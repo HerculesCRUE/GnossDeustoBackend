@@ -16,7 +16,7 @@ namespace UrisFactory.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GenerateUri(string resource, string resource_class, Guid identifier)
+        public IActionResult GenerateUri(string resource, string resource_class, string identifier)
         {
             var queryString = HttpContext.Request.Query.ToList();
 
