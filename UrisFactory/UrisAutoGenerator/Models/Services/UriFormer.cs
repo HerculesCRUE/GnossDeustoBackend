@@ -30,7 +30,7 @@ namespace UrisFactory.Models.Services
             string parsedCharacter = ParserCharacter(character);
             ResourcesClass resourceClassObject = ParserResourceClass(resourceClass);
 
-            if (resourceClassObject != null)
+            if (resourceClassObject != null || string.IsNullOrEmpty(parsedCharacter))
             {
                 string parsedLabelResourceClass = resourceClassObject.LabelResourceClass;
                 string resourceURL = resourceClassObject.ResourceURL;
@@ -49,18 +49,26 @@ namespace UrisFactory.Models.Services
             }
             else
             {
-                if (resourceClassObject == null)
+                if (resourceClassObject == null && string.IsNullOrEmpty(parsedCharacter))
+                {
+                    throw new ParametersNotConfiguredException("resource class and resource not configured");
+                }
+                else if (resourceClassObject == null)
                 {
                     throw new ParametersNotConfiguredException("resource class not configured");
                 }
+                else
+                {
+                    throw new ParametersNotConfiguredException("resource not configured");
+                }
             }
-            return uri;
         }
 
         private static string GetUriByStructure(UrlStructure urlStructure, string parsedCharacter, string parsedResourceClass, Dictionary<string, string> queryString)
         {
             string uri = "";
             bool error = false;
+            string errorMessage = "";
             bool containsKey = false;
             foreach (Component component in urlStructure.Components.OrderBy(structure => structure.UrlComponentOrder))
             {
@@ -91,7 +99,8 @@ namespace UrisFactory.Models.Services
                         containsKey = queryString.ContainsKey(componentName);
                         if (!containsKey && component.Mandatory)
                         {
-                            error = true;
+                            error = true; 
+                            errorMessage += $"parameter {componentName} missing \n"; 
                         }
                         else if (containsKey)
                         {
@@ -103,7 +112,7 @@ namespace UrisFactory.Models.Services
             }
             if (error)
             {
-                throw new ParametersNotConfiguredException("Parameters missing");
+                throw new ParametersNotConfiguredException(errorMessage);
             }
             return uri;
         }
