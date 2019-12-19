@@ -9116,11 +9116,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Hercules\\AutoGeneradorUris\\UrisFactory\\UrisAutoGenerator\\UrisFactory.csproj",
+      "projectUniqueName": "C:\\Hercules\\AutoGeneradorUris\\UrisFactoryGit\\GnossDeustoBackend\\UrisFactory\\UrisAutoGenerator\\UrisFactory.csproj",
       "projectName": "UrisFactory",
-      "projectPath": "C:\\Hercules\\AutoGeneradorUris\\UrisFactory\\UrisAutoGenerator\\UrisFactory.csproj",
+      "projectPath": "C:\\Hercules\\AutoGeneradorUris\\UrisFactoryGit\\GnossDeustoBackend\\UrisFactory\\UrisAutoGenerator\\UrisFactory.csproj",
       "packagesPath": "C:\\Users\\JRuiz\\.nuget\\packages\\",
-      "outputPath": "C:\\Hercules\\AutoGeneradorUris\\UrisFactory\\UrisAutoGenerator\\obj\\",
+      "outputPath": "C:\\Hercules\\AutoGeneradorUris\\UrisFactoryGit\\GnossDeustoBackend\\UrisFactory\\UrisAutoGenerator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
