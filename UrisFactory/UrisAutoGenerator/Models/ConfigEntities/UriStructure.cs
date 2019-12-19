@@ -7,9 +7,7 @@ namespace UrisFactory.Models.ConfigEntities
 {
     public class UriStructure
     {
-        public string Base { get; set; }
-        public IList<Characters> Characters { get; set; }
-        public IList<UrlStructure> UrlStructures { get; set; }
-        public IList<ResourcesClass> ResourcesClasses { get; set; }
+        public string Name { get; set; }
+        public IList<Component> Components { get; set; }
     }
 }

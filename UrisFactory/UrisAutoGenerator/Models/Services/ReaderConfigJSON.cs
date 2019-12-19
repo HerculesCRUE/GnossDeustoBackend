@@ -10,10 +10,10 @@ namespace UrisFactory.Models.Services
 {
     public class ReaderConfigJSON
     {
-        public static UriStructure Read()
+        public static UriStructureGeneral Read()
         {
             string texto = File.ReadAllText("Config/UrisConfig.json");
-            UriStructure uriStructure = JsonConvert.DeserializeObject<UriStructure>(texto);
+            UriStructureGeneral uriStructure = JsonConvert.DeserializeObject<UriStructureGeneral>(texto);
             return uriStructure;
         }
     }

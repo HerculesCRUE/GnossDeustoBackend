@@ -27,14 +27,7 @@ namespace UrisFactory.Controllers
             }
 
             string uri = UriFormer.GetURI(resource, resource_class, queryDictionary);
-            //if(uri == null)
-            //{
-            //    return BadRequest($"resource: {resource} or resource class: {resource_class} not configured in the json file");
-            //}
-            //else
-            //{
-                return Ok(uri);
-           // }
+            return Ok(uri);
         }
     }
 }

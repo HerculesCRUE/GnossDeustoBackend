@@ -8,7 +8,7 @@ namespace UrisFactory.Models.Services
 {
     public static class ConfigJsonHandler
     {
-        private static UriStructure _uriStructure;
+        private static UriStructureGeneral _uriStructure;
         public static void InitializerConfigJson()
         {
             if (_uriStructure == null)
@@ -24,7 +24,7 @@ namespace UrisFactory.Models.Services
             }
         }
 
-        public static UriStructure GetUriStructure()
+        public static UriStructureGeneral GetUriStructure()
         {
             if(_uriStructure == null)
             {

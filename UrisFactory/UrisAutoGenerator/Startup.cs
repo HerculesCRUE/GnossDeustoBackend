@@ -32,7 +32,7 @@ namespace UrisFactory
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Uris auto generator", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Uris factory", Version = "v1" });
             });
             services.Configure<ForwardedHeadersOptions>(options =>
             {
@@ -63,7 +63,7 @@ namespace UrisFactory
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Uris auto generator");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Uris factory");
             });
 
             app.UseEndpoints(endpoints =>

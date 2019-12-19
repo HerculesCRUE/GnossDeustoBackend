@@ -10,75 +10,75 @@
       "labelCharacter": "kos"
     }
   ],
-  "urlStructures": [
+  "uriStructures": [
     {
-      "name": "urlResourceStructure",
+      "name": "uriResourceStructure",
       "components": [
         {
-          "urlComponent": "base",
-          "urlComponentValue": "base",
-          "urlComponentOrder": 1,
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
           "mandatory": true,
           "finalCharacter": "/"
         },
         {
-          "urlComponent": "character",
-          "urlComponentValue": "@RESOURCE",
-          "urlComponentOrder": 2,
+          "uriComponent": "character",
+          "uriComponentValue": "@RESOURCE",
+          "uriComponentOrder": 2,
           "mandatory": true,
           "finalCharacter": "/"
         },
         {
-          "urlComponent": "resourceClass",
-          "urlComponentValue": "@RESOURCECLASS",
-          "urlComponentOrder": 3,
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "@RESOURCECLASS",
+          "uriComponentOrder": 3,
           "mandatory": true,
           "finalCharacter": "/"
         },
         {
-          "urlComponent": "identifier",
-          "urlComponentValue": "@ID",
-          "urlComponentOrder": 4,
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
           "mandatory": true,
           "finalCharacter": ""
         }
       ]
     },
     {
-      "name": "urlPublicationStructure",
+      "name": "uriPublicationStructure",
       "components": [
         {
-          "urlComponent": "base",
-          "urlComponentValue": "base",
-          "urlComponentOrder": 1,
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
           "mandatory": true,
           "finalCharacter": "/"
         },
         {
-          "urlComponent": "character",
-          "urlComponentValue": "character@RESOURCE",
-          "urlComponentOrder": 2,
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
           "mandatory": true,
           "finalCharacter": "/"
         },
         {
-          "urlComponent": "sector",
-          "urlComponentValue": "@SECTOR",
-          "urlComponentOrder": 3,
+          "uriComponent": "sector",
+          "uriComponentValue": "@SECTOR",
+          "uriComponentOrder": 3,
           "mandatory": true,
           "finalCharacter": "/"
         },
         {
-          "urlComponent": "resourceClass",
-          "urlComponentValue": "resourceClass@RESOURCECLASS",
-          "urlComponentOrder": 4,
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 4,
           "mandatory": true,
           "finalCharacter": "/"
         },
         {
-          "urlComponent": "identifier",
-          "urlComponentValue": "@ID",
-          "urlComponentOrder": 5,
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 5,
           "mandatory": true,
           "finalCharacter": ""
         }
@@ -89,12 +89,12 @@
     {
       "resourceClass": "researcher",
       "labelResourceClass": "investigador",
-      "resourceURL": "urlResourceStructure"
+      "resourceURI": "uriResourceStructure"
     },
     {
       "resourceClass": "publication",
       "labelResourceClass": "publicacion",
-      "resourceURL": "urlPublicationStructure"
+      "resourceURI": "uriPublicationStructure"
     }
   ]
 

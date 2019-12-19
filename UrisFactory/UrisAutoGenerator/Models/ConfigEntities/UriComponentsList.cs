@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace UrisFactory.Models.ConfigEntities
 {
-    public static class UrlComponentsList
+    public static class UriComponentsList
     {
         public const string Base = "base";
         public const string Character = "character";

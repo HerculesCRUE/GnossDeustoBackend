@@ -9,6 +9,6 @@ namespace UrisFactory.Models.ConfigEntities
     {
         public string ResourceClass { get; set; }
         public string LabelResourceClass { get; set; }
-        public string ResourceURL { get; set; }
+        public string ResourceURI { get; set; }
     }
 }

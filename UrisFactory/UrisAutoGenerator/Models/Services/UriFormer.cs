@@ -9,9 +9,9 @@ namespace UrisFactory.Models.Services
 {
     public class UriFormer
     {
-        private static UriStructure _uristructure;
+        private static UriStructureGeneral _uristructure;
 
-        private static UriStructure UriStructure
+        private static UriStructureGeneral UriStructure
         {
             get
             {
@@ -33,9 +33,9 @@ namespace UrisFactory.Models.Services
             if (resourceClassObject != null || string.IsNullOrEmpty(parsedCharacter))
             {
                 string parsedLabelResourceClass = resourceClassObject.LabelResourceClass;
-                string resourceURL = resourceClassObject.ResourceURL;
+                string resourceURL = resourceClassObject.ResourceURI;
 
-                UrlStructure urlStructure = UriStructure.UrlStructures.FirstOrDefault(structure => structure.Name.Equals(resourceURL));
+                UriStructure urlStructure = UriStructure.UriStructures.FirstOrDefault(structure => structure.Name.Equals(resourceURL));
 
                 if (urlStructure != null)
                 {
@@ -64,34 +64,34 @@ namespace UrisFactory.Models.Services
             }
         }
 
-        private static string GetUriByStructure(UrlStructure urlStructure, string parsedCharacter, string parsedResourceClass, Dictionary<string, string> queryString)
+        private static string GetUriByStructure(UriStructure urlStructure, string parsedCharacter, string parsedResourceClass, Dictionary<string, string> queryString)
         {
             string uri = "";
             bool error = false;
             string errorMessage = "";
             bool containsKey = false;
-            foreach (Component component in urlStructure.Components.OrderBy(structure => structure.UrlComponentOrder))
+            foreach (Component component in urlStructure.Components.OrderBy(structure => structure.UriComponentOrder))
             {
-                string componentName = component.UrlComponent;
+                string componentName = component.UriComponent;
                 switch (componentName)
                 {
-                    case UrlComponentsList.Base:
+                    case UriComponentsList.Base:
                         uri += UriStructure.Base + component.FinalCharacter;
                         break;
-                    case UrlComponentsList.Character:
+                    case UriComponentsList.Character:
                         uri += parsedCharacter + component.FinalCharacter;
                         break;
-                    case UrlComponentsList.ResourceClass:
+                    case UriComponentsList.ResourceClass:
                         uri += parsedResourceClass + component.FinalCharacter;
                         break;
-                    case UrlComponentsList.Identifier:
-                        containsKey = queryString.ContainsKey(UrlComponentsList.Identifier);
+                    case UriComponentsList.Identifier:
+                        containsKey = queryString.ContainsKey(UriComponentsList.Identifier);
                         if(!containsKey && component.Mandatory)
                         {
                             error = true;
                         }else if (containsKey)
                         {
-                            string id = queryString[UrlComponentsList.Identifier];
+                            string id = queryString[UriComponentsList.Identifier];
                             uri += id + component.FinalCharacter;
                         }
                         break;
