@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UrisFactory.Models.ConfigEntities;
+using UrisFactory.Models.Services;
 
 namespace UrisFactory.Filters
 {
@@ -11,14 +13,25 @@ namespace UrisFactory.Filters
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
+            UriStructureGeneral uriStructureGeneral = ConfigJsonHandler.GetUriStructure();
+            
             if (operation.OperationId.Equals("GenerateUri"))
             {
-                operation.Parameters.Add(new OpenApiParameter
+                foreach (UriStructure structure in uriStructureGeneral.UriStructures)
                 {
-                    Name = "inventado",
-                    In = ParameterLocation.Query,
-                    Required = false
-                }) ;
+                    foreach (Component component in structure.Components)
+                    {
+                        if (!UriComponentsList.DefaultParameters.Contains(component.UriComponent))
+                        {
+                            operation.Parameters.Add(new OpenApiParameter
+                            {
+                                Name = component.UriComponent,
+                                In = ParameterLocation.Query,
+                                Required = false
+                            });
+                        }
+                    }
+                }
             }
         }
     }
