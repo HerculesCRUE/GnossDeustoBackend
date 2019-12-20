@@ -27,7 +27,7 @@ namespace UrisFactory.Filters
                             {
                                 Name = component.UriComponent,
                                 In = ParameterLocation.Query,
-                                Required = component.Mandatory
+                                Required = false
                             });
                         }
                     }
