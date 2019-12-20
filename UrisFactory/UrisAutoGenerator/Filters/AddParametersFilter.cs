@@ -14,7 +14,6 @@ namespace UrisFactory.Filters
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             UriStructureGeneral uriStructureGeneral = ConfigJsonHandler.GetUriStructure();
-            
             if (operation.OperationId.Equals("GenerateUri"))
             {
                 foreach (UriStructure structure in uriStructureGeneral.UriStructures)
