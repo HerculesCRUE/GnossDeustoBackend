@@ -19,7 +19,6 @@ namespace UrisFactory.Controllers
         public IActionResult GenerateUri(string resource, string resource_class, string identifier)
         {
             var queryString = HttpContext.Request.Query.ToList();
-
             Dictionary<string, string> queryDictionary = new Dictionary<string, string>();
             foreach(var value in queryString)
             {
