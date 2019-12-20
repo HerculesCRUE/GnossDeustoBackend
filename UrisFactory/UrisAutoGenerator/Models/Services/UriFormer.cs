@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UrisFactory.Extra.Exceptions;
 using UrisFactory.Models.ConfigEntities;
 
@@ -76,13 +75,13 @@ namespace UrisFactory.Models.Services
                 switch (componentName)
                 {
                     case UriComponentsList.Base:
-                        uri += UriStructure.Base + component.FinalCharacter;
+                        uri =$"{uri}{UriStructure.Base}{component.FinalCharacter}";
                         break;
                     case UriComponentsList.Character:
-                        uri += parsedCharacter + component.FinalCharacter;
+                        uri = $"{uri}{parsedCharacter}{component.FinalCharacter}";
                         break;
                     case UriComponentsList.ResourceClass:
-                        uri += parsedResourceClass + component.FinalCharacter;
+                        uri = $"{uri}{parsedResourceClass}{component.FinalCharacter}";
                         break;
                     case UriComponentsList.Identifier:
                         containsKey = queryString.ContainsKey(UriComponentsList.Identifier);
@@ -92,7 +91,7 @@ namespace UrisFactory.Models.Services
                         }else if (containsKey)
                         {
                             string id = queryString[UriComponentsList.Identifier];
-                            uri += id + component.FinalCharacter;
+                            uri = $"{uri}{id}{component.FinalCharacter}";
                         }
                         break;
                     default:
@@ -100,12 +99,12 @@ namespace UrisFactory.Models.Services
                         if (!containsKey && component.Mandatory)
                         {
                             error = true; 
-                            errorMessage += $"parameter {componentName} missing \n"; 
+                            errorMessage = $"{errorMessage} parameter {componentName} missing \n"; 
                         }
                         else if (containsKey)
                         {
                             string componentVariable = queryString[componentName];
-                            uri += componentVariable + component.FinalCharacter;
+                            uri = $"{uri}{componentVariable}{component.FinalCharacter}";
                         }
                         break;
                 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace UrisFactory.Models.ConfigEntities
 {
@@ -13,6 +11,14 @@ namespace UrisFactory.Models.ConfigEntities
         public const string ResourceClass = "resourceClass";
         public const string Identifier = "identifier";
 
-        public static ImmutableList<String> DefaultParameters = new List<string> { Base, Character, ResourceClass,Identifier }.ToImmutableList();
+        private static ImmutableList<String> defaultParameters = new List<string> { Base, Character, ResourceClass, Identifier }.ToImmutableList();
+
+        public static ImmutableList<String> DefaultParameters
+        {
+            get
+            {
+                return defaultParameters;
+            }
+        }
     }
 }

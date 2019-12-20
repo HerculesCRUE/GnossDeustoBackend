@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using UrisFactory.Extra.Exceptions;
 using UrisFactory.Models.ConfigEntities;
 
@@ -15,9 +13,9 @@ namespace UrisFactory.Models.Services
             {
                 try
                 {
-                    _uriStructure = ReaderConfigJSON.Read();
+                    _uriStructure = ReaderConfigJson.Read();
                 }
-                catch(Exception ex)
+                catch (Exception)
                 {
                     throw new FailedLoadConfigJsonException("Could not load config file, maybe Config/UrisConfig.json does not exist or is bad formed");
                 }

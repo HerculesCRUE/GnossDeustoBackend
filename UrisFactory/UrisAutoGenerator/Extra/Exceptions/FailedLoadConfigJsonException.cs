@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace UrisFactory.Extra.Exceptions
 {
-    public class FailedLoadConfigJsonException: Exception
+    public class FailedLoadConfigJsonException : Exception
     {
         public FailedLoadConfigJsonException()
         {
