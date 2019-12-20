@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using UrisFactory.Filters;
 using UrisFactory.Middlewares;
 
 namespace UrisFactory
@@ -33,6 +34,7 @@ namespace UrisFactory
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Uris factory", Version = "v1" });
+                c.OperationFilter<AddParametersFilter>();
             });
             services.Configure<ForwardedHeadersOptions>(options =>
             {

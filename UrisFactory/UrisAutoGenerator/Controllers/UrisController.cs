@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using UrisFactory.Models.ConfigEntities;
 using UrisFactory.Models.Services;
 
@@ -13,10 +14,10 @@ namespace UrisFactory.Controllers
     [Route("[controller]")]
     public class UrisController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet(Name= "GenerateUri")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GenerateUri(string resource, string resource_class, string identifier)
+        public IActionResult GenerateUri(string resource, string resource_class, string identifier, [FromQuery] Dictionary<string,string> parametros_opcionales)
         {
             var queryString = HttpContext.Request.Query.ToList();
             Dictionary<string, string> queryDictionary = new Dictionary<string, string>();
