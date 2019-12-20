@@ -30,7 +30,7 @@ namespace UrisFactory.Models.Services
             string parsedCharacter = ParserCharacter(character);
             ResourcesClass resourceClassObject = ParserResourceClass(resourceClass);
 
-            if (resourceClassObject != null || string.IsNullOrEmpty(parsedCharacter))
+            if (resourceClassObject != null && !string.IsNullOrEmpty(parsedCharacter))
             {
                 string parsedLabelResourceClass = resourceClassObject.LabelResourceClass;
                 string resourceURL = resourceClassObject.ResourceURI;
