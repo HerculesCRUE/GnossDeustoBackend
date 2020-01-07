@@ -50,7 +50,6 @@ namespace XUnitTestUrisFactory
             queryString.Add("sector", "sector1");
             string uri = UriFormer.GetURI("resource", "publication", queryString);
             string uriResultante = "http://datos.um.es/res/sector1/publicacion/123d";
-
             Assert.True(uriResultante.Equals(uri));
         }
     }
