@@ -8,7 +8,7 @@ namespace XUnitTestUrisFactory
 {
     public class ApiTest
     {
-        [Fact]
+        
         public async void CallApiResourceOK()
         {
             HttpClient client = new HttpClient();
@@ -23,7 +23,7 @@ namespace XUnitTestUrisFactory
             Assert.True(success);
         }
 
-        [Fact]
+        
         public async void CallApiResourceFail()
         {
             HttpClient client = new HttpClient();
@@ -33,7 +33,7 @@ namespace XUnitTestUrisFactory
             Assert.True(!response.IsSuccessStatusCode);
         }
 
-        [Fact]
+        
         public async void CallApiPublicationOK()
         {
             HttpClient client = new HttpClient();
@@ -48,7 +48,7 @@ namespace XUnitTestUrisFactory
             Assert.True(success);
         }
 
-        [Fact]
+        
         public async void CallApiPublicationFail()
         {
             HttpClient client = new HttpClient();
