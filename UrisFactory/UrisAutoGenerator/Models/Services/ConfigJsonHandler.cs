@@ -11,14 +11,7 @@ namespace UrisFactory.Models.Services
         {
             if (_uriStructure == null)
             {
-                try
-                {
-                    _uriStructure = ReaderConfigJson.Read();
-                }
-                catch (Exception)
-                {
-                    throw new FailedLoadConfigJsonException("Could not load config file, maybe Config/UrisConfig.json does not exist or is bad formed");
-                }
+                LoadConfigJson();
             }
         }
 
@@ -29,6 +22,32 @@ namespace UrisFactory.Models.Services
                 InitializerConfigJson();
             }
             return _uriStructure;
+        }
+
+        internal static void LoadConfigJson()
+        {
+            try
+            {
+                _uriStructure = ReaderConfigJson.Read();
+                if (!IsCorrectFormedUriStructure())
+                {
+                    throw new FailedLoadConfigJsonException("Could not load config file, the structure is not correctly");
+                }
+            }
+            catch (Exception)
+            {
+                throw new FailedLoadConfigJsonException("Could not load config file, maybe Config/UrisConfig.json does not exist or is bad formed");
+            }
+        }
+
+        private static bool IsCorrectFormedUriStructure()
+        {
+            bool correct = false;
+            if (_uriStructure != null && _uriStructure.Base != null && _uriStructure.Characters.Count > 0 && _uriStructure.UriStructures.Count > 0)
+            {
+                correct = true;
+            }
+            return correct;
         }
     }
 }
