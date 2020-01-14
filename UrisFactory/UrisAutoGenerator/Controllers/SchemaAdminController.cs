@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UrisFactory.Models.ConfigEntities;
+using UrisFactory.Models.Entities;
 using UrisFactory.Models.Services;
 
 namespace UrisFactory.Controllers
@@ -31,6 +33,25 @@ namespace UrisFactory.Controllers
             else
             {
                 return BadRequest("Error: new config file is not correctly formed.");
+            }
+        }
+
+        [HttpGet("{name}")]
+        public IActionResult GetUriStructureInfo(string name)
+        {
+            UriStructureGeneral uriSchema = ConfigJsonHandler.GetUriStructure();
+            UriStructure uri = uriSchema.UriStructures.FirstOrDefault(uriStructure => uriStructure.Name.Equals(name));
+            if(uri != null)
+            {
+                ResourcesClass resourceClass = uriSchema.ResourcesClasses.FirstOrDefault(resourcesClass => resourcesClass.ResourceURI.Equals(name));
+                InfoUriStructure infoUriStructure= new InfoUriStructure();
+                infoUriStructure.UriStructure = uri;
+                infoUriStructure.ResourcesClass = resourceClass;
+                return Ok(infoUriStructure);
+            }
+            else
+            {
+                return BadRequest($"No data of uriStructure {name}");
             }
         }
     }
