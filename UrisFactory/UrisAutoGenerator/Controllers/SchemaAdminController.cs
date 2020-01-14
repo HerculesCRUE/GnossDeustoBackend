@@ -18,8 +18,7 @@ namespace UrisFactory.Controllers
         [HttpGet(Name="getSchema")]
         public FileResult GetSchema()
         {
-            string contentType = "";
-            contentType = SchemaConfigFileOperations.GetContentType();
+            string contentType = SchemaConfigFileOperations.GetContentType();
             return File(SchemaConfigFileOperations.GetFileData(), contentType);
         }
 
