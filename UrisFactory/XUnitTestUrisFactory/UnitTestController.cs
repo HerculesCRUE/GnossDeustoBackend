@@ -20,7 +20,7 @@ namespace XUnitTestUrisFactory
             LoadConfigJsonMiddleware loadConfigJsonMiddleware = new LoadConfigJsonMiddleware(next: (innerHttpContext) => Task.FromResult(0));
             var context = new DefaultHttpContext();
             await loadConfigJsonMiddleware.Invoke(context);
-            var parsedJson = ConfigJsonHandler.GetUriStructure();
+            var parsedJson = ConfigJsonHandler.GetUrisConfig();
             Assert.True(parsedJson != null);
         }
     }

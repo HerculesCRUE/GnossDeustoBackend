@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UrisFactory.Extra.Exceptions;
 using UrisFactory.Models.ConfigEntities;
 using UrisFactory.Models.Entities;
 using UrisFactory.Models.Services;
@@ -18,14 +19,14 @@ namespace UrisFactory.Controllers
         public FileResult GetSchema()
         {
             string contentType = "";
-            contentType = SchemaConfigOperations.GetContentType();
-            return File(SchemaConfigOperations.GetFileData(), contentType);
+            contentType = SchemaConfigFileOperations.GetContentType();
+            return File(SchemaConfigFileOperations.GetFileData(), contentType);
         }
 
         [HttpPost]
         public IActionResult ReplaceSchemaConfig(IFormFile newSchemaConfig)
         {
-            bool result = SchemaConfigOperations.SaveConfigFile(newSchemaConfig);
+            bool result = SchemaConfigFileOperations.SaveConfigFile(newSchemaConfig);
             if (result)
             {
                 return Ok("new config file loaded");
@@ -39,11 +40,10 @@ namespace UrisFactory.Controllers
         [HttpGet("{name}")]
         public IActionResult GetUriStructureInfo(string name)
         {
-            UriStructureGeneral uriSchema = ConfigJsonHandler.GetUriStructure();
-            UriStructure uri = uriSchema.UriStructures.FirstOrDefault(uriStructure => uriStructure.Name.Equals(name));
-            if(uri != null)
+            UriStructure uri = ConfigJsonHandler.GetUriStructure(name);
+            if (uri != null)
             {
-                ResourcesClass resourceClass = uriSchema.ResourcesClasses.FirstOrDefault(resourcesClass => resourcesClass.ResourceURI.Equals(name));
+                ResourcesClass resourceClass = ConfigJsonHandler.GetResourceClass(name);
                 InfoUriStructure infoUriStructure= new InfoUriStructure();
                 infoUriStructure.UriStructure = uri;
                 infoUriStructure.ResourcesClass = resourceClass;
@@ -58,14 +58,10 @@ namespace UrisFactory.Controllers
         [HttpDelete]
         public IActionResult DeleteUriStructure(string name)
         {
-            UriStructureGeneral uriSchema = ConfigJsonHandler.GetUriStructure();
-            UriStructure uri = uriSchema.UriStructures.FirstOrDefault(uriStructure => uriStructure.Name.Equals(name));
-            if (uri != null)
+            if (ConfigJsonHandler.ExistUriStructure(name))
             {
-                ResourcesClass resourceClass = uriSchema.ResourcesClasses.FirstOrDefault(resourcesClass => resourcesClass.ResourceURI.Equals(name));
-                uriSchema.UriStructures.Remove(uri);
-                uriSchema.ResourcesClasses.Remove(resourceClass);
-                bool deleted = SchemaConfigOperations.SaveConfigJsonInConfigFile();
+                ConfigJsonHandler.DeleteUriStructureInfo(name);
+                bool deleted = SchemaConfigFileOperations.SaveConfigJsonInConfigFile();
                 if (deleted)
                 {
                     return Ok($"uriStructure: {name} has been deleted and the new config schema is loaded");
@@ -86,17 +82,27 @@ namespace UrisFactory.Controllers
         {
             if(infoUriStructure != null && infoUriStructure.ResourcesClass != null && infoUriStructure.UriStructure != null)
             {
-                UriStructureGeneral uriSchema = ConfigJsonHandler.GetUriStructure();
-                uriSchema.ResourcesClasses.Add(infoUriStructure.ResourcesClass);
-                uriSchema.UriStructures.Add(infoUriStructure.UriStructure);
-                bool saved = SchemaConfigOperations.SaveConfigJsonInConfigFile();
-                if (saved)
+                try
                 {
-                    return Ok($"uriStructure: {infoUriStructure.UriStructure.Name} has been deleted and the new config schema is loaded");
+                    ConfigJsonHandler.AddUriStructureInfo(infoUriStructure.UriStructure, infoUriStructure.ResourcesClass);
+
+                    bool saved = SchemaConfigFileOperations.SaveConfigJsonInConfigFile();
+                    if (saved)
+                    {
+                        return Ok($"uriStructure: {infoUriStructure.UriStructure.Name} has been deleted and the new config schema is loaded");
+                    }
+                    else
+                    {
+                        return Problem(detail: "Server error has ocurred", null, 500);
+                    }
                 }
-                else
+                catch(UriStructureConfiguredException)
                 {
-                    return BadRequest();
+                    return BadRequest($"UriStructure {infoUriStructure.UriStructure.Name} already exist");
+                }
+                catch (UriStructureBadInfoException)
+                {
+                    return BadRequest($"UriStructure name {infoUriStructure.UriStructure.Name} and ResourcesClass ResourceURI{infoUriStructure.ResourcesClass.ResourceURI} no match");
                 }
             }
             else

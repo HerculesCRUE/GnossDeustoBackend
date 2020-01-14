@@ -11,7 +11,7 @@ using UrisFactory.Models.ConfigEntities;
 
 namespace UrisFactory.Models.Services
 {
-    public static class SchemaConfigOperations
+    public static class SchemaConfigFileOperations
     {
         private static string configPath = "config/UrisConfig.json";
         private static string oldConfigPath = "config/oldUrisConfig.json";
@@ -39,7 +39,7 @@ namespace UrisFactory.Models.Services
 
         public static bool SaveConfigJsonInConfigFile()
         {
-            UriStructureGeneral uriSchema = ConfigJsonHandler.GetUriStructure();
+            UriStructureGeneral uriSchema = ConfigJsonHandler.GetUrisConfig();
             string uriSchemaJson = JsonConvert.SerializeObject(uriSchema);
             var stream = CreateStream();
             byte[] data = new UTF8Encoding(true).GetBytes(uriSchemaJson);

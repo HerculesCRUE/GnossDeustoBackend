@@ -13,7 +13,7 @@ namespace UrisFactory.Filters
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
-            UriStructureGeneral uriStructureGeneral = ConfigJsonHandler.GetUriStructure();
+            UriStructureGeneral uriStructureGeneral = ConfigJsonHandler.GetUrisConfig();
             if (operation.OperationId != null && operation.OperationId.Equals("GenerateUri"))
             {
                 foreach (UriStructure structure in uriStructureGeneral.UriStructures)

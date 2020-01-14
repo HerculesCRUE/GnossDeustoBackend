@@ -15,7 +15,7 @@ namespace UrisFactory.Models.Services
             get
             {
                 if (_uristructure == null){
-                    _uristructure = ConfigJsonHandler.GetUriStructure();
+                    _uristructure = ConfigJsonHandler.GetUrisConfig();
                 }
                 return _uristructure;
                     
