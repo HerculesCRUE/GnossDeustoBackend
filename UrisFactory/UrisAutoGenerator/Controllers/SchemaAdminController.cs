@@ -95,13 +95,13 @@ namespace UrisFactory.Controllers
                         return Problem(detail: "Server error has ocurred", null, 500);
                     }
                 }
-                catch(UriStructureConfiguredException)
+                catch(UriStructureConfiguredException confEx)
                 {
-                    return BadRequest($"UriStructure {infoUriStructure.UriStructure.Name} already exist");
+                    return BadRequest(confEx.Message);
                 }
-                catch (UriStructureBadInfoException)
+                catch (UriStructureBadInfoException badInfoEx)
                 {
-                    return BadRequest($"UriStructure name {infoUriStructure.UriStructure.Name} and ResourcesClass ResourceURI{infoUriStructure.ResourcesClass.ResourceURI} no match, or a data component is empty");
+                    return BadRequest(badInfoEx.Message);
                 }
             }
             else

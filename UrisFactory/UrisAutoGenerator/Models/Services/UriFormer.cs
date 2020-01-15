@@ -50,15 +50,15 @@ namespace UrisFactory.Models.Services
             {
                 if (resourceClassObject == null && string.IsNullOrEmpty(parsedCharacter))
                 {
-                    throw new ParametersNotConfiguredException("resource class and resource not configured");
+                    throw new ParametersNotConfiguredException($"resource class: '{resourceClass}' and resource: '{character}' not configured");
                 }
                 else if (resourceClassObject == null)
                 {
-                    throw new ParametersNotConfiguredException("resource class not configured");
+                    throw new ParametersNotConfiguredException($"resource class: '{resourceClass}' not configured");
                 }
                 else
                 {
-                    throw new ParametersNotConfiguredException("resource not configured");
+                    throw new ParametersNotConfiguredException($"resource: '{character}' not configured");
                 }
             }
         }

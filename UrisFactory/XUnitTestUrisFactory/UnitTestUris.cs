@@ -42,9 +42,14 @@ namespace XUnitTestUrisFactory
             Assert.Throws<ParametersNotConfiguredException>(() => UriFormer.GetURI("resource", "publication", queryString));
         }
 
+        [Trait("Priority", "1")]
         [Fact]
         public void TestUriPublicationOK()
         {
+            while (UnitTestConfigOperations.IsDeleting)
+            {
+
+            }
             Dictionary<string, string> queryString = new Dictionary<string, string>();
             queryString.Add("identifier", "123d");
             queryString.Add("sector", "sector1");

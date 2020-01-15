@@ -25,7 +25,7 @@ namespace UrisFactory.Models.Services
             return _uriSchema;
         }
 
-        internal static void LoadConfigJson()
+        public static void LoadConfigJson()
         {
             try
             {
@@ -48,6 +48,10 @@ namespace UrisFactory.Models.Services
             {
                 correct = true;
             }
+            else
+            {
+                _uriSchema = null;
+            }
             return correct;
         }
 
@@ -57,6 +61,8 @@ namespace UrisFactory.Models.Services
             _uriSchema.UriStructures.Remove(uriStructure);
             _uriSchema.ResourcesClasses.Remove(resourcesClass);
         }
+
+        ///<exception cref="UriStructureConfiguredException">UriStructure not exist in config file</exception>
         public static void DeleteUriStructureInfo(string name)
         {
             if (ExistUriStructure(name))
@@ -97,13 +103,17 @@ namespace UrisFactory.Models.Services
                 _uriSchema.UriStructures.Add(uriStructure);
                 _uriSchema.ResourcesClasses.Add(resourcesClass);
             }
-            else if(_uriSchema.UriStructures.Any(uriStructures => uriStructures.Name.Equals(uriStructure)))
+            else if(ExistUriStructure(uriStructure.Name))
             {
-                throw new UriStructureConfiguredException();
+                throw new UriStructureConfiguredException($"UriStructure {uriStructure.Name} already exist");
+            }
+            else if(!uriStructure.Name.Equals(resourcesClass.ResourceURI))
+            {
+                throw new UriStructureBadInfoException($"UriStructure name: {uriStructure.Name} and ResourcesClass ResourceURI: {resourcesClass.ResourceURI} no match");
             }
             else
             {
-                throw new UriStructureBadInfoException();
+                throw new UriStructureBadInfoException($"Data component is empty");
             }
         }
 
