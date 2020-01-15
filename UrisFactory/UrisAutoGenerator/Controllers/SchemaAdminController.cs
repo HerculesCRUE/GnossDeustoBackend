@@ -19,7 +19,7 @@ namespace UrisFactory.Controllers
         public FileResult GetSchema()
         {
             string contentType = SchemaConfigFileOperations.GetContentType();
-            return File(SchemaConfigFileOperations.GetFileData(), contentType);
+            return File(SchemaConfigFileOperations.GetFileSchemaData(), contentType);
         }
 
         [HttpPost]
@@ -101,7 +101,7 @@ namespace UrisFactory.Controllers
                 }
                 catch (UriStructureBadInfoException)
                 {
-                    return BadRequest($"UriStructure name {infoUriStructure.UriStructure.Name} and ResourcesClass ResourceURI{infoUriStructure.ResourcesClass.ResourceURI} no match");
+                    return BadRequest($"UriStructure name {infoUriStructure.UriStructure.Name} and ResourcesClass ResourceURI{infoUriStructure.ResourcesClass.ResourceURI} no match, or a data component is empty");
                 }
             }
             else

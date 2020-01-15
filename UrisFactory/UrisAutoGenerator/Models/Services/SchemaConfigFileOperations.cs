@@ -23,7 +23,7 @@ namespace UrisFactory.Models.Services
             return contentType;
         }
 
-        public static byte[] GetFileData()
+        public static byte[] GetFileSchemaData()
         {
             return File.ReadAllBytes(configPath);
         }

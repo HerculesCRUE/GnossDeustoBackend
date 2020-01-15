@@ -52,16 +52,24 @@ namespace UrisFactory.Models.Services
         }
 
         //Operations with the Schema
-        public static void DeleteUriStructureInfo(UriStructure uriStructure, ResourcesClass resourcesClass)
+        private static void DeleteUriStructureInfo(UriStructure uriStructure, ResourcesClass resourcesClass)
         {
             _uriSchema.UriStructures.Remove(uriStructure);
             _uriSchema.ResourcesClasses.Remove(resourcesClass);
         }
         public static void DeleteUriStructureInfo(string name)
         {
-            var uriStructure = _uriSchema.UriStructures.First(uriStructure => uriStructure.Name.Equals(name));
-            var resourcesClasses = _uriSchema.ResourcesClasses.First(uriStructure => uriStructure.ResourceURI.Equals(name));
-            DeleteUriStructureInfo(uriStructure, resourcesClasses);
+            if (ExistUriStructure(name))
+            {
+                var uriStructure = _uriSchema.UriStructures.First(uriStructure => uriStructure.Name.Equals(name));
+                var resourcesClasses = _uriSchema.ResourcesClasses.First(uriStructure => uriStructure.ResourceURI.Equals(name));
+                DeleteUriStructureInfo(uriStructure, resourcesClasses);
+            }
+            else
+            {
+                throw new UriStructureConfiguredException($"No data of uriStructure {name}");
+            }
+            
         }
 
         public static bool ExistUriStructure(string name)
@@ -84,7 +92,7 @@ namespace UrisFactory.Models.Services
         public static void AddUriStructureInfo(UriStructure uriStructure, ResourcesClass resourcesClass)
         {
 
-            if (!_uriSchema.UriStructures.Any(uriStructures => uriStructures.Name.Equals(uriStructure))  && uriStructure.Name.Equals(resourcesClass.ResourceURI))
+            if (!_uriSchema.UriStructures.Any(uriStructures => uriStructures.Name.Equals(uriStructure))  &&(!string.IsNullOrEmpty(uriStructure.Name) && uriStructure.Name.Equals(resourcesClass.ResourceURI)) && (uriStructure.Components.Count>1 && !string.IsNullOrEmpty(resourcesClass.LabelResourceClass) && !string.IsNullOrEmpty(resourcesClass.ResourceClass)))
             {
                 _uriSchema.UriStructures.Add(uriStructure);
                 _uriSchema.ResourcesClasses.Add(resourcesClass);

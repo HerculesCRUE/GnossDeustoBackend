@@ -25,4 +25,10 @@
     <Folder Include="Extra\Cache\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Config\UrisConfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
