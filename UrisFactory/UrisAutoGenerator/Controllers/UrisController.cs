@@ -7,10 +7,18 @@ using UrisFactory.Models.Services;
 
 namespace UrisFactory.Controllers
 {
+
     [ApiController]
     [Route("[controller]")]
     public class UrisController : ControllerBase
     {
+        private ConfigJsonHandler _configJsonHandler;
+
+        public UrisController(ConfigJsonHandler configJsonHandler)
+        {
+            _configJsonHandler = configJsonHandler;
+        }
+
         [HttpGet(Name= "GenerateUri")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -23,7 +31,8 @@ namespace UrisFactory.Controllers
                 queryDictionary.Add(value.Key, value.Value.FirstOrDefault());
             }
 
-            string uri = UriFormer.GetURI(resource, resource_class, queryDictionary);
+            UriFormer uriFormer = new UriFormer(_configJsonHandler.GetUrisConfig());
+            string uri = uriFormer.GetURI(resource, resource_class, queryDictionary);
             return Ok(uri);
         }
     }

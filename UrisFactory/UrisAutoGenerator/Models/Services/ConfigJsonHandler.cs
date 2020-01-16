@@ -5,10 +5,21 @@ using UrisFactory.Models.ConfigEntities;
 
 namespace UrisFactory.Models.Services
 {
-    public static class ConfigJsonHandler
+    public class ConfigJsonHandler
     {
-        private static UriStructureGeneral _uriSchema;
-        public static void InitializerConfigJson()
+        private UriStructureGeneral _uriSchema;
+
+        public ConfigJsonHandler()
+        {
+            InitializerConfigJson();
+        }
+
+        public ConfigJsonHandler(string json)
+        {
+            InitializerConfigJson(json);
+        }
+
+        private void InitializerConfigJson()
         {
             if (_uriSchema == null)
             {
@@ -16,7 +27,15 @@ namespace UrisFactory.Models.Services
             }
         }
 
-        public static UriStructureGeneral GetUrisConfig()
+        private void InitializerConfigJson(string json)
+        {
+            if (_uriSchema == null)
+            {
+                LoadConfigJson(json);
+            }
+        }
+
+        public UriStructureGeneral GetUrisConfig()
         {
             if(_uriSchema == null)
             {
@@ -25,7 +44,7 @@ namespace UrisFactory.Models.Services
             return _uriSchema;
         }
 
-        public static void LoadConfigJson()
+        public void LoadConfigJson()
         {
             try
             {
@@ -41,7 +60,23 @@ namespace UrisFactory.Models.Services
             }
         }
 
-        private static bool IsCorrectFormedUriStructure()
+        public void LoadConfigJson(string json)
+        {
+            try
+            {
+                _uriSchema = ReaderConfigJson.Read(json);
+                if (!IsCorrectFormedUriStructure())
+                {
+                    throw new FailedLoadConfigJsonException("Could not load config file, the structure is not correctly");
+                }
+            }
+            catch (Exception)
+            {
+                throw new FailedLoadConfigJsonException("Could not load config file, maybe Config/UrisConfig.json does not exist or is bad formed");
+            }
+        }
+
+        private bool IsCorrectFormedUriStructure()
         {
             bool correct = false;
             if (_uriSchema != null && _uriSchema.Base != null && _uriSchema.Characters.Count > 0 && _uriSchema.UriStructures.Count > 0)
@@ -55,15 +90,29 @@ namespace UrisFactory.Models.Services
             return correct;
         }
 
+        public static bool IsCorrectFormedUriStructure(UriStructureGeneral uriSchema)
+        {
+            bool correct = false;
+            if (uriSchema != null && uriSchema.Base != null && uriSchema.Characters.Count > 0 && uriSchema.UriStructures.Count > 0)
+            {
+                correct = true;
+            }
+            else
+            {
+                uriSchema = null;
+            }
+            return correct;
+        }
+
         //Operations with the Schema
-        private static void DeleteUriStructureInfo(UriStructure uriStructure, ResourcesClass resourcesClass)
+        private void DeleteUriStructureInfo(UriStructure uriStructure, ResourcesClass resourcesClass)
         {
             _uriSchema.UriStructures.Remove(uriStructure);
             _uriSchema.ResourcesClasses.Remove(resourcesClass);
         }
 
         ///<exception cref="UriStructureConfiguredException">UriStructure not exist in config file</exception>
-        public static void DeleteUriStructureInfo(string name)
+        public void DeleteUriStructureInfo(string name)
         {
             if (ExistUriStructure(name))
             {
@@ -78,24 +127,24 @@ namespace UrisFactory.Models.Services
             
         }
 
-        public static bool ExistUriStructure(string name)
+        public bool ExistUriStructure(string name)
         {
             return _uriSchema.UriStructures.Any(uriStructure => uriStructure.Name.Equals(name));
         }
 
-        public static UriStructure GetUriStructure(string name)
+        public UriStructure GetUriStructure(string name)
         {
             return _uriSchema.UriStructures.FirstOrDefault(uriStruct => uriStruct.Name.Equals(name));
         }
         
-        public static ResourcesClass GetResourceClass(string name)
+        public ResourcesClass GetResourceClass(string name)
         {
             return _uriSchema.ResourcesClasses.FirstOrDefault(resourceClass => resourceClass.ResourceURI.Equals(name));
         }
 
         ///<exception cref="UriStructureConfiguredException">UriStructure Already exist in config file</exception>
         ///<exception cref="UriStructureBadInfoException">there is a mismatch between uriStructure and resourceClass given</exception>
-        public static void AddUriStructureInfo(UriStructure uriStructure, ResourcesClass resourcesClass)
+        public void AddUriStructureInfo(UriStructure uriStructure, ResourcesClass resourcesClass)
         {
 
             if (!_uriSchema.UriStructures.Any(uriStructures => uriStructures.Name.Equals(uriStructure))  &&(!string.IsNullOrEmpty(uriStructure.Name) && uriStructure.Name.Equals(resourcesClass.ResourceURI)) && (uriStructure.Components.Count>1 && !string.IsNullOrEmpty(resourcesClass.LabelResourceClass) && !string.IsNullOrEmpty(resourcesClass.ResourceClass)))

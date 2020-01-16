@@ -17,10 +17,8 @@ namespace XUnitTestUrisFactory
         [Fact]
         public async void TestUriPublicationOK()
         {
-            LoadConfigJsonMiddleware loadConfigJsonMiddleware = new LoadConfigJsonMiddleware(next: (innerHttpContext) => Task.FromResult(0));
-            var context = new DefaultHttpContext();
-            await loadConfigJsonMiddleware.Invoke(context);
-            var parsedJson = ConfigJsonHandler.GetUrisConfig();
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            var parsedJson = configJsonHandler.GetUrisConfig();
 
             Assert.True(parsedJson != null);
         }

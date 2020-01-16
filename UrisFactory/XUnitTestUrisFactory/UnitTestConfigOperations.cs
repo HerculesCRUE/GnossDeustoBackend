@@ -7,20 +7,19 @@ using UrisFactory.Extra.Exceptions;
 using UrisFactory.Models.ConfigEntities;
 using UrisFactory.Models.Services;
 using Xunit;
+using XUnitTestUrisFactory.Properties;
+using XUnitTestUrisFactory.services;
 
 namespace XUnitTestUrisFactory
 {
     public class UnitTestConfigOperations
     {
-        public static bool IsDeleting { get; set; }
-
-        private static string _uriBackUpConfig = "config/UrisConfig_copy.json";
-        private static string _uriConfig = "config/UrisConfig.json";
-
         [Fact]
         public void TestGetSchemaFileData()
         {
-            var bytesSchema = SchemaConfigFileOperations.GetFileSchemaData();
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ISchemaConfigOperations schemaConfigOperations = new SchemaConfigMemoryOperations(configJsonHandler);
+            var bytesSchema = schemaConfigOperations.GetFileSchemaData();
             var bytesAsString = Encoding.UTF8.GetString(bytesSchema);
             UriStructureGeneral uriSchema = JsonConvert.DeserializeObject<UriStructureGeneral>(bytesAsString);
             bool correctGenerated = uriSchema != null && uriSchema.Base != null && uriSchema.Characters != null && uriSchema.ResourcesClasses != null && uriSchema.ResourcesClasses.Count > 0 && uriSchema.UriStructures != null && uriSchema.UriStructures.Count > 0;
@@ -30,135 +29,74 @@ namespace XUnitTestUrisFactory
         [Fact]
         public void TestDeleteUriStructureOk()
         {
-            try
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            UriStructureGeneral uriSchema = configJsonHandler.GetUrisConfig();
+            int oldResourcesClassesCount = uriSchema.ResourcesClasses.Count;
+            int oldUriStructuresCount = uriSchema.UriStructures.Count;
+            if (configJsonHandler.ExistUriStructure("uriPublicationStructure"))
             {
-                IsDeleting = true;
-                CreateBackUpConfig();
-                UriStructureGeneral uriSchema = ConfigJsonHandler.GetUrisConfig();
-                int oldResourcesClassesCount = uriSchema.ResourcesClasses.Count;
-                int oldUriStructuresCount = uriSchema.UriStructures.Count;
-                if (ConfigJsonHandler.ExistUriStructure("uriPublicationStructure"))
-                {
-                    ConfigJsonHandler.DeleteUriStructureInfo("uriPublicationStructure");
-                    SchemaConfigFileOperations.SaveConfigJsonInConfigFile();
-                    UriStructureGeneral uriSchema2 = ConfigJsonHandler.GetUrisConfig();
-                    RestoreBackUpConfig();
-                    ConfigJsonHandler.LoadConfigJson();
-                    IsDeleting = false;
-                    Assert.True(oldResourcesClassesCount == uriSchema2.ResourcesClasses.Count + 1 && oldUriStructuresCount == uriSchema2.UriStructures.Count + 1);
-                }
-                else
-                {
-                    IsDeleting = false;
-                    Assert.True(false);
-                }
+                configJsonHandler.DeleteUriStructureInfo("uriPublicationStructure");
+                ISchemaConfigOperations schemaConfigOperations = new SchemaConfigMemoryOperations(configJsonHandler);
+                schemaConfigOperations.SaveConfigJson();
+                UriStructureGeneral uriSchema2 = configJsonHandler.GetUrisConfig();
+                Assert.True(oldResourcesClassesCount == uriSchema2.ResourcesClasses.Count + 1 && oldUriStructuresCount == uriSchema2.UriStructures.Count + 1);
             }
-            catch (Exception)
+            else
             {
-                RestoreBackUpConfig();
-                IsDeleting = false;
+                Assert.True(false);
             }
         }
 
         [Fact]
         public void TestDeleteUriStructureNoNameFoundError()
         {
-            try
-            {
-                CreateBackUpConfig();
-                Assert.Throws<UriStructureConfiguredException>(() => ConfigJsonHandler.DeleteUriStructureInfo("badName"));
-                SchemaConfigFileOperations.SaveConfigJsonInConfigFile();
-                ConfigJsonHandler.GetUrisConfig();
-                RestoreBackUpConfig();
-            }
-            catch (Exception)
-            {
-                RestoreBackUpConfig();
-            }
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            Assert.Throws<UriStructureConfiguredException>(() => configJsonHandler.DeleteUriStructureInfo("badName"));
         }
 
         [Fact]
         public void TestAddUriStructureOk()
         {
-            try
-            {
-                CreateBackUpConfig();
-                UriStructureGeneral uriSchema = ConfigJsonHandler.GetUrisConfig();
-                UriStructure newUriStructure = CreateUriStructureExample("newUriExample");
-                ResourcesClass newResourcesClass = CreateResourceClassExample("newUriExample", "rsp", "pipaon");
-                int oldResourcesClassesCount = uriSchema.ResourcesClasses.Count;
-                int oldUriStructuresCount = uriSchema.UriStructures.Count;
-                ConfigJsonHandler.AddUriStructureInfo(newUriStructure,newResourcesClass);
-                SchemaConfigFileOperations.SaveConfigJsonInConfigFile();
-                UriStructureGeneral uriSchema2 = ConfigJsonHandler.GetUrisConfig();
-                RestoreBackUpConfig();
-                ConfigJsonHandler.LoadConfigJson();
-                Assert.True(oldResourcesClassesCount + 1 == uriSchema2.ResourcesClasses.Count && oldUriStructuresCount + 1 == uriSchema2.UriStructures.Count);
-            }
-            catch (Exception)
-            {
-                RestoreBackUpConfig();
-            }
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            UriStructureGeneral uriSchema = configJsonHandler.GetUrisConfig();
+            UriStructure newUriStructure = CreateUriStructureExample("newUriExample");
+            ResourcesClass newResourcesClass = CreateResourceClassExample("newUriExample", "rsp", "pipaon");
+            int oldResourcesClassesCount = uriSchema.ResourcesClasses.Count;
+            int oldUriStructuresCount = uriSchema.UriStructures.Count;
+            configJsonHandler.AddUriStructureInfo(newUriStructure,newResourcesClass);
+            ISchemaConfigOperations schemaConfigOperations = new SchemaConfigMemoryOperations(configJsonHandler);
+            schemaConfigOperations.SaveConfigJson();
+            UriStructureGeneral uriSchema2 = configJsonHandler.GetUrisConfig();
+            Assert.True(oldResourcesClassesCount + 1 == uriSchema2.ResourcesClasses.Count && oldUriStructuresCount + 1 == uriSchema2.UriStructures.Count);
         }
 
         [Fact]
         public void TestAddUriStructureFailMatchNames()
         {
-            try
-            {
-                CreateBackUpConfig();
-                UriStructure newUriStructure = CreateUriStructureExample("newUriExamp");
-                ResourcesClass newResourcesClass = CreateResourceClassExample("newUriExample", "rsp", "pipaon");
-                Assert.Throws<UriStructureBadInfoException>(() => ConfigJsonHandler.AddUriStructureInfo(newUriStructure, newResourcesClass));
-            }
-            catch (Exception)
-            {
-                RestoreBackUpConfig();
-            }
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            UriStructure newUriStructure = CreateUriStructureExample("newUriExamp");
+            ResourcesClass newResourcesClass = CreateResourceClassExample("newUriExample", "rsp", "pipaon");
+            Assert.Throws<UriStructureBadInfoException>(() => configJsonHandler.AddUriStructureInfo(newUriStructure, newResourcesClass));
         }
 
         [Fact]
         public void TestAddUriStructureFailUriStructureConfiguredException()
         {
-            try
-            {
-                CreateBackUpConfig();
-                UriStructure newUriStructure = CreateUriStructureExample("uriResourceStructure");
-                ResourcesClass newResourcesClass = CreateResourceClassExample("uriResourceStructure", "rsp", "");
-                Assert.Throws<UriStructureConfiguredException>(() => ConfigJsonHandler.AddUriStructureInfo(newUriStructure, newResourcesClass));
-            }
-            catch (Exception)
-            {
-                RestoreBackUpConfig();
-            }
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            UriStructure newUriStructure = CreateUriStructureExample("uriResourceStructure");
+            ResourcesClass newResourcesClass = CreateResourceClassExample("uriResourceStructure", "rsp", "");
+            Assert.Throws<UriStructureConfiguredException>(() => configJsonHandler.AddUriStructureInfo(newUriStructure, newResourcesClass));
         }
 
         [Fact]
         public void TestAddUriStructureFailUriStructureBadInfoException()
         {
-            try
-            {
-                CreateBackUpConfig();
-                UriStructure newUriStructure = CreateUriStructureExample("newUriExample");
-                ResourcesClass newResourcesClass = CreateResourceClassExample("newUriExample", "rsp", "");
-                Assert.Throws<UriStructureBadInfoException>(() => ConfigJsonHandler.AddUriStructureInfo(newUriStructure, newResourcesClass));
-            }
-            catch (Exception)
-            {
-                RestoreBackUpConfig();
-            }
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            UriStructure newUriStructure = CreateUriStructureExample("newUriExample");
+            ResourcesClass newResourcesClass = CreateResourceClassExample("newUriExample", "rsp", "");
+            Assert.Throws<UriStructureBadInfoException>(() => configJsonHandler.AddUriStructureInfo(newUriStructure, newResourcesClass));
         }
 
-        private void CreateBackUpConfig()
-        {
-            File.Copy(_uriConfig, _uriBackUpConfig);
-        }
-
-        private void RestoreBackUpConfig()
-        {
-            File.Delete(_uriConfig);
-            File.Move(_uriBackUpConfig, _uriConfig);
-        }
 
         private UriStructure CreateUriStructureExample(string name)
         {

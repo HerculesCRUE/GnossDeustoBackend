@@ -14,7 +14,7 @@ namespace UrisFactory.Middlewares
 
         public async Task Invoke(HttpContext context /* other dependencies */)
         {
-            ConfigJsonHandler.InitializerConfigJson();
+            //ConfigJsonHandler.InitializerConfigJson();
             await _next(context);
         }
     }

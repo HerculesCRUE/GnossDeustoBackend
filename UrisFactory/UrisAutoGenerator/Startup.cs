@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using UrisFactory.Filters;
 using UrisFactory.Middlewares;
+using UrisFactory.Models.Services;
 
 namespace UrisFactory
 {
@@ -36,6 +37,9 @@ namespace UrisFactory
             {
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
+
+            services.AddSingleton(typeof(ConfigJsonHandler));
+            services.AddScoped<ISchemaConfigOperations, SchemaConfigFileOperations>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

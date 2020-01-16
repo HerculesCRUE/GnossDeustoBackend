@@ -14,18 +14,27 @@ namespace UrisFactory.Controllers
     [ApiController]
     [Route("[Controller]")]
     public class SchemaAdminController : Controller
-    {        
+    {
+        private ConfigJsonHandler _configJsonHandler;
+        private ISchemaConfigOperations _schemaConfigOperations;
+
+        public SchemaAdminController(ConfigJsonHandler configJsonHandler, ISchemaConfigOperations schemaConfigOperations)
+        {
+            _configJsonHandler = configJsonHandler;
+            _schemaConfigOperations = schemaConfigOperations;
+        }
+
         [HttpGet(Name="getSchema")]
         public FileResult GetSchema()
         {
-            string contentType = SchemaConfigFileOperations.GetContentType();
-            return File(SchemaConfigFileOperations.GetFileSchemaData(), contentType);
+            string contentType = _schemaConfigOperations.GetContentType();
+            return File(_schemaConfigOperations.GetFileSchemaData(), contentType);
         }
 
         [HttpPost]
         public IActionResult ReplaceSchemaConfig(IFormFile newSchemaConfig)
         {
-            bool result = SchemaConfigFileOperations.SaveConfigFile(newSchemaConfig);
+            bool result = _schemaConfigOperations.SaveConfigFile(newSchemaConfig);
             if (result)
             {
                 return Ok("new config file loaded");
@@ -39,10 +48,10 @@ namespace UrisFactory.Controllers
         [HttpGet("{name}")]
         public IActionResult GetUriStructureInfo(string name)
         {
-            UriStructure uri = ConfigJsonHandler.GetUriStructure(name);
+            UriStructure uri = _configJsonHandler.GetUriStructure(name);
             if (uri != null)
             {
-                ResourcesClass resourceClass = ConfigJsonHandler.GetResourceClass(name);
+                ResourcesClass resourceClass = _configJsonHandler.GetResourceClass(name);
                 InfoUriStructure infoUriStructure= new InfoUriStructure();
                 infoUriStructure.UriStructure = uri;
                 infoUriStructure.ResourcesClass = resourceClass;
@@ -57,10 +66,10 @@ namespace UrisFactory.Controllers
         [HttpDelete]
         public IActionResult DeleteUriStructure(string name)
         {
-            if (ConfigJsonHandler.ExistUriStructure(name))
+            if (_configJsonHandler.ExistUriStructure(name))
             {
-                ConfigJsonHandler.DeleteUriStructureInfo(name);
-                bool deleted = SchemaConfigFileOperations.SaveConfigJsonInConfigFile();
+                _configJsonHandler.DeleteUriStructureInfo(name);
+                bool deleted = _schemaConfigOperations.SaveConfigJson();
                 if (deleted)
                 {
                     return Ok($"uriStructure: {name} has been deleted and the new config schema is loaded");
@@ -83,9 +92,8 @@ namespace UrisFactory.Controllers
             {
                 try
                 {
-                    ConfigJsonHandler.AddUriStructureInfo(infoUriStructure.UriStructure, infoUriStructure.ResourcesClass);
-
-                    bool saved = SchemaConfigFileOperations.SaveConfigJsonInConfigFile();
+                    _configJsonHandler.AddUriStructureInfo(infoUriStructure.UriStructure, infoUriStructure.ResourcesClass);
+                    bool saved = _schemaConfigOperations.SaveConfigJson();
                     if (saved)
                     {
                         return Ok($"uriStructure: {infoUriStructure.UriStructure.Name} has been deleted and the new config schema is loaded");

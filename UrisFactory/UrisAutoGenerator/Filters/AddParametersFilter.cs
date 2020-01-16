@@ -11,9 +11,16 @@ namespace UrisFactory.Filters
 {
     public class AddParametersFilter: IOperationFilter
     {
+        private ConfigJsonHandler _configJsonHandler;
+
+        public AddParametersFilter(ConfigJsonHandler configJsonHandler)
+        {
+            _configJsonHandler = configJsonHandler;
+        }
+
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
-            UriStructureGeneral uriStructureGeneral = ConfigJsonHandler.GetUrisConfig();
+            UriStructureGeneral uriStructureGeneral = _configJsonHandler.GetUrisConfig();
             if (operation.OperationId != null && operation.OperationId.Equals("GenerateUri"))
             {
                 foreach (UriStructure structure in uriStructureGeneral.UriStructures)

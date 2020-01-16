@@ -8,22 +8,23 @@ namespace UrisFactory.Models.Services
 {
     public class UriFormer
     {
-        private static UriStructureGeneral _uristructure;
+        private UriStructureGeneral _uristructure;
 
-        private static UriStructureGeneral UriStructure
+
+        public UriFormer(UriStructureGeneral uristructure)
+        {
+            _uristructure = uristructure;
+        }
+        private UriStructureGeneral UriStructure
         {
             get
             {
-                if (_uristructure == null){
-                    _uristructure = ConfigJsonHandler.GetUrisConfig();
-                }
-                return _uristructure;
-                    
+                return _uristructure;    
             }
             
         }
 
-        public static string GetURI(string character, string resourceClass, Dictionary<string, string> queryString)
+        public string GetURI(string character, string resourceClass, Dictionary<string, string> queryString)
         {
             string uri = "";
             string parsedCharacter = ParserCharacter(character);
@@ -63,7 +64,7 @@ namespace UrisFactory.Models.Services
             }
         }
 
-        private static string GetUriByStructure(UriStructure urlStructure, string parsedCharacter, string parsedResourceClass, Dictionary<string, string> queryString)
+        private string GetUriByStructure(UriStructure urlStructure, string parsedCharacter, string parsedResourceClass, Dictionary<string, string> queryString)
         {
             string uri = "";
             bool error = false;
@@ -116,13 +117,13 @@ namespace UrisFactory.Models.Services
             return uri;
         }
 
-        private static string ParserCharacter(string pCharacter)
+        private string ParserCharacter(string pCharacter)
         {
             string character = UriStructure.Characters.Where(charact => charact.Character.Equals(pCharacter)).Select(charact => charact.LabelCharacter).FirstOrDefault();
             return character;
         }
 
-        private static ResourcesClass ParserResourceClass(string pResourceClass)
+        private ResourcesClass ParserResourceClass(string pResourceClass)
         {
             ResourcesClass resourceClass = null;
             resourceClass = UriStructure.ResourcesClasses.FirstOrDefault(resource => resource.ResourceClass.Equals(pResourceClass));

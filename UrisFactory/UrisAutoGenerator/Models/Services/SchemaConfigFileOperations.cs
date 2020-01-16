@@ -11,24 +11,29 @@ using UrisFactory.Models.ConfigEntities;
 
 namespace UrisFactory.Models.Services
 {
-    public static class SchemaConfigFileOperations
+    public class SchemaConfigFileOperations : ISchemaConfigOperations
     {
         private static string configPath = "config/UrisConfig.json";
         private static string oldConfigPath = "config/oldUrisConfig.json";
 
-        public static string GetContentType()
+        private ConfigJsonHandler _configJsonHandler;
+        public SchemaConfigFileOperations(ConfigJsonHandler configJsonHandler)
+        {
+            _configJsonHandler = configJsonHandler;
+        }
+        public string GetContentType()
         {
             string contentType = "";
             new FileExtensionContentTypeProvider().TryGetContentType(Path.GetFileName(configPath), out contentType);
             return contentType;
         }
 
-        public static byte[] GetFileSchemaData()
+        public byte[] GetFileSchemaData()
         {
             return File.ReadAllBytes(configPath);
         }
 
-        public static bool SaveConfigFile(IFormFile formFile)
+        public bool SaveConfigFile(IFormFile formFile)
         {
             var stream = CreateStream();
             formFile.CopyTo(stream);
@@ -37,9 +42,9 @@ namespace UrisFactory.Models.Services
             return savedCorrectly;
         }
 
-        public static bool SaveConfigJsonInConfigFile()
+        public bool SaveConfigJson()
         {
-            UriStructureGeneral uriSchema = ConfigJsonHandler.GetUrisConfig();
+            UriStructureGeneral uriSchema = _configJsonHandler.GetUrisConfig();
             string uriSchemaJson = JsonConvert.SerializeObject(uriSchema);
             var stream = CreateStream();
             byte[] data = new UTF8Encoding(true).GetBytes(uriSchemaJson);
@@ -49,18 +54,18 @@ namespace UrisFactory.Models.Services
             return saved;
         }
 
-        private static FileStream CreateStream()
+        private FileStream CreateStream()
         {
             File.Move(configPath, oldConfigPath);
             return File.Create(configPath);
         }
 
-        private static bool replacePreviousSchemaConfig(FileStream stream)
+        private bool replacePreviousSchemaConfig(FileStream stream)
         {
             bool replaced = false;
             try
             {
-                ConfigJsonHandler.LoadConfigJson();
+                _configJsonHandler.LoadConfigJson();
                 File.Delete(oldConfigPath);
                 replaced = true;
             }
