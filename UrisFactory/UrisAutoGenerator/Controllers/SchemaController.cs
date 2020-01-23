@@ -13,12 +13,12 @@ namespace UrisFactory.Controllers
 {
     [ApiController]
     [Route("[Controller]")]
-    public class SchemaAdminController : Controller
+    public class SchemaController : Controller
     {
         private ConfigJsonHandler _configJsonHandler;
         private ISchemaConfigOperations _schemaConfigOperations;
 
-        public SchemaAdminController(ConfigJsonHandler configJsonHandler, ISchemaConfigOperations schemaConfigOperations)
+        public SchemaController(ConfigJsonHandler configJsonHandler, ISchemaConfigOperations schemaConfigOperations)
         {
             _configJsonHandler = configJsonHandler;
             _schemaConfigOperations = schemaConfigOperations;

@@ -10,11 +10,11 @@ namespace UrisFactory.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class UrisController : ControllerBase
+    public class FactoryController : ControllerBase
     {
         private ConfigJsonHandler _configJsonHandler;
 
-        public UrisController(ConfigJsonHandler configJsonHandler)
+        public FactoryController(ConfigJsonHandler configJsonHandler)
         {
             _configJsonHandler = configJsonHandler;
         }
@@ -22,7 +22,7 @@ namespace UrisFactory.Controllers
         [HttpGet(Name= "GenerateUri")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GenerateUri(string resource, string resource_class, string identifier, [FromQuery] Dictionary<string,string> parametros_opcionales)
+        public IActionResult GenerateUri(string resource, string resource_class, string identifier)
         {
             var queryString = HttpContext.Request.Query.ToList();
             Dictionary<string, string> queryDictionary = new Dictionary<string, string>();
