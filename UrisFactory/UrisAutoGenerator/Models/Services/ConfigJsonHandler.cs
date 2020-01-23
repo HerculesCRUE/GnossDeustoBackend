@@ -21,7 +21,7 @@ namespace UrisFactory.Models.Services
 
         private void InitializerConfigJson()
         {
-            if (_uriSchema == null)
+            if (_uriSchema == null) 
             {
                 LoadConfigJson();
             }
