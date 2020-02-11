@@ -15,21 +15,21 @@ namespace XUnitTestUrisFactory
             queryString.Add("identifier", "123d");
             ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
             UriFormer uriFormer = new UriFormer(configJsonHandler.GetUrisConfig());
-            string uri = uriFormer.GetURI("resource", "researcher", queryString);
-            string uriResultante = "http://datos.um.es/res/investigador/123d";
+            string uri = uriFormer.GetURI("Researcher", queryString);
+            string uriResultante = "http://data.um.es/res/researcher/123d";
 
             Assert.True(uriResultante.Equals(uri));
         }
 
-        [Fact]
-        public void TestUriResearcherFail()
-        {
-            Dictionary<string, string> queryString = new Dictionary<string, string>();
-            queryString.Add("identifier", "123d");
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
-            UriFormer uriFormer = new UriFormer(configJsonHandler.GetUrisConfig());
-            Assert.Throws<ParametersNotConfiguredException>(() => uriFormer.GetURI("resourc", "researcher", queryString));
-        }
+        //[Fact]
+        //public void TestUriResearcherFail()
+        //{
+        //    Dictionary<string, string> queryString = new Dictionary<string, string>();
+        //    queryString.Add("identifier", "123d");
+        //    ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+        //    UriFormer uriFormer = new UriFormer(configJsonHandler.GetUrisConfig());
+        //    Assert.Throws<ParametersNotConfiguredException>(() => uriFormer.GetURI("resourc", "researcher", queryString));
+        //}
         [Fact]
         public void TestUriResearcherFailClass()
         {
@@ -37,7 +37,7 @@ namespace XUnitTestUrisFactory
             queryString.Add("identifier", "123d");
             ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
             UriFormer uriFormer = new UriFormer(configJsonHandler.GetUrisConfig());
-            Assert.Throws<ParametersNotConfiguredException>(() => uriFormer.GetURI("resource", "resea", queryString));
+            Assert.Throws<ParametersNotConfiguredException>(() => uriFormer.GetURI("resea", queryString));
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace XUnitTestUrisFactory
             queryString.Add("identifier", "123d");
             ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
             UriFormer uriFormer = new UriFormer(configJsonHandler.GetUrisConfig());
-            Assert.Throws<ParametersNotConfiguredException>(() => uriFormer.GetURI("resource", "publication", queryString));
+            Assert.Throws<ParametersNotConfiguredException>(() => uriFormer.GetURI("publication", queryString));
         }
 
         [Trait("Priority", "1")]
@@ -59,8 +59,8 @@ namespace XUnitTestUrisFactory
             queryString.Add("sector", "sector1");
             ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
             UriFormer uriFormer = new UriFormer(configJsonHandler.GetUrisConfig());
-            string uri = uriFormer.GetURI("resource", "publication", queryString);
-            string uriResultante = "http://datos.um.es/res/sector1/publicacion/123d";
+            string uri = uriFormer.GetURI("publication", queryString);
+            string uriResultante = "http://data.um.es/res/sector1/publicacion/123d";
             Assert.True(uriResultante.Equals(uri));
         }
     }

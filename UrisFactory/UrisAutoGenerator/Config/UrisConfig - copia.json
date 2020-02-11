@@ -1,5 +1,5 @@
 {
-  "base": "http://datos.um.es",
+  "base": "http://data.um.es",
   "characters": [
     {
       "character": "resource",
@@ -71,14 +71,1103 @@
         {
           "uriComponent": "resourceClass",
           "uriComponentValue": "resourceClass@RESOURCECLASS",
-          "uriComponentOrder": 4,
+          "uriComponentOrder": 3,
           "mandatory": true,
           "finalCharacter": "/"
         },
         {
           "uriComponent": "identifier",
           "uriComponentValue": "@ID",
-          "uriComponentOrder": 5,
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriActivityStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriFundingStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriFundingProgramStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriGeographicalScopeStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriMetricStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriAcademicDegreeStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriAwardedDegreeStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriFunderStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriGeonamesFeatureStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriConceptStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@KOS",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriKnowledgeAreaStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@KOS",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriResearchLineStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@KOS",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriKeywordStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@KOS",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriProjectStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriResearchObjectStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriCollectionStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriPerdiodicalStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriJournalStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriMagazineStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriDocumentStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriArticleStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriConferencePaperStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriEditorialArticleStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriBookStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriProceedingsStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriDocumentPartStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriBookSectionStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriChapterStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriPatentStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriReportStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriThesisStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriWebpageStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+	{
+      "name": "uriConferencePosterStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
           "mandatory": true,
           "finalCharacter": ""
         }
@@ -87,14 +1176,179 @@
   ],
   "resourcesClasses": [
     {
-      "resourceClass": "researcher",
-      "labelResourceClass": "investigador",
+      "resourceClass": "Researcher",
+      "labelResourceClass": "researcher",
       "resourceURI": "uriResourceStructure"
     },
     {
       "resourceClass": "publication",
       "labelResourceClass": "publicacion",
       "resourceURI": "uriPublicationStructure"
+    },
+    {
+      "resourceClass": "Activity",
+      "labelResourceClass": "activity",
+      "resourceURI": "uriActivityStructure"
+    },
+    {
+      "resourceClass": "Funding",
+      "labelResourceClass": "funding",
+      "resourceURI": "uriFundingStructure"
+    },
+    {
+      "resourceClass": "FundingProgram",
+      "labelResourceClass": "funding-program",
+      "resourceURI": "uriFundingProgramStructure"
+    },
+    {
+      "resourceClass": "GeographicalScope",
+      "labelResourceClass": "geographical-scope",
+      "resourceURI": "uriGeographicalScopeStructure"
+    },
+    {
+      "resourceClass": "Metric",
+      "labelResourceClass": "metric",
+      "resourceURI": "uriMetricStructure"
+    },
+    {
+      "resourceClass": "AcademicDegree",
+      "labelResourceClass": "academic-degree",
+      "resourceURI": "uriAcademicDegreeStructure"
+    },
+    {
+      "resourceClass": "AwardedDegree",
+      "labelResourceClass": "awarded-degree",
+      "resourceURI": "uriAwardedDegreeStructure"
+    },
+    {
+      "resourceClass": "Funder",
+      "labelResourceClass": "funder",
+      "resourceURI": "uriFunderStructure"
+    },
+    {
+      "resourceClass": "GeonamesFeature",
+      "labelResourceClass": "geonames-feature",
+      "resourceURI": "uriGeonamesFeatureStructure"
+    },
+    {
+      "resourceClass": "Concept",
+      "labelResourceClass": "concept",
+      "resourceURI": "uriConceptStructure"
+    },
+    {
+      "resourceClass": "KnowledgeArea",
+      "labelResourceClass": "knowledge-area",
+      "resourceURI": "uriKnowledgeAreaStructure"
+    },
+    {
+      "resourceClass": "ResearchLine",
+      "labelResourceClass": "research-line",
+      "resourceURI": "uriResearchLineStructure"
+    },
+    {
+      "resourceClass": "Keyword",
+      "labelResourceClass": "keyword",
+      "resourceURI": "uriKeywordStructure"
+    },
+    {
+      "resourceClass": "Project",
+      "labelResourceClass": "project",
+      "resourceURI": "uriProjectStructure"
+    },
+    {
+      "resourceClass": "ResearchObject",
+      "labelResourceClass": "research-object",
+      "resourceURI": "uriResearchObjectStructure"
+    },
+    {
+      "resourceClass": "Collection",
+      "labelResourceClass": "collection",
+      "resourceURI": "uriCollectionStructure"
+    },
+    {
+      "resourceClass": "Periodical",
+      "labelResourceClass": "periodical",
+      "resourceURI": "uriPerdiodicalStructure"
+    },
+    {
+      "resourceClass": "Journal",
+      "labelResourceClass": "journal",
+      "resourceURI": "uriJournalStructure"
+    },
+    {
+      "resourceClass": "Magazine",
+      "labelResourceClass": "magazine",
+      "resourceURI": "uriMagazineStructure"
+    },
+    {
+      "resourceClass": "Document",
+      "labelResourceClass": "document",
+      "resourceURI": "uriDocumentStructure"
+    },
+    {
+      "resourceClass": "Article",
+      "labelResourceClass": "article",
+      "resourceURI": "uriArticleStructure"
+    },
+    {
+      "resourceClass": "ConferencePaper",
+      "labelResourceClass": "conference-paper",
+      "resourceURI": "uriConferencePaperStructure"
+    },
+    {
+      "resourceClass": "EditorialArticle",
+      "labelResourceClass": "editorial-article",
+      "resourceURI": "uriEditorialArticleStructure"
+    },
+    {
+      "resourceClass": "Book",
+      "labelResourceClass": "book",
+      "resourceURI": "uriBookStructure"
+    },
+    {
+      "resourceClass": "Proceedings",
+      "labelResourceClass": "proceedings",
+      "resourceURI": "uriProceedingsStructure"
+    },
+    {
+      "resourceClass": "DocumentPart",
+      "labelResourceClass": "document-part",
+      "resourceURI": "uriDocumentPartStructure"
+    },
+    {
+      "resourceClass": "BookSection",
+      "labelResourceClass": "book-section",
+      "resourceURI": "uriBookSectionStructure"
+    },
+    {
+      "resourceClass": "Chapter",
+      "labelResourceClass": "chapter",
+      "resourceURI": "uriChapterStructure"
+    },
+    {
+      "resourceClass": "Patent",
+      "labelResourceClass": "patent",
+      "resourceURI": "uriPatentStructure"
+    },
+    {
+      "resourceClass": "Report",
+      "labelResourceClass": "report",
+      "resourceURI": "uriReportStructure"
+    },
+    {
+      "resourceClass": "Thesis",
+      "labelResourceClass": "thesis",
+      "resourceURI": "uriThesisStructure"
+    },
+    {
+      "resourceClass": "Webpage",
+      "labelResourceClass": "webpage",
+      "resourceURI": "uriWebpageStructure"
+    },
+    {
+      "resourceClass": "ConferencePoster",
+      "labelResourceClass": "conference-poster",
+      "resourceURI": "uriConferencePosterStructure"
     }
   ]
 

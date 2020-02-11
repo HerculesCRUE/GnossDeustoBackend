@@ -24,43 +24,38 @@ namespace UrisFactory.Models.Services
             
         }
 
-        public string GetURI(string character, string resourceClass, Dictionary<string, string> queryString)
+        public string GetURI(string resourceClass, Dictionary<string, string> queryString)
         {
             string uri = "";
-            string parsedCharacter = ParserCharacter(character);
-            ResourcesClass resourceClassObject = ParserResourceClass(resourceClass);
+            ResourcesClass resourceClassObject = ParserResourceClass(resourceClass);          
 
-            if (resourceClassObject != null && !string.IsNullOrEmpty(parsedCharacter))
+            if (resourceClassObject != null)
             {
                 string parsedLabelResourceClass = resourceClassObject.LabelResourceClass;
                 string resourceURL = resourceClassObject.ResourceURI;
 
                 UriStructure urlStructure = UriStructure.UriStructures.FirstOrDefault(structure => structure.Name.Equals(resourceURL));
-
                 if (urlStructure != null)
                 {
-                    uri = GetUriByStructure(urlStructure, parsedCharacter, parsedLabelResourceClass, queryString);
+                    string parsedCharacter = ParserCharacter(urlStructure.Components.ToList());
+                    if (!string.IsNullOrEmpty(parsedCharacter))
+                    {
+                        uri = GetUriByStructure(urlStructure, parsedCharacter, parsedLabelResourceClass, queryString);
+                    }
+                    else
+                    {
+                        throw new ParametersNotConfiguredException($"Character for {resourceURL} not configured");
+                    }
                 }
                 else
                 {
-                    throw new ParametersNotConfiguredException($"Structure {urlStructure} not configured");
+                    throw new ParametersNotConfiguredException($"Structure for {resourceURL} not configured");
                 }
                 return uri;
             }
             else
             {
-                if (resourceClassObject == null && string.IsNullOrEmpty(parsedCharacter))
-                {
-                    throw new ParametersNotConfiguredException($"resource class: '{resourceClass}' and resource: '{character}' not configured");
-                }
-                else if (resourceClassObject == null)
-                {
-                    throw new ParametersNotConfiguredException($"resource class: '{resourceClass}' not configured");
-                }
-                else
-                {
-                    throw new ParametersNotConfiguredException($"resource: '{character}' not configured");
-                }
+                throw new ParametersNotConfiguredException($"resource class: '{resourceClass}' not configured");
             }
         }
 
@@ -117,10 +112,21 @@ namespace UrisFactory.Models.Services
             return uri;
         }
 
-        private string ParserCharacter(string pCharacter)
+        private string ParserCharacter(List<Component> pUriStructureComponents)
         {
-            string character = UriStructure.Characters.Where(charact => charact.Character.Equals(pCharacter)).Select(charact => charact.LabelCharacter).FirstOrDefault();
-            return character;
+            string labelCharacter = null;
+            string uriComponentValue = pUriStructureComponents.FirstOrDefault(component => component.UriComponent.Equals(UriComponentsList.Character)).UriComponentValue;
+            string[] parameters = uriComponentValue.Split('@');
+            if(parameters.Length == 2)
+            {
+                string character = parameters[1].ToLower();
+                Characters characterObject = UriStructure.Characters.FirstOrDefault(charac => charac.Character.Equals(character));
+                if(characterObject != null)
+                {
+                    labelCharacter = characterObject.LabelCharacter;
+                }
+            }  
+            return labelCharacter;
         }
 
         private ResourcesClass ParserResourceClass(string pResourceClass)

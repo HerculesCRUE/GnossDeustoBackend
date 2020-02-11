@@ -24,6 +24,9 @@ namespace UrisFactory.Controllers
             _schemaConfigOperations = schemaConfigOperations;
         }
 
+        ///<summary>
+        ///Return the Config file schema
+        ///</summary>
         [HttpGet(Name="getSchema")]
         public FileResult GetSchema()
         {
@@ -31,6 +34,10 @@ namespace UrisFactory.Controllers
             return File(_schemaConfigOperations.GetFileSchemaData(), contentType);
         }
 
+        ///<summary>
+        ///Replace the Config file schema
+        ///</summary>
+        ///<param name="newSchemaConfig">new config file schema</param>
         [HttpPost]
         public IActionResult ReplaceSchemaConfig(IFormFile newSchemaConfig)
         {
@@ -45,6 +52,10 @@ namespace UrisFactory.Controllers
             }
         }
 
+        ///<summary>
+        ///Return the uri structure and the resource class asociated with the uri structure
+        ///</summary>
+        ///<param name="name">name of the uri structure</param>
         [HttpGet("{name}")]
         public IActionResult GetUriStructureInfo(string name)
         {
@@ -63,6 +74,10 @@ namespace UrisFactory.Controllers
             }
         }
 
+        ///<summary>
+        ///Delete the uri structure and the resource class asociated with the uri structure
+        ///</summary>
+        ///<param name="name">name of the uri structure</param>
         [HttpDelete]
         public IActionResult DeleteUriStructure(string name)
         {
@@ -85,6 +100,10 @@ namespace UrisFactory.Controllers
             }
         }
 
+        ///<summary>
+        ///Add an uri structure and a resource class asociated with the uri structure
+        ///</summary>
+        ///<param name="infoUriStructure">uri structure and the resource class to add</param>
         [HttpPut]
         public IActionResult AddUriStructure(InfoUriStructure infoUriStructure)
         {
