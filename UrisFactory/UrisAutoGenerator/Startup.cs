@@ -33,7 +33,7 @@ namespace UrisFactory
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Uris factory", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Uris factory", Version = "v1"});
                 c.OperationFilter<AddParametersFilter>();
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -68,10 +68,18 @@ namespace UrisFactory
 
             app.UseAuthorization();
             
-            app.UseSwagger();
+            app.UseSwagger(c=>
+                {
+                    c.RouteTemplate = "uris/swagger/{documentName}/swagger.json";
+                    c.PreSerializeFilters.Add((swaggerDoc, httpReq) => swaggerDoc.Servers = new List<OpenApiServer>
+                      {
+                        new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}/uris" }
+                      });
+                });
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Uris factory");
+                c.RoutePrefix = "uris/swagger";
+                c.SwaggerEndpoint("/uris/swagger/v1/swagger.json", "Uris factory");
             });
 
             app.UseEndpoints(endpoints =>
