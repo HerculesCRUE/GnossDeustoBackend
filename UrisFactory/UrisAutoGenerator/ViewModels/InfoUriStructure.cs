@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UrisFactory.Models.ConfigEntities;
 
-namespace UrisFactory.Models.Entities
+namespace UrisFactory.ViewModels
 {
     public class InfoUriStructure
     {

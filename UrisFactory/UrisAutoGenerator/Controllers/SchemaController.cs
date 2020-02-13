@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UrisFactory.Extra.Exceptions;
 using UrisFactory.Models.ConfigEntities;
-using UrisFactory.Models.Entities;
+using UrisFactory.ViewModels;
 using UrisFactory.Models.Services;
+using Swashbuckle.AspNetCore.Filters;
+using UrisFactory.ModelExamples;
 
 namespace UrisFactory.Controllers
 {
@@ -105,6 +107,7 @@ namespace UrisFactory.Controllers
         ///</summary>
         ///<param name="infoUriStructure">uri structure and the resource class to add</param>
         [HttpPut]
+        [SwaggerRequestExample(typeof(InfoUriStructure), typeof(UriStructureRequest))]
         public IActionResult AddUriStructure(InfoUriStructure infoUriStructure)
         {
             if(infoUriStructure != null && infoUriStructure.ResourcesClass != null && infoUriStructure.UriStructure != null)

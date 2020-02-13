@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <Folder Include="Extra\Cache\" />
+    <Folder Include="Models\Entities\" />
   </ItemGroup>
 
   <ItemGroup>

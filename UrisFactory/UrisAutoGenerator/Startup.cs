@@ -47,6 +47,7 @@ namespace UrisFactory
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
             services.AddSwaggerExamplesFromAssemblyOf<UrisFactoryExamples>();
+            services.AddSwaggerExamplesFromAssemblyOf<UriStructureRequest>();
             services.AddSingleton(typeof(ConfigJsonHandler));
             services.AddScoped<ISchemaConfigOperations, SchemaConfigFileOperations>();
         }
