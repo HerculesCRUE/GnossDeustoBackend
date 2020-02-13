@@ -30,7 +30,15 @@ namespace UrisFactory.Models.Services
 
         public byte[] GetFileSchemaData()
         {
-            return File.ReadAllBytes(configPath);
+            try
+            {
+                return File.ReadAllBytes(configPath);
+            }
+            catch (Exception ex)
+            {
+                string message = $"{ex.Message}-----------------------{ex.InnerException}";
+                return Encoding.Unicode.GetBytes(message);
+            }
         }
 
         public bool SaveConfigFile(IFormFile formFile)

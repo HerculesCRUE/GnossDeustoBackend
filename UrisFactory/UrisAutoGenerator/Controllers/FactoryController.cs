@@ -26,6 +26,7 @@ namespace UrisFactory.Controllers
         ///</summary>
         ///<param name="resource_class">name of the resource class that specified the resource uri structure to use</param>
         ///<param name="identifier">identifier</param>
+        ///<returns>test</returns>
         [HttpGet(Name= "GenerateUri")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
