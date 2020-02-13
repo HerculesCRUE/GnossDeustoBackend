@@ -2,7 +2,9 @@
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using Swashbuckle.AspNetCore.Annotations;
+using Swashbuckle.AspNetCore.Filters;
+using UrisFactory.ModelExamples;
 using UrisFactory.Models.Services;
 
 namespace UrisFactory.Controllers
@@ -27,6 +29,8 @@ namespace UrisFactory.Controllers
         [HttpGet(Name= "GenerateUri")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(IEnumerable<Uri>))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(UriExample))]
         public IActionResult GenerateUri(string resource_class, string identifier)
         {
             var queryString = HttpContext.Request.Query.ToList();

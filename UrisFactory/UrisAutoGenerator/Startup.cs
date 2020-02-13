@@ -12,8 +12,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 using UrisFactory.Filters;
 using UrisFactory.Middlewares;
+using UrisFactory.ModelExamples;
 using UrisFactory.Models.Services;
 
 namespace UrisFactory
@@ -38,12 +40,13 @@ namespace UrisFactory
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
+                c.ExampleFilters();
             });
             services.Configure<ForwardedHeadersOptions>(options =>
             {
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
-
+            services.AddSwaggerExamplesFromAssemblyOf<UriExample>();
             services.AddSingleton(typeof(ConfigJsonHandler));
             services.AddScoped<ISchemaConfigOperations, SchemaConfigFileOperations>();
         }
