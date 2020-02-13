@@ -29,8 +29,8 @@ namespace UrisFactory.Controllers
         [HttpGet(Name= "GenerateUri")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(IEnumerable<Uri>))]
-        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(UriExample))]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example of use", typeof(IEnumerable<Uri>))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(UrisFactoryExamples))]
         public IActionResult GenerateUri(string resource_class, string identifier)
         {
             var queryString = HttpContext.Request.Query.ToList();
