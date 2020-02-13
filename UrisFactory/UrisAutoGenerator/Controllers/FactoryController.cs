@@ -30,7 +30,7 @@ namespace UrisFactory.Controllers
         [HttpGet(Name= "GenerateUri")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [SwaggerResponse(StatusCodes.Status200OK, "Example of use", typeof(IEnumerable<Uri>))]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example of use", typeof(string))]
         [SwaggerResponseExample(StatusCodes.Status200OK, typeof(UrisFactoryExamples))]
         public IActionResult GenerateUri(string resource_class, string identifier)
         {

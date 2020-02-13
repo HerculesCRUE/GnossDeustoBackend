@@ -118,7 +118,7 @@ namespace UrisFactory.Controllers
                     bool saved = _schemaConfigOperations.SaveConfigJson();
                     if (saved)
                     {
-                        return Ok($"uriStructure: {infoUriStructure.UriStructure.Name} has been deleted and the new config schema is loaded");
+                        return Ok($"uriStructure: {infoUriStructure.UriStructure.Name} has been added and the new config schema is loaded");
                     }
                     else
                     {
