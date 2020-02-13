@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrisFactory", "UrisAutoGenerator\UrisFactory.csproj", "{5828E27B-37C4-4D01-8D67-83ABB97DD1F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestUrisFactory", "XUnitTestUrisFactory\XUnitTestUrisFactory.csproj", "{665FCC09-0821-4117-9B2B-69D0A0A3318A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestUrisFactory", "XUnitTestUrisFactory\XUnitTestUrisFactory.csproj", "{665FCC09-0821-4117-9B2B-69D0A0A3318A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

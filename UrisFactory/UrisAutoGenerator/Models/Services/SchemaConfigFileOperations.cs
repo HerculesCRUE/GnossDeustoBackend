@@ -13,8 +13,8 @@ namespace UrisFactory.Models.Services
 {
     public class SchemaConfigFileOperations : ISchemaConfigOperations
     {
-        private static string configPath = "config/UrisConfig.json";
-        private static string oldConfigPath = "config/oldUrisConfig.json";
+        private static string configPath = "Config/UrisConfig.json";
+        private static string oldConfigPath = "Config/oldUrisConfig.json";
 
         private ConfigJsonHandler _configJsonHandler;
         public SchemaConfigFileOperations(ConfigJsonHandler configJsonHandler)
