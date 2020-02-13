@@ -70,7 +70,7 @@ namespace UrisFactory
             
             app.UseSwagger(c=>
                 {
-                    c.RouteTemplate = "uris/swagger/{documentName}/swagger.json";
+                   // c.RouteTemplate = "uris/swagger/{documentName}/swagger.json";
                     c.PreSerializeFilters.Add((swaggerDoc, httpReq) => swaggerDoc.Servers = new List<OpenApiServer>
                       {
                         new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}/uris" },
@@ -79,8 +79,8 @@ namespace UrisFactory
                 });
             app.UseSwaggerUI(c =>
             {
-                c.RoutePrefix = "uris/swagger";
-                c.SwaggerEndpoint("/uris/swagger/v1/swagger.json", "Uris factory");
+                //c.RoutePrefix = "uris/swagger";
+                c.SwaggerEndpoint("v1/swagger.json", "Uris factory");
             });
 
             app.UseEndpoints(endpoints =>
