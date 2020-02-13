@@ -12,7 +12,6 @@ using UrisFactory.Models.Services;
 namespace UrisFactory.Controllers
 {
     [ApiController]
-    //[Route("uris/[Controller]")]
     [Route("[Controller]")]
     public class SchemaController : Controller
     {

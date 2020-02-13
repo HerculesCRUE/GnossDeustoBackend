@@ -9,7 +9,6 @@ namespace UrisFactory.Controllers
 {
 
     [ApiController]
-    //[Route("uris/[controller]")]
     [Route("[controller]")]
     public class FactoryController : ControllerBase
     {
