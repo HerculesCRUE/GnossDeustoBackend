@@ -10,6 +10,7 @@ using UrisFactory.ViewModels;
 using UrisFactory.Models.Services;
 using Swashbuckle.AspNetCore.Filters;
 using UrisFactory.ModelExamples;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace UrisFactory.Controllers
 {
@@ -30,6 +31,8 @@ namespace UrisFactory.Controllers
         ///Return the Config file schema
         ///</summary>
         [HttpGet(Name="getSchema")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(UriStructureGeneral))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(UriStructureGeneralExample))]
         public FileResult GetSchema()
         {
             string contentType = _schemaConfigOperations.GetContentType();
@@ -41,6 +44,10 @@ namespace UrisFactory.Controllers
         ///</summary>
         ///<param name="newSchemaConfig">new config file schema</param>
         [HttpPost]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(string))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(ReplaceSchemaResponse))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(UriErrorExample))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(ReplaceShemaErrorResponse))]
         public IActionResult ReplaceSchemaConfig(IFormFile newSchemaConfig)
         {
             bool result = _schemaConfigOperations.SaveConfigFile(newSchemaConfig);
@@ -50,7 +57,7 @@ namespace UrisFactory.Controllers
             }
             else
             {
-                return BadRequest("Error: new config file is not correctly formed.");
+                return BadRequest("{{\"error\": \" new config file is not correctly formed.\"}}");
             }
         }
 
@@ -59,6 +66,10 @@ namespace UrisFactory.Controllers
         ///</summary>
         ///<param name="name">name of the uri structure</param>
         [HttpGet("{name}")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(InfoUriStructure))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(UriStructureInfoRequest))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(UriErrorExample))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(InfoStructureErrorResponse))]
         public IActionResult GetUriStructureInfo(string name)
         {
             UriStructure uri = _configJsonHandler.GetUriStructure(name);
@@ -72,7 +83,7 @@ namespace UrisFactory.Controllers
             }
             else
             {
-                return BadRequest($"No data of uriStructure {name}");
+                return BadRequest($"{{\"error\": \"No data of uriStructure {name}\"}}");
             }
         }
 
@@ -81,6 +92,10 @@ namespace UrisFactory.Controllers
         ///</summary>
         ///<param name="name">name of the uri structure</param>
         [HttpDelete]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(string))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(DeleteUriStructureResponse))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(UriErrorExample))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(DeleteUriStructureErrorResponse))]
         public IActionResult DeleteUriStructure(string name)
         {
             if (_configJsonHandler.ExistUriStructure(name))
@@ -98,7 +113,7 @@ namespace UrisFactory.Controllers
             }
             else
             {
-                return BadRequest($"No data of uriStructure {name}");
+                return BadRequest($"{{\"error\": \"No data of uriStructure {name}\"}}");
             }
         }
 
@@ -107,7 +122,11 @@ namespace UrisFactory.Controllers
         ///</summary>
         ///<param name="infoUriStructure">uri structure and the resource class to add</param>
         [HttpPut]
-        [SwaggerRequestExample(typeof(InfoUriStructure), typeof(UriStructureRequest))]
+        [SwaggerRequestExample(typeof(InfoUriStructure), typeof(UriStructureInfoRequest))]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(string))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(AddUriStructureResponse))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(UriErrorExample))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(AddUriStructureErrorResponse))]
         public IActionResult AddUriStructure(InfoUriStructure infoUriStructure)
         {
             if(infoUriStructure != null && infoUriStructure.ResourcesClass != null && infoUriStructure.UriStructure != null)
@@ -131,12 +150,12 @@ namespace UrisFactory.Controllers
                 }
                 catch (UriStructureBadInfoException badInfoEx)
                 {
-                    return BadRequest(badInfoEx.Message);
+                    return BadRequest($"{{\"error\": \"{badInfoEx.Message}\"}}");
                 }
             }
             else
             {
-                return BadRequest("info structure is missing");
+                return BadRequest("{{\"error\": \"info structure is missing\"}}");
             }
         }
     }

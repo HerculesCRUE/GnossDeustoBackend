@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace UrisFactory.ModelExamples
 {
-    public class UrisFactoryExamples: IExamplesProvider<string>
+    public class ReplaceSchemaResponse : IExamplesProvider<string>
     {
         public string GetExamples()
         {
-            return "http://data.um.es/res/researcher/121s";
+            return "new config file loaded";
         }
- 
+
     }
 }
