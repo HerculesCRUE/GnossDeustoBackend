@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Serilog;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace UrisFactory.Middlewares
         private readonly RequestDelegate _next;
         public ErrorHandlingMiddleware(RequestDelegate next)
         {
+            Log.Logger = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.File("logs/log.txt").CreateLogger();
             _next = next;
         }
 
@@ -48,6 +50,7 @@ namespace UrisFactory.Middlewares
             
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
+            Log.Error(ex.Message);
             return context.Response.WriteAsync(result);
         }
     }

@@ -1,0 +1,1 @@
+2020-02-14 12:57:00.510 +01:00 [ERR] resource class: 'df' not configured
