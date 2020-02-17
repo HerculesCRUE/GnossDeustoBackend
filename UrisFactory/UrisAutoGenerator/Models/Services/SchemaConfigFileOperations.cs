@@ -13,8 +13,8 @@ namespace UrisFactory.Models.Services
 {
     public class SchemaConfigFileOperations : ISchemaConfigOperations
     {
-        private static string configPath = "Config/UrisConfig.json";
-        private static string oldConfigPath = "Config/oldUrisConfig.json";
+        private static string configPath = "onfig/UrisConfig.json";
+        private static string oldConfigPath = "onfig/oldUrisConfig.json";
 
         private ConfigJsonHandler _configJsonHandler;
         public SchemaConfigFileOperations(ConfigJsonHandler configJsonHandler)
@@ -30,15 +30,12 @@ namespace UrisFactory.Models.Services
 
         public byte[] GetFileSchemaData()
         {
-            try
-            {
-                return File.ReadAllBytes(configPath);
-            }
-            catch (Exception ex)
-            {
-                string message = $"{ex.Message}-----------------------{ex.InnerException}";
-                return Encoding.Unicode.GetBytes(message);
-            }
+            return File.ReadAllBytes(configPath);
+            //catch (Exception ex)
+            //{
+            //    string message = $"{ex.Message}-----------------------{ex.InnerException}";
+            //    return Encoding.Unicode.GetBytes(message);
+            //}
         }
 
         public bool SaveConfigFile(IFormFile formFile)
