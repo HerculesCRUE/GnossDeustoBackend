@@ -1,0 +1,101 @@
+{
+  "base": "http://datos.um.es",
+  "characters": [
+    {
+      "character": "resource",
+      "labelCharacter": "res"
+    },
+    {
+      "character": "kos",
+      "labelCharacter": "kos"
+    }
+  ],
+  "uriStructures": [
+    {
+      "name": "uriResourceStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "@RESOURCECLASS",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    },
+    {
+      "name": "uriPublicationStructure",
+      "components": [
+        {
+          "uriComponent": "base",
+          "uriComponentValue": "base",
+          "uriComponentOrder": 1,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "character",
+          "uriComponentValue": "character@RESOURCE",
+          "uriComponentOrder": 2,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "sector",
+          "uriComponentValue": "@SECTOR",
+          "uriComponentOrder": 3,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "resourceClass",
+          "uriComponentValue": "resourceClass@RESOURCECLASS",
+          "uriComponentOrder": 4,
+          "mandatory": true,
+          "finalCharacter": "/"
+        },
+        {
+          "uriComponent": "identifier",
+          "uriComponentValue": "@ID",
+          "uriComponentOrder": 5,
+          "mandatory": true,
+          "finalCharacter": ""
+        }
+      ]
+    }
+  ],
+  "resourcesClasses": [
+    {
+      "resourceClass": "researcher",
+      "labelResourceClass": "investigador",
+      "resourceURI": "uriResourceStructure"
+    },
+    {
+      "resourceClass": "publication",
+      "labelResourceClass": "publicacion",
+      "resourceURI": "uriPublicationStructure"
+    }
+  ]
+
+}

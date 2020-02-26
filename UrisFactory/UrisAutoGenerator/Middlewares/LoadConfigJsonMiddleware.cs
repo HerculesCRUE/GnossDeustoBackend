@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using UrisFactory.Models.Services;
 
@@ -17,7 +14,7 @@ namespace UrisFactory.Middlewares
 
         public async Task Invoke(HttpContext context /* other dependencies */)
         {
-            ConfigJsonHandler.InitializerConfigJson();
+            //ConfigJsonHandler.InitializerConfigJson();
             await _next(context);
         }
     }

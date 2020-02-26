@@ -1,19 +1,21 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 using UrisFactory.Models.ConfigEntities;
 
 namespace UrisFactory.Models.Services
 {
-    public class ReaderConfigJSON
+    public class ReaderConfigJson
     {
-        public static UriStructure Read()
+        public static UriStructureGeneral Read()
         {
             string texto = File.ReadAllText("Config/UrisConfig.json");
-            UriStructure uriStructure = JsonConvert.DeserializeObject<UriStructure>(texto);
+            return Read(texto);
+        }
+
+        public static UriStructureGeneral Read(string texto)
+        {
+            UriStructureGeneral uriStructure = JsonConvert.DeserializeObject<UriStructureGeneral>(texto);
             return uriStructure;
         }
     }

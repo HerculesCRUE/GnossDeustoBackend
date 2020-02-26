@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UrisFactory.Extra.Exceptions;
 using UrisFactory.Models.ConfigEntities;
 
@@ -9,90 +8,86 @@ namespace UrisFactory.Models.Services
 {
     public class UriFormer
     {
-        private static UriStructure _uristructure;
+        private UriStructureGeneral _uristructure;
 
-        private static UriStructure UriStructure
+
+        public UriFormer(UriStructureGeneral uristructure)
+        {
+            _uristructure = uristructure;
+        }
+        private UriStructureGeneral UriStructure
         {
             get
             {
-                if (_uristructure == null){
-                    _uristructure = ConfigJsonHandler.GetUriStructure();
-                }
-                return _uristructure;
-                    
+                return _uristructure;    
             }
             
         }
 
-        public static string GetURI(string character, string resourceClass, Dictionary<string, string> queryString)
+        public string GetURI(string resourceClass, Dictionary<string, string> queryString)
         {
             string uri = "";
-            string parsedCharacter = ParserCharacter(character);
-            ResourcesClass resourceClassObject = ParserResourceClass(resourceClass);
+            ResourcesClass resourceClassObject = ParserResourceClass(resourceClass);          
 
-            if (resourceClassObject != null || string.IsNullOrEmpty(parsedCharacter))
+            if (resourceClassObject != null)
             {
                 string parsedLabelResourceClass = resourceClassObject.LabelResourceClass;
-                string resourceURL = resourceClassObject.ResourceURL;
+                string resourceURL = resourceClassObject.ResourceURI;
 
-                UrlStructure urlStructure = UriStructure.UrlStructures.FirstOrDefault(structure => structure.Name.Equals(resourceURL));
-
+                UriStructure urlStructure = UriStructure.UriStructures.FirstOrDefault(structure => structure.Name.Equals(resourceURL));
                 if (urlStructure != null)
                 {
-                    uri = GetUriByStructure(urlStructure, parsedCharacter, parsedLabelResourceClass, queryString);
+                    string parsedCharacter = ParserCharacter(urlStructure.Components.ToList());
+                    if (!string.IsNullOrEmpty(parsedCharacter))
+                    {
+                        uri = GetUriByStructure(urlStructure, parsedCharacter, parsedLabelResourceClass, queryString);
+                    }
+                    else
+                    {
+                        throw new ParametersNotConfiguredException($"Character for {resourceURL} not configured");
+                    }
                 }
                 else
                 {
-                    throw new ParametersNotConfiguredException($"Structure {urlStructure} not configured");
+                    throw new ParametersNotConfiguredException($"Structure for {resourceURL} not configured");
                 }
                 return uri;
             }
             else
             {
-                if (resourceClassObject == null && string.IsNullOrEmpty(parsedCharacter))
-                {
-                    throw new ParametersNotConfiguredException("resource class and resource not configured");
-                }
-                else if (resourceClassObject == null)
-                {
-                    throw new ParametersNotConfiguredException("resource class not configured");
-                }
-                else
-                {
-                    throw new ParametersNotConfiguredException("resource not configured");
-                }
+                throw new ParametersNotConfiguredException($"resource class: '{resourceClass}' not configured");
             }
         }
 
-        private static string GetUriByStructure(UrlStructure urlStructure, string parsedCharacter, string parsedResourceClass, Dictionary<string, string> queryString)
+        private string GetUriByStructure(UriStructure urlStructure, string parsedCharacter, string parsedResourceClass, Dictionary<string, string> queryString)
         {
             string uri = "";
             bool error = false;
             string errorMessage = "";
             bool containsKey = false;
-            foreach (Component component in urlStructure.Components.OrderBy(structure => structure.UrlComponentOrder))
+            foreach (Component component in urlStructure.Components.OrderBy(structure => structure.UriComponentOrder))
             {
-                string componentName = component.UrlComponent;
+                string componentName = component.UriComponent;
                 switch (componentName)
                 {
-                    case UrlComponentsList.Base:
-                        uri += UriStructure.Base + component.FinalCharacter;
+                    case UriComponentsList.Base:
+                        uri =$"{uri}{UriStructure.Base}{component.FinalCharacter}";
                         break;
-                    case UrlComponentsList.Character:
-                        uri += parsedCharacter + component.FinalCharacter;
+                    case UriComponentsList.Character:
+                        uri = $"{uri}{parsedCharacter}{component.FinalCharacter}";
                         break;
-                    case UrlComponentsList.ResourceClass:
-                        uri += parsedResourceClass + component.FinalCharacter;
+                    case UriComponentsList.ResourceClass:
+                        uri = $"{uri}{parsedResourceClass}{component.FinalCharacter}";
                         break;
-                    case UrlComponentsList.Identifier:
-                        containsKey = queryString.ContainsKey(UrlComponentsList.Identifier);
+                    case UriComponentsList.Identifier:
+                        containsKey = queryString.ContainsKey(UriComponentsList.Identifier);
                         if(!containsKey && component.Mandatory)
                         {
                             error = true;
                         }else if (containsKey)
                         {
-                            string id = queryString[UrlComponentsList.Identifier];
-                            uri += id + component.FinalCharacter;
+                            string id = queryString[UriComponentsList.Identifier];
+                            uri = $"{uri}{id}{component.FinalCharacter}";
                         }
                         break;
                     default:
@@ -100,12 +95,12 @@ namespace UrisFactory.Models.Services
                         if (!containsKey && component.Mandatory)
                         {
                             error = true; 
-                            errorMessage += $"parameter {componentName} missing \n"; 
+                            errorMessage = $"{errorMessage} parameter {componentName} missing \n"; 
                         }
                         else if (containsKey)
                         {
                             string componentVariable = queryString[componentName];
-                            uri += componentVariable + component.FinalCharacter;
+                            uri = $"{uri}{componentVariable}{component.FinalCharacter}";
                         }
                         break;
                 }
@@ -117,13 +112,24 @@ namespace UrisFactory.Models.Services
             return uri;
         }
 
-        private static string ParserCharacter(string pCharacter)
+        private string ParserCharacter(List<Component> pUriStructureComponents)
         {
-            string character = UriStructure.Characters.Where(charact => charact.Character.Equals(pCharacter)).Select(charact => charact.LabelCharacter).FirstOrDefault();
-            return character;
+            string labelCharacter = null;
+            string uriComponentValue = pUriStructureComponents.FirstOrDefault(component => component.UriComponent.Equals(UriComponentsList.Character)).UriComponentValue;
+            string[] parameters = uriComponentValue.Split('@');
+            if(parameters.Length == 2)
+            {
+                string character = parameters[1].ToLower();
+                Characters characterObject = UriStructure.Characters.FirstOrDefault(charac => charac.Character.Equals(character));
+                if(characterObject != null)
+                {
+                    labelCharacter = characterObject.LabelCharacter;
+                }
+            }  
+            return labelCharacter;
         }
 
-        private static ResourcesClass ParserResourceClass(string pResourceClass)
+        private ResourcesClass ParserResourceClass(string pResourceClass)
         {
             ResourcesClass resourceClass = null;
             resourceClass = UriStructure.ResourcesClasses.FirstOrDefault(resource => resource.ResourceClass.Equals(pResourceClass));
