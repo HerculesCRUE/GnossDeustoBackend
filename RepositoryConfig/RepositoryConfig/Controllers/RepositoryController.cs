@@ -3,14 +3,75 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RepositoryConfigSolution.Models.Entities;
+using RepositoryConfigSolution.Models.Services;
 
-namespace RepositoryConfig.Controllers
+namespace RepositoryConfigSolution.Controllers
 {
-    public class RepositoryController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class RepositoryController : ControllerBase
     {
-        public IActionResult Index()
+        private IRepositoriesConfigService _repositoriesConfigService;
+
+        public RepositoryController(IRepositoriesConfigService iRepositoriesConfigService)
         {
-            return View();
+            _repositoriesConfigService = iRepositoriesConfigService;
+        }
+
+        [HttpGet]
+        public IActionResult GetRepositoriesConfigs()
+        {
+            return Ok(_repositoriesConfigService.GetRepositoryConfigs());
+        }
+
+        [HttpGet("{name}")]
+        public IActionResult GetRepositoryConfig(string name)
+        {
+            return Ok(_repositoriesConfigService.GetRepositoryConfigByName(name));
+        }
+
+        [HttpPost]
+        public IActionResult AddConfigRepository(RepositoryConfig repositoryConfig)
+        {
+            bool added = _repositoriesConfigService.AddRepositoryConfig(repositoryConfig);
+            if (added)
+            {
+                return Ok($"new config repository {repositoryConfig.Name} has been added");
+            }
+            else
+            {
+                return BadRequest($"config repository {repositoryConfig.Name} already exist");
+            }
+            
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteRepositoryConfig(string nombre)
+        {
+            bool deleted = _repositoriesConfigService.RemoveRepositoryConfig(nombre);
+            if (deleted)
+            {
+                return Ok($"Config repository {nombre} has been deleted");
+            }
+            else
+            {
+                return Problem("Error has ocurred");
+            }
+        }
+
+        [HttpPut]
+        public IActionResult ModifyRepositoryConfig(RepositoryConfig repositoryConfig)
+        {
+            bool modified = _repositoriesConfigService.ModifyRepositoryConfig(repositoryConfig);
+            if (modified)
+            {
+                return Ok($"Config repository {repositoryConfig.Name} has been modified");
+            }
+            else
+            {
+                return BadRequest($"Check that repository config with id {repositoryConfig.RepositoryConfigID} exist");
+            }
         }
     }
 }

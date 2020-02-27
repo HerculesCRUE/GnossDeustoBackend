@@ -15,9 +15,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RepositoryConfigSolution.Middlewares;
+using RepositoryConfigSolution.Models.Services;
 using Swashbuckle.AspNetCore.Filters;
 
-namespace RepositoryConfig
+namespace RepositoryConfigSolution
 {
     public class Startup
     {
@@ -44,6 +46,8 @@ namespace RepositoryConfig
             {
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
+
+            services.AddSingleton<IRepositoriesConfigService, RepositoriesConfigMockService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,7 +57,7 @@ namespace RepositoryConfig
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseHttpsRedirection();
 
             app.UseRouting();
