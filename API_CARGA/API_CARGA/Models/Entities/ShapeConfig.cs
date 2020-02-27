@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API_CARGA.Models
+namespace API_CARGA.Models.Entities
 {
     /// <summary>
     /// Datos de configuración de una validación SHACL

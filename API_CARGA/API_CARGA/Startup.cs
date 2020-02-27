@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Text.Json.Serialization;
+using API_CARGA.Middlewares;
+using API_CARGA.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,13 +23,11 @@ namespace PRH
         }
 
         public IConfiguration Configuration { get; }
-
+        //<summary>
         // This method gets called by the runtime. Use this method to add services to the container.
+        //</summary>
         public void ConfigureServices(IServiceCollection services)
-        {
-            //services.AddControllers().AddNewtonsoftJson(options =>
-                //options.SerializerSettings.Converters.Add(new StringEnumConverter()));
-               
+        {              
             services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -46,13 +45,14 @@ namespace PRH
             {
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
-            
 
-            //services.AddSingleton(typeof(ConfigJsonHandler));
-            //services.AddScoped<ISchemaConfigOperations, SchemaConfigFileOperations>();
+
+            services.AddSingleton<IRepositoriesConfigService, RepositoriesConfigMockService>();
         }
 
+        //<summary>
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        //</summary>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -60,7 +60,7 @@ namespace PRH
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseMiddleware(typeof(LoadConfigJsonMiddleware));
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -71,11 +71,17 @@ namespace PRH
             });
 
             app.UseAuthorization();
-            //app.UseMiddleware(typeof(ErrorHandlingMiddleware));
-            app.UseSwagger();
+            app.UseSwagger(c =>
+            {
+                c.PreSerializeFilters.Add((swaggerDoc, httpReq) => swaggerDoc.Servers = new List<OpenApiServer>
+                      {
+                        new OpenApiServer { Url = $"/carga"},
+                        new OpenApiServer { Url = $"/" }
+                      });
+            });
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API de carga");
+                c.SwaggerEndpoint("v1/swagger.json", "API de carga");
             });
 
             app.UseEndpoints(endpoints =>

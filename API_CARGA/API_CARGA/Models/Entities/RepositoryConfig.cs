@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace API_CARGA.Models
+namespace API_CARGA.Models.Entities
 {
     /// <summary>
     /// Datos de configuración de un repositorio OAI-PMH
@@ -13,14 +11,20 @@ namespace API_CARGA.Models
         /// <summary>
         /// Identificador del repositorio
         /// </summary>
-        public string identifier { get; set; }
+        [Key]
+        public Guid RepositoryConfigID { get; set; }
         /// <summary>
         /// Nombre del repositorio
         /// </summary>
-        public string name { get; set; }        
+        [Required]
+        public string Name { get; set; }
         /// <summary>
         /// Token OAUTH
         /// </summary>
-        public string oauthToken { get; set; }
+        public string OauthToken { get; set; }
+        /// <summary>
+        /// url del repositorio
+        /// </summary>
+        public string Url { get; set; }
     }
 }
