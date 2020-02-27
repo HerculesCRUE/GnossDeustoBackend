@@ -10,7 +10,7 @@ namespace API_CARGA.Models.Services
         public RepositoryConfig GetRepositoryConfigByName(string name);
         public RepositoryConfig GetRepositoryConfigById(Guid id);
         public bool RemoveRepositoryConfig(Guid identifier);
-        public bool AddRepositoryConfig(RepositoryConfig repositoryConfig);
+        public Guid AddRepositoryConfig(RepositoryConfig repositoryConfig);
         public bool ModifyRepositoryConfig(RepositoryConfig repositoryConfig);
     }
 }

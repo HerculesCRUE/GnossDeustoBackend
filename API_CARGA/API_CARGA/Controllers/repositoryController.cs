@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using API_CARGA.ModelExamples;
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
+using API_CARGA.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OaiPmhNet;
-using OaiPmhNet.Models;
 using Swashbuckle.AspNetCore.Annotations;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace PMH.Controllers
 {
@@ -30,6 +31,8 @@ namespace PMH.Controllers
         /// <returns>Listado con todas las configuraciones de los repositorios OAI-PMH</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(List<RepositoryConfig>))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(ConfigRepositoriesResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult GetRepository()
         {
@@ -43,6 +46,8 @@ namespace PMH.Controllers
         /// <returns>Configuración del repositorio</returns>
         [HttpGet("{identifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(RepositoryConfig))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(ConfigRepositoryResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult GetRepository(Guid identifier)
         {
@@ -56,17 +61,21 @@ namespace PMH.Controllers
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(Guid))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(UriErrorExample))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(AddRepositoryErrorResponse))]
         public IActionResult AddConfigRepository(RepositoryConfig repositoryConfig)
         {
-            bool added = _repositoriesConfigService.AddRepositoryConfig(repositoryConfig);
-            if (added)
+            Guid addedID = _repositoriesConfigService.AddRepositoryConfig(repositoryConfig);
+            if (!addedID.Equals(Guid.Empty))
             {
-                return Ok($"new config repository {repositoryConfig.Name} has been added");
+                //return Ok($"new config repository {repositoryConfig.Name} has been added with identifier: {addedID}");
+                return Ok(addedID);
             }
             else
             {
-                return BadRequest($"config repository {repositoryConfig.Name} already exist");
+                return BadRequest(new UriErrorExample { Error = $"config repository {repositoryConfig.Name} already exist" });
             }
         }
 
@@ -98,6 +107,8 @@ namespace PMH.Controllers
         /// <returns></returns>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(UriErrorExample))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(ModifyRepositoryErrorResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult ModifyRepositoryConfig(RepositoryConfig repositoryConfig)
         {
@@ -108,7 +119,7 @@ namespace PMH.Controllers
             }
             else
             {
-                return BadRequest($"Check that repository config with id {repositoryConfig.RepositoryConfigID} exist");
+                return BadRequest(new UriErrorExample { Error = $"Check that repository config with id {repositoryConfig.RepositoryConfigID} exist" });
             }
         }
 

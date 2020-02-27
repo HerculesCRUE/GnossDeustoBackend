@@ -1,7 +1,11 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Text.Json.Serialization;
 using API_CARGA.Middlewares;
+using API_CARGA.ModelExamples;
 using API_CARGA.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace PRH
 {
@@ -38,8 +43,12 @@ namespace PRH
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API de carga", Version = "v1",Description= "API de carga" });
                 c.IncludeXmlComments(string.Format(@"{0}comments.xml", System.AppDomain.CurrentDomain.BaseDirectory));
-                // c.OperationFilter<AddParametersFilter>();
+                c.ExampleFilters();
             });
+            services.AddSwaggerExamplesFromAssemblyOf<ConfigRepositoriesResponse>();
+            services.AddSwaggerExamplesFromAssemblyOf<ConfigRepositoryResponse>();
+            services.AddSwaggerExamplesFromAssemblyOf<AddRepositoryErrorResponse>();
+            services.AddSwaggerExamplesFromAssemblyOf<ModifyRepositoryErrorResponse>();
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {

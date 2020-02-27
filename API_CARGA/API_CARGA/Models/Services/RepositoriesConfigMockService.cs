@@ -16,31 +16,36 @@ namespace API_CARGA.Models.Services
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_1",
-                Url = "config\\repository"
+                Url = "config\\repository",
+                OauthToken = "12weq1"
             });
             _configRepositories.Add(new RepositoryConfig
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_2",
-                Url = "config\\repository"
+                Url = "config\\repository",
+                OauthToken = "11389"
             });
             _configRepositories.Add(new RepositoryConfig
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_3",
-                Url = "config\\repository"
+                Url = "config\\repository",
+                OauthToken = "1238912"
             });
             _configRepositories.Add(new RepositoryConfig
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_4",
-                Url = "config\\repository"
+                Url = "config\\repository",
+                OauthToken = "asf46s"
             });
             _configRepositories.Add(new RepositoryConfig
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_5",
-                Url = "config\\repository"
+                Url = "config\\repository",
+                OauthToken = "87f9"
             });
         }
 
@@ -76,15 +81,16 @@ namespace API_CARGA.Models.Services
             }
         }
 
-        public bool AddRepositoryConfig(RepositoryConfig repositoryConfig)
+        public Guid AddRepositoryConfig(RepositoryConfig repositoryConfig)
         {
-            bool added = false;
+            Guid repositoryConfigID = Guid.Empty;
             if (GetRepositoryConfigByName(repositoryConfig.Name) == null)
             {
+                repositoryConfigID = Guid.NewGuid();
+                repositoryConfig.RepositoryConfigID = repositoryConfigID;
                 _configRepositories.Add(repositoryConfig);
-                added = true;
             }
-            return added;
+            return repositoryConfigID;
         }
 
         public bool ModifyRepositoryConfig(RepositoryConfig repositoryConfig)
@@ -96,7 +102,7 @@ namespace API_CARGA.Models.Services
                 //CheckDataExceptions(repositoryConfigOriginal, repositoryConfig);
                 repositoryConfigOriginal.Name = repositoryConfig.Name;
                 repositoryConfigOriginal.Url = repositoryConfig.Url;
-                //repositoryConfigOriginal.InitialDate = 
+                repositoryConfigOriginal.OauthToken = repositoryConfig.OauthToken; 
                 modified = true;
 
             }
