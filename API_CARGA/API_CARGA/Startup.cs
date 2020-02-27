@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
-using System.Reflection;
 using System.Text.Json.Serialization;
 using API_CARGA.Middlewares;
 using API_CARGA.ModelExamples;
@@ -18,8 +16,6 @@ using Microsoft.Extensions.Logging;
 
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
-
-using Microsoft.OpenApi.Models; 
 
 
 namespace PRH
