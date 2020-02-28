@@ -16,6 +16,7 @@ namespace API_CARGA.Models.Entities
         /// <summary>
         /// Nombre de la validación
         /// </summary>
+        [Required]
         public string Name { get; set; }
         /// <summary>
         /// Nombre de la clase que se validará
