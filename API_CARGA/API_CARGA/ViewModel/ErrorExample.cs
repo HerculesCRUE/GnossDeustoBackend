@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.ViewModel
 {
-    public class UriErrorExample
+    public class ErrorExample
     {
         public string Error { get; set; }
     }

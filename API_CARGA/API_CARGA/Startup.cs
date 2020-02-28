@@ -50,6 +50,11 @@ namespace PRH
             services.AddSwaggerExamplesFromAssemblyOf<AddRepositoryErrorResponse>();
             services.AddSwaggerExamplesFromAssemblyOf<ModifyRepositoryErrorResponse>();
 
+            services.AddSwaggerExamplesFromAssemblyOf<ShapeConfigResponse>();
+            services.AddSwaggerExamplesFromAssemblyOf<ShapesConfigsResponse>();
+            services.AddSwaggerExamplesFromAssemblyOf<AddShapeConfigResponseError>();
+            services.AddSwaggerExamplesFromAssemblyOf<ModifyShapeConfigResponseError>();
+
             services.Configure<ForwardedHeadersOptions>(options =>
             {
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
@@ -57,6 +62,7 @@ namespace PRH
 
 
             services.AddSingleton<IRepositoriesConfigService, RepositoriesConfigMockService>();
+            services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
         }
 
         //<summary>

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.ModelExamples
 {
-    public class AddRepositoryErrorResponse : IExamplesProvider<ErrorExample>
+    public class AddShapeConfigResponseError : IExamplesProvider<ErrorExample>
     {
         public ErrorExample GetExamples()
         {
             return new ErrorExample
             {
-                Error = "config repository {name} already exist"
+                Error = "Check that shape config with id {identifier} exist"
             };
         }
     }

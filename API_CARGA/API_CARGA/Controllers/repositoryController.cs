@@ -63,7 +63,7 @@ namespace PMH.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(Guid))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(UriErrorExample))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ErrorExample))]
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(AddRepositoryErrorResponse))]
         public IActionResult AddConfigRepository(RepositoryConfig repositoryConfig)
         {
@@ -75,7 +75,7 @@ namespace PMH.Controllers
             }
             else
             {
-                return BadRequest(new UriErrorExample { Error = $"config repository {repositoryConfig.Name} already exist" });
+                return BadRequest(new ErrorExample { Error = $"config repository {repositoryConfig.Name} already exist" });
             }
         }
 
@@ -107,7 +107,7 @@ namespace PMH.Controllers
         /// <returns></returns>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(UriErrorExample))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ErrorExample))]
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(ModifyRepositoryErrorResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult ModifyRepositoryConfig(RepositoryConfig repositoryConfig)
@@ -119,7 +119,7 @@ namespace PMH.Controllers
             }
             else
             {
-                return BadRequest(new UriErrorExample { Error = $"Check that repository config with id {repositoryConfig.RepositoryConfigID} exist" });
+                return BadRequest(new ErrorExample { Error = $"Check that repository config with id {repositoryConfig.RepositoryConfigID} exist" });
             }
         }
 

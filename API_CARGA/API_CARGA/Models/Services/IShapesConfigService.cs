@@ -6,11 +6,11 @@ namespace API_CARGA.Models.Services
 {
     public interface IShapesConfigService
     {
-        public List<ShapeConfig> GetRepositoryConfigs();
-        public ShapeConfig GetRepositoryConfigByName(string name);
-        public ShapeConfig GetRepositoryConfigById(Guid id);
-        public bool RemoveRepositoryConfig(Guid identifier);
-        public Guid AddRepositoryConfig(ShapeConfig shapeConfig);
-        public bool ModifyRepositoryConfig(ShapeConfig shapeConfig);
+        public List<ShapeConfig> GetShapesConfigs();
+        public ShapeConfig GetShapeConfigByName(string name);
+        public ShapeConfig GetShapeConfigById(Guid id);
+        public bool RemoveShapeConfig(Guid identifier);
+        public Guid AddShapeConfig(ShapeConfig shapeConfig);
+        public bool ModifyShapeConfig(ShapeConfig shapeConfig);
     }
 }

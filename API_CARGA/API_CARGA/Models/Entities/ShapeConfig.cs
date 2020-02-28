@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace API_CARGA.Models.Entities
 {
@@ -13,6 +11,7 @@ namespace API_CARGA.Models.Entities
         /// <summary>
         /// Identificador de la validación
         /// </summary>
+        [Key]
         public Guid ShapeConfigID { get; set; }
         /// <summary>
         /// Nombre de la validación

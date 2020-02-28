@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.ModelExamples
 {
-    public class ModifyRepositoryErrorResponse : IExamplesProvider<UriErrorExample>
+    public class ModifyRepositoryErrorResponse : IExamplesProvider<ErrorExample>
     {
-        public UriErrorExample GetExamples()
+        public ErrorExample GetExamples()
         {
-            return new UriErrorExample
+            return new ErrorExample
             {
                 Error = "Check that repository config with id {identifier} exist"
             };

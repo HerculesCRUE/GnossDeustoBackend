@@ -50,10 +50,10 @@ namespace API_CARGA.Models.Services
                 Shape = "Definition_1"
             });
         }
-        public Guid AddRepositoryConfig(ShapeConfig shapeConfig)
+        public Guid AddShapeConfig(ShapeConfig shapeConfig)
         {
             Guid addedID = Guid.Empty;
-            ShapeConfig shapeConfigOriginal = GetRepositoryConfigByName(shapeConfig.Name);
+            ShapeConfig shapeConfigOriginal = GetShapeConfigByName(shapeConfig.Name);
             if(shapeConfigOriginal == null)
             {
                 addedID = Guid.NewGuid();
@@ -64,25 +64,25 @@ namespace API_CARGA.Models.Services
             return addedID;
         }
 
-        public ShapeConfig GetRepositoryConfigById(Guid id)
+        public ShapeConfig GetShapeConfigById(Guid id)
         {
             return _listShapesConfig.FirstOrDefault(shape => shape.ShapeConfigID.Equals(id));
         }
 
-        public ShapeConfig GetRepositoryConfigByName(string name)
+        public ShapeConfig GetShapeConfigByName(string name)
         {
             return _listShapesConfig.FirstOrDefault(shape => shape.Name.Equals(name));
         }
 
-        public List<ShapeConfig> GetRepositoryConfigs()
+        public List<ShapeConfig> GetShapesConfigs()
         {
             return _listShapesConfig;
         }
 
-        public bool ModifyRepositoryConfig(ShapeConfig shapeConfig)
+        public bool ModifyShapeConfig(ShapeConfig shapeConfig)
         {
             bool modified = false;
-            ShapeConfig shapeConfigOriginal = GetRepositoryConfigById(shapeConfig.ShapeConfigID);
+            ShapeConfig shapeConfigOriginal = GetShapeConfigById(shapeConfig.ShapeConfigID);
             if(shapeConfigOriginal != null)
             {
                 shapeConfigOriginal.Name = shapeConfig.Name;
@@ -93,11 +93,11 @@ namespace API_CARGA.Models.Services
             return modified;
         }
 
-        public bool RemoveRepositoryConfig(Guid identifier)
+        public bool RemoveShapeConfig(Guid identifier)
         {
             try
             {
-                ShapeConfig shapeConfig = GetRepositoryConfigById(identifier);
+                ShapeConfig shapeConfig = GetShapeConfigById(identifier);
                 if(shapeConfig != null)
                 {
                     _listShapesConfig.Remove(shapeConfig);

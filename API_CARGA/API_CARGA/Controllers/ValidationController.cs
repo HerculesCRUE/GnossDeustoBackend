@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API_CARGA.ModelExamples;
 using API_CARGA.Models.Entities;
+using API_CARGA.Models.Services;
+using API_CARGA.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace API_CARGA.Controllers
 {
@@ -12,17 +17,23 @@ namespace API_CARGA.Controllers
     [ApiController]
     public class ValidationController : ControllerBase
     {
-
+        IShapesConfigService _shapeConfigService;
+        public ValidationController(IShapesConfigService iShapeConfigService)
+        {
+            _shapeConfigService = iShapeConfigService;
+        }
         /// <summary>
         /// Obtiene la configuración de los shape SHACL de validación
         /// </summary>
         /// <returns>Listado con las definiciones de las validaciones</returns>       
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(List<ShapeConfig>))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(ShapesConfigsResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public List<ShapeConfig> GetShape()
+        public IActionResult GetShape()
         {
-            return null;
+            return Ok(_shapeConfigService.GetShapesConfigs());
         }
 
         /// <summary>
@@ -32,10 +43,12 @@ namespace API_CARGA.Controllers
         /// <returns>Definición de la validación</returns>       
         [HttpGet("{identifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(ShapeConfig))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(ShapeConfigResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ShapeConfig GetShape(string identifier)
+        public IActionResult GetShape(Guid identifier)
         {
-            return null;
+            return Ok(_shapeConfigService.GetShapeConfigById(identifier));
         }
 
 
@@ -46,10 +59,21 @@ namespace API_CARGA.Controllers
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(Guid))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ErrorExample))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(AddShapeConfigResponseError))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult PostShape(ShapeConfig shapeconfig)
+        public IActionResult AddShape(ShapeConfig shapeconfig)
         {
-            return Ok("");
+            Guid addedID = _shapeConfigService.AddShapeConfig(shapeconfig);
+            if (!addedID.Equals(Guid.Empty))
+            {
+                return Ok(addedID);
+            }
+            else
+            {
+                return BadRequest(new ErrorExample { Error = $"shape config {shapeconfig.Name} already exist" });
+            }
         }
 
         /// <summary>
@@ -60,9 +84,17 @@ namespace API_CARGA.Controllers
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult DeleteShape(string identifier)
+        public IActionResult DeleteShape(Guid identifier)
         {
-            return Ok("");
+            bool deleted = _shapeConfigService.RemoveShapeConfig(identifier);
+            if (deleted)
+            {
+                return Ok($"shape config {identifier} has been deleted");
+            }
+            else
+            {
+                return Problem("Error has ocurred");
+            }
         }
 
         /// <summary>
@@ -73,10 +105,20 @@ namespace API_CARGA.Controllers
         /// <returns></returns>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ErrorExample))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(ModifyShapeConfigResponseError))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult PutShape(string identifier, ShapeConfig shapeconfig)
+        public IActionResult ModifyShape(ShapeConfig shapeconfig)
         {
-            return Ok("");
+            bool modified = _shapeConfigService.ModifyShapeConfig(shapeconfig);
+            if (modified)
+            {
+                return Ok($"shape config {shapeconfig.ShapeConfigID} has been modified");
+            }
+            else
+            {
+                return BadRequest(new ErrorExample { Error = $"Check that shape config with id {shapeconfig.ShapeConfigID} exist"});
+            }
         }
     }
 }
