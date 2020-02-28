@@ -13,18 +13,18 @@ namespace API_CARGA.Models.Entities
         /// <summary>
         /// Identificador de la validación
         /// </summary>
-        public string identifier { get; set; }
+        public Guid ShapeConfigID { get; set; }
         /// <summary>
         /// Nombre de la validación
         /// </summary>
-        public string name { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// Nombre de la clase que se validará
         /// </summary>
-        public string entityClass { get; set; }
+        public string EntityClass { get; set; }
         /// <summary>
         /// Definición del shape SHACL
         /// </summary>
-        public string shape { get; set; }
+        public string Shape { get; set; }
     }
 }

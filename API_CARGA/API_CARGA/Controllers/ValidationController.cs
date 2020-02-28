@@ -57,7 +57,7 @@ namespace API_CARGA.Controllers
         /// </summary>
         /// <param name="identifier">Identificador de la validación</param>
         /// <returns></returns>
-        [HttpDelete("{identifier}")]
+        [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult DeleteShape(string identifier)
@@ -71,7 +71,7 @@ namespace API_CARGA.Controllers
         /// <param name="identifier">Identificador de la validación</param>
         /// <param name="shapeconfig">Datos de configuración de la validación</param>
         /// <returns></returns>
-        [HttpPut("{identifier}")]
+        [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult PutShape(string identifier, ShapeConfig shapeconfig)
