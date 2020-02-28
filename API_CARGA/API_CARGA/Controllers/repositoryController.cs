@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using API_CARGA.ModelExamples;
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
@@ -70,7 +69,6 @@ namespace PMH.Controllers
             Guid addedID = _repositoriesConfigService.AddRepositoryConfig(repositoryConfig);
             if (!addedID.Equals(Guid.Empty))
             {
-                //return Ok($"new config repository {repositoryConfig.Name} has been added with identifier: {addedID}");
                 return Ok(addedID);
             }
             else

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API_CARGA.ModelExamples;
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
@@ -100,7 +98,6 @@ namespace API_CARGA.Controllers
         /// <summary>
         /// Modifica la configuración de validación mediante un shape SHACL
         /// </summary>
-        /// <param name="identifier">Identificador de la validación</param>
         /// <param name="shapeconfig">Datos de configuración de la validación</param>
         /// <returns></returns>
         [HttpPut]

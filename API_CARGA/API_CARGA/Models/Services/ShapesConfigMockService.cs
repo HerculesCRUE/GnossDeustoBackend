@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
@@ -104,7 +103,7 @@ namespace API_CARGA.Models.Services
                 }
                 return true;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return false;
             } 
