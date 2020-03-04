@@ -15,14 +15,14 @@ namespace ApiCargaWebInterface.Controllers
         }
         public IActionResult Index()
         {
-            List<RepositoryConfigView> result = _serviceApi.GetRepositoryConfigs();
+            List<RepositoryConfigViewModel> result = _serviceApi.GetRepositoryConfigs();
             return View(result);
         }
 
         [Route("[Controller]/{id}")]
         public IActionResult Details(Guid id)
         {
-            RepositoryConfigView result = _serviceApi.GetRepositoryConfig(id);
+            RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(id);
             if (result != null)
             {
                 return View(result);
@@ -35,7 +35,7 @@ namespace ApiCargaWebInterface.Controllers
 
         public IActionResult Edit(Guid id)
         {
-            RepositoryConfigView result = _serviceApi.GetRepositoryConfig(id);
+            RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(id);
             if (result != null)
             {
                 return View(result);
@@ -47,7 +47,7 @@ namespace ApiCargaWebInterface.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(RepositoryConfigView repositoryConfigView)
+        public IActionResult Edit(RepositoryConfigViewModel repositoryConfigView)
         {
             try
             {
@@ -81,11 +81,11 @@ namespace ApiCargaWebInterface.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(RepositoryConfigView repositoryConfigView)
+        public IActionResult Create(RepositoryConfigViewModel repositoryConfigView)
         {
             try
             {
-                RepositoryConfigView result = _serviceApi.CreateRepositoryConfigView(repositoryConfigView);
+                RepositoryConfigViewModel result = _serviceApi.CreateRepositoryConfigView(repositoryConfigView);
                 return RedirectToAction("Details", new { id = result.RepositoryConfigID });
                 
             }

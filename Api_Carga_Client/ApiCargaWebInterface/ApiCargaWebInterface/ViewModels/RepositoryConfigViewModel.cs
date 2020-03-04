@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ApiCargaWebInterface.ViewModels
 {
     [Display(Name = "Config repository")]
-    public class RepositoryConfigView
+    public class RepositoryConfigViewModel
     {
         [Display(Name = "Identifier")]
         public Guid RepositoryConfigID { get; set; }

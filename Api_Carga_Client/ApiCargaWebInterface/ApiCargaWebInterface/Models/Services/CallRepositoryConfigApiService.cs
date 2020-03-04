@@ -17,17 +17,17 @@ namespace ApiCargaWebInterface.Models.Services
             _serviceApi = serviceApi;
         }
 
-        public RepositoryConfigView GetRepositoryConfig(Guid id)
+        public RepositoryConfigViewModel GetRepositoryConfig(Guid id)
         {
             string result = _serviceApi.CallGetApi($"{_urlRepositoryConfigApi}/{id}");
-            RepositoryConfigView resultObject = JsonConvert.DeserializeObject<RepositoryConfigView>(result);
+            RepositoryConfigViewModel resultObject = JsonConvert.DeserializeObject<RepositoryConfigViewModel>(result);
             return resultObject;
         }
 
-        public List<RepositoryConfigView> GetRepositoryConfigs()
+        public List<RepositoryConfigViewModel> GetRepositoryConfigs()
         {
             string result = _serviceApi.CallGetApi($"{_urlRepositoryConfigApi}");
-            List<RepositoryConfigView>  resultObject = JsonConvert.DeserializeObject<List<RepositoryConfigView>>(result);
+            List<RepositoryConfigViewModel>  resultObject = JsonConvert.DeserializeObject<List<RepositoryConfigViewModel>>(result);
             return resultObject;
         }
 
@@ -42,18 +42,18 @@ namespace ApiCargaWebInterface.Models.Services
             return eliminado;
         }
 
-        public RepositoryConfigView CreateRepositoryConfigView(RepositoryConfigView newRepositoryConfigView)
+        public RepositoryConfigViewModel CreateRepositoryConfigView(RepositoryConfigViewModel newRepositoryConfigView)
         {
             Guid guidAdded;
             string result = _serviceApi.CallPostApi("etl-config/Repository",newRepositoryConfigView);
             result = JsonConvert.DeserializeObject<string>(result);
             Guid.TryParse(result, out guidAdded);
             result = _serviceApi.CallGetApi($"etl-config/Repository/{guidAdded}");
-            RepositoryConfigView resultObject = JsonConvert.DeserializeObject<RepositoryConfigView>(result);
+            RepositoryConfigViewModel resultObject = JsonConvert.DeserializeObject<RepositoryConfigViewModel>(result);
             return resultObject;
         }
 
-        public void ModifyRepositoryConfig(RepositoryConfigView repositoryConfigView)
+        public void ModifyRepositoryConfig(RepositoryConfigViewModel repositoryConfigView)
         {
             string result = _serviceApi.CallPutApi("etl-config/Repository",repositoryConfigView);
         }

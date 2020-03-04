@@ -6,10 +6,10 @@ namespace ApiCargaWebInterface.Models.Services
 {
     public interface ICallRepositoryConfigService
     {
-        public List<RepositoryConfigView> GetRepositoryConfigs();
-        public RepositoryConfigView GetRepositoryConfig(Guid id);
+        public List<RepositoryConfigViewModel> GetRepositoryConfigs();
+        public RepositoryConfigViewModel GetRepositoryConfig(Guid id);
         public bool DeleteRepositoryConfig(Guid id);
-        public RepositoryConfigView CreateRepositoryConfigView(RepositoryConfigView newRepositoryConfigView);
-        public void ModifyRepositoryConfig(RepositoryConfigView repositoryConfigView);
+        public RepositoryConfigViewModel CreateRepositoryConfigView(RepositoryConfigViewModel newRepositoryConfigView);
+        public void ModifyRepositoryConfig(RepositoryConfigViewModel repositoryConfigView);
     }
 }
