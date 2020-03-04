@@ -1,0 +1,11 @@
+﻿@model Exception
+@{
+    ViewData["Title"] = "Server error";
+}
+
+<h1 class="text-danger"><span class="glyphicon glyphicon-alert"></span> @Model.GetType().Name</h1>
+<h2>Looks like something went wrong at the server</h2>
+<p>
+    Server track these errors automatically, but if the problem persists contact the admin. In the meantime, try refreshing: sometimes things fix themselves.
+</p>
+

@@ -1,0 +1,26 @@
+2020-03-04 11:38:42.121 +01:00 [ERR] The request matched multiple endpoints. Matches: 
+
+PMH.Controllers.RepositoryController.GetRepository (API_CARGA)
+PMH.Controllers.RepositoryController.GetRepository (API_CARGA)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.ReportAmbiguity(CandidateState[] candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.ProcessFinalCandidates(HttpContext httpContext, CandidateState[] candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.Select(HttpContext httpContext, CandidateState[] candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DfaMatcher.MatchAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.Matching.DataSourceDependentMatcher.MatchAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware.Invoke(HttpContext context)
+   at API_CARGA.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\API_CARGA\API_CARGA\Middlewares\ErrorHandlingMiddleware.cs:line 24
+
+2020-03-04 11:40:57.267 +01:00 [ERR] The request matched multiple endpoints. Matches: 
+
+PMH.Controllers.RepositoryController.GetRepository (API_CARGA)
+PMH.Controllers.RepositoryController.GetRepository (API_CARGA)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.ReportAmbiguity(CandidateState[] candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.ProcessFinalCandidates(HttpContext httpContext, CandidateState[] candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.Select(HttpContext httpContext, CandidateState[] candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DfaMatcher.MatchAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.Matching.DataSourceDependentMatcher.MatchAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware.Invoke(HttpContext context)
+   at API_CARGA.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\API_CARGA\API_CARGA\Middlewares\ErrorHandlingMiddleware.cs:line 24
+

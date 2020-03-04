@@ -62,19 +62,19 @@ namespace PMH.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(Guid))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ErrorExample))]
-        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(AddRepositoryErrorResponse))]
+        //[SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ErrorExample))]
+        //[SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(AddRepositoryErrorResponse))]
         public IActionResult AddConfigRepository(RepositoryConfig repositoryConfig)
         {
             Guid addedID = _repositoriesConfigService.AddRepositoryConfig(repositoryConfig);
-            if (!addedID.Equals(Guid.Empty))
-            {
-                return Ok(addedID);
-            }
-            else
-            {
-                return BadRequest(new ErrorExample { Error = $"config repository {repositoryConfig.Name} already exist" });
-            }
+            //if (!addedID.Equals(Guid.Empty))
+            //{
+            return Ok(addedID);
+            //}
+            //else
+            //{
+            //    return BadRequest(new ErrorExample { Error = $"config repository {repositoryConfig.Name} already exist" });
+            //}
         }
 
         /// <summary>

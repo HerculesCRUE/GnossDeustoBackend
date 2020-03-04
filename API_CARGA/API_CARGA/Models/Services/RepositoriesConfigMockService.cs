@@ -51,13 +51,13 @@ namespace API_CARGA.Models.Services
 
         public List<RepositoryConfig> GetRepositoryConfigs()
         {
-            return _configRepositories;
+            return _configRepositories.OrderBy(repository => repository.Name).ToList();
         }
 
-        public RepositoryConfig GetRepositoryConfigByName(string name)
-        {
-            return _configRepositories.FirstOrDefault(repository => repository.Name.Equals(name));
-        }
+        //public RepositoryConfig GetRepositoryConfigByName(string name)
+        //{
+        //    return _configRepositories.FirstOrDefault(repository => repository.Name.Equals(name));
+        //}
 
         public RepositoryConfig GetRepositoryConfigById(Guid id)
         {
@@ -84,12 +84,12 @@ namespace API_CARGA.Models.Services
         public Guid AddRepositoryConfig(RepositoryConfig repositoryConfig)
         {
             Guid repositoryConfigID = Guid.Empty;
-            if (GetRepositoryConfigByName(repositoryConfig.Name) == null)
-            {
-                repositoryConfigID = Guid.NewGuid();
-                repositoryConfig.RepositoryConfigID = repositoryConfigID;
-                _configRepositories.Add(repositoryConfig);
-            }
+            //if (GetRepositoryConfigByName(repositoryConfig.Name) == null)
+            //{
+            repositoryConfigID = Guid.NewGuid();
+            repositoryConfig.RepositoryConfigID = repositoryConfigID;
+            _configRepositories.Add(repositoryConfig);
+            //}
             return repositoryConfigID;
         }
 
