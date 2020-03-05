@@ -53,7 +53,14 @@ namespace ApiCargaWebInterface.Models.Services
             }
             catch (HttpRequestException)
             {
-                throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+                if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                {
+                    throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpRequestException(response.ReasonPhrase);
+                }
             }
             return result;
         }
@@ -79,7 +86,14 @@ namespace ApiCargaWebInterface.Models.Services
                 {
                     throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+                else if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                {
+                    throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpRequestException(response.ReasonPhrase);
+                }
             }
         }
 
@@ -104,7 +118,14 @@ namespace ApiCargaWebInterface.Models.Services
                 {
                     throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+                else if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                {
+                    throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpRequestException(response.ReasonPhrase);
+                }
             }
         }
     }
