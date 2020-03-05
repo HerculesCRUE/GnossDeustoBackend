@@ -1,5 +1,6 @@
 ﻿using ApiCargaWebInterface.Extra.Exceptions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Serilog;
 using System;
@@ -26,11 +27,12 @@ namespace ApiCargaWebInterface.Middlewares
             }
             catch (Exception ex)
             {
-                await HandleExceptionAsync(context, ex);
+                HandleExceptionAsync(context, ex);
+                await _next(context);
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception ex)
+        private void HandleExceptionAsync(HttpContext context, Exception ex)
         {
             if (string.IsNullOrEmpty(_timeStamp) || !_timeStamp.Equals(CreateTimeStamp()))
             {
@@ -54,10 +56,8 @@ namespace ApiCargaWebInterface.Middlewares
                 Log.Error($"{ex.Message}\n{ex.StackTrace}\n");
             }
 
-            context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
-
-            return context.Response.WriteAsync(result);
+            context.Request.Path = $"/error/{code.GetHashCode()}";
         }
 
         private void CreateLoggin(string pTimestamp)

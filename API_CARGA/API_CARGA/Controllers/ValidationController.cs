@@ -79,7 +79,7 @@ namespace API_CARGA.Controllers
         /// </summary>
         /// <param name="identifier">Identificador de la validación</param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpDelete("{identifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult DeleteShape(Guid identifier)

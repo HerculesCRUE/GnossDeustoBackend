@@ -75,7 +75,7 @@ namespace API_CARGA.Models.Services
 
         public List<ShapeConfig> GetShapesConfigs()
         {
-            return _listShapesConfig;
+            return _listShapesConfig.OrderBy(shape=>shape.Name).ToList();
         }
 
         public bool ModifyShapeConfig(ShapeConfig shapeConfig)

@@ -1,0 +1,542 @@
+2020-03-05 09:58:16.826 +01:00 [ERR] One or more errors occurred. (No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.)
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 43
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 25
+
+2020-03-05 09:59:20.037 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|49aecc32-442881a2017a9cbf.2.e666de62_","errors":{"identifier":["The value '71213465-4e2a-4319-a695-1eb72df2c35' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 25
+
+2020-03-05 10:01:13.269 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|8944f1fa-40facec0279e52d4.1.e666de64_","errors":{"identifier":["The value '71213465-4e2a-4319-a695-1eb72df2c35' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 25
+
+2020-03-05 10:11:53.257 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|866c3ef5-49f04ab60be3c85c.1.e666de66_","errors":{"identifier":["The value '71213465-4e2a-4319-a695-1eb72df2375' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:13:05.579 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|e2e392b5-41ffe9cf98c2371a.1.e666de68_","errors":{"identifier":["The value '71213465-e2a-4319-a695-1eb72df2c375' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:14:30.134 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|e2e392b6-41ffe9cf98c2371a.1.e666de69_","errors":{"identifier":["The value '7121345-4e2a-4319-a695-1eb72df2c375' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:17:58.430 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|79a759f2-4069257660aea6cd.1.e666de6b_","errors":{"identifier":["The value '71213465-e2a-4319-a695-1eb72df2c375' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:19:14.477 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|f52aa552-4759f8f38950e6ab.1.e666de6d_","errors":{"identifier":["The value '71213465-4e2a-4319-a65-1eb72df2c375' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:20:07.688 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|f52aa554-4759f8f38950e6ab.1.e666de6f_","errors":{"identifier":["The value '71213465-4e2a-4319-a95-1eb72df2c375' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:21:21.254 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|f52aa555-4759f8f38950e6ab.1.e666de70_","errors":{"identifier":["The value '71213465-4e2-4319-a695-1eb72df2c375' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:22:55.488 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|f52aa556-4759f8f38950e6ab.1.e666de71_","errors":{"identifier":["The value '71213465-4e2a-431-a695-1eb72df2c375' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:24:39.153 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|85ddc850-498cd2d1179320c3.1.e666de74_","errors":{"identifier":["The value '71213465-4e2a-4319-695-1eb72df2c375' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:33:41.278 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|40a10944-434194d239daee4f.1.e666de76_","errors":{"identifier":["The value '71213465-e2a-4319-a695-1eb72df2c375' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:34:52.041 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|d1e55e96-48f8b1cdd72ccdc5.1.e666de79_","errors":{"identifier":["The value '71213465-4e2a-4319-a695-1b72df2c375' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:35:45.079 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|d1e55e97-48f8b1cdd72ccdc5.1.e666de7b_","errors":{"identifier":["The value '7121346-4e2a-4319-a695-1eb72df2c375' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:37:22.750 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|9a484066-4cb5ecbd1f5c8779.1.e666de7f_","errors":{"identifier":["The value '7121365-4e2a-4319-a695-1eb72df2c375' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:38:05.527 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|9a484067-4cb5ecbd1f5c8779.1.e666de81_","errors":{"identifier":["The value '7121365-4e2a-4319-a695-1eb72df2c375' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:40:01.785 +01:00 [ERR] {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|6ef72b16-48972bcb5e956c7f.1.e666de84_","errors":{"identifier":["The value '7121345-4e2a-4319-a695-1eb72df2c375' is not valid."]}}
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallGetApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 49
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.GetShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 43
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Edit(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:47:17.498 +01:00 [ERR] 
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallDeleteApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 30
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.DeleteShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 33
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Delete(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 69
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:50:48.481 +01:00 [ERR] 
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallDeleteApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 30
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.DeleteShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 33
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Delete(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 69
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+
+2020-03-05 10:57:37.595 +01:00 [ERR] Method Not Allowed
+   at ApiCargaWebInterface.Models.Services.CallApiService.CallDeleteApi(String urlMethod) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallApiService.cs:line 36
+   at ApiCargaWebInterface.Models.Services.CallShapeConfigApiService.DeleteShapeConfig(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Models\Services\CallShapeConfigApiService.cs:line 33
+   at ApiCargaWebInterface.Controllers.ShapeConfigController.Delete(Guid id) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Controllers\ShapeConfigController.cs:line 69
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at ApiCargaWebInterface.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\Api_Carga_Client\ApiCargaWebInterface\ApiCargaWebInterface\Middlewares\ErrorHandlingMiddleware.cs:line 26
+

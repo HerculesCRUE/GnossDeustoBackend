@@ -16,16 +16,6 @@ namespace ApiCargaWebInterface.Controllers
             return View("General", feature.OriginalPath);
         }
 
-        [Route("error/{code}/{message}")]
-        public IActionResult ErrorHandler(int code, string message)
-        {
-            var feature = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
-            if (code == 404)
-            {
-                return View("Error404", feature.OriginalPath);
-            }
-            return View("General", feature.OriginalPath);
-        }
 
         [Route("error/exception")]
         public IActionResult ExceptionHandler()

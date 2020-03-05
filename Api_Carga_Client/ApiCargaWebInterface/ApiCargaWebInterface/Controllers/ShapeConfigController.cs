@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using ApiCargaWebInterface.Extra.Exceptions;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
@@ -7,23 +9,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiCargaWebInterface.Controllers
 {
-    public class RepositoryConfigController : Controller
+    public class ShapeConfigController : Controller
     {
-        readonly ICallRepositoryConfigService _serviceApi;
-        public RepositoryConfigController(ICallRepositoryConfigService serviceApi)
+        readonly ICallShapeConfigService _serviceApi;
+        public ShapeConfigController(ICallShapeConfigService serviceApi)
         {
             _serviceApi = serviceApi;
         }
         public IActionResult Index()
         {
-            List<RepositoryConfigViewModel> result = _serviceApi.GetRepositoryConfigs();
+            List<ShapeConfigViewModel> result = _serviceApi.GetShapeConfigs();
             return View(result);
         }
 
         [Route("[Controller]/{id}")]
         public IActionResult Details(Guid id)
         {
-            RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(id);
+            ShapeConfigViewModel result = _serviceApi.GetShapeConfig(id);
             if (result != null)
             {
                 return View(result);
@@ -36,7 +38,7 @@ namespace ApiCargaWebInterface.Controllers
 
         public IActionResult Edit(Guid id)
         {
-            RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(id);
+            ShapeConfigViewModel result = _serviceApi.GetShapeConfig(id);
             if (result != null)
             {
                 return View(result);
@@ -48,24 +50,23 @@ namespace ApiCargaWebInterface.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(RepositoryConfigViewModel repositoryConfigView)
+        public IActionResult Edit(ShapeConfigViewModel shapeConfigViewModel)
         {
             try
             {
-                _serviceApi.ModifyRepositoryConfig(repositoryConfigView);
+                _serviceApi.ModifyShapeConfig(shapeConfigViewModel);
 
-                return RedirectToAction("Details",new { id = repositoryConfigView.RepositoryConfigID });
+                return RedirectToAction("Details", new { id = shapeConfigViewModel.ShapeConfigID });
             }
-            catch(BadRequestException)
+            catch (BadRequestException)
             {
                 return BadRequest();
             }
-            
         }
 
         public IActionResult Delete(Guid id)
         {
-            bool result = _serviceApi.DeleteRepositoryConfig(id);
+            bool result = _serviceApi.DeleteShapeConfig(id);
             if (result)
             {
                 return RedirectToAction("Index");
@@ -82,13 +83,13 @@ namespace ApiCargaWebInterface.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(RepositoryConfigViewModel repositoryConfigView)
+        public IActionResult Create(ShapeConfigViewModel shapeConfigViewModel)
         {
             try
             {
-                RepositoryConfigViewModel result = _serviceApi.CreateRepositoryConfigView(repositoryConfigView);
-                return RedirectToAction("Details", new { id = result.RepositoryConfigID });
-                
+                ShapeConfigViewModel result = _serviceApi.CreateShapeConfig(shapeConfigViewModel);
+                return RedirectToAction("Details", new { id = result.ShapeConfigID });
+
             }
             catch (BadRequestException)
             {

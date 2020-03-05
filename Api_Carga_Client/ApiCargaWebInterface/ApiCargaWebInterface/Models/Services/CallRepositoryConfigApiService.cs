@@ -45,17 +45,17 @@ namespace ApiCargaWebInterface.Models.Services
         public RepositoryConfigViewModel CreateRepositoryConfigView(RepositoryConfigViewModel newRepositoryConfigView)
         {
             Guid guidAdded;
-            string result = _serviceApi.CallPostApi("etl-config/Repository",newRepositoryConfigView);
+            string result = _serviceApi.CallPostApi( _urlRepositoryConfigApi,newRepositoryConfigView);
             result = JsonConvert.DeserializeObject<string>(result);
             Guid.TryParse(result, out guidAdded);
-            result = _serviceApi.CallGetApi($"etl-config/Repository/{guidAdded}");
+            result = _serviceApi.CallGetApi($"{_urlRepositoryConfigApi}/{guidAdded}");
             RepositoryConfigViewModel resultObject = JsonConvert.DeserializeObject<RepositoryConfigViewModel>(result);
             return resultObject;
         }
 
         public void ModifyRepositoryConfig(RepositoryConfigViewModel repositoryConfigView)
         {
-            string result = _serviceApi.CallPutApi("etl-config/Repository",repositoryConfigView);
+            string result = _serviceApi.CallPutApi(_urlRepositoryConfigApi, repositoryConfigView);
         }
     }
 }

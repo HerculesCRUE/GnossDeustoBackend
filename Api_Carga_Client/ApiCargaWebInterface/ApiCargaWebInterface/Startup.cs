@@ -22,8 +22,9 @@ namespace ApiCargaWebInterface
         {
             services.AddControllersWithViews();
             services.AddSingleton(typeof(ConfigUrlService));
-            services.AddSingleton<ICallRepositoryConfigService, CallRepositoryConfigApiService>();
-            services.AddSingleton<ICallService, CallApiService>();
+            services.AddScoped<ICallRepositoryConfigService, CallRepositoryConfigApiService>();
+            services.AddScoped<ICallService, CallApiService>();
+            services.AddScoped<ICallShapeConfigService, CallShapeConfigApiService>(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,8 +41,10 @@ namespace ApiCargaWebInterface
                 app.UseHsts();
             }
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
-            app.UseHttpsRedirection();
             app.UseStatusCodePagesWithReExecute("/error/{0}");
+            
+            app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
 
             app.UseRouting();

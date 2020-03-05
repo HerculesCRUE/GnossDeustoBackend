@@ -1,10 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ApiCargaWebInterface.Extra.Exceptions;
+using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace ApiCargaWebInterface.Models.Services
 {
@@ -30,7 +27,14 @@ namespace ApiCargaWebInterface.Models.Services
             }
             catch (HttpRequestException)
             {
-                throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+                if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                {
+                    throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpRequestException(response.ReasonPhrase);
+                }
             }
             return result;
         }
@@ -73,7 +77,7 @@ namespace ApiCargaWebInterface.Models.Services
             {
                 if (response.StatusCode.Equals(HttpStatusCode.BadRequest))
                 {
-                    throw new BadResquestException(response.Content.ReadAsStringAsync().Result);
+                    throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
                 }
                 throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
             }
@@ -98,7 +102,7 @@ namespace ApiCargaWebInterface.Models.Services
             {
                 if (response.StatusCode.Equals(HttpStatusCode.BadRequest))
                 {
-                    throw new BadResquestException(response.Content.ReadAsStringAsync().Result);
+                    throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
                 }
                 throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
             }
