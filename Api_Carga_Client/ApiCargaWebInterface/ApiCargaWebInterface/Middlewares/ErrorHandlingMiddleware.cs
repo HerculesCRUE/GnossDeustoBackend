@@ -19,7 +19,7 @@ namespace ApiCargaWebInterface.Middlewares
 
         }
 
-        public async Task Invoke(HttpContext context /* other dependencies */)
+        public async Task Invoke(HttpContext context)
         {
             try
             {
@@ -46,10 +46,10 @@ namespace ApiCargaWebInterface.Middlewares
                 code = HttpStatusCode.BadRequest;
                 Log.Information($"{ex.Message}\n");
             }
-            var result = JsonConvert.SerializeObject(new { error = "Internal server error" });
+
             if (code != HttpStatusCode.InternalServerError)
             {
-                result = JsonConvert.SerializeObject(new { error = ex.Message });
+                Log.Information($"{ex.Message}\n");
             }
             else
             {
