@@ -7,7 +7,6 @@ namespace API_CARGA.Models.Services
     public interface IShapesConfigService
     {
         public List<ShapeConfig> GetShapesConfigs();
-        public ShapeConfig GetShapeConfigByName(string name);
         public ShapeConfig GetShapeConfigById(Guid id);
         public bool RemoveShapeConfig(Guid identifier);
         public Guid AddShapeConfig(ShapeConfig shapeConfig);

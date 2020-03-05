@@ -26,7 +26,7 @@ namespace XUnitTestAPI_CARGA
         public void DeleteConfigRepository()
         {
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            RepositoryConfig repositoryConfig = repositoriesConfigMockService.GetRepositoryConfigByName("ConfigRepository_1");
+            RepositoryConfig repositoryConfig = repositoriesConfigMockService.GetRepositoryConfigs()[0];
             repositoriesConfigMockService.RemoveRepositoryConfig(repositoryConfig.RepositoryConfigID);
             repositoryConfig = repositoriesConfigMockService.GetRepositoryConfigById(repositoryConfig.RepositoryConfigID);
             Assert.Null(repositoryConfig);

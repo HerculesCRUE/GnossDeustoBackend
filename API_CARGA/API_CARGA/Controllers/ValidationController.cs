@@ -70,7 +70,7 @@ namespace API_CARGA.Controllers
             }
             else
             {
-                return BadRequest(new ErrorExample { Error = $"shape config {shapeconfig.Name} already exist" });
+                return Problem("Error has ocurred");
             }
         }
 

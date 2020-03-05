@@ -52,25 +52,15 @@ namespace API_CARGA.Models.Services
         public Guid AddShapeConfig(ShapeConfig shapeConfig)
         {
             Guid addedID = Guid.Empty;
-            ShapeConfig shapeConfigOriginal = GetShapeConfigByName(shapeConfig.Name);
-            if(shapeConfigOriginal == null)
-            {
-                addedID = Guid.NewGuid();
-                shapeConfig.ShapeConfigID = addedID;
-                _listShapesConfig.Add(shapeConfig);
-
-            }
+            addedID = Guid.NewGuid();
+            shapeConfig.ShapeConfigID = addedID;
+            _listShapesConfig.Add(shapeConfig);
             return addedID;
         }
 
         public ShapeConfig GetShapeConfigById(Guid id)
         {
             return _listShapesConfig.FirstOrDefault(shape => shape.ShapeConfigID.Equals(id));
-        }
-
-        public ShapeConfig GetShapeConfigByName(string name)
-        {
-            return _listShapesConfig.FirstOrDefault(shape => shape.Name.Equals(name));
         }
 
         public List<ShapeConfig> GetShapesConfigs()

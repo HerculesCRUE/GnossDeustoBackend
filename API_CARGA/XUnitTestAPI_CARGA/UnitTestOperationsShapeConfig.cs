@@ -26,7 +26,7 @@ namespace XUnitTestAPI_CARGA
         public void DeleteConfigRepository()
         {
             ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-            ShapeConfig shapeConfig = shapesConfigMockService.GetShapeConfigByName("ShapeConfig_1");
+            ShapeConfig shapeConfig = shapesConfigMockService.GetShapesConfigs()[0];
             shapesConfigMockService.RemoveShapeConfig(shapeConfig.ShapeConfigID);
             shapeConfig = shapesConfigMockService.GetShapeConfigById(shapeConfig.ShapeConfigID);
             Assert.Null(shapeConfig);
