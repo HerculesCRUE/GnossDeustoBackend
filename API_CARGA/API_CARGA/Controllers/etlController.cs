@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using API_CARGA.Models.Entities;
+using API_CARGA.Models.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OaiPmhNet;
@@ -17,6 +21,12 @@ namespace PMH.Controllers
     [Route("[controller]")]
     public class etlController : Controller
     {
+        private IRepositoriesConfigService _repositoriesConfigService;
+        public etlController(IRepositoriesConfigService iRepositoriesConfigService)
+        {
+            _repositoriesConfigService = iRepositoriesConfigService;
+        }
+
         /// <summary>
         /// Ejecuta el último paso del proceso de carga, por el que el RDF generado se almacena en el Triple Store. Permite cargar una fuente RDF arbitraria.
         /// </summary>
@@ -27,8 +37,7 @@ namespace PMH.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult dataPublish(IFormFile rdfFile)
         {
-
-            return Ok("");
+            throw new Exception("TODO");
         }
 
         /// <summary>
@@ -41,8 +50,7 @@ namespace PMH.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult dataValidate(IFormFile rdfFile)
         {
-
-            return Ok("");
+            throw new Exception("TODO");
         }
 
         /// <summary>
@@ -55,8 +63,7 @@ namespace PMH.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult dataDiscover(IFormFile rdfFile)
         {
-
-            return Ok("");
+            throw new Exception("TODO");
         }
 
 
@@ -71,10 +78,13 @@ namespace PMH.Controllers
         [HttpGet("GetRecord/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public string GetRecord(string repositoryIdentifier,string identifier, string metadataPrefix)
+        public FileResult GetRecord(Guid repositoryIdentifier, string identifier, string metadataPrefix)
         {
-
-            return "";
+            RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
+            string uri = repositoryConfig.Url;
+            uri += $"?verb=GetRecord&identifier={identifier}&metadataPrefix={metadataPrefix}";
+            byte[] array = getByte(uri);
+            return File(array, "application/xml");
         }
 
         /// <summary>
@@ -86,10 +96,13 @@ namespace PMH.Controllers
         [HttpGet("Identify/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public string Identify(string repositoryIdentifier)
+        public FileResult Identify(Guid repositoryIdentifier)
         {
-
-            return "";
+            RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
+            string uri = repositoryConfig.Url;
+            uri += $"?verb=Identify";
+            byte[] array = getByte(uri);
+            return File(array, "application/xml");
         }
 
         /// <summary>
@@ -106,10 +119,33 @@ namespace PMH.Controllers
         [HttpGet("ListIdentifiers/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public string ListIdentifiers(string repositoryIdentifier, string metadataPrefix, DateTime? from = null, DateTime? until = null, string set = null, string resumptionToken = null)
+        public FileResult ListIdentifiers(Guid repositoryIdentifier, string metadataPrefix=null, DateTime? from = null, DateTime? until = null, string set = null, string resumptionToken = null)
         {
-
-            return "";
+            RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
+            string uri = repositoryConfig.Url;
+            uri += $"?verb=ListIdentifiers";
+            if (metadataPrefix!=null)
+            {
+                uri += $"&metadataPrefix={metadataPrefix}";
+            }
+            if (from.HasValue)
+            {
+                uri += $"&from={from.ToString()}";
+            }
+            if (until.HasValue)
+            {
+                uri += $"&until={until.ToString()}";
+            }
+            if (set!=null)
+            {
+                uri += $"&set={set}";
+            }
+            if (resumptionToken != null)
+            {
+                uri += $"&resumptionToken={resumptionToken}";
+            }
+            byte[] array = getByte(uri);
+            return File(array, "application/xml");
         }
 
 
@@ -123,10 +159,17 @@ namespace PMH.Controllers
         [HttpGet("ListMetadataFormats/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public string ListMetadataFormats(string repositoryIdentifier, string identifier = null)
+        public FileResult ListMetadataFormats(Guid repositoryIdentifier, string identifier = null)
         {
-
-            return "";
+            RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
+            string uri = repositoryConfig.Url;
+            uri += $"?verb=ListMetadataFormats";
+            if (identifier != null)
+            {
+                uri += $"&identifier={identifier}";
+            }
+            byte[] array = getByte(uri);
+            return File(array, "application/xml");
         }
 
         /// <summary>
@@ -143,10 +186,33 @@ namespace PMH.Controllers
         [HttpGet("ListRecords/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public string ListRecords(string repositoryIdentifier, string metadataPrefix, DateTime? from = null, DateTime? until = null, string set = null, string resumptionToken = null)
+        public FileResult ListRecords(Guid repositoryIdentifier, string metadataPrefix, DateTime? from = null, DateTime? until = null, string set = null, string resumptionToken = null)
         {
-
-            return "";
+            RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
+            string uri = repositoryConfig.Url;
+            uri += $"?verb=ListRecords";
+            if (metadataPrefix != null)
+            {
+                uri += $"&metadataPrefix={metadataPrefix}";
+            }
+            if (from.HasValue)
+            {
+                uri += $"&from={from.ToString()}";
+            }
+            if (until.HasValue)
+            {
+                uri += $"&until={until.ToString()}";
+            }
+            if (set != null)
+            {
+                uri += $"&set={set}";
+            }
+            if (resumptionToken != null)
+            {
+                uri += $"&resumptionToken={resumptionToken}";
+            }
+            byte[] array = getByte(uri);
+            return File(array, "application/xml");
         }
 
         /// <summary>
@@ -159,9 +225,28 @@ namespace PMH.Controllers
         [HttpGet("ListSets/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public string ListSets(string repositoryIdentifier, string resumptionToken = null)
+        public FileResult ListSets(Guid repositoryIdentifier, string resumptionToken = null)
         {
-            return "";
+            RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
+            string uri = repositoryConfig.Url;
+            uri += $"?verb=ListSets";           
+            if (resumptionToken != null)
+            {
+                uri += $"&resumptionToken={resumptionToken}";
+            }
+            byte[] array = getByte(uri);
+            return File(array, "application/xml");
+        }
+
+        private byte[] getByte(string URL)
+        {
+            HttpWebRequest wrGETURL = (HttpWebRequest)WebRequest.Create(URL);
+            System.Net.HttpWebResponse webresponse = (HttpWebResponse)wrGETURL.GetResponse();
+            string ct = webresponse.ContentType;
+            Stream objStream = webresponse.GetResponseStream();
+            BinaryReader breader = new BinaryReader(objStream);
+            byte[] buffer = breader.ReadBytes((int)webresponse.ContentLength);
+            return buffer;
         }
     }
 }

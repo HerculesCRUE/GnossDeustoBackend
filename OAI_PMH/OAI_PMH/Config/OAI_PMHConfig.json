@@ -1,7 +1,10 @@
 {
-	"SupportSets": true,
+  "SupportSets": true,
   "RepositoryName": "OAI_PMH_CVN",
   "DeletedRecord": "transient",
+  "AdminEmails": null,
+  "Granularity": "YYYY-MM-DDThh:mm:ssZ",
+  "EarliestDatestamp": null,
   "ResumptionTokenCustomParameterNames": [ "offset" ],
   "MetadataFormats": [
     {

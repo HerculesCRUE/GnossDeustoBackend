@@ -27,7 +27,10 @@ namespace OAI_PMH.Controllers
             _configOAI = OaiConfiguration.Instance;
             _configOAI.SupportSets = _configJsonHandler.GetConfig().SupportSets;
             _configOAI.RepositoryName = _configJsonHandler.GetConfig().RepositoryName;
+            _configOAI.AdminEmails = _configJsonHandler.GetConfig().AdminEmails;
             _configOAI.DeletedRecord = _configJsonHandler.GetConfig().DeletedRecord;
+            _configOAI.Granularity = _configJsonHandler.GetConfig().Granularity;
+            _configOAI.EarliestDatestamp = _configJsonHandler.GetConfig().EarliestDatestamp;
             _configOAI.ResumptionTokenCustomParameterNames.UnionWith(_configJsonHandler.GetConfig().ResumptionTokenCustomParameterNames);
         }
 

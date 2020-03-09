@@ -47,6 +47,13 @@ namespace API_CARGA.Models.Services
                 Url = "config\\repository",
                 OauthToken = "87f9"
             });
+            _configRepositories.Add(new RepositoryConfig
+            {
+                RepositoryConfigID = new Guid("11111111-1111-1111-1111-111111111111"),
+                Name = "CVN_OAI_PMH",
+                Url = "https://localhost:44353/OAI_PMH",
+                OauthToken = "87f9j"
+            }); ;
         }
 
         public List<RepositoryConfig> GetRepositoryConfigs()

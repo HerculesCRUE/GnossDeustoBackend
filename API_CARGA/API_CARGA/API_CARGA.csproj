@@ -10,12 +10,16 @@
 
   <ItemGroup>
     <Compile Remove="Config\**" />
+    <Compile Remove="Extras\**" />
     <Compile Remove="Extra\**" />
     <Content Remove="Config\**" />
+    <Content Remove="Extras\**" />
     <Content Remove="Extra\**" />
     <EmbeddedResource Remove="Config\**" />
+    <EmbeddedResource Remove="Extras\**" />
     <EmbeddedResource Remove="Extra\**" />
     <None Remove="Config\**" />
+    <None Remove="Extras\**" />
     <None Remove="Extra\**" />
   </ItemGroup>
 
@@ -51,10 +55,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Extras\Exception\" />
   </ItemGroup>
 
   <ItemGroup>

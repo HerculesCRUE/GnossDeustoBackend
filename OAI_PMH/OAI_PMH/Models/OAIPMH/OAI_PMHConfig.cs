@@ -9,6 +9,10 @@ namespace OaiPmhNet.Models.OAIPMH
         public bool SupportSets { get; set; }
         public string RepositoryName { get; set; }
         public string DeletedRecord { get; set; }
+        public string[] AdminEmails { get; set; }
+        public string Granularity { get; set; }
+        public string EarliestDatestamp { get; set; }
+        
         public List<string> ResumptionTokenCustomParameterNames { get; set; }
         public List<MetadataFormat> MetadataFormats { get; set; }
         public List<Set> Sets { get; set; }
