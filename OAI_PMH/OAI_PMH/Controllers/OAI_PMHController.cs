@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.Xml.Linq;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OaiPmhNet;
 using OaiPmhNet.Converters;
 using OaiPmhNet.Models;
-using OaiPmhNet.Test;
-using Swashbuckle.AspNetCore.Annotations;
+using OaiPmhNet.Models.OAIPMH;
+using OaiPmhNet.Models.Services;
+using System;
+using System.IO;
+using System.Xml;
+using System.Xml.Linq;
+
 
 namespace OAI_PMH.Controllers
 {
@@ -20,6 +18,19 @@ namespace OAI_PMH.Controllers
     [Route("[controller]")]
     public class OAI_PMHController : Controller
     {
+        private ConfigJson _configJsonHandler;
+        private IOaiConfiguration _configOAI;
+
+        public OAI_PMHController(ConfigJson configJsonHandler)
+        {
+            _configJsonHandler = configJsonHandler;
+            _configOAI = OaiConfiguration.Instance;
+            _configOAI.SupportSets = _configJsonHandler.GetConfig().SupportSets;
+            _configOAI.RepositoryName = _configJsonHandler.GetConfig().RepositoryName;
+            _configOAI.DeletedRecord = _configJsonHandler.GetConfig().DeletedRecord;
+            _configOAI.ResumptionTokenCustomParameterNames.UnionWith(_configJsonHandler.GetConfig().ResumptionTokenCustomParameterNames);
+        }
+
         /// <summary>
         /// <p>Verbs, one of the defined OAI-PMH requests. <a href="https://www.openarchives.org/OAI/openarchivesprotocol.html" target="_blank">More information</a></p>
         /// <ul>
@@ -287,123 +298,32 @@ namespace OAI_PMH.Controllers
         ///			</ul>
         ///		</li>
         ///	</ul>
-        /// </summary>       
-
-
+        /// </summary>    
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public FileResult Get(OaiVerb verb, string identifier = "", string metadataPrefix = "", string from = "", string until = "", string set = "", string resumptionToken = "")
         {
-            var config = OaiConfiguration.Instance;
-            config.SupportSets = true;
-
-            /*config.RepositoryName = constants.APPLICATION_NAME;
-            config.BaseUrl = () =>
+            //CONFIG OAI-PMH
+            _configOAI.BaseUrl = () =>
             {
-                Uri baseUri = new Uri(UrlHelper.BaseSiteUri, "oai2");
+                Uri baseUri = new Uri(string.Concat(this.Request.Scheme, "://", this.Request.Host, this.Request.Path));
                 return baseUri.AbsoluteUri;
-            };*/
-            //config.DeletedRecord = "transient";
-            //config.AdminEmails = new string[] { constants.SUPPORT_EMAIL };
-            //config.ResumptionTokenCustomParameterNames.Add("offset");
-
-            #region MetadataFormat
-            IList<MetadataFormat> metadataFormats = new List<MetadataFormat>()
-            {
-                new MetadataFormat(
-                    "oai_dc",
-                    OaiNamespaces.OaiDcNamespace,
-                    OaiNamespaces.OaiDcSchema,
-                    OaiNamespaces.OaiDcSchemaLocation),
-                new MetadataFormat(
-                    "rdf",
-                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-                    "http://www.openarchives.org/OAI/2.0/rdf.xsd",
-                    "http://www.w3.org/1999/02/22-rdf-syntax-ns# http://www.openarchives.org/OAI/2.0/rdf.xsd")
-            };
-            MetadataFormatRepository metadataFormatRepository = new MetadataFormatRepository(metadataFormats);
-            #endregion
-            
-            #region RecordRepository
-            IList<SampleRecord> records = new List<SampleRecord>()
-            {
-                new SampleRecord()
-                {
-                    Id = 11,
-                    Date = new DateTime(2018, 2, 16, 1, 0, 0, DateTimeKind.Utc),
-                    Title = "Title 1",
-                    Owner = "Owner 1",
-                    Contributors = new List<string>() { "Contributor 1", "Contributor 1.1" }
-                },
-                new SampleRecord()
-                {
-                    Id = 13,
-                    Date = new DateTime(2018, 2, 16, 3, 0, 0, DateTimeKind.Utc),
-                    Title = "Title 3"
-                },
-                new SampleRecord()
-                {
-                    Id = 12,
-                    Date = new DateTime(2018, 2, 16, 2, 0, 0, DateTimeKind.Utc),
-                    Title = "Title 2",
-                    Owner = "Owner 2"
-                },
-                new SampleRecord()
-                {
-                    Id = 14,
-                    Date = new DateTime(2018, 2, 16, 4, 0, 0, DateTimeKind.Utc),
-                    Title = "Title 4",
-                    Owner = "Owner 4"
-                },
-                new SampleRecord()
-                {
-                    Id = 15,
-                    Date = new DateTime(2018, 2, 16, 5, 0, 0, DateTimeKind.Utc),
-                    Title = "Title 5",
-                    Owner = "Owner 5",
-                    Contributors = new List<string>() { "Contributor 5" }
-                }
-            };
-            
-            DateConverter dateConverter = new DateConverter();
-            DublinCoreMetadataConverter dublinCoreMetadataConverter = new DublinCoreMetadataConverter(config, dateConverter);
-            RecordRepository recordRepository = new RecordRepository(config, records, dateConverter, dublinCoreMetadataConverter);
-            #endregion
-
-            #region SetRepository
-            IList<Set> sets = new List<Set>()
-            {
-                new Set()
-                {
-                    Spec = "video",
-                    Name = "Video Collection",
-                    Description = "This set contains videos."
-                },
-                new Set()
-                {
-                    Spec = "image",
-                    Name = "Image Collection"
-                }
             };
 
-            SetRepository setRepository= new SetRepository(config, sets);
-            #endregion
 
-            DataProvider provider = new DataProvider(config, metadataFormatRepository, recordRepository, setRepository);
+            //MetadataFormatRepository
+            MetadataFormatRepository metadataFormatRepository = new MetadataFormatRepository(_configJsonHandler.GetConfig().MetadataFormats);
+
+            RecordRepository recordRepository = new RecordRepository(_configOAI);
+
+            //SetRepository
+            SetRepository setRepository = new SetRepository(_configOAI, _configJsonHandler.GetConfig().Sets);
+
+            DataProvider provider = new DataProvider(_configOAI, metadataFormatRepository, recordRepository, setRepository);
 
             ArgumentContainer arguments = new ArgumentContainer(verb.ToString(), metadataPrefix, resumptionToken, identifier, from, until, set);
             XDocument document = provider.ToXDocument(DateTime.Now, arguments);
-
-            //var settings = new XmlWriterSettings { OmitXmlDeclaration = true, Encoding = Encoding.UTF8 };
-            //using (var memoryStream = new MemoryStream())
-            //using (var xmlWriter = XmlWriter.Create(memoryStream, settings))
-            //{
-            //    document.WriteTo(xmlWriter);
-            //    xmlWriter.Flush();
-            //    XmlData.XmlBinary = memoryStream.ToArray();
-            //}
-
 
             var memoryStream = new MemoryStream();
             var xmlWriter = XmlWriter.Create(memoryStream);

@@ -1,0 +1,22 @@
+{
+	"SupportSets": true,
+  "RepositoryName": "OAI_PMH_CVN",
+  "DeletedRecord": "transient",
+  "ResumptionTokenCustomParameterNames": [ "offset" ],
+  "MetadataFormats": [
+    {
+      "prefix": "oai_dc",
+      "ns": "http://www.openarchives.org/OAI/2.0/oai_dc/",
+      "schema": "http://www.openarchives.org/OAI/2.0/oai_dc.xsd",
+      "schemaLocation": "http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"
+    }
+  ],
+  "Sets": [
+    {
+      "spec": "cvn",
+      "name": "Currículum Vítae Normalizado",
+      "description": "Currículum Vítae Normalizado"
+    }
+
+  ]
+}

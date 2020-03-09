@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using OaiPmhNet.Models.Services;
 
 namespace PRH
 {
@@ -46,7 +47,8 @@ namespace PRH
             {
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
-            
+
+            services.AddSingleton(typeof(ConfigJson));
 
             //services.AddSingleton(typeof(ConfigJsonHandler));
             //services.AddScoped<ISchemaConfigOperations, SchemaConfigFileOperations>();

@@ -2,7 +2,7 @@
 using System.Linq;
 using OaiPmhNet.Models;
 
-namespace OaiPmhNet.Test
+namespace OaiPmhNet.Models.OAIPMH
 {
     public class MetadataFormatRepository : IMetadataFormatRepository
     {

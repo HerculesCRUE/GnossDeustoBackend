@@ -15,6 +15,7 @@
     <Compile Remove="Controllers\PRHController - Copia.cs" />
     <Compile Remove="Controllers\SchemaController.cs" />
     <Compile Remove="Models\Entity.cs" />
+    <Compile Remove="Models\Services\ReaderConfigJSON.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Config\" />
     <Folder Include="Extra\Cache\" />
+    <Folder Include="Extra\Exceptions\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +38,14 @@
     <PackageReference Include="OaiPmhNet" Version="0.4.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.4.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>

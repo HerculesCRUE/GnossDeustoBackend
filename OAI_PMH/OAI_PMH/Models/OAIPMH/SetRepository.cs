@@ -3,7 +3,7 @@ using OaiPmhNet.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OaiPmhNet.Test
+namespace OaiPmhNet.Models.OAIPMH
 {
     public class SetRepository : ISetRepository
     {
