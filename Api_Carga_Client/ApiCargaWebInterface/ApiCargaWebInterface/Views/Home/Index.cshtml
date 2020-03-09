@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Access to</p>
+        <div class="col-md-6 list-group">
+            <a class="list-group-item" asp-area="" asp-controller="RepositoryConfig" asp-action="Index">Config repositories</a>
+        </div>
+        <div class="col-md-6 list-group">
+            <a class="list-group-item" asp-area="" asp-controller="ShapeConfig" asp-action="Index">Config shapes</a>
+        </div>
+    </div>

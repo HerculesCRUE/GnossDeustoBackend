@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ApiCargaWebInterface.ViewModels.RepositoryConfigViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RepositoryConfigID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OauthToken)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RepositoryConfigID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OauthToken)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.RepositoryConfigID  }) |
+                @Html.ActionLink("Details", "Details", new { id=item.RepositoryConfigID }) |
+                @Html.ActionLink("Delete", "Delete", new {id=item.RepositoryConfigID })
+                <i class="material-icons add"></i>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

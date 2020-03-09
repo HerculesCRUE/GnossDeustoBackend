@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace UrisFactory
+namespace ApiCargaWebInterface
 {
     public class Program
     {
@@ -9,6 +9,7 @@ namespace UrisFactory
         {
             CreateHostBuilder(args).Build().Run();
         }
+
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
@@ -17,4 +18,3 @@ namespace UrisFactory
                 });
     }
 }
-
