@@ -1,138 +1,126 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using API_CARGA.ModelExamples;
+using API_CARGA.Models.Entities;
+using API_CARGA.Models.Services;
+using API_CARGA.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OaiPmhNet;
-using OaiPmhNet.Models;
 using Swashbuckle.AspNetCore.Annotations;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace PMH.Controllers
 {
     /// <summary>
-    /// API de carga
+    /// Configuración del ETL
     /// </summary>
     [ApiController]
-    [Route("[controller]")]
-    public class repositoryController : Controller
+    [Route("etl-config/[controller]")]
+    public class RepositoryController : ControllerBase
     {
-        /// <summary>
-        /// Devuelve la información de la fuente de datos OAI-PMH configurada. 
-        /// </summary>
-        /// <returns>URI del repositorio OAI-PMH ¿JUNTO CON CONFIGURACIÓN DE SEGURIDAD OAUTH O HTTP BÁSICA?. Si no hay ninguna fuente configurada devuelve NULL</returns>
-        [HttpGet("DataSource", Name = "DataSource")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult DataSource()
+        private IRepositoriesConfigService _repositoriesConfigService;
+
+        public RepositoryController(IRepositoriesConfigService iRepositoriesConfigService)
         {
-            return Ok("");
+            _repositoriesConfigService = iRepositoriesConfigService;
+        }
+        /// <summary>
+        /// Obtiene un listado con todas las configuraciones de los repositorios OAI-PMH
+        /// </summary>
+        /// <returns>Listado con todas las configuraciones de los repositorios OAI-PMH</returns>
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(List<RepositoryConfig>))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(ConfigRepositoriesResponse))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult GetRepository()
+        {
+            return Ok(_repositoriesConfigService.GetRepositoryConfigs());
         }
 
         /// <summary>
-        /// Configuración de la fuente de datos OAI-PMH. ¿JUNTO CON CONFIGURACIÓN DE SEGURIDAD OAUTH O HTTP BÁSICA?
+        /// Obtiene la configuración de un repositorio OAI-PMH
         /// </summary>
-        /// <param name="repositoryUri">URI del repositorio OAI-PMH</param>
-        /// <returns>200 si verifica que los datos son correctos</returns>
-        [HttpPut("SetDataSource", Name = "SetDataSource")]
+        /// <param name="identifier">Identificador del repositorio</param>
+        /// <returns>Configuración del repositorio</returns>
+        [HttpGet("{identifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(RepositoryConfig))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(ConfigRepositoryResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult SetDataSource(string repositoryUri)
+        public IActionResult GetRepository(Guid identifier)
         {
-            return Ok("");
+            return Ok(_repositoriesConfigService.GetRepositoryConfigById(identifier));
         }
 
         /// <summary>
-        /// Recuperar un registro de metadatos individual del repositorio
+        /// Añade una nueva configuración de un repositorio OAI-PMH
         /// </summary>
-        /// <param name="identifier">Identificador de la entidad a recolectar</param>
-        /// <param name="metadataPrefix">Prefijo del metadata que se desea recuperar</param>
-        /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
-        [HttpGet("GetRecord", Name = "GetRecord")]
+        /// <param name="repositoryConfig">Datos de configuración del repositorio</param>
+        /// <returns></returns>
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(Guid))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public string GetRecord(string identifier,string metadataPrefix)
+        //[SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ErrorExample))]
+        //[SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(AddRepositoryErrorResponse))]
+        public IActionResult AddConfigRepository(RepositoryConfig repositoryConfig)
         {
-
-            return "";
+            Guid addedID = _repositoriesConfigService.AddRepositoryConfig(repositoryConfig);
+            //if (!addedID.Equals(Guid.Empty))
+            //{
+            return Ok(addedID);
+            //}
+            //else
+            //{
+            //    return BadRequest(new ErrorExample { Error = $"config repository {repositoryConfig.Name} already exist" });
+            //}
         }
 
         /// <summary>
-        /// Obtine la información del repositorio
+        /// Elimina la configuración de un repositorio OAI-PMH.
         /// </summary>
-        /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
-        [HttpGet("Identify", Name = "Identify")]
+        /// <param name="identifier">Identificador del repositorio</param>
+        /// <returns></returns>
+        [HttpDelete("{identifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public string Identify()
+        public IActionResult DeleteRepository(Guid identifier)
         {
-
-            return "";
+            bool deleted = _repositoriesConfigService.RemoveRepositoryConfig(identifier);
+            if (deleted)
+            {
+                return Ok($"Config repository {identifier} has been deleted");
+            }
+            else
+            {
+                return Problem("Error has ocurred");
+            }
         }
 
         /// <summary>
-        /// Es una forma abreviada de ListRecords, que recupera solo encabezados en lugar de registros.
+        /// Modifica la configuración de un repositorio OAI-PMH.
         /// </summary>
-        /// <param name="metadataPrefix">Especifica que los encabezados deben devolverse solo si el formato de metadatos que coincide con el metadataPrefix proporcionado está disponible o, según el soporte del repositorio para las eliminaciones, se ha eliminado. Los formatos de metadatos admitidos por un repositorio y para un elemento en particular se pueden recuperar mediante la solicitud ListMetadataFormats.</param>
-        /// <param name="from">Fecha de inicio desde la que se desean recuperar las cabeceras de las entidades</param>
-        /// <param name="until">Fecha de fin hasta la que se desean recuperar las cabeceras de las entidades</param>
-        /// <param name="set">Argumento con un valor setSpec, que especifica los criterios establecidos para la recolección selectiva.</param>
-        /// <param name="resumptionToken">Argumento exclusivo con un valor que es el token de control de flujo devuelto por una solicitud ListIdentifiers anterior que emitió una lista incompleta.</param>
-        /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
-        [HttpGet("ListIdentifiers", Name = "ListIdentifiers")]
+        /// <param name="repositoryConfig">Datos de configuración del repositorio</param>
+        /// <returns></returns>
+        [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ErrorExample))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(ModifyRepositoryErrorResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public string ListIdentifiers(string metadataPrefix, DateTime? from=null,DateTime? until=null,string set=null,string resumptionToken=null)
+        public IActionResult ModifyRepositoryConfig(RepositoryConfig repositoryConfig)
         {
-
-            return "";
+            bool modified = _repositoriesConfigService.ModifyRepositoryConfig(repositoryConfig);
+            if (modified)
+            {
+                return Ok($"Config repository {repositoryConfig.RepositoryConfigID} has been modified");
+            }
+            else
+            {
+                return BadRequest(new ErrorExample { Error = $"Check that repository config with id {repositoryConfig.RepositoryConfigID} exist" });
+            }
         }
 
 
-
-        /// <summary>
-        /// Recupera los formatos de metadatos disponibles del repositorio
-        /// </summary>
-        /// <param name="identifier">Argumento opcional que especifica el identificador único del elemento para el que se solicitan los formatos de metadatos disponibles. Si se omite este argumento, la respuesta incluye todos los formatos de metadatos admitidos por este repositorio. </param>
-        /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
-        [HttpGet("ListMetadataFormats", Name = "ListMetadataFormats")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public string ListMetadataFormats(string identifier=null)
-        {
-
-            return "";
-        }
-
-        /// <summary>
-        /// Recupera registros del repositorio
-        /// </summary>
-        /// <param name="metadataPrefix">Especifica que los encabezados deben devolverse solo si el formato de metadatos que coincide con el metadataPrefix proporcionado está disponible o, según el soporte del repositorio para las eliminaciones, se ha eliminado. Los formatos de metadatos admitidos por un repositorio y para un elemento en particular se pueden recuperar mediante la solicitud ListMetadataFormats.</param>
-        /// <param name="from">Fecha de inicio desde la que se desean recuperar las cabeceras de las entidades</param>
-        /// <param name="until">Fecha de fin hasta la que se desean recuperar las cabeceras de las entidades</param>
-        /// <param name="set">Argumento con un valor setSpec, que especifica los criterios establecidos para la recolección selectiva.</param>
-        /// <param name="resumptionToken">Argumento exclusivo con un valor que es el token de control de flujo devuelto por una solicitud ListRecords anterior que emitió una lista incompleta.</param>
-        /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
-        [HttpGet("ListRecords", Name = "ListRecords")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public string ListRecords(string metadataPrefix, DateTime? from = null, DateTime? until = null, string set = null, string resumptionToken = null)
-        {
-
-            return "";
-        }
-
-        /// <summary>
-        /// Se utiliza para recuperar la estructura establecida de un repositorio, útil para la recolección selectiva.
-        /// </summary>
-        /// <param name="resumptionToken">Argumento exclusivo con un valor que es el token de control de flujo devuelto por una solicitud ListSets anterior que emitió una lista incompleta.</param>
-        /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
-        [HttpGet("ListSets", Name = "ListSets")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public string ListSets(string resumptionToken = null)
-        {
-
-            return "";
-        }
     }
 }
