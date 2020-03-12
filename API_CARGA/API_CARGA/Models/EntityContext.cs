@@ -14,23 +14,29 @@ namespace API_CARGA.Models
         public DbSet<RepositoryConfig> RepositoryConfig { get; set; }
         public DbSet<ShapeConfig> ShapeConfig { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public EntityContext(DbContextOptions options)
+            : base(options)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=SchoolDB;Trusted_Connection=True;");
-        }
+            Database.Migrate();
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            if (_defaultSchema != null && !_defaultSchema.Equals("dbo"))
-            {
-                modelBuilder.HasDefaultSchema(_defaultSchema);
-            }
         }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseNpgsql("Host=192.168.40.179;Database=hercules;Username=hercules;Password=hercules");
+        //}
 
-        private static string GetDefaultSchema(DbConnection pConexionMaster)
-        {
-            string schemaDefecto = null;
-            return schemaDefecto;
-        }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    if (_defaultSchema != null && !_defaultSchema.Equals("dbo"))
+        //    {
+        //        modelBuilder.HasDefaultSchema(_defaultSchema);
+        //    }
+        //}
+
+        //private static string GetDefaultSchema(DbConnection pConexionMaster)
+        //{
+        //    string schemaDefecto = null;
+        //    return schemaDefecto;
+        //}
     }
 }
