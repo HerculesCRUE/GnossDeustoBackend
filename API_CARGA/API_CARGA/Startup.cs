@@ -61,6 +61,7 @@ namespace PRH
 
             services.AddSingleton<IRepositoriesConfigService, RepositoriesConfigMockService>();
             services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
+            services.AddSingleton(typeof(SparqlConfigJson));
         }
 
         //<summary>
