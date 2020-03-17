@@ -9,16 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Config\**" />
     <Compile Remove="Extras\**" />
     <Compile Remove="Extra\**" />
-    <Content Remove="Config\**" />
     <Content Remove="Extras\**" />
     <Content Remove="Extra\**" />
-    <EmbeddedResource Remove="Config\**" />
     <EmbeddedResource Remove="Extras\**" />
     <EmbeddedResource Remove="Extra\**" />
-    <None Remove="Config\**" />
     <None Remove="Extras\**" />
     <None Remove="Extra\**" />
   </ItemGroup>
