@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Connected Services\" />
     <Folder Include="Extra\Cache\" />
     <Folder Include="Extra\Exceptions\" />
   </ItemGroup>

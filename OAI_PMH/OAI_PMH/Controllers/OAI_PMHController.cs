@@ -31,7 +31,6 @@ namespace OAI_PMH.Controllers
             _configOAI.DeletedRecord = _configJsonHandler.GetConfig().DeletedRecord;
             _configOAI.Granularity = _configJsonHandler.GetConfig().Granularity;
             _configOAI.EarliestDatestamp = _configJsonHandler.GetConfig().EarliestDatestamp;
-            _configOAI.ResumptionTokenCustomParameterNames.UnionWith(_configJsonHandler.GetConfig().ResumptionTokenCustomParameterNames);
         }
 
         /// <summary>
@@ -307,6 +306,7 @@ namespace OAI_PMH.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public FileResult Get(OaiVerb verb, string identifier = "", string metadataPrefix = "", string from = "", string until = "", string set = "", string resumptionToken = "")
         {
+
             //CONFIG OAI-PMH
             _configOAI.BaseUrl = () =>
             {
@@ -326,7 +326,7 @@ namespace OAI_PMH.Controllers
             DataProvider provider = new DataProvider(_configOAI, metadataFormatRepository, recordRepository, setRepository);
 
             ArgumentContainer arguments = new ArgumentContainer(verb.ToString(), metadataPrefix, resumptionToken, identifier, from, until, set);
-            XDocument document = provider.ToXDocument(DateTime.Now, arguments);
+            XDocument document = provider.ToXDocument(DateTime.Now.AddMinutes(100), arguments);
 
             var memoryStream = new MemoryStream();
             var xmlWriter = XmlWriter.Create(memoryStream);

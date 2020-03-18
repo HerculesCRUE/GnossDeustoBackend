@@ -3,9 +3,9 @@
   "RepositoryName": "OAI_PMH_CVN",
   "DeletedRecord": "transient",
   "AdminEmails": null,
-  "Granularity": "YYYY-MM-DDThh:mm:ssZ",
+  "Granularity": "yyyy-MM-ddThh:mm:ssZ",
   "EarliestDatestamp": null,
-  "ResumptionTokenCustomParameterNames": [ "offset" ],
+  "XML_CVN_Repository": "http://aa.com",
   "MetadataFormats": [
     {
       "prefix": "oai_dc",
