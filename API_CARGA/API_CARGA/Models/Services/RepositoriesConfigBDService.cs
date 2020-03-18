@@ -1,4 +1,5 @@
 ﻿using API_CARGA.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,34 +9,73 @@ namespace API_CARGA.Models.Services
 {
     public class RepositoriesConfigBDService : IRepositoriesConfigService
     {
-        public Guid AddRepositoryConfig(RepositoryConfig repositoryConfig)
+        private readonly EntityContext _context;
+        public RepositoriesConfigBDService(EntityContext context)
         {
-            throw new NotImplementedException();
-        }
-
-        public RepositoryConfig GetRepositoryConfigById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public RepositoryConfig GetRepositoryConfigByName(string name)
-        {
-            throw new NotImplementedException();
+            _context = context;
         }
 
         public List<RepositoryConfig> GetRepositoryConfigs()
         {
-            throw new NotImplementedException();
+            return _context.RepositoryConfig.OrderBy(repository => repository.Name).ToList();
         }
 
-        public bool ModifyRepositoryConfig(RepositoryConfig repositoryConfig)
+        //public RepositoryConfig GetRepositoryConfigByName(string name)
+        //{
+        //    return _configRepositories.FirstOrDefault(repository => repository.Name.Equals(name));
+        //}
+
+        public RepositoryConfig GetRepositoryConfigById(Guid id)
         {
-            throw new NotImplementedException();
+            return _context.RepositoryConfig.FirstOrDefault(repository => repository.RepositoryConfigID.Equals(id));
         }
 
         public bool RemoveRepositoryConfig(Guid identifier)
         {
-            throw new NotImplementedException();
+            try
+            {
+                RepositoryConfig repositoryConfig = GetRepositoryConfigById(identifier);
+                if (repositoryConfig != null)
+                {
+                    _context.Entry(repositoryConfig).State = EntityState.Deleted;
+                    _context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public Guid AddRepositoryConfig(RepositoryConfig repositoryConfig)
+        {
+            Guid repositoryConfigID = Guid.Empty;
+            //if (GetRepositoryConfigByName(repositoryConfig.Name) == null)
+            //{
+            repositoryConfigID = Guid.NewGuid();
+            repositoryConfig.RepositoryConfigID = repositoryConfigID;
+            _context.RepositoryConfig.Add(repositoryConfig);
+            _context.SaveChanges();
+            //}
+            return repositoryConfigID;
+        }
+
+        public bool ModifyRepositoryConfig(RepositoryConfig repositoryConfig)
+        {
+            bool modified = false;
+            RepositoryConfig repositoryConfigOriginal = GetRepositoryConfigById(repositoryConfig.RepositoryConfigID);
+            if (repositoryConfigOriginal != null)
+            {
+                //CheckDataExceptions(repositoryConfigOriginal, repositoryConfig);
+                repositoryConfigOriginal.Name = repositoryConfig.Name;
+                repositoryConfigOriginal.Url = repositoryConfig.Url;
+                repositoryConfigOriginal.OauthToken = repositoryConfig.OauthToken;
+                _context.SaveChanges();
+                modified = true;
+                
+            }
+            return modified;
         }
     }
 }

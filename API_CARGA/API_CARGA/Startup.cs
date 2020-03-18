@@ -4,10 +4,12 @@ using System.Net;
 using System.Text.Json.Serialization;
 using API_CARGA.Middlewares;
 using API_CARGA.ModelExamples;
+using API_CARGA.Models;
 using API_CARGA.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -59,8 +61,13 @@ namespace PRH
             });
 
 
-            services.AddSingleton<IRepositoriesConfigService, RepositoriesConfigMockService>();
-            services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
+            services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("PostgreConnectionmigration")));
+            //services.AddSingleton<IRepositoriesConfigService, RepositoriesConfigMockService>();
+            services.AddScoped<IRepositoriesConfigService, RepositoriesConfigBDService>();
+            //services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
+            services.AddScoped<IShapesConfigService, ShapesConfigBDService>();
+
+
             services.AddSingleton(typeof(SparqlConfigJson));
         }
 

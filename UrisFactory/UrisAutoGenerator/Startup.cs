@@ -31,14 +31,51 @@ namespace UrisFactory
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c =>
+
+            //IdentityServer
+            services.AddAuthentication("Bearer")
+            .AddJwtBearer("Bearer", options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Uris factory", Version = "v1"});
-                c.OperationFilter<AddParametersFilter>();
+                options.Authority = "http://localhost:5000";
+                options.RequireHttpsMetadata = false;
+
+                options.Audience = "api_uris";
+            });
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Uris factory", Version = "v1"});
+                options.OperationFilter<AddParametersFilter>();
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-                c.ExampleFilters();
+                options.IncludeXmlComments(xmlPath);
+                options.ExampleFilters();
+                // Define the OAuth2.0 scheme that's in use (i.e. Implicit Flow)
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        Implicit = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = new System.Uri("http://localhost:5000/auth-server/connect/authorize", UriKind.Absolute),
+                            Scopes = new Dictionary<string, string>
+                            {
+                                { "api_uris", "Uris factory" }
+                            }
+                        }
+                    }
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
+                        },
+                        new[] { "api_uris", "Uris factory" }
+                    }
+                });
             });
             services.Configure<ForwardedHeadersOptions>(options =>
             {
@@ -90,6 +127,8 @@ namespace UrisFactory
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("v1/swagger.json", "Uris factory");
+                c.OAuthClientId("client");
+                c.OAuthClientSecret("511536EF-F270-4058-80CA-1C89C192F69A");
             });
 
             app.UseEndpoints(endpoints =>
