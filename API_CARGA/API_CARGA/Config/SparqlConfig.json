@@ -1,0 +1,5 @@
+{
+  "graph": "http://test.com",
+  "endpoint": "http://localhost:8890/sparql",
+  "queryparam": "query"
+}
