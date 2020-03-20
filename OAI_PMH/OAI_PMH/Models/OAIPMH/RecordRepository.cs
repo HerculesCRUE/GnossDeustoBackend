@@ -109,7 +109,7 @@ namespace OaiPmhNet.Models.OAIPMH
                 case "rdf":
                     record.Metadata = new RecordMetadata()
                     {
-                        Content = System.Xml.Linq.XElement.Parse(pCVN.rdf_cvn)
+                        Content = System.Xml.Linq.XElement.Parse(pCVN.rdf)
                     };
                     break;
             }
@@ -119,40 +119,61 @@ namespace OaiPmhNet.Models.OAIPMH
 
         private HashSet<string> GetCurriculumsIDs(DateTime pInicio)
         {
-            /* [ENTORNO]/curriculum/rest/v1/auth/changes?date=[YYYY-MM-DD]	GET	user y key	HTTP 200	"ids": {1, 2, 3, ...} */
+            HashSet<string> listaIDS = new HashSet<string>();
+            listaIDS.Add("0000-0001-8055-6823");//Diego
+            listaIDS.Add("0000-0002-7558-2880");//Jesualdo
+            return listaIDS;
+            ///* [ENTORNO]/curriculum/rest/v1/auth/changes?date=[YYYY-MM-DD]	GET	user y key	HTTP 200	"ids": {1, 2, 3, ...} */
 
-            string responseString = "";
-            WebRequest request = WebRequest.Create(
-              $"{_configJsonHandler.GetConfig().XML_CVN_Repository}/curriculum/rest/v1/auth/changes?date=[{pInicio.Year}-{pInicio.Month}-{pInicio.Day}]");
-            WebResponse response = request.GetResponse();
-            using (Stream dataStream = response.GetResponseStream())
-            {
-                StreamReader reader = new StreamReader(dataStream);
-                responseString = reader.ReadToEnd();
-            }
-            // Close the response.  
-            response.Close();
+            //string responseString = "";
+            //WebRequest request = WebRequest.Create(
+            //  $"{_configJsonHandler.GetConfig().XML_CVN_Repository}/curriculum/rest/v1/auth/changes?date=[{pInicio.Year}-{pInicio.Month}-{pInicio.Day}]");
+            //WebResponse response = request.GetResponse();
+            //using (Stream dataStream = response.GetResponseStream())
+            //{
+            //    StreamReader reader = new StreamReader(dataStream);
+            //    responseString = reader.ReadToEnd();
+            //}
+            //// Close the response.  
+            //response.Close();
 
-            return JsonConvert.DeserializeObject<HashSet<string>>(responseString);
+            //return JsonConvert.DeserializeObject<HashSet<string>>(responseString);
         }
 
         private CVN GetCurriculum(string pId)
         {
+            string responseString = System.IO.File.ReadAllText($"Config/{pId}.xml");
+            return new CVN(responseString,pId, _configJsonHandler);
+
+            //WebRequest request = WebRequest.Create(
+            //  $"{_configJsonHandler.GetConfig().XML_CVN_Repository}/curriculum/rest/v1/auth/cvn?id=[{pId}]");
+            //WebResponse response = request.GetResponse();
+            //using (Stream dataStream = response.GetResponseStream())
+            //{
+            //    StreamReader reader = new StreamReader(dataStream);
+            //    responseString = reader.ReadToEnd();
+            //}
+            //// Close the response.  
+            //response.Close();
+
+            //return new CVN(responseString);
+
+
             /*[ENTORNO]/curriculum/rest/v1/auth/cvn?id=[identificador]	GET	user y key	HTTP 200	XML*/
 
-            string responseString = "";
-            WebRequest request = WebRequest.Create(
-              $"{_configJsonHandler.GetConfig().XML_CVN_Repository}/curriculum/rest/v1/auth/cvn?id=[{pId}]");
-            WebResponse response = request.GetResponse();
-            using (Stream dataStream = response.GetResponseStream())
-            {
-                StreamReader reader = new StreamReader(dataStream);
-                responseString = reader.ReadToEnd();
-            }
-            // Close the response.  
-            response.Close();
+            //string responseString = "";
+            //WebRequest request = WebRequest.Create(
+            //  $"{_configJsonHandler.GetConfig().XML_CVN_Repository}/curriculum/rest/v1/auth/cvn?id=[{pId}]");
+            //WebResponse response = request.GetResponse();
+            //using (Stream dataStream = response.GetResponseStream())
+            //{
+            //    StreamReader reader = new StreamReader(dataStream);
+            //    responseString = reader.ReadToEnd();
+            //}
+            //// Close the response.  
+            //response.Close();
 
-            return new CVN(responseString);
+            //return new CVN(responseString);
         }
 
     }

@@ -15,5 +15,7 @@ namespace OaiPmhNet.Models.OAIPMH
         public string XML_CVN_Repository { get; set; }
         public List<MetadataFormat> MetadataFormats { get; set; }
         public List<Set> Sets { get; set; }
+        public string PythonScript { get; set; }
+        public string PythonExe { get; set; }
     }
 }

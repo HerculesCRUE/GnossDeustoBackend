@@ -318,7 +318,7 @@ namespace OAI_PMH.Controllers
             //MetadataFormatRepository
             MetadataFormatRepository metadataFormatRepository = new MetadataFormatRepository(_configJsonHandler.GetConfig().MetadataFormats);
 
-            RecordRepository recordRepository = new RecordRepository(_configOAI);
+            RecordRepository recordRepository = new RecordRepository(_configOAI, _configJsonHandler);
 
             //SetRepository
             SetRepository setRepository = new SetRepository(_configOAI, _configJsonHandler.GetConfig().Sets);
