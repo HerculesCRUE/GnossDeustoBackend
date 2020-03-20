@@ -39,7 +39,7 @@ namespace PRH
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OAI-PMH", Version = "v1",Description= "Open Archives Initiative Protocol for Metadata Harvesting" });
-                c.IncludeXmlComments(string.Format(@"{0}\comments.xml", System.AppDomain.CurrentDomain.BaseDirectory));
+                c.IncludeXmlComments(string.Format(@"{0}comments.xml", System.AppDomain.CurrentDomain.BaseDirectory));
                 // c.OperationFilter<AddParametersFilter>();
             });
 
@@ -73,11 +73,19 @@ namespace PRH
             });
 
             app.UseAuthorization();
+            app.UseSwagger(c =>
+            {
+                c.PreSerializeFilters.Add((swaggerDoc, httpReq) => swaggerDoc.Servers = new List<OpenApiServer>
+                      {
+                        new OpenApiServer { Url = $"/oai-pmh-cvn"},
+                        new OpenApiServer { Url = $"/" }
+                      });
+            });
             //app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hercules PRH");
+                c.SwaggerEndpoint("v1/swagger.json", "OAI-PMH cvn");
             });
 
             app.UseEndpoints(endpoints =>

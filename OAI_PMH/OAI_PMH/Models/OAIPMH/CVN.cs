@@ -30,11 +30,15 @@ namespace OaiPmhNet.Models.OAIPMH
             StreamReader sError = p.StandardError;
             string standardError = sError.ReadToEnd();
 
+            Id = pId;
+            Date = DateTime.Now;
             if (string.IsNullOrEmpty(standardError))
             {
                 rdf = File.ReadAllText(output);
-                Id = pId;
-                Date = DateTime.Now;
+            }
+            else
+            {
+                throw new Exception("Error al convertir a RDF: Executable:"+ p.StartInfo.FileName + ". Args:"+ p.StartInfo.Arguments+ ". Error:"+standardError);
             }
         }
 
