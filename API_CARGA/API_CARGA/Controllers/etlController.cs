@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Xml;
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
+using API_CARGA.Models.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OaiPmhNet;
@@ -22,9 +25,11 @@ namespace PMH.Controllers
     public class etlController : Controller
     {
         private IRepositoriesConfigService _repositoriesConfigService;
-        public etlController(IRepositoriesConfigService iRepositoriesConfigService)
+        private SparqlConfig _sparqlConfig;
+        public etlController(IRepositoriesConfigService iRepositoriesConfigService,SparqlConfigJson sparqlConfigJson)
         {
             _repositoriesConfigService = iRepositoriesConfigService;
+            _sparqlConfig = sparqlConfigJson.GetConfig();
         }
 
         /// <summary>
@@ -37,7 +42,10 @@ namespace PMH.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult dataPublish(IFormFile rdfFile)
         {
-            throw new Exception("TODO");
+            XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
+            List<string> triples = SparqlUtility.GetTriplesFromRDF(rdf);
+            SparqlUtility.LoadTriples(triples, _sparqlConfig.endpoint, _sparqlConfig.queryparam, _sparqlConfig.graph);
+            return Ok();
         }
 
         /// <summary>
@@ -119,12 +127,12 @@ namespace PMH.Controllers
         [HttpGet("ListIdentifiers/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public FileResult ListIdentifiers(Guid repositoryIdentifier, string metadataPrefix=null, DateTime? from = null, DateTime? until = null, string set = null, string resumptionToken = null)
+        public FileResult ListIdentifiers(Guid repositoryIdentifier, string metadataPrefix = null, DateTime? from = null, DateTime? until = null, string set = null, string resumptionToken = null)
         {
             RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
             string uri = repositoryConfig.Url;
             uri += $"?verb=ListIdentifiers";
-            if (metadataPrefix!=null)
+            if (metadataPrefix != null)
             {
                 uri += $"&metadataPrefix={metadataPrefix}";
             }
@@ -136,7 +144,7 @@ namespace PMH.Controllers
             {
                 uri += $"&until={until.ToString()}";
             }
-            if (set!=null)
+            if (set != null)
             {
                 uri += $"&set={set}";
             }
@@ -229,7 +237,7 @@ namespace PMH.Controllers
         {
             RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
             string uri = repositoryConfig.Url;
-            uri += $"?verb=ListSets";           
+            uri += $"?verb=ListSets";
             if (resumptionToken != null)
             {
                 uri += $"&resumptionToken={resumptionToken}";

@@ -60,13 +60,18 @@ namespace PRH
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
 
+
             services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("PostgreConnectionmigration")));
-            services.AddSingleton<IRepositoriesConfigService, RepositoriesConfigMockService>();
-            //services.AddScoped<IRepositoriesConfigService, RepositoriesConfigBDService>();
-            services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
-            //services.AddScoped<IShapesConfigService, ShapesConfigBDService>();
             services.AddSingleton(typeof(ConfigUrlService));
             services.AddScoped(typeof(OaiPublishRDFService));
+            //services.AddSingleton<IRepositoriesConfigService, RepositoriesConfigMockService>();
+            services.AddScoped<IRepositoriesConfigService, RepositoriesConfigBDService>();
+            //services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
+            services.AddScoped<IShapesConfigService, ShapesConfigBDService>();
+
+
+            services.AddSingleton(typeof(SparqlConfigJson));
+
         }
 
         //<summary>

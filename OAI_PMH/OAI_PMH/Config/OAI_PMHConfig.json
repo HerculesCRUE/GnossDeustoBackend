@@ -3,15 +3,20 @@
   "RepositoryName": "OAI_PMH_CVN",
   "DeletedRecord": "transient",
   "AdminEmails": null,
-  "Granularity": "YYYY-MM-DDThh:mm:ssZ",
+  "Granularity": "yyyy-MM-ddThh:mm:ssZ",
   "EarliestDatestamp": null,
-  "ResumptionTokenCustomParameterNames": [ "offset" ],
+  "XML_CVN_Repository": "http://test.com",
+  "PythonScript": "c:\\cvn\\main.py",
+  "PythonExe": "C:\\Users\\Alvaro\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
   "MetadataFormats": [
     {
       "prefix": "oai_dc",
       "ns": "http://www.openarchives.org/OAI/2.0/oai_dc/",
       "schema": "http://www.openarchives.org/OAI/2.0/oai_dc.xsd",
       "schemaLocation": "http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"
+    },
+    {
+      "prefix": "rdf"
     }
   ],
   "Sets": [
