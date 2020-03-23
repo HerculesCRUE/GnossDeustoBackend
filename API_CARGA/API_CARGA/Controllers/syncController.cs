@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API_CARGA.Models.Entities;
+using API_CARGA.Models.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +16,11 @@ namespace UrisFactory.Controllers
     [Route("[Controller]")]
     public class syncController : Controller
     {
+        private OaiPublishRDFService _oaiPublishRDFService;
+        public syncController(OaiPublishRDFService oaiPublishRDFService)
+        {
+            _oaiPublishRDFService = oaiPublishRDFService;
+        }
         /// <summary>
         /// Obtiene un listado con todas las configuraciones de las sincronizaciones
         /// </summary>
@@ -44,11 +50,12 @@ namespace UrisFactory.Controllers
         /// Añade una nueva configuración de sincronización
         /// </summary>
         /// <returns></returns>
-        [HttpPost("config")]
+        [HttpPost("execute/{identifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult PostSyncro(SyncConfig syncroconfig)
+        public IActionResult PostSyncro(Guid identifier)
         {
+            _oaiPublishRDFService.PublishRepositories(identifier);
             return Ok("");
         }
 

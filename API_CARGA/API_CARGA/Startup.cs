@@ -62,6 +62,8 @@ namespace PRH
 
 
             services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("PostgreConnectionmigration")));
+            services.AddSingleton(typeof(ConfigUrlService));
+            services.AddScoped(typeof(OaiPublishRDFService));
             //services.AddSingleton<IRepositoriesConfigService, RepositoriesConfigMockService>();
             services.AddScoped<IRepositoriesConfigService, RepositoriesConfigBDService>();
             //services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
@@ -69,6 +71,7 @@ namespace PRH
 
 
             services.AddSingleton(typeof(SparqlConfigJson));
+
         }
 
         //<summary>
