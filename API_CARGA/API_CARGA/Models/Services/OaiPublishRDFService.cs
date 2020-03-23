@@ -20,16 +20,17 @@ namespace API_CARGA.Models.Services
 
         public void PublishRepositories(Guid identifier)
         {
-            // List<string> listIdentifier = CallListIdentifier(identifier);
-            //  List<string> listRdf = CallGetRecord(identifier, listIdentifier);
-            List<string> listRdf = new List<string>();
-            listRdf.Add("prueba");
+            List<string> listIdentifier = CallListIdentifier(identifier);
+            List<string> listRdf = CallGetRecord(identifier, listIdentifier);
+            //List<string> listRdf = new List<string>();
+            //listRdf.Add("prueba");
             CallDataPublish(listRdf, identifier);
         }
 
         public List<string> CallListIdentifier(Guid identifierRepo)
         {
             List<string> listIdentifier = new List<string>();
+            //string xml = CallGetApi($"etl/ListIdentifiers/{identifierRepo}?metadataPrefix=rdf");
             string xml = CallGetApi($"etl/ListIdentifiers/{identifierRepo}?metadataPrefix=rdf");
             XDocument respuestaXML = XDocument.Load(xml);
             XElement listIdentifierElement = respuestaXML.Element("ListIdentifiers");
