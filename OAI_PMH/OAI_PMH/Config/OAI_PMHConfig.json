@@ -4,7 +4,6 @@
   "DeletedRecord": "transient",
   "AdminEmails": null,
   "Granularity": "yyyy-MM-ddThh:mm:ssZ",
-  "EarliestDatestamp": null,
   "XML_CVN_Repository": "http://test.com",
   "PythonScript": "c:\\cvn\\main.py",
   "PythonExe": "C:\\Users\\Alvaro\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",

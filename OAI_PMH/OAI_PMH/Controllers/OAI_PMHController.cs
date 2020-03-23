@@ -13,24 +13,29 @@ using System.Xml.Linq;
 
 namespace OAI_PMH.Controllers
 {
-
+    /// <summary>
+    /// Controlador OAI-PMH
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class OAI_PMHController : Controller
     {
-        private ConfigJson _configJsonHandler;
+        private ConfigService _configService;
         private IOaiConfiguration _configOAI;
 
-        public OAI_PMHController(ConfigJson configJsonHandler)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="configService">Configuración del servicio</param>
+        public OAI_PMHController(ConfigService configService)
         {
-            _configJsonHandler = configJsonHandler;
+            _configService = configService;
             _configOAI = OaiConfiguration.Instance;
-            _configOAI.SupportSets = _configJsonHandler.GetConfig().SupportSets;
-            _configOAI.RepositoryName = _configJsonHandler.GetConfig().RepositoryName;
-            _configOAI.AdminEmails = _configJsonHandler.GetConfig().AdminEmails;
-            _configOAI.DeletedRecord = _configJsonHandler.GetConfig().DeletedRecord;
-            _configOAI.Granularity = _configJsonHandler.GetConfig().Granularity;
-            _configOAI.EarliestDatestamp = _configJsonHandler.GetConfig().EarliestDatestamp;
+            _configOAI.SupportSets = _configService.GetConfig().SupportSets;
+            _configOAI.RepositoryName = _configService.GetConfig().RepositoryName;
+            _configOAI.AdminEmails = _configService.GetConfig().AdminEmails;
+            _configOAI.DeletedRecord = _configService.GetConfig().DeletedRecord;
+            _configOAI.Granularity = _configService.GetConfig().Granularity;
         }
 
         /// <summary>
@@ -316,12 +321,12 @@ namespace OAI_PMH.Controllers
 
 
             //MetadataFormatRepository
-            MetadataFormatRepository metadataFormatRepository = new MetadataFormatRepository(_configJsonHandler.GetConfig().MetadataFormats);
+            MetadataFormatRepository metadataFormatRepository = new MetadataFormatRepository(_configService.GetConfig().MetadataFormats);
 
-            RecordRepository recordRepository = new RecordRepository(_configOAI, _configJsonHandler);
+            RecordRepository recordRepository = new RecordRepository(_configOAI, _configService);
 
             //SetRepository
-            SetRepository setRepository = new SetRepository(_configOAI, _configJsonHandler.GetConfig().Sets);
+            SetRepository setRepository = new SetRepository(_configOAI, _configService.GetConfig().Sets);
 
             DataProvider provider = new DataProvider(_configOAI, metadataFormatRepository, recordRepository, setRepository);
 

@@ -26,21 +26,16 @@ namespace PRH
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            //services.AddControllers().AddNewtonsoftJson(options =>
-                //options.SerializerSettings.Converters.Add(new StringEnumConverter()));
-               
+        {               
             services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-                //options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
 
             services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "OAI-PMH", Version = "v1",Description= "Open Archives Initiative Protocol for Metadata Harvesting" });
+            { 
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "OAI-PMH cvn", Version = "v1",Description= "Open Archives Initiative Protocol for Metadata Harvesting" });
                 c.IncludeXmlComments(string.Format(@"{0}comments.xml", System.AppDomain.CurrentDomain.BaseDirectory));
-                // c.OperationFilter<AddParametersFilter>();
             });
 
             services.Configure<ForwardedHeadersOptions>(options =>
@@ -48,10 +43,8 @@ namespace PRH
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
 
-            services.AddSingleton(typeof(ConfigJson));
+            services.AddSingleton(typeof(ConfigService));
 
-            //services.AddSingleton(typeof(ConfigJsonHandler));
-            //services.AddScoped<ISchemaConfigOperations, SchemaConfigFileOperations>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +55,6 @@ namespace PRH
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseMiddleware(typeof(LoadConfigJsonMiddleware));
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -81,7 +73,7 @@ namespace PRH
                         new OpenApiServer { Url = $"/" }
                       });
             });
-            //app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
