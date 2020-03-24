@@ -13,7 +13,7 @@ Este Api contiene dos controladores
 	 - **Put /Schema:** Añade un nuevo esquema de uris.
 	 - **Get /Schema{name}:** Obtiene un esquema de uris
 	 >Los métodos correspondientes a Schema reciben o devuelven un objeto de esquema de uris como puede por ejemplo:
-	{
+	`{
   "uriStructure": {
     "name": "uriExampleStructure",
     "components": [
@@ -52,5 +52,5 @@ Este Api contiene dos controladores
     "labelResourceClass": "example",
     "resourceURI": "uriExampleStructure"
   }
-}
+}`
 	 
