@@ -31,11 +31,9 @@ namespace OAI_PMH.Controllers
         {
             _configService = configService;
             _configOAI = OaiConfiguration.Instance;
-            _configOAI.SupportSets = _configService.GetConfig().SupportSets;
-            _configOAI.RepositoryName = _configService.GetConfig().RepositoryName;
-            _configOAI.AdminEmails = _configService.GetConfig().AdminEmails;
-            _configOAI.DeletedRecord = _configService.GetConfig().DeletedRecord;
-            _configOAI.Granularity = _configService.GetConfig().Granularity;
+            _configOAI.SupportSets = true;
+            _configOAI.RepositoryName = "OAI_PMH_CVN";
+            _configOAI.Granularity = "yyyy-MM-ddThh:mm:ssZ";
         }
 
         
@@ -56,7 +54,6 @@ namespace OAI_PMH.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public FileResult Get(OaiVerb verb, string identifier = "", string metadataPrefix = "", string from = "", string until = "", string set = "", string resumptionToken = "")
         {
-
             //CONFIG OAI-PMH
             _configOAI.BaseUrl = () =>
             {
@@ -64,14 +61,13 @@ namespace OAI_PMH.Controllers
                 return baseUri.AbsoluteUri;
             };
 
-
             //MetadataFormatRepository
-            MetadataFormatRepository metadataFormatRepository = new MetadataFormatRepository(_configService.GetConfig().MetadataFormats);
+            MetadataFormatRepository metadataFormatRepository = new MetadataFormatRepository();
 
             RecordRepository recordRepository = new RecordRepository(_configOAI, _configService);
 
             //SetRepository
-            SetRepository setRepository = new SetRepository(_configOAI, _configService.GetConfig().Sets);
+            SetRepository setRepository = new SetRepository(_configOAI);
 
             DataProvider provider = new DataProvider(_configOAI, metadataFormatRepository, recordRepository, setRepository);
 

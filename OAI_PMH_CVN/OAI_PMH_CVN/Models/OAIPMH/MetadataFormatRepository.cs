@@ -14,10 +14,13 @@ namespace OaiPmhNet.Models.OAIPMH
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="metadataFormats">Lista de metadatos disponibles</param>
-        public MetadataFormatRepository(IList<MetadataFormat> metadataFormats)
+        public MetadataFormatRepository()
         {
-            _dictionary = metadataFormats.ToDictionary(f => f.Prefix, f => f);
+            MetadataFormat oai_dc = new MetadataFormat("oai_dc", "http://www.openarchives.org/OAI/2.0/oai_dc/", "http://www.openarchives.org/OAI/2.0/oai_dc.xsd", "http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd");
+            MetadataFormat rdf = new MetadataFormat("rdf", "", "", "");
+            _dictionary = new Dictionary<string, MetadataFormat>();
+            _dictionary.Add("oai_dc", oai_dc);
+            _dictionary.Add("rdf", rdf);
         }
 
         /// <summary>

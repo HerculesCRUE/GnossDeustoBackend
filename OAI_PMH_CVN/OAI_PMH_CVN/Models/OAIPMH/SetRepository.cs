@@ -18,16 +18,23 @@ namespace OaiPmhNet.Models.OAIPMH
         /// </summary>
         /// <param name="configuration">Configuración OAI-PMH</param>
         /// <param name="sets">Lista de sets disponibles</param>
-        public SetRepository(IOaiConfiguration configuration, IList<Set> sets)
+        public SetRepository(IOaiConfiguration configuration)
         {
             _configuration = configuration;
-            _sets = sets;
+
+            Set set = new Set();
+            set.Spec = "cvn";
+            set.Name = "Currículum Vítae Normalizado";
+            set.Description = "Currículum Vítae Normalizado";
+
+            _sets = new List<Set>();
+            _sets.Add(set);
         }
 
         /// <summary>
         /// Obtiene los sets del repositorio en función de los argumentos pasados
         /// </summary>
-        /// <param name="arguments">Parámetros de la consulta</param>        /// 
+        /// <param name="arguments">Parámetros de la consulta</param>        
         /// <param name="resumptionToken">Token de reanudación</param>
         /// <returns></returns>
         public SetContainer GetSets(ArgumentContainer arguments, IResumptionToken resumptionToken = null)
