@@ -9,4 +9,4 @@
  ### Diagrama de componentes del proyecto:
  
 
-[<img src="img/diagrama_de_componentes.png" />]
+<img src="img/diagrama_de_componentes.png" />
