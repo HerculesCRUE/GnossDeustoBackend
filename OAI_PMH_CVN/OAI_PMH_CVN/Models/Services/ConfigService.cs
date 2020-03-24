@@ -10,7 +10,7 @@ namespace OaiPmhNet.Models.Services
     /// </summary>
     public class ConfigService
     {
-        private OAI_PMHConfig _config;
+        private OAI_PMH_CVN_Config _config;
 
         /// <summary>
         /// Constructor
@@ -32,7 +32,7 @@ namespace OaiPmhNet.Models.Services
         /// Obtiene la configuración del servicio
         /// </summary>
         /// <returns>Configuración del servicio</returns>
-        public OAI_PMHConfig GetConfig()
+        public OAI_PMH_CVN_Config GetConfig()
         {
             if (_config == null)
             {
@@ -48,11 +48,11 @@ namespace OaiPmhNet.Models.Services
         {
             try
             {
-                _config = JsonConvert.DeserializeObject<OAI_PMHConfig>(System.IO.File.ReadAllText("Config/OAI_PMHConfig.json"));
+                _config = JsonConvert.DeserializeObject<OAI_PMH_CVN_Config>(System.IO.File.ReadAllText("Config/OAI_PMH_CVN_Config.json"));
             }
             catch (Exception)
             {
-                throw new Exception("No se encuentra el fichero de configuración, puede que Config/OAI_PMHConfig.json no exista o no esté correctamente formateado");
+                throw new Exception("No se encuentra el fichero de configuración, puede que Config/OAI_PMH_CVN_Config.json no exista o no esté correctamente formateado");
             }
         }
     }
