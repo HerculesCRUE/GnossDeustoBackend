@@ -12,3 +12,45 @@ Este Api contiene dos controladores
 	 - **Delete /Schema:** Elimina un esquema de uris.
 	 - **Put /Schema:** Añade un nuevo esquema de uris.
 	 - **Get /Schema{name}:** Obtiene un esquema de uris
+	 >Los métodos correspondientes a Schema reciben o devuelven un objeto de esquema de uris como puede por ejemplo:
+	{
+  "uriStructure": {
+    "name": "uriExampleStructure",
+    "components": [
+      {
+        "uriComponent": "base",
+        "uriComponentValue": "base",
+        "uriComponentOrder": 1,
+        "mandatory": true,
+        "finalCharacter": "/"
+      },
+      {
+        "uriComponent": "character",
+        "uriComponentValue": "character@RESOURCE",
+        "uriComponentOrder": 2,
+        "mandatory": true,
+        "finalCharacter": "/"
+      },
+      {
+        "uriComponent": "resourceClass",
+        "uriComponentValue": "resourceClass@RESOURCECLASS",
+        "uriComponentOrder": 3,
+        "mandatory": true,
+        "finalCharacter": "/"
+      },
+      {
+        "uriComponent": "identifier",
+        "uriComponentValue": "@ID",
+        "uriComponentOrder": 4,
+        "mandatory": true,
+        "finalCharacter": ""
+      }
+    ]
+  },
+  "resourcesClass": {
+    "resourceClass": "Example",
+    "labelResourceClass": "example",
+    "resourceURI": "uriExampleStructure"
+  }
+}
+	 
