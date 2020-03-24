@@ -49,6 +49,7 @@ namespace UrisFactory.Controllers
         /// <summary>
         /// Añade una nueva configuración de sincronización
         /// </summary>
+        /// <param name="identifier">Identificador de la sincronización</param>
         /// <returns></returns>
         [HttpPost("execute/{identifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

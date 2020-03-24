@@ -27,6 +27,11 @@ namespace API_CARGA.Models.Utility
             return xmlDoc;
         }
 
+        /// <summary>
+        /// Obtiene los triples de un RDF
+        /// </summary>
+        /// <param name="pXMLRDF">XML RDF</param>
+        /// <returns>Lista de triples</returns>
         public static List<string> GetTriplesFromRDF(XmlDocument pXMLRDF)
         {
             List<string> triples = new List<string>();
@@ -70,6 +75,13 @@ namespace API_CARGA.Models.Utility
             return triples;
         }
 
+        /// <summary>
+        /// Carga los triples en un PARQL endpoint
+        /// </summary>
+        /// <param name="pTriples">Triples a inertar</param>
+        /// <param name="pSPARQLEndpoint">Endpoint SPARQL</param>
+        /// <param name="pQueryParam">Query param</param>
+        /// <param name="pGraph">Grafo</param>
         public static void LoadTriples( List<string> pTriples, string pSPARQLEndpoint, string pQueryParam, string pGraph)
         {
             int maxTriples = 500;
