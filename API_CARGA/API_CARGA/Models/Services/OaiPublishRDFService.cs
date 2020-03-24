@@ -23,15 +23,12 @@ namespace API_CARGA.Models.Services
         {
             List<string> listIdentifier = CallListIdentifier(identifier);
             List<string> listRdf = CallGetRecord(identifier, listIdentifier);
-            //List<string> listRdf = new List<string>();
-            //listRdf.Add("prueba");
             CallDataPublish(listRdf, identifier);
         }
 
         public List<string> CallListIdentifier(Guid identifierRepo)
         {
             List<string> listIdentifier = new List<string>();
-            //string xml = CallGetApi($"etl/ListIdentifiers/{identifierRepo}?metadataPrefix=rdf");
             string xml = CallGetApi($"etl/ListIdentifiers/{identifierRepo}?metadataPrefix=rdf");
             XDocument respuestaXML = XDocument.Load(new StringReader(xml));
             XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
@@ -60,11 +57,6 @@ namespace API_CARGA.Models.Services
 
         public void CallDataPublish(List<string> listRdf, Guid identifier)
         {
-            string path = $"temp/rdf/{identifier}";
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
             foreach(string rdf in listRdf)
             {
                 var bytes = Encoding.UTF8.GetBytes(rdf);
