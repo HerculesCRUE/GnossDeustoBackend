@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -32,12 +33,13 @@ namespace API_CARGA.Models.Services
             List<string> listIdentifier = new List<string>();
             //string xml = CallGetApi($"etl/ListIdentifiers/{identifierRepo}?metadataPrefix=rdf");
             string xml = CallGetApi($"etl/ListIdentifiers/{identifierRepo}?metadataPrefix=rdf");
-            XDocument respuestaXML = XDocument.Load(xml);
-            XElement listIdentifierElement = respuestaXML.Element("ListIdentifiers");
-            IEnumerable<XElement> listHeader = listIdentifierElement.Descendants("header");
+            XDocument respuestaXML = XDocument.Load(new StringReader(xml));
+            XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
+            XElement listIdentifierElement = respuestaXML.Root.Element(nameSpace + "ListIdentifiers");
+            IEnumerable<XElement> listHeader = listIdentifierElement.Descendants(nameSpace + "header");
             foreach (var header in listHeader)
             {
-                string identifier = header.Element("identifier").Value;
+                string identifier = header.Element(nameSpace + "identifier").Value;
                 listIdentifier.Add(identifier);
             }
             return listIdentifier;
@@ -49,8 +51,9 @@ namespace API_CARGA.Models.Services
             foreach (string indentifier in listIdentifier) 
             {
                 string respuesta = CallGetApi($"etl/GetRecord/{repoIdentifier}?identifier={indentifier}&&metadataPrefix=rdf");
-                XDocument respuestaXML = XDocument.Load(respuesta);
-                listRdf.Add(respuestaXML.Element("GetRecord").Element("metadata").Value);
+                XDocument respuestaXML = XDocument.Parse(respuesta);
+                XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
+                listRdf.Add(respuestaXML.Root.Element(nameSpace + "GetRecord").Descendants(nameSpace + "metadata").First().FirstNode.ToString());
             }
             return listRdf;
         }
@@ -64,12 +67,10 @@ namespace API_CARGA.Models.Services
             }
             foreach(string rdf in listRdf)
             {
-                string fileName = $"{Guid.NewGuid().ToString()}.rdf";
-                File.Create($"{path}/{fileName}").Close();
-                File.WriteAllText($"{path}/{fileName}", rdf);
-                var bytes = File.ReadAllBytes($"{path}/{fileName}");
-                var objeto = new { rdfFile = bytes };
-                CallPostApi("etl/data-publish", objeto);
+                var bytes = Encoding.UTF8.GetBytes(rdf);
+                MultipartFormDataContent multiContent = new MultipartFormDataContent();
+                multiContent.Add(new ByteArrayContent(bytes), "rdfFile", "rdfFile.rdf");
+                CallPostApiFile("etl/data-publish", multiContent);
             }
         }
 
@@ -100,17 +101,17 @@ namespace API_CARGA.Models.Services
             return result;
         }
 
-        private string CallPostApi(string urlMethod, object item)
+        private string CallPostApiFile(string urlMethod, MultipartFormDataContent item)
         {
-            string stringData = JsonConvert.SerializeObject(item);
-            var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+            //string stringData = JsonConvert.SerializeObject(item);
+            //var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
             string result = "";
             HttpResponseMessage response = null;
             try
             {
                 HttpClient client = new HttpClient();
                 string url = _serviceUrl.GetUrl();
-                response = client.PostAsync($"{url}{urlMethod}", contentData).Result;
+                response = client.PostAsync($"{url}{urlMethod}", item).Result;
                 response.EnsureSuccessStatusCode();
                 result = response.Content.ReadAsStringAsync().Result;
                 return result;
