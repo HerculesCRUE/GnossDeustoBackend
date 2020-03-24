@@ -1,5 +1,5 @@
 ## Sobre GnossDeustoBackend
-Éste es el repositorio del proyecto Hércules ASIO en el que se incluirán los programas y servicios
+Éste es el repositorio del proyecto Hércules ASIO en el que se incluiyen los siguientes programas y servicios
 
  - [API_CARGA](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA "API_CARGA"): Servicio web que realiza las tareas de carga/configuración.
  - [Api_Carga_Client/ApiCargaWebInterface](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Api_Carga_Client/ApiCargaWebInterface "This path skips through empty directories"):
