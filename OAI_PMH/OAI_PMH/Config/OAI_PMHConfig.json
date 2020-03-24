@@ -6,7 +6,7 @@
   "Granularity": "yyyy-MM-ddThh:mm:ssZ",
   "XML_CVN_Repository": "http://test.com",
   "PythonScript": "c:\\cvn\\main.py",
-  "PythonExe": "C:\\Users\\Alvaro\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
+  "PythonExe": "C:\\Users\\JRuiz\\AppData\\Local\\Programs\\Python\\Python38\\python.exe",
   "MetadataFormats": [
     {
       "prefix": "oai_dc",
