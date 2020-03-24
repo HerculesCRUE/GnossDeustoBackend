@@ -1,6 +1,7 @@
 # Sobre UrisFactory
 
 Este Api contiene dos controladores
+Accesible en pruebas en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/swagger/index.html
 
  - **Factory**: contiene el siguiente método para la generación de uris: 
 	 - **get /Factory** : Genera una uri de forma dinámica pasandole dos parámetros: 
