@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by RAFAEL GARCIA TAMARIT (FUNDACION ESPAÑOLA DE CIENCIA Y TECNOLOGIA) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:spec="http://cv.normalizado.org/CVNSubtype" xmlns:cvn="http://cv.normalizado.org/cvn" targetNamespace="http://cv.normalizado.org/CVNSubtype" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>
+						Version: 1.0.0		
+		</xs:documentation>
+		<xs:documentation>
+				Author:FECYT 
+				http://www.fecyt.es
+				http://cv.normalizado.org
+		</xs:documentation>
+	</xs:annotation>
+	<xs:import namespace="http://cv.normalizado.org/cvn" schemaLocation="ISOUtilities.xsd"/>
+	<xs:element name="CVNSubtype">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Subtype">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Item" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:complexContent>
+										<xs:extension base="spec:ItemType">
+											<xs:attribute name="code" use="required"/>
+										</xs:extension>
+									</xs:complexContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- elementos principales del item-->
+	<xs:complexType name="ItemType">
+		<xs:sequence>
+			<xs:element name="Name" type="spec:NameType"/>
+			<xs:element name="CodeSubtype1" type="xs:string"/>
+			<xs:element name="CodeSubtype2" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- tipos de datos-->
+	<xs:complexType name="NameType">
+		<xs:sequence>
+			<xs:element name="NameDetail" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Name" type="xs:string"/>
+						<xs:element name="ShortName" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="lang" type="cvn:ISO_639" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by Rosa Hernández (Fundación Española de Ciencua y Tecnología) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mo="http://cv.normalizado.org/CVNTreeModel" xmlns:cvn="http://cv.normalizado.org/cvn" targetNamespace="http://cv.normalizado.org/CVNTreeModel" elementFormDefault="qualified" attributeFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation>
+						Version: 1.0
+						Date: 2009-03-30		
+		</xs:documentation>
+		<xs:documentation>
+				Author:FECYT 
+				http://www.fecyt.es
+				http://cv.normalizado.org
+				contact: soporte.cvn@fecyt.es
+		</xs:documentation>
+	</xs:annotation>
+	<xs:element name="CVNTreeModel">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Node">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Version" type="mo:PropertyType"/>
+							<xs:element name="Agent" type="mo:PropertyType"/>
+							<xs:element name="CVNItem" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:complexContent>
+										<xs:extension base="mo:PropertyType">
+											<xs:attribute name="code"/>
+										</xs:extension>
+									</xs:complexContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="version" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="PropertyType">
+		<xs:sequence>
+			<xs:element name="Property" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="mo:IndicatorType">
+							<xs:attribute name="name" type="mo:PropertyName" use="required"/>
+							<xs:attribute name="code"/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IndicatorType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="CVNItem" minOccurs="0">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="mo:PropertyType">
+							<xs:attribute name="code"/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Indicator" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Value" type="xs:string" minOccurs="0"/>
+						<xs:element name="Child" type="mo:IndicatorType" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="name" use="required"/>
+					<xs:attribute name="code"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="PropertyName">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CvnItemID"/>
+			<xs:enumeration value="Subtype"/>
+			<xs:enumeration value="Title"/>
+			<xs:enumeration value="Description"/>
+			<xs:enumeration value="Subject"/>
+			<xs:enumeration value="Filter"/>
+			<xs:enumeration value="Edition"/>
+			<xs:enumeration value="Link"/>
+			<xs:enumeration value="Entity"/>
+			<xs:enumeration value="Date"/>
+			<xs:enumeration value="Author"/>
+			<xs:enumeration value="Dedication"/>
+			<xs:enumeration value="Roll"/>
+			<xs:enumeration value="Collaborator"/>
+			<xs:enumeration value="Place"/>
+			<xs:enumeration value="EconomicDimension"/>
+			<xs:enumeration value="PhysicalDimension"/>
+			<xs:enumeration value="Location"/>
+			<xs:enumeration value="ExternalPK"/>
+			<xs:enumeration value="LocalPK"/>
+			<xs:enumeration value="Scope"/>
+			<xs:enumeration value="Diffusion"/>
+			<xs:enumeration value="Quality"/>
+			<xs:enumeration value="Url"/>
+			<xs:enumeration value="Language"/>
+			<xs:enumeration value="Validation"/>
+			<xs:enumeration value="Contact"/>
+			<xs:enumeration value="Collection"/>
+			<xs:enumeration value="Identification"/>
+			<xs:enumeration value="Address"/>
+			<xs:enumeration value="VersionID"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
