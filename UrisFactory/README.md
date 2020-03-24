@@ -1,5 +1,7 @@
 # Sobre UrisFactory
-Accesible en pruebas en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/swagger/index.html.
+
+Accesible en pruebas en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/uris/swagger/index.html.
+
 Este Api contiene dos controladores.
 
 

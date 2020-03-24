@@ -87,7 +87,7 @@ namespace API_CARGA.Models.Utility
                             objeto = objeto.Replace(",", ".");
                         }
                     }
-                    triples.Add($"<{sujeto}>    <{propiedad}>   \"{objeto.Replace("\r\n", " ")}\"{lang}{dataType}.");
+                    triples.Add($"<{sujeto}>    <{propiedad}>   \"{objeto.Replace("\r\n", " ").Replace("\n", " ")}\"{lang}{dataType}.");
                 }
             }
 
