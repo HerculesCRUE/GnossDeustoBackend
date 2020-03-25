@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.ModelExamples
 {
-    public class ModifyShapeConfigResponseError : IExamplesProvider<ErrorExample>
+    public class ModifySyncErrorResponse : IExamplesProvider<ErrorExample>
     {
         public ErrorExample GetExamples()
         {
             return new ErrorExample
             {
-                Error = "Check that shape config with id {identifier} exist"
+                Error = "Check that sync config with id {identifier} exist"
             };
         }
     }

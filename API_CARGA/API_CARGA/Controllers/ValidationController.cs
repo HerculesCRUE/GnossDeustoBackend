@@ -59,7 +59,7 @@ namespace API_CARGA.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(Guid))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ErrorExample))]
-        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(AddShapeConfigResponseError))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(AddShapeConfigErrorResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult AddShape(ShapeConfig shapeconfig)
         {
@@ -103,7 +103,7 @@ namespace API_CARGA.Controllers
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ErrorExample))]
-        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(ModifyShapeConfigResponseError))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(ModifyShapeConfigErrorResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult ModifyShape(ShapeConfig shapeconfig)
         {

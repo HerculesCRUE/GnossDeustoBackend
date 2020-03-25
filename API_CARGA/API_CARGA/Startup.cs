@@ -52,8 +52,13 @@ namespace PRH
 
             services.AddSwaggerExamplesFromAssemblyOf<ShapeConfigResponse>();
             services.AddSwaggerExamplesFromAssemblyOf<ShapesConfigsResponse>();
-            services.AddSwaggerExamplesFromAssemblyOf<AddShapeConfigResponseError>();
-            services.AddSwaggerExamplesFromAssemblyOf<ModifyShapeConfigResponseError>();
+            services.AddSwaggerExamplesFromAssemblyOf<AddShapeConfigErrorResponse>();
+            services.AddSwaggerExamplesFromAssemblyOf<ModifyShapeConfigErrorResponse>();
+
+            services.AddSwaggerExamplesFromAssemblyOf<ConfigSyncsResponse>();
+            services.AddSwaggerExamplesFromAssemblyOf<ConfigSyncResponse>();
+            services.AddSwaggerExamplesFromAssemblyOf<AddSyncErrorResponse>();
+            services.AddSwaggerExamplesFromAssemblyOf<ModifySyncErrorResponse>();
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {
@@ -68,6 +73,8 @@ namespace PRH
             services.AddScoped<IRepositoriesConfigService, RepositoriesConfigBDService>();
             //services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
             services.AddScoped<IShapesConfigService, ShapesConfigBDService>();
+            //services.AddSingleton<ISyncConfigService, SyncConfigMockService>();
+            services.AddScoped<ISyncsConfigService, SyncsConfigBDService>();
 
 
             services.AddSingleton(typeof(SparqlConfigJson));
