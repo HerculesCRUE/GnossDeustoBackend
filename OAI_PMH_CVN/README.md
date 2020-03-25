@@ -11,5 +11,5 @@ Para ello, esté servicio hará uso de dos servicios externos:
 
 En estos momentos aún no se hace uso de estos dos servicios:
  - El API CVN UM está pendiente de probar, de momento se trabaja con un mock que provee siempre los dos mismos cv.
- - El CVN: Su funcionamiento ahora mismo está integrado dentro del servicio OAI PMH CVN, peo se externalizará a este servicio.
+ - El CVN: Su funcionamiento ahora mismo está integrado dentro del servicio OAI PMH CVN, pero se externalizará a este servicio.
 
