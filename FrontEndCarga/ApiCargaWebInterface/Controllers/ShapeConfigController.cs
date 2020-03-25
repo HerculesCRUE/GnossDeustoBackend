@@ -14,6 +14,7 @@ namespace ApiCargaWebInterface.Controllers
         {
             _serviceApi = serviceApi;
         }
+
         public IActionResult Index()
         {
             List<ShapeConfigViewModel> result = _serviceApi.GetShapeConfigs();

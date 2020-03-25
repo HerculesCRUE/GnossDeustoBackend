@@ -44,9 +44,15 @@ namespace ApiCargaWebInterface
             app.UseStatusCodePagesWithReExecute("/error/{0}");
             
             app.UseHttpsRedirection();
-            
-            app.UseStaticFiles();
 
+            app.UsePathBase("/carga-web");
+            app.Use((context, next) =>
+            {
+                context.Request.PathBase = "/carga-web";
+                return next();
+            });
+            app.UseStaticFiles();
+            
             app.UseRouting();
 
             app.UseAuthorization();
