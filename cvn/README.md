@@ -89,8 +89,8 @@ curl --location --request POST 'http://127.0.0.1:5000/v1/convert?orcid=0000-0001
 --data-binary '@examples/cvn_202033-Diego.xml'
 ```
 
-Recomendable usar en Windows " en vez de ', el comando sería:
-curl --location --request POST "http://127.0.0.1:5000/v1/convert?orcid=0000-0001-8055-6823" --header "Content-Type: application/x-www-form-urlencoded" --data-binary "@examples/cvn_202033-Diego.xml" 
+> Recomendable usar en Windows `"` en vez de `'`, el comando sería:
+> `curl --location --request POST "http://127.0.0.1:5000/v1/convert?orcid=0000-0001-8055-6823" --header "Content-Type: application/x-www-form-urlencoded" --data-binary "@examples/cvn_202033-Diego.xml"`
 
 #### C# - RestSharp
 
