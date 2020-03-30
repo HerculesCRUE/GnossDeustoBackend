@@ -1,13 +1,4 @@
 {
-  "XML_CVN_Repository": "http://test.com",
-  "PythonScript": "c:\\cvn\\main.py",
-  "PythonExe": "C:\\Users\\Alvaro\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
-  "Sets": [
-    {
-      "spec": "cvn",
-      "name": "Currículum Vítae Normalizado",
-      "description": "Currículum Vítae Normalizado"
-    }
-
-  ]
+  "XML_CVN_Repository": "http://curriculumpruebas.um.es:81/curriculum/rest/v1/auth/",
+  "CVN_ROH_converter": "http://herc-as-front-desa.atica.um.es/cvn/v1/convert"
 }

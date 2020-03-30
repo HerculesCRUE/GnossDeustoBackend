@@ -33,7 +33,7 @@ namespace OAI_PMH.Controllers
             _configOAI = OaiConfiguration.Instance;
             _configOAI.SupportSets = true;
             _configOAI.RepositoryName = "OAI_PMH_CVN";
-            _configOAI.Granularity = "yyyy-MM-ddThh:mm:ssZ";
+            _configOAI.Granularity = "yyyy-MM-dd";
         }
 
         

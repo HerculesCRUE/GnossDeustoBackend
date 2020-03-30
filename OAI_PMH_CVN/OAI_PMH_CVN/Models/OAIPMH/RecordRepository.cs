@@ -5,9 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using OAI_PMH_CVN.Models.Services;
 using OaiPmhNet.Converters;
 using OaiPmhNet.Models;
 using OaiPmhNet.Models.Services;
+using RestSharp;
 
 namespace OaiPmhNet.Models.OAIPMH
 {
@@ -42,7 +44,7 @@ namespace OaiPmhNet.Models.OAIPMH
         /// <returns></returns>
         public Record GetRecord(string identifier, string metadataPrefix)
         {
-            CVN CVN = GetCurriculum(identifier);
+            CVN CVN = GetCurriculum(identifier, false,_configService.GetConfig().XML_CVN_Repository);
             return ToRecord(CVN, metadataPrefix);
         }
 
@@ -60,24 +62,24 @@ namespace OaiPmhNet.Models.OAIPMH
             {
                 inicio = from;
             }
-
-            HashSet<string> ids = GetCurriculumsIDs(inicio);
+            HashSet<string> ids = GetCurriculumsIDs(inicio, _configService.GetConfig().XML_CVN_Repository);
             List<CVN> listCVN = new List<CVN>();
             foreach (string id in ids)
             {
-                listCVN.Add(GetCurriculum(id));
+                listCVN.Add(GetCurriculum(id, arguments.Verb == OaiVerb.ListIdentifiers.ToString(), _configService.GetConfig().XML_CVN_Repository));
             }
-
             if (arguments.Verb == OaiVerb.ListIdentifiers.ToString())
-            {
-                container.Records = listCVN.Select(r => ToRecord(r, arguments.MetadataPrefix));
-            }
-            else
             {
                 container.Records = listCVN.Select(r => ToIdentifiersRecord(r));
             }
+            else
+            {
+                container.Records = listCVN.Select(r => ToRecord(r, arguments.MetadataPrefix));
+
+            }
             return container;
         }
+
 
         /// <summary>
         /// Obtiene los identificadores del repositorio en función de los argumentos pasados
@@ -103,8 +105,7 @@ namespace OaiPmhNet.Models.OAIPMH
             {
                 Header = new RecordHeader()
                 {
-                    Identifier = pCVN.Id.ToString(),
-                    Datestamp = pCVN.Date
+                    Identifier = pCVN.Id.ToString()
                 }
             };
 
@@ -125,24 +126,12 @@ namespace OaiPmhNet.Models.OAIPMH
             {
                 Header = new RecordHeader()
                 {
-                    Identifier = pCVN.Id.ToString(),
-                    Datestamp = pCVN.Date
+                    Identifier = pCVN.Id.ToString()
                 }
             };
 
             switch (pMetadataPrefix)
             {
-                case "oai_dc":
-                    record.Metadata = new RecordMetadata()
-                    {
-                        Content = _dublinCoreMetadataConverter.Encode(new DublinCoreMetadata()
-                        {
-                            Title = new List<string>() { pCVN.Name },
-                            Date = new List<DateTime>() { pCVN.Date },
-                            Identifier = new List<string> { pCVN.Id.ToString() }
-                        })
-                    };
-                    break;
                 case "rdf":
                     record.Metadata = new RecordMetadata()
                     {
@@ -157,62 +146,39 @@ namespace OaiPmhNet.Models.OAIPMH
         /// Obtiene los IDs de los curriculums desde una fecha de inicio
         /// </summary>
         /// <param name="pInicio">Fecha de inicio</param>
+        /// <param name="pXML_CVN_Repository">Ruta del repositorio de CVN</param>
         /// <returns>Identificadores de os curriculums</returns>
-        private HashSet<string> GetCurriculumsIDs(DateTime pInicio)
+        private HashSet<string> GetCurriculumsIDs(DateTime pInicio, string pXML_CVN_Repository)
         {
-            HashSet<string> listaIDS = new HashSet<string>();
-            listaIDS.Add("0000-0001-8055-6823");//Diego
-            listaIDS.Add("0000-0002-7558-2880");//Jesualdo
-            return listaIDS;
-
-            /* [ENTORNO]/curriculum/rest/v1/auth/changes?date=[YYYY-MM-DD]	GET	user y key	HTTP 200	"ids": {1, 2, 3, ...} */
-            //string responseString = "";
-            //WebRequest request = WebRequest.Create(
-            //  $"{_configJsonHandler.GetConfig().XML_CVN_Repository}/curriculum/rest/v1/auth/changes?date=[{pInicio.Year}-{pInicio.Month}-{pInicio.Day}]");
-            //WebResponse response = request.GetResponse();
-            //using (Stream dataStream = response.GetResponseStream())
-            //{
-            //    StreamReader reader = new StreamReader(dataStream);
-            //    responseString = reader.ReadToEnd();
-            //}
-            //// Close the response.  
-            //response.Close();
-            //return JsonConvert.DeserializeObject<HashSet<string>>(responseString);          
+            var client = new RestClient($"{pXML_CVN_Repository}changes?date={pInicio.Year}-{pInicio.Month}-{pInicio.Day}");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("application", "asio");
+            request.AddHeader("key", "asiokey");
+            XML_CVN_Repository_Response respuesta = JsonConvert.DeserializeObject<XML_CVN_Repository_Response>(client.Execute(request).Content);
+            return new HashSet<string>(respuesta.ids.Select(x=>x.ToString()));
         }
 
-        private CVN GetCurriculum(string pId)
+        /// <summary>
+        /// Obtiene un CVN
+        /// </summary>
+        /// <param name="pId">Identificador</param>
+        /// <param name="pOnlyIDs">Obtiene solo el CVN con el IDID</param>
+        /// <param name="pXML_CVN_Repository">Ruta del repositorio de CVN</param>
+        /// <returns></returns>
+        private CVN GetCurriculum(string pId, bool pOnlyIDs, string pXML_CVN_Repository)
         {
-            string responseString = System.IO.File.ReadAllText($"Config/{pId}.xml");
-            return new CVN(responseString,pId, _configService.GetConfig().PythonExe, _configService.GetConfig().PythonScript);
-
-            //WebRequest request = WebRequest.Create(
-            //  $"{_configJsonHandler.GetConfig().XML_CVN_Repository}/curriculum/rest/v1/auth/cvn?id=[{pId}]");
-            //WebResponse response = request.GetResponse();
-            //using (Stream dataStream = response.GetResponseStream())
-            //{
-            //    StreamReader reader = new StreamReader(dataStream);
-            //    responseString = reader.ReadToEnd();
-            //}
-            //// Close the response.  
-            //response.Close();
-
-            //return new CVN(responseString);
-
-
-            /*[ENTORNO]/curriculum/rest/v1/auth/cvn?id=[identificador]	GET	user y key	HTTP 200	XML*/
-            //string responseString = "";
-            //WebRequest request = WebRequest.Create(
-            //  $"{_configJsonHandler.GetConfig().XML_CVN_Repository}/curriculum/rest/v1/auth/cvn?id=[{pId}]");
-            //WebResponse response = request.GetResponse();
-            //using (Stream dataStream = response.GetResponseStream())
-            //{
-            //    StreamReader reader = new StreamReader(dataStream);
-            //    responseString = reader.ReadToEnd();
-            //}
-            //// Close the response.  
-            //response.Close();
-
-            //return new CVN(responseString);
+            string xml = "";
+            if (!pOnlyIDs)
+            {
+                var client = new RestClient($"{pXML_CVN_Repository}cvn?id={pId}");
+                client.Timeout = -1;
+                var request = new RestRequest(Method.GET);
+                request.AddHeader("application", "asio");
+                request.AddHeader("key", "asiokey");
+                xml = client.Execute(request).Content;
+            }
+            return new CVN(xml, pId, _configService.GetConfig().CVN_ROH_converter);
         }
 
     }

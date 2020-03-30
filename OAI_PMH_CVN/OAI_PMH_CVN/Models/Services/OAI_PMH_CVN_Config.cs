@@ -9,17 +9,14 @@ namespace OaiPmhNet.Models.Services
     /// </summary>
     public class OAI_PMH_CVN_Config
     {
-
-        //public string XML_CVN_Repository { get; set; }        
+        /// <summary>
+        /// Ruta del servicio repositorio de CVN
+        /// </summary>
+        public string XML_CVN_Repository { get; set; }        
 
         /// <summary>
-        /// Ruta del Script de Python encargado de transformar el XML del CVN a RDF
+        /// Ruta del servicio convertidor de CVN a RDF ROH
         /// </summary>
-        public string PythonScript { get; set; }
-
-        /// <summary>
-        /// Ruta del ejecutable de Pyhton
-        /// </summary>
-        public string PythonExe { get; set; }
+        public string CVN_ROH_converter { get; set; }
     }
 }
