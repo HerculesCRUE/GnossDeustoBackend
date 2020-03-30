@@ -23,11 +23,12 @@ namespace OaiPmhNet.Models.OAIPMH
         {
             if (!string.IsNullOrEmpty(pXML_CVN))
             {
-                while(pId.Length<4)
+                string id_Aux = pId;
+                while (id_Aux.Length<4)
                 {
-                    pId = "0" + pId;
+                    id_Aux = "0" + id_Aux;
                 }
-                var client = new RestClient($"{ pRutaCVN_ROH_converter }?orcid=0000-0001-8055-{pId}");
+                var client = new RestClient($"{ pRutaCVN_ROH_converter }?orcid=0000-0001-8055-{id_Aux}");
                 client.Timeout = -1;
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
