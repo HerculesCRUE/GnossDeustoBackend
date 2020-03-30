@@ -1,5 +1,5 @@
 {
-  "graph": "http://test.com",
+  "graph": "http://data.um.es/graph/um_cvn",
   "endpoint": "http://localhost:8890/sparql",
   "queryparam": "query"
 }

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://cv.normalizado.org/cvn" targetNamespace="http://cv.normalizado.org/cvn">
+	<include schemaLocation="ISOUtilities.xsd"/>
+	<annotation>
+		<documentation>
+			Version:  1.0.9
+			Date:2008-10-23
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>
+				Author:FECYT 
+				http://www.fecyt.es
+				http://cv.normalizado.org
+		</documentation>
+	</annotation>
+	<!-- 
+		**********************************************
+			string 
+		**********************************************
+	-->
+	<complexType name="CVN_string">
+		<sequence>
+			<element name="Item" type="string"/>
+		</sequence>
+		<attribute name="code" type="string" use="optional"/>
+		<attribute name="obligatory" type="boolean" use="optional"/>
+		<attribute name="multiplicity" type="boolean" use="optional"/>
+		<attribute name="attribute" type="string" use="optional"/>
+	</complexType>
+	<!-- 
+		**********************************************
+			email
+		**********************************************
+	-->
+	<complexType name="CVN_InternetEmailAddressType">
+		<sequence>
+			<element name="Item" type="tns:emailType"/>
+		</sequence>
+		<attribute name="code" type="string" use="optional"/>
+		<attribute name="obligatory" type="boolean" use="optional"/>
+		<attribute name="multiplicity" type="boolean" use="optional"/>
+		<attribute name="attribute" type="string" use="optional"/>
+	</complexType>
+	<simpleType name="emailType">
+		<restriction base="string">
+			<pattern value="(.*@.*)"/>
+		</restriction>
+	</simpleType>
+	<!-- 
+		**********************************************
+			CVN_ISO_639
+		**********************************************
+	-->
+	<complexType name="CVN_ISO_639">
+		<sequence>
+			<element name="Item" type="tns:ISO_639"/>
+		</sequence>
+		<attribute name="code" type="string" use="optional"/>
+		<attribute name="obligatory" type="boolean" use="optional"/>
+		<attribute name="multiplicity" type="boolean" use="optional"/>
+		<attribute name="attribute" type="string" use="optional"/>
+	</complexType>
+	<!-- 
+		**********************************************
+			CVN_ISO_3166
+		**********************************************
+	-->
+	<complexType name="CVN_ISO_3166">
+		<sequence>
+			<element name="Item" type="tns:ISO_3166"/>
+		</sequence>
+		<attribute name="code" type="string" use="optional"/>
+		<attribute name="obligatory" type="boolean" use="optional"/>
+		<attribute name="multiplicity" type="boolean" use="optional"/>
+		<attribute name="attribute" type="string" use="optional"/>
+	</complexType>
+	<!-- 
+		**********************************************
+			Date
+		**********************************************
+	-->
+	<complexType name="CVN_date">
+		<sequence>
+			<element name="Item" type="date"/>
+		</sequence>
+		<attribute name="code" type="string" use="optional"/>
+		<attribute name="obligatory" type="boolean" use="optional"/>
+		<attribute name="multiplicity" type="boolean" use="optional"/>
+		<attribute name="attribute" type="string" use="optional"/>
+	</complexType>
+	<complexType name="CVN_duration">
+		<sequence>
+			<element name="Item" type="duration"/>
+		</sequence>
+		<attribute name="code" type="string" use="optional"/>
+		<attribute name="obligatory" type="boolean" use="optional"/>
+		<attribute name="multiplicity" type="boolean" use="optional"/>
+		<attribute name="attribute" type="string" use="optional"/>
+	</complexType>
+	<complexType name="CVN_gYearMonth">
+		<sequence>
+			<element name="Item" type="gYearMonth"/>
+		</sequence>
+		<attribute name="code" type="string" use="optional"/>
+		<attribute name="obligatory" type="boolean" use="optional"/>
+		<attribute name="multiplicity" type="boolean" use="optional"/>
+		<attribute name="attribute" type="string" use="optional"/>
+	</complexType>
+	<complexType name="CVN_gYear">
+		<sequence>
+			<element name="Item" type="gYear"/>
+		</sequence>
+		<attribute name="code" type="string" use="optional"/>
+		<attribute name="obligatory" type="boolean" use="optional"/>
+		<attribute name="multiplicity" type="boolean" use="optional"/>
+		<attribute name="attribute" type="string" use="optional"/>
+	</complexType>
+	<!-- 
+		**********************************************
+			FlexibleDatesType
+		**********************************************
+	-->
+	<complexType name="FlexibleDatesType">
+		<choice>
+			<element name="DayMonthYear" type="tns:CVN_date"/>
+			<element name="MonthYear" type="tns:CVN_gYearMonth"/>
+			<element name="Year" type="tns:CVN_gYear"/>
+		</choice>
+	</complexType>
+	<!-- 
+		**********************************************
+			Boolean
+		**********************************************
+	-->
+	<complexType name="CVN_boolean">
+		<sequence>
+			<element name="Item" type="boolean"/>
+		</sequence>
+		<attribute name="code" type="string" use="optional"/>
+		<attribute name="obligatory" type="boolean" use="optional"/>
+		<attribute name="multiplicity" type="boolean" use="optional"/>
+		<attribute name="attribute" type="string" use="optional"/>
+	</complexType>
+	<!-- 
+	    ######################################################
+			ExtensionType
+		######################################################
+	 -->
+	<complexType name="ExtensionType">
+		<sequence>
+			<element name="Name" type="tns:CVN_string"/>
+			<element name="Value" type="tns:CVN_string"/>
+			<element name="Type" type="tns:CVN_string"/>
+		</sequence>
+	</complexType>
+</schema>

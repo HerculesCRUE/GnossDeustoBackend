@@ -6,6 +6,7 @@ using API_CARGA.Middlewares;
 using API_CARGA.ModelExamples;
 using API_CARGA.Models;
 using API_CARGA.Models.Services;
+using IdentityServer4.EntityFramework.DbContexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using Microsoft.OpenApi.Models;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 using Swashbuckle.AspNetCore.Filters;
 
 
@@ -52,22 +54,36 @@ namespace PRH
 
             services.AddSwaggerExamplesFromAssemblyOf<ShapeConfigResponse>();
             services.AddSwaggerExamplesFromAssemblyOf<ShapesConfigsResponse>();
-            services.AddSwaggerExamplesFromAssemblyOf<AddShapeConfigResponseError>();
-            services.AddSwaggerExamplesFromAssemblyOf<ModifyShapeConfigResponseError>();
+            services.AddSwaggerExamplesFromAssemblyOf<AddShapeConfigErrorResponse>();
+            services.AddSwaggerExamplesFromAssemblyOf<ModifyShapeConfigErrorResponse>();
+
+            services.AddSwaggerExamplesFromAssemblyOf<ConfigSyncsResponse>();
+            services.AddSwaggerExamplesFromAssemblyOf<ConfigSyncResponse>();
+            services.AddSwaggerExamplesFromAssemblyOf<AddSyncErrorResponse>();
+            services.AddSwaggerExamplesFromAssemblyOf<ModifySyncErrorResponse>();
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
 
+            
+            services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
+            {
+                var builder = new NpgsqlDbContextOptionsBuilder(opt);
+                builder.SetPostgresVersion(new Version(9, 6));
+                
+                opt.UseNpgsql(Configuration.GetConnectionString("PostgreConnectionmigration"));
 
-            services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("PostgreConnectionmigration")));
+            });
             services.AddSingleton(typeof(ConfigUrlService));
             services.AddScoped(typeof(OaiPublishRDFService));
             //services.AddSingleton<IRepositoriesConfigService, RepositoriesConfigMockService>();
             services.AddScoped<IRepositoriesConfigService, RepositoriesConfigBDService>();
             //services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
             services.AddScoped<IShapesConfigService, ShapesConfigBDService>();
+            //services.AddSingleton<ISyncConfigService, SyncConfigMockService>();
+            services.AddScoped<ISyncsConfigService, SyncsConfigBDService>();
 
 
             services.AddSingleton(typeof(SparqlConfigJson));

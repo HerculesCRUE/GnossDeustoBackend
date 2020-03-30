@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace API_CARGA.Models.Entities
 {
@@ -13,26 +12,28 @@ namespace API_CARGA.Models.Entities
         /// <summary>
         /// Identificador de la sincronización
         /// </summary>
-        public string identifier { get; set; }
+        [Key]
+        public Guid SyncConfigID { get; set; }
         /// <summary>
         /// Nombre de la sincronización
         /// </summary>
-        public string name { get; set; }
+        [Required]
+        public string Name { get; set; }
         /// <summary>
         /// Hora de inicio, en formato 00:00
         /// </summary>
-        public string startHour { get; set; }
+        public string StartHour { get; set; }
         /// <summary>
         /// Frecuencia de la actualización en segundos
         /// </summary>
-        public int updateFrequency { get; set; }
+        public int UpdateFrequency { get; set; }
         /// <summary>
         /// Identificador del repositorio del que se recuperarán los datos
         /// </summary>
-        public string repositoryIdentifier { get; set; }
+        public Guid RepositoryIdentifier { get; set; }
         /// <summary>
         /// Identificador de los sets del repositorio que se recuperarán en la sincronización
         /// </summary>
-        public List<string> repositorySetIdentifiers { get; set; }
+        public List<string> RepositorySetIdentifiers { get; set; }
     }
 }
