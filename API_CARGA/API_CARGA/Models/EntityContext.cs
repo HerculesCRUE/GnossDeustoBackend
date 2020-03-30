@@ -1,10 +1,5 @@
 ﻿using API_CARGA.Models.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API_CARGA.Models
 {

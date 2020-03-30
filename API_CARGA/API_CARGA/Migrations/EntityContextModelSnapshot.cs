@@ -21,73 +21,73 @@ namespace API_CARGA.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("API_CARGA.Models.Entities.RepositoryConfig", b =>
-                {
-                    b.Property<Guid>("RepositoryConfigID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+            {
+                b.Property<Guid>("RepositoryConfigID")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.Property<string>("OauthToken")
-                        .HasColumnType("text");
+                b.Property<string>("OauthToken")
+                    .HasColumnType("text");
 
-                    b.Property<string>("Url")
-                        .HasColumnType("text");
+                b.Property<string>("Url")
+                    .HasColumnType("text");
 
-                    b.HasKey("RepositoryConfigID");
+                b.HasKey("RepositoryConfigID");
 
-                    b.ToTable("RepositoryConfig");
-                });
+                b.ToTable("RepositoryConfig");
+            });
 
             modelBuilder.Entity("API_CARGA.Models.Entities.ShapeConfig", b =>
-                {
-                    b.Property<Guid>("ShapeConfigID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+            {
+                b.Property<Guid>("ShapeConfigID")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid");
 
-                    b.Property<string>("EntityClass")
-                        .HasColumnType("text");
+                b.Property<string>("EntityClass")
+                    .HasColumnType("text");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.Property<string>("Shape")
-                        .HasColumnType("text");
+                b.Property<string>("Shape")
+                    .HasColumnType("text");
 
-                    b.HasKey("ShapeConfigID");
+                b.HasKey("ShapeConfigID");
 
-                    b.ToTable("ShapeConfig");
-                });
+                b.ToTable("ShapeConfig");
+            });
 
             modelBuilder.Entity("API_CARGA.Models.Entities.SyncConfig", b =>
-                {
-                    b.Property<Guid>("SyncConfigID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+            {
+                b.Property<Guid>("SyncConfigID")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.Property<Guid>("RepositoryIdentifier")
-                        .HasColumnType("uuid");
+                b.Property<Guid>("RepositoryIdentifier")
+                    .HasColumnType("uuid");
 
-                    b.Property<List<string>>("RepositorySetIdentifiers")
-                        .HasColumnType("text[]");
+                b.Property<List<string>>("RepositorySetIdentifiers")
+                    .HasColumnType("text[]");
 
-                    b.Property<string>("StartHour")
-                        .HasColumnType("text");
+                b.Property<string>("StartHour")
+                    .HasColumnType("text");
 
-                    b.Property<int>("UpdateFrequency")
-                        .HasColumnType("integer");
+                b.Property<int>("UpdateFrequency")
+                    .HasColumnType("integer");
 
-                    b.HasKey("SyncConfigID");
+                b.HasKey("SyncConfigID");
 
-                    b.ToTable("SyncConfig");
-                });
+                b.ToTable("SyncConfig");
+            });
 #pragma warning restore 612, 618
         }
     }
