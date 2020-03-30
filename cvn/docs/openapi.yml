@@ -1,0 +1,41 @@
+openapi: 3.0.0
+info:
+  title: Servicio conversión CVN-ROH
+  description: Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH.
+  version: af0908b
+servers:
+  - url: http://localhost:5000/v1
+paths:
+  /convert:
+    post:
+      summary: Convierte CVN XML a tripletas ROH
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+              format: binary
+      parameters:
+        - name: orcid
+          in: query
+          required: true
+          description: ORCID de la persona del CVN a convertir
+          schema:
+            type: string
+        - name: format
+          in: query
+          required: false
+          description: Formato de salida deseado
+          schema:
+            type: string
+            enum: ['xml', 'n3', 'turtle', 'nt', 'pretty-xml', 'trix', 'trig', 'nquads']
+            default: 'xml'
+      responses:
+        '200':
+          description: "Resultado de la conversión, en el formato que se haya pedido (xml por defecto)"
+        '500':
+          description: "Error de conversión (archivo demasiado grande/mal formateado) o del servidor en general."
+        "422":
+          description: "Error de validación. Algún campo no se está incluyendo o se está incluyendo mal. Ver mensaje de respuesta"
+          
