@@ -14,6 +14,7 @@ import secrets  # temporal, para generar las ID de ciertas entidades
 import urllib.parse
 from flask import Flask, request, make_response, jsonify
 import re
+import requests
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB máx.
@@ -28,7 +29,6 @@ code_name = {}
 
 @app.route('/v1/convert', methods=['POST'])
 def v1_convert():
-
     # Validar la solicitud
     # Comprobar el archivo que nos llega
     # Comprobar los argumentos
@@ -60,7 +60,6 @@ def v1_convert():
     except Exception as e:
         return make_error_response("Error while parsing the XML.")
 
-
     # Crear el grafo, lo iremos rellenando más abajo
     # Le inyectamos el término corto de la ontología roh
 
@@ -74,7 +73,7 @@ def v1_convert():
     g = Graph()
     g.namespace_manager = namespace_manager
 
-    person = URIRef("https://purl.org/roh/researcher/" + str(params['orcid']))
+    person = URIRef(generate_uri('Researcher', params['orcid']))
 
     # Vamos a ir recorriendo el árbol XML del documento CVN e iremos sacando, cuando sea necesario, información, para
     # luego insertarla en tripletas generadas al vuelo con rdflib
@@ -191,20 +190,20 @@ def v1_convert():
                         print(">>> DOI: " + str(doi))
 
             if doi is None:
-                publication = URIRef("https://purl.org/roh/article/" + str(
-                    secrets.token_hex(6)))  # TODO integrar backend generador URIs desarrollado por GNOSS
+
+                publication = URIRef(generate_uri('Article', secrets.token_hex(6)))
             else:
-                publication = URIRef("https://purl.org/roh/article/" + urllib.parse.quote_plus(str(doi)))
+                publication = URIRef(generate_uri('Article', urllib.parse.quote_plus(str(doi))))
             g.add((publication, RDF.type, bibo.AcademicArticle))
             g.add((publication, roh.title, Literal(str(title))))
             # Journal object
             if journal is not None:
                 # Generar a URI
                 if issn is None:  # Si no hemos detectado el ISSN, generamos un número al azar
-                    journal_object = URIRef(
-                        "https://purl.org/roh/journal/" + urllib.parse.quote_plus(str(secrets.token_hex(6))))
+                    journal_object = URIRef(generate_uri("Journal", urllib.parse.quote_plus(str(secrets.token_hex(6)))))
                 else:
-                    journal_object = URIRef("https://purl.org/roh/journal/" + urllib.parse.quote_plus(str(issn)))
+
+                    journal_object = URIRef(generate_uri("Journal", urllib.parse.quote_plus(str(issn))))
                 g.add((journal_object, RDF.type, bibo.Journal))
                 g.add((journal_object, roh.title, Literal(str(journal))))
                 g.add((journal_object, vivo.publicationVenueFor, publication))
@@ -261,14 +260,50 @@ def code_get_name(code, lang='spa'):
 def make_validation_error(message):
     return make_response(jsonify({'error': message}), 422)  # 422 = Unprocessable Entity
 
+
 def make_error_response(message):
     return make_response(jsonify({'error': message}), 500)  # 422 = Unprocessable Entity
+
+
+# Caché de URIs generadas
+# TODO mover a un servicio externo
+cached_uris = {}
+
+
+def generate_uri(resource_class, identifier):
+    """
+    Generar, usando la API HTTP, las URIs correspondientes a cada entidad.
+    :param resource_class:
+    :param identifier:
+    :return: la URI
+    """
+    # Antes de intentar obtener la URI, comprobar a ver si la tenemos ya en caché
+    cache_id = resource_class + "." + identifier
+    if cache_id in cached_uris:
+        return cached_uris[cache_id]
+
+    api_response = requests.get("http://herc-as-front-desa.atica.um.es/uris/Factory", params={
+        'resource_class': resource_class,
+        'identifier': identifier
+    })
+
+    # Si falla:
+    if api_response.status_code != 200:
+        return "http://data.um.es/class/" + resource_class + "/" + identifier
+
+    # TODO comprobar que lo que devuelve es de hecho una URL bien formateada
+
+    # Guardamos en caché si sale bien
+    result = api_response.text
+    cached_uris[cache_id] = result
+    return result
+
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Servidor HTTP que ofrece una API para convertir XML CVN a tripletas "
                                                  "ROH")
-    parser.add_argument("-p", "--port", type=int, default=5000, choices=range(0,65536),
+    parser.add_argument("-p", "--port", type=int, default=5000, choices=range(0, 65536),
                         help="El puerto en el que se ejecutará el servidor HTTP (por defecto 5000)", metavar="")
     parser.add_argument("--debug", action="store_true", help="DEBUG: activar modo debug (aumenta tiempo de ejecución)")
     args = parser.parse_args()
