@@ -1,5 +1,6 @@
 using System;
 
+
 namespace ApiCargaWebInterface.Models
 {
     public class ErrorViewModel
