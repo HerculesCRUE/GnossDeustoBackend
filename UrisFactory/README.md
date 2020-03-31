@@ -17,49 +17,48 @@ Este Api contiene dos controladores.
 	 - **Get /Schema{name}:** Obtiene un esquema de uris
 	 >Los métodos correspondientes a Schema reciben o devuelven un objeto de esquema de uris como puede por ejemplo:
 	
-[	
-	{
-	      "uriStructure": {
-	        "name": "uriExampleStructure",
-	        "components": [
-	          {
-	            "uriComponent": "base",
-	            "uriComponentValue": "base",
-	            "uriComponentOrder": 1,
-	            "mandatory": true,
-	            "finalCharacter": "/"
-	          },
-	          {
-	            "uriComponent": "character",
-	            "uriComponentValue": "character@RESOURCE",
-	            "uriComponentOrder": 2,
-	            "mandatory": true,
-	            "finalCharacter": "/"
-	          },
-	          {
-	            "uriComponent": "resourceClass",
-	            "uriComponentValue": "resourceClass@RESOURCECLASS",
-	            "uriComponentOrder": 3,
-	            "mandatory": true,
-	            "finalCharacter": "/"
-	          },
-	          {
-	            "uriComponent": "identifier",
-	            "uriComponentValue": "@ID",
-	            "uriComponentOrder": 4,
-	            "mandatory": true,
-	            "finalCharacter": ""
-	          }
-	        ]
-	      },
-	      "resourcesClass": {
-	        "resourceClass": "Example",
-	        "labelResourceClass": "example",
-	        "resourceURI": "uriExampleStructure"
-	      }
-	}
-]	 
-
+	    [
+		    {
+			    "uriStructure": {
+				    "name": "uriExampleStructure",  
+				    "components": [
+					    {
+						    "uriComponent": "base",
+						    "uriComponentValue": "base",
+						    "uriComponentOrder": 1,
+						    "mandatory": true,
+						    "finalCharacter": "/"
+					    },
+					    {
+						    "uriComponent": "character",
+						    "uriComponentValue": "character@RESOURCE",
+						    "uriComponentOrder": 2,
+						    "mandatory": true,
+						    "finalCharacter": "/"
+					    },
+					    { 
+						    "uriComponent": "resourceClass",
+						    "uriComponentValue": "resourceClass@RESOURCECLASS",
+						    "uriComponentOrder": 3,
+						    "mandatory": true,
+						    "finalCharacter": "/"
+					    },
+					    { 
+						    "uriComponent": "identifier",  
+						    "uriComponentValue": "@ID",
+						    "uriComponentOrder": 4,
+						    "mandatory": true,
+						    "finalCharacter": ""
+					    }
+				    ]
+			    },  
+			    "resourcesClass": {  
+				    "resourceClass": "Example",
+				    "labelResourceClass": "example",
+				    "resourceURI": "uriExampleStructure"
+			    }
+		    }
+	    ]
 
 	 
 # Hércules backend asio. ESPECIFICACIÓN DE ESQUEMA DE URIS
@@ -69,26 +68,26 @@ Este Api contiene dos controladores.
  1. [Introducción](#introducción)
  2. [Características del esquema de Uris](#características-del-esquema-de-uris)
  3. [Estructura del esquema de Uris](#estructura-del-esquema-de-uris)
-	 3.1. [Base](#base)
-	 3.2. [Carácter de la información](#carácter-de-la-información)
-	 3.3. [Sector o ámbito](#sector-o-ámbito)
-	 3.4. [Dominio o temática](#domino-o-temática)
-	 3.5. [Conceptos específicos](#conceptos-específicos)
+	 1. [Base](#base)
+	 2. [Carácter de la información](#carácter-de-la-información)
+	 3. [Sector o ámbito](#sector-o-ámbito)
+	 4. [Dominio o temática](#domino-o-temática)
+	 5. [Conceptos específicos](#conceptos-específicos)
  4. [Tipos de uris](#tipos-de-uris)
-	 4.1. [Uri para identificar vocabularios](#uri-para-identificar-vocabularios)
-	 4.2. [Uri para identificar esquemas de conceptos](#uri-para-identificar-esquemas-de-conceptos)
-	 4.3. [Uri para identificar a cualquier instancia física o conceptual](#uri-para-identificar-a-cualquier-instancia-física-o-conceptual)
+	 1. [Uri para identificar vocabularios](#uri-para-identificar-vocabularios)
+	 2. [Uri para identificar esquemas de conceptos](#uri-para-identificar-esquemas-de-conceptos)
+	 3. [Uri para identificar a cualquier instancia física o conceptual](#uri-para-identificar-a-cualquier-instancia-física-o-conceptual)
  5. [Normalización de los componentes de los uris](#normalización-de-los-componentes-de-los-uris)
  6. [Prácticas relativas a la gestión de recursos semánticos a través de uri](#prácticas-relativas-a-la-gestión-de-recursos-semánticos-a-través-de-uri)
  7. [Definición del esquema de uris para la factoría de uris](#definición-del-esquema-de-uris-para-la-factoría-de-uris)
 
-## 1 Introducción
+## Introducción
 
 El presente documento describe la Especificación del Esquema de URIs de Hércules. En su elaboración tenemos en cuenta las recomendaciones de la [Norma Técnica de Interoperabilidad de Reutilización de recursos de la Información](https://www.boe.es/boe/dias/2013/03/04/pdfs/BOE-A-2013-2380.pdf) (NTI), de la Secretaría de Estado de Administraciones Públicas; que se basan, a su vez, en las iniciativas de datos abiertos y las recomendaciones procedentes del mundo de la Web Semántica.
 
 Como veremos, estas recomendaciones serán adaptadas al ámbito de un sistema de investigación universitaria; y tendrán presente la resolución y conexión de las entidades identificadas por la URIs.
 
-## 2 Características del esquema de Uris
+## Características del esquema de Uris
 
 Este documento de diseño del Esquema de URIs Hércules tendrá unos requisitos genéricos similares a los utilizados en la citada NTI. Estos requisitos serán:
 
@@ -98,7 +97,7 @@ Este documento de diseño del Esquema de URIs Hércules tendrá unos requisitos 
  4. No exponer información sobre la implementación técnica de los recursos que representan los URIs. En la medida de lo posible se omitirá información específica sobre la tecnología subyacente del recurso representado; por ejemplo, no se incluirán las extensiones correspondientes a tecnologías con las que se generan los recursos web como .php, .jsp, etc.
  5. Cumplir el principio de persistencia de los URIs, lo que significa que los que ya han sido creados previamente nunca deberían variar, y que el contenido al que hacen referencia debería ser accesible. En el caso de que sea necesario cambiar o eliminar el recurso al que apunta un identificador, se deberá establecer un mecanismo de información sobre el estado del recurso usando los códigos de estado de HTTP. En el caso de poder ofrecer una redirección a la nueva ubicación del recurso, se utilizarán los códigos de estado HTTP 3XX, mientras que para indicar que un recurso ha desaparecido permanentemente se utilizará el código de estado HTTP 410.
 
-## 3 Estructura del esquema de uris
+## Estructura del esquema de uris
 
 Los URIs generados tendrán una estructura uniforme que proporcionará coherencia al esquema de URIs de Hércules ASIO como sistema de representación de los recursos, de acuerdo con los requisitos genéricos previamente descritos y proporcionará información intuitiva sobre la procedencia y el tipo de información identificada.
 
@@ -108,7 +107,7 @@ http://{base}/{carácter}[/{dominio}][/{concepto}][.{ext}]
 
 Definimos a continuación cada uno de los elementos de la ruta del URI.
 
-### 3.1 Base
+### Base
 
 Es un componente obligatorio que define el espacio y dominio dedicado por cada universidad al albergue de la plataforma de datos abiertos y reutilizables. Recomendamos el uso de un subdominio, por ejemplo:
 
@@ -118,7 +117,7 @@ http://datos.crue.org
 
 http://sgi-data.deusto.es
 
-### 3.2 Carácter de la información 
+### Carácter de la información 
 
 Es un componente obligatorio, que puede tomar una de las siguientes formas:
 
@@ -127,32 +126,32 @@ Es un componente obligatorio, que puede tomar una de las siguientes formas:
  - kos. Indica que se trate de un sistema de organización del conocimiento (Knowledge Organization System) en el dominio de SGI: tesauros, taxonomías, etc.
  - res. Indica que se trata de una entidad del dominio.
 
-### 3.3 Sector o ámbito
+### Sector o ámbito
 
 Es un componente opcional de posible aplicación en URIs de organización de conocimiento.
 
 
-### 3.4 Dominio o temática
+### Dominio o temática
 
 Es un componente opcional de posible aplicación en URIs de organización de conocimiento o en entidades que puedan tener subclases. Por ejemplo, podría servir para distinguir el tema de una publicación.
 
-### 3.5 Conceptos específicos
+### Conceptos específicos
 
 Es un componente opcional del URI, pero funcionalmente obligatorio si se trata de declarar entidades del ámbito de SGI, como: investigador, publicación, proyecto, etc.
 
-## 4 Tipos de URIs
+## Tipos de URIs
 
 A continuación, se especifican los tipos de URI específicos para recursos semánticos de una iniciativa basada en _Linked Data_.
 
-### 4.1 Uri para identificar vocabularios
+### Uri para identificar vocabularios
 
 Cualquier vocabulario u ontología seguirá el esquema: http://{base}/def/{sector}/{dominio}
 
-### 4.2 URI para identificar esquemas de conceptos
+### URI para identificar esquemas de conceptos
 
 Cualquier sistema de organización del conocimiento –taxonomías, diccionarios, tesauros, etc.– sobre un dominio concreto será identificado mediante un esquema de URI basado en la estructura: http://{base}/kos/{sector}/{dominio}
 
-### 4.3 URI para identificar a cualquier instancia física o conceptual
+### URI para identificar a cualquier instancia física o conceptual
 
 Estos recursos son las representaciones atómicas de los documentos y recursos de información. A su vez suelen ser instancias de las clases que se definen en los vocabularios. Estos recursos se identifican mediante el esquema: http://{base}/res/{sector}[/{dominio}]/{clase}/{ID}
 
@@ -160,7 +159,7 @@ Por ejemplo: http://data.um.es/res/investigador/{id-investigador}
 
 Las instancias físicas o conceptuales que se incluirán como fragmentos en las URIs se corresponderán con las entidades identificadas en la Red de Ontologías Hércules (ROH), como: researcher/investigador, project/proyecto, publication/publicación, etc.
 
-## 5 Normalización de los componentes de los URI
+## Normalización de los componentes de los URI
 
 Para garantizar la coherencia y el mantenimiento posterior del esquema de URI se aplicarán las siguientes reglas para normalizar las distintas partes que componen los URI:
 
@@ -172,7 +171,7 @@ Para garantizar la coherencia y el mantenimiento posterior del esquema de URI se
  6. Evitar en la medida de lo posible la abreviatura de palabras, salvo que la abreviatura sea intuitiva.
  7. Los términos que componen los URI deberán ser legibles e interpretables por el mayor número de personas posible, por lo que se utilizará el castellano, cualquiera de las lenguas oficiales de España o el inglés como lengua franca de la investigación.
 
-## 6 Prácticas relativas a la gestión de recursos semánticos a través de URI
+## Prácticas relativas a la gestión de recursos semánticos a través de URI
 
 Las siguientes prácticas se desarrollarán como requisitos del servidor Linked Data de Hércules ASIO y se aplicarán para la gestión de recursos semánticos descritos en RDF:
 
@@ -180,7 +179,7 @@ Las siguientes prácticas se desarrollarán como requisitos del servidor Linked 
  2. En el caso de que no se realice una negociación del contenido desde el servidor y, para favorecer el descubrimiento de contenido RDF desde los documentos HTML relacionados con las descripciones de los recursos, se incluirán enlaces a la representación alternativa en cualquiera de las representaciones en RDF desde los propios documentos HTML de la forma `<link rel=«alternate» type=«application/rdf+xml» href=«documento.rdf»>` o similar. En esa sentencia se incluye el tipo de formato MIME del documento (application/rdf+xml, text/n3, etc.).
  3. Cuando se establezcan enlaces entre distintos recursos de información, se procurará la generación de enlaces que conecten los recursos bidireccionales para facilitar la navegación sobre los recursos de información en ambos sentidos.
 
-## 7 Definición del Esquema de URIs
+## Definición del Esquema de URIs
 
 El Esquema de URIs tiene que declararse en un formato informático que pueda ser interpretado por la Factoría de URIs para devolver el identificador único que precisa cada entidad cargada en ASIO. La propuesta se declara como un JSON y tiene la siguiente forma:
 
@@ -328,5 +327,6 @@ Se indica a continuación un ejemplo:
 		    ]
 	    }
     ]
+
 
 
