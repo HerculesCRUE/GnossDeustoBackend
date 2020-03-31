@@ -71,7 +71,7 @@ Este Api contiene dos controladores.
 	 1. [Base](#base)
 	 2. [Carácter de la información](#carácter-de-la-información)
 	 3. [Sector o ámbito](#sector-o-ámbito)
-	 4. [Dominio o temática](#domino-o-temática)
+	 4. [Dominio o temática](#dominio-o-temática)
 	 5. [Conceptos específicos](#conceptos-específicos)
  4. [Tipos de uris](#tipos-de-uris)
 	 1. [Uri para identificar vocabularios](#uri-para-identificar-vocabularios)
