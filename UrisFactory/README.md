@@ -79,7 +79,7 @@ Este Api contiene dos controladores.
 	 3. [Uri para identificar a cualquier instancia física o conceptual](#uri-para-identificar-a-cualquier-instancia-física-o-conceptual)
  5. [Normalización de los componentes de los uris](#normalización-de-los-componentes-de-los-uris)
  6. [Prácticas relativas a la gestión de recursos semánticos a través de uri](#prácticas-relativas-a-la-gestión-de-recursos-semánticos-a-través-de-uri)
- 7. [Definición del esquema de uris para la factoría de uris](#definición-del-esquema-de-uris-para-la-factoría-de-uris)
+ 7. [Definición del esquema de uris para la factoría de uris](#definición-del-esquema-de-uris)
 
 ## Introducción
 
@@ -159,7 +159,7 @@ Por ejemplo: http://data.um.es/res/investigador/{id-investigador}
 
 Las instancias físicas o conceptuales que se incluirán como fragmentos en las URIs se corresponderán con las entidades identificadas en la Red de Ontologías Hércules (ROH), como: researcher/investigador, project/proyecto, publication/publicación, etc.
 
-## Normalización de los componentes de los URI
+## Normalización de los componentes de los URIs
 
 Para garantizar la coherencia y el mantenimiento posterior del esquema de URI se aplicarán las siguientes reglas para normalizar las distintas partes que componen los URI:
 
