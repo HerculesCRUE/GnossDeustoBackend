@@ -9,7 +9,7 @@ namespace UrisFactory.ViewModels
     public class InfoUriStructure
     {
         public UriStructure UriStructure{get;set;}
-
+         
         public ResourcesClass ResourcesClass { get; set; }
     }
 }

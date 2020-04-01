@@ -33,14 +33,14 @@ namespace UrisFactory
             services.AddControllers();
 
             //IdentityServer
-            services.AddAuthentication("Bearer")
-            .AddJwtBearer("Bearer", options =>
-            {
-                options.Authority = "http://localhost:5000";
-                options.RequireHttpsMetadata = false;
+            //services.AddAuthentication("Bearer")
+            //.AddJwtBearer("Bearer", options =>
+            //{
+            //    options.Authority = "http://localhost:5000";
+            //    options.RequireHttpsMetadata = false;
 
-                options.Audience = "api_uris";
-            });
+            //    options.Audience = "api_uris";
+            //});
 
             services.AddSwaggerGen(options =>
             {
@@ -51,31 +51,31 @@ namespace UrisFactory
                 options.IncludeXmlComments(xmlPath);
                 options.ExampleFilters();
                 // Define the OAuth2.0 scheme that's in use (i.e. Implicit Flow)
-                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-                {
-                    Type = SecuritySchemeType.OAuth2,
-                    Flows = new OpenApiOAuthFlows
-                    {
-                        Implicit = new OpenApiOAuthFlow
-                        {
-                            AuthorizationUrl = new System.Uri("http://localhost:5000/auth-server/connect/authorize", UriKind.Absolute),
-                            Scopes = new Dictionary<string, string>
-                            {
-                                { "api_uris", "Uris factory" }
-                            }
-                        }
-                    }
-                });
-                options.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
-                        },
-                        new[] { "api_uris", "Uris factory" }
-                    }
-                });
+            //    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+            //    {
+            //        Type = SecuritySchemeType.OAuth2,
+            //        Flows = new OpenApiOAuthFlows
+            //        {
+            //            Implicit = new OpenApiOAuthFlow
+            //            {
+            //                AuthorizationUrl = new System.Uri("http://localhost:5000/auth-server/connect/authorize", UriKind.Absolute),
+            //                Scopes = new Dictionary<string, string>
+            //                {
+            //                    { "api_uris", "Uris factory" }
+            //                }
+            //            }
+            //        }
+            //    });
+            //    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            //    {
+            //        {
+            //            new OpenApiSecurityScheme
+            //            {
+            //                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
+            //            },
+            //            new[] { "api_uris", "Uris factory" }
+            //        }
+            //    });
             });
             services.Configure<ForwardedHeadersOptions>(options =>
             {
