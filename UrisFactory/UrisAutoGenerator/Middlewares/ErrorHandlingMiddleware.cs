@@ -75,7 +75,17 @@ namespace UrisFactory.Middlewares
         private string CreateTimeStamp()
         {
             DateTime time = DateTime.Now;
-            string timeStamp = $"{time.Year.ToString()}{time.Month.ToString()}{time.Day.ToString()}";
+            string month = time.Month.ToString();
+            if (month.Length == 1)
+            {
+                month = $"0{month}";
+            }
+            string day = time.Day.ToString();
+            if (day.Length == 1)
+            {
+                day = $"0{day}";
+            }
+            string timeStamp = $"{time.Year.ToString()}{month}{day}";
             return timeStamp;
         }
     }
