@@ -87,7 +87,12 @@ def v1_convert():
 
         # Identificación CVN
         if code == "000.010.000.000":
-            first_name, first_family_name, second_family_name, email = None, None, None, None
+            first_name, first_family_name, second_family_name, email, cellphone, landline, extension = None, None, \
+                                                                                                       None, None, \
+                                                                                                       None, None, \
+                                                                                                       None
+            website = None
+
             for subchild in child:
                 subcode = node_get_code(subchild)
 
@@ -109,13 +114,40 @@ def v1_convert():
                 if node_get_code(subchild) == "000.010.000.230":
                     email = subchild.find("{http://codes.cvn.fecyt.es/beans}Value").text
 
+                # Fijo
+                if node_get_code(subchild) == "000.010.000.210":
+                    landline = subchild.find("{http://codes.cvn.fecyt.es/beans}Number").text
+                    extension = subchild.find("{http://codes.cvn.fecyt.es/beans}Extension").text
+
+                # Móvil
+                if node_get_code(subchild) == "000.010.000.240":
+                    cellphone = subchild.find("{http://codes.cvn.fecyt.es/beans}Number").text
+
+                # Página web personal
+                if node_get_code(subchild) == "000.010.000.250":
+                    website = subchild.find("{http://codes.cvn.fecyt.es/beans}Value").text
+
             # Person
             g.add((person, RDF.type, roh.Researcher))
             # Person > name
             full_name = first_name + " " + first_family_name + " " + second_family_name
             g.add((person, FOAF.name, Literal(full_name)))
             # Person > email
-            g.add((person, FOAF.mbox, Literal(email)))
+            if email is not None:
+                g.add((person, FOAF.mbox, Literal("mailto:" + email)))
+            # Person > landline
+            if landline is not None:
+                if extension is not None:
+                    g.add((person, FOAF.phone, Literal("tel:" + landline + "," + extension)))
+                else:
+                    g.add((person, FOAF.phone, Literal("tel:" + landline)))
+            # Person > cellphone
+            if cellphone is not None:
+                g.add((person, FOAF.phone, Literal("tel:" + cellphone)))
+            # Person > website
+            if website is not None:
+                g.add((person, FOAF.homepage, Literal(website)))
+
 
         # Publicaciones, documentos científicos y técnicos (ResearchObject)
         if code == "060.010.010.000":
