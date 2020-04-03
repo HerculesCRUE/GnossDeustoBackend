@@ -30,6 +30,11 @@ code_name = {}
 
 @app.route('/v1/convert', methods=['POST'])
 def v1_convert():
+
+    # ---
+    # Validación de la solicitud
+    # ---
+
     # Validar la solicitud
     # Comprobar el archivo que nos llega
     # Comprobar los argumentos
@@ -61,27 +66,28 @@ def v1_convert():
     except Exception as e:
         return make_error_response("Error while parsing the XML.")
 
-    # Crear el grafo, lo iremos rellenando más abajo
-    # Le inyectamos el término corto de la ontología roh
+    # ---
+    # Grafo y ontologías
+    # ---
 
     # Lista de ontologías para acceder a ellas desde la config
     ontologies = {}
+    ontology_primary = None # TODO comprobar que se ha definido una ontología primaria
+
+    with open("mappings/cvn/1.4.2_sp1/cvn-to-roh/ontologies.toml") as f:
+        config_ontologies = toml.loads(f.read())
+        # TODO error handling config ontologías error lectura
 
     # TODO quitar code smell, hacer configurables
     namespace_manager = NamespaceManager(Graph())
-    roh = Namespace("https://purl.org/roh/")
-    namespace_manager.bind('roh', roh, override=False)
-    ontologies['roh'] = roh
-    bibo = Namespace("http://purl.org/ontology/bibo/")
-    namespace_manager.bind('bibo', bibo, override=False)
-    ontologies['bibo'] = bibo
-    vivo = Namespace("http://vivoweb.org/ontology/core#")
-    namespace_manager.bind('vivo', vivo, override=False)
-    ontologies['vivo'] = vivo
-    foaf = Namespace("http://xmlns.com/foaf/0.1/")
-    namespace_manager.bind('foaf', foaf, override=False)
-    ontologies['foaf'] = foaf
 
+    for ontology in config_ontologies['ontologies']:
+        ontologies[ontology['shortname']] = Namespace(ontology['uri_base'])
+        namespace_manager.bind(ontology['shortname'], ontologies[ontology['shortname']])
+        if ('primary' in ontology) and ontology['primary']:
+            ontology_primary = ontologies[ontology['shortname']]
+
+    # Iniciar grafo
     g = Graph()
     g.namespace_manager = namespace_manager
 
@@ -108,7 +114,7 @@ def v1_convert():
     #           Guardar en el grafo
 
     person = URIRef(generate_uri(config['instance']['class'], params['orcid']))
-    g.add((person, RDF.type, roh.term(config['instance']['class'])))
+    g.add((person, RDF.type, ontology_primary.term(config['instance']['class'])))
 
     info_node = get_node_by_code(root, config['code'])
 
