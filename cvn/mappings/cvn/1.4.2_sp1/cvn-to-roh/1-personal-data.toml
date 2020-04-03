@@ -1,0 +1,49 @@
+code = "000.010.000.000"
+instance.ontology = "roh"
+instance.class = "Researcher"
+
+    [[properties]] # Nombre
+    ontology = "foaf"
+    name = "name"
+    format = "{first_name} {first_family_name} {second_family_name}"
+
+        [[properties.sources]] # Nombre
+        code = "000.010.000.020"
+        name = "first_name"
+        bean = "Value"
+
+        [[properties.sources]] # Apellido 1
+        code = "000.010.000.010"
+        name = "first_family_name"
+        bean = "FirstFamilyName"
+
+        [[properties.sources]] # Apellido 2
+        code = "000.010.000.010"
+        name = "second_family_name"
+        bean = "SecondFamilyName"
+
+    [[properties]] # Teléfono
+    ontology = "foaf"
+    name = "phone"
+    format = "tel:{number}{extension}"
+
+        [[properties.sources]] # Número
+        code = "000.010.000.210"
+        name = "number"
+        bean = "Number"
+
+        [[properties.sources]] # Extensión
+        code = "000.010.000.210"
+        name = "extension"
+        bean = "Extension"
+        format = ",{value}"
+
+    [[properties]] # Email
+    ontology = "foaf"
+    name = "mailbox"
+    format = "mailto:{email}"
+
+        [[properties.sources]]
+        code = "000.010.000.230"
+        name = "email"
+        bean = "Value"

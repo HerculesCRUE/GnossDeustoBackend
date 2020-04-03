@@ -8,13 +8,14 @@
 #
 import argparse
 import xml.etree.ElementTree as ET
-from rdflib import Graph, Namespace, Literal, URIRef, BNode
-from rdflib.namespace import RDF, FOAF, NamespaceManager
+from rdflib import Graph, Namespace, Literal, URIRef
+from rdflib.namespace import RDF, NamespaceManager
 import secrets  # temporal, para generar las ID de ciertas entidades
 import urllib.parse
 from flask import Flask, request, make_response, jsonify
 import re
 import requests
+import toml
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB máx.
@@ -63,17 +64,84 @@ def v1_convert():
     # Crear el grafo, lo iremos rellenando más abajo
     # Le inyectamos el término corto de la ontología roh
 
+    # Lista de ontologías para acceder a ellas desde la config
+    ontologies = {}
+
+    # TODO quitar code smell
     namespace_manager = NamespaceManager(Graph())
     roh = Namespace("https://purl.org/roh/")
     namespace_manager.bind('roh', roh, override=False)
+    ontologies['roh'] = roh
     bibo = Namespace("http://purl.org/ontology/bibo/")
     namespace_manager.bind('bibo', bibo, override=False)
+    ontologies['bibo'] = bibo
     vivo = Namespace("http://vivoweb.org/ontology/core#")
     namespace_manager.bind('vivo', vivo, override=False)
+    ontologies['vivo'] = vivo
+    foaf = Namespace("http://xmlns.com/foaf/0.1/")
+    namespace_manager.bind('foaf', vivo, override=False)
+    ontologies['foaf'] = foaf
+
     g = Graph()
     g.namespace_manager = namespace_manager
 
     person = URIRef(generate_uri('Researcher', params['orcid']))
+
+    # ----- INICIO PROCESO CVN
+
+    # 1. Datos personales
+    with open("mappings/cvn/1.4.2_sp1/cvn-to-roh/1-personal-data.toml") as f:  # TODO des-hardcodificar
+        config = toml.loads(f.read())
+        # TODO error handling si archivo no se puede abrir
+        # TODO validar TOML
+
+    # Lógica a seguir
+    #
+    # Recorrer instances. En cada uno:
+    #   Instanciar en la ontología la clase, aunque esté vacía
+    #       Para cada propiedad:
+    #           Recorrer todos los sources:
+    #               Obtener valor
+    #               Darle formato
+    #               Guardarlos en un diccionario para que el source pueda acceder a ellos
+    #           Aplicar formato
+    #           Guardar en el grafo
+
+    person = URIRef(generate_uri(config['instance']['class'], params['orcid']))
+    g.add((person, RDF.type, roh.term(config['instance']['class'])))
+
+    info_node = get_node_by_code(root, config['code'])
+
+    for property in config['properties']:
+        # Declaramos un dict. para que podamos guardar los valores de los sources
+        sources = {}
+        for source in property['sources']:
+            source_node = get_node_by_code(info_node, source['code'])
+            if source_node is not None:
+                result = source_node.find("{http://codes.cvn.fecyt.es/beans}" + source['bean'])
+                if result is not None:
+                    # Formateamos source
+                    if 'format' in source:
+                        sources[source['name']] = source['format'].format(value=result.text)
+                    else:
+                        sources[source['name']] = result.text
+                else:
+                    sources[source['name']] = None
+
+        # Formateamos
+        print("Sources: " + str(sources))
+        g.add((person, ontologies[property['ontology']].term(property['name']),
+               Literal(property['format'].format(**sources))))
+
+
+        # Sources procesadas, formateamos texto
+
+    return make_response(g.serialize(format=params['format']), 200)  # TODO Quitar, DEBUG
+
+    # 2. Generar entidades
+    # 3. Enlazar
+
+    # ----- FIN PROCESO CVN
 
     # Vamos a ir recorriendo el árbol XML del documento CVN e iremos sacando, cuando sea necesario, información, para
     # luego insertarla en tripletas generadas al vuelo con rdflib
@@ -82,72 +150,6 @@ def v1_convert():
 
         if app.debug:  # Debug
             print("> " + code + ": " + code_get_name(code, "spa"))
-
-        # TODO hacer switch
-
-        # Identificación CVN
-        if code == "000.010.000.000":
-            first_name, first_family_name, second_family_name, email, cellphone, landline, extension = None, None, \
-                                                                                                       None, None, \
-                                                                                                       None, None, \
-                                                                                                       None
-            website = None
-
-            for subchild in child:
-                subcode = node_get_code(subchild)
-
-                if app.debug:  # Debug
-                    print(">> " + subcode + ": " + code_get_name(subcode))
-
-                # TODO hacer switch
-
-                # Apellidos
-                if node_get_code(subchild) == "000.010.000.010":
-                    first_family_name = subchild.find("{http://codes.cvn.fecyt.es/beans}FirstFamilyName").text
-                    second_family_name = subchild.find("{http://codes.cvn.fecyt.es/beans}SecondFamilyName").text
-
-                # Nombre
-                if node_get_code(subchild) == "000.010.000.020":
-                    first_name = subchild.find("{http://codes.cvn.fecyt.es/beans}Value").text
-
-                # Email
-                if node_get_code(subchild) == "000.010.000.230":
-                    email = subchild.find("{http://codes.cvn.fecyt.es/beans}Value").text
-
-                # Fijo
-                if node_get_code(subchild) == "000.010.000.210":
-                    landline = subchild.find("{http://codes.cvn.fecyt.es/beans}Number").text
-                    extension = subchild.find("{http://codes.cvn.fecyt.es/beans}Extension").text
-
-                # Móvil
-                if node_get_code(subchild) == "000.010.000.240":
-                    cellphone = subchild.find("{http://codes.cvn.fecyt.es/beans}Number").text
-
-                # Página web personal
-                if node_get_code(subchild) == "000.010.000.250":
-                    website = subchild.find("{http://codes.cvn.fecyt.es/beans}Value").text
-
-            # Person
-            g.add((person, RDF.type, roh.Researcher))
-            # Person > name
-            full_name = first_name + " " + first_family_name + " " + second_family_name
-            g.add((person, FOAF.name, Literal(full_name)))
-            # Person > email
-            if email is not None:
-                g.add((person, FOAF.mbox, Literal("mailto:" + email)))
-            # Person > landline
-            if landline is not None:
-                if extension is not None:
-                    g.add((person, FOAF.phone, Literal("tel:" + landline + "," + extension)))
-                else:
-                    g.add((person, FOAF.phone, Literal("tel:" + landline)))
-            # Person > cellphone
-            if cellphone is not None:
-                g.add((person, FOAF.phone, Literal("tel:" + cellphone)))
-            # Person > website
-            if website is not None:
-                g.add((person, FOAF.homepage, Literal(website)))
-
 
         # Publicaciones, documentos científicos y técnicos (ResearchObject)
         if code == "060.010.010.000":
@@ -259,6 +261,18 @@ def v1_convert():
     return make_response(g.serialize(format=params['format']), 200)
 
 
+def get_node_by_code(tree, code):
+    """
+    Recorre un árbol y va buscando si algún hijo tiene el código que le indicamos
+    :param tree: el árbol de nodos donde buscar
+    :param code: el código que buscamos
+    :return: el nodo que buscamos, si no, None
+    """
+    for child in tree:
+        if node_get_code(child) == code:
+            return child
+    return None
+
 def node_get_code(node):
     """
     Obtener el código CVN de un nodo XML.
@@ -329,7 +343,6 @@ def generate_uri(resource_class, identifier):
     result = api_response.text
     cached_uris[cache_id] = result
     return result
-
 
 
 if __name__ == "__main__":
