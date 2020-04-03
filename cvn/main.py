@@ -67,7 +67,7 @@ def v1_convert():
     # Lista de ontologías para acceder a ellas desde la config
     ontologies = {}
 
-    # TODO quitar code smell
+    # TODO quitar code smell, hacer configurables
     namespace_manager = NamespaceManager(Graph())
     roh = Namespace("https://purl.org/roh/")
     namespace_manager.bind('roh', roh, override=False)
@@ -79,7 +79,7 @@ def v1_convert():
     namespace_manager.bind('vivo', vivo, override=False)
     ontologies['vivo'] = vivo
     foaf = Namespace("http://xmlns.com/foaf/0.1/")
-    namespace_manager.bind('foaf', vivo, override=False)
+    namespace_manager.bind('foaf', foaf, override=False)
     ontologies['foaf'] = foaf
 
     g = Graph()
@@ -129,7 +129,6 @@ def v1_convert():
                     sources[source['name']] = None
 
         # Formateamos
-        print("Sources: " + str(sources))
         g.add((person, ontologies[property['ontology']].term(property['name']),
                Literal(property['format'].format(**sources))))
 

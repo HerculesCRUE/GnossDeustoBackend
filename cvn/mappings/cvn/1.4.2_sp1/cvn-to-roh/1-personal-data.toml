@@ -47,3 +47,23 @@ instance.class = "Researcher"
         code = "000.010.000.230"
         name = "email"
         bean = "Value"
+
+    [[properties]] # Teléfono móvil
+    ontology = "foaf"
+    name = "phone"
+    format = "tel:{phone}"
+
+        [[properties.sources]]
+        code = "000.010.000.240"
+        name = "phone"
+        bean = "Number"
+
+    [[properties]]
+    ontology = "foaf"
+    name = "homepage"
+    format = "{homepage}"
+
+        [[properties.sources]]
+        code = "000.010.000.250"
+        name = "homepage"
+        bean = "Value"
