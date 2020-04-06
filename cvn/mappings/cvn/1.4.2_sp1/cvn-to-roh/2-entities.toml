@@ -70,3 +70,109 @@ id.fallback = "uuid4"
         code = "010.020.000.260"
         name = "description"
         bean = "Value"
+
+[[entities]] # Formación académica recibida
+code = "020.010.010.000"
+ontology = "vivo"
+class = "AcademicDegree"
+
+    [[entities.criteria.property]]
+    code = "020.010.010.010"
+    values = ["950"]
+
+    [[entities.properties]]
+    ontology = "xsd"
+    name = "dateTime"
+    format = "{date}"
+
+        [[entities.properties.sources]]
+        code = "020.010.010.130"
+        name = "date"
+        bean = "Value"
+
+    [[entities.properties]]
+    ontology = "roh"
+    name = "title"
+    format = "{title}"
+
+        [[entities.properties.sources]]
+        code = "020.010.010.030"
+        name = "title"
+        bean = "Name"
+
+[[entities]] # Doctorado
+code = "020.010.020.000"
+ontology = "roh"
+class = "PhDThesis"
+
+    [[entities.properties]]
+    ontology = "xsd"
+    name = "dateTime"
+    format = "{date}"
+
+        [[entities.properties.sources]]
+        code = "020.010.020.140"
+        name = "date"
+        bean = "Value"
+
+    [[entities.properties]]
+    ontology = "roh"
+    name = "title"
+    format = "{title}"
+
+        [[entities.properties.sources]]
+        code = "020.010.020.160"
+        name = "title"
+        bean = "Value"
+
+[[entities]] # Certificado de idiomas
+code = "020.060.000.000"
+ontology = "roh"
+class = "LanguageCertificate"
+
+    [[entities.relations]]
+    ontology = "roh"
+    name = "hasAccreditation"
+    inverse_ontology = "roh"
+    inverse_name = "accreditationOf"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    ontology = "roh"
+    name = "readingSkill"
+    format = "{skill}"
+
+        [[entities.properties.sources]]
+        code = "020.060.000.130"
+        name = "skill"
+        bean = "Value"
+
+    [[entities.properties]]
+    ontology = "roh"
+    name = "spokenInteractionSkill"
+    format = "{skill}"
+
+        [[entities.properties.sources]]
+        code = "020.060.000.140"
+        name = "skill"
+        bean = "Value"
+
+    [[entities.properties]]
+    ontology = "roh"
+    name = "speakingSkill"
+    format = "{skill}"
+
+        [[entities.properties.sources]]
+        code = "020.060.000.150"
+        name = "skill"
+        bean = "Value"
+
+    [[entities.properties]]
+    ontology = "roh"
+    name = "writingSkill"
+    format = "{skill}"
+
+        [[entities.properties.sources]]
+        code = "020.060.000.160"
+        name = "skill"
+        bean = "Value"

@@ -170,8 +170,21 @@ def v1_convert():
                 if has_all_formatting_fields(class_property['format'], sources):
                     formatted = class_property['format'].format_map(sources)
                     # TODO validar que se tienen todos los parámetros necesarios
+                    # TODO no mostrar si es "None"
                     g.add((current_entity, ontologies[class_property['ontology']].term(class_property['name']),
                            Literal(formatted)))
+
+            # Relaciones (modo sencillo)
+            # TODO cambiar spanglish relations por relationship
+            if 'relations' in entity:
+                for relation in entity['relations']:
+                    if 'link_to_cvn_person' in relation and relation['link_to_cvn_person']:
+                        g.add((person, ontologies[relation['ontology']].term(relation['name']), current_entity))
+                    if 'inverse_name' in relation:
+                        inverse_ontology = relation['ontology']
+                        if 'inverse_ontology' in relation:
+                            inverse_ontology = relation['inverse_ontology']
+                        g.add((current_entity, ontologies[inverse_ontology].term(relation['inverse_name']), person))
 
 
     return make_response(g.serialize(format=params['format']), 200)  # TODO Quitar, DEBUG
