@@ -307,7 +307,7 @@ def get_nodes_by_code(tree, code):
     for child in tree:
         if node_get_code(child) == code:
             nodes.append(child)
-    return None
+    return nodes
 
 def node_get_code(node):
     """
