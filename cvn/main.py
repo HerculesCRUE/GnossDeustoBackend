@@ -16,6 +16,7 @@ from flask import Flask, request, make_response, jsonify
 import re
 import requests
 import toml
+import uuid
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB máx.
@@ -28,9 +29,11 @@ ALLOWED_FORMATS = ["xml", "n3", "turtle", "nt", "pretty-xml", "trix", "trig", "n
 code_name = {}
 
 
+# TODO testing
+# TODO modularizar, quitar spaghetti code
+
 @app.route('/v1/convert', methods=['POST'])
 def v1_convert():
-
     # ---
     # Validación de la solicitud
     # ---
@@ -72,7 +75,7 @@ def v1_convert():
 
     # Lista de ontologías para acceder a ellas desde la config
     ontologies = {}
-    ontology_primary = None # TODO comprobar que se ha definido una ontología primaria
+    ontology_primary = None  # TODO comprobar que se ha definido una ontología primaria
 
     with open("mappings/cvn/1.4.2_sp1/cvn-to-roh/ontologies.toml") as f:
         config_ontologies = toml.loads(f.read())
@@ -127,8 +130,6 @@ def v1_convert():
         g.add((person, ontologies[data_property['ontology']].term(data_property['name']),
                Literal(formatted_value)))
 
-    return make_response(g.serialize(format=params['format']), 200)  # TODO Quitar, DEBUG
-
         # Sources procesadas, formateamos texto
 
     # 2. Generar entidades
@@ -137,12 +138,41 @@ def v1_convert():
     with open("mappings/cvn/1.4.2_sp1/cvn-to-roh/2-entities.toml") as f:  # TODO des-hardcodificar
         entities_config = toml.loads(f.read())
 
-    for entity in entities_config:
+    for entity in entities_config['entities']:
         # Para cada tipo de entidad buscamos en el árbol las que tengan el código
-        #for entity_result in
-        for class_property in entity['properties']:
-            sources = get_sources_from_property()
+        for entity_result in get_nodes_by_code(root, entity['code']):
+            properties = {}
+            for class_property in entity['properties']:
+                sources = get_sources_from_property(class_property, entity_result)
+                properties[class_property['name']] = class_property['format'].format_map(sources)
+                # TODO validar que se tienen todos los parámetros necesarios
+                # Posible problema aquí: ¿qué pasa si hay dos propiedades con el mismo nombre de distintas ontologías?
 
+            # Generación de la URI
+            identifier = uuid.uuid4()  # por defecto UUIDv4
+            resource_class = entity['class']  # por defecto el nombre de la clase de la entidad
+
+            if 'id' in entity:
+                if 'resource' in entity['id']:
+                    resource_class = entity['id']['resource']
+                if 'format' in entity['id']:
+                    if has_all_formatting_fields(entity['id']['format'], properties):
+                        identifier = entity['id']['format'].format_map(properties).strip()
+
+            # Generamos la tripleta de la entidad como tal
+            current_entity = URIRef(generate_uri(resource_class, str(identifier)))
+            g.add((current_entity, RDF.type, ontologies[entity['ontology']].term(entity['class'])))
+
+            # La rellenamos con las propiedades
+            for class_property in entity['properties']:
+                sources = get_sources_from_property(class_property, entity_result)
+                formatted = class_property['format'].format_map(sources)
+                # TODO validar que se tienen todos los parámetros necesarios
+                g.add((current_entity, ontologies[class_property['ontology']].term(class_property['name']),
+                       Literal(formatted)))
+
+
+    return make_response(g.serialize(format=params['format']), 200)  # TODO Quitar, DEBUG
 
     # 3. Enlazar
 
@@ -284,6 +314,21 @@ def get_sources_from_property(current_property, node):
     return sources
 
 
+def has_all_formatting_fields(format_string, fields):
+    """
+    Comprueba que todos los campos de formateo estén definidos en el diccionario
+    :param format_string: el texto que se le pasa al Formatter
+    :param fields: los campos con los valores que se usan para rellenar
+    :return: bool ¿están todos los campos de formateo cubiertos por el diccionario?
+    """
+    format_fields = re.findall(r'{(.*?)}', format_string)
+
+    for field in format_fields:
+        if field not in fields:
+            return False
+    return True
+
+
 def get_node_by_code(tree, code):
     """
     Devuelve el primer elemento del árbol con el código especificado
@@ -295,6 +340,7 @@ def get_node_by_code(tree, code):
         if node_get_code(child) == code:
             return child
     return None
+
 
 def get_nodes_by_code(tree, code):
     """
@@ -308,6 +354,7 @@ def get_nodes_by_code(tree, code):
         if node_get_code(child) == code:
             nodes.append(child)
     return nodes
+
 
 def node_get_code(node):
     """

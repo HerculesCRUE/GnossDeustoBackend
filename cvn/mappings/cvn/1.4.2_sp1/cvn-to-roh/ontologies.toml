@@ -14,3 +14,7 @@ uri_base = "http://purl.org/roh/mirror/vivo#"
 [[ontologies]]
 shortname = "foaf"
 uri_base = "http://xmlns.com/foaf/0.1/"
+
+[[ontologies]]
+shortname = "xsd"
+uri_base = "http://www.w3.org/2001/XMLSchema#"
