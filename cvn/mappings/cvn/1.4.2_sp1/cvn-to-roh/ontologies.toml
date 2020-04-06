@@ -5,11 +5,11 @@ primary = true
 
 [[ontologies]]
 shortname = "bibo"
-uri_base = "http://purl.org/ontology/bibo/"
+uri_base = "http://purl.org/roh/mirror/bibo/"
 
 [[ontologies]]
 shortname = "vivo"
-uri_base = "http://vivoweb.org/ontology/core#"
+uri_base = "http://purl.org/roh/mirror/vivo#"
 
 [[ontologies]]
 shortname = "foaf"
