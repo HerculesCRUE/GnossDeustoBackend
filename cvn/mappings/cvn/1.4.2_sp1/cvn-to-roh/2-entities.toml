@@ -12,7 +12,6 @@ id.format = "{doi}"
     inverse_name = "correspondingAuthor"
     link_to_cvn_person = true
 
-
     [[entities.properties]]
     ontology = "roh"
     name = "title"
@@ -24,7 +23,7 @@ id.format = "{doi}"
         bean = "Value"
 
     [[entities.properties]]
-    ontology = "xsd"
+    ontology = "vivo"
     name = "dateTime"
     format = "{publication_date}"
 
@@ -96,7 +95,7 @@ class = "AcademicDegree"
     values = ["950"]
 
     [[entities.properties]]
-    ontology = "xsd"
+    ontology = "vivo"
     name = "dateTime"
     format = "{date}"
 
@@ -121,7 +120,7 @@ ontology = "roh"
 class = "PhDThesis"
 
     [[entities.properties]]
-    ontology = "xsd"
+    ontology = "vivo"
     name = "dateTime"
     format = "{date}"
 
