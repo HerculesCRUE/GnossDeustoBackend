@@ -117,34 +117,33 @@ def v1_convert():
     person = URIRef(generate_uri(config['instance']['class'], params['orcid']))
     g.add((person, RDF.type, ontology_primary.term(config['instance']['class'])))
 
+    # Representa el único nodo que contiene todos los datos personales del CVN
     info_node = get_node_by_code(root, config['code'])
 
-    for property in config['properties']:
-        # Declaramos un dict. para que podamos guardar los valores de los sources
-        sources = {}
-        for source in property['sources']:
-            source_node = get_node_by_code(info_node, source['code'])
-            if source_node is not None:
-                result = source_node.find("{http://codes.cvn.fecyt.es/beans}" + source['bean'])
-                if result is not None:
-                    # Formateamos source
-                    if 'format' in source:
-                        sources[source['name']] = source['format'].format(value=result.text)
-                    else:
-                        sources[source['name']] = result.text
-                else:
-                    sources[source['name']] = None
-
+    for data_property in config['properties']:
         # Formateamos
-        g.add((person, ontologies[property['ontology']].term(property['name']),
-               Literal(property['format'].format(**sources))))
+        formatted_value = data_property['format'].format_map(get_sources_from_property(data_property, info_node))
 
-
-        # Sources procesadas, formateamos texto
+        g.add((person, ontologies[data_property['ontology']].term(data_property['name']),
+               Literal(formatted_value)))
 
     return make_response(g.serialize(format=params['format']), 200)  # TODO Quitar, DEBUG
 
+        # Sources procesadas, formateamos texto
+
     # 2. Generar entidades
+
+    # Cargar config
+    with open("mappings/cvn/1.4.2_sp1/cvn-to-roh/2-entities.toml") as f:  # TODO des-hardcodificar
+        entities_config = toml.loads(f.read())
+
+    for entity in entities_config:
+        # Para cada tipo de entidad buscamos en el árbol las que tengan el código
+        #for entity_result in
+        for class_property in entity['properties']:
+            sources = get_sources_from_property()
+
+
     # 3. Enlazar
 
     # ----- FIN PROCESO CVN
@@ -265,6 +264,24 @@ def v1_convert():
 
     # Serializar y guardar en un archivo con el formato que queramos
     return make_response(g.serialize(format=params['format']), 200)
+
+
+def get_sources_from_property(current_property, node):
+    # Declaramos un dict. para que podamos guardar los valores de los sources
+    sources = {}
+    for source in current_property['sources']:
+        source_node = get_node_by_code(node, source['code'])
+        if source_node is not None:
+            result = source_node.find("{http://codes.cvn.fecyt.es/beans}" + source['bean'])
+            if result is not None:
+                # Formateamos source
+                if 'format' in source:
+                    sources[source['name']] = source['format'].format(value=result.text)
+                else:
+                    sources[source['name']] = result.text
+            else:
+                sources[source['name']] = None
+    return sources
 
 
 def get_node_by_code(tree, code):
