@@ -5,6 +5,14 @@ class = "AcademicArticle"
 id.resource = "Article"
 id.format = "{doi}"
 
+    [[entities.relations]]
+    ontology = "roh"
+    name = "correspondingAuthorOf"
+    inverse_ontology = "roh"
+    inverse_name = "correspondingAuthor"
+    link_to_cvn_person = true
+
+
     [[entities.properties]]
     ontology = "roh"
     name = "title"
@@ -50,6 +58,13 @@ code = "010.020.000.000"
 ontology = "roh"
 class = "Position"
 id.fallback = "uuid4"
+
+    [[entities.relations]]
+    ontology = "roh"
+    name = "hasPosition"
+    inverse_ontology = "roh"
+    inverse_name = "positionOf"
+    link_to_cvn_person = true
 
     [[entities.properties]]
     ontology = "vivo"
