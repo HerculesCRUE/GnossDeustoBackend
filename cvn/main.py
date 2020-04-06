@@ -78,16 +78,17 @@ def v1_convert():
         config_ontologies = toml.loads(f.read())
         # TODO error handling config ontologías error lectura
 
-    # TODO quitar code smell, hacer configurables
+    # El NamespaceManager se encarga de gestionar las ontologías enlazadas
     namespace_manager = NamespaceManager(Graph())
 
+    # Recorrer la config de ontologías y añadirlas al NamespaceManager
     for ontology in config_ontologies['ontologies']:
         ontologies[ontology['shortname']] = Namespace(ontology['uri_base'])
         namespace_manager.bind(ontology['shortname'], ontologies[ontology['shortname']])
         if ('primary' in ontology) and ontology['primary']:
             ontology_primary = ontologies[ontology['shortname']]
 
-    # Iniciar grafo
+    # Iniciar grafo principal con el NamespaceManager rellenado de ontologías
     g = Graph()
     g.namespace_manager = namespace_manager
 
@@ -268,14 +269,27 @@ def v1_convert():
 
 def get_node_by_code(tree, code):
     """
-    Recorre un árbol y va buscando si algún hijo tiene el código que le indicamos
+    Devuelve el primer elemento del árbol con el código especificado
     :param tree: el árbol de nodos donde buscar
     :param code: el código que buscamos
-    :return: el nodo que buscamos, si no, None
+    :return: el primer elemento del árbol con el código, si no, None
     """
     for child in tree:
         if node_get_code(child) == code:
             return child
+    return None
+
+def get_nodes_by_code(tree, code):
+    """
+    Recorre un árbol y devuelve todos los elementos inmediatamente debajo que tienen el código
+    :param tree: el árbol de nodos donde buscar
+    :param code: el código que buscamos
+    :return: array con los nodos que buscamos, si no, None
+    """
+    nodes = []
+    for child in tree:
+        if node_get_code(child) == code:
+            nodes.append(child)
     return None
 
 def node_get_code(node):
