@@ -144,14 +144,15 @@ def v1_convert():
             properties = {}
             for class_property in entity['properties']:
                 sources = get_sources_from_property(class_property, entity_result)
-                properties[class_property['name']] = class_property['format'].format_map(sources)
+                if 'format' in class_property and has_all_formatting_fields(class_property['format'], sources):
+                    properties[class_property['name']] = class_property['format'].format_map(sources)
+                    # hay algún source que no se ha generado
                 # TODO validar que se tienen todos los parámetros necesarios
                 # Posible problema aquí: ¿qué pasa si hay dos propiedades con el mismo nombre de distintas ontologías?
 
             # Generación de la URI
             identifier = uuid.uuid4()  # por defecto UUIDv4
             resource_class = entity['class']  # por defecto el nombre de la clase de la entidad
-
             if 'id' in entity:
                 if 'resource' in entity['id']:
                     resource_class = entity['id']['resource']
@@ -166,10 +167,11 @@ def v1_convert():
             # La rellenamos con las propiedades
             for class_property in entity['properties']:
                 sources = get_sources_from_property(class_property, entity_result)
-                formatted = class_property['format'].format_map(sources)
-                # TODO validar que se tienen todos los parámetros necesarios
-                g.add((current_entity, ontologies[class_property['ontology']].term(class_property['name']),
-                       Literal(formatted)))
+                if has_all_formatting_fields(class_property['format'], sources):
+                    formatted = class_property['format'].format_map(sources)
+                    # TODO validar que se tienen todos los parámetros necesarios
+                    g.add((current_entity, ontologies[class_property['ontology']].term(class_property['name']),
+                           Literal(formatted)))
 
 
     return make_response(g.serialize(format=params['format']), 200)  # TODO Quitar, DEBUG
