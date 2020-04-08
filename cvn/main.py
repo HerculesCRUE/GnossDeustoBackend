@@ -10,8 +10,6 @@ import argparse
 import xml.etree.ElementTree as ET
 from rdflib import Graph, Namespace, Literal, URIRef
 from rdflib.namespace import RDF, NamespaceManager
-import secrets  # temporal, para generar las ID de ciertas entidades
-import urllib.parse
 from flask import Flask, request, make_response, jsonify
 import re
 import requests
@@ -20,17 +18,20 @@ import uuid
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB máx.
-# app.debug = True
 
-# Formatos
+# Formatos de salida permitidos
 ALLOWED_FORMATS = ["xml", "n3", "turtle", "nt", "pretty-xml", "trix", "trig", "nquads"]
 
 # Caché para los nombres de códigos
+# TODO estudiar caché más elaborado, también para URIs generadas
 code_name = {}
 
 
 # TODO testing
 # TODO modularizar, quitar spaghetti code
+# TODO crear clases para config y units tests correspondientes
+# TODO documentación
+
 
 @app.route('/v1/convert', methods=['POST'])
 def v1_convert():
@@ -74,6 +75,7 @@ def v1_convert():
     # ---
 
     # Lista de ontologías para acceder a ellas desde la config
+    # TODO mover a una clase con funciones de utilidad
     ontologies = {}
     ontology_primary = None  # TODO comprobar que se ha definido una ontología primaria
 
@@ -121,7 +123,7 @@ def v1_convert():
     g.add((person, RDF.type, ontology_primary.term(config['instance']['class'])))
 
     # Representa el único nodo que contiene todos los datos personales del CVN
-    info_node = get_node_by_code(root, config['code'])
+    info_node = get_first_node_by_code(root, config['code'])
 
     for data_property in config['properties']:
         # Formateamos
@@ -140,15 +142,8 @@ def v1_convert():
 
     for entity in entities_config['entities']:
         # Para cada tipo de entidad buscamos en el árbol las que tengan el código
-        for entity_result in get_nodes_by_code(root, entity['code']):
-            properties = {}
-            for class_property in entity['properties']:
-                sources = get_sources_from_property(class_property, entity_result)
-                if 'format' in class_property and has_all_formatting_fields(class_property['format'], sources):
-                    properties[class_property['name']] = class_property['format'].format_map(sources)
-                    # hay algún source que no se ha generado
-                # TODO validar que se tienen todos los parámetros necesarios
-                # Posible problema aquí: ¿qué pasa si hay dos propiedades con el mismo nombre de distintas ontologías?
+        for entity_result_node in get_all_nodes_by_code(root, entity['code']):
+            properties = get_properties_from_node(entity, entity_result_node)
 
             # Generación de la URI
             identifier = uuid.uuid4()  # por defecto UUIDv4
@@ -166,7 +161,7 @@ def v1_convert():
 
             # La rellenamos con las propiedades
             for class_property in entity['properties']:
-                sources = get_sources_from_property(class_property, entity_result)
+                sources = get_sources_from_property(class_property, entity_result_node)
                 if has_all_formatting_fields(class_property['format'], sources):
                     formatted = class_property['format'].format_map(sources)
                     # TODO validar que se tienen todos los parámetros necesarios
@@ -186,136 +181,44 @@ def v1_convert():
                             inverse_ontology = relation['inverse_ontology']
                         g.add((current_entity, ontologies[inverse_ontology].term(relation['inverse_name']), person))
 
-
     return make_response(g.serialize(format=params['format']), 200)  # TODO Quitar, DEBUG
 
     # 3. Enlazar
 
+    # TODO limpiar comentarios
     # ----- FIN PROCESO CVN
-
     # Vamos a ir recorriendo el árbol XML del documento CVN e iremos sacando, cuando sea necesario, información, para
     # luego insertarla en tripletas generadas al vuelo con rdflib
-    for child in root:
-        code = node_get_code(child)
-
-        if app.debug:  # Debug
-            print("> " + code + ": " + code_get_name(code, "spa"))
-
-        # Publicaciones, documentos científicos y técnicos (ResearchObject)
-        if code == "060.010.010.000":
-            title, journal, volume, page_start, page_end, doi, issn = None, None, None, None, None, None, None  # TODO sustituir por diccionarios
-
-            for subchild in child:
-                subcode = node_get_code(subchild)
-
-                if app.debug:  # Debug
-                    print(">> " + subcode + ": " + code_get_name(subcode))
-
-                # TODO hacer switch
-
-                # Título
-                if node_get_code(subchild) == "060.010.010.030":
-                    title = subchild.find("{http://codes.cvn.fecyt.es/beans}Value").text
-                    if app.debug:  # Debug
-                        print(">>> TÍTULO: " + str(title))
-
-                # Journal
-                if node_get_code(subchild) == "060.010.010.210":
-                    try:
-                        journal = subchild.find("{http://codes.cvn.fecyt.es/beans}Value").text
-                    except AttributeError as e:
-                        if app.debug:  # Debug
-                            print(">>> JOURNAL: error")
-                    if app.debug:  # Debug
-                        print(">>> JOURNAL: " + str(journal))
-
-                # Volume
-                if node_get_code(subchild) == "060.010.010.080":
-                    try:
-                        volume = subchild.find("{http://codes.cvn.fecyt.es/beans}Volume").text
-                    except AttributeError as e:
-                        if app.debug:  # Debug
-                            print(">>> VOLUMEN: error")
-                    if app.debug:  # Debug
-                        print(">>> VOLUMEN: " + str(volume))
-
-                # Páginas inicio y fin
-                if node_get_code(subchild) == "060.010.010.090":
-                    try:
-                        page_start = subchild.find("{http://codes.cvn.fecyt.es/beans}InitialPage").text
-                        page_end = subchild.find("{http://codes.cvn.fecyt.es/beans}FinalPage").text
-                    except AttributeError as e:
-                        if app.debug:  # Debug
-                            print(">>> PÁGINAS: error")
-
-                    if app.debug:  # Debug
-                        print(">>> PÁGINAS: " + str(page_start) + "-" + str(page_end))
-
-                # ISSN Journal
-                if node_get_code(subchild) == "060.010.010.160":
-                    try:
-                        issn = subchild.find("{http://codes.cvn.fecyt.es/beans}Value").text
-                    except AttributeError as e:
-                        if app.debug:  # Debug
-                            print(">>> ISSN JOURNAL: error")
-                    if app.debug:  # Debug
-                        print(">>> ISSN JOURNAL: " + str(issn))
-
-                # DOI
-                if node_get_code(subchild) == "060.010.010.400":
-                    try:
-                        if subchild.find(
-                                "{http://codes.cvn.fecyt.es/beans}Type").text == "040":  # SOLO DOI, número mágico :S
-                            doi = subchild.find("{http://codes.cvn.fecyt.es/beans}Value").text
-                    except AttributeError as e:
-                        if app.debug:  # Debug
-                            print(">>> DOI: error")
-                    if app.debug:  # Debug
-                        print(">>> DOI: " + str(doi))
-
-            if doi is None:
-
-                publication = URIRef(generate_uri('Article', secrets.token_hex(6)))
-            else:
-                publication = URIRef(generate_uri('Article', urllib.parse.quote_plus(str(doi))))
-            g.add((publication, RDF.type, bibo.AcademicArticle))
-            g.add((publication, roh.title, Literal(str(title))))
-            # Journal object
-            if journal is not None:
-                # Generar a URI
-                if issn is None:  # Si no hemos detectado el ISSN, generamos un número al azar
-                    journal_object = URIRef(generate_uri("Journal", urllib.parse.quote_plus(str(secrets.token_hex(6)))))
-                else:
-
-                    journal_object = URIRef(generate_uri("Journal", urllib.parse.quote_plus(str(issn))))
-                g.add((journal_object, RDF.type, bibo.Journal))
-                g.add((journal_object, roh.title, Literal(str(journal))))
-                g.add((journal_object, vivo.publicationVenueFor, publication))
-                if issn is not None:
-                    g.add((journal_object, bibo.issn, Literal(str(issn))))
-            if volume is not None:
-                g.add((publication, bibo.volume, Literal(str(volume))))
-            if (page_start is not None) and (page_end is not None):
-                g.add((publication, bibo.start, Literal(str(page_start))))
-                g.add((publication, bibo.end, Literal(str(page_end))))
-            if doi is not None:
-                g.add((publication, bibo.doi, Literal(str(doi))))
-            # roh:correspondingAuthor
-            g.add((publication, roh.correspondingAuthor, person))
-
-            # Crear rol TODO personalizar el nombre del rol según el tipo
-            # role_uri = URIRef("http://purl.obolibrary.org/obo/BFO_0000023")
-            # TODO roles — lo tengo que consultar con Mikel y Diego
-
     # Serializar y guardar en un archivo con el formato que queramos
-    return make_response(g.serialize(format=params['format']), 200)
+
+
+def generate_class_from_(entity, parent=None):
+    return None  # TODO
+
+
+def get_properties_from_node(entity_config, node):
+    """
+    Recorre un nodo y genera un diccionario con propiedades y sus valores formateados
+    :param entity_config: el objeto de configuración
+    :param node: el nodo XML del CVN de donde queremos sacar las propiedades
+    :return:
+    """
+    properties = {}
+    for property_config in entity_config['properties']:
+        sources = get_sources_from_property(property_config, node)
+        if 'format' in property_config and has_all_formatting_fields(property_config['format'], sources):
+            properties[property_config['name']] = property_config['format'].format_map(sources)
+    return properties
+    # hay algún source que no se ha generado
+    # TODO validar que se tienen todos los parámetros necesarios
+    # Posible problema aquí: ¿qué pasa si hay dos propiedades con el mismo nombre de distintas ontologías?
 
 
 def get_sources_from_property(current_property, node):
     # Declaramos un dict. para que podamos guardar los valores de los sources
     sources = {}
     for source in current_property['sources']:
-        source_node = get_node_by_code(node, source['code'])
+        source_node = get_first_node_by_code(node, source['code'])
         if source_node is not None:
             result = source_node.find("{http://codes.cvn.fecyt.es/beans}" + source['bean'])
             if result is not None:
@@ -336,6 +239,7 @@ def has_all_formatting_fields(format_string, fields):
     :param fields: los campos con los valores que se usan para rellenar
     :return: bool ¿están todos los campos de formateo cubiertos por el diccionario?
     """
+    # Busca los valores entre {} y los devuelve en una lista
     format_fields = re.findall(r'{(.*?)}', format_string)
 
     for field in format_fields:
@@ -344,7 +248,7 @@ def has_all_formatting_fields(format_string, fields):
     return True
 
 
-def get_node_by_code(tree, code):
+def get_first_node_by_code(tree, code):
     """
     Devuelve el primer elemento del árbol con el código especificado
     :param tree: el árbol de nodos donde buscar
@@ -357,7 +261,7 @@ def get_node_by_code(tree, code):
     return None
 
 
-def get_nodes_by_code(tree, code):
+def get_all_nodes_by_code(tree, code):
     """
     Recorre un árbol y devuelve todos los elementos inmediatamente debajo que tienen el código
     :param tree: el árbol de nodos donde buscar
@@ -374,6 +278,8 @@ def get_nodes_by_code(tree, code):
 def node_get_code(node):
     """
     Obtener el código CVN de un nodo XML.
+    :param node: el nodo XML
+    :return: string con el código del nodo
     """
 
     if node.tag == "{http://codes.cvn.fecyt.es/beans}Code":
@@ -392,6 +298,10 @@ def node_get_code(node):
 def code_get_name(code, lang='spa'):
     """
     Obtener el nombre de un código CVN a partir de los mapeos XML.
+    OJO: muy mal rendimiento, usar solo para debug.
+    :param lang: idioma en el que queremos obtener los nombres
+    :param code: el código del que queremos obtener el nombre
+    :return: string el nombre del código
     """
     if code in code_name:
         return code_name[code]
@@ -403,6 +313,7 @@ def code_get_name(code, lang='spa'):
 
 def make_validation_error(message):
     return make_response(jsonify({'error': message}), 422)  # 422 = Unprocessable Entity
+    # TODO juntar esta función y make_error_response
 
 
 def make_error_response(message):
@@ -410,7 +321,8 @@ def make_error_response(message):
 
 
 # Caché de URIs generadas
-# TODO mover a un servicio externo
+# TODO mover a un servicio externo, o hacer algo más elaborado
+# Problema: memoria...? múltiples ejecuciones = se borra
 cached_uris = {}
 
 
@@ -429,15 +341,13 @@ def generate_uri(resource_class, identifier):
     api_response = requests.get("http://herc-as-front-desa.atica.um.es/uris/Factory", params={
         'resource_class': resource_class,
         'identifier': identifier
-    })
+    })  # TODO comprobar que lo que devuelve es de hecho una URL bien formateada
 
-    # Si falla:
+    # Si falla, nos la jugamos y nos inventamos una URI que podría ser:
     if api_response.status_code != 200:
         return "http://data.um.es/class/" + resource_class + "/" + identifier
 
-    # TODO comprobar que lo que devuelve es de hecho una URL bien formateada
-
-    # Guardamos en caché si sale bien
+    # Guardamos en caché si ha salido bien
     result = api_response.text
     cached_uris[cache_id] = result
     return result

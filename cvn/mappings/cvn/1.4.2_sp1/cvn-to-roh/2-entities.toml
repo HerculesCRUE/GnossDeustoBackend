@@ -58,6 +58,26 @@ ontology = "roh"
 class = "Position"
 id.fallback = "uuid4"
 
+    [[entities.subentities]]
+    ontology = "foaf"
+    class = "Organization"
+
+        [[entities.relations]]
+        ontology = "vivo"
+        name = "relates"
+        inverse_ontology = "vivo"
+        inverse_name = "relatedBy"
+
+        [[entities.properties]]
+        ontology = "foaf"
+        name = "mame"
+        format = "{name}"
+
+            [[entities.properties.sources]]
+            code = "010.020.000.020"
+            name = "name"
+            bean = "Value"
+
     [[entities.relations]]
     ontology = "roh"
     name = "hasPosition"
