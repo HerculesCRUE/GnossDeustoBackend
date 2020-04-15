@@ -1,13 +1,5 @@
-![](.//media/image1.png){width="5.555555555555555e-2in"
-height="4.4444444444444446e-2in"}Logroño, noviembre-2019
 
-Hércules backend asio. Estimación de Arquitectura de Sistemas
-
-![](.//media/image1.png){width="5.555555555555555e-2in"
-height="4.4444444444444446e-2in"}Proyecto Hércules
-
-**\
-**
+# Hércules Backend ASIO. Estimación de Arquitectura de Sistemas
 
 [1 INTRODUCCIÓN 3](#introducción)
 
@@ -41,6 +33,8 @@ Arquitectura lógica
 -------------------
 
 El diagrama lógico de la arquitectura es el siguiente:
+![](.//media/image1.png){width="5.555555555555555e-2in"
+height="4.4444444444444446e-2in"}
 
 Los componentes de la arquitectura son:
 
