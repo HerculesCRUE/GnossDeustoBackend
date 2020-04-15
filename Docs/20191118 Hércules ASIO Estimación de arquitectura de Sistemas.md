@@ -33,8 +33,7 @@ Arquitectura lógica
 -------------------
 
 El diagrama lógico de la arquitectura es el siguiente:
-![](.//media/image1.png){width="5.555555555555555e-2in"
-height="4.4444444444444446e-2in"}
+![](.//media/image1.png)
 
 Los componentes de la arquitectura son:
 
