@@ -1,14 +1,4 @@
-![](.//media/image1.png){width="5.555555555555555e-2in"
-height="4.4444444444444446e-2in"}Logroño, diciembre-2019
-
-Hércules backend asio. ESPECIFICACIÓN DE ESQUEMA DE URIS y buenas
-prácticas
-
-![](.//media/image1.png){width="5.555555555555555e-2in"
-height="4.4444444444444446e-2in"}Proyecto Hércules
-
-**\
-**
+# Hércules backend asio. ESPECIFICACIÓN DE ESQUEMA DE URIS y buenas prácticas
 
 [1 INTRODUCCIÓN 3](#introducción)
 
