@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: Bridge ASIO-FAIR Metrics
+  version: 1.0.0
+servers:
+- description: Flask local
+  url: http://localhost:8080/v1/
+paths:
+  /collections:
+    get:
+      operationId: collections_get
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: string
+          description: OK
+      summary: Obtener una lista de las colecciones
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /collections/{idCollection}/evaluate:
+    post:
+      operationId: collections_id_evaluate_post
+      parameters:
+      - description: ID de la colección sobre la que ejecutar el test
+        explode: false
+        in: path
+        name: idCollection
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - description: URI/Identificador del recurso sobre el que ejecutar el test
+        explode: true
+        in: query
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: ORCID ID de la persona que ejecuta el test
+        explode: true
+        in: query
+        name: orcid
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Título de la prueba
+        explode: true
+        in: query
+        name: title
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: string
+          description: OK
+        422:
+          description: Errores de validación
+      summary: Inicia un nuevo test a partir de una colección
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /evaluations:
+    get:
+      operationId: evaluations_get
+      responses:
+        200:
+          description: OK
+      summary: Obtiene una lista de evaluaciones relevantes
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /evaluations/{idEvaluation}/result:
+    get:
+      operationId: evaluations_id_result_get
+      parameters:
+      - description: ID de la evaluación
+        explode: false
+        in: path
+        name: idEvaluation
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        200:
+          description: OK
+      summary: Obtiene detalles del resultado de una evaluación
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+components:
+  schemas: {}

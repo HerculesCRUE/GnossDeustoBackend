@@ -1,0 +1,46 @@
+#+TITLE: Despliegue del servidor Ruby de FAIR Metrics
+#+AUTHOR: Íñigo Apellániz
+
+Vamos a instalar y desplegar la aplicación de Ruby, que usa Ruby on Rails.
+
+* Prerrequisitos
+- Última versión de Ruby instalada en nuestro ordenador
+
+* Descarga y despliegue local
+Clonamos el repositorio de Metrics:
+#+BEGIN_SRC bash
+git clone https://github.com/FAIRMetrics/Metrics
+#+END_SRC
+
+Accedemos a la carpeta =MetricsEvaluatorCode/Ruby/fairmetrics=.
+#+BEGIN_SRC bash
+cd MetricsEvaluatorCode/Ruby/fairmetrics
+#+END_SRC
+
+Ejecutamos el comando de instalación de las dependencias:
+#+BEGIN_SRC bash
+bundle install
+#+END_SRC
+
+A continuación, tendremos que ejecutar las migraciones para generar la base de
+datos.
+#+BEGIN_SRC bash
+bin/rails db:migrate RAILS_ENV=development
+#+END_SRC
+
+Este comando creará un archivo de base de datos SQLite:
+=db/development.sqlite3=. En caso de que el anterior comando diera un error, lo
+abrimos con algún editor de bases de datos (porejemplo, [[https://tableplus.com/][TablePlus]]), y creamos
+las siguientes tablas:
+- =metrics=
+- =evaluations=
+- =collections=
+Luego, ejecutamos el comando anterior de nuevo.
+
+Ahora, para ejecutar la web, basta con usar el siguiente comando:
+#+BEGIN_SRC bash
+./bin/ruby s
+#+END_SRC
+
+Eso abrirá un servidor en local en [[http://localhost:8080]].
+

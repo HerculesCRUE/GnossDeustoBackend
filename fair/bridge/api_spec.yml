@@ -1,0 +1,81 @@
+openapi: '3.0.0'
+servers:
+  - url: http://localhost:8080/v1/
+    description: 'Flask local'
+info:
+  description: ''
+  version: 1.0.0
+  title: Bridge ASIO-FAIR Metrics
+paths:
+  /collections:
+    get:
+      summary: 'Obtener una lista de las colecciones'
+      operationId: collections_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: OK
+  /collections/{id}/evaluate:
+    post:
+      summary: 'Inicia un nuevo test a partir de una colección'
+      operationId: collections_id_evaluate_post
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: 'ID de la colección sobre la que ejecutar el test'
+        - in: query
+          name: resource
+          required: true
+          schema:
+            type: string
+          description: 'URI/Identificador del recurso sobre el que ejecutar el test'
+        - in: query
+          name: executor
+          required: true
+          schema:
+            type: string
+          description: 'ORCID ID de la persona que ejecuta el test'
+        - in: query
+          name: title
+          required: true
+          schema:
+            type: string
+          description: 'Título de la prueba'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: string
+        '422':
+          description: 'Errores de validación'
+  /evaluations:
+    get:
+      summary: 'Obtiene una lista de evaluaciones relevantes'
+      operationId: evaluations_get
+      responses:
+        '200':
+          description: 'OK'
+  /evaluations/{id}/result:
+    get:
+      summary: 'Obtiene detalles del resultado de una evaluación'
+      operationId: evaluations_id_result_get
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description: 'ID de la evaluación'
+      responses:
+        '200':
+          description: 'OK'
