@@ -224,7 +224,7 @@ La privacidad de los datos de la entidad recuperada desde OAI-PMH estará
 definida como uno de los atributos de los metadatos recuperados y será
 gestionada por el API de Carga (funciones de publicación). Tomando como
 referencia el documento [20200129 Hércules ASIO Data confidentiality
-proposal](https://univmurcia.sharepoint.com/sites/ASIOGnossD/_layouts/15/Doc.aspx?OR=teams&action=edit&sourcedoc=%7b4276BA10-A7BC-4107-AE91-ECDAB4665A18%7d)
+proposal](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/20200129%20H%C3%A9rcules%20ASIO%20Data%20confidentiality%20proposal.md)
 y el enfoque acordado, las entidades marcadas como confidenciales se
 almacenarán en ASIO en un grafo privado, que permitirá el uso de datos
 agregados, pero no el acceso a los datos identificativos individuales.
