@@ -143,7 +143,7 @@ In this case the entity is entirely confidential but has some data (e.g.
 the project budget) that could be used in arbitrary aggregated queries.
 Suppose these data:
 
-![](.//media/image2_DataConfidentiality.emf)
+![](.//media/image2_DataConfidentiality.png)
 
 The SPARQL Endpoint would always exclude the private graph for an
 external data manager if the query asks for an attribute that allows a
@@ -188,7 +188,7 @@ Confidential Attributes 
 If an entity has a confidential data (e.g. the project budget) then the
 confidential attribute is confidential. Suppose these data:
 
-![](.//media/image3_DataConfidentiality.emf)
+![](.//media/image3_DataConfidentiality.png)
 
 The SPARQL Endpoint would always include the private graph if the
 external data manager has permission to query aggregated confidential
