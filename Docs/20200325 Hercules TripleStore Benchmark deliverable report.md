@@ -354,17 +354,6 @@ The table below summarises the results on the assessed TripleStores.
 
 **Table 1:** Results of scoring for assessed TripleStores.
 
-                       **Functionalities**   **Performance**   **Management**   **Total**
-  -------------------- --------------------- ----------------- ---------------- -----------
-  **AllegroGraph**     2.87                  3.68              3.67             3.27
-  **Amazon Neptune**   2.86                  2.95              3.0              2.89
-  **Blazegraph**       2.58                  3.32              3.0              2.97
-  **Corese**           2.09                  2.2               **4.87**         3.14
-  **Jena TDB**         3.53                  3.2               **4.87**         **3.82**
-  **Neo4J**            2.12                  3.44              3.27             2.83
-  **Stardog**          **3.75**              **4.41**          2.47             3.55
-  **Virtuoso**         3.16                  3.89              3.27             3.4
-
 
 |                | Functionalities | Performance | Management | Total |
 |----------------|-----------------|-------------|------------|-------|
