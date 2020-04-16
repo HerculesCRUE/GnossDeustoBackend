@@ -83,16 +83,7 @@ Las siguientes características técnicas incluyen:
 -   Un ejemplo de servicios de datos para los distintos modelos de
     gestión de base de datos: SQL, RDF Store, Cache y Colas de eventos.
 
-
-| Tables   |      Are      |      Cool |
-|----------|:-------------:|----------:|
-| col 1 is |  left-aligned |     $1600 |
-| col 2 is |    centered   | $12<br>$4 |
-| col 3 is | right-aligned |        $1 |
-
-
 La lista de componentes es:
-
 
 | Servidor                                           | SO + Software                                   | CPU | RAM | Disco |
 |----------------------------------------------------|-------------------------------------------------|-----|-----|-------|
@@ -163,83 +154,6 @@ La lista de componentes es:
 |                                                    | nano-2.3.1-10.el7.x86_64                        |     |     |       |
 | 1 almacenamiento compartido                        |                                                 |     |     | 50    |
 
-  ---------------------------------------------------------------------------------------------------------------------------
-  Servidor                                             SO + Software                                      CPU   RAM   Disco
-  ---------------------------------------------------- -------------------------------------------------- ----- ----- -------
-  2 frontales web para contenido dinámico              CentOS 7\                                          4     8     50
-                                                       Apache 2.4.33 con modcache y http2\                            
-                                                       httpd24u-2.4.33-3.ius.centos7.x86\_64\                         
-                                                       httpd24u-filesystem-2.4.33-3.ius.centos7.noarch\               
-                                                       httpd24u-tools-2.4.33-3.ius.centos7.x86\_64\                   
-                                                       httpd24u-mod\_ssl-2.4.33-3.ius.centos7.x86\_64\                
-                                                       iotop-0.6-2.el7.noarch\                                        
-                                                       net-tools-2.0-0.22.20131004git.el7.x86\_64\                    
-                                                       htop-2.1.0-1.el7.x86\_64\                                      
-                                                       mlocate-0.26-8.el7.x86\_64\                                    
-                                                       lsof-4.87-5.el7.x86\_64\                                       
-                                                       nano-2.3.1-10.el7.x86\_64                                      
-
-  2 frontales web para estáticos y cache web           CentOS 7\                                          2     3     50
-                                                       Apache 2.4.33 con modcache y http2 o SQUID\                    
-                                                       httpd24u-2.4.33-3.ius.centos7.x86\_64\                         
-                                                       httpd24u-filesystem-2.4.33-3.ius.centos7.noarch\               
-                                                       httpd24u-tools-2.4.33-3.ius.centos7.x86\_64\                   
-                                                       httpd24u-mod\_ssl-2.4.33-3.ius.centos7.x86\_64\                
-                                                       iotop-0.6-2.el7.noarch\                                        
-                                                       net-tools-2.0-0.22.20131004git.el7.x86\_64\                    
-                                                       htop-2.1.0-1.el7.x86\_64\                                      
-                                                       mlocate-0.26-8.el7.x86\_64\                                    
-                                                       lsof-4.87-5.el7.x86\_64\                                       
-                                                       nano-2.3.1-10.el7.x86\_64                                      
-
-  1 servidor para tareas y servicios de Backoffice     CentOS 7\                                          2     6     50
-                                                       Apache 2.4.33 con modcache y http2 o SQUID\                    
-                                                       httpd24u-2.4.33-3.ius.centos7.x86\_64\                         
-                                                       httpd24u-filesystem-2.4.33-3.ius.centos7.noarch\               
-                                                       httpd24u-tools-2.4.33-3.ius.centos7.x86\_64\                   
-                                                       httpd24u-mod\_ssl-2.4.33-3.ius.centos7.x86\_64\                
-                                                       iotop-0.6-2.el7.noarch\                                        
-                                                       net-tools-2.0-0.22.20131004git.el7.x86\_64\                    
-                                                       htop-2.1.0-1.el7.x86\_64\                                      
-                                                       mlocate-0.26-8.el7.x86\_64\                                    
-                                                       lsof-4.87-5.el7.x86\_64\                                       
-                                                       nano-2.3.1-10.el7.x86\_64                                      
-
-  1 cluster de BBDD SQL                                PostgreSQL 11.6                                    4     8     50
-
-  2 servidores para RDF Store en alta disponibilidad   CentOS Linux release 7.3.1611 (Core)\              4     14    50
-                                                       Virtuoso 7.x Open Source Version\                              
-                                                       ldd (GNU libc) 2.17\                                           
-                                                       iotop-0.6-2.el7.noarch\                                        
-                                                       net-tools-2.0-0.22.20131004git.el7.x86\_64\                    
-                                                       htop-2.1.0-1.el7.x86\_64\                                      
-                                                       mlocate-0.26-8.el7.x86\_64\                                    
-                                                       lsof-4.87-5.el7.x86\_64\                                       
-                                                       nano-2.3.1-10.el7.x86\_64                                      
-
-  2 servidores para datos de cache                     CentOS Linux release 7.3.1611 (Core)\              2     4     25
-                                                       Redis 5.x\                                                     
-                                                       iotop-0.6-2.el7.noarch\                                        
-                                                       net-tools-2.0-0.22.20131004git.el7.x86\_64\                    
-                                                       htop-2.1.0-1.el7.x86\_64\                                      
-                                                       mlocate-0.26-8.el7.x86\_64\                                    
-                                                       lsof-4.87-5.el7.x86\_64\                                       
-                                                       nano-2.3.1-10.el7.x86\_64                                      
-
-  1 servidor para gestión de colas de eventos          CentOS Linux release 7.3.1611 (Core)\              2     2     25
-                                                       RabbitMQ 3.8. rabbitmq-server\                                 
-                                                       epel-release-7-11.noarch\                                      
-                                                       erlang-R16B-03.18.el7.x86\_64.rpm\                             
-                                                       socat-1.7.3.2-2.el7.x86\_64.rpm\                               
-                                                       iotop-0.6-2.el7.noarch\                                        
-                                                       net-tools-2.0-0.22.20131004git.el7.x86\_64\                    
-                                                       htop-2.1.0-1.el7.x86\_64\                                      
-                                                       mlocate-0.26-8.el7.x86\_64\                                    
-                                                       lsof-4.87-5.el7.x86\_64\                                       
-                                                       nano-2.3.1-10.el7.x86\_64                                      
-
-  1 almacenamiento compartido                                                                                         50
-  ---------------------------------------------------------------------------------------------------------------------------
 
 Arquitectura Física en Preproducción
 ------------------------------------
@@ -248,16 +162,17 @@ La propuesta para los servidores de preproducción, con la misma
 arquitectura lógica y software base que en producción, pero sin alta
 disponibilidad (en principio), sería:
 
-  Servidor                                           SO + Software                         CPU   RAM   Disco
-  -------------------------------------------------- ------------------------------------- ----- ----- -------
-  1 frontal web para contenido dinámico              CentOS 7, Apache, ...                 2     6     50
-  1 frontal web para estáticos y cache web           CentOS 7, Apache, ...                 2     3     50
-  1 servidor para tareas y servicios de Backoffice   PostgreSQL ...                        2     4     50
-  1 servidor de BBDD SQL                             CentOS 7, Virtuoso Open Source, ...   3     8     50
-  1 servidor para RDF Store                          CentOS 7, Redis, ...                  3     14    50
-  1 servidor para datos de cache                     CentOS 7, RabbitMQ, ...               2     4     25
-  1 servidor para gestión de colas de eventos        CentOS 7, Apache, ...                 2     1     25
-  1 almacenamiento compartido                        NFS                                               50
+| Servidor                                         | SO + Software                     | CPU | RAM | Disco |
+|--------------------------------------------------|-----------------------------------|-----|-----|-------|
+| 1 frontal web para contenido dinámico            | CentOS 7, Apache, …               | 2   | 6   | 50    |
+| 1 frontal web para estáticos y cache web         | CentOS 7, Apache, …               | 2   | 3   | 50    |
+| 1 servidor para tareas y servicios de Backoffice | PostgreSQL …                      | 2   | 4   | 50    |
+| 1 servidor de BBDD SQL                           | CentOS 7, Virtuoso Open Source, … | 3   | 8   | 50    |
+| 1 servidor para RDF Store                        | CentOS 7, Redis, …                | 3   | 14  | 50    |
+| 1 servidor para datos de cache                   | CentOS 7, RabbitMQ, …             | 2   | 4   | 25    |
+| 1 servidor para gestión de colas de eventos      | CentOS 7, Apache, …               | 2   | 1   | 25    |
+| 1 almacenamiento compartido                      | NFS                               |     |     | 50    |
+
 
 Arquitectura Física en Desarrollo
 ---------------------------------
@@ -267,12 +182,12 @@ preproducción, pudiendo reutilizar componentes si se dimensionan
 adecuadamente. En el caso de que fuesen servidores separados de los de
 preproducción, necesitaríamos:
 
-  Servidor                                           SO + Software                         CPU   RAM   Disco
-  -------------------------------------------------- ------------------------------------- ----- ----- -------
-  1 frontal web para contenido dinámico y estático   CentOS 7, Apache, ...                 2     6     50
-  1 servidor para tareas y servicios de Backoffice   CentOS 7, Apache, ...                 2     3     50
-  1 servidor de BBDD SQL                             PostgreSQL ...                        3     8     50
-  1 servidor para RDF Store                          CentOS 7, Virtuoso Open Source, ...   3     14    50
-  1 servidor para datos de cache                     CentOS 7, Redis, ...                  2     4     25
-  1 servidor para gestión de colas de eventos        CentOS 7, RabbitMQ, ...               2     1     25
-  1 almacenamiento compartido                        NFS                                               50
+| Servidor                                         | SO + Software                     | CPU | RAM | Disco |
+|--------------------------------------------------|-----------------------------------|-----|-----|-------|
+| 1 frontal web para contenido dinámico y estático | CentOS 7, Apache, …               | 2   | 6   | 50    |
+| 1 servidor para tareas y servicios de Backoffice | CentOS 7, Apache, …               | 2   | 3   | 50    |
+| 1 servidor de BBDD SQL                           | PostgreSQL …                      | 3   | 8   | 50    |
+| 1 servidor para RDF Store                        | CentOS 7, Virtuoso Open Source, … | 3   | 14  | 50    |
+| 1 servidor para datos de cache                   | CentOS 7, Redis, …                | 2   | 4   | 25    |
+| 1 servidor para gestión de colas de eventos      | CentOS 7, RabbitMQ, …             | 2   | 1   | 25    |
+| 1 almacenamiento compartido                      | NFS                               |     |     | 50    |
