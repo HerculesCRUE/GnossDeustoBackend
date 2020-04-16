@@ -37,7 +37,7 @@ funcional de los trabajos de carga del Hito 1, que serán:
 
 Este documento usa como referencia de OAI-PMH la guía de implementación
 contenida en [20200203 Hércules ASIO Especificación de funciones de
-Carga](https://univmurcia.sharepoint.com/sites/ASIOGnossD/_layouts/15/Doc.aspx?OR=teams&action=edit&sourcedoc=%7b43D385DD-3087-4C47-8897-8EE45954E906%7d).
+Carga](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/20200203%20H%C3%A9rcules%20ASIO%20Especificaci%C3%B3n%20de%20funciones%20de%20Carga.md).
 
 INTERFAZ DE CARGA Y SINCRONIZACIÓN
 ==================================
@@ -46,7 +46,7 @@ El interfaz estándar de carga y sincronización de datos de Hércules ASIO
 será la salida de un servicio OAI-PMH desarrollado según la guía de
 implementación indicada contenida en [20200203 Hércules ASIO
 Especificación de funciones de
-Carga](https://univmurcia.sharepoint.com/sites/ASIOGnossD/_layouts/15/Doc.aspx?OR=teams&action=edit&sourcedoc=%7b43D385DD-3087-4C47-8897-8EE45954E906%7d).
+Carga](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/20200203%20H%C3%A9rcules%20ASIO%20Especificaci%C3%B3n%20de%20funciones%20de%20Carga.md).
 
 Esto implica que los metadatos de salida de un servicio OAI-PMH para el
 proyecto Hércules siempre tendrán el mismo formato, alineado con la ROH
