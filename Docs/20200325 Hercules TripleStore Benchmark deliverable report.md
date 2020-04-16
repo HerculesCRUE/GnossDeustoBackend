@@ -89,153 +89,47 @@ addresses the functionality, 2- whether the function is complete and
 compliant with standards, and 3- whether the implementation of the
 function is effective.
 
-  **Function**                    **Weight**   **Description**
-  ------------------------------- ------------ -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Ability to load and serve RDF   5            Can load RDF in its standard serialisations, using standard interfaces, efficiently. Will provide RDF as results of queries in standard serialisations effectively.
-  SPARQL 1.1 compliance           5            Provide SPARQL endpoints using the SPARQL protocol and a complete implementation of the SPARQL 1.1 query language, including support for multiple languages and character encodings.
-  SPARQL update compliance        3            Provide SPARQL Update endpoints compliant with the SPARQL Update protocol. Assuming that, in the absence of SPARQL update, other approaches can be used to update the data, this is seen as less important than the previous functions.
+| Function                      | Weight | Description                                                                                                                                                                                                                              |
+|-------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Ability to load and serve RDF | 5      | Can load RDF in its standard serialisations, using standard interfaces, efficiently. Will provide RDF as results of queries in standard serialisations effectively.                                                                      |
+| SPARQL 1.1 compliance         | 5      | Provide SPARQL endpoints using the SPARQL protocol and a complete implementation of the SPARQL 1.1 query language, including support for multiple languages and character encodings.                                                     |
+| SPARQL update compliance      | 3      | Provide SPARQL Update endpoints compliant with the  SPARQL Update protocol. Assuming that, in the absence of SPARQL update, other approaches can be used to update the data, this is seen as less important than the previous functions. |
+
 
 **Extensions (F2, Weight: 3)**
 
 Extensions are functionalities that are not considered core to the
 handling of RDF/SPARQL linked data, but would provide useful additions.
 
-+---------------------------+------------+---------------------------+
-| **Function**              | **Weight** | **Description**           |
-+===========================+============+===========================+
-| Full-text search          | 5          | Provides a full-text      |
-|                           |            | index of the data, and    |
-| (e.g. through Lucene,     |            | can make full-text        |
-| Solr, ElasticSearch)      |            | queries (e.g. as part of  |
-|                           |            | SPARQL queries). As this  |
-|                           |            | is a common requirement   |
-|                           |            | in many scenarios, the    |
-|                           |            | weight of this function   |
-|                           |            | is high.                  |
-+---------------------------+------------+---------------------------+
-| GeoSPARQL                 | 2          | Compliant with the        |
-|                           |            | GeoSPARQL specification,  |
-|                           |            | providing SPARQL          |
-|                           |            | construct to query data   |
-|                           |            | based on geographical     |
-|                           |            | locations. As this is a   |
-|                           |            | less common requirement,  |
-|                           |            | which can be addressed    |
-|                           |            | through dedicated SPARQL  |
-|                           |            | queries, this is seen as  |
-|                           |            | less critical.            |
-+---------------------------+------------+---------------------------+
-| SPARQL query federation   | 2          | Compliant with SPARQL     |
-| (SERVICE Clause)          |            | query federation through  |
-|                           |            | providing the SERVICE     |
-|                           |            | clause. As                |
-|                           |            | implementations of this   |
-|                           |            | tend to be inefficient,   |
-|                           |            | and often not needed if   |
-|                           |            | data distribution can be  |
-|                           |            | achieved in another way,  |
-|                           |            | this is seen as a weak    |
-|                           |            | requirement.              |
-+---------------------------+------------+---------------------------+
-| SPARQL query federation   | 2          | The SERVICE clause        |
-| (automatic handling of    |            | described above requires  |
-| data distribution)        |            | knowledge of where the    |
-|                           |            | data is distributed. A    |
-|                           |            | system able to            |
-|                           |            | automatically handle data |
-|                           |            | distribution and federate |
-|                           |            | queries over distributed  |
-|                           |            | stores transparently      |
-|                           |            | would be an advantage     |
-|                           |            | without being absolutely  |
-|                           |            | required.                 |
-+---------------------------+------------+---------------------------+
-| Reasoning (RDFS           | 5          | Being able to enable      |
-| entailment)               |            | basic taxonomy-based      |
-|                           |            | reasoning over RDFS       |
-|                           |            | ontologies. This is the   |
-|                           |            | simplest level of         |
-|                           |            | reasoning, which is often |
-|                           |            | sufficient in simple use  |
-|                           |            | cases.                    |
-+---------------------------+------------+---------------------------+
-| Reasoning ("Basic" OWL    | 4          | The simplest OWL profiles |
-| profiles)                 |            | (EL, QL) are made to      |
-|                           |            | represent classes of      |
-|                           |            | language that enable      |
-|                           |            | efficient reasoning. In   |
-|                           |            | cases where reasoning is  |
-|                           |            | useful, adhering to those |
-|                           |            | profile gives some        |
-|                           |            | assurance that            |
-|                           |            | performance will not be   |
-|                           |            | too degraded. Those can   |
-|                           |            | therefore be useful in a  |
-|                           |            | broader, but slightly     |
-|                           |            | more complex use cases.   |
-+---------------------------+------------+---------------------------+
-| Reasoning (DL-based OWL   | 2          | The more advanced         |
-| profiles)                 |            | profiles of OWL require   |
-|                           |            | reasoners based on        |
-|                           |            | description logics, which |
-|                           |            | can be very complex and   |
-|                           |            | resource-consuming,       |
-|                           |            | especially for large      |
-|                           |            | knowledge bases. This     |
-|                           |            | addresses a small number  |
-|                           |            | of more advanced use      |
-|                           |            | cases.                    |
-+---------------------------+------------+---------------------------+
-| Custom inference rules    | 3          | Ability to implement      |
-|                           |            | custom inference rules,   |
-|                           |            | including Jena-like       |
-|                           |            | rules, SWRL, or others.   |
-+---------------------------+------------+---------------------------+
-| Method for RDF validation | 3          | Provide support for, for  |
-| and close world           |            | example, SHACL.           |
-| assumption                |            |                           |
-+---------------------------+------------+---------------------------+
-| Programmatic access       | 2          | Other programming         |
-| through other RDF         |            | interfaces exist for RDF  |
-| standard APIs             |            | data (e.g. RDF4J) and     |
-|                           |            | might be available to the |
-|                           |            | system.                   |
-+---------------------------+------------+---------------------------+
-| Programmatic access       | 1          | The system provides       |
-| through other database    |            | access to the data        |
-| access methods            |            | through standard database |
-|                           |            | access methods (e.g.      |
-|                           |            | JDBC, ODBC).              |
-+---------------------------+------------+---------------------------+
-| Named Entity recognition  | 3          | Availability to recognise |
-|                           |            | entities from text.       |
-+---------------------------+------------+---------------------------+
-| Handling of property      | 2          | The system might include  |
-| graphs                    |            | the ability to handle     |
-|                           |            | property graphs through   |
-|                           |            | specific functions.       |
-+---------------------------+------------+---------------------------+
-| Other data formats on     | 1          | The system might provide  |
-| ingest                    |            | facilities to load and    |
-|                           |            | transform into RDF data   |
-|                           |            | from other formats (e.g.  |
-|                           |            | CSV/TSV, XML, JSON, RDBs  |
-|                           |            | through "virtual graph"   |
-|                           |            | system).                  |
-+---------------------------+------------+---------------------------+
+| Function                                                          | Weight | Description                                                                                                                                                                                                                                                                                                                   |
+|-------------------------------------------------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Full-text search                                                  | 5      | Provides a full-text index of the data, and can make full-text queries (e.g. as part of SPARQL queries). As this is a common requirement in many scenarios, the weight of this function is high.(e.g. through Lucene, Solr, ElasticSearch)                                                                                    |
+| GeoSPARQL                                                         | 2      | Compliant with the GeoSPARQL specification, providing SPARQL construct to query data based on geographical locations. As this is a less common requirement, which can be addressed through dedicated SPARQL queries, this is seen as less critical.                                                                           |
+| SPARQL query federation (SERVICE Clause)                          | 2      | Compliant with SPARQL query federation through providing the SERVICE clause. As implementations of this tend to be inefficient, and often not needed if data distribution can be achieved in another way, this is seen as a weak requirement.                                                                                 |
+| SPARQL query federation (automatic handling of data distribution) | 2      | The SERVICE clause described above requires knowledge of where the data is distributed. A system able to automatically handle data distribution and federate queries over distributed stores transparently would be an advantage without being absolutely required.                                                           |
+| Reasoning (RDFS entailment)                                       | 5      | Being able to enable basic taxonomy-based reasoning over RDFS ontologies. This is the simplest level of reasoning, which is often sufficient in simple use cases.                                                                                                                                                             |
+| Reasoning (“Basic” OWL profiles)                                  | 4      | The simplest OWL profiles (EL, QL) are made to represent classes of language that enable efficient reasoning. In cases where reasoning is useful, adhering to those profile gives some assurance that performance will not be too degraded. Those can therefore be useful in a broader, but slightly more complex use cases.  |
+| Reasoning (DL-based OWL profiles)                                 | 2      | The more advanced profiles of OWL require reasoners based on description logics, which can be very complex and resource-consuming, especially for large knowledge bases. This addresses a small number of more advanced use cases.                                                                                            |
+| Custom inference rules                                            | 3      | Ability to implement custom inference rules, including Jena-like rules, SWRL, or others.                                                                                                                                                                                                                                      |
+| Method for RDF validation and close world assumption              | 3      | Provide support for, for example, SHACL.                                                                                                                                                                                                                                                                                      |
+| Programmatic access through other RDF standard APIs               | 2      | Other programming interfaces exist for RDF data (e.g. RDF4J) and might be available to the system.                                                                                                                                                                                                                            |
+| Programmatic access through other database access methods         | 1      | The system provides access to the data through standard database access methods (e.g. JDBC, ODBC).                                                                                                                                                                                                                            |
+| Named Entity recognition                                          | 3      | Availability to recognise entities from text.                                                                                                                                                                                                                                                                                 |
+| Handling of property graphs                                       | 2      | The system might include the ability to handle property graphs through specific functions.                                                                                                                                                                                                                                    |
+| Other data formats on ingest                                      | 1      | The system might provide facilities to load and transform into RDF data from other formats (e.g. CSV/TSV, XML, JSON, RDBs through “virtual graph” system).                                                                                                                                                                    |
 
 **Security (F3, Weight: 4)**
 
 The handling of security for any information system is critical.
 TripleStores might include their own security mechanisms, or those might
 have to be handled separately.
+| Function                       | Weight | Description                                                                                                                                                                                                                                              |
+|--------------------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Data encryption                | 2      | This relates to whether the system provides options to encrypt the data in the store, and the strength of the encryption.                                                                                                                                |
+| Role-based access control      | 5      | This relates to the ability to restrict access to the data based on the role of the user. The level at which access control is provided (graph, entities, individual triples, custom) affects the score for this criterion.                              |
+| Attribute-based access control | 3      | This relates to the ability to restrict access to the data based on custom policies related to attributes of the user. The level at which access control is provided (graph, entities, individual triples, custom) affects the score for this criterion. |
+| Usage quotas                   | 2      | The system might provide a way for the administrator to impose quotas on the use of the system (e.g. amount of triples read in a given period of time), to avoid overload.                                                                               |
 
-  **Function**                     **Weight**   **Description**
-  -------------------------------- ------------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Data encryption                  2            This relates to whether the system provides options to encrypt the data in the store, and the strength of the encryption.
-  Role-based access control        5            This relates to the ability to restrict access to the data based on the role of the user. The level at which access control is provided (graph, entities, individual triples, custom) affects the score for this criterion.
-  Attribute-based access control   3            This relates to the ability to restrict access to the data based on custom policies related to attributes of the user. The level at which access control is provided (graph, entities, individual triples, custom) affects the score for this criterion.
-  Usage quotas                     2            The system might provide a way for the administrator to impose quotas on the use of the system (e.g. amount of triples read in a given period of time), to avoid overload.
 
 Performance and scalability
 ---------------------------
@@ -255,14 +149,14 @@ assumption that TripleStores might perform very differently depending on
 whether they are optimised for large or small datasets, and that most
 scenarios will require significant, but not very large amounts of data.
 
-  **Data size**                      **Weight**   **Description**
-  ---------------------------------- ------------ ------------------------------------------------------------------------------------
-  Tens of thousands of triples       5            Average query response time on datasets with tens of thousands of RDF triples.
-  Hundreds of thousands of triples   5            Average query response time on datasets with hundreds of thousands of RDF triples.
-  Millions of triples                4            Average query response time on datasets with millions of RDF triples.
-  Tens of millions of triples        3            Average query response time on datasets with tens of millions of RDF triples.
-  Hundreds of millions of triples    2            Average query response time on datasets with hundreds of millions of RDF triples.
-  Billions of triples                1            Average query response time on datasets with billions of RDF triples.
+| Data size                        | Weight | Description                                                                        |
+|----------------------------------|--------|------------------------------------------------------------------------------------|
+| Tens of thousands of triples     | 5      | Average query response time on datasets with tens of thousands of RDF triples.     |
+| Hundreds of thousands of triples | 5      | Average query response time on datasets with hundreds of thousands of RDF triples. |
+| Millions of triples              | 4      | Average query response time on datasets with millions of RDF triples.              |
+| Tens of millions of triples      | 3      | Average query response time on datasets with tens of millions of RDF triples.      |
+| Hundreds of millions of triples  | 2      | Average query response time on datasets with hundreds of millions of RDF triples.  |
+| Billions of triples              | 1      | Average query response time on datasets with billions of RDF triples.              |
 
 **Loading and update time (P2, Weight: 2)**
 
@@ -272,12 +166,12 @@ performance of the system overall. Loading and update times are
 evaluated based on calculating the time required to make changes to
 datasets, using different size and complexity of changes.
 
-  **Operation**   **Weight**   **Description**
-  --------------- ------------ -------------------------------------------------------------------------------------------------------------------------------
-  Batch loading   5            Batch loading is the insertion of large amounts of triples into the system, as a background process.
-  Insert          4            Insert corresponds to adding triples on the basis of specific conditions (using SPARQL update).
-  Clear           2            Clear corresponding to dropping a whole graph of the whole of the data in the store (possibly to overnight it with new data).
-  Delete          3            Delete corresponds to removing specific triples based on specific conditions (using SPARQL update).
+| Operation     | Weight | Description                                                                                                                   |
+|---------------|--------|-------------------------------------------------------------------------------------------------------------------------------|
+| Batch loading | 5      | Batch loading is the insertion of large amounts of triples into the system, as a background process.                          |
+| Insert        | 4      | Insert corresponds to adding triples on the basis of specific conditions (using SPARQL update).                               |
+| Clear         | 2      | Clear corresponding to dropping a whole graph of the whole of the data in the store (possibly to overnight it with new data). |
+| Delete        | 3      | Delete corresponds to removing specific triples based on specific conditions (using SPARQL update).                           |
 
 **Memory footprint (P3, Weight: 4)**
 
@@ -288,14 +182,14 @@ the system. Memory footprint is measured while the queries used to
 measure query response times are executed, taking the peak memory use of
 the system.
 
-  **Data size**                      **Weight**   **Description**
-  ---------------------------------- ------------ --------------------------------------------------------------------------------------------------------
-  Tens of thousands of triples       5            Amount of memory allocated to the system when querying datasets with tens of thousands of triples.
-  Hundreds of thousands of triples   5            Amount of memory allocated to the system when querying datasets with hundreds of thousands of triples.
-  Millions of triples                4            Amount of memory allocated to the system when querying datasets with millions of triples.
-  Tens of millions of triples        3            Amount of memory allocated to the system when querying datasets with tens of millions of triples.
-  Hundreds of millions of triples    2            Amount of memory allocated to the system when querying datasets with hundreds of millions of triples.
-  Billions of triples                1            Amount of memory allocated to the system when querying datasets with billions of triples.
+| Data size                        | Weight | Description                                                                                            |
+|----------------------------------|--------|--------------------------------------------------------------------------------------------------------|
+| Tens of thousands of triples     | 5      | Amount of memory allocated to the system when querying datasets with tens of thousands of triples.     |
+| Hundreds of thousands of triples | 5      | Amount of memory allocated to the system when querying datasets with hundreds of thousands of triples. |
+| Millions of triples              | 4      | Amount of memory allocated to the system when querying datasets with millions of triples.              |
+| Tens of millions of triples      | 3      | Amount of memory allocated to the system when querying datasets with tens of millions of triples.      |
+| Hundreds of millions of triples  | 2      | Amount of memory allocated to the system when querying datasets with hundreds of millions of triples.  |
+| Billions of triples              | 1      | Amount of memory allocated to the system when querying datasets with billions of triples.              |
 
 **Robustness and Scaling (Weight: 4)**
 
@@ -303,12 +197,12 @@ Besides pure runtime performance, reliability and the ability to scale
 the system up are critical. Crashes, downtimes, and performance
 decreases can have a very negative effect on the end user.
 
-  **Criterion**                         **Weight**   **Description**
-  ------------------------------------- ------------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Robustness / reliability              5            Robustness and reliability are calculated by running complex, notoriously challenging queries with large result sets, stress-testing the system.
-  Transaction and rollback mechanism    3            The system provides a journal of update transactions, which can be used to rollback changes.
-  Vertical scalability                  2            Vertical scalability is the ability of the system to maximally utilise the resources available to it, and to expand to new resources made available.
-  Horizontal scalability (clustering)   3            Horizontal scalability is the ability of the system to be distributed over multiple instances (e.g. in a cluster), with new instances being added to enable increases in scale.
+| Criterion                           | Weight | Description                                                                                                                                                                     |
+|-------------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Robustness / reliability            | 5      | Robustness and reliability are calculated by running complex, notoriously challenging queries with large result sets, stress-testing the system.                                |
+| Transaction and rollback mechanism  | 3      | The system provides a journal of update transactions, which can be used to rollback changes.                                                                                    |
+| Vertical scalability                | 2      | Vertical scalability is the ability of the system to maximally utilise the resources available to it, and to expand to new resources made available.                            |
+| Horizontal scalability (clustering) | 3      | Horizontal scalability is the ability of the system to be distributed over multiple instances (e.g. in a cluster), with new instances being added to enable increases in scale. |
 
 Management and maintenance
 --------------------------
@@ -328,10 +222,10 @@ the cost is based on the most likely option depending on the scenario.
 For open source systems, there might be constraints and specific clauses
 that apply, which might restrict some aspects of the system.
 
-  **Criterion**         **Weight**   **Description**
-  --------------------- ------------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Cost                  5            Cost is calculated based on the price of the software, considering the options that are most likely to be required. Free and open source system score 5.
-  Open source licence   2            Open source licences can be more or less permissive, or include specific aspects that could restrict the use or distribution of the system. A system under commercial, non-free licences score 0.
+| Criterion           | Weight | Description                                                                                                                                                                                       |
+|---------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Cost                | 5      | Cost is calculated based on the price of the software, considering the options that are most likely to be required. Free and open source system score 5.                                          |
+| Open source licence | 2      | Open source licences can be more or less permissive, or include specific aspects that could restrict the use or distribution of the system. A system under commercial, non-free licences score 0. |
 
 **Ease of deployment (M2, Weight: 2)**
 
@@ -339,13 +233,13 @@ The effort required in deployment is important, especially as it might
 have to be realised by administrators with limited experience in
 TripleStores.
 
-  **Criterion**                  **Weight**   **Description**
-  ------------------------------ ------------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Automatic installer            3            This criterion looks at whether an automatic installer is available to get the system up and running.
-  Complexity of configuration    5            This criterion measures the amount of effort required to configure the system, including whether default configurations are available, how valid they are, the number of changes required to be made, and how complex those changes are.
-  Quality of the documentation   4            This measures how much the system can be setup in common scenarios following the documentation, and how much the documentation addresses possible problems in installation.
-  Dependencies                   3            The system might require other libraries or systems to be installed in order to run, which might increase the cost and make deployment more complicated.
-  Released as a container        2            The system is available as a (Docker) container, ready to be deployed.
+| Criterion                    | Weight | Description                                                                                                                                                                                                                              |
+|------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Automatic installer          | 3      | This criterion looks at whether an automatic installer is available to get the system up and running.                                                                                                                                    |
+| Complexity of configuration  | 5      | This criterion measures the amount of effort required to configure the system, including whether default configurations are available, how valid they are, the number of changes required to be made, and how complex those changes are. |
+| Quality of the documentation | 4      | This measures how much the system can be setup in common scenarios following the documentation, and how much the documentation addresses possible problems in installation.                                                              |
+| Dependencies                 | 3      | The system might require other libraries or systems to be installed in order to run, which might increase the cost and make deployment more complicated.                                                                                 |
+| Released as a container      | 2      | The system is available as a (Docker) container, ready to be deployed.                                                                                                                                                                   |
 
 **Administration, updates and maintenance (Weight: 5)**
 
@@ -354,18 +248,18 @@ cost of the system. There are many factors that affect the amount of
 efforts required to keep the system updated and maintained, which are
 evaluated differently.
 
-  **Criterion**                                 **Weight**   **Description**
-  --------------------------------------------- ------------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Quality of the documentation                  4            As for the same criterion in relation to deployment, the quality of the documentation here relates to how complete and clear the documentation is in relation to realising basic maintenance operations and resolving problems.
-  Support services                              4            This relates to whether the cost of the system includes customer support services from the system provider.
-  Active development                            5            This relates to how much the system is being developed, whether by the company providing it or by the open source community.
-  Update frequency                              3            This relates to how often the system is being updated by the provider, whether for additional features, bug fixes, etc.
-  Automatic update                              3            This relates to whether update are automatic, or automatically deployed.
-  Downtime required                             4            This relates to whether downtime from the system is required for updates.
-  Backup mechanism                              3            A preferably automatic mechanism is available to make regular backups of the data.
-  Monitoring                                    2            Interfaces to monitor the state (health, data) of the system are available.
-  Availability of a strong community of users   2            A large community of users might help with easy of use and administration, by providing a knowledge base of problems and solutions. This can be evaluated in part by using the db-engines ranking.
-  Available as a cloud service                  1            There is an option to use the system as a cloud service (DBaaS), rather than deploying it locally.
+| Criterion                                   | Weight | Description                                                                                                                                                                                                                     |
+|---------------------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Quality of the documentation                | 4      | As for the same criterion in relation to deployment, the quality of the documentation here relates to how complete and clear the documentation is in relation to realising basic maintenance operations and resolving problems. |
+| Support services                            | 4      | This relates to whether the cost of the system includes customer support services from the system provider.                                                                                                                     |
+| Active development                          | 5      | This relates to how much the system is being developed, whether by the company providing it or by the open source community.                                                                                                    |
+| Update frequency                            | 3      | This relates to how often the system is being updated by the provider, whether for additional features, bug fixes, etc.                                                                                                         |
+| Automatic update                            | 3      | This relates to whether update are automatic, or automatically deployed.                                                                                                                                                        |
+| Downtime required                           | 4      | This relates to whether downtime from the system is required for updates.                                                                                                                                                       |
+| Backup mechanism                            | 3      | A preferably automatic mechanism is available to make regular backups of the data.                                                                                                                                              |
+| Monitoring                                  | 2      | Interfaces to monitor the state (health, data) of the system are available.                                                                                                                                                     |
+| Availability of a strong community of users | 2      | A large community of users might help with easy of use and administration, by providing a knowledge base of problems and solutions. This can be evaluated in part by using the db-engines ranking.                              |
+| Available as a cloud service                | 1      | There is an option to use the system as a cloud service (DBaaS), rather than deploying it locally.                                                                                                                              |
 
 TripleStore Assessed 
 ====================
@@ -470,6 +364,18 @@ The table below summarises the results on the assessed TripleStores.
   **Neo4J**            2.12                  3.44              3.27             2.83
   **Stardog**          **3.75**              **4.41**          2.47             3.55
   **Virtuoso**         3.16                  3.89              3.27             3.4
+
+
+|                | Functionalities | Performance | Management | Total |
+|----------------|-----------------|-------------|------------|-------|
+| AllegroGraph   | 2.87            | 3.68        | 3.67       | 3.27  |
+| Amazon Neptune | 2.86            | 2.95        | 3.0        | 2.89  |
+| Blazegraph     | 2.58            | 3.32        | 3.0        | 2.97  |
+| Corese         | 2.09            | 2.2         | **4.87**       | 3.14  |
+| Jena TDB       | 3.53            | 3.2         | **4.87**       | **3.82**  |
+| Neo4J          | 2.12            | 3.44        | 3.27       | 2.83  |
+| Stardog        | **3.75**            | **4.41**        | 2.47       | 3.55  |
+| Virtuoso       | 3.16            | 3.89        | 3.27       | 3.4   |
 
 Those results are obtained from carrying out:
 
