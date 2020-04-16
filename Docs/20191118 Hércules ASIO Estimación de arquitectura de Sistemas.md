@@ -84,17 +84,11 @@ Las siguientes características técnicas incluyen:
     gestión de base de datos: SQL, RDF Store, Cache y Colas de eventos.
 
 
-: Sample grid table.
-
-+---------------+---------------+--------------------+
-| Fruit         | Price         | Advantages         |
-+===============+===============+====================+
-| Bananas       | $1.34         | - built-in wrapper |
-|               |               | - bright color     |
-+---------------+---------------+--------------------+
-| Oranges       | $2.10         | - cures scurvy     |
-|               |               | - tasty            |
-+---------------+---------------+--------------------+
+| Tables   |      Are      |      Cool |
+|----------|:-------------:|----------:|
+| col 1 is |  left-aligned |     $1600 |
+| col 2 is |    centered   | $12<br>$4 |
+| col 3 is | right-aligned |        $1 |
 
 
 La lista de componentes es:
