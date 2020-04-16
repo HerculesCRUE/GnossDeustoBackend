@@ -1,0 +1,504 @@
+@prefix ns1: <http://purl.org/dc/elements/1.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_backup> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/support/documentation/current/backup-and-restore.html> ;
+    ns1:title "Allegrograph Backup and Restore" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_benchmark_LUBM> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/allegrograph/agraph_bench_lubm.lhtml> ;
+    ns1:title "AllegroGraph Benchmark Lubm" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_change_history> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/support/documentation/current/change-history.html> ;
+    ns1:title "AllegroGraph Change History" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_comercial_edition> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/allegrograph/ag_commercial_edition.lhtml> ;
+    ns1:title "AllegroGraph Comercial Edition" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_has_value_tutorial> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/support/documentation/current/has-value-tutorial.html> ;
+    ns1:title "Allegrograph Has Value Tutorial" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_homepage> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/allegrograph/> ;
+    ns1:title "AllegroGraph Homepage" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_introduction> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/support/documentation/current/agraph-introduction.html> ;
+    ns1:title "Introduction to AllegroGraph" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_license> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/allegrograph/license.pdf> ;
+    ns1:title "AllegroGraph License" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_load_doc> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/support/documentation/current/agload.html> ;
+    ns1:title "AllegroGraph Documentation on Imporing Datat" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_performance_tuning> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/allegrograph/agraph_performance_tuning.lhtml> ;
+    ns1:title "AllegroGraph Performance Tuning" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_reasoner_tutorial> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/support/documentation/current/reasoner-tutorial.html> ;
+    ns1:title "AllegroGraph Reasoner Tutorial" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_security> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/support/documentation/current/security.html> ;
+    ns1:title "AllegroGraph Security Features" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_security_overview> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/support/documentation/current/security-overview.html> ;
+    ns1:title "AllegroGraph Security Overview" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_shacl> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/support/documentation/current/shacl.html> ;
+    ns1:title "Allegrograph Shacl Support" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_sparql_support> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/support/documentation/current/sparql-reference.html> ;
+    ns1:title "AllegroGraph SPARQL Support" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_spin> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/support/documentation/current/spin.html> ;
+    ns1:title "AllegroGraph Spin Support" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_text_index> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/support/documentation/6.4.1/text-index.html> ;
+    ns1:title "AllegroGraph Text Index" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegrograph_webinar_22-09> a ns1:BibliographicResource ;
+    ns1:source <https://franz.com/agraph/services/conferences_seminars/Franz_webinar_1-22-09.pdf> ;
+    ns1:title "AllegroGraph webinar 22-09" .
+
+<http://data.datascienceinstitute.ie/asio/bib/anzograph_homepage> a ns1:BibliographicResource ;
+    ns1:source <https://www.cambridgesemantics.com/anzograph/> ;
+    ns1:title "AnzoGraph Homapage" .
+
+<http://data.datascienceinstitute.ie/asio/bib/blazegraph_about> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/blazegraph/database/wiki/About_Blazegraph> ;
+    ns1:title "About Blazegraph" .
+
+<http://data.datascienceinstitute.ie/asio/bib/blazegraph_documentation> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/blazegraph/database/wiki> ;
+    ns1:title "Blazegraph Documentation" .
+
+<http://data.datascienceinstitute.ie/asio/bib/blazegraph_federated> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/blazegraph/database/wiki/FederatedQuery> ;
+    ns1:title "Blazegraph Federated Query" .
+
+<http://data.datascienceinstitute.ie/asio/bib/blazegraph_full_text_search> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/blazegraph/database/wiki/FullTextSearch> ;
+    ns1:title "Blazegraph Full Text Search" .
+
+<http://data.datascienceinstitute.ie/asio/bib/blazegraph_geospatial> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/blazegraph/database/wiki/GeoSpatial> ;
+    ns1:title "Blazegraph GeoSpatial Queries" .
+
+<http://data.datascienceinstitute.ie/asio/bib/blazegraph_github> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/blazegraph/database> ;
+    ns1:title "Blazegraph githup repository" .
+
+<http://data.datascienceinstitute.ie/asio/bib/blazegraph_homepage> a ns1:BibliographicResource ;
+    ns1:source <https://blazegraph.com/> ;
+    ns1:title "Blazegraph homepage" .
+
+<http://data.datascienceinstitute.ie/asio/bib/blazegraph_inference> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/blazegraph/database/wiki/InferenceAndTruthMaintenance> ;
+    ns1:title "Blazegraph Inference and Truth Maintenance" .
+
+<http://data.datascienceinstitute.ie/asio/bib/blazegraph_licence> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/blazegraph/database/blob/master/LICENSE.txt> ;
+    ns1:title "Blazegraph Licence" .
+
+<http://data.datascienceinstitute.ie/asio/bib/blazegraph_res_api> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/blazegraph/database/wiki/REST_API> ;
+    ns1:title "Blazegraph REST API" .
+
+<http://data.datascienceinstitute.ie/asio/bib/blazegraph_security_models> a ns1:BibliographicResource ;
+    ns1:source <https://blog.blazegraph.com/?p=307> ;
+    ns1:title "Security models in Blazegraph" .
+
+<http://data.datascienceinstitute.ie/asio/bib/blazegraph_sparql_update> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/blazegraph/database/wiki/SPARQL_Update> ;
+    ns1:title "Blazegraph SPARQL Update" .
+
+<http://data.datascienceinstitute.ie/asio/bib/blazegraph_transactions> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/blazegraph/database/wiki/TxGuide> ;
+    ns1:title "Blazegraph transactions" .
+
+<http://data.datascienceinstitute.ie/asio/bib/brightstardb_homepage> a ns1:BibliographicResource ;
+    ns1:source <http://brightstardb.com/> ;
+    ns1:title "BrightStarDB homapage" .
+
+<http://data.datascienceinstitute.ie/asio/bib/corese_api> a ns1:BibliographicResource ;
+    ns1:source <https://project.inria.fr/corese/corese-api/> ;
+    ns1:title "Corese API" .
+
+<http://data.datascienceinstitute.ie/asio/bib/corese_dqp> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/Wimmics/corese/wiki/DQP---Distributed-Query-Process> ;
+    ns1:title "Corese distributed query process" .
+
+<http://data.datascienceinstitute.ie/asio/bib/corese_encryption> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/Wimmics/corese/wiki/CORESE-server#ssl-access-management> ;
+    ns1:title "Corese encryption" .
+
+<http://data.datascienceinstitute.ie/asio/bib/corese_entailments> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/Wimmics/corese/wiki/CORESE-server#entailments-activation> ;
+    ns1:title "Corese entailments" .
+
+<http://data.datascienceinstitute.ie/asio/bib/corese_github> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/Wimmics/corese> ;
+    ns1:title "Corese github" .
+
+<http://data.datascienceinstitute.ie/asio/bib/corese_homepage> a ns1:BibliographicResource ;
+    ns1:source <https://project.inria.fr/corese/> ;
+    ns1:title "Corese Homepage" .
+
+<http://data.datascienceinstitute.ie/asio/bib/corese_neo4j> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/Wimmics/corese/wiki/Description-du-mapping-avec-neo4j-(french)> ;
+    ns1:title "Corse Neo4J mapping" .
+
+<http://data.datascienceinstitute.ie/asio/bib/ibm_db2_homepage> a ns1:BibliographicResource ;
+    ns1:source <https://www.ibm.com/products/db2-database> ;
+    ns1:title "IBM DB2 homepage" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_acl> a ns1:BibliographicResource ;
+    ns1:source <https://jena.apache.org/documentation/fuseki2/data-access-control> ;
+    ns1:title "Jena access control" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_arq> a ns1:BibliographicResource ;
+    ns1:source <https://jena.apache.org/documentation/query/index.html> ;
+    ns1:title "Jena ARQ" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_csv_pt> a ns1:BibliographicResource ;
+    ns1:source <https://jena.apache.org/documentation/csv/get_started.html> ;
+    ns1:title "Jena CSV PT" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_doc> a ns1:BibliographicResource ;
+    ns1:source <https://jena.apache.org/documentation/> ;
+    ns1:title "Jena documentation overview" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_fulltextsearch> a ns1:BibliographicResource ;
+    ns1:source <https://jena.apache.org/documentation/query/text-query.html> ;
+    ns1:title "Full text search in Jena" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_fuseki_security> a ns1:BibliographicResource ;
+    ns1:source <https://jena.apache.org/documentation/fuseki2/fuseki-security.html> ;
+    ns1:title "Jena fuseki security" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_geosparql> a ns1:BibliographicResource ;
+    ns1:source <https://jena.apache.org/documentation/geosparql/index.html> ;
+    ns1:title "Jena GeoSPARQL" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_github> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/apache/jena/> ;
+    ns1:title "Jena Github" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_homepage> a ns1:BibliographicResource ;
+    ns1:source <https://jena.apache.org/> ;
+    ns1:title "Jena Homepage" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_inference> a ns1:BibliographicResource ;
+    ns1:source <https://jena.apache.org/documentation/inference/> ;
+    ns1:title "Jena inference" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_licence> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/apache/jena/blob/master/LICENSE> ;
+    ns1:title "Jena Licence" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_reading_writing> a ns1:BibliographicResource ;
+    ns1:source <https://jena.apache.org/documentation/io/> ;
+    ns1:title "Jena reading and writing RDF" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_service> a ns1:BibliographicResource ;
+    ns1:source <https://jena.apache.org/documentation/query/service.html> ;
+    ns1:title "Jena Federated Query" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_shacl> a ns1:BibliographicResource ;
+    ns1:source <https://jena.apache.org/documentation/shacl/index.html> ;
+    ns1:title "Jena SHACL" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_transactions> a ns1:BibliographicResource ;
+    ns1:source <https://jena.apache.org/documentation/txn/> ;
+    ns1:title "Jena transactions" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_update> a ns1:BibliographicResource ;
+    ns1:source <https://jena.apache.org/documentation/query/update.html> ;
+    ns1:title "Jena ARQ update" .
+
+<http://data.datascienceinstitute.ie/asio/bib/morsey2011dbpedia> a ns1:BibliographicResource ;
+    ns1:title "DBpedia SPARQL benchmark--performance assessment with real queries on real data" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_access_control> a ns1:BibliographicResource ;
+    ns1:source <https://neo4j.com/docs/operations-manual/current/authentication-authorization/access-control/> ;
+    ns1:title "Neo4J access control" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_cluster_query> a ns1:BibliographicResource ;
+    ns1:source <https://medium.com/neo4j/querying-neo4j-clusters-7d6fde75b5b4> ;
+    ns1:title "Neo4J cluster query" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_constraints> a ns1:BibliographicResource ;
+    ns1:source <https://neo4j.com/docs/cypher-manual/current/administration/constraints/> ;
+    ns1:title "Neo4J constraints" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_documentation> a ns1:BibliographicResource ;
+    ns1:source <https://neo4j.com/docs/> ;
+    ns1:title "Neo4J documentation" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_encryption> a ns1:BibliographicResource ;
+    ns1:source <https://neo4j.com/blog/neo4j-data-encryption-ogm/> ;
+    ns1:title "Neo4J data encryption" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_fulltextsearch> a ns1:BibliographicResource ;
+    ns1:source <https://neo4j.com/developer/kb/fulltext-search-in-neo4j/> ;
+    ns1:title "Neo4J full text search" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_graphaware> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/graphaware/neo4j-nlp> ;
+    ns1:title "Neo4J GraphAware plugin" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_homepage> a ns1:BibliographicResource ;
+    ns1:source <https://neo4j.com/> ;
+    ns1:title "Neo4J homepage" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_import> a ns1:BibliographicResource ;
+    ns1:source <https://neo4j.com/developer/data-import/> ;
+    ns1:title "Neo4J data import" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_licencing> a ns1:BibliographicResource ;
+    ns1:source <https://neo4j.com/business-edge/licensing-neo4j/> ;
+    ns1:title "Neo4J licencing" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_rdf> a ns1:BibliographicResource ;
+    ns1:source <https://neo4j.com/labs/nsmtx-rdf/> ;
+    ns1:title "Neo4J NSMTX RDF plugin" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_reasoning> a ns1:BibliographicResource ;
+    ns1:source <https://neo4j.com/blog/neo4j-rdf-graph-database-reasoning-engine/> ;
+    ns1:title "Neo4J reasoning" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_releases> a ns1:BibliographicResource ;
+    ns1:source <https://neo4j.com/release-notes/> ;
+    ns1:title "Neo4J releases" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_sparql> a ns1:BibliographicResource ;
+    ns1:source <https://stackoverflow.com/questions/55627115/use-sparql-to-query-an-existing-neo4j-graph> ;
+    ns1:title "Neo4J sparql support" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_spatial> a ns1:BibliographicResource ;
+    ns1:source <https://neo4j.com/docs/cypher-manual/current/functions/spatial/> ;
+    ns1:title "Neo4J spatial" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_transactions> a ns1:BibliographicResource ;
+    ns1:source <https://neo4j.com/docs/cypher-manual/current/introduction/transactions/> ;
+    ns1:title "Neo4J transactions" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_versions> a ns1:BibliographicResource ;
+    ns1:source <https://neo4j.com/subscriptions/> ;
+    ns1:title "Neo4J versions" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neptune_access> a ns1:BibliographicResource ;
+    ns1:source <https://docs.aws.amazon.com/neptune/latest/userguide/security-iam.html> ;
+    ns1:title "Neptune access control" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neptune_encrypt> a ns1:BibliographicResource ;
+    ns1:source <https://docs.aws.amazon.com/neptune/latest/userguide/encrypt.html> ;
+    ns1:title "Neptune Encryption" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neptune_federated> a ns1:BibliographicResource ;
+    ns1:source <https://docs.aws.amazon.com/neptune/latest/userguide/sparql-service.html> ;
+    ns1:title "Neptune Federated Queries" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neptune_formats> a ns1:BibliographicResource ;
+    ns1:source <https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-rdf.html> ;
+    ns1:title "Neptune formats" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neptune_fulltextsearch> a ns1:BibliographicResource ;
+    ns1:source <https://docs.aws.amazon.com/neptune/latest/userguide/full-text-search.html> ;
+    ns1:title "Amazon Neptune full-text search" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neptune_gremlin> a ns1:BibliographicResource ;
+    ns1:source <https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-gremlin.html> ;
+    ns1:title "Neptune Gremlin" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neptune_guide> a ns1:BibliographicResource ;
+    ns1:source <https://docs.aws.amazon.com/neptune/latest/userguide/intro.html> ;
+    ns1:title "Amazon Neptune use guide" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neptune_homepage> a ns1:BibliographicResource ;
+    ns1:source <https://aws.amazon.com/neptune/> ;
+    ns1:title "Amazon Neptune Homepage" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neptune_pricing> a ns1:BibliographicResource ;
+    ns1:source <https://aws.amazon.com/neptune/pricing/> ;
+    ns1:title "Neptune Pricing" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neptune_rdf4j> a ns1:BibliographicResource ;
+    ns1:source <https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-sparql-rdf4j-console.html> ;
+    ns1:title "Neptune RDF4J" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neptune_releases> a ns1:BibliographicResource ;
+    ns1:source <https://docs.aws.amazon.com/neptune/latest/userguide/engine-releases.html> ;
+    ns1:title "Neptune releases" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neptune_sparql> a ns1:BibliographicResource ;
+    ns1:source <https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-sparql.html> ;
+    ns1:title "Neptune SPARQL" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neptune_sparqlc> a ns1:BibliographicResource ;
+    ns1:source <https://docs.aws.amazon.com/neptune/latest/userguide/feature-sparql-compliance.html> ;
+    ns1:title "Neptune Sparql compliance" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neptune_transactions> a ns1:BibliographicResource ;
+    ns1:source <https://docs.aws.amazon.com/neptune/latest/userguide/transactions.html> ;
+    ns1:title "Neptune Transactions" .
+
+<http://data.datascienceinstitute.ie/asio/bib/perf_analyses> a ns1:BibliographicResource ;
+    ns1:source <perf_summary.md> ;
+    ns1:title "Meta-analysis of performance benchmark results" .
+
+<http://data.datascienceinstitute.ie/asio/bib/rohloff2007evaluation> a ns1:BibliographicResource ;
+    ns1:title "An evaluation of triple-store technologies for large data stores" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_constraints> a ns1:BibliographicResource ;
+    ns1:source <https://www.stardog.com/docs/#_validating_constraints> ;
+    ns1:title "Stardog constraints" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_data_add> a ns1:BibliographicResource ;
+    ns1:source <https://www.stardog.com/docs/man/data-add> ;
+    ns1:title "Stardog data add" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_data_uni> a ns1:BibliographicResource ;
+    ns1:source <https://www.stardog.com/docs/#_enterprise_data_unification> ;
+    ns1:title "Stardog data unification" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_encryption> a ns1:BibliographicResource ;
+    ns1:source <https://www.stardog.com/docs/#_deploying_stardog_securely> ;
+    ns1:title "Stardog encryption" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_entity_ex> a ns1:BibliographicResource ;
+    ns1:source <https://www.stardog.com/docs/#_entity_extraction_and_linking> ;
+    ns1:title "Stardog entity extraction" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_federated> a ns1:BibliographicResource ;
+    ns1:source <https://www.stardog.com/docs/7.0.0/#_federated_queries> ;
+    ns1:title "Stardog federated query" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_geo> a ns1:BibliographicResource ;
+    ns1:source <https://www.stardog.com/blog/geospatial-a-primer/> ;
+    ns1:title "Stardog geo" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_homepage> a ns1:BibliographicResource ;
+    ns1:source <https://www.stardog.com/> ;
+    ns1:title "stardog homepage" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_manual> a ns1:BibliographicResource ;
+    ns1:source <https://www.stardog.com/docs/7.0.0/> ;
+    ns1:title "Stardog Manual" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_pricing> a ns1:BibliographicResource ;
+    ns1:source <https://www.stardog.com/pricing/> ;
+    ns1:title "Stardog pricing" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_reasoning> a ns1:BibliographicResource ;
+    ns1:source <https://www.stardog.com/docs/#_owl_rule_reasoning> ;
+    ns1:title "Stardog reasoning" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_releases> a ns1:BibliographicResource ;
+    ns1:source <https://www.stardog.com/docs/release-notes> ;
+    ns1:title "Stardog releases" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_search> a ns1:BibliographicResource ;
+    ns1:source <https://www.stardog.com/docs/#_search> ;
+    ns1:title "Stardog search" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_security> a ns1:BibliographicResource ;
+    ns1:source <https://www.stardog.com/docs/#_security> ;
+    ns1:title "Stardog security" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_transactions> a ns1:BibliographicResource ;
+    ns1:source <https://www.stardog.com/docs/#_acid_transactions> ;
+    ns1:title "Stardog ACID transactions" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_bulk_loading> a ns1:BibliographicResource ;
+    ns1:source <http://vos.openlinksw.com/owiki/wiki/VOS/VirtBulkRDFLoader> ;
+    ns1:title "Virtuoso bul loading" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_config> a ns1:BibliographicResource ;
+    ns1:source <http://docs.openlinksw.com/virtuoso/dbadm/> ;
+    ns1:title "Virtuoso config" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_content_types> a ns1:BibliographicResource ;
+    ns1:source <https://medium.com/virtuoso-blog/documents-content-types-supported-by-virtuoso-3dc9b4c2378c> ;
+    ns1:title "Virtuoso document and types supported" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_faq_fed> a ns1:BibliographicResource ;
+    ns1:source <https://virtuoso.openlinksw.com/faq/#FederatedSPARQL> ;
+    ns1:title "Virtuoso FAQ on federation" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_fulltext_search> a ns1:BibliographicResource ;
+    ns1:source <http://vos.openlinksw.com/owiki/wiki/VOS/VirtTipsAndTricksSPARQL11Update> ;
+    ns1:title "Virtuoso full text search" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_geo> a ns1:BibliographicResource ;
+    ns1:source <http://vos.openlinksw.com/owiki/wiki/VOS/VirtGeoSPARQLEnhancementDocs> ;
+    ns1:title "Virtuoso Geospatial data" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_github> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/openlink/virtuoso-opensource> ;
+    ns1:title "Virtuoso github" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_homepage> a ns1:BibliographicResource ;
+    ns1:source <https://virtuoso.openlinksw.com/> ;
+    ns1:title "Virtuoso homepage" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_opensource_licence> a ns1:BibliographicResource ;
+    ns1:source <http://vos.openlinksw.com/owiki/wiki/VOS/VOSLicense> ;
+    ns1:title "Virtuoso Open Source licence" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_pricing> a ns1:BibliographicResource ;
+    ns1:source <https://virtuoso.openlinksw.com/pricing/> ;
+    ns1:title "Virtuoso Pricing" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_reasoning> a ns1:BibliographicResource ;
+    ns1:source <http://vos.openlinksw.com/owiki/wiki/VOS/VirtTipsAndTricksGuideRDFSchemaOWLInferenceRules> ;
+    ns1:title "Virtuoso reasoning" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_security> a ns1:BibliographicResource ;
+    ns1:source <http://docs.openlinksw.com/virtuoso/virtuosofaq33_01/> ;
+    ns1:title "Virtuoso security" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_shacl> a ns1:BibliographicResource ;
+    ns1:source <https://github.com/openlink/virtuoso-opensource/issues/660> ;
+    ns1:title "Virtuoso support of SHACL" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_sparql_examples> a ns1:BibliographicResource ;
+    ns1:source <http://vos.openlinksw.com/owiki/wiki/VOS/VirtTipsAndTricksSPARQL11FeaturesExamplesCollection> ;
+    ns1:title "Examples of SPARQL 1.1. features in Virtuoso" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_sparql_fed> a ns1:BibliographicResource ;
+    ns1:source <http://vos.openlinksw.com/owiki/wiki/VOS/VirtTipsAndTricksDiscoverSPARQFedCapabilities> ;
+    ns1:title "Virtuoso SPARQL-FED" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_sparql_update_examples> a ns1:BibliographicResource ;
+    ns1:source <http://vos.openlinksw.com/owiki/wiki/VOS/VirtTipsAndTricksSPARQL11Update> ;
+    ns1:title "Virtuoso SPARQL update examples" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_spin> a ns1:BibliographicResource ;
+    ns1:source <https://medium.com/virtuoso-blog/virtuoso-8-0-creating-a-custom-inference-rules-using-spin-vocabulary-d7a060f859ef> ;
+    ns1:title "Example of using SPIN in virtuoso" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_transactions> a ns1:BibliographicResource ;
+    ns1:source <http://docs.openlinksw.com/virtuoso/clusteroperationtransc/> ;
+    ns1:title "Virtuoso transactions" .
+
+<http://data.datascienceinstitute.ie/asio/bib/voigt2012yet> a ns1:BibliographicResource ;
+    ns1:title "Yet Another Triple Store Benchmark? Practical Experiences with Real-World Data." .
+
+

@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% from "public/_public_macros.html" import category %}
+
+{% block title %}Hercules triple store benchmark{% endblock %}
+
+{% block content %}
+  
+<div class="container">
+
+  <h1>Hercules triple store benchmarking framework</h1>
+
+  <p>Click on a category name to see its details</p>
+
+  <div class="row">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    {% for cat in benchmark %}
+	  <div class="panel panel-default">
+        {{ category(cat.name, cat.description, loop.index) }}
+		<!-- Add class 'in' to expand by default -->
+		<div id="collapse{{loop.index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{loop.index}}">
+		  <div class="panel-body">
+		  	{% for group in cat.groups %}
+		  	<div class="panel panel-info">
+		  	  <div class="panel-heading">
+                <h3 class="panel-title">{{group.name}}</h3>
+              </div>
+              <div class="panel-body">
+                <p>{{group.description}}</p>
+                <table class="table table-hover table-responsive">
+                  <thead>
+                    <tr>
+                      <th>Criterion</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for criterion in group.criteria %}
+                    <tr>
+                      <td><a href="/entity?uri={{criterion.id}}">{{criterion.name}}</a></td>
+                      <td>{{criterion.description}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+		  	</div>
+		  	{% endfor %}
+		  </div>
+		</div>
+	  </div>
+    {% endfor %}
+    </div>
+  </div>
+
+</div>
+  
+{% endblock %}

@@ -1,0 +1,35 @@
+@base <http://datascienceinstitute.ie/asio/> .
+@prefix asio: <http://datascienceinstitute.ie/asio/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .  
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/> .
+@prefix owbo: <http://datascienceinstitute.ie/owbo/> . 
+
+
+doap:Version owbo:x 275 . 
+doap:Version owbo:y 252 . 
+asio:TripleStoreRelease owbo:x 167 . 
+asio:TripleStoreRelease owbo:y 385 . 
+asio:Criterion owbo:x 790 . 
+asio:Criterion owbo:y 454 . 
+asio:CriterionAssessment owbo:x 494 . 
+asio:CriterionAssessment owbo:y 452 . 
+xsd:integer owbo:x 576 . 
+xsd:integer owbo:y 571 . 
+skos:Concept owbo:x 788 . 
+skos:Concept owbo:y 191 . 
+asio:CriterionCategory owbo:x 786 . 
+asio:CriterionCategory owbo:y 301 . 
+xsd:string owbo:x 495 . 
+xsd:string owbo:y 235 . 
+provo:Entity owbo:x 357 . 
+provo:Entity owbo:y 584 . 
+doap:Project owbo:x 280 . 
+doap:Project owbo:y 129 . 
+asio:TripleStore owbo:x 106 . 
+asio:TripleStore owbo:y 250 . 

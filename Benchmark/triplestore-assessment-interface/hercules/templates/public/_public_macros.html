@@ -1,0 +1,73 @@
+{# ############################################# #}
+{#  CATEGORY  #}
+{# ############################################# #}
+{% macro category(title, description, index, scorre) %}
+  <div class="panel-heading" role="tab" id="heading{{index}}">
+    <div class="row">
+      <div class="col-md-11">
+        <h3 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{index}}" aria-expanded="false" aria-controls="collapse{{index}}">
+            {{title}}
+          </a>
+        </h3>
+        <p>{{description}}</p>
+      </div>
+      <div class="col-md-1 text-info">
+      	{% if scorre %}
+        <span>{{ score(scorre, 5) }}</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+
+{# ############################################# #}
+{#  HOME PAGE  #}
+{# ############################################# #}
+{% macro home_card(image, link, number, type) %}
+  <div class="panel panel-primary text-center">
+    <div class="panel-body">
+      <a href="{{link}}">
+        <h1 class="panel-title" style="font-size:300%">{{number}}</h1>
+      </a>
+    </div>
+    <div class="panel-footer">
+      <a href="{{link}}">
+        <h6>{{type}}</h6>
+      </a>
+    </div>
+  </div>
+{% endmacro %}
+
+
+{# ############################################# #}
+{#  RANKING  #}
+{# ############################################# #}
+{% macro rank_entry(name, uri, order, scorre) %}
+  <li data-id="{{uri}}"
+      data-name="{{name}}">
+    <a href="/entity?uri={{uri}}" class="list-group-item">
+      <div class="row">
+        <div class="col-md-1">{{order}}</div>
+        <div class="col-md-10"><h4 class="list-group-item-heading">{{name}}</h4></div>
+        <div class="col-md-1 text-info">
+          {% if scorre %}
+            {{ score(scorre, 5) }}
+          {% endif %}
+        </div>
+      </div>
+    </a>
+  </li>
+{% endmacro %}
+
+
+{# ############################################# #}
+{#  SCORE  #}
+{# ############################################# #}
+{% macro score(score, scale) %}
+  <span class="text-{% if score/scale < 0.3 %}danger
+  {% elif score/scale < 0.8 %}warning
+  {% else %}success
+  {% endif %}"><strong>{{score}}</strong></span>
+{% endmacro %}

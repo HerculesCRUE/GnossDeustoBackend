@@ -1,0 +1,4 @@
+[entities]
+ontotext_graphdb=graphdb
+apache_jena_-_tdb=apache_jena
+virtuoso_universal_server=virtuoso

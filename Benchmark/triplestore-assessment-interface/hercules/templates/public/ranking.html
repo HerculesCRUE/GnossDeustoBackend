@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% from "public/_public_macros.html" import rank_entry %}
+
+{% block title %}Hercules triple store ranking{% endblock %}
+
+{% block content %}
+  
+<div class="container">
+
+  <h1>Hercules triple store ranking</h1>
+
+  <div class="row">
+    <ul class="grid list-group ranking">
+        {% for item in ranking %}
+          {{ rank_entry(item.name, item.id, loop.index, item.score) }}
+        {% endfor %}
+    </ul>
+  </div>
+  
+  <h2>Not assessed</h2>
+  <p>Assessment of the following triple stores is underway.</p>
+
+  <div class="row">
+    <ul class="grid list-group ranking">
+        {% for item in unranked %}
+          {{ rank_entry(item.name, item.id, loop.index) }}
+        {% endfor %}
+    </ul>
+  </div>
+
+</div>
+  
+{% endblock %}

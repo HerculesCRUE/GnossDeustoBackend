@@ -1,0 +1,71 @@
+@prefix ns1: <http://purl.org/dc/elements/1.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegro_lubm> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "AllegroGraph overview including performance" .
+
+<http://data.datascienceinstitute.ie/asio/bib/allegro_lubm2> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "AllegroGraph LUBM results" .
+
+<http://data.datascienceinstitute.ie/asio/bib/bench1> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "Benchmark 1" .
+
+<http://data.datascienceinstitute.ie/asio/bib/bench2> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "Benchmark 2" .
+
+<http://data.datascienceinstitute.ie/asio/bib/bench3> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "Benchmark 2" .
+
+<http://data.datascienceinstitute.ie/asio/bib/bench4> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "Benchmark 4" .
+
+<http://data.datascienceinstitute.ie/asio/bib/bench5> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "Benchmarking triple stores" .
+
+<http://data.datascienceinstitute.ie/asio/bib/bench6> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "Usability of triple stores" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_berlin_res> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "Jena TDB result on Berlin SPARQL Benchmark" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_load_lubm> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "Jena Loading Tests" .
+
+<http://data.datascienceinstitute.ie/asio/bib/jena_lubm_perf> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "Jena LUBM perf" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_lubm> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "Neo4J reasoning with LUBM" .
+
+<http://data.datascienceinstitute.ie/asio/bib/neo4j_slow_query> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "Neo4J slow on query from berlin benchmark" .
+
+<http://data.datascienceinstitute.ie/asio/bib/stardog_benchmark_results> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "Stardog benchmark results" .
+
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_lubm> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "Virtuoso benchmarking LUBM" .
+
+<http://data.datascienceinstitute.ie/asio/bib/w3c_large_stores> a ns1:BibliographicResource ;
+    ns1:source <https://test.com> ;
+    ns1:title "Large RDF triple stores" .
+
+

@@ -1,0 +1,33 @@
+<http://data.datascienceinstitute.ie/software/anzograph> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://datascienceinstitute.ie/asio/TripleStore> .
+<http://data.datascienceinstitute.ie/software/anzograph> <http://www.w3.org/2000/01/rdf-schema#label> "AnzoGraph"@en .
+<http://data.datascienceinstitute.ie/software/anzograph> <http://www.w3.org/2004/02/skos/core#prefLabel> "AnzoGraph" .
+<http://data.datascienceinstitute.ie/software/anzograph> <http://usefulinc.com/ns/doap#homepage> <https://www.cambridgesemantics.com/anzograph/> .
+
+<http://data.datascienceinstitute.ie/software/brightstardb> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://datascienceinstitute.ie/asio/TripleStore> .
+<http://data.datascienceinstitute.ie/software/brightstardb> <http://www.w3.org/2000/01/rdf-schema#label> "BrightstarDB"@en .
+<http://data.datascienceinstitute.ie/software/brightstardb> <http://www.w3.org/2004/02/skos/core#prefLabel> "BrightstarDB" .
+<http://data.datascienceinstitute.ie/software/brightstardb> <http://usefulinc.com/ns/doap#homepage> <http://brightstardb.com/> .
+
+<http://data.datascienceinstitute.ie/software/corese> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://datascienceinstitute.ie/asio/TripleStore> .
+<http://data.datascienceinstitute.ie/software/corese> <http://www.w3.org/2000/01/rdf-schema#label> "Corese"@en .
+<http://data.datascienceinstitute.ie/software/corese> <http://www.w3.org/2004/02/skos/core#prefLabel> "Corese" .
+<http://data.datascienceinstitute.ie/software/corese> <http://usefulinc.com/ns/doap#homepage> <https://project.inria.fr/corese/> .
+
+<http://data.datascienceinstitute.ie/software/ibm_db2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://datascienceinstitute.ie/asio/TripleStore> .
+<http://data.datascienceinstitute.ie/software/ibm_db2> <http://www.w3.org/2000/01/rdf-schema#label> "IBM DB2"@en .
+<http://data.datascienceinstitute.ie/software/ibm_db2> <http://www.w3.org/2004/02/skos/core#prefLabel> "IBM DB2" .
+<http://data.datascienceinstitute.ie/software/ibm_db2> <http://usefulinc.com/ns/doap#homepage> <https://www.ibm.com/products/db2-database/> .
+
+<http://data.datascienceinstitute.ie/software/neo4j> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://datascienceinstitute.ie/asio/TripleStore> .
+<http://data.datascienceinstitute.ie/software/neo4j> <http://www.w3.org/2000/01/rdf-schema#label> "Neo4J"@en .
+<http://data.datascienceinstitute.ie/software/neo4j> <http://www.w3.org/2004/02/skos/core#prefLabel> "Neo4J" .
+<http://data.datascienceinstitute.ie/software/neo4j> <http://usefulinc.com/ns/doap#homepage> <https://neo4j.com/> .
+
+<http://data.datascienceinstitute.ie/software/oracle_db> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://usefulinc.com/ns/doap#Project> .
+<http://data.datascienceinstitute.ie/software/oracle_db> <http://www.w3.org/2000/01/rdf-schema#label> "Oracle Database"@en .
+<http://data.datascienceinstitute.ie/software/oracle_db> <http://www.w3.org/2004/02/skos/core#prefLabel> "Oracle Database" .
+<http://data.datascienceinstitute.ie/software/oracle_db> <http://usefulinc.com/ns/doap#homepage> <https://www.oracle.com/database/> .
+<http://data.datascienceinstitute.ie/software/oracle_db> <http://usefulinc.com/ns/doap#release> <http://data.datascienceinstitute.ie/software/oracle_db/release/18c> .
+<http://data.datascienceinstitute.ie/software/oracle_db/release/18c> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://datascienceinstitute.ie/asio/TripleStoreRelease> .
+<http://data.datascienceinstitute.ie/software/oracle_db/release/18c> <http://www.w3.org/2000/01/rdf-schema#label> "Oracle Database 18c"@en .
+<http://data.datascienceinstitute.ie/software/oracle_db/release/18c> <http://www.w3.org/2004/02/skos/core#prefLabel> "Oracle Database 18c" .

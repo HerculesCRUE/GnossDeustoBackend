@@ -1,0 +1,37 @@
+######################
+# OS Files
+######################
+
+# OS X #
+.DS_Store
+
+
+######################
+# Build files
+######################
+
+# setuptools #
+__pycache__
+.project
+.pydevproject
+.python-version
+build
+dist
+*.egg-info
+*.pyc
+
+
+######################
+# Generated files
+######################
+
+# application #
+out/
+
+
+######################
+# Sensitive data
+######################
+
+# Configurations #
+

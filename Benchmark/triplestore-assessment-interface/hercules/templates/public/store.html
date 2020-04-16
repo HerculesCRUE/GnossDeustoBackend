@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+{% from "public/_public_macros.html" import category, score %}
+
+{% block title %}Hercules triple store benchmarks{% endblock %}
+
+{% block content %}
+  
+<div class="container">
+
+  <div class="row herc-ts-heading" style="margin-bottom:20px">
+    <div class="col-md-10">
+      <h2>{{store.name}}</h2>
+      <a href="{{store.uri}}" target="_blank">{{store.uri}}</a>
+    </div>
+    <div class="col-md-2">
+        {% if store.home %}
+        <a href="{{store.home}}" target="_blank">
+        	<button type="button" class="btn btn-default btn-lg">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"/>
+        </button></a>
+        {% endif %}
+    	{% for link in store.pages %}
+        <a href="{{link}}" target="_blank">
+            <button type="button" class="btn btn-default btn-lg">
+                <span class="glyphicon glyphicon-link" aria-hidden="true"/>
+            </button>
+        </a>
+    	{% endfor %}
+    </div>
+  </div>
+
+  <p>Click on a category name to see its details</p>
+
+  <div class="row">
+    <!--
+    <div class="alert alert-warning" role="alert">Note: still need to multiply by broader criterion weight</div>
+    -->
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    {% for cat in assessment.values() %}
+	  <div class="panel panel-default">
+		{{ category(cat.name, cat.description, loop.index, cat.score) }}
+		<!-- Add class 'in' to expand by default -->
+		<div id="collapse{{loop.index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{loop.index}}">
+		  <div class="panel-body">	  
+		    {% for group in cat.groups.values() %}		  
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">{{group.name}}</h3>
+                <!--
+                <span>{{group.score}}</span>
+                -->
+              </div>
+              <div class="panel-body">  
+                <table class="table table-hover table-responsive">
+                  <thead>
+                    <tr>
+                      <th>Criterion</th>
+                      <th>Score</th>
+                      <th>Justification</th>
+                      <th>Primary Source</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for crit in group.criteria.values() %}
+                    <tr>
+                      <td><a href="/entity?uri={{crit.id}}">{{crit.name}}</a></td>
+                      <td>{{ score(crit.score,5) }}</td>
+                      <td>{{crit.reason}}</td>
+                      <td>
+                        {% if crit.source %}
+                        <a href="{{crit.source.id}}" target="_blank">{{crit.source.title}} <span class="glyphicon glyphicon-link" aria-hidden="true"/></a>
+                        {% endif %}
+                      </td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>		  
+		    {% endfor %}	    
+		  </div>
+		</div>
+	  </div>
+    {% endfor %}
+    </div>
+  </div>
+
+</div>
+  
+{% endblock %}

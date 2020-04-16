@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% from "public/_public_macros.html" import score %}
+
+{% block title %}Hercules benchmarking criteria{% endblock %}
+
+{% block content %}
+  
+<div class="container">
+
+  <div about="{{criterion.id}}" class="row" id="criterion">
+    <h3>{{criterion.group.name}}</h3> 
+    <h1>{{criterion.name}}</h1>   
+    <p>{{criterion.description}}</p>
+  </div>
+  
+  <div id="module" class="row">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Triple store ranking for this criterion</h3>
+      </div>
+      <div class="panel-body">  
+        <table class="table table-hover table-responsive">
+          <thead>
+            <tr>
+              <th>Triple store</th>
+              <th>Score</th>
+              <th>Justification</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for rank in ranking %}
+            <tr>
+              <td><a href="/entity?uri={{rank.id}}">{{rank.name}}</a></td>
+              <td>{{ score(rank.score, 5) }}</td>
+              <td>{{rank.reason}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">	
+    <form id="criterion_customize">
+	<div class="col-md-6">
+		Adjust the weight of this criterion to see how it affects the overall ranking 
+    </div>
+	<div class="col-md-5">
+      <input type="range" class="align-bottom custom-range" name="weight" id="weightI" value="{{criterion.weight}}" min="1" max="5" oninput="weightO.value = weightI.value">
+    </div>
+	<div class="col-md-1">
+      <output name="weight" id="weightO">{{criterion.weight}}</output>
+    </div>
+    </form>
+  </div>
+
+  <div class="row" id="ranking">
+    <div class="panel panel-default">
+      <div class="panel-body">
+      	<table class="table table-striped table-responsive">
+          <thead>
+            <tr>
+              <th>Triple store</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+  
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+<script>
+var updateRank = function(data) {
+	table = '';
+	data.ranking.forEach(function(el) {
+	  table += '<tr><td>' + el.name + '</td><td>'+ el.score + '</td></tr>'
+	})
+	$('#ranking table tbody').html(table)
+}
+$('#weightI').change(function(){
+	$.post('/ranking',
+		{ criterion: $('#criterion').attr('about'), weight : $(this).val()},
+		updateRank
+	)
+})
+$( document ).ready(function(){$('#weightI').change()})
+</script>
+{% endblock %}

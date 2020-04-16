@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% from "public/_public_macros.html" import home_card %}
+
+{% block title %}Hercules triple store benchmarks{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <h1>Welcome to Hercules</h1>
+  
+  <div class="row">
+    <div class="col-md-2">
+      {{ home_card(None,
+                   'criterion',
+                   numbers.criterion, 
+                   "Assessment Criteria") }}
+    </div>
+    <div class="col-md-2">
+      {{ home_card(None,
+                   'store',
+                   numbers.store, 
+                   "Known Triple Stores") }}
+    </div>  
+
+</div>
+  
+{% endblock %}
