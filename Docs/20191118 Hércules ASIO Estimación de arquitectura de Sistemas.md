@@ -93,6 +93,76 @@ Las siguientes características técnicas incluyen:
 
 La lista de componentes es:
 
+
+| Servidor                                           | SO + Software                                   | CPU | RAM | Disco |
+|----------------------------------------------------|-------------------------------------------------|-----|-----|-------|
+| 2 frontales web para contenido dinámico            | CentOS 7                                        | 4   | 8   | 50    |
+|                                                    | Apache 2.4.33 con modcache y http2              |     |     |       |
+|                                                    | httpd24u-2.4.33-3.ius.centos7.x86_64            |     |     |       |
+|                                                    | httpd24u-filesystem-2.4.33-3.ius.centos7.noarch |     |     |       |
+|                                                    | httpd24u-tools-2.4.33-3.ius.centos7.x86_64      |     |     |       |
+|                                                    | httpd24u-mod_ssl-2.4.33-3.ius.centos7.x86_64    |     |     |       |
+|                                                    | iotop-0.6-2.el7.noarch                          |     |     |       |
+|                                                    | net-tools-2.0-0.22.20131004git.el7.x86_64       |     |     |       |
+|                                                    | htop-2.1.0-1.el7.x86_64                         |     |     |       |
+|                                                    | mlocate-0.26-8.el7.x86_64                       |     |     |       |
+|                                                    | lsof-4.87-5.el7.x86_64                          |     |     |       |
+|                                                    | nano-2.3.1-10.el7.x86_64                        |     |     |       |
+| 2 frontales web para estáticos y cache web         | CentOS 7                                        | 2   | 3   | 50    |
+|                                                    | Apache 2.4.33 con modcache y http2 o SQUID      |     |     |       |
+|                                                    | httpd24u-2.4.33-3.ius.centos7.x86_64            |     |     |       |
+|                                                    | httpd24u-filesystem-2.4.33-3.ius.centos7.noarch |     |     |       |
+|                                                    | httpd24u-tools-2.4.33-3.ius.centos7.x86_64      |     |     |       |
+|                                                    | httpd24u-mod_ssl-2.4.33-3.ius.centos7.x86_64    |     |     |       |
+|                                                    | iotop-0.6-2.el7.noarch                          |     |     |       |
+|                                                    | net-tools-2.0-0.22.20131004git.el7.x86_64       |     |     |       |
+|                                                    | htop-2.1.0-1.el7.x86_64                         |     |     |       |
+|                                                    | mlocate-0.26-8.el7.x86_64                       |     |     |       |
+|                                                    | lsof-4.87-5.el7.x86_64                          |     |     |       |
+|                                                    | nano-2.3.1-10.el7.x86_64                        |     |     |       |
+| 1 servidor para tareas y servicios de Backoffice   | CentOS 7                                        | 2   | 6   | 50    |
+|                                                    | Apache 2.4.33 con modcache y http2 o SQUID      |     |     |       |
+|                                                    | httpd24u-2.4.33-3.ius.centos7.x86_64            |     |     |       |
+|                                                    | httpd24u-filesystem-2.4.33-3.ius.centos7.noarch |     |     |       |
+|                                                    | httpd24u-tools-2.4.33-3.ius.centos7.x86_64      |     |     |       |
+|                                                    | httpd24u-mod_ssl-2.4.33-3.ius.centos7.x86_64    |     |     |       |
+|                                                    | iotop-0.6-2.el7.noarch                          |     |     |       |
+|                                                    | net-tools-2.0-0.22.20131004git.el7.x86_64       |     |     |       |
+|                                                    | htop-2.1.0-1.el7.x86_64                         |     |     |       |
+|                                                    | mlocate-0.26-8.el7.x86_64                       |     |     |       |
+|                                                    | lsof-4.87-5.el7.x86_64                          |     |     |       |
+|                                                    | nano-2.3.1-10.el7.x86_64                        |     |     |       |
+| 1 cluster de BBDD SQL                              | PostgreSQL 11.6                                 | 4   | 8   | 50    |
+| 2 servidores para RDF Store en alta disponibilidad | CentOS Linux release 7.3.1611 (Core)            | 4   | 14  | 50    |
+|                                                    | Virtuoso 7.x Open Source Version                |     |     |       |
+|                                                    | ldd (GNU libc) 2.17                             |     |     |       |
+|                                                    | iotop-0.6-2.el7.noarch                          |     |     |       |
+|                                                    | net-tools-2.0-0.22.20131004git.el7.x86_64       |     |     |       |
+|                                                    | htop-2.1.0-1.el7.x86_64                         |     |     |       |
+|                                                    | mlocate-0.26-8.el7.x86_64                       |     |     |       |
+|                                                    | lsof-4.87-5.el7.x86_64                          |     |     |       |
+|                                                    | nano-2.3.1-10.el7.x86_64                        |     |     |       |
+| 2 servidores para datos de cache                   | CentOS Linux release 7.3.1611 (Core)            | 2   | 4   | 25    |
+|                                                    | Redis  5.x                                      |     |     |       |
+|                                                    | iotop-0.6-2.el7.noarch                          |     |     |       |
+|                                                    | net-tools-2.0-0.22.20131004git.el7.x86_64       |     |     |       |
+|                                                    | htop-2.1.0-1.el7.x86_64                         |     |     |       |
+|                                                    | mlocate-0.26-8.el7.x86_64                       |     |     |       |
+|                                                    | lsof-4.87-5.el7.x86_64                          |     |     |       |
+|                                                    | nano-2.3.1-10.el7.x86_64                        |     |     |       |
+| 1 servidor para gestión de colas de eventos        | CentOS Linux release 7.3.1611 (Core)            | 2   | 2   | 25    |
+|                                                    | RabbitMQ 3.8. rabbitmq-server                   |     |     |       |
+|                                                    | epel-release-7-11.noarch                        |     |     |       |
+|                                                    | erlang-R16B-03.18.el7.x86_64.rpm                |     |     |       |
+|                                                    | socat-1.7.3.2-2.el7.x86_64.rpm                  |     |     |       |
+|                                                    | iotop-0.6-2.el7.noarch                          |     |     |       |
+|                                                    | net-tools-2.0-0.22.20131004git.el7.x86_64       |     |     |       |
+|                                                    | htop-2.1.0-1.el7.x86_64                         |     |     |       |
+|                                                    | mlocate-0.26-8.el7.x86_64                       |     |     |       |
+|                                                    | lsof-4.87-5.el7.x86_64                          |     |     |       |
+|                                                    | nano-2.3.1-10.el7.x86_64                        |     |     |       |
+| 1 almacenamiento compartido                        |                                                 |     |     | 50    |
+
   ---------------------------------------------------------------------------------------------------------------------------
   Servidor                                             SO + Software                                      CPU   RAM   Disco
   ---------------------------------------------------- -------------------------------------------------- ----- ----- -------
