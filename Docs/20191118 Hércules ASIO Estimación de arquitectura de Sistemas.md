@@ -84,6 +84,8 @@ Las siguientes características técnicas incluyen:
     gestión de base de datos: SQL, RDF Store, Cache y Colas de eventos.
 
 
+: Sample grid table.
+
 +---------------+---------------+--------------------+
 | Fruit         | Price         | Advantages         |
 +===============+===============+====================+
@@ -93,6 +95,7 @@ Las siguientes características técnicas incluyen:
 | Oranges       | $2.10         | - cures scurvy     |
 |               |               | - tasty            |
 +---------------+---------------+--------------------+
+
 
 La lista de componentes es:
 
