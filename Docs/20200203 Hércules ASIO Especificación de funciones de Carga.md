@@ -1,0 +1,412 @@
+# Hércules Backend ASIO. Especificación de las funciones de carga
+
+[1 INTRODUCCIÓN 4](#introducción)
+
+[2 ARQUITECTURA DE LOS PROCESOS DE CARGA
+5](#arquitectura-de-los-procesos-de-carga)
+
+[3 OAI-PMH. Implementación Hércules
+6](#oai-pmh.-implementación-hércules)
+
+[3.1 Delete records 7](#delete-records)
+
+[3.2 Granularidad de los 'datestamp' 7](#granularidad-de-los-datestamp)
+
+[3.3 Datestamps devueltos 7](#datestamps-devueltos)
+
+[3.4 Confidencialidad de los datos 7](#confidencialidad-de-los-datos)
+
+[3.5 Seguridad 7](#seguridad)
+
+[4 API de Carga 8](#api-de-carga)
+
+[4.1 API de Carga. ETL 8](#api-de-carga.-etl)
+
+[4.1.1 POST etl​/data-publish 8](#post-etldata-publish)
+
+[4.1.2 POST etl​/data-validate 8](#post-etldata-validate)
+
+[4.1.3 POST etl​/data-discover 8](#post-etldata-discover)
+
+[4.1.4 GET etl​/GetRecord/{repositoryIdentifier}
+8](#get-etlgetrecordrepositoryidentifier)
+
+[4.1.5 GET etl​/Identify/{repositoryIdentifier}
+9](#get-etlidentifyrepositoryidentifier)
+
+[4.1.6 GET etl​/ListIdentifiers/{repositoryIdentifier}
+9](#get-etllistidentifiersrepositoryidentifier)
+
+[4.1.7 GET etl​/ListMetadataFormats/{repositoryIdentifier}
+9](#get-etllistmetadataformatsrepositoryidentifier)
+
+[4.1.8 GET etl​/ListRecords/{repositoryIdentifier}
+9](#get-etllistrecordsrepositoryidentifier)
+
+[4.1.9 GET etl​/ListSets/{repositoryIdentifier}
+9](#get-etllistsetsrepositoryidentifier)
+
+[4.2 API de Carga. ETL-CONFIG 9](#api-de-carga.-etl-config)
+
+[4.2.10 GET etl-config/​repository 9](#get-etl-configrepository)
+
+[4.2.11 POST etl-config/​repository 9](#post-etl-configrepository)
+
+[4.2.12 GET etl-config/​repository/{identifier}
+10](#get-etl-configrepositoryidentifier)
+
+[4.2.13 DELETE etl-config/​repository/{identifier}
+10](#delete-etl-configrepositoryidentifier)
+
+[4.2.14 PUT etl-config/​repository/{identifier}
+10](#put-etl-configrepositoryidentifier)
+
+[4.2.15 GET etl​-config/validation 10](#get-etl-configvalidation)
+
+[4.2.16 POST etl​-config/validation 10](#post-etl-configvalidation)
+
+[4.2.17 GET etl​-config/validation/{identifier}
+10](#get-etl-configvalidationidentifier)
+
+[4.2.18 DELETE etl​-config/validation/{identifier}
+10](#delete-etl-configvalidationidentifier)
+
+[4.2.19 PUT etl​-config/validation/{identifier}
+10](#put-etl-configvalidationidentifier)
+
+[4.3 API de Carga. SYNC 10](#api-de-carga.-sync)
+
+[4.3.20 ​GET /sync​/config 10](#get-syncconfig)
+
+[4.3.21 ​POST /sync​/config 11](#post-syncconfig)
+
+[4.3.22 ​GET /sync​/config​/{identifier} 11](#get-syncconfigidentifier)
+
+[4.3.23 ​DELETE /sync​/config​/{identifier}
+11](#delete-syncconfigidentifier)
+
+[4.3.24 ​PUT /sync​/config​/{identifier} 11](#put-syncconfigidentifier)
+
+[4.3.25 ​GET /sync​/status​/{identifier} 11](#get-syncstatusidentifier)
+
+[4.3.26 ​ POST /sync​/enable​/{identifier}
+11](#post-syncenableidentifier)
+
+[4.3.27 ​ POST /disable​/stop​/{identifier}
+11](#post-disablestopidentifier)
+
+INTRODUCCIÓN
+============
+
+Este documento contiene la especificación de las funciones de carga, que
+incluye la descripción de la implementación del protocolo OAI-PMH para
+el intercambio de datos desde el SGI hacia el Backend. Los formatos de
+metadatos que devuelve el protocolo OAI-PMH se corresponden con lo
+definido en la Red de Ontologías Hércules (ROH) para cada una de sus
+entidades.
+
+Los grupos funcionales del API de carga de datos son:
+
+-   Carga ETL. Agrupa las funciones de acceso al interfaz OAI-PMH y las
+    encargadas de la publicación, la validación y el descubrimiento.
+
+-   Configuración ETL. Contiene las funciones que configuran los
+    repositorios OAI-PMH a los que accederá ASIO y las de gestión de
+    validaciones.
+
+-   Sincronización ETL. Agrupa las funciones de configuración de los
+    procesos de sincronización de datos.
+
+ARQUITECTURA DE LOS PROCESOS DE CARGA
+=====================================
+
+Los procesos de carga de datos desde el SGI hacia el Backend ASIO
+responden al siguiente esquema de arquitectura:
+
+![](.//media/image2_FuncionesCarga.png)
+
+El Sistema de Gestión de Investigación (SGI) contará con un proveedor de
+datos conforme al [protocolo
+OAI-PMH](http://www.openarchives.org/OAI/openarchivesprotocol.html)
+(Open Archive Initiative -- Protocol for Metadata Harvesting) y a la
+guía de implementación del apartado siguiente de este documento.
+
+Este proveedor de datos será accedido por un API de Carga que, además de
+otras, contará con las funciones de *harvesting* o recolección de
+OAI-PMH.
+
+El resto de las funciones del API de Carga se encargan de las funciones
+de conversión, validación, descubrimiento y, finalmente, publicación en
+el RDF Store.
+
+Nuestra propuesta cuenta con un nodo central Unidata que recibirá y
+cargará los triples publicados en cada universidad. De esto se encargan
+el proceso Sincronizador de cada universidad y un API de Carga en
+Unidata que aceptará y consolidará los datos provenientes de las
+universidades.
+
+OAI-PMH. Implementación Hércules
+================================
+
+El interfaz de comunicación de datos entre el SGI (como el futuro
+Hércules SGI, Sigma o cualquier otra fuente) y Hércules ASIO es un API
+que implementa el protocolo OAI-PMH.
+
+En nuestra propuesta de uso del protocolo OAI-PMH utilizamos la
+definición
+de [*sets*](http://www.openarchives.org/OAI/openarchivesprotocol.html#Set),
+mediante el atributo setSpec, para reconocer la clase del ítem devuelto,
+por ejemplo "roh:project" o "roh:researcher". \[poner un ejemplo de
+petición devuelta por ListIdentifiers con datos supuestos de Hércules\]
+
+El estándar OAI-PMH obliga a que todas las peticiones devuelvan
+metadatos del ítem o ítems solicitados con el formato Dublin Core. En el
+caso de Hércules, los metadatos devueltos en ese formato serán sólo
+Title y Description, ya que el resto del modelo es insuficiente para
+representar las entidades de ROH.
+
+Para comunicar la información completa de las entidades, cada clase de
+ítem, que se corresponde con una entidad en ROH, tendrá un formato de
+metadatos alineado con su definición ontológica. El formato de metadatos
+de cada entidad estará definido en un XSD que mapea los atributos y
+relaciones de la entidad en ROH.
+
+Por ejemplo, para \[añadir un ejemplo del formato de metadatos para una
+entidad de ROH, como una publicación\]:
+
+Una vez conocida la clase del ítem obtenido, a través del metadato
+setSpec, podemos pedir el formato de metadatos adecuado para un registro
+con las
+instrucciones [GetRecord](http://www.openarchives.org/OAI/openarchivesprotocol.html#GetRecord) o [ListRecords](http://www.openarchives.org/OAI/openarchivesprotocol.html#ListRecords).
+Por ejemplo, con esta petición:
+
+[https://h-pmh.um.es/OAI-script?verb=ListRecords&from=2020-02-10&set=**roh:project**&metadataPrefix=**oai\_roh\_project**](https://h-pmh.um.es/OAI-script?verb=ListRecords&from=2020-02-10&set=roh:project&metadataPrefix=oai_roh_project)
+
+Si alguien quisiera implementar un *harvester* o recolector sin conocer
+a priori la relación entre *sets* y los formatos de metadatos, podría
+recurrir al
+método [ListMetadataFormats](http://www.openarchives.org/OAI/openarchivesprotocol.html#ListMetadataFormats),
+que devuelve todos los formatos existentes o los formatos aceptados por
+una entidad concreta \[poner un ejemplo\]
+
+Además de lo indicado anteriormente de los sets y formatos de metadatos,
+la implementación de OAI-PMH debe contar con otras características que
+se describen a continuación.
+
+Delete records
+--------------
+
+La propiedad 'deleteRecord' del repositorio estará declarada y
+configurada como 'persistent' o 'transiente' para garantizar que se
+puedan acceder a los datos eliminados. En caso contrario no se podrían
+sincronizar las eliminaciones.
+
+Granularidad de los 'datestamp'
+-------------------------------
+
+OAI-PMH permite definir granularidad de días o de segundos. El proveedor
+debería soportar segundos si se quieren realizar varias sincronizaciones
+diarias. En caso contrario sólo se podría realizar de forma efectiva una
+sincronización diaria.
+
+Datestamps devueltos
+--------------------
+
+Los 'datestamp' devueltos para los 'records' se corresponderán con la
+última acción realizada sobre el 'record', sea ésta la creación, la
+actualización o el borrado. En caso contrario no se podrían realizar
+actualizaciones
+
+Confidencialidad de los datos
+-----------------------------
+
+La privacidad de los datos de la entidad recuperada desde OAI-PMH estará
+definida como uno de los atributos de los metadatos recuperados y será
+gestionada por el API de Carga (funciones de publicación). Tomando como
+referencia el documento [20200129 Hércules ASIO Data confidentiality
+proposal](https://univmurcia.sharepoint.com/sites/ASIOGnossD/_layouts/15/Doc.aspx?OR=teams&action=edit&sourcedoc=%7b4276BA10-A7BC-4107-AE91-ECDAB4665A18%7d)
+y el enfoque acordado, las entidades marcadas como confidenciales se
+almacenarán en ASIO en un grafo privado, que permitirá el uso de datos
+agregados, pero no el acceso a los datos identificativos individuales.
+
+Seguridad
+---------
+
+El proveedor de datos OAI-PMH será un punto de acceso a toda la
+información del SGI (sea cual sea), incluidos los datos confidenciales.
+Esto obliga a proteger el interfaz, obligando a que todas las llamadas
+negocien el acceso antes de obtener información del sistema.
+
+La propuesta es que las llamadas al proveedor OAI-PMH estén protegidas
+por OAuth 2.0.
+
+API de Carga
+============
+
+Este API tendrá todos los controladores necesarios para realizar la
+carga de datos.
+
+-   ETL: Extracción, transformación y carga de datos.
+
+-   ETL-CONFIG: Configuraciones correspondientes a la extracción,
+    transformación y carga de datos.
+
+-   SYNC: Configuraciones y métodos para interactuar con las
+    sincronizaciones.
+
+La especificación concreta de este API se puede consultar en:
+
+<http://herc-as-front-desa.atica.um.es/carga/swagger/index.html>
+
+La versión HTML de la documentación se encuentra en:
+
+http://herc-as-front-desa.atica.um.es/docs/api-carga.html
+
+API de Carga. ETL
+-----------------
+
+Dentro de este controlador se encuentran todos los métodos necesarios
+para la extracción, transformación y carga de datos.
+
+### POST etl​/data-publish
+
+Ejecuta el último paso del proceso de carga, por el que el RDF generado
+se almacena en el Triple Store. Permite cargar una fuente RDF
+arbitraria.
+
+### POST etl​/data-validate
+
+Valida un RDF mediante el shape SHACL configurado
+
+### POST etl​/data-discover
+
+Reconcilia entidades y descubre enlaces o equivalencias. Permite
+efectuar el descubrimiento en fuentes RDF arbitrarias.
+
+### GET etl​/GetRecord/{repositoryIdentifier}
+
+Este método hace de PROXY entre el API y el proveedor OAI-PMH.
+
+Recupera un registro de metadatos individual del repositorio en formato
+XML OAI-PMH.
+
+### GET etl​/Identify/{repositoryIdentifier}
+
+Este método hace de PROXY entre el API y el proveedor OAI-PMH.
+
+Obtiene la información del repositorio OAI-PMH configurado en formato
+XML OAI-PMH.
+
+### GET etl​/ListIdentifiers/{repositoryIdentifier}
+
+Este método hace de PROXY entre el API y el proveedor OAI-PMH.
+
+Es una forma abreviada de ListRecords, que recupera solo encabezados en
+formato XML OAI-PMH en lugar de registros.
+
+### GET etl​/ListMetadataFormats/{repositoryIdentifier}
+
+Este método hace de PROXY entre el API y el proveedor OAI-PMH.
+
+Recupera los formatos de metadatos disponibles del repositorio en
+formato XML OAI-PMH.
+
+### GET etl​/ListRecords/{repositoryIdentifier}
+
+Este método hace de PROXY entre el API y el proveedor OAI-PMH.
+
+Recupera registros del repositorio en formato XML OAI-PMH.
+
+### GET etl​/ListSets/{repositoryIdentifier}
+
+Este método hace de PROXY entre el API y el proveedor OAI-PMH.
+
+Recuperar la estructura establecida de un repositorio en formato XML
+OAI-PMH, útil para la recolección selectiva.
+
+API de Carga. ETL-CONFIG
+------------------------
+
+Dentro de este controlador se encuentran todos los métodos necesarios
+para la configuración de la extracción, transformación y carga de datos.
+
+### GET etl-config/​repository
+
+Obtiene un listado con todas las configuraciones de los repositorios
+OAI-PMH.
+
+### POST etl-config/​repository
+
+Añade una nueva configuración de un repositorio OAI-PMH.
+
+### GET etl-config/​repository/{identifier}
+
+Obtiene la configuración de un repositorio OAI-PMH.
+
+### DELETE etl-config/​repository/{identifier}
+
+Elimina la configuración de un repositorio OAI-PMH.
+
+### PUT etl-config/​repository/{identifier}
+
+Modifica la configuración de un repostorio OAI-PMH.
+
+### GET etl​-config/validation
+
+Obtiene la configuración de los shape SHACL de validación.
+
+### POST etl​-config/validation
+
+Añade una configuración de validación mediante un shape SHACL.
+
+### GET etl​-config/validation/{identifier}
+
+Obtiene la configuración del shape SHACL pasado por parámetro.
+
+### DELETE etl​-config/validation/{identifier}
+
+Elimina la configuración una configuración de validación.
+
+### PUT etl​-config/validation/{identifier}
+
+Modifica la configuración de validación mediante un shape SHACL.
+
+API de Carga. SYNC
+------------------
+
+Dentro de este controlador se encuentran todos los métodos para
+configurar las sincronizaciones, obtener su estado, activarlas y
+desactivarlas.
+
+### ​GET /sync​/config
+
+Obtiene todas las configuraciones de las sincronizaciones previamente
+establecidas.
+
+### ​POST /sync​/config
+
+Añade una nueva configuración de sincronización.
+
+### ​GET /sync​/config​/{identifier}
+
+Obtiene la configuración de una sincronización en particular.
+
+### ​DELETE /sync​/config​/{identifier}
+
+Elimina la configuración de una sincronización.
+
+### ​PUT /sync​/config​/{identifier}
+
+Modifica la configuración de una sincronización en particular.
+
+### ​GET /sync​/status​/{identifier}
+
+Obtiene el estado de una sincronización.
+
+### ​ POST /sync​/enable​/{identifier}
+
+Activa una sincronización.
+
+### ​ POST /disable​/stop​/{identifier}
+
+Desactiva una sincronización.
