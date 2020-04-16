@@ -83,6 +83,19 @@ Las siguientes características técnicas incluyen:
 -   Un ejemplo de servicios de datos para los distintos modelos de
     gestión de base de datos: SQL, RDF Store, Cache y Colas de eventos.
 
+
+-------------------------------------------------------------
+ Centered   Default           Right Left
+  Header    Aligned         Aligned Aligned
+----------- ------- --------------- -------------------------
+   First    row                12.0 Example of a row that
+                                    spans multiple lines.
+
+  Second    row                 5.0 Here's another one. Note
+                                    the blank line between
+                                    rows.
+-------------------------------------------------------------
+
 La lista de componentes es:
 
   ---------------------------------------------------------------------------------------------------------------------------
