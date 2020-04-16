@@ -94,6 +94,7 @@ Las siguientes características técnicas incluyen:
   Second    row                 5.0 Here's another one. Note
                                     the blank line between
                                     rows.
+
 -------------------------------------------------------------
 
 La lista de componentes es:
