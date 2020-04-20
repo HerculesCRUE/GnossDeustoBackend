@@ -1,6 +1,6 @@
 code = "000.010.000.000"
 instance.ontology = "roh"
-instance.class = "Person"
+instance.classname = "Person"
 
     [[properties]] # Nombre
     ontology = "foaf"

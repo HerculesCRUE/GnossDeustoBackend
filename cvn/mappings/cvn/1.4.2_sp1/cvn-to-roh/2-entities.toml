@@ -1,7 +1,7 @@
 [[entities]] # Publicaciones, documentos científicos y técnicos
 code = "060.010.010.000"
 ontology = "bibo"
-class = "AcademicArticle"
+classname = "AcademicArticle"
 id.resource = "Article"
 id.format = "{doi}"
 
@@ -55,12 +55,12 @@ id.format = "{doi}"
 [[entities]]
 code = "010.020.000.000"
 ontology = "roh"
-class = "Position"
+classname = "Position"
 id.fallback = "uuid4"
 
     [[entities.subentities]]
     ontology = "foaf"
-    class = "Organization"
+    classname = "Organization"
 
         [[entities.relations]]
         ontology = "vivo"
@@ -108,7 +108,7 @@ id.fallback = "uuid4"
 [[entities]] # Formación académica recibida
 code = "020.010.010.000"
 ontology = "vivo"
-class = "AcademicDegree"
+classname = "AcademicDegree"
 
     [[entities.criteria.property]]
     code = "020.010.010.010"
@@ -137,7 +137,7 @@ class = "AcademicDegree"
 [[entities]] # Doctorado
 code = "020.010.020.000"
 ontology = "roh"
-class = "PhDThesis"
+classname = "PhDThesis"
 
     [[entities.properties]]
     ontology = "vivo"
@@ -162,7 +162,7 @@ class = "PhDThesis"
 [[entities]] # Certificado de idiomas
 code = "020.060.000.000"
 ontology = "roh"
-class = "LanguageCertificate"
+classname = "LanguageCertificate"
 
     [[entities.relations]]
     ontology = "roh"

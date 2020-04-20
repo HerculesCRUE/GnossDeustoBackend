@@ -119,8 +119,8 @@ def v1_convert():
     #           Aplicar formato
     #           Guardar en el grafo
 
-    person = URIRef(generate_uri(config['instance']['class'], params['orcid']))
-    g.add((person, RDF.type, ontology_primary.term(config['instance']['class'])))
+    person = URIRef(generate_uri(config['instance']['classname'], params['orcid']))
+    g.add((person, RDF.type, ontology_primary.term(config['instance']['classname'])))
 
     # Representa el único nodo que contiene todos los datos personales del CVN
     info_node = get_first_node_by_code(root, config['code'])
@@ -147,7 +147,7 @@ def v1_convert():
 
             # Generación de la URI
             identifier = uuid.uuid4()  # por defecto UUIDv4
-            resource_class = entity['class']  # por defecto el nombre de la clase de la entidad
+            resource_class = entity['classname']  # por defecto el nombre de la clase de la entidad
             if 'id' in entity:
                 if 'resource' in entity['id']:
                     resource_class = entity['id']['resource']
@@ -157,7 +157,7 @@ def v1_convert():
 
             # Generamos la tripleta de la entidad como tal
             current_entity = URIRef(generate_uri(resource_class, str(identifier)))
-            g.add((current_entity, RDF.type, ontologies[entity['ontology']].term(entity['class'])))
+            g.add((current_entity, RDF.type, ontologies[entity['ontology']].term(entity['classname'])))
 
             # La rellenamos con las propiedades
             for class_property in entity['properties']:
