@@ -1,0 +1,67 @@
+from ..utils import code as cvn_code
+import cvn.config.property as cvn_property
+from cvn.utils.printable import Printable
+
+
+def init_entity_from_serialized_toml(config, parent=None):
+    # code and name are required attributes
+
+    code = None
+    if 'code' not in config:
+        # if code is not set but we have a parent, set it to the parent's code
+        if (parent is not None) and (parent.code is not None):
+            code = parent.code
+        else:
+            raise KeyError('code not specified for Entity')
+    else:
+        code = config['code']
+
+    if not cvn_code.is_cvn_code_valid(code):
+        raise ValueError('code does not match expected format')
+
+    if 'ontology' not in config:
+        raise KeyError('ontology not specified for Entity')
+        # TODO comprobar que está definida
+
+    if 'classname' not in config:
+        raise KeyError('classname not specified for Entity')
+
+    entity = Entity(code, config['ontology'], config['classname'])
+
+    # Populate properties
+    if 'properties' not in config:
+        raise KeyError('no properties defined for Entity: ' + entity.classname)
+    for property_config in config['properties']:
+        property_generated = cvn_property.init_property_from_serialized_toml(property_config)
+        entity.add_property(property_generated)
+
+    # Subentities, recursive (optional)
+    if 'subentities' in config:
+        for subentity in config['subentities']:
+            entity.add_subentity(init_entity_from_serialized_toml(subentity, entity))
+
+    return entity
+
+
+class Entity(Printable):
+    def __init__(self, code, ontology, classname, parent=None):
+        self.code = code
+        self.ontology = ontology
+        self.classname = classname
+        self.subentities = []
+        self.properties = []
+        self.relations = []
+        self.parent = parent
+
+    def add_property(self, entity_property):
+        """
+        Adds a property to the Entity
+        :param entity_property: the Property to add
+        :return: the resulting Entity
+        """
+        self.properties.append(entity_property)
+        return self
+
+    def add_subentity(self, subentity):
+        self.subentities.append(subentity)
+        return self

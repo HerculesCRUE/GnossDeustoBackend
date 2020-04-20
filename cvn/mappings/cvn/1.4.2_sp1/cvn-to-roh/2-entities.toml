@@ -62,18 +62,18 @@ id.fallback = "uuid4"
     ontology = "foaf"
     classname = "Organization"
 
-        [[entities.relations]]
+        [[entities.subentities.relations]]
         ontology = "vivo"
         name = "relates"
         inverse_ontology = "vivo"
         inverse_name = "relatedBy"
 
-        [[entities.properties]]
+        [[entities.subentities.properties]]
         ontology = "foaf"
         name = "mame"
         format = "{name}"
 
-            [[entities.properties.sources]]
+            [[entities.subentities.properties.sources]]
             code = "010.020.000.020"
             name = "name"
             bean = "Value"

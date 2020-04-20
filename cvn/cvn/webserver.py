@@ -15,6 +15,7 @@ import re
 import requests
 import toml
 import uuid
+from cvn.config import entity as config_entity
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB máx.
@@ -139,6 +140,12 @@ def v1_convert():
     # Cargar config
     with open("mappings/cvn/1.4.2_sp1/cvn-to-roh/2-entities.toml") as f:  # TODO des-hardcodificar
         entities_config = toml.loads(f.read())
+
+    # Generar instancias Entity
+    entities = []
+    for entity_config in entities_config['entities']:
+        entities.append(config_entity.init_entity_from_serialized_toml(entity_config))
+    print(entities)
 
     for entity in entities_config['entities']:
         # Para cada tipo de entidad buscamos en el árbol las que tengan el código
