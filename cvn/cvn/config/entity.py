@@ -29,7 +29,7 @@ def init_entity_from_serialized_toml(config, parent=None):
     if 'classname' not in config:
         raise KeyError('classname not specified for Entity')
 
-    entity = Entity(code, config['ontology'], config['classname'])
+    entity = Entity(code, config['ontology'], config['classname'], parent=parent)
 
     # Populate properties
     if 'properties' not in config:
