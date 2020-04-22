@@ -44,6 +44,7 @@ def init_entity_from_serialized_toml(config, parent=None):
 
 
 class Entity(Printable):
+    # TODO todo el tema de la id y la URI
     def __init__(self, code, ontology, classname, parent=None):
         self.code = code
         self.ontology = ontology
@@ -52,6 +53,7 @@ class Entity(Printable):
         self.properties = []
         self.relations = []
         self.parent = parent
+        self.triplets = []
 
     def add_property(self, entity_property):
         """
@@ -65,3 +67,19 @@ class Entity(Printable):
     def add_subentity(self, subentity):
         self.subentities.append(subentity)
         return self
+
+    def get_property_values_from_node(self, item_node):
+        for property_item in self.properties:
+            property_item.get_value_from_node(item_node)
+
+    def clear_values(self):
+        for property_item in self.properties:
+            property_item.clear_values()
+        for subentity in self.subentities:
+            subentity.clear_values()
+
+    def generate_property_triples(self, graph):
+        triples = []
+        for property_item in self.properties:
+
+        return triples

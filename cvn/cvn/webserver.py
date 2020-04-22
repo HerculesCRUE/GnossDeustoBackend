@@ -16,17 +16,13 @@ import requests
 import toml
 import uuid
 from cvn.config import entity as config_entity
+from cvn.utils import xmltree
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB máx.
 
 # Formatos de salida permitidos
 ALLOWED_FORMATS = ["xml", "n3", "turtle", "nt", "pretty-xml", "trix", "trig", "nquads"]
-
-# Caché para los nombres de códigos
-# TODO estudiar caché más elaborado, también para URIs generadas
-code_name = {}
-
 
 # TODO testing
 # TODO modularizar, quitar spaghetti code
@@ -124,7 +120,7 @@ def v1_convert():
     g.add((person, RDF.type, ontology_primary.term(config['instance']['classname'])))
 
     # Representa el único nodo que contiene todos los datos personales del CVN
-    info_node = get_first_node_by_code(root, config['code'])
+    info_node = xmltree.get_first_node_by_code(root, config['code'])
 
     for data_property in config['properties']:
         # Formateamos
@@ -138,69 +134,70 @@ def v1_convert():
     # 2. Generar entidades
 
     # Cargar config
-    with open("mappings/cvn/1.4.2_sp1/cvn-to-roh/2-entities.toml") as f:  # TODO des-hardcodificar
+    with open("mappings/cvn/1.4.2_sp1/cvn-to-roh/2-entities.toml") as f:  # TODO deshardcodificar
         entities_config = toml.loads(f.read())
 
     # Generar instancias Entity
     entities = []
     for entity_config in entities_config['entities']:
         entities.append(config_entity.init_entity_from_serialized_toml(entity_config))
-    print(entities)
 
-    for entity in entities_config['entities']:
+    for entity in entities:
         # Para cada tipo de entidad buscamos en el árbol las que tengan el código
-        for entity_result_node in get_all_nodes_by_code(root, entity['code']):
-            properties = get_properties_from_node(entity, entity_result_node)
+        for entity_result_node in xmltree.get_all_nodes_by_code(root, entity.code):
+            # properties = get_properties_from_node(entity, entity_result_node)
+
+            print(entity.get_property_values_from_node(entity_result_node))
+            # MAL MAL MAL no se puede pretender rellenar una entidad con la información de todas, hay que, de alguna
+            # manera intentar
 
             # Generación de la URI
             identifier = uuid.uuid4()  # por defecto UUIDv4
-            resource_class = entity['classname']  # por defecto el nombre de la clase de la entidad
-            if 'id' in entity:
-                if 'resource' in entity['id']:
-                    resource_class = entity['id']['resource']
-                if 'format' in entity['id']:
-                    if has_all_formatting_fields(entity['id']['format'], properties):
-                        identifier = entity['id']['format'].format_map(properties).strip()
+            # resource_class = entity['classname']  # por defecto el nombre de la clase de la entidad
+            # if 'id' in entity:
+            #     if 'resource' in entity['id']:
+            #         resource_class = entity['id']['resource']
+            #     if 'format' in entity['id']:
+            #         if has_all_formatting_fields(entity['id']['format'], properties):
+            #             identifier = entity['id']['format'].format_map(properties).strip()
 
             # Generamos la tripleta de la entidad como tal
-            current_entity = URIRef(generate_uri(resource_class, str(identifier)))
-            g.add((current_entity, RDF.type, ontologies[entity['ontology']].term(entity['classname'])))
+            current_entity = URIRef(generate_uri(entity.classname, str(identifier)))
+            g.add((current_entity, RDF.type, ontologies[entity.ontology].term(entity.classname)))
 
-            # La rellenamos con las propiedades
-            for class_property in entity['properties']:
-                sources = get_sources_from_property(class_property, entity_result_node)
-                if has_all_formatting_fields(class_property['format'], sources):
-                    formatted = class_property['format'].format_map(sources)
-                    # TODO validar que se tienen todos los parámetros necesarios
-                    # TODO no mostrar si es "None"
-                    g.add((current_entity, ontologies[class_property['ontology']].term(class_property['name']),
-                           Literal(formatted)))
+            # # La rellenamos con las propiedades
+            # for class_property in entity['properties']:
+            #     sources = get_sources_from_property(class_property, entity_result_node)
+            #     if has_all_formatting_fields(class_property['format'], sources):
+            #         formatted = class_property['format'].format_map(sources)
+            #         # TODO validar que se tienen todos los parámetros necesarios
+            #         # TODO no mostrar si es "None"
+            #         g.add((current_entity, ontologies[class_property['ontology']].term(class_property['name']),
+            #                Literal(formatted)))
 
-            # Relaciones (modo sencillo)
-            # TODO cambiar spanglish relations por relationship
-            if 'relations' in entity:
-                for relation in entity['relations']:
-                    if 'link_to_cvn_person' in relation and relation['link_to_cvn_person']:
-                        g.add((person, ontologies[relation['ontology']].term(relation['name']), current_entity))
-                    if 'inverse_name' in relation:
-                        inverse_ontology = relation['ontology']
-                        if 'inverse_ontology' in relation:
-                            inverse_ontology = relation['inverse_ontology']
-                        g.add((current_entity, ontologies[inverse_ontology].term(relation['inverse_name']), person))
+            # # Relaciones (modo sencillo)
+            # # TODO cambiar spanglish relations por relationship
+            # if 'relations' in entity:
+            #     for relation in entity['relations']:
+            #         if 'link_to_cvn_person' in relation and relation['link_to_cvn_person']:
+            #             g.add((person, ontologies[relation['ontology']].term(relation['name']), current_entity))
+            #         if 'inverse_name' in relation:
+            #             inverse_ontology = relation['ontology']
+            #             if 'inverse_ontology' in relation:
+            #                 inverse_ontology = relation['inverse_ontology']
+            #             g.add((current_entity, ontologies[inverse_ontology].term(relation['inverse_name']), person))
+
+            # Limpiamos la entidad
+            entity.clear_values()
 
     return make_response(g.serialize(format=params['format']), 200)  # TODO Quitar, DEBUG
 
     # 3. Enlazar
-
     # TODO limpiar comentarios
     # ----- FIN PROCESO CVN
     # Vamos a ir recorriendo el árbol XML del documento CVN e iremos sacando, cuando sea necesario, información, para
     # luego insertarla en tripletas generadas al vuelo con rdflib
     # Serializar y guardar en un archivo con el formato que queramos
-
-
-def generate_class_from_(entity, parent=None):
-    return None  # TODO
 
 
 def get_properties_from_node(entity_config, node):
@@ -225,7 +222,7 @@ def get_sources_from_property(current_property, node):
     # Declaramos un dict. para que podamos guardar los valores de los sources
     sources = {}
     for source in current_property['sources']:
-        source_node = get_first_node_by_code(node, source['code'])
+        source_node = xmltree.get_first_node_by_code(node, source['code'])
         if source_node is not None:
             result = source_node.find("{http://codes.cvn.fecyt.es/beans}" + source['bean'])
             if result is not None:
@@ -237,85 +234,23 @@ def get_sources_from_property(current_property, node):
             else:
                 sources[source['name']] = None
     return sources
+#
+#
+# def has_all_formatting_fields(format_string, fields):
+#     """
+#     Comprueba que todos los campos de formateo estén definidos en el diccionario
+#     :param format_string: el texto que se le pasa al Formatter
+#     :param fields: los campos con los valores que se usan para rellenar
+#     :return: bool ¿están todos los campos de formateo cubiertos por el diccionario?
+#     """
+#     # Busca los valores entre {} y los devuelve en una lista
+#     format_fields = re.findall(r'{(.*?)}', format_string)
+#
+#     for field in format_fields:
+#         if field not in fields:
+#             return False
+#     return True
 
-
-def has_all_formatting_fields(format_string, fields):
-    """
-    Comprueba que todos los campos de formateo estén definidos en el diccionario
-    :param format_string: el texto que se le pasa al Formatter
-    :param fields: los campos con los valores que se usan para rellenar
-    :return: bool ¿están todos los campos de formateo cubiertos por el diccionario?
-    """
-    # Busca los valores entre {} y los devuelve en una lista
-    format_fields = re.findall(r'{(.*?)}', format_string)
-
-    for field in format_fields:
-        if field not in fields:
-            return False
-    return True
-
-
-def get_first_node_by_code(tree, code):
-    """
-    Devuelve el primer elemento del árbol con el código especificado
-    :param tree: el árbol de nodos donde buscar
-    :param code: el código que buscamos
-    :return: el primer elemento del árbol con el código, si no, None
-    """
-    for child in tree:
-        if node_get_code(child) == code:
-            return child
-    return None
-
-
-def get_all_nodes_by_code(tree, code):
-    """
-    Recorre un árbol y devuelve todos los elementos inmediatamente debajo que tienen el código
-    :param tree: el árbol de nodos donde buscar
-    :param code: el código que buscamos
-    :return: array con los nodos que buscamos, si no, None
-    """
-    nodes = []
-    for child in tree:
-        if node_get_code(child) == code:
-            nodes.append(child)
-    return nodes
-
-
-def node_get_code(node):
-    """
-    Obtener el código CVN de un nodo XML.
-    :param node: el nodo XML
-    :return: string con el código del nodo
-    """
-
-    if node.tag == "{http://codes.cvn.fecyt.es/beans}Code":
-        return node.text
-
-    find_result = node.find('{http://codes.cvn.fecyt.es/beans}Code')
-
-    if find_result is None:
-        for child in node:
-            if child.tag == "{http://codes.cvn.fecyt.es/beans}Code":
-                return child.text
-
-    return find_result.text
-
-
-def code_get_name(code, lang='spa'):
-    """
-    Obtener el nombre de un código CVN a partir de los mapeos XML.
-    OJO: muy mal rendimiento, usar solo para debug.
-    :param lang: idioma en el que queremos obtener los nombres
-    :param code: el código del que queremos obtener el nombre
-    :return: string el nombre del código
-    """
-    if code in code_name:
-        return code_name[code]
-    tree = ET.parse('mappings/cvn/1.4.2_sp1/XSD/SpecificationManual.xml')  # hardcoded for now
-    result = tree.getroot().find("./*Item[@code='" + code + "']/Name/NameDetail[@lang='" + lang + "']/Name").text
-    code_name[code] = result
-    return result
 
 
 def make_validation_error(message):

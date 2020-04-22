@@ -32,16 +32,36 @@ class Source(Printable):
         self.name = name
         self.bean = bean
         self.format = format_string
+        self.value = None
+        self.formatted_value = None
 
-    def format(self, value):
+    def set_value(self, value):
+        self.value = value
+        if value is None:
+            self.formatted_value = None
+        else:
+            self.formatted_value = self.formatted()
+
+    def formatted(self):
         """
         Formats the input value following the source format
-        :param value: the value of the source
         :return: the formatted value
         """
+        if self.value is None:
+            return None
         if self.format is None:
-            return value
-        return self.format.format(value=value)
+            return self.value
+        return self.format.format(value=self.value)
+
+    def get_value_from_node(self, item_node):
+        result = item_node.find("{http://codes.cvn.fecyt.es/beans}" + self.bean)
+        if result is not None:
+            self.set_value(result.text)
+        return self.formatted_value
+
+    def clear_value(self):
+        self.value = None
+        self.formatted_value = None
 
     def __str__(self):
         return str(self.__class__) + ": " + str(self.__dict__)

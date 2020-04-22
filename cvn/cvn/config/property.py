@@ -1,5 +1,7 @@
 from cvn.utils.printable import Printable
 import cvn.config.source as cvn_source
+from cvn.utils import xmltree
+import re
 
 
 def init_property_from_serialized_toml(config):
@@ -24,13 +26,62 @@ def init_property_from_serialized_toml(config):
     return generated_property
 
 
+def has_all_formatting_fields(format_string, fields):
+    """
+    Comprueba que todos los campos de formateo estén definidos en el diccionario
+    :param format_string: el texto que se le pasa al Formatter
+    :param fields: los campos con los valores que se usan para rellenar
+    :return: bool ¿están todos los campos de formateo cubiertos por el diccionario?
+    """
+    # Busca los valores entre {} y los devuelve en una lista
+    format_fields = re.findall(r'{(.*?)}', format_string)
+
+    for field in format_fields:
+        if field not in fields:
+            return False
+    return True
+
+
 class Property(Printable):
     def __init__(self, ontology, name, format_string):
         self.ontology = ontology
         self.name = name
         self.format = format_string
         self.sources = []
+        self.formatted_value = None
 
     def add_source(self, source):
         self.sources.append(source)
         return self
+
+    def get_source_dict(self):
+        sources = {}
+        for source in self.sources:
+            if source.formatted_value is not None:
+                sources[source.name] = source.formatted_value
+
+    def formatted(self):
+        try:
+            formatted = self.format.format(self.get_source_dict())
+            return formatted
+        except KeyError:
+            print("Falta key para generar propiedad correctamente: " + str(self))
+        return None
+
+    def get_value_from_node(self, item_node):
+        sources = {}
+        # Rellenar todas las sources
+        for source in self.sources:
+            source_node = xmltree.get_first_node_by_code(item_node, source.code)
+            if source_node is not None:
+                source.get_value_from_node(source_node)
+        # Formatear
+        return self.formatted()
+
+    def clear_values(self):
+        self.formatted_value = None
+        for source in self.sources:
+            source.clear_value()
+
+    def generate_triple(self, graph):
+
