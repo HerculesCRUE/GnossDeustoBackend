@@ -152,11 +152,14 @@ id.fallback = "uuid4"
 [[entities]] # Formación académica recibida
 code = "020.010.010.000"
 ontology = "vivo"
-classname = "AcademicDegree"
+classname = "AwardedDegree"
 
     [[entities.criteria.property]]
-    code = "020.010.010.010"
-    values = ["950"]
+    ontology = "vivo"
+    name = "relates"
+    inverse_ontology = "vivo"
+    inverse_name = "relates"
+    link_to_cvn_person = true
 
     [[entities.properties]]
     ontology = "vivo"
@@ -168,15 +171,43 @@ classname = "AcademicDegree"
         name = "date"
         bean = "Value"
 
-    [[entities.properties]]
-    ontology = "roh"
-    name = "title"
-    format = "{title}"
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "AcademicDegree"
 
-        [[entities.properties.sources]]
-        code = "020.010.010.030"
+        [[entities.subentities.relationships]]
+        ontology = "vivo"
+        name = "relates"
+
+        [[entities.subentities.properties]]
+        ontology = "roh"
         name = "title"
-        bean = "Name"
+        format = "{title}"
+
+            [[entities.subentities.properties.sources]]
+            code = "020.010.010.030"
+            name = "title"
+            bean = "Name"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "University"
+
+            [[entities.subentities.subentities.relationships]]
+            ontology = "roh"
+            name = "awards"
+            inverse_ontology = "roh"
+            inverse_name = "awardedBy"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "foaf"
+            name = "name"
+            format = "{title}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "020.010.010.090"
+                name = "name"
+                bean = "Name"
 
 [[entities]] # Doctorado
 code = "020.010.020.000"
