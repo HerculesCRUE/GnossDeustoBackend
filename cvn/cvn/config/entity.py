@@ -81,6 +81,7 @@ class Entity(Printable):
             property_item.clear_values()
         for subentity in self.subentities:
             subentity.clear_values()
+        return self
 
     def get_identifier(self):
         if self.identifier is None:
@@ -97,4 +98,7 @@ class Entity(Printable):
     def generate_property_triples(self):
         triples = []
         for property_item in self.properties:
-            property_item.generate_triple()
+            triples.append(property_item.generate_triple())
+
+    def add_entity_to_ontology(self, ontology_config):
+        ontology_config.graph.add(self.generate_entity_triple(ontology_config))

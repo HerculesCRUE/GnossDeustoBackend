@@ -173,7 +173,7 @@ def v1_convert():
             #             identifier = entity['id']['format'].format_map(properties).strip()
 
             # Generamos la tripleta de la entidad como tal
-            g.add(entity.generate_entity_triple(ontology_config))
+            entity.add_entity_to_ontology(ontology_config)
 
             # # La rellenamos con las propiedades
             # for class_property in entity['properties']:
