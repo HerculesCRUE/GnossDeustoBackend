@@ -16,6 +16,7 @@ import requests
 import toml
 import uuid
 from cvn.config import entity as config_entity
+from cvn.config.ontology import OntologyConfig, Ontology
 from cvn.utils import xmltree
 
 app = Flask(__name__)
@@ -74,7 +75,6 @@ def v1_convert():
     # Lista de ontologías para acceder a ellas desde la config
     # TODO mover a una clase con funciones de utilidad
     ontologies = {}
-    ontology_primary = None  # TODO comprobar que se ha definido una ontología primaria
 
     with open("mappings/cvn/1.4.2_sp1/cvn-to-roh/ontologies.toml") as f:
         config_ontologies = toml.loads(f.read())
@@ -83,16 +83,25 @@ def v1_convert():
     # El NamespaceManager se encarga de gestionar las ontologías enlazadas
     namespace_manager = NamespaceManager(Graph())
 
+    ontology_config = OntologyConfig()
+
     # Recorrer la config de ontologías y añadirlas al NamespaceManager
     for ontology in config_ontologies['ontologies']:
-        ontologies[ontology['shortname']] = Namespace(ontology['uri_base'])
-        namespace_manager.bind(ontology['shortname'], ontologies[ontology['shortname']])
+
+        primary = False
         if ('primary' in ontology) and ontology['primary']:
-            ontology_primary = ontologies[ontology['shortname']]
+            primary = True
+        ontology_instance = Ontology(short_name=ontology['shortname'], uri_base=ontology['uri_base'], primary=primary)
+        ontology_config.add_ontology(ontology_instance)
+        namespace_manager.bind(ontology_instance.short_name, ontology_instance.namespace)
+
+        # TODO comprobar que se ha definido una ontología primaria
 
     # Iniciar grafo principal con el NamespaceManager rellenado de ontologías
     g = Graph()
     g.namespace_manager = namespace_manager
+
+    ontology_config.graph = g
 
     person = URIRef(generate_uri('Researcher', params['orcid']))
 
@@ -117,7 +126,7 @@ def v1_convert():
     #           Guardar en el grafo
 
     person = URIRef(generate_uri(config['instance']['classname'], params['orcid']))
-    g.add((person, RDF.type, ontology_primary.term(config['instance']['classname'])))
+    g.add((person, RDF.type, ontology_config.get_primary().term(config['instance']['classname'])))
 
     # Representa el único nodo que contiene todos los datos personales del CVN
     info_node = xmltree.get_first_node_by_code(root, config['code'])
@@ -126,7 +135,7 @@ def v1_convert():
         # Formateamos
         formatted_value = data_property['format'].format_map(get_sources_from_property(data_property, info_node))
 
-        g.add((person, ontologies[data_property['ontology']].term(data_property['name']),
+        g.add((person, ontology_config.get_ontology(data_property['ontology']).term(data_property['name']),
                Literal(formatted_value)))
 
         # Sources procesadas, formateamos texto
@@ -164,7 +173,7 @@ def v1_convert():
 
             # Generamos la tripleta de la entidad como tal
             current_entity = URIRef(generate_uri(entity.classname, str(identifier)))
-            g.add((current_entity, RDF.type, ontologies[entity.ontology].term(entity.classname)))
+            g.add((current_entity, RDF.type, ontology_config.get_ontology(entity.ontology).term(entity.classname)))
 
             # # La rellenamos con las propiedades
             # for class_property in entity['properties']:
