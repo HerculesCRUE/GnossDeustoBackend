@@ -53,7 +53,7 @@ class Entity(Printable):
         self.classname = classname
         self.subentities = []
         self.properties = []
-        self.relations = []
+        self.relationships = []
         self.parent = parent
         self.triplets = []
         self.identifier = None

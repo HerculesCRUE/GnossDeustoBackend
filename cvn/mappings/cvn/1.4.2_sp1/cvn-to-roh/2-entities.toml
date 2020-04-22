@@ -5,7 +5,7 @@ classname = "AcademicArticle"
 id.resource = "Article"
 id.format = "{doi}"
 
-    [[entities.relations]]
+    [[entities.relationships]]
     ontology = "roh"
     name = "correspondingAuthorOf"
     inverse_ontology = "roh"
@@ -62,7 +62,7 @@ id.fallback = "uuid4"
     ontology = "foaf"
     classname = "Organization"
 
-        [[entities.subentities.relations]]
+        [[entities.subentities.relationships]]
         ontology = "vivo"
         name = "relates"
         inverse_ontology = "vivo"
@@ -78,7 +78,7 @@ id.fallback = "uuid4"
             name = "name"
             bean = "Value"
 
-    [[entities.relations]]
+    [[entities.relationships]]
     ontology = "roh"
     name = "hasPosition"
     inverse_ontology = "roh"
@@ -164,7 +164,7 @@ code = "020.060.000.000"
 ontology = "roh"
 classname = "LanguageCertificate"
 
-    [[entities.relations]]
+    [[entities.relationships]]
     ontology = "roh"
     name = "hasAccreditation"
     inverse_ontology = "roh"
