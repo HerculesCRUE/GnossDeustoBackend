@@ -1,6 +1,5 @@
 from ..utils import code as cvn_code
 import cvn.config.property as cvn_property
-from cvn.utils.printable import Printable
 from rdflib.namespace import RDF
 from rdflib import Literal, URIRef
 import uuid
@@ -74,7 +73,7 @@ def init_entity_from_serialized_toml(config, parent=None):
     return entity
 
 
-class Entity(Printable):
+class Entity:
     # TODO todo el tema de la id y la URI
     def __init__(self, code, ontology, classname, parent=None):
         self.code = code
