@@ -173,6 +173,16 @@ classname = "LanguageCertificate"
 
     [[entities.properties]]
     ontology = "roh"
+    name = "language"
+    format = "{language}"
+
+        [[entities.properties.sources]]
+        code = "020.060.000.010"
+        name = "language"
+        bean = "Identification"
+
+    [[entities.properties]]
+    ontology = "roh"
     name = "readingSkill"
     format = "{skill}"
 
