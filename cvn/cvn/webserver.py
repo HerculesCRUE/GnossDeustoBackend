@@ -8,7 +8,7 @@
 #
 import argparse
 import xml.etree.ElementTree as ET
-from rdflib import Graph, Namespace, Literal, URIRef
+from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import RDF, NamespaceManager
 from flask import Flask, request, make_response, jsonify
 import re
@@ -24,6 +24,7 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB máx.
 
 # Formatos de salida permitidos
 ALLOWED_FORMATS = ["xml", "n3", "turtle", "nt", "pretty-xml", "trix", "trig", "nquads"]
+
 
 # TODO testing
 # TODO modularizar, quitar spaghetti code
@@ -162,7 +163,7 @@ def v1_convert():
             # manera intentar
 
             # Generación de la URI
-            identifier = uuid.uuid4()  # por defecto UUIDv4
+            # identifier = uuid.uuid4()  # por defecto UUIDv4
             # resource_class = entity['classname']  # por defecto el nombre de la clase de la entidad
             # if 'id' in entity:
             #     if 'resource' in entity['id']:
@@ -172,8 +173,7 @@ def v1_convert():
             #             identifier = entity['id']['format'].format_map(properties).strip()
 
             # Generamos la tripleta de la entidad como tal
-            current_entity = URIRef(generate_uri(entity.classname, str(identifier)))
-            g.add((current_entity, RDF.type, ontology_config.get_ontology(entity.ontology).term(entity.classname)))
+            g.add(entity.generate_entity_triple(ontology_config))
 
             # # La rellenamos con las propiedades
             # for class_property in entity['properties']:
@@ -210,24 +210,24 @@ def v1_convert():
     # Serializar y guardar en un archivo con el formato que queramos
 
 
-def get_properties_from_node(entity_config, node):
-    """
-    Recorre un nodo y genera un diccionario con propiedades y sus valores formateados
-    :param entity_config: el objeto de configuración
-    :param node: el nodo XML del CVN de donde queremos sacar las propiedades
-    :return:
-    """
-    properties = {}
-    for property_config in entity_config['properties']:
-        sources = get_sources_from_property(property_config, node)
-        if 'format' in property_config and has_all_formatting_fields(property_config['format'], sources):
-            properties[property_config['name']] = property_config['format'].format_map(sources)
-    return properties
-    # hay algún source que no se ha generado
-    # TODO validar que se tienen todos los parámetros necesarios
-    # Posible problema aquí: ¿qué pasa si hay dos propiedades con el mismo nombre de distintas ontologías?
-
-
+# def get_properties_from_node(entity_config, node):
+#     """
+#     Recorre un nodo y genera un diccionario con propiedades y sus valores formateados
+#     :param entity_config: el objeto de configuración
+#     :param node: el nodo XML del CVN de donde queremos sacar las propiedades
+#     :return:
+#     """
+#     properties = {}
+#     for property_config in entity_config['properties']:
+#         sources = get_sources_from_property(property_config, node)
+#         if 'format' in property_config and has_all_formatting_fields(property_config['format'], sources):
+#             properties[property_config['name']] = property_config['format'].format_map(sources)
+#     return properties
+#     # hay algún source que no se ha generado
+#     # TODO validar que se tienen todos los parámetros necesarios
+#     # Posible problema aquí: ¿qué pasa si hay dos propiedades con el mismo nombre de distintas ontologías?
+#
+#
 def get_sources_from_property(current_property, node):
     # Declaramos un dict. para que podamos guardar los valores de los sources
     sources = {}
@@ -244,23 +244,22 @@ def get_sources_from_property(current_property, node):
             else:
                 sources[source['name']] = None
     return sources
-#
-#
-# def has_all_formatting_fields(format_string, fields):
-#     """
-#     Comprueba que todos los campos de formateo estén definidos en el diccionario
-#     :param format_string: el texto que se le pasa al Formatter
-#     :param fields: los campos con los valores que se usan para rellenar
-#     :return: bool ¿están todos los campos de formateo cubiertos por el diccionario?
-#     """
-#     # Busca los valores entre {} y los devuelve en una lista
-#     format_fields = re.findall(r'{(.*?)}', format_string)
-#
-#     for field in format_fields:
-#         if field not in fields:
-#             return False
-#     return True
 
+
+def has_all_formatting_fields(format_string, fields):
+    """
+    Comprueba que todos los campos de formateo estén definidos en el diccionario
+    :param format_string: el texto que se le pasa al Formatter
+    :param fields: los campos con los valores que se usan para rellenar
+    :return: bool ¿están todos los campos de formateo cubiertos por el diccionario?
+    """
+    # Busca los valores entre {} y los devuelve en una lista
+    format_fields = re.findall(r'{(.*?)}', format_string)
+
+    for field in format_fields:
+        if field not in fields:
+            return False
+    return True
 
 
 def make_validation_error(message):

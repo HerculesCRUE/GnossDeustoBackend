@@ -1,7 +1,9 @@
 from ..utils import code as cvn_code
 import cvn.config.property as cvn_property
 from cvn.utils.printable import Printable
-
+from rdflib.namespace import RDF
+from rdflib import Literal, URIRef
+import uuid
 
 def init_entity_from_serialized_toml(config, parent=None):
     # code and name are required attributes
@@ -54,6 +56,7 @@ class Entity(Printable):
         self.relations = []
         self.parent = parent
         self.triplets = []
+        self.identifier = None
 
     def add_property(self, entity_property):
         """
@@ -73,10 +76,23 @@ class Entity(Printable):
             property_item.get_value_from_node(item_node)
 
     def clear_values(self):
+        self.identifier = None
         for property_item in self.properties:
             property_item.clear_values()
         for subentity in self.subentities:
             subentity.clear_values()
+
+    def get_identifier(self):
+        if self.identifier is None:
+            self.identifier = str(uuid.uuid4())
+        return self.identifier
+
+    def get_uri(self):
+        return URIRef("http://data.um.es/class/" + self.classname + "/" + self.get_identifier())
+        # TODO re-integrar UriFactory
+
+    def generate_entity_triple(self, ontology_config):
+        return self.get_uri(), RDF.type, ontology_config.get_ontology(self.ontology).term(self.classname)
 
     def generate_property_triples(self):
         triples = []
