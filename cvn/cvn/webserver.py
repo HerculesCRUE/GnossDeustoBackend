@@ -127,6 +127,7 @@ def v1_convert():
     #           Guardar en el grafo
 
     person = URIRef(generate_uri(config['instance']['classname'], params['orcid']))
+    ontology_config.cvn_person = person
     g.add((person, RDF.type, ontology_config.get_primary().term(config['instance']['classname'])))
 
     # Representa el único nodo que contiene todos los datos personales del CVN

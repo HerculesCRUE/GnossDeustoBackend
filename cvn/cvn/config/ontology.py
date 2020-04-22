@@ -5,6 +5,7 @@ class OntologyConfig:
     def __init__(self):
         self.ontologies = {}
         self.graph = None
+        self.cvn_person = None
 
     def get_ontology(self, short_name):
         try:
