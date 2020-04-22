@@ -95,10 +95,18 @@ class Entity(Printable):
     def generate_entity_triple(self, ontology_config):
         return self.get_uri(), RDF.type, ontology_config.get_ontology(self.ontology).term(self.classname)
 
-    def generate_property_triples(self):
+    def generate_property_triples(self, ontology_config):
         triples = []
         for property_item in self.properties:
-            triples.append(property_item.generate_triple())
+            if property_item.formatted_value is not None:
+                triple = self.get_uri(), \
+                         ontology_config.get_ontology(property_item.ontology).term(property_item.name), \
+                         Literal(str(property_item.formatted_value))
+                triples.append(triple)
+        return triples
 
     def add_entity_to_ontology(self, ontology_config):
         ontology_config.graph.add(self.generate_entity_triple(ontology_config))
+        for triple in self.generate_property_triples(ontology_config):
+            ontology_config.graph.add(triple)
+
