@@ -70,13 +70,13 @@ id.fallback = "uuid4"
 
         [[entities.subentities.properties]]
         ontology = "foaf"
-        name = "mame"
+        name = "name"
         format = "{name}"
 
             [[entities.subentities.properties.sources]]
             code = "010.020.000.020"
             name = "name"
-            bean = "Value"
+            bean = "Name"
 
     [[entities.relationships]]
     ontology = "roh"
