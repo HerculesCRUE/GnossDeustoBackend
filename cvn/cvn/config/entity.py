@@ -66,11 +66,10 @@ def init_entity_from_serialized_toml(config, parent=None):
     entity = Entity(code, config['ontology'], config['classname'], parent=parent)
 
     # Populate properties
-    if 'properties' not in config:
-        raise KeyError('no properties defined for Entity: ' + entity.classname)
-    for property_config in config['properties']:
-        property_generated = cvn_property.init_property_from_serialized_toml(property_config)
-        entity.add_property(property_generated)
+    if 'properties' in config:
+        for property_config in config['properties']:
+            property_generated = cvn_property.init_property_from_serialized_toml(property_config)
+            entity.add_property(property_generated)
 
     # Relationships
     if 'relationships' in config:
