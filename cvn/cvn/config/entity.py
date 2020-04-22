@@ -105,6 +105,8 @@ class Entity:
     def get_property_values_from_node(self, item_node):
         for property_item in self.properties:
             property_item.get_value_from_node(item_node)
+        for subentities in self.subentities:
+            subentities.get_property_values_from_node(item_node)
 
     def clear_values(self):
         self.identifier = None
@@ -145,7 +147,7 @@ class Entity:
             else:
                 if self.parent is None:
                     continue  # Si es una relación con el padre, pero no tiene... nos la saltamos
-                other = self.parent
+                other = self.parent.get_uri()
 
             # Relación directa
             direct_triple = self.get_uri(), ontology_config.get_ontology(relationship.ontology).term(relationship.name), other
@@ -183,3 +185,7 @@ class Entity:
         relationship_triples = self.generate_relationship_triples(ontology_config)
         for triple in relationship_triples:
             ontology_config.graph.add(triple)
+
+        # Subentidades
+        for subentity in self.subentities:
+            subentity.add_entity_to_ontology(ontology_config)
