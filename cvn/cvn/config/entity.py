@@ -78,8 +78,7 @@ class Entity(Printable):
         for subentity in self.subentities:
             subentity.clear_values()
 
-    def generate_property_triples(self, graph):
+    def generate_property_triples(self):
         triples = []
         for property_item in self.properties:
-
-        return triples
+            property_item.generate_triple()

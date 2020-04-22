@@ -59,13 +59,16 @@ class Property(Printable):
         for source in self.sources:
             if source.formatted_value is not None:
                 sources[source.name] = source.formatted_value
+        return sources
 
     def formatted(self):
         try:
-            formatted = self.format.format(self.get_source_dict())
+            formatted = self.format.format_map(self.get_source_dict())
+            self.formatted_value = formatted
             return formatted
         except KeyError:
-            print("Falta key para generar propiedad correctamente: " + str(self))
+            print("Falta key para generar propiedad correctamente: " + str(self.format) + " -- "
+                  + str(self.get_source_dict()))
         return None
 
     def get_value_from_node(self, item_node):
@@ -83,5 +86,5 @@ class Property(Printable):
         for source in self.sources:
             source.clear_value()
 
-    def generate_triple(self, graph):
-
+    def generate_triple(self):
+        print("tripleta property (entidad, " + str(self.ontology) + ":" + str(self.name) + ", " + str(self.formatted_value) + ")")

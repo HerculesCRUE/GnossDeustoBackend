@@ -147,7 +147,8 @@ def v1_convert():
         for entity_result_node in xmltree.get_all_nodes_by_code(root, entity.code):
             # properties = get_properties_from_node(entity, entity_result_node)
 
-            print(entity.get_property_values_from_node(entity_result_node))
+            entity.get_property_values_from_node(entity_result_node)
+            entity.generate_property_triples()
             # MAL MAL MAL no se puede pretender rellenar una entidad con la información de todas, hay que, de alguna
             # manera intentar
 
