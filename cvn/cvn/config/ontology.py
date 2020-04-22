@@ -8,10 +8,9 @@ class OntologyConfig:
         self.cvn_person = None
 
     def get_ontology(self, short_name):
-        try:
-            return self.ontologies.get(short_name)
-        except KeyError:
-            return None
+        if short_name not in self.ontologies:
+            raise KeyError("Ontology " + short_name + " not defined")
+        return self.ontologies.get(short_name)
 
     def add_ontology(self, ontology):
         # if self.ontology_exists(ontology.short_name):
