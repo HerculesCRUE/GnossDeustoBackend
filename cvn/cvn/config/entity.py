@@ -75,11 +75,14 @@ def init_entity_from_serialized_toml(config, parent=None):
     if 'relationships' in config:
         for relationship in config['relationships']:
 
-            if 'ontology' not in relationship:
-                raise KeyError('ontology not specified for Relationship')
-                # TODO comprobar que está definida
-            if 'name' not in relationship:
-                raise KeyError('name not specified for Relationship')
+            ontology = None
+            name = None
+            if 'name' in relationship:
+                if 'ontology' not in relationship:
+                    raise KeyError('Relationship name was specified but no ontology for it')
+                    # TODO comprobar que está definida
+                name = relationship['name']
+                ontology = relationship['ontology']
 
             inverse_name = None
             inverse_ontology = None
@@ -94,9 +97,11 @@ def init_entity_from_serialized_toml(config, parent=None):
             if 'link_to_cvn_person' in relationship:
                 link_to_cvn_person = relationship['link_to_cvn_person']
 
-            generated_relationship = Relationship(relationship['ontology'], relationship['name'], inverse_ontology,
-                                                  inverse_name, link_to_cvn_person)
-            entity.add_relationship(generated_relationship)
+            if ((name is not None) and (ontology is not None)) \
+                    or ((inverse_name is not None) and (inverse_ontology is not None)):
+                generated_relationship = Relationship(ontology, name, inverse_ontology,
+                                                      inverse_name, link_to_cvn_person)
+                entity.add_relationship(generated_relationship)
 
     # Subentities, recursive (optional)
     if 'subentities' in config:
@@ -198,9 +203,11 @@ class Entity:
                 other = self.parent.get_uri()
 
             # Relación directa
-            direct_triple = self.get_uri(), ontology_config.get_ontology(relationship.ontology).term(
-                relationship.name), other
-            triples.append(direct_triple)
+            if (relationship.name is not None) and (relationship.ontology is not None):
+                direct_triple = self.get_uri(), \
+                                ontology_config.get_ontology(relationship.ontology).term(relationship.name), \
+                                other
+                triples.append(direct_triple)
 
             # Relación inversa
             if (relationship.inverse_name is not None) and \
