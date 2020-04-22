@@ -59,6 +59,50 @@ classname = "Position"
 id.fallback = "uuid4"
 
     [[entities.subentities]]
+    ontology = "vivo"
+    classname = "DateTimeInterval"
+
+        [[entities.subentities.relationships]]
+        inverse_ontology = "vivo"
+        inverse_name = "dateTimeInterval"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "start"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "start"
+            format = "{start}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "010.020.000.180"
+                name = "start"
+                bean = "Value"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "end"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "end"
+            format = "{end}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "010.020.000.310"
+                name = "end"
+                bean = "Value"
+
+    [[entities.subentities]]
     ontology = "foaf"
     classname = "Organization"
 
