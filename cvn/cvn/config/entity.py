@@ -4,6 +4,39 @@ from rdflib.namespace import RDF
 from rdflib import Literal, URIRef
 import uuid
 from cvn.config.relationship import Relationship
+import requests
+
+# Caché de URIs generadas
+# TODO mover a un servicio externo, o hacer algo más elaborado
+# Problema: memoria...? múltiples ejecuciones = se borra
+cached_uris = {}
+
+
+def generate_uri(resource_class, identifier):
+    """
+    Generar, usando la API HTTP, las URIs correspondientes a cada entidad.
+    :param resource_class:
+    :param identifier:
+    :return: la URI
+    """
+    # Antes de intentar obtener la URI, comprobar a ver si la tenemos ya en caché
+    cache_id = resource_class + "." + identifier
+    if cache_id in cached_uris:
+        return cached_uris[cache_id]
+
+    api_response = requests.get("http://herc-as-front-desa.atica.um.es/uris/Factory", params={
+        'resource_class': resource_class,
+        'identifier': identifier
+    })  # TODO comprobar que lo que devuelve es de hecho una URL bien formateada
+
+    # Si falla, nos la jugamos y nos inventamos una URI que podría ser:
+    if api_response.status_code != 200:
+        return "http://data.um.es/class/" + resource_class + "/" + identifier
+
+    # Guardamos en caché si ha salido bien
+    result = api_response.text
+    cached_uris[cache_id] = result
+    return result
 
 
 def init_entity_from_serialized_toml(config, parent=None):
