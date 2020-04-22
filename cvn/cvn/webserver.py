@@ -13,7 +13,6 @@ from rdflib.namespace import RDF, NamespaceManager
 from flask import Flask, request, make_response, jsonify
 import re
 import toml
-import uuid
 from cvn.config import entity as config_entity
 from cvn.config.ontology import OntologyConfig, Ontology
 from cvn.utils import xmltree
@@ -244,22 +243,6 @@ def get_sources_from_property(current_property, node):
             else:
                 sources[source['name']] = None
     return sources
-
-
-def has_all_formatting_fields(format_string, fields):
-    """
-    Comprueba que todos los campos de formateo estén definidos en el diccionario
-    :param format_string: el texto que se le pasa al Formatter
-    :param fields: los campos con los valores que se usan para rellenar
-    :return: bool ¿están todos los campos de formateo cubiertos por el diccionario?
-    """
-    # Busca los valores entre {} y los devuelve en una lista
-    format_fields = re.findall(r'{(.*?)}', format_string)
-
-    for field in format_fields:
-        if field not in fields:
-            return False
-    return True
 
 
 def make_validation_error(message):

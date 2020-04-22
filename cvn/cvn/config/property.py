@@ -86,4 +86,8 @@ class Property(Printable):
             source.clear_value()
 
     def generate_triple(self):
-        print("tripleta property (entidad, " + str(self.ontology) + ":" + str(self.name) + ", " + str(self.formatted_value) + ")")
+        print("tripleta property (entidad, " + str(self.ontology) + ":" + str(self.name) + ", "
+              + str(self.formatted_value) + ")")
+
+    def get_identifier(self):
+        return self.ontology.short_name + ":" + self.name

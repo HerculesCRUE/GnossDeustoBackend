@@ -5,6 +5,7 @@ from rdflib import Literal, URIRef
 import uuid
 from cvn.config.relationship import Relationship
 import requests
+import re
 
 # Caché de URIs generadas
 # TODO mover a un servicio externo, o hacer algo más elaborado
@@ -108,7 +109,8 @@ def init_entity_from_serialized_toml(config, parent=None):
 
 class Entity:
     # TODO todo el tema de la id y la URI
-    def __init__(self, code, ontology, classname, parent=None):
+    def __init__(self, code, ontology, classname, parent=None, identifier_config_resource=None,
+                 identifier_config_format=None):
         self.code = code
         self.ontology = ontology
         self.classname = classname
@@ -117,7 +119,9 @@ class Entity:
         self.relationships = []
         self.parent = parent
         self.triplets = []
-        self.identifier = None
+        self.generated_identifier = None
+        self.identifier_config_resource = identifier_config_resource
+        self.identifier_config_format = identifier_config_format
 
     def add_property(self, entity_property):
         """
@@ -142,7 +146,7 @@ class Entity:
             subentities.get_property_values_from_node(item_node)
 
     def clear_values(self):
-        self.identifier = None
+        self.generated_identifier = None
         for property_item in self.properties:
             property_item.clear_values()
         for subentity in self.subentities:
@@ -150,13 +154,24 @@ class Entity:
         return self
 
     def get_identifier(self):
-        if self.identifier is None:
-            self.identifier = str(uuid.uuid4())
-        return self.identifier
+        if self.generated_identifier is None:
+
+            resource = self.classname
+            if self.identifier_config_resource is not None:
+                resource = self.identifier_config_resource
+
+            identifier = str(uuid.uuid4())
+            if self.identifier_config_format is not None:
+                property_dict = self.get_property_dict()
+                if has_all_formatting_fields(self.identifier_config_format, property_dict):
+                    identifier = self.identifier_config_format.format_map(property_dict)
+
+            self.generated_identifier = generate_uri(resource, identifier)
+
+        return self.generated_identifier
 
     def get_uri(self):
-        return URIRef("http://data.um.es/class/" + self.classname + "/" + self.get_identifier())
-        # TODO re-integrar UriFactory
+        return URIRef(self.get_identifier())
 
     def generate_entity_triple(self, ontology_config):
         return self.get_uri(), RDF.type, ontology_config.get_ontology(self.ontology).term(self.classname)
@@ -177,35 +192,25 @@ class Entity:
 
             if relationship.link_to_cvn_person:
                 other = ontology_config.cvn_person
+                # TODO comprobar que person no sea None
             else:
                 if self.parent is None:
                     continue  # Si es una relación con el padre, pero no tiene... nos la saltamos
                 other = self.parent.get_uri()
 
             # Relación directa
-            direct_triple = self.get_uri(), ontology_config.get_ontology(relationship.ontology).term(relationship.name), other
+            direct_triple = self.get_uri(), ontology_config.get_ontology(relationship.ontology).term(
+                relationship.name), other
             triples.append(direct_triple)
 
             # Relación inversa
             if (relationship.inverse_name is not None) and \
-                (relationship.inverse_ontology is not None):
-                inverse_triple = other, ontology_config.get_ontology(relationship.inverse_ontology)\
+                    (relationship.inverse_ontology is not None):
+                inverse_triple = other, ontology_config.get_ontology(relationship.inverse_ontology) \
                     .term(relationship.inverse_name), self.get_uri()
                 triples.append(inverse_triple)
 
         return triples
-
-        # TODO comprobar que person no sea None
-
-    #   if 'relations' in entity:
-    #     for relation in entity['relations']:
-    #         if 'link_to_cvn_person' in relation and relation['link_to_cvn_person']:
-    #             g.add((person, ontologies[relation['ontology']].term(relation['name']), current_entity))
-    #         if 'inverse_name' in relation:
-    #             inverse_ontology = relation['ontology']
-    #             if 'inverse_ontology' in relation:
-    #                 inverse_ontology = relation['inverse_ontology']
-    #             g.add((current_entity, ontologies[inverse_ontology].term(relation['inverse_name']), person))
 
     def add_entity_to_ontology(self, ontology_config):
         ontology_config.graph.add(self.generate_entity_triple(ontology_config))
@@ -222,3 +227,26 @@ class Entity:
         # Subentidades
         for subentity in self.subentities:
             subentity.add_entity_to_ontology(ontology_config)
+
+    def get_property_dict(self):
+        properties = {}
+        for property_item in self.properties:
+            if property_item.formatted_value is not None:
+                properties[property_item.get_identifier()] = property_item.formatted_value
+        return properties
+
+
+def has_all_formatting_fields(format_string, fields):
+    """
+    Comprueba que todos los campos de formateo estén definidos en el diccionario
+    :param format_string: el texto que se le pasa al Formatter
+    :param fields: los campos con los valores que se usan para rellenar
+    :return: bool ¿están todos los campos de formateo cubiertos por el diccionario?
+    """
+    # Busca los valores entre {} y los devuelve en una lista
+    format_fields = re.findall(r'{(.*?)}', format_string)
+
+    for field in format_fields:
+        if field not in fields:
+            return False
+    return True
