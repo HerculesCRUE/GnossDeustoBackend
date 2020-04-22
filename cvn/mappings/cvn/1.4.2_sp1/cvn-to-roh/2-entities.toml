@@ -7,9 +7,9 @@ id.format = "{doi}"
 
     [[entities.relationships]]
     ontology = "roh"
-    name = "correspondingAuthorOf"
+    name = "correspondingAuthor"
     inverse_ontology = "roh"
-    inverse_name = "correspondingAuthor"
+    inverse_name = "correspondingAuthorOf"
     link_to_cvn_person = true
 
     [[entities.properties]]

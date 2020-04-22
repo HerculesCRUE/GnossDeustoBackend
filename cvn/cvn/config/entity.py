@@ -4,6 +4,8 @@ from cvn.utils.printable import Printable
 from rdflib.namespace import RDF
 from rdflib import Literal, URIRef
 import uuid
+from cvn.config.relationship import Relationship
+
 
 def init_entity_from_serialized_toml(config, parent=None):
     # code and name are required attributes
@@ -37,6 +39,33 @@ def init_entity_from_serialized_toml(config, parent=None):
         property_generated = cvn_property.init_property_from_serialized_toml(property_config)
         entity.add_property(property_generated)
 
+    # Relationships
+    if 'relationships' in config:
+        for relationship in config['relationships']:
+
+            if 'ontology' not in relationship:
+                raise KeyError('ontology not specified for Relationship')
+                # TODO comprobar que está definida
+            if 'name' not in relationship:
+                raise KeyError('name not specified for Relationship')
+
+            inverse_name = None
+            inverse_ontology = None
+            if 'inverse_name' in relationship:
+                if 'inverse_ontology' not in relationship:
+                    raise KeyError('inverse Relationship name was specified but no ontology for it')
+                    # TODO comprobar que está definida
+                inverse_name = relationship['inverse_name']
+                inverse_ontology = relationship['inverse_ontology']
+
+            link_to_cvn_person = False
+            if 'link_to_cvn_person' in relationship:
+                link_to_cvn_person = relationship['link_to_cvn_person']
+
+            generated_relationship = Relationship(relationship['ontology'], relationship['name'], inverse_ontology,
+                                                  inverse_name, link_to_cvn_person)
+            entity.add_relationship(generated_relationship)
+
     # Subentities, recursive (optional)
     if 'subentities' in config:
         for subentity in config['subentities']:
@@ -66,6 +95,9 @@ class Entity(Printable):
         """
         self.properties.append(entity_property)
         return self
+
+    def add_relationship(self, relationship):
+        self.relationships.append(relationship)
 
     def add_subentity(self, subentity):
         self.subentities.append(subentity)
@@ -105,8 +137,50 @@ class Entity(Printable):
                 triples.append(triple)
         return triples
 
+    def generate_relationship_triples(self, ontology_config):
+        triples = []
+        for relationship in self.relationships:
+
+            if relationship.link_to_cvn_person:
+                other = ontology_config.cvn_person
+            else:
+                if self.parent is None:
+                    continue  # Si es una relación con el padre, pero no tiene... nos la saltamos
+                other = self.parent
+
+            # Relación directa
+            direct_triple = self.get_uri(), ontology_config.get_ontology(relationship.ontology).term(relationship.name), other
+            triples.append(direct_triple)
+
+            # Relación inversa
+            if (relationship.inverse_name is not None) and \
+                (relationship.inverse_ontology is not None):
+                inverse_triple = other, ontology_config.get_ontology(relationship.inverse_ontology)\
+                    .term(relationship.inverse_name), self.get_uri()
+                triples.append(inverse_triple)
+
+        return triples
+
+        # TODO comprobar que person no sea None
+
+    #   if 'relations' in entity:
+    #     for relation in entity['relations']:
+    #         if 'link_to_cvn_person' in relation and relation['link_to_cvn_person']:
+    #             g.add((person, ontologies[relation['ontology']].term(relation['name']), current_entity))
+    #         if 'inverse_name' in relation:
+    #             inverse_ontology = relation['ontology']
+    #             if 'inverse_ontology' in relation:
+    #                 inverse_ontology = relation['inverse_ontology']
+    #             g.add((current_entity, ontologies[inverse_ontology].term(relation['inverse_name']), person))
+
     def add_entity_to_ontology(self, ontology_config):
         ontology_config.graph.add(self.generate_entity_triple(ontology_config))
+
+        # Propiedades
         for triple in self.generate_property_triples(ontology_config):
             ontology_config.graph.add(triple)
 
+        # Relaciones
+        relationship_triples = self.generate_relationship_triples(ontology_config)
+        for triple in relationship_triples:
+            ontology_config.graph.add(triple)

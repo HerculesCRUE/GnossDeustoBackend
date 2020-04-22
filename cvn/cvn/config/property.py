@@ -67,8 +67,7 @@ class Property(Printable):
             self.formatted_value = formatted
             return formatted
         except KeyError:
-            print("Falta key para generar propiedad correctamente: " + str(self.format) + " -- "
-                  + str(self.get_source_dict()))
+            pass # TODO error handling
         return None
 
     def get_value_from_node(self, item_node):
