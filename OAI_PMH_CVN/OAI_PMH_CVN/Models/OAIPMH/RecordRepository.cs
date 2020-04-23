@@ -150,7 +150,7 @@ namespace OaiPmhNet.Models.OAIPMH
         /// <returns>Identificadores de os curriculums</returns>
         private HashSet<string> GetCurriculumsIDs(DateTime pInicio, string pXML_CVN_Repository)
         {
-            var client = new RestClient($"{pXML_CVN_Repository}changes?date={pInicio.Year}-{pInicio.Month}-{pInicio.Day}");
+            var client = new RestClient($"{pXML_CVN_Repository}changes?date={pInicio.ToString("yyyy")}-{pInicio.ToString("MM")}-{pInicio.ToString("dd")}");
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
             request.AddHeader("application", "asio");
