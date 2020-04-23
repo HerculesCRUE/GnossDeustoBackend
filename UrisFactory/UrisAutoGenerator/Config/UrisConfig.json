@@ -1073,6 +1073,34 @@
 				}
 			]
 		}, {
+			"Name": "uriFundingSourceStructure",
+			"Components": [{
+					"UriComponent": "base",
+					"UriComponentValue": "base",
+					"UriComponentOrder": 1,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "character",
+					"UriComponentValue": "character@RESOURCE",
+					"UriComponentOrder": 2,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "resourceClass",
+					"UriComponentValue": "resourceClass@RESOURCECLASS",
+					"UriComponentOrder": 3,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "identifier",
+					"UriComponentValue": "@ID",
+					"UriComponentOrder": 4,
+					"Mandatory": true,
+					"FinalCharacter": ""
+				}
+			]
+		}, {
 			"Name": "uriProjectExpenseStructure",
 			"Components": [{
 					"UriComponent": "base",
@@ -1338,6 +1366,10 @@
 			"ResourceClass": "FundingAmount",
 			"LabelResourceClass": "fundingamount",
 			"ResourceURI": "uriFundingAmountStructure"
+		}, {
+			"ResourceClass": "FundingSource",
+			"LabelResourceClass": "fundingsource",
+			"ResourceURI": "uriFundingSourceStructure"
 		}, {
 			"ResourceClass": "ProjectExpense",
 			"LabelResourceClass": "projectexpense",
