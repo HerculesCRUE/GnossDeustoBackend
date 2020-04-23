@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using OaiPmhNet;
 using OaiPmhNet.Models;
 using Swashbuckle.AspNetCore.Annotations;
+using VDS.RDF.Shacl.Validation;
 
 namespace PMH.Controllers
 {
@@ -25,11 +26,13 @@ namespace PMH.Controllers
     public class etlController : Controller
     {
         private IRepositoriesConfigService _repositoriesConfigService;
+        private IShapesConfigService _shapeConfigService;
         private SparqlConfig _sparqlConfig;
-        public etlController(IRepositoriesConfigService iRepositoriesConfigService,SparqlConfigJson sparqlConfigJson)
+        public etlController(IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, SparqlConfigJson sparqlConfigJson)
         {
             _repositoriesConfigService = iRepositoriesConfigService;
-            _sparqlConfig = sparqlConfigJson.GetConfig();
+            _shapeConfigService = iShapeConfigService;
+            _sparqlConfig = sparqlConfigJson.GetConfig();            
         }
 
         /// <summary>
@@ -54,11 +57,13 @@ namespace PMH.Controllers
         /// <param name="rdfFile">Fichero RDF</param>
         /// <returns></returns>
         [HttpPost("data-validate")]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ShapeReport))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult dataValidate(IFormFile rdfFile)
         {
-            throw new Exception("TODO");
+            XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);      
+            return Ok(SparqlUtility.ValidateRDF(rdf, _shapeConfigService.GetShapesConfigs()));
         }
 
         /// <summary>
