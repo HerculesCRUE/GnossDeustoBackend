@@ -2,6 +2,8 @@
 using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace ApiCargaWebInterface.Models.Services
 {
@@ -95,6 +97,42 @@ namespace ApiCargaWebInterface.Models.Services
                     throw new HttpRequestException(response.ReasonPhrase);
                 }
             }
+        }
+
+        public string CallPostApiToken(string url, System.Threading.Tasks.Task<string> token)
+        {
+            string result = "";
+            HttpResponseMessage response = null;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.Result);
+                response = client.GetAsync($"{url}").Result;
+                response.EnsureSuccessStatusCode();
+                result = response.Content.ReadAsStringAsync().Result;
+            }
+            catch (HttpRequestException)
+            {
+                if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                {
+                    throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpRequestException(response.ReasonPhrase);
+                }
+            }
+            return result;
+        }
+
+        public string CallPostApiToken(string urlMethod, object item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string CallPostApiToken(Task<string> token)
+        {
+            throw new System.NotImplementedException();
         }
 
         public string CallPutApi(string urlMethod, object item)

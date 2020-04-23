@@ -1,0 +1,8 @@
+2020-04-22 10:10:10.708 +02:00 [INF] {"error":"invalid_client"}
+
+2020-04-22 10:10:10.728 +02:00 [INF] {"error":"invalid_client"}
+
+2020-04-22 11:30:17.686 +02:00 [INF] {"error":"invalid_client"}
+
+2020-04-22 11:30:17.692 +02:00 [INF] {"error":"invalid_client"}
+

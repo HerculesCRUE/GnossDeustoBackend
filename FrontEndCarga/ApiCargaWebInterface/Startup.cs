@@ -1,5 +1,6 @@
 using ApiCargaWebInterface.Middlewares;
 using ApiCargaWebInterface.Models.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,7 +25,24 @@ namespace ApiCargaWebInterface
             services.AddSingleton(typeof(ConfigUrlService));
             services.AddScoped<ICallRepositoryConfigService, CallRepositoryConfigApiService>();
             services.AddScoped<ICallService, CallApiService>();
-            services.AddScoped<ICallShapeConfigService, CallShapeConfigApiService>(); 
+            services.AddScoped<ICallShapeConfigService, CallShapeConfigApiService>();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+            })
+            .AddCookie("Cookies")
+            .AddOpenIdConnect("oidc", options =>
+            {
+                options.Authority = "http://localhost:56306";
+                //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
+                options.RequireHttpsMetadata = false;
+                options.ClientId = "client";
+                options.ClientSecret = "secret";
+                options.SaveTokens = true;
+                options.SignInScheme = "Cookies";
+                options.Scope.Add("api1");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

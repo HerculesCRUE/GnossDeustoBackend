@@ -9,7 +9,9 @@ namespace ApiCargaWebInterface.Models.Services
     {
         public string CallGetApi(string urlMethod);
         public string CallPostApi(string urlMethod, object item);
+        public string CallPostApiToken(string urlMethod, object item);
         public string CallPutApi(string urlMethod, object item);
         public string CallDeleteApi(string urlMethod);
+        string CallPostApiToken(Task<string> token);
     }
 }

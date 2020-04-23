@@ -4,13 +4,16 @@ using API_CARGA.ModelExamples;
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
 using API_CARGA.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.Filters;
 
 namespace API_CARGA.Controllers
 {
+    
     [Route("etl-config/[controller]")]
     [ApiController]
     public class ValidationController : ControllerBase
@@ -23,7 +26,8 @@ namespace API_CARGA.Controllers
         /// <summary>
         /// Obtiene la configuración de los shape SHACL de validación
         /// </summary>
-        /// <returns>Listado con las definiciones de las validaciones</returns>       
+        /// <returns>Listado con las definiciones de las validaciones</returns> 
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(List<ShapeConfig>))]
@@ -31,6 +35,7 @@ namespace API_CARGA.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult GetShape()
         {
+            var accessToken = Request.Headers[HeaderNames.Authorization];
             return Ok(_shapeConfigService.GetShapesConfigs());
         }
 

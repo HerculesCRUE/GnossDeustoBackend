@@ -7,6 +7,7 @@ using API_CARGA.ModelExamples;
 using API_CARGA.Models;
 using API_CARGA.Models.Services;
 using IdentityServer4.EntityFramework.DbContexts;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -40,7 +41,19 @@ namespace PRH
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 //options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
-
+            services.AddAuthentication(options => {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "http://localhost:56306";
+                    //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
+                    options.RequireHttpsMetadata = false;
+                    options.ApiName = "api1";
+                    //options.ApiSecret = "secret".Sha256();
+                });
+            services.AddAuthorization();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API de carga", Version = "v1",Description= "API de carga" });

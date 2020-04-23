@@ -11,5 +11,6 @@ namespace ApiCargaWebInterface.Models.Services
         public bool DeleteShapeConfig(Guid id);
         public ShapeConfigViewModel CreateShapeConfig(ShapeConfigViewModel newRepositoryConfigView);
         public void ModifyShapeConfig(ShapeConfigViewModel repositoryConfigView);
+        public string GetAccessToken(System.Threading.Tasks.Task<string> v);
     }
 }

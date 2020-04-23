@@ -1,4 +1,7 @@
 ﻿using ApiCargaWebInterface.ViewModels;
+using IdentityServer4.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -52,9 +55,30 @@ namespace ApiCargaWebInterface.Models.Services
             return resultObject;
         }
 
+        public string GetAccessToken(System.Threading.Tasks.Task<string> token)
+        {
+            //IdentityRequestTokenViewModel identityRequest = new IdentityRequestTokenViewModel()
+            //{
+            //    client_id = "client",
+            //    client_secret = "secret",
+            //    grant_type = "client_credentials",
+            //    scope = "api1"
+            //};
+
+            //string result = _serviceApi.CallPostApiToken("http://localhost:56306/connect/token", identityRequest);
+            //result = JsonConvert.DeserializeObject<string>(result);
+            //return result;
+
+            string result = _serviceApi.CallPostApiToken("http://localhost:56306/connect/token",token);
+            List<ShapeConfigViewModel> resultObject = JsonConvert.DeserializeObject<List<ShapeConfigViewModel>>(result);
+            return "";
+
+        }
+
         public void ModifyShapeConfig(ShapeConfigViewModel repositoryConfigView)
         {
             string result = _serviceApi.CallPutApi(_urlShapeConfigApi, repositoryConfigView);
         }
+
     }
 }

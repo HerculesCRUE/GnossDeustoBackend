@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using ApiCargaWebInterface.Extra.Exceptions;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 
 namespace ApiCargaWebInterface.Controllers
 {
@@ -17,6 +19,10 @@ namespace ApiCargaWebInterface.Controllers
 
         public IActionResult Index()
         {
+            var v = HttpContext.GetTokenAsync("access_token");
+            var accessToken = Request.Headers[HeaderNames.Authorization];
+            _serviceApi.GetAccessToken(v);
+            
             List<ShapeConfigViewModel> result = _serviceApi.GetShapeConfigs();
             return View(result);
         }
