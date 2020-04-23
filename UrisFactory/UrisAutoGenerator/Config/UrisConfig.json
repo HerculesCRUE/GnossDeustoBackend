@@ -1101,6 +1101,34 @@
 				}
 			]
 		}, {
+			"Name": "uriSeqStructure",
+			"Components": [{
+					"UriComponent": "base",
+					"UriComponentValue": "base",
+					"UriComponentOrder": 1,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "character",
+					"UriComponentValue": "character@RESOURCE",
+					"UriComponentOrder": 2,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "resourceClass",
+					"UriComponentValue": "resourceClass@RESOURCECLASS",
+					"UriComponentOrder": 3,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "identifier",
+					"UriComponentValue": "@ID",
+					"UriComponentOrder": 4,
+					"Mandatory": true,
+					"FinalCharacter": ""
+				}
+			]
+		}, {
 			"Name": "uriProjectExpenseStructure",
 			"Components": [{
 					"UriComponent": "base",
@@ -1386,6 +1414,10 @@
 			"ResourceClass": "InvestigatorRole",
 			"LabelResourceClass": "investigatorrole",
 			"ResourceURI": "uriInvestigatorRole"
+		}, {
+			"ResourceClass": "Seq",
+			"LabelResourceClass": "seq",
+			"ResourceURI": "uriSeqStructure"
 		}
 	]
 }
