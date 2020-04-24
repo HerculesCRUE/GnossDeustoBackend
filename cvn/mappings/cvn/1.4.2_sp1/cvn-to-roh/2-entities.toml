@@ -246,7 +246,6 @@ id.resource = "PhDThesis"
 code = "020.060.000.000"
 ontology = "roh"
 classname = "LanguageCertificate"
-id.resource = "LanguageCertificate"
 
     [[entities.relationships]]
     ontology = "roh"
