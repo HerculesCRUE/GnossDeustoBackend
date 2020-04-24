@@ -76,7 +76,7 @@ id.fallback = "uuid4"
 
             [[entities.subentities.subentities.properties]]
             ontology = "vivo"
-            name = "start"
+            name = "dateTime"
             format = "{start}"
 
                 [[entities.subentities.subentities.properties.sources]]
@@ -94,7 +94,7 @@ id.fallback = "uuid4"
 
             [[entities.subentities.subentities.properties]]
             ontology = "vivo"
-            name = "end"
+            name = "dateTime"
             format = "{end}"
 
                 [[entities.subentities.subentities.properties.sources]]
