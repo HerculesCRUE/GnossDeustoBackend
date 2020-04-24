@@ -6,7 +6,11 @@ import uuid
 from cvn.config.relationship import Relationship
 import requests
 import re
-import shelve
+
+# Caché de URIs generadas
+# TODO mover a un servicio externo, o hacer algo más elaborado
+# Problema: memoria...? múltiples ejecuciones = se borra
+cached_uris = {}
 
 
 def generate_uri(resource_class, identifier):
@@ -18,11 +22,8 @@ def generate_uri(resource_class, identifier):
     """
     # Antes de intentar obtener la URI, comprobar a ver si la tenemos ya en caché
     cache_id = resource_class + "." + identifier
-
-    # TODO mejorar cache
-    with shelve.open("uri_cache") as cache:
-        if cache_id in cache:
-            return cache[cache_id]
+    if cache_id in cached_uris:
+        return cached_uris[cache_id]
 
     api_response = requests.get("http://herc-as-front-desa.atica.um.es/uris/Factory", params={
         'resource_class': resource_class,
@@ -35,8 +36,7 @@ def generate_uri(resource_class, identifier):
 
     # Guardamos en caché si ha salido bien
     result = api_response.text
-    with shelve.open("uri_cache") as cache:
-        cache[cache_id] = result
+    cached_uris[cache_id] = result
     return result
 
 
