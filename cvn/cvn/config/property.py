@@ -90,4 +90,4 @@ class Property(Printable):
               + str(self.formatted_value) + ")")
 
     def get_identifier(self):
-        return self.ontology.short_name + ":" + self.name
+        return str(self.ontology) + ":" + str(self.name)

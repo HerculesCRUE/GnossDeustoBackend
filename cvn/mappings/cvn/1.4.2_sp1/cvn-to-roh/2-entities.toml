@@ -56,7 +56,7 @@ id.format = "{doi}"
 code = "010.020.000.000"
 ontology = "roh"
 classname = "Position"
-id.fallback = "uuid4"
+id.resource = "Position"
 
     [[entities.subentities]]
     ontology = "vivo"
@@ -105,6 +105,8 @@ id.fallback = "uuid4"
     [[entities.subentities]]
     ontology = "foaf"
     classname = "Organization"
+    id.resource = "Organization"
+    id.format = "{name}"
 
         [[entities.subentities.relationships]]
         ontology = "vivo"
@@ -153,6 +155,7 @@ id.fallback = "uuid4"
 code = "020.010.010.000"
 ontology = "vivo"
 classname = "AwardedDegree"
+id.resource = "AwardedDegree"
 
     [[entities.criteria.property]]
     ontology = "vivo"
@@ -174,6 +177,8 @@ classname = "AwardedDegree"
     [[entities.subentities]]
     ontology = "vivo"
     classname = "AcademicDegree"
+    id.resource = "AcademicDegree"
+    id.format = "{title}"
 
         [[entities.subentities.relationships]]
         ontology = "vivo"
@@ -192,6 +197,8 @@ classname = "AwardedDegree"
         [[entities.subentities.subentities]]
         ontology = "vivo"
         classname = "University"
+        id.resource = "University"
+        id.format = "{name}"
 
             [[entities.subentities.subentities.relationships]]
             ontology = "roh"
@@ -202,7 +209,7 @@ classname = "AwardedDegree"
             [[entities.subentities.subentities.properties]]
             ontology = "foaf"
             name = "name"
-            format = "{title}"
+            format = "{name}"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "020.010.010.090"
@@ -213,6 +220,7 @@ classname = "AwardedDegree"
 code = "020.010.020.000"
 ontology = "roh"
 classname = "PhDThesis"
+id.resource = "PhDThesis"
 
     [[entities.properties]]
     ontology = "vivo"
@@ -238,6 +246,7 @@ classname = "PhDThesis"
 code = "020.060.000.000"
 ontology = "roh"
 classname = "LanguageCertificate"
+id.resource = "LanguageCertificate"
 
     [[entities.relationships]]
     ontology = "roh"

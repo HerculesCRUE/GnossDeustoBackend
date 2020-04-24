@@ -1,7 +1,7 @@
 from ..utils import code as cvn_code
 import cvn.config.property as cvn_property
 from rdflib.namespace import RDF
-from rdflib import Literal, URIRef
+from rdflib import Literal, URIRef, BNode
 import uuid
 from cvn.config.relationship import Relationship
 import requests
@@ -63,7 +63,16 @@ def init_entity_from_serialized_toml(config, parent=None):
     if 'classname' not in config:
         raise KeyError('classname not specified for Entity')
 
-    entity = Entity(code, config['ontology'], config['classname'], parent=parent)
+    # ID
+    config_id_format = None
+    config_id_resource = None
+    if 'id' in config:
+        if 'format' in config['id']:
+            config_id_format = config['id']['format']
+        if 'resource' in config['id']:
+            config_id_resource = config['id']['resource']
+
+    entity = Entity(code, config['ontology'], config['classname'], parent, config_id_resource, config_id_format)
 
     # Populate properties
     if 'properties' in config:
@@ -126,6 +135,7 @@ class Entity:
         self.generated_identifier = None
         self.identifier_config_resource = identifier_config_resource
         self.identifier_config_format = identifier_config_format
+        self.node = None
 
     def add_property(self, entity_property):
         """
@@ -153,9 +163,13 @@ class Entity:
         self.generated_identifier = None
         for property_item in self.properties:
             property_item.clear_values()
+        self.node = None
         for subentity in self.subentities:
             subentity.clear_values()
         return self
+
+    def is_blank_node(self):
+        return self.identifier_config_resource is None
 
     def get_identifier(self):
         if self.generated_identifier is None:
@@ -175,6 +189,10 @@ class Entity:
         return self.generated_identifier
 
     def get_uri(self):
+        if self.is_blank_node():
+            if self.node is None:
+                self.node = BNode()
+            return self.node
         return URIRef(self.get_identifier())
 
     def generate_entity_triple(self, ontology_config):
