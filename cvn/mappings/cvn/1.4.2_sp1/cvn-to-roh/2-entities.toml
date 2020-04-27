@@ -26,6 +26,36 @@ id.resource = "Project"
         bean = "Value"
 
     [[entities.subentities]]
+    ontology = "roh"
+    classname = "Funding"
+
+        [[entities.subentities.relationships]]
+        ontology = "roh"
+        name = "supports"
+        inverse_ontology = "roh"
+        inverse_name = "isSupportedBy"
+
+        [[entities.subentities.properties]]
+        ontology = "vivo"
+        name = "identifier"
+        format = "{identifier}"
+
+            [[entities.subentities.properties.sources]]
+            code = "050.020.010.260"
+            name = "identifier"
+            bean = "Value"
+
+        [[entities.subentities.properties]]
+        ontology = "roh"
+        name = "monetaryAmount"
+        format = "{monetary_amount}"
+
+            [[entities.subentities.properties.sources]]
+            code = "050.020.010.290"
+            name = "monetary_amount"
+            bean = "Value"
+
+    [[entities.subentities]]
     ontology = "vivo"
     classname = "MemberRole"
 
