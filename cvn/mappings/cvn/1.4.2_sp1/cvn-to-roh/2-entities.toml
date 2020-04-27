@@ -1,4 +1,79 @@
 [[entities]]
+code = "030.010.000.000"
+ontology = "vivo"
+classname = "TeacherRole"
+
+    [[entities.relationships]]
+    ontology = "oboro"
+    name = "RO_000052"
+    inverse_ontology = "oboro"
+    inverse_name = "RO_000053"
+    link_to_cvn_person = true
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "Course"
+
+        [[entities.subentities.relationships]]
+        ontology = "obobfo"
+        name = "BFO_0000054"
+        inverse_ontology = "obobfo"
+        inverse_name = "BFO_0000055"
+
+        [[entities.subentities.properties]]
+        ontology = "roh"
+        name = "title"
+        format = "{title}"
+
+            [[entities.subentities.properties.sources]]
+            code = "030.010.000.160"
+            name = "title"
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "DateTimeInterval"
+
+        [[entities.subentities.relationships]]
+        inverse_ontology = "vivo"
+        inverse_name = "dateTimeInterval"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "start"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{start}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.010.000.550"
+                name = "start"
+                bean = "Value"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "end"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{end}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.010.000.610"
+                name = "end"
+                bean = "Value"
+
+[[entities]]
 code = "050.020.010.000"
 ontology = "roh"
 classname = "Project"
@@ -13,7 +88,6 @@ id.resource = "Project"
         code = "050.020.010.010"
         name = "title"
         bean = "Value"
-
 
     [[entities.properties]]
     ontology = "vivo"
