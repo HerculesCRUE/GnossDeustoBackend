@@ -1,3 +1,92 @@
+[[entities]]
+code = "050.020.010.000"
+ontology = "roh"
+classname = "Project"
+id.resource = "Project"
+
+    [[entities.properties]]
+    ontology = "roh"
+    name = "title"
+    format = "{title}"
+
+        [[entities.properties.sources]]
+        code = "050.020.010.010"
+        name = "title"
+        bean = "Value"
+
+
+    [[entities.properties]]
+    ontology = "vivo"
+    name = "description"
+    format = "{description}"
+
+        [[entities.properties.sources]]
+        code = "050.020.010.340"
+        name = "description"
+        bean = "Value"
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "MemberRole"
+
+        [[entities.subentities.relationships]]
+        ontology = "vivo"
+        name = "relates"
+        inverse_ontology = "vivo"
+        inverse_name = "relates"
+
+        [[entities.subentities.relationships]]
+        ontology = "roh"
+        name = "roleOf"
+        inverse_ontology = "roh"
+        inverse_name = "hasRole"
+        link_to_cvn_person = true
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "DateTimeInterval"
+
+        [[entities.subentities.relationships]]
+        inverse_ontology = "vivo"
+        inverse_name = "dateTimeInterval"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "start"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{start}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "050.020.010.270"
+                name = "start"
+                bean = "Value"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "end"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{end}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "050.020.010.410"
+                name = "end"
+                bean = "Value"
+
+
 [[entities]] # Publicaciones, documentos científicos y técnicos
 code = "060.010.010.000"
 ontology = "bibo"
@@ -125,10 +214,10 @@ id.resource = "Position"
             bean = "Name"
 
     [[entities.relationships]]
-    ontology = "roh"
-    name = "hasPosition"
     inverse_ontology = "roh"
-    inverse_name = "positionOf"
+    inverse_name = "hasPosition"
+    ontology = "roh"
+    name = "positionOf"
     link_to_cvn_person = true
 
     [[entities.properties]]
@@ -155,7 +244,14 @@ id.resource = "Position"
 code = "020.010.010.000"
 ontology = "vivo"
 classname = "AwardedDegree"
-id.resource = "AwardedDegree"
+
+    [[entities.relationships]]
+    ontology = "vivo"
+    name = "related"
+    inverse_ontology = "vivo"
+    inverse_name = "related"
+    link_to_cvn_person = true
+
 
     [[entities.criteria.property]]
     ontology = "vivo"
