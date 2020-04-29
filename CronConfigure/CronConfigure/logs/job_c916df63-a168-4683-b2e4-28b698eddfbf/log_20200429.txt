@@ -1,0 +1,45 @@
+2020-04-29 13:09:50.957 +02:00 [ERR] One or more errors occurred. (A task was canceled.)
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at CronConfigure.Models.Services.CallApiService.CallPostApi(String urlMethod, Object item) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\CallApiService.cs:line 30
+   at CronConfigure.Models.Services.ProgramingMethodsService.PublishRepositories(Guid idRepositoryGuid) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\ProgramingMethodsService.cs:line 27
+
+2020-04-29 13:22:52.726 +02:00 [ERR] One or more errors occurred. (A task was canceled.)
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at CronConfigure.Models.Services.CallApiService.CallPostApi(String urlMethod, Object item) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\CallApiService.cs:line 30
+   at CronConfigure.Models.Services.ProgramingMethodsService.PublishRepositories(Guid idRepositoryGuid) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\ProgramingMethodsService.cs:line 27
+
+2020-04-29 13:26:51.554 +02:00 [ERR] One or more errors occurred. (A task was canceled.)
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at CronConfigure.Models.Services.CallApiService.CallPostApi(String urlMethod, Object item) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\CallApiService.cs:line 30
+   at CronConfigure.Models.Services.ProgramingMethodsService.PublishRepositories(Guid idRepositoryGuid) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\ProgramingMethodsService.cs:line 27
+
+2020-04-29 13:56:34.617 +02:00 [ERR] One or more errors occurred. (No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.)
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at CronConfigure.Models.Services.CallApiService.CallPostApi(String urlMethod, Object item) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\CallApiService.cs:line 31
+   at CronConfigure.Models.Services.ProgramingMethodsService.PublishRepositories(Guid idRepositoryGuid) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\ProgramingMethodsService.cs:line 29
+
+2020-04-29 14:33:02.310 +02:00 [ERR] One or more errors occurred. (A task was canceled.)
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at CronConfigure.Models.Services.CallApiService.CallPostApi(String urlMethod, Object item) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\CallApiService.cs:line 31
+   at CronConfigure.Models.Services.ProgramingMethodsService.PublishRepositories(Guid idRepositoryGuid) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\ProgramingMethodsService.cs:line 29
+
+2020-04-29 14:43:32.690 +02:00 [ERR] One or more errors occurred. (An error occurred while sending the request.)
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at CronConfigure.Models.Services.CallApiService.CallPostApi(String urlMethod, Object item) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\CallApiService.cs:line 31
+   at CronConfigure.Models.Services.ProgramingMethodsService.PublishRepositories(Guid idRepositoryGuid) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\ProgramingMethodsService.cs:line 29
+
+2020-04-29 15:05:22.065 +02:00 [ERR] One or more errors occurred. (An error occurred while sending the request.)
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at CronConfigure.Models.Services.CallApiService.CallPostApi(String urlMethod, Object item) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\CallApiService.cs:line 31
+   at CronConfigure.Models.Services.ProgramingMethodsService.PublishRepositories(Guid idRepositoryGuid) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\ProgramingMethodsService.cs:line 29
+

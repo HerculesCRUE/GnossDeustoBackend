@@ -6,6 +6,7 @@ using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using CronConfigure.Filters;
+using CronConfigure.Middlewares;
 using CronConfigure.Models;
 using CronConfigure.Models.Services;
 using Hangfire;
@@ -58,7 +59,7 @@ namespace CronConfigure
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
-                options.SchemaFilter<EnumSchemaFilter>();
+                //options.SchemaFilter<EnumSchemaFilter>();
             });
             services.Configure<ForwardedHeadersOptions>(options =>
             {
@@ -76,6 +77,9 @@ namespace CronConfigure
             });
 
             services.AddScoped(typeof(CronApiService));
+            services.AddScoped(typeof(CallApiService));
+            services.AddScoped(typeof(ProgramingMethodsService));
+            services.AddSingleton(typeof(ConfigUrlService)); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,7 +95,7 @@ namespace CronConfigure
                 serviceScope.ServiceProvider.GetRequiredService<HangfireEntityContext>().Database.Migrate();
             }
 
-
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseHttpsRedirection();
 
             app.UseRouting();

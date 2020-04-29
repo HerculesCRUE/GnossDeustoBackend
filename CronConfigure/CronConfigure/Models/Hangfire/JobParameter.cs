@@ -11,13 +11,14 @@ namespace CronConfigure.Models.Hangfire
     [Table("jobparameter", Schema = "hangfire")]
     public partial class JobParameter
     {
-        [Column(Order = 0)]
+        [Column("jobid",Order = 0)]
         public long JobId { get; set; }
 
-        [Column(Order = 1)]
+        [Column("name", Order = 1)]
         [StringLength(40)]
         public string Name { get; set; }
 
+        [Column("value", Order = 2)]
         public string Value { get; set; }
 
         public virtual Job Job { get; set; }

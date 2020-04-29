@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CronConfigure.Models.Entitties;
 
 namespace CronConfigure.Models
 {
@@ -21,6 +22,7 @@ namespace CronConfigure.Models
         public DbSet<Set> Set { get; set; }
         public DbSet<State> State { get; set; }
         public DbSet<Counter> Counter { get; set; }
+        public DbSet<JobRepository> JobRepository { get; set; }
         public HangfireEntityContext(DbContextOptions<HangfireEntityContext> options)
             : base(options) 
         {
