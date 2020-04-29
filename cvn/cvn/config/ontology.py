@@ -21,22 +21,11 @@ class OntologyConfig:
     def ontology_exists(self, short_name):
         return short_name in self.ontologies
 
-    def get_primary(self):
-        """
-        Obtener la ontología primaria
-        :return: la primera ontología que tenga primary como True
-        """
-        for ontology in self.ontologies.values():
-            if ontology.primary:
-                return ontology
-        return None
-
 
 class Ontology:
-    def __init__(self, short_name, uri_base, primary=False):
+    def __init__(self, short_name, uri_base):
         self.short_name = short_name
         self.uri_base = uri_base
-        self.primary = primary
         self.namespace = Namespace(self.uri_base)
 
     def term(self, name):

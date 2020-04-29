@@ -86,15 +86,9 @@ def v1_convert():
 
     # Recorrer la config de ontologías y añadirlas al NamespaceManager
     for ontology in config_ontologies['ontologies']:
-
-        primary = False
-        if ('primary' in ontology) and ontology['primary']:
-            primary = True
-        ontology_instance = Ontology(short_name=ontology['shortname'], uri_base=ontology['uri_base'], primary=primary)
+        ontology_instance = Ontology(short_name=ontology['shortname'], uri_base=ontology['uri_base'])
         ontology_config.add_ontology(ontology_instance)
         namespace_manager.bind(ontology_instance.short_name, ontology_instance.namespace)
-
-        # TODO comprobar que se ha definido una ontología primaria
 
     # Iniciar grafo principal con el NamespaceManager rellenado de ontologías
     g = Graph()
@@ -126,7 +120,7 @@ def v1_convert():
 
     person = URIRef(config_entity.generate_uri(config['instance']['classname'], params['orcid']))
     ontology_config.cvn_person = person
-    g.add((person, RDF.type, ontology_config.get_primary().term(config['instance']['classname'])))
+    g.add((person, RDF.type, ontology_config.get_ontology(config['instance']['ontology']).term(config['instance']['classname'])))
 
     # Representa el único nodo que contiene todos los datos personales del CVN
     info_node = xmltree.get_first_node_by_code(root, config['code'])
