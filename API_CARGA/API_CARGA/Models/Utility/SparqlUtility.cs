@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using VDS.RDF;
+using VDS.RDF.Parsing;
 using VDS.RDF.Shacl;
 using VDS.RDF.Shacl.Validation;
 using VDS.RDF.Writing;
@@ -50,9 +51,8 @@ namespace API_CARGA.Models.Utility
         /// <returns>Lista de triples</returns>
         public static List<string> GetTriplesFromRDF(XmlDocument pXMLRDF)
         {
-            IGraph g = new Graph();
-            g.LoadFromString(pXMLRDF.InnerXml);
-
+            IGraph g = new Graph();          
+            g.LoadFromString(pXMLRDF.InnerXml, new RdfXmlParser());
             System.IO.StringWriter sw = new System.IO.StringWriter();
             NTriplesWriter nTriplesWriter = new NTriplesWriter();
             nTriplesWriter.Save(g, sw);
