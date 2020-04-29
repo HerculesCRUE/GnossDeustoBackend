@@ -156,6 +156,31 @@ id.resource = "Project"
         inverse_name = "hasRole"
         link_to_cvn_person = true
 
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeInterval"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "dateTimeInterval"
+
+            [[entities.subentities.subentities.subentities]]
+            ontology = "vivo"
+            classname = "DateTimeValue"
+
+                [[entities.subentities.subentities.subentities.relationships]]
+                inverse_ontology = "vivo"
+                inverse_name = "start"
+
+                [[entities.subentities.subentities.subentities.properties]]
+                ontology = "vivo"
+                name = "dateTime"
+                format = "{start}"
+
+                    [[entities.subentities.subentities.subentities.properties.sources]]
+                    code = "050.020.010.270"
+                    name = "start"
+                    bean = "Value"
     [[entities.subentities]]
     ontology = "vivo"
     classname = "DateTimeInterval"
