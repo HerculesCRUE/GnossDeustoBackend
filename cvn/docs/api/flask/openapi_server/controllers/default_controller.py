@@ -1,7 +1,7 @@
 import connexion
 import six
 
-from swagger_server import util
+from openapi_server import util
 
 
 def convert_post(orcid, format=None):  # noqa: E501

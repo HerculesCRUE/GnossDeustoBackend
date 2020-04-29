@@ -1,3 +1,13 @@
-# Documentación de la API especificada con OpenAPI 3
+# Documentación de la API
 
-Para generar una vista se puede usar el [editor online de Swagger](https://editor.swagger.io/), copiando y pegando el contenido del archivo `openapi.yml`.
+Para generarla, los requisitos son:
+
+- Python 3
+- Pipenv
+
+Ejecutar desde la carpeta `flask`:
+
+```bash
+$ pipenv install
+$ pipenv run python3 -m openapi_server
+```
