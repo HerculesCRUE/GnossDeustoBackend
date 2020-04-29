@@ -119,15 +119,25 @@ id.resource = "Project"
             name = "identifier"
             bean = "Value"
 
-        [[entities.subentities.properties]]
+        [[entities.subentities.subentities]]
         ontology = "roh"
-        name = "monetaryAmount"
-        format = "{monetary_amount}"
+        classname = "FundingAmount"
 
-            [[entities.subentities.properties.sources]]
-            code = "050.020.010.290"
-            name = "monetary_amount"
-            bean = "Value"
+            [[entities.subentities.subentities.relationships]]
+            ontology = "oboro"
+            name = "BFO_0000050"
+            inverse_ontology = "oboro"
+            inverse_name = "BFO_0000051"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "roh"
+            name = "monetaryAmount"
+            format = "{monetary_amount}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "050.020.010.290"
+                name = "monetary_amount"
+                bean = "Value"
 
     [[entities.subentities]]
     ontology = "vivo"
