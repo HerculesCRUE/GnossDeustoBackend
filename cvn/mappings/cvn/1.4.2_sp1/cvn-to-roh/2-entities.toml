@@ -75,7 +75,7 @@ classname = "TeacherRole"
 
 [[entities]]
 code = "050.020.010.000"
-ontology = "roh"
+ontology = "vivo"
 classname = "Project"
 id.resource = "Project"
 
@@ -247,7 +247,7 @@ id.format = "{doi}"
 
 [[entities]]
 code = "010.020.000.000"
-ontology = "roh"
+ontology = "vivo"
 classname = "Position"
 id.resource = "Position"
 
