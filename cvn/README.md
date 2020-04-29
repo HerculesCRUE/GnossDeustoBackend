@@ -18,7 +18,7 @@ $ pipenv install
 Ejecutar un servidor en el puerto por defecto (`5000`) y con el modo `debug` desactivado:
 
 ```bash
-$ pipenv run python3 main.py
+$ pipenv run python3 -m cvn.webserver
 ```
 
 ## Configuración
@@ -27,13 +27,13 @@ Es posible configurar el puerto de ejecución con el parámetro `-p`.  Si no se 
 En el siguiente ejemplo, se ejecutará el servidor en el puerto `80`.
 
 ```bash
-$ pipenv run python3 main.py -p 80
+$ pipenv run python3 -m cvn.webserver -p 80
 ```
 
 Si se incluye el argumento `-h`, se mostrará la ayuda:
 
 ```text
-usage: main.py [-h] [-p] [--debug]
+usage: webserver.py [-h] [-p] [--debug]
 
 Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH
 
