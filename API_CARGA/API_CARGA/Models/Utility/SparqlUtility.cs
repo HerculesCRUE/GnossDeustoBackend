@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API_CARGA.Models.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -8,6 +9,10 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using VDS.RDF;
+using VDS.RDF.Shacl;
+using VDS.RDF.Shacl.Validation;
+using VDS.RDF.Writing;
 
 namespace API_CARGA.Models.Utility
 {
@@ -34,64 +39,56 @@ namespace API_CARGA.Models.Utility
         /// <returns>Lista de triples</returns>
         public static List<string> GetTriplesFromRDF(XmlDocument pXMLRDF)
         {
-            List<string> triples = new List<string>();
+            IGraph g = new Graph();
+            g.LoadFromString(pXMLRDF.InnerXml);
 
-            XmlNode nodoRDF = pXMLRDF.GetElementsByTagName("rdf:RDF")[0];
-            foreach (XmlNode entidadRaiz in nodoRDF.ChildNodes)
-            {
-                triples.AddRange( GetTriplesFromEntity(entidadRaiz));
-            }
-            return triples;
+            System.IO.StringWriter sw = new System.IO.StringWriter();
+            NTriplesWriter nTriplesWriter = new NTriplesWriter();
+            nTriplesWriter.Save(g, sw);
+
+            return sw.ToString().Split("\r\n").ToList();
         }
 
+
         /// <summary>
-        /// Obtiene los triples de una entidad
+        /// Valida un RDF
         /// </summary>
-        /// <param name="pXMLEntity">XML entity</param>
+        /// <param name="pXMLRDF">XML RDF</param>
+        /// <param name="pShapesConfig">Lista de Shapes de validación</param>
         /// <returns>Lista de triples</returns>
-        public static List<string> GetTriplesFromEntity(XmlNode pXMLEntity)
+        public static ShapeReport ValidateRDF(XmlDocument pXMLRDF,List<ShapeConfig> pShapesConfig)
         {
-            List<string> triples = new List<string>();
+            //IGraph shapeGraph = new Graph();
+            //shapeGraph.LoadFromString(File.ReadAllText("c:\\cargas\\shapes_prado.ttl"));
 
-            string sujeto = pXMLEntity.Attributes["rdf:about"].Value;
-            string rdfType = pXMLEntity.NamespaceURI + pXMLEntity.LocalName;
-            triples.Add($"<{sujeto}>    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>   <{rdfType}>.");
-            foreach (XmlNode tripe in pXMLEntity.ChildNodes)
+            IGraph dataGraph = new Graph();
+            dataGraph.LoadFromString(pXMLRDF.InnerXml);
+
+            ShapeReport response = new ShapeReport();
+            response.conforms = true;
+            response.results = new List<ShapeReport.Result>();
+            foreach (ShapeConfig shape in pShapesConfig)
             {
-                string propiedad = tripe.NamespaceURI + tripe.LocalName;
-                if (tripe.Attributes["rdf:resource"] != null)
+                IGraph shapeGraph = new Graph();
+                //shapeGraph.LoadFromString(shape.Shape);
+                shapeGraph.LoadFromString(File.ReadAllText("c:\\cargas\\shapes_prado.ttl"));
+                ShapesGraph shapesGraph = new ShapesGraph(shapeGraph);
+                
+                Report report = shapesGraph.Validate(dataGraph);
+                if(!report.Conforms)
                 {
-                    string entidadobjeto = tripe.Attributes["rdf:resource"].Value;
-                    triples.Add($"<{sujeto}>    <{propiedad}>   <{entidadobjeto}>.");
-                }
-                else if (tripe.HasChildNodes && tripe.ChildNodes.Count==1 && tripe.ChildNodes[0].Attributes!=null && tripe.ChildNodes[0].Attributes["rdf:about"] != null)
-                {
-                    triples.Add($"<{sujeto}>    <{propiedad}>   <{tripe.ChildNodes[0].Attributes["rdf:about"].Value}>.");
-                    triples.AddRange(GetTriplesFromEntity(tripe.ChildNodes[0]));
-                }
-                else
-                {
-                    string objeto = tripe.InnerText.Replace("\"", "\\\"");
-                    string dataType = "";
-
-                    string lang = "";
-                    if (tripe.Attributes["xml:lang"] != null)
+                    response.conforms = false;
+                    response.results.AddRange(report.Results.ToList().Select(x => new ShapeReport.Result()
                     {
-                        lang = "@" + tripe.Attributes["xml:lang"].Value;
-                    }
-                    else if (tripe.Attributes["rdf:datatype"] != null)
-                    {
-                        dataType = "^^<" + tripe.Attributes["rdf:datatype"].Value + ">";
-                        if (tripe.Attributes["rdf:datatype"].Value == "http://www.w3.org/2001/XMLSchema#float")
-                        {
-                            objeto = objeto.Replace(",", ".");
-                        }
-                    }
-                    triples.Add($"<{sujeto}>    <{propiedad}>   \"{objeto.Replace("\r\n", " ").Replace("\n", " ")}\"{lang}{dataType}.");
+                        severity = (x.Severity != null) ? x.Severity.ToString() : null,
+                        focusNode = (x.FocusNode != null) ? x.FocusNode.ToString() : null,
+                        resultValue = (x.ResultValue != null) ? x.ResultValue.ToString() : null,
+                        message = (x.Message != null) ? x.Message.ToString() : null,
+                        resultPath = (x.ResultPath != null) ? x.ResultPath.ToString() : null
+                    }).ToList());
                 }
             }
-
-            return triples;
+            return response;
         }
 
         /// <summary>
