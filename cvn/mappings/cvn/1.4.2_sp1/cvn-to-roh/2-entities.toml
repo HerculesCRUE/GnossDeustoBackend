@@ -571,6 +571,26 @@ id.resource = "PhDThesis"
             code = "020.010.020.190"
             name = "mark"
 
+    [[entities.subentities]]
+    ontology = "roh"
+    classname = "DegreeHomologation"
+
+        # TODO cambiar por la relación real
+        [[entities.subentities.relationships]]
+        ontology = "vivo"
+        name = "relates"
+        inverse_ontology = "vivo"
+        inverse_name = "relates"
+
+        [[entities.subentities.properties]]
+        ontology = "vivo"
+        name = "dateTime"
+        format = "{date}"
+
+            [[entities.subentities.properties.sources]]
+            code = "020.010.020.250"
+            name = "date"
+
 
 [[entities]] # Certificado de idiomas
 code = "020.060.000.000"
