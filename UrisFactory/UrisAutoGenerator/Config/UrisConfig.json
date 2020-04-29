@@ -9,34 +9,6 @@
 		}
 	],
 	"UriStructures": [{
-			"Name": "uriResourceStructure",
-			"Components": [{
-					"UriComponent": "base",
-					"UriComponentValue": "base",
-					"UriComponentOrder": 1,
-					"Mandatory": true,
-					"FinalCharacter": "/"
-				}, {
-					"UriComponent": "character",
-					"UriComponentValue": "@RESOURCE",
-					"UriComponentOrder": 2,
-					"Mandatory": true,
-					"FinalCharacter": "/"
-				}, {
-					"UriComponent": "resourceClass",
-					"UriComponentValue": "@RESOURCECLASS",
-					"UriComponentOrder": 3,
-					"Mandatory": true,
-					"FinalCharacter": "/"
-				}, {
-					"UriComponent": "identifier",
-					"UriComponentValue": "@ID",
-					"UriComponentOrder": 4,
-					"Mandatory": true,
-					"FinalCharacter": ""
-				}
-			]
-		}, {
 			"Name": "uriPublicationStructure",
 			"Components": [{
 					"UriComponent": "base",
@@ -1268,13 +1240,149 @@
 					"FinalCharacter": ""
 				}
 			]
+		}, {
+			"Name": "uriPersonStructure",
+			"Components": [{
+					"UriComponent": "base",
+					"UriComponentValue": "base",
+					"UriComponentOrder": 1,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "character",
+					"UriComponentValue": "character@RESOURCE",
+					"UriComponentOrder": 2,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "resourceClass",
+					"UriComponentValue": "resourceClass@RESOURCECLASS",
+					"UriComponentOrder": 3,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "identifier",
+					"UriComponentValue": "@ID",
+					"UriComponentOrder": 4,
+					"Mandatory": true,
+					"FinalCharacter": ""
+				}
+			]
+		}, {
+			"Name": "uriPositionStructure",
+			"Components": [{
+					"UriComponent": "base",
+					"UriComponentValue": "base",
+					"UriComponentOrder": 1,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "character",
+					"UriComponentValue": "character@RESOURCE",
+					"UriComponentOrder": 2,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "resourceClass",
+					"UriComponentValue": "resourceClass@RESOURCECLASS",
+					"UriComponentOrder": 3,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "identifier",
+					"UriComponentValue": "@ID",
+					"UriComponentOrder": 4,
+					"Mandatory": true,
+					"FinalCharacter": ""
+				}
+			]
+		}, {
+			"Name": "uriOrganizationStructure",
+			"Components": [{
+					"UriComponent": "base",
+					"UriComponentValue": "base",
+					"UriComponentOrder": 1,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "character",
+					"UriComponentValue": "character@RESOURCE",
+					"UriComponentOrder": 2,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "resourceClass",
+					"UriComponentValue": "resourceClass@RESOURCECLASS",
+					"UriComponentOrder": 3,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "identifier",
+					"UriComponentValue": "@ID",
+					"UriComponentOrder": 4,
+					"Mandatory": true,
+					"FinalCharacter": ""
+				}
+			]
+		}, {
+			"Name": "uriUniversityStructure",
+			"Components": [{
+					"UriComponent": "base",
+					"UriComponentValue": "base",
+					"UriComponentOrder": 1,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "character",
+					"UriComponentValue": "character@RESOURCE",
+					"UriComponentOrder": 2,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "resourceClass",
+					"UriComponentValue": "resourceClass@RESOURCECLASS",
+					"UriComponentOrder": 3,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "identifier",
+					"UriComponentValue": "@ID",
+					"UriComponentOrder": 4,
+					"Mandatory": true,
+					"FinalCharacter": ""
+				}
+			]
+		}, {
+			"Name": "uriPhDThesisStructure",
+			"Components": [{
+					"UriComponent": "base",
+					"UriComponentValue": "base",
+					"UriComponentOrder": 1,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "character",
+					"UriComponentValue": "character@RESOURCE",
+					"UriComponentOrder": 2,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "resourceClass",
+					"UriComponentValue": "resourceClass@RESOURCECLASS",
+					"UriComponentOrder": 3,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "identifier",
+					"UriComponentValue": "@ID",
+					"UriComponentOrder": 4,
+					"Mandatory": true,
+					"FinalCharacter": ""
+				}
+			]
 		}
 	],
 	"ResourcesClasses": [{
-			"ResourceClass": "Researcher",
-			"LabelResourceClass": "researcher",
-			"ResourceURI": "uriResourceStructure"
-		}, {
 			"ResourceClass": "Publication",
 			"LabelResourceClass": "publicacion",
 			"ResourceURI": "uriPublicationStructure"
@@ -1450,6 +1558,26 @@
 			"ResourceClass": "Exhibit",
 			"LabelResourceClass": "exhibit",
 			"ResourceURI": "uriExhibitStructure"
+		}, {
+			"ResourceClass": "Person",
+			"LabelResourceClass": "person",
+			"ResourceURI": "uriPersonStructure"
+		}, {
+			"ResourceClass": "Position",
+			"LabelResourceClass": "position",
+			"ResourceURI": "uriPositionStructure"
+		}, {
+			"ResourceClass": "Organization",
+			"LabelResourceClass": "organization",
+			"ResourceURI": "uriOrganizationStructure"
+		}, {
+			"ResourceClass": "University",
+			"LabelResourceClass": "university",
+			"ResourceURI": "uriUniversityStructure"
+		}, {
+			"ResourceClass": "PhDThesis",
+			"LabelResourceClass": "phdthesis",
+			"ResourceURI": "uriPhDThesisStructure"
 		}
 	]
 }
