@@ -181,6 +181,7 @@ id.resource = "Project"
                     code = "050.020.010.270"
                     name = "start"
                     bean = "Value"
+
     [[entities.subentities]]
     ontology = "vivo"
     classname = "DateTimeInterval"
@@ -280,6 +281,80 @@ id.format = "{doi}"
         name = "finalpage"
         bean = "FinalPage"
 
+# Posición actual
+[[entities]]
+code = "010.010.000.000"
+ontology = "vivo"
+classname = "Position"
+id.resource = "Position"
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "DateTimeInterval"
+
+        [[entities.subentities.relationships]]
+        inverse_ontology = "vivo"
+        inverse_name = "dateTimeInterval"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "start"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{start}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "010.010.000.180"
+                name = "start"
+                bean = "Value"
+
+    [[entities.subentities]]
+    ontology = "foaf"
+    classname = "Organization"
+    id.resource = "Organization"
+    id.format = "{name}"
+
+        [[entities.subentities.relationships]]
+        ontology = "vivo"
+        name = "relates"
+        inverse_ontology = "vivo"
+        inverse_name = "relatedBy"
+
+        [[entities.subentities.properties]]
+        ontology = "foaf"
+        name = "name"
+        format = "{name}"
+
+            [[entities.subentities.properties.sources]]
+            code = "010.010.000.020"
+            name = "name"
+            bean = "Name"
+
+    [[entities.relationships]]
+    inverse_ontology = "roh"
+    inverse_name = "hasPosition"
+    ontology = "roh"
+    name = "positionOf"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    ontology = "vivo"
+    name = "HRJobTitle"
+    format = "{title}"
+
+        [[entities.properties.sources]]
+        code = "010.010.000.170"
+        name = "title"
+        bean = "Value"
+
+
+# Posiciones en el pasado
 [[entities]]
 code = "010.020.000.000"
 ontology = "vivo"
