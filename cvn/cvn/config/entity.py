@@ -237,6 +237,9 @@ class Entity:
         return triples
 
     def add_entity_to_ontology(self, ontology_config):
+        if not self.should_generate():
+            return
+
         ontology_config.graph.add(self.generate_entity_triple(ontology_config))
 
         # Propiedades
@@ -258,6 +261,20 @@ class Entity:
             if property_item.formatted_value is not None:
                 properties[property_item.get_identifier()] = property_item.formatted_value
         return properties
+
+    def should_generate(self):
+        if (len(self.properties) > 0) and self.are_properties_empty():
+            return False
+        return True
+
+    def are_properties_empty(self):
+        for property_item in self.properties:
+            if property_item.formatted_value is not None:
+                return False
+        for subentity in self.subentities:
+            if not subentity.are_properties_empty():
+                return False
+        return True
 
 
 def has_all_formatting_fields(format_string, fields):
