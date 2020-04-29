@@ -106,3 +106,19 @@ request.AddParameter("application/x-www-form-urlencoded", "<contenido del archiv
 IRestResponse response = client.Execute(request);
 Console.WriteLine(response.Content);
 ```
+
+# Ejecución de la documentación de la API
+
+Existe un servidor de OpenAPI que va incluido en los archivos. Tiene los mismos requisitos que la API. Podemos ejecutarlo de la siguiente manera:
+
+```bash
+$ cd docs/api/flask
+$ pipenv install
+$ pipenv run python3 -m openapi_server
+```
+
+Se puede acceder desde la siguiente URL:
+
+http://localhost:8080/v1/ui
+
+Se puede ejecutar a la vez que la API abriendo otra terminal nueva (en Windows, una nueva ventana)
