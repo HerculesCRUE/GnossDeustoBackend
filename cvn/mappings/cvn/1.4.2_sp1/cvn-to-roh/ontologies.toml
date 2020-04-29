@@ -16,8 +16,8 @@ uri_base = "http://purl.org/roh/mirror/foaf#"
 
 [[ontologies]]
 shortname = "oboro"
-uri_base = "http://purl.org/roh/mirror/obo/ro/"
+uri_base = "http://purl.org/roh/mirror/obo/ro#"
 
 [[ontologies]]
 shortname = "obobfo"
-uri_base = "http://purl.org/roh/mirror/obo/bfo/"
+uri_base = "http://purl.org/roh/mirror/obo/bfo#"
