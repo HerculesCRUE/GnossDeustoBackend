@@ -14,6 +14,11 @@ namespace CronConfigure.Models.Services
 {
     public class CronApiService
     {
+        private HangfireEntityContext _context;
+        public CronApiService(HangfireEntityContext context)
+        {
+            _context = context;
+        }
         public List<RecurringJobViewModel> GetRecurringJobs()
         {
             List<RecurringJobDto> recurringJobs = JobStorage.Current.GetConnection().GetRecurringJobs();
@@ -39,7 +44,12 @@ namespace CronConfigure.Models.Services
             return recurringJobsView;
         }
 
-        internal void DeleteJob(string id)
+        public bool ExistJob(string id)
+        {
+            return _context.Job.Any(item => item.Id.ToString().Equals(id));
+        }
+
+        public void DeleteJob(string id)
         {
             BackgroundJob.Delete(id);
         }
@@ -55,13 +65,13 @@ namespace CronConfigure.Models.Services
             return recurringJob;
         }
 
-        public List<JobViewModel> GetJobs(JobType type)
+        public List<JobViewModel> GetJobs(JobType type,int from, int count)
         {
             List<JobViewModel> listJobViewModel = new List<JobViewModel>();
             var api = JobStorage.Current.GetMonitoringApi();
             if (type.Equals(JobType.All) || type.Equals(JobType.Succeeded))
             { 
-                foreach (var succeeded in api.SucceededJobs(0, 100))
+                foreach (var succeeded in api.SucceededJobs(from, count))
                 {
                     JobViewModel job = new JobViewModel()
                     {
@@ -74,7 +84,7 @@ namespace CronConfigure.Models.Services
             }
             if (type.Equals(JobType.All) || type.Equals(JobType.Failed))
             {
-                foreach (var failed in api.FailedJobs(0, 100))
+                foreach (var failed in api.FailedJobs(from, count))
                 {
                     JobViewModel job = new JobViewModel()
                     {
@@ -89,10 +99,12 @@ namespace CronConfigure.Models.Services
             return listJobViewModel;
         }
 
-        public List<ScheduledJobViewModel> GetScheduledJobs()
+        
+
+        public List<ScheduledJobViewModel> GetScheduledJobs(int from, int count)
         {
             var api = JobStorage.Current.GetMonitoringApi();
-            JobList<ScheduledJobDto> listScheduled = api.ScheduledJobs(0, 100);
+            JobList<ScheduledJobDto> listScheduled = api.ScheduledJobs(from, count);
             List<ScheduledJobViewModel> listScheduledViewModel = new List<ScheduledJobViewModel>();
             foreach (var scheduled in listScheduled)
             {
@@ -107,6 +119,42 @@ namespace CronConfigure.Models.Services
                 listScheduledViewModel.Add(scheduledViewModel);
             }
             return listScheduledViewModel;
+        }
+
+        public List<JobViewModel> GetJobsOfRecurringJob(string recurringJob)
+        {
+            recurringJob = $"\"{recurringJob}\"";
+            var ids = _context.JobParameter.Where(item => item.Value.Equals(recurringJob)).Select(item => item.JobId).Distinct().ToList();
+            List<JobViewModel> listJobViewModel = new List<JobViewModel>();
+            var api = JobStorage.Current.GetMonitoringApi();
+            foreach (long id in ids)
+            {
+                var jobDetails = api.JobDetails(id.ToString());
+                string state = "";
+                if (jobDetails.History.Count > 0)
+                {
+                    state = jobDetails.History[0].StateName;
+                }
+                JobViewModel job = new JobViewModel()
+                {
+                    Id = id.ToString(),
+                    Job = jobDetails.Job.ToString(),
+                    State = state
+                };
+                listJobViewModel.Add(job);
+            }
+            return listJobViewModel;
+
+        }
+
+        public bool ExistRecurringJob(string recurringJob)
+        {
+            return _context.Set.Any(item => item.Key.Equals("recurring-jobs") && item.Value.Equals(recurringJob));
+        }
+
+        internal bool ExistScheduledJob(string id)
+        {
+            return _context.Set.Any(item => item.Key.Equals("schedule") && item.Value.Equals(id));
         }
 
     }

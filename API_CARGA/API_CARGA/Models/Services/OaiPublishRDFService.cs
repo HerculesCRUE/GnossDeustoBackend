@@ -22,6 +22,10 @@ namespace API_CARGA.Models.Services
         public void PublishRepositories(Guid identifier)
         {
             List<string> listIdentifier = CallListIdentifier(identifier);
+            if (listIdentifier.Count > 2)
+            {
+                listIdentifier = listIdentifier.GetRange(0, 2);
+            }
             List<string> listRdf = CallGetRecord(identifier, listIdentifier);
             CallDataPublish(listRdf, identifier);
         }

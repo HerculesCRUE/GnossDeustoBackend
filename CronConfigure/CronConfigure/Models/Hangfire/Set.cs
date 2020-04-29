@@ -11,16 +11,18 @@ namespace CronConfigure.Models.Hangfire
     [Table("set", Schema = "hangfire")]
     public partial class Set
     {
-        [Column(Order = 0)]
+        [Column("key", Order = 0)]
         [StringLength(100)]
         public string Key { get; set; }
 
+        [Column("score")]
         public double Score { get; set; }
 
-        [Column(Order = 1)]
+        [Column("value",Order = 1)]
         [StringLength(256)]
         public string Value { get; set; }
 
+        [Column("expireat")]
         public DateTime? ExpireAt { get; set; }
     }
 }

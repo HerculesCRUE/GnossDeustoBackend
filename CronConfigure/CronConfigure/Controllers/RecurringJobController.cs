@@ -11,33 +11,53 @@ using NCrontab;
 
 namespace CronConfigure.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class RecurringJobController : ControllerBase
     {
 
         public CronApiService _cronApiService;
+        private ProgramingMethodsService _programingMethodsService;
 
-        public RecurringJobController(CronApiService cronApiService)
+        public RecurringJobController(CronApiService cronApiService, ProgramingMethodsService programingMethodsService)
         {
             _cronApiService = cronApiService;
+            _programingMethodsService = programingMethodsService;
         }
 
+        /// <summary>
+        /// Añade una sincornizacion recurrente
+        /// </summary>
+        /// <param name="id_repository">identificador del repositorio a sincronizar </param>
+        /// <param name="nombre_job">nombre de la tarea</param>
+        /// <param name="fecha_inicio">momento a partir del cúal empieza la sincronización</param>
+        /// <param name="cron_expression">expresión recurrente del cron (https://crontab.guru/)</param>
+        /// <returns></returns> 
         [HttpPost]
-        public IActionResult AddExecution(string nombre_fichero, string nombre_job, string fecha_inicio, string cron_expression, bool execute_inmediatly)
+        public IActionResult AddExecution(string id_repository, string nombre_job, string fecha_inicio, string cron_expression)
         {
+            Guid idRep = Guid.Empty;
+            try
+            {
+                idRep = new Guid(id_repository);
+            }
+            catch (Exception)
+            {
+                return BadRequest("identificador invalido");
+            }
             var fechaInicio = DateTime.Parse(fecha_inicio);
             bool validCronExpr = true;
-            if (_cronApiService.GetRecurringJobs(nombre_job)!=null)
+            if (_cronApiService.ExistRecurringJob(nombre_job))
             {
-                return BadRequest("Ya existe un job con ese nombre");
+                return BadRequest("Ya existe una tarea con ese nombre");
             }
             else
             {
                 var correct = CrontabSchedule.TryParse(cron_expression);
                 if (correct != null)
                 {
-                    BackgroundJob.Schedule(() => ExampleService.PonerEnCola(nombre_job, nombre_fichero, cron_expression, execute_inmediatly), fechaInicio);
+                    //BackgroundJob.Schedule(() => ExampleService.PonerEnCola(nombre_job, nombre_fichero, cron_expression, execute_inmediatly), fechaInicio);
+                    _programingMethodsService.ProgramPublishRepositoryRecurringJob(idRep, nombre_job, cron_expression, fechaInicio);
                 }
                 else
                 {
@@ -54,27 +74,49 @@ namespace CronConfigure.Controllers
             }
         }
 
+        /// <summary>
+        /// Elimina una tarea recurrente
+        /// </summary>
+        /// <param name="nombre_job">nombre de la tarea recurrente a eliminar</param>
+        /// <returns></returns> 
         [HttpDelete]
         public IActionResult DeleteRecurringJob(string nombre_job)
         {
             RecurringJob.RemoveIfExists(nombre_job);
-            BackgroundJob.Delete(nombre_job);
             return Ok();
         }
 
+        /// <summary>
+        /// Obtiene un listado de tareas recurrentes 
+        /// </summary>
+        /// <returns>listado de tareas recurrentes</returns> 
         [HttpGet]
         public IActionResult GetRecurringJob()
         {
             return Ok(_cronApiService.GetRecurringJobs());
         }
 
+        /// <summary>
+        /// Obtiene una tarea recurrente
+        /// </summary>
+        /// <param name="id">nombre de la tarea recurrente</param>
+        /// <returns>tarea recurrentes</returns> 
         [HttpGet("{id}")]
         public IActionResult GetRecurringJob(string id)
         {
             return Ok(_cronApiService.GetRecurringJobs(id));
         }
 
-
+        /// <summary>
+        /// Obtiene un listado de tareas que se han ejecutado a partir de una tarea recurrente 
+        /// </summary>
+        /// <param name="id">nombre de la tarea recurrente</param>
+        /// <returns>listado de tareas</returns> 
+        [HttpGet("jobs/{id}")]
+        public IActionResult GetJobsOfRecurringJob(string id)
+        {
+            return Ok(_cronApiService.GetJobsOfRecurringJob(id));
+        }
 
     }
 }

@@ -1,0 +1,10 @@
+2020-04-27 17:10:32.326 +02:00 [ERR] Object reference not set to an instance of an object.
+   at CronConfigure.Models.Services.programingMethodsService.PublishRepositories(String idRepository) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\programingMethodsService.cs:line 18
+
+2020-04-27 17:18:19.814 +02:00 [ERR] One or more errors occurred. (An error occurred while sending the request.)
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at CronConfigure.Models.Services.CallApiService.CallPostApi(String urlMethod, Object item) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\CallApiService.cs:line 30
+   at CronConfigure.Models.Services.programingMethodsService.PublishRepositories(String idRepository) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\programingMethodsService.cs:line 23
+
