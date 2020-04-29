@@ -26,7 +26,6 @@
     <Compile Remove="Controllers\PRHController - Copia.cs" />
     <Compile Remove="Controllers\SchemaController.cs" />
     <Compile Remove="Controllers\settingsController.cs" />
-    <Compile Remove="Controllers\syncController.cs" />
   </ItemGroup>
 
   <ItemGroup>
