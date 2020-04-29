@@ -12,7 +12,7 @@ uri_base = "http://purl.org/roh/mirror/vivo#"
 
 [[ontologies]]
 shortname = "foaf"
-uri_base = "http://xmlns.com/foaf/0.1/"
+uri_base = "http://purl.org/roh/mirror/foaf#"
 
 [[ontologies]]
 shortname = "oboro"
