@@ -15,21 +15,21 @@ namespace API_CARGA.ModelExamples
             {
                 ShapeConfigID = Guid.NewGuid(),
                 Name = "ShapeConfig_1",
-                EntityClass = "ShapeClass",
+                RepositoryID = Guid.NewGuid(),
                 Shape = "Definition_1"
             });
             listShapesConfig.Add(new ShapeConfig()
             {
                 ShapeConfigID = Guid.NewGuid(),
                 Name = "ShapeConfig_2",
-                EntityClass = "ShapeClass",
+                RepositoryID = Guid.NewGuid(),
                 Shape = "Definition_1"
             });
             listShapesConfig.Add(new ShapeConfig()
             {
                 ShapeConfigID = Guid.NewGuid(),
                 Name = "ShapeConfig_3",
-                EntityClass = "ShapeClass",
+                RepositoryID = Guid.NewGuid(),
                 Shape = "Definition_1"
             });
             return listShapesConfig;

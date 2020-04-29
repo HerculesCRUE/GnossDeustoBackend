@@ -35,12 +35,31 @@ namespace API_CARGA.Models.Entities
             /// Path del resultado
             /// </summary>
             public string resultPath { get; set; }
+
+            /// <summary>
+            /// Nombre del Shape
+            /// </summary>
+            public string shapeName { get; set; }
+
+            /// <summary>
+            /// Identificador del Shape
+            /// </summary>
+            public Guid shapeID { get; set; }
         }
+
         /// <summary>
-        /// 
+        /// Severidad
+        /// </summary>
+        public string severity { get; set; }
+
+        /// <summary>
+        /// Indica si no se incumple ninguna restricción
         /// </summary>
         public bool conforms { get; set; }
-        //
+
+        /// <summary>
+        /// Lista con las validaciones que no han pasado
+        /// </summary>
         public List<Result> results { get; set; }
     }
 }

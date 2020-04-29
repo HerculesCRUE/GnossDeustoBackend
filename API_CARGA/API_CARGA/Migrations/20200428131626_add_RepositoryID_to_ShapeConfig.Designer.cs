@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using API_CARGA.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace API_CARGA.Migrations
 {
     [DbContext(typeof(EntityContext))]
-    partial class EntityContextModelSnapshot : ModelSnapshot
+    [Migration("20200428131626_add_RepositoryID_to_ShapeConfig")]
+    partial class add_RepositoryID_to_ShapeConfig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,8 +61,6 @@ namespace API_CARGA.Migrations
 
                     b.HasKey("ShapeConfigID");
 
-                    b.HasIndex("RepositoryID");
-
                     b.ToTable("ShapeConfig");
                 });
 
@@ -89,15 +89,6 @@ namespace API_CARGA.Migrations
                     b.HasKey("SyncConfigID");
 
                     b.ToTable("SyncConfig");
-                });
-
-            modelBuilder.Entity("API_CARGA.Models.Entities.ShapeConfig", b =>
-                {
-                    b.HasOne("API_CARGA.Models.Entities.RepositoryConfig", "RepositoryConfig")
-                        .WithMany()
-                        .HasForeignKey("RepositoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -15,7 +15,7 @@ namespace API_CARGA.ModelExamples
             {
                 ShapeConfigID = Guid.NewGuid(),
                 Name = "ShapeConfig_1",
-                EntityClass = "ShapeClass",
+                RepositoryID = Guid.NewGuid(),
                 Shape = "Definition_1"
             });
         }

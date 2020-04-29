@@ -43,7 +43,7 @@ namespace API_CARGA.Models.Services
             {
                 shapeConfigOriginal.Name = shapeConfig.Name;
                 shapeConfigOriginal.Shape = shapeConfig.Shape;
-                shapeConfigOriginal.EntityClass = shapeConfig.EntityClass;
+                shapeConfigOriginal.RepositoryID = shapeConfig.RepositoryID;
                 _context.SaveChanges();
                 modified = true;
             }
