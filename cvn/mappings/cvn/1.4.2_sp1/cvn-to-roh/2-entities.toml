@@ -552,6 +552,26 @@ id.resource = "PhDThesis"
         name = "title"
         bean = "Value"
 
+    [[entities.subentities]]
+    ontology = "roh"
+    classname = "PhDThesisMetric"
+
+        [[entities.subentities.relationships]]
+        ontology = "roh"
+        name = "metricOf"
+        inverse_ontology = "roh"
+        inverse_name = "hasMetric"
+
+        [[entities.subentities.properties]]
+        ontology = "roh"
+        name = "mark"
+        format = "{mark}"
+
+            [[entities.subentities.properties.sources]]
+            code = "020.010.020.190"
+            name = "mark"
+
+
 [[entities]] # Certificado de idiomas
 code = "020.060.000.000"
 ontology = "roh"
