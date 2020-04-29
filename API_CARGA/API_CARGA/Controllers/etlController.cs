@@ -55,7 +55,7 @@ namespace PMH.Controllers
         /// Valida un RDF mediante el shape SHACL configurado
         /// </summary>
         /// <param name="rdfFile">Fichero RDF</param>
-        /// <param name="repositoryIdentifier">Identificador del respositorio para seleccionar los Shapes</param>
+        /// <param name="repositoryIdentifier">Identificador del repositorio para seleccionar los Shapes</param>
         /// <returns></returns>
         [HttpPost("data-validate")]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ShapeReport))]
