@@ -98,13 +98,13 @@ namespace API_CARGA.Models.Utility
                 }
             }
 
-            if (response.results.Exists(x => x.severity == "http://www.w3.org/ns/shacl#Warning"))
-            {
-                response.severity = "http://www.w3.org/ns/shacl#Warning";
-            }
-            else if (response.results.Exists(x => x.severity == "http://www.w3.org/ns/shacl#Violation"))
+            if (response.results.Exists(x => x.severity == "http://www.w3.org/ns/shacl#Violation"))
             {
                 response.severity = "http://www.w3.org/ns/shacl#Violation";
+            }
+            else if (response.results.Exists(x => x.severity == "http://www.w3.org/ns/shacl#Warning"))
+            {
+                response.severity = "http://www.w3.org/ns/shacl#Warning";
             }
             else if (response.results.Exists(x => x.severity == "http://www.w3.org/ns/shacl#Info"))
             {
