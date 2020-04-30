@@ -1,3 +1,5 @@
+![](.//media/CabeceraDocumentosMD.png)
+
 # Hércules Backend ASIO. . MODELO DE MULTILINGÜISMO
 
 [1 INTRODUCCIÓN 3](#introducción)
