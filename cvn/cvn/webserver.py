@@ -120,17 +120,19 @@ def v1_convert():
 
     person = URIRef(config_entity.generate_uri(config['instance']['classname'], params['orcid']))
     ontology_config.cvn_person = person
-    g.add((person, RDF.type, ontology_config.get_ontology(config['instance']['ontology']).term(config['instance']['classname'])))
+    g.add((person, RDF.type,
+           ontology_config.get_ontology(config['instance']['ontology']).term(config['instance']['classname'])))
 
     # Representa el único nodo que contiene todos los datos personales del CVN
     info_node = xmltree.get_first_node_by_code(root, config['code'])
 
     for data_property in config['properties']:
         # Formateamos
-        formatted_value = data_property['format'].format_map(get_sources_from_property(data_property, info_node))
-
-        g.add((person, ontology_config.get_ontology(data_property['ontology']).term(data_property['name']),
-               Literal(formatted_value)))
+        sources = get_sources_from_property(data_property, info_node)
+        if config_entity.has_all_formatting_fields(data_property['format'], sources):
+            formatted_value = data_property['format'].format_map(sources)
+            g.add((person, ontology_config.get_ontology(data_property['ontology']).term(data_property['name']),
+                   Literal(formatted_value)))
 
         # Sources procesadas, formateamos texto
 

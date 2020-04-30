@@ -56,7 +56,7 @@ Parámetros:
 | `orcid` | Sí | La ORCID de la persona de la que es el CVN.<br>Ejemplo: `0000-0001-8055-6823`
 | `format` | No | Valor por defecto: `xml`<br>Posibles formatos: <ul><li>`xml`</li><li>`n3`</li><li>`turtle`</li><li>`nt`</li><li>`pretty-xml`</li><li>`trix`</li><li>`trig`</li><li>`nquads`</li></ul>
 
-El contenido del archivo que queremos debe enviarse como el cuerpo, en codificación binaria (ver ejemplos más abajo).
+El contenido del archivo que queremos debe enviarse como el cuerpo, en codificación binaria (ver ejemplos más abajo) y estando en UTF-8.
 
 ### Posibles errores
 
