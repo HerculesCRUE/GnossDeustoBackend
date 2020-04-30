@@ -60,7 +60,7 @@ where { ?s a \<http://vivoweb.org/ontology/core#Project>}
 
 select count(\*) from \<http://data.um.es/graph/um_sgi_3>
 
-where { ?s a \<http://vivoweb.org/ontology/core\#Project>}
+where { ?s a \<http://vivoweb.org/ontology/core#Project>}
 
 **Consulta que devuelve los datos de un proyecto** (teniendo en cuenta
 que podrían faltar algunos datos).
