@@ -53,22 +53,19 @@ http://data.um.es/graph/um_sgi_3
 **Consulta que devuelve los URIs de todos los proyectos**.
 
 select \* from \<http://data.um.es/graph/um_sgi_3>
+
 where { ?s a \<http://vivoweb.org/ontology/core#Project>}
-
-select \* from \<http://data.um.es/graph/um_sgi_3\>
-
-where { ?s a \<http://vivoweb.org/ontology/core\#Project\>}
 
 **Consulta que cuenta los proyectos cargados**.
 
-select count(\*) from \<http://data.um.es/graph/um_sgi_3\>
+select count(\*) from \<http://data.um.es/graph/um_sgi_3>
 
-where { ?s a \<http://vivoweb.org/ontology/core\#Project\>}
+where { ?s a \<http://vivoweb.org/ontology/core\#Project>}
 
 **Consulta que devuelve los datos de un proyecto** (teniendo en cuenta
 que podrían faltar algunos datos).
 
-select \* from \<http://data.um.es/graph/um_sgi_3\>
+select \* from \<http://data.um.es/graph/um_sgi_3>
 
 where {
 
@@ -76,7 +73,7 @@ where {
 
 OPTIONAL{?o ?p2 ?o2 OPTIONAL{?o2 ?p3 ?o3}}
 
-FILTER(?s=\<http://data.um.es/res/project/10031\>)
+FILTER(?s=\<http://data.um.es/res/project/10031>)
 
 }
 
