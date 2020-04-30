@@ -52,8 +52,8 @@ http://data.um.es/graph/um_sgi_3
 
 **Consulta que devuelve los URIs de todos los proyectos**.
 
-select * from <http://data.um.es/graph/um_sgi_3>
-where { ?s a <http://vivoweb.org/ontology/core#Project>}
+select \* from \<http://data.um.es/graph/um_sgi_3\>
+where { ?s a \<http://vivoweb.org/ontology/core#Project\>}
 
 select \* from \<http://data.um.es/graph/um_sgi_3\>
 
