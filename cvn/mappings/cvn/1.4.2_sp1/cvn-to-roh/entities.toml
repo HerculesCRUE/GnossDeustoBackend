@@ -1,4 +1,78 @@
 [[entities]]
+code = "000.010.000.000"
+displayname = "foaf:Person"
+primary = true
+id.resource = "Person"
+id.format = "{identifier}"
+
+    [[entities.properties]] # Nombre
+    ontology = "foaf"
+    name = "name"
+    format = "{first_name} {first_family_name} {second_family_name}"
+
+        [[entities.properties.sources]] # Nombre
+        code = "000.010.000.020"
+        name = "first_name"
+        bean = "Value"
+
+        [[entities.properties.sources]] # Apellido 1
+        code = "000.010.000.010"
+        name = "first_family_name"
+        bean = "FirstFamilyName"
+
+        [[entities.properties.sources]] # Apellido 2
+        code = "000.010.000.010"
+        name = "second_family_name"
+        bean = "SecondFamilyName"
+
+    [[entities.properties]] # Teléfono
+    ontology = "foaf"
+    name = "phone"
+    format = "tel:{number}{extension}"
+
+        [[entities.properties.sources]] # Número
+        code = "000.010.000.210"
+        name = "number"
+        bean = "Number"
+
+        [[entities.properties.sources]] # Extensión
+        code = "000.010.000.210"
+        name = "extension"
+        bean = "Extension"
+        format = ",{value}"
+
+    [[entities.properties]] # Email
+    ontology = "foaf"
+    name = "mailbox"
+    format = "mailto:{email}"
+
+        [[entities.properties.sources]]
+        code = "000.010.000.230"
+        name = "email"
+        bean = "Value"
+
+    [[entities.properties]] # Teléfono móvil
+    ontology = "foaf"
+    name = "phone"
+    format = "tel:{phone}"
+
+        [[entities.properties.sources]]
+        code = "000.010.000.240"
+        name = "phone"
+        bean = "Number"
+
+    [[entities.properties]]
+    ontology = "foaf"
+    name = "homepage"
+    format = "{homepage}"
+
+        [[entities.properties.sources]]
+        code = "000.010.000.250"
+        name = "homepage"
+        bean = "Value"
+
+
+[[entities]]
 code = "030.010.000.000"
 displayname = "vivo:TeacherRole"
 
@@ -571,6 +645,18 @@ id.resource = "PhDThesis"
             name = "mark"
 
     [[entities.subentities]]
+    displayname = "foaf:Organization"
+
+        [[entities.subentities.properties]]
+        displayname = "foaf:name"
+        format = "{name}"
+
+            [[entities.subentities.properties.sources]]
+            code = "030.010.000.540"
+            bean = "Name"
+            name = "name"
+
+    [[entities.subentities]]
     ontology = "roh"
     classname = "DegreeHomologation"
 
@@ -593,8 +679,7 @@ id.resource = "PhDThesis"
 
 [[entities]] # Certificado de idiomas
 code = "020.060.000.000"
-ontology = "roh"
-classname = "LanguageCertificate"
+displayname = "roh:LanguageCertificate"
 
     [[entities.conditions]]
     type = "bean_value_equals"
@@ -603,10 +688,8 @@ classname = "LanguageCertificate"
     value = "eus"
 
     [[entities.relationships]]
-    ontology = "roh"
-    name = "hasAccreditation"
-    inverse_ontology = "roh"
-    inverse_name = "accreditationOf"
+    direct = "roh:hasAccreditation"
+    inverse = "roh:accreditationOf"
     link_to_cvn_person = true
 
     [[entities.properties]]

@@ -79,8 +79,6 @@ def init_entity_from_serialized_toml(config, parent=None):
         ontology = config['ontology']
         classname = config['classname']
 
-
-
     # ID
     config_id_format = None
     config_id_resource = None
@@ -90,7 +88,13 @@ def init_entity_from_serialized_toml(config, parent=None):
         if 'resource' in config['id']:
             config_id_resource = config['id']['resource']
 
-    entity = Entity(code, ontology, classname, parent, config_id_resource, config_id_format)
+    primary = False
+    if 'primary' in config:
+        primary = config['primary']
+
+    entity = Entity(code=code, ontology=ontology, classname=classname, parent=parent,
+                    identifier_config_resource=config_id_resource, identifier_config_format=config_id_format,
+                    primary=primary)
 
     # Populate properties
     if 'properties' in config:
@@ -166,7 +170,7 @@ def init_entity_from_serialized_toml(config, parent=None):
 class Entity:
     # TODO todo el tema de la id y la URI
     def __init__(self, code, ontology, classname, parent=None, identifier_config_resource=None,
-                 identifier_config_format=None):
+                 identifier_config_format=None, primary=False):
         self.code = code
         self.ontology = ontology
         self.classname = classname
@@ -180,6 +184,7 @@ class Entity:
         self.identifier_config_format = identifier_config_format
         self.node = None
         self.xml_item = None
+        self.primary = primary
         self.conditions = []
 
     def add_property(self, entity_property):

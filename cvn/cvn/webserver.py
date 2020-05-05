@@ -96,133 +96,43 @@ def v1_convert():
 
     ontology_config.graph = g
 
-    person = URIRef(config_entity.generate_uri('Researcher', params['orcid']))
-
-    # ----- INICIO PROCESO CVN
-
-    # 1. Datos personales
-    with open("mappings/cvn/1.4.2_sp1/cvn-to-roh/1-personal-data.toml") as f:  # TODO des-hardcodificar
-        config = toml.loads(f.read())
-        # TODO error handling si archivo no se puede abrir
-        # TODO validar TOML
-
-    # Lógica a seguir
-    #
-    # Recorrer instances. En cada uno:
-    #   Instanciar en la ontología la clase, aunque esté vacía
-    #       Para cada propiedad:
-    #           Recorrer todos los sources:
-    #               Obtener valor
-    #               Darle formato
-    #               Guardarlos en un diccionario para que el source pueda acceder a ellos
-    #           Aplicar formato
-    #           Guardar en el grafo
-
-    person = URIRef(config_entity.generate_uri(config['instance']['classname'], params['orcid']))
-    ontology_config.cvn_person = person
-    g.add((person, RDF.type,
-           ontology_config.get_ontology(config['instance']['ontology']).term(config['instance']['classname'])))
-
-    # Representa el único nodo que contiene todos los datos personales del CVN
-    info_node = xmltree.get_first_node_by_code(root, config['code'])
-
-    for data_property in config['properties']:
-        # Formateamos
-        sources = get_sources_from_property(data_property, info_node)
-        if config_entity.has_all_formatting_fields(data_property['format'], sources):
-            formatted_value = data_property['format'].format_map(sources)
-            g.add((person, ontology_config.get_ontology(data_property['ontology']).term(data_property['name']),
-                   Literal(formatted_value)))
-
-        # Sources procesadas, formateamos texto
-
     # 2. Generar entidades
 
     # Cargar config
-    with open("mappings/cvn/1.4.2_sp1/cvn-to-roh/2-entities.toml") as f:  # TODO deshardcodificar
+    with open("mappings/cvn/1.4.2_sp1/cvn-to-roh/entities.toml") as f:  # TODO deshardcodificar
         entities_config = toml.loads(f.read())
 
     # Generar instancias Entity
     entities = []
+    primary_entity = None
     for entity_config in entities_config['entities']:
-        entities.append(config_entity.init_entity_from_serialized_toml(entity_config))
+        generated_entity = config_entity.init_entity_from_serialized_toml(entity_config)
+        if generated_entity.primary:  # La entidad primnaria (la de la persona del CVN la guardamos por separado)
+            primary_entity = generated_entity
+        else:
+            entities.append(generated_entity)
+    if primary_entity is None:
+        raise ValueError("Config error: there is no primary entity")
+
+    # Procesar entidad primaria
+    primary_node = xmltree.get_first_node_by_code(root, primary_entity.code)
+    if primary_node is None:
+        raise ValueError("This CVN doesn't have a primary node with personal data")
+    primary_entity.get_property_values_from_node(primary_node)
+    primary_entity.add_entity_to_ontology(ontology_config)
+    ontology_config.cvn_person = primary_entity.get_uri()
+
 
     for entity in entities:
         # Para cada tipo de entidad buscamos en el árbol las que tengan el código
         for entity_result_node in xmltree.get_all_nodes_by_code(root, entity.code):
-            # properties = get_properties_from_node(entity, entity_result_node)
-
             entity.get_property_values_from_node(entity_result_node)
-            # entity.generate_property_triples()
-            # MAL MAL MAL no se puede pretender rellenar una entidad con la información de todas, hay que, de alguna
-            # manera intentar
-
-            # Generación de la URI
-            # identifier = uuid.uuid4()  # por defecto UUIDv4
-            # resource_class = entity['classname']  # por defecto el nombre de la clase de la entidad
-            # if 'id' in entity:
-            #     if 'resource' in entity['id']:
-            #         resource_class = entity['id']['resource']
-            #     if 'format' in entity['id']:
-            #         if has_all_formatting_fields(entity['id']['format'], properties):
-            #             identifier = entity['id']['format'].format_map(properties).strip()
-
-            # Generamos la tripleta de la entidad como tal
             entity.add_entity_to_ontology(ontology_config)
-
-            # # La rellenamos con las propiedades
-            # for class_property in entity['properties']:
-            #     sources = get_sources_from_property(class_property, entity_result_node)
-            #     if has_all_formatting_fields(class_property['format'], sources):
-            #         formatted = class_property['format'].format_map(sources)
-            #         # TODO validar que se tienen todos los parámetros necesarios
-            #         # TODO no mostrar si es "None"
-            #         g.add((current_entity, ontologies[class_property['ontology']].term(class_property['name']),
-            #                Literal(formatted)))
-
-            # # Relaciones (modo sencillo)
-            # # TODO cambiar spanglish relations por relationship
-            # if 'relations' in entity:
-            #     for relation in entity['relations']:
-            #         if 'link_to_cvn_person' in relation and relation['link_to_cvn_person']:
-            #             g.add((person, ontologies[relation['ontology']].term(relation['name']), current_entity))
-            #         if 'inverse_name' in relation:
-            #             inverse_ontology = relation['ontology']
-            #             if 'inverse_ontology' in relation:
-            #                 inverse_ontology = relation['inverse_ontology']
-            #             g.add((current_entity, ontologies[inverse_ontology].term(relation['inverse_name']), person))
-
-            # Limpiamos la entidad
             entity.clear_values()
 
     return make_response(g.serialize(format=params['format']), 200)  # TODO Quitar, DEBUG
 
-    # 3. Enlazar
-    # TODO limpiar comentarios
-    # ----- FIN PROCESO CVN
-    # Vamos a ir recorriendo el árbol XML del documento CVN e iremos sacando, cuando sea necesario, información, para
-    # luego insertarla en tripletas generadas al vuelo con rdflib
-    # Serializar y guardar en un archivo con el formato que queramos
 
-
-# def get_properties_from_node(entity_config, node):
-#     """
-#     Recorre un nodo y genera un diccionario con propiedades y sus valores formateados
-#     :param entity_config: el objeto de configuración
-#     :param node: el nodo XML del CVN de donde queremos sacar las propiedades
-#     :return:
-#     """
-#     properties = {}
-#     for property_config in entity_config['properties']:
-#         sources = get_sources_from_property(property_config, node)
-#         if 'format' in property_config and has_all_formatting_fields(property_config['format'], sources):
-#             properties[property_config['name']] = property_config['format'].format_map(sources)
-#     return properties
-#     # hay algún source que no se ha generado
-#     # TODO validar que se tienen todos los parámetros necesarios
-#     # Posible problema aquí: ¿qué pasa si hay dos propiedades con el mismo nombre de distintas ontologías?
-#
-#
 def get_sources_from_property(current_property, node):
     # Declaramos un dict. para que podamos guardar los valores de los sources
     sources = {}
