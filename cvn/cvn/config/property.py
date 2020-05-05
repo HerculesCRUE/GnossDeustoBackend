@@ -1,5 +1,6 @@
 from cvn.utils.printable import Printable
 import cvn.config.source as cvn_source
+import cvn.config.condition as cvn_condition
 from cvn.utils import xmltree
 import re
 
@@ -40,6 +41,12 @@ def init_property_from_serialized_toml(config, entity_parent):
         generated_source = cvn_source.init_source_from_serialized_toml(source)
         generated_property.add_source(generated_source)
 
+    # Conditions
+    if 'conditions' in config:
+        for condition in config['conditions']:
+            generated_property.add_condition(cvn_condition.init_condition_from_serialized_toml(condition,
+                                                                                               generated_property))
+
     return generated_property
 
 
@@ -65,12 +72,17 @@ class Property(Printable):
         self.name = name
         self.format = format_string
         self.sources = []
+        self.conditions = []
         self.formatted_value = None
         self.hidden = hidden
         self.parent = parent
 
     def add_source(self, source):
         self.sources.append(source)
+        return self
+
+    def add_condition(self, condition):
+        self.conditions.append(condition)
         return self
 
     def get_source_dict(self):
@@ -105,7 +117,12 @@ class Property(Printable):
             source.clear_value()
 
     def should_generate(self):
-        return (not self.hidden) and (self.formatted_value is not None)
+        if self.hidden or self.formatted_value is None:
+            return False
+        for condition in self.conditions:
+            if not condition.is_met():
+                return False
+        return True
 
     def get_identifier(self):
         return str(self.ontology) + ":" + str(self.name)

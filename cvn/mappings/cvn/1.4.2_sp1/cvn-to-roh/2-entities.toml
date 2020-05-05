@@ -22,6 +22,20 @@ displayname = "vivo:TeacherRole"
             code = "030.010.000.160"
             name = "title"
 
+        [[entities.subentities.properties]]
+        displayname = "vivo:courseCredits"
+        format = "{credits}"
+
+            [[entities.subentities.properties.conditions]]
+            type = "bean_value_equals"
+            code = "030.010.000.210"
+            bean = "Value"
+            value = "000"
+
+            [[entities.subentities.properties.sources]]
+            code = "030.010.000.220"
+            name = "credits"
+
     [[entities.subentities]]
     displayname = "vivo:DateTimeInterval"
 
