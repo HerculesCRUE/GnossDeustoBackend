@@ -56,12 +56,29 @@ def init_entity_from_serialized_toml(config, parent=None):
     if not cvn_code.is_cvn_code_valid(code):
         raise ValueError('code does not match expected format')
 
-    if 'ontology' not in config:
-        raise KeyError('ontology not specified for Entity')
-        # TODO comprobar que está definida
+    ontology = "owl"
+    classname = "Thing"
 
-    if 'classname' not in config:
-        raise KeyError('classname not specified for Entity')
+    if 'displayname' in config:
+        display_name_format = re.compile("^[a-zA-Z]+:\w+$")
+        if re.match(display_name_format, config['displayname']):
+            split = config['displayname'].split(":")
+            ontology = split[0]
+            classname = split[1]
+        else:
+            raise ValueError('displayname has invalid format')
+    else:
+        if 'ontology' not in config:
+            raise KeyError('ontology not specified for Entity')
+            # TODO comprobar que está definida
+
+        if 'classname' not in config:
+            raise KeyError('classname not specified for Entity')
+
+        ontology = config['ontology']
+        classname = config['classname']
+
+
 
     # ID
     config_id_format = None
@@ -72,7 +89,7 @@ def init_entity_from_serialized_toml(config, parent=None):
         if 'resource' in config['id']:
             config_id_resource = config['id']['resource']
 
-    entity = Entity(code, config['ontology'], config['classname'], parent, config_id_resource, config_id_format)
+    entity = Entity(code, ontology, classname, parent, config_id_resource, config_id_format)
 
     # Populate properties
     if 'properties' in config:
@@ -86,21 +103,40 @@ def init_entity_from_serialized_toml(config, parent=None):
 
             ontology = None
             name = None
-            if 'name' in relationship:
-                if 'ontology' not in relationship:
-                    raise KeyError('Relationship name was specified but no ontology for it')
-                    # TODO comprobar que está definida
-                name = relationship['name']
-                ontology = relationship['ontology']
+
+            if 'direct' in relationship:
+                display_name_format = re.compile("^[a-zA-Z]+:\w+$")
+                if re.match(display_name_format, relationship['direct']):
+                    split = relationship['direct'].split(":")
+                    ontology = split[0]
+                    name = split[1]
+                else:
+                    raise ValueError('direct in relationship has invalid format')
+            else:
+                if 'name' in relationship:
+                    if 'ontology' not in relationship:
+                        raise KeyError('Relationship name was specified but no ontology for it')
+                        # TODO comprobar que está definida
+                    name = relationship['name']
+                    ontology = relationship['ontology']
 
             inverse_name = None
             inverse_ontology = None
-            if 'inverse_name' in relationship:
-                if 'inverse_ontology' not in relationship:
-                    raise KeyError('inverse Relationship name was specified but no ontology for it')
-                    # TODO comprobar que está definida
-                inverse_name = relationship['inverse_name']
-                inverse_ontology = relationship['inverse_ontology']
+            if 'inverse' in relationship:
+                display_name_format = re.compile("^[a-zA-Z]+:\w+$")
+                if re.match(display_name_format, relationship['inverse']):
+                    split = relationship['inverse'].split(":")
+                    inverse_ontology = split[0]
+                    inverse_name = split[1]
+                else:
+                    raise ValueError('inverse in relationship has invalid format')
+            else:
+                if 'inverse_name' in relationship:
+                    if 'inverse_ontology' not in relationship:
+                        raise KeyError('inverse Relationship name was specified but no ontology for it')
+                        # TODO comprobar que está definida
+                    inverse_name = relationship['inverse_name']
+                    inverse_ontology = relationship['inverse_ontology']
 
             link_to_cvn_person = False
             if 'link_to_cvn_person' in relationship:

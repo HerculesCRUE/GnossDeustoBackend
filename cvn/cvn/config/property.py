@@ -5,17 +5,29 @@ import re
 
 
 def init_property_from_serialized_toml(config):
-    if 'ontology' not in config:
-        raise KeyError('ontology not specified for Property')
-        # TODO comprobar que está definida
 
-    if 'name' not in config:
-        raise KeyError('name not specified for Property')
+    ontology = "owl"
+    name = "topDataProperty"
+    if 'displayname' in config:
+        display_name_format = re.compile("^[a-zA-Z]+:\w+$")
+        if re.match(display_name_format, config['displayname']):
+            split = config['displayname'].split(":")
+            ontology = split[0]
+            name = split[1]
+        else:
+            raise ValueError('displayname has invalid format')
+    else:
+        if 'ontology' not in config:
+            raise KeyError('ontology not specified for Property')
+            # TODO comprobar que está definida
+
+        if 'name' not in config:
+            raise KeyError('name not specified for Property')
 
     if 'format' not in config:
         raise KeyError('format not specified for Property')
 
-    generated_property = Property(config['ontology'], config['name'], config['format'])
+    generated_property = Property(ontology, name, config['format'])
 
     if 'sources' not in config:
         raise KeyError('no sources defined for Property')
