@@ -14,30 +14,36 @@ from cvn.utils import xmltree
 def init_condition_from_serialized_toml(config, parent):
     if 'type' not in config:
         raise KeyError('type not present in Condition declaration: ' + config)
-    # if 'type' not in Condition.ALLOWED_TYPES:
-    #    raise ValueError('Condition type not supported: ' + config['type'])
+
     if 'code' not in config:
         raise KeyError('code not present in Condition declaration: ' + config)
+
+    negated = False
+    if 'negated' in config:
+        negated = config['negated']
     bean = "Value"
+
     if 'bean' in config:
         bean = config['bean']
+
     return Condition(condition_type=config['type'], code=config['code'], value=config['value'],
-                     parent=parent, bean=bean)
+                     parent=parent, bean=bean, negated=negated)
 
 
 class Condition:
     ALLOWED_TYPES = ['bean_value_equals']
 
-    def __init__(self, condition_type, code, parent, value=None, bean="Value"):
+    def __init__(self, condition_type, code, parent, value=None, bean="Value", negated=False):
         self.condition_type = condition_type
         self.code = code
         self.value = value
         self.bean = bean
         self.parent = parent
+        self.negated = negated
 
     def is_met(self):
         if self.parent is None:
-            return True
+            return not self.negated
 
         # Primero tenemos que obtener el árbol XML para el item
         xml_item = None
@@ -51,7 +57,7 @@ class Condition:
             for element in xmltree.get_all_nodes_by_code(xml_item, self.code):
                 result = element.find("{http://codes.cvn.fecyt.es/beans}" + self.bean)
                 if (result is not None) and (result.text == self.value):
-                    return True
-            return False
+                    return not self.negated
+            return self.negated
 
-        return True  # ante la duda Sí
+        return not self.negated  # ante la duda por defecto
