@@ -596,6 +596,12 @@ code = "020.060.000.000"
 ontology = "roh"
 classname = "LanguageCertificate"
 
+    [[entities.conditions]]
+    type = "bean_value_equals"
+    code = "020.060.000.010"
+    bean = "Identification"
+    value = "eus"
+
     [[entities.relationships]]
     ontology = "roh"
     name = "hasAccreditation"
@@ -604,9 +610,7 @@ classname = "LanguageCertificate"
     link_to_cvn_person = true
 
     [[entities.properties]]
-    ontology = "roh"
-    name = "language"
-    format = "{language}"
+    displayname = "roh:language"
 
         [[entities.properties.sources]]
         code = "020.060.000.010"
@@ -614,9 +618,7 @@ classname = "LanguageCertificate"
         bean = "Identification"
 
     [[entities.properties]]
-    ontology = "roh"
-    name = "readingSkill"
-    format = "{skill}"
+    displayname = "roh:readingSkill"
 
         [[entities.properties.sources]]
         code = "020.060.000.130"
@@ -624,9 +626,7 @@ classname = "LanguageCertificate"
         bean = "Value"
 
     [[entities.properties]]
-    ontology = "roh"
-    name = "spokenInteractionSkill"
-    format = "{skill}"
+    displayname = "roh:spokenInteractionSkill"
 
         [[entities.properties.sources]]
         code = "020.060.000.140"
@@ -634,9 +634,7 @@ classname = "LanguageCertificate"
         bean = "Value"
 
     [[entities.properties]]
-    ontology = "roh"
-    name = "speakingSkill"
-    format = "{skill}"
+    displayname = "roh:speakingSkill"
 
         [[entities.properties.sources]]
         code = "020.060.000.150"
@@ -644,9 +642,7 @@ classname = "LanguageCertificate"
         bean = "Value"
 
     [[entities.properties]]
-    ontology = "roh"
-    name = "writingSkill"
-    format = "{skill}"
+    displayname = "roh:writingSkill"
 
         [[entities.properties.sources]]
         code = "020.060.000.160"

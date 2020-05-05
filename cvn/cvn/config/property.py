@@ -26,14 +26,16 @@ def init_property_from_serialized_toml(config, entity_parent):
             raise KeyError('name not specified for Property')
         name = config['name']
 
-    if 'format' not in config:
-        raise KeyError('format not specified for Property')
+    format_string = None
+    if 'format' in config:
+        format_string = config['format']
 
     hidden = False
     if 'hidden' in config:
         hidden = config['hidden']
 
-    generated_property = Property(ontology, name, config['format'], hidden=hidden, parent=entity_parent)
+    generated_property = Property(ontology=ontology, name=name, format_string=format_string,
+                                  hidden=hidden, parent=entity_parent)
 
     if 'sources' not in config:
         raise KeyError('no sources defined for Property')
@@ -67,7 +69,7 @@ def has_all_formatting_fields(format_string, fields):
 
 
 class Property(Printable):
-    def __init__(self, ontology, name, format_string, parent, hidden=False):
+    def __init__(self, ontology, name, parent, format_string=None, hidden=False):
         self.ontology = ontology
         self.name = name
         self.format = format_string
@@ -85,6 +87,13 @@ class Property(Printable):
         self.conditions.append(condition)
         return self
 
+    def get_source_array(self):
+        sources = []
+        for source in self.sources:
+            if source.formatted_value is not None:
+                sources.append(source.formatted_value)
+        return sources
+
     def get_source_dict(self):
         sources = {}
         for source in self.sources:
@@ -93,13 +102,22 @@ class Property(Printable):
         return sources
 
     def formatted(self):
-        try:
-            formatted = self.format.format_map(self.get_source_dict())
-            self.formatted_value = formatted
-            return formatted
-        except KeyError:
-            pass # TODO error handling
-        return None
+        if self.format is None:
+            result = ""
+            for source in self.get_source_array():
+                result = result + str(source)
+            if result == "":
+                return None
+            self.formatted_value = result
+            return result
+        else:
+            try:
+                formatted = self.format.format_map(self.get_source_dict())
+                self.formatted_value = formatted
+                return formatted
+            except KeyError:
+                pass  # TODO error handling
+            return None
 
     def get_value_from_node(self, item_node):
         sources = {}
