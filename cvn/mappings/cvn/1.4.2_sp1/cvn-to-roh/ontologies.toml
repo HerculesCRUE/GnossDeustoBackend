@@ -25,3 +25,7 @@ uri_base = "http://purl.org/roh/mirror/obo/bfo#"
 [[ontologies]]
 shortname = "owl"
 uri_base = "http://www.w3.org/2002/07/owl#"
+
+[[ontologies]]
+shortname = "vcard"
+uri_base = "http://purl.org/roh/mirror/vcard#"
