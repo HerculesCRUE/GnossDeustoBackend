@@ -5,7 +5,6 @@ import re
 
 
 def init_property_from_serialized_toml(config, entity_parent):
-
     ontology = "owl"
     name = "topDataProperty"
     if 'displayname' in config:
@@ -20,9 +19,11 @@ def init_property_from_serialized_toml(config, entity_parent):
         if 'ontology' not in config:
             raise KeyError('ontology not specified for Property')
             # TODO comprobar que está definida
+        ontology = config['ontology']
 
         if 'name' not in config:
             raise KeyError('name not specified for Property')
+        name = config['name']
 
     if 'format' not in config:
         raise KeyError('format not specified for Property')
