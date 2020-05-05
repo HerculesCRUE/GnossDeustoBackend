@@ -27,7 +27,11 @@ def init_property_from_serialized_toml(config):
     if 'format' not in config:
         raise KeyError('format not specified for Property')
 
-    generated_property = Property(ontology, name, config['format'])
+    hidden = False
+    if 'hidden' in config:
+        hidden = config['hidden']
+
+    generated_property = Property(ontology, name, config['format'], hidden=hidden)
 
     if 'sources' not in config:
         raise KeyError('no sources defined for Property')
@@ -55,12 +59,13 @@ def has_all_formatting_fields(format_string, fields):
 
 
 class Property(Printable):
-    def __init__(self, ontology, name, format_string):
+    def __init__(self, ontology, name, format_string, hidden=False):
         self.ontology = ontology
         self.name = name
         self.format = format_string
         self.sources = []
         self.formatted_value = None
+        self.hidden = hidden
 
     def add_source(self, source):
         self.sources.append(source)
@@ -97,9 +102,8 @@ class Property(Printable):
         for source in self.sources:
             source.clear_value()
 
-    def generate_triple(self):
-        print("tripleta property (entidad, " + str(self.ontology) + ":" + str(self.name) + ", "
-              + str(self.formatted_value) + ")")
+    def should_generate(self):
+        return (not self.hidden) and (self.formatted_value is not None)
 
     def get_identifier(self):
         return str(self.ontology) + ":" + str(self.name)

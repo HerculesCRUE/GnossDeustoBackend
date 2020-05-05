@@ -237,7 +237,7 @@ class Entity:
     def generate_property_triples(self, ontology_config):
         triples = []
         for property_item in self.properties:
-            if property_item.formatted_value is not None:
+            if property_item.should_generate():
                 triple = self.get_uri(), \
                          ontology_config.get_ontology(property_item.ontology).term(property_item.name), \
                          Literal(str(property_item.formatted_value))
