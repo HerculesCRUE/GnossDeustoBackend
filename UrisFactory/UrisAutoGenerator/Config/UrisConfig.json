@@ -1380,7 +1380,63 @@
 					"FinalCharacter": ""
 				}
 			]
-		}
+		}, {
+			"Name": "uriPrincipalInvestigatorRoleStructure",
+			"Components": [{
+					"UriComponent": "base",
+					"UriComponentValue": "base",
+					"UriComponentOrder": 1,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "character",
+					"UriComponentValue": "character@RESOURCE",
+					"UriComponentOrder": 2,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "resourceClass",
+					"UriComponentValue": "resourceClass@RESOURCECLASS",
+					"UriComponentOrder": 3,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "identifier",
+					"UriComponentValue": "@ID",
+					"UriComponentOrder": 4,
+					"Mandatory": true,
+					"FinalCharacter": ""
+				}
+			]
+		}, {
+			"Name": "uriLeaderRoleStructure",
+			"Components": [{
+					"UriComponent": "base",
+					"UriComponentValue": "base",
+					"UriComponentOrder": 1,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "character",
+					"UriComponentValue": "character@RESOURCE",
+					"UriComponentOrder": 2,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "resourceClass",
+					"UriComponentValue": "resourceClass@RESOURCECLASS",
+					"UriComponentOrder": 3,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				}, {
+					"UriComponent": "identifier",
+					"UriComponentValue": "@ID",
+					"UriComponentOrder": 4,
+					"Mandatory": true,
+					"FinalCharacter": ""
+				}
+			]
+		}	
 	],
 	"ResourcesClasses": [{
 			"ResourceClass": "Publication",
@@ -1578,6 +1634,14 @@
 			"ResourceClass": "PhDThesis",
 			"LabelResourceClass": "phdthesis",
 			"ResourceURI": "uriPhDThesisStructure"
+		}, {
+			"ResourceClass": "PrincipalInvestigatorRole",
+			"LabelResourceClass": "principalinvestigatorrole",
+			"ResourceURI": "uriPrincipalInvestigatorRoleStructure"
+		}, {
+			"ResourceClass": "LeaderRole",
+			"LabelResourceClass": "leaderrole",
+			"ResourceURI": "uriLeaderRoleStructure"
 		}
 	]
 }
