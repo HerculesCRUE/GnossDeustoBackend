@@ -6,6 +6,7 @@ import uuid
 from cvn.config.relationship import Relationship
 import requests
 import re
+import cvn.config.condition as cvn_condition
 
 # Caché de URIs generadas
 # TODO mover a un servicio externo, o hacer algo más elaborado
@@ -94,8 +95,9 @@ def init_entity_from_serialized_toml(config, parent=None):
     # Populate properties
     if 'properties' in config:
         for property_config in config['properties']:
-            property_generated = cvn_property.init_property_from_serialized_toml(property_config)
+            property_generated = cvn_property.init_property_from_serialized_toml(property_config, entity)
             entity.add_property(property_generated)
+            property_generated.parent = entity
 
     # Relationships
     if 'relationships' in config:
@@ -145,8 +147,13 @@ def init_entity_from_serialized_toml(config, parent=None):
             if ((name is not None) and (ontology is not None)) \
                     or ((inverse_name is not None) and (inverse_ontology is not None)):
                 generated_relationship = Relationship(ontology, name, inverse_ontology,
-                                                      inverse_name, link_to_cvn_person)
+                                                      inverse_name, link_to_cvn_person, parent=entity)
                 entity.add_relationship(generated_relationship)
+
+    # Conditions
+    if 'conditions' in config:
+        for condition in config['conditions']:
+            entity.add_condition(cvn_condition.init_condition_from_serialized_toml(condition, entity))
 
     # Subentities, recursive (optional)
     if 'subentities' in config:
@@ -172,6 +179,8 @@ class Entity:
         self.identifier_config_resource = identifier_config_resource
         self.identifier_config_format = identifier_config_format
         self.node = None
+        self.xml_item = None
+        self.conditions = []
 
     def add_property(self, entity_property):
         """
@@ -189,9 +198,14 @@ class Entity:
         self.subentities.append(subentity)
         return self
 
+    def add_condition(self, condition):
+        self.conditions.append(condition)
+        return self
+
     def get_property_values_from_node(self, item_node):
         for property_item in self.properties:
             property_item.get_value_from_node(item_node)
+        self.xml_item = item_node
         for subentities in self.subentities:
             subentities.get_property_values_from_node(item_node)
 
@@ -200,6 +214,7 @@ class Entity:
         for property_item in self.properties:
             property_item.clear_values()
         self.node = None
+        self.xml_item = None
         for subentity in self.subentities:
             subentity.clear_values()
         return self
@@ -301,6 +316,9 @@ class Entity:
     def should_generate(self):
         if (len(self.properties) > 0) and self.are_properties_empty():
             return False
+        for condition in self.conditions:
+            if not condition.is_met():
+                return False
         return True
 
     def are_properties_empty(self):

@@ -4,7 +4,7 @@ from cvn.utils import xmltree
 import re
 
 
-def init_property_from_serialized_toml(config):
+def init_property_from_serialized_toml(config, entity_parent):
 
     ontology = "owl"
     name = "topDataProperty"
@@ -31,7 +31,7 @@ def init_property_from_serialized_toml(config):
     if 'hidden' in config:
         hidden = config['hidden']
 
-    generated_property = Property(ontology, name, config['format'], hidden=hidden)
+    generated_property = Property(ontology, name, config['format'], hidden=hidden, parent=entity_parent)
 
     if 'sources' not in config:
         raise KeyError('no sources defined for Property')
@@ -59,13 +59,14 @@ def has_all_formatting_fields(format_string, fields):
 
 
 class Property(Printable):
-    def __init__(self, ontology, name, format_string, hidden=False):
+    def __init__(self, ontology, name, format_string, parent, hidden=False):
         self.ontology = ontology
         self.name = name
         self.format = format_string
         self.sources = []
         self.formatted_value = None
         self.hidden = hidden
+        self.parent = parent
 
     def add_source(self, source):
         self.sources.append(source)
