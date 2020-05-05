@@ -11,10 +11,8 @@ displayname = "vivo:TeacherRole"
     displayname = "vivo:Course"
 
         [[entities.subentities.relationships]]
-        ontology = "obobfo"
-        name = "BFO_0000054"
-        inverse_ontology = "obobfo"
-        inverse_name = "BFO_0000055"
+        direct = "obobfo:BFO_0000054"
+        inverse = "obobfo:BFO_0000055"
 
         [[entities.subentities.properties]]
         displayname = "roh:title"
@@ -25,24 +23,19 @@ displayname = "vivo:TeacherRole"
             name = "title"
 
     [[entities.subentities]]
-    ontology = "vivo"
-    classname = "DateTimeInterval"
+    displayname = "vivo:DateTimeInterval"
 
         [[entities.subentities.relationships]]
-        inverse_ontology = "vivo"
-        inverse_name = "dateTimeInterval"
+        inverse = "vivo:dateTimeInterval"
 
         [[entities.subentities.subentities]]
-        ontology = "vivo"
-        classname = "DateTimeValue"
+        displayname = "vivo:DateTimeValue"
 
             [[entities.subentities.subentities.relationships]]
-            inverse_ontology = "vivo"
-            inverse_name = "start"
+            inverse = "vivo:start"
 
             [[entities.subentities.subentities.properties]]
-            ontology = "vivo"
-            name = "dateTime"
+            displayname = "vivo:dateTime"
             format = "{start}"
 
                 [[entities.subentities.subentities.properties.sources]]
@@ -51,16 +44,13 @@ displayname = "vivo:TeacherRole"
                 bean = "Value"
 
         [[entities.subentities.subentities]]
-        ontology = "vivo"
-        classname = "DateTimeValue"
+        displayname = "vivo:DateTimeValue"
 
             [[entities.subentities.subentities.relationships]]
-            inverse_ontology = "vivo"
-            inverse_name = "end"
+            inverse = "vivo:end"
 
             [[entities.subentities.subentities.properties]]
-            ontology = "vivo"
-            name = "dateTime"
+            displayname = "vivo:dateTime"
             format = "{end}"
 
                 [[entities.subentities.subentities.properties.sources]]
