@@ -4,6 +4,26 @@ displayname = "foaf:Person"
 primary = true
 id.resource = "Person"
 id.format = "{identifier}"
+cache = "foaf:person"
+
+    [[entities.properties]]
+    displayname = "foaf:name"
+    hidden = true
+    format = "{name} {familyName} {secondFamilyName}"
+
+        [[entities.properties.sources]]
+        code = "000.010.000.020"
+        name = "name"
+
+        [[entities.properties.sources]]
+        code = "000.010.000.010"
+        name = "familyName"
+        bean = "FirstFamilyName"
+
+        [[entities.properties.sources]]
+        code = "000.010.000.010"
+        name = "secondFamilyName"
+        bean = "SecondFamilyName"
 
     [[entities.subentities]]
     displayname = "vcard:Individual"
