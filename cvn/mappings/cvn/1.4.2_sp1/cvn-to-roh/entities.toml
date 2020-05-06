@@ -289,7 +289,7 @@ displayname = "roh:PhDSupervisingRelationship"
         inverse = "vivo:relates"
 
         [[entities.subentities.subentities]]
-        displayname = "foaf:person"
+        displayname = "foaf:Person"
         id.resource = "Person"
         cache = "foaf:name"
 
@@ -324,7 +324,7 @@ displayname = "roh:PhDSupervisingRelationship"
         inverse = "vivo:relates"
 
         [[entities.subentities.subentities]]
-        displayname = "foaf:person"
+        displayname = "foaf:Person"
         id.resource = "Person"
         cache = "foaf:name"
 
@@ -397,7 +397,7 @@ displayname = "roh:PhDSupervisingRelationship"
                 name = "date"
 
         [[entities.subentities.subentities]]
-        displayname = "foaf:person"
+        displayname = "foaf:Person"
         id.resource = "Person"
         cache = "foaf:name"
 
