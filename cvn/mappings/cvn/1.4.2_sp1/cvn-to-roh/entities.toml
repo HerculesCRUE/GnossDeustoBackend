@@ -661,6 +661,12 @@ classname = "AwardedDegree"
     id.resource = "AcademicDegree"
     id.format = "{title}"
 
+        # Solo "Titulados Superiores" = 950
+        [[entities.conditions]]
+        type = "bean_value_equals"
+        code = "020.010.010.010"
+        value = "950"
+
         [[entities.subentities.relationships]]
         ontology = "vivo"
         name = "relates"
