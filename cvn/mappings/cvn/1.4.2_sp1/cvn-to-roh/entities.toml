@@ -194,6 +194,40 @@ displayname = "vivo:TeacherRole"
             [[entities.subentities.properties.sources]]
             code = "030.010.000.220"
             name = "hours"
+
+        [[entities.subentities.subentities]]
+        displayname = "vivo:AcademicDegree"
+        id.resource = "AcademicDegree"
+
+            [[entities.subentities.subentities.relationships]]
+            direct = "oboro:BFO_0000050"
+            inverse = "oboro:BFO_0000051"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "roh:title"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.010.000.020"
+                bean = "Name"
+                name = "title"
+
+            [[entities.subentities.subentities.subentities]]
+            displayname = "foaf:Organization"
+            id.resource = "Organization"
+            cache = "foaf:name"
+
+                [[entities.subentities.subentities.subentities.relationships]]
+                direct = "vivo:relates"
+                inverse = "vivo:relates"
+
+                [[entities.subentities.subentities.subentities.properties]]
+                displayname = "foaf:name"
+
+                    [[entities.subentities.subentities.subentities.properties.sources]]
+                    code = "030.010.000.540"
+                    bean = "Name"
+                    name = "name"
+
     [[entities.subentities]]
     displayname = "vivo:DateTimeInterval"
 
