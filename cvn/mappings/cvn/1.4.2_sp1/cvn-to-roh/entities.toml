@@ -63,6 +63,32 @@ id.format = "{identifier}"
                 name = "email"
 
         [[entities.subentities.subentities]]
+        displayname = "vcard:Phone"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse = "vcard:hasPhone"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "vcard:phone"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "000.010.000.240"
+                name = "cellphone"
+
+        [[entities.subentities.subentities]]
+        displayname = "vcard:Fax"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse = "vcard:hasRelated"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "vcard:fax"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "000.010.000.240"
+                name = "cellphone"
+
+        [[entities.subentities.subentities]]
         displayname = "vcard:Name"
 
             [[entities.subentities.subentities.relationships]]
