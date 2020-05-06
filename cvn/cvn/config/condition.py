@@ -1,10 +1,6 @@
 # Tipos:
-# property_present: la propiedad tiene un valor válido
-# property_not_present: la propiedad no tiene un valor válido
+# bean_present: la propiedad tiene un bean con ese código
 # bean_value_equals -- la propiedad tiene un valor específico único o array (múltiples permitidos)
-# property_regex: (PRÓXIMAMENTE) la propiedad está presente y su valor cumple el formato de una expresión regular
-# entity_code
-# property_code
 import cvn.config.entity as cvn_entity
 import cvn.config.property as cvn_property
 import cvn.config.relationship as cvn_relationship
@@ -26,12 +22,16 @@ def init_condition_from_serialized_toml(config, parent):
     if 'bean' in config:
         bean = config['bean']
 
-    return Condition(condition_type=config['type'], code=config['code'], value=config['value'],
+    value = None
+    if 'value' in config:
+        value = config['value']
+
+    return Condition(condition_type=config['type'], code=config['code'], value=value,
                      parent=parent, bean=bean, negated=negated)
 
 
 class Condition:
-    ALLOWED_TYPES = ['bean_value_equals']
+    ALLOWED_TYPES = ['bean_value_equals', 'bean_present']
 
     def __init__(self, condition_type, code, parent, value=None, bean="Value", negated=False):
         self.condition_type = condition_type
@@ -57,6 +57,13 @@ class Condition:
             for element in xmltree.get_all_nodes_by_code(xml_item, self.code):
                 result = element.find("{http://codes.cvn.fecyt.es/beans}" + self.bean)
                 if (result is not None) and (result.text == self.value):
+                    return not self.negated
+            return self.negated
+
+        if self.condition_type == "bean_present":
+            for element in xmltree.get_all_nodes_by_code(xml_item, self.code):
+                result = element.find("{http://codes.cvn.fecyt.es/beans}" + self.bean)
+                if result is not None:
                     return not self.negated
             return self.negated
 
