@@ -153,3 +153,6 @@ class Property(Printable):
 
     def get_identifier(self):
         return str(self.ontology) + ":" + str(self.name)
+
+    def get_format_safe_identifier(self):
+        return str(self.ontology) + "_" + str(self.name)

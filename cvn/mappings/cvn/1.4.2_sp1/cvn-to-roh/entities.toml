@@ -234,6 +234,7 @@ displayname = "vivo:TeacherRole"
             [[entities.subentities.subentities.subentities]]
             displayname = "foaf:Organization"
             id.resource = "Organization"
+            id.format = "{foaf:name}"
             cache = "foaf:name"
 
                 [[entities.subentities.subentities.subentities.relationships]]
@@ -811,7 +812,7 @@ code = "060.010.010.000"
 ontology = "bibo"
 classname = "AcademicArticle"
 id.resource = "Article"
-id.format = "{doi}"
+id.format = "{vivo:doi}"
 
     [[entities.relationships]]
     ontology = "roh"
@@ -821,8 +822,15 @@ id.format = "{doi}"
     link_to_cvn_person = true
 
     [[entities.properties]]
-    ontology = "roh"
-    name = "title"
+    displayname = "vivo:doi"
+    format = "{doi}"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.400"
+        name = "doi"
+
+    [[entities.properties]]
+    displayname = "roh:title"
     format = "{title}"
 
         [[entities.properties.sources]]
@@ -897,7 +905,7 @@ id.resource = "Position"
     ontology = "foaf"
     classname = "Organization"
     id.resource = "Organization"
-    id.format = "{name}"
+    id.format = "{foaf:name}"
     cache = "foaf:name"
 
         [[entities.subentities.relationships]]
@@ -989,7 +997,7 @@ id.resource = "Position"
     ontology = "foaf"
     classname = "Organization"
     id.resource = "Organization"
-    id.format = "{name}"
+    id.format = "{foaf:name}"
     cache = "foaf:name"
 
         [[entities.subentities.relationships]]
@@ -1160,6 +1168,9 @@ id.resource = "PhDThesis"
 
     [[entities.subentities]]
     displayname = "foaf:Organization"
+    id.resource = "Organization"
+    id.format = "{foaf:name}"
+    cache = "foaf:name"
 
         [[entities.subentities.properties]]
         displayname = "foaf:name"

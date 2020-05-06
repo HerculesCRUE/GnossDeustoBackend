@@ -8,6 +8,7 @@ import requests
 import re
 import cvn.config.condition as cvn_condition
 import cvn.config.entitycache as cvn_entity_cache
+import urllib.parse
 
 # Caché de URIs generadas
 # TODO mover a un servicio externo, o hacer algo más elaborado
@@ -85,7 +86,7 @@ def init_entity_from_serialized_toml(config, parent=None):
     config_id_resource = None
     if 'id' in config:
         if 'format' in config['id']:
-            config_id_format = config['id']['format']
+            config_id_format = config['id']['format'].replace(":", "_")
         if 'resource' in config['id']:
             config_id_resource = config['id']['resource']
 
@@ -242,9 +243,9 @@ class Entity:
 
             identifier = str(uuid.uuid4())
             if self.identifier_config_format is not None:
-                property_dict = self.get_property_dict()
+                property_dict = self.get_property_dict(format_safe=True)
                 if has_all_formatting_fields(self.identifier_config_format, property_dict):
-                    identifier = self.identifier_config_format.format_map(property_dict)
+                    identifier = urllib.parse.quote_plus(self.identifier_config_format.format_map(property_dict))
 
             self.generated_identifier = generate_uri(resource, identifier)
 
@@ -324,11 +325,14 @@ class Entity:
         for subentity in self.subentities:
             subentity.add_entity_to_ontology(ontology_config)
 
-    def get_property_dict(self):
+    def get_property_dict(self, format_safe=False):
         properties = {}
         for property_item in self.properties:
             if property_item.formatted_value is not None:
-                properties[property_item.get_identifier()] = property_item.formatted_value
+                if format_safe:
+                    properties[property_item.get_format_safe_identifier()] = property_item.formatted_value
+                else:
+                    properties[property_item.get_identifier()] = property_item.formatted_value
         return properties
 
     def should_generate(self):
