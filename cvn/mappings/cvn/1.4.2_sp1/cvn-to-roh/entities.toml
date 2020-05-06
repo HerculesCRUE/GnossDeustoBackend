@@ -109,6 +109,14 @@ id.format = "{identifier}"
                 bean = "FirstFamilyName"
                 name = "name"
 
+            [[entities.subentities.subentities.properties]]
+            displayname = "rohes:secondFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "000.010.000.010"
+                bean = "SecondFamilyName"
+                name = "name"
+
 
     # TODO cuando se sepa cómo modelar segundo apellido, moverlo ahí y quitar esto
     [[entities.properties]] # Nombre
