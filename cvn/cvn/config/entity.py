@@ -7,6 +7,7 @@ from cvn.config.relationship import Relationship
 import requests
 import re
 import cvn.config.condition as cvn_condition
+import cvn.config.entitycache as cvn_entity_cache
 
 # Caché de URIs generadas
 # TODO mover a un servicio externo, o hacer algo más elaborado
@@ -92,9 +93,13 @@ def init_entity_from_serialized_toml(config, parent=None):
     if 'primary' in config:
         primary = config['primary']
 
+    cache_property = None
+    if 'cache' in config:
+        cache_property = config['cache']
+
     entity = Entity(code=code, ontology=ontology, classname=classname, parent=parent,
                     identifier_config_resource=config_id_resource, identifier_config_format=config_id_format,
-                    primary=primary)
+                    primary=primary, property_cache=cache_property)
 
     # Populate properties
     if 'properties' in config:
@@ -170,7 +175,7 @@ def init_entity_from_serialized_toml(config, parent=None):
 class Entity:
     # TODO todo el tema de la id y la URI
     def __init__(self, code, ontology, classname, parent=None, identifier_config_resource=None,
-                 identifier_config_format=None, primary=False):
+                 identifier_config_format=None, primary=False, property_cache=None):
         self.code = code
         self.ontology = ontology
         self.classname = classname
@@ -186,6 +191,7 @@ class Entity:
         self.xml_item = None
         self.primary = primary
         self.conditions = []
+        self.property_cache = property_cache
 
     def add_property(self, entity_property):
         """
@@ -249,6 +255,13 @@ class Entity:
             if self.node is None:
                 self.node = BNode()
             return self.node
+        if self.should_cache():
+            if cvn_entity_cache.get_current_entity_cache().in_cache(self.get_cache_id()):
+                return cvn_entity_cache.get_current_entity_cache().get(self.get_cache_id())
+            else:
+                uri = URIRef(self.get_identifier())
+                cvn_entity_cache.get_current_entity_cache().add_to_cache(self.get_cache_id(), uri)
+                return uri
         return URIRef(self.get_identifier())
 
     def generate_entity_triple(self, ontology_config):
@@ -334,6 +347,25 @@ class Entity:
             if not subentity.are_properties_empty():
                 return False
         return True
+
+    def should_cache(self):
+        if self.property_cache is None:
+            return False
+        for property_item in self.properties:
+            if property_item.get_identifier() == self.property_cache:
+                if property_item.formatted_value is not None:
+                    return True
+        return False
+
+    def get_cache_id(self):
+        if self.property_cache is None:
+            return None
+        cached_property = None
+        for property_item in self.properties:
+            if property_item.get_identifier() == self.property_cache:
+                cached_property = property_item.formatted_value
+                break
+        return self.ontology + ":" + self.classname + ":" + cached_property
 
 
 def has_all_formatting_fields(format_string, fields):

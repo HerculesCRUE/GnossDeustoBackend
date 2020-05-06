@@ -490,6 +490,7 @@ id.resource = "Position"
     classname = "Organization"
     id.resource = "Organization"
     id.format = "{name}"
+    cache = "foaf:name"
 
         [[entities.subentities.relationships]]
         ontology = "vivo"
@@ -581,6 +582,7 @@ id.resource = "Position"
     classname = "Organization"
     id.resource = "Organization"
     id.format = "{name}"
+    cache = "foaf:name"
 
         [[entities.subentities.relationships]]
         ontology = "vivo"
