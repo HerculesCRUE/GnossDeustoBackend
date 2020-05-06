@@ -33,14 +33,14 @@ namespace CronConfigure.Controllers
         /// <param name="codigo_objeto">codigo del objeto</param>
         /// <returns>identifdicador de la tarea</returns> 
         [HttpPost]
-        public IActionResult AddExecution(string id_repository, string fecha_inicio, string fecha = null, string set = null, string codigo_objeto = null)
+        public IActionResult AddExecution(string id_repository, string fecha_inicio, string fecha = null, string set = null)
         {
             DateTime fechaInicio = DateTime.Now;
             DateTime? fechaDateTime = null;
-            if (codigo_objeto != null && set == null)
-            {
-                return BadRequest("falta el tipo de objeto");
-            }
+            //if (codigo_objeto != null && set == null)
+            //{
+            //    return BadRequest("falta el tipo de objeto");
+            //}
             if(fecha_inicio != null)
             {
                 try
