@@ -264,6 +264,167 @@ displayname = "vivo:TeacherRole"
                 name = "end"
                 bean = "Value"
 
+# Dirección de tesis doctoral
+[[entities]]
+code = "030.040.000.000"
+displayname = "roh:PhDSupervisingRelationship"
+
+    [[entities.subentities]]
+    displayname = "roh:SupervisorRole"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relates"
+        inverse = "vivo:relates"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relatedBy"
+        inverse = "oboro:RO_0000052"
+        link_to_cvn_person = true
+
+    [[entities.subentities]]
+    displayname = "roh:SupervisorRole"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relates"
+        inverse = "vivo:relates"
+
+        [[entities.subentities.subentities]]
+        displayname = "foaf:person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+        [[entities.subentities.subentities.relationships]]
+        direct = "vivo:relatedBy"
+        inverse = "oboro:RO_0000052"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "foaf:name"
+            format = "{name} {familyName} {secondFamilyName}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.180"
+                name = "name"
+                bean = "GivenName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.180"
+                name = "familyName"
+                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}FirstFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.180"
+                name = "secondFamilyName"
+                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
+
+    [[entities.subentities]]
+    displayname = "roh:SuperviseeRole"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relates"
+        inverse = "vivo:relates"
+
+        [[entities.subentities.subentities]]
+        displayname = "foaf:person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+        [[entities.subentities.subentities.relationships]]
+        direct = "vivo:relatedBy"
+        inverse = "oboro:RO_0000052"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "foaf:name"
+            format = "{name} {familyName} {secondFamilyName}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "name"
+                bean = "GivenName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "familyName"
+                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}FirstFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "secondFamilyName"
+                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
+
+    [[entities.subentities]]
+    displayname = "vivo:PhDThesis"
+    id.resource = "PhDThesis"
+
+        # TODO relación correcta PhDThesis - PhDSupervisionRelationship
+        [[entities.subentities.relationships]]
+        direct = "vivo:relates"
+        inverse = "vivo:relates"
+
+        [[entities.subentities.properties]]
+        displayname = "roh:title"
+
+            [[entities.subentities.properties.sources]]
+            code = "030.040.000.030"
+            name = "title"
+
+        [[entities.subentities.subentities]]
+        displayname = "roh:PhDThesisMetric"
+
+            [[entities.subentities.subentities.relationships]]
+            direct = "roh:metricOf"
+            inverse = "roh:hasMetric"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "roh:mark"
+            format = "{mark}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.150"
+                name = "mark"
+
+        [[entities.subentities.subentities]]
+        displayname = "vivo:ThesisViva"
+
+            [[entities.subentities.subentities.relationships]]
+            direct = "bibo:presents"
+            inverse = "bibo:presentedAt"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "vivo:dateTime"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.140"
+                name = "date"
+
+        [[entities.subentities.subentities]]
+        displayname = "foaf:person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+        [[entities.subentities.subentities.relationships]]
+        direct = "vivo:correspondingAuthor"
+        inverse = "vivo:correspondingAuthorOf"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "foaf:name"
+            format = "{name} {familyName} {secondFamilyName}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "name"
+                bean = "GivenName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "familyName"
+                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}FirstFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "secondFamilyName"
+                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
+
+
 [[entities]]
 code = "050.020.010.000"
 ontology = "vivo"
