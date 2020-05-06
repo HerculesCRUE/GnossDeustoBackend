@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API_CARGA.Models.Entities
 {
@@ -19,12 +21,16 @@ namespace API_CARGA.Models.Entities
         [Required]
         public string Name { get; set; }
         /// <summary>
-        /// Nombre de la clase que se validará
+        /// Identificador de la validación
         /// </summary>
-        public string EntityClass { get; set; }
+        [ForeignKey("RepositoryConfig")]
+        [Required]
+        public Guid RepositoryID { get; set; }
         /// <summary>
         /// Definición del shape SHACL
         /// </summary>
         public string Shape { get; set; }
+
+        public RepositoryConfig RepositoryConfig { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using VDS.RDF;
+using VDS.RDF.Parsing;
 using VDS.RDF.Shacl;
 using VDS.RDF.Shacl.Validation;
 using VDS.RDF.Writing;
@@ -32,6 +33,17 @@ namespace API_CARGA.Models.Utility
             return xmlDoc;
         }
 
+        public static string GetTextFromFile(IFormFile pRDFFile)
+        {
+            var result = new StringBuilder();
+            using (var reader = new StreamReader(pRDFFile.OpenReadStream()))
+            {
+                while (reader.Peek() >= 0)
+                    result.AppendLine(reader.ReadLine());
+            }
+            return result.ToString();
+        }
+
         /// <summary>
         /// Obtiene los triples de un RDF
         /// </summary>
@@ -39,9 +51,8 @@ namespace API_CARGA.Models.Utility
         /// <returns>Lista de triples</returns>
         public static List<string> GetTriplesFromRDF(XmlDocument pXMLRDF)
         {
-            IGraph g = new Graph();
-            g.LoadFromString(pXMLRDF.InnerXml);
-
+            IGraph g = new Graph();          
+            g.LoadFromString(pXMLRDF.InnerXml, new RdfXmlParser());
             System.IO.StringWriter sw = new System.IO.StringWriter();
             NTriplesWriter nTriplesWriter = new NTriplesWriter();
             nTriplesWriter.Save(g, sw);
@@ -53,16 +64,13 @@ namespace API_CARGA.Models.Utility
         /// <summary>
         /// Valida un RDF
         /// </summary>
-        /// <param name="pXMLRDF">XML RDF</param>
+        /// <param name="pRdfFileContent">XML RDF</param>
         /// <param name="pShapesConfig">Lista de Shapes de validación</param>
         /// <returns>Lista de triples</returns>
-        public static ShapeReport ValidateRDF(XmlDocument pXMLRDF,List<ShapeConfig> pShapesConfig)
+        public static ShapeReport ValidateRDF(string pRdfFileContent, List<ShapeConfig> pShapesConfig)
         {
-            //IGraph shapeGraph = new Graph();
-            //shapeGraph.LoadFromString(File.ReadAllText("c:\\cargas\\shapes_prado.ttl"));
-
             IGraph dataGraph = new Graph();
-            dataGraph.LoadFromString(pXMLRDF.InnerXml);
+            dataGraph.LoadFromString(pRdfFileContent);
 
             ShapeReport response = new ShapeReport();
             response.conforms = true;
@@ -70,12 +78,11 @@ namespace API_CARGA.Models.Utility
             foreach (ShapeConfig shape in pShapesConfig)
             {
                 IGraph shapeGraph = new Graph();
-                //shapeGraph.LoadFromString(shape.Shape);
-                shapeGraph.LoadFromString(File.ReadAllText("c:\\cargas\\shapes_prado.ttl"));
+                shapeGraph.LoadFromString(shape.Shape);
                 ShapesGraph shapesGraph = new ShapesGraph(shapeGraph);
-                
+
                 Report report = shapesGraph.Validate(dataGraph);
-                if(!report.Conforms)
+                if (!report.Conforms)
                 {
                     response.conforms = false;
                     response.results.AddRange(report.Results.ToList().Select(x => new ShapeReport.Result()
@@ -84,9 +91,24 @@ namespace API_CARGA.Models.Utility
                         focusNode = (x.FocusNode != null) ? x.FocusNode.ToString() : null,
                         resultValue = (x.ResultValue != null) ? x.ResultValue.ToString() : null,
                         message = (x.Message != null) ? x.Message.ToString() : null,
-                        resultPath = (x.ResultPath != null) ? x.ResultPath.ToString() : null
+                        resultPath = (x.ResultPath != null) ? x.ResultPath.ToString() : null,
+                        shapeID = shape.ShapeConfigID,
+                        shapeName = shape.Name
                     }).ToList());
                 }
+            }
+
+            if (response.results.Exists(x => x.severity == "http://www.w3.org/ns/shacl#Violation"))
+            {
+                response.severity = "http://www.w3.org/ns/shacl#Violation";
+            }
+            else if (response.results.Exists(x => x.severity == "http://www.w3.org/ns/shacl#Warning"))
+            {
+                response.severity = "http://www.w3.org/ns/shacl#Warning";
+            }
+            else if (response.results.Exists(x => x.severity == "http://www.w3.org/ns/shacl#Info"))
+            {
+                response.severity = "http://www.w3.org/ns/shacl#Info";
             }
             return response;
         }

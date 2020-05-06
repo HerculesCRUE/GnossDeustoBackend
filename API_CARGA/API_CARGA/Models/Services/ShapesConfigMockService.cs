@@ -17,35 +17,35 @@ namespace API_CARGA.Models.Services
             {
                 ShapeConfigID = Guid.NewGuid(),
                 Name = "ShapeConfig_1",
-                EntityClass = "ShapeClass",
+                RepositoryID = Guid.NewGuid(),
                 Shape = "Definition_1"
             });
             _listShapesConfig.Add(new ShapeConfig()
             {
                 ShapeConfigID = Guid.NewGuid(),
                 Name = "ShapeConfig_2",
-                EntityClass = "ShapeClass",
+                RepositoryID = Guid.NewGuid(),
                 Shape = "Definition_1"
             });
             _listShapesConfig.Add(new ShapeConfig()
             {
                 ShapeConfigID = Guid.NewGuid(),
                 Name = "ShapeConfig_3",
-                EntityClass = "ShapeClass",
+                RepositoryID = Guid.NewGuid(),
                 Shape = "Definition_1"
             });
             _listShapesConfig.Add(new ShapeConfig()
             {
                 ShapeConfigID = Guid.NewGuid(),
                 Name = "ShapeConfig_4",
-                EntityClass = "ShapeClass",
+                RepositoryID = Guid.NewGuid(),
                 Shape = "Definition_1"
             });
             _listShapesConfig.Add(new ShapeConfig()
             {
                 ShapeConfigID = Guid.NewGuid(),
                 Name = "ShapeConfig_5",
-                EntityClass = "ShapeClass",
+                RepositoryID = Guid.NewGuid(),
                 Shape = "Definition_1"
             });
         }
@@ -76,7 +76,7 @@ namespace API_CARGA.Models.Services
             {
                 shapeConfigOriginal.Name = shapeConfig.Name;
                 shapeConfigOriginal.Shape = shapeConfig.Shape;
-                shapeConfigOriginal.EntityClass = shapeConfig.EntityClass;
+                shapeConfigOriginal.RepositoryID = shapeConfig.RepositoryID;
                 modified = true;
             }
             return modified;

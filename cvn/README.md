@@ -18,7 +18,7 @@ $ pipenv install
 Ejecutar un servidor en el puerto por defecto (`5000`) y con el modo `debug` desactivado:
 
 ```bash
-$ pipenv run python3 main.py
+$ pipenv run python3 -m cvn.webserver
 ```
 
 ## Configuración
@@ -27,13 +27,13 @@ Es posible configurar el puerto de ejecución con el parámetro `-p`.  Si no se 
 En el siguiente ejemplo, se ejecutará el servidor en el puerto `80`.
 
 ```bash
-$ pipenv run python3 main.py -p 80
+$ pipenv run python3 -m cvn.webserver -p 80
 ```
 
 Si se incluye el argumento `-h`, se mostrará la ayuda:
 
 ```text
-usage: main.py [-h] [-p] [--debug]
+usage: webserver.py [-h] [-p] [--debug]
 
 Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH
 
@@ -56,7 +56,7 @@ Parámetros:
 | `orcid` | Sí | La ORCID de la persona de la que es el CVN.<br>Ejemplo: `0000-0001-8055-6823`
 | `format` | No | Valor por defecto: `xml`<br>Posibles formatos: <ul><li>`xml`</li><li>`n3`</li><li>`turtle`</li><li>`nt`</li><li>`pretty-xml`</li><li>`trix`</li><li>`trig`</li><li>`nquads`</li></ul>
 
-El contenido del archivo que queremos debe enviarse como el cuerpo, en codificación binaria (ver ejemplos más abajo).
+El contenido del archivo que queremos debe enviarse como el cuerpo, en codificación binaria (ver ejemplos más abajo) y estando en UTF-8.
 
 ### Posibles errores
 
@@ -106,3 +106,19 @@ request.AddParameter("application/x-www-form-urlencoded", "<contenido del archiv
 IRestResponse response = client.Execute(request);
 Console.WriteLine(response.Content);
 ```
+
+# Ejecución de la documentación de la API
+
+Existe un servidor de OpenAPI que va incluido en los archivos. Tiene los mismos requisitos que la API. Podemos ejecutarlo de la siguiente manera:
+
+```bash
+$ cd docs/api/flask
+$ pipenv install
+$ pipenv run python3 -m openapi_server
+```
+
+Se puede acceder desde la siguiente URL:
+
+http://localhost:8080/v1/ui
+
+Se puede ejecutar a la vez que la API abriendo otra terminal nueva (en Windows, una nueva ventana)

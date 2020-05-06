@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using API_CARGA.ModelExamples;
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
+using API_CARGA.Models.Utility;
 using API_CARGA.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.Filters;
+using VDS.RDF;
 
 namespace API_CARGA.Controllers
 {
     [Route("etl-config/[controller]")]
     [ApiController]
-    public class ValidationController : ControllerBase
+    public class validationController : ControllerBase
     {
         IShapesConfigService _shapeConfigService;
-        public ValidationController(IShapesConfigService iShapeConfigService)
+        public validationController(IShapesConfigService iShapeConfigService)
         {
             _shapeConfigService = iShapeConfigService;
         }
@@ -49,11 +51,12 @@ namespace API_CARGA.Controllers
             return Ok(_shapeConfigService.GetShapeConfigById(identifier));
         }
 
-
         /// <summary>
         /// Añade una configuración de validación mediante un shape SHACL
         /// </summary>
-        /// <param name="shapeconfig">Configuración de la validación</param>
+        /// <param name="name">Nombre del Shape</param>
+        /// <param name="repositoryID">ID del repositorio de la validación</param>
+        /// <param name="rdfFile">Fichero con el Shape</param>
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -61,17 +64,39 @@ namespace API_CARGA.Controllers
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ErrorExample))]
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(AddShapeConfigErrorResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult AddShape(ShapeConfig shapeconfig)
+        public IActionResult AddShape(string name, Guid repositoryID, IFormFile rdfFile)
         {
-            Guid addedID = _shapeConfigService.AddShapeConfig(shapeconfig);
-            if (!addedID.Equals(Guid.Empty))
+            ShapeConfig shapeconfig = new ShapeConfig();
+            shapeconfig.ShapeConfigID = Guid.NewGuid();
+            shapeconfig.Name = name;
+            shapeconfig.RepositoryID = repositoryID;
+            try
             {
-                return Ok(addedID);
+                shapeconfig.Shape = SparqlUtility.GetTextFromFile(rdfFile);
+                IGraph shapeGraph = new Graph();
+                shapeGraph.LoadFromString(shapeconfig.Shape);
             }
-            else
+            catch (Exception ex)
             {
-                return Problem("Error has ocurred");
+                return Problem(ex.Message);
             }
+
+            try
+            {
+                Guid addedID = _shapeConfigService.AddShapeConfig(shapeconfig);
+                if (!addedID.Equals(Guid.Empty))
+                {
+                    return Ok(addedID);
+                }
+                else
+                {
+                    return Problem($"Se ha producido un error al añadir el Shape");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ErrorExample { Error = $"Se ha producido un error al añadir el Shape " + ex.Message });
+            }            
         }
 
         /// <summary>
@@ -87,35 +112,64 @@ namespace API_CARGA.Controllers
             bool deleted = _shapeConfigService.RemoveShapeConfig(identifier);
             if (deleted)
             {
-                return Ok($"shape config {identifier} has been deleted");
+                return Ok($"El shape con id {identifier} ha sido eliminado");
             }
             else
             {
-                return Problem("Error has ocurred");
+                return Problem("Se ha producido un error al eliminar el Shape");
             }
         }
 
         /// <summary>
         /// Modifica la configuración de validación mediante un shape SHACL
         /// </summary>
-        /// <param name="shapeconfig">Datos de configuración de la validación</param>
+        /// <param name="shapeConfigID">Identificador del Shape</param>
+        /// <param name="name">Nombre del Shape</param>
+        /// <param name="repositoryID">ID del repositorio de la validación</param>
+        /// <param name="rdfFile">Fichero con el Shape</param>
         /// <returns></returns>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ErrorExample))]
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(ModifyShapeConfigErrorResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ModifyShape(ShapeConfig shapeconfig)
+        public IActionResult ModifyShape(Guid shapeConfigID, string name, Guid repositoryID, IFormFile rdfFile)
         {
-            bool modified = _shapeConfigService.ModifyShapeConfig(shapeconfig);
-            if (modified)
+            ShapeConfig shapeconfig = new ShapeConfig();
+            shapeconfig.ShapeConfigID = shapeConfigID;
+            shapeconfig.Name = name;
+            shapeconfig.RepositoryID = repositoryID;
+            try
             {
-                return Ok($"shape config {shapeconfig.ShapeConfigID} has been modified");
+                shapeconfig.Shape = SparqlUtility.GetTextFromFile(rdfFile);
+                IGraph shapeGraph = new Graph();
+                shapeGraph.LoadFromString(shapeconfig.Shape);
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest(new ErrorExample { Error = $"Check that shape config with id {shapeconfig.ShapeConfigID} exist"});
+                return Problem(ex.Message);
             }
+            if (!_shapeConfigService.GetShapesConfigs().Exists(x => x.ShapeConfigID == shapeConfigID))
+            {
+                return BadRequest(new ErrorExample { Error = $"Comprueba si el shape config con id {shapeconfig.ShapeConfigID} existe" });
+            }
+            try
+            {
+                bool modified = _shapeConfigService.ModifyShapeConfig(shapeconfig);
+                if (modified)
+                {
+                    return Ok($"La configuración del shape {shapeconfig.ShapeConfigID} ha sido modificada");
+                }
+                else
+                {
+                    return BadRequest(new ErrorExample { Error = $"Se ha producido un error al modificar el Shape" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ErrorExample { Error = $"Se ha producido un error al modificar el Shape " + ex.Message });
+            }
+
         }
     }
 }

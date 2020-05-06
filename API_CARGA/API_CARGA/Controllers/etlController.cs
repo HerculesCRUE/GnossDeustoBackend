@@ -55,15 +55,16 @@ namespace PMH.Controllers
         /// Valida un RDF mediante el shape SHACL configurado
         /// </summary>
         /// <param name="rdfFile">Fichero RDF</param>
+        /// <param name="repositoryIdentifier">Identificador del repositorio para seleccionar los Shapes</param>
         /// <returns></returns>
         [HttpPost("data-validate")]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ShapeReport))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult dataValidate(IFormFile rdfFile)
+        public IActionResult dataValidate(IFormFile rdfFile, Guid repositoryIdentifier)
         {
-            XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);      
-            return Ok(SparqlUtility.ValidateRDF(rdf, _shapeConfigService.GetShapesConfigs()));
+            string rdfFileContent = SparqlUtility.GetTextFromFile(rdfFile);      
+            return Ok(SparqlUtility.ValidateRDF(rdfFileContent, _shapeConfigService.GetShapesConfigs().FindAll(x=>x.RepositoryID==repositoryIdentifier)));
         }
 
         /// <summary>

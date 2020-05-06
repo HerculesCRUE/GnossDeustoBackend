@@ -40,7 +40,7 @@ namespace XUnitTestAPI_CARGA
             {
                 ShapeConfigID = Guid.NewGuid(),
                 Name = "Circular Shape",
-                EntityClass = "EntityMaster",
+                RepositoryID = Guid.NewGuid(),
                 Shape = "Circle"
             };
             Guid identifierAdded = shapesConfigMockService.AddShapeConfig(shapeConfigToAdd);

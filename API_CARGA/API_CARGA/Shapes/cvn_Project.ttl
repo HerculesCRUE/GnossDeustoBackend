@@ -1,0 +1,128 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix bibo: <http://purl.org/roh/mirror/bibo/> .
+@prefix foaf: <http://purl.org/roh/mirror/foaf#> .
+@prefix obobfo: <http://purl.org/roh/mirror/obo/bfo#> .
+@prefix oboro: <http://purl.org/roh/mirror/obo/ro#> .
+@prefix roh: <http://purl.org/roh#> .
+@prefix vivo: <http://purl.org/roh/mirror/vivo#> .
+@prefix vcard: <http://purl.org/roh/mirror/vcard#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix geonames: <http://purl.org/roh/mirror/geonames#> .
+
+	
+roh:ProjectShape
+	a sh:NodeShape ;
+	sh:targetClass vivo:Project;
+	sh:property [
+		sh:severity sh:Violation;
+		sh:path roh:hasContract;
+		sh:class roh:ProjectContract;
+	] ;
+	sh:property [
+		sh:severity sh:Violation;
+		sh:path roh:hasKnowledgeArea;
+		sh:class skos:Concept;
+	] ;
+	sh:property [
+		sh:severity sh:Violation;
+		sh:path roh:participates;
+		sh:or ( 
+			[ sh:class roh:Activity ] 
+			[ sh:class vivo:Competition ] 
+			[ sh:class bibo:Conference ] 
+			[ sh:class vivo:Course ] 
+			[ sh:class vivo:Exhibit ] 
+			[ sh:class bibo:Hearing ] 
+			[ sh:class vivo:Internship ] 
+			[ sh:class bibo:Interview ] 
+			[ sh:class vivo:Meeting ] 
+			[ sh:class bibo:Performance ] 
+			[ sh:class vivo:Presentation ] 
+			[ sh:class vivo:InvitedTalk ] 
+			[ sh:class roh:PanelTalk ] 
+			[ sh:class roh:ThesisViva ] 
+			[ sh:class bibo:Workshop ] 
+		)
+	] ;
+	sh:property [
+		sh:severity sh:Violation;
+		sh:path roh:produces;
+		sh:class roh:ResearchObject;
+	] ;
+	sh:property [
+		sh:severity sh:Violation;
+		sh:path roh:spends;
+		sh:class roh:ProjectExpense;
+	] ;
+	sh:property [
+		sh:severity sh:Violation;
+		sh:path geonames:locatedIn;
+		sh:class geonames:Feature;
+	] ;
+	sh:property [
+		sh:severity sh:Violation;
+		sh:path oboro:BFO_0000051;
+		sh:class vivo:Project;
+	] ;
+	sh:property [
+		sh:severity sh:Violation;
+		sh:path vivo:dateTimeInterval;
+		sh:class vivo:DateTimeInterval;
+	] ;
+	sh:property [
+		sh:severity sh:Violation;
+		sh:path vivo:relatedBy;
+		sh:class roh:Dossier;
+	] ;
+	sh:property [
+		sh:severity sh:Violation;	
+		sh:path roh:acronym;
+		sh:datatype xsd:string;
+	] ;
+	sh:property [
+		sh:severity sh:Violation;
+		sh:path roh:foreseenJustificationDate;
+		sh:datatype xsd:dateTime;
+	] ;
+	sh:property [
+		sh:severity sh:Violation;
+		sh:path roh:modality;
+		sh:datatype xsd:string;
+	] ;
+	sh:property [
+		sh:severity sh:Violation;
+		sh:path roh:projectStatus;
+		sh:datatype xsd:string;
+	] ;
+	sh:property [
+		sh:severity sh:Warning;
+		sh:path vivo:description;
+		sh:class rdfs:Literal;
+	] ;
+	sh:property [
+		sh:severity sh:Violation;	
+		sh:path roh:title;
+		sh:qualifiedMinCount  1;
+		sh:qualifiedValueShape [
+			sh:datatype xsd:string ;
+		] ;
+	] ;
+	sh:property [
+		sh:severity sh:Warning;
+		sh:path vivo:freetextKeyword;
+		sh:qualifiedMinCount  1;
+		sh:qualifiedValueShape [
+			sh:datatype xsd:string ;
+		] ;
+	] ;
+	sh:property [
+		sh:severity sh:Warning;
+		sh:path vivo:identifier;
+		sh:qualifiedMinCount  1;
+		sh:qualifiedValueShape [
+			sh:datatype xsd:string ;
+		] ;
+	] .
