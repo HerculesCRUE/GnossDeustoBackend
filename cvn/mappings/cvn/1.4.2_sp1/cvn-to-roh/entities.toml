@@ -185,7 +185,6 @@ displayname = "vivo:TeacherRole"
 
         [[entities.subentities.properties]]
         displayname = "vivo:courseCredits"
-        format = "{credits}"
 
             [[entities.subentities.properties.conditions]]
             type = "bean_value_equals"
@@ -197,6 +196,18 @@ displayname = "vivo:TeacherRole"
             code = "030.010.000.220"
             name = "credits"
 
+        [[entities.subentities.properties]]
+        displayname = "vivo:courseHours"
+
+            [[entities.subentities.properties.conditions]]
+            type = "bean_value_equals"
+            code = "030.010.000.210"
+            bean = "Value"
+            value = "010"
+
+            [[entities.subentities.properties.sources]]
+            code = "030.010.000.220"
+            name = "hours"
     [[entities.subentities]]
     displayname = "vivo:DateTimeInterval"
 
