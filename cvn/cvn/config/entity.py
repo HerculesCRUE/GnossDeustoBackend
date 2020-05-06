@@ -56,7 +56,7 @@ def init_entity_from_serialized_toml(config, parent=None):
         code = config['code']
 
     if not cvn_code.is_cvn_code_valid(code):
-        raise ValueError('code does not match expected format')
+        raise ValueError('code does not match expected format: ' + config['code'])
 
     ontology = "owl"
     classname = "Thing"
@@ -68,7 +68,7 @@ def init_entity_from_serialized_toml(config, parent=None):
             ontology = split[0]
             classname = split[1]
         else:
-            raise ValueError('displayname has invalid format')
+            raise ValueError('displayname has invalid format: ' + config['displayname'])
     else:
         if 'ontology' not in config:
             raise KeyError('ontology not specified for Entity')
