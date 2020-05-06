@@ -19,9 +19,9 @@ namespace API_CARGA.Models.Services
             _serviceUrl = serviceUrl;
         }
 
-        public void PublishRepositories(Guid identifier)
+        public void PublishRepositories(Guid identifier, DateTime? fechaFrom = null, string set = null, string codigoObjeto = null)
         {
-            List<string> listIdentifier = CallListIdentifier(identifier);
+            List<string> listIdentifier = CallListIdentifier(identifier,set,fechaFrom);
             if (listIdentifier.Count > 2)
             {
                 listIdentifier = listIdentifier.GetRange(0, 2);
@@ -30,10 +30,19 @@ namespace API_CARGA.Models.Services
             CallDataPublish(listRdf, identifier);
         }
 
-        public List<string> CallListIdentifier(Guid identifierRepo)
+        public List<string> CallListIdentifier(Guid identifierRepo, string set = null, DateTime? fechaFrom = null)
         {
+            string uri = $"etl/ListIdentifiers/{identifierRepo}?metadataPrefix=rdf";
+            if (set != null )
+            {
+                uri += $"&set={set}";
+            }
+            if(fechaFrom != null)
+            {
+                uri += $"&from={fechaFrom}";
+            }
             List<string> listIdentifier = new List<string>();
-            string xml = CallGetApi($"etl/ListIdentifiers/{identifierRepo}?metadataPrefix=rdf");
+            string xml = CallGetApi(uri);
             XDocument respuestaXML = XDocument.Load(new StringReader(xml));
             XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
             XElement listIdentifierElement = respuestaXML.Root.Element(nameSpace + "ListIdentifiers");

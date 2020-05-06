@@ -26,7 +26,7 @@ namespace CronConfigure.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
-                client.Timeout = TimeSpan.FromMinutes(30);
+                client.Timeout = TimeSpan.FromDays(1);
                 string url = _serviceUrl.GetUrl();
                 response = client.PostAsync($"{url}{urlMethod}", contentData).Result;
                 response.EnsureSuccessStatusCode();

@@ -41,15 +41,15 @@ namespace CronConfigure
             services.AddControllers();
 
             //Add Hangfire services.
-            services.AddHangfire(configuration => configuration
+            services.AddHangfire((isp, configuration) => configuration
                 .SetDataCompatibilityLevel(CompatibilityLevel.Version_110)
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseRecommendedSerializerSettings()
                 .UsePostgreSqlStorage(Configuration.GetConnectionString("HangfireConnection"), new PostgreSqlStorageOptions()
                 {
-                    InvisibilityTimeout = TimeSpan.FromMinutes(5)
-
+                    InvisibilityTimeout = TimeSpan.FromDays(1)
                 }));
+
 
             services.AddHangfireServer();
 
@@ -85,6 +85,11 @@ namespace CronConfigure
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //app.Use((context, next) =>
+            //{
+            //    context.Request.PathBase ="/cron-config";
+            //    return next();
+            //});
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -108,7 +113,7 @@ namespace CronConfigure
             {
                 c.PreSerializeFilters.Add((swaggerDoc, httpReq) => swaggerDoc.Servers = new List<OpenApiServer>
                       {
-                        new OpenApiServer { Url = $"/CronConfig"},
+                        new OpenApiServer { Url = $"/cron-config"},
                         new OpenApiServer { Url = $"/" }
                       });
             });

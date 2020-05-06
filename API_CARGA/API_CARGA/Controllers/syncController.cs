@@ -159,12 +159,12 @@ namespace UrisFactory.Controllers
         /// </summary>
         /// <param name="identifier">Identificador de la sincronización</param>
         /// <returns></returns>
-        [HttpPost("execute/{identifier}")]
+        [HttpPost("execute")]///{identifier}
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult PostSyncro(Guid identifier)
+        public IActionResult PostSyncro(PublishRepositoryModel publishModel)
         {
-            _oaiPublishRDFService.PublishRepositories(identifier);
+            _oaiPublishRDFService.PublishRepositories(publishModel.repository_identifier, publishModel.fecha_from, publishModel.set, publishModel.codigo_objeto);
             return Ok("");
         }
     }

@@ -1,4 +1,5 @@
 ﻿using CronConfigure.Models.Entitties;
+using CronConfigure.ViewModels;
 using Hangfire;
 using Newtonsoft.Json;
 using Serilog;
@@ -21,12 +22,19 @@ namespace CronConfigure.Models.Services
         }
 
         [AutomaticRetry(Attempts = 0, DelaysInSeconds = new int[] { 3600 })]
-        public string PublishRepositories(Guid idRepositoryGuid)
+        public string PublishRepositories(Guid idRepositoryGuid, DateTime? fecha = null, string pSet = null, string codigoObjeto = null)
         {
             string idRepository = idRepositoryGuid.ToString();
             try
             {
-                string result = _serviceApi.CallPostApi($"sync/execute/{idRepository}", idRepository);
+                object objeto = new
+                {
+                    repository_identifier = idRepositoryGuid,
+                    codigo_objeto = codigoObjeto,
+                    fecha_from = fecha,
+                    set = pSet
+                };
+                string result = _serviceApi.CallPostApi($"sync/execute", objeto);///{idRepository}
                 result = JsonConvert.DeserializeObject<string>(result);
                 return result;
             }
@@ -40,18 +48,18 @@ namespace CronConfigure.Models.Services
             } 
         }
 
-        public static void ProgramRecurringJob(Guid idRepository, string nombreCron, string cronExpression)
+        public static void ProgramRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime? fecha = null, string set = null, string codigoObjeto = null)
         {
             ConfigUrlService serviceUrl = new ConfigUrlService();
             CallApiService serviceApi = new CallApiService(serviceUrl);
             ProgramingMethodsService service = new ProgramingMethodsService(serviceApi, null);
 
-            RecurringJob.AddOrUpdate(nombreCron, () => service.PublishRepositories(idRepository), cronExpression);
+            RecurringJob.AddOrUpdate(nombreCron, () => service.PublishRepositories(idRepository, fecha, set, codigoObjeto), cronExpression);
         }
 
-        public string ProgramPublishRepositoryJob(Guid idRepository, DateTime fechaInicio)
+        public string ProgramPublishRepositoryJob(Guid idRepository, DateTime fechaInicio, DateTime? fecha = null, string set = null, string codigoObjeto = null)
         {
-            string id = BackgroundJob.Schedule(() => PublishRepositories(idRepository), fechaInicio);
+            string id = BackgroundJob.Schedule(() => PublishRepositories(idRepository, fecha, set, codigoObjeto), fechaInicio);
             JobRepository jobRepository = new JobRepository()
             {
                 IdJob = id,
@@ -61,9 +69,9 @@ namespace CronConfigure.Models.Services
             _context.SaveChanges();
             return id;
         }
-        public void ProgramPublishRepositoryRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime fechaInicio)
+        public void ProgramPublishRepositoryRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime fechaInicio, DateTime? fecha = null, string set = null, string codigoObjeto = null)
         {
-            string id = BackgroundJob.Schedule(() => ProgramRecurringJob(idRepository,nombreCron,cronExpression), fechaInicio);
+            string id = BackgroundJob.Schedule(() => ProgramRecurringJob(idRepository,nombreCron,cronExpression,fecha,set,codigoObjeto), fechaInicio);
             JobRepository jobRepository = new JobRepository()
             {
                 IdJob = $"{id}_{nombreCron}",

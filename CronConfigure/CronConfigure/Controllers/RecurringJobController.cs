@@ -32,11 +32,43 @@ namespace CronConfigure.Controllers
         /// <param name="nombre_job">nombre de la tarea</param>
         /// <param name="fecha_inicio">momento a partir del cúal empieza la sincronización</param>
         /// <param name="cron_expression">expresión recurrente del cron (https://crontab.guru/)</param>
+        /// <param name="fecha">fecha a partir de la cual se debe actualizar</param>
+        /// <param name="set">tipo del objeto</param>
+        /// <param name="codigo_objeto">codigo del objeto</param>
         /// <returns></returns> 
         [HttpPost]
-        public IActionResult AddExecution(string id_repository, string nombre_job, string fecha_inicio, string cron_expression)
+        public IActionResult AddExecution(string id_repository, string nombre_job, string fecha_inicio, string cron_expression, string fecha = null, string set = null, string codigo_objeto = null)
         {
             Guid idRep = Guid.Empty;
+            DateTime fechaInicio = DateTime.Now;
+            DateTime? fechaDateTime = null;
+            if (codigo_objeto != null && set == null)
+            {
+                return BadRequest("falta el tipo de objeto");
+            }
+            if (fecha_inicio != null)
+            {
+                try
+                {
+                    fechaInicio = DateTime.Parse(fecha_inicio);
+                }
+                catch (Exception)
+                {
+                    return BadRequest("fecha de inicio inválida");
+                }
+            }
+
+            if (fecha != null)
+            {
+                try
+                {
+                    fechaDateTime = DateTime.Parse(fecha);
+                }
+                catch (Exception)
+                {
+                    return BadRequest("fecha de sincronzación inválida");
+                }
+            }
             try
             {
                 idRep = new Guid(id_repository);
@@ -45,7 +77,6 @@ namespace CronConfigure.Controllers
             {
                 return BadRequest("identificador invalido");
             }
-            var fechaInicio = DateTime.Parse(fecha_inicio);
             bool validCronExpr = true;
             if (_cronApiService.ExistRecurringJob(nombre_job))
             {
@@ -57,7 +88,7 @@ namespace CronConfigure.Controllers
                 if (correct != null)
                 {
                     //BackgroundJob.Schedule(() => ExampleService.PonerEnCola(nombre_job, nombre_fichero, cron_expression, execute_inmediatly), fechaInicio);
-                    _programingMethodsService.ProgramPublishRepositoryRecurringJob(idRep, nombre_job, cron_expression, fechaInicio);
+                    _programingMethodsService.ProgramPublishRepositoryRecurringJob(idRep, nombre_job, cron_expression, fechaInicio,fechaDateTime,set, codigo_objeto);
                 }
                 else
                 {

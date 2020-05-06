@@ -28,11 +28,42 @@ namespace CronConfigure.Controllers
         /// </summary>
         /// <param name="id_repository">identificador del repositorio</param>
         /// <param name="fecha_inicio">fecha de ejecución</param>
+        /// <param name="fecha">fecha a partir de la cual se debe actualizar</param>
+        /// <param name="set">tipo del objeto</param>
+        /// <param name="codigo_objeto">codigo del objeto</param>
         /// <returns>identifdicador de la tarea</returns> 
         [HttpPost]
-        public IActionResult AddExecution(string id_repository, string fecha_inicio)
+        public IActionResult AddExecution(string id_repository, string fecha_inicio, string fecha = null, string set = null, string codigo_objeto = null)
         {
-            var fechaInicio = DateTime.Parse(fecha_inicio);
+            DateTime fechaInicio = DateTime.Now;
+            DateTime? fechaDateTime = null;
+            if (codigo_objeto != null && set == null)
+            {
+                return BadRequest("falta el tipo de objeto");
+            }
+            if(fecha_inicio != null)
+            {
+                try
+                {
+                    fechaInicio = DateTime.Parse(fecha_inicio);
+                }
+                catch (Exception)
+                {
+                    return BadRequest("fecha de inicio inválida");
+                }
+            }
+
+            if (fecha != null)
+            {
+                try
+                {
+                    fechaDateTime = DateTime.Parse(fecha);
+                }
+                catch (Exception)
+                {
+                    return BadRequest("fecha de sincronzación inválida");
+                }
+            }
             Guid idRep = Guid.Empty;
             try
             {
@@ -42,7 +73,7 @@ namespace CronConfigure.Controllers
             {
                 return BadRequest("identificador invalido");
             }
-            string id = _programingMethodsService.ProgramPublishRepositoryJob(idRep, fechaInicio);
+            string id = _programingMethodsService.ProgramPublishRepositoryJob(idRep, fechaInicio, fechaDateTime, set, codigo_objeto);
 
             return Ok(id);
         }
