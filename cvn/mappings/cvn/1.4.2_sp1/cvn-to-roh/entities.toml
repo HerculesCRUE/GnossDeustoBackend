@@ -117,28 +117,6 @@ id.format = "{identifier}"
                 bean = "SecondFamilyName"
                 name = "name"
 
-
-    # TODO cuando se sepa cómo modelar segundo apellido, moverlo ahí y quitar esto
-    [[entities.properties]] # Nombre
-    ontology = "foaf"
-    name = "name"
-    format = "{first_name} {first_family_name} {second_family_name}"
-
-        [[entities.properties.sources]] # Nombre
-        code = "000.010.000.020"
-        name = "first_name"
-        bean = "Value"
-
-        [[entities.properties.sources]] # Apellido 1
-        code = "000.010.000.010"
-        name = "first_family_name"
-        bean = "FirstFamilyName"
-
-        [[entities.properties.sources]] # Apellido 2
-        code = "000.010.000.010"
-        name = "second_family_name"
-        bean = "SecondFamilyName"
-
     # TODO Sustituir por subclase VCARD cuando sepamos lo de la extensión
     [[entities.properties]] # Teléfono
     ontology = "foaf"

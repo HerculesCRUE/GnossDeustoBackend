@@ -3,6 +3,10 @@ shortname = "roh"
 uri_base = "http://purl.org/roh#"
 
 [[ontologies]]
+shortname = "rohes"
+uri_base = "http://purl.org/rohes#"
+
+[[ontologies]]
 shortname = "bibo"
 uri_base = "http://purl.org/roh/mirror/bibo/"
 
