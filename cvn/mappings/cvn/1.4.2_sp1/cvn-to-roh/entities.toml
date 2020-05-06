@@ -598,6 +598,42 @@ id.resource = "Project"
                 name = "end"
                 bean = "Value"
 
+    [[entities.subentities]]
+    displayname = "vivo:PrincipalInvestigatorRole"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relates"
+        inverse = "vivo:relatedBy"
+
+        [[entities.subentities.subentities]]
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+            [[entities.subentities.subentities.relationships]]
+            direct = "vivo:relatedBy"
+            inverse = "vivo:relates"
+
+            [[entities.subentities.subentities.properties]]
+                displayname = "foaf:name"
+                format = "{name} {familyName} {secondFamilyName}"
+
+                    [[entities.subentities.subentities.properties.sources]]
+                    code = "050.020.010.140"
+                    name = "name"
+                    bean = "GivenName"
+
+                    [[entities.subentities.subentities.properties.sources]]
+                    code = "050.020.010.140"
+                    name = "familyName"
+                    bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}FirstFamilyName"
+
+                    [[entities.subentities.subentities.properties.sources]]
+                    code = "050.020.010.140"
+                    name = "secondFamilyName"
+                    bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
+
+
 
 [[entities]] # Publicaciones, documentos científicos y técnicos
 code = "060.010.010.000"
