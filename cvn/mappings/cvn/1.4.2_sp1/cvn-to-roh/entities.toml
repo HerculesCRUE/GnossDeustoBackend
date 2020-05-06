@@ -297,24 +297,24 @@ displayname = "roh:PhDSupervisingRelationship"
         direct = "vivo:relatedBy"
         inverse = "oboro:RO_0000052"
 
-            [[entities.subentities.subentities.properties]]
-            displayname = "foaf:name"
-            format = "{name} {familyName} {secondFamilyName}"
+        [[entities.subentities.subentities.properties]]
+        displayname = "foaf:name"
+        format = "{name} {familyName} {secondFamilyName}"
 
-                [[entities.subentities.subentities.properties.sources]]
-                code = "030.040.000.180"
-                name = "name"
-                bean = "GivenName"
+            [[entities.subentities.subentities.properties.sources]]
+            code = "030.040.000.180"
+            name = "name"
+            bean = "GivenName"
 
-                [[entities.subentities.subentities.properties.sources]]
-                code = "030.040.000.180"
-                name = "familyName"
-                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}FirstFamilyName"
+            [[entities.subentities.subentities.properties.sources]]
+            code = "030.040.000.180"
+            name = "familyName"
+            bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}FirstFamilyName"
 
-                [[entities.subentities.subentities.properties.sources]]
-                code = "030.040.000.180"
-                name = "secondFamilyName"
-                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
+            [[entities.subentities.subentities.properties.sources]]
+            code = "030.040.000.180"
+            name = "secondFamilyName"
+            bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
 
     [[entities.subentities]]
     displayname = "roh:SuperviseeRole"
