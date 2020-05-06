@@ -68,6 +68,13 @@ def has_all_formatting_fields(format_string, fields):
     return True
 
 
+class Default(dict):
+    # solución rápida para cuando no hay un valor de un format
+    #  https://stackoverflow.com/a/19800610
+    def __missing__(self, key):
+        return ''
+
+
 class Property(Printable):
     def __init__(self, ontology, name, parent, format_string=None, hidden=False):
         self.ontology = ontology
@@ -112,9 +119,11 @@ class Property(Printable):
             return result
         else:
             try:
-                formatted = self.format.format_map(self.get_source_dict())
-                self.formatted_value = formatted
-                return formatted
+                formatted = self.format.format_map(Default(self.get_source_dict())).strip()
+                if formatted != "":
+                    self.formatted_value = formatted
+                    return formatted
+                return None
             except KeyError:
                 pass  # TODO error handling
             return None
