@@ -633,7 +633,178 @@ id.resource = "Project"
                     name = "secondFamilyName"
                     bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
 
+# Contratos, convenios o proyectos de I+D+i no competitivos con Administraciones o entidades públicas o privadas
+[[entities]]
+code = "050.020.020.000"
+ontology = "vivo"
+classname = "Project"
+id.resource = "Project"
 
+    [[entities.properties]]
+    ontology = "roh"
+    name = "title"
+    format = "{title}"
+
+        [[entities.properties.sources]]
+        code = "050.020.020.010"
+        name = "title"
+        bean = "Value"
+
+    [[entities.properties]]
+    ontology = "vivo"
+    name = "description"
+    format = "{description}"
+
+        [[entities.properties.sources]]
+        code = "050.020.020.300"
+        name = "description"
+        bean = "Value"
+
+    [[entities.subentities]]
+    ontology = "roh"
+    classname = "Funding"
+
+        [[entities.subentities.relationships]]
+        ontology = "roh"
+        name = "supports"
+        inverse_ontology = "roh"
+        inverse_name = "isSupportedBy"
+
+        [[entities.subentities.properties]]
+        ontology = "vivo"
+        name = "identifier"
+        format = "{identifier}"
+
+            [[entities.subentities.properties.sources]]
+            code = "050.020.020.110"
+            name = "identifier"
+            bean = "Value"
+
+        [[entities.subentities.subentities]]
+        ontology = "roh"
+        classname = "FundingAmount"
+
+            [[entities.subentities.subentities.relationships]]
+            ontology = "oboro"
+            name = "BFO_0000050"
+            inverse_ontology = "oboro"
+            inverse_name = "BFO_0000051"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "roh"
+            name = "monetaryAmount"
+            format = "{monetary_amount}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "050.020.020.200"
+                name = "monetary_amount"
+                bean = "Value"
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "MemberRole"
+
+        [[entities.subentities.relationships]]
+        ontology = "vivo"
+        name = "relates"
+        inverse_ontology = "vivo"
+        inverse_name = "relates"
+
+        [[entities.subentities.relationships]]
+        ontology = "roh"
+        name = "roleOf"
+        inverse_ontology = "roh"
+        inverse_name = "hasRole"
+        link_to_cvn_person = true
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeInterval"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "dateTimeInterval"
+
+            [[entities.subentities.subentities.subentities]]
+            ontology = "vivo"
+            classname = "DateTimeValue"
+
+                [[entities.subentities.subentities.subentities.relationships]]
+                inverse_ontology = "vivo"
+                inverse_name = "start"
+
+                [[entities.subentities.subentities.subentities.properties]]
+                ontology = "vivo"
+                name = "dateTime"
+                format = "{start}"
+
+                    [[entities.subentities.subentities.subentities.properties.sources]]
+                    code = "050.020.020.180"
+                    name = "start"
+                    bean = "Value"
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "DateTimeInterval"
+
+        [[entities.subentities.relationships]]
+        inverse_ontology = "vivo"
+        inverse_name = "dateTimeInterval"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "start"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{start}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "050.020.020.180"
+                name = "start"
+                bean = "Value"
+
+        # TODO fecha finalización
+
+    [[entities.subentities]]
+    displayname = "vivo:PrincipalInvestigatorRole"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relates"
+        inverse = "vivo:relatedBy"
+
+        [[entities.subentities.subentities]]
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+            [[entities.subentities.subentities.relationships]]
+            direct = "vivo:relatedBy"
+            inverse = "vivo:relates"
+
+            [[entities.subentities.subentities.properties]]
+                displayname = "foaf:name"
+                format = "{name} {familyName} {secondFamilyName}"
+
+                    [[entities.subentities.subentities.properties.sources]]
+                    code = "050.020.020.250"
+                    name = "name"
+                    bean = "GivenName"
+
+                    [[entities.subentities.subentities.properties.sources]]
+                    code = "050.020.020.250"
+                    name = "familyName"
+                    bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}FirstFamilyName"
+
+                    [[entities.subentities.subentities.properties.sources]]
+                    code = "050.020.020.250"
+                    name = "secondFamilyName"
+                    bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
 
 [[entities]] # Publicaciones, documentos científicos y técnicos
 code = "060.010.010.000"
