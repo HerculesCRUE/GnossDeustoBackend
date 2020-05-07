@@ -36,7 +36,7 @@ def init_property_from_serialized_toml(config, entity_parent):
 
     data_type = None
     if 'datatype' in config:
-        data_type = config['data_type']
+        data_type = config['datatype']
 
     generated_property = Property(ontology=ontology, name=name, format_string=format_string,
                                   hidden=hidden, parent=entity_parent, data_type=data_type)

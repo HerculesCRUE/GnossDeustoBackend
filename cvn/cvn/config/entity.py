@@ -274,13 +274,23 @@ class Entity:
         for property_item in self.properties:
             if property_item.should_generate():
 
+                # Valores por defecto: el tipo de datos definido como default y la propiedad como string simplón
                 literal_type = ontology_config.get_ontology(default_type.ontology).term(default_type.name)
-                # Generar valor teniendo en cuenta el tipo
-                #  conversion = ontology_config.get_data
+                property_value = str(property_item.formatted_value)
+
+                # ¿Tiene la propiedad un tipo de dato específico? Si no, nos quedamos con el default
+                if property_item.data_type is not None:
+                    # El tipo de dato definido para la propiedad, ¿existe? - si no, el default
+                    data_type = ontology_config.get_data_type(property_item.data_type)
+                    if data_type is not None:
+                        # Intentamos convertir el string en su tipo de dato correspondiente
+                        property_value = (data_type.get_python_type())(property_value)
+                        literal_type = ontology_config.get_ontology(data_type.ontology).term(data_type.name)
 
                 triple = self.get_uri(), \
                          ontology_config.get_ontology(property_item.ontology).term(property_item.name), \
-                         Literal(str(property_item.formatted_value), datatype=literal_type)
+                         Literal(property_value, datatype=literal_type)
+
                 triples.append(triple)
         return triples
 

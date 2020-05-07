@@ -9,11 +9,11 @@ class DataType:
         self.python_type = python_type
         self.default = default
 
-        def get_python_type():
-            return locate(self.python_type)
+    def get_python_type(self):
+        return locate(self.python_type)
 
-        def get_id():
-            return self.ontology + ":" + self.name
+    def get_identifier(self):
+        return self.ontology + ":" + self.name
 
 
 class OntologyConfig:
@@ -35,7 +35,7 @@ class OntologyConfig:
 
     def get_data_type(self, identifier):
         for data_type in self.data_types:
-            if data_type.get_id() == identifier:
+            if data_type.get_identifier() == identifier:
                 return data_type
         return None
 

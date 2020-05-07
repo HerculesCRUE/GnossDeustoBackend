@@ -105,9 +105,9 @@ def v1_convert():
         default = False
         if 'default' in data_type_config:
             default = data_type_config['default']
-        data_type_instance = DataType(ontology=data_type_config['ontology'], name=data_type_config['name'],
-                                      python_type=data_type_config['python_type'], default=default)
-        ontology_config.add_data_type(data_type_instance)
+
+        ontology_config.add_data_type(DataType(ontology=data_type_config['ontology'], name=data_type_config['name'],
+                                      python_type=data_type_config['python_type'], default=default))
 
     # 2. Generar entidades
 

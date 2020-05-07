@@ -505,6 +505,7 @@ id.resource = "Project"
             ontology = "roh"
             name = "monetaryAmount"
             format = "{monetary_amount}"
+            datatype = "xsd:float"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "050.020.010.290"
@@ -694,6 +695,7 @@ id.resource = "Project"
             ontology = "roh"
             name = "monetaryAmount"
             format = "{monetary_amount}"
+            datatype = "xsd:float"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "050.020.020.200"
