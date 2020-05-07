@@ -875,6 +875,98 @@ id.format = "{vivo:doi}"
         name = "finalpage"
         bean = "FinalPage"
 
+# Trabajos presentados en congresos nacionales o internacionales
+[[entities]]
+code = "060.010.020.000"
+displayname = "vivo:Conference"
+id.resource = "Conference"
+id.format = "{foaf:name}"
+
+    [[entities.relationships]]
+    direct = "roh:participatedBy"
+    inverse = "roh:participates"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    displayname = "foaf:name"
+
+        [[entities.properties.sources]]
+        code = "060.010.020.100"
+        name = "name"
+
+    # TODO Comunidad autónoma, país
+
+    [[entities.properties]]
+    displayname = "vcard:locality"
+
+        [[entities.properties.sources]]
+        code = "060.010.020.180"
+        name = "city"
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "DateTimeInterval"
+
+        [[entities.subentities.relationships]]
+        inverse_ontology = "vivo"
+        inverse_name = "dateTimeInterval"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "start"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{start}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.020.190"
+                name = "start"
+                bean = "Value"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "end"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{end}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.020.380"
+                name = "end"
+                bean = "Value"
+
+        [[entities.subentities]]
+        displayname = "vivo:ConferencePaper"
+        id.resource = "ConferencePaper"
+
+            [[entities.subentities.relationships]]
+            direct = "bibo:presentedAt"
+            inverse = "bibo:presents"
+
+            # TODO lista de autores
+
+            [[entities.subentities.properties]]
+            displayname = "roh:title"
+
+                [[entities.subentities.properties.sources]]
+                code = "060.010.020.030"
+                name = "title"
+
+# TODO Trabajos presentados en jornadas, seminarios, talleres de trabajo y/o cursos nacionales o internacionales
+# TODO Gestión I+D+i
+
 # Posición actual
 [[entities]]
 code = "010.010.000.000"
