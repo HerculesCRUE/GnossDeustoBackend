@@ -37,7 +37,7 @@ namespace CronConfigure.Controllers
         /// <param name="codigo_objeto">codigo del objeto</param>
         /// <returns></returns> 
         [HttpPost]
-        public IActionResult AddExecution(string id_repository, string nombre_job, string fecha_inicio, string cron_expression, string fecha = null, string set = null)
+        public IActionResult AddExecution(CreateRecurringJobModel recurringJobModel)
         {
             Guid idRep = Guid.Empty;
             DateTime fechaInicio = DateTime.Now;
@@ -46,11 +46,11 @@ namespace CronConfigure.Controllers
             //{
             //    return BadRequest("falta el tipo de objeto");
             //}
-            if (fecha_inicio != null)
+            if (recurringJobModel.fecha_inicio != null)
             {
                 try
                 {
-                    fechaInicio = DateTime.Parse(fecha_inicio);
+                    fechaInicio = DateTime.Parse(recurringJobModel.fecha_inicio);
                 }
                 catch (Exception)
                 {
@@ -58,11 +58,11 @@ namespace CronConfigure.Controllers
                 }
             }
 
-            if (fecha != null)
+            if (recurringJobModel.fecha != null)
             {
                 try
                 {
-                    fechaDateTime = DateTime.Parse(fecha);
+                    fechaDateTime = DateTime.Parse(recurringJobModel.fecha);
                 }
                 catch (Exception)
                 {
@@ -71,24 +71,24 @@ namespace CronConfigure.Controllers
             }
             try
             {
-                idRep = new Guid(id_repository);
+                idRep = new Guid(recurringJobModel.id_repository);
             }
             catch (Exception)
             {
                 return BadRequest("identificador invalido");
             }
             bool validCronExpr = true;
-            if (_cronApiService.ExistRecurringJob(nombre_job))
+            if (_cronApiService.ExistRecurringJob(recurringJobModel.nombre_job))
             {
                 return BadRequest("Ya existe una tarea con ese nombre");
             }
             else
             {
-                var correct = CrontabSchedule.TryParse(cron_expression);
+                var correct = CrontabSchedule.TryParse(recurringJobModel.cron_expression);
                 if (correct != null)
                 {
                     //BackgroundJob.Schedule(() => ExampleService.PonerEnCola(nombre_job, nombre_fichero, cron_expression, execute_inmediatly), fechaInicio);
-                    _programingMethodsService.ProgramPublishRepositoryRecurringJob(idRep, nombre_job, cron_expression, fechaInicio,fechaDateTime,set, codigo_objeto);
+                    _programingMethodsService.ProgramPublishRepositoryRecurringJob(idRep, recurringJobModel.nombre_job, recurringJobModel.cron_expression, fechaInicio,fechaDateTime, recurringJobModel.set);
                 }
                 else
                 {
@@ -113,7 +113,7 @@ namespace CronConfigure.Controllers
         [HttpDelete]
         public IActionResult DeleteRecurringJob(string nombre_job)
         {
-            RecurringJob.RemoveIfExists(nombre_job);
+            _cronApiService.DeleteRecurringJob(nombre_job);
             return Ok();
         }
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CronConfigure.Models;
 using CronConfigure.Models.Enumeracion;
 using CronConfigure.Models.Services;
+using CronConfigure.ViewModels;
 using Hangfire;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,7 @@ namespace CronConfigure.Controllers
         /// <param name="codigo_objeto">codigo del objeto</param>
         /// <returns>identifdicador de la tarea</returns> 
         [HttpPost]
-        public IActionResult AddExecution(string id_repository, string fecha_inicio, string fecha = null, string set = null)
+        public IActionResult AddExecution(CreateJobModel jobModel)
         {
             DateTime fechaInicio = DateTime.Now;
             DateTime? fechaDateTime = null;
@@ -41,11 +42,11 @@ namespace CronConfigure.Controllers
             //{
             //    return BadRequest("falta el tipo de objeto");
             //}
-            if(fecha_inicio != null)
+            if(jobModel.fecha_inicio != null)
             {
                 try
                 {
-                    fechaInicio = DateTime.Parse(fecha_inicio);
+                    fechaInicio = DateTime.Parse(jobModel.fecha_inicio);
                 }
                 catch (Exception)
                 {
@@ -53,11 +54,11 @@ namespace CronConfigure.Controllers
                 }
             }
 
-            if (fecha != null)
+            if (jobModel.fecha != null)
             {
                 try
                 {
-                    fechaDateTime = DateTime.Parse(fecha);
+                    fechaDateTime = DateTime.Parse(jobModel.fecha);
                 }
                 catch (Exception)
                 {
@@ -67,13 +68,13 @@ namespace CronConfigure.Controllers
             Guid idRep = Guid.Empty;
             try
             {
-                idRep = new Guid(id_repository);
+                idRep = new Guid(jobModel.id_repository);
             }
             catch (Exception)
             {
                 return BadRequest("identificador invalido");
             }
-            string id = _programingMethodsService.ProgramPublishRepositoryJob(idRep, fechaInicio, fechaDateTime, set, codigo_objeto);
+            string id = _programingMethodsService.ProgramPublishRepositoryJob(idRep, fechaInicio, fechaDateTime, jobModel.set);
 
             return Ok(id);
         }

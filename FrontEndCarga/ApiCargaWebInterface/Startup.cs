@@ -22,9 +22,12 @@ namespace ApiCargaWebInterface
         {
             services.AddControllersWithViews();
             services.AddSingleton(typeof(ConfigUrlService));
+            services.AddSingleton(typeof(ConfigUrlCronService));
             services.AddScoped<ICallRepositoryConfigService, CallRepositoryConfigApiService>();
             services.AddScoped<ICallService, CallApiService>();
-            services.AddScoped<ICallShapeConfigService, CallShapeConfigApiService>(); 
+            services.AddScoped<ICallShapeConfigService, CallShapeConfigApiService>();
+            services.AddScoped(typeof(CallCronApiService));
+            services.AddScoped(typeof(CallCronService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

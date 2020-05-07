@@ -17,7 +17,5 @@ namespace ApiCargaWebInterface.ViewModels
         public DateTime FechaIinicio { get; set; }
         [Display(Name = "nexpresión de cron")]
         public string CronExpression { get; set; }
-        [Display(Name = "ejecutar inmediatamente")]
-        public bool ExecuteInmediatly { get; set; }
     }
 }

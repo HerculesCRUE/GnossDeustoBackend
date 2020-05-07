@@ -2,6 +2,9 @@
 
 @{
     ViewData["Title"] = "Edit";
+    var modelo = new ApiCargaWebInterface.ViewModels.CreateJobViewModel();
+    modelo.IdRepository = Model.RepositoryConfigID;
+    //modelo.FechaIinicio = DateTime.Now;
 }
 
 <h1>Edit</h1>
@@ -9,7 +12,7 @@
 <h4>Config repository</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group" hidden>
@@ -37,6 +40,8 @@
             </div>
         </form>
     </div>
+
+    <partial name="_CreateJob" model="@modelo"/>
 </div>
 
 <div>

@@ -1,0 +1,46 @@
+﻿@model ApiCargaWebInterface.ViewModels.CreateJobViewModel
+
+    <div class="col-md-6">
+        <h4>CreateJobViewModel</h4>
+        <hr />
+        <form asp-action="Create" asp-controller="Job">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdRepository" class="control-label"></label>
+                <input asp-for="IdRepository" class="form-control" readonly />
+                <span asp-validation-for="IdRepository" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaIinicio" class="control-label"></label>
+                <input asp-for="FechaIinicio" class="form-control" />
+                <span asp-validation-for="FechaIinicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaFrom" class="control-label"></label>
+                <input asp-for="FechaFrom" class="form-control" />
+                <span asp-validation-for="FechaFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Set" class="control-label"></label>
+                <input asp-for="Set" class="form-control" />
+                <span asp-validation-for="Set" class="text-danger"></span>
+            </div>
+            <fieldset>
+                <legend>Datos obligatorios para crear una tarea recurrente</legend>
+                <div class="form-group">
+                    <label asp-for="Nombre_job" class="control-label"></label>
+                    <input asp-for="Nombre_job" class="form-control" />
+                    <span asp-validation-for="Nombre_job" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CronExpression" class="control-label"></label>
+                    <input asp-for="CronExpression" class="form-control" placeholder="* * * * *"/>
+                    <span asp-validation-for="CronExpression" class="text-danger"></span>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+
