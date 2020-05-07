@@ -839,6 +839,13 @@ id.format = "{vivo:doi}"
         bean = "Value"
 
     [[entities.properties]]
+    displayname = "vivo:description"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.290"
+        name = "description"
+
+    [[entities.properties]]
     ontology = "vivo"
     name = "dateTime"
     format = "{publication_date}"
