@@ -1368,8 +1368,8 @@ code = "060.030.100.000"
 displayname = "roh:Award"
 
     [[entities.relationships]]
-    direct = "vivo:relates"
-    inverse = "vivo:relates"
+    direct = "roh:accreditationOf"
+    inverse = "roh:hasAccreditation"
     link_to_cvn_person = true
 
     [[entities.properties]]
