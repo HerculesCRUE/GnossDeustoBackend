@@ -17,6 +17,8 @@ namespace ApiCargaWebInterface.ViewModels
         public DateTime? FechaFrom { get; set; }
         [Display(Name = "set")]
         public string Set { get; set; }
+        [Display(Name = "Codigo del objeto")]
+        public string CodigoObjeto { get; set; }
         [Display(Name = "nombre del trabajo")]
         public string Nombre_job { get; set; }
         [Display(Name = "nexpresión de cron: * * * * * (minuto hora día del mes mes día de la semana)")]

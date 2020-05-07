@@ -32,6 +32,11 @@
                 <input asp-for="Set" class="form-control" />
                 <span asp-validation-for="Set" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="CodigoObjeto" class="control-label"></label>
+                <input asp-for="CodigoObjeto" class="form-control" />
+                <span asp-validation-for="CodigoObjeto" class="text-danger"></span>
+            </div>
             <fieldset>
                 <legend>Datos obligatorios para crear una tarea recurrente</legend>
                 <div class="form-group">
@@ -41,7 +46,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="CronExpression" class="control-label"></label>
-                    <input asp-for="CronExpression" class="form-control"  placeholder="* * * * *" />
+                    <input asp-for="CronExpression" class="form-control" placeholder="* * * * *" />
                     <span asp-validation-for="CronExpression" class="text-danger"></span>
                 </div>
             </fieldset>

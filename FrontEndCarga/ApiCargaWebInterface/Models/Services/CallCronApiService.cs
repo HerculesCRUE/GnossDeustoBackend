@@ -24,9 +24,12 @@ namespace ApiCargaWebInterface.Models.Services
                 id_repository = newJob.IdRepository.ToString(),
                 fecha_inicio = newJob.FechaIinicio,
                 fecha = newJob.FechaFrom,
-                set = newJob.Set
+                set = newJob.Set,
+                codigo_objeto = newJob.CodigoObjeto
             };
-            string result = _serviceApi.CallPostApi(_urlJobApi, newCreateJob);
+            string stringData = JsonConvert.SerializeObject(newCreateJob);
+            string uriParams = stringData.Replace(':', '=').Replace(',', '&').Replace("\"", "").Replace("{", "").Replace("}", "").Replace("null","");
+            string result = _serviceApi.CallPostApi($"{_urlJobApi}?{uriParams}", null);
             guidAdded = JsonConvert.DeserializeObject<string>(result);
             return guidAdded;
         }
@@ -40,10 +43,13 @@ namespace ApiCargaWebInterface.Models.Services
                 fecha_inicio = newJob.FechaIinicio,
                 fecha = newJob.FechaFrom,
                 set = newJob.Set,
+                codigo_objeto = newJob.CodigoObjeto,
                 nombre_job = newJob.Nombre_job,
                 cron_expression = newJob.CronExpression
             };
-            string result = _serviceApi.CallPostApi(_urlRecurringJobApi, newCreateRecuringJob);
+            string stringData = JsonConvert.SerializeObject(newCreateRecuringJob);
+            string uriParams = stringData.Replace(':', '=').Replace(',', '&').Replace("\"", "").Replace("{", "").Replace("}", "").Replace("null", "");
+            string result = _serviceApi.CallPostApi($"{ _urlRecurringJobApi}?{uriParams}", null);
             guidAdded = JsonConvert.DeserializeObject<string>(result);
             return guidAdded;
         }

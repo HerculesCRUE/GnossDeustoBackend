@@ -30,27 +30,27 @@ namespace CronConfigure.Controllers
         /// </summary>
         /// <param name="id_repository">identificador del repositorio a sincronizar </param>
         /// <param name="nombre_job">nombre de la tarea</param>
-        /// <param name="fecha_inicio">momento a partir del cúal empieza la sincronización</param>
-        /// <param name="cron_expression">expresión recurrente del cron (https://crontab.guru/)</param>
-        /// <param name="fecha">fecha a partir de la cual se debe actualizar</param>
+        /// <param name="fecha_inicio">momento a partir del cúal empieza la sincronización,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
+        /// <param name="cron_expression">el parametro cron_expresion sigue un patrón de 5 atributos, separados por espacios entre sí: * * * * *. El primero corresponde al minuto, el segundo a la hora, a continuación el día del mes, seguido por el mes y posteriormente el día del mes. Un ejemplo sería: */15 * * * * que correspondería a cada 15 minutos, para probar las expresisiones se puede acudir a https://crontab.guru/</param>
+        /// <param name="fecha">fecha a partir de la cual se debe actualizar,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
         /// <param name="set">tipo del objeto</param>
         /// <param name="codigo_objeto">codigo del objeto</param>
         /// <returns></returns> 
         [HttpPost]
-        public IActionResult AddExecution(CreateRecurringJobModel recurringJobModel)
+        public IActionResult AddExecution(string id_repository, string nombre_job, string fecha_inicio, string cron_expression, string fecha = null, string set = null, string codigo_objeto = null)
         {
             Guid idRep = Guid.Empty;
             DateTime fechaInicio = DateTime.Now;
             DateTime? fechaDateTime = null;
-            //if (codigo_objeto != null && set == null)
-            //{
-            //    return BadRequest("falta el tipo de objeto");
-            //}
-            if (recurringJobModel.fecha_inicio != null)
+            if (codigo_objeto != null && set == null)
+            {
+                return BadRequest("falta el tipo de objeto");
+            }
+            if (fecha_inicio != null)
             {
                 try
                 {
-                    fechaInicio = DateTime.Parse(recurringJobModel.fecha_inicio);
+                    fechaInicio = DateTime.Parse(fecha_inicio);
                 }
                 catch (Exception)
                 {
@@ -58,11 +58,11 @@ namespace CronConfigure.Controllers
                 }
             }
 
-            if (recurringJobModel.fecha != null)
+            if (fecha != null)
             {
                 try
                 {
-                    fechaDateTime = DateTime.Parse(recurringJobModel.fecha);
+                    fechaDateTime = DateTime.Parse(fecha);
                 }
                 catch (Exception)
                 {
@@ -71,24 +71,24 @@ namespace CronConfigure.Controllers
             }
             try
             {
-                idRep = new Guid(recurringJobModel.id_repository);
+                idRep = new Guid(id_repository);
             }
             catch (Exception)
             {
                 return BadRequest("identificador invalido");
             }
             bool validCronExpr = true;
-            if (_cronApiService.ExistRecurringJob(recurringJobModel.nombre_job))
+            if (_cronApiService.ExistRecurringJob(nombre_job))
             {
                 return BadRequest("Ya existe una tarea con ese nombre");
             }
             else
             {
-                var correct = CrontabSchedule.TryParse(recurringJobModel.cron_expression);
+                var correct = CrontabSchedule.TryParse(cron_expression);
                 if (correct != null)
                 {
                     //BackgroundJob.Schedule(() => ExampleService.PonerEnCola(nombre_job, nombre_fichero, cron_expression, execute_inmediatly), fechaInicio);
-                    _programingMethodsService.ProgramPublishRepositoryRecurringJob(idRep, recurringJobModel.nombre_job, recurringJobModel.cron_expression, fechaInicio,fechaDateTime, recurringJobModel.set);
+                    _programingMethodsService.ProgramPublishRepositoryRecurringJob(idRep, nombre_job, cron_expression, fechaInicio,fechaDateTime,set,codigo_objeto);
                 }
                 else
                 {

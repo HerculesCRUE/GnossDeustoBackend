@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using CronConfigure.Models;
 using CronConfigure.Models.Enumeracion;
 using CronConfigure.Models.Services;
-using CronConfigure.ViewModels;
 using Hangfire;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,25 +27,25 @@ namespace CronConfigure.Controllers
         /// Programa una sincronización de repositorios para una fecha concreta
         /// </summary>
         /// <param name="id_repository">identificador del repositorio</param>
-        /// <param name="fecha_inicio">fecha de ejecución</param>
-        /// <param name="fecha">fecha a partir de la cual se debe actualizar</param>
+        /// <param name="fecha_inicio">fecha de ejecución,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
+        /// <param name="fecha">fecha a partir de la cual se debe actualizar,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
         /// <param name="set">tipo del objeto</param>
         /// <param name="codigo_objeto">codigo del objeto</param>
         /// <returns>identifdicador de la tarea</returns> 
         [HttpPost]
-        public IActionResult AddExecution(CreateJobModel jobModel)
+        public IActionResult AddExecution(string id_repository, string fecha_inicio, string fecha = null, string set = null, string codigo_objeto = null)
         {
             DateTime fechaInicio = DateTime.Now;
             DateTime? fechaDateTime = null;
-            //if (codigo_objeto != null && set == null)
-            //{
-            //    return BadRequest("falta el tipo de objeto");
-            //}
-            if(jobModel.fecha_inicio != null)
+            if (codigo_objeto != null && set == null)
+            {
+                return BadRequest("falta el tipo de objeto");
+            }
+            if(fecha_inicio != null)
             {
                 try
                 {
-                    fechaInicio = DateTime.Parse(jobModel.fecha_inicio);
+                    fechaInicio = DateTime.Parse(fecha_inicio);
                 }
                 catch (Exception)
                 {
@@ -54,11 +53,11 @@ namespace CronConfigure.Controllers
                 }
             }
 
-            if (jobModel.fecha != null)
+            if (fecha != null)
             {
                 try
                 {
-                    fechaDateTime = DateTime.Parse(jobModel.fecha);
+                    fechaDateTime = DateTime.Parse(fecha);
                 }
                 catch (Exception)
                 {
@@ -68,13 +67,13 @@ namespace CronConfigure.Controllers
             Guid idRep = Guid.Empty;
             try
             {
-                idRep = new Guid(jobModel.id_repository);
+                idRep = new Guid(id_repository);
             }
             catch (Exception)
             {
                 return BadRequest("identificador invalido");
             }
-            string id = _programingMethodsService.ProgramPublishRepositoryJob(idRep, fechaInicio, fechaDateTime, jobModel.set);
+            string id = _programingMethodsService.ProgramPublishRepositoryJob(idRep, fechaInicio, fechaDateTime, set, codigo_objeto);
 
             return Ok(id);
         }
