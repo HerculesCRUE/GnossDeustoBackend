@@ -376,10 +376,9 @@ displayname = "roh:PhDSupervisingRelationship"
     displayname = "vivo:PhDThesis"
     id.resource = "PhDThesis"
 
-        # TODO relación correcta PhDThesis - PhDSupervisionRelationship
         [[entities.subentities.relationships]]
-        direct = "vivo:relates"
-        inverse = "vivo:relates"
+        direct = "vivo:producedBy"
+        inverse = "vivo:produces"
 
         [[entities.subentities.properties]]
         displayname = "roh:title"
