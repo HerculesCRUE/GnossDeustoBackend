@@ -8,3 +8,8 @@ default = true
 ontology = "xsd"
 name = "float"
 python_type = "float"
+
+[[datatypes]]
+ontology = "xsd"
+name = "decimal"
+python_type = "decimal.Decimal"
