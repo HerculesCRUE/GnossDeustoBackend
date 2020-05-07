@@ -8,7 +8,7 @@ uri_base = "http://purl.org/rohes#"
 
 [[ontologies]]
 shortname = "bibo"
-uri_base = "http://purl.org/roh/mirror/bibo/"
+uri_base = "http://purl.org/roh/mirror/bibo#"
 
 [[ontologies]]
 shortname = "vivo"
