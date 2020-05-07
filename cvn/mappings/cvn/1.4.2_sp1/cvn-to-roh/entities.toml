@@ -388,7 +388,7 @@ displayname = "roh:PhDSupervisingRelationship"
             name = "title"
 
         [[entities.subentities.subentities]]
-        displayname = "roh:PhDThesisMetric"
+        displayname = "roh:ThesisMetric"
 
             [[entities.subentities.subentities.relationships]]
             direct = "roh:metricOf"
@@ -855,7 +855,7 @@ id.format = "{vivo:doi}"
         bean = "Value"
 
     [[entities.properties]]
-    ontology = "bibo"
+    ontology = "vivo"
     name = "start"
     format = "{initialpage}"
 
@@ -865,7 +865,7 @@ id.format = "{vivo:doi}"
         bean = "InitialPage"
 
     [[entities.properties]]
-    ontology = "bibo"
+    ontology = "vivo"
     name = "end"
     format = "{finalpage}"
 
@@ -1247,7 +1247,7 @@ id.resource = "PhDThesis"
 
     [[entities.subentities]]
     ontology = "roh"
-    classname = "PhDThesisMetric"
+    classname = "ThesisMetric"
 
         [[entities.subentities.relationships]]
         ontology = "roh"
@@ -1292,7 +1292,7 @@ id.resource = "PhDThesis"
 
         [[entities.subentities.properties]]
         ontology = "vivo"
-        name = "dateTime"
+        name = "dateIssued"
         format = "{date}"
 
             [[entities.subentities.properties.sources]]
@@ -1352,6 +1352,14 @@ displayname = "roh:LanguageCertificate"
 
         [[entities.properties.sources]]
         code = "020.060.000.160"
+        name = "skill"
+        bean = "Value"
+
+    [[entities.properties]]
+    displayname = "roh:listeningSkill"
+
+        [[entities.properties.sources]]
+        code = "020.060.000.120"
         name = "skill"
         bean = "Value"
 
