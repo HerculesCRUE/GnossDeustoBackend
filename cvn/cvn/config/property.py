@@ -18,7 +18,7 @@ def init_property_from_serialized_toml(config, entity_parent):
             raise ValueError('displayname has invalid format')
     else:
         if 'ontology' not in config:
-            raise KeyError('ontology not specified for Property')
+            raise KeyError('ontology not specified for Property: ' + str(config))
             # TODO comprobar que está definida
         ontology = config['ontology']
 
@@ -34,8 +34,12 @@ def init_property_from_serialized_toml(config, entity_parent):
     if 'hidden' in config:
         hidden = config['hidden']
 
+    data_type = None
+    if 'datatype' in config:
+        data_type = config['data_type']
+
     generated_property = Property(ontology=ontology, name=name, format_string=format_string,
-                                  hidden=hidden, parent=entity_parent)
+                                  hidden=hidden, parent=entity_parent, data_type=data_type)
 
     if 'sources' not in config:
         raise KeyError('no sources defined for Property')
@@ -76,7 +80,7 @@ class Default(dict):
 
 
 class Property(Printable):
-    def __init__(self, ontology, name, parent, format_string=None, hidden=False):
+    def __init__(self, ontology, name, parent, format_string=None, hidden=False, data_type="xsd:string"):
         self.ontology = ontology
         self.name = name
         self.format = format_string
@@ -85,6 +89,7 @@ class Property(Printable):
         self.formatted_value = None
         self.hidden = hidden
         self.parent = parent
+        self.data_type = data_type
 
     def add_source(self, source):
         self.sources.append(source)

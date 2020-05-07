@@ -33,3 +33,11 @@ uri_base = "http://www.w3.org/2002/07/owl#"
 [[ontologies]]
 shortname = "vcard"
 uri_base = "http://purl.org/roh/mirror/vcard#"
+
+[[ontologies]]
+shortname = "xsd"
+uri_base = "http://www.w3.org/2001/XMLSchema#"
+
+[[ontologies]]
+shortname = "rdfs"
+uri_base = "http://www.w3.org/2000/01/rdf-schema#"

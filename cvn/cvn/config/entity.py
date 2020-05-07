@@ -270,11 +270,17 @@ class Entity:
 
     def generate_property_triples(self, ontology_config):
         triples = []
+        default_type = ontology_config.get_default_data_type()
         for property_item in self.properties:
             if property_item.should_generate():
+
+                literal_type = ontology_config.get_ontology(default_type.ontology).term(default_type.name)
+                # Generar valor teniendo en cuenta el tipo
+                #  conversion = ontology_config.get_data
+
                 triple = self.get_uri(), \
                          ontology_config.get_ontology(property_item.ontology).term(property_item.name), \
-                         Literal(str(property_item.formatted_value))
+                         Literal(str(property_item.formatted_value), datatype=literal_type)
                 triples.append(triple)
         return triples
 

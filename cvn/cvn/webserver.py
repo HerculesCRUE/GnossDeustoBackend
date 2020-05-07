@@ -14,7 +14,7 @@ from flask import Flask, request, make_response, jsonify
 import re
 import toml
 from cvn.config import entity as config_entity
-from cvn.config.ontology import OntologyConfig, Ontology
+from cvn.config.ontology import OntologyConfig, Ontology, DataType
 from cvn.utils import xmltree
 
 app = Flask(__name__)
@@ -95,6 +95,19 @@ def v1_convert():
     g.namespace_manager = namespace_manager
 
     ontology_config.graph = g
+
+    # Tipos de datos
+    with open("mappings/cvn/1.4.2_sp1/cvn-to-roh/data-types.toml") as f:
+        config_data_types = toml.loads(f.read())
+
+    # TODO mover a su clase
+    for data_type_config in config_data_types['datatypes']:
+        default = False
+        if 'default' in data_type_config:
+            default = data_type_config['default']
+        data_type_instance = DataType(ontology=data_type_config['ontology'], name=data_type_config['name'],
+                                      python_type=data_type_config['python_type'], default=default)
+        ontology_config.add_data_type(data_type_instance)
 
     # 2. Generar entidades
 
