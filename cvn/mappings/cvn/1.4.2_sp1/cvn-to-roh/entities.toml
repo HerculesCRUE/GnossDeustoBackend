@@ -1355,3 +1355,26 @@ displayname = "roh:LanguageCertificate"
         code = "020.060.000.160"
         name = "skill"
         bean = "Value"
+
+[[entities]]
+code = "060.030.100.000"
+displayname = "roh:Award"
+
+    [[entities.relationships]]
+    direct = "vivo:relates"
+    inverse = "vivo:relates"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    displayname = "roh:title"
+
+        [[entities.properties.sources]]
+        code = "060.030.100.010"
+        name = "title"
+
+    [[entities.properties]]
+    displayname = "vivo:dateTime"
+
+        [[entities.properties.sources]]
+        code = "060.030.100.040"
+        name = "dateTime"
