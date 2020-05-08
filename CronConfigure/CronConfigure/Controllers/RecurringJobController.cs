@@ -30,9 +30,9 @@ namespace CronConfigure.Controllers
         /// </summary>
         /// <param name="id_repository">identificador del repositorio a sincronizar </param>
         /// <param name="nombre_job">nombre de la tarea</param>
-        /// <param name="fecha_inicio">momento a partir del cúal empieza la sincronización</param>
-        /// <param name="cron_expression">expresión recurrente del cron (https://crontab.guru/)</param>
-        /// <param name="fecha">fecha a partir de la cual se debe actualizar</param>
+        /// <param name="fecha_inicio">momento a partir del cúal empieza la sincronización,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
+        /// <param name="cron_expression">el parametro cron_expresion sigue un patrón de 5 atributos, separados por espacios entre sí: * * * * *. El primero corresponde al minuto, el segundo a la hora, a continuación el día del mes, seguido por el mes y posteriormente el día del mes. Un ejemplo sería: */15 * * * * que correspondería a cada 15 minutos, para probar las expresisiones se puede acudir a https://crontab.guru/</param>
+        /// <param name="fecha">fecha a partir de la cual se debe actualizar,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
         /// <param name="set">tipo del objeto</param>
         /// <param name="codigo_objeto">codigo del objeto</param>
         /// <returns></returns> 
@@ -88,7 +88,7 @@ namespace CronConfigure.Controllers
                 if (correct != null)
                 {
                     //BackgroundJob.Schedule(() => ExampleService.PonerEnCola(nombre_job, nombre_fichero, cron_expression, execute_inmediatly), fechaInicio);
-                    _programingMethodsService.ProgramPublishRepositoryRecurringJob(idRep, nombre_job, cron_expression, fechaInicio,fechaDateTime,set, codigo_objeto);
+                    _programingMethodsService.ProgramPublishRepositoryRecurringJob(idRep, nombre_job, cron_expression, fechaInicio,fechaDateTime,set,codigo_objeto);
                 }
                 else
                 {
@@ -113,7 +113,7 @@ namespace CronConfigure.Controllers
         [HttpDelete]
         public IActionResult DeleteRecurringJob(string nombre_job)
         {
-            RecurringJob.RemoveIfExists(nombre_job);
+            _cronApiService.DeleteRecurringJob(nombre_job);
             return Ok();
         }
 

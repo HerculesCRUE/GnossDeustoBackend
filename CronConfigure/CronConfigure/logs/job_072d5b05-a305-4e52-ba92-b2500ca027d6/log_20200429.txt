@@ -1,8 +1,0 @@
-2020-04-29 08:57:05.858 +02:00 [ERR] {"error":"Internal server error"}
-   at CronConfigure.Models.Services.CallApiService.CallPostApi(String urlMethod, Object item) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\CallApiService.cs:line 46
-   at CronConfigure.Models.Services.programingMethodsService.PublishRepositories(String idRepository) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\programingMethodsService.cs:line 23
-
-2020-04-29 10:10:23.408 +02:00 [ERR] {"error":"Internal server error"}
-   at CronConfigure.Models.Services.CallApiService.CallPostApi(String urlMethod, Object item) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\CallApiService.cs:line 46
-   at CronConfigure.Models.Services.programingMethodsService.PublishRepositories(String idRepository) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\programingMethodsService.cs:line 23
-
