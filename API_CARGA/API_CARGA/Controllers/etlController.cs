@@ -32,7 +32,7 @@ namespace PMH.Controllers
         {
             _repositoriesConfigService = iRepositoriesConfigService;
             _shapeConfigService = iShapeConfigService;
-            _sparqlConfig = sparqlConfigJson.GetConfig();            
+            _sparqlConfig = sparqlConfigJson.GetConfig();
         }
 
         /// <summary>
@@ -45,10 +45,11 @@ namespace PMH.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult dataPublish(IFormFile rdfFile)
         {
-            XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
-            List<string> triples = SparqlUtility.GetTriplesFromRDF(rdf);
             try
             {
+                XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
+                List<string> triples = SparqlUtility.GetTriplesFromRDF(rdf);
+
                 SparqlUtility.LoadTriples(triples, _sparqlConfig.endpoint, _sparqlConfig.queryparam, _sparqlConfig.graph);
                 return Ok();
             }
@@ -69,17 +70,17 @@ namespace PMH.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult dataValidate(IFormFile rdfFile, Guid repositoryIdentifier)
-        {
-            string rdfFileContent = SparqlUtility.GetTextFromFile(rdfFile);
+        {            
             try
             {
+                string rdfFileContent = SparqlUtility.GetTextFromFile(rdfFile);
                 return Ok(SparqlUtility.ValidateRDF(rdfFileContent, _shapeConfigService.GetShapesConfigs().FindAll(x => x.RepositoryID == repositoryIdentifier)));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Problem(ex.ToString());
             }
-            
+
         }
 
         /// <summary>
