@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API_CARGA.Models.Entities;
+using API_CARGA.Models.Transport;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,23 +16,91 @@ namespace API_CARGA.Models.Services
     public class OaiPublishRDFService
     {
         readonly ConfigUrlService _serviceUrl;
-        public OaiPublishRDFService(ConfigUrlService serviceUrl)
+        readonly EntityContext _context;
+        public OaiPublishRDFService(ConfigUrlService serviceUrl, EntityContext context)
         {
             _serviceUrl = serviceUrl;
+            _context = context;
         }
 
         public void PublishRepositories(Guid identifier, DateTime? fechaFrom = null, string set = null, string codigoObjeto = null)
         {
-            List<string> listIdentifier = CallListIdentifier(identifier,set,fechaFrom);
-            if (listIdentifier.Count > 2)
+            List<IdentifierOAIPMH> listIdentifier = CallListIdentifier(identifier,set,fechaFrom);
+            //if (listIdentifier.Count > 2)
+            //{
+            //    listIdentifier = listIdentifier.GetRange(0, 2);
+            //}
+            IdentifierOAIPMH lastSyncro = null;
+            try
             {
-                listIdentifier = listIdentifier.GetRange(0, 2);
+                foreach (IdentifierOAIPMH identifierOAIPMH in listIdentifier)
+                {
+                    List<string> listRdf = CallGetRecord(identifier, identifierOAIPMH.Identifier, codigoObjeto);
+                    CallDataPublish(listRdf, identifier);
+                    lastSyncro = identifierOAIPMH;
+                }
+                if (lastSyncro != null)
+                {
+                    AddSyncro(lastSyncro, set, identifier);
+                }
+
             }
-            List<string> listRdf = CallGetRecord(identifier, listIdentifier);
-            CallDataPublish(listRdf, identifier);
+            catch (Exception ex)
+            {
+                if (string.IsNullOrEmpty(codigoObjeto) && lastSyncro != null)
+                {
+                    AddSyncro(lastSyncro, set, identifier);
+                }
+                throw new Exception(ex.Message);
+            }
+            
         }
 
-        public List<string> CallListIdentifier(Guid identifierRepo, string set = null, DateTime? fechaFrom = null)
+        private void AddSyncro(IdentifierOAIPMH lastSyncro, string set, Guid repositoryId)
+        {
+            if (_context.RepositorySync.Any(item => item.RepositoryId.Equals(repositoryId)))
+            {
+                if (!string.IsNullOrEmpty(set))
+                {
+                    RepositorySync repoSync = _context.RepositorySync.FirstOrDefault(item => item.RepositoryId.Equals(repositoryId) && item.Set == null);
+                    repoSync.UltimaFechaDeSincronizacion = lastSyncro.Fecha;
+
+                }
+                else
+                {
+                    RepositorySync repoSync = _context.RepositorySync.FirstOrDefault(item => item.RepositoryId.Equals(repositoryId) && item.Set.Equals(set));
+                    if(repoSync == null)
+                    {
+                        repoSync.UltimaFechaDeSincronizacion = lastSyncro.Fecha;
+                    }
+                    else
+                    {
+                        RepositorySync repoSyncAdd = new RepositorySync()
+                        {
+                            Id = Guid.NewGuid(),
+                            RepositoryId = repositoryId,
+                            Set = set,
+                            UltimaFechaDeSincronizacion = lastSyncro.Fecha
+                        };
+                        _context.RepositorySync.Add(repoSyncAdd);
+                    }
+                }
+            }
+            else
+            {
+                RepositorySync repoSyncAdd = new RepositorySync()
+                {
+                    Id = Guid.NewGuid(),
+                    RepositoryId = repositoryId,
+                    Set = null,
+                    UltimaFechaDeSincronizacion = lastSyncro.Fecha
+                };
+                _context.RepositorySync.Add(repoSyncAdd);
+            }
+            _context.SaveChanges();
+        }
+
+        public List<IdentifierOAIPMH> CallListIdentifier(Guid identifierRepo, string set = null, DateTime? fechaFrom = null)
         {
             string uri = $"etl/ListIdentifiers/{identifierRepo}?metadataPrefix=rdf";
             if (set != null )
@@ -41,7 +111,7 @@ namespace API_CARGA.Models.Services
             {
                 uri += $"&from={fechaFrom}";
             }
-            List<string> listIdentifier = new List<string>();
+            List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
             string xml = CallGetApi(uri);
             XDocument respuestaXML = XDocument.Load(new StringReader(xml));
             XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
@@ -50,21 +120,30 @@ namespace API_CARGA.Models.Services
             foreach (var header in listHeader)
             {
                 string identifier = header.Element(nameSpace + "identifier").Value;
-                listIdentifier.Add(identifier);
+                string fecha = header.Element(nameSpace + "datestamp").Value;
+                DateTime fechaSincro = DateTime.Parse(fecha);
+                IdentifierOAIPMH identifierOAIPMH = new IdentifierOAIPMH()
+                {
+                    Fecha = fechaSincro,
+                    Identifier = identifier
+                };
+                listIdentifier.Add(identifierOAIPMH);
             }
             return listIdentifier;
         }
 
-        public List<string> CallGetRecord(Guid repoIdentifier, List<string> listIdentifier)
+        public List<string> CallGetRecord(Guid repoIdentifier, string identifier, string CodigoObjeto = null)
         {
             List<string> listRdf = new List<string>();
-            foreach (string indentifier in listIdentifier) 
-            {
-                string respuesta = CallGetApi($"etl/GetRecord/{repoIdentifier}?identifier={indentifier}&&metadataPrefix=rdf");
+            IdentifierOAIPMH lastIdentifer = null;
+            //foreach (IdentifierOAIPMH indentifier in listIdentifier)
+            //{
+                string respuesta = CallGetApi($"etl/GetRecord/{repoIdentifier}?identifier={identifier}&&metadataPrefix=rdf");
                 XDocument respuestaXML = XDocument.Parse(respuesta);
                 XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
                 listRdf.Add(respuestaXML.Root.Element(nameSpace + "GetRecord").Descendants(nameSpace + "metadata").First().FirstNode.ToString());
-            }
+            //}
+            
             return listRdf;
         }
 

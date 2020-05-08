@@ -1,6 +1,0 @@
-2020-04-29 13:03:42.899 +02:00 [ERR] One or more errors occurred. (A task was canceled.)
-   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
-   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
-   at CronConfigure.Models.Services.CallApiService.CallPostApi(String urlMethod, Object item) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\CallApiService.cs:line 30
-   at CronConfigure.Models.Services.ProgramingMethodsService.PublishRepositories(Guid idRepositoryGuid) in C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\ProgramingMethodsService.cs:line 27
-

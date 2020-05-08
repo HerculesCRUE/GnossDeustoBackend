@@ -52,6 +52,17 @@ namespace CronConfigure.Models.Services
         public void DeleteJob(string id)
         {
             BackgroundJob.Delete(id);
+            var rel = _context.JobRepository.FirstOrDefault(item => item.IdJob.Equals(id));
+            _context.Entry(rel).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            _context.SaveChanges();
+        }
+
+        public void DeleteRecurringJob(string id)
+        {
+            RecurringJob.RemoveIfExists(id);
+            var rel = _context.JobRepository.FirstOrDefault(item => item.IdJob.Equals(id));
+            _context.Entry(rel).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            _context.SaveChanges();
         }
 
         public void EnqueueJob(string id)
@@ -89,6 +100,7 @@ namespace CronConfigure.Models.Services
                     JobViewModel job = new JobViewModel()
                     {
                         Id = failed.Key,
+                        ExceptionDetails = failed.Value.ExceptionDetails,
                         Job = failed.Value.Job.ToString(),
                         State = "Fail"
                     };
