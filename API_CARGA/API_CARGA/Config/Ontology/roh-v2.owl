@@ -319,6 +319,12 @@ by creating a research management system with semantic capacities based on seman
     
 
 
+    <!-- http://vitro.mannlib.cornell.edu/ns/vitro/0.7#exampleAnnot -->
+
+    <owl:AnnotationProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#exampleAnnot"/>
+    
+
+
     <!-- http://www.w3.org/2003/06/sw-vocab-status/ns#term_status -->
 
     <owl:AnnotationProperty rdf:about="http://www.w3.org/2003/06/sw-vocab-status/ns#term_status"/>
@@ -1407,6 +1413,14 @@ by creating a research management system with semantic capacities based on seman
     
 
 
+    <!-- http://purl.org/roh#excellenceLabel -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/roh#excellenceLabel">
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://purl.org/roh#expenseModality -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/roh#expenseModality"/>
@@ -2254,6 +2268,17 @@ Definition source: http://isiwebofknowledge.com/researcherid/</obo:IAO_0000112>
     
 
 
+    <!-- http://vivoweb.org/ontology/core#hrJobTitle -->
+
+    <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#hrJobTitle">
+        <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Position"/>
+        <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition http://en.wikipedia.org/wiki/Job_title#Job_title.</vitro:descriptionAnnot>
+        <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">administrative secretary</vitro:exampleAnnot>
+        <rdfs:label xml:lang="en">HR job title</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -2738,6 +2763,16 @@ The previous short definition was: &quot;An arbitrary classification of a space/
         </rdfs:subClassOf>
         <rdfs:comment>roh:Expense denotes the expenses incurred either by a project (roh:Project) or person (foaf:Person) and linked through roh:spends. Every expense has a time instant of associated expense (live:DateTimeValue) and other properties that qualify it as (roh:monetaryAmount, roh:currency, roh:title or vivo:description. It should be extended with more types of expenses, such as personnel costs, subcontracting, travel, equipment, research infrastructure and other goods and services. Currently, a distinction is made between roh:PersonExpense and roh:ProjectExpense.</rdfs:comment>
         <rdfs:label xml:lang="en">Expense</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/roh#ExternalMemberRole -->
+
+    <owl:Class rdf:about="http://purl.org/roh#ExternalMemberRole">
+        <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/obo/bfo#BFO_0000023"/>
+        <rdfs:comment xml:lang="en">A member who works in a Project or participates in an Activity but do not belong to the main Organization.</rdfs:comment>
+        <rdfs:label xml:lang="en">External Member Role</rdfs:label>
     </owl:Class>
     
 
@@ -3240,12 +3275,6 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
     
 
 
-    <!-- http://purl.org/roh#Project -->
-
-    <owl:Class rdf:about="http://purl.org/roh#Project"/>
-    
-
-
     <!-- http://purl.org/roh#ProjectContract -->
 
     <owl:Class rdf:about="http://purl.org/roh#ProjectContract">
@@ -3297,6 +3326,12 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
 
     <owl:Class rdf:about="http://purl.org/roh#ResearchGroup">
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/foaf#Organization"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/roh#excellenceLabel"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3333,7 +3368,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
                     </owl:Class>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://purl.org/roh#producedBy"/>
-                        <owl:allValuesFrom rdf:resource="http://purl.org/roh#Project"/>
+                        <owl:allValuesFrom rdf:resource="http://purl.org/roh/mirror/vivo#Project"/>
                     </owl:Restriction>
                 </owl:unionOf>
             </owl:Class>
@@ -5470,7 +5505,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/roh/mirror/vivo#courseCredits"/>
-                <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A course as taught in one time period (such as a semester; although note that a course could consist of only one meeting (teaching session)) by one or more instructors, normally but not always for credit. Does not represent either each meeting of the course or the course offering such as Biology 101 taught every semester from 1980 to 2010</obo:IAO_0000112>
@@ -6206,6 +6241,12 @@ Notice that a roh:Project may also be part (vivo:hasPart) of another project, e.
         <obo:IAO_0000412 rdf:resource="http://purl.org/roh/mirror/vivo"/>
         <rdfs:label xml:lang="en">University</rdfs:label>
     </owl:Class>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#Position -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#Position"/>
     
 
 
