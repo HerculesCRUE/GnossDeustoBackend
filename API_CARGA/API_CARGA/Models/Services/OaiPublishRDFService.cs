@@ -50,6 +50,8 @@ namespace API_CARGA.Models.Services
             foreach (var header in listHeader)
             {
                 string identifier = header.Element(nameSpace + "identifier").Value;
+                string fecha = header.Element(nameSpace + "datestamp").Value;
+                DateTime fechaSincro = DateTime.Parse(fecha);
                 listIdentifier.Add(identifier);
             }
             return listIdentifier;
