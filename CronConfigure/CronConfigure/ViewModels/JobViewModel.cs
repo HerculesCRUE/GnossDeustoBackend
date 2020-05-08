@@ -11,5 +11,7 @@ namespace CronConfigure.ViewModels
         public string Job { get; set; }
         public string State { get; set; }
         public string Id { get; set; }
+
+        public string ExceptionDetails { get; set; }
     }
 }

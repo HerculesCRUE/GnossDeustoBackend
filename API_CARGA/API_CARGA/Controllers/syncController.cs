@@ -164,8 +164,16 @@ namespace UrisFactory.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult PostSyncro(PublishRepositoryModel publishModel)
         {
-            _oaiPublishRDFService.PublishRepositories(publishModel.repository_identifier, publishModel.fecha_from, publishModel.set);
-            return Ok("");
+            try
+            {
+                _oaiPublishRDFService.PublishRepositories(publishModel.repository_identifier, publishModel.fecha_from, publishModel.set);
+                return Ok("");
+            }
+            catch(Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+            
         }
     }
 }

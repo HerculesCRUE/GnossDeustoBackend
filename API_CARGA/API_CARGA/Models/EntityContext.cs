@@ -18,8 +18,8 @@ namespace API_CARGA.Models
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<RepositorySync>()
-                .HasKey(c => new { c.RepositoryId, c.Set });
+            //modelBuilder.Entity<RepositorySync>()
+            //    .HasKey(c => new { c.RepositoryId, c.Set });
 
         }
     }

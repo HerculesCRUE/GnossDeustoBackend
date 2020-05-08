@@ -100,6 +100,7 @@ namespace CronConfigure.Models.Services
                     JobViewModel job = new JobViewModel()
                     {
                         Id = failed.Key,
+                        ExceptionDetails = failed.Value.ExceptionDetails,
                         Job = failed.Value.Job.ToString(),
                         State = "Fail"
                     };
