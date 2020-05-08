@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using VDS.RDF;
 using VDS.RDF.Parsing;
+using VDS.RDF.Query.Inference;
 using VDS.RDF.Shacl;
 using VDS.RDF.Shacl.Validation;
 using VDS.RDF.Writing;
@@ -51,7 +52,7 @@ namespace API_CARGA.Models.Utility
         /// <returns>Lista de triples</returns>
         public static List<string> GetTriplesFromRDF(XmlDocument pXMLRDF)
         {
-            IGraph g = new Graph();          
+            RohGraph g = new RohGraph();          
             g.LoadFromString(pXMLRDF.InnerXml, new RdfXmlParser());
             System.IO.StringWriter sw = new System.IO.StringWriter();
             NTriplesWriter nTriplesWriter = new NTriplesWriter();
@@ -69,8 +70,18 @@ namespace API_CARGA.Models.Utility
         /// <returns>Lista de triples</returns>
         public static ShapeReport ValidateRDF(string pRdfFileContent, List<ShapeConfig> pShapesConfig)
         {
-            IGraph dataGraph = new Graph();
+            //Cargamos la ontología
+            RohGraph ontologyGraph = new RohGraph();
+            ontologyGraph.LoadFromFile("Config/Ontology/roh-v2.owl");
+
+            //Cargamos datos a validar
+            RohGraph dataGraph = new RohGraph();
             dataGraph.LoadFromString(pRdfFileContent);
+
+            //Aplicamos inferencias de la ontologia
+            RohRdfsReasoner reasoner = new RohRdfsReasoner();
+            reasoner.Initialise(ontologyGraph);
+            reasoner.Apply(dataGraph);
 
             ShapeReport response = new ShapeReport();
             response.conforms = true;
