@@ -105,7 +105,9 @@ namespace OaiPmhNet.Models.OAIPMH
             {
                 Header = new RecordHeader()
                 {
-                    Identifier = pCVN.Id.ToString()
+                    Identifier = pCVN.Id.ToString(),
+                    SetSpecs = new List<string>() { "cvn" },
+                    Datestamp = DateTime.UtcNow.AddSeconds(int.Parse(pCVN.Id))
                 }
             };
 
@@ -126,7 +128,9 @@ namespace OaiPmhNet.Models.OAIPMH
             {
                 Header = new RecordHeader()
                 {
-                    Identifier = pCVN.Id.ToString()
+                    Identifier = pCVN.Id.ToString(),
+                    SetSpecs = new List<string>() { "cvn"},
+                    Datestamp = DateTime.UtcNow
                 }
             };
 
