@@ -44,7 +44,7 @@ namespace OaiPmhNet.Models.OAIPMH
         /// <returns></returns>
         public Record GetRecord(string identifier, string metadataPrefix)
         {
-            CVN CVN = GetCurriculum(identifier, false,_configService.GetConfig().XML_CVN_Repository);
+            CVN CVN = GetCurriculum(identifier, false, _configService.GetConfig().XML_CVN_Repository);
             return ToRecord(CVN, metadataPrefix);
         }
 
@@ -129,7 +129,7 @@ namespace OaiPmhNet.Models.OAIPMH
                 Header = new RecordHeader()
                 {
                     Identifier = pCVN.Id.ToString(),
-                    SetSpecs = new List<string>() { "cvn"},
+                    SetSpecs = new List<string>() { "cvn" },
                     Datestamp = DateTime.UtcNow
                 }
             };
@@ -160,7 +160,7 @@ namespace OaiPmhNet.Models.OAIPMH
             request.AddHeader("application", "asio");
             request.AddHeader("key", "asiokey");
             XML_CVN_Repository_Response respuesta = JsonConvert.DeserializeObject<XML_CVN_Repository_Response>(client.Execute(request).Content);
-            return new HashSet<string>(respuesta.ids.Select(x=>x.ToString()));
+            return new HashSet<string>(respuesta.ids.Select(x => x.ToString()));
         }
 
         /// <summary>
