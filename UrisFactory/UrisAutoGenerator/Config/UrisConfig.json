@@ -395,8 +395,13 @@
       "ResourceURI": "uriResourceStructure"
     },
     {
-      "ResourceClass": "VcardGroupIndividual",
-      "LabelResourceClass": "vcardgroupindividual",
+      "ResourceClass": "VcardGroup",
+      "LabelResourceClass": "vcardgroup",
+      "ResourceURI": "uriResourceStructure"
+    },
+    {
+      "ResourceClass": "VcardIndividual",
+      "LabelResourceClass": "vcardindividual",
       "ResourceURI": "uriResourceStructure"
     },
     {
@@ -453,6 +458,21 @@
       "ResourceClass": "Expense",
       "LabelResourceClass": "expense",
       "ResourceURI": "uriResourceStructure"
-    }
+    },
+    {
+      "ResourceClass": "SupervisingRelationship",
+      "LabelResourceClass": "supervisingrelationship",
+      "ResourceURI": "uriResourceStructure"
+    },
+    {
+      "ResourceClass": "PhDSuperviseeRole",
+      "LabelResourceClass": "phdsuperviseerole",
+      "ResourceURI": "uriResourceStructure"
+    },
+    {
+      "ResourceClass": "PhDSupervisorRole",
+      "LabelResourceClass": "phdsupervisorrole",
+      "ResourceURI": "uriResourceStructure"
+    }	
   ]
 }
