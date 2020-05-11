@@ -58,7 +58,7 @@ namespace API_CARGA.Models.Utility
             NTriplesWriter nTriplesWriter = new NTriplesWriter();
             nTriplesWriter.Save(g, sw);
 
-            return sw.ToString().Split("\r\n").ToList();
+            return sw.ToString().Split("\n").ToList();
         }
 
 
