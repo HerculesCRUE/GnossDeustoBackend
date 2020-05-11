@@ -33,15 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <COMReference Include="{4fb2d46f-efc8-4643-bcd0-6e5bfa6a174c}">
-      <Guid>4fb2d46f-efc8-4643-bcd0-6e5bfa6a174c</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>4</VersionMinor>
-      <WrapperTool>tlbimp</WrapperTool>
-    </COMReference>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="dotNetRDF" Version="2.5.1" />
     <PackageReference Include="IdentityServer4" Version="3.1.2" />
     <PackageReference Include="IdentityServer4.EntityFramework" Version="3.1.2" />
