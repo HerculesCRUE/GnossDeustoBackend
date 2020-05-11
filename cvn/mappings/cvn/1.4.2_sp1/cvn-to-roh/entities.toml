@@ -866,9 +866,7 @@ id.format = "{vivo:doi}"
         bean = "Value"
 
     [[entities.properties]]
-    ontology = "vivo"
-    name = "start"
-    format = "{initialpage}"
+    displayname = "vivo:startPage"
 
         [[entities.properties.sources]]
         code = "060.010.010.090"
@@ -876,9 +874,7 @@ id.format = "{vivo:doi}"
         bean = "InitialPage"
 
     [[entities.properties]]
-    ontology = "vivo"
-    name = "end"
-    format = "{finalpage}"
+    displayname = "vivo:pageEnd"
 
         [[entities.properties.sources]]
         code = "060.010.010.090"
