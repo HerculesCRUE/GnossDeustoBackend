@@ -15,7 +15,7 @@ namespace PMH.Controllers
     /// Configuración del ETL
     /// </summary>
     [ApiController]
-    [Route("etl-config/[controller]")]
+    [Route("Etl-config/[controller]")]
     public class RepositoryController : ControllerBase
     {
         private IRepositoriesConfigService _repositoriesConfigService;
