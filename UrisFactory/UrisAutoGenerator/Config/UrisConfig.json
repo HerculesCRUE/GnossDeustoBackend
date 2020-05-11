@@ -473,6 +473,21 @@
       "ResourceClass": "PhDSupervisorRole",
       "LabelResourceClass": "phdsupervisorrole",
       "ResourceURI": "uriResourceStructure"
+    },
+    {
+      "ResourceClass": "Conference",
+      "LabelResourceClass": "conference",
+      "ResourceURI": "uriResourceStructure"
+    },
+    {
+      "ResourceClass": "ResearchObjectExpense",
+      "LabelResourceClass": "researchobjectexpense",
+      "ResourceURI": "uriResourceStructure"
+    },
+    {
+      "ResourceClass": "OrganizerRole",
+      "LabelResourceClass": "organizerrole",
+      "ResourceURI": "uriResourceStructure"
     }	
   ]
 }
