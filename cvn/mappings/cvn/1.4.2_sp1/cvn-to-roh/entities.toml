@@ -264,7 +264,7 @@ displayname = "vivo:TeacherRole"
             [[entities.subentities.subentities.properties]]
             displayname = "vivo:dateTime"
             format = "{start}"
-            datatype = "xsd:dateTime"
+            datatype = "xsd:datetime"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "030.010.000.550"
@@ -280,7 +280,7 @@ displayname = "vivo:TeacherRole"
             [[entities.subentities.subentities.properties]]
             displayname = "vivo:dateTime"
             format = "{end}"
-            datatype = "xsd:dateTime"
+            datatype = "xsd:datetime"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "030.010.000.610"
@@ -413,7 +413,7 @@ displayname = "roh:PhDSupervisingRelationship"
 
             [[entities.subentities.subentities.properties]]
             displayname = "vivo:dateTime"
-            datatype = "xsd:dateTime"
+            datatype = "xsd:datetime"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "030.040.000.140"
@@ -552,6 +552,7 @@ id.resource = "Project"
                 ontology = "vivo"
                 name = "dateTime"
                 format = "{start}"
+                datatype = "xsd:datetime"
 
                     [[entities.subentities.subentities.subentities.properties.sources]]
                     code = "050.020.010.270"
@@ -578,6 +579,7 @@ id.resource = "Project"
             ontology = "vivo"
             name = "dateTime"
             format = "{start}"
+            datatype = "xsd:datetime"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "050.020.010.270"
@@ -596,6 +598,7 @@ id.resource = "Project"
             ontology = "vivo"
             name = "dateTime"
             format = "{end}"
+            datatype = "xsd:datetime"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "050.020.010.410"
@@ -742,6 +745,7 @@ id.resource = "Project"
                 ontology = "vivo"
                 name = "dateTime"
                 format = "{start}"
+                datatype = "xsd:datetime"
 
                     [[entities.subentities.subentities.subentities.properties.sources]]
                     code = "050.020.020.180"
@@ -768,6 +772,7 @@ id.resource = "Project"
             ontology = "vivo"
             name = "dateTime"
             format = "{start}"
+            datatype = "xsd:datetime"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "050.020.020.180"
@@ -853,6 +858,7 @@ id.format = "{vivo:doi}"
     ontology = "vivo"
     name = "dateTime"
     format = "{publication_date}"
+    datatype = "xsd:datetime"
 
         [[entities.properties.sources]]
         code = "060.010.010.140"
@@ -927,6 +933,7 @@ id.format = "{foaf:name}"
             ontology = "vivo"
             name = "dateTime"
             format = "{start}"
+            datatype = "xsd:datetime"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "060.010.020.190"
@@ -945,6 +952,7 @@ id.format = "{foaf:name}"
             ontology = "vivo"
             name = "dateTime"
             format = "{end}"
+            datatype = "xsd:datetime"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "060.010.020.380"
@@ -998,6 +1006,7 @@ id.resource = "Position"
             ontology = "vivo"
             name = "dateTime"
             format = "{start}"
+            datatype = "xsd:datetime"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "010.010.000.180"
@@ -1072,6 +1081,7 @@ id.resource = "Position"
             ontology = "vivo"
             name = "dateTime"
             format = "{start}"
+            datatype = "xsd:datetime"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "010.020.000.180"
@@ -1090,6 +1100,7 @@ id.resource = "Position"
             ontology = "vivo"
             name = "dateTime"
             format = "{end}"
+            datatype = "xsd:datetime"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "010.020.000.310"
@@ -1170,6 +1181,7 @@ classname = "AwardedDegree"
     ontology = "vivo"
     name = "dateTime"
     format = "{date}"
+    datatype = "xsd:datetime"
 
         [[entities.properties.sources]]
         code = "020.010.010.130"
@@ -1234,6 +1246,7 @@ id.resource = "PhDThesis"
     ontology = "vivo"
     name = "dateTime"
     format = "{date}"
+    datatype = "xsd:datetime"
 
         [[entities.properties.sources]]
         code = "020.010.020.140"
@@ -1386,7 +1399,7 @@ displayname = "roh:Award"
 
     [[entities.properties]]
     displayname = "vivo:dateTime"
-    datatype = "xsd:dateTime"
+    datatype = "xsd:datetime"
 
         [[entities.properties.sources]]
         code = "060.030.100.040"

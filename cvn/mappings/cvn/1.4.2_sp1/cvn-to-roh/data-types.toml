@@ -16,5 +16,6 @@ python_type = "decimal.Decimal"
 
 [[datatypes]]
 ontology = "xsd"
-name = "dateTime"
-python_type = "datetime.datetime"
+name = "datetime"
+python_type = "str"
+force = true
