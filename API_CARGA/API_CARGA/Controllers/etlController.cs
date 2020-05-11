@@ -23,12 +23,12 @@ namespace PMH.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class etlController : Controller
+    public class EtlController : Controller
     {
         private IRepositoriesConfigService _repositoriesConfigService;
         private IShapesConfigService _shapeConfigService;
         private SparqlConfig _sparqlConfig;
-        public etlController(IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, SparqlConfigJson sparqlConfigJson)
+        public EtlController(IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, SparqlConfigJson sparqlConfigJson)
         {
             _repositoriesConfigService = iRepositoriesConfigService;
             _shapeConfigService = iShapeConfigService;

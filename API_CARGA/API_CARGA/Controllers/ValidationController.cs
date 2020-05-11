@@ -15,10 +15,10 @@ namespace API_CARGA.Controllers
 {
     [Route("etl-config/[controller]")]
     [ApiController]
-    public class validationController : ControllerBase
+    public class ValidationController : ControllerBase
     {
         IShapesConfigService _shapeConfigService;
-        public validationController(IShapesConfigService iShapeConfigService)
+        public ValidationController(IShapesConfigService iShapeConfigService)
         {
             _shapeConfigService = iShapeConfigService;
         }
