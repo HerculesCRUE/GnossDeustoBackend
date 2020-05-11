@@ -38,11 +38,46 @@ namespace CronConfigure.Controllers
         /// Añade una nueva tarea programada de única ejecución para sincornización de repositorios
         /// </summary>
         /// <param name="fecha_ejecucion">fecha en la que se ejecutará la tarea</param>
-        /// <param name="id_repository">número de tareas a traer</param>
+        /// <param name="id_repository">identificador del repositorio</param>
+        /// <param name="fecha">fecha a partir de la cual se debe actualizar,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
+        /// <param name="set">tipo del objeto</param>
+        /// <param name="codigo_objeto">codigo del objeto</param>
         /// <returns></returns> 
         [HttpPost]
-        public IActionResult AddScheduledJob(string fecha_ejecucion, string id_repository)
+        public IActionResult AddScheduledJob(string fecha_ejecucion, string id_repository, string fecha = null, string set = null, string codigo_objeto = null)
         {
+            DateTime fechaInicio = DateTime.Now;
+            DateTime? fechaDateTime = null;
+            if (codigo_objeto != null && set == null)
+            {
+                return BadRequest("falta el tipo de objeto");
+            }
+            if (fecha_ejecucion != null)
+            {
+                try
+                {
+                    fechaInicio = DateTime.Parse(fecha_ejecucion);
+                }
+                catch (Exception)
+                {
+                    return BadRequest("fecha de ejecución inválida");
+                }
+            }
+            else
+            {
+                return BadRequest("La fecha de ejecución es obligatoria");
+            }
+            if (fecha != null)
+            {
+                try
+                {
+                    fechaDateTime = DateTime.Parse(fecha);
+                }
+                catch (Exception)
+                {
+                    return BadRequest("fecha de sincronzación inválida");
+                }
+            }
             Guid idRep = Guid.Empty;
             try
             {
@@ -52,8 +87,8 @@ namespace CronConfigure.Controllers
             {
                 return BadRequest("identificador invalido");
             }
-            var fechaInicio = DateTime.Parse(fecha_ejecucion);
-            _programingMethodsService.ProgramPublishRepositoryJob(idRep, fechaInicio);
+            fechaInicio = DateTime.Parse(fecha_ejecucion);
+            _programingMethodsService.ProgramPublishRepositoryJob(idRep, fechaInicio, fechaDateTime, set, codigo_objeto);
             return Ok();
         }
 

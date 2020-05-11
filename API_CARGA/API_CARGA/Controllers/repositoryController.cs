@@ -16,11 +16,11 @@ namespace PMH.Controllers
     /// </summary>
     [ApiController]
     [Route("etl-config/[controller]")]
-    public class repositoryController : ControllerBase
+    public class RepositoryController : ControllerBase
     {
         private IRepositoriesConfigService _repositoriesConfigService;
 
-        public repositoryController(IRepositoriesConfigService iRepositoriesConfigService)
+        public RepositoryController(IRepositoriesConfigService iRepositoriesConfigService)
         {
             _repositoriesConfigService = iRepositoriesConfigService;
         }

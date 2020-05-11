@@ -18,11 +18,11 @@ namespace UrisFactory.Controllers
     /// </summary>
     [ApiController]
     [Route("[Controller]")]
-    public class syncController : Controller
+    public class SyncController : Controller
     {
         private OaiPublishRDFService _oaiPublishRDFService;
         private ISyncsConfigService _syncConfigService;
-        public syncController(OaiPublishRDFService oaiPublishRDFService, ISyncsConfigService iSyncConfigService)
+        public SyncController(OaiPublishRDFService oaiPublishRDFService, ISyncsConfigService iSyncConfigService)
         {
             _oaiPublishRDFService = oaiPublishRDFService;
             _syncConfigService = iSyncConfigService;
