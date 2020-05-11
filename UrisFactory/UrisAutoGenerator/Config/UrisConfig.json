@@ -438,6 +438,16 @@
       "ResourceClass": "VcardTelephone",
       "LabelResourceClass": "vcardtelephone",
       "ResourceURI": "uriResourceStructure"
+    },
+    {
+      "ResourceClass": "VcardURL",
+      "LabelResourceClass": "vcardurl",
+      "ResourceURI": "uriResourceStructure"
+    },
+    {
+      "ResourceClass": "ResearchGroup",
+      "LabelResourceClass": "researchgroup",
+      "ResourceURI": "uriResourceStructure"
     }
   ]
 }
