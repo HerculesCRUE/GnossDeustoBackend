@@ -448,6 +448,11 @@
       "ResourceClass": "ResearchGroup",
       "LabelResourceClass": "researchgroup",
       "ResourceURI": "uriResourceStructure"
+    },
+    {
+      "ResourceClass": "Expense",
+      "LabelResourceClass": "expense",
+      "ResourceURI": "uriResourceStructure"
     }
   ]
 }
