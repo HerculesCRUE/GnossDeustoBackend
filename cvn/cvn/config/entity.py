@@ -290,7 +290,11 @@ class Entity:
                         except TypeError:
                             pass
 
-                        print("Generando tripleta de tipo " + str(type(property_value)) + " con valor " + str(property_value))
+                        if data_type.force:
+                            literal_type = ontology_config.get_ontology(data_type.ontology).term(data_type.name)
+
+                        print("Generando tripleta de tipo " + str(type(property_value)) + " con valor "
+                              + str(property_value))
                         print("Generando tipo " + str(type(literal_type)) + " con valor " + str(literal_type))
 
                 triple = self.get_uri(), \

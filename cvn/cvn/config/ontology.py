@@ -3,11 +3,12 @@ from pydoc import locate
 
 
 class DataType:
-    def __init__(self, ontology, name, python_type, default):
+    def __init__(self, ontology, name, python_type, default, force):
         self.ontology = ontology
         self.name = name
         self.python_type = python_type
         self.default = default
+        self.force = force
 
     def get_python_type(self):
         return locate(self.python_type)
