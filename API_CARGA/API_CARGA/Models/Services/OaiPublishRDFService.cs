@@ -25,13 +25,14 @@ namespace API_CARGA.Models.Services
 
         public void PublishRepositories(Guid identifier, DateTime? fechaFrom = null, string set = null, string codigoObjeto = null)
         {
-            List<IdentifierOAIPMH> listIdentifier = CallListIdentifier(identifier,set,fechaFrom);
+            List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
+            if (codigoObjeto == null)
+            {
+                listIdentifier = CallListIdentifier(identifier,set,fechaFrom);
             //if (listIdentifier.Count > 2)
             //{
             //    listIdentifier = listIdentifier.GetRange(0, 2);
             //}
-            if (codigoObjeto != null)
-            {
                 var objeto = listIdentifier.FirstOrDefault(item => item.Identifier.Equals(codigoObjeto));
                 listIdentifier = new List<IdentifierOAIPMH>();
                 if(objeto!= null)
@@ -42,15 +43,23 @@ namespace API_CARGA.Models.Services
             IdentifierOAIPMH lastSyncro = null;
             try
             {
-                foreach (IdentifierOAIPMH identifierOAIPMH in listIdentifier)
+                if (codigoObjeto == null) 
                 {
-                    List<string> listRdf = CallGetRecord(identifier, identifierOAIPMH.Identifier, codigoObjeto);
-                    CallDataPublish(listRdf, identifier);
-                    lastSyncro = identifierOAIPMH;
+                    foreach (IdentifierOAIPMH identifierOAIPMH in listIdentifier)
+                    {
+                        List<string> listRdf = CallGetRecord(identifier, identifierOAIPMH.Identifier);
+                        CallDataPublish(listRdf, identifier);
+                        lastSyncro = identifierOAIPMH;
+                    }
+                    if (lastSyncro != null)
+                    {
+                        AddSyncro(lastSyncro, set, identifier);
+                    }
                 }
-                if (lastSyncro != null)
+                else
                 {
-                    AddSyncro(lastSyncro, set, identifier);
+                    List<string> listRdf = CallGetRecord(identifier, codigoObjeto);
+                    CallDataPublish(listRdf, identifier);
                 }
 
             }
@@ -143,7 +152,7 @@ namespace API_CARGA.Models.Services
             return listIdentifier;
         }
 
-        public List<string> CallGetRecord(Guid repoIdentifier, string identifier, string CodigoObjeto = null)
+        public List<string> CallGetRecord(Guid repoIdentifier, string identifier)
         {
             List<string> listRdf = new List<string>();
             IdentifierOAIPMH lastIdentifer = null;
