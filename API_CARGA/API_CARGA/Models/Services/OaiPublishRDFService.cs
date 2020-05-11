@@ -30,6 +30,15 @@ namespace API_CARGA.Models.Services
             //{
             //    listIdentifier = listIdentifier.GetRange(0, 2);
             //}
+            if (codigoObjeto != null)
+            {
+                var objeto = listIdentifier.FirstOrDefault(item => item.Identifier.Equals(codigoObjeto));
+                listIdentifier = new List<IdentifierOAIPMH>();
+                if(objeto!= null)
+                {
+                    listIdentifier.Add(objeto);
+                }
+            }
             IdentifierOAIPMH lastSyncro = null;
             try
             {
@@ -109,7 +118,9 @@ namespace API_CARGA.Models.Services
             }
             if(fechaFrom != null)
             {
-                uri += $"&from={fechaFrom}";
+                DateTime until = DateTime.Now.AddYears(1);
+                uri += $"&from={fechaFrom}&until={until}";
+
             }
             List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
             string xml = CallGetApi(uri);
