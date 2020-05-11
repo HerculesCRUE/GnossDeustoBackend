@@ -13,3 +13,8 @@ python_type = "float"
 ontology = "xsd"
 name = "decimal"
 python_type = "decimal.Decimal"
+
+[[datatypes]]
+ontology = "xsd"
+name = "dateTime"
+python_type = "datetime.datetime"

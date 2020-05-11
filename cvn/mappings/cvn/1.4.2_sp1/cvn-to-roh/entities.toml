@@ -264,6 +264,7 @@ displayname = "vivo:TeacherRole"
             [[entities.subentities.subentities.properties]]
             displayname = "vivo:dateTime"
             format = "{start}"
+            datatype = "xsd:dateTime"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "030.010.000.550"
@@ -279,6 +280,7 @@ displayname = "vivo:TeacherRole"
             [[entities.subentities.subentities.properties]]
             displayname = "vivo:dateTime"
             format = "{end}"
+            datatype = "xsd:dateTime"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "030.010.000.610"
@@ -411,6 +413,7 @@ displayname = "roh:PhDSupervisingRelationship"
 
             [[entities.subentities.subentities.properties]]
             displayname = "vivo:dateTime"
+            datatype = "xsd:dateTime"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "030.040.000.140"
@@ -1383,6 +1386,7 @@ displayname = "roh:Award"
 
     [[entities.properties]]
     displayname = "vivo:dateTime"
+    datatype = "xsd:dateTime"
 
         [[entities.properties.sources]]
         code = "060.030.100.040"

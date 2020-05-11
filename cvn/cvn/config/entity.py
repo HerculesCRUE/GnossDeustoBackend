@@ -284,8 +284,14 @@ class Entity:
                     data_type = ontology_config.get_data_type(property_item.data_type)
                     if data_type is not None:
                         # Intentamos convertir el string en su tipo de dato correspondiente
-                        property_value = (data_type.get_python_type())(property_value)
-                        literal_type = ontology_config.get_ontology(data_type.ontology).term(data_type.name)
+                        try:
+                            property_value = (data_type.get_python_type())(property_value)
+                            literal_type = ontology_config.get_ontology(data_type.ontology).term(data_type.name)
+                        except TypeError:
+                            pass
+
+                        print("Generando tripleta de tipo " + str(type(property_value)) + " con valor " + str(property_value))
+                        print("Generando tipo " + str(type(literal_type)) + " con valor " + str(literal_type))
 
                 triple = self.get_uri(), \
                          ontology_config.get_ontology(property_item.ontology).term(property_item.name), \
