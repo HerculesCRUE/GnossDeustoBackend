@@ -51,11 +51,20 @@ namespace ApiCargaWebInterface.Controllers
                 if (jobModel.Nombre_job != null)
                 {
                     _serviceApi.CreateRecurringJob(jobModel);
-                    return Ok(jobModel.Nombre_job);
+                    resultCreated item = new resultCreated()
+                    {
+                        Id = jobModel.Nombre_job
+                    };
+                    return View("Created", item);
                 }
                 else
                 {
-                    return Ok(_serviceApi.CreateJob(jobModel));
+                    string id = _serviceApi.CreateJob(jobModel);
+                    resultCreated item = new resultCreated()
+                    {
+                        Id = id
+                    };
+                    return View("Created", item);
                 }
             }
             

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ApiCargaWebInterface.Extra.Exceptions;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiCargaWebInterface.Controllers
@@ -10,9 +11,11 @@ namespace ApiCargaWebInterface.Controllers
     public class ShapeConfigController : Controller
     {
         readonly ICallShapeConfigService _serviceApi;
-        public ShapeConfigController(ICallShapeConfigService serviceApi)
+        readonly ICallRepositoryConfigService _repositoryServiceApi;
+        public ShapeConfigController(ICallShapeConfigService serviceApi, ICallRepositoryConfigService repositoryServiceApi)
         {
             _serviceApi = serviceApi;
+            _repositoryServiceApi = repositoryServiceApi;
         }
 
         public IActionResult Index()
@@ -38,9 +41,18 @@ namespace ApiCargaWebInterface.Controllers
         public IActionResult Edit(Guid id)
         {
             ShapeConfigViewModel result = _serviceApi.GetShapeConfig(id);
+            
             if (result != null)
             {
-                return View(result);
+                ShapeConfigEditModel shapeConfigViewModel = new ShapeConfigEditModel()
+                {
+                    Name = result.Name,
+                    RepositoryID = result.RepositoryID,
+                    Shape = result.Shape,
+                    ShapeConfigID = result.ShapeConfigID
+                };
+
+                return View(shapeConfigViewModel);
             }
             else
             {
@@ -49,7 +61,7 @@ namespace ApiCargaWebInterface.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(ShapeConfigViewModel shapeConfigViewModel)
+        public IActionResult Edit(ShapeConfigEditModel shapeConfigViewModel)
         {
             try
             {
@@ -90,12 +102,22 @@ namespace ApiCargaWebInterface.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(ShapeConfigViewModel shapeConfigViewModel)
-        {
+        public IActionResult Create(ShapeConfigCreateModel shapeConfigViewModel)/*Guid ShapeConfigID,string Name, Guid RepositoryID, IFormFile ShapeFile)*/ 
+        { 
             try
             {
-                ShapeConfigViewModel result = _serviceApi.CreateShapeConfig(shapeConfigViewModel);
-                return RedirectToAction("Details", new { id = result.ShapeConfigID });
+                var repository = _repositoryServiceApi.GetRepositoryConfig(shapeConfigViewModel.RepositoryID);
+                if(repository == null)
+                {
+                    ModelState.AddModelError("RepositoryID", "No existe el repositorio");
+                    return View("Create", shapeConfigViewModel);
+                }
+                else
+                {
+                    ShapeConfigViewModel result = _serviceApi.CreateShapeConfig(shapeConfigViewModel);
+                    return RedirectToAction("Details", new { id = result.ShapeConfigID });
+                }
+               
 
             }
             catch (BadRequestException)

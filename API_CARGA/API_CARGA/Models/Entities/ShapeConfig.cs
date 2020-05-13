@@ -23,7 +23,7 @@ namespace API_CARGA.Models.Entities
         /// <summary>
         /// Identificador de la validación
         /// </summary>
-        [ForeignKey("RepositoryConfig")]
+        //[ForeignKey("RepositoryConfig")]
         [Required]
         public Guid RepositoryID { get; set; }
         /// <summary>
@@ -31,6 +31,6 @@ namespace API_CARGA.Models.Entities
         /// </summary>
         public string Shape { get; set; }
 
-        public RepositoryConfig RepositoryConfig { get; set; }
+        //public virtual RepositoryConfig RepositoryConfig { get; set; }
     }
 }

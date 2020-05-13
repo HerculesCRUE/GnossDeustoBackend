@@ -32,7 +32,7 @@ namespace OaiPmhNet.Models.OAIPMH
                 client.Timeout = -1;
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                request.AddParameter("application/x-www-form-urlencoded", pXML_CVN, ParameterType.RequestBody);
+                request.AddParameter("application/x-www-form-urlencoded; charset=UTF-8", pXML_CVN, ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
                 if(response.StatusCode!=System.Net.HttpStatusCode.OK)
                 {

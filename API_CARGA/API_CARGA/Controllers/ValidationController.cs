@@ -15,10 +15,10 @@ namespace API_CARGA.Controllers
 {
     [Route("etl-config/[controller]")]
     [ApiController]
-    public class validationController : ControllerBase
+    public class ValidationController : ControllerBase
     {
         IShapesConfigService _shapeConfigService;
-        public validationController(IShapesConfigService iShapeConfigService)
+        public ValidationController(IShapesConfigService iShapeConfigService)
         {
             _shapeConfigService = iShapeConfigService;
         }
@@ -141,9 +141,12 @@ namespace API_CARGA.Controllers
             shapeconfig.RepositoryID = repositoryID;
             try
             {
-                shapeconfig.Shape = SparqlUtility.GetTextFromFile(rdfFile);
-                IGraph shapeGraph = new Graph();
-                shapeGraph.LoadFromString(shapeconfig.Shape);
+                if (rdfFile != null) 
+                {
+                    shapeconfig.Shape = SparqlUtility.GetTextFromFile(rdfFile);
+                    IGraph shapeGraph = new Graph();
+                    shapeGraph.LoadFromString(shapeconfig.Shape);
+                }
             }
             catch (Exception ex)
             {

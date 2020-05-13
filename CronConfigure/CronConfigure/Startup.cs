@@ -85,11 +85,11 @@ namespace CronConfigure
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //app.Use((context, next) =>
-            //{
-            //    context.Request.PathBase ="/cron-config";
-            //    return next();
-            //});
+            app.Use((context, next) =>
+            {
+                context.Request.PathBase = "/cron-config";
+                return next();
+            });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
