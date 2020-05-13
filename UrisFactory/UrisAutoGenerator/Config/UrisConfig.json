@@ -465,13 +465,13 @@
       "ResourceURI": "uriResourceStructure"
     },
     {
-      "ResourceClass": "PhDSuperviseeRole",
-      "LabelResourceClass": "phdsuperviseerole",
+      "ResourceClass": "SuperviseeRole",
+      "LabelResourceClass": "superviseerole",
       "ResourceURI": "uriResourceStructure"
     },
     {
-      "ResourceClass": "PhDSupervisorRole",
-      "LabelResourceClass": "phdsupervisorrole",
+      "ResourceClass": "SupervisorRole",
+      "LabelResourceClass": "supervisorrole",
       "ResourceURI": "uriResourceStructure"
     },
     {
@@ -488,6 +488,11 @@
       "ResourceClass": "OrganizerRole",
       "LabelResourceClass": "organizerrole",
       "ResourceURI": "uriResourceStructure"
-    }	
+    }	,
+    {
+      "ResourceClass": "EditedBook",
+      "LabelResourceClass": "editedbook",
+      "ResourceURI": "uriResourceStructure"
+    }
   ]
 }
