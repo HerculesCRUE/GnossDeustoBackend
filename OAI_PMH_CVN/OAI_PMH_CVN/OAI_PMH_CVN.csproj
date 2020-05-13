@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Content Remove="appsettings.Development.json" />
-    <Content Remove="appsettings.json" />
     <Content Remove="Config\UrisConfig - copia.json" />
     <Content Remove="Config\UrisConfig.json" />
     <Content Remove="Config\UrisConfigV1.json" />
