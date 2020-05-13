@@ -76,8 +76,16 @@ namespace ApiCargaWebInterface.Controllers
             }
         }
 
-        public IActionResult Create()
+        public IActionResult Create(Guid? repositoryId = null)
         {
+            if (repositoryId != null )
+            {
+                ShapeConfigCreateModel shapeConfigViewModel = new ShapeConfigCreateModel()
+                {
+                    RepositoryID = repositoryId.Value
+                };
+                return View(shapeConfigViewModel);
+            }
             return View();
         }
 

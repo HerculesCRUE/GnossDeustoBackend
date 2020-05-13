@@ -1,26 +1,19 @@
 ﻿@model ApiCargaWebInterface.ViewModels.ShapeConfigCreateModel
-
-@{
-    ViewData["Title"] = "Create";
-}
-
-<h1>Create</h1>
-
-<h4>Shape Config</h4>
-<hr />
-<div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <h4>ShapeConfigCreateModel</h4>
+        <hr />
+
+        <form asp-action="Create" asp-controller="ShapeConfig" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RepositoryID" class="control-label"></label>
+                <input asp-for="RepositoryID" class="form-control" readonly />
+                <span asp-validation-for="RepositoryID" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RepositoryID" class="control-label"></label>
-                <input asp-for="RepositoryID" class="form-control" />
-                <span asp-validation-for="RepositoryID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ShapeFile" class="control-label"></label>
@@ -32,9 +25,4 @@
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 

@@ -1,4 +1,5 @@
-﻿using CronConfigure.Models.Entitties;
+﻿using CronConfigure.Filters;
+using CronConfigure.Models.Entitties;
 using CronConfigure.ViewModels;
 using Hangfire;
 using Newtonsoft.Json;
@@ -22,6 +23,7 @@ namespace CronConfigure.Models.Services
         }
 
         [AutomaticRetry(Attempts = 0, DelaysInSeconds = new int[] { 3600 })]
+        [ProlongExpirationTime]
         public string PublishRepositories(Guid idRepositoryGuid, DateTime? fecha = null, string pSet = null, string codigoObjeto = null)
         {
             string idRepository = idRepositoryGuid.ToString();

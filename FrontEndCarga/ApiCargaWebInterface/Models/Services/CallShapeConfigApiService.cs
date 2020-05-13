@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,10 +17,12 @@ namespace ApiCargaWebInterface.Models.Services
             _serviceApi = serviceApi;
         }
 
-        public ShapeConfigViewModel CreateShapeConfig(ShapeConfigViewModel newRepositoryConfigView)
+        public ShapeConfigViewModel CreateShapeConfig(ShapeConfigCreateModel newRepositoryConfigView)
         {
             Guid guidAdded;
-            string result = _serviceApi.CallPostApi(_urlShapeConfigApi, newRepositoryConfigView);
+            string parameters = $"?name={newRepositoryConfigView.Name}&repositoryID={newRepositoryConfigView.RepositoryID}";
+
+            string result = _serviceApi.CallPostApi($"{_urlShapeConfigApi}{parameters}", newRepositoryConfigView.ShapeFile, true);
             result = JsonConvert.DeserializeObject<string>(result);
             Guid.TryParse(result, out guidAdded);
             result = _serviceApi.CallGetApi($"{_urlShapeConfigApi}/{guidAdded}");
@@ -52,9 +55,10 @@ namespace ApiCargaWebInterface.Models.Services
             return resultObject;
         }
 
-        public void ModifyShapeConfig(ShapeConfigViewModel repositoryConfigView)
+        public void ModifyShapeConfig(ShapeConfigEditModel repositoryConfigView)
         {
-            string result = _serviceApi.CallPutApi(_urlShapeConfigApi, repositoryConfigView);
+            string parameters = $"?name={repositoryConfigView.Name}&repositoryID={repositoryConfigView.RepositoryID}&shapeConfigID={repositoryConfigView.ShapeConfigID}";
+            string result = _serviceApi.CallPutApi($"{_urlShapeConfigApi}{parameters}", repositoryConfigView.ShapeFile, true);
         }
     }
 }

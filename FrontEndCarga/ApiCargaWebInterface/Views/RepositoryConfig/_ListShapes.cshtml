@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ApiCargaWebInterface.ViewModels.ShapeConfigViewModel>
+
+@{
+    var modeloShape = new ApiCargaWebInterface.ViewModels.ShapeConfigCreateModel();
+    if (Model.Count() > 0)
+    {
+        modeloShape.RepositoryID = Model.First().RepositoryID;
+    }
+    
+    //modelo.FechaIinicio = DateTime.Now;
+}
+<hr />
+<h3>Shapes</h3>
+<hr />
+<p>
+    @Html.ActionLink("Create", "Create", "ShapeConfig", modeloShape) 
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShapeConfigID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RepositoryID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shape)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShapeConfigID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RepositoryID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Shape)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "ShapeConfig", new { id = item.ShapeConfigID }) |
+                    @Html.ActionLink("Details", "Details", "ShapeConfig", new { id = item.ShapeConfigID }) |
+                    @Html.ActionLink("Delete", "Delete", "ShapeConfig", new { id = item.ShapeConfigID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
