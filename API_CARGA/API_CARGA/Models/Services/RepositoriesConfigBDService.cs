@@ -17,7 +17,7 @@ namespace API_CARGA.Models.Services
 
         public List<RepositoryConfig> GetRepositoryConfigs()
         {
-            return _context.RepositoryConfig.OrderBy(repository => repository.Name).ToList();
+            return _context.RepositoryConfig.Include(item => item.ShapeConfig).OrderBy(repository => repository.Name).ToList();
         }
 
         //public RepositoryConfig GetRepositoryConfigByName(string name)
@@ -27,7 +27,7 @@ namespace API_CARGA.Models.Services
 
         public RepositoryConfig GetRepositoryConfigById(Guid id)
         {
-            return _context.RepositoryConfig.FirstOrDefault(repository => repository.RepositoryConfigID.Equals(id));
+            return _context.RepositoryConfig.Include(item => item.ShapeConfig).FirstOrDefault(repository => repository.RepositoryConfigID.Equals(id));
         }
 
         public bool RemoveRepositoryConfig(Guid identifier)
@@ -35,8 +35,17 @@ namespace API_CARGA.Models.Services
             try
             {
                 RepositoryConfig repositoryConfig = GetRepositoryConfigById(identifier);
+               // List<ShapeConfig> shapes = 
                 if (repositoryConfig != null)
                 {
+                    if (repositoryConfig.ShapeConfig != null)
+                    {
+                        foreach (var shape in repositoryConfig.ShapeConfig)
+                        {
+                            _context.Entry(shape).State = EntityState.Deleted;
+                        }
+                    }
+                    
                     _context.Entry(repositoryConfig).State = EntityState.Deleted;
                     _context.SaveChanges();
                 }

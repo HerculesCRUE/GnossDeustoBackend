@@ -9,7 +9,7 @@ namespace ApiCargaWebInterface.Models.Services
         public List<ShapeConfigViewModel> GetShapeConfigs();
         public ShapeConfigViewModel GetShapeConfig(Guid id);
         public bool DeleteShapeConfig(Guid id);
-        public ShapeConfigViewModel CreateShapeConfig(ShapeConfigViewModel newRepositoryConfigView);
-        public void ModifyShapeConfig(ShapeConfigViewModel repositoryConfigView);
+        public ShapeConfigViewModel CreateShapeConfig(ShapeConfigCreateModel newRepositoryConfigView);
+        public void ModifyShapeConfig(ShapeConfigEditModel repositoryConfigView);
     }
 }

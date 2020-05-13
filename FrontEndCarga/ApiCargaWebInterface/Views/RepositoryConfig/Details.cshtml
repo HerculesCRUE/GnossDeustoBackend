@@ -2,6 +2,12 @@
 
 @{
     ViewData["Title"] = "Details";
+   
+    var modeloShape = new ApiCargaWebInterface.ViewModels.ShapeConfigCreateModel();
+    modeloShape.RepositoryID = Model.RepositoryConfigID;
+
+    //modelo.FechaIinicio = DateTime.Now;
+    
 }
 
 <h1>Details</h1>
@@ -10,28 +16,28 @@
     <h4>Config repository</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.RepositoryConfigID)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.RepositoryConfigID)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.OauthToken)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.OauthToken)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Url)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Url)
         </dd>
     </dl>
@@ -40,3 +46,14 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.RepositoryConfigID }) |
     <a asp-action="Index">Back to List</a>
 </div>
+<hr />
+<h3>Shapes</h3>
+<p>
+    @Html.ActionLink("Create", "Create", "ShapeConfig", modeloShape)
+</p>
+@if (Model.ShapeConfig != null)
+{
+    <partial name="_ListShapes" model="@Model.ShapeConfig" />
+}
+
+

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -16,5 +17,8 @@ namespace ApiCargaWebInterface.ViewModels
         public string OauthToken { get; set; }
 
         public string Url { get; set; }
+
+        [Display(Name = "Shapes Configurados")]
+        public List<ShapeConfigViewModel> ShapeConfig { get; set; }
     }
 }
