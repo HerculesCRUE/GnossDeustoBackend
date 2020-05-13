@@ -42,7 +42,10 @@ namespace API_CARGA.Models.Services
             if (shapeConfigOriginal != null)
             {
                 shapeConfigOriginal.Name = shapeConfig.Name;
-                shapeConfigOriginal.Shape = shapeConfig.Shape;
+                if (shapeConfig.Shape != null)
+                {
+                    shapeConfigOriginal.Shape = shapeConfig.Shape;
+                }
                 shapeConfigOriginal.RepositoryID = shapeConfig.RepositoryID;
                 _context.SaveChanges();
                 modified = true;

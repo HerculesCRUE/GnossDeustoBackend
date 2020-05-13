@@ -141,9 +141,12 @@ namespace API_CARGA.Controllers
             shapeconfig.RepositoryID = repositoryID;
             try
             {
-                shapeconfig.Shape = SparqlUtility.GetTextFromFile(rdfFile);
-                IGraph shapeGraph = new Graph();
-                shapeGraph.LoadFromString(shapeconfig.Shape);
+                if (rdfFile != null) 
+                {
+                    shapeconfig.Shape = SparqlUtility.GetTextFromFile(rdfFile);
+                    IGraph shapeGraph = new Graph();
+                    shapeGraph.LoadFromString(shapeconfig.Shape);
+                }
             }
             catch (Exception ex)
             {
