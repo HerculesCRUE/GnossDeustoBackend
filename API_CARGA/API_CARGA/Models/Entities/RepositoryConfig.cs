@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API_CARGA.Models.Entities
 {
@@ -10,6 +11,11 @@ namespace API_CARGA.Models.Entities
     /// </summary>
     public class RepositoryConfig
     {
+        public RepositoryConfig()
+        {
+            ///ShapeConfig = new HashSet<ShapeConfig>();
+        }
+
         /// <summary>
         /// Identificador del repositorio
         /// </summary>
@@ -28,5 +34,9 @@ namespace API_CARGA.Models.Entities
         /// url del repositorio
         /// </summary>
         public string Url { get; set; }
+        
+        [ForeignKey("RepositoryID")]
+        public virtual ICollection<ShapeConfig> ShapeConfig { get; set; }
+
     }
 }
