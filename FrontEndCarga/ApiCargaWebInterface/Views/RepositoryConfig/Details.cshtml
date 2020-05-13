@@ -2,6 +2,12 @@
 
 @{
     ViewData["Title"] = "Details";
+   
+    var modeloShape = new ApiCargaWebInterface.ViewModels.ShapeConfigCreateModel();
+    modeloShape.RepositoryID = Model.RepositoryConfigID;
+
+    //modelo.FechaIinicio = DateTime.Now;
+    
 }
 
 <h1>Details</h1>
@@ -40,7 +46,12 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.RepositoryConfigID }) |
     <a asp-action="Index">Back to List</a>
 </div>
-@if (Model.ShapeConfig!= null)
+<hr />
+<h3>Shapes</h3>
+<p>
+    @Html.ActionLink("Create", "Create", "ShapeConfig", modeloShape)
+</p>
+@if (Model.ShapeConfig != null)
 {
     <partial name="_ListShapes" model="@Model.ShapeConfig" />
 }
