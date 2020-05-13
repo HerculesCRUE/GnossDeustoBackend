@@ -178,8 +178,8 @@ displayname = "vivo:TeacherRole"
     displayname = "vivo:Course"
 
         [[entities.subentities.relationships]]
-        direct = "obobfo:BFO_0000054"
-        inverse = "obobfo:BFO_0000055"
+        direct = "obobfo:BFO_0000055"
+        inverse = "obobfo:BFO_0000054"
 
         [[entities.subentities.properties]]
         displayname = "roh:title"
