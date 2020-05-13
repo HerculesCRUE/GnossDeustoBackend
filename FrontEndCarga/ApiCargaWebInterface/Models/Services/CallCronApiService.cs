@@ -22,13 +22,19 @@ namespace ApiCargaWebInterface.Models.Services
             Object newCreateJob = new
             {
                 id_repository = newJob.IdRepository.ToString(),
-                fecha_inicio = newJob.FechaIinicio,
-                fecha = newJob.FechaFrom,
                 set = newJob.Set,
                 codigo_objeto = newJob.CodigoObjeto
             };
             string stringData = JsonConvert.SerializeObject(newCreateJob);
             string uriParams = stringData.Replace(':', '=').Replace(',', '&').Replace("\"", "").Replace("{", "").Replace("}", "").Replace("null","");
+            if (newJob.FechaIinicio.HasValue)
+            {
+                uriParams += $"&fecha_inicio={newJob.FechaIinicio.Value.ToString("dd/MM/yyyy HH:mm")}";
+            }
+            if (newJob.FechaFrom.HasValue)
+            {
+                uriParams += $"&fecha={newJob.FechaFrom.Value.ToString("dd/MM/yyyy HH:mm")}";
+            }
             string result = _serviceApi.CallPostApi($"{_urlJobApi}?{uriParams}", null);
             guidAdded = JsonConvert.DeserializeObject<string>(result);
             return guidAdded;
@@ -40,8 +46,6 @@ namespace ApiCargaWebInterface.Models.Services
             Object newCreateRecuringJob = new
             {
                 id_repository = newJob.IdRepository.ToString(),
-                fecha_inicio = newJob.FechaIinicio,
-                fecha = newJob.FechaFrom,
                 set = newJob.Set,
                 codigo_objeto = newJob.CodigoObjeto,
                 nombre_job = newJob.Nombre_job,
@@ -49,6 +53,14 @@ namespace ApiCargaWebInterface.Models.Services
             };
             string stringData = JsonConvert.SerializeObject(newCreateRecuringJob);
             string uriParams = stringData.Replace(':', '=').Replace(',', '&').Replace("\"", "").Replace("{", "").Replace("}", "").Replace("null", "");
+            if (newJob.FechaIinicio.HasValue)
+            {
+                uriParams += $"&fecha_inicio={newJob.FechaIinicio.Value.ToString("dd/MM/yyyy HH:mm")}";
+            }
+            if (newJob.FechaFrom.HasValue)
+            {
+                uriParams += $"&fecha={newJob.FechaFrom.Value.ToString("dd/MM/yyyy HH:mm")}";
+            }
             string result = _serviceApi.CallPostApi($"{ _urlRecurringJobApi}?{uriParams}", null);
             guidAdded = JsonConvert.DeserializeObject<string>(result);
             return guidAdded;
