@@ -41,6 +41,26 @@ namespace API_CARGA.Migrations
                     b.ToTable("RepositoryConfig");
                 });
 
+            modelBuilder.Entity("API_CARGA.Models.Entities.RepositorySync", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("RepositoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Set")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UltimaFechaDeSincronizacion")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sincronizacion_Repositorio");
+                });
+
             modelBuilder.Entity("API_CARGA.Models.Entities.ShapeConfig", b =>
                 {
                     b.Property<Guid>("ShapeConfigID")

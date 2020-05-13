@@ -33,7 +33,7 @@ namespace OAI_PMH.Controllers
             _configOAI = OaiConfiguration.Instance;
             _configOAI.SupportSets = true;
             _configOAI.RepositoryName = "OAI_PMH_CVN";
-            _configOAI.Granularity = "yyyy-MM-dd";
+            _configOAI.Granularity = "yyyy-MM-ddTHH:mm:ssZ";
         }
 
         
@@ -60,6 +60,7 @@ namespace OAI_PMH.Controllers
                 Uri baseUri = new Uri(string.Concat(this.Request.Scheme, "://", this.Request.Host, this.Request.Path));
                 return baseUri.AbsoluteUri;
             };
+         
 
             //MetadataFormatRepository
             MetadataFormatRepository metadataFormatRepository = new MetadataFormatRepository();

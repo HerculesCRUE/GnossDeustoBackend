@@ -34,9 +34,9 @@ namespace API_CARGA.Models.Entities
         /// url del repositorio
         /// </summary>
         public string Url { get; set; }
-        
         [ForeignKey("RepositoryID")]
         public virtual ICollection<ShapeConfig> ShapeConfig { get; set; }
+
 
     }
 }

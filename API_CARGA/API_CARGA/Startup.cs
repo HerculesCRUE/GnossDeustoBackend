@@ -57,11 +57,6 @@ namespace PRH
             services.AddSwaggerExamplesFromAssemblyOf<AddShapeConfigErrorResponse>();
             services.AddSwaggerExamplesFromAssemblyOf<ModifyShapeConfigErrorResponse>();
 
-            services.AddSwaggerExamplesFromAssemblyOf<ConfigSyncsResponse>();
-            services.AddSwaggerExamplesFromAssemblyOf<ConfigSyncResponse>();
-            services.AddSwaggerExamplesFromAssemblyOf<AddSyncErrorResponse>();
-            services.AddSwaggerExamplesFromAssemblyOf<ModifySyncErrorResponse>();
-
             services.Configure<ForwardedHeadersOptions>(options =>
             {
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
@@ -83,7 +78,6 @@ namespace PRH
             //services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
             services.AddScoped<IShapesConfigService, ShapesConfigBDService>();
             //services.AddSingleton<ISyncConfigService, SyncConfigMockService>();
-            services.AddScoped<ISyncsConfigService, SyncsConfigBDService>();
 
 
             services.AddSingleton(typeof(SparqlConfigJson));
