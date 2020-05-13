@@ -107,7 +107,7 @@ namespace OaiPmhNet.Models.OAIPMH
                 {
                     Identifier = pCVN.Id.ToString(),
                     SetSpecs = new List<string>() { "cvn" },
-                    Datestamp = DateTime.UtcNow.AddSeconds(int.Parse(pCVN.Id))
+                    Datestamp = DateTime.UtcNow.AddDays(-100+int.Parse(pCVN.Id))
                 }
             };
 
@@ -130,7 +130,7 @@ namespace OaiPmhNet.Models.OAIPMH
                 {
                     Identifier = pCVN.Id.ToString(),
                     SetSpecs = new List<string>() { "cvn" },
-                    Datestamp = DateTime.UtcNow
+                    Datestamp = DateTime.UtcNow.AddDays(-100 + int.Parse(pCVN.Id))
                 }
             };
 
