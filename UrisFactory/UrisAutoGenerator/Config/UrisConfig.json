@@ -460,8 +460,8 @@
       "ResourceURI": "uriResourceStructure"
     },
     {
-      "ResourceClass": "SupervisingRelationship",
-      "LabelResourceClass": "supervisingrelationship",
+      "ResourceClass": "PhDSupervisingRelationship",
+      "LabelResourceClass": "phdsupervisingrelationship",
       "ResourceURI": "uriResourceStructure"
     },
     {
