@@ -37,9 +37,9 @@
                     @Html.DisplayFor(modelItem => item.Shape)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "ShapeConfig", new { id = item.ShapeConfigID }) |
-                    @Html.ActionLink("Details", "Details", "ShapeConfig", new { id = item.ShapeConfigID }) |
-                    @Html.ActionLink("Delete", "Delete", "ShapeConfig", new { id = item.ShapeConfigID })
+                    <a href="@Url.Action("Details", new {  id=item.ShapeConfigID  })" class="ver"><i class="material-icons">remove_red_eye</i></a>
+                    <a href="@Url.Action("Edit", new {  id=item.ShapeConfigID  })" class="editar"><i class="material-icons">mode_edit</i></a>
+                    <a href="@Url.Action("Delete", new {  id=item.ShapeConfigID  })" class="borrar"><i class="material-icons">delete</i></a>
                 </td>
             </tr>
         }
