@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -39,13 +40,22 @@ namespace CronConfigure
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
+            IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+            string connectionHangfireString = "";
+            if (environmentVariables.Contains("HangfireConnection"))
+            {
+                connectionHangfireString = environmentVariables["HangfireConnection"] as string;
+            }
+            else
+            {
+                connectionHangfireString = Configuration.GetConnectionString("HangfireConnection");
+            }
             //Add Hangfire services.
             services.AddHangfire((isp, configuration) => configuration
                 .SetDataCompatibilityLevel(CompatibilityLevel.Version_110)
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseRecommendedSerializerSettings()
-                .UsePostgreSqlStorage(Configuration.GetConnectionString("HangfireConnection"), new PostgreSqlStorageOptions()
+                .UsePostgreSqlStorage(connectionHangfireString, new PostgreSqlStorageOptions()
                 {
                     InvisibilityTimeout = TimeSpan.FromDays(1)
                 }));
@@ -66,13 +76,12 @@ namespace CronConfigure
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
 
-
             services.AddEntityFrameworkNpgsql().AddDbContext<HangfireEntityContext>(opt =>
             {
                 var builder = new NpgsqlDbContextOptionsBuilder(opt);
                 builder.SetPostgresVersion(new Version(9, 6));
                 builder.MigrationsHistoryTable("__EFMigrationsHistory", "hangfire");
-                opt.UseNpgsql(Configuration.GetConnectionString("HangfireConnection"));
+                opt.UseNpgsql(connectionHangfireString);
 
             });
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,7 +23,16 @@ namespace API_CARGA.Models.Services
                     .AddJsonFile("appsettings.json");
 
                 Configuration = builder.Build();
-                Graph = Configuration["Sparql:Graph"];
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("Graph"))
+                {
+                    Graph = environmentVariables["Graph"] as string;
+                }
+                else
+                {
+                    Graph = Configuration["Sparql:Graph"];
+                }
+                
             }
             return Graph;
         }
@@ -36,7 +46,15 @@ namespace API_CARGA.Models.Services
                     .AddJsonFile("appsettings.json");
 
                 Configuration = builder.Build();
-                Endpoint = Configuration["Sparql:Endpoint"];
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("Endpoint"))
+                {
+                    Endpoint = environmentVariables["Endpoint"] as string;
+                }
+                else
+                {
+                    Endpoint = Configuration["Sparql:Endpoint"];
+                }
             }
             return Endpoint;
         }
@@ -50,7 +68,16 @@ namespace API_CARGA.Models.Services
                     .AddJsonFile("appsettings.json");
 
                 Configuration = builder.Build();
-                QueryParam = Configuration["Sparql:QueryParam"];
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("QueryParam"))
+                {
+                    QueryParam = environmentVariables["QueryParam"] as string;
+                }
+                else
+                {
+                    QueryParam = Configuration["Sparql:QueryParam"];
+                }
+
             }
             return QueryParam;
         }
