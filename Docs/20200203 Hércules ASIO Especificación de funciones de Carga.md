@@ -248,11 +248,11 @@ carga de datos.
 
 -   ETL: Extracción, transformación y carga de datos.
 
--   ETL-CONFIG: Configuraciones correspondientes a la extracción,
-    transformación y carga de datos.
+-   REPOSITORY: Contiene los procesos necesarios para la gestión de los repositorios OAI-PMH (creación, modificación, eliminación...).
 
--   SYNC: Configuraciones y métodos para interactuar con las
-    sincronizaciones.
+-   SYNC: Contiene los procesos necesarios para la ejecución de las sincronizaciones.
+
+-   VALIDATION: Contiene los procesos necesarios para la gestión de las validaciones (creación, modificación, eliminación...).
 
 La especificación concreta de este API se puede consultar en:
 
