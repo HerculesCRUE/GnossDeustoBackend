@@ -104,7 +104,7 @@ uri_base = "http://xmlns.com/foaf/0.1/"
 Observa cómo se repite el encabezado `[[ontologies]]` en cada ontología, indicando que se trata de un elemento de un *array*.
 
 
-## Generación de entidades
+# Generación de entidades
 
 Las entidades se declaran en el archivo `entities.toml`. Se definen en un array llamado `entities`:
 
@@ -115,9 +115,9 @@ Las entidades se declaran en el archivo `entities.toml`. Se definen en un array 
 (configuración entidad 2)
 ```
 
-### Configuración
+## Configuración
 
-#### Código
+### Código
 
 - `code`: un string, representa el código del bean en el CVN. En las subentidades no es necesario. 
 
@@ -127,7 +127,7 @@ code = "000.010.000.000"
 [...]
 ```
 
-#### Displayname
+### Displayname
 
 Es la manera de representar qué clase y ontología vamos a usar. Es un string: la ontología, luego ":" y finalmente el nombre de la clase.
 
@@ -142,7 +142,7 @@ displayname = "foaf:Person"
 
 Para permitir tener *backwards compatibility* con versiones antiguas de este programa, es posible declarar el displayname por separado (ontology y classname), aunque está *deprecated* y no debe hacerse así más.
 
-#### Entidad primaria
+### Entidad primaria
 
 Una entidad puede ser marcada como primaria poniendo `primary` a `true`. Debe haber siempre una entidad primaria.
 No es necesario poner el ajuste si el valor va a ser `false`. La entidad primaria se genera antes que las demás y es posible hacer relaciones directas a ella sin necesidad de crear subentidades.
@@ -155,7 +155,7 @@ primary = true
 [...]
 ```
 
-#### Generación de URIS
+### Generación de URIs
 
 Para la generación se usa el servicio UrisFactory.
 
@@ -171,7 +171,7 @@ id.resource = "Article"
 id.format = "{vivo:doi}"
 ```
 
-#### Caché
+### Caché
 
 Debido a la cantidad de datos duplicados e independientes que existen en un CVN, existe la posibilidad de evitar generar dos entidades que tengan el mismo valor para una propiedad. De esta manera podemos guardar bajo la misma instancia varias personas con el mismo nombre. Ejemplo:
 
@@ -182,4 +182,110 @@ id.resource = "Person"
 cache = "foaf:name"
 ```
 
-### Ejemplos
+## Propiedades
+
+Una entidad puede tener propiedades (el equivalente a *data properties*).
+
+Las propiedades se declaran en un subarray dentro de las entidades. Las propiedades, a su vez, tienen fuentes de datos, permitiendo formatear el resultado y mezclar datos de diferentes sitios dentro del Item del CVN.
+
+Por ejemplo:
+
+```
+[[entities.properties]]
+    displayname = "foaf:name"
+    hidden = true
+    format = "{name} {familyName} {secondFamilyName}"
+
+        [[entities.properties.sources]]
+        code = "000.010.000.020"
+        name = "name"
+
+        [[entities.properties.sources]]
+        code = "000.010.000.010"
+        name = "familyName"
+        bean = "FirstFamilyName"
+
+        [[entities.properties.sources]]
+        code = "000.010.000.010"
+        name = "secondFamilyName"
+        bean = "SecondFamilyName"
+```
+
+En este ejemplo declaramos la propiedad `foaf:name` y lo formateamos: Nombre Apellido Segundoapellido. Ahora, sacamos esos valores de ciertos códigos en el Item CVN. Cada *Source* puede tener un código y bean diferente.
+
+## Relaciones
+
+Las entidades pueden tener dos tipos de relaciones: con su clase padre (si son subclases) o con la entidad primaria. Cada relación tiene a su vez dos campos: la relación directa (esta clase *x* la otra) e inversa (otra clase *x* esta). Ambas son opcionales: puede declararse solo directa, solo inversa o directa e inversa. Las relaciones equivalen a *object properties*. Ejemplos:
+
+De una relación con la entidad primaria:
+
+```
+[[entities]]
+code = "060.010.010.000"
+ontology = "bibo"
+classname = "AcademicArticle"
+id.resource = "Article"
+id.format = "{vivo:doi}"
+
+    [[entities.relationships]]
+    ontology = "roh"
+    name = "correspondingAuthor"
+    inverse_ontology = "roh"
+    inverse_name = "correspondingAuthorOf"
+    link_to_cvn_person = true
+```
+Aquí creamos un *AcademicArticle* y lo enlazamos con la entidad primaria (normalmente será la persona del CVN)
+
+En el siguiente ejemplo hay dos relaciones con las clases padres: un *DateTimeInterval* se enlaza con la clase superior, y a su vez, sus subclases, con ella:
+
+```
+[[entities.subentities]]
+    ontology = "vivo"
+    classname = "DateTimeInterval"
+
+        [[entities.subentities.relationships]]
+        inverse_ontology = "vivo"
+        inverse_name = "dateTimeInterval"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "start"
+```
+
+
+## Subentidades
+
+Las entidades pueden tener subentidades (con sus propiedades, condiciones, relaciones), y éstas pueden tener, a su vez, más subentidades (y subsubentidades, etc.)
+
+Se declaran en el subarray `subentities`:
+
+```
+[[entities]]
+code = "030.010.000.000"
+displayname = "vivo:TeacherRole"
+
+    [[entities.relationships]]
+    direct = "oboro:RO_000052"
+    inverse = "oboro:RO_000053"
+    link_to_cvn_person = true
+
+    [[entities.subentities]]
+    displayname = "vivo:Course"
+
+        [[entities.subentities.relationships]]
+        direct = "obobfo:BFO_0000055"
+        inverse = "obobfo:BFO_0000054"
+
+        [[entities.subentities.properties]]
+        displayname = "roh:title"
+        format = "{title}"
+
+            [[entities.subentities.properties.sources]]
+            code = "030.010.000.160"
+            name = "title"
+```
+En este ejemplo creamos una entidad padre *vivo:TeacherRole*, y una subentidad *vivo:Course* y las relacionamos entre sí. La subentidad tiene, a su vez, una propiedad.
