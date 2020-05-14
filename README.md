@@ -197,7 +197,7 @@ Además, habrá que configurar en el fichero SparqlConfig.json los datos de conf
     }
 
     
- - **FrontEndCarga**: tendremos que configurar la ubicación del API_CARGA al que debe hacer las llamadas mediante el parámetro “ConfigURL” en el appsettings.json que se encontrará en la raíz del proyecto. Ejemplo: `"ConfigUrl": http://herc-as-front-desa.atica.um.es/carga/`
+ - **FrontEndCarga**: tendremos que configurar la ubicación del API_CARGA y del CronConfigure al que deben hacer las llamadas mediante el parámetro “ConfigURL” y "ConfigUrlCron" en el appsettings.json que se encontrará en la raíz del proyecto. Ejemplo: `"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/","ConfigUrlCron": "https://localhost:44359/"`
 
 ### Control de aplicaciones
 
