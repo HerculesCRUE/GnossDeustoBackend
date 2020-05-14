@@ -1,59 +1,47 @@
 ﻿@model ApiCargaWebInterface.ViewModels.RepositoryConfigViewModel
 
 @{
-    ViewData["Title"] = "Details";
-   
+    ViewData["Title"] = Model.Name + " - Repositorio";
+    ViewData["BodyClass"] = "fichaRecurso";
+
     var modeloShape = new ApiCargaWebInterface.ViewModels.ShapeConfigCreateModel();
     modeloShape.RepositoryID = Model.RepositoryConfigID;
-
-    //modelo.FechaIinicio = DateTime.Now;
-    
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>Config repository</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RepositoryConfigID)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RepositoryConfigID)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OauthToken)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OauthToken)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Url)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Url)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.RepositoryConfigID }) |
-    <a asp-action="Index">Back to List</a>
-</div>
-<hr />
-<h3>Shapes</h3>
-<p>
-    @Html.ActionLink("Create", "Create", "ShapeConfig", modeloShape)
-</p>
-@if (Model.ShapeConfig != null)
-{
-    <partial name="_ListShapes" model="@Model.ShapeConfig" />
-}
+    <div class="row">
+        <div class="col col-12 col-lg-12 col-contenido">
+            <div class="wrapCol">
+                <div class="header-resource">
+                    <div class="h1-container">
+                        <h1>@Model.Name</h1>
+                        <a href="javascript: void(0);" class="btn btn-sincronizar">Sincronizar</a>
+                    </div>
+                </div>
+                <div class="contenido">
+                    <div class="grupo grupo-descripcion">
+                        <div class="identifier">
+                            <p class="titulo">Identifier</p>
+                            <p>@Model.RepositoryConfigID</p>
+                        </div>
+                        <div class="outh-token">
+                            <p class="titulo">Oauth token</p>
+                            <p>@Model.OauthToken</p>
+                        </div>
+                        <div class="outh-token">
+                            <p class="titulo">Url</p>
+                            <p>@Model.Url</p>
+                        </div>
+                    </div>
+
+                    <div class="grupo grupo-programacion">
+                        <h2>Shapes</h2>
+                        <a href="@Url.Action("Create", "ShapeConfig", modeloShape)" class="btn btn-programacion">Crear nuevo Shape</a>
+                        <partial name="_ListShapes" model="@Model.ShapeConfig" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
