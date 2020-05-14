@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OAI_PMH_CVN.Models.Services;
 using OaiPmhNet;
 using OaiPmhNet.Converters;
 using OaiPmhNet.Models;
 using OaiPmhNet.Models.OAIPMH;
-using OaiPmhNet.Models.Services;
 using System;
 using System.IO;
 using System.Xml;
@@ -20,16 +20,17 @@ namespace OAI_PMH.Controllers
     [Route("[controller]")]
     public class OAI_PMHController : Controller
     {
-        private ConfigService _configService;
         private IOaiConfiguration _configOAI;
+
+        readonly ConfigOAI_PMH_CVN _configOAI_PMH_CVN;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="configService">Configuración del servicio</param>
-        public OAI_PMHController(ConfigService configService)
+        /// <param name="configOAI_PMH_CVN">Configuración del servicio</param>
+        public OAI_PMHController(ConfigOAI_PMH_CVN configOAI_PMH_CVN)
         {
-            _configService = configService;
+            _configOAI_PMH_CVN = configOAI_PMH_CVN;
             _configOAI = OaiConfiguration.Instance;
             _configOAI.SupportSets = true;
             _configOAI.RepositoryName = "OAI_PMH_CVN";
@@ -57,7 +58,7 @@ namespace OAI_PMH.Controllers
             //CONFIG OAI-PMH
             _configOAI.BaseUrl = () =>
             {
-                Uri baseUri = new Uri(string.Concat(this.Request.Scheme, "://", this.Request.Host, this.Request.Path));
+                Uri baseUri = new Uri(_configOAI_PMH_CVN.GetConfigUrl());
                 return baseUri.AbsoluteUri;
             };
          
@@ -65,7 +66,7 @@ namespace OAI_PMH.Controllers
             //MetadataFormatRepository
             MetadataFormatRepository metadataFormatRepository = new MetadataFormatRepository();
 
-            RecordRepository recordRepository = new RecordRepository(_configOAI, _configService);
+            RecordRepository recordRepository = new RecordRepository(_configOAI, _configOAI_PMH_CVN);
 
             //SetRepository
             SetRepository setRepository = new SetRepository(_configOAI);

@@ -6,12 +6,6 @@ Accesible en pruebas en esta dirección a través de swagger: http://herc-as-fro
 API CARGA es un servicio web que contienen 4 controladores, utilizados cada uno de ellos para su propio propósito:
  - etlController: Contiene los procesos ETL (Extract, Transform and Load) necesarios para la carga de datos.
  - repositoryController: Contiene los procesos necesarios para la gestión de los repositorios OAI-PMH (creación, modificación, eliminación...).
- - syncController: Contiene los procesos necesarios para la gestión de las sincronizaciones  (creación, modificación, eliminación...).
- - ValidationControlles: Contiene los procesos necesarios para la gestión de las validaciones  (creación, modificación, eliminación...).
+ - syncController: Contiene los procesos necesarios para la ejecución de las sincronizaciones.
+ - ValidationController: Contiene los procesos necesarios para la gestión de las validaciones  (creación, modificación, eliminación...).
  
-
-## Cómo compilar
-API CARGA está construido contra el último ASP.NET Core 3.
-
-* Instalar el .NET Core SDK Requerido
-* Instalar GIT

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -28,27 +29,18 @@ namespace API_CARGA.Models.Services
             List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
             if (codigoObjeto == null)
             {
-                listIdentifier = CallListIdentifier(identifier,set,fechaFrom);
-            //if (listIdentifier.Count > 2)
-            //{
-            //    listIdentifier = listIdentifier.GetRange(0, 2);
-            //}
-                var objeto = listIdentifier.FirstOrDefault(item => item.Identifier.Equals(codigoObjeto));
-                listIdentifier = new List<IdentifierOAIPMH>();
-                if(objeto!= null)
-                {
-                    listIdentifier.Add(objeto);
-                }
+                listIdentifier = CallListIdentifier(identifier, set, fechaFrom);
             }
             IdentifierOAIPMH lastSyncro = null;
             try
             {
-                if (codigoObjeto == null) 
+                if (codigoObjeto == null)
                 {
                     foreach (IdentifierOAIPMH identifierOAIPMH in listIdentifier)
                     {
-                        List<string> listRdf = CallGetRecord(identifier, identifierOAIPMH.Identifier);
-                        CallDataPublish(listRdf, identifier);
+                        string rdf = CallGetRecord(identifier, identifierOAIPMH.Identifier);
+                        CallDataValidate(rdf, identifier);
+                        CallDataPublish(rdf);
                         lastSyncro = identifierOAIPMH;
                     }
                     if (lastSyncro != null)
@@ -58,8 +50,9 @@ namespace API_CARGA.Models.Services
                 }
                 else
                 {
-                    List<string> listRdf = CallGetRecord(identifier, codigoObjeto);
-                    CallDataPublish(listRdf, identifier);
+                    string rdf = CallGetRecord(identifier, codigoObjeto);
+                    CallDataValidate(rdf, identifier);
+                    CallDataPublish(rdf);
                 }
 
             }
@@ -71,7 +64,7 @@ namespace API_CARGA.Models.Services
                 }
                 throw new Exception(ex.Message);
             }
-            
+
         }
 
         private void AddSyncro(IdentifierOAIPMH lastSyncro, string set, Guid repositoryId)
@@ -87,7 +80,7 @@ namespace API_CARGA.Models.Services
                 else
                 {
                     RepositorySync repoSync = _context.RepositorySync.FirstOrDefault(item => item.RepositoryId.Equals(repositoryId) && item.Set.Equals(set));
-                    if(repoSync == null)
+                    if (repoSync == null)
                     {
                         repoSync.UltimaFechaDeSincronizacion = lastSyncro.Fecha;
                     }
@@ -121,15 +114,14 @@ namespace API_CARGA.Models.Services
         public List<IdentifierOAIPMH> CallListIdentifier(Guid identifierRepo, string set = null, DateTime? fechaFrom = null)
         {
             string uri = $"etl/ListIdentifiers/{identifierRepo}?metadataPrefix=rdf";
-            if (set != null )
+            if (set != null)
             {
                 uri += $"&set={set}";
             }
-            if(fechaFrom != null)
+            if (fechaFrom != null)
             {
                 DateTime until = DateTime.Now.AddYears(1);
-                uri += $"&from={fechaFrom}&until={until}";
-
+                uri += $"&from={fechaFrom.Value.ToString("u",CultureInfo.InvariantCulture)}&until={until.ToString("u", CultureInfo.InvariantCulture)}";
             }
             List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
             string xml = CallGetApi(uri);
@@ -141,7 +133,7 @@ namespace API_CARGA.Models.Services
             {
                 string identifier = header.Element(nameSpace + "identifier").Value;
                 string fecha = header.Element(nameSpace + "datestamp").Value;
-                DateTime fechaSincro = DateTime.Parse(fecha);
+                DateTime fechaSincro = DateTime.Parse(fecha).ToUniversalTime();
                 IdentifierOAIPMH identifierOAIPMH = new IdentifierOAIPMH()
                 {
                     Fecha = fechaSincro,
@@ -152,29 +144,39 @@ namespace API_CARGA.Models.Services
             return listIdentifier;
         }
 
-        public List<string> CallGetRecord(Guid repoIdentifier, string identifier)
+        /// <summary>
+        /// Obtiene el rdf del identificador en el repositorio
+        /// </summary>
+        /// <param name="repoIdentifier">Identificador del repositorio</param>
+        /// <param name="identifier">Identificador del elemento</param>
+        /// <returns>RDF</returns>
+        public string CallGetRecord(Guid repoIdentifier, string identifier)
         {
-            List<string> listRdf = new List<string>();
-            IdentifierOAIPMH lastIdentifer = null;
-            //foreach (IdentifierOAIPMH indentifier in listIdentifier)
-            //{
-                string respuesta = CallGetApi($"etl/GetRecord/{repoIdentifier}?identifier={identifier}&&metadataPrefix=rdf");
-                XDocument respuestaXML = XDocument.Parse(respuesta);
-                XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
-                listRdf.Add(respuestaXML.Root.Element(nameSpace + "GetRecord").Descendants(nameSpace + "metadata").First().FirstNode.ToString());
-            //}
-            
-            return listRdf;
+            string respuesta = CallGetApi($"etl/GetRecord/{repoIdentifier}?identifier={identifier}&&metadataPrefix=rdf");
+            XDocument respuestaXML = XDocument.Parse(respuesta);
+            XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
+            string rdf = respuestaXML.Root.Element(nameSpace + "GetRecord").Descendants(nameSpace + "metadata").First().FirstNode.ToString();
+            return rdf;
         }
 
-        public void CallDataPublish(List<string> listRdf, Guid identifier)
+        public void CallDataPublish(string rdf)
         {
-            foreach(string rdf in listRdf)
+            var bytes = Encoding.UTF8.GetBytes(rdf);
+            MultipartFormDataContent multiContent = new MultipartFormDataContent();
+            multiContent.Add(new ByteArrayContent(bytes), "rdfFile", "rdfFile.rdf");
+            CallPostApiFile("etl/data-publish", multiContent);
+        }
+
+        public void CallDataValidate(string rdf, Guid repositoryIdentifier)
+        {
+            var bytes = Encoding.UTF8.GetBytes(rdf);
+            MultipartFormDataContent multiContent = new MultipartFormDataContent();            
+            multiContent.Add(new ByteArrayContent(bytes), "rdfFile", "rdfFile.rdf");
+            string response= CallPostApiFile("etl/data-validate", multiContent, "repositoryIdentifier="+ repositoryIdentifier.ToString());
+            ShapeReport shapeReport= JsonConvert.DeserializeObject<ShapeReport>(response);
+            if (!shapeReport.conforms && shapeReport.severity == "http://www.w3.org/ns/shacl#Violation")
             {
-                var bytes = Encoding.UTF8.GetBytes(rdf);
-                MultipartFormDataContent multiContent = new MultipartFormDataContent();
-                multiContent.Add(new ByteArrayContent(bytes), "rdfFile", "rdfFile.rdf");
-                CallPostApiFile("etl/data-publish", multiContent);
+                throw new Exception("Se han producido errores en la validación: "+ JsonConvert.SerializeObject(shapeReport));
             }
         }
 
@@ -205,7 +207,7 @@ namespace API_CARGA.Models.Services
             return result;
         }
 
-        private string CallPostApiFile(string urlMethod, MultipartFormDataContent item)
+        private string CallPostApiFile(string urlMethod, MultipartFormDataContent item,string parameters=null)
         {
             //string stringData = JsonConvert.SerializeObject(item);
             //var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
@@ -214,8 +216,12 @@ namespace API_CARGA.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
-                string url = _serviceUrl.GetUrl();
-                response = client.PostAsync($"{url}{urlMethod}", item).Result;
+                string url = _serviceUrl.GetUrl()+ urlMethod;
+                if(parameters!=null)
+                {
+                    url += "?"+parameters;
+                }
+                response = client.PostAsync(url, item).Result;
                 response.EnsureSuccessStatusCode();
                 result = response.Content.ReadAsStringAsync().Result;
                 return result;

@@ -28,8 +28,8 @@ namespace XUnitTestIntegracion
             ConfigUrlService urlService = new ConfigUrlService();
             urlService.Url = "http://herc-as-front-desa.atica.um.es/carga/";
             OaiPublishRDFService oaiPublish = new OaiPublishRDFService(urlService, null);
-            var lista = oaiPublish.CallGetRecord(new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"), "0000-0001-8055-6823");
-            Assert.True(lista.Count > 0);
+            string rdf = oaiPublish.CallGetRecord(new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"), "0000-0001-8055-6823");
+            Assert.True(!string.IsNullOrEmpty(rdf));
         }
     }
 }

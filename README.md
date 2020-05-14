@@ -6,6 +6,7 @@
  - [OAI_PMH_CVN](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/OAI_PMH_CVN "OAI_PMH_CVN"): Servicio OAI-PMH para la obtención de invstigadores de la Universidad de Murcia.
  - [UrisFactory](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/UrisFactory "UrisFactory"): Servicio que genera las uris de los recursos
  - [cvn](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/cvn): Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH.
+ - [CronConfigure](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/CronConfigure): Servicio Web que realiza la creación de tareas para la sincronización de un repositorio.
  
  ### Diagrama de componentes del proyecto:
  
@@ -174,6 +175,7 @@ Una vez realizado tendremos descargada una carpeta GnossDeustoBackend con los di
  - **FrontEndCarga**: se encuentra en FrontEndCarga/ApiCargaWebInterface.
  - **OAI_PMH_CVN**: se encuentra en OAI_PMH_CVN/OAI_PMH_CVN
  - **UrisFactory:** se encuentra en UrisFactory/UrisAutoGenerator
+ - **UrisFactory:** se encuentra en CronConfigure/CronConfigure
  
 Las anteriores rutas son las que hay que compilar y ejecutar con los comandos dotnet, por lo que hay que tenerlas en cuenta.
 
@@ -188,8 +190,23 @@ Antes de ejecutar los apis deberíamos configurar los elementos necesarios para 
        "PostgreConnection": "Host=ip_del_servidor;Database=nombre_de_la_base_de_datos;Username=usuario;Password=contraseña",
        "PostgreConnectionmigration": "Host=ip_del_servidor;Database=nombre_de_la_base_de_datos;Username=usuario;Password=contraseña"
     },
+Además, habrá que configurar en el fichero SparqlConfig.json los datos de configración del endpoint Sparql contra el que se realizarán las publicaciones, quedando:
+>
+    {
+      "graph": "nombre_del_grafo_para_las_publicaciones",
+      "endpoint": "url_del_endpoint_sparql",
+      "queryparam": "nombre_del_parametro_para_la_query"
+    }
+
     
- - **FrontEndCarga**: tendremos que configurar la ubicación del API_CARGA al que debe hacer las llamadas mediante el parámetro “ConfigURL” en el appsettings.json que se encontrará en la raíz del proyecto. Ejemplo: `"ConfigUrl": http://herc-as-front-desa.atica.um.es/carga/`
+ - **FrontEndCarga**: tendremos que configurar la ubicación del API_CARGA y del CronConfigure al que deben hacer las llamadas mediante el parámetro “ConfigURL” y "ConfigUrlCron" en el appsettings.json que se encontrará en la raíz del proyecto. Ejemplo: `"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/","ConfigUrlCron": "https://localhost:44359/"`
+ 
+  - **OAI_PMH_CVN**: En este api tendremos que configurar en el fichero OAI_PMH_CVN_Config.json la url del repositorio de curriculums CVN-XML de la UM y el servicio de CVN-ROH encargado de transformar los CVN-XML al formato RDF ROH, quedando: 
+ >
+    {
+      "XML_CVN_Repository": "url_repositorio_curriculums_CVN-XML_UM",
+      "CVN_ROH_converter": "url_CVN-ROH"
+    }
 
 ### Control de aplicaciones
 

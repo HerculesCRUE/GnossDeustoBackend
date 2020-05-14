@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,7 +21,16 @@ namespace CronConfigure.Models.Services
                     .AddJsonFile("appsettings.json");
 
                 Configuration = builder.Build();
-                var connectionString = Configuration["ConfigUrl"];
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                string connectionString = "";
+                if (environmentVariables.Contains("ConfigUrl"))
+                {
+                    connectionString = environmentVariables["ConfigUrl"] as string;
+                }
+                else
+                {
+                    connectionString = Configuration["ConfigUrl"];
+                }
                 Url = connectionString;
             }
             return Url;

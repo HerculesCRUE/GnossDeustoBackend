@@ -76,7 +76,7 @@ namespace API_CARGA.Models.Utility
 
             //Cargamos datos a validar
             RohGraph dataGraph = new RohGraph();
-            dataGraph.LoadFromString(pRdfFileContent);
+            dataGraph.LoadFromString(pRdfFileContent, new RdfXmlParser());
 
             //Aplicamos inferencias de la ontologia
             RohRdfsReasoner reasoner = new RohRdfsReasoner();

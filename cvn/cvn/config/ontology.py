@@ -1,4 +1,20 @@
 from rdflib import Namespace
+from pydoc import locate
+
+
+class DataType:
+    def __init__(self, ontology, name, python_type, default, force):
+        self.ontology = ontology
+        self.name = name
+        self.python_type = python_type
+        self.default = default
+        self.force = force
+
+    def get_python_type(self):
+        return locate(self.python_type)
+
+    def get_identifier(self):
+        return self.ontology + ":" + self.name
 
 
 class OntologyConfig:
@@ -6,6 +22,23 @@ class OntologyConfig:
         self.ontologies = {}
         self.graph = None
         self.cvn_person = None
+        self.data_types = []
+
+    def add_data_type(self, data_type):
+        self.data_types.append(data_type)
+        return self
+
+    def get_default_data_type(self):
+        for data_type in self.data_types:
+            if data_type.default:
+                return data_type
+        return None
+
+    def get_data_type(self, identifier):
+        for data_type in self.data_types:
+            if data_type.get_identifier() == identifier:
+                return data_type
+        return None
 
     def get_ontology(self, short_name):
         if short_name not in self.ontologies:

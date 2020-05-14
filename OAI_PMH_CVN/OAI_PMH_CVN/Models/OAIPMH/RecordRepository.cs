@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 using OAI_PMH_CVN.Models.Services;
 using OaiPmhNet.Converters;
 using OaiPmhNet.Models;
-using OaiPmhNet.Models.Services;
 using RestSharp;
 
 namespace OaiPmhNet.Models.OAIPMH
@@ -19,7 +18,7 @@ namespace OaiPmhNet.Models.OAIPMH
     public class RecordRepository : IRecordRepository
     {
         private readonly IOaiConfiguration _configurationOAI;
-        private readonly ConfigService _configService;
+        private readonly ConfigOAI_PMH_CVN _configOAI_PMH_CVN;
         private readonly IDateConverter _dateConverter;
         private readonly IDublinCoreMetadataConverter _dublinCoreMetadataConverter;
 
@@ -27,11 +26,11 @@ namespace OaiPmhNet.Models.OAIPMH
         /// Constructor
         /// </summary>
         /// <param name="configurationOAI">Configuración OAI-PMH</param>
-        /// <param name="configService">Configuración del servicio</param>
-        public RecordRepository(IOaiConfiguration configurationOAI, ConfigService configService)
+        /// <param name="configOAI_PMH_CVN">Configuración del servicio</param>
+        public RecordRepository(IOaiConfiguration configurationOAI, ConfigOAI_PMH_CVN configOAI_PMH_CVN)
         {
             _configurationOAI = configurationOAI;
-            _configService = configService;
+            _configOAI_PMH_CVN = configOAI_PMH_CVN;
             _dateConverter = new DateConverter();
             _dublinCoreMetadataConverter = new DublinCoreMetadataConverter(configurationOAI, _dateConverter);
         }
@@ -44,7 +43,7 @@ namespace OaiPmhNet.Models.OAIPMH
         /// <returns></returns>
         public Record GetRecord(string identifier, string metadataPrefix)
         {
-            CVN CVN = GetCurriculum(identifier, false, _configService.GetConfig().XML_CVN_Repository);
+            CVN CVN = GetCurriculum(identifier, false, _configOAI_PMH_CVN.GetXML_CVN_Repository());
             return ToRecord(CVN, metadataPrefix);
         }
 
@@ -62,11 +61,12 @@ namespace OaiPmhNet.Models.OAIPMH
             {
                 inicio = from;
             }
-            HashSet<string> ids = GetCurriculumsIDs(inicio, _configService.GetConfig().XML_CVN_Repository);
+            
+            HashSet<string> ids = GetCurriculumsIDs(inicio, _configOAI_PMH_CVN.GetXML_CVN_Repository());
             List<CVN> listCVN = new List<CVN>();
             foreach (string id in ids)
             {
-                listCVN.Add(GetCurriculum(id, arguments.Verb == OaiVerb.ListIdentifiers.ToString(), _configService.GetConfig().XML_CVN_Repository));
+                listCVN.Add(GetCurriculum(id, arguments.Verb == OaiVerb.ListIdentifiers.ToString(), _configOAI_PMH_CVN.GetXML_CVN_Repository()));
             }
             if (arguments.Verb == OaiVerb.ListIdentifiers.ToString())
             {
@@ -77,6 +77,7 @@ namespace OaiPmhNet.Models.OAIPMH
                 container.Records = listCVN.Select(r => ToRecord(r, arguments.MetadataPrefix));
 
             }
+            container.Records = container.Records.Where(x=>x.Header.Datestamp>inicio).ToList();
             return container;
         }
 
@@ -182,7 +183,7 @@ namespace OaiPmhNet.Models.OAIPMH
                 request.AddHeader("key", "asiokey");
                 xml = client.Execute(request).Content;
             }
-            return new CVN(xml, pId, _configService.GetConfig().CVN_ROH_converter);
+            return new CVN(xml, pId, _configOAI_PMH_CVN.GetCVN_ROH_converter());
         }
 
     }
