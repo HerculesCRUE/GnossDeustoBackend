@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiCargaWebInterface", "ApiCargaWebInterface\ApiCargaWebInterface.csproj", "{7A343412-4AA6-48FB-9F5B-ABA7C0865324}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestIntegracion", "XUnitTestIntegracion\XUnitTestIntegracion.csproj", "{19CE9939-BA78-454F-B001-FA413199F1BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestIntegracion", "XUnitTestIntegracion\XUnitTestIntegracion.csproj", "{19CE9939-BA78-454F-B001-FA413199F1BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
