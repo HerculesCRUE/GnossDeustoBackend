@@ -6,6 +6,7 @@
  - [OAI_PMH_CVN](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/OAI_PMH_CVN "OAI_PMH_CVN"): Servicio OAI-PMH para la obtención de invstigadores de la Universidad de Murcia.
  - [UrisFactory](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/UrisFactory "UrisFactory"): Servicio que genera las uris de los recursos
  - [cvn](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/cvn): Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH.
+ - [CronConfigure](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/CronConfigure): Servicio Web que realiza la creación de tareas para la sincronización de un repositorio.
  
  ### Diagrama de componentes del proyecto:
  
@@ -174,6 +175,7 @@ Una vez realizado tendremos descargada una carpeta GnossDeustoBackend con los di
  - **FrontEndCarga**: se encuentra en FrontEndCarga/ApiCargaWebInterface.
  - **OAI_PMH_CVN**: se encuentra en OAI_PMH_CVN/OAI_PMH_CVN
  - **UrisFactory:** se encuentra en UrisFactory/UrisAutoGenerator
+ - **UrisFactory:** se encuentra en CronConfigure/CronConfigure
  
 Las anteriores rutas son las que hay que compilar y ejecutar con los comandos dotnet, por lo que hay que tenerlas en cuenta.
 
