@@ -65,7 +65,7 @@ namespace PMH.Controllers
         /// Valida un RDF mediante el shape SHACL configurado
         /// </summary>
         /// <param name="rdfFile">Fichero RDF</param>
-        /// <param name="repositoryIdentifier">Identificador del repositorio para seleccionar los Shapes</param>
+        /// <param name="repositoryIdentifier">Identificador del repositorio para seleccionar los Shapes (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns></returns>
         [HttpPost("data-validate")]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ShapeReport))]
@@ -86,7 +86,7 @@ namespace PMH.Controllers
         }
 
         /// <summary>
-        /// Reconcilia entidades y descubre enlaces o equivalencias. Permite efectuar el descubrimiento en fuentes RDF arbitrarias.
+        /// **(Pendiente de implementar)Reconcilia entidades y descubre enlaces o equivalencias. Permite efectuar el descubrimiento en fuentes RDF arbitrarias.
         /// </summary>
         /// <param name="rdfFile">Fichero RDF</param>
         /// <returns></returns>
@@ -105,7 +105,7 @@ namespace PMH.Controllers
         /// </summary>
         /// <param name="identifier">Identificador de la entidad a recolectar</param>
         /// <param name="metadataPrefix">Prefijo del metadata que se desea recuperar</param>
-        /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH</param>
+        /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("GetRecord/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -123,7 +123,7 @@ namespace PMH.Controllers
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Obtiene la información del repositorio OAI-PMH configurado en formato XML OAI-PMH.
         /// </summary>
-        /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH</param>
+        /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("Identify/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -146,7 +146,7 @@ namespace PMH.Controllers
         /// <param name="until">Fecha de fin hasta la que se desean recuperar las cabeceras de las entidades</param>
         /// <param name="set">Argumento con un valor setSpec, que especifica los criterios establecidos para la recolección selectiva.</param>
         /// <param name="resumptionToken">Argumento exclusivo con un valor que es el token de control de flujo devuelto por una solicitud ListIdentifiers anterior que emitió una lista incompleta.</param>
-        /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH</param>
+        /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("ListIdentifiers/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -186,7 +186,7 @@ namespace PMH.Controllers
         /// Recupera los formatos de metadatos disponibles del repositorio en formato XML OAI-PMH.        
         /// </summary>
         /// <param name="identifier">Argumento opcional que especifica el identificador único del elemento para el que se solicitan los formatos de metadatos disponibles. Si se omite este argumento, la respuesta incluye todos los formatos de metadatos admitidos por este repositorio. </param>
-        /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH</param>
+        /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("ListMetadataFormats/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -213,7 +213,7 @@ namespace PMH.Controllers
         /// <param name="until">Fecha de fin hasta la que se desean recuperar las cabeceras de las entidades</param>
         /// <param name="set">Argumento con un valor setSpec, que especifica los criterios establecidos para la recolección selectiva.</param>
         /// <param name="resumptionToken">Argumento exclusivo con un valor que es el token de control de flujo devuelto por una solicitud ListRecords anterior que emitió una lista incompleta.</param>
-        /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH</param>
+        /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("ListRecords/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -252,7 +252,7 @@ namespace PMH.Controllers
         /// Recuperar la estructura establecida de un repositorio en formato XML OAI-PMH, útil para la recolección selectiva.        
         /// </summary>
         /// <param name="resumptionToken">Argumento exclusivo con un valor que es el token de control de flujo devuelto por una solicitud ListSets anterior que emitió una lista incompleta.</param>
-        /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH</param>
+        /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("ListSets/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
