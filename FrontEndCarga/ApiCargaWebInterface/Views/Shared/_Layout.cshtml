@@ -4,55 +4,348 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link runat="server" rel="icon" type="image/x-icon" href="favicon.ico" />
-    <title>@ViewData["Title"] - Universidad de Murcia</title>
+    <title>@ViewData["Title"] - Hércules</title>
+    <!--Default-->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <!--Fuentes-->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&amp;display=swap" rel="stylesheet">
+    <!-- MATERIAL ICONS -->
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;op0ubx" media="all">
+    <!-- BOOTSTRAP 4 + PROPELLER -->
+    <link rel="stylesheet" href="~/theme/libraries/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="~/theme/libraries/propeller/css/propeller.min.css" media="screen" type="text/css">
+    <!-- LIGHTGALLERY -->
+    <link media="screen" type="text/css" rel="stylesheet" href="~/theme/libraries/lightgallery/css/lightgallery.min.css">
+    <!-- PERSONALIZACION TEMA -->
+    <link media="screen" type="text/css" rel="stylesheet" href="~/theme/theme.css">
+    <link media="screen" type="text/css" rel="stylesheet" href="./theme/theme2.css">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="noindex,nofollow">
+    <style>
+        .cke {
+            visibility: hidden;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/img/UniMurcia/logo-um.png" class="d-inline-block" width="250" />
-                    Universidad de Murcia
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+<body class="listado comunidad usuarioConectado" cz-shortcut-listen="true">
+    <form method="post" target="_blank" action="" name="formularioRDF" id="formularioRDF">
+        <fieldset style="display: none">
+            <legend class="nota">formularioRDF</legend>
+            <input type="text" style="display: none;" title="query" name="query" id="query">
+            <input type="text" style="display: none;" title="pagina" name="pagina" id="pagina">
+            <input type="submit" style="display: none;" id="rdfHack" value="enviar" title="enviar">
+        </fieldset>
+    </form>
+    <header id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col col01">
+                    <div class="menu-toggle">
+                        <a href="javascript:void(0);" data-target="menuLateralPrincipal" data-placement="left" data-position="slidepush" class="pmd-sidebar-toggle">
+                            <span class="material-icons">menu</span>
+                        </a>
+                    </div>
+                    <div class="logo">
+                        <a href="javascript: void(0);">Hércules</a>
+                    </div>
+                </div>
+                <div class="col col02">
+                    <ul>
+                        <li class="active">
+                            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li>
+                            <a asp-area="" asp-controller="RepositoryConfig" asp-action="Index">Config repositories</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="RepositoryConfig" asp-action="Index">Config repositories</a>
+                        <li>
+                            <a asp-area="" asp-controller="ShapeConfig" asp-action="Index">Config shapes</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ShapeConfig" asp-action="Index">Config shapes</a>
+                    </ul>
+                </div>
+                <div class="col col03">
+                    <ul>
+                        <li class="usuario">
+                            <div class="datos">
+                                <p class="nombre">Félix Tuesta</p>
+                                <p>Dpto. UX</p>
+                            </div>
+                            <div class="imagen">
+                                <a href="javascript: void(0);" data-target="menuLateralUsuario" data-placement="right" data-position="slidepush" class="pmd-sidebar-toggle">
+                                    <span style="background: url(theme/resources/persona-default.png);"></span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="notificaciones">
+                            <i class="material-icons">notifications</i>
+                            <span class="budge"></span>
+                        </li>
+                        <li class="mensajes">
+                            <i class="material-icons">email</i>
+                            <span class="budge"></span>
+                        </li>
+                        <li class="buscar">
+                            <a href="javascript: void(0);" data-target="menuLateralMetabuscador" data-placement="right" data-position="slidepush" class="pmd-sidebar-toggle">
+                                <i class="material-icons">search</i>
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - Universidad de Murcia - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </header>
+    <main role="main">
+        <div class="container">
+
+            @RenderBody()
+        </div>
+    </main>
+
+    <div id="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col col-12 col-md-3 col-ministerio">
+                    <a href="javascript: void(0);">
+                        <img src="~/theme/resources/logo-ministerio.png" alt="Ministerio de Ciencia e Innovación">
+                    </a>
+                </div>
+                <div class="col col-12 col-md-3 col-universidad">
+                    <a href="javascript: void(0);">
+                        <img src="~/theme/resources/logo-um-peq.png" alt="Universidad de Murcia">
+                    </a>
+                </div>
+                <div class="col col-12 col-md-6 col-europa">
+                    <div class="presentacion">
+                        <p class="titulo">Fondo Europeo de Desarrollo regional (FEDER)</p>
+                        <p class="subtitulo">Una manera de hacer Europa</p>
+                    </div>
+                    <a href="javascript: void(0);">
+                        <img src="~/theme/resources/logo-ue.png" alt="Unión Europea">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <aside id="menuLateralUsuario" class="menuLateral usuario pmd-sidebar sidebar-default pmd-sidebar-right pmd-sidebar-right-fixed" role="navigation">
+
+        <div class="header">
+            <div class="wrap-header">
+                <div class="img-usuario">
+                    <span style="background: url(theme/resources/persona-default.png) no-repeat center"></span>
+                </div>
+                <div class="info-usuario">
+                    <p class="nombre">Usuario Usuario</p>
+                    <p>Equipo GNOSS</p>
+                </div>
+            </div>
+            <span class="material-icons cerrar">close</span>
+        </div>
+
+        <div class="body">
+            <div class="group-collapse">
+                <a href="#micuenta" data-toggle="collapse" aria-expanded="true">Mi cuenta</a>
+                <div id="micuenta" class="collapse show">
+                    <ul class="pmd-sidebar-nav">
+                        <li class="liMensajes nuevos">
+                            <a href="javascript: void(0);">Mensajes</a> <span>2 nuevos</span>
+                        </li>
+                        <li class="liNotificaciones nuevos">
+                            <a href="javascript: void(0);">Notificaciones</a> <span>6 nuevos</span>
+                        </li>
+                        <li class="liPanelControl">
+                            <a href="javascript: void(0);">myGNOSS/Panel de control</a>
+                        </li>
+                        <li class="liPerfil">
+                            <a href="javascript: void(0);">Ver perfil</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="group-collapse">
+                <a href="#espacio" data-toggle="collapse" aria-expanded="true">Mi espacio personal</a>
+                <div id="espacio" class="collapse show">
+                    <ul class="pmd-sidebar-nav">
+                        <li class="liRecursos">
+                            <a href="javascript: void(0);">Mis recursos</a>
+                        </li>
+                        <li class="liPublicaciones">
+                            <a href="javascript: void(0);">Mis publicaciones</a>
+                        </li>
+                        <li class="liFavoritos">
+                            <a href="javascript: void(0);">Mis favoritos</a>
+                        </li>
+                        <li class="liBorradores">
+                            <a href="javascript: void(0);">Mis borradores</a>
+                        </li>
+                        <li class="ver">
+                            <a href="javascript: void(0);">Ver todas</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="group-collapse">
+                <a href="#comunidades" data-toggle="collapse" aria-expanded="true">Mi espacio personal</a>
+                <div id="comunidades" class="collapse show">
+                    <ul class="pmd-sidebar-nav">
+                        <li><a href="javascript: void(0);">Gestión de proyectos GNOSS</a></li>
+                        <li><a href="javascript: void(0);">Personalizaciones de comunidades</a></li>
+                        <li><a href="javascript: void(0);">Soporte GNOSS Preproduccion</a></li>
+                        <li><a href="javascript: void(0);">Soporte al servicio LRT</a></li>
+                        <li class="ver">
+                            <a href="javascript: void(0);">Ver todas</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="group-collapse">
+                <a href="#identidades" data-toggle="collapse" aria-expanded="true">Mi espacio personal</a>
+                <div id="identidades" class="collapse show">
+                    <ul class="pmd-sidebar-nav">
+                        <li>
+                            <a href="javascript: void(0);">Usuario - Equipo GNOSS</a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">Usuario - DKH</a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">Usuario - IneveryCrea</a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">Usuario - ADVEO</a>
+                        </li>
+                        <li class="ver">
+                            <a href="javascript: void(0);">Ver todas</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <aside id="menuLateralMetabuscador" class="menuLateral metabuscador pmd-sidebar pmd-sidebar-right-fixed pmd-z-depth-1 right" role="navigation">
+        <div class="header">
+            <div id="buscador" class="buscador">
+                <form method="post" id="formBuscador" action="http://devsare.gnoss.com/es/recursos?search=">
+                    <div class="fieldsetGroup">
+                        <select class="ddlCategorias" id="ddlCategorias">
+                            <option value="MyGNOSSMeta">Todo Amarauna</option>
+                            <option value="824509ea-0e22-4aa3-b6a0-65a69cdd571c" selected="selected">Recursos</option>
+                            <option value="02a9baf9-2991-4128-a479-aa8492858e95">Foro</option>
+                            <option value="68760789-604d-4e8b-8acf-149c80fa1c8a">Personas</option>
+                            <option value="f016bc87-668c-4c3d-9b10-5c1fe650f104">Preguntas frecuentes</option>
+                        </select>
+                    </div>
+                    <div class="fieldsetGroup searchGroup">
+                        <div id="selector" style=""><p class="seleccionado"><a href="#">Recursos</a><span></span></p><div id="opciones"><ul><li><a href="#" rel="0">Todo Amarauna</a></li><li><a href="#" rel="1">Recursos</a></li><li><a href="#" rel="2">Foro</a></li><li><a href="#" rel="3">Personas</a></li><li><a href="#" rel="4">Preguntas frecuentes</a></li></ul></div></div>
+                        <div class="textoBusquedaPrincipalInput">
+                            <input type="text" id="txtBusquedaPrincipal" class="text txtBusqueda autocompletar personalizado ac_input defaultText" placeholder="¿Qué quieres encontrar?" autocomplete="off" style="width: 476px;">
+                            <input type="button" title="Encontrar" class="encontrar" id="btnBuscarPrincipal">
+                            <span class="botonSearch">
+                                <i class="material-icons">search</i>
+                            </span>
+                        </div>
+                    </div>
+                    <input type="submit" style="display: none;" id="enviarFormBuscador" value="enviar" title="enviar">
+                </form>
+            </div>        <i class="material-icons cerrar">close</i>
+        </div>
+        <div class="body">
+            <ul class="nav pmd-sidebar-nav resultados">
+                <li>
+                    <p class="title">Organización</p>
+                    <ul>
+                        <li class="organizacion">
+                            <a href="javascript: void(0);">Departamento diseño de producto</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <p class="title">Documentación</p>
+                    <ul>
+                        <li class="documentacion">
+                            <a href="javascript: void(0);">Informe de diseño conceptual</a>
+                        </li>
+                        <li class="documentacion">
+                            <a href="javascript: void(0);">Informe de cálculos de diseño</a>
+                        </li>
+                        <li class="documentacion">
+                            <a href="javascript: void(0);">Informe de previsión de diseño</a>
+                        </li>
+                        <li class="documentacion">
+                            <a href="javascript: void(0);">Plan de validación del diseño</a>
+                        </li>
+                        <li class="ver">
+                            <a href="javascript: void(0);">Ver todos</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <p class="title">Formación</p>
+                    <ul>
+                        <li class="formacion">
+                            <a href="javascript: void(0);">Diseño y desarrollo de producto</a>
+                        </li>
+                        <li class="formacion">
+                            <a href="javascript: void(0);">Diseño y desarrollo de servicio</a>
+                        </li>
+                        <li class="formacion">
+                            <a href="javascript: void(0);">201811214 Pantallas de vistas V2 - Mygnoss y CRFP</a>
+                        </li>
+                        <li class="ver">
+                            <a href="javascript: void(0);">Ver todos</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <p class="title">Cambio</p>
+                    <ul>
+                        <li class="cambio">
+                            <a href="javascript: void(0);">Informe de diseño conceptual</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav pmd-sidebar-nav sugerencias">
+                <li class="enlaces">
+                    <ul>
+                        <li>
+                            <a href="javascript: void(0);">Organización</a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">Documentación</a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">Formación</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <p class="title">Recientes</p>
+                    <ul>
+                        <li class="recientes"><a href="javascript: void(0);">documentos de conformidad</a></li>
+                        <li class="recientes"><a href="javascript: void(0);">manual de entrega</a></li>
+                        <li class="recientes"><a href="javascript: void(0);">documentacion departamento</a></li>
+                        <li class="recientes"><a href="javascript: void(0);">diseño de proceso</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <p class="title">Fecha de publicación</p>
+                    <ul>
+                        <li class="fechapublicacion"><a href="javascript: void(0);">Hoy</a></li>
+                        <li class="fechapublicacion"><a href="javascript: void(0);">Esta semana</a></li>
+                        <li class="fechapublicacion"><a href="javascript: void(0);">Este mes</a></li>
+                        <li class="fechapublicacion"><a href="javascript: void(0);">Este año</a></li>
+                        <li class="fechapublicacion"><a href="javascript: void(0);">Seleccionar fechas</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <!--Default-->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <partial name="_ValidationScriptsPartial"/>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
