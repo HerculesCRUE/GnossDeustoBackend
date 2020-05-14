@@ -104,42 +104,82 @@ uri_base = "http://xmlns.com/foaf/0.1/"
 Observa cómo se repite el encabezado `[[ontologies]]` en cada ontología, indicando que se trata de un elemento de un *array*.
 
 
-> En proceso de redacción
+## Generación de entidades
 
-# Generación de datos personales
-
-`1-personal-data.toml`
-
-En esta sección se extraen ciertos datos simples de una sección especial en el CVN dedicada exclusivamente a los datos personales de la persona del currículum. Dichos datos se guardan específicamente en un *Item* dentro del árbol XML. Como posteriormente se va a referenciar a la persona del CVN en muchos sitios de la conversión se ha visto necesario hacer este paso uno aparte, de manera que sea lo primero que tengamos listo.
-
-El archivo está dividido en dos partes:
-
-- Metadatos de la generación de datos personales \
-	Para indicar de dónde sacar los datos y a qué clase convertirlos
-- Parámetros a extraer \
-	Códigos y formatos de los parámetros y a qué propiedades convertirlos
-
-## Metadatos de la generación de datos personales
-
-En las primeras líneas de código que tiene este archivo es donde se indica el código del CVN del elemento XML donde se guardan los datos personales, y la clase que se debe generar.
+Las entidades se declaran en el archivo `entities.toml`. Se definen en un array llamado `entities`:
 
 ```
+[[entities]]
+(configuración entidad 1)
+[[entities]]
+(configuración entidad 2)
+```
+
+### Configuración
+
+#### Código
+
+- `code`: un string, representa el código del bean en el CVN. En las subentidades no es necesario. 
+
+```
+[[entities]]
 code = "000.010.000.000"
-instance.ontology = "roh"
-instance.class = "Person"
+[...]
 ```
 
-- `code`: el código del `CvnItemBean` de donde vamos a sacar la información
-- `instance`
-	- `instance.ontology`: el nombre corto de ontología (previamente definida) de la clase que se va a crear
-	- `instance.class`: el nombre de la clase que queremos crear
+#### Displayname
 
-## Extracción de propiedades
+Es la manera de representar qué clase y ontología vamos a usar. Es un string: la ontología, luego ":" y finalmente el nombre de la clase.
 
-> En proceso de redacción
+Por ejemplo: `foaf:Person` o `vivo:dateTime`.
 
-# Generación de entidades 
+```
+[[entities]]
+code = "000.010.000.000"
+displayname = "foaf:Person"
+[...]
+```
 
-`2-entities.toml`
+Para permitir tener *backwards compatibility* con versiones antiguas de este programa, es posible declarar el displayname por separado (ontology y classname), aunque está *deprecated* y no debe hacerse así más.
 
-> En proceso de redacción
+#### Entidad primaria
+
+Una entidad puede ser marcada como primaria poniendo `primary` a `true`. Debe haber siempre una entidad primaria.
+No es necesario poner el ajuste si el valor va a ser `false`. La entidad primaria se genera antes que las demás y es posible hacer relaciones directas a ella sin necesidad de crear subentidades.
+
+```
+[[entities]]
+code = "000.010.000.000"
+displayname = "foaf:Person"
+primary = true
+[...]
+```
+
+#### Generación de URIS
+
+Para la generación se usa el servicio UrisFactory.
+
+- `id.resource`: Un string. El nombre del recurso en la URI (suele coincidir con el nombre de la clase). Si una entidad no tiene `id.resource` se generará como un blank node, sin URI.
+
+- `id.format`: el identificador de la entidad. Un string. Si se deja vacío, se generará una ID única (UUID4). Se puede especificar el formato de la ID generada. Podemos incluir una o varias propiedades en lugar de una UUID. Para ello, ponemos el displayname de la propiedad entre corchetes. Ejemplo: `id.format = "{vivo:doi}`
+
+```
+[[entities]]
+code = "060.010.010.000"
+displayname = "bibo:AcademicArticle"
+id.resource = "Article"
+id.format = "{vivo:doi}"
+```
+
+#### Caché
+
+Debido a la cantidad de datos duplicados e independientes que existen en un CVN, existe la posibilidad de evitar generar dos entidades que tengan el mismo valor para una propiedad. De esta manera podemos guardar bajo la misma instancia varias personas con el mismo nombre. Ejemplo:
+
+```
+[[entities.subentities.subentities]]
+displayname = "foaf:Person"
+id.resource = "Person"
+cache = "foaf:name"
+```
+
+### Ejemplos
