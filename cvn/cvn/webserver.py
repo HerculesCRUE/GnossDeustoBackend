@@ -181,10 +181,11 @@ if __name__ == "__main__":
                                                  "ROH")
     parser.add_argument("-p", "--port", type=int, default=5000, choices=range(0, 65536),
                         help="El puerto en el que se ejecutará el servidor HTTP (por defecto 5000)", metavar="")
+    parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--debug", action="store_true", help="DEBUG: activar modo debug (aumenta tiempo de ejecución)")
     args = parser.parse_args()
 
-    app.run(debug=args.debug, port=args.port)
+    app.run(debug=args.debug, port=args.port, host=args.host)
 
 # 19/03/2020 Iñigo — lo que he podido en este poco tiempo, lo siento por el código desastroso :^(
 # 20/03/2020 Iñigo — he cambiado el script para que sea una API HTTP en vez de una utilidad de consola. Lo he hecho
