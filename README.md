@@ -198,6 +198,13 @@ Además, habrá que configurar en el fichero SparqlConfig.json los datos de conf
 
     
  - **FrontEndCarga**: tendremos que configurar la ubicación del API_CARGA y del CronConfigure al que deben hacer las llamadas mediante el parámetro “ConfigURL” y "ConfigUrlCron" en el appsettings.json que se encontrará en la raíz del proyecto. Ejemplo: `"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/","ConfigUrlCron": "https://localhost:44359/"`
+ 
+  - **OAI_PMH_CVN**: En este api tendremos que configurar en el fichero OAI_PMH_CVN_Config.json la url del repositorio de curriculums CVN-XML de la UM y el servicio de CVN-ROH encargado de transformar los CVN-XML al formato RDF ROH, quedando: 
+ >
+    {
+      "XML_CVN_Repository": "url_repositorio_curriculums_CVN-XML_UM",
+      "CVN_ROH_converter": "url_CVN-ROH"
+    }
 
 ### Control de aplicaciones
 
