@@ -7,5 +7,5 @@ API CARGA es un servicio web que contienen 4 controladores, utilizados cada uno 
  - etlController: Contiene los procesos ETL (Extract, Transform and Load) necesarios para la carga de datos.
  - repositoryController: Contiene los procesos necesarios para la gestión de los repositorios OAI-PMH (creación, modificación, eliminación...).
  - syncController: Contiene los procesos necesarios para la ejecución de las sincronizaciones.
- - ValidationControlles: Contiene los procesos necesarios para la gestión de las validaciones  (creación, modificación, eliminación...).
+ - ValidationController: Contiene los procesos necesarios para la gestión de las validaciones  (creación, modificación, eliminación...).
  
