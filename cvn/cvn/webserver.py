@@ -181,7 +181,8 @@ if __name__ == "__main__":
                                                  "ROH")
     parser.add_argument("-p", "--port", type=int, default=5000, choices=range(0, 65536),
                         help="El puerto en el que se ejecutará el servidor HTTP (por defecto 5000)", metavar="")
-    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--host", default="127.0.0.1",
+                        help="El host donde se bindeará el servidor HTTP (por defecto 127.0.0.1)")
     parser.add_argument("--debug", action="store_true", help="DEBUG: activar modo debug (aumenta tiempo de ejecución)")
     args = parser.parse_args()
 
