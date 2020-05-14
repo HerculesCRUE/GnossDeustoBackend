@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -27,12 +28,13 @@ namespace PMH.Controllers
     {
         private IRepositoriesConfigService _repositoriesConfigService;
         private IShapesConfigService _shapeConfigService;
-        private SparqlConfig _sparqlConfig;
-        public etlController(IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, SparqlConfigJson sparqlConfigJson)
+        readonly ConfigSparql _configSparql;
+
+        public etlController(IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql)
         {
             _repositoriesConfigService = iRepositoriesConfigService;
             _shapeConfigService = iShapeConfigService;
-            _sparqlConfig = sparqlConfigJson.GetConfig();
+            _configSparql = configSparql;
         }
 
         /// <summary>
@@ -50,7 +52,7 @@ namespace PMH.Controllers
                 XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
                 List<string> triples = SparqlUtility.GetTriplesFromRDF(rdf);
 
-                SparqlUtility.LoadTriples(triples, _sparqlConfig.endpoint, _sparqlConfig.queryparam, _sparqlConfig.graph);
+                SparqlUtility.LoadTriples(triples, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), _configSparql.GetGraph());
                 return Ok();
             }
             catch (Exception ex)
@@ -160,11 +162,11 @@ namespace PMH.Controllers
             }
             if (from.HasValue)
             {
-                uri += $"&from={from.ToString()}";
+                uri += $"&from={from.Value.ToString("u",CultureInfo.InvariantCulture)}";
             }
             if (until.HasValue)
             {
-                uri += $"&until={until.ToString()}";
+                uri += $"&until={until.Value.ToString("u",CultureInfo.InvariantCulture)}";
             }
             if (set != null)
             {

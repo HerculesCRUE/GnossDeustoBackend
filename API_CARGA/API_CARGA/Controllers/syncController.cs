@@ -29,9 +29,9 @@ namespace UrisFactory.Controllers
         /// <summary>
         /// Ejecuta una sincronización
         /// </summary>
-        /// <param name="publishModel">Modelo para la ejecución de una soncronización</param>
+        /// <param name="publishModel">Modelo para la ejecución de una sincronización</param>
         /// <returns></returns>
-        [HttpPost("execute")]///{identifier}
+        [HttpPost("execute")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult PostSyncro(PublishRepositoryModel publishModel)

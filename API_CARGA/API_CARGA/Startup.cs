@@ -72,15 +72,13 @@ namespace PRH
 
             });
             services.AddSingleton(typeof(ConfigUrlService));
+            services.AddSingleton(typeof(ConfigSparql));
             services.AddScoped(typeof(OaiPublishRDFService));
             //services.AddSingleton<IRepositoriesConfigService, RepositoriesConfigMockService>();
             services.AddScoped<IRepositoriesConfigService, RepositoriesConfigBDService>();
             //services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
             services.AddScoped<IShapesConfigService, ShapesConfigBDService>();
             //services.AddSingleton<ISyncConfigService, SyncConfigMockService>();
-
-
-            services.AddSingleton(typeof(SparqlConfigJson));
 
         }
 
