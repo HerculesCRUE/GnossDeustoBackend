@@ -9,9 +9,3 @@ API CARGA es un servicio web que contienen 4 controladores, utilizados cada uno 
  - syncController: Contiene los procesos necesarios para la gestión de las sincronizaciones  (creación, modificación, eliminación...).
  - ValidationControlles: Contiene los procesos necesarios para la gestión de las validaciones  (creación, modificación, eliminación...).
  
-
-## Cómo compilar
-API CARGA está construido contra el último ASP.NET Core 3.
-
-* Instalar el .NET Core SDK Requerido
-* Instalar GIT
