@@ -188,6 +188,14 @@ Antes de ejecutar los apis deberíamos configurar los elementos necesarios para 
        "PostgreConnection": "Host=ip_del_servidor;Database=nombre_de_la_base_de_datos;Username=usuario;Password=contraseña",
        "PostgreConnectionmigration": "Host=ip_del_servidor;Database=nombre_de_la_base_de_datos;Username=usuario;Password=contraseña"
     },
+Además, habrá que configurar en el fichero SparqlConfig.json los datos de configración del endpoint Sparql contra el que se realizarán las publicaciones, quedando:
+>
+    {
+      "graph": "nombre_del_grafo_para_las_publicaciones",
+      "endpoint": "url_del_endpoint_sparql",
+      "queryparam": "nombre_del_parametro_para_la_query"
+    }
+
     
  - **FrontEndCarga**: tendremos que configurar la ubicación del API_CARGA al que debe hacer las llamadas mediante el parámetro “ConfigURL” en el appsettings.json que se encontrará en la raíz del proyecto. Ejemplo: `"ConfigUrl": http://herc-as-front-desa.atica.um.es/carga/`
 
