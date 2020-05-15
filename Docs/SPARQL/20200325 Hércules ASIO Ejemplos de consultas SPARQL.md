@@ -10,11 +10,11 @@ GRAFO DE DATOS DE CVN
 
 El grafo de los datos cargados desde CVN es:
 
-http://data.um.es/graph/um\_cvn
+http://data.um.es/graph/um/cvn
 
 **Consulta que devuelve los URIs de los investigadores cargados**.
 
-select \* from \<http://data.um.es/graph/um\_cvn\>
+	select \* from \<http://data.um.es/graph/um/cvn\>
 
 where {?s a \<https://purl.org/roh/Researcher\>}
 
