@@ -46,54 +46,39 @@
 [4.1.9 GET etl​/ListSets/{repositoryIdentifier}
 9](#get-etllistsetsrepositoryidentifier)
 
-[4.2 API de Carga. ETL-CONFIG 9](#api-de-carga.-etl-config)
+[4.2 API de Carga. ETL-CONFIG 9](#api-de-carga.-repository)
 
-[4.2.10 GET etl-config/​repository 9](#get-etl-configrepository)
+[4.2.1 GET etl-config/​repository 9](#get-etl-configrepository)
 
-[4.2.11 POST etl-config/​repository 9](#post-etl-configrepository)
+[4.2.2 POST etl-config/​repository 9](#post-etl-configrepository)
 
-[4.2.12 GET etl-config/​repository/{identifier}
+[4.2.3 GET etl-config/​repository/{identifier}
 10](#get-etl-configrepositoryidentifier)
 
-[4.2.13 DELETE etl-config/​repository/{identifier}
+[4.2.4 DELETE etl-config/​repository/{identifier}
 10](#delete-etl-configrepositoryidentifier)
 
-[4.2.14 PUT etl-config/​repository/{identifier}
+[4.2.5 PUT etl-config/​repository/{identifier}
 10](#put-etl-configrepositoryidentifier)
 
-[4.2.15 GET etl​-config/validation 10](#get-etl-configvalidation)
+[4.3 API de Carga. SYNC 9](#api-de-carga.-sync)
 
-[4.2.16 POST etl​-config/validation 10](#post-etl-configvalidation)
+[4.3.1 POST sync/execute 10](#post-syncexecute)
 
-[4.2.17 GET etl​-config/validation/{identifier}
+[4.4 API de Carga. VALIDATION 9](#api-de-carga.-validation)
+
+[4.4.1 GET etl​-config/validation 10](#get-etl-configvalidation)
+
+[4.4.2 POST etl​-config/validation 10](#post-etl-configvalidation)
+
+[4.4.3 GET etl​-config/validation/{identifier}
 10](#get-etl-configvalidationidentifier)
 
-[4.2.18 DELETE etl​-config/validation/{identifier}
+[4.4.4 DELETE etl​-config/validation/{identifier}
 10](#delete-etl-configvalidationidentifier)
 
-[4.2.19 PUT etl​-config/validation/{identifier}
+[4.4.5 PUT etl​-config/validation/{identifier}
 10](#put-etl-configvalidationidentifier)
-
-[4.3 API de Carga. SYNC 10](#api-de-carga.-sync)
-
-[4.3.20 ​GET /sync​/config 10](#get-syncconfig)
-
-[4.3.21 ​POST /sync​/config 11](#post-syncconfig)
-
-[4.3.22 ​GET /sync​/config​/{identifier} 11](#get-syncconfigidentifier)
-
-[4.3.23 ​DELETE /sync​/config​/{identifier}
-11](#delete-syncconfigidentifier)
-
-[4.3.24 ​PUT /sync​/config​/{identifier} 11](#put-syncconfigidentifier)
-
-[4.3.25 ​GET /sync​/status​/{identifier} 11](#get-syncstatusidentifier)
-
-[4.3.26 ​ POST /sync​/enable​/{identifier}
-11](#post-syncenableidentifier)
-
-[4.3.27 ​ POST /disable​/stop​/{identifier}
-11](#post-disablestopidentifier)
 
 INTRODUCCIÓN
 ============
