@@ -14,29 +14,29 @@ http://graph.um.es/graph/um/cvn
 
 **Consulta que devuelve los URIs de los investigadores cargados**.
 
-	select * from <http://graph.um.es/graph/um/cvn>
-	where {?s a <https://purl.org/roh/Researcher>}
+	select * from <http://graph.um.es/graph/um_cvn>
+	where {?s a <http://purl.org/roh/mirror/foaf#Person>}
 
 **Consulta que devuelve todos los triples de un investigador**.
 
-	select * from <http://graph.um.es/graph/um/cvn>
-	where { <https://purl.org/roh/researcher/0000-0001-8055-6823> ?p ?o}
+	select * from <http://graph.um.es/graph/um_cvn>
+	where { <http://graph.um.es/res/person/d7aad123-55b9-4400-b108-185139408f7f> ?p ?o}
 
 **Consulta que devuelve todas las entidades de las que el investigador
 es objeto (**con los datos cargados actualmente, sólo devuelve
 artículos**)**.
 
-	select * from <http://graph.um.es/graph/um/cvn>
+	select * from <http://graph.um.es/graph/um_cvn>
 	where {
-		?s ?p <https://purl.org/roh/researcher/0000-0001-8055-6823>.
+		?s ?p <http://graph.um.es/res/person/d7aad123-55b9-4400-b108-185139408f7f>.
 		?s a ?o.
 	}
 
 **Consulta que devuelve todos los triples un artículo.**
 
-	select * from <http://graph.um.es/graph/um/cvn>
+	select * from <http://graph.um.es/graph/um_cvn>
 	where {
-		<https://purl.org/roh/article/10.1080%2F10447318.2014.927287> ?p ?o.
+		<http://graph.um.es/res/article/4167c433-5af4-4071-8daa-df71d9c18fc5> ?p ?o.
 	}
 
 GRAFO DE DATOS DE SISTEMAS DE LA UM
@@ -44,7 +44,7 @@ GRAFO DE DATOS DE SISTEMAS DE LA UM
 
 El grafo de los datos importados desde los sistemas de la UM es:
 
-http://graph.um.es/graph/um_sgi_3
+http://graph.um.es/graph/um_sgi
 
 **Consulta que devuelve los URIs de todos los proyectos**.
 
