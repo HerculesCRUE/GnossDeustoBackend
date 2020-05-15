@@ -14,15 +14,13 @@ http://data.um.es/graph/um/cvn
 
 **Consulta que devuelve los URIs de los investigadores cargados**.
 
-	select \* from \<http://data.um.es/graph/um/cvn\>
-
-where {?s a \<https://purl.org/roh/Researcher\>}
+	select * from <http://data.um.es/graph/um/cvn>
+	where {?s a <https://purl.org/roh/Researcher>}
 
 **Consulta que devuelve todos los triples de un investigador**.
 
-select \* from \<http://data.um.es/graph/um\_cvn\>
-
-where { \<https://purl.org/roh/researcher/0000-0001-8055-6823\> ?p ?o}
+	select * from <http://data.um.es/graph/um/cvn>
+	where { <https://purl.org/roh/researcher/0000-0001-8055-6823> ?p ?o}
 
 **Consulta que devuelve todas las entidades de las que el investigador
 es objeto (**con los datos cargados actualmente, sólo devuelve
