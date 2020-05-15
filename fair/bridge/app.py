@@ -100,4 +100,4 @@ def v1_evaluation_result(id):
     return jsonify(result.json())
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5200)

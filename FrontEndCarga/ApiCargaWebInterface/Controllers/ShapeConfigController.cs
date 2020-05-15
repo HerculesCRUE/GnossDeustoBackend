@@ -90,7 +90,7 @@ namespace ApiCargaWebInterface.Controllers
 
         public IActionResult Create(Guid? repositoryId = null)
         {
-            if (repositoryId != null )
+            if (repositoryId.HasValue)
             {
                 ShapeConfigCreateModel shapeConfigViewModel = new ShapeConfigCreateModel()
                 {

@@ -5,20 +5,6 @@
     ViewData["BodyClass"] = "listado";
 }
 
-<div id="headerListado">
-    <div class="col col01 col-md-3">
-        <div class="h1-container">
-            <h1>Repositorios</h1>
-            <span class="numResultados">( @Model.Count() )</span>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row row-buscador">
-            <div class="col col02 col-md-12">
-            </div>
-        </div>
-    </div>
-</div>
 <div class="row">
     <div class="col col-12 col-lg-12 col-contenido">
         <div class="wrapCol">
@@ -29,33 +15,26 @@
             </div>
             <div class="resource-list compacView">
                 <div class="wrap">
+                    <h1>Repositorios</h1>
                     @foreach (var item in Model)
                     {
                         <article class="resource resource-ficharepositorio">
                             <div class="wrap">
-                                <p class="tipo">@Html.DisplayFor(modelItem => item.RepositoryConfigID)</p>
                                 <h2>
                                     <a href="@Url.Action("Details", new {  id=item.RepositoryConfigID  })">@Html.DisplayFor(modelItem => item.Name)</a>
                                 </h2>
                                 <div class="desc">
+                                    <p class="tipo">@Html.DisplayFor(modelItem => item.Url)</p>
                                     <p>@Html.DisplayFor(modelItem => item.OauthToken)</p>
-                                    <p>@Html.DisplayFor(modelItem => item.Url)</p>
-                                </div>
-                                <div class="columna acciones">
-                                    <ul>
-                                        <li>
-                                            <a href="@Url.Action("Edit", new {  id=item.RepositoryConfigID  })" class="editar"><i class="material-icons">mode_edit</i></a>
-                                        </li>
-                                        <li>
-                                            <a href="@Url.Action("Delete", new {  id=item.RepositoryConfigID  })" class="borrar"><i class="material-icons">delete</i></a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </article>
                     }
                 </div>
             </div>
+            <a href="@Url.Action("Create")" class="btn-mas-recursos">
+                <i class="material-icons add">add</i>
+            </a>
         </div>
     </div>
 </div>

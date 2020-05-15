@@ -40,7 +40,7 @@ namespace ApiCargaWebInterface.Controllers
             RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(id);
             if (result != null)
             {
-                return View(result);
+                return View("Create", result);
             }
             else
             {
@@ -87,6 +87,7 @@ namespace ApiCargaWebInterface.Controllers
         {
             try
             {
+                repositoryConfigView.RepositoryConfigID = Guid.NewGuid();
                 RepositoryConfigViewModel result = _serviceApi.CreateRepositoryConfigView(repositoryConfigView);
                 return RedirectToAction("Details", new { id = result.RepositoryConfigID });
                 
