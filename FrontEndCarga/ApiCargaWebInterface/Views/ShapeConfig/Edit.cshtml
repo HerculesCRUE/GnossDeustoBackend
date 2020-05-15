@@ -1,51 +1,56 @@
 ﻿@model ApiCargaWebInterface.ViewModels.ShapeConfigEditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = Model.Name + " - Editar shape";
+    ViewData["BodyClass"] = "formulario";
 }
-
-<h1>Edit</h1>
-
-<h4>Shape Config</h4>
-<hr />
 <div class="row">
-    <div class="col-md-12">
-        <form asp-action="Edit"  method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group" hidden>
-                <label asp-for="ShapeConfigID" class="control-label"></label>
-                <input asp-for="ShapeConfigID" class="form-control" readonly />
-                <span asp-validation-for="ShapeConfigID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group" hidden>
-                <label asp-for="RepositoryID" class="control-label"></label>
-                <input asp-for="RepositoryID" class="form-control" />
-                <span asp-validation-for="RepositoryID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Shape" class="control-label"></label>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Shape)
-                </dd>
-            </div>
-            <div class="form-group">
-                <label asp-for="ShapeFile" class="control-label"></label>
-                <input asp-for="ShapeFile" class="form-control"/>
-                <span asp-validation-for="ShapeFile" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <form asp-action="Edit">
+                <div class="fieldset fieldset01">
+                    <fieldset class="mediumLabels">
+                        <h1>Crear shape</h1>
+                        <div class="fieldsetContent">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <p hidden>
+                                <label asp-for="ShapeConfigID" class="control-label"></label>
+                                <input asp-for="ShapeConfigID" class="form-control" readonly />
+                                <span asp-validation-for="ShapeConfigID" class="text-danger"></span>
+                            </p>
+                            <p>
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </p>
+                            <p hidden>
+                                <label asp-for="RepositoryID" class="control-label"></label>
+                                <input asp-for="RepositoryID" class="form-control" />
+                                <span asp-validation-for="RepositoryID" class="text-danger"></span>
+                            </p>
+                            <p>
+                                <label asp-for="Shape" class="control-label"></label>
+                                <dd class="col-sm-10">
+                                    @Html.DisplayFor(model => model.Shape)
+                                </dd>
+                            </p>
+                            <p>
+                                <label asp-for="ShapeFile" class="control-label"></label>
+                                <input asp-for="ShapeFile" class="form-control" />
+                                <span asp-validation-for="ShapeFile" class="text-danger"></span>
+                            </p>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="fieldset actionButtons fieldset03">
+                    <fieldset>
+                        <p>
+                            <input class="submit principal" type="submit" value="Guardar">
+                        </p>
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
