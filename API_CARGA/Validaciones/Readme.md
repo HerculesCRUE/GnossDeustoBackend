@@ -46,6 +46,7 @@
 	}
 	
 7.- En esta carpeta se encuentran todas las validaciones extraídas de la ontología a fecha 15/5/2020.
+
 	domain.ttl: Contiene todas las validaciones de restricciones de dominio extraídas del OWL de la ontología ROH.
 	rangeDataType.ttl: Contiene todas las validaciones de restricciones de rango de dataTypes extraídas del OWL de la ontología ROH.
 	rangeObject.ttl: Contiene todas las validaciones de restricciones de rango de objetos extraídas del OWL de la ontología ROH.
