@@ -97,11 +97,17 @@ namespace CronConfigure.Models.Services
             {
                 foreach (var failed in api.FailedJobs(from, count))
                 {
+                    string name = "";
+                    if (failed.Value.Job != null)
+                    {
+                        name = failed.Value.Job.ToString();
+                    }
+
                     JobViewModel job = new JobViewModel()
                     {
                         Id = failed.Key,
                         ExceptionDetails = failed.Value.ExceptionDetails,
-                        Job = failed.Value.Job.ToString(),
+                        Job = name,
                         State = "Fail"
                     };
                     listJobViewModel.Add(job);
