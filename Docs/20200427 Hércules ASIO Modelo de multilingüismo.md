@@ -2,24 +2,23 @@
 
 # Hércules Backend ASIO. Modelo de Multilingüismo
 
-[1 INTRODUCCIÓN 3](#introducción)
+[1 INTRODUCCIÓN](#introducción)
 
-[2 DATOS MULTILINGÜES 4](#datos-multilingües)
+[2 DATOS MULTILINGÜES](#datos-multilingües)
 
-[2.1 Nombrado (naming) 4](#nombrado-naming)
+[2.1 Nombrado (naming)](#nombrado-naming)
 
-[2.2 Desreferenciado (dereferencing) 5](#desreferenciado-dereferencing)
+[2.2 Desreferenciado (dereferencing)](#desreferenciado-dereferencing)
 
-[2.3 Etiquetado (labeling) 5](#etiquetado-labeling)
+[2.3 Etiquetado (labeling)](#etiquetado-labeling)
 
-[2.4 Descripciones más largas (longer description)
-6](#descripciones-más-largas-longer-description)
+[2.4 Descripciones más largas (longer description)](#descripciones-más-largas-longer-description)
 
-[2.5 Enlazado (linking) 7](#enlazado-linking)
+[2.5 Enlazado (linking)](#enlazado-linking)
 
-[2.6 Reutilización (reuse) 7](#reutilización-reuse)
+[2.6 Reutilización (reuse)](#reutilización-reuse)
 
-[3 RESUMEN DE PATRONES DEL MODELO 9](#resumen-de-patrones-del-modelo)
+[3 RESUMEN DE PATRONES DEL MODELO](#resumen-de-patrones-del-modelo)
 
 INTRODUCCIÓN
 ============
