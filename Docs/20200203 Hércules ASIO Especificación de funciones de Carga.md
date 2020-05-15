@@ -324,11 +324,11 @@ Este método hace de PROXY entre el API y el proveedor OAI-PMH.
 Recuperar la estructura establecida de un repositorio en formato XML
 OAI-PMH, útil para la recolección selectiva.
 
-API de Carga. ETL-CONFIG
+API de Carga. REPOSITORY
 ------------------------
 
 Dentro de este controlador se encuentran todos los métodos necesarios
-para la configuración de la extracción, transformación y carga de datos.
+para la gestión de los repositorios.
 
 ### GET etl-config/​repository
 
@@ -351,6 +351,23 @@ Elimina la configuración de un repositorio OAI-PMH.
 
 Modifica la configuración de un repostorio OAI-PMH.
 
+API de Carga. SYNC
+------------------
+
+Dentro de este controlador se encuentran los métodos para
+ejecutar las sincronizaciones.
+
+### ​POST /sync​/execute
+
+Ejecuta una sincronización.
+
+
+API de Carga. VALIDATION
+------------------------
+
+Dentro de este controlador se encuentran todos los métodos necesarios
+para la gestión de las validaciones.
+
 ### GET etl​-config/validation
 
 Obtiene la configuración de los shape SHACL de validación.
@@ -371,42 +388,3 @@ Elimina la configuración una configuración de validación.
 
 Modifica la configuración de validación mediante un shape SHACL.
 
-API de Carga. SYNC
-------------------
-
-Dentro de este controlador se encuentran todos los métodos para
-configurar las sincronizaciones, obtener su estado, activarlas y
-desactivarlas.
-
-### ​GET /sync​/config
-
-Obtiene todas las configuraciones de las sincronizaciones previamente
-establecidas.
-
-### ​POST /sync​/config
-
-Añade una nueva configuración de sincronización.
-
-### ​GET /sync​/config​/{identifier}
-
-Obtiene la configuración de una sincronización en particular.
-
-### ​DELETE /sync​/config​/{identifier}
-
-Elimina la configuración de una sincronización.
-
-### ​PUT /sync​/config​/{identifier}
-
-Modifica la configuración de una sincronización en particular.
-
-### ​GET /sync​/status​/{identifier}
-
-Obtiene el estado de una sincronización.
-
-### ​ POST /sync​/enable​/{identifier}
-
-Activa una sincronización.
-
-### ​ POST /disable​/stop​/{identifier}
-
-Desactiva una sincronización.
