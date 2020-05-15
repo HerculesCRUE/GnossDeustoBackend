@@ -23,12 +23,10 @@ namespace XUnitTestIntegracion
         [Fact]
         public void TestGetRecord()
         {
-            List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
-            listIdentifier.Add(new IdentifierOAIPMH { Identifier = "0000-0001-8055-6823", Fecha = DateTime.Now });
             ConfigUrlService urlService = new ConfigUrlService();
             urlService.Url = "http://herc-as-front-desa.atica.um.es/carga/";
             OaiPublishRDFService oaiPublish = new OaiPublishRDFService(urlService, null);
-            string rdf = oaiPublish.CallGetRecord(new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"), "0000-0001-8055-6823");
+            string rdf = oaiPublish.CallGetRecord(new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"), "1");
             Assert.True(!string.IsNullOrEmpty(rdf));
         }
     }
