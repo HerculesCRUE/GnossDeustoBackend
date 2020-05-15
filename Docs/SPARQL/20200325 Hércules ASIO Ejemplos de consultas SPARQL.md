@@ -36,7 +36,7 @@ artículos**)**.
 
 	select * from <http://graph.um.es/graph/um_cvn>
 	where {
-		<http://data.um.es/res/article/e449793d-fdaa-4c0e-9999-53f47d7aa437> ?p ?o.
+		<http://graph.um.es/res/article/4167c433-5af4-4071-8daa-df71d9c18fc5> ?p ?o.
 	}
 
 GRAFO DE DATOS DE SISTEMAS DE LA UM
