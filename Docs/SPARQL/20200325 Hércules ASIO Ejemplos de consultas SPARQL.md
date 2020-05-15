@@ -23,8 +23,7 @@ http://graph.um.es/graph/um/cvn
 	where { <http://graph.um.es/res/person/d7aad123-55b9-4400-b108-185139408f7f> ?p ?o}
 
 **Consulta que devuelve todas las entidades de las que el investigador
-es objeto (**con los datos cargados actualmente, sólo devuelve
-artículos**)**.
+es objeto**.
 
 	select * from <http://graph.um.es/graph/um_cvn>
 	where {
@@ -56,8 +55,7 @@ http://graph.um.es/graph/um_sgi
 	select count(*) from <http://graph.um.es/graph/um_sgi>
 	where { ?s a <http://purl.org/roh/mirror/vivo#Project>}
 
-**Consulta que devuelve los datos de un proyecto** (teniendo en cuenta
-que podrían faltar algunos datos).
+**Consulta que devuelve los datos de un proyecto (hasta 3 niveles)** 
 
 	select * from <http://graph.um.es/graph/um_sgi>
 	where {
@@ -66,3 +64,43 @@ que podrían faltar algunos datos).
 		FILTER(?s=<http://graph.um.es/res/project/12307>)
 	}
 	order by asc(?s) asc(?p) asc(?o) asc(?p2) asc(?o2) asc(?p3) asc(?o3)
+	
+**Consulta que devuelve los URIs de todas las conferencias**.
+
+	select * from <http://graph.um.es/graph/um_sgi>
+	where { ?s a <http://purl.org/roh/mirror/bibo#Conference>}
+
+**Consulta que cuenta las conferencias cargadas**.
+
+	select count(*) from <http://graph.um.es/graph/um_sgi>
+	where { ?s a <http://purl.org/roh/mirror/bibo#Conference>}
+
+**Consulta que devuelve los datos de una conferencia (hasta 3 niveles)**
+
+	select * from <http://graph.um.es/graph/um_sgi>
+	where {
+		?s ?p ?o.
+		OPTIONAL{?o ?p2 ?o2 OPTIONAL{?o2 ?p3 ?o3}}
+		FILTER(?s=<http://graph.um.es/res/conference/12670>)
+	}
+	order by asc(?s) asc(?p) asc(?o) asc(?p2) asc(?o2) asc(?p3) asc(?o3)
+	
+**Consulta que devuelve los URIs de todos los artículos**.
+
+	select * from <http://graph.um.es/graph/um_sgi>
+	where { ?s a <http://purl.org/roh/mirror/bibo#Article>}
+
+**Consulta que cuenta los artículos cargados**.
+
+	select count(*) from <http://graph.um.es/graph/um_sgi>
+	where { ?s a <http://purl.org/roh/mirror/bibo#Article>}
+
+**Consulta que devuelve los datos de un artículo (hasta 3 niveles)** 
+
+	select * from <http://graph.um.es/graph/um_sgi>
+	where {
+		?s ?p ?o.
+		OPTIONAL{?o ?p2 ?o2 OPTIONAL{?o2 ?p3 ?o3}}
+		FILTER(?s=<http://graph.um.es/res/article/44357>)
+	}
+	order by asc(?s) asc(?p) asc(?o) asc(?p2) asc(?o2) asc(?p3) asc(?o3)	
