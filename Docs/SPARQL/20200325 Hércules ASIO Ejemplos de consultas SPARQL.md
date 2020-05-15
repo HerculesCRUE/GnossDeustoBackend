@@ -14,19 +14,19 @@ http://graph.um.es/graph/um/cvn
 
 **Consulta que devuelve los URIs de los investigadores cargados**.
 
-	select * from <http://graph.um.es/graph/um/cvn>
+	select * from <http://graph.um.es/graph/um_cvn>
 	where {?s a <http://purl.org/roh/mirror/foaf#Person>}
 
 **Consulta que devuelve todos los triples de un investigador**.
 
-	select * from <http://graph.um.es/graph/um/cvn>
+	select * from <http://graph.um.es/graph/um_cvn>
 	where { <http://data.um.es/res/person/fb4cab6c-1e0f-4010-9e59-ae2af1ac23f3> ?p ?o}
 
 **Consulta que devuelve todas las entidades de las que el investigador
 es objeto (**con los datos cargados actualmente, sólo devuelve
 artículos**)**.
 
-	select * from <http://graph.um.es/graph/um/cvn>
+	select * from <http://graph.um.es/graph/um_cvn>
 	where {
 		?s ?p <http://data.um.es/res/person/fb4cab6c-1e0f-4010-9e59-ae2af1ac23f3>.
 		?s a ?o.
@@ -34,7 +34,7 @@ artículos**)**.
 
 **Consulta que devuelve todos los triples un artículo.**
 
-	select * from <http://graph.um.es/graph/um/cvn>
+	select * from <http://graph.um.es/graph/um_cvn>
 	where {
 		<http://data.um.es/res/article/e449793d-fdaa-4c0e-9999-53f47d7aa437> ?p ?o.
 	}
