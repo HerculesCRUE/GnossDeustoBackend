@@ -81,6 +81,17 @@ namespace ApiCargaWebInterface.Controllers
             
         }
 
+        public IActionResult Syncro(Guid repositoryId)
+        {
+            CreateJobViewModel jobModel = new CreateJobViewModel() { IdRepository = repositoryId };
+            string id = _serviceApi.CreateJob(jobModel);
+            resultCreated item = new resultCreated()
+            {
+                Id = id
+            };
+            return View("Created", item);
+        }
+
         public IActionResult CronValid(string CronExpression)
         {
             var correct = CrontabSchedule.TryParse(CronExpression);
