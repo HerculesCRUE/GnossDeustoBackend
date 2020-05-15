@@ -52,6 +52,7 @@
 	rangeObject.ttl: Contiene todas las validaciones de restricciones de rango de objetos extraídas del OWL de la ontología ROH.
 	Class_validations: Contiene todas las validaciones propias de cada una de las clases del OWL de la ontología ROH.
 	
-8.- Las validaciones cargadas en las configuraciones se corresponden con las validaciones del repositorio OAI_PMH_CVN, cuyo identificaro es 5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"
+8.- Las validaciones cargadas en las configuraciones se corresponden con las validaciones del repositorio OAI_PMH_CVN, cuyo identificador es 5efac0ad-ec4e-467d-bbf5-ce3f64edb46a.
+	Se pueden consultar con esta petición {http://herc-as-front-desa.atica.um.es/carga/etl-config/Validation}(http://herc-as-front-desa.atica.um.es/carga/etl-config/Validation) o mediante el interfaz swagger {http://herc-as-front-desa.atica.um.es/carga/swagger/index.html}(http://herc-as-front-desa.atica.um.es/carga/swagger/index.html)
 
 	
