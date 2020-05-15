@@ -22,9 +22,20 @@ namespace ApiCargaWebInterface.Controllers
             List<CreateRecurringJobViewModel> lista = new List<CreateRecurringJobViewModel>();
             return View(lista);
         }
-        public IActionResult Create()
+        public IActionResult Create(Guid? IdRepository = null)
         {
-            return View();
+            if (IdRepository.HasValue)
+            {
+                CreateJobViewModel createJobViewModel = new CreateJobViewModel()
+                {
+                    IdRepository = IdRepository.Value
+                };
+                return View(createJobViewModel);
+            }
+            else
+            {
+                return View();
+            }
         }
         [HttpPost]
         public IActionResult Create(CreateJobViewModel jobModel)

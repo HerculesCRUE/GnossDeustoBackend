@@ -11,10 +11,12 @@ namespace ApiCargaWebInterface.ViewModels
     {
         [Display(Name = "Identifier")]
         public Guid ShapeConfigID { get; set; }
+        [Display(Name = "Nombre del shape")]
         public string Name { get; set; }
         [Display(Name = "identificador del repositorio")]
         public Guid RepositoryID { get; set; }
         public string Shape { get; set; }
+        [Display(Name = "Archivo que define el shape")]
         public IFormFile ShapeFile { get; set; }
     }
 }
