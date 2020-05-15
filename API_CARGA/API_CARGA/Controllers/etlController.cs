@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
@@ -51,6 +52,13 @@ namespace PMH.Controllers
             {
                 XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
                 List<string> triples = SparqlUtility.GetTriplesFromRDF(rdf);
+               
+                triples =triples.Select(x => Regex.Replace(
+                    x,
+                    @"\\u(?<Value>[a-zA-Z0-9]{4})",
+                    m => {
+                        return ((char)int.Parse(m.Groups["Value"].Value, NumberStyles.HexNumber)).ToString();
+                    })).ToList();
 
                 SparqlUtility.LoadTriples(triples, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), _configSparql.GetGraph());
                 return Ok();
