@@ -44,25 +44,25 @@ GRAFO DE DATOS DE SISTEMAS DE LA UM
 
 El grafo de los datos importados desde los sistemas de la UM es:
 
-http://graph.um.es/graph/um_sgi_3
+http://graph.um.es/graph/um_sgi
 
 **Consulta que devuelve los URIs de todos los proyectos**.
 
 	select * from <http://graph.um.es/graph/um_sgi>
-	where { ?s a <http://vivoweb.org/ontology/core#Project>}
+	where { ?s a <http://purl.org/roh/mirror/vivo#Project>}
 
 **Consulta que cuenta los proyectos cargados**.
 
 	select count(*) from <http://graph.um.es/graph/um_sgi>
-	where { ?s a <http://vivoweb.org/ontology/core#Project>}
+	where { ?s a <http://purl.org/roh/mirror/vivo#Project>}
 
 **Consulta que devuelve los datos de un proyecto** (teniendo en cuenta
 que podrían faltar algunos datos).
 
 	select * from <http://graph.um.es/graph/um_sgi>
 	where {
-	?s ?p ?o.
-	OPTIONAL{?o ?p2 ?o2 OPTIONAL{?o2 ?p3 ?o3}}
-	FILTER(?s=<http://graph.um.es/res/project/10031>)
+		?s ?p ?o.
+		OPTIONAL{?o ?p2 ?o2 OPTIONAL{?o2 ?p3 ?o3}}
+		FILTER(?s=<http://graph.um.es/res/project/12307>)
 	}
 	order by asc(?s) asc(?p) asc(?o) asc(?p2) asc(?o2) asc(?p3) asc(?o3)
