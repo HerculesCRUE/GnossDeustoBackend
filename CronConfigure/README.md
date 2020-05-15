@@ -1,3 +1,9 @@
 # Sobre CronConfigure
 
-Es un api para la gesti髇 y configuraci髇 del programado de tareas, tanto de ejecuci髇 recurrente como ejecuci髇 鷑ica sobre los repositorios configurados
+Accesible desde: [http://herc-as-front-desa.atica.um.es/cron-config/swagger/index.html](http://herc-as-front-desa.atica.um.es/cron-config/swagger/index.html)
+Es un api para la gesti贸n y configuraci贸n del programado de tareas, tanto de ejecuci贸n recurrente como ejecuci贸n 煤nica sobre los repositorios configurados.
+Este api contiene 3 controladores:
+
+ - **JobController**: Con los m茅todos disponibles en este controlador se pueden crear una sincronizaci贸n, obtener las tareas y volver a ejecutar una tarea ya ejecutada.
+ - **RecurringJobController**: Mediante los m茅todos de este controlador se puede crear una tarea recurrente especificando el patr贸n de repetici贸n, borrar las tareas recurrentes y obtener dichas tareas, as铆 como obtener las tareas que se han ejecutado a partir de una tarea recurrente.
+ -  **ScheduledJobController**: Este controlador sirve para crear tareas que se ejecuten en una determinada fecha, obtener este tipo de tareas y eliminarlas

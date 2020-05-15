@@ -1,0 +1,352 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix ns: <http://www.w3.org/2003/06/sw-vocab-status/ns#>.
+@prefix ro: <http://purl.org/roh/mirror/obo/ro#>.
+@prefix bfo: <http://purl.org/roh/mirror/obo/bfo#>.
+@prefix iao: <http://purl.org/roh/mirror/obo/iao#>.
+@prefix obo: <http://purl.obolibrary.org/obo/>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix bibo: <http://purl.org/roh/mirror/bibo#>.
+@prefix foaf: <https://xmlns.com/foaf/0.1/>.
+@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix vivo: <http://purl.org/roh/mirror/vivo#>.
+@prefix skos1: <http://purl.org/roh/mirror/skos#>.
+@prefix terms: <http://purl.org/dc/terms/>.
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>.
+@prefix uneskos: <http://purl.org/umu/uneskos#>.
+@prefix skos-thes: <http://purl.org/iso25964/skos-thes#>.
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix roh: <http://purl.org/roh#>.
+@prefix foaf1: <http://purl.org/roh/mirror/foaf#>.
+@prefix vcard: <http://purl.org/roh/mirror/vcard#>.
+@prefix geonames: <http://purl.org/roh/mirror/geonames#>.
+@prefix ero: <http://purl.org/roh/mirror/obo/ero#>.
+roh:domainroh__accreditationOfShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:accreditationOf ;
+	sh:class roh:Accreditation.
+roh:domainroh__issuesShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:issues ;
+	sh:class roh:AccreditationIssuer.
+roh:domainroh__issuedByShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:issuedBy ;
+	sh:class roh:Accreditation.
+roh:domainroh__participatedByShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:participatedBy ;
+	sh:class roh:Activity.
+roh:domainbfo__BFO_0000055Shape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf bfo:BFO_0000055 ;
+	sh:class roh:Activity.
+roh:domainroh__CVOfShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:CVOf ;
+	sh:class roh:CurriculumVitae.
+roh:domainroh__factorHShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:factorH ;
+	sh:class roh:CurriculumVitae.
+roh:domainroh__summaryShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:summary ;
+	sh:class roh:CurriculumVitae.
+roh:domainroh__spentByShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:spentBy ;
+	sh:class roh:Expense.
+roh:domainroh__supportsShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:supports ;
+	sh:class roh:Funding.
+roh:domainroh__publicFundingShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:publicFunding ;
+	sh:class roh:Funding.
+roh:domainroh__citesShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:cites ;
+	sh:class roh:CurriculumVitae.
+roh:domainroh__grantsShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:grants ;
+	sh:class roh:FundingAmount.
+roh:domainroh__infrastructureOfShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:infrastructureOf ;
+	sh:class roh:Infrastructure.
+roh:domainroh__languageSkillShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:languageSkill ;
+	sh:class roh:LanguageCertificate.
+roh:domainroh__metricOfShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:metricOf ;
+	sh:class roh:Metric.
+roh:domainroh__cumLaudeShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:cumLaude ;
+	sh:class roh:PhDThesisMetric.
+roh:domainroh__metricNameShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:metricName ;
+	sh:class roh:Metric.
+roh:domainroh__markShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:mark ;
+	sh:class roh:PhDThesisMetric.
+roh:domainroh__impactFactorShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:impactFactor ;
+	sh:class roh:PublicationMetric.
+roh:domainroh__quartileShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:quartile ;
+	sh:class roh:PublicationMetric.
+roh:domainroh__rankingShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:ranking ;
+	sh:class roh:PublicationMetric.
+roh:domainroh__hasMetricShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:hasMetric ;
+	sh:class roh:ResearchObject.
+roh:domainbibo__issueShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf bibo:issue ;
+	sh:or ( 
+		[sh:class bibo:Article]
+		[sh:class bibo:Issue]
+	). 
+roh:domainbibo__editorListShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf bibo:editorList ;
+	sh:class bibo:Document.
+roh:domainbibo__authorListShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf bibo:authorList ;
+	sh:class bibo:Document.
+roh:domainbibo__pageEndShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf bibo:pageEnd ;
+	sh:class bibo:Document.
+roh:domainroh__languageShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:language ;
+	sh:class roh:LanguageCertificate.
+roh:domainbibo__volumeShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf bibo:volume ;
+	sh:class bibo:Document.
+roh:domainroh__ownerOrganizationShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:ownerOrganization ;
+	sh:class bibo:Patent.
+roh:domainroh__supervisedByShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:supervisedBy ;
+	sh:class bibo:Thesis.
+roh:domainroh__hasAccreditationShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:hasAccreditation ;
+	sh:class foaf1:Agent.
+roh:domainfoaf1__mboxShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf foaf1:mbox ;
+	sh:class foaf1:Agent.
+roh:domainroh__hasInfrastructureShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:hasInfrastructure ;
+	sh:class foaf1:Agent.
+roh:domainroh__hasContactInfoShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:hasContactInfo ;
+	sh:class foaf1:Agent.
+roh:domainroh__statusShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:status ;
+	sh:class bibo:Report.
+roh:domainroh__grantedByShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:grantedBy ;
+	sh:class foaf1:Organization.
+roh:domainroh__ownerOrganizationOfShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:ownerOrganizationOf ;
+	sh:class foaf1:Organization.
+roh:domainvivo__affiliatedOrganizationShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf vivo:affiliatedOrganization ;
+	sh:class foaf1:Organization.
+roh:domainvivo__hasPredecessorOrganizationShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf vivo:hasPredecessorOrganization ;
+	sh:class foaf1:Organization.
+roh:domainroh__providesShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:provides ;
+	sh:class foaf1:Organization.
+roh:domainvivo__hasSuccessorOrganizationShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf vivo:hasSuccessorOrganization ;
+	sh:class foaf1:Organization.
+roh:domainroh__foundationDateShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:foundationDate ;
+	sh:class foaf1:Organization.
+roh:domainroh__correspondingAuthorOfShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:correspondingAuthorOf ;
+	sh:class foaf1:Person.
+roh:domainroh__hasPositionShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:hasPosition ;
+	sh:class foaf1:Person.
+roh:domainroh__supervisorOfShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:supervisorOf ;
+	sh:class foaf1:Person.
+roh:domainroh__hasCVShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:hasCV ;
+	sh:class foaf1:Person.
+roh:domainroh__ORCIDShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:ORCID ;
+	sh:class foaf1:Person.
+roh:domainfoaf1__imgShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf foaf1:img ;
+	sh:class foaf1:Person.
+roh:domainroh__taxIDShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:taxID ;
+	sh:class foaf1:Person.
+roh:domainfoaf1__genderShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf foaf1:gender ;
+	sh:class foaf1:Person.
+roh:domainfoaf1__surnameShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf foaf1:surname ;
+	sh:class foaf1:Person.
+roh:domainfoaf1__firstNameShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf foaf1:firstName ;
+	sh:class foaf1:Person.
+roh:domainvivo__researcherIdShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf vivo:researcherId ;
+	sh:class foaf1:Person.
+roh:domainvivo__eRACommonsIdShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf vivo:eRACommonsId ;
+	sh:class foaf1:Person.
+roh:domainvivo__scopusIdShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf vivo:scopusId ;
+	sh:class foaf1:Person.
+roh:domainroh__dedicationShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:dedication ;
+	sh:class bfo:BFO_0000023.
+roh:domainroh__roleOfShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:roleOf ;
+	sh:class bfo:BFO_0000023.
+roh:domainbfo__BFO_0000054Shape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf bfo:BFO_0000054 ;
+	sh:class bfo:BFO_0000023.
+roh:domainroh__contactInfoOfShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:contactInfoOf ;
+	sh:class vcard:Kind.
+roh:domainroh__isProvidedByShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:isProvidedBy ;
+	sh:class ero:ERO_0000005.
+roh:domainroh__contractSigningDateShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:contractSigningDate ;
+	sh:class vivo:Contract.
+roh:domainvivo__degreeCandidacyShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf vivo:degreeCandidacy ;
+	sh:class vivo:AdvisingRelationship.
+roh:domainvivo__startShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf vivo:start ;
+	sh:class vivo:DateTimeInterval.
+roh:domainvivo__endShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf vivo:end ;
+	sh:class vivo:DateTimeInterval.
+roh:domainroh__awardedByShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:awardedBy ;
+	sh:class vivo:AwardedDegree.
+roh:domainroh__contractSigningDateOfShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:contractSigningDateOf ;
+	sh:class vivo:DateTimeValue.
+roh:domainroh__promotesShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:promotes ;
+	sh:class vivo:FundingOrganization.
+roh:domainroh__contractOfShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:contractOf ;
+	sh:class vivo:Contract.
+roh:domainroh__positionOfShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:positionOf ;
+	sh:class vivo:Position.
+roh:domainroh__foreseenJustificationDateShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:foreseenJustificationDate ;
+	sh:class vivo:Project.
+roh:domainroh__knowledgeAreaOfShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:knowledgeAreaOf ;
+	sh:class skos:Concept.
+roh:domainroh__modalityShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:modality ;
+	sh:class vivo:Project.
+roh:domainroh__promotedByShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:promotedBy ;
+	sh:or ( 
+		[sh:class roh:FundingSource]
+		[sh:class roh:FundingProgram]
+	). 
+roh:domainroh__projectStatusShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:projectStatus ;
+	sh:class vivo:Project.
+roh:domainroh__awardsShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:awards ;
+	sh:class vivo:University.
+roh:domainroh__hasRoleShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:hasRole ;
+	sh:class foaf1:Agent.
+roh:domainvivo__hrJobTitleShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf vivo:hrJobTitle ;
+	sh:class vivo:Position.
+roh:domainbibo__pageStartShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf bibo:pageStart ;
+	sh:class bibo:Document.
+roh:domainroh__isSupportedByShape
+	a sh:NodeShape ;
+	sh:targetSubjectsOf roh:isSupportedBy ;
+	sh:class vivo:Project.

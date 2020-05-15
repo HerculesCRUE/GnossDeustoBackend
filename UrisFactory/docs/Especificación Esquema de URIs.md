@@ -1,51 +1,38 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
-# Hércules Backend ASIO. Especificación de Esquema de URIS y buenas prácticas
+# Hércules Backend ASIO. Especificación de Esquema de URIs
 
 [1 INTRODUCCIÓN 3](#introducción)
 
-[2 Características del Esquema de URIs
-4](#características-del-esquema-de-uris)
+[2 Características del Esquema de URIs](#características-del-esquema-de-uris)
 
-[3 Estructura del Esquema de URIs 5](#estructura-del-esquema-de-uris)
+[3 Estructura del Esquema de URIs](#estructura-del-esquema-de-uris)
 
-[3.1 Base 5](#base)
+[3.1 Base](#base)
 
-[3.2 Carácter de la información 5](#carácter-de-la-información)
+[3.2 Carácter de la información](#carácter-de-la-información)
 
-[3.3 Sector o ámbito 6](#sector-o-ámbito)
+[3.3 Sector o ámbito](#sector-o-ámbito)
 
-[3.4 dominio o temática 6](#dominio-o-temática)
+[3.4 dominio o temática](#dominio-o-temática)
 
-[3.5 conceptos específicos 6](#conceptos-específicos)
+[3.5 conceptos específicos](#conceptos-específicos)
 
-[4 Tipos de URIs 7](#tipos-de-uris)
+[4 Tipos de URIs](#tipos-de-uris)
 
-[4.1 URI para identificar vocabularios
-7](#uri-para-identificar-vocabularios)
+[4.1 URI para identificar vocabularios](#uri-para-identificar-vocabularios)
 
-[4.2 URI para identificar esquemas de conceptos
-7](#uri-para-identificar-esquemas-de-conceptos)
+[4.2 URI para identificar esquemas de conceptos](#uri-para-identificar-esquemas-de-conceptos)
 
-[4.3 URI para identificar a cualquier instancia física o conceptual
-7](#uri-para-identificar-a-cualquier-instancia-física-o-conceptual)
+[4.3 URI para identificar a cualquier instancia física o conceptual](#uri-para-identificar-a-cualquier-instancia-física-o-conceptual)
 
-[5 Definición del Esquema de URIs 8](#definición-del-esquema-de-uris)
-
-[6 Buenas prácticas de URIs 11](#buenas-prácticas-de-uris)
-
-[6.1 Normalización de los componentes de los URI
-11](#normalización-de-los-componentes-de-los-uri)
-
-[6.2 Prácticas relativas a la gestión de recursos semánticos a través de
-URI
-11](#prácticas-relativas-a-la-gestión-de-recursos-semánticos-a-través-de-uri)
+[5 Definición del Esquema de URIs](#definición-del-esquema-de-uris)
 
 INTRODUCCIÓN
 ============
 
 El presente documento describe la Especificación del Esquema de URIs de
-Hércules e incluye las Buenas prácticas de URIs.
+Hércules.
 
 En su elaboración tenemos en cuenta las recomendaciones de la [Norma
 Técnica de Interoperabilidad de Reutilización de recursos de la
@@ -517,83 +504,3 @@ Se indica a continuación un ejemplo:
 
 \]
 
-Buenas prácticas de URIs
-========================
-
-Agrupamos las Buenas prácticas en unas **Reglas de normalización** de
-los componentes de los URI y en unas recomendaciones en la **Gestión de
-recursos semánticos** a través de URI.
-
-Normalización de los componentes de los URI
--------------------------------------------
-
-Para garantizar la coherencia y el mantenimiento posterior del esquema
-de URI se aplicarán las siguientes reglas para normalizar las distintas
-partes que componen los URI:
-
-a)  Seleccionar identificadores alfanuméricos cortos únicos, que sean
-    representativos, intuitivos y semánticos.
-
-b)  Usar siempre minúsculas, salvo en los casos en los que se utilice el
-    nombre de la clase o concepto. Habitualmente, los nombres de las
-    clases se representan con el primer carácter de cada palabra en
-    mayúsculas.
-
-c)  Eliminar todos los acentos, diéresis y símbolos de puntuación. Como
-    excepción puede usarse el guion (--).
-
-d)  Eliminar conjunciones y artículos en los casos de que el concepto a
-    representar contenga más de una palabra.
-
-e)  Usar el guion (--) como separador entre palabras.
-
-f)  Evitar en la medida de lo posible la abreviatura de palabras, salvo
-    que la abreviatura sea intuitiva.
-
-g)  Los términos que componen los URI deberán ser legibles e
-    interpretables por el mayor número de personas posible, por lo que
-    se utilizará el castellano, cualquiera de las lenguas oficiales de
-    España o el inglés como lengua franca de la investigación.
-
-Prácticas relativas a la gestión de recursos semánticos a través de URI
------------------------------------------------------------------------
-
-Las siguientes prácticas se desarrollarán como requisitos del servidor
-Linked Data de Hércules ASIO y se aplicarán para la gestión de recursos
-semánticos descritos en RDF:
-
-a)  Cumplir el principio de persistencia de los URIs, lo que significa
-    que los que ya han sido creados previamente nunca deberían variar, y
-    que el contenido al que hacen referencia debería ser accesible. En
-    el caso de que sea necesario cambiar o eliminar el recurso al que
-    apunta un identificador, se deberá establecer un mecanismo de
-    información sobre el estado del recurso usando los códigos de estado
-    de HTTP. En el caso de poder ofrecer una redirección a la nueva
-    ubicación del recurso, se utilizarán los códigos de estado HTTP 3XX,
-    mientras que para indicar que un recurso ha desaparecido
-    permanentemente se utilizará el código de estado HTTP 410
-
-b)  Siempre que sea posible, y existan versiones del recurso en formato
-    legible para personas HTML o similar y RDF, el servidor que gestiona
-    los URI realizará negociación del contenido en función de la
-    cabecera del agente que realiza la petición. En el caso de que el
-    cliente acepte un formato de representación RDF en cualquiera de sus
-    notaciones (p.e., especificando en su cabecera que acepta el tipo
-    MIME application/rdf+xml) se servirá el documento RDF a través del
-    mecanismo de redirecciones alternativas mediante los códigos de
-    estado HTTP 3XX.
-
-c)  En el caso de que no se realice una negociación del contenido desde
-    el servidor y, para favorecer el descubrimiento de contenido RDF
-    desde los documentos HTML relacionados con las descripciones de los
-    recursos, se incluirán enlaces a la representación alternativa en
-    cualquiera de las representaciones en RDF desde los propios
-    documentos HTML de la forma \<link rel=«alternate»
-    type=«application/rdf+xml» href=«documento.rdf»\> o similar. En esa
-    sentencia se incluye el tipo de formato MIME del documento
-    (application/rdf+xml, text/n3, etc.).
-
-d)  Cuando se establezcan enlaces entre distintos recursos de
-    información, se procurará la generación de enlaces que conecten los
-    recursos bidireccionales para facilitar la navegación sobre los
-    recursos de información en ambos sentidos.

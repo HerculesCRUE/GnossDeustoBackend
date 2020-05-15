@@ -1,5 +1,5 @@
 {
-  "Base": "http://data.um.es",
+  "Base": "http://graph.um.es",
   "Characters": [
     {
       "Character": "resource",
@@ -488,11 +488,23 @@
       "ResourceClass": "OrganizerRole",
       "LabelResourceClass": "organizerrole",
       "ResourceURI": "uriResourceStructure"
-    }	,
+    },
     {
       "ResourceClass": "EditedBook",
       "LabelResourceClass": "editedbook",
       "ResourceURI": "uriResourceStructure"
     }
+	,
+    {
+      "ResourceClass": "FundingOrganization",
+      "LabelResourceClass": "fundingorganization",
+      "ResourceURI": "uriResourceStructure"
+    },
+    {
+      "ResourceClass": "Contract",
+      "LabelResourceClass": "contract",
+      "ResourceURI": "uriResourceStructure"
+    }
+	
   ]
 }

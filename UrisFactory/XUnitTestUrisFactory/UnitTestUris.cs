@@ -16,7 +16,7 @@ namespace XUnitTestUrisFactory
             ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
             UriFormer uriFormer = new UriFormer(configJsonHandler.GetUrisConfig());
             string uri = uriFormer.GetURI("Researcher", queryString);
-            string uriResultante = "http://data.um.es/res/researcher/123d";
+            string uriResultante = "http://graph.um.es/res/researcher/123d";
 
             Assert.True(uriResultante.Equals(uri));
         }
@@ -60,7 +60,7 @@ namespace XUnitTestUrisFactory
             ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
             UriFormer uriFormer = new UriFormer(configJsonHandler.GetUrisConfig());
             string uri = uriFormer.GetURI("publication", queryString);
-            string uriResultante = "http://data.um.es/res/sector1/publicacion/123d";
+            string uriResultante = "http://graph.um.es/res/sector1/publicacion/123d";
             Assert.True(uriResultante.Equals(uri));
         }
     }
