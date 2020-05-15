@@ -1,0 +1,6 @@
+[submodule "roh"]
+	path = roh
+	url = https://github.com/deustohercules/roh
+[submodule "pellet"]
+	path = pellet
+	url = https://github.com/stardog-union/pellet
