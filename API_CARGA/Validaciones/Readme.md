@@ -51,5 +51,7 @@
 	rangeDataType.ttl: Contiene todas las validaciones de restricciones de rango de dataTypes extraídas del OWL de la ontología ROH.
 	rangeObject.ttl: Contiene todas las validaciones de restricciones de rango de objetos extraídas del OWL de la ontología ROH.
 	Class_validations: Contiene todas las validaciones propias de cada una de las clases del OWL de la ontología ROH.
+	
+8.- Las validaciones cargadas en las configuraciones se corresponden con las validaciones del repositorio OAI_PMH_CVN, cuyo identificaro es 5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"
 
 	
