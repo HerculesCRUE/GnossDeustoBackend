@@ -1,3 +1,5 @@
+![](.//media/CabeceraDocumentosMD.png)
+
 # Hércules Backend ASIO. Especificación de Esquema de URIS y buenas prácticas
 
 [1 INTRODUCCIÓN 3](#introducción)
