@@ -44,7 +44,7 @@ GRAFO DE DATOS DE SISTEMAS DE LA UM
 
 El grafo de los datos importados desde los sistemas de la UM es:
 
-http://graph.um.es/graph/um_sgi_3
+http://graph.um.es/graph/um_sgi
 
 **Consulta que devuelve los URIs de todos los proyectos**.
 
