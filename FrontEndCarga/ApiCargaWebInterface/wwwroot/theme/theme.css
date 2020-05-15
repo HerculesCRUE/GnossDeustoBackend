@@ -827,6 +827,7 @@ main {
         #footer .col-europa .presentacion {
             flex: 0 0 100%;
             max-width: 100%;
+            padding-right: 0;
             padding-bottom: 16px;
         }
 }
@@ -4950,15 +4951,13 @@ main {
         padding-bottom: 60px;
     }
 
-    .formulario .col-facetas {
-        display: none;
-    }
-
     .formulario .col-contenido {
-        min-height: calc(100vh - 182px);
+        min-height: calc(100vh - 242px);
     }
 
         .formulario .col-contenido .wrapCol {
+            width: 808px;
+            margin: 0 auto;
             padding: 47px 103px 82px 103px;
         }
 
@@ -4967,8 +4966,18 @@ main {
         font-weight: 800;
         line-height: 29px;
         color: #8c1525;
-        letter-spacing: 0.46px;
+        letter-spacing: .46px;
         margin-bottom: 20px;
+    }
+
+    .formulario .mediumLabels h2 {
+        font-size: 19px;
+        font-weight: 600;
+        line-height: 24px;
+        color: #8c1525;
+        letter-spacing: .38px;
+        margin-top: 15px;
+        margin-bottom: 10px;
     }
 
     .formulario .mediumLabels label {
@@ -4980,7 +4989,9 @@ main {
 
     .formulario .mediumLabels input[type="email"],
     .formulario .mediumLabels input[type="password"],
-    .formulario .mediumLabels input[type="text"] {
+    .formulario .mediumLabels input[type="text"],
+    .formulario .mediumLabels input[type="date"],
+    .formulario .mediumLabels input[type="datetime-local"] {
         height: 48px;
         width: 100%;
         font-size: 15px;
@@ -4992,7 +5003,12 @@ main {
         padding: 14px 24px;
     }
 
+        .formulario .mediumLabels input[type="text"]:disabled {
+            background-color: #e4dddd;
+        }
+
     .formulario .mediumLabels input[type="file"] {
+        color: #555;
         width: 100%;
     }
 
@@ -5017,6 +5033,9 @@ main {
             }
 
 @media (max-width: 991px) {
+    .formulario .col-contenido .wrapCol {
+        width: 100%;
+    }
 }
 
 @media (max-width: 767px) {
