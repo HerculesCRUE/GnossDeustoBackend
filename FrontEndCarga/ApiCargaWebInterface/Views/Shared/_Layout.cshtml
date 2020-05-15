@@ -29,69 +29,27 @@
         }
     </style>
 </head>
-<body class="listado comunidad usuarioConectado" cz-shortcut-listen="true">
-    <form method="post" target="_blank" action="" name="formularioRDF" id="formularioRDF">
-        <fieldset style="display: none">
-            <legend class="nota">formularioRDF</legend>
-            <input type="text" style="display: none;" title="query" name="query" id="query">
-            <input type="text" style="display: none;" title="pagina" name="pagina" id="pagina">
-            <input type="submit" style="display: none;" id="rdfHack" value="enviar" title="enviar">
-        </fieldset>
-    </form>
+<body class="@ViewData["BodyClass"] comunidad usuarioConectado" cz-shortcut-listen="true">
     <header id="header">
         <div class="container-fluid">
             <div class="row">
                 <div class="col col01">
-                    <div class="menu-toggle">
-                        <a href="javascript:void(0);" data-target="menuLateralPrincipal" data-placement="left" data-position="slidepush" class="pmd-sidebar-toggle">
-                            <span class="material-icons">menu</span>
-                        </a>
-                    </div>
+                    
                     <div class="logo">
-                        <a href="javascript: void(0);">Hércules</a>
+                        <a href="@Url.Action("Index", "RepositoryConfig")">Hércules</a>
                     </div>
                 </div>
                 <div class="col col02">
                     <ul>
-                        <li class="active">
-                            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <li>
+                            <a asp-area="" asp-controller="RepositoryConfig" asp-action="Index">Repositorios</a>
                         </li>
                         <li>
-                            <a asp-area="" asp-controller="RepositoryConfig" asp-action="Index">Config repositories</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="ShapeConfig" asp-action="Index">Config shapes</a>
+                            <a asp-area="" asp-controller="ShapeConfig" asp-action="Index">Shapes</a>
                         </li>
                     </ul>
                 </div>
-                <div class="col col03">
-                    <ul>
-                        <li class="usuario">
-                            <div class="datos">
-                                <p class="nombre">Félix Tuesta</p>
-                                <p>Dpto. UX</p>
-                            </div>
-                            <div class="imagen">
-                                <a href="javascript: void(0);" data-target="menuLateralUsuario" data-placement="right" data-position="slidepush" class="pmd-sidebar-toggle">
-                                    <span style="background: url(theme/resources/persona-default.png);"></span>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="notificaciones">
-                            <i class="material-icons">notifications</i>
-                            <span class="budge"></span>
-                        </li>
-                        <li class="mensajes">
-                            <i class="material-icons">email</i>
-                            <span class="budge"></span>
-                        </li>
-                        <li class="buscar">
-                            <a href="javascript: void(0);" data-target="menuLateralMetabuscador" data-placement="right" data-position="slidepush" class="pmd-sidebar-toggle">
-                                <i class="material-icons">search</i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                
             </div>
         </div>
     </header>
