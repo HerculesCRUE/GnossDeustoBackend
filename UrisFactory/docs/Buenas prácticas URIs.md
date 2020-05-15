@@ -14,7 +14,7 @@ INTRODUCCIÓN
 ============
 
 El presente documento tiene en cuenta la [Especificación del Esquema de URIs de
-Hércules]().
+Hércules](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/UrisFactory/docs/Especificaci%C3%B3n%20Esquema%20de%20URIs.md).
 
 En su elaboración tenemos en cuenta las recomendaciones de la [Norma
 Técnica de Interoperabilidad de Reutilización de recursos de la
