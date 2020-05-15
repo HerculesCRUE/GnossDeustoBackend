@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +22,15 @@ namespace OAI_PMH_CVN.Models.Services
                     .AddJsonFile("appsettings.json");
 
                 Configuration = builder.Build();
-                XML_CVN_Repository = Configuration["XML_CVN_Repository"];
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("XML_CVN_Repository"))
+                {
+                    XML_CVN_Repository = environmentVariables["XML_CVN_Repository"] as string;
+                }
+                else
+                {
+                    XML_CVN_Repository = Configuration["XML_CVN_Repository"];
+                }
             }
             return XML_CVN_Repository;
         }
@@ -36,7 +44,15 @@ namespace OAI_PMH_CVN.Models.Services
                     .AddJsonFile("appsettings.json");
 
                 Configuration = builder.Build();
-                CVN_ROH_converter = Configuration["CVN_ROH_converter"];
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("CVN_ROH_converter"))
+                {
+                    CVN_ROH_converter = environmentVariables["CVN_ROH_converter"] as string;
+                }
+                else
+                {
+                    CVN_ROH_converter = Configuration["CVN_ROH_converter"];
+                }
             }
             return CVN_ROH_converter;
         }
@@ -50,7 +66,15 @@ namespace OAI_PMH_CVN.Models.Services
                     .AddJsonFile("appsettings.json");
 
                 Configuration = builder.Build();
-                ConfigUrl = Configuration["ConfigUrl"];
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ConfigUrl"))
+                {
+                    ConfigUrl = environmentVariables["ConfigUrl"] as string;
+                }
+                else
+                {
+                    ConfigUrl = Configuration["ConfigUrl"];
+                }
             }
             return ConfigUrl;
         }

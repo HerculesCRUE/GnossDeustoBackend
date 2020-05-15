@@ -1,53 +1,63 @@
 ﻿@model IEnumerable<ApiCargaWebInterface.ViewModels.ShapeConfigViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Shapes";
+    ViewData["BodyClass"] = "listado";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ShapeConfigID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RepositoryID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Shape)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShapeConfigID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RepositoryID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Shape)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ShapeConfigID}) |
-                @Html.ActionLink("Details", "Details", new { id=item.ShapeConfigID}) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.ShapeConfigID})
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div id="headerListado">
+    <div class="col col01 col-md-3">
+        <div class="h1-container">
+            <h1>Shapes</h1>
+            <span class="numResultados">( @Model.Count() )</span>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row row-buscador">
+            <div class="col col02 col-md-12">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <div class="acciones-listado">
+                <div class="wrap">
+
+                </div>
+            </div>
+            <div class="resource-list compacView">
+                <div class="wrap">
+                    @foreach (var item in Model)
+                    {
+
+                        <article class="resource resource-ficharepositorio">
+                            <div class="wrap">
+                                <p class="tipo">@Html.DisplayFor(modelItem => item.ShapeConfigID)</p>
+                                <h2>
+                                    <a href="@Url.Action("Details", new {  id=item.ShapeConfigID  })">@Html.DisplayFor(modelItem => item.Name)</a>
+                                </h2>
+                                <div class="desc">
+                                    
+                                </div>
+                                <div class="columna acciones">
+                                    <ul>
+                                        <li>
+                                            <a href="@Url.Action("Edit", new {  id=item.ShapeConfigID  })" class="editar"><i class="material-icons">mode_edit</i></a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Delete", new {  id=item.ShapeConfigID  })" class="borrar"><i class="material-icons">delete</i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

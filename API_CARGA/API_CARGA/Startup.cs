@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using System.Text.Json.Serialization;
@@ -67,8 +68,16 @@ namespace PRH
             {
                 var builder = new NpgsqlDbContextOptionsBuilder(opt);
                 builder.SetPostgresVersion(new Version(9, 6));
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("PostgreConnectionmigration"))
+                {
+                    opt.UseNpgsql(environmentVariables["PostgreConnectionmigration"] as string);
+                }
+                else
+                {
+                    opt.UseNpgsql(Configuration.GetConnectionString("PostgreConnectionmigration"));
+                }
                 
-                opt.UseNpgsql(Configuration.GetConnectionString("PostgreConnectionmigration"));
 
             });
             services.AddSingleton(typeof(ConfigUrlService));

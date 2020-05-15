@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections;
 using System.IO;
 
 namespace ApiCargaWebInterface.Models.Services
@@ -16,7 +18,17 @@ namespace ApiCargaWebInterface.Models.Services
                     .AddJsonFile("appsettings.json");
 
                 Configuration = builder.Build();
-                var connectionString = Configuration["ConfigUrl"];
+                string connectionString = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ConfigUrl"))
+                {
+                    connectionString = environmentVariables["ConfigUrl"] as string;
+                }
+                else
+                {
+                    connectionString = Configuration["ConfigUrl"];
+                }
+                
                 Url = connectionString;
             }
             return Url;

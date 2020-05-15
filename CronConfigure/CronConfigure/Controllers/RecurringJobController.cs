@@ -28,7 +28,7 @@ namespace CronConfigure.Controllers
         /// <summary>
         /// Añade una sincornizacion recurrente
         /// </summary>
-        /// <param name="id_repository">identificador del repositorio a sincronizar </param>
+        /// <param name="id_repository">identificador del repositorio a sincronizar, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository </param>
         /// <param name="nombre_job">nombre de la tarea</param>
         /// <param name="fecha_inicio">momento a partir del cúal empieza la sincronización,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
         /// <param name="cron_expression">el parametro cron_expresion sigue un patrón de 5 atributos, separados por espacios entre sí: * * * * *. El primero corresponde al minuto, el segundo a la hora, a continuación el día del mes, seguido por el mes y posteriormente el día del mes. Un ejemplo sería: */15 * * * * que correspondería a cada 15 minutos, para probar las expresisiones se puede acudir a https://crontab.guru/</param>

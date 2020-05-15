@@ -1,54 +1,61 @@
 ﻿@model IEnumerable<ApiCargaWebInterface.ViewModels.RepositoryConfigViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Repositorios";
+    ViewData["BodyClass"] = "listado";
 }
 
-<h1>Index</h1>
+<div id="headerListado">
+    <div class="col col01 col-md-3">
+        <div class="h1-container">
+            <h1>Repositorios</h1>
+            <span class="numResultados">( @Model.Count() )</span>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row row-buscador">
+            <div class="col col02 col-md-12">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <div class="acciones-listado">
+                <div class="wrap">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RepositoryConfigID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OauthToken)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Url)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RepositoryConfigID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OauthToken)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Url)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.RepositoryConfigID  }) |
-                @Html.ActionLink("Details", "Details", new { id=item.RepositoryConfigID }) |
-                @Html.ActionLink("Delete", "Delete", new {id=item.RepositoryConfigID })
-                <i class="material-icons add"></i>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                </div>
+            </div>
+            <div class="resource-list compacView">
+                <div class="wrap">
+                    @foreach (var item in Model)
+                    {
+                        <article class="resource resource-ficharepositorio">
+                            <div class="wrap">
+                                <p class="tipo">@Html.DisplayFor(modelItem => item.RepositoryConfigID)</p>
+                                <h2>
+                                    <a href="@Url.Action("Details", new {  id=item.RepositoryConfigID  })">@Html.DisplayFor(modelItem => item.Name)</a>
+                                </h2>
+                                <div class="desc">
+                                    <p>@Html.DisplayFor(modelItem => item.OauthToken)</p>
+                                    <p>@Html.DisplayFor(modelItem => item.Url)</p>
+                                </div>
+                                <div class="columna acciones">
+                                    <ul>
+                                        <li>
+                                            <a href="@Url.Action("Edit", new {  id=item.RepositoryConfigID  })" class="editar"><i class="material-icons">mode_edit</i></a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Delete", new {  id=item.RepositoryConfigID  })" class="borrar"><i class="material-icons">delete</i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

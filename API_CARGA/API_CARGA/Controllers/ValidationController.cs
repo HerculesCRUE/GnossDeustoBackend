@@ -55,7 +55,7 @@ namespace API_CARGA.Controllers
         /// Añade una configuración de validación mediante un shape SHACL
         /// </summary>
         /// <param name="name">Nombre del Shape</param>
-        /// <param name="repositoryID">ID del repositorio de la validación</param>
+        /// <param name="repositoryID">ID del repositorio de la validación, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository</param>
         /// <param name="rdfFile">Fichero con el Shape</param>
         /// <returns></returns>
         [HttpPost]
@@ -125,7 +125,7 @@ namespace API_CARGA.Controllers
         /// </summary>
         /// <param name="shapeConfigID">Identificador del Shape</param>
         /// <param name="name">Nombre del Shape</param>
-        /// <param name="repositoryID">ID del repositorio de la validación</param>
+        /// <param name="repositoryID">ID del repositorio de la validación, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository</param>
         /// <param name="rdfFile">Fichero con el Shape</param>
         /// <returns></returns>
         [HttpPut]

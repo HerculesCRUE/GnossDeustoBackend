@@ -33,15 +33,20 @@ $ pipenv run python3 -m cvn.webserver -p 80
 Si se incluye el argumento `-h`, se mostrará la ayuda:
 
 ```text
-usage: webserver.py [-h] [-p] [--debug]
+usage: webserver.py [-h] [-p] [--host HOST] [--debug]
 
 Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH
 
 optional arguments:
   -h, --help    show this help message and exit
-  -p , --port   El puerto en el que se ejecutará el servidor HTTP
+  -p , --port   El puerto en el que se ejecutará el servidor HTTP (por defecto
+                5000)
+  --host HOST   El host donde se bindeará el servidor HTTP (por defecto
+                127.0.0.1)
   --debug       DEBUG: activar modo debug (aumenta tiempo de ejecución)
 ```
+
+Si queremos que el servidor escuche en `0.0.0.0`, añadimos el argumento `--host 0.0.0.0`.
 
 # Endpoints
 

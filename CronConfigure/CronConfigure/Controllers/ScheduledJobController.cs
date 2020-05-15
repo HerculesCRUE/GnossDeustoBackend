@@ -37,8 +37,8 @@ namespace CronConfigure.Controllers
         /// <summary>
         /// Añade una nueva tarea programada de única ejecución para sincornización de repositorios
         /// </summary>
-        /// <param name="fecha_ejecucion">fecha en la que se ejecutará la tarea</param>
-        /// <param name="id_repository">identificador del repositorio</param>
+        /// <param name="fecha_ejecucion">fecha en la que se ejecutará la tarea,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
+        /// <param name="id_repository">identificador del repositorio,  este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository</param>
         /// <param name="fecha">fecha a partir de la cual se debe actualizar,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
         /// <param name="set">tipo del objeto</param>
         /// <param name="codigo_objeto">codigo del objeto</param>
