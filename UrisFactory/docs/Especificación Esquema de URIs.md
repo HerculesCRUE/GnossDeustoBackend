@@ -2,7 +2,7 @@
 
 # Hércules Backend ASIO. Especificación de Esquema de URIs
 
-[1 INTRODUCCIÓN 3](#introducción)
+[1 INTRODUCCIÓN](#introducción)
 
 [2 Características del Esquema de URIs](#características-del-esquema-de-uris)
 
@@ -20,11 +20,19 @@
 
 [4 Tipos de URIs](#tipos-de-uris)
 
-[4.1 URI para identificar vocabularios](#uri-para-identificar-vocabularios)
+[4.1 URI para identificar a cualquier instancia física o conceptual](#uri-para-identificar-a-cualquier-instancia-física-o-conceptual)
 
-[4.2 URI para identificar esquemas de conceptos](#uri-para-identificar-esquemas-de-conceptos)
+[4.2 URI para identificar vocabularios](#uri-para-identificar-vocabularios)
 
-[4.3 URI para identificar a cualquier instancia física o conceptual](#uri-para-identificar-a-cualquier-instancia-física-o-conceptual)
+[4.3 URI para identificar esquemas de conceptos](#uri-para-identificar-esquemas-de-conceptos)
+
+[4.4 URI para identificar named graphs](#uri-para-identificar-named-graphs)
+
+[4.5 URI para identificar datasets](#uri-para-identificar-datasets)
+
+[4.6 URI para identificar entidades VoID](#uri-para-identificar-entidades-void)
+
+[4.7 URI para identificar entidades PROV](#uri-para-identificar-entidades-prov)
 
 [5 Definición del Esquema de URIs](#definición-del-esquema-de-uris)
 
@@ -43,7 +51,7 @@ recomendaciones procedentes del mundo de la Web Semántica.
 
 Como veremos, estas recomendaciones serán adaptadas al ámbito de un
 sistema de investigación universitaria; y tendrán presente la resolución
-y conexión de las entidades identificadas por la URIs.
+y conexión de las entidades identificadas por los URIs.
 
 Características del Esquema de URIs
 ===================================
@@ -74,16 +82,17 @@ d)  No exponer información sobre la implementación técnica de los
     web como .php, .jsp, etc.
 
 El punto c descrito anteriormente implica que **los URI de Hércules no
-serán "opacos" sino "visibles"**, lo que quiere decir que contendrán
-información semántica que un humano puede interpretar, lo que
-consideramos una ventaja. Además, URIs que podríamos calificar como
-"opacos", como las de ORCiD (p.e.
-<https://orcid.org/0000-0001-8055-6823>), en realidad lo son porque se
-lo pueden permitir sin que los humanos tengan problemas de
-interpretación: en ese dominio sólo hay investigadores. La legibilidad
-por humanos es la mayor ventaja de los URI "visibles", además de ser la
-recomendación de la NTI de Reutilización, referencia del proyecto
-Hércules.
+serán totalmente "opacos" sino parcialmente "visibles"**, es decir, que 
+contendrán información semántica que un humano pueda interpretar, lo que
+consideramos una ventaja. Decimos que son parcialmente visibles porque 
+los URIs no contendrán, en principio, elementos que permitan que un 
+humano reconozca directamente una entidad, como podría ser el nombre de
+un investigador. Además, URIs que podríamos calificar como "opacos", 
+como las de ORCiD (p.e. <https://orcid.org/0000-0001-8055-6823>), 
+en realidad lo son porque se lo pueden permitir sin que los humanos 
+tengan problemas de interpretación: en ese dominio sólo hay 
+investigadores. La legibilidad por humanos es la mayor ventaja de los URI "visibles", además de ser la recomendación de la NTI de Reutilización, 
+referencia del proyecto Hércules.
 
 Además, hay que indicar que para un sistema informático todos los URI
 son igualmente "visibles", por lo que no hay diferencia en cuanto a la
@@ -131,12 +140,6 @@ Carácter de la información
 Es un componente obligatorio, que puede tomar una de las siguientes
 formas:
 
--   catalogo o cat. En principio, el proyecto HERCULES ASIO no contempla
-    el alojamiento de datasets como medio de publicación de datos
-    abiertos, sino que todo el portal será un sistema Linked Data
-    interrogable mediante un API y un punto SPARQL. No parece necesario
-    que existan declaraciones de datasets.
-
 -   def. Indica que el recurso identificado es un vocabulario u
     ontología definido por OWL.
 
@@ -146,11 +149,19 @@ formas:
 
 -   res. Indica que se trata de una entidad del dominio.
 
+-   graph. Indica que se trata de un grafo con nombre.
+
+-   catalogo o cat. Indica que se trata de un dataset.
+
+
 Sector o ámbito
 ---------------
 
+El elemento "sector" sólo se debería usar si "dominio" no fuera 
+suficiente para proporcionar significado a la URI.
+
 Es un componente opcional de posible aplicación en URIs de organización
-de conocimiento.
+de conocimiento, por lo que sólo se usará en [URIs para identificar vocabularios](#uri-para-identificar-vocabularios) o en [URIs para identificar esquemas de conceptos]((#uri-para-identificar-esquemas-de-conceptos)).
 
 dominio o temática
 ------------------
@@ -172,28 +183,14 @@ Tipos de URIs
 A continuación, se especifican los tipos de URI específicos para
 recursos semánticos de una iniciativa basada en *Linked Data*.
 
-URI para identificar vocabularios
----------------------------------
-
-Cualquier vocabulario u ontología seguirá el esquema:
-http://{base}/def/{sector}/{dominio}
-
-URI para identificar esquemas de conceptos
-------------------------------------------
-
-Cualquier sistema de organización del conocimiento --taxonomías,
-diccionarios, tesauros, etc.-- sobre un dominio concreto será
-identificado mediante un esquema de URI basado en la estructura:
-http://{base}/kos/{sector}/{dominio}
-
 URI para identificar a cualquier instancia física o conceptual
 --------------------------------------------------------------
 
-Estos recursos son las representaciones atómicas de los documentos y
+Estos recursos Linked Data son las representaciones atómicas de los documentos y
 recursos de información. A su vez suelen ser instancias de las clases
 que se definen en los vocabularios. Estos recursos se identifican
 mediante el esquema:
-http://{base}/res/{sector}\[/{dominio}\]/{clase}/{ID}
+http://{base}/res/\[{dominio}\]/{clase}/{ID}
 
 Por ejemplo: http://data.um.es/res/investigador/{id-investigador}
 
@@ -202,13 +199,61 @@ en las URIs se corresponderán con las entidades identificadas en la Red
 de Ontologías Hércules (ROH), como: researcher/investigador,
 project/proyecto, publication/publicación, etc.
 
+URI para identificar vocabularios
+---------------------------------
+
+Cualquier vocabulario u ontología seguirá el esquema:
+http://{base}/def/\[{sector}\]/{dominio}
+
+URI para identificar esquemas de conceptos
+------------------------------------------
+
+Cualquier sistema de organización del conocimiento --taxonomías,
+diccionarios, tesauros, etc.-- sobre un dominio concreto será
+identificado mediante un esquema de URI basado en la estructura:
+http://{base}/kos/\[{sector}\]/{dominio}/{ID}
+
+Por ejemplo: http://graph.um.es/kos/research-area/21
+
+URI para identificar named graphs
+---------------------------------
+
+El esquema de los URI para grafos con nombre es:
+http://{base}/graph/\[{sector}\]/{dominio}
+
+Por ejemplo (sin "sector"):
+http://graph.um.es/graph/um_cvn
+
+URI para identificar datasets
+-----------------------------
+
+El dataset resultante del proyecto ASIO necesitará un URI con el que 
+pueda ser referenciado desde otros sistemas o datasets. Este 
+identificador (URI) proporcionará información de catálogo de datos
+(expresada en DCAT), información de datasets enlazados (expresada 
+en VoID) o con información de procedencia (expresada en PROV).
+
+En cualquiera de los casos, el dataset referenciado será el mismo, 
+resultante de la incorporación de datos del sistema de investigación de
+una universidad o de todas ellas en el nodo Unidata.
+
+El esquema propuesto para identificar el dataset hacia estos sistemas
+externos es:
+http://{base}/cat/\[{sector}\]/{dominio}/{ID}
+
+Por ejemplo (sin "sector"): 
+http://graph.um.es/cat/research/um
+
+
 Definición del Esquema de URIs
 ==============================
 
 El Esquema de URIs tiene que declararse en un formato informático que
 pueda ser interpretado por la Factoría de URIs para devolver el
-identificador único que precisa cada entidad cargada en ASIO. La
-propuesta se declara como un JSON y tiene la siguiente forma:
+identificador único que precisa cada entidad (cada instanci) cargada
+en ASIO.
+
+La propuesta se declara como un JSON y tiene la siguiente forma:
 
 \[
 
