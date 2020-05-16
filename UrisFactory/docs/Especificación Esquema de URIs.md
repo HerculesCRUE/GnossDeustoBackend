@@ -213,7 +213,7 @@ diccionarios, tesauros, etc.-- sobre un dominio concreto será
 identificado mediante un esquema de URI basado en la estructura:
 http://{base}/kos/\[{sector}\]/{dominio}/{ID}
 
-Por ejemplo: http://graph.um.es/kos/research-area/21
+Por ejemplo: http://graph.um.es/kos/research-area/{id-categoría}
 
 URI para identificar named graphs
 ---------------------------------
@@ -222,7 +222,7 @@ El esquema de los URI para grafos con nombre es:
 http://{base}/graph/\[{sector}\]/{dominio}
 
 Por ejemplo (sin "sector"):
-http://graph.um.es/graph/um_cvn
+http://graph.um.es/graph/research/{id-grafo}
 
 URI para identificar datasets
 -----------------------------
@@ -242,7 +242,7 @@ externos es:
 http://{base}/cat/\[{sector}\]/{dominio}/{ID}
 
 Por ejemplo (sin "sector"): 
-http://graph.um.es/cat/research/um
+http://graph.um.es/cat/research/{id-dataset}
 
 
 Definición del Esquema de URIs
