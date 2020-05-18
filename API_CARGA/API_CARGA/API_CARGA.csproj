@@ -70,6 +70,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Transport\" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

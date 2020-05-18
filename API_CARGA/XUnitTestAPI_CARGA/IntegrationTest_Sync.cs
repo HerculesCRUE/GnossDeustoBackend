@@ -1,14 +1,13 @@
 using API_CARGA.Models;
 using API_CARGA.Models.Services;
-using API_CARGA.Models.Transport;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace XUnitTestIntegracion
+namespace XUnitTestAPI_CARGA
 {
-    public class UnitTest_Sync
+    public class IntegrationTest_Sync
     {
         [Fact]
         public void TestListIdentifier()

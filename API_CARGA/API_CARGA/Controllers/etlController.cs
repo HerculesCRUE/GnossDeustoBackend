@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace PMH.Controllers
+namespace API_CARGA.Controllers
 {
     /// <summary>
     /// API de carga

@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.Filters;
 
-namespace UrisFactory.Controllers
+namespace API_CARGA.Controllers
 {
     /// <summary>
     /// Dentro de este controlador se encuentran todos los métodos para configurar las sincronizaciones, obtener su estado, activarlas y desactivarlas.
