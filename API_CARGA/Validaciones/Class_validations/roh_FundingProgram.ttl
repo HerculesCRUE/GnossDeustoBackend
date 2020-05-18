@@ -1,0 +1,52 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix ns: <http://www.w3.org/2003/06/sw-vocab-status/ns#>.
+@prefix ro: <http://purl.org/roh/mirror/obo/ro#>.
+@prefix bfo: <http://purl.org/roh/mirror/obo/bfo#>.
+@prefix iao: <http://purl.org/roh/mirror/obo/iao#>.
+@prefix obo: <http://purl.obolibrary.org/obo/>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix bibo: <http://purl.org/roh/mirror/bibo#>.
+@prefix foaf: <https://xmlns.com/foaf/0.1/>.
+@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix vivo: <http://purl.org/roh/mirror/vivo#>.
+@prefix skos1: <http://purl.org/roh/mirror/skos#>.
+@prefix terms: <http://purl.org/dc/terms/>.
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>.
+@prefix uneskos: <http://purl.org/umu/uneskos#>.
+@prefix skos-thes: <http://purl.org/iso25964/skos-thes#>.
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix roh: <http://purl.org/roh#>.
+@prefix foaf1: <http://purl.org/roh/mirror/foaf#>.
+roh:roh_FundingProgramShape
+	a sh:NodeShape ;
+	sh:targetClass roh:FundingProgram ;
+	sh:property roh:someValuesClass__roh__FundingProgram__roh__promotedBy;
+	sh:property roh:someValuesDataType__roh__FundingProgram__vivo__identifier;
+	sh:property roh:allValuesClass__roh__FundingProgram__roh__promotedBy;
+	sh:property roh:allValuesDataType__roh__FundingProgram__vivo__identifier.
+roh:someValuesClass__roh__FundingProgram__roh__promotedBy 
+	sh:severity sh:Violation;
+	sh:path roh:promotedBy;
+	sh:qualifiedMinCount  1;
+	sh:qualifiedValueShape [
+		sh:class vivo:FundingOrganization;
+	].
+roh:someValuesDataType__roh__FundingProgram__vivo__identifier 
+	sh:severity sh:Violation;
+	sh:path vivo:identifier;
+	sh:qualifiedMinCount  1;
+	sh:qualifiedValueShape [
+		sh:datatype xsd:string;
+	].
+roh:allValuesClass__roh__FundingProgram__roh__promotedBy 
+	sh:severity sh:Violation;
+	sh:path roh:promotedBy;
+	sh:class vivo:FundingOrganization.
+roh:allValuesDataType__roh__FundingProgram__vivo__identifier 
+	sh:severity sh:Violation;
+	sh:path vivo:identifier;
+	sh:datatype xsd:string.

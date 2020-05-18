@@ -116,7 +116,11 @@ namespace CronConfigure
 
             app.UseAuthorization();
             app.UseHangfireServer();
-            app.UseHangfireDashboard();
+            app.UseHangfireDashboard("/hangfire",new DashboardOptions()
+            {
+                Authorization = new [] {new HangfireDashboardNoAuthorizationFilter() }
+            }
+                );
             //backgroundJobs.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
             app.UseSwagger(c =>
             {

@@ -20,6 +20,8 @@ from cvn.utils import xmltree
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB máx.
 
+debug = False
+
 # Formatos de salida permitidos
 ALLOWED_FORMATS = ["xml", "n3", "turtle", "nt", "pretty-xml", "trix", "trig", "nquads"]
 
@@ -185,6 +187,8 @@ if __name__ == "__main__":
                         help="El host donde se bindeará el servidor HTTP (por defecto 127.0.0.1)")
     parser.add_argument("--debug", action="store_true", help="DEBUG: activar modo debug (aumenta tiempo de ejecución)")
     args = parser.parse_args()
+
+    debug = args.debug
 
     app.run(debug=args.debug, port=args.port, host=args.host)
 

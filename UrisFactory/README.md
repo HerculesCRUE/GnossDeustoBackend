@@ -230,6 +230,10 @@ Las partes del formato anterior son:
 	 - **resourceClass**. Identificador del tipo de entidad.
 	 - **labelResourceClass**. Opcional, se declara si se desea que la URL tenga otro texto, habitualmente por requisitos de idioma.
 	 - **resourceURI**. Identifica el elemento uriResourceStructure que se usará para componer el URI de la entidad.
+	 
+
+Dado el carácter de personalización completa gracias a este formato, la librería podría responder a cualquier otro Esquema de URIs, como el de la NTI (https://www.boe.es/boe/dias/2013/03/04/pdfs/BOE-A-2013-2380.pdf).
+
 
 Se indica a continuación un ejemplo:
 
@@ -327,6 +331,7 @@ Se indica a continuación un ejemplo:
 		    ]
 	    }
     ]
+
 
 
 

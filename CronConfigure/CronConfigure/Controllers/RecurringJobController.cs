@@ -50,7 +50,7 @@ namespace CronConfigure.Controllers
             {
                 try
                 {
-                    fechaInicio = DateTime.Parse(fecha_inicio);
+                    fechaInicio = DateTime.ParseExact(fecha_inicio, "dd/MM/yyyy hh:mm", null);
                 }
                 catch (Exception)
                 {
@@ -62,7 +62,7 @@ namespace CronConfigure.Controllers
             {
                 try
                 {
-                    fechaDateTime = DateTime.Parse(fecha);
+                    fechaDateTime = DateTime.ParseExact(fecha, "dd/MM/yyyy hh:mm", null);
                 }
                 catch (Exception)
                 {

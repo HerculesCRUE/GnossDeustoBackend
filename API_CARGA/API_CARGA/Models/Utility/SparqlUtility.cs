@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using VDS.RDF;
@@ -57,8 +59,12 @@ namespace API_CARGA.Models.Utility
             System.IO.StringWriter sw = new System.IO.StringWriter();
             NTriplesWriter nTriplesWriter = new NTriplesWriter();
             nTriplesWriter.Save(g, sw);
-
-            return sw.ToString().Split("\n").ToList();
+            return sw.ToString().Split("\n").ToList().Select(x => Regex.Replace(
+                    x,
+                    @"\\u(?<Value>[a-zA-Z0-9]{4})",
+                    m => {
+                        return ((char)int.Parse(m.Groups["Value"].Value, NumberStyles.HexNumber)).ToString();
+                    })).ToList();
         }
 
 
@@ -104,7 +110,8 @@ namespace API_CARGA.Models.Utility
                         message = (x.Message != null) ? x.Message.ToString() : null,
                         resultPath = (x.ResultPath != null) ? x.ResultPath.ToString() : null,
                         shapeID = shape.ShapeConfigID,
-                        shapeName = shape.Name
+                        shapeName = shape.Name,
+                       sourceShape = (x.SourceShape != null) ? x.SourceShape.ToString() : null,
                     }).ToList());
                 }
             }
@@ -241,6 +248,59 @@ namespace API_CARGA.Models.Utility
                     query += " } ";
 
                     string url = pSPARQLEndpoint;
+                    if (string.IsNullOrEmpty(url))
+                    {
+                        Graph graph = new Graph();
+                        graph.LoadFromString(string.Join(" ", triplesInsert));
+                    }
+                    else
+                    {
+                        NameValueCollection parametros = new NameValueCollection();
+                        parametros.Add(pQueryParam, query);
+                        WebClient webClient = new WebClient();
+                        try
+                        {
+                            webClient.UploadValues(url, "POST", parametros);
+                        }
+                        catch (WebException ex)
+                        {
+                            if (ex.Response != null)
+                            {
+                                string response = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
+                                throw new Exception(response);
+                            }
+                            throw ex;
+                        }
+                        catch (Exception ex)
+                        {
+                            throw ex;
+                        }
+                        finally
+                        {
+                            webClient.Dispose();
+                        }
+                    }
+                }
+            }
+
+
+            //NotBlankNodes
+            if (listNotBlankNodeTriples.Count > 0)
+            {
+                string query = "";
+                query += $" INSERT DATA INTO <{pGraph}>";
+                query += " { ";
+                query += string.Join(" ", listNotBlankNodeTriples);
+                query += " } ";
+
+                string url = pSPARQLEndpoint;
+                if (string.IsNullOrEmpty(url))
+                {
+                    Graph graph = new Graph();
+                    graph.LoadFromString(string.Join(" ", listNotBlankNodeTriples));
+                }
+                else
+                {
                     NameValueCollection parametros = new NameValueCollection();
                     parametros.Add(pQueryParam, query);
                     WebClient webClient = new WebClient();
@@ -267,50 +327,6 @@ namespace API_CARGA.Models.Utility
                     }
                 }
             }
-
-
-            //NotBlankNodes
-            if (listNotBlankNodeTriples.Count > 0)
-            {
-                string query = "";
-                query += $" INSERT DATA INTO <{pGraph}>";
-                query += " { ";
-                query += string.Join(" ", listNotBlankNodeTriples);
-                query += " } ";
-
-                string url = pSPARQLEndpoint;
-                NameValueCollection parametros = new NameValueCollection();
-                parametros.Add(pQueryParam, query);
-                WebClient webClient = new WebClient();
-                try
-                {
-                    webClient.UploadValues(url, "POST", parametros);
-                }
-                catch (WebException ex)
-                {
-                    if (ex.Response != null)
-                    {
-                        string response = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
-                        throw new Exception(response);
-                    }
-                    throw ex;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                    webClient.Dispose();
-                }
-            }
-
-            
-
-
-
-
-
         }
     }
 }

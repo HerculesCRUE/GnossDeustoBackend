@@ -33,9 +33,9 @@ namespace XUnitTestUrisFactory
             UriStructureGeneral uriSchema = configJsonHandler.GetUrisConfig();
             int oldResourcesClassesCount = uriSchema.ResourcesClasses.Count;
             int oldUriStructuresCount = uriSchema.UriStructures.Count;
-            if (configJsonHandler.ExistUriStructure("uriPublicationStructure"))
+            if (configJsonHandler.ExistUriStructure("uriResourceStructure"))
             {
-                configJsonHandler.DeleteUriStructureInfo("uriPublicationStructure");
+                configJsonHandler.DeleteUriStructureInfo("uriResourceStructure");
                 ISchemaConfigOperations schemaConfigOperations = new SchemaConfigMemoryOperations(configJsonHandler);
                 schemaConfigOperations.SaveConfigJson();
                 UriStructureGeneral uriSchema2 = configJsonHandler.GetUrisConfig();

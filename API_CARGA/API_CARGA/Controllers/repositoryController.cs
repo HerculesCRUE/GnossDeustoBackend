@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.Filters;
 
-namespace PMH.Controllers
+namespace API_CARGA.Controllers
 {
     /// <summary>
     /// Configuración del ETL

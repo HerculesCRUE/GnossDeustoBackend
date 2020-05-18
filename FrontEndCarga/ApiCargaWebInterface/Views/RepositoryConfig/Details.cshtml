@@ -5,7 +5,9 @@
     ViewData["BodyClass"] = "fichaRecurso";
 
     var modeloShape = new ApiCargaWebInterface.ViewModels.ShapeConfigCreateModel();
+    var modeloJob = new ApiCargaWebInterface.ViewModels.CreateJobViewModel();
     modeloShape.RepositoryID = Model.RepositoryConfigID;
+    modeloJob.IdRepository = Model.RepositoryConfigID;
 }
 
 
@@ -15,9 +17,13 @@
                 <div class="header-resource">
                     <div class="h1-container">
                         <h1>@Model.Name</h1>
-                        <a href="javascript: void(0);" class="btn btn-sincronizar">Sincronizar</a>
+                        <div class="botones">
+                            <a href="@Url.Action("Syncro", "Job", new { repositoryId = Model.RepositoryConfigID })" class="btn btn-sincronizar">Sincronizar</a>
+                            <a href="@Url.Action("Edit", new {  id=Model.RepositoryConfigID  })" class="btn btn-editar">Editar</a>
+                            <a href="@Url.Action("Delete", new {  id=Model.RepositoryConfigID  })" class="btn btn-eliminar">Eliminar</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
                 <div class="contenido">
                     <div class="grupo grupo-descripcion">
                         <div class="identifier">
@@ -33,7 +39,11 @@
                             <p>@Model.Url</p>
                         </div>
                     </div>
-
+                    <div class="grupo grupo-programacion">
+                        <h2>Tareas de sincronización</h2>
+                        <a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>
+                        @*<partial name="_ListTareas" model="@Model.ShapeConfig" />*@
+                    </div>
                     <div class="grupo grupo-programacion">
                         <h2>Shapes</h2>
                         <a href="@Url.Action("Create", "ShapeConfig", modeloShape)" class="btn btn-programacion">Crear nuevo Shape</a>

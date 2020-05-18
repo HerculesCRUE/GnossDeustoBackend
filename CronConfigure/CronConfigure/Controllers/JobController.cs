@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using CronConfigure.Models;
@@ -27,12 +28,13 @@ namespace CronConfigure.Controllers
         /// Programa una sincronización de repositorios para una fecha concreta
         /// </summary>
         /// <param name="id_repository">identificador del repositorio, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository</param>
+        /// <param name="fecha_inicio">fecha a partir de la cual se ejecutará,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 2020-05-14T10:55:54.548Z</param>
         /// <param name="fecha">fecha a partir de la cual se debe actualizar,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
         /// <param name="set">tipo del objeto</param>
         /// <param name="codigo_objeto">codigo del objeto</param>
         /// <returns>identifdicador de la tarea</returns> 
         [HttpPost]
-        public IActionResult AddExecution(string id_repository, string fecha = null, string set = null, string codigo_objeto = null)
+        public IActionResult AddExecution(string id_repository, string fecha_inicio = null, string fecha = null, string set = null, string codigo_objeto = null)
         {
             DateTime fechaInicio = DateTime.Now;
             DateTime? fechaDateTime = null;
@@ -40,23 +42,23 @@ namespace CronConfigure.Controllers
             {
                 return BadRequest("falta el tipo de objeto");
             }
-            //if(fecha_inicio != null)
-            //{
-            //    try
-            //    {
-            //        fechaInicio = DateTime.Parse(fecha_inicio);
-            //    }
-            //    catch (Exception)
-            //    {
-            //        return BadRequest("fecha de inicio inválida");
-            //    }
-            //}
+            if (fecha_inicio != null)
+            {
+                try
+                {
+                    fechaInicio = DateTime.ParseExact(fecha_inicio, "dd/MM/yyyy hh:mm",null);
+                }
+                catch (Exception)
+                {
+                    return BadRequest("fecha de inicio inválida");
+                }
+            }
 
             if (fecha != null)
             {
                 try
                 {
-                    fechaDateTime = DateTime.Parse(fecha);
+                    fechaDateTime = DateTime.ParseExact(fecha, "dd/MM/yyyy hh:mm", null);
                 }
                 catch (Exception)
                 {

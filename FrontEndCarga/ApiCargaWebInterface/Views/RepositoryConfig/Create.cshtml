@@ -1,55 +1,60 @@
 ﻿@model ApiCargaWebInterface.ViewModels.RepositoryConfigViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    bool editar = Model != null && !Model.RepositoryConfigID.Equals(Guid.Empty);
+    string action = "Create";
+    if (!editar)
+    {
+        ViewData["Title"] = "Crear repositorio";
+    }
+    else
+    {
+        ViewData["Title"] = Model.Name + " - Editar repositorio";
+        action = "Edit";
+    }
+    ViewData["BodyClass"] = "formulario";
 }
     <div class="row">
         <div class="col col-12 col-lg-12 col-contenido">
             <div class="wrapCol">
-                <div class="header-resource">
-                    <div class="h1-container">
-                        <h1>Create Config repository</h1>
-                    </div>
-                </div>
-                <div class="contenido">
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-4">
-                            <form asp-action="Create">
+                <form asp-action="@action">
+                    <div class="fieldset fieldset01">
+                        <fieldset class="mediumLabels">
+                            <h1>Crear repositorio</h1>
+                            <div class="fieldsetContent">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <div class="form-group" hidden>
+                                <p hidden>
                                     <label asp-for="RepositoryConfigID" class="control-label"></label>
                                     <input asp-for="RepositoryConfigID" class="form-control" />
                                     <span asp-validation-for="RepositoryConfigID" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
+                                </p>
+                                <p>
                                     <label asp-for="Name" class="control-label"></label>
                                     <input asp-for="Name" class="form-control" />
                                     <span asp-validation-for="Name" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
+                                </p>
+                                <p>
                                     <label asp-for="OauthToken" class="control-label"></label>
                                     <input asp-for="OauthToken" class="form-control" />
                                     <span asp-validation-for="OauthToken" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
+                                </p>
+                                <p>
                                     <label asp-for="Url" class="control-label"></label>
                                     <input asp-for="Url" class="form-control" />
                                     <span asp-validation-for="Url" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" value="Create" class="btn btn-primary" />
-                                </div>
-                            </form>
-                        </div>
-
+                                </p>
+                            </div>
+                        </fieldset>
                     </div>
-
-                    <div>
-                        <a asp-action="Index">Back to List</a>
+                    <div class="fieldset actionButtons fieldset03">
+                        <fieldset>
+                            <p>
+                                <input class="submit principal" type="submit" value="Guardar">
+                            </p>
+                        </fieldset>
                     </div>
-                </div>
+                </form>
             </div>
-        </div>
 
+        </div>
     </div>
