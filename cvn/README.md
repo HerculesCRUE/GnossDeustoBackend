@@ -1,5 +1,7 @@
 Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH.
 
+http://herc-as-front-desa.atica.um.es:8080/v1/ui/#/default/convert_post
+
 # Instalación
 
 Requisitos:
