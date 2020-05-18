@@ -80,8 +80,13 @@ namespace XUnitTestAPI_CARGA
             stream.Position = 0;
             var file = new FormFile(stream, 0, stream.Length, null, "rdf.xml");
             ShapeReport report = (ShapeReport)((OkObjectResult)etlController.dataValidate(file,new Guid("390cde26-b39d-41c8-89e0-b87c207d8cf2"))).Value;
-
-            Assert.True(report.conforms);
+            if (!report.conforms && report.results.Count > 0)
+            {
+                Assert.True(true);
+            }else
+            {
+                Assert.True(false);
+            }
         }
 
         private string rdfFile
@@ -97,7 +102,6 @@ namespace XUnitTestAPI_CARGA
                 rdfFile.Append("		<foaf:name rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Nombre Apellido</foaf:name>");
                 rdfFile.Append("		<foaf:firstName rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Nombre</foaf:firstName>");
                 rdfFile.Append("		<foaf:surname rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Apellido</foaf:surname>");
-                rdfFile.Append("		<vivo:identifier rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Identificador 1</vivo:identifier>");
                 rdfFile.Append("	</rdf:Description>");
                 rdfFile.Append("	<rdf:Description rdf:nodeID=\"N13102d9d82124e479f8d7042a8fab61a\">");
                 rdfFile.Append("		<vivo:relates rdf:resource=\"http://graph.um.es/res/project/1\" />");
