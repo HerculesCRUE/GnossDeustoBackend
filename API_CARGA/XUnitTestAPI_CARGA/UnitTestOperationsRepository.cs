@@ -1,5 +1,7 @@
+using API_CARGA.Controllers;
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -12,7 +14,8 @@ namespace XUnitTestAPI_CARGA
         public void GetRepository()
         {
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            List<RepositoryConfig> listaRepositorios = repositoriesConfigMockService.GetRepositoryConfigs();
+            repositoryController repositoryController = new repositoryController(repositoriesConfigMockService);
+            List<RepositoryConfig> listaRepositorios = (List<RepositoryConfig>)(((OkObjectResult)repositoryController.GetRepository()).Value);
             Assert.True(listaRepositorios.Count > 0);            
         }
 
@@ -20,11 +23,12 @@ namespace XUnitTestAPI_CARGA
         public void GetRepositoryByID()
         {
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            List<RepositoryConfig> listaRepositorios = repositoriesConfigMockService.GetRepositoryConfigs();
+            repositoryController repositoryController = new repositoryController(repositoriesConfigMockService);
+            List<RepositoryConfig> listaRepositorios = (List<RepositoryConfig>)(((OkObjectResult)repositoryController.GetRepository()).Value);
             if (listaRepositorios.Count > 0)
             {
                 RepositoryConfig repositoryConfig = listaRepositorios[0];
-                RepositoryConfig repositoryConfigGetByID = repositoriesConfigMockService.GetRepositoryConfigById(repositoryConfig.RepositoryConfigID);
+                RepositoryConfig repositoryConfigGetByID = (RepositoryConfig)(((OkObjectResult)repositoryController.GetRepository(repositoryConfig.RepositoryConfigID)).Value);
                 Assert.True(repositoryConfig.Name.Equals(repositoryConfigGetByID.Name));
             }
         }
@@ -34,15 +38,15 @@ namespace XUnitTestAPI_CARGA
         public void AddConfigRepository()
         {
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
+            repositoryController repositoryController = new repositoryController(repositoriesConfigMockService);
             RepositoryConfig repositoryConfigToAdd = new RepositoryConfig
             {
-                RepositoryConfigID = Guid.NewGuid(),
                 Name = "Un repositorio para configurarlos a todos",
                 Url = "config\\repository",
                 OauthToken = "12weq1"
             };
-            Guid identifierAdded = repositoriesConfigMockService.AddRepositoryConfig(repositoryConfigToAdd);
-            RepositoryConfig repositoryConfig = repositoriesConfigMockService.GetRepositoryConfigById(identifierAdded);
+            Guid identifierAdded = (Guid)(((OkObjectResult)repositoryController.AddConfigRepository(repositoryConfigToAdd)).Value);
+            RepositoryConfig repositoryConfig = (RepositoryConfig)(((OkObjectResult)repositoryController.GetRepository(identifierAdded)).Value);
             Assert.True(repositoryConfigToAdd.Name.Equals(repositoryConfig.Name));
         }
 
@@ -51,9 +55,10 @@ namespace XUnitTestAPI_CARGA
         public void DeleteConfigRepository()
         {
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            RepositoryConfig repositoryConfig = repositoriesConfigMockService.GetRepositoryConfigs()[0];
-            repositoriesConfigMockService.RemoveRepositoryConfig(repositoryConfig.RepositoryConfigID);
-            repositoryConfig = repositoriesConfigMockService.GetRepositoryConfigById(repositoryConfig.RepositoryConfigID);
+            repositoryController repositoryController = new repositoryController(repositoriesConfigMockService);
+            RepositoryConfig repositoryConfig = ((List<RepositoryConfig>)(((OkObjectResult)repositoryController.GetRepository()).Value))[0];
+            repositoryController.DeleteRepository(repositoryConfig.RepositoryConfigID);
+            repositoryConfig = (RepositoryConfig)(((OkObjectResult)repositoryController.GetRepository(repositoryConfig.RepositoryConfigID)).Value);
             Assert.Null(repositoryConfig);
         }
 
@@ -61,12 +66,13 @@ namespace XUnitTestAPI_CARGA
         public void ModifyConfigRepository()
         {
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            RepositoryConfig repositoryConfig = repositoriesConfigMockService.GetRepositoryConfigs()[0];
+            repositoryController repositoryController = new repositoryController(repositoriesConfigMockService);
+            RepositoryConfig repositoryConfig = ((List<RepositoryConfig>)(((OkObjectResult)repositoryController.GetRepository()).Value))[0];
             Random random = new Random();
             string newName = "updatedRepository_" + random.NextDouble();
             repositoryConfig.Name = newName;
-            repositoriesConfigMockService.ModifyRepositoryConfig(repositoryConfig);
-            RepositoryConfig updatedrepositoryConfig = repositoriesConfigMockService.GetRepositoryConfigById(repositoryConfig.RepositoryConfigID);
+            repositoryController.ModifyRepositoryConfig(repositoryConfig);
+            RepositoryConfig updatedrepositoryConfig = (RepositoryConfig)(((OkObjectResult)repositoryController.GetRepository(repositoryConfig.RepositoryConfigID)).Value);
             Assert.True(updatedrepositoryConfig.Name.Equals(newName));
         }
 

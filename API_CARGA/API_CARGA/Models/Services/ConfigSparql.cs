@@ -12,7 +12,7 @@ namespace API_CARGA.Models.Services
     {
         public IConfigurationRoot Configuration { get; set; }
         private string Graph { get; set; }
-        private string Endpoint { get; set; }
+        public string Endpoint { get; set; }
         private string QueryParam { get; set; }
         public string GetGraph()
         {
@@ -39,7 +39,7 @@ namespace API_CARGA.Models.Services
 
         public string GetEndpoint()
         {
-            if (string.IsNullOrEmpty(Endpoint))
+            if (Endpoint==null)
             {
                 var builder = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())

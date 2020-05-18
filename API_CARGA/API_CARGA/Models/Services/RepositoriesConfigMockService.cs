@@ -42,18 +42,18 @@ namespace API_CARGA.Models.Services
             });
             _configRepositories.Add(new RepositoryConfig
             {
-                RepositoryConfigID = Guid.NewGuid(),
+                RepositoryConfigID = new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"),
                 Name = "ConfigRepository_5",
-                Url = "config\\repository",
+                Url = "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH",
                 OauthToken = "87f9"
-            });
+            }) ;
             _configRepositories.Add(new RepositoryConfig
             {
                 RepositoryConfigID = new Guid("11111111-1111-1111-1111-111111111111"),
                 Name = "CVN_OAI_PMH",
                 Url = "https://localhost:44353/OAI_PMH",
                 OauthToken = "87f9j"
-            }); ;
+            }); 
         }
 
         public List<RepositoryConfig> GetRepositoryConfigs()
