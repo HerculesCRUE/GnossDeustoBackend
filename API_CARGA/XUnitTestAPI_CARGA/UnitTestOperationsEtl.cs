@@ -57,7 +57,7 @@ namespace XUnitTestAPI_CARGA
                     Assert.True(false);
                 }
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 Assert.True(true);
             }

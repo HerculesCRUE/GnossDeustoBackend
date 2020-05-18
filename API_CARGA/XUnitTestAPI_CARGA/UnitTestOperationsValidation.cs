@@ -91,7 +91,7 @@ namespace XUnitTestAPI_CARGA
                 Guid identifierAdded = (Guid)(((OkObjectResult)validationController.AddShape("Shape Name", Guid.NewGuid(), file)).Value);
                 Assert.True(false);
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 Assert.True(true);
             }
@@ -174,7 +174,7 @@ namespace XUnitTestAPI_CARGA
                     Assert.True(false);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Assert.True(true);
             }
@@ -225,7 +225,7 @@ namespace XUnitTestAPI_CARGA
                     Assert.True(false);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Assert.True(true);
             }
