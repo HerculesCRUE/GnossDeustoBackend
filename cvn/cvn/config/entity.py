@@ -9,6 +9,7 @@ import re
 import cvn.config.condition as cvn_condition
 import cvn.config.entitycache as cvn_entity_cache
 import urllib.parse
+import cvn.webserver as web_server
 
 # Caché de URIs generadas
 # TODO mover a un servicio externo, o hacer algo más elaborado
@@ -23,6 +24,9 @@ def generate_uri(resource_class, identifier):
     :param identifier:
     :return: la URI
     """
+    if web_server.debug:
+        return "http://data.um.es/class/" + resource_class + "/" + identifier
+
     # Antes de intentar obtener la URI, comprobar a ver si la tenemos ya en caché
     cache_id = resource_class + "." + identifier
     if cache_id in cached_uris:
