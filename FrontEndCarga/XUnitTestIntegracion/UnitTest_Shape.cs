@@ -36,7 +36,7 @@ namespace XUnitTestIntegracion
                 var resultado = callRepository.GetShapeConfig(id);
                 Assert.True(true);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 Assert.True(false);
             }
@@ -59,30 +59,6 @@ namespace XUnitTestIntegracion
                 Assert.True(false);
             }
         }
-
-      //  [Fact]
-      //  public void TestConexionCreateShapeConfig()
-       // {
-       //     try
-         //   {
-        //        ConfigUrlService configUrl = new ConfigUrlService();
-        //        CallApiService callService = new CallApiService(configUrl);
-        //        CallShapeConfigApiService callRepository = new CallShapeConfigApiService(callService);
-        //        ShapeConfigCreateModel item = new ShapeConfigCreateModel()
-         //       {
-       //             Name = "Prueba",
-        //            
-
-        //        };
-       //         var resultado = callRepository.CreateShapeConfig(item);
-       //         Assert.True(true);
-       //     }
-       //     catch (Exception)
-      //      {
-       //         Assert.True(false);
-       //     }
-       // }
-
        
     }
 }
