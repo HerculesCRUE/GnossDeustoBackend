@@ -1,6 +1,6 @@
 # ASIO Validation Questions
 
-In this project different SPARQL queries are executed in order to test the ROH ontology. Those validations questions are gathered from: https://docs.google.com/spreadsheets/d/17y4mIlhFw691-Cv3AqMJGUqXgFEX-A2WZ7CdmZ9wdlY/edit#gid=0
+In this project different SPARQL queries are executed in order to test the ROH ontology. Those validations questions are gathered from: https://github.com/HerculesCRUE/GnossDeustoOnto/blob/master/Documentation/CoverturaPreguntasCompetencia.pdf
 
 * [Documentation](https://deustohercules.github.io/validation-questions/testapidocs/index.html)
 * [Test Results](https://deustohercules.github.io/validation-questions/surefire-report.html)
