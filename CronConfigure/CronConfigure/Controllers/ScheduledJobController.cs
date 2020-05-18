@@ -56,7 +56,7 @@ namespace CronConfigure.Controllers
             {
                 try
                 {
-                    fechaInicio = DateTime.Parse(fecha_ejecucion);
+                    fechaInicio = DateTime.ParseExact(fecha_ejecucion, "dd/MM/yyyy hh:mm", null);
                 }
                 catch (Exception)
                 {
@@ -71,7 +71,7 @@ namespace CronConfigure.Controllers
             {
                 try
                 {
-                    fechaDateTime = DateTime.Parse(fecha);
+                    fechaDateTime = DateTime.ParseExact(fecha, "dd/MM/yyyy hh:mm", null);
                 }
                 catch (Exception)
                 {
@@ -87,7 +87,6 @@ namespace CronConfigure.Controllers
             {
                 return BadRequest("identificador invalido");
             }
-            fechaInicio = DateTime.Parse(fecha_ejecucion);
             _programingMethodsService.ProgramPublishRepositoryJob(idRep, fechaInicio, fechaDateTime, set, codigo_objeto);
             return Ok();
         }
