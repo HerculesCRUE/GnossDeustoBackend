@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_CARGA", "API_CARGA\API_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestAPI_CARGA", "XUnitTestAPI_CARGA\XUnitTestAPI_CARGA.csproj", "{BE6D5051-2F4C-4CB4-8631-CAA78F955DA5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestIntegracion", "XUnitTestIntegracion\XUnitTestIntegracion.csproj", "{0EBCA150-6A1F-44A7-920E-E753E5794DCC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{BE6D5051-2F4C-4CB4-8631-CAA78F955DA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE6D5051-2F4C-4CB4-8631-CAA78F955DA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE6D5051-2F4C-4CB4-8631-CAA78F955DA5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0EBCA150-6A1F-44A7-920E-E753E5794DCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0EBCA150-6A1F-44A7-920E-E753E5794DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0EBCA150-6A1F-44A7-920E-E753E5794DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0EBCA150-6A1F-44A7-920E-E753E5794DCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
