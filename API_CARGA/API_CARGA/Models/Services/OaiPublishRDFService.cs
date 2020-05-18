@@ -13,12 +13,10 @@ namespace API_CARGA.Models.Services
 {
     public class OaiPublishRDFService
     {
-        readonly ConfigUrlService _serviceUrl;
         readonly EntityContext _context;
         readonly ICallNeedPublishData _publishData;
-        public OaiPublishRDFService(ConfigUrlService serviceUrl, EntityContext context, ICallNeedPublishData publishData)
+        public OaiPublishRDFService(EntityContext context, ICallNeedPublishData publishData)
         {
-            _serviceUrl = serviceUrl;
             _context = context;
             _publishData = publishData;
         }

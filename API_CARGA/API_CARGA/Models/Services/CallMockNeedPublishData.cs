@@ -29,7 +29,7 @@ namespace API_CARGA.Models.Services
             else if (urlMethod.Contains("GetRecord"))
             {
                 StringBuilder rdfFile = new StringBuilder();
-                rdfFile.Append("<? xml version = \"1.0\" encoding = \"utf - 8\" standalone = \"no\" ?>");
+                //rdfFile.Append("<? xml version = \"1.0\" encoding = \"utf - 8\" standalone = \"no\" ?>");
                 rdfFile.Append("<OAI-PMH xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd\" xmlns=\"http://www.openarchives.org/OAI/2.0/\">");
                 rdfFile.Append("<responseDate>2020-05-18T16:56:06Z</responseDate>");
                 rdfFile.Append("<request verb=\"GetRecord\" identifier=\"1\" metadataPrefix=\"rdf\">http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH</request>");

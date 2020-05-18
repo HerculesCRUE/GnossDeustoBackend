@@ -87,6 +87,7 @@ namespace PRH
             services.AddScoped<IRepositoriesConfigService, RepositoriesConfigBDService>();
             //services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
             services.AddScoped<IShapesConfigService, ShapesConfigBDService>();
+            services.AddScoped<ICallNeedPublishData, CallApiNeedInfoPublisData>();
             //services.AddSingleton<ISyncConfigService, SyncConfigMockService>();
 
         }

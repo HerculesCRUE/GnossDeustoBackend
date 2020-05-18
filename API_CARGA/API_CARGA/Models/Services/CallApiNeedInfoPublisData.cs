@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
-    public class CallApiNeedInfoPublisData: CallNeedPublishData
+    public class CallApiNeedInfoPublisData: ICallNeedPublishData
     {
         readonly ConfigUrlService _serviceUrl;
         public CallApiNeedInfoPublisData(ConfigUrlService serviceUrl)
@@ -67,7 +67,7 @@ namespace API_CARGA.Models.Services
 
 
 
-        pulic string CallPostApiFile(string urlMethod, MultipartFormDataContent item, string parameters = null)
+        public string CallPostApiFile(string urlMethod, MultipartFormDataContent item, string parameters = null)
         {
             //string stringData = JsonConvert.SerializeObject(item);
             //var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
