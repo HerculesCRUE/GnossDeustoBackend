@@ -1,22 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Xml;
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
 using API_CARGA.Models.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OaiPmhNet;
-using OaiPmhNet.Models;
 using Swashbuckle.AspNetCore.Annotations;
-using VDS.RDF.Shacl.Validation;
 
 namespace PMH.Controllers
 {
@@ -51,15 +44,7 @@ namespace PMH.Controllers
             try
             {
                 XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
-                List<string> triples = SparqlUtility.GetTriplesFromRDF(rdf);
-               
-                triples =triples.Select(x => Regex.Replace(
-                    x,
-                    @"\\u(?<Value>[a-zA-Z0-9]{4})",
-                    m => {
-                        return ((char)int.Parse(m.Groups["Value"].Value, NumberStyles.HexNumber)).ToString();
-                    })).ToList();
-
+                List<string> triples = SparqlUtility.GetTriplesFromRDF(rdf);    
                 SparqlUtility.LoadTriples(triples, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), _configSparql.GetGraph());
                 return Ok();
             }
@@ -237,11 +222,11 @@ namespace PMH.Controllers
             }
             if (from.HasValue)
             {
-                uri += $"&from={from.ToString()}";
+                uri += $"&from={from.Value.ToString("u", CultureInfo.InvariantCulture)}";
             }
             if (until.HasValue)
             {
-                uri += $"&until={until.ToString()}";
+                uri += $"&until={until.Value.ToString("u", CultureInfo.InvariantCulture)}";
             }
             if (set != null)
             {

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_CARGA", "API_CARGA\API_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestAPI_CARGA", "XUnitTestAPI_CARGA\XUnitTestAPI_CARGA.csproj", "{BE6D5051-2F4C-4CB4-8631-CAA78F955DA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestIntegracion", "XUnitTestIntegracion\XUnitTestIntegracion.csproj", "{0EBCA150-6A1F-44A7-920E-E753E5794DCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestIntegracion", "XUnitTestIntegracion\XUnitTestIntegracion.csproj", "{0EBCA150-6A1F-44A7-920E-E753E5794DCC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
