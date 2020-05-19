@@ -21,7 +21,7 @@ El presente documento describe la arquitectura de sistemas del Backend
 SGI del proyecto Hércules ASIO, para su despliegue en la infraestructura 
 de cada universidad.
 
-Además de la arquitetuca lógica, incluye una propuesta de software base para 
+Además de la arquitetura lógica, incluye una propuesta de software base para 
 cada componente y la estimación de las dimensiones en el entorno de producción y
 en los entornos de preproducción y desarrollo, necesarios para el proceso
 de desarrollo del proyecto ASIO.
