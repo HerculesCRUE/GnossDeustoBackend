@@ -25,7 +25,7 @@ arquitectura para leer y escribir datos enlazados en la web.
 LDP 1.0 es una recomendación del W3C: <https://www.w3.org/TR/ldp/>
 
 El presente documento evalúa el grado de cumplimiento de LDP que el
-Servidor Linked Data de ASIO debe cumplir, para lo que se tiene en
+Servidor Linked Data de Hércules ASIO debe cumplir, para lo que se tiene en
 cuenta la extensión de uso en la comunidad Linked Data, su utilidad en
 ASIO, los posibles beneficios a largo plazo, la dificultad de
 implementación y los condicionantes de seguridad.
