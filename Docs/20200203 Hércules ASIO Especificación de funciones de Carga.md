@@ -2,7 +2,7 @@
 
 # Hércules Backend ASIO. Especificación de las funciones de carga
 
-[1 INTRODUCCIÓN 4](#introducción)
+[1 INTRODUCCIÓN](#introducción)
 
 [2 ARQUITECTURA DE LOS PROCESOS DE CARGA](#arquitectura-de-los-procesos-de-carga)
 
