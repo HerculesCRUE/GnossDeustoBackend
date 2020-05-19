@@ -1,25 +1,24 @@
+![](.//media/CabeceraDocumentosMD.png)
+
 # Hércules Backend ASIO. Trabajos de carga. Hito 1
 
-[1 INTRODUCCIÓN 3](#introducción)
+[1 INTRODUCCIÓN](#introducción)
 
-[2 INTERFAZ DE CARGA Y SINCRONIZACIÓN
-4](#interfaz-de-carga-y-sincronización)
+[2 INTERFAZ DE CARGA Y SINCRONIZACIÓN](#interfaz-de-carga-y-sincronización)
 
-[3 SERVICIO OAI-PMH PARA CARGA DE CVN
-5](#servicio-oai-pmh-para-carga-de-cvn)
+[3 SERVICIO OAI-PMH PARA CARGA DE CVN](#servicio-oai-pmh-para-carga-de-cvn)
 
-[3.1 ACTUALIZACIÓN DE DATOS DESDE EL REPOSITORIO CVN
-6](#actualización-de-datos-desde-el-repositorio-cvn)
+[3.1 ACTUALIZACIÓN DE DATOS DESDE EL REPOSITORIO CVN(#actualización-de-datos-desde-el-repositorio-cvn)
 
-[4 CARGA INICIAL DE DATOS DE LA UNIVERSIDAD DE MURCIA
-7](#carga-inicial-de-datos-de-la-universidad-de-murcia)
+[4 CARGA INICIAL DE DATOS DE LA UNIVERSIDAD DE MURCIA](#carga-inicial-de-datos-de-la-universidad-de-murcia)
 
 INTRODUCCIÓN
 ============
 
 Este documento contiene una descripción general del funcionamiento de
 los procesos de carga, fundamentalmente sincronización, y la descripción
-funcional de los trabajos de carga del Hito 1, que serán:
+funcional de los trabajos de carga del Hito 1 del proyecto Hércules ASIO, 
+que serán:
 
 -   Desarrollo de un servicio
     [OAI-PMH](http://www.openarchives.org/OAI/openarchivesprotocol.html)
