@@ -8,7 +8,8 @@ Listado de imagenes docker de todas las aplicaciones incluidas en GnossDeustoBac
  - [cvn](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/cvn) - Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH: http://herc-as-front-desa.atica.um.es/docs/apicvn.tar.gz
  - [CronConfigure](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/CronConfigure) - Servicio Web que realiza la creación de tareas para la sincronización de un repositorio: http://herc-as-front-desa.atica.um.es/docs/apicron.tar.gz
 
-DESPLIEGUE DOCKER / DOCKER-COMPOSE
+Despliegue DOCKER / DOCKER-COMPOSE
+----------------------------------
 
 Una vez que tengamos las imágenes tenemos descargadas en el nodo de Docker, tenemos que importarlas como imágenes docker con este comando: 
 
