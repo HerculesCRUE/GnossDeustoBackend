@@ -112,11 +112,11 @@ CONTENEDORES
 ============
 
 La implementación LDP del servidor Linked Data de ASIO sólo tendría un
-contenedor (*basic* *container*) y devolvería sólo un subconjunto de las
+contenedor ([*basic* *container*](https://www.w3.org/TR/ldp/#ldpbc)) y devolvería sólo un subconjunto de las
 propiedades del contenedor (*minimal-container triples*), sin devolver
-los triples de los recursos. En el caso de ASIO, el volumen de recursos
+los triples de los recursos contenidos. En el caso de ASIO, el volumen de recursos
 y su complejidad no permite que la recuperación de los triples se
-realice mediante el mecanismo previsto en los contenedores.
+realice mediante el mecanismo previsto para los contenedores.
 
 CONCLUSIONES
 ============
