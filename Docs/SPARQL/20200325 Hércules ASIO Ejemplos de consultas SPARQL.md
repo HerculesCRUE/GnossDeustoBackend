@@ -1,9 +1,22 @@
+![](.//media/CabeceraDocumentosMD.png)
+
 # Hércules Backend ASIO. Ejemplos de consultas sparql
 
-[1 GRAFO DE DATOS DE CVN 3](#grafo-de-datos-de-cvn)
+[1 INTRODUCCIÓN](#introduccion)
 
-[2 GRAFO DE DATOS DE SISTEMAS DE LA UM
-4](#grafo-de-datos-de-sistemas-de-la-um)
+[2 GRAFO DE DATOS DE CVN](#grafo-de-datos-de-cvn)
+
+[3 GRAFO DE DATOS DE SISTEMAS DE LA UM](#grafo-de-datos-de-sistemas-de-la-um)
+
+Introducción
+============
+
+En este documento se incluyen y describen un conjunto de consultas SPARQL sobre el 
+conjunto de datos disponible en el proyecto Hércules ASIO.
+
+El documento no es exhaustivo, sino que contiene ejemplos de consultas de 
+recuperación de la información, e irá evolucionando según el sistema vaya incorporando
+más datos.
 
 GRAFO DE DATOS DE CVN
 =====================
