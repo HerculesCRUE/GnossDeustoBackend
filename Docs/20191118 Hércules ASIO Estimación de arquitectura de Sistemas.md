@@ -1,26 +1,31 @@
+![](.//media/CabeceraDocumentosMD.png)
 
 # Hércules Backend ASIO. Estimación de Arquitectura de Sistemas
 
-[1 INTRODUCCIÓN 3](#introducción)
+[1 INTRODUCCIÓN](#introducción)
 
-[2 ARQUITECTURA DE SISTEMAS 4](#arquitectura-de-sistemas)
+[2 ARQUITECTURA DE SISTEMAS](#arquitectura-de-sistemas)
 
-[2.1 Arquitectura lógica 4](#arquitectura-lógica)
+[2.1 Arquitectura lógica](#arquitectura-lógica)
 
-[2.2 Arquitectura Física en producción
-6](#arquitectura-física-en-producción)
+[2.2 Arquitectura Física en producción](#arquitectura-física-en-producción)
 
-[2.3 Arquitectura Física en Preproducción
-9](#arquitectura-física-en-preproducción)
+[2.3 Arquitectura Física en Preproducción](#arquitectura-física-en-preproducción)
 
-[2.4 Arquitectura Física en Desarrollo
-10](#arquitectura-física-en-desarrollo)
+[2.4 Arquitectura Física en Desarrollo](#arquitectura-física-en-desarrollo)
 
 INTRODUCCIÓN
 ============
 
 El presente documento describe la arquitectura de sistemas del Backend
-SGI del proyecto Hércules ASIO.
+SGI del proyecto Hércules ASIO, para su despliegue en la infraestructura 
+de cada universidad.
+
+Además de la arquitetuca lógica, incluye una propuesta de software base para 
+cada componente y la estimación de las dimensiones en el entorno de producción y
+en los entornos de preproducción y desarrollo, necesarios para el proceso
+de desarrollo del proyecto ASIO.
+
 
 ARQUITECTURA DE SISTEMAS
 ========================
