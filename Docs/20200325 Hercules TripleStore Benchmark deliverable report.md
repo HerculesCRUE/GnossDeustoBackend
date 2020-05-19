@@ -45,25 +45,25 @@ the framework before presenting the results.
 Table of contents
 =================
 
-**[Table of contents](#table-of-contents) 1**
+**[Table of contents](#table-of-contents)**
 
-**[Criteria](#criteria) 3**
+**[Criteria](#criteria)**
 
-> [Functionalities (F)](#functionalities-f) 3
+> [Functionalities (F)](#functionalities-f)
 >
-> [Performance and scalability](#performance-and-scalability) 5
+> [Performance and scalability](#performance-and-scalability)
 >
-> [Management and maintenance](#management-and-maintenance) 7
+> [Management and maintenance](#management-and-maintenance)
 
-**[TripleStore Assessed](#triplestore-assessed) 9**
+**[TripleStore Assessed](#triplestore-assessed)**
 
-**[Architecture and data](#architecture-and-data) 10**
+**[Architecture and data](#architecture-and-data)**
 
-**[Results](#results) 10**
+**[Results](#results)**
 
-**[Appendix 1: Criteria in RDF](#appendix-1-criteria-in-rdf) 11**
+**[Appendix 1: Criteria in RDF](#appendix-1-criteria-in-rdf)**
 
-**[Appendix 2: Criterion Ontology](#appendix-2-criterion-ontology) 12**
+**[Appendix 2: Criterion Ontology](#appendix-2-criterion-ontology)**
 
 Criteria
 ========
