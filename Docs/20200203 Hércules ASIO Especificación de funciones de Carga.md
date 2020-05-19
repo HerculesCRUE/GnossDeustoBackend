@@ -72,10 +72,10 @@ INTRODUCCIÓN
 ============
 
 Este documento contiene la especificación de las funciones de carga del 
-proyecto Hércules ASIO ((API Carga)[https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA]), e incluye la descripción de la implementación 
-del (protocolo OAI-PMH)[https://www.openarchives.org/pmh/] para el intercambio de datos desde el SGI hacia el Backend. 
+proyecto Hércules ASIO ([API Carga](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA)), e incluye la descripción de la implementación 
+del [protocolo OAI-PMH](https://www.openarchives.org/pmh/) para el intercambio de datos desde el SGI hacia el Backend. 
 Los formatos de metadatos que devuelve el protocolo OAI-PMH se corresponden
-con lo definido en la (Red de Ontologías Hércules (ROH))[https://github.com/HerculesCRUE/GnossDeustoOnto] para cada una de sus
+con lo definido en la [Red de Ontologías Hércules (ROH)](https://github.com/HerculesCRUE/GnossDeustoOnto) para cada una de sus
 entidades.
 
 Los grupos funcionales del API de carga de datos son:
