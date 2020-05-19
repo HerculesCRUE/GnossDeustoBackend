@@ -1,8 +1,14 @@
+![](.//media/CabeceraDocumentosMD.png)
+
 # Hércules Backend ASIO. TripleStore Benchmark deliverable report
 
 We report here on the creation of a TripleStore assessment framework and
 on the results obtained from applying this framework to several modern
-TripleStore. We consider a TripleStore any data storage and querying
+TripleStore. The results of the benchmark will be later applied to recommend
+one or more TripleStores for the Hercules ASIO deployment and to provide a way
+to select one for each Hercules ASIO setup.
+
+We consider a TripleStore any data storage and querying
 system which is capable of handling RDF[^1] data, either natively or
 not, and to query the data using the SPARQL query language and
 protocol[^2]. A number of benchmark studies have been conducted in the
