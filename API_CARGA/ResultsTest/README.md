@@ -5,4 +5,4 @@ Esta carpeta contiene los resultados de las pruebas unitarias correspondientes a
  - ResultsTest.rar. Fichero comprimido con los resultados de las pruebas en formato HTML.
 
 Los resultados de las pruebas se pueden consultar en:
-http://herc-as-front-desa.atica.um.es/api-carga/resulttests/index.html
+http://herc-as-front-desa.atica.um.es/api-carga/resultstest/index.html
