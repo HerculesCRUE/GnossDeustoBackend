@@ -28,6 +28,8 @@ jobs:
       run: mvn install
     - name: Launch tests
       run: mvn surefire-report:report -DontFile=roh/roh-v2.owl -DdataFile=roh/examples/data.ttl -Duneskos=roh/unesco-individuals.rdf
+    - name: Generate maven site
+      run: mvn site
     - name: Generate documentation
       run: mvn javadoc:test-javadoc
     - name: Deploy github pages

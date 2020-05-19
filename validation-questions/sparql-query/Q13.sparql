@@ -1,0 +1,15 @@
+PREFIX vivo: <http://purl.org/roh/mirror/vivo#>
+PREFIX bibo:  <http://purl.org/roh/mirror/bibo#>
+PREFIX roh: <http://purl.org/roh#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+SELECT  ?document ?documentType
+WHERE {
+?dossier a roh:Dossier .
+?dossier vivo:relates <http://purl.org/roh/data#a-project>, ?document .
+?document a ?documentType .
+?documentType rdfs:subClassOf bibo:Report .FILTER NOT EXISTS {
+?document a ?otherClass .
+?otherClass rdfs:subClassOf ?documentType .
+FILTER (?otherClass != ?documentType)
+}
+} 

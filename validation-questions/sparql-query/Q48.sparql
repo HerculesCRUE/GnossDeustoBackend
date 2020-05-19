@@ -1,0 +1,13 @@
+PREFIX roh: <http://purl.org/roh#>
+PREFIX foaf: <http://purl.org/roh/mirror/foaf#>
+PREFIX vivo: <http://purl.org/roh/mirror/vivo#>
+SELECT ?researchGroup (SUM(?cites) as ?totalCites) 
+WHERE {
+?researcher a foaf:Person ;
+roh:hasPosition ?position ;
+roh:hasCV ?cv .
+?cv roh:cites ?cites ;
+roh:factorH ?factorH .
+?position vivo:relates ?researchGroup .
+?researchGroup a roh:ResearchGroup .
+} GROUP BY ?researchGroup 

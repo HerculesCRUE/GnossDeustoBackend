@@ -1,0 +1,19 @@
+PREFIX vivo: <http://purl.org/roh/mirror/vivo#>
+PREFIX roh: <http://purl.org/roh#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://purl.org/roh/mirror/foaf#>
+SELECT  DISTINCT ?organization ?project 
+WHERE {
+?organization a ?organizationClass .
+?organizationClass rdfs:subClassOf* foaf:Organization .
+?role roh:roleOf ?organization ;
+vivo:relatedBy ?project .
+?project a vivo:Project ;
+vivo:dateTimeInterval ?dateTimeInterval .
+?dateTimeInterval vivo:start ?startDateTimeValue ;
+vivo:end ?endDateTimeValue . 
+?startDateTimeValue vivo:dateTime ?start . 
+?endDateTimeValue vivo:dateTime ?end . 
+FILTER (YEAR(?start) <= "2019"^^xsd:integer && YEAR(?end) >= "2019"^^xsd:integer )
+}

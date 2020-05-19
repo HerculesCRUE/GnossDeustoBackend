@@ -3,6 +3,8 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +38,18 @@ public class ValidationQuestionsTest {
 		// data = DataGenerator.getInferredModel(System.getProperty("ontFile"), System.getProperty("dataFile"));
 	}
 	
+	private static void writeSPARQLQuery(String method, String query) {
+		FileWriter myWriter;
+		try {
+			myWriter = new FileWriter(String.format("sparql-query/%s.sparql", method));
+		    myWriter.write(query);
+		    myWriter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Centros de  investigación que trabajan en un área/disciplina específica.
 	 */
@@ -45,19 +59,13 @@ public class ValidationQuestionsTest {
 		expectedResult.add("http://purl.org/roh/data#centro-investigacion-2");
 		expectedResult.add("http://purl.org/roh/data#centro-investigacion-1");
 		
-		String queryString = "PREFIX vivo: <http://vivoweb.org/ontology/core#>\n" + 
-				"PREFIX roh: <http://purl.org/roh#>\n" + 
-				"PREFIX obo: <http://purl.obolibrary.org/obo/>\n" + 
-				"PREFIX bibo: <http://purl.org/ontology/bibo/>\n" + 
-				"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" + 
-				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
-				"PREFIX unesco: <http://purl.org/roh/unesco-individuals#>\n" + 
-				"PREFIX ro: <http://purl.org/obo/owl/ro#>\n" + 
+		String queryString = "PREFIX roh: <http://purl.org/roh#>\n" + 
 				"\n" + 
 				"SELECT ?centro WHERE {\n" + 
 				"        ?centro a roh:ResearchGroup ;\n" + 
 				"                          roh:hasKnowledgeArea unesco:C00261 .\n" + 
 				"}";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String> result = new ArrayList<String>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -101,6 +109,7 @@ public class ValidationQuestionsTest {
 				"FILTER (?otherClass != ?positionClass)\n" +
 				"}\n"+
 				"}\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -143,6 +152,7 @@ public class ValidationQuestionsTest {
 				"         roh:hasAccreditation ?accreditation .\n" + 
 				" ?accreditation roh:title ?accreditationTitle\n" + 
 				"}";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -174,8 +184,7 @@ public class ValidationQuestionsTest {
 		expectedResult.add(new String[]{"http://purl.org/roh/data#centro-investigacion-1", null});
 
 		
-		String queryString = "PREFIX vivo: <http://vivoweb.org/ontology/core#>\n" + 
-				"PREFIX roh: <http://purl.org/roh#>\n" + 
+		String queryString = "PREFIX roh: <http://purl.org/roh#>\n" + 
 				"PREFIX ro: <http://purl.org/roh/mirror/obo/ro#>\n" + 
 				"PREFIX bibo: <http://purl.org/ontology/bibo/>\n" + 
 				"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" + 
@@ -195,6 +204,7 @@ public class ValidationQuestionsTest {
 				"}\n" +
 				"FILTER (!BOUND(?projectStatus) || ?projectStatus != \"PROPOSAL_SUBMITTED\")\n" +
 				"}";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -247,6 +257,7 @@ public class ValidationQuestionsTest {
 				"?dateIssued vivo:dateTime ?dateTime .\n" +
 				"FILTER (YEAR(?dateTime) >= \"2010\"^^xsd:integer && YEAR(?dateTime) <= \"2020\"^^xsd:integer)\n" +
 				"} GROUP BY ?organization ?researchObject ?knowledgeArea\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -312,6 +323,7 @@ public class ValidationQuestionsTest {
 				"\n" + 
 				"} \n" +
 				"GROUP BY ?location";
+		// writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		Map<Resource, Integer> locationPubs = new HashMap<Resource, Integer>();
@@ -395,6 +407,7 @@ public class ValidationQuestionsTest {
 				"}\n"+
 				"FILTER (str(?researchObjectClass) != \"http://purl.org/roh#ResearchObject\")\n" +
 				"}\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
@@ -442,6 +455,7 @@ public class ValidationQuestionsTest {
 				"?position vivo:relates ?centre .\n" +
 				"?centre a roh:ResearchGroup .\n" +
 				"} GROUP BY ?patent ?centre ?knowledgeArea";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -501,6 +515,7 @@ public class ValidationQuestionsTest {
 				"FILTER (?otherClass != ?roleClass)\n" +
 				"}\n"+
 				"}\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -547,6 +562,7 @@ public class ValidationQuestionsTest {
 				"roh:hasPosition ?position .\n" + 
 				"?position vivo:relates <http://purl.org/roh/data#centro-investigacion-1> .\n" +
 				"} ORDER BY ASC(?date) LIMIT 1\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -591,6 +607,7 @@ public class ValidationQuestionsTest {
 				"roh:hasPosition ?position .\n" + 
 				"?position vivo:relates <http://purl.org/roh/data#centro-investigacion-1> .\n" +
 				"} ORDER BY DESC(?date) LIMIT 1\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -612,7 +629,7 @@ public class ValidationQuestionsTest {
 	}
 	
 	/**
-	 * Listas proyectos agrupados por ámbito geográfico.
+	 * Listar proyectos agrupados por ámbito geográfico.
 	 */
 	@Test
 	public void Q12() {
@@ -634,7 +651,7 @@ public class ValidationQuestionsTest {
 				"FILTER (?projectStatus != \"PROPOSAL_SUBMITTED\")" +
 				"}\n" +
 				"}\n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -688,6 +705,7 @@ public class ValidationQuestionsTest {
 				"FILTER (?otherClass != ?documentType)\n" +
 				"}\n"+
 				"} \n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -739,7 +757,7 @@ public class ValidationQuestionsTest {
 				"roh:hasKnowledgeArea ?knowledgeArea .\n" +
 				"?knowledgeArea skos:broader+|skos:narrower+|skos:related+ uneskos:C00750 .\n" +
 				"}\n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String> result = new ArrayList<String>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -787,7 +805,7 @@ public class ValidationQuestionsTest {
 				"?organizationClass rdfs:subClassOf foaf:Organization .\n" +
 				"FILTER (YEAR(?start) <= \"2019\"^^xsd:integer && YEAR(?end) >= \"2019\"^^xsd:integer )\n" +
 				"}\n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -841,7 +859,7 @@ public class ValidationQuestionsTest {
 				"?organizationClass rdfs:subClassOf foaf:Organization .\n" +
 				"FILTER (YEAR(?date) >= \"2019\"^^xsd:integer && YEAR(?date) <= \"2020\"^^xsd:integer )\n" +
 				"}\n ORDER BY ?researcher";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -895,6 +913,7 @@ public class ValidationQuestionsTest {
 				"?endDateTimeValue vivo:dateTime ?end . \n" +
 				"FILTER (YEAR(?start) <= \"2019\"^^xsd:integer && YEAR(?end) >= \"2019\"^^xsd:integer )\n" +
 				"}\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -939,7 +958,7 @@ public class ValidationQuestionsTest {
 				"?metric roh:impactFactor ?impactFactor .\n" +
 				"?authorList rdfs:member ?researcher .\n" +
 				"} GROUP BY ?researcher \n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1019,7 +1038,7 @@ public class ValidationQuestionsTest {
 				"}\n" +
 				"}\n" +
 				"} GROUP BY ?organization ?knowledgeArea ORDER BY ?count\n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1043,7 +1062,7 @@ public class ValidationQuestionsTest {
 	}
 	
 	/**
-	 * Contar research objects de diferentes tipos o proyectos a nivel persona, línea, área de conocimeinto u organización.
+	 * Contar research objects de diferentes tipos o proyectos a nivel persona, línea, área de conocimiento u organización.
 	 */
 	@Test
 	public void Q21() {
@@ -1089,6 +1108,7 @@ public class ValidationQuestionsTest {
 				"?centreRole roh:roleOf ?centre .\n" +
 				"?centre a roh:ResearchGroup .\n" +
 				"}\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1130,6 +1150,7 @@ public class ValidationQuestionsTest {
 				"  ?supervisingRelationship a roh:PhDSupervisingRelationship ;\n" +
 				" roh:produces ?thesis" +
 				"}";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String> result = new ArrayList<String>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1171,6 +1192,7 @@ public class ValidationQuestionsTest {
 				"FILTER (?otherClass != ?roleClass)\n" +
 				"}\n"+
 				"}\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1212,7 +1234,7 @@ public class ValidationQuestionsTest {
 				"?position vivo:relates ?center .\n" + 
 				"?center a roh:ResearchGroup .\n" + 
 				"}\n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1260,6 +1282,7 @@ public class ValidationQuestionsTest {
 				"FILTER (?otherClass != ?roleClass)\n" +
 				"}\n"+
 				"}\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1300,7 +1323,7 @@ public class ValidationQuestionsTest {
 				"bibo:authorList ?authorList .\n" +
 				"?authorList rdfs:member <http://purl.org/roh/data#investigador-1> . \n" +
 				"}\n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String> result = new ArrayList<String>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1345,6 +1368,7 @@ public class ValidationQuestionsTest {
 				"?cv roh:cites ?cites ;\n" + 
 				"roh:factorH ?factorH .\n" + 
 				"}\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1400,6 +1424,7 @@ public class ValidationQuestionsTest {
 				"FILTER (str(?quartile) = \"Q1\"^^xsd:string || str(?quartile) = \"Q2\"^^xsd:string) \n" +
 				"FILTER (YEAR(?date) >= \"2015\"^^xsd:integer && YEAR(?date) <= \"2020\"^^xsd:integer )\n" +
 				"} GROUP BY ?researcher HAVING (?count > 5) \n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1441,7 +1466,7 @@ public class ValidationQuestionsTest {
 				"?fundingAmount roh:monetaryAmount ?fundingAmounts .\n" +
 				"?company a vivo:Company .\n" +
 				"}\n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1489,6 +1514,7 @@ public class ValidationQuestionsTest {
 				"}\n" +
 				"}\n" +
 				"}\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1526,6 +1552,7 @@ public class ValidationQuestionsTest {
 				"?project a vivo:Project ;\n" +
 				"roh:foreseenJustificationDate ?foreseenJustificationDate .\n" +
 				"}\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String> result = new ArrayList<String>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1559,7 +1586,7 @@ public class ValidationQuestionsTest {
 				"roh:spends ?expense .\n" +
 				"?expense vivo:description ?description .\n" +
 				"}\n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1602,7 +1629,7 @@ public class ValidationQuestionsTest {
 				"?fundingAmount roh:grants ?organization ;\n" +
 				"roh:monetaryAmount ?monetaryAmount .\n" +
 				"} GROUP BY ?organization ?fundingProgram \n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1660,7 +1687,7 @@ public class ValidationQuestionsTest {
 				"?otherOrganization a foaf:Organization .\n" +
 				"FILTER (?organization != ?otherOrganization) \n" + 
 				"}\n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1717,7 +1744,7 @@ public class ValidationQuestionsTest {
 				"roh:grants ?organization .\n" +
 				"?organization a foaf:Organization .\n" +
 				"} GROUP BY ?organization ?knowledgeArea\n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1775,7 +1802,7 @@ public class ValidationQuestionsTest {
 				"}\n" +
 				"}\n" +
 				"}\n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1839,6 +1866,7 @@ public class ValidationQuestionsTest {
 				"FILTER (?otherOrganization != <http://purl.org/roh/data#centro-investigacion-1>)" +
 				"FILTER (YEAR(?startTime) <= \"2019\"^^xsd:integer && YEAR(?endTime) >= \"2019\"^^xsd:integer)" +
 				"}\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1888,6 +1916,7 @@ public class ValidationQuestionsTest {
 				"?researcher foaf:gender ?gender .\n" +
 				"?metric roh:impactFactor ?impactFactor .\n" +
 				"} GROUP BY ?gender \n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1942,6 +1971,7 @@ public class ValidationQuestionsTest {
 				"?position vivo:relates ?researchGroup .\n" +
 				"?researchGroup a roh:ResearchGroup .\n" +
 				"} GROUP BY ?researchGroup \n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -1983,7 +2013,7 @@ public class ValidationQuestionsTest {
 				"vivo:hasPublicationVenue <http://purl.org/roh/data#excelent-journal> .\n" +
 				"?authorList rdfs:member ?researcher .\n" +
 				"}\n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -2029,7 +2059,7 @@ public class ValidationQuestionsTest {
 				"?metric roh:impactFactor ?impactFactor ;\n" +
 				"FILTER (YEAR(?date) >= \"2020\"^^xsd:integer && YEAR(?date) <= \"2020\"^^xsd:integer )\n" +
 				"} \n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -2080,6 +2110,7 @@ public class ValidationQuestionsTest {
 				"?position vivo:relates <http://purl.org/roh/data#centro-investigacion-1> .\n" +
 				"FILTER regex(?title, \"great\", \"i\")" +
 				"}\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String> result = new ArrayList<String>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -2121,6 +2152,7 @@ public class ValidationQuestionsTest {
 				"?position vivo:relates <http://purl.org/roh/data#centro-investigacion-1> .\n" +
 				"?metric roh:quartile \"Q2\"" +
 				"}\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -2167,7 +2199,7 @@ public class ValidationQuestionsTest {
 				"?metric roh:impactFactor ?impactFactor ;\n" +
 				"FILTER (YEAR(?date) >= \"2020\"^^xsd:integer && YEAR(?date) <= \"2020\"^^xsd:integer )\n" +
 				"} \n";
-		
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -2219,6 +2251,7 @@ public class ValidationQuestionsTest {
 				"}\n" +
 				"FILTER (!BOUND(?projectStatus) || ?projectStatus != \"PROPOSAL_SUBMITTED\")\n" +
 				"}\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
@@ -2266,6 +2299,7 @@ public class ValidationQuestionsTest {
 				"?university ro:BFO_0000051 ?researchGroup .\n" +
 				"FILTER regex(?title, \"fabulous\", \"i\")" +
 				"}\n";
+		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
 		List<String[]> result = new ArrayList<String[]>();
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {

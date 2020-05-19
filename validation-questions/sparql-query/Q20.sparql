@@ -1,0 +1,43 @@
+PREFIX roh: <http://purl.org/roh#>
+PREFIX vivo: <http://purl.org/roh/mirror/vivo#>
+PREFIX foaf: <http://purl.org/roh/mirror/foaf#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bfo: <http://purl.org/roh/mirror/obo/bfo#>
+PREFIX bibo:  <http://purl.org/roh/mirror/bibo#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?organization ?knowledgeArea (count(DISTINCT ?item) as ?count) 
+WHERE {
+SELECT ?date ?item ?organization ?knowledgeArea 
+WHERE{
+{
+?item a vivo:Project ;
+vivo:dateTimeInterval ?dateTimeInterval ;
+roh:hasKnowledgeArea ?knowledgeArea ;
+vivo:relates ?role .
+?dateTimeInterval vivo:end ?endDateTimeValue ;
+vivo:start ?startDateTimeValue .
+?endDateTimeValue vivo:dateTime ?end .
+?startDateTimeValue vivo:dateTime ?start .
+?role a ?roleClass ;
+roh:roleOf ?organization .
+?roleClass rdfs:subClassOf* bfo:BFO_0000023 .
+?organization a ?organizationClass .
+?organizationClass rdfs:subClassOf* foaf:Organization .
+FILTER (YEAR(?start) <= "2019"^^xsd:integer && YEAR(?end) >= "2019"^^xsd:integer )
+}
+UNION {
+?item a ?publicationClass ;
+vivo:dateIssued ?dateTimeValue ;
+roh:hasKnowledgeArea ?knowledgeArea ;
+bibo:authorList ?authorList .
+?publicationClass rdfs:subClassOf* bibo:Document .
+?authorList ?order ?author .
+?author roh:hasPosition ?position .
+?position vivo:relates ?organization .
+?organization a ?organizationClass .
+?organizationClass rdfs:subClassOf* foaf:Organization .
+?dateTimeValue vivo:dateTime ?date .
+FILTER (YEAR(?date) <= "2019"^^xsd:integer || YEAR(?date) >= "2020"^^xsd:integer )
+}
+}
+} GROUP BY ?organization ?knowledgeArea ORDER BY ?count
