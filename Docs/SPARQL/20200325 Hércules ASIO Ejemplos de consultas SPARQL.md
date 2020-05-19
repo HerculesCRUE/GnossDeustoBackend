@@ -1,4 +1,4 @@
-![](.//media/CabeceraDocumentosMD.png)
+![](..//media/CabeceraDocumentosMD.png)
 
 # Hércules Backend ASIO. Ejemplos de consultas sparql
 
