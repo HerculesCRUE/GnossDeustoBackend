@@ -18,6 +18,8 @@ El documento no es exhaustivo, sino que contiene ejemplos de consultas de
 recuperación de la información, e irá evolucionando según el sistema vaya incorporando
 más datos.
 
+La URL del SPARQL endpoint es http://155.54.239.204:8890/sparql
+
 GRAFO DE DATOS DE CVN
 =====================
 
