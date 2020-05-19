@@ -58,22 +58,22 @@ Indicamos a continuación el contenido del primer compose, que va a contener var
 	  
 Del mismo modo, el segundo compose sería:
 
-version: '3'
-
-services:
-  apicvn:
-    image: apicvn
-    ports:
-      - 5104:5104
-	  
-  apioaipmh:
-    image: oaipmh
-    ports:
-      - 5102:5102
-	environment:
-      XML_CVN_Repository: "http://curriculumpruebas.um.es/curriculum/rest/v1/auth/"
-      CVN_ROH_converter: "http://herc-as-front-desa.atica.um.es/cvn/v1/convert"
-      ConfigUrl: "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH"
+	version: '3'
+	
+	services:
+	  apicvn:
+	    image: apicvn
+	    ports:
+	      - 5104:5104
+		  
+	  apioaipmh:
+	    image: oaipmh
+	    ports:
+	      - 5102:5102
+		environment:
+	      XML_CVN_Repository: "http://curriculumpruebas.um.es/curriculum/rest/v1/auth/"
+	      CVN_ROH_converter: "http://herc-as-front-desa.atica.um.es/cvn/v1/convert"
+	      ConfigUrl: "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH"
 
 Los despliegues se realizan ejecuntando el siguiente comando, en la misma ubicacion donde se encuentre el docker-compose.yml:
 
