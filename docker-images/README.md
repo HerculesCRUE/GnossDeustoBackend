@@ -1,5 +1,6 @@
 ## Sobre docker-images
-Listado de imagenes docker de todas las aplicaciones incluidas en GnossDeustoBackend
+
+Este es el listado de imágenes docker de las aplicaciones incluidas en GnossDeustoBackend:
 
  - [API_CARGA](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA "API_CARGA") - Servicio web que realiza las tareas de carga/configuración: http://herc-as-front-desa.atica.um.es/docs/apicarga.tar.gz
  - [FrontEndCarga](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/FrontEndCarga "FrontEndCarga") - Interfaz web para la parte de Repository y Validation del API_CARGA: http://herc-as-front-desa.atica.um.es/docs/apifrontcarga.tar.gz
@@ -11,13 +12,13 @@ Listado de imagenes docker de todas las aplicaciones incluidas en GnossDeustoBac
 Despliegue DOCKER / DOCKER-COMPOSE
 ----------------------------------
 
-Una vez que tengamos las imágenes tenemos descargadas en el nodo de Docker, tenemos que importarlas como imágenes docker con este comando: 
+Una vez que tengamos las imágenes descargadas, tenemos que importarlas como imágenes docker con este comando: 
 
 docker load < imagen.tar
 
-Cuando las tengamos importadas las desplegaremos con docker-compose creando un archivo docker-compose.yml. Lo único que debemos tener en cuenta es que los docker-compose.yml deben estar en ubicaciones separadas ya que se llaman igual (docker-compose.yml) y deber respetar el formato yaml, ya que si hay tabulaciones no funcionará aunque lanza errores bastante claros cuando ocurre esto. 
+Cuando las tengamos importadas las desplegaremos con docker-compose, creando un archivo docker-compose.yml. Hay que tener en cuenta que los docker-compose.yml deben estar en ubicaciones separadas ya que tienen el mismo nombre (docker-compose.yml) y, además, respetar el formato yaml, ya que si hay tabulaciones no funcionará, aunque lanza errores bastante claros cuando ocurre esto. 
 
-El primero de ellos va a contener lo siguiente, adaptando las variables de entorno (enviroment:) a nuestras necesidades. El segundo bloque de los ports es el puerto que utiliza inernamente la api en docker y el primero en el que se levanta externamente y con este podemos jugar segun nuestras necesidades.
+Indicamos a continuación el contenido del primer compose, que va a contener varios servicios. En cada uno hemos adaptado las variables de entorno (enviroment:) a nuestras necesidades y definido en un segundo bloque los puertos (ports). El segundo indica el que utiliza internamente cada api en docker y el primero es el que se levanta externamente, que podemos adaptar segun nuestras necesidades.
 
 version: '3'
 
@@ -55,7 +56,7 @@ services:
     ports:
       - 5000:5000
 	  
-El segundo compose sería el siguiente, también adaptando las variables a nuestras necesidades:
+Del mismo modo, el segundo compose sería:
 
 version: '3'
 
@@ -74,7 +75,7 @@ services:
       CVN_ROH_converter: "http://herc-as-front-desa.atica.um.es/cvn/v1/convert"
       ConfigUrl: "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH"
 
-Los despliegues se realizan con el siguiente comando en la misma ubicacion donde se encuentre el docker-compose.yml:
+Los despliegues se realizan ejecuntando el siguiente comando, en la misma ubicacion donde se encuentre el docker-compose.yml:
 
 docker-compose up -d
 
