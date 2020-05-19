@@ -16,10 +16,10 @@ namespace CronConfigure.Controllers
     public class RecurringJobController : ControllerBase
     {
 
-        public CronApiService _cronApiService;
-        private ProgramingMethodsService _programingMethodsService;
+        public ICronApiService _cronApiService;
+        private IProgramingMethodService _programingMethodsService;
 
-        public RecurringJobController(CronApiService cronApiService, ProgramingMethodsService programingMethodsService)
+        public RecurringJobController(ICronApiService cronApiService, IProgramingMethodService programingMethodsService)
         {
             _cronApiService = cronApiService;
             _programingMethodsService = programingMethodsService;

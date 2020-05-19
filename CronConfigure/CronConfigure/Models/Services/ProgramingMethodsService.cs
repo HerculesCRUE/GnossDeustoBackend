@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.Models.Services
 {
-    public class ProgramingMethodsService
+    public class ProgramingMethodsService : IProgramingMethodService
     {
         private CallApiService _serviceApi;
         private HangfireEntityContext _context;
