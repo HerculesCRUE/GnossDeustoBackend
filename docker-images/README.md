@@ -20,41 +20,41 @@ Cuando las tengamos importadas las desplegaremos con docker-compose, creando un 
 
 Indicamos a continuación el contenido del primer compose, que va a contener varios servicios. En cada uno hemos adaptado las variables de entorno (enviroment:) a nuestras necesidades y definido en un segundo bloque los puertos (ports). El segundo indica el que utiliza internamente cada api en docker y el primero es el que se levanta externamente, que podemos adaptar segun nuestras necesidades.
 
-version: '3'
-
-services:
-  apicarga:
-    image: apicarga
-    ports:
-      - 5100:5100
-	environment:
-	  PostgreConnection: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
-      PostgreConnectionmigration: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
-	  ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
-	  Graph: "http://graph.um.es/graph/um_cvn"
-      Endpoint: "http://155.54.239.204:8890/sparql"
-      QueryParam: "query"
+	version: '3'
+	
+	services:
+	  apicarga:
+	    image: apicarga
+	    ports:
+	      - 5100:5100
+		environment:
+		  PostgreConnection: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
+	      PostgreConnectionmigration: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
+		  ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
+		  Graph: "http://graph.um.es/graph/um_cvn"
+	      Endpoint: "http://155.54.239.204:8890/sparql"
+	      QueryParam: "query"
+		  
+	  apifrontcarga:
+	    image: apifrontcarga
+	    ports:
+	      - 5103:5103
+		environment:
+	      ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
+		  ConfigUrlCron: "http://herc-as-front-desa.atica.um.es/cron-config/"
+		  
+	  apicron:
+	    image: apicron
+	    ports:
+	      - 5107:5107
+	    environment:
+		  HangfireConnection: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
+		  ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
 	  
-  apifrontcarga:
-    image: apifrontcarga
-    ports:
-      - 5103:5103
-	environment:
-      ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
-	  ConfigUrlCron: "http://herc-as-front-desa.atica.um.es/cron-config/"
-	  
-  apicron:
-    image: apicron
-    ports:
-      - 5107:5107
-    environment:
-	  HangfireConnection: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
-	  ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
-	  
-  uris:
-    image: uris
-    ports:
-      - 5000:5000
+	  uris:
+	    image: uris
+	    ports:
+	      - 5000:5000
 	  
 Del mismo modo, el segundo compose sería:
 
