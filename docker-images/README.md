@@ -2,7 +2,7 @@
 
 ## Requisitos previos
 Para hacer funcionar el backend será necesario tener instalado en nuestro servidor:
-* Apache
+* Apache configurado como proxy inverso
 
 * Docker (podemos seguir la documentacion oficial dependiendo de nuestra dristrubución de Linux) 
     - Centos https://docs.docker.com/engine/install/centos/
@@ -77,6 +77,8 @@ Así obtenemos una base de datos lista para que las APIs del backend puedan usar
 
 Necesitamos preparar Apache como proxy invesro y poder acceder a las APIs a través del dominio que vayamos a utilizar y luego este redirija al puerto específico de cada una de ellas.
 
+Para que funcione correctamente debemos ajustar el ServerName con el dominio que vayamos a utilizar (en este emplo mihercules.com) y añadir los parametros del proxy inverso para que Apache redirija las peticiones al API adecuda. Estos parametros los podemos ver en el final de este archivo de ejemplo http://herc-as-front-desa.atica.um.es/docs/httpd.conf.
+
 
 Despliegue DOCKER / DOCKER-COMPOSE
 ----------------------------------
@@ -125,11 +127,6 @@ Indicamos a continuación el contenido del primer compose, que va a contener var
 	    ports:
 	      - 5000:5000
 	  
-Del mismo modo, el segundo compose sería:
-
-	version: '3'
-	
-	services:
 	  apicvn:
 	    image: apicvn
 	    ports:
