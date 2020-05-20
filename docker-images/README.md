@@ -58,6 +58,7 @@ Para desdeplegar Virtuoso con docker-compose necesitamos un docker-compose.yml c
 		restart: unless-stopped
 
 Para levantar Virtuoso ejecutaremos este comando en la misma ruta donde tengamos el docker-compose.yml:
+	
 	docker-compose up -d
 	
 Una vez creado el Con esto ya tendríamos un Virtuoso operativo en nuestro entorno. Podemos probar que efectivamente está funcionando correctamente accediiendo a http://localhost:8890, nos debería paracer la con
