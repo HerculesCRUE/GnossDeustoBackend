@@ -14,7 +14,7 @@ Despliegue DOCKER / DOCKER-COMPOSE
 
 Una vez que tengamos las imágenes descargadas, tenemos que importarlas como imágenes docker con este comando: 
 
-docker load < imagen.tar.gz
+	docker load < imagen.tar.gz
 
 Cuando las tengamos importadas las desplegaremos con docker-compose, creando un archivo docker-compose.yml. Hay que tener en cuenta que los docker-compose.yml deben estar en ubicaciones separadas ya que tienen el mismo nombre (docker-compose.yml) y, además, respetar el formato yaml, ya que si hay tabulaciones no funcionará, aunque lanza errores bastante claros cuando ocurre esto. 
 
