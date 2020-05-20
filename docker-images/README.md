@@ -82,16 +82,14 @@ Necesitamos preparar Apache como proxy invesro y poder acceder a las APIs a trav
 Para que funcione correctamente debemos ajustar el ServerName con el dominio que vayamos a utilizar (en este emplo mihercules.com) y añadir los parametros del proxy inverso para que Apache redirija las peticiones al API adecuda. Estos parametros los podemos ver en el final de este archivo de ejemplo http://herc-as-front-desa.atica.um.es/docs/httpd.conf.
 
 
-Despliegue DOCKER / DOCKER-COMPOSE
+Despliegue de las APIs
 ----------------------------------
 
 Una vez que tengamos las imágenes descargadas, tenemos que importarlas como imágenes docker con este comando: 
 
 	docker load < {nombre-imagen}.tar.gz
  
-Cuando las tengamos importadas las desplegaremos con docker-compose, creando un archivo docker-compose.yml. Hay que tener en cuenta que los docker-compose.yml deben estar en ubicaciones separadas ya que tienen el mismo nombre (docker-compose.yml) y, además, respetar el formato yaml, ya que si hay tabulaciones no funcionará, aunque lanza errores bastante claros cuando ocurre esto. 
-
-Indicamos a continuación el contenido del primer compose, que va a contener varios servicios. En cada uno hemos adaptado las variables de entorno (enviroment:) a nuestras necesidades y definido en un segundo bloque los puertos (ports). El segundo indica el que utiliza internamente cada api en docker y el primero es el que se levanta externamente, que podemos adaptar segun nuestras necesidades.
+Cuando las tengamos importadas las desplegaremos con docker-compose, creando un archivo docker-compose.yml. En este ejemplo podemos ver los ajustes de las variables dependiendo de nuestro entorno:
 
 	version: '3'
 	
@@ -101,11 +99,11 @@ Indicamos a continuación el contenido del primer compose, que va a contener var
 	    ports:
 	      - 5100:5100
 		environment:
-		  PostgreConnection: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
-	      PostgreConnectionmigration: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
-		  ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
+		  PostgreConnection: "Username=docker;Password=docker;Host=127.0.0.1;Port=5432;Pooling=true"
+	      PostgreConnectionmigration: "Username=docker;Password=docker;Host=127.0.0.1;Port=5432;Pooling=true"
+		  ConfigUrl: "http://mihercules.com/carga/"
 		  Graph: "http://graph.um.es/graph/um_cvn"
-	      Endpoint: "http://155.54.239.204:8890/sparql"
+	      Endpoint: "http://localhost:8890/sparql"
 	      QueryParam: "query"
 		  
 	  apifrontcarga:
@@ -113,16 +111,16 @@ Indicamos a continuación el contenido del primer compose, que va a contener var
 	    ports:
 	      - 5103:5103
 		environment:
-	      ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
-		  ConfigUrlCron: "http://herc-as-front-desa.atica.um.es/cron-config/"
+	      ConfigUrl: "http://mihercules.com/carga/"
+		  ConfigUrlCron: "http://mihercules.comcron-config/"
 		  
 	  apicron:
 	    image: apicron
 	    ports:
 	      - 5107:5107
 	    environment:
-		  HangfireConnection: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
-		  ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
+		  HangfireConnection: "Username=docker;Password=docker;Host=127.0.0.1;Port=5432;Pooling=true"
+		  ConfigUrl: "http://mihercules.com/carga/"
 	  
 	  apiuris:
 	    image: apiuris
@@ -140,10 +138,10 @@ Indicamos a continuación el contenido del primer compose, que va a contener var
 	      - 5102:5102
 		environment:
 	      XML_CVN_Repository: "http://curriculumpruebas.um.es/curriculum/rest/v1/auth/"
-	      CVN_ROH_converter: "http://herc-as-front-desa.atica.um.es/cvn/v1/convert"
-	      ConfigUrl: "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH"
+	      CVN_ROH_converter: "http://mihercules.com/cvn/v1/convert"
+	      ConfigUrl: "http://mihercules.com/oai-pmh-cvn/OAI_PMH"
 
-Los despliegues se realizan ejecuntando el siguiente comando, en la misma ubicacion donde se encuentre el docker-compose.yml:
+Para lanzar las APIs usamos este comando como en el caso de Virtuoso:
 
-docker-compose up -d
+	docker-compose up -d
 
