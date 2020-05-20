@@ -10,6 +10,6 @@ namespace UrisFactory.ViewModels
     {
         public UriStructure UriStructure{get;set;}
          
-        public ResourcesClass ResourcesClass { get; set; }
+        public List<ResourcesClass> ResourcesClass { get; set; }
     }
 }

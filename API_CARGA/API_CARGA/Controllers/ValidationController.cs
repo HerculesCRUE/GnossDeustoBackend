@@ -39,7 +39,7 @@ namespace API_CARGA.Controllers
         /// <summary>
         /// Obtiene la configuración del shape SHACL pasado por parámetro
         /// </summary>
-        /// <param name="identifier">Identificador de la validación</param>
+        /// <param name="identifier">Identificador de la validación a obtener, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository, ejemplo: 5efac0ad-ec4e-467d-bbf5-ce3f64edb46a</param>
         /// <returns>Definición de la validación</returns>       
         [HttpGet("{identifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -54,8 +54,8 @@ namespace API_CARGA.Controllers
         /// <summary>
         /// Añade una configuración de validación mediante un shape SHACL
         /// </summary>
-        /// <param name="name">Nombre del Shape</param>
-        /// <param name="repositoryID">ID del repositorio de la validación, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository</param>
+        /// <param name="name">Nombre del Shape, elegido por el usuario que lo crea, ejemplo: bibo_Article</param>
+        /// <param name="repositoryID">ID del repositorio de la validación, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository, ejemplo: 5efac0ad-ec4e-467d-bbf5-ce3f64edb46a</param>
         /// <param name="rdfFile">Fichero con el Shape</param>
         /// <returns></returns>
         [HttpPost]
@@ -102,7 +102,7 @@ namespace API_CARGA.Controllers
         /// <summary>
         /// Elimina la configuración una configuración de validación 
         /// </summary>
-        /// <param name="identifier">Identificador de la validación</param>
+        /// <param name="identifier">Identificador de la validación a eliminar, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository, ejemplo: 5efac0ad-ec4e-467d-bbf5-ce3f64edb46a</param>
         /// <returns></returns>
         [HttpDelete("{identifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -123,9 +123,9 @@ namespace API_CARGA.Controllers
         /// <summary>
         /// Modifica la configuración de validación mediante un shape SHACL
         /// </summary>
-        /// <param name="shapeConfigID">Identificador del Shape</param>
-        /// <param name="name">Nombre del Shape</param>
-        /// <param name="repositoryID">ID del repositorio de la validación, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository</param>
+        /// <param name="shapeConfigID">Identificador del Shape a modificar, este párametro se puede obtener de: http://herc-as-front-desa.atica.um.es/carga/etl-config/Validation, ejemplo: bb1c3916-63a3-4b8d-89cf-3a51341482da</param>
+        /// <param name="name">Nombre a modificar para el shape, puede ser el mismo que tenía anteriormente, ejemplo: bibo_Article</param>
+        /// <param name="repositoryID">ID del repositorio de la validacióna modificar, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository, ejemplo: 5efac0ad-ec4e-467d-bbf5-ce3f64edb46a</param>
         /// <param name="rdfFile">Fichero con el Shape</param>
         /// <returns></returns>
         [HttpPut]

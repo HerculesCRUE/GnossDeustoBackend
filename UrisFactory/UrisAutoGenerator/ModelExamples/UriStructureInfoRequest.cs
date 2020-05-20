@@ -12,14 +12,18 @@ namespace UrisFactory.ModelExamples
     {
         public InfoUriStructure GetExamples()
         {
+            ResourcesClass item = new ResourcesClass()
+            {
+                ResourceClass = "Example",
+                LabelResourceClass = "example",
+                ResourceURI = "uriExampleStructure"
+            };
+            List<ResourcesClass> list = new List<ResourcesClass>();
+            list.Add(item);
             return new InfoUriStructure
             {
-                ResourcesClass = new ResourcesClass
-                {
-                    ResourceClass = "Example",
-                    LabelResourceClass = "example",
-                    ResourceURI = "uriExampleStructure"
-                },
+                
+                ResourcesClass = list,
                 UriStructure = new UriStructure
                 {
                     Name = "uriExampleStructure",

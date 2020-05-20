@@ -30,8 +30,8 @@ namespace CronConfigure.Controllers
         /// <param name="id_repository">identificador del repositorio, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository</param>
         /// <param name="fecha_inicio">fecha a partir de la cual se ejecutará,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
         /// <param name="fecha">fecha a partir de la cual se debe actualizar,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
-        /// <param name="set">tipo del objeto</param>
-        /// <param name="codigo_objeto">codigo del objeto</param>
+        /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones, este parametro se puede obtener de http://herc-as-front-desa.atica.um.es/carga/etl/ListSets/{identificador_del_repositorio}</param>
+        /// <param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro, este parametro se puede obtener en la respuesta identifier que da el método http://herc-as-front-desa.atica.um.es/carga/etl/ListIdentifiers/{identificador_del_repositorio}?metadataPrefix=rdf</param>
         /// <returns>identifdicador de la tarea</returns> 
         [HttpPost]
         public IActionResult AddExecution(string id_repository, string fecha_inicio = null, string fecha = null, string set = null, string codigo_objeto = null)
@@ -82,7 +82,7 @@ namespace CronConfigure.Controllers
         /// <summary>
         /// Vuelve a ejecutar una tarea ya ejecutada o programada
         /// </summary>
-        /// <param name="id">identificador de la tarea</param>
+        /// <param name="id">identificador de la tarea, el identificador se puede obterner del método: que lista los jobs http://herc-as-front-desa.atica.um.es/cron-config/Job?type=0&amp;from=0&amp;count=100</param>
         /// <returns></returns> 
         [HttpPost("{id}")]
         public IActionResult AddExecution(string id)
@@ -102,11 +102,11 @@ namespace CronConfigure.Controllers
         /// devuelve una lista de tareas paginadas
         /// </summary>
         /// <param name="type">tipo de las tareas devueltas: 0: para todos los tipos, 1: para las que han fallado, 2: para las correctas </param>
-        /// <param name="from">número desde el que tiene que empezar a traer</param>
-        /// <param name="count">número de tareas a traer</param>
+        /// <param name="from">número desde el cual se va a traer las tareas del listado, por defecto 0 para empezar a traer desde el primer elemento de la lista de tareas</param>
+        /// <param name="count">número máximo de tareas a traer</param>
         /// <returns>listado de tareas</returns> 
         [HttpGet]
-        public IActionResult GetJobs(JobType type, int from, int count)
+        public IActionResult GetJobs(JobType type, int count, int from = 0)
         {
             return Ok(_cronApiService.GetJobs(type, from, count));
 
