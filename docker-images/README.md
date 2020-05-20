@@ -66,9 +66,11 @@ Despues de ejecutar el comando ya tendríamos un servidor Virtuoso operativo en 
 ## PostgreSQL
 
 Para PostgreSQL necesitamos importar la imagen que obtenemos en el enlace http://herc-as-front-desa.atica.um.es/docs/herculessql.tar.gz. Una vez descargada la importamos en el nodo de docker con el siguiente comando:
+	
 	docker load < herculessql.tar.gz
 	
 Una vez importada la ejecutamos con este comando:
+	
 	docker run -p 5432:5432 --name herculessql herculessql
 	
 Así obtenemos una base de datos lista para que las APIs del backend puedan usarla.
