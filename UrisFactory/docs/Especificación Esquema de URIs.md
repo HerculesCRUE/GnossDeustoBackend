@@ -214,7 +214,7 @@ diccionarios, tesauros, etc.-- sobre un dominio concreto será
 identificado mediante un esquema de URI basado en la estructura:
 http://{base}/kos/\[{sector}\]/{dominio}/{ID}
 
-Por ejemplo: http://graph.um.es/kos/research-area/{id-categoría}
+Por ejemplo (sin "sector"): http://graph.um.es/kos/research-area/{id-categoría}
 
 URI para identificar named graphs
 ---------------------------------
