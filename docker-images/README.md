@@ -19,6 +19,7 @@ Para hacer funcionar el backend será necesario tener instalado en nuestro servi
 
 Este es el listado de imágenes docker de las aplicaciones incluidas en GnossDeustoBackend:
 
+ - PostgreSQL - Imagen de PostgreSQL preparada para funcionar con el backend: http://herc-as-front-desa.atica.um.es/docs/herculessql.tar.gz
  - [API_CARGA](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA "API_CARGA") - Servicio web que realiza las tareas de carga/configuración: http://herc-as-front-desa.atica.um.es/docs/apicarga.tar.gz
  - [FrontEndCarga](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/FrontEndCarga "FrontEndCarga") - Interfaz web para la parte de Repository y Validation del API_CARGA: http://herc-as-front-desa.atica.um.es/docs/apifrontcarga.tar.gz
  - [OAI_PMH_CVN](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/OAI_PMH_CVN "OAI_PMH_CVN") - Servicio OAI-PMH para la obtención de invstigadores de la Universidad de Murcia: http://herc-as-front-desa.atica.um.es/docs/apioaipmh.tar.gz
@@ -55,6 +56,18 @@ Para desdeplegar Virtuoso con docker-compose necesitamos un docker-compose.yml c
 		    - /var/container-data/virtuoso/db:/database   
 		user: ${CURRENT_UID}
 		restart: unless-stopped
+
+Con esto ya tendríamos un Virtuoso operativo en nuestro entorno.
+
+## PostgreSQL
+
+Para PostgreSQL necesitamos importar la imagen que obtenemos en el enlace http://herc-as-front-desa.atica.um.es/docs/herculessql.tar.gz. Una vez descargada la importamos en el nodo de docker con el siguiente comando:
+	docker load < herculessql.tar.gz
+	
+Una vez importada la ejecutamos con este comando:
+	docker run -p 5432:5432 --name herculessql herculessql
+	
+Así obtenemos una base de datos lista para que las APIs del backend puedan usarla.
 
 Despliegue DOCKER / DOCKER-COMPOSE
 ----------------------------------
