@@ -91,7 +91,8 @@ un investigador. Además, URIs que podríamos calificar como "opacos",
 como las de ORCiD (p.e. <https://orcid.org/0000-0001-8055-6823>), 
 en realidad lo son porque se lo pueden permitir sin que los humanos 
 tengan problemas de interpretación: en ese dominio sólo hay 
-investigadores. La legibilidad por humanos es la mayor ventaja de los URI "visibles", además de ser la recomendación de la NTI de Reutilización, 
+investigadores. La legibilidad por humanos es la mayor ventaja de los URI "visibles", 
+además de ser la recomendación de la NTI de Reutilización, 
 referencia del proyecto Hércules.
 
 Además, hay que indicar que para un sistema informático todos los URI
@@ -161,16 +162,16 @@ El elemento "sector" sólo se debería usar si "dominio" no fuera
 suficiente para proporcionar significado a la URI.
 
 Es un componente opcional de posible aplicación en URIs de organización
-de conocimiento, por lo que sólo se usará en [URIs para identificar vocabularios](#uri-para-identificar-vocabularios) o en [URIs para identificar esquemas de conceptos]((#uri-para-identificar-esquemas-de-conceptos)).
+de conocimiento, por lo que sólo se usará en [URIs para identificar vocabularios](#uri-para-identificar-vocabularios) o en [URIs para identificar esquemas de conceptos](#uri-para-identificar-esquemas-de-conceptos).
 
-dominio o temática
+Dominio o temática
 ------------------
 
 Es un componente opcional de posible aplicación en URIs de organización
 de conocimiento o en entidades que puedan tener subclases. Por ejemplo,
 podría servir para distinguir el tema de una publicación.
 
-conceptos específicos
+Conceptos específicos
 ---------------------
 
 Es un componente opcional del URI, pero funcionalmente obligatorio si se
@@ -213,7 +214,7 @@ diccionarios, tesauros, etc.-- sobre un dominio concreto será
 identificado mediante un esquema de URI basado en la estructura:
 http://{base}/kos/\[{sector}\]/{dominio}/{ID}
 
-Por ejemplo: http://graph.um.es/kos/research-area/{id-categoría}
+Por ejemplo (sin "sector"): http://graph.um.es/kos/research-area/{id-categoría}
 
 URI para identificar named graphs
 ---------------------------------
