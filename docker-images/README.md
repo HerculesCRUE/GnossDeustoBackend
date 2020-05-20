@@ -61,7 +61,7 @@ Para levantar Virtuoso ejecutaremos este comando en la misma ruta donde tengamos
 	
 	docker-compose up -d
 	
-Una vez creado el Con esto ya tendríamos un Virtuoso operativo en nuestro entorno. Podemos probar que efectivamente está funcionando correctamente accediiendo a http://localhost:8890, nos debería paracer la con
+Despues de ejecutar el comando ya tendríamos un servidor Virtuoso operativo en nuestro entorno. Podemos probar que efectivamente está funcionando correctamente accediiendo a http://localhost:8890, nos debería paracer la consola de administración de Virtuoso.
 
 ## PostgreSQL
 
@@ -72,6 +72,11 @@ Una vez importada la ejecutamos con este comando:
 	docker run -p 5432:5432 --name herculessql herculessql
 	
 Así obtenemos una base de datos lista para que las APIs del backend puedan usarla.
+
+## Preparación de Apache
+
+Necesitamos preparar Apache como proxy invesro y poder acceder a las APIs a través del dominio que vayamos a utilizar y luego este redirija al puerto específico de cada una de ellas.
+
 
 Despliegue DOCKER / DOCKER-COMPOSE
 ----------------------------------
