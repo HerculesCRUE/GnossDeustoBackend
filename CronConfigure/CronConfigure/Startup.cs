@@ -85,9 +85,9 @@ namespace CronConfigure
 
             });
 
-            services.AddScoped(typeof(CronApiService));
+            services.AddScoped<ICronApiService, CronApiService>();
+            services.AddScoped<IProgramingMethodService, ProgramingMethodsService>();
             services.AddScoped(typeof(CallApiService));
-            services.AddScoped(typeof(ProgramingMethodsService));
             services.AddSingleton(typeof(ConfigUrlService)); 
         }
 

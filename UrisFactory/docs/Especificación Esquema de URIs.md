@@ -39,8 +39,8 @@
 INTRODUCCIÓN
 ============
 
-El presente documento describe la Especificación del Esquema de URIs de
-Hércules.
+El presente documento describe la Especificación del Esquema de URIs para el
+proyecto Hércules ASIO.
 
 En su elaboración tenemos en cuenta las recomendaciones de la [Norma
 Técnica de Interoperabilidad de Reutilización de recursos de la

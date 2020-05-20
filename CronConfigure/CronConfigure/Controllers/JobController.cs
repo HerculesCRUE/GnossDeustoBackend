@@ -16,9 +16,9 @@ namespace CronConfigure.Controllers
     [ApiController]
     public class JobController : ControllerBase
     {
-        private CronApiService _cronApiService;
-        private ProgramingMethodsService _programingMethodsService;
-        public JobController(CronApiService cronApiService, ProgramingMethodsService programingMethodsService)
+        private ICronApiService _cronApiService;
+        private IProgramingMethodService _programingMethodsService;
+        public JobController(ICronApiService cronApiService, IProgramingMethodService programingMethodsService)
         {
             _cronApiService = cronApiService;
             _programingMethodsService = programingMethodsService;
@@ -28,7 +28,7 @@ namespace CronConfigure.Controllers
         /// Programa una sincronización de repositorios para una fecha concreta
         /// </summary>
         /// <param name="id_repository">identificador del repositorio, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository</param>
-        /// <param name="fecha_inicio">fecha a partir de la cual se ejecutará,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 2020-05-14T10:55:54.548Z</param>
+        /// <param name="fecha_inicio">fecha a partir de la cual se ejecutará,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
         /// <param name="fecha">fecha a partir de la cual se debe actualizar,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
         /// <param name="set">tipo del objeto</param>
         /// <param name="codigo_objeto">codigo del objeto</param>

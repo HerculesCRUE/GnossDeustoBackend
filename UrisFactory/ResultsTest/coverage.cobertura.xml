@@ -1,0 +1,1634 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<coverage line-rate="0.3358" branch-rate="0.4675" version="1.9" timestamp="1589872654" lines-covered="269" lines-valid="801" branches-covered="72" branches-valid="154">
+  <sources>
+    <source></source>
+  </sources>
+  <packages>
+    <package name="UrisFactory" line-rate="0.3358" branch-rate="0.4675" complexity="229">
+      <classes>
+        <class name="UrisFactory.ViewModels.InfoUriStructure" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\ViewModels\InfoUriStructure.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="get_UriStructure" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="11" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_ResourcesClass" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="13" hits="7" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="11" hits="8" branch="False" />
+            <line number="13" hits="7" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Models.Services.ConfigJsonHandler" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Models\Services\ConfigJsonHandler.cs" line-rate="0.7064" branch-rate="0.7726999999999999" complexity="50">
+          <methods>
+            <method name="InitializerConfigJson" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="23" hits="25" branch="False" />
+                <line number="24" hits="25" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="12" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="25" hits="25" branch="False" />
+                <line number="26" hits="25" branch="False" />
+                <line number="27" hits="25" branch="False" />
+                <line number="28" hits="25" branch="False" />
+              </lines>
+            </method>
+            <method name="InitializerConfigJson" signature="(System.String)" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="31" hits="0" branch="False" />
+                <line number="32" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="12" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="33" hits="0" branch="False" />
+                <line number="34" hits="0" branch="False" />
+                <line number="35" hits="0" branch="False" />
+                <line number="36" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="GetUrisConfig" signature="()" line-rate="0.5714" branch-rate="0.5">
+              <lines>
+                <line number="39" hits="16" branch="False" />
+                <line number="40" hits="16" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="12" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="41" hits="0" branch="False" />
+                <line number="42" hits="0" branch="False" />
+                <line number="43" hits="0" branch="False" />
+                <line number="44" hits="16" branch="False" />
+                <line number="45" hits="16" branch="False" />
+              </lines>
+            </method>
+            <method name="LoadConfigJson" signature="()" line-rate="0.5454" branch-rate="0.5">
+              <lines>
+                <line number="48" hits="27" branch="False" />
+                <line number="50" hits="27" branch="False" />
+                <line number="51" hits="27" branch="False" />
+                <line number="52" hits="27" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="24" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="53" hits="0" branch="False" />
+                <line number="54" hits="0" branch="False" />
+                <line number="56" hits="27" branch="False" />
+                <line number="57" hits="0" branch="False" />
+                <line number="58" hits="0" branch="False" />
+                <line number="59" hits="0" branch="False" />
+                <line number="61" hits="27" branch="False" />
+              </lines>
+            </method>
+            <method name="LoadConfigJson" signature="(System.String)" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="64" hits="0" branch="False" />
+                <line number="66" hits="0" branch="False" />
+                <line number="67" hits="0" branch="False" />
+                <line number="68" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="25" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="69" hits="0" branch="False" />
+                <line number="70" hits="0" branch="False" />
+                <line number="72" hits="0" branch="False" />
+                <line number="73" hits="0" branch="False" />
+                <line number="74" hits="0" branch="False" />
+                <line number="75" hits="0" branch="False" />
+                <line number="77" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="IsCorrectFormedUriStructure" signature="()" line-rate="0.7272" branch-rate="0.5">
+              <lines>
+                <line number="80" hits="27" branch="False" />
+                <line number="81" hits="27" branch="False" />
+                <line number="82" hits="27" branch="True" condition-coverage="50% (4/8)">
+                  <conditions>
+                    <condition number="9" type="jump" coverage="50%" />
+                    <condition number="22" type="jump" coverage="50%" />
+                    <condition number="41" type="jump" coverage="50%" />
+                    <condition number="67" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="83" hits="27" branch="False" />
+                <line number="84" hits="27" branch="False" />
+                <line number="85" hits="27" branch="False" />
+                <line number="87" hits="0" branch="False" />
+                <line number="88" hits="0" branch="False" />
+                <line number="89" hits="0" branch="False" />
+                <line number="90" hits="27" branch="False" />
+                <line number="91" hits="27" branch="False" />
+              </lines>
+            </method>
+            <method name="IsCorrectFormedUriStructure" signature="(UrisFactory.Models.ConfigEntities.UriStructureGeneral)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="94" hits="6" branch="False" />
+                <line number="95" hits="6" branch="False" />
+                <line number="96" hits="6" branch="True" condition-coverage="100% (8/8)">
+                  <conditions>
+                    <condition number="4" type="jump" coverage="100%" />
+                    <condition number="12" type="jump" coverage="100%" />
+                    <condition number="26" type="jump" coverage="100%" />
+                    <condition number="47" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="97" hits="5" branch="False" />
+                <line number="98" hits="5" branch="False" />
+                <line number="99" hits="5" branch="False" />
+                <line number="101" hits="1" branch="False" />
+                <line number="102" hits="1" branch="False" />
+                <line number="103" hits="1" branch="False" />
+                <line number="104" hits="6" branch="False" />
+                <line number="105" hits="6" branch="False" />
+              </lines>
+            </method>
+            <method name="DeleteUriStructureInfo" signature="(UrisFactory.Models.ConfigEntities.UriStructure,UrisFactory.Models.ConfigEntities.ResourcesClass)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="109" hits="2" branch="False" />
+                <line number="110" hits="2" branch="False" />
+                <line number="111" hits="2" branch="False" />
+                <line number="112" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="DeleteUriStructureInfo" signature="(System.String)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="116" hits="3" branch="False" />
+                <line number="117" hits="3" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="28" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="118" hits="2" branch="False" />
+                <line number="119" hits="4" branch="False" />
+                <line number="120" hits="4" branch="False" />
+                <line number="121" hits="2" branch="False" />
+                <line number="122" hits="2" branch="False" />
+                <line number="124" hits="1" branch="False" />
+                <line number="125" hits="1" branch="False" />
+                <line number="128" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="ExistUriStructure" signature="(System.String)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="131" hits="11" branch="False" />
+                <line number="132" hits="28" branch="False" />
+                <line number="133" hits="11" branch="False" />
+              </lines>
+            </method>
+            <method name="GetUriStructure" signature="(System.String)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="136" hits="2" branch="False" />
+                <line number="137" hits="5" branch="False" />
+                <line number="138" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="GetResourceClass" signature="(System.String)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="141" hits="1" branch="False" />
+                <line number="142" hits="2" branch="False" />
+                <line number="143" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="AddUriStructureInfo" signature="(UrisFactory.Models.ConfigEntities.UriStructure,UrisFactory.Models.ConfigEntities.ResourcesClass)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="148" hits="8" branch="False" />
+                <line number="150" hits="24" branch="True" condition-coverage="100% (12/12)">
+                  <conditions>
+                    <condition number="42" type="jump" coverage="100%" />
+                    <condition number="60" type="jump" coverage="100%" />
+                    <condition number="84" type="jump" coverage="100%" />
+                    <condition number="103" type="jump" coverage="100%" />
+                    <condition number="116" type="jump" coverage="100%" />
+                    <condition number="140" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="151" hits="3" branch="False" />
+                <line number="152" hits="3" branch="False" />
+                <line number="153" hits="3" branch="False" />
+                <line number="154" hits="3" branch="False" />
+                <line number="155" hits="5" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="209" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="156" hits="1" branch="False" />
+                <line number="157" hits="1" branch="False" />
+                <line number="159" hits="4" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="271" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="160" hits="3" branch="False" />
+                <line number="161" hits="3" branch="False" />
+                <line number="164" hits="1" branch="False" />
+                <line number="165" hits="1" branch="False" />
+                <line number="167" hits="3" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="12" hits="25" branch="False" />
+                <line number="13" hits="25" branch="False" />
+                <line number="14" hits="25" branch="False" />
+                <line number="15" hits="25" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String)" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="17" hits="0" branch="False" />
+                <line number="18" hits="0" branch="False" />
+                <line number="19" hits="0" branch="False" />
+                <line number="20" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="23" hits="25" branch="False" />
+            <line number="24" hits="25" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="12" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="25" hits="25" branch="False" />
+            <line number="26" hits="25" branch="False" />
+            <line number="27" hits="25" branch="False" />
+            <line number="28" hits="25" branch="False" />
+            <line number="31" hits="0" branch="False" />
+            <line number="32" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="12" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="33" hits="0" branch="False" />
+            <line number="34" hits="0" branch="False" />
+            <line number="35" hits="0" branch="False" />
+            <line number="36" hits="0" branch="False" />
+            <line number="39" hits="16" branch="False" />
+            <line number="40" hits="16" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="12" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="41" hits="0" branch="False" />
+            <line number="42" hits="0" branch="False" />
+            <line number="43" hits="0" branch="False" />
+            <line number="44" hits="16" branch="False" />
+            <line number="45" hits="16" branch="False" />
+            <line number="48" hits="27" branch="False" />
+            <line number="50" hits="27" branch="False" />
+            <line number="51" hits="27" branch="False" />
+            <line number="52" hits="27" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="24" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="53" hits="0" branch="False" />
+            <line number="54" hits="0" branch="False" />
+            <line number="56" hits="27" branch="False" />
+            <line number="57" hits="0" branch="False" />
+            <line number="58" hits="0" branch="False" />
+            <line number="59" hits="0" branch="False" />
+            <line number="61" hits="27" branch="False" />
+            <line number="64" hits="0" branch="False" />
+            <line number="66" hits="0" branch="False" />
+            <line number="67" hits="0" branch="False" />
+            <line number="68" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="25" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="69" hits="0" branch="False" />
+            <line number="70" hits="0" branch="False" />
+            <line number="72" hits="0" branch="False" />
+            <line number="73" hits="0" branch="False" />
+            <line number="74" hits="0" branch="False" />
+            <line number="75" hits="0" branch="False" />
+            <line number="77" hits="0" branch="False" />
+            <line number="80" hits="27" branch="False" />
+            <line number="81" hits="27" branch="False" />
+            <line number="82" hits="27" branch="True" condition-coverage="50% (4/8)">
+              <conditions>
+                <condition number="9" type="jump" coverage="50%" />
+                <condition number="22" type="jump" coverage="50%" />
+                <condition number="41" type="jump" coverage="50%" />
+                <condition number="67" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="83" hits="27" branch="False" />
+            <line number="84" hits="27" branch="False" />
+            <line number="85" hits="27" branch="False" />
+            <line number="87" hits="0" branch="False" />
+            <line number="88" hits="0" branch="False" />
+            <line number="89" hits="0" branch="False" />
+            <line number="90" hits="27" branch="False" />
+            <line number="91" hits="27" branch="False" />
+            <line number="94" hits="6" branch="False" />
+            <line number="95" hits="6" branch="False" />
+            <line number="96" hits="6" branch="True" condition-coverage="100% (8/8)">
+              <conditions>
+                <condition number="4" type="jump" coverage="100%" />
+                <condition number="12" type="jump" coverage="100%" />
+                <condition number="26" type="jump" coverage="100%" />
+                <condition number="47" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="97" hits="5" branch="False" />
+            <line number="98" hits="5" branch="False" />
+            <line number="99" hits="5" branch="False" />
+            <line number="101" hits="1" branch="False" />
+            <line number="102" hits="1" branch="False" />
+            <line number="103" hits="1" branch="False" />
+            <line number="104" hits="6" branch="False" />
+            <line number="105" hits="6" branch="False" />
+            <line number="109" hits="2" branch="False" />
+            <line number="110" hits="2" branch="False" />
+            <line number="111" hits="2" branch="False" />
+            <line number="112" hits="2" branch="False" />
+            <line number="116" hits="3" branch="False" />
+            <line number="117" hits="3" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="28" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="118" hits="2" branch="False" />
+            <line number="119" hits="4" branch="False" />
+            <line number="120" hits="4" branch="False" />
+            <line number="121" hits="2" branch="False" />
+            <line number="122" hits="2" branch="False" />
+            <line number="124" hits="1" branch="False" />
+            <line number="125" hits="1" branch="False" />
+            <line number="128" hits="2" branch="False" />
+            <line number="131" hits="11" branch="False" />
+            <line number="132" hits="28" branch="False" />
+            <line number="133" hits="11" branch="False" />
+            <line number="136" hits="2" branch="False" />
+            <line number="137" hits="5" branch="False" />
+            <line number="138" hits="2" branch="False" />
+            <line number="141" hits="1" branch="False" />
+            <line number="142" hits="2" branch="False" />
+            <line number="143" hits="1" branch="False" />
+            <line number="148" hits="8" branch="False" />
+            <line number="150" hits="24" branch="True" condition-coverage="100% (12/12)">
+              <conditions>
+                <condition number="42" type="jump" coverage="100%" />
+                <condition number="60" type="jump" coverage="100%" />
+                <condition number="84" type="jump" coverage="100%" />
+                <condition number="103" type="jump" coverage="100%" />
+                <condition number="116" type="jump" coverage="100%" />
+                <condition number="140" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="151" hits="3" branch="False" />
+            <line number="152" hits="3" branch="False" />
+            <line number="153" hits="3" branch="False" />
+            <line number="154" hits="3" branch="False" />
+            <line number="155" hits="5" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="209" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="156" hits="1" branch="False" />
+            <line number="157" hits="1" branch="False" />
+            <line number="159" hits="4" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="271" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="160" hits="3" branch="False" />
+            <line number="161" hits="3" branch="False" />
+            <line number="164" hits="1" branch="False" />
+            <line number="165" hits="1" branch="False" />
+            <line number="167" hits="3" branch="False" />
+            <line number="12" hits="25" branch="False" />
+            <line number="13" hits="25" branch="False" />
+            <line number="14" hits="25" branch="False" />
+            <line number="15" hits="25" branch="False" />
+            <line number="17" hits="0" branch="False" />
+            <line number="18" hits="0" branch="False" />
+            <line number="19" hits="0" branch="False" />
+            <line number="20" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Models.Services.ReaderConfigJson" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Models\Services\ReaderConfigJSON.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="Read" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="11" hits="27" branch="False" />
+                <line number="12" hits="27" branch="False" />
+                <line number="13" hits="27" branch="False" />
+                <line number="14" hits="27" branch="False" />
+              </lines>
+            </method>
+            <method name="Read" signature="(System.String)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="17" hits="29" branch="False" />
+                <line number="18" hits="29" branch="False" />
+                <line number="19" hits="29" branch="False" />
+                <line number="20" hits="29" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="11" hits="27" branch="False" />
+            <line number="12" hits="27" branch="False" />
+            <line number="13" hits="27" branch="False" />
+            <line number="14" hits="27" branch="False" />
+            <line number="17" hits="29" branch="False" />
+            <line number="18" hits="29" branch="False" />
+            <line number="19" hits="29" branch="False" />
+            <line number="20" hits="29" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Models.Services.SchemaConfigFileOperations" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Models\Services\SchemaConfigFileOperations.cs" line-rate="0.5614" branch-rate="1" complexity="8">
+          <methods>
+            <method name="GetContentType" signature="()" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="25" hits="0" branch="False" />
+                <line number="26" hits="0" branch="False" />
+                <line number="27" hits="0" branch="False" />
+                <line number="28" hits="0" branch="False" />
+                <line number="29" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="GetFileSchemaData" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="32" hits="1" branch="False" />
+                <line number="33" hits="1" branch="False" />
+                <line number="39" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="SaveConfigFile" signature="(Microsoft.AspNetCore.Http.IFormFile)" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="42" hits="0" branch="False" />
+                <line number="43" hits="0" branch="False" />
+                <line number="44" hits="0" branch="False" />
+                <line number="45" hits="0" branch="False" />
+                <line number="46" hits="0" branch="False" />
+                <line number="47" hits="0" branch="False" />
+                <line number="48" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SaveConfigJson" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="51" hits="1" branch="False" />
+                <line number="52" hits="1" branch="False" />
+                <line number="53" hits="1" branch="False" />
+                <line number="54" hits="1" branch="False" />
+                <line number="55" hits="1" branch="False" />
+                <line number="56" hits="1" branch="False" />
+                <line number="57" hits="1" branch="False" />
+                <line number="58" hits="1" branch="False" />
+                <line number="59" hits="1" branch="False" />
+                <line number="60" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="CreateStream" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="63" hits="1" branch="False" />
+                <line number="64" hits="1" branch="False" />
+                <line number="65" hits="1" branch="False" />
+                <line number="66" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="replacePreviousSchemaConfig" signature="(System.IO.FileStream)" line-rate="0.409" branch-rate="1">
+              <lines>
+                <line number="69" hits="1" branch="False" />
+                <line number="70" hits="1" branch="False" />
+                <line number="72" hits="1" branch="False" />
+                <line number="73" hits="1" branch="False" />
+                <line number="74" hits="1" branch="False" />
+                <line number="75" hits="1" branch="False" />
+                <line number="76" hits="1" branch="False" />
+                <line number="77" hits="0" branch="False" />
+                <line number="78" hits="0" branch="False" />
+                <line number="80" hits="0" branch="False" />
+                <line number="81" hits="0" branch="False" />
+                <line number="82" hits="0" branch="False" />
+                <line number="83" hits="0" branch="False" />
+                <line number="84" hits="0" branch="False" />
+                <line number="85" hits="0" branch="False" />
+                <line number="86" hits="0" branch="False" />
+                <line number="87" hits="0" branch="False" />
+                <line number="88" hits="0" branch="False" />
+                <line number="89" hits="0" branch="False" />
+                <line number="90" hits="0" branch="False" />
+                <line number="91" hits="1" branch="False" />
+                <line number="92" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(UrisFactory.Models.Services.ConfigJsonHandler)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="20" hits="5" branch="False" />
+                <line number="21" hits="5" branch="False" />
+                <line number="22" hits="5" branch="False" />
+                <line number="23" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name=".cctor" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="16" hits="1" branch="False" />
+                <line number="17" hits="1" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="25" hits="0" branch="False" />
+            <line number="26" hits="0" branch="False" />
+            <line number="27" hits="0" branch="False" />
+            <line number="28" hits="0" branch="False" />
+            <line number="29" hits="0" branch="False" />
+            <line number="32" hits="1" branch="False" />
+            <line number="33" hits="1" branch="False" />
+            <line number="39" hits="1" branch="False" />
+            <line number="42" hits="0" branch="False" />
+            <line number="43" hits="0" branch="False" />
+            <line number="44" hits="0" branch="False" />
+            <line number="45" hits="0" branch="False" />
+            <line number="46" hits="0" branch="False" />
+            <line number="47" hits="0" branch="False" />
+            <line number="48" hits="0" branch="False" />
+            <line number="51" hits="1" branch="False" />
+            <line number="52" hits="1" branch="False" />
+            <line number="53" hits="1" branch="False" />
+            <line number="54" hits="1" branch="False" />
+            <line number="55" hits="1" branch="False" />
+            <line number="56" hits="1" branch="False" />
+            <line number="57" hits="1" branch="False" />
+            <line number="58" hits="1" branch="False" />
+            <line number="59" hits="1" branch="False" />
+            <line number="60" hits="1" branch="False" />
+            <line number="63" hits="1" branch="False" />
+            <line number="64" hits="1" branch="False" />
+            <line number="65" hits="1" branch="False" />
+            <line number="66" hits="1" branch="False" />
+            <line number="69" hits="1" branch="False" />
+            <line number="70" hits="1" branch="False" />
+            <line number="72" hits="1" branch="False" />
+            <line number="73" hits="1" branch="False" />
+            <line number="74" hits="1" branch="False" />
+            <line number="75" hits="1" branch="False" />
+            <line number="76" hits="1" branch="False" />
+            <line number="77" hits="0" branch="False" />
+            <line number="78" hits="0" branch="False" />
+            <line number="80" hits="0" branch="False" />
+            <line number="81" hits="0" branch="False" />
+            <line number="82" hits="0" branch="False" />
+            <line number="83" hits="0" branch="False" />
+            <line number="84" hits="0" branch="False" />
+            <line number="85" hits="0" branch="False" />
+            <line number="86" hits="0" branch="False" />
+            <line number="87" hits="0" branch="False" />
+            <line number="88" hits="0" branch="False" />
+            <line number="89" hits="0" branch="False" />
+            <line number="90" hits="0" branch="False" />
+            <line number="91" hits="1" branch="False" />
+            <line number="92" hits="1" branch="False" />
+            <line number="20" hits="5" branch="False" />
+            <line number="21" hits="5" branch="False" />
+            <line number="22" hits="5" branch="False" />
+            <line number="23" hits="5" branch="False" />
+            <line number="16" hits="1" branch="False" />
+            <line number="17" hits="1" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Models.Services.UriFormer" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Models\Services\UriFormer.cs" line-rate="0.7872" branch-rate="0.7" complexity="43">
+          <methods>
+            <method name="get_UriStructure" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="21" hits="6" branch="False" />
+                <line number="22" hits="6" branch="False" />
+                <line number="23" hits="6" branch="False" />
+              </lines>
+            </method>
+            <method name="GetURI" signature="(System.String,System.Collections.Generic.Dictionary`2&lt;System.String,System.String&gt;)" line-rate="0.8332999999999999" branch-rate="0.6666">
+              <lines>
+                <line number="28" hits="3" branch="False" />
+                <line number="29" hits="3" branch="False" />
+                <line number="30" hits="3" branch="False" />
+                <line number="32" hits="3" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="21" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="33" hits="1" branch="False" />
+                <line number="34" hits="1" branch="False" />
+                <line number="35" hits="1" branch="False" />
+                <line number="37" hits="2" branch="False" />
+                <line number="38" hits="1" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="92" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="39" hits="1" branch="False" />
+                <line number="40" hits="1" branch="False" />
+                <line number="41" hits="1" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="129" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="42" hits="1" branch="False" />
+                <line number="43" hits="1" branch="False" />
+                <line number="44" hits="1" branch="False" />
+                <line number="46" hits="0" branch="False" />
+                <line number="47" hits="0" branch="False" />
+                <line number="49" hits="1" branch="False" />
+                <line number="51" hits="0" branch="False" />
+                <line number="52" hits="0" branch="False" />
+                <line number="54" hits="1" branch="False" />
+                <line number="57" hits="2" branch="False" />
+                <line number="58" hits="2" branch="False" />
+                <line number="60" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="GetUriByStructure" signature="(UrisFactory.Models.ConfigEntities.UriStructure,System.String,System.String,System.Collections.Generic.Dictionary`2&lt;System.String,System.String&gt;)" line-rate="0.6279" branch-rate="0.6428">
+              <lines>
+                <line number="63" hits="1" branch="False" />
+                <line number="64" hits="1" branch="False" />
+                <line number="65" hits="1" branch="False" />
+                <line number="66" hits="1" branch="False" />
+                <line number="67" hits="1" branch="False" />
+                <line number="68" hits="15" branch="True" condition-coverage="100% (4/4)">
+                  <conditions>
+                    <condition number="30" type="jump" coverage="100%" />
+                    <condition number="416" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="69" hits="4" branch="False" />
+                <line number="70" hits="4" branch="False" />
+                <line number="71" hits="4" branch="True" condition-coverage="80% (8/10)">
+                  <conditions>
+                    <condition number="101" type="jump" coverage="50%" />
+                    <condition number="118" type="jump" coverage="100%" />
+                    <condition number="132" type="jump" coverage="100%" />
+                    <condition number="146" type="jump" coverage="100%" />
+                    <condition number="160" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="74" hits="1" branch="False" />
+                <line number="75" hits="1" branch="False" />
+                <line number="77" hits="1" branch="False" />
+                <line number="78" hits="1" branch="False" />
+                <line number="80" hits="1" branch="False" />
+                <line number="81" hits="1" branch="False" />
+                <line number="83" hits="1" branch="False" />
+                <line number="84" hits="1" branch="True" condition-coverage="50% (2/4)">
+                  <conditions>
+                    <condition number="251" type="jump" coverage="50%" />
+                    <condition number="267" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="85" hits="0" branch="False" />
+                <line number="86" hits="0" branch="False" />
+                <line number="87" hits="1" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="280" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="88" hits="1" branch="False" />
+                <line number="89" hits="1" branch="False" />
+                <line number="90" hits="1" branch="False" />
+                <line number="91" hits="1" branch="False" />
+                <line number="92" hits="1" branch="False" />
+                <line number="94" hits="0" branch="False" />
+                <line number="95" hits="0" branch="True" condition-coverage="0% (0/4)">
+                  <conditions>
+                    <condition number="327" type="jump" coverage="0%" />
+                    <condition number="343" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="96" hits="0" branch="False" />
+                <line number="97" hits="0" branch="False" />
+                <line number="98" hits="0" branch="False" />
+                <line number="99" hits="0" branch="False" />
+                <line number="100" hits="0" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="375" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="101" hits="0" branch="False" />
+                <line number="102" hits="0" branch="False" />
+                <line number="103" hits="0" branch="False" />
+                <line number="104" hits="0" branch="False" />
+                <line number="105" hits="0" branch="False" />
+                <line number="107" hits="4" branch="False" />
+                <line number="108" hits="1" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="441" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="109" hits="0" branch="False" />
+                <line number="110" hits="0" branch="False" />
+                <line number="112" hits="1" branch="False" />
+                <line number="113" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="ParserCharacter" signature="(System.Collections.Generic.List`1&lt;UrisFactory.Models.ConfigEntities.Component&gt;)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="116" hits="1" branch="False" />
+                <line number="117" hits="1" branch="False" />
+                <line number="118" hits="3" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="10" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="119" hits="1" branch="False" />
+                <line number="120" hits="1" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="64" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="121" hits="1" branch="False" />
+                <line number="122" hits="1" branch="False" />
+                <line number="123" hits="2" branch="False" />
+                <line number="124" hits="1" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="129" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="125" hits="1" branch="False" />
+                <line number="126" hits="1" branch="False" />
+                <line number="127" hits="1" branch="False" />
+                <line number="128" hits="1" branch="False" />
+                <line number="129" hits="1" branch="False" />
+                <line number="130" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="ParserResourceClass" signature="(System.String)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="133" hits="3" branch="False" />
+                <line number="134" hits="3" branch="False" />
+                <line number="135" hits="180" branch="False" />
+                <line number="136" hits="3" branch="False" />
+                <line number="137" hits="3" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(UrisFactory.Models.ConfigEntities.UriStructureGeneral)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="14" hits="3" branch="False" />
+                <line number="15" hits="3" branch="False" />
+                <line number="16" hits="3" branch="False" />
+                <line number="17" hits="3" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="21" hits="6" branch="False" />
+            <line number="22" hits="6" branch="False" />
+            <line number="23" hits="6" branch="False" />
+            <line number="28" hits="3" branch="False" />
+            <line number="29" hits="3" branch="False" />
+            <line number="30" hits="3" branch="False" />
+            <line number="32" hits="3" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="21" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="33" hits="1" branch="False" />
+            <line number="34" hits="1" branch="False" />
+            <line number="35" hits="1" branch="False" />
+            <line number="37" hits="2" branch="False" />
+            <line number="38" hits="1" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="92" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="39" hits="1" branch="False" />
+            <line number="40" hits="1" branch="False" />
+            <line number="41" hits="1" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="129" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="42" hits="1" branch="False" />
+            <line number="43" hits="1" branch="False" />
+            <line number="44" hits="1" branch="False" />
+            <line number="46" hits="0" branch="False" />
+            <line number="47" hits="0" branch="False" />
+            <line number="49" hits="1" branch="False" />
+            <line number="51" hits="0" branch="False" />
+            <line number="52" hits="0" branch="False" />
+            <line number="54" hits="1" branch="False" />
+            <line number="57" hits="2" branch="False" />
+            <line number="58" hits="2" branch="False" />
+            <line number="60" hits="1" branch="False" />
+            <line number="63" hits="1" branch="False" />
+            <line number="64" hits="1" branch="False" />
+            <line number="65" hits="1" branch="False" />
+            <line number="66" hits="1" branch="False" />
+            <line number="67" hits="1" branch="False" />
+            <line number="68" hits="15" branch="True" condition-coverage="100% (4/4)">
+              <conditions>
+                <condition number="30" type="jump" coverage="100%" />
+                <condition number="416" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="69" hits="4" branch="False" />
+            <line number="70" hits="4" branch="False" />
+            <line number="71" hits="4" branch="True" condition-coverage="80% (8/10)">
+              <conditions>
+                <condition number="101" type="jump" coverage="50%" />
+                <condition number="118" type="jump" coverage="100%" />
+                <condition number="132" type="jump" coverage="100%" />
+                <condition number="146" type="jump" coverage="100%" />
+                <condition number="160" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="74" hits="1" branch="False" />
+            <line number="75" hits="1" branch="False" />
+            <line number="77" hits="1" branch="False" />
+            <line number="78" hits="1" branch="False" />
+            <line number="80" hits="1" branch="False" />
+            <line number="81" hits="1" branch="False" />
+            <line number="83" hits="1" branch="False" />
+            <line number="84" hits="1" branch="True" condition-coverage="50% (2/4)">
+              <conditions>
+                <condition number="251" type="jump" coverage="50%" />
+                <condition number="267" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="85" hits="0" branch="False" />
+            <line number="86" hits="0" branch="False" />
+            <line number="87" hits="1" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="280" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="88" hits="1" branch="False" />
+            <line number="89" hits="1" branch="False" />
+            <line number="90" hits="1" branch="False" />
+            <line number="91" hits="1" branch="False" />
+            <line number="92" hits="1" branch="False" />
+            <line number="94" hits="0" branch="False" />
+            <line number="95" hits="0" branch="True" condition-coverage="0% (0/4)">
+              <conditions>
+                <condition number="327" type="jump" coverage="0%" />
+                <condition number="343" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="96" hits="0" branch="False" />
+            <line number="97" hits="0" branch="False" />
+            <line number="98" hits="0" branch="False" />
+            <line number="99" hits="0" branch="False" />
+            <line number="100" hits="0" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="375" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="101" hits="0" branch="False" />
+            <line number="102" hits="0" branch="False" />
+            <line number="103" hits="0" branch="False" />
+            <line number="104" hits="0" branch="False" />
+            <line number="105" hits="0" branch="False" />
+            <line number="107" hits="4" branch="False" />
+            <line number="108" hits="1" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="441" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="109" hits="0" branch="False" />
+            <line number="110" hits="0" branch="False" />
+            <line number="112" hits="1" branch="False" />
+            <line number="113" hits="1" branch="False" />
+            <line number="116" hits="1" branch="False" />
+            <line number="117" hits="1" branch="False" />
+            <line number="118" hits="3" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="10" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="119" hits="1" branch="False" />
+            <line number="120" hits="1" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="64" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="121" hits="1" branch="False" />
+            <line number="122" hits="1" branch="False" />
+            <line number="123" hits="2" branch="False" />
+            <line number="124" hits="1" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="129" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="125" hits="1" branch="False" />
+            <line number="126" hits="1" branch="False" />
+            <line number="127" hits="1" branch="False" />
+            <line number="128" hits="1" branch="False" />
+            <line number="129" hits="1" branch="False" />
+            <line number="130" hits="1" branch="False" />
+            <line number="133" hits="3" branch="False" />
+            <line number="134" hits="3" branch="False" />
+            <line number="135" hits="180" branch="False" />
+            <line number="136" hits="3" branch="False" />
+            <line number="137" hits="3" branch="False" />
+            <line number="14" hits="3" branch="False" />
+            <line number="15" hits="3" branch="False" />
+            <line number="16" hits="3" branch="False" />
+            <line number="17" hits="3" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Models.ConfigEntities.Characters" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Models\ConfigEntities\Characters.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="get_Character" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="5" hits="65" branch="False" />
+              </lines>
+            </method>
+            <method name="get_LabelCharacter" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="6" hits="65" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="5" hits="65" branch="False" />
+            <line number="6" hits="65" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Models.ConfigEntities.Component" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Models\ConfigEntities\Component.cs" line-rate="1" branch-rate="1" complexity="5">
+          <methods>
+            <method name="get_UriComponent" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="6" hits="307" branch="False" />
+              </lines>
+            </method>
+            <method name="get_UriComponentValue" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="7" hits="302" branch="False" />
+              </lines>
+            </method>
+            <method name="get_UriComponentOrder" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="8" hits="305" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Mandatory" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="9" hits="301" branch="False" />
+              </lines>
+            </method>
+            <method name="get_FinalCharacter" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="10" hits="305" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="6" hits="307" branch="False" />
+            <line number="7" hits="302" branch="False" />
+            <line number="8" hits="305" branch="False" />
+            <line number="9" hits="301" branch="False" />
+            <line number="10" hits="305" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Models.ConfigEntities.ResourcesClass" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Models\ConfigEntities\ResourcesClass.cs" line-rate="1" branch-rate="1" complexity="3">
+          <methods>
+            <method name="get_ResourceClass" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="6" hits="2828" branch="False" />
+              </lines>
+            </method>
+            <method name="get_LabelResourceClass" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="7" hits="2654" branch="False" />
+              </lines>
+            </method>
+            <method name="get_ResourceURI" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="8" hits="2667" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="6" hits="2828" branch="False" />
+            <line number="7" hits="2654" branch="False" />
+            <line number="8" hits="2667" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Models.ConfigEntities.UriComponentsList" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Models\ConfigEntities\UriComponentsList.cs" line-rate="0" branch-rate="1" complexity="2">
+          <methods>
+            <method name="get_DefaultParameters" signature="()" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="19" hits="0" branch="False" />
+                <line number="20" hits="0" branch="False" />
+                <line number="21" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".cctor" signature="()" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="14" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="19" hits="0" branch="False" />
+            <line number="20" hits="0" branch="False" />
+            <line number="21" hits="0" branch="False" />
+            <line number="14" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Models.ConfigEntities.UriStructure" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Models\ConfigEntities\UriStructure.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="get_Name" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="8" hits="144" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Components" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="9" hits="146" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="8" hits="144" branch="False" />
+            <line number="9" hits="146" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Models.ConfigEntities.UriStructureGeneral" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Models\ConfigEntities\UriStructureGeneral.cs" line-rate="1" branch-rate="1" complexity="4">
+          <methods>
+            <method name="get_Base" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="7" hits="67" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Characters" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="8" hits="98" branch="False" />
+              </lines>
+            </method>
+            <method name="get_UriStructures" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="9" hits="135" branch="False" />
+              </lines>
+            </method>
+            <method name="get_ResourcesClasses" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="10" hits="85" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="7" hits="67" branch="False" />
+            <line number="8" hits="98" branch="False" />
+            <line number="9" hits="135" branch="False" />
+            <line number="10" hits="85" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Middlewares.LoadConfigJsonMiddleware" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Middlewares\LoadConfigJsonMiddleware.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="(Microsoft.AspNetCore.Http.RequestDelegate)" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="10" hits="0" branch="False" />
+                <line number="11" hits="0" branch="False" />
+                <line number="12" hits="0" branch="False" />
+                <line number="13" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="0" branch="False" />
+            <line number="11" hits="0" branch="False" />
+            <line number="12" hits="0" branch="False" />
+            <line number="13" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Middlewares.LoadConfigJsonMiddleware/&lt;Invoke&gt;d__2" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Middlewares\LoadConfigJsonMiddleware.cs" line-rate="0" branch-rate="0" complexity="2">
+          <methods>
+            <method name="MoveNext" signature="()" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="16" hits="0" branch="False" />
+                <line number="18" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="50" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="19" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="16" hits="0" branch="False" />
+            <line number="18" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="50" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="19" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Filters.AddParametersFilter" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Filters\AddParametersFilter.cs" line-rate="0" branch-rate="0" complexity="11">
+          <methods>
+            <method name="Apply" signature="(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="22" hits="0" branch="False" />
+                <line number="23" hits="0" branch="False" />
+                <line number="24" hits="0" branch="True" condition-coverage="0% (0/4)">
+                  <conditions>
+                    <condition number="19" type="jump" coverage="0%" />
+                    <condition number="42" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="25" hits="0" branch="False" />
+                <line number="26" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="212" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="27" hits="0" branch="False" />
+                <line number="28" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="188" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="29" hits="0" branch="False" />
+                <line number="30" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="124" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="31" hits="0" branch="False" />
+                <line number="32" hits="0" branch="False" />
+                <line number="33" hits="0" branch="False" />
+                <line number="34" hits="0" branch="False" />
+                <line number="35" hits="0" branch="False" />
+                <line number="36" hits="0" branch="False" />
+                <line number="37" hits="0" branch="False" />
+                <line number="38" hits="0" branch="False" />
+                <line number="39" hits="0" branch="False" />
+                <line number="40" hits="0" branch="False" />
+                <line number="41" hits="0" branch="False" />
+                <line number="42" hits="0" branch="False" />
+                <line number="43" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(UrisFactory.Models.Services.ConfigJsonHandler)" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="16" hits="0" branch="False" />
+                <line number="17" hits="0" branch="False" />
+                <line number="18" hits="0" branch="False" />
+                <line number="19" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="22" hits="0" branch="False" />
+            <line number="23" hits="0" branch="False" />
+            <line number="24" hits="0" branch="True" condition-coverage="0% (0/4)">
+              <conditions>
+                <condition number="19" type="jump" coverage="0%" />
+                <condition number="42" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="25" hits="0" branch="False" />
+            <line number="26" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="212" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="27" hits="0" branch="False" />
+            <line number="28" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="188" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="29" hits="0" branch="False" />
+            <line number="30" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="124" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="31" hits="0" branch="False" />
+            <line number="32" hits="0" branch="False" />
+            <line number="33" hits="0" branch="False" />
+            <line number="34" hits="0" branch="False" />
+            <line number="35" hits="0" branch="False" />
+            <line number="36" hits="0" branch="False" />
+            <line number="37" hits="0" branch="False" />
+            <line number="38" hits="0" branch="False" />
+            <line number="39" hits="0" branch="False" />
+            <line number="40" hits="0" branch="False" />
+            <line number="41" hits="0" branch="False" />
+            <line number="42" hits="0" branch="False" />
+            <line number="43" hits="0" branch="False" />
+            <line number="16" hits="0" branch="False" />
+            <line number="17" hits="0" branch="False" />
+            <line number="18" hits="0" branch="False" />
+            <line number="19" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Extra.Exceptions.FailedLoadConfigJsonException" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Extra\Exceptions\FailedLoadConfigJsonException.cs" line-rate="0" branch-rate="1" complexity="3">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="7" hits="0" branch="False" />
+                <line number="8" hits="0" branch="False" />
+                <line number="9" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String)" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="12" hits="0" branch="False" />
+                <line number="13" hits="0" branch="False" />
+                <line number="14" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String,System.Exception)" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="17" hits="0" branch="False" />
+                <line number="18" hits="0" branch="False" />
+                <line number="19" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="7" hits="0" branch="False" />
+            <line number="8" hits="0" branch="False" />
+            <line number="9" hits="0" branch="False" />
+            <line number="12" hits="0" branch="False" />
+            <line number="13" hits="0" branch="False" />
+            <line number="14" hits="0" branch="False" />
+            <line number="17" hits="0" branch="False" />
+            <line number="18" hits="0" branch="False" />
+            <line number="19" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Extra.Exceptions.ParametersNotConfiguredException" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Extra\Exceptions\ParametersNotConfiguredException.cs" line-rate="0.3333" branch-rate="1" complexity="3">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="7" hits="0" branch="False" />
+                <line number="8" hits="0" branch="False" />
+                <line number="9" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="12" hits="2" branch="False" />
+                <line number="13" hits="2" branch="False" />
+                <line number="14" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String,System.Exception)" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="17" hits="0" branch="False" />
+                <line number="18" hits="0" branch="False" />
+                <line number="19" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="7" hits="0" branch="False" />
+            <line number="8" hits="0" branch="False" />
+            <line number="9" hits="0" branch="False" />
+            <line number="12" hits="2" branch="False" />
+            <line number="13" hits="2" branch="False" />
+            <line number="14" hits="2" branch="False" />
+            <line number="17" hits="0" branch="False" />
+            <line number="18" hits="0" branch="False" />
+            <line number="19" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Extra.Exceptions.UriStructureBadInfoException" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Extra\Exceptions\UriStructureBadInfoException.cs" line-rate="0.3333" branch-rate="1" complexity="3">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="10" hits="0" branch="False" />
+                <line number="11" hits="0" branch="False" />
+                <line number="12" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="15" hits="4" branch="False" />
+                <line number="16" hits="4" branch="False" />
+                <line number="17" hits="4" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String,System.Exception)" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="20" hits="0" branch="False" />
+                <line number="21" hits="0" branch="False" />
+                <line number="22" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="0" branch="False" />
+            <line number="11" hits="0" branch="False" />
+            <line number="12" hits="0" branch="False" />
+            <line number="15" hits="4" branch="False" />
+            <line number="16" hits="4" branch="False" />
+            <line number="17" hits="4" branch="False" />
+            <line number="20" hits="0" branch="False" />
+            <line number="21" hits="0" branch="False" />
+            <line number="22" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Extra.Exceptions.UriStructureConfiguredException" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Extra\Exceptions\UriStructureConfiguredException.cs" line-rate="0.3333" branch-rate="1" complexity="3">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="10" hits="0" branch="False" />
+                <line number="11" hits="0" branch="False" />
+                <line number="12" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="15" hits="2" branch="False" />
+                <line number="16" hits="2" branch="False" />
+                <line number="17" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String,System.Exception)" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="20" hits="0" branch="False" />
+                <line number="21" hits="0" branch="False" />
+                <line number="22" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="0" branch="False" />
+            <line number="11" hits="0" branch="False" />
+            <line number="12" hits="0" branch="False" />
+            <line number="15" hits="2" branch="False" />
+            <line number="16" hits="2" branch="False" />
+            <line number="17" hits="2" branch="False" />
+            <line number="20" hits="0" branch="False" />
+            <line number="21" hits="0" branch="False" />
+            <line number="22" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Controllers.FactoryController" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Controllers\FactoryController.cs" line-rate="0" branch-rate="0" complexity="3">
+          <methods>
+            <method name="GenerateUri" signature="(System.String,System.String)" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="38" hits="0" branch="False" />
+                <line number="39" hits="0" branch="False" />
+                <line number="40" hits="0" branch="False" />
+                <line number="41" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="89" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="42" hits="0" branch="False" />
+                <line number="43" hits="0" branch="False" />
+                <line number="44" hits="0" branch="False" />
+                <line number="46" hits="0" branch="False" />
+                <line number="47" hits="0" branch="False" />
+                <line number="48" hits="0" branch="False" />
+                <line number="49" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(UrisFactory.Models.Services.ConfigJsonHandler)" line-rate="0" branch-rate="1">
+              <lines>
+                <line number="19" hits="0" branch="False" />
+                <line number="20" hits="0" branch="False" />
+                <line number="21" hits="0" branch="False" />
+                <line number="22" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="38" hits="0" branch="False" />
+            <line number="39" hits="0" branch="False" />
+            <line number="40" hits="0" branch="False" />
+            <line number="41" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="89" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="42" hits="0" branch="False" />
+            <line number="43" hits="0" branch="False" />
+            <line number="44" hits="0" branch="False" />
+            <line number="46" hits="0" branch="False" />
+            <line number="47" hits="0" branch="False" />
+            <line number="48" hits="0" branch="False" />
+            <line number="49" hits="0" branch="False" />
+            <line number="19" hits="0" branch="False" />
+            <line number="20" hits="0" branch="False" />
+            <line number="21" hits="0" branch="False" />
+            <line number="22" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="UrisFactory.Controllers.SchemaController" filename="C:\Hercules\AutoGeneradorUris\UrisFactoryGit\GnossDeustoBackend\UrisFactory\UrisAutoGenerator\Controllers\SchemaController.cs" line-rate="0.8225" branch-rate="0.625" complexity="18">
+          <methods>
+            <method name="GetSchema" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="37" hits="1" branch="False" />
+                <line number="38" hits="1" branch="False" />
+                <line number="39" hits="1" branch="False" />
+                <line number="40" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="ReplaceSchemaConfig" signature="(Microsoft.AspNetCore.Http.IFormFile)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="52" hits="2" branch="False" />
+                <line number="53" hits="2" branch="False" />
+                <line number="54" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="17" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="55" hits="1" branch="False" />
+                <line number="56" hits="1" branch="False" />
+                <line number="59" hits="1" branch="False" />
+                <line number="60" hits="1" branch="False" />
+                <line number="62" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="GetUriStructureInfo" signature="(System.String)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="74" hits="2" branch="False" />
+                <line number="75" hits="2" branch="False" />
+                <line number="76" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="20" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="77" hits="1" branch="False" />
+                <line number="78" hits="1" branch="False" />
+                <line number="79" hits="1" branch="False" />
+                <line number="80" hits="1" branch="False" />
+                <line number="81" hits="1" branch="False" />
+                <line number="82" hits="1" branch="False" />
+                <line number="85" hits="1" branch="False" />
+                <line number="86" hits="1" branch="False" />
+                <line number="88" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="DeleteUriStructure" signature="(System.String)" line-rate="0.6923" branch-rate="0.5">
+              <lines>
+                <line number="100" hits="1" branch="False" />
+                <line number="101" hits="1" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="15" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="102" hits="1" branch="False" />
+                <line number="103" hits="1" branch="False" />
+                <line number="104" hits="1" branch="False" />
+                <line number="105" hits="1" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="46" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="106" hits="1" branch="False" />
+                <line number="107" hits="1" branch="False" />
+                <line number="110" hits="0" branch="False" />
+                <line number="111" hits="0" branch="False" />
+                <line number="115" hits="0" branch="False" />
+                <line number="116" hits="0" branch="False" />
+                <line number="118" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="AddUriStructure" signature="(UrisFactory.ViewModels.InfoUriStructure)" line-rate="0.65" branch-rate="0.5">
+              <lines>
+                <line number="131" hits="2" branch="False" />
+                <line number="132" hits="2" branch="True" condition-coverage="50% (3/6)">
+                  <conditions>
+                    <condition number="2" type="jump" coverage="50%" />
+                    <condition number="10" type="jump" coverage="50%" />
+                    <condition number="26" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="133" hits="2" branch="False" />
+                <line number="135" hits="2" branch="False" />
+                <line number="136" hits="2" branch="False" />
+                <line number="137" hits="1" branch="False" />
+                <line number="138" hits="1" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="72" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="139" hits="1" branch="False" />
+                <line number="140" hits="1" branch="False" />
+                <line number="143" hits="0" branch="False" />
+                <line number="144" hits="0" branch="False" />
+                <line number="147" hits="0" branch="False" />
+                <line number="148" hits="0" branch="False" />
+                <line number="149" hits="0" branch="False" />
+                <line number="151" hits="1" branch="False" />
+                <line number="152" hits="1" branch="False" />
+                <line number="153" hits="1" branch="False" />
+                <line number="157" hits="0" branch="False" />
+                <line number="158" hits="0" branch="False" />
+                <line number="160" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(UrisFactory.Models.Services.ConfigJsonHandler,UrisFactory.Models.Services.ISchemaConfigOperations)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="24" hits="8" branch="False" />
+                <line number="25" hits="8" branch="False" />
+                <line number="26" hits="8" branch="False" />
+                <line number="27" hits="8" branch="False" />
+                <line number="28" hits="8" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="37" hits="1" branch="False" />
+            <line number="38" hits="1" branch="False" />
+            <line number="39" hits="1" branch="False" />
+            <line number="40" hits="1" branch="False" />
+            <line number="52" hits="2" branch="False" />
+            <line number="53" hits="2" branch="False" />
+            <line number="54" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="17" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="55" hits="1" branch="False" />
+            <line number="56" hits="1" branch="False" />
+            <line number="59" hits="1" branch="False" />
+            <line number="60" hits="1" branch="False" />
+            <line number="62" hits="2" branch="False" />
+            <line number="74" hits="2" branch="False" />
+            <line number="75" hits="2" branch="False" />
+            <line number="76" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="20" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="77" hits="1" branch="False" />
+            <line number="78" hits="1" branch="False" />
+            <line number="79" hits="1" branch="False" />
+            <line number="80" hits="1" branch="False" />
+            <line number="81" hits="1" branch="False" />
+            <line number="82" hits="1" branch="False" />
+            <line number="85" hits="1" branch="False" />
+            <line number="86" hits="1" branch="False" />
+            <line number="88" hits="2" branch="False" />
+            <line number="100" hits="1" branch="False" />
+            <line number="101" hits="1" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="15" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="102" hits="1" branch="False" />
+            <line number="103" hits="1" branch="False" />
+            <line number="104" hits="1" branch="False" />
+            <line number="105" hits="1" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="46" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="106" hits="1" branch="False" />
+            <line number="107" hits="1" branch="False" />
+            <line number="110" hits="0" branch="False" />
+            <line number="111" hits="0" branch="False" />
+            <line number="115" hits="0" branch="False" />
+            <line number="116" hits="0" branch="False" />
+            <line number="118" hits="1" branch="False" />
+            <line number="131" hits="2" branch="False" />
+            <line number="132" hits="2" branch="True" condition-coverage="50% (3/6)">
+              <conditions>
+                <condition number="2" type="jump" coverage="50%" />
+                <condition number="10" type="jump" coverage="50%" />
+                <condition number="26" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="133" hits="2" branch="False" />
+            <line number="135" hits="2" branch="False" />
+            <line number="136" hits="2" branch="False" />
+            <line number="137" hits="1" branch="False" />
+            <line number="138" hits="1" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="72" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="139" hits="1" branch="False" />
+            <line number="140" hits="1" branch="False" />
+            <line number="143" hits="0" branch="False" />
+            <line number="144" hits="0" branch="False" />
+            <line number="147" hits="0" branch="False" />
+            <line number="148" hits="0" branch="False" />
+            <line number="149" hits="0" branch="False" />
+            <line number="151" hits="1" branch="False" />
+            <line number="152" hits="1" branch="False" />
+            <line number="153" hits="1" branch="False" />
+            <line number="157" hits="0" branch="False" />
+            <line number="158" hits="0" branch="False" />
+            <line number="160" hits="2" branch="False" />
+            <line number="24" hits="8" branch="False" />
+            <line number="25" hits="8" branch="False" />
+            <line number="26" hits="8" branch="False" />
+            <line number="27" hits="8" branch="False" />
+            <line number="28" hits="8" branch="False" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

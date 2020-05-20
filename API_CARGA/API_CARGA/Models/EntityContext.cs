@@ -1,4 +1,5 @@
 ﻿using API_CARGA.Models.Entities;
+using API_CARGA.Models.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace API_CARGA.Models
@@ -9,10 +10,14 @@ namespace API_CARGA.Models
         public DbSet<RepositoryConfig> RepositoryConfig { get; set; }
         public DbSet<ShapeConfig> ShapeConfig { get; set; }
         public DbSet<RepositorySync> RepositorySync { get; set; }
-        public EntityContext(DbContextOptions options)
+        public EntityContext(DbContextOptions options, bool memory = false)
             : base(options)
         {
-            Database.Migrate();
+            if (!memory)
+            {
+                Database.Migrate();
+            }
+           
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

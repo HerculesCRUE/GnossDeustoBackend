@@ -1,0 +1,19 @@
+PREFIX vivo: <http://purl.org/roh/mirror/vivo#>
+PREFIX roh: <http://purl.org/roh#>
+PREFIX bibo:  <http://purl.org/roh/mirror/bibo#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://purl.org/roh/mirror/foaf#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?organization ?researchObject ?knowledgeArea 
+WHERE {
+?researchObject a roh:ResearchObject ;
+vivo:dateIssued ?dateIssued ;
+roh:hasKnowledgeArea ?knowledgeArea ;
+bibo:authorList ?authorList .
+?authorList rdfs:member ?author .
+?author roh:hasPosition ?position .
+?organization a foaf:Organization .
+?position vivo:relates ?organization .
+?dateIssued vivo:dateTime ?dateTime .
+FILTER (YEAR(?dateTime) >= "2010"^^xsd:integer && YEAR(?dateTime) <= "2020"^^xsd:integer)
+} GROUP BY ?organization ?researchObject ?knowledgeArea

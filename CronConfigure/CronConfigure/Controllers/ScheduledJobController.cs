@@ -14,9 +14,9 @@ namespace CronConfigure.Controllers
     [ApiController]
     public class ScheduledJobController : ControllerBase
     {
-        public CronApiService _cronApiService;
-        private ProgramingMethodsService _programingMethodsService;
-        public ScheduledJobController(CronApiService cronApiService, ProgramingMethodsService programingMethodsService)
+        public ICronApiService _cronApiService;
+        private IProgramingMethodService _programingMethodsService;
+        public ScheduledJobController(ICronApiService cronApiService, IProgramingMethodService programingMethodsService)
         {
             _cronApiService = cronApiService;
             _programingMethodsService = programingMethodsService;

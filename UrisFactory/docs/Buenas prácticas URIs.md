@@ -13,7 +13,8 @@
 INTRODUCCIÓN
 ============
 
-El presente documento tiene en cuenta la [Especificación del Esquema de URIs de
+El presente documento describe las buenas prácticas en la definición de los URI
+para el proyecto Hércules ASIO y tiene en cuenta la [Especificación del Esquema de URIs de
 Hércules](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/UrisFactory/docs/Especificaci%C3%B3n%20Esquema%20de%20URIs.md).
 
 En su elaboración tenemos en cuenta las recomendaciones de la [Norma
@@ -23,7 +24,8 @@ Información](https://www.boe.es/boe/dias/2013/03/04/pdfs/BOE-A-2013-2380.pdf)
 basan, a su vez, en las iniciativas de datos abiertos y las
 recomendaciones procedentes del mundo de la Web Semántica.
 
-Las recomendaciones de multilingüismo se incluyen en el documento [20200427 Hércules ASIO Modelo de multilingüismo.md](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/20200427%20H%C3%A9rcules%20ASIO%20Modelo%20de%20multiling%C3%BCismo.md).
+Las recomendaciones de multilingüismo se incluyen y detallan en el documento
+[20200427 Hércules ASIO Modelo de multilingüismo.md](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/20200427%20H%C3%A9rcules%20ASIO%20Modelo%20de%20multiling%C3%BCismo.md).
 
 Buenas prácticas de URIs
 ========================

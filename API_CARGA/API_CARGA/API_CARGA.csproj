@@ -11,12 +11,16 @@
   <ItemGroup>
     <Compile Remove="Extras\**" />
     <Compile Remove="Extra\**" />
+    <Compile Remove="Models\MockContext\**" />
     <Content Remove="Extras\**" />
     <Content Remove="Extra\**" />
+    <Content Remove="Models\MockContext\**" />
     <EmbeddedResource Remove="Extras\**" />
     <EmbeddedResource Remove="Extra\**" />
+    <EmbeddedResource Remove="Models\MockContext\**" />
     <None Remove="Extras\**" />
     <None Remove="Extra\**" />
+    <None Remove="Models\MockContext\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,12 +37,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="1.2.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="dotNetRDF" Version="2.5.1" />
     <PackageReference Include="IdentityServer4" Version="3.1.2" />
     <PackageReference Include="IdentityServer4.EntityFramework" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>
@@ -64,6 +72,10 @@
     <None Update="Config\Ontology\roh-v2.owl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Transport\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

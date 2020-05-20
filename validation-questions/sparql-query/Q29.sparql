@@ -1,0 +1,9 @@
+PREFIX bibo:  <http://purl.org/roh/mirror/bibo#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX roh: <http://purl.org/roh#>
+SELECT DISTINCT ?item 
+WHERE {
+?item a roh:ResearchObject ;
+bibo:authorList ?authorList .
+?authorList rdfs:member <http://purl.org/roh/data#investigador-1> . 
+}

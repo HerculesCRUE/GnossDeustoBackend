@@ -42,7 +42,12 @@ namespace API_CARGA.Models.Entities
             public string shapeName { get; set; }
 
             /// <summary>
-            /// Identificador del Shape
+            /// Identificador del shape SHACL
+            /// </summary>
+            public string sourceShape { get; set; }
+
+            /// <summary>
+            /// Identificador de la configuración del Shape configurado
             /// </summary>
             public Guid shapeID { get; set; }
         }

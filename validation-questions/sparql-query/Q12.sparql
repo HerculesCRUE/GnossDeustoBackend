@@ -1,0 +1,14 @@
+PREFIX vivo: <http://purl.org/roh/mirror/vivo#>
+PREFIX roh: <http://purl.org/roh#>
+PREFIX gn:	<http://purl.org/roh/mirror/geonames#>
+SELECT DISTINCT ?project ?centre ?location 
+WHERE {
+?project a vivo:Project ; 
+gn:locatedIn ?location ;
+vivo:relates ?role .
+?role a vivo:MemberRole ;
+roh:roleOf ?centre .
+?centre a roh:ResearchGroup .
+OPTIONAL { ?project roh:projectStatus ?projectStatus .
+FILTER (?projectStatus != "PROPOSAL_SUBMITTED")}
+}

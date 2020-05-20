@@ -1,0 +1,14 @@
+PREFIX roh: <http://purl.org/roh#>
+PREFIX vivo: <http://purl.org/roh/mirror/vivo#>
+PREFIX ro: <http://purl.org/roh/mirror/obo/ro#>
+SELECT ?project ?company ?fundingAmounts 
+WHERE {
+?project a vivo:Project ;
+roh:projectStatus "PROPOSAL_SUBMITTED" ;
+roh:isSupportedBy ?funding .
+?funding ro:hasPart ?fundingAmount ;
+roh:fundedBy ?fundingProgram .
+?fundingProgram roh:promotedBy ?company .
+?fundingAmount roh:monetaryAmount ?fundingAmounts .
+?company a vivo:Company .
+}

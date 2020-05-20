@@ -1,6 +1,4 @@
 ﻿using API_CARGA.Models.Entities;
-using API_CARGA.Models.Transport;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,19 +7,18 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace API_CARGA.Models.Services
 {
     public class OaiPublishRDFService
     {
-        readonly ConfigUrlService _serviceUrl;
         readonly EntityContext _context;
-        public OaiPublishRDFService(ConfigUrlService serviceUrl, EntityContext context)
+        readonly ICallNeedPublishData _publishData;
+        public OaiPublishRDFService(EntityContext context, ICallNeedPublishData publishData)
         {
-            _serviceUrl = serviceUrl;
             _context = context;
+            _publishData = publishData;
         }
 
         public void PublishRepositories(Guid identifier, DateTime? fechaFrom = null, string set = null, string codigoObjeto = null)
@@ -39,8 +36,8 @@ namespace API_CARGA.Models.Services
                     foreach (IdentifierOAIPMH identifierOAIPMH in listIdentifier)
                     {
                         string rdf = CallGetRecord(identifier, identifierOAIPMH.Identifier);
-                        CallDataValidate(rdf, identifier);
-                        CallDataPublish(rdf);
+                        _publishData.CallDataValidate(rdf, identifier);
+                        _publishData.CallDataPublish(rdf);
                         lastSyncro = identifierOAIPMH;
                     }
                     if (lastSyncro != null)
@@ -51,8 +48,8 @@ namespace API_CARGA.Models.Services
                 else
                 {
                     string rdf = CallGetRecord(identifier, codigoObjeto);
-                    CallDataValidate(rdf, identifier);
-                    CallDataPublish(rdf);
+                    _publishData.CallDataValidate(rdf, identifier);
+                    _publishData.CallDataPublish(rdf);
                 }
 
             }
@@ -124,7 +121,7 @@ namespace API_CARGA.Models.Services
                 uri += $"&from={fechaFrom.Value.ToString("u",CultureInfo.InvariantCulture)}&until={until.ToString("u", CultureInfo.InvariantCulture)}";
             }
             List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
-            string xml = CallGetApi(uri);
+            string xml = _publishData.CallGetApi(uri);
             XDocument respuestaXML = XDocument.Load(new StringReader(xml));
             XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
             XElement listIdentifierElement = respuestaXML.Root.Element(nameSpace + "ListIdentifiers");
@@ -152,91 +149,13 @@ namespace API_CARGA.Models.Services
         /// <returns>RDF</returns>
         public string CallGetRecord(Guid repoIdentifier, string identifier)
         {
-            string respuesta = CallGetApi($"etl/GetRecord/{repoIdentifier}?identifier={identifier}&&metadataPrefix=rdf");
+            string respuesta = _publishData.CallGetApi($"etl/GetRecord/{repoIdentifier}?identifier={identifier}&&metadataPrefix=rdf");
             XDocument respuestaXML = XDocument.Parse(respuesta);
             XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
             string rdf = respuestaXML.Root.Element(nameSpace + "GetRecord").Descendants(nameSpace + "metadata").First().FirstNode.ToString();
             return rdf;
         }
 
-        public void CallDataPublish(string rdf)
-        {
-            var bytes = Encoding.UTF8.GetBytes(rdf);
-            MultipartFormDataContent multiContent = new MultipartFormDataContent();
-            multiContent.Add(new ByteArrayContent(bytes), "rdfFile", "rdfFile.rdf");
-            CallPostApiFile("etl/data-publish", multiContent);
-        }
-
-        public void CallDataValidate(string rdf, Guid repositoryIdentifier)
-        {
-            var bytes = Encoding.UTF8.GetBytes(rdf);
-            MultipartFormDataContent multiContent = new MultipartFormDataContent();            
-            multiContent.Add(new ByteArrayContent(bytes), "rdfFile", "rdfFile.rdf");
-            string response= CallPostApiFile("etl/data-validate", multiContent, "repositoryIdentifier="+ repositoryIdentifier.ToString());
-            ShapeReport shapeReport= JsonConvert.DeserializeObject<ShapeReport>(response);
-            if (!shapeReport.conforms && shapeReport.severity == "http://www.w3.org/ns/shacl#Violation")
-            {
-                throw new Exception("Se han producido errores en la validación: "+ JsonConvert.SerializeObject(shapeReport));
-            }
-        }
-
-        //http://herc-as-front-desa.atica.um.es/etl/ListIdentifiers/13131?metadataPrefix=rdf
-        private string CallGetApi(string urlMethod)
-        {
-            string result = "";
-            HttpResponseMessage response = null;
-            try
-            {
-                HttpClient client = new HttpClient();
-                string url = _serviceUrl.GetUrl();
-                response = client.GetAsync($"{url}{urlMethod}").Result;
-                response.EnsureSuccessStatusCode();
-                result = response.Content.ReadAsStringAsync().Result;
-            }
-            catch (HttpRequestException)
-            {
-                if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
-                {
-                    throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
-                }
-                else
-                {
-                    throw new HttpRequestException(response.ReasonPhrase);
-                }
-            }
-            return result;
-        }
-
-        private string CallPostApiFile(string urlMethod, MultipartFormDataContent item,string parameters=null)
-        {
-            //string stringData = JsonConvert.SerializeObject(item);
-            //var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
-            string result = "";
-            HttpResponseMessage response = null;
-            try
-            {
-                HttpClient client = new HttpClient();
-                string url = _serviceUrl.GetUrl()+ urlMethod;
-                if(parameters!=null)
-                {
-                    url += "?"+parameters;
-                }
-                response = client.PostAsync(url, item).Result;
-                response.EnsureSuccessStatusCode();
-                result = response.Content.ReadAsStringAsync().Result;
-                return result;
-            }
-            catch (HttpRequestException)
-            {
-                if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
-                {
-                    throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
-                }
-                else
-                {
-                    throw new HttpRequestException(response.ReasonPhrase);
-                }
-            }
-        }
+        
     }
 }

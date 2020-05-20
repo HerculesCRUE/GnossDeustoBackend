@@ -1,93 +1,82 @@
+![](.//media/CabeceraDocumentosMD.png)
+
 # Hércules Backend ASIO. Especificación de las funciones de carga
 
-[1 INTRODUCCIÓN 4](#introducción)
+[1 INTRODUCCIÓN](#introducción)
 
-[2 ARQUITECTURA DE LOS PROCESOS DE CARGA
-5](#arquitectura-de-los-procesos-de-carga)
+[2 ARQUITECTURA DE LOS PROCESOS DE CARGA](#arquitectura-de-los-procesos-de-carga)
 
-[3 OAI-PMH. Implementación Hércules
-6](#oai-pmh.-implementación-hércules)
+[3 OAI-PMH. Implementación Hércules](#oai-pmh.-implementación-hércules)
 
-[3.1 Delete records 7](#delete-records)
+[3.1 Delete records](#delete-records)
 
-[3.2 Granularidad de los 'datestamp' 7](#granularidad-de-los-datestamp)
+[3.2 Granularidad de los 'datestamp'](#granularidad-de-los-datestamp)
 
-[3.3 Datestamps devueltos 7](#datestamps-devueltos)
+[3.3 Datestamps devueltos](#datestamps-devueltos)
 
-[3.4 Confidencialidad de los datos 7](#confidencialidad-de-los-datos)
+[3.4 Confidencialidad de los datos](#confidencialidad-de-los-datos)
 
-[3.5 Seguridad 7](#seguridad)
+[3.5 Seguridad](#seguridad)
 
-[4 API de Carga 8](#api-de-carga)
+[4 API de Carga](#api-de-carga)
 
-[4.1 API de Carga. ETL 8](#api-de-carga.-etl)
+[4.1 API de Carga. ETL](#api-de-carga.-etl)
 
-[4.1.1 POST etl​/data-publish 8](#post-etldata-publish)
+[4.1.1 POST etl​/data-publish](#post-etldata-publish)
 
-[4.1.2 POST etl​/data-validate 8](#post-etldata-validate)
+[4.1.2 POST etl​/data-validate](#post-etldata-validate)
 
-[4.1.3 POST etl​/data-discover 8](#post-etldata-discover)
+[4.1.3 POST etl​/data-discover](#post-etldata-discover)
 
-[4.1.4 GET etl​/GetRecord/{repositoryIdentifier}
-8](#get-etlgetrecordrepositoryidentifier)
+[4.1.4 GET etl​/GetRecord/{repositoryIdentifier}](#get-etlgetrecordrepositoryidentifier)
 
-[4.1.5 GET etl​/Identify/{repositoryIdentifier}
-9](#get-etlidentifyrepositoryidentifier)
+[4.1.5 GET etl​/Identify/{repositoryIdentifier}](#get-etlidentifyrepositoryidentifier)
 
-[4.1.6 GET etl​/ListIdentifiers/{repositoryIdentifier}
-9](#get-etllistidentifiersrepositoryidentifier)
+[4.1.6 GET etl​/ListIdentifiers/{repositoryIdentifier}](#get-etllistidentifiersrepositoryidentifier)
 
-[4.1.7 GET etl​/ListMetadataFormats/{repositoryIdentifier}
-9](#get-etllistmetadataformatsrepositoryidentifier)
+[4.1.7 GET etl​/ListMetadataFormats/{repositoryIdentifier}](#get-etllistmetadataformatsrepositoryidentifier)
 
-[4.1.8 GET etl​/ListRecords/{repositoryIdentifier}
-9](#get-etllistrecordsrepositoryidentifier)
+[4.1.8 GET etl​/ListRecords/{repositoryIdentifier}](#get-etllistrecordsrepositoryidentifier)
 
-[4.1.9 GET etl​/ListSets/{repositoryIdentifier}
-9](#get-etllistsetsrepositoryidentifier)
+[4.1.9 GET etl​/ListSets/{repositoryIdentifier}](#get-etllistsetsrepositoryidentifier)
 
-[4.2 API de Carga. ETL-CONFIG 9](#api-de-carga.-repository)
+[4.2 API de Carga. ETL-CONFIG](#api-de-carga.-repository)
 
-[4.2.1 GET etl-config/​repository 9](#get-etl-configrepository)
+[4.2.1 GET etl-config/​repository](#get-etl-configrepository)
 
-[4.2.2 POST etl-config/​repository 9](#post-etl-configrepository)
+[4.2.2 POST etl-config/​repositor](#post-etl-configrepository)
 
-[4.2.3 GET etl-config/​repository/{identifier}
-10](#get-etl-configrepositoryidentifier)
+[4.2.3 GET etl-config/​repository/{identifier}](#get-etl-configrepositoryidentifier)
 
-[4.2.4 DELETE etl-config/​repository/{identifier}
-10](#delete-etl-configrepositoryidentifier)
+[4.2.4 DELETE etl-config/​repository/{identifier}](#delete-etl-configrepositoryidentifier)
 
-[4.2.5 PUT etl-config/​repository/{identifier}
-10](#put-etl-configrepositoryidentifier)
+[4.2.5 PUT etl-config/​repository/{identifier}](#put-etl-configrepositoryidentifier)
 
-[4.3 API de Carga. SYNC 9](#api-de-carga.-sync)
+[4.3 API de Carga. SYNC](#api-de-carga.-sync)
 
-[4.3.1 POST sync/execute 10](#post-syncexecute)
+[4.3.1 POST sync/execute ](#post-syncexecute)
 
-[4.4 API de Carga. VALIDATION 9](#api-de-carga.-validation)
+[4.4 API de Carga. VALIDATION](#api-de-carga.-validation)
 
-[4.4.1 GET etl​-config/validation 10](#get-etl-configvalidation)
+[4.4.1 GET etl​-config/validation](#get-etl-configvalidation)
 
-[4.4.2 POST etl​-config/validation 10](#post-etl-configvalidation)
+[4.4.2 POST etl​-config/validation](#post-etl-configvalidation)
 
-[4.4.3 GET etl​-config/validation/{identifier}
-10](#get-etl-configvalidationidentifier)
+[4.4.3 GET etl​-config/validation/{identifier}](#get-etl-configvalidationidentifier)
 
-[4.4.4 DELETE etl​-config/validation/{identifier}
-10](#delete-etl-configvalidationidentifier)
+[4.4.4 DELETE etl​-config/validation/{identifier}](#delete-etl-configvalidationidentifier)
 
-[4.4.5 PUT etl​-config/validation/{identifier}
-10](#put-etl-configvalidationidentifier)
+[4.4.5 PUT etl​-config/validation/{identifier}](#put-etl-configvalidationidentifier)
 
 INTRODUCCIÓN
 ============
 
-Este documento contiene la especificación de las funciones de carga, que
-incluye la descripción de la implementación del protocolo OAI-PMH para
-el intercambio de datos desde el SGI hacia el Backend. Los formatos de
-metadatos que devuelve el protocolo OAI-PMH se corresponden con lo
-definido en la Red de Ontologías Hércules (ROH) para cada una de sus
+Este documento contiene la especificación de las funciones de carga del 
+proyecto Hércules ASIO ([API Carga](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA)), e incluye la descripción de la implementación 
+del [protocolo OAI-PMH](https://www.openarchives.org/pmh/)(Open Archive Initiative -- Protocol for Metadata Harvesting) 
+para el intercambio de datos desde el SGI hacia el Backend. 
+Los formatos de metadatos que devuelve el protocolo OAI-PMH se corresponden
+con lo definido en la [Red de Ontologías Hércules (ROH)](https://github.com/HerculesCRUE/GnossDeustoOnto) para cada una de sus
 entidades.
 
 Los grupos funcionales del API de carga de datos son:

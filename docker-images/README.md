@@ -1,5 +1,6 @@
 ## Sobre docker-images
-Listado de imagenes docker de todas las aplicaciones incluidas en GnossDeustoBackend
+
+Este es el listado de imágenes docker de las aplicaciones incluidas en GnossDeustoBackend:
 
  - [API_CARGA](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA "API_CARGA") - Servicio web que realiza las tareas de carga/configuración: http://herc-as-front-desa.atica.um.es/docs/apicarga.tar.gz
  - [FrontEndCarga](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/FrontEndCarga "FrontEndCarga") - Interfaz web para la parte de Repository y Validation del API_CARGA: http://herc-as-front-desa.atica.um.es/docs/apifrontcarga.tar.gz
@@ -8,72 +9,73 @@ Listado de imagenes docker de todas las aplicaciones incluidas en GnossDeustoBac
  - [cvn](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/cvn) - Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH: http://herc-as-front-desa.atica.um.es/docs/apicvn.tar.gz
  - [CronConfigure](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/CronConfigure) - Servicio Web que realiza la creación de tareas para la sincronización de un repositorio: http://herc-as-front-desa.atica.um.es/docs/apicron.tar.gz
 
-DESPLIEGUE DOCKER / DOCKER-COMPOSE
+Despliegue DOCKER / DOCKER-COMPOSE
+----------------------------------
 
-Una vez que tengamos las imágenes tenemos descargadas en el nodo de Docker, tenemos que importarlas como imágenes docker con este comando: 
+Una vez que tengamos las imágenes descargadas, tenemos que importarlas como imágenes docker con este comando: 
 
-docker load < imagen.tar
+	docker load < {nombre-imagen}.tar.gz
 
-Cuando las tengamos importadas las desplegaremos con docker-compose creando un archivo docker-compose.yml. Lo único que debemos tener en cuenta es que los docker-compose.yml deben estar en ubicaciones separadas ya que se llaman igual (docker-compose.yml) y deber respetar el formato yaml, ya que si hay tabulaciones no funcionará aunque lanza errores bastante claros cuando ocurre esto. 
+Cuando las tengamos importadas las desplegaremos con docker-compose, creando un archivo docker-compose.yml. Hay que tener en cuenta que los docker-compose.yml deben estar en ubicaciones separadas ya que tienen el mismo nombre (docker-compose.yml) y, además, respetar el formato yaml, ya que si hay tabulaciones no funcionará, aunque lanza errores bastante claros cuando ocurre esto. 
 
-El primero de ellos va a contener lo siguiente, adaptando las variables de entorno (enviroment:) a nuestras necesidades. El segundo bloque de los ports es el puerto que utiliza inernamente la api en docker y el primero en el que se levanta externamente y con este podemos jugar segun nuestras necesidades.
+Indicamos a continuación el contenido del primer compose, que va a contener varios servicios. En cada uno hemos adaptado las variables de entorno (enviroment:) a nuestras necesidades y definido en un segundo bloque los puertos (ports). El segundo indica el que utiliza internamente cada api en docker y el primero es el que se levanta externamente, que podemos adaptar segun nuestras necesidades.
 
-version: '3'
-
-services:
-  apicarga:
-    image: apicarga
-    ports:
-      - 5100:5100
-	environment:
-	  PostgreConnection: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
-      PostgreConnectionmigration: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
-	  ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
-	  Graph: "http://graph.um.es/graph/um_cvn"
-      Endpoint: "http://155.54.239.204:8890/sparql"
-      QueryParam: "query"
+	version: '3'
+	
+	services:
+	  apicarga:
+	    image: apicarga
+	    ports:
+	      - 5100:5100
+		environment:
+		  PostgreConnection: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
+	      PostgreConnectionmigration: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
+		  ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
+		  Graph: "http://graph.um.es/graph/um_cvn"
+	      Endpoint: "http://155.54.239.204:8890/sparql"
+	      QueryParam: "query"
+		  
+	  apifrontcarga:
+	    image: apifrontcarga
+	    ports:
+	      - 5103:5103
+		environment:
+	      ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
+		  ConfigUrlCron: "http://herc-as-front-desa.atica.um.es/cron-config/"
+		  
+	  apicron:
+	    image: apicron
+	    ports:
+	      - 5107:5107
+	    environment:
+		  HangfireConnection: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
+		  ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
 	  
-  apifrontcarga:
-    image: apifrontcarga
-    ports:
-      - 5103:5103
-	environment:
-      ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
-	  ConfigUrlCron: "http://herc-as-front-desa.atica.um.es/cron-config/"
+	  apiuris:
+	    image: apiuris
+	    ports:
+	      - 5000:5000
 	  
-  apicron:
-    image: apicron
-    ports:
-      - 5107:5107
-    environment:
-	  HangfireConnection: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
-	  ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
-	  
-  uris:
-    image: uris
-    ports:
-      - 5000:5000
-	  
-El segundo compose sería el siguiente, también adaptando las variables a nuestras necesidades:
+Del mismo modo, el segundo compose sería:
 
-version: '3'
+	version: '3'
+	
+	services:
+	  apicvn:
+	    image: apicvn
+	    ports:
+	      - 5104:5104
+		  
+	  apioaipmh:
+	    image: apioaipmh
+	    ports:
+	      - 5102:5102
+		environment:
+	      XML_CVN_Repository: "http://curriculumpruebas.um.es/curriculum/rest/v1/auth/"
+	      CVN_ROH_converter: "http://herc-as-front-desa.atica.um.es/cvn/v1/convert"
+	      ConfigUrl: "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH"
 
-services:
-  apicvn:
-    image: apicvn
-    ports:
-      - 5104:5104
-	  
-  apioaipmh:
-    image: oaipmh
-    ports:
-      - 5102:5102
-	environment:
-      XML_CVN_Repository: "http://curriculumpruebas.um.es/curriculum/rest/v1/auth/"
-      CVN_ROH_converter: "http://herc-as-front-desa.atica.um.es/cvn/v1/convert"
-      ConfigUrl: "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH"
-
-Los despliegues se realizan con el siguiente comando en la misma ubicacion donde se encuentre el docker-compose.yml:
+Los despliegues se realizan ejecuntando el siguiente comando, en la misma ubicacion donde se encuentre el docker-compose.yml:
 
 docker-compose up -d
 

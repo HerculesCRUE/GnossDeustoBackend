@@ -1,29 +1,35 @@
+![](.//media/CabeceraDocumentosMD.png)
+
 # Hércules Backend ASIO. Data confidentiality proposal
 
-[1 INTRODUCTION 3](#introduction)
+[1 INTRODUCTION](#introduction)
 
-[2 Requirements 4](#requirements)
+[2 Requirements](#requirements)
 
-[2.1 Data Confidentiality and privacy
-4](#data-confidentiality-and-privacy)
+[2.1 Data Confidentiality and privacy](#data-confidentiality-and-privacy)
 
-[2.2 Identified Roles 4](#identified-roles)
+[2.2 Identified Roles](#identified-roles)
 
-[3 RDF Stores secutiry options 6](#rdf-stores-security-options)
+[3 RDF Stores secutiry options](#rdf-stores-security-options)
 
-[4 Data confidentiality management 7](#data-confidentiality-management)
+[4 Data confidentiality management](#data-confidentiality-management)
 
-[4.1 Confidential entities 7](#confidential-entities)
+[4.1 Confidential entities](#confidential-entities)
 
-[4.2 Confidential Attributes 8](#confidential-attributes)
+[4.2 Confidential attributes](#confidential-attributes)
 
 INTRODUCTION
 ============
 
 This document contains two confidentiality proposal for the Backend SGI
-data. On the one hand, we consider the functional requirements and the
-expected roles, on the other, the security and privacy limitations of
-the RDF stores.
+data of the Hercules ASIO project. On the one hand, we consider the functional 
+requirements and theexpected roles, on the other, the security and privacy
+limitations of the RDF stores.
+
+The chosen proposal is the one based on the definition of [confidential entities](#confidential-entities).
+
+This proposal will be applied later in the configuration and deployment of the
+data retrieval interfaces, such as de Linked Data Server and the SPARQL Endpoint.
 
 Requirements
 ============
@@ -182,7 +188,7 @@ The pros and cons of this proposal:
 | **Confidentiality management**. It’s not necessary to manage the transfer of the confidential data to external data managers.                              | **Linked Data Server**. The public linked data server would not show data from the private graph, not even the non-confidential attributes.                                                                               |
 |                                                                                                                                                        | **SPARQL Endpoint**. It isn’t possible to retrieve any data from an entity that has a confidential attribute except for aggregated queries.                                                                               |
 
-Confidential Attributes 
+Confidential attributes 
 ------------------------
 
 If an entity has a confidential data (e.g. the project budget) then the
