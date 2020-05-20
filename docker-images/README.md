@@ -51,8 +51,8 @@ Indicamos a continuación el contenido del primer compose, que va a contener var
 		  HangfireConnection: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
 		  ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
 	  
-	  uris:
-	    image: uris
+	  apiuris:
+	    image: apiuris
 	    ports:
 	      - 5000:5000
 	  
@@ -67,7 +67,7 @@ Del mismo modo, el segundo compose sería:
 	      - 5104:5104
 		  
 	  apioaipmh:
-	    image: oaipmh
+	    image: apioaipmh
 	    ports:
 	      - 5102:5102
 		environment:
