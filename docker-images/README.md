@@ -27,7 +27,34 @@ Este es el listado de imágenes docker de las aplicaciones incluidas en GnossDeu
  - [CronConfigure](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/CronConfigure) - Servicio Web que realiza la creación de tareas para la sincronización de un repositorio: http://herc-as-front-desa.atica.um.es/docs/apicron.tar.gz
  - PostgreSQL - Imagen de PostgreSQL preparada para funcionar con el backend: http://herc-as-front-desa.atica.um.es/docs/herculessql.tar.gz
  
- 
+## Despliegue de Virtuoso con docker-compose
+
+Para desdeplegar Virtuoso con docker-compose necesitamos un docker-compose.yml con el siguiete contenido:
+
+	version: "3"
+	services:
+	    virtuoso:
+		container_name:
+		    virtuoso
+		image:
+		    openlink/virtuoso-opensource-7:latest
+		environment:
+		    DBA_PASSWORD: mysecret      
+		    VIRTUOSO_INI_FILE:            
+		    VIRT_Parameters_NumberOfBuffers: 100000
+		    VIRT_Parameters_MaxDirtyBuffers: 60000
+		    VIRT_Parameters_MaxClientConnections: 100
+		    VIRT_HTTPServer_MaxClientConnections: 50
+		    VIRT_HTTPServer_ServerIdString: "virtuoso"
+		    VIRT_Zero Config_ServerName: "virtuoso"
+		    VIRT_I18N_XAnyNormalization: 3
+		ports:
+		    - "1111:1111"
+		    - "8890:8890"
+		volumes:
+		    - /var/container-data/virtuoso/db:/database   
+		user: ${CURRENT_UID}
+		restart: unless-stopped
 
 Despliegue DOCKER / DOCKER-COMPOSE
 ----------------------------------
