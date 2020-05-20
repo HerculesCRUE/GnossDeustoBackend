@@ -164,14 +164,14 @@ suficiente para proporcionar significado a la URI.
 Es un componente opcional de posible aplicación en URIs de organización
 de conocimiento, por lo que sólo se usará en [URIs para identificar vocabularios](#uri-para-identificar-vocabularios) o en [URIs para identificar esquemas de conceptos](#uri-para-identificar-esquemas-de-conceptos).
 
-dominio o temática
+Dominio o temática
 ------------------
 
 Es un componente opcional de posible aplicación en URIs de organización
 de conocimiento o en entidades que puedan tener subclases. Por ejemplo,
 podría servir para distinguir el tema de una publicación.
 
-conceptos específicos
+Conceptos específicos
 ---------------------
 
 Es un componente opcional del URI, pero funcionalmente obligatorio si se
