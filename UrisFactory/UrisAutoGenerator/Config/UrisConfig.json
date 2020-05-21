@@ -504,6 +504,11 @@
       "ResourceClass": "Contract",
       "LabelResourceClass": "contract",
       "ResourceURI": "uriResourceStructure"
+    },
+    {
+      "ResourceClass": "FundingRole",
+      "LabelResourceClass": "fundingrole",
+      "ResourceURI": "uriResourceStructure"
     }
 	
   ]
