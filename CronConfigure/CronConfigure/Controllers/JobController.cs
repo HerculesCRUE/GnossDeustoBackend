@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CronConfigure.Controllers
 {
+    /// <summary>
+    /// Controlador para gestionar las tareas ejecutadas y poder crear tareas nuevas
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class JobController : ControllerBase

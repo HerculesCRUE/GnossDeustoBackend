@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CronConfigure.Controllers
 {
+    /// <summary>
+    /// Controlador para gestionar las tareas programadas y crear tareas nuevas programadas para una fecha determinada
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class ScheduledJobController : ControllerBase

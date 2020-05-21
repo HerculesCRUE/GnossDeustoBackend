@@ -11,6 +11,9 @@ using NCrontab;
 
 namespace CronConfigure.Controllers
 {
+    /// <summary>
+    /// Controlador para gestionar las tareas tareas recurrentes creadas así como crear tareas recurrentes nuevas
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class RecurringJobController : ControllerBase
