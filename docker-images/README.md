@@ -62,7 +62,7 @@ Para levantar Virtuoso ejecutaremos este comando en la misma ruta donde tengamos
 	
 	docker-compose up -d
 	
-Despues de ejecutar el comando ya tendríamos un servidor Virtuoso operativo en nuestro entorno. Podemos probar que efectivamente está funcionando correctamente accediiendo a http://localhost:8890, nos debería paracer la consola de administración de Virtuoso.
+Despue¡és de ejecutar el comando ya tendríamos un servidor Virtuoso operativo en nuestro entorno. Podemos probar que efectivamente está funcionando correctamente accediendo a http://localhost:8890, nos debería paracer la consola de administración de Virtuoso.
 
 ## PostgreSQL
 
@@ -70,7 +70,7 @@ Para PostgreSQL necesitamos importar la imagen que obtenemos en el enlace http:/
 	
 	docker load < herculessql.tar.gz
 	
-Una vez importada la ejecutamos con este comando:
+Con este comando la hacemos operativa:
 	
 	docker run -p 5432:5432 --name herculessql herculessql
 	
@@ -80,7 +80,7 @@ Así obtenemos una base de datos lista para que las APIs del backend puedan usar
 
 Necesitamos preparar Apache como proxy invesro y poder acceder a las APIs a través del dominio que vayamos a utilizar y luego este redirija al puerto específico de cada una de ellas.
 
-Para que funcione correctamente debemos ajustar el ServerName con el dominio que vayamos a utilizar (en este emplo mihercules.com) y añadir los parametros del proxy inverso para que Apache redirija las peticiones al API adecuda. Estos parametros los podemos ver en el final de este archivo de ejemplo http://herc-as-front-desa.atica.um.es/docs/httpd.conf.
+Para que funcione correctamente debemos ajustar el ServerName con el dominio que vayamos a utilizar (en este ejemplo mihercules.com) y añadir los parametros del proxy inverso para que Apache redirija las peticiones al API adecuda. Estos parametros los podemos ver en el final de este archivo de ejemplo http://herc-as-front-desa.atica.um.es/docs/httpd.conf.
 
 
 Despliegue de las APIs
