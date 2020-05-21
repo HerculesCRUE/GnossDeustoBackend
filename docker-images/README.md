@@ -72,7 +72,7 @@ Para PostgreSQL necesitamos importar la imagen que obtenemos en el enlace http:/
 	
 Con este comando la hacemos operativa:
 	
-	docker run -p 5432:5432 --name herculessql herculessql
+	docker run -d -p 5432:5432 --name herculessql herculessql
 	
 Así obtenemos una base de datos lista para que las APIs del backend puedan usarla.
 
