@@ -1053,7 +1053,6 @@ id.format = "{vivo:doi}"
         format = "{name} {familyName} {secondFamilyName}"
 
             [[entities.subentities.properties.sources]]
-            code = "060.010.010.040"
             name = "name"
             bean = "GivenName"
 

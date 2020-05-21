@@ -137,7 +137,9 @@ class Property(Printable):
         sources = {}
         # Rellenar todas las sources
         for source in self.sources:
-            source_node = xmltree.get_first_node_by_code(item_node, source.code)
+            source_node = item_node
+            if source.code is not None:
+                source_node = xmltree.get_first_node_by_code(item_node, source.code)
             if source_node is not None:
                 source.get_value_from_node(source_node)
         # Formatear
