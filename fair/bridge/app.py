@@ -8,8 +8,6 @@ import argparse
 
 app = Flask(__name__)
 
-app.config.from_pyfile('config.py')
-
 server_url = None
 
 
