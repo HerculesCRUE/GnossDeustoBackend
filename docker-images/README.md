@@ -142,6 +142,16 @@ Cuando las tengamos importadas las desplegaremos con docker-compose, creando un 
 	      XML_CVN_Repository: "http://curriculumpruebas.um.es/curriculum/rest/v1/auth/"
 	      CVN_ROH_converter: "http://mihercules.com/cvn/v1/convert"
 	      ConfigUrl: "http://mihercules.com/oai-pmh-cvn/OAI_PMH"
+	  
+	  apibridge:
+	    image: apibridge
+	    ports:
+	      - 5200:5200
+	  
+	  bridgeswagger:
+	    image: bridgeswagger
+	    ports:
+	      - 8082:8080
 
 Para lanzar las APIs usamos este comando como en el caso de Virtuoso:
 
