@@ -14,7 +14,7 @@ using System.Xml.Linq;
 namespace OAI_PMH.Controllers
 {
     /// <summary>
-    /// Controlador OAI-PMH
+    /// Controlador OAI-PMH que sirve los datos de los curículums de los investigadores de la Universidad de Murcia en formato RDF.
     /// </summary>
     [ApiController]
     [Route("[controller]")]
