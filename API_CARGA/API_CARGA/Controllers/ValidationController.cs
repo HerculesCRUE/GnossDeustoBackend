@@ -13,9 +13,6 @@ using VDS.RDF;
 
 namespace API_CARGA.Controllers
 {
-    /// <summary>
-    /// Contiene los procesos necesarios para la gestión de las validaciones (creación, modificación, eliminación...).
-    /// </summary>
     [Route("etl-config/[controller]")]
     [ApiController]
     public class ValidationController : ControllerBase

@@ -12,7 +12,7 @@ using Swashbuckle.AspNetCore.Filters;
 namespace API_CARGA.Controllers
 {
     /// <summary>
-    /// Contiene los procesos necesarios para la gestión de los repositorios OAI-PMH (creación, modificación, eliminación...).
+    /// Configuración del ETL
     /// </summary>
     [ApiController]
     [Route("etl-config/[controller]")]

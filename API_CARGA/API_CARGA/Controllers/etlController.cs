@@ -14,7 +14,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace API_CARGA.Controllers
 {
     /// <summary>
-    /// Contiene los procesos ETL (Extract, Transform and Load) necesarios para la carga de datos.
+    /// API de carga
     /// </summary>
     [ApiController]
     [Route("[controller]")]

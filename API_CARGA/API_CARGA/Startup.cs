@@ -21,7 +21,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 using Swashbuckle.AspNetCore.Filters;
 
 
-namespace API_CARGA
+namespace PRH
 {
     public class Startup
     {
