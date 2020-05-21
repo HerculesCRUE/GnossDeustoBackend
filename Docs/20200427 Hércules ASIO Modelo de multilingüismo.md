@@ -23,8 +23,8 @@
 INTRODUCCIÓN
 ============
 
-El desarrollo de la Red de Ontologías Hércules (ROH) debe contemplar el
-uso de diversos idiomas. Por una parte, tiene que poder albergar
+El desarrollo de la Red de Ontologías Hércules (ROH) en el proyecto Hércules ASIO
+debe contemplar el uso de diversos idiomas. Por una parte, tiene que poder albergar
 información de las universidades de las comunidades autónomas españolas
 con sus propios idiomas oficiales. Por otra, el proyecto tiene vocación
 de ser conocido y potencialmente usado más allá de España.

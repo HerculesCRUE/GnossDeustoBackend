@@ -3,16 +3,15 @@
 # Hércules Backend ASIO. Evaluación de cumplimiento Linked Data Platform (LDP)
 
 
-[1 INTRODUCCIÓN 3](#introducción)
+[1 INTRODUCCIÓN](#introducción)
 
-[2 TIPOS DE RECURSOS SOPORTADOS 4](#tipos-de-recursos-soportados)
+[2 TIPOS DE RECURSOS SOPORTADOS](#tipos-de-recursos-soportados)
 
-[3 RECUPERACIÓN Y CREACIÓN DE RECURSOS
-5](#recuperación-y-creación-de-recursos)
+[3 RECUPERACIÓN Y CREACIÓN DE RECURSOS](#recuperación-y-creación-de-recursos)
 
-[4 CONTENEDORES 6](#contenedores)
+[4 CONTENEDORES](#contenedores)
 
-[5 CONCLUSIONES 7](#conclusiones)
+[5 CONCLUSIONES](#conclusiones)
 
 INTRODUCCIÓN
 ============
@@ -26,7 +25,7 @@ arquitectura para leer y escribir datos enlazados en la web.
 LDP 1.0 es una recomendación del W3C: <https://www.w3.org/TR/ldp/>
 
 El presente documento evalúa el grado de cumplimiento de LDP que el
-Servidor Linked Data de ASIO debe cumplir, para lo que se tiene en
+Servidor Linked Data de Hércules ASIO debe cumplir, para lo que se tiene en
 cuenta la extensión de uso en la comunidad Linked Data, su utilidad en
 ASIO, los posibles beneficios a largo plazo, la dificultad de
 implementación y los condicionantes de seguridad.
@@ -113,11 +112,11 @@ CONTENEDORES
 ============
 
 La implementación LDP del servidor Linked Data de ASIO sólo tendría un
-contenedor (*basic* *container*) y devolvería sólo un subconjunto de las
+contenedor ([*basic* *container*](https://www.w3.org/TR/ldp/#ldpbc)) y devolvería sólo un subconjunto de las
 propiedades del contenedor (*minimal-container triples*), sin devolver
-los triples de los recursos. En el caso de ASIO, el volumen de recursos
+los triples de los recursos contenidos. En el caso de ASIO, el volumen de recursos
 y su complejidad no permite que la recuperación de los triples se
-realice mediante el mecanismo previsto en los contenedores.
+realice mediante el mecanismo previsto para los contenedores.
 
 CONCLUSIONES
 ============

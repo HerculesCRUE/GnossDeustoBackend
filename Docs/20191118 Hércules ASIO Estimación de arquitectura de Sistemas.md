@@ -1,26 +1,31 @@
+![](.//media/CabeceraDocumentosMD.png)
 
 # Hércules Backend ASIO. Estimación de Arquitectura de Sistemas
 
-[1 INTRODUCCIÓN 3](#introducción)
+[1 INTRODUCCIÓN](#introducción)
 
-[2 ARQUITECTURA DE SISTEMAS 4](#arquitectura-de-sistemas)
+[2 ARQUITECTURA DE SISTEMAS](#arquitectura-de-sistemas)
 
-[2.1 Arquitectura lógica 4](#arquitectura-lógica)
+[2.1 Arquitectura lógica](#arquitectura-lógica)
 
-[2.2 Arquitectura Física en producción
-6](#arquitectura-física-en-producción)
+[2.2 Arquitectura Física en producción](#arquitectura-física-en-producción)
 
-[2.3 Arquitectura Física en Preproducción
-9](#arquitectura-física-en-preproducción)
+[2.3 Arquitectura Física en Preproducción](#arquitectura-física-en-preproducción)
 
-[2.4 Arquitectura Física en Desarrollo
-10](#arquitectura-física-en-desarrollo)
+[2.4 Arquitectura Física en Desarrollo](#arquitectura-física-en-desarrollo)
 
 INTRODUCCIÓN
 ============
 
 El presente documento describe la arquitectura de sistemas del Backend
-SGI del proyecto Hércules ASIO.
+SGI del proyecto Hércules ASIO, para su despliegue en la infraestructura 
+de cada universidad.
+
+Además de la arquitetura lógica, incluye una propuesta de software base para 
+cada componente y la estimación de las dimensiones en el entorno de producción y
+en los entornos de preproducción y desarrollo, necesarios para el proceso
+de desarrollo del proyecto ASIO.
+
 
 ARQUITECTURA DE SISTEMAS
 ========================
@@ -37,40 +42,37 @@ El diagrama lógico de la arquitectura es el siguiente:
 
 Los componentes de la arquitectura son:
 
--   Frontales web para la generación dinámica de contenido Web.
+-   **Frontales web para la generación dinámica de contenido Web**.
     Contarían con un balanceo de red para garantizar la disponibilidad y
     dotar al Backend de una mayor capacidad de respuesta. Se encargarían
     de servir el contenido Web y de todos los servicios y APIs, con los
     niveles de seguridad de cada caso.
 
--   **Frontales** web para servir contenido estático y cache web**. Se
-    encar**garían de las imágenes, ficheros Javascript y CSS de las
+-   **Frontales web para servir contenido estático y cache web**. Se
+    encargarían de las imágenes, ficheros Javascript y CSS de las
     páginas.
 
--   **S**ervidor para ejecución de servicios y tareas de procesado
+-   **Servidor para ejecución de servicios y tareas de procesado**
     offline, que se encargarían de las tareas de carga y sincronización
     de datos entre los sistemas del backend y con los sistemas externos.
 
-```{=html}
-<!-- -->
-```
--   Servicio de Base de Datos SQL, para configuración del portal
+-   **Servicio de Base de Datos SQL**, para configuración del portal
     semántico.
 
--   **S**ervidores balanceados para el sistema de gestión de base de
-    datos RDF que aloje al Grafo de Conocimiento.
+-   **Servidores balanceados para el sistema de gestión de base de
+    datos RDF** que aloje al Grafo de Conocimiento.
 
--   **S**ervidores balanceados para datos de cache, pregenerados por la
+-   **Servidores balanceados para datos de cache**, pregenerados por la
     plataforma para agilizar el servicio de páginas y datos hacia los
     usuarios del backend.
 
--   Servidor para gestión de colas de eventos, que usaremos en los
+-   **Servidor para gestión de colas de eventos**, que usaremos en los
     procesos de actualización de datos.
 
--   Almacenamiento de disco en red, para alojamiento de archivos que
+-   **Almacenamiento de disco en red**, para alojamiento de archivos que
     deban ser accesibles por diferentes componentes del backend.
 
--   Servicio de balanceo de carga interno para los servidores de datos.
+-   **Servicio de balanceo de carga interno** para los servidores de datos.
 
 Arquitectura Física en producción
 ---------------------------------

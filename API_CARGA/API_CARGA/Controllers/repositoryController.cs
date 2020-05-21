@@ -41,7 +41,7 @@ namespace API_CARGA.Controllers
         /// <summary>
         /// Obtiene la configuración de un repositorio OAI-PMH
         /// </summary>
-        /// <param name="identifier">Identificador del repositorio</param>
+        /// <param name="identifier">Identificador del repositorio, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository</param>
         /// <returns>Configuración del repositorio</returns>
         [HttpGet("{identifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -71,7 +71,7 @@ namespace API_CARGA.Controllers
         /// <summary>
         /// Elimina la configuración de un repositorio OAI-PMH.
         /// </summary>
-        /// <param name="identifier">Identificador del repositorio</param>
+        /// <param name="identifier">Identificador del repositorio, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository, ejemplo: 5efac0ad-ec4e-467d-bbf5-ce3f64edb46a</param>
         /// <returns></returns>
         [HttpDelete("{identifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

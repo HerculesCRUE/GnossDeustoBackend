@@ -14,21 +14,21 @@ namespace API_CARGA.ModelExamples
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_1",
-                Url = "config\\repository",
+                Url = "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH",
                 OauthToken = "12weq1"
             });
             repositoryConfigs.Add(new RepositoryConfig
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_2",
-                Url = "config\\repository",
+                Url = "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH",
                 OauthToken = "11389"
             });
             repositoryConfigs.Add(new RepositoryConfig
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_3",
-                Url = "config\\repository",
+                Url = "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH",
                 OauthToken = "1238912"
             });
             return repositoryConfigs;

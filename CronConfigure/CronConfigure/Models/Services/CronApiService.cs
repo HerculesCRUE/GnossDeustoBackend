@@ -12,7 +12,7 @@ using NCrontab;
 
 namespace CronConfigure.Models.Services
 {
-    public class CronApiService
+    public class CronApiService : ICronApiService
     {
         private HangfireEntityContext _context;
         public CronApiService(HangfireEntityContext context)
@@ -170,7 +170,7 @@ namespace CronConfigure.Models.Services
             return _context.Set.Any(item => item.Key.Equals("recurring-jobs") && item.Value.Equals(recurringJob));
         }
 
-        internal bool ExistScheduledJob(string id)
+        public bool ExistScheduledJob(string id)
         {
             return _context.Set.Any(item => item.Key.Equals("schedule") && item.Value.Equals(id));
         }

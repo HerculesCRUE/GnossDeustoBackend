@@ -14,9 +14,9 @@ namespace CronConfigure.Controllers
     [ApiController]
     public class ScheduledJobController : ControllerBase
     {
-        public CronApiService _cronApiService;
-        private ProgramingMethodsService _programingMethodsService;
-        public ScheduledJobController(CronApiService cronApiService, ProgramingMethodsService programingMethodsService)
+        public ICronApiService _cronApiService;
+        private IProgramingMethodService _programingMethodsService;
+        public ScheduledJobController(ICronApiService cronApiService, IProgramingMethodService programingMethodsService)
         {
             _cronApiService = cronApiService;
             _programingMethodsService = programingMethodsService;
@@ -25,8 +25,8 @@ namespace CronConfigure.Controllers
         /// <summary>
         /// Obtiene un listado de tareas programadas 
         /// </summary>
-        /// <param name="from">número desde el que tiene que empezar a traer</param>
-        /// <param name="count">número de tareas a traer</param>
+        /// <param name="from">número desde el cual se va a traer las tareas del listado, por defecto 0 para empezar a traer desde el primer elemento de la lista de tareas</param>
+        /// <param name="count">número máximo de tareas programadas a traer</param>
         /// <returns>listado de tareas programadas</returns> 
         [HttpGet]
         public IActionResult GetScheduledJobs(int from, int count)
@@ -40,9 +40,9 @@ namespace CronConfigure.Controllers
         /// <param name="fecha_ejecucion">fecha en la que se ejecutará la tarea,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
         /// <param name="id_repository">identificador del repositorio,  este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository</param>
         /// <param name="fecha">fecha a partir de la cual se debe actualizar,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
-        /// <param name="set">tipo del objeto</param>
-        /// <param name="codigo_objeto">codigo del objeto</param>
-        /// <returns></returns> 
+        /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones, este parametro se puede obtener de http://herc-as-front-desa.atica.um.es/carga/etl/ListSets/{identificador_del_repositorio}</param>
+        /// <param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro, este parametro se puede obtener en la respuesta identifier que da el método http://herc-as-front-desa.atica.um.es/carga/etl/ListIdentifiers/{identificador_del_repositorio}?metadataPrefix=rdf</param>
+        /// <returns>identificador de la tarea creada</returns> 
         [HttpPost]
         public IActionResult AddScheduledJob(string fecha_ejecucion, string id_repository, string fecha = null, string set = null, string codigo_objeto = null)
         {
@@ -87,14 +87,14 @@ namespace CronConfigure.Controllers
             {
                 return BadRequest("identificador invalido");
             }
-            _programingMethodsService.ProgramPublishRepositoryJob(idRep, fechaInicio, fechaDateTime, set, codigo_objeto);
-            return Ok();
+            return Ok(_programingMethodsService.ProgramPublishRepositoryJob(idRep, fechaInicio, fechaDateTime, set, codigo_objeto));
+            
         }
 
         /// <summary>
         /// Añade a la cola una tarea que estaba prevista ejecutar en un futuro 
         /// </summary>
-        /// <param name="id">identificador de la tarea programada</param>
+        /// <param name="id">identificador de la tarea programada, identificador que se obtiene al crear una tarea progranada o accesibke a través de http://herc-as-front-desa.atica.um.es/cron-config/ScheduledJob?from=0&amp;count=100</param>
         /// <returns></returns> 
         [HttpPut]
         public IActionResult EnqueuedScheduledJob(string id)
@@ -113,7 +113,7 @@ namespace CronConfigure.Controllers
         /// <summary>
         /// Elimina una tarea programada
         /// </summary>
-        /// <param name="id">identificador de la tarea programada</param>
+        /// <param name="id">identificador de la tarea programada, identificador que se obtiene al crear una tarea progranada o accesibke a través de http://herc-as-front-desa.atica.um.es/cron-config/ScheduledJob?from=0&amp;count=100</param>
         /// <returns></returns> 
         [HttpDelete]
         public IActionResult DeleteScheduledJob(string id)

@@ -1,0 +1,21 @@
+PREFIX roh: <http://purl.org/roh#>
+PREFIX vivo: <http://purl.org/roh/mirror/vivo#>
+PREFIX ro: <http://purl.org/roh/mirror/obo/ro#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT DISTINCT ?project ?fundingProgram ?otherOrganization ?university 
+WHERE{
+?project a vivo:Project ;
+vivo:dateTimeInterval ?dateTimeInterval ;
+vivo:relates ?role ;
+vivo:relates ?otherRole ;
+roh:isSupportedBy ?funding .
+?funding roh:fundedBy ?fundingProgram .
+?role roh:roleOf <http://purl.org/roh/data#centro-investigacion-1> .
+?otherRole roh:roleOf ?otherOrganization .
+?university ro:BFO_0000051 ?otherOrganization .
+?university a vivo:University .
+?dateTimeInterval vivo:start ?start ;
+vivo:end ?end .
+?start vivo:dateTime ?startTime .
+?end vivo:dateTime ?endTime .
+FILTER (?otherOrganization != <http://purl.org/roh/data#centro-investigacion-1>)FILTER (YEAR(?startTime) <= "2019"^^xsd:integer && YEAR(?endTime) >= "2019"^^xsd:integer)}

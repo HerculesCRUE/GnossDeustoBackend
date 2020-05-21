@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UrisFactory.Extra.Exceptions;
 using UrisFactory.Models.ConfigEntities;
@@ -105,10 +106,14 @@ namespace UrisFactory.Models.Services
         }
 
         //Operations with the Schema
-        private void DeleteUriStructureInfo(UriStructure uriStructure, ResourcesClass resourcesClass)
+        private void DeleteUriStructureInfo(UriStructure uriStructure, List<ResourcesClass> resourcesClass)
         {
             _uriSchema.UriStructures.Remove(uriStructure);
-            _uriSchema.ResourcesClasses.Remove(resourcesClass);
+            foreach(ResourcesClass item in resourcesClass)
+            {
+                _uriSchema.ResourcesClasses.Remove(item);
+            }
+           
         }
 
         ///<exception cref="UriStructureConfiguredException">UriStructure not exist in config file</exception>
@@ -117,7 +122,7 @@ namespace UrisFactory.Models.Services
             if (ExistUriStructure(name))
             {
                 var uriStructure = _uriSchema.UriStructures.First(uriStructure => uriStructure.Name.Equals(name));
-                var resourcesClasses = _uriSchema.ResourcesClasses.First(uriStructure => uriStructure.ResourceURI.Equals(name));
+                var resourcesClasses = _uriSchema.ResourcesClasses.Where(uriStructure => uriStructure.ResourceURI.Equals(name)).ToList();
                 DeleteUriStructureInfo(uriStructure, resourcesClasses);
             }
             else
@@ -137,9 +142,9 @@ namespace UrisFactory.Models.Services
             return _uriSchema.UriStructures.FirstOrDefault(uriStruct => uriStruct.Name.Equals(name));
         }
         
-        public ResourcesClass GetResourceClass(string name)
+        public List<ResourcesClass> GetResourceClass(string name)
         {
-            return _uriSchema.ResourcesClasses.FirstOrDefault(resourceClass => resourceClass.ResourceURI.Equals(name));
+            return _uriSchema.ResourcesClasses.Where(resourceClass => resourceClass.ResourceURI.Equals(name)).ToList();
         }
 
         ///<exception cref="UriStructureConfiguredException">UriStructure Already exist in config file</exception>

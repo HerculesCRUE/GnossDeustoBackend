@@ -1,0 +1,11 @@
+PREFIX vivo: <http://purl.org/roh/mirror/vivo#>
+PREFIX roh: <http://purl.org/roh#>
+SELECT DISTINCT ?project ?centre 
+WHERE {
+?project a vivo:Project ;
+vivo:relates ?role ;
+vivo:relates ?centreRole .
+?role roh:roleOf <http://purl.org/roh/data#company-one> .
+?centreRole roh:roleOf ?centre .
+?centre a roh:ResearchGroup .
+}

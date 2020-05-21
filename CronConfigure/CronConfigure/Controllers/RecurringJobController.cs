@@ -16,10 +16,10 @@ namespace CronConfigure.Controllers
     public class RecurringJobController : ControllerBase
     {
 
-        public CronApiService _cronApiService;
-        private ProgramingMethodsService _programingMethodsService;
+        public ICronApiService _cronApiService;
+        private IProgramingMethodService _programingMethodsService;
 
-        public RecurringJobController(CronApiService cronApiService, ProgramingMethodsService programingMethodsService)
+        public RecurringJobController(ICronApiService cronApiService, IProgramingMethodService programingMethodsService)
         {
             _cronApiService = cronApiService;
             _programingMethodsService = programingMethodsService;
@@ -29,12 +29,12 @@ namespace CronConfigure.Controllers
         /// Añade una sincornizacion recurrente
         /// </summary>
         /// <param name="id_repository">identificador del repositorio a sincronizar, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository </param>
-        /// <param name="nombre_job">nombre de la tarea</param>
+        /// <param name="nombre_job">nombre de la tarea recurrente, no puede haber varias tareas con el mismo nombre, este nombre es elegido por el usuario que crea la tarea recurrente</param>
         /// <param name="fecha_inicio">momento a partir del cúal empieza la sincronización,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
         /// <param name="cron_expression">el parametro cron_expresion sigue un patrón de 5 atributos, separados por espacios entre sí: * * * * *. El primero corresponde al minuto, el segundo a la hora, a continuación el día del mes, seguido por el mes y posteriormente el día del mes. Un ejemplo sería: */15 * * * * que correspondería a cada 15 minutos, para probar las expresisiones se puede acudir a https://crontab.guru/</param>
         /// <param name="fecha">fecha a partir de la cual se debe actualizar,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
-        /// <param name="set">tipo del objeto</param>
-        /// <param name="codigo_objeto">codigo del objeto</param>
+        /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones, este parametro se puede obtener de http://herc-as-front-desa.atica.um.es/carga/etl/ListSets/{identificador_del_repositorio}</param>
+        /// <param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro, este parametro se puede obtener en la respuesta identifier que da el método http://herc-as-front-desa.atica.um.es/carga/etl/ListIdentifiers/{identificador_del_repositorio}?metadataPrefix=rdf</param>
         /// <returns></returns> 
         [HttpPost]
         public IActionResult AddExecution(string id_repository, string nombre_job, string fecha_inicio, string cron_expression, string fecha = null, string set = null, string codigo_objeto = null)
@@ -108,7 +108,7 @@ namespace CronConfigure.Controllers
         /// <summary>
         /// Elimina una tarea recurrente
         /// </summary>
-        /// <param name="nombre_job">nombre de la tarea recurrente a eliminar</param>
+        /// <param name="nombre_job">nombre de la tarea recurrente a eliminar, es el nombre que se le ha puesto a la tarea en el momento de su creación se puede obtener desde http://herc-as-front-desa.atica.um.es/cron-config/RecurringJob</param>
         /// <returns></returns> 
         [HttpDelete]
         public IActionResult DeleteRecurringJob(string nombre_job)
@@ -118,7 +118,7 @@ namespace CronConfigure.Controllers
         }
 
         /// <summary>
-        /// Obtiene un listado de tareas recurrentes 
+        /// Obtiene el listado de tareas recurrentes 
         /// </summary>
         /// <returns>listado de tareas recurrentes</returns> 
         [HttpGet]
@@ -130,7 +130,7 @@ namespace CronConfigure.Controllers
         /// <summary>
         /// Obtiene una tarea recurrente
         /// </summary>
-        /// <param name="id">nombre de la tarea recurrente</param>
+        /// <param name="id">nombre de la tarea recurrentea obtener, es el nombre que se le ha puesto a la tarea en el momento de su creación se puede obtener desde http://herc-as-front-desa.atica.um.es/cron-config/RecurringJob</param>
         /// <returns>tarea recurrentes</returns> 
         [HttpGet("{id}")]
         public IActionResult GetRecurringJob(string id)
@@ -141,7 +141,7 @@ namespace CronConfigure.Controllers
         /// <summary>
         /// Obtiene un listado de tareas que se han ejecutado a partir de una tarea recurrente 
         /// </summary>
-        /// <param name="id">nombre de la tarea recurrente</param>
+        /// <param name="id">nombre de la tarea recurrente de la que se quieren obtener las tareas ejecutadas, es el nombre que se le ha puesto a la tarea en el momento de su creación se puede obtener desde http://herc-as-front-desa.atica.um.es/cron-config/RecurringJob</param>
         /// <returns>listado de tareas</returns> 
         [HttpGet("jobs/{id}")]
         public IActionResult GetJobsOfRecurringJob(string id)

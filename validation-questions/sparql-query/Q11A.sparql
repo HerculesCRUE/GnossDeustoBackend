@@ -1,0 +1,16 @@
+PREFIX vivo: <http://purl.org/roh/mirror/vivo#>
+PREFIX roh: <http://purl.org/roh#>
+PREFIX foaf: <http://purl.org/roh/mirror/foaf#>
+PREFIX bibo: <http://purl.org/roh/mirror/bibo#>
+SELECT DISTINCT ?researchObject ?date 
+WHERE {
+?researchObject a roh:ResearchObject ;
+vivo:dateIssued ?dateIssued ;
+roh:hasKnowledgeArea ?knowledgeArea ;
+bibo:authorList ?authorList .
+?dateIssued vivo:dateTime ?date .
+?authorList ?p ?author .
+?author a foaf:Person ;
+roh:hasPosition ?position .
+?position vivo:relates <http://purl.org/roh/data#centro-investigacion-1> .
+} ORDER BY ASC(?date) LIMIT 1

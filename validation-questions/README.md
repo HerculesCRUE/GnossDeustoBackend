@@ -5,8 +5,17 @@ In this project different SPARQL queries are executed in order to test the ROH o
 * [Documentation](https://deustohercules.github.io/validation-questions/testapidocs/index.html)
 * [Test Results](https://deustohercules.github.io/validation-questions/surefire-report.html)
 
+You can find more details about the questions and run them interactively at `sparql-query` directory.
+
 
 # USAGE
+
+Asumptions: it requires to have installed the following tools:
+- git client
+- mvn tool
+- jdk 8.0
+
+If you do not want to install neither Java or Maven in your system, please go to section entitled Docker, where how to lauch a container including these tools is explained. 
 
 Download the repository and cd to validation-questions path:
 
@@ -62,7 +71,14 @@ $ git submodule update
 Create a Docker container:
 
 ```
-$ docker run --rm -ti -v </path/to/GnossDeustoBackend/validation-questions>:/source maven:3-jdk-8 /bin/bash
+cd </path/to/GnossDeustoBackend/validation-questions>
+$ docker run --rm -ti -v ${PWD}:/source maven:3-jdk-8 /bin/bash
+```
+
+In Windows, you may use the following command instead:
+
+```
+$ docker run --rm -ti -v %cd%:/source maven:3-jdk-8 /bin/bash
 ```
 
 From the container, execute the following commands to install pellet:

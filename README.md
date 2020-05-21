@@ -14,6 +14,11 @@
 <img src="img/diagrama_de_componentes.png" />
 
 
+Todas las aplicaciones aquí descritas pueden usarse de dos formas distintas: 
+  - Como un API, instalando la aplicación como se describe más abajo y llamando a su Endpoint.
+  - Como una librería, añadiendo el ensamblado DLL a la solución de código fuente y usando las clases y métodos definidos en él. 
+  
+
 # Configuración e instalación
 
 

@@ -1,0 +1,14 @@
+PREFIX roh: <http://purl.org/roh#>
+PREFIX vivo: <http://purl.org/roh/mirror/vivo#>
+PREFIX ro: <http://purl.org/roh/mirror/obo/ro#>
+PREFIX foaf: <http://purl.org/roh/mirror/foaf#>
+SELECT ?organization ?knowledgeArea (SUM(?monetaryAmount) as ?totalFunding) 
+WHERE {
+?project a vivo:Project ;
+roh:hasKnowledgeArea ?knowledgeArea ;
+roh:isSupportedBy ?funding .
+?funding ro:hasPart ?fundingAmount .
+?fundingAmount roh:monetaryAmount ?monetaryAmount ;
+roh:grants ?organization .
+?organization a foaf:Organization .
+} GROUP BY ?organization ?knowledgeArea

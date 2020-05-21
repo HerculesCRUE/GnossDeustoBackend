@@ -22,11 +22,10 @@ namespace UrisFactory.Controllers
         }
 
         ///<summary>
-        ///Generate a Uri associated with the resource class and the identifier
+        ///Genera una Uri con la estructura asociada a la resource class pasada con el identificador como parametro, ejemplo de uso: con la llamada: "http://herc-as-front-desa.atica.um.es/uris/Factory?resource_class=Article&amp;identifier=1231d", se obtiene http://graph.um.es/res/article/1231d
         ///</summary>
-        ///<param name="resource_class">name of the resource class that specified the resource uri structure to use</param>
-        ///<param name="identifier">identifier</param>
-        ///<returns>test</returns>
+        ///<param name="resource_class">nombre de la resource class que especifica la estructura de uris a usar, el listado de resource class se pueden obtener a través de http://herc-as-front-desa.atica.um.es/uris/Schema, en el apartado ResourcesClasses-> ResourceClass; ejemplo: Article</param>
+        ///<param name="identifier">identifier, es un cadena que represent un ORCID</param>
         [HttpGet(Name= "GenerateUri")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -1,8 +1,14 @@
+![](.//media/CabeceraDocumentosMD.png)
+
 # Hércules Backend ASIO. TripleStore Benchmark deliverable report
 
 We report here on the creation of a TripleStore assessment framework and
 on the results obtained from applying this framework to several modern
-TripleStore. We consider a TripleStore any data storage and querying
+TripleStore. The results of the benchmark will be later applied to recommend
+one or more TripleStores for the Hercules ASIO deployment and to provide a way
+to select one for each Hercules ASIO setup.
+
+We consider a TripleStore any data storage and querying
 system which is capable of handling RDF[^1] data, either natively or
 not, and to query the data using the SPARQL query language and
 protocol[^2]. A number of benchmark studies have been conducted in the
@@ -39,25 +45,25 @@ the framework before presenting the results.
 Table of contents
 =================
 
-**[Table of contents](#table-of-contents) 1**
+**[Table of contents](#table-of-contents)**
 
-**[Criteria](#criteria) 3**
+**[Criteria](#criteria)**
 
-> [Functionalities (F)](#functionalities-f) 3
+> [Functionalities (F)](#functionalities-f)
 >
-> [Performance and scalability](#performance-and-scalability) 5
+> [Performance and scalability](#performance-and-scalability)
 >
-> [Management and maintenance](#management-and-maintenance) 7
+> [Management and maintenance](#management-and-maintenance)
 
-**[TripleStore Assessed](#triplestore-assessed) 9**
+**[TripleStore Assessed](#triplestore-assessed)**
 
-**[Architecture and data](#architecture-and-data) 10**
+**[Architecture and data](#architecture-and-data)**
 
-**[Results](#results) 10**
+**[Results](#results)**
 
-**[Appendix 1: Criteria in RDF](#appendix-1-criteria-in-rdf) 11**
+**[Appendix 1: Criteria in RDF](#appendix-1-criteria-in-rdf)**
 
-**[Appendix 2: Criterion Ontology](#appendix-2-criterion-ontology) 12**
+**[Appendix 2: Criterion Ontology](#appendix-2-criterion-ontology)**
 
 Criteria
 ========
