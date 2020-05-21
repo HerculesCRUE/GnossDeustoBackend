@@ -3,6 +3,9 @@
 
 Accesible en el entorno de desarrollo en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/carga/swagger/index.html.
 
+La documentación de la librería está disponible en: 
+http://herc-as-front-desa.atica.um.es/api-carga/library/api/API_CARGA.Controllers.html
+
 API CARGA es un servicio web que contienen 4 controladores, utilizados cada uno de ellos para su propio propósito:
  - etlController: Contiene los procesos ETL (Extract, Transform and Load) necesarios para la carga de datos.
  - repositoryController: Contiene los procesos necesarios para la gestión de los repositorios OAI-PMH (creación, modificación, eliminación...).
