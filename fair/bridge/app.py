@@ -9,6 +9,7 @@ import argparse
 app = Flask(__name__)
 
 server_url = None
+orcid = None
 
 
 @app.route('/v1/collections/', methods=['GET'])
@@ -74,9 +75,8 @@ def v1_evaluations():
     all_evaluations = result.json()
     evaluations = []
 
-    # Ahora mismo filtramos los resultados para que solo las pruebas hechas desde este ORCID iD sean mostradas
-    # TODO dejar de hardcodear
-    orcid_id = 'https://orcid.org/0000-0001-8055-6823'
+    # Esta petición de API requiere un ORCID para ejecutarse, que identifica a quién está mandando las peticiones
+    orcid_id = 'https://orcid.org/' + orcid
 
     for evaluation in all_evaluations:
         print(str(evaluation))
@@ -103,6 +103,7 @@ def v1_evaluation_result(evaluation_id):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Servidor HTTP que ofrece una API simple para interactuar con" +
                                                  " un servicio de métricas FAIR")
+    parser.add_argument("orcid", type=str, help="ORCID de la persona que ejecuta el test (requerido por el backend)")
     parser.add_argument("-p", "--port", type=int, default=5200, choices=range(0, 65536),
                         help="El puerto en el que se ejecutará el servidor HTTP (por defecto 5200)", metavar="")
     parser.add_argument("--host", default="127.0.0.1",
@@ -112,4 +113,5 @@ if __name__ == '__main__':
                         help="URL del backend de FAIR (no incluir / final)")
     args = parser.parse_args()
     server_url = args.server_url
+    orcid = args.orcid
     app.run(debug=args.debug, port=args.port, host=args.host)
