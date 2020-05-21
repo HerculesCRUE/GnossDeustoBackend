@@ -138,7 +138,7 @@ namespace API_CARGA.Models.Utility
         /// <param name="pSPARQLEndpoint">Endpoint SPARQL</param>
         /// <param name="pQueryParam">Query param</param>
         /// <param name="pGraph">Grafo</param>
-        public static void LoadTriples(List<string> pTriples, string pSPARQLEndpoint, string pQueryParam, string pGraph)
+        public static void LoadTriples(List<string> pTriples, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pGraphUnidata)
         {
             List<string> listNotBlankNodeTriples = new List<string>();
             List<string> listBlankNodeTriples = new List<string>();
@@ -240,46 +240,8 @@ namespace API_CARGA.Models.Utility
                     {
                         triplesInsert.Add(listBlankNodeTriples[i]);
                     }
-
-                    string query = "";
-                    query += $" INSERT INTO <{pGraph}>";
-                    query += " { ";
-                    query += string.Join(" ", triplesInsert);
-                    query += " } ";
-
-                    string url = pSPARQLEndpoint;
-                    if (string.IsNullOrEmpty(url))
-                    {
-                        Graph graph = new Graph();
-                        graph.LoadFromString(string.Join(" ", triplesInsert));
-                    }
-                    else
-                    {
-                        NameValueCollection parametros = new NameValueCollection();
-                        parametros.Add(pQueryParam, query);
-                        WebClient webClient = new WebClient();
-                        try
-                        {
-                            webClient.UploadValues(url, "POST", parametros);
-                        }
-                        catch (WebException ex)
-                        {
-                            if (ex.Response != null)
-                            {
-                                string response = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
-                                throw new Exception(response);
-                            }
-                            throw ex;
-                        }
-                        catch (Exception ex)
-                        {
-                            throw ex;
-                        }
-                        finally
-                        {
-                            webClient.Dispose();
-                        }
-                    }
+                    InsertData(pSPARQLEndpoint, pGraph, triplesInsert, pQueryParam);
+                    InsertData(pSPARQLEndpoint, pGraphUnidata, triplesInsert, pQueryParam);
                 }
             }
 
@@ -287,44 +249,50 @@ namespace API_CARGA.Models.Utility
             //NotBlankNodes
             if (listNotBlankNodeTriples.Count > 0)
             {
-                string query = "";
-                query += $" INSERT DATA INTO <{pGraph}>";
-                query += " { ";
-                query += string.Join(" ", listNotBlankNodeTriples);
-                query += " } ";
+                InsertData(pSPARQLEndpoint, pGraph, listNotBlankNodeTriples, pQueryParam);
+                InsertData(pSPARQLEndpoint, pGraphUnidata, listNotBlankNodeTriples, pQueryParam);
+            }
+        }
 
-                string url = pSPARQLEndpoint;
-                if (string.IsNullOrEmpty(url))
+        private static void InsertData(string pSPARQLEndpoint, string pGraph, List<string> triplesInsert,  string pQueryParam)
+        {
+            string query = "";
+            query += $" INSERT INTO <{pGraph}>";
+            query += " { ";
+            query += string.Join(" ", triplesInsert);
+            query += " } ";
+
+            string url = pSPARQLEndpoint;
+            if (string.IsNullOrEmpty(url))
+            {
+                Graph graph = new Graph();
+                graph.LoadFromString(string.Join(" ", triplesInsert));
+            }
+            else
+            {
+                NameValueCollection parametros = new NameValueCollection();
+                parametros.Add(pQueryParam, query);
+                WebClient webClient = new WebClient();
+                try
                 {
-                    Graph graph = new Graph();
-                    graph.LoadFromString(string.Join(" ", listNotBlankNodeTriples));
+                    webClient.UploadValues(url, "POST", parametros);
                 }
-                else
+                catch (WebException ex)
                 {
-                    NameValueCollection parametros = new NameValueCollection();
-                    parametros.Add(pQueryParam, query);
-                    WebClient webClient = new WebClient();
-                    try
+                    if (ex.Response != null)
                     {
-                        webClient.UploadValues(url, "POST", parametros);
+                        string response = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
+                        throw new Exception(response);
                     }
-                    catch (WebException ex)
-                    {
-                        if (ex.Response != null)
-                        {
-                            string response = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
-                            throw new Exception(response);
-                        }
-                        throw ex;
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
-                    finally
-                    {
-                        webClient.Dispose();
-                    }
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    webClient.Dispose();
                 }
             }
         }

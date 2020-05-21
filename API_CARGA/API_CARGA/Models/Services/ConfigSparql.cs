@@ -37,6 +37,29 @@ namespace API_CARGA.Models.Services
             return Graph;
         }
 
+        public string GetGraphUnidata()
+        {
+            if (string.IsNullOrEmpty(Graph))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("GraphUnidata"))
+                {
+                    Graph = environmentVariables["GraphUnidata"] as string;
+                }
+                else
+                {
+                    Graph = Configuration["Sparql:GraphUnidata"];
+                }
+
+            }
+            return Graph;
+        }
+
         public string GetEndpoint()
         {
             if (Endpoint==null)

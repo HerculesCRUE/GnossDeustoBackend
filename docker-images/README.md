@@ -1,4 +1,4 @@
-# Despliegue del backend
+# Despliegue del backend con Docker
 
 ## Requisitos previos
 Para hacer funcionar el backend será necesario tener instalado en nuestro servidor:
@@ -20,14 +20,15 @@ Para hacer funcionar el backend será necesario tener instalado en nuestro servi
 Este es el listado de imágenes docker de las aplicaciones incluidas en GnossDeustoBackend:
 
  - PostgreSQL - Imagen de PostgreSQL preparada para funcionar con el backend: http://herc-as-front-desa.atica.um.es/docs/herculessql.tar.gz
+ - [UrisFactory](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/UrisFactory "UrisFactory") - Servicio que genera las uris de los recursos: http://herc-as-front-desa.atica.um.es/docs/apiuris.tar.gz
  - [API_CARGA](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA "API_CARGA") - Servicio web que realiza las tareas de carga/configuración: http://herc-as-front-desa.atica.um.es/docs/apicarga.tar.gz
  - [FrontEndCarga](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/FrontEndCarga "FrontEndCarga") - Interfaz web para la parte de Repository y Validation del API_CARGA: http://herc-as-front-desa.atica.um.es/docs/apifrontcarga.tar.gz
- - [OAI_PMH_CVN](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/OAI_PMH_CVN "OAI_PMH_CVN") - Servicio OAI-PMH para la obtención de invstigadores de la Universidad de Murcia: http://herc-as-front-desa.atica.um.es/docs/apioaipmh.tar.gz
- - [UrisFactory](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/UrisFactory "UrisFactory") - Servicio que genera las uris de los recursos: http://herc-as-front-desa.atica.um.es/docs/apiuris.tar.gz
- - [cvn](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/cvn) - Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH: http://herc-as-front-desa.atica.um.es/docs/apicvn.tar.gz
  - [CronConfigure](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/CronConfigure) - Servicio Web que realiza la creación de tareas para la sincronización de un repositorio: http://herc-as-front-desa.atica.um.es/docs/apicron.tar.gz
- - PostgreSQL - Imagen de PostgreSQL preparada para funcionar con el backend: http://herc-as-front-desa.atica.um.es/docs/herculessql.tar.gz
- 
+ - [OAI_PMH_CVN](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/OAI_PMH_CVN "OAI_PMH_CVN") - Servicio OAI-PMH para la obtención de invstigadores de la Universidad de Murcia: http://herc-as-front-desa.atica.um.es/docs/apioaipmh.tar.gz
+ - [cvn](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/cvn) - Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH: http://herc-as-front-desa.atica.um.es/docs/apicvn.tar.gz
+- [Bridge](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/fair/bridge) - Bridge para métricas fair: http://herc-as-front-desa.atica.um.es/docs/apibridge.tar.gz
+- [BrideSwagger](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/fair/bridge) - Interfaz swagger para el bridge: http://herc-as-front-desa.atica.um.es/docs/bridgeswagger.tar.gz
+
 ## Despliegue de Virtuoso con docker-compose
 
 Para desdeplegar Virtuoso con docker-compose necesitamos un docker-compose.yml con el siguiete contenido. Sería recomendable ajustar el DBA_PASSWORD. El resto de variables dependerá de las caractísticas de nuesta infraestructura.
@@ -61,7 +62,7 @@ Para levantar Virtuoso ejecutaremos este comando en la misma ruta donde tengamos
 	
 	docker-compose up -d
 	
-Despues de ejecutar el comando ya tendríamos un servidor Virtuoso operativo en nuestro entorno. Podemos probar que efectivamente está funcionando correctamente accediiendo a http://localhost:8890, nos debería paracer la consola de administración de Virtuoso.
+Despue¡és de ejecutar el comando ya tendríamos un servidor Virtuoso operativo en nuestro entorno. Podemos probar que efectivamente está funcionando correctamente accediendo a http://localhost:8890, nos debería paracer la consola de administración de Virtuoso.
 
 ## PostgreSQL
 
@@ -69,9 +70,9 @@ Para PostgreSQL necesitamos importar la imagen que obtenemos en el enlace http:/
 	
 	docker load < herculessql.tar.gz
 	
-Una vez importada la ejecutamos con este comando:
+Con este comando la hacemos operativa:
 	
-	docker run -p 5432:5432 --name herculessql herculessql
+	docker run -d -p 5432:5432 --name herculessql herculessql
 	
 Así obtenemos una base de datos lista para que las APIs del backend puedan usarla.
 
@@ -79,7 +80,7 @@ Así obtenemos una base de datos lista para que las APIs del backend puedan usar
 
 Necesitamos preparar Apache como proxy invesro y poder acceder a las APIs a través del dominio que vayamos a utilizar y luego este redirija al puerto específico de cada una de ellas.
 
-Para que funcione correctamente debemos ajustar el ServerName con el dominio que vayamos a utilizar (en este emplo mihercules.com) y añadir los parametros del proxy inverso para que Apache redirija las peticiones al API adecuda. Estos parametros los podemos ver en el final de este archivo de ejemplo http://herc-as-front-desa.atica.um.es/docs/httpd.conf.
+Para que funcione correctamente debemos ajustar el ServerName con el dominio que vayamos a utilizar (en este ejemplo mihercules.com) y añadir los parametros del proxy inverso para que Apache redirija las peticiones al API adecuda. Estos parametros los podemos ver en el final de este archivo de ejemplo http://herc-as-front-desa.atica.um.es/docs/httpd.conf.
 
 
 Despliegue de las APIs
@@ -98,11 +99,12 @@ Cuando las tengamos importadas las desplegaremos con docker-compose, creando un 
 	    image: apicarga
 	    ports:
 	      - 5100:5100
-		environment:
-		  PostgreConnection: "Username=docker;Password=docker;Host=127.0.0.1;Port=5432;Pooling=true"
+	    environment:
+	      PostgreConnection: "Username=docker;Password=docker;Host=127.0.0.1;Port=5432;Pooling=true"
 	      PostgreConnectionmigration: "Username=docker;Password=docker;Host=127.0.0.1;Port=5432;Pooling=true"
-		  ConfigUrl: "http://mihercules.com/carga/"
-		  Graph: "http://graph.um.es/graph/um_cvn"
+	      ConfigUrl: "http://mihercules.com/carga/"
+	      Graph: "http://graph.um.es/graph/um_cvn"
+	      GraphUnidata: "http://data.um.es/graph/unidata"
 	      Endpoint: "http://localhost:8890/sparql"
 	      QueryParam: "query"
 		  
@@ -110,17 +112,17 @@ Cuando las tengamos importadas las desplegaremos con docker-compose, creando un 
 	    image: apifrontcarga
 	    ports:
 	      - 5103:5103
-		environment:
+	    environment:
 	      ConfigUrl: "http://mihercules.com/carga/"
-		  ConfigUrlCron: "http://mihercules.comcron-config/"
+	      ConfigUrlCron: "http://mihercules.comcron-config/"
 		  
 	  apicron:
 	    image: apicron
 	    ports:
 	      - 5107:5107
 	    environment:
-		  HangfireConnection: "Username=docker;Password=docker;Host=127.0.0.1;Port=5432;Pooling=true"
-		  ConfigUrl: "http://mihercules.com/carga/"
+	      HangfireConnection: "Username=docker;Password=docker;Host=127.0.0.1;Port=5432;Pooling=true"
+	      ConfigUrl: "http://mihercules.com/carga/"
 	  
 	  apiuris:
 	    image: apiuris
@@ -136,7 +138,7 @@ Cuando las tengamos importadas las desplegaremos con docker-compose, creando un 
 	    image: apioaipmh
 	    ports:
 	      - 5102:5102
-		environment:
+	    environment:
 	      XML_CVN_Repository: "http://curriculumpruebas.um.es/curriculum/rest/v1/auth/"
 	      CVN_ROH_converter: "http://mihercules.com/cvn/v1/convert"
 	      ConfigUrl: "http://mihercules.com/oai-pmh-cvn/OAI_PMH"
