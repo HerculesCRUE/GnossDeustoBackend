@@ -96,7 +96,7 @@ namespace CronConfigure
         {
             app.Use((context, next) =>
             {
-                context.Request.PathBase = "/cron-config";
+                //context.Request.PathBase = "/cron-config";
                 return next();
             });
             if (env.IsDevelopment())
