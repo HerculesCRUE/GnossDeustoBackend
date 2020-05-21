@@ -98,11 +98,11 @@ Cuando las tengamos importadas las desplegaremos con docker-compose, creando un 
 	    image: apicarga
 	    ports:
 	      - 5100:5100
-		environment:
-		  PostgreConnection: "Username=docker;Password=docker;Host=127.0.0.1;Port=5432;Pooling=true"
+	    environment:
+	      PostgreConnection: "Username=docker;Password=docker;Host=127.0.0.1;Port=5432;Pooling=true"
 	      PostgreConnectionmigration: "Username=docker;Password=docker;Host=127.0.0.1;Port=5432;Pooling=true"
-		  ConfigUrl: "http://mihercules.com/carga/"
-		  Graph: "http://graph.um.es/graph/um_cvn"
+	      ConfigUrl: "http://mihercules.com/carga/"
+	      Graph: "http://graph.um.es/graph/um_cvn"
 	      Endpoint: "http://localhost:8890/sparql"
 	      QueryParam: "query"
 		  
@@ -110,17 +110,17 @@ Cuando las tengamos importadas las desplegaremos con docker-compose, creando un 
 	    image: apifrontcarga
 	    ports:
 	      - 5103:5103
-		environment:
+	    environment:
 	      ConfigUrl: "http://mihercules.com/carga/"
-		  ConfigUrlCron: "http://mihercules.comcron-config/"
+	      ConfigUrlCron: "http://mihercules.comcron-config/"
 		  
 	  apicron:
 	    image: apicron
 	    ports:
 	      - 5107:5107
 	    environment:
-		  HangfireConnection: "Username=docker;Password=docker;Host=127.0.0.1;Port=5432;Pooling=true"
-		  ConfigUrl: "http://mihercules.com/carga/"
+	      HangfireConnection: "Username=docker;Password=docker;Host=127.0.0.1;Port=5432;Pooling=true"
+	      ConfigUrl: "http://mihercules.com/carga/"
 	  
 	  apiuris:
 	    image: apiuris
@@ -136,7 +136,7 @@ Cuando las tengamos importadas las desplegaremos con docker-compose, creando un 
 	    image: apioaipmh
 	    ports:
 	      - 5102:5102
-		environment:
+	    environment:
 	      XML_CVN_Repository: "http://curriculumpruebas.um.es/curriculum/rest/v1/auth/"
 	      CVN_ROH_converter: "http://mihercules.com/cvn/v1/convert"
 	      ConfigUrl: "http://mihercules.com/oai-pmh-cvn/OAI_PMH"
