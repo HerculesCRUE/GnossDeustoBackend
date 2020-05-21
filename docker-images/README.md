@@ -103,7 +103,7 @@ Cuando las tengamos importadas las desplegaremos con docker-compose, creando un 
 	      PostgreConnectionmigration: "Username=docker;Password=docker;Host=127.0.0.1;Port=5432;Pooling=true"
 	      ConfigUrl: "http://mihercules.com/carga/"
 	      Graph: "http://graph.um.es/graph/um_cvn"
-              GraphUnidata: "http://data.um.es/graph/unidata"
+	      GraphUnidata: "http://data.um.es/graph/unidata"
 	      Endpoint: "http://localhost:8890/sparql"
 	      QueryParam: "query"
 		  
