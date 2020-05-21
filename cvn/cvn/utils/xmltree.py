@@ -14,7 +14,7 @@ def get_first_node_by_code(tree, code):
     :return: el primer elemento del árbol con el código, si no, None
     """
     for child in tree:
-        if node_get_code(child) == code:
+        if node_get_code(child) == code and child.tag != "{http://codes.cvn.fecyt.es/beans}Code":
             return child
     return None
 
@@ -28,7 +28,7 @@ def get_all_nodes_by_code(tree, code):
     """
     nodes = []
     for child in tree:
-        if node_get_code(child) == code:
+        if node_get_code(child) == code and child.tag != "{http://codes.cvn.fecyt.es/beans}Code":
             nodes.append(child)
     return nodes
 

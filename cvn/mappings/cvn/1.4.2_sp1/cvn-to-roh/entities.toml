@@ -1037,6 +1037,36 @@ id.format = "{vivo:doi}"
         name = "finalpage"
         bean = "FinalPage"
 
+    [[entities.subentities]]
+    code = "060.010.010.040"
+    subcode = true
+    displayname = "foaf:Person"
+    id.resource = "Person"
+    cache = "foaf:name"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relates"
+        inverse = "vivo:relates"
+
+        [[entities.subentities.properties]]
+        displayname = "foaf:name"
+        format = "{name} {familyName} {secondFamilyName}"
+
+            [[entities.subentities.properties.sources]]
+            code = "060.010.010.040"
+            name = "name"
+            bean = "GivenName"
+
+            [[entities.subentities.properties.sources]]
+            code = "060.010.010.040"
+            name = "familyName"
+            bean = "FirstFamilyName"
+
+            [[entities.subentities.properties.sources]]
+            code = "060.010.010.040"
+            name = "secondFamilyName"
+            bean = "SecondFamilyName"
+
 # Trabajos presentados en congresos nacionales o internacionales
 [[entities]]
 code = "060.010.020.000"

@@ -9,6 +9,7 @@ import re
 import cvn.config.condition as cvn_condition
 import cvn.config.entitycache as cvn_entity_cache
 import urllib.parse
+import cvn.utils.xmltree as xmltree
 import cvn.webserver as web_server
 
 # Caché de URIs generadas
@@ -102,9 +103,13 @@ def init_entity_from_serialized_toml(config, parent=None):
     if 'cache' in config:
         cache_property = config['cache']
 
+    sub_code = False
+    if 'subcode' in config:
+        sub_code = config['subcode']
+
     entity = Entity(code=code, ontology=ontology, classname=classname, parent=parent,
                     identifier_config_resource=config_id_resource, identifier_config_format=config_id_format,
-                    primary=primary, property_cache=cache_property)
+                    primary=primary, property_cache=cache_property, sub_code=sub_code)
 
     # Populate properties
     if 'properties' in config:
@@ -180,11 +185,13 @@ def init_entity_from_serialized_toml(config, parent=None):
 class Entity:
     # TODO todo el tema de la id y la URI
     def __init__(self, code, ontology, classname, parent=None, identifier_config_resource=None,
-                 identifier_config_format=None, primary=False, property_cache=None):
+                 identifier_config_format=None, primary=False, property_cache=None, sub_code=False):
         self.code = code
+        self.sub_code = sub_code
         self.ontology = ontology
         self.classname = classname
         self.subentities = []
+        self.generated_subentities = []
         self.properties = []
         self.relationships = []
         self.parent = parent
@@ -218,12 +225,30 @@ class Entity:
         self.conditions.append(condition)
         return self
 
-    def get_property_values_from_node(self, item_node):
+    def generate_and_add_to_ontology(self, ontology_config, xml_tree, skip_subentities_with_subcode=True):
+        for entity_result_node in xmltree.get_all_nodes_by_code(xml_tree, self.code):
+            self.get_property_values_from_node(entity_result_node, skip_subentities_with_subcode)
+            self.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
+
+            for sub_entity in self.subentities:
+                sub_entity.clear_values()
+                if sub_entity.sub_code:
+                    sub_entity.generate_and_add_to_ontology(ontology_config, entity_result_node,
+                                                            skip_subentities_with_subcode=False)
+
+            self.clear_values()
+
+    def get_property_values_from_node(self, item_node, skip_subentities_with_subcode):
+        node = item_node
         for property_item in self.properties:
             property_item.get_value_from_node(item_node)
         self.xml_item = item_node
-        for subentities in self.subentities:
-            subentities.get_property_values_from_node(item_node)
+        for sub_entity in self.subentities:
+            if skip_subentities_with_subcode:
+                if not sub_entity.sub_code:
+                    sub_entity.get_property_values_from_node(item_node, skip_subentities_with_subcode)
+            else:
+                sub_entity.get_property_values_from_node(item_node, skip_subentities_with_subcode)
 
     def clear_values(self):
         self.generated_identifier = None
@@ -297,9 +322,9 @@ class Entity:
                         if data_type.force:
                             literal_type = ontology_config.get_ontology(data_type.ontology).term(data_type.name)
 
-                        print("Generando tripleta de tipo " + str(type(property_value)) + " con valor "
-                              + str(property_value))
-                        print("Generando tipo " + str(type(literal_type)) + " con valor " + str(literal_type))
+                        # print("Generando tripleta de tipo " + str(type(property_value)) + " con valor "
+                        #      + str(property_value))
+                        # print("Generando tipo " + str(type(literal_type)) + " con valor " + str(literal_type))
 
                 triple = self.get_uri(), \
                          ontology_config.get_ontology(property_item.ontology).term(property_item.name), \
@@ -336,7 +361,7 @@ class Entity:
 
         return triples
 
-    def add_entity_to_ontology(self, ontology_config):
+    def add_entity_to_ontology(self, ontology_config, skip_subentities_with_subcode):
         if not self.should_generate():
             return
 
@@ -353,7 +378,10 @@ class Entity:
 
         # Subentidades
         for subentity in self.subentities:
-            subentity.add_entity_to_ontology(ontology_config)
+            if skip_subentities_with_subcode and subentity.sub_code:
+                subentity.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
+            else:
+                subentity.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
 
     def get_property_dict(self, format_safe=False):
         properties = {}
