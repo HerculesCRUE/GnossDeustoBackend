@@ -14,6 +14,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace UrisFactory.Controllers
 {
+    /// <summary>
+    /// Controlador encargado de gerstionar el esquema de Uris, que ofrece métodos para la consulta de este esquema y su modificación
+    /// </summary>
     [ApiController]
     [Route("[Controller]")]
     public class SchemaController : Controller

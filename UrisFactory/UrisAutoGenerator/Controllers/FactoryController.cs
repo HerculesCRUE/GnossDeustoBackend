@@ -9,7 +9,9 @@ using UrisFactory.Models.Services;
 
 namespace UrisFactory.Controllers
 {
-
+    /// <summary>
+    /// Controlador encargado de generar una uri válida para una resource class y un identificador ORCID
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class FactoryController : ControllerBase
