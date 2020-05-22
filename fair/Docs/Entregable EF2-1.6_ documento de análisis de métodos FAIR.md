@@ -1,33 +1,31 @@
+![](.//media/CabeceraDocumentosMD.png)
+
 # Hércules Backend ASIO. EF2.1-6. Documento de Análisis de métodos FAIR
 
 Contents
 ========
 
-[**1.** **Introducción** 2](#introducción)
+[**1.** **Introducción**](#introducción)
 
-[**1.1.** **Findable (Encontrable/Localizable)**
-2](#findable-encontrablelocalizable)
+[**1.1.** **Findable (Encontrable/Localizable)**](#findable-encontrablelocalizable)
 
-[**1.2.** **Accesible** 3](#accesible)
+[**1.2.** **Accesible**](#accesible)
 
-[**1.3.** **Interoperable** 3](#interoperable)
+[**1.3.** **Interoperable**](#interoperable)
 
-[**1.4.** **Reutilizable** 3](#reutilizable)
+[**1.4.** **Reutilizable**](#reutilizable)
 
-[**1.5.** **Aplicación de los principios FAIR en hercules-ASIO**
-4](#aplicación-de-los-principios-fair-en-hercules-asio)
+[**1.5.** **Aplicación de los principios FAIR en hercules-ASIO**](#aplicación-de-los-principios-fair-en-hercules-asio)
 
-[**2.** **Conceptos FAIR** 6](#conceptos-fair)
+[**2.** **Conceptos FAIR**](#conceptos-fair)
 
-[**3.** **Alineación de HERCULES-ASIO con los principios FAIR**
-10](#alineación-de-hercules-asio-con-los-principios-fair)
+[**3.** **Alineación de HERCULES-ASIO con los principios FAIR**](#alineación-de-hercules-asio-con-los-principios-fair)
 
-[**4.** **Conclusión** 11](#conclusión)
+[**4.** **Conclusión**](#conclusión)
 
-[**Bibliografía** 13](#bibliografía)
+[**Bibliografía**](#bibliografía)
 
-[**Apéndice 1. Métricas publicadas por FAIRmetrics**
-14](#apéndice-1.-métricas-publicadas-por-fairmetrics)
+[**Apéndice 1. Métricas publicadas por FAIRmetrics**](#apéndice-1.-métricas-publicadas-por-fairmetrics)
 
 **Introducción** 
 ================
