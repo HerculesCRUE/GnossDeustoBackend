@@ -5,10 +5,11 @@ from cvn.utils.printable import Printable
 def init_source_from_serialized_toml(config):
     # code and name are required attributes
 
-    if 'code' not in config:
-        raise KeyError('code not specified for Source')
-    if not cvn_code.is_cvn_code_valid(config['code']):
-        raise ValueError('code does not match expected format')
+    code = None
+    if 'code' in config:
+        code = config['code']
+        if not cvn_code.is_cvn_code_valid(config['code']):
+            raise ValueError('code does not match expected format')
 
     if 'name' not in config:
         raise KeyError('name not specified for Source')
@@ -23,7 +24,7 @@ def init_source_from_serialized_toml(config):
     if 'format' in config:
         format_string = config['format']
 
-    return Source(config['code'], config['name'], bean, format_string)
+    return Source(code, config['name'], bean, format_string)
 
 
 class Source(Printable):

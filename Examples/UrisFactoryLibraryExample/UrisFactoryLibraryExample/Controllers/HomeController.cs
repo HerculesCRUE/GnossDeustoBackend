@@ -89,8 +89,7 @@ namespace UrisFactoryLibraryExample.Controllers
             ConfigJsonHandler config = new ConfigJsonHandler(uriSchemaJson);
 
             FactoryController factoryController = new FactoryController(config);
-            var cosas = factoryController.GenerateUri("Test", "1234");
-            return cosas;
+            return factoryController.GenerateUri("Test", "1234");      
         }
     }
 }
