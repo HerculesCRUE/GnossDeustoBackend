@@ -23,7 +23,7 @@ Como no es necesario ningún conector específico para actualizar un RDF Store y
 - **dotNetRDF**: versión 2.5.1
 - **IdentityServer4**: versión 3.1.2
 - **IdentityServer4.EntityFramework**: versión 3.1.2
-- **icrosoft.AspNetCore.Mvc.Formatters.Json**: versión 2.2.0
+- **Microsoft.AspNetCore.Mvc.Formatters.Json**: versión 2.2.0
 - **Microsoft.AspNetCore.Mvc.NewtonsoftJson**: versión 3.0.0
 - **Microsoft.EntityFrameworkCore**: versión 3.1.4
 - **Microsoft.EntityFrameworkCore.SqlServer**: versión 3.1.2
