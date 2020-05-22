@@ -12,7 +12,7 @@ using UrisFactory.Models.Services;
 namespace UrisFactoryLibraryExample.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/")]
     public class HomeController : ControllerBase
     {
         public HomeController()
