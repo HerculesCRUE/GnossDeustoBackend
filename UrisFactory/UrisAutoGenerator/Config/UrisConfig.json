@@ -524,7 +524,14 @@
       "ResourceClass": "ResearchProposal",
       "LabelResourceClass": "researchproposal",
       "ResourceURI": "uriResourceStructure"
+    },
+    {
+	"ResourceClass": "EvaluationSummary",
+      "LabelResourceClass": "evaluationsummary",
+      "ResourceURI": "uriResourceStructure"
     }
+	
+	EvaluationSummary
 	
 	
   ]
