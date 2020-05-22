@@ -529,10 +529,7 @@
 	"ResourceClass": "EvaluationSummary",
       "LabelResourceClass": "evaluationsummary",
       "ResourceURI": "uriResourceStructure"
-    }
-	
-	EvaluationSummary
-	
+    }	
 	
   ]
 }
