@@ -1051,8 +1051,16 @@ id.format = "{vivo:doi}"
         cache = "foaf:name"
 
             [[entities.subentities.subentities.relationships]]
-            direct = "vivo:relates"
-            inverse = "vivo:relates"
+            inverse = "rdf:{roh_dummy}"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "roh:dummy" # (no existe, pero como esta propiedad no se convierte en tripletas, da igual)
+            # hidden = true
+
+                [[entities.subentities.subentities.properties.sources]]
+                name = "order"
+                bean = "SignatureOrder"
+                format = "_{value}"
 
             [[entities.subentities.subentities.properties]]
             displayname = "foaf:name"

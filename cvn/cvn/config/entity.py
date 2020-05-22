@@ -127,13 +127,9 @@ def init_entity_from_serialized_toml(config, parent=None):
             name = None
 
             if 'direct' in relationship:
-                display_name_format = re.compile("^[a-zA-Z]+:\w+$")
-                if re.match(display_name_format, relationship['direct']):
-                    split = relationship['direct'].split(":")
-                    ontology = split[0]
-                    name = split[1]
-                else:
-                    raise ValueError('direct in relationship has invalid format')
+                split = relationship['direct'].split(":")
+                ontology = split[0]
+                name = split[1]
             else:
                 if 'name' in relationship:
                     if 'ontology' not in relationship:
@@ -145,13 +141,9 @@ def init_entity_from_serialized_toml(config, parent=None):
             inverse_name = None
             inverse_ontology = None
             if 'inverse' in relationship:
-                display_name_format = re.compile("^[a-zA-Z]+:\w+$")
-                if re.match(display_name_format, relationship['inverse']):
-                    split = relationship['inverse'].split(":")
-                    inverse_ontology = split[0]
-                    inverse_name = split[1]
-                else:
-                    raise ValueError('inverse in relationship has invalid format')
+                split = relationship['inverse'].split(":")
+                inverse_ontology = split[0]
+                inverse_name = split[1]
             else:
                 if 'inverse_name' in relationship:
                     if 'inverse_ontology' not in relationship:
@@ -363,17 +355,39 @@ class Entity:
 
             # Relación directa
             if (relationship.name is not None) and (relationship.ontology is not None):
+
+                # Rellenar el nombre de la propiedad con el valor de la propiedad correspondiente, si existiera
+                name = relationship.name
+                property_dict = self.get_property_dict(format_safe=True)
+                if '{' in name:
+                    if has_all_formatting_fields(name, property_dict):
+                        name = name.format_map(property_dict)
+                    else:
+                        continue
+
                 direct_triple = self.get_uri(), \
-                                ontology_config.get_ontology(relationship.ontology).term(relationship.name), \
+                                ontology_config.get_ontology(relationship.ontology).term(name), \
                                 other
                 triples.append(direct_triple)
 
             # Relación inversa
             if (relationship.inverse_name is not None) and \
                     (relationship.inverse_ontology is not None):
+
+                # Rellenar el nombre de la propiedad con el valor de la propiedad correspondiente, si existiera
+                name = relationship.inverse_name
+                property_dict = self.get_property_dict(format_safe=True)
+                if '{' in name:
+                    if has_all_formatting_fields(name, property_dict):
+                        name = name.format_map(property_dict)
+                    else:
+                        continue
+
                 inverse_triple = other, ontology_config.get_ontology(relationship.inverse_ontology) \
-                    .term(relationship.inverse_name), self.get_uri()
+                    .term(name), self.get_uri()
                 triples.append(inverse_triple)
+            else:
+                continue
 
         return triples
 
