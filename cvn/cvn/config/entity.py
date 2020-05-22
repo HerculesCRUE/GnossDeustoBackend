@@ -25,6 +25,7 @@ def generate_uri(resource_class, identifier):
     :param identifier:
     :return: la URI
     """
+    return "http://data.um.es/class/" + resource_class + "/" + identifier
     if web_server.debug:
         return "http://data.um.es/class/" + resource_class + "/" + identifier
 
@@ -225,17 +226,37 @@ class Entity:
         self.conditions.append(condition)
         return self
 
-    def generate_and_add_to_ontology(self, ontology_config, xml_tree, skip_subentities_with_subcode=True):
-        for entity_result_node in xmltree.get_all_nodes_by_code(xml_tree, self.code):
-            self.get_property_values_from_node(entity_result_node, skip_subentities_with_subcode)
+    def generate_and_add_to_ontology(self, ontology_config, xml_tree, skip_subentities_with_subcode=True, do_loop=True):
+        if do_loop:
+            for entity_result_node in xmltree.get_all_nodes_by_code(xml_tree, self.code):
+                print("generating w/ loop: " + self.classname)
+                self.get_property_values_from_node(entity_result_node, skip_subentities_with_subcode)
+                self.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
+
+                for sub_entity in self.subentities:
+                    loop = False
+                    node = entity_result_node
+                    if sub_entity.sub_code:
+                        print("subcode loop")
+                        loop = True
+                    sub_entity.generate_and_add_to_ontology(ontology_config, node,
+                                                            skip_subentities_with_subcode=False, do_loop=loop)
+                self.clear_values()
+        else:
+            print("generating " + self.classname)
+            self.get_property_values_from_node(xml_tree, skip_subentities_with_subcode)
             self.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
 
             for sub_entity in self.subentities:
-                sub_entity.clear_values()
+                loop = False
                 if sub_entity.sub_code:
-                    sub_entity.generate_and_add_to_ontology(ontology_config, entity_result_node,
-                                                            skip_subentities_with_subcode=False)
-
+                    print("subcode no loop " + str(xml_tree))
+                    loop = True
+                    sub_entity.generate_and_add_to_ontology(ontology_config, xml_tree,
+                                                            skip_subentities_with_subcode=False, do_loop=loop)
+                else:
+                    sub_entity.generate_and_add_to_ontology(ontology_config, xml_tree,
+                                                            skip_subentities_with_subcode=False, do_loop=loop)
             self.clear_values()
 
     def get_property_values_from_node(self, item_node, skip_subentities_with_subcode):
@@ -243,21 +264,16 @@ class Entity:
         for property_item in self.properties:
             property_item.get_value_from_node(item_node)
         self.xml_item = item_node
-        for sub_entity in self.subentities:
-            if skip_subentities_with_subcode:
-                if not sub_entity.sub_code:
-                    sub_entity.get_property_values_from_node(item_node, skip_subentities_with_subcode)
-            else:
-                sub_entity.get_property_values_from_node(item_node, skip_subentities_with_subcode)
 
-    def clear_values(self):
+    def clear_values(self, include_sub_entities_with_sub_code=False):
         self.generated_identifier = None
         for property_item in self.properties:
             property_item.clear_values()
         self.node = None
         self.xml_item = None
         for subentity in self.subentities:
-            subentity.clear_values()
+            if include_sub_entities_with_sub_code or not subentity.sub_code:
+                subentity.clear_values()
         return self
 
     def is_blank_node(self):

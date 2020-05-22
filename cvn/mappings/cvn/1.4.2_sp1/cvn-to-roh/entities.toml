@@ -1038,33 +1038,39 @@ id.format = "{vivo:doi}"
         bean = "FinalPage"
 
     [[entities.subentities]]
-    code = "060.010.010.040"
-    subcode = true
-    displayname = "foaf:Person"
-    id.resource = "Person"
-    cache = "foaf:name"
+    displayname = "rdfs:Seq"
 
         [[entities.subentities.relationships]]
-        direct = "vivo:relates"
-        inverse = "vivo:relates"
+        inverse = "vivo:editorList"
 
-        [[entities.subentities.properties]]
-        displayname = "foaf:name"
-        format = "{name} {familyName} {secondFamilyName}"
+        [[entities.subentities.subentities]]
+        code = "060.010.010.040"
+        subcode = true
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
 
-            [[entities.subentities.properties.sources]]
-            name = "name"
-            bean = "GivenName"
+            [[entities.subentities.subentities.relationships]]
+            direct = "vivo:relates"
+            inverse = "vivo:relates"
 
-            [[entities.subentities.properties.sources]]
-            code = "060.010.010.040"
-            name = "familyName"
-            bean = "FirstFamilyName"
+            [[entities.subentities.subentities.properties]]
+            displayname = "foaf:name"
+            format = "{name} {familyName} {secondFamilyName}"
 
-            [[entities.subentities.properties.sources]]
-            code = "060.010.010.040"
-            name = "secondFamilyName"
-            bean = "SecondFamilyName"
+                [[entities.subentities.subentities.properties.sources]]
+                name = "name"
+                bean = "GivenName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.010.040"
+                name = "familyName"
+                bean = "FirstFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.010.040"
+                name = "secondFamilyName"
+                bean = "SecondFamilyName"
 
 # Trabajos presentados en congresos nacionales o internacionales
 [[entities]]

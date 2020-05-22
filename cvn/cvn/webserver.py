@@ -134,11 +134,7 @@ def v1_convert():
         raise ValueError("Config error: there is no primary entity")
 
     # Procesar entidad primaria
-    primary_node = xmltree.get_first_node_by_code(root, primary_entity.code)
-    if primary_node is None:
-        raise ValueError("This CVN doesn't have a primary node with personal data")
-    primary_entity.get_property_values_from_node(primary_node, skip_subentities_with_subcode=False)
-    primary_entity.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode=False)
+    primary_entity.generate_and_add_to_ontology(ontology_config, root)
     ontology_config.cvn_person = primary_entity.get_uri()
 
     for entity in entities:
