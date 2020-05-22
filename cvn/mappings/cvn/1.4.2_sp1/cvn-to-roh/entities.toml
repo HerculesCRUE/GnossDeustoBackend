@@ -1055,7 +1055,7 @@ id.format = "{vivo:doi}"
 
             [[entities.subentities.subentities.properties]]
             displayname = "roh:dummy" # (no existe, pero como esta propiedad no se convierte en tripletas, da igual)
-            # hidden = true
+            hidden = true
 
                 [[entities.subentities.subentities.properties.sources]]
                 name = "order"
