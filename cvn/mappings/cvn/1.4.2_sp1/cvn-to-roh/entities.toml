@@ -1041,7 +1041,7 @@ id.format = "{vivo:doi}"
     displayname = "rdf:Seq"
 
         [[entities.subentities.relationships]]
-        inverse = "vivo:editorList"
+        inverse = "vivo:authorList"
 
         [[entities.subentities.subentities]]
         code = "060.010.010.040"
