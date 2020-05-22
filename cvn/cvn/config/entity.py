@@ -11,6 +11,7 @@ import cvn.config.entitycache as cvn_entity_cache
 import urllib.parse
 import cvn.utils.xmltree as xmltree
 import cvn.webserver as web_server
+import logging
 
 # Caché de URIs generadas
 # TODO mover a un servicio externo, o hacer algo más elaborado
@@ -25,7 +26,7 @@ def generate_uri(resource_class, identifier):
     :param identifier:
     :return: la URI
     """
-    return "http://data.um.es/class/" + resource_class + "/" + identifier
+    
     if web_server.debug:
         return "http://data.um.es/class/" + resource_class + "/" + identifier
 
@@ -221,23 +222,25 @@ class Entity:
     def generate_and_add_to_ontology(self, ontology_config, xml_tree, skip_subentities_with_subcode=True, do_loop=True):
         if do_loop:
             for entity_result_node in xmltree.get_all_nodes_by_code(xml_tree, self.code):
-                print("generating w/ loop: " + self.classname)
+                logging.debug("generating w/ loop: " + self.classname)
                 self.get_property_values_from_node(entity_result_node, skip_subentities_with_subcode)
                 if not self.should_generate():
                     continue
                 self.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
+                if self.primary:
+                    ontology_config.cvn_person = self.get_uri()
 
                 for sub_entity in self.subentities:
                     loop = False
                     node = entity_result_node
                     if sub_entity.sub_code:
-                        print("subcode loop")
+                        logging.debug("subcode loop")
                         loop = True
                     sub_entity.generate_and_add_to_ontology(ontology_config, node,
                                                             skip_subentities_with_subcode=False, do_loop=loop)
                 self.clear_values()
         else:
-            print("generating " + self.classname)
+            logging.debug("generating " + self.classname)
             self.get_property_values_from_node(xml_tree, skip_subentities_with_subcode)
             if not self.should_generate():
                 return
@@ -246,7 +249,7 @@ class Entity:
             for sub_entity in self.subentities:
                 loop = False
                 if sub_entity.sub_code:
-                    print("subcode no loop " + str(xml_tree))
+                    logging.debug("subcode no loop " + str(xml_tree))
                     loop = True
                     sub_entity.generate_and_add_to_ontology(ontology_config, xml_tree,
                                                             skip_subentities_with_subcode=False, do_loop=loop)
@@ -333,10 +336,6 @@ class Entity:
 
                         if data_type.force:
                             literal_type = ontology_config.get_ontology(data_type.ontology).term(data_type.name)
-
-                        # print("Generando tripleta de tipo " + str(type(property_value)) + " con valor "
-                        #      + str(property_value))
-                        # print("Generando tipo " + str(type(literal_type)) + " con valor " + str(literal_type))
 
                 triple = self.get_uri(), \
                          ontology_config.get_ontology(property_item.ontology).term(property_item.name), \

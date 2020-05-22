@@ -1,3 +1,5 @@
+![](.//media/CabeceraDocumentosMD.png)
+
 # Hércules Backend ASIO. EF2.1-7. Métricas FAIR I- software y documentación de métricas
 
 Contents

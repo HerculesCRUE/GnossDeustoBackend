@@ -16,6 +16,7 @@ import toml
 from cvn.config import entity as config_entity
 from cvn.config.ontology import OntologyConfig, Ontology, DataType
 from cvn.utils import xmltree
+import logging
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB máx.
@@ -135,7 +136,6 @@ def v1_convert():
 
     # Procesar entidad primaria
     primary_entity.generate_and_add_to_ontology(ontology_config, root)
-    ontology_config.cvn_person = primary_entity.get_uri()
 
     for entity in entities:
         # Para cada tipo de entidad buscamos en el árbol las que tengan el código
@@ -182,6 +182,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     debug = args.debug
+    if debug:
+        logging.basicConfig(level=logging.DEBUG)
 
     app.run(debug=args.debug, port=args.port, host=args.host)
 
