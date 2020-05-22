@@ -223,6 +223,8 @@ class Entity:
             for entity_result_node in xmltree.get_all_nodes_by_code(xml_tree, self.code):
                 print("generating w/ loop: " + self.classname)
                 self.get_property_values_from_node(entity_result_node, skip_subentities_with_subcode)
+                if not self.should_generate():
+                    continue
                 self.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
 
                 for sub_entity in self.subentities:
@@ -237,6 +239,8 @@ class Entity:
         else:
             print("generating " + self.classname)
             self.get_property_values_from_node(xml_tree, skip_subentities_with_subcode)
+            if not self.should_generate():
+                return
             self.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
 
             for sub_entity in self.subentities:
