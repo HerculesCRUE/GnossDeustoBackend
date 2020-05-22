@@ -1038,7 +1038,7 @@ id.format = "{vivo:doi}"
         bean = "FinalPage"
 
     [[entities.subentities]]
-    displayname = "rdfs:Seq"
+    displayname = "rdf:Seq"
 
         [[entities.subentities.relationships]]
         inverse = "vivo:editorList"
