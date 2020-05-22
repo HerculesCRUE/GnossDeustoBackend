@@ -25,7 +25,7 @@ def generate_uri(resource_class, identifier):
     :param identifier:
     :return: la URI
     """
-    return "http://data.um.es/class/" + resource_class + "/" + identifier
+    
     if web_server.debug:
         return "http://data.um.es/class/" + resource_class + "/" + identifier
 
