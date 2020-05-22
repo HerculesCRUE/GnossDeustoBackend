@@ -1834,3 +1834,18 @@ displayname = "roh:Award"
         [[entities.properties.sources]]
         code = "060.030.100.040"
         name = "dateTime"
+
+[[entities]]
+code = "070.010.000.000"
+displayname = "roh:CurriculumVitae"
+
+    [[entities.relationships]]
+    inverse = "roh:hasCV"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    displayname = "vivo:description"
+
+        [[entities.properties.sources]]
+        code = "070.010.000.010"
+        name = "description"
