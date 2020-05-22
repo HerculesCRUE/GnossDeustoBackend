@@ -88,8 +88,9 @@ namespace UrisFactoryLibraryExample.Controllers
 
             ConfigJsonHandler config = new ConfigJsonHandler(uriSchemaJson);
 
-            SchemaController schemaController = new SchemaController(config, new SchemaConfigFileOperations(config));
-            return schemaController.GetUriStructureInfo("test");
+            FactoryController factoryController = new FactoryController(config);
+            var cosas = factoryController.GenerateUri("Test", "1234");
+            return cosas;
         }
     }
 }
