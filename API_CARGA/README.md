@@ -17,3 +17,24 @@ Para una especificación más detallada del servicio se puede consultar la sigui
 Esta aplicación se encarga de sincronizar los datos de un repositorio OAI-PMH con el RDF Store. Obtiene todas las entidades actualizadas desde la última sincronización, solicita al repositorio OAI-PMH todos sus datos y los inserta en el RDF Store. 
 
 Como no es necesario ningún conector específico para actualizar un RDF Store ya que, por definición, deben tener un SPARQL Endpoint, no se ha creado ninguna librería específica de conexión al RDF Store. Las actualizaciones se realizan vía peticiones HTTP al SPARQL Endpoint. 
+
+## Dependencias
+
+- **dotNetRDF**: versión 2.5.1
+- **IdentityServer4**: versión 3.1.2
+- **IdentityServer4.EntityFramework**: versión 3.1.2
+- **icrosoft.AspNetCore.Mvc.Formatters.Json**: versión 2.2.0
+- **Microsoft.AspNetCore.Mvc.NewtonsoftJson**: versión 3.0.0
+- **Microsoft.EntityFrameworkCore**: versión 3.1.4
+- **Microsoft.EntityFrameworkCore.SqlServer**: versión 3.1.2
+- **Microsoft.EntityFrameworkCore.Tools**: versión 3.1.2
+- **Microsoft.Extensions.Logging.Debug**: versión 3.0.0
+- **Microsoft.VisualStudio.Web.CodeGeneration.Design**: versión 3.0.0
+- **Npgsql.EntityFrameworkCore.PostgreSQL**: versión 3.1.2
+- **OaiPmhNet**: versión 0.4.1
+- **Serilog.AspNetCore**: versión 3.2.0
+- **Swashbuckle.AspNetCore**: versión 5.0.0
+- **Swashbuckle.AspNetCore.Annotations**: versión 5.0.0
+- **Swashbuckle.AspNetCore.Filters**: versión 5.0.2
+- **Swashbuckle.AspNetCore.SwaggerGen**: versión 5.0.0
+- **Swashbuckle.AspNetCore.SwaggerUI**: versión 5.0.0
