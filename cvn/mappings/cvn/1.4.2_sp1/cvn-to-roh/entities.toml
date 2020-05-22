@@ -8,7 +8,6 @@ cache = "foaf:person"
 
     [[entities.properties]]
     displayname = "foaf:name"
-    hidden = true
     format = "{name} {familyName} {secondFamilyName}"
 
         [[entities.properties.sources]]
