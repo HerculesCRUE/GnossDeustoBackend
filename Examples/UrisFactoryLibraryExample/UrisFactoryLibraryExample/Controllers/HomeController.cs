@@ -12,7 +12,7 @@ using UrisFactory.Models.Services;
 namespace UrisFactoryLibraryExample.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/")]
     public class HomeController : ControllerBase
     {
         public HomeController()
@@ -88,8 +88,8 @@ namespace UrisFactoryLibraryExample.Controllers
 
             ConfigJsonHandler config = new ConfigJsonHandler(uriSchemaJson);
 
-            SchemaController schemaController = new SchemaController(config, new SchemaConfigFileOperations(config));
-            return schemaController.GetUriStructureInfo("test");
+            FactoryController factoryController = new FactoryController(config);
+            return factoryController.GenerateUri("Test", "1234");      
         }
     }
 }

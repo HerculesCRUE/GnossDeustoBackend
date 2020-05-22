@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.Filters;
 using UrisFactory.ModelExamples;
+using UrisFactory.Models.ConfigEntities;
 using UrisFactory.Models.Services;
 
 namespace UrisFactory.Controllers
@@ -37,11 +38,18 @@ namespace UrisFactory.Controllers
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(UrisFactoryErrorReponse))]
         public IActionResult GenerateUri(string resource_class, string identifier)
         {
-            var queryString = HttpContext.Request.Query.ToList();
             Dictionary<string, string> queryDictionary = new Dictionary<string, string>();
-            foreach(var value in queryString)
+            if (HttpContext != null)
             {
-                queryDictionary.Add(value.Key, value.Value.FirstOrDefault());
+                var queryString = HttpContext.Request.Query.ToList();
+                foreach (var value in queryString)
+                {
+                    queryDictionary.Add(value.Key, value.Value.FirstOrDefault());
+                }
+            }
+            else
+            {
+                queryDictionary.Add(UriComponentsList.Identifier, identifier);
             }
 
             UriFormer uriFormer = new UriFormer(_configJsonHandler.GetUrisConfig());

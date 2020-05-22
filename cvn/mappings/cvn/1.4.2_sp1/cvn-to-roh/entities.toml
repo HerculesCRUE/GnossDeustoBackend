@@ -548,7 +548,7 @@ displayname = "roh:DegreeSupervisingRelationship"
 
     [[entities.subentities]]
     displayname = "vivo:DegreeThesis"
-    id.resource = "PhDThesis"
+    id.resource = "DegreeThesis"
 
         [[entities.subentities.relationships]]
         direct = "vivo:producedBy"
@@ -971,13 +971,20 @@ id.resource = "Project"
                     code = "050.020.020.250"
                     name = "secondFamilyName"
                     bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
-
-[[entities]] # Publicaciones, documentos científicos y técnicos
+# Publicaciones, documentos científicos y técnicos
+# AcademicArticle
+[[entities]]
 code = "060.010.010.000"
 ontology = "bibo"
 classname = "AcademicArticle"
 id.resource = "Article"
 id.format = "{vivo:doi}"
+cache = "roh:title"
+
+    [[entities.conditions]]
+    type = "bean_value_equals"
+    code = "060.010.010.010"
+    value = "020"
 
     [[entities.relationships]]
     ontology = "roh"
@@ -1036,6 +1043,277 @@ id.format = "{vivo:doi}"
         code = "060.010.010.090"
         name = "finalpage"
         bean = "FinalPage"
+
+    [[entities.subentities]]
+    displayname = "rdf:Seq"
+
+        [[entities.subentities.relationships]]
+        inverse = "vivo:authorList"
+
+        [[entities.subentities.subentities]]
+        code = "060.010.010.040"
+        subcode = true
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse = "rdf:{roh_dummy}"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "roh:dummy" # (no existe, pero como esta propiedad no se convierte en tripletas, da igual)
+            hidden = true
+
+                [[entities.subentities.subentities.properties.sources]]
+                name = "order"
+                bean = "SignatureOrder"
+                format = "_{value}"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "foaf:name"
+            format = "{name} {familyName} {secondFamilyName}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                name = "name"
+                bean = "GivenName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.010.040"
+                name = "familyName"
+                bean = "FirstFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.010.040"
+                name = "secondFamilyName"
+                bean = "SecondFamilyName"
+
+## Book Chapter/Section
+[[entities]]
+code = "060.010.010.000"
+ontology = "bibo"
+classname = "BookSection"
+id.resource = "BookSection"
+id.format = "{vivo:doi}"
+
+    [[entities.conditions]]
+    type = "bean_value_equals"
+    code = "060.010.010.010"
+    value = "004"
+
+    [[entities.relationships]]
+    ontology = "roh"
+    name = "correspondingAuthor"
+    inverse_ontology = "roh"
+    inverse_name = "correspondingAuthorOf"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    displayname = "vivo:doi"
+    format = "{doi}"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.400"
+        name = "doi"
+
+    [[entities.properties]]
+    displayname = "roh:title"
+    format = "{title}"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.030"
+        name = "title"
+        bean = "Value"
+
+    [[entities.properties]]
+    displayname = "vivo:description"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.290"
+        name = "description"
+
+    [[entities.properties]]
+    ontology = "vivo"
+    name = "dateTime"
+    format = "{publication_date}"
+    datatype = "xsd:datetime"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.140"
+        name = "publication_date"
+        bean = "Value"
+
+    [[entities.properties]]
+    displayname = "vivo:startPage"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.090"
+        name = "initialpage"
+        bean = "InitialPage"
+
+    [[entities.properties]]
+    displayname = "vivo:pageEnd"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.090"
+        name = "finalpage"
+        bean = "FinalPage"
+
+    [[entities.subentities]]
+    displayname = "rdf:Seq"
+
+        [[entities.subentities.relationships]]
+        inverse = "vivo:authorList"
+
+        [[entities.subentities.subentities]]
+        code = "060.010.010.040"
+        subcode = true
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse = "rdf:{roh_dummy}"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "roh:dummy" # (no existe, pero como esta propiedad no se convierte en tripletas, da igual)
+            hidden = true
+
+                [[entities.subentities.subentities.properties.sources]]
+                name = "order"
+                bean = "SignatureOrder"
+                format = "_{value}"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "foaf:name"
+            format = "{name} {familyName} {secondFamilyName}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                name = "name"
+                bean = "GivenName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.010.040"
+                name = "familyName"
+                bean = "FirstFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.010.040"
+                name = "secondFamilyName"
+                bean = "SecondFamilyName"
+
+## Book Chapter/Section
+[[entities]]
+code = "060.010.010.000"
+ontology = "bibo"
+classname = "Book"
+id.resource = "Book"
+id.format = "{vivo:doi}"
+
+    [[entities.conditions]]
+    type = "bean_value_equals"
+    code = "060.010.010.010"
+    value = "032"
+
+    [[entities.relationships]]
+    ontology = "roh"
+    name = "correspondingAuthor"
+    inverse_ontology = "roh"
+    inverse_name = "correspondingAuthorOf"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    displayname = "vivo:doi"
+    format = "{doi}"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.400"
+        name = "doi"
+
+    [[entities.properties]]
+    displayname = "roh:title"
+    format = "{title}"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.030"
+        name = "title"
+        bean = "Value"
+
+    [[entities.properties]]
+    displayname = "vivo:description"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.290"
+        name = "description"
+
+    [[entities.properties]]
+    ontology = "vivo"
+    name = "dateTime"
+    format = "{publication_date}"
+    datatype = "xsd:datetime"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.140"
+        name = "publication_date"
+        bean = "Value"
+
+    [[entities.properties]]
+    displayname = "vivo:startPage"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.090"
+        name = "initialpage"
+        bean = "InitialPage"
+
+    [[entities.properties]]
+    displayname = "vivo:pageEnd"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.090"
+        name = "finalpage"
+        bean = "FinalPage"
+
+    [[entities.subentities]]
+    displayname = "rdf:Seq"
+
+        [[entities.subentities.relationships]]
+        inverse = "vivo:authorList"
+
+        [[entities.subentities.subentities]]
+        code = "060.010.010.040"
+        subcode = true
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse = "rdf:{roh_dummy}"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "roh:dummy" # (no existe, pero como esta propiedad no se convierte en tripletas, da igual)
+            hidden = true
+
+                [[entities.subentities.subentities.properties.sources]]
+                name = "order"
+                bean = "SignatureOrder"
+                format = "_{value}"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "foaf:name"
+            format = "{name} {familyName} {secondFamilyName}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                name = "name"
+                bean = "GivenName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.010.040"
+                name = "familyName"
+                bean = "FirstFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.010.040"
+                name = "secondFamilyName"
+                bean = "SecondFamilyName"
 
 # Trabajos presentados en congresos nacionales o internacionales
 [[entities]]
@@ -1556,3 +1834,18 @@ displayname = "roh:Award"
         [[entities.properties.sources]]
         code = "060.030.100.040"
         name = "dateTime"
+
+[[entities]]
+code = "070.010.000.000"
+displayname = "roh:CurriculumVitae"
+
+    [[entities.relationships]]
+    inverse = "roh:hasCV"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    displayname = "vivo:description"
+
+        [[entities.properties.sources]]
+        code = "070.010.000.010"
+        name = "description"
