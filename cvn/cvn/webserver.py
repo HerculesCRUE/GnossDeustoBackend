@@ -16,6 +16,7 @@ import toml
 from cvn.config import entity as config_entity
 from cvn.config.ontology import OntologyConfig, Ontology, DataType
 from cvn.utils import xmltree
+import logging
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB máx.
@@ -182,6 +183,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     debug = args.debug
+    if debug:
+        logging.basicConfig(level=logging.DEBUG)
 
     app.run(debug=args.debug, port=args.port, host=args.host)
 
