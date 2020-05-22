@@ -50,6 +50,9 @@ def node_get_code(node):
             if child.tag == "{http://codes.cvn.fecyt.es/beans}Code":
                 return child.text
 
+    if find_result is None:
+        return None
+
     return find_result.text
 
 
