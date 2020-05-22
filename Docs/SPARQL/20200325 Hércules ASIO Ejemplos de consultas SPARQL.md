@@ -43,7 +43,7 @@ es objeto**.
 	select * from <http://graph.um.es/graph/um_cvn>
 	where {
 		?s ?p <http://graph.um.es/res/person/d7aad123-55b9-4400-b108-185139408f7f>.
-		?s a ?o.
+		?s a ?rdftype.
 	}
 
 **Consulta que devuelve todos los triples un artículo.**
