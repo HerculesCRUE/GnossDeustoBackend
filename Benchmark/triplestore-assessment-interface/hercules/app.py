@@ -6,7 +6,7 @@ import sys
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 
-from hercules import public
+from hercules import api, public
 
 
 def create_app(config_object="hercules.settings"):
@@ -31,6 +31,7 @@ def register_blueprints(app):
     """Register Flask blueprints."""
     url_prefix=app.config['APP_SETTINGS']['url-prefix']
     app.register_blueprint(public.views.blueprint, url_prefix=url_prefix)
+    app.register_blueprint(api.api.blueprint, url_prefix=url_prefix)
     return None
 
 def register_extensions(app):

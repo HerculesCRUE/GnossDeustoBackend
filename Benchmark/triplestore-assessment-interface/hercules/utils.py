@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """Helper utilities and decorators."""
+from SPARQLWrapper import SPARQLWrapper, JSON
 from flask import flash
-from SPARQLWrapper import SPARQLWrapper, JSON, RDF, SELECT
+
 from .settings import SPARQL_SETTINGS
+
 
 def flash_errors(form, category="warning"):
     """Flash all errors for a form."""
@@ -28,3 +30,4 @@ def sparql_query(query):
         sparql.setQuery(query)
         return sparql.query().convert()
     return None
+

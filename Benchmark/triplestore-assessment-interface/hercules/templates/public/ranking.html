@@ -5,15 +5,40 @@
 
 {% block content %}
   
-<div class="container">
+<div class="container" ng-app="HerculesApp" ng-controller="HerculesController">
 
-  <h1>Hercules triple store ranking</h1>
+  <div class="herc_ts_info row" style="margin-bottom:20px">
+    <div class="col-md-10">
+      <h1>Hercules triple store ranking</h1>
+    </div>
+    <div class="col-md-2">
+      <form name="custom_download" action="/assessment" method="POST">
+        <button type="submit" class="btn btn-default btn-lg"  style="margin-top:30px" data-toggle="tooltip" data-placement="bottom" title="Download all assessments in RDF/Turtle">
+          <span class="glyphicon glyphicon-download-alt" aria-hidden="true"/>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div ng-show="customrank" class="alert alert-warning" role="alert">
+    <strong>Warning.</strong> Custom benchmark parameters are in effect. Go <a href="/criterion">here</a> to change/reset them.
+  </div>
 
   <div class="row">
-    <ul class="grid list-group ranking">
-        {% for item in ranking %}
-          {{ rank_entry(item.name, item.id, loop.index, item.score) }}
-        {% endfor %}
+    <ul class="herc_rank grid list-group">
+      <li ng-repeat="rank in ranking" class="herc_rank_entry" data-id="{a rank.id a}" data-name="{a rank.name a}">
+        <a href="/entity?uri={a rank.id a}" class="list-group-item">
+          <div class="row">
+            <div class="col-md-1">{a $index+1 a}</div>
+            <div class="col-md-10">
+              <h4 class="list-group-item-heading">{a rank.name a}</h4>
+            </div>
+            <div class="col-md-1 text-info">
+              <strong>{a rank.score a}</strong>
+            </div>
+          </div>
+        </a>
+      </li>
     </ul>
   </div>
   
@@ -21,7 +46,7 @@
   <p>Assessment of the following triple stores is underway.</p>
 
   <div class="row">
-    <ul class="grid list-group ranking">
+    <ul class="herc_rank grid list-group">
         {% for item in unranked %}
           {{ rank_entry(item.name, item.id, loop.index) }}
         {% endfor %}
@@ -29,5 +54,18 @@
   </div>
 
 </div>
-  
+{{super()}}
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+<script>
+for ( var f in sessionStorage) {
+   if(f.startsWith('http://datascienceinstitute.ie/asio/criteria/')) {
+      $('form[name="custom_download"]').append(
+         '<input type="hidden" name="' + f
+         + '" value="'+sessionStorage[f]+'"/>')
+   }
+} 
+</script>
 {% endblock %}
