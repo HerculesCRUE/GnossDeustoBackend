@@ -50,7 +50,7 @@ es objeto**.
 
 	select * from <http://graph.um.es/graph/um_cvn>
 	where {
-		<http://graph.um.es/res/article/4167c433-5af4-4071-8daa-df71d9c18fc5> ?p ?o.
+		<http://graph.um.es/res/article/54abcda1-55bf-4896-ab2f-41b63a1dc135> ?p ?o.
 	}
 
 GRAFO DE DATOS DE SISTEMAS DE LA UM
