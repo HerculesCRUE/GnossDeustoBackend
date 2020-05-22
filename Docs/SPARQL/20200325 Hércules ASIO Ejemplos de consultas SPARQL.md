@@ -35,14 +35,14 @@ http://graph.um.es/graph/um/cvn
 **Consulta que devuelve todos los triples de un investigador**.
 
 	select * from <http://graph.um.es/graph/um_cvn>
-	where { <http://graph.um.es/res/person/d7aad123-55b9-4400-b108-185139408f7f> ?p ?o}
+	where { <http://graph.um.es/res/person/f6544839-0e1e-4e4b-bc5d-70199198a50f> ?p ?o}
 
 **Consulta que devuelve todas las entidades de las que el investigador
 es objeto**.
 
 	select * from <http://graph.um.es/graph/um_cvn>
 	where {
-		?s ?p <http://graph.um.es/res/person/d7aad123-55b9-4400-b108-185139408f7f>.
+		?s ?p <http://graph.um.es/res/person/f6544839-0e1e-4e4b-bc5d-70199198a50f>.
 		?s a ?rdftype.
 	}
 
