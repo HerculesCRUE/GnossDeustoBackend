@@ -227,6 +227,8 @@ class Entity:
                 if not self.should_generate():
                     continue
                 self.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
+                if self.primary:
+                    ontology_config.cvn_person = self.get_uri()
 
                 for sub_entity in self.subentities:
                     loop = False
