@@ -1,3 +1,6 @@
+# Libraries
+Aqui se encuentran las dll de los proyectos desarrollados, tanto en Windows como en Linux 
+
 # Dependencias 
 En este documento se especifican las dependencias de librerías especificas que tienen las librerías desarrolladas en este proyecto
 - [Dependencias UrisFactory](#dependencias-urisFactory)
