@@ -136,7 +136,6 @@ def v1_convert():
 
     # Procesar entidad primaria
     primary_entity.generate_and_add_to_ontology(ontology_config, root)
-    ontology_config.cvn_person = primary_entity.get_uri()
 
     for entity in entities:
         # Para cada tipo de entidad buscamos en el árbol las que tengan el código
