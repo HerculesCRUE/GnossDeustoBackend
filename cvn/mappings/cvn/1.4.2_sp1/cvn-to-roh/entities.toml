@@ -548,7 +548,7 @@ displayname = "roh:DegreeSupervisingRelationship"
 
     [[entities.subentities]]
     displayname = "vivo:DegreeThesis"
-    id.resource = "PhDThesis"
+    id.resource = "DegreeThesis"
 
         [[entities.subentities.relationships]]
         direct = "vivo:producedBy"
