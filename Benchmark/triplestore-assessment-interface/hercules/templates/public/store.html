@@ -69,7 +69,7 @@
                   <tbody>
                   {% for crit in group.criteria.values() %}
                     <tr>
-                      <td><a href="/entity?uri={{crit.id}}">{{crit.name}}</a></td>
+                      <td><a href="{{url_for('public.entity')}}?uri={{crit.id}}">{{crit.name}}</a></td>
                       <td>{{ score(crit.score,5) }}</td>
                       <td>{{crit.reason}}</td>
                       <td>

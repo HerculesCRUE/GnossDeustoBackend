@@ -2,8 +2,8 @@
 
 {% block styles %}
 {{super()}}
-<link rel="stylesheet" href="{{url_for('.static', filename='css/style.css')}}"/>
-<link rel="stylesheet" href="{{url_for('.static', filename='css/gnoss.css')}}"/>
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}"/>
+<link rel="stylesheet" href="{{url_for('static', filename='css/gnoss.css')}}"/>
 {% endblock %}
 
 {% block navbar %}
@@ -19,6 +19,9 @@
 
 {% block scripts %}
   {{super()}}
+    <script>
+apidata = { url : '{{ url_for("api.reranking")}}' }
+    </script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
