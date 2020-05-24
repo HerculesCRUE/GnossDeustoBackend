@@ -10,7 +10,7 @@ API CARGA es un servicio web que contienen 4 controladores, utilizados cada uno 
  - etlController: Contiene los procesos ETL (Extract, Transform and Load) necesarios para la carga de datos.
  - repositoryController: Contiene los procesos necesarios para la gestión de los repositorios OAI-PMH (creación, modificación, eliminación...).
  - syncController: Contiene los procesos necesarios para la ejecución de las sincronizaciones.
- - ValidationController: Contiene los procesos necesarios para la gestión de las validaciones  (creación, modificación, eliminación...).
+ - ValidationController: Contiene los procesos necesarios para la gestión de las validaciones  (creación, modificación, eliminación...). La carpeta [Validaciones](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA/Validaciones) contiene información sobre los [shapes SHACL](https://www.w3.org/TR/shacl/) definidos para validar.
  
 Para una especificación más detallada del servicio se puede consultar la siguiente documentación: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/20200203%20H%C3%A9rcules%20ASIO%20Especificaci%C3%B3n%20de%20funciones%20de%20Carga.md
  
