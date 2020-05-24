@@ -30,8 +30,8 @@ def configure_logger(app):
 def register_blueprints(app):
     """Register Flask blueprints."""
     url_prefix=app.config['APP_SETTINGS']['url-prefix']
-    app.register_blueprint(public.views.blueprint, url_prefix=url_prefix)
-    app.register_blueprint(api.api.blueprint, url_prefix=url_prefix)
+    app.register_blueprint(public.views.blueprint, url_prefix='/')
+    app.register_blueprint(api.api.blueprint, url_prefix='/')
     return None
 
 def register_extensions(app):
