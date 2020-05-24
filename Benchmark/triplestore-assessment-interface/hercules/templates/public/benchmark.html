@@ -45,7 +45,7 @@
                   <tbody>
                     {% for criterion in group.criteria %}
                     <tr about="{{criterion.id}}">
-                      <td><a href="{{url_for('public.entity')}}?uri={{criterion.id}}">{{criterion.name}}</a></td>
+                      <td><a href="/benchmark/entity?uri={{criterion.id}}">{{criterion.name}}</a></td>
                       <td>{{criterion.description}}</td>
                       <td class="herc_weight">
                         <input style="display:none" type="range" class="herc_weight_setter align-bottom custom-range" name="{{criterion.id}}" value="{{criterion.weight}}" min="1" max="5" data-defaultvalue="{{criterion.weight}}">

@@ -17,7 +17,7 @@ At the moment, the Hercules app is provided as a [Flask](https://flask.palletspr
 ## Run
 
 1. Set the server port in [config.json](config.json) (defaults to `5000`)
-2. Set the SPARQL endpoint in [hercules/settings.py](hercules/settings.py). You can also set the path of the application URL in `APP_SETTINGS.url-prefix` (must start and end with slash)
+2. Set the SPARQL endpoint in [hercules/settings.py](hercules/settings.py).
 3. `python server.py`
 4. Go to `localhost:{the_port}`
 

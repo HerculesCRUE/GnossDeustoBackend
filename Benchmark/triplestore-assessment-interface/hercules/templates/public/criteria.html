@@ -30,7 +30,7 @@
           <tbody>
             {% for rank in ranking %}
             <tr>
-              <td><a href="{{url_for('public.entity')}}?uri={{rank.id}}">{{rank.name}}</a></td>
+              <td><a href="/benchmark/entity?uri={{rank.id}}">{{rank.name}}</a></td>
               <td>{{ score(rank.score, 5) }}</td>
               <td>{{rank.reason}}</td>
             </tr>
