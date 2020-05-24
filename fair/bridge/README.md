@@ -1,7 +1,8 @@
 # *bridge*
 
-Enlace entre la API del servidor público de FAIR Metrics y el futuro *backend*
-de ROH.
+Enlace con el API del servidor público de FAIR Metrics, desplegado en:
+
+http://herc-as-front-desa.atica.um.es/bridgeswagger/v1/ui/#/
 
 ## Despliegue
 
@@ -78,7 +79,7 @@ Para generar el front-end swagger hacer lo siguiente:
 El fichero bridge/openapi.yaml contiene la especificación de la API del bridge ASIO-FAIRmetrics acorde con OpenAPI 3.0
 
 
-## Por hacer/mejoras en el futuro
+## Por hacer/mejoras
 
 - Hacer configurable
   Guardar valores de configuración en un archivo aparte
