@@ -25,6 +25,8 @@ El SPARQL Endpoint provisional se encuentra disponible en un servidor de la Univ
 
 http://155.54.239.204:8890/sparql
 
+Hay ejemplos de consultas en el documento [20200325 Hércules ASIO Ejemplos de consultas](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/SPARQL/20200325%20H%C3%A9rcules%20ASIO%20Ejemplos%20de%20consultas%20SPARQL.md)
+
 Los datos cargados se pueden consultar en una versión preliminar del servidor Linked Data, soportado por [Trifid](https://github.com/zazuko/trifid), desplegado en los servidores de la Universidad de Murcia. Por ejemplo:
 
 http://graph.um.es/res/project/RAYD-A-2002-6237
