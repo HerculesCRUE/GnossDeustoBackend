@@ -84,6 +84,7 @@ WHERE {{
 }}
 """
 	data = sparql(query)
+	print(data)
 	qcats = data.query(f"""
 {PREFIXES}
 SELECT DISTINCT ?category WHERE {{
