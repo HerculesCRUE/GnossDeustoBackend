@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Helper utilities and decorators."""
-from SPARQLWrapper import SPARQLWrapper, JSON
+from SPARQLWrapper import SPARQLWrapper, JSON, JSONLD
 from flask import flash
 
 from .settings import SPARQL_SETTINGS
@@ -26,8 +26,8 @@ def sparql_query(query):
     endpoint = SPARQL_SETTINGS["data-sources"][0]
     if endpoint["protocol"] == "sparql":
         sparql = SPARQLWrapper(endpoint["url"])
-        sparql.setReturnFormat(JSON)
         sparql.setQuery(query)
+        sparql.setReturnFormat(JSON if sparql.queryType == 'SELECT' else JSONLD)
         return sparql.query().convert()
     return None
 

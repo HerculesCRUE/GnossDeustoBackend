@@ -45,7 +45,7 @@ WHERE {{
 @blueprint.route("/", methods=["GET", "POST"])
 def home():
     """Home page."""
-    
+
     query = f"""
 {PREFIXES}
 SELECT DISTINCT ?criterion
@@ -84,7 +84,6 @@ WHERE {{
 }}
 """
 	data = sparql(query)
-	print(data)
 	qcats = data.query(f"""
 {PREFIXES}
 SELECT DISTINCT ?category WHERE {{

@@ -142,7 +142,7 @@ SELECT DISTINCT ?store ?group (SUM(?val*?weight)/SUM(?weight) AS ?weighted) WHER
   }}
   ?group skos:broader ?cat
 }} GROUP BY ?store
-ORDER BY DESC(?score)
+ ORDER BY DESC(?score)
 """
     res = sparql(query)
     scoremap = {}
