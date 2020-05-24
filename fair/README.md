@@ -16,4 +16,5 @@ de evaluación de FAIR del proyecto Hércules dentro del proyecto [FAIR Sharing]
 Por último, indicar que disponemos de una [librería "bridge"](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/fair/bridge) que conecta con el API
 del proyecto FAIR Sharing y permite ejecutar las métricas programáticamente.
 El interfaz swagger de esta librería está accesible en:
+
 http://herc-as-front-desa.atica.um.es/bridgeswagger/v1/ui/#/
