@@ -13,6 +13,9 @@ http://herc-as-front-desa.atica.um.es/
 Si bien, como apuntamos en los documentos citados anteriormente, relizaremos los tests
 de evaluación de FAIR del proyecto Hércules dentro del proyecto [FAIR Sharing](https://fairsharing.github.io/FAIR-Evaluator-FrontEnd/#!/#%2F!).
 
+Los primeros tests de la ROH están en:
+https://fairsharing.github.io/FAIR-Evaluator-FrontEnd/#!/evaluations/4046
+
 Por último, indicar que disponemos de una [librería "bridge"](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/fair/bridge) que conecta con el API
 del proyecto FAIR Sharing y permite ejecutar las métricas programáticamente.
 El interfaz swagger de esta librería está accesible en:
