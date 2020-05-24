@@ -1,7 +1,7 @@
 1.- Gestión de validaciones
 
-	1.- Las validaciones se efectuan mediante Shapes SHACL.	
-	2.- Las validaciones van ligadas al repositorio de sincronización, es decir, se podrán efectuar diferentes validaciones en función del repositorio ya que puede que algún repositorio sea más completo que otro.
+1.- Las validaciones se efectuan mediante Shapes SHACL.	
+2.- Las validaciones van ligadas al repositorio de sincronización, es decir, se podrán efectuar diferentes validaciones en función del repositorio ya que puede que algún repositorio sea más completo que otro.
 
 2.- Desde el 'API_CARGA' http://herc-as-front-desa.atica.um.es/carga/swagger/index.html se pueden dar altas, bajas, y modificaciones de los Shapes
 
