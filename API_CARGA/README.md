@@ -19,7 +19,17 @@ Esta aplicación se encarga de sincronizar los datos de un repositorio OAI-PMH c
 *Conexión a Triple Store*
 -------------------------
 
-Como no es necesario ningún conector específico para actualizar un RDF Store ya que, por definición, deben tener un SPARQL Endpoint, no se ha creado ninguna librería específica de conexión al RDF Store. Las actualizaciones se realizan vía peticiones HTTP al SPARQL Endpoint. 
+Como no es necesario ningún conector específico para actualizar un RDF Store ya que, por definición, deben tener un SPARQL Endpoint, no se ha creado ninguna librería específica de conexión al RDF Store. Las actualizaciones se realizan vía peticiones HTTP al SPARQL Endpoint.
+
+El SPARQL Endpoint provisional se encuentra disponible en un servidor de la Universidad de Murcia, con acceso protegido por una VPN en la siguiente URL:
+
+http://155.54.239.204:8890/sparql
+
+Los datos cargados se pueden consultar en una versión preliminar del servidor Linked Data, soportado por [Trifid](https://github.com/zazuko/trifid), desplegado en los servidores de la Universidad de Murcia. Por ejemplo:
+
+http://graph.um.es/res/project/RAYD-A-2002-6237
+
+
 
 ## Dependencias
 
