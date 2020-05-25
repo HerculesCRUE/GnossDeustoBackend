@@ -509,7 +509,27 @@
       "ResourceClass": "FundingRole",
       "LabelResourceClass": "fundingrole",
       "ResourceURI": "uriResourceStructure"
-    }
+    },
+    {
+      "ResourceClass": "HRClassification",
+      "LabelResourceClass": "hr",
+      "ResourceURI": "uriKosStructure"
+    },
+    {
+      "ResourceClass": "Dossier",
+      "LabelResourceClass": "dossier",
+      "ResourceURI": "uriResourceStructure"
+    },
+    {
+      "ResourceClass": "ResearchProposal",
+      "LabelResourceClass": "researchproposal",
+      "ResourceURI": "uriResourceStructure"
+    },
+    {
+	"ResourceClass": "EvaluationSummary",
+      "LabelResourceClass": "evaluationsummary",
+      "ResourceURI": "uriResourceStructure"
+    }	
 	
   ]
 }

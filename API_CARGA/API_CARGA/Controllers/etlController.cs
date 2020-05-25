@@ -14,7 +14,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace API_CARGA.Controllers
 {
     /// <summary>
-    /// API de carga
+    /// Contiene los procesos ETL (Extract, Transform and Load) necesarios para la carga de datos.
     /// </summary>
     [ApiController]
     [Route("[controller]")]
@@ -33,6 +33,7 @@ namespace API_CARGA.Controllers
 
         /// <summary>
         /// Ejecuta el último paso del proceso de carga, por el que el RDF generado se almacena en el Triple Store. Permite cargar una fuente RDF arbitraria.
+        /// Aquí se encuentra un RDF de Ejemplo: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_CARGA/API_CARGA/Samples/rdfSample.xml
         /// </summary>
         /// <param name="rdfFile">Fichero RDF</param>
         /// <returns></returns>
@@ -45,7 +46,7 @@ namespace API_CARGA.Controllers
             {
                 XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
                 List<string> triples = SparqlUtility.GetTriplesFromRDF(rdf);    
-                SparqlUtility.LoadTriples(triples, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), _configSparql.GetGraph(), _configSparql.GetGraphUnidata());
+                SparqlUtility.LoadTriples(triples, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), _configSparql.GetGraph(), _configSparql.GetGraphUnidata()); 
                 return Ok();
             }
             catch (Exception ex)
@@ -56,6 +57,7 @@ namespace API_CARGA.Controllers
 
         /// <summary>
         /// Valida un RDF mediante el shape SHACL configurado
+        /// Aquí se encuentra un RDF de Ejemplo: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_CARGA/API_CARGA/Samples/rdfSample.xml
         /// </summary>
         /// <param name="rdfFile">Fichero RDF</param>
         /// <param name="repositoryIdentifier">Identificador del repositorio para seleccionar los Shapes (los repositorios disponibles están en /etl-config/repository)</param>

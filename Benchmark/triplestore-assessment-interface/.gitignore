@@ -12,13 +12,18 @@
 
 # setuptools #
 __pycache__
-.project
-.pydevproject
-.python-version
 build
 dist
 *.egg-info
 *.pyc
+
+# pyenv #
+.python-version
+
+# Eclipse, PyDev #
+.project
+.pydevproject
+.settings
 
 
 ######################

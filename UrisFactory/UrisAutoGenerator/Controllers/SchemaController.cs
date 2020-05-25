@@ -14,6 +14,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace UrisFactory.Controllers
 {
+    /// <summary>
+    /// Controlador encargado de gerstionar el esquema de Uris, que ofrece métodos para la consulta de este esquema y su modificación
+    /// </summary>
     [ApiController]
     [Route("[Controller]")]
     public class SchemaController : Controller
@@ -42,6 +45,9 @@ namespace UrisFactory.Controllers
         ///<summary>
         ///Reemplaza el fichero de configuración por otro fichero dado, para ver la estrucutura del fichero, se recomienda ver el fichero dado por: http://herc-as-front-desa.atica.um.es/uris/Schema
         ///</summary>
+        ///<remarks>
+        ///Se puede encontrar un ejemplo del fichero como plantilla en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/UrisFactory/docs/20191211%20Esquema%20de%20URIs.json
+        /// </remarks>
         ///<param name="newSchemaConfig">nuevo fichero de configuración</param>
         [HttpPost]
         [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(string))]

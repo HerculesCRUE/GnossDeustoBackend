@@ -2,7 +2,7 @@
 {#  CATEGORY  #}
 {# ############################################# #}
 {% macro category(title, description, index, scorre) %}
-  <div class="panel-heading" role="tab" id="heading{{index}}">
+  <div class="herc_assess_cat panel-heading" role="tab" id="heading{{index}}">
     <div class="row">
       <div class="col-md-11">
         <h3 class="panel-title">
@@ -27,7 +27,7 @@
 {# ############################################# #}
 {% macro home_card(image, link, number, type) %}
   <div class="panel panel-primary text-center">
-    <div class="panel-body">
+    <div class="panel-body" style="margin-top:20px">
       <a href="{{link}}">
         <h1 class="panel-title" style="font-size:300%">{{number}}</h1>
       </a>
@@ -45,12 +45,14 @@
 {#  RANKING  #}
 {# ############################################# #}
 {% macro rank_entry(name, uri, order, scorre) %}
-  <li data-id="{{uri}}"
+  <li class="herc_rank_entry" data-id="{{uri}}"
       data-name="{{name}}">
-    <a href="/entity?uri={{uri}}" class="list-group-item">
+    <a href="/benchmark/entity/?uri={{uri}}" class="list-group-item">
       <div class="row">
         <div class="col-md-1">{{order}}</div>
-        <div class="col-md-10"><h4 class="list-group-item-heading">{{name}}</h4></div>
+        <div class="col-md-10">
+          <h4 class="list-group-item-heading" {% if not scorre %}style="color:#888"{% endif %}>{{name}}</h4>
+        </div>
         <div class="col-md-1 text-info">
           {% if scorre %}
             {{ score(scorre, 5) }}

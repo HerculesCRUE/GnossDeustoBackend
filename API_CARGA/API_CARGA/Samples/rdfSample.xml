@@ -1,0 +1,63 @@
+<rdf:RDF xmlns:bibo="http://purl.org/roh/mirror/bibo#" xmlns:foaf="http://purl.org/roh/mirror/foaf#" xmlns:obobfo="http://purl.org/roh/mirror/obo/bfo#" xmlns:oboro="http://purl.org/roh/mirror/obo/ro#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:roh="http://purl.org/roh#" xmlns:rohes="http://purl.org/rohes#" xmlns:vcard="http://purl.org/roh/mirror/vcard#" xmlns:vivo="http://purl.org/roh/mirror/vivo#">
+	<rdf:Description rdf:about="http://graph.um.es/res/person/1">
+		<rdf:type rdf:resource = "http://purl.org/roh/mirror/foaf#Person" />
+		<roh:hasRole rdf:nodeID="N13102d9d82124e479f8d7042a8fab61a" />
+		<foaf:phone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">tel:666666666</foaf:phone>
+		<foaf:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nombre Apellido</foaf:name>
+		<foaf:firstName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nombre</foaf:firstName>
+		<foaf:surname rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Apellido</foaf:surname>
+	</rdf:Description>
+	<rdf:Description rdf:nodeID="N13102d9d82124e479f8d7042a8fab61a">
+		<vivo:relates rdf:resource="http://graph.um.es/res/project/1" />
+		<vivo:dateTimeInterval rdf:nodeID="N2552ff6c9f41464d85917e5286ac26d6" />
+		<roh:roleOf rdf:resource="http://graph.um.es/res/person/1" />
+		<rdf:type rdf:resource="http://purl.org/roh/mirror/vivo#MemberRole" />
+	</rdf:Description>
+	<rdf:Description rdf:about="http://graph.um.es/res/project/1">
+		<roh:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IMPLICACIONES QUIMICAS Y BIOQUIMICAS EN EL COLOR Y AROMAS DEMOSTOS Y VINOS</roh:title>
+		<vivo:relatedBy rdf:nodeID="N92b3d38e204e40439f1ec47abd63b35e" />
+		<rdf:type rdf:resource="http://purl.org/roh/mirror/vivo#Project" />
+		<vivo:dateTimeInterval rdf:nodeID="Ncd7b021fabbd4f768a5c2f3869e85132" />
+		<vivo:relates rdf:nodeID="N13102d9d82124e479f8d7042a8fab61a" />
+		<roh:isSupportedBy rdf:nodeID="N0f320d4ca3184adb88ba7d1afdf624b1" />
+	</rdf:Description>
+	<rdf:Description rdf:nodeID="N0f320d4ca3184adb88ba7d1afdf624b1">
+		<roh:supports rdf:resource="http://graph.um.es/res/project/1" />
+		<vivo:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PCT89-4</vivo:identifier>
+		<rdf:type rdf:resource="http://purl.org/roh#Funding" />
+		<oboro:BFO_0000051 rdf:nodeID="N5c0b27570e19415188b29776607abf7d" />
+	</rdf:Description>
+	<rdf:Description rdf:nodeID="N5c0b27570e19415188b29776607abf7d">
+		<oboro:BFO_0000050 rdf:nodeID="N0f320d4ca3184adb88ba7d1afdf624b1" />
+		<rdf:type rdf:resource="http://purl.org/roh#FundingAmount" />
+		<roh:monetaryAmount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21035.42</roh:monetaryAmount>
+	</rdf:Description>
+	<rdf:Description rdf:nodeID="N2552ff6c9f41464d85917e5286ac26d6">
+		<rdf:type rdf:resource="http://purl.org/roh/mirror/vivo#DateTimeInterval" />
+		<vivo:start rdf:nodeID="N87c73ed5cf5e4d6d979fc46f2872d1fd" />
+	</rdf:Description>
+	<rdf:Description rdf:nodeID="N87c73ed5cf5e4d6d979fc46f2872d1fd">
+		<rdf:type rdf:resource="http://purl.org/roh/mirror/vivo#DateTimeValue" />
+		<vivo:dateTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1990-01-01T00:00:00.000+01:00</vivo:dateTime>
+	</rdf:Description>
+	<rdf:Description rdf:about="http://graph.um.es/res/project/1">
+		<roh:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IMPLICACIONES QUIMICAS Y BIOQUIMICAS EN EL COLOR Y AROMAS DEMOSTOS Y VINOS</roh:title>
+		<vivo:relatedBy rdf:nodeID="N92b3d38e204e40439f1ec47abd63b35e" />
+		<rdf:type rdf:resource="http://purl.org/roh/mirror/vivo#Project" />
+		<vivo:dateTimeInterval rdf:nodeID="Ncd7b021fabbd4f768a5c2f3869e85132" />
+		<roh:isSupportedBy rdf:nodeID="N0f320d4ca3184adb88ba7d1afdf624b1" />
+	</rdf:Description>
+	<rdf:Description rdf:nodeID="N92b3d38e204e40439f1ec47abd63b35e">
+		<vivo:relates rdf:resource="http://graph.um.es/res/person/1" />
+		<vivo:relates rdf:resource="http://graph.um.es/res/project/1" />
+		<rdf:type rdf:resource="http://purl.org/roh/mirror/vivo#PrincipalInvestigatorRole" />
+	</rdf:Description>
+	<rdf:Description rdf:nodeID="Ncd7b021fabbd4f768a5c2f3869e85132">
+		<vivo:start rdf:nodeID="Na1caef70b2c54896a3a246a3c7033677" />
+		<rdf:type rdf:resource="http://purl.org/roh/mirror/vivo#DateTimeInterval" />
+	</rdf:Description>
+	<rdf:Description rdf:nodeID="Na1caef70b2c54896a3a246a3c7033677">
+		<vivo:dateTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1990-01-02T00:00:00.000+01:00</vivo:dateTime>
+		<rdf:type rdf:resource="http://purl.org/roh/mirror/vivo#DateTimeValue" />
+	</rdf:Description>
+</rdf:RDF>

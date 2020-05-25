@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CronConfigure.Controllers
 {
+    /// <summary>
+    /// Controlador para gestionar las tareas ejecutadas y poder crear tareas nuevas
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class JobController : ControllerBase
@@ -33,6 +36,9 @@ namespace CronConfigure.Controllers
         /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones, este parametro se puede obtener de http://herc-as-front-desa.atica.um.es/carga/etl/ListSets/{identificador_del_repositorio}</param>
         /// <param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro, este parametro se puede obtener en la respuesta identifier que da el método http://herc-as-front-desa.atica.um.es/carga/etl/ListIdentifiers/{identificador_del_repositorio}?metadataPrefix=rdf</param>
         /// <returns>identifdicador de la tarea</returns> 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public IActionResult AddExecution(string id_repository, string fecha_inicio = null, string fecha = null, string set = null, string codigo_objeto = null)
         {
@@ -84,6 +90,9 @@ namespace CronConfigure.Controllers
         /// </summary>
         /// <param name="id">identificador de la tarea, el identificador se puede obterner del método: que lista los jobs http://herc-as-front-desa.atica.um.es/cron-config/Job?type=0&amp;from=0&amp;count=100</param>
         /// <returns></returns> 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("{id}")]
         public IActionResult AddExecution(string id)
         {
@@ -106,6 +115,8 @@ namespace CronConfigure.Controllers
         /// <param name="count">número máximo de tareas a traer</param>
         /// <returns>listado de tareas</returns> 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult GetJobs(JobType type, int count, int from = 0)
         {
             return Ok(_cronApiService.GetJobs(type, from, count));

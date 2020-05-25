@@ -1,43 +1,28 @@
 # -*- coding: utf-8 -*-
 """Public section, including homepage and signup."""
 import json
-import requests
+
 from flask import (
     Blueprint,
-    flash,
     redirect,
     render_template,
     request,
     url_for,
-    jsonify,
 )
-from rdflib import Namespace, RDFS, URIRef
-from rdflib.namespace import DC, DCTERMS, DOAP, FOAF, SKOS
+from rdflib import RDFS, URIRef
+from rdflib.namespace import DCTERMS, DOAP, FOAF, SKOS
 
-from ..utils import sparql_query
+from ..common.rdf import ASIO, PREFIXES, bgp_isstore
+from ..utils import sparql_query as sparql
 
 blueprint = Blueprint("public", __name__, static_folder="../static")
 
-ASIO = Namespace('http://datascienceinstitute.ie/asio/')
-
-PREFIXES = f"""
-  PREFIX asio: <{ASIO}>
-  PREFIX asios: <http://datascienceinstitute.ie/asio/schema#>
-  PREFIX dc: <http://purl.org/dc/elements/1.1/>
-  PREFIX dct: <http://purl.org/dc/terms/>
-  PREFIX doap: <http://usefulinc.com/ns/doap#>
-  PREFIX owl: <http://www.w3.org/2002/07/owl#>
-  PREFIX provo: <http://www.w3.org/ns/prov#>
-  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-  PREFIX sc: <http://purl.org/science/owl/sciencecommons/>
-  PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-"""
-
 typetable = """
-	( asio:TripleStore "store" )
-	( asio:TripleStoreAssessment   "assessment" )
-	( asio:Criterion   "criterion" )
-	( asio:CriterionCategory   "criterioncategory" )
+    ( asio:TripleStore "store" )
+    ( doap:Project "store" )
+    ( asio:TripleStoreAssessment   "assessment" )
+    ( asio:Criterion   "criterion" )
+    ( asio:CriterionCategory   "criterioncategory" )
 """
 
 def guess_type(uri):
@@ -51,22 +36,16 @@ WHERE {{
 	 <{uri}> a ?type
 }}
 """
-    res = sparql_query(query)
+    res = sparql(query)
     if res['results']['bindings']:
         return res['results']['bindings'][0]['typestring']['value']
     return None
 
-def bgp_isstore(var):
-	return f"""
-	 {{ ?{var} a asio:TripleStore }}
-	 UNION
-	 {{ ?{var} a doap:Project ; doap:release [ a asio:TripleStoreRelease ] }}
-"""
 
 @blueprint.route("/", methods=["GET", "POST"])
 def home():
     """Home page."""
-    
+
     query = f"""
 {PREFIXES}
 SELECT DISTINCT ?criterion
@@ -74,7 +53,7 @@ WHERE {{
 	?criterion a asio:Criterion
 }}
 """
-    res = sparql_query(query)
+    res = sparql(query)
     ncriteria = len(res['results']['bindings'])
     query = f"""
 {PREFIXES}
@@ -85,10 +64,11 @@ WHERE {{
 	 {{ ?store a doap:Project ; doap:release [a asio:TripleStoreRelease] }}
 }}
 """
-    res = sparql_query(query)
+    res = sparql(query)
     nstores = len(res['results']['bindings'])
     
     return render_template("public/home.html", numbers={ "criterion" : ncriteria, "store" : nstores})
+
 
 @blueprint.route("/criterion", methods=["GET"])   
 def criteria():
@@ -103,7 +83,7 @@ WHERE {{
  . ?category a asio:CriterionCategory
 }}
 """
-	data = sparql_query(query)
+	data = sparql(query)
 	qcats = data.query(f"""
 {PREFIXES}
 SELECT DISTINCT ?category WHERE {{
@@ -124,6 +104,7 @@ SELECT DISTINCT ?category WHERE {{
 				'id' : str(group),
 				'name' : str(data.value(group, RDFS.label)),
 				'description' : str(data.value(group, RDFS.comment)),
+				'weight' : int(float(data.value(group, ASIO.weight))),
 				'criteria' : []
 			}
 			# Just to ensure they come in ordered
@@ -137,8 +118,10 @@ SELECT DISTINCT ?criterion WHERE {{
 				crit = rowc.criterion
 				cr = {
 					'id' : str(crit),
+					'short' : str(crit).rsplit('/', 1)[-1],
 					'name' : str(data.value(crit, RDFS.label)),
 					'description' : str(data.value(crit, DCTERMS.description)),
+					'weight' : int(float(data.value(crit, ASIO.weight))),
 				}
 				gr['criteria'].append(cr)
 			catdesc['groups'].append(gr)		
@@ -148,7 +131,7 @@ SELECT DISTINCT ?criterion WHERE {{
 
 @blueprint.route("/criterion/<slug>", methods=["GET"])
 def criterion(slug):
-	crid = URIRef('http://datascienceinstitute.ie/asio/criteria/'+slug)
+	crid = URIRef('http://datascienceinstitute.ie/asio/criteria/' + slug)
 	query = f"""
 {PREFIXES}
 DESCRIBE <{crid}> ?group
@@ -156,7 +139,7 @@ WHERE {{
     <{crid}> dct:subject ?group
 }}
 """
-	data = sparql_query(query)
+	data = sparql(query)
 	grid = data.value(crid, DCTERMS.subject)
 	criterion = {
 		"id"   : str(crid),
@@ -180,12 +163,12 @@ SELECT DISTINCT ?store ?storename ?name ?value ?why WHERE {{
 	. ?store rdfs:label ?storename
 }} ORDER BY DESC(?value)
 """
-	res = sparql_query(query)
+	res = sparql(query)
 	ranking = []
 	last = None
 	for bind in res['results']['bindings']:
 		stid = bind['store']['value']
-		if last is None or stid!=last:
+		if last is None or stid != last:
 			ranking.append({
 				"id"     : str(stid),
 				"name"   : str(bind['storename']['value']),
@@ -202,7 +185,8 @@ def entity():
     what = request.args.get('uri')
     type = guess_type(what)
     slug = what.rsplit('/', 1)[-1]
-    return redirect(url_for('.'+type, slug=slug))
+    return redirect(url_for('.' + type, slug=slug))
+
 
 @blueprint.route("/store", methods=["GET"])   
 def ranking():
@@ -235,7 +219,7 @@ WHERE {{
 }} GROUP BY ?store ?namesO 
 ORDER BY DESC(?score) ?store
 """
-    res = sparql_query(query)
+    res = sparql(query)
     for bind in res['results']['bindings']:
     	score = 'score' in bind
     	names = json.loads(bind["namesO"]["value"])
@@ -248,64 +232,6 @@ ORDER BY DESC(?score) ?store
     	
     return render_template("public/ranking.html", ranking=ranking, unranked=unranked)
 
-@blueprint.route("/ranking", methods=["POST"])   
-def reranking():
-	nucrit = request.form.get('criterion')
-	nuweight = float(request.form.get('weight'))
-	rerank = {
-		"criterion"	: nucrit,
-		"weight"	: nuweight,
-		"ranking"	: []
-	}
-	query = f"""
-{PREFIXES}
-SELECT DISTINCT * WHERE {{
-	?criterion a asio:Criterion
-	      ; asio:weight ?weight
-}} 
-"""
-	res = sparql_query(query)
-	spvalues = ''
-	for bind in res['results']['bindings']:
-		crit = str(bind['criterion']['value'])
-		weight = nuweight if crit == nucrit else float(bind['weight']['value'])
-		spvalues += f"""( <{crit}> {weight} )"""
-	ists = bgp_isstore('store')
-	query = f"""
-{PREFIXES}
-SELECT DISTINCT ?store (SUM(?weighted*?groupweight)/SUM(?groupweight) AS ?score) WHERE {{
-{{
-SELECT DISTINCT ?store ?group (SUM(?val*?weight)/SUM(?weight) AS ?weighted) WHERE {{
-  {ists}
-  VALUES(?crit ?weight) {{
-    {spvalues}
-  }}
-  ?assess dc:subject|dct:subject ?store
-  		; asios:value ?val
-  		; asios:criterion ?crit . 
-  ?crit dct:subject ?group .
-  }} GROUP BY ?store ?group 
-}} 
-  ?group skos:broader ?cat
-       ; asio:weight ?groupweight .
-}} GROUP BY ?store
-ORDER BY DESC(?score)
-"""
-	res = sparql_query(query)
-	scoremap = {}
-	describe = "DESCRIBE"
-	for bind in res['results']['bindings']:
-		describe += ' <' + bind['store']['value'] + '>'
-		scoremap[bind['store']['value']] = bind['score']['value']
-	data = sparql_query(describe)	
-	for bind in res['results']['bindings']:
-		stor = bind['store']['value']
-		rerank['ranking'].append({
-			'id'   : str(stor),
-			'name' : str(data.value(URIRef(stor), RDFS.label)),
-			'score': round(float(scoremap[stor]),2)
-		})
-	return jsonify(rerank)
     
 @blueprint.route("/store/<slug>", methods=["GET"])
 def store(slug):
@@ -313,10 +239,10 @@ def store(slug):
 	query = f"""
 DESCRIBE <{uri}>
 """
-	data = sparql_query(query)
-	name = data.value( uri, RDFS.label )
-	home = data.value( uri, DOAP.homepage )
-	pages = data.objects( uri, FOAF.page )
+	data = sparql(query)
+	name = data.value(uri, RDFS.label)
+	home = data.value(uri, DOAP.homepage)
+	pages = data.objects(uri, FOAF.page)
 
 	bgp = f"""
  ?assess a asios:CriterionAssessment 
@@ -348,7 +274,7 @@ WHERE {{
 ORDER BY ?category ?bigcrit
 """
 	assess = {}
-	res = sparql_query(query)
+	res = sparql(query)
 	for bind in res['results']['bindings']:
 		cat = bind['category']['value']
 		group = bind['bigcrit']['value']
@@ -379,8 +305,8 @@ ORDER BY ?category ?bigcrit
 				'id' : bind['source']['value'],
 				'title' : bind['sourcetitle']['value']
 			}
-		#ac = assess[cat]['groups'][group]['criteria'][crit]
-		#assess[cat]['groups'][group]['score'] += ac['score'] * ac['weight']
+		# ac = assess[cat]['groups'][group]['criteria'][crit]
+		# assess[cat]['groups'][group]['score'] += ac['score'] * ac['weight']
 		
 	query = f"""
 {PREFIXES}
@@ -390,11 +316,11 @@ WHERE {{
 }}
 GROUP BY ?bigcrit ?category ORDER BY ?bigcrit
 """
-	res = sparql_query(query)
+	res = sparql(query)
 	for bind in res['results']['bindings']:
 		cat = bind['category']['value']
 		group = bind['bigcrit']['value']
-		assess[cat]['groups'][group]['score'] = round(float(bind['bigscore']['value']),2)
+		assess[cat]['groups'][group]['score'] = round(float(bind['bigscore']['value']), 2)
 
 	query = f"""
 {PREFIXES}
@@ -406,14 +332,14 @@ WHERE {{
 GROUP BY ?bigweight ?category 
   }} GROUP BY ?category
 """
-	res = sparql_query(query)
+	res = sparql(query)
 	for bind in res['results']['bindings']:
 		cat = bind['category']['value']
-		assess[cat]['score'] = round(float(bind['score']['value']),2)
+		assess[cat]['score'] = round(float(bind['score']['value']), 2)
 	return render_template("public/store.html", store={
 		'uri'  : uri,
-		'name' : name, 
+		'name' : name,
 		'home' : home,
 		'score': 0,
-		'pages': data.objects( uri, FOAF.page )
+		'pages': data.objects(uri, FOAF.page)
 	}, assessment=assess)
