@@ -66,7 +66,7 @@ namespace CronConfigure.Models.Services
             {
                 IdJob = id,
                 IdRepository = idRepository,
-                FechaEjecucion = fechaInicio.ToString("dd/MM/yyyy hh:mm")
+                FechaEjecucion = fechaInicio
             };
             _context.JobRepository.Add(jobRepository);
             _context.SaveChanges();
@@ -79,7 +79,7 @@ namespace CronConfigure.Models.Services
             {
                 IdJob = $"{id}_{nombreCron}_{cronExpression}",
                 IdRepository = idRepository,
-                FechaEjecucion = fechaInicio.ToString("dd/MM/yyyy hh:mm")
+                FechaEjecucion = fechaInicio
             };
             _context.JobRepository.Add(jobRepository);
             _context.SaveChanges();

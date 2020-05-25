@@ -13,5 +13,6 @@ namespace CronConfigure.ViewModels
         public string Id { get; set; }
 
         public string ExceptionDetails { get; set; }
+        public DateTime? ExecutedAt { get; set; }
     }
 }

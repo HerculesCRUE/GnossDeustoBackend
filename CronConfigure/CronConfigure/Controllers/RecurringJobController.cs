@@ -22,11 +22,13 @@ namespace CronConfigure.Controllers
 
         public ICronApiService _cronApiService;
         private IProgramingMethodService _programingMethodsService;
+        private IRepositoryCronService _repositoryCronService;
 
-        public RecurringJobController(ICronApiService cronApiService, IProgramingMethodService programingMethodsService)
+        public RecurringJobController(ICronApiService cronApiService, IProgramingMethodService programingMethodsService, IRepositoryCronService repositoryCronService)
         {
             _cronApiService = cronApiService;
             _programingMethodsService = programingMethodsService;
+            _repositoryCronService = repositoryCronService;
         }
 
         /// <summary>
@@ -162,6 +164,30 @@ namespace CronConfigure.Controllers
         public IActionResult GetJobsOfRecurringJob(string id)
         {
             return Ok(_cronApiService.GetJobsOfRecurringJob(id));
+        }
+
+        /// <summary>
+        /// Obtiene un listado de tareas recurrentes ejecutadas de un repositorio
+        /// </summary>
+        /// <param name="id">Identidicador del repositorio a obtener las tareas ejecutadas, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository</param>
+        /// <returns>listado de tareas</returns> 
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpGet("repository/{id}")]
+        public IActionResult GetJobsOfRepository(string id)
+        {
+
+            Guid idRep = Guid.Empty;
+            try
+            {
+                idRep = new Guid(id);
+                return Ok(_repositoryCronService.GetRecurringJobs(idRep));
+            }
+            catch (Exception)
+            {
+                return BadRequest("identificador invalido");
+            }
         }
 
     }

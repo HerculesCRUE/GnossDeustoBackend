@@ -14,6 +14,6 @@ namespace CronConfigure.Models.Entitties
         public string IdJob { get; set; }
         [Required]
         public Guid IdRepository { get; set; }
-        public string FechaEjecucion { get; set; }
+        public DateTime FechaEjecucion { get; set; }
     }
 }

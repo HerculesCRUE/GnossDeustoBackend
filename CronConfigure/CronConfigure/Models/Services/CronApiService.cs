@@ -88,7 +88,8 @@ namespace CronConfigure.Models.Services
                     {
                         Id = succeeded.Key,
                         Job = succeeded.Value.Job.ToString(),
-                        State = "Succeed"
+                        State = "Succeed",
+                        ExecutedAt = succeeded.Value.SucceededAt
                     };
                     listJobViewModel.Add(job);
                 }
@@ -108,7 +109,8 @@ namespace CronConfigure.Models.Services
                         Id = failed.Key,
                         ExceptionDetails = failed.Value.ExceptionDetails,
                         Job = name,
-                        State = "Fail"
+                        State = "Fail",
+                        ExecutedAt = failed.Value.FailedAt
                     };
                     listJobViewModel.Add(job);
                 }
@@ -173,6 +175,31 @@ namespace CronConfigure.Models.Services
         public bool ExistScheduledJob(string id)
         {
             return _context.Set.Any(item => item.Key.Equals("schedule") && item.Value.Equals(id));
+        }
+
+        public JobViewModel GetJob(string id)
+        {
+            var api = JobStorage.Current.GetMonitoringApi();
+            var jobDto = api.JobDetails(id);
+            JobViewModel job = new JobViewModel();
+            string state = "";
+            
+            if (jobDto != null)
+            {
+                if (jobDto.History.Count > 0)
+                {
+                    state = jobDto.History[0].StateName;
+                }
+                job.ExceptionDetails = "";
+                job.Id = id;
+                if (jobDto.Job != null) 
+                {
+                    job.Job = jobDto.Job.ToString();
+                }
+                job.State = state;
+               //ob.ExecutedAt = jobDto.
+            }
+            return job;
         }
 
     }

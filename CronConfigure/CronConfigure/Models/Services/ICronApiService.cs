@@ -20,5 +20,6 @@ namespace CronConfigure.Models.Services
         public List<JobViewModel> GetJobsOfRecurringJob(string recurringJob);
         public bool ExistRecurringJob(string recurringJob);
         public bool ExistScheduledJob(string id);
+        public JobViewModel GetJob(string id);
     }
 }
