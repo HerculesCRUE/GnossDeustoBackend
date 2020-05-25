@@ -8,6 +8,9 @@ Este api contiene 3 controladores:
  - **RecurringJobController**: Mediante los métodos de este controlador se puede crear una tarea recurrente especificando el patrón de repetición, borrar las tareas recurrentes y obtener dichas tareas, así como obtener las tareas que se han ejecutado a partir de una tarea recurrente.
  -  **ScheduledJobController**: Este controlador sirve para crear tareas que se ejecuten en una determinada fecha, obtener este tipo de tareas y eliminarlas
  
+ La documentación de la librería está disponible en:
+
+http://herc-as-front-desa.atica.um.es/cronconfigure/library/api/CronConfigure.Controllers.html
 ## Dependencias
 
 - **coverlet.collector**: versión 1.2.1
