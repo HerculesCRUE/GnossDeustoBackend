@@ -40,6 +40,7 @@ namespace CronConfigure.Controllers
         /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones, este parametro se puede obtener de http://herc-as-front-desa.atica.um.es/carga/etl/ListSets/{identificador_del_repositorio}</param>
         /// <param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro, este parametro se puede obtener en la respuesta identifier que da el método http://herc-as-front-desa.atica.um.es/carga/etl/ListIdentifiers/{identificador_del_repositorio}?metadataPrefix=rdf</param>
         /// <returns></returns> 
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
@@ -116,6 +117,7 @@ namespace CronConfigure.Controllers
         /// </summary>
         /// <param name="nombre_job">nombre de la tarea recurrente a eliminar, es el nombre que se le ha puesto a la tarea en el momento de su creación se puede obtener desde http://herc-as-front-desa.atica.um.es/cron-config/RecurringJob</param>
         /// <returns></returns> 
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete]
         public IActionResult DeleteRecurringJob(string nombre_job)
@@ -128,6 +130,7 @@ namespace CronConfigure.Controllers
         /// Obtiene el listado de tareas recurrentes 
         /// </summary>
         /// <returns>listado de tareas recurrentes</returns> 
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet]
         public IActionResult GetRecurringJob()
@@ -140,6 +143,7 @@ namespace CronConfigure.Controllers
         /// </summary>
         /// <param name="id">nombre de la tarea recurrentea obtener, es el nombre que se le ha puesto a la tarea en el momento de su creación se puede obtener desde http://herc-as-front-desa.atica.um.es/cron-config/RecurringJob</param>
         /// <returns>tarea recurrentes</returns> 
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("{id}")]
         public IActionResult GetRecurringJob(string id)
@@ -153,6 +157,7 @@ namespace CronConfigure.Controllers
         /// <param name="id">nombre de la tarea recurrente de la que se quieren obtener las tareas ejecutadas, es el nombre que se le ha puesto a la tarea en el momento de su creación se puede obtener desde http://herc-as-front-desa.atica.um.es/cron-config/RecurringJob</param>
         /// <returns>listado de tareas</returns> 
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("jobs/{id}")]
         public IActionResult GetJobsOfRecurringJob(string id)
         {

@@ -32,6 +32,7 @@ namespace CronConfigure.Controllers
         /// <param name="count">número máximo de tareas programadas a traer</param>
         /// <returns>listado de tareas programadas</returns> 
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         public IActionResult GetScheduledJobs(int from, int count)
         {
@@ -49,6 +50,7 @@ namespace CronConfigure.Controllers
         /// <returns>identificador de la tarea creada</returns> 
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpPost]
         public IActionResult AddScheduledJob(string fecha_ejecucion, string id_repository, string fecha = null, string set = null, string codigo_objeto = null)
         {
@@ -104,6 +106,7 @@ namespace CronConfigure.Controllers
         /// <returns></returns> 
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpPut]
         public IActionResult EnqueuedScheduledJob(string id)
         {
@@ -125,6 +128,7 @@ namespace CronConfigure.Controllers
         /// <returns></returns> 
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpDelete]
         public IActionResult DeleteScheduledJob(string id)
         {
