@@ -1,0 +1,28 @@
+### YamlMime:ManagedReference
+items:
+- uid: CronConfigure.Migrations
+  commentId: N:CronConfigure.Migrations
+  id: CronConfigure.Migrations
+  children:
+  - CronConfigure.Migrations.AddTableJobRepository
+  - CronConfigure.Migrations.InitialHangFire_Context
+  langs:
+  - csharp
+  - vb
+  name: CronConfigure.Migrations
+  nameWithType: CronConfigure.Migrations
+  fullName: CronConfigure.Migrations
+  type: Namespace
+  assemblies:
+  - CronConfigure
+references:
+- uid: CronConfigure.Migrations.InitialHangFire_Context
+  commentId: T:CronConfigure.Migrations.InitialHangFire_Context
+  name: InitialHangFire_Context
+  nameWithType: InitialHangFire_Context
+  fullName: CronConfigure.Migrations.InitialHangFire_Context
+- uid: CronConfigure.Migrations.AddTableJobRepository
+  commentId: T:CronConfigure.Migrations.AddTableJobRepository
+  name: AddTableJobRepository
+  nameWithType: AddTableJobRepository
+  fullName: CronConfigure.Migrations.AddTableJobRepository

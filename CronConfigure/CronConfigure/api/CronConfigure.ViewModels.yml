@@ -1,0 +1,58 @@
+### YamlMime:ManagedReference
+items:
+- uid: CronConfigure.ViewModels
+  commentId: N:CronConfigure.ViewModels
+  id: CronConfigure.ViewModels
+  children:
+  - CronConfigure.ViewModels.CreateJobModel
+  - CronConfigure.ViewModels.CreateRecurringJobModel
+  - CronConfigure.ViewModels.JobViewModel
+  - CronConfigure.ViewModels.RecurringJobViewModel
+  - CronConfigure.ViewModels.ScheduledJobViewModel
+  - CronConfigure.ViewModels.SendPulishObjectModel
+  langs:
+  - csharp
+  - vb
+  name: CronConfigure.ViewModels
+  nameWithType: CronConfigure.ViewModels
+  fullName: CronConfigure.ViewModels
+  type: Namespace
+  assemblies:
+  - CronConfigure
+references:
+- uid: CronConfigure.ViewModels.CreateJobModel
+  commentId: T:CronConfigure.ViewModels.CreateJobModel
+  name: CreateJobModel
+  nameWithType: CreateJobModel
+  fullName: CronConfigure.ViewModels.CreateJobModel
+- uid: CronConfigure.ViewModels.CreateRecurringJobModel
+  commentId: T:CronConfigure.ViewModels.CreateRecurringJobModel
+  name: CreateRecurringJobModel
+  nameWithType: CreateRecurringJobModel
+  fullName: CronConfigure.ViewModels.CreateRecurringJobModel
+- uid: CronConfigure.ViewModels.JobViewModel
+  commentId: T:CronConfigure.ViewModels.JobViewModel
+  name: JobViewModel
+  nameWithType: JobViewModel
+  fullName: CronConfigure.ViewModels.JobViewModel
+- uid: CronConfigure.ViewModels.RecurringJobViewModel
+  commentId: T:CronConfigure.ViewModels.RecurringJobViewModel
+  parent: CronConfigure.ViewModels
+  name: RecurringJobViewModel
+  nameWithType: RecurringJobViewModel
+  fullName: CronConfigure.ViewModels.RecurringJobViewModel
+- uid: CronConfigure.ViewModels.ScheduledJobViewModel
+  commentId: T:CronConfigure.ViewModels.ScheduledJobViewModel
+  name: ScheduledJobViewModel
+  nameWithType: ScheduledJobViewModel
+  fullName: CronConfigure.ViewModels.ScheduledJobViewModel
+- uid: CronConfigure.ViewModels.SendPulishObjectModel
+  commentId: T:CronConfigure.ViewModels.SendPulishObjectModel
+  name: SendPulishObjectModel
+  nameWithType: SendPulishObjectModel
+  fullName: CronConfigure.ViewModels.SendPulishObjectModel
+- uid: CronConfigure.ViewModels
+  commentId: N:CronConfigure.ViewModels
+  name: CronConfigure.ViewModels
+  nameWithType: CronConfigure.ViewModels
+  fullName: CronConfigure.ViewModels

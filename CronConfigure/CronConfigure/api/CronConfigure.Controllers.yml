@@ -1,0 +1,34 @@
+### YamlMime:ManagedReference
+items:
+- uid: CronConfigure.Controllers
+  commentId: N:CronConfigure.Controllers
+  id: CronConfigure.Controllers
+  children:
+  - CronConfigure.Controllers.JobController
+  - CronConfigure.Controllers.RecurringJobController
+  - CronConfigure.Controllers.ScheduledJobController
+  langs:
+  - csharp
+  - vb
+  name: CronConfigure.Controllers
+  nameWithType: CronConfigure.Controllers
+  fullName: CronConfigure.Controllers
+  type: Namespace
+  assemblies:
+  - CronConfigure
+references:
+- uid: CronConfigure.Controllers.JobController
+  commentId: T:CronConfigure.Controllers.JobController
+  name: JobController
+  nameWithType: JobController
+  fullName: CronConfigure.Controllers.JobController
+- uid: CronConfigure.Controllers.RecurringJobController
+  commentId: T:CronConfigure.Controllers.RecurringJobController
+  name: RecurringJobController
+  nameWithType: RecurringJobController
+  fullName: CronConfigure.Controllers.RecurringJobController
+- uid: CronConfigure.Controllers.ScheduledJobController
+  commentId: T:CronConfigure.Controllers.ScheduledJobController
+  name: ScheduledJobController
+  nameWithType: ScheduledJobController
+  fullName: CronConfigure.Controllers.ScheduledJobController

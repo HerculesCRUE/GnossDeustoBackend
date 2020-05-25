@@ -1,0 +1,28 @@
+### YamlMime:ManagedReference
+items:
+- uid: UrisFactory
+  commentId: N:UrisFactory
+  id: UrisFactory
+  children:
+  - UrisFactory.Program
+  - UrisFactory.Startup
+  langs:
+  - csharp
+  - vb
+  name: UrisFactory
+  nameWithType: UrisFactory
+  fullName: UrisFactory
+  type: Namespace
+  assemblies:
+  - UrisFactory
+references:
+- uid: UrisFactory.Program
+  commentId: T:UrisFactory.Program
+  name: Program
+  nameWithType: Program
+  fullName: UrisFactory.Program
+- uid: UrisFactory.Startup
+  commentId: T:UrisFactory.Startup
+  name: Startup
+  nameWithType: Startup
+  fullName: UrisFactory.Startup

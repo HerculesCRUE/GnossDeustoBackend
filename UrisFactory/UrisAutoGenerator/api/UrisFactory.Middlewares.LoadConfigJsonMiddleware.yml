@@ -1,0 +1,455 @@
+### YamlMime:ManagedReference
+items:
+- uid: UrisFactory.Middlewares.LoadConfigJsonMiddleware
+  commentId: T:UrisFactory.Middlewares.LoadConfigJsonMiddleware
+  id: LoadConfigJsonMiddleware
+  parent: UrisFactory.Middlewares
+  children:
+  - UrisFactory.Middlewares.LoadConfigJsonMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)
+  - UrisFactory.Middlewares.LoadConfigJsonMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)
+  langs:
+  - csharp
+  - vb
+  name: LoadConfigJsonMiddleware
+  nameWithType: LoadConfigJsonMiddleware
+  fullName: UrisFactory.Middlewares.LoadConfigJsonMiddleware
+  type: Class
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Middlewares/LoadConfigJsonMiddleware.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: LoadConfigJsonMiddleware
+    path: Middlewares/LoadConfigJsonMiddleware.cs
+    startLine: 6
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Middlewares
+  syntax:
+    content: public class LoadConfigJsonMiddleware
+    content.vb: Public Class LoadConfigJsonMiddleware
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: UrisFactory.Middlewares.LoadConfigJsonMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)
+  commentId: M:UrisFactory.Middlewares.LoadConfigJsonMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)
+  id: '#ctor(Microsoft.AspNetCore.Http.RequestDelegate)'
+  parent: UrisFactory.Middlewares.LoadConfigJsonMiddleware
+  langs:
+  - csharp
+  - vb
+  name: LoadConfigJsonMiddleware(RequestDelegate)
+  nameWithType: LoadConfigJsonMiddleware.LoadConfigJsonMiddleware(RequestDelegate)
+  fullName: UrisFactory.Middlewares.LoadConfigJsonMiddleware.LoadConfigJsonMiddleware(Microsoft.AspNetCore.Http.RequestDelegate)
+  type: Constructor
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Middlewares/LoadConfigJsonMiddleware.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Middlewares/LoadConfigJsonMiddleware.cs
+    startLine: 9
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Middlewares
+  syntax:
+    content: public LoadConfigJsonMiddleware(RequestDelegate next)
+    parameters:
+    - id: next
+      type: Microsoft.AspNetCore.Http.RequestDelegate
+    content.vb: Public Sub New(next As RequestDelegate)
+  overload: UrisFactory.Middlewares.LoadConfigJsonMiddleware.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Middlewares.LoadConfigJsonMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)
+  commentId: M:UrisFactory.Middlewares.LoadConfigJsonMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)
+  id: Invoke(Microsoft.AspNetCore.Http.HttpContext)
+  parent: UrisFactory.Middlewares.LoadConfigJsonMiddleware
+  langs:
+  - csharp
+  - vb
+  name: Invoke(HttpContext)
+  nameWithType: LoadConfigJsonMiddleware.Invoke(HttpContext)
+  fullName: UrisFactory.Middlewares.LoadConfigJsonMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)
+  type: Method
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Middlewares/LoadConfigJsonMiddleware.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Invoke
+    path: Middlewares/LoadConfigJsonMiddleware.cs
+    startLine: 14
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Middlewares
+  syntax:
+    content: public Task Invoke(HttpContext context)
+    parameters:
+    - id: context
+      type: Microsoft.AspNetCore.Http.HttpContext
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Public Function Invoke(context As HttpContext) As Task
+  overload: UrisFactory.Middlewares.LoadConfigJsonMiddleware.Invoke*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: UrisFactory.Middlewares
+  commentId: N:UrisFactory.Middlewares
+  name: UrisFactory.Middlewares
+  nameWithType: UrisFactory.Middlewares
+  fullName: UrisFactory.Middlewares
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: UrisFactory.Middlewares.LoadConfigJsonMiddleware.#ctor*
+  commentId: Overload:UrisFactory.Middlewares.LoadConfigJsonMiddleware.#ctor
+  name: LoadConfigJsonMiddleware
+  nameWithType: LoadConfigJsonMiddleware.LoadConfigJsonMiddleware
+  fullName: UrisFactory.Middlewares.LoadConfigJsonMiddleware.LoadConfigJsonMiddleware
+- uid: Microsoft.AspNetCore.Http.RequestDelegate
+  commentId: T:Microsoft.AspNetCore.Http.RequestDelegate
+  parent: Microsoft.AspNetCore.Http
+  isExternal: true
+  name: RequestDelegate
+  nameWithType: RequestDelegate
+  fullName: Microsoft.AspNetCore.Http.RequestDelegate
+- uid: Microsoft.AspNetCore.Http
+  commentId: N:Microsoft.AspNetCore.Http
+  isExternal: true
+  name: Microsoft.AspNetCore.Http
+  nameWithType: Microsoft.AspNetCore.Http
+  fullName: Microsoft.AspNetCore.Http
+- uid: UrisFactory.Middlewares.LoadConfigJsonMiddleware.Invoke*
+  commentId: Overload:UrisFactory.Middlewares.LoadConfigJsonMiddleware.Invoke
+  name: Invoke
+  nameWithType: LoadConfigJsonMiddleware.Invoke
+  fullName: UrisFactory.Middlewares.LoadConfigJsonMiddleware.Invoke
+- uid: Microsoft.AspNetCore.Http.HttpContext
+  commentId: T:Microsoft.AspNetCore.Http.HttpContext
+  parent: Microsoft.AspNetCore.Http
+  isExternal: true
+  name: HttpContext
+  nameWithType: HttpContext
+  fullName: Microsoft.AspNetCore.Http.HttpContext
+- uid: System.Threading.Tasks.Task
+  commentId: T:System.Threading.Tasks.Task
+  parent: System.Threading.Tasks
+  isExternal: true
+  name: Task
+  nameWithType: Task
+  fullName: System.Threading.Tasks.Task
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks

@@ -1,0 +1,544 @@
+### YamlMime:ManagedReference
+items:
+- uid: UrisFactory.ModelExamples.UrisFactoryErrorReponse
+  commentId: T:UrisFactory.ModelExamples.UrisFactoryErrorReponse
+  id: UrisFactoryErrorReponse
+  parent: UrisFactory.ModelExamples
+  children:
+  - UrisFactory.ModelExamples.UrisFactoryErrorReponse.GetExamples
+  langs:
+  - csharp
+  - vb
+  name: UrisFactoryErrorReponse
+  nameWithType: UrisFactoryErrorReponse
+  fullName: UrisFactory.ModelExamples.UrisFactoryErrorReponse
+  type: Class
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/ModelExamples/UrisFactoryErrorReponse.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: UrisFactoryErrorReponse
+    path: ModelExamples/UrisFactoryErrorReponse.cs
+    startLine: 8
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.ModelExamples
+  syntax:
+    content: 'public class UrisFactoryErrorReponse : IExamplesProvider<UriErrorExample>'
+    content.vb: >-
+      Public Class UrisFactoryErrorReponse
+          Implements IExamplesProvider(Of UriErrorExample)
+  inheritance:
+  - System.Object
+  implements:
+  - Swashbuckle.AspNetCore.Filters.IExamplesProvider{UrisFactory.ModelExamples.UriErrorExample}
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: UrisFactory.ModelExamples.UrisFactoryErrorReponse.GetExamples
+  commentId: M:UrisFactory.ModelExamples.UrisFactoryErrorReponse.GetExamples
+  id: GetExamples
+  parent: UrisFactory.ModelExamples.UrisFactoryErrorReponse
+  langs:
+  - csharp
+  - vb
+  name: GetExamples()
+  nameWithType: UrisFactoryErrorReponse.GetExamples()
+  fullName: UrisFactory.ModelExamples.UrisFactoryErrorReponse.GetExamples()
+  type: Method
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/ModelExamples/UrisFactoryErrorReponse.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetExamples
+    path: ModelExamples/UrisFactoryErrorReponse.cs
+    startLine: 10
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.ModelExamples
+  syntax:
+    content: public UriErrorExample GetExamples()
+    return:
+      type: UrisFactory.ModelExamples.UriErrorExample
+    content.vb: Public Function GetExamples As UriErrorExample
+  overload: UrisFactory.ModelExamples.UrisFactoryErrorReponse.GetExamples*
+  implements:
+  - Swashbuckle.AspNetCore.Filters.IExamplesProvider{UrisFactory.ModelExamples.UriErrorExample}.GetExamples
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: UrisFactory.ModelExamples
+  commentId: N:UrisFactory.ModelExamples
+  name: UrisFactory.ModelExamples
+  nameWithType: UrisFactory.ModelExamples
+  fullName: UrisFactory.ModelExamples
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Swashbuckle.AspNetCore.Filters.IExamplesProvider{UrisFactory.ModelExamples.UriErrorExample}
+  commentId: T:Swashbuckle.AspNetCore.Filters.IExamplesProvider{UrisFactory.ModelExamples.UriErrorExample}
+  parent: Swashbuckle.AspNetCore.Filters
+  definition: Swashbuckle.AspNetCore.Filters.IExamplesProvider`1
+  name: IExamplesProvider<UriErrorExample>
+  nameWithType: IExamplesProvider<UriErrorExample>
+  fullName: Swashbuckle.AspNetCore.Filters.IExamplesProvider<UrisFactory.ModelExamples.UriErrorExample>
+  nameWithType.vb: IExamplesProvider(Of UriErrorExample)
+  fullName.vb: Swashbuckle.AspNetCore.Filters.IExamplesProvider(Of UrisFactory.ModelExamples.UriErrorExample)
+  name.vb: IExamplesProvider(Of UriErrorExample)
+  spec.csharp:
+  - uid: Swashbuckle.AspNetCore.Filters.IExamplesProvider`1
+    name: IExamplesProvider
+    nameWithType: IExamplesProvider
+    fullName: Swashbuckle.AspNetCore.Filters.IExamplesProvider
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: UrisFactory.ModelExamples.UriErrorExample
+    name: UriErrorExample
+    nameWithType: UriErrorExample
+    fullName: UrisFactory.ModelExamples.UriErrorExample
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Swashbuckle.AspNetCore.Filters.IExamplesProvider`1
+    name: IExamplesProvider
+    nameWithType: IExamplesProvider
+    fullName: Swashbuckle.AspNetCore.Filters.IExamplesProvider
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: UrisFactory.ModelExamples.UriErrorExample
+    name: UriErrorExample
+    nameWithType: UriErrorExample
+    fullName: UrisFactory.ModelExamples.UriErrorExample
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Swashbuckle.AspNetCore.Filters.IExamplesProvider`1
+  commentId: T:Swashbuckle.AspNetCore.Filters.IExamplesProvider`1
+  isExternal: true
+  name: IExamplesProvider<T>
+  nameWithType: IExamplesProvider<T>
+  fullName: Swashbuckle.AspNetCore.Filters.IExamplesProvider<T>
+  nameWithType.vb: IExamplesProvider(Of T)
+  fullName.vb: Swashbuckle.AspNetCore.Filters.IExamplesProvider(Of T)
+  name.vb: IExamplesProvider(Of T)
+  spec.csharp:
+  - uid: Swashbuckle.AspNetCore.Filters.IExamplesProvider`1
+    name: IExamplesProvider
+    nameWithType: IExamplesProvider
+    fullName: Swashbuckle.AspNetCore.Filters.IExamplesProvider
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Swashbuckle.AspNetCore.Filters.IExamplesProvider`1
+    name: IExamplesProvider
+    nameWithType: IExamplesProvider
+    fullName: Swashbuckle.AspNetCore.Filters.IExamplesProvider
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Swashbuckle.AspNetCore.Filters
+  commentId: N:Swashbuckle.AspNetCore.Filters
+  isExternal: true
+  name: Swashbuckle.AspNetCore.Filters
+  nameWithType: Swashbuckle.AspNetCore.Filters
+  fullName: Swashbuckle.AspNetCore.Filters
+- uid: UrisFactory.ModelExamples.UrisFactoryErrorReponse.GetExamples*
+  commentId: Overload:UrisFactory.ModelExamples.UrisFactoryErrorReponse.GetExamples
+  name: GetExamples
+  nameWithType: UrisFactoryErrorReponse.GetExamples
+  fullName: UrisFactory.ModelExamples.UrisFactoryErrorReponse.GetExamples
+- uid: Swashbuckle.AspNetCore.Filters.IExamplesProvider{UrisFactory.ModelExamples.UriErrorExample}.GetExamples
+  commentId: M:Swashbuckle.AspNetCore.Filters.IExamplesProvider{UrisFactory.ModelExamples.UriErrorExample}.GetExamples
+  parent: Swashbuckle.AspNetCore.Filters.IExamplesProvider{UrisFactory.ModelExamples.UriErrorExample}
+  definition: Swashbuckle.AspNetCore.Filters.IExamplesProvider`1.GetExamples
+  name: GetExamples()
+  nameWithType: IExamplesProvider<UriErrorExample>.GetExamples()
+  fullName: Swashbuckle.AspNetCore.Filters.IExamplesProvider<UrisFactory.ModelExamples.UriErrorExample>.GetExamples()
+  nameWithType.vb: IExamplesProvider(Of UriErrorExample).GetExamples()
+  fullName.vb: Swashbuckle.AspNetCore.Filters.IExamplesProvider(Of UrisFactory.ModelExamples.UriErrorExample).GetExamples()
+  spec.csharp:
+  - uid: Swashbuckle.AspNetCore.Filters.IExamplesProvider`1.GetExamples
+    name: GetExamples
+    nameWithType: IExamplesProvider<UriErrorExample>.GetExamples
+    fullName: Swashbuckle.AspNetCore.Filters.IExamplesProvider<UrisFactory.ModelExamples.UriErrorExample>.GetExamples
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Swashbuckle.AspNetCore.Filters.IExamplesProvider`1.GetExamples
+    name: GetExamples
+    nameWithType: IExamplesProvider(Of UriErrorExample).GetExamples
+    fullName: Swashbuckle.AspNetCore.Filters.IExamplesProvider(Of UrisFactory.ModelExamples.UriErrorExample).GetExamples
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: UrisFactory.ModelExamples.UriErrorExample
+  commentId: T:UrisFactory.ModelExamples.UriErrorExample
+  parent: UrisFactory.ModelExamples
+  name: UriErrorExample
+  nameWithType: UriErrorExample
+  fullName: UrisFactory.ModelExamples.UriErrorExample
+- uid: Swashbuckle.AspNetCore.Filters.IExamplesProvider`1.GetExamples
+  commentId: M:Swashbuckle.AspNetCore.Filters.IExamplesProvider`1.GetExamples
+  isExternal: true
+  name: GetExamples()
+  nameWithType: IExamplesProvider<T>.GetExamples()
+  fullName: Swashbuckle.AspNetCore.Filters.IExamplesProvider<T>.GetExamples()
+  nameWithType.vb: IExamplesProvider(Of T).GetExamples()
+  fullName.vb: Swashbuckle.AspNetCore.Filters.IExamplesProvider(Of T).GetExamples()
+  spec.csharp:
+  - uid: Swashbuckle.AspNetCore.Filters.IExamplesProvider`1.GetExamples
+    name: GetExamples
+    nameWithType: IExamplesProvider<T>.GetExamples
+    fullName: Swashbuckle.AspNetCore.Filters.IExamplesProvider<T>.GetExamples
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Swashbuckle.AspNetCore.Filters.IExamplesProvider`1.GetExamples
+    name: GetExamples
+    nameWithType: IExamplesProvider(Of T).GetExamples
+    fullName: Swashbuckle.AspNetCore.Filters.IExamplesProvider(Of T).GetExamples
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )

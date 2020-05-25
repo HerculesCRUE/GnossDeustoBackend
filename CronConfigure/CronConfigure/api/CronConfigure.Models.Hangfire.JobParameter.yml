@@ -1,0 +1,601 @@
+### YamlMime:ManagedReference
+items:
+- uid: CronConfigure.Models.Hangfire.JobParameter
+  commentId: T:CronConfigure.Models.Hangfire.JobParameter
+  id: JobParameter
+  parent: CronConfigure.Models.Hangfire
+  children:
+  - CronConfigure.Models.Hangfire.JobParameter.Job
+  - CronConfigure.Models.Hangfire.JobParameter.JobId
+  - CronConfigure.Models.Hangfire.JobParameter.Name
+  - CronConfigure.Models.Hangfire.JobParameter.Value
+  langs:
+  - csharp
+  - vb
+  name: JobParameter
+  nameWithType: JobParameter
+  fullName: CronConfigure.Models.Hangfire.JobParameter
+  type: Class
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/JobParameter.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: JobParameter
+    path: Models/Hangfire/JobParameter.cs
+    startLine: 10
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: >-
+      [Table("jobparameter", Schema = "hangfire")]
+
+      public class JobParameter
+    content.vb: >-
+      <Table("jobparameter", Schema:="hangfire")>
+
+      Public Class JobParameter
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.Schema.TableAttribute
+    ctor: System.ComponentModel.DataAnnotations.Schema.TableAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: jobparameter
+    namedArguments:
+    - name: Schema
+      type: System.String
+      value: hangfire
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: CronConfigure.Models.Hangfire.JobParameter.JobId
+  commentId: P:CronConfigure.Models.Hangfire.JobParameter.JobId
+  id: JobId
+  parent: CronConfigure.Models.Hangfire.JobParameter
+  langs:
+  - csharp
+  - vb
+  name: JobId
+  nameWithType: JobParameter.JobId
+  fullName: CronConfigure.Models.Hangfire.JobParameter.JobId
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/JobParameter.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: JobId
+    path: Models/Hangfire/JobParameter.cs
+    startLine: 13
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: >-
+      [Column("jobid", Order = 0)]
+
+      public long JobId { get; set; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: >-
+      <Column("jobid", Order:=0)>
+
+      Public Property JobId As Long
+  overload: CronConfigure.Models.Hangfire.JobParameter.JobId*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute
+    ctor: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: jobid
+    namedArguments:
+    - name: Order
+      type: System.Int32
+      value: 0
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Hangfire.JobParameter.Name
+  commentId: P:CronConfigure.Models.Hangfire.JobParameter.Name
+  id: Name
+  parent: CronConfigure.Models.Hangfire.JobParameter
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: JobParameter.Name
+  fullName: CronConfigure.Models.Hangfire.JobParameter.Name
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/JobParameter.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Name
+    path: Models/Hangfire/JobParameter.cs
+    startLine: 16
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: >-
+      [Column("name", Order = 1)]
+
+      [StringLength(40)]
+
+      public string Name { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <Column("name", Order:=1)>
+
+      <StringLength(40)>
+
+      Public Property Name As String
+  overload: CronConfigure.Models.Hangfire.JobParameter.Name*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute
+    ctor: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: name
+    namedArguments:
+    - name: Order
+      type: System.Int32
+      value: 1
+  - type: System.ComponentModel.DataAnnotations.StringLengthAttribute
+    ctor: System.ComponentModel.DataAnnotations.StringLengthAttribute.#ctor(System.Int32)
+    arguments:
+    - type: System.Int32
+      value: 40
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Hangfire.JobParameter.Value
+  commentId: P:CronConfigure.Models.Hangfire.JobParameter.Value
+  id: Value
+  parent: CronConfigure.Models.Hangfire.JobParameter
+  langs:
+  - csharp
+  - vb
+  name: Value
+  nameWithType: JobParameter.Value
+  fullName: CronConfigure.Models.Hangfire.JobParameter.Value
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/JobParameter.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Value
+    path: Models/Hangfire/JobParameter.cs
+    startLine: 20
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: >-
+      [Column("value", Order = 2)]
+
+      public string Value { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <Column("value", Order:=2)>
+
+      Public Property Value As String
+  overload: CronConfigure.Models.Hangfire.JobParameter.Value*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute
+    ctor: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: value
+    namedArguments:
+    - name: Order
+      type: System.Int32
+      value: 2
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Hangfire.JobParameter.Job
+  commentId: P:CronConfigure.Models.Hangfire.JobParameter.Job
+  id: Job
+  parent: CronConfigure.Models.Hangfire.JobParameter
+  langs:
+  - csharp
+  - vb
+  name: Job
+  nameWithType: JobParameter.Job
+  fullName: CronConfigure.Models.Hangfire.JobParameter.Job
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/JobParameter.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Job
+    path: Models/Hangfire/JobParameter.cs
+    startLine: 23
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: public virtual Job Job { get; set; }
+    parameters: []
+    return:
+      type: CronConfigure.Models.Hangfire.Job
+    content.vb: Public Overridable Property Job As Job
+  overload: CronConfigure.Models.Hangfire.JobParameter.Job*
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
+references:
+- uid: CronConfigure.Models.Hangfire
+  commentId: N:CronConfigure.Models.Hangfire
+  name: CronConfigure.Models.Hangfire
+  nameWithType: CronConfigure.Models.Hangfire
+  fullName: CronConfigure.Models.Hangfire
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: CronConfigure.Models.Hangfire.JobParameter.JobId*
+  commentId: Overload:CronConfigure.Models.Hangfire.JobParameter.JobId
+  name: JobId
+  nameWithType: JobParameter.JobId
+  fullName: CronConfigure.Models.Hangfire.JobParameter.JobId
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  name: Int64
+  nameWithType: Int64
+  fullName: System.Int64
+- uid: CronConfigure.Models.Hangfire.JobParameter.Name*
+  commentId: Overload:CronConfigure.Models.Hangfire.JobParameter.Name
+  name: Name
+  nameWithType: JobParameter.Name
+  fullName: CronConfigure.Models.Hangfire.JobParameter.Name
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: CronConfigure.Models.Hangfire.JobParameter.Value*
+  commentId: Overload:CronConfigure.Models.Hangfire.JobParameter.Value
+  name: Value
+  nameWithType: JobParameter.Value
+  fullName: CronConfigure.Models.Hangfire.JobParameter.Value
+- uid: CronConfigure.Models.Hangfire.JobParameter.Job*
+  commentId: Overload:CronConfigure.Models.Hangfire.JobParameter.Job
+  name: Job
+  nameWithType: JobParameter.Job
+  fullName: CronConfigure.Models.Hangfire.JobParameter.Job
+- uid: CronConfigure.Models.Hangfire.Job
+  commentId: T:CronConfigure.Models.Hangfire.Job
+  parent: CronConfigure.Models.Hangfire
+  name: Job
+  nameWithType: Job
+  fullName: CronConfigure.Models.Hangfire.Job

@@ -1,0 +1,1545 @@
+### YamlMime:ManagedReference
+items:
+- uid: CronConfigure.Models.Services.CronApiService
+  commentId: T:CronConfigure.Models.Services.CronApiService
+  id: CronApiService
+  parent: CronConfigure.Models.Services
+  children:
+  - CronConfigure.Models.Services.CronApiService.#ctor(CronConfigure.Models.HangfireEntityContext)
+  - CronConfigure.Models.Services.CronApiService.DeleteJob(System.String)
+  - CronConfigure.Models.Services.CronApiService.DeleteRecurringJob(System.String)
+  - CronConfigure.Models.Services.CronApiService.EnqueueJob(System.String)
+  - CronConfigure.Models.Services.CronApiService.ExistJob(System.String)
+  - CronConfigure.Models.Services.CronApiService.ExistRecurringJob(System.String)
+  - CronConfigure.Models.Services.CronApiService.ExistScheduledJob(System.String)
+  - CronConfigure.Models.Services.CronApiService.GetJobs(CronConfigure.Models.Enumeracion.JobType,System.Int32,System.Int32)
+  - CronConfigure.Models.Services.CronApiService.GetJobsOfRecurringJob(System.String)
+  - CronConfigure.Models.Services.CronApiService.GetRecurringJobs
+  - CronConfigure.Models.Services.CronApiService.GetRecurringJobs(System.String)
+  - CronConfigure.Models.Services.CronApiService.GetScheduledJobs(System.Int32,System.Int32)
+  langs:
+  - csharp
+  - vb
+  name: CronApiService
+  nameWithType: CronApiService
+  fullName: CronConfigure.Models.Services.CronApiService
+  type: Class
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Services/CronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: CronApiService
+    path: Models/Services/CronApiService.cs
+    startLine: 14
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Services
+  syntax:
+    content: 'public class CronApiService : ICronApiService'
+    content.vb: >-
+      Public Class CronApiService
+          Implements ICronApiService
+  inheritance:
+  - System.Object
+  implements:
+  - CronConfigure.Models.Services.ICronApiService
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: CronConfigure.Models.Services.CronApiService.#ctor(CronConfigure.Models.HangfireEntityContext)
+  commentId: M:CronConfigure.Models.Services.CronApiService.#ctor(CronConfigure.Models.HangfireEntityContext)
+  id: '#ctor(CronConfigure.Models.HangfireEntityContext)'
+  parent: CronConfigure.Models.Services.CronApiService
+  langs:
+  - csharp
+  - vb
+  name: CronApiService(HangfireEntityContext)
+  nameWithType: CronApiService.CronApiService(HangfireEntityContext)
+  fullName: CronConfigure.Models.Services.CronApiService.CronApiService(CronConfigure.Models.HangfireEntityContext)
+  type: Constructor
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Services/CronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Services/CronApiService.cs
+    startLine: 17
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Services
+  syntax:
+    content: public CronApiService(HangfireEntityContext context)
+    parameters:
+    - id: context
+      type: CronConfigure.Models.HangfireEntityContext
+    content.vb: Public Sub New(context As HangfireEntityContext)
+  overload: CronConfigure.Models.Services.CronApiService.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Services.CronApiService.GetRecurringJobs
+  commentId: M:CronConfigure.Models.Services.CronApiService.GetRecurringJobs
+  id: GetRecurringJobs
+  parent: CronConfigure.Models.Services.CronApiService
+  langs:
+  - csharp
+  - vb
+  name: GetRecurringJobs()
+  nameWithType: CronApiService.GetRecurringJobs()
+  fullName: CronConfigure.Models.Services.CronApiService.GetRecurringJobs()
+  type: Method
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Services/CronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetRecurringJobs
+    path: Models/Services/CronApiService.cs
+    startLine: 21
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Services
+  syntax:
+    content: public List<RecurringJobViewModel> GetRecurringJobs()
+    return:
+      type: System.Collections.Generic.List{CronConfigure.ViewModels.RecurringJobViewModel}
+    content.vb: Public Function GetRecurringJobs As List(Of RecurringJobViewModel)
+  overload: CronConfigure.Models.Services.CronApiService.GetRecurringJobs*
+  implements:
+  - CronConfigure.Models.Services.ICronApiService.GetRecurringJobs
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Services.CronApiService.ExistJob(System.String)
+  commentId: M:CronConfigure.Models.Services.CronApiService.ExistJob(System.String)
+  id: ExistJob(System.String)
+  parent: CronConfigure.Models.Services.CronApiService
+  langs:
+  - csharp
+  - vb
+  name: ExistJob(String)
+  nameWithType: CronApiService.ExistJob(String)
+  fullName: CronConfigure.Models.Services.CronApiService.ExistJob(System.String)
+  type: Method
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Services/CronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ExistJob
+    path: Models/Services/CronApiService.cs
+    startLine: 46
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Services
+  syntax:
+    content: public bool ExistJob(string id)
+    parameters:
+    - id: id
+      type: System.String
+    return:
+      type: System.Boolean
+    content.vb: Public Function ExistJob(id As String) As Boolean
+  overload: CronConfigure.Models.Services.CronApiService.ExistJob*
+  implements:
+  - CronConfigure.Models.Services.ICronApiService.ExistJob(System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Services.CronApiService.DeleteJob(System.String)
+  commentId: M:CronConfigure.Models.Services.CronApiService.DeleteJob(System.String)
+  id: DeleteJob(System.String)
+  parent: CronConfigure.Models.Services.CronApiService
+  langs:
+  - csharp
+  - vb
+  name: DeleteJob(String)
+  nameWithType: CronApiService.DeleteJob(String)
+  fullName: CronConfigure.Models.Services.CronApiService.DeleteJob(System.String)
+  type: Method
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Services/CronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: DeleteJob
+    path: Models/Services/CronApiService.cs
+    startLine: 51
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Services
+  syntax:
+    content: public void DeleteJob(string id)
+    parameters:
+    - id: id
+      type: System.String
+    content.vb: Public Sub DeleteJob(id As String)
+  overload: CronConfigure.Models.Services.CronApiService.DeleteJob*
+  implements:
+  - CronConfigure.Models.Services.ICronApiService.DeleteJob(System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Services.CronApiService.DeleteRecurringJob(System.String)
+  commentId: M:CronConfigure.Models.Services.CronApiService.DeleteRecurringJob(System.String)
+  id: DeleteRecurringJob(System.String)
+  parent: CronConfigure.Models.Services.CronApiService
+  langs:
+  - csharp
+  - vb
+  name: DeleteRecurringJob(String)
+  nameWithType: CronApiService.DeleteRecurringJob(String)
+  fullName: CronConfigure.Models.Services.CronApiService.DeleteRecurringJob(System.String)
+  type: Method
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Services/CronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: DeleteRecurringJob
+    path: Models/Services/CronApiService.cs
+    startLine: 59
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Services
+  syntax:
+    content: public void DeleteRecurringJob(string id)
+    parameters:
+    - id: id
+      type: System.String
+    content.vb: Public Sub DeleteRecurringJob(id As String)
+  overload: CronConfigure.Models.Services.CronApiService.DeleteRecurringJob*
+  implements:
+  - CronConfigure.Models.Services.ICronApiService.DeleteRecurringJob(System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Services.CronApiService.EnqueueJob(System.String)
+  commentId: M:CronConfigure.Models.Services.CronApiService.EnqueueJob(System.String)
+  id: EnqueueJob(System.String)
+  parent: CronConfigure.Models.Services.CronApiService
+  langs:
+  - csharp
+  - vb
+  name: EnqueueJob(String)
+  nameWithType: CronApiService.EnqueueJob(String)
+  fullName: CronConfigure.Models.Services.CronApiService.EnqueueJob(System.String)
+  type: Method
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Services/CronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: EnqueueJob
+    path: Models/Services/CronApiService.cs
+    startLine: 67
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Services
+  syntax:
+    content: public void EnqueueJob(string id)
+    parameters:
+    - id: id
+      type: System.String
+    content.vb: Public Sub EnqueueJob(id As String)
+  overload: CronConfigure.Models.Services.CronApiService.EnqueueJob*
+  implements:
+  - CronConfigure.Models.Services.ICronApiService.EnqueueJob(System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Services.CronApiService.GetRecurringJobs(System.String)
+  commentId: M:CronConfigure.Models.Services.CronApiService.GetRecurringJobs(System.String)
+  id: GetRecurringJobs(System.String)
+  parent: CronConfigure.Models.Services.CronApiService
+  langs:
+  - csharp
+  - vb
+  name: GetRecurringJobs(String)
+  nameWithType: CronApiService.GetRecurringJobs(String)
+  fullName: CronConfigure.Models.Services.CronApiService.GetRecurringJobs(System.String)
+  type: Method
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Services/CronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetRecurringJobs
+    path: Models/Services/CronApiService.cs
+    startLine: 72
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Services
+  syntax:
+    content: public RecurringJobViewModel GetRecurringJobs(string id)
+    parameters:
+    - id: id
+      type: System.String
+    return:
+      type: CronConfigure.ViewModels.RecurringJobViewModel
+    content.vb: Public Function GetRecurringJobs(id As String) As RecurringJobViewModel
+  overload: CronConfigure.Models.Services.CronApiService.GetRecurringJobs*
+  implements:
+  - CronConfigure.Models.Services.ICronApiService.GetRecurringJobs(System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Services.CronApiService.GetJobs(CronConfigure.Models.Enumeracion.JobType,System.Int32,System.Int32)
+  commentId: M:CronConfigure.Models.Services.CronApiService.GetJobs(CronConfigure.Models.Enumeracion.JobType,System.Int32,System.Int32)
+  id: GetJobs(CronConfigure.Models.Enumeracion.JobType,System.Int32,System.Int32)
+  parent: CronConfigure.Models.Services.CronApiService
+  langs:
+  - csharp
+  - vb
+  name: GetJobs(JobType, Int32, Int32)
+  nameWithType: CronApiService.GetJobs(JobType, Int32, Int32)
+  fullName: CronConfigure.Models.Services.CronApiService.GetJobs(CronConfigure.Models.Enumeracion.JobType, System.Int32, System.Int32)
+  type: Method
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Services/CronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetJobs
+    path: Models/Services/CronApiService.cs
+    startLine: 78
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Services
+  syntax:
+    content: public List<JobViewModel> GetJobs(JobType type, int from, int count)
+    parameters:
+    - id: type
+      type: CronConfigure.Models.Enumeracion.JobType
+    - id: from
+      type: System.Int32
+    - id: count
+      type: System.Int32
+    return:
+      type: System.Collections.Generic.List{CronConfigure.ViewModels.JobViewModel}
+    content.vb: Public Function GetJobs(type As JobType, from As Integer, count As Integer) As List(Of JobViewModel)
+  overload: CronConfigure.Models.Services.CronApiService.GetJobs*
+  implements:
+  - CronConfigure.Models.Services.ICronApiService.GetJobs(CronConfigure.Models.Enumeracion.JobType,System.Int32,System.Int32)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Services.CronApiService.GetScheduledJobs(System.Int32,System.Int32)
+  commentId: M:CronConfigure.Models.Services.CronApiService.GetScheduledJobs(System.Int32,System.Int32)
+  id: GetScheduledJobs(System.Int32,System.Int32)
+  parent: CronConfigure.Models.Services.CronApiService
+  langs:
+  - csharp
+  - vb
+  name: GetScheduledJobs(Int32, Int32)
+  nameWithType: CronApiService.GetScheduledJobs(Int32, Int32)
+  fullName: CronConfigure.Models.Services.CronApiService.GetScheduledJobs(System.Int32, System.Int32)
+  type: Method
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Services/CronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetScheduledJobs
+    path: Models/Services/CronApiService.cs
+    startLine: 121
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Services
+  syntax:
+    content: public List<ScheduledJobViewModel> GetScheduledJobs(int from, int count)
+    parameters:
+    - id: from
+      type: System.Int32
+    - id: count
+      type: System.Int32
+    return:
+      type: System.Collections.Generic.List{CronConfigure.ViewModels.ScheduledJobViewModel}
+    content.vb: Public Function GetScheduledJobs(from As Integer, count As Integer) As List(Of ScheduledJobViewModel)
+  overload: CronConfigure.Models.Services.CronApiService.GetScheduledJobs*
+  implements:
+  - CronConfigure.Models.Services.ICronApiService.GetScheduledJobs(System.Int32,System.Int32)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Services.CronApiService.GetJobsOfRecurringJob(System.String)
+  commentId: M:CronConfigure.Models.Services.CronApiService.GetJobsOfRecurringJob(System.String)
+  id: GetJobsOfRecurringJob(System.String)
+  parent: CronConfigure.Models.Services.CronApiService
+  langs:
+  - csharp
+  - vb
+  name: GetJobsOfRecurringJob(String)
+  nameWithType: CronApiService.GetJobsOfRecurringJob(String)
+  fullName: CronConfigure.Models.Services.CronApiService.GetJobsOfRecurringJob(System.String)
+  type: Method
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Services/CronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetJobsOfRecurringJob
+    path: Models/Services/CronApiService.cs
+    startLine: 141
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Services
+  syntax:
+    content: public List<JobViewModel> GetJobsOfRecurringJob(string recurringJob)
+    parameters:
+    - id: recurringJob
+      type: System.String
+    return:
+      type: System.Collections.Generic.List{CronConfigure.ViewModels.JobViewModel}
+    content.vb: Public Function GetJobsOfRecurringJob(recurringJob As String) As List(Of JobViewModel)
+  overload: CronConfigure.Models.Services.CronApiService.GetJobsOfRecurringJob*
+  implements:
+  - CronConfigure.Models.Services.ICronApiService.GetJobsOfRecurringJob(System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Services.CronApiService.ExistRecurringJob(System.String)
+  commentId: M:CronConfigure.Models.Services.CronApiService.ExistRecurringJob(System.String)
+  id: ExistRecurringJob(System.String)
+  parent: CronConfigure.Models.Services.CronApiService
+  langs:
+  - csharp
+  - vb
+  name: ExistRecurringJob(String)
+  nameWithType: CronApiService.ExistRecurringJob(String)
+  fullName: CronConfigure.Models.Services.CronApiService.ExistRecurringJob(System.String)
+  type: Method
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Services/CronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ExistRecurringJob
+    path: Models/Services/CronApiService.cs
+    startLine: 167
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Services
+  syntax:
+    content: public bool ExistRecurringJob(string recurringJob)
+    parameters:
+    - id: recurringJob
+      type: System.String
+    return:
+      type: System.Boolean
+    content.vb: Public Function ExistRecurringJob(recurringJob As String) As Boolean
+  overload: CronConfigure.Models.Services.CronApiService.ExistRecurringJob*
+  implements:
+  - CronConfigure.Models.Services.ICronApiService.ExistRecurringJob(System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Services.CronApiService.ExistScheduledJob(System.String)
+  commentId: M:CronConfigure.Models.Services.CronApiService.ExistScheduledJob(System.String)
+  id: ExistScheduledJob(System.String)
+  parent: CronConfigure.Models.Services.CronApiService
+  langs:
+  - csharp
+  - vb
+  name: ExistScheduledJob(String)
+  nameWithType: CronApiService.ExistScheduledJob(String)
+  fullName: CronConfigure.Models.Services.CronApiService.ExistScheduledJob(System.String)
+  type: Method
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Services/CronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ExistScheduledJob
+    path: Models/Services/CronApiService.cs
+    startLine: 172
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Services
+  syntax:
+    content: public bool ExistScheduledJob(string id)
+    parameters:
+    - id: id
+      type: System.String
+    return:
+      type: System.Boolean
+    content.vb: Public Function ExistScheduledJob(id As String) As Boolean
+  overload: CronConfigure.Models.Services.CronApiService.ExistScheduledJob*
+  implements:
+  - CronConfigure.Models.Services.ICronApiService.ExistScheduledJob(System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: CronConfigure.Models.Services
+  commentId: N:CronConfigure.Models.Services
+  name: CronConfigure.Models.Services
+  nameWithType: CronConfigure.Models.Services
+  fullName: CronConfigure.Models.Services
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: CronConfigure.Models.Services.ICronApiService
+  commentId: T:CronConfigure.Models.Services.ICronApiService
+  parent: CronConfigure.Models.Services
+  name: ICronApiService
+  nameWithType: ICronApiService
+  fullName: CronConfigure.Models.Services.ICronApiService
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: CronConfigure.Models.Services.CronApiService.#ctor*
+  commentId: Overload:CronConfigure.Models.Services.CronApiService.#ctor
+  name: CronApiService
+  nameWithType: CronApiService.CronApiService
+  fullName: CronConfigure.Models.Services.CronApiService.CronApiService
+- uid: CronConfigure.Models.HangfireEntityContext
+  commentId: T:CronConfigure.Models.HangfireEntityContext
+  parent: CronConfigure.Models
+  name: HangfireEntityContext
+  nameWithType: HangfireEntityContext
+  fullName: CronConfigure.Models.HangfireEntityContext
+- uid: CronConfigure.Models
+  commentId: N:CronConfigure.Models
+  name: CronConfigure.Models
+  nameWithType: CronConfigure.Models
+  fullName: CronConfigure.Models
+- uid: CronConfigure.Models.Services.CronApiService.GetRecurringJobs*
+  commentId: Overload:CronConfigure.Models.Services.CronApiService.GetRecurringJobs
+  name: GetRecurringJobs
+  nameWithType: CronApiService.GetRecurringJobs
+  fullName: CronConfigure.Models.Services.CronApiService.GetRecurringJobs
+- uid: CronConfigure.Models.Services.ICronApiService.GetRecurringJobs
+  commentId: M:CronConfigure.Models.Services.ICronApiService.GetRecurringJobs
+  parent: CronConfigure.Models.Services.ICronApiService
+  name: GetRecurringJobs()
+  nameWithType: ICronApiService.GetRecurringJobs()
+  fullName: CronConfigure.Models.Services.ICronApiService.GetRecurringJobs()
+  spec.csharp:
+  - uid: CronConfigure.Models.Services.ICronApiService.GetRecurringJobs
+    name: GetRecurringJobs
+    nameWithType: ICronApiService.GetRecurringJobs
+    fullName: CronConfigure.Models.Services.ICronApiService.GetRecurringJobs
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: CronConfigure.Models.Services.ICronApiService.GetRecurringJobs
+    name: GetRecurringJobs
+    nameWithType: ICronApiService.GetRecurringJobs
+    fullName: CronConfigure.Models.Services.ICronApiService.GetRecurringJobs
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List{CronConfigure.ViewModels.RecurringJobViewModel}
+  commentId: T:System.Collections.Generic.List{CronConfigure.ViewModels.RecurringJobViewModel}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<RecurringJobViewModel>
+  nameWithType: List<RecurringJobViewModel>
+  fullName: System.Collections.Generic.List<CronConfigure.ViewModels.RecurringJobViewModel>
+  nameWithType.vb: List(Of RecurringJobViewModel)
+  fullName.vb: System.Collections.Generic.List(Of CronConfigure.ViewModels.RecurringJobViewModel)
+  name.vb: List(Of RecurringJobViewModel)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: CronConfigure.ViewModels.RecurringJobViewModel
+    name: RecurringJobViewModel
+    nameWithType: RecurringJobViewModel
+    fullName: CronConfigure.ViewModels.RecurringJobViewModel
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: CronConfigure.ViewModels.RecurringJobViewModel
+    name: RecurringJobViewModel
+    nameWithType: RecurringJobViewModel
+    fullName: CronConfigure.ViewModels.RecurringJobViewModel
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: CronConfigure.Models.Services.CronApiService.ExistJob*
+  commentId: Overload:CronConfigure.Models.Services.CronApiService.ExistJob
+  name: ExistJob
+  nameWithType: CronApiService.ExistJob
+  fullName: CronConfigure.Models.Services.CronApiService.ExistJob
+- uid: CronConfigure.Models.Services.ICronApiService.ExistJob(System.String)
+  commentId: M:CronConfigure.Models.Services.ICronApiService.ExistJob(System.String)
+  parent: CronConfigure.Models.Services.ICronApiService
+  isExternal: true
+  name: ExistJob(String)
+  nameWithType: ICronApiService.ExistJob(String)
+  fullName: CronConfigure.Models.Services.ICronApiService.ExistJob(System.String)
+  spec.csharp:
+  - uid: CronConfigure.Models.Services.ICronApiService.ExistJob(System.String)
+    name: ExistJob
+    nameWithType: ICronApiService.ExistJob
+    fullName: CronConfigure.Models.Services.ICronApiService.ExistJob
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: CronConfigure.Models.Services.ICronApiService.ExistJob(System.String)
+    name: ExistJob
+    nameWithType: ICronApiService.ExistJob
+    fullName: CronConfigure.Models.Services.ICronApiService.ExistJob
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: CronConfigure.Models.Services.CronApiService.DeleteJob*
+  commentId: Overload:CronConfigure.Models.Services.CronApiService.DeleteJob
+  name: DeleteJob
+  nameWithType: CronApiService.DeleteJob
+  fullName: CronConfigure.Models.Services.CronApiService.DeleteJob
+- uid: CronConfigure.Models.Services.ICronApiService.DeleteJob(System.String)
+  commentId: M:CronConfigure.Models.Services.ICronApiService.DeleteJob(System.String)
+  parent: CronConfigure.Models.Services.ICronApiService
+  isExternal: true
+  name: DeleteJob(String)
+  nameWithType: ICronApiService.DeleteJob(String)
+  fullName: CronConfigure.Models.Services.ICronApiService.DeleteJob(System.String)
+  spec.csharp:
+  - uid: CronConfigure.Models.Services.ICronApiService.DeleteJob(System.String)
+    name: DeleteJob
+    nameWithType: ICronApiService.DeleteJob
+    fullName: CronConfigure.Models.Services.ICronApiService.DeleteJob
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: CronConfigure.Models.Services.ICronApiService.DeleteJob(System.String)
+    name: DeleteJob
+    nameWithType: ICronApiService.DeleteJob
+    fullName: CronConfigure.Models.Services.ICronApiService.DeleteJob
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: CronConfigure.Models.Services.CronApiService.DeleteRecurringJob*
+  commentId: Overload:CronConfigure.Models.Services.CronApiService.DeleteRecurringJob
+  name: DeleteRecurringJob
+  nameWithType: CronApiService.DeleteRecurringJob
+  fullName: CronConfigure.Models.Services.CronApiService.DeleteRecurringJob
+- uid: CronConfigure.Models.Services.ICronApiService.DeleteRecurringJob(System.String)
+  commentId: M:CronConfigure.Models.Services.ICronApiService.DeleteRecurringJob(System.String)
+  parent: CronConfigure.Models.Services.ICronApiService
+  isExternal: true
+  name: DeleteRecurringJob(String)
+  nameWithType: ICronApiService.DeleteRecurringJob(String)
+  fullName: CronConfigure.Models.Services.ICronApiService.DeleteRecurringJob(System.String)
+  spec.csharp:
+  - uid: CronConfigure.Models.Services.ICronApiService.DeleteRecurringJob(System.String)
+    name: DeleteRecurringJob
+    nameWithType: ICronApiService.DeleteRecurringJob
+    fullName: CronConfigure.Models.Services.ICronApiService.DeleteRecurringJob
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: CronConfigure.Models.Services.ICronApiService.DeleteRecurringJob(System.String)
+    name: DeleteRecurringJob
+    nameWithType: ICronApiService.DeleteRecurringJob
+    fullName: CronConfigure.Models.Services.ICronApiService.DeleteRecurringJob
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: CronConfigure.Models.Services.CronApiService.EnqueueJob*
+  commentId: Overload:CronConfigure.Models.Services.CronApiService.EnqueueJob
+  name: EnqueueJob
+  nameWithType: CronApiService.EnqueueJob
+  fullName: CronConfigure.Models.Services.CronApiService.EnqueueJob
+- uid: CronConfigure.Models.Services.ICronApiService.EnqueueJob(System.String)
+  commentId: M:CronConfigure.Models.Services.ICronApiService.EnqueueJob(System.String)
+  parent: CronConfigure.Models.Services.ICronApiService
+  isExternal: true
+  name: EnqueueJob(String)
+  nameWithType: ICronApiService.EnqueueJob(String)
+  fullName: CronConfigure.Models.Services.ICronApiService.EnqueueJob(System.String)
+  spec.csharp:
+  - uid: CronConfigure.Models.Services.ICronApiService.EnqueueJob(System.String)
+    name: EnqueueJob
+    nameWithType: ICronApiService.EnqueueJob
+    fullName: CronConfigure.Models.Services.ICronApiService.EnqueueJob
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: CronConfigure.Models.Services.ICronApiService.EnqueueJob(System.String)
+    name: EnqueueJob
+    nameWithType: ICronApiService.EnqueueJob
+    fullName: CronConfigure.Models.Services.ICronApiService.EnqueueJob
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: CronConfigure.Models.Services.ICronApiService.GetRecurringJobs(System.String)
+  commentId: M:CronConfigure.Models.Services.ICronApiService.GetRecurringJobs(System.String)
+  parent: CronConfigure.Models.Services.ICronApiService
+  isExternal: true
+  name: GetRecurringJobs(String)
+  nameWithType: ICronApiService.GetRecurringJobs(String)
+  fullName: CronConfigure.Models.Services.ICronApiService.GetRecurringJobs(System.String)
+  spec.csharp:
+  - uid: CronConfigure.Models.Services.ICronApiService.GetRecurringJobs(System.String)
+    name: GetRecurringJobs
+    nameWithType: ICronApiService.GetRecurringJobs
+    fullName: CronConfigure.Models.Services.ICronApiService.GetRecurringJobs
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: CronConfigure.Models.Services.ICronApiService.GetRecurringJobs(System.String)
+    name: GetRecurringJobs
+    nameWithType: ICronApiService.GetRecurringJobs
+    fullName: CronConfigure.Models.Services.ICronApiService.GetRecurringJobs
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: CronConfigure.ViewModels.RecurringJobViewModel
+  commentId: T:CronConfigure.ViewModels.RecurringJobViewModel
+  parent: CronConfigure.ViewModels
+  name: RecurringJobViewModel
+  nameWithType: RecurringJobViewModel
+  fullName: CronConfigure.ViewModels.RecurringJobViewModel
+- uid: CronConfigure.ViewModels
+  commentId: N:CronConfigure.ViewModels
+  name: CronConfigure.ViewModels
+  nameWithType: CronConfigure.ViewModels
+  fullName: CronConfigure.ViewModels
+- uid: CronConfigure.Models.Services.CronApiService.GetJobs*
+  commentId: Overload:CronConfigure.Models.Services.CronApiService.GetJobs
+  name: GetJobs
+  nameWithType: CronApiService.GetJobs
+  fullName: CronConfigure.Models.Services.CronApiService.GetJobs
+- uid: CronConfigure.Models.Services.ICronApiService.GetJobs(CronConfigure.Models.Enumeracion.JobType,System.Int32,System.Int32)
+  commentId: M:CronConfigure.Models.Services.ICronApiService.GetJobs(CronConfigure.Models.Enumeracion.JobType,System.Int32,System.Int32)
+  parent: CronConfigure.Models.Services.ICronApiService
+  isExternal: true
+  name: GetJobs(JobType, Int32, Int32)
+  nameWithType: ICronApiService.GetJobs(JobType, Int32, Int32)
+  fullName: CronConfigure.Models.Services.ICronApiService.GetJobs(CronConfigure.Models.Enumeracion.JobType, System.Int32, System.Int32)
+  spec.csharp:
+  - uid: CronConfigure.Models.Services.ICronApiService.GetJobs(CronConfigure.Models.Enumeracion.JobType,System.Int32,System.Int32)
+    name: GetJobs
+    nameWithType: ICronApiService.GetJobs
+    fullName: CronConfigure.Models.Services.ICronApiService.GetJobs
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: CronConfigure.Models.Enumeracion.JobType
+    name: JobType
+    nameWithType: JobType
+    fullName: CronConfigure.Models.Enumeracion.JobType
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: CronConfigure.Models.Services.ICronApiService.GetJobs(CronConfigure.Models.Enumeracion.JobType,System.Int32,System.Int32)
+    name: GetJobs
+    nameWithType: ICronApiService.GetJobs
+    fullName: CronConfigure.Models.Services.ICronApiService.GetJobs
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: CronConfigure.Models.Enumeracion.JobType
+    name: JobType
+    nameWithType: JobType
+    fullName: CronConfigure.Models.Enumeracion.JobType
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: CronConfigure.Models.Enumeracion.JobType
+  commentId: T:CronConfigure.Models.Enumeracion.JobType
+  parent: CronConfigure.Models.Enumeracion
+  name: JobType
+  nameWithType: JobType
+  fullName: CronConfigure.Models.Enumeracion.JobType
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Collections.Generic.List{CronConfigure.ViewModels.JobViewModel}
+  commentId: T:System.Collections.Generic.List{CronConfigure.ViewModels.JobViewModel}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<JobViewModel>
+  nameWithType: List<JobViewModel>
+  fullName: System.Collections.Generic.List<CronConfigure.ViewModels.JobViewModel>
+  nameWithType.vb: List(Of JobViewModel)
+  fullName.vb: System.Collections.Generic.List(Of CronConfigure.ViewModels.JobViewModel)
+  name.vb: List(Of JobViewModel)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: CronConfigure.ViewModels.JobViewModel
+    name: JobViewModel
+    nameWithType: JobViewModel
+    fullName: CronConfigure.ViewModels.JobViewModel
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: CronConfigure.ViewModels.JobViewModel
+    name: JobViewModel
+    nameWithType: JobViewModel
+    fullName: CronConfigure.ViewModels.JobViewModel
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: CronConfigure.Models.Enumeracion
+  commentId: N:CronConfigure.Models.Enumeracion
+  name: CronConfigure.Models.Enumeracion
+  nameWithType: CronConfigure.Models.Enumeracion
+  fullName: CronConfigure.Models.Enumeracion
+- uid: CronConfigure.Models.Services.CronApiService.GetScheduledJobs*
+  commentId: Overload:CronConfigure.Models.Services.CronApiService.GetScheduledJobs
+  name: GetScheduledJobs
+  nameWithType: CronApiService.GetScheduledJobs
+  fullName: CronConfigure.Models.Services.CronApiService.GetScheduledJobs
+- uid: CronConfigure.Models.Services.ICronApiService.GetScheduledJobs(System.Int32,System.Int32)
+  commentId: M:CronConfigure.Models.Services.ICronApiService.GetScheduledJobs(System.Int32,System.Int32)
+  parent: CronConfigure.Models.Services.ICronApiService
+  isExternal: true
+  name: GetScheduledJobs(Int32, Int32)
+  nameWithType: ICronApiService.GetScheduledJobs(Int32, Int32)
+  fullName: CronConfigure.Models.Services.ICronApiService.GetScheduledJobs(System.Int32, System.Int32)
+  spec.csharp:
+  - uid: CronConfigure.Models.Services.ICronApiService.GetScheduledJobs(System.Int32,System.Int32)
+    name: GetScheduledJobs
+    nameWithType: ICronApiService.GetScheduledJobs
+    fullName: CronConfigure.Models.Services.ICronApiService.GetScheduledJobs
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: CronConfigure.Models.Services.ICronApiService.GetScheduledJobs(System.Int32,System.Int32)
+    name: GetScheduledJobs
+    nameWithType: ICronApiService.GetScheduledJobs
+    fullName: CronConfigure.Models.Services.ICronApiService.GetScheduledJobs
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List{CronConfigure.ViewModels.ScheduledJobViewModel}
+  commentId: T:System.Collections.Generic.List{CronConfigure.ViewModels.ScheduledJobViewModel}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<ScheduledJobViewModel>
+  nameWithType: List<ScheduledJobViewModel>
+  fullName: System.Collections.Generic.List<CronConfigure.ViewModels.ScheduledJobViewModel>
+  nameWithType.vb: List(Of ScheduledJobViewModel)
+  fullName.vb: System.Collections.Generic.List(Of CronConfigure.ViewModels.ScheduledJobViewModel)
+  name.vb: List(Of ScheduledJobViewModel)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: CronConfigure.ViewModels.ScheduledJobViewModel
+    name: ScheduledJobViewModel
+    nameWithType: ScheduledJobViewModel
+    fullName: CronConfigure.ViewModels.ScheduledJobViewModel
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: CronConfigure.ViewModels.ScheduledJobViewModel
+    name: ScheduledJobViewModel
+    nameWithType: ScheduledJobViewModel
+    fullName: CronConfigure.ViewModels.ScheduledJobViewModel
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: CronConfigure.Models.Services.CronApiService.GetJobsOfRecurringJob*
+  commentId: Overload:CronConfigure.Models.Services.CronApiService.GetJobsOfRecurringJob
+  name: GetJobsOfRecurringJob
+  nameWithType: CronApiService.GetJobsOfRecurringJob
+  fullName: CronConfigure.Models.Services.CronApiService.GetJobsOfRecurringJob
+- uid: CronConfigure.Models.Services.ICronApiService.GetJobsOfRecurringJob(System.String)
+  commentId: M:CronConfigure.Models.Services.ICronApiService.GetJobsOfRecurringJob(System.String)
+  parent: CronConfigure.Models.Services.ICronApiService
+  isExternal: true
+  name: GetJobsOfRecurringJob(String)
+  nameWithType: ICronApiService.GetJobsOfRecurringJob(String)
+  fullName: CronConfigure.Models.Services.ICronApiService.GetJobsOfRecurringJob(System.String)
+  spec.csharp:
+  - uid: CronConfigure.Models.Services.ICronApiService.GetJobsOfRecurringJob(System.String)
+    name: GetJobsOfRecurringJob
+    nameWithType: ICronApiService.GetJobsOfRecurringJob
+    fullName: CronConfigure.Models.Services.ICronApiService.GetJobsOfRecurringJob
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: CronConfigure.Models.Services.ICronApiService.GetJobsOfRecurringJob(System.String)
+    name: GetJobsOfRecurringJob
+    nameWithType: ICronApiService.GetJobsOfRecurringJob
+    fullName: CronConfigure.Models.Services.ICronApiService.GetJobsOfRecurringJob
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: CronConfigure.Models.Services.CronApiService.ExistRecurringJob*
+  commentId: Overload:CronConfigure.Models.Services.CronApiService.ExistRecurringJob
+  name: ExistRecurringJob
+  nameWithType: CronApiService.ExistRecurringJob
+  fullName: CronConfigure.Models.Services.CronApiService.ExistRecurringJob
+- uid: CronConfigure.Models.Services.ICronApiService.ExistRecurringJob(System.String)
+  commentId: M:CronConfigure.Models.Services.ICronApiService.ExistRecurringJob(System.String)
+  parent: CronConfigure.Models.Services.ICronApiService
+  isExternal: true
+  name: ExistRecurringJob(String)
+  nameWithType: ICronApiService.ExistRecurringJob(String)
+  fullName: CronConfigure.Models.Services.ICronApiService.ExistRecurringJob(System.String)
+  spec.csharp:
+  - uid: CronConfigure.Models.Services.ICronApiService.ExistRecurringJob(System.String)
+    name: ExistRecurringJob
+    nameWithType: ICronApiService.ExistRecurringJob
+    fullName: CronConfigure.Models.Services.ICronApiService.ExistRecurringJob
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: CronConfigure.Models.Services.ICronApiService.ExistRecurringJob(System.String)
+    name: ExistRecurringJob
+    nameWithType: ICronApiService.ExistRecurringJob
+    fullName: CronConfigure.Models.Services.ICronApiService.ExistRecurringJob
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: CronConfigure.Models.Services.CronApiService.ExistScheduledJob*
+  commentId: Overload:CronConfigure.Models.Services.CronApiService.ExistScheduledJob
+  name: ExistScheduledJob
+  nameWithType: CronApiService.ExistScheduledJob
+  fullName: CronConfigure.Models.Services.CronApiService.ExistScheduledJob
+- uid: CronConfigure.Models.Services.ICronApiService.ExistScheduledJob(System.String)
+  commentId: M:CronConfigure.Models.Services.ICronApiService.ExistScheduledJob(System.String)
+  parent: CronConfigure.Models.Services.ICronApiService
+  isExternal: true
+  name: ExistScheduledJob(String)
+  nameWithType: ICronApiService.ExistScheduledJob(String)
+  fullName: CronConfigure.Models.Services.ICronApiService.ExistScheduledJob(System.String)
+  spec.csharp:
+  - uid: CronConfigure.Models.Services.ICronApiService.ExistScheduledJob(System.String)
+    name: ExistScheduledJob
+    nameWithType: ICronApiService.ExistScheduledJob
+    fullName: CronConfigure.Models.Services.ICronApiService.ExistScheduledJob
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: CronConfigure.Models.Services.ICronApiService.ExistScheduledJob(System.String)
+    name: ExistScheduledJob
+    nameWithType: ICronApiService.ExistScheduledJob
+    fullName: CronConfigure.Models.Services.ICronApiService.ExistScheduledJob
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )

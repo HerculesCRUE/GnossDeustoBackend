@@ -1,0 +1,22 @@
+### YamlMime:ManagedReference
+items:
+- uid: UrisFactory.Filters
+  commentId: N:UrisFactory.Filters
+  id: UrisFactory.Filters
+  children:
+  - UrisFactory.Filters.AddParametersFilter
+  langs:
+  - csharp
+  - vb
+  name: UrisFactory.Filters
+  nameWithType: UrisFactory.Filters
+  fullName: UrisFactory.Filters
+  type: Namespace
+  assemblies:
+  - UrisFactory
+references:
+- uid: UrisFactory.Filters.AddParametersFilter
+  commentId: T:UrisFactory.Filters.AddParametersFilter
+  name: AddParametersFilter
+  nameWithType: AddParametersFilter
+  fullName: UrisFactory.Filters.AddParametersFilter

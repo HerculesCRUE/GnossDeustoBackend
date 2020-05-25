@@ -1,0 +1,22 @@
+### YamlMime:ManagedReference
+items:
+- uid: CronConfigure.Middlewares
+  commentId: N:CronConfigure.Middlewares
+  id: CronConfigure.Middlewares
+  children:
+  - CronConfigure.Middlewares.ErrorHandlingMiddleware
+  langs:
+  - csharp
+  - vb
+  name: CronConfigure.Middlewares
+  nameWithType: CronConfigure.Middlewares
+  fullName: CronConfigure.Middlewares
+  type: Namespace
+  assemblies:
+  - CronConfigure
+references:
+- uid: CronConfigure.Middlewares.ErrorHandlingMiddleware
+  commentId: T:CronConfigure.Middlewares.ErrorHandlingMiddleware
+  name: ErrorHandlingMiddleware
+  nameWithType: ErrorHandlingMiddleware
+  fullName: CronConfigure.Middlewares.ErrorHandlingMiddleware

@@ -1,0 +1,129 @@
+### YamlMime:TableOfContent
+- uid: CronConfigure
+  name: CronConfigure
+  items:
+  - uid: CronConfigure.Program
+    name: Program
+  - uid: CronConfigure.Startup
+    name: Startup
+  - uid: CronConfigure.WeatherForecast
+    name: WeatherForecast
+- uid: CronConfigure.Controllers
+  name: CronConfigure.Controllers
+  items:
+  - uid: CronConfigure.Controllers.JobController
+    name: JobController
+  - uid: CronConfigure.Controllers.RecurringJobController
+    name: RecurringJobController
+  - uid: CronConfigure.Controllers.ScheduledJobController
+    name: ScheduledJobController
+- uid: CronConfigure.Exceptions
+  name: CronConfigure.Exceptions
+  items:
+  - uid: CronConfigure.Exceptions.BadRequestException
+    name: BadRequestException
+- uid: CronConfigure.Filters
+  name: CronConfigure.Filters
+  items:
+  - uid: CronConfigure.Filters.EnumSchemaFilter
+    name: EnumSchemaFilter
+  - uid: CronConfigure.Filters.HangfireDashboardNoAuthorizationFilter
+    name: HangfireDashboardNoAuthorizationFilter
+  - uid: CronConfigure.Filters.ProlongExpirationTimeAttribute
+    name: ProlongExpirationTimeAttribute
+- uid: CronConfigure.Middlewares
+  name: CronConfigure.Middlewares
+  items:
+  - uid: CronConfigure.Middlewares.ErrorHandlingMiddleware
+    name: ErrorHandlingMiddleware
+- uid: CronConfigure.Migrations
+  name: CronConfigure.Migrations
+  items:
+  - uid: CronConfigure.Migrations.AddTableJobRepository
+    name: AddTableJobRepository
+  - uid: CronConfigure.Migrations.InitialHangFire_Context
+    name: InitialHangFire_Context
+- uid: CronConfigure.Models
+  name: CronConfigure.Models
+  items:
+  - uid: CronConfigure.Models.EjemploResultado
+    name: EjemploResultado
+  - uid: CronConfigure.Models.ErrorViewModel
+    name: ErrorViewModel
+  - uid: CronConfigure.Models.ExampleService
+    name: ExampleService
+  - uid: CronConfigure.Models.HangfireEntityContext
+    name: HangfireEntityContext
+  - uid: CronConfigure.Models.Recurrent
+    name: Recurrent
+- uid: CronConfigure.Models.Entitties
+  name: CronConfigure.Models.Entitties
+  items:
+  - uid: CronConfigure.Models.Entitties.JobRepository
+    name: JobRepository
+- uid: CronConfigure.Models.Enumeracion
+  name: CronConfigure.Models.Enumeracion
+  items:
+  - uid: CronConfigure.Models.Enumeracion.JobType
+    name: JobType
+- uid: CronConfigure.Models.Hangfire
+  name: CronConfigure.Models.Hangfire
+  items:
+  - uid: CronConfigure.Models.Hangfire.AggregatedCounter
+    name: AggregatedCounter
+  - uid: CronConfigure.Models.Hangfire.Count
+    name: Count
+  - uid: CronConfigure.Models.Hangfire.Counter
+    name: Counter
+  - uid: CronConfigure.Models.Hangfire.Hash
+    name: Hash
+  - uid: CronConfigure.Models.Hangfire.Job
+    name: Job
+  - uid: CronConfigure.Models.Hangfire.JobParameter
+    name: JobParameter
+  - uid: CronConfigure.Models.Hangfire.JobQueue
+    name: JobQueue
+  - uid: CronConfigure.Models.Hangfire.List
+    name: List
+  - uid: CronConfigure.Models.Hangfire.Schema
+    name: Schema
+  - uid: CronConfigure.Models.Hangfire.Server
+    name: Server
+  - uid: CronConfigure.Models.Hangfire.Set
+    name: Set
+  - uid: CronConfigure.Models.Hangfire.State
+    name: State
+- uid: CronConfigure.Models.Services
+  name: CronConfigure.Models.Services
+  items:
+  - uid: CronConfigure.Models.Services.CallApiService
+    name: CallApiService
+  - uid: CronConfigure.Models.Services.ConfigUrlService
+    name: ConfigUrlService
+  - uid: CronConfigure.Models.Services.CronApiService
+    name: CronApiService
+  - uid: CronConfigure.Models.Services.ICronApiService
+    name: ICronApiService
+  - uid: CronConfigure.Models.Services.IProgramingMethodService
+    name: IProgramingMethodService
+  - uid: CronConfigure.Models.Services.MockCronApiService
+    name: MockCronApiService
+  - uid: CronConfigure.Models.Services.MockProgramingMethodService
+    name: MockProgramingMethodService
+  - uid: CronConfigure.Models.Services.ProgramingMethodsService
+    name: ProgramingMethodsService
+- uid: CronConfigure.ViewModels
+  name: CronConfigure.ViewModels
+  items:
+  - uid: CronConfigure.ViewModels.CreateJobModel
+    name: CreateJobModel
+  - uid: CronConfigure.ViewModels.CreateRecurringJobModel
+    name: CreateRecurringJobModel
+  - uid: CronConfigure.ViewModels.JobViewModel
+    name: JobViewModel
+  - uid: CronConfigure.ViewModels.RecurringJobViewModel
+    name: RecurringJobViewModel
+  - uid: CronConfigure.ViewModels.ScheduledJobViewModel
+    name: ScheduledJobViewModel
+  - uid: CronConfigure.ViewModels.SendPulishObjectModel
+    name: SendPulishObjectModel

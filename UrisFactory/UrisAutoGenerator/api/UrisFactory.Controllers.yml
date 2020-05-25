@@ -1,0 +1,28 @@
+### YamlMime:ManagedReference
+items:
+- uid: UrisFactory.Controllers
+  commentId: N:UrisFactory.Controllers
+  id: UrisFactory.Controllers
+  children:
+  - UrisFactory.Controllers.FactoryController
+  - UrisFactory.Controllers.SchemaController
+  langs:
+  - csharp
+  - vb
+  name: UrisFactory.Controllers
+  nameWithType: UrisFactory.Controllers
+  fullName: UrisFactory.Controllers
+  type: Namespace
+  assemblies:
+  - UrisFactory
+references:
+- uid: UrisFactory.Controllers.FactoryController
+  commentId: T:UrisFactory.Controllers.FactoryController
+  name: FactoryController
+  nameWithType: FactoryController
+  fullName: UrisFactory.Controllers.FactoryController
+- uid: UrisFactory.Controllers.SchemaController
+  commentId: T:UrisFactory.Controllers.SchemaController
+  name: SchemaController
+  nameWithType: SchemaController
+  fullName: UrisFactory.Controllers.SchemaController

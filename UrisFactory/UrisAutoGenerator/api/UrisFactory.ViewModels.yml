@@ -1,0 +1,28 @@
+### YamlMime:ManagedReference
+items:
+- uid: UrisFactory.ViewModels
+  commentId: N:UrisFactory.ViewModels
+  id: UrisFactory.ViewModels
+  children:
+  - UrisFactory.ViewModels.InfoUriStructure
+  langs:
+  - csharp
+  - vb
+  name: UrisFactory.ViewModels
+  nameWithType: UrisFactory.ViewModels
+  fullName: UrisFactory.ViewModels
+  type: Namespace
+  assemblies:
+  - UrisFactory
+references:
+- uid: UrisFactory.ViewModels.InfoUriStructure
+  commentId: T:UrisFactory.ViewModels.InfoUriStructure
+  parent: UrisFactory.ViewModels
+  name: InfoUriStructure
+  nameWithType: InfoUriStructure
+  fullName: UrisFactory.ViewModels.InfoUriStructure
+- uid: UrisFactory.ViewModels
+  commentId: N:UrisFactory.ViewModels
+  name: UrisFactory.ViewModels
+  nameWithType: UrisFactory.ViewModels
+  fullName: UrisFactory.ViewModels

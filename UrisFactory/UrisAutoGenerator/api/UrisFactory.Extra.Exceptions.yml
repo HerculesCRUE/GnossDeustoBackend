@@ -1,0 +1,40 @@
+### YamlMime:ManagedReference
+items:
+- uid: UrisFactory.Extra.Exceptions
+  commentId: N:UrisFactory.Extra.Exceptions
+  id: UrisFactory.Extra.Exceptions
+  children:
+  - UrisFactory.Extra.Exceptions.FailedLoadConfigJsonException
+  - UrisFactory.Extra.Exceptions.ParametersNotConfiguredException
+  - UrisFactory.Extra.Exceptions.UriStructureBadInfoException
+  - UrisFactory.Extra.Exceptions.UriStructureConfiguredException
+  langs:
+  - csharp
+  - vb
+  name: UrisFactory.Extra.Exceptions
+  nameWithType: UrisFactory.Extra.Exceptions
+  fullName: UrisFactory.Extra.Exceptions
+  type: Namespace
+  assemblies:
+  - UrisFactory
+references:
+- uid: UrisFactory.Extra.Exceptions.FailedLoadConfigJsonException
+  commentId: T:UrisFactory.Extra.Exceptions.FailedLoadConfigJsonException
+  name: FailedLoadConfigJsonException
+  nameWithType: FailedLoadConfigJsonException
+  fullName: UrisFactory.Extra.Exceptions.FailedLoadConfigJsonException
+- uid: UrisFactory.Extra.Exceptions.ParametersNotConfiguredException
+  commentId: T:UrisFactory.Extra.Exceptions.ParametersNotConfiguredException
+  name: ParametersNotConfiguredException
+  nameWithType: ParametersNotConfiguredException
+  fullName: UrisFactory.Extra.Exceptions.ParametersNotConfiguredException
+- uid: UrisFactory.Extra.Exceptions.UriStructureBadInfoException
+  commentId: T:UrisFactory.Extra.Exceptions.UriStructureBadInfoException
+  name: UriStructureBadInfoException
+  nameWithType: UriStructureBadInfoException
+  fullName: UrisFactory.Extra.Exceptions.UriStructureBadInfoException
+- uid: UrisFactory.Extra.Exceptions.UriStructureConfiguredException
+  commentId: T:UrisFactory.Extra.Exceptions.UriStructureConfiguredException
+  name: UriStructureConfiguredException
+  nameWithType: UriStructureConfiguredException
+  fullName: UrisFactory.Extra.Exceptions.UriStructureConfiguredException

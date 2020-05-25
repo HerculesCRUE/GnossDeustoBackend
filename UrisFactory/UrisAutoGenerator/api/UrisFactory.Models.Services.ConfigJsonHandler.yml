@@ -1,0 +1,913 @@
+### YamlMime:ManagedReference
+items:
+- uid: UrisFactory.Models.Services.ConfigJsonHandler
+  commentId: T:UrisFactory.Models.Services.ConfigJsonHandler
+  id: ConfigJsonHandler
+  parent: UrisFactory.Models.Services
+  children:
+  - UrisFactory.Models.Services.ConfigJsonHandler.#ctor
+  - UrisFactory.Models.Services.ConfigJsonHandler.#ctor(System.String)
+  - UrisFactory.Models.Services.ConfigJsonHandler.AddUriStructureInfo(UrisFactory.Models.ConfigEntities.UriStructure,UrisFactory.Models.ConfigEntities.ResourcesClass)
+  - UrisFactory.Models.Services.ConfigJsonHandler.DeleteUriStructureInfo(System.String)
+  - UrisFactory.Models.Services.ConfigJsonHandler.ExistUriStructure(System.String)
+  - UrisFactory.Models.Services.ConfigJsonHandler.GetResourceClass(System.String)
+  - UrisFactory.Models.Services.ConfigJsonHandler.GetUrisConfig
+  - UrisFactory.Models.Services.ConfigJsonHandler.GetUriStructure(System.String)
+  - UrisFactory.Models.Services.ConfigJsonHandler.IsCorrectFormedUriStructure(UrisFactory.Models.ConfigEntities.UriStructureGeneral)
+  - UrisFactory.Models.Services.ConfigJsonHandler.LoadConfigJson
+  - UrisFactory.Models.Services.ConfigJsonHandler.LoadConfigJson(System.String)
+  langs:
+  - csharp
+  - vb
+  name: ConfigJsonHandler
+  nameWithType: ConfigJsonHandler
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler
+  type: Class
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/ConfigJsonHandler.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ConfigJsonHandler
+    path: Models/Services/ConfigJsonHandler.cs
+    startLine: 8
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: public class ConfigJsonHandler
+    content.vb: Public Class ConfigJsonHandler
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.#ctor
+  commentId: M:UrisFactory.Models.Services.ConfigJsonHandler.#ctor
+  id: '#ctor'
+  parent: UrisFactory.Models.Services.ConfigJsonHandler
+  langs:
+  - csharp
+  - vb
+  name: ConfigJsonHandler()
+  nameWithType: ConfigJsonHandler.ConfigJsonHandler()
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.ConfigJsonHandler()
+  type: Constructor
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/ConfigJsonHandler.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Services/ConfigJsonHandler.cs
+    startLine: 12
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: public ConfigJsonHandler()
+    content.vb: Public Sub New
+  overload: UrisFactory.Models.Services.ConfigJsonHandler.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.#ctor(System.String)
+  commentId: M:UrisFactory.Models.Services.ConfigJsonHandler.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: UrisFactory.Models.Services.ConfigJsonHandler
+  langs:
+  - csharp
+  - vb
+  name: ConfigJsonHandler(String)
+  nameWithType: ConfigJsonHandler.ConfigJsonHandler(String)
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.ConfigJsonHandler(System.String)
+  type: Constructor
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/ConfigJsonHandler.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Services/ConfigJsonHandler.cs
+    startLine: 17
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: public ConfigJsonHandler(string json)
+    parameters:
+    - id: json
+      type: System.String
+    content.vb: Public Sub New(json As String)
+  overload: UrisFactory.Models.Services.ConfigJsonHandler.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.GetUrisConfig
+  commentId: M:UrisFactory.Models.Services.ConfigJsonHandler.GetUrisConfig
+  id: GetUrisConfig
+  parent: UrisFactory.Models.Services.ConfigJsonHandler
+  langs:
+  - csharp
+  - vb
+  name: GetUrisConfig()
+  nameWithType: ConfigJsonHandler.GetUrisConfig()
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.GetUrisConfig()
+  type: Method
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/ConfigJsonHandler.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetUrisConfig
+    path: Models/Services/ConfigJsonHandler.cs
+    startLine: 38
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: public UriStructureGeneral GetUrisConfig()
+    return:
+      type: UrisFactory.Models.ConfigEntities.UriStructureGeneral
+    content.vb: Public Function GetUrisConfig As UriStructureGeneral
+  overload: UrisFactory.Models.Services.ConfigJsonHandler.GetUrisConfig*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.LoadConfigJson
+  commentId: M:UrisFactory.Models.Services.ConfigJsonHandler.LoadConfigJson
+  id: LoadConfigJson
+  parent: UrisFactory.Models.Services.ConfigJsonHandler
+  langs:
+  - csharp
+  - vb
+  name: LoadConfigJson()
+  nameWithType: ConfigJsonHandler.LoadConfigJson()
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.LoadConfigJson()
+  type: Method
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/ConfigJsonHandler.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: LoadConfigJson
+    path: Models/Services/ConfigJsonHandler.cs
+    startLine: 47
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: public void LoadConfigJson()
+    content.vb: Public Sub LoadConfigJson
+  overload: UrisFactory.Models.Services.ConfigJsonHandler.LoadConfigJson*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.LoadConfigJson(System.String)
+  commentId: M:UrisFactory.Models.Services.ConfigJsonHandler.LoadConfigJson(System.String)
+  id: LoadConfigJson(System.String)
+  parent: UrisFactory.Models.Services.ConfigJsonHandler
+  langs:
+  - csharp
+  - vb
+  name: LoadConfigJson(String)
+  nameWithType: ConfigJsonHandler.LoadConfigJson(String)
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.LoadConfigJson(System.String)
+  type: Method
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/ConfigJsonHandler.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: LoadConfigJson
+    path: Models/Services/ConfigJsonHandler.cs
+    startLine: 63
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: public void LoadConfigJson(string json)
+    parameters:
+    - id: json
+      type: System.String
+    content.vb: Public Sub LoadConfigJson(json As String)
+  overload: UrisFactory.Models.Services.ConfigJsonHandler.LoadConfigJson*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.IsCorrectFormedUriStructure(UrisFactory.Models.ConfigEntities.UriStructureGeneral)
+  commentId: M:UrisFactory.Models.Services.ConfigJsonHandler.IsCorrectFormedUriStructure(UrisFactory.Models.ConfigEntities.UriStructureGeneral)
+  id: IsCorrectFormedUriStructure(UrisFactory.Models.ConfigEntities.UriStructureGeneral)
+  parent: UrisFactory.Models.Services.ConfigJsonHandler
+  langs:
+  - csharp
+  - vb
+  name: IsCorrectFormedUriStructure(UriStructureGeneral)
+  nameWithType: ConfigJsonHandler.IsCorrectFormedUriStructure(UriStructureGeneral)
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.IsCorrectFormedUriStructure(UrisFactory.Models.ConfigEntities.UriStructureGeneral)
+  type: Method
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/ConfigJsonHandler.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: IsCorrectFormedUriStructure
+    path: Models/Services/ConfigJsonHandler.cs
+    startLine: 93
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: public static bool IsCorrectFormedUriStructure(UriStructureGeneral uriSchema)
+    parameters:
+    - id: uriSchema
+      type: UrisFactory.Models.ConfigEntities.UriStructureGeneral
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function IsCorrectFormedUriStructure(uriSchema As UriStructureGeneral) As Boolean
+  overload: UrisFactory.Models.Services.ConfigJsonHandler.IsCorrectFormedUriStructure*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.DeleteUriStructureInfo(System.String)
+  commentId: M:UrisFactory.Models.Services.ConfigJsonHandler.DeleteUriStructureInfo(System.String)
+  id: DeleteUriStructureInfo(System.String)
+  parent: UrisFactory.Models.Services.ConfigJsonHandler
+  langs:
+  - csharp
+  - vb
+  name: DeleteUriStructureInfo(String)
+  nameWithType: ConfigJsonHandler.DeleteUriStructureInfo(String)
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.DeleteUriStructureInfo(System.String)
+  type: Method
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/ConfigJsonHandler.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: DeleteUriStructureInfo
+    path: Models/Services/ConfigJsonHandler.cs
+    startLine: 119
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  example: []
+  syntax:
+    content: public void DeleteUriStructureInfo(string name)
+    parameters:
+    - id: name
+      type: System.String
+    content.vb: Public Sub DeleteUriStructureInfo(name As String)
+  overload: UrisFactory.Models.Services.ConfigJsonHandler.DeleteUriStructureInfo*
+  exceptions:
+  - type: UrisFactory.Extra.Exceptions.UriStructureConfiguredException
+    commentId: T:UrisFactory.Extra.Exceptions.UriStructureConfiguredException
+    description: UriStructure not exist in config file
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.ExistUriStructure(System.String)
+  commentId: M:UrisFactory.Models.Services.ConfigJsonHandler.ExistUriStructure(System.String)
+  id: ExistUriStructure(System.String)
+  parent: UrisFactory.Models.Services.ConfigJsonHandler
+  langs:
+  - csharp
+  - vb
+  name: ExistUriStructure(String)
+  nameWithType: ConfigJsonHandler.ExistUriStructure(String)
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.ExistUriStructure(System.String)
+  type: Method
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/ConfigJsonHandler.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ExistUriStructure
+    path: Models/Services/ConfigJsonHandler.cs
+    startLine: 134
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: public bool ExistUriStructure(string name)
+    parameters:
+    - id: name
+      type: System.String
+    return:
+      type: System.Boolean
+    content.vb: Public Function ExistUriStructure(name As String) As Boolean
+  overload: UrisFactory.Models.Services.ConfigJsonHandler.ExistUriStructure*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.GetUriStructure(System.String)
+  commentId: M:UrisFactory.Models.Services.ConfigJsonHandler.GetUriStructure(System.String)
+  id: GetUriStructure(System.String)
+  parent: UrisFactory.Models.Services.ConfigJsonHandler
+  langs:
+  - csharp
+  - vb
+  name: GetUriStructure(String)
+  nameWithType: ConfigJsonHandler.GetUriStructure(String)
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.GetUriStructure(System.String)
+  type: Method
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/ConfigJsonHandler.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetUriStructure
+    path: Models/Services/ConfigJsonHandler.cs
+    startLine: 139
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: public UriStructure GetUriStructure(string name)
+    parameters:
+    - id: name
+      type: System.String
+    return:
+      type: UrisFactory.Models.ConfigEntities.UriStructure
+    content.vb: Public Function GetUriStructure(name As String) As UriStructure
+  overload: UrisFactory.Models.Services.ConfigJsonHandler.GetUriStructure*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.GetResourceClass(System.String)
+  commentId: M:UrisFactory.Models.Services.ConfigJsonHandler.GetResourceClass(System.String)
+  id: GetResourceClass(System.String)
+  parent: UrisFactory.Models.Services.ConfigJsonHandler
+  langs:
+  - csharp
+  - vb
+  name: GetResourceClass(String)
+  nameWithType: ConfigJsonHandler.GetResourceClass(String)
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.GetResourceClass(System.String)
+  type: Method
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/ConfigJsonHandler.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetResourceClass
+    path: Models/Services/ConfigJsonHandler.cs
+    startLine: 144
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: public List<ResourcesClass> GetResourceClass(string name)
+    parameters:
+    - id: name
+      type: System.String
+    return:
+      type: System.Collections.Generic.List{UrisFactory.Models.ConfigEntities.ResourcesClass}
+    content.vb: Public Function GetResourceClass(name As String) As List(Of ResourcesClass)
+  overload: UrisFactory.Models.Services.ConfigJsonHandler.GetResourceClass*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.AddUriStructureInfo(UrisFactory.Models.ConfigEntities.UriStructure,UrisFactory.Models.ConfigEntities.ResourcesClass)
+  commentId: M:UrisFactory.Models.Services.ConfigJsonHandler.AddUriStructureInfo(UrisFactory.Models.ConfigEntities.UriStructure,UrisFactory.Models.ConfigEntities.ResourcesClass)
+  id: AddUriStructureInfo(UrisFactory.Models.ConfigEntities.UriStructure,UrisFactory.Models.ConfigEntities.ResourcesClass)
+  parent: UrisFactory.Models.Services.ConfigJsonHandler
+  langs:
+  - csharp
+  - vb
+  name: AddUriStructureInfo(UriStructure, ResourcesClass)
+  nameWithType: ConfigJsonHandler.AddUriStructureInfo(UriStructure, ResourcesClass)
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.AddUriStructureInfo(UrisFactory.Models.ConfigEntities.UriStructure, UrisFactory.Models.ConfigEntities.ResourcesClass)
+  type: Method
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/ConfigJsonHandler.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: AddUriStructureInfo
+    path: Models/Services/ConfigJsonHandler.cs
+    startLine: 151
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  example: []
+  syntax:
+    content: public void AddUriStructureInfo(UriStructure uriStructure, ResourcesClass resourcesClass)
+    parameters:
+    - id: uriStructure
+      type: UrisFactory.Models.ConfigEntities.UriStructure
+    - id: resourcesClass
+      type: UrisFactory.Models.ConfigEntities.ResourcesClass
+    content.vb: Public Sub AddUriStructureInfo(uriStructure As UriStructure, resourcesClass As ResourcesClass)
+  overload: UrisFactory.Models.Services.ConfigJsonHandler.AddUriStructureInfo*
+  exceptions:
+  - type: UrisFactory.Extra.Exceptions.UriStructureConfiguredException
+    commentId: T:UrisFactory.Extra.Exceptions.UriStructureConfiguredException
+    description: UriStructure Already exist in config file
+  - type: UrisFactory.Extra.Exceptions.UriStructureBadInfoException
+    commentId: T:UrisFactory.Extra.Exceptions.UriStructureBadInfoException
+    description: there is a mismatch between uriStructure and resourceClass given
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: UrisFactory.Models.Services
+  commentId: N:UrisFactory.Models.Services
+  name: UrisFactory.Models.Services
+  nameWithType: UrisFactory.Models.Services
+  fullName: UrisFactory.Models.Services
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.#ctor*
+  commentId: Overload:UrisFactory.Models.Services.ConfigJsonHandler.#ctor
+  name: ConfigJsonHandler
+  nameWithType: ConfigJsonHandler.ConfigJsonHandler
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.ConfigJsonHandler
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.GetUrisConfig*
+  commentId: Overload:UrisFactory.Models.Services.ConfigJsonHandler.GetUrisConfig
+  name: GetUrisConfig
+  nameWithType: ConfigJsonHandler.GetUrisConfig
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.GetUrisConfig
+- uid: UrisFactory.Models.ConfigEntities.UriStructureGeneral
+  commentId: T:UrisFactory.Models.ConfigEntities.UriStructureGeneral
+  parent: UrisFactory.Models.ConfigEntities
+  name: UriStructureGeneral
+  nameWithType: UriStructureGeneral
+  fullName: UrisFactory.Models.ConfigEntities.UriStructureGeneral
+- uid: UrisFactory.Models.ConfigEntities
+  commentId: N:UrisFactory.Models.ConfigEntities
+  name: UrisFactory.Models.ConfigEntities
+  nameWithType: UrisFactory.Models.ConfigEntities
+  fullName: UrisFactory.Models.ConfigEntities
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.LoadConfigJson*
+  commentId: Overload:UrisFactory.Models.Services.ConfigJsonHandler.LoadConfigJson
+  name: LoadConfigJson
+  nameWithType: ConfigJsonHandler.LoadConfigJson
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.LoadConfigJson
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.IsCorrectFormedUriStructure*
+  commentId: Overload:UrisFactory.Models.Services.ConfigJsonHandler.IsCorrectFormedUriStructure
+  name: IsCorrectFormedUriStructure
+  nameWithType: ConfigJsonHandler.IsCorrectFormedUriStructure
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.IsCorrectFormedUriStructure
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: UrisFactory.Extra.Exceptions.UriStructureConfiguredException
+  commentId: T:UrisFactory.Extra.Exceptions.UriStructureConfiguredException
+  name: UriStructureConfiguredException
+  nameWithType: UriStructureConfiguredException
+  fullName: UrisFactory.Extra.Exceptions.UriStructureConfiguredException
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.DeleteUriStructureInfo*
+  commentId: Overload:UrisFactory.Models.Services.ConfigJsonHandler.DeleteUriStructureInfo
+  name: DeleteUriStructureInfo
+  nameWithType: ConfigJsonHandler.DeleteUriStructureInfo
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.DeleteUriStructureInfo
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.ExistUriStructure*
+  commentId: Overload:UrisFactory.Models.Services.ConfigJsonHandler.ExistUriStructure
+  name: ExistUriStructure
+  nameWithType: ConfigJsonHandler.ExistUriStructure
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.ExistUriStructure
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.GetUriStructure*
+  commentId: Overload:UrisFactory.Models.Services.ConfigJsonHandler.GetUriStructure
+  name: GetUriStructure
+  nameWithType: ConfigJsonHandler.GetUriStructure
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.GetUriStructure
+- uid: UrisFactory.Models.ConfigEntities.UriStructure
+  commentId: T:UrisFactory.Models.ConfigEntities.UriStructure
+  parent: UrisFactory.Models.ConfigEntities
+  name: UriStructure
+  nameWithType: UriStructure
+  fullName: UrisFactory.Models.ConfigEntities.UriStructure
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.GetResourceClass*
+  commentId: Overload:UrisFactory.Models.Services.ConfigJsonHandler.GetResourceClass
+  name: GetResourceClass
+  nameWithType: ConfigJsonHandler.GetResourceClass
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.GetResourceClass
+- uid: System.Collections.Generic.List{UrisFactory.Models.ConfigEntities.ResourcesClass}
+  commentId: T:System.Collections.Generic.List{UrisFactory.Models.ConfigEntities.ResourcesClass}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<ResourcesClass>
+  nameWithType: List<ResourcesClass>
+  fullName: System.Collections.Generic.List<UrisFactory.Models.ConfigEntities.ResourcesClass>
+  nameWithType.vb: List(Of ResourcesClass)
+  fullName.vb: System.Collections.Generic.List(Of UrisFactory.Models.ConfigEntities.ResourcesClass)
+  name.vb: List(Of ResourcesClass)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: UrisFactory.Models.ConfigEntities.ResourcesClass
+    name: ResourcesClass
+    nameWithType: ResourcesClass
+    fullName: UrisFactory.Models.ConfigEntities.ResourcesClass
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: UrisFactory.Models.ConfigEntities.ResourcesClass
+    name: ResourcesClass
+    nameWithType: ResourcesClass
+    fullName: UrisFactory.Models.ConfigEntities.ResourcesClass
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: UrisFactory.Extra.Exceptions.UriStructureBadInfoException
+  commentId: T:UrisFactory.Extra.Exceptions.UriStructureBadInfoException
+  name: UriStructureBadInfoException
+  nameWithType: UriStructureBadInfoException
+  fullName: UrisFactory.Extra.Exceptions.UriStructureBadInfoException
+- uid: UrisFactory.Models.Services.ConfigJsonHandler.AddUriStructureInfo*
+  commentId: Overload:UrisFactory.Models.Services.ConfigJsonHandler.AddUriStructureInfo
+  name: AddUriStructureInfo
+  nameWithType: ConfigJsonHandler.AddUriStructureInfo
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler.AddUriStructureInfo
+- uid: UrisFactory.Models.ConfigEntities.ResourcesClass
+  commentId: T:UrisFactory.Models.ConfigEntities.ResourcesClass
+  parent: UrisFactory.Models.ConfigEntities
+  name: ResourcesClass
+  nameWithType: ResourcesClass
+  fullName: UrisFactory.Models.ConfigEntities.ResourcesClass

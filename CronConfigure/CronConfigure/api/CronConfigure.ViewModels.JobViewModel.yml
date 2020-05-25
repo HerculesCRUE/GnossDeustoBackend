@@ -1,0 +1,513 @@
+### YamlMime:ManagedReference
+items:
+- uid: CronConfigure.ViewModels.JobViewModel
+  commentId: T:CronConfigure.ViewModels.JobViewModel
+  id: JobViewModel
+  parent: CronConfigure.ViewModels
+  children:
+  - CronConfigure.ViewModels.JobViewModel.ExceptionDetails
+  - CronConfigure.ViewModels.JobViewModel.Id
+  - CronConfigure.ViewModels.JobViewModel.Job
+  - CronConfigure.ViewModels.JobViewModel.State
+  langs:
+  - csharp
+  - vb
+  name: JobViewModel
+  nameWithType: JobViewModel
+  fullName: CronConfigure.ViewModels.JobViewModel
+  type: Class
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/ViewModels/JobViewModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: JobViewModel
+    path: ViewModels/JobViewModel.cs
+    startLine: 8
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.ViewModels
+  syntax:
+    content: public class JobViewModel
+    content.vb: Public Class JobViewModel
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: CronConfigure.ViewModels.JobViewModel.Job
+  commentId: P:CronConfigure.ViewModels.JobViewModel.Job
+  id: Job
+  parent: CronConfigure.ViewModels.JobViewModel
+  langs:
+  - csharp
+  - vb
+  name: Job
+  nameWithType: JobViewModel.Job
+  fullName: CronConfigure.ViewModels.JobViewModel.Job
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/ViewModels/JobViewModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Job
+    path: ViewModels/JobViewModel.cs
+    startLine: 10
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.ViewModels
+  syntax:
+    content: public string Job { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Job As String
+  overload: CronConfigure.ViewModels.JobViewModel.Job*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.ViewModels.JobViewModel.State
+  commentId: P:CronConfigure.ViewModels.JobViewModel.State
+  id: State
+  parent: CronConfigure.ViewModels.JobViewModel
+  langs:
+  - csharp
+  - vb
+  name: State
+  nameWithType: JobViewModel.State
+  fullName: CronConfigure.ViewModels.JobViewModel.State
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/ViewModels/JobViewModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: State
+    path: ViewModels/JobViewModel.cs
+    startLine: 11
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.ViewModels
+  syntax:
+    content: public string State { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property State As String
+  overload: CronConfigure.ViewModels.JobViewModel.State*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.ViewModels.JobViewModel.Id
+  commentId: P:CronConfigure.ViewModels.JobViewModel.Id
+  id: Id
+  parent: CronConfigure.ViewModels.JobViewModel
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: JobViewModel.Id
+  fullName: CronConfigure.ViewModels.JobViewModel.Id
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/ViewModels/JobViewModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Id
+    path: ViewModels/JobViewModel.cs
+    startLine: 12
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.ViewModels
+  syntax:
+    content: public string Id { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Id As String
+  overload: CronConfigure.ViewModels.JobViewModel.Id*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.ViewModels.JobViewModel.ExceptionDetails
+  commentId: P:CronConfigure.ViewModels.JobViewModel.ExceptionDetails
+  id: ExceptionDetails
+  parent: CronConfigure.ViewModels.JobViewModel
+  langs:
+  - csharp
+  - vb
+  name: ExceptionDetails
+  nameWithType: JobViewModel.ExceptionDetails
+  fullName: CronConfigure.ViewModels.JobViewModel.ExceptionDetails
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/ViewModels/JobViewModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ExceptionDetails
+    path: ViewModels/JobViewModel.cs
+    startLine: 14
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.ViewModels
+  syntax:
+    content: public string ExceptionDetails { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ExceptionDetails As String
+  overload: CronConfigure.ViewModels.JobViewModel.ExceptionDetails*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: CronConfigure.ViewModels
+  commentId: N:CronConfigure.ViewModels
+  name: CronConfigure.ViewModels
+  nameWithType: CronConfigure.ViewModels
+  fullName: CronConfigure.ViewModels
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: CronConfigure.ViewModels.JobViewModel.Job*
+  commentId: Overload:CronConfigure.ViewModels.JobViewModel.Job
+  name: Job
+  nameWithType: JobViewModel.Job
+  fullName: CronConfigure.ViewModels.JobViewModel.Job
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: CronConfigure.ViewModels.JobViewModel.State*
+  commentId: Overload:CronConfigure.ViewModels.JobViewModel.State
+  name: State
+  nameWithType: JobViewModel.State
+  fullName: CronConfigure.ViewModels.JobViewModel.State
+- uid: CronConfigure.ViewModels.JobViewModel.Id*
+  commentId: Overload:CronConfigure.ViewModels.JobViewModel.Id
+  name: Id
+  nameWithType: JobViewModel.Id
+  fullName: CronConfigure.ViewModels.JobViewModel.Id
+- uid: CronConfigure.ViewModels.JobViewModel.ExceptionDetails*
+  commentId: Overload:CronConfigure.ViewModels.JobViewModel.ExceptionDetails
+  name: ExceptionDetails
+  nameWithType: JobViewModel.ExceptionDetails
+  fullName: CronConfigure.ViewModels.JobViewModel.ExceptionDetails

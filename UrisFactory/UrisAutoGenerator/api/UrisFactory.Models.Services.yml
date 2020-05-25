@@ -1,0 +1,53 @@
+### YamlMime:ManagedReference
+items:
+- uid: UrisFactory.Models.Services
+  commentId: N:UrisFactory.Models.Services
+  id: UrisFactory.Models.Services
+  children:
+  - UrisFactory.Models.Services.ConfigJsonHandler
+  - UrisFactory.Models.Services.ISchemaConfigOperations
+  - UrisFactory.Models.Services.ReaderConfigJson
+  - UrisFactory.Models.Services.SchemaConfigFileOperations
+  - UrisFactory.Models.Services.UriFormer
+  langs:
+  - csharp
+  - vb
+  name: UrisFactory.Models.Services
+  nameWithType: UrisFactory.Models.Services
+  fullName: UrisFactory.Models.Services
+  type: Namespace
+  assemblies:
+  - UrisFactory
+references:
+- uid: UrisFactory.Models.Services.ConfigJsonHandler
+  commentId: T:UrisFactory.Models.Services.ConfigJsonHandler
+  parent: UrisFactory.Models.Services
+  name: ConfigJsonHandler
+  nameWithType: ConfigJsonHandler
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler
+- uid: UrisFactory.Models.Services.ISchemaConfigOperations
+  commentId: T:UrisFactory.Models.Services.ISchemaConfigOperations
+  parent: UrisFactory.Models.Services
+  name: ISchemaConfigOperations
+  nameWithType: ISchemaConfigOperations
+  fullName: UrisFactory.Models.Services.ISchemaConfigOperations
+- uid: UrisFactory.Models.Services.ReaderConfigJson
+  commentId: T:UrisFactory.Models.Services.ReaderConfigJson
+  name: ReaderConfigJson
+  nameWithType: ReaderConfigJson
+  fullName: UrisFactory.Models.Services.ReaderConfigJson
+- uid: UrisFactory.Models.Services.SchemaConfigFileOperations
+  commentId: T:UrisFactory.Models.Services.SchemaConfigFileOperations
+  name: SchemaConfigFileOperations
+  nameWithType: SchemaConfigFileOperations
+  fullName: UrisFactory.Models.Services.SchemaConfigFileOperations
+- uid: UrisFactory.Models.Services.UriFormer
+  commentId: T:UrisFactory.Models.Services.UriFormer
+  name: UriFormer
+  nameWithType: UriFormer
+  fullName: UrisFactory.Models.Services.UriFormer
+- uid: UrisFactory.Models.Services
+  commentId: N:UrisFactory.Models.Services
+  name: UrisFactory.Models.Services
+  nameWithType: UrisFactory.Models.Services
+  fullName: UrisFactory.Models.Services

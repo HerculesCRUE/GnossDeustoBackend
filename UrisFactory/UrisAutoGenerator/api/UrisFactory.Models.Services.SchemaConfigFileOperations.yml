@@ -1,0 +1,736 @@
+### YamlMime:ManagedReference
+items:
+- uid: UrisFactory.Models.Services.SchemaConfigFileOperations
+  commentId: T:UrisFactory.Models.Services.SchemaConfigFileOperations
+  id: SchemaConfigFileOperations
+  parent: UrisFactory.Models.Services
+  children:
+  - UrisFactory.Models.Services.SchemaConfigFileOperations.#ctor(UrisFactory.Models.Services.ConfigJsonHandler)
+  - UrisFactory.Models.Services.SchemaConfigFileOperations.GetContentType
+  - UrisFactory.Models.Services.SchemaConfigFileOperations.GetFileSchemaData
+  - UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigFile(Microsoft.AspNetCore.Http.IFormFile)
+  - UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigJson
+  langs:
+  - csharp
+  - vb
+  name: SchemaConfigFileOperations
+  nameWithType: SchemaConfigFileOperations
+  fullName: UrisFactory.Models.Services.SchemaConfigFileOperations
+  type: Class
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/SchemaConfigFileOperations.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: SchemaConfigFileOperations
+    path: Models/Services/SchemaConfigFileOperations.cs
+    startLine: 13
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: 'public class SchemaConfigFileOperations : ISchemaConfigOperations'
+    content.vb: >-
+      Public Class SchemaConfigFileOperations
+          Implements ISchemaConfigOperations
+  inheritance:
+  - System.Object
+  implements:
+  - UrisFactory.Models.Services.ISchemaConfigOperations
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: UrisFactory.Models.Services.SchemaConfigFileOperations.#ctor(UrisFactory.Models.Services.ConfigJsonHandler)
+  commentId: M:UrisFactory.Models.Services.SchemaConfigFileOperations.#ctor(UrisFactory.Models.Services.ConfigJsonHandler)
+  id: '#ctor(UrisFactory.Models.Services.ConfigJsonHandler)'
+  parent: UrisFactory.Models.Services.SchemaConfigFileOperations
+  langs:
+  - csharp
+  - vb
+  name: SchemaConfigFileOperations(ConfigJsonHandler)
+  nameWithType: SchemaConfigFileOperations.SchemaConfigFileOperations(ConfigJsonHandler)
+  fullName: UrisFactory.Models.Services.SchemaConfigFileOperations.SchemaConfigFileOperations(UrisFactory.Models.Services.ConfigJsonHandler)
+  type: Constructor
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/SchemaConfigFileOperations.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Services/SchemaConfigFileOperations.cs
+    startLine: 19
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: public SchemaConfigFileOperations(ConfigJsonHandler configJsonHandler)
+    parameters:
+    - id: configJsonHandler
+      type: UrisFactory.Models.Services.ConfigJsonHandler
+    content.vb: Public Sub New(configJsonHandler As ConfigJsonHandler)
+  overload: UrisFactory.Models.Services.SchemaConfigFileOperations.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.Services.SchemaConfigFileOperations.GetContentType
+  commentId: M:UrisFactory.Models.Services.SchemaConfigFileOperations.GetContentType
+  id: GetContentType
+  parent: UrisFactory.Models.Services.SchemaConfigFileOperations
+  langs:
+  - csharp
+  - vb
+  name: GetContentType()
+  nameWithType: SchemaConfigFileOperations.GetContentType()
+  fullName: UrisFactory.Models.Services.SchemaConfigFileOperations.GetContentType()
+  type: Method
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/SchemaConfigFileOperations.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetContentType
+    path: Models/Services/SchemaConfigFileOperations.cs
+    startLine: 23
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: public string GetContentType()
+    return:
+      type: System.String
+    content.vb: Public Function GetContentType As String
+  overload: UrisFactory.Models.Services.SchemaConfigFileOperations.GetContentType*
+  implements:
+  - UrisFactory.Models.Services.ISchemaConfigOperations.GetContentType
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.Services.SchemaConfigFileOperations.GetFileSchemaData
+  commentId: M:UrisFactory.Models.Services.SchemaConfigFileOperations.GetFileSchemaData
+  id: GetFileSchemaData
+  parent: UrisFactory.Models.Services.SchemaConfigFileOperations
+  langs:
+  - csharp
+  - vb
+  name: GetFileSchemaData()
+  nameWithType: SchemaConfigFileOperations.GetFileSchemaData()
+  fullName: UrisFactory.Models.Services.SchemaConfigFileOperations.GetFileSchemaData()
+  type: Method
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/SchemaConfigFileOperations.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetFileSchemaData
+    path: Models/Services/SchemaConfigFileOperations.cs
+    startLine: 30
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: public byte[] GetFileSchemaData()
+    return:
+      type: System.Byte[]
+    content.vb: Public Function GetFileSchemaData As Byte()
+  overload: UrisFactory.Models.Services.SchemaConfigFileOperations.GetFileSchemaData*
+  implements:
+  - UrisFactory.Models.Services.ISchemaConfigOperations.GetFileSchemaData
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigFile(Microsoft.AspNetCore.Http.IFormFile)
+  commentId: M:UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigFile(Microsoft.AspNetCore.Http.IFormFile)
+  id: SaveConfigFile(Microsoft.AspNetCore.Http.IFormFile)
+  parent: UrisFactory.Models.Services.SchemaConfigFileOperations
+  langs:
+  - csharp
+  - vb
+  name: SaveConfigFile(IFormFile)
+  nameWithType: SchemaConfigFileOperations.SaveConfigFile(IFormFile)
+  fullName: UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigFile(Microsoft.AspNetCore.Http.IFormFile)
+  type: Method
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/SchemaConfigFileOperations.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: SaveConfigFile
+    path: Models/Services/SchemaConfigFileOperations.cs
+    startLine: 40
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: public bool SaveConfigFile(IFormFile formFile)
+    parameters:
+    - id: formFile
+      type: Microsoft.AspNetCore.Http.IFormFile
+    return:
+      type: System.Boolean
+    content.vb: Public Function SaveConfigFile(formFile As IFormFile) As Boolean
+  overload: UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigFile*
+  implements:
+  - UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigFile(Microsoft.AspNetCore.Http.IFormFile)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigJson
+  commentId: M:UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigJson
+  id: SaveConfigJson
+  parent: UrisFactory.Models.Services.SchemaConfigFileOperations
+  langs:
+  - csharp
+  - vb
+  name: SaveConfigJson()
+  nameWithType: SchemaConfigFileOperations.SaveConfigJson()
+  fullName: UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigJson()
+  type: Method
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/Services/SchemaConfigFileOperations.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: SaveConfigJson
+    path: Models/Services/SchemaConfigFileOperations.cs
+    startLine: 49
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.Services
+  syntax:
+    content: public bool SaveConfigJson()
+    return:
+      type: System.Boolean
+    content.vb: Public Function SaveConfigJson As Boolean
+  overload: UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigJson*
+  implements:
+  - UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigJson
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: UrisFactory.Models.Services
+  commentId: N:UrisFactory.Models.Services
+  name: UrisFactory.Models.Services
+  nameWithType: UrisFactory.Models.Services
+  fullName: UrisFactory.Models.Services
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: UrisFactory.Models.Services.ISchemaConfigOperations
+  commentId: T:UrisFactory.Models.Services.ISchemaConfigOperations
+  parent: UrisFactory.Models.Services
+  name: ISchemaConfigOperations
+  nameWithType: ISchemaConfigOperations
+  fullName: UrisFactory.Models.Services.ISchemaConfigOperations
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: UrisFactory.Models.Services.SchemaConfigFileOperations.#ctor*
+  commentId: Overload:UrisFactory.Models.Services.SchemaConfigFileOperations.#ctor
+  name: SchemaConfigFileOperations
+  nameWithType: SchemaConfigFileOperations.SchemaConfigFileOperations
+  fullName: UrisFactory.Models.Services.SchemaConfigFileOperations.SchemaConfigFileOperations
+- uid: UrisFactory.Models.Services.ConfigJsonHandler
+  commentId: T:UrisFactory.Models.Services.ConfigJsonHandler
+  parent: UrisFactory.Models.Services
+  name: ConfigJsonHandler
+  nameWithType: ConfigJsonHandler
+  fullName: UrisFactory.Models.Services.ConfigJsonHandler
+- uid: UrisFactory.Models.Services.SchemaConfigFileOperations.GetContentType*
+  commentId: Overload:UrisFactory.Models.Services.SchemaConfigFileOperations.GetContentType
+  name: GetContentType
+  nameWithType: SchemaConfigFileOperations.GetContentType
+  fullName: UrisFactory.Models.Services.SchemaConfigFileOperations.GetContentType
+- uid: UrisFactory.Models.Services.ISchemaConfigOperations.GetContentType
+  commentId: M:UrisFactory.Models.Services.ISchemaConfigOperations.GetContentType
+  parent: UrisFactory.Models.Services.ISchemaConfigOperations
+  name: GetContentType()
+  nameWithType: ISchemaConfigOperations.GetContentType()
+  fullName: UrisFactory.Models.Services.ISchemaConfigOperations.GetContentType()
+  spec.csharp:
+  - uid: UrisFactory.Models.Services.ISchemaConfigOperations.GetContentType
+    name: GetContentType
+    nameWithType: ISchemaConfigOperations.GetContentType
+    fullName: UrisFactory.Models.Services.ISchemaConfigOperations.GetContentType
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: UrisFactory.Models.Services.ISchemaConfigOperations.GetContentType
+    name: GetContentType
+    nameWithType: ISchemaConfigOperations.GetContentType
+    fullName: UrisFactory.Models.Services.ISchemaConfigOperations.GetContentType
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: UrisFactory.Models.Services.SchemaConfigFileOperations.GetFileSchemaData*
+  commentId: Overload:UrisFactory.Models.Services.SchemaConfigFileOperations.GetFileSchemaData
+  name: GetFileSchemaData
+  nameWithType: SchemaConfigFileOperations.GetFileSchemaData
+  fullName: UrisFactory.Models.Services.SchemaConfigFileOperations.GetFileSchemaData
+- uid: UrisFactory.Models.Services.ISchemaConfigOperations.GetFileSchemaData
+  commentId: M:UrisFactory.Models.Services.ISchemaConfigOperations.GetFileSchemaData
+  parent: UrisFactory.Models.Services.ISchemaConfigOperations
+  name: GetFileSchemaData()
+  nameWithType: ISchemaConfigOperations.GetFileSchemaData()
+  fullName: UrisFactory.Models.Services.ISchemaConfigOperations.GetFileSchemaData()
+  spec.csharp:
+  - uid: UrisFactory.Models.Services.ISchemaConfigOperations.GetFileSchemaData
+    name: GetFileSchemaData
+    nameWithType: ISchemaConfigOperations.GetFileSchemaData
+    fullName: UrisFactory.Models.Services.ISchemaConfigOperations.GetFileSchemaData
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: UrisFactory.Models.Services.ISchemaConfigOperations.GetFileSchemaData
+    name: GetFileSchemaData
+    nameWithType: ISchemaConfigOperations.GetFileSchemaData
+    fullName: UrisFactory.Models.Services.ISchemaConfigOperations.GetFileSchemaData
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Byte[]
+  isExternal: true
+  name: Byte[]
+  nameWithType: Byte[]
+  fullName: System.Byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: System.Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigFile*
+  commentId: Overload:UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigFile
+  name: SaveConfigFile
+  nameWithType: SchemaConfigFileOperations.SaveConfigFile
+  fullName: UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigFile
+- uid: UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigFile(Microsoft.AspNetCore.Http.IFormFile)
+  commentId: M:UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigFile(Microsoft.AspNetCore.Http.IFormFile)
+  parent: UrisFactory.Models.Services.ISchemaConfigOperations
+  isExternal: true
+  name: SaveConfigFile(IFormFile)
+  nameWithType: ISchemaConfigOperations.SaveConfigFile(IFormFile)
+  fullName: UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigFile(Microsoft.AspNetCore.Http.IFormFile)
+  spec.csharp:
+  - uid: UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigFile(Microsoft.AspNetCore.Http.IFormFile)
+    name: SaveConfigFile
+    nameWithType: ISchemaConfigOperations.SaveConfigFile
+    fullName: UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigFile
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Http.IFormFile
+    name: IFormFile
+    nameWithType: IFormFile
+    fullName: Microsoft.AspNetCore.Http.IFormFile
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigFile(Microsoft.AspNetCore.Http.IFormFile)
+    name: SaveConfigFile
+    nameWithType: ISchemaConfigOperations.SaveConfigFile
+    fullName: UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigFile
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Http.IFormFile
+    name: IFormFile
+    nameWithType: IFormFile
+    fullName: Microsoft.AspNetCore.Http.IFormFile
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Http.IFormFile
+  commentId: T:Microsoft.AspNetCore.Http.IFormFile
+  parent: Microsoft.AspNetCore.Http
+  isExternal: true
+  name: IFormFile
+  nameWithType: IFormFile
+  fullName: Microsoft.AspNetCore.Http.IFormFile
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Microsoft.AspNetCore.Http
+  commentId: N:Microsoft.AspNetCore.Http
+  isExternal: true
+  name: Microsoft.AspNetCore.Http
+  nameWithType: Microsoft.AspNetCore.Http
+  fullName: Microsoft.AspNetCore.Http
+- uid: UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigJson*
+  commentId: Overload:UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigJson
+  name: SaveConfigJson
+  nameWithType: SchemaConfigFileOperations.SaveConfigJson
+  fullName: UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigJson
+- uid: UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigJson
+  commentId: M:UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigJson
+  parent: UrisFactory.Models.Services.ISchemaConfigOperations
+  name: SaveConfigJson()
+  nameWithType: ISchemaConfigOperations.SaveConfigJson()
+  fullName: UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigJson()
+  spec.csharp:
+  - uid: UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigJson
+    name: SaveConfigJson
+    nameWithType: ISchemaConfigOperations.SaveConfigJson
+    fullName: UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigJson
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigJson
+    name: SaveConfigJson
+    nameWithType: ISchemaConfigOperations.SaveConfigJson
+    fullName: UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigJson
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )

@@ -1,0 +1,693 @@
+### YamlMime:ManagedReference
+items:
+- uid: CronConfigure.Models.Hangfire.Set
+  commentId: T:CronConfigure.Models.Hangfire.Set
+  id: Set
+  parent: CronConfigure.Models.Hangfire
+  children:
+  - CronConfigure.Models.Hangfire.Set.ExpireAt
+  - CronConfigure.Models.Hangfire.Set.Key
+  - CronConfigure.Models.Hangfire.Set.Score
+  - CronConfigure.Models.Hangfire.Set.Value
+  langs:
+  - csharp
+  - vb
+  name: Set
+  nameWithType: Set
+  fullName: CronConfigure.Models.Hangfire.Set
+  type: Class
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/Set.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Set
+    path: Models/Hangfire/Set.cs
+    startLine: 10
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: >-
+      [Table("set", Schema = "hangfire")]
+
+      public class Set
+    content.vb: >-
+      <Table("set", Schema:="hangfire")>
+
+      Public Class Set
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.Schema.TableAttribute
+    ctor: System.ComponentModel.DataAnnotations.Schema.TableAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: set
+    namedArguments:
+    - name: Schema
+      type: System.String
+      value: hangfire
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: CronConfigure.Models.Hangfire.Set.Key
+  commentId: P:CronConfigure.Models.Hangfire.Set.Key
+  id: Key
+  parent: CronConfigure.Models.Hangfire.Set
+  langs:
+  - csharp
+  - vb
+  name: Key
+  nameWithType: Set.Key
+  fullName: CronConfigure.Models.Hangfire.Set.Key
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/Set.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Key
+    path: Models/Hangfire/Set.cs
+    startLine: 13
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: >-
+      [Column("key", Order = 0)]
+
+      [StringLength(100)]
+
+      public string Key { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <Column("key", Order:=0)>
+
+      <StringLength(100)>
+
+      Public Property Key As String
+  overload: CronConfigure.Models.Hangfire.Set.Key*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute
+    ctor: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: key
+    namedArguments:
+    - name: Order
+      type: System.Int32
+      value: 0
+  - type: System.ComponentModel.DataAnnotations.StringLengthAttribute
+    ctor: System.ComponentModel.DataAnnotations.StringLengthAttribute.#ctor(System.Int32)
+    arguments:
+    - type: System.Int32
+      value: 100
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Hangfire.Set.Score
+  commentId: P:CronConfigure.Models.Hangfire.Set.Score
+  id: Score
+  parent: CronConfigure.Models.Hangfire.Set
+  langs:
+  - csharp
+  - vb
+  name: Score
+  nameWithType: Set.Score
+  fullName: CronConfigure.Models.Hangfire.Set.Score
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/Set.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Score
+    path: Models/Hangfire/Set.cs
+    startLine: 17
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: >-
+      [Column("score")]
+
+      public double Score { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: >-
+      <Column("score")>
+
+      Public Property Score As Double
+  overload: CronConfigure.Models.Hangfire.Set.Score*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute
+    ctor: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: score
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Hangfire.Set.Value
+  commentId: P:CronConfigure.Models.Hangfire.Set.Value
+  id: Value
+  parent: CronConfigure.Models.Hangfire.Set
+  langs:
+  - csharp
+  - vb
+  name: Value
+  nameWithType: Set.Value
+  fullName: CronConfigure.Models.Hangfire.Set.Value
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/Set.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Value
+    path: Models/Hangfire/Set.cs
+    startLine: 20
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: >-
+      [Column("value", Order = 1)]
+
+      [StringLength(256)]
+
+      public string Value { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <Column("value", Order:=1)>
+
+      <StringLength(256)>
+
+      Public Property Value As String
+  overload: CronConfigure.Models.Hangfire.Set.Value*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute
+    ctor: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: value
+    namedArguments:
+    - name: Order
+      type: System.Int32
+      value: 1
+  - type: System.ComponentModel.DataAnnotations.StringLengthAttribute
+    ctor: System.ComponentModel.DataAnnotations.StringLengthAttribute.#ctor(System.Int32)
+    arguments:
+    - type: System.Int32
+      value: 256
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Hangfire.Set.ExpireAt
+  commentId: P:CronConfigure.Models.Hangfire.Set.ExpireAt
+  id: ExpireAt
+  parent: CronConfigure.Models.Hangfire.Set
+  langs:
+  - csharp
+  - vb
+  name: ExpireAt
+  nameWithType: Set.ExpireAt
+  fullName: CronConfigure.Models.Hangfire.Set.ExpireAt
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/Set.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ExpireAt
+    path: Models/Hangfire/Set.cs
+    startLine: 24
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: >-
+      [Column("expireat")]
+
+      public DateTime? ExpireAt { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.DateTime}
+    content.vb: >-
+      <Column("expireat")>
+
+      Public Property ExpireAt As Date?
+  overload: CronConfigure.Models.Hangfire.Set.ExpireAt*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute
+    ctor: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: expireat
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: CronConfigure.Models.Hangfire
+  commentId: N:CronConfigure.Models.Hangfire
+  name: CronConfigure.Models.Hangfire
+  nameWithType: CronConfigure.Models.Hangfire
+  fullName: CronConfigure.Models.Hangfire
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: CronConfigure.Models.Hangfire.Set.Key*
+  commentId: Overload:CronConfigure.Models.Hangfire.Set.Key
+  name: Key
+  nameWithType: Set.Key
+  fullName: CronConfigure.Models.Hangfire.Set.Key
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: CronConfigure.Models.Hangfire.Set.Score*
+  commentId: Overload:CronConfigure.Models.Hangfire.Set.Score
+  name: Score
+  nameWithType: Set.Score
+  fullName: CronConfigure.Models.Hangfire.Set.Score
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: CronConfigure.Models.Hangfire.Set.Value*
+  commentId: Overload:CronConfigure.Models.Hangfire.Set.Value
+  name: Value
+  nameWithType: Set.Value
+  fullName: CronConfigure.Models.Hangfire.Set.Value
+- uid: CronConfigure.Models.Hangfire.Set.ExpireAt*
+  commentId: Overload:CronConfigure.Models.Hangfire.Set.ExpireAt
+  name: ExpireAt
+  nameWithType: Set.ExpireAt
+  fullName: CronConfigure.Models.Hangfire.Set.ExpireAt
+- uid: System.Nullable{System.DateTime}
+  commentId: T:System.Nullable{System.DateTime}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<DateTime>
+  nameWithType: Nullable<DateTime>
+  fullName: System.Nullable<System.DateTime>
+  nameWithType.vb: Nullable(Of DateTime)
+  fullName.vb: System.Nullable(Of System.DateTime)
+  name.vb: Nullable(Of DateTime)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.DateTime
+    name: DateTime
+    nameWithType: DateTime
+    fullName: System.DateTime
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.DateTime
+    name: DateTime
+    nameWithType: DateTime
+    fullName: System.DateTime
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )

@@ -1,0 +1,568 @@
+### YamlMime:ManagedReference
+items:
+- uid: UrisFactory.Models.ConfigEntities.Component
+  commentId: T:UrisFactory.Models.ConfigEntities.Component
+  id: Component
+  parent: UrisFactory.Models.ConfigEntities
+  children:
+  - UrisFactory.Models.ConfigEntities.Component.FinalCharacter
+  - UrisFactory.Models.ConfigEntities.Component.Mandatory
+  - UrisFactory.Models.ConfigEntities.Component.UriComponent
+  - UrisFactory.Models.ConfigEntities.Component.UriComponentOrder
+  - UrisFactory.Models.ConfigEntities.Component.UriComponentValue
+  langs:
+  - csharp
+  - vb
+  name: Component
+  nameWithType: Component
+  fullName: UrisFactory.Models.ConfigEntities.Component
+  type: Class
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/ConfigEntities/Component.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Component
+    path: Models/ConfigEntities/Component.cs
+    startLine: 3
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.ConfigEntities
+  syntax:
+    content: public class Component
+    content.vb: Public Class Component
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: UrisFactory.Models.ConfigEntities.Component.UriComponent
+  commentId: P:UrisFactory.Models.ConfigEntities.Component.UriComponent
+  id: UriComponent
+  parent: UrisFactory.Models.ConfigEntities.Component
+  langs:
+  - csharp
+  - vb
+  name: UriComponent
+  nameWithType: Component.UriComponent
+  fullName: UrisFactory.Models.ConfigEntities.Component.UriComponent
+  type: Property
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/ConfigEntities/Component.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: UriComponent
+    path: Models/ConfigEntities/Component.cs
+    startLine: 5
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.ConfigEntities
+  syntax:
+    content: public string UriComponent { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property UriComponent As String
+  overload: UrisFactory.Models.ConfigEntities.Component.UriComponent*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.ConfigEntities.Component.UriComponentValue
+  commentId: P:UrisFactory.Models.ConfigEntities.Component.UriComponentValue
+  id: UriComponentValue
+  parent: UrisFactory.Models.ConfigEntities.Component
+  langs:
+  - csharp
+  - vb
+  name: UriComponentValue
+  nameWithType: Component.UriComponentValue
+  fullName: UrisFactory.Models.ConfigEntities.Component.UriComponentValue
+  type: Property
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/ConfigEntities/Component.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: UriComponentValue
+    path: Models/ConfigEntities/Component.cs
+    startLine: 6
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.ConfigEntities
+  syntax:
+    content: public string UriComponentValue { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property UriComponentValue As String
+  overload: UrisFactory.Models.ConfigEntities.Component.UriComponentValue*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.ConfigEntities.Component.UriComponentOrder
+  commentId: P:UrisFactory.Models.ConfigEntities.Component.UriComponentOrder
+  id: UriComponentOrder
+  parent: UrisFactory.Models.ConfigEntities.Component
+  langs:
+  - csharp
+  - vb
+  name: UriComponentOrder
+  nameWithType: Component.UriComponentOrder
+  fullName: UrisFactory.Models.ConfigEntities.Component.UriComponentOrder
+  type: Property
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/ConfigEntities/Component.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: UriComponentOrder
+    path: Models/ConfigEntities/Component.cs
+    startLine: 7
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.ConfigEntities
+  syntax:
+    content: public int UriComponentOrder { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property UriComponentOrder As Integer
+  overload: UrisFactory.Models.ConfigEntities.Component.UriComponentOrder*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.ConfigEntities.Component.Mandatory
+  commentId: P:UrisFactory.Models.ConfigEntities.Component.Mandatory
+  id: Mandatory
+  parent: UrisFactory.Models.ConfigEntities.Component
+  langs:
+  - csharp
+  - vb
+  name: Mandatory
+  nameWithType: Component.Mandatory
+  fullName: UrisFactory.Models.ConfigEntities.Component.Mandatory
+  type: Property
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/ConfigEntities/Component.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Mandatory
+    path: Models/ConfigEntities/Component.cs
+    startLine: 8
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.ConfigEntities
+  syntax:
+    content: public bool Mandatory { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property Mandatory As Boolean
+  overload: UrisFactory.Models.ConfigEntities.Component.Mandatory*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.Models.ConfigEntities.Component.FinalCharacter
+  commentId: P:UrisFactory.Models.ConfigEntities.Component.FinalCharacter
+  id: FinalCharacter
+  parent: UrisFactory.Models.ConfigEntities.Component
+  langs:
+  - csharp
+  - vb
+  name: FinalCharacter
+  nameWithType: Component.FinalCharacter
+  fullName: UrisFactory.Models.ConfigEntities.Component.FinalCharacter
+  type: Property
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/Models/ConfigEntities/Component.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: FinalCharacter
+    path: Models/ConfigEntities/Component.cs
+    startLine: 9
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.Models.ConfigEntities
+  syntax:
+    content: public string FinalCharacter { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property FinalCharacter As String
+  overload: UrisFactory.Models.ConfigEntities.Component.FinalCharacter*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: UrisFactory.Models.ConfigEntities
+  commentId: N:UrisFactory.Models.ConfigEntities
+  name: UrisFactory.Models.ConfigEntities
+  nameWithType: UrisFactory.Models.ConfigEntities
+  fullName: UrisFactory.Models.ConfigEntities
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: UrisFactory.Models.ConfigEntities.Component.UriComponent*
+  commentId: Overload:UrisFactory.Models.ConfigEntities.Component.UriComponent
+  name: UriComponent
+  nameWithType: Component.UriComponent
+  fullName: UrisFactory.Models.ConfigEntities.Component.UriComponent
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: UrisFactory.Models.ConfigEntities.Component.UriComponentValue*
+  commentId: Overload:UrisFactory.Models.ConfigEntities.Component.UriComponentValue
+  name: UriComponentValue
+  nameWithType: Component.UriComponentValue
+  fullName: UrisFactory.Models.ConfigEntities.Component.UriComponentValue
+- uid: UrisFactory.Models.ConfigEntities.Component.UriComponentOrder*
+  commentId: Overload:UrisFactory.Models.ConfigEntities.Component.UriComponentOrder
+  name: UriComponentOrder
+  nameWithType: Component.UriComponentOrder
+  fullName: UrisFactory.Models.ConfigEntities.Component.UriComponentOrder
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: UrisFactory.Models.ConfigEntities.Component.Mandatory*
+  commentId: Overload:UrisFactory.Models.ConfigEntities.Component.Mandatory
+  name: Mandatory
+  nameWithType: Component.Mandatory
+  fullName: UrisFactory.Models.ConfigEntities.Component.Mandatory
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: UrisFactory.Models.ConfigEntities.Component.FinalCharacter*
+  commentId: Overload:UrisFactory.Models.ConfigEntities.Component.FinalCharacter
+  name: FinalCharacter
+  nameWithType: Component.FinalCharacter
+  fullName: UrisFactory.Models.ConfigEntities.Component.FinalCharacter

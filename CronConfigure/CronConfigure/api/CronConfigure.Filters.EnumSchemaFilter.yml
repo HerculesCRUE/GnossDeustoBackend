@@ -1,0 +1,479 @@
+### YamlMime:ManagedReference
+items:
+- uid: CronConfigure.Filters.EnumSchemaFilter
+  commentId: T:CronConfigure.Filters.EnumSchemaFilter
+  id: EnumSchemaFilter
+  parent: CronConfigure.Filters
+  children:
+  - CronConfigure.Filters.EnumSchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)
+  langs:
+  - csharp
+  - vb
+  name: EnumSchemaFilter
+  nameWithType: EnumSchemaFilter
+  fullName: CronConfigure.Filters.EnumSchemaFilter
+  type: Class
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Filters/EnumSchemaFilter.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: EnumSchemaFilter
+    path: Filters/EnumSchemaFilter.cs
+    startLine: 10
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Filters
+  syntax:
+    content: 'public class EnumSchemaFilter : ISchemaFilter'
+    content.vb: >-
+      Public Class EnumSchemaFilter
+          Implements ISchemaFilter
+  inheritance:
+  - System.Object
+  implements:
+  - Swashbuckle.AspNetCore.SwaggerGen.ISchemaFilter
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: CronConfigure.Filters.EnumSchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)
+  commentId: M:CronConfigure.Filters.EnumSchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)
+  id: Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)
+  parent: CronConfigure.Filters.EnumSchemaFilter
+  langs:
+  - csharp
+  - vb
+  name: Apply(OpenApiSchema, SchemaFilterContext)
+  nameWithType: EnumSchemaFilter.Apply(OpenApiSchema, SchemaFilterContext)
+  fullName: CronConfigure.Filters.EnumSchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema, Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)
+  type: Method
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Filters/EnumSchemaFilter.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Apply
+    path: Filters/EnumSchemaFilter.cs
+    startLine: 12
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Filters
+  syntax:
+    content: public void Apply(OpenApiSchema model, SchemaFilterContext context)
+    parameters:
+    - id: model
+      type: Microsoft.OpenApi.Models.OpenApiSchema
+    - id: context
+      type: Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext
+    content.vb: Public Sub Apply(model As OpenApiSchema, context As SchemaFilterContext)
+  overload: CronConfigure.Filters.EnumSchemaFilter.Apply*
+  implements:
+  - Swashbuckle.AspNetCore.SwaggerGen.ISchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: CronConfigure.Filters
+  commentId: N:CronConfigure.Filters
+  name: CronConfigure.Filters
+  nameWithType: CronConfigure.Filters
+  fullName: CronConfigure.Filters
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Swashbuckle.AspNetCore.SwaggerGen.ISchemaFilter
+  commentId: T:Swashbuckle.AspNetCore.SwaggerGen.ISchemaFilter
+  parent: Swashbuckle.AspNetCore.SwaggerGen
+  isExternal: true
+  name: ISchemaFilter
+  nameWithType: ISchemaFilter
+  fullName: Swashbuckle.AspNetCore.SwaggerGen.ISchemaFilter
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Swashbuckle.AspNetCore.SwaggerGen
+  commentId: N:Swashbuckle.AspNetCore.SwaggerGen
+  isExternal: true
+  name: Swashbuckle.AspNetCore.SwaggerGen
+  nameWithType: Swashbuckle.AspNetCore.SwaggerGen
+  fullName: Swashbuckle.AspNetCore.SwaggerGen
+- uid: CronConfigure.Filters.EnumSchemaFilter.Apply*
+  commentId: Overload:CronConfigure.Filters.EnumSchemaFilter.Apply
+  name: Apply
+  nameWithType: EnumSchemaFilter.Apply
+  fullName: CronConfigure.Filters.EnumSchemaFilter.Apply
+- uid: Swashbuckle.AspNetCore.SwaggerGen.ISchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)
+  commentId: M:Swashbuckle.AspNetCore.SwaggerGen.ISchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)
+  parent: Swashbuckle.AspNetCore.SwaggerGen.ISchemaFilter
+  isExternal: true
+  name: Apply(OpenApiSchema, SchemaFilterContext)
+  nameWithType: ISchemaFilter.Apply(OpenApiSchema, SchemaFilterContext)
+  fullName: Swashbuckle.AspNetCore.SwaggerGen.ISchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema, Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)
+  spec.csharp:
+  - uid: Swashbuckle.AspNetCore.SwaggerGen.ISchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)
+    name: Apply
+    nameWithType: ISchemaFilter.Apply
+    fullName: Swashbuckle.AspNetCore.SwaggerGen.ISchemaFilter.Apply
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.OpenApi.Models.OpenApiSchema
+    name: OpenApiSchema
+    nameWithType: OpenApiSchema
+    fullName: Microsoft.OpenApi.Models.OpenApiSchema
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext
+    name: SchemaFilterContext
+    nameWithType: SchemaFilterContext
+    fullName: Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Swashbuckle.AspNetCore.SwaggerGen.ISchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)
+    name: Apply
+    nameWithType: ISchemaFilter.Apply
+    fullName: Swashbuckle.AspNetCore.SwaggerGen.ISchemaFilter.Apply
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.OpenApi.Models.OpenApiSchema
+    name: OpenApiSchema
+    nameWithType: OpenApiSchema
+    fullName: Microsoft.OpenApi.Models.OpenApiSchema
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext
+    name: SchemaFilterContext
+    nameWithType: SchemaFilterContext
+    fullName: Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.OpenApi.Models.OpenApiSchema
+  commentId: T:Microsoft.OpenApi.Models.OpenApiSchema
+  parent: Microsoft.OpenApi.Models
+  isExternal: true
+  name: OpenApiSchema
+  nameWithType: OpenApiSchema
+  fullName: Microsoft.OpenApi.Models.OpenApiSchema
+- uid: Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext
+  commentId: T:Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext
+  parent: Swashbuckle.AspNetCore.SwaggerGen
+  isExternal: true
+  name: SchemaFilterContext
+  nameWithType: SchemaFilterContext
+  fullName: Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext
+- uid: Microsoft.OpenApi.Models
+  commentId: N:Microsoft.OpenApi.Models
+  isExternal: true
+  name: Microsoft.OpenApi.Models
+  nameWithType: Microsoft.OpenApi.Models
+  fullName: Microsoft.OpenApi.Models

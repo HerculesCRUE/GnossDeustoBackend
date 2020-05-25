@@ -1,0 +1,522 @@
+### YamlMime:ManagedReference
+items:
+- uid: UrisFactory.ViewModels.InfoUriStructure
+  commentId: T:UrisFactory.ViewModels.InfoUriStructure
+  id: InfoUriStructure
+  parent: UrisFactory.ViewModels
+  children:
+  - UrisFactory.ViewModels.InfoUriStructure.ResourcesClass
+  - UrisFactory.ViewModels.InfoUriStructure.UriStructure
+  langs:
+  - csharp
+  - vb
+  name: InfoUriStructure
+  nameWithType: InfoUriStructure
+  fullName: UrisFactory.ViewModels.InfoUriStructure
+  type: Class
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/ViewModels/InfoUriStructure.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: InfoUriStructure
+    path: ViewModels/InfoUriStructure.cs
+    startLine: 8
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.ViewModels
+  syntax:
+    content: public class InfoUriStructure
+    content.vb: Public Class InfoUriStructure
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: UrisFactory.ViewModels.InfoUriStructure.UriStructure
+  commentId: P:UrisFactory.ViewModels.InfoUriStructure.UriStructure
+  id: UriStructure
+  parent: UrisFactory.ViewModels.InfoUriStructure
+  langs:
+  - csharp
+  - vb
+  name: UriStructure
+  nameWithType: InfoUriStructure.UriStructure
+  fullName: UrisFactory.ViewModels.InfoUriStructure.UriStructure
+  type: Property
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/ViewModels/InfoUriStructure.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: UriStructure
+    path: ViewModels/InfoUriStructure.cs
+    startLine: 10
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.ViewModels
+  syntax:
+    content: public UriStructure UriStructure { get; set; }
+    parameters: []
+    return:
+      type: UrisFactory.Models.ConfigEntities.UriStructure
+    content.vb: Public Property UriStructure As UriStructure
+  overload: UrisFactory.ViewModels.InfoUriStructure.UriStructure*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: UrisFactory.ViewModels.InfoUriStructure.ResourcesClass
+  commentId: P:UrisFactory.ViewModels.InfoUriStructure.ResourcesClass
+  id: ResourcesClass
+  parent: UrisFactory.ViewModels.InfoUriStructure
+  langs:
+  - csharp
+  - vb
+  name: ResourcesClass
+  nameWithType: InfoUriStructure.ResourcesClass
+  fullName: UrisFactory.ViewModels.InfoUriStructure.ResourcesClass
+  type: Property
+  source:
+    remote:
+      path: UrisFactory/UrisAutoGenerator/ViewModels/InfoUriStructure.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ResourcesClass
+    path: ViewModels/InfoUriStructure.cs
+    startLine: 12
+  assemblies:
+  - UrisFactory
+  namespace: UrisFactory.ViewModels
+  syntax:
+    content: public List<ResourcesClass> ResourcesClass { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{UrisFactory.Models.ConfigEntities.ResourcesClass}
+    content.vb: Public Property ResourcesClass As List(Of ResourcesClass)
+  overload: UrisFactory.ViewModels.InfoUriStructure.ResourcesClass*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: UrisFactory.ViewModels
+  commentId: N:UrisFactory.ViewModels
+  name: UrisFactory.ViewModels
+  nameWithType: UrisFactory.ViewModels
+  fullName: UrisFactory.ViewModels
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: UrisFactory.ViewModels.InfoUriStructure.UriStructure*
+  commentId: Overload:UrisFactory.ViewModels.InfoUriStructure.UriStructure
+  name: UriStructure
+  nameWithType: InfoUriStructure.UriStructure
+  fullName: UrisFactory.ViewModels.InfoUriStructure.UriStructure
+- uid: UrisFactory.Models.ConfigEntities.UriStructure
+  commentId: T:UrisFactory.Models.ConfigEntities.UriStructure
+  parent: UrisFactory.Models.ConfigEntities
+  name: UriStructure
+  nameWithType: UriStructure
+  fullName: UrisFactory.Models.ConfigEntities.UriStructure
+- uid: UrisFactory.Models.ConfigEntities
+  commentId: N:UrisFactory.Models.ConfigEntities
+  name: UrisFactory.Models.ConfigEntities
+  nameWithType: UrisFactory.Models.ConfigEntities
+  fullName: UrisFactory.Models.ConfigEntities
+- uid: UrisFactory.ViewModels.InfoUriStructure.ResourcesClass*
+  commentId: Overload:UrisFactory.ViewModels.InfoUriStructure.ResourcesClass
+  name: ResourcesClass
+  nameWithType: InfoUriStructure.ResourcesClass
+  fullName: UrisFactory.ViewModels.InfoUriStructure.ResourcesClass
+- uid: System.Collections.Generic.List{UrisFactory.Models.ConfigEntities.ResourcesClass}
+  commentId: T:System.Collections.Generic.List{UrisFactory.Models.ConfigEntities.ResourcesClass}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<ResourcesClass>
+  nameWithType: List<ResourcesClass>
+  fullName: System.Collections.Generic.List<UrisFactory.Models.ConfigEntities.ResourcesClass>
+  nameWithType.vb: List(Of ResourcesClass)
+  fullName.vb: System.Collections.Generic.List(Of UrisFactory.Models.ConfigEntities.ResourcesClass)
+  name.vb: List(Of ResourcesClass)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: UrisFactory.Models.ConfigEntities.ResourcesClass
+    name: ResourcesClass
+    nameWithType: ResourcesClass
+    fullName: UrisFactory.Models.ConfigEntities.ResourcesClass
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: UrisFactory.Models.ConfigEntities.ResourcesClass
+    name: ResourcesClass
+    nameWithType: ResourcesClass
+    fullName: UrisFactory.Models.ConfigEntities.ResourcesClass
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic

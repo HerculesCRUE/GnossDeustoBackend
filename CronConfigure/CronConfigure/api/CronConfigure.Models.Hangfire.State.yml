@@ -1,0 +1,733 @@
+### YamlMime:ManagedReference
+items:
+- uid: CronConfigure.Models.Hangfire.State
+  commentId: T:CronConfigure.Models.Hangfire.State
+  id: State
+  parent: CronConfigure.Models.Hangfire
+  children:
+  - CronConfigure.Models.Hangfire.State.CreatedAt
+  - CronConfigure.Models.Hangfire.State.Data
+  - CronConfigure.Models.Hangfire.State.Id
+  - CronConfigure.Models.Hangfire.State.Job
+  - CronConfigure.Models.Hangfire.State.JobId
+  - CronConfigure.Models.Hangfire.State.Name
+  - CronConfigure.Models.Hangfire.State.Reason
+  langs:
+  - csharp
+  - vb
+  name: State
+  nameWithType: State
+  fullName: CronConfigure.Models.Hangfire.State
+  type: Class
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/State.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: State
+    path: Models/Hangfire/State.cs
+    startLine: 10
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: >-
+      [Table("state", Schema = "hangfire")]
+
+      public class State
+    content.vb: >-
+      <Table("state", Schema:="hangfire")>
+
+      Public Class State
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.Schema.TableAttribute
+    ctor: System.ComponentModel.DataAnnotations.Schema.TableAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: state
+    namedArguments:
+    - name: Schema
+      type: System.String
+      value: hangfire
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: CronConfigure.Models.Hangfire.State.Id
+  commentId: P:CronConfigure.Models.Hangfire.State.Id
+  id: Id
+  parent: CronConfigure.Models.Hangfire.State
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: State.Id
+  fullName: CronConfigure.Models.Hangfire.State.Id
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/State.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Id
+    path: Models/Hangfire/State.cs
+    startLine: 13
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: >-
+      [Column(Order = 0)]
+
+      public long Id { get; set; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: >-
+      <Column(Order:=0)>
+
+      Public Property Id As Long
+  overload: CronConfigure.Models.Hangfire.State.Id*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute
+    ctor: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Order
+      type: System.Int32
+      value: 0
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Hangfire.State.JobId
+  commentId: P:CronConfigure.Models.Hangfire.State.JobId
+  id: JobId
+  parent: CronConfigure.Models.Hangfire.State
+  langs:
+  - csharp
+  - vb
+  name: JobId
+  nameWithType: State.JobId
+  fullName: CronConfigure.Models.Hangfire.State.JobId
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/State.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: JobId
+    path: Models/Hangfire/State.cs
+    startLine: 16
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: >-
+      [Column(Order = 1)]
+
+      public long JobId { get; set; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: >-
+      <Column(Order:=1)>
+
+      Public Property JobId As Long
+  overload: CronConfigure.Models.Hangfire.State.JobId*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute
+    ctor: System.ComponentModel.DataAnnotations.Schema.ColumnAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Order
+      type: System.Int32
+      value: 1
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Hangfire.State.Name
+  commentId: P:CronConfigure.Models.Hangfire.State.Name
+  id: Name
+  parent: CronConfigure.Models.Hangfire.State
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: State.Name
+  fullName: CronConfigure.Models.Hangfire.State.Name
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/State.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Name
+    path: Models/Hangfire/State.cs
+    startLine: 19
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: >-
+      [Required]
+
+      [StringLength(20)]
+
+      public string Name { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <Required>
+
+      <StringLength(20)>
+
+      Public Property Name As String
+  overload: CronConfigure.Models.Hangfire.State.Name*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.RequiredAttribute
+    ctor: System.ComponentModel.DataAnnotations.RequiredAttribute.#ctor
+    arguments: []
+  - type: System.ComponentModel.DataAnnotations.StringLengthAttribute
+    ctor: System.ComponentModel.DataAnnotations.StringLengthAttribute.#ctor(System.Int32)
+    arguments:
+    - type: System.Int32
+      value: 20
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Hangfire.State.Reason
+  commentId: P:CronConfigure.Models.Hangfire.State.Reason
+  id: Reason
+  parent: CronConfigure.Models.Hangfire.State
+  langs:
+  - csharp
+  - vb
+  name: Reason
+  nameWithType: State.Reason
+  fullName: CronConfigure.Models.Hangfire.State.Reason
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/State.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Reason
+    path: Models/Hangfire/State.cs
+    startLine: 23
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: >-
+      [StringLength(100)]
+
+      public string Reason { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <StringLength(100)>
+
+      Public Property Reason As String
+  overload: CronConfigure.Models.Hangfire.State.Reason*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.StringLengthAttribute
+    ctor: System.ComponentModel.DataAnnotations.StringLengthAttribute.#ctor(System.Int32)
+    arguments:
+    - type: System.Int32
+      value: 100
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Hangfire.State.CreatedAt
+  commentId: P:CronConfigure.Models.Hangfire.State.CreatedAt
+  id: CreatedAt
+  parent: CronConfigure.Models.Hangfire.State
+  langs:
+  - csharp
+  - vb
+  name: CreatedAt
+  nameWithType: State.CreatedAt
+  fullName: CronConfigure.Models.Hangfire.State.CreatedAt
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/State.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: CreatedAt
+    path: Models/Hangfire/State.cs
+    startLine: 26
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: public DateTime CreatedAt { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property CreatedAt As Date
+  overload: CronConfigure.Models.Hangfire.State.CreatedAt*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Hangfire.State.Data
+  commentId: P:CronConfigure.Models.Hangfire.State.Data
+  id: Data
+  parent: CronConfigure.Models.Hangfire.State
+  langs:
+  - csharp
+  - vb
+  name: Data
+  nameWithType: State.Data
+  fullName: CronConfigure.Models.Hangfire.State.Data
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/State.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Data
+    path: Models/Hangfire/State.cs
+    startLine: 28
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: public string Data { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Data As String
+  overload: CronConfigure.Models.Hangfire.State.Data*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: CronConfigure.Models.Hangfire.State.Job
+  commentId: P:CronConfigure.Models.Hangfire.State.Job
+  id: Job
+  parent: CronConfigure.Models.Hangfire.State
+  langs:
+  - csharp
+  - vb
+  name: Job
+  nameWithType: State.Job
+  fullName: CronConfigure.Models.Hangfire.State.Job
+  type: Property
+  source:
+    remote:
+      path: CronConfigure/CronConfigure/Models/Hangfire/State.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Job
+    path: Models/Hangfire/State.cs
+    startLine: 30
+  assemblies:
+  - CronConfigure
+  namespace: CronConfigure.Models.Hangfire
+  syntax:
+    content: public virtual Job Job { get; set; }
+    parameters: []
+    return:
+      type: CronConfigure.Models.Hangfire.Job
+    content.vb: Public Overridable Property Job As Job
+  overload: CronConfigure.Models.Hangfire.State.Job*
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
+references:
+- uid: CronConfigure.Models.Hangfire
+  commentId: N:CronConfigure.Models.Hangfire
+  name: CronConfigure.Models.Hangfire
+  nameWithType: CronConfigure.Models.Hangfire
+  fullName: CronConfigure.Models.Hangfire
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: CronConfigure.Models.Hangfire.State.Id*
+  commentId: Overload:CronConfigure.Models.Hangfire.State.Id
+  name: Id
+  nameWithType: State.Id
+  fullName: CronConfigure.Models.Hangfire.State.Id
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  name: Int64
+  nameWithType: Int64
+  fullName: System.Int64
+- uid: CronConfigure.Models.Hangfire.State.JobId*
+  commentId: Overload:CronConfigure.Models.Hangfire.State.JobId
+  name: JobId
+  nameWithType: State.JobId
+  fullName: CronConfigure.Models.Hangfire.State.JobId
+- uid: CronConfigure.Models.Hangfire.State.Name*
+  commentId: Overload:CronConfigure.Models.Hangfire.State.Name
+  name: Name
+  nameWithType: State.Name
+  fullName: CronConfigure.Models.Hangfire.State.Name
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: CronConfigure.Models.Hangfire.State.Reason*
+  commentId: Overload:CronConfigure.Models.Hangfire.State.Reason
+  name: Reason
+  nameWithType: State.Reason
+  fullName: CronConfigure.Models.Hangfire.State.Reason
+- uid: CronConfigure.Models.Hangfire.State.CreatedAt*
+  commentId: Overload:CronConfigure.Models.Hangfire.State.CreatedAt
+  name: CreatedAt
+  nameWithType: State.CreatedAt
+  fullName: CronConfigure.Models.Hangfire.State.CreatedAt
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: CronConfigure.Models.Hangfire.State.Data*
+  commentId: Overload:CronConfigure.Models.Hangfire.State.Data
+  name: Data
+  nameWithType: State.Data
+  fullName: CronConfigure.Models.Hangfire.State.Data
+- uid: CronConfigure.Models.Hangfire.State.Job*
+  commentId: Overload:CronConfigure.Models.Hangfire.State.Job
+  name: Job
+  nameWithType: State.Job
+  fullName: CronConfigure.Models.Hangfire.State.Job
+- uid: CronConfigure.Models.Hangfire.Job
+  commentId: T:CronConfigure.Models.Hangfire.Job
+  parent: CronConfigure.Models.Hangfire
+  name: Job
+  nameWithType: Job
+  fullName: CronConfigure.Models.Hangfire.Job

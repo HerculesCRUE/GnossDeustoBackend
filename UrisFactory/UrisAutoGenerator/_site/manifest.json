@@ -1,0 +1,666 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/Hercules/AutoGeneradorUris/UrisFactoryGit/GnossDeustoBackend/UrisFactory/UrisAutoGenerator",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Controllers.FactoryController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Controllers.FactoryController.html",
+          "hash": "LlQDtD45gIKhvrV6TdzKUA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Controllers.SchemaController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Controllers.SchemaController.html",
+          "hash": "17014ClyNBNKbThKRfcu6A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Controllers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Controllers.html",
+          "hash": "pjR6OlgrD4ds0IgLqsTbLQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Extra.Exceptions.FailedLoadConfigJsonException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Extra.Exceptions.FailedLoadConfigJsonException.html",
+          "hash": "mYEHhAg/tGYTq/L6AbHeww=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Extra.Exceptions.ParametersNotConfiguredException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Extra.Exceptions.ParametersNotConfiguredException.html",
+          "hash": "wDfYV/HcCH60scqwFcgslQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Extra.Exceptions.UriStructureBadInfoException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Extra.Exceptions.UriStructureBadInfoException.html",
+          "hash": "mF1WMvBfsLkXaYc/Y5Ybbg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Extra.Exceptions.UriStructureConfiguredException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Extra.Exceptions.UriStructureConfiguredException.html",
+          "hash": "re9Cqlnsrd1rRe2kR4GZ5w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Extra.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Extra.Exceptions.html",
+          "hash": "A7/KJL8KuPW6gmGq2+Es8g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Filters.AddParametersFilter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Filters.AddParametersFilter.html",
+          "hash": "H0PHLGumtFlFWzrmWnfOWw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Filters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Filters.html",
+          "hash": "gmQxUeFGPPjqKRotYnu8zQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Middlewares.ErrorHandlingMiddleware.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Middlewares.ErrorHandlingMiddleware.html",
+          "hash": "7JqdqPOvAwWtxoFSuRtCnQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Middlewares.LoadConfigJsonMiddleware.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Middlewares.LoadConfigJsonMiddleware.html",
+          "hash": "hOck+HlhLd0en118qminRA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Middlewares.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Middlewares.html",
+          "hash": "wM8QlBuSVj/gTTC1X8ZAzw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ModelExamples.AddUriStructureErrorResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ModelExamples.AddUriStructureErrorResponse.html",
+          "hash": "MI5z8CPEIN4LKuBWBafasA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ModelExamples.AddUriStructureResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ModelExamples.AddUriStructureResponse.html",
+          "hash": "HyFZNUWkbNjAXvWiblVMPA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ModelExamples.DeleteUriStructureErrorResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ModelExamples.DeleteUriStructureErrorResponse.html",
+          "hash": "NOmI+6ZOGIDWHwvk24U49g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ModelExamples.DeleteUriStructureResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ModelExamples.DeleteUriStructureResponse.html",
+          "hash": "0W3YTLIdd92OOaYolY1GCA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ModelExamples.InfoStructureErrorResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ModelExamples.InfoStructureErrorResponse.html",
+          "hash": "JyQNTqdXh7QRzPsRPJ7mew=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ModelExamples.ReplaceSchemaResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ModelExamples.ReplaceSchemaResponse.html",
+          "hash": "b3DUuQIVQZ3n+zOCmgnqpA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ModelExamples.ReplaceShemaErrorResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ModelExamples.ReplaceShemaErrorResponse.html",
+          "hash": "rY1sM1Nk/4hxIZfnfRKdTA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ModelExamples.Uri.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ModelExamples.Uri.html",
+          "hash": "pSOTsY+ewwz85vdie7w3Ow=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ModelExamples.UriErrorExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ModelExamples.UriErrorExample.html",
+          "hash": "nPNf4bZ6+UGlURhtE01Jkg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ModelExamples.UriStructureGeneralExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ModelExamples.UriStructureGeneralExample.html",
+          "hash": "fYuSIx+98pAXeiMb/c7geg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ModelExamples.UriStructureInfoRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ModelExamples.UriStructureInfoRequest.html",
+          "hash": "vSU/GH8NQbKxWoryN6Mxjw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ModelExamples.UrisFactoryErrorReponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ModelExamples.UrisFactoryErrorReponse.html",
+          "hash": "eVi+uNrJ20HjOVDTprVtLQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ModelExamples.UrisFactoryResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ModelExamples.UrisFactoryResponse.html",
+          "hash": "iz4Acn9b5VeITTGLK8DrXg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ModelExamples.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ModelExamples.html",
+          "hash": "IpuQ0hc7Y/XJaqGJLPpK1A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Models.ConfigEntities.Characters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Models.ConfigEntities.Characters.html",
+          "hash": "mj0yff5p4ntc6dC8Hmwyhg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Models.ConfigEntities.Component.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Models.ConfigEntities.Component.html",
+          "hash": "oDHF9Mjpv/VmNq6ovxw1dg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Models.ConfigEntities.ResourcesClass.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Models.ConfigEntities.ResourcesClass.html",
+          "hash": "Ls8NO5N4Mkzm2PPXLwTUsw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Models.ConfigEntities.UriComponentsList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Models.ConfigEntities.UriComponentsList.html",
+          "hash": "KNg8M7TbxsyAvxnn4+jYXA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Models.ConfigEntities.UriStructure.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Models.ConfigEntities.UriStructure.html",
+          "hash": "e5gNDjya5+F8Wsk65EOnmg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Models.ConfigEntities.UriStructureGeneral.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Models.ConfigEntities.UriStructureGeneral.html",
+          "hash": "QYFDK7iZsX97maUeGW2Ayg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Models.ConfigEntities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Models.ConfigEntities.html",
+          "hash": "t7k2MIAeonHlcp5S2BcfyQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Models.Services.ConfigJsonHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Models.Services.ConfigJsonHandler.html",
+          "hash": "NLtqgVCqjqGnEM+t3NVtYw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Models.Services.ISchemaConfigOperations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Models.Services.ISchemaConfigOperations.html",
+          "hash": "rUAFpT7eppIMWFSDW+riFw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Models.Services.ReaderConfigJson.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Models.Services.ReaderConfigJson.html",
+          "hash": "0zFQFZms4zDMl0k1WJso7w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Models.Services.SchemaConfigFileOperations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Models.Services.SchemaConfigFileOperations.html",
+          "hash": "eM4i3a/RBVzI1E1KmCqu7g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Models.Services.UriFormer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Models.Services.UriFormer.html",
+          "hash": "Nqq7CMli5bh+T6BLZ8e1KQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Models.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Models.Services.html",
+          "hash": "CUe3LqA9W2fodnmGl0cYEA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Program.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Program.html",
+          "hash": "a5wAND3iQ6MyW572DI3Vkw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.Startup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.Startup.html",
+          "hash": "7CzCWu06Qi2AgSE17mdjWw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ViewModels.InfoUriStructure.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ViewModels.InfoUriStructure.html",
+          "hash": "dND+U+0cT+fHzCfvFoPHCg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.ViewModels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.ViewModels.html",
+          "hash": "DcioiC8d2SgId/bNKsLOzQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UrisFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UrisFactory.html",
+          "hash": "jFygHhAHEi/yAQN7S000NQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "DXHnx9y+z8isaFmLconh1g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "s/FC7QTpZILYwfy2rO839Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "6N8kuRtmi57eWyI0tasJgg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "gB8AESyvNru97tzIZofEEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "bnGukJ0tqy4oNA+liA72UQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "+rHUkRZHZRi5gd1aTU6lJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 3
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 45,
+          "skipped_file_count": 45
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
