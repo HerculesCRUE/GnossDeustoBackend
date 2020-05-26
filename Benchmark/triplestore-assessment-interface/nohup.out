@@ -1,0 +1,1153 @@
+ * Serving Flask app "hercules" (lazy loading)
+ * Environment: development
+ * Debug mode: on
+ * Running on http://0.0.0.0:8400/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+127.0.0.1 - - [24/Mar/2020 09:36:15] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:36:43] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:36:43] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+/usr/local/lib/python3.6/site-packages/SPARQLWrapper/Wrapper.py:684: RuntimeWarning: Sending Accept header '*/*' because unexpected returned format 'json' in a 'DESCRIBE' SPARQL query form
+  warnings.warn("Sending Accept header '*/*' because unexpected returned format '%s' in a '%s' SPARQL query form" % (self.returnFormat, self.queryType), RuntimeWarning)
+127.0.0.1 - - [24/Mar/2020 09:36:51] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 09:36:51] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:36:51] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:37:15] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:37:40] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:37:46] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/P1_6 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 09:37:46] "[37mGET /criterion/P1_6 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:37:47] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:38:00] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:38:05] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:38:07] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:38:11] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:38:15] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:38:21] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:38:26] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:38:31] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:38:37] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/P1_6 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 09:38:37] "[37mGET /criterion/P1_6 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:38:37] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:38:40] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:38:50] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:39:03] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:39:16] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:39:25] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/M1_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 09:39:25] "[37mGET /criterion/M1_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:39:26] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:39:31] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:39:40] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:43:29] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:43:29] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:43:29] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/Mar/2020 09:43:32] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:43:35] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F1_2 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 09:43:35] "[37mGET /criterion/F1_2 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:43:35] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:43:38] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:43:40] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:43:42] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/stardog HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 09:43:42] "[37mGET /store/stardog HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:44:16] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:48:04] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:48:04] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 09:48:04] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/Mar/2020 10:38:11] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:39:08] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 10:39:08] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:39:32] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:39:37] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:39:39] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:39:41] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:39:42] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:39:49] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F3_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 10:39:49] "[37mGET /criterion/F3_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:39:49] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:40:01] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:40:03] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:40:05] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:40:08] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:52:20] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:52:23] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 10:52:24] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:55:01] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:55:06] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F2_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 10:55:06] "[37mGET /criterion/F2_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:55:07] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 10:55:13] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/allegrograph HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 10:55:13] "[37mGET /store/allegrograph HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 11:06:49] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 11:06:52] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F3_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 11:06:52] "[37mGET /criterion/F3_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 11:06:53] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 11:10:57] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 11:11:03] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 11:11:05] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 11:11:05] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 12:53:29] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/Mar/2020 12:53:33] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 12:53:33] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 12:53:36] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 12:53:40] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F1_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 12:53:40] "[37mGET /criterion/F1_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 12:53:41] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 12:55:40] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/allegrograph HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 12:55:41] "[37mGET /store/allegrograph HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 13:17:29] "[37mGET /criterion/F1_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 13:17:29] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 13:19:59] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/allegrograph HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 13:19:59] "[37mGET /store/allegrograph HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 13:21:10] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 13:22:09] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F1_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 13:22:09] "[37mGET /criterion/F1_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 13:22:10] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 13:31:09] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 13:31:15] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 13:31:20] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F1_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 13:31:20] "[37mGET /criterion/F1_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 13:31:21] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 13:32:40] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/allegrograph HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 13:32:40] "[37mGET /store/allegrograph HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 13:32:43] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 14:28:14] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 14:28:14] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 14:28:15] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 14:28:16] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 14:51:00] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 14:51:00] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 14:51:03] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/virtuoso HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 14:51:03] "[37mGET /store/virtuoso HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 14:51:03] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 20:02:31] "[37mGET /store/virtuoso HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 20:02:31] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 20:10:05] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/Mar/2020 20:10:06] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 21:23:39] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/allegrograph HTTP/1.1[0m" 302 -
+127.0.0.1 - - [24/Mar/2020 21:23:40] "[37mGET /store/allegrograph HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/Mar/2020 21:23:43] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 05:32:13] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 05:32:13] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 05:40:40] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 05:40:41] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 05:40:41] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [25/Mar/2020 05:40:55] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 07:40:11] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 07:40:11] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 07:40:36] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 07:40:36] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:04:02] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:04:02] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:04:02] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [25/Mar/2020 08:04:07] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:04:20] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/P1_4 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [25/Mar/2020 08:04:20] "[37mGET /criterion/P1_4 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:04:21] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:04:24] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/allegrograph HTTP/1.1[0m" 302 -
+127.0.0.1 - - [25/Mar/2020 08:04:25] "[37mGET /store/allegrograph HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:13:56] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:14:02] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:14:17] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:14:19] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:14:25] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [25/Mar/2020 08:14:25] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:16:30] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:16:40] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/P2_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [25/Mar/2020 08:16:40] "[37mGET /criterion/P2_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:16:41] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:18:26] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:20:52] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [25/Mar/2020 08:20:52] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:23:00] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:23:02] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/stardog HTTP/1.1[0m" 302 -
+127.0.0.1 - - [25/Mar/2020 08:23:02] "[37mGET /store/stardog HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:23:05] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/allegrograph HTTP/1.1[0m" 302 -
+127.0.0.1 - - [25/Mar/2020 08:23:05] "[37mGET /store/allegrograph HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:23:34] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:24:06] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/M1_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [25/Mar/2020 08:24:06] "[37mGET /criterion/M1_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:24:07] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:25:12] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:26:13] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:36:32] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [25/Mar/2020 08:36:32] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:36:50] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:36:58] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/M1_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [25/Mar/2020 08:36:58] "[37mGET /criterion/M1_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 08:36:59] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 19:03:10] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 19:03:10] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 19:03:10] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [25/Mar/2020 19:03:16] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/neo4j HTTP/1.1[0m" 302 -
+127.0.0.1 - - [25/Mar/2020 19:03:17] "[37mGET /store/neo4j HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 19:03:17] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 20:01:43] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [25/Mar/2020 20:01:44] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [26/Mar/2020 09:41:14] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [26/Mar/2020 09:41:14] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [26/Mar/2020 09:41:20] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [26/Mar/2020 09:41:20] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [26/Mar/2020 09:41:21] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [26/Mar/2020 09:41:25] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [26/Mar/2020 09:41:28] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [26/Mar/2020 09:42:05] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [26/Mar/2020 09:42:08] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/graphdb HTTP/1.1[0m" 302 -
+127.0.0.1 - - [26/Mar/2020 09:42:08] "[37mGET /store/graphdb HTTP/1.1[0m" 200 -
+127.0.0.1 - - [30/Mar/2020 09:43:58] "[37mHEAD / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [30/Mar/2020 09:43:58] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [30/Mar/2020 09:43:58] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [30/Mar/2020 09:43:59] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [30/Mar/2020 09:43:59] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [30/Mar/2020 09:43:59] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [30/Mar/2020 09:44:03] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [30/Mar/2020 09:44:08] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [30/Mar/2020 09:44:12] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F1_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [30/Mar/2020 09:44:12] "[37mGET /criterion/F1_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [30/Mar/2020 09:44:12] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [30/Mar/2020 09:44:34] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [30/Mar/2020 09:44:40] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/blazegraph HTTP/1.1[0m" 302 -
+127.0.0.1 - - [30/Mar/2020 09:44:41] "[37mGET /store/blazegraph HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 05:42:58] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 05:42:58] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 05:42:58] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [01/Apr/2020 05:42:59] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 05:43:02] "[37mGET /criterion HTTP/1.1[0m" 200 -
+ * Detected change in '/home/matdaq/triplestore-assessment-interface/hercules/public/views.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+ * Serving Flask app "hercules" (lazy loading)
+ * Environment: development
+ * Debug mode: on
+ * Running on http://0.0.0.0:8400/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+127.0.0.1 - - [01/Apr/2020 09:08:19] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 09:08:19] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 09:08:19] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [01/Apr/2020 09:08:24] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 09:08:27] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+/usr/local/lib/python3.6/site-packages/SPARQLWrapper/Wrapper.py:684: RuntimeWarning: Sending Accept header '*/*' because unexpected returned format 'json' in a 'DESCRIBE' SPARQL query form
+  warnings.warn("Sending Accept header '*/*' because unexpected returned format '%s' in a '%s' SPARQL query form" % (self.returnFormat, self.queryType), RuntimeWarning)
+127.0.0.1 - - [01/Apr/2020 09:08:27] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 09:08:52] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 09:08:57] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F3_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [01/Apr/2020 09:08:57] "[37mGET /criterion/F3_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 09:08:58] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 09:16:51] "[37mGET /criterion/F3_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 09:16:52] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 15:16:40] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 15:16:40] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 15:16:41] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [01/Apr/2020 15:16:42] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 15:16:45] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F1_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [01/Apr/2020 15:16:46] "[37mGET /criterion/F1_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 15:16:46] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 15:16:54] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 15:16:54] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 15:16:55] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 15:16:57] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 15:16:59] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 15:17:00] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 15:17:02] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F1_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [01/Apr/2020 15:17:02] "[37mGET /criterion/F1_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 15:17:03] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 15:17:04] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/allegrograph HTTP/1.1[0m" 302 -
+127.0.0.1 - - [01/Apr/2020 15:17:04] "[37mGET /store/allegrograph HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 16:57:03] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 16:57:05] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 16:57:08] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 16:57:11] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 16:57:12] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/allegrograph HTTP/1.1[0m" 302 -
+127.0.0.1 - - [01/Apr/2020 16:57:12] "[37mGET /store/allegrograph HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 16:57:18] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 19:16:24] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 19:16:24] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 19:16:24] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [01/Apr/2020 19:16:27] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 19:16:30] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F3_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [01/Apr/2020 19:16:31] "[37mGET /criterion/F3_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 19:16:31] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [01/Apr/2020 19:16:32] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/amazon_neptune HTTP/1.1[0m" 302 -
+127.0.0.1 - - [01/Apr/2020 19:16:32] "[37mGET /store/amazon_neptune HTTP/1.1[0m" 200 -
+ * Detected change in '/home/matdaq/triplestore-assessment-interface/hercules/public/views.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+ * Serving Flask app "hercules" (lazy loading)
+ * Environment: development
+ * Debug mode: on
+ * Running on http://0.0.0.0:8400/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+127.0.0.1 - - [02/Apr/2020 08:32:35] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 08:32:35] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 08:32:36] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 08:32:39] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+/usr/local/lib/python3.6/site-packages/SPARQLWrapper/Wrapper.py:684: RuntimeWarning: Sending Accept header '*/*' because unexpected returned format 'json' in a 'DESCRIBE' SPARQL query form
+  warnings.warn("Sending Accept header '*/*' because unexpected returned format '%s' in a '%s' SPARQL query form" % (self.returnFormat, self.queryType), RuntimeWarning)
+127.0.0.1 - - [02/Apr/2020 08:32:39] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 09:02:42] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 09:02:45] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 10:00:50] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 10:00:51] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [02/Apr/2020 11:42:36] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 11:42:36] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 11:42:38] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 11:42:42] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/stardog HTTP/1.1[0m" 302 -
+127.0.0.1 - - [02/Apr/2020 11:42:43] "[37mGET /store/stardog HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 11:42:59] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F2_7 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [02/Apr/2020 11:42:59] "[37mGET /criterion/F2_7 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 11:43:00] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 11:43:03] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 11:43:05] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 12:16:32] "[37mGET /criterion/F2_7 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 12:16:32] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 12:16:32] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [02/Apr/2020 12:16:32] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 12:50:54] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/virtuoso HTTP/1.1[0m" 302 -
+127.0.0.1 - - [02/Apr/2020 12:50:55] "[37mGET /store/virtuoso HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 12:51:03] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/M1_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [02/Apr/2020 12:51:03] "[37mGET /criterion/M1_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 12:51:03] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/Apr/2020 12:51:15] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [04/Apr/2020 21:43:37] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [04/Apr/2020 21:43:37] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [06/Apr/2020 09:36:40] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [08/Apr/2020 15:10:25] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [08/Apr/2020 15:10:25] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [08/Apr/2020 15:10:25] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [08/Apr/2020 15:10:29] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [08/Apr/2020 15:10:36] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [08/Apr/2020 15:10:38] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/neo4j HTTP/1.1[0m" 302 -
+127.0.0.1 - - [08/Apr/2020 15:10:38] "[37mGET /store/neo4j HTTP/1.1[0m" 200 -
+127.0.0.1 - - [09/Apr/2020 15:21:14] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [09/Apr/2020 15:21:14] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [09/Apr/2020 15:21:14] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [09/Apr/2020 15:21:16] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [09/Apr/2020 15:21:17] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [09/Apr/2020 15:21:51] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [09/Apr/2020 15:21:59] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [09/Apr/2020 15:22:01] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [09/Apr/2020 15:23:01] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/neo4j HTTP/1.1[0m" 302 -
+127.0.0.1 - - [09/Apr/2020 15:23:01] "[37mGET /store/neo4j HTTP/1.1[0m" 200 -
+127.0.0.1 - - [12/Apr/2020 20:06:40] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [12/Apr/2020 20:06:40] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [13/Apr/2020 16:58:32] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [13/Apr/2020 16:58:33] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [13/Apr/2020 20:16:36] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [14/Apr/2020 08:11:32] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [21/Apr/2020 11:14:45] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [21/Apr/2020 11:14:45] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [21/Apr/2020 11:14:45] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [21/Apr/2020 11:14:47] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [21/Apr/2020 11:30:50] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/anzograph HTTP/1.1[0m" 302 -
+127.0.0.1 - - [21/Apr/2020 11:30:50] "[37mGET /store/anzograph HTTP/1.1[0m" 200 -
+127.0.0.1 - - [21/Apr/2020 11:30:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [23/Apr/2020 16:50:59] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/Apr/2020 16:50:59] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/Apr/2020 16:50:59] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [23/Apr/2020 16:51:00] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/Apr/2020 16:51:00] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/Apr/2020 16:51:05] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/graphdb HTTP/1.1[0m" 302 -
+127.0.0.1 - - [23/Apr/2020 16:51:05] "[37mGET /store/graphdb HTTP/1.1[0m" 200 -
+127.0.0.1 - - [27/Apr/2020 10:16:16] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [27/Apr/2020 10:16:16] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [27/Apr/2020 10:16:17] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [27/Apr/2020 10:17:51] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [27/Apr/2020 10:17:51] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [27/Apr/2020 10:18:09] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [27/Apr/2020 10:18:09] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [27/Apr/2020 10:18:09] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [27/Apr/2020 10:18:20] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [27/Apr/2020 10:18:20] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [27/Apr/2020 10:18:20] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [27/Apr/2020 10:18:39] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/May/2020 20:02:40] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/May/2020 20:02:41] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/May/2020 20:02:41] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [02/May/2020 20:02:45] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [02/May/2020 20:02:46] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/May/2020 20:02:49] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F1_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [02/May/2020 20:02:49] "[37mGET /criterion/F1_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/May/2020 20:02:50] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [02/May/2020 20:02:51] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [04/May/2020 19:50:23] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [04/May/2020 19:50:23] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [04/May/2020 19:50:24] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [04/May/2020 19:50:26] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [04/May/2020 19:50:29] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [04/May/2020 19:50:33] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [04/May/2020 19:50:33] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [04/May/2020 19:50:35] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [05/May/2020 10:57:20] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [05/May/2020 10:57:20] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [05/May/2020 10:57:20] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [05/May/2020 10:57:22] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [05/May/2020 10:57:23] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [05/May/2020 10:57:25] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/stardog HTTP/1.1[0m" 302 -
+127.0.0.1 - - [05/May/2020 10:57:25] "[37mGET /store/stardog HTTP/1.1[0m" 200 -
+127.0.0.1 - - [05/May/2020 10:57:30] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [06/May/2020 13:56:25] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [06/May/2020 13:56:26] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [06/May/2020 13:56:26] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [06/May/2020 13:56:31] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [06/May/2020 13:56:41] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F1_2 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [06/May/2020 13:56:41] "[37mGET /criterion/F1_2 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [06/May/2020 13:56:43] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [06/May/2020 13:56:51] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [06/May/2020 13:56:54] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [06/May/2020 13:56:55] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [06/May/2020 13:57:00] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [06/May/2020 13:57:13] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [06/May/2020 13:57:14] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [07/May/2020 14:26:05] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [07/May/2020 14:26:06] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [08/May/2020 12:26:45] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [08/May/2020 12:26:46] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [08/May/2020 12:26:46] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [08/May/2020 12:26:48] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [08/May/2020 12:26:52] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [08/May/2020 12:26:52] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [08/May/2020 12:26:54] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [08/May/2020 12:26:56] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [08/May/2020 15:51:55] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [08/May/2020 15:51:55] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [08/May/2020 15:51:55] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [14/May/2020 04:57:08] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 04:57:08] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 04:57:08] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [14/May/2020 06:11:16] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 06:11:19] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 06:11:22] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 07:14:06] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 07:14:06] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 07:14:06] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [14/May/2020 07:14:46] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 10:47:50] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 10:47:51] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [14/May/2020 12:28:07] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 12:28:07] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [14/May/2020 12:28:13] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 12:28:19] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 12:31:11] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 12:31:11] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [14/May/2020 12:31:14] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 12:31:15] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 12:31:16] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 12:31:16] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [14/May/2020 12:38:58] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 13:07:54] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 13:07:54] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 13:07:54] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [14/May/2020 13:07:56] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 13:35:57] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 14:49:41] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [14/May/2020 15:27:17] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 15:45:22] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [14/May/2020 16:17:17] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [15/May/2020 10:25:26] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [15/May/2020 10:25:27] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [15/May/2020 10:25:27] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [18/May/2020 05:15:50] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [18/May/2020 05:15:50] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [18/May/2020 05:15:51] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [18/May/2020 05:16:00] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [18/May/2020 05:59:38] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/P1_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [18/May/2020 05:59:38] "[37mGET /criterion/P1_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [18/May/2020 05:59:39] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [18/May/2020 18:59:49] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [18/May/2020 18:59:49] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [18/May/2020 18:59:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [19/May/2020 14:13:24] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [19/May/2020 14:13:24] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [19/May/2020 14:13:24] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [19/May/2020 14:13:25] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [19/May/2020 14:13:25] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [19/May/2020 14:53:30] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [19/May/2020 14:53:30] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [19/May/2020 16:31:44] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [19/May/2020 16:31:44] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [22/May/2020 08:39:59] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:39:59] "[37mGET /static/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:40:00] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [22/May/2020 08:40:02] "[37mGET /criterion HTTP/1.1[0m" 200 -
+ * Detected change in '/home/matdaq/triplestore-assessment-interface/hercules/app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+ * Serving Flask app "hercules" (lazy loading)
+ * Environment: development
+ * Debug mode: on
+ * Running on http://0.0.0.0:8400/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+/usr/local/lib/python3.6/site-packages/SPARQLWrapper/Wrapper.py:684: RuntimeWarning: Sending Accept header '*/*' because unexpected returned format 'json' in a 'DESCRIBE' SPARQL query form
+  warnings.warn("Sending Accept header '*/*' because unexpected returned format '%s' in a '%s' SPARQL query form" % (self.returnFormat, self.queryType), RuntimeWarning)
+127.0.0.1 - - [22/May/2020 08:41:41] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:41:42] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:41:42] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:41:42] "[37mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:41:42] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:41:42] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:41:42] "[37mGET /static/img/logo-ue.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:41:42] "[37mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:41:57] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:41:58] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:42:04] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [22/May/2020 08:42:04] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:42:19] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:42:21] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:42:21] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:42:24] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:42:30] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:42:48] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:42:51] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F1_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [22/May/2020 08:42:51] "[37mGET /criterion/F1_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:42:52] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:42:52] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:42:55] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:42:56] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:42:57] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [22/May/2020 08:42:57] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+ * Serving Flask app "hercules" (lazy loading)
+ * Environment: development
+ * Debug mode: on
+ * Running on http://0.0.0.0:8400/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+/usr/local/lib/python3.6/site-packages/SPARQLWrapper/Wrapper.py:684: RuntimeWarning: Sending Accept header '*/*' because unexpected returned format 'json' in a 'DESCRIBE' SPARQL query form
+  warnings.warn("Sending Accept header '*/*' because unexpected returned format '%s' in a '%s' SPARQL query form" % (self.returnFormat, self.queryType), RuntimeWarning)
+127.0.0.1 - - [22/May/2020 08:43:22] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 08:43:24] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 10:20:16] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 10:20:17] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 10:20:17] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 10:20:17] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 10:20:17] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 10:20:17] "[37mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 10:20:17] "[37mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 10:20:17] "[37mGET /static/img/logo-ue.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 10:20:18] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [22/May/2020 12:18:33] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 12:18:33] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [22/May/2020 12:18:46] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 12:18:46] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 12:18:46] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 12:18:47] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 12:18:47] "[37mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 12:18:47] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 12:18:47] "[37mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 12:18:47] "[37mGET /static/img/logo-ue.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 12:18:47] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [22/May/2020 13:11:03] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:03] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:03] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:03] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:03] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:03] "[37mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:03] "[37mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:03] "[37mGET /static/img/logo-ue.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:04] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [22/May/2020 13:11:09] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:11] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:11] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:11] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:18] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:18] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:55] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:55] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:11:56] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:12:06] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:12:06] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [22/May/2020 13:12:16] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:12:16] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:12:19] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:12:19] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:12:21] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:12:21] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+/usr/local/lib/python3.6/site-packages/SPARQLWrapper/Wrapper.py:684: RuntimeWarning: Sending Accept header '*/*' because unexpected returned format 'json' in a 'CONSTRUCT' SPARQL query form
+  warnings.warn("Sending Accept header '*/*' because unexpected returned format '%s' in a '%s' SPARQL query form" % (self.returnFormat, self.queryType), RuntimeWarning)
+127.0.0.1 - - [22/May/2020 13:12:34] "[37mPOST /assessment HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:12:42] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/apache_jena HTTP/1.1[0m" 302 -
+127.0.0.1 - - [22/May/2020 13:12:42] "[37mGET /store/apache_jena HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:12:43] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:12:54] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:12:56] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:13:18] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/P2_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [22/May/2020 13:13:18] "[37mGET /criterion/P2_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:13:19] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:13:19] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 13:13:22] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:11:57] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:11:57] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:11:57] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:11:57] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:11:57] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:11:57] "[37mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:11:57] "[37mGET /static/img/logo-ue.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:11:57] "[37mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:11:57] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [22/May/2020 16:12:10] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:12:11] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:34:45] "[37mPOST /assessment HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:34:45] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [22/May/2020 16:34:49] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:34:49] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:34:49] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:34:49] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:34:49] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:34:49] "[37mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:34:49] "[37mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:34:49] "[37mGET /static/img/logo-ue.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:34:50] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:34:52] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/corese HTTP/1.1[0m" 302 -
+127.0.0.1 - - [22/May/2020 16:34:52] "[37mGET /store/corese HTTP/1.1[0m" 200 -
+127.0.0.1 - - [22/May/2020 16:34:55] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:37:17] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:37:17] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:37:17] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:37:17] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:37:17] "[37mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:37:17] "[37mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:37:17] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:37:17] "[37mGET /static/img/logo-ue.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:37:18] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [23/May/2020 10:37:24] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:37:25] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:37:31] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:37:32] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:43:43] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:43:44] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:43:51] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:44:20] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F1_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [23/May/2020 10:44:20] "[37mGET /criterion/F1_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:44:21] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:44:21] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 10:45:07] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/blazegraph HTTP/1.1[0m" 302 -
+127.0.0.1 - - [23/May/2020 10:45:07] "[37mGET /store/blazegraph HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:43] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:43] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:43] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:43] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:43] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:43] "[37mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:43] "[37mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:43] "[37mGET /static/img/logo-ue.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:43] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [23/May/2020 23:26:46] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:47] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:47] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:47] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:47] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:50] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:52] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:55] "[32mGET /entity?uri=http://datascienceinstitute.ie/asio/criteria/F3_1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [23/May/2020 23:26:55] "[37mGET /criterion/F3_1 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:56] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:56] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [23/May/2020 23:26:56] "[32mGET /entity?uri=http://data.datascienceinstitute.ie/software/amazon_neptune HTTP/1.1[0m" 302 -
+127.0.0.1 - - [23/May/2020 23:26:57] "[37mGET /store/amazon_neptune HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 09:59:02] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 09:59:02] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 09:59:02] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 09:59:02] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 09:59:02] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 10:55:01] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 10:55:02] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 10:55:03] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 10:55:03] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 10:55:03] "[36mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [24/May/2020 10:55:03] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 10:55:03] "[36mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [24/May/2020 10:55:03] "[36mGET /static/img/logo-ue.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [24/May/2020 10:55:06] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 10:55:14] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 10:55:17] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:08:01] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:08:05] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:08:08] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:08:58] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:09:00] "[37mGET / HTTP/1.1[0m" 200 -
+ * Detected change in '/home/matdaq/triplestore-assessment-interface/hercules/settings.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+127.0.0.1 - - [24/May/2020 12:09:14] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 12:09:20] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 12:09:23] "[37mGET /tsa/ HTTP/1.1[0m" 200 -
+/usr/local/lib/python3.6/site-packages/SPARQLWrapper/Wrapper.py:684: RuntimeWarning: Sending Accept header '*/*' because unexpected returned format 'json' in a 'DESCRIBE' SPARQL query form
+  warnings.warn("Sending Accept header '*/*' because unexpected returned format '%s' in a '%s' SPARQL query form" % (self.returnFormat, self.queryType), RuntimeWarning)
+127.0.0.1 - - [24/May/2020 12:09:28] "[37mGET /tsa/criterion HTTP/1.1[0m" 200 -
+ * Detected change in '/home/matdaq/triplestore-assessment-interface/hercules/app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+127.0.0.1 - - [24/May/2020 12:23:13] "[33mGET /tsa/ HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 12:23:16] "[37mGET / HTTP/1.1[0m" 200 -
+/usr/local/lib/python3.6/site-packages/SPARQLWrapper/Wrapper.py:684: RuntimeWarning: Sending Accept header '*/*' because unexpected returned format 'json' in a 'DESCRIBE' SPARQL query form
+  warnings.warn("Sending Accept header '*/*' because unexpected returned format '%s' in a '%s' SPARQL query form" % (self.returnFormat, self.queryType), RuntimeWarning)
+127.0.0.1 - - [24/May/2020 12:23:23] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:23:27] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:23:34] "[37mGET /store HTTP/1.1[0m" 200 -
+ * Detected change in '/home/matdaq/triplestore-assessment-interface/hercules/app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+127.0.0.1 - - [24/May/2020 12:23:44] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:23:45] "[37mGET / HTTP/1.1[0m" 200 -
+/usr/local/lib/python3.6/site-packages/SPARQLWrapper/Wrapper.py:684: RuntimeWarning: Sending Accept header '*/*' because unexpected returned format 'json' in a 'DESCRIBE' SPARQL query form
+  warnings.warn("Sending Accept header '*/*' because unexpected returned format '%s' in a '%s' SPARQL query form" % (self.returnFormat, self.queryType), RuntimeWarning)
+127.0.0.1 - - [24/May/2020 12:23:50] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:23:50] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:23:53] "[37mGET /criterion HTTP/1.1[0m" 200 -
+ * Serving Flask app "hercules" (lazy loading)
+ * Environment: development
+ * Debug mode: on
+ * Running on http://0.0.0.0:8400/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+ * Serving Flask app "hercules" (lazy loading)
+ * Environment: development
+ * Debug mode: on
+ * Running on http://0.0.0.0:8400/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+127.0.0.1 - - [24/May/2020 12:26:02] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:26:02] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:26:02] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:26:02] "[37mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:26:02] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:26:02] "[37mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:26:02] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 12:26:02] "[36mGET /static/img/logo-ue.png HTTP/1.1[0m" 304 -
+/usr/local/lib/python3.6/site-packages/SPARQLWrapper/Wrapper.py:684: RuntimeWarning: Sending Accept header '*/*' because unexpected returned format 'json' in a 'DESCRIBE' SPARQL query form
+  warnings.warn("Sending Accept header '*/*' because unexpected returned format '%s' in a '%s' SPARQL query form" % (self.returnFormat, self.queryType), RuntimeWarning)
+127.0.0.1 - - [24/May/2020 12:26:08] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:34:33] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:34:33] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:34:33] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:34:33] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:34:33] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:34:33] "[37mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:34:33] "[37mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:34:33] "[37mGET /static/img/logo-ue.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:34:33] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 13:34:38] "[33mGET /benchmark HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 13:34:42] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:34:42] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:34:43] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:34:44] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:35:11] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 13:35:11] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:46:20] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:46:20] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:46:22] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:46:22] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:46:22] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:46:58] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:47:07] "[37mGET / HTTP/1.1[0m" 200 -
+ * Detected change in '/home/matdaq/triplestore-assessment-interface/hercules/app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+127.0.0.1 - - [24/May/2020 13:51:34] "[33mGET /stores HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 13:51:36] "[33mGET /store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 13:53:21] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 13:53:23] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 13:53:26] "[37mGET /tsa/ HTTP/1.1[0m" 200 -
+/usr/local/lib/python3.6/site-packages/SPARQLWrapper/Wrapper.py:684: RuntimeWarning: Sending Accept header '*/*' because unexpected returned format 'json' in a 'DESCRIBE' SPARQL query form
+  warnings.warn("Sending Accept header '*/*' because unexpected returned format '%s' in a '%s' SPARQL query form" % (self.returnFormat, self.queryType), RuntimeWarning)
+127.0.0.1 - - [24/May/2020 13:53:32] "[37mGET /tsa/criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 13:53:36] "[37mGET /tsa/store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 14:55:25] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 15:30:51] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 15:30:51] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 15:30:56] "[33mGET /benchmark HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 15:31:08] "[37mGET /tsa/ HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 15:31:14] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 15:31:19] "[33mGET /store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 15:41:44] "[33mGET /benchmark HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 15:41:44] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 15:41:47] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 15:41:47] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 15:42:26] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 15:42:31] "[37mGET /tsa/ HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 15:42:35] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 15:42:47] "[37mGET /tsa/ HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:09:29] "[33mGET /store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:09:31] "[33mGET /store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:09:33] "[33mGET /store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:09:34] "[33mGET /store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:09:38] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:09:46] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:09:51] "[33mGET /benchmark HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:09:56] "[33mGET /benchmark/ HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:10:02] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:11:06] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:11:08] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:17:24] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:17:47] "[33mGET / HTTP/1.1[0m" 404 -
+ * Detected change in '/home/matdaq/triplestore-assessment-interface/hercules/settings.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+127.0.0.1 - - [24/May/2020 16:18:08] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:18:26] "[37mGET / HTTP/1.1[0m" 200 -
+/usr/local/lib/python3.6/site-packages/SPARQLWrapper/Wrapper.py:684: RuntimeWarning: Sending Accept header '*/*' because unexpected returned format 'json' in a 'DESCRIBE' SPARQL query form
+  warnings.warn("Sending Accept header '*/*' because unexpected returned format '%s' in a '%s' SPARQL query form" % (self.returnFormat, self.queryType), RuntimeWarning)
+127.0.0.1 - - [24/May/2020 16:18:34] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:18:37] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:19:28] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:19:30] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:19:34] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:19:36] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:19:37] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:19:42] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:07] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:21] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:21] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:21] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:21] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:21] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:21] "[37mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:21] "[37mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:21] "[37mGET /static/img/logo-ue.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:23] "[33mGET /benchmark/store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:24:25] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:26] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:26] "[37mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:26] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:26] "[37mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:26] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:26] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:26] "[37mGET /static/img/logo-ue.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:26] "[33mPOST /benchmark/ranking HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:24:38] "[33mGET /benchmark/store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:24:40] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:40] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:40] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:40] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:40] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:40] "[37mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:40] "[37mGET /static/img/logo-ue.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:24:40] "[37mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 200 -
+ * Detected change in '/home/matdaq/triplestore-assessment-interface/hercules/settings.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+127.0.0.1 - - [24/May/2020 16:25:31] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:25:34] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:25:37] "[33mGET / HTTP/1.1[0m" 404 -
+ * Detected change in '/home/matdaq/triplestore-assessment-interface/hercules/settings.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181
+127.0.0.1 - - [24/May/2020 16:25:45] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:25:47] "[33mGET /benchmark/store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:25:51] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:25:57] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:25:59] "[33mGET /benchmark/store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:26:02] "[33mGET /benchmark/store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:26:08] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:26:10] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:26:11] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:26:12] "[37mGET /store HTTP/1.1[0m" 200 -
+/usr/local/lib/python3.6/site-packages/SPARQLWrapper/Wrapper.py:684: RuntimeWarning: Sending Accept header '*/*' because unexpected returned format 'json' in a 'DESCRIBE' SPARQL query form
+  warnings.warn("Sending Accept header '*/*' because unexpected returned format '%s' in a '%s' SPARQL query form" % (self.returnFormat, self.queryType), RuntimeWarning)
+127.0.0.1 - - [24/May/2020 16:26:20] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:26:30] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:26:37] "[33mGET /benchmark/store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:26:41] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:26:41] "[33mGET /benchmark/store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:26:45] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:26:48] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:26:56] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:26:59] "[33mGET /benchmark/store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:27:03] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:04] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:18] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:18] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:18] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:18] "[37mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:18] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:18] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:18] "[37mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:18] "[37mGET /static/img/logo-ue.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:29] "[33mGET /benchmark/store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:27:33] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:33] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:33] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:33] "[37mGET /static/img/logo-um-peq.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:33] "[37mGET /static/img/logo-ministerio.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:33] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:33] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:33] "[37mGET /static/img/logo-ue.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:27:34] "[33mPOST /benchmark/ranking HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:29:43] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:30:19] "[35m[1mGET /store HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/site-packages/flask/app.py", line 2309, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/local/lib/python3.6/site-packages/flask/app.py", line 2295, in wsgi_app
+    response = self.handle_exception(e)
+  File "/usr/local/lib/python3.6/site-packages/flask/app.py", line 1741, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/usr/local/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/usr/local/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/matdaq/triplestore-assessment-interface/hercules/public/views.py", line 233, in ranking
+    return render_template("public/ranking.html", ranking=ranking, unranked=unranked)
+  File "/usr/local/lib/python3.6/site-packages/flask/templating.py", line 135, in render_template
+    context, ctx.app)
+  File "/usr/local/lib/python3.6/site-packages/flask/templating.py", line 117, in _render
+    rv = template.render(context)
+  File "/usr/local/lib/python3.6/site-packages/jinja2/environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "/usr/local/lib/python3.6/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/usr/local/lib/python3.6/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "/home/matdaq/triplestore-assessment-interface/hercules/templates/public/ranking.html", line 2, in top-level template code
+    {% from "public/_public_macros.html" import rank_entry %}
+  File "/home/matdaq/triplestore-assessment-interface/hercules/templates/layout.html", line 1, in top-level template code
+    {% extends "bootstrap/base.html" %}
+  File "/usr/local/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
+    {% block doc -%}
+  File "/usr/local/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 3, in block "doc"
+    <html{% block html_attribs %}{% endblock html_attribs %}>
+  File "/usr/local/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 11, in block "html"
+    {%- endblock metas %}
+  File "/usr/local/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 16, in block "body"
+    {%- endblock styles %}
+  File "/home/matdaq/triplestore-assessment-interface/hercules/templates/public/ranking.html", line 61, in block "scripts"
+    {{super()}}
+  File "/home/matdaq/triplestore-assessment-interface/hercules/templates/layout.html", line 26, in block "scripts"
+    <script src="{{ url_for('/benchmark/static', filename='js/scripts.js') }}"></script>
+  File "/usr/local/lib/python3.6/site-packages/flask/helpers.py", line 356, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "/usr/local/lib/python3.6/site-packages/flask/app.py", line 2061, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/usr/local/lib/python3.6/site-packages/flask/helpers.py", line 345, in url_for
+    force_external=external)
+  File "/usr/local/lib/python3.6/site-packages/werkzeug/routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint '/benchmark/static' with values ['filename']. Did you mean 'public.static' instead?
+127.0.0.1 - - [24/May/2020 16:30:19] "[37mGET /store?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:30:19] "[37mGET /store?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:30:19] "[37mGET /store?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:30:19] "[37mGET /store?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:30:19] "[37mGET /store?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:31:13] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:31:50] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:31:52] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:32:25] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:32:25] "[33mGET /benchmark/static/css/style.css HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:32:25] "[33mGET /benchmark/static/css/gnoss.css HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:32:43] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:32:43] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:32:43] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:07] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:07] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:07] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:07] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:07] "[33mGET /static/js/main.js')%20%7D%7D HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:33:07] "[33mGET /static/js/main.js')%20%7D%7D HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:33:20] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:20] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:20] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:20] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:20] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:21] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:39] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:39] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:39] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:39] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:39] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:40] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:42] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:42] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:42] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:42] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:42] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:48] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:48] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:48] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:48] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:48] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:33:48] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:36:34] "[33mGET /benchmark/store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:36:36] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:04] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:04] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:04] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:04] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:04] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:07] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:07] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:07] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:07] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:07] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:08] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:09] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:09] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:09] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:09] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:42:09] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:43:27] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:43:27] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:43:27] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:43:27] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:43:27] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:43:28] "[33mGET /benchmark/store HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:43:31] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:43:31] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:43:31] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:43:31] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:43:31] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:47:49] "[33mGET /benchmark/criterion HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:47:52] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:47:53] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:47:53] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:47:53] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:47:53] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:47:57] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:47:57] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:47:57] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:47:57] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:47:57] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:00] "[33mGET /benchmark/criterion HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:48:02] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:02] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:02] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:02] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:02] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:03] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:03] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:03] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:03] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:03] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:04] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:05] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:05] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:05] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:05] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:05] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:21] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:21] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:21] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:21] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:21] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:22] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:23] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:27] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:38] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:38] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:38] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:39] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:39] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:39] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:43] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:46] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:46] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:46] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:46] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:46] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:56] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:56] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:56] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:56] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:56] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:48:59] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:01] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:27] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:27] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:27] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:27] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:27] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:37] "[33mGET /benchmark/criterion HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:49:41] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:41] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:41] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:41] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:41] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:43] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:45] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:50] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:50] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:50] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:50] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:50] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:51] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:51] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:51] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:51] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:51] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:53] "[33mGET /benchmark/criterion HTTP/1.1[0m" 404 -
+127.0.0.1 - - [24/May/2020 16:49:55] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:55] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:55] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:55] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:49:55] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:12] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:15] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:15] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:15] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:15] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:15] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:17] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:20] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:20] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:20] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:20] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:20] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:54] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:54] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:54] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:54] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:54] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:58] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:58] "[37mGET /criterion HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:58] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:58] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:58] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:50:58] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:00] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:00] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:00] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:00] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:00] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:01] "[37mGET /store HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:02] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:02] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:02] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:02] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:02] "[37mPOST /ranking HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:04] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:04] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:04] "[37mGET /static/css/gnoss.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:04] "[37mGET /static/js/main.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [24/May/2020 16:51:04] "[37mGET /static/js/scripts.js HTTP/1.1[0m" 200 -
+ * Detected change in '/home/matdaq/triplestore-assessment-interface/hercules/public/views.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 114-497-181

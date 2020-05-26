@@ -18,6 +18,8 @@ El documento no es exhaustivo, sino que contiene ejemplos de consultas de
 recuperación de la información, e irá evolucionando según el sistema vaya incorporando
 más datos.
 
+La URL del SPARQL endpoint es http://155.54.239.204:8890/sparql
+
 GRAFO DE DATOS DE CVN
 =====================
 
@@ -33,22 +35,22 @@ http://graph.um.es/graph/um/cvn
 **Consulta que devuelve todos los triples de un investigador**.
 
 	select * from <http://graph.um.es/graph/um_cvn>
-	where { <http://graph.um.es/res/person/d7aad123-55b9-4400-b108-185139408f7f> ?p ?o}
+	where { <http://graph.um.es/res/person/f6544839-0e1e-4e4b-bc5d-70199198a50f> ?p ?o}
 
 **Consulta que devuelve todas las entidades de las que el investigador
 es objeto**.
 
 	select * from <http://graph.um.es/graph/um_cvn>
 	where {
-		?s ?p <http://graph.um.es/res/person/d7aad123-55b9-4400-b108-185139408f7f>.
-		?s a ?o.
+		?s ?p <http://graph.um.es/res/person/f6544839-0e1e-4e4b-bc5d-70199198a50f>.
+		?s a ?rdftype.
 	}
 
 **Consulta que devuelve todos los triples un artículo.**
 
 	select * from <http://graph.um.es/graph/um_cvn>
 	where {
-		<http://graph.um.es/res/article/4167c433-5af4-4071-8daa-df71d9c18fc5> ?p ?o.
+		<http://graph.um.es/res/article/54abcda1-55bf-4896-ab2f-41b63a1dc135> ?p ?o.
 	}
 
 GRAFO DE DATOS DE SISTEMAS DE LA UM

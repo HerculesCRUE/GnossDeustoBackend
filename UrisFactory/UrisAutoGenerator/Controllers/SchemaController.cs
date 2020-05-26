@@ -14,6 +14,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace UrisFactory.Controllers
 {
+    /// <summary>
+    /// Controlador encargado de gerstionar el esquema de Uris, que ofrece métodos para la consulta de este esquema y su modificación
+    /// </summary>
     [ApiController]
     [Route("[Controller]")]
     public class SchemaController : Controller
@@ -28,7 +31,7 @@ namespace UrisFactory.Controllers
         }
 
         ///<summary>
-        ///Return the Config file schema
+        ///Obtiene el fichero de configuración de los esquemas configurados
         ///</summary>
         [HttpGet(Name="getSchema")]
         [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(UriStructureGeneral))]
@@ -40,9 +43,12 @@ namespace UrisFactory.Controllers
         }
 
         ///<summary>
-        ///Replace the Config file schema
+        ///Reemplaza el fichero de configuración por otro fichero dado, para ver la estrucutura del fichero, se recomienda ver el fichero dado por: http://herc-as-front-desa.atica.um.es/uris/Schema
         ///</summary>
-        ///<param name="newSchemaConfig">new config file schema</param>
+        ///<remarks>
+        ///Se puede encontrar un ejemplo del fichero como plantilla en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/UrisFactory/docs/20191211%20Esquema%20de%20URIs.json
+        /// </remarks>
+        ///<param name="newSchemaConfig">nuevo fichero de configuración</param>
         [HttpPost]
         [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(string))]
         [SwaggerResponseExample(StatusCodes.Status200OK, typeof(ReplaceSchemaResponse))]
@@ -62,9 +68,9 @@ namespace UrisFactory.Controllers
         }
 
         ///<summary>
-        ///Return the uri structure and the resource class asociated with the uri structure
+        ///Obtiene la estrucutra uri y las resources class asociadas a esa estructura R
         ///</summary>
-        ///<param name="name">name of the uri structure</param>
+        ///<param name="name">nombre de la estructura uri, se pueden obtener a través del método http://herc-as-front-desa.atica.um.es/uris/Schema, en los objetos UriStructures, Name</param>
         [HttpGet("{name}")]
         [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(InfoUriStructure))]
         [SwaggerResponseExample(StatusCodes.Status200OK, typeof(UriStructureInfoRequest))]
@@ -75,7 +81,7 @@ namespace UrisFactory.Controllers
             UriStructure uri = _configJsonHandler.GetUriStructure(name);
             if (uri != null)
             {
-                ResourcesClass resourceClass = _configJsonHandler.GetResourceClass(name);
+                List<ResourcesClass> resourceClass = _configJsonHandler.GetResourceClass(name);
                 InfoUriStructure infoUriStructure= new InfoUriStructure();
                 infoUriStructure.UriStructure = uri;
                 infoUriStructure.ResourcesClass = resourceClass;
@@ -88,9 +94,9 @@ namespace UrisFactory.Controllers
         }
 
         ///<summary>
-        ///Delete the uri structure and the resource class asociated with the uri structure
+        ///Borra la estrcutura uri y las resource class asociadas a esa estructura
         ///</summary>
-        ///<param name="name">name of the uri structure</param>
+        ///<param name="name">nombre de la estructura uri a eliminar, se pueden obtener a través del método http://herc-as-front-desa.atica.um.es/uris/Schema, en los objetos UriStructures, Name</param>
         [HttpDelete]
         [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(string))]
         [SwaggerResponseExample(StatusCodes.Status200OK, typeof(DeleteUriStructureResponse))]
@@ -118,9 +124,9 @@ namespace UrisFactory.Controllers
         }
 
         ///<summary>
-        ///Add an uri structure and a resource class asociated with the uri structure
+        ///Añade una nueva estructura de uris y una reource class asociada a esta nueva estrucutra 
         ///</summary>
-        ///<param name="infoUriStructure">uri structure and the resource class to add</param>
+        ///<param name="infoUriStructure">objeto que contiene una estrucutura nueva y una resource class asociada a esa estructura</param>
         [HttpPut]
         [SwaggerRequestExample(typeof(InfoUriStructure), typeof(UriStructureInfoRequest))]
         [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(string))]
@@ -129,11 +135,11 @@ namespace UrisFactory.Controllers
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(AddUriStructureErrorResponse))]
         public IActionResult AddUriStructure(InfoUriStructure infoUriStructure)
         {
-            if(infoUriStructure != null && infoUriStructure.ResourcesClass != null && infoUriStructure.UriStructure != null)
+            if(infoUriStructure != null && infoUriStructure.ResourcesClass != null && infoUriStructure.UriStructure != null && infoUriStructure.ResourcesClass.Count == 1)
             {
                 try
                 {
-                    _configJsonHandler.AddUriStructureInfo(infoUriStructure.UriStructure, infoUriStructure.ResourcesClass);
+                    _configJsonHandler.AddUriStructureInfo(infoUriStructure.UriStructure, infoUriStructure.ResourcesClass.First());
                     bool saved = _schemaConfigOperations.SaveConfigJson();
                     if (saved)
                     {

@@ -1,6 +1,14 @@
 # Sobre UrisFactory
 
+La documentación que explica la Especificación de URIs Hércules y las buenas prácticas está en:
+
+https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/UrisFactory/docs
+
 Accesible en pruebas en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/uris/swagger/index.html.
+
+La documentación de la librería está disponible en: 
+
+http://herc-as-front-desa.atica.um.es/uris-factory/library/api/UrisFactory.Controllers.html
 
 Este Api contiene dos controladores.
 
@@ -60,6 +68,24 @@ Este Api contiene dos controladores.
 		    }
 	    ]
 
+	
+## Dependencias
+
+ - **IdentityServer4**: versión 3.1.2
+ -  **IdentityServer4.AccessTokenValidation**: versión 3.0.1
+ - **Microsoft.EntityFrameworkCore.Tools**: versión 3.0.0
+ - **Microsoft.Extensions.Logging**: versión 3.1.1
+ - **Microsoft.Extensions.Logging.Debug**: versión 3.0.0
+ - **Microsoft.VisualStudio.Web.CodeGeneration.Design**: versión 3.0.0
+ - **Newtonsoft.Json**: versión 12.0.3
+ - **Serilog.AspNetCore**: versión 3.2.0
+ - **Swashbuckle.AspNetCore**: versión 5.0.0
+ - **Swashbuckle.AspNetCore.Annotations**: versión 5.0.0
+ - **Swashbuckle.AspNetCore.Filters**: versión 5.0.0
+ - **Swashbuckle.AspNetCore.Swagger**: versión 5.0.0
+ - **Swashbuckle.AspNetCore.SwaggerGen**: versión 5.0.0
+ - **Swashbuckle.AspNetCore.SwaggerUI**: versión 5.0.0
+ - **SSwashbuckle.Core**: versión 5.6.0	
 	 
 # Hércules backend asio. ESPECIFICACIÓN DE ESQUEMA DE URIS
 

@@ -1,0 +1,39 @@
+/* =============================================================================
+   App specific CSS file.
+   ========================================================================== */
+
+.herc_assess {
+}
+
+.herc_assess_cat {
+}
+
+.herc_benchmark {
+}
+
+.herc_benchmark_cat {
+}
+
+ul.herc_rank {
+  list-style-type: none;
+}
+
+li.herc_rank_entry {
+}
+
+.herc_ts_info {
+}
+
+td.herc_weight {
+  cursor: pointer;
+  min-width: 120px;
+}
+
+td.herc_weight:hover {
+  background-color: #8a2be226;
+}
+
+.herc-user {
+  color: blue;
+  font-weight: bold;
+}

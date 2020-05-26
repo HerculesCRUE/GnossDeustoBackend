@@ -14,7 +14,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace API_CARGA.Controllers
 {
     /// <summary>
-    /// API de carga
+    /// Contiene los procesos ETL (Extract, Transform and Load) necesarios para la carga de datos.
     /// </summary>
     [ApiController]
     [Route("[controller]")]
@@ -33,6 +33,7 @@ namespace API_CARGA.Controllers
 
         /// <summary>
         /// Ejecuta el último paso del proceso de carga, por el que el RDF generado se almacena en el Triple Store. Permite cargar una fuente RDF arbitraria.
+        /// Aquí se encuentra un RDF de Ejemplo: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_CARGA/API_CARGA/Samples/rdfSample.xml
         /// </summary>
         /// <param name="rdfFile">Fichero RDF</param>
         /// <returns></returns>
@@ -45,7 +46,7 @@ namespace API_CARGA.Controllers
             {
                 XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
                 List<string> triples = SparqlUtility.GetTriplesFromRDF(rdf);    
-                SparqlUtility.LoadTriples(triples, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), _configSparql.GetGraph());
+                SparqlUtility.LoadTriples(triples, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), _configSparql.GetGraph(), _configSparql.GetGraphUnidata()); 
                 return Ok();
             }
             catch (Exception ex)
@@ -56,6 +57,7 @@ namespace API_CARGA.Controllers
 
         /// <summary>
         /// Valida un RDF mediante el shape SHACL configurado
+        /// Aquí se encuentra un RDF de Ejemplo: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_CARGA/API_CARGA/Samples/rdfSample.xml
         /// </summary>
         /// <param name="rdfFile">Fichero RDF</param>
         /// <param name="repositoryIdentifier">Identificador del repositorio para seleccionar los Shapes (los repositorios disponibles están en /etl-config/repository)</param>
@@ -96,8 +98,8 @@ namespace API_CARGA.Controllers
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recupera un registro de metadatos individual del repositorio en formato XML OAI-PMH.        
         /// </summary>
-        /// <param name="identifier">Identificador de la entidad a recolectar</param>
-        /// <param name="metadataPrefix">Prefijo del metadata que se desea recuperar</param>
+        /// <param name="identifier">Identificador de la entidad a recolectar (Los identificadores se obtienen con el metodo /etl/ListIdentifiers/{repositoryIdentifier}).</param>
+        /// <param name="metadataPrefix">Prefijo del metadata que se desea recuperar (rdf). Los formatos de metadatos admitidos por un repositorio y para un elemento en particular se pueden recuperar mediante la solicitud /etl/ListMetadataFormats/{repositoryIdentifier}.</param>
         /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("GetRecord/{repositoryIdentifier}")]
@@ -135,9 +137,9 @@ namespace API_CARGA.Controllers
         /// Es una forma abreviada de ListRecords, que recupera solo encabezados en formato XML OAI-PMH en lugar de registros.        
         /// </summary>
         /// <param name="metadataPrefix">Especifica que los encabezados deben devolverse solo si el formato de metadatos que coincide con el metadataPrefix proporcionado está disponible o, según el soporte del repositorio para las eliminaciones, se ha eliminado. Los formatos de metadatos admitidos por un repositorio y para un elemento en particular se pueden recuperar mediante la solicitud ListMetadataFormats.</param>
-        /// <param name="from">Fecha de inicio desde la que se desean recuperar las cabeceras de las entidades</param>
-        /// <param name="until">Fecha de fin hasta la que se desean recuperar las cabeceras de las entidades</param>
-        /// <param name="set">Argumento con un valor setSpec, que especifica los criterios establecidos para la recolección selectiva.</param>
+        /// <param name="from">Fecha de inicio desde la que se desean recuperar las cabeceras de las entidades (Codificado con ISO8601 y expresado en UTC, YYYY-MM-DD o YYYY-MM-DDThh:mm:ssZ)</param>
+        /// <param name="until">Fecha de fin hasta la que se desean recuperar las cabeceras de las entidades (Codificado con ISO8601 y expresado en UTC, YYYY-MM-DD o YYYY-MM-DDThh:mm:ssZ)</param>
+        /// <param name="set">Argumento con un valor setSpec, que especifica los criterios establecidos para la recolección selectiva. Los formatos de sets admitidos por un repositorio y para un elemento en particular se pueden recuperar mediante la solicitud ListSets.</param>
         /// <param name="resumptionToken">Argumento exclusivo con un valor que es el token de control de flujo devuelto por una solicitud ListIdentifiers anterior que emitió una lista incompleta.</param>
         /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
@@ -202,9 +204,9 @@ namespace API_CARGA.Controllers
         /// Recupera registros del repositorio en formato XML OAI-PMH.        
         /// </summary>
         /// <param name="metadataPrefix">Especifica que los encabezados deben devolverse solo si el formato de metadatos que coincide con el metadataPrefix proporcionado está disponible o, según el soporte del repositorio para las eliminaciones, se ha eliminado. Los formatos de metadatos admitidos por un repositorio y para un elemento en particular se pueden recuperar mediante la solicitud ListMetadataFormats.</param>
-        /// <param name="from">Fecha de inicio desde la que se desean recuperar las cabeceras de las entidades</param>
-        /// <param name="until">Fecha de fin hasta la que se desean recuperar las cabeceras de las entidades</param>
-        /// <param name="set">Argumento con un valor setSpec, que especifica los criterios establecidos para la recolección selectiva.</param>
+        /// <param name="from">Fecha de inicio desde la que se desean recuperar las cabeceras de las entidades (Codificado con ISO8601 y expresado en UTC, YYYY-MM-DD o YYYY-MM-DDThh:mm:ssZ)</param>
+        /// <param name="until">Fecha de fin hasta la que se desean recuperar las cabeceras de las entidades (Codificado con ISO8601 y expresado en UTC, YYYY-MM-DD o YYYY-MM-DDThh:mm:ssZ)</param>
+        /// <param name="set">Argumento con un valor setSpec, que especifica los criterios establecidos para la recolección selectiva. Los formatos de sets admitidos por un repositorio y para un elemento en particular se pueden recuperar mediante la solicitud ListSets.</param>
         /// <param name="resumptionToken">Argumento exclusivo con un valor que es el token de control de flujo devuelto por una solicitud ListRecords anterior que emitió una lista incompleta.</param>
         /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>

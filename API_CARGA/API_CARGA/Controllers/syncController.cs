@@ -14,7 +14,7 @@ using Swashbuckle.AspNetCore.Filters;
 namespace API_CARGA.Controllers
 {
     /// <summary>
-    /// Dentro de este controlador se encuentran todos los métodos para configurar las sincronizaciones, obtener su estado, activarlas y desactivarlas.
+    /// Contiene los procesos necesarios para la ejecución de las sincronizaciones.
     /// </summary>
     [ApiController]
     [Route("[Controller]")]

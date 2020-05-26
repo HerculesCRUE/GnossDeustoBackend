@@ -14,7 +14,7 @@ using System.Xml.Linq;
 namespace OAI_PMH.Controllers
 {
     /// <summary>
-    /// Controlador OAI-PMH
+    /// Controlador OAI-PMH que sirve los datos de los curículums de los investigadores de la Universidad de Murcia en formato RDF.
     /// </summary>
     [ApiController]
     [Route("[controller]")]
@@ -37,18 +37,18 @@ namespace OAI_PMH.Controllers
             _configOAI.Granularity = "yyyy-MM-ddTHH:mm:ssZ";
         }
 
-        
+
 
         /// <summary>
         /// API OAI-PMH para la recuperación de CVN, más información del protocolo OAI-PMH visita https://www.openarchives.org/OAI/openarchivesprotocol.html
         /// </summary>
         /// <param name="verb">Verbo OAI-PMH</param>
-        /// <param name="identifier">Identificador</param>
-        /// <param name="metadataPrefix">Prefijo del metadata</param>
-        /// <param name="from">Fecha 'desde'</param>
-        /// <param name="until">Fecha 'hasta'</param>
-        /// <param name="set">Agrupador</param>
-        /// <param name="resumptionToken">Token de reanudación</param>
+        /// <param name="identifier">Identificador de la entidad a recuperar (los identificadores se obtienen con el metodo ListIdentifiers)</param>
+        /// <param name="metadataPrefix">Especifica que los encabezados deben devolverse solo si el formato de metadatos que coincide con el metadataPrefix proporcionado está disponible o, según el soporte del repositorio para las eliminaciones, se ha eliminado. Los formatos de metadatos admitidos por un repositorio y para un elemento en particular se pueden recuperar mediante la solicitud ListMetadataFormats.</param>
+        /// <param name="from">Fecha de inicio desde la que se desean recuperar las cabeceras de las entidades (Codificado con ISO8601 y expresado en UTC, YYYY-MM-DD o YYYY-MM-DDThh:mm:ssZ)</param>
+        /// <param name="until">Fecha de fin hasta la que se desean recuperar las cabeceras de las entidades (Codificado con ISO8601 y expresado en UTC, YYYY-MM-DD o YYYY-MM-DDThh:mm:ssZ)</param>
+        /// <param name="set">Argumento con un valor setSpec, que especifica los criterios establecidos para la recolección selectiva. Los formatos de sets admitidos por un repositorio y para un elemento en particular se pueden recuperar mediante la solicitud ListSets.</param>
+        /// <param name="resumptionToken">Token de reanudación (No disponible)</param>
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]

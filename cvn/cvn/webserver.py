@@ -16,6 +16,7 @@ import toml
 from cvn.config import entity as config_entity
 from cvn.config.ontology import OntologyConfig, Ontology, DataType
 from cvn.utils import xmltree
+import logging
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB máx.
@@ -112,7 +113,8 @@ def v1_convert():
             force = data_type_config['force']
 
         ontology_config.add_data_type(DataType(ontology=data_type_config['ontology'], name=data_type_config['name'],
-                                      python_type=data_type_config['python_type'], default=default, force=force))
+                                               python_type=data_type_config['python_type'], default=default,
+                                               force=force))
 
     # 2. Generar entidades
 
@@ -133,22 +135,13 @@ def v1_convert():
         raise ValueError("Config error: there is no primary entity")
 
     # Procesar entidad primaria
-    primary_node = xmltree.get_first_node_by_code(root, primary_entity.code)
-    if primary_node is None:
-        raise ValueError("This CVN doesn't have a primary node with personal data")
-    primary_entity.get_property_values_from_node(primary_node)
-    primary_entity.add_entity_to_ontology(ontology_config)
-    ontology_config.cvn_person = primary_entity.get_uri()
-
+    primary_entity.generate_and_add_to_ontology(ontology_config, root)
 
     for entity in entities:
         # Para cada tipo de entidad buscamos en el árbol las que tengan el código
-        for entity_result_node in xmltree.get_all_nodes_by_code(root, entity.code):
-            entity.get_property_values_from_node(entity_result_node)
-            entity.add_entity_to_ontology(ontology_config)
-            entity.clear_values()
+        entity.generate_and_add_to_ontology(ontology_config, root)
 
-    return make_response(g.serialize(format=params['format']), 200)  # TODO Quitar, DEBUG
+    return make_response(g.serialize(format=params['format']), 200)
 
 
 def get_sources_from_property(current_property, node):
@@ -189,6 +182,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     debug = args.debug
+    if debug:
+        logging.basicConfig(level=logging.DEBUG)
 
     app.run(debug=args.debug, port=args.port, host=args.host)
 

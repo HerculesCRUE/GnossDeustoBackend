@@ -140,7 +140,7 @@ namespace XUnitTestUrisFactory
                 ISchemaConfigOperations schemaConfigOperations = new SchemaConfigMemoryOperations(configJsonHandler);
                 schemaConfigOperations.SaveConfigJson();
                 UriStructureGeneral uriSchema2 = configJsonHandler.GetUrisConfig();
-                Assert.True(oldResourcesClassesCount == uriSchema2.ResourcesClasses.Count + 1 && oldUriStructuresCount == uriSchema2.UriStructures.Count + 1);
+                Assert.True(oldResourcesClassesCount > uriSchema2.ResourcesClasses.Count && oldUriStructuresCount > uriSchema2.UriStructures.Count);
             }
             else
             {
@@ -196,8 +196,10 @@ namespace XUnitTestUrisFactory
             SchemaController schemaController = new SchemaController(configJsonHandler, schemaConfigOperations);
             UriStructure newUriStructure = CreateUriStructureExample("newUriExample");
             ResourcesClass newResourcesClass = CreateResourceClassExample("newUriExample", "rsp", "pipaon");
+            List<ResourcesClass> lista = new List<ResourcesClass>();
+            lista.Add(newResourcesClass);
             InfoUriStructure structure = new InfoUriStructure();
-            structure.ResourcesClass = newResourcesClass;
+            structure.ResourcesClass = lista;
             structure.UriStructure = newUriStructure;
             var result = schemaController.AddUriStructure(structure);
             if (result is BadRequestObjectResult)
@@ -220,7 +222,9 @@ namespace XUnitTestUrisFactory
             UriStructure newUriStructure = CreateUriStructureExample("newUriExamp");
             ResourcesClass newResourcesClass = CreateResourceClassExample("newUriExample", "rsp", "pipaon");
             InfoUriStructure structure = new InfoUriStructure();
-            structure.ResourcesClass = newResourcesClass;
+            List<ResourcesClass> lista = new List<ResourcesClass>();
+            lista.Add(newResourcesClass);
+            structure.ResourcesClass = lista;
             structure.UriStructure = newUriStructure;
             var result = schemaController.AddUriStructure(structure);
             if (result is BadRequestObjectResult)

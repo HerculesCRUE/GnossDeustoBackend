@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% from "public/_public_macros.html" import score %}
 
-{% block title %}Hercules benchmarking criteria{% endblock %}
+{% block title %}{{criterion.name}} - Hercules benchmarking criteria{% endblock %}
 
 {% block content %}
   
@@ -30,7 +30,7 @@
           <tbody>
             {% for rank in ranking %}
             <tr>
-              <td><a href="/entity?uri={{rank.id}}">{{rank.name}}</a></td>
+              <td><a href="/benchmark/entity?uri={{rank.id}}">{{rank.name}}</a></td>
               <td>{{ score(rank.score, 5) }}</td>
               <td>{{rank.reason}}</td>
             </tr>
@@ -47,10 +47,10 @@
 		Adjust the weight of this criterion to see how it affects the overall ranking 
     </div>
 	<div class="col-md-5">
-      <input type="range" class="align-bottom custom-range" name="weight" id="weightI" value="{{criterion.weight}}" min="1" max="5" oninput="weightO.value = weightI.value">
+      <input type="range" class="herc_weight_setter align-bottom custom-range" name="{{criterion.id}}" id="weightI" value="{{criterion.weight}}" min="1" max="5" oninput="weightO.value = weightI.value" data-defaultvalue="{{criterion.weight}}">
     </div>
 	<div class="col-md-1">
-      <output name="weight" id="weightO">{{criterion.weight}}</output>
+      <output name="{{criterion.id}}" id="weightO">{{criterion.weight}}</output>
     </div>
     </form>
   </div>
@@ -73,7 +73,7 @@
   </div>
 
 </div>
-  
+{{super()}}
 {% endblock %}
 
 {% block scripts %}
@@ -87,11 +87,36 @@ var updateRank = function(data) {
 	$('#ranking table tbody').html(table)
 }
 $('#weightI').change(function(){
-	$.post('/ranking',
-		{ criterion: $('#criterion').attr('about'), weight : $(this).val()},
+	var crit = $('#criterion').attr('about');
+	var v = $(this).val();
+    if (v == $(this).data('defaultvalue')) {
+        // Unset local storage if matches default value
+        sessionStorage.removeItem(crit)
+        $('#weightO').removeClass('herc-user')
+    } else {
+        $('#weightO').addClass('herc-user');
+        sessionStorage.setItem(crit, v)
+    }
+    var overrides = {};
+    //overrides[crit] = v;
+    
+    for (var i = 0; i < sessionStorage.length; i++){
+    	var k = sessionStorage.key(i);
+        overrides[k] = sessionStorage[k]
+    }
+    
+	$.post(apidata.url,
+		overrides,
 		updateRank
 	)
+}).on('input change', function() {
+	// Set the value as the user slides
+    $('#weightO').text($(this).val())
 })
-$( document ).ready(function(){$('#weightI').change()})
+$( document ).ready(function(){
+	var custW = (sessionStorage.getItem('herc:weights-custom')=="true");
+	setUserWeights(!custW);
+	$('#weightI').change()
+})
 </script>
 {% endblock %}

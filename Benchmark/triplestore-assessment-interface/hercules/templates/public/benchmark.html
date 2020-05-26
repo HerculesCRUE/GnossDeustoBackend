@@ -9,12 +9,16 @@
 
   <h1>Hercules triple store benchmarking framework</h1>
 
-  <p>Click on a category name to see its details</p>
+  <p>Click on a category name to see its details
+    <label class="checkbox-inline" style="float:right">
+      <input type="checkbox" id="weight-adjust" value="true"> Adjust weights (uncheck to reset)
+    </label>  
+  </p>
 
-  <div class="row">
+  <div class="herc_benchmark row">
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     {% for cat in benchmark %}
-	  <div class="panel panel-default">
+	  <div class="herc_benchmark_cat panel panel-default">
         {{ category(cat.name, cat.description, loop.index) }}
 		<!-- Add class 'in' to expand by default -->
 		<div id="collapse{{loop.index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{loop.index}}">
@@ -22,7 +26,11 @@
 		  	{% for group in cat.groups %}
 		  	<div class="panel panel-info">
 		  	  <div class="panel-heading">
-                <h3 class="panel-title">{{group.name}}</h3>
+                <span class="panel-title" style="font-weight:bold">{{group.name}}</span>
+                <div class="herc_weight" style="float:right">
+                  <input style="display:none" type="range" class="herc_weight_setter align-bottom custom-range" name="{{group.id}}" value="{{group.weight}}" min="1" max="5" data-defaultvalue="{{group.weight}}">
+                  <output name="{{group.id}}" style="cursor: pointer">{{group.weight}}</output> 
+                </div>
               </div>
               <div class="panel-body">
                 <p>{{group.description}}</p>
@@ -31,13 +39,18 @@
                     <tr>
                       <th>Criterion</th>
                       <th>Description</th>
+                      <th class="herc_weight">Weight</th>
                     </tr>
                   </thead>
                   <tbody>
                     {% for criterion in group.criteria %}
-                    <tr>
-                      <td><a href="/entity?uri={{criterion.id}}">{{criterion.name}}</a></td>
+                    <tr about="{{criterion.id}}">
+                      <td><a href="/benchmark/entity?uri={{criterion.id}}">{{criterion.name}}</a></td>
                       <td>{{criterion.description}}</td>
+                      <td class="herc_weight">
+                        <input style="display:none" type="range" class="herc_weight_setter align-bottom custom-range" name="{{criterion.id}}" value="{{criterion.weight}}" min="1" max="5" data-defaultvalue="{{criterion.weight}}">
+                        <output name="{{criterion.id}}">{{criterion.weight}}</output>        
+                      </td>
                     </tr>
                     {% endfor %}
                   </tbody>
@@ -53,5 +66,45 @@
   </div>
 
 </div>
-  
+
+{{super()}}
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+<script>
+$('#weight-adjust').change(function() {
+    var isset = $(this).is(":checked");
+    // Show the weight column
+    $('.herc_weight').toggle(isset);
+    // Also enable/disable weights from local storage
+    setUserWeights(!isset)
+})
+$('.herc_weight').click(function() {
+    // Make the slider visible and hide the others 
+    $('.herc_weight input').hide();
+    $(this).find('input').show()
+})
+$('.herc_weight_setter').change(function() {
+    var crit = $(this).prop('name');
+    if ($(this).val() == $(this).data('defaultvalue')) {
+        // Unset local storage if matches default value
+        sessionStorage.removeItem(crit)
+        $(this).siblings('output').removeClass('herc-user')
+    } else {
+        $(this).siblings('output').addClass('herc-user');
+        sessionStorage.setItem(crit, $(this).val())
+    }
+}).on('input change', function() {
+	// Set the value as the user slides
+    $(this).siblings('output').text($(this).val())
+}).blur(function() {
+    $(this).hide()
+})
+
+$(document).ready(function() {
+    var isset = (sessionStorage.getItem('herc:weights-custom')=="true")
+    $('#weight-adjust').prop('checked',isset).change()
+})
+</script>
 {% endblock %}

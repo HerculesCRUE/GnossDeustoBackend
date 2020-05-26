@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% from "public/_public_macros.html" import category, score %}
 
-{% block title %}Hercules triple store benchmarks{% endblock %}
+{% block title %}{{store.name}} - Hercules assessment{% endblock %}
 
 {% block content %}
   
 <div class="container">
 
-  <div class="row herc-ts-heading" style="margin-bottom:20px">
+  <div class="herc_ts_info row" style="margin-bottom:20px">
     <div class="col-md-10">
       <h2>{{store.name}}</h2>
       <a href="{{store.uri}}" target="_blank">{{store.uri}}</a>
@@ -28,10 +28,16 @@
     	{% endfor %}
     </div>
   </div>
-
+ 
+  {% if assessment %}
   <p>Click on a category name to see its details</p>
+  {% else %}
+  <div class="alert alert-danger" role="alert">
+    <strong>Sorry.</strong> This database has not been assessed yet. Please check back later.
+  </div>
+  {% endif %}
 
-  <div class="row">
+  <div class="herc_assess row">
     <!--
     <div class="alert alert-warning" role="alert">Note: still need to multiply by broader criterion weight</div>
     -->
@@ -63,7 +69,7 @@
                   <tbody>
                   {% for crit in group.criteria.values() %}
                     <tr>
-                      <td><a href="/entity?uri={{crit.id}}">{{crit.name}}</a></td>
+                      <td><a href="/benchmark/entity?uri={{crit.id}}">{{crit.name}}</a></td>
                       <td>{{ score(crit.score,5) }}</td>
                       <td>{{crit.reason}}</td>
                       <td>
@@ -86,5 +92,5 @@
   </div>
 
 </div>
-  
+{{super()}}
 {% endblock %}

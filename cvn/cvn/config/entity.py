@@ -9,7 +9,9 @@ import re
 import cvn.config.condition as cvn_condition
 import cvn.config.entitycache as cvn_entity_cache
 import urllib.parse
+import cvn.utils.xmltree as xmltree
 import cvn.webserver as web_server
+import logging
 
 # Caché de URIs generadas
 # TODO mover a un servicio externo, o hacer algo más elaborado
@@ -24,6 +26,7 @@ def generate_uri(resource_class, identifier):
     :param identifier:
     :return: la URI
     """
+    
     if web_server.debug:
         return "http://data.um.es/class/" + resource_class + "/" + identifier
 
@@ -102,9 +105,13 @@ def init_entity_from_serialized_toml(config, parent=None):
     if 'cache' in config:
         cache_property = config['cache']
 
+    sub_code = False
+    if 'subcode' in config:
+        sub_code = config['subcode']
+
     entity = Entity(code=code, ontology=ontology, classname=classname, parent=parent,
                     identifier_config_resource=config_id_resource, identifier_config_format=config_id_format,
-                    primary=primary, property_cache=cache_property)
+                    primary=primary, property_cache=cache_property, sub_code=sub_code)
 
     # Populate properties
     if 'properties' in config:
@@ -121,13 +128,9 @@ def init_entity_from_serialized_toml(config, parent=None):
             name = None
 
             if 'direct' in relationship:
-                display_name_format = re.compile("^[a-zA-Z]+:\w+$")
-                if re.match(display_name_format, relationship['direct']):
-                    split = relationship['direct'].split(":")
-                    ontology = split[0]
-                    name = split[1]
-                else:
-                    raise ValueError('direct in relationship has invalid format')
+                split = relationship['direct'].split(":")
+                ontology = split[0]
+                name = split[1]
             else:
                 if 'name' in relationship:
                     if 'ontology' not in relationship:
@@ -139,13 +142,9 @@ def init_entity_from_serialized_toml(config, parent=None):
             inverse_name = None
             inverse_ontology = None
             if 'inverse' in relationship:
-                display_name_format = re.compile("^[a-zA-Z]+:\w+$")
-                if re.match(display_name_format, relationship['inverse']):
-                    split = relationship['inverse'].split(":")
-                    inverse_ontology = split[0]
-                    inverse_name = split[1]
-                else:
-                    raise ValueError('inverse in relationship has invalid format')
+                split = relationship['inverse'].split(":")
+                inverse_ontology = split[0]
+                inverse_name = split[1]
             else:
                 if 'inverse_name' in relationship:
                     if 'inverse_ontology' not in relationship:
@@ -180,11 +179,13 @@ def init_entity_from_serialized_toml(config, parent=None):
 class Entity:
     # TODO todo el tema de la id y la URI
     def __init__(self, code, ontology, classname, parent=None, identifier_config_resource=None,
-                 identifier_config_format=None, primary=False, property_cache=None):
+                 identifier_config_format=None, primary=False, property_cache=None, sub_code=False):
         self.code = code
+        self.sub_code = sub_code
         self.ontology = ontology
         self.classname = classname
         self.subentities = []
+        self.generated_subentities = []
         self.properties = []
         self.relationships = []
         self.parent = parent
@@ -218,21 +219,60 @@ class Entity:
         self.conditions.append(condition)
         return self
 
-    def get_property_values_from_node(self, item_node):
+    def generate_and_add_to_ontology(self, ontology_config, xml_tree, skip_subentities_with_subcode=True, do_loop=True):
+        if do_loop:
+            for entity_result_node in xmltree.get_all_nodes_by_code(xml_tree, self.code):
+                logging.debug("generating w/ loop: " + self.classname)
+                self.get_property_values_from_node(entity_result_node, skip_subentities_with_subcode)
+                if not self.should_generate():
+                    continue
+                self.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
+                if self.primary:
+                    ontology_config.cvn_person = self.get_uri()
+
+                for sub_entity in self.subentities:
+                    loop = False
+                    node = entity_result_node
+                    if sub_entity.sub_code:
+                        logging.debug("subcode loop")
+                        loop = True
+                    sub_entity.generate_and_add_to_ontology(ontology_config, node,
+                                                            skip_subentities_with_subcode=False, do_loop=loop)
+                self.clear_values()
+        else:
+            logging.debug("generating " + self.classname)
+            self.get_property_values_from_node(xml_tree, skip_subentities_with_subcode)
+            if not self.should_generate():
+                return
+            self.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
+
+            for sub_entity in self.subentities:
+                loop = False
+                if sub_entity.sub_code:
+                    logging.debug("subcode no loop " + str(xml_tree))
+                    loop = True
+                    sub_entity.generate_and_add_to_ontology(ontology_config, xml_tree,
+                                                            skip_subentities_with_subcode=False, do_loop=loop)
+                else:
+                    sub_entity.generate_and_add_to_ontology(ontology_config, xml_tree,
+                                                            skip_subentities_with_subcode=False, do_loop=loop)
+            self.clear_values()
+
+    def get_property_values_from_node(self, item_node, skip_subentities_with_subcode):
+        node = item_node
         for property_item in self.properties:
             property_item.get_value_from_node(item_node)
         self.xml_item = item_node
-        for subentities in self.subentities:
-            subentities.get_property_values_from_node(item_node)
 
-    def clear_values(self):
+    def clear_values(self, include_sub_entities_with_sub_code=False):
         self.generated_identifier = None
         for property_item in self.properties:
             property_item.clear_values()
         self.node = None
         self.xml_item = None
         for subentity in self.subentities:
-            subentity.clear_values()
+            if include_sub_entities_with_sub_code or not subentity.sub_code:
+                subentity.clear_values()
         return self
 
     def is_blank_node(self):
@@ -297,10 +337,6 @@ class Entity:
                         if data_type.force:
                             literal_type = ontology_config.get_ontology(data_type.ontology).term(data_type.name)
 
-                        print("Generando tripleta de tipo " + str(type(property_value)) + " con valor "
-                              + str(property_value))
-                        print("Generando tipo " + str(type(literal_type)) + " con valor " + str(literal_type))
-
                 triple = self.get_uri(), \
                          ontology_config.get_ontology(property_item.ontology).term(property_item.name), \
                          Literal(property_value, datatype=literal_type)
@@ -322,21 +358,43 @@ class Entity:
 
             # Relación directa
             if (relationship.name is not None) and (relationship.ontology is not None):
+
+                # Rellenar el nombre de la propiedad con el valor de la propiedad correspondiente, si existiera
+                name = relationship.name
+                property_dict = self.get_property_dict(format_safe=True)
+                if '{' in name:
+                    if has_all_formatting_fields(name, property_dict):
+                        name = name.format_map(property_dict)
+                    else:
+                        continue
+
                 direct_triple = self.get_uri(), \
-                                ontology_config.get_ontology(relationship.ontology).term(relationship.name), \
+                                ontology_config.get_ontology(relationship.ontology).term(name), \
                                 other
                 triples.append(direct_triple)
 
             # Relación inversa
             if (relationship.inverse_name is not None) and \
                     (relationship.inverse_ontology is not None):
+
+                # Rellenar el nombre de la propiedad con el valor de la propiedad correspondiente, si existiera
+                name = relationship.inverse_name
+                property_dict = self.get_property_dict(format_safe=True)
+                if '{' in name:
+                    if has_all_formatting_fields(name, property_dict):
+                        name = name.format_map(property_dict)
+                    else:
+                        continue
+
                 inverse_triple = other, ontology_config.get_ontology(relationship.inverse_ontology) \
-                    .term(relationship.inverse_name), self.get_uri()
+                    .term(name), self.get_uri()
                 triples.append(inverse_triple)
+            else:
+                continue
 
         return triples
 
-    def add_entity_to_ontology(self, ontology_config):
+    def add_entity_to_ontology(self, ontology_config, skip_subentities_with_subcode):
         if not self.should_generate():
             return
 
@@ -353,7 +411,10 @@ class Entity:
 
         # Subentidades
         for subentity in self.subentities:
-            subentity.add_entity_to_ontology(ontology_config)
+            if skip_subentities_with_subcode and subentity.sub_code:
+                subentity.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
+            else:
+                subentity.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
 
     def get_property_dict(self, format_safe=False):
         properties = {}
