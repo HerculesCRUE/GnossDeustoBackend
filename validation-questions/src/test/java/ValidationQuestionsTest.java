@@ -60,10 +60,11 @@ public class ValidationQuestionsTest {
 		expectedResult.add("http://purl.org/roh/data#centro-investigacion-1");
 		
 		String queryString = "PREFIX roh: <http://purl.org/roh#>\n" + 
+				"PREFIX uneskos: <http://purl.org/roh/unesco-individuals#>\n" +
 				"\n" + 
 				"SELECT ?centro WHERE {\n" + 
 				"        ?centro a roh:ResearchGroup ;\n" + 
-				"                          roh:hasKnowledgeArea unesco:C00261 .\n" + 
+				"                          roh:hasKnowledgeArea uneskos:120304 .\n" + 
 				"}";
 		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
@@ -98,7 +99,7 @@ public class ValidationQuestionsTest {
 				"\n" + 
 				"SELECT ?researcher ?center ?positionClass\n" + 
 				"WHERE {\n" + 
-				"  ?researcher	roh:hasKnowledgeArea unesco:C00261 ;\n" + 
+				"  ?researcher	roh:hasKnowledgeArea unesco:120304 ;\n" + 
 				"  				roh:hasPosition ?position .\n" + 
 				"  ?position vivo:relates ?center ;\n" + 
 				"  			a	?positionClass .\n" +
@@ -234,9 +235,9 @@ public class ValidationQuestionsTest {
 	@Test
 	public void Q6() {
 		List<String[]> expectedResult = new ArrayList<String[]>();
-		expectedResult.add(new String[]{"http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/data#journal-article-1", "http://purl.org/roh/unesco-individuals#C00750"});
-		expectedResult.add(new String[]{"http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/data#my-fabulous-patent", "http://purl.org/roh/unesco-individuals#C00750"});
-		expectedResult.add(new String[]{"http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/data#another-fabulous-patent", "http://purl.org/roh/unesco-individuals#C00750"});
+		expectedResult.add(new String[]{"http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/data#journal-article-1", "http://purl.org/roh/unesco-individuals#1203"});
+		expectedResult.add(new String[]{"http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/data#my-fabulous-patent", "http://purl.org/roh/unesco-individuals#1203"});
+		expectedResult.add(new String[]{"http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/data#another-fabulous-patent", "http://purl.org/roh/unesco-individuals#1203"});
 		
 		String queryString =  "PREFIX vivo: <http://purl.org/roh/mirror/vivo#>\n" + 
 				"PREFIX roh: <http://purl.org/roh#>\n" + 
@@ -438,8 +439,8 @@ public class ValidationQuestionsTest {
 	@Test 
 	public void Q9 () {
 		List<String[]> expectedResult = new ArrayList<String[]>();
-		expectedResult.add(new String[]{"http://purl.org/roh/data#my-fabulous-patent", "http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/unesco-individuals#C00750"});
-		expectedResult.add(new String[]{"http://purl.org/roh/data#another-fabulous-patent", "http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/unesco-individuals#C00750"});
+		expectedResult.add(new String[]{"http://purl.org/roh/data#my-fabulous-patent", "http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/unesco-individuals#1203"});
+		expectedResult.add(new String[]{"http://purl.org/roh/data#another-fabulous-patent", "http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/unesco-individuals#1203"});
 		
 		String queryString = "PREFIX vivo: <http://purl.org/roh/mirror/vivo#>\n" + 
 				"PREFIX roh: <http://purl.org/roh#>\n" + 
@@ -484,8 +485,8 @@ public class ValidationQuestionsTest {
 	@Test
 	public void Q10() {
 		List<String[]> expectedResult = new ArrayList<String[]>();
-		expectedResult.add(new String[]{"http://purl.org/roh/data#a-project", "http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/unesco-individuals#C00750"});
-		expectedResult.add(new String[]{"http://purl.org/roh/data#a-project", "http://purl.org/roh/data#company-one", "http://purl.org/roh/unesco-individuals#C00750"});
+		expectedResult.add(new String[]{"http://purl.org/roh/data#a-project", "http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/unesco-individuals#1203"});
+		expectedResult.add(new String[]{"http://purl.org/roh/data#a-project", "http://purl.org/roh/data#company-one", "http://purl.org/roh/unesco-individuals#1203"});
 		
 		String queryString = "PREFIX vivo: <http://purl.org/roh/mirror/vivo#>\n" + 
 				"PREFIX roh: <http://purl.org/roh#>\n" + 
@@ -634,7 +635,7 @@ public class ValidationQuestionsTest {
 	@Test
 	public void Q12() {
 		List<String[]> expectedResult = new ArrayList<String[]>();
-		expectedResult.add(new String[]{"http://purl.org/roh/data#a-project", "http://purl.org/roh/data#centro-investigacion-1", "http://www.geonames.org/3336903/"});
+		expectedResult.add(new String[]{"http://purl.org/roh/data#a-project", "http://purl.org/roh/data#centro-investigacion-1", "https://sws.geonames.org/3336903/"});
 		
 		String queryString = "PREFIX vivo: <http://purl.org/roh/mirror/vivo#>\n" + 
 				"PREFIX roh: <http://purl.org/roh#>\n" +
@@ -753,9 +754,16 @@ public class ValidationQuestionsTest {
 				"PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n" +
 				"SELECT DISTINCT ?project \n" +
 				"WHERE {\n" +
+				"{\n" +
 				"?project a vivo:Project ;\n" +
 				"roh:hasKnowledgeArea ?knowledgeArea .\n" +
-				"?knowledgeArea skos:broader+|skos:narrower+|skos:related+ uneskos:C00750 .\n" +
+				"?knowledgeArea skos:broader+|skos:narrower+|skos:related+ uneskos:1203 .\n" +
+				"} UNION {\n" +
+					"uneskos:1203 skos:broader+ ?topKnowledgeArea .\n" +
+					"?topKnowledgeArea skos:narrower+ ?otherKnowledgeArea .\n" +
+					"?project roh:hasKnowledgeArea ?otherKnowledgeArea ;\n" +
+					"a vivo:Project .\n" +
+				"}\n" +
 				"}\n";
 		writeSPARQLQuery(Thread.currentThread().getStackTrace()[1].getMethodName(), queryString);
 		Query query = QueryFactory.create(queryString) ;
@@ -992,8 +1000,8 @@ public class ValidationQuestionsTest {
 	@Test
 	public void Q20() {
 		List<String[]> expectedResult = new ArrayList<String[]>();
-		expectedResult.add(new String[]{"http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/unesco-individuals#C00750", "4"});
-		expectedResult.add(new String[]{"http://purl.org/roh/data#company-one", "http://purl.org/roh/unesco-individuals#C00750", "1"});
+		expectedResult.add(new String[]{"http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/unesco-individuals#1203", "4"});
+		expectedResult.add(new String[]{"http://purl.org/roh/data#company-one", "http://purl.org/roh/unesco-individuals#1203", "1"});
 		
 		String queryString = "PREFIX roh: <http://purl.org/roh#>\n" + 
 				"PREFIX vivo: <http://purl.org/roh/mirror/vivo#>\n" +
@@ -1728,7 +1736,7 @@ public class ValidationQuestionsTest {
 	@Test
 	public void Q39() {
 		List<String[]> expectedResult = new ArrayList<String[]>();
-		expectedResult.add(new String[]{"http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/unesco-individuals#C00750", "10000"});
+		expectedResult.add(new String[]{"http://purl.org/roh/data#centro-investigacion-1", "http://purl.org/roh/unesco-individuals#1203", "10000"});
 		
 		String queryString = "PREFIX roh: <http://purl.org/roh#>\n" +
 				"PREFIX vivo: <http://purl.org/roh/mirror/vivo#>\n" + 
@@ -2135,7 +2143,7 @@ public class ValidationQuestionsTest {
 	@Test
 	public void Q53() {
 		List<String[]> expectedResult = new ArrayList<String[]>();
-		expectedResult.add(new String[]{"http://purl.org/roh/data#excelent-journal", "http://purl.org/roh/unesco-individuals#C00750"});
+		expectedResult.add(new String[]{"http://purl.org/roh/data#excelent-journal", "http://purl.org/roh/unesco-individuals#1203"});
 		
 		String queryString = "PREFIX roh: <http://purl.org/roh#>\n" + 
 				"PREFIX vivo: <http://purl.org/roh/mirror/vivo#>\n" + 

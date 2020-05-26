@@ -1,4 +1,3 @@
-PREFIX vivo: <http://vivoweb.org/ontology/core#>
 PREFIX roh: <http://purl.org/roh#>
 PREFIX ro: <http://purl.org/roh/mirror/obo/ro#>
 PREFIX bibo: <http://purl.org/ontology/bibo/>
