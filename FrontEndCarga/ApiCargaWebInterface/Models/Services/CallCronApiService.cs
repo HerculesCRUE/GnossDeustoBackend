@@ -12,6 +12,7 @@ namespace ApiCargaWebInterface.Models.Services
         readonly CallCronService _serviceApi;
         readonly static string _urlRecurringJobApi = "RecurringJob";
         readonly static string _urlJobApi = "Job";
+        readonly static string _urlScheduledJobApi = "ScheduledJob";
         public CallCronApiService(CallCronService serviceApi)
         {
             _serviceApi = serviceApi;
@@ -64,6 +65,18 @@ namespace ApiCargaWebInterface.Models.Services
             string result = _serviceApi.CallPostApi($"{ _urlRecurringJobApi}?{uriParams}", null);
             guidAdded = JsonConvert.DeserializeObject<string>(result);
             return guidAdded;
+        }
+
+        public void DeleteRecurringJob(string id)
+        {
+            string result = _serviceApi.CallDeleteApi($"{_urlRecurringJobApi}?nombre_job={id}");
+            result = JsonConvert.DeserializeObject<string>(result);
+        }
+
+        public void DeleteScheduledJob(string id)
+        {
+            string result = _serviceApi.CallDeleteApi($"{_urlScheduledJobApi}?id={id}");
+            result = JsonConvert.DeserializeObject<string>(result);
         }
     }
 }

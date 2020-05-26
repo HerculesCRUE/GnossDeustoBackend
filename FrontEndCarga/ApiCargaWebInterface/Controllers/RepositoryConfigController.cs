@@ -11,9 +11,11 @@ namespace ApiCargaWebInterface.Controllers
     public class RepositoryConfigController : Controller
     {
         readonly ICallRepositoryConfigService _serviceApi;
-        public RepositoryConfigController(ICallRepositoryConfigService serviceApi)
+        readonly CallRepositoryJobService _respositoryJobService;
+        public RepositoryConfigController(ICallRepositoryConfigService serviceApi, CallRepositoryJobService respositoryJobService)
         {
             _serviceApi = serviceApi;
+            _respositoryJobService = respositoryJobService;
         }
         public IActionResult Index()
         {
@@ -25,6 +27,9 @@ namespace ApiCargaWebInterface.Controllers
         public IActionResult Details(Guid id)
         {
             RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(id);
+            result.ListRecurringJobs = _respositoryJobService.GetRecurringJobsOfRepo(id);
+            result.ListJobs = _respositoryJobService.GetJobsOfRepo(id);
+            result.ListScheduledJobs = _respositoryJobService.GetScheduledJobsOfRepo(id);
             if (result != null)
             {
                 return View(result);

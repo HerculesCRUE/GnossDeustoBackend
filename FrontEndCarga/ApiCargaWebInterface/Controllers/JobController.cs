@@ -81,6 +81,19 @@ namespace ApiCargaWebInterface.Controllers
             
         }
 
+        public IActionResult Delete(string id, string job)
+        {
+            if (job.Equals("scheduled"))
+            {
+                _serviceApi.DeleteScheduledJob(id);
+            }
+            else if (job.Equals("recurring"))
+            {
+                _serviceApi.DeleteRecurringJob(id);
+            }
+            return View("Deleted", id);
+        }
+
         public IActionResult Syncro(Guid repositoryId)
         {
             CreateJobViewModel jobModel = new CreateJobViewModel() { IdRepository = repositoryId };

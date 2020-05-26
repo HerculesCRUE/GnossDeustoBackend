@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CronConfigure.Models;
+using CronConfigure.Models.Entitties;
 using CronConfigure.Models.Enumeracion;
 using CronConfigure.ViewModels;
 using Hangfire;
@@ -53,6 +54,24 @@ namespace CronConfigure.Models.Services
         {
             BackgroundJob.Delete(id);
             var rel = _context.JobRepository.FirstOrDefault(item => item.IdJob.Equals(id));
+            if (rel == null)
+            {
+                var list = _context.JobRepository.Where(item => item.IdJob.Contains($"{id}_") && item.FechaEjecucion > DateTime.Now).ToList();
+                if (list.Count>1)
+                {
+                    foreach(var job in list)
+                    {
+                        if (job.IdJob.Split("_")[0].Equals(id))
+                        {
+                            rel = job;
+                        }
+                    }
+                }
+                else
+                {
+                    rel = list[0];
+                }
+            }
             _context.Entry(rel).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             _context.SaveChanges();
         }
@@ -60,7 +79,52 @@ namespace CronConfigure.Models.Services
         public void DeleteRecurringJob(string id)
         {
             RecurringJob.RemoveIfExists(id);
-            var rel = _context.JobRepository.FirstOrDefault(item => item.IdJob.Equals(id));
+            JobRepository rel = null;
+            var list = _context.JobRepository.Where(item => item.IdJob.Contains($"_{id}") && item.FechaEjecucion < DateTime.Now).ToList();
+            foreach(var job in list)
+            {
+                var parts = job.IdJob.Split("_");
+                string jobID = parts[1];
+                if (parts.Length > 2)
+                {
+                    var correct = CrontabSchedule.TryParse(parts[parts.Length - 1]);
+                    if (correct != null)
+                    {
+                        int partsNum = parts.Length;
+                        for (int i = 1; i < partsNum - 1; i++)
+                        {
+                            if (i == 1)
+                            {
+                                jobID = $"{parts[i]}";
+                            }
+                            else
+                            {
+                                jobID = $"{jobID}_{parts[i]}";
+                            }
+                        }
+                    }
+                    else
+                    {
+                        int partsNum = parts.Length;
+                        for (int i = 1; i < partsNum; i++)
+                        {
+                            if (i == 1)
+                            {
+                                jobID = $"{parts[i]}";
+                            }
+                            else
+                            {
+                                jobID = $"{jobID}_{parts[i]}";
+                            }
+                        }
+                    }
+
+                }
+                if (jobID.Equals(id))
+                {
+                    rel = job;
+                }
+            }
             _context.Entry(rel).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             _context.SaveChanges();
         }
@@ -115,7 +179,7 @@ namespace CronConfigure.Models.Services
                     listJobViewModel.Add(job);
                 }
             }
-            listJobViewModel = listJobViewModel.OrderBy(item => item.State).ToList();
+            listJobViewModel = listJobViewModel.OrderByDescending(item => item.State).ToList();
             return listJobViewModel;
         }
 
@@ -151,17 +215,20 @@ namespace CronConfigure.Models.Services
             {
                 var jobDetails = api.JobDetails(id.ToString());
                 string state = "";
-                if (jobDetails.History.Count > 0)
+                if (jobDetails != null)
                 {
-                    state = jobDetails.History[0].StateName;
+                    if (jobDetails.History.Count > 0)
+                    {
+                        state = jobDetails.History[0].StateName;
+                    }
+                    JobViewModel job = new JobViewModel()
+                    {
+                        Id = id.ToString(),
+                        Job = jobDetails.Job.ToString(),
+                        State = state
+                    };
+                    listJobViewModel.Add(job);
                 }
-                JobViewModel job = new JobViewModel()
-                {
-                    Id = id.ToString(),
-                    Job = jobDetails.Job.ToString(),
-                    State = state
-                };
-                listJobViewModel.Add(job);
             }
             return listJobViewModel;
 
@@ -181,14 +248,16 @@ namespace CronConfigure.Models.Services
         {
             var api = JobStorage.Current.GetMonitoringApi();
             var jobDto = api.JobDetails(id);
-            JobViewModel job = new JobViewModel();
+            JobViewModel job = null;
             string state = "";
             
             if (jobDto != null)
             {
+                job = new JobViewModel();
                 if (jobDto.History.Count > 0)
                 {
                     state = jobDto.History[0].StateName;
+                    job.ExecutedAt = jobDto.History[0].CreatedAt;
                 }
                 job.ExceptionDetails = "";
                 job.Id = id;

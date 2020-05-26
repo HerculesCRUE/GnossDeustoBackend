@@ -26,7 +26,7 @@ namespace CronConfigure.Models.Services
                 {
                     
                     var parts = id.Split("_");
-                    string jobID = "";
+                    string jobID = parts[1];
                     if (parts.Length > 2)
                     {
                         var correct = CrontabSchedule.TryParse(parts[parts.Length-1]);
@@ -78,9 +78,13 @@ namespace CronConfigure.Models.Services
             List<string> jobsId = _context.JobRepository.Where(item => item.IdRepository.Equals(repositoryID) && item.FechaEjecucion < DateTime.Now && !item.IdJob.Contains("_")).Select(item => item.IdJob).ToList();
             foreach(string id in jobsId)
             {
-                jobs.Add(_cronApiService.GetJob(id));
+                var job = _cronApiService.GetJob(id);
+                if (job != null)
+                {
+                    jobs.Add(job);
+                }
             }
-            return jobs.OrderBy(item => item.ExecutedAt).ToList();
+            return jobs.OrderByDescending(item => item.ExecutedAt).ToList();
         }
 
         public List<ScheduledJobViewModel> GetScheduledJobs(Guid repositoryID)
@@ -119,7 +123,7 @@ namespace CronConfigure.Models.Services
             List<JobViewModel> listAllJobs = new List<JobViewModel>();
             List<JobViewModel> listJobs = GetJobs(repositoryID);
             List<JobViewModel> listJobsOfRecurring = GetJobsOfRecurringJob(repositoryID);
-            listAllJobs = listJobs.Union(listJobsOfRecurring).OrderBy(item => item.ExecutedAt).ToList();
+            listAllJobs = listJobs.Union(listJobsOfRecurring).OrderByDescending(item => item.ExecutedAt).ToList();
             return listAllJobs;
         }
     }
