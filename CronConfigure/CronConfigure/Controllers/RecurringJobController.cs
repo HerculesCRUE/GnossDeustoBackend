@@ -91,6 +91,10 @@ namespace CronConfigure.Controllers
             {
                 return BadRequest("Ya existe una tarea con ese nombre");
             }
+            else if (string.IsNullOrEmpty(nombre_job))
+            {
+                return BadRequest("El nombre no puede ser vacío");
+            }
             else
             {
                 var correct = CrontabSchedule.TryParse(cron_expression);
