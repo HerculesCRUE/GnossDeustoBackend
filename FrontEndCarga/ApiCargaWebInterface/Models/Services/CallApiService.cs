@@ -1,4 +1,5 @@
 ﻿using ApiCargaWebInterface.Extra.Exceptions;
+using ApiCargaWebInterface.Models.Entities;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
@@ -16,13 +17,17 @@ namespace ApiCargaWebInterface.Models.Services
             _serviceUrl = serviceUrl;
         }
 
-        public string CallDeleteApi(string urlMethod)
+        public string CallDeleteApi(string urlMethod, TokenBearer token = null)
         {
             string result = "";
             HttpResponseMessage response = null;
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
                 string url = _serviceUrl.GetUrl();
                 response = client.DeleteAsync($"{url}{urlMethod}").Result;
                 response.EnsureSuccessStatusCode();
@@ -42,13 +47,17 @@ namespace ApiCargaWebInterface.Models.Services
             return result;
         }
 
-        public string CallGetApi(string urlMethod)
+        public string CallGetApi(string urlMethod, TokenBearer token = null)
         {
             string result = "";
             HttpResponseMessage response = null;
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null) 
+                { 
+                    client.DefaultRequestHeaders.Add("Authorization",$"{token.token_type} {token.access_token}");
+                }
                 string url = _serviceUrl.GetUrl();
                 response = client.GetAsync($"{url}{urlMethod}").Result;
                 response.EnsureSuccessStatusCode();
@@ -68,7 +77,7 @@ namespace ApiCargaWebInterface.Models.Services
             return result;
         }
 
-        public string CallPostApi(string urlMethod, object item, bool isFile = false)
+        public string CallPostApi(string urlMethod, object item, TokenBearer token = null, bool isFile = false)
         {
             HttpContent contentData = null;
             if (!isFile)
@@ -92,6 +101,10 @@ namespace ApiCargaWebInterface.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
                 string url = _serviceUrl.GetUrl();
                 response = client.PostAsync($"{url}{urlMethod}", contentData).Result;
                 response.EnsureSuccessStatusCode();
@@ -115,7 +128,7 @@ namespace ApiCargaWebInterface.Models.Services
             }
         }
 
-        public string CallPutApi(string urlMethod, object item, bool isFile=false)
+        public string CallPutApi(string urlMethod, object item, TokenBearer token = null, bool isFile=false)
         {
             HttpContent contentData = null;
             if (!isFile)
@@ -142,6 +155,10 @@ namespace ApiCargaWebInterface.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
                 string url = _serviceUrl.GetUrl();
                 response = client.PutAsync($"{url}{urlMethod}", contentData).Result;
                 response.EnsureSuccessStatusCode();
@@ -164,5 +181,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
             }
         }
+
+       
     }
 }

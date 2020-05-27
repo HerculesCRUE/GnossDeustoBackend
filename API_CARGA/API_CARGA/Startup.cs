@@ -8,6 +8,7 @@ using API_CARGA.ModelExamples;
 using API_CARGA.Models;
 using API_CARGA.Models.Services;
 using IdentityServer4.EntityFramework.DbContexts;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -41,12 +42,47 @@ namespace PRH
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 //options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
-
+            services.AddAuthentication(options => {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "http://localhost:56306";
+                    //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
+                    options.RequireHttpsMetadata = false;
+                    options.ApiName = "apiCarga";
+                    //options.ApiSecret = "secret".Sha256();
+                });
+            services.AddAuthorization();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API de carga", Version = "v1",Description= "API de carga" });
                 c.IncludeXmlComments(string.Format(@"{0}comments.xml", System.AppDomain.CurrentDomain.BaseDirectory));
                 c.ExampleFilters();
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme."
+
+                    //Flows = new OpenApiOAuthFlows
+                    //{
+                    //    ClientCredentials = new OpenApiOAuthFlow
+                    //    {
+                    //       AuthorizationUrl = new Uri("http://localhost:56306/connect/authorize"),
+                    //        TokenUrl = new Uri("http://localhost:56306/connect/token"),
+                    //        Scopes = new Dictionary<string, string>
+                    //        {
+                    //            { "apiCarga", "permission" }
+                    //        }
+                    //    }
+                    //}
+                });
+                c.OperationFilter<SecurityRequirementsOperationFilter>();
             });
             services.AddSwaggerExamplesFromAssemblyOf<ConfigRepositoriesResponse>();
             services.AddSwaggerExamplesFromAssemblyOf<ConfigRepositoryResponse>();
@@ -101,7 +137,7 @@ namespace PRH
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseAuthentication();
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseHttpsRedirection();
 
@@ -124,6 +160,10 @@ namespace PRH
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("v1/swagger.json", "API de carga");
+
+                c.OAuthClientId("carga");
+                c.OAuthClientSecret("secret");
+                c.OAuthAppName("apiCarga");
             });
 
             app.UseEndpoints(endpoints =>

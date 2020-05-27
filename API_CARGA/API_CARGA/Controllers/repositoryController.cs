@@ -4,6 +4,7 @@ using API_CARGA.ModelExamples;
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
 using API_CARGA.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -11,6 +12,7 @@ using Swashbuckle.AspNetCore.Filters;
 
 namespace API_CARGA.Controllers
 {
+    [Authorize]
     /// <summary>
     /// Contiene los procesos necesarios para la gestión de los repositorios OAI-PMH (creación, modificación, eliminación...).
     /// </summary>

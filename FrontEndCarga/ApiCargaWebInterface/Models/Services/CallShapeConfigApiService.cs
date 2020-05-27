@@ -22,7 +22,7 @@ namespace ApiCargaWebInterface.Models.Services
             Guid guidAdded;
             string parameters = $"?name={newRepositoryConfigView.Name}&repositoryID={newRepositoryConfigView.RepositoryID}";
 
-            string result = _serviceApi.CallPostApi($"{_urlShapeConfigApi}{parameters}", newRepositoryConfigView.ShapeFile, true);
+            string result = _serviceApi.CallPostApi($"{_urlShapeConfigApi}{parameters}", newRepositoryConfigView.ShapeFile, null, true);
             result = JsonConvert.DeserializeObject<string>(result);
             Guid.TryParse(result, out guidAdded);
             result = _serviceApi.CallGetApi($"{_urlShapeConfigApi}/{guidAdded}");
@@ -58,7 +58,7 @@ namespace ApiCargaWebInterface.Models.Services
         public void ModifyShapeConfig(ShapeConfigEditModel repositoryConfigView)
         {
             string parameters = $"?name={repositoryConfigView.Name}&repositoryID={repositoryConfigView.RepositoryID}&shapeConfigID={repositoryConfigView.ShapeConfigID}";
-            string result = _serviceApi.CallPutApi($"{_urlShapeConfigApi}{parameters}", repositoryConfigView.ShapeFile, true);
+            string result = _serviceApi.CallPutApi($"{_urlShapeConfigApi}{parameters}", repositoryConfigView.ShapeFile,null, true);
         }
     }
 }

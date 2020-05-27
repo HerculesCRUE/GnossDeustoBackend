@@ -14,7 +14,7 @@ namespace XUnitTestIntegracion
             {
                 ConfigUrlService configUrl = new ConfigUrlService();
                 CallApiService callService = new CallApiService(configUrl);
-                CallRepositoryConfigApiService callRepository = new CallRepositoryConfigApiService(callService);
+                CallRepositoryConfigApiService callRepository = new CallRepositoryConfigApiService(callService, null);
                 var resultado = callRepository.GetRepositoryConfigs();
                 Assert.True(true);
             }
@@ -31,7 +31,7 @@ namespace XUnitTestIntegracion
             {
                 ConfigUrlService configUrl = new ConfigUrlService();
                 CallApiService callService = new CallApiService(configUrl);
-                CallRepositoryConfigApiService callRepository = new CallRepositoryConfigApiService(callService);
+                CallRepositoryConfigApiService callRepository = new CallRepositoryConfigApiService(callService, null);
                 Guid id = Guid.NewGuid();
                 var resultado = callRepository.GetRepositoryConfig(id);
                 Assert.True(true);
@@ -49,7 +49,7 @@ namespace XUnitTestIntegracion
             {
                 ConfigUrlService configUrl = new ConfigUrlService();
                 CallApiService callService = new CallApiService(configUrl);
-                CallRepositoryConfigApiService callRepository = new CallRepositoryConfigApiService(callService);
+                CallRepositoryConfigApiService callRepository = new CallRepositoryConfigApiService(callService, null);
                 Guid id = Guid.NewGuid();
                 var resultado = callRepository.DeleteRepositoryConfig(id);
                 Assert.True(true);
@@ -67,7 +67,7 @@ namespace XUnitTestIntegracion
             {
                 ConfigUrlService configUrl = new ConfigUrlService();
                 CallApiService callService = new CallApiService(configUrl);
-                CallRepositoryConfigApiService callRepository = new CallRepositoryConfigApiService(callService);
+                CallRepositoryConfigApiService callRepository = new CallRepositoryConfigApiService(callService, null);
                 RepositoryConfigViewModel item = new RepositoryConfigViewModel()
                 {
                     Name = "Prueba",
@@ -90,7 +90,7 @@ namespace XUnitTestIntegracion
             {
                 ConfigUrlService configUrl = new ConfigUrlService();
                 CallApiService callService = new CallApiService(configUrl);
-                CallRepositoryConfigApiService callRepository = new CallRepositoryConfigApiService(callService);
+                CallRepositoryConfigApiService callRepository = new CallRepositoryConfigApiService(callService, null);
                 RepositoryConfigViewModel item = new RepositoryConfigViewModel()
                 {
                     Name = "Prueba_",

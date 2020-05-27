@@ -1,4 +1,5 @@
 ﻿using ApiCargaWebInterface.Extra.Exceptions;
+using ApiCargaWebInterface.Models.Entities;
 using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http;
@@ -13,7 +14,7 @@ namespace ApiCargaWebInterface.Models.Services
             _serviceUrl = serviceUrl;
         }
 
-        public string CallDeleteApi(string urlMethod)
+        public string CallDeleteApi(string urlMethod, TokenBearer token = null)
         {
             string result = "";
             HttpResponseMessage response = null;
@@ -39,7 +40,7 @@ namespace ApiCargaWebInterface.Models.Services
             return result;
         }
 
-        public string CallGetApi(string urlMethod)
+        public string CallGetApi(string urlMethod, TokenBearer token = null)
         {
             string result = "";
             HttpResponseMessage response = null;
@@ -65,7 +66,7 @@ namespace ApiCargaWebInterface.Models.Services
             return result;
         }
 
-        public string CallPostApi(string urlMethod, object item, bool isFile = false)
+        public string CallPostApi(string urlMethod, object item, TokenBearer token = null, bool isFile = false)
         {
             string stringData = JsonConvert.SerializeObject(item);
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
@@ -97,7 +98,7 @@ namespace ApiCargaWebInterface.Models.Services
             }
         }
 
-        public string CallPutApi(string urlMethod, object item, bool isFile = false)
+        public string CallPutApi(string urlMethod, object item, TokenBearer token = null, bool isFile = false)
         {
             string stringData = JsonConvert.SerializeObject(item);
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");

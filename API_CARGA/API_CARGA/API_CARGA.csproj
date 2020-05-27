@@ -47,6 +47,7 @@
     </PackageReference>
     <PackageReference Include="dotNetRDF" Version="2.5.1" />
     <PackageReference Include="IdentityServer4" Version="3.1.2" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
     <PackageReference Include="IdentityServer4.EntityFramework" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
