@@ -1,8 +1,10 @@
-using System; 
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Reflection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -30,18 +32,39 @@ namespace UrisFactory
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IDictionary environmentVariables = Environment.GetEnvironmentVariables();
             services.AddControllers();
+            string authority = "";
+            if (environmentVariables.Contains("Authority"))
+            {
+                authority = environmentVariables["Authority"] as string;
+            }
+            else
+            {
+                authority = Configuration["Authority"];
+            }
+            string scope = "";
+            if (environmentVariables.Contains("Scope"))
+            {
+                scope = environmentVariables["Scope"] as string;
+            }
+            else
+            {
+                scope = Configuration["Scope"];
+            }
 
-            //IdentityServer
-            //services.AddAuthentication("Bearer")
-            //.AddJwtBearer("Bearer", options =>
-            //{
-            //    options.Authority = "http://localhost:5000";
-            //    options.RequireHttpsMetadata = false;
-
-            //    options.Audience = "api_uris";
-            //});
-
+            services.AddAuthentication(options => {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = authority;
+                    //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
+                    options.RequireHttpsMetadata = false;
+                    options.ApiName = scope;
+                });
+            services.AddAuthorization();
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Uris factory", Version = "v1"});
@@ -50,32 +73,16 @@ namespace UrisFactory
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
                 options.ExampleFilters();
-                // Define the OAuth2.0 scheme that's in use (i.e. Implicit Flow)
-            //    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-            //    {
-            //        Type = SecuritySchemeType.OAuth2,
-            //        Flows = new OpenApiOAuthFlows
-            //        {
-            //            Implicit = new OpenApiOAuthFlow
-            //            {
-            //                AuthorizationUrl = new System.Uri("http://localhost:5000/auth-server/connect/authorize", UriKind.Absolute),
-            //                Scopes = new Dictionary<string, string>
-            //                {
-            //                    { "api_uris", "Uris factory" }
-            //                }
-            //            }
-            //        }
-            //    });
-            //    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-            //    {
-            //        {
-            //            new OpenApiSecurityScheme
-            //            {
-            //                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
-            //            },
-            //            new[] { "api_uris", "Uris factory" }
-            //        }
-            //    });
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme."
+                });
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
             });
             services.Configure<ForwardedHeadersOptions>(options =>
             {
@@ -103,6 +110,7 @@ namespace UrisFactory
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseAuthentication();
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseMiddleware(typeof(LoadConfigJsonMiddleware));
             app.UseHttpsRedirection();
