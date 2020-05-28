@@ -28,7 +28,8 @@ namespace ApiCargaWebInterface
             services.AddScoped<ICallShapeConfigService, CallShapeConfigApiService>();
             services.AddScoped(typeof(CallCronApiService));
             services.AddScoped(typeof(CallCronService));
-            services.AddScoped(typeof(CallTokenService));
+            services.AddScoped(typeof(ConfigTokenService));
+            services.AddScoped(typeof(CallTokenService)); 
             services.AddScoped(typeof(CallRepositoryJobService)); 
         }
 

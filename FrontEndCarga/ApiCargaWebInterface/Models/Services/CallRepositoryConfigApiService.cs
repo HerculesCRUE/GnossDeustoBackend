@@ -19,7 +19,7 @@ namespace ApiCargaWebInterface.Models.Services
             _serviceApi = serviceApi;
             if (tokenService != null) 
             {
-                _token = tokenService.CallTokenIdentity("http://localhost:56306/connect/token", "client_credentials", "apiCarga", "carga", "secret");
+                _token = tokenService.CallTokenIdentity();
             }
         }
 
