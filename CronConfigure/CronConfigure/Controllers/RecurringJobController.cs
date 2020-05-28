@@ -6,6 +6,7 @@ using CronConfigure.Models.Services;
 using CronConfigure.ViewModels;
 using Hangfire;
 using Hangfire.Storage;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NCrontab;
@@ -17,6 +18,7 @@ namespace CronConfigure.Controllers
     /// </summary>
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class RecurringJobController : ControllerBase
     {
 
@@ -59,7 +61,7 @@ namespace CronConfigure.Controllers
             {
                 try
                 {
-                    fechaInicio = DateTime.ParseExact(fecha_inicio, "dd/MM/yyyy hh:mm", null);
+                    fechaInicio = DateTime.ParseExact(fecha_inicio, "dd/MM/yyyy HH:mm", null);
                 }
                 catch (Exception)
                 {
@@ -71,7 +73,7 @@ namespace CronConfigure.Controllers
             {
                 try
                 {
-                    fechaDateTime = DateTime.ParseExact(fecha, "dd/MM/yyyy hh:mm", null);
+                    fechaDateTime = DateTime.ParseExact(fecha, "dd/MM/yyyy HH:mm", null);
                 }
                 catch (Exception)
                 {

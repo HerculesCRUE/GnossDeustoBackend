@@ -19,7 +19,7 @@ namespace ApiCargaWebInterface.Models.Services
             _serviceApi = serviceApi;
             if (tokenService != null) 
             {
-                _token = tokenService.CallTokenIdentity();
+                _token = tokenService.CallTokenCarga();
             }
         }
 

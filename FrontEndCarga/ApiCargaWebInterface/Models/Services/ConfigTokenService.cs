@@ -14,6 +14,7 @@ namespace ApiCargaWebInterface.Models.Services
         public string Authority { get; set; }
         public string GrantType { get; set; }
         public string Scope { get; set; }
+        public string ScopeCron { get; set; }
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }
         public ConfigTokenService()
@@ -82,6 +83,26 @@ namespace ApiCargaWebInterface.Models.Services
                 Scope = scope;
             }
             return Scope;
+        }
+
+        public string GetScopeCron()
+        {
+            if (string.IsNullOrEmpty(Scope))
+            {
+                string scope = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ScopeCron"))
+                {
+                    scope = environmentVariables["ScopeCron"] as string;
+                }
+                else
+                {
+                    scope = Configuration["ScopeCron"];
+                }
+
+                ScopeCron = scope;
+            }
+            return ScopeCron;
         }
 
         public string GetClientId()

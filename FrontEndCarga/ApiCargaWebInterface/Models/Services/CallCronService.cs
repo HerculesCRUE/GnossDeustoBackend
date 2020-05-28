@@ -21,6 +21,10 @@ namespace ApiCargaWebInterface.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
                 string url = _serviceUrl.GetUrl();
                 response = client.DeleteAsync($"{url}{urlMethod}").Result;
                 response.EnsureSuccessStatusCode();
@@ -47,6 +51,10 @@ namespace ApiCargaWebInterface.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
                 string url = _serviceUrl.GetUrl();
                 response = client.GetAsync($"{url}{urlMethod}").Result;
                 response.EnsureSuccessStatusCode();
@@ -75,6 +83,10 @@ namespace ApiCargaWebInterface.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
                 string url = _serviceUrl.GetUrl();
                 response = client.PostAsync($"{url}{urlMethod}", contentData).Result;
                 response.EnsureSuccessStatusCode();
@@ -107,6 +119,10 @@ namespace ApiCargaWebInterface.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
                 string url = _serviceUrl.GetUrl();
                 response = client.PutAsync($"{url}{urlMethod}", contentData).Result;
                 response.EnsureSuccessStatusCode();

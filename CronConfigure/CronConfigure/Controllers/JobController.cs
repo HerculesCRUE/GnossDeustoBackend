@@ -7,6 +7,7 @@ using CronConfigure.Models;
 using CronConfigure.Models.Enumeracion;
 using CronConfigure.Models.Services;
 using Hangfire;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace CronConfigure.Controllers
     /// </summary>
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class JobController : ControllerBase
     {
         private ICronApiService _cronApiService;
@@ -54,7 +56,7 @@ namespace CronConfigure.Controllers
             {
                 try
                 {
-                    fechaInicio = DateTime.ParseExact(fecha_inicio, "dd/MM/yyyy hh:mm",null);
+                    fechaInicio = DateTime.ParseExact(fecha_inicio, "dd/MM/yyyy HH:mm",null);
                 }
                 catch (Exception)
                 {
@@ -66,7 +68,7 @@ namespace CronConfigure.Controllers
             {
                 try
                 {
-                    fechaDateTime = DateTime.ParseExact(fecha, "dd/MM/yyyy hh:mm", null);
+                    fechaDateTime = DateTime.ParseExact(fecha, "dd/MM/yyyy HH:mm", null);
                 }
                 catch (Exception)
                 {

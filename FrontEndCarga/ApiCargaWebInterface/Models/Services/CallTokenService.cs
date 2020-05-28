@@ -15,17 +15,27 @@ namespace ApiCargaWebInterface.Models.Services
         {
             _configToken = configToken;
         }
-        public TokenBearer CallTokenIdentity()
+        public TokenBearer CallTokenCarga()
         {
-            /*string stringData = "grant_type=client_credentials&scope=api1&client_id=client&client_secret=secret";*///JsonConvert.SerializeObject(item);
-            string stringData = $"grant_type={_configToken.GetGrantType()}& scope={_configToken.GetScope()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScope()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+            return CallTokenIdentity(stringData);
+        }
+        public TokenBearer CallTokenCron()
+        {
+            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeCron()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+            return CallTokenIdentity(stringData);
+        }
+
+        private TokenBearer CallTokenIdentity(string stringData)
+        {
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
             HttpResponseMessage response = null;
             try
             {
                 HttpClient client = new HttpClient();
                 client.Timeout = TimeSpan.FromDays(1);
-                response = client.PostAsync($"{_configToken.GetAuthority()}", contentData).Result;
+                string authority = _configToken.GetAuthority();
+                response = client.PostAsync($"{authority}", contentData).Result;
                 response.EnsureSuccessStatusCode();
                 string result = response.Content.ReadAsStringAsync().Result;
                 TokenBearer token = JsonConvert.DeserializeObject<TokenBearer>(result);

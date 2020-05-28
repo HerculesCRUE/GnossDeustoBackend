@@ -36,7 +36,26 @@ namespace PRH
         // This method gets called by the runtime. Use this method to add services to the container.
         //</summary>
         public void ConfigureServices(IServiceCollection services)
-        {              
+        {
+            IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+            string authority = "";
+            if (environmentVariables.Contains("Authority"))
+            {
+                authority = environmentVariables["Authority"] as string;
+            }
+            else
+            {
+                authority = Configuration["Authority"];
+            }
+            string scope = "";
+            if (environmentVariables.Contains("Scope"))
+            {
+                scope = environmentVariables["Scope"] as string;
+            }
+            else
+            {
+                scope = Configuration["Scope"];
+            }
             services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -48,11 +67,10 @@ namespace PRH
             })
                 .AddIdentityServerAuthentication(options =>
                 {
-                    options.Authority = "http://localhost:56306";
+                    options.Authority = authority;
                     //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
                     options.RequireHttpsMetadata = false;
-                    options.ApiName = "apiCarga";
-                    //options.ApiSecret = "secret".Sha256();
+                    options.ApiName = scope;
                 });
             services.AddAuthorization();
             services.AddSwaggerGen(c =>
@@ -68,19 +86,6 @@ namespace PRH
                     BearerFormat = "JWT",
                     In = ParameterLocation.Header,
                     Description = "JWT Authorization header using the Bearer scheme."
-
-                    //Flows = new OpenApiOAuthFlows
-                    //{
-                    //    ClientCredentials = new OpenApiOAuthFlow
-                    //    {
-                    //       AuthorizationUrl = new Uri("http://localhost:56306/connect/authorize"),
-                    //        TokenUrl = new Uri("http://localhost:56306/connect/token"),
-                    //        Scopes = new Dictionary<string, string>
-                    //        {
-                    //            { "apiCarga", "permission" }
-                    //        }
-                    //    }
-                    //}
                 });
                 c.OperationFilter<SecurityRequirementsOperationFilter>();
             });
@@ -160,10 +165,6 @@ namespace PRH
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("v1/swagger.json", "API de carga");
-
-                c.OAuthClientId("carga");
-                c.OAuthClientSecret("secret");
-                c.OAuthAppName("apiCarga");
             });
 
             app.UseEndpoints(endpoints =>
