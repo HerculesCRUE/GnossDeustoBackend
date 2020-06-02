@@ -48,13 +48,13 @@ namespace PRH
                 authority = Configuration["Authority"];
             }
             string scope = "";
-            if (environmentVariables.Contains("Scope"))
+            if (environmentVariables.Contains("ScopeCarga"))
             {
-                scope = environmentVariables["Scope"] as string;
+                scope = environmentVariables["ScopeCarga"] as string;
             }
             else
             {
-                scope = Configuration["Scope"];
+                scope = Configuration["ScopeCarga"];
             }
             services.AddControllers().AddJsonOptions(options =>
             {
@@ -129,6 +129,9 @@ namespace PRH
             //services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
             services.AddScoped<IShapesConfigService, ShapesConfigBDService>();
             services.AddScoped<ICallNeedPublishData, CallApiNeedInfoPublisData>();
+            services.AddScoped(typeof(ConfigTokenService));
+            services.AddScoped(typeof(CallTokenService));
+            services.AddScoped(typeof(CallUri)); 
             //services.AddSingleton<ISyncConfigService, SyncConfigMockService>();
 
         }

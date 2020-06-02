@@ -7,6 +7,7 @@ using System.Xml;
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
 using API_CARGA.Models.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -18,17 +19,20 @@ namespace API_CARGA.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class etlController : Controller
     {
         private IRepositoriesConfigService _repositoriesConfigService;
         private IShapesConfigService _shapeConfigService;
         readonly ConfigSparql _configSparql;
+        readonly CallUri _callUri;
 
-        public etlController(IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql)
+        public etlController(IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallUri callUri)
         {
             _repositoriesConfigService = iRepositoriesConfigService;
             _shapeConfigService = iShapeConfigService;
             _configSparql = configSparql;
+            _callUri = callUri;
         }
 
         /// <summary>
@@ -110,7 +114,8 @@ namespace API_CARGA.Controllers
             RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
             string uri = repositoryConfig.Url;
             uri += $"?verb=GetRecord&identifier={identifier}&metadataPrefix={metadataPrefix}";
-            byte[] array = getByte(uri);
+            byte[] array = _callUri.GetUri(uri);
+            //byte[] array = getByte(uri);
             return File(array, "application/xml");
         }
 
@@ -128,7 +133,8 @@ namespace API_CARGA.Controllers
             RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
             string uri = repositoryConfig.Url;
             uri += $"?verb=Identify";
-            byte[] array = getByte(uri);
+            //byte[] array = getByte(uri);
+            byte[] array = _callUri.GetUri(uri);
             return File(array, "application/xml");
         }
 
@@ -171,7 +177,8 @@ namespace API_CARGA.Controllers
             {
                 uri += $"&resumptionToken={resumptionToken}";
             }
-            byte[] array = getByte(uri);
+            //byte[] array = getByte(uri);
+            byte[] array = _callUri.GetUri(uri);
             return File(array, "application/xml");
         }
 
@@ -195,7 +202,8 @@ namespace API_CARGA.Controllers
             {
                 uri += $"&identifier={identifier}";
             }
-            byte[] array = getByte(uri);
+            //byte[] array = getByte(uri);
+            byte[] array = _callUri.GetUri(uri);
             return File(array, "application/xml");
         }
 
@@ -238,7 +246,8 @@ namespace API_CARGA.Controllers
             {
                 uri += $"&resumptionToken={resumptionToken}";
             }
-            byte[] array = getByte(uri);
+            //byte[] array = getByte(uri);
+            byte[] array = _callUri.GetUri(uri);
             return File(array, "application/xml");
         }
 
@@ -261,7 +270,8 @@ namespace API_CARGA.Controllers
             {
                 uri += $"&resumptionToken={resumptionToken}";
             }
-            byte[] array = getByte(uri);
+            //byte[] array = getByte(uri);
+            byte[] array = _callUri.GetUri(uri);
             return File(array, "application/xml");
         }
 

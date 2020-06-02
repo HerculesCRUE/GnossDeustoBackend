@@ -6,6 +6,7 @@ using API_CARGA.ModelExamples;
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
 using API_CARGA.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -18,6 +19,7 @@ namespace API_CARGA.Controllers
     /// </summary>
     [ApiController]
     [Route("[Controller]")]
+    [Authorize]
     public class syncController : Controller
     {
         private OaiPublishRDFService _oaiPublishRDFService;
@@ -41,7 +43,11 @@ namespace API_CARGA.Controllers
                 _oaiPublishRDFService.PublishRepositories(publishModel.repository_identifier, publishModel.fecha_from, publishModel.set);
                 return Ok("");
             }
-            catch(Exception ex)
+            catch (TaskCanceledException ex)
+            {
+                return Problem(ex.Message);
+            }
+            catch (Exception ex)
             {
                 return Problem(ex.Message);
             }

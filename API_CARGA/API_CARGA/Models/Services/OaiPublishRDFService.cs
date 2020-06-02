@@ -15,8 +15,13 @@ namespace API_CARGA.Models.Services
     {
         readonly EntityContext _context;
         readonly ICallNeedPublishData _publishData;
-        public OaiPublishRDFService(EntityContext context, ICallNeedPublishData publishData)
+        readonly TokenBearer _token;
+        public OaiPublishRDFService(EntityContext context, ICallNeedPublishData publishData, CallTokenService tokenService)
         {
+            if (tokenService != null)
+            {
+                _token = tokenService.CallTokenCarga();
+            }
             _context = context;
             _publishData = publishData;
         }
@@ -36,8 +41,8 @@ namespace API_CARGA.Models.Services
                     foreach (IdentifierOAIPMH identifierOAIPMH in listIdentifier)
                     {
                         string rdf = CallGetRecord(identifier, identifierOAIPMH.Identifier);
-                        _publishData.CallDataValidate(rdf, identifier);
-                        _publishData.CallDataPublish(rdf);
+                        _publishData.CallDataValidate(rdf, identifier, _token);
+                        _publishData.CallDataPublish(rdf, _token);
                         lastSyncro = identifierOAIPMH;
                     }
                     if (lastSyncro != null)
@@ -48,8 +53,8 @@ namespace API_CARGA.Models.Services
                 else
                 {
                     string rdf = CallGetRecord(identifier, codigoObjeto);
-                    _publishData.CallDataValidate(rdf, identifier);
-                    _publishData.CallDataPublish(rdf);
+                    _publishData.CallDataValidate(rdf, identifier, _token);
+                    _publishData.CallDataPublish(rdf, _token);
                 }
 
             }
@@ -121,7 +126,7 @@ namespace API_CARGA.Models.Services
                 uri += $"&from={fechaFrom.Value.ToString("u",CultureInfo.InvariantCulture)}&until={until.ToString("u", CultureInfo.InvariantCulture)}";
             }
             List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
-            string xml = _publishData.CallGetApi(uri);
+            string xml = _publishData.CallGetApi(uri, _token);
             XDocument respuestaXML = XDocument.Load(new StringReader(xml));
             XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
             XElement listIdentifierElement = respuestaXML.Root.Element(nameSpace + "ListIdentifiers");
@@ -149,7 +154,7 @@ namespace API_CARGA.Models.Services
         /// <returns>RDF</returns>
         public string CallGetRecord(Guid repoIdentifier, string identifier)
         {
-            string respuesta = _publishData.CallGetApi($"etl/GetRecord/{repoIdentifier}?identifier={identifier}&&metadataPrefix=rdf");
+            string respuesta = _publishData.CallGetApi($"etl/GetRecord/{repoIdentifier}?identifier={identifier}&&metadataPrefix=rdf", _token);
             XDocument respuestaXML = XDocument.Parse(respuesta);
             XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
             string rdf = respuestaXML.Root.Element(nameSpace + "GetRecord").Descendants(nameSpace + "metadata").First().FirstNode.ToString();

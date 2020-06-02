@@ -16,7 +16,7 @@ namespace XUnitTestAPI_CARGA
             ConfigUrlService urlService = new ConfigUrlService();
             urlService.Url = "http://herc-as-front-desa.atica.um.es/carga/";
             CallApiNeedInfoPublisData api = new CallApiNeedInfoPublisData(urlService);
-            OaiPublishRDFService oaiPublish = new OaiPublishRDFService(null, api);
+            OaiPublishRDFService oaiPublish = new OaiPublishRDFService(null, api, null);
             var lista = oaiPublish.CallListIdentifier(new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"));
             Assert.True(lista.Count > 0);
         }
@@ -27,7 +27,7 @@ namespace XUnitTestAPI_CARGA
             ConfigUrlService urlService = new ConfigUrlService();
             urlService.Url = "http://herc-as-front-desa.atica.um.es/carga/";
             CallApiNeedInfoPublisData api = new CallApiNeedInfoPublisData(urlService);
-            OaiPublishRDFService oaiPublish = new OaiPublishRDFService(null, api);
+            OaiPublishRDFService oaiPublish = new OaiPublishRDFService(null, api, null);
             string rdf = oaiPublish.CallGetRecord(new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"), "1");
             Assert.True(!string.IsNullOrEmpty(rdf));
         }

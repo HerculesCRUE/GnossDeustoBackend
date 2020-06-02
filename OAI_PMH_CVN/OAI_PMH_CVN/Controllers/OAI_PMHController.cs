@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OAI_PMH_CVN.Models.Services;
 using OaiPmhNet;
@@ -18,6 +19,7 @@ namespace OAI_PMH.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class OAI_PMHController : Controller
     {
         private IOaiConfiguration _configOAI;
@@ -78,6 +80,7 @@ namespace OAI_PMH.Controllers
 
             var memoryStream = new MemoryStream();
             var xmlWriter = XmlWriter.Create(memoryStream);
+
             document.WriteTo(xmlWriter);
             xmlWriter.Flush();
             byte[] array = memoryStream.ToArray();

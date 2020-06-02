@@ -129,7 +129,9 @@ namespace CronConfigure
             services.AddScoped<IProgramingMethodService, ProgramingMethodsService>();
             services.AddScoped<IRepositoryCronService, RepositoryCronService>();
             services.AddScoped(typeof(CallApiService));
-            services.AddSingleton(typeof(ConfigUrlService)); 
+            services.AddSingleton(typeof(ConfigUrlService));
+            services.AddScoped(typeof(ConfigTokenService));
+            services.AddScoped(typeof(CallTokenService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

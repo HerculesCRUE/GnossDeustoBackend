@@ -1,4 +1,5 @@
 ﻿using CronConfigure.Exceptions;
+using CronConfigure.Models.Entitties;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace CronConfigure.Models.Services
             _serviceUrl = serviceUrl;
         }
 
-        public string CallPostApi(string urlMethod, object item)
+        public string CallPostApi(string urlMethod, object item, TokenBearer token = null)
         {
             string stringData = JsonConvert.SerializeObject(item);
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
@@ -26,6 +27,10 @@ namespace CronConfigure.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
                 client.Timeout = TimeSpan.FromDays(1);
                 string url = _serviceUrl.GetUrl();
                 response = client.PostAsync($"{url}{urlMethod}", contentData).Result;

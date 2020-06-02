@@ -1,4 +1,5 @@
-﻿using System;
+﻿using API_CARGA.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -9,17 +10,17 @@ namespace API_CARGA.Models.Services
 {
     public class CallMockNeedPublishData: ICallNeedPublishData
     {
-        public void CallDataPublish(string rdf)
+        public void CallDataPublish(string rdf, TokenBearer token = null)
         {
             
         }
 
-        public void CallDataValidate(string rdf, Guid repositoryIdentifier)
+        public void CallDataValidate(string rdf, Guid repositoryIdentifier, TokenBearer token = null)
         {
             
         }
 
-        public string CallGetApi(string urlMethod)
+        public string CallGetApi(string urlMethod, TokenBearer token = null)
         {
             string xml = "";
             if (urlMethod.Contains("ListIdentifiers"))
@@ -116,7 +117,7 @@ namespace API_CARGA.Models.Services
             return xml;
         }
 
-        public string CallPostApiFile(string urlMethod, MultipartFormDataContent item, string parameters = null)
+        public string CallPostApiFile(string urlMethod, MultipartFormDataContent item, TokenBearer token = null, string parameters = null)
         {
             return "";
         }
