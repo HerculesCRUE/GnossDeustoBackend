@@ -9,6 +9,7 @@ namespace ApiCargaWebInterface.Models.Services
     {
         public IConfigurationRoot Configuration { get; set; }
         public string Url { get; set; }
+        public string UrlUris { get; set; }
         public string GetUrl()
         {
             if (string.IsNullOrEmpty(Url))
@@ -32,6 +33,32 @@ namespace ApiCargaWebInterface.Models.Services
                 Url = connectionString;
             }
             return Url;
+        }
+
+        public string GetUrlUrisFactory()
+        {
+            if (string.IsNullOrEmpty(UrlUris))
+            {
+
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                string connectionString = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ConfigUrlUrisFactory"))
+                {
+                    connectionString = environmentVariables["ConfigUrlUrisFactory"] as string;
+                }
+                else
+                {
+                    connectionString = Configuration["ConfigUrlUrisFactory"];
+                }
+
+                UrlUris = connectionString;
+            }
+            return UrlUris;
         }
     }
 }

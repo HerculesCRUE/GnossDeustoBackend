@@ -75,13 +75,13 @@ namespace ApiCargaWebInterface.Models.Services
 
         public void DeleteRecurringJob(string id)
         {
-            string result = _serviceApi.CallDeleteApi($"{_urlRecurringJobApi}?nombre_job={id}", _token);
+            string result = _serviceApi.CallDeleteApi("", $"{_urlRecurringJobApi}?nombre_job={id}", _token);
             result = JsonConvert.DeserializeObject<string>(result);
         }
 
         public void DeleteScheduledJob(string id)
         {
-            string result = _serviceApi.CallDeleteApi($"{_urlScheduledJobApi}?id={id}", _token);
+            string result = _serviceApi.CallDeleteApi("",$"{_urlScheduledJobApi}?id={id}", _token);
             result = JsonConvert.DeserializeObject<string>(result);
         }
     }

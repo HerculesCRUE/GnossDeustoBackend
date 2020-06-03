@@ -26,6 +26,12 @@ namespace ApiCargaWebInterface.Models.Services
             return CallTokenIdentity(stringData);
         }
 
+        public TokenBearer CallTokenUrisFactory()
+        {
+            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeUrisFactory()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+            return CallTokenIdentity(stringData);
+        }
+
         private TokenBearer CallTokenIdentity(string stringData)
         {
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");

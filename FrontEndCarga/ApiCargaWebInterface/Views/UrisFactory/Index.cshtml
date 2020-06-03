@@ -1,0 +1,37 @@
+﻿@model ApiCargaWebInterface.ViewModels.UrisFactoryResultViewModel
+
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <form asp-action="GetUri" method="get">
+                <div class="fieldset fieldset01">
+                    <fieldset class="mediumLabels">
+                        <div class="fieldsetContent">
+                            <h1>Get Uri</h1>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Resource_class" class="control-label"></label>
+                                <input asp-for="Resource_class" class="form-control" />
+                                <span asp-validation-for="Resource_class" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Identifier" class="control-label"></label>
+                                <input asp-for="Identifier" class="form-control" />
+                                <span asp-validation-for="Identifier" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="GetUri" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </form>
+            @if (Model != null)
+            {
+                <p>@Model.UriResult</p>
+            }
+        </div>
+    </div>
+</div>
+
+

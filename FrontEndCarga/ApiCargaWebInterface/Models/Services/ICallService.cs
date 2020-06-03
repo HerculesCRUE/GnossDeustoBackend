@@ -8,9 +8,9 @@ namespace ApiCargaWebInterface.Models.Services
 {
     public interface ICallService
     {
-        public string CallGetApi(string urlMethod, TokenBearer token = null);
-        public string CallPostApi(string urlMethod, object item, TokenBearer token = null, bool isFile = false);
-        public string CallPutApi(string urlMethod, object item, TokenBearer token = null, bool isFile = false);
-        public string CallDeleteApi(string urlMethod, TokenBearer token = null);
+        public string CallGetApi(string urlBase, string urlMethod, TokenBearer token = null);
+        public string CallPostApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false);
+        public string CallPutApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false);
+        public string CallDeleteApi(string urlBase, string urlMethod, TokenBearer token = null);
     }
 }

@@ -11,13 +11,12 @@ namespace ApiCargaWebInterface.Models.Services
 {
     public class CallApiService : ICallService
     {
-        readonly ConfigUrlService _serviceUrl;
-        public CallApiService(ConfigUrlService serviceUrl)
+        
+        public CallApiService()
         {
-            _serviceUrl = serviceUrl;
         }
 
-        public string CallDeleteApi(string urlMethod, TokenBearer token = null)
+        public string CallDeleteApi(string urlBase, string urlMethod, TokenBearer token = null)
         {
             string result = "";
             HttpResponseMessage response = null;
@@ -28,8 +27,7 @@ namespace ApiCargaWebInterface.Models.Services
                 {
                     client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
                 }
-                string url = _serviceUrl.GetUrl();
-                response = client.DeleteAsync($"{url}{urlMethod}").Result;
+                response = client.DeleteAsync($"{urlBase}{urlMethod}").Result;
                 response.EnsureSuccessStatusCode();
                 result = response.Content.ReadAsStringAsync().Result;
             }
@@ -47,7 +45,7 @@ namespace ApiCargaWebInterface.Models.Services
             return result;
         }
 
-        public string CallGetApi(string urlMethod, TokenBearer token = null)
+        public string CallGetApi(string urlBase, string urlMethod, TokenBearer token = null)
         {
             string result = "";
             HttpResponseMessage response = null;
@@ -58,8 +56,7 @@ namespace ApiCargaWebInterface.Models.Services
                 { 
                     client.DefaultRequestHeaders.Add("Authorization",$"{token.token_type} {token.access_token}");
                 }
-                string url = _serviceUrl.GetUrl();
-                response = client.GetAsync($"{url}{urlMethod}").Result;
+                response = client.GetAsync($"{urlBase}{urlMethod}").Result;
                 response.EnsureSuccessStatusCode();
                 result = response.Content.ReadAsStringAsync().Result;
             }
@@ -77,7 +74,7 @@ namespace ApiCargaWebInterface.Models.Services
             return result;
         }
 
-        public string CallPostApi(string urlMethod, object item, TokenBearer token = null, bool isFile = false)
+        public string CallPostApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false)
         {
             HttpContent contentData = null;
             if (!isFile)
@@ -105,8 +102,7 @@ namespace ApiCargaWebInterface.Models.Services
                 {
                     client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
                 }
-                string url = _serviceUrl.GetUrl();
-                response = client.PostAsync($"{url}{urlMethod}", contentData).Result;
+                response = client.PostAsync($"{urlBase}{urlMethod}", contentData).Result;
                 response.EnsureSuccessStatusCode();
                 result = response.Content.ReadAsStringAsync().Result;
                 return result;
@@ -128,7 +124,7 @@ namespace ApiCargaWebInterface.Models.Services
             }
         }
 
-        public string CallPutApi(string urlMethod, object item, TokenBearer token = null, bool isFile=false)
+        public string CallPutApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile=false)
         {
             HttpContent contentData = null;
             if (!isFile)
@@ -159,8 +155,7 @@ namespace ApiCargaWebInterface.Models.Services
                 {
                     client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
                 }
-                string url = _serviceUrl.GetUrl();
-                response = client.PutAsync($"{url}{urlMethod}", contentData).Result;
+                response = client.PutAsync($"{urlBase}{urlMethod}", contentData).Result;
                 response.EnsureSuccessStatusCode();
                 result = response.Content.ReadAsStringAsync().Result;
                 return result;

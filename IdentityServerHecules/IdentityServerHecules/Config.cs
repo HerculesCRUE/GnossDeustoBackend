@@ -57,7 +57,7 @@ namespace IdentityServerHecules
                 {
                     new Secret("master".Sha256())
                 },
-                AllowedScopes = {"apiCron", "apiCarga"},
+                AllowedScopes = {"apiCron", "apiCarga","apiUrisFactory"},
                 AccessTokenLifetime = 86400
                 //AccessTokenType = AccessTokenType.Reference
             },
