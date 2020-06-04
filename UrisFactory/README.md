@@ -10,6 +10,8 @@ La documentación de la librería está disponible en:
 
 http://herc-as-front-desa.atica.um.es/uris-factory/library/api/UrisFactory.Controllers.html
 
+Los resultados de las pruebas unitarias se pueden consultar en [ResultsTest](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/UrisFactory/ResultsTest).
+
 Este Api contiene dos controladores.
 
 
