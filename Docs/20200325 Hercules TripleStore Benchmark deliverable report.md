@@ -51,9 +51,9 @@ Table of contents
 
 > [Functionalities (F)](#functionalities-f)
 >
-> [Performance and scalability](#performance-and-scalability)
+> [Performance and scalability (P)](#performance-and-scalability-p)
 >
-> [Management and maintenance](#management-and-maintenance)
+> [Management and maintenance (M)](#management-and-maintenance-m)
 
 **[TripleStore Assessed](#triplestore-assessed)**
 
@@ -137,8 +137,8 @@ have to be handled separately.
 | Usage quotas                   | 2      | The system might provide a way for the administrator to impose quotas on the use of the system (e.g. amount of triples read in a given period of time), to avoid overload.                                                                               |
 
 
-Performance and scalability
----------------------------
+Performance and scalability (P)
+-------------------------------
 
 Performance relates to the amount of time and computational resources
 required to run and use the system. Scalability relates to the ability
@@ -210,8 +210,8 @@ decreases can have a very negative effect on the end user.
 | Vertical scalability                | 2      | Vertical scalability is the ability of the system to maximally utilise the resources available to it, and to expand to new resources made available.                            |
 | Horizontal scalability (clustering) | 3      | Horizontal scalability is the ability of the system to be distributed over multiple instances (e.g. in a cluster), with new instances being added to enable increases in scale. |
 
-Management and maintenance
---------------------------
+Management and maintenance (M)
+------------------------------
 
 Management and maintenance relate to the complexity of getting and
 keeping the system running from the point of view of the administrator.
