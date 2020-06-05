@@ -9,7 +9,7 @@ At the moment, the Hercules app is provided as a [Flask](https://flask.palletspr
 ## Requirements
 
 * Python 3.6.6 or above
-* A SPARQL endpoint that publishes a dataset using the ASIO Criterion ontology.
+* A SPARQL endpoint Fuseki that publishes a dataset using the ASIO Criterion ontology.
 
 ## Build
 
