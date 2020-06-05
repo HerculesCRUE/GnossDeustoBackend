@@ -1,3 +1,5 @@
+![](..//Docs/media/CabeceraDocumentosMD.png)
+
 # Despliegue del backend con Docker
 
 ## Requisitos previos
