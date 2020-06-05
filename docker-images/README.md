@@ -161,13 +161,17 @@ Para lanzar las APIs usamos este comando como en el caso de Virtuoso:
 
 ## Preparación del interfaz Fuseki para benchmark
 
-Para poder utilizar benchmark necesitamos almacenar los datos sparql en Fuseli. Para desplegar Fuseki facilmente lo podemos hacer por medio de este comando Docker:
+Para poder utilizar benchmark necesitamos almacenar los datos sparql en Fuseki. Para desplegar Fuseki facilmente lo podemos hacer por medio de este comando Docker:
 
 	docker run -d -p 3030:3030 stain/jena-fuseki fuseki
 
-Durante el despliegue nso generará un usuario y contraseña que debemos apuntar.
+Durante el despliegue nos generará un usuario y contraseña que debemos apuntar.
 
-Cuando tengamos Fuseki operativo podemos entrar a la interfaz gráfica y cargarle información. Craremos un data set y cargaremos los achivos que se encuentran en:
+Cuando tengamos Fuseki operativo podemos entrar a la interfaz gráfica y cargarle información. Craremos un data set y cargaremos los achivos ttl y nq que se encuentran en estas urls
 
-https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Benchmark/triplestore-assessment-interface
+- https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Benchmark/criterion-ontology/src
+- https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Benchmark/triplestore-dataset/static/data
+- https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Benchmark/triplestore-assessments
+
+
 
