@@ -1,3 +1,5 @@
+![](../../Docs/media/CabeceraDocumentosMD.png)
+
 # Hercules triple store assessment interface
 
 This Web application is a frontend for triple store assessment datasets. It provides a point of reference for the evaluation of RDF stores or other database systems that support RDF in some form.
