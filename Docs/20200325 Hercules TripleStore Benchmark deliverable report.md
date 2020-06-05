@@ -1444,191 +1444,191 @@ Appendix 1: Criteria in RDF
 Appendix 2: Criterion Ontology
 ==============================
 
-\@prefix : \<http://datascienceinstitute.ie/asio/schema\#\> .
+	\@prefix : \<http://datascienceinstitute.ie/asio/schema\#\> .
 
-\@prefix dc: \<http://purl.org/dc/terms/\> .
+	\@prefix dc: \<http://purl.org/dc/terms/\> .
 
-\@prefix owl: \<http://www.w3.org/2002/07/owl\#\> .
+	\@prefix owl: \<http://www.w3.org/2002/07/owl\#\> .
 
-\@prefix rdf: \<http://www.w3.org/1999/02/22-rdf-syntax-ns\#\> .
+	\@prefix rdf: \<http://www.w3.org/1999/02/22-rdf-syntax-ns\#\> .
 
-\@prefix xml: \<http://www.w3.org/XML/1998/namespace\> .
+	\@prefix xml: \<http://www.w3.org/XML/1998/namespace\> .
 
-\@prefix xsd: \<http://www.w3.org/2001/XMLSchema\#\> .
+	\@prefix xsd: \<http://www.w3.org/2001/XMLSchema\#\> .
 
-\@prefix asio: \<http://datascienceinstitute.ie/asio/\> .
+	\@prefix asio: \<http://datascienceinstitute.ie/asio/\> .
 
-\@prefix doap: \<http://usefulinc.com/ns/doap\#\> .
+	\@prefix doap: \<http://usefulinc.com/ns/doap\#\> .
 
-\@prefix foaf: \<http://xmlns.com/foaf/0.1/\> .
+	\@prefix foaf: \<http://xmlns.com/foaf/0.1/\> .
 
-\@prefix rdfs: \<http://www.w3.org/2000/01/rdf-schema\#\> .
+	\@prefix rdfs: \<http://www.w3.org/2000/01/rdf-schema\#\> .
 
-\@prefix skos: \<http://www.w3.org/2004/02/skos/core\#\> .
+	\@prefix skos: \<http://www.w3.org/2004/02/skos/core\#\> .
 
-\@prefix provo: \<http://www.w3.org/ns/prov\#\> .
+	\@prefix provo: \<http://www.w3.org/ns/prov\#\> .
 
-\@base \<http://datascienceinstitute.ie/asio/schema\> .
+	\@base \<http://datascienceinstitute.ie/asio/schema\> .
 
-\<http://datascienceinstitute.ie/asio/schema\> rdf:type owl:Ontology ;
+	\<http://datascienceinstitute.ie/asio/schema\> rdf:type owl:Ontology ;
 
-rdfs:comment \"Ontological schema for defining the benchmarking criteria
-of RDF and graph stores.\"\@en .
+	rdfs:comment \"Ontological schema for defining the benchmarking criteria
+	of RDF and graph stores.\"\@en .
 
-\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
+	\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
-\# Object Properties
+	\# Object Properties
 
-\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
+	\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
-\#\#\# http://datascienceinstitute.ie/asio/benchmakedIn
+	\#\#\# http://datascienceinstitute.ie/asio/benchmakedIn
 
-asio:benchmakedIn rdf:type owl:ObjectProperty ;
+	asio:benchmakedIn rdf:type owl:ObjectProperty ;
 
-rdfs:domain asio:TripleStoreRelease ;
+	rdfs:domain asio:TripleStoreRelease ;
 
-rdfs:range provo:Entity ;
+	rdfs:range provo:Entity ;
 
-rdfs:label \"benchmarked in\"\@en .
+	rdfs:label \"benchmarked in\"\@en .
 
-\#\#\# http://datascienceinstitute.ie/asio/criterion
+	\#\#\# http://datascienceinstitute.ie/asio/criterion
 
-asio:criterion rdf:type owl:ObjectProperty ;
+	asio:criterion rdf:type owl:ObjectProperty ;
 
-rdfs:domain asio:CriterionAssessment ;
+	rdfs:domain asio:CriterionAssessment ;
 
-rdfs:range asio:Criterion ;
+	rdfs:range asio:Criterion ;
 
-rdfs:label \"criterion\"\@en .
+	rdfs:label \"criterion\"\@en .
 
-\#\#\# http://datascienceinstitute.ie/asio/isAssessedWith
+	\#\#\# http://datascienceinstitute.ie/asio/isAssessedWith
 
-asio:isAssessedWith rdf:type owl:ObjectProperty ;
+	asio:isAssessedWith rdf:type owl:ObjectProperty ;
 
-rdfs:domain doap:Version ;
+	rdfs:domain doap:Version ;
 
-rdfs:range asio:CriterionAssessment ;
+	rdfs:range asio:CriterionAssessment ;
 
-rdfs:label \"is assessed with\"\@en .
+	rdfs:label \"is assessed with\"\@en .
 
-\#\#\# http://purl.org/dc/terms/subject
+	\#\#\# http://purl.org/dc/terms/subject
 
-dc:subject rdf:type owl:ObjectProperty .
+	dc:subject rdf:type owl:ObjectProperty .
 
-\#\#\# http://usefulinc.com/ns/doap\#release
+	\#\#\# http://usefulinc.com/ns/doap\#release
 
-doap:release rdf:type owl:ObjectProperty .
+	doap:release rdf:type owl:ObjectProperty .
 
-\#\#\# http://www.w3.org/ns/prov\#primarySource
+	\#\#\# http://www.w3.org/ns/prov\#primarySource
 
-provo:primarySource rdf:type owl:ObjectProperty .
+	provo:primarySource rdf:type owl:ObjectProperty .
 
-\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
+	\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
-\# Data properties
+	\# Data properties
 
-\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
+	\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
-\#\#\# http://datascienceinstitute.ie/asio/value
+	\#\#\# http://datascienceinstitute.ie/asio/value
 
-asio:value rdf:type owl:DatatypeProperty ;
+	asio:value rdf:type owl:DatatypeProperty ;
 
-rdfs:domain asio:CriterionAssessment ;
+	rdfs:domain asio:CriterionAssessment ;
 
-rdfs:range xsd:integer ;
+	rdfs:range xsd:integer ;
 
-rdfs:comment \"value\"\@en .
+	rdfs:comment \"value\"\@en .
 
-\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
+	\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
-\# Classes
+	\# Classes
 
-\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
+	\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
-\#\#\# http://datascienceinstitute.ie/asio/Criterion
+	\#\#\# http://datascienceinstitute.ie/asio/Criterion
 
-asio:Criterion rdf:type owl:Class ;
+	asio:Criterion rdf:type owl:Class ;
 
-rdfs:subClassOf \[ rdf:type owl:Restriction ;
+	rdfs:subClassOf \[ rdf:type owl:Restriction ;
 
-owl:onProperty dc:subject ;
+	owl:onProperty dc:subject ;
 
-owl:someValuesFrom asio:CriterionCategory
+	owl:someValuesFrom asio:CriterionCategory
 
-\] ;
+	\] ;
 
-rdfs:label \"criterion\"\@en .
+	rdfs:label \"criterion\"\@en .
 
-\#\#\# http://datascienceinstitute.ie/asio/CriterionAssessment
+	\#\#\# http://datascienceinstitute.ie/asio/CriterionAssessment
 
-asio:CriterionAssessment rdf:type owl:Class ;
+	asio:CriterionAssessment rdf:type owl:Class ;
 
-rdfs:subClassOf \[ rdf:type owl:Restriction ;
+	rdfs:subClassOf \[ rdf:type owl:Restriction ;
 
-owl:onProperty provo:primarySource ;
+	owl:onProperty provo:primarySource ;
 
-owl:someValuesFrom provo:Entity
+	owl:someValuesFrom provo:Entity
 
-\] ;
+	\] ;
 
-rdfs:label \"criterion assessment\"\@en .
+	rdfs:label \"criterion assessment\"\@en .
 
-\#\#\# http://datascienceinstitute.ie/asio/CriterionCategory
+	\#\#\# http://datascienceinstitute.ie/asio/CriterionCategory
 
-asio:CriterionCategory rdf:type owl:Class ;
+	asio:CriterionCategory rdf:type owl:Class ;
 
-rdfs:subClassOf skos:Concept .
+	rdfs:subClassOf skos:Concept .
 
-\#\#\# http://datascienceinstitute.ie/asio/TripleStore
+	\#\#\# http://datascienceinstitute.ie/asio/TripleStore
 
-asio:TripleStore rdf:type owl:Class ;
+	asio:TripleStore rdf:type owl:Class ;
 
-rdfs:subClassOf doap:Project ,
+	rdfs:subClassOf doap:Project ,
 
-\[ rdf:type owl:Restriction ;
+	\[ rdf:type owl:Restriction ;
 
-owl:onProperty doap:release ;
+	owl:onProperty doap:release ;
 
-owl:allValuesFrom asio:TripleStoreRelease
+	owl:allValuesFrom asio:TripleStoreRelease
 
-\] ;
+	\] ;
 
-rdfs:comment \"\"\"A software project that provides RDF triple/quad
-storage capabilities.
+	rdfs:comment \"\"\"A software project that provides RDF triple/quad
+	storage capabilities.
 
-At the moment this notion is strict: a software system is a triple store
-iff it was born a triple store, i.e. all its releases are triple store
-releases. This excludes databases (e.g. Oracle DB since release 18c)
-that grew to incorporate support for RDF.\"\"\"\@en ;
+	At the moment this notion is strict: a software system is a triple store
+	iff it was born a triple store, i.e. all its releases are triple store
+	releases. This excludes databases (e.g. Oracle DB since release 18c)
+	that grew to incorporate support for RDF.\"\"\"\@en ;
 
-rdfs:label \"triple store\"\@en .
+	rdfs:label \"triple store\"\@en .
 
-\#\#\# http://datascienceinstitute.ie/asio/TripleStoreRelease
+	\#\#\# http://datascienceinstitute.ie/asio/TripleStoreRelease
 
-asio:TripleStoreRelease rdf:type owl:Class ;
+	asio:TripleStoreRelease rdf:type owl:Class ;
 
-rdfs:subClassOf doap:Version ;
+	rdfs:subClassOf doap:Version ;
 
-rdfs:label \"triple store release\"\@en .
+	rdfs:label \"triple store release\"\@en .
 
-\#\#\# http://usefulinc.com/ns/doap\#Project
+	\#\#\# http://usefulinc.com/ns/doap\#Project
 
-doap:Project rdf:type owl:Class .
+	doap:Project rdf:type owl:Class .
 
-\#\#\# http://usefulinc.com/ns/doap\#Version
+	\#\#\# http://usefulinc.com/ns/doap\#Version
 
-doap:Version rdf:type owl:Class .
+	doap:Version rdf:type owl:Class .
 
-\#\#\# http://www.w3.org/2004/02/skos/core\#Concept
+	\#\#\# http://www.w3.org/2004/02/skos/core\#Concept
 
-skos:Concept rdf:type owl:Class .
+	skos:Concept rdf:type owl:Class .
 
-\#\#\# http://www.w3.org/ns/prov\#Entity
+	\#\#\# http://www.w3.org/ns/prov\#Entity
 
-provo:Entity rdf:type owl:Class .
+	provo:Entity rdf:type owl:Class .
 
-\#\#\# Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z)
-https://github.com/owlcs/owlapi
+	\#\#\# Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z)
+	https://github.com/owlcs/owlapi
 
 [^1]: Rdf spec
 
