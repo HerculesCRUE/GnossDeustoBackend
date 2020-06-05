@@ -74,7 +74,7 @@ namespace ApiCargaWebInterface.Models.Services
             return result;
         }
 
-        public string CallPostApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false)
+        public string CallPostApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false, string fileName = "rdfFile")
         {
             string stringData = JsonConvert.SerializeObject(item);
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
@@ -110,7 +110,7 @@ namespace ApiCargaWebInterface.Models.Services
             }
         }
 
-        public string CallPutApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false)
+        public string CallPutApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false, string fileName = "rdfFile")
         {
             string stringData = JsonConvert.SerializeObject(item);
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");

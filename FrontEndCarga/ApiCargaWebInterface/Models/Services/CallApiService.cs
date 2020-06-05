@@ -74,7 +74,7 @@ namespace ApiCargaWebInterface.Models.Services
             return result;
         }
 
-        public string CallPostApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false)
+        public string CallPostApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false, string fileName = "rdfFile")
         {
             HttpContent contentData = null;
             if (!isFile)
@@ -91,7 +91,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 ByteArrayContent bytes = new ByteArrayContent(data);
                 contentData = new MultipartFormDataContent();
-                ((MultipartFormDataContent)contentData).Add(bytes, "rdfFile", ((IFormFile)item).FileName);
+                ((MultipartFormDataContent)contentData).Add(bytes, fileName, ((IFormFile)item).FileName);
             }
             string result = "";
             HttpResponseMessage response = null;
@@ -124,7 +124,7 @@ namespace ApiCargaWebInterface.Models.Services
             }
         }
 
-        public string CallPutApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile=false)
+        public string CallPutApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile=false, string fileName = "rdfFile")
         {
             HttpContent contentData = null;
             if (!isFile)
@@ -143,7 +143,7 @@ namespace ApiCargaWebInterface.Models.Services
                     }
                     ByteArrayContent bytes = new ByteArrayContent(data);
                     contentData = new MultipartFormDataContent();
-                    ((MultipartFormDataContent)contentData).Add(bytes, "rdfFile", ((IFormFile)item).FileName);
+                    ((MultipartFormDataContent)contentData).Add(bytes, fileName, ((IFormFile)item).FileName);
                 }
             }
             string result = "";
