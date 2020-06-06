@@ -1,12 +1,14 @@
 ![](.//docs/media/CabeceraDocumentosMD.png)
 
-# Sobre UrisFactory
+# Acerca de UrisFactory
 
-La documentación que explica la Especificación de URIs Hércules y las buenas prácticas está en:
+La documentación que explica la Especificación de URIs Hércules y las Buenas prácticas de URis está en:
 
 https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/UrisFactory/docs
 
-Accesible en pruebas en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/uris/swagger/index.html.
+La librería se utiliza como un servicio web, accesible en pruebas en esta dirección a través de swagger: 
+
+http://herc-as-front-desa.atica.um.es/uris/swagger/index.html.
 
 La documentación de la librería está disponible en: 
 
