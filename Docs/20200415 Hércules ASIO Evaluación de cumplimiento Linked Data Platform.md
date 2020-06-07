@@ -145,7 +145,7 @@ y sin las funciones de actualización de datos.
 
 Cumplir con LDP garantiza un servidor que publica datos enlazados
 (*linked data*) de acuerdo a los estándares y clarifica y extiende las
-reglas de datos enlazados ( [*Linked Data Design
+reglas de datos enlazados ([*Linked Data Design
 Issues*](http://www.w3.org/DesignIssues/LinkedData.html)):
 
 1.  Usar URIs como nombres de cosas.
