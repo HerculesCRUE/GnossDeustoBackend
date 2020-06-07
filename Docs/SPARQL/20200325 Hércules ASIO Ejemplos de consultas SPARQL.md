@@ -2,11 +2,11 @@
 
 # Hércules Backend ASIO. Ejemplos de consultas sparql
 
-[1 INTRODUCCIÓN](#introduccion)
+[INTRODUCCIÓN](#introduccion)
 
-[2 GRAFO DE DATOS DE CVN](#grafo-de-datos-de-cvn)
+[GRAFO DE DATOS DE CVN](#grafo-de-datos-de-cvn)
 
-[3 GRAFO DE DATOS DE SISTEMAS DE LA UM](#grafo-de-datos-de-sistemas-de-la-um)
+[GRAFO DE DATOS DE SISTEMAS DE LA UM](#grafo-de-datos-de-sistemas-de-la-um)
 
 Introducción
 ============
