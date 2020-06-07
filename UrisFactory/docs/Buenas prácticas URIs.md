@@ -10,7 +10,7 @@
 
 [Prácticas relativas a la gestión de recursos semánticos a través de URI](#prácticas-relativas-a-la-gestión-de-recursos-semánticos-a-través-de-uri)
 
-[Ejemplos de uso](#ejemplos_de_uso)
+[Ejemplos de uso](#ejemplos-de-uso)
 
 INTRODUCCIÓN
 ============
@@ -142,10 +142,15 @@ Ejemplos de uso
 
 En cuanto a la normalización de URIs, la carga de los datos de la 
 Universidad de Murcia genera URI como los siguientes:
+
 http://graph.um.es/res/project/RAYD-A-2002-6237
+
 http://graph.um.es/res/researchproposal/RAYD-A-2002-6237
+
 http://graph.um.es/res/dossier/RAYD-A-2002-6237
+
 http://graph.um.es/res/contract/0bbb9175-6c05-4b18-8e34-d38cffa678cd
+
 http://graph.um.es/res/person/5089
 
 En la siguiente fase del proyecto ASIO estos URI podrían tener algún cambio,
@@ -156,7 +161,8 @@ El servidor Linked Data actual, basado en Trifid, es el encargado de
 desreferenciar los URI anteriores. No es el servidor definitivo del 
 proyecto ASIO, si bien permite el desreferenciado de los URI, una 
 presentación básica en HTML y la obtención de la información en
-varios formatos. Por ejemplo:
+varios formatos. Para ver un ejemplo podemos ejecutar los siguientes
+comandos CURL:
 
     curl http://graph.um.es/res/project/RAYD-A-2002-6237
     curl -H "Accept: application/rdf+xml" http://graph.um.es/res/project/RAYD-A-2002-6237
