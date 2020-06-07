@@ -52,8 +52,8 @@ Para garantizar la coherencia y el mantenimiento posterior del esquema
 de URI se aplicarán las siguientes reglas para normalizar las distintas
 partes que componen los URI:
 
-a)  Seleccionar identificadores alfanuméricos cortos únicos, que sean
-    representativos, intuitivos y, si fuera posible, semánticos.
+a)  Seleccionar identificadores alfanuméricos cortos (en lo posible) únicos, 
+    que sean representativos, intuitivos y, si fuera posible, semánticos.
 
 b)  Usar siempre minúsculas, salvo en los casos en los que se utilice el
     nombre de la clase o concepto. Habitualmente, los nombres de las
