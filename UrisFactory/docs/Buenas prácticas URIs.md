@@ -141,7 +141,7 @@ Ejemplos de uso
 ---------------
 
 En cuanto a la normalización de URIs, la carga de los datos de la 
-Universidad de Murcia genera URI como los siguientes:
+Universidad de Murcia genera URIs para instancias como los siguientes: 
 
 http://graph.um.es/res/project/RAYD-A-2002-6237
 
@@ -153,16 +153,24 @@ http://graph.um.es/res/contract/0bbb9175-6c05-4b18-8e34-d38cffa678cd
 
 http://graph.um.es/res/person/5089
 
-En la siguiente fase del proyecto ASIO estos URI podrían tener algún cambio,
-en particular en el segmento del identificador, y también tendremos 
-ejemplos diferentes procedentes de otras cargas de datos.
+Los grafos con nombre definidos para las pruebas de carga de datos 
+tienen los siguientes URIs:
 
-El servidor Linked Data actual, basado en Trifid, es el encargado de 
-desreferenciar los URI anteriores. No es el servidor definitivo del 
-proyecto ASIO, si bien permite el desreferenciado de los URI, una 
-presentación básica en HTML y la obtención de la información en
-varios formatos. Para ver un ejemplo podemos ejecutar los siguientes
-comandos CURL:
+http://graph.um.es/graph/um_sgi (provenientes de una exportación de datos)
+
+http://graph.um.es/graph/um_cvn (provenientes de la carga de CVN)
+
+En la siguiente fase del proyecto ASIO estos URI podrían tener algún 
+cambio, en particular en el segmento del identificador, y también 
+tendremos ejemplos diferentes procedentes de otras cargas de datos.
+
+En cuanto a la gestión de recursos semánticso, contamos con una 
+versión preliminar de un servidor Linked Data, basado en Trifid, 
+que se encarga de desreferenciar los URI anteriores. No es el 
+servidor definitivo del proyecto ASIO, si bien permite el 
+desreferenciado de los URI, una presentación básica en HTML y la
+obtención de la información en varios formatos. 
+Para ver un ejemplo podemos ejecutar los siguientes comandos CURL:
 
     curl http://graph.um.es/res/project/RAYD-A-2002-6237
     curl -H "Accept: application/rdf+xml" http://graph.um.es/res/project/RAYD-A-2002-6237
