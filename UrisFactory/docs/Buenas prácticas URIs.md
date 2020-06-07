@@ -2,33 +2,44 @@
 
 # Hércules Backend ASIO. Buenas prácticas del esquema de URIs
 
-[1 INTRODUCCIÓN](#introducción)
+[INTRODUCCIÓN](#introducción)
 
-[1 Buenas prácticas de URIs](#buenas-prácticas-de-uris)
+[Buenas prácticas de URIs](#buenas-prácticas-de-uris)
 
-[1.1 Normalización de los componentes de los URI](#normalización-de-los-componentes-de-los-uri)
+[Normalización de los componentes de los URI](#normalización-de-los-componentes-de-los-uri)
 
-[1.2 Prácticas relativas a la gestión de recursos semánticos a través de URI](#prácticas-relativas-a-la-gestión-de-recursos-semánticos-a-través-de-uri)
+[Prácticas relativas a la gestión de recursos semánticos a través de URI](#prácticas-relativas-a-la-gestión-de-recursos-semánticos-a-través-de-uri)
 
 INTRODUCCIÓN
 ============
 
 El presente documento describe las buenas prácticas en la definición de los URI
-para el proyecto Hércules ASIO y tiene en cuenta la [Especificación del Esquema de URIs de
-Hércules](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/UrisFactory/docs/Especificaci%C3%B3n%20Esquema%20de%20URIs.md).
+para el proyecto Hércules ASIO y tiene en cuenta lo indicado en la 
+[Especificación del Esquema de URIs de Hércules](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/UrisFactory/docs/Especificaci%C3%B3n%20Esquema%20de%20URIs.md).
 
-En su elaboración tenemos en cuenta las recomendaciones de la [Norma
+En su elaboración aplicamos las recomendaciones de la [Norma
 Técnica de Interoperabilidad de Reutilización de recursos de la
 Información](https://www.boe.es/boe/dias/2013/03/04/pdfs/BOE-A-2013-2380.pdf)
-(NTI), de la Secretaría de Estado de Administraciones Públicas; que se
+(NTI), de la Secretaría de Estado de Administraciones Públicas, que se
 basan, a su vez, en las iniciativas de datos abiertos y las
-recomendaciones procedentes del mundo de la Web Semántica.
+recomendaciones procedentes del mundo de la Web Semántica para los 
+datos enlazados (Linked Data).
 
 Las recomendaciones de multilingüismo se incluyen y detallan en el documento
 [20200427 Hércules ASIO Modelo de multilingüismo.md](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/20200427%20H%C3%A9rcules%20ASIO%20Modelo%20de%20multiling%C3%BCismo.md).
 
 Buenas prácticas de URIs
 ========================
+
+Un URI (Uniform Resource Identifier, ver IETF [RFC 3986](https://tools.ietf.org/html/rfc3986), [RFC 6874](https://tools.ietf.org/html/rfc6874) y [RFC 7320](https://tools.ietf.org/html/rfc7320)) 
+establece un identificador único que permite referenciar la información 
+mediante mecanismos HTTP.
+
+Las siguientes reglas y recomendaciones tienen en cuenta las propuestas de la [NTI](https://www.boe.es/boe/dias/2013/03/04/pdfs/BOE-A-2013-2380.pdf) 
+para espacios de datos enlazados (Linked data), que adoptan los principios de diseño y
+las políticas de persistencia de URIs del W3C, en particular 
+[Best Practices for Publishing Linked Data. The Role of "Good URIs" for Linked Data](https://www.w3.org/TR/ld-bp/#HTTP-URIS) y 
+[Architecture of the World Wide Web. Uri persistence](https://www.w3.org/TR/webarch/#URI-persistence).
 
 Agrupamos las Buenas prácticas en unas **Reglas de normalización** de
 los componentes de los URI y en unas recomendaciones en la **Gestión de
@@ -42,7 +53,7 @@ de URI se aplicarán las siguientes reglas para normalizar las distintas
 partes que componen los URI:
 
 a)  Seleccionar identificadores alfanuméricos cortos únicos, que sean
-    representativos, intuitivos y semánticos.
+    representativos, intuitivos y, si fuera posible, semánticos.
 
 b)  Usar siempre minúsculas, salvo en los casos en los que se utilice el
     nombre de la clase o concepto. Habitualmente, los nombres de las
@@ -72,7 +83,12 @@ Las siguientes prácticas se desarrollarán como requisitos del servidor
 Linked Data de Hércules ASIO y se aplicarán para la gestión de recursos
 semánticos descritos en RDF:
 
-a)  Cumplir el principio de persistencia de los URIs, lo que significa
+a)  Los URI son HTTP, que permiten el desreferenciado y el acceso a la 
+    información identificada como un componente más de la WWW, lo que 
+    supone además otros beneficios, como el enlazado, el uso     
+    de cache de contenido y la indexación por parte de motores de búsqueda.
+
+b)  Cumplir el principio de persistencia de los URIs, lo que significa
     que los que ya han sido creados previamente nunca deberían variar, y
     que el contenido al que hacen referencia debería ser accesible. En
     el caso de que sea necesario cambiar o eliminar el recurso al que
@@ -83,7 +99,7 @@ a)  Cumplir el principio de persistencia de los URIs, lo que significa
     mientras que para indicar que un recurso ha desaparecido
     permanentemente se utilizará el código de estado HTTP 410
 
-b)  Siempre que sea posible, y existan versiones del recurso en formato
+c)  Siempre que sea posible, y existan versiones del recurso en formato
     legible para personas HTML o similar y RDF, el servidor que gestiona
     los URI realizará negociación del contenido en función de la
     cabecera del agente que realiza la petición. En el caso de que el
@@ -93,7 +109,14 @@ b)  Siempre que sea posible, y existan versiones del recurso en formato
     mecanismo de redirecciones alternativas mediante los códigos de
     estado HTTP 3XX.
 
-c)  En el caso de que no se realice una negociación del contenido desde
+d)  En el caso de que la universidad no pudiera seguir gestionando el 
+    espacio de URIs, debería proporcionar un volcado de los datos públicos, 
+    para que otra entidad del ámbito universitario se hiciera cargo 
+    de los mismos; y establecer un mecanismo de redirección hacia el nuevo 
+    espacio el tiempo suficiente para que las redirecciones HTTP sean
+    reconocidas por los actores implicados.
+
+e)  En el caso de que no se realice una negociación del contenido desde
     el servidor y, para favorecer el descubrimiento de contenido RDF
     desde los documentos HTML relacionados con las descripciones de los
     recursos, se incluirán enlaces a la representación alternativa en
@@ -102,8 +125,12 @@ c)  En el caso de que no se realice una negociación del contenido desde
     type=«application/rdf+xml» href=«documento.rdf»\> o similar. En esa
     sentencia se incluye el tipo de formato MIME del documento
     (application/rdf+xml, text/n3, etc.).
+    
+f)  El resultado del desreferenciado de los URI será independiente del
+    servidor implementado (Linked Data Server de ASIO), pudiendo cambiar
+    éste sin que varíe la información servida.
 
-d)  Cuando se establezcan enlaces entre distintos recursos de
+g)  Cuando se establezcan enlaces entre distintos recursos de
     información, se procurará la generación de enlaces que conecten los
     recursos bidireccionales para facilitar la navegación sobre los
     recursos de información en ambos sentidos.
