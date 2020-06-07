@@ -25,7 +25,7 @@ arquitectura para leer y escribir datos enlazados en la web.
 LDP 1.0 es una recomendación del W3C: <https://www.w3.org/TR/ldp/>
 
 El presente documento evalúa el grado de cumplimiento de LDP que el
-Servidor Linked Data de Hércules ASIO debe cumplir, para lo que se tiene en
+Servidor Linked Data de Hércules ASIO debe cumplir, para lo que se tienen en
 cuenta la extensión de uso en la comunidad Linked Data, su utilidad en
 ASIO, los posibles beneficios a largo plazo, la dificultad de
 implementación y los condicionantes de seguridad.
@@ -44,12 +44,14 @@ tipos:
 ![](.//media/image2_LDP.png)
 *Ejemplos de diferentes tipos de LDPRs - Fuente W3C*
 
-No es necesario que un servidor LDP permita la recuperación de recursos
-LDP-NR. En Hércules ASIO sólo tendremos recursos LDP-RS, que podrían
-contener metadatos que describan y enlacen con documentos de otros tipos
-y que permitan su obtención desde otras plataformas. Es decir, el
-servicio de otros tipos de recursos será responsabilidad de las
-plataformas que los alojen, particularmente Hércules SGI.
+Según la especificación, no es necesario que un servidor LDP permita
+la recuperación de recursos LDP-NR. Por tanto, el servidor LDP de
+Hércules ASIO sólo alojará y servirá recursos LDP-RS, mientras que
+los documentos LDP-NR de otros tipos, enlazados o descritos por 
+los metadatos, serían accesibles mediante otras plataformas. Es decir, 
+el servicio de recursos LDP-NR será responsabilidad de las plataformas
+que los alojen, particularmente de Hércules SGI, y no del 
+servidor Linked Data de ASIO..
 
 RECUPERACIÓN Y CREACIÓN DE RECURSOS
 ===================================
@@ -69,14 +71,14 @@ dificultades ni problemas reseñables. Se trata de:
 
 -   Los servidores LDP deben publicar las posibles restricciones para
     crear o actualizar recursos (LDPRs), mediante una cabecera Link, una
-    relación <http://www.w3.org/ns/ldp#constrainedBy> y una URI que
+    relación <http://www.w3.org/ns/ldp#constrainedBy> y un URI que
     defina el conjunto de restricciones. Por ejemplo y como veremos en
     nuestro caso, un servidor LPD podría rechazar la creación de
-    recursos con PUT o POST, y se devolvería esa cabecera Link al
+    recursos con PUT o POST, por lo que se devolvería esa cabecera Link al
     responder con un código 4xx.
 
 En cuanto a los métodos HTTP de gestión de los recursos, la
-especificación de LDP indica lo siguientes métodos obligatorios (todos
+especificación de LDP indica los siguientes métodos obligatorios (todos
 de lectura): GET, HEAD y OPTIONS.
 
 Por el contrario, son métodos opcionales los que tienen que ver con la
@@ -97,7 +99,7 @@ En cuanto a las peticiones GET de recursos RDF (LDP-RS), lo que debe
 cumplir un servidor LDP no tendría ninguna característica que no deba
 tener un servidor Linked Data. Se trata de:
 
--   Los recursos RDF deben ser recursos LPDR.
+-   Los recursos RDF deben ser recursos LPD-RS.
 
 -   El servidor LDP debe proporcionar una representación RDF de los
     recursos LDP-RS.
@@ -111,19 +113,34 @@ tener un servidor Linked Data. Se trata de:
 CONTENEDORES
 ============
 
-La implementación LDP del servidor Linked Data de ASIO sólo tendría un
-contenedor ([*basic* *container*](https://www.w3.org/TR/ldp/#ldpbc)) y devolvería sólo un subconjunto de las
-propiedades del contenedor (*minimal-container triples*), sin devolver
-los triples de los recursos contenidos. En el caso de ASIO, el volumen de recursos
-y su complejidad no permite que la recuperación de los triples se
-realice mediante el mecanismo previsto para los contenedores.
+La implementación LDP del servidor Linked Data de ASIO tendría las 
+siguientes características:
+
+-   Sólo tendrá un contenedor. No parece de utilidad la separación
+    del contenido en diferentes contenedores cuando toda la información 
+    es referente al Sistema de Gestión de la Investigación (SGI) de la
+    universidad.  Por tanto, no sería necesario implementar el mecanismo
+    entre contenedores para obtener la información de un recurso.
+
+-   El contenedor sólo devolverá un subconjunto de sus propiedades 
+    (minimal-container triples) y en ningún caso todos los triples de 
+    los recursos contenidos, ni siquiera de manera paginada. En el caso
+    de ASIO, el volumen de recursos supondría una carga para los sistemas
+    que no se justifica. Si se desease proporcionar acceso al dataset
+    completo, sería más recomendable ofrecer una descarga desde un servidor
+    de ficheros.
+    
+Por tanto, el servidor Linked Data de ASIO se implementará como un servidor 
+LDP con un único contenedor que sólo devolverá los triples de
+la entidad solicitada ([LDP Basic container](https://www.w3.org/TR/ldp/#ldpbc)).
+
 
 CONCLUSIONES
 ============
 
 El servidor Linked Data que implementaremos en ASIO cumplirá el estándar
-LDP para la recuperación de recursos RDF, con un único contenedor y sin
-las funciones de actualización de datos.
+LDP para la recuperación de recursos RDF (LDP-RS), con un único contenedor 
+y sin las funciones de actualización de datos.
 
 Cumplir con LDP garantiza un servidor que publica datos enlazados
 (*linked data*) de acuerdo a los estándares y clarifica y extiende las
@@ -134,7 +151,7 @@ Issues*](http://www.w3.org/DesignIssues/LinkedData.html)):
 
 2.  Usar URIs HTTP para que las personas puedan localizar esos nombres.
 
-3.  Cuando alguien pide una URI, proporcionar información útil usando
+3.  Cuando alguien pide un URI, proporcionar información útil usando
     estándares (RDF, SPARQL).
 
 4.  Incluir enlaces a otros URIs, para que se puedan descubrir más
