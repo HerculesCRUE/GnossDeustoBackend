@@ -42,6 +42,7 @@ tipos:
     documentos generados con editores de texto, hojas de cálculo, etc.
 
 ![](.//media/image2_LDP.png)
+
 *Ejemplos de diferentes tipos de LDPRs - Fuente W3C*
 
 Según la especificación, no es necesario que un servidor LDP permita
