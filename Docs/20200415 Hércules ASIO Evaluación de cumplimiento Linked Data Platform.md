@@ -48,12 +48,15 @@ Issues*](http://www.w3.org/DesignIssues/LinkedData.html)):
 Para cada sección del presente documento indicaremos el nivel de 
 cumplimiento LDP que proponemos para el servidor Linked Data de ASIO:
 
--   Tipos de recursos soportados. Ofrecerá recursos representados en RDF.
+-   Tipos de recursos soportados. El servidor Linked Data de ASIO 
+    ofrecerá recursos representados en RDF.
 
--   Recuperación y creación de recursos. Sólo responderá a los
-    métodos HTTP de recuperación de información, GET, HEAD y OPTIONS.
+-   Recuperación y creación de recursos. El servidor Linked Data de 
+    ASIOSólo responderá a los métodos HTTP de recuperación de
+    información: GET, HEAD y OPTIONS.
     
--   Contenedores. Dispondrá de un único contenedor de tipo *basic container*.
+-   Contenedores. El servidor Linked Data de ASIO solo dispondrá de
+    un único contenedor de tipo *basic container*.
 
 TIPOS DE RECURSOS SOPORTADOS
 ============================
