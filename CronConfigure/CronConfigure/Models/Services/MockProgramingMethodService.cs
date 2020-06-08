@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.Models.Services
 {
+    ///<summary>
+    ///Clase que sirve de mock del ProgramingMethodService para la realización de los test
+    ///</summary>
     public class MockProgramingMethodService : IProgramingMethodService
     {
         public string ProgramPublishRepositoryJob(Guid idRepository, DateTime fechaInicio, DateTime? fecha = null, string set = null, string codigoObjeto = null)
