@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.ViewModels
 {
+    ///<summary>
+    ///Clase que sirve para mostrar los datos de una tarea recurrente
+    ///</summary>
     public class RecurringJobViewModel
     {
         public string Id { get; set; }

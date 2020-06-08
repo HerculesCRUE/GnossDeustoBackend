@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.Models.Hangfire
 {
+    ///<summary>
+    ///Clase usada por Hangfire para el guardado de las tareas
+    ///</summary>
     [Table("counter", Schema = "hangfire")]
     public class Count
     {

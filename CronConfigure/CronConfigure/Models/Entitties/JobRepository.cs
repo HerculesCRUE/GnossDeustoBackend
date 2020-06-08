@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 namespace CronConfigure.Models.Entitties
 {
     [Table("JobRepository", Schema = "hangfire")]
+    ///<summary>
+    ///Clase que vincula una sincronización con un repositorio
+    ///</summary>
     public class JobRepository
     {
         [Key]
