@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
+    ///<summary>
+    ///Clase que hace de Mock para el uso de la clase CallApiNeedPublishData de forma ficticia
+    ///</summary>
     public class CallMockNeedPublishData: ICallNeedPublishData
     {
         public void CallDataPublish(string rdf)
@@ -19,6 +22,10 @@ namespace API_CARGA.Models.Services
             
         }
 
+        ///<summary>
+        ///Simula realizar una llamada para la obtención de unos datos ficticios que harían esas llamadas
+        ///</summary>
+        ///<param name="urlMethod">método a llamar</param>
         public string CallGetApi(string urlMethod)
         {
             string xml = "";
