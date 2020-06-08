@@ -1,3 +1,5 @@
+![](.//media/CabeceraDocumentosMD.png)
+
 # Hercules ASIO Benchmark - User guide
 
 This document gives a brief overview of the usage of the interface to the triple store benchmark data developped as part of the project. The primary function of this interface is to display a ranking of triple store systems according to a score based on assessing them with the set of weighted criteria considered. However, this interface being based on linked data, it also enables exploring the criteria and their assessement for different triple store systems, as well as to provide personalised weights for the criteria that can better reflect specific scenarios and use cases.
