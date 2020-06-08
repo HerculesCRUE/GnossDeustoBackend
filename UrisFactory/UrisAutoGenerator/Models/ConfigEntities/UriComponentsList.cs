@@ -4,6 +4,9 @@ using System.Collections.Immutable;
 
 namespace UrisFactory.Models.ConfigEntities
 {
+    ///<summary>
+    ///almacena los nombres 
+    ///</summary>
     public static class UriComponentsList
     {
         public const string Base = "base";

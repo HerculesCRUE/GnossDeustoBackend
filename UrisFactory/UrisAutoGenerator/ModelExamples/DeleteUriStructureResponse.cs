@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace UrisFactory.ModelExamples
 {
+    ///<summary>
+    ///Clase de ejemplo para mostrar una correcta eliminación de una estructura uri
+    ///</summary>
     public class DeleteUriStructureResponse : IExamplesProvider<string>
     {
         public string GetExamples()

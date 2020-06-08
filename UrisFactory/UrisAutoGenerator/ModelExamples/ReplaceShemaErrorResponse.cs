@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace UrisFactory.ModelExamples
 {
+    ///<summary>
+    ///Clase de ejemplo para mostrar correcto reemplazo del fichero de configuración
+    ///</summary>
     public class ReplaceShemaErrorResponse : IExamplesProvider<UriErrorExample>
     {
         public UriErrorExample GetExamples()

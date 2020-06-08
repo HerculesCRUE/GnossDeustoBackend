@@ -1,6 +1,9 @@
 ﻿
 namespace UrisFactory.Models.ConfigEntities
 {
+    ///<summary>
+    ///Objeto que representa a un objeto que hay dentro de la estructura Components del fichero json de configuración
+    ///</summary>
     public class Component
     {
         public string UriComponent { get; set; }

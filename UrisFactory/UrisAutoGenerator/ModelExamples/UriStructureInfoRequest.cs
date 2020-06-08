@@ -8,6 +8,9 @@ using UrisFactory.ViewModels;
 
 namespace UrisFactory.ModelExamples
 {
+    ///<summary>
+    ///Clase de ejemplo para mostrar un ejemplo de estructura uri
+    ///</summary>
     public class UriStructureInfoRequest: IExamplesProvider<InfoUriStructure>
     {
         public InfoUriStructure GetExamples()
