@@ -3,15 +3,15 @@
 # Hércules Backend ASIO. Evaluación de cumplimiento Linked Data Platform (LDP)
 
 
-[1 INTRODUCCIÓN](#introducción)
+[INTRODUCCIÓN](#introducción)
 
-[2 TIPOS DE RECURSOS SOPORTADOS](#tipos-de-recursos-soportados)
+[TIPOS DE RECURSOS SOPORTADOS](#tipos-de-recursos-soportados)
 
-[3 RECUPERACIÓN Y CREACIÓN DE RECURSOS](#recuperación-y-creación-de-recursos)
+[RECUPERACIÓN Y CREACIÓN DE RECURSOS](#recuperación-y-creación-de-recursos)
 
-[4 CONTENEDORES](#contenedores)
+[CONTENEDORES](#contenedores)
 
-[5 CONCLUSIONES](#conclusiones)
+[CONCLUSIONES](#conclusiones)
 
 INTRODUCCIÓN
 ============
@@ -25,10 +25,35 @@ arquitectura para leer y escribir datos enlazados en la web.
 LDP 1.0 es una recomendación del W3C: <https://www.w3.org/TR/ldp/>
 
 El presente documento evalúa el grado de cumplimiento de LDP que el
-Servidor Linked Data de Hércules ASIO debe cumplir, para lo que se tienen en
-cuenta la extensión de uso en la comunidad Linked Data, su utilidad en
-ASIO, los posibles beneficios a largo plazo, la dificultad de
-implementación y los condicionantes de seguridad.
+Servidor Linked Data de Hércules ASIO debería cubrir, para lo que se 
+tienen en cuenta la extensión de uso de LDP en la comunidad Linked Data, 
+su utilidad en ASIO, los posibles beneficios a largo plazo, la 
+dificultad de implementación y los condicionantes de seguridad.
+
+Cumplir con LDP garantiza un servidor que publica datos enlazados
+(*linked data*) de acuerdo a los estándares y clarifica y extiende las
+reglas de datos enlazados ([*Linked Data Design
+Issues*](http://www.w3.org/DesignIssues/LinkedData.html)):
+
+1.  Usar URIs como nombres de cosas.
+
+2.  Usar URIs HTTP para que las personas puedan localizar esos nombres.
+
+3.  Cuando alguien pide un URI, proporcionar información útil usando
+    estándares (RDF, SPARQL).
+
+4.  Incluir enlaces a otros URIs, para que se puedan descubrir más
+    cosas.
+
+Para cada sección del presente documento indicaremos el nivel de 
+cumplimiento LDP que proponemos para el servidor Linked Data de ASIO:
+
+-   Tipos de recursos soportados. Ofrecerá recursos representados en RDF.
+
+-   Recuperación y creación de recursos. Sólo responderá a los
+    métodos HTTP de recuperación de información, GET, HEAD y OPTIONS.
+    
+-   Contenedores. Dispondrá de un único contenedor de tipo *basic container*.
 
 TIPOS DE RECURSOS SOPORTADOS
 ============================
@@ -45,14 +70,14 @@ tipos:
 
 *Ejemplos de diferentes tipos de LDPRs - Fuente W3C*
 
-Según la especificación, no es necesario que un servidor LDP permita
-la recuperación de recursos LDP-NR. Por tanto, el servidor LDP de
-Hércules ASIO sólo alojará y servirá recursos LDP-RS, mientras que
-los documentos LDP-NR de otros tipos, enlazados o descritos por 
-los metadatos, serían accesibles mediante otras plataformas. Es decir, 
-el servicio de recursos LDP-NR será responsabilidad de las plataformas
-que los alojen, particularmente de Hércules SGI, y no del 
-servidor Linked Data de ASIO..
+Según la especificación, es obligatorio que un servidor LDP permita
+la recuperación de recursos LDP-RS, pero no que ofrezca recursos LDP-NR.
+Proponemos que el servidor LDP de Hércules ASIO sólo aloje y sirva 
+recursos LDP-RS, mientras que los documentos LDP-NR de otros tipos, 
+enlazados o descritos por los metadatos, serían accesibles mediante 
+otras plataformas. Es decir, el servicio de recursos LDP-NR será 
+responsabilidad de las plataformas que los alojen, particularmente de
+Hércules SGI, y no del servidor Linked Data de ASIO.
 
 RECUPERACIÓN Y CREACIÓN DE RECURSOS
 ===================================
@@ -94,7 +119,16 @@ de ASIO, actualizar una entidad (p.e. un proyecto) requiere
 habitualmente de la actualización de datos entidades relacionadas (p.e.
 las actividades). Hacer esto requeriría de varias peticiones (POST o
 PUT) y de un control de la operación global con una especie de
-transacción muy complejo de implementar mediante peticiones HTTP.
+transacción muy compleja de implementar mediante peticiones HTTP.
+
+Por otro lado, hay que considerar que la edición de recursos, 
+y por tanto la modificación de sus datos (salvo determinados 
+procesos como reconciliación de entidades y descubrimiento de
+enlaces de Hércules ASIO y enriquecimiento de datos previsto 
+en Hércules ED), se realiza en el SGI de cada universidad, por
+lo que sería complicado gestionar problemas de inconsistencia de
+datos si se permitiera además hacer modificaciones mediante el
+servidor LDP de ASIO.
 
 En cuanto a las peticiones GET de recursos RDF (LDP-RS), lo que debe
 cumplir un servidor LDP no tendría ninguna característica que no deba
@@ -117,11 +151,12 @@ CONTENEDORES
 La implementación LDP del servidor Linked Data de ASIO tendría las 
 siguientes características:
 
--   Sólo tendrá un contenedor. No parece de utilidad la separación
-    del contenido en diferentes contenedores cuando toda la información 
-    es referente al Sistema de Gestión de la Investigación (SGI) de la
-    universidad.  Por tanto, no sería necesario implementar el mecanismo
-    entre contenedores para obtener la información de un recurso.
+-   Sólo tendrá un contenedor. La separación en containers tiene sentido
+    cuando la información proviene de fuentes diversas, mientras que en
+    ASIO toda la información pertenece a la misma fuente, el Sistema de 
+    Gestión de la Investigación (SGI) de la universidad.  Por tanto, 
+    proponemos no implementar el el mecanismo LDP previsto para obtener
+    la información de un recurso entre varios contenedores.
 
 -   El contenedor sólo devolverá un subconjunto de sus propiedades 
     (minimal-container triples) y en ningún caso todos los triples de 
@@ -141,19 +176,5 @@ CONCLUSIONES
 
 El servidor Linked Data que implementaremos en ASIO cumplirá el estándar
 LDP para la recuperación de recursos RDF (LDP-RS), con un único contenedor 
-y sin las funciones de actualización de datos.
+y sólo con las funciones de lectura de datos.
 
-Cumplir con LDP garantiza un servidor que publica datos enlazados
-(*linked data*) de acuerdo a los estándares y clarifica y extiende las
-reglas de datos enlazados ([*Linked Data Design
-Issues*](http://www.w3.org/DesignIssues/LinkedData.html)):
-
-1.  Usar URIs como nombres de cosas.
-
-2.  Usar URIs HTTP para que las personas puedan localizar esos nombres.
-
-3.  Cuando alguien pide un URI, proporcionar información útil usando
-    estándares (RDF, SPARQL).
-
-4.  Incluir enlaces a otros URIs, para que se puedan descubrir más
-    cosas.
