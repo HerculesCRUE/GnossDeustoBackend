@@ -1,3 +1,5 @@
+![](.//media/CabeceraDocumentosMD.png)
+
 # Hercules ASIO Benchmark - Developper documentation
 
 This document gives a brief overview of the code associated with the Hercules ASIO Triple Store Benchmark tool and the underlying data. This code is organised in four different components, available as four subrepositories of the codebase for the project. Each section below covers each of those components.
