@@ -160,6 +160,10 @@ http://graph.um.es/graph/um_sgi (provenientes de una exportación de datos)
 
 http://graph.um.es/graph/um_cvn (provenientes de la carga de CVN)
 
+Las categorías SKOS tienen URIs como:
+
+http://graph.um.es/kos/hr/0006B (BECAS POSTDOCTORALES)
+
 En la siguiente fase del proyecto ASIO estos URI podrían tener algún 
 cambio, en particular en el segmento del identificador, y también 
 tendremos ejemplos diferentes procedentes de otras cargas de datos.
