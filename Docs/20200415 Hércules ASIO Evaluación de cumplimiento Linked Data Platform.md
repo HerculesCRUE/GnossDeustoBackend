@@ -52,10 +52,11 @@ cumplimiento LDP que proponemos para el servidor Linked Data de ASIO:
     ofrecerá recursos representados en RDF.
 
 -   Recuperación y creación de recursos. El servidor Linked Data de 
-    ASIOSólo responderá a los métodos HTTP de recuperación de
-    información: GET, HEAD y OPTIONS.
+    ASIO responderá a los métodos HTTP de recuperación de
+    información (GET, HEAD y OPTIONS) y NO a los de escritura (POST, 
+    PUT, DELETE y PATCH).
     
--   Contenedores. El servidor Linked Data de ASIO solo dispondrá de
+-   Contenedores. El servidor Linked Data de ASIO dispondrá de
     un único contenedor de tipo *basic container*.
 
 TIPOS DE RECURSOS SOPORTADOS
@@ -88,7 +89,7 @@ RECUPERACIÓN Y CREACIÓN DE RECURSOS
 La primera de las especificaciones generales de LDP que debe cumplirse
 es que sea un servidor HTTP 1.1. Otras especificaciones obligatorias son
 las habituales en este tipo de servidores y su cumplimiento no supone
-dificultades ni problemas reseñables. Se trata de:
+dificultades ni problemas reseñables, por lo que incluirán. Se trata de:
 
 -   Las respuestas deben incluir *entity tags* en una cabecera ETag,
     como mecanismo de validación de la cache web (ver
@@ -107,8 +108,9 @@ dificultades ni problemas reseñables. Se trata de:
     responder con un código 4xx.
 
 En cuanto a los métodos HTTP de gestión de los recursos, la
-especificación de LDP indica los siguientes métodos obligatorios (todos
-de lectura): GET, HEAD y OPTIONS.
+especificación de LDP indica los siguientes métodos obligatorios 
+(todos de lectura), a los que responderá el servidor Linked Data: 
+GET, HEAD y OPTIONS.
 
 Por el contrario, son métodos opcionales los que tienen que ver con la
 actualización de recursos: POST, PUT, DELETE y PATCH.
@@ -122,20 +124,20 @@ de ASIO, actualizar una entidad (p.e. un proyecto) requiere
 habitualmente de la actualización de datos entidades relacionadas (p.e.
 las actividades). Hacer esto requeriría de varias peticiones (POST o
 PUT) y de un control de la operación global con una especie de
-transacción muy compleja de implementar mediante peticiones HTTP.
-
+transacción muy compleja de implementar mediante peticiones HTTP. 
 Por otro lado, hay que considerar que la edición de recursos, 
 y por tanto la modificación de sus datos (salvo determinados 
 procesos como reconciliación de entidades y descubrimiento de
-enlaces de Hércules ASIO y enriquecimiento de datos previsto 
-en Hércules ED), se realiza en el SGI de cada universidad, por
-lo que sería complicado gestionar problemas de inconsistencia de
-datos si se permitiera además hacer modificaciones mediante el
+enlaces de Hércules ASIO, así como el enriquecimiento de datos 
+previsto en Hércules ED), se realiza en el SGI de cada universidad, 
+por lo que sería complicado gestionar problemas de inconsistencia 
+de datos si se permitiera además hacer modificaciones mediante el
 servidor LDP de ASIO.
 
 En cuanto a las peticiones GET de recursos RDF (LDP-RS), lo que debe
 cumplir un servidor LDP no tendría ninguna característica que no deba
-tener un servidor Linked Data. Se trata de:
+tener un servidor Linked Data, por lo que también lo cumplirá. 
+Se trata de:
 
 -   Los recursos RDF deben ser recursos LPD-RS.
 
@@ -158,7 +160,7 @@ siguientes características:
     cuando la información proviene de fuentes diversas, mientras que en
     ASIO toda la información pertenece a la misma fuente, el Sistema de 
     Gestión de la Investigación (SGI) de la universidad.  Por tanto, 
-    proponemos no implementar el el mecanismo LDP previsto para obtener
+    proponemos no implementar el mecanismo LDP previsto para obtener
     la información de un recurso entre varios contenedores.
 
 -   El contenedor sólo devolverá un subconjunto de sus propiedades 
