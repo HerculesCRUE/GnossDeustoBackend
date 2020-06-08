@@ -2,6 +2,9 @@
 
 namespace UrisFactory.Extra.Exceptions
 {
+    ///<summary>
+    ///Excepción para indicar que ha fallado la carga del fichero de configuración
+    ///</summary>
     public class FailedLoadConfigJsonException : Exception
     {
         public FailedLoadConfigJsonException()

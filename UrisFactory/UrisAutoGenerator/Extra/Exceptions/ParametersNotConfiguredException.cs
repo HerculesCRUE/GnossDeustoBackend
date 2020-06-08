@@ -2,6 +2,9 @@
 
 namespace UrisFactory.Extra.Exceptions
 {
+    ///<summary>
+    ///Excepción para indicar que hay parametros configurados
+    ///</summary>
     public class ParametersNotConfiguredException : Exception
     {
         public ParametersNotConfiguredException()
