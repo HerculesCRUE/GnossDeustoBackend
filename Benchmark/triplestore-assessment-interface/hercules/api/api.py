@@ -125,6 +125,9 @@ def reranking():
     query = f"""
 {PREFIXES}
 SELECT DISTINCT ?store (SUM(?weighted*?groupweight)/SUM(?groupweight) AS ?score) WHERE {{
+  VALUES(?group ?groupweight) {{
+    {gpvalues}
+  }}
 {{
 SELECT DISTINCT ?store ?group (SUM(?val*?weight)/SUM(?weight) AS ?weighted) WHERE {{
   {ists}
@@ -137,10 +140,8 @@ SELECT DISTINCT ?store ?group (SUM(?val*?weight)/SUM(?weight) AS ?weighted) WHER
   ?crit dct:subject ?group .
   }} GROUP BY ?store ?group 
 }} 
-  VALUES(?group ?groupweight) {{
-    {gpvalues}
-  }}
   ?group skos:broader ?cat
+#       ; asio:weight ?groupweight
 }} GROUP BY ?store
  ORDER BY DESC(?score)
 """

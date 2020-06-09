@@ -32,6 +32,9 @@ dist
 
 # application #
 
+# outputs #
+nohup.out
+
 
 ######################
 # Sensitive data

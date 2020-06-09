@@ -1,5 +1,3 @@
-![](../../Docs/media/CabeceraDocumentosMD.png)
-
 # Hercules triple store assessment interface
 
 This Web application is a frontend for triple store assessment datasets. It provides a point of reference for the evaluation of RDF stores or other database systems that support RDF in some form.
@@ -9,7 +7,7 @@ At the moment, the Hercules app is provided as a [Flask](https://flask.palletspr
 ## Requirements
 
 * Python 3.6.6 or above
-* A SPARQL endpoint Fuseki that publishes a dataset using the ASIO Criterion ontology.
+* A SPARQL endpoint that publishes a dataset using the ASIO Criterion ontology.
 
 ## Build
 
