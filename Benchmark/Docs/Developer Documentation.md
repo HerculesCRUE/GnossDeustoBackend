@@ -8,7 +8,7 @@ This document gives a brief overview of the code associated with the Hercules AS
 
 This component is the backbone of the tool, as it is used to model and structure all of the data associated with the assessment of triple stores systems. It provides a dedicated [RDFS ontology](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/criterion-ontology/src/schema.ttl) for the representation of criteria, systems and assessements, as well as a [dataset](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/criterion-ontology/src/criteria.ttl) representing, according to this ontology, the set of criteria used to assess triple stores in the systems with their descriptions, weights, categories, etc.
 
-The two file linked above are the main component of this repository. Other files and script included were support for creating those files and are kept mostly for transparancy reasons. We would expect those files to remain stable in time. However, the creation of a new criteria or the modification of the default weights for criteria if needed should be achieved through editing those files directly (especially the [criteria.ttl](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/criterion-ontology/src/criteria.ttl))
+The two files linked above are the main components of this repository. Other files and scripts included were support for creating those files and are kept mostly for transparancy reasons. We would expect those files to remain stable in time. However, the creation of a new criteria or the modification of the default weights for criteria if needed should be achieved through editing those files directly (especially the [criteria.ttl](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/criterion-ontology/src/criteria.ttl))
 
 ## [The triple store dataset](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Benchmark/triplestore-dataset)
 
@@ -28,17 +28,17 @@ Editing this repository should mostly have the purpose to add new assessments or
 F1_1::Loads RDF in various serialisations::5::allegrograph_load_doc
 
 @misc{allegrograph_load_doc,
-title={AllegroGraph Documentation on Imporing Datat},
+title={AllegroGraph Documentation on Importing Data},
 url={https://franz.com/agraph/support/documentation/current/agload.html}
 }
 ```
 
 indicates that the triple store allegrograph is given a score of 5 on criterion F1.1 (handling of RDF) with the justification that it "Loads RDF in various serialisations" as evidenced in the document described through a bibtex entry with the key "allegrograph_load_doc".
 
-With this file edited, the script [bib2ttl.py](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/triplestore-assessments/scripts/bib2ttl.py) with the above describe file as parameter will generate RDF (tutle) data from the bibliographic references, and the script [ast2ttl.py](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/triplestore-assessments/scripts/ast2ttl.py) (also with sources.bib in parameter) will generate RDF (according to the criterion ontology) representing the assessment of the triple stores.
+With this file edited, the script [bib2ttl.py](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/triplestore-assessments/scripts/bib2ttl.py) with the above describe file as parameter will generate RDF (turtle) data from the bibliographic references, and the script [ast2ttl.py](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/triplestore-assessments/scripts/ast2ttl.py) (also with sources.bib in parameter) will generate RDF (according to the criterion ontology) representing the assessment of the triple stores.
 
 ## [Triple Store Assessment Interface](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Benchmark/triplestore-assessment-interface)
 
-This component is the frontend of the tool. It is developped as a python flasck application which intallation is described in the [README file](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/triplestore-assessment-interface/README.md) of the repository. The application itself relies on a sparql endpoint being deployed and available with the data from the component described above loaded in one single graph. The address of this endpoint shoudl be configured in the [hercules/settings.py](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/triplestore-assessment-interface/hercules/settings.py) file. Other than this, it is structured as a typical flask application.
+This component is the frontend of the tool. It is developped as a python flask application which intallation is described in the [README file](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/triplestore-assessment-interface/README.md) of the repository. The application itself relies on a sparql endpoint being deployed and available with the data from the component described above loaded in one single graph. The address of this endpoint shoudl be configured in the [hercules/settings.py](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/triplestore-assessment-interface/hercules/settings.py) file. Other than this, it is structured as a typical flask application.
 
 Basic [guidelines](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/Docs/UserGuide.md) for using the interface once deployed are also available.
