@@ -1,10 +1,14 @@
-## Sobre OAI PMH CVN
+![](..//Docs/media/CabeceraDocumentosMD.png)
+
+## Acerca de OAI PMH CVN
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
 
 Accesible en pruebas en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/swagger/index.html.
 
 La documentación de la librería está disponible en: 
 http://herc-as-front-desa.atica.um.es/oaipmh-cvn/library/api/OAI_PMH.Controllers.html
+
+Las librerías compiladas se encuentran en la carpeta [librerías](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/libraries).
 
 OAI PMH CVN es un servicio web basado en OAI-PMH ([https://www.openarchives.org/OAI/openarchivesprotocol.html](https://www.openarchives.org/OAI/openarchivesprotocol.html)) que sirve los datos de los curículums de los investigadores de la Universidad de Murcia en formato RDF y dublin core.
 

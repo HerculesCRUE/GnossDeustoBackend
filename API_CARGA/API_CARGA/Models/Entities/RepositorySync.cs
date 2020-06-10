@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Entities
 {
+    /// <summary>
+    /// Datos de una sincornización sobre un repositorio
+    /// </summary>
     [Table("Sincronizacion_Repositorio")]
     public class RepositorySync
     {

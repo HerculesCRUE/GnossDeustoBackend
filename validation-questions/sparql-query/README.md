@@ -2,8 +2,8 @@
 
 A continuación, se exponen las preguntas de competencia y su ejecución online:
 
-* Q1 - Centros de  investigación que trabajan en un área/disciplina específica: https://tinyurl.com/ycjb7654
-* Q2 - Listado de los investigadores de un centro/estructura de investigación de un área/disciplina específica y su posición: https://tinyurl.com/ybrtkd4o
+* Q1 - Centros de  investigación que trabajan en un área/disciplina específica: https://tinyurl.com/yc5pvrn5
+* Q2 - Listado de los investigadores de un centro/estructura de investigación de un área/disciplina específica y su posición: https://tinyurl.com/y9w5gykd
 * Q3 - Sin implementar.
 * Q4 - Centros/estructuras de investigación que posean sellos de calidad asociados: https://tinyurl.com/yc3zlhoy
 * Q5 - Listado de los centros/estructuras de investigación que hayan realizado proyectos y su respectiva convocatoria: https://tinyurl.com/y97q9b6s
@@ -17,7 +17,7 @@ A continuación, se exponen las preguntas de competencia y su ejecución online:
 * Q12 - Listar proyectos agrupados por ámbito geográfico: https://tinyurl.com/y9onbpqa
 * Q13 - Dado un proyecto listar los documentos de su dossier: https://tinyurl.com/y9onbpqa
 * Q14 - Diferentes consultas sobre proyectos: Implementada por Q5, Q10 y Q12.
-* Q15 - Listar proyectos con el mismo subject area o con subject areas relacionadas por parentesco, mirando en el árbol UNESKOS: https://tinyurl.com/ybecn6ff
+* Q15 - Listar proyectos con el mismo subject area o con subject areas relacionadas por parentesco, mirando en el árbol UNESKOS: https://tinyurl.com/y7al28b5
 * Q16A - Dada una persona listar proyectos en los que ha intervenido filtrados por periodo y/o organización: https://tinyurl.com/yaxswxce
 * Q16B - Dada una persona listar research objects a los que ha contribuido, filtrados por periodo y/o organización: https://tinyurl.com/y7dlllfu
 * Q17 - Dada una organización, en un periodo de tiempo, listar research projects o proyectos: https://tinyurl.com/y72gcv2q

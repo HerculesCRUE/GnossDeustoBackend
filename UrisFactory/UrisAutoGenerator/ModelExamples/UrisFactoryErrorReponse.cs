@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace UrisFactory.ModelExamples
 {
+    ///<summary>
+    ///Clase de ejemplo para mostrar un error al obtener una uri
+    ///</summary>
     public class UrisFactoryErrorReponse : IExamplesProvider<UriErrorExample>
     {
         public UriErrorExample GetExamples()

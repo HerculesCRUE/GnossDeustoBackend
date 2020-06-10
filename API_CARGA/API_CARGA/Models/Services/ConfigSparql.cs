@@ -8,12 +8,18 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
+    ///<summary>
+    ///Clase para obtener la configuración necesaria para el uso de Sparql
+    ///</summary>
     public class ConfigSparql
     {
         public IConfigurationRoot Configuration { get; set; }
         private string Graph { get; set; }
         public string Endpoint { get; set; }
         private string QueryParam { get; set; }
+        ///<summary>
+        ///Obtiene el gráfo configurado en Sparql:Graph del fichero appsettings.json
+        ///</summary>
         public string GetGraph()
         {
             if (string.IsNullOrEmpty(Graph))
@@ -36,7 +42,9 @@ namespace API_CARGA.Models.Services
             }
             return Graph;
         }
-
+        ///<summary>
+        ///Obtiene el gráfo de unidata configurado en Sparql:GraphUnidata del fichero appsettings.json
+        ///</summary>
         public string GetGraphUnidata()
         {
             if (string.IsNullOrEmpty(Graph))
@@ -59,7 +67,9 @@ namespace API_CARGA.Models.Services
             }
             return Graph;
         }
-
+        ///<summary>
+        ///Obtiene el endpoint configurado en Sparql:Endpoint del fichero appsettings.json
+        ///</summary>
         public string GetEndpoint()
         {
             if (Endpoint==null)
@@ -82,6 +92,9 @@ namespace API_CARGA.Models.Services
             return Endpoint;
         }
 
+        ///<summary>
+        ///Obtiene el parametro de query configurado en Sparql:QueryParam del fichero appsettings.json
+        ///</summary>
         public string GetQueryParam()
         {
             if (string.IsNullOrEmpty(QueryParam))

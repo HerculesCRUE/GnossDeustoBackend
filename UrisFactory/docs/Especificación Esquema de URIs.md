@@ -85,15 +85,15 @@ El punto c descrito anteriormente implica que **los URI de Hércules no
 serán totalmente "opacos" sino parcialmente "visibles"**, es decir, que 
 contendrán información semántica que un humano pueda interpretar, lo que
 consideramos una ventaja. Decimos que son parcialmente visibles porque 
-los URIs no contendrán, en principio, elementos que permitan que un 
-humano reconozca directamente una entidad, como podría ser el nombre de
+los URIs no contendrán elementos que permitan que un humano 
+reconozca directamente una entidad, como podría ser el nombre de
 un investigador. Además, URIs que podríamos calificar como "opacos", 
 como las de ORCiD (p.e. <https://orcid.org/0000-0001-8055-6823>), 
 en realidad lo son porque se lo pueden permitir sin que los humanos 
 tengan problemas de interpretación: en ese dominio sólo hay 
-investigadores. La legibilidad por humanos es la mayor ventaja de los URI "visibles", 
-además de ser la recomendación de la NTI de Reutilización, 
-referencia del proyecto Hércules.
+investigadores. La legibilidad por humanos es la mayor ventaja de 
+los URI parcialmente "visibles", además de ser la recomendación de 
+la [NTI de Reutilización](https://www.boe.es/boe/dias/2013/03/04/pdfs/BOE-A-2013-2380.pdf), referencia del proyecto Hércules.
 
 Además, hay que indicar que para un sistema informático todos los URI
 son igualmente "visibles", por lo que no hay diferencia en cuanto a la

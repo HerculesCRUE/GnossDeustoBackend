@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace UrisFactory.Extra.Exceptions
 {
+    ///<summary>
+    ///Excepción para indicar que hay un fallo con la configuración de la estructura Uri
+    ///</summary>
     public class UriStructureConfiguredException : Exception
     {
         public UriStructureConfiguredException()

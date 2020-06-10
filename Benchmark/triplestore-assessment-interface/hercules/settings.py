@@ -21,7 +21,8 @@ APP_SETTINGS = {
 
 SPARQL_SETTINGS = {
     "data-sources" : [{
+    	# Example local endpoint
         "protocol" : "sparql",
-             "url" : "http://140.203.155.10:10147/hercules/query"
+             "url" : "http://192.168.99.102:8890/sparql"
     }]
 }

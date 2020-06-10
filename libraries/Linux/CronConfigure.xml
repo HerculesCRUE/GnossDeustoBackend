@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CronConfigure</name>
+    </assembly>
+    <members>
+        <member name="T:CronConfigure.Controllers.JobController">
+            <summary>
+            Controlador para gestionar las tareas ejecutadas y poder crear tareas nuevas
+            </summary>
+        </member>
+        <member name="M:CronConfigure.Controllers.JobController.AddExecution(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Programa una sincronización de repositorios para una fecha concreta
+            </summary>
+            <param name="id_repository">identificador del repositorio, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository</param>
+            <param name="fecha_inicio">fecha a partir de la cual se ejecutará,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
+            <param name="fecha">fecha a partir de la cual se debe actualizar,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
+            <param name="set">tipo del objeto, usado para filtrar por agrupaciones, este parametro se puede obtener de http://herc-as-front-desa.atica.um.es/carga/etl/ListSets/{identificador_del_repositorio}</param>
+            <param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro, este parametro se puede obtener en la respuesta identifier que da el método http://herc-as-front-desa.atica.um.es/carga/etl/ListIdentifiers/{identificador_del_repositorio}?metadataPrefix=rdf</param>
+            <returns>identifdicador de la tarea</returns> 
+        </member>
+        <member name="M:CronConfigure.Controllers.JobController.AddExecution(System.String)">
+            <summary>
+            Vuelve a ejecutar una tarea ya ejecutada o programada
+            </summary>
+            <param name="id">identificador de la tarea, el identificador se puede obterner del método: que lista los jobs http://herc-as-front-desa.atica.um.es/cron-config/Job?type=0&amp;from=0&amp;count=100</param>
+            <returns></returns> 
+        </member>
+        <member name="M:CronConfigure.Controllers.JobController.GetJobs(CronConfigure.Models.Enumeracion.JobType,System.Int32,System.Int32)">
+            <summary>
+            devuelve una lista de tareas paginadas
+            </summary>
+            <param name="type">tipo de las tareas devueltas: 0: para todos los tipos, 1: para las que han fallado, 2: para las correctas </param>
+            <param name="from">número desde el cual se va a traer las tareas del listado, por defecto 0 para empezar a traer desde el primer elemento de la lista de tareas</param>
+            <param name="count">número máximo de tareas a traer</param>
+            <returns>listado de tareas</returns> 
+        </member>
+        <member name="T:CronConfigure.Controllers.RecurringJobController">
+            <summary>
+            Controlador para gestionar las tareas tareas recurrentes creadas así como crear tareas recurrentes nuevas
+            </summary>
+        </member>
+        <member name="M:CronConfigure.Controllers.RecurringJobController.AddExecution(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Añade una sincornizacion recurrente
+            </summary>
+            <param name="id_repository">identificador del repositorio a sincronizar, este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository </param>
+            <param name="nombre_job">nombre de la tarea recurrente, no puede haber varias tareas con el mismo nombre, este nombre es elegido por el usuario que crea la tarea recurrente</param>
+            <param name="fecha_inicio">momento a partir del cúal empieza la sincronización,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
+            <param name="cron_expression">el parametro cron_expresion sigue un patrón de 5 atributos, separados por espacios entre sí: * * * * *. El primero corresponde al minuto, el segundo a la hora, a continuación el día del mes, seguido por el mes y posteriormente el día del mes. Un ejemplo sería: */15 * * * * que correspondería a cada 15 minutos, para probar las expresisiones se puede acudir a https://crontab.guru/</param>
+            <param name="fecha">fecha a partir de la cual se debe actualizar,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
+            <param name="set">tipo del objeto, usado para filtrar por agrupaciones, este parametro se puede obtener de http://herc-as-front-desa.atica.um.es/carga/etl/ListSets/{identificador_del_repositorio}</param>
+            <param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro, este parametro se puede obtener en la respuesta identifier que da el método http://herc-as-front-desa.atica.um.es/carga/etl/ListIdentifiers/{identificador_del_repositorio}?metadataPrefix=rdf</param>
+            <returns></returns> 
+        </member>
+        <member name="M:CronConfigure.Controllers.RecurringJobController.DeleteRecurringJob(System.String)">
+            <summary>
+            Elimina una tarea recurrente
+            </summary>
+            <param name="nombre_job">nombre de la tarea recurrente a eliminar, es el nombre que se le ha puesto a la tarea en el momento de su creación se puede obtener desde http://herc-as-front-desa.atica.um.es/cron-config/RecurringJob</param>
+            <returns></returns> 
+        </member>
+        <member name="M:CronConfigure.Controllers.RecurringJobController.GetRecurringJob">
+            <summary>
+            Obtiene el listado de tareas recurrentes 
+            </summary>
+            <returns>listado de tareas recurrentes</returns> 
+        </member>
+        <member name="M:CronConfigure.Controllers.RecurringJobController.GetRecurringJob(System.String)">
+            <summary>
+            Obtiene una tarea recurrente
+            </summary>
+            <param name="id">nombre de la tarea recurrentea obtener, es el nombre que se le ha puesto a la tarea en el momento de su creación se puede obtener desde http://herc-as-front-desa.atica.um.es/cron-config/RecurringJob</param>
+            <returns>tarea recurrentes</returns> 
+        </member>
+        <member name="M:CronConfigure.Controllers.RecurringJobController.GetJobsOfRecurringJob(System.String)">
+            <summary>
+            Obtiene un listado de tareas que se han ejecutado a partir de una tarea recurrente 
+            </summary>
+            <param name="id">nombre de la tarea recurrente de la que se quieren obtener las tareas ejecutadas, es el nombre que se le ha puesto a la tarea en el momento de su creación se puede obtener desde http://herc-as-front-desa.atica.um.es/cron-config/RecurringJob</param>
+            <returns>listado de tareas</returns> 
+        </member>
+        <member name="T:CronConfigure.Controllers.ScheduledJobController">
+            <summary>
+            Controlador para gestionar las tareas programadas y crear tareas nuevas programadas para una fecha determinada
+            </summary>
+        </member>
+        <member name="M:CronConfigure.Controllers.ScheduledJobController.GetScheduledJobs(System.Int32,System.Int32)">
+            <summary>
+            Obtiene un listado de tareas programadas 
+            </summary>
+            <param name="from">número desde el cual se va a traer las tareas del listado, por defecto 0 para empezar a traer desde el primer elemento de la lista de tareas</param>
+            <param name="count">número máximo de tareas programadas a traer</param>
+            <returns>listado de tareas programadas</returns> 
+        </member>
+        <member name="M:CronConfigure.Controllers.ScheduledJobController.AddScheduledJob(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Añade una nueva tarea programada de única ejecución para sincornización de repositorios
+            </summary>
+            <param name="fecha_ejecucion">fecha en la que se ejecutará la tarea,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
+            <param name="id_repository">identificador del repositorio,  este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository</param>
+            <param name="fecha">fecha a partir de la cual se debe actualizar,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
+            <param name="set">tipo del objeto, usado para filtrar por agrupaciones, este parametro se puede obtener de http://herc-as-front-desa.atica.um.es/carga/etl/ListSets/{identificador_del_repositorio}</param>
+            <param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro, este parametro se puede obtener en la respuesta identifier que da el método http://herc-as-front-desa.atica.um.es/carga/etl/ListIdentifiers/{identificador_del_repositorio}?metadataPrefix=rdf</param>
+            <returns>identificador de la tarea creada</returns> 
+        </member>
+        <member name="M:CronConfigure.Controllers.ScheduledJobController.EnqueuedScheduledJob(System.String)">
+            <summary>
+            Añade a la cola una tarea que estaba prevista ejecutar en un futuro 
+            </summary>
+            <param name="id">identificador de la tarea programada, identificador que se obtiene al crear una tarea progranada o accesibke a través de http://herc-as-front-desa.atica.um.es/cron-config/ScheduledJob?from=0&amp;count=100</param>
+            <returns></returns> 
+        </member>
+        <member name="M:CronConfigure.Controllers.ScheduledJobController.DeleteScheduledJob(System.String)">
+            <summary>
+            Elimina una tarea programada
+            </summary>
+            <param name="id">identificador de la tarea programada, identificador que se obtiene al crear una tarea progranada o accesibke a través de http://herc-as-front-desa.atica.um.es/cron-config/ScheduledJob?from=0&amp;count=100</param>
+            <returns></returns> 
+        </member>
+    </members>
+</doc>

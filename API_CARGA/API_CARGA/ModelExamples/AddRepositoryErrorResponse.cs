@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.ModelExamples
 {
+    ///<summary>
+    ///Sirve para mostrar un error al añadir un repositorio con un nombre repetido
+    ///</summary>
     public class AddRepositoryErrorResponse : IExamplesProvider<ErrorExample>
     {
         public ErrorExample GetExamples()

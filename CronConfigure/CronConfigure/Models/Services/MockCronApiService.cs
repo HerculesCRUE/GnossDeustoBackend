@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.Models.Services
 {
+    ///<summary>
+    ///Clase que sirve de mock del CronApiService para la realización de los test
+    ///</summary>
     public class MockCronApiService : ICronApiService
     {
         public void DeleteJob(string id)

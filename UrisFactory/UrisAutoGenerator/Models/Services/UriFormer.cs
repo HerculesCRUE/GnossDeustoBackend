@@ -6,6 +6,9 @@ using UrisFactory.Models.ConfigEntities;
 
 namespace UrisFactory.Models.Services
 {
+    ///<summary>
+    ///Clase encargada de generar las uris
+    ///</summary>
     public class UriFormer
     {
         private UriStructureGeneral _uristructure;
@@ -24,6 +27,11 @@ namespace UrisFactory.Models.Services
             
         }
 
+        ///<summary>
+        ///Devuelve una uri a partir de una resourceClass y y una lista de valores
+        ///</summary>
+        ///<param name="resourceClass">nombre de la resourceClass a usar para generar la uri</param>
+        ///<param name="queryString">diccionario con los valores cogidos de la url de la petición</param>
         public string GetURI(string resourceClass, Dictionary<string, string> queryString)
         {
             string uri = "";
@@ -59,6 +67,13 @@ namespace UrisFactory.Models.Services
             }
         }
 
+        ///<summary>
+        ///Genera una uri
+        ///</summary>
+        ///<param name="urlStructure">estructura URL para la construcción de la uri</param>
+        ///<param name="parsedCharacter">Character a usar pra la generación de la uri, este character debe estar configurado en el fichero de configuración</param>
+        ///<param name="parsedResourceClass">etiqueta a mostrar en la uri de la resource class de la cual queremos generar la uri</param>
+        ///<param name="queryString">diccionario con los valores cogidos de la url de la petición</param>
         private string GetUriByStructure(UriStructure urlStructure, string parsedCharacter, string parsedResourceClass, Dictionary<string, string> queryString)
         {
             string uri = "";
@@ -112,6 +127,10 @@ namespace UrisFactory.Models.Services
             return uri;
         }
 
+        ///<summary>
+        ///devuelve el Character que usa una estructura Uri
+        ///</summary>
+        ///<param name="pUriStructureComponents">componentes de la estructura uri</param>
         private string ParserCharacter(List<Component> pUriStructureComponents)
         {
             string labelCharacter = null;
@@ -129,6 +148,10 @@ namespace UrisFactory.Models.Services
             return labelCharacter;
         }
 
+        ///<summary>
+        ///devuelve un objeto ResourceClass
+        ///</summary>
+        ///<param name="pResourceClass">nombre del objeto a devolver</param>
         private ResourcesClass ParserResourceClass(string pResourceClass)
         {
             ResourcesClass resourceClass = null;

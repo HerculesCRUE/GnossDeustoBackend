@@ -6,10 +6,15 @@ using System.Text;
 
 namespace API_CARGA.Models.Services
 {
+    ///<summary>
+    ///Clase para gestionar los shapes en memoria
+    ///</summary>
     public class ShapesConfigMockService : IShapesConfigService
     {
         private List<ShapeConfig> _listShapesConfig;
-
+        ///<summary>
+        ///Inicializa la lista de shapes
+        ///</summary>
         public ShapesConfigMockService()
         {
             _listShapesConfig = new List<ShapeConfig>();
@@ -126,6 +131,11 @@ namespace API_CARGA.Models.Services
                 Shape = personShape.ToString()
             });
         }
+
+        ///<summary>
+        ///Añade un shape
+        ///</summary>
+        ///<param name="shapeConfig">Shape a añadir</param>
         public Guid AddShapeConfig(ShapeConfig shapeConfig)
         {
             Guid addedID = Guid.Empty;
@@ -135,16 +145,27 @@ namespace API_CARGA.Models.Services
             return addedID;
         }
 
+        ///<summary>
+        ///Devuelve un shape
+        ///</summary>
+        ///<param name="id">Identificador del shape a devolver</param>
         public ShapeConfig GetShapeConfigById(Guid id)
         {
             return _listShapesConfig.FirstOrDefault(shape => shape.ShapeConfigID.Equals(id));
         }
 
+        ///<summary>
+        ///Devuelve una lista shapes
+        ///</summary>
         public List<ShapeConfig> GetShapesConfigs()
         {
             return _listShapesConfig.OrderBy(shape=>shape.Name).ToList();
         }
 
+        ///<summary>
+        ///Modifica un shape existente
+        ///</summary>
+        ///<param name="shapeConfig">Shape a modificar con los nuevos valores</param>
         public bool ModifyShapeConfig(ShapeConfig shapeConfig)
         {
             bool modified = false;
@@ -159,6 +180,10 @@ namespace API_CARGA.Models.Services
             return modified;
         }
 
+        ///<summary>
+        ///Elimina un shape existente
+        ///</summary>
+        ///<param name="identifier">Identificador del shape a eliminar</param>
         public bool RemoveShapeConfig(Guid identifier)
         {
             try
