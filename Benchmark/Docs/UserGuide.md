@@ -26,5 +26,5 @@ It is possible to create a fully personalised ranking by changing the weights of
 
 ## Adding and Editing Assessments
 
-The interface currently does not provide a function to change the underlying data, by adding assessments, criterion or default weights, or by changing the ones in place. This can currently be achieved by modifying the github projects associated with producing the data for those, e.g. through a pull request. More details about this will be provided in the developper documentation and an adminstrator interface providing those functionalities will be developped in the near future.
+The interface currently does not provide a function to change the underlying data, by adding assessments, criterion or default weights, or by changing the ones in place. This can currently be achieved by modifying the github projects associated with producing the data for those, e.g. through a pull request. More details about this are provided in the [developer documentation](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/Docs/Developer%20Documentation.md).
 
