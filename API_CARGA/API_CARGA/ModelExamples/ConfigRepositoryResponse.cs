@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.ModelExamples
 {
+    ///<summary>
+    ///Sirve para mostrar un ejemplo de respuesta de un repositorios
+    ///</summary>
     public class ConfigRepositoryResponse : IExamplesProvider<RepositoryConfig>
     {
         public RepositoryConfig GetExamples()

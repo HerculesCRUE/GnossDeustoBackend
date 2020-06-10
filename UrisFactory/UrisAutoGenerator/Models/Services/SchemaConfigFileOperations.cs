@@ -11,6 +11,9 @@ using UrisFactory.Models.ConfigEntities;
 
 namespace UrisFactory.Models.Services
 {
+    ///<summary>
+    ///Clase para la gestión de las operaciones con el fichero de configuración
+    ///</summary>
     public class SchemaConfigFileOperations : ISchemaConfigOperations
     {
         private static string configPath = "Config/UrisConfig.json";
@@ -21,6 +24,10 @@ namespace UrisFactory.Models.Services
         {
             _configJsonHandler = configJsonHandler;
         }
+
+        ///<summary>
+        ///Obtiene el content type del fichero
+        ///</summary>
         public string GetContentType()
         {
             string contentType = "";
@@ -28,6 +35,9 @@ namespace UrisFactory.Models.Services
             return contentType;
         }
 
+        ///<summary>
+        ///Obtiene los bytes con el fichero de configuracion
+        ///</summary>
         public byte[] GetFileSchemaData()
         {
             return File.ReadAllBytes(configPath);
@@ -38,6 +48,10 @@ namespace UrisFactory.Models.Services
             //}
         }
 
+        ///<summary>
+        ///Guarda el fichero de configuracion
+        ///</summary>
+        ///<param name="formFile">cadena de texto emulando el json del fichero de configuracion</param>
         public bool SaveConfigFile(IFormFile formFile)
         {
             var stream = CreateStream();
@@ -47,6 +61,9 @@ namespace UrisFactory.Models.Services
             return savedCorrectly;
         }
 
+        ///<summary>
+        ///Guarda el fichero de configuracion
+        ///</summary>
         public bool SaveConfigJson()
         {
             UriStructureGeneral uriSchema = _configJsonHandler.GetUrisConfig();
@@ -59,12 +76,20 @@ namespace UrisFactory.Models.Services
             return saved;
         }
 
+        ///<summary>
+        ///Crea un file stream para su posterior uso
+        ///</summary>
+
         private FileStream CreateStream()
         {
             File.Move(configPath, oldConfigPath);
             return File.Create(configPath);
         }
 
+        ///<summary>
+        ///Reemplaza la copia de seguridad que se ha hecho del anterior esquema por un esquema nuevo
+        ///</summary>
+        ///<param name="stream">file stream del fichero</param>
         private bool replacePreviousSchemaConfig(FileStream stream)
         {
             bool replaced = false;

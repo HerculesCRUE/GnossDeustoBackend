@@ -11,6 +11,9 @@ using System.Xml.Linq;
 
 namespace API_CARGA.Models.Services
 {
+    ///<summary>
+    ///Clase para crear una sincronización
+    ///</summary>
     public class OaiPublishRDFService
     {
         readonly EntityContext _context;
@@ -26,6 +29,13 @@ namespace API_CARGA.Models.Services
             _publishData = publishData;
         }
 
+        /// <summary>
+        /// Hace la sincronización del repositorio
+        /// </summary>
+        /// <param name="identifier">fIdentificador del repositorio</param>
+        /// <param name="fechaFrom">fecha a partir de la cual se debe actualizar</param>
+        /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
+        /// <param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
         public void PublishRepositories(Guid identifier, DateTime? fechaFrom = null, string set = null, string codigoObjeto = null)
         {
             List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
@@ -69,6 +79,12 @@ namespace API_CARGA.Models.Services
 
         }
 
+        /// <summary>
+        /// Añade un objeto de sincronización en base de datos
+        /// </summary>
+        /// <param name="lastSyncro">Objeto identificador de OAIPMH que contiene la fecha</param>
+        /// <param name="repositoryId">fIdentificador del repositorio</param>
+        /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
         private void AddSyncro(IdentifierOAIPMH lastSyncro, string set, Guid repositoryId)
         {
             if (_context.RepositorySync.Any(item => item.RepositoryId.Equals(repositoryId)))
@@ -113,6 +129,13 @@ namespace API_CARGA.Models.Services
             _context.SaveChanges();
         }
 
+        /// <summary>
+        /// Obtiene una lista de identificadores
+        /// </summary>
+        /// <param name="identifierRepo">Identificador del repositorio</param>
+        /// <param name="fechaFrom">fecha a partir de la cual se debe actualizar</param>
+        /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
+        /// <returns>Lista de identificadores</returns>
         public List<IdentifierOAIPMH> CallListIdentifier(Guid identifierRepo, string set = null, DateTime? fechaFrom = null)
         {
             string uri = $"etl/ListIdentifiers/{identifierRepo}?metadataPrefix=rdf";

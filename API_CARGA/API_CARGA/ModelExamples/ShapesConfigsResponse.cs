@@ -6,6 +6,9 @@ using System.Text;
 
 namespace API_CARGA.ModelExamples
 {
+    ///<summary>
+    ///Sirve para mostrar un ejemplo de respuesta de una lista de Shapes
+    ///</summary>
     public class ShapesConfigsResponse : IExamplesProvider<List<ShapeConfig>>
     {
         public List<ShapeConfig> GetExamples()

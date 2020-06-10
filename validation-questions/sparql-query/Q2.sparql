@@ -7,7 +7,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?researcher ?center ?positionClass
 WHERE {
-  ?researcher	roh:hasKnowledgeArea unesco:C00261 ;
+  ?researcher	roh:hasKnowledgeArea unesco:120304 ;
   				roh:hasPosition ?position .
   ?position vivo:relates ?center ;
   			a	?positionClass .

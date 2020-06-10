@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UrisFactory</name>
+    </assembly>
+    <members>
+        <member name="T:UrisFactory.Controllers.FactoryController">
+            <summary>
+            Controlador encargado de generar una uri válida para una resource class y un identificador ORCID
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Controllers.FactoryController.GenerateUri(System.String,System.String)">
+            <summary>
+            Genera una Uri con la estructura asociada a la resource class pasada con el identificador como parametro, ejemplo de uso: con la llamada: "http://herc-as-front-desa.atica.um.es/uris/Factory?resource_class=Article&amp;identifier=1231d", se obtiene http://graph.um.es/res/article/1231d
+            </summary>
+            <param name="resource_class">nombre de la resource class que especifica la estructura de uris a usar, el listado de resource class se pueden obtener a través de http://herc-as-front-desa.atica.um.es/uris/Schema, en el apartado ResourcesClasses-> ResourceClass; ejemplo: Article</param>
+            <param name="identifier">identifier, es un cadena que representa un ORCID</param>
+        </member>
+        <member name="T:UrisFactory.Controllers.SchemaController">
+            <summary>
+            Controlador encargado de gerstionar el esquema de Uris, que ofrece métodos para la consulta de este esquema y su modificación
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Controllers.SchemaController.GetSchema">
+            <summary>
+            Obtiene el fichero de configuración de los esquemas configurados
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Controllers.SchemaController.ReplaceSchemaConfig(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Reemplaza el fichero de configuración por otro fichero dado, para ver la estrucutura del fichero, se recomienda ver el fichero dado por: http://herc-as-front-desa.atica.um.es/uris/Schema
+            </summary>
+            <remarks>
+            Se puede encontrar un ejemplo del fichero como plantilla en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/UrisFactory/docs/20191211%20Esquema%20de%20URIs.json
+             </remarks>
+            <param name="newSchemaConfig">nuevo fichero de configuración</param>
+        </member>
+        <member name="M:UrisFactory.Controllers.SchemaController.GetUriStructureInfo(System.String)">
+            <summary>
+            Obtiene la estrucutra uri y las resources class asociadas a esa estructura R
+            </summary>
+            <param name="name">nombre de la estructura uri, se pueden obtener a través del método http://herc-as-front-desa.atica.um.es/uris/Schema, en los objetos UriStructures, Name</param>
+        </member>
+        <member name="M:UrisFactory.Controllers.SchemaController.DeleteUriStructure(System.String)">
+            <summary>
+            Borra la estrcutura uri y las resource class asociadas a esa estructura
+            </summary>
+            <param name="name">nombre de la estructura uri a eliminar, se pueden obtener a través del método http://herc-as-front-desa.atica.um.es/uris/Schema, en los objetos UriStructures, Name</param>
+        </member>
+        <member name="M:UrisFactory.Controllers.SchemaController.AddUriStructure(UrisFactory.ViewModels.InfoUriStructure)">
+            <summary>
+            Añade una nueva estructura de uris y una reource class asociada a esta nueva estrucutra 
+            </summary>
+            <param name="infoUriStructure">objeto que contiene una estrucutura nueva y una resource class asociada a esa estructura</param>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.DeleteUriStructureInfo(System.String)">
+            <exception cref="T:UrisFactory.Extra.Exceptions.UriStructureConfiguredException">UriStructure not exist in config file</exception>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.AddUriStructureInfo(UrisFactory.Models.ConfigEntities.UriStructure,UrisFactory.Models.ConfigEntities.ResourcesClass)">
+            <exception cref="T:UrisFactory.Extra.Exceptions.UriStructureConfiguredException">UriStructure Already exist in config file</exception>
+            <exception cref="T:UrisFactory.Extra.Exceptions.UriStructureBadInfoException">there is a mismatch between uriStructure and resourceClass given</exception>
+        </member>
+    </members>
+</doc>

@@ -1,5 +1,5 @@
 # Libraries
-Aqui se encuentran las dll de los proyectos desarrollados, tanto en Windows como en Linux.
+Aquí se encuentran las dll de los proyectos desarrollados, tanto en [Windows](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/libraries/Windows) como en [Linux](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/libraries/Linux).
 En el siguiente enlace: https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Examples/UrisFactoryLibraryExample, se puede encontrar un ejemplo de uso de la libreria de UrisFactory
 
 # Dependencias 

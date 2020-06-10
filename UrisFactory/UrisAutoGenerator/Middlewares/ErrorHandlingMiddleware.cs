@@ -8,6 +8,9 @@ using UrisFactory.Extra.Exceptions;
 
 namespace UrisFactory.Middlewares
 {
+    ///<summary>
+    ///Clase que hace de middleware y gestiona los errores de la aplicación para generar logs
+    ///</summary>
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;

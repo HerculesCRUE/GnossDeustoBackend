@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace UrisFactory.Extra.Exceptions
 {
+    ///<summary>
+    ///Excepción para indicar que no concuerdan los datos de la estructura uri
+    ///</summary>
     public class UriStructureBadInfoException : Exception
     {
         public UriStructureBadInfoException()

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.ModelExamples
 {
+    ///<summary>
+    ///Sirve para mostrar un error de respuesta al intentar modificar un repositorio que no existe
+    ///</summary>
     public class ModifyShapeConfigErrorResponse : IExamplesProvider<ErrorExample>
     {
         public ErrorExample GetExamples()

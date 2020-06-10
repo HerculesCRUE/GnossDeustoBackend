@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace API_CARGA.ModelExamples
 {
+    ///<summary>
+    ///Sirve para mostrar un ejemplo de respuesta de una lista de repositorios 
+    ///</summary>
     public class ConfigRepositoriesResponse : IExamplesProvider<List<RepositoryConfig>>
     {
         public List<RepositoryConfig> GetExamples()

@@ -2,6 +2,9 @@
 
 namespace UrisFactory.Models.ConfigEntities
 {
+    ///<summary>
+    ///Objeto que simula el fichero Json de configuración
+    ///</summary>
     public class UriStructureGeneral
     {
         public string Base { get; set; }

@@ -1,14 +1,22 @@
-# Sobre UrisFactory
+![](.//docs/media/CabeceraDocumentosMD.png)
 
-La documentación que explica la Especificación de URIs Hércules y las buenas prácticas está en:
+# Acerca de UrisFactory
+
+La documentación que explica la Especificación de URIs Hércules y las Buenas prácticas de URis está en:
 
 https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/UrisFactory/docs
 
-Accesible en pruebas en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/uris/swagger/index.html.
+La librería se utiliza como un servicio web, accesible en pruebas en esta dirección a través de swagger: 
+
+http://herc-as-front-desa.atica.um.es/uris/swagger/index.html.
 
 La documentación de la librería está disponible en: 
 
 http://herc-as-front-desa.atica.um.es/uris-factory/library/api/UrisFactory.Controllers.html
+
+Los resultados de las pruebas unitarias se pueden consultar en [ResultsTest](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/UrisFactory/ResultsTest).
+
+La librería compilada se encuentra en la carpeta [librerías](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/libraries).
 
 Este Api contiene dos controladores.
 

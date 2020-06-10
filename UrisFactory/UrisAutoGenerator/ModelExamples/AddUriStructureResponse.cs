@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace UrisFactory.ModelExamples
 {
+    ///<summary>
+    ///Clase de ejemplo para mostrar una insercción correcta de una estructura uri
+    ///</summary>
     public class AddUriStructureResponse : IExamplesProvider<string>
     {
         public string GetExamples()

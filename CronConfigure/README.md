@@ -1,4 +1,6 @@
-# Sobre CronConfigure
+![](..//Docs/media/CabeceraDocumentosMD.png)
+
+# Acerca de CronConfigure
 
 Accesible desde: [http://herc-as-front-desa.atica.um.es/cron-config/swagger/index.html](http://herc-as-front-desa.atica.um.es/cron-config/swagger/index.html)
 Es un api para la gestión y configuración del programado de tareas, tanto de ejecución recurrente como ejecución única sobre los repositorios configurados.
@@ -11,6 +13,11 @@ Este api contiene 3 controladores:
  La documentación de la librería está disponible en:
 
 http://herc-as-front-desa.atica.um.es/cronconfigure/library/api/CronConfigure.Controllers.html
+
+Los resultados de las pruebas unitarias se pueden consultar en [ResultsTest](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/CronConfigure/ResultsTest).
+
+Las librerías compiladas se encuentran en la carpeta [librerías](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/libraries).
+
 ## Dependencias
 
 - **coverlet.collector**: versión 1.2.1

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Middlewares
 {
+    ///<summary>
+    ///Clase que actua de Middleware para la gestión de las excepciones
+    ///</summary>
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;

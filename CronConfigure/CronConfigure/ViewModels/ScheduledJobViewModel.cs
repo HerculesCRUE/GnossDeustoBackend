@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.ViewModels
 {
+    ///<summary>
+    ///Clase que sirve para mostrar los datos de una tarea programada
+    ///</summary>
     public class ScheduledJobViewModel
     {
         public string Key { get; set; }

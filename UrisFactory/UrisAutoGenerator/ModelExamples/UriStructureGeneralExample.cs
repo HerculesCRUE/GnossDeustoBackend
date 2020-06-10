@@ -7,6 +7,9 @@ using UrisFactory.Models.ConfigEntities;
 
 namespace UrisFactory.ModelExamples
 {
+    ///<summary>
+    ///Clase de ejemplo para mostrar un ejemplo del fichero de configuración
+    ///</summary>
     public class UriStructureGeneralExample : IExamplesProvider<UriStructureGeneral>
     {
         public UriStructureGeneral GetExamples()
