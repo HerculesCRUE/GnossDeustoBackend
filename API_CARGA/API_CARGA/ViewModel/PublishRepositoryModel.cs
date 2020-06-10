@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.ViewModel
 {
+    /// <summary>
+    /// Clase para pasar datos entre apis
+    /// </summary>
     public class PublishRepositoryModel
     {
         [Required]

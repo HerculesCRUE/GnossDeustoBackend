@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.ModelExamples
 {
+    ///<summary>
+    ///Sirve para mostrar un ejemplo de respuesta de un Shape
+    ///</summary>
     public class ShapeConfigResponse : IExamplesProvider<ShapeConfig>
     {
         public ShapeConfig GetExamples()
