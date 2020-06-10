@@ -4,7 +4,7 @@
 
 This document gives a brief overview of the code associated with the Hercules ASIO Triple Store Benchmark tool and the underlying data. This code is organised in four different components, available as four subrepositories of the codebase for the project. Each section below covers each of those components.
 
-## [The Crierion Ontology](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Benchmark/criterion-ontology)
+## [The Criterion Ontology](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Benchmark/criterion-ontology)
 
 This component is the backbone of the tool, as it is used to model and structure all of the data associated with the assessment of triple stores systems. It provides a dedicated [RDFS ontology](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/criterion-ontology/src/schema.ttl) for the representation of criteria, systems and assessements, as well as a [dataset](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/criterion-ontology/src/criteria.ttl) representing, according to this ontology, the set of criteria used to assess triple stores in the systems with their descriptions, weights, categories, etc.
 
