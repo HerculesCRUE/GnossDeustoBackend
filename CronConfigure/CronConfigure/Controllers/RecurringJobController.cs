@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using CronConfigure.Models;
-using CronConfigure.Models.Enumeracion;
+﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
+// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+// Controlador para gestionar las tareas tareas recurrentes creadas así como crear tareas recurrentes nuevas
+using System;
 using CronConfigure.Models.Services;
-using CronConfigure.ViewModels;
-using Hangfire;
-using Hangfire.Storage;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NCrontab;
