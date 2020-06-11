@@ -47,7 +47,7 @@ Basic [guidelines](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/maste
 
 ## HOWTO
 
-The [Triple Store Assessment Interface](Benchmark/triplestore-assessment-interface) is completely data-driven: Neither the criteria nor their categories are hardcoded, and the application will attempt to display whatever is contained in the associated [dataset](Benchmark/triplestore-dataset).
+The [Triple Store Assessment Interface](/Benchmark/triplestore-assessment-interface) is completely data-driven: Neither the criteria nor their categories are hardcoded, and the application will attempt to display whatever is contained in the associated [dataset](Benchmark/triplestore-dataset).
 
 
 ### Add a criterion
