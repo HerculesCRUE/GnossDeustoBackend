@@ -47,7 +47,7 @@ Basic [guidelines](/Benchmark/Docs/UserGuide.md) for using the interface once de
 
 ## HOWTO
 
-The [Triple Store Assessment Interface](/Benchmark/triplestore-assessment-interface) is completely data-driven: Neither the criteria nor their categories are hardcoded, and the application will attempt to display whatever is contained in the associated [dataset](#the-triple-store-dataset).
+The [Triple Store Assessment Interface](#triple-store-assessment-interface) is completely data-driven: Neither the criteria nor their categories are hardcoded, and the application will attempt to display whatever is contained in the associated [dataset](#the-triple-store-dataset).
 
 In the following, we will assume that `asio:` is the prefix for namespace `<http://datascienceinstitute.ie/asio/>`. Note however that __namespaces are currently unstable and subject to change__.
 
@@ -76,7 +76,7 @@ For example, here is a snippet in Turtle format of a criterion that addresses su
     :ldp_support    a asio:Criterion
 	    ; rdfs:label "Linked Data Platform support"@en
 	    ; dc:description "Compliance with the HTTP protocol bindings established by the W3C Linked Data Platform specification, https://www.w3.org/TR/ldp/"@en
-	    ; dc:subject :F4
+	    ; dc:subject :functionalities_standards
 	    ; asio:weight "4.0"^^xsd:decimal
 	.
      
