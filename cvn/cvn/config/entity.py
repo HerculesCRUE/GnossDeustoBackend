@@ -27,8 +27,8 @@ def generate_uri(resource_class, identifier):
     :return: la URI
     """
     
-    # if web_server.debug:
-    return "http://data.um.es/class/" + resource_class + "/" + identifier
+    if web_server.debug:
+        return "http://data.um.es/class/" + resource_class + "/" + identifier
 
     # Antes de intentar obtener la URI, comprobar a ver si la tenemos ya en caché
     cache_id = resource_class + "." + identifier
