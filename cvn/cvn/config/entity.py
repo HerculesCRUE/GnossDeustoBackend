@@ -27,8 +27,8 @@ def generate_uri(resource_class, identifier):
     :return: la URI
     """
     
-    if web_server.debug:
-        return "http://data.um.es/class/" + resource_class + "/" + identifier
+    # if web_server.debug:
+    return "http://data.um.es/class/" + resource_class + "/" + identifier
 
     # Antes de intentar obtener la URI, comprobar a ver si la tenemos ya en caché
     cache_id = resource_class + "." + identifier
@@ -109,9 +109,13 @@ def init_entity_from_serialized_toml(config, parent=None):
     if 'subcode' in config:
         sub_code = config['subcode']
 
+    uri = None
+    if 'uri' in config:
+        uri = config['uri']
+
     entity = Entity(code=code, ontology=ontology, classname=classname, parent=parent,
                     identifier_config_resource=config_id_resource, identifier_config_format=config_id_format,
-                    primary=primary, property_cache=cache_property, sub_code=sub_code)
+                    primary=primary, property_cache=cache_property, sub_code=sub_code, uri=uri)
 
     # Populate properties
     if 'properties' in config:
@@ -179,7 +183,7 @@ def init_entity_from_serialized_toml(config, parent=None):
 class Entity:
     # TODO todo el tema de la id y la URI
     def __init__(self, code, ontology, classname, parent=None, identifier_config_resource=None,
-                 identifier_config_format=None, primary=False, property_cache=None, sub_code=False):
+                 identifier_config_format=None, primary=False, property_cache=None, sub_code=False, uri=None):
         self.code = code
         self.sub_code = sub_code
         self.ontology = ontology
@@ -198,6 +202,7 @@ class Entity:
         self.primary = primary
         self.conditions = []
         self.property_cache = property_cache
+        self.uri = uri
 
     def add_property(self, entity_property):
         """
@@ -265,7 +270,8 @@ class Entity:
         self.xml_item = item_node
 
     def clear_values(self, include_sub_entities_with_sub_code=False):
-        self.generated_identifier = None
+        if self.uri is None:
+            self.generated_identifier = None
         for property_item in self.properties:
             property_item.clear_values()
         self.node = None
@@ -276,9 +282,14 @@ class Entity:
         return self
 
     def is_blank_node(self):
+        if self.uri is not None:
+            return False
         return self.identifier_config_resource is None
 
     def get_identifier(self):
+        if self.uri is not None:
+            return self.uri
+
         if self.generated_identifier is None:
 
             resource = self.classname
@@ -398,11 +409,13 @@ class Entity:
         if not self.should_generate():
             return
 
-        ontology_config.graph.add(self.generate_entity_triple(ontology_config))
-
-        # Propiedades
-        for triple in self.generate_property_triples(ontology_config):
-            ontology_config.graph.add(triple)
+        if self.uri is None:
+            ontology_config.graph.add(self.generate_entity_triple(ontology_config))
+            # Propiedades
+            for triple in self.generate_property_triples(ontology_config):
+                ontology_config.graph.add(triple)
+        else:
+            print("a")
 
         # Relaciones
         relationship_triples = self.generate_relationship_triples(ontology_config)
