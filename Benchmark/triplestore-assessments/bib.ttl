@@ -458,6 +458,10 @@
     ns1:source <https://virtuoso.openlinksw.com/> ;
     ns1:title "Virtuoso homepage" .
 
+<http://data.datascienceinstitute.ie/asio/bib/virtuoso_ldp> a ns1:BibliographicResource ;
+    ns1:source <http://vos.openlinksw.com/owiki/wiki/VOS/VirtLDP> ;
+    ns1:title "Virtuoso support for Linked Data Platform" .
+
 <http://data.datascienceinstitute.ie/asio/bib/virtuoso_opensource_licence> a ns1:BibliographicResource ;
     ns1:source <http://vos.openlinksw.com/owiki/wiki/VOS/VOSLicense> ;
     ns1:title "Virtuoso Open Source licence" .
