@@ -27,6 +27,8 @@ def get_all_nodes_by_code(tree, code):
     :return: array con los nodos que buscamos, si no, None
     """
     nodes = []
+    if tree is None:
+        return nodes
     for child in tree:
         if node_get_code(child) == code and child.tag != "{http://codes.cvn.fecyt.es/beans}Code":
             nodes.append(child)
