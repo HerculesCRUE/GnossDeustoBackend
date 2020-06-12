@@ -609,6 +609,54 @@ ontology = "vivo"
 classname = "Project"
 id.resource = "Project"
 
+    [[entities.subentities]] # Autonómicos
+    displayname = "geonames:Feature"
+    uri = "http://sws.geonames.org/2510769/"
+
+        [[entities.subentities.conditions]]
+        type = "bean_value_equals"
+        code = "050.020.010.040"
+        value = "000"
+
+        [[entities.subentities.relationships]]
+        inverse = "geonames:locatedIn"
+
+    [[entities.subentities]] # Nacionales
+    displayname = "geonames:Feature"
+    uri = "http://sws.geonames.org/2510769/"
+
+        [[entities.subentities.conditions]]
+        type = "bean_value_equals"
+        code = "050.020.010.040"
+        value = "010"
+
+        [[entities.subentities.relationships]]
+        inverse = "geonames:locatedIn"
+
+    [[entities.subentities]] # UE
+    displayname = "geonames:Feature"
+    uri = "http://sws.geonames.org/6695072/"
+
+        [[entities.subentities.conditions]]
+        type = "bean_value_equals"
+        code = "050.020.010.040"
+        value = "020"
+
+        [[entities.subentities.relationships]]
+        inverse = "geonames:locatedIn"
+
+    [[entities.subentities]] # Internacional no UE
+    displayname = "geonames:Feature"
+    uri = "http://sws.geonames.org/6295630/"
+
+        [[entities.subentities.conditions]]
+        type = "bean_value_equals"
+        code = "050.020.010.040"
+        value = "030"
+
+        [[entities.subentities.relationships]]
+        inverse = "geonames:locatedIn"
+
     [[entities.properties]]
     ontology = "roh"
     name = "title"

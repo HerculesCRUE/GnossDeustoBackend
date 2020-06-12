@@ -50,6 +50,13 @@
 	; asio:weight "4.0"^^xsd:decimal
 .
 
+:F4 a asio:CriterionCategory
+	; rdfs:label "Linked Data Platform (LDP)"@en
+	; rdfs:comment "Linked Data Platform (LDP) defines a set of rules for HTTP operations on web resources, some based on RDF, to provide an architecture for read-write Linked Data on the web. A score of 5 would include full compliance with the recommendations at https://www.w3.org/TR/ldp/"@en
+	; skos:broader :F
+	; asio:weight "5.0"^^xsd:decimal
+.
+
 :P1 a asio:CriterionCategory
 	; rdfs:label "Query response time"@en
 	; rdfs:comment "Query response time corresponds to the time between when a query is submitted to the system and when the results are obtained. Scoring here is based on comparing average results over a large variety of queries on several sizes of datasets."@en
@@ -250,6 +257,41 @@
 	; dc:description "The system might provide a way for the administrator to impose quotas on the use of the system (e.g. amount of triples read in a given period of time), to avoid overload. This is scored 5 if quotas can be highly customised."@en
 	; dc:subject :F3
 	; asio:weight "2.0"^^xsd:decimal
+.
+
+:F4_1 a asio:Criterion
+	; rdfs:label "Support for the managment of LDP RDF resources"@en
+	; dc:description "The system support the management of Linked Data Platform RDF resources, according to the specification. This gets a score of 5 for full compliance with the specification. "@en
+	; dc:subject :F4
+	; asio:weight "4.0"^^xsd:decimal
+.
+
+:F4_2 a asio:Criterion
+	; rdfs:label "Support for the managment of LDP Non-RDF resources"@en
+	; dc:description "The system support the management of Linked Data Platform Non-RDF resources, according to the specification. This gets a score of 5 for full compliance with the specification. "@en
+	; dc:subject :F4
+	; asio:weight "2.0"^^xsd:decimal
+.
+
+:F4_3 a asio:Criterion
+	; rdfs:label "Support for HTTP read methods (GET, HEAD and OPTIONS)"@en
+	; dc:description "The system support the use of HTTP read methods according to the specification. This gets a score of 5 for full compliance with the specification. "@en
+	; dc:subject :F4
+	; asio:weight "4.0"^^xsd:decimal
+.
+
+:F4_4 a asio:Criterion
+	; rdfs:label "Support for HTTP write methods (POST, PUT, DELETE and PATCH)"@en
+	; dc:description "The system support the use of HTTP write methods according to the specification. This gets a score of 5 for full compliance with the specification. "@en
+	; dc:subject :F4
+	; asio:weight "2.0"^^xsd:decimal
+.
+
+:F4_5 a asio:Criterion
+	; rdfs:label "Support for containers"@en
+	; dc:description "The system supports basic LDP containers. This gets a score of 5 for full compliance with the specification. "@en
+	; dc:subject :F4
+	; asio:weight "3.0"^^xsd:decimal
 .
 
 :P1_1 a asio:Criterion

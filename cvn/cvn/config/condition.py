@@ -48,7 +48,10 @@ class Condition:
         # Primero tenemos que obtener el árbol XML para el item
         xml_item = None
         if isinstance(self.parent, cvn_entity.Entity):
-            xml_item = self.parent.xml_item
+            if self.parent.parent is not None:
+                xml_item = self.parent.parent.xml_item
+            else:
+                xml_item = self.parent.xml_item
         if isinstance(self.parent, cvn_property.Property) or isinstance(self.parent, cvn_relationship.Relationship):
             xml_item = self.parent.parent.xml_item
 

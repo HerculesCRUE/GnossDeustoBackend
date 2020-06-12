@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
+﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
+// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+// Clase para hacer las operaciones del esquema de configuración en memoria y hacer los test unitarios
+using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Text;
 using UrisFactory.Models.ConfigEntities;
