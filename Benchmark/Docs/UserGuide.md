@@ -16,7 +16,7 @@ Starting on the [frontpage of the tool](http://herc-as-front-desa.atica.um.es/be
 
 Clicking on the row corresponding to a ranked striple store system in the previous page will show the scores obtained by this striple store in each of the categories of assessement. Any of those categories can be further expanded by clicking on it, showing the list of criteria assessed for the given triple store, in the given category, together with the score received, and explaination for the score and a link to evidence to justify that score (see image below for an extract of the page for Virtuoso).
 
-![](.//media/ts_ranking.png)
+![](.//media/benchmark.png)
 
 ## Exploring assessement criteria
 
