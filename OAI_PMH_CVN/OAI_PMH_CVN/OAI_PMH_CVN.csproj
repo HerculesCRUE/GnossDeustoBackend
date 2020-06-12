@@ -29,10 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="docfx.console" Version="2.53.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
