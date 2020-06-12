@@ -1,3 +1,6 @@
+// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
+// Proyecto H�rcules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,8 +10,6 @@ using API_CARGA.Middlewares;
 using API_CARGA.ModelExamples;
 using API_CARGA.Models;
 using API_CARGA.Models.Services;
-using IdentityServer4.EntityFramework.DbContexts;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;

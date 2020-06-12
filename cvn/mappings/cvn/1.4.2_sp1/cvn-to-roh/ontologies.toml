@@ -41,3 +41,7 @@ uri_base = "http://www.w3.org/2001/XMLSchema#"
 [[ontologies]]
 shortname = "rdf"
 uri_base = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+
+[[ontologies]]
+shortname = "geonames"
+uri_base = "http://purl.org/roh/mirror/geonames#"

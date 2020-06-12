@@ -1,8 +1,14 @@
 ![](..//Docs/media/CabeceraDocumentosMD.png)
 
-El informe sobre el Benchmark se encuentra en la [carpeta Docs](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Docs):
+El informe sobre el Benchmark se encuentra en la [carpeta Docs](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Docs) general del Backend:
 
 [Hércules Backend ASIO. TripleStore Benchmark deliverable report](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/20200325%20Hercules%20TripleStore%20Benchmark%20deliverable%20report.md)
+
+En la carpeta [Docs](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Benchmark/Docs) del Benchmark se pueden consultar los siguientes documentos:
+
+[Guía del usuario](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/Docs/UserGuide.md) (en inglés).
+
+[Documentación del desarrollador](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/Docs/Developer%20Documentation.md) (en inglés). Este documento explica como añadir, editar o eliminar criterios.
 
 La aplicación de Benchmark está desplegada en:
 

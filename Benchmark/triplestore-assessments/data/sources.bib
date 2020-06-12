@@ -8,11 +8,11 @@ title={AllegroGraph Homepage},
 url={https://franz.com/agraph/allegrograph/}
 }
 
-P1_6::Ranks highly on LUBM benchmark with 1B triples::5::perf_analyses
+P1_6::Ranks highly on LUBM benchmark with 1B triples::5::perf_summary
 
-@misc{perf_analyses,
+@misc{perf_summary,
 title={Meta-analysis of performance benchmark results},
-url={perf_summary.md}
+url={https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Benchmark/triplestore-assessments/data/perf_summary.md}
 }
 
 P1_5::Assumes high performance on 100M triples, based on results with at 1B::5::perf_summary
@@ -128,7 +128,17 @@ title={AllegroGraph Benchmark Lubm},
 url={https://franz.com/agraph/allegrograph/agraph_bench_lubm.lhtml}
 }
 
-P4_2::ACID transactions with rollback provided::5::allegrograph_introduction
+F4_1::No explicit implementation of LDP RDF Resource Management::1::allegrograph_introduction
+
+F4_2::No explicit implementation of LDP Non-RDF Resource Management::1::allegrograph_introduction
+
+F4_3::No explicit implementation of HTTP Read operations::1::allegrograph_introduction
+
+F4_4::No explicit implementation of HTTP Write operations::1::allegrograph_introduction
+
+F4_5::No explicit implementation of containers::1::allegrograph_introduction
+
+P4_5::ACID transactions with rollback provided::5::allegrograph_introduction
 
 M1_1::Free for under 5M triples::3::allegrograph_comercial_edition
 
@@ -274,6 +284,16 @@ F3_3::Attribute-based access control not mentioned in documentation::0::neptune_
 
 F3_4::No customisable user quota mentioned in documentation::0::neptune_guide
 
+F4_1::No explicit implementation of LDP RDF Resource Management (although available through additional third party software)::2::neptune_guide
+
+F4_2::No explicit implementation of LDP Non-RDF Resource Management::1::neptune_guide
+
+F4_3::No explicit implementation of HTTP Read operations::2::neptune_guide
+
+F4_4::No explicit implementation of HTTP Write operations::1::neptune_guide
+
+F4_5::No explicit implementation of containers::1::neptune_guide
+
 P4_2::Transactions mentioned, but unclear whether rollbacks are feasible::2::neptune_transactions
 
 @misc{neptune_transactions,
@@ -418,6 +438,16 @@ title={Jena documentation overview},
 url={https://jena.apache.org/documentation/}
 }
 
+F4_1::No explicit implementation of LDP RDF Resource Management (although external extensions exist)::2::jena_doc
+
+F4_2::No explicit implementation of LDP Non-RDF Resource Management::1::jena_doc
+
+F4_3::No explicit implementation of HTTP Read operations::2::jena_doc
+
+F4_4::No explicit implementation of HTTP Write operations::1::jena_doc
+
+F4_5::No explicit implementation of containers::1::jena_doc
+
 P4_2::Transaction mechanism provided through API::4::jena_transactions
 
 @misc{jena_transactions,
@@ -549,6 +579,16 @@ F3_2::Security in blazegraph is handled outside of the system::0::blazegraph_sec
 F3_3::Security in blazegraph is handled outside of the system::0::blazegraph_security_models
 
 F3_4::Security in blazegraph is handled outside of the system::0::blazegraph_security_models
+
+F4_1::No explicit implementation of LDP RDF Resource Management::1::blazegraph_documentation
+
+F4_2::No explicit implementation of LDP Non-RDF Resource Management::1::blazegraph_documentation
+
+F4_3::No explicit implementation of HTTP Read operations::1::blazegraph_documentation
+
+F4_4::No explicit implementation of HTTP Write operations::1::blazegraph_documentation
+
+F4_5::No explicit implementation of containers::1::blazegraph_documentation
 
 P4_2::Transaction mechanism, but not enabled by default and complex::3::blazegraph_transactions
 
@@ -703,6 +743,16 @@ F3_3::Attribute-based access control not mentioned::0::stardog_security
 
 F3_4::quotas not mentioned in documentation::0::stardog_manual
 
+F4_1::No explicit implementation of LDP RDF Resource Management::1::stardog_manual
+
+F4_2::No explicit implementation of LDP Non-RDF Resource Management::1::stardog_manual
+
+F4_3::No explicit implementation of HTTP Read operations::1::stardog_manual
+
+F4_4::No explicit implementation of HTTP Write operations::1::stardog_manual
+
+F4_5::No explicit implementation of containers::1::stardog_manual
+
 P4_2::Supports ACID transactions::4::stardog_transactions
 
 @misc{stardog_transactions,
@@ -853,6 +903,21 @@ F3_4::Quotas can be set on space available to users or on resources per query, b
 title={Virtuoso config},
 url={http://docs.openlinksw.com/virtuoso/dbadm/}
 }
+
+@misc{virtuoso_ldp,
+title= {Virtuoso support for Linked Data Platform},
+url = {http://vos.openlinksw.com/owiki/wiki/VOS/VirtLDP}
+}
+
+F4_1::Implements support for managing RDF resources::5::virtuoso_ldp
+
+F4_2::Unclear whether support for non RDF resources is included::2::virtuoso_ldp
+
+F4_3::Implementation of LDP-compliant HTTP-read operations::5::virtuoso_ldp
+
+F4_4::Implementation of LDP-compliant HTTP-write operations::5::virtuoso_ldp
+
+F4_5::Implementation of LDP containsers::5::virtuoso_ldp
 
 P4_2::Transactions are supported, but unclear how they apply to SPARQL operations::3::virtuoso_transactions
 
@@ -1006,6 +1071,16 @@ F3_3::No mention of access control in documentation::0::corese_github
 
 F3_4::No mention of usage quota in documentation::0::corese_github
 
+F4_1::No explicit implementation of LDP RDF Resource Management::1::corese_github
+
+F4_2::No explicit implementation of LDP Non-RDF Resource Management::1::corese_github
+
+F4_3::No explicit implementation of HTTP Read operations::1::corese_github
+
+F4_4::No explicit implementation of HTTP Write operations::1::corese_github
+
+F4_5::No explicit implementation of containers::1::corese_github
+
 p4_2::No mention of transactions in documentation::0::corese_github
 
 M1_1::Free and open source::5::corese_github
@@ -1143,6 +1218,16 @@ url={https://neo4j.com/docs/operations-manual/current/authentication-authorizati
 F3_3::not clear mechanism for atribute-based access control::1::neo4j_access_control
 
 F3_4::No mention of quotas in documentation::0::neo4j_documentation
+
+F4_1::No explicit implementation of LDP RDF Resource Management::1::neo4j_documentation
+
+F4_2::No explicit implementation of LDP Non-RDF Resource Management::1::neo4j_documentation
+
+F4_3::No explicit implementation of HTTP Read operations::1::neo4j_documentation
+
+F4_4::No explicit implementation of HTTP Write operations::1::neo4j_documentation
+
+F4_5::No explicit implementation of containers::1::neo4j_documentation
 
 P4_2::Transaction mechanism available, but specific to query system::5::neo4j_transactions
 
