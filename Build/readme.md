@@ -1,7 +1,25 @@
-# Prerrequisitos
- - Tener el entorno de .Net Core 3.1 Runtime instalado. Se puede acceder a él desde: 
-	 - [https://docs.microsoft.com/es-es/dotnet/core/install/runtime?pivots=os-windows](https://docs.microsoft.com/es-es/dotnet/core/install/runtime?pivots=os-windows)
-# Configuraciones y ejecuciones 
+![](../Docs/media/CabeceraDocumentosMD.png)
+
+# Compilados de los entregables software
+Esta carpeta contiene los compilados de los entregables de software desarrollados
+en .Net Core y sus instrucciones de instalación y ejecución.
+
+# Prerrequisitos de instalación para Windows y Linux
+Instalar el entorno de .Net Core 3.1 Runtime. Las instrucciones y descargas están en: 
+[https://docs.microsoft.com/es-es/dotnet/core/install/runtime?pivots=os-windows](https://docs.microsoft.com/es-es/dotnet/core/install/runtime?pivots=os-windows)
+
+# Ejecución
+
+En Windows basta con descargar y descomprimir cada uno de los compilados en 
+diferentes carpetas de un dominio ya existente en el IIS (Internet Information Server).
+
+En Linux, hay que descargar y descomprimir el compilado en una carpeta; y luego 
+ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
+
+    dotnet UrisFactory.dll
+
+
+# Configuración de cada compilado 
 ## Api urisFactory
 ### Configuración
  >
@@ -9,7 +27,7 @@
        "PostgreConnection": "Host=ip_del_servidor;Database=nombre_de_la_base_de_datos;Username=usuario;Password=contraseña",
        "PostgreConnectionmigration": "Host=ip_del_servidor;Database=nombre_de_la_base_de_datos;Username=usuario;Password=contraseña"
     }
-  ### Ejecución
+### Ejecución Linux
     dotnet UrisFactory.dll
 ## Api Carga
 ### Configuración
@@ -35,7 +53,7 @@
          }
          }
 
-  ### Ejecución
+### Ejecución Linux
     dotnet API_CARGA.dll
 ## FrontEndCarga
 ### Configuración
@@ -53,7 +71,7 @@
     "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
     "ConfigUrlCron": "http://herc-as-front-desa.atica.um.es/cron-config/"
     }
-  ### Ejecución
+### Ejecución
     dotnet ApiCargaWebInterface.dll
    
 ## Api CronConfigure
@@ -73,9 +91,9 @@
           "Urls": "http://0.0.0.0:5107",
             "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/"
             }
-  ### Ejecución
+### Ejecución Linux
     dotnet CronConfigure.dll
- ## Api OAIPMH
+## Api OAIPMH
 ### Configuración
     {
       "Logging": {
@@ -91,5 +109,5 @@
         "CVN_ROH_converter": "http://herc-as-front-desa.atica.um.es/cvn/v1/convert",
           "ConfigUrl": "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH"
           }
-  ### Ejecución
+  ### Ejecución Linux
     dotnet OAI_PMH_CVN.dll
