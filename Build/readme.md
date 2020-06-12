@@ -1,7 +1,7 @@
-# Configuraciones y ejecuciones 
-## Prerrequisitos
- - Tener instalado el entorno de .Net Core 3.1 Runtime instalado. Se puede acceder a él desde: 
+# Prerrequisitos
+ - Tener el entorno de .Net Core 3.1 Runtime instalado. Se puede acceder a él desde: 
 	 - [https://docs.microsoft.com/es-es/dotnet/core/install/runtime?pivots=os-windows](https://docs.microsoft.com/es-es/dotnet/core/install/runtime?pivots=os-windows)
+# Configuraciones y ejecuciones 
 ## Api urisFactory
 ### Configuración
  >
