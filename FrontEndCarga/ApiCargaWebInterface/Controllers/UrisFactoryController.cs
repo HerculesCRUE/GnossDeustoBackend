@@ -99,6 +99,14 @@ namespace ApiCargaWebInterface.Controllers
            
         }
 
+        [HttpGet("[Controller]/create-structure")]
+        public IActionResult CreateStructure()
+        {
+            WebUriStructureViewModel structureViewModel = new WebUriStructureViewModel();
+            structureViewModel.Structure = JsonConvert.SerializeObject(UriStructureViewModel.GetUriStrcuture(), Formatting.Indented);
+            return View(structureViewModel);
+        }
+
         public IActionResult Delete(string name)
         {
             try

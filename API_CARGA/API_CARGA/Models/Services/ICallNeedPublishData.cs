@@ -2,6 +2,7 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase que sirve para realizar las llamadas necesarias al controlador etl para poder realizar una sincronización
+using API_CARGA.Models.Entities;
 using System;
 using System.Net.Http;
 

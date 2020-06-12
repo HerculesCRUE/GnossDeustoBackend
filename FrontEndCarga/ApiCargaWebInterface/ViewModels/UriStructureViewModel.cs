@@ -8,47 +8,51 @@ namespace ApiCargaWebInterface.ViewModels
 {
     public class UriStructureViewModel
     {
-        public string GetUriStrcuture()
+        public static string GetUriStrcuture()
         {
+            string uriStructure;
             StringBuilder structure = new StringBuilder();
-            structure.Append("{");
-            structure.Append("\"uriStructure\": {");
-            structure.Append("\"name\": \"uriExampleStructure\", ");
-            structure.Append("\"components\": [");
-            structure.Append("{");
-            structure.Append("\"uriComponent\": \"base\", ");
-            structure.Append("\"uriComponentValue\": \"base\", ");
-            structure.Append("\"uriComponentOrder\": 1, ");
-            structure.Append("\"mandatory\": true, ");
-            structure.Append("\"finalCharacter\": \"/\"");
-            structure.Append("},");
-            structure.Append("{");
-            structure.Append("\"uriComponent\": \"character\", ");
-            structure.Append("\"uriComponentValue\": \"character@RESOURCE\", ");
-            structure.Append("\"uriComponentOrder\": 2, ");
-            structure.Append("\"mandatory\": true, ");
-            structure.Append("\"finalCharacter\": \"/\"");
-            structure.Append("},");
-            structure.Append("{");
-            structure.Append("\"uriComponent\": \"resourceClass\", ");
-            structure.Append("\"uriComponentValue\": \"resourceClass@RESOURCECLASS\", ");
-            structure.Append("\"uriComponentOrder\": 3, ");
-            structure.Append("\"mandatory\": true, ");
-            structure.Append("\"finalCharacter\": \"/\" ");
-            structure.Append("}, ");
-            structure.Append("{");
-            structure.Append("\"uriComponent\": \"identifier\", ");
-            structure.Append("\"uriComponentValue\": \"@ID\", ");
-            structure.Append("\"uriComponentOrder\": 4, ");
-            structure.Append("\"mandatory\": true, ");
-            structure.Append("\"finalCharacter\": \"\"");
-            structure.Append("\"resourcesClass\": [");
-            structure.Append("{");
-            structure.Append("\"resourceClass\": \"Example\", ");
-            structure.Append("\"labelResourceClass\": \"example\", ");
-            structure.Append("\"resourceURI\": \"uriExampleStructure\"");
-            structure.Append("}]}");
-            return structure.ToString();
+            structure.AppendLine("{");
+            structure.AppendLine("\"uriStructure\": {");
+            structure.AppendLine("\"name\": \"uriExampleStructure\", ");
+            structure.AppendLine("\"components\": [");
+            structure.AppendLine("{");
+            structure.AppendLine("\"uriComponent\": \"base\", ");
+            structure.AppendLine("\"uriComponentValue\": \"base\", ");
+            structure.AppendLine("\"uriComponentOrder\": 1, ");
+            structure.AppendLine("\"mandatory\": true, ");
+            structure.AppendLine("\"finalCharacter\": \"/\"");
+            structure.AppendLine("},");
+            structure.AppendLine("{");
+            structure.AppendLine("\"uriComponent\": \"character\", ");
+            structure.AppendLine("\"uriComponentValue\": \"character@RESOURCE\", ");
+            structure.AppendLine("\"uriComponentOrder\": 2, ");
+            structure.AppendLine("\"mandatory\": true, ");
+            structure.AppendLine("\"finalCharacter\": \"/\"");
+            structure.AppendLine("},");
+            structure.AppendLine("{");
+            structure.AppendLine("\"uriComponent\": \"resourceClass\", ");
+            structure.AppendLine("\"uriComponentValue\": \"resourceClass@RESOURCECLASS\", ");
+            structure.AppendLine("\"uriComponentOrder\": 3, ");
+            structure.AppendLine("\"mandatory\": true, ");
+            structure.AppendLine("\"finalCharacter\": \"/\" ");
+            structure.AppendLine("}, ");
+            structure.AppendLine("{");
+            structure.AppendLine("\"uriComponent\": \"identifier\", ");
+            structure.AppendLine("\"uriComponentValue\": \"@ID\", ");
+            structure.AppendLine("\"uriComponentOrder\": 4, ");
+            structure.AppendLine("\"mandatory\": true, ");
+            structure.AppendLine("\"finalCharacter\": \"\"");
+            structure.AppendLine("\"resourcesClass\": [");
+            structure.AppendLine("{");
+            structure.AppendLine("\"resourceClass\": \"Example\", ");
+            structure.AppendLine("\"labelResourceClass\": \"example\", ");
+            structure.AppendLine("\"resourceURI\": \"uriExampleStructure\"");
+            structure.AppendLine("}");
+            structure.AppendLine("]");
+            structure.AppendLine("}");
+            uriStructure = structure.ToString();
+            return uriStructure;
         }
     }
 }
