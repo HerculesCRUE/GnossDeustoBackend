@@ -12,10 +12,6 @@
     <None Remove="Models\Entities\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="docfx.console" Version="2.53.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="IdentityServer4" Version="3.1.2" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
