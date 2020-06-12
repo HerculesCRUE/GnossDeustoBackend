@@ -5,43 +5,34 @@
 Contents
 ========
 
-[**1.** **Introducción** 2](#introducción)
+[**1.** **Introducción**](#introducción)
 
-[**1.1.** **Aplicación de los principios FAIR en HERCULES-ASIO**
-2](#aplicación-de-los-principios-fair-en-hercules-asio)
+[**1.1.** **Aplicación de los principios FAIR en HERCULES-ASIO**](#aplicación-de-los-principios-fair-en-hercules-asio)
 
-[**2.** **Metodología para la implementación de las métricas FAIR**
-5](#metodología-para-la-implementación-de-las-métricas-fair)
+[**2.** **Metodología para la implementación de las métricas FAIR**](#metodología-para-la-implementación-de-las-métricas-fair)
 
 [**2.1.** **Especificación del módulo de métricas FAIR para evaluación
-automatizada de los recursos (ontologías o datos)**
-5](#especificación-del-módulo-de-métricas-fair-para-evaluación-automatizada-de-los-recursos-ontologías-o-datos)
+automatizada de los recursos (ontologías o datos)**](#especificación-del-módulo-de-métricas-fair-para-evaluación-automatizada-de-los-recursos-ontologías-o-datos)
 
 [**2.2.** **Estado del proyecto FAIRmetrics y análisis de su
-repositorio**
-7](#estado-del-proyecto-fairmetrics-y-análisis-de-su-repositorio)
+repositorio**](#estado-del-proyecto-fairmetrics-y-análisis-de-su-repositorio)
 
 [**2.3.** **Decisión de la estrategia de implementación y evaluación de
-políticas FAIR**
-9](#decisión-de-la-estrategia-de-implementación-y-evaluación-de-políticas-fair)
+políticas FAIR**](#decisión-de-la-estrategia-de-implementación-y-evaluación-de-políticas-fair)
 
-[**3.** **Implementación del Bridge API RESTful**
-11](#implementación-del-bridge-api-restful)
+[**3.** **Implementación del Bridge API RESTful**](#implementación-del-bridge-api-restful)
 
-[**3.1.** **Implementación del puente entre ASIO y FAIRMetrics**
-11](#implementación-del-puente-entre-asio-y-fairmetrics)
+[**3.1.** **Implementación del puente entre ASIO y FAIRMetrics**](#implementación-del-puente-entre-asio-y-fairmetrics)
 
-[**3.2.** **Instalación y configuración del puente ASIO-FAIRmetrics**
-14](#instalación-y-configuración-del-puente-asio-fairmetrics)
+[**3.2.** **Instalación y configuración del puente ASIO-FAIRmetrics**](#instalación-y-configuración-del-puente-asio-fairmetrics)
 
-[**4.** **Conclusión** 1](#conclusión)
+[**4.** **Conclusión**](#conclusión)
 
-[**Bibliografía** 2](#bibliografía)
+[**Bibliografía**](#bibliografía)
 
-[**Apéndice 1. Métricas FAIR en HERCULES-ASIO**
-3](#apéndice-1.-métricas-fair-en-hercules-asio)
+[**Apéndice 1. Métricas FAIR en HERCULES-ASIO**](#apéndice-1.-métricas-fair-en-hercules-asio)
 
-**Introducción** 
+**1- Introducción** 
 ================
 
 El objetivo de este documento es "Definir y desarrollar un módulo de
@@ -69,7 +60,7 @@ En las siguientes subsecciones ofrecemos, primero, el contexto en el que
 se ubica este entregable y, en segundo lugar, exponemos lo que se ha
 planteado exactamente dentro del módulo de métricas FAIR.
 
-**Aplicación de los principios FAIR en HERCULES-ASIO**
+**1.1. Aplicación de los principios FAIR en HERCULES-ASIO**
 ------------------------------------------------------
 
 El objetivo principal del PT1 de este proyecto es crear la
@@ -151,7 +142,7 @@ de los principios FAIR, que serán especificadas al dominio SGI tras
 haber primero abordado y garantizado que se ofrecen las 14 métricas
 formuladas por FAIRmetrics.
 
-**Metodología para la implementación de las métricas FAIR**
+**2. Metodología para la implementación de las métricas FAIR**
 ===========================================================
 
 Esta sección describe el proceso seguido en la implementación del módulo
@@ -171,8 +162,8 @@ métricas FAIR para HERCULES-ASIO ha consistido en 3 pasos:
     FAIR tanto sobre la Red de Ontologías Hércules (ROH) como a los
     recursos modelados a partir de ROH.
 
-    1.  **Especificación del módulo de métricas FAIR para evaluación automatizada de los recursos (ontologías o datos)**
-        ----------------------------------------------------------------------------------------------------------------
+**2.1 Especificación del módulo de métricas FAIR para evaluación automatizada de los recursos (ontologías o datos)**
+----------------------------------------------------------------------------------------------------------------
 
 El resultado final será la generación de un test-suite que evalúe las 14
 métricas descritas en el entregable "EF2-1.6: documento de análisis de
@@ -250,10 +241,10 @@ de medición de FAIR diseñado:
     serán necesarios para permitir su evolución cuidadosa y abordar los
     desacuerdos válidos.
 
-    1.  **Estado del proyecto FAIRmetrics y análisis de su repositorio**
-        ----------------------------------------------------------------
+**2.2. Estado del proyecto FAIRmetrics y análisis de su repositorio**
+---------------------------------------------------------------------
 
-El repositorio de código en GitHub \[5\] para FAIRmetrics[^1] ofrece una
+El repositorio de código en GitHub \[5\] para [FAIRmetrics](https://github.com/FAIRMetrics/Metrics) ofrece una
 implementación de referencia para las métricas descritas en el artículo
 seminal al respecto titulado "*A design framework and exemplar metrics
 for FAIRness*" \[6\]. En tal repositorio, se ofrecen implementaciones
@@ -320,15 +311,15 @@ los siguientes pasos:
 6.  En nuestra conversación con el director del proyecto FAIRmetrics, se
     ha aclarado que es además posible crear nuevas métricas específicas
     al dominio de gestión de datos de la investigación a través de la
-    compleción de FAIR Maturity Indicator template[^2]. Se pueden
+    compleción de [FAIR Maturity Indicator template](https://github.com/FAIRMetrics/Metrics/blob/master/MaturityIndicators/MaturityIndicatorTemplate.md). Se pueden
     realizar extensiones a través de la provisión de un endpoint para
     tales nuevas métricas usando SmartAPI\[8\], extensión semántica de
     OpenAPI. Se ha acordado dialogar con autores de FAIRmetrics en caso
     de detectarse necesidad de ofrecer nuevas métricas, específicas a la
     gestión de información de investigación.
 
-    1.  **Decisión de la estrategia de implementación y evaluación de políticas FAIR**
-        ------------------------------------------------------------------------------
+**2.3. Decisión de la estrategia de implementación y evaluación de políticas FAIR**
+------------------------------------------------------------------------------
 
 Se ha decidido cresar un proxy/bridge API usando OpenAPI, que será
 utilizada desde back-end HERCULES-ASIO para realizar validación de
@@ -336,7 +327,7 @@ recursos (resources) y de la red de ontologías como tal.
 
 Tal API será ofrecida en primera instancia conectándose con API pública
 ya desplegada por FAIRsharing, disponible en
-<https://ejp-evaluator.appspot.com/FAIR_Evaluator//>.
+<https://ejp-evaluator.appspot.com/FAIR_Evaluator/>.
 
 La implementación de la API del módulo de métricas FAIR para la
 evaluación automática de recursos, se ha realizado de tal modo que es
@@ -396,7 +387,7 @@ modo el repositorio
 del proyecto FAIRmetrics, así ayudando a otras organizaciones en la
 provisión de recursos online siguiendo las directrices FAIR.
 
-**Implementación del Bridge API RESTful** 
+**3. Implementación del Bridge API RESTful** 
 =========================================
 
 Tal como se ha mencionado en el punto 2, se ha decidido crear un bridge
@@ -404,7 +395,7 @@ o puente entre la API RESTful de FAIRmetrics ya desplegada en la nube
 por los creadores de FAIRmetrics y el código cliente que se desarrollará
 como parte del back-end de HERCULES-ASIO.
 
-**Implementación del puente entre ASIO y FAIRMetrics**
+**3.1. Implementación del puente entre ASIO y FAIRMetrics**
 ------------------------------------------------------
 
 La Figura 1 muestra la arquitectura del evaluador de métricas FAIR
@@ -457,26 +448,32 @@ supuesto, código fuente, se podría invocar tal API:
 
 -   Recuperar las colecciones existentes de test suites FAIR a ejecutar:
 
+```
 curl -X GET \"http://localhost:8080/v1/collections\" -H \"accept:
 application/json\"
+```
 
 -   Ejecutar la colección de test suite seleccionada:
 
+```
 curl -X POST
 \"http://localhost:8080/v1/collections/5/evaluate?resource=10.1109%2FACCESS.2019.2952321&orcid=0000-0001-8055-6823&title=prueba\"
 -H \"accept: application/json\"
+```
 
--   Recuperar el histórico de evaluaciones ejecutadas por un
-    > investigador (ORCID):
+-   Recuperar el histórico de evaluaciones ejecutadas por uninvestigador (ORCID):
 
+```
 curl -X GET \"http://localhost:8080/v1/evaluations\" -H \"accept:
-\*/\*\"
+*/*"
+```
 
--   Recuperar el resultado en detalle de la ejecución anterior de una
-    > colección de tests:
+-   Recuperar el resultado en detalle de la ejecución anterior de una colección de tests:
 
+```
 curl -X GET \"http://localhost:8080/v1/evaluations/3263/result\" -H
-\"accept: \*/\*\"
+\"accept: */*"
+```
 
 Finalmente, la Figura 3 muestra el resultado de ejecutar el método GET
 /collections que retorna una colección JSON con todas las colecciones de
@@ -488,7 +485,7 @@ test suites registradas en FAIRmetrics.
 [/collections](http://localhost:8080/v1/ui/#/operations/default/collections_get)
 a través de la interfaz Swagger.
 
-**Instalación y configuración del puente ASIO-FAIRmetrics**
+**3.2. Instalación y configuración del puente ASIO-FAIRmetrics**
 -----------------------------------------------------------
 
 Antes de instalar y ejecutar el puente ASIO-FAIRmetrics es primero
@@ -582,8 +579,8 @@ recurso DOI
 [10.1109/ACCESS.2019.2952321](http://dx.doi.org/10.1109/ACCESS.2019.2952321)
 lanzado por investigador 0000-0001-8055-6823.
 
-**Conclusión**
-==============
+**4. Conclusión**
+=================
 
 Este documento ha descrito la implementación inicial de las métricas
 FAIR, mediante la provisión de un puente o bridge entre el código del
@@ -643,6 +640,17 @@ schema.org». \[En línea\]. Disponible en: https://schema.org/.
 \[Accedido: 24-nov-2019\].
 
 **Apéndice 1. Métricas FAIR en HERCULES-ASIO**
+==============================================
+
+![Fair table:](.//media/fair_table_1.png)
+![Fair table:](.//media/fair_table_2.png)
+![Fair table:](.//media/fair_table_3.png)
+![Fair table:](.//media/fair_table_4.png)
+![Fair table:](.//media/fair_table_5.png)
+![Fair table:](.//media/fair_table_6.png)
+![Fair table:](.//media/fair_table_7.png)
+
+<!-- 
 | Principio FAIR                                                                                                 | Métrica/Explicación                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Especificación                                                                                                                                                                                                                                                                                                                      | Verificación                                                                                                                                                                                                                                                                                                                                                                        |
 |----------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Findable                                                                                                       | FM-F1A. Identifier Uniqueness                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                      | An URL to a registered identifier scheme must be specified.                                                                                                                                                                                                                                                                         | URL to a registered identifier scheme must be present:                                                                                                                                                                                                                                                                                                                              |
@@ -738,6 +746,7 @@ schema.org». \[En línea\]. Disponible en: https://schema.org/.
 | [1] https://www.w3.org/TR/vocab-dcat-2/                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                     |
 | [2] http://guid.one/guid                                                                                       |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                     |
 | [3] https://www.iana.org/assignments/media-types/media-types.xhtml                                             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                     |
+-->
 [^1]: <https://github.com/FAIRMetrics/Metrics>
 
 [^2]: <https://github.com/FAIRMetrics/Metrics/blob/master/MaturityIndicators/MaturityIndicatorTemplate.md>
@@ -753,5 +762,5 @@ schema.org». \[En línea\]. Disponible en: https://schema.org/.
 [^7]: <http://guid.one/guid>
 
 [^8]: <https://www.iana.org/assignments/media-types/media-types.xhtml>
-==============================================
+<!-- ==============================================>
 
