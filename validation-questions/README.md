@@ -7,7 +7,7 @@ In this project different SPARQL queries are executed in order to test the ROH o
 * [Documentation](https://deustohercules.github.io/validation-questions/testapidocs/index.html)
 * [Test Results](https://deustohercules.github.io/validation-questions/surefire-report.html)
 
-You can find more details about the questions and run them interactively at `sparql-query` directory.
+Remember to play with the validation questions by playing interactively at [`sparql-query`](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/validation-questions/sparql-query) directory.
 
 
 # USAGE
