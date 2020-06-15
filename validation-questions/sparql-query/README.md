@@ -62,3 +62,4 @@ A continuación, se exponen las preguntas de competencia y su ejecución online:
 * Q54 - Listar los impactos JCR de los investigadores de un grupo en un año: https://tinyurl.com/y886xrzt
 * Q55 - Listar los proyectos privados obtenidos por un grupo de investigación contratados por una organización privada: https://tinyurl.com/ycvuqzay
 * Q56 - Listar las tesis de una universidad en las que aparezca en el título los tokens que indique como entrada a la consulta: https://tinyurl.com/yc6vh6ny
+* Q57 - Indicar el porcentaje de mujeres frente a hombres como autores de publicaciones con impacto de un grupo de investigación: implementada por Q45.
