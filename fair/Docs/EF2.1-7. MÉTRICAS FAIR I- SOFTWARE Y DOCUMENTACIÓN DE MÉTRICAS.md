@@ -7,26 +7,26 @@ Contents
 
 [**1.** **Introducción**](#1--introducción)
 
-[**1.1.** **Aplicación de los principios FAIR en HERCULES-ASIO**](#aplicación-de-los-principios-fair-en-hercules-asio)
+[**1.1.** **Aplicación de los principios FAIR en HERCULES-ASIO**](#11-aplicación-de-los-principios-fair-en-hercules-asio)
 
-[**2.** **Metodología para la implementación de las métricas FAIR**](#metodología-para-la-implementación-de-las-métricas-fair)
+[**2.** **Metodología para la implementación de las métricas FAIR**](#2-metodología-para-la-implementación-de-las-métricas-fair)
 
 [**2.1.** **Especificación del módulo de métricas FAIR para evaluación
-automatizada de los recursos (ontologías o datos)**](#especificación-del-módulo-de-métricas-fair-para-evaluación-automatizada-de-los-recursos-ontologías-o-datos)
+automatizada de los recursos (ontologías o datos)**](#21-especificación-del-módulo-de-métricas-fair-para-evaluación-automatizada-de-los-recursos-ontologías-o-datos)
 
 [**2.2.** **Estado del proyecto FAIRmetrics y análisis de su
-repositorio**](#estado-del-proyecto-fairmetrics-y-análisis-de-su-repositorio)
+repositorio**](#22-estado-del-proyecto-fairmetrics-y-análisis-de-su-repositorio)
 
 [**2.3.** **Decisión de la estrategia de implementación y evaluación de
-políticas FAIR**](#decisión-de-la-estrategia-de-implementación-y-evaluación-de-políticas-fair)
+políticas FAIR**](#23-decisión-de-la-estrategia-de-implementación-y-evaluación-de-políticas-fair)
 
-[**3.** **Implementación del Bridge API RESTful**](#implementación-del-bridge-api-restful)
+[**3.** **Implementación del Bridge API RESTful**](#3-implementación-del-bridge-api-restful)
 
-[**3.1.** **Implementación del puente entre ASIO y FAIRMetrics**](#implementación-del-puente-entre-asio-y-fairmetrics)
+[**3.1.** **Implementación del puente entre ASIO y FAIRMetrics**](#31-implementación-del-puente-entre-asio-y-fairmetrics)
 
-[**3.2.** **Instalación y configuración del puente ASIO-FAIRmetrics**](#instalación-y-configuración-del-puente-asio-fairmetrics)
+[**3.2.** **Instalación y configuración del puente ASIO-FAIRmetrics**](#32-instalación-y-configuración-del-puente-asio-fairmetrics)
 
-[**4.** **Conclusión**](#conclusión)
+[**4.** **Conclusión**](#4-conclusión)
 
 [**Bibliografía**](#bibliografía)
 
@@ -614,30 +614,16 @@ Como trabajo futuro deberemos realizar lo siguiente:
 **Bibliografía**
 ================
 
-\[1\] M. D. Wilkinson *et al.*, «The FAIR Guiding Principles for
-scientific data management and stewardship», *Scientific Data*, vol. 3,
-n.^o^ 1, pp. 1-9, mar. 2016, doi: 10.1038/sdata.2016.18.\[2\] Mark
-Wilkinson, Erik Schultes, Luiz Olavo Bonino, Susanna-Assunta Sansone,
-Peter Doorn, y Michel Dumontier, *FAIRMetrics/Metrics: FAIR Metrics,
-Evaluation results, and initial release of automated evaluator code*.
-Zenodo, 2018.\[3\] P. O. of the E. Union, «Turning FAIR into reality :
-final report and action plan from the European Commission expert group
-on FAIR data.», 26-nov-2018. \[En línea\]. Disponible en:
-https://op.europa.eu:443/en/publication-detail/-/publication/7769a148-f1f6-11e8-9982-01aa75ed71a1/language-en/format-PDF.
-\[Accedido: 23-nov-2019\].\[4\] «OpenAPI Specification \| Swagger». \[En
-línea\]. Disponible en: https://swagger.io/specification/. \[Accedido:
-14-ene-2020\].\[5\] «GitHub». \[En línea\]. Disponible en:
-https://github.com/. \[Accedido: 14-ene-2020\].\[6\] M. D. Wilkinson,
-S.-A. Sansone, E. Schultes, P. Doorn, L. O. Bonino da Silva Santos, y M.
-Dumontier, «A design framework and exemplar metrics for FAIRness»,
-*Scientific Data*, vol. 5, n.^o^ 1, pp. 1-4, jun. 2018, doi:
-10.1038/sdata.2018.118.\[7\] «curl». \[En línea\]. Disponible en:
-https://curl.haxx.se/. \[Accedido: 14-ene-2020\].\[8\] «SmartAPI». \[En
-línea\]. Disponible en: https://smart-api.info/. \[Accedido:
-14-ene-2020\].\[9\] «FAIRsharing». \[En línea\]. Disponible en:
-https://fairsharing.org/. \[Accedido: 24-nov-2019\].\[10\] «Home -
-schema.org». \[En línea\]. Disponible en: https://schema.org/.
-\[Accedido: 24-nov-2019\].
+* [1] M. D. Wilkinson *et al.*, «The FAIR Guiding Principles for scientific data management and stewardship», *Scientific Data*, vol. 3, n.^o^ 1, pp. 1-9, mar. 2016, doi: 10.1038/sdata.2016.18.
+* [2] Mark Wilkinson, Erik Schultes, Luiz Olavo Bonino, Susanna-Assunta Sansone, Peter Doorn, y Michel Dumontier, *FAIRMetrics/Metrics: FAIR Metrics, Evaluation results, and initial release of automated evaluator code*. Zenodo, 2018.
+* [3] P. O. of the E. Union, «Turning FAIR into reality: final report and action plan from the European Commission expert group on FAIR data.», 26-nov-2018. [En línea]. Disponible en: https://op.europa.eu:443/en/publication-detail/-/publication/7769a148-f1f6-11e8-9982-01aa75ed71a1/language-en/format-PDF. [Accedido: 23-nov-2019].
+* [4] «OpenAPI Specification | Swagger». [En línea]. Disponible en: https://swagger.io/specification/. [Accedido: 14-ene-2020].
+* [5] «GitHub». [En línea]. Disponible en: https://github.com/. [Accedido: 14-ene-2020].
+* [6] M. D. Wilkinson, S.-A. Sansone, E. Schultes, P. Doorn, L. O. Bonino da Silva Santos, y M. Dumontier, «A design framework and exemplar metrics for FAIRness»,*Scientific Data*, vol. 5, n.^o^ 1, pp. 1-4, jun. 2018, doi: 10.1038/sdata.2018.118.
+* [7] «curl». [En línea]. Disponible en: https://curl.haxx.se/. [Accedido: 14-ene-2020].
+* [8] «SmartAPI». [En línea]. Disponible en: https://smart-api.info/. [Accedido: 14-ene-2020].
+* [9] «FAIRsharing». [En línea]. Disponible en: https://fairsharing.org/. [Accedido: 24-nov-2019].
+* [10] «Home - schema.org». [En línea]. Disponible en: https://schema.org/. [Accedido: 24-nov-2019].
 
 **Apéndice 1. Métricas FAIR en HERCULES-ASIO**
 ==============================================
