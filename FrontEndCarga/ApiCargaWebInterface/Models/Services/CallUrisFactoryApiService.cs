@@ -53,5 +53,16 @@ namespace ApiCargaWebInterface.Models.Services
         {
             _serviceApi.CallDeleteApi(_serviceUrl.GetUrlUrisFactory(), $"{_urlSchema}?name={uriStructure}",_token);
         }
+
+        public void AddStructure(string structure)
+        {
+            InfoUriStructureViewModel infoUriStructure = JsonConvert.DeserializeObject<InfoUriStructureViewModel>(structure);
+            object item = new
+            {
+                infoUriStructure = infoUriStructure
+            };
+            string result = _serviceApi.CallPutApi(_serviceUrl.GetUrlUrisFactory(), $"{_urlSchema}", infoUriStructure, _token);
+           // return result;
+        }
     }
 }

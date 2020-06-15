@@ -43,6 +43,9 @@ namespace ApiCargaWebInterface.ViewModels
             structure.AppendLine("\"uriComponentOrder\": 4, ");
             structure.AppendLine("\"mandatory\": true, ");
             structure.AppendLine("\"finalCharacter\": \"\"");
+            structure.AppendLine("}");
+            structure.AppendLine("]");
+            structure.AppendLine("},");
             structure.AppendLine("\"resourcesClass\": [");
             structure.AppendLine("{");
             structure.AppendLine("\"resourceClass\": \"Example\", ");

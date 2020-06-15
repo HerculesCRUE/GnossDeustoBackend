@@ -2,29 +2,37 @@
 
 @{
     ViewData["Title"] = "Create - Structure";
-    ViewData["BodyClass"] = "fichaRecurso";
+    ViewData["BodyClass"] = "formulario";
 }
 
 <div class="row">
     <div class="col col-12 col-lg-12 col-contenido">
         <div class="wrapCol">
-            <div class="header-resource">
-                <div class="h1-container">
-                    <h1>@Model.Name</h1>
-                    <div class="botones">
-                        <a href="@Url.Action("Delete", new {name=@Model.Name })" class="btn btn-eliminar">Eliminar</a>
-                    </div>
+            @*<div class="contenido">
+                <div class="grupo grupo-descripcion">*@
+                    <form asp-action="CreateStructure" method="post">
+                        <div class="fieldset fieldset01">
+                            <fieldset class="mediumLabels">
+                                <h1>Crear estructura</h1>
+                                <div class="fieldsetContent">
+                                    @*<pre>*@
+                                        <textarea cols="75" rows="50" id="structure" name="structure">
+                                        @Model.Structure
+                                        </textarea>
+                                    @*</pre>*@
+                                    <div class="fieldset actionButtons fieldset03">
+                                        <fieldset>
+                                            <p>
+                                                <input class="submit principal" type="submit" value="Agregar estructura">
+                                            </p>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </form>
                 </div>
-            </div>
-            <div class="contenido">
-                <div class="grupo grupo-descripcion">
-                    <pre>
-                    <textarea cols="100" rows="150" id="structure">
-                            @Model.Structure
-                        </textarea>
-                    </pre>
-                </div>
-            </div>
-        </div>
+            @*</div>
+        </div>*@
     </div>
 </div>

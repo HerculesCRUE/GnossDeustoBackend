@@ -13,5 +13,6 @@ namespace ApiCargaWebInterface.Models.Services
         public void ReplaceSchema(IFormFile newFile);
         public string GetStructure(string uriStructure);
         public void DeleteStructure(string uriStructure);
+        public void AddStructure(string structure);
     }
 }
