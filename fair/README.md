@@ -2,8 +2,10 @@
 
 Contamos con la siguiente documentación:
 
-[Métricas FAIR. Software y documentación](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/fair/Docs/EF2.1-7.%20M%C3%89TRICAS%20FAIR%20I-%20SOFTWARE%20Y%20DOCUMENTACI%C3%93N%20DE%20M%C3%89TRICAS.md)
+
 [Documento de Análisis de métodos FAIR](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/fair/Docs/Entregable%20EF2-1.6_%20documento%20de%20an%C3%A1lisis%20de%20m%C3%A9todos%20FAIR.md)
+
+[Métricas FAIR. Software y documentación](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/fair/Docs/EF2.1-7.%20M%C3%89TRICAS%20FAIR%20I-%20SOFTWARE%20Y%20DOCUMENTACI%C3%93N%20DE%20M%C3%89TRICAS.md)
 
 Hay una instancia disponible de la [aplicación y librería FAIR Metrics](https://github.com/FAIRMetrics/Metrics) 
 instanciada en los servidores de la Universidad de Murcia:
