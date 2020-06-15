@@ -1,3 +1,5 @@
+![](../Docs/media/CabeceraDocumentosMD.png)
+
 # ASIO Validation Questions
 
 In this project different SPARQL queries are executed in order to test the ROH ontology. Those validations questions are gathered from: https://github.com/HerculesCRUE/GnossDeustoOnto/blob/master/Documentation/2-%20CoberturaPreguntasCompetencia.pdf
