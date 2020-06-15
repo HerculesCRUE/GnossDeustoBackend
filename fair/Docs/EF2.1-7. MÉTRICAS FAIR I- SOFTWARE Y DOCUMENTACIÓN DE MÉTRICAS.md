@@ -5,7 +5,7 @@
 Contents
 ========
 
-[**1.** **Introducción**](#introduccion)
+[**1.** **Introducción**](#1--introducción)
 
 [**1.1.** **Aplicación de los principios FAIR en HERCULES-ASIO**](#aplicación-de-los-principios-fair-en-hercules-asio)
 
@@ -32,8 +32,8 @@ políticas FAIR**](#decisión-de-la-estrategia-de-implementación-y-evaluación-
 
 [**Apéndice 1. Métricas FAIR en HERCULES-ASIO**](#apéndice-1.-métricas-fair-en-hercules-asio)
 
-<a href="#introduccion">**1- Introducción**</a>
-===============================================
+**1- Introducción** 
+===================
 
 El objetivo de este documento es "Definir y desarrollar un módulo de
 métricas FAIR para evaluación automatizada de los recursos (ontologías o
