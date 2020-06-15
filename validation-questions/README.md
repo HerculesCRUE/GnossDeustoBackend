@@ -2,7 +2,7 @@
 
 # ASIO Validation Questions
 
-In this project different SPARQL queries are executed in order to test the ROH ontology. Those [validations questions](https://github.com/HerculesCRUE/GnossDeustoOnto/blob/master/Documentation/2-%20CoberturaPreguntasCompetencia.pdf) can be reviewed by selecting the sub-folder [sparql-query](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/validation-questions/sparql-query): 
+In this project different SPARQL queries are executed in order to test the ROH ontology. Those [validations questions](https://github.com/HerculesCRUE/GnossDeustoOnto/blob/master/Documentation/2-%20CoberturaPreguntasCompetencia.pdf) can be reviewed by selecting the sub-folder [sparql-query](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/validation-questions/sparql-query). The next two items point to the JavaDoc documentation generated from the implemented tests and to a page reporting details about the tests executed through Maven plugin surefire: 
 
 * [Documentation](https://deustohercules.github.io/validation-questions/testapidocs/index.html)
 * [Test Results](https://deustohercules.github.io/validation-questions/surefire-report.html)
