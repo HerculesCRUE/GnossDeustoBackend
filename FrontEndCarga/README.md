@@ -1,6 +1,6 @@
 # Sobre FrontEndCarga
 
-Accesible en pruebas en esta direcciÃ³n: http://herc-as-front-desa.atica.um.es/carga-web.
+Accesible en pruebas en esta dirección: http://herc-as-front-desa.atica.um.es/carga-web.
 
 ## Manual
 Este proyecto es una interfaz web desarrollada con el patrón MVC. Al acceder a la web vemos un menú en la parte superior desde la que se puede acceder a los repositorios, los shapes y las operaciones del urisFactory.
