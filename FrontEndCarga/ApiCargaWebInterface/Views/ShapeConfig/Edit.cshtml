@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col col-12 col-lg-12 col-contenido">
         <div class="wrapCol">
-            <form asp-action="Edit">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
                 <div class="fieldset fieldset01">
                     <fieldset class="mediumLabels">
                         <h1>Crear shape</h1>
@@ -31,7 +31,7 @@
                             <p>
                                 <label asp-for="Shape" class="control-label"></label>
                                 <dd class="col-sm-10">
-                                    @Html.DisplayFor(model => model.Shape)
+                                    <a href="@Url.Action("Download", "ShapeConfig", new {  id=Model.ShapeConfigID  })" class="btn-mas-recursos"><i class="material-icons">attachment</i>Descargar</a>
                                 </dd>
                             </p>
                             <p>

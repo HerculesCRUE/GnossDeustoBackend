@@ -1,0 +1,38 @@
+﻿@model ApiCargaWebInterface.ViewModels.WebUriStructureViewModel
+
+@{
+    ViewData["Title"] = "Create - Structure";
+    ViewData["BodyClass"] = "formulario";
+}
+
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            @*<div class="contenido">
+                <div class="grupo grupo-descripcion">*@
+                    <form asp-action="CreateStructure" method="post">
+                        <div class="fieldset fieldset01">
+                            <fieldset class="mediumLabels">
+                                <h1>Crear estructura</h1>
+                                <div class="fieldsetContent">
+                                    @*<pre>*@
+                                        <textarea cols="75" rows="50" id="structure" name="structure">
+                                        @Model.Structure
+                                        </textarea>
+                                    @*</pre>*@
+                                    <div class="fieldset actionButtons fieldset03">
+                                        <fieldset>
+                                            <p>
+                                                <input class="submit principal" type="submit" value="Agregar estructura">
+                                            </p>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+            @*</div>
+        </div>*@
+    </div>
+</div>

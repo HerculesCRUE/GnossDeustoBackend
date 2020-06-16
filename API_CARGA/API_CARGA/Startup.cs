@@ -1,6 +1,6 @@
 // Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
-// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+// Proyecto Hï¿½rcules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +10,7 @@ using API_CARGA.Middlewares;
 using API_CARGA.ModelExamples;
 using API_CARGA.Models;
 using API_CARGA.Models.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -37,18 +38,58 @@ namespace PRH
         // This method gets called by the runtime. Use this method to add services to the container.
         //</summary>
         public void ConfigureServices(IServiceCollection services)
-        {              
+        {
+            IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+            string authority = "";
+            if (environmentVariables.Contains("Authority"))
+            {
+                authority = environmentVariables["Authority"] as string;
+            }
+            else
+            {
+                authority = Configuration["Authority"];
+            }
+            string scope = "";
+            if (environmentVariables.Contains("ScopeCarga"))
+            {
+                scope = environmentVariables["ScopeCarga"] as string;
+            }
+            else
+            {
+                scope = Configuration["ScopeCarga"];
+            }
             services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 //options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
-
+            services.AddAuthentication(options => {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = authority;
+                    //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
+                    options.RequireHttpsMetadata = false;
+                    options.ApiName = scope;
+                });
+            services.AddAuthorization();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API de carga", Version = "v1",Description= "API de carga" });
                 c.IncludeXmlComments(string.Format(@"{0}comments.xml", System.AppDomain.CurrentDomain.BaseDirectory));
                 c.ExampleFilters();
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme."
+                });
+                c.OperationFilter<SecurityRequirementsOperationFilter>();
             });
             services.AddSwaggerExamplesFromAssemblyOf<ConfigRepositoriesResponse>();
             services.AddSwaggerExamplesFromAssemblyOf<ConfigRepositoryResponse>();
@@ -90,6 +131,9 @@ namespace PRH
             //services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
             services.AddScoped<IShapesConfigService, ShapesConfigBDService>();
             services.AddScoped<ICallNeedPublishData, CallApiNeedInfoPublisData>();
+            services.AddScoped(typeof(ConfigTokenService));
+            services.AddScoped(typeof(CallTokenService));
+            services.AddScoped(typeof(CallUri)); 
             //services.AddSingleton<ISyncConfigService, SyncConfigMockService>();
 
         }
@@ -103,7 +147,7 @@ namespace PRH
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseAuthentication();
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseHttpsRedirection();
 

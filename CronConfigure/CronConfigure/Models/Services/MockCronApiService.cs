@@ -64,6 +64,11 @@ namespace CronConfigure.Models.Services
             }
         }
 
+        public JobViewModel GetJob(string id)
+        {
+            return new JobViewModel();
+        }
+
         public List<JobViewModel> GetJobs(JobType type, int from, int count)
         {
             return new List<JobViewModel>();

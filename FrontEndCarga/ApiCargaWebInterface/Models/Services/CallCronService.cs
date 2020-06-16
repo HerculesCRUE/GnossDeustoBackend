@@ -3,6 +3,7 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Servicio para hacer llamadas al api de cron
 using ApiCargaWebInterface.Extra.Exceptions;
+using ApiCargaWebInterface.Models.Entities;
 using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http;
@@ -17,13 +18,17 @@ namespace ApiCargaWebInterface.Models.Services
             _serviceUrl = serviceUrl;
         }
 
-        public string CallDeleteApi(string urlMethod)
+        public string CallDeleteApi(string urlBase, string urlMethod, TokenBearer token = null)
         {
             string result = "";
             HttpResponseMessage response = null;
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
                 string url = _serviceUrl.GetUrl();
                 response = client.DeleteAsync($"{url}{urlMethod}").Result;
                 response.EnsureSuccessStatusCode();
@@ -43,13 +48,17 @@ namespace ApiCargaWebInterface.Models.Services
             return result;
         }
 
-        public string CallGetApi(string urlMethod)
+        public string CallGetApi(string urlBase, string urlMethod, TokenBearer token = null)
         {
             string result = "";
             HttpResponseMessage response = null;
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
                 string url = _serviceUrl.GetUrl();
                 response = client.GetAsync($"{url}{urlMethod}").Result;
                 response.EnsureSuccessStatusCode();
@@ -69,7 +78,7 @@ namespace ApiCargaWebInterface.Models.Services
             return result;
         }
 
-        public string CallPostApi(string urlMethod, object item, bool isFile = false)
+        public string CallPostApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false, string fileName = "rdfFile")
         {
             string stringData = JsonConvert.SerializeObject(item);
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
@@ -78,6 +87,10 @@ namespace ApiCargaWebInterface.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
                 string url = _serviceUrl.GetUrl();
                 response = client.PostAsync($"{url}{urlMethod}", contentData).Result;
                 response.EnsureSuccessStatusCode();
@@ -101,7 +114,7 @@ namespace ApiCargaWebInterface.Models.Services
             }
         }
 
-        public string CallPutApi(string urlMethod, object item, bool isFile = false)
+        public string CallPutApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false, string fileName = "rdfFile")
         {
             string stringData = JsonConvert.SerializeObject(item);
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
@@ -110,6 +123,10 @@ namespace ApiCargaWebInterface.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
                 string url = _serviceUrl.GetUrl();
                 response = client.PutAsync($"{url}{urlMethod}", contentData).Result;
                 response.EnsureSuccessStatusCode();

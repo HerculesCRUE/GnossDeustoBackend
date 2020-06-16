@@ -13,8 +13,8 @@ namespace XUnitTestIntegracion
             try
             {
                 ConfigUrlService configUrl = new ConfigUrlService();
-                CallApiService callService = new CallApiService(configUrl);
-                CallShapeConfigApiService callRepository = new CallShapeConfigApiService(callService);
+                CallApiService callService = new CallApiService();
+                CallShapeConfigApiService callRepository = new CallShapeConfigApiService(callService, null, configUrl);
                 var resultado = callRepository.GetShapeConfigs();
                 Assert.True(true);
             }
@@ -30,8 +30,8 @@ namespace XUnitTestIntegracion
             try
             {
                 ConfigUrlService configUrl = new ConfigUrlService();
-                CallApiService callService = new CallApiService(configUrl);
-                CallShapeConfigApiService callRepository = new CallShapeConfigApiService(callService);
+                CallApiService callService = new CallApiService();
+                CallShapeConfigApiService callRepository = new CallShapeConfigApiService(callService, null, configUrl);
                 Guid id = Guid.NewGuid();
                 var resultado = callRepository.GetShapeConfig(id);
                 Assert.True(true);
@@ -48,8 +48,8 @@ namespace XUnitTestIntegracion
             try
             {
                 ConfigUrlService configUrl = new ConfigUrlService();
-                CallApiService callService = new CallApiService(configUrl);
-                CallShapeConfigApiService callRepository = new CallShapeConfigApiService(callService);
+                CallApiService callService = new CallApiService();
+                CallShapeConfigApiService callRepository = new CallShapeConfigApiService(callService, null, configUrl);
                 Guid id = Guid.NewGuid();
                 var resultado = callRepository.DeleteShapeConfig(id);
                 Assert.True(true);

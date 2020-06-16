@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
@@ -27,15 +28,27 @@ namespace API_CARGA.Models.Services
         ///</summary>
         ///<param name="urlMethod">método al que se hace la llamada</param>
         //http://herc-as-front-desa.atica.um.es/etl/ListIdentifiers/13131?metadataPrefix=rdf
-        public string CallGetApi(string urlMethod)
+        public string CallGetApi(string urlMethod, TokenBearer token = null)
         {
             string result = "";
             HttpResponseMessage response = null;
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
                 string url = _serviceUrl.GetUrl();
-                response = client.GetAsync($"{url}{urlMethod}").Result;
+                try
+                {
+                    string ruta = $"{url}{urlMethod}";
+                    response = client.GetAsync(ruta).Result;
+                }
+                catch (TaskCanceledException ex)
+                {
+                    throw new TaskCanceledException(ex.Message);
+                }
                 response.EnsureSuccessStatusCode();
                 result = response.Content.ReadAsStringAsync().Result;
             }
@@ -50,6 +63,7 @@ namespace API_CARGA.Models.Services
                     throw new HttpRequestException(response.ReasonPhrase);
                 }
             }
+
             return result;
         }
 
@@ -57,12 +71,13 @@ namespace API_CARGA.Models.Services
         ///Realizar una llamda Post al método /etl/data-publish para publicar un rdf
         ///</summary>
         ///<param name="rdf">contenido en rdf a publicar</param>
-        public void CallDataPublish(string rdf)
+        ///<param name="token">Token de tipo Bearer para la seguridad entre apis</param>
+        public void CallDataPublish(string rdf, TokenBearer token = null)
         {
             var bytes = Encoding.UTF8.GetBytes(rdf);
             MultipartFormDataContent multiContent = new MultipartFormDataContent();
             multiContent.Add(new ByteArrayContent(bytes), "rdfFile", "rdfFile.rdf");
-            CallPostApiFile("etl/data-publish", multiContent);
+            CallPostApiFile("etl/data-publish", multiContent, token);
         }
 
         ///<summary>
@@ -70,12 +85,13 @@ namespace API_CARGA.Models.Services
         ///</summary>
         ///<param name="rdf">contenido en rdf a publicar</param>
         ///<param name="repositoryIdentifier">Identificador del repositorio</param>
-        public void CallDataValidate(string rdf, Guid repositoryIdentifier)
+        ///<param name="token">Token de tipo Bearer para la seguridad entre apis</param>
+        public void CallDataValidate(string rdf, Guid repositoryIdentifier, TokenBearer token = null)
         {
             var bytes = Encoding.UTF8.GetBytes(rdf);
             MultipartFormDataContent multiContent = new MultipartFormDataContent();
             multiContent.Add(new ByteArrayContent(bytes), "rdfFile", "rdfFile.rdf");
-            string response = CallPostApiFile("etl/data-validate", multiContent, "repositoryIdentifier=" + repositoryIdentifier.ToString());
+            string response = CallPostApiFile("etl/data-validate", multiContent, token, "repositoryIdentifier=" + repositoryIdentifier.ToString());
             ShapeReport shapeReport = JsonConvert.DeserializeObject<ShapeReport>(response);
             if (!shapeReport.conforms && shapeReport.severity == "http://www.w3.org/ns/shacl#Violation")
             {
@@ -84,13 +100,15 @@ namespace API_CARGA.Models.Services
         }
 
 
+
         ///<summary>
         ///Realizar una llamda Post para enviar un fichero
         ///</summary>
         ///<param name="urlMethod">método a llamar</param>
         ///<param name="item">Objeto con el fichero</param>
         ///<param name="parameters">parametros adicionales en formato queryString</param>
-        public string CallPostApiFile(string urlMethod, MultipartFormDataContent item, string parameters = null)
+        ///<param name="token">Token de tipo Bearer para la seguridad entre apis</param>
+        public string CallPostApiFile(string urlMethod, MultipartFormDataContent item, TokenBearer token = null, string parameters = null)
         {
             //string stringData = JsonConvert.SerializeObject(item);
             //var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
@@ -99,6 +117,10 @@ namespace API_CARGA.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
                 string url = _serviceUrl.GetUrl() + urlMethod;
                 if (parameters != null)
                 {

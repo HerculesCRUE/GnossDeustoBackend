@@ -20,13 +20,13 @@ namespace CronConfigure.Models.Services
         {
             _serviceUrl = serviceUrl;
         }
-
         ///<summary>
         ///Hace llamadas Post
         ///</summary>
         ///<param name="urlMethod">url del método a llamar, esta url se encdaenará con url configurada</param>
         ///<param name="item">objeto a pasar</param>
-        public string CallPostApi(string urlMethod, object item)
+        ///<param name="token">Token del tipo Bearer para incluir seguridad si hiciese falta a la llamada de las apis</param>
+        public string CallPostApi(string urlMethod, object item, TokenBearer token = null)
         {
             string stringData = JsonConvert.SerializeObject(item);
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
@@ -35,6 +35,10 @@ namespace CronConfigure.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
                 client.Timeout = TimeSpan.FromDays(1);
                 string url = _serviceUrl.GetUrl();
                 response = client.PostAsync($"{url}{urlMethod}", contentData).Result;

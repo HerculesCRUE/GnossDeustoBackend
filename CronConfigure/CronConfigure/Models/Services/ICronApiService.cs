@@ -70,5 +70,6 @@ namespace CronConfigure.Models.Services
         ///</summary>
         ///<param name="id">identificador de la tarea programada</param>
         public bool ExistScheduledJob(string id);
+        public JobViewModel GetJob(string id);
     }
 }

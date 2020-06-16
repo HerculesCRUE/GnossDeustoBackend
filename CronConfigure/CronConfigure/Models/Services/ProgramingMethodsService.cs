@@ -18,11 +18,16 @@ namespace CronConfigure.Models.Services
     {
         private CallApiService _serviceApi;
         private HangfireEntityContext _context;
+        readonly TokenBearer _token;
 
-        public ProgramingMethodsService(CallApiService serviceApi, HangfireEntityContext context)
+        public ProgramingMethodsService(CallApiService serviceApi, HangfireEntityContext context, CallTokenService tokenService)
         {
             _serviceApi = serviceApi;
             _context = context;
+            if (tokenService != null)
+            {
+                _token = tokenService.CallTokenCarga();
+            }
         }
 
         [AutomaticRetry(Attempts = 0, DelaysInSeconds = new int[] { 3600 })]
@@ -46,7 +51,7 @@ namespace CronConfigure.Models.Services
                     fecha_from = fecha,
                     set = pSet
                 };
-                string result = _serviceApi.CallPostApi($"sync/execute", objeto);///{idRepository}
+                string result = _serviceApi.CallPostApi($"sync/execute", objeto, _token);///{idRepository}
                 result = JsonConvert.DeserializeObject<string>(result);
                 return result;
             }
@@ -73,7 +78,7 @@ namespace CronConfigure.Models.Services
         {
             ConfigUrlService serviceUrl = new ConfigUrlService();
             CallApiService serviceApi = new CallApiService(serviceUrl);
-            ProgramingMethodsService service = new ProgramingMethodsService(serviceApi, null);
+            ProgramingMethodsService service = new ProgramingMethodsService(serviceApi, null, null);
 
             RecurringJob.AddOrUpdate(nombreCron, () => service.PublishRepositories(idRepository, fecha, set, codigoObjeto), cronExpression);
         }
@@ -92,7 +97,8 @@ namespace CronConfigure.Models.Services
             JobRepository jobRepository = new JobRepository()
             {
                 IdJob = id,
-                IdRepository = idRepository
+                IdRepository = idRepository,
+                FechaEjecucion = fechaInicio
             };
             _context.JobRepository.Add(jobRepository);
             _context.SaveChanges();
@@ -114,8 +120,9 @@ namespace CronConfigure.Models.Services
             string id = BackgroundJob.Schedule(() => ProgramRecurringJob(idRepository,nombreCron,cronExpression,fecha,set,codigoObjeto), fechaInicio);
             JobRepository jobRepository = new JobRepository()
             {
-                IdJob = $"{id}_{nombreCron}",
-                IdRepository = idRepository
+                IdJob = $"{id}_{nombreCron}_{cronExpression}",
+                IdRepository = idRepository,
+                FechaEjecucion = fechaInicio
             };
             _context.JobRepository.Add(jobRepository);
             _context.SaveChanges();

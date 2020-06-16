@@ -24,6 +24,9 @@ namespace CronConfigure.Migrations
                     b.Property<string>("IdJob")
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("FechaEjecucion")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<Guid>("IdRepository")
                         .HasColumnType("uuid");
 

@@ -14,6 +14,7 @@ using CronConfigure.Models;
 using CronConfigure.Models.Services;
 using Hangfire;
 using Hangfire.PostgreSql;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -50,6 +51,24 @@ namespace CronConfigure
             {
                 connectionHangfireString = Configuration.GetConnectionString("HangfireConnection");
             }
+            string authority = "";
+            if (environmentVariables.Contains("Authority"))
+            {
+                authority = environmentVariables["Authority"] as string;
+            }
+            else
+            {
+                authority = Configuration["Authority"];
+            }
+            string scope = "";
+            if (environmentVariables.Contains("Scope"))
+            {
+                scope = environmentVariables["Scope"] as string;
+            }
+            else
+            {
+                scope = Configuration["Scope"];
+            }
             //Add Hangfire services.
             services.AddHangfire((isp, configuration) => configuration
                 .SetDataCompatibilityLevel(CompatibilityLevel.Version_110)
@@ -60,7 +79,18 @@ namespace CronConfigure
                     InvisibilityTimeout = TimeSpan.FromDays(1)
                 }));
 
-
+            services.AddAuthentication(options => {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = authority;
+                    //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
+                    options.RequireHttpsMetadata = false;
+                    options.ApiName = scope;
+                });
+            services.AddAuthorization();
             services.AddHangfireServer();
 
             services.AddSwaggerGen(options =>
@@ -70,6 +100,16 @@ namespace CronConfigure
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
                 //options.SchemaFilter<EnumSchemaFilter>();
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme."
+                });
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
             });
             services.Configure<ForwardedHeadersOptions>(options =>
             {
@@ -85,10 +125,13 @@ namespace CronConfigure
 
             });
 
-            services.AddScoped<ICronApiService, CronApiService>();
+            services.AddScoped<ICronApiService, CronApiService>(); 
             services.AddScoped<IProgramingMethodService, ProgramingMethodsService>();
+            services.AddScoped<IRepositoryCronService, RepositoryCronService>();
             services.AddScoped(typeof(CallApiService));
-            services.AddSingleton(typeof(ConfigUrlService)); 
+            services.AddSingleton(typeof(ConfigUrlService));
+            services.AddScoped(typeof(ConfigTokenService));
+            services.AddScoped(typeof(CallTokenService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -96,13 +139,14 @@ namespace CronConfigure
         {
             app.Use((context, next) =>
             {
-                context.Request.PathBase = "/cron-config";
+                //context.Request.PathBase = "/cron-config";
                 return next();
             });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseAuthentication();
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<HangfireEntityContext>();

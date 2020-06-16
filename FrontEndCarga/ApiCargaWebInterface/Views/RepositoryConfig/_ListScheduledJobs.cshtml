@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ApiCargaWebInterface.ViewModels.ScheduledJobViewModel>
+
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="items tabla">
+        <div class="cabecera">
+            <div class="columna">
+                <p>Clave</p>
+            </div>
+            <div class="columna">
+                <p>Fecha de ejecución</p>
+            </div>
+            <div class="columna acciones">
+                <p>Acciones</p>
+            </div>
+        </div>
+        @foreach (var scheduled in Model)
+        {
+            <div class="fila">
+                <div class="columna principal">
+                    <p>@scheduled.Key</p>
+                </div>
+                <div class="columna">
+                    <p>@scheduled.EnqueueAt</p>
+                </div>
+                <div class="columna acciones">
+                    <ul>
+                        @*<li>
+                                <a href="@Url.Action("Details", "ShapeConfig", new {  id=shape.ShapeConfigID  })" class="ver">
+                                    <i class="material-icons">remove_red_eye</i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Edit", "ShapeConfig", new {  id=shape.ShapeConfigID  })" class="editar">
+                                    <i class="material-icons">mode_edit</i>
+                                </a>
+                            </li>*@
+                        <li>
+                            <a href="@Url.Action("Delete", "Job", new {  id=scheduled.Key, job="scheduled"  })" class="borrar">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+}

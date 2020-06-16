@@ -4,6 +4,7 @@
 // Controlador Shapes
 using System;
 using System.Collections.Generic;
+using System.Text;
 using ApiCargaWebInterface.Extra.Exceptions;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
@@ -35,6 +36,23 @@ namespace ApiCargaWebInterface.Controllers
             if (result != null)
             {
                 return View(result);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet("[Controller]/download/{id}")]
+        public IActionResult DownloadShape(Guid id)
+        {
+            ShapeConfigViewModel result = _serviceApi.GetShapeConfig(id);
+            if (result != null)
+            {
+                var content = new System.IO.MemoryStream(Encoding.ASCII.GetBytes(result.Shape));
+                var contentType = "APPLICATION/octet-stream";
+                var fileName = $"{id}_shape.txt";
+                return File(content, contentType, fileName);
             }
             else
             {

@@ -1,0 +1,33 @@
+﻿@model ApiCargaWebInterface.ViewModels.WebUriStructureViewModel
+
+@{
+    ViewData["Title"] = Model.Name + " - Structure";
+    ViewData["BodyClass"] = "fichaRecurso";
+}
+
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <div class="header-resource">
+                <div class="h1-container">
+                    <h1>@Model.Name</h1>
+                    <div class="botones">
+                        <a href="@Url.Action("Delete", new {name=@Model.Name })" class="btn btn-eliminar">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="contenido">
+                <div class="grupo grupo-descripcion">
+                    <pre>
+                        <code id="structure">
+                            @Model.Structure
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

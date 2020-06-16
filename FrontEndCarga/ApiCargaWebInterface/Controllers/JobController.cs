@@ -43,7 +43,7 @@ namespace ApiCargaWebInterface.Controllers
         public IActionResult Create(CreateJobViewModel jobModel)
         {
             var correct = CrontabSchedule.TryParse(jobModel.CronExpression);
-            if (correct != null)
+            if (correct == null)
             {
                 ModelState.AddModelError("CronExpression", "expresión del cron inválida");
             }
@@ -81,6 +81,19 @@ namespace ApiCargaWebInterface.Controllers
                 }
             }
             
+        }
+
+        public IActionResult Delete(string id, string job)
+        {
+            if (job.Equals("scheduled"))
+            {
+                _serviceApi.DeleteScheduledJob(id);
+            }
+            else if (job.Equals("recurring"))
+            {
+                _serviceApi.DeleteRecurringJob(id);
+            }
+            return View("Deleted", id);
         }
 
         public IActionResult Syncro(Guid repositoryId)

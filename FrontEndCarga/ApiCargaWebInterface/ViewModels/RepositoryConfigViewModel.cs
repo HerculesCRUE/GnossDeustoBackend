@@ -20,5 +20,12 @@ namespace ApiCargaWebInterface.ViewModels
 
         [Display(Name = "Shapes Configurados")]
         public List<ShapeConfigViewModel> ShapeConfig { get; set; }
+        [Display(Name = "Tareas recurrentes Configuradas")]
+        public List<RecurringJobViewModel> ListRecurringJobs { get; set; }
+        [Display(Name = "Tareas Ejecutadas")]
+        public List<JobViewModel> ListJobs { get; set; }
+        [Display(Name = "Tareas Programadas")]
+        public List<ScheduledJobViewModel> ListScheduledJobs { get; set; }
+
     }
 }

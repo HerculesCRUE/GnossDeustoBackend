@@ -22,6 +22,7 @@ namespace OAI_PMH.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class OAI_PMHController : Controller
     {
         private IOaiConfiguration _configOAI;
@@ -82,6 +83,7 @@ namespace OAI_PMH.Controllers
 
             var memoryStream = new MemoryStream();
             var xmlWriter = XmlWriter.Create(memoryStream);
+
             document.WriteTo(xmlWriter);
             xmlWriter.Flush();
             byte[] array = memoryStream.ToArray();

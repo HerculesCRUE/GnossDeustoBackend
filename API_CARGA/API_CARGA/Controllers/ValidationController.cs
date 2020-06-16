@@ -9,6 +9,7 @@ using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
 using API_CARGA.Models.Utility;
 using API_CARGA.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -22,6 +23,7 @@ namespace API_CARGA.Controllers
     /// </summary>
     [Route("etl-config/[controller]")]
     [ApiController]
+    [Authorize]
     public class ValidationController : ControllerBase
     {
         IShapesConfigService _shapeConfigService;

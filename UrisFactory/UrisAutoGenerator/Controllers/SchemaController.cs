@@ -15,6 +15,7 @@ using UrisFactory.Models.Services;
 using Swashbuckle.AspNetCore.Filters;
 using UrisFactory.ModelExamples;
 using Swashbuckle.AspNetCore.Annotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UrisFactory.Controllers
 {
@@ -23,6 +24,7 @@ namespace UrisFactory.Controllers
     /// </summary>
     [ApiController]
     [Route("[Controller]")]
+    [Authorize]
     public class SchemaController : Controller
     {
         private ConfigJsonHandler _configJsonHandler;

@@ -5,6 +5,7 @@
 using System;
 using System.Net.Http;
 using System.Text;
+using API_CARGA.Models.Entities;
 
 namespace API_CARGA.Models.Services
 {
@@ -13,12 +14,12 @@ namespace API_CARGA.Models.Services
     ///</summary>
     public class CallMockNeedPublishData: ICallNeedPublishData
     {
-        public void CallDataPublish(string rdf)
+        public void CallDataPublish(string rdf, TokenBearer token = null)
         {
             
         }
 
-        public void CallDataValidate(string rdf, Guid repositoryIdentifier)
+        public void CallDataValidate(string rdf, Guid repositoryIdentifier, TokenBearer token = null)
         {
             
         }
@@ -27,7 +28,7 @@ namespace API_CARGA.Models.Services
         ///Simula realizar una llamada para la obtención de unos datos ficticios que harían esas llamadas
         ///</summary>
         ///<param name="urlMethod">método a llamar</param>
-        public string CallGetApi(string urlMethod)
+        public string CallGetApi(string urlMethod, TokenBearer token = null)
         {
             string xml = "";
             if (urlMethod.Contains("ListIdentifiers"))
@@ -124,7 +125,7 @@ namespace API_CARGA.Models.Services
             return xml;
         }
 
-        public string CallPostApiFile(string urlMethod, MultipartFormDataContent item, string parameters = null)
+        public string CallPostApiFile(string urlMethod, MultipartFormDataContent item, TokenBearer token = null, string parameters = null)
         {
             return "";
         }
