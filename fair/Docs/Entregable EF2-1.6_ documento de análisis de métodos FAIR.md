@@ -5,23 +5,23 @@
 Contents
 ========
 
-[**1.** **Introducción**](#introducción)
+[**1.** **Introducción**](#1-introducción)
 
-[**1.1.** **Findable (Encontrable/Localizable)**](#findable-encontrablelocalizable)
+[**1.1.** **Findable (Encontrable/Localizable)**](#11-findable-encontrablelocalizable)
 
-[**1.2.** **Accesible**](#accesible)
+[**1.2.** **Accesible**](#12-accesible)
 
-[**1.3.** **Interoperable**](#interoperable)
+[**1.3.** **Interoperable**](#13-interoperable)
 
-[**1.4.** **Reutilizable**](#reutilizable)
+[**1.4.** **Reutilizable**](#14-reutilizable)
 
-[**1.5.** **Aplicación de los principios FAIR en hercules-ASIO**](#aplicación-de-los-principios-fair-en-hercules-asio)
+[**1.5.** **Aplicación de los principios FAIR en hercules-ASIO**](#15-aplicación-de-los-principios-fair-en-hercules-asio)
 
-[**2.** **Conceptos FAIR**](#conceptos-fair)
+[**2.** **Conceptos FAIR**](#2-conceptos-fair)
 
-[**3.** **Alineación de HERCULES-ASIO con los principios FAIR**](#alineación-de-hercules-asio-con-los-principios-fair)
+[**3.** **Alineación de HERCULES-ASIO con los principios FAIR**](#3-alineación-de-hercules-asio-con-los-principios-fair)
 
-[**4.** **Conclusión**](#conclusión)
+[**4.** **Conclusión**](#4-conclusión)
 
 [**Bibliografía**](#bibliografía)
 
