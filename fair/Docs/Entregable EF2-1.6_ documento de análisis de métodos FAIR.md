@@ -296,6 +296,9 @@ dominio de gestión de datos de investigación del proyecto HERCULES-ASIO.
 ![Fair table:](.//media/fair_table_5.png)
 ![Fair table:](.//media/fair_table_6.png)
 ![Fair table:](.//media/fair_table_7.png)
+![Fair table:](.//media/fair_table_8.png)
+![Fair table:](.//media/fair_table_9.png)
+![Fair table:](.//media/fair_table_10.png)
 <!--
 | Principio Fair | Métrica/Explicación | Especificación | Verificación |
 |----------------|---------------------|----------------|--------------|
