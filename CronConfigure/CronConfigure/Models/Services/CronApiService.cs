@@ -2,13 +2,16 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase para gestionar los distintos tipos de tareas
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using CronConfigure.Models.Entitties;
 using CronConfigure.Models.Enumeracion;
 using CronConfigure.ViewModels;
 using Hangfire;
 using Hangfire.Storage;
 using Hangfire.Storage.Monitoring;
+using NCrontab;
 
 namespace CronConfigure.Models.Services
 {
