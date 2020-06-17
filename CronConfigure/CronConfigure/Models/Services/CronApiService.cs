@@ -312,7 +312,14 @@ namespace CronConfigure.Models.Services
                     state = jobDto.History[0].StateName;
                     if (state.Equals("Failed"))
                     {
-                        job.ExceptionDetails = jobDto.History[0].Reason;
+                        if (jobDto.History[0].Data.ContainsKey("ExceptionMessage"))
+                        {
+                            job.ExceptionDetails = jobDto.History[0].Data["ExceptionMessage"];
+                        }
+                        else
+                        {
+                            job.ExceptionDetails = jobDto.History[0].Reason;
+                        }
                     }
                     job.ExecutedAt = jobDto.History[0].CreatedAt;
                 }

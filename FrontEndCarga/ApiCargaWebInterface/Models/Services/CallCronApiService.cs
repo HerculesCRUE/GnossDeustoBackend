@@ -46,11 +46,22 @@ namespace ApiCargaWebInterface.Models.Services
             {
                 uriParams += $"&fecha={newJob.FechaFrom.Value.ToString("dd/MM/yyyy HH:mm")}";
             }
-            string result = _serviceApi.CallPostApi($"{_urlJobApi}?{uriParams}", null, _token);
+            string result = _serviceApi.CallPostApi("",$"{_urlJobApi}?{uriParams}", null, _token);
             guidAdded = JsonConvert.DeserializeObject<string>(result);
             return guidAdded;
         }
 
+        internal List<JobViewModel> GetJobsOfRecurringJob(string name)
+        {
+            string result = _serviceApi.CallGetApi("", $"{_urlRecurringJobApi}/Jobs/{name}", _token);
+            List<JobViewModel> resultObject = JsonConvert.DeserializeObject<List<JobViewModel>>(result);
+            return resultObject;
+        }
+
+        public void ReQueueJob(string idJob)
+        {
+            string result = _serviceApi.CallPostApi("", $"{ _urlJobApi}/{idJob}", null, _token);
+        }
         public string CreateRecurringJob(CreateJobViewModel newJob)
         {//string id_repository, string nombre_job, string fecha_inicio, string cron_expression, string fecha = null, string set = null
             string guidAdded;
@@ -72,7 +83,7 @@ namespace ApiCargaWebInterface.Models.Services
             {
                 uriParams += $"&fecha={newJob.FechaFrom.Value.ToString("dd/MM/yyyy HH:mm")}";
             }
-            string result = _serviceApi.CallPostApi($"{ _urlRecurringJobApi}?{uriParams}", null, _token);
+            string result = _serviceApi.CallPostApi("", $"{ _urlRecurringJobApi}?{uriParams}", null, _token);
             guidAdded = JsonConvert.DeserializeObject<string>(result);
             return guidAdded;
         }
