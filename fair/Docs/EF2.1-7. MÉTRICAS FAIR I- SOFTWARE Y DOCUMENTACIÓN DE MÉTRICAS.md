@@ -531,11 +531,11 @@ siguiente:
 
 2.  Ejecutar los siguientes tres comandos para lanzar el bridge:
 
-    pipenv install
+    `pipenv install`
 
-    pipenv Shell
+    `pipenv Shell`
 
-    python app.py
+    `python app.py`
 
 3.  Seguir las indicaciones de la sección 3.1 para ver ejemplos de uso
     de la API.
@@ -544,7 +544,7 @@ Para generar el front-end swagger hacer lo siguiente:
 
 1.  Ejecutar comando: 
 
-    openapi-generator generate -i openapi.yaml -g python-flask -o codegen\_server/
+    `openapi-generator generate -i openapi.yaml -g python-flask -o codegen\_server/`
 
 2.  Copiar los contenidos del fichero
     `codegen\_server/openapi\_server/controllers/default\_controller\_asio.py`
@@ -553,7 +553,7 @@ Para generar el front-end swagger hacer lo siguiente:
 
 3.  Ejecutar en directorio `codegen\_server/` el comando: 
 
-    python -m openapi\_server
+    `python -m openapi\_server`
 
 4.  Acceder en el navegador a la dirección
     `<http://localhost:8080/v1/ui/>`
