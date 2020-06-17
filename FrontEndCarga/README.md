@@ -17,8 +17,10 @@ Para poder acceder a su información y poder editarla o eliminar el shape tendrem
 ### Factoria de uris
 Interfaz desde la que se puede:
  - Obtener una uri.
- - Descargar el archivo el archivo de configuraciÃ³n de las uris.
- - Reemplazar el archivo de configuraciÃ³n de uris.
+ - Descargar el archivo el archivo de configuración de las uris.
+ - Reemplazar el archivo de configuración de uris.
  - Eliminar una estructura de uris.
  - Añadir una nueva estructura de uris.
  ![](img/urisFactory.png)
+ A la hora de crear una estructura uri nos aparecerá un texto editable en el que aparece una estructura uri a modo de ayuda, como se ve en la siguiente imagen
+![](img/AddUriStructure.png)
