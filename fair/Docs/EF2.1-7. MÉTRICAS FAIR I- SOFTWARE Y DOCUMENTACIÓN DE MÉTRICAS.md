@@ -317,11 +317,19 @@ los siguientes pasos:
     OpenAPI. Se ha acordado dialogar con autores de FAIRmetrics en caso
     de detectarse necesidad de ofrecer nuevas métricas, específicas a la
     gestión de información de investigación.
+    
+Por tanto, una vez revisado el proyecto FAIRMETRICS y su código fuente
+se concluyó que las métricas están suficientemente bien implementadas 
+para poder utilizarse, aunque es claro que podrían extenderse en algunos
+apartados. Por ejemplo, actualmente hay soporte específico para algunos
+formatos de URIs ampliamente utilizados como DOI, pero no para algunos 
+más concretos al ámbito científico como ORCID. En el siguiente apartado 
+de estrategia se explica cómo se plantea realizar estas modificaciones. 
 
 **2.3. Decisión de la estrategia de implementación y evaluación de políticas FAIR**
 ------------------------------------------------------------------------------
 
-Se ha decidido cresar un proxy/bridge API usando OpenAPI, que será
+Se ha decidido crear un proxy/bridge API usando OpenAPI, que será
 utilizada desde back-end HERCULES-ASIO para realizar validación de
 recursos (resources) y de la red de ontologías como tal.
 
