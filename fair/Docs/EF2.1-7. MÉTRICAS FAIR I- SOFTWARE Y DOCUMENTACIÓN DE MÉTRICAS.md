@@ -30,7 +30,7 @@ políticas FAIR**](#23-decisión-de-la-estrategia-de-implementación-y-evaluaci�
 
 [**Bibliografía**](#bibliografía)
 
-[**Apéndice 1. Métricas FAIR en HERCULES-ASIO**](#apéndice-1.-métricas-fair-en-hercules-asio)
+[**Apéndice 1. Métricas FAIR en HERCULES-ASIO**](#apéndice-1-métricas-fair-en-hercules-asio)
 
 **1- Introducción** 
 ===================
