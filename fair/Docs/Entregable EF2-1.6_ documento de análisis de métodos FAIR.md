@@ -25,7 +25,7 @@ Contents
 
 [**Bibliografía**](#bibliografía)
 
-[**Apéndice 1. Métricas publicadas por FAIRmetrics**](#apéndice-1.-métricas-publicadas-por-fairmetrics)
+[**Apéndice 1. Métricas publicadas por FAIRmetrics**](#apéndice-1-métricas-publicadas-por-fairmetrics)
 
 **1. Introducción** 
 ================
