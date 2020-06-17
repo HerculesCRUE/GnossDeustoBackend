@@ -25,5 +25,5 @@ Interfaz desde la que se puede:
  - Eliminar una estructura de uris.
  - Añadir una nueva estructura de uris.
  ![](img/urisFactory.png)
- A la hora de crear una estructura uri nos aparecerá un texto editable en el que aparece una estructura uri a modo de ayuda, como se ve en la siguiente imagen
+ A la hora de crear una estructura uri nos aparecerá un texto editable en el que aparece una estructura uri a modo de ayuda, como se ve en la siguiente imágen
 ![](img/AddUriStructure.png)
