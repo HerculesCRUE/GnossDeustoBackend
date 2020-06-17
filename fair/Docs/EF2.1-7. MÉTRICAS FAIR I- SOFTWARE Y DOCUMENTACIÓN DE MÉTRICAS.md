@@ -107,24 +107,24 @@ la solución propuesta con los principios FAIR:
 1.  Análisis de métodos FAIR (Entregable: documento de análisis). Este
     es el documento presente. Entregado en diciembre 2019.
 
-> **Entregable [EF2-1.6]{.underline}**: documento de análisis de métodos
+> **Entregable [EF2-1.6]**: documento de análisis de métodos
 > FAIR
 
 2.  Definir y desarrollar un módulo de métricas FAIR para evaluación
     automatizada de los recursos (ontologías o datos). Se trata del
     presente entegable.
 
-> **Entregable [EF2-1.7]{.underline}**: ***Métricas FAIR I- software y
+> **Entregable [EF2-1.7]**: ***Métricas FAIR I- software y
 > documentación de métricas***
 
 3.  Publicar los resultados de ejecutar las métricas FAIR
 
-> **Entregable [EF2-1.8a]{.underline}**: Métricas FAIR II - Resultados
+> **Entregable [EF2-1.8a]**: Métricas FAIR II - Resultados
 > publicados en la Web de la evaluación con métricas FAIR, versión 1
 > (primer ciclo de desarrollo realizado - 80%). Fecha por determinar,
 > desde Mayo 2020.
 >
-> **Entregable [EF2-1.8b]{.underline}**: Métricas FAIR II - Resultados
+> **Entregable [EF2-1.8b]**: Métricas FAIR II - Resultados
 > publicados en la Web de la evaluación con métricas FAIR, versión 2.
 > Fecha por determinar, desde Mayo 2020.
 
@@ -529,32 +529,34 @@ siguiente:
 1.  Descargar el código de
     <https://github.com/deustohercules/roh/tree/master/fair/bridge>
 
-2.  Ejecutar los siguientes tres comandos para lanzar el puente:
+2.  Ejecutar los siguientes tres comandos para lanzar el bridge:
 
-    a.  pipenv install
+    pipenv install
 
-    b.  pipenv Shell
+    pipenv Shell
 
-    c.  python app.py
+    python app.py
 
 3.  Seguir las indicaciones de la sección 3.1 para ver ejemplos de uso
     de la API.
 
 Para generar el front-end swagger hacer lo siguiente:
 
-1.  Ejecutar comando: openapi-generator generate -i openapi.yaml -g
-    python-flask -o codegen\_server/
+1.  Ejecutar comando: 
+
+    openapi-generator generate -i openapi.yaml -g python-flask -o codegen\_server/
 
 2.  Copiar los contenidos del fichero
-    codegen\_server/openapi\_server/controllers/default\_controller\_asio.py
+    `codegen\_server/openapi\_server/controllers/default\_controller\_asio.py`
     al fichero automáticamente generado por openapi-generator
-    codegen\_server/openapi\_server/controllers/default\_controller.py
+    `codegen\_server/openapi\_server/controllers/default\_controller.py`
 
-3.  Ejecutar en directorio codegen\_server/ el comando: python -m
-    openapi\_server
+3.  Ejecutar en directorio `codegen\_server/` el comando: 
+
+    python -m openapi\_server
 
 4.  Acceder en el navegador a la dirección
-    <http://localhost:8080/v1/ui/>
+    `<http://localhost:8080/v1/ui/>`
 
 5.  Probar la API a través de la interfaz Swagger generada
 
