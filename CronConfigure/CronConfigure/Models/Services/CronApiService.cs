@@ -2,13 +2,16 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase para gestionar los distintos tipos de tareas
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using CronConfigure.Models.Entitties;
 using CronConfigure.Models.Enumeracion;
 using CronConfigure.ViewModels;
 using Hangfire;
 using Hangfire.Storage;
 using Hangfire.Storage.Monitoring;
+using NCrontab;
 
 namespace CronConfigure.Models.Services
 {
@@ -290,6 +293,10 @@ namespace CronConfigure.Models.Services
             return _context.Set.Any(item => item.Key.Equals("schedule") && item.Value.Equals(id));
         }
 
+        ///<summary>
+        ///Obtiene los datos de una tarea concreta
+        ///</summary>
+        ///<param name="id">identificador de la tarea</param>
         public JobViewModel GetJob(string id)
         {
             var api = JobStorage.Current.GetMonitoringApi();
@@ -303,9 +310,13 @@ namespace CronConfigure.Models.Services
                 if (jobDto.History.Count > 0)
                 {
                     state = jobDto.History[0].StateName;
+                    if (state.Equals("Failed"))
+                    {
+                        job.ExceptionDetails = jobDto.History[0].Reason;
+                    }
                     job.ExecutedAt = jobDto.History[0].CreatedAt;
                 }
-                job.ExceptionDetails = "";
+                
                 job.Id = id;
                 if (jobDto.Job != null) 
                 {

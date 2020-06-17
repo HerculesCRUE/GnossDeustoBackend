@@ -6,6 +6,7 @@ using System;
 using CronConfigure.Models.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CronConfigure.Controllers
 {

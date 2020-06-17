@@ -4,6 +4,7 @@
 // Controlador para gestionar las tareas tareas recurrentes creadas así como crear tareas recurrentes nuevas
 using System;
 using CronConfigure.Models.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NCrontab;

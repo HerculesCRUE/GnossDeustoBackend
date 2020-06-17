@@ -39,6 +39,21 @@ namespace ApiCargaWebInterface.Controllers
                 return View();
             }
         }
+
+        [HttpGet("[Controller]/{id}")]
+        public IActionResult DetailsJob(string id)
+        {
+           var job = _serviceApi.GetJob(id);
+            return View(job);
+        }
+
+        [HttpGet("[Controller]/recurring/{name}")]
+        public IActionResult DetailsRecurringJob(string name)
+        {
+            var recurringJob = _serviceApi.GetRecurringJob(name);
+            return View(recurringJob);
+        }
+
         [HttpPost]
         public IActionResult Create(CreateJobViewModel jobModel)
         {

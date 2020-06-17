@@ -3,6 +3,7 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Sirve para hacer llamadas a un API cuya url base esta configurada en UrlConfig del appSettings.json
 using CronConfigure.Exceptions;
+using CronConfigure.Models.Entitties;
 using Newtonsoft.Json;
 using System;
 using System.Net;

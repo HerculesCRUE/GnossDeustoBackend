@@ -69,6 +69,11 @@ namespace CronConfigure.Models.Services
             return new JobViewModel();
         }
 
+        public JobViewModel GetJobData(string id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public List<JobViewModel> GetJobs(JobType type, int from, int count)
         {
             return new List<JobViewModel>();

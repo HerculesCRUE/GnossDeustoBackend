@@ -88,5 +88,19 @@ namespace ApiCargaWebInterface.Models.Services
             string result = _serviceApi.CallDeleteApi("",$"{_urlScheduledJobApi}?id={id}", _token);
             result = JsonConvert.DeserializeObject<string>(result);
         }
+
+        public JobViewModel GetJob(string id)
+        {
+            string result = _serviceApi.CallGetApi("", $"{_urlJobApi}/{id}", _token);
+            JobViewModel resultObject = JsonConvert.DeserializeObject<JobViewModel>(result);
+            return resultObject;
+        }
+
+        public RecurringJobViewModel GetRecurringJob(string name)
+        {
+            string result = _serviceApi.CallGetApi("", $"{_urlRecurringJobApi}/{name}", _token);
+            RecurringJobViewModel resultObject = JsonConvert.DeserializeObject<RecurringJobViewModel>(result);
+            return resultObject;
+        }
     }
 }
