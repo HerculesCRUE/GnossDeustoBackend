@@ -1,3 +1,5 @@
+![](./Docs/media/CabeceraDocumentosMD.png)
+
 # Métricas FAIR
 
 Contamos con la siguiente documentación:
