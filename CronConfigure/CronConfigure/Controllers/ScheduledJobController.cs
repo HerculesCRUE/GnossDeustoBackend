@@ -4,6 +4,7 @@
 // Controlador para gestionar las tareas programadas y crear tareas nuevas programadas para una fecha determinada
 using System;
 using CronConfigure.Models.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
