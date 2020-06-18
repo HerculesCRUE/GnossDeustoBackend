@@ -80,12 +80,13 @@ Factoría de URIs
 ----------------
 
 Interfaz desde la que se puede:
- - Obtener una uri.
- - Descargar el archivo el archivo de configuración de las uris.
- - Reemplazar el archivo de configuración de uris.
- - Eliminar una estructura de uris.
- - Añadir una nueva estructura de uris.
+ - Obtener un URI.
+ - Descargar el archivo el archivo de configuración de los URIs.
+ - Reemplazar el archivo de configuración de URIs.
+ - Eliminar una estructura de URIs.
+ - Añadir una nueva estructura de URIs.
  ![](img/urisFactory.png)
- A la hora de crear una estructura uri nos mostrará un texto editable en el que aparece una
- estructura URI a modo de ayuda, como se ve en la siguiente imágen:
+ 
+ A la hora de crear una estructura URI nos mostrará un texto editable en el que aparece una
+ estructura a modo de ayuda, como se ve en la siguiente imágen:
 ![](img/AddUriStructure.png)
