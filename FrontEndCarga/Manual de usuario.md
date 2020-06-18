@@ -12,7 +12,7 @@
 
 [Listado de shapes](#listado-de-shapes)
 
-[Factoría de URIs](#factoria-de-uris)
+[Factoría de URIs](#factoría-de-uris)
 
 Introducción
 ------------
