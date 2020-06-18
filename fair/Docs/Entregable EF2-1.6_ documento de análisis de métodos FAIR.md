@@ -524,6 +524,5 @@ https://www.w3.org/TR/shacl/. \[Accedido: 25-nov-2019\].
 **Apéndice 1. Métricas publicadas por FAIRmetrics**
 ===================================================
 
-FAIR Metrics ALL
-[FAIR Metrics ALL](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/fair/Docs/Entregable%20EF2-1.6%20AP%C3%89NDICE%20M%C3%A9tricas%20publicadas%20por%20FAIRmetrics.pdf), Mark D. Wilkinson, Susanna-Assunta Sansone,
+Reporte técnico en el que se ha basado el análisis de métricas FAIR: [FAIR Metrics ALL](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/fair/Docs/Entregable%20EF2-1.6%20AP%C3%89NDICE%20M%C3%A9tricas%20publicadas%20por%20FAIRmetrics.pdf), Mark D. Wilkinson, Susanna-Assunta Sansone,
 Erik Schultes, Peter Doorn, Luiz Olavo Bonino da Silva Santos, Michel Dumontier, July 4, 2018
