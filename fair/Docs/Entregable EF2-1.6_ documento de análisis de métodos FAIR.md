@@ -484,27 +484,40 @@ principios FAIR.
 
 **Bibliografía**
 ================
-
 \[1\] M. D. Wilkinson *et al.*, «The FAIR Guiding Principles for
 scientific data management and stewardship», *Scientific Data*, vol. 3,
-n.^o^ 1, pp. 1-9, mar. 2016.\[2\] Mark Wilkinson, Erik Schultes, Luiz
+n.^o^ 1, pp. 1-9, mar. 2016.
+
+\[2\] Mark Wilkinson, Erik Schultes, Luiz
 Olavo Bonino, Susanna-Assunta Sansone, Peter Doorn, y Michel Dumontier,
 *FAIRMetrics/Metrics: FAIR Metrics, Evaluation results, and initial
-release of automated evaluator code*. Zenodo, 2018.\[3\] P. O. of the E.
+release of automated evaluator code*. Zenodo, 2018.
+
+\[3\] P. O. of the E.
 Union, «Turning FAIR into reality : final report and action plan from
 the European Commission expert group on FAIR data.», 26-nov-2018. \[En
 línea\]. Disponible en:
 https://op.europa.eu:443/en/publication-detail/-/publication/7769a148-f1f6-11e8-9982-01aa75ed71a1/language-en/format-PDF.
-\[Accedido: 23-nov-2019\].\[4\] F. Admin, «Guiding Principles for
+\[Accedido: 23-nov-2019\].
+
+\[4\] F. Admin, «Guiding Principles for
 Findable, Accessible, Interoperable and Re-usable Data Publishing
 version b1.0», *FORCE11*, 10-sep-2014. \[En línea\]. Disponible en:
-https://www.force11.org/fairprinciples. \[Accedido: 23-nov-2019\].\[5\]
+https://www.force11.org/fairprinciples. \[Accedido: 23-nov-2019\].
+
+\[5\]
 M. D. Wilkinson, S.-A. Sansone, E. Schultes, P. Doorn, L. O. B. da S.
 Santos, y M. Dumontier, «A design framework and exemplar metrics for
-FAIRness», *bioRxiv*, p. 225490, dic. 2017.\[6\] «FAIRsharing». \[En
+FAIRness», *bioRxiv*, p. 225490, dic. 2017.
+
+\[6\] «FAIRsharing». \[En
 línea\]. Disponible en: https://fairsharing.org/. \[Accedido:
-24-nov-2019\].\[7\] «Home - schema.org». \[En línea\]. Disponible en:
-https://schema.org/. \[Accedido: 24-nov-2019\].\[8\] «Shapes Constraint
+24-nov-2019\].
+
+\[7\] «Home - schema.org». \[En línea\]. Disponible en:
+https://schema.org/. \[Accedido: 24-nov-2019\].
+
+\[8\] «Shapes Constraint
 Language (SHACL)». \[En línea\]. Disponible en:
 https://www.w3.org/TR/shacl/. \[Accedido: 25-nov-2019\].
 
