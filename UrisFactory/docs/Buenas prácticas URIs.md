@@ -10,6 +10,8 @@
 
 [Prácticas relativas a la gestión de recursos semánticos a través de URI](#prácticas-relativas-a-la-gestión-de-recursos-semánticos-a-través-de-uri)
 
+[Política de persistencia y contrato de buenas prácticas](#política-de-persistencia-y-contrato-de-buenas-prácticas)
+
 [Ejemplos de uso](#ejemplos-de-uso)
 
 INTRODUCCIÓN
@@ -87,10 +89,10 @@ semánticos descritos en RDF:
 
 a)  Los URI son HTTP, que permiten el desreferenciado y el acceso a la 
     información identificada como un componente más de la WWW, lo que 
-    supone además otros beneficios, como el enlazado, el uso     
+    supone además otros beneficios, como el enlazado, el uso 
     de cache de contenido y la indexación por parte de motores de búsqueda.
 
-b)  Cumplir el principio de persistencia de los URIs, lo que significa
+b)  Cumplir el principio de **persistencia de los URIs**, lo que significa
     que los que ya han sido creados previamente nunca deberían variar, y
     que el contenido al que hacen referencia debería ser accesible. En
     el caso de que sea necesario cambiar o eliminar el recurso al que
@@ -136,6 +138,35 @@ g)  Cuando se establezcan enlaces entre distintos recursos de
     información, se procurará la generación de enlaces que conecten los
     recursos bidireccionales para facilitar la navegación sobre los
     recursos de información en ambos sentidos.
+    
+Política de persistencia y contrato de buenas prácticas
+-------------------------------------------------------
+
+De entre las prácticas de gestión de recursos semámticos del apartado
+anterior, hay que destacar el cumplimiento del principio de persistencia 
+de los URIs. Como se ha indicado, los URIs que ya han sido creados 
+nunca deberían variar y el contenido al que hacen referencia debería ser 
+accesible. 
+
+Sin embargo, en los sistemas informáticos los recursos pueden sufrir 
+cambios o ser eliminados. En esos casos, se deberá establecer un 
+mecanismo que informe sobre el estado del recurso usando los códigos 
+de estado de HTTP. Por ejemplo, si se pudiera ofrecer una redirección 
+a la nueva ubicación del recurso (el nuevo URI), se utilizarían los
+códigos de estado [HTTP 3XX](https://tools.ietf.org/html/rfc2616#page-61); mientras que si el recurso ha sido eliminado
+se utilizaría el código de estado [HTTP 410](https://tools.ietf.org/html/rfc2616#page-68).
+
+Es fundamental que los URI (Uniform Resource Identifier), usados para 
+referenciar la información del SGI mediante Hércules ASIO, compartan un 
+esquema común, apliquen unas reglas de normalización similares y, 
+especialmente, persistan según lo identificado, es decir, que cumplan el
+principio de persistencia para que la información sea accesible en el 
+futuro y se mantenga la integridad de la información.
+
+Como garantía de cumplimiento, las universidades que implanten ASIO se
+comprometen, mediante la adhesión a un "Contrato de buenas prácticas de URIs",
+a cumplir las recomendaciones de este documento, particularmente el
+principio de persistencia.
 
 Ejemplos de uso
 ---------------
