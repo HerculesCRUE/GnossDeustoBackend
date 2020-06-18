@@ -126,6 +126,20 @@ namespace CronConfigure.Controllers
 
         }
 
+        /// <summary>
+        /// devuelve una tarea
+        /// </summary>
+        /// <param name="id">identificador de la tarea, el identificador se puede obterner del método: que lista los jobs http://herc-as-front-desa.atica.um.es/cron-config/Job?type=0&amp;from=0&amp;count=100</param>
+        /// <returns>tarea</returns> 
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult GetJob(string id)
+        {
+            return Ok(_cronApiService.GetJob(id));
+
+        }
+
 
         /// <summary>
         /// Obtiene un listado de tareas ejecutadas de un repositorio

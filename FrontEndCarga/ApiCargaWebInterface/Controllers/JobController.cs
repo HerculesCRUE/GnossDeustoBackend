@@ -39,6 +39,24 @@ namespace ApiCargaWebInterface.Controllers
                 return View();
             }
         }
+
+        [HttpGet("[Controller]/{id}")]
+        public IActionResult DetailsJob(string id)
+        {
+           var job = _serviceApi.GetJob(id);
+            return View(job);
+        }
+
+        [HttpGet("[Controller]/recurring/{name}")]
+        public IActionResult DetailsRecurringJob(string name)
+        {
+            var recurringJob = _serviceApi.GetRecurringJob(name);
+            RecurringJobWebViewModel recurringJobViewModel = new RecurringJobWebViewModel();
+            recurringJobViewModel.RecurringJobViewModel = recurringJob;
+            recurringJobViewModel.ListJobs = _serviceApi.GetJobsOfRecurringJob(name);
+            return View(recurringJobViewModel);
+        }
+
         [HttpPost]
         public IActionResult Create(CreateJobViewModel jobModel)
         {
@@ -107,6 +125,12 @@ namespace ApiCargaWebInterface.Controllers
             return View("Created", item);
         }
 
+        public IActionResult ReQueue(string idJob)
+        {
+            _serviceApi.ReQueueJob(idJob);
+            var job = _serviceApi.GetJob(idJob);
+            return View("DetailsJob", job);
+        }
         public IActionResult CronValid(string CronExpression)
         {
             var correct = CrontabSchedule.TryParse(CronExpression);

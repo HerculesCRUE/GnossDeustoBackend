@@ -293,6 +293,10 @@ namespace CronConfigure.Models.Services
             return _context.Set.Any(item => item.Key.Equals("schedule") && item.Value.Equals(id));
         }
 
+        ///<summary>
+        ///Obtiene los datos de una tarea concreta
+        ///</summary>
+        ///<param name="id">identificador de la tarea</param>
         public JobViewModel GetJob(string id)
         {
             var api = JobStorage.Current.GetMonitoringApi();
@@ -306,9 +310,20 @@ namespace CronConfigure.Models.Services
                 if (jobDto.History.Count > 0)
                 {
                     state = jobDto.History[0].StateName;
+                    if (state.Equals("Failed"))
+                    {
+                        if (jobDto.History[0].Data.ContainsKey("ExceptionMessage"))
+                        {
+                            job.ExceptionDetails = jobDto.History[0].Data["ExceptionMessage"];
+                        }
+                        else
+                        {
+                            job.ExceptionDetails = jobDto.History[0].Reason;
+                        }
+                    }
                     job.ExecutedAt = jobDto.History[0].CreatedAt;
                 }
-                job.ExceptionDetails = "";
+                
                 job.Id = id;
                 if (jobDto.Job != null) 
                 {

@@ -1,0 +1,46 @@
+﻿@model ApiCargaWebInterface.ViewModels.JobViewModel
+
+@{
+    ViewData["Title"] = Model.Id + " - Job";
+    ViewData["BodyClass"] = "fichaRecurso";
+}
+    <div class="row">
+        <div class="col col-12 col-lg-12 col-contenido">
+            <div class="wrapCol">
+                <div class="header-resource">
+                    <div class="h1-container">
+                        <h1>Detalles de la tarea: @Model.Id</h1>
+                        <div class="botones">
+                            <a href="@Url.Action("ReQueue", new { idJob = Model.Id })" class="btn btn-sincronizar">Sincronizar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contenido">
+                    <div class="grupo grupo-descripcion">
+                        <div class="identifier">
+                            <p class="titulo">Identifier</p>
+                            <p>@Model.Id</p>
+                        </div>
+                        <div class="job">
+                            <p class="titulo">Tarea</p>
+                            <p>@Model.Job</p>
+                        </div>
+                        <div class="state">
+                            <p class="titulo">Estado de la tarea</p>
+                            <p>@Model.State</p>
+                        </div>
+                        <div class="ExecutedAt">
+                            <p class="titulo">Fecha hidden ejecución</p>
+                            <p>@Model.ExecutedAt</p>
+                        </div>
+                        <div class="Exception">
+                            <p class="titulo">Excepción</p>
+                            <p>@Model.ExceptionDetails</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

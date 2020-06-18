@@ -1,0 +1,60 @@
+﻿@model ApiCargaWebInterface.ViewModels.RecurringJobWebViewModel
+
+@{
+    ViewData["Title"] = Model.RecurringJobViewModel.Id + " - Job";
+    ViewData["BodyClass"] = "fichaRecurso";
+}
+    <div class="row">
+        <div class="col col-12 col-lg-12 col-contenido">
+            <div class="wrapCol">
+                <div class="header-resource">
+                    <div class="h1-container">
+                        <h1>Detalles de la tarea recurrente: @Model.RecurringJobViewModel.Id</h1>
+                        @*<div class="botones">
+                            <a href="@Url.Action("ReQueue", new { idJob = Model.Id })" class="btn btn-sincronizar">Sincronizar</a>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="contenido">
+                    <div class="grupo grupo-descripcion">
+                        <div class="identifier">
+                            <p class="titulo">Nombre</p>
+                            <p>@Model.RecurringJobViewModel.Id</p>
+                        </div>
+                        <div class="job">
+                            <p class="titulo">Expresión del cron</p>
+                            <p>@Model.RecurringJobViewModel.Cron</p>
+                        </div>
+                        <div class="state">
+                            <p class="titulo">Siguiente ejecución</p>
+                            <p>@Model.RecurringJobViewModel.NextExecution</p>
+                        </div>
+                        <div class="Exception">
+                            <p class="titulo">Fecha de creación</p>
+                            <p>@Model.RecurringJobViewModel.CreatedAt</p>
+                        </div>
+                        <div class="ExecutedAt">
+                            <p class="titulo">Cola</p>
+                            <p>@Model.RecurringJobViewModel.Queue</p>
+                        </div>
+                        <div class="ExecutedAt">
+                            <p class="titulo">Última tarea ejecutada</p>
+                            <p>@Model.RecurringJobViewModel.LastJobId</p>
+                        </div>
+                        <div class="ExecutedAt">
+                            <p class="titulo">Estado de la última tarea ejecutada</p>
+                            <p>@Model.RecurringJobViewModel.LastJobState</p>
+                        </div>
+                        <div class="ExecutedAt">
+                            <p class="titulo">Estado de la última tarea ejecutada</p>
+                            <p>@Model.RecurringJobViewModel.LastJobState</p>
+                        </div>
+                    </div>
+                    <div class="grupo grupo-programacion">
+                        <h2>Ejecuciones completadas a partir de esta tarea recurrente</h2>
+                        <partial name="../RepositoryConfig/_ListJobs" model="@Model.ListJobs" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
