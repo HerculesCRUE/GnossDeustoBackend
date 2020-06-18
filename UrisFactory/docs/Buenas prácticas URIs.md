@@ -10,7 +10,7 @@
 
 [Prácticas relativas a la gestión de recursos semánticos a través de URI](#prácticas-relativas-a-la-gestión-de-recursos-semánticos-a-través-de-uri)
 
-[Política de persistencia y contrato de buenas prácticas](#política-de-persistencia-y-contrato-de-buenas-prácticas)
+[Política de persistencia y Contrato de buenas prácticas](#política-de-persistencia-y-contrato-de-buenas-prácticas)
 
 [Ejemplos de uso](#ejemplos-de-uso)
 
@@ -139,7 +139,7 @@ g)  Cuando se establezcan enlaces entre distintos recursos de
     recursos bidireccionales para facilitar la navegación sobre los
     recursos de información en ambos sentidos.
     
-Política de persistencia y contrato de buenas prácticas
+Política de persistencia y Contrato de buenas prácticas
 -------------------------------------------------------
 
 De entre las prácticas de gestión de recursos semámticos del apartado
