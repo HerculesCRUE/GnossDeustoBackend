@@ -18,7 +18,7 @@ Introducción
 ------------
 
 Al acceder a la web vemos un menú en la parte superior desde la que se puede acceder
-a los repositorios, los shapes y las operaciones del urisFactory.
+a la administración de los repositorios, los shapes y las operaciones de URIs Factory.
 
 Página principal. Listado de repositorios
 -----------------------------------------
