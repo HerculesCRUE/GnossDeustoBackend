@@ -254,6 +254,7 @@ namespace CronConfigure.Models.Services
             var ids = _context.JobParameter.Where(item => item.Value.Equals(recurringJob)).Select(item => item.JobId).Distinct().ToList();
             List<JobViewModel> listJobViewModel = new List<JobViewModel>();
             var api = JobStorage.Current.GetMonitoringApi();
+            DateTime? executedAt = null;
             foreach (long id in ids)
             {
                 var jobDetails = api.JobDetails(id.ToString());
@@ -263,12 +264,14 @@ namespace CronConfigure.Models.Services
                     if (jobDetails.History.Count > 0)
                     {
                         state = jobDetails.History[0].StateName;
+                        executedAt = jobDetails.History[0].CreatedAt;
                     }
                     JobViewModel job = new JobViewModel()
                     {
                         Id = id.ToString(),
                         Job = jobDetails.Job.ToString(),
-                        State = state
+                        State = state,
+                        ExecutedAt = executedAt
                     };
                     listJobViewModel.Add(job);
                 }

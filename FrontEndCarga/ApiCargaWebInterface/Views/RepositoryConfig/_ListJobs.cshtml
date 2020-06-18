@@ -5,14 +5,17 @@
     <div class="items tabla">
         <div class="cabecera">
             <div class="columna">
+                <p>Identificador</p>
+            </div>
+            <div class="columna">
                 <p>Fecha</p>
             </div>
             <div class="columna">
                 <p>Estado</p>
             </div>
             @*<div class="columna acciones">
-                <p>Acciones</p>
-            </div>*@
+            <p>Acciones</p>
+        </div>*@
         </div>
         @foreach (var job in Model)
         {
@@ -22,35 +25,38 @@
                 clase = "class =text-danger";
             }
             
-            <div class="fila">
-                <div class="columna principal">
-                    <a href="@Url.Action("DetailsJob", "Job",new { id = job.Id })">
-                        <p @clase>@job.ExecutedAt</p>
+    <div class="fila">
+        <div class="columna principal">
+            <a href="@Url.Action("DetailsJob", "Job",new { id = job.Id })">
+                <p @clase>@job.Id</p>
+            </a>
+        </div>
+        <div class="columna">
+                <p @clase>@job.ExecutedAt</p>
+        </div>
+        <div class="columna">
+            <p @clase>@job.State</p>
+        </div>
+        <div class="columna acciones">
+            <ul>
+                @*<li>
+                    <a href="@Url.Action("Details", "ShapeConfig", new {  id=shape.ShapeConfigID  })" class="ver">
+                        <i class="material-icons">remove_red_eye</i>
                     </a>
-                </div>
-                <div class="columna">
-                    <p @clase>@job.State</p>
-                </div>
-                <div class="columna acciones">
-                    <ul>
-                        @*<li>
-                            <a href="@Url.Action("Details", "ShapeConfig", new {  id=shape.ShapeConfigID  })" class="ver">
-                                <i class="material-icons">remove_red_eye</i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Edit", "ShapeConfig", new {  id=shape.ShapeConfigID  })" class="editar">
-                                <i class="material-icons">mode_edit</i>
-                            </a>
-                        </li>*@
-                        @*<li>
-                            <a href="@Url.Action("Delete", "ShapeConfig", new {  id=job.Id  })" class="borrar">
-                                <i class="material-icons">delete</i>
-                            </a>
-                        </li>*@
-                    </ul>
-                </div>
-            </div>
+                </li>
+                <li>
+                    <a href="@Url.Action("Edit", "ShapeConfig", new {  id=shape.ShapeConfigID  })" class="editar">
+                        <i class="material-icons">mode_edit</i>
+                    </a>
+                </li>*@
+                @*<li>
+                    <a href="@Url.Action("Delete", "ShapeConfig", new {  id=job.Id  })" class="borrar">
+                        <i class="material-icons">delete</i>
+                    </a>
+                </li>*@
+            </ul>
+        </div>
+    </div>
         }
     </div>
 }
