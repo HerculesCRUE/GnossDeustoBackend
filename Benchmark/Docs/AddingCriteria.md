@@ -1,6 +1,6 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
-# Adding Criteira to the Benchmark Framework
+# Adding Criteria to the Benchmark Framework
 
 The process to add criteria to the framework is based on editing the data sources that is used in by the tool to display scores and ranke them mostly in two places: the criteria description and the triple srore assessments. 
 
