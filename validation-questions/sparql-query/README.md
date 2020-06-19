@@ -1,6 +1,6 @@
 # Introducción
 
-Este documento da acceso a la implementación y ejecución de las preguntas de competencia que han sido desplegadas sobre un Triple Store FUSEKI sobre el que se ha habilitado un razonador Pellet. Además, también documento las adaptaciones que han sido realizadas para permitir la ejecución de las consultas sobre un Triple Store RDF que no soporta caracterísiticas avanzadas de razonamiento, en este caso Virtuoso. 
+Este documento da acceso a la implementación y ejecución de las preguntas de competencia que han sido desplegadas sobre un Triple Store [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) sobre el que se ha habilitado el [razonador Pellet Openllet](https://github.com/Galigator/openllet/). Además, también documento las adaptaciones que han sido realizadas para permitir la ejecución de las consultas sobre un Triple Store RDF que no soporta caracterísiticas avanzadas de razonamiento, en este caso [Openlink Virtuoso](https://virtuoso.openlinksw.com/). 
 
 # Carga de datos en Virtuoso
 
