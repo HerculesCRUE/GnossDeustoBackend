@@ -1,3 +1,7 @@
+# Introducción
+
+Este documento da acceso a la implementación y ejecución de las preguntas de competencia que han sido desplegadas sobre un Triple Store FUSEKI sobre el que se ha habilitado un razonador Pellet. Además, también documento las adaptaciones que han sido realizadas para permitir la ejecución de las consultas sobre un Triple Store RDF que no soporta caracterísiticas avanzadas de razonamiento, en este caso Virtuoso. 
+
 # Carga de datos en Virtuoso
 
 Dadas las limitaciones de razonamiento de Virtuoso, se han tenido que realizar algunas variaciones sobre las consultas SPARQL. Estas consultas se encuentran en el directorio `virtuoso-sparql`. 
