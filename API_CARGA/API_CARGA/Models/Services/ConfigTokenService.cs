@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
+// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+// Clase para la obtención de los datos necesarios para obtener el token de acceso a los apis de apiCarga y OAIPMH_CVN
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
+    /// <summary>
+    /// Clase para la obtención de los datos necesarios para obtener el token de acceso a los apis de apiCarga y OAIPMH_CVN
+    /// </summary> 
     public class ConfigTokenService
     {
         public IConfigurationRoot Configuration { get; set; }
@@ -29,6 +36,9 @@ namespace API_CARGA.Models.Services
 
             Configuration = builder.Build();
         }
+        /// <summary>
+        /// obtiene el endpoint para la llamada de obtención del token
+        /// </summary> 
         public string GetAuthorityGetToken()
         {
             if (string.IsNullOrEmpty(Authority))
@@ -49,6 +59,9 @@ namespace API_CARGA.Models.Services
             return Authority;
         }
 
+        /// <summary>
+        /// obtiene el tipo de concesión de Oauth
+        /// </summary> 
         public string GetGrantType()
         {
             if (string.IsNullOrEmpty(GrantType))
@@ -69,6 +82,9 @@ namespace API_CARGA.Models.Services
             return GrantType;
         }
 
+        /// <summary>
+        /// obtiene la limitación de acceso al api de carga
+        /// </summary> 
         public string GetScopeCarga()
         {
             if (string.IsNullOrEmpty(Scope))
@@ -89,6 +105,9 @@ namespace API_CARGA.Models.Services
             return Scope;
         }
 
+        /// <summary>
+        /// obtiene el id de cliente del api de carga
+        /// </summary> 
         public string GetClientIdCarga()
         {
             if (string.IsNullOrEmpty(ClientId))
@@ -109,6 +128,9 @@ namespace API_CARGA.Models.Services
             return ClientId;
         }
 
+        /// <summary>
+        /// obtiene la "clave" de acceso del api de carga
+        /// </summary>
         public string GetClientSecretCarga()
         {
             if (string.IsNullOrEmpty(ClientSecret))
@@ -129,6 +151,9 @@ namespace API_CARGA.Models.Services
             return ClientSecret;
         }
 
+        /// <summary>
+        /// obtiene la limitación de acceso al api de OAIPMH
+        /// </summary> 
         public string GetScopeOAIPMH()
         {
             if (string.IsNullOrEmpty(ScopeOAIPMH))
@@ -149,6 +174,9 @@ namespace API_CARGA.Models.Services
             return ScopeOAIPMH;
         }
 
+        /// <summary>
+        /// obtiene la "clave" de acceso del api de OAIPMH
+        /// </summary>
         public string GetClientSecretOAIPMH()
         {
             if (string.IsNullOrEmpty(ClientSecretOAIPMH))
@@ -169,6 +197,9 @@ namespace API_CARGA.Models.Services
             return ClientSecretOAIPMH;
         }
 
+        /// <summary>
+        /// obtiene la id del cliente de OAIPMH
+        /// </summary>
         public string GetClientIdOAIPMH()
         {
             if (string.IsNullOrEmpty(ClientIdOAIPMH))

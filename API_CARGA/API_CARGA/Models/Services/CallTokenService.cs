@@ -1,4 +1,8 @@
-﻿using API_CARGA.Models.Entities;
+﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
+// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+// clase para la obtención de los tokens de acceso
+using API_CARGA.Models.Entities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
+    /// <summary>
+    /// clase para la obtención de los tokens de acceso
+    /// </summary>
     public class CallTokenService
     {
         private ConfigTokenService _configToken;
@@ -15,18 +22,29 @@ namespace API_CARGA.Models.Services
         {
             _configToken = configToken;
         }
+
+        /// <summary>
+        /// Obtiene el token de acceso al api de carga
+        /// </summary>
         public TokenBearer CallTokenCarga()
         {
             string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeCarga()}&client_id={_configToken.GetClientIdCarga()}&client_secret={_configToken.GetClientSecretCarga()}";
             return CallTokenIdentity(stringData);
         }
 
+        /// <summary>
+        /// Obtiene el token de acceso al api de OAIPMH
+        /// </summary>
         public TokenBearer CallTokenOAIPMH()
         {
             string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeOAIPMH()}&client_id={_configToken.GetClientIdOAIPMH()}&client_secret={_configToken.GetClientSecretOAIPMH()}";
             return CallTokenIdentity(stringData);
         }
 
+        /// <summary>
+        /// Realiza la llamada para la obtención del token de acceso con el endpoint configurado en AuthorityGetToken
+        /// </summary>
+        /// <param name="stringData">Datos con el scope, el cliente id, el grantType y el secret</param>
         private TokenBearer CallTokenIdentity(string stringData)
         {
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
