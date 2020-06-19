@@ -1,3 +1,5 @@
+![](../../Docs/media/CabeceraDocumentosMD.png)
+
 # Introducción
 
 Este documento da acceso a la implementación y ejecución de las preguntas de competencia que han sido desplegadas sobre un Triple Store [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) sobre el que se ha habilitado el [razonador Pellet Openllet](https://github.com/Galigator/openllet/). Además, también documenta las adaptaciones que han sido realizadas para permitir la ejecución de las consultas sobre un Triple Store RDF que no soporte algunas características avanzadas de razonamiento, como sucede en este caso con [Openlink Virtuoso](https://virtuoso.openlinksw.com/). 
@@ -14,7 +16,7 @@ rdf_loader_run();
 sparql load <https://sws.geonames.org/3128026/> into <http://hercules.asio>;
 ```
 
-A la hora de ejecutar las consultas, en el punto de SPARQL de Virtuoso hay que desabilitar la opción `Strict checking of void variables` para que las consultas funcionen correctamente.
+A la hora de ejecutar las consultas, en el punto de SPARQL de Virtuoso hay que deshabilitar la opción `Strict checking of void variables` para que las consultas funcionen correctamente.
 
 # Preguntas de competencia
 
