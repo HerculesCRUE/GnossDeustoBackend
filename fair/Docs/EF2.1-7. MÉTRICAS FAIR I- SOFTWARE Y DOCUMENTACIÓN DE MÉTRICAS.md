@@ -60,6 +60,8 @@ En las siguientes subsecciones ofrecemos, primero, el contexto en el que
 se ubica este entregable y, en segundo lugar, exponemos lo que se ha
 planteado exactamente dentro del módulo de métricas FAIR.
 
+This document is also available in [PDF printable form](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/fair/Docs/EF2.1-7.%20M%C3%89TRICAS%20FAIR%20I-%20SOFTWARE%20Y%20DOCUMENTACI%C3%93N%20DE%20M%C3%89TRICAS.pdf).
+
 **1.1. Aplicación de los principios FAIR en HERCULES-ASIO**
 ------------------------------------------------------
 
