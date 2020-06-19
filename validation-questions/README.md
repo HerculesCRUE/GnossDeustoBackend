@@ -104,3 +104,6 @@ This project could be deployed on Github Actions to enable the automatic generat
 
 1. The owner of the repository must [create its Personal Access Token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line).
 2. [A secret must be created in the repository](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) with the content of the Personal Access Token.
+3. A workflow file must be created under `.github/workflows` folder. An example of the workflow for executing the tests can be found at [this repository](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/validation-questions/.github/workflows/maven.yml). In this example the `${{ secrets.MIKEL_PAT }}` variable should be replaced by the name given to previously created secret containing the Personal Access Token of the owner of the repository.
+
+When the workflow is configured, it will be launched every time the repository is updated.
