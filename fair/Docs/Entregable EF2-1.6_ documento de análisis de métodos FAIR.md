@@ -55,6 +55,8 @@ metadatos como los datos se registren o indexen en un recurso
 encontrable (el componente de infraestructura). A continuación,
 resumimos los 4 principios FAIR.
 
+This document is also available in [PDF printable form](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/fair/Docs/EF2-1.6%20DOCUMENTO%20DE%20AN%C3%81LISIS%20DE%20M%C3%89TODOS%20FAIR.pdf). 
+
 **1.1. Findable (Encontrable/Localizable)**
 --------------------------------------
 
