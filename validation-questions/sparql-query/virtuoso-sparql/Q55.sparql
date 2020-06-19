@@ -1,0 +1,20 @@
+PREFIX roh: <http://purl.org/roh#>
+PREFIX vivo: <http://purl.org/roh/mirror/vivo#>
+PREFIX ro: <http://purl.org/roh/mirror/obo/ro#>
+SELECT ?researchGroup ?project ?company 
+WHERE {
+?project a vivo:Project ;
+vivo:relates ?role ;
+roh:isSupportedBy ?funding .
+?funding ro:hasPart ?fundingAmount ;
+roh:fundedBy ?fundingProgram .
+?fundingProgram roh:promotedBy ?company .
+?fundingAmount roh:monetaryAmount ?fundingAmounts .
+?company a vivo:Company .
+?role roh:roleOf ?researchGroup .
+?researchGroup a roh:ResearchGroup .
+OPTIONAL {
+?project roh:projectStatus ?projectStatus .
+}
+FILTER (!BOUND(?projectStatus) || ?projectStatus != "PROPOSAL_SUBMITTED")
+}

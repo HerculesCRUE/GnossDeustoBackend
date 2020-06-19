@@ -1,0 +1,11 @@
+PREFIX vivo: <http://purl.org/roh/mirror/vivo#>
+PREFIX roh: <http://purl.org/roh#>
+PREFIX ro: <http://purl.org/roh/mirror/obo/ro#>
+
+SELECT ?thesis 
+WHERE {
+  ?supervisorRole a roh:SupervisorRole ;
+  ro:RO_0000052 <http://purl.org/roh/data#investigador-1> ;
+        vivo:relatedBy ?supervisingRelationship .
+  ?supervisingRelationship a roh:PhDSupervisingRelationship ;
+ roh:produces ?thesis}
