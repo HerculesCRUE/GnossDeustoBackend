@@ -1,3 +1,5 @@
+![](../../Docs/media/CabeceraDocumentosMD.png)
+
 # Introducción
 
 Este documento da acceso a la implementación y ejecución de las preguntas de competencia que han sido desplegadas sobre un Triple Store [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) sobre el que se ha habilitado el [razonador Pellet Openllet](https://github.com/Galigator/openllet/). Además, también documenta las adaptaciones que han sido realizadas para permitir la ejecución de las consultas sobre un Triple Store RDF que no soporte algunas características avanzadas de razonamiento, como sucede en este caso con [Openlink Virtuoso](https://virtuoso.openlinksw.com/). 
