@@ -1,12 +1,16 @@
 # Carga de datos en Virtuoso
 
+Dadas las limitaciones de razonamiento de Virtuoso, se han tenido que realizar algunas variaciones sobre las consultas SPARQL. Estas consultas se encuentran en el directorio `virtuoso-sparql`. 
+
+En primer lugar, hay que cargar en Virtuoso el dataset previamente generado que contiene todas las tripletas inferidas. Para este ejemplo se ha utilizado el grafo `http://hercules.asio`. Además, se carga la instancia de Geonames necesaria para ejecutar los ejemplos, para poder realizar las consultas solamente con SPARQL, y sin intervención de otros lenguajes de programación:
+
 ```
 ld_dir ('/ruta/del/dataset/inferido/', '*.owl', 'http://hercules.asio');
 rdf_loader_run();
 sparql load <https://sws.geonames.org/3128026/> into <http://hercules.asio>;
 ```
 
-Hay que desabilitar la opción "Strict checking of void variables" del punto de acceso SPARQL.
+A la hora de ejecutar las consultas, en el punto de SPARQL de Virtuoso hay que desabilitar la opción `Strict checking of void variables` para que las consultas funcionen correctamente.
 
 # Preguntas de competencia
 
