@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
+// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+// Clase para la obtención de los datos necesarios para obtener el token de acceso al apiCarga
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.Models.Services
 {
+    /// <summary>
+    /// Clase para la obtención de los datos necesarios para obtener el token de acceso al apiCarga
+    /// </summary> 
     public class ConfigTokenService
     {
         public IConfigurationRoot Configuration { get; set; }
@@ -25,6 +32,9 @@ namespace CronConfigure.Models.Services
 
             Configuration = builder.Build();
         }
+        /// <summary>
+        /// obtiene el endpoint para la llamada de obtención del token
+        /// </summary> 
         public string GetAuthorityGetToken()
         {
             if (string.IsNullOrEmpty(Authority))
@@ -44,7 +54,9 @@ namespace CronConfigure.Models.Services
             }
             return Authority;
         }
-
+        /// <summary>
+        /// obtiene el tipo de concesión de Oauth
+        /// </summary> 
         public string GetGrantType()
         {
             if (string.IsNullOrEmpty(GrantType))
@@ -65,6 +77,9 @@ namespace CronConfigure.Models.Services
             return GrantType;
         }
 
+        /// <summary>
+        /// obtiene la limitación de acceso al api de carga
+        /// </summary> 
         public string GetScopeCarga()
         {
             if (string.IsNullOrEmpty(Scope))
@@ -85,6 +100,9 @@ namespace CronConfigure.Models.Services
             return Scope;
         }
 
+        /// <summary>
+        /// obtiene el id de cliente del api de carga
+        /// </summary> 
         public string GetClientId()
         {
             if (string.IsNullOrEmpty(ClientId))
@@ -105,6 +123,9 @@ namespace CronConfigure.Models.Services
             return ClientId;
         }
 
+        /// <summary>
+        /// obtiene la "clave" de acceso del api de carga
+        /// </summary>
         public string GetClientSecret()
         {
             if (string.IsNullOrEmpty(ClientSecret))

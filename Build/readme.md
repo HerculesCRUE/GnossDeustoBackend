@@ -21,6 +21,19 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
 
 # Configuración de cada compilado 
 ## Api urisFactory
+### Configuración
+    {
+      "Logging": {
+          "LogLevel": {
+                "Default": "Information",
+                 "Microsoft": "Warning",
+                  "Microsoft.Hosting.Lifetime": "Information"
+                    }
+              },
+        "Authority": "http://localhost:56306",
+         "Scope": "apiUrisFactory",
+          "AllowedHosts": "*"
+    }
 ### Ejecución Linux
     dotnet UrisFactory.dll
 ## Api Carga
@@ -40,10 +53,19 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
         "Urls": "http://0.0.0.0:5100",
          "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
          "Sparql": {
-         "Graph": "http://data.um.es/graph/um_cvn",
-         "Endpoint": "http://155.54.239.204:8890/sparql"
-         "QueryParam": "query"
-         }
+           "Graph": "http://data.um.es/graph/um_cvn",
+           "Endpoint": "http://155.54.239.204:8890/sparql"
+           "QueryParam": "query"
+         },
+         "Authority": "http://localhost:56306",
+         "ScopeCarga": "apiCarga",
+         "AuthorityGetToken": "http://localhost:56306/connect/token",
+         "GrantType": "client_credentials",
+         "ClientId": "carga",
+         "ClientSecret": "secret",
+         "ScopeOAIPMH": "apiOAIPMH",
+         "ClientIdOAIPMH": "OAIPMH",
+        "ClientSecretOAIPMH": "secretOAIPMH"
          }
  - PostgreConnectionmigration: Cadena de conexión a la base de datos PostgreSQL
  - LogLevel.Default: Nivel de error por defecto
@@ -53,7 +75,15 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
  - ConfigUrl: URL donde está lanzada esta aplicación
  - Sparql.Graph: Grafo en el que se van a almacenar los triples
  - Sparql.Endpoint: URL del Endpoint Sparql
- - Sparql.QueryParam: Nombre del parámetro en el que hay que pasar la query al SPARQL Endpoint
+ - Authority: Url de la servicio de identidades
+ - ScopeCarga: Limitación de acceso al api de carga
+ - AuthorityGetToken: Endpoint para la llamada de obtención del token
+ - GrantType: Tipo de concesión de Oauth
+ - ClientId: Id de cliente del api de OAIPMH
+ - ClientSecret: "clave" de acceso del api de carga
+ - ScopeOAIPMH: Limitación de acceso al api de OAIPMH
+ - ClientIdOAIPMH: Id de cliente del api de OAIPMH
+ - ClientSecretOAIPMH: "clave" de acceso del api de OAIPMH
 ### Ejecución Linux
     dotnet API_CARGA.dll
 ## FrontEndCarga
@@ -70,7 +100,15 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
     "AllowedHosts": "*",
     "Urls": "http://0.0.0.0:5103",
     "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
-    "ConfigUrlCron": "http://herc-as-front-desa.atica.um.es/cron-config/"
+    "ConfigUrlCron": "http://herc-as-front-desa.atica.um.es/cron-config/",
+    "ConfigUrlUrisFactory": "http://herc-as-front-desa.atica.um.es/uris/",
+    "Authority": "http://localhost:56306/connect/token",
+    "GrantType": "client_credentials",
+    "Scope": "apiCarga",
+    "ScopeCron": "apiCron",
+    "ScopeUrisFactory": "apiUrisFactory",
+    "ClientId": "Web",
+    "ClientSecret": "master"
     }
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
@@ -78,6 +116,14 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
  - Urls: Url en la que se va a lanzar la aplicación
  - ConfigUrl: Url donde está lanzada la aplicación API Carga
  - ConfigUrlCron: Url donde está lanzada la aplicación CronConfigure
+ - ConfigUrlUrisFactory: Url donde está lanzada la aplicación UrisFactory
+ - Authority: Endpoint para la llamada de obtención del token
+ - GrantType: Tipo de concesión de Oauth
+ - Scope: Limitación de acceso al api de carga
+ - ScopeCron: Limitación de acceso al api de cron
+ - ScopeUrisFactory: Limitación de acceso al api de urisFactory
+ - ClientId: Id de cliente, en este caso se ha configurado un cliente que pueda acceder a todas las apis que usa la web
+ - ClientSecret: "clave" de acceso del cliente
 ### Ejecución
     dotnet ApiCargaWebInterface.dll
    
@@ -96,7 +142,14 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
       },
         "AllowedHosts": "*",
         "Urls": "http://0.0.0.0:5107",
-        "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/"
+        "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
+		"Authority": "http://localhost:56306",
+		"AuthorityGetToken": "http://localhost:56306/connect/token",
+		"Scope": "apiCron",
+		"ScopeCarga": "apiCarga",
+		"GrantType": "client_credentials",
+		"ClientId": "carga",
+		"ClientSecret": "secret"
             }
  - HangfireConnection: Cadena de conexión a la base de datos PostgreSQL de tareas programadas
  - LogLevel.Default: Nivel de error por defecto
@@ -104,6 +157,14 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
  - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
  - Urls: Url en la que se va a lanzar la aplicación
  - ConfigUrl: Url donde está lanzada la aplicación API Carga
+ - Authority: Url de la servicio de identidades
+ - AuthorityGetToken: Endpoint para la llamada de obtención del token
+ - GrantType: Tipo de concesión de Oauth
+ - Scope: Limitación de acceso al api de cron
+ - ScopeCarga: Limitación de acceso al api de carga
+ - ScopeUrisFactory: Limitación de acceso al api de urisFactory
+ - ClientId: Id de cliente, en este caso se ha configurado un cliente que pueda acceder a todas las apis que usa la web
+ - ClientSecret: "clave" de acceso del cliente
 ### Ejecución Linux
     dotnet CronConfigure.dll
 ## Api OAIPMH
@@ -120,7 +181,9 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
     "Urls": "http://0.0.0.0:5102",
     "XML_CVN_Repository":"http://curriculumpruebas.um.es/curriculum/rest/v1/auth/",
     "CVN_ROH_converter": "http://herc-as-front-desa.atica.um.es/cvn/v1/convert",
-    "ConfigUrl": "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH"
+    "ConfigUrl": "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH",
+	"Authority": "http://localhost:56306",
+	"Scope": "apiOAIPMH"
           }
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
@@ -129,5 +192,7 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
  - XML_CVN_Repository: URL del repositorio CVN
  - CVN_ROH_converter: URL del conversor de PDF a CVN
  - ConfigUrl: URL donde está lanzada esta aplicación
+ - Authority: Url de la servicio de identidades
+ - Scope: Limitación de acceso al api de apiOAIPMH
   ### Ejecución Linux
     dotnet OAI_PMH_CVN.dll
