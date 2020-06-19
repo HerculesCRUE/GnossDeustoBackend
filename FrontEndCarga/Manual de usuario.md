@@ -23,7 +23,7 @@ a la administración de los repositorios, los shapes y las operaciones de URIs F
 Página principal. Listado de repositorios
 -----------------------------------------
 
-La página de inicio de la web es el listado de los repositorios. Desde este listado se
+La página de inicio de la web es el listado de los repositorios, un repositorio es una especie de contenedor donde se almacena la información de ASIO. Desde este listado se
 puede crear un repositorio nuevo con el botón + que se encuentra por la mitad 
 de la página. 
 ![](img/repositorios.png)
@@ -47,6 +47,7 @@ También se puede acceder a la información de las tareas, tanto de tareas de ej
 Vista de una tarea
 ------------------
 
+Se demonina una tarea a la programación de una sincronización de un repositorio, cuando está sincronización se realiza esta tarea pasa a ser una tarea ejecutada.
 En la pantalla que se muestra a continuación se muestran los datos de una tarea ejecutada
 y un botón con el cual se puede volver a lanzar. Los datos mostrados son:
  - Identificador de la tarea.
@@ -59,6 +60,8 @@ y un botón con el cual se puede volver a lanzar. Los datos mostrados son:
 Vista de una tarea recurrente
 -----------------------------
 
+Cuando se habla de una tarea recurrente, se habla de una programación de sincronización sobre un repositorio que tiene una repetición a lo largo
+del tiempo que viene indicada según la expresión del cron.
 En la siguiente imágen se muestran los datos de una tarea recurrente:
  - El nombre de la tarea recurrente.
  - La expresión del cron que indica la recurrencia de dicha tarea.
@@ -79,6 +82,7 @@ Para poder acceder a su información y poder editarla o eliminar el shape tendre
 Factoría de URIs
 ----------------
 
+Si quiere acceder a información explicativa sobre las uris y el esquema de uris puede acceder desde: https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/UrisFactory
 Interfaz desde la que se puede:
  - Obtener un URI.
  - Descargar el archivo el archivo de configuración de los URIs.
