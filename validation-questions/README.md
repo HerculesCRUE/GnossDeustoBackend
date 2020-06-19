@@ -98,4 +98,9 @@ $ mvn compile
 $ mvn test -DontFile=GnossDeustoOnto/roh-v2.owl -DdataFile=GnossDeustoOnto/examples/data.ttl  -Duneskos=GnossDeustoOnto/unesco-individuals.rdf
 ```
 
+# Deployment on GitHub Actions
 
+This project could be deployed on Github Actions to enable the automatic generation of the tests when a modification is done. To do that, the following steps must be followed:
+
+1. The owner of the repository must [create its Personal Access Token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line).
+2. [A secret must be created in the repository](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) with the content of the Personal Access Token.
