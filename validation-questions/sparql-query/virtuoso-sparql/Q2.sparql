@@ -1,0 +1,20 @@
+PREFIX foaf: <http://purl.org/roh/mirror/foaf#>
+PREFIX roh: <http://purl.org/roh#>
+PREFIX vivo:  <http://purl.org/roh/mirror/vivo#>
+PREFIX unesco: <http://purl.org/roh/unesco-individuals#>
+PREFIX ro: <http://purl.org/obo/owl/ro#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?researcher ?center ?positionClass
+WHERE {
+  ?researcher	roh:hasKnowledgeArea unesco:120304 ;
+  				roh:hasPosition ?position .
+  ?position vivo:relates ?center ;
+  			a	?positionClass .
+  ?center a roh:ResearchGroup .
+FILTER NOT EXISTS {
+?position a ?otherClass .
+?otherClass rdfs:subClassOf ?positionClass .
+FILTER (?otherClass != ?positionClass)
+}
+}

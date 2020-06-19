@@ -1,0 +1,7 @@
+PREFIX roh: <http://purl.org/roh#>
+SELECT ?center ?accreditationTitle
+WHERE {
+ ?center a roh:ResearchGroup ;
+         roh:hasAccreditation ?accreditation .
+ ?accreditation roh:title ?accreditationTitle
+}

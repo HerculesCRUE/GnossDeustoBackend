@@ -1,0 +1,11 @@
+PREFIX vivo: <http://purl.org/roh/mirror/vivo#>
+PREFIX bibo:  <http://purl.org/roh/mirror/bibo#>
+PREFIX roh: <http://purl.org/roh#>
+SELECT ?patent ?researcher ?center 
+WHERE {
+?patent a bibo:Patent ;
+roh:correspondingAuthor ?researcher .
+?researcher roh:hasPosition ?position .
+?position vivo:relates ?center .
+?center a roh:ResearchGroup .
+}

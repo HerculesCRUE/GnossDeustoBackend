@@ -1,3 +1,13 @@
+# Carga de datos en Virtuoso
+
+```
+ld_dir ('/ruta/del/dataset/inferido/', '*.owl', 'http://hercules.asio');
+rdf_loader_run();
+sparql load <https://sws.geonames.org/3128026/> into <http://hercules.asio>;
+```
+
+Hay que desabilitar la opción "Strict checking of void variables" del punto de acceso SPARQL.
+
 # Preguntas de competencia
 
 A continuación, se exponen las preguntas de competencia y su ejecución online:

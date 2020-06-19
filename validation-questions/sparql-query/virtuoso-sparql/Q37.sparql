@@ -1,0 +1,14 @@
+PREFIX roh: <http://purl.org/roh#>
+PREFIX vivo: <http://purl.org/roh/mirror/vivo#>
+PREFIX foaf: <http://purl.org/roh/mirror/foaf#>
+SELECT DISTINCT ?project ?organization ?otherOrganization 
+WHERE {
+?project a vivo:Project ;
+vivo:relates ?role ;
+vivo:relates ?otherRole .
+?role roh:roleOf ?organization .
+?organization a foaf:Organization .
+?otherRole roh:roleOf ?otherOrganization .
+?otherOrganization a foaf:Organization .
+FILTER (?organization != ?otherOrganization) 
+}
