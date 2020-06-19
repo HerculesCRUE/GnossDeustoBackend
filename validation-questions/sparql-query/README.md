@@ -16,7 +16,7 @@ rdf_loader_run();
 sparql load <https://sws.geonames.org/3128026/> into <http://hercules.asio>;
 ```
 
-A la hora de ejecutar las consultas, en el punto de SPARQL de Virtuoso hay que desabilitar la opción `Strict checking of void variables` para que las consultas funcionen correctamente.
+A la hora de ejecutar las consultas, en el punto de SPARQL de Virtuoso hay que deshabilitar la opción `Strict checking of void variables` para que las consultas funcionen correctamente.
 
 # Preguntas de competencia
 
