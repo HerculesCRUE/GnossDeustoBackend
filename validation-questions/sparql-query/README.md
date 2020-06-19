@@ -1,10 +1,10 @@
 # Introducción
 
-Este documento da acceso a la implementación y ejecución de las preguntas de competencia que han sido desplegadas sobre un Triple Store [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) sobre el que se ha habilitado el [razonador Pellet Openllet](https://github.com/Galigator/openllet/). Además, también documento las adaptaciones que han sido realizadas para permitir la ejecución de las consultas sobre un Triple Store RDF que no soporta caracterísiticas avanzadas de razonamiento, en este caso [Openlink Virtuoso](https://virtuoso.openlinksw.com/). 
+Este documento da acceso a la implementación y ejecución de las preguntas de competencia que han sido desplegadas sobre un Triple Store [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) sobre el que se ha habilitado el [razonador Pellet Openllet](https://github.com/Galigator/openllet/). Además, también documenta las adaptaciones que han sido realizadas para permitir la ejecución de las consultas sobre un Triple Store RDF que no soporte algunas características avanzadas de razonamiento, como sucede en este caso con [Openlink Virtuoso](https://virtuoso.openlinksw.com/). 
 
 # Carga de datos en Virtuoso
 
-Dadas las limitaciones de razonamiento de Virtuoso, se han tenido que realizar algunas variaciones sobre las consultas SPARQL. Estas consultas se encuentran en el directorio `virtuoso-sparql`. 
+Dadas las [limitaciones de razonamiento de la versión open source de Virtuoso](http://docs.openlinksw.com/virtuoso/virtuosofaq6/), se han tenido que realizar algunas variaciones sobre las consultas SPARQL. Estas consultas se encuentran en el directorio `virtuoso-sparql`. 
 
 En primer lugar, hay que cargar en Virtuoso el dataset previamente generado que contiene todas las tripletas inferidas. Para este ejemplo se ha utilizado el grafo `http://hercules.asio`. Además, se carga la instancia de Geonames necesaria para ejecutar los ejemplos, para poder realizar las consultas solamente con SPARQL, y sin intervención de otros lenguajes de programación:
 
