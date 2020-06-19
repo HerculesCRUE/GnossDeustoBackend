@@ -16,15 +16,18 @@
 
 Introducción
 ------------
-Está web sirve para integrar las apis de urisFactory, cron y apiCarga que se encuentran en el proyecto en una interfaz web única, de esta forma se puede acceder a los métodos
-de los apis de una forma más accesible e intuitiva para el usuario, al acceder a la web vemos un menú en la parte superior desde la que se puede acceder
-a la administración de los repositorios, las validaciones y las operaciones de la factoría de uris, mientras que la página principal es el listado de repositorios.
+Está web sirve para integrar las apis de urisFactory, cron y apiCarga que se encuentran en el 
+proyecto en una interfaz web única, de esta forma se puede acceder a los métodos de los apis de
+una forma más accesible e intuitiva para el usuario, al acceder a la web vemos un menú en la parte
+superior desde la que se puede acceder a la administración de los repositorios, las validaciones 
+y las operaciones de la factoría de uris, mientras que la página principal es el listado de repositorios.
 
 Página principal. Listado de repositorios
 -----------------------------------------
 
-La página de inicio de la web es el listado de los repositorios, un repositorio es una especie de contenedor donde se almacena la información de ASIO. Desde este listado se
-puede crear un repositorio nuevo con el botón + que se encuentra por la mitad 
+La página de inicio de la web es el listado de los repositorios, un repositorio es una especie de
+ contenedor donde se almacena la información de ASIO.
+Desde este listado se puede crear un repositorio nuevo con el botón + que se encuentra por la mitad 
 de la página. 
 ![](img/repositorios.png)
 
@@ -47,7 +50,9 @@ También se puede acceder a la información de las tareas, tanto de tareas de ej
 Vista de una tarea
 ------------------
 
-Se demonina una tarea a la programación de una sincronización de un repositorio, cuando está sincronización se realiza esta tarea pasa a ser una tarea ejecutada.
+Se demonina una tarea a la programación de una sincronización de un repositorio, cuando está sincronización 
+se realiza esta tarea pasa a ser una tarea ejecutada, también se puede usar el nombre de tarea de ejecución
+única.
 En la pantalla que se muestra a continuación se muestran los datos de una tarea ejecutada
 y un botón con el cual se puede volver a lanzar. Los datos mostrados son:
  - Identificador de la tarea.
@@ -60,8 +65,9 @@ y un botón con el cual se puede volver a lanzar. Los datos mostrados son:
 Vista de una tarea recurrente
 -----------------------------
 
-Cuando se habla de una tarea recurrente, se habla de una programación de sincronización sobre un repositorio que tiene una repetición a lo largo
-del tiempo que viene indicada según la expresión del cron.
+Cuando se habla de una tarea recurrente, se habla de una programación de sincronización sobre un repositorio que 
+tiene una repetición a lo largo del tiempo, esta repetición o recurrencia viene dada por la expresión del cron
+configurada en esta tarea recurrente.
 En la siguiente imágen se muestran los datos de una tarea recurrente:
  - El nombre de la tarea recurrente.
  - La expresión del cron que indica la recurrencia de dicha tarea.
@@ -75,7 +81,7 @@ Listado de validaciones
 -----------------
 
 Para obtener más información de los validaciones puedes consultar: https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA/Validaciones
-Desde el listado general de validaciones se pueden acceder a todos las validaciones que hay creados
+Desde esta página se muestra el listado general de validaciones se pueden acceder a todos las validaciones que hay creados
 ![](img/shapes.png)
 Para poder acceder a su información y poder editarla o eliminar el shape tendremos que acceder a él.
 ![](img/shape.png)
