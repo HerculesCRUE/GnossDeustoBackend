@@ -1,3 +1,5 @@
+![](../../Docs/media/CabeceraDocumentosMD.png)
+
 # Gestión de validaciones
 
 Las validaciones se efectuan mediante [Shapes SHACL](https://www.w3.org/TR/shacl/).	
