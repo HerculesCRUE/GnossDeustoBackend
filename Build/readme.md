@@ -21,6 +21,9 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
 
 # Configuración de cada compilado 
 ## Api urisFactory
+
+[apiuris.tar.gz](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Build/apiuris.tar.gz)
+
 ### Configuración
     {
       "Logging": {
@@ -37,6 +40,9 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
 ### Ejecución Linux
     dotnet UrisFactory.dll
 ## Api Carga
+
+[apicarga.tar.gz](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Build/apicarga.tar.gz)
+
 ### Configuración
 
     { 
@@ -87,6 +93,9 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
 ### Ejecución Linux
     dotnet API_CARGA.dll
 ## FrontEndCarga
+
+[apifrontcarga.tar.gz](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Build/apifrontcarga.tar.gz)
+
 ### Configuración
  >
     {
@@ -128,6 +137,9 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
     dotnet ApiCargaWebInterface.dll
    
 ## Api CronConfigure
+
+[apicron.tar.gz](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Build/apicron.tar.gz)
+
 ### Configuración
     {
       "ConnectionStrings": {
@@ -168,6 +180,9 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
 ### Ejecución Linux
     dotnet CronConfigure.dll
 ## Api OAIPMH
+
+[apioaipmh.tar.gz](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Build/apioaipmh.tar.gz)
+
 ### Configuración
     {
       "Logging": {
