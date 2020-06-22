@@ -17,8 +17,10 @@
 Introducción
 ------------
 Está web es el punto de entrada de los usuarios para administrar sus repositorios. Desde una interfaz intuitiva podrán dar de alta nuevos repositorios, administrarlos y eliminarlos. La primera página que se le muestra al usuario es el listado de repositorios existentes. 
+
 Para cada repositorio el usuario podrá añadir validaciones, tareas programadas y tareas recurrentes. 
-Además, desde el menú superior, puede acceder también al listado de validaciones (shapes) y a la administración de la factoría de uris, desde donde se podrá administrar los esquemas de URIs. 
+
+Además, desde el menú superior puede acceder también al listado de validaciones (shapes) y a la administración de la factoría de uris, desde donde se podrá administrar los esquemas de URIs. 
 
 Página principal. Listado de repositorios
 -----------------------------------------
@@ -27,11 +29,13 @@ La página de inicio de la web es el listado de los repositorios, un repositorio
  contenedor donde se almacena la información de ASIO.
 Desde este listado se puede crear un repositorio nuevo con el botón + que se encuentra por la mitad 
 de la página. 
+
 ![](img/repositorios.png)
 
 Al acceder a un repositorio podemos ver las validaciones que tiene vinculados ese repositorio, 
 así como las tareas de sincronización programadas y ejecutadas que ha tenido, 
 como se muestra a continuación. 
+
 ![](img/repositorio.png)
 
 Desde esta pantalla se pueden crear nuevos validaciones asociados al repositorio y nuevas 
@@ -58,6 +62,7 @@ y un botón con el cual se puede volver a lanzar. Los datos mostrados son:
  - El estado de la tarea, que puede ser que se haya ejecutado con éxito o esté en estado fallido.
  - La fecha de la ejecución en formato UTC.
  - Error que haya causado el fallo de la tarea.
+ 
 ![](img/JobFailDetails.png)
 
 Vista de una tarea recurrente
@@ -73,6 +78,7 @@ En la siguiente imágen se muestran los datos de una tarea recurrente:
  - El identificador de la última tarea ejecutada, en el caso de que se haya ejecutado alguna tarea.
  - El estado de la última tarea ejecutada, en el caso de que se haya ejecutado alguna tarea.
  - Por último se muestra un litado de las tareas ejecutadas a partir de la tarea recurrente.
+ 
 ![](img/RecurringJobDetails.png)
 
 Listado de validaciones
@@ -80,8 +86,10 @@ Listado de validaciones
 
 Para obtener más información de los validaciones puedes consultar: https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA/Validaciones
 Desde esta página se muestra el listado general de validaciones se pueden acceder a todos las validaciones que hay creados
+
 ![](img/shapes.png)
 Para poder acceder a su información y poder editarla o eliminar el shape tendremos que acceder a él.
+
 ![](img/shape.png)
 
 Factoría de URIs
@@ -94,8 +102,10 @@ Interfaz desde la que se puede:
  - Reemplazar el archivo de configuración de URIs.
  - Eliminar una estructura de URIs.
  - Añadir una nueva estructura de URIs.
+ 
  ![](img/urisFactory.png)
  
  A la hora de crear una estructura URI nos mostrará un texto editable en el que aparece una
  estructura a modo de ayuda, como se ve en la siguiente imágen:
+ 
 ![](img/AddUriStructure.png)
