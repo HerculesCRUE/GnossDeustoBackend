@@ -16,11 +16,9 @@
 
 Introducción
 ------------
-Está web sirve para integrar las apis de urisFactory, cron y apiCarga que se encuentran en el 
-proyecto en una interfaz web única, de esta forma se puede acceder a los métodos de los apis de
-una forma más accesible e intuitiva para el usuario, al acceder a la web vemos un menú en la parte
-superior desde la que se puede acceder a la administración de los repositorios, las validaciones 
-y las operaciones de la factoría de uris, mientras que la página principal es el listado de repositorios.
+Está web es el punto de entrada de los usuarios para administrar sus repositorios. Desde una interfaz intuitiva podrán dar de alta nuevos repositorios, administrarlos y eliminarlos. La primera página que se le muestra al usuario es el listado de repositorios existentes. 
+Para cada repositorio el usuario podrá añadir validaciones, tareas programadas y tareas recurrentes. 
+Además, desde el menú superior, puede acceder también al listado de validaciones (shapes) y a la administración de la factoría de uris, desde donde se podrá administrar los esquemas de URIs. 
 
 Página principal. Listado de repositorios
 -----------------------------------------
