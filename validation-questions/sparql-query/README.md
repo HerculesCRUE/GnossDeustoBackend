@@ -8,7 +8,7 @@ Este documento da acceso a la implementación y ejecución de las preguntas de c
 
 Dadas las [limitaciones de razonamiento de la versión open source de Virtuoso](http://docs.openlinksw.com/virtuoso/virtuosofaq6/), se han tenido que realizar algunas variaciones sobre las consultas SPARQL. Estas consultas se encuentran en el directorio `virtuoso-sparql`. 
 
-En primer lugar, hay que cargar en Virtuoso el dataset previamente generado que contiene todas las tripletas inferidas. Para este ejemplo se ha utilizado el grafo `http://graph.um.es/validation-questions`. Además, se carga la instancia de Geonames necesaria para ejecutar los ejemplos, para poder realizar las consultas solamente con SPARQL, y sin intervención de otros lenguajes de programación:
+En primer lugar, hay que cargar en Virtuoso el dataset previamente generado que contiene todas las tripletas inferidas (descargar y descomprimir [roh-v2-inferred.zip](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/validation-questions/sparql-query/virtuoso-sparql/roh-v2-inferred.zip)). Para este ejemplo se ha utilizado el grafo `http://graph.um.es/validation-questions`. Además, se carga la instancia de Geonames necesaria para ejecutar los ejemplos, para poder realizar las consultas solamente con SPARQL, y sin intervención de otros lenguajes de programación:
 
 ```
 ld_dir ('/ruta/del/dataset/inferido/', '*.owl', 'http://graph.um.es/validation-questions');
