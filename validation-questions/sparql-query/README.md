@@ -16,7 +16,7 @@ rdf_loader_run();
 sparql load <https://sws.geonames.org/3128026/> into <http://graph.um.es/validation-questions>;
 ```
 
-A la hora de ejecutar las consultas, en el punto de SPARQL de Virtuoso (http://155.54.239.204:8890/sparql, de momento de acceso privado) hay que deshabilitar la opción `Strict checking of void variables` para que las consultas funcionen correctamente.
+A la hora de ejecutar las consultas, en el punto de SPARQL de Virtuoso (http://155.54.239.204:8890/sparql) hay que deshabilitar la opción `Strict checking of void variables` para que las consultas funcionen correctamente.
 
 # Preguntas de competencia
 
