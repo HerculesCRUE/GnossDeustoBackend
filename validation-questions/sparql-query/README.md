@@ -11,12 +11,12 @@ Dadas las [limitaciones de razonamiento de la versión open source de Virtuoso](
 En primer lugar, hay que cargar en Virtuoso el dataset previamente generado que contiene todas las tripletas inferidas. Para este ejemplo se ha utilizado el grafo `http://hercules.asio`. Además, se carga la instancia de Geonames necesaria para ejecutar los ejemplos, para poder realizar las consultas solamente con SPARQL, y sin intervención de otros lenguajes de programación:
 
 ```
-ld_dir ('/ruta/del/dataset/inferido/', '*.owl', 'http://hercules.asio');
+ld_dir ('/ruta/del/dataset/inferido/', '*.owl', 'http://graph.um.es/validation-questions');
 rdf_loader_run();
-sparql load <https://sws.geonames.org/3128026/> into <http://hercules.asio>;
+sparql load <https://sws.geonames.org/3128026/> into <http://graph.um.es/validation-questions>;
 ```
 
-A la hora de ejecutar las consultas, en el punto de SPARQL de Virtuoso hay que deshabilitar la opción `Strict checking of void variables` para que las consultas funcionen correctamente.
+A la hora de ejecutar las consultas, en el punto de SPARQL de Virtuoso (http://155.54.239.204:8890/sparql, de momento de acceso privado) hay que deshabilitar la opción `Strict checking of void variables` para que las consultas funcionen correctamente.
 
 # Preguntas de competencia
 
