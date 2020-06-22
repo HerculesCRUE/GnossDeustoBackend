@@ -118,7 +118,7 @@ actualización de recursos: POST, PUT, DELETE y PATCH.
 Como ya hemos adelantado, consideramos que el servidor LDP de ASIO no
 debería soportar las actualizaciones de recursos mediante los métodos
 HTTP. Los métodos expuestos funcionan bien cuando la actualización
-implica sólo a un recurso concreto, sin implicaciones en recursos
+afecta sólo a un recurso concreto, sin implicaciones en recursos
 relacionados. Cuando el modelo ontológico es complejo, como es el caso
 de ASIO, actualizar una entidad (p.e. un proyecto) requiere
 habitualmente de la actualización de datos entidades relacionadas (p.e.
@@ -203,14 +203,14 @@ tipo de miembros que contiene, particularmente su definición ontológica.
 *How can I ensure the resource data is easy to query?*
 
 El mecanismo de consulta de una entidad individual es el previsto
-en un servidor Linked Data, que permite la navegación ilimiatada entre
+en un servidor Linked Data, que permite la navegación ilimitada entre
 entidades a través de sus URI. Para consultas más complejas, el 
 proyecto ASIO contará con un punto SPARQL.
 
 *How is the order of the container entries expressed?*
 
 Como hemos indicado, no vemos necesario implementar la paginación
-como mecanismo de recuperación de entodades, por lo que tampoco
+como mecanismo de recuperación de entidades, por lo que tampoco
 sería necesario gestionar un orden.
 
 
@@ -232,5 +232,5 @@ nivel de cumplimiento aquí expresado no presupone una restricción
 para estas implementaciones, sino que expresa el mínimo que deberían
 ser capaces de cumplir. Por ejemplo, podría ser que la implementación 
 seleccionada soportase el servicio de recursos no-RDF (LDP-NR), pero
-no consideramos que sea un requisito ya que en nuestra propuesta el
+no consideramos que sea un requisito, ya que en nuestra propuesta el
 servidor Linked Data sólo servirá recursos RDF (LDP-RS).
