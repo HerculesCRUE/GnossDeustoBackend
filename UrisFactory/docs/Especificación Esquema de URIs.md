@@ -193,7 +193,7 @@ que se definen en los vocabularios. Estos recursos se identifican
 mediante el esquema:
 http://{base}/res/\[{dominio}\]/{clase}/{ID}
 
-Por ejemplo: http://data.um.es/res/investigador/{id-investigador}
+Por ejemplo: http://graph.um.es/res/researcher/{id-investigador}
 
 Las instancias físicas o conceptuales que se incluirán como fragmentos
 en las URIs se corresponderán con las entidades identificadas en la Red
