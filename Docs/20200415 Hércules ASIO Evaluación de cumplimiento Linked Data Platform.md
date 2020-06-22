@@ -156,22 +156,65 @@ CONTENEDORES
 La implementación LDP del servidor Linked Data de ASIO tendría las 
 siguientes características:
 
--   Sólo tendrá un contenedor. La separación en containers tiene sentido
-    cuando la información proviene de fuentes diversas, mientras que en
-    ASIO toda la información pertenece a la misma fuente, el Sistema de 
-    Gestión de la Investigación (SGI) de la universidad.  Por tanto, 
-    proponemos no implementar el mecanismo LDP previsto para obtener
-    la información de un recurso entre varios contenedores.
-
--   El contenedor sólo devolverá un subconjunto de sus propiedades 
+1.  El contenedor sólo devolverá un subconjunto de sus propiedades 
     (minimal-container triples) y en ningún caso todos los triples de 
-    los recursos contenidos, ni siquiera de manera paginada. En el caso
-    de ASIO, el volumen de recursos supondría una carga para los sistemas
-    que no se justifica. Si se desease proporcionar acceso al dataset
-    completo, sería más recomendable ofrecer una descarga desde un servidor
-    de ficheros.
+    los recursos contenidos, ni siquiera de manera paginada. 
     
-Por tanto, el servidor Linked Data de ASIO se implementará como un servidor 
+En el caso de ASIO, el volumen de recursos supondría una carga para
+los sistemas que no se justifica. Si se desease proporcionar acceso
+al dataset completo, sería más recomendable ofrecer una descarga
+desde un servidor de ficheros.
+    
+
+2.  Sólo necesita un contenedor. 
+
+Según el estándar LPD, la separación en containers tiene sentido 
+cuando la información se organiza en conceptos que particionan 
+la información. En el ejemplo del estándar hablan de blogs, 
+páginas wiki o productos. Consideramos que no es necesario aplicar
+en ASIO esta división en conceptos, ya que toda la información 
+pertenece a la misma fuente, el Sistema de Gestión de la 
+Investigación (SGI) de la universidad. Por tanto, proponemos que
+no sea necesario que el servidor Linked Data disponga del 
+mecanismo LDP previsto para obtener la información de un *recurso*
+entre varios contenedores.
+
+Además, las respuestas a las preguntas que, según el estándar LDP,
+los contenedores deberían responder, indican que su utilidad en el
+servidor Linked Data que proponemos sería muy limitado o inexistente:
+
+*To which URLs can I POST to create new resources?*
+
+Como hemos indicado antes, proponemos que el servidor Linked Data
+no acepte actualizaciones de datos.
+
+*Where can I GET a list of existing resources?*
+
+Como hemos justificado antes por volumen de datos, proponemos que,
+si es necesario un acceso al dataset completo, este se proporcione
+mediante un volcado de datos descargable desde un servidor de
+ficheros.
+
+*How do I get information about the members along with the container?*
+
+El servidor Linked Data proporcionará información básica acerca del 
+tipo de miembros que contiene, particularmente su definición ontológica.
+
+*How can I ensure the resource data is easy to query?*
+
+El mecanismo de consulta de una entidad individual es el previsto
+en un servidor Linked Data, que permite la navegación ilimiatada entre
+entidades a través de sus URI. Para consultas más complejas, el 
+proyecto ASIO contará con un punto SPARQL.
+
+*How is the order of the container entries expressed?*
+
+Como hemos indicado, no vemos necesario implementar la paginación
+como mecanismo de recuperación de entodades, por lo que tampoco
+sería necesario gestionar un orden.
+
+
+En resumen, el servidor Linked Data de ASIO se implementará como un servidor 
 LDP con un único contenedor que sólo devolverá los triples de
 la entidad solicitada ([LDP Basic container](https://www.w3.org/TR/ldp/#ldpbc)).
 
@@ -183,3 +226,11 @@ El servidor Linked Data que implementaremos en ASIO cumplirá el estándar
 LDP para la recuperación de recursos RDF (LDP-RS), con un único contenedor 
 y sólo con las funciones de lectura de datos.
 
+Probablemente, el servidor Linked Data de ASIO reutilizará alguna
+implementación de código abierto que soporte el estándar LDP. El 
+nivel de cumplimiento aquí expresado no presupone una restricción
+para estas implementaciones, sino que expresa el mínimo que deberían
+ser capaces de cumplir. Por ejemplo, podría ser que la implementación 
+seleccionada soportase el servicio de recursos no-RDF (LDP-NR), pero
+no consideramos que sea un requisito ya que en nuestra propuesta el
+servidor Linked Data sólo servirá recursos RDF (LDP-RS).
