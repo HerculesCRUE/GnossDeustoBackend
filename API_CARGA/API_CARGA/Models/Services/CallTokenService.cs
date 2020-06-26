@@ -40,6 +40,14 @@ namespace API_CARGA.Models.Services
             string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeOAIPMH()}&client_id={_configToken.GetClientIdOAIPMH()}&client_secret={_configToken.GetClientSecretOAIPMH()}";
             return CallTokenIdentity(stringData);
         }
+        /// <summary>
+        /// Obtiene el token de acceso al api de Unidata
+        /// </summary>
+        public TokenBearer CallTokenUnidata()
+        {
+            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeUnidata()}&client_id={_configToken.GetClientIdUnidata()}&client_secret={_configToken.GetClientSecretUnidata()}";
+            return CallTokenIdentity(stringData);
+        }
 
         /// <summary>
         /// Realiza la llamada para la obtención del token de acceso con el endpoint configurado en AuthorityGetToken

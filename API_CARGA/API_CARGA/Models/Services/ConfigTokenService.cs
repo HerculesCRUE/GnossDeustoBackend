@@ -18,15 +18,18 @@ namespace API_CARGA.Models.Services
     public class ConfigTokenService
     {
         public IConfigurationRoot Configuration { get; set; }
-        public string Authority { get; set; }
-        public string GrantType { get; set; }
-        public string Scope { get; set; }
-        public string ScopeOAIPMH { get; set; }
-        public string ScopeCron { get; set; }
-        public string ClientId { get; set; }
-        public string ClientIdOAIPMH { get; set; }
-        public string ClientSecret { get; set; }
-        public string ClientSecretOAIPMH { get; set; }
+        private string Authority { get; set; }
+        private string GrantType { get; set; }
+        private string Scope { get; set; }
+        private string ScopeOAIPMH { get; set; }
+        private string ScopeCron { get; set; }
+        private string ClientId { get; set; }
+        private string ClientIdOAIPMH { get; set; }
+        private string ClientSecret { get; set; }
+        private string ClientSecretOAIPMH { get; set; }
+        private string ClientIdUnidata { get; set; }
+        private string ClientSecretUnidata { get; set; }
+        private string ScopeUnidata { get; set; }
         
         public ConfigTokenService()
         {
@@ -218,6 +221,77 @@ namespace API_CARGA.Models.Services
                 ClientIdOAIPMH = clientId;
             }
             return ClientIdOAIPMH;
+        }
+
+
+
+        /// <summary>
+        /// obtiene la limitación de acceso al api de unidata
+        /// </summary> 
+        public string GetScopeUnidata()
+        {
+            if (string.IsNullOrEmpty(ScopeUnidata))
+            {
+                string scope = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ScopeUnidata"))
+                {
+                    scope = environmentVariables["ScopeUnidata"] as string;
+                }
+                else
+                {
+                    scope = Configuration["ScopeUnidata"];
+                }
+
+                ScopeUnidata = scope;
+            }
+            return ScopeUnidata;
+        }
+
+        /// <summary>
+        /// obtiene el id de cliente del api de carga
+        /// </summary> 
+        public string GetClientIdUnidata()
+        {
+            if (string.IsNullOrEmpty(ClientIdUnidata))
+            {
+                string clientId = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ClientIdUnidata"))
+                {
+                    clientId = environmentVariables["ClientIdUnidata"] as string;
+                }
+                else
+                {
+                    clientId = Configuration["ClientIdUnidata"];
+                }
+
+                ClientIdUnidata = clientId;
+            }
+            return ClientIdUnidata;
+        }
+
+        /// <summary>
+        /// obtiene la "clave" de acceso del api de carga
+        /// </summary>
+        public string GetClientSecretUnidata()
+        {
+            if (string.IsNullOrEmpty(ClientSecretUnidata))
+            {
+                string clientSecret = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ClientSecretUnidata"))
+                {
+                    clientSecret = environmentVariables["ClientSecretUnidata"] as string;
+                }
+                else
+                {
+                    clientSecret = Configuration["ClientSecretUnidata"];
+                }
+
+                ClientSecretUnidata = clientSecret;
+            }
+            return ClientSecretUnidata;
         }
     }
 }

@@ -2,6 +2,7 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 using API_CARGA.Models.Entities;
+using API_CARGA.Models.Services;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -298,6 +299,11 @@ namespace API_CARGA.Models.Utility
                     webClient.Dispose();
                 }
             }
+        }
+
+        private static void InsertDataUniData(List<string> triplesInsert)
+        {
+            CallApiService callApi = new CallApiService();
         }
     }
 }

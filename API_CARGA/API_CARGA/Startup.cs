@@ -131,8 +131,10 @@ namespace PRH
             //services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
             services.AddScoped<IShapesConfigService, ShapesConfigBDService>();
             services.AddScoped<ICallNeedPublishData, CallApiNeedInfoPublisData>();
+            services.AddScoped<ICallService, CallApiService>();
             services.AddScoped(typeof(ConfigTokenService));
             services.AddScoped(typeof(CallTokenService));
+            services.AddScoped(typeof(CallApiUnidata));
             services.AddScoped(typeof(CallUri)); 
             //services.AddSingleton<ISyncConfigService, SyncConfigMockService>();
 

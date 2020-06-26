@@ -15,7 +15,8 @@ namespace API_CARGA.Models.Services
     public class ConfigUrlService
     {
         public IConfigurationRoot Configuration { get; set; }
-        public string Url { get; set; }
+        private string Url { get; set; }
+        private string UrlUnidata { get; set; }
         ///<summary>
         ///Obtiene la url configurada en ConfigUrl del fichero appsettings.json
         ///</summary>
@@ -42,5 +43,32 @@ namespace API_CARGA.Models.Services
             }
             return Url;
         }
+        ///<summary>
+        ///Obtiene la url configurada en ConfigUrlUnidata del fichero appsettings.json
+        ///</summary>
+        public string GetUrlUnidata()
+        {
+            if (string.IsNullOrEmpty(UrlUnidata))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                string connectionString = "";
+                if (environmentVariables.Contains("ConfigUrlUnidata"))
+                {
+                    connectionString = environmentVariables["ConfigUrlUnidata"] as string;
+                }
+                else
+                {
+                    connectionString = Configuration["ConfigUrlUnidata"];
+                }
+                UrlUnidata = connectionString;
+            }
+            return UrlUnidata;
+        }
+        
     }
 }

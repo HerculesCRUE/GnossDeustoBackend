@@ -86,6 +86,19 @@ namespace IdentityServerHecules
                 AccessTokenLifetime = 86400
                 //AccessTokenType = AccessTokenType.Reference
             }
+            ,
+            new Client
+            {
+                ClientId = "unidata",
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                ClientSecrets =
+                {
+                    new Secret("secretUnidata".Sha256())
+                },
+                AllowedScopes = { "apiUnidata"},
+                AccessTokenLifetime = 86400
+                //AccessTokenType = AccessTokenType.Reference
+            }
         };
         }
 
@@ -94,7 +107,7 @@ namespace IdentityServerHecules
         {
             return new List<ApiResource>
         {
-            new ApiResource("api1", "My Api"),new ApiResource("apiCarga", "My ApiCarga"),new ApiResource("apiCron", "My ApiCron"),new ApiResource("apiUrisFactory", "My ApiUrisFactory"),new ApiResource("apiOAIPMH", "My apiOAIPMH")
+            new ApiResource("api1", "My Api"),new ApiResource("apiCarga", "My ApiCarga"),new ApiResource("apiCron", "My ApiCron"),new ApiResource("apiUrisFactory", "My ApiUrisFactory"),new ApiResource("apiOAIPMH", "My apiOAIPMH"),new ApiResource("apiUnidata", "My apiUnidata")
         };
         }
     }
