@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ApiCargaWebInterface.Models.Services
@@ -43,6 +44,8 @@ namespace ApiCargaWebInterface.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
+                //var authString = Convert.ToBase64String(Encoding.UTF8.GetBytes("admin:Root12345678"));
+                //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authString);
                 client.Timeout = TimeSpan.FromDays(1);
                 string authority = _configToken.GetAuthority();
                 response = client.PostAsync($"{authority}", contentData).Result;
