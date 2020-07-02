@@ -3,7 +3,6 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase para crear una sincronización 
 using API_CARGA.Models.Entities;
-using API_CARGA.Models.Utility;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -40,9 +39,6 @@ namespace API_CARGA.Models.Services
         /// <param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
         public void PublishRepositories(Guid identifier, DateTime? fechaFrom = null, string set = null, string codigoObjeto = null)
         {
-            List<string> lista = new List<string>();
-            lista.Add("hola");
-            SparqlUtility.InsertDataUniData(lista);
             List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
             if (codigoObjeto == null)
             {

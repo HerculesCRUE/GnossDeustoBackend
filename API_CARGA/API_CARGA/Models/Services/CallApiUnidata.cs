@@ -20,11 +20,13 @@ namespace API_CARGA.Models.Services
 
         public void LoadTriples(List<string> triplesInsertar)
         {
-            object objeto = new
+            string triples = "";
+            foreach (string triple in triplesInsertar)
             {
-                triples = triplesInsertar
-            };
-            _callApiService.CallPostApi(_serviceUrl.GetUrlUnidata(), "loadtriples", objeto, _token);
+                triples = $"triples={triple}&";
+            }
+            triples = triples.Remove(triples.Length - 1);
+            _callApiService.CallPostApi(_serviceUrl.GetUrlUnidata(), $"loadtriples?{triples}", null, _token);
         }
     }
 }

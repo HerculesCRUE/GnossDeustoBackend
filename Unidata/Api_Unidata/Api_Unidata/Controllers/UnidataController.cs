@@ -27,6 +27,7 @@ namespace Api_Unidata.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult LoadTriples(List<string> triples)
         {
+            
             SparqlUtility.LoadTriples(triples);
             return Ok();
         }
