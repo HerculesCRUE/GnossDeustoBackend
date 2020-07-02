@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Api_Unidata.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -66,7 +68,10 @@ namespace Api_Unidata
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API de unidata", Version = "v1", Description = "API de unidata" });
                 c.IncludeXmlComments(string.Format(@"{0}comments.xml", System.AppDomain.CurrentDomain.BaseDirectory));
-                c.ExampleFilters();
+                //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                //c.IncludeXmlComments(xmlPath);
+                //c.ExampleFilters();
                 c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",

@@ -245,7 +245,7 @@ namespace API_CARGA.Models.Utility
                         triplesInsert.Add(listBlankNodeTriples[i]);
                     }
                     InsertData(pSPARQLEndpoint, pGraph, triplesInsert, pQueryParam);
-                    InsertData(pSPARQLEndpoint, pGraphUnidata, triplesInsert, pQueryParam);
+                    InsertDataUniData(triplesInsert);
                 }
             }
 
@@ -254,7 +254,7 @@ namespace API_CARGA.Models.Utility
             if (listNotBlankNodeTriples.Count > 0)
             {
                 InsertData(pSPARQLEndpoint, pGraph, listNotBlankNodeTriples, pQueryParam);
-                InsertData(pSPARQLEndpoint, pGraphUnidata, listNotBlankNodeTriples, pQueryParam);
+                InsertDataUniData(listNotBlankNodeTriples);
             }
         }
 
@@ -301,9 +301,14 @@ namespace API_CARGA.Models.Utility
             }
         }
 
-        private static void InsertDataUniData(List<string> triplesInsert)
+        public static void InsertDataUniData(List<string> triplesInsert)
         {
             CallApiService callApi = new CallApiService();
+            ConfigTokenService configTokenService = new ConfigTokenService();
+            CallTokenService callTokenService = new CallTokenService(configTokenService);
+            ConfigUrlService configUrl = new ConfigUrlService();
+            CallApiUnidata callUnidata = new CallApiUnidata(callApi, callTokenService, configUrl);
+            callUnidata.LoadTriples(triplesInsert);
         }
     }
 }

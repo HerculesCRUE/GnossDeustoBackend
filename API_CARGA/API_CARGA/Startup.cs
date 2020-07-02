@@ -135,6 +135,7 @@ namespace PRH
             services.AddScoped(typeof(ConfigTokenService));
             services.AddScoped(typeof(CallTokenService));
             services.AddScoped(typeof(CallApiUnidata));
+            services.AddScoped(typeof(CallApiService));
             services.AddScoped(typeof(CallUri)); 
             //services.AddSingleton<ISyncConfigService, SyncConfigMockService>();
 

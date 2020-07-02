@@ -18,9 +18,13 @@ namespace API_CARGA.Models.Services
             _serviceUrl = serviceUrl;
         }
 
-        public void LoadTriples(List<string> triples)
+        public void LoadTriples(List<string> triplesInsertar)
         {
-            _callApiService.CallPostApi(_serviceUrl.GetUrlUnidata(), "loadtriples", triples, _token);
+            object objeto = new
+            {
+                triples = triplesInsertar
+            };
+            _callApiService.CallPostApi(_serviceUrl.GetUrlUnidata(), "loadtriples", objeto, _token);
         }
     }
 }
