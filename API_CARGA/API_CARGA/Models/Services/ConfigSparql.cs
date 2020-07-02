@@ -16,6 +16,7 @@ namespace API_CARGA.Models.Services
     {
         public IConfigurationRoot Configuration { get; set; }
         private string Graph { get; set; }
+        private string GraphUnidata { get; set; }
         public string Endpoint { get; set; }
         private string QueryParam { get; set; }
         ///<summary>
@@ -48,7 +49,7 @@ namespace API_CARGA.Models.Services
         ///</summary>
         public string GetGraphUnidata()
         {
-            if (string.IsNullOrEmpty(Graph))
+            if (string.IsNullOrEmpty(GraphUnidata))
             {
                 var builder = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
@@ -58,15 +59,15 @@ namespace API_CARGA.Models.Services
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("GraphUnidata"))
                 {
-                    Graph = environmentVariables["GraphUnidata"] as string;
+                    GraphUnidata = environmentVariables["GraphUnidata"] as string;
                 }
                 else
                 {
-                    Graph = Configuration["Sparql:GraphUnidata"];
+                    GraphUnidata = Configuration["Sparql:GraphUnidata"];
                 }
 
             }
-            return Graph;
+            return GraphUnidata;
         }
         ///<summary>
         ///Obtiene el endpoint configurado en Sparql:Endpoint del fichero appsettings.json
