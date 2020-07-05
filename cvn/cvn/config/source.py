@@ -6,25 +6,25 @@ def init_source_from_serialized_toml(config):
     # code and name are required attributes
 
     code = None
-    if 'code' in config:
-        code = config['code']
-        if not cvn_code.is_cvn_code_valid(config['code']):
-            raise ValueError('code does not match expected format')
+    if "code" in config:
+        code = config["code"]
+        if not cvn_code.is_cvn_code_valid(config["code"]):
+            raise ValueError("code does not match expected format")
 
-    if 'name' not in config:
-        raise KeyError('name not specified for Source')
+    if "name" not in config:
+        raise KeyError("name not specified for Source")
 
     # Default value for bean
     bean = "Value"
-    if 'bean' in config:
-        bean = config['bean']
+    if "bean" in config:
+        bean = config["bean"]
 
     # format is optional
     format_string = None
-    if 'format' in config:
-        format_string = config['format']
+    if "format" in config:
+        format_string = config["format"]
 
-    return Source(code, config['name'], bean, format_string)
+    return Source(code, config["name"], bean, format_string)
 
 
 class Source(Printable):

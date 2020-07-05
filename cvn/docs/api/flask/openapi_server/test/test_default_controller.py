@@ -18,20 +18,19 @@ class TestDefaultController(BaseTestCase):
 
         Convierte CVN XML a tripletas ROH
         """
-        query_string = [('orcid', 'orcid_example'),
-                        ('format', 'xml')]
-        headers = { 
-            'Content-Type': 'application/x-www-form-urlencoded',
+        query_string = [("orcid", "orcid_example"), ("format", "xml")]
+        headers = {
+            "Content-Type": "application/x-www-form-urlencoded",
         }
         response = self.client.open(
-            '/v1/convert',
-            method='POST',
+            "/v1/convert",
+            method="POST",
             headers=headers,
-            content_type='application/x-www-form-urlencoded',
-            query_string=query_string)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+            content_type="application/x-www-form-urlencoded",
+            query_string=query_string,
+        )
+        self.assert200(response, "Response body is : " + response.data.decode("utf-8"))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

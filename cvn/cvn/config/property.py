@@ -8,50 +8,59 @@ import re
 def init_property_from_serialized_toml(config, entity_parent):
     ontology = "owl"
     name = "topDataProperty"
-    if 'displayname' in config:
+    if "displayname" in config:
         display_name_format = re.compile("^[a-zA-Z]+:\w+$")
-        if re.match(display_name_format, config['displayname']):
-            split = config['displayname'].split(":")
+        if re.match(display_name_format, config["displayname"]):
+            split = config["displayname"].split(":")
             ontology = split[0]
             name = split[1]
         else:
-            raise ValueError('displayname has invalid format')
+            raise ValueError("displayname has invalid format")
     else:
-        if 'ontology' not in config:
-            raise KeyError('ontology not specified for Property: ' + str(config))
+        if "ontology" not in config:
+            raise KeyError("ontology not specified for Property: " + str(config))
             # TODO comprobar que está definida
-        ontology = config['ontology']
+        ontology = config["ontology"]
 
-        if 'name' not in config:
-            raise KeyError('name not specified for Property')
-        name = config['name']
+        if "name" not in config:
+            raise KeyError("name not specified for Property")
+        name = config["name"]
 
     format_string = None
-    if 'format' in config:
-        format_string = config['format']
+    if "format" in config:
+        format_string = config["format"]
 
     hidden = False
-    if 'hidden' in config:
-        hidden = config['hidden']
+    if "hidden" in config:
+        hidden = config["hidden"]
 
     data_type = None
-    if 'datatype' in config:
-        data_type = config['datatype']
+    if "datatype" in config:
+        data_type = config["datatype"]
 
-    generated_property = Property(ontology=ontology, name=name, format_string=format_string,
-                                  hidden=hidden, parent=entity_parent, data_type=data_type)
+    generated_property = Property(
+        ontology=ontology,
+        name=name,
+        format_string=format_string,
+        hidden=hidden,
+        parent=entity_parent,
+        data_type=data_type,
+    )
 
-    if 'sources' not in config:
-        raise KeyError('no sources defined for Property')
-    for source in config['sources']:
+    if "sources" not in config:
+        raise KeyError("no sources defined for Property")
+    for source in config["sources"]:
         generated_source = cvn_source.init_source_from_serialized_toml(source)
         generated_property.add_source(generated_source)
 
     # Conditions
-    if 'conditions' in config:
-        for condition in config['conditions']:
-            generated_property.add_condition(cvn_condition.init_condition_from_serialized_toml(condition,
-                                                                                               generated_property))
+    if "conditions" in config:
+        for condition in config["conditions"]:
+            generated_property.add_condition(
+                cvn_condition.init_condition_from_serialized_toml(
+                    condition, generated_property
+                )
+            )
 
     return generated_property
 
@@ -64,7 +73,7 @@ def has_all_formatting_fields(format_string, fields):
     :return: bool ¿están todos los campos de formateo cubiertos por el diccionario?
     """
     # Busca los valores entre {} y los devuelve en una lista
-    format_fields = re.findall(r'{(.*?)}', format_string)
+    format_fields = re.findall(r"{(.*?)}", format_string)
 
     for field in format_fields:
         if field not in fields:
@@ -76,11 +85,19 @@ class Default(dict):
     # solución rápida para cuando no hay un valor de un format
     #  https://stackoverflow.com/a/19800610
     def __missing__(self, key):
-        return ''
+        return ""
 
 
 class Property(Printable):
-    def __init__(self, ontology, name, parent, format_string=None, hidden=False, data_type="xsd:string"):
+    def __init__(
+        self,
+        ontology,
+        name,
+        parent,
+        format_string=None,
+        hidden=False,
+        data_type="xsd:string",
+    ):
         self.ontology = ontology
         self.name = name
         self.format = format_string
@@ -124,7 +141,9 @@ class Property(Printable):
             return result
         else:
             try:
-                formatted = self.format.format_map(Default(self.get_source_dict())).strip()
+                formatted = self.format.format_map(
+                    Default(self.get_source_dict())
+                ).strip()
                 if formatted != "":
                     self.formatted_value = formatted
                     return formatted

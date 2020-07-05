@@ -13,5 +13,5 @@ class TestConstructor(unittest.TestCase):
         self.assertIsNone(entity.identifier_config_format)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -13,11 +13,7 @@ VERSION = "1.0.0"
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-REQUIRES = [
-    "connexion>=2.0.2",
-    "swagger-ui-bundle>=0.0.2",
-    "python_dateutil>=2.6.0"
-]
+REQUIRES = ["connexion>=2.0.2", "swagger-ui-bundle>=0.0.2", "python_dateutil>=2.6.0"]
 
 setup(
     name=NAME,
@@ -28,12 +24,10 @@ setup(
     keywords=["OpenAPI", "Servicio conversión CVN-ROH"],
     install_requires=REQUIRES,
     packages=find_packages(),
-    package_data={'': ['openapi/openapi.yaml']},
+    package_data={"": ["openapi/openapi.yaml"]},
     include_package_data=True,
-    entry_points={
-        'console_scripts': ['openapi_server=openapi_server.__main__:main']},
+    entry_points={"console_scripts": ["openapi_server=openapi_server.__main__:main"]},
     long_description="""\
     Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH.
-    """
+    """,
 )
-

@@ -8,32 +8,40 @@ from cvn.utils import xmltree
 
 
 def init_condition_from_serialized_toml(config, parent):
-    if 'type' not in config:
-        raise KeyError('type not present in Condition declaration: ' + config)
+    if "type" not in config:
+        raise KeyError("type not present in Condition declaration: " + config)
 
-    if 'code' not in config:
-        raise KeyError('code not present in Condition declaration: ' + config)
+    if "code" not in config:
+        raise KeyError("code not present in Condition declaration: " + config)
 
     negated = False
-    if 'negated' in config:
-        negated = config['negated']
+    if "negated" in config:
+        negated = config["negated"]
     bean = "Value"
 
-    if 'bean' in config:
-        bean = config['bean']
+    if "bean" in config:
+        bean = config["bean"]
 
     value = None
-    if 'value' in config:
-        value = config['value']
+    if "value" in config:
+        value = config["value"]
 
-    return Condition(condition_type=config['type'], code=config['code'], value=value,
-                     parent=parent, bean=bean, negated=negated)
+    return Condition(
+        condition_type=config["type"],
+        code=config["code"],
+        value=value,
+        parent=parent,
+        bean=bean,
+        negated=negated,
+    )
 
 
 class Condition:
-    ALLOWED_TYPES = ['bean_value_equals', 'bean_present']
+    ALLOWED_TYPES = ["bean_value_equals", "bean_present"]
 
-    def __init__(self, condition_type, code, parent, value=None, bean="Value", negated=False):
+    def __init__(
+        self, condition_type, code, parent, value=None, bean="Value", negated=False
+    ):
         self.condition_type = condition_type
         self.code = code
         self.value = value
@@ -52,7 +60,9 @@ class Condition:
                 xml_item = self.parent.parent.xml_item
             else:
                 xml_item = self.parent.xml_item
-        if isinstance(self.parent, cvn_property.Property) or isinstance(self.parent, cvn_relationship.Relationship):
+        if isinstance(self.parent, cvn_property.Property) or isinstance(
+            self.parent, cvn_relationship.Relationship
+        ):
             xml_item = self.parent.parent.xml_item
 
         # Luego ya actuamos en consecuencia

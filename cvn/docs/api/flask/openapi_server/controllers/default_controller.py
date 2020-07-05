@@ -16,4 +16,4 @@ def convert_post(orcid, format=None):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return "do some magic!"

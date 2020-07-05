@@ -19,7 +19,7 @@ from cvn.utils import xmltree
 import logging
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB máx.
+app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # 16MB máx.
 
 debug = False
 
@@ -33,7 +33,7 @@ ALLOWED_FORMATS = ["xml", "n3", "turtle", "nt", "pretty-xml", "trix", "trig", "n
 # TODO documentación
 
 
-@app.route('/v1/convert', methods=['POST'])
+@app.route("/v1/convert", methods=["POST"])
 def v1_convert():
     # ---
     # Validación de la solicitud
@@ -48,22 +48,22 @@ def v1_convert():
     if request.get_data() is None:
         return make_validation_error("An xml file is required as binary body data.")
 
-    if request.args.get('orcid') is None:
+    if request.args.get("orcid") is None:
         return make_validation_error("The orcid parameter is required.")
 
     # Validar si es una ID de ORCID real
-    pattern = re.compile('0000-000(1-[5-9]|2-[0-9]|3-[0-4])\d{3}-\d{3}[\dX]')
-    if not pattern.match(request.args.get('orcid')):
+    pattern = re.compile("0000-000(1-[5-9]|2-[0-9]|3-[0-4])\d{3}-\d{3}[\dX]")
+    if not pattern.match(request.args.get("orcid")):
         return make_validation_error("The orcid field has an invalid format.")
 
     # Guardar algunos parámetros en el diccionario para luego generar bien el resultado
-    params = {'orcid': request.args.get('orcid'), 'format': "xml"}
+    params = {"orcid": request.args.get("orcid"), "format": "xml"}
 
     # Si se especifica el formato, solo permitir ciertos valores
-    if request.args.get('format') is not None:
-        if request.args.get('format') not in ALLOWED_FORMATS:
+    if request.args.get("format") is not None:
+        if request.args.get("format") not in ALLOWED_FORMATS:
             return make_validation_error("The format field has an unsupported format.")
-        params['format'] = request.args.get('format')
+        params["format"] = request.args.get("format")
 
     try:
         root = ET.fromstring(input_xml)
@@ -88,10 +88,14 @@ def v1_convert():
     ontology_config = OntologyConfig()
 
     # Recorrer la config de ontologías y añadirlas al NamespaceManager
-    for ontology in config_ontologies['ontologies']:
-        ontology_instance = Ontology(short_name=ontology['shortname'], uri_base=ontology['uri_base'])
+    for ontology in config_ontologies["ontologies"]:
+        ontology_instance = Ontology(
+            short_name=ontology["shortname"], uri_base=ontology["uri_base"]
+        )
         ontology_config.add_ontology(ontology_instance)
-        namespace_manager.bind(ontology_instance.short_name, ontology_instance.namespace)
+        namespace_manager.bind(
+            ontology_instance.short_name, ontology_instance.namespace
+        )
 
     # Iniciar grafo principal con el NamespaceManager rellenado de ontologías
     g = Graph()
@@ -104,30 +108,40 @@ def v1_convert():
         config_data_types = toml.loads(f.read())
 
     # TODO mover a su clase
-    for data_type_config in config_data_types['datatypes']:
+    for data_type_config in config_data_types["datatypes"]:
         default = False
-        if 'default' in data_type_config:
-            default = data_type_config['default']
+        if "default" in data_type_config:
+            default = data_type_config["default"]
         force = False
-        if 'force' in data_type_config:
-            force = data_type_config['force']
+        if "force" in data_type_config:
+            force = data_type_config["force"]
 
-        ontology_config.add_data_type(DataType(ontology=data_type_config['ontology'], name=data_type_config['name'],
-                                               python_type=data_type_config['python_type'], default=default,
-                                               force=force))
+        ontology_config.add_data_type(
+            DataType(
+                ontology=data_type_config["ontology"],
+                name=data_type_config["name"],
+                python_type=data_type_config["python_type"],
+                default=default,
+                force=force,
+            )
+        )
 
     # 2. Generar entidades
 
     # Cargar config
-    with open("mappings/cvn/1.4.2_sp1/cvn-to-roh/entities.toml") as f:  # TODO deshardcodificar
+    with open(
+        "mappings/cvn/1.4.2_sp1/cvn-to-roh/entities.toml"
+    ) as f:  # TODO deshardcodificar
         entities_config = toml.loads(f.read())
 
     # Generar instancias Entity
     entities = []
     primary_entity = None
-    for entity_config in entities_config['entities']:
+    for entity_config in entities_config["entities"]:
         generated_entity = config_entity.init_entity_from_serialized_toml(entity_config)
-        if generated_entity.primary:  # La entidad primnaria (la de la persona del CVN la guardamos por separado)
+        if (
+            generated_entity.primary
+        ):  # La entidad primnaria (la de la persona del CVN la guardamos por separado)
             primary_entity = generated_entity
         else:
             entities.append(generated_entity)
@@ -141,44 +155,62 @@ def v1_convert():
         # Para cada tipo de entidad buscamos en el árbol las que tengan el código
         entity.generate_and_add_to_ontology(ontology_config, root)
 
-    return make_response(g.serialize(format=params['format']), 200)
+    return make_response(g.serialize(format=params["format"]), 200)
 
 
 def get_sources_from_property(current_property, node):
     # Declaramos un dict. para que podamos guardar los valores de los sources
     sources = {}
-    for source in current_property['sources']:
-        source_node = xmltree.get_first_node_by_code(node, source['code'])
+    for source in current_property["sources"]:
+        source_node = xmltree.get_first_node_by_code(node, source["code"])
         if source_node is not None:
-            result = source_node.find("{http://codes.cvn.fecyt.es/beans}" + source['bean'])
+            result = source_node.find(
+                "{http://codes.cvn.fecyt.es/beans}" + source["bean"]
+            )
             if result is not None:
                 # Formateamos source
-                if 'format' in source:
-                    sources[source['name']] = source['format'].format(value=result.text)
+                if "format" in source:
+                    sources[source["name"]] = source["format"].format(value=result.text)
                 else:
-                    sources[source['name']] = result.text
+                    sources[source["name"]] = result.text
             else:
-                sources[source['name']] = None
+                sources[source["name"]] = None
     return sources
 
 
 def make_validation_error(message):
-    return make_response(jsonify({'error': message}), 422)  # 422 = Unprocessable Entity
+    return make_response(jsonify({"error": message}), 422)  # 422 = Unprocessable Entity
     # TODO juntar esta función y make_error_response
 
 
 def make_error_response(message):
-    return make_response(jsonify({'error': message}), 500)  # 422 = Unprocessable Entity
+    return make_response(jsonify({"error": message}), 500)  # 422 = Unprocessable Entity
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Servidor HTTP que ofrece una API para convertir XML CVN a tripletas "
-                                                 "ROH")
-    parser.add_argument("-p", "--port", type=int, default=5000, choices=range(0, 65536),
-                        help="El puerto en el que se ejecutará el servidor HTTP (por defecto 5000)", metavar="")
-    parser.add_argument("--host", default="127.0.0.1",
-                        help="El host donde se bindeará el servidor HTTP (por defecto 127.0.0.1)")
-    parser.add_argument("--debug", action="store_true", help="DEBUG: activar modo debug (aumenta tiempo de ejecución)")
+    parser = argparse.ArgumentParser(
+        description="Servidor HTTP que ofrece una API para convertir XML CVN a tripletas "
+        "ROH"
+    )
+    parser.add_argument(
+        "-p",
+        "--port",
+        type=int,
+        default=5000,
+        choices=range(0, 65536),
+        help="El puerto en el que se ejecutará el servidor HTTP (por defecto 5000)",
+        metavar="",
+    )
+    parser.add_argument(
+        "--host",
+        default="127.0.0.1",
+        help="El host donde se bindeará el servidor HTTP (por defecto 127.0.0.1)",
+    )
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="DEBUG: activar modo debug (aumenta tiempo de ejecución)",
+    )
     args = parser.parse_args()
 
     debug = args.debug
