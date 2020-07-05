@@ -221,7 +221,13 @@ def init_entity_from_serialized_toml(config, parent=None):
 
 
 class Entity:
-    # TODO todo el tema de la id y la URI
+    """Entity representa una clase en RDF: Person, Project, etc.
+
+    Es la base de la generación. Todas las demás clases relacionadas cuelgan de Entity: Property, Relationship...
+
+
+    """
+
     def __init__(
         self,
         code,
@@ -282,6 +288,14 @@ class Entity:
         skip_subentities_with_subcode=True,
         do_loop=True,
     ):
+        """
+
+        :param ontology_config:
+        :param xml_tree:
+        :param skip_subentities_with_subcode:
+        :param do_loop:
+        :return:
+        """
         if do_loop:
             for entity_result_node in xmltree.get_all_nodes_by_code(
                 xml_tree, self.code
@@ -345,6 +359,11 @@ class Entity:
         self.xml_item = item_node
 
     def clear_values(self, include_sub_entities_with_sub_code=False):
+        """
+        Borra todos los valores de la clase
+        :param include_sub_entities_with_sub_code:
+        :return: self
+        """
         if self.uri is None:
             self.generated_identifier = None
         for property_item in self.properties:
@@ -543,6 +562,16 @@ class Entity:
                 )
 
     def get_property_dict(self, format_safe=False):
+        """
+        Devuelve el diccionario de propiedades, que se usa especialmente para rellenar datos en funciones de formateo
+        No se incluyen aquellas propiedades vacías, sin valor (None).
+
+        Por ejemplo:
+        {"foaf:name": "Gregorio Esteban Sánchez", "foaf:email": "mailto:gregorio@example.com"}
+
+        :param format_safe: bool, si se incluye las claves de los elementos del diccionario serán compatibles con la función format de Python (ver get_format_safe_identifier)
+        :return: diccionario con las propiedades con su display name como clave y su valor
+        """
         properties = {}
         for property_item in self.properties:
             if property_item.formatted_value is not None:
@@ -557,6 +586,12 @@ class Entity:
         return properties
 
     def should_generate(self):
+        """
+        Comprueba si debería o no generarse la entidad:
+        - Si tiene propiedades y alguna no está vacía
+        - ...y, si tiene condiciones, se cumplen todas
+        :return: bool
+        """
         if (len(self.properties) > 0) and self.are_properties_empty():
             return False
         for condition in self.conditions:
@@ -565,6 +600,10 @@ class Entity:
         return True
 
     def are_properties_empty(self):
+        """
+        Recorre todas las propiedades y comprueba si alguna tiene valor
+        :return: bool
+        """
         for property_item in self.properties:
             if property_item.formatted_value is not None:
                 return False
@@ -574,6 +613,13 @@ class Entity:
         return True
 
     def should_cache(self):
+        """
+        Comprueba si debe cachearse el elemento:
+        - Si en la config se ha indicado que se quiere cachear
+        - ...y si las propiedades que se usan para el caché no están vacías
+
+        :return: bool
+        """
         if self.property_cache is None:
             return False
         for property_item in self.properties:
@@ -583,6 +629,13 @@ class Entity:
         return False
 
     def get_cache_id(self):
+        """
+        Devuelve el identificador del caché, que es: "ontología:classname:cached_property"
+
+        Por ejemplo: "foaf:Organization:Facultad de Ingeniería"
+
+        :return: str, identificador del caché
+        """
         if self.property_cache is None:
             return None
         cached_property = None
