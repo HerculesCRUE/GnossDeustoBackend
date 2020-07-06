@@ -136,6 +136,68 @@ namespace API_CARGA.Models.Utility
         }
 
         /// <summary>
+        /// Valida un RDF
+        /// </summary>
+        /// <param name="pRdfFileContent">XML RDF</param>
+        /// <param name="pValidation">Validación a realizar</param>
+        /// <returns>Lista de triples</returns>
+        public static ShapeReport ValidateRDF(string pRdfFileContent, string pValidation)
+        {
+            //Cargamos la ontología
+            RohGraph ontologyGraph = new RohGraph();
+            ontologyGraph.LoadFromFile("Config/Ontology/roh-v2.owl");
+
+            //Cargamos datos a validar
+            RohGraph dataGraph = new RohGraph();
+            dataGraph.LoadFromString(pRdfFileContent, new RdfXmlParser());
+
+            //Aplicamos inferencias de la ontologia
+            RohRdfsReasoner reasoner = new RohRdfsReasoner();
+            reasoner.Initialise(ontologyGraph);
+            reasoner.Apply(dataGraph);
+
+            ShapeReport response = new ShapeReport();
+            response.conforms = true;
+            response.results = new List<ShapeReport.Result>();
+           
+            IGraph shapeGraph = new Graph();
+            shapeGraph.LoadFromString(pValidation);
+            ShapesGraph shapesGraph = new ShapesGraph(shapeGraph);
+
+            Report report = shapesGraph.Validate(dataGraph);
+            if (!report.Conforms)
+            {
+                response.conforms = false;
+                response.results.AddRange(report.Results.ToList().Select(x => new ShapeReport.Result()
+                {
+                    severity = (x.Severity != null) ? x.Severity.ToString() : null,
+                    focusNode = (x.FocusNode != null) ? x.FocusNode.ToString() : null,
+                    resultValue = (x.ResultValue != null) ? x.ResultValue.ToString() : null,
+                    message = (x.Message != null) ? x.Message.ToString() : null,
+                    resultPath = (x.ResultPath != null) ? x.ResultPath.ToString() : null,
+                    shapeID = Guid.Empty,
+                    shapeName = "personalized validation",
+                    sourceShape = (x.SourceShape != null) ? x.SourceShape.ToString() : null,
+                }).ToList());
+            }
+            
+
+            if (response.results.Exists(x => x.severity == "http://www.w3.org/ns/shacl#Violation"))
+            {
+                response.severity = "http://www.w3.org/ns/shacl#Violation";
+            }
+            else if (response.results.Exists(x => x.severity == "http://www.w3.org/ns/shacl#Warning"))
+            {
+                response.severity = "http://www.w3.org/ns/shacl#Warning";
+            }
+            else if (response.results.Exists(x => x.severity == "http://www.w3.org/ns/shacl#Info"))
+            {
+                response.severity = "http://www.w3.org/ns/shacl#Info";
+            }
+            return response;
+        }
+
+        /// <summary>
         /// Carga los triples en un PARQL endpoint
         /// </summary>
         /// <param name="pTriples">Triples a inertar</param>

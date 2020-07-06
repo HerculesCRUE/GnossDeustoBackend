@@ -89,6 +89,32 @@ namespace API_CARGA.Controllers
         }
 
         /// <summary>
+        /// Valida un RDF mediante el fichero de validación pasado
+        /// Aquí se encuentra un RDF de Ejemplo: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_CARGA/API_CARGA/Samples/rdfSample.xml
+        /// </summary>
+        /// <param name="rdfFile">Fichero RDF a validar</param>
+        /// <param name="validationFile">Fichero de validación</param>
+        /// <returns></returns>
+        [HttpPost("data-validate-personalized")]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ShapeReport))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult dataValidate(IFormFile rdfFile, IFormFile validationFile)
+        {
+            try
+            {
+                string rdfFileContent = SparqlUtility.GetTextFromFile(rdfFile);
+                string validation = SparqlUtility.GetTextFromFile(validationFile);
+                return Ok(SparqlUtility.ValidateRDF(rdfFileContent, validation));
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.ToString());
+            }
+
+        }
+
+        /// <summary>
         /// **(Pendiente de implementar)Reconcilia entidades y descubre enlaces o equivalencias. Permite efectuar el descubrimiento en fuentes RDF arbitrarias.
         /// </summary>
         /// <param name="rdfFile">Fichero RDF</param>
