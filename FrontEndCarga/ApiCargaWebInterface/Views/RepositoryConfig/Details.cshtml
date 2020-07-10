@@ -18,10 +18,11 @@
                     <div class="h1-container">
                         <h1>@Model.Name</h1>
                         <div class="botones">
+                            <a href="@Url.Action("Index", "Publish", new {repository = Model.RepositoryConfigID })" class="btn btn-sincronizar">Publicación manual</a>
                             <a href="@Url.Action("Syncro", "Job", new { repositoryId = Model.RepositoryConfigID })" class="btn btn-sincronizar">Sincronizar</a>
                             <a href="@Url.Action("Edit", new {  id=Model.RepositoryConfigID  })" class="btn btn-editar">Editar</a>
                             <a href="@Url.Action("Delete", new {  id=Model.RepositoryConfigID  })" class="btn btn-eliminar">Eliminar</a>
-                            </div>
+                        </div>
                         </div>
                     </div>
                 <div class="contenido">
