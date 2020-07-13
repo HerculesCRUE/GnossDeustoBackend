@@ -363,6 +363,52 @@ namespace API_CARGA.Models.Utility
             }
         }
 
+        public static void LoadOntology(string pSPARQLEndpoint, string pGraph, string pOntologyURL, string pQueryParam)
+        {
+            string query = "";
+            query += $" sparql clear graph <{pGraph}>";
+            
+
+            string url = pSPARQLEndpoint;
+            //if (string.IsNullOrEmpty(url))
+            //{
+            //    Graph graph = new Graph(); 
+            //    graph.LoadFromUri(pOntologyURL,);
+            //}
+            if (!string.IsNullOrEmpty(url))
+            {
+                NameValueCollection parametros = new NameValueCollection();
+                parametros.Add(pQueryParam, query);
+                WebClient webClient = new WebClient();
+                try
+                {
+                    webClient.UploadValues(url, "POST", parametros);
+                    query = "";
+                    query += $"sparql load {pOntologyURL} into {pGraph}";
+                    parametros = new NameValueCollection();
+                    parametros.Add(pQueryParam, query);
+                    webClient.UploadValues(url, "POST", parametros);
+                }
+                catch (WebException ex)
+                {
+                    if (ex.Response != null)
+                    {
+                        string response = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
+                        throw new Exception(response);
+                    }
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    webClient.Dispose();
+                }
+            }
+        }
+
         public static void InsertDataUniData(List<string> triplesInsert)
         {
             CallApiService callApi = new CallApiService();

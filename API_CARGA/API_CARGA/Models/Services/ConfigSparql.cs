@@ -19,6 +19,7 @@ namespace API_CARGA.Models.Services
         private string GraphUnidata { get; set; }
         public string Endpoint { get; set; }
         private string QueryParam { get; set; }
+        private string GraphOntology { get; set; }
         ///<summary>
         ///Obtiene el gráfo configurado en Sparql:Graph del fichero appsettings.json
         ///</summary>
@@ -44,6 +45,33 @@ namespace API_CARGA.Models.Services
             }
             return Graph;
         }
+
+        ///<summary>
+        ///Obtiene el gráfo configurado en Sparql:GraphOntology del fichero appsettings.json
+        ///</summary>
+        public string GetGraphOntology()
+        {
+            if (string.IsNullOrEmpty(GraphOntology))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("GraphOntology"))
+                {
+                    GraphOntology = environmentVariables["GraphOntology"] as string;
+                }
+                else
+                {
+                    GraphOntology = Configuration["Sparql:GraphOntology"];
+                }
+
+            }
+            return GraphOntology;
+        }
+
         ///<summary>
         ///Obtiene el gráfo de unidata configurado en Sparql:GraphUnidata del fichero appsettings.json
         ///</summary>

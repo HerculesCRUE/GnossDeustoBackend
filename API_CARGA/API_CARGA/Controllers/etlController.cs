@@ -115,6 +115,38 @@ namespace API_CARGA.Controllers
         }
 
         /// <summary>
+        /// Elimina la ontologia cargada y la reemplaza por la nueva
+        /// </summary>
+        /// <param name="ontology">URL de la ontología</param>
+        /// <returns></returns>
+        [HttpPost("load-ontology")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult LoadOntology(string ontology)
+        {
+            try
+            {
+                bool rdfFileContent = OntologyService.RemoteFileExists(ontology);
+                if (rdfFileContent)
+                {
+                    SparqlUtility.LoadOntology(_configSparql.GetEndpoint(), _configSparql.GetGraphOntology(), ontology,_configSparql.GetQueryParam());
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("Bad ontology uri");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.ToString());
+            }
+
+        }
+
+
+        /// <summary>
         /// **(Pendiente de implementar)Reconcilia entidades y descubre enlaces o equivalencias. Permite efectuar el descubrimiento en fuentes RDF arbitrarias.
         /// </summary>
         /// <param name="rdfFile">Fichero RDF</param>
