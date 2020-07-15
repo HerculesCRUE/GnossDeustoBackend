@@ -1,0 +1,75 @@
+﻿@model ApiCargaWebInterface.ViewModels.OntologyModel
+@{
+
+    ViewData["Title"] = "load ontology";
+
+    ViewData["BodyClass"] = "formulario";
+}
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            @if (Model.Messagge != null && !string.IsNullOrEmpty(Model.Messagge))
+            {
+                <p>@Model.Messagge </p>
+            }
+            <form asp-action="LoadOntology" method="post" enctype="multipart/form-data">
+                <div class="fieldset fieldset01">
+                    <fieldset class="mediumLabels">
+                        <h1>Get Uri</h1>
+                        <div class="fieldsetContent">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Ontology_uri" class="control-label"></label>
+                                <input asp-for="Ontology_uri" class="form-control" />
+                                <span asp-validation-for="Ontology_uri" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="ontology_type" class="control-label">Ontología a obtener</label>
+                                <select for="ontology_type" id="ontology_type" class="form-control">
+                                    <option value="0">roh.owl</option>
+                                    <option value="1">rohes.owl</option>
+                                    <option value="2">rohum.owl</option>
+                                </select>
+                            </div>
+                            <div class="fieldset actionButtons fieldset03">
+                                <fieldset>
+                                    <p>
+                                        <input class="submit principal" type="submit" value="cambiar ontologia">
+                                    </p>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </form>
+            <form asp-action="GetOntology" method="get">
+                <div class="fieldset fieldset01">
+                    <fieldset class="mediumLabels">
+                        <h1>Get Uri</h1>
+                        <div class="fieldsetContent">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label for="ontology_type" class="control-label">Ontología a obtener</label>
+                                <select for="ontology_type" id="ontology_type" class="form-control">
+                                    <option value="0">roh.owl</option>
+                                    <option value="1">rohes.owl</option>
+                                    <option value="2">rohum.owl</option>
+                                </select>
+                            </div>
+                            <div class="fieldset actionButtons fieldset03">
+                                <fieldset>
+                                    <p>
+                                        <input class="submit principal" type="submit" value="Obtener ontologia">
+                                    </p>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

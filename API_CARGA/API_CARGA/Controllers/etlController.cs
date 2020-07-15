@@ -23,20 +23,22 @@ namespace API_CARGA.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
+    
     public class etlController : Controller
     {
         private IRepositoriesConfigService _repositoriesConfigService;
         private IShapesConfigService _shapeConfigService;
         readonly ConfigSparql _configSparql;
         readonly CallUri _callUri;
+        readonly ConfigUrlService _configUrlService;
 
-        public etlController(IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallUri callUri)
+        public etlController(IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallUri callUri, ConfigUrlService configUrlService)
         {
             _repositoriesConfigService = iRepositoriesConfigService;
             _shapeConfigService = iShapeConfigService;
             _configSparql = configSparql;
             _callUri = callUri;
+            _configUrlService = configUrlService;
         }
 
         /// <summary>
@@ -46,6 +48,7 @@ namespace API_CARGA.Controllers
         /// <param name="rdfFile">Fichero RDF</param>
         /// <returns></returns>
         [HttpPost("data-publish")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult dataPublish(IFormFile rdfFile)
@@ -71,6 +74,7 @@ namespace API_CARGA.Controllers
         /// <param name="repositoryIdentifier">Identificador del repositorio para seleccionar los Shapes (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns></returns>
         [HttpPost("data-validate")]
+        [Authorize]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ShapeReport))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -96,6 +100,7 @@ namespace API_CARGA.Controllers
         /// <param name="validationFile">Fichero de validación</param>
         /// <returns></returns>
         [HttpPost("data-validate-personalized")]
+        [Authorize]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ShapeReport))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -117,26 +122,33 @@ namespace API_CARGA.Controllers
         /// <summary>
         /// Elimina la ontologia cargada y la reemplaza por la nueva
         /// </summary>
-        /// <param name="ontology">URL de la ontología</param>
+        /// <param name="ontology">Fichero de la nueva ontologia</param>
+        /// <param name="ontologyType">tipo de ontologia; siendo el 0 la ontología roh, el 1 la ontología rohes y el 2 la ontología rohum </param>
         /// <returns></returns>
         [HttpPost("load-ontology")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult LoadOntology(string ontology)
+        public IActionResult LoadOntology(IFormFile ontology, OntologyEnum ontologyType)
         {
             try
             {
-                bool rdfFileContent = OntologyService.RemoteFileExists(ontology);
-                if (rdfFileContent)
+                OntologyService.SetOntology(ontology, ontologyType);
+                string ontologyGraph = "";
+                if (ontologyType.Equals(OntologyEnum.OntologyRoh))
                 {
-                    SparqlUtility.LoadOntology(_configSparql.GetEndpoint(), _configSparql.GetGraphOntology(), ontology,_configSparql.GetQueryParam());
-                    return Ok();
+                    ontologyGraph = _configSparql.GetGraphRoh();
+                }
+                else if (ontologyType.Equals(OntologyEnum.OntologyRohes))
+                {
+                    ontologyGraph = _configSparql.GetGraphRohes();
                 }
                 else
                 {
-                    return BadRequest("Bad ontology uri");
+                    ontologyGraph = _configSparql.GetGraphRohum();
                 }
-                
+                SparqlUtility.LoadOntology(_configSparql.GetEndpoint(), ontologyGraph, $"{_configUrlService.GetUrl()}/etl/GetOntology?ontology={ontologyType}", _configSparql.GetQueryParam());
+                return Ok();   
             }
             catch (Exception ex)
             {
@@ -152,6 +164,7 @@ namespace API_CARGA.Controllers
         /// <param name="rdfFile">Fichero RDF</param>
         /// <returns></returns>
         [HttpPost("data-discover")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult dataDiscover(IFormFile rdfFile)
@@ -169,6 +182,7 @@ namespace API_CARGA.Controllers
         /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("GetRecord/{repositoryIdentifier}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public FileResult GetRecord(Guid repositoryIdentifier, string identifier, string metadataPrefix)
@@ -188,6 +202,7 @@ namespace API_CARGA.Controllers
         /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("Identify/{repositoryIdentifier}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public FileResult Identify(Guid repositoryIdentifier)
@@ -212,6 +227,7 @@ namespace API_CARGA.Controllers
         /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("ListIdentifiers/{repositoryIdentifier}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public FileResult ListIdentifiers(Guid repositoryIdentifier, string metadataPrefix = null, DateTime? from = null, DateTime? until = null, string set = null, string resumptionToken = null)
@@ -253,6 +269,7 @@ namespace API_CARGA.Controllers
         /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("ListMetadataFormats/{repositoryIdentifier}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public FileResult ListMetadataFormats(Guid repositoryIdentifier, string identifier = null)
@@ -281,6 +298,7 @@ namespace API_CARGA.Controllers
         /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("ListRecords/{repositoryIdentifier}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public FileResult ListRecords(Guid repositoryIdentifier, string metadataPrefix, DateTime? from = null, DateTime? until = null, string set = null, string resumptionToken = null)
@@ -321,6 +339,7 @@ namespace API_CARGA.Controllers
         /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("ListSets/{repositoryIdentifier}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public FileResult ListSets(Guid repositoryIdentifier, string resumptionToken = null)
@@ -335,6 +354,18 @@ namespace API_CARGA.Controllers
             //byte[] array = getByte(uri);
             byte[] array = _callUri.GetUri(uri);
             return File(array, "application/xml");
+        }
+
+        /// <summary>
+        /// Devuelve la ontologia cargada     
+        /// </summary>
+        /// <returns>Ontologia</returns>
+        [HttpGet("GetOntology")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult GetOntology(OntologyEnum ontology)
+        {
+            return Ok(OntologyService.GetOntology(ontology));
         }
 
         private byte[] getByte(string URL)

@@ -68,6 +68,18 @@ namespace ApiCargaWebInterface.Controllers
             {
                 return View("ValidationError", vEx.Report);
             }
+            catch (Exception ex)
+            {
+                return View("Index", new PublishRepositoryModel
+                {
+                    RepositoryId = repositoryId,
+                    Id = "",
+                    Type = "rdf",
+                    Result = $"Ha ocurrido un error al publicar el rdf"
+                });
+            }
         }
+
+       
     }
 }

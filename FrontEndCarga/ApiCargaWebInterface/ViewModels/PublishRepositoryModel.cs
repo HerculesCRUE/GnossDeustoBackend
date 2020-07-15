@@ -15,5 +15,6 @@ namespace ApiCargaWebInterface.ViewModels
         [Required]
         public string Type { get; set; }
         public string Result { get; set; }
+        public string Ontology_uri { get; set; }
     }
 }

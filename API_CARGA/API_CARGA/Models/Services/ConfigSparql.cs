@@ -19,7 +19,9 @@ namespace API_CARGA.Models.Services
         private string GraphUnidata { get; set; }
         public string Endpoint { get; set; }
         private string QueryParam { get; set; }
-        private string GraphOntology { get; set; }
+        private string GraphRoh { get; set; }
+        private string GraphRohes { get; set; }
+        private string GraphRohum { get; set; }
         ///<summary>
         ///Obtiene el gráfo configurado en Sparql:Graph del fichero appsettings.json
         ///</summary>
@@ -47,11 +49,11 @@ namespace API_CARGA.Models.Services
         }
 
         ///<summary>
-        ///Obtiene el gráfo configurado en Sparql:GraphOntology del fichero appsettings.json
+        ///Obtiene el gráfo configurado en Sparql:GraphRoh del fichero appsettings.json
         ///</summary>
-        public string GetGraphOntology()
+        public string GetGraphRoh()
         {
-            if (string.IsNullOrEmpty(GraphOntology))
+            if (string.IsNullOrEmpty(GraphRoh))
             {
                 var builder = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
@@ -59,17 +61,69 @@ namespace API_CARGA.Models.Services
 
                 Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("GraphOntology"))
+                if (environmentVariables.Contains("GraphRoh"))
                 {
-                    GraphOntology = environmentVariables["GraphOntology"] as string;
+                    GraphRoh = environmentVariables["GraphRoh"] as string;
                 }
                 else
                 {
-                    GraphOntology = Configuration["Sparql:GraphOntology"];
+                    GraphRoh = Configuration["Sparql:GraphRoh"];
                 }
 
             }
-            return GraphOntology;
+            return GraphRoh;
+        }
+
+        ///<summary>
+        ///Obtiene el gráfo configurado en Sparql:GraphRohes del fichero appsettings.json
+        ///</summary>
+        public string GetGraphRohes()
+        {
+            if (string.IsNullOrEmpty(GraphRohes))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("GraphRohes"))
+                {
+                    GraphRohes = environmentVariables["GraphRohes"] as string;
+                }
+                else
+                {
+                    GraphRohes = Configuration["Sparql:GraphRohes"];
+                }
+
+            }
+            return GraphRohes;
+        }
+
+        ///<summary>
+        ///Obtiene el gráfo configurado en Sparql:GraphRohes del fichero appsettings.json
+        ///</summary>
+        public string GetGraphRohum()
+        {
+            if (string.IsNullOrEmpty(GraphRohum))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("GraphRohum"))
+                {
+                    GraphRohum = environmentVariables["GraphRohum"] as string;
+                }
+                else
+                {
+                    GraphRohum = Configuration["Sparql:GraphRohum"];
+                }
+
+            }
+            return GraphRohum;
         }
 
         ///<summary>

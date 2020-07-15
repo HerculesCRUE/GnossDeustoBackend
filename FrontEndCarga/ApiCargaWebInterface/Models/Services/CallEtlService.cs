@@ -48,5 +48,16 @@ namespace ApiCargaWebInterface.Models.Services
             string rdf = respuestaXML.Root.Element(nameSpace + "GetRecord").Descendants(nameSpace + "metadata").First().FirstNode.ToString();
             return rdf;
         }
+
+        public void PostOntology(IFormFile ontology, int ontologyType)
+        {
+            _serviceApi.CallPostApi(_serviceUrl.GetUrl(), $"etl/load-ontology?ontologyType={ontologyType}", ontology, _token, true, "ontology");
+        }
+
+        public string GetOntology(int ontologyType)
+        {
+            string result = _serviceApi.CallGetApi(_serviceUrl.GetUrl(), $"etl/GetOntology?ontology={ontologyType}", _token);
+            return result;
+        }
     }
 }

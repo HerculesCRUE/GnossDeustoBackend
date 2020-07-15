@@ -11,5 +11,7 @@ namespace ApiCargaWebInterface.Models.Services
         public string CallGetRecord(Guid repoIdentifier, string identifier, string type);
         public void CallDataValidate(IFormFile rdf, Guid repositoryIdentifier);
         public void CallDataPublish(IFormFile rdf);
+        public void PostOntology(IFormFile ontologyUri, int ontologyType);
+        public string GetOntology(int ontologyType);
     }
 }

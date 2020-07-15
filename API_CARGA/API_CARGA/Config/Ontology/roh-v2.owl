@@ -23,7 +23,7 @@
     <owl:Ontology rdf:about="http://purl.org/roh">
         <owl:versionIRI rdf:resource="http://purl.org/roh/1.0"/>
         <terms:license rdf:resource="https://creativecommons.org/licenses/by-sa/4.0/"/>
-        <rdfs:comment xml:lang="en">The University of Murcia signed on November 29, 2017, a Covenant with the Ministry of Economy, Industry and Competitiveness backing the “HÉRCULES: Semantic University Research Data” Project with a budget of FIVE MILLION FOUR HUNDRED AND SIXTY-TWO THOUSAND SIX HUNDRED euros with an 80% of co-financiering from the European Regional Development Fund program (ERDF) within the 2014-2020 period. 
+        <rdfs:comment xml:lang="en">The University of Murcia signed on November 29, 2017, a Covenant with the Ministry of Economy, Industry and Competitiveness backing the ?H?RCULES: Semantic University Research Data? Project with a budget of FIVE MILLION FOUR HUNDRED AND SIXTY-TWO THOUSAND SIX HUNDRED euros with an 80% of co-financiering from the European Regional Development Fund program (ERDF) within the 2014-2020 period. 
 
 The project arose as a CRUE initiative, to create the basis for a new collaboration model between universities, to develop the information management systems and with the main objective of encouraging this type of collaboration.
 
@@ -540,7 +540,7 @@ by creating a research management system with semantic capacities based on seman
         <rdfs:domain rdf:resource="http://purl.org/roh/mirror/vcard#Kind"/>
         <rdfs:range rdf:resource="http://purl.org/roh/mirror/foaf#Agent"/>
         <rdfs:label xml:lang="en">contact info of</rdfs:label>
-        <rdfs:label xml:lang="es">información de contacto de</rdfs:label>
+        <rdfs:label xml:lang="es">informaci?n de contacto de</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -647,7 +647,7 @@ by creating a research management system with semantic capacities based on seman
         <rdfs:domain rdf:resource="http://purl.org/roh/mirror/foaf#Agent"/>
         <rdfs:range rdf:resource="http://purl.org/roh/mirror/vcard#Kind"/>
         <rdfs:label xml:lang="en">has contact info</rdfs:label>
-        <rdfs:label xml:lang="es">tiene información de contacto</rdfs:label>
+        <rdfs:label xml:lang="es">tiene informaci?n de contacto</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -1063,7 +1063,7 @@ by creating a research management system with semantic capacities based on seman
         <rdfs:comment>A homepage for some thing.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://purl.org/roh/mirror/foaf#"/>
         <rdfs:label>homepage</rdfs:label>
-        <rdfs:label xml:lang="es">página web</rdfs:label>
+        <rdfs:label xml:lang="es">p?gina web</rdfs:label>
         <ns:term_status>stable</ns:term_status>
     </owl:ObjectProperty>
     
@@ -1098,7 +1098,7 @@ by creating a research management system with semantic capacities based on seman
         <rdfs:range rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
         <rdfs:comment>A  personal mailbox, ie. an Internet mailbox associated with exactly one owner, the first owner of this mailbox. This is a &apos;static inverse functional property&apos;, in that  there is (across time and change) at most one individual that ever has any particular value for foaf:mbox.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://purl.org/roh/mirror/foaf#"/>
-        <rdfs:label xml:lang="es">buzón personal</rdfs:label>
+        <rdfs:label xml:lang="es">buz?n personal</rdfs:label>
         <rdfs:label>personal mailbox</rdfs:label>
         <ns:term_status>stable</ns:term_status>
     </owl:ObjectProperty>
@@ -1210,7 +1210,7 @@ by creating a research management system with semantic capacities based on seman
         <rdfs:domain rdf:resource="http://purl.org/roh/mirror/foaf#Organization"/>
         <rdfs:range rdf:resource="http://purl.org/roh/mirror/foaf#Organization"/>
         <rdfs:label xml:lang="en">has affiliated organization</rdfs:label>
-        <rdfs:label xml:lang="es">tiene una organización afiliada</rdfs:label>
+        <rdfs:label xml:lang="es">tiene una organizaci?n afiliada</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -1295,7 +1295,7 @@ by creating a research management system with semantic capacities based on seman
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdfs:domain rdf:resource="http://purl.org/roh/mirror/foaf#Organization"/>
         <rdfs:range rdf:resource="http://purl.org/roh/mirror/foaf#Organization"/>
-        <rdfs:label xml:lang="es">organización predecesora</rdfs:label>
+        <rdfs:label xml:lang="es">organizaci?n predecesora</rdfs:label>
         <rdfs:label xml:lang="en">predecessor organization</rdfs:label>
     </owl:ObjectProperty>
     
@@ -1325,7 +1325,7 @@ by creating a research management system with semantic capacities based on seman
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdfs:domain rdf:resource="http://purl.org/roh/mirror/foaf#Organization"/>
         <rdfs:range rdf:resource="http://purl.org/roh/mirror/foaf#Organization"/>
-        <rdfs:label xml:lang="es">organización sucesora</rdfs:label>
+        <rdfs:label xml:lang="es">organizaci?n sucesora</rdfs:label>
         <rdfs:label xml:lang="en">successor organization</rdfs:label>
     </owl:ObjectProperty>
     
@@ -1334,7 +1334,7 @@ by creating a research management system with semantic capacities based on seman
     <!-- http://purl.org/roh/mirror/vivo#publicationVenueFor -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/roh/mirror/vivo#publicationVenueFor">
-        <rdfs:label xml:lang="es">lugar de publicación para</rdfs:label>
+        <rdfs:label xml:lang="es">lugar de publicaci?n para</rdfs:label>
         <rdfs:label xml:lang="en">publication venue for</rdfs:label>
     </owl:ObjectProperty>
     
@@ -1383,7 +1383,7 @@ by creating a research management system with semantic capacities based on seman
 
     <owl:ObjectProperty rdf:about="http://purl.org/roh/mirror/vivo#subjectAreaOf">
         <rdfs:label xml:lang="en">subject area of</rdfs:label>
-        <rdfs:label xml:lang="es">área temática de</rdfs:label>
+        <rdfs:label xml:lang="es">?rea tem?tica de</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -2170,7 +2170,7 @@ by creating a research management system with semantic capacities based on seman
         <rdfs:comment xml:lang="en">An issue number</rdfs:comment>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/roh/mirror/bibo#</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">issue</rdfs:label>
-        <rdfs:label xml:lang="es">número</rdfs:label>
+        <rdfs:label xml:lang="es">n?mero</rdfs:label>
         <ns:term_status>stable</ns:term_status>
     </owl:DatatypeProperty>
     
@@ -2204,7 +2204,7 @@ by creating a research management system with semantic capacities based on seman
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/roh/mirror/bibo#</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">end page</rdfs:label>
         <rdfs:label xml:lang="en">page end</rdfs:label>
-        <rdfs:label xml:lang="es">página fin</rdfs:label>
+        <rdfs:label xml:lang="es">p?gina fin</rdfs:label>
         <ns:term_status>stable</ns:term_status>
     </owl:DatatypeProperty>
     
@@ -2219,7 +2219,7 @@ by creating a research management system with semantic capacities based on seman
         <rdfs:comment xml:lang="en">Starting page number within a continuous page range.</rdfs:comment>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/roh/mirror/bibo#</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">page start</rdfs:label>
-        <rdfs:label xml:lang="es">página inicio</rdfs:label>
+        <rdfs:label xml:lang="es">p?gina inicio</rdfs:label>
         <rdfs:label xml:lang="en">start page</rdfs:label>
         <ns:term_status>stable</ns:term_status>
     </owl:DatatypeProperty>
@@ -2264,7 +2264,7 @@ by creating a research management system with semantic capacities based on seman
         <rdfs:comment>The gender of this Agent (typically but not necessarily &apos;male&apos; or &apos;female&apos;).</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://purl.org/roh/mirror/foaf#"/>
         <rdfs:label>gender</rdfs:label>
-        <rdfs:label xml:lang="es">género</rdfs:label>
+        <rdfs:label xml:lang="es">g?nero</rdfs:label>
         <ns:term_status>testing</ns:term_status>
     </owl:DatatypeProperty>
     
@@ -2316,7 +2316,7 @@ by creating a research management system with semantic capacities based on seman
         <rdfs:comment>Title (Mr, Mrs, Ms, Dr. etc)</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://purl.org/roh/mirror/foaf#"/>
         <rdfs:label>title</rdfs:label>
-        <rdfs:label xml:lang="es">título personal</rdfs:label>
+        <rdfs:label xml:lang="es">t?tulo personal</rdfs:label>
         <ns:term_status>testing</ns:term_status>
     </owl:DatatypeProperty>
     
@@ -2354,7 +2354,7 @@ by creating a research management system with semantic capacities based on seman
 
     <owl:DatatypeProperty rdf:about="http://purl.org/roh/mirror/vivo#description">
         <rdfs:comment>This data property may be associated to any roh entity which needs to include a description</rdfs:comment>
-        <rdfs:label xml:lang="es">descripción</rdfs:label>
+        <rdfs:label xml:lang="es">descripci?n</rdfs:label>
         <rdfs:label xml:lang="en">description</rdfs:label>
     </owl:DatatypeProperty>
     
@@ -2391,7 +2391,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition http://en.wikipedia.org/wiki/Job_title#Job_title.</vitro:descriptionAnnot>
         <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">administrative secretary</vitro:exampleAnnot>
         <rdfs:label xml:lang="en">HR job title</rdfs:label>
-        <rdfs:label xml:lang="es">título de posición de trabajo</rdfs:label>
+        <rdfs:label xml:lang="es">t?tulo de posici?n de trabajo</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -2469,7 +2469,7 @@ Definition source: http://isiwebofknowledge.com/researcherid/</obo:IAO_0000112>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">An attestation of qualification, competence, or authority issued to an individual by a third party with a relevant or  de facto authority or assumed competence to do so in the academic field.</rdfs:comment>
         <rdfs:label xml:lang="en">Academic Accreditation</rdfs:label>
-        <rdfs:label xml:lang="es">Acreditación Académica</rdfs:label>
+        <rdfs:label xml:lang="es">Acreditaci?n Acad?mica</rdfs:label>
     </owl:Class>
     
 
@@ -2517,7 +2517,7 @@ Definition source: http://isiwebofknowledge.com/researcherid/</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An attestation of qualification, competence, or authority issued to an individual by a third party with a relevant or  de facto authority or assumed competence to do so.</obo:IAO_0000115>
         <rdfs:comment>An Accreditation models research and academic position accreditations. Qualification goes beyond Accreditation because it also refers to degrees and other qualifications a person may have.  Accreditation has an important data property which is dateIssued which links Accreditation with xsd:dateTime value</rdfs:comment>
         <rdfs:label xml:lang="en">Accreditation</rdfs:label>
-        <rdfs:label xml:lang="es">Acreditación</rdfs:label>
+        <rdfs:label xml:lang="es">Acreditaci?n</rdfs:label>
     </owl:Class>
     
 
@@ -2542,7 +2542,7 @@ Definition source: http://isiwebofknowledge.com/researcherid/</obo:IAO_0000112>
         </owl:equivalentClass>
         <rdfs:comment xml:lang="en">An organization with a relevant or de facto authority or assumed competence to issue research or academic accreditations.</rdfs:comment>
         <rdfs:label xml:lang="en">Accreditation Issuer</rdfs:label>
-        <rdfs:label xml:lang="es">Emisor de Acreditación</rdfs:label>
+        <rdfs:label xml:lang="es">Emisor de Acreditaci?n</rdfs:label>
     </owl:Class>
     
 
@@ -2706,7 +2706,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:label xml:lang="en">Auditing Relationship</rdfs:label>
-        <rdfs:label xml:lang="es">Relación de Auditoría</rdfs:label>
+        <rdfs:label xml:lang="es">Relaci?n de Auditor?a</rdfs:label>
     </owl:Class>
     
 
@@ -2793,7 +2793,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:label xml:lang="en">Degree Homologation</rdfs:label>
-        <rdfs:label xml:lang="es">Homologación de Titulación</rdfs:label>
+        <rdfs:label xml:lang="es">Homologaci?n de Titulaci?n</rdfs:label>
     </owl:Class>
     
 
@@ -2804,7 +2804,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
         <rdfs:subClassOf rdf:resource="http://purl.org/roh#Metric"/>
         <owl:disjointWith rdf:resource="http://purl.org/roh#PublicationMetric"/>
         <rdfs:label xml:lang="en">Degree Metric</rdfs:label>
-        <rdfs:label xml:lang="es">Métrica de Grado</rdfs:label>
+        <rdfs:label xml:lang="es">M?trica de Grado</rdfs:label>
     </owl:Class>
     
 
@@ -2820,7 +2820,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:label xml:lang="en">Degree Supervising Relationship</rdfs:label>
-        <rdfs:label xml:lang="es">Relación de Supervisión de Titulación Universitaria</rdfs:label>
+        <rdfs:label xml:lang="es">Relaci?n de Supervisi?n de Titulaci?n Universitaria</rdfs:label>
     </owl:Class>
     
 
@@ -2939,7 +2939,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/bibo#Report"/>
         <rdfs:comment xml:lang="en">An evaluation summary provided by a funding organization.</rdfs:comment>
         <rdfs:label xml:lang="en">Evaluation Summary</rdfs:label>
-        <rdfs:label xml:lang="es">Resumen de Evaluación</rdfs:label>
+        <rdfs:label xml:lang="es">Resumen de Evaluaci?n</rdfs:label>
     </owl:Class>
     
 
@@ -3016,7 +3016,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/vivo#FacultyPosition"/>
         <rdfs:comment xml:lang="en">A retired professor who has retained their rank, title and privileges.</rdfs:comment>
         <rdfs:label xml:lang="en">Faculty Position Emeritus</rdfs:label>
-        <rdfs:label xml:lang="es">Posición de Profesor Emérito</rdfs:label>
+        <rdfs:label xml:lang="es">Posici?n de Profesor Em?rito</rdfs:label>
     </owl:Class>
     
 
@@ -3096,7 +3096,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
 The funding organization (vivo:FundingOrganization), imported from VIVO, inherits from foaf:Organization, finances (roh:funds) through different funding aids (roh:Funding) to projects (roh:Project) through the roh:supports relationship and through the roh:FundingAmounts into which a roh:Funding is divided. A funding organization in turn divides a roh:Funding into several roh:FundingAmounts associated with different foaf:Organizations through the roh:grants relationship.
 
 The Funding Program entity (roh:FundingProgram), new in ROH, defines the funding initiatives promoted (roh:promotedBy) by a Funding Organization (vivo:FundingOrganization) and is in operation during a time interval (vivo:dateTimeInterval) and is usually linked to a geographical scope (geonames:Feature).</rdfs:comment>
-        <rdfs:label xml:lang="es">Financiación</rdfs:label>
+        <rdfs:label xml:lang="es">Financiaci?n</rdfs:label>
         <rdfs:label xml:lang="en">Funding</rdfs:label>
     </owl:Class>
     
@@ -3137,7 +3137,7 @@ The Funding Program entity (roh:FundingProgram), new in ROH, defines the funding
         </rdfs:subClassOf>
         <rdfs:comment rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">A FundingAmount is linked to a Funding that finances a Project. Each FundingAmount is associated to an Organization participating in the Project and to a specific annuity.</rdfs:comment>
         <rdfs:label xml:lang="en">Funding Amount</rdfs:label>
-        <rdfs:label xml:lang="es">Monto de Financiación</rdfs:label>
+        <rdfs:label xml:lang="es">Monto de Financiaci?n</rdfs:label>
     </owl:Class>
     
 
@@ -3201,7 +3201,7 @@ The Funding Program entity (roh:FundingProgram), new in ROH, defines the funding
         </rdfs:subClassOf>
         <rdfs:comment>The Funding Program entity (roh:FundingProgram), new in ROH, defines the funding initiatives promoted (roh:promotedBy) by a Funding Organization (vivo:FundingOrganization) and is in operation during a time interval (vivo:dateTimeInterval) and is usually linked to a geographical scope (geonames:Feature). Each organization taking part in a Project has a Funding, which is divided into several FundingAmounts</rdfs:comment>
         <rdfs:label xml:lang="en">Funding Program</rdfs:label>
-        <rdfs:label xml:lang="es">Programa de Financiación</rdfs:label>
+        <rdfs:label xml:lang="es">Programa de Financiaci?n</rdfs:label>
     </owl:Class>
     
 
@@ -3218,7 +3218,7 @@ The Funding Program entity (roh:FundingProgram), new in ROH, defines the funding
         <rdfs:comment xml:lang="en">We have just considered a subset of the available funding sources, taking into account the sample datasets provided by University of Murcia
 
 A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.</rdfs:comment>
-        <rdfs:label xml:lang="es">Fuente de Financiación</rdfs:label>
+        <rdfs:label xml:lang="es">Fuente de Financiaci?n</rdfs:label>
         <rdfs:label xml:lang="en">Funding Source</rdfs:label>
     </owl:Class>
     
@@ -3230,7 +3230,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
         <rdfs:subClassOf rdf:resource="http://purl.org/roh#Funding"/>
         <rdfs:comment xml:lang="en">An amount of money given especially by the government to a person or organization for a special purpose.</rdfs:comment>
         <rdfs:label xml:lang="en">Grant</rdfs:label>
-        <rdfs:label xml:lang="es">Subvención</rdfs:label>
+        <rdfs:label xml:lang="es">Subvenci?n</rdfs:label>
     </owl:Class>
     
 
@@ -3338,7 +3338,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
         <owl:disjointWith rdf:resource="http://purl.org/roh#ProjectClassification"/>
         <rdfs:comment>ROH will be populated with instance data of UNESCO skos concepts. A Person, Activity, Project and Organization can be qualified by a KnowledgeArea</rdfs:comment>
         <rdfs:label xml:lang="en">Knowledge Area</rdfs:label>
-        <rdfs:label xml:lang="es">Área de Conocimiento</rdfs:label>
+        <rdfs:label xml:lang="es">?rea de Conocimiento</rdfs:label>
     </owl:Class>
     
 
@@ -3432,7 +3432,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/vivo#LibrarianPosition"/>
         <rdfs:comment xml:lang="en">A retired librarian who has retained their rank, title and privileges.</rdfs:comment>
         <rdfs:label xml:lang="en">Librarian Position Emeritus</rdfs:label>
-        <rdfs:label xml:lang="es">Posición de Bibliotecario Emérito</rdfs:label>
+        <rdfs:label xml:lang="es">Posici?n de Bibliotecario Em?rito</rdfs:label>
     </owl:Class>
     
 
@@ -3443,7 +3443,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
         <rdfs:subClassOf rdf:resource="http://purl.org/roh#Funding"/>
         <rdfs:comment xml:lang="en">An amount of money that is borrowed, often from a bank or a funding organization, and has to be paid back, usually together with an extra amount of money that you have to pay as a charge for borrowing.</rdfs:comment>
         <rdfs:label xml:lang="en">Loan</rdfs:label>
-        <rdfs:label xml:lang="es">Préstamo</rdfs:label>
+        <rdfs:label xml:lang="es">Pr?stamo</rdfs:label>
     </owl:Class>
     
 
@@ -3459,7 +3459,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:label xml:lang="en">Master Supervising Relationship</rdfs:label>
-        <rdfs:label xml:lang="es">Relación de Supervisión de Máster Universitario</rdfs:label>
+        <rdfs:label xml:lang="es">Relaci?n de Supervisi?n de M?ster Universitario</rdfs:label>
     </owl:Class>
     
 
@@ -3470,7 +3470,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/bibo#Thesis"/>
         <rdfs:comment xml:lang="en">A document created to summarize research findings associated with the completion of a master degree.</rdfs:comment>
         <rdfs:label xml:lang="en">Master Thesis</rdfs:label>
-        <rdfs:label xml:lang="es">Tesis de Máster</rdfs:label>
+        <rdfs:label xml:lang="es">Tesis de M?ster</rdfs:label>
     </owl:Class>
     
 
@@ -3492,7 +3492,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
         </rdfs:subClassOf>
         <rdfs:comment>Metric based on cfMetric, including attributes Identifier, Uniform Resource Identifier, Name, Description and linked to foaf:Agent, Keyword and optionally to ResearchObject</rdfs:comment>
         <rdfs:label xml:lang="en">Metric</rdfs:label>
-        <rdfs:label xml:lang="es">Métrica</rdfs:label>
+        <rdfs:label xml:lang="es">M?trica</rdfs:label>
     </owl:Class>
     
 
@@ -3522,7 +3522,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
         <rdfs:subClassOf rdf:resource="http://purl.org/roh#Funding"/>
         <rdfs:comment xml:lang="en">The process of paying to have part of a company&apos;s work done by another company.</rdfs:comment>
         <rdfs:label xml:lang="en">Outsourcing</rdfs:label>
-        <rdfs:label xml:lang="es">Subcontratación</rdfs:label>
+        <rdfs:label xml:lang="es">Subcontrataci?n</rdfs:label>
     </owl:Class>
     
 
@@ -3584,7 +3584,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:label xml:lang="en">PhD Supervising Relationship</rdfs:label>
-        <rdfs:label xml:lang="es">Relación de Supervisión de Doctorado</rdfs:label>
+        <rdfs:label xml:lang="es">Relaci?n de Supervisi?n de Doctorado</rdfs:label>
     </owl:Class>
     
 
@@ -3628,7 +3628,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
                 <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label xml:lang="es">Métrica de Tesis Doctoral</rdfs:label>
+        <rdfs:label xml:lang="es">M?trica de Tesis Doctoral</rdfs:label>
         <rdfs:label xml:lang="en">PhD Thesis Metric</rdfs:label>
     </owl:Class>
     
@@ -3692,7 +3692,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
 
     <owl:Class rdf:about="http://purl.org/roh#ProjectClassification">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <rdfs:label xml:lang="es">Clasificación de Proyecto</rdfs:label>
+        <rdfs:label xml:lang="es">Clasificaci?n de Proyecto</rdfs:label>
         <rdfs:label xml:lang="en">Project Classification</rdfs:label>
     </owl:Class>
     
@@ -3742,7 +3742,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
                 <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label xml:lang="es">Métrica de Pubicación</rdfs:label>
+        <rdfs:label xml:lang="es">M?trica de Pubicaci?n</rdfs:label>
         <rdfs:label xml:lang="en">Publication Metric</rdfs:label>
     </owl:Class>
     
@@ -3780,7 +3780,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
     <owl:Class rdf:about="http://purl.org/roh#ResearchAccreditation">
         <rdfs:subClassOf rdf:resource="http://purl.org/roh#Accreditation"/>
         <rdfs:comment xml:lang="en">An attestation of qualification, competence, or authority issued to an individual by a third party with a relevant or  de facto authority or assumed competence to do so in the research field.</rdfs:comment>
-        <rdfs:label xml:lang="es">Acreditación de Investigación</rdfs:label>
+        <rdfs:label xml:lang="es">Acreditaci?n de Investigaci?n</rdfs:label>
         <rdfs:label xml:lang="en">Research Accreditation</rdfs:label>
     </owl:Class>
     
@@ -3796,7 +3796,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
                 <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label xml:lang="es">Grupo de Investigación</rdfs:label>
+        <rdfs:label xml:lang="es">Grupo de Investigaci?n</rdfs:label>
         <rdfs:label xml:lang="en">Research Group</rdfs:label>
     </owl:Class>
     
@@ -3848,7 +3848,7 @@ A roh:FundingSource roh:feeds a roh:Funding with funds to sponsor some projects.
         <rdfs:comment>The research object entity (roh:ResearchObject) is a new entity defined in ROH that corresponds to a research result generated by a person (researcher), usually through work on a project. A roh:ResearchObject is associated with several foaf:Person through the bibo:authorList property. Usually a roh:ResearchObject results from working on a roh:Project (roh:produces). This entity defines a complete taxonomy of research objects mostly imported from BIBO [4], covering all kinds of publications, patents, software and web pages. Some examples are: bibo:Collection, bibo:Journal, bibo:Article, bibo:Book, bibo:Chapter, bibo:Patent, bibo:Thesis and bibo:Webpage. The primary author of a research object is accessible through the roh:correspondingAuthor property.
 
 The most important research result is represented by the concept publication and is defined mainly through the imported entity vivo:Document. Currently, the following sets of entities related to the publication concept are supported: bibo:Collection (Newspaper, Magazine) and bibo:Document (Article, ConferencePaper, EditorialArticle, Book, Proceedings, ConferencePaper, Chapter, Thesis) and obo:Software. bibo:Thesis has been refined into roh:DegreeThesis, roh:MasterThesis and roh:PhDThesis.</rdfs:comment>
-        <rdfs:label xml:lang="es">Objeto de Investigación</rdfs:label>
+        <rdfs:label xml:lang="es">Objeto de Investigaci?n</rdfs:label>
         <rdfs:label xml:lang="en">Research Object</rdfs:label>
     </owl:Class>
     
@@ -3858,7 +3858,7 @@ The most important research result is represented by the concept publication and
 
     <owl:Class rdf:about="http://purl.org/roh#ResearchObjectExpense">
         <rdfs:subClassOf rdf:resource="http://purl.org/roh#Expense"/>
-        <rdfs:label xml:lang="es">Gasto de Objeto de Investigación</rdfs:label>
+        <rdfs:label xml:lang="es">Gasto de Objeto de Investigaci?n</rdfs:label>
         <rdfs:label xml:lang="en">Research Object Expense</rdfs:label>
     </owl:Class>
     
@@ -3878,7 +3878,7 @@ The most important research result is represented by the concept publication and
     <owl:Class rdf:about="http://purl.org/roh#ResearcherPosition">
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/vivo#Position"/>
         <rdfs:comment xml:lang="en">A member of a university or research organization focused on research task further than other ones.</rdfs:comment>
-        <rdfs:label xml:lang="es">Posición de Investigador</rdfs:label>
+        <rdfs:label xml:lang="es">Posici?n de Investigador</rdfs:label>
         <rdfs:label xml:lang="en">Researcher Position</rdfs:label>
     </owl:Class>
     
@@ -3993,7 +3993,7 @@ The most important research result is represented by the concept publication and
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label xml:lang="es">Relación de Supervisión</rdfs:label>
+        <rdfs:label xml:lang="es">Relaci?n de Supervisi?n</rdfs:label>
         <rdfs:label xml:lang="en">Supervising Relationship</rdfs:label>
     </owl:Class>
     
@@ -4033,7 +4033,7 @@ The most important research result is represented by the concept publication and
 
     <owl:Class rdf:about="http://purl.org/roh#Thesis_Metric">
         <rdfs:subClassOf rdf:resource="http://purl.org/roh#DegreeMetric"/>
-        <rdfs:label xml:lang="es">Métrica de Tesis</rdfs:label>
+        <rdfs:label xml:lang="es">M?trica de Tesis</rdfs:label>
         <rdfs:label xml:lang="en">Thesis Metric</rdfs:label>
     </owl:Class>
     
@@ -4044,7 +4044,7 @@ The most important research result is represented by the concept publication and
     <owl:Class rdf:about="http://purl.org/roh#ThirdPartyContractorRole">
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/obo/bfo#BFO_0000023"/>
         <rdfs:comment xml:lang="en">A role of contracting someone to perform a job.</rdfs:comment>
-        <rdfs:label xml:lang="es">Rol de Contración de Tercera Parte</rdfs:label>
+        <rdfs:label xml:lang="es">Rol de Contraci?n de Tercera Parte</rdfs:label>
         <rdfs:label xml:lang="en">Third Party Contractor Role</rdfs:label>
     </owl:Class>
     
@@ -4065,7 +4065,7 @@ The most important research result is represented by the concept publication and
         <rdfs:subClassOf rdf:resource="http://purl.org/roh#KnowledgeArea"/>
         <rdfs:comment xml:lang="en">List of terms used in subject analysis and retrieval of documents and publications in the fields of education, culture, natural sciences, social and human sciences, communication and information by UNESCO.</rdfs:comment>
         <rdfs:label xml:lang="en">UNESCO Knowledge Area</rdfs:label>
-        <rdfs:label xml:lang="es">Área de Conocimiento UNESCO</rdfs:label>
+        <rdfs:label xml:lang="es">?rea de Conocimiento UNESCO</rdfs:label>
     </owl:Class>
     
 
@@ -4075,7 +4075,7 @@ The most important research result is represented by the concept publication and
     <owl:Class rdf:about="http://purl.org/roh#WorkshopPaper">
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/vivo#ConferencePaper"/>
         <rdfs:comment xml:lang="en">A paper published on a conference workshop.</rdfs:comment>
-        <rdfs:label xml:lang="es">Artículo de Seminario</rdfs:label>
+        <rdfs:label xml:lang="es">Art?culo de Seminario</rdfs:label>
         <rdfs:label xml:lang="en">Workshop Paper</rdfs:label>
     </owl:Class>
     
@@ -4102,7 +4102,7 @@ The most important research result is represented by the concept publication and
         <rdfs:comment xml:lang="en">A scholarly academic article, typically published in a journal.</rdfs:comment>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/roh/mirror/bibo#</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">Academic Article</rdfs:label>
-        <rdfs:label xml:lang="es">Artículo Académico</rdfs:label>
+        <rdfs:label xml:lang="es">Art?culo Acad?mico</rdfs:label>
         <ns:term_status>stable</ns:term_status>
     </owl:Class>
     
@@ -4136,7 +4136,7 @@ The most important research result is represented by the concept publication and
         <rdfs:comment xml:lang="en">A written composition in prose, usually nonfiction, on a specific topic, forming an independent part of a book or other publication, as a newspaper or magazine.</rdfs:comment>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/roh/mirror/bibo#</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">Article</rdfs:label>
-        <rdfs:label xml:lang="es">Artículo</rdfs:label>
+        <rdfs:label xml:lang="es">Art?culo</rdfs:label>
         <ns:term_status>stable</ns:term_status>
     </owl:Class>
     
@@ -4214,7 +4214,7 @@ The most important research result is represented by the concept publication and
         <rdfs:comment xml:lang="en">A section of a book.</rdfs:comment>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/roh/mirror/bibo#</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">Book Section</rdfs:label>
-        <rdfs:label xml:lang="es">Sección de Libro</rdfs:label>
+        <rdfs:label xml:lang="es">Secci?n de Libro</rdfs:label>
         <ns:term_status>unstable</ns:term_status>
     </owl:Class>
     
@@ -4227,7 +4227,7 @@ The most important research result is represented by the concept publication and
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A main division of a book</obo:IAO_0000115>
         <rdfs:comment xml:lang="en">A chapter of a book.</rdfs:comment>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/roh/mirror/bibo#</rdfs:isDefinedBy>
-        <rdfs:label xml:lang="es">Capítulo</rdfs:label>
+        <rdfs:label xml:lang="es">Cap?tulo</rdfs:label>
         <rdfs:label xml:lang="en">Chapter</rdfs:label>
         <ns:term_status>unstable</ns:term_status>
     </owl:Class>
@@ -4276,7 +4276,7 @@ The most important research result is represented by the concept publication and
         <rdfs:comment xml:lang="en">A collection of Documents or Collections</rdfs:comment>
         <rdfs:comment>ResearchObjects related to publication concept are based on types defined by BIBO ontology. Currently, the following set of publication-related entities are supported: bibo: bibo:Collection (Periodical, Journal, Magazine)</rdfs:comment>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/roh/mirror/bibo#</rdfs:isDefinedBy>
-        <rdfs:label xml:lang="es">Colección</rdfs:label>
+        <rdfs:label xml:lang="es">Colecci?n</rdfs:label>
         <rdfs:label xml:lang="en">Collection</rdfs:label>
         <ns:term_status>stable</ns:term_status>
     </owl:Class>
@@ -4412,7 +4412,7 @@ The most important research result is represented by the concept publication and
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An instance or a session in which testimony and arguments are presented, esp. before an official, as a judge in a lawsuit.</obo:IAO_0000115>
         <rdfs:comment xml:lang="en">An instance or a session in which testimony and arguments are presented, esp. before an official, as a judge in a lawsuit.</rdfs:comment>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/roh/mirror/bibo#</rdfs:isDefinedBy>
-        <rdfs:label xml:lang="es">Audición</rdfs:label>
+        <rdfs:label xml:lang="es">Audici?n</rdfs:label>
         <rdfs:label xml:lang="en">Hearing</rdfs:label>
         <ns:term_status>stable</ns:term_status>
     </owl:Class>
@@ -4453,7 +4453,7 @@ The most important research result is represented by the concept publication and
         <rdfs:comment xml:lang="en">something that is printed or published and distributed, esp. a given number of a periodical</rdfs:comment>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/roh/mirror/bibo#</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">Issue</rdfs:label>
-        <rdfs:label xml:lang="es">Número</rdfs:label>
+        <rdfs:label xml:lang="es">N?mero</rdfs:label>
         <ns:term_status>stable</ns:term_status>
     </owl:Class>
     
@@ -4482,7 +4482,7 @@ The most important research result is represented by the concept publication and
         <rdfs:comment xml:lang="en">A periodical of scholarly journal Articles.</rdfs:comment>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/roh/mirror/bibo#</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">Journal</rdfs:label>
-        <rdfs:label xml:lang="es">Publicación de Impacto</rdfs:label>
+        <rdfs:label xml:lang="es">Publicaci?n de Impacto</rdfs:label>
         <ns:term_status>stable</ns:term_status>
     </owl:Class>
     
@@ -4568,7 +4568,7 @@ The most important research result is represented by the concept publication and
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Something carried out, acted or rendered.</obo:IAO_0000115>
         <rdfs:comment xml:lang="en">A public performance.</rdfs:comment>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/roh/mirror/bibo#</rdfs:isDefinedBy>
-        <rdfs:label xml:lang="es">Actuación</rdfs:label>
+        <rdfs:label xml:lang="es">Actuaci?n</rdfs:label>
         <rdfs:label xml:lang="en">Performance</rdfs:label>
         <ns:term_status>unstable</ns:term_status>
     </owl:Class>
@@ -4600,7 +4600,7 @@ The most important research result is represented by the concept publication and
         <rdfs:comment xml:lang="en">A group of related documents issued at regular intervals.</rdfs:comment>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/roh/mirror/bibo#</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">Periodical</rdfs:label>
-        <rdfs:label xml:lang="es">Revista Periódica</rdfs:label>
+        <rdfs:label xml:lang="es">Revista Peri?dica</rdfs:label>
         <ns:term_status>stable</ns:term_status>
     </owl:Class>
     
@@ -4682,7 +4682,7 @@ The most important research result is represented by the concept publication and
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">One section of a website that appears at a unique address within the parent site&apos;s address or URL on the World Wide Web</obo:IAO_0000115>
         <rdfs:comment xml:lang="en">A web page is an online document available (at least initially) on the world wide web. A web page is written first and foremost to appear on the web, as distinct from other online resources such as books, manuscripts or audio documents which use the web primarily as a distribution mechanism alongside other more traditional methods such as print.</rdfs:comment>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/roh/mirror/bibo#</rdfs:isDefinedBy>
-        <rdfs:label xml:lang="es">Página web</rdfs:label>
+        <rdfs:label xml:lang="es">P?gina web</rdfs:label>
         <rdfs:label xml:lang="en">Webpage</rdfs:label>
         <ns:term_status>unstable</ns:term_status>
     </owl:Class>
@@ -4906,7 +4906,7 @@ Besides, an instance of a foaf:Organization is associated to the following entit
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organization</rdfs:comment>
         <rdfs:comment>An organization.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://purl.org/roh/mirror/foaf#"/>
-        <rdfs:label xml:lang="es">Organización</rdfs:label>
+        <rdfs:label xml:lang="es">Organizaci?n</rdfs:label>
         <rdfs:label>Organization</rdfs:label>
         <rdfs:label xml:lang="en">Organization</rdfs:label>
         <ns:term_status>stable</ns:term_status>
@@ -5125,7 +5125,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
 
     <owl:Class rdf:about="http://purl.org/roh/mirror/geonames#Feature">
         <rdfs:comment xml:lang="en">A geographical feature</rdfs:comment>
-        <rdfs:label xml:lang="es">Característica</rdfs:label>
+        <rdfs:label xml:lang="es">Caracter?stica</rdfs:label>
         <rdfs:label xml:lang="en">Feature</rdfs:label>
         <skos:historyNote xml:lang="en">Modified in version 3.1 : The cardinality constraints on feature code, feature class are relaxed on this class, and put on the specific subclass Geonames Feature. This class and attached properties can therefore be used for features not necessarily identified in the Geoanmes data base</skos:historyNote>
     </owl:Class>
@@ -5136,7 +5136,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
 
     <owl:Class rdf:about="http://purl.org/roh/mirror/obo/bfo#BFO_0000008">
         <rdfs:comment xml:lang="en">A temporal region is an occurrent entity that is part of time as defined relative to some reference frame.</rdfs:comment>
-        <rdfs:label xml:lang="es">Región Temporal</rdfs:label>
+        <rdfs:label xml:lang="es">Regi?n Temporal</rdfs:label>
         <rdfs:label xml:lang="en">Temporal Region</rdfs:label>
     </owl:Class>
     
@@ -5208,7 +5208,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <owl:disjointWith rdf:resource="http://purl.org/roh/mirror/obo/bfo#BFO_0000148"/>
         <rdfs:comment xml:lang="en">A one-dimensional temporal region is a temporal region that is extended.</rdfs:comment>
         <rdfs:label xml:lang="en">One-Dimensional Temporal Region</rdfs:label>
-        <rdfs:label xml:lang="es">Región Temporal Mono-dimensional</rdfs:label>
+        <rdfs:label xml:lang="es">Regi?n Temporal Mono-dimensional</rdfs:label>
     </owl:Class>
     
 
@@ -5218,7 +5218,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
     <owl:Class rdf:about="http://purl.org/roh/mirror/obo/bfo#BFO_0000148">
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/obo/bfo#BFO_0000008"/>
         <rdfs:comment xml:lang="en">A zero-dimensional temporal region is a temporal region that is without extent.</rdfs:comment>
-        <rdfs:label xml:lang="es">Región Temporal con Cero Dimensiones</rdfs:label>
+        <rdfs:label xml:lang="es">Regi?n Temporal con Cero Dimensiones</rdfs:label>
         <rdfs:label xml:lang="en">Zero-Dimensional Temporal Region</rdfs:label>
     </owl:Class>
     
@@ -5291,7 +5291,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Nicole Vasilevsky</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Nicole Vasilevsky</obo:IAO_0000119>
         <rdfs:label xml:lang="en">Funding Role</rdfs:label>
-        <rdfs:label xml:lang="es">Rol de Financiación</rdfs:label>
+        <rdfs:label xml:lang="es">Rol de Financiaci?n</rdfs:label>
     </owl:Class>
     
 
@@ -5353,7 +5353,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Matt Brush</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Matthew Brush</obo:IAO_0000119>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Coordinate with NIF. NIF ID: nlx_res_20090444</rdfs:comment>
-        <rdfs:label xml:lang="es">Servicio de Formación</rdfs:label>
+        <rdfs:label xml:lang="es">Servicio de Formaci?n</rdfs:label>
         <rdfs:label xml:lang="en">Training Service</rdfs:label>
     </owl:Class>
     
@@ -5387,7 +5387,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://neurolex.org/wiki/Category:Analysis_service_resource</obo:IAO_0000119>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Coordinate with NIF: NIF ID: nlx_res_20090420</rdfs:comment>
         <rdfs:label xml:lang="en">Material Analysis Service</rdfs:label>
-        <rdfs:label xml:lang="es">Servicio de Análisis de Material</rdfs:label>
+        <rdfs:label xml:lang="es">Servicio de An?lisis de Material</rdfs:label>
     </owl:Class>
     
 
@@ -5404,7 +5404,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://neurolex.org/wiki/Category:Material_service_resource</obo:IAO_0000119>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Coordinate with NIF. NIF ID: nlx_res_20090418</rdfs:comment>
         <rdfs:label xml:lang="en">Material Production Service</rdfs:label>
-        <rdfs:label xml:lang="es">Servicio de Producción de Material</rdfs:label>
+        <rdfs:label xml:lang="es">Servicio de Producci?n de Material</rdfs:label>
     </owl:Class>
     
 
@@ -5659,7 +5659,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Matt Brush</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Matthew Brush</obo:IAO_0000119>
         <rdfs:label xml:lang="en">Analysis Service</rdfs:label>
-        <rdfs:label xml:lang="es">Servicio de Análisis</rdfs:label>
+        <rdfs:label xml:lang="es">Servicio de An?lisis</rdfs:label>
     </owl:Class>
     
 
@@ -5676,7 +5676,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000118 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">data transformation service</obo:IAO_0000118>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Matthew Brush</obo:IAO_0000119>
         <rdfs:label xml:lang="en">Data Analysis Service</rdfs:label>
-        <rdfs:label xml:lang="es">Servicio de Análisis de Datos</rdfs:label>
+        <rdfs:label xml:lang="es">Servicio de An?lisis de Datos</rdfs:label>
     </owl:Class>
     
 
@@ -5691,7 +5691,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Matt Brush</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Matthew Brush</obo:IAO_0000119>
         <rdfs:label xml:lang="en">Material Modification Service</rdfs:label>
-        <rdfs:label xml:lang="es">Servicio de Modificación de Material</rdfs:label>
+        <rdfs:label xml:lang="es">Servicio de Modificaci?n de Material</rdfs:label>
     </owl:Class>
     
 
@@ -5715,7 +5715,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000119 xml:lang="en">OBI_0000159</obo:IAO_0000119>
         <obo:IAO_0000119 xml:lang="en">group:OBI</obo:IAO_0000119>
         <obo:IAO_0000412 rdf:resource="http://purl.org/roh/mirror/obo/iao#IAO.owl"/>
-        <rdfs:label xml:lang="es">Artículo de Revista de Impacto</rdfs:label>
+        <rdfs:label xml:lang="es">Art?culo de Revista de Impacto</rdfs:label>
         <rdfs:label xml:lang="en">Journal Article</rdfs:label>
     </owl:Class>
     
@@ -5725,7 +5725,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
 
     <owl:Class rdf:about="http://purl.org/roh/mirror/obo/iao#IAO_0000030">
         <obo:IAO_0000115 xml:lang="en">A generically dependent continuant that is about some thing.</obo:IAO_0000115>
-        <rdfs:label xml:lang="es">Entidad de Contenido de Información</rdfs:label>
+        <rdfs:label xml:lang="es">Entidad de Contenido de Informaci?n</rdfs:label>
         <rdfs:label xml:lang="en">information content entity</rdfs:label>
     </owl:Class>
     
@@ -5772,7 +5772,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/vcard#Kind"/>
         <rdfs:comment xml:lang="en">An object representing a named geographical place</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://purl.org/roh/mirror/vcard"/>
-        <rdfs:label xml:lang="es">Localización</rdfs:label>
+        <rdfs:label xml:lang="es">Localizaci?n</rdfs:label>
         <rdfs:label xml:lang="en">Location</rdfs:label>
     </owl:Class>
     
@@ -5784,7 +5784,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/vcard#Kind"/>
         <rdfs:comment xml:lang="en">An object representing an organization.  An organization is a single entity, and might represent a business or government, a department or division within a business or government, a club, an association, or the like.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://purl.org/roh/mirror/vcard"/>
-        <rdfs:label xml:lang="es">Organización</rdfs:label>
+        <rdfs:label xml:lang="es">Organizaci?n</rdfs:label>
         <rdfs:label xml:lang="en">Organization</rdfs:label>
     </owl:Class>
     
@@ -5827,7 +5827,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An academic degree at any level, both as reported by individuals for employment and as offered by academic degree programs.</obo:IAO_0000115>
         <rdfs:comment>An AcademicDegree describes the degrees offered by a University and obtained by different Researchers.</rdfs:comment>
         <rdfs:label xml:lang="en">Academic Degree</rdfs:label>
-        <rdfs:label xml:lang="es">Grado Académico</rdfs:label>
+        <rdfs:label xml:lang="es">Grado Acad?mico</rdfs:label>
     </owl:Class>
     
 
@@ -5840,7 +5840,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A distinct, usually specialized educational unit within an educational organization.</obo:IAO_0000115>
         <obo:IAO_0000412 rdf:resource="http://purl.org/roh/mirror/vivo"/>
         <rdfs:label xml:lang="en">Academic Department</rdfs:label>
-        <rdfs:label xml:lang="es">Departamento Académico</rdfs:label>
+        <rdfs:label xml:lang="es">Departamento Acad?mico</rdfs:label>
     </owl:Class>
     
 
@@ -5901,7 +5901,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         </rdfs:subClassOf>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A dual relationship of one person being advised or mentored by another person, typically including start and end dates</obo:IAO_0000115>
         <rdfs:label xml:lang="en">Advising Relationship</rdfs:label>
-        <rdfs:label xml:lang="es">Relación de Asesoramiento</rdfs:label>
+        <rdfs:label xml:lang="es">Relaci?n de Asesoramiento</rdfs:label>
     </owl:Class>
     
 
@@ -5983,7 +5983,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000115>The awarding of a degree by an agent to another agent. It is mostly for academic degrees.</obo:IAO_0000115>
         <rdfs:comment>An AwardedDegree is related to a Person and AcademicDegree, it is a qualiification (degree) received by somebody.</rdfs:comment>
         <rdfs:label xml:lang="en">Awarded Degree</rdfs:label>
-        <rdfs:label xml:lang="es">Titulación Universitaria Concedida</rdfs:label>
+        <rdfs:label xml:lang="es">Titulaci?n Universitaria Concedida</rdfs:label>
     </owl:Class>
     
 
@@ -6047,7 +6047,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Intel Talent Search; poetry contest</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Not the same as an award or distinction.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An occasion on which a winner is selected from among two or more contestants.</obo:IAO_0000115>
-        <rdfs:label xml:lang="es">Competición</rdfs:label>
+        <rdfs:label xml:lang="es">Competici?n</rdfs:label>
         <rdfs:label xml:lang="en">Competition</rdfs:label>
     </owl:Class>
     
@@ -6064,7 +6064,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A paper presented at a conference; optionally collected into a Proceedings or a special Journal issue</obo:IAO_0000115>
-        <rdfs:label xml:lang="es">Artículo de Conferencia</rdfs:label>
+        <rdfs:label xml:lang="es">Art?culo de Conferencia</rdfs:label>
         <rdfs:label xml:lang="en">Conference Paper</rdfs:label>
     </owl:Class>
     
@@ -6076,7 +6076,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/bibo#Document"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The digital file (or physical equivalent), if available after the conference, vs. the act of attending/presenting: use ConferencePresentation for information about date/time/location/name of the event where the poster was presented</obo:IAO_0000115>
         <rdfs:label xml:lang="en">Conference Poster</rdfs:label>
-        <rdfs:label xml:lang="es">Póster en Conferencia</rdfs:label>
+        <rdfs:label xml:lang="es">P?ster en Conferencia</rdfs:label>
     </owl:Class>
     
 
@@ -6279,7 +6279,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
     <owl:Class rdf:about="http://purl.org/roh/mirror/vivo#EditorialArticle">
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/bibo#Article"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An article of opinion, typically published in a newspaper. For academics, most commonly Op Ed pieces</obo:IAO_0000115>
-        <rdfs:label xml:lang="es">Artículo de Editor</rdfs:label>
+        <rdfs:label xml:lang="es">Art?culo de Editor</rdfs:label>
         <rdfs:label xml:lang="en">Editorial Article</rdfs:label>
     </owl:Class>
     
@@ -6310,7 +6310,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
     <owl:Class rdf:about="http://purl.org/roh/mirror/vivo#Exhibit">
         <rdfs:subClassOf rdf:resource="http://purl.org/roh#Activity"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The showing of an object or a collection of objects, in an organized manner.</obo:IAO_0000115>
-        <rdfs:label xml:lang="es">Exhibición</rdfs:label>
+        <rdfs:label xml:lang="es">Exhibici?n</rdfs:label>
         <rdfs:label xml:lang="en">Exhibit</rdfs:label>
     </owl:Class>
     
@@ -6331,7 +6331,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Something designed, built, installed, etc., to serve a specific function or activity affording a convenience or service.</obo:IAO_0000115>
         <rdfs:comment>A Facility belongs to an Organization and might be funded by a Funding.</rdfs:comment>
         <rdfs:label xml:lang="en">Facility</rdfs:label>
-        <rdfs:label xml:lang="es">Instalación</rdfs:label>
+        <rdfs:label xml:lang="es">Instalaci?n</rdfs:label>
     </owl:Class>
     
 
@@ -6344,7 +6344,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">That is a position held by an academic faculty member who works for administration.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An academic administrative position (associate dean, etc.) as distinct from a professional administrative position (non-academic)</obo:IAO_0000115>
         <rdfs:label xml:lang="en">Faculty Administrative Position</rdfs:label>
-        <rdfs:label xml:lang="es">Posición Administrativa en Facultad</rdfs:label>
+        <rdfs:label xml:lang="es">Posici?n Administrativa en Facultad</rdfs:label>
     </owl:Class>
     
 
@@ -6355,7 +6355,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/vivo#AdvisingRelationship"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An advisory relationship in which one faculty member mentors another faculty member.</obo:IAO_0000115>
         <rdfs:label xml:lang="en">Faculty Mentoring Relationship</rdfs:label>
-        <rdfs:label xml:lang="es">Relación de Mentor de Facultad</rdfs:label>
+        <rdfs:label xml:lang="es">Relaci?n de Mentor de Facultad</rdfs:label>
     </owl:Class>
     
 
@@ -6368,7 +6368,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Professor; Associate Professor; Assistant Professor</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Academic position in a university or institution</obo:IAO_0000115>
         <rdfs:label xml:lang="en">Faculty Position</rdfs:label>
-        <rdfs:label xml:lang="es">Posición en Facultad</rdfs:label>
+        <rdfs:label xml:lang="es">Posici?n en Facultad</rdfs:label>
     </owl:Class>
     
 
@@ -6382,7 +6382,7 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An institution founded with an endowment to support educational, research, artistic or other charitable activities.</obo:IAO_0000115>
         <obo:IAO_0000412 rdf:resource="http://purl.org/roh/mirror/vivo"/>
         <rdfs:label xml:lang="en">Foundation</rdfs:label>
-        <rdfs:label xml:lang="es">Fundación</rdfs:label>
+        <rdfs:label xml:lang="es">Fundaci?n</rdfs:label>
     </owl:Class>
     
 
@@ -6427,11 +6427,11 @@ Besides, an instance of a foaf:Person / roh:Researcher is associated to the foll
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A defined class of organizations that fund Grants</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organization that provides financial support to individuals or organizations to carry out specified activities.</obo:IAO_0000115>
         <obo:IAO_0000412 rdf:resource="http://purl.org/roh/mirror/vivo"/>
-        <rdfs:comment>A Funder inherits from foaf:Organization, it funds several Projects, “funds” several Fundings
+        <rdfs:comment>A Funder inherits from foaf:Organization, it funds several Projects, ?funds? several Fundings
 
 The funding organization (vivo:FundingOrganization), imported from VIVO, inherits from foaf:Organization, finances (roh:funds) through different funding aids (roh:Funding) to projects (roh:Project) through the roh:supports relationship and through the roh:FundingAmounts into which a roh:Funding is divided. A funding organization in turn divides a roh:Funding into several roh:FundingAmounts associated with different foaf:Organizations through the roh:grants relationship.</rdfs:comment>
         <rdfs:label xml:lang="en">Funding Organization</rdfs:label>
-        <rdfs:label xml:lang="es">Organización Financiadora</rdfs:label>
+        <rdfs:label xml:lang="es">Organizaci?n Financiadora</rdfs:label>
     </owl:Class>
     
 
@@ -6456,7 +6456,7 @@ The funding organization (vivo:FundingOrganization), imported from VIVO, inherit
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/vivo#AdvisingRelationship"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An advisory relationship in which a professor advises a graduate student.</obo:IAO_0000115>
         <rdfs:label xml:lang="en">Graduate Advising Relationship</rdfs:label>
-        <rdfs:label xml:lang="es">Relación de Asesor de Graduados</rdfs:label>
+        <rdfs:label xml:lang="es">Relaci?n de Asesor de Graduados</rdfs:label>
     </owl:Class>
     
 
@@ -6514,7 +6514,7 @@ The funding organization (vivo:FundingOrganization), imported from VIVO, inherit
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A broad-ranging leader concept, from leading a small temporary committee to head of a large international organization.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A leadership role</obo:IAO_0000115>
         <rdfs:label xml:lang="en">Leader Role</rdfs:label>
-        <rdfs:label xml:lang="es">Rol de Líder</rdfs:label>
+        <rdfs:label xml:lang="es">Rol de L?der</rdfs:label>
     </owl:Class>
     
 
@@ -6527,7 +6527,7 @@ The funding organization (vivo:FundingOrganization), imported from VIVO, inherit
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Librarian; Library Systems Analyst; Music Bibliographer</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A position held  by library and information science professionals, or academic or technical experts, in support of providing information services or materials</obo:IAO_0000115>
         <rdfs:label xml:lang="en">Librarian Position</rdfs:label>
-        <rdfs:label xml:lang="es">Posición de Bibliotecario</rdfs:label>
+        <rdfs:label xml:lang="es">Posici?n de Bibliotecario</rdfs:label>
     </owl:Class>
     
 
@@ -6550,7 +6550,7 @@ The funding organization (vivo:FundingOrganization), imported from VIVO, inherit
         <rdfs:subClassOf rdf:resource="http://purl.org/roh#Activity"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A gathering of people for a defined purpose, not necessarily public or announced</obo:IAO_0000115>
         <rdfs:label xml:lang="en">Meeting</rdfs:label>
-        <rdfs:label xml:lang="es">Reunión</rdfs:label>
+        <rdfs:label xml:lang="es">Reuni?n</rdfs:label>
     </owl:Class>
     
 
@@ -6574,7 +6574,7 @@ The funding organization (vivo:FundingOrganization), imported from VIVO, inherit
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Staff, support, and other non-academic positions.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A position classified as professional, staff, support, or any other non-academic role</obo:IAO_0000115>
         <rdfs:label xml:lang="en">Non-Academic Position</rdfs:label>
-        <rdfs:label xml:lang="es">Posición no Académica</rdfs:label>
+        <rdfs:label xml:lang="es">Posici?n no Acad?mica</rdfs:label>
     </owl:Class>
     
 
@@ -6587,7 +6587,7 @@ The funding organization (vivo:FundingOrganization), imported from VIVO, inherit
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Those positions are held by people who do academic work but do not have faculty positions in universities or institutes.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A position involving academic work but without faculty status</obo:IAO_0000115>
         <rdfs:label xml:lang="en">Non-Faculty Academic Position</rdfs:label>
-        <rdfs:label xml:lang="es">Posición Académica no de Facultad</rdfs:label>
+        <rdfs:label xml:lang="es">Posici?n Acad?mica no de Facultad</rdfs:label>
     </owl:Class>
     
 
@@ -6649,7 +6649,7 @@ Contents
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Director of Admissions and Placement; Associate University Librarian</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Particular position in an organization, commonly identified by job title, and normally associated with a job description that details the tasks and responsibilities that go with the position.</obo:IAO_0000115>
         <rdfs:comment>Position is reused from vivo:Position and is refined into AcademicPosition (non-existing in VIVO) and NonAcademicPosition, for each position a range of possible figures is considered. This entiy is subject to refinement according to the country where it is applied.</rdfs:comment>
-        <rdfs:label xml:lang="es">Posición</rdfs:label>
+        <rdfs:label xml:lang="es">Posici?n</rdfs:label>
         <rdfs:label xml:lang="en">Position</rdfs:label>
     </owl:Class>
     
@@ -6661,7 +6661,7 @@ Contents
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/vivo#AdvisingRelationship"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An advisory relationship in which the advisee is a Postdoc or Fellow.</obo:IAO_0000115>
         <rdfs:label xml:lang="en">Postdoc or Fellow Advising Relationship</rdfs:label>
-        <rdfs:label xml:lang="es">Relación de PostDoc o de Asesor Compañero</rdfs:label>
+        <rdfs:label xml:lang="es">Relaci?n de PostDoc o de Asesor Compa?ero</rdfs:label>
     </owl:Class>
     
 
@@ -6671,7 +6671,7 @@ Contents
     <owl:Class rdf:about="http://purl.org/roh/mirror/vivo#PostdocPosition">
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/vivo#NonFacultyAcademicPosition"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A postdoctoral training appointment (job)</obo:IAO_0000115>
-        <rdfs:label xml:lang="es">Posición Postdoctoral</rdfs:label>
+        <rdfs:label xml:lang="es">Posici?n Postdoctoral</rdfs:label>
         <rdfs:label xml:lang="en">Postdoctoral Position</rdfs:label>
     </owl:Class>
     
@@ -6682,7 +6682,7 @@ Contents
     <owl:Class rdf:about="http://purl.org/roh/mirror/vivo#Presentation">
         <rdfs:subClassOf rdf:resource="http://purl.org/roh#Activity"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Encompasses talk, speech, lecture, slide lecture, conference presentation</obo:IAO_0000115>
-        <rdfs:label xml:lang="es">Presentación</rdfs:label>
+        <rdfs:label xml:lang="es">Presentaci?n</rdfs:label>
         <rdfs:label xml:lang="en">Presentation</rdfs:label>
     </owl:Class>
     
@@ -6706,7 +6706,7 @@ Contents
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/vivo#Position"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A position designated as primary by the organization or group where it is held. This designation may be applied to zero or more of an agent&apos;s positions and may be asserted in conjunction with other subclasses of position.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A position designated as primary by the organization where it is held.</obo:IAO_0000115>
-        <rdfs:label xml:lang="es">Posición Primaria</rdfs:label>
+        <rdfs:label xml:lang="es">Posici?n Primaria</rdfs:label>
         <rdfs:label xml:lang="en">Primary Position</rdfs:label>
     </owl:Class>
     
@@ -6877,7 +6877,7 @@ It includes the Data Properties vivo:identifier, roh:acronym, vivo:description, 
 An roh:Project includes several sub-classes roh:PrivateProject and roh:PublicFundingProject. The first subclass includes the subclasses roh:Agreement whilst the latter one defines as its subclasses: roh:Bidding, roh:EuropeanProject, roh:NationalProject or roh:RegionalProject.
 
 Besides an instance of a roh:Project is associated to the following entities:
-- oaf:Organización, where different organizations may play different obo:Roles in a project, e.g. vivo:MemberRole or vivo:AdministratorRole. 
+- oaf:Organizaci?n, where different organizations may play different obo:Roles in a project, e.g. vivo:MemberRole or vivo:AdministratorRole. 
 - foaf:Person, where an person may play different obo:Roles, e.g. vivo:PrincipalInvestigatorRole or vivo:ResearcherRole, 
 - roh:ResearchObject, where a project roh:produces several roh:ResearchObject, where some results of a project might be for example of types bibo:Journal, obo:JournalArticle, or roh:PhDThesis.
 - roh:Funding sponsors (roh:funds) a project, it describes the details about the funding associated to a project. 
@@ -6900,7 +6900,7 @@ Notice that a roh:Project may also be part (vivo:hasPart) of another project, e.
     <owl:Class rdf:about="http://purl.org/roh/mirror/vivo#Relationship">
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">functions as an n-ary predicate</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">a reified relationship</obo:IAO_0000115>
-        <rdfs:label xml:lang="es">Relación</rdfs:label>
+        <rdfs:label xml:lang="es">Relaci?n</rdfs:label>
         <rdfs:label xml:lang="en">Relationship</rdfs:label>
     </owl:Class>
     
@@ -6926,7 +6926,7 @@ Notice that a roh:Project may also be part (vivo:hasPart) of another project, e.
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A proposal for a research grant that has been submitted but not approved; does not represent an existing activity</obo:IAO_0000115>
-        <rdfs:label xml:lang="es">Propuesta de Investigación</rdfs:label>
+        <rdfs:label xml:lang="es">Propuesta de Investigaci?n</rdfs:label>
         <rdfs:label xml:lang="en">Research Proposal</rdfs:label>
     </owl:Class>
     
@@ -6972,7 +6972,7 @@ Notice that a roh:Project may also be part (vivo:hasPart) of another project, e.
     <owl:Class rdf:about="http://purl.org/roh/mirror/vivo#UndergraduateAdvisingRelationship">
         <rdfs:subClassOf rdf:resource="http://purl.org/roh/mirror/vivo#AdvisingRelationship"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An advisory relationship in which a professor advises an undergraduate student.</obo:IAO_0000115>
-        <rdfs:label xml:lang="es">Relación de Asesor de Estudiantes sin Grado</rdfs:label>
+        <rdfs:label xml:lang="es">Relaci?n de Asesor de Estudiantes sin Grado</rdfs:label>
         <rdfs:label xml:lang="en">Undergraduate Advising Relationship</rdfs:label>
     </owl:Class>
     
@@ -7041,7 +7041,7 @@ Notice that a roh:Project may also be part (vivo:hasPart) of another project, e.
         <rdf:type rdf:resource="http://purl.org/roh#FundingSource"/>
         <rdfs:comment xml:lang="en">A fund allocated by the European Union. It finances direct payments to farmers under the Common Agricultural Policy (CAP) and measures to regulate agricultural markets such as intervention and export refunds.</rdfs:comment>
         <rdfs:label xml:lang="en">European Agricultural Guarantee Fund</rdfs:label>
-        <rdfs:label xml:lang="es">Fondo Europeo de Orientación y Garantía Agrícola</rdfs:label>
+        <rdfs:label xml:lang="es">Fondo Europeo de Orientaci?n y Garant?a Agr?cola</rdfs:label>
     </owl:NamedIndividual>
     
 
@@ -7052,7 +7052,7 @@ Notice that a roh:Project may also be part (vivo:hasPart) of another project, e.
         <rdf:type rdf:resource="http://purl.org/roh#FundingSource"/>
         <rdfs:comment xml:lang="en">The EMFF is the fund for the EU&apos;s maritime and fisheries policies for 2014-2020.</rdfs:comment>
         <rdfs:label xml:lang="en">European Maritime and Fisheries Fund</rdfs:label>
-        <rdfs:label xml:lang="es">Fondo Europeo Marítimo y de Pesca</rdfs:label>
+        <rdfs:label xml:lang="es">Fondo Europeo Mar?timo y de Pesca</rdfs:label>
     </owl:NamedIndividual>
     
 
