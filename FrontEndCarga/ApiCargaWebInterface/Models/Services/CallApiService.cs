@@ -7,6 +7,7 @@ using ApiCargaWebInterface.Models.Entities;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -96,6 +97,51 @@ namespace ApiCargaWebInterface.Models.Services
                 ByteArrayContent bytes = new ByteArrayContent(data);
                 contentData = new MultipartFormDataContent();
                 ((MultipartFormDataContent)contentData).Add(bytes, fileName, ((IFormFile)item).FileName);
+            }
+            string result = "";
+            HttpResponseMessage response = null;
+            try
+            {
+                HttpClient client = new HttpClient();
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
+                }
+                response = client.PostAsync($"{urlBase}{urlMethod}", contentData).Result;
+                response.EnsureSuccessStatusCode();
+                result = response.Content.ReadAsStringAsync().Result;
+                return result;
+            }
+            catch (HttpRequestException)
+            {
+                if (response.StatusCode.Equals(HttpStatusCode.BadRequest))
+                {
+                    throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
+                }
+                else if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                {
+                    throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpRequestException(response.ReasonPhrase);
+                }
+            }
+        }
+
+        public string CallPostApiFiles(string urlBase, string urlMethod, Dictionary<string, IFormFile> files, TokenBearer token = null)
+        {
+            MultipartFormDataContent contentData = contentData = new MultipartFormDataContent();
+            foreach (var file in files)
+            {
+                IFormFile item = file.Value;
+                byte[] data;
+                using (var br = new BinaryReader(item.OpenReadStream()))
+                {
+                    data = br.ReadBytes((int)item.OpenReadStream().Length);
+                }
+                ByteArrayContent bytes = new ByteArrayContent(data);
+                contentData.Add(bytes, file.Key, item.FileName);
             }
             string result = "";
             HttpResponseMessage response = null;

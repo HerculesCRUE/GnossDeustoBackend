@@ -4,7 +4,9 @@
 // Servicio para hacer llamadas al api de cron
 using ApiCargaWebInterface.Extra.Exceptions;
 using ApiCargaWebInterface.Models.Entities;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 
@@ -112,6 +114,11 @@ namespace ApiCargaWebInterface.Models.Services
                     throw new HttpRequestException(response.ReasonPhrase);
                 }
             }
+        }
+
+        public string CallPostApiFiles(string urlBase, string urlMethod, Dictionary<string, IFormFile> files, TokenBearer token = null)
+        {
+            throw new System.NotImplementedException();
         }
 
         public string CallPutApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false, string fileName = "rdfFile")

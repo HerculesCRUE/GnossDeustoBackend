@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ApiCargaWebInterface.ViewModels;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace ApiCargaWebInterface.Models.Services
         public void CallDataPublish(IFormFile rdf);
         public void PostOntology(IFormFile ontologyUri, int ontologyType);
         public string GetOntology(int ontologyType);
+        public void ValidateRDFPersonalized(Guid repositoryId, IFormFile rdfToValidate, IFormFile validationRdf, List<Guid> validationShapesList, List<ShapeConfigViewModel> repositoryShapes);
     }
 }

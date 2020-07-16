@@ -140,8 +140,9 @@ namespace API_CARGA.Models.Utility
         /// </summary>
         /// <param name="pRdfFileContent">XML RDF</param>
         /// <param name="pValidation">Validación a realizar</param>
+        /// <param name="pValidatoinFileName">Nombre del fichero de validación</param>
         /// <returns>Lista de triples</returns>
-        public static ShapeReport ValidateRDF(string pRdfFileContent, string pValidation)
+        public static ShapeReport ValidateRDF(string pRdfFileContent, string pValidation, string pValidatoinFileName)
         {
             //Cargamos la ontología
             RohGraph ontologyGraph = new RohGraph();
@@ -176,7 +177,7 @@ namespace API_CARGA.Models.Utility
                     message = (x.Message != null) ? x.Message.ToString() : null,
                     resultPath = (x.ResultPath != null) ? x.ResultPath.ToString() : null,
                     shapeID = Guid.Empty,
-                    shapeName = "personalized validation",
+                    shapeName = $"{pValidatoinFileName}",
                     sourceShape = (x.SourceShape != null) ? x.SourceShape.ToString() : null,
                 }).ToList());
             }
