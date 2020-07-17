@@ -1,16 +1,16 @@
-﻿using ApiCargaWebInterface.Extra.Exceptions;
+﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
+// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+// Clase para llamar a los métodos que ofrece el controlador etl del API_CARGA 
+using ApiCargaWebInterface.Extra.Exceptions;
 using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.ViewModels;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace ApiCargaWebInterface.Models.Services

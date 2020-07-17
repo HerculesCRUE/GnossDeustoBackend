@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
+// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+// Controlador para reemplazar y obtener las ontologías
+using System;
 using System.Text;
-using System.Threading.Tasks;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
 using Microsoft.AspNetCore.Http;
