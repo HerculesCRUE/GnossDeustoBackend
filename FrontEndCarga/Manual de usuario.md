@@ -108,3 +108,16 @@ Interfaz desde la que se puede:
  estructura a modo de ayuda, como se ve en la siguiente imágen:
  
 ![](img/AddUriStructure.png)
+
+Publicación y validación de rdf
+----------------
+A esta interfaz se accede desde la vista de detalles de un repositorio, desde la parte superior donde aparece la opción publicación manual.
+Desde esta interfaz se puede: 
+ - Obtener el rdf de un repositorio.
+ - Validar un rdf propio o descargado del propio repositorio, tanto por medio de un rdf de validación propio como por los shapes configurados en el propio repositorio.
+ - Publicar un rdf, pasando antes por los sahpes configurados en el repositorio.
+Cuando se obtenga un error de validación se mostrará una página de error como la que aparece a continuación.
+Interfaz:
+![](img/manualPublish.png)
+Error de validación:
+![](img/validationError.png)
