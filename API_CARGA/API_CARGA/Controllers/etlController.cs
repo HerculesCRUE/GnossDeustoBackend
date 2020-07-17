@@ -110,7 +110,7 @@ namespace API_CARGA.Controllers
             {
                 string rdfFileContent = SparqlUtility.GetTextFromFile(rdfFile);
                 string validation = SparqlUtility.GetTextFromFile(validationFile);
-                return Ok(SparqlUtility.ValidateRDF(rdfFileContent, validation));
+                return Ok(SparqlUtility.ValidateRDF(rdfFileContent, validation, validationFile.FileName));
             }
             catch (Exception ex)
             {
