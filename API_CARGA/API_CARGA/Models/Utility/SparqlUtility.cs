@@ -205,7 +205,7 @@ namespace API_CARGA.Models.Utility
         /// <param name="pSPARQLEndpoint">Endpoint SPARQL</param>
         /// <param name="pQueryParam">Query param</param>
         /// <param name="pGraph">Grafo</param>
-        public static void LoadTriples(List<string> pTriples, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pGraphUnidata)
+        public static void LoadTriples(List<string> pTriples, string pSPARQLEndpoint, string pQueryParam, string pGraph)
         {
             List<string> listNotBlankNodeTriples = new List<string>();
             List<string> listBlankNodeTriples = new List<string>();

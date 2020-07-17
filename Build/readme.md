@@ -61,7 +61,10 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
          "Sparql": {
            "Graph": "http://data.um.es/graph/um_cvn",
            "Endpoint": "http://155.54.239.204:8890/sparql"
-           "QueryParam": "query"
+           "QueryParam": "query",
+		   "GraphRoh": "http://graph.um.es/graph/research/roh",
+		   "GraphRohes": "http://graph.um.es/graph/research/rohes",
+		   "GraphRohum": "http://graph.um.es/graph/research/rohum"
          },
          "Authority": "http://localhost:56306",
          "ScopeCarga": "apiCarga",
@@ -71,7 +74,11 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
          "ClientSecret": "secret",
          "ScopeOAIPMH": "apiOAIPMH",
          "ClientIdOAIPMH": "OAIPMH",
-        "ClientSecretOAIPMH": "secretOAIPMH"
+        "ClientSecretOAIPMH": "secretOAIPMH",
+		"ConfigUrlUnidata": "https://localhost:44354/",
+		"ScopeUnidata": "apiUnidata",
+		"ClientIdUnidata": "unidata",
+		"ClientSecretUnidata": "secretUnidata"
          }
  - PostgreConnectionmigration: Cadena de conexión a la base de datos PostgreSQL
  - LogLevel.Default: Nivel de error por defecto

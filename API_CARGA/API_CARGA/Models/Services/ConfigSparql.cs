@@ -16,7 +16,6 @@ namespace API_CARGA.Models.Services
     {
         public IConfigurationRoot Configuration { get; set; }
         private string Graph { get; set; }
-        private string GraphUnidata { get; set; }
         public string Endpoint { get; set; }
         private string QueryParam { get; set; }
         private string GraphRoh { get; set; }
@@ -126,31 +125,6 @@ namespace API_CARGA.Models.Services
             return GraphRohum;
         }
 
-        ///<summary>
-        ///Obtiene el gráfo de unidata configurado en Sparql:GraphUnidata del fichero appsettings.json
-        ///</summary>
-        public string GetGraphUnidata()
-        {
-            if (string.IsNullOrEmpty(GraphUnidata))
-            {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("GraphUnidata"))
-                {
-                    GraphUnidata = environmentVariables["GraphUnidata"] as string;
-                }
-                else
-                {
-                    GraphUnidata = Configuration["Sparql:GraphUnidata"];
-                }
-
-            }
-            return GraphUnidata;
-        }
         ///<summary>
         ///Obtiene el endpoint configurado en Sparql:Endpoint del fichero appsettings.json
         ///</summary>
