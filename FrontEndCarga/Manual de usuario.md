@@ -14,6 +14,8 @@
 
 [Factoría de URIs](#factoría-de-uris)
 
+[Publicación y validación de rdf](#publicacion-y-validacion-de-rdf)
+
 Introducción
 ------------
 Está web es el punto de entrada de los usuarios para administrar sus repositorios. Desde una interfaz intuitiva podrán dar de alta nuevos repositorios, administrarlos y eliminarlos. La primera página que se le muestra al usuario es el listado de repositorios existentes. 
