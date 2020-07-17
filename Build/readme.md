@@ -88,6 +88,9 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
  - ConfigUrl: URL donde está lanzada esta aplicación
  - Sparql.Graph: Grafo en el que se van a almacenar los triples
  - Sparql.Endpoint: URL del Endpoint Sparql
+ - Sparql.GraphRoh: gráfo de la ontologia roh
+ - Sparql.GraphRohes: gráfo de la ontologia rohes
+ - Sparql.GraphRohum: gráfo de la ontologia rohum
  - Authority: Url de la servicio de identidades
  - ScopeCarga: Limitación de acceso al api de carga
  - AuthorityGetToken: Endpoint para la llamada de obtención del token
@@ -97,6 +100,10 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
  - ScopeOAIPMH: Limitación de acceso al api de OAIPMH
  - ClientIdOAIPMH: Id de cliente del api de OAIPMH
  - ClientSecretOAIPMH: "clave" de acceso del api de OAIPMH
+ - ConfigUrlUnidata: URL donde está lanzada la aplicación de unidata
+ - ScopeUnidata: Limitación de acceso al api de unidata
+ - ClientIdUnidata: Id de cliente del api de unidata
+ - ClientSecretUnidata: "clave" de acceso del api de unidata
 ### Ejecución Linux
     dotnet API_CARGA.dll
 ## FrontEndCarga
@@ -218,3 +225,36 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
  - Scope: Limitación de acceso al api de apiOAIPMH
   ### Ejecución Linux
     dotnet OAI_PMH_CVN.dll
+## Api unidata
+
+
+### Configuración
+    {
+      "Logging": {
+          "LogLevel": {
+                "Default": "Information",
+                 "Microsoft": "Warning",
+                  "Microsoft.Hosting.Lifetime": "Information"
+                    }
+              },
+        "Authority": "http://localhost:56306",
+         "Scope": "apiUrisFactory",
+          "AllowedHosts": "*",
+		  "GraphUnidata": "http://data.um.es/graph/unidata",
+		  "EndpointUnidata": "http://localhost:8890/sparql",
+		  "QueryParam": "query",
+		  "Authority": "http://localhost:56306",
+		  "ScopeUnidata": "apiUnidata",
+		  "AuthorityGetToken": "http://localhost:56306/connect/token",
+		  "GrantType": "client_credentials",
+		  "ClientIdUnidata": "unidata",
+		  "ClientSecretUnidata": "secretUnidata"
+    }
+ - LogLevel.Default: Nivel de error por defecto
+ - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
+ - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
+ - Authority: Url de la servicio de identidades
+ - Scope: Limitación de acceso de este api
+ - GrantType: Tipo de concesión de Oauth
+ - ClientIdUnidata: Id de cliente del api de unidata
+ - ClientSecretUnidata: "clave" de acceso del api de unidata
