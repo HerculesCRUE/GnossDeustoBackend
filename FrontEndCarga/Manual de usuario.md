@@ -14,7 +14,7 @@
 
 [Factoría de URIs](#factoría-de-uris)
 
-[Publicación y validación de rdf](#publicacion-y-validacion-de-rdf)
+[Publicación y validación de rdf](#publicación-y-validación-de-rdf)
 
 Introducción
 ------------
