@@ -119,7 +119,10 @@ Desde esta interfaz se puede:
  - Validar un rdf propio o descargado del propio repositorio, tanto por medio de un rdf de validación propio como por los shapes configurados en el propio repositorio.
  - Publicar un rdf, pasando antes por los sahpes configurados en el repositorio.
 Cuando se obtenga un error de validación se mostrará una página de error como la que aparece a continuación.
+
 Interfaz:
 ![](img/manualPublish.png)
+
 Error de validación:
+
 ![](img/validationError.png)
