@@ -125,4 +125,4 @@ Interfaz:
 
 Error de validación:
 
-![](img/validationError.png)
+![](img/validationError.PNG)
