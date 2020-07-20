@@ -25,9 +25,12 @@ namespace XUnitTestAPI_CARGA
         {
             ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
+            ConfigTokenService configTokenService = new ConfigTokenService();
+            CallTokenService callTokenService = new CallTokenService(configTokenService);
+            CallUri callUri = new CallUri(callTokenService);
             ConfigSparql configSparql = new ConfigSparql();
             configSparql.Endpoint = "";
-            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, configSparql);
+            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null);
 
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
@@ -46,8 +49,11 @@ namespace XUnitTestAPI_CARGA
             ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
             ConfigSparql configSparql = new ConfigSparql();
+            ConfigTokenService configTokenService = new ConfigTokenService();
+            CallTokenService callTokenService = new CallTokenService(configTokenService);
+            CallUri callUri = new CallUri(callTokenService);
             configSparql.Endpoint = "";
-            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, configSparql);
+            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null);
 
             try
             {
@@ -75,7 +81,7 @@ namespace XUnitTestAPI_CARGA
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
             ConfigSparql configSparql = new ConfigSparql();
             configSparql.Endpoint = "";
-            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, configSparql);
+            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null);
 
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);

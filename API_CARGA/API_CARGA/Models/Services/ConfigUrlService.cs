@@ -15,7 +15,7 @@ namespace API_CARGA.Models.Services
     public class ConfigUrlService
     {
         public IConfigurationRoot Configuration { get; set; }
-        private string Url { get; set; }
+        public string Url { get; set; }
         private string UrlUnidata { get; set; }
         ///<summary>
         ///Obtiene la url configurada en ConfigUrl del fichero appsettings.json
