@@ -16,6 +16,7 @@ using IdentityServer4.EntityFramework.Entities;
 using IdentityServer4.EntityFramework.Mappers;
 using IdentityServer4.Stores;
 using IdentityServerHecules.Persist;
+using System.Collections;
 
 namespace IdentityServerHecules
 {
@@ -39,7 +40,16 @@ namespace IdentityServerHecules
             ///////////////
             ///////Prueba
 
-            const string connectionString = @"Host=192.168.40.179;Database=hercules;Username=hercules;Password=hercules";
+            IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+            string connectionString = "";
+            if (environmentVariables.Contains("PostgreConnection"))
+            {
+                connectionString = environmentVariables["PostgreConnection"] as string;
+            }
+            else
+            {
+                connectionString = Configuration["PostgreConnection"];
+            }
             //const string connectionString = @"Username =herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true";
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
