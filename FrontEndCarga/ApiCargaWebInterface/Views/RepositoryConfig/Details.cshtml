@@ -8,6 +8,22 @@
     var modeloJob = new ApiCargaWebInterface.ViewModels.CreateJobViewModel();
     modeloShape.RepositoryID = Model.RepositoryConfigID;
     modeloJob.IdRepository = Model.RepositoryConfigID;
+    string clase = "";
+    if (Model.PorcentajeTareas != null)
+    {
+        if (Model.PorcentajeTareas < 50)
+        {
+            clase = "class =text-danger";
+        }
+        else if (50 < Model.PorcentajeTareas && Model.PorcentajeTareas < 70)
+        {
+            clase = "class =text-warning";
+        }
+        else
+        {
+            clase = "class =text-success";
+        }
+    }
 }
 
 
@@ -39,6 +55,26 @@
                             <p class="titulo">Url</p>
                             <p>@Model.Url</p>
                         </div>
+                        <div class="outh-token">
+                            <p class="titulo">Tareas exitosas</p>
+                            <p @clase>@Model.PorcentajeTareas %</p>
+                        </div>
+                        <hr />
+                        <div class="outh-token">
+                            <p class="titulo">Última tarea ejecutada</p>
+                            <p>@Model.LastJob</p>
+                        </div>
+                        <div class="outh-token">
+                            <p class="titulo">Estado de la última tarea ejecutada</p>
+                            <p>@Model.LastState</p>
+                            @if (Model.LastState.Equals("Failed"))
+                            {
+                                <a href="@Url.Action("DetailsJob", "Job",new { id = Model.LastJob })">
+                                    <p class="text-danger">vea el error</p>
+                                </a>
+                            }
+                        </div>
+
                     </div>
                     <div class="grupo grupo-programacion">
                         <h2>Tareas de sincronización</h2>

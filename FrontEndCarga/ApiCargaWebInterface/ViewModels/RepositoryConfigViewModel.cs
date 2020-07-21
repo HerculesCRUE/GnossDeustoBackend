@@ -17,7 +17,11 @@ namespace ApiCargaWebInterface.ViewModels
         public string OauthToken { get; set; }
 
         public string Url { get; set; }
-
+        [Display(Name = "Última tarea ejecutada")]
+        public string LastJob { get; set; }
+        [Display(Name = "Estado de la última tarea ejecutada")]
+        public string LastState { get; set; }
+        public double PorcentajeTareas { get; set; }
         [Display(Name = "Shapes Configurados")]
         public List<ShapeConfigViewModel> ShapeConfig { get; set; }
         [Display(Name = "Tareas recurrentes Configuradas")]

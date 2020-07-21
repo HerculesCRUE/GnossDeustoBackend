@@ -4,6 +4,7 @@
 // Controlador repositorios
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ApiCargaWebInterface.Extra.Exceptions;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
@@ -34,6 +35,15 @@ namespace ApiCargaWebInterface.Controllers
             result.ListRecurringJobs = _respositoryJobService.GetRecurringJobsOfRepo(id);
             result.ListJobs = _respositoryJobService.GetJobsOfRepo(id);
             result.ListScheduledJobs = _respositoryJobService.GetScheduledJobsOfRepo(id);
+            if (result.ListJobs != null && result.ListJobs.Count > 0)
+            {
+                var job = result.ListJobs.OrderByDescending(item => item.ExecutedAt).FirstOrDefault();
+                result.LastJob = job.Id;
+                result.LastState = job.State;
+                int succed = result.ListJobs.Count(item => !item.State.Equals("Failed"));
+                double percentage = ((double)succed / result.ListJobs.Count)*100;
+                result.PorcentajeTareas = Math.Round(percentage, 2);
+            }
             if (result != null)
             {
                 return View(result);
