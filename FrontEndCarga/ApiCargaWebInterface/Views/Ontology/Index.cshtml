@@ -15,7 +15,7 @@
             <form asp-action="LoadOntology" method="post" enctype="multipart/form-data">
                 <div class="fieldset fieldset01">
                     <fieldset class="mediumLabels">
-                        <h1>Get Uri</h1>
+                        <h1>Cargar/cambiar una ontologia</h1>
                         <div class="fieldsetContent">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
@@ -24,7 +24,7 @@
                                 <span asp-validation-for="Ontology_uri" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label for="ontology_type" class="control-label">Ontología a obtener</label>
+                                <label for="ontology_type" class="control-label">Ontología a cambiar</label>
                                 <select for="ontology_type" id="ontology_type" class="form-control">
                                     <option value="0">roh.owl</option>
                                     <option value="1">rohes.owl</option>
@@ -45,7 +45,7 @@
             <form asp-action="GetOntology" method="get">
                 <div class="fieldset fieldset01">
                     <fieldset class="mediumLabels">
-                        <h1>Get Uri</h1>
+                        <h1>obtener ontologia</h1>
                         <div class="fieldsetContent">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
