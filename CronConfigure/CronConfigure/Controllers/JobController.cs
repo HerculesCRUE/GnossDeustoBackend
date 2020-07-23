@@ -159,7 +159,7 @@ namespace CronConfigure.Controllers
                 idRep = new Guid(id);
                 return Ok(_repositoryCronService.GetAllJobs(idRep));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return BadRequest("identificador invalido");
             }

@@ -6,6 +6,7 @@ using ApiCargaWebInterface.Extra.Exceptions;
 using ApiCargaWebInterface.Models.Entities;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -57,10 +58,12 @@ namespace ApiCargaWebInterface.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
+               
                 if (token != null)
                 {
                     client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
                 }
+
                 string url = _serviceUrl.GetUrl();
                 response = client.GetAsync($"{url}{urlMethod}").Result;
                 response.EnsureSuccessStatusCode();

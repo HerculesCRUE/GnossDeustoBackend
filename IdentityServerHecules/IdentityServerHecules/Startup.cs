@@ -48,13 +48,16 @@ namespace IdentityServerHecules
             }
             else
             {
-                connectionString = Configuration["PostgreConnection"];
+                connectionString = Configuration.GetConnectionString("PostgreConnection");
             }
             //const string connectionString = @"Username =herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true";
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
             // configure identity server with in-memory stores, keys, clients and scopes
-            services.AddIdentityServer()
+            services.AddIdentityServer(x=>
+            {
+                x.IssuerUri = "http://herc-as-front-desa.atica.um.es:5108";
+            })
                 .AddDeveloperSigningCredential()
                 //.AddInMemoryApiResources(Config.GetApiResources())
                 //.AddInMemoryClients(Config.GetClients())

@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using UrisFactory.Filters;
@@ -35,6 +36,7 @@ namespace UrisFactory
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IdentityModelEventSource.ShowPII = true; //Add this line
             IDictionary environmentVariables = Environment.GetEnvironmentVariables();
             services.AddControllers();
             string authority = "";
@@ -138,8 +140,6 @@ namespace UrisFactory
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("v1/swagger.json", "Uris factory");
-                c.OAuthClientId("client");
-                c.OAuthClientSecret("511536EF-F270-4058-80CA-1C89C192F69A");
             });
 
             app.UseEndpoints(endpoints =>

@@ -261,15 +261,20 @@ namespace CronConfigure.Models.Services
                 string state = "";
                 if (jobDetails != null)
                 {
-                    if (jobDetails.History.Count > 0)
+                    if (jobDetails.History != null && jobDetails.History.Count > 0)
                     {
                         state = jobDetails.History[0].StateName;
                         executedAt = jobDetails.History[0].CreatedAt;
                     }
+                    var jobString = "";
+                    if (jobDetails.Job != null)
+                    {
+                        jobString = jobDetails.Job.ToString();
+                    }
                     JobViewModel job = new JobViewModel()
                     {
                         Id = id.ToString(),
-                        Job = jobDetails.Job.ToString(),
+                        Job = jobString,
                         State = state,
                         ExecutedAt = executedAt
                     };
@@ -310,12 +315,12 @@ namespace CronConfigure.Models.Services
             if (jobDto != null)
             {
                 job = new JobViewModel();
-                if (jobDto.History.Count > 0)
+                if (jobDto.History != null && jobDto.History.Count > 0)
                 {
                     state = jobDto.History[0].StateName;
                     if (state.Equals("Failed"))
                     {
-                        if (jobDto.History[0].Data.ContainsKey("ExceptionMessage"))
+                        if (jobDto.History[0].Data != null && jobDto.History[0].Data.ContainsKey("ExceptionMessage"))
                         {
                             job.ExceptionDetails = jobDto.History[0].Data["ExceptionMessage"];
                         }

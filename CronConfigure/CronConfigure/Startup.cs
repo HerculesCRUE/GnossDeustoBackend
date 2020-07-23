@@ -137,16 +137,16 @@ namespace CronConfigure
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.Use((context, next) =>
-            {
-                //context.Request.PathBase = "/cron-config";
-                return next();
-            });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             app.UseAuthentication();
+            app.Use((context, next) =>
+            {
+                context.Request.PathBase = "/cron-config";
+                return next();
+            });
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<HangfireEntityContext>();
@@ -165,7 +165,6 @@ namespace CronConfigure
                 Authorization = new [] {new HangfireDashboardNoAuthorizationFilter() }
             }
                 );
-            //backgroundJobs.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
             app.UseSwagger(c =>
             {
                 c.PreSerializeFilters.Add((swaggerDoc, httpReq) => swaggerDoc.Servers = new List<OpenApiServer>
