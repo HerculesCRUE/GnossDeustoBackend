@@ -1,0 +1,49 @@
+﻿@model ApiCargaWebInterface.ViewModels.GetTokenViewModel
+@{
+
+    ViewData["Title"] = "get token";
+
+    ViewData["BodyClass"] = "formulario";
+}
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <form asp-action="GetToken" method="get">
+                <div class="fieldset fieldset01">
+                    <fieldset class="mediumLabels">
+                        <h1>Obtener token</h1>
+                        <div class="fieldsetContent">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label for="token_Type" class="control-label"> Elige el tipo de token</label>
+                                <select for="token_Type" id="token_Type" class="form-control">
+                                    @foreach (var option in Model.TokenOptions)
+                                    {
+                                        <option value="@option.Key">@option.Value</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="fieldset actionButtons fieldset03">
+                                <fieldset>
+                                    <p>
+                                        <input class="submit principal" type="submit" value="obtener token">
+                                    </p>
+                                </fieldset>
+                            </div>
+                            @if (!string.IsNullOrEmpty(Model.Token))
+                            {
+                                <p class="text text-info" style="word-wrap: break-word;">
+                                    @Model.Token
+                                </p>
+                            }
+                        </div>
+                    </fieldset>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+

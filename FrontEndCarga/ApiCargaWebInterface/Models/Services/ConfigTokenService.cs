@@ -22,6 +22,9 @@ namespace ApiCargaWebInterface.Models.Services
         public string ScopeUrisFactory { get; set; }
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }
+        public string ScopeOAIPMH { get; set; }
+        public string ClientIdOAIPMH { get; set; }
+        public string ClientSecretOAIPMH { get; set; }
         public ConfigTokenService()
         {
             var builder = new ConfigurationBuilder()
@@ -48,6 +51,66 @@ namespace ApiCargaWebInterface.Models.Services
                 Authority = authority;
             }
             return Authority;
+        }
+
+        internal object GetClientSecretOAIPMH()
+        {
+            if (string.IsNullOrEmpty(ScopeOAIPMH))
+            {
+                string clientSecretOAIPMH = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ClientSecretOAIPMH"))
+                {
+                    clientSecretOAIPMH = environmentVariables["ClientSecretOAIPMH"] as string;
+                }
+                else
+                {
+                    clientSecretOAIPMH = Configuration["ClientSecretOAIPMH"];
+                }
+
+                ClientSecretOAIPMH = clientSecretOAIPMH;
+            }
+            return ClientSecretOAIPMH;
+        }
+
+        internal string GetScopeOAIPMH()
+        {
+            if (string.IsNullOrEmpty(ScopeOAIPMH))
+            {
+                string scopeOAIPMH = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ScopeOAIPMH"))
+                {
+                    scopeOAIPMH = environmentVariables["ScopeOAIPMH"] as string;
+                }
+                else
+                {
+                    scopeOAIPMH = Configuration["ScopeOAIPMH"];
+                }
+
+                ScopeOAIPMH = scopeOAIPMH;
+            }
+            return ScopeOAIPMH;
+        }
+
+        public string GetClientIdOAIPMH()
+        {
+            if (string.IsNullOrEmpty(ClientIdOAIPMH))
+            {
+                string ScopeOAIPMH = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ClientIdOAIPMH"))
+                {
+                    ScopeOAIPMH = environmentVariables["ClientIdOAIPMH"] as string;
+                }
+                else
+                {
+                    ScopeOAIPMH = Configuration["ClientIdOAIPMH"];
+                }
+
+                ClientIdOAIPMH = ScopeOAIPMH;
+            }
+            return ClientIdOAIPMH;
         }
 
         public string GetGrantType()

@@ -37,6 +37,12 @@ namespace ApiCargaWebInterface.Models.Services
             return CallTokenIdentity(stringData);
         }
 
+        internal TokenBearer CallTokenOAIPMH()
+        {
+            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeOAIPMH()}&client_id={_configToken.GetClientIdOAIPMH()}&client_secret={_configToken.GetClientSecretOAIPMH()}";
+            return CallTokenIdentity(stringData);
+        }
+
         private TokenBearer CallTokenIdentity(string stringData)
         {
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
