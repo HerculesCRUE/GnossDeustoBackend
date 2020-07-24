@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 using ApiCargaWebInterface.Extra.Exceptions;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace ApiCargaWebInterface.Controllers
 {
+    [Authorize]
     public class UrisFactoryController : Controller
     {
         ICallUrisFactoryApiService _callUrisFactoryService;

@@ -8,11 +8,13 @@ using System.Linq;
 using ApiCargaWebInterface.Extra.Exceptions;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NCrontab;
 
 namespace ApiCargaWebInterface.Controllers
 {
+    
     public class RepositoryConfigController : Controller
     {
         readonly ICallRepositoryConfigService _serviceApi;

@@ -1,10 +1,15 @@
 using ApiCargaWebInterface.Middlewares;
 using ApiCargaWebInterface.Models.Services;
+using AspNetCore.Security.CAS;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Collections;
 
 namespace ApiCargaWebInterface
 {
@@ -20,6 +25,38 @@ namespace ApiCargaWebInterface
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+            string casBaseUrl = "";
+            if (environmentVariables.Contains("CasBaseUrl"))
+            {
+                casBaseUrl = environmentVariables["CasBaseUrl"] as string;
+            }
+            else
+            {
+                casBaseUrl = Configuration["CasBaseUrl"];
+            }
+
+            string serviceHost = "";
+            if (environmentVariables.Contains("ServiceHost"))
+            {
+                serviceHost = environmentVariables["ServiceHost"] as string;
+            }
+            else
+            {
+                serviceHost = Configuration["ServiceHost"];
+            }
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new PathString("/login");
+                    options.AccessDeniedPath = new PathString("/access-denied");
+                })
+                .AddCAS(options =>
+                {
+                    options.CasServerUrlBase = casBaseUrl;  // Set in `appsettings.json` file.
+                    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.ServiceHost = serviceHost;
+                });
             services.AddControllersWithViews();
             services.AddSingleton(typeof(ConfigUrlService));
             services.AddSingleton(typeof(ConfigUrlCronService));
@@ -50,7 +87,7 @@ namespace ApiCargaWebInterface
             }
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseStatusCodePagesWithReExecute("/error/{0}");
-            
+            app.UseAuthentication();
             app.UseHttpsRedirection();
 
             app.UsePathBase("/carga-web");

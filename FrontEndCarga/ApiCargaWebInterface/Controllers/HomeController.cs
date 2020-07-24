@@ -6,13 +6,22 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ApiCargaWebInterface.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 
 namespace ApiCargaWebInterface.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        [AllowAnonymous]
+        [Route("login")]
+        public async Task Login(string returnUrl)
+        {
+            var props = new AuthenticationProperties { RedirectUri = returnUrl };
+            await HttpContext.ChallengeAsync("CAS", props);
+        }
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
