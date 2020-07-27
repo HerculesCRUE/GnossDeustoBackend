@@ -35,7 +35,7 @@ A continuación, se exponen las preguntas de competencia y su ejecución online:
 * Q11A - Encontrar el research object más antiguo organización: https://tinyurl.com/ydx4tt9c
 * Q11B - Encontrar el research object más reciente de una organización: https://tinyurl.com/y9hen48l
 * Q12 - Listar proyectos agrupados por ámbito geográfico: https://tinyurl.com/y9onbpqa
-* Q13 - Dado un proyecto listar los documentos de su dossier: https://tinyurl.com/y9onbpqa
+* Q13 - Dado un proyecto listar los documentos de su dossier: https://tinyurl.com/y4388zw7
 * Q14 - Diferentes consultas sobre proyectos: Implementada por Q5, Q10 y Q12.
 * Q15 - Listar proyectos con el mismo subject area o con subject areas relacionadas por parentesco, mirando en el árbol UNESKOS: https://tinyurl.com/y7al28b5
 * Q16A - Dada una persona listar proyectos en los que ha intervenido filtrados por periodo y/o organización: https://tinyurl.com/yaxswxce
