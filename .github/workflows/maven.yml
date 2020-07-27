@@ -40,12 +40,16 @@ jobs:
       run: mvn install
     - name: Launch tests
       run: mvn test -DontFile=/home/runner/work/GnossDeustoBackend/GnossDeustoBackend/roh/roh-v2.owl -DdataFile=/home/runner/work/GnossDeustoBackend/GnossDeustoBackend/roh/examples/data.ttl -Duneskos=/home/runner/work/GnossDeustoBackend/GnossDeustoBackend/roh/unesco-individuals.rdf
+      working-directory: validation-questions
     - name: Generate surefire-report
       run: mvn surefire-report:report -DontFile=/home/runner/work/GnossDeustoBackend/GnossDeustoBackend/roh/roh-v2.owl -DdataFile=/home/runner/work/GnossDeustoBackend/GnossDeustoBackend/roh/examples/data.ttl -Duneskos=/home/runner/work/GnossDeustoBackend/GnossDeustoBackend/roh/unesco-individuals.rdf
+      working-directory: validation-questions
     - name: Generate maven site
       run: mvn site
+      working-directory: validation-questions
     - name: Generate documentation
       run: mvn javadoc:test-javadoc
+      working-directory: validation-questions
     - name: Deploy github pages
       uses: peaceiris/actions-gh-pages@v3.6.1
       with:
