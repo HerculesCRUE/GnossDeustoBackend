@@ -22,7 +22,7 @@ jobs:
     - name: Checkout ontology
       uses: actions/checkout@v2
       with:
-        repository: deustohercules/roh
+        repository: HerculesCRUE/GnossDeustoOnto
         ref: 'staging'
         token: ${{ secrets.GNOSS_SECRET }}
         path: roh
