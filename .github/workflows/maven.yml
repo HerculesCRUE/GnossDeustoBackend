@@ -1,0 +1,49 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+        token: ${{ secrets.MIKEL_PAT }}
+    - name: Checkout ontology
+      uses: actions/checkout@v2
+      with:
+        repository: deustohercules/roh
+        ref: 'staging'
+        token: ${{ secrets.MIKEL_PAT }}
+        path: roh
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - name: Install Pellet reasoner
+      working-directory: pellet
+      run: mvn install
+    - name: Launch tests
+      run: mvn test -DontFile=/home/runner/work/validation-questions/validation-questions/roh/roh-v2.owl -DdataFile=/home/runner/work/validation-questions/validation-questions/roh/examples/data.ttl -Duneskos=/home/runner/work/validation-questions/validation-questions/roh/unesco-individuals.rdf
+    - name: Generate surefire-report
+      run: mvn surefire-report:report -DontFile=/home/runner/work/validation-questions/validation-questions/roh/roh-v2.owl -DdataFile=/home/runner/work/validation-questions/validation-questions/roh/examples/data.ttl -Duneskos=/home/runner/work/validation-questions/validation-questions/roh/unesco-individuals.rdf
+    - name: Generate maven site
+      run: mvn site
+    - name: Generate documentation
+      run: mvn javadoc:test-javadoc
+    - name: Deploy github pages
+      uses: peaceiris/actions-gh-pages@v3.6.1
+      with:
+         keep_files: true    
+         publish_dir: target/site
+         github_token: ${{ secrets.GITHUB_TOKEN }}
