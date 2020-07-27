@@ -30,6 +30,11 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name: Checkout pellet repo.
+      uses: actions/checkout@v2
+      with:
+          repository: stardog-union/pellet
+          path: pellet
     - name: Install Pellet reasoner
       working-directory: pellet
       run: mvn install
