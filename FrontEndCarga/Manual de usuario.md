@@ -16,7 +16,7 @@
 
 [Publicación y validación de rdf](#publicación-y-validación-de-rdf)
 
-[Obtención de Tokens](#obtención-de-Tokens)
+ [Obtención de Tokens](#obtención-de-Tokens)
 
 Introducción
 ------------
