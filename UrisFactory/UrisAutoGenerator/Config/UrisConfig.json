@@ -81,452 +81,542 @@
   "ResourcesClasses": [
     {
       "ResourceClass": "Publication",
+      "RdfType": "publicacion",
       "LabelResourceClass": "publicacion",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Activity",
+      "RdfType": "actividad",
       "LabelResourceClass": "activity",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Funding",
+      "RdfType": "funding",
       "LabelResourceClass": "funding",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "FundingProgram",
+      "RdfType": "fundingProgram",
       "LabelResourceClass": "funding-program",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "GeographicalScope",
+      "RdfType": "geographical",
       "LabelResourceClass": "geographical-scope",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Metric",
+      "RdfType": "metrica",
       "LabelResourceClass": "metric",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "AcademicDegree",
+      "RdfType": "gradoAcademico",
       "LabelResourceClass": "academic-degree",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "AwardedDegree",
+      "RdfType": "gradoOtorgado",
       "LabelResourceClass": "awarded-degree",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Funder",
+      "RdfType": "",
       "LabelResourceClass": "funder",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "GeonamesFeature",
+      "RdfType": "",
       "LabelResourceClass": "geonames-feature",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Concept",
+      "RdfType": "",
       "LabelResourceClass": "concept",
       "ResourceURI": "uriKosStructure"
     },
     {
       "ResourceClass": "KnowledgeArea",
+      "RdfType": "",
       "LabelResourceClass": "knowledge-area",
       "ResourceURI": "uriKosStructure"
     },
     {
       "ResourceClass": "ResearchLine",
+      "RdfType": "",
       "LabelResourceClass": "research-line",
       "ResourceURI": "uriKosStructure"
     },
     {
       "ResourceClass": "Keyword",
+      "RdfType": "",
       "LabelResourceClass": "keyword",
       "ResourceURI": "uriKosStructure"
     },
     {
       "ResourceClass": "Project",
+      "RdfType": "",
       "LabelResourceClass": "project",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "ResearchObject",
+      "RdfType": "",
       "LabelResourceClass": "research-object",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Collection",
+      "RdfType": "",
       "LabelResourceClass": "collection",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Periodical",
+      "RdfType": "",
       "LabelResourceClass": "periodical",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Journal",
+      "RdfType": "",
       "LabelResourceClass": "journal",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Magazine",
+      "RdfType": "",
       "LabelResourceClass": "magazine",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Document",
+      "RdfType": "",
       "LabelResourceClass": "document",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Article",
+      "RdfType": "",
       "LabelResourceClass": "article",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "ConferencePaper",
+      "RdfType": "",
       "LabelResourceClass": "conference-paper",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "EditorialArticle",
+      "RdfType": "",
       "LabelResourceClass": "editorial-article",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Book",
+      "RdfType": "",
       "LabelResourceClass": "book",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Proceedings",
+      "RdfType": "",
       "LabelResourceClass": "proceedings",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "DocumentPart",
+      "RdfType": "",
       "LabelResourceClass": "document-part",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "BookSection",
+      "RdfType": "",
       "LabelResourceClass": "book-section",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Chapter",
+      "RdfType": "",
       "LabelResourceClass": "chapter",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Patent",
+      "RdfType": "",
       "LabelResourceClass": "patent",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Report",
+      "RdfType": "",
       "LabelResourceClass": "report",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Thesis",
+      "RdfType": "",
       "LabelResourceClass": "thesis",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Webpage",
+      "RdfType": "",
       "LabelResourceClass": "webpage",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "ConferencePoster",
+      "RdfType": "",
       "LabelResourceClass": "conference-poster",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Role",
+      "RdfType": "",
       "LabelResourceClass": "Role",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Example",
+      "RdfType": "",
       "LabelResourceClass": "example",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "FundingAmount",
+      "RdfType": "",
       "LabelResourceClass": "fundingamount",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "FundingSource",
+      "RdfType": "",
       "LabelResourceClass": "fundingsource",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "ProjectExpense",
+      "RdfType": "",
       "LabelResourceClass": "projectexpense",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "DateTimeInterval",
+      "RdfType": "",
       "LabelResourceClass": "datetimeinterval",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "ProjectContract",
+      "RdfType": "",
       "LabelResourceClass": "projectcontract",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "InvestigatorRole",
+      "RdfType": "",
       "LabelResourceClass": "investigatorrole",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Seq",
+      "RdfType": "",
       "LabelResourceClass": "seq",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Exhibit",
+      "RdfType": "",
       "LabelResourceClass": "exhibit",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Person",
+      "RdfType": "",
       "LabelResourceClass": "person",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Position",
+      "RdfType": "",
       "LabelResourceClass": "position",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Organization",
+      "RdfType": "",
       "LabelResourceClass": "organization",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "University",
+      "RdfType": "",
       "LabelResourceClass": "university",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "PhDThesis",
+      "RdfType": "",
       "LabelResourceClass": "phdthesis",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "PrincipalInvestigatorRole",
+      "RdfType": "",
       "LabelResourceClass": "principalinvestigatorrole",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "LeaderRole",
+      "RdfType": "",
       "LabelResourceClass": "leaderrole",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Internship",
+      "RdfType": "",
       "LabelResourceClass": "internship",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "AdministratorRole",
+      "RdfType": "",
       "LabelResourceClass": "administratorrole",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "StaffRole",
+      "RdfType": "",
       "LabelResourceClass": "staffrole",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "ExternalMemberRole",
+      "RdfType": "",
       "LabelResourceClass": "externalmemberrole",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "MemberRole",
+      "RdfType": "",
       "LabelResourceClass": "memberrole",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "PresenterRole",
+      "RdfType": "",
       "LabelResourceClass": "presenterrole",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardAddress",
+      "RdfType": "",
       "LabelResourceClass": "vcardaddress",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardAgent",
+      "RdfType": "",
       "LabelResourceClass": "vcardagent",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardContact",
+      "RdfType": "",
       "LabelResourceClass": "vcardcontact",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardDate",
+      "RdfType": "",
       "LabelResourceClass": "vcarddate",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardEmail",
+      "RdfType": "",
       "LabelResourceClass": "vcardmail",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardFax",
+      "RdfType": "",
       "LabelResourceClass": "vcardfax",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardGroup",
+      "RdfType": "",
       "LabelResourceClass": "vcardgroup",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardIndividual",
+      "RdfType": "",
       "LabelResourceClass": "vcardindividual",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardKind",
+      "RdfType": "",
       "LabelResourceClass": "vcardkind",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardLabel",
+      "RdfType": "",
       "LabelResourceClass": "vcardlabel",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardLocation",
+      "RdfType": "",
       "LabelResourceClass": "vcardlocation",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardName",
+      "RdfType": "",
       "LabelResourceClass": "vcardname",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardOrganization",
+      "RdfType": "",
       "LabelResourceClass": "vcardorganization",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardPhone",
+      "RdfType": "",
       "LabelResourceClass": "vcardphone",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardPostal",
+      "RdfType": "",
       "LabelResourceClass": "vcardpostal",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardTelephone",
+      "RdfType": "",
       "LabelResourceClass": "vcardtelephone",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "VcardURL",
+      "RdfType": "",
       "LabelResourceClass": "vcardurl",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "ResearchGroup",
+      "RdfType": "",
       "LabelResourceClass": "researchgroup",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Expense",
+      "RdfType": "",
       "LabelResourceClass": "expense",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "PhDSupervisingRelationship",
+      "RdfType": "",
       "LabelResourceClass": "phdsupervisingrelationship",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "SuperviseeRole",
+      "RdfType": "",
       "LabelResourceClass": "superviseerole",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "SupervisorRole",
+      "RdfType": "",
       "LabelResourceClass": "supervisorrole",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Conference",
+      "RdfType": "",
       "LabelResourceClass": "conference",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "ResearchObjectExpense",
+      "RdfType": "",
       "LabelResourceClass": "researchobjectexpense",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "OrganizerRole",
+      "RdfType": "",
       "LabelResourceClass": "organizerrole",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "EditedBook",
+      "RdfType": "",
       "LabelResourceClass": "editedbook",
       "ResourceURI": "uriResourceStructure"
     }
 	,
     {
       "ResourceClass": "FundingOrganization",
+      "RdfType": "",
       "LabelResourceClass": "fundingorganization",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "Contract",
+      "RdfType": "",
       "LabelResourceClass": "contract",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "FundingRole",
+      "RdfType": "",
       "LabelResourceClass": "fundingrole",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "HRClassification",
+      "RdfType": "",
       "LabelResourceClass": "hr",
       "ResourceURI": "uriKosStructure"
     },
     {
       "ResourceClass": "Dossier",
+      "RdfType": "",
       "LabelResourceClass": "dossier",
       "ResourceURI": "uriResourceStructure"
     },
     {
       "ResourceClass": "ResearchProposal",
+      "RdfType": "",
       "LabelResourceClass": "researchproposal",
       "ResourceURI": "uriResourceStructure"
     },
     {
-	"ResourceClass": "EvaluationSummary",
+      "ResourceClass": "EvaluationSummary",
+      "RdfType": "",
       "LabelResourceClass": "evaluationsummary",
       "ResourceURI": "uriResourceStructure"
     }	

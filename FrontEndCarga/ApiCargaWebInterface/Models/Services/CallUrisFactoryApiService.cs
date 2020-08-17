@@ -26,9 +26,9 @@ namespace ApiCargaWebInterface.Models.Services
             }
         }
 
-        public string GetUri(string resourceClass, string identifier)
+        public string GetUri(string resourceClass, string identifier, UriGetEnum uriGetEnum)
         {
-            string result = _serviceApi.CallGetApi(_serviceUrl.GetUrlUrisFactory(),$"{_urlFactory}?identifier={identifier}&resource_class={resourceClass}", _token);
+            string result = _serviceApi.CallGetApi(_serviceUrl.GetUrlUrisFactory(),$"{_urlFactory}?identifier={identifier}&resource_class={resourceClass}&eleccion_uri={uriGetEnum}", _token);
             return result;
         }
 

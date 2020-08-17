@@ -49,6 +49,7 @@ namespace ApiCargaWebInterface.ViewModels
             structure.AppendLine("\"resourcesClass\": [");
             structure.AppendLine("{");
             structure.AppendLine("\"resourceClass\": \"Example\", ");
+            structure.AppendLine("\"rdfType\": \"ejemplo\", ");
             structure.AppendLine("\"labelResourceClass\": \"example\", ");
             structure.AppendLine("\"resourceURI\": \"uriExampleStructure\"");
             structure.AppendLine("}");

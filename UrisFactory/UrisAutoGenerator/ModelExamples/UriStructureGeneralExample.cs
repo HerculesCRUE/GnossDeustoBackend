@@ -112,12 +112,14 @@ namespace UrisFactory.ModelExamples
                     new ResourcesClass()
                     {
                         ResourceClass = "Researcher",
+                        RdfType = "investigador",
                         LabelResourceClass = "researcher",
                         ResourceURI = "uriResourceStructure"
                     },
                     new ResourcesClass()
                     {
                         ResourceClass = "Activity",
+                        RdfType = "actividad",
                         LabelResourceClass = "activity",
                         ResourceURI = "uriActivityStructure"
                     }

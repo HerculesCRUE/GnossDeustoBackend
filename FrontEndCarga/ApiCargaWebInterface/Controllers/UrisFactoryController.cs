@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using ApiCargaWebInterface.Extra.Exceptions;
+using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -15,7 +16,7 @@ using Newtonsoft.Json;
 
 namespace ApiCargaWebInterface.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class UrisFactoryController : Controller
     {
         ICallUrisFactoryApiService _callUrisFactoryService;
@@ -28,14 +29,14 @@ namespace ApiCargaWebInterface.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult GetUri(string Resource_class, string Identifier)
+        public IActionResult GetUri(string Resource_class, string Identifier, UriGetEnum uriGetEnum)
         {
             UrisFactoryResultViewModel urisFactoryModel = new UrisFactoryResultViewModel();
             urisFactoryModel.Identifier = Identifier;
             urisFactoryModel.Resource_class = Identifier;
             try
             {
-                urisFactoryModel.UriResult = _callUrisFactoryService.GetUri(Resource_class, Identifier);
+                urisFactoryModel.UriResult = _callUrisFactoryService.GetUri(Resource_class, Identifier, uriGetEnum);
             }
             catch(HttpRequestException ex)
             {

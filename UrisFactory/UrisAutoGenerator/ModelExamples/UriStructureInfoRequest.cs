@@ -19,6 +19,7 @@ namespace UrisFactory.ModelExamples
             ResourcesClass item = new ResourcesClass()
             {
                 ResourceClass = "Example",
+                RdfType = "Ejemplo",
                 LabelResourceClass = "example",
                 ResourceURI = "uriExampleStructure"
             };

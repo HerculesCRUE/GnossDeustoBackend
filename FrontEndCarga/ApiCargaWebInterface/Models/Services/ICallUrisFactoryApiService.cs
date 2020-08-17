@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ApiCargaWebInterface.Models.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace ApiCargaWebInterface.Models.Services
 {
     public interface ICallUrisFactoryApiService
     {
-        public string GetUri(string resourceClass, string identifier);
+        public string GetUri(string resourceClass, string identifier, UriGetEnum uriGetEnum);
         public string GetSchema();
         public void ReplaceSchema(IFormFile newFile);
         public string GetStructure(string uriStructure);

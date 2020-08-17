@@ -16,6 +16,7 @@ using Swashbuckle.AspNetCore.Filters;
 using UrisFactory.ModelExamples;
 using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.AspNetCore.Authorization;
+using UrisFactory.Extra.Enum;
 
 namespace UrisFactory.Controllers
 {

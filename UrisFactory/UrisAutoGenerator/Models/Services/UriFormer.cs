@@ -36,10 +36,19 @@ namespace UrisFactory.Models.Services
         ///</summary>
         ///<param name="resourceClass">nombre de la resourceClass a usar para generar la uri</param>
         ///<param name="queryString">diccionario con los valores cogidos de la url de la petición</param>
-        public string GetURI(string resourceClass, Dictionary<string, string> queryString)
+        public string GetURI(string resourceClass, Dictionary<string, string> queryString, bool isRdfType = false)
         {
             string uri = "";
-            ResourcesClass resourceClassObject = ParserResourceClass(resourceClass);          
+            ResourcesClass resourceClassObject = null;
+            if (!isRdfType)
+            {
+                resourceClassObject = ParserResourceClass(resourceClass);
+            }
+            else
+            {
+                resourceClassObject = ParserResourceClassRdfType(resourceClass);
+            }
+            
 
             if (resourceClassObject != null)
             {
@@ -153,13 +162,24 @@ namespace UrisFactory.Models.Services
         }
 
         ///<summary>
-        ///devuelve un objeto ResourceClass
+        ///devuelve un objeto ResourceClass a partir del nombre de resource class
         ///</summary>
         ///<param name="pResourceClass">nombre del objeto a devolver</param>
         private ResourcesClass ParserResourceClass(string pResourceClass)
         {
             ResourcesClass resourceClass = null;
             resourceClass = UriStructure.ResourcesClasses.FirstOrDefault(resource => resource.ResourceClass.Equals(pResourceClass));
+            return resourceClass;
+        }
+
+        ///<summary>
+        ///devuelve un objeto ResourceClass a partir del RDFType
+        ///</summary>
+        ///<param name="pRdfType">rdftype del objeto a devolver</param>
+        private ResourcesClass ParserResourceClassRdfType(string pRdfType)
+        {
+            ResourcesClass resourceClass = null;
+            resourceClass = UriStructure.ResourcesClasses.FirstOrDefault(resource => resource.RdfType.Equals(pRdfType));
             return resourceClass;
         }
     }
