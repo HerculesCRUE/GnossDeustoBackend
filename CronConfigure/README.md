@@ -18,6 +18,10 @@ Los resultados de las pruebas unitarias se pueden consultar en [ResultsTest](htt
 
 Las librerías compiladas se encuentran en la carpeta [librerías](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/libraries).
 
+*Obtención del Token*
+-------------------------
+Este api esta protegida mediante tokens, por ello para poder usar la interfaz swagger hay que obtener un token, el cual se puede obtener desde https://herc-as-front-desa.atica.um.es/carga-web/Token
+
 ## Dependencias
 
 - **coverlet.collector**: versión 1.2.1

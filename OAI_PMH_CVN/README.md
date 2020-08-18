@@ -16,6 +16,10 @@ Para ello, esté servicio hará uso de dos servicios externos:
  - API CVN UM: Api que proveerá de los currículums en formato XML CVN.
  - CVN: Servidor HTTP que ofrece una API para convertir XML CVN a RDF ROH.
 
+*Obtención del Token*
+-------------------------
+Este api esta protegida mediante tokens, por ello para poder usar la interfaz swagger hay que obtener un token, el cual se puede obtener desde https://herc-as-front-desa.atica.um.es/carga-web/Token
+
 ## Dependencias
 
 - **docfx.console**: versión 2.53.1

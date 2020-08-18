@@ -76,6 +76,9 @@ Este Api contiene dos controladores.
 		    }
 	    ]
 
+*Obtención del Token*
+-------------------------
+Este api esta protegida mediante tokens, por ello para poder usar la interfaz swagger hay que obtener un token, el cual se puede obtener desde https://herc-as-front-desa.atica.um.es/carga-web/Token
 	
 ## Dependencias
 
