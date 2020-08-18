@@ -132,4 +132,4 @@ Error de validación:
 Obtención de Tokens
 ----------------
 Desde esta interfaz se pueden obtener los tokens de las diferentes aplicaciones que habrá que pegar en las diferentes apis para poder usar la interfaz swagger de cada api
-![](img/getToken.PNG)
+![](img/getTokens.PNG)
