@@ -57,7 +57,7 @@ namespace IdentityServerHecules
                 {
                     new Secret("master".Sha256())
                 },
-                AllowedScopes = {"apiCron", "apiCarga","apiUrisFactory"},
+                AllowedScopes = {"apiCron", "apiCarga","apiUrisFactory","apiGestorDocumentacion"},
                 AccessTokenLifetime = 86400
                 //AccessTokenType = AccessTokenType.Reference
             },
@@ -96,6 +96,19 @@ namespace IdentityServerHecules
                     new Secret("secretUnidata".Sha256())
                 },
                 AllowedScopes = { "apiUnidata"},
+                AccessTokenLifetime = 86400
+                //AccessTokenType = AccessTokenType.Reference
+            }
+             ,
+            new Client
+            {
+                ClientId = "GestorDocumentacion",
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                ClientSecrets =
+                {
+                    new Secret("secretGestorDocumentacion".Sha256())
+                },
+                AllowedScopes = { "apiGestorDocumentacion"},
                 AccessTokenLifetime = 86400
                 //AccessTokenType = AccessTokenType.Reference
             }
