@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GestorDocumentacion</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "M:GestorDocumentacion.Controllers.PageController.GetPage(System.String)" -->
+        <member name="M:GestorDocumentacion.Controllers.PageController.GetPages">
+            <summary>
+            Devuelve una lista de las páginas web cargadas.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.PageController.LoadPage">
+            <summary>
+            Carga o modifica una página web e incluye información acerca de la página, como la URL, metadatos title o description, etc.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.PageController.DeletePage">
+            <summary>
+            Elimina una página web.
+            </summary>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestorDocumentacion.Controllers.TemplateController.GetTemplate(System.String)" -->
+        <member name="M:GestorDocumentacion.Controllers.TemplateController.GetTemplates">
+            <summary>
+            Devuelve una lista de las plantillas cargadas.
+            </summary>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.TemplateController.LoadTemplate">
+            <summary>
+            Carga o modifica una plantilla web e incluye información acerca de la plantilla, como metadatos title o description.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.TemplateController.DeleteTemplate">
+            <summary>
+            Elimina una plantilla
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

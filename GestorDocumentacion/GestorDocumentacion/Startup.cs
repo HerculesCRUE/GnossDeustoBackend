@@ -7,18 +7,22 @@ using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using GestorDocumentacion.Middlewares;
+using GestorDocumentacion.Models;
+using GestorDocumentacion.Models.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.OpenApi.Models;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 using Swashbuckle.AspNetCore.Filters;
 
 namespace GestorDocumentacion
@@ -75,7 +79,7 @@ namespace GestorDocumentacion
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
-                options.ExampleFilters();
+               // options.ExampleFilters();
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
@@ -87,10 +91,31 @@ namespace GestorDocumentacion
                 });
                 options.OperationFilter<SecurityRequirementsOperationFilter>();
             });
+
+            services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
+            {
+                var builder = new NpgsqlDbContextOptionsBuilder(opt);
+                builder.SetPostgresVersion(new Version(9, 6));
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("PostgreConnectionmigration"))
+                {
+                    opt.UseNpgsql(environmentVariables["PostgreConnectionmigration"] as string);
+                }
+                else
+                {
+                    opt.UseNpgsql(Configuration.GetConnectionString("PostgreConnectionmigration"));
+                }
+
+
+            });
             services.Configure<ForwardedHeadersOptions>(options =>
             {
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
+
+            services.AddScoped<IPagesOperationsServices, PagesOperationService>(); 
+            services.AddScoped<ITemplatesOperationsServices, TemplatesOperationsService>();
+            services.AddScoped(typeof(FileOperationsService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

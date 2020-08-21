@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestorDocumentacion.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,9 +8,10 @@ namespace GestorDocumentacion.Models.Services
 {
     public interface ITemplatesOperationsServices
     {
-        public string GetTemplate(string name);
-        public bool LoadTemploate();
-        public List<string> GetTemplates();
-        public bool DeleteTemplate(string name);
+        public Template GetTemplate(string name);
+        public Template GetTemplate(Guid templateID);
+        public bool LoadTemplate(Template template, bool isNew);
+        public List<Template> GetTemplates();
+        public bool DeleteTemplate(Guid templateID);
     }
 }
