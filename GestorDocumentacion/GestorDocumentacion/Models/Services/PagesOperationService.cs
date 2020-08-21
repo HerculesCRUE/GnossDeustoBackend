@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace GestorDocumentacion.Models.Services
 {
+    /// <summary>
+    /// Clase para la gestión de páginas
+    /// </summary>
     public class PagesOperationService : IPagesOperationsServices
     {
         private readonly EntityContext _context;
@@ -14,6 +17,11 @@ namespace GestorDocumentacion.Models.Services
         {
             _context = context;
         }
+        /// <summary>
+        /// Elimina una página
+        /// </summary>
+        /// <param name="pageID">Identificador de la página a eliminar</param>
+        /// <returns>Si se ha realizado con exito</returns>
         public bool DeletePage(Guid pageID)
         {
             Page page = _context.Page.FirstOrDefault(page => page.PageID.Equals(pageID));
@@ -24,22 +32,38 @@ namespace GestorDocumentacion.Models.Services
             }
             return true;
         }
-
+        /// <summary>
+        /// Obtiene una página por su nombre
+        /// </summary>
+        /// <param name="name">Nombre de la página a obtener</param>
+        /// <returns>Un objeto página</returns>
         public Page GetPage(string name)
         {
             return _context.Page.FirstOrDefault(page => page.Name.Equals(name));
         }
-
+        /// <summary>
+        /// Obtiene una página por su identificador
+        /// </summary>
+        /// <param name="pageID">Identificador de la página a obtener</param>
+        /// <returns>Un objeto página</returns>
         public Page GetPage(Guid pageID)
         {
             return _context.Page.FirstOrDefault(page => page.PageID.Equals(pageID));
         }
-
+        /// <summary>
+        /// Obtiene una lista de páginas
+        /// </summary>
+        /// <returns>Lista de objetos página</returns>
         public List<Page> GetPages()
         {
             return _context.Page.ToList();
         }
-
+        /// <summary>
+        /// Carga o modifica una página
+        /// </summary>
+        /// <param name="page">página nueva o a modificar</param>
+        /// <param name="isNew">Si el documento es nuevo</param>
+        /// <returns>Si se ha realizado con exito</returns>
         public bool LoadPage(Page page, bool isNew)
         {
             if (isNew)

@@ -8,16 +8,26 @@ using System.Threading.Tasks;
 
 namespace GestorDocumentacion.Models.Services
 {
+    /// <summary>
+    /// Clase para la gestión de los documentos
+    /// </summary>
     public class DocumentsOperationsService : IDocumentsOperationsService
     {
         private static string path = "CMS/Documents";
         private readonly EntityContext _context;
         private FileOperationsService _fileOperationsService;
+
         public DocumentsOperationsService(EntityContext context, FileOperationsService fileOperationsService)
         {
             _context = context;
              _fileOperationsService = fileOperationsService;
         }
+
+        /// <summary>
+        /// Elimina un objeto documento y el documento enlazado a él
+        /// </summary>
+        /// <param name="documentId">Identificador del documento</param>
+        /// <returns>Si se ha realizado con exito</returns>
         public bool DeleteDocument(Guid documentId)
         {
             Document page = _context.Document.FirstOrDefault(document => document.DocumentId.Equals(documentId));
@@ -30,11 +40,21 @@ namespace GestorDocumentacion.Models.Services
             return true;
         }
 
+        /// <summary>
+        /// Obtiene un documento por su nombre
+        /// </summary>
+        /// <param name="name">Nombre del documento a obtener</param>
+        /// <returns>Un objeto documento</returns>
         public Document GetDocument(string name)
         {
             return _context.Document.FirstOrDefault(documento => documento.Name.Equals(name));
         }
 
+        /// <summary>
+        /// Obtiene los bytes de un documento
+        /// </summary>
+        /// <param name="documentId">Identificador del documento a obtener</param>
+        /// <returns>contenido del fichero</returns>
         public byte[] GetDocumentBytes(Guid documentId)
         {
             Document document = _context.Document.FirstOrDefault(documento => documento.DocumentId.Equals(documentId));
@@ -45,17 +65,34 @@ namespace GestorDocumentacion.Models.Services
             }
             return data;
         }
+
+        /// <summary>
+        /// Obtiene un documento por su Identificador
+        /// </summary>
+        /// <param name="documentId">Identificador del documento a obtener</param>
+        /// <returns>Un objeto documento</returns>
         public Document GetDocument(Guid documentId)
         {
             Document document = _context.Document.FirstOrDefault(documento => documento.DocumentId.Equals(documentId));
             return document;
         }
 
+        /// <summary>
+        /// Obtiene una lista de documentos
+        /// </summary>
+        /// <returns>Lista de objetos documento</returns>
         public List<Document> GetDocuments()
         {
             return _context.Document.ToList();
         }
 
+        /// <summary>
+        /// Carga o modifica un documento
+        /// </summary>
+        /// <param name="document">Documento nuevo o a modificar</param>
+        /// <param name="isNew">Si el documento es nuevo</param>
+        /// <param name="documentFile">Contenido del fichero</param>
+        /// <returns>Si se ha realizado con exito</returns>
         public bool LoadDocument(Document document, bool isNew, IFormFile documentFile)
         {
             document.SavedRoute = $"{path}/{document.DocumentId}.pdf";
@@ -96,6 +133,11 @@ namespace GestorDocumentacion.Models.Services
             
         }
 
+        /// <summary>
+        /// Obtiene el nombre del documento y su contenido
+        /// </summary>
+        /// <param name="documentId">Identificador del documento</param>
+        /// <returns>Un diccionario en el que en la clave es el nombre del documento y el valor el contenido del fichero</returns>
         public Dictionary<string, byte[]> GetDocumentInfo(Guid documentId)
         {
             Dictionary<string, byte[]> docInfo = new Dictionary<string, byte[]>();

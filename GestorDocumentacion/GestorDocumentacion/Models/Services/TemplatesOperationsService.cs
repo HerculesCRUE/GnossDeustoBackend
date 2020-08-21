@@ -14,6 +14,11 @@ namespace GestorDocumentacion.Models.Services
         {
             _context = context;
         }
+        /// <summary>
+        /// Elimina una plantilla
+        /// </summary>
+        /// <param name="templateID">Identificador de la plantilla a eliminar</param>
+        /// <returns>Si se ha realizado con exito</returns>
         public bool DeleteTemplate(Guid templateID)
         {
             Template template = _context.Template.FirstOrDefault(template => template.TemplateID.Equals(templateID));
@@ -24,22 +29,38 @@ namespace GestorDocumentacion.Models.Services
             }
             return true;
         }
-
+        /// <summary>
+        /// Obtiene una plantilla por su nombre
+        /// </summary>
+        /// <param name="name">Nombre de la plantilla a obtener</param>
+        /// <returns>Un objeto página</returns>
         public Template GetTemplate(string name)
         {
             return _context.Template.FirstOrDefault(template => template.Name.Equals(name));
         }
-
+        /// <summary>
+        /// Obtiene una plantilla por su nombre
+        /// </summary>
+        /// <param name="templateID">Identificador de la plantilla a obtener</param>
+        /// <returns>Un objeto página</returns>
         public Template GetTemplate(Guid templateID)
         {
            return _context.Template.FirstOrDefault(template => template.TemplateID.Equals(templateID));
         }
-
+        /// <summary>
+        /// Obtiene una lista de plantillas
+        /// </summary>
+        /// <returns>Lista de objetos plantilla</returns>
         public List<Template> GetTemplates()
         {
             return _context.Template.ToList();
         }
-
+        /// <summary>
+        /// Carga o modifica una plantilla
+        /// </summary>
+        /// <param name="template">plantilla nueva o a modificar</param>
+        /// <param name="isNew">Si el documento es nuevo</param>
+        /// <returns>Si se ha realizado con exito</returns>
         public bool LoadTemplate(Template template, bool isNew)
         {
             if (isNew)
