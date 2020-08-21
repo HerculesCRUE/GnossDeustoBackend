@@ -10,6 +10,7 @@ namespace GestorDocumentacion.Models.Services
 {
     public class FileOperationsService
     {
+        
         public string ReadFile(IFormFile file)
         {
             var result = new StringBuilder();
@@ -21,9 +22,24 @@ namespace GestorDocumentacion.Models.Services
             return result.ToString();
         }
 
-        private object CreateStream()
+        public void DeleteDocument(string route)
         {
-            throw new NotImplementedException();
+            string routeFile = route;
+            File.Delete(routeFile);
+        }
+
+        public void SaveDocument(string route, IFormFile document)
+        {
+            string routeFile = route;
+            var stream = File.Create(routeFile);
+            document.CopyTo(stream);
+            stream.Close();
+        }
+
+        public byte[] ReadDocument(string route)
+        {
+            var data = File.ReadAllBytes(route);
+            return data;
         }
     }
 }

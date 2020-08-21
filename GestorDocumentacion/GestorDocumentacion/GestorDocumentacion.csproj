@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CMS\Documents\" />
     <Folder Include="CMS\templates\" />
     <Folder Include="CMS\pages\" />
   </ItemGroup>

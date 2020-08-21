@@ -115,6 +115,7 @@ namespace GestorDocumentacion
 
             services.AddScoped<IPagesOperationsServices, PagesOperationService>(); 
             services.AddScoped<ITemplatesOperationsServices, TemplatesOperationsService>();
+            services.AddScoped<IDocumentsOperationsService, DocumentsOperationsService>();
             services.AddScoped(typeof(FileOperationsService));
         }
 
