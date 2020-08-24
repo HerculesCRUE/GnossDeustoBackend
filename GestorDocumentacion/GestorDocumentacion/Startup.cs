@@ -1,3 +1,6 @@
+// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
+// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -116,7 +119,7 @@ namespace GestorDocumentacion
             services.AddScoped<IPagesOperationsServices, PagesOperationService>(); 
             services.AddScoped<ITemplatesOperationsServices, TemplatesOperationsService>();
             services.AddScoped<IDocumentsOperationsService, DocumentsOperationsService>();
-            services.AddScoped(typeof(FileOperationsService));
+            services.AddScoped<IFileOperationService, FileOperationsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

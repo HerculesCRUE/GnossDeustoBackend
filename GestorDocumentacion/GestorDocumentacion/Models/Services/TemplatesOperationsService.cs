@@ -87,9 +87,9 @@ namespace GestorDocumentacion.Models.Services
                 {
                     templateModify.Content = template.Content;
                 }
-                if (!string.IsNullOrEmpty(template.Name) && template.Content != templateModify.Name)
+                if (!string.IsNullOrEmpty(template.Name) && template.Name != templateModify.Name)
                 {
-                    if (GetTemplate(template.Name) != null)
+                    if (GetTemplate(template.Name) == null)
                     {
                         templateModify.Name = template.Name;
                     }

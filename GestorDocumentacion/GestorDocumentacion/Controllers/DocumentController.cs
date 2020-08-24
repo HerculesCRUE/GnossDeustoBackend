@@ -32,7 +32,7 @@ namespace GestorDocumentacion.Controllers
         ///</summary>
         ///<param name="id">identificador del documento html</param>
         [HttpGet("{id}")]
-        public IActionResult GetPage(Guid id)
+        public IActionResult GetDocument(Guid id)
         {
             var documentInfo = _documentsOperationsService.GetDocumentInfo(id);
             if (documentInfo != null)
@@ -98,7 +98,7 @@ namespace GestorDocumentacion.Controllers
         /// <returns></returns>
         [HttpDelete]
         [Route("delete")]
-        public IActionResult DeletePage(Guid pageId)
+        public IActionResult DeleteDocument(Guid pageId)
         {
             return Ok(_documentsOperationsService.DeleteDocument(pageId));
         }

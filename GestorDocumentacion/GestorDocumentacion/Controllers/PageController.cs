@@ -23,8 +23,8 @@ namespace GestorDocumentacion.Controllers
     public class PageController : ControllerBase
     {
         private IPagesOperationsServices _pagesOperationsService;
-        private FileOperationsService _fileOperationsService;
-        public PageController(IPagesOperationsServices pagesOperationsService, FileOperationsService fileOperationsService)
+        private IFileOperationService _fileOperationsService;
+        public PageController(IPagesOperationsServices pagesOperationsService, IFileOperationService fileOperationsService)
         {
             _pagesOperationsService = pagesOperationsService;
             _fileOperationsService = fileOperationsService;

@@ -22,8 +22,8 @@ namespace GestorDocumentacion.Controllers
     public class TemplateController : ControllerBase
     {
         private ITemplatesOperationsServices _templatesOperationsService;
-        private FileOperationsService _fileOperationsService;
-        public TemplateController(ITemplatesOperationsServices templatesOperationsService, FileOperationsService fileOperationsService)
+        private IFileOperationService _fileOperationsService;
+        public TemplateController(ITemplatesOperationsServices templatesOperationsService, IFileOperationService fileOperationsService)
         {
             _templatesOperationsService = templatesOperationsService;
             _fileOperationsService = fileOperationsService;

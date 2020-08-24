@@ -15,16 +15,30 @@ namespace GestorDocumentacion.Models.Services
     /// <summary>
     /// Clase para la gestión de los documentos
     /// </summary>
-    public class DocumentsOperationsService : IDocumentsOperationsService
+    public class DocumentsOperationsMockService : IDocumentsOperationsService
     {
         private static string path = "CMS/Documents";
-        private readonly EntityContext _context;
         private IFileOperationService _fileOperationsService;
+        private List<Document> _listDocuments;
 
-        public DocumentsOperationsService(EntityContext context, IFileOperationService fileOperationsService)
+        public DocumentsOperationsMockService(IFileOperationService fileOperationsService)
         {
-            _context = context;
-             _fileOperationsService = fileOperationsService;
+            _listDocuments = new List<Document>();
+            Document document1 = new Document()
+            {
+                DocumentId = Guid.NewGuid(),
+                Name = "Document1",
+                SavedRoute = path
+            };
+            Document document2 = new Document()
+            {
+                DocumentId = Guid.NewGuid(),
+                Name = "Document2",
+                SavedRoute = path
+            };
+            _listDocuments.Add(document1);
+            _listDocuments.Add(document2);
+            _fileOperationsService = fileOperationsService;
         }
 
         /// <summary>
@@ -34,12 +48,11 @@ namespace GestorDocumentacion.Models.Services
         /// <returns>Si se ha realizado con exito</returns>
         public bool DeleteDocument(Guid documentId)
         {
-            Document page = _context.Document.FirstOrDefault(document => document.DocumentId.Equals(documentId));
-            if (page != null)
+            Document document = _listDocuments.FirstOrDefault(document => document.DocumentId.Equals(documentId));
+            if (document != null)
             {
-                _context.Entry(page).State = EntityState.Deleted;
-                _fileOperationsService.DeleteDocument(page.SavedRoute);
-                _context.SaveChanges();
+                _listDocuments.Remove(document);
+                _fileOperationsService.DeleteDocument(document.SavedRoute);
             }
             return true;
         }
@@ -51,7 +64,7 @@ namespace GestorDocumentacion.Models.Services
         /// <returns>Un objeto documento</returns>
         public Document GetDocument(string name)
         {
-            return _context.Document.FirstOrDefault(documento => documento.Name.Equals(name));
+            return _listDocuments.FirstOrDefault(documento => documento.Name.Equals(name));
         }
 
         /// <summary>
@@ -61,7 +74,7 @@ namespace GestorDocumentacion.Models.Services
         /// <returns>contenido del fichero</returns>
         public byte[] GetDocumentBytes(Guid documentId)
         {
-            Document document = _context.Document.FirstOrDefault(documento => documento.DocumentId.Equals(documentId));
+            Document document = _listDocuments.FirstOrDefault(documento => documento.DocumentId.Equals(documentId));
             byte[] data = null;
             if (document != null)
             {
@@ -77,7 +90,7 @@ namespace GestorDocumentacion.Models.Services
         /// <returns>Un objeto documento</returns>
         public Document GetDocument(Guid documentId)
         {
-            Document document = _context.Document.FirstOrDefault(documento => documento.DocumentId.Equals(documentId));
+            Document document = _listDocuments.FirstOrDefault(documento => documento.DocumentId.Equals(documentId));
             return document;
         }
 
@@ -87,7 +100,7 @@ namespace GestorDocumentacion.Models.Services
         /// <returns>Lista de objetos documento</returns>
         public List<Document> GetDocuments()
         {
-            return _context.Document.ToList();
+            return _listDocuments;
         }
 
         /// <summary>
@@ -104,9 +117,8 @@ namespace GestorDocumentacion.Models.Services
             {
                 if (document != null && !string.IsNullOrEmpty(document.Name) && GetDocument(document.Name) == null)
                 {
-                    _context.Document.Add(document);
-                    _context.SaveChanges();
-                    
+                    _listDocuments.Add(document);
+
                     _fileOperationsService.SaveDocument(document.SavedRoute, documentFile);
                     return true;
                 }
@@ -124,17 +136,16 @@ namespace GestorDocumentacion.Models.Services
                     if (GetDocument(document.Name) == null)
                     {
                         documentModify.Name = document.Name;
-                        _context.SaveChanges();
                     }
                     else
                     {
                         return false;
                     }
                 }
-                
+
             }
             return false;
-            
+
         }
 
         /// <summary>
