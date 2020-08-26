@@ -9,6 +9,7 @@ using System.Text.Json.Serialization;
 using API_CARGA.Middlewares;
 using API_CARGA.ModelExamples;
 using API_CARGA.Models;
+using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -123,6 +124,28 @@ namespace PRH
                 
 
             });
+            if (environmentVariables.Contains("uriRabbitMq"))
+            {
+                string uriRabbitMq = environmentVariables["uriRabbitMq"] as string;
+                string usernameRabbitMq = environmentVariables["usernameRabbitMq"] as string;
+                string passwordRabbitMq = environmentVariables["passwordRabbitMq"] as string;
+                string virtualhostRabbitMq = environmentVariables["virtualhostRabbitMq"] as string;
+                string hostnameRabbitMq = environmentVariables["hostnameRabbitMq"] as string;
+                services.Configure<RabbitMQInfo>(options => 
+                {
+                    options.HostNameRabbitMq = hostnameRabbitMq;
+                    options.PasswordRabbitMq = passwordRabbitMq;
+                    options.UriRabbitMq = uriRabbitMq;
+                    options.UsernameRabbitMq = usernameRabbitMq;
+                    options.VirtualHostRabbitMq = virtualhostRabbitMq;
+                }
+                ) ;
+            }
+            else
+            {
+                services.Configure<RabbitMQInfo>(Configuration.GetSection("RabbitMQ"));
+            }
+            services.AddSingleton<RabbitMQService>();
             services.AddSingleton(typeof(ConfigUrlService));
             services.AddSingleton(typeof(ConfigSparql));
             services.AddScoped(typeof(OaiPublishRDFService));

@@ -31,14 +31,16 @@ namespace API_CARGA.Controllers
         readonly ConfigSparql _configSparql;
         readonly CallUri _callUri;
         readonly ConfigUrlService _configUrlService;
+        private readonly RabbitMQService _amqpService;
 
-        public etlController(IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallUri callUri, ConfigUrlService configUrlService)
+        public etlController(IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallUri callUri, ConfigUrlService configUrlService, RabbitMQService amqpService)
         {
             _repositoriesConfigService = iRepositoriesConfigService;
             _shapeConfigService = iShapeConfigService;
             _configSparql = configSparql;
             _callUri = callUri;
             _configUrlService = configUrlService;
+            _amqpService = amqpService;
         }
 
         /// <summary>
@@ -56,8 +58,9 @@ namespace API_CARGA.Controllers
             try
             {
                 XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
-                List<string> triples = SparqlUtility.GetTriplesFromRDF(rdf);    
-                SparqlUtility.LoadTriples(triples, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), _configSparql.GetGraph()); 
+                List<string> triples = SparqlUtility.GetTriplesFromRDF(rdf);
+                //SparqlUtility.LoadTriples(triples, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), _configSparql.GetGraph()); 
+                _amqpService.PublishMessage(triples);
                 return Ok();
             }
             catch (Exception ex)
