@@ -1,4 +1,8 @@
-﻿using API_CARGA.Models.Entities;
+﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
+// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+// Clase para hacer llamadas a las urls configuradas que pertenecen al OAIPMH
+using API_CARGA.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
+
     public class CallUri
     {
         readonly TokenBearer _token;
@@ -17,6 +22,11 @@ namespace API_CARGA.Models.Services
                 _token = tokenService.CallTokenOAIPMH();
             }
         }
+        /// <summary>
+        /// Obtiene el resultado
+        /// </summary>
+        /// <param name="url">url a llamar</param>
+        /// <returns></returns>
         public byte[] GetUri(string url)
         {
             byte[] result;

@@ -1,4 +1,8 @@
-﻿using API_CARGA.Models.Entities;
+﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
+// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+// Clase para conectar con el servidor Rabbit
+using API_CARGA.Models.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -13,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
+    /// <summary>
+    /// Clase para conectar con el servidor Rabbi
+    /// </summary>
     public class RabbitMQService
     {
 
@@ -20,6 +27,10 @@ namespace API_CARGA.Models.Services
         private readonly ConnectionFactory connectionFactory;
         private string queueName;
 
+        /// <summary>
+        /// Constructor de la clase que configura los datos necesarios para conectarse con rabbit
+        /// </summary>
+        /// <param name="ampOptionsSnapshot">Opciones de configuracion para Rabbit</param>
         public RabbitMQService(IOptions<RabbitMQInfo> ampOptionsSnapshot)
         {
             var builder = new ConfigurationBuilder()
@@ -49,6 +60,10 @@ namespace API_CARGA.Models.Services
             };
         }
 
+        /// <summary>
+        /// Encola un objeto en Rabbbit
+        /// </summary>
+        /// <param name="message">Objeto a encolar</param>
         public void PublishMessage(object message)
         {
             using (var conn = connectionFactory.CreateConnection())
