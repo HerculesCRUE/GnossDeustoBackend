@@ -1,4 +1,8 @@
-﻿using CronConfigure.ViewModels;
+﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
+// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+// Clase para obtener la información de las tareas vinculadas a un repositorio
+using CronConfigure.ViewModels;
 using NCrontab;
 using System;
 using System.Collections.Generic;
@@ -7,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.Models.Services
 {
+    ///<summary>
+    ///Clase para obtener la información de las tareas vinculadas a un repositorio
+    ///</summary>
     public class RepositoryCronService: IRepositoryCronService
     {
         private HangfireEntityContext _context;
@@ -16,6 +23,12 @@ namespace CronConfigure.Models.Services
             _context = context;
             _cronApiService = cronApiService;
         }
+
+        ///<summary>
+        ///Obtiene las tareas recurrentes de un repositorio
+        ///</summary>
+        ///<param name="repositoryID">Identificador del repositorio</param>
+        ///<returns>Lista de tareas recurrentes</returns>
         public List<RecurringJobViewModel> GetRecurringJobs(Guid repositoryID)
         {
             List<string> recurringJobsId = _context.JobRepository.Where(item => item.IdRepository.Equals(repositoryID) && item.FechaEjecucion < DateTime.Now && item.IdJob.Contains("_")).Select(item => item.IdJob).ToList();
@@ -72,6 +85,11 @@ namespace CronConfigure.Models.Services
             return recurringJobs;
         }
 
+        ///<summary>
+        ///Obtiene las tareas de un repositorio
+        ///</summary>
+        ///<param name="repositoryID">Identificador del repositorio</param>
+        ///<returns>Lista de tareas</returns>
         public List<JobViewModel> GetJobs(Guid repositoryID)
         {
             List<JobViewModel> jobs = new List<JobViewModel>();
@@ -87,6 +105,11 @@ namespace CronConfigure.Models.Services
             return jobs.OrderByDescending(item => item.ExecutedAt).ToList();
         }
 
+        ///<summary>
+        ///Obtiene las tareas programadas de un repositorio
+        ///</summary>
+        ///<param name="repositoryID">Identificador del repositorio</param>
+        ///<returns>Lista de tareas programadas</returns>
         public List<ScheduledJobViewModel> GetScheduledJobs(Guid repositoryID)
         {
             List<ScheduledJobViewModel> scheduledJobs = new List<ScheduledJobViewModel>();
@@ -103,6 +126,11 @@ namespace CronConfigure.Models.Services
             return scheduledJobs;
         }
 
+        ///<summary>
+        ///Obtiene las tareas ejecutadas a partir de todas las tareas recurrentes vinculadas a un repositorio
+        ///</summary>
+        ///<param name="repositoryID">Identificador del repositorio</param>
+        ///<returns>Lista de tareas</returns>
         public List<JobViewModel> GetJobsOfRecurringJob(Guid repositoryID)
         {
             List<RecurringJobViewModel>  listRecurring = GetRecurringJobs(repositoryID);
@@ -118,6 +146,11 @@ namespace CronConfigure.Models.Services
             return listJobs;
         }
 
+        ///<summary>
+        ///Obtiene las tareas recurrentes y las tareas de un repositorio
+        ///</summary>
+        ///<param name="repositoryID">Identificador del repositorio</param>
+        ///<returns>Lista de tareas</returns>
         public List<JobViewModel> GetAllJobs(Guid repositoryID)
         {
             List<JobViewModel> listAllJobs = new List<JobViewModel>();
