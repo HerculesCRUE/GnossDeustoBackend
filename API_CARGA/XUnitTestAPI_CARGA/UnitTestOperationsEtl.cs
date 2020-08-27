@@ -30,7 +30,8 @@ namespace XUnitTestAPI_CARGA
             CallUri callUri = new CallUri(callTokenService);
             ConfigSparql configSparql = new ConfigSparql();
             configSparql.Endpoint = "";
-            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null);
+            RabbitMQMockService mockRabbit = new RabbitMQMockService();
+            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, mockRabbit);
 
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
@@ -53,7 +54,7 @@ namespace XUnitTestAPI_CARGA
             CallTokenService callTokenService = new CallTokenService(configTokenService);
             CallUri callUri = new CallUri(callTokenService);
             configSparql.Endpoint = "";
-            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null);
+            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, null);
 
             try
             {
@@ -81,7 +82,7 @@ namespace XUnitTestAPI_CARGA
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
             ConfigSparql configSparql = new ConfigSparql();
             configSparql.Endpoint = "";
-            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null);
+            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null, null);
 
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);

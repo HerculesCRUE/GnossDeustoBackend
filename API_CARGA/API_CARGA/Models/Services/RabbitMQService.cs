@@ -20,7 +20,7 @@ namespace API_CARGA.Models.Services
     /// <summary>
     /// Clase para conectar con el servidor Rabbi
     /// </summary>
-    public class RabbitMQService
+    public class RabbitMQService : IRabbitMQService
     {
 
         private readonly RabbitMQInfo amqpInfo;
