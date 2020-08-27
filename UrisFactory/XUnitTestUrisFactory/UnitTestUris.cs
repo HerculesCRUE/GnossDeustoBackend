@@ -24,6 +24,19 @@ namespace XUnitTestUrisFactory
             Assert.True(uriResultante.Equals(uri));
         }
 
+        [Fact]
+        public void TestUriRdfTypeOK()
+        {
+            Dictionary<string, string> queryString = new Dictionary<string, string>();
+            queryString.Add("identifier", "123d");
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            UriFormer uriFormer = new UriFormer(configJsonHandler.GetUrisConfig());
+            string uri = uriFormer.GetURI("gradoOtorgado", queryString, true);
+            string uriResultante = "http://graph.um.es/res/awarded-degree/123d";
+
+            Assert.True(uriResultante.Equals(uri));
+        }
+
         //[Fact]
         //public void TestUriResearcherFail()
         //{
