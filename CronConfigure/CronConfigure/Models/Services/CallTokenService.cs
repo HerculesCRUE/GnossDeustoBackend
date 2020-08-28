@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.Models.Services
 {
+    /// <summary>
+    /// Clase para la obtención de los tokens de acceso
+    /// </summary>
     public class CallTokenService
     {
         private ConfigTokenService _configToken;
