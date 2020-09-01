@@ -37,7 +37,9 @@ namespace API_CARGA.Models.Services
         /// <param name="fechaFrom">fecha a partir de la cual se debe actualizar</param>
         /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
         /// <param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
-        public void PublishRepositories(Guid identifier, DateTime? fechaFrom = null, string set = null, string codigoObjeto = null)
+        /// <param name="jobId">En el caso de que haya sido una tarea la que ha lanzado la acción representa el identificador de la tarea</param>
+        ///<param name="jobCreatedDate">En el caso de que haya sido una tarea la que ha lanzado la acción representa la fecha de creación de dicha tarea</param>
+        public void PublishRepositories(Guid identifier, DateTime? fechaFrom = null, string set = null, string codigoObjeto = null, string jobId = null, DateTime? jobCreatedDate = null)
         {
             List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
             if (codigoObjeto == null)
@@ -53,7 +55,7 @@ namespace API_CARGA.Models.Services
                     {
                         string rdf = CallGetRecord(identifier, identifierOAIPMH.Identifier);
                         _publishData.CallDataValidate(rdf, identifier, _token);
-                        _publishData.CallDataPublish(rdf, _token);
+                        _publishData.CallDataPublish(rdf, jobId, jobCreatedDate, _token);
                         lastSyncro = identifierOAIPMH;
                     }
                     if (lastSyncro != null)
@@ -65,7 +67,7 @@ namespace API_CARGA.Models.Services
                 {
                     string rdf = CallGetRecord(identifier, codigoObjeto);
                     _publishData.CallDataValidate(rdf, identifier, _token);
-                    _publishData.CallDataPublish(rdf, _token);
+                    _publishData.CallDataPublish(rdf, jobId, jobCreatedDate, _token);
                 }
 
             }

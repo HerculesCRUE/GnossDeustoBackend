@@ -2,6 +2,7 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase que sirve de mock del ProgramingMethodService para la realización de los test
+using Hangfire.Server;
 using System;
 
 namespace CronConfigure.Models.Services
@@ -21,7 +22,7 @@ namespace CronConfigure.Models.Services
            
         }
 
-        public string PublishRepositories(Guid idRepositoryGuid, DateTime? fecha = null, string pSet = null, string codigoObjeto = null)
+        public string PublishRepositories(Guid idRepositoryGuid, PerformContext context, DateTime? fecha = null, string pSet = null, string codigoObjeto = null)
         {
             return "";
         }

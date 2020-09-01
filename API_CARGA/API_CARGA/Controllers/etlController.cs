@@ -31,9 +31,9 @@ namespace API_CARGA.Controllers
         readonly ConfigSparql _configSparql;
         readonly CallUri _callUri;
         readonly ConfigUrlService _configUrlService;
-        private readonly RabbitMQService _amqpService;
+        readonly IRabbitMQService _amqpService;
 
-        public etlController(IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallUri callUri, ConfigUrlService configUrlService, RabbitMQService amqpService)
+        public etlController(IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallUri callUri, ConfigUrlService configUrlService, IRabbitMQService amqpService)
         {
             _repositoriesConfigService = iRepositoriesConfigService;
             _shapeConfigService = iShapeConfigService;
@@ -57,10 +57,30 @@ namespace API_CARGA.Controllers
         {
             try
             {
+                string jobId = HttpContext.Request.Query["job_id"];
+                string jobCreatedDate = HttpContext.Request.Query["job_created_date"];
                 XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
                 List<string> triples = SparqlUtility.GetTriplesFromRDF(rdf);
                 //SparqlUtility.LoadTriples(triples, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), _configSparql.GetGraph()); 
-                _amqpService.PublishMessage(triples);
+                object rabbitLoadObject = triples;
+                if (!string.IsNullOrEmpty(jobId) && !string.IsNullOrEmpty(jobCreatedDate))
+                {
+                    rabbitLoadObject = new
+                    {
+                        JobID = jobId,
+                        Triples = triples,
+                        JobCreatedDate = jobCreatedDate
+                    };
+                }
+                else if (!string.IsNullOrEmpty(jobId))
+                {
+                    rabbitLoadObject = new
+                    {
+                        JobID = jobId,
+                        Triples = triples
+                    };
+                }
+                _amqpService.PublishMessage(rabbitLoadObject);
                 return Ok();
             }
             catch (Exception ex)

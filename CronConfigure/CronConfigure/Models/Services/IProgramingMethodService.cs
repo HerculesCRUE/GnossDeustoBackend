@@ -2,6 +2,7 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Interfaz para la programación de tareas
+using Hangfire.Server;
 using System;
 
 namespace CronConfigure.Models.Services
@@ -18,7 +19,7 @@ namespace CronConfigure.Models.Services
         ///<param name="fecha">Fecha desde la que se quiere sincronizar</param>
         /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones
         /// <param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
-        public string PublishRepositories(Guid idRepositoryGuid, DateTime? fecha = null, string pSet = null, string codigoObjeto = null);
+        public string PublishRepositories(Guid idRepositoryGuid, PerformContext context, DateTime? fecha = null, string pSet = null, string codigoObjeto = null);
         ///<summary>
         ///Método para programar una sincronización recurrente
         ///</summary>

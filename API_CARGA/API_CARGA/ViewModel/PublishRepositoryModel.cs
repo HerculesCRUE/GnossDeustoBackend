@@ -16,7 +16,8 @@ namespace API_CARGA.ViewModel
         public Guid repository_identifier { get; set; }
         public DateTime? fecha_from { get; set; }
         public string set { get; set; }
-        //public string codigo_objeto { get; set; }
-
+        public string codigo_objeto { get; set; }
+        public string job_id { get; set; }
+        public DateTime? job_created_date { get; set; }
     }
 }

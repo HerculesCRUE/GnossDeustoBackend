@@ -72,12 +72,23 @@ namespace API_CARGA.Models.Services
         ///</summary>
         ///<param name="rdf">contenido en rdf a publicar</param>
         ///<param name="token">Token de tipo Bearer para la seguridad entre apis</param>
-        public void CallDataPublish(string rdf, TokenBearer token = null)
+        ///<param name="jobId">En el caso de que haya sido una tarea la que ha lanzado la acción representa el identificador de la tarea</param>
+        ///<param name="jobCreatedDate">En el caso de que haya sido una tarea la que ha lanzado la acción representa la fecha de creación de dicha tarea</param>
+        public void CallDataPublish(string rdf, string jobId = null, DateTime? jobCreatedDate = null, TokenBearer token = null)
         {
             var bytes = Encoding.UTF8.GetBytes(rdf);
             MultipartFormDataContent multiContent = new MultipartFormDataContent();
             multiContent.Add(new ByteArrayContent(bytes), "rdfFile", "rdfFile.rdf");
-            CallPostApiFile("etl/data-publish", multiContent, token);
+            string query = null;
+            if (!string.IsNullOrEmpty(jobId))
+            {
+                query = $"job_id={jobId}";
+                if (jobCreatedDate.HasValue)
+                {
+                    query += $"&job_created_date={jobCreatedDate}";
+                }
+            }
+            CallPostApiFile("etl/data-publish", multiContent, token, query);
         }
 
         ///<summary>

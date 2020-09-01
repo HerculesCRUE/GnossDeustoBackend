@@ -5,6 +5,7 @@
 using CronConfigure.Filters;
 using CronConfigure.Models.Entitties;
 using Hangfire;
+using Hangfire.Server;
 using Newtonsoft.Json;
 using Serilog;
 using System;
@@ -39,9 +40,11 @@ namespace CronConfigure.Models.Services
         ///<param name="fecha">Fecha desde la que se quiere sincronizar</param>
         /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones
         /// <param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
-        public string PublishRepositories(Guid idRepositoryGuid, DateTime? fecha = null, string pSet = null, string codigoObjeto = null)
+        public string PublishRepositories(Guid idRepositoryGuid, PerformContext context, DateTime? fecha = null, string pSet = null, string codigoObjeto = null)
         {
             string idRepository = idRepositoryGuid.ToString();
+            string idJob = context.BackgroundJob.Id;
+            DateTime fechaJob = context.BackgroundJob.CreatedAt;
             try
             {
                 object objeto = new
@@ -49,7 +52,9 @@ namespace CronConfigure.Models.Services
                     repository_identifier = idRepositoryGuid,
                     codigo_objeto = codigoObjeto,
                     fecha_from = fecha,
-                    set = pSet
+                    set = pSet,
+                    job_id = idJob,
+                    job_created_date = fechaJob
                 };
                 string result = _serviceApi.CallPostApi($"sync/execute", objeto, _token);///{idRepository}
                 result = JsonConvert.DeserializeObject<string>(result);
@@ -80,7 +85,7 @@ namespace CronConfigure.Models.Services
             CallApiService serviceApi = new CallApiService(serviceUrl);
             ProgramingMethodsService service = new ProgramingMethodsService(serviceApi, null, null);
 
-            RecurringJob.AddOrUpdate(nombreCron, () => service.PublishRepositories(idRepository, fecha, set, codigoObjeto), cronExpression);
+            RecurringJob.AddOrUpdate(nombreCron, () => service.PublishRepositories(idRepository, null, fecha, set, codigoObjeto), cronExpression);
         }
 
         ///<summary>
@@ -93,7 +98,7 @@ namespace CronConfigure.Models.Services
         ///<param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
         public string ProgramPublishRepositoryJob(Guid idRepository, DateTime fechaInicio, DateTime? fecha = null, string set = null, string codigoObjeto = null)
         {
-            string id = BackgroundJob.Schedule(() => PublishRepositories(idRepository, fecha, set, codigoObjeto), fechaInicio);
+            string id = BackgroundJob.Schedule(() => PublishRepositories(idRepository, null, fecha, set, codigoObjeto), fechaInicio);
             JobRepository jobRepository = new JobRepository()
             {
                 IdJob = id,

@@ -35,6 +35,8 @@ namespace API_CARGA.Models.Services
         ///Realizar una llamda Post al método /etl/data-publish para publicar un rdf
         ///</summary>
         ///<param name="rdf">contenido en rdf a publicar</param>
-        public void CallDataPublish(string rdf, TokenBearer token = null);
+        ///<param name="jobId">En el caso de que haya sido una tarea la que ha lanzado la acción representa el identificador de la tarea</param>
+        ///<param name="jobCreatedDate">En el caso de que haya sido una tarea la que ha lanzado la acción representa la fecha de creación de dicha tarea</param>
+        public void CallDataPublish(string rdf, string jobId = null, DateTime? jobCreatedDate = null, TokenBearer token = null);
     }
 }

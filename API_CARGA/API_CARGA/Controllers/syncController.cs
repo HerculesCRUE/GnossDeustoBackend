@@ -38,7 +38,7 @@ namespace API_CARGA.Controllers
         {
             try
             {
-                _oaiPublishRDFService.PublishRepositories(publishModel.repository_identifier, publishModel.fecha_from, publishModel.set);
+                _oaiPublishRDFService.PublishRepositories(publishModel.repository_identifier, publishModel.fecha_from, publishModel.set,publishModel.codigo_objeto, publishModel.job_id, publishModel.job_created_date);
                 return Ok("");
             }
             catch (TaskCanceledException ex)
