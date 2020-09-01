@@ -1368,7 +1368,7 @@ id.format = "{vivo:doi}"
 code = "060.010.020.000"
 displayname = "bibo:Conference"
 id.resource = "Conference"
-id.format = "{foaf:name}"
+id.format = "{roh:title}"
 
     [[entities.relationships]]
     direct = "roh:participatedBy"
@@ -1376,7 +1376,7 @@ id.format = "{foaf:name}"
     link_to_cvn_person = true
 
     [[entities.properties]]
-    displayname = "foaf:name"
+    displayname = "roh:title"
 
         [[entities.properties.sources]]
         code = "060.010.020.100"
