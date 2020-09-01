@@ -1642,9 +1642,9 @@ classname = "AwardedDegree"
 
     [[entities.relationships]]
     ontology = "vivo"
-    name = "related"
+    name = "relates"
     inverse_ontology = "vivo"
-    inverse_name = "related"
+    inverse_name = "relates"
     link_to_cvn_person = true
 
 
