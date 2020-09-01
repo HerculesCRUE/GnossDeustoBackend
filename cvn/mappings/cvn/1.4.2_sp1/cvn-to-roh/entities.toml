@@ -1096,7 +1096,7 @@ cache = "roh:title"
     displayname = "rdf:Seq"
 
         [[entities.subentities.relationships]]
-        inverse = "vivo:authorList"
+        inverse = "bibo:authorList"
 
         [[entities.subentities.subentities]]
         code = "060.010.010.040"
@@ -1210,7 +1210,7 @@ id.format = "{vivo:doi}"
     displayname = "rdf:Seq"
 
         [[entities.subentities.relationships]]
-        inverse = "vivo:authorList"
+        inverse = "bibo:authorList"
 
         [[entities.subentities.subentities]]
         code = "060.010.010.040"
@@ -1324,7 +1324,7 @@ id.format = "{vivo:doi}"
     displayname = "rdf:Seq"
 
         [[entities.subentities.relationships]]
-        inverse = "vivo:authorList"
+        inverse = "bibo:authorList"
 
         [[entities.subentities.subentities]]
         code = "060.010.010.040"
@@ -1366,7 +1366,7 @@ id.format = "{vivo:doi}"
 # Trabajos presentados en congresos nacionales o internacionales
 [[entities]]
 code = "060.010.020.000"
-displayname = "vivo:Conference"
+displayname = "bibo:Conference"
 id.resource = "Conference"
 id.format = "{foaf:name}"
 
