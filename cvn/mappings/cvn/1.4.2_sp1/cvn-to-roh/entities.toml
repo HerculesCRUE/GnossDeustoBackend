@@ -6,6 +6,18 @@ id.resource = "Person"
 id.format = "{identifier}"
 cache = "foaf:person"
 
+    # DEBUG -- para marcar a la persona primaria del CVN.
+    # Eliminar, sustituir o cambiar según proceda.
+    [[entities.properties]]
+    displayname = "roh:debugPrimary"
+    datatype = "xsd:boolean"
+
+        # Debug: este código no existe, pero lo sobreescribimos con "value"
+        [[entities.properties.sources]]
+        code = "000.010.000.020"
+        name = "debug"
+        value = "true"
+
     [[entities.properties]]
     displayname = "foaf:name"
     format = "{name} {familyName} {secondFamilyName}"
@@ -662,6 +674,7 @@ id.resource = "Project"
     ontology = "roh"
     name = "title"
     format = "{title}"
+    required = true
 
         [[entities.properties.sources]]
         code = "050.020.010.010"

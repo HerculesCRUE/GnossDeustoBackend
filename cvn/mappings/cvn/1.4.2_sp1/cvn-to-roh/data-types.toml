@@ -19,3 +19,8 @@ ontology = "xsd"
 name = "datetime"
 python_type = "str"
 force = true
+
+[[datatypes]]
+ontology = "xsd"
+name = "boolean"
+python_type = "bool"
