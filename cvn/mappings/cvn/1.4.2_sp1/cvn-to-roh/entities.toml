@@ -1705,13 +1705,13 @@ classname = "AwardedDegree"
             inverse_name = "awardedBy"
 
             [[entities.subentities.subentities.properties]]
-            ontology = "foaf"
-            name = "name"
-            format = "{name}"
+            ontology = "roh"
+            name = "title"
+            format = "{title}"
 
                 [[entities.subentities.subentities.properties.sources]]
                 code = "020.010.010.090"
-                name = "name"
+                name = "title"
                 bean = "Name"
 
 [[entities]] # Doctorado
