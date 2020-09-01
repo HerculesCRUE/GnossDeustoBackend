@@ -234,15 +234,15 @@ displayname = "vivo:TeacherRole"
             [[entities.subentities.subentities.subentities]]
             displayname = "foaf:Organization"
             id.resource = "Organization"
-            id.format = "{foaf:name}"
-            cache = "foaf:name"
+            id.format = "{roh:title}"
+            cache = "roh:title"
 
                 [[entities.subentities.subentities.subentities.relationships]]
                 direct = "vivo:relates"
                 inverse = "vivo:relates"
 
                 [[entities.subentities.subentities.subentities.properties]]
-                displayname = "foaf:name"
+                displayname = "roh:title"
 
                     [[entities.subentities.subentities.subentities.properties.sources]]
                     code = "030.010.000.540"
@@ -1495,8 +1495,8 @@ id.resource = "Position"
     ontology = "foaf"
     classname = "Organization"
     id.resource = "Organization"
-    id.format = "{foaf:name}"
-    cache = "foaf:name"
+    id.format = "{roh:title}"
+    cache = "roh:title"
 
         [[entities.subentities.relationships]]
         ontology = "vivo"
@@ -1505,8 +1505,8 @@ id.resource = "Position"
         inverse_name = "relatedBy"
 
         [[entities.subentities.properties]]
-        ontology = "foaf"
-        name = "name"
+        ontology = "roh"
+        name = "title"
         format = "{name}"
 
             [[entities.subentities.properties.sources]]
@@ -1589,8 +1589,8 @@ id.resource = "Position"
     ontology = "foaf"
     classname = "Organization"
     id.resource = "Organization"
-    id.format = "{foaf:name}"
-    cache = "foaf:name"
+    id.format = "{roh:title}"
+    cache = "roh:title"
 
         [[entities.subentities.relationships]]
         ontology = "vivo"
@@ -1599,8 +1599,8 @@ id.resource = "Position"
         inverse_name = "relatedBy"
 
         [[entities.subentities.properties]]
-        ontology = "foaf"
-        name = "name"
+        ontology = "roh"
+        name = "title"
         format = "{name}"
 
             [[entities.subentities.properties.sources]]
@@ -1763,11 +1763,11 @@ id.resource = "PhDThesis"
     [[entities.subentities]]
     displayname = "foaf:Organization"
     id.resource = "Organization"
-    id.format = "{foaf:name}"
-    cache = "foaf:name"
+    id.format = "{roh:title}"
+    cache = "roh:title"
 
         [[entities.subentities.properties]]
-        displayname = "foaf:name"
+        displayname = "roh:title"
         format = "{name}"
 
             [[entities.subentities.properties.sources]]
