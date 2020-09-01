@@ -440,8 +440,13 @@ class Entity:
         return properties
 
     def should_generate(self):
+
         if (len(self.properties) > 0) and self.are_properties_empty():
             return False
+
+        if (len(self.properties) > 0) and self.is_a_required_property_missing():
+            return False
+
         for condition in self.conditions:
             if not condition.is_met():
                 return False
@@ -455,6 +460,12 @@ class Entity:
             if not subentity.are_properties_empty():
                 return False
         return True
+
+    def is_a_required_property_missing(self):
+        for property_item in self.properties:
+            if property_item.required and not property_item.should_generate():
+                return True
+        return False
 
     def should_cache(self):
         if self.property_cache is None:

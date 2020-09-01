@@ -38,8 +38,13 @@ def init_property_from_serialized_toml(config, entity_parent):
     if 'datatype' in config:
         data_type = config['datatype']
 
+    required = False
+    if 'required' in config:
+        required = config['required']
+
     generated_property = Property(ontology=ontology, name=name, format_string=format_string,
-                                  hidden=hidden, parent=entity_parent, data_type=data_type)
+                                  hidden=hidden, parent=entity_parent, data_type=data_type,
+                                  required=required)
 
     if 'sources' not in config:
         raise KeyError('no sources defined for Property')
@@ -80,7 +85,8 @@ class Default(dict):
 
 
 class Property(Printable):
-    def __init__(self, ontology, name, parent, format_string=None, hidden=False, data_type="xsd:string"):
+    def __init__(self, ontology, name, parent, format_string=None, hidden=False, data_type="xsd:string",
+                 required=False):
         self.ontology = ontology
         self.name = name
         self.format = format_string
@@ -90,6 +96,7 @@ class Property(Printable):
         self.hidden = hidden
         self.parent = parent
         self.data_type = data_type
+        self.required = required
 
     def add_source(self, source):
         self.sources.append(source)

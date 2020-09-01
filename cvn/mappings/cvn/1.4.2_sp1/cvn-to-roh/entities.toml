@@ -1390,6 +1390,7 @@ id.format = "{roh:title}"
 
     [[entities.properties]]
     displayname = "roh:title"
+    required = true
 
         [[entities.properties.sources]]
         code = "060.010.020.100"
