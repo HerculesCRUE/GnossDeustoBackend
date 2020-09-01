@@ -547,7 +547,7 @@ displayname = "roh:DegreeSupervisingRelationship"
                 bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
 
     [[entities.subentities]]
-    displayname = "vivo:DegreeThesis"
+    displayname = "roh:DegreeThesis"
     id.resource = "DegreeThesis"
 
         [[entities.subentities.relationships]]
