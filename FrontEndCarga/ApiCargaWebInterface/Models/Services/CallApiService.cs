@@ -14,13 +14,21 @@ using System.Net.Http;
 
 namespace ApiCargaWebInterface.Models.Services
 {
+    /// <summary>
+    /// Servicio para hacer llamadas a un api
+    /// </summary>
     public class CallApiService : ICallService
     {
         
         public CallApiService()
         {
         }
-
+        /// <summary>
+        /// Hace una petición delete
+        /// </summary>
+        /// <param name="urlBase">Url donde se encuentra el api</param>
+        /// <param name="urlMethod">Url del método</param>
+        /// <param name="token">token bearer de seguridad</param>
         public string CallDeleteApi(string urlBase, string urlMethod, TokenBearer token = null)
         {
             string result = "";
@@ -50,6 +58,12 @@ namespace ApiCargaWebInterface.Models.Services
             return result;
         }
 
+        /// <summary>
+        /// Hace una petición get
+        /// </summary>
+        /// <param name="urlBase">Url donde se encuentra el api</param>
+        /// <param name="urlMethod">Url del método</param>
+        /// <param name="token">token bearer de seguridad</param>
         public string CallGetApi(string urlBase, string urlMethod, TokenBearer token = null)
         {
             string result = "";
@@ -79,6 +93,15 @@ namespace ApiCargaWebInterface.Models.Services
             return result;
         }
 
+        /// <summary>
+        /// Hace una petición post al api
+        /// </summary>
+        /// <param name="urlBase">Url donde se encuentra el api</param>
+        /// <param name="urlMethod">Url del método</param>
+        /// <param name="token">token bearer de seguridad</param>
+        /// <param name="item">objeto a pasar</param>
+        /// <param name="isFile">si el objeto pasado es un fichero</param>
+        /// <param name="fileName">nombre del parametro del fichero, en el caso de que el objeto pasado sea un fichero</param>
         public string CallPostApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false, string fileName = "rdfFile")
         {
             HttpContent contentData = null;
@@ -129,6 +152,13 @@ namespace ApiCargaWebInterface.Models.Services
             }
         }
 
+        /// <summary>
+        /// Hace una petición post
+        /// </summary>
+        /// <param name="urlBase">Url donde se encuentra el api/param>
+        /// <param name="urlMethod">Url del método</param>
+        /// <param name="token">token bearer de seguridad</param>
+        /// <param name="files">diccionario de ficheros a pasar, en el que la clave es el nombre del parametro y el valor el fichero</param>
         public string CallPostApiFiles(string urlBase, string urlMethod, Dictionary<string, IFormFile> files, TokenBearer token = null)
         {
             MultipartFormDataContent contentData = contentData = new MultipartFormDataContent();
@@ -173,7 +203,15 @@ namespace ApiCargaWebInterface.Models.Services
                 }
             }
         }
-
+        /// <summary>
+        /// Hace una petición put
+        /// </summary>
+        /// <param name="urlBase">Url donde se encuentra el api</param>
+        /// <param name="urlMethod">Url del método</param>
+        /// <param name="token">token bearer de seguridad</param>
+        ///  <param name="item">objeto a pasar</param>
+        /// <param name="isFile">si el objeto pasado es un fichero</param>
+        /// <param name="fileName">nombre del parametro del fichero, en el caso de que el objeto pasado sea un fichero</param>
         public string CallPutApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile=false, string fileName = "rdfFile")
         {
             HttpContent contentData = null;

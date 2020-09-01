@@ -1,8 +1,8 @@
 ﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
-// Servicio para hacer llamadas al api de repositorios
-﻿using ApiCargaWebInterface.Models.Entities;
+// Servicio para hacer llamadas al api de repositorios OAIPMH
+using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.ViewModels;
 using Newtonsoft.Json;
 using System;
@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace ApiCargaWebInterface.Models.Services
 {
+    /// <summary>
+    /// Servicio para hacer llamadas al api de repositorios OAIPMH
+    /// </summary>
     public class CallRepositoryConfigApiService : ICallRepositoryConfigService
     {
         readonly ICallService _serviceApi;
@@ -28,7 +31,11 @@ namespace ApiCargaWebInterface.Models.Services
                 _token = tokenService.CallTokenCarga();
             }
         }
-
+        /// <summary>
+        /// Obtiene un repositorio OAIPMH
+        /// </summary>
+        /// <param name="id">Identificador del repositorio</param>
+        /// <returns>Repositorio OAIPMH</returns>
         public RepositoryConfigViewModel GetRepositoryConfig(Guid id)
         {
             string result = _serviceApi.CallGetApi(_serviceUrl.GetUrl(),$"{_urlRepositoryConfigApi}/{id}", _token);
@@ -36,6 +43,10 @@ namespace ApiCargaWebInterface.Models.Services
             return resultObject;
         }
 
+        /// <summary>
+        /// Obtiene todos los repositorios OAIPMH
+        /// </summary>
+        /// <returns>Lista de repositorios OAIPMH</returns>
         public List<RepositoryConfigViewModel> GetRepositoryConfigs()
         {
             string result = _serviceApi.CallGetApi(_serviceUrl.GetUrl(), $"{_urlRepositoryConfigApi}", _token);
@@ -43,6 +54,11 @@ namespace ApiCargaWebInterface.Models.Services
             return resultObject;
         }
 
+        /// <summary>
+        /// Elimina un repositorio OAIPMH
+        /// </summary>
+        /// <param name="id">Identificador del repositorio OAIPMH</param>
+        /// <returns>Exito</returns>
         public bool DeleteRepositoryConfig(Guid id)
         { 
             bool eliminado = false;
@@ -53,7 +69,11 @@ namespace ApiCargaWebInterface.Models.Services
             }
             return eliminado;
         }
-
+        /// <summary>
+        /// Crea un repositorio OAIPMH
+        /// </summary>
+        /// <param name="newRepositoryConfigView">Repositorio a crear</param>
+        /// <returns>Repositorio creado</returns>
         public RepositoryConfigViewModel CreateRepositoryConfigView(RepositoryConfigViewModel newRepositoryConfigView)
         {
             Guid guidAdded;
@@ -65,6 +85,10 @@ namespace ApiCargaWebInterface.Models.Services
             return resultObject;
         }
 
+        /// <summary>
+        /// Modifica un repositorio OAIPMH
+        /// </summary>
+        /// <param name="repositoryConfigView">Repositorio a modificar</param>
         public void ModifyRepositoryConfig(RepositoryConfigViewModel repositoryConfigView)
         {
             string result = _serviceApi.CallPutApi(_serviceUrl.GetUrl(), _urlRepositoryConfigApi, repositoryConfigView, _token);

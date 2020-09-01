@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace ApiCargaWebInterface.Models.Services
 {
+    /// <summary>
+    /// Servicio para hacer llamadas al api de Shapes
+    /// </summary>
     public class CallShapeConfigApiService : ICallShapeConfigService
     {
         readonly ICallService _serviceApi;
@@ -29,6 +32,11 @@ namespace ApiCargaWebInterface.Models.Services
             }
         }
 
+        /// <summary>
+        /// Añade una configuración de validación mediante un shape SHACL.
+        /// </summary>
+        /// <param name="newRepositoryConfigView">Configuración de validación a añadir</param>
+        /// <returns>Configuración creada</returns>
         public ShapeConfigViewModel CreateShapeConfig(ShapeConfigCreateModel newRepositoryConfigView)
         {
             Guid guidAdded;
@@ -42,6 +50,11 @@ namespace ApiCargaWebInterface.Models.Services
             return resultObject;
         }
 
+        /// <summary>
+        /// Elimina una configuración de validación
+        /// </summary>
+        /// <param name="id">Identificador del shape</param>
+        /// <returns>Si se ha completado con éxito</returns>
         public bool DeleteShapeConfig(Guid id)
         {
             bool eliminado = false;
@@ -53,13 +66,21 @@ namespace ApiCargaWebInterface.Models.Services
             return eliminado;
         }
 
+        /// <summary>
+        /// Obtiene una configuración de validación
+        /// </summary>
+        /// <param name="id">Identificador del shape</param>
+        /// <returns>configuración de validación</returns>
         public ShapeConfigViewModel GetShapeConfig(Guid id)
         {
             string result = _serviceApi.CallGetApi(_serviceUrl.GetUrl(), $"{_urlShapeConfigApi}/{id}",_token);
             ShapeConfigViewModel resultObject = JsonConvert.DeserializeObject<ShapeConfigViewModel>(result);
             return resultObject;
         }
-
+        /// <summary>
+        /// Obtiene todos las configuraciones de validación
+        /// </summary>
+        /// <returns>Lista de configuraciones</returns>
         public List<ShapeConfigViewModel> GetShapeConfigs()
         {
             string result = _serviceApi.CallGetApi(_serviceUrl.GetUrl(), $"{_urlShapeConfigApi}", _token);
@@ -67,6 +88,10 @@ namespace ApiCargaWebInterface.Models.Services
             return resultObject;
         }
 
+        /// <summary>
+        /// Modifica una validación de configuración
+        /// </summary>
+        /// <param name="repositoryConfigView">Configuración de validación a modificar</param>
         public void ModifyShapeConfig(ShapeConfigEditModel repositoryConfigView)
         {
             string parameters = $"?name={repositoryConfigView.Name}&repositoryID={repositoryConfigView.RepositoryID}&shapeConfigID={repositoryConfigView.ShapeConfigID}";

@@ -9,10 +9,17 @@ using System.IO;
 
 namespace ApiCargaWebInterface.Models.Services
 {
+    /// <summary>
+    /// Servicio para obtener las variables de configuración respecto al cron
+    /// </summary>
     public class ConfigUrlCronService
     {
         public IConfigurationRoot Configuration { get; set; }
         public string Url { get; set; }
+        /// <summary>
+        /// Obtiene la url del api de cron que ha sido configurada
+        /// </summary>
+        /// <returns>uri del api cron</returns>
         public string GetUrl()
         {
             if (string.IsNullOrEmpty(Url))

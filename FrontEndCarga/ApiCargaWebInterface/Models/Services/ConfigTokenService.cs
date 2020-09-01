@@ -1,7 +1,7 @@
 ﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
-// // Clase para la obtención de los datos necesarios para obtener los tokens de acceso 
+// Clase para la obtención de los datos necesarios para obtener los tokens de acceso 
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections;
@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace ApiCargaWebInterface.Models.Services
 {
+    /// <summary>
+    /// Clase para la obtención de los datos necesarios para obtener los tokens de acceso 
+    /// </summary>
     public class ConfigTokenService
     {
         public IConfigurationRoot Configuration { get; set; }
@@ -33,6 +36,10 @@ namespace ApiCargaWebInterface.Models.Services
 
             Configuration = builder.Build();
         }
+        /// <summary>
+        /// obtiene el authority configurado
+        /// </summary>
+        /// <returns>authority</returns>
         public string GetAuthority()
         {
             if (string.IsNullOrEmpty(Authority))
@@ -52,7 +59,10 @@ namespace ApiCargaWebInterface.Models.Services
             }
             return Authority;
         }
-
+        /// <summary>
+        /// Obtiene el client secret configurado
+        /// </summary>
+        /// <returns>client secretreturns>
         internal object GetClientSecretOAIPMH()
         {
             if (string.IsNullOrEmpty(ScopeOAIPMH))
@@ -72,7 +82,10 @@ namespace ApiCargaWebInterface.Models.Services
             }
             return ClientSecretOAIPMH;
         }
-
+        /// <summary>
+        /// Obtiene el Scope del OAIPMH configurado
+        /// </summary>
+        /// <returns>Scope del OAIPMH</returns>
         internal string GetScopeOAIPMH()
         {
             if (string.IsNullOrEmpty(ScopeOAIPMH))
@@ -92,7 +105,10 @@ namespace ApiCargaWebInterface.Models.Services
             }
             return ScopeOAIPMH;
         }
-
+        /// <summary>
+        /// Obtien el cliente id del OAIPMH configurado
+        /// </summary>
+        /// <returns>cliente id del OAIPMH</returns>
         public string GetClientIdOAIPMH()
         {
             if (string.IsNullOrEmpty(ClientIdOAIPMH))
@@ -112,7 +128,10 @@ namespace ApiCargaWebInterface.Models.Services
             }
             return ClientIdOAIPMH;
         }
-
+        /// <summary>
+        /// Obtiene el grant type configurado
+        /// </summary>
+        /// <returns>grant type</returns>
         public string GetGrantType()
         {
             if (string.IsNullOrEmpty(GrantType))
@@ -132,7 +151,10 @@ namespace ApiCargaWebInterface.Models.Services
             }
             return GrantType;
         }
-
+        /// <summary>
+        /// Obtiene el scope de api carga configurado
+        /// </summary>
+        /// <returns>scope api carga</returns>
         public string GetScope()
         {
             if (string.IsNullOrEmpty(Scope))
@@ -152,7 +174,10 @@ namespace ApiCargaWebInterface.Models.Services
             }
             return Scope;
         }
-
+        /// <summary>
+        /// Obtiene el scope del cron configurado
+        /// </summary>
+        /// <returns>scope del cron</returns>
         public string GetScopeCron()
         {
             if (string.IsNullOrEmpty(ScopeCron))
@@ -172,7 +197,10 @@ namespace ApiCargaWebInterface.Models.Services
             }
             return ScopeCron;
         }
-
+        /// <summary>
+        /// Obtiene el scope del urisFactory configurado
+        /// </summary>
+        /// <returns>scope de urisFactory</returns>
         public string GetScopeUrisFactory()
         {
             if (string.IsNullOrEmpty(ScopeUrisFactory))
@@ -192,7 +220,10 @@ namespace ApiCargaWebInterface.Models.Services
             }
             return ScopeUrisFactory;
         }
-
+        /// <summary>
+        /// Obtiene el cliente id configurado
+        /// </summary>
+        /// <returns>cliente id</returns>
         public string GetClientId()
         {
             if (string.IsNullOrEmpty(ClientId))
@@ -212,7 +243,10 @@ namespace ApiCargaWebInterface.Models.Services
             }
             return ClientId;
         }
-
+        /// <summary>
+        /// Obtiene el client secret configurado
+        /// </summary>
+        /// <returns>client secret</returns>
         public string GetClientSecret()
         {
             if (string.IsNullOrEmpty(ClientSecret))

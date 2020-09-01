@@ -13,6 +13,9 @@ using System.Net.Http;
 
 namespace ApiCargaWebInterface.Models.Services
 {
+    /// <summary>
+    /// Servicio para hacer llamadas al api de cron
+    /// </summary>
     public class CallCronService : ICallService
     {
         readonly ConfigUrlCronService _serviceUrl;
@@ -21,6 +24,12 @@ namespace ApiCargaWebInterface.Models.Services
             _serviceUrl = serviceUrl;
         }
 
+        /// <summary>
+        /// Hace una petición delete al apiCron
+        /// </summary>
+        /// <param name="urlBase">Url donde se encuentra el api cron, se puede omitir en este método</param>
+        /// <param name="urlMethod">Url del método dentro del apiCron</param>
+        /// <param name="token">token bearer de seguridad</param>
         public string CallDeleteApi(string urlBase, string urlMethod, TokenBearer token = null)
         {
             string result = "";
@@ -51,6 +60,12 @@ namespace ApiCargaWebInterface.Models.Services
             return result;
         }
 
+        /// <summary>
+        /// Hace una petición get al apiCron
+        /// </summary>
+        /// <param name="urlBase">Url donde se encuentra el api cron, se puede omitir en este método</param>
+        /// <param name="urlMethod">Url del método dentro del apiCron</param>
+        /// <param name="token">token bearer de seguridad</param>
         public string CallGetApi(string urlBase, string urlMethod, TokenBearer token = null)
         {
             string result = "";
@@ -83,6 +98,15 @@ namespace ApiCargaWebInterface.Models.Services
             return result;
         }
 
+        /// <summary>
+        /// Hace una petición post al apiCron
+        /// </summary>
+        /// <param name="urlBase">Url donde se encuentra el api cron, se puede omitir en este método</param>
+        /// <param name="urlMethod">Url del método dentro del apiCron</param>
+        /// <param name="token">token bearer de seguridad</param>
+        /// <param name="item">objeto a pasar</param>
+        /// <param name="isFile">si el objeto pasado es un fichero</param>
+        /// <param name="fileName">nombre del parametro del fichero, en el caso de que el objeto pasado sea un fichero</param>
         public string CallPostApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false, string fileName = "rdfFile")
         {
             string stringData = JsonConvert.SerializeObject(item);
@@ -119,11 +143,27 @@ namespace ApiCargaWebInterface.Models.Services
             }
         }
 
+        /// <summary>
+        /// Hace una petición post al apiCron
+        /// </summary>
+        /// <param name="urlBase">Url donde se encuentra el api cron, se puede omitir en este método</param>
+        /// <param name="urlMethod">Url del método dentro del apiCron</param>
+        /// <param name="token">token bearer de seguridad</param>
+        /// <param name="files">diccionario de ficheros a pasar, en el que la clave es el nombre del parametro y el valor el fichero</param>
         public string CallPostApiFiles(string urlBase, string urlMethod, Dictionary<string, IFormFile> files, TokenBearer token = null)
         {
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Hace una petición put al apiCron
+        /// </summary>
+        /// <param name="urlBase">Url donde se encuentra el api cron, se puede omitir en este método</param>
+        /// <param name="urlMethod">Url del método dentro del apiCron</param>
+        /// <param name="token">token bearer de seguridad</param>
+        ///  <param name="item">objeto a pasar</param>
+        /// <param name="isFile">si el objeto pasado es un fichero</param>
+        /// <param name="fileName">nombre del parametro del fichero, en el caso de que el objeto pasado sea un fichero</param>
         public string CallPutApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false, string fileName = "rdfFile")
         {
             string stringData = JsonConvert.SerializeObject(item);
