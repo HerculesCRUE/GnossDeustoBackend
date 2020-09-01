@@ -1077,7 +1077,7 @@ cache = "roh:title"
         bean = "Value"
 
     [[entities.properties]]
-    displayname = "vivo:startPage"
+    displayname = "bibo:pageStart"
 
         [[entities.properties.sources]]
         code = "060.010.010.090"
@@ -1085,7 +1085,7 @@ cache = "roh:title"
         bean = "InitialPage"
 
     [[entities.properties]]
-    displayname = "vivo:pageEnd"
+    displayname = "bibo:pageEnd"
 
         [[entities.properties.sources]]
         code = "060.010.010.090"
@@ -1191,7 +1191,7 @@ id.format = "{vivo:doi}"
         bean = "Value"
 
     [[entities.properties]]
-    displayname = "vivo:startPage"
+    displayname = "bibo:pageStart"
 
         [[entities.properties.sources]]
         code = "060.010.010.090"
@@ -1199,7 +1199,7 @@ id.format = "{vivo:doi}"
         bean = "InitialPage"
 
     [[entities.properties]]
-    displayname = "vivo:pageEnd"
+    displayname = "bibo:pageEnd"
 
         [[entities.properties.sources]]
         code = "060.010.010.090"
@@ -1305,7 +1305,7 @@ id.format = "{vivo:doi}"
         bean = "Value"
 
     [[entities.properties]]
-    displayname = "vivo:startPage"
+    displayname = "bibo:pageStart"
 
         [[entities.properties.sources]]
         code = "060.010.010.090"
@@ -1313,7 +1313,7 @@ id.format = "{vivo:doi}"
         bean = "InitialPage"
 
     [[entities.properties]]
-    displayname = "vivo:pageEnd"
+    displayname = "bibo:pageEnd"
 
         [[entities.properties.sources]]
         code = "060.010.010.090"
