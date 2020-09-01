@@ -217,6 +217,7 @@ displayname = "vivo:TeacherRole"
         [[entities.subentities.subentities]]
         displayname = "vivo:AcademicDegree"
         id.resource = "AcademicDegree"
+        cache = "roh:title"
 
             [[entities.subentities.subentities.relationships]]
             direct = "oboro:BFO_0000050"
