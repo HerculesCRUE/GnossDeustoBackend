@@ -11,6 +11,9 @@ using NCrontab;
 
 namespace ApiCargaWebInterface.Controllers
 {
+    /// <summary>
+    /// Controlador para gestionar las llamadas relacionandas con el Api cron
+    /// </summary>
     public class JobController : Controller
     {
         readonly CallCronApiService _serviceApi;

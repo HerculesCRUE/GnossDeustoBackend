@@ -179,8 +179,9 @@ namespace CronConfigure.Models.Services
         {
             List<JobViewModel> listJobViewModel = new List<JobViewModel>();
             var api = JobStorage.Current.GetMonitoringApi();
+           
             if (type.Equals(JobType.All) || type.Equals(JobType.Succeeded))
-            { 
+            {
                 foreach (var succeeded in api.SucceededJobs(from, count))
                 {
                     JobViewModel job = new JobViewModel()
@@ -212,6 +213,15 @@ namespace CronConfigure.Models.Services
                         ExecutedAt = failed.Value.FailedAt
                     };
                     listJobViewModel.Add(job);
+                }
+            }
+            if (type.Equals(JobType.All) || type.Equals(JobType.Processing))
+            {
+                var processingJobs = api.ProcessingJobs(from, count);
+                foreach (var processing in processingJobs)
+                {
+                    var jobProcessing = GetJob(processing.Key);
+                    listJobViewModel.Add(jobProcessing);
                 }
             }
             listJobViewModel = listJobViewModel.OrderByDescending(item => item.State).ToList();
@@ -330,6 +340,15 @@ namespace CronConfigure.Models.Services
                         }
                     }
                     job.ExecutedAt = jobDto.History[0].CreatedAt;
+                    var processing = _context.ProcessingJobState.FirstOrDefault(item => item.JobId.Equals(id));
+                    if (processing != null)
+                    {
+
+                        job.LastIdentifierOAIPMH = processing.LastIdentifierOAIPMH;
+                        job.ProcessNumIdentifierOAIPMH = processing.ProcessNumIdentifierOAIPMH;
+                        job.TotalNumIdentifierOAIPMH = processing.TotalNumIdentifierOAIPMH;
+                        
+                    }
                 }
                 
                 job.Id = id;
