@@ -7,8 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiCargaWebInterface.Controllers
 {
+    /// <summary>
+    /// Clase para gestionar los errores y sus respectivos redireccionamientos
+    /// </summary>
     public class ErrorController : Controller
     {
+        /// <summary>
+        /// Redirecciona a una página con el código de error dado
+        /// </summary>
+        /// <param name="code">codigo de error</param>
+        /// <returns>página de error</returns>
         [Route("error/{code}")]
         public IActionResult ErrorHandler(int code)
         {
@@ -20,7 +28,10 @@ namespace ApiCargaWebInterface.Controllers
             return View("General", feature.OriginalPath);
         }
 
-
+        /// <summary>
+        /// Redirecciona a una página de error cuando ocurre una excepción
+        /// </summary>
+        /// <returns>página de error</returns>
         [Route("error/exception")]
         public IActionResult ExceptionHandler()
         {

@@ -42,7 +42,7 @@ namespace ApiCargaWebInterface.Controllers
                 var job = result.ListJobs.OrderByDescending(item => item.ExecutedAt).FirstOrDefault();
                 result.LastJob = job.Id;
                 result.LastState = job.State;
-                int succed = result.ListJobs.Count(item => !item.State.Equals("Failed"));
+                int succed = result.ListJobs.Count(item => item.State.Equals("Succeed"));
                 double percentage = ((double)succed / result.ListJobs.Count)*100;
                 result.PorcentajeTareas = Math.Round(percentage, 2);
             }

@@ -13,6 +13,7 @@ namespace CronConfigure.Models.Enumeracion
     {
         All = 0,
         Failed = 1,
-        Succeeded = 2
+        Succeeded = 2,
+        Processing = 3
     }
 }

@@ -24,7 +24,11 @@
             {
                 clase = "class =text-danger";
             }
-            
+            else if (job.State.Equals("Processing"))
+            {
+                clase = "class =text-info";
+            }
+
     <div class="fila">
         <div class="columna principal">
             <a href="@Url.Action("DetailsJob", "Job",new { id = job.Id })">

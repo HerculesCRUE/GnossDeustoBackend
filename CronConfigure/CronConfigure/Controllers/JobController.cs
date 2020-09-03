@@ -113,7 +113,7 @@ namespace CronConfigure.Controllers
         /// <summary>
         /// devuelve una lista de tareas paginadas
         /// </summary>
-        /// <param name="type">tipo de las tareas devueltas: 0: para todos los tipos, 1: para las que han fallado, 2: para las correctas </param>
+        /// <param name="type">tipo de las tareas devueltas: 0: para todos los tipos, 1: para las que han fallado, 2: para las correctas, 3: para los que se están procesando </param>
         /// <param name="from">número desde el cual se va a traer las tareas del listado, por defecto 0 para empezar a traer desde el primer elemento de la lista de tareas</param>
         /// <param name="count">número máximo de tareas a traer</param>
         /// <returns>listado de tareas</returns> 

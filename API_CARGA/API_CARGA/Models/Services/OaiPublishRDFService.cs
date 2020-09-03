@@ -51,12 +51,18 @@ namespace API_CARGA.Models.Services
             {
                 if (codigoObjeto == null)
                 {
+                    int totalCount = listIdentifier.Count();
                     foreach (IdentifierOAIPMH identifierOAIPMH in listIdentifier)
                     {
+                        if (!string.IsNullOrEmpty(jobId))
+                        {
+                            AddProcessingState(identifierOAIPMH.Identifier, identifier, jobId, listIdentifier.IndexOf(identifierOAIPMH), totalCount);
+                        }
                         string rdf = CallGetRecord(identifier, identifierOAIPMH.Identifier);
                         _publishData.CallDataValidate(rdf, identifier, _token);
                         _publishData.CallDataPublish(rdf, jobId, jobCreatedDate, _token);
                         lastSyncro = identifierOAIPMH;
+                        
                     }
                     if (lastSyncro != null)
                     {
@@ -86,7 +92,7 @@ namespace API_CARGA.Models.Services
         /// Añade un objeto de sincronización en base de datos
         /// </summary>
         /// <param name="lastSyncro">Objeto identificador de OAIPMH que contiene la fecha</param>
-        /// <param name="repositoryId">fIdentificador del repositorio</param>
+        /// <param name="repositoryId">Identificador del repositorio</param>
         /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
         private void AddSyncro(IdentifierOAIPMH lastSyncro, string set, Guid repositoryId)
         {
@@ -128,6 +134,38 @@ namespace API_CARGA.Models.Services
                     UltimaFechaDeSincronizacion = lastSyncro.Fecha
                 };
                 _context.RepositorySync.Add(repoSyncAdd);
+            }
+            _context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Añade o actualiza a la tabla ProcessingJobState una entrada para saber en que estado se encuentra la sincronización
+        /// </summary>
+        /// <param name="identifierOAIPMH">Objeto identificador de OAIPMH </param>
+        /// <param name="repositoryId">Identificador del repositorio</param>
+        /// <param name="jobId">Identificador de la tarea</param>
+        /// <param name="index">Número del elemento que se está procesando</param>
+        /// <param name="totalOfElements">Elementos a procesar</param>
+        public void AddProcessingState(string identifierOAIPMH, Guid repositoryId, string jobId, int index, int totalOfElements)
+        {
+            var processingJobState = _context.ProcessingJobState.FirstOrDefault(item => item.JobId.Equals(jobId));
+            if(processingJobState == null)
+            {
+                ProcessingJobState processingJobStateNew = new ProcessingJobState()
+                {
+                    Id = Guid.NewGuid(),
+                    JobId = jobId,
+                    LastIdentifierOAIPMH = identifierOAIPMH,
+                    ProcessNumIdentifierOAIPMH = index,
+                    RepositoryId = repositoryId,
+                    TotalNumIdentifierOAIPMH = totalOfElements
+                };
+                _context.ProcessingJobState.Add(processingJobStateNew);
+            }
+            else
+            {
+                processingJobState.LastIdentifierOAIPMH = identifierOAIPMH;
+                processingJobState.ProcessNumIdentifierOAIPMH = index;
             }
             _context.SaveChanges();
         }

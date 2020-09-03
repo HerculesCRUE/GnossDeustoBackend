@@ -37,6 +37,20 @@
                             <p class="titulo">Excepción</p>
                             <p>@Model.ExceptionDetails</p>
                         </div>
+                        @if (Model.State.Equals("Processing"))
+                        {
+                            double complete = ((double)Model.ProcessNumIdentifierOAIPMH / Model.TotalNumIdentifierOAIPMH)*100;
+                            string percentage = $"{complete}%";
+                            <div class="LastIdentifierOAIPMH">
+                                <p class="titulo">Último elemento procesado</p>
+                                <p>@Model.LastIdentifierOAIPMH</p>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="@complete" aria-valuemin="0" aria-valuemax="100" style="width:@percentage">
+                                    <span>@percentage</span>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

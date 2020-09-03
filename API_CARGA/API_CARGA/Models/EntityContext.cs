@@ -14,6 +14,7 @@ namespace API_CARGA.Models
         public DbSet<RepositoryConfig> RepositoryConfig { get; set; }
         public DbSet<ShapeConfig> ShapeConfig { get; set; }
         public DbSet<RepositorySync> RepositorySync { get; set; }
+        public DbSet<ProcessingJobState> ProcessingJobState { get; set; }
         public EntityContext(DbContextOptions options, bool memory = false)
             : base(options)
         {
@@ -28,7 +29,9 @@ namespace API_CARGA.Models
         {
             //modelBuilder.Entity<RepositorySync>()
             //    .HasKey(c => new { c.RepositoryId, c.Set });
-
+            modelBuilder.Entity<ProcessingJobState>()
+                .HasIndex(u => u.JobId)
+                .IsUnique();
         }
     }
 }
