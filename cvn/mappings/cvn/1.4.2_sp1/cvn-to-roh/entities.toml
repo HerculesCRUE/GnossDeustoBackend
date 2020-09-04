@@ -1537,7 +1537,7 @@ id.resource = "Position"
 
     [[entities.properties]]
     ontology = "vivo"
-    name = "HRJobTitle"
+    name = "hrJobTitle"
     format = "{title}"
 
         [[entities.properties.sources]]
@@ -1631,7 +1631,7 @@ id.resource = "Position"
 
     [[entities.properties]]
     ontology = "vivo"
-    name = "HRJobTitle"
+    name = "hrJobTitle"
     format = "{title}"
 
         [[entities.properties.sources]]
