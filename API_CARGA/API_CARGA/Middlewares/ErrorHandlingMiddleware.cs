@@ -3,9 +3,12 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase que actua de Middleware para la gestión de las excepciones
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Serilog;
 using System;
+using System.Collections;
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -17,7 +20,9 @@ namespace API_CARGA.Middlewares
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
+        private IConfigurationRoot Configuration { get; set; }
         private string _timeStamp;
+        private string _LogPath;
         public ErrorHandlingMiddleware(RequestDelegate next)
         {
             _next = next;
@@ -75,7 +80,12 @@ namespace API_CARGA.Middlewares
 
         private void CreateLoggin(string pTimestamp)
         {
-            Log.Logger = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.File($"logs/log_{pTimestamp}.txt").CreateLogger();
+            string pathDirectory = GetLogPath();
+            if (!Directory.Exists(pathDirectory))
+            {
+                Directory.CreateDirectory(pathDirectory);
+            }
+            Log.Logger = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.File($"{pathDirectory}/log_{pTimestamp}.txt").CreateLogger();
         }
 
         private string CreateTimeStamp()
@@ -93,6 +103,30 @@ namespace API_CARGA.Middlewares
             }
             string timeStamp = $"{time.Year.ToString()}{month}{day}";
             return timeStamp;
+        }
+
+        public string GetLogPath()
+        {
+            if (string.IsNullOrEmpty(_LogPath))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                string logPath = "";
+                if (environmentVariables.Contains("LogPath"))
+                {
+                    logPath = environmentVariables["LogPath"] as string;
+                }
+                else
+                {
+                    logPath = Configuration["LogPath"];
+                }
+                _LogPath = logPath;
+            }
+            return _LogPath;
         }
     }
 }

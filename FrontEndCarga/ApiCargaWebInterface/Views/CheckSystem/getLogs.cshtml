@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ApiCargaWebInterface.ViewModels.LogInfoViewModel>
+
+@{
+    ViewData["Title"] = "Logs";
+    ViewData["BodyClass"] = "fichaRecurso";
+}
+    <div class="row">
+        <div class="col col-12 col-lg-12 col-contenido">
+            <div class="wrapCol">
+                <h1>Logs</h1>
+                <div class="list-group">
+                    @foreach (var item in Model)
+                    {
+                        <a href="@Url.Action("getLog",new { api = item.Api, log_name = item.NameLog})" class="list-group-item">
+                            <h4 class="list-group-item-heading">@item.NameLog</h4>
+                            <p class="list-group-item-text">Última escritura: @item.LastModified</p>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
