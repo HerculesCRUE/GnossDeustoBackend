@@ -1,0 +1,75 @@
+﻿@model ApiCargaWebInterface.Models.Entities.CheckSystemReport
+
+@{
+    ViewData["Title"] = "Logs";
+    ViewData["BodyClass"] = "fichaRecurso";
+    string cronSuccess = "list-group-item-info";
+    string cargaSuccess = "list-group-item-info";
+    string tokensSuccess = "list-group-item-info";
+    string cronText = "Sin ejecutar";
+    string cargaText = "Sin ejecutar";
+    string tokensText = "Sin ejecutar";
+    if(Model != null)
+    {
+        if (Model.ApiCarga)
+        {
+            cargaSuccess = "list-group-item-success";
+            cargaText = "Correcto";
+        }
+        else
+        {
+            cargaSuccess = "list-group-item-danger";
+            cargaText = "Fallido";
+        }
+        if (Model.ApiCron)
+        {
+            cronSuccess = "list-group-item-success";
+            cronText = "Correcto";
+        }
+        else
+        {
+            cronSuccess = "list-group-item-danger";
+            cronText = "Fallido";
+        }
+        if (Model.IdentityServer)
+        {
+            tokensSuccess = "list-group-item-success";
+            tokensText = "Correcto";
+        }
+        else
+        {
+            tokensSuccess = "list-group-item-danger";
+            tokensText = "Fallido";
+        }
+    }
+}
+    <div class="row">
+        <div class="col col-12 col-lg-12 col-contenido">
+            <div class="wrapCol">
+                <h1>Estado del sistema</h1>
+                <div class="list-group">
+                    <a href="@Url.Action("getLogs",new { api = "Carga"})" class="list-group-item @cargaSuccess">
+                        <h4 class="list-group-item-heading">Estado de api Carga: </h4>
+                        <p class="list-group-item-text">@cargaText</p>
+                    </a>
+                    <a href="@Url.Action("getLogs",new { api = "Cron"})" class="list-group-item @cronSuccess">
+                        <h4 class="list-group-item-heading">Estado del api Cron</h4>
+                        <p class="list-group-item-text">@cronText</p>
+                    </a>
+                    <a href="@Url.Action("getLogs",new { api = "Identity"})" class="list-group-item @tokensSuccess">
+                        <h4 class="list-group-item-heading">Estado del proveedor de tokens: </h4>
+                        <p class="list-group-item-text">@tokensText</p>
+                    </a>
+                </div>
+                <form asp-action="getReportBasic" method="get">
+                    <div class="fieldset actionButtons fieldset03">
+                        <fieldset>
+                            <p>
+                                <input class="submit principal" type="submit" value="Comprobar estado">
+                            </p>
+                        </fieldset>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

@@ -57,7 +57,8 @@ namespace ApiCargaWebInterface
                     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.ServiceHost = serviceHost;
                 });
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(); 
+            services.AddSingleton(typeof(ConfigPathLog));
             services.AddSingleton(typeof(ConfigUrlService));
             services.AddSingleton(typeof(ConfigUrlCronService));
             services.AddScoped<ICallRepositoryConfigService, CallRepositoryConfigApiService>();
@@ -66,6 +67,7 @@ namespace ApiCargaWebInterface
             services.AddScoped<ICallEtlService, CallEtlService>();
             services.AddScoped<ICallShapeConfigService, CallShapeConfigApiService>(); 
             services.AddScoped(typeof(CallCronApiService));
+            services.AddScoped(typeof(CheckSystemService));
             services.AddScoped(typeof(CallCronService));
             services.AddScoped(typeof(ConfigTokenService));
             services.AddScoped(typeof(CallTokenService)); 

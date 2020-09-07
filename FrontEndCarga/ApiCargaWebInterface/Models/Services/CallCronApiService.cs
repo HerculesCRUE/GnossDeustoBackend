@@ -142,6 +142,16 @@ namespace ApiCargaWebInterface.Models.Services
         }
 
         /// <summary>
+        /// Obtiene todas las tareas
+        /// </summary>
+        /// <returns>lista de tareas</returns>
+        public List<JobViewModel> GetJobs()
+        {
+            string result = _serviceApi.CallGetApi("", $"{_urlJobApi}", _token);
+            List<JobViewModel> resultObject = JsonConvert.DeserializeObject<List<JobViewModel>>(result);
+            return resultObject;
+        }
+        /// <summary>
         /// Obtiene una tarea recurrente
         /// </summary>
         /// <param name="name">Nombre de la tarea recurrente</param>
