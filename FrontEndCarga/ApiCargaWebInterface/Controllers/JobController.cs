@@ -21,12 +21,20 @@ namespace ApiCargaWebInterface.Controllers
         {
             _serviceApi = serviceApi;
         }
-
+        /// <summary>
+        /// Devuelve una página principal con una lista de tareas vacía
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             List<CreateRecurringJobViewModel> lista = new List<CreateRecurringJobViewModel>();
             return View(lista);
         }
+        /// <summary>
+        /// Devuelve la página de creación de una tarea con el idetificador del repositorio asociado
+        /// </summary>
+        /// <param name="IdRepository">Identificador del repositorio</param>
+        /// <returns></returns>
         public IActionResult Create(Guid? IdRepository = null)
         {
             if (IdRepository.HasValue)
@@ -43,6 +51,11 @@ namespace ApiCargaWebInterface.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene los detalles de una tarea
+        /// </summary>
+        /// <param name="id">Identificador de una tarea</param>
+        /// <returns></returns>
         [HttpGet("[Controller]/{id}")]
         public IActionResult DetailsJob(string id)
         {
@@ -50,6 +63,11 @@ namespace ApiCargaWebInterface.Controllers
             return View(job);
         }
 
+        /// <summary>
+        /// Obtiene los detalles de una tarea recurrente
+        /// </summary>
+        /// <param name="name">Nombre de la tarea recurrente</param>
+        /// <returns></returns>
         [HttpGet("[Controller]/recurring/{name}")]
         public IActionResult DetailsRecurringJob(string name)
         {
@@ -60,6 +78,11 @@ namespace ApiCargaWebInterface.Controllers
             return View(recurringJobViewModel);
         }
 
+        /// <summary>
+        /// Crea una tarea nueva
+        /// </summary>
+        /// <param name="jobModel">Detalles de la tarea a crear</param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Create(CreateJobViewModel jobModel)
         {
@@ -104,6 +127,12 @@ namespace ApiCargaWebInterface.Controllers
             
         }
 
+        /// <summary>
+        /// Elimina una tarea
+        /// </summary>
+        /// <param name="id">identificador de la tarea</param>
+        /// <param name="job">tipo de tarea (programada: scheduled o recurrente: recurring)</param>
+        /// <returns></returns>
         public IActionResult Delete(string id, string job)
         {
             if (job.Equals("scheduled"))
@@ -117,6 +146,11 @@ namespace ApiCargaWebInterface.Controllers
             return View("Deleted", id);
         }
 
+        /// <summary>
+        /// Crea una tarea de sincronización para un repositorio
+        /// </summary>
+        /// <param name="repositoryId">Identificador del repositorio</param>
+        /// <returns></returns>
         public IActionResult Syncro(Guid repositoryId)
         {
             CreateJobViewModel jobModel = new CreateJobViewModel() { IdRepository = repositoryId };
@@ -128,12 +162,22 @@ namespace ApiCargaWebInterface.Controllers
             return View("Created", item);
         }
 
+        /// <summary>
+        /// Vuelve a encolar una tarea
+        /// </summary>
+        /// <param name="idJob">Identificador de la tarea</param>
+        /// <returns></returns>
         public IActionResult ReQueue(string idJob)
         {
             _serviceApi.ReQueueJob(idJob);
             var job = _serviceApi.GetJob(idJob);
             return View("DetailsJob", job);
         }
+        /// <summary>
+        /// Comprueba que una expresión cron es válida
+        /// </summary>
+        /// <param name="CronExpression">Expresión a comprobar</param>
+        /// <returns></returns>
         public IActionResult CronValid(string CronExpression)
         {
             var correct = CrontabSchedule.TryParse(CronExpression);

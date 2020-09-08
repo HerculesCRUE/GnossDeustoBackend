@@ -1,7 +1,7 @@
 ﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
-// Controlador repositorios
+// Controlador repositorios OAIPMH
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,9 @@ using NCrontab;
 
 namespace ApiCargaWebInterface.Controllers
 {
-    
+    /// <summary>
+    /// Controlador repositorios OAIPMH
+    /// </summary>
     public class RepositoryConfigController : Controller
     {
         readonly ICallRepositoryConfigService _serviceApi;
@@ -24,12 +26,20 @@ namespace ApiCargaWebInterface.Controllers
             _serviceApi = serviceApi;
             _respositoryJobService = respositoryJobService;
         }
+        /// <summary>
+        /// Obtiene una lista de todos los repositorio OAIPMH
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             List<RepositoryConfigViewModel> result = _serviceApi.GetRepositoryConfigs();
             return View(result);
         }
-
+        /// <summary>
+        /// Obtiene los detalles asociados a un repositorio OAIPMH
+        /// </summary>
+        /// <param name="id">Identificador del repositorio</param>
+        /// <returns></returns>
         [Route("[Controller]/{id}")]
         public IActionResult Details(Guid id)
         {
@@ -55,7 +65,11 @@ namespace ApiCargaWebInterface.Controllers
                 return NotFound();
             }
         }
-
+        /// <summary>
+        /// Devuleve la página de edición con los datos actuales del repositorio OAIPMH
+        /// </summary>
+        /// <param name="id">Identificador del repositorio</param>
+        /// <returns></returns>
         public IActionResult Edit(Guid id)
         {
             RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(id);
@@ -69,6 +83,11 @@ namespace ApiCargaWebInterface.Controllers
             }
         }
 
+        /// <summary>
+        /// Edita la información de un repositorio OAIPMH
+        /// </summary>
+        /// <param name="repositoryConfigView">Información modificada del repositorio OAIPMH</param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Edit(RepositoryConfigViewModel repositoryConfigView)
         {
@@ -84,7 +103,11 @@ namespace ApiCargaWebInterface.Controllers
             }
             
         }
-
+        /// <summary>
+        /// Elimina un repositorio OAIPMH
+        /// </summary>
+        /// <param name="id">Identificador del repositorio</param>
+        /// <returns></returns>
         public IActionResult Delete(Guid id)
         {
             bool result = _serviceApi.DeleteRepositoryConfig(id);
@@ -98,11 +121,20 @@ namespace ApiCargaWebInterface.Controllers
             }
         }
 
+        /// <summary>
+        /// Devuelve la página de creación de un repositorio OAIPMH
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             return View();
         }
 
+        /// <summary>
+        /// Crea un nuevo repositorio OAIPMH
+        /// </summary>
+        /// <param name="repositoryConfigView">Información del nuevo repositorio OAIPMH</param>
+        /// <returns>La página de detalle del nuevo repositorio OAIPMH</returns>
         [HttpPost]
         public IActionResult Create(RepositoryConfigViewModel repositoryConfigView)
         {

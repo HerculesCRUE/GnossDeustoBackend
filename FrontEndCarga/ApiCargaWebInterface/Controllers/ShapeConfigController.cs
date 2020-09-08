@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiCargaWebInterface.Controllers
 {
+    /// <summary>
+    /// Controlador de los shapes (configuración de validación)
+    /// </summary>
     public class ShapeConfigController : Controller
     {
         readonly ICallShapeConfigService _serviceApi;
@@ -22,13 +25,21 @@ namespace ApiCargaWebInterface.Controllers
             _serviceApi = serviceApi;
             _repositoryServiceApi = repositoryServiceApi;
         }
-
+        /// <summary>
+        /// Devueleve una lista con todas las configuraciones de validación
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             List<ShapeConfigViewModel> result = _serviceApi.GetShapeConfigs();
             return View(result);
         }
 
+        /// <summary>
+        /// Obtiene una configuración de validación
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("[Controller]/{id}")]
         public IActionResult Details(Guid id)
         {
@@ -43,6 +54,11 @@ namespace ApiCargaWebInterface.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene el archivo de configuración asociado al shape
+        /// </summary>
+        /// <param name="id">Identificador del shape</param>
+        /// <returns></returns>
         [HttpGet("[Controller]/download/{id}")]
         public IActionResult DownloadShape(Guid id)
         {
@@ -60,6 +76,11 @@ namespace ApiCargaWebInterface.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene la página de edición con los datos actuales de la configuración
+        /// </summary>
+        /// <param name="id">Identificador de la configuración</param>
+        /// <returns></returns>
         public IActionResult Edit(Guid id)
         {
             ShapeConfigViewModel result = _serviceApi.GetShapeConfig(id);
@@ -82,6 +103,11 @@ namespace ApiCargaWebInterface.Controllers
             }
         }
 
+        /// <summary>
+        /// Edita una configuración de validación
+        /// </summary>
+        /// <param name="shapeConfigViewModel">datos nuevos a modificar</param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Edit(ShapeConfigEditModel shapeConfigViewModel)
         {
@@ -97,6 +123,11 @@ namespace ApiCargaWebInterface.Controllers
             }
         }
 
+        /// <summary>
+        /// Elimina una configuración de validación
+        /// </summary>
+        /// <param name="id">Identificador de la configuración de validación</param>
+        /// <returns></returns>
         public IActionResult Delete(Guid id)
         {
             bool result = _serviceApi.DeleteShapeConfig(id);
@@ -110,6 +141,11 @@ namespace ApiCargaWebInterface.Controllers
             }
         }
 
+        /// <summary>
+        /// Devuelve la página de creación de una configuración de validación
+        /// </summary>
+        /// <param name="repositoryId">Identificador del repositorio OAIPMH al que se va asociar la configuración</param>
+        /// <returns></returns>
         public IActionResult Create(Guid? repositoryId = null)
         {
             if (repositoryId.HasValue)
@@ -122,7 +158,11 @@ namespace ApiCargaWebInterface.Controllers
             }
             return View();
         }
-
+        /// <summary>
+        /// Crea una configuración de validación
+        /// </summary>
+        /// <param name="shapeConfigViewModel">Información de la nueva configuración de validación</param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Create(ShapeConfigCreateModel shapeConfigViewModel)/*Guid ShapeConfigID,string Name, Guid RepositoryID, IFormFile ShapeFile)*/ 
         { 

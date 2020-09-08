@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 
 namespace ApiCargaWebInterface.Middlewares
 {
+    /// <summary>
+    /// Clase que actua de Middleware para la gestión de las excepciones
+    /// </summary>
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
@@ -67,7 +70,10 @@ namespace ApiCargaWebInterface.Middlewares
             context.Response.StatusCode = (int)code;
             context.Request.Path = $"/error/{code.GetHashCode()}";
         }
-
+        /// <summary>
+        /// Creación del log para la escritura del error
+        /// </summary>
+        /// <param name="pTimestamp"></param>
         private void CreateLoggin(string pTimestamp)
         {
             string pathDirectory = GetLogPath();
@@ -77,7 +83,10 @@ namespace ApiCargaWebInterface.Middlewares
             }
             Log.Logger = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.File($"{pathDirectory}/log_{pTimestamp}.txt").CreateLogger();
         }
-
+        /// <summary>
+        /// Devuleve una cadena con el día/mes/año
+        /// </summary>
+        /// <returns>cadena con el día/mes/año</returns>
         private string CreateTimeStamp()
         {
             DateTime time = DateTime.Now;
@@ -94,7 +103,10 @@ namespace ApiCargaWebInterface.Middlewares
             string timeStamp = $"{time.Year.ToString()}{month}{day}";
             return timeStamp;
         }
-
+        /// <summary>
+        /// Obtiene el path configurado donde guardar el error
+        /// </summary>
+        /// <returns></returns>
         public string GetLogPath()
         {
             if (string.IsNullOrEmpty(_LogPath))

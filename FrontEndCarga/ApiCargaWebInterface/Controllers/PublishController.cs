@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiCargaWebInterface.Controllers
 {
+    /// <summary>
+    /// Controlador para la publicación manual y la validacion de los rdf
+    /// </summary>
     public class PublishController : Controller
     {
         ICallEtlService _callEtlPublishService;
@@ -23,6 +26,11 @@ namespace ApiCargaWebInterface.Controllers
             _callEtlPublishService = callDtlPublishService;
             _serviceApi = serviceApi;
         }
+        /// <summary>
+        /// Obtiene la información de un repositorio OAIPMH
+        /// </summary>
+        /// <param name="repository">Identificador del repositorio</param>
+        /// <returns></returns>
         [Route("[Controller]/{repository}")]
         public IActionResult Index(Guid repository)
         {
@@ -37,6 +45,13 @@ namespace ApiCargaWebInterface.Controllers
             return View(publishRepositoryModel);
         }
 
+        /// <summary>
+        /// Obtiene el rdf de un elemento asociado al repositorio
+        /// </summary>
+        /// <param name="repoIdentifier">Identificador del repositorio OAI-PMH </param>
+        /// <param name="identifier">Identificador de la entidad a recolectar (Los identificadores se obtienen con el metodo /etl/ListIdentifiers/{repositoryIdentifier}).</param>
+        /// <param name="type">metadata que se desea recuperar (rdf). Los formatos de metadatos admitidos por un repositorio y para un elemento en particular se pueden recuperar mediante la solicitud /etl/ListMetadataFormats/{repositoryIdentifier}.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("[Controller]/getrdf")]
         public IActionResult GetRDF(Guid repositoryId, string id, string type)
@@ -54,6 +69,14 @@ namespace ApiCargaWebInterface.Controllers
                 return NotFound();
             }
         }
+        /// <summary>
+        /// Valida un rdf tanto con un rdf de validación personalizado como por una lista de shapes configuradas en el repositorio
+        /// </summary>
+        /// <param name="repositoryId">Identificador del repositorio OAIPMH</param>
+        /// <param name="rdfToValidate">RDF a validar</param>
+        /// <param name="validationRdf">RDF de validación</param>
+        /// <param name="shapesList">Lista de shapes de validación</param>
+        /// <returns></returns>
         [HttpPost]
         [Route("[Controller]/validate")]
         public IActionResult ValidateRdf(Guid repositoryId, IFormFile rdfToValidate, IFormFile validationRDF, List<Guid> shapesList)
@@ -78,6 +101,12 @@ namespace ApiCargaWebInterface.Controllers
             }
         }
 
+        /// <summary>
+        /// Publica un rdf
+        /// </summary>
+        /// <param name="repositoryId">Identificador del repositorio</param>
+        /// <param name="rdfPublish">RDF a publicar</param>
+        /// <returns></returns>
         [HttpPost]
         [Route("[Controller]")]
         public IActionResult PublishRdf(Guid repositoryId, IFormFile rdfPublish)

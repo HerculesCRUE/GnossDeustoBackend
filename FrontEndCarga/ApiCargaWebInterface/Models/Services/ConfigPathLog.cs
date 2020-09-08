@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
+// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+// Servicio para Obtener los path de log configurados
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,12 +12,19 @@ using System.Threading.Tasks;
 
 namespace ApiCargaWebInterface.Models.Services
 {
+    /// <summary>
+    /// Servicio para Obtener los path de log configurados
+    /// </summary>
     public class ConfigPathLog
     {
         private IConfigurationRoot Configuration { get; set; }
         private string _LogPath;
         private string _LogPathCarga;
         private string _LogPathCron;
+        /// <summary>
+        /// Obtiene el path configurado para los logs de la propia aplicación
+        /// </summary>
+        /// <returns>path propio</returns>
         public string GetLogPath()
         {
             if (string.IsNullOrEmpty(_LogPath))
@@ -37,7 +48,10 @@ namespace ApiCargaWebInterface.Models.Services
             }
             return _LogPath;
         }
-
+        /// <summary>
+        /// Obtiene el path de log configurado para el api carga
+        /// </summary>
+        /// <returns>path de logs del apiCarga</returns>
         public string GetLogPathCarga()
         {
             if (string.IsNullOrEmpty(_LogPathCarga))
@@ -61,7 +75,10 @@ namespace ApiCargaWebInterface.Models.Services
             }
             return _LogPathCarga;
         }
-
+        /// <summary>
+        /// Obtiene el path de log configurado para el api cron
+        /// </summary>
+        /// <returns>path de logs del apiCron</returns>
         public string GetLogPathCron()
         {
             if (string.IsNullOrEmpty(_LogPathCron))

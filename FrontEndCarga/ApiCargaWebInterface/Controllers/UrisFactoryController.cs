@@ -16,6 +16,9 @@ using Newtonsoft.Json;
 
 namespace ApiCargaWebInterface.Controllers
 {
+    /// <summary>
+    /// Controlador encargado de gestionar las operaciones de la factoria de uris
+    /// </summary>
     //[Authorize]
     public class UrisFactoryController : Controller
     {
@@ -24,10 +27,21 @@ namespace ApiCargaWebInterface.Controllers
         {
             _callUrisFactoryService = callUrisFactoryService;
         }
+        /// <summary>
+        /// Devuelve la página principal
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
         }
+        /// <summary>
+        /// Obtiene una uri
+        /// </summary>
+        /// <param name="resourceClass">Resource class o rdfType</param>
+        /// <param name="identifier">Identificador</param>
+        /// <param name="uriGetEnum">Configurador para indicar si el parametro pasado en resourceClass es un resource class o rdf type</param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetUri(string Resource_class, string Identifier, UriGetEnum uriGetEnum)
         {
@@ -44,6 +58,10 @@ namespace ApiCargaWebInterface.Controllers
             }
             return View("Index", urisFactoryModel);
         }
+        /// <summary>
+        /// Obtiene el esquema de uris configurado
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("[Controller]/Schema")]
         public IActionResult DownloadSchema()
         {
@@ -62,6 +80,11 @@ namespace ApiCargaWebInterface.Controllers
 
         }
 
+        /// <summary>
+        /// Remplaza el esquema de uris configurado
+        /// </summary>
+        /// <param name="New_Schema_File">Nuevo esquema de uris</param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult ReplaceSchema(IFormFile New_Schema_File)
         {
@@ -82,6 +105,11 @@ namespace ApiCargaWebInterface.Controllers
             return View("Index", null);
         }
 
+        /// <summary>
+        /// Obtiene los detalles de una estructura de uris
+        /// </summary>
+        /// <param name="Uri_Structure">Nombre de la estructura de uris</param>
+        /// <returns></returns>
         [HttpGet("[Controller]/structure")]
         public IActionResult Details(string Uri_Structure)
         {
@@ -102,7 +130,10 @@ namespace ApiCargaWebInterface.Controllers
             }
            
         }
-
+        /// <summary>
+        /// Devuelve la página de creación de una estructura
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("[Controller]/create-structure")]
         public IActionResult CreateStructure()
         {
@@ -110,14 +141,22 @@ namespace ApiCargaWebInterface.Controllers
             structureViewModel.Structure = UriStructureViewModel.GetUriStrcuture();
             return View(structureViewModel);
         }
-
+        /// <summary>
+        /// Crea una estructura nueva
+        /// </summary>
+        /// <param name="structureViewModel">Información de la estructura de uris</param>
+        /// <returns></returns>
         [HttpPost("[Controller]/create-structure")]
         public IActionResult CreateStructure(WebUriStructureViewModel structureViewModel)
         {
             _callUrisFactoryService.AddStructure(structureViewModel.Structure);
             return View(structureViewModel);
         }
-
+        /// <summary>
+        /// Elimina una estructura de uris
+        /// </summary>
+        /// <param name="name">Nombre de la estructura a eliminar</param>
+        /// <returns></returns>
         public IActionResult Delete(string name)
         {
             try

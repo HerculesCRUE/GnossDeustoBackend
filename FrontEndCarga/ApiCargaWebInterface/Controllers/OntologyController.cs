@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiCargaWebInterface.Controllers
 {
+    /// <summary>
+    /// Controlador para reemplazar y obtener las ontologías
+    /// </summary>
     public class OntologyController : Controller
     {
         public IActionResult Index()
@@ -24,6 +27,12 @@ namespace ApiCargaWebInterface.Controllers
             _callEDtlPublishService = callEDtlPublishService;
         }
 
+        /// <summary>
+        /// Carga una ontología
+        /// </summary>
+        /// <param name="Ontology_uri">Nueva Ontología</param>
+        /// <param name="ontology_type">Tipo de ontología; siendo el 0 la ontología roh, el 1 la ontología rohes y el 2 la ontología rohum </param>
+        /// <returns></returns>
         [HttpPost]
         [Route("[Controller]/load-ontology")]
         public IActionResult LoadOntology(IFormFile Ontology_uri, int ontology_type)
@@ -45,6 +54,11 @@ namespace ApiCargaWebInterface.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene la ontología
+        /// </summary>
+        /// <param name="ontology_type">Tipo de ontología a obtener; siendo el 0 la ontología roh, el 1 la ontología rohes y el 2 la ontología rohum </param>
+        /// <returns></returns>
         [HttpGet]
         [Route("[Controller]/get-ontology")]
         public IActionResult GetOntology(int ontology_type)
