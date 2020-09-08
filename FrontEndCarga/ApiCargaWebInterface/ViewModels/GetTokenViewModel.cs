@@ -10,7 +10,7 @@ namespace ApiCargaWebInterface.ViewModels
     public class GetTokenViewModel
     {
         [Display(Name = "Tipo de token")]
-        public Dictionary<TokensEnum, string> TokenOptions { get; set; }
+        public Dictionary<int, string> TokenOptions { get; set; }
         public string Token { get; set; }
     }
 }

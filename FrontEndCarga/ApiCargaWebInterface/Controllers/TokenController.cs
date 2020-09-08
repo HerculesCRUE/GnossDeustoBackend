@@ -73,13 +73,13 @@ namespace ApiCargaWebInterface.Controllers
         /// Carga la lista de apis disponibles
         /// </summary>
         /// <returns></returns>
-        private Dictionary<TokensEnum, string> LoadTokenList()
+        private Dictionary<int, string> LoadTokenList()
         {
-            Dictionary<TokensEnum, string> tokensList = new Dictionary<TokensEnum, string>();
-            tokensList.Add(TokensEnum.TokenCarga, "token de api carga");
-            tokensList.Add(TokensEnum.TokenUrisFactory, "token de uris factory");
-            tokensList.Add(TokensEnum.TokenCron, "token de cron configure");
-            tokensList.Add(TokensEnum.TokenOAIPMH, "token de api OAIPMH");
+            Dictionary<int, string> tokensList = new Dictionary<int, string>();
+            tokensList.Add((int)TokensEnum.TokenCarga, "token de api carga");
+            tokensList.Add((int)TokensEnum.TokenUrisFactory, "token de uris factory");
+            tokensList.Add((int)TokensEnum.TokenCron, "token de cron configure");
+            tokensList.Add((int)TokensEnum.TokenOAIPMH, "token de api OAIPMH");
             return tokensList;
         }
     }

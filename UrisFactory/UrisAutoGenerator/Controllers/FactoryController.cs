@@ -21,7 +21,7 @@ namespace UrisFactory.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
+    //[Authorize]
     public class FactoryController : ControllerBase
     {
         private ConfigJsonHandler _configJsonHandler;
