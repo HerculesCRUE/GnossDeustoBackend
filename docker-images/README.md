@@ -64,7 +64,7 @@ Para levantar Virtuoso ejecutaremos este comando en la misma ruta donde tengamos
 	
 	docker-compose up -d
 	
-Despue¡és de ejecutar el comando ya tendríamos un servidor Virtuoso operativo en nuestro entorno. Podemos probar que efectivamente está funcionando correctamente accediendo a http://localhost:8890, nos debería paracer la consola de administración de Virtuoso.
+Despueués de ejecutar el comando ya tendríamos un servidor Virtuoso operativo en nuestro entorno. Podemos probar que efectivamente está funcionando correctamente accediendo a http://localhost:8890, nos debería paracer la consola de administración de Virtuoso.
 
 ## PostgreSQL
 
@@ -77,6 +77,36 @@ Con este comando la hacemos operativa:
 	docker run -d -p 5432:5432 --name herculessql herculessql
 	
 Así obtenemos una base de datos lista para que las APIs del backend puedan usarla.
+
+## RabbitMQ
+
+Para deplegar RabbitMQ podemos usar la imagen de Bitnami con docker-compose. Podemos ajustar el password con la variable RABBITMQ_PASSWORD. El usuario por defecto es "user".
+	
+	version: '2'
+	
+	services:
+         rabbitmq:
+           image: 'docker.io/bitnami/rabbitmq:3.8-debian-10'
+	   environment:
+      	     - RABBITMQ_PASSWORD=my_password
+           ports:
+             - '4369:4369'
+             - '5672:5672'
+             - '25672:25672'
+             - '15672:15672'
+           volumes:
+            - 'rabbitmq_data:/bitnami'
+        volumes:
+          rabbitmq_data:
+            driver: local
+	
+Para levantar RabbitMQ ejecutaremos este comando en la misma ruta donde tengamos el docker-compose.yml:
+	
+	docker-compose up -d
+	
+Con estos pasos ya tendríamos un sistema RabbitMQ. Podemos entrar a la consola de administracion de RabbitMQ a traves de http://locahost:15672. Una vez logueados deberíamos crear un virtual host en http://localhost:15672/#/vhosts y darle permisos al usuario "user".
+
+Para mas informacion: https://hub.docker.com/r/bitnami/rabbitmq/
 
 ## Preparación de Apache
 
