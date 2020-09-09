@@ -112,6 +112,12 @@ Con estos pasos ya tendríamos un sistema RabbitMQ. Podemos entrar a la consola 
 
 Para mas informacion: https://hub.docker.com/r/bitnami/rabbitmq/
 
+## Preparación de Trifid
+
+Para poner en marcha el servicio de linked data debemos decargar este paquete http://herc-as-front-desa.atica.um.es/docs/trifid.tar.gz y descomprimirlo.
+
+
+
 ## Preparación de Apache
 
 Necesitamos preparar Apache como proxy invesro y poder acceder a las APIs a través del dominio que vayamos a utilizar y luego este redirija al puerto específico de cada una de ellas.
