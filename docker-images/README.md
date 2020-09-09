@@ -114,7 +114,24 @@ Para mas informacion: https://hub.docker.com/r/bitnami/rabbitmq/
 
 ## Preparación de Trifid
 
-Para poner en marcha el servicio de linked data debemos decargar este paquete http://herc-as-front-desa.atica.um.es/docs/trifid.tar.gz y descomprimirlo.
+Para poner en marcha el servicio de linked data debemos decargar este paquete http://herc-as-front-desa.atica.um.es/docs/trifid.tar.gz y descomprimirlo. Una vez descomprimido tenemos que abrir el archivo config-custom.json e indicar el interfaz SPARQL de nuestro Virtuoso y el baseurl donde vaya a responder el servicio y el puerto: 
+
+	{
+ 		"baseConfig": "trifid:config-sparql.json", // inherit the default sparql config
+  		"sparqlEndpointUrl": "http://localhost:8890/sparql", // overrides SPARQL endpoint
+  		"datasetBaseUrl": "http://graph.um.es/", // enables "proxy" mode.
+  		"listener": {
+   		"port": 8081
+  		}
+	}
+
+Una vez ajustados los parametros tenemos que construir la imagen con el siguiente comando:
+	
+	docker build -t trifid .
+	
+Con la imagen ya contruida la ponemos en marcha con este comando:
+
+	docker run -d -p 8081:8081 --name trifid trifid
 
 
 
