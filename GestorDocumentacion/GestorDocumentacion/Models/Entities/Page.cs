@@ -13,10 +13,12 @@ namespace GestorDocumentacion.Models.Entities
     {
         [Key]
         public Guid PageID { get; set; }
+        [Required]
         public string Route { get; set; }
         [Required]
-        public string Name { get; set; }
-        [Required]
+        [MaxLength]
         public string Content { get; set; }
+        public DateTime LastModified { get; set; }
+        public DateTime LastRequested { get; set; }
     }
 }

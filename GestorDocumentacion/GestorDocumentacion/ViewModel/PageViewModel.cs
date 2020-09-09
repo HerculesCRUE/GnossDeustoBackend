@@ -9,6 +9,6 @@ namespace GestorDocumentacion.ViewModel
     {
         public Guid PageID { get; set; }
         public string Route { get; set; }
-        public string Name { get; set; }
+        public DateTime LastModified { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace GestorDocumentacion.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Page>()
-                .HasIndex(u => u.Name)
+                .HasIndex(u => u.Route)
                 .IsUnique();
 
             modelBuilder.Entity<Template>()

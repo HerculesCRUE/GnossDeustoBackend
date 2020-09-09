@@ -58,7 +58,7 @@ namespace GestorDocumentacion.Controllers
             {
                 PageViewModel pageModel = new PageViewModel()
                 {
-                    Name = page.Name,
+                    LastModified = page.LastModified,
                     PageID = page.PageID,
                     Route = page.Route
                 };
@@ -81,9 +81,11 @@ namespace GestorDocumentacion.Controllers
         {
             Guid guidPage = Guid.Empty;
             bool isNew = false;
+            DateTime lastModified = DateTime.MinValue;
             if (Guid.Empty.Equals(pageId))
             {
                 guidPage = Guid.NewGuid();
+                lastModified = DateTime.Now;
                 isNew = true;
             }
             else
@@ -93,14 +95,14 @@ namespace GestorDocumentacion.Controllers
 
             Page page = new Page()
             {
-                Name = name,
+                LastModified = lastModified,
                 PageID = guidPage,
                 Route = route,
                 Content = _fileOperationsService.ReadFile(html_page)
             };
             if(!_pagesOperationsService.LoadPage(page, isNew))
             {
-                return BadRequest($"The page with name {name} already exist");
+                return BadRequest($"The page with route {route} already exist");
             }
             return Ok(guidPage);
             
