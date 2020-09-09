@@ -133,7 +133,25 @@ Con la imagen ya contruida la ponemos en marcha con este comando:
 
 	docker run -d -p 8081:8081 --name trifid trifid
 
+Ahora solamente nos faltaría añadir esta configuración a Apache:
 
+	<VirtualHost *:80>
+	
+		ServerName graph.um.es
+	
+		ProxyPreserveHost On
+		ProxyPass / http://127.0.0.1:8081/
+		ProxyPassReverse / http://127.0.0.1:8081/
+		Timeout 5400
+		ProxyTimeout 5400
+	
+		<Proxy *>
+			Order deny,allow
+			Allow from all
+			Require all granted
+		</Proxy>
+	
+	</VirtualHost>
 
 ## Preparación de Apache
 
