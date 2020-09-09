@@ -78,12 +78,12 @@
                     </div>
                     <div class="grupo grupo-programacion">
                         <h2>Tareas de sincronización</h2>
-                        <a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>
+                        <a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea</a>
                         <partial name="_ListRecurringJobs" model="@Model.ListRecurringJobs" />
                     </div>
                     <div class="grupo grupo-programacion">
                         <h2>Tareas programadas</h2>
-                        <a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>
+                        @*<a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>*@
                         <partial name="_ListScheduledJobs" model="@Model.ListScheduledJobs" />
                     </div>
                     <div class="grupo grupo-programacion">

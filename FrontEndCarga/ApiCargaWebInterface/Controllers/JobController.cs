@@ -86,18 +86,22 @@ namespace ApiCargaWebInterface.Controllers
         [HttpPost]
         public IActionResult Create(CreateJobViewModel jobModel)
         {
-            var correct = CrontabSchedule.TryParse(jobModel.CronExpression);
-            if (correct == null)
-            {
-                ModelState.AddModelError("CronExpression", "expresión del cron inválida");
-            }
+            
             if (jobModel.IdRepository.Equals(Guid.Empty))
             {
                 ModelState.AddModelError("IdRepository", "id del repositorio no válido");
             }
-            if ((jobModel.Nombre_job != null && jobModel.CronExpression== null) || ((jobModel.CronExpression != null && jobModel.Nombre_job == null)))
+            if ((jobModel.Nombre_job != null && jobModel.CronExpression== null) || (jobModel.CronExpression != null && jobModel.Nombre_job == null))
             {
                 ModelState.AddModelError("Nombre_job", "faltan datos para crear un job recurrente");
+            }
+            else if (!string.IsNullOrEmpty(jobModel.Nombre_job) && !string.IsNullOrEmpty(jobModel.CronExpression))
+            {
+                var correct = CrontabSchedule.TryParse(jobModel.CronExpression);
+                if (correct == null)
+                {
+                    ModelState.AddModelError("CronExpression", "expresión del cron inválida");
+                }
             }
             if (!ModelState.IsValid)
             {
@@ -112,7 +116,7 @@ namespace ApiCargaWebInterface.Controllers
                     {
                         Id = jobModel.Nombre_job
                     };
-                    return View("Created", item);
+                    return RedirectToAction("Details", "RepositoryConfig", new { id = jobModel.IdRepository });
                 }
                 else
                 {
@@ -121,7 +125,7 @@ namespace ApiCargaWebInterface.Controllers
                     {
                         Id = id
                     };
-                    return View("Created", item);
+                    return RedirectToAction("Details", "RepositoryConfig", new { id = jobModel.IdRepository });
                 }
             }
             
