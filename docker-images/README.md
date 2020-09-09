@@ -100,7 +100,7 @@ Para deplegar RabbitMQ podemos usar la imagen de Bitnami con docker-compose. Pod
           rabbitmq_data:
             driver: local
 	
-Para levantar Virtuoso ejecutaremos este comando en la misma ruta donde tengamos el docker-compose.yml:
+Para levantar RabbitMQ ejecutaremos este comando en la misma ruta donde tengamos el docker-compose.yml:
 	
 	docker-compose up -d
 	
