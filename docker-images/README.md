@@ -128,7 +128,7 @@ Una vez que tengamos las im√°genes descargadas, tenemos que importarlas como im√
  
 Cuando las tengamos importadas las desplegaremos con docker-compose, creando un archivo docker-compose.yml. En este ejemplo podemos ver los ajustes de las variables dependiendo de nuestro entorno:
 
-	        version: '3'
+	version: '3'
 
         services:
           apicarga:
@@ -136,9 +136,9 @@ Cuando las tengamos importadas las desplegaremos con docker-compose, creando un 
             ports:
               - 5100:5100
             environment:
-              PostgreConnection: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
-              PostgreConnectionmigration: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
-              ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
+              PostgreConnection: "Username=docker;Password=docker;Host=localhost;Port=5432;Database=docker;Pooling=true"
+              PostgreConnectionmigration: "Username=docker;Password=docker;Host=localhost;Port=5432;Database=docker;Pooling=true"
+              ConfigUrl: "http://mihercules.com/carga/"
               Graph: "http://graph.um.es/graph/um_cvn"
               GraphUnidata: "http://data.um.es/graph/unidata"
               Endpoint: "http://155.54.239.204:8890/sparql"
@@ -146,31 +146,31 @@ Cuando las tengamos importadas las desplegaremos con docker-compose, creando un 
               GraphRoh: "http://graph.um.es/graph/research/roh"
               GraphRohes: "http://graph.um.es/graph/research/rohes"
               GraphRohum: "http://graph.um.es/graph/research/rohum"
-              Authority: "http://herc-as-front-desa.atica.um.es:5108"
+              Authority: "http://mihercules.com:5108"
               ScopeCarga: "apiCarga"
-              AuthorityGetToken: "http://herc-as-front-desa.atica.um.es:5108/connect/token"
+              AuthorityGetToken: "http://mihercules.com:5108/connect/token"
               GrantType: "client_credentials"
               ClientId: "carga"
               ClientSecret: "secret"
               ScopeOAIPMH: "apiOAIPMH"
               ClientIdOAIPMH: "OAIPMH"
               ClientSecretOAIPMH: "secretOAIPMH"
-              ConfigUrlUnidata: "http://herc-as-front-desa.atica.um.es/unidata"
+              ConfigUrlUnidata: "http://mihercules.com/unidata"
               ScopeUnidata: "apiUnidata"
               ClientIdUnidata: "unidata"
               ClientSecretUnidata: "secretUnidata"
             volumes:
-              - /home/esteban_herculesgnoss/dock1/logs/apicarga:/app/logs
+              - /path_to_logs/logs/apicarga:/app/logs
           
           apifrontcarga:
             image: apifrontcarga
             ports:
               - 5103:5103
             environment:
-              ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
-              ConfigUrlCron: "http://herc-as-front-desa.atica.um.es/cron-config/"
-              ConfigUrlUrisFactory: "http://herc-as-front-desa.atica.um.es/uris/"
-              Authority: "http://herc-as-front-desa.atica.um.es:5108/connect/token"
+              ConfigUrl: "http://mihercules.com/carga/"
+              ConfigUrlCron: "http://mihercules.com/cron-config/"
+              ConfigUrlUrisFactory: "http://mihercules.com/uris/"
+              Authority: "http://mihercules.com:5108/connect/token"
               GrantType: "client_credentials"
               Scope: "apiCarga"
               ScopeCron: "apiCron"
@@ -181,43 +181,43 @@ Cuando las tengamos importadas las desplegaremos con docker-compose, creando un 
               ClientIdOAIPMH: "OAIPMH"
               ClientSecretOAIPMH: "secretOAIPMH"
             volumes:
-               - /home/esteban_herculesgnoss/dock1/logs/apifrontcarga:/app/logs
+               - /path_to_logs/logs/apifrontcarga:/app/logs
               
           apicron:
             image: apicron
             ports:
               - 5107:5107
             environment:
-              HangfireConnection: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true" 
-              ConfigUrl: "http://herc-as-front-desa.atica.um.es/carga/"
-              Authority: "http://herc-as-front-desa.atica.um.es:5108"
-              AuthorityGetToken: "http://herc-as-front-desa.atica.um.es:5108/connect/token"
+              HangfireConnection: "Username=docker;Password=docker;Host=localhost;Port=5432;Database=docker;Pooling=true" 
+              ConfigUrl: "http://mihercules.com/carga/"
+              Authority: "http://mihercules.com:5108"
+              AuthorityGetToken: "http://mihercules.com:5108/connect/token"
               Scope: "apiCron"
               ScopeCarga: "apiCarga"
               GrantType: "client_credentials"
               ClientId: "carga"
               ClientSecret: "secret"
             volumes:
-              - /home/esteban_herculesgnoss/dock1/logs/apicron:/app/logs
+              - /path_to_logs/logs/apicron:/app/logs
           
           apiuris:
             image: apiuris
             ports:
               - 5000:5000
             environment:
-              Authority: "http://herc-as-front-desa.atica.um.es:5108"
+              Authority: "http://mihercules.com:5108"
               Scope: "apiUrisFactory"
             volumes:
-              - /home/esteban_herculesgnoss/dock1/logs/apiuris:/app/logs
+              - /path_to_logs/logs/apiuris:/app/logs
 
           apiidentity:
             image: apiidentity
             ports: 
               - 5108:5108
             environment:
-              PostgreConnection: "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
+              PostgreConnection: "Username=docker;Password=docker;Host=localhost;Port=5432;Database=docker;Pooling=true"
             volumes:
-              - /home/esteban_herculesgnoss/dock1/logs/apiidentity:/app/logs
+              - /path_to_logs/logs/apiidentity:/app/logs
               
           apiunidata:
             image: apiunidata
@@ -226,40 +226,38 @@ Cuando las tengamos importadas las desplegaremos con docker-compose, creando un 
             environment:
               GraphUnidata: "http://data.um.es/graph/unidata"
               EndpointUnidata: "http://155.54.239.204:8890/sparql"
-              Authority: "http://herc-as-front-desa.atica.um.es:5108"
-              AuthorityGetToken: "http://herc-as-front-desa.atica.um.es:5108/connect/token"
+              Authority: "http://mihercules.com:5108"
+              AuthorityGetToken: "http://mihercules.com:5108/connect/token"
             volumes:
-               - /home/esteban_herculesgnoss/dock1/logs/apiunidata:/app/logs
-           
-
+               - /path_to_logs/logs/apiunidata:/app/logs
+               
           apicvn:
-              image: apicvn
-              ports:
+            image: apicvn
+            ports:
               - 5104:5104
-          
+  
           apioaipmh:
-              image: apioaipmh
-              ports:
+            image: apioaipmh
+            ports:
               - 5102:80
-              environment:
+            environment:
               XML_CVN_Repository: "http://curriculumpruebas.um.es/curriculum/rest/v1/auth/"
-              CVN_ROH_converter: "http://herc-as-front-desa.atica.um.es/cvn/v1/convert"
-              ConfigUrl: "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH"
-              Authority: "http://herc-as-front-desa.atica.um.es:5108"
+              CVN_ROH_converter: "http://mihercules.com/cvn/v1/convert"
+              ConfigUrl: "http://mihercules.com/oai-pmh-cvn/OAI_PMH"
+              Authority: "http://mihercules.com:5108"
               Scope: "apiOAIPMH"
           
           apibridge:
-              image: apibridge
-              ports:
+            image: apibridge
+            ports:
               - 5200:5200
           
           briggeswagger:
-              image: bridgeswagger
-              ports:
+            image: bridgeswagger
+            ports:
               - 8082:8080
-           
 
-
+            
 Para lanzar las APIs usamos este comando como en el caso de Virtuoso:
 
 	docker-compose up -d
