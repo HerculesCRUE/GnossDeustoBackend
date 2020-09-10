@@ -241,12 +241,17 @@ namespace CronConfigure.Models.Services
             List<ScheduledJobViewModel> listScheduledViewModel = new List<ScheduledJobViewModel>();
             foreach (var scheduled in listScheduled)
             {
+                string jobString = "";
+                if (scheduled.Value.Job != null)
+                {
+                    jobString = scheduled.Value.Job.ToString();
+                }
                 ScheduledJobViewModel scheduledViewModel = new ScheduledJobViewModel()
                 {
                     Key = scheduled.Key,
                     EnqueueAt = scheduled.Value.EnqueueAt,
                     InScheduledState = scheduled.Value.InScheduledState,
-                    Job = scheduled.Value.Job.ToString(),
+                    Job = jobString,
                     ScheduledAt = scheduled.Value.ScheduledAt
                 };
                 listScheduledViewModel.Add(scheduledViewModel);
