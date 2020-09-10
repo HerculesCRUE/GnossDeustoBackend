@@ -44,7 +44,7 @@ cache = "foaf:person"
         inverse = "roh:hasContactInfo"
 
         [[entities.subentities.subentities]]
-        displayname = "vcard:Addresss"
+        displayname = "vcard:Address"
 
             [[entities.subentities.subentities.relationships]]
             inverse = "vcard:hasAddress"
