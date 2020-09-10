@@ -9,7 +9,7 @@ cache = "foaf:person"
     # DEBUG -- para marcar a la persona primaria del CVN.
     # Eliminar, sustituir o cambiar según proceda.
     [[entities.properties]]
-    displayname = "roh:debugPrimary"
+    displayname = "foaf:primaryTopic"
     datatype = "xsd:boolean"
 
         # Debug: este código no existe, pero lo sobreescribimos con "value"
