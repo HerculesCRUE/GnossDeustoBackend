@@ -1669,16 +1669,33 @@ classname = "AwardedDegree"
     inverse_name = "relates"
     link_to_cvn_person = true
 
-    [[entities.properties]]
-    ontology = "vivo"
-    name = "dateTime"
-    format = "{date}"
-    datatype = "xsd:datetime"
+    [[entities.subentities]]
+    displayname = "vivo:DateTimeValue"
 
-        [[entities.properties.sources]]
+        [[entities.subentities.relationships]]
+        inverse = "vivo:dateTimeValue"
+
+        [[entities.subentities.properties]]
+        ontology = "vivo"
+        name = "dateTime"
+        format = "{date}"
+        datatype = "xsd:datetime"
+
+        [[entities.subentities.properties.sources]]
         code = "020.010.010.130"
         name = "date"
         bean = "Value"
+
+    # [[entities.properties]]
+    # ontology = "vivo"
+    # name = "dateTime"
+    # format = "{date}"
+    # datatype = "xsd:datetime"
+
+    #     [[entities.properties.sources]]
+    #     code = "020.010.010.130"
+    #     name = "date"
+    #     bean = "Value"
 
     [[entities.subentities]]
     ontology = "vivo"
