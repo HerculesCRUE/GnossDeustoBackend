@@ -31,7 +31,8 @@ namespace XUnitTestAPI_CARGA
             ConfigSparql configSparql = new ConfigSparql();
             configSparql.Endpoint = "";
             RabbitMQMockService mockRabbit = new RabbitMQMockService();
-            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, mockRabbit);
+            //TODO implementar mock de DiscoverItem
+            etlController etlController = new etlController(null,repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, mockRabbit);
 
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
@@ -40,7 +41,7 @@ namespace XUnitTestAPI_CARGA
             stream.Position = 0;
             var file = new FormFile(stream, 0, stream.Length, null, "rdf.xml");
 
-            etlController.dataPublish(file);
+            etlController.dataPublish(file,"x","x");
             Assert.True(true);
         }
 
@@ -54,11 +55,12 @@ namespace XUnitTestAPI_CARGA
             CallTokenService callTokenService = new CallTokenService(configTokenService);
             CallUri callUri = new CallUri(callTokenService);
             configSparql.Endpoint = "";
-            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, null);
+            //TODO implementar mock de DiscoverItem
+            etlController etlController = new etlController(null,repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, null);
 
             try
             {
-                var response = etlController.dataPublish(null);
+                var response = etlController.dataPublish(null,"x","x");
                 if (response is BadRequestObjectResult)
                 {
                     Assert.True(true);
@@ -82,7 +84,8 @@ namespace XUnitTestAPI_CARGA
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
             ConfigSparql configSparql = new ConfigSparql();
             configSparql.Endpoint = "";
-            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null, null);
+            //TODO implementar mock de DiscoverItem
+            etlController etlController = new etlController(null,repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null, null);
 
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);

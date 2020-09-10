@@ -3,15 +3,17 @@ using System;
 using API_CARGA.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace API_CARGA.Migrations
 {
     [DbContext(typeof(EntityContext))]
-    partial class EntityContextModelSnapshot : ModelSnapshot
+    [Migration("20200910090945_Update_DiscoverItem_5")]
+    partial class Update_DiscoverItem_5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -204,7 +206,7 @@ namespace API_CARGA.Migrations
             modelBuilder.Entity("API_CARGA.Models.Entities.DiscoverItem+DiscoverDissambiguation+DiscoverDissambiguationCandiate", b =>
                 {
                     b.HasOne("API_CARGA.Models.Entities.DiscoverItem+DiscoverDissambiguation", null)
-                        .WithMany("DissambiguationCandiates")
+                        .WithMany("DissambiguationProblems")
                         .HasForeignKey("DiscoverDissambiguationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

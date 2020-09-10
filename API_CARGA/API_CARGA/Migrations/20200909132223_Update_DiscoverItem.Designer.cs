@@ -3,15 +3,17 @@ using System;
 using API_CARGA.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace API_CARGA.Migrations
 {
     [DbContext(typeof(EntityContext))]
-    partial class EntityContextModelSnapshot : ModelSnapshot
+    [Migration("20200909132223_Update_DiscoverItem")]
+    partial class Update_DiscoverItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,20 +30,8 @@ namespace API_CARGA.Migrations
                     b.Property<string>("DiscoverRdf")
                         .HasColumnType("text");
 
-                    b.Property<bool>("DissambiguationProcessed")
-                        .HasColumnType("boolean");
-
                     b.Property<string>("Error")
                         .HasColumnType("text");
-
-                    b.Property<string>("JobCreatedDate")
-                        .HasColumnType("text");
-
-                    b.Property<string>("JobID")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("Publish")
-                        .HasColumnType("boolean");
 
                     b.Property<string>("Rdf")
                         .IsRequired()
@@ -54,49 +44,6 @@ namespace API_CARGA.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("DiscoverItem");
-                });
-
-            modelBuilder.Entity("API_CARGA.Models.Entities.DiscoverItem+DiscoverDissambiguation", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("DiscoverItemID")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("IDOrigin")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("DiscoverItemID");
-
-                    b.ToTable("DiscoverDissambiguation");
-                });
-
-            modelBuilder.Entity("API_CARGA.Models.Entities.DiscoverItem+DiscoverDissambiguation+DiscoverDissambiguationCandiate", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("DiscoverDissambiguationID")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("IDCandidate")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<float>("Score")
-                        .HasColumnType("real");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("DiscoverDissambiguationID");
-
-                    b.ToTable("DiscoverDissambiguationCandiate");
                 });
 
             modelBuilder.Entity("API_CARGA.Models.Entities.ProcessingJobState", b =>
@@ -190,24 +137,6 @@ namespace API_CARGA.Migrations
                     b.HasIndex("RepositoryID");
 
                     b.ToTable("ShapeConfig");
-                });
-
-            modelBuilder.Entity("API_CARGA.Models.Entities.DiscoverItem+DiscoverDissambiguation", b =>
-                {
-                    b.HasOne("API_CARGA.Models.Entities.DiscoverItem", null)
-                        .WithMany("DissambiguationProblems")
-                        .HasForeignKey("DiscoverItemID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("API_CARGA.Models.Entities.DiscoverItem+DiscoverDissambiguation+DiscoverDissambiguationCandiate", b =>
-                {
-                    b.HasOne("API_CARGA.Models.Entities.DiscoverItem+DiscoverDissambiguation", null)
-                        .WithMany("DissambiguationCandiates")
-                        .HasForeignKey("DiscoverDissambiguationID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("API_CARGA.Models.Entities.ShapeConfig", b =>
