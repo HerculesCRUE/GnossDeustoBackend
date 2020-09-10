@@ -312,11 +312,11 @@ class Entity:
                 self.node = BNode()
             return self.node
         if self.should_cache():
-            if cvn_entity_cache.get_current_entity_cache().in_cache(self.get_cache_id()):
-                return cvn_entity_cache.get_current_entity_cache().get(self.get_cache_id())
+            if cvn_entity_cache.get_current_entity_cache().in_cache(self.get_cache_id().lower()):
+                return cvn_entity_cache.get_current_entity_cache().get(self.get_cache_id().lower())
             else:
                 uri = URIRef(self.get_identifier())
-                cvn_entity_cache.get_current_entity_cache().add_to_cache(self.get_cache_id(), uri)
+                cvn_entity_cache.get_current_entity_cache().add_to_cache(self.get_cache_id().lower(), uri)
                 return uri
         return URIRef(self.get_identifier())
 
