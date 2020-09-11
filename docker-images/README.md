@@ -169,7 +169,7 @@ Una vez que tengamos las im√°genes descargadas, tenemos que importarlas como im√
 
 	docker load < {nombre-imagen}.tar.gz
  
-Cuando las tengamos importadas las desplegaremos con docker-compose, creando un archivo docker-compose.yml. En este ejemplo podemos ver los ajustes de las variables dependiendo de nuestro entorno:
+Cuando las tengamos importadas las desplegaremos con docker-compose, creando un archivo docker-compose.yml. Podemos elegir la ruta que mas nos convenga (por ejemplo ~\apis) En este ejemplo podemos ver los ajustes de las variables dependiendo de nuestro entorno:
 
 	version: '3'
 
