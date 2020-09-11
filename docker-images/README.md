@@ -39,7 +39,7 @@ API que publica los RDF en el nodo central unidata: http://herc-as-front-desa.at
 
 ## Despliegue de Virtuoso con docker-compose
 
-Para desdeplegar Virtuoso con docker-compose necesitamos un docker-compose.yml con el siguiete contenido. Sería recomendable ajustar el DBA_PASSWORD. El resto de variables dependerá de las caractísticas de nuesta infraestructura.
+Para desdeplegar Virtuoso con docker-compose necesitamos un docker-compose.yml con el siguiete contenido. Podemos elegir la ruta que mas nos convenga (por ejemplo ~\virtuoso). Sería recomendable ajustar el DBA_PASSWORD. El resto de variables dependerá de las caractísticas de nuesta infraestructura.
 
 	version: "3"
 	services:
@@ -86,7 +86,7 @@ Así obtenemos una base de datos lista para que las APIs del backend puedan usar
 
 ## RabbitMQ
 
-Para deplegar RabbitMQ podemos usar la imagen de Bitnami con docker-compose. Podemos ajustar el password con la variable RABBITMQ_PASSWORD. El usuario por defecto es "user".
+Para deplegar RabbitMQ podemos usar la imagen de Bitnami con docker-compose. Podemos elegir la ruta que mas nos convenga (por ejemplo ~\rabbitmq). Podemos ajustar el password con la variable RABBITMQ_PASSWORD. El usuario por defecto es "user".
 	
 	version: '2'
 	
