@@ -59,9 +59,9 @@ namespace API_CARGA.Models.Services
                 discoverItemOriginal.Error = discoverItem.Error;
                 discoverItemOriginal.JobID = discoverItem.JobID;
                 discoverItemOriginal.JobCreatedDate = discoverItem.JobCreatedDate;
-
                 discoverItemOriginal.Publish = discoverItem.Publish;
                 discoverItemOriginal.DissambiguationProcessed = discoverItem.DissambiguationProcessed;
+                discoverItemOriginal.DiscoverReport = discoverItem.DiscoverReport;
                 _context.SaveChanges();
                 modified = true;
             }

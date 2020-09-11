@@ -103,8 +103,8 @@ namespace API_CARGA.Models.Entities
         /// <summary>
         /// Indica el estado del item:
         ///     Pending
-        ///     Processing
         ///     Processed
+        ///     ProcessedDissambiguationProblem
         ///     Error
         /// </summary>
         [Required]
@@ -145,6 +145,11 @@ namespace API_CARGA.Models.Entities
         /// Indica si están ya resueltos los problemas de desambiguación
         /// </summary>
         public bool DissambiguationProcessed { get; set; }
+
+        /// <summary>
+        /// Reporte de las tareas del descubrimiento
+        /// </summary>
+        public string DiscoverReport { get; set; }
 
         /// <summary>
         /// Problemas de desambiguación

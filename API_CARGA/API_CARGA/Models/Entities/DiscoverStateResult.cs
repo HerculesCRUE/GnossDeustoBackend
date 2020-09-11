@@ -96,6 +96,11 @@ namespace API_CARGA.Models.Entities
         public string Error { get; set; }
 
         /// <summary>
+        /// Reporte del proceso de descubrimiento
+        /// </summary>
+        public string DiscoverReport { get; set; }
+
+        /// <summary>
         /// Problemas de desambiguación
         /// </summary>
         public List<DiscoverDissambiguation> DissambiguationProblems { get; set; }
