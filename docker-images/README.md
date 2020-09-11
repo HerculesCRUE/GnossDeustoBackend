@@ -16,6 +16,8 @@ Para hacer funcionar el backend será necesario tener instalado en nuestro servi
 * Base de datos RDF (en este ejemplo, Virtuoso desplegado con Docker)
 
 * Base de datos SQL (en este ejemplo PostgreSQL desplegada con Docker)
+
+* Gestor de colas (en este ejemplo RabbitMQ desplegada con Docker)
  
 ## Descarga de imágenes necesarias
 
