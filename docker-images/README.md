@@ -16,6 +16,8 @@ Para hacer funcionar el backend será necesario tener instalado en nuestro servi
 * Base de datos RDF (en este ejemplo, Virtuoso desplegado con Docker)
 
 * Base de datos SQL (en este ejemplo PostgreSQL desplegada con Docker)
+
+* Gestor de colas (en este ejemplo RabbitMQ desplegada con Docker)
  
 ## Descarga de imágenes necesarias
 
@@ -37,7 +39,7 @@ API que publica los RDF en el nodo central unidata: http://herc-as-front-desa.at
 
 ## Despliegue de Virtuoso con docker-compose
 
-Para desdeplegar Virtuoso con docker-compose necesitamos un docker-compose.yml con el siguiete contenido. Sería recomendable ajustar el DBA_PASSWORD. El resto de variables dependerá de las caractísticas de nuesta infraestructura.
+Para desdeplegar Virtuoso con docker-compose necesitamos un docker-compose.yml con el siguiete contenido. Podemos elegir la ruta que mas nos convenga (por ejemplo ~\virtuoso). Sería recomendable ajustar el DBA_PASSWORD. El resto de variables dependerá de las caractísticas de nuesta infraestructura.
 
 	version: "3"
 	services:
@@ -84,7 +86,7 @@ Así obtenemos una base de datos lista para que las APIs del backend puedan usar
 
 ## RabbitMQ
 
-Para deplegar RabbitMQ podemos usar la imagen de Bitnami con docker-compose. Podemos ajustar el password con la variable RABBITMQ_PASSWORD. El usuario por defecto es "user".
+Para deplegar RabbitMQ podemos usar la imagen de Bitnami con docker-compose. Podemos elegir la ruta que mas nos convenga (por ejemplo ~\rabbitmq). Podemos ajustar el password con la variable RABBITMQ_PASSWORD. El usuario por defecto es "user".
 	
 	version: '2'
 	
@@ -167,7 +169,7 @@ Una vez que tengamos las imágenes descargadas, tenemos que importarlas como im�
 
 	docker load < {nombre-imagen}.tar.gz
  
-Cuando las tengamos importadas las desplegaremos con docker-compose, creando un archivo docker-compose.yml. En este ejemplo podemos ver los ajustes de las variables dependiendo de nuestro entorno:
+Cuando las tengamos importadas las desplegaremos con docker-compose, creando un archivo docker-compose.yml. Podemos elegir la ruta que mas nos convenga (por ejemplo ~\apis). En este ejemplo podemos ver los ajustes de las variables dependiendo de nuestro entorno:
 
 	version: '3'
 
