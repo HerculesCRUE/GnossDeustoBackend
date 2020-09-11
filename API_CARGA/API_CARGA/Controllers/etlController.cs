@@ -213,6 +213,8 @@ namespace API_CARGA.Controllers
                         Rdf = item.Rdf,
                         DiscoverRdf = item.DiscoverRdf,
                         Error = item.Error,
+                        DiscoverReport = item.DiscoverReport,
+
                         DissambiguationProblems = new List<DiscoverStateResult.DiscoverDissambiguation>()
                     };
 
