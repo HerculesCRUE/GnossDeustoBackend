@@ -194,10 +194,10 @@ namespace API_CARGA.Controllers
         /// </summary>
         /// <param name="identifier">Identificador de la tarea de descubrimiento</param>
         /// <returns></returns>
-        [HttpPost("data-discover-state")]
+        [HttpGet("data-discover-state/{identifier}")]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(DiscoverStateResult))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult dataDiscoverState(Guid identifier)
         {
