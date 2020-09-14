@@ -20,11 +20,12 @@ namespace XUnitTestAPI_CARGA
         public void TestGetRecord()
         {
             ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-            RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
+            RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();            
             ConfigTokenService configTokenService = new ConfigTokenService();
             CallTokenService callTokenService = new CallTokenService(configTokenService);
             CallUri callUri = new CallUri(callTokenService);
-            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, null, callUri, null, null);
+            //TODO implementar mock de DiscoverItem
+            etlController etlController = new etlController(null,repositoriesConfigMockService, shapesConfigMockService, null, callUri, null, null);
             FileContentResult resultesponse = (FileContentResult)etlController.GetRecord(new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"), "1", "rdf");
             string respuesta = Encoding.Default.GetString(resultesponse.FileContents);
             XDocument respuestaXML = XDocument.Parse(respuesta.Substring(respuesta.IndexOf("<OAI-PMH ")));
@@ -41,7 +42,8 @@ namespace XUnitTestAPI_CARGA
             CallTokenService callTokenService = new CallTokenService(configTokenService);
             CallUri callUri = new CallUri(callTokenService);
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, null, callUri, null, null);
+            //TODO implementar mock de DiscoverItem
+            etlController etlController = new etlController(null,repositoriesConfigMockService, shapesConfigMockService, null, callUri, null, null);
             FileContentResult resultesponse = (FileContentResult)etlController.Identify(new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"));
             string respuesta = Encoding.Default.GetString(resultesponse.FileContents);
             XDocument respuestaXML = XDocument.Parse(respuesta.Substring(respuesta.IndexOf("<OAI-PMH ")));
@@ -58,7 +60,8 @@ namespace XUnitTestAPI_CARGA
             CallTokenService callTokenService = new CallTokenService(configTokenService);
             CallUri callUri = new CallUri(callTokenService);
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, null, callUri , null, null);
+            //TODO implementar mock de DiscoverItem
+            etlController etlController = new etlController(null,repositoriesConfigMockService, shapesConfigMockService, null, callUri , null, null);
             FileContentResult resultesponse = (FileContentResult)etlController.ListIdentifiers(new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"),"rdf", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(1));
             string respuesta = Encoding.Default.GetString(resultesponse.FileContents);
             XDocument respuestaXML = XDocument.Parse(respuesta.Substring(respuesta.IndexOf("<OAI-PMH ")));
@@ -75,7 +78,8 @@ namespace XUnitTestAPI_CARGA
             ConfigTokenService configTokenService = new ConfigTokenService();
             CallTokenService callTokenService = new CallTokenService(configTokenService);
             CallUri callUri = new CallUri(callTokenService);
-            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, null, callUri, null, null);
+            //TODO implementar mock de DiscoverItem
+            etlController etlController = new etlController(null,repositoriesConfigMockService, shapesConfigMockService, null, callUri, null, null);
             FileContentResult resultesponse = (FileContentResult)etlController.ListMetadataFormats(new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"));
             string respuesta = Encoding.Default.GetString(resultesponse.FileContents);
             XDocument respuestaXML = XDocument.Parse(respuesta.Substring(respuesta.IndexOf("<OAI-PMH ")));
@@ -92,7 +96,8 @@ namespace XUnitTestAPI_CARGA
             ConfigTokenService configTokenService = new ConfigTokenService();
             CallTokenService callTokenService = new CallTokenService(configTokenService);
             CallUri callUri = new CallUri(callTokenService);
-            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, null, callUri, null, null);
+            //TODO implementar mock de DiscoverItem
+            etlController etlController = new etlController(null,repositoriesConfigMockService, shapesConfigMockService, null, callUri, null, null);
             FileContentResult resultesponse = (FileContentResult)etlController.ListRecords(new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"), "rdf", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(1));
             string respuesta = Encoding.Default.GetString(resultesponse.FileContents);
             XDocument respuestaXML = XDocument.Parse(respuesta.Substring(respuesta.IndexOf("<OAI-PMH ")));
@@ -109,7 +114,8 @@ namespace XUnitTestAPI_CARGA
             ConfigTokenService configTokenService = new ConfigTokenService();
             CallTokenService callTokenService = new CallTokenService(configTokenService);
             CallUri callUri = new CallUri(callTokenService);
-            etlController etlController = new etlController(repositoriesConfigMockService, shapesConfigMockService, null, callUri, null, null);
+            //TODO implementar mock de DiscoverItem
+            etlController etlController = new etlController(null,repositoriesConfigMockService, shapesConfigMockService, null, callUri, null, null);
             FileContentResult resultesponse = (FileContentResult)etlController.ListSets(new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"));
             string respuesta = Encoding.Default.GetString(resultesponse.FileContents);
             XDocument respuestaXML = XDocument.Parse(respuesta.Substring(respuesta.IndexOf("<OAI-PMH ")));

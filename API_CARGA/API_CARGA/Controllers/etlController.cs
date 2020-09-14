@@ -1,4 +1,4 @@
-﻿﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Contiene los procesos ETL (Extract, Transform and Load) necesarios para la carga de datos.
@@ -27,14 +27,16 @@ namespace API_CARGA.Controllers
     public class etlController : Controller
     {
         private IRepositoriesConfigService _repositoriesConfigService;
+        private DiscoverItemBDService _discoverItemService;
         private IShapesConfigService _shapeConfigService;
         readonly ConfigSparql _configSparql;
         readonly CallUri _callUri;
         readonly ConfigUrlService _configUrlService;
         readonly IRabbitMQService _amqpService;
 
-        public etlController(IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallUri callUri, ConfigUrlService configUrlService, IRabbitMQService amqpService)
+        public etlController(DiscoverItemBDService iIDiscoverItemService, IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallUri callUri, ConfigUrlService configUrlService, IRabbitMQService amqpService)
         {
+            _discoverItemService = iIDiscoverItemService;
             _repositoriesConfigService = iRepositoriesConfigService;
             _shapeConfigService = iShapeConfigService;
             _configSparql = configSparql;
@@ -48,39 +50,20 @@ namespace API_CARGA.Controllers
         /// Aquí se encuentra un RDF de Ejemplo: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_CARGA/API_CARGA/Samples/rdfSample.xml
         /// </summary>
         /// <param name="rdfFile">Fichero RDF</param>
+        /// <param name="jobCreatedDate">Fecha de creación de la tarea</param>
+        /// <param name="jobId">Identificador de la tarea</param>
         /// <returns></returns>
         [HttpPost("data-publish")]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult dataPublish(IFormFile rdfFile)
+        public IActionResult dataPublish(IFormFile rdfFile, string jobCreatedDate, string jobId)
         {
             try
             {
-                string jobId = HttpContext.Request.Query["job_id"];
-                string jobCreatedDate = HttpContext.Request.Query["job_created_date"];
                 XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
-                List<string> triples = SparqlUtility.GetTriplesFromRDF(rdf);
-                //SparqlUtility.LoadTriples(triples, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), _configSparql.GetGraph()); 
-                object rabbitLoadObject = triples;
-                if (!string.IsNullOrEmpty(jobId) && !string.IsNullOrEmpty(jobCreatedDate))
-                {
-                    rabbitLoadObject = new
-                    {
-                        JobID = jobId,
-                        Triples = triples,
-                        JobCreatedDate = jobCreatedDate
-                    };
-                }
-                else if (!string.IsNullOrEmpty(jobId))
-                {
-                    rabbitLoadObject = new
-                    {
-                        JobID = jobId,
-                        Triples = triples
-                    };
-                }
-                _amqpService.PublishMessage(rabbitLoadObject);
+                DiscoverItem discoverItem = new DiscoverItem() { ID = Guid.NewGuid(), JobID = jobId, Rdf = rdf.InnerXml, JobCreatedDate = jobCreatedDate, Publish = true };
+                _amqpService.PublishMessage(discoverItem);
                 return Ok();
             }
             catch (Exception ex)
@@ -182,7 +165,7 @@ namespace API_CARGA.Controllers
 
 
         /// <summary>
-        /// **(Pendiente de implementar)Reconcilia entidades y descubre enlaces o equivalencias. Permite efectuar el descubrimiento en fuentes RDF arbitrarias.
+        /// Aplica el descubrimiento sobre un RDF
         /// </summary>
         /// <param name="rdfFile">Fichero RDF</param>
         /// <returns></returns>
@@ -192,7 +175,74 @@ namespace API_CARGA.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult dataDiscover(IFormFile rdfFile)
         {
-            throw new Exception("TODO");
+            try
+            {
+                XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
+                DiscoverItem discoverItem = new DiscoverItem() { Rdf = rdf.InnerXml, Publish = false, Status = "Pending" };
+                Guid addedID = _discoverItemService.AddDiscoverItem(discoverItem);
+                _amqpService.PublishMessage(discoverItem);
+                return Ok(addedID);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el estado de una tarea de descubrimiento descubrimiento
+        /// </summary>
+        /// <param name="identifier">Identificador de la tarea de descubrimiento</param>
+        /// <returns></returns>
+        [HttpGet("data-discover-state/{identifier}")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(DiscoverStateResult))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult dataDiscoverState(Guid identifier)
+        {
+            try
+            {
+                DiscoverItem item = _discoverItemService.GetDiscoverItemById(identifier);
+                if (item != null)
+                {
+                    DiscoverStateResult discoverStateResult = new DiscoverStateResult()
+                    {
+                        ID = item.ID,
+                        Status = (DiscoverStateResult.DiscoverItemStatus)Enum.Parse(typeof(DiscoverStateResult.DiscoverItemStatus), item.Status),
+                        Rdf = item.Rdf,
+                        DiscoverRdf = item.DiscoverRdf,
+                        Error = item.Error,
+                        DiscoverReport = item.DiscoverReport,
+
+                        DissambiguationProblems = new List<DiscoverStateResult.DiscoverDissambiguation>()
+                    };
+
+                    foreach(DiscoverItem.DiscoverDissambiguation problem in item.DissambiguationProblems)
+                    {
+                        DiscoverStateResult.DiscoverDissambiguation discoverDissambiguation = new DiscoverStateResult.DiscoverDissambiguation()
+                        {
+                            IDOrigin = problem.IDOrigin,
+                            DissambiguationCandiates = new List<DiscoverStateResult.DiscoverDissambiguation.DiscoverDissambiguationCandiate>()
+                        };
+                        foreach (DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate candidate in problem.DissambiguationCandiates)
+                        {
+                            discoverDissambiguation.DissambiguationCandiates.Add(new DiscoverStateResult.DiscoverDissambiguation.DiscoverDissambiguationCandiate() 
+                            { 
+                                IDCandidate=candidate.IDCandidate,
+                                Score=candidate.Score
+                            });
+                        }
+                        discoverStateResult.DissambiguationProblems.Add(discoverDissambiguation);
+                    }
+                    return Ok(discoverStateResult);
+                }
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.ToString());
+            }
         }
 
 
