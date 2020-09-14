@@ -28,7 +28,6 @@ namespace XUnitTestGestorDocumentacion
             int countOld = mock.GetPages().Count;
             Page pageNew = new Page()
             {
-                Name = "PagerNew",
                 Content = "<p>hola</p>",
                 Route = "pages/newPage.html",
                 PageID = Guid.NewGuid()
@@ -44,7 +43,6 @@ namespace XUnitTestGestorDocumentacion
             int countOld = mock.GetPages().Count;
             Page pageNew = new Page()
             {
-                Name = "Page1",
                 Content = "<p>hola</p>",
                 Route = "pages/newPage.html",
                 PageID = Guid.NewGuid()
@@ -83,10 +81,10 @@ namespace XUnitTestGestorDocumentacion
             Page page = new Page()
             {
                 PageID = mock.GetPages().FirstOrDefault().PageID,
-                Name = "Modify Page"
+                Route = "/modify/route"
             };
             bool added = mock.LoadPage(page, false);
-            Assert.True(mock.GetPage(page.Name)!=null);
+            Assert.True(mock.GetPage(page.Route)!=null);
         }
     }
 }

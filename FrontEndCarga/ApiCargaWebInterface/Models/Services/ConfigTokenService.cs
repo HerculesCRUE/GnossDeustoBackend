@@ -26,6 +26,7 @@ namespace ApiCargaWebInterface.Models.Services
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }
         public string ScopeOAIPMH { get; set; }
+        public string ScopeDocumentacion { get; set; }
         public string ClientIdOAIPMH { get; set; }
         public string ClientSecretOAIPMH { get; set; }
         public ConfigTokenService()
@@ -82,6 +83,30 @@ namespace ApiCargaWebInterface.Models.Services
             }
             return ClientSecretOAIPMH;
         }
+        /// <summary>
+        /// Obtiene el Scope del api de documentacion configurado
+        /// </summary>
+        /// <returns>Scope del OAIPMH</returns>
+        internal object GetScopeDocumentacion()
+        {
+            if (string.IsNullOrEmpty(ScopeDocumentacion))
+            {
+                string ScopeDocumentacion = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ScopeDocumentacion"))
+                {
+                    ScopeDocumentacion = environmentVariables["ScopeDocumentacion"] as string;
+                }
+                else
+                {
+                    ScopeDocumentacion = Configuration["ScopeDocumentacion"];
+                }
+
+                ScopeDocumentacion = ScopeDocumentacion;
+            }
+            return ScopeDocumentacion;
+        }
+
         /// <summary>
         /// Obtiene el Scope del OAIPMH configurado
         /// </summary>

@@ -65,7 +65,7 @@ namespace XUnitTestGestorDocumentacion
             FileOperationMockService mockFile = new FileOperationMockService();
             PageController controllerMock = new PageController(mock, mockFile);
             int countOld = mock.GetPages().Count;
-            var result = ((OkObjectResult)controllerMock.GetPage(mock.GetPages().FirstOrDefault().PageID)).Value;
+            var result = ((OkObjectResult)controllerMock.GetPage(mock.GetPages().FirstOrDefault().Route)).Value;
             Assert.True(result != null);
         }
 

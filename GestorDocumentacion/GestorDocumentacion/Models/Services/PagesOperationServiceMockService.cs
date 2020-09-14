@@ -19,16 +19,18 @@ namespace GestorDocumentacion.Models.Services
             Page page1 = new Page()
             {
                 PageID = Guid.NewGuid(),
-                Name = "Page1",
                 Route = "/pages/page1.html",
-                Content = "<html><head></head><body><p>hola mundo</p></body></html>"
+                Content = "<html><head></head><body><p>hola mundo</p></body></html>",
+                LastModified = DateTime.Now,
+                LastRequested = null
             };
             Page page2 = new Page()
             {
                 PageID = Guid.NewGuid(),
-                Name = "Page2",
                 Route = "/pages/page2.html",
-                Content = "<html><head></head><body><p>hola mundo</p></body></html>"
+                Content = "<html><head></head><body><p>hola mundo</p></body></html>",
+                LastModified = DateTime.Now,
+                LastRequested = null
             };
             _pageList.Add(page1);
             _pageList.Add(page2);
@@ -50,11 +52,11 @@ namespace GestorDocumentacion.Models.Services
         /// <summary>
         /// Obtiene una página por su nombre
         /// </summary>
-        /// <param name="name">Nombre de la página a obtener</param>
+        /// <param name="route">Ruta de la página a obtener</param>
         /// <returns>Un objeto página</returns>
-        public Page GetPage(string name)
+        public Page GetPage(string route)
         {
-            Page page = _pageList.FirstOrDefault(page => page.Name.Equals(name));
+            Page page = _pageList.FirstOrDefault(page => page.Route.Equals(route));
             return page;
         }
         /// <summary>
@@ -86,7 +88,7 @@ namespace GestorDocumentacion.Models.Services
 
             if (isNew)
             {
-                if (page != null && !string.IsNullOrEmpty(page.Content) && !string.IsNullOrEmpty(page.Name) && GetPage(page.Name) == null)
+                if (page != null && !string.IsNullOrEmpty(page.Content) && !string.IsNullOrEmpty(page.Route) && GetPage(page.Route) == null)
                 {
                     _pageList.Add(page);
                     return true;
@@ -99,20 +101,16 @@ namespace GestorDocumentacion.Models.Services
                 {
                     pageModify.Content = page.Content;
                 }
-                if (!string.IsNullOrEmpty(page.Name) && page.Name != pageModify.Name)
+                if (!string.IsNullOrEmpty(page.Route) && page.Route != pageModify.Route)
                 {
-                    if (GetPage(page.Name) == null)
+                    if (GetPage(page.Route) == null)
                     {
-                        pageModify.Name = page.Name;
+                        pageModify.Route = page.Route;
                     }
                     else
                     {
                         return false;
                     }
-                }
-                if (!string.IsNullOrEmpty(page.Route) && page.Route != pageModify.Route)
-                {
-                    pageModify.Route = page.Route;
                 }
             }
             return false;

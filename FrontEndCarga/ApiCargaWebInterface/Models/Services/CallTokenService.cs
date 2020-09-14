@@ -51,10 +51,19 @@ namespace ApiCargaWebInterface.Models.Services
             return CallTokenIdentity(stringData);
         }
         /// <summary>
+        /// Obtiene un token de seguridad de acceso para el Api de uris
+        /// </summary>
+        /// <returns>Token bearer</returns>
+        public TokenBearer CallTokenApiDocumentacion()
+        {
+            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeDocumentacion()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+            return CallTokenIdentity(stringData);
+        }
+        /// <summary>
         /// Obtiene un token de seguridad de acceso para el Api OAIPMH
         /// </summary>
         /// <returns>Token bearer</returns>
-        internal TokenBearer CallTokenOAIPMH()
+        public TokenBearer CallTokenOAIPMH()
         {
             string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeOAIPMH()}&client_id={_configToken.GetClientIdOAIPMH()}&client_secret={_configToken.GetClientSecretOAIPMH()}";
             return CallTokenIdentity(stringData);

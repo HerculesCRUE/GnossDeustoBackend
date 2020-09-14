@@ -39,11 +39,18 @@ namespace GestorDocumentacion.Models.Services
         /// <summary>
         /// Obtiene una página por su nombre
         /// </summary>
-        /// <param name="name">Nombre de la página a obtener</param>
+        /// <param name="route">Ruta de la página a obtener</param>
         /// <returns>Un objeto página</returns>
-        public Page GetPage(string name)
+        public Page GetPage(string route)
         {
-            return _context.Page.FirstOrDefault(page => page.Name.Equals(name));
+            Page page = _context.Page.FirstOrDefault(page => page.Route.Equals(route));
+            if (page != null)
+            {
+                page.LastRequested = DateTime.Now;
+                _context.SaveChanges();
+            }
+            
+            return page;
         }
         /// <summary>
         /// Obtiene una página por su identificador
@@ -52,6 +59,7 @@ namespace GestorDocumentacion.Models.Services
         /// <returns>Un objeto página</returns>
         public Page GetPage(Guid pageID)
         {
+
             return _context.Page.FirstOrDefault(page => page.PageID.Equals(pageID));
         }
         /// <summary>
@@ -72,8 +80,9 @@ namespace GestorDocumentacion.Models.Services
         {
             if (isNew)
             {
-                if (page != null && !string.IsNullOrEmpty(page.Content) && !string.IsNullOrEmpty(page.Name) && GetPage(page.Name) == null)
+                if (page != null && !string.IsNullOrEmpty(page.Content) && !string.IsNullOrEmpty(page.Route) && GetPage(page.Route) == null)
                 {
+                    page.LastModified = DateTime.Now;
                     _context.Page.Add(page);
                     _context.SaveChanges();
                     return true;
@@ -85,21 +94,19 @@ namespace GestorDocumentacion.Models.Services
                 if(!string.IsNullOrEmpty(page.Content) && page.Content != pageModify.Content)
                 {
                     pageModify.Content = page.Content;
+                    pageModify.LastModified = DateTime.Now;
                 }
-                if (!string.IsNullOrEmpty(page.Name) && page.Name != pageModify.Name)
+                if (!string.IsNullOrEmpty(page.Route) && page.Route != pageModify.Route)
                 {
-                    if (GetPage(page.Name) == null)
+                    if (GetPage(page.Route) == null)
                     {
-                        pageModify.Name = page.Name;
+                        pageModify.Route = page.Route;
+                        pageModify.LastModified = DateTime.Now;
                     }
                     else
                     {
                         return false;
                     }
-                }
-                if (!string.IsNullOrEmpty(page.Route) && page.Route != pageModify.Route)
-                {
-                    pageModify.Route = page.Route;
                 }
                 _context.SaveChanges();
             }

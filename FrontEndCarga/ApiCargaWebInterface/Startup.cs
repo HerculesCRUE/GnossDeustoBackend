@@ -1,15 +1,19 @@
 using ApiCargaWebInterface.Middlewares;
 using ApiCargaWebInterface.Models.Services;
+using ApiCargaWebInterface.Models.Services.VirtualPathProvider;
 using AspNetCore.Security.CAS;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections;
+using System.Reflection;
 
 namespace ApiCargaWebInterface
 {
@@ -57,6 +61,18 @@ namespace ApiCargaWebInterface
                     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.ServiceHost = serviceHost;
                 });
+           // services.AddMvcRazorRuntimeCompilation();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.Configure<MvcRazorRuntimeCompilationOptions>(opts =>
+            {
+                CallApiService serviceApi = new CallApiService();
+                CallTokenService tokenService = new CallTokenService(new ConfigTokenService());
+                ConfigUrlService serviceUrl = new ConfigUrlService();
+                CallApiVirtualPath apiVirtualPath = new CallApiVirtualPath(tokenService, serviceUrl, serviceApi);
+                opts.FileProviders.Add(
+                    new ApiFileProvider(apiVirtualPath));
+            });
             services.AddControllersWithViews(); 
             services.AddSingleton(typeof(ConfigPathLog));
             services.AddSingleton(typeof(ConfigUrlService));
@@ -70,8 +86,10 @@ namespace ApiCargaWebInterface
             services.AddScoped(typeof(CheckSystemService));
             services.AddScoped(typeof(CallCronService));
             services.AddScoped(typeof(ConfigTokenService));
-            services.AddScoped(typeof(CallTokenService)); 
-            services.AddScoped(typeof(CallRepositoryJobService)); 
+            services.AddScoped(typeof(CallTokenService));
+            services.AddScoped(typeof(CallApiVirtualPath));
+            services.AddScoped(typeof(CallRepositoryJobService));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,6 +124,10 @@ namespace ApiCargaWebInterface
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages(
+                    
+                    );
+                //endpoints.MapControllers();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=RepositoryConfig}/{action=Index}/{id?}");

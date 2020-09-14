@@ -17,6 +17,7 @@ namespace ApiCargaWebInterface.Models.Services
         public IConfigurationRoot Configuration { get; set; }
         public string Url { get; set; }
         public string UrlUris { get; set; }
+        public string UrlDocumentacion { get; set; }
         /// <summary>
         /// Obtiene la url del api de carga que ha sido configurada
         /// </summary>
@@ -73,6 +74,36 @@ namespace ApiCargaWebInterface.Models.Services
                 UrlUris = connectionString;
             }
             return UrlUris;
+        }
+
+        /// <summary>
+        /// Obtiene la url del api de documentación que ha sido configurada
+        /// </summary>
+        /// <returns>uri del api uris factory</returns>
+        public string GetUrlDocumentacion()
+        {
+            if (string.IsNullOrEmpty(UrlDocumentacion))
+            {
+
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                string connectionString = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ConfigUrlDocumentacion"))
+                {
+                    connectionString = environmentVariables["ConfigUrlDocumentacion"] as string;
+                }
+                else
+                {
+                    connectionString = Configuration["ConfigUrlDocumentacion"];
+                }
+
+                UrlDocumentacion = connectionString;
+            }
+            return UrlDocumentacion;
         }
     }
 }

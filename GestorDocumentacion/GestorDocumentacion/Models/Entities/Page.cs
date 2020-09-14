@@ -19,6 +19,6 @@ namespace GestorDocumentacion.Models.Entities
         [MaxLength]
         public string Content { get; set; }
         public DateTime LastModified { get; set; }
-        public DateTime LastRequested { get; set; }
+        public DateTime? LastRequested { get; set; }
     }
 }

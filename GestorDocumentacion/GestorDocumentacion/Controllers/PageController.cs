@@ -32,16 +32,16 @@ namespace GestorDocumentacion.Controllers
         ///<summary>
         ///Devuelve el HTML de una página web, incluyendo sus metadatos.
         ///</summary>
-        ///<param name="id">identificador del fichero html</param>
-        [HttpGet("{id}")]
-        public IActionResult GetPage(Guid id)
+        ///<param name="route">Ruta configurada para el archivo</param>
+        [HttpGet]
+        public IActionResult GetPage(string route)
         {
-            var page = _pagesOperationsService.GetPage(id);
+            var page = _pagesOperationsService.GetPage(route);
             if(page != null)
             {
-                return Ok(page.Content);
+                return Ok(page);
             }
-            return Ok("Not found");
+            return Ok(null);
         }
 
         /// <summary>
@@ -81,11 +81,9 @@ namespace GestorDocumentacion.Controllers
         {
             Guid guidPage = Guid.Empty;
             bool isNew = false;
-            DateTime lastModified = DateTime.MinValue;
             if (Guid.Empty.Equals(pageId))
             {
                 guidPage = Guid.NewGuid();
-                lastModified = DateTime.Now;
                 isNew = true;
             }
             else
@@ -95,7 +93,7 @@ namespace GestorDocumentacion.Controllers
 
             Page page = new Page()
             {
-                LastModified = lastModified,
+                LastModified = DateTime.Now,
                 PageID = guidPage,
                 Route = route,
                 Content = _fileOperationsService.ReadFile(html_page)
