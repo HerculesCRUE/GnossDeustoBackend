@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+   
 namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
 {
     /// <summary>
@@ -15,6 +15,7 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
     {
         private CallApiVirtualPath _apiVirtualPath;
         private string _viewPath;
+        private static Dictionary<string, DateTime?> _pageLastRequested = new Dictionary<string, DateTime?>();
 
         public ApiChangeToken(CallApiVirtualPath apiVirtualPath, string viewPath)
         {
@@ -33,13 +34,13 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
                     PageInfo page = _apiVirtualPath.GetPage(_viewPath);
                     if (page != null)
                     {
-                        if (!page.LastRequested.HasValue)
+                        if (!LastRequested(_viewPath).HasValue)
                         {
                             return false;
                         }
                         else
                         {
-                            return page.LastModified > page.LastRequested.Value;
+                            return page.LastModified > LastRequested(_viewPath).Value;
                         }
                     }
                     else
@@ -58,6 +59,21 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
         public IDisposable RegisterChangeCallback(Action<object> callback, object state)
         {
             return EmptyDisposable.Instance;
+        }
+
+        private DateTime? LastRequested(string path)
+        {
+            DateTime? lastRequested = null;
+            if (_pageLastRequested.ContainsKey(path))
+            {
+                lastRequested = _pageLastRequested[path];
+                _pageLastRequested[path] = DateTime.Now;
+            }
+            else
+            {
+                _pageLastRequested.Add(path, DateTime.Now);
+            }
+            return lastRequested;
         }
     }
     internal class EmptyDisposable : IDisposable

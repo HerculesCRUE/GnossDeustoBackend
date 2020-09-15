@@ -131,6 +131,7 @@ namespace ApiCargaWebInterface
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=RepositoryConfig}/{action=Index}/{id?}");
+
             });
         }
     }

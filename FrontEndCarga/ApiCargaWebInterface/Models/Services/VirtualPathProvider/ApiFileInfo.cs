@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.FileProviders;
-
+ 
 namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
 {
     /// <summary>
@@ -75,14 +75,13 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
             try
             {
                 var page = _apiVirtualPath.GetPage(viewPath);
+                
                 if (page != null)
                 {
                     _exists = true;
                     _viewContent = Encoding.UTF8.GetBytes(page.Content);
                     _lastModified = page.LastModified;
                 }
-                    
-                
             }
             catch (Exception ex)
             {

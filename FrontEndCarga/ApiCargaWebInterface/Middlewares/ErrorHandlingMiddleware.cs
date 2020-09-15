@@ -68,7 +68,15 @@ namespace ApiCargaWebInterface.Middlewares
             }
 
             context.Response.StatusCode = (int)code;
-            context.Request.Path = $"/error/{code.GetHashCode()}";
+            if ((int)code == 500)
+            {
+                context.Request.Path = $"/error/exception";
+            }
+            else
+            {
+                context.Request.Path = $"/error/{code.GetHashCode()}";
+            }
+            
         }
         /// <summary>
         /// Creación del log para la escritura del error

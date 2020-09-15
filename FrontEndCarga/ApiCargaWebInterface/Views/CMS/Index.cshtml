@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ApiCargaWebInterface.ViewModels.PageViewModel>
+
+@{
+    ViewData["Title"] = "Pages";
+    ViewData["BodyClass"] = "listado";
+}
+
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <div class="acciones-listado">
+                <div class="wrap">
+
+                </div>
+            </div>
+            <div class="resource-list compacView">
+                <div class="wrap">
+                    <h1>Pages</h1>
+                    @foreach (var item in Model)
+                    {
+                        <article class="resource resource-ficharepositorio">
+                            <div class="wrap">
+                                <h2>
+                                    <a href="@Url.Action("Details", new {  id=item.Route  })">@Html.DisplayFor(modelItem => item.Route)</a>
+                                </h2>
+                                
+                            </div>
+                        </article>
+                    }
+                </div>
+            </div>
+            <a href="@Url.Action("Create")" class="btn-mas-recursos">
+                <i class="material-icons add">add</i>
+            </a>
+        </div>
+    </div>
+</div>

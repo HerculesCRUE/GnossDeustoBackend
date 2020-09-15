@@ -32,5 +32,12 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
             PageInfo resultObject = JsonConvert.DeserializeObject<PageInfo>(result);
             return resultObject;
         }
+
+        public List<PageInfo> GetPages()
+        {
+            string result = _serviceApi.CallGetApi(_serviceUrl.GetUrlDocumentacion(), $"page/list", _token);
+            List<PageInfo> resultObject = JsonConvert.DeserializeObject<List<PageInfo>>(result);
+            return resultObject;
+        }
     }
 }
