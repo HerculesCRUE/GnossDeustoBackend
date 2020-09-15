@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GestorDocumentacion.Models.Services
@@ -78,11 +79,21 @@ namespace GestorDocumentacion.Models.Services
         /// <returns>Si se ha realizado con exito</returns>
         public bool LoadPage(Page page, bool isNew)
         {
+            StringBuilder layout = new StringBuilder();
+            layout.AppendLine("@{");
+            layout.AppendLine("Layout = \"_Layout\";");
+            layout.AppendLine("}");
             if (isNew)
             {
                 if (page != null && !string.IsNullOrEmpty(page.Content) && !string.IsNullOrEmpty(page.Route) && GetPage(page.Route) == null)
                 {
+                    if (!page.Content.Contains("\"_Layout\""))
+                    {
+                        page.Content = $"{layout.ToString()}{page.Content}";
+                    }
                     page.LastModified = DateTime.Now;
+
+
                     _context.Page.Add(page);
                     _context.SaveChanges();
                     return true;
@@ -93,6 +104,10 @@ namespace GestorDocumentacion.Models.Services
                 var pageModify = GetPage(page.PageID);
                 if(!string.IsNullOrEmpty(page.Content) && page.Content != pageModify.Content)
                 {
+                    if (!page.Content.Contains("\"_Layout\""))
+                    {
+                        page.Content = $"{layout.ToString()}{page.Content}";
+                    }
                     pageModify.Content = page.Content;
                     pageModify.LastModified = DateTime.Now;
                 }
