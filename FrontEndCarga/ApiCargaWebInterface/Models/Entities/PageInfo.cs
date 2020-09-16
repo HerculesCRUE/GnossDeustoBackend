@@ -7,6 +7,7 @@ namespace ApiCargaWebInterface.Models.Entities
 {
     public class PageInfo
     {
+        public Guid PageId { get; set; }
         public string Route { get; set; }
         public string Content { get; set; }
         public DateTime LastModified { get; set; }

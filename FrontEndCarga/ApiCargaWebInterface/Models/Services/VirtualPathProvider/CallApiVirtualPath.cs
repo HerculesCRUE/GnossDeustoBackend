@@ -3,6 +3,7 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Servicio para obtener las variables de configuración de urls
 using ApiCargaWebInterface.Models.Entities;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,21 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
             string result = _serviceApi.CallGetApi(_serviceUrl.GetUrlDocumentacion(), $"page/list", _token);
             List<PageInfo> resultObject = JsonConvert.DeserializeObject<List<PageInfo>>(result);
             return resultObject;
+        }
+
+        public void CreatePage(Guid pageId,string route, IFormFile pageHtml)
+        {
+            string method = $"page/load?route={route}";
+            if (!Guid.Empty.Equals(pageId))
+            {
+                method += $"&pageId={pageId}";
+            }
+            _serviceApi.CallPostApi(_serviceUrl.GetUrlDocumentacion(), method, pageHtml, _token, true, "html_page");
+        }
+
+        public void DeletePage(Guid pageId)
+        {
+            _serviceApi.CallDeleteApi(_serviceUrl.GetUrlDocumentacion(), $"page/delete?pageId={pageId}",_token);
         }
     }
 }

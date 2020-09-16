@@ -1,0 +1,64 @@
+﻿@model ApiCargaWebInterface.ViewModels.PageViewModel
+
+@{
+    bool editar = Model != null && !Model.PageId.Equals(Guid.Empty);
+    string action = "Create";
+    if (!editar)
+    {
+        ViewData["Title"] = "Crear Página";
+    }
+    else
+    {
+        ViewData["Title"] = Model.Route + " - Editar Página";
+        action = "Edit";
+    }
+    ViewData["BodyClass"] = "formulario";
+}
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div class="fieldset fieldset01">
+                    <fieldset class="mediumLabels">
+                        <h1>Crear shape</h1>
+                        <div class="fieldsetContent">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <p>
+                                <label asp-for="Route" class="control-label"></label>
+                                <input asp-for="Route" class="form-control" />
+                                <span asp-validation-for="Route" class="text-danger"></span>
+                            </p>
+                            <p hidden>
+                                <label asp-for="PageId" class="control-label"></label>
+                                <input asp-for="PageId" class="form-control" />
+                                <span asp-validation-for="PageId" class="text-danger"></span>
+                            </p>
+                            <p>
+                                <label asp-for="FileHtml" class="control-label"></label>
+                                <input asp-for="FileHtml" class="form-control" />
+                                <span asp-validation-for="FileHtml" class="text-danger"></span>
+                            </p>
+                            @if (editar)
+                            {
+                        <a href="@Url.Action("DownloadHtml", new {  route=Model.Route  })" class="btn-mas-recursos"><i class="material-icons">attachment</i>Descargue el html actual</a>
+                            }
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="fieldset actionButtons fieldset03">
+                    <fieldset>
+                        <p>
+                            <input class="submit principal" type="submit" value="Guardar">
+                        </p>
+                    </fieldset>
+                </div>
+            </form>
+            
+        </div>
+
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

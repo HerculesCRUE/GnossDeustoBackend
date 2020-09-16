@@ -16,11 +16,11 @@ namespace GestorDocumentacion.Models.Services
     public interface IPagesOperationsServices
     {
         /// <summary>
-        /// Obtiene una página por su nombre
+        /// Obtiene una página por su ruta
         /// </summary>
-        /// <param name="name">Nombre de la página a obtener</param>
+        /// <param name="route">Ruta de la página a obtener</param>
         /// <returns>Un objeto página</returns>
-        public Page GetPage(string name);
+        public Page GetPage(string route);
         /// <summary>
         /// Obtiene una página por su identificador
         /// </summary>

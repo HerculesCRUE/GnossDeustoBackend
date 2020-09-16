@@ -1,0 +1,42 @@
+﻿@model ApiCargaWebInterface.ViewModels.PageViewModel
+
+@{
+    ViewData["Title"] = Model.Route;
+    ViewData["BodyClass"] = "fichaRecurso";
+}
+
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <div class="header-resource">
+                <div class="h1-container">
+                    <h1>@Model.Route</h1>
+                    <div class="botones">
+                        <a href="@Url.Action("Create", new {  page_id=Model.PageId, route=Model.Route  })" class="btn btn-editar">Editar</a>
+                        <a href="@Url.Action("Delete", new {  page_id=Model.PageId  })" class="btn btn-eliminar">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="contenido">
+                <div class="grupo grupo-descripcion">
+                    <div class="identifier">
+                        <p class="titulo">Identifier</p>
+                        <p>@Model.PageId</p>
+                    </div>
+                    <div class="outh-token">
+                        <p class="titulo">Route</p>
+                        <p><a href="@Model.Route">@Model.Route</a></p>
+                    </div>
+                    <div class="outh-token">
+                        <p class="titulo">Html de la vista</p>
+                        <a href="@Url.Action("DownloadHtml", new {  route=Model.Route  })" class="btn-mas-recursos"><i class="material-icons">attachment</i>Descargar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

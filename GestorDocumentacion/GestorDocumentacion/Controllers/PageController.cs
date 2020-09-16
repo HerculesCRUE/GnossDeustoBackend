@@ -70,14 +70,13 @@ namespace GestorDocumentacion.Controllers
         /// <summary>
         /// Carga o modifica una página web e incluye información acerca de la página, como la URL, metadatos title o description, etc.
         /// </summary>
-        /// <param name="name">Nombre nuevo de la página</param>
         /// <param name="route">Ruta nueva de la página</param>
         /// <param name="pageId">Identificador de la página a modificar, en el caso de que se quiera añadir una nueva hay que dejar este campo vacio</param>
         /// <param name="html_page">Contenido html de la página</param>
         /// <returns></returns>
         [HttpPost]
         [Route("load")]
-        public IActionResult LoadPage(string name, string route, Guid pageId, IFormFile html_page)
+        public IActionResult LoadPage(string route, Guid pageId, IFormFile html_page)
         {
             Guid guidPage = Guid.Empty;
             bool isNew = false;
