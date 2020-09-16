@@ -65,7 +65,7 @@ namespace ApiCargaWebInterface.Models.Services
         /// <returns>client secretreturns>
         internal object GetClientSecretOAIPMH()
         {
-            if (string.IsNullOrEmpty(ScopeOAIPMH))
+            if (string.IsNullOrEmpty(ClientSecretOAIPMH))
             {
                 string clientSecretOAIPMH = "";
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
