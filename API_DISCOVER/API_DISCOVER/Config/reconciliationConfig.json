@@ -1,0 +1,332 @@
+[
+  {
+    "rdfType": "http://purl.org/roh/mirror/foaf#Person",
+    "identifiers": [
+      "http://purl.org/roh/mirror/vivo#identifier",
+      "http://purl.org/roh/mirror/vivo#eRACommonsId",
+      "http://purl.org/roh/mirror/vivo#researcherID",
+      "http://purl.org/roh#ORCID",
+      "http://purl.org/roh/mirror/vivo#scopusId",
+      "http://purl.org/roh#taxID"
+    ],
+    "properties": [
+      {
+        "property": "http://purl.org/roh/mirror/foaf#name",
+        "mandatory": true,
+        "inverse": false,
+        "type": 2,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.89,
+        "scoreNegative": null
+      },
+      {
+        "property": "http://purl.org/roh#birthdate",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.05
+      },
+      {
+        "property": "http://purl.org/roh#participates",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": null
+      },
+      {
+        "property": "http://purl.org/roh/mirror/foaf#homepage",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.025
+      },
+      {
+        "property": "http://purl.org/roh#correspondingAuthorOf",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": null
+      },
+      {
+        "property": "http://purl.org/roh/mirror/bibo#authorList@@@?",
+        "mandatory": false,
+        "inverse": true,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": null
+      },
+      {
+        "property": "http://purl.org/roh/mirror/vivo#relatedBy@@@http://purl.org/roh/mirror/vivo#relates",
+        "mandatory": false,
+        "inverse": true,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": null
+      },
+      {
+        "property": "http://purl.org/roh/mirror/vivo#correspondingAuthorOf",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": null
+      }
+    ]
+  },
+  {
+    "rdfType": "http://purl.org/roh/mirror/foaf#Organization",
+    "identifiers": [
+      "http://purl.org/roh/mirror/vivo#identifier"
+    ],
+    "properties": [
+      {
+        "property": "http://purl.org/roh#title",
+        "mandatory": true,
+        "inverse": false,
+        "type": 3,
+        "maxNumWordsTitle": 0,
+        "scorePositive": 0.9,
+        "scoreNegative": null
+      },
+      {
+        "property": "http://purl.org/roh#awards",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": null
+      },
+      {
+        "property": "http://purl.org/roh/mirror/foaf#homepage",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.025
+      },
+      {
+        "property": "http://purl.org/roh#awardedBy",
+        "mandatory": false,
+        "inverse": true,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": null
+      }
+    ]
+  },
+  {
+    "rdfType": "http://purl.org/roh/mirror/vivo#Project",
+    "identifiers": [
+      "http://purl.org/roh/mirror/vivo#identifier"
+    ],
+    "properties": [
+      {
+        "property": "http://purl.org/roh#title",
+        "mandatory": true,
+        "inverse": false,
+        "type": 3,
+        "maxNumWordsTitle": 10,
+        "scorePositive": 0.9,
+        "scoreNegative": null
+      },
+      {
+        "property": "http://purl.org/roh/mirror/vivo#dateTimeInterval@@@http://purl.org/roh/mirror/vivo#start@@@http://purl.org/roh/mirror/vivo#dateTime",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.9,
+        "scoreNegative": 0.05
+      },
+      {
+        "property": "http://purl.org/roh#isSupportedBy@@@http://purl.org/roh/mirror/vivo#identifier",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.9,
+        "scoreNegative": null
+      }
+    ]
+  },
+  {
+    "rdfType": "http://purl.org/roh/mirror/bibo#Document",
+    "identifiers": [
+      "http://purl.org/roh/mirror/bibo#doi"
+    ],
+    "properties": [
+      {
+        "property": "http://purl.org/roh#title",
+        "mandatory": true,
+        "inverse": false,
+        "type": 3,
+        "maxNumWordsTitle": 10,
+        "scorePositive": 0.9,
+        "scoreNegative": null
+      },
+      {
+        "property": "http://purl.org/roh#correspondingAuthor",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.05
+      },
+      {
+        "property": "http://purl.org/roh/mirror/bibo#authorList@@@?",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.5
+      },
+      {
+        "property": "http://purl.org/roh/mirror/bibo#editorList@@@?",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.5
+      },
+      {
+        "property": "http://purl.org/roh/mirror/vivo#freetextKeyword",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": null
+      },
+      {
+        "property": "http://purl.org/roh/mirror/vivo#hasPublicationVenue",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.05
+      },
+      {
+        "property": "http://purl.org/roh/mirror/bibo#presentedAt",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.05
+      },
+      {
+        "property": "http://purl.org/roh/mirror/vivo#dateTime",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": null
+      },
+      {
+        "property": "http://purl.org/roh/mirror/vivo#startPage",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.05
+      },
+      {
+        "property": "http://purl.org/roh/mirror/bibo#presents",
+        "mandatory": false,
+        "inverse": true,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.05
+      }
+    ]
+  },
+  {
+    "rdfType": "http://purl.org/roh#Activity",
+    "identifiers": [
+      "http://purl.org/roh/mirror/vivo#identifier"
+    ],
+    "properties": [
+      {
+        "property": "http://purl.org/roh#title",
+        "mandatory": true,
+        "inverse": false,
+        "type": 3,
+        "maxNumWordsTitle": 10,
+        "scorePositive": 0.9,
+        "scoreNegative": null
+      },
+      {
+        "property": "http://purl.org/roh/mirror/vivo#dateTimeInterval@@@http://purl.org/roh/mirror/vivo#start@@@http://purl.org/roh/mirror/vivo#dateTime",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.05
+      },
+      {
+        "property": "http://purl.org/roh/mirror/vcard#locality",
+        "mandatory": false,
+        "inverse": false,
+        "type": 3,
+        "maxNumWordsTitle": 0,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.05
+      },
+      {
+        "property": "http://purl.org/roh#participatedBy",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.05
+      },
+      {
+        "property": "http://purl.org/roh/mirror/bibo#presents",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.05
+      }
+    ]
+  },
+  {
+    "rdfType": "http://purl.org/roh/mirror/vivo#AcademicDegree",
+    "identifiers": [],
+    "properties": [
+      {
+        "property": "http://purl.org/roh#title",
+        "mandatory": true,
+        "inverse": false,
+        "type": 3,
+        "maxNumWordsTitle": 0,
+        "scorePositive": 0.99,
+        "scoreNegative": null
+      }
+    ]
+  }
+]
