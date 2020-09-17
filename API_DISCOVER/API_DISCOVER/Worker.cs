@@ -81,27 +81,14 @@ namespace API_DISCOVER
 
                 //Se ha producido un error al aplicar el descubrimiento
                 DiscoverItemBDService pDiscoverItemBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>();
-
-                DiscoverItem discoverItemBBDD = null;
-                if (discoverItem.ID != Guid.Empty)
-                {
-                    discoverItemBBDD = pDiscoverItemBDService.GetDiscoverItemById(discoverItem.ID);
-                }
-                if (discoverItemBBDD != null)
-                {
-                    //Si existe el item en BBDD se actualiza
-                    discoverItemBBDD.Status = DiscoverItem.DiscoverItemStatus.Error.ToString();
-                    discoverItemBBDD.Error = $"{ex.Message}\n{ex.StackTrace}\n";
-                    pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBBDD);
-                }
-                else
-                {
-                    //Si no existe se crea
-                    discoverItemBBDD = discoverItem;
-                    discoverItemBBDD.Status = DiscoverItem.DiscoverItemStatus.Error.ToString();
-                    discoverItemBBDD.Error = $"{ex.Message}\n{ex.StackTrace}\n";
-                    pDiscoverItemBDService.AddDiscoverItem(discoverItemBBDD);
-                }
+                DiscoverItem discoverItemBBDD = pDiscoverItemBDService.GetDiscoverItemById(discoverItem.ID);
+                discoverItemBBDD.Status = DiscoverItem.DiscoverItemStatus.Error.ToString();
+                discoverItemBBDD.Error = $"{ex.Message}\n{ex.StackTrace}\n";
+                discoverItemBBDD.Rdf = discoverItem.Rdf;
+                discoverItemBBDD.DiscoverRdf = "";
+                discoverItemBBDD.DiscoverReport = "";
+                discoverItemBBDD.DissambiguationProblems = null;
+                pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBBDD);
             }
             return true;
 

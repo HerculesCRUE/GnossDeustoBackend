@@ -41,7 +41,7 @@ namespace XUnitTestAPI_CARGA
             stream.Position = 0;
             var file = new FormFile(stream, 0, stream.Length, null, "rdf.xml");
 
-            etlController.dataPublish(file,"x","x");
+            etlController.dataPublish(file,"x",false);
             Assert.True(true);
         }
 
@@ -60,7 +60,7 @@ namespace XUnitTestAPI_CARGA
 
             try
             {
-                var response = etlController.dataPublish(null,"x","x");
+                var response = etlController.dataPublish(null,"x",false);
                 if (response is BadRequestObjectResult)
                 {
                     Assert.True(true);

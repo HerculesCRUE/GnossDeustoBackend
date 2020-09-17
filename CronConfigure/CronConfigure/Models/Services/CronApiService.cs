@@ -188,7 +188,7 @@ namespace CronConfigure.Models.Services
                     {
                         Id = succeeded.Key,
                         Job = succeeded.Value.Job.ToString(),
-                        State = "Succeed",
+                        State = "Succeeded",
                         ExecutedAt = succeeded.Value.SucceededAt
                     };
                     listJobViewModel.Add(job);
