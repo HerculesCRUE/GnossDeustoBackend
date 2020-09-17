@@ -9,6 +9,7 @@ using Hangfire.Server;
 using Newtonsoft.Json;
 using Serilog;
 using System;
+using System.Linq;
 
 namespace CronConfigure.Models.Services
 {
@@ -45,6 +46,19 @@ namespace CronConfigure.Models.Services
             string idRepository = idRepositoryGuid.ToString();
             string idJob = context.BackgroundJob.Id;
             DateTime fechaJob = context.BackgroundJob.CreatedAt;
+            var discover = _context.ProcessDiscoverStateJob.FirstOrDefault(item => item.JobId.Equals(idJob));
+            if (discover == null)
+            {
+                ProcessDiscoverStateJob discoveryState = new ProcessDiscoverStateJob()
+                {
+                    Id = Guid.NewGuid(),
+                    DateJob = fechaJob,
+                    JobId = idJob,
+                    State = "Pending"
+                };
+                _context.ProcessDiscoverStateJob.Add(discoveryState);
+                _context.SaveChanges();
+            }
             try
             {
                 object objeto = new
