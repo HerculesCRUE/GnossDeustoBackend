@@ -126,7 +126,7 @@ namespace API_DISCOVER.Models.Utility
                 }
 
                 //Integración con apis externos
-                orcidIntegration=ORCIDIntegration(ref dataGraph, ref dataInferenceGraph, reasoner);
+                orcidIntegration = ORCIDIntegration(ref dataGraph, ref dataInferenceGraph, reasoner);
             }
             DateTime discoverEndTime = DateTime.Now;
             DiscoverResult resultado = new DiscoverResult(dataGraph, dataInferenceGraph, ontologyGraph, discoveredEntitiesWithSubject, discoveredEntitiesWithIds, discoveredEntitiesWithBBDD, discoveredEntitiesProbability, (discoverEndTime - discoverInitTime).TotalSeconds, orcidIntegration);
@@ -158,7 +158,7 @@ namespace API_DISCOVER.Models.Utility
             {
                 if (pDiscoverResult.discoveredEntitiesProbability.Count > 0)
                 {
-                    //Hay dudas en la desambiguación, por lo que lo insertamos en la BBDD
+                    //Hay dudas en la desambiguación, por lo que lo actualizamos en la BBDD con su estado correspondiente
                     pDiscoverItem.Status = DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString();
                     pDiscoverItem.DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
                     pDiscoverItem.DiscoverRdf = pDiscoverResult.GetDataGraphRDF();
@@ -171,11 +171,12 @@ namespace API_DISCOVER.Models.Utility
                         }
                         pDiscoverItem.DissambiguationProblems.Add(discoverDissambiguation);
                     }
+                    pDiscoverItem.Error = "";
+                    pDiscoverItemBDService.ModifyDiscoverItem(pDiscoverItem);
                 }
                 else
                 {
                     //No hay problemas en la reconciliación por lo que procedemos
-
                     #region 1º Eliminamos de la BBD las entidades principales que aparecen en el RDF
                     List<string> mainEntities = new List<string>();
                     string query = @"select distinct * where{?s <http://purl.org/roh/mirror/foaf#primaryTopic> ""true""^^<http://www.w3.org/2001/XMLSchema#boolean>}";
@@ -300,70 +301,75 @@ namespace API_DISCOVER.Models.Utility
 
                     //4º Limpiamos los blanknodes huerfanos, o que no tengan triples
                     DeleteOrphanNodes();
+
+                    //Lo marcamos como procesado en la BBDD y eliminamos sus metadatos
+                    pDiscoverItem.Status = DiscoverItem.DiscoverItemStatus.Processed.ToString();
+                    pDiscoverItem.DissambiguationProblems = null;
+                    pDiscoverItem.DiscoverRdf = null;
+                    pDiscoverItem.Rdf = null;
+                    pDiscoverItem.Error = "";
+                    pDiscoverItemBDService.ModifyDiscoverItem(pDiscoverItem);
                 }
             }
-            else if (pDiscoverItem.Status == DiscoverItem.DiscoverItemStatus.Pending.ToString())
+            else
             {
                 //Actualizamos en BBDD
                 DiscoverItem discoverItemBD = pDiscoverItemBDService.GetDiscoverItemById(pDiscoverItem.ID);
-                if (discoverItemBD != null)
+                discoverItemBD.DiscoverRdf = pDiscoverResult.GetDataGraphRDF();
+                discoverItemBD.Status = DiscoverItem.DiscoverItemStatus.Processed.ToString();
+                discoverItemBD.DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
+                if (pDiscoverResult.discoveredEntitiesProbability.Count > 0)
                 {
-                    discoverItemBD.DiscoverRdf = pDiscoverResult.GetDataGraphRDF();
-                    discoverItemBD.Status = DiscoverItem.DiscoverItemStatus.Processed.ToString();
-                    discoverItemBD.DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
-                    if (pDiscoverResult.discoveredEntitiesProbability.Count > 0)
+                    //Hay dudas en la desambiguación, por lo que lo almacenamos en la BBDD                    
+                    discoverItemBD.Status = DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString();
+                    foreach (string entityID in pDiscoverResult.discoveredEntitiesProbability.Keys)
                     {
-                        //Hay dudas en la desambiguación, por lo que lo almacenamos en la BBDD                    
-                        discoverItemBD.Status = DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString();
-                        foreach (string entityID in pDiscoverResult.discoveredEntitiesProbability.Keys)
+                        DiscoverItem.DiscoverDissambiguation discoverDissambiguation = new DiscoverItem.DiscoverDissambiguation() { IDOrigin = entityID, DissambiguationCandiates = new List<DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate>() };
+                        foreach (string candidateID in pDiscoverResult.discoveredEntitiesProbability[entityID].Keys)
                         {
-                            DiscoverItem.DiscoverDissambiguation discoverDissambiguation = new DiscoverItem.DiscoverDissambiguation() { IDOrigin = entityID, DissambiguationCandiates = new List<DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate>() };
-                            foreach (string candidateID in pDiscoverResult.discoveredEntitiesProbability[entityID].Keys)
-                            {
-                                discoverDissambiguation.DissambiguationCandiates.Add(new DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate() { IDCandidate = candidateID, Score = pDiscoverResult.discoveredEntitiesProbability[entityID][candidateID] });
-                            }
-                            discoverItemBD.DissambiguationProblems.Add(discoverDissambiguation);
+                            discoverDissambiguation.DissambiguationCandiates.Add(new DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate() { IDCandidate = candidateID, Score = pDiscoverResult.discoveredEntitiesProbability[entityID][candidateID] });
                         }
+                        discoverItemBD.DissambiguationProblems.Add(discoverDissambiguation);
                     }
-                    //Reporte de descubrimiento
-                    discoverItemBD.DiscoverReport = "Time processed (seconds): " + pDiscoverResult.secondsProcessed + "\n";
-                    if (pDiscoverResult.discoveredEntitiesWithSubject != null && pDiscoverResult.discoveredEntitiesWithSubject.Count > 0)
-                    {
-                        discoverItemBD.DiscoverReport += "Entities discover with the same uri: " + pDiscoverResult.discoveredEntitiesWithSubject.Count + "\n";
-                        foreach (string uri in pDiscoverResult.discoveredEntitiesWithSubject)
-                        {
-                            discoverItemBD.DiscoverReport += "\t" + uri + "\n";
-                        }
-                    }
-                    if (pDiscoverResult.discoveredEntitiesWithId != null && pDiscoverResult.discoveredEntitiesWithId.Count > 0)
-                    {
-                        discoverItemBD.DiscoverReport += "Entities discover with some common identifier: " + pDiscoverResult.discoveredEntitiesWithId.Count + "\n";
-                        foreach (string uri in pDiscoverResult.discoveredEntitiesWithId.Keys)
-                        {
-                            discoverItemBD.DiscoverReport += "\t" + uri + " --> " + pDiscoverResult.discoveredEntitiesWithId[uri] + "\n";
-                        }
-                    }
-                    if (pDiscoverResult.discoveredEntitiesWithDataBase != null && pDiscoverResult.discoveredEntitiesWithDataBase.Count > 0)
-                    {
-                        discoverItemBD.DiscoverReport += "Entities discover with reconciliation config: " + pDiscoverResult.discoveredEntitiesWithDataBase.Count + "\n";
-                        foreach (string uri in pDiscoverResult.discoveredEntitiesWithDataBase.Keys)
-                        {
-                            discoverItemBD.DiscoverReport += "\t" + uri + " --> " + pDiscoverResult.discoveredEntitiesWithDataBase[uri] + "\n";
-                        }
-                    }
-                    if (pDiscoverResult.orcidIntegration != null && pDiscoverResult.orcidIntegration.Count > 0)
-                    {
-                        discoverItemBD.DiscoverReport += "Entities with identifiers obtained with ORCID integration: " + pDiscoverResult.orcidIntegration.Count + "\n";
-                        foreach (string uri in pDiscoverResult.orcidIntegration.Keys)
-                        {
-                            foreach (string property in pDiscoverResult.orcidIntegration[uri].Keys)
-                            {
-                                discoverItemBD.DiscoverReport += "\t" + uri + " - " + property + " --> " + pDiscoverResult.orcidIntegration[uri][property] + "\n";
-                            }
-                        }
-                    }
-                    pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBD);
                 }
+                //Reporte de descubrimiento
+                discoverItemBD.DiscoverReport = "Time processed (seconds): " + pDiscoverResult.secondsProcessed + "\n";
+                if (pDiscoverResult.discoveredEntitiesWithSubject != null && pDiscoverResult.discoveredEntitiesWithSubject.Count > 0)
+                {
+                    discoverItemBD.DiscoverReport += "Entities discover with the same uri: " + pDiscoverResult.discoveredEntitiesWithSubject.Count + "\n";
+                    foreach (string uri in pDiscoverResult.discoveredEntitiesWithSubject)
+                    {
+                        discoverItemBD.DiscoverReport += "\t" + uri + "\n";
+                    }
+                }
+                if (pDiscoverResult.discoveredEntitiesWithId != null && pDiscoverResult.discoveredEntitiesWithId.Count > 0)
+                {
+                    discoverItemBD.DiscoverReport += "Entities discover with some common identifier: " + pDiscoverResult.discoveredEntitiesWithId.Count + "\n";
+                    foreach (string uri in pDiscoverResult.discoveredEntitiesWithId.Keys)
+                    {
+                        discoverItemBD.DiscoverReport += "\t" + uri + " --> " + pDiscoverResult.discoveredEntitiesWithId[uri] + "\n";
+                    }
+                }
+                if (pDiscoverResult.discoveredEntitiesWithDataBase != null && pDiscoverResult.discoveredEntitiesWithDataBase.Count > 0)
+                {
+                    discoverItemBD.DiscoverReport += "Entities discover with reconciliation config: " + pDiscoverResult.discoveredEntitiesWithDataBase.Count + "\n";
+                    foreach (string uri in pDiscoverResult.discoveredEntitiesWithDataBase.Keys)
+                    {
+                        discoverItemBD.DiscoverReport += "\t" + uri + " --> " + pDiscoverResult.discoveredEntitiesWithDataBase[uri] + "\n";
+                    }
+                }
+                if (pDiscoverResult.orcidIntegration != null && pDiscoverResult.orcidIntegration.Count > 0)
+                {
+                    discoverItemBD.DiscoverReport += "Entities with identifiers obtained with ORCID integration: " + pDiscoverResult.orcidIntegration.Count + "\n";
+                    foreach (string uri in pDiscoverResult.orcidIntegration.Keys)
+                    {
+                        foreach (string property in pDiscoverResult.orcidIntegration[uri].Keys)
+                        {
+                            discoverItemBD.DiscoverReport += "\t" + uri + " - " + property + " --> " + pDiscoverResult.orcidIntegration[uri][property] + "\n";
+                        }
+                    }
+                }
+                pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBD);
             }
         }
 
@@ -2013,7 +2019,7 @@ namespace API_DISCOVER.Models.Utility
         /// <param name="pDataInferenceGraph">Grafo en local en el que aplicar la implementación de ORCID (con inferencia)</param>
         /// <param name="pReasoner">Razonador para la inferencia de la ontología</param>
         /// <returns>Identificadores descubiertos con la integración de ORCID</returns>
-        private static Dictionary<string,Dictionary<string,string>> ORCIDIntegration(ref RohGraph pDataGraph, ref RohGraph pDataInferenceGraph, RohRdfsReasoner pReasoner)
+        private static Dictionary<string, Dictionary<string, string>> ORCIDIntegration(ref RohGraph pDataGraph, ref RohGraph pDataInferenceGraph, RohRdfsReasoner pReasoner)
         {
             Dictionary<string, Dictionary<string, string>> identifiersDiscover = new Dictionary<string, Dictionary<string, string>>();
 
@@ -2079,7 +2085,7 @@ namespace API_DISCOVER.Models.Utility
                         IUriNode p = pDataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
                         ILiteralNode o = pDataGraph.CreateLiteralNode(entityORCID[entityID], new Uri("http://www.w3.org/2001/XMLSchema#string"));
                         pDataGraph.Assert(new Triple(s, p, o));
-                        if(!identifiersDiscover.ContainsKey(entityID))
+                        if (!identifiersDiscover.ContainsKey(entityID))
                         {
                             identifiersDiscover.Add(entityID, new Dictionary<string, string>());
                         }
@@ -2293,7 +2299,10 @@ namespace API_DISCOVER.Models.Utility
                                         {
                                             identifiersDiscover.Add(personID, new Dictionary<string, string>());
                                         }
-                                        identifiersDiscover[personID].Add("http://purl.org/roh#ORCID", ((LiteralNode)sparqlResult["orcid"]).Value);
+                                        if (!identifiersDiscover[personID].ContainsKey("http://purl.org/roh#ORCID"))
+                                        {
+                                            identifiersDiscover[personID].Add("http://purl.org/roh#ORCID", ((LiteralNode)sparqlResult["orcid"]).Value);
+                                        }
                                     }
                                     if (sparqlResult.HasValue("researcherid"))
                                     {
@@ -2304,7 +2313,10 @@ namespace API_DISCOVER.Models.Utility
                                         {
                                             identifiersDiscover.Add(personID, new Dictionary<string, string>());
                                         }
-                                        identifiersDiscover[personID].Add("http://purl.org/roh/mirror/vivo#researcherId", ((LiteralNode)sparqlResult["researcherid"]).Value);
+                                        if (!identifiersDiscover[personID].ContainsKey("http://purl.org/roh/mirror/vivo#researcherId"))
+                                        {
+                                            identifiersDiscover[personID].Add("http://purl.org/roh/mirror/vivo#researcherId", ((LiteralNode)sparqlResult["researcherid"]).Value);
+                                        }
                                     }
                                     if (sparqlResult.HasValue("scopusid"))
                                     {
@@ -2315,7 +2327,10 @@ namespace API_DISCOVER.Models.Utility
                                         {
                                             identifiersDiscover.Add(personID, new Dictionary<string, string>());
                                         }
-                                        identifiersDiscover[personID].Add("http://purl.org/roh/mirror/vivo#scopusId", ((LiteralNode)sparqlResult["scopusid"]).Value);
+                                        if (!identifiersDiscover[personID].ContainsKey("http://purl.org/roh/mirror/vivo#scopusId"))
+                                        {
+                                            identifiersDiscover[personID].Add("http://purl.org/roh/mirror/vivo#scopusId", ((LiteralNode)sparqlResult["scopusid"]).Value);
+                                        }
                                     }
                                 }
                             }
