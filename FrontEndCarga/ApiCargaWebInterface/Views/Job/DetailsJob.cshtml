@@ -46,10 +46,13 @@
                                 <p class="titulo">Último elemento procesado</p>
                                 <p>@Model.LastIdentifierOAIPMH</p>
                             </div>
-                            <div class="progress">
-                                <p class="titulo">Estado del proceso de carga:</p>
-                                <div class="progress-bar" role="progressbar" aria-valuenow="@complete" aria-valuemin="0" aria-valuemax="100" style="width:@percentage">
-                                    <span>@process</span>
+                            <div class="estado-tarea">
+                                <p class="titulo">Estado última tarea ejecutada</p>
+                                <p>En ejecucion</p>
+                                <div class="barra-progreso">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="@complete" aria-valuemin="0" aria-valuemax="100" style="width:@percentage">
+                                        
+                                    </div>
                                 </div>
                             </div>
                         }

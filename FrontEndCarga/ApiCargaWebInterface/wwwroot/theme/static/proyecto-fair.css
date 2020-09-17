@@ -1,0 +1,7 @@
+#contenido-principal h1 { font-size: 21px; font-weight: 500; line-height: 1.24; color: #333333; }
+#contenido-principal h2 { margin-top: 5px; font-size: 17px; font-weight: 300; line-height: 1.53; color: #333333; }
+#contenido-principal h3 { font-size: 15px; color: #af1a2e; line-height: 1.27; font-weight: bold; font-family: 'Muli', sans-serif;}
+#contenido-principal h3:first-of-type { margin-top: 0; }
+#contenido-principal div:nth-of-type(4n+3) { border-bottom: 1px solid #ddd; padding-bottom: 20px;}
+#contenido-principal > p { display: none;}
+#contenido-principal div { font-size: 15px; color: #747474; line-height: 1.27; font-family: 'Muli', sans-serif; }
