@@ -50,19 +50,22 @@ namespace API_CARGA.Controllers
         /// Aquí se encuentra un RDF de Ejemplo: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_CARGA/API_CARGA/Samples/rdfSample.xml
         /// </summary>
         /// <param name="rdfFile">Fichero RDF</param>
-        /// <param name="jobCreatedDate">Fecha de creación de la tarea</param>
         /// <param name="jobId">Identificador de la tarea</param>
+        /// <param name="discoverProcessed">Indica si ya está procesado el descubrimiento</param>
         /// <returns></returns>
         [HttpPost("data-publish")]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult dataPublish(IFormFile rdfFile, string jobCreatedDate, string jobId)
+        public IActionResult dataPublish(IFormFile rdfFile, string jobId,bool discoverProcessed)
         {
             try
             {
                 XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
-                DiscoverItem discoverItem = new DiscoverItem() { ID = Guid.NewGuid(), JobID = jobId, Rdf = rdf.InnerXml, JobCreatedDate = jobCreatedDate, Publish = true };
+                DiscoverItem discoverItem = new DiscoverItem() { JobID = jobId, Publish = true,DissambiguationProcessed=discoverProcessed, Status = "Pending" };
+                Guid addedID = _discoverItemService.AddDiscoverItem(discoverItem);
+                //No guardamos el RDF en la BBDD, sólo en rabbit
+                discoverItem.Rdf = rdf.InnerXml;
                 _amqpService.PublishMessage(discoverItem);
                 return Ok();
             }
@@ -440,6 +443,7 @@ namespace API_CARGA.Controllers
         {
             return Ok(OntologyService.GetOntology(ontology));
         }
+
 
         private byte[] getByte(string URL)
         {

@@ -3,15 +3,17 @@ using System;
 using API_CARGA.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace API_CARGA.Migrations
 {
     [DbContext(typeof(EntityContext))]
-    partial class EntityContextModelSnapshot : ModelSnapshot
+    [Migration("20200917065924_Nombre_de_la_migracion")]
+    partial class Nombre_de_la_migracion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,6 +46,7 @@ namespace API_CARGA.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("Rdf")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Status")
