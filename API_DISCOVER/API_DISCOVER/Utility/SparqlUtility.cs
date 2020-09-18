@@ -15,7 +15,7 @@ using VDS.RDF;
 using VDS.RDF.Parsing;
 using API_DISCOVER.Models.Entities;
 
-namespace API_DISCOVER.Models.Utility
+namespace API_DISCOVER.Utility
 {
     public static class SparqlUtility
     {

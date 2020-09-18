@@ -34,6 +34,16 @@ namespace API_DISCOVER
 
                     IDictionary environmentVariables = Environment.GetEnvironmentVariables();
 
+
+                    services.AddSingleton(typeof(ConfigUrlCronService));
+                    services.AddScoped(typeof(CallCronApiService));
+                    services.AddScoped(typeof(CallCronService));
+                    services.AddScoped(typeof(ConfigTokenService));
+                    services.AddScoped(typeof(CallTokenService));
+
+                    services.AddScoped<DiscoverItemBDService, DiscoverItemBDService>();
+                    services.AddScoped<ProcessDiscoverStateJobBDService, ProcessDiscoverStateJobBDService>();
+
                     //SQL
                     {
                         var optionsBuilder = new DbContextOptionsBuilder<EntityContext>();
@@ -48,8 +58,7 @@ namespace API_DISCOVER
                         {
                             optionsBuilder.UseNpgsql(Configuration.GetConnectionString("PostgreConnectionmigration"));
                         }
-                        services.AddScoped<EntityContext>(s => new EntityContext(optionsBuilder.Options));
-                        services.AddScoped<DiscoverItemBDService, DiscoverItemBDService>();
+                        services.AddScoped<EntityContext>(s => new EntityContext(optionsBuilder.Options));                        
                     }
 
                     //Rabbit

@@ -17,7 +17,7 @@ using VDS.RDF.Query.Builder;
 using VDS.RDF.Query.Inference;
 using VDS.RDF.Update;
 
-namespace API_DISCOVER.Models.Utility
+namespace API_DISCOVER.Utility
 {
     public static class Discover
     {
@@ -134,14 +134,17 @@ namespace API_DISCOVER.Models.Utility
             return resultado;
         }
 
+
         /// <summary>
         /// Procesa los resultados del descubrimiento
         /// </summary>
         /// <param name="pDiscoverItem">Objeto con los datos de com procesar el proeso de descubrimiento</param>
         /// <param name="pDiscoverResult">Resultado de la aplicación del descubrimiento</param>
         /// <param name="pDiscoverItemBDService">Clase para gestionar las operaciones de las tareas de descubrimiento</param>
+        /// <param name="pCallCronApiService">Servicio para hacer llamadas a los métodos del apiCron</param>
+        /// <param name="pProcessDiscoverStateJobBDService">Clase para gestionar los estados de descubrimiento de las tareas</param>
         /// <returns></returns>
-        public static void Process(DiscoverItem pDiscoverItem, DiscoverResult pDiscoverResult, DiscoverItemBDService pDiscoverItemBDService)
+        public static void Process(DiscoverItem pDiscoverItem, DiscoverResult pDiscoverResult, DiscoverItemBDService pDiscoverItemBDService, CallCronApiService pCallCronApiService, ProcessDiscoverStateJobBDService pProcessDiscoverStateJobBDService)
         {
             /*
              En función del resultado obtenido se realiza una de las siguientes acciones:
@@ -310,6 +313,38 @@ namespace API_DISCOVER.Models.Utility
                     pDiscoverItem.Error = "";
                     pDiscoverItemBDService.ModifyDiscoverItem(pDiscoverItem);
                 }
+
+                //Actualizamos el estado de descubrimiento de la tarea si el estado encolado esta en estado Success o Error (ha finalizado)
+                string statusQueueJob = pCallCronApiService.GetJob(pDiscoverItem.JobID).State;
+                if ((statusQueueJob == "Failed" || statusQueueJob == "Succeeded") )
+                {
+                    ProcessDiscoverStateJob processDiscoverStateJob = pProcessDiscoverStateJobBDService.GetrocessDiscoverStateJobByIdJob(pDiscoverItem.JobID);
+                    string state;
+                    //Actualizamos a error si existen items en estado error o con problemas de desambiguación 
+                    if (pDiscoverItemBDService.ExistsDiscoverItemsErrorOrDissambiguatinProblems(pDiscoverItem.JobID))
+                    {
+                        state = "Error";
+                    }
+                    else if(pDiscoverItemBDService.ExistsDiscoverItemsPending(pDiscoverItem.JobID))
+                    {
+                        //Actualizamos a 'Pending' si aún existen items pendientes
+                        state = "Pending";
+                    }else
+                    {
+                        //Actualizamos a Success si no existen items en estado error ni con problemas de desambiguación y no hay ninguno pendiente
+                        state = "Success";
+                    }
+                    if (processDiscoverStateJob != null)
+                    {
+                        processDiscoverStateJob.State = state;
+                        pProcessDiscoverStateJobBDService.ModifyProcessDiscoverStateJob(processDiscoverStateJob);
+                    }
+                    else
+                    {
+                        processDiscoverStateJob = new ProcessDiscoverStateJob() { State = state, JobId = pDiscoverItem.JobID };
+                        pProcessDiscoverStateJobBDService.AddProcessDiscoverStateJob(processDiscoverStateJob);
+                    }
+                }
             }
             else
             {
@@ -447,10 +482,13 @@ namespace API_DISCOVER.Models.Utility
         /// Obtiene los datos de desambiguación del RDF
         /// </summary>
         /// <param name="pEntitiesRdfTypes">Listado con los sujetos y sus rdf:type (con inferencia)</param>
-        /// <param name="pRohGraph">Grafo en local</param>
+        /// <param name="pTriples">Lista de triples</param>
         /// <returns>Entidades del RDF con sus datos de desambiguación</returns>
-        private static Dictionary<string, List<DisambiguationData>> GetDisambiguationDataRdf(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pRohGraph)
+        private static Dictionary<string, List<DisambiguationData>> GetDisambiguationDataRdf(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, List<Triple> pTriples)
         {
+            Dictionary<string, Dictionary<string, HashSet<string>>> directRels = ExtractRelsFromTriples(pTriples, false);
+            Dictionary<string, Dictionary<string, HashSet<string>>> inverseRels = ExtractRelsFromTriples(pTriples, true);
+
             Dictionary<string, List<DisambiguationData>> disambiguationDataRdf = new Dictionary<string, List<DisambiguationData>>();
             foreach (string entityID in pEntitiesRdfTypes.Keys)
             {
@@ -462,7 +500,7 @@ namespace API_DISCOVER.Models.Utility
                     {
                         foreach (Disambiguation disambiguation in disambiguations)
                         {
-                            DisambiguationData disambiguationData = GetEntityDataForReconciliation(entityID, disambiguation, pRohGraph);
+                            DisambiguationData disambiguationData = GetEntityDataForReconciliation(entityID, disambiguation, directRels, inverseRels);
 
                             if (!disambiguationDataRdf.ContainsKey(entityID))
                             {
@@ -478,7 +516,7 @@ namespace API_DISCOVER.Models.Utility
             }
             //Obtenemos los roh:identifier de todas las entidades           
             Dictionary<string, KeyValuePair<string, string>> disambiguationIdentifiersRdf = new Dictionary<string, KeyValuePair<string, string>>();
-            Dictionary<string, Dictionary<string, HashSet<string>>> identifiersData = GetPropertiesValues(pEntitiesRdfTypes.Keys.ToList(), new List<string> { mPropertyRohIdentifier, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" }, false, pRohGraph);
+            Dictionary<string, Dictionary<string, HashSet<string>>> identifiersData = GetPropertiesValues(pEntitiesRdfTypes.Keys.ToList(), new List<string> { mPropertyRohIdentifier, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" }, false, directRels);
             foreach (string entityId in identifiersData.Keys)
             {
                 if (identifiersData[entityId].ContainsKey(mPropertyRohIdentifier) && identifiersData[entityId].ContainsKey("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"))
@@ -501,11 +539,12 @@ namespace API_DISCOVER.Models.Utility
         /// </summary>
         /// <param name="pSubject">Sujeto</param>
         /// <param name="pDisambiguation">Objeto de desambiguación</param>
-        /// <param name="pGrafo">Grafo en local</param>
+        /// <param name="pDirectRels">Relaciones directas</param>
+        /// <param name="pInverseRels">Relaciones inversas</param>
         /// <returns>Datos para la desambiguación</returns>
-        private static DisambiguationData GetEntityDataForReconciliation(string pSubject, Disambiguation pDisambiguation, RohGraph pGrafo)
+        private static DisambiguationData GetEntityDataForReconciliation(string pSubject, Disambiguation pDisambiguation, Dictionary<string, Dictionary<string, HashSet<string>>> pDirectRels, Dictionary<string, Dictionary<string, HashSet<string>>> pInverseRels)
         {
-            Dictionary<string, DisambiguationData> data = GetEntityDataForReconciliation(new List<string> { pSubject }, pDisambiguation, pGrafo);
+            Dictionary<string, DisambiguationData> data = GetEntityDataForReconciliation(new List<string> { pSubject }, pDisambiguation, pDirectRels, pInverseRels);
             if (data != null && data.ContainsKey(pSubject))
             {
                 return data[pSubject];
@@ -518,19 +557,20 @@ namespace API_DISCOVER.Models.Utility
         /// </summary>
         /// <param name="pSubject">Sujeto</param>
         /// <param name="pDisambiguation">Objeto de desambiguación</param>
-        /// <param name="pGrafo">Grafo en local</param>
+        /// <param name="pDirectRels">Relaciones directas</param>
+        /// <param name="pInverseRels">Relaciones inversas</param>
         /// <returns>Datos para la desambiguación</returns>
-        private static Dictionary<string, DisambiguationData> GetEntityDataForReconciliation(List<string> pSubjects, Disambiguation pDisambiguation, RohGraph pGrafo)
+        private static Dictionary<string, DisambiguationData> GetEntityDataForReconciliation(List<string> pSubjects, Disambiguation pDisambiguation, Dictionary<string, Dictionary<string, HashSet<string>>> pDirectRels, Dictionary<string, Dictionary<string, HashSet<string>>> pInverseRels)
         {
             Dictionary<string, DisambiguationData> response = new Dictionary<string, DisambiguationData>();
             //Propiedades directas
             List<string> properties = pDisambiguation.properties.Where(x => !x.inverse).Select(x => x.property).ToList();
             properties.AddRange(pDisambiguation.identifiers);
-            Dictionary<string, Dictionary<string, HashSet<string>>> propertiesData = GetPropertiesValues(pSubjects, properties, false, pGrafo);
+            Dictionary<string, Dictionary<string, HashSet<string>>> propertiesData = GetPropertiesValues(pSubjects, properties, false, pDirectRels);
 
             //Propiedades inversas
             List<string> inverseProperties = pDisambiguation.properties.Where(x => x.inverse).Select(x => x.property).ToList();
-            Dictionary<string, Dictionary<string, HashSet<string>>> inversePropertiesData = GetPropertiesValues(pSubjects, inverseProperties, true, pGrafo);
+            Dictionary<string, Dictionary<string, HashSet<string>>> inversePropertiesData = GetPropertiesValues(pSubjects, inverseProperties, true, pInverseRels);
 
             //Identificadores
             foreach (string propertyIdentifier in pDisambiguation.identifiers)
@@ -615,20 +655,15 @@ namespace API_DISCOVER.Models.Utility
         }
 
         /// <summary>
-        /// Obtiene N propiedades de N entidades de un grafo en local
+        /// Extrae las relaciones de los triples para procesarlos posteriormente por GetPropertiesValues
         /// </summary>
-        /// <param name="pSubjects">Sujetos</param>
-        /// <param name="pProperties">Propiedades</param>
+        /// <param name="pTriples">Lista de triples</param>
         /// <param name="pInverse">Implica si son inversas</param>
-        /// <param name="pGrafo">Grafo en local</param>
-        /// <returns>Valor de las propiedades para los sujetos introducidos</returns>
-        private static Dictionary<string, Dictionary<string, HashSet<string>>> GetPropertiesValues(List<string> pSubjects, List<string> pProperties, bool pInverse, RohGraph pGrafo)
+        /// <returns>Diccinoario con las relaciones</returns>
+        private static Dictionary<string, Dictionary<string, HashSet<string>>> ExtractRelsFromTriples(List<Triple> pTriples, bool pInverse)
         {
-            Dictionary<string, Dictionary<string, HashSet<string>>> propertyValues = new Dictionary<string, Dictionary<string, HashSet<string>>>();
-            List<Triple> triples = pGrafo.Triples.ToList();
-
             Dictionary<string, Dictionary<string, HashSet<string>>> rels = new Dictionary<string, Dictionary<string, HashSet<string>>>();
-            foreach (Triple triple in triples)
+            foreach (Triple triple in pTriples)
             {
                 string s = triple.Subject.ToString();
                 string p = triple.Predicate.ToString();
@@ -669,6 +704,21 @@ namespace API_DISCOVER.Models.Utility
                     }
                 }
             }
+            return rels;
+        }
+
+        /// <summary>
+        /// Obtiene N propiedades de N entidades de un grafo en local
+        /// </summary>
+        /// <param name="pSubjects">Sujetos</param>
+        /// <param name="pProperties">Propiedades</param>
+        /// <param name="pInverse">Implica si son inversas</param>
+        /// <param name="pRels">Relaciones</param>
+        /// <returns>Valor de las propiedades para los sujetos introducidos</returns>
+        private static Dictionary<string, Dictionary<string, HashSet<string>>> GetPropertiesValues(List<string> pSubjects, List<string> pProperties, bool pInverse, Dictionary<string, Dictionary<string, HashSet<string>>> pRels)
+        {
+            Dictionary<string, Dictionary<string, HashSet<string>>> propertyValues = new Dictionary<string, Dictionary<string, HashSet<string>>>();
+
 
             foreach (string property in pProperties)
             {
@@ -686,19 +736,19 @@ namespace API_DISCOVER.Models.Utility
                     foreach (string propertyIn in propertySplit)
                     {
                         outAux = new HashSet<string>();
-                        foreach (string subjectIn in rels.Keys)
+                        foreach (string subjectIn in pRels.Keys)
                         {
-                            if (rels[subjectIn].ContainsKey(propertyIn) || propertyIn == "?")
+                            if (pRels[subjectIn].ContainsKey(propertyIn) || propertyIn == "?")
                             {
                                 if (inAux.Contains(subjectIn))
                                 {
                                     if (propertyIn != "?")
                                     {
-                                        outAux.UnionWith(rels[subjectIn][propertyIn]);
+                                        outAux.UnionWith(pRels[subjectIn][propertyIn]);
                                     }
                                     else
                                     {
-                                        outAux.UnionWith(rels[subjectIn].Where(x => x.Key != "http://www.w3.org/1999/02/22-rdf-syntax-ns#type").SelectMany(x => x.Value).ToList());
+                                        outAux.UnionWith(pRels[subjectIn].Where(x => x.Key != "http://www.w3.org/1999/02/22-rdf-syntax-ns#type").SelectMany(x => x.Value).ToList());
                                     }
                                 }
                             }
@@ -1346,7 +1396,7 @@ namespace API_DISCOVER.Models.Utility
             pReasoner.Apply(pDataInferenceGraph);
             pEntitiesRdfTypes = LoadEntitiesWithRdfTypes(pDataInferenceGraph, pIncludeBlankNodes);
             pEntitiesRdfType = LoadEntitiesWithRdfType(pDataGraph, pIncludeBlankNodes);
-            pDisambiguationDataRdf = GetDisambiguationDataRdf(pEntitiesRdfTypes, pDataGraph);
+            pDisambiguationDataRdf = GetDisambiguationDataRdf(pEntitiesRdfTypes, pDataGraph.Triples.ToList());
         }
 
         /// <summary>
