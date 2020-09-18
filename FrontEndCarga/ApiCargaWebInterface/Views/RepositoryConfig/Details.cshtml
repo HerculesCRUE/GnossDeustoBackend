@@ -38,7 +38,9 @@
                             <li>
                                 <a href="#" class="btn dropdown-toggle" role="button" id="dropdownPublicacion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Publicación manual</a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPublicacion" x-placement="bottom-end" style="position: absolute; transform: translate3d(-126px, 36px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                    <a href="@Url.Action("Index", "Publish", new {repository = Model.RepositoryConfigID })" class="dropdown-item">Publicación manual</a>
+                                    <a href="@Url.Action("Index", "Publish", new {repository = Model.RepositoryConfigID })" class="dropdown-item">Obtención de RDFs</a>
+                                    <a href="@Url.Action("ValidarRdf", "Publish", new {repository = Model.RepositoryConfigID })" class="dropdown-item">Validación de RDF</a>
+                                    <a href="@Url.Action("PublicarRdf", "Publish", new {repository = Model.RepositoryConfigID })" class="dropdown-item">Publicación de RDF</a>
                                 </div>
                             </li>
                             <li>
