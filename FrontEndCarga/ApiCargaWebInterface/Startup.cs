@@ -1,4 +1,5 @@
 using ApiCargaWebInterface.Middlewares;
+using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.Models.Services.VirtualPathProvider;
 using AspNetCore.Security.CAS;
@@ -8,9 +9,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 using System;
 using System.Collections;
 using System.Reflection;
@@ -73,6 +76,28 @@ namespace ApiCargaWebInterface
                 opts.FileProviders.Add(
                     new ApiFileProvider(apiVirtualPath));
             });
+
+
+            services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
+            {
+                var builder = new NpgsqlDbContextOptionsBuilder(opt);
+                builder.SetPostgresVersion(new Version(9, 6));
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("PostgreConnectionmigration"))
+                {
+                    opt.UseNpgsql(environmentVariables["PostgreConnectionmigration"] as string);
+                }
+                else
+                {
+                    opt.UseNpgsql(Configuration.GetConnectionString("PostgreConnectionmigration"));
+                }
+
+
+            });
+
+            services.AddScoped<DiscoverItemBDService, DiscoverItemBDService>();
+
+
             services.AddControllersWithViews(); 
             services.AddSingleton(typeof(ConfigPathLog));
             services.AddSingleton(typeof(ConfigUrlService));

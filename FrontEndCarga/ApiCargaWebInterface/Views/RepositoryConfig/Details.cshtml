@@ -53,6 +53,7 @@
                         </ul>
                         
                     </div>
+
                 </div>
             </div>
             <div class="contenido">
@@ -60,6 +61,41 @@
                     <div class="identifier">
                         <p class="titulo">Identifier</p>
                         <p>@Model.RepositoryConfigID</p>
+                        </div>
+                        <div class="outh-token">
+                            <p class="titulo">Oauth token</p>
+                            <p>@Model.OauthToken</p>
+                        </div>
+                        <div class="outh-token">
+                            <p class="titulo">Url</p>
+                            <p>@Model.Url</p>
+                        </div>
+                        <div class="outh-token">
+                            <p class="titulo">Tareas exitosas</p>
+                            <p @clase>@Model.PorcentajeTareas %</p>
+                        </div>
+                        <hr />
+                        @if (!string.IsNullOrEmpty(Model.LastJob))
+                        {
+                            <div class="outh-token">
+                                <p class="titulo">Última tarea ejecutada</p>
+                                <p>@Model.LastJob</p>
+                            </div>
+                            @if (!string.IsNullOrEmpty(Model.LastState))
+                            {
+                                <div class="outh-token">
+                                    <p class="titulo">Estado de la última tarea ejecutada</p>
+                                    <p>@Model.LastState</p>
+                                    @if (Model.LastState.Equals("Failed"))
+                                    {
+                                        <a href="@Url.Action("DetailsJob", "Job", new { id = Model.LastJob })">
+                                            <p class="text-danger">vea el error</p>
+                                        </a>
+                                    }
+                                </div>
+                            }
+                        }
+
                     </div>
                     <div class="outh-token">
                         <p class="titulo">Oauth token</p>

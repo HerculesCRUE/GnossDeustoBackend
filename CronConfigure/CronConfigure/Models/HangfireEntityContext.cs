@@ -27,6 +27,7 @@ namespace CronConfigure.Models
         public DbSet<JobRepository> JobRepository { get; set; }
         public DbSet<ProcessingJobState> ProcessingJobState { get; set; }
         public DbSet<ProcessDiscoverStateJob> ProcessDiscoverStateJob { get; set; }
+        public DbSet<DiscoverItem> DiscoverItem { get; set; }
         public HangfireEntityContext(DbContextOptions<HangfireEntityContext> options)
             : base(options) 
         {

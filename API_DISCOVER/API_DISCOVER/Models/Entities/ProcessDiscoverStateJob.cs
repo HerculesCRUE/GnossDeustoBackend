@@ -3,15 +3,13 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase para asociar una tarea con su estado de descubrimiento
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+
 /// <summary>
 /// Clase para asociar una tarea con su estado de descubrimiento
 /// </summary>
-namespace CronConfigure.Models.Entitties
+namespace API_DISCOVER.Models.Entities
 {
     [Table("ProcessDiscoverStateJob")]
     public class ProcessDiscoverStateJob

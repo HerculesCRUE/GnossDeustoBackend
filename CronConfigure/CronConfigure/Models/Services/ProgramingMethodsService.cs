@@ -52,7 +52,6 @@ namespace CronConfigure.Models.Services
                 ProcessDiscoverStateJob discoveryState = new ProcessDiscoverStateJob()
                 {
                     Id = Guid.NewGuid(),
-                    DateJob = fechaJob,
                     JobId = idJob,
                     State = "Pending"
                 };
@@ -72,6 +71,38 @@ namespace CronConfigure.Models.Services
                 };
                 string result = _serviceApi.CallPostApi($"sync/execute", objeto, _token);///{idRepository}
                 result = JsonConvert.DeserializeObject<string>(result);
+
+                #region Actualizamos ProcessDiscoverStateJob
+                string state;
+                //Actualizamos a error si existen items en estado error o con problemas de desambiguación 
+                if (_context.DiscoverItem.Any(x => x.JobID == idJob && (x.Status == DiscoverItem.DiscoverItemStatus.Error.ToString() || x.Status == DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString())))
+                {
+                    state = "Error";
+                }
+                else if (_context.DiscoverItem.Any(x => x.JobID == idJob && (x.Status == DiscoverItem.DiscoverItemStatus.Pending.ToString())))
+                {
+                    //Actualizamos a 'Pending' si aún existen items pendientes
+                    state = "Pending";
+                }
+                else
+                {
+                    //Actualizamos a Success si no existen items en estado error ni con problemas de desambiguación y no hay ninguno pendiente
+                    state = "Success";
+                }
+                ProcessDiscoverStateJob processDiscoverStateJob = _context.ProcessDiscoverStateJob.FirstOrDefault(item => item.JobId.Equals(idJob));
+                if (processDiscoverStateJob != null)
+                {
+                    processDiscoverStateJob.State = state;
+                }
+                else
+                {
+                    processDiscoverStateJob = new ProcessDiscoverStateJob() { State = state, JobId = idJob };
+                    _context.ProcessDiscoverStateJob.Add(processDiscoverStateJob);
+                }
+                _context.SaveChanges();
+                #endregion
+
+
                 return result;
             }
             catch (Exception ex)
@@ -81,7 +112,7 @@ namespace CronConfigure.Models.Services
                 Log.Error($"{ex.Message}\n{ex.StackTrace}\n");
                 throw new Exception(ex.Message);
                 //return ex.Message;
-            } 
+            }
         }
 
         ///<summary>
@@ -136,7 +167,7 @@ namespace CronConfigure.Models.Services
         ///<param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
         public void ProgramPublishRepositoryRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime fechaInicio, DateTime? fecha = null, string set = null, string codigoObjeto = null)
         {
-            string id = BackgroundJob.Schedule(() => ProgramRecurringJob(idRepository,nombreCron,cronExpression,fecha,set,codigoObjeto), fechaInicio);
+            string id = BackgroundJob.Schedule(() => ProgramRecurringJob(idRepository, nombreCron, cronExpression, fecha, set, codigoObjeto), fechaInicio);
             JobRepository jobRepository = new JobRepository()
             {
                 IdJob = $"{id}_{nombreCron}_{cronExpression}",

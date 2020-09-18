@@ -3,24 +3,18 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Contexto de la base de datos
 
-using API_DISCOVER.Models.Entities;
+using ApiCargaWebInterface.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API_DISCOVER.Models
+namespace ApiCargaWebInterface.Models
 {
     public class EntityContext : DbContext
     {
         private string _defaultSchema;
         public DbSet<DiscoverItem> DiscoverItem { get; set; }
-        public DbSet<ProcessDiscoverStateJob> ProcessDiscoverStateJob { get; set; }
         public EntityContext(DbContextOptions options, bool memory = false)
             : base(options)
-        {
-            if (!memory)
-            {
-                Database.Migrate();
-            }
-           
+        {           
 
         }
 

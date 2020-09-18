@@ -166,7 +166,7 @@ namespace ApiCargaWebInterface.Controllers
             try
             {
                 _callEtlPublishService.CallDataValidate(rdfPublish, repositoryId);
-                _callEtlPublishService.CallDataPublish(rdfPublish);
+                _callEtlPublishService.CallDataPublish(rdfPublish,"",true);
                 
                 return View("PublicarRdf", new PublishRepositoryModel
                 {

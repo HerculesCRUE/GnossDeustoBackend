@@ -2,14 +2,13 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase para gestionar las operaciones en base de datos de los repositorios 
-using API_DISCOVER.Models.Entities;
+using ApiCargaWebInterface.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
-namespace API_DISCOVER.Models.Services
+namespace ApiCargaWebInterface.Models.Services
 {
     ///<summary>
     ///Clase para gestionar las operaciones de las tareas de descubrimiento
@@ -22,45 +21,23 @@ namespace API_DISCOVER.Models.Services
             _context = context;
         }
 
-
         ///<summary>
-        /// Obtiene un item de descubrimiento
+        ///Obtiene un item de descubrimiento
         ///</summary>
         ///<param name="id">Identificador del item</param>
-        ///<remarks>Item de descubrimiento</remarks>
         public DiscoverItem GetDiscoverItemById(Guid id)
         {
             return _context.DiscoverItem.Include(item => item.DissambiguationProblems).ThenInclude(p => p.DissambiguationCandiates).FirstOrDefault(item => item.ID.Equals(id));
         }
-
+        
         /// <summary>
         /// Obtiene los items con error de un Job (sólo obtiene el identificador y el estado)
         /// </summary>
         /// <param name="jobId">Identificador del job</param>
-        /// <returns>Lista de Items de descubrimiento (sólo obtiene el identificador y el estado)</returns>
+        /// <returns></returns>
         public List<DiscoverItem> GetDiscoverItemsErrorByJobMini(string jobId)
         {
-            return _context.DiscoverItem.Where(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Error.ToString() || x.Status == DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString())).Select(x => new DiscoverItem { ID = x.ID, JobID = x.JobID, Status = x.Status }).ToList();
-        }
-
-        /// <summary>
-        /// Obtiene si existen o no items pendientes de procesar por el descubrimiento para un Job
-        /// </summary>
-        /// <param name="jobId">Identificador del job</param>
-        /// <returns></returns>
-        public bool ExistsDiscoverItemsPending(string jobId)
-        {
-            return _context.DiscoverItem.Any(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Pending.ToString()));
-        }
-
-        /// <summary>
-        /// Obtiene si existen o no items con estado error o procesados con problemas de desambiguación
-        /// </summary>
-        /// <param name="jobId">Identificador del job</param>
-        /// <returns></returns>
-        public bool ExistsDiscoverItemsErrorOrDissambiguatinProblems(string jobId)
-        {
-            return _context.DiscoverItem.Any(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Error.ToString() || x.Status == DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString()));
+            return _context.DiscoverItem.Where(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Error.ToString() || x.Status == DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString())).Select(x=>new DiscoverItem { ID=x.ID,JobID=x.JobID,Status=x.Status}).ToList();
         }
 
         ///<summary>
@@ -94,7 +71,6 @@ namespace API_DISCOVER.Models.Services
                 discoverItemOriginal.DissambiguationProcessed = discoverItem.DissambiguationProcessed;
                 discoverItemOriginal.DiscoverReport = discoverItem.DiscoverReport;
                 discoverItemOriginal.DissambiguationProblems = discoverItem.DissambiguationProblems;
-                            
                 _context.SaveChanges();
                 modified = true;
             }
