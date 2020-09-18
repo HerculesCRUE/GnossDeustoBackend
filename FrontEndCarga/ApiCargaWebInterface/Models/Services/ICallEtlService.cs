@@ -33,8 +33,10 @@ namespace ApiCargaWebInterface.Models.Services
         /// <summary>
         /// Llama al método del api de carga de publicación
         /// </summary>
-        /// <param name="rdf">rdf a pasar</param>
-        public void CallDataPublish(IFormFile rdf);
+        /// <param name="rdfFile">rdf a pasar</param>
+        /// <param name="jobId">Identificador de la tarea</param>
+        /// <param name="discoverProcessed">Indica si ya está procesado el descubrimiento</param>
+        public void CallDataPublish(IFormFile rdfFile, string jobId, bool discoverProcessed);
         /// <summary>
         /// Sube una ontologia
         /// </summary>
