@@ -70,23 +70,21 @@ Así obtenemos una base de datos lista para que las APIs del backend puedan usar
 
 Para deplegar RabbitMQ podemos usar la imagen de Bitnami con docker-compose. Podemos elegir la ruta que mas nos convenga (por ejemplo ~\rabbitmq). Podemos ajustar el password con la variable RABBITMQ_PASSWORD. El usuario por defecto es "user".
 	
-	version: '2'
-	
+	version: "3.6"
 	services:
-         rabbitmq:
-           image: 'docker.io/bitnami/rabbitmq:3.8-debian-10'
-	   environment:
-      	     - RABBITMQ_PASSWORD=my_password
-           ports:
-             - '4369:4369'
-             - '5672:5672'
-             - '25672:25672'
-             - '15672:15672'
-           volumes:
-            - 'rabbitmq_data:/bitnami'
-        volumes:
-          rabbitmq_data:
-            driver: local
+ 	 rabbitmq:
+    	  image: 'rabbitmq:3.6-management-alpine'
+    	  ports:
+      	   - '5672:5672'
+      	   - '15672:15672'
+    	  environment:
+      	   AMQP_URL: 'amqp://rabbitmq?connection_attempts=5&retry_delay=5'
+     	   RABBITMQ_DEFAULT_USER: "guest"
+      	   RABBITMQ_DEFAULT_PASS: "guest"
+    	  networks:
+           - network
+	 networks:
+  	  network: {}
 	
 Para levantar RabbitMQ ejecutaremos este comando en la misma ruta donde tengamos el docker-compose.yml:
 	
