@@ -63,10 +63,22 @@ namespace API_CARGA.Models.Services
                             AddProcessingState(identifierOAIPMH.Identifier, identifier, jobId, listIdentifier.IndexOf(identifierOAIPMH), totalCount);
                         }
                         string rdf = CallGetRecord(identifier, identifierOAIPMH.Identifier);
-                        _publishData.CallDataValidate(rdf, identifier, _token);
-                        _publishData.CallDataPublish(rdf, jobId, jobCreatedDate, _token);
-                        lastSyncro = identifierOAIPMH;
-                        
+                        try
+                        {
+
+                            _publishData.CallDataValidate(rdf, identifier, _token);
+                            _publishData.CallDataPublish(rdf, jobId, jobCreatedDate, _token);
+                        }
+                        catch (ValidationException ex)
+                        {
+                            validationException = true;
+                            if (string.IsNullOrEmpty(codigoObjeto) && lastSyncro != null)
+                            {
+                                AddSyncro(lastSyncro, set, identifier);
+                            }
+                            exception.AppendLine(ex.Message);
+                        }
+                        lastSyncro = identifierOAIPMH;   
                     }
                     if (lastSyncro != null)
                     {
@@ -84,15 +96,6 @@ namespace API_CARGA.Models.Services
                     throw new Exception(exception.ToString());
                 }
 
-            }
-            catch(ValidationException ex)
-            {
-                validationException = true;
-                if (string.IsNullOrEmpty(codigoObjeto) && lastSyncro != null)
-                {
-                    AddSyncro(lastSyncro, set, identifier);
-                }
-                exception.AppendLine(ex.Message);
             }
             catch (Exception ex)
             {
