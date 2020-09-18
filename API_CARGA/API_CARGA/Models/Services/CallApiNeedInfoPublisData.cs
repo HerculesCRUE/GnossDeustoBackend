@@ -5,6 +5,7 @@
 using API_CARGA.Models.Entities;
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -106,7 +107,7 @@ namespace API_CARGA.Models.Services
             ShapeReport shapeReport = JsonConvert.DeserializeObject<ShapeReport>(response);
             if (!shapeReport.conforms && shapeReport.severity == "http://www.w3.org/ns/shacl#Violation")
             {
-                throw new Exception("Se han producido errores en la validación: " + JsonConvert.SerializeObject(shapeReport));
+                throw new ValidationException(/*"Se han producido errores en la validación: " + */JsonConvert.SerializeObject(shapeReport));
             }
         }
 

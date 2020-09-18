@@ -5,9 +5,11 @@
 using API_CARGA.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 
 namespace API_CARGA.Models.Services
@@ -41,6 +43,8 @@ namespace API_CARGA.Models.Services
         ///<param name="jobCreatedDate">En el caso de que haya sido una tarea la que ha lanzado la acción representa la fecha de creación de dicha tarea</param>
         public void PublishRepositories(Guid identifier, DateTime? fechaFrom = null, string set = null, string codigoObjeto = null, string jobId = null, DateTime? jobCreatedDate = null)
         {
+            bool validationException = false;
+            StringBuilder exception = new StringBuilder();
             List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
             if (codigoObjeto == null)
             {
@@ -75,7 +79,20 @@ namespace API_CARGA.Models.Services
                     _publishData.CallDataValidate(rdf, identifier, _token);
                     _publishData.CallDataPublish(rdf, jobId, jobCreatedDate, _token);
                 }
+                if (validationException)
+                {
+                    throw new Exception(exception.ToString());
+                }
 
+            }
+            catch(ValidationException ex)
+            {
+                validationException = true;
+                if (string.IsNullOrEmpty(codigoObjeto) && lastSyncro != null)
+                {
+                    AddSyncro(lastSyncro, set, identifier);
+                }
+                exception.AppendLine(ex.Message);
             }
             catch (Exception ex)
             {
