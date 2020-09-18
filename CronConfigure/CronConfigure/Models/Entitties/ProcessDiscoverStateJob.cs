@@ -20,6 +20,5 @@ namespace CronConfigure.Models.Entitties
         public Guid Id { get; set; }
         public string JobId { get; set; }
         public string State { get; set; }
-        public DateTime DateJob { get; set; }
     }
 }
