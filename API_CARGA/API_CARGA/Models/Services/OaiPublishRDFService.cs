@@ -60,7 +60,7 @@ namespace API_CARGA.Models.Services
                         }
                         string rdf = CallGetRecord(identifier, identifierOAIPMH.Identifier);
                         _publishData.CallDataValidate(rdf, identifier, _token);
-                        _publishData.CallDataPublish(rdf, jobId, jobCreatedDate, _token);
+                        _publishData.CallDataPublish(rdf, jobId, false, _token);
                         lastSyncro = identifierOAIPMH;
                         
                     }
@@ -73,7 +73,7 @@ namespace API_CARGA.Models.Services
                 {
                     string rdf = CallGetRecord(identifier, codigoObjeto);
                     _publishData.CallDataValidate(rdf, identifier, _token);
-                    _publishData.CallDataPublish(rdf, jobId, jobCreatedDate, _token);
+                    _publishData.CallDataPublish(rdf, jobId, false, _token);
                 }
 
             }

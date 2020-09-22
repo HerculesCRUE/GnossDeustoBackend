@@ -71,23 +71,18 @@ namespace API_CARGA.Models.Services
         ///Realizar una llamda Post al método /etl/data-publish para publicar un rdf
         ///</summary>
         ///<param name="rdf">contenido en rdf a publicar</param>
-        ///<param name="token">Token de tipo Bearer para la seguridad entre apis</param>
         ///<param name="jobId">En el caso de que haya sido una tarea la que ha lanzado la acción representa el identificador de la tarea</param>
-        ///<param name="jobCreatedDate">En el caso de que haya sido una tarea la que ha lanzado la acción representa la fecha de creación de dicha tarea</param>
-        public void CallDataPublish(string rdf, string jobId = null, DateTime? jobCreatedDate = null, TokenBearer token = null)
+        ///<param name="discoverProcessed">En el caso de que ya se haya procesado el descubrimiento se envía true y se inserta tal cual en BBDD (sin procesar descubrimiento)</param>
+        public void CallDataPublish(string rdf, string jobId = null, bool discoverProcessed = false, TokenBearer token = null)
         {
             var bytes = Encoding.UTF8.GetBytes(rdf);
             MultipartFormDataContent multiContent = new MultipartFormDataContent();
             multiContent.Add(new ByteArrayContent(bytes), "rdfFile", "rdfFile.rdf");
-            string query = null;
+            string query = $"discoverProcessed={discoverProcessed}";
             if (!string.IsNullOrEmpty(jobId))
             {
-                query = $"job_id={jobId}";
-                if (jobCreatedDate.HasValue)
-                {
-                    query += $"&job_created_date={jobCreatedDate}";
-                }
-            }
+                query = $"jobId={jobId}";
+            }           
             CallPostApiFile("etl/data-publish", multiContent, token, query);
         }
 
