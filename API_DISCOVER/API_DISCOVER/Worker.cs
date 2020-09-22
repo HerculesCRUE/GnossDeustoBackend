@@ -88,7 +88,7 @@ namespace API_DISCOVER
                 {
                     //Si viene de una tarea actualizamos su estado de descubrimiento
                     ProcessDiscoverStateJobBDService processDiscoverStateJobBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<ProcessDiscoverStateJobBDService>();
-                    ProcessDiscoverStateJob processDiscoverStateJob = processDiscoverStateJobBDService.GetrocessDiscoverStateJobByIdJob(discoverItem.JobID);
+                    ProcessDiscoverStateJob processDiscoverStateJob = processDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(discoverItem.JobID);
                     if (processDiscoverStateJob != null)
                     {
                         processDiscoverStateJob.State = "Error";

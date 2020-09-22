@@ -2,14 +2,13 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase para crear una sincronización 
+using API_CARGA.Extras.Excepciones;
 using API_CARGA.Models.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace API_CARGA.Models.Services
@@ -67,7 +66,7 @@ namespace API_CARGA.Models.Services
                         {
 
                             _publishData.CallDataValidate(rdf, identifier, _token);
-                            _publishData.CallDataPublish(rdf, jobId, jobCreatedDate, _token);
+                            _publishData.CallDataPublish(rdf, jobId, true, _token);
                         }
                         catch (ValidationException ex)
                         {
@@ -78,7 +77,8 @@ namespace API_CARGA.Models.Services
                             }
                             exception.AppendLine(ex.Message);
                         }
-                        lastSyncro = identifierOAIPMH;   
+                        lastSyncro = identifierOAIPMH;
+
                     }
                     if (lastSyncro != null)
                     {
@@ -89,7 +89,7 @@ namespace API_CARGA.Models.Services
                 {
                     string rdf = CallGetRecord(identifier, codigoObjeto);
                     _publishData.CallDataValidate(rdf, identifier, _token);
-                    _publishData.CallDataPublish(rdf, jobId, jobCreatedDate, _token);
+                    _publishData.CallDataPublish(rdf, jobId, false, _token);
                 }
                 if (validationException)
                 {

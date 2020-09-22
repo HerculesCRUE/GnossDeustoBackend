@@ -27,7 +27,7 @@ namespace API_DISCOVER.Models.Services
         ///Obtiene un estado de descubrimiento de una tarea a través de su identificador
         ///</summary>
         ///<param name="id">Identificador del estado de descubrimiento de la tarea</param>
-        public ProcessDiscoverStateJob GetrocessDiscoverStateJobById(Guid id)
+        public ProcessDiscoverStateJob GetProcessDiscoverStateJobById(Guid id)
         {
             return _context.ProcessDiscoverStateJob.FirstOrDefault(item => item.Id.Equals(id));
         }
@@ -36,7 +36,7 @@ namespace API_DISCOVER.Models.Services
         ///Obtiene un estado de descubrimiento de una tarea a través de su idJob
         ///</summary>
         ///<param name="id">Identificador del Job del estado de descubrimiento de la tarea</param>
-        public ProcessDiscoverStateJob GetrocessDiscoverStateJobByIdJob(string idJob)
+        public ProcessDiscoverStateJob GetProcessDiscoverStateJobByIdJob(string idJob)
         {
             return _context.ProcessDiscoverStateJob.FirstOrDefault(item => item.JobId.Equals(idJob));
         }
@@ -63,7 +63,7 @@ namespace API_DISCOVER.Models.Services
         public bool ModifyProcessDiscoverStateJob(ProcessDiscoverStateJob processDiscoverStateJob)
         {
             bool modified = false;
-            ProcessDiscoverStateJob processDiscoverStateJobOriginal = GetrocessDiscoverStateJobById(processDiscoverStateJob.Id);
+            ProcessDiscoverStateJob processDiscoverStateJobOriginal = GetProcessDiscoverStateJobById(processDiscoverStateJob.Id);
             if (processDiscoverStateJobOriginal != null)
             {
                 processDiscoverStateJobOriginal.JobId = processDiscoverStateJob.JobId;
@@ -82,7 +82,7 @@ namespace API_DISCOVER.Models.Services
         {
             try
             {
-                ProcessDiscoverStateJob processDiscoverStateJob = GetrocessDiscoverStateJobById(id);
+                ProcessDiscoverStateJob processDiscoverStateJob = GetProcessDiscoverStateJobById(id);
                 if (processDiscoverStateJob != null)
                 {
                     _context.Entry(processDiscoverStateJob).State = EntityState.Deleted;

@@ -14,7 +14,7 @@ namespace API_CARGA.Models.Services
     ///</summary>
     public class CallMockNeedPublishData: ICallNeedPublishData
     {
-        public void CallDataPublish(string rdf, string jobId = null, DateTime? jobCreatedDate = null, TokenBearer token = null)
+        public void CallDataPublish(string rdf, string jobId = null, bool discoverProcessed = false, TokenBearer token = null)
         {
 
         }
