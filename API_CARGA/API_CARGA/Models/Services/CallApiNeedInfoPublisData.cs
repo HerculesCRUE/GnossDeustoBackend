@@ -82,7 +82,7 @@ namespace API_CARGA.Models.Services
             string query = $"discoverProcessed={discoverProcessed}";
             if (!string.IsNullOrEmpty(jobId))
             {
-                query = $"jobId={jobId}";
+                query = $"&jobId={jobId}";
             }           
             CallPostApiFile("etl/data-publish", multiContent, token, query);
         }
