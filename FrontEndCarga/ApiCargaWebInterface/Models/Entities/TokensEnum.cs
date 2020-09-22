@@ -14,6 +14,7 @@ namespace ApiCargaWebInterface.Models.Entities
         TokenCarga = 0,
         TokenUrisFactory = 1,
         TokenCron = 2,
-        TokenOAIPMH = 3
+        TokenOAIPMH = 3,
+        TokenDocumentacion= 4
     }
 }
