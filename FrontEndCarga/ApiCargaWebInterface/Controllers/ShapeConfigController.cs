@@ -32,6 +32,10 @@ namespace ApiCargaWebInterface.Controllers
         public IActionResult Index()
         {
             List<ShapeConfigViewModel> result = _serviceApi.GetShapeConfigs();
+            if (result == null)
+            {
+                result = new List<ShapeConfigViewModel>();
+            }
             return View(result);
         }
 

@@ -33,6 +33,10 @@ namespace ApiCargaWebInterface.Controllers
         public IActionResult Index()
         {
             List<RepositoryConfigViewModel> result = _serviceApi.GetRepositoryConfigs();
+            if(result == null)
+            {
+                result = new List<RepositoryConfigViewModel>();
+            }
             return View(result);
         }
         /// <summary>

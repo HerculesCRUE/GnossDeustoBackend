@@ -23,7 +23,19 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
             _serviceApi = serviceApi;
             if (tokenService != null)
             {
-                _token = tokenService.CallTokenApiDocumentacion();
+                bool tokenCargado = false;
+                while (!tokenCargado) 
+                {
+                    try
+                    {
+                        _token = tokenService.CallTokenApiDocumentacion();
+                        tokenCargado = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        tokenCargado = false;
+                    }
+                }
             }
         }
 

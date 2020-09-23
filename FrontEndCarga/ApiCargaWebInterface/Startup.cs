@@ -64,20 +64,29 @@ namespace ApiCargaWebInterface
                     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.ServiceHost = serviceHost;
                 });
-           // services.AddMvcRazorRuntimeCompilation();
-            services.AddRazorPages().AddRazorRuntimeCompilation();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.Configure<MvcRazorRuntimeCompilationOptions>(opts =>
+            bool cargado = false;
+            while (!cargado) 
             {
-                CallApiService serviceApi = new CallApiService();
-                CallTokenService tokenService = new CallTokenService(new ConfigTokenService());
-                ConfigUrlService serviceUrl = new ConfigUrlService();
-                CallApiVirtualPath apiVirtualPath = new CallApiVirtualPath(tokenService, serviceUrl, serviceApi);
-                opts.FileProviders.Add(
-                    new ApiFileProvider(apiVirtualPath));
-            });
-
-
+                // services.AddMvcRazorRuntimeCompilation();
+                try
+                {
+                    services.AddRazorPages().AddRazorRuntimeCompilation();
+                    services.AddControllersWithViews().AddRazorRuntimeCompilation();
+                    services.Configure<MvcRazorRuntimeCompilationOptions>(opts =>
+                    {
+                        CallApiService serviceApi = new CallApiService();
+                        CallTokenService tokenService = new CallTokenService(new ConfigTokenService());
+                        ConfigUrlService serviceUrl = new ConfigUrlService();
+                        CallApiVirtualPath apiVirtualPath = new CallApiVirtualPath(tokenService, serviceUrl, serviceApi);
+                        opts.FileProviders.Add(
+                            new ApiFileProvider(apiVirtualPath));
+                    });
+                    cargado = true;
+                } catch (Exception ex)
+                {
+                    cargado = false;
+                }
+            }
             services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
             {
                 var builder = new NpgsqlDbContextOptionsBuilder(opt);
