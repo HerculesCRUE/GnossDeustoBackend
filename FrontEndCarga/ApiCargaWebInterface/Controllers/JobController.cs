@@ -83,7 +83,8 @@ namespace ApiCargaWebInterface.Controllers
 
             //_discoverItemService.get
             //TODO cargar los problemas de desambiguación
-            //var discoverItemsErrorMini= _discoverItemService.GetDiscoverItemsErrorByJobMini(id);
+            var discoverItemsErrorMini= _discoverItemService.GetDiscoverItemsErrorByJobMini(id);
+            job.DiscoverItemsMini = discoverItemsErrorMini;
             //var xx = _discoverItemService.GetDiscoverItemById(new Guid("1cb4de68-9489-4a18-8698-45cefbe34ba6"));
             return View(job);
         }
