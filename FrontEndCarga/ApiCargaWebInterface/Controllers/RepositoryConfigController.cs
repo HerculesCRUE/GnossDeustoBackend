@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ApiCargaWebInterface.Extra.Exceptions;
+using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -21,8 +22,10 @@ namespace ApiCargaWebInterface.Controllers
     {
         readonly ICallRepositoryConfigService _serviceApi;
         readonly CallRepositoryJobService _respositoryJobService;
-        public RepositoryConfigController(ICallRepositoryConfigService serviceApi, CallRepositoryJobService respositoryJobService)
+        readonly ProcessDiscoverStateJobBDService _processDiscoverStateJobBDService;
+        public RepositoryConfigController(ProcessDiscoverStateJobBDService iProcessDiscoverStateJobBDService, ICallRepositoryConfigService serviceApi, CallRepositoryJobService respositoryJobService)
         {
+            _processDiscoverStateJobBDService = iProcessDiscoverStateJobBDService;
             _serviceApi = serviceApi;
             _respositoryJobService = respositoryJobService;
         }
@@ -55,6 +58,16 @@ namespace ApiCargaWebInterface.Controllers
                 int succed = result.ListJobs.Count(item => item.State.Equals("Succeeded"));
                 double percentage = ((double)succed / result.ListJobs.Count)*100;
                 result.PorcentajeTareas = Math.Round(percentage, 2);
+
+                List<ProcessDiscoverStateJob> statesDiscoverJob = _processDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJobs(result.ListJobs.Select(x => x.Id).ToList());
+                foreach(JobViewModel jobVM in result.ListJobs)
+                {
+                    ProcessDiscoverStateJob state = statesDiscoverJob.FirstOrDefault(x => x.JobId == jobVM.Id);
+                    if(state!=null)
+                    {
+                        jobVM.DiscoverState = state.State;
+                    }
+                }
             }
             if (result != null)
             {

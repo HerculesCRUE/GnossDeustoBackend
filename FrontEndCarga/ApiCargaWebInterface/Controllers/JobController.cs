@@ -26,11 +26,13 @@ namespace ApiCargaWebInterface.Controllers
     {       
         readonly CallCronApiService _serviceApi;
         readonly DiscoverItemBDService _discoverItemService;
+        readonly ProcessDiscoverStateJobBDService _processDiscoverStateJobBDService;
         readonly ICallEtlService _callEDtlPublishService;
-        public JobController(DiscoverItemBDService iIDiscoverItemService, CallCronApiService serviceApi, ICallEtlService callEDtlPublishService)
+        public JobController(DiscoverItemBDService iIDiscoverItemService, ProcessDiscoverStateJobBDService iProcessDiscoverStateJobBDService, CallCronApiService serviceApi, ICallEtlService callEDtlPublishService)
         {
             _serviceApi = serviceApi;
             _discoverItemService = iIDiscoverItemService;
+            _processDiscoverStateJobBDService = iProcessDiscoverStateJobBDService;
             _callEDtlPublishService = callEDtlPublishService;
         }
         /// <summary>
@@ -72,6 +74,14 @@ namespace ApiCargaWebInterface.Controllers
         public IActionResult DetailsJob(string id)
         {
             var job = _serviceApi.GetJob(id);
+            ProcessDiscoverStateJob stateJob = _processDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(job.Id);
+            if(stateJob!=null)
+            {
+                job.DiscoverState = stateJob.State;
+            }
+            job.DiscoverStates= _discoverItemService.GetDiscoverItemsStatesByJob(id);
+
+            //_discoverItemService.get
             //TODO cargar los problemas de desambiguación
             //var discoverItemsErrorMini= _discoverItemService.GetDiscoverItemsErrorByJobMini(id);
             //var xx = _discoverItemService.GetDiscoverItemById(new Guid("1cb4de68-9489-4a18-8698-45cefbe34ba6"));
