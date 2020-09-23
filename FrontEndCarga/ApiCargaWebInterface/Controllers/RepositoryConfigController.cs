@@ -66,6 +66,24 @@ namespace ApiCargaWebInterface.Controllers
             }
         }
         /// <summary>
+        /// Obtiene los los shapes del repositorio
+        /// </summary>
+        /// <param name="id">Identificador del repositorio</param>
+        /// <returns></returns>
+        [Route("[Controller]/shapes/{id}")]
+        public IActionResult RepositoryShapes(Guid id)
+        {
+            RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(id);
+            if (result != null)
+            {
+                return View(result);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        /// <summary>
         /// Devuleve la página de edición con los datos actuales del repositorio OAIPMH
         /// </summary>
         /// <param name="id">Identificador del repositorio</param>
