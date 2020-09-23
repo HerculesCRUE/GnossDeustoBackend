@@ -105,6 +105,7 @@ namespace ApiCargaWebInterface
             });
 
             services.AddScoped<DiscoverItemBDService, DiscoverItemBDService>();
+            services.AddScoped<ProcessDiscoverStateJobBDService, ProcessDiscoverStateJobBDService>();
 
 
             services.AddControllersWithViews(); 

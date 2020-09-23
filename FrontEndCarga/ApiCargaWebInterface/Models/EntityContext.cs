@@ -12,6 +12,7 @@ namespace ApiCargaWebInterface.Models
     {
         private string _defaultSchema;
         public DbSet<DiscoverItem> DiscoverItem { get; set; }
+        public DbSet<ProcessDiscoverStateJob> ProcessDiscoverStateJob { get; set; }
         public EntityContext(DbContextOptions options, bool memory = false)
             : base(options)
         {           

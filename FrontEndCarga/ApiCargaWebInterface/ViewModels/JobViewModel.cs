@@ -3,6 +3,7 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase que sirve para mostrar los datos de una tarea
 using System;
+using System.Collections.Generic;
 
 namespace ApiCargaWebInterface.ViewModels
 {
@@ -19,6 +20,14 @@ namespace ApiCargaWebInterface.ViewModels
         /// Estado de la ejecución
         /// </summary>
         public string State { get; set; }
+        /// <summary>
+        /// Estado del descubrimiento
+        /// </summary>
+        public string DiscoverState { get; set; }
+        /// <summary>
+        /// Número de items en cada uno de los estados del descubrimiento
+        /// </summary>
+        public Dictionary<string,int> DiscoverStates { get; set; }
         /// <summary>
         /// Identificador de le tarea
         /// </summary>

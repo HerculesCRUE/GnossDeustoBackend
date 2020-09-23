@@ -29,6 +29,23 @@
                             <p class="titulo">Estado de la tarea</p>
                             <p>@Model.State</p>
                         </div>
+                        <div class="state">
+                            <p class="titulo">Estado del descubrimiento</p>
+                            @{
+                                string estadoDescubrimiento = Model.DiscoverState;
+                                @if (Model.DiscoverStates != null)
+                                {
+                                    int numTotal = Model.DiscoverStates.Values.Sum();
+                                    int numProcess = 0;
+                                    if (Model.DiscoverStates.ContainsKey("Processed"))
+                                    {
+                                        numProcess = Model.DiscoverStates["Processed"];
+                                    }
+                                    estadoDescubrimiento += $" ({numProcess}/{numTotal} success)";
+                                }
+                            }
+                            <p>@estadoDescubrimiento</p>
+                        </div>
                         <div class="ExecutedAt">
                             <p class="titulo">Fecha de la ejecución</p>
                             <p>@Model.ExecutedAt</p>
@@ -39,7 +56,7 @@
                         </div>
                         @if (Model.State.Equals("Processing"))
                         {
-                            double complete = ((double)Model.ProcessNumIdentifierOAIPMH / Model.TotalNumIdentifierOAIPMH)*100;
+                            double complete = ((double)Model.ProcessNumIdentifierOAIPMH / Model.TotalNumIdentifierOAIPMH) * 100;
                             string percentage = $"{complete}%";
                             string process = $"{percentage} -> {Model.ProcessNumIdentifierOAIPMH} elemetnos procesados de {Model.TotalNumIdentifierOAIPMH}";
                             <div class="LastIdentifierOAIPMH">
@@ -51,7 +68,7 @@
                                 <p>En ejecucion</p>
                                 <div class="barra-progreso">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="@complete" aria-valuemin="0" aria-valuemax="100" style="width:@percentage">
-                                        
+
                                     </div>
                                 </div>
                             </div>
