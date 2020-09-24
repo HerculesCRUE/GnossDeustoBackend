@@ -104,14 +104,15 @@ Para simplificar el despliegue de estos servicios tenemos que hacer un directori
 	mkdir servicios
 	cd servicios
 
-Una vez en el directorio nos descargamos el scrip que descarga las imágenes para posteriormente cargalar en Docker.
+Una vez en el directorio "Servicios" nos descargamos el script que descarga las imágenes para posteriormente cargarlas en Docker.
 	
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios/carga_imagenes.sh
 
 Una vez cargadas las imágenes en este mismo directorio nos bajamos el yml de los servicios.
 	
-	http://herc-as-front-desa.atica.um.es/docs/docker-servicios/carga_imagenes.sh
+	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios/docker-compose.yml
 	
+Antes de lentar los servicios debemos editar este archivo y reemplezar "ip_de_nuestra_maquina" por la ip de la máquina donde estemos levantando los servicios. Asi todos los servicios se podran comunicar conrrectamente entre ellos.	
 
 ## Preparación del interfaz Fuseki para benchmark
 
