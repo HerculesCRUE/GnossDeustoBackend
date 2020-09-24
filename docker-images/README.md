@@ -21,78 +21,9 @@ Para hacer funcionar el backend será necesario tener instalado en nuestro servi
  
 ## Despliegue de Virtuoso con docker-compose
 
-Para desdeplegar Virtuoso con docker-compose necesitamos un docker-compose.yml con el siguiete contenido. Podemos elegir la ruta que mas nos convenga (por ejemplo ~\virtuoso). Sería recomendable ajustar el DBA_PASSWORD. El resto de variables dependerá de las caractísticas de nuesta infraestructura.
-
-	version: "3"
-	services:
-	    virtuoso:
-		container_name:
-		    virtuoso
-		image:
-		    openlink/virtuoso-opensource-7:latest
-		environment:
-		    DBA_PASSWORD: mysecret      
-		    VIRTUOSO_INI_FILE:            
-		    VIRT_Parameters_NumberOfBuffers: 100000
-		    VIRT_Parameters_MaxDirtyBuffers: 60000
-		    VIRT_Parameters_MaxClientConnections: 100
-		    VIRT_HTTPServer_MaxClientConnections: 50
-		    VIRT_HTTPServer_ServerIdString: "virtuoso"
-		    VIRT_Zero Config_ServerName: "virtuoso"
-		    VIRT_I18N_XAnyNormalization: 3
-		ports:
-		    - "1111:1111"
-		    - "8890:8890"
-		volumes:
-		    - /var/container-data/virtuoso/db:/database   
-		user: ${CURRENT_UID}
-		restart: unless-stopped
-
-Para levantar Virtuoso ejecutaremos este comando en la misma ruta donde tengamos el docker-compose.yml:
-	
-	docker-compose up -d
-	
-Despueués de ejecutar el comando ya tendríamos un servidor Virtuoso operativo en nuestro entorno. Podemos probar que efectivamente está funcionando correctamente accediendo a http://localhost:8890, nos debería paracer la consola de administración de Virtuoso.
-
 ## PostgreSQL
 
-Para PostgreSQL necesitamos importar la imagen que obtenemos en el enlace http://herc-as-front-desa.atica.um.es/docs/herculessql.tar.gz. Una vez descargada la importamos en el nodo de docker con el siguiente comando:
-	
-	docker load < herculessql.tar.gz
-	
-Con este comando la hacemos operativa:
-	
-	docker run -d -p 5432:5432 --name herculessql herculessql
-	
-Así obtenemos una base de datos lista para que las APIs del backend puedan usarla.
-
 ## RabbitMQ
-
-Para deplegar RabbitMQ podemos usar la imagen de Bitnami con docker-compose. Podemos elegir la ruta que mas nos convenga (por ejemplo ~\rabbitmq). Podemos ajustar el password con la variable RABBITMQ_PASSWORD. El usuario por defecto es "user".
-	
-	version: "3.6"
-	services:
- 	 rabbitmq:
-    	  image: 'rabbitmq:3.6-management-alpine'
-    	  ports:
-      	   - '5672:5672'
-      	   - '15672:15672'
-    	  environment:
-      	   AMQP_URL: 'amqp://rabbitmq?connection_attempts=5&retry_delay=5'
-     	   RABBITMQ_DEFAULT_USER: "guest"
-      	   RABBITMQ_DEFAULT_PASS: "guest"
-    	  networks:
-           - network
-	 networks:
-  	  network: {}
-	
-Para levantar RabbitMQ ejecutaremos este comando en la misma ruta donde tengamos el docker-compose.yml:
-	
-	docker-compose up -d
-	
-Con estos pasos ya tendríamos un sistema RabbitMQ. Podemos entrar a la consola de administracion de RabbitMQ a traves de http://locahost:15672. Una vez logueados deberíamos crear un virtual host en http://localhost:15672/#/vhosts y darle permisos al usuario "user".
-
-Para mas informacion: https://hub.docker.com/r/bitnami/rabbitmq/
 
 ## Preparación de Trifid
 
