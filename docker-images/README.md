@@ -19,7 +19,11 @@ Para hacer funcionar el backend será necesario tener instalado en nuestro servi
 
 * Gestor de colas (en este ejemplo RabbitMQ desplegada con Docker)
  
-## Despliegue de Virtuoso con docker-compose
+## Despliegue de Virtuoso
+
+Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml con el siguiente comando:
+	
+	mkdir virtuoso
 
 ## PostgreSQL
 
