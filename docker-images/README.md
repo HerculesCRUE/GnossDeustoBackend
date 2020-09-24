@@ -47,7 +47,7 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 
 ## Preparación de Trifid
 
-Para poner en marcha el servicio de linked creamos un directorio en la home del usuario que se data debemos decargar este paquete http://herc-as-front-desa.atica.um.es/docs/trifid.tar.gz y descomprimirlo. Una vez descomprimido tenemos que abrir el archivo config-custom.json e indicar el interfaz SPARQL de nuestro Virtuoso y el baseurl donde vaya a responder el servicio y el puerto: 
+Para poner en marcha el servicio de linked tenemos que crear una imagen docker con la configuración adecuada para nuestro entorno. Lo primero que debemos hacerun directorio en la home del usuario que se data debemos decargar este paquete http://herc-as-front-desa.atica.um.es/docs/trifid.tar.gz y descomprimirlo. Una vez descomprimido tenemos que abrir el archivo config-custom.json e indicar el interfaz SPARQL de nuestro Virtuoso y el baseurl donde vaya a responder el servicio y el puerto: 
 
 	{
  		"baseConfig": "trifid:config-sparql.json", // inherit the default sparql config
