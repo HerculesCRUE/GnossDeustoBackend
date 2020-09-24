@@ -17,6 +17,8 @@ Para hacer funcionar el backend será necesario tener instalado en nuestro servi
 * Base de datos SQL (en este ejemplo PostgreSQL desplegada con Docker)
 
 * Gestor de colas (en este ejemplo RabbitMQ desplegada con Docker)
+
+* Servidor de Liked Data (en este ejemplo Trifid desplegada con Docker)
  
 ## Despliegue de Virtuoso
 
@@ -77,7 +79,6 @@ Una vez ajustados los parametros tenemos que construir la imagen con el siguient
 Con la imagen ya contruida la ponemos en marcha con este comando:
 
 	docker run -d -p 8081:8081 --name trifid trifid
-
 
 ## Preparación de Apache
 
