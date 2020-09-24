@@ -27,7 +27,7 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-virtuoso/docker-compose.yml
 	docker-compose up -d
 	
-## PostgreSQL
+## Despliegue de PostgreSQL
 
 Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml, entramos en el directorio, descargamos el yml y levantamos el docker con los siguientes comandos: 
 
@@ -36,7 +36,7 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-postgresql/docker-compose.yml
 	docker-compose up -d
 	
-## RabbitMQ
+## Despliegue de RabbitMQ
 
 Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml, entramos en el directorio, descargamos el yml y levantamos el docker con los siguientes comandos: 
 	
