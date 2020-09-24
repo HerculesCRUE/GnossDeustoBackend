@@ -4,7 +4,6 @@
 
 ## Requisitos previos
 Para hacer funcionar el backend será necesario tener instalado en nuestro servidor:
-* Apache configurado como proxy inverso
 
 * Docker (podemos seguir la documentacion oficial dependiendo de nuestra dristrubución de Linux) 
     - Centos https://docs.docker.com/engine/install/centos/
@@ -43,12 +42,12 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 	
 	mkdir rabbitmq
 	cd rabbitmq
-	wget http://herc-as-front-desa.atica.um.es/docs/docker-virtuoso/docker-compose.yml
+	wget http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/docker-compose.yml
 	docker-compose up -d
 
 ## Preparación de Trifid
 
-Para poner en marcha el servicio de linked data debemos decargar este paquete http://herc-as-front-desa.atica.um.es/docs/trifid.tar.gz y descomprimirlo. Una vez descomprimido tenemos que abrir el archivo config-custom.json e indicar el interfaz SPARQL de nuestro Virtuoso y el baseurl donde vaya a responder el servicio y el puerto: 
+Para poner en marcha el servicio de linked creamos un directorio en la home del usuario que se data debemos decargar este paquete http://herc-as-front-desa.atica.um.es/docs/trifid.tar.gz y descomprimirlo. Una vez descomprimido tenemos que abrir el archivo config-custom.json e indicar el interfaz SPARQL de nuestro Virtuoso y el baseurl donde vaya a responder el servicio y el puerto: 
 
 	{
  		"baseConfig": "trifid:config-sparql.json", // inherit the default sparql config
@@ -88,10 +87,6 @@ Ahora solamente nos faltaría añadir esta configuración a Apache:
 	</VirtualHost>
 
 ## Preparación de Apache
-
-Necesitamos preparar Apache como proxy invesro y poder acceder a las APIs a través del dominio que vayamos a utilizar y luego este redirija al puerto específico de cada una de ellas.
-
-Para que funcione correctamente debemos ajustar el ServerName con el dominio que vayamos a utilizar (en este ejemplo mihercules.com) y añadir los parametros del proxy inverso para que Apache redirija las peticiones al API adecuda. Estos parametros los podemos ver en el final de este archivo de ejemplo http://herc-as-front-desa.atica.um.es/docs/httpd.conf.
 
 ## Descarga de imágenes necesarias
 
