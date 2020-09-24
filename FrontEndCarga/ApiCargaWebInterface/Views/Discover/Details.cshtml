@@ -1,0 +1,92 @@
+﻿@model ApiCargaWebInterface.ViewModels.DiscoverItemViewModel
+
+@{
+    ViewData["Title"] = "Discovery item";
+    ViewData["BodyClass"] = "fichaRecurso";
+}
+
+    <div class="row">
+        <div class="col col-12 col-lg-12 col-contenido">
+            <div class="wrapCol">
+                <div class="header-resource">
+                    <div class="h1-container">
+                        <h1>Errores de descubrimiento</h1>
+                        <div class="botones">
+                        </div>
+                    </div>
+                </div>
+                <div class="contenido">
+                    <div class="grupo grupo-descripcion">
+                        @if (!string.IsNullOrEmpty(Model.Error))
+                        {
+                            var diccionarioValues = new Dictionary<string, string>();
+                                    diccionarioValues.Add("idJob", Model.JobId);
+                                    diccionarioValues.Add("IdDiscoverItem", Model.IdDiscoverItem.ToString());
+                        <div class="estado-tarea">
+                            <div class="tabla error">
+                                <div class="fila">
+                                    <p class="titulo">Error de descubrimiento</p>
+                                    <p class="descripcion">@Model.Error</p>
+
+                                </div>
+                            </div>
+                            <form asp-action="RetryDiscover" asp-controller="Job" asp-all-route-data="diccionarioValues" method="post">
+                                <input class="submit principal" type="submit" value="Reintentar">
+                            </form>
+                        </div>
+                        }
+                        else
+                        {
+                            <div class="estado-tarea">
+                                @{
+                                    var diccionarioValues = new Dictionary<string, string>();
+                                    diccionarioValues.Add("idJob", Model.JobId);
+                                    diccionarioValues.Add("IdDiscoverItem", Model.IdDiscoverItem.ToString());
+                                }
+                                <form asp-action="ResolveDiscover" asp-controller="Job" asp-all-route-data="diccionarioValues" method="post">
+                                    <div class="tabla error">
+                                        @*<input type="text" name="idJob" value="@Model.JobId" hidden disabled />
+                                    <input type="text" name="IdDiscoverItem" value="@Model.IdDiscoverItem" hidden disabled />*@
+                                        @*<div class="cabecera">
+                                        <p>Acciones</p>
+                                    </div>*@
+                                        @foreach (var item in Model.DissambiguationProblems)
+                                        {
+
+
+                                            <div class="fila">
+                                                <p class="titulo">Error descubrimiento para el item @item.Key</p>
+                                                <p class="descripcion">Elige la opción que más se adecue para @item.Key</p>
+                                                @*<div class="acciones">
+                                            <ul>
+                                                <li>
+                                                    <input type="checkbox" style="border: 0px; padding: 0px; margin-top: 0px;">
+                                                    <label class="validar">Validar</label>
+                                                </li>
+                                                <li>*@
+                                                <select name="DissambiguationProblemsResolve[@item.Key]">
+                                                    <option value="">Ninguna opción</option>
+                                                    @foreach (var option in item.Value)
+                                                    {
+                                                        string value = option.Split('|').First().Trim();
+                                                        <option value="@value">@option</option>
+                                                    }
+                                                </select>
+                                                @*</li>
+                                                </ul>
+                                            </div>*@
+                                            </div>
+                                        }
+                                    </div>
+                                    <input class="submit principal" type="submit" value="Validar">
+                                </form>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div>
+    <a href="@Url.Action("DetailsJob","Job", new {  id=Model.JobId  })">Volver a la tarea</a>
+</div>

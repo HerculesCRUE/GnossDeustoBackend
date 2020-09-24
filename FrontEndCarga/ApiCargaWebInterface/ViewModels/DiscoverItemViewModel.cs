@@ -14,6 +14,7 @@ namespace ApiCargaWebInterface.ViewModels
         [Display(Name = "Error")]
         public string Error { get; set; }
         [Display(Name = "Problemas de desambiguación")]
-        public Dictionary<string,List<string>> DissambiguationProblems { get; set; }       
+        public Dictionary<string, List<string>> DissambiguationProblems { get; set; }
+        public string JobId { get; set; }
     }
 }

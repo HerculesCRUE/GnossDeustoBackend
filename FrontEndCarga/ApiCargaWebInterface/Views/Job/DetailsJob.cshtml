@@ -58,57 +58,61 @@
                             double complete = ((double)Model.ProcessNumIdentifierOAIPMH / Model.TotalNumIdentifierOAIPMH) * 100;
                             string percentage = $"{complete}%";
                             string process = $"{percentage} -> {Model.ProcessNumIdentifierOAIPMH} elemetnos procesados de {Model.TotalNumIdentifierOAIPMH}";
-                        <div class="LastIdentifierOAIPMH">
-                            <p class="titulo">Último elemento procesado</p>
-                            <p>@Model.LastIdentifierOAIPMH</p>
-                        </div>
-                        <div class="estado-tarea">
-                            <p class="titulo">Estado última tarea ejecutada</p>
-                            <p>En ejecucion</p>
-                            <div class="barra-progreso">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="@complete" aria-valuemin="0" aria-valuemax="100" style="width:@percentage">
+                            <div class="LastIdentifierOAIPMH">
+                                <p class="titulo">Último elemento procesado</p>
+                                <p>@Model.LastIdentifierOAIPMH</p>
+                            </div>
+                            <div class="estado-tarea">
+                                <p class="titulo">Estado última tarea ejecutada</p>
+                                <p>En ejecucion</p>
+                                <div class="barra-progreso">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="@complete" aria-valuemin="0" aria-valuemax="100" style="width:@percentage">
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         }
-                        else if(Model.State.Equals("Failed") || Model.State.Equals("Succeeded")){
-                        <div class="grupo grupo-programacion">
-                            <div class="items tabla">
-                                <div class="cabecera">
-                                    <div class="columna">
-                                        <p>Identificador del item</p>
-                                    </div>
-                                    <div class="columna">
-                                        <p>Estado</p>
-                                    </div>
-                                    <div class="columna acciones">
-                                        <p>Acciones</p>
-                                    </div>
-                                </div>
-                                @foreach (var discoverItem in Model.DiscoverItemsMini)
-                                {
-                                <div class="fila">
-                                    <div class="columna principal">
-                                        <p>@discoverItem.ID</p>
-                                    </div>
-                                    <div class="columna principal">
-                                        <p>@discoverItem.Status</p>
-                                    </div>
-                                    <div class="columna acciones">
-                                        <ul>
-                                            <li>
-                                                <a href="@Url.Action("Details", "Discover", new {  id=discoverItem.ID  })" class="ver">
-                                                    <i class="material-icons">remove_red_eye</i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                }
-
+                        else if (Model.State.Equals("Failed") || Model.State.Equals("Succeeded"))
+                        {
+                            <div class="Exception">
+                                <p class="titulo">Errores de descubrimiento</p>
                             </div>
-                        </div>
+                            <div class="grupo grupo-programacion">
+                                <div class="items tabla">
+                                    <div class="cabecera">
+                                        <div class="columna">
+                                            <p>Identificador del item</p>
+                                        </div>
+                                        <div class="columna">
+                                            <p>Estado</p>
+                                        </div>
+                                        <div class="columna acciones">
+                                            <p>Acciones</p>
+                                        </div>
+                                    </div>
+                                    @foreach (var discoverItem in Model.DiscoverItemsMini)
+                                    {
+                                        <div class="fila">
+                                            <div class="columna principal">
+                                                <p>@discoverItem.ID</p>
+                                            </div>
+                                            <div class="columna principal">
+                                                <p>@discoverItem.Status</p>
+                                            </div>
+                                            <div class="columna acciones">
+                                                <ul>
+                                                    <li>
+                                                        <a href="@Url.Action("Details", "Discover", new {  itemId=discoverItem.ID })" class="ver">
+                                                            <i class="material-icons">remove_red_eye</i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
                         }
 
                     </div>

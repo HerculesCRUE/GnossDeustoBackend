@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<ApiCargaWebInterface.ViewModels.JobViewModel>
 
 @if (Model != null && Model.Count() > 0)
-{
+    {
+        int i = 0;
+        string hidden = "";
+        string clase = "";
     <div class="items tabla">
         <div class="cabecera">
             <div class="columna">
@@ -17,12 +20,17 @@
                 <p>Estado descubrimiento</p>
             </div>
             @*<div class="columna acciones">
-            <p>Acciones</p>
-        </div>*@
+                    <p>Acciones</p>
+                </div>*@
         </div>
         @foreach (var job in Model)
         {
-            string clase = "";
+            if (i == 5)
+            {
+                hidden = "style=\"display: none;\"";
+                clase = "name=\"Show\"";
+            }
+
             if (job.State.Equals("Failed"))
             {
                 clase = "class =text-danger";
@@ -31,42 +39,69 @@
             {
                 clase = "class =text-info";
             }
+            @*if (i == 5)
+            {
+                @Html.Raw("<div style=\"display: none;\" id=\"Show\">");
+            }*@
 
-    <div class="fila">
-        <div class="columna principal">
-            <a href="@Url.Action("DetailsJob", "Job",new { id = job.Id })">
-                <p @clase>@job.Id</p>
-            </a>
-        </div>
-        <div class="columna">
-            <p @clase>@job.ExecutedAt</p>
-        </div>
-        <div class="columna">
-            <p @clase>@job.State</p>
-        </div>
-        <div class="columna">
-            <p @clase>@job.DiscoverState</p>
-        </div>
-        <div class="columna acciones">
-            <ul>
-                @*<li>
-                    <a href="@Url.Action("Details", "ShapeConfig", new {  id=shape.ShapeConfigID  })" class="ver">
-                        <i class="material-icons">remove_red_eye</i>
+            <div class="fila" @hidden @clase>
+                <div class="columna principal">
+                    <a href="@Url.Action("DetailsJob", "Job",new { id = job.Id })">
+                        <p @clase>@job.Id</p>
                     </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Edit", "ShapeConfig", new {  id=shape.ShapeConfigID  })" class="editar">
-                        <i class="material-icons">mode_edit</i>
-                    </a>
-                </li>*@
-                @*<li>
-                    <a href="@Url.Action("Delete", "ShapeConfig", new {  id=job.Id  })" class="borrar">
-                        <i class="material-icons">delete</i>
-                    </a>
-                </li>*@
-            </ul>
-        </div>
-    </div>
+                </div>
+                <div class="columna">
+                    <p @clase>@job.ExecutedAt</p>
+                </div>
+                <div class="columna">
+                    <p @clase>@job.State</p>
+                </div>
+                <div class="columna">
+                    <p @clase>@job.DiscoverState</p>
+                </div>
+                <div class="columna acciones">
+                    <ul>
+                        @*<li>
+                                <a href="@Url.Action("Details", "ShapeConfig", new {  id=shape.ShapeConfigID  })" class="ver">
+                                    <i class="material-icons">remove_red_eye</i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Edit", "ShapeConfig", new {  id=shape.ShapeConfigID  })" class="editar">
+                                    <i class="material-icons">mode_edit</i>
+                                </a>
+                            </li>*@
+                        @*<li>
+                                <a href="@Url.Action("Delete", "ShapeConfig", new {  id=job.Id  })" class="borrar">
+                                    <i class="material-icons">delete</i>
+                                </a>
+                            </li>*@
+                    </ul>
+                </div>
+            </div>
+            i++;
         }
     </div>
+    @*if (i >= 5)
+    {
+        @Html.Raw("</div>");
+    }*@
+    <a href="javascript: void(0);" class="ver-mas" onclick="myFunction()" id="verMas">Ver más</a>
+    <script>
+        function myFunction() {
+            var elements = document.getElementsByName("Show");
+            var element = document.getElementById("verMas");
+            
+            for (let i = 0;i < elements.length; i++) {
+                if (elements[i].style.display === "none") {
+                    elements[i].style.display = "block";
+                    element.innerHTML = 'Ver menos';
+            } else {
+                    elements[i].style.display = "none";
+                    element.innerHTML = 'Ver más';
+            }
+        }
+            }
+            
+    </script>
 }

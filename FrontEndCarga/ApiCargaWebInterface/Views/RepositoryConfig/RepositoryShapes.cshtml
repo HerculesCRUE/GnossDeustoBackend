@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Repositorios";
     ViewData["BodyClass"] = "fichaRecurso";
+    var modeloShape = new ApiCargaWebInterface.ViewModels.ShapeConfigCreateModel();
+    modeloShape.RepositoryID = Model.RepositoryConfigID;
 }
     <div class="row">
         <div class="col col-12 col-lg-12 col-contenido">
@@ -9,6 +11,7 @@
                 <div class="contenido">
                     <div class="grupo grupo-programacion">
                         <h2>Shapes del repositorio <a href="@Url.Action("Details", new {  id=Model.RepositoryConfigID  })"> @Model.Name </a></h2>
+                        <a href="@Url.Action("Create", "ShapeConfig", modeloShape)" class="btn btn-programacion">Crear nuevo Shape</a>
                         @if (Model != null && Model.ShapeConfig.Count() > 0)
                         {
                             int i = 0;
