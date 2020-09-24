@@ -47,12 +47,24 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 
 ## Preparación de Trifid
 
-Para poner en marcha el servicio de linked tenemos que crear una imagen docker con la configuración adecuada para nuestro entorno. Lo primero que debemos hacerun directorio en la home del usuario que se data debemos decargar este paquete http://herc-as-front-desa.atica.um.es/docs/trifid.tar.gz y descomprimirlo. Una vez descomprimido tenemos que abrir el archivo config-custom.json e indicar el interfaz SPARQL de nuestro Virtuoso y el baseurl donde vaya a responder el servicio y el puerto: 
+Para poner en marcha el servicio de linked tenemos que crear una imagen docker con la configuración adecuada para nuestro entorno. En la home del usuario descargamos el paquete de trifid con este comando:
+
+	wget http://herc-as-front-desa.atica.um.es/docs/trifid.tar.gz
+	
+Después lo  descomprimimimos:
+
+	tar xzvf http://herc-as-front-desa.atica.um.es/docs/trifid.tar.gz
+	
+Una vez descomprimido entramos en el directorio trifid.
+
+	cd trifid
+	
+Y editamos el archivo config-custom.json indicando la ip de nuestra máquina en el sparqlEndpointUrl y en datasetBaseUrl.
 
 	{
  		"baseConfig": "trifid:config-sparql.json", // inherit the default sparql config
-  		"sparqlEndpointUrl": "http://localhost:8890/sparql", // overrides SPARQL endpoint
-  		"datasetBaseUrl": "http://graph.um.es/", // enables "proxy" mode.
+  		"sparqlEndpointUrl": "http://ip_de_nuestra_máquina:8890/sparql", // overrides SPARQL endpoint
+  		"datasetBaseUrl": "http://ip_de_nuestra_máquina:8081/", // enables "proxy" mode.
   		"listener": {
    		"port": 8081
   		}
@@ -66,25 +78,6 @@ Con la imagen ya contruida la ponemos en marcha con este comando:
 
 	docker run -d -p 8081:8081 --name trifid trifid
 
-Ahora solamente nos faltaría añadir esta configuración a Apache:
-
-	<VirtualHost *:80>
-	
-		ServerName graph.um.es
-	
-		ProxyPreserveHost On
-		ProxyPass / http://127.0.0.1:8081/
-		ProxyPassReverse / http://127.0.0.1:8081/
-		Timeout 5400
-		ProxyTimeout 5400
-	
-		<Proxy *>
-			Order deny,allow
-			Allow from all
-			Require all granted
-		</Proxy>
-	
-	</VirtualHost>
 
 ## Preparación de Apache
 
