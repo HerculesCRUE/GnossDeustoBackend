@@ -80,8 +80,6 @@ Con la imagen ya contruida la ponemos en marcha con este comando:
 
 	docker run -d -p 8081:8081 --name trifid trifid
 
-## Preparación de Apache
-
 ## Despliegue de los servicios
 
 Este es el listado de imágenes docker de las aplicaciones incluidas en GnossDeustoBackend:
@@ -101,10 +99,19 @@ API que publica los RDF en el nodo central unidata: http://herc-as-front-desa.at
 - [GestorDocumentacion](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/GestorDocumentacion) - Interfaz para la gestion de la documentación: http://herc-as-front-desa.atica.um.es/docs/apigesdoc.tar.gz
 
 
-Despliegue de las APIs
-----------------------------------
+Para simplificar el despliegue de estos servicios tenemos que hacer un directorio en el home del usuario que se llame por ejemplo "Servicios" yluego entramos en el.
 
+	mkdir servicios
+	cd servicios
 
+Una vez en el directorio nos descargamos el scrip que descarga las imágenes para posteriormente cargalar en Docker.
+	
+	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios/carga_imagenes.sh
+
+Una vez cargadas las imágenes en este mismo directorio nos bajamos el yml de los servicios.
+	
+	http://herc-as-front-desa.atica.um.es/docs/docker-servicios/carga_imagenes.sh
+	
 
 ## Preparación del interfaz Fuseki para benchmark
 
