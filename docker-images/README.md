@@ -21,13 +21,30 @@ Para hacer funcionar el backend será necesario tener instalado en nuestro servi
  
 ## Despliegue de Virtuoso
 
-Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml con el siguiente comando:
-	
-	mkdir virtuoso
+Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml, entramos en el directorio, descargamos el yml y levantamos el docker con los siguientes comandos: 
 
+	mkdir virtuoso
+	cd virtuoso
+	wget http://herc-as-front-desa.atica.um.es/docs/docker-virtuoso/docker-compose.yml
+	docker-compose up -d
+	
 ## PostgreSQL
 
+Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml, entramos en el directorio, descargamos el yml y levantamos el docker con los siguientes comandos: 
+
+	mkdir postgresql
+	cd postgresql
+	wget http://herc-as-front-desa.atica.um.es/docs/docker-postgresql/docker-compose.yml
+	docker-compose up -d
+	
 ## RabbitMQ
+
+Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml, entramos en el directorio, descargamos el yml y levantamos el docker con los siguientes comandos: 
+	
+	mkdir rabbitmq
+	cd rabbitmq
+	wget http://herc-as-front-desa.atica.um.es/docs/docker-virtuoso/docker-compose.yml
+	docker-compose up -d
 
 ## Preparación de Trifid
 
