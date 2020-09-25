@@ -8,7 +8,7 @@
 
 [Página de un repositorio](#página-de-un-repositorio)
 
-[Configuraciones de validación para un repositorio](#vista-del-listado-de-configuraciones-de-validación-(Shapes)-para-un-repositorio)
+[Configuraciones de validación para un repositorio](#vista-del-listado-de-configuraciones-de-validación-shapes-para-un-repositorio)
 
 [Vista de una tarea](#vista-de-una-tarea)
 
@@ -21,6 +21,8 @@
 [Publicación y validación de rdf](#publicación-y-validación-de-rdf)
 
  [Obtención de Tokens](#obtención-de-Tokens)
+
+[Administración de páginas](#administración-de-páginas)
 
 Introducción
 ------------
@@ -165,6 +167,6 @@ Desde esta interfaz se pueden consultar lás páginas que han sido creadas por e
 ![](img/Pages.png)
 
 Al pulsar el botón + aparecerá un formulario para crear páginas con contenido HTML estático con una ruta dada para poder consultar estas páginas en el futuro y un campo para subir el html.
-*Importante que la ruta introducida empieze por /*
+**Importante que la ruta introducida empiece por /**
 
 ![](img/CreatePage.png)
