@@ -157,3 +157,14 @@ Obtención de Tokens
 ----------------
 Desde esta interfaz se pueden obtener los tokens de las diferentes aplicaciones que habrá que pegar en las diferentes apis para poder usar la interfaz swagger de cada api
 ![](img/getTokens.png)
+
+Administración de páginas
+----------------
+Desde esta interfaz se pueden consultar lás páginas que han sido creadas por el usuario, eliminarlas, editarlas y crearlas gracias al botoón + que aparece en el listado.
+
+![](img/Pages.png)
+
+Al pulsar el botón + aparecerá un formulario para crear páginas con contenido HTML estático con una ruta dada para poder consultar estas páginas en el futuro y un campo para subir el html.
+*Importante que la ruta introducida empieze por /*
+
+![](img/CreatePage.png)
