@@ -31,7 +31,7 @@ Para desplegar Virtuoso vamos a utilizar docker-compose con su correspondiente p
 * VIRT_Parameters_MaxClientConnections: 100 - Máximo de conexiones por el puerto 1111.
 * VIRT_HTTPServer_MaxClientConnections: 50 - Máximo de conexiones por el puerto 8890.
 
-Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml, entramos en el directorio, descargamos el yml y levantamos el docker con los siguientes comandos: 
+Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a contener el docker-compose.yml, entramos en el directorio, descargamos el yml y levantamos el docker con los siguientes comandos: 
 
 	mkdir virtuoso
 	cd virtuoso
@@ -51,6 +51,8 @@ Y podemos hacer una sencilla comprobación de que funciona entrando en la interf
 	
 ## Despliegue de PostgreSQL
 
+El procedimiento para desplegar PostgreSQL es similar al de virtuso. Utilizaremos docker-compose con su respectivo yml
+
 Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml, entramos en el directorio, descargamos el yml y levantamos el docker con los siguientes comandos: 
 
 	mkdir postgresql
@@ -60,6 +62,7 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 	
 ## Despliegue de RabbitMQ
 
+El procedimiento para desplegar RabbitMQ es similar
 Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml, entramos en el directorio, descargamos el yml y levantamos el docker con los siguientes comandos: 
 	
 	mkdir rabbitmq
