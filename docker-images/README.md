@@ -46,6 +46,10 @@ Un vez deplegado podemos ver el proceso de docker con este comando:
 	
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/01_docker_ps.png)
 
+Y podemos hacer una sencilla comprobación de que funciona entrando en la interfaz web con http://ip_de_nuestra_maquina:8890
+
+![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/02_web.png)
+
 Detalles del docker-compose.yml:
 
 * DBA_PASSWORD: mysecret - Ajusta la clave para el usuario dba     
