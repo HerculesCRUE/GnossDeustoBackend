@@ -20,7 +20,7 @@ Para hacer funcionar el backend será necesario tener instalado en nuestro servi
 
 * Servidor de Liked Data (en este ejemplo Trifid desplegada con Docker)
 
-* Acceso a curriculumpruebas.um.es
+* Acceso a http://curriculumpruebas.um.es/curriculum/rest/v1/auth desde la máquina donde vayamos a desplegar.
  
 ## Despliegue de Virtuoso
 
