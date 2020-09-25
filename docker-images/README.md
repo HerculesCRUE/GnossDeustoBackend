@@ -64,7 +64,7 @@ Depués de desplegar, como en el caso anterior vamos a hacer la comprobación de
 	
 	docker-compose ps
 	
-![](http://herc-as-front-desa.atica.um.es/docs/capturas/postgresql/04_docker_ps.png)
+![](http://herc-as-front-desa.atica.um.es/docs/capturas/postgre/04_docker_ps.png)
 
 	
 ## Despliegue de RabbitMQ
