@@ -19,6 +19,8 @@ Para hacer funcionar el backend será necesario tener instalado en nuestro servi
 * Gestor de colas (en este ejemplo RabbitMQ desplegada con Docker)
 
 * Servidor de Liked Data (en este ejemplo Trifid desplegada con Docker)
+
+* Acceso a curriculumpruebas.um.es
  
 ## Despliegue de Virtuoso
 
