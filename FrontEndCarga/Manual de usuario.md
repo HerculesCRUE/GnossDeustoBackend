@@ -4,7 +4,11 @@
 
 [Introducción](#introduccion)
 
-[Página principal. Listado de repositorios](#página-principal-listado-de-repositorios)
+[Página principal. Listado de repositorios](#página-principal-listado-de-repositorios) 
+
+[Página de un repositorio](#página-de-un-repositorio)
+
+[Configuraciones de validación para un repositorio](#vista-del-listado-de-configuraciones-de-validación-(Shapes)-para-un-repositorio)
 
 [Vista de una tarea](#vista-de-una-tarea)
 
@@ -34,26 +38,38 @@ Desde este listado se puede crear un repositorio nuevo con el botón "+" que se 
 
 ![](img/repositorios.png)
 
-Al acceder a un repositorio podemos ver las validaciones que tiene vinculados ese repositorio, 
-así como las tareas de sincronización programadas y el histórico de sincronizaciones ejecutadas que ha tenido, 
-como se muestra a continuación. 
+Al acceder a un repositorio podemos ver las validaciones configuradas que tiene vinculados ese repositorio, mediante el enlace que aparece en la sección de Ver las configuraciones de validación para el respositorio, 
+así como las tareas de sincronización programadas y el histórico de sincronizaciones ejecutadas que ha tenido. En este histórico aparecen las últimas 5 tareas ejecutadas, para poder ver el resto basta con pulsar en ver más para que se desplieguen el resto de tareas ejecutadas. En esté último apartado en el que se muestran las tareas ejecutadas aparecen dos estados:
+ - Estado: Que indica la validación de los rdfs y su posterior encolado para su procesamiento. Pueden aparecer errores de ejecución y de validación de las diferentes configuraciones de validación que tiene el repositorio
+ - Estado de descubrimiento: Que indica la publicación de los rdfs y el desambiguamiento de las urls formadas. Pueden aparecer errores de ejecución y de desambiguación de las urls, lo que dará al usuario la opción de elegir la correcta.
+como se muestra en el siguiente apartado. 
+
+Página de un repositorio
+-----------------------------------------
 
 ![](img/repositorio.png)
 
-Desde esta pantalla se pueden crear nuevos validaciones asociados al repositorio y nuevas 
-sincronizaciones. Además se puede editar o eliminar el repositorio y modificar la
+Desde esta pantalla se pueden crear nuevas sincronizaciones. Además se puede editar o eliminar el repositorio y modificar la
 información asociada a él (validaciones y tareas):
- - Modificar shape.
- - Eliminar shape.
  - Eliminar tarea programada.
  - Eliminar tarea recurrente.
 
-También se puede acceder a la información de las tareas, tanto de tareas de ejecución
+Desde la página de un repositorioo también se puede acceder a la información de las tareas, tanto de tareas de ejecución
 única como de tareas recurrentes, como se muestra en los apartados siguientes.
+Como se ha mencionado anteriormente para acceder a las configuraciones de validación hay un enlace en la sección Ver las configuraciones de validación para el respositorio,
+ acontinuación se muestra la vista de configuraciones para un repositorio
+
+
+Vista del listado de configuraciones de validación (Shapes) para un repositorio
+------------------
+Un shape es una configuración de validación que se configura en un repositorio y sirve para comprobar que los elementos que se van a sincornizar en el repositorio
+tienen una estructura válida.
+Desde este vista se muestran los shapes configurados para un repositorio, desde esta página se puede tanto crear un nuevo shape para el repositorio como eliminar, modificar y visualizar uno ya creado.
+
+![](img/ShapesRepo.png)
 
 Vista de una tarea
 ------------------
-
 Se denomina una tarea a la programación de una sincronización de un repositorio. Cuando está sincronización 
 se realiza, esta tarea pasa a ser una tarea ejecutada. 
 
@@ -63,9 +79,21 @@ y un botón con el cual se puede volver a lanzar. Los datos mostrados son:
  - La tarea ejecutada.
  - El estado de la tarea, que puede ser que se haya ejecutado con éxito o esté en estado fallido.
  - La fecha de la ejecución en formato UTC.
- - Error que haya causado el fallo de la tarea.
- 
-![](img/JobFailDetails.png)
+ - Error que haya causado el fallo de la tarea, en el caso de que haya ocurrido algún error.
+ - Errores en el descubrimiento, pueden ser del tipo error, los cuales se pueden volver a reintentar o ProcessedDissambiguationProble, que requieren la intervención del usuario.
+
+Vista de una tarea con errores de descubrimiento:
+![](img/JobDiscoverError.png)
+En está vista se ve que tenemos un error asociado a la tarea de ejecución en el descubrimiento y otro de desambiguación que requiere la intervención del usuario, a continución se muestrán las vistas de
+estos errores.
+En la siguiente imágen se muestra un error de ejecución que se haya podido dar por un error puntual, se puede volver a lanzar pulsando el botón de reintentar.
+
+![](img/DiscoverError.png)
+
+A continuación se muestra un error en el que se requiere la intervención del usuario eligiendo la opción que sea correcta enter las opciones disponibles o no elegir ninguna opción
+en el caso de que no sea ninguna la opción correcta.
+
+![](img/DiscoverUser.png)
 
 Vista de una tarea recurrente
 -----------------------------
@@ -115,15 +143,11 @@ Interfaz desde la que se puede:
 
 Publicación y validación de rdf
 ----------------
-A esta interfaz se accede desde la vista de detalles de un repositorio, desde la parte superior donde aparece la opción publicación manual.
-Desde esta interfaz se puede: 
+Se accede desde la vista de detalles de un repositorio, desde la parte superior donde aparece la opción publicación manual, se despliega un menú con 3 opciones.
  - Obtener el rdf de un repositorio.
  - Validar un rdf propio o descargado del propio repositorio, tanto por medio de un rdf de validación propio como por los shapes configurados en el propio repositorio.
  - Publicar un rdf, pasando antes por los sahpes configurados en el repositorio.
 Cuando se obtenga un error de validación se mostrará una página de error como la que aparece a continuación.
-
-Interfaz:
-![](img/manualPublish.png)
 
 Error de validación:
 
