@@ -24,9 +24,7 @@ Para hacer funcionar el backend será necesario tener instalado en nuestro servi
  
 ## Despliegue de Virtuoso
 
-Para desplegar Virtuoso
-Detalles del docker-compose.yml:
-
+Para desplegar Virtuoso vamos a utilizar docker-compose con su correspondiente plantilla docker-compose.yml. Las configuraciones más importantes de esta plantilla son las siguientes:
 * DBA_PASSWORD: mysecret - Ajusta la clave para el usuario dba     
 * VIRT_Parameters_NumberOfBuffers: 100000 - Nivel de buffer ajustado para 1 GB de RAM, para más RAM se incrementaria proporcionalmente.
 * VIRT_Parameters_MaxDirtyBuffers: 60000 - Nivel de buffer ajustado para 1 GB de RAM, para más RAM se incrementaria proporcionalmente.
@@ -50,13 +48,6 @@ Y podemos hacer una sencilla comprobación de que funciona entrando en la interf
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/02_web.png)
 
-Detalles del docker-compose.yml:
-
-* DBA_PASSWORD: mysecret - Ajusta la clave para el usuario dba     
-* VIRT_Parameters_NumberOfBuffers: 100000 - Nivel de buffer ajustado para 1 GB de RAM, para más RAM se incrementaria proporcionalmente.
-* VIRT_Parameters_MaxDirtyBuffers: 60000 - Nivel de buffer ajustado para 1 GB de RAM, para más RAM se incrementaria proporcionalmente.
-* VIRT_Parameters_MaxClientConnections: 100 - Máximo de conexiones por el puerto 1111.
-* VIRT_HTTPServer_MaxClientConnections: 50 - Máximo de conexiones por el puerto 8890.
 	
 ## Despliegue de PostgreSQL
 
