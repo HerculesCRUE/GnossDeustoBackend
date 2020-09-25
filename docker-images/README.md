@@ -117,6 +117,10 @@ Para simplificar el despliegue de estos servicios tenemos que hacer un directori
 Una vez en el directorio "Servicios" nos descargamos el script que descarga las imágenes para posteriormente cargarlas en Docker.
 	
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios/carga_imagenes.sh
+	
+Lo ejecutamos:
+
+	./carga_imagenes.sh
 
 Una vez cargadas las imágenes en este mismo directorio nos bajamos el yml de los servicios.
 	
