@@ -25,7 +25,7 @@ Para hacer funcionar el backend será necesario tener instalado en nuestro servi
 ## Despliegue de Virtuoso
 
 Para desplegar Virtuoso vamos a utilizar docker-compose con su correspondiente plantilla docker-compose.yml. Las configuraciones más importantes de esta plantilla son las siguientes:
-* DBA_PASSWORD: mysecret - Ajusta la clave para el usuario dba     
+* DBA_PASSWORD: mysecret - Ajusta la clave para el usuario dba.    
 * VIRT_Parameters_NumberOfBuffers: 100000 - Nivel de buffer ajustado para 1 GB de RAM, para más RAM se incrementaria proporcionalmente.
 * VIRT_Parameters_MaxDirtyBuffers: 60000 - Nivel de buffer ajustado para 1 GB de RAM, para más RAM se incrementaria proporcionalmente.
 * VIRT_Parameters_MaxClientConnections: 100 - Máximo de conexiones por el puerto 1111.
@@ -51,7 +51,7 @@ Y podemos hacer una sencilla comprobación de que funciona entrando en la interf
 	
 ## Despliegue de PostgreSQL
 
-El procedimiento para desplegar PostgreSQL es similar al de virtuso. Utilizaremos docker-compose con su respectivo yml
+El procedimiento para desplegar PostgreSQL es similar al de virtuso. Utilizaremos docker-compose con su respectivo yml. En esta plantilla no es necesario ajustar nada aunque podemos ajustar el password que queramos, cosa que tenemos que tener en cuenta a la hora de ajustar el yml de los servicios que veremos más adelante.
 
 Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml, entramos en el directorio, descargamos el yml y levantamos el docker con los siguientes comandos: 
 
@@ -60,9 +60,17 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-postgresql/docker-compose.yml
 	docker-compose up -d
 	
+Depués de desplegar, como en el caso anterior vamos a hacer la comprobación de que el contenedor está levantado pero en esta ocasión vamos a usar el comando docker-compose ps que se limita a mostrar información solo de los procesos de este yml.
+	
+	docker-compose ps
+	
+![](http://herc-as-front-desa.atica.um.es/docs/capturas/postgresql/04_docker_ps.png)
+
+	
 ## Despliegue de RabbitMQ
 
-El procedimiento para desplegar RabbitMQ es similar
+RabbitMQ lo desplegaremos con la misma mecánica que en los casos anteriores.
+
 Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml, entramos en el directorio, descargamos el yml y levantamos el docker con los siguientes comandos: 
 	
 	mkdir rabbitmq
