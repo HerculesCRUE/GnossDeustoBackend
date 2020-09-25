@@ -24,12 +24,23 @@ Para hacer funcionar el backend será necesario tener instalado en nuestro servi
  
 ## Despliegue de Virtuoso
 
+Para desplegar Virtuoso
+Detalles del docker-compose.yml:
+
+* DBA_PASSWORD: mysecret - Ajusta la clave para el usuario dba     
+* VIRT_Parameters_NumberOfBuffers: 100000 - Nivel de buffer ajustado para 1 GB de RAM, para más RAM se incrementaria proporcionalmente.
+* VIRT_Parameters_MaxDirtyBuffers: 60000 - Nivel de buffer ajustado para 1 GB de RAM, para más RAM se incrementaria proporcionalmente.
+* VIRT_Parameters_MaxClientConnections: 100 - Máximo de conexiones por el puerto 1111.
+* VIRT_HTTPServer_MaxClientConnections: 50 - Máximo de conexiones por el puerto 8890.
+
 Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml, entramos en el directorio, descargamos el yml y levantamos el docker con los siguientes comandos: 
 
 	mkdir virtuoso
 	cd virtuoso
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-virtuoso/docker-compose.yml
 	docker-compose up -d
+	
+	
 
 Detalles del docker-compose.yml:
 
