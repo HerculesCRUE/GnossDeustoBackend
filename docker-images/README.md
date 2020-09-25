@@ -40,7 +40,11 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-virtuoso/docker-compose.yml
 	docker-compose up -d
 	
+Un vez deplegado podemos ver el proceso de docker con este comando:
+
+	docker ps
 	
+![](..//Docs/capturas/virtuoso/01_docker_ps.png)
 
 Detalles del docker-compose.yml:
 
