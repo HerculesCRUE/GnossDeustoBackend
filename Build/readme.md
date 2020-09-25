@@ -37,6 +37,8 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
          "Scope": "apiUrisFactory",
           "AllowedHosts": "*"
     }
+- Scope: Limitación de acceso al api de urisFactory
+
 ### Ejecución Linux
     dotnet UrisFactory.dll
 ## Api Carga
@@ -113,7 +115,10 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
 ### Configuración
  >
     {
-    "Logging": {
+	"ConnectionStrings": {
+	"PostgreConnectionmigration": ""
+	},
+	"Logging": {
     "LogLevel": {
     "Default": "Information",
     "Microsoft": "Warning",
@@ -121,22 +126,35 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
     }
     },
     "AllowedHosts": "*",
-    "Urls": "http://0.0.0.0:5103",
+	"LogPath": "",
+	"LogPathCarga": "",
+	"LogPathCron": "",
+	"Urls": "http://0.0.0.0:5103",
     "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
-    "ConfigUrlCron": "http://herc-as-front-desa.atica.um.es/cron-config/",
+	"ConfigUrlDocumentacion": "http://herc-as-front-desa.atica.um.es/documentacion/",
+	"ConfigUrlCron": "http://herc-as-front-desa.atica.um.es/cron-config/",
     "ConfigUrlUrisFactory": "http://herc-as-front-desa.atica.um.es/uris/",
     "Authority": "http://localhost:56306/connect/token",
     "GrantType": "client_credentials",
     "Scope": "apiCarga",
     "ScopeCron": "apiCron",
     "ScopeUrisFactory": "apiUrisFactory",
-    "ClientId": "Web",
-    "ClientSecret": "master"
+	"ScopeDocumentacion": "apiGestorDocumentacion",
+	"ScopeOAIPMH": "apiOAIPMH",
+	"ClientId": "Web",
+	"ClientIdOAIPMH": "OAIPMH",
+	"ClientSecretOAIPMH": "secretOAIPMH",
+	"ClientSecret": "master"
     }
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
  - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
+ - PostgreConnectionmigration: Conexión con la base de datos
+ - LogPath: Ruta donde va a guardar los logs de la aplicación
+ - LogPathCarga: Ruta donde escribe los logs el apiCarga
+ - LogPathCron: Ruta donde escribe los logs el apiCron
  - Urls: Url en la que se va a lanzar la aplicación
+ - ConfigUrlDocumentacion: Url donde está lanzada la aplicación de apiDocumentacion
  - ConfigUrl: Url donde está lanzada la aplicación API Carga
  - ConfigUrlCron: Url donde está lanzada la aplicación CronConfigure
  - ConfigUrlUrisFactory: Url donde está lanzada la aplicación UrisFactory
@@ -144,8 +162,12 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
  - GrantType: Tipo de concesión de Oauth
  - Scope: Limitación de acceso al api de carga
  - ScopeCron: Limitación de acceso al api de cron
+ - ScopeDocumentacion: Limitación de acceso al api de documentación
+ - ScopeOAIPMH: Limitación de acceso al api de OAIPMH
  - ScopeUrisFactory: Limitación de acceso al api de urisFactory
  - ClientId: Id de cliente, en este caso se ha configurado un cliente que pueda acceder a todas las apis que usa la web
+ - ClientIdOAIPMH: Id de cliente de OAIPMH
+ - ClientSecretOAIPMH: "clave" de acceso del cliente de OAIPMH
  - ClientSecret: "clave" de acceso del cliente
 ### Ejecución
     dotnet ApiCargaWebInterface.dll
@@ -258,3 +280,35 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
  - GrantType: Tipo de concesión de Oauth
  - ClientIdUnidata: Id de cliente del api de unidata
  - ClientSecretUnidata: "clave" de acceso del api de unidata
+ 
+ ## GestorDocumentacion
+
+[gestorDocumentacion.tar.gz](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Build/gestordocumentacion.tar.gz)
+
+### Configuración
+ >
+    {
+	"ConnectionStrings": {
+	"PostgreConnectionmigration": ""
+	},
+	"Logging": {
+    "LogLevel": {
+    "Default": "Information",
+    "Microsoft": "Warning",
+    "Microsoft.Hosting.Lifetime": "Information"
+    }
+    },
+    "AllowedHosts": "*",
+	"LogPath": "",
+    "Authority": "http://localhost:56306",
+    "Scope": "apiGestorDocumentacion",
+    }
+ - LogLevel.Default: Nivel de error por defecto
+ - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
+ - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
+ - PostgreConnectionmigration: Conexión con la base de datos
+ - LogPath: Ruta donde va a guardar los logs de la aplicación
+ - Authority: Url donde está instalado el IdentityServer
+ - Scope: Limitación de acceso al api de documentacion
+### Ejecución
+    dotnet GestorDocumentacion.dll
