@@ -61,6 +61,10 @@ namespace ApiCargaWebInterface.Controllers
             {
                 token = _callTokenService.CallTokenOAIPMH();
             }
+            else if (token_Type.Equals((int)TokensEnum.TokenDocumentacion))
+            {
+                token = _callTokenService.CallTokenApiDocumentacion();
+            }
             if (token != null)
             {
                 tokenViewModel.Token = $"{token.token_type} {token.access_token}";
@@ -80,6 +84,7 @@ namespace ApiCargaWebInterface.Controllers
             tokensList.Add((int)TokensEnum.TokenUrisFactory, "token de uris factory");
             tokensList.Add((int)TokensEnum.TokenCron, "token de cron configure");
             tokensList.Add((int)TokensEnum.TokenOAIPMH, "token de api OAIPMH");
+            tokensList.Add((int)TokensEnum.TokenDocumentacion, "token de api documentacion");
             return tokensList;
         }
     }

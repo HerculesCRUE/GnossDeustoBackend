@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace GestorDocumentacion.Models.Services
 {
+    /// <summary>
+    /// Clase para la simulación de la gestión de plantillas
+    /// </summary>
     public class TemplatesOperationMockService : ITemplatesOperationsServices
     {
         private List<Template> _pageTemplate;
@@ -31,6 +34,11 @@ namespace GestorDocumentacion.Models.Services
             _pageTemplate.Add(template1);
             _pageTemplate.Add(Template2);
         }
+        /// <summary>
+        /// Elimina una plantilla
+        /// </summary>
+        /// <param name="templateID">Identificador de la plantilla</param>
+        /// <returns></returns>
         public bool DeleteTemplate(Guid templateID)
         {
             Template template = _pageTemplate.FirstOrDefault(page => page.TemplateID.Equals(templateID));
@@ -40,22 +48,38 @@ namespace GestorDocumentacion.Models.Services
             }
             return true;
         }
-
+        /// <summary>
+        /// Obtiene una plantilla a partir de su nombre
+        /// </summary>
+        /// <param name="name">Nombre de la plantila</param>
+        /// <returns></returns>
         public Template GetTemplate(string name)
         {
             return _pageTemplate.FirstOrDefault(page => page.Name.Equals(name));
         }
-
+        /// <summary>
+        /// Obtiene una plantilla a partir de su identificador
+        /// </summary>
+        /// <param name="templateID">Identificador de la plantilla</param>
+        /// <returns></returns>
         public Template GetTemplate(Guid templateID)
         {
             return _pageTemplate.FirstOrDefault(page => page.TemplateID.Equals(templateID));
         }
-
+        /// <summary>
+        /// Obtiene una lista de plantillas
+        /// </summary>
+        /// <returns></returns>
         public List<Template> GetTemplates()
         {
             return _pageTemplate;
         }
-
+        /// <summary>
+        /// Carga una nueva plantilla o modifica una existente
+        /// </summary>
+        /// <param name="template">Datos nuevos de la plantilla</param>
+        /// <param name="isNew">Indica si la plantilla es nueva o no</param>
+        /// <returns></returns>
         public bool LoadTemplate(Template template, bool isNew)
         {
             if (isNew)

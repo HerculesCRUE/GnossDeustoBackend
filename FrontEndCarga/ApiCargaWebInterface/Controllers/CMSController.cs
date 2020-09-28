@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
+// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+// Controlador para gestionar elar las páginas creadas por los usuarios
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +15,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiCargaWebInterface.Controllers
 {
+    /// <summary>
+    /// Controlador para gestionar elar las páginas creadas por los usuarios
+    /// </summary>
     public class CMSController : Controller
     {
         CallApiVirtualPath _documentationApi;
@@ -19,6 +26,11 @@ namespace ApiCargaWebInterface.Controllers
             _documentationApi = documentationApi;
         }
 
+        /// <summary>
+        /// Es el método encargado de enrutar las páginas creadas por los usuarios
+        /// </summary>
+        /// <param name="url">url de la página a buscar</param>
+        /// <returns></returns>
         [HttpGet("{*url}", Order = int.MaxValue)]
         public IActionResult GetRoute(string url)
         {
@@ -30,6 +42,10 @@ namespace ApiCargaWebInterface.Controllers
             return View($"/{url}");
         }
 
+        /// <summary>
+        /// Obtiene el listado de las páginas creadas
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             var pages = _documentationApi.GetPages();
@@ -45,7 +61,11 @@ namespace ApiCargaWebInterface.Controllers
             }
             return View(pagesViewModel);
         }
-
+        /// <summary>
+        /// Obtiene los datos de una página
+        /// </summary>
+        /// <param name="route">Ruta de la página</param>
+        /// <returns></returns>
         public IActionResult Details(string route)
         {
             var page = _documentationApi.GetPage(route);
@@ -58,13 +78,22 @@ namespace ApiCargaWebInterface.Controllers
             };
             return View(pageViewModel);
         }
-
+        /// <summary>
+        /// Elimina una página
+        /// </summary>
+        /// <param name="page_id">Identificador de la página</param>
+        /// <returns></returns>
         public IActionResult Delete(Guid page_id)
         {
             _documentationApi.DeletePage(page_id);
             return RedirectToAction("Index");
         }
-
+        /// <summary>
+        /// devuelve el formulario de creación/edición de una página
+        /// </summary>
+        /// <param name="page_id">Identificador de la página en el caso que sea una edición</param>
+        /// <param name="route">Ruta de la página en el caso de que sea una edición</param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Create(Guid page_id, string route)
         {
@@ -75,7 +104,11 @@ namespace ApiCargaWebInterface.Controllers
             pageModel.Route = route;
             return View(pageModel);
         }
-
+        /// <summary>
+        /// Crea o modifica una página
+        /// </summary>
+        /// <param name="new_page">Datos nuevos de la página</param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Create(PageViewModel new_page)
         {
