@@ -56,8 +56,7 @@ namespace API_DISCOVER
 
         private bool ProcessItem(string item)
         {
-            DiscoverItem discoverItem = JsonConvert.DeserializeObject<DiscoverItem>(item);
-            
+            DiscoverItem discoverItem = JsonConvert.DeserializeObject<DiscoverItem>(item);              
             try
             {
                 //Aplicamos el proceso de descubrimiento
