@@ -70,7 +70,8 @@ Este Api contiene dos controladores.
 			    },  
 			    "resourcesClass": {  
 				    "resourceClass": "Example",
-				    "labelResourceClass": "example",
+					"RdfType": "ExampleRdfType",
+					"labelResourceClass": "example",
 				    "resourceURI": "uriExampleStructure"
 			    }
 		    }
@@ -242,7 +243,8 @@ El Esquema de URIs tiene que declararse en un formato informático que pueda ser
     			"resourcesClasses": [ 
     				{
     					"resourceClass": {se corresponde con una entidad de ROH},
-    					"labelResourceClass": {opcional, etiqueta de la entidad},
+						"RdfType": "Rdf type al que pertenece en la ontología",
+						"labelResourceClass": {opcional, etiqueta de la entidad},
     					"resourceURI": {nombre de la estructura de URI que aplica}
     				}
     			]
@@ -265,6 +267,7 @@ Las partes del formato anterior son:
 	 - **finalCharacter**. Indica si el componente lleva una barra para la composición de un URI correcto.
  - **resourceClasses**. Tendrá tantos elementos como entidades de ROH necesiten disponer de un URI a través de la Factoría de URIs. Los atributos por los que se declara como se compone el URI para cada entidad son:
 	 - **resourceClass**. Identificador del tipo de entidad.
+	 - **RdfType**. Rdf type al que pertenece en la ontología.
 	 - **labelResourceClass**. Opcional, se declara si se desea que la URL tenga otro texto, habitualmente por requisitos de idioma.
 	 - **resourceURI**. Identifica el elemento uriResourceStructure que se usará para componer el URI de la entidad.
 	 
@@ -357,12 +360,14 @@ Se indica a continuación un ejemplo:
 		    "resourcesClasses": [
 			    {
 				    "resourceClass": "researcher",
-				    "labelResourceClass": "investigador",
+					"RdfType": "researcherType",
+					"labelResourceClass": "investigador",
 				    "resourceURI": "uriResourceStructure"
 			    },
 			    {
 				    "resourceClass": "publication",
-				    "labelResourceClass": "publicacion",
+					"RdfType": "publicationType",
+					"labelResourceClass": "publicacion",
 				    "resourceURI": "uriPublicationStructure"
 			    }
 		    ]
