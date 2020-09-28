@@ -316,7 +316,7 @@ namespace API_DISCOVER.Utility
                 }
 
                 //Actualizamos el estado de descubrimiento de la tarea si el estado encolado esta en estado Success o Error (ha finalizado)
-                string statusQueueJob = "Succeeded";// pCallCronApiService.GetJob(pDiscoverItem.JobID).State;
+                string statusQueueJob = pCallCronApiService.GetJob(pDiscoverItem.JobID).State;
                 if ((statusQueueJob == "Failed" || statusQueueJob == "Succeeded") )
                 {
                     ProcessDiscoverStateJob processDiscoverStateJob = pProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(pDiscoverItem.JobID);
