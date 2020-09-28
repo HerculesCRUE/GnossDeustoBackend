@@ -13,3 +13,24 @@ determinada y luego acceder a esas páginas a través de la web (https://herc-as-f
 Hay una versión disponible en el entorno de pruebas de la Universidad de Murcia, en esta dirección: 
 
 http://herc-as-front-desa.atica.um.es/documentacion.
+
+*Obtención del Token*
+-------------------------
+Este api esta protegida mediante tokens, por ello para poder usar la interfaz swagger hay que obtener un token, el cual se puede obtener desde https://herc-as-front-desa.atica.um.es/carga-web/Token
+
+## Dependencias
+
+- **coverlet.collector**: versión 1.2.1
+- **IndetityServer4**: versión 4.0.4
+- **IdentityServer4.AccessTokenValidation**: versión 3.0.1
+- **Microsoft.EntityFrameworkCore**: versión 3.1.7
+- **Microsoft.EntityFrameworkCore.Tools**: versión 3.1.7
+- **Microsoft.VisualStudio.Web.CodeGeneration.Design**: versión 3.1.4
+- **Npgsql.EntityFrameworkCore.PostgreSQL**: versión 3.1.4
+- **Serilog.AspNetCore**: versión 3.4.0
+- **Swashbuckle.AspNetCore**: versión 4.0.4
+- **Swashbuckle.AspNetCore.Annotations**: versión 5.5.1
+- **Swashbuckle.AspNetCore.Filters**: versión 5.5.2
+- **Swashbuckle.AspNetCore.Swagger**: versión 5.5.1
+- **Swashbuckle.AspNetCore.SwaggerGen **: versión 5.5.1
+- **Swashbuckle.AspNetCore.SwaggerUi **: versión 5.5.1

@@ -12,8 +12,14 @@
                 <div class="h1-container">
                     <h1>@Model.Route</h1>
                     <div class="botones">
-                        <a href="@Url.Action("Create", new {  page_id=Model.PageId, route=Model.Route  })" class="btn btn-editar">Editar</a>
-                        <a href="@Url.Action("Delete", new {  page_id=Model.PageId  })" class="btn btn-eliminar">Eliminar</a>
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("Create", new {  page_id=Model.PageId, route=Model.Route  })" class="btn btn-editar">Editar</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Delete", new {  page_id=Model.PageId  })" class="btn btn-eliminar">Eliminar</a>
+                            </li>
+                        </ul>  
                     </div>
                 </div>
             </div>

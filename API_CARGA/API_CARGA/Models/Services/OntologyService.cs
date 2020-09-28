@@ -51,7 +51,7 @@ namespace API_CARGA.Models.Services
         /// <summary>
         /// Lee el fichero de la ontologia
         /// </summary>
-        /// <param name="url">Ulr del fichero</param>
+        /// <param name="ontologyType">Tipo de ontología</param>
         /// <returns>Devuelve el contenido de la ontologia</returns>
         public static string GetOntology(OntologyEnum ontologyType)
         {
@@ -74,6 +74,7 @@ namespace API_CARGA.Models.Services
         /// Remplaza la ontologia
         /// </summary>
         /// <param name="newOntology">Nueva ontologia</param>
+        /// <param name="ontologyType">Tipo de ontologia a sustituir</param>
         /// <returns></returns>
         public static void SetOntology(IFormFile newOntology, OntologyEnum ontologyType)
         {

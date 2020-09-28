@@ -8,9 +8,9 @@ using System.Collections;
 using System.IO;
 namespace CronConfigure.Models.Services
 {
-    ///<summary>
-    //Obtiene las configuraciones de las url base
-    ///</summary>
+    /// <summary>
+    /// Obtiene las configuraciones de las url base
+    /// </summary>
     public class ConfigUrlService
     {
         public IConfigurationRoot Configuration { get; set; }

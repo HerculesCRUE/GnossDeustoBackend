@@ -23,6 +23,12 @@ namespace CronConfigure.Controllers
         private ICronApiService _cronApiService;
         private IProgramingMethodService _programingMethodsService;
         private IRepositoryCronService _repositoryCronService;
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="cronApiService">Servicio para interactuar con base de datos</param>
+        /// <param name="programingMethodsService">Prgroamador de tareas</param>
+        /// <param name="repositoryCronService">Servicios para las vinculaciones con los repositorios</param>
         public JobController(ICronApiService cronApiService, IProgramingMethodService programingMethodsService, IRepositoryCronService repositoryCronService)
         {
             _cronApiService = cronApiService;
