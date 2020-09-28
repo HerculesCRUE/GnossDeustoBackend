@@ -22,6 +22,44 @@ Las librerías compiladas se encuentran en la carpeta [librerías](https://githu
 -------------------------
 Este api esta protegida mediante tokens, por ello para poder usar la interfaz swagger hay que obtener un token, el cual se puede obtener desde https://herc-as-front-desa.atica.um.es/carga-web/Token
 
+## Configuración en el appsettings.json
+    {
+      "ConnectionStrings": {
+          "HangfireConnection":""
+           },
+             "Logging": {
+                 "LogLevel": {
+                       "Default": "Information",
+                       "Microsoft": "Warning",
+                       "Microsoft.Hosting.Lifetime":"Information"
+    }
+      },
+        "AllowedHosts": "*",
+        "Urls": "http://0.0.0.0:5107",
+        "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
+		"Authority": "http://localhost:56306",
+		"AuthorityGetToken": "http://localhost:56306/connect/token",
+		"Scope": "apiCron",
+		"ScopeCarga": "apiCarga",
+		"GrantType": "client_credentials",
+		"ClientId": "carga",
+		"ClientSecret": "secret"
+            }
+ - HangfireConnection: Cadena de conexión a la base de datos PostgreSQL de tareas programadas
+ - LogLevel.Default: Nivel de error por defecto
+ - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
+ - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
+ - Urls: Url en la que se va a lanzar la aplicación
+ - ConfigUrl: Url donde está lanzada la aplicación API Carga
+ - Authority: Url de la servicio de identidades
+ - AuthorityGetToken: Endpoint para la llamada de obtención del token
+ - GrantType: Tipo de concesión de Oauth
+ - Scope: Limitación de acceso al api de cron
+ - ScopeCarga: Limitación de acceso al api de carga
+ - ScopeUrisFactory: Limitación de acceso al api de urisFactory
+ - ClientId: Id de cliente, en este caso se ha configurado un cliente que pueda acceder a todas las apis que usa la web
+ - ClientSecret: "clave" de acceso del cliente
+
 ## Dependencias
 
 - **coverlet.collector**: versión 1.2.1

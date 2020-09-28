@@ -20,6 +20,33 @@ Para ello, esté servicio hará uso de dos servicios externos:
 -------------------------
 Este api esta protegida mediante tokens, por ello para poder usar la interfaz swagger hay que obtener un token, el cual se puede obtener desde https://herc-as-front-desa.atica.um.es/carga-web/Token
 
+## Configuración en el appsettings.json
+    {
+      "Logging": {
+          "LogLevel": {
+                "Default": "Information",
+                "Microsoft": "Warning",
+                "Microsoft.Hosting.Lifetime":"Information"
+    }
+          },
+            "AllowedHosts": "*",
+    "Urls": "http://0.0.0.0:5102",
+    "XML_CVN_Repository":"http://curriculumpruebas.um.es/curriculum/rest/v1/auth/",
+    "CVN_ROH_converter": "http://herc-as-front-desa.atica.um.es/cvn/v1/convert",
+    "ConfigUrl": "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH",
+	"Authority": "http://localhost:56306",
+	"Scope": "apiOAIPMH"
+          }
+ - LogLevel.Default: Nivel de error por defecto
+ - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
+ - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
+ - Urls: Url en la que se va a lanzar la aplicación
+ - XML_CVN_Repository: URL del repositorio CVN
+ - CVN_ROH_converter: URL del conversor de PDF a CVN
+ - ConfigUrl: URL donde está lanzada esta aplicación
+ - Authority: Url de la servicio de identidades
+ - Scope: Limitación de acceso al api de apiOAIPMH
+
 ## Dependencias
 
 - **docfx.console**: versión 2.53.1

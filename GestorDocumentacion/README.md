@@ -18,6 +18,32 @@ http://herc-as-front-desa.atica.um.es/documentacion.
 -------------------------
 Este api esta protegida mediante tokens, por ello para poder usar la interfaz swagger hay que obtener un token, el cual se puede obtener desde https://herc-as-front-desa.atica.um.es/carga-web/Token
 
+## Configuración en el appsettings.json
+ >
+    {
+	"ConnectionStrings": {
+	"PostgreConnectionmigration": ""
+	},
+	"Logging": {
+    "LogLevel": {
+    "Default": "Information",
+    "Microsoft": "Warning",
+    "Microsoft.Hosting.Lifetime": "Information"
+    }
+    },
+    "AllowedHosts": "*",
+	"LogPath": "",
+    "Authority": "http://localhost:56306",
+    "Scope": "apiGestorDocumentacion",
+    }
+ - LogLevel.Default: Nivel de error por defecto
+ - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
+ - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
+ - PostgreConnectionmigration: Conexión con la base de datos
+ - LogPath: Ruta donde va a guardar los logs de la aplicación
+ - Authority: Url donde está instalado el IdentityServer
+ - Scope: Limitación de acceso al api de documentacion
+
 ## Dependencias
 
 - **coverlet.collector**: versión 1.2.1

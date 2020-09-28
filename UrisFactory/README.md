@@ -81,6 +81,22 @@ Este Api contiene dos controladores.
 -------------------------
 Este api esta protegida mediante tokens, por ello para poder usar la interfaz swagger hay que obtener un token, el cual se puede obtener desde https://herc-as-front-desa.atica.um.es/carga-web/Token
 	
+## Configuración en el appsettings.json	
+
+    {
+      "Logging": {
+          "LogLevel": {
+                "Default": "Information",
+                 "Microsoft": "Warning",
+                  "Microsoft.Hosting.Lifetime": "Information"
+                    }
+              },
+        "Authority": "http://localhost:56306",
+         "Scope": "apiUrisFactory",
+          "AllowedHosts": "*"
+    }
+- Scope: Limitación de acceso al api de urisFactory
+
 ## Dependencias
 
  - **IdentityServer4**: versión 3.1.2

@@ -19,6 +19,64 @@ https://herc-as-front-desa.atica.um.es/carga-web.
 
 En esta carpeta está disponible el [Manual de Usuario del FrontEnd](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/Manual%20de%20usuario.md).
 
+## Configuración en el appsettings.json
+ >
+    {
+	"ConnectionStrings": {
+	"PostgreConnectionmigration": ""
+	},
+	"Logging": {
+    "LogLevel": {
+    "Default": "Information",
+    "Microsoft": "Warning",
+    "Microsoft.Hosting.Lifetime": "Information"
+    }
+    },
+    "AllowedHosts": "*",
+	"LogPath": "",
+	"LogPathCarga": "",
+	"LogPathCron": "",
+	"Urls": "http://0.0.0.0:5103",
+    "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
+	"ConfigUrlDocumentacion": "http://herc-as-front-desa.atica.um.es/documentacion/",
+	"ConfigUrlCron": "http://herc-as-front-desa.atica.um.es/cron-config/",
+    "ConfigUrlUrisFactory": "http://herc-as-front-desa.atica.um.es/uris/",
+    "Authority": "http://localhost:56306/connect/token",
+    "GrantType": "client_credentials",
+    "Scope": "apiCarga",
+    "ScopeCron": "apiCron",
+    "ScopeUrisFactory": "apiUrisFactory",
+	"ScopeDocumentacion": "apiGestorDocumentacion",
+	"ScopeOAIPMH": "apiOAIPMH",
+	"ClientId": "Web",
+	"ClientIdOAIPMH": "OAIPMH",
+	"ClientSecretOAIPMH": "secretOAIPMH",
+	"ClientSecret": "master"
+    }
+ - LogLevel.Default: Nivel de error por defecto
+ - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
+ - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
+ - PostgreConnectionmigration: Conexión con la base de datos
+ - LogPath: Ruta donde va a guardar los logs de la aplicación
+ - LogPathCarga: Ruta donde escribe los logs el apiCarga
+ - LogPathCron: Ruta donde escribe los logs el apiCron
+ - Urls: Url en la que se va a lanzar la aplicación
+ - ConfigUrlDocumentacion: Url donde está lanzada la aplicación de apiDocumentacion
+ - ConfigUrl: Url donde está lanzada la aplicación API Carga
+ - ConfigUrlCron: Url donde está lanzada la aplicación CronConfigure
+ - ConfigUrlUrisFactory: Url donde está lanzada la aplicación UrisFactory
+ - Authority: Endpoint para la llamada de obtención del token
+ - GrantType: Tipo de concesión de Oauth
+ - Scope: Limitación de acceso al api de carga
+ - ScopeCron: Limitación de acceso al api de cron
+ - ScopeDocumentacion: Limitación de acceso al api de documentación
+ - ScopeOAIPMH: Limitación de acceso al api de OAIPMH
+ - ScopeUrisFactory: Limitación de acceso al api de urisFactory
+ - ClientId: Id de cliente, en este caso se ha configurado un cliente que pueda acceder a todas las apis que usa la web
+ - ClientIdOAIPMH: Id de cliente de OAIPMH
+ - ClientSecretOAIPMH: "clave" de acceso del cliente de OAIPMH
+ - ClientSecret: "clave" de acceso del cliente
+
 ## Dependencias
 
 - **AspNetCore.Security.CAS**: versión 2.0.5
