@@ -45,7 +45,7 @@ http://graph.um.es/res/project/RAYD-A-2002-6237
 
     { 
     "ConnectionStrings": {
-    "PostgreConnectionmigration": "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"},
+    "PostgreConnectionmigration": ""},
       "Logging": {
     "LogLevel": {
       "Default": "Information",
