@@ -6,7 +6,7 @@
 
 [2 ARQUITECTURA DE LOS PROCESOS DE CARGA](#arquitectura-de-los-procesos-de-carga)
 
-[3 OAI-PMH. Implementación Hércules](#oai-pmh.-implementación-hércules)
+[3 OAI-PMH. Implementación Hércules](#oai-pmh-implementación-hércules)
 
 [3.1 Delete records](#delete-records)
 
@@ -20,7 +20,7 @@
 
 [4 API de Carga](#api-de-carga)
 
-[4.1 API de Carga. ETL](#api-de-carga.-etl)
+[4.1 API de Carga. ETL](#api-de-carga-etl)
 
 [4.1.1 POST etl​/data-publish](#post-etldata-publish)
 
@@ -40,7 +40,7 @@
 
 [4.1.9 GET etl​/ListSets/{repositoryIdentifier}](#get-etllistsetsrepositoryidentifier)
 
-[4.2 API de Carga. ETL-CONFIG](#api-de-carga.-repository)
+[4.2 API de Carga. ETL-CONFIG](#api-de-carga-repository)
 
 [4.2.1 GET etl-config/​repository](#get-etl-configrepository)
 
@@ -52,11 +52,11 @@
 
 [4.2.5 PUT etl-config/​repository/{identifier}](#put-etl-configrepositoryidentifier)
 
-[4.3 API de Carga. SYNC](#api-de-carga.-sync)
+[4.3 API de Carga. SYNC](#api-de-carga-sync)
 
 [4.3.1 POST sync/execute ](#post-syncexecute)
 
-[4.4 API de Carga. VALIDATION](#api-de-carga.-validation)
+[4.4 API de Carga. VALIDATION](#api-de-carga-validation)
 
 [4.4.1 GET etl​-config/validation](#get-etl-configvalidation)
 
