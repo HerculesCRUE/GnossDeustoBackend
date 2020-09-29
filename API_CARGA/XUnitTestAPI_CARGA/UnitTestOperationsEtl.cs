@@ -21,6 +21,7 @@ namespace XUnitTestAPI_CARGA
     public class UnitTestOperationsEtl
     {
         [Fact]
+
         public void DataPublish()
         {
             ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
