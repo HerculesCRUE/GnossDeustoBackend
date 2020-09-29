@@ -6,7 +6,7 @@
 
 [2 ARQUITECTURA DE LOS PROCESOS DE CARGA](#arquitectura-de-los-procesos-de-carga)
 
-[3 OAI-PMH. Implementación Hércules](#oai-pmh.-implementación-hércules)
+[3 OAI-PMH. Implementación Hércules](#oai-pmh--implementación-hércules)
 
 [3.1 Delete records](#delete-records)
 
