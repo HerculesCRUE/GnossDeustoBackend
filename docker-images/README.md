@@ -77,6 +77,16 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 	cd rabbitmq
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/docker-compose.yml
 	docker-compose up -d
+	
+Una vez levantado podemos hacer la comprobación de que esta el contenedor levantado con este comando:
+
+	docker-compose ps
+
+![](http://herc-as-front-desa.atica.um.es/docs/capturas/rabbitmq/00_rabbitq_docker_ps.png)
+
+Y podemos probar a cargar el interfaz web de rabbitmq con http://ip_de_nuestra_maquina:15672 y ver como nos sale la pantalla de login.
+
+![](http://herc-as-front-desa.atica.um.es/docs/capturas/rabbitmq/01_rabbitmq_login.png)
 
 ## Preparación de Trifid
 
