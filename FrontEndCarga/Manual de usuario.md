@@ -10,6 +10,8 @@
 
 [Configuraciones de validación para un repositorio](#vista-del-listado-de-configuraciones-de-validación-shapes-para-un-repositorio)
 
+[Creación de una tarea](#creación-de-una-tarea)
+
 [Vista de una tarea](#vista-de-una-tarea)
 
 [Vista de una tarea recurrente](#vista-de-una-tarea-recurrente)
