@@ -11,6 +11,7 @@
  - [UrisFactory](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/UrisFactory "UrisFactory"): Servicio que genera las uris de los recursos
  - [cvn](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/cvn): Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH.
  - [CronConfigure](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/CronConfigure): Servicio Web que realiza la creación de tareas para la sincronización de un repositorio.
+ - [GestorDocumentacion](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/GestorDocumentacion): Servicio web para la creación de páginas de contenido html y su posterior visualización en FrontEndCarga.
  
  ### Diagrama de componentes del proyecto:
  
