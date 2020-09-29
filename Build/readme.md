@@ -68,7 +68,14 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
 		   "GraphRohes": "http://graph.um.es/graph/research/rohes",
 		   "GraphRohum": "http://graph.um.es/graph/research/rohum"
          },
-         "Authority": "http://localhost:56306",
+		 "RabbitMQ": {
+		   "usernameRabbitMq": "gnoss",
+		   "passwordRabbitMq": "c2123adc8575f3",
+		   "hostnameRabbitMq": "pruebas",
+		   "uriRabbitMq": "amqp://gnoss:c2123adc8575f3@82.223.132.195:5672/pruebas",
+		   "virtualhostRabbitMq": "pruebas"
+		 },
+		 "Authority": "http://localhost:56306",
          "ScopeCarga": "apiCarga",
          "AuthorityGetToken": "http://localhost:56306/connect/token",
          "GrantType": "client_credentials",
