@@ -71,6 +71,7 @@ http://graph.um.es/res/project/RAYD-A-2002-6237
 		   "uriRabbitMq": "",
 		   "virtualhostRabbitMq": ""
 		 },
+		 "RabbitQueueName": "",
 		 "Authority": "http://localhost:56306",
          "ScopeCarga": "apiCarga",
          "AuthorityGetToken": "http://localhost:56306/connect/token",
@@ -93,6 +94,7 @@ http://graph.um.es/res/project/RAYD-A-2002-6237
  - ConfigUrl: URL donde está lanzada esta aplicación
  - Sparql.Graph: Grafo en el que se van a almacenar los triples
  - Sparql.Endpoint: URL del Endpoint Sparql
+ - Sparql.QueryParam: Parámetro para la query en el Endpoint Sparql
  - Sparql.GraphRoh: gráfo de la ontologia roh
  - Sparql.GraphRohes: gráfo de la ontologia rohes
  - Sparql.GraphRohum: gráfo de la ontologia rohum
@@ -101,11 +103,12 @@ http://graph.um.es/res/project/RAYD-A-2002-6237
  - RabbitMQ.hostnameRabbitMq: host de Rabbit
  - RabbitMQ.uriRabbitMq: cadena de conexión para acceder a Rabbit
  - RabbitMQ.virtualhostRabbitMq: host virtual configurado en Rabbit
+ - RabbitQueueName: Nombre de la cola de Rabbit
  - Authority: Url de la servicio de identidades
  - ScopeCarga: Limitación de acceso al api de carga
  - AuthorityGetToken: Endpoint para la llamada de obtención del token
  - GrantType: Tipo de concesión de Oauth
- - ClientId: Id de cliente del api de OAIPMH
+ - ClientId: Id de cliente del api del API CARGA
  - ClientSecret: "clave" de acceso del api de carga
  - ScopeOAIPMH: Limitación de acceso al api de OAIPMH
  - ClientIdOAIPMH: Id de cliente del api de OAIPMH
