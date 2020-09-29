@@ -41,7 +41,67 @@ Los datos cargados se pueden consultar en una versión preliminar del servidor L
 
 http://graph.um.es/res/project/RAYD-A-2002-6237
 
+## Configuración en el appsettings.json
 
+    { 
+    "ConnectionStrings": {
+    "PostgreConnectionmigration": ""},
+      "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+      },
+        "AllowedHosts": "*",
+        "Urls": "http://0.0.0.0:5100",
+         "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
+         "Sparql": {
+           "Graph": "http://data.um.es/graph/um_cvn",
+           "Endpoint": "http://155.54.239.204:8890/sparql"
+           "QueryParam": "query",
+		   "GraphRoh": "http://graph.um.es/graph/research/roh",
+		   "GraphRohes": "http://graph.um.es/graph/research/rohes",
+		   "GraphRohum": "http://graph.um.es/graph/research/rohum"
+         },
+         "Authority": "http://localhost:56306",
+         "ScopeCarga": "apiCarga",
+         "AuthorityGetToken": "http://localhost:56306/connect/token",
+         "GrantType": "client_credentials",
+         "ClientId": "carga",
+         "ClientSecret": "secret",
+         "ScopeOAIPMH": "apiOAIPMH",
+         "ClientIdOAIPMH": "OAIPMH",
+        "ClientSecretOAIPMH": "secretOAIPMH",
+		"ConfigUrlUnidata": "https://localhost:44354/",
+		"ScopeUnidata": "apiUnidata",
+		"ClientIdUnidata": "unidata",
+		"ClientSecretUnidata": "secretUnidata"
+         }
+ - PostgreConnectionmigration: Cadena de conexión a la base de datos PostgreSQL
+ - LogLevel.Default: Nivel de error por defecto
+ - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
+ - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
+ - Urls: Url en la que se va a lanzar la aplicación
+ - ConfigUrl: URL donde está lanzada esta aplicación
+ - Sparql.Graph: Grafo en el que se van a almacenar los triples
+ - Sparql.Endpoint: URL del Endpoint Sparql
+ - Sparql.GraphRoh: gráfo de la ontologia roh
+ - Sparql.GraphRohes: gráfo de la ontologia rohes
+ - Sparql.GraphRohum: gráfo de la ontologia rohum
+ - Authority: Url de la servicio de identidades
+ - ScopeCarga: Limitación de acceso al api de carga
+ - AuthorityGetToken: Endpoint para la llamada de obtención del token
+ - GrantType: Tipo de concesión de Oauth
+ - ClientId: Id de cliente del api de OAIPMH
+ - ClientSecret: "clave" de acceso del api de carga
+ - ScopeOAIPMH: Limitación de acceso al api de OAIPMH
+ - ClientIdOAIPMH: Id de cliente del api de OAIPMH
+ - ClientSecretOAIPMH: "clave" de acceso del api de OAIPMH
+ - ConfigUrlUnidata: URL donde está lanzada la aplicación de unidata
+ - ScopeUnidata: Limitación de acceso al api de unidata
+ - ClientIdUnidata: Id de cliente del api de unidata
+ - ClientSecretUnidata: "clave" de acceso del api de unidata
 
 ## Dependencias
 

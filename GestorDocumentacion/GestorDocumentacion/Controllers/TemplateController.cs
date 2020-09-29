@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using GestorDocumentacion.Models.Entities;
 using GestorDocumentacion.Models.Services;
 using GestorDocumentacion.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace GestorDocumentacion.Controllers
     ///</summary>
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class TemplateController : ControllerBase
     {
         private ITemplatesOperationsServices _templatesOperationsService;
@@ -31,7 +33,6 @@ namespace GestorDocumentacion.Controllers
         ///<summary>
         ///Devuelve una plantilla HTML, incluyendo sus metadatos.
         ///</summary>
-        ///<remarks>
         ///<param name="templateId">identificador de la plantilla html</param>
         [HttpGet("{name}")]
         public IActionResult GetTemplate(Guid templateId)

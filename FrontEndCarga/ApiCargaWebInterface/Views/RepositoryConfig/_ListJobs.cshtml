@@ -5,6 +5,7 @@
         int i = 0;
         string hidden = "";
         string clase = "";
+        string name = "";
     <div class="items tabla">
         <div class="cabecera">
             <div class="columna">
@@ -25,11 +26,10 @@
         </div>
         @foreach (var job in Model)
         {
-            if (i == 5)
+            if (i >= 5)
             {
-                //hidden = "style=\"visibility: hidden;\"";
                 hidden = "style=\"display: none;\"";
-                clase = "name=\"Show\"";
+                name = "name=\"Show\"";
             }
 
             if (job.State.Equals("Failed"))
@@ -38,14 +38,22 @@
             }
             else if (job.State.Equals("Processing"))
             {
-                clase = "class =text-info";
+                clase = "class =text-primary";
             }
-            @*if (i == 5)
+            else if (job.State.Equals("Succeeded"))
             {
-                @Html.Raw("<div style=\"display: none;\" id=\"Show\">");
-            }*@
+                clase = "class =text-success";
+                if (job.DiscoverState.Equals("Error"))
+                {
+                    clase = "class =text-info";
+                }
+            }
+             else if (job.State.Equals("Scheduled"))
+            {
+                clase = "class =text-secondary";
+            }
 
-            <div class="fila" @Html.Raw(hidden) @Html.Raw(clase)>
+            <div class="fila" @Html.Raw(hidden) @Html.Raw(name)>
                 <div class="columna principal">
                     <a href="@Url.Action("DetailsJob", "Job",new { id = job.Id })">
                         <p @clase>@job.Id</p>
@@ -94,13 +102,6 @@
             var element = document.getElementById("verMas");
 
             for (let i = 0; i < elements.length; i++) {
-                //if (elements[i].style.visibility === "hidden") {
-                //    elements[i].style.visibility = "";
-                //    element.innerHTML = 'Ver menos';
-                //} else {
-                //    elements[i].style.visibility = "hidden";
-                //    element.innerHTML = 'Ver más';
-                //}
                 if (elements[i].style.display === "none") {
                     elements[i].style.display = "table-row";
                     element.innerHTML = 'Ver menos';

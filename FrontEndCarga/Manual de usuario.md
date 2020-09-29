@@ -10,6 +10,8 @@
 
 [Configuraciones de validación para un repositorio](#vista-del-listado-de-configuraciones-de-validación-shapes-para-un-repositorio)
 
+[Creación de una tarea](#creación-de-una-tarea)
+
 [Vista de una tarea](#vista-de-una-tarea)
 
 [Vista de una tarea recurrente](#vista-de-una-tarea-recurrente)
@@ -40,7 +42,7 @@ Desde este listado se puede crear un repositorio nuevo con el botón "+" que se 
 
 ![](img/repositorios.png)
 
-Al acceder a un repositorio podemos ver las validaciones configuradas que tiene vinculados ese repositorio, mediante el enlace que aparece en la sección de Ver las configuraciones de validación para el respositorio, 
+Al acceder a un repositorio podemos ver las validaciones configuradas que tiene vinculadas ese repositorio, mediante el enlace que aparece en la sección de Ver las configuraciones de validación para el respositorio, 
 así como las tareas de sincronización programadas y el histórico de sincronizaciones ejecutadas que ha tenido. En este histórico aparecen las últimas 5 tareas ejecutadas, para poder ver el resto basta con pulsar en ver más para que se desplieguen el resto de tareas ejecutadas. En esté último apartado en el que se muestran las tareas ejecutadas aparecen dos estados:
  - Estado: Que indica la validación de los rdfs y su posterior encolado para su procesamiento. Pueden aparecer errores de ejecución y de validación de las diferentes configuraciones de validación que tiene el repositorio
  - Estado de descubrimiento: Que indica la publicación de los rdfs y el desambiguamiento de las urls formadas. Pueden aparecer errores de ejecución y de desambiguación de las urls, lo que dará al usuario la opción de elegir la correcta.
@@ -70,6 +72,30 @@ Desde este vista se muestran los shapes configurados para un repositorio, desde 
 
 ![](img/ShapesRepo.png)
 
+Creación de una tarea
+------------------
+Para acceder a este formulario, se puede acceder desde la vista de un repositorio mostrada anteriormente en la parte de la lisata de tareas desde el botón para crear tareas, y aparece el siguiente formulario
+para crear una tarea asociada al repositorio.
+![](img/crearTarea.png)
+Los datos a introducir en este formulario son:
+ - **Fecha de inicio:** fecha a partir de la cual se ejecutará.
+ - **fecha de última sincronización:** fecha a partir de la cual se debe actualizar. Opcional.
+ - **Set:** tipo del objeto, usado para filtrar por agrupaciones, este parametro se puede obtener de http://herc-as-front-desa.atica.um.es/carga/etl/ListSets/{identificador_del_repositorio}.Opcional.
+ - **Código de objeto:** codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro, este parametro se puede obtener en la respuesta identifier que da el método http://herc-as-front-desa.atica.um.es/carga/etl/ListIdentifiers/{identificador_del_repositorio}?metadataPrefix=rdf. Opcional.
+ - **Nombre del trabajo:** Nombre que se le va a dar a la tarea de sincronización. Obligatorio para tarea recurrente.
+ - **Expresión del cron:** Recurrencia de la tarea. Obligatorio para tarea recurrente.
+
+Desde esta interfaz se pueden crear varios tipos de tarea según los datos que se introduzcan:
+ - **Tarea recurrente:** Para crear este tipo de tarea es necesario rellenar los campos obligatorios para crear una tarea de recurrencia como nombre del trabajo y expresión del cron,
+a su vez se puede dejar vacía la fecha de inicio o poner la fecha actual para que la tarea recurrente este activa desde el primer instante. 
+*Una tarea se le denomina recurrente cuando tiene una repeteción o recurrencia a través de un patrón. Por ejemplo que se ejecute todos los lunes a las 8 de la mañana*.
+ - **Tarea programada:** Para crear esta tarea basta con poner la fecha de inicio en una fecha futura, en el caso de que se introduzcan también los datos para crear una tarea
+ recurrente esta no será valida hasta el momento que se ejecute la tarea en la fecha futura especificada. *Una tarea se le denomina programada cuando está configurada para 
+ ejecutarse en un momento en el futuro*.
+ - **Tarea/tarea de ejecución única:** Para crear este tipo de tare basta con dejar vacía la fecha de inicio o poner la fecha actual para que la tarea recurrente este activa desde el primer instante,
+ si no pasará a ser una tarea programada. *Una tarea se le denomina de ejecución única cuando se ejecuta una sola vez en el momento de su creación o cuando se ha ejecutado ya, con esto último lo que 
+ se quiere decir que una tarea recurrente cada vez que se ejecuta crea tareas de única ejecución al igual que una tarea programada cuando pasa a ser ejecutada ejecuta una tarea de ejecución única*.
+ 
 Vista de una tarea
 ------------------
 Se denomina una tarea a la programación de una sincronización de un repositorio. Cuando está sincronización 

@@ -12,8 +12,14 @@
                 <div class="h1-container">
                     <h1>@Model.Name</h1>
                     <div class="botones">
-                        <a href="@Url.Action("Edit", "ShapeConfig", new {  id=Model.ShapeConfigID  })" class="btn btn-editar">Editar</a>
-                        <a href="@Url.Action("Delete", "ShapeConfig", new {  id=Model.ShapeConfigID  })" class="btn btn-eliminar">Eliminar</a>
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("Edit", "ShapeConfig", new {  id=Model.ShapeConfigID  })" class="btn btn-editar">Editar</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Delete", "ShapeConfig", new {  id=Model.ShapeConfigID  })" class="btn btn-eliminar">Eliminar</a>
+                            </li>
+                        </ul>   
                     </div>
                 </div>
             </div>

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using GestorDocumentacion.Models.Entities;
 using GestorDocumentacion.Models.Services;
 using GestorDocumentacion.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -20,6 +21,7 @@ namespace GestorDocumentacion.Controllers
     ///</summary>
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class PageController : ControllerBase
     {
         private IPagesOperationsServices _pagesOperationsService;
