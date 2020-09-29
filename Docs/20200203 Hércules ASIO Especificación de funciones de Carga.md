@@ -26,19 +26,27 @@
 
 [4.1.2 POST etl​/data-validate](#post-etldata-validate)
 
-[4.1.3 POST etl​/data-discover](#post-etldata-discover)
+[4.1.3 POST etl​/data-validate-personalized](#post-etldata-validate-personalized)
 
-[4.1.4 GET etl​/GetRecord/{repositoryIdentifier}](#get-etlgetrecordrepositoryidentifier)
+[4.1.4 POST etl​/load-ontolgy](#post-etlload-ontolgy)
 
-[4.1.5 GET etl​/Identify/{repositoryIdentifier}](#get-etlidentifyrepositoryidentifier)
+[4.1.5 POST etl​/data-discover](#post-etldata-discover)
 
-[4.1.6 GET etl​/ListIdentifiers/{repositoryIdentifier}](#get-etllistidentifiersrepositoryidentifier)
+[4.1.6 POST etl​/data-discover-state/{identifier}](#get-etldata-discover-stateidentifier)
 
-[4.1.7 GET etl​/ListMetadataFormats/{repositoryIdentifier}](#get-etllistmetadataformatsrepositoryidentifier)
+[4.1.7 GET etl​/GetRecord/{repositoryIdentifier}](#get-etlgetrecordrepositoryidentifier)
 
-[4.1.8 GET etl​/ListRecords/{repositoryIdentifier}](#get-etllistrecordsrepositoryidentifier)
+[4.1.8 GET etl​/Identify/{repositoryIdentifier}](#get-etlidentifyrepositoryidentifier)
 
-[4.1.9 GET etl​/ListSets/{repositoryIdentifier}](#get-etllistsetsrepositoryidentifier)
+[4.1.9 GET etl​/ListIdentifiers/{repositoryIdentifier}](#get-etllistidentifiersrepositoryidentifier)
+
+[4.1.10 GET etl​/ListMetadataFormats/{repositoryIdentifier}](#get-etllistmetadataformatsrepositoryidentifier)
+
+[4.1.11 GET etl​/ListRecords/{repositoryIdentifier}](#get-etllistrecordsrepositoryidentifier)
+
+[4.1.12 GET etl​/ListSets/{repositoryIdentifier}](#get-etllistsetsrepositoryidentifier)
+
+[4.1.13 GET etl​/GetOntology](#get-etlontology)
 
 [4.2 API de Carga. ETL-CONFIG](#api-de-carga-repository)
 
@@ -252,10 +260,21 @@ arbitraria.
 
 Valida un RDF mediante el shape SHACL configurado
 
+### POST etl​/data-validate-personalized
+
+Valida un RDF mediante el fichero de validación pasado
+
+### POST etl​/load-ontology
+
+Elimina la ontologia cargada y la reemplaza por la nueva
+
 ### POST etl​/data-discover
 
-Reconcilia entidades y descubre enlaces o equivalencias. Permite
-efectuar el descubrimiento en fuentes RDF arbitrarias.
+Aplica el descubrimiento sobre un RDF
+
+### GET etl​/data-discover-state/{identifier}
+
+Obtiene el estado de una tarea de descubrimiento
 
 ### GET etl​/GetRecord/{repositoryIdentifier}
 
@@ -297,6 +316,10 @@ Este método hace de PROXY entre el API y el proveedor OAI-PMH.
 
 Recuperar la estructura establecida de un repositorio en formato XML
 OAI-PMH, útil para la recolección selectiva.
+
+### GET etl​/GetOntology
+
+Devuelve la ontología cargada.
 
 API de Carga. REPOSITORY
 ------------------------
