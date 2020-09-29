@@ -9,7 +9,13 @@ Este api contiene 3 controladores:
  - **JobController**: Con los métodos disponibles en este controlador se pueden crear una sincronización, obtener las tareas y volver a ejecutar una tarea ya ejecutada.
  - **RecurringJobController**: Mediante los métodos de este controlador se puede crear una tarea recurrente especificando el patrón de repetición, borrar las tareas recurrentes y obtener dichas tareas, así como obtener las tareas que se han ejecutado a partir de una tarea recurrente.
  -  **ScheduledJobController**: Este controlador sirve para crear tareas que se ejecuten en una determinada fecha, obtener este tipo de tareas y eliminarlas
- 
+
+Mediante estos controladores se pueden crear los siguientes tipos de tareas: 
+ - **Tarea recurrente:** Una tarea se le denomina recurrente cuando tiene una repeteción o recurrencia a través de un patrón. Por ejemplo que se ejecute todos los lunes a las 8 de la mañana.
+ - **Tarea programada:** Una tarea se le denomina programada cuando está configurada para ejecutarse en un momento en el futuro.
+ - **Tarea/ tarea de única ejecución:** Una tarea se le denomina de ejecución única cuando se ejecuta una sola vez en el momento de su creación o cuando se ha ejecutado ya, con esto último lo que 
+ se quiere decir que una tarea recurrente cada vez que se ejecuta crea tareas de única ejecución al igual que una tarea programada cuando pasa a ser ejecutada ejecuta una tarea de ejecución única.
+
  La documentación de la librería está disponible en:
 
 http://herc-as-front-desa.atica.um.es/cronconfigure/library/api/CronConfigure.Controllers.html

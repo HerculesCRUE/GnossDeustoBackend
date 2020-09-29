@@ -21,7 +21,7 @@ namespace ApiCargaWebInterface.ViewModels
         public string CodigoObjeto { get; set; }
         [Display(Name = "Nombre del trabajo")]
         public string Nombre_job { get; set; }
-        [Display(Name = "nexpresión de cron: * * * * * (cada \"*\" se corresponde con minuto, hora, día del mes, mes y día de la semana, por ese orden. Ej: 0 8 * * 1 ejecutaría la tarea los lunes a las 8:00)")]
+        [Display(Name = "Expresión de cron: * * * * * (cada \"*\" se corresponde con minuto, hora, día del mes, mes y día de la semana, por ese orden. Ej: 0 8 * * 1 ejecutaría la tarea los lunes a las 8:00)")]
         public string CronExpression { get; set; }
     }
 }
