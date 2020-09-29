@@ -96,6 +96,11 @@ http://graph.um.es/res/project/RAYD-A-2002-6237
  - Sparql.GraphRoh: gráfo de la ontologia roh
  - Sparql.GraphRohes: gráfo de la ontologia rohes
  - Sparql.GraphRohum: gráfo de la ontologia rohum
+ - RabbitMQ.usernameRabbitMq: usuario para acceder a Rabbit
+ - RabbitMQ.passwordRabbitMq: contraseña del usuario para acceder a Rabbit
+ - RabbitMQ.hostnameRabbitMq: host de Rabbit
+ - RabbitMQ.uriRabbitMq: cadena de conexión para acceder a Rabbit
+ - RabbitMQ.virtualhostRabbitMq: host virtual configurado en Rabbit
  - Authority: Url de la servicio de identidades
  - ScopeCarga: Limitación de acceso al api de carga
  - AuthorityGetToken: Endpoint para la llamada de obtención del token
