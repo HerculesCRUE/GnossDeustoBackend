@@ -87,17 +87,15 @@ Los datos a introducir en este formulario son:
 
 Desde esta interfaz se pueden crear varios tipos de tarea según los datos que se introduzcan:
  - **Tarea recurrente:** Para crear este tipo de tarea es necesario rellenar los campos obligatorios para crear una tarea de recurrencia como nombre del trabajo y expresión del cron,
-a su vez se puede dejar vacía la fecha de inicio o poner la fecha actual para que la tarea recurrente este activa desde el primer instante.
+a su vez se puede dejar vacía la fecha de inicio o poner la fecha actual para que la tarea recurrente este activa desde el primer instante. 
+*Una tarea se le denomina recurrente cuando tiene una repeteción o recurrencia a través de un patrón. Por ejemplo que se ejecute todos los lunes a las 8 de la mañana*.
  - **Tarea programada:** Para crear esta tarea basta con poner la fecha de inicio en una fecha futura, en el caso de que se introduzcan también los datos para crear una tarea
- recurrente esta no será valida hasta el momento que se ejecute la tarea en la fecha futura especificada.
+ recurrente esta no será valida hasta el momento que se ejecute la tarea en la fecha futura especificada. *Una tarea se le denomina programada cuando está configurada para 
+ ejecutarse en un momento en el futuro*.
  - **Tarea/tarea de ejecución única:** Para crear este tipo de tare basta con dejar vacía la fecha de inicio o poner la fecha actual para que la tarea recurrente este activa desde el primer instante,
- si no pasará a ser una tarea programada.
- 
- - *Tarea recurrente: Una tarea se le denomina recurrente cuando tiene una repeteción o recurrencia a través de un patrón. Por ejemplo que se ejecute todos los lunes a las 8 de la mañana*.
- - *Tarea programada: Una tarea se le denomina programada cuando está configurada para ejecutarse en un momento en el futuro*.
- - *Tarea/ tarea de única ejecución: Una tarea se le denomina de ejecución única cuando se ejecuta una sola vez en el momento de su creación o cuando se ha ejecutado ya, con esto último lo que 
+ si no pasará a ser una tarea programada. *Una tarea se le denomina de ejecución única cuando se ejecuta una sola vez en el momento de su creación o cuando se ha ejecutado ya, con esto último lo que 
  se quiere decir que una tarea recurrente cada vez que se ejecuta crea tareas de única ejecución al igual que una tarea programada cuando pasa a ser ejecutada ejecuta una tarea de ejecución única*.
-
+ 
 Vista de una tarea
 ------------------
 Se denomina una tarea a la programación de una sincronización de un repositorio. Cuando está sincronización 
