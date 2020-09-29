@@ -46,7 +46,7 @@
 
 [4.1.12 GET etl​/ListSets/{repositoryIdentifier}](#get-etllistsetsrepositoryidentifier)
 
-[4.1.13 GET etl​/GetOntology](#get-etlontology)
+[4.1.13 GET etl​/GetOntology](#get-etlgetontology)
 
 [4.2 API de Carga. ETL-CONFIG](#api-de-carga-repository)
 
