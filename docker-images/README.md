@@ -90,7 +90,7 @@ Y podemos probar a cargar el interfaz web de rabbitmq con http://ip_de_nuestra_m
 
 Ahora debemos loguearnos con usurio "guest" y password "password", que son los que estan ajustados en el yml, y procederemos a crear un virtual host seguiendo estos sencillos pasos:
 
-![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/2020-09-30 08_27_35-Window.png)
+![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/1.png)
 
 ## Preparación de Trifid
 
