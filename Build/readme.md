@@ -29,13 +29,13 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
       "Logging": {
           "LogLevel": {
                 "Default": "Information",
-                 "Microsoft": "Warning",
-                  "Microsoft.Hosting.Lifetime": "Information"
-                    }
-              },
-        "Authority": "http://localhost:56306",
-         "Scope": "apiUrisFactory",
-          "AllowedHosts": "*"
+                "Microsoft": "Warning",
+                "Microsoft.Hosting.Lifetime": "Information"
+           }
+      },
+      "Authority": "http://localhost:56306",
+      "Scope": "apiUrisFactory",
+      "AllowedHosts": "*"
     }
 - Scope: Limitación de acceso al api de urisFactory
 
@@ -48,47 +48,49 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
 ### Configuración
 
     { 
-    "ConnectionStrings": {
-    "PostgreConnectionmigration": "Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"},
-      "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft": "Warning",
-      "Microsoft.Hosting.Lifetime": "Information"
-    }
-      },
-        "AllowedHosts": "*",
-        "Urls": "http://0.0.0.0:5100",
-         "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
-         "Sparql": {
-           "Graph": "http://data.um.es/graph/um_cvn",
-           "Endpoint": "http://155.54.239.204:8890/sparql"
-           "QueryParam": "query",
-		   "GraphRoh": "http://graph.um.es/graph/research/roh",
-		   "GraphRohes": "http://graph.um.es/graph/research/rohes",
-		   "GraphRohum": "http://graph.um.es/graph/research/rohum"
-         },
-		 "RabbitMQ": {
-		   "usernameRabbitMq": "",
-		   "passwordRabbitMq": "",
-		   "hostnameRabbitMq": "",
-		   "uriRabbitMq": "",
-		   "virtualhostRabbitMq": ""
-		 },
-		 "Authority": "http://localhost:56306",
-         "ScopeCarga": "apiCarga",
-         "AuthorityGetToken": "http://localhost:56306/connect/token",
-         "GrantType": "client_credentials",
-         "ClientId": "carga",
-         "ClientSecret": "secret",
-         "ScopeOAIPMH": "apiOAIPMH",
-         "ClientIdOAIPMH": "OAIPMH",
-        "ClientSecretOAIPMH": "secretOAIPMH",
+		"ConnectionStrings": {
+			"PostgreConnectionmigration": ""
+		},
+		"Logging": {
+			"LogLevel": {
+				"Default": "Information",
+				"Microsoft": "Warning",
+				"Microsoft.Hosting.Lifetime": "Information"
+			}
+		},
+		"AllowedHosts": "*",
+		"Urls": "http://0.0.0.0:5100",
+		"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
+		"Sparql": {
+			"Graph": "http://data.um.es/graph/um_cvn",
+			"Endpoint": "http://155.54.239.204:8890/sparql"
+			"QueryParam": "query",
+			"GraphRoh": "http://graph.um.es/graph/research/roh",
+			"GraphRohes": "http://graph.um.es/graph/research/rohes",
+			"GraphRohum": "http://graph.um.es/graph/research/rohum"
+		},
+		"RabbitMQ": {
+			"usernameRabbitMq": "user",
+			"passwordRabbitMq": "pass",
+			"hostnameRabbitMq": "hercules",
+			"uriRabbitMq": "amqp://user:pass@ip:puerto/hercules",
+			"virtualhostRabbitMq": "hercules"
+		},
+		"RabbitQueueName": "HerculesDemoQueue",
+		"Authority": "http://localhost:56306",
+		"ScopeCarga": "apiCarga",
+		"AuthorityGetToken": "http://localhost:56306/connect/token",
+		"GrantType": "client_credentials",
+		"ClientId": "carga",
+		"ClientSecret": "secret",
+		"ScopeOAIPMH": "apiOAIPMH",
+		"ClientIdOAIPMH": "OAIPMH",
+		"ClientSecretOAIPMH": "secretOAIPMH",
 		"ConfigUrlUnidata": "https://localhost:44354/",
 		"ScopeUnidata": "apiUnidata",
 		"ClientIdUnidata": "unidata",
 		"ClientSecretUnidata": "secretUnidata"
-         }
+    }
  - PostgreConnectionmigration: Cadena de conexión a la base de datos PostgreSQL
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
@@ -127,37 +129,37 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
 ### Configuración
  >
     {
-	"ConnectionStrings": {
-	"PostgreConnectionmigration": ""
-	},
-	"Logging": {
-    "LogLevel": {
-    "Default": "Information",
-    "Microsoft": "Warning",
-    "Microsoft.Hosting.Lifetime": "Information"
-    }
-    },
-    "AllowedHosts": "*",
-	"LogPath": "",
-	"LogPathCarga": "",
-	"LogPathCron": "",
-	"Urls": "http://0.0.0.0:5103",
-    "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
-	"ConfigUrlDocumentacion": "http://herc-as-front-desa.atica.um.es/documentacion/",
-	"ConfigUrlCron": "http://herc-as-front-desa.atica.um.es/cron-config/",
-    "ConfigUrlUrisFactory": "http://herc-as-front-desa.atica.um.es/uris/",
-    "Authority": "http://localhost:56306/connect/token",
-    "GrantType": "client_credentials",
-    "Scope": "apiCarga",
-    "ScopeCron": "apiCron",
-    "ScopeUrisFactory": "apiUrisFactory",
-	"ScopeDocumentacion": "apiGestorDocumentacion",
-	"ScopeOAIPMH": "apiOAIPMH",
-	"ClientId": "Web",
-	"ClientIdOAIPMH": "OAIPMH",
-	"ClientSecretOAIPMH": "secretOAIPMH",
-	"ClientSecret": "master",
-	"Proxy": "/carga-web"
+		"ConnectionStrings": {
+			"PostgreConnectionmigration": ""
+		},
+		"Logging": {
+			"LogLevel": {
+				"Default": "Information",
+				"Microsoft": "Warning",
+				"Microsoft.Hosting.Lifetime": "Information"
+			}
+		},
+		"AllowedHosts": "*",
+		"LogPath": "",
+		"LogPathCarga": "",
+		"LogPathCron": "",
+		"Urls": "http://0.0.0.0:5103",
+		"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
+		"ConfigUrlDocumentacion": "http://herc-as-front-desa.atica.um.es/documentacion/",
+		"ConfigUrlCron": "http://herc-as-front-desa.atica.um.es/cron-config/",
+		"ConfigUrlUrisFactory": "http://herc-as-front-desa.atica.um.es/uris/",
+		"Authority": "http://localhost:56306/connect/token",
+		"GrantType": "client_credentials",
+		"Scope": "apiCarga",
+		"ScopeCron": "apiCron",
+		"ScopeUrisFactory": "apiUrisFactory",
+		"ScopeDocumentacion": "apiGestorDocumentacion",
+		"ScopeOAIPMH": "apiOAIPMH",
+		"ClientId": "Web",
+		"ClientIdOAIPMH": "OAIPMH",
+		"ClientSecretOAIPMH": "secretOAIPMH",
+		"ClientSecret": "master",
+		"Proxy": "/carga-web"
 	}
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
@@ -192,19 +194,19 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
 
 ### Configuración
     {
-      "ConnectionStrings": {
-          "HangfireConnection":"Username=herculesdb;Password=NUuPIsrUV4x3o6sZEqE8;Host=155.54.239.203;Port=5432;Database=herculesdb;Pooling=true"
-           },
-             "Logging": {
-                 "LogLevel": {
-                       "Default": "Information",
-                       "Microsoft": "Warning",
-                       "Microsoft.Hosting.Lifetime":"Information"
-    }
-      },
-        "AllowedHosts": "*",
-        "Urls": "http://0.0.0.0:5107",
-        "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
+		"ConnectionStrings": {
+			"HangfireConnection":""
+		},
+		"Logging": {
+			"LogLevel": {
+				"Default": "Information",
+				"Microsoft": "Warning",
+				"Microsoft.Hosting.Lifetime":"Information"
+			}
+		},
+		"AllowedHosts": "*",
+		"Urls": "http://0.0.0.0:5107",
+		"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
 		"Authority": "http://localhost:56306",
 		"AuthorityGetToken": "http://localhost:56306/connect/token",
 		"Scope": "apiCron",
@@ -212,7 +214,7 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
 		"GrantType": "client_credentials",
 		"ClientId": "carga",
 		"ClientSecret": "secret"
-            }
+    }
  - HangfireConnection: Cadena de conexión a la base de datos PostgreSQL de tareas programadas
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
@@ -240,16 +242,16 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
                 "Default": "Information",
                 "Microsoft": "Warning",
                 "Microsoft.Hosting.Lifetime":"Information"
-    }
-          },
-            "AllowedHosts": "*",
-    "Urls": "http://0.0.0.0:5102",
-    "XML_CVN_Repository":"http://curriculumpruebas.um.es/curriculum/rest/v1/auth/",
-    "CVN_ROH_converter": "http://herc-as-front-desa.atica.um.es/cvn/v1/convert",
-    "ConfigUrl": "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH",
-	"Authority": "http://localhost:56306",
-	"Scope": "apiOAIPMH"
           }
+      },
+      "AllowedHosts": "*",
+      "Urls": "http://0.0.0.0:5102",
+      "XML_CVN_Repository":"http://curriculumpruebas.um.es/curriculum/rest/v1/auth/",
+      "CVN_ROH_converter": "http://herc-as-front-desa.atica.um.es/cvn/v1/convert",
+      "ConfigUrl": "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH",
+      "Authority": "http://localhost:56306",
+      "Scope": "apiOAIPMH"
+    }
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
  - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
@@ -269,22 +271,22 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
       "Logging": {
           "LogLevel": {
                 "Default": "Information",
-                 "Microsoft": "Warning",
-                  "Microsoft.Hosting.Lifetime": "Information"
-                    }
-              },
-        "Authority": "http://localhost:56306",
-         "Scope": "apiUrisFactory",
-          "AllowedHosts": "*",
-		  "GraphUnidata": "http://data.um.es/graph/unidata",
-		  "EndpointUnidata": "http://localhost:8890/sparql",
-		  "QueryParam": "query",
-		  "Authority": "http://localhost:56306",
-		  "ScopeUnidata": "apiUnidata",
-		  "AuthorityGetToken": "http://localhost:56306/connect/token",
-		  "GrantType": "client_credentials",
-		  "ClientIdUnidata": "unidata",
-		  "ClientSecretUnidata": "secretUnidata"
+                "Microsoft": "Warning",
+                "Microsoft.Hosting.Lifetime": "Information"
+          }
+      },
+      "Authority": "http://localhost:56306",
+      "Scope": "apiUrisFactory",
+      "AllowedHosts": "*",
+      "GraphUnidata": "http://data.um.es/graph/unidata",
+      "EndpointUnidata": "http://localhost:8890/sparql",
+      "QueryParam": "query",
+      "Authority": "http://localhost:56306",
+      "ScopeUnidata": "apiUnidata",
+      "AuthorityGetToken": "http://localhost:56306/connect/token",
+      "GrantType": "client_credentials",
+      "ClientIdUnidata": "unidata",
+      "ClientSecretUnidata": "secretUnidata"
     }
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
@@ -302,20 +304,20 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
 ### Configuración
  >
     {
-	"ConnectionStrings": {
-	"PostgreConnectionmigration": ""
-	},
-	"Logging": {
-    "LogLevel": {
-    "Default": "Information",
-    "Microsoft": "Warning",
-    "Microsoft.Hosting.Lifetime": "Information"
-    }
-    },
-    "AllowedHosts": "*",
-	"LogPath": "",
-    "Authority": "http://localhost:56306",
-    "Scope": "apiGestorDocumentacion",
+		"ConnectionStrings": {
+			"PostgreConnectionmigration": ""
+		},
+		"Logging": {
+			"LogLevel": {
+				"Default": "Information",
+				"Microsoft": "Warning",
+				"Microsoft.Hosting.Lifetime": "Information"
+			}
+		},
+		"AllowedHosts": "*",
+		"LogPath": "",
+		"Authority": "http://localhost:56306",
+		"Scope": "apiGestorDocumentacion",
     }
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
