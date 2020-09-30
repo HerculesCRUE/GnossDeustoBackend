@@ -8,9 +8,9 @@ http://herc-as-front-desa.atica.um.es/api_discover/api/API_DISCOVER.html
 
 API DISCOVER es un servicio encargado de aplicar el descubrimiento sobre los RDF de carga para su posterior publicación la BBDD.
  
-Para una especificación más detallada del servicio se puede consultar la siguiente documentación: https://github.com/TODO
+Para una especificación más detallada acerca del descubrimiento se puede consultar la siguiente documentación: https://github.com/TODO
  
-Esta aplicación se encarga de realizar el descubrimiento sobre los RDFs para su posterior carga./GnossDeustoBackend/tree/master/libraries).
+Esta aplicación se encarga de realizar el descubrimiento sobre los RDFs para su posterior carga.
 
 *Conexión a Triple Store*
 -------------------------
@@ -27,6 +27,116 @@ Los datos cargados se pueden consultar en una versión preliminar del servidor L
 
 http://graph.um.es/res/project/RAYD-A-2002-6237
 
+## Configuración en el reconciliationConfig.json
+En este fichero se configuran, por cada una de las clases de la ontología, las propiedades a tener en cuenta para realizar el descubrimiento con los datos que ya están cargados en el Triple Store.
+
+Este fichero se encuentra aqui: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_DISCOVER/API_DISCOVER/Config/reconciliationConfig.json.
+
+A continuación se muestra un fragmento del fichero con la configuración del descubrimiento para las entidades del tipo 'http://purl.org/roh/mirror/foaf#Person'
+
+    
+	{
+		"rdfType": "http://purl.org/roh/mirror/foaf#Person",
+		"identifiers": [
+			"http://purl.org/roh/mirror/vivo#identifier",
+			"http://purl.org/roh/mirror/vivo#eRACommonsId",
+			"http://purl.org/roh/mirror/vivo#researcherID",
+			"http://purl.org/roh#ORCID",
+			"http://purl.org/roh/mirror/vivo#scopusId",
+			"http://purl.org/roh#taxID"
+		],
+		"properties": [
+			{
+				"property": "http://purl.org/roh/mirror/foaf#name",
+				"mandatory": true,
+				"inverse": false,
+				"type": 2,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.89,
+				"scoreNegative": null
+			},
+			{
+				"property": "http://purl.org/roh#birthdate",
+				"mandatory": false,
+				"inverse": false,
+				"type": 0,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.5,
+				"scoreNegative": 0.05
+			},
+			{
+				"property": "http://purl.org/roh#participates",
+				"mandatory": false,
+				"inverse": false,
+				"type": 0,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.5,
+				"scoreNegative": null
+			},
+			{
+				"property": "http://purl.org/roh/mirror/foaf#homepage",
+				"mandatory": false,
+				"inverse": false,
+				"type": 0,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.5,
+				"scoreNegative": 0.025
+			},
+			{
+				"property": "http://purl.org/roh#correspondingAuthorOf",
+				"mandatory": false,
+				"inverse": false,
+				"type": 0,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.5,
+				"scoreNegative": null
+			},
+			{
+				"property": "http://purl.org/roh/mirror/bibo#authorList@@@?",
+				"mandatory": false,
+				"inverse": true,
+				"type": 0,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.5,
+				"scoreNegative": null
+			},
+			{
+				"property": "http://purl.org/roh/mirror/vivo#relatedBy@@@http://purl.org/roh/mirror/vivo#relates",
+				"mandatory": false,
+				"inverse": true,
+				"type": 0,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.5,
+				"scoreNegative": null
+			},
+			{
+				"property": "http://purl.org/roh/mirror/vivo#correspondingAuthorOf",
+				"mandatory": false,
+				"inverse": false,
+				"type": 0,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.5,
+				"scoreNegative": null
+			}
+		]
+	}
+	
+	
+ - rdfType: Clase a la que afecta la configuración de descubrimiento
+ - identifiers: Propiedades que son identificadores de la entidad (si 2 entidades tienen el mismo identificador es la misma entidad, independientemente del resto de propiedades)
+ - properties: Listado de propiedades junto con sus características para tener en cuenta en el descubrimiento
+ - properties.property:  Propiedad a tener en cuanta en al reconciliación ('@@@' implica un 'salto' y '?' implica que puede ser cualquier propiedad)
+ - properties.mandatory: Indica si el cumplimineto de esa propiedad es obligatorio para considerar a dos entidades la misma
+ - properties.inverse: Si vale 'false' se buscan los valores de las propiedades utilizando la entidad como sujeto, si vale 'true' se buscan los valores de las propiedades utilizando la entidad como objeto
+ - properties.type: Es el tipo de igualdad que se debe cumplir 
+	- 0 (equals): Misma entidad o mismo valor de la propiedad
+	- 1 (ignoreCaseSensitive): Mismo valor de la propiedad (ignorando mayúsculas y minúsculas)
+	- 2 (name): Mismo nombre (para nombres de personas)
+	- 3 (title): Mismo título (para títulos de documentos por ejemplo)
+ - properties.maxNumWordsTitle: En el caso de que properties.type tenga como valor '3' implica el número de palabras que debe tener el título para considerar el máximo valor de igualdad
+ - properties.scorePositive: Score positivo que se da a la relación cuando se da una coincidencia.
+ - properties.scoreNegative: Score negativo que se da a la relación cuando no se da una coincidencia y ambas entidad tienen algún valor para esa propiedad.
+
 ## Configuración en el appsettings.json
 
     { 
@@ -41,8 +151,8 @@ http://graph.um.es/res/project/RAYD-A-2002-6237
 			}
 		},
 		"Sparql": {
-			"Graph": "",
-			"Endpoint": "",
+			"Graph": "http://HerculesDemo.com",
+			"Endpoint": "http://155.54.239.204:8890/sparql",
 			"QueryParam": "query"
 		},
 		"RabbitMQ": {
@@ -52,15 +162,14 @@ http://graph.um.es/res/project/RAYD-A-2002-6237
 			"uriRabbitMq": "",
 			"virtualhostRabbitMq": ""
 		},
-		"RabbitQueueName": "",
-		"Authority": "",
+		"RabbitQueueName": "HerculesDemoQueue1",
+		"Authority": "https://localhost:44354/connect/token",
 		"GrantType": "client_credentials",
 		"ScopeCron": "apiCron",
 		"ClientId": "Web",
 		"ClientSecret": "master",
 		"ConfigUrlCron": "http://localhost:56255/"
 	}
-
 		 
 		 
  - PostgreConnectionmigration: Cadena de conexión a la base de datos PostgreSQL
