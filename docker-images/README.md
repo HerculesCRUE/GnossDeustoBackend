@@ -191,6 +191,13 @@ Una vez cargadas las imágenes en este mismo directorio nos bajamos el yml de lo
 	
 Antes de lentar los servicios debemos editar este archivo y reemplezar "ip_de_nuestra_maquina" por la ip de la máquina donde estemos levantando los servicios. Asi todos los servicios se podran comunicar conrrectamente entre ellos.	
 
+Con la ip ajustada ya podemos deplegar el docker-compose como de costumbre con este comando:
+
+	docker-compose up -d
+
+Ahora si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz web para poder hacer cargas.
+
+![](http://herc-as-front-desa.atica.um.es/docs/capturas/front.png)
 
 ## Preparación del interfaz Fuseki para benchmark
 
