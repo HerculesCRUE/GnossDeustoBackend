@@ -116,6 +116,7 @@ Y vemos como han aplicado correctamente estos permisos.
 
 Ya tenemos RabbitMQ listo para trabajar en nuestro entorno.
 
+
 ## Preparación de Trifid
 
 Para poner en marcha el servicio de linked tenemos que crear una imagen docker con la configuración adecuada para nuestro entorno. En la home del usuario descargamos el paquete de trifid con este comando:
@@ -148,6 +149,7 @@ Una vez ajustados los parametros tenemos que construir la imagen con el siguient
 Con la imagen ya contruida la ponemos en marcha con este comando:
 
 	docker run -d -p 8081:8081 --name trifid trifid
+
 
 ## Despliegue de los servicios
 
@@ -188,6 +190,7 @@ Una vez cargadas las imágenes en este mismo directorio nos bajamos el yml de lo
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios/docker-compose.yml
 	
 Antes de lentar los servicios debemos editar este archivo y reemplezar "ip_de_nuestra_maquina" por la ip de la máquina donde estemos levantando los servicios. Asi todos los servicios se podran comunicar conrrectamente entre ellos.	
+
 
 ## Preparación del interfaz Fuseki para benchmark
 
