@@ -25,20 +25,20 @@ Este api esta protegida mediante tokens, por ello para poder usar la interfaz sw
 ## Configuración en el appsettings.json
  >
     {
-	"ConnectionStrings": {
-	"PostgreConnectionmigration": ""
-	},
-	"Logging": {
-    "LogLevel": {
-    "Default": "Information",
-    "Microsoft": "Warning",
-    "Microsoft.Hosting.Lifetime": "Information"
-    }
-    },
-    "AllowedHosts": "*",
-	"LogPath": "",
-    "Authority": "http://localhost:56306",
-    "Scope": "apiGestorDocumentacion",
+		"ConnectionStrings": {
+			"PostgreConnectionmigration": ""
+		},
+		"Logging": {
+			"LogLevel": {
+				"Default": "Information",
+				"Microsoft": "Warning",
+				"Microsoft.Hosting.Lifetime": "Information"
+			}
+		},
+		"AllowedHosts": "*",
+		"LogPath": "",
+		"Authority": "http://localhost:56306",
+		"Scope": "apiGestorDocumentacion",
     }
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft

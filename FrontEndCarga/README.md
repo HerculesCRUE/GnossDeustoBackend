@@ -22,37 +22,37 @@ En esta carpeta está disponible el [Manual de Usuario del FrontEnd](https://gith
 ## Configuración en el appsettings.json
  >
     {
-	"ConnectionStrings": {
-	"PostgreConnectionmigration": ""
-	},
-	"Logging": {
-    "LogLevel": {
-    "Default": "Information",
-    "Microsoft": "Warning",
-    "Microsoft.Hosting.Lifetime": "Information"
-    }
-    },
-    "AllowedHosts": "*",
-	"LogPath": "",
-	"LogPathCarga": "",
-	"LogPathCron": "",
-	"Urls": "http://0.0.0.0:5103",
-    "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
-	"ConfigUrlDocumentacion": "http://herc-as-front-desa.atica.um.es/documentacion/",
-	"ConfigUrlCron": "http://herc-as-front-desa.atica.um.es/cron-config/",
-    "ConfigUrlUrisFactory": "http://herc-as-front-desa.atica.um.es/uris/",
-    "Authority": "http://localhost:56306/connect/token",
-    "GrantType": "client_credentials",
-    "Scope": "apiCarga",
-    "ScopeCron": "apiCron",
-    "ScopeUrisFactory": "apiUrisFactory",
-	"ScopeDocumentacion": "apiGestorDocumentacion",
-	"ScopeOAIPMH": "apiOAIPMH",
-	"ClientId": "Web",
-	"ClientIdOAIPMH": "OAIPMH",
-	"ClientSecretOAIPMH": "secretOAIPMH",
-	"ClientSecret": "master",
-	"Proxy": "/carga-web"
+		"ConnectionStrings": {
+			"PostgreConnectionmigration": ""
+		},
+		"Logging": {
+			"LogLevel": {
+				"Default": "Information",
+				"Microsoft": "Warning",
+				"Microsoft.Hosting.Lifetime": "Information"
+			}
+		},
+		"AllowedHosts": "*",
+		"LogPath": "",
+		"LogPathCarga": "",
+		"LogPathCron": "",
+		"Urls": "http://0.0.0.0:5103",
+		"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
+		"ConfigUrlDocumentacion": "http://herc-as-front-desa.atica.um.es/documentacion/",
+		"ConfigUrlCron": "http://herc-as-front-desa.atica.um.es/cron-config/",
+		"ConfigUrlUrisFactory": "http://herc-as-front-desa.atica.um.es/uris/",
+		"Authority": "http://localhost:56306/connect/token",
+		"GrantType": "client_credentials",
+		"Scope": "apiCarga",
+		"ScopeCron": "apiCron",
+		"ScopeUrisFactory": "apiUrisFactory",
+		"ScopeDocumentacion": "apiGestorDocumentacion",
+		"ScopeOAIPMH": "apiOAIPMH",
+		"ClientId": "Web",
+		"ClientIdOAIPMH": "OAIPMH",
+		"ClientSecretOAIPMH": "secretOAIPMH",
+		"ClientSecret": "master",
+		"Proxy": "/carga-web"
 	}
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
@@ -78,6 +78,8 @@ En esta carpeta está disponible el [Manual de Usuario del FrontEnd](https://gith
  - ClientSecretOAIPMH: "clave" de acceso del cliente de OAIPMH
  - ClientSecret: "clave" de acceso del cliente
  - Proxy: directorio virtual que se ha configurado para el proxy inverso, en caso de que no se haya configurado dejar vacío.
+ 
+Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/ApiCargaWebInterface/appsettings.json
 
 ## Dependencias
 

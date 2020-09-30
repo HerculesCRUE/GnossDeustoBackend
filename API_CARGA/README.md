@@ -119,6 +119,7 @@ http://graph.um.es/res/project/RAYD-A-2002-6237
  - ClientIdUnidata: Id de cliente del api de unidata
  - ClientSecretUnidata: "clave" de acceso del api de unidata
 
+Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_CARGA/API_CARGA/appsettings.json
 ## Dependencias
 
 - **dotNetRDF**: versión 2.5.1
