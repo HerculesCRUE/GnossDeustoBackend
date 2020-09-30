@@ -10,8 +10,6 @@ API DISCOVER es un servicio encargado de aplicar el descubrimiento sobre los RDF
  
 Para una especificación más detallada acerca del funcionaminto del descubrimiento se puede consultar la siguiente documentación: https://github.com/TODO
  
-Esta aplicación se encarga de realizar el descubrimiento sobre los RDFs para su posterior carga.
-
 *Conexión a Triple Store*
 -------------------------
 
@@ -156,13 +154,13 @@ A continuación se muestra un fragmento del fichero con la configuración del de
 			"QueryParam": "query"
 		},
 		"RabbitMQ": {
-			"usernameRabbitMq": "",
-			"passwordRabbitMq": "",
-			"hostnameRabbitMq": "",
-			"uriRabbitMq": "",
-			"virtualhostRabbitMq": ""
+			"usernameRabbitMq": "user",
+			"passwordRabbitMq": "pass",
+			"hostnameRabbitMq": "hercules",
+			"uriRabbitMq": "amqp://user:pass@ip:puerto/hercules",
+			"virtualhostRabbitMq": "hercules"
 		},
-		"RabbitQueueName": "HerculesDemoQueue1",
+		"RabbitQueueName": "HerculesDemoQueue",
 		"Authority": "https://localhost:44354/connect/token",
 		"GrantType": "client_credentials",
 		"ScopeCron": "apiCron",
