@@ -152,7 +152,7 @@ Con la imagen ya contruida la ponemos en marcha con este comando:
 
 Una vez levantado podemos hacer una simple comprobación entrando a su interfaz web en http://ip_de_nuestra_maquina:8081.
 
-![](http://herc-as-front-desa.atica.um.es/docs/trific.png)
+![](http://herc-as-front-desa.atica.um.es/docs/trifid.png)
 
 ## Despliegue de los servicios
 
