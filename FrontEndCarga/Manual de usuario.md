@@ -120,7 +120,7 @@ En la siguiente imágen se muestra un error de ejecución que se haya podido dar
 
 A continuación se muestra un error en el que se requiere la intervención del usuario eligiendo la opción que sea correcta enter las opciones disponibles o no elegir ninguna opción
 en el caso de que no sea ninguna la opción correcta. En esta pantalla se muestra la confianza de las opciones siendo 1 la más alta, además se puede visualizar los datos de 
-las diferentes opciones desde el enlace.
+las diferentes opciones desde el enlace que hay en ver opción.
 
 ![](img/DiscoverUser.png)
 
