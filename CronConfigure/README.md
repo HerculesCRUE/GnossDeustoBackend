@@ -30,19 +30,19 @@ Este api esta protegida mediante tokens, por ello para poder usar la interfaz sw
 
 ## Configuración en el appsettings.json
     {
-      "ConnectionStrings": {
-          "HangfireConnection":""
-           },
-             "Logging": {
-                 "LogLevel": {
-                       "Default": "Information",
-                       "Microsoft": "Warning",
-                       "Microsoft.Hosting.Lifetime":"Information"
-    }
-      },
-        "AllowedHosts": "*",
-        "Urls": "http://0.0.0.0:5107",
-        "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
+		"ConnectionStrings": {
+			"HangfireConnection":""
+		},
+		"Logging": {
+			"LogLevel": {
+				"Default": "Information",
+				"Microsoft": "Warning",
+				Microsoft.Hosting.Lifetime":"Information"
+			}
+		},
+		"AllowedHosts": "*",
+		"Urls": "http://0.0.0.0:5107",
+		"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
 		"Authority": "http://localhost:56306",
 		"AuthorityGetToken": "http://localhost:56306/connect/token",
 		"Scope": "apiCron",
@@ -50,7 +50,7 @@ Este api esta protegida mediante tokens, por ello para poder usar la interfaz sw
 		"GrantType": "client_credentials",
 		"ClientId": "carga",
 		"ClientSecret": "secret"
-            }
+    }
  - HangfireConnection: Cadena de conexión a la base de datos PostgreSQL de tareas programadas
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
@@ -64,6 +64,8 @@ Este api esta protegida mediante tokens, por ello para poder usar la interfaz sw
  - ScopeCarga: Limitación de acceso al api de carga
  - ScopeUrisFactory: Limitación de acceso al api de urisFactory
  - ClientId: Id de cliente, en este caso se ha configurado un cliente que pueda acceder a todas las apis que usa la web
+ 
+ Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/CronConfigure/CronConfigure/appsettings.json
  - ClientSecret: "clave" de acceso del cliente
 
 ## Dependencias
