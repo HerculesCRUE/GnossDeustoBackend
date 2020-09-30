@@ -4,7 +4,7 @@
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
 
 La documentación de la librería está disponible en: 
-http://herc-as-front-desa.atica.um.es/TODO.html
+http://herc-as-front-desa.atica.um.es/api_discover/api/API_DISCOVER.html
 
 API DISCOVER es un servicio encargado de aplicar el descubrimiento sobre los RDF de carga para su posterior publicación la BBDD.
  
