@@ -32,10 +32,6 @@ namespace ApiCargaWebInterface.Controllers
         public IActionResult Details(Guid itemId)
         {
             var discovery = _discoverItemService.GetDiscoverItemById(itemId);
-
-            RohGraph dataGraph = new RohGraph();
-            dataGraph.LoadFromString(discovery.DiscoverRdf, new RdfXmlParser());
-
             DiscoverItemViewModel model = new DiscoverItemViewModel();
             model.DissambiguationProblems = new Dictionary<string, List<string>>();
             model.DissambiguationProblemsTitles = new Dictionary<string, string>();
@@ -47,6 +43,8 @@ namespace ApiCargaWebInterface.Controllers
             }
             else
             {
+                RohGraph dataGraph = new RohGraph();
+                dataGraph.LoadFromString(discovery.DiscoverRdf, new RdfXmlParser());
                 model.JobId = discovery.JobID;
                 
                 foreach (var item in discovery.DissambiguationProblems)
