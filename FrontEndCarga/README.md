@@ -51,8 +51,9 @@ En esta carpeta está disponible el [Manual de Usuario del FrontEnd](https://gith
 	"ClientId": "Web",
 	"ClientIdOAIPMH": "OAIPMH",
 	"ClientSecretOAIPMH": "secretOAIPMH",
-	"ClientSecret": "master"
-    }
+	"ClientSecret": "master",
+	"Proxy": "/carga-web"
+	}
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
  - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
@@ -76,6 +77,7 @@ En esta carpeta está disponible el [Manual de Usuario del FrontEnd](https://gith
  - ClientIdOAIPMH: Id de cliente de OAIPMH
  - ClientSecretOAIPMH: "clave" de acceso del cliente de OAIPMH
  - ClientSecret: "clave" de acceso del cliente
+ - Proxy: directorio virtual que se ha configurado para el proxy inverso
 
 ## Dependencias
 

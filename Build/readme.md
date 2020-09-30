@@ -156,8 +156,9 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
 	"ClientId": "Web",
 	"ClientIdOAIPMH": "OAIPMH",
 	"ClientSecretOAIPMH": "secretOAIPMH",
-	"ClientSecret": "master"
-    }
+	"ClientSecret": "master",
+	"Proxy": "/carga-web"
+	}
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
  - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
@@ -180,6 +181,7 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
  - ClientId: Id de cliente, en este caso se ha configurado un cliente que pueda acceder a todas las apis que usa la web
  - ClientIdOAIPMH: Id de cliente de OAIPMH
  - ClientSecretOAIPMH: "clave" de acceso del cliente de OAIPMH
+ - Proxy: directorio virtual que se ha configurado para el proxy inverso
  - ClientSecret: "clave" de acceso del cliente
 ### Ejecución
     dotnet ApiCargaWebInterface.dll

@@ -10,6 +10,7 @@ namespace ApiCargaWebInterface.ViewModels
     {
         public Guid PageId { get; set; }
         public string Route { get; set; }
+        public string RouteProxyLess { get; set; }
         public IFormFile FileHtml { get; set; }
         public DateTime LastModified { get; set; }
     }

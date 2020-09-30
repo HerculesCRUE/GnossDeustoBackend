@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.Models.Services.VirtualPathProvider;
 using ApiCargaWebInterface.ViewModels;
 using Microsoft.AspNetCore.Diagnostics;
@@ -50,11 +51,14 @@ namespace ApiCargaWebInterface.Controllers
         {
             var pages = _documentationApi.GetPages();
             List<PageViewModel> pagesViewModel = new List<PageViewModel>();
-            foreach(var page in pages)
-            {
+            ConfigUrlService urlService = new ConfigUrlService();
+            foreach (var page in pages)
+            {  
+                string routeProxy = $"{urlService.GetProxy()}{page.Route}";
                 PageViewModel pageViewModel = new PageViewModel()
                 {
-                    Route = page.Route,
+                    RouteProxyLess = page.Route,
+                    Route = routeProxy,
                     PageId = page.PageId
                 };
                 pagesViewModel.Add(pageViewModel);

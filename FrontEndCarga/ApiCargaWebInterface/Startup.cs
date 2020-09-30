@@ -144,11 +144,20 @@ namespace ApiCargaWebInterface
             app.UseStatusCodePagesWithReExecute("/error/{0}");
             app.UseAuthentication();
             app.UseHttpsRedirection();
-
-            app.UsePathBase("/carga-web");
+            IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+            string proxy = "";
+            if (environmentVariables.Contains("Proxy"))
+            {
+                proxy = environmentVariables["Proxy"] as string;
+            }
+            else
+            {
+                proxy = Configuration.GetConnectionString("Proxy");
+            }
+            app.UsePathBase(proxy);
             app.Use((context, next) =>
             {
-                context.Request.PathBase = "/carga-web";
+                context.Request.PathBase = proxy;
                 return next();
             });
             app.UseStaticFiles();
