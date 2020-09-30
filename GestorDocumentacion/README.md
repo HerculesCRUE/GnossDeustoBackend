@@ -47,6 +47,7 @@ Este api esta protegida mediante tokens, por ello para poder usar la interfaz sw
  - LogPath: Ruta donde va a guardar los logs de la aplicación
  - Authority: Url donde está instalado el IdentityServer
  - Scope: Limitación de acceso al api de documentacion
+ Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/GestorDocumentacion/GestorDocumentacion/appsettings.json
 
 ## Dependencias
 
