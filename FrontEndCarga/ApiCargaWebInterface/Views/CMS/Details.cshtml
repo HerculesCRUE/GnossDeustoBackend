@@ -1,7 +1,7 @@
 ﻿@model ApiCargaWebInterface.ViewModels.PageViewModel
 
 @{
-    ViewData["Title"] = Model.Route;
+    ViewData["Title"] = Model.RouteProxyLess;
     ViewData["BodyClass"] = "fichaRecurso";
 }
 
@@ -10,11 +10,11 @@
         <div class="wrapCol">
             <div class="header-resource">
                 <div class="h1-container">
-                    <h1>@Model.Route</h1>
+                    <h1>@Model.RouteProxyLess</h1>
                     <div class="botones">
                         <ul>
                             <li>
-                                <a href="@Url.Action("Create", new {  page_id=Model.PageId, route=Model.Route  })" class="btn btn-editar">Editar</a>
+                                <a href="@Url.Action("Create", new {  page_id=Model.PageId, route=Model.RouteProxyLess  })" class="btn btn-editar">Editar</a>
                             </li>
                             <li>
                                 <a href="@Url.Action("Delete", new {  page_id=Model.PageId  })" class="btn btn-eliminar">Eliminar</a>
@@ -31,11 +31,11 @@
                     </div>
                     <div class="outh-token">
                         <p class="titulo">Route</p>
-                        <p><a href="@Model.Route">@Model.Route</a></p>
+                        <p><a href="@Model.Route">@Model.RouteProxyLess</a></p>
                     </div>
                     <div class="outh-token">
                         <p class="titulo">Html de la vista</p>
-                        <a href="@Url.Action("DownloadHtml", new {  route=Model.Route  })" class="btn-mas-recursos"><i class="material-icons">attachment</i>Descargar</a>
+                        <a href="@Url.Action("DownloadHtml", new {  route=Model.RouteProxyLess  })" class="btn-mas-recursos"><i class="material-icons">attachment</i>Descargar</a>
                     </div>
                 </div>
             </div>

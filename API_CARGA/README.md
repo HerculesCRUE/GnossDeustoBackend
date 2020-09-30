@@ -44,48 +44,49 @@ http://graph.um.es/res/project/RAYD-A-2002-6237
 ## Configuración en el appsettings.json
 
     { 
-    "ConnectionStrings": {
-    "PostgreConnectionmigration": ""},
-      "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft": "Warning",
-      "Microsoft.Hosting.Lifetime": "Information"
-    }
-      },
-        "AllowedHosts": "*",
-        "Urls": "http://0.0.0.0:5100",
-         "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
-         "Sparql": {
-           "Graph": "http://data.um.es/graph/um_cvn",
-           "Endpoint": "http://155.54.239.204:8890/sparql"
-           "QueryParam": "query",
-		   "GraphRoh": "http://graph.um.es/graph/research/roh",
-		   "GraphRohes": "http://graph.um.es/graph/research/rohes",
-		   "GraphRohum": "http://graph.um.es/graph/research/rohum"
-         },
-		 "RabbitMQ": {
-		   "usernameRabbitMq": "",
-		   "passwordRabbitMq": "",
-		   "hostnameRabbitMq": "",
-		   "uriRabbitMq": "",
-		   "virtualhostRabbitMq": ""
-		 },
-		 "RabbitQueueName": "",
-		 "Authority": "http://localhost:56306",
-         "ScopeCarga": "apiCarga",
-         "AuthorityGetToken": "http://localhost:56306/connect/token",
-         "GrantType": "client_credentials",
-         "ClientId": "carga",
-         "ClientSecret": "secret",
-         "ScopeOAIPMH": "apiOAIPMH",
-         "ClientIdOAIPMH": "OAIPMH",
-        "ClientSecretOAIPMH": "secretOAIPMH",
+		"ConnectionStrings": {
+			"PostgreConnectionmigration": ""
+		},
+		"Logging": {
+			"LogLevel": {
+				"Default": "Information",
+				"Microsoft": "Warning",
+				"Microsoft.Hosting.Lifetime": "Information"
+			}
+		},
+		"AllowedHosts": "*",
+		"Urls": "http://0.0.0.0:5100",
+		"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
+		"Sparql": {
+			"Graph": "http://data.um.es/graph/um_cvn",
+			"Endpoint": "http://155.54.239.204:8890/sparql"
+			"QueryParam": "query",
+			"GraphRoh": "http://graph.um.es/graph/research/roh",
+			"GraphRohes": "http://graph.um.es/graph/research/rohes",
+			"GraphRohum": "http://graph.um.es/graph/research/rohum"
+		},
+		"RabbitMQ": {
+			"usernameRabbitMq": "user",
+			"passwordRabbitMq": "pass",
+			"hostnameRabbitMq": "hercules",
+			"uriRabbitMq": "amqp://user:pass@ip:puerto/hercules",
+			"virtualhostRabbitMq": "hercules"
+		},
+		"RabbitQueueName": "HerculesDemoQueue",
+		"Authority": "http://localhost:56306",
+		"ScopeCarga": "apiCarga",
+		"AuthorityGetToken": "http://localhost:56306/connect/token",
+		"GrantType": "client_credentials",
+		"ClientId": "carga",
+		"ClientSecret": "secret",
+		"ScopeOAIPMH": "apiOAIPMH",
+		"ClientIdOAIPMH": "OAIPMH",
+		"ClientSecretOAIPMH": "secretOAIPMH",
 		"ConfigUrlUnidata": "https://localhost:44354/",
 		"ScopeUnidata": "apiUnidata",
 		"ClientIdUnidata": "unidata",
 		"ClientSecretUnidata": "secretUnidata"
-         }
+    }
  - PostgreConnectionmigration: Cadena de conexión a la base de datos PostgreSQL
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft

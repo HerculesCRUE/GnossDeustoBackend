@@ -51,14 +51,11 @@ namespace ApiCargaWebInterface.Controllers
         {
             var pages = _documentationApi.GetPages();
             List<PageViewModel> pagesViewModel = new List<PageViewModel>();
-            ConfigUrlService urlService = new ConfigUrlService();
             foreach (var page in pages)
             {  
-                string routeProxy = $"{urlService.GetProxy()}{page.Route}";
                 PageViewModel pageViewModel = new PageViewModel()
                 {
-                    RouteProxyLess = page.Route,
-                    Route = routeProxy,
+                    Route = page.Route,
                     PageId = page.PageId
                 };
                 pagesViewModel.Add(pageViewModel);
@@ -73,10 +70,12 @@ namespace ApiCargaWebInterface.Controllers
         public IActionResult Details(string route)
         {
             var page = _documentationApi.GetPage(route);
-
+            ConfigUrlService urlService = new ConfigUrlService();
+            string routeProxy = $"{urlService.GetProxy()}{page.Route}";
             PageViewModel pageViewModel = new PageViewModel()
             {
-                Route = page.Route,
+                Route = routeProxy,
+                RouteProxyLess = page.Route,
                 LastModified = page.LastModified,
                 PageId = page.PageId
             };
