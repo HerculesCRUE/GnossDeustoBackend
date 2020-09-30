@@ -52,30 +52,59 @@
                                     </div>*@
                                         @foreach (var item in Model.DissambiguationProblems)
                                         {
-
-
+                                        <div class="fila">
+                                            <p class="titulo">Error descubrimiento para el item @item.Key</p>
+                                            <p class="descripcion">Elige la opción que más se adecue para @item.Key</p>
+                                            <div class="items tabla">
+                                                <div class="cabecera">
+                                                    <div class="columna principal" style="text-align:left">
+                                                        <p>Opciones</p>
+                                                    </div>
+                                                    <div class="columna" style="text-align:left">
+                                                        <p>confianza</p>
+                                                    </div>
+                                                    <div class="columna" style="text-align:left">
+                                                        <p>Enlaces</p>
+                                                    </div>
+                                                </div>
+                                                <div class="fila">
+                                                    <div class="columna principal">
+                                                        <div class="radio">
+                                                            <label><input type="radio" name="DissambiguationProblemsResolve[@item.Key]" value="" checked>Ninguna opción</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="columna">
+                                                        <a href="" target="_blank"></a>
+                                                    </div>
+                                                </div>
+                                                @foreach (var option in item.Value)
+                                                {
+                                                    string value = option.Split('|').First().Trim();
+                                                    string confianza = option.Split('|').Last().Trim();
                                             <div class="fila">
-                                                <p class="titulo">Error descubrimiento para el item @item.Key</p>
-                                                <p class="descripcion">Elige la opción que más se adecue para @item.Key</p>
-                                                @*<div class="acciones">
-                                            <ul>
-                                                <li>
-                                                    <input type="checkbox" style="border: 0px; padding: 0px; margin-top: 0px;">
-                                                    <label class="validar">Validar</label>
-                                                </li>
-                                                <li>*@
-                                                <select name="DissambiguationProblemsResolve[@item.Key]">
-                                                    <option value="">Ninguna opción</option>
-                                                    @foreach (var option in item.Value)
-                                                    {
-                                                        string value = option.Split('|').First().Trim();
-                                                        <option value="@value">@option</option>
-                                                    }
-                                                </select>
-                                                @*</li>
-                                                </ul>
-                                            </div>*@
+                                                <div class="columna principal">
+                                                    <div class="radio">
+                                                        <label><input type="radio" name="DissambiguationProblemsResolve[@item.Key]" value="@value">@value</label>
+                                                    </div>
+                                                </div>
+                                                <div class="columna">
+                                                    <p>@confianza</p>
+                                                </div>
+                                                <div class="columna">
+                                                    <a href="@value" target="_blank">ver opción</a>
+                                                </div>
                                             </div>
+                                                }
+                                            </div>
+                                            @*<select name="DissambiguationProblemsResolve[@item.Key]">
+                                                <option value="">Ninguna opción</option>
+                                                @foreach (var option in item.Value)
+                                                {
+                                                    string value = option.Split('|').First().Trim();
+                                                    <option value="@value">@option</option>
+                                                }
+                                            </select>*@
+                                        </div>
                                         }
                                     </div>
                                     <input class="submit principal" type="submit" value="Validar">
