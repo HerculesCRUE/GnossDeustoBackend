@@ -91,21 +91,27 @@ Y podemos probar a cargar el interfaz web de rabbitmq con http://ip_de_nuestra_m
 Ahora debemos loguearnos con usurio "guest" y password "password", que son los que estan ajustados en el yml, y procederemos a crear un virtual host seguiendo estos sencillos pasos:
 
 Ya logueados vamos a la sección "Admin".
+
 ![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/2.png)
 
-Una vez logueados pinchamos en "Virtual Hosts"
+Una vez logueados pinchamos en "Virtual Hosts".
+
 ![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/3.png)
 
-Escribimos el nombre del virtual host. En nuestro caso "hercules" porque es el que está ajustado en el docker-compose.yml de servicios. Después pinnchamos en "Add virtual host"
+Escribimos el nombre del virtual host. En nuestro caso "hercules" porque es el que está ajustado en el docker-compose.yml de servicios. Después pinchamos en "Add virtual host".
+
 ![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/4.png)
 
 Una vez añadido entramos en sus ajustes.
+
 ![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/5.png)
 
 Le damos permisos al usuario guest. En nuestro caso "guest" porque es el que está ajustado en el docker-compose.yml de servicios.
+
 ![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/6.png)
 
 Y vemos como han aplicado correctamente estos permisos.
+
 ![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/7.png)
 
 Ya tenemos RabbitMQ listo para trabajar en nuestro entorno.
