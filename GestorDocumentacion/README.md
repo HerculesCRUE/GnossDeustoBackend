@@ -16,7 +16,7 @@ http://herc-as-front-desa.atica.um.es/apiGestorDocumentacion/api/GestorDocumenta
 
 Hay una versión disponible en el entorno de pruebas de la Universidad de Murcia, en esta dirección: 
 
-http://herc-as-front-desa.atica.um.es/documentacion.
+http://herc-as-front-desa.atica.um.es/documentacion/swagger/index.html.
 
 *Obtención del Token*
 -------------------------
