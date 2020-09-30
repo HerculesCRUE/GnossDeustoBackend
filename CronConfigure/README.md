@@ -37,7 +37,7 @@ Este api esta protegida mediante tokens, por ello para poder usar la interfaz sw
 			"LogLevel": {
 				"Default": "Information",
 				"Microsoft": "Warning",
-				Microsoft.Hosting.Lifetime":"Information"
+				"Microsoft.Hosting.Lifetime":"Information"
 			}
 		},
 		"AllowedHosts": "*",

@@ -97,6 +97,8 @@ Este api esta protegida mediante tokens, por ello para poder usar la interfaz sw
     }
 - Scope: Limitación de acceso al api de urisFactory
 
+ Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/UrisFactory/UrisAutoGenerator/appsettings.json
+
 ## Dependencias
 
  - **IdentityServer4**: versión 3.1.2
