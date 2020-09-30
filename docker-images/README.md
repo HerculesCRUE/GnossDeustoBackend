@@ -88,6 +88,10 @@ Y podemos probar a cargar el interfaz web de rabbitmq con http://ip_de_nuestra_m
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/rabbitmq/01_rabbitmq_login.png)
 
+Ahora debemos loguearnos con usurio "guest" y password "password", que son los que estan ajustados en el yml, y procederemos a crear un virtual host seguiendo estos sencillos pasos:
+
+![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/2020-09-30 08_27_35-Window.png)
+
 ## Preparación de Trifid
 
 Para poner en marcha el servicio de linked tenemos que crear una imagen docker con la configuración adecuada para nuestro entorno. En la home del usuario descargamos el paquete de trifid con este comando:
