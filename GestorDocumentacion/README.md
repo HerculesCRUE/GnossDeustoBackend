@@ -10,6 +10,10 @@ determinada y luego acceder a esas páginas a través de la web (https://herc-as-f
 	 - *Post:* /Page/loadpage: Carga una nueva página o modifica un página existente
 	 - *Delete:* /Page/Delete: Elimina una página dando su identificador
 
+ La documentación de la librería está disponible en:
+
+http://herc-as-front-desa.atica.um.es/apiGestorDocumentacion/api/GestorDocumentacion.Controllers.html
+
 Hay una versión disponible en el entorno de pruebas de la Universidad de Murcia, en esta dirección: 
 
 http://herc-as-front-desa.atica.um.es/documentacion.

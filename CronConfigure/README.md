@@ -18,7 +18,7 @@ Mediante estos controladores se pueden crear los siguientes tipos de tareas:
 
  La documentación de la librería está disponible en:
 
-http://herc-as-front-desa.atica.um.es/cronconfigure/library/api/CronConfigure.Controllers.html
+http://herc-as-front-desa.atica.um.es/cronconfigure/api/CronConfigure.Controllers.html
 
 Los resultados de las pruebas unitarias se pueden consultar en [ResultsTest](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/CronConfigure/ResultsTest).
 
