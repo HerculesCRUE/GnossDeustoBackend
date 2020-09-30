@@ -8,7 +8,7 @@ http://herc-as-front-desa.atica.um.es/api_discover/api/API_DISCOVER.html
 
 API DISCOVER es un servicio encargado de aplicar el descubrimiento sobre los RDF de carga para su posterior publicación la BBDD.
  
-Para una especificación más detallada acerca del descubrimiento se puede consultar la siguiente documentación: https://github.com/TODO
+Para una especificación más detallada acerca del funcionaminto del descubrimiento se puede consultar la siguiente documentación: https://github.com/TODO
  
 Esta aplicación se encarga de realizar el descubrimiento sobre los RDFs para su posterior carga.
 
