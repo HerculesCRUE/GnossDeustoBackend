@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using VDS.RDF;
+using VDS.RDF.Parsing;
+using VDS.RDF.Query;
 
 namespace ApiCargaWebInterface.Controllers
 {
@@ -29,8 +32,13 @@ namespace ApiCargaWebInterface.Controllers
         public IActionResult Details(Guid itemId)
         {
             var discovery = _discoverItemService.GetDiscoverItemById(itemId);
+
+            RohGraph dataGraph = new RohGraph();
+            dataGraph.LoadFromString(discovery.DiscoverRdf, new RdfXmlParser());
+
             DiscoverItemViewModel model = new DiscoverItemViewModel();
             model.DissambiguationProblems = new Dictionary<string, List<string>>();
+            model.DissambiguationProblemsTitles = new Dictionary<string, string>();
             if (discovery.Status.Equals("Error"))
             {
                 model.Error = discovery.Error;
@@ -47,6 +55,12 @@ namespace ApiCargaWebInterface.Controllers
                     if (!model.DissambiguationProblems.ContainsKey(item.IDOrigin))
                     {
                         model.DissambiguationProblems.Add(item.IDOrigin, new List<string>());
+                        model.DissambiguationProblemsTitles.Add(item.IDOrigin, "");
+                        SparqlResultSet sparqlResultSet = (SparqlResultSet)dataGraph.ExecuteQuery("select ?title where{<" + item.IDOrigin + "> ?prop ?title. FILTER(?prop in (<http://purl.org/roh#title>,<http://purl.org/roh/mirror/foaf#name>))}");
+                        foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
+                        {
+                            model.DissambiguationProblemsTitles[item.IDOrigin]= ((LiteralNode)(sparqlResult["title"])).Value;
+                        }
                     }
                     foreach (var problem in item.DissambiguationCandiates)
                     {

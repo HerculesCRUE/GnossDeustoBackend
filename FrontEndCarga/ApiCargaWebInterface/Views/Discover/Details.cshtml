@@ -55,6 +55,10 @@
                                         <div class="fila">
                                             <p class="titulo">Error descubrimiento para el item @item.Key</p>
                                             <p class="descripcion">Elige la opción que más se adecue para @item.Key</p>
+                                            @if (Model.DissambiguationProblemsTitles.ContainsKey(item.Key))
+                                            {
+                                                <p class="descripcion">Nombre: @Model.DissambiguationProblemsTitles[item.Key]</p>
+                                            }
                                             <div class="items tabla">
                                                 <div class="cabecera">
                                                     <div class="columna principal" style="text-align:left">
@@ -81,29 +85,29 @@
                                                 {
                                                     string value = option.Split('|').First().Trim();
                                                     string confianza = option.Split('|').Last().Trim();
-                                            <div class="fila">
-                                                <div class="columna principal">
-                                                    <div class="radio">
-                                                        <label><input type="radio" name="DissambiguationProblemsResolve[@item.Key]" value="@value">@value</label>
+                                                    <div class="fila">
+                                                        <div class="columna principal">
+                                                            <div class="radio">
+                                                                <label><input type="radio" name="DissambiguationProblemsResolve[@item.Key]" value="@value">@value</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="columna">
+                                                            <p>@confianza</p>
+                                                        </div>
+                                                        <div class="columna">
+                                                            <a href="@value" target="_blank">ver opción</a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="columna">
-                                                    <p>@confianza</p>
-                                                </div>
-                                                <div class="columna">
-                                                    <a href="@value" target="_blank">ver opción</a>
-                                                </div>
-                                            </div>
                                                 }
                                             </div>
                                             @*<select name="DissambiguationProblemsResolve[@item.Key]">
-                                                <option value="">Ninguna opción</option>
-                                                @foreach (var option in item.Value)
-                                                {
-                                                    string value = option.Split('|').First().Trim();
-                                                    <option value="@value">@option</option>
-                                                }
-                                            </select>*@
+            <option value="">Ninguna opción</option>
+            @foreach (var option in item.Value)
+            {
+                string value = option.Split('|').First().Trim();
+                <option value="@value">@option</option>
+            }
+        </select>*@
                                         </div>
                                         }
                                     </div>
