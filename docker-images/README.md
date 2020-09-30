@@ -152,7 +152,7 @@ Con la imagen ya contruida la ponemos en marcha con este comando:
 
 Una vez levantado podemos hacer una simple comprobación entrando a su interfaz web en http://ip_de_nuestra_maquina:8081.
 
-![](http://herc-as-front-desa.atica.um.es/docs/trific.png)
+![](http://herc-as-front-desa.atica.um.es/docs/trifid.png)
 
 ## Despliegue de los servicios
 
@@ -184,8 +184,9 @@ Una vez en el directorio "Servicios" nos descargamos el script que descarga las 
 	
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios/carga_imagenes.sh
 	
-Lo ejecutamos:
+Le damos permisos de ejecución y lo ejecutamos:
 
+	chmod +x carga_imagenes.sh
 	./carga_imagenes.sh
 
 Una vez cargadas las imágenes en este mismo directorio nos bajamos el yml de los servicios.
