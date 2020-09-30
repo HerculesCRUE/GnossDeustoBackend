@@ -77,7 +77,7 @@ En esta carpeta está disponible el [Manual de Usuario del FrontEnd](https://gith
  - ClientIdOAIPMH: Id de cliente de OAIPMH
  - ClientSecretOAIPMH: "clave" de acceso del cliente de OAIPMH
  - ClientSecret: "clave" de acceso del cliente
- - Proxy: directorio virtual que se ha configurado para el proxy inverso
+ - Proxy: directorio virtual que se ha configurado para el proxy inverso, en caso de que no se haya configurado dejar vacío.
 
 ## Dependencias
 

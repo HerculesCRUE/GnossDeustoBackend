@@ -181,7 +181,7 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
  - ClientId: Id de cliente, en este caso se ha configurado un cliente que pueda acceder a todas las apis que usa la web
  - ClientIdOAIPMH: Id de cliente de OAIPMH
  - ClientSecretOAIPMH: "clave" de acceso del cliente de OAIPMH
- - Proxy: directorio virtual que se ha configurado para el proxy inverso
+ - Proxy: directorio virtual que se ha configurado para el proxy inverso, en caso de que no se haya configurado dejar vacío.
  - ClientSecret: "clave" de acceso del cliente
 ### Ejecución
     dotnet ApiCargaWebInterface.dll
