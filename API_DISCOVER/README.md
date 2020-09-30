@@ -10,8 +10,6 @@ API DISCOVER es un servicio encargado de aplicar el descubrimiento sobre los RDF
  
 Para una especificación más detallada acerca del funcionaminto del descubrimiento se puede consultar la siguiente documentación: https://github.com/TODO
  
-Esta aplicación se encarga de realizar el descubrimiento sobre los RDFs para su posterior carga.
-
 *Conexión a Triple Store*
 -------------------------
 
