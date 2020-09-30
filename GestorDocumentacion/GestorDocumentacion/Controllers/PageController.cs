@@ -81,6 +81,7 @@ namespace GestorDocumentacion.Controllers
         public IActionResult LoadPage(string route, Guid pageId, IFormFile html_page)
         {
             Guid guidPage = Guid.Empty;
+            string content = "";
             bool isNew = false;
             if (Guid.Empty.Equals(pageId))
             {
@@ -91,13 +92,16 @@ namespace GestorDocumentacion.Controllers
             {
                 guidPage = pageId;
             }
-
+            if(html_page != null)
+            {
+                content = _fileOperationsService.ReadFile(html_page);
+            }
             Page page = new Page()
             {
                 LastModified = DateTime.Now,
                 PageID = guidPage,
                 Route = route,
-                Content = _fileOperationsService.ReadFile(html_page)
+                Content = content
             };
             if(!_pagesOperationsService.LoadPage(page, isNew))
             {

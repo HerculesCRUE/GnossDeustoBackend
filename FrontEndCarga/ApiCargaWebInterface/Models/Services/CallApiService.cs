@@ -107,8 +107,11 @@ namespace ApiCargaWebInterface.Models.Services
             HttpContent contentData = null;
             if (!isFile)
             {
-                string stringData = JsonConvert.SerializeObject(item);
-                contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+                if (item != null)
+                {
+                    string stringData = JsonConvert.SerializeObject(item);
+                    contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+                }
             }
             else
             {

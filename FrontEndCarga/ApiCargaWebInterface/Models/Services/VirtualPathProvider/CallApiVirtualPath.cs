@@ -60,7 +60,15 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
             {
                 method += $"&pageId={pageId}";
             }
-            _serviceApi.CallPostApi(_serviceUrl.GetUrlDocumentacion(), method, pageHtml, _token, true, "html_page");
+            if (pageHtml != null)
+            {
+                _serviceApi.CallPostApi(_serviceUrl.GetUrlDocumentacion(), method, pageHtml, _token, true, "html_page");
+            }
+            else
+            {
+                _serviceApi.CallPostApi(_serviceUrl.GetUrlDocumentacion(), method, pageHtml, _token);
+            }
+            
         }
 
         public void DeletePage(Guid pageId)
