@@ -184,8 +184,9 @@ Una vez en el directorio "Servicios" nos descargamos el script que descarga las 
 	
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios/carga_imagenes.sh
 	
-Lo ejecutamos:
+Le damos permisos de ejecución y lo ejecutamos:
 
+	chmod +x carga_imagenes.sh
 	./carga_imagenes.sh
 
 Una vez cargadas las imágenes en este mismo directorio nos bajamos el yml de los servicios.
