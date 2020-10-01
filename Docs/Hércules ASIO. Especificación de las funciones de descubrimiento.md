@@ -46,7 +46,7 @@ responden al siguiente esquema de arquitectura:
 
 ![](.//media/image2_FuncionesCarga.png)
 
-Dentro de esta estructura, El API de descubrimiento reconcilia, descubre enlaces y detecta equivalencias;
+Dentro de esta estructura, el API de descubrimiento reconcilia, descubre enlaces y detecta equivalencias;
 y se encarga de enviar los triples definitivos hacia el RDF Store. Para ello, lee de una cola de Rabbit MQ los RDF pendientes de procesar, que han sido introducidos a través del método POST etl​/data-publish del API CARGA.
 
 Reconciliación, Descubrimiento y Detección de equivalencias
