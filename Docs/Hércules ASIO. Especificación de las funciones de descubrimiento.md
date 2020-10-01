@@ -59,3 +59,39 @@ El flujo de acciones de descubrimiento, que comienza con la reconciliación de e
     3.	Una o más entidades han superado el umbral mínimo. Se incluyen en la lista de entidades sobre las que tendría que decidir un administrador.
     4.	Ninguna entidad ha superado el umbral mínimo. La entidad se considera nueva, y se continúa con el proceso de carga con los datos adicionales obtenidos en los procesos anteriores.
 
+Configuración por tipo de entidad
+-------------------
+Para la reconciliación de entidades se realiza una configuración por cada tipo de entidad de las propiedades que deben coincidir para considerar que se trata de la misma entidad. Estas propiedades pueden ser directas o inversas y pueden tener N saltos.
+Esta concidencia puede ser de 4 tipos:
+1.	Equals: El valor de la propiedad es exactamente el mismo.
+2.	IgnoreCaseSensitive: El valor de la propiedad es exactamente el mismo (ignorando mayúsculas y minúsculas).
+3.	Name: Utilizado para nombres de personas, tiene en cuenta abreviaturas, más o menos apellidos.... (pendiente de definir al algoritmo)
+4.	Title: Utilizado para nombres/títulos en los que el valor debe ser el mismo ignorando caracteres especiales, mayúsculas, minúsculas y acentos.
+    *	En este caso, además hay que establecer el nº de palabras para considerar que la similitud es del 100%.
+
+Algoritmos de similitud. Nombres y nombres propios
+--------------
+Se han evaluado las siguientes aproximaciones:
+* Distancia de edición (distancia Levenshtein). Es utilizado comúnmente para ver las similitudes entre dos textos, pero consideramos que no daría un buen resultado en los nombres y apellidos. Es útil para encontrar textos similares por si se cometen faltas de ortografía, pero en este caso las faltas de ortografía no son tan frecuentes y podría dar lugar a muchos falsos positivos (Mario - María, Fernando – Fernández).
+* Medida Jaro-Winkler. Esta variación de la medida Jaro tiene en cuenta la existencia de prefijos comunes, lo que resulta de utilidad en nombres escritos con iniciales, como “E. García López”. Funciona bien con nombres y apellidos, pero ofrece una escala de resultados con la que no es fácil establecer umbrales de aceptación. Por ejemplo, la similitud de “Álvaro” y “Alvar” sería de 0,94 y la de “Álvaro” y “A.” sería de 0,78.
+* Finalmente se ha optado por una medida basada en conjuntos de caracteres, usando n-gramas (inicialmente de longitud 2) y obteniendo el coeficiente de Jaccard. Los aspectos a considerar son:
+  * Reordenar la cadena de nombre + apellidos si aparece una coma. Por ejemplo, “Pérez Lara, Ángel” a “Ángel Pérez Lara”.
+  * Dividir el nombre y apellidos en sus palabras, retirando stop words (de, del, la) y guiones.
+  * Considerar la puntuación de las palabras con un coeficiente de Jaccard por encima de 0,5. Si no se supera, el índice resultante sería 0.
+  * Otorgar un peso fijo de 0,5 al reconocimiento de una inicial (“Eduardo” y “E.”).
+  * La puntuación de una palabra será 0 si no aparece en el orden adecuado.
+
+Por ejemplo, para “Ángel Pérez Lara” podríamos obtener los siguientes candidatos, de los que consideraríamos los que superasen 0,5:
+* Ángela Pérez Lara: 0,90
+* A. Pérez Lara: 0,83
+* Miguel Pérez Lara: 0,67.
+* Ángel Pérez Rodríguez: 0,67.
+* Miguel Ángel Pérez Lara: 0,625
+* Ángel Pedro Pérez Laras: 0,58
+* Corte
+  * Ángel Pedro Pérez Talavera: 0,46
+  * Ángel Pedro Pérez Calatayud: 0,46
+  * Ángel Yoset Lara Pérez: 0,42
+
+TODO: Revisar si se penaliza la no exactitud. Por ejemplo: “Luis Miguel Pérez García” con “Luis Miguel Aguirre Gómez”.
+ 
