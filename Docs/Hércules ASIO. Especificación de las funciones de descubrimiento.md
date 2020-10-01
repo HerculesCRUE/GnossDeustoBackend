@@ -46,13 +46,13 @@ El flujo de acciones de descubrimiento, que comienza con la reconciliación de e
     3.	Umbral máximo para considerar que es la misma entidad.
 3.	En el caso de que no se haya encontrado la entidad o sólo se hayan encontrado entidades candidatas que alcanzan el umbral mínimo, se utilizará el descubrimiento de enlaces para intentar la reconciliación. 
     1.	Nodo Unidata. La entidad podría estar cargada en Unidata procedente de otra universidad.
-        *	La entidad cuenta con algún identificador (p.e. ORCID) y no había una entidad candidata. Consideramos que es la misma entidad y procedemos a enriquecer los datos del nodo de ASIO con lo que hubiera en Unidata.
-        * La entidad cuenta con algún identificador (p.e. ORCID) pero había una entidad candidata. En este caso, tenemos que considerar que podría no ser la misma entidad. Por ejemplo, supongamos que la entidad a reconciliar es el investigador Luis Pérez con el ORCID XXX. Podría ser que en el nodo ASIO ya tuviéramos un Luis Pérez, pero sin código ORCID. No se puede considerar que sea la misma persona. Sin embargo, sí consideraríamos que sería la única entidad candidata a serlo de las existentes en Unidata.
-        * Se buscan similitudes con entidades ya cargadas en Unidata, en función del tipo de entidad, del mismo modo que se ha hecho antes en el nodo ASIO. Por ejemplo, el paper con el que llega este investigador podría estar ya cargado en Unidata. El resultado sería una nueva propuesta de entidades con su valoración de la similitud, a sumar al obtenido de ASIO (si lo hubiera).
+        1.	La entidad cuenta con algún identificador (p.e. ORCID) y no había una entidad candidata. Consideramos que es la misma entidad y procedemos a enriquecer los datos del nodo de ASIO con lo que hubiera en Unidata.
+        2. La entidad cuenta con algún identificador (p.e. ORCID) pero había una entidad candidata. En este caso, tenemos que considerar que podría no ser la misma entidad. Por ejemplo, supongamos que la entidad a reconciliar es el investigador Luis Pérez con el ORCID XXX. Podría ser que en el nodo ASIO ya tuviéramos un Luis Pérez, pero sin código ORCID. No se puede considerar que sea la misma persona. Sin embargo, sí consideraríamos que sería la única entidad candidata a serlo de las existentes en Unidata.
+        3. Se buscan similitudes con entidades ya cargadas en Unidata, en función del tipo de entidad, del mismo modo que se ha hecho antes en el nodo ASIO. Por ejemplo, el paper con el que llega este investigador podría estar ya cargado en Unidata. El resultado sería una nueva propuesta de entidades con su valoración de la similitud, a sumar al obtenido de ASIO (si lo hubiera).
     2.	Datasets externos. La entidad estará, probablemente, en alguna de las fuentes externas configuradas en el descubrimiento de enlaces. 
-        * La entidad cuenta con algún identificador (p.e. ORCID) y no había una entidad candidata. Consideramos que es la misma entidad y procedemos a enriquecer y enlazar los datos del nodo de ASIO con lo que hubiera en el dataset externo.
-        * La entidad cuenta con algún identificador (p.e. ORCID) pero había una entidad candidata. De la misma forma que hemos indicado para el nodo Unidata, no podemos considerar que sea la misma entidad, aunque sí sería la única candidata de los datasets externos.
-        * Mediante los APIs de descubrimiento se intentarían recuperar datos adicionales de la(s) entidad(es) candidata(s) con los que intentaría la reconciliación y se obtendría una nueva valoración que añadir, en su caso, a la obtenida de pasos anteriores.
+        1. La entidad cuenta con algún identificador (p.e. ORCID) y no había una entidad candidata. Consideramos que es la misma entidad y procedemos a enriquecer y enlazar los datos del nodo de ASIO con lo que hubiera en el dataset externo.
+        2. La entidad cuenta con algún identificador (p.e. ORCID) pero había una entidad candidata. De la misma forma que hemos indicado para el nodo Unidata, no podemos considerar que sea la misma entidad, aunque sí sería la única candidata de los datasets externos.
+        3. Mediante los APIs de descubrimiento se intentarían recuperar datos adicionales de la(s) entidad(es) candidata(s) con los que intentaría la reconciliación y se obtendría una nueva valoración que añadir, en su caso, a la obtenida de pasos anteriores.
 4.	Terminados los pasos anteriores, podrían darse los siguientes casos:
     1.	Una entidad ha superado el umbral máximo. Se considera que es la misma entidad y se continúa con la carga con los datos adicionales obtenidos.
     2.	Más de una entidad ha superado el umbral máximo. Se incluye en la lista de entidades sobre las que tendría que decidir un administrador.
@@ -67,7 +67,7 @@ Esta concidencia puede ser de 4 tipos:
 2.	IgnoreCaseSensitive: El valor de la propiedad es exactamente el mismo (ignorando mayúsculas y minúsculas).
 3.	Name: Utilizado para nombres de personas, tiene en cuenta abreviaturas, más o menos apellidos.... (pendiente de definir al algoritmo)
 4.	Title: Utilizado para nombres/títulos en los que el valor debe ser el mismo ignorando caracteres especiales, mayúsculas, minúsculas y acentos.
-    *	En este caso, además hay que establecer el nº de palabras para considerar que la similitud es del 100%.
+    1.	En este caso, además hay que establecer el nº de palabras para considerar que la similitud es del 100%.
 
 Algoritmos de similitud. Nombres y nombres propios
 --------------
