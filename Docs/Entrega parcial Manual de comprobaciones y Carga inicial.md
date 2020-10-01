@@ -2,6 +2,8 @@
 
 # Prueba del entorno y carga inicial
 
+Hay que realizar una modificación en el host de la maquina desde la que estemos accediendo añadiendo que el dominio graph.um.es responda de la IP de la maquina dodne hemos instalado el servicio de trifid.
+
 Una vez desplegados y configurados todos los contenedores, como se indica en el documento [Despliegue del backend con Docker](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/docker-images), podemos realizar las pruebas necesarias para comprobar todos los servicios están respondiendo correctamente, para ello accederemos vía el interfaz web y realizaremos una carga inicial, y comprobaremos en virtuoso que los datos se hayan obtenido correctamente. 
 
 El primer paso es acceder a la interfaz web de los servicios dados de alta, por ejemplo: http://ip_de_nuestra_máquina:5103, todas las funcionalidades disponibles en el interfaz web se detallan en el documento [Manual de usuario del FrontEnd de Carga](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/Manual%20de%20usuario.md#administraci%C3%B3n-de-p%C3%A1ginas)
@@ -69,7 +71,13 @@ Por último, hacemos clic en Guardar para crear la tarea
 
 Cuando accedamos de nuevo al repositorio, nos mostrara la tarea en el listado de "Tareas de sincronización"
 
-Para comprobar las ejecuciones y su estado, accedemos al repositorio y navegamos hasta el apartado "Tareas Programadas", 
+Para comprobar las ejecuciones y su estado, accedemos al repositorio y navegamos hasta el apartado "Tareas Programadas", dentro del apartado "Ejecuciones completadas", disponemos de un listado de las ejecuciones realizadas con su identificador, fecha de realización de la sincronización, estado y estado del descubrimiento. Si pulsamos en el identificador correspondiente a la tarea que queramos revisar, nos llevara a una descripción detallada del resultado de la sincronización
+CAPTURA
 
+En caso de que haya algun error nos mostrara el mismo y podemos acceder a ver el detalle correspondiente pulsando en el icono de la columna acciones
+Captura
 
+Nos mostrara una lista indicandonos que errores se han detectado y las opciones para solventarlos, generalmente estos errores son debidos a que ya existe la entidad en la base de datos y nos da la opción de cargarla asociandolo a dicha entidad ya creada, si pulsamos en "Ver opción", podremos comprobar los datos correspondiente a la entidad para asegurarnos de que sea la correcta
+Captura
 
+Cuando seleccionemos que relalizar para cada uno de los errores pulsamos en validar para confirmar que se hara esos cambios.
