@@ -33,8 +33,8 @@ En detalle, el proceso de reconciliación y carga es el siguiente:
     1. Si para alguna entidad hay más de un candidato que supere el umbral máximo o hay alguna entidad que supere el umbral mínimo, pero no alcance el máximo se agregará el RDF a una BBDD junto con todos los datos necesarios para que el administrador decida como proceder.
     2. Si no estamos en el punto anterior, es decir no hay dudas en cuanto a la reconciliación:
        1.	Se obtienen las entidades principales del RDF y se eliminan todos los triples que haya en el grafo RDF en los que aparezcan como sujeto u objeto (nota: sólo tendrían que estar marcadas como 'principales' aquellas entidades que lleguen con la información completa, por ejemplo: una conferencia con todos sus papers ).
-       2.	Se eliminan todos los triples de las entidades secundarias cuyo sujeto y predicado estén en el RDF a cargar y estén marcados como monovaluados según la especificación de la ontología, a excepción de las propiedades foaf:name y roh:title que no se eliminan y TAMPOCO se insertan.
-       3.	Se vuelcan los triples al grafo RDF, a excepción de las propiedades foaf:name y roh:title de las entidades secundarias que no se hayan eliminado en el paso anterior. En el caso de las entidades secundarias nuevas sí que hay que cargar sus títulos.
+       2.	Se eliminan todos los triples de las entidades secundarias cuyo sujeto y predicado estén en el RDF a cargar y estén marcados como monovaluados según la especificación de la ontología. En la próxima implementación se añadirá una excepción para las propiedades foaf:name y roh:title que no se eliminarán y TAMPOCO se insertarán.
+       3.	Se vuelcan los triples al grafo RDF. En la próxima implementación se contemplará la excepción de las propiedades foaf:name y roh:title de las entidades secundarias que no se hayan eliminado en el paso anterior. En el caso de las entidades secundarias nuevas sí que hay que cargar sus títulos.
 
 Reglas de cálculo de descubrimiento
 -----------------------
@@ -45,17 +45,17 @@ El flujo de acciones de descubrimiento, que comienza con la reconciliación de e
     1.	Umbral mínimo para considerar la similitud suficiente para que sea una entidad candidata a reconciliar. Si se alcanza, la valoración obtenida se podría reforzar en los siguientes pasos de descubrimiento.
     2.	Umbral máximo para considerar que es la misma entidad.
 4.	En el caso de que no se haya encontrado la entidad o sólo se hayan encontrado entidades candidatas que alcanzan el umbral mínimo, se utilizará el descubrimiento de enlaces para intentar la reconciliación. 
-    1.	(Pendiente de implementar) Nodo Unidata. La entidad podría estar cargada en Unidata procedente de otra universidad.
+    1.	(Próxima implementación) Nodo Unidata. La entidad podría estar cargada en Unidata procedente de otra universidad.
         1.	La entidad cuenta con algún identificador (p.e. ORCID) y no había una entidad candidata. Consideramos que es la misma entidad y procedemos a enriquecer los datos del nodo de ASIO con lo que hubiera en Unidata.
         2. La entidad cuenta con algún identificador (p.e. ORCID) pero había una entidad candidata. En este caso, tenemos que considerar que podría no ser la misma entidad. Por ejemplo, supongamos que la entidad a reconciliar es el investigador Luis Pérez con el ORCID XXX. Podría ser que en el nodo ASIO ya tuviéramos un Luis Pérez, pero sin código ORCID. No se puede considerar que sea la misma persona. Sin embargo, sí consideraríamos que sería la única entidad candidata a serlo de las existentes en Unidata.
         3. Se buscan similitudes con entidades ya cargadas en Unidata, en función del tipo de entidad, del mismo modo que se ha hecho antes en el nodo ASIO. Por ejemplo, el paper con el que llega este investigador podría estar ya cargado en Unidata. El resultado sería una nueva propuesta de entidades con su valoración de la similitud, a sumar al obtenido de ASIO (si lo hubiera).
-    2.	(Pendiente de implementar) Datasets externos. La entidad estará, probablemente, en alguna de las fuentes externas configuradas en el descubrimiento de enlaces. 
+    2.	(Próxima implementación) Datasets externos. La entidad estará, probablemente, en alguna de las fuentes externas configuradas en el descubrimiento de enlaces. 
         1. La entidad cuenta con algún identificador (p.e. ORCID) y no había una entidad candidata. Consideramos que es la misma entidad y procedemos a enriquecer y enlazar los datos del nodo de ASIO con lo que hubiera en el dataset externo.
         2. La entidad cuenta con algún identificador (p.e. ORCID) pero había una entidad candidata. De la misma forma que hemos indicado para el nodo Unidata, no podemos considerar que sea la misma entidad, aunque sí sería la única candidata de los datasets externos.
         3. Mediante los APIs de descubrimiento se intentarían recuperar datos adicionales de la(s) entidad(es) candidata(s) con los que intentaría la reconciliación y se obtendría una nueva valoración que añadir, en su caso, a la obtenida de pasos anteriores.
-4.	Además de intentar reconciliar las entidades con los datos cargados en ASIO y en Unidata se enriquecen los datos usando datasets Externos.
+5.	Además de intentar reconciliar las entidades con los datos cargados en ASIO y en Unidata se enriquecen los datos usando datasets Externos.
 	1.	ORCID: Se enriquecerá el RDF de carga con el API de ORCID (https://pub.orcid.org/v3.0/) añadiendo identificadores a las personas del RDF (http://purl.org/roh#ORCID, http://purl.org/roh/mirror/vivo#researcherId y http://purl.org/roh/mirror/vivo#scopusId). Para identificar en ORCID a las personas se aplicarán las mismas reglas de similitud configuradas para el descubrimiento con los datos procedentes de ORCID (nombres de personas y nombres de publicaciones).
-5.	Terminados los pasos anteriores, podrían darse los siguientes casos:
+6.	Terminados los pasos anteriores, podrían darse los siguientes casos:
     1.	Una entidad ha superado el umbral máximo. Se considera que es la misma entidad y se continúa con la carga con los datos adicionales obtenidos.
     2.	Más de una entidad ha superado el umbral máximo. Se incluye en la lista de entidades sobre las que tendría que decidir un administrador.
     3.	Una o más entidades han superado el umbral mínimo. Se incluyen en la lista de entidades sobre las que tendría que decidir un administrador.
@@ -95,7 +95,7 @@ Por ejemplo, para “Ángel Pérez Lara” podríamos obtener los siguientes can
   * Ángel Pedro Pérez Calatayud: 0,46
   * Ángel Yoset Lara Pérez: 0,42
 
-TODO: Revisar si se penaliza la no exactitud. Por ejemplo: “Luis Miguel Pérez García” con “Luis Miguel Aguirre Gómez”.
+Próxima implementación: Decidir si se penaliza la no exactitud. Por ejemplo: “Luis Miguel Pérez García” con “Luis Miguel Aguirre Gómez”.
 
 Tipos de Entidades en las que aplicar descubrimiento
 --------------------
