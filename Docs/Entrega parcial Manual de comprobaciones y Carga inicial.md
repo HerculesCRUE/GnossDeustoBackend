@@ -2,12 +2,12 @@
 
 # Prueba del entorno y carga inicial
 
-Una vez desplegados y configurados todos los contenedores, como se indica en el documento [Despliegue del backend con Docker](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/docker-images) podemos realizar las pruebas necesarias para comprobar todos los servicios están respondiendo correctamente, para ello accederemos vía el interfaz web y realizaremos una carga inicial, y comprobaremos en virtuoso que los datos se hayan obtenido correctamente. 
+Una vez desplegados y configurados todos los contenedores, como se indica en el documento [Despliegue del backend con Docker](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/docker-images), podemos realizar las pruebas necesarias para comprobar todos los servicios están respondiendo correctamente, para ello accederemos vía el interfaz web y realizaremos una carga inicial, y comprobaremos en virtuoso que los datos se hayan obtenido correctamente. 
 
-El primer paso es acceder a la interfaz web de los servicios dados de alta, si hemos seria: http://ipdelamaquina:5103
+El primer paso es acceder a la interfaz web de los servicios dados de alta, si hemos seria: http://ip_de_nuestra_máquin:5103
 CapturaHer1
 
-Comprobamos que podemos acceder al endpoint de virtuoso accediendo a http://ipdelamaquina:8089/sparql y comprobamos que no hay cargado ningún dato con la siguiente con la siguiente consulta:
+Comprobamos que podemos acceder al endpoint de virtuoso accediendo a http://ip_de_nuestra_máquin:8089/sparql y comprobamos que no hay cargado ningún dato con la siguiente con la siguiente consulta:
 ```
 select * from <http://HerculesDemo.com> where
 
