@@ -160,7 +160,7 @@ Para que este sistema funcioane correctamente debemos añadir a la resolucion de
 
 	ip_de_nuestra_maquina graph.um.es
 	
-Ahora si consultamos en el navegador web esta URL http://graph.um.es/res/person/a9ab51bc-0ed4-4c65-9ac8-b559bba5c91a, nos nos debería aparaces esto:
+Ejemplo de datos:
 
 ![](http://herc-as-front-desa.atica.um.es/docs/trifid1.png)
 
