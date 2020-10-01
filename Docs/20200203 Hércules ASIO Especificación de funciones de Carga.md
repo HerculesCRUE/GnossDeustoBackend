@@ -264,7 +264,7 @@ para la extracción, transformación y carga de datos.
 ### POST etl​/data-publish
 
 Ejecuta el penúltimo paso del proceso de carga, por el que el RDF generado
-se encola en una cola de RABBIT para que posteriormente el servicio de descubimiento
+se encola en una cola de Rabbit MQ para que posteriormente el servicio de descubimiento
 lo procese y lo almacene en el Triple Store. Permite cargar una fuente RDF
 arbitraria.
 
