@@ -1,5 +1,15 @@
 ![](..//Docs/media/CabeceraDocumentosMD.png)
 
+| Fecha         | 01/10/2020                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Cambios en la documentación| 
+|Descripción|insercción de controladores|
+|Versión|0.2|
+|Módulo|CronConfigure|
+|Tipo|Documentación|
+|Cambios de la Versión| Se ha añadido a la documentación los parámetros de configuración nuevos|
+
+
 # Acerca de CronConfigure
 
 Accesible desde: [http://herc-as-front-desa.atica.um.es/cron-config/swagger/index.html](http://herc-as-front-desa.atica.um.es/cron-config/swagger/index.html)
