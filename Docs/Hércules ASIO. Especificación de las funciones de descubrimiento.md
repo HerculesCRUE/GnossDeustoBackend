@@ -2,21 +2,21 @@
 
 # Hércules Backend ASIO. Especificación de las funciones de descubrimiento
 
-[Introducción](#introducción)
+[1 Introducción](#introducción)
 
-[Reconciliación, Descubrimiento y Detección de equivalencias](#reconciliación-descubrimiento-y-detección-de-equivalencias)
+[2 Reconciliación, Descubrimiento y Detección de equivalencias](#reconciliación-descubrimiento-y-detección-de-equivalencias)
 
-[Reconciliación y carga](#reconciliación-y-carga)
+[2.1 Reconciliación y carga](#reconciliación-y-carga)
 
-[Reglas de cálculo de descubrimiento](#reglas-de-cálculo-de-descubrimiento)
+[2.2 Reglas de cálculo de descubrimiento](#reglas-de-cálculo-de-descubrimiento)
 
-[Configuración por tipo de entidad](#configuración-por-tipo-de-entidad)
+[2.3 Configuración por tipo de entidad](#configuración-por-tipo-de-entidad)
 
-[Algoritmos de similitud. Nombres y nombres propios](#algoritmos-de-similitud-nombres-y-nombres-propios)
+[2.4 Algoritmos de similitud. Nombres y nombres propios](#algoritmos-de-similitud-nombres-y-nombres-propios)
 
-[Tipos de Entidades en las que aplicar descubrimiento](#tipos-de-entidades-en-las-que-aplicar-descubrimiento)
+[2.5 Tipos de Entidades en las que aplicar descubrimiento](#tipos-de-entidades-en-las-que-aplicar-descubrimiento)
 
-[Detalle del proceso para "http://purl.org/roh/mirror/foaf#Person". Investigadores de un CV](#detalle-del-proceso-para-"http://purlorg/roh/mirror/foaf#Person"-investigadores-de un-cv)
+[2.6 Detalle del proceso para "http://purl.org/roh/mirror/foaf#Person". Investigadores de un CV](#detalle-del-proceso-para-"http://purlorg/roh/mirror/foaf#Person"-investigadores-de-un-cv)
 
 Introducción
 ============
