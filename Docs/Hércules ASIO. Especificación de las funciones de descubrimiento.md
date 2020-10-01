@@ -6,6 +6,18 @@
 
 [Reconciliación, Descubrimiento y Detección de equivalencias](#reconciliación-descubrimiento-y-detección-de-equivalencias)
 
+[Reconciliación y carga](#reconciliación-y-carga)
+
+[Reglas de cálculo de descubrimiento](#reglas-de-cálculo-de-descubrimiento)
+
+[Configuración por tipo de entidad](#configuración-por-tipo-de-entidad)
+
+[Algoritmos de similitud. Nombres y nombres propios](#algoritmos-de-similitud-nombres-y-nombres-propios)
+
+[Tipos de Entidades en las que aplicar descubrimiento](#tipos-de-entidades-en-las-que-aplicar-descubrimiento)
+
+[Detalle del proceso para "http://purl.org/roh/mirror/foaf#Person". Investigadores de un CV](#detalle-del-proceso-para-"http://purlorg/roh/mirror/foaf#Person"-investigadores-de un-cv)
+
 Introducción
 ============
 El API Descubrimiento ofrece unas funciones que son parte del proceso de carga. Estas funciones se dividen en 3 grupos:
