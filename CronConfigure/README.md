@@ -3,7 +3,7 @@
 | Fecha         | 01/10/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Cambios en la documentación| 
-|Descripción|insercción de controladores|
+|Descripción|configuración de appsettings|
 |Versión|0.2|
 |Módulo|CronConfigure|
 |Tipo|Documentación|
