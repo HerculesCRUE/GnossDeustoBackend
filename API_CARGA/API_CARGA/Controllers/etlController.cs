@@ -46,7 +46,7 @@ namespace API_CARGA.Controllers
         }
 
         /// <summary>
-        /// Ejecuta el penúltimo paso del proceso de carga, por el que el RDF generado se encola en una cola de RABBIT para que posteriormente el servicio de descubimiento lo procese y lo almacene en el Triple Store. Permite cargar una fuente RDF arbitraria.
+        /// Ejecuta el penúltimo paso del proceso de carga, por el que el RDF generado se encola en una cola de Rabbit MQ para que posteriormente el servicio de descubimiento lo procese y lo almacene en el Triple Store. Permite cargar una fuente RDF arbitraria.
         /// Aquí se encuentra un RDF de Ejemplo: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_CARGA/API_CARGA/Samples/rdfSample.xml
         /// </summary>
         /// <param name="rdfFile">Fichero RDF</param>
