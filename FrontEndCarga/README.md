@@ -2,7 +2,7 @@
 
 | Fecha         | 01/10/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
-|Titulo|Cambios en el manual de usuario| 
+|Titulo|Cambios en la documentación| 
 |Descripción|insercción de controladores|
 |Versión|0.2|
 |Módulo|FrontEndCarga|
