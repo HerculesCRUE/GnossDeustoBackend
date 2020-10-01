@@ -71,13 +71,17 @@ namespace ApiCargaWebInterface.Controllers
         /// <param name="id">Identificador de una tarea</param>
         /// <returns></returns>
         [HttpGet("[Controller]/{id}")]
-        public IActionResult DetailsJob(string id)
+        public IActionResult DetailsJob(string id, Guid repository_id)
         {
             var job = _serviceApi.GetJob(id);
             ProcessDiscoverStateJob stateJob = _processDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(job.Id);
             if(stateJob!=null)
             {
                 job.DiscoverState = stateJob.State;
+            }
+            if (!Guid.Empty.Equals(repository_id))
+            {
+                job.IdRepository = repository_id;
             }
             job.DiscoverStates= _discoverItemService.GetDiscoverItemsStatesByJob(id);
             var discoverItemsErrorMini= _discoverItemService.GetDiscoverItemsErrorByJobMini(id);

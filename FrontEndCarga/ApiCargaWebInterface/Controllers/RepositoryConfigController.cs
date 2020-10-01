@@ -71,6 +71,7 @@ namespace ApiCargaWebInterface.Controllers
                     {
                         jobVM.DiscoverState = state.State;
                     }
+                    jobVM.IdRepository = id;
                 }
             }
             if (result != null)
