@@ -66,7 +66,7 @@ Como se ha mencionado anteriormente para acceder a las configuraciones de valida
 
 Vista del listado de configuraciones de validación (Shapes) para un repositorio
 ------------------
-Un shape es una configuración de validación que se configura en un repositorio y sirve para comprobar que los elementos que se van a sincornizar en el repositorio
+Un shape es una configuración de validación que se configura en un repositorio y sirve para comprobar que los elementos que se van a sincronizar en el repositorio
 tienen una estructura válida.
 Desde este vista se muestran los shapes configurados para un repositorio, desde esta página se puede tanto crear un nuevo shape para el repositorio como eliminar, modificar y visualizar uno ya creado.
 
