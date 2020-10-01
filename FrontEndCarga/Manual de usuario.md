@@ -50,6 +50,7 @@ Al acceder a un repositorio podemos ver las validaciones configuradas que tiene 
 así como las tareas de sincronización programadas y el histórico de sincronizaciones ejecutadas que ha tenido. En este histórico aparecen las últimas 5 tareas ejecutadas, para poder ver el resto basta con pulsar en ver más para que se desplieguen el resto de tareas ejecutadas. En esté último apartado en el que se muestran las tareas ejecutadas aparecen dos estados:
  - Estado: Que indica la validación de los rdfs y su posterior encolado para su procesamiento. Pueden aparecer errores de ejecución y de validación de las diferentes configuraciones de validación que tiene el repositorio
  - Estado de descubrimiento: Que indica la publicación de los rdfs y el desambiguamiento de las urls formadas. Pueden aparecer errores de ejecución y de desambiguación de las urls, lo que dará al usuario la opción de elegir la correcta.
+ 
 ![](img/repositorio.png)
 
 Desde esta pantalla se pueden crear nuevas sincronizaciones. Además se puede editar o eliminar el repositorio y modificar la
