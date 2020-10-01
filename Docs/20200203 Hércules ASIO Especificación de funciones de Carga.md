@@ -124,7 +124,7 @@ El API de descubrimiento reconcilia, descubre enlaces y detecta equivalencias;
 y se encarga de enviar los triples definitivos hacia el RDF Store.
 
 Nuestra propuesta cuenta con un nodo central Unidata que recibirá y
-cargará los triples publicados en cada universidad. De esto se encargan
+cargará los triples publicados en cada universidad. De esto se encargarán
 el proceso Sincronizador de cada universidad y un API de Carga en
 Unidata que aceptará y consolidará los datos provenientes de las
 universidades.
