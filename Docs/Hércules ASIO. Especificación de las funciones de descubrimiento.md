@@ -13,19 +13,21 @@
 
 [1 Introducción](#introducción)
 
-[2 Reconciliación, Descubrimiento y Detección de equivalencias](#reconciliación-descubrimiento-y-detección-de-equivalencias)
+[2 Arquitectura del proceso de descubrimiento](#arquitectura-del-proceso-de-descubrimiento)
 
-[2.1 Reconciliación y carga](#reconciliación-y-carga)
+[3 Reconciliación, Descubrimiento y Detección de equivalencias](#reconciliación-descubrimiento-y-detección-de-equivalencias)
 
-[2.2 Reglas de cálculo de descubrimiento](#reglas-de-cálculo-de-descubrimiento)
+[3.1 Reconciliación y carga](#reconciliación-y-carga)
 
-[2.3 Configuración por tipo de entidad](#configuración-por-tipo-de-entidad)
+[3.2 Reglas de cálculo de descubrimiento](#reglas-de-cálculo-de-descubrimiento)
 
-[2.4 Algoritmos de similitud. Nombres y nombres propios](#algoritmos-de-similitud-nombres-y-nombres-propios)
+[3.3 Configuración por tipo de entidad](#configuración-por-tipo-de-entidad)
 
-[2.5 Tipos de Entidades en las que aplicar descubrimiento](#tipos-de-entidades-en-las-que-aplicar-descubrimiento)
+[3.4 Algoritmos de similitud. Nombres y nombres propios](#algoritmos-de-similitud-nombres-y-nombres-propios)
 
-[2.6 Detalle del proceso para "http://purl.org/roh/mirror/foaf#Person". Investigadores de un CV](#detalle-del-proceso-para-httppurlorgrohmirrorfoafPerson-investigadores-de-un-cv)
+[3.5 Tipos de Entidades en las que aplicar descubrimiento](#tipos-de-entidades-en-las-que-aplicar-descubrimiento)
+
+[3.6 Detalle del proceso para "http://purl.org/roh/mirror/foaf#Person". Investigadores de un CV](#detalle-del-proceso-para-httppurlorgrohmirrorfoafPerson-investigadores-de-un-cv)
 
 Introducción
 ============
@@ -35,6 +37,17 @@ El API Descubrimiento ofrece unas funciones que son parte del proceso de carga. 
 -	Detección de equivalencias, que genera equivalencias semánticas.
 
 Los 3 grupos de funciones se desarrollarán al mismo tiempo, ya que todos ellos actúan en el proceso de descubrimiento para todos los datos a cargar en ASIO.
+
+Arquitectura del proceso de descubrimiento
+=====================================
+
+Los procesos de carga de datos desde el SGI hacia el Backend ASIO
+responden al siguiente esquema de arquitectura:
+
+![](.//media/image2_FuncionesCarga.png)
+
+Dentro de esta estructura, El API de descubrimiento reconcilia, descubre enlaces y detecta equivalencias;
+y se encarga de enviar los triples definitivos hacia el RDF Store. Para ello, lee de una cola de Rabbit MQ los RDF pendientes de procesar, que han sido introducidos a través del método POST etl​/data-publish del API CARGA.
 
 Reconciliación, Descubrimiento y Detección de equivalencias
 ===================
