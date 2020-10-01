@@ -136,7 +136,7 @@ Y editamos el archivo config-custom.json indicando la ip de nuestra máquina en 
 	{
  		"baseConfig": "trifid:config-sparql.json", // inherit the default sparql config
   		"sparqlEndpointUrl": "http://ip_de_nuestra_máquina:8890/sparql", // overrides SPARQL endpoint
-  		"datasetBaseUrl": "http://ip_de_nuestra_máquina:8081/", // enables "proxy" mode.
+  		"datasetBaseUrl": "http://graph.um.es/", // enables "proxy" mode.
   		"listener": {
    		"port": 8081
   		}
@@ -146,13 +146,49 @@ Una vez ajustados los parametros tenemos que construir la imagen con el siguient
 	
 	docker build -t trifid .
 	
-Con la imagen ya contruida la ponemos en marcha con este comando:
+Con la imagen ya construida la ponemos en marcha con este comando:
 
 	docker run -d -p 8081:8081 --name trifid trifid
 
 Una vez levantado podemos hacer una simple comprobación entrando a su interfaz web en http://ip_de_nuestra_maquina:8081.
 
 ![](http://herc-as-front-desa.atica.um.es/docs/trifid.png)
+
+Para que el servidor de linked data pueda mostrar la información correctamente debemos instalar Apache. En el caso de Centos lo podemos instalar con este comando:
+
+	yum install -i httpd
+	
+Una vez instalado tenemos que crear el archivo /etc/httpd/conf.d/trifid.conf con este contenido:
+
+	<VirtualHost *:80>
+
+	    ServerName graph.um.es
+
+	    ProxyPreserveHost On
+	    ProxyPass / http://127.0.0.1:8081/
+	    ProxyPassReverse / http://127.0.0.1:8081/
+	    Timeout 5400
+	    ProxyTimeout 5400
+
+	    <Proxy *>
+		Order deny,allow
+		Allow from all
+		Require all granted
+	    </Proxy>
+
+	</VirtualHost>
+
+Para que el proxy inverso funcione en Centos tenemos que ejecutar este comando adicional:
+
+	setsebool -P httpd_can_network_connect on
+
+Reiniciamos Apache:
+
+	systemctl restart httpd
+	
+Para que este sistema funcioane debemos añadir a la resolucion de nombres local del equipo desde donde vamos a ajecutar las pruebas una línea que asocie graph.um.es con la máquina donde tengamos los servicios.
+
+	ip_de_nuestra_maquina graph.um.es
 
 ## Despliegue de los servicios
 
@@ -202,20 +238,3 @@ Con la ip ajustada ya podemos deplegar el docker-compose como de costumbre con e
 Ahora si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz web para poder hacer cargas.
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/front.png)
-
-## Preparación del interfaz Fuseki para benchmark
-
-Para poder utilizar benchmark necesitamos almacenar los datos sparql en Fuseki. Para desplegar Fuseki facilmente lo podemos hacer por medio de este comando Docker:
-
-	docker run -d -p 3030:3030 stain/jena-fuseki fuseki
-
-Durante el despliegue nos generará un usuario y contraseña que debemos apuntar.
-
-Cuando tengamos Fuseki operativo podemos entrar a la interfaz gráfica y cargarle información. Craremos un data set y cargaremos los achivos ttl y nq que se encuentran en estas urls:
-
-- https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Benchmark/criterion-ontology/src
-- https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Benchmark/triplestore-dataset/static/data
-- https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Benchmark/triplestore-assessments
-
-
-

@@ -1,5 +1,15 @@
 ![](../Docs/media/CabeceraDocumentosMD.png)
  
+| Fecha         | 01/10/2020                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Cambios en el manual de usuario| 
+|Descripción|cambio en las interfaces e insercción de nuevas páginas|
+|Versión|0.2|
+|Módulo|FrontEndCarga|
+|Tipo|Manual|
+|Cambios de la Versión| En está versión se han cambiado las interfaces de la vista de un repositorio, la vista detalle de una tarea, la publicación manual se ha divido en 3 interfaces y se han creado las vistas de  obtención de tokens para el acceso a los apis, la vista de errores de descubrimiento incluida en la sección vista de una tarea y la administración de páginas|
+ 
+ 
 # Manual de usuario del FrontEnd de Carga
 
 [Introducción](#introduccion)
@@ -164,6 +174,11 @@ Interfaz desde la que se puede:
  
  ![](img/urisFactory.png)
  
+ En la pantalla anterior solo aparece la opción de obtener una uri, en el tipo de dato hay que especificar si en el parámetro resource_class se le está pasando un resource_class (por defecto) o un 
+ Rdf type, para acceder a las operaciones concernientes al esquema de uris hay que pinchar en Esquema de uris que llevará a la siguiente imágen
+ 
+ ![](img/urisFactorySchema.png)
+ 
  A la hora de crear una estructura URI nos mostrará un texto editable en el que aparece una
  estructura a modo de ayuda, como se ve en la siguiente imágen:
  
@@ -196,3 +211,7 @@ Al pulsar el botón + aparecerá un formulario para crear páginas con contenido
 **Importante que la ruta introducida empiece por /**
 
 ![](img/CreatePage.png)
+
+A continuación se muestra un ejemplo de una página creada mediante este formulario, con la url /public/gnossdeustobackend/index
+
+![](img/paginaCreada.png)

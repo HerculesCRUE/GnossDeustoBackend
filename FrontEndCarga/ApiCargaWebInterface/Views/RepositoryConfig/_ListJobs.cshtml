@@ -55,7 +55,7 @@
 
             <div class="fila" @Html.Raw(hidden) @Html.Raw(name)>
                 <div class="columna principal">
-                    <a href="@Url.Action("DetailsJob", "Job",new { id = job.Id })">
+                    <a href="@Url.Action("DetailsJob", "Job",new { id = job.Id, repository_id = job.IdRepository })">
                         <p @clase>@job.Id</p>
                     </a>
                 </div>

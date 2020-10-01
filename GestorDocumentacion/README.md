@@ -1,5 +1,15 @@
 ![](../Docs/media/CabeceraDocumentosMD.png)
 
+| Fecha         | 01/10/2020                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|versión inicial| 
+|Descripción|Documentación del gestor de documentación|
+|Versión|0.1|
+|Módulo|GestorDocumentacion|
+|Tipo|Documentación|
+|Cambios de la Versión|Creación|
+
+
 # Sobre api gestor de documentación
 
 Este módulo se usa para cargar páginas HTML y servirlas a través de la web a modo de un gestor de contenidos, en el que los usuarios pueden subir páginas html con una ruta
@@ -47,6 +57,7 @@ Este api esta protegida mediante tokens, por ello para poder usar la interfaz sw
  - LogPath: Ruta donde va a guardar los logs de la aplicación
  - Authority: Url donde está instalado el IdentityServer
  - Scope: Limitación de acceso al api de documentacion
+ 
  Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/GestorDocumentacion/GestorDocumentacion/appsettings.json
 
 ## Dependencias

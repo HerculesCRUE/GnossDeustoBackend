@@ -1,5 +1,14 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
+| Fecha         | 01/10/2020                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|A20200203 Hércules ASIO Especificación de funciones de Carga| 
+|Descripción|Especificación de funciones de Carga|
+|Versión|0.2|
+|Módulo|API CARGA|
+|Tipo|Especificación|
+|Cambios de la Versión|Actualizada la sección [ARQUITECTURA DE LOS PROCESOS DE CARGA](#arquitectura-de-los-procesos-de-carga)<br/>Modificada la sección [POST etl​/data-publish](#post-etldata-publish)<br/>Añadida la sección [POST etl​/data-validate-personalized](#post-etldata-validate-personalized)<br/>Añadida la sección [POST etl​/load-ontolgy](#post-etlload-ontology)<br/>Añadida la sección [GET etl​/data-discover-state/{identifier}](#get-etldata-discover-stateidentifier)<br/>Añadida la sección [GET etl​/GetOntology](#get-etlgetontology)<br/>|
+
 # Hércules Backend ASIO. Especificación de las funciones de carga
 
 [1 INTRODUCCIÓN](#introducción)
@@ -32,7 +41,7 @@
 
 [4.1.5 POST etl​/data-discover](#post-etldata-discover)
 
-[4.1.6 POST etl​/data-discover-state/{identifier}](#get-etldata-discover-stateidentifier)
+[4.1.6 GET etl​/data-discover-state/{identifier}](#get-etldata-discover-stateidentifier)
 
 [4.1.7 GET etl​/GetRecord/{repositoryIdentifier}](#get-etlgetrecordrepositoryidentifier)
 
@@ -117,12 +126,14 @@ Este proveedor de datos será accedido por un API de Carga que, además de
 otras, contará con las funciones de *harvesting* o recolección de
 OAI-PMH.
 
-El resto de las funciones del API de Carga se encargan de las funciones
-de conversión, validación, descubrimiento y, finalmente, publicación en
-el RDF Store.
+El API de Carga se encargan de las funciones de conversión y validación; y
+envía a una cola los RDF sobre los que hay que aplicar el descubrimiento.
+
+El API de descubrimiento reconcilia, descubre enlaces y detecta equivalencias;
+y se encarga de enviar los triples definitivos hacia el RDF Store.
 
 Nuestra propuesta cuenta con un nodo central Unidata que recibirá y
-cargará los triples publicados en cada universidad. De esto se encargan
+cargará los triples publicados en cada universidad. De esto se encargarán
 el proceso Sincronizador de cada universidad y un API de Carga en
 Unidata que aceptará y consolidará los datos provenientes de las
 universidades.
@@ -252,8 +263,9 @@ para la extracción, transformación y carga de datos.
 
 ### POST etl​/data-publish
 
-Ejecuta el último paso del proceso de carga, por el que el RDF generado
-se almacena en el Triple Store. Permite cargar una fuente RDF
+Ejecuta el penúltimo paso del proceso de carga, por el que el RDF generado
+se encola en una cola de RABBIT para que posteriormente el servicio de descubimiento
+lo procese y lo almacene en el Triple Store. Permite cargar una fuente RDF
 arbitraria.
 
 ### POST etl​/data-validate

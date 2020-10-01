@@ -1,5 +1,15 @@
 ![](../Docs/media/CabeceraDocumentosMD.png)
 
+| Fecha         | 01/10/2020                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|versión inicial| 
+|Descripción|Documentación del IdentityServer|
+|Versión|0.1|
+|Módulo|IdentityServerHercules|
+|Tipo|Documentación|
+|Cambios de la Versión|Creación|
+
+
 # Sobre api IdentityServer
 
 Este módulo es el encargado de la securización mediante tokens para los apis que forman el proyecto, este api valida los tokens de seguridad y proporciona nuevos tokens de acceso.

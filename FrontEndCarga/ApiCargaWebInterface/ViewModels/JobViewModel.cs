@@ -18,6 +18,10 @@ namespace ApiCargaWebInterface.ViewModels
         /// </summary>
         public string Job { get; set; }
         /// <summary>
+        /// Identificador del repositorio
+        /// </summary>
+        public Guid IdRepository { get; set; }
+        /// <summary>
         /// Estado de la ejecución
         /// </summary>
         public string State { get; set; }
