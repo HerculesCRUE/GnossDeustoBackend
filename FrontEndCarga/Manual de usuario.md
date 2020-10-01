@@ -42,15 +42,14 @@ Desde este listado se puede crear un repositorio nuevo con el botón "+" que se 
 
 ![](img/repositorios.png)
 
+En el siguiente apartado se muestra la vista de un repositorio. 
+
+Página de un repositorio
+-----------------------------------------
 Al acceder a un repositorio podemos ver las validaciones configuradas que tiene vinculadas ese repositorio, mediante el enlace que aparece en la sección de Ver las configuraciones de validación para el respositorio, 
 así como las tareas de sincronización programadas y el histórico de sincronizaciones ejecutadas que ha tenido. En este histórico aparecen las últimas 5 tareas ejecutadas, para poder ver el resto basta con pulsar en ver más para que se desplieguen el resto de tareas ejecutadas. En esté último apartado en el que se muestran las tareas ejecutadas aparecen dos estados:
  - Estado: Que indica la validación de los rdfs y su posterior encolado para su procesamiento. Pueden aparecer errores de ejecución y de validación de las diferentes configuraciones de validación que tiene el repositorio
  - Estado de descubrimiento: Que indica la publicación de los rdfs y el desambiguamiento de las urls formadas. Pueden aparecer errores de ejecución y de desambiguación de las urls, lo que dará al usuario la opción de elegir la correcta.
-como se muestra en el siguiente apartado. 
-
-Página de un repositorio
------------------------------------------
-
 ![](img/repositorio.png)
 
 Desde esta pantalla se pueden crear nuevas sincronizaciones. Además se puede editar o eliminar el repositorio y modificar la
@@ -62,7 +61,6 @@ Desde la página de un repositorioo también se puede acceder a la información 
 única como de tareas recurrentes, como se muestra en los apartados siguientes.
 Como se ha mencionado anteriormente para acceder a las configuraciones de validación hay un enlace en la sección Ver las configuraciones de validación para el respositorio,
  acontinuación se muestra la vista de configuraciones para un repositorio
-
 
 Vista del listado de configuraciones de validación (Shapes) para un repositorio
 ------------------
