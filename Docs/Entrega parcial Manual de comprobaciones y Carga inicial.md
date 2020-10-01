@@ -1,4 +1,6 @@
-**Prueba del entorno y carga inicial**
+![](.//media/CabeceraDocumentosMD.png)
+
+# Prueba del entorno y carga inicial
 
 Una vez desplegados y configurados todos los contenedores podemos realizar las pruebas necesarias para comprobar todos los servicios están respondiendo correctamente, para ello accederemos vía el interfaz web y realizaremos una carga inicial, y comprobaremos en virtuoso que los datos se hayan obtenido correctamente. 
 
