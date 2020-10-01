@@ -64,9 +64,10 @@ Este api esta protegida mediante tokens, por ello para poder usar la interfaz sw
  - ScopeCarga: Limitación de acceso al api de carga
  - ScopeUrisFactory: Limitación de acceso al api de urisFactory
  - ClientId: Id de cliente, en este caso se ha configurado un cliente que pueda acceder a todas las apis que usa la web
+ - ClientSecret: "clave" de acceso del cliente
  
  Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/CronConfigure/CronConfigure/appsettings.json
- - ClientSecret: "clave" de acceso del cliente
+
 
 ## Dependencias
 
