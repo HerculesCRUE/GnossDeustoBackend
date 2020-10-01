@@ -148,47 +148,19 @@ Una vez ajustados los parametros tenemos que construir la imagen con el siguient
 	
 Con la imagen ya construida la ponemos en marcha con este comando:
 
-	docker run -d -p 8081:8081 --name trifid trifid
+	docker run -d -p 80:8081 --name trifid trifid
+	
+Con este comando lo quecemos es exponer el puerto 8081 interno de trifid por el puerto 80 público.
 
-Una vez levantado podemos hacer una simple comprobación entrando a su interfaz web en http://ip_de_nuestra_maquina:8081.
+Una vez levantado podemos hacer una simple comprobación entrando a su interfaz web en http://ip_de_nuestra_maquina:80.
 
 ![](http://herc-as-front-desa.atica.um.es/docs/trifid.png)
-
-Para que el servidor de linked data pueda mostrar la información correctamente debemos instalar Apache. En el caso de Centos lo podemos instalar con este comando:
-
-	yum install -i httpd
 	
-Una vez instalado tenemos que crear el archivo /etc/httpd/conf.d/trifid.conf con este contenido:
-
-	<VirtualHost *:80>
-
-	    ServerName graph.um.es
-
-	    ProxyPreserveHost On
-	    ProxyPass / http://127.0.0.1:8081/
-	    ProxyPassReverse / http://127.0.0.1:8081/
-	    Timeout 5400
-	    ProxyTimeout 5400
-
-	    <Proxy *>
-		Order deny,allow
-		Allow from all
-		Require all granted
-	    </Proxy>
-
-	</VirtualHost>
-
-Para que el proxy inverso funcione en Centos tenemos que ejecutar este comando adicional:
-
-	setsebool -P httpd_can_network_connect on
-
-Reiniciamos Apache:
-
-	systemctl restart httpd
-	
-Para que este sistema funcioane debemos añadir a la resolucion de nombres local del equipo desde donde vamos a ajecutar las pruebas una línea que asocie graph.um.es con la máquina donde tengamos los servicios.
+Para que este sistema funcioane correctamente debemos añadir a la resolucion de nombres local del equipo desde donde vamos a ajecutar las pruebas una línea que asocie graph.um.es con la máquina donde tengamos los servicios.
 
 	ip_de_nuestra_maquina graph.um.es
+	
+
 
 ## Despliegue de los servicios
 
