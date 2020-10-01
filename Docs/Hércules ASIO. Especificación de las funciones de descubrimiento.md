@@ -144,16 +144,16 @@ Entre otras configuraciones, en este caso, para el caso de los investigadores (h
 1. Similitud por nombre:
 
 
-    {
-        "property": "http://purl.org/roh/mirror/foaf#name",
-        "mandatory": true,
-        "inverse": false,
-        "type": 2,
-        "maxNumWordsTitle": null,
-        "scorePositive": 0.89,
-        "scoreNegative": null
-    }
-    
+{
+"property": "http://purl.org/roh/mirror/foaf#name",
+"mandatory": true,
+"inverse": false,
+"type": 2,
+"maxNumWordsTitle": null,
+"scorePositive": 0.89,
+"scoreNegative": null
+}
+
     
     
 	{
