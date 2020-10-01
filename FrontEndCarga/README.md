@@ -1,5 +1,15 @@
 ![](../Docs/media/CabeceraDocumentosMD.png)
 
+| Fecha         | 01/10/2020                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Cambios en el manual de usuario| 
+|Descripción|insercción de controladores|
+|Versión|0.2|
+|Módulo|FrontEndCarga|
+|Tipo|Documentación|
+|Cambios de la Versión| Se ha añadido a la documentación controladores nuevos que forman la web y parámetros de configuración nuevos|
+
+
 # Sobre FrontEnd de Carga
 
 Este módulo constituye el interfaz Web de administración de las cargas de datos en la plataforma Hércules ASIO. Esta aplicación web realizada mediante el patrón MVC (módelo-vista-controlador) esta formado por diferentes controladores que se comunican con los diferentes apis creados en este proyecto. Estos controladores dividen su ámbito en la gestión de errores, de los repositorios, de los shapes, de las tareas, la gestión de la factoria de uris, etc.:
