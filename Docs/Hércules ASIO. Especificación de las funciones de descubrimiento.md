@@ -94,4 +94,42 @@ Por ejemplo, para “Ángel Pérez Lara” podríamos obtener los siguientes can
   * Ángel Yoset Lara Pérez: 0,42
 
 TODO: Revisar si se penaliza la no exactitud. Por ejemplo: “Luis Miguel Pérez García” con “Luis Miguel Aguirre Gómez”.
- 
+
+Tipos de Entidades en las que aplicar descubrimiento
+--------------------
+Los casos de uso identificados se corresponden con las entidades principales de la ontología, que son:
+
+    http://purl.org/roh#Accreditation (Acreditación)
+        http://purl.org/roh#LanguageCertificate (Certificado de Idioma)
+    http://purl.org/roh#Activity (Actividad)
+        http://purl.org/roh/mirror/vivo#Course (Curso)
+    http://purl.org/roh/mirror/foaf#Agent (Agente)
+        http://purl.org/roh/mirror/foaf#Organization (Organización)
+        http://purl.org/roh/mirror/foaf#Person (Persona)
+    http://purl.org/roh/mirror/geonames#Feature (Característica)
+    http://purl.org/roh#CurriculumVitae (Curriculum Vitae)
+    http://purl.org/roh/mirror/foaf#Document (Documento)
+    http://purl.org/roh/mirror/obo/iao#IAO_0000030 (Entidad de Contenido de Información)
+    http://purl.org/roh#Funding (Financiación)
+    http://purl.org/roh#FundingSource (Fuente de financiación)
+    http://purl.org/roh#Expense (Gasto)
+    http://purl.org/roh/mirror/vivo#AcademicDegree (Grado académico)
+    http://purl.org/roh#Infraestructure (Infraestructura)
+    http://purl.org/roh#FundingAmount (Monto de financiación)
+    http://purl.org/roh#Metric (Métrica)
+    http://purl.org/roh#ResearchObject (Objeto de financiación)
+    http://purl.org/roh#FundingProgram (Programa de financiación)
+    http://purl.org/roh/mirror/vivo#Project (Proyecto)
+    http://purl.org/roh/mirror/obo/bfo#BFO_0000008 (Región Temporal)
+    http://purl.org/roh/mirror/vivo#Relationship (Relación)
+        http://purl.org/roh/mirror/vivo#Contract (Contrato)
+        http://purl.org/roh/mirror/vivo#Position (Posición)
+        http://purl.org/roh/mirror/vivo#AdvisingRelationship (Relación de asesoramiento)
+        http://purl.org/roh#AuditingRelationship (Relación de auditoría)
+        http://purl.org/roh#SupervisingRelationship (Relación de supervisión)
+        http://purl.org/roh/mirror/vivo#AwardedDegree (Titulación Universitaria Concedida)
+    http://purl.org/roh/mirror/obo/bfo#BFO_0000023 (Rol)
+    http://purl.org/roh/mirror/obo/ero#ERO_0000005 (Servicio)
+    http://purl.org/roh/mirror/vcard#Kind (Tipo)
+
+1/10/2020: En este momento, se realiza el descubrimiento sobre las entidades "foaf:Person" obtenidas de un curriculum en formato CVN.
