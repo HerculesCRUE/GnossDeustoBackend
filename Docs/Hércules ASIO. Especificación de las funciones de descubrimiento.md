@@ -1,3 +1,11 @@
+![](.//media/CabeceraDocumentosMD.png)
+
+# Hércules Backend ASIO. Especificación de las funciones de descubrimiento
+
+[Introducción](#introducción)
+
+[Reconciliación, Descubrimiento y Detección de equivalencias](#reconciliación-descubrimiento-y-detección-de-equivalencias)
+
 Introducción
 ============
 El API Descubrimiento ofrece unas funciones que son parte del proceso de carga. Estas funciones se dividen en 3 grupos:
