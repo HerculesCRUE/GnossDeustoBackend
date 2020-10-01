@@ -3,7 +3,7 @@
 | Fecha         | 01/10/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|versión inicial| 
-|Descripción|Documnetación del gestor de documentación|
+|Descripción|Documentación del gestor de documentación|
 |Versión|0.1|
 |Módulo|GestorDocumentacion|
 |Tipo|Documentación|
