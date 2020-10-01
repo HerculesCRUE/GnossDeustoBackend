@@ -152,7 +152,7 @@ Con la imagen ya construida la ponemos en marcha con este comando:
 	
 Con este comando lo quecemos es exponer el puerto 8081 interno de trifid por el puerto 80 público.
 
-Una vez levantado podemos hacer una simple comprobación entrando a su interfaz web en http://ip_de_nuestra_maquina:80.
+Una vez levantado podemos hacer una simple comprobación entrando a su interfaz web en http://ip_de_nuestra_maquina.
 
 ![](http://herc-as-front-desa.atica.um.es/docs/trifid.png)
 	
@@ -160,7 +160,9 @@ Para que este sistema funcioane correctamente debemos añadir a la resolucion de
 
 	ip_de_nuestra_maquina graph.um.es
 	
+Ahora si consultamos en el navegador web esta URL http://graph.um.es/res/person/a9ab51bc-0ed4-4c65-9ac8-b559bba5c91a, nos nos debería aparaces esto:
 
+![](http://herc-as-front-desa.atica.um.es/docs/trifid1.png)
 
 ## Despliegue de los servicios
 
