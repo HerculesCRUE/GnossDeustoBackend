@@ -142,6 +142,7 @@ Detalle del proceso para "http://purl.org/roh/mirror/foaf#Person". Investigadore
 Describimos aquí el proceso para un investigador que nos llega en un CV del que sólo tenemos el nombre y un paper que tiene en común con el dueño del CV. 
 Entre otras configuraciones, en este caso, para el caso de los investigadores (http://purl.org/roh/mirror/foaf#Person) se utilizarán dos configuraciones para la similitud: 
 1. Similitud por nombre:
+
     {
         "property": "http://purl.org/roh/mirror/foaf#name",
         "mandatory": true,
@@ -151,8 +152,10 @@ Entre otras configuraciones, en este caso, para el caso de los investigadores (h
         "scorePositive": 0.89,
         "scoreNegative": null
     }
+    
 A través de un algoritmo, [Algoritmos de similitud. Nombres y nombres propios](#algoritmos-de-similitud-nombres-y-nombres-propios), se obtendrá la similitud (un valor entre 0% y 100%) entre el nombre del investigador a cargar y el de otros investigadores cargados. Estará establecido un valor mínimo (p.e. 70%) que indicará que es probable que se trate de la misma entidad pero que habrá que reforzar con el descubrimiento para poder llegar a la conclusión de que se trata de la misma entidad y un valor máximo (p.e. 90%) que implicará que se trata de la misma entidad. Dado que esta propiedad está configurada como "mandatory" (obligatoria), es requisito imprescindible que los investigadores candidatos cumplan esta similitud.
 2. Similitud por publicaciones: 
+
     {
         "property": "http://purl.org/roh#correspondingAuthorOf",
         "mandatory": false,
@@ -162,6 +165,7 @@ A través de un algoritmo, [Algoritmos de similitud. Nombres y nombres propios](
         "scorePositive": 0.5,
         "scoreNegative": null
       }
+      
 Obtendrá las publicaciones que tienen en común el investigador del RDF a cargar con los investigadores candidatos cargados en el Triple Store. 
 
 Una vez explicadas las configuraciones de similitud que actuarán para este caso de uso en particular, este sería el flujo de reconciliación utilizado:
