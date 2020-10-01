@@ -155,6 +155,96 @@ Entre otras configuraciones, en este caso, para el caso de los investigadores (h
     }
     
     
+    
+	{
+		"rdfType": "http://purl.org/roh/mirror/foaf#Person",
+		"identifiers": [
+			"http://purl.org/roh/mirror/vivo#identifier",
+			"http://purl.org/roh/mirror/vivo#eRACommonsId",
+			"http://purl.org/roh/mirror/vivo#researcherID",
+			"http://purl.org/roh#ORCID",
+			"http://purl.org/roh/mirror/vivo#scopusId",
+			"http://purl.org/roh#taxID"
+		],
+		"properties": [
+			{
+				"property": "http://purl.org/roh/mirror/foaf#name",
+				"mandatory": true,
+				"inverse": false,
+				"type": 2,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.89,
+				"scoreNegative": null
+			},
+			{
+				"property": "http://purl.org/roh#birthdate",
+				"mandatory": false,
+				"inverse": false,
+				"type": 0,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.5,
+				"scoreNegative": 0.05
+			},
+			{
+				"property": "http://purl.org/roh#participates",
+				"mandatory": false,
+				"inverse": false,
+				"type": 0,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.5,
+				"scoreNegative": null
+			},
+			{
+				"property": "http://purl.org/roh/mirror/foaf#homepage",
+				"mandatory": false,
+				"inverse": false,
+				"type": 0,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.5,
+				"scoreNegative": 0.025
+			},
+			{
+				"property": "http://purl.org/roh#correspondingAuthorOf",
+				"mandatory": false,
+				"inverse": false,
+				"type": 0,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.5,
+				"scoreNegative": null
+			},
+			{
+				"property": "http://purl.org/roh/mirror/bibo#authorList@@@?",
+				"mandatory": false,
+				"inverse": true,
+				"type": 0,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.5,
+				"scoreNegative": null
+			},
+			{
+				"property": "http://purl.org/roh/mirror/vivo#relatedBy@@@http://purl.org/roh/mirror/vivo#relates",
+				"mandatory": false,
+				"inverse": true,
+				"type": 0,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.5,
+				"scoreNegative": null
+			},
+			{
+				"property": "http://purl.org/roh/mirror/vivo#correspondingAuthorOf",
+				"mandatory": false,
+				"inverse": false,
+				"type": 0,
+				"maxNumWordsTitle": null,
+				"scorePositive": 0.5,
+				"scoreNegative": null
+			}
+		]
+	}
+	
+	
+    
+    
 A través de un algoritmo, [Algoritmos de similitud. Nombres y nombres propios](#algoritmos-de-similitud-nombres-y-nombres-propios), se obtendrá la similitud (un valor entre 0% y 100%) entre el nombre del investigador a cargar y el de otros investigadores cargados. Estará establecido un valor mínimo (p.e. 70%) que indicará que es probable que se trate de la misma entidad pero que habrá que reforzar con el descubrimiento para poder llegar a la conclusión de que se trata de la misma entidad y un valor máximo (p.e. 90%) que implicará que se trata de la misma entidad. Dado que esta propiedad está configurada como "mandatory" (obligatoria), es requisito imprescindible que los investigadores candidatos cumplan esta similitud.
 
 2. Similitud por publicaciones: 
