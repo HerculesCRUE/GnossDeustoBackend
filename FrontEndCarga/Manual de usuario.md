@@ -164,6 +164,11 @@ Interfaz desde la que se puede:
  
  ![](img/urisFactory.png)
  
+ En la pantalla anterior solo aparece la opción de obtener una uri, para acceder a las operaciones concernientes al esquema de uris hay que pinchar en Esquema de uris
+ que llevará a la siguiente imágen
+ 
+ ![](img/urisFactorySchema.png)
+ 
  A la hora de crear una estructura URI nos mostrará un texto editable en el que aparece una
  estructura a modo de ayuda, como se ve en la siguiente imágen:
  
