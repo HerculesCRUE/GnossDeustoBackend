@@ -7,7 +7,7 @@
 |Versión|0.2|
 |Módulo|API CARGA|
 |Tipo|Especificación|
-|Cambios de la Versión|Actualizada la sección [ARQUITECTURA DE LOS PROCESOS DE CARGA](#arquitectura-de-los-procesos-de-carga)<br/>Añadida la sección [POST etl​/data-validate-personalized](#post-etldata-validate-personalized)<br/>Añadida la sección [POST etl​/load-ontolgy](#post-etlload-ontology)<br/>Añadida la sección [POST etl​/data-discover-state/{identifier}](#post-eltdata-discover-stateidentifier)<br/>Añadida la sección [GET etl​/GetOntology](#get-etlgetontology)<br/>|
+|Cambios de la Versión|Actualizada la sección [ARQUITECTURA DE LOS PROCESOS DE CARGA](#arquitectura-de-los-procesos-de-carga)<br/>Añadida la sección [POST etl​/data-validate-personalized](#post-etldata-validate-personalized)<br/>Añadida la sección [POST etl​/load-ontolgy](#post-etlload-ontology)<br/>Añadida la sección [GET etl​/data-discover-state/{identifier}](#get-eltdata-discover-stateidentifier)<br/>Añadida la sección [GET etl​/GetOntology](#get-etlgetontology)<br/>|
 
 # Hércules Backend ASIO. Especificación de las funciones de carga
 
