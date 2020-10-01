@@ -164,8 +164,8 @@ Interfaz desde la que se puede:
  
  ![](img/urisFactory.png)
  
- En la pantalla anterior solo aparece la opción de obtener una uri, para acceder a las operaciones concernientes al esquema de uris hay que pinchar en Esquema de uris
- que llevará a la siguiente imágen
+ En la pantalla anterior solo aparece la opción de obtener una uri, en el tipo de dato hay que especificar si en el parámetro resource_class se le está pasando un resource_class (por defecto) o un 
+ Rdf type, para acceder a las operaciones concernientes al esquema de uris hay que pinchar en Esquema de uris que llevará a la siguiente imágen
  
  ![](img/urisFactorySchema.png)
  
@@ -201,3 +201,7 @@ Al pulsar el botón + aparecerá un formulario para crear páginas con contenido
 **Importante que la ruta introducida empiece por /**
 
 ![](img/CreatePage.png)
+
+A continuación se muestra un ejemplo de una página creada mediante este formulario, con la url /public/gnossdeustobackend/index
+
+![](img/paginaCreada.png)
