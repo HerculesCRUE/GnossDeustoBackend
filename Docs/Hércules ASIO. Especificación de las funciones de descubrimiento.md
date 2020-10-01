@@ -154,6 +154,7 @@ Entre otras configuraciones, en este caso, para el caso de los investigadores (h
     }
     
 A través de un algoritmo, [Algoritmos de similitud. Nombres y nombres propios](#algoritmos-de-similitud-nombres-y-nombres-propios), se obtendrá la similitud (un valor entre 0% y 100%) entre el nombre del investigador a cargar y el de otros investigadores cargados. Estará establecido un valor mínimo (p.e. 70%) que indicará que es probable que se trate de la misma entidad pero que habrá que reforzar con el descubrimiento para poder llegar a la conclusión de que se trata de la misma entidad y un valor máximo (p.e. 90%) que implicará que se trata de la misma entidad. Dado que esta propiedad está configurada como "mandatory" (obligatoria), es requisito imprescindible que los investigadores candidatos cumplan esta similitud.
+
 2. Similitud por publicaciones: 
 
     {
