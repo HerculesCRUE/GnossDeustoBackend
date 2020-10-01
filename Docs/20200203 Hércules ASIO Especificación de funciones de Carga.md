@@ -117,12 +117,14 @@ Este proveedor de datos será accedido por un API de Carga que, además de
 otras, contará con las funciones de *harvesting* o recolección de
 OAI-PMH.
 
-El resto de las funciones del API de Carga se encargan de las funciones
-de conversión, validación, descubrimiento y, finalmente, publicación en
-el RDF Store.
+El API de Carga se encargan de las funciones de conversión y validación; y
+envía a una cola los RDF sobre los que hay que aplicar el descubrimiento.
+
+El API de descubrimiento reconcilia, descubre enlaces y detecta equivalencias;
+y se encarga de enviar los triples definitivos hacia el RDF Store.
 
 Nuestra propuesta cuenta con un nodo central Unidata que recibirá y
-cargará los triples publicados en cada universidad. De esto se encargan
+cargará los triples publicados en cada universidad. De esto se encargarán
 el proceso Sincronizador de cada universidad y un API de Carga en
 Unidata que aceptará y consolidará los datos provenientes de las
 universidades.
