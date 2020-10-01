@@ -16,7 +16,7 @@
 
 [2.5 Tipos de Entidades en las que aplicar descubrimiento](#tipos-de-entidades-en-las-que-aplicar-descubrimiento)
 
-[2.6 Detalle del proceso para "http://purl.org/roh/mirror/foaf#Person". Investigadores de un CV](#detalle-del-proceso-para-http://purlorg/roh/mirror/foafPerson-investigadores-de-un-cv)
+[2.6 Detalle del proceso para "http://purl.org/roh/mirror/foaf#Person". Investigadores de un CV](#detalle-del-proceso-para-httppurlorgrohmirrorfoafPerson-investigadores-de-un-cv)
 
 Introducción
 ============
