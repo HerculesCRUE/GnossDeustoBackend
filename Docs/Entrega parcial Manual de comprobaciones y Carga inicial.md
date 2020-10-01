@@ -83,5 +83,6 @@ En caso de que haya algun error nos mostrara el mismo y podemos acceder a ver el
 Nos mostrara una lista indicandonos que errores se han detectado y las opciones para solventarlos, generalmente estos errores son debidos a que ya existe la entidad en la base de datos y nos da la opción de cargarla asociandolo a dicha entidad ya creada, si pulsamos en "Ver opción", podremos comprobar los datos correspondiente a la entidad para asegurarnos de que sea la correcta
 
 ![](media/detalle_errores.png)
+![](media/detalle_entidad.png)
 
 Cuando seleccionemos que relalizar para cada uno de los errores pulsamos en validar para confirmar que se hara esos cambios.
