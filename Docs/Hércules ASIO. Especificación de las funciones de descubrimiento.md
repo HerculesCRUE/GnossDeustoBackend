@@ -61,7 +61,7 @@ El flujo de acciones de descubrimiento, que comienza con la reconciliación de e
 
 Configuración por tipo de entidad
 -------------------
-Para la reconciliación de entidades se realiza una configuración por cada tipo de entidad de las propiedades que deben coincidir para considerar que se trata de la misma entidad. Estas propiedades pueden ser directas o inversas y pueden tener N saltos.
+Para la reconciliación de entidades se realiza una configuración por cada tipo de entidad de las propiedades que deben coincidir para considerar que se trata de la misma entidad. Estas propiedades pueden ser directas o inversas y pueden tener N saltos (ver formato en (Configuración en el reconciliationConfig.json)[https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_DISCOVER/README.md#configuraci%C3%B3n-en-el-reconciliationconfigjson]
 Esta concidencia puede ser de 4 tipos:
 1.	Equals: El valor de la propiedad es exactamente el mismo.
 2.	IgnoreCaseSensitive: El valor de la propiedad es exactamente el mismo (ignorando mayúsculas y minúsculas).
