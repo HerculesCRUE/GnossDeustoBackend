@@ -8,7 +8,8 @@ http://herc-as-front-desa.atica.um.es/api_discover/api/API_DISCOVER.html
 
 API DISCOVER es un servicio encargado de aplicar el descubrimiento sobre los RDF de carga para su posterior publicación la BBDD.
  
-Para una especificación más detallada acerca del funcionaminto del descubrimiento se puede consultar la siguiente documentación: https://github.com/TODO
+Para una especificación más detallada acerca del funcionaminto del descubrimiento se puede consultar la siguiente documentación:
+[Hércules Backend ASIO. Especificación de las funciones de descubrimiento](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/H%C3%A9rcules%20ASIO.%20Especificaci%C3%B3n%20de%20las%20funciones%20de%20descubrimiento.md)
  
 *Conexión a Triple Store*
 -------------------------
