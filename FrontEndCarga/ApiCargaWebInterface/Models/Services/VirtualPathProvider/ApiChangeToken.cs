@@ -40,7 +40,7 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
                         }
                         else
                         {
-                            return page.LastModified > LastRequested(_viewPath).Value;
+                            return page.LastModified > LastRequested(_viewPath, true).Value;
                         }
                     }
                     else
@@ -61,13 +61,16 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
             return EmptyDisposable.Instance;
         }
 
-        private DateTime? LastRequested(string path)
+        private DateTime? LastRequested(string path, bool changeResquested = false)
         {
             DateTime? lastRequested = null;
             if (_pageLastRequested.ContainsKey(path))
             {
                 lastRequested = _pageLastRequested[path];
-                _pageLastRequested[path] = DateTime.Now;
+                if (changeResquested)
+                {
+                    _pageLastRequested[path] = DateTime.Now;
+                }
             }
             else
             {
