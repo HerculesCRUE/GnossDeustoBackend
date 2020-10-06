@@ -35,6 +35,52 @@ namespace CronConfigure.Migrations
                     b.ToTable("JobRepository","hangfire");
                 });
 
+            modelBuilder.Entity("CronConfigure.Models.Entitties.ProcessDiscoverStateJob", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("JobId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("State")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobId")
+                        .IsUnique();
+
+                    b.ToTable("ProcessDiscoverStateJob");
+                });
+
+            modelBuilder.Entity("CronConfigure.Models.Entitties.ProcessingJobState", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("JobId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastIdentifierOAIPMH")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ProcessNumIdentifierOAIPMH")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("RepositoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("TotalNumIdentifierOAIPMH")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProcessingJobState");
+                });
+
             modelBuilder.Entity("CronConfigure.Models.Hangfire.AggregatedCounter", b =>
                 {
                     b.Property<string>("Key")

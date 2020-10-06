@@ -4,10 +4,18 @@
 // Controlador tareas
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NCrontab;
+using VDS.RDF;
+using VDS.RDF.Parsing;
+using VDS.RDF.Update;
+using VDS.RDF.Writing;
 
 namespace ApiCargaWebInterface.Controllers
 {
@@ -15,11 +23,17 @@ namespace ApiCargaWebInterface.Controllers
     /// Controlador para gestionar las llamadas relacionandas con el Api cron
     /// </summary>
     public class JobController : Controller
-    {
+    {       
         readonly CallCronApiService _serviceApi;
-        public JobController(CallCronApiService serviceApi)
+        readonly DiscoverItemBDService _discoverItemService;
+        readonly ProcessDiscoverStateJobBDService _processDiscoverStateJobBDService;
+        readonly ICallEtlService _callEDtlPublishService;
+        public JobController(DiscoverItemBDService iIDiscoverItemService, ProcessDiscoverStateJobBDService iProcessDiscoverStateJobBDService, CallCronApiService serviceApi, ICallEtlService callEDtlPublishService)
         {
             _serviceApi = serviceApi;
+            _discoverItemService = iIDiscoverItemService;
+            _processDiscoverStateJobBDService = iProcessDiscoverStateJobBDService;
+            _callEDtlPublishService = callEDtlPublishService;
         }
         /// <summary>
         /// Devuelve una página principal con una lista de tareas vacía
@@ -57,9 +71,21 @@ namespace ApiCargaWebInterface.Controllers
         /// <param name="id">Identificador de una tarea</param>
         /// <returns></returns>
         [HttpGet("[Controller]/{id}")]
-        public IActionResult DetailsJob(string id)
+        public IActionResult DetailsJob(string id, Guid repository_id)
         {
-           var job = _serviceApi.GetJob(id);
+            var job = _serviceApi.GetJob(id);
+            ProcessDiscoverStateJob stateJob = _processDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(job.Id);
+            if(stateJob!=null)
+            {
+                job.DiscoverState = stateJob.State;
+            }
+            if (!Guid.Empty.Equals(repository_id))
+            {
+                job.IdRepository = repository_id;
+            }
+            job.DiscoverStates= _discoverItemService.GetDiscoverItemsStatesByJob(id);
+            var discoverItemsErrorMini= _discoverItemService.GetDiscoverItemsErrorByJobMini(id);
+            job.DiscoverItemsMini = discoverItemsErrorMini;
             return View(job);
         }
 
@@ -86,12 +112,12 @@ namespace ApiCargaWebInterface.Controllers
         [HttpPost]
         public IActionResult Create(CreateJobViewModel jobModel)
         {
-            
+
             if (jobModel.IdRepository.Equals(Guid.Empty))
             {
                 ModelState.AddModelError("IdRepository", "id del repositorio no válido");
             }
-            if ((jobModel.Nombre_job != null && jobModel.CronExpression== null) || (jobModel.CronExpression != null && jobModel.Nombre_job == null))
+            if ((jobModel.Nombre_job != null && jobModel.CronExpression == null) || (jobModel.CronExpression != null && jobModel.Nombre_job == null))
             {
                 ModelState.AddModelError("Nombre_job", "faltan datos para crear un job recurrente");
             }
@@ -128,7 +154,7 @@ namespace ApiCargaWebInterface.Controllers
                     return RedirectToAction("Details", "RepositoryConfig", new { id = jobModel.IdRepository });
                 }
             }
-            
+
         }
 
         /// <summary>
@@ -190,6 +216,87 @@ namespace ApiCargaWebInterface.Controllers
                 return Json(true);
             }
             return Json(false);
+        }
+
+        /// <summary>
+        /// Resuelve un problema de descubrimiento de un job
+        /// </summary>
+        /// <param name="DissambiguationProblemsResolve">Resolución con los problemas de desambiguación</param>
+        /// <param name="IdDiscoverItem">Identificador del item de descubrimiento</param>
+        /// <param name="idJob">Identificador de la tarea a la que eprtenece el item de descubrimiento</param>
+        /// <returns></returns>
+        [HttpPost("[Controller]/{idJob}/resolve/{IdDiscoverItem}")]
+        public IActionResult ResolveDiscover(string idJob, string IdDiscoverItem, Dictionary<string, string> DissambiguationProblemsResolve)
+        {
+            DiscoverItem item = _discoverItemService.GetDiscoverItemById(new Guid(IdDiscoverItem));
+
+            //Cargamos el RDF
+            RohGraph dataGraph = new RohGraph();
+            dataGraph.LoadFromString(item.DiscoverRdf, new RdfXmlParser());
+
+            //Modificamos el RDF
+            TripleStore store = new TripleStore();
+            store.Add(dataGraph);
+            //Cambiamos candidato.Key por entityID
+            foreach (string uriOriginal in DissambiguationProblemsResolve.Keys)
+            {
+                if (!string.IsNullOrEmpty(DissambiguationProblemsResolve[uriOriginal]))
+                {
+                    SparqlUpdateParser parser = new SparqlUpdateParser();
+                    //Actualizamos los sujetos
+                    SparqlUpdateCommandSet updateSubject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                                                                    INSERT{<" + DissambiguationProblemsResolve[uriOriginal] + @"> ?p ?o.}
+                                                                    WHERE 
+                                                                    {
+                                                                        ?s ?p ?o.   FILTER(?s = <" + uriOriginal + @">)
+                                                                    }");
+                    //Actualizamos los objetos
+                    SparqlUpdateCommandSet updateObject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                                                                    INSERT{?s ?p <" + DissambiguationProblemsResolve[uriOriginal] + @">.}
+                                                                    WHERE 
+                                                                    {
+                                                                        ?s ?p ?o.   FILTER(?o = <" + uriOriginal + @">)
+                                                                    }");
+                    LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
+                    processor.ProcessCommandSet(updateSubject);
+                    processor.ProcessCommandSet(updateObject);
+                }
+            }
+            
+            System.IO.StringWriter sw = new System.IO.StringWriter();
+            RdfXmlWriter rdfXmlWriter = new RdfXmlWriter();
+            rdfXmlWriter.Save(dataGraph, sw);
+            string rdfXml= sw.ToString();
+            Stream stream =new MemoryStream(Encoding.UTF8.GetBytes(rdfXml));
+            FormFile file = new FormFile(stream, 0, stream.Length, "rdfFile", "rdf.xml");
+            //Lo reencolamos corregido
+            _callEDtlPublishService.CallDataPublish(file,idJob,true);
+
+            //Eliminamos el item
+            _discoverItemService.RemoveDiscoverItem(item.ID);
+
+            return RedirectToAction("DetailsJob", "Job", new { id = idJob });
+        }
+
+        /// <summary>
+        /// Vuelve a encolar un problema de descubrimiento que haya fallado
+        /// </summary>
+        /// <param name="IdDiscoverItem">Identificador del item de descubrimiento</param>
+        /// <param name="idJob">Identificador de la tarea a la que eprtenece el item de descubrimiento</param>
+        /// <returns></returns>
+        [HttpPost("[Controller]/{idJob}/retry/{IdDiscoverItem}")]
+        public IActionResult RetryDiscover(string idJob, string IdDiscoverItem)
+        {
+            DiscoverItem item = _discoverItemService.GetDiscoverItemById(new Guid(IdDiscoverItem));
+            Stream stream = new MemoryStream(Encoding.UTF8.GetBytes(item.Rdf));
+            FormFile file = new FormFile(stream, 0, stream.Length, "rdfFile", "rdf.xml");
+            //Lo reencolamos sin corregir para que lo vuelva a intentar
+            _callEDtlPublishService.CallDataPublish(file, idJob, false);
+
+            //Eliminamos el item
+            _discoverItemService.RemoveDiscoverItem(item.ID);
+            return RedirectToAction("DetailsJob", "Job", new { id = idJob });
+
         }
     }
 }

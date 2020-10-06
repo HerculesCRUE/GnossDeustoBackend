@@ -1,4 +1,5 @@
 using ApiCargaWebInterface.Middlewares;
+using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.Models.Services.VirtualPathProvider;
 using AspNetCore.Security.CAS;
@@ -8,9 +9,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 using System;
 using System.Collections;
 using System.Reflection;
@@ -61,18 +64,50 @@ namespace ApiCargaWebInterface
                     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.ServiceHost = serviceHost;
                 });
-           // services.AddMvcRazorRuntimeCompilation();
-            services.AddRazorPages().AddRazorRuntimeCompilation();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.Configure<MvcRazorRuntimeCompilationOptions>(opts =>
+            bool cargado = false;
+            while (!cargado) 
             {
-                CallApiService serviceApi = new CallApiService();
-                CallTokenService tokenService = new CallTokenService(new ConfigTokenService());
-                ConfigUrlService serviceUrl = new ConfigUrlService();
-                CallApiVirtualPath apiVirtualPath = new CallApiVirtualPath(tokenService, serviceUrl, serviceApi);
-                opts.FileProviders.Add(
-                    new ApiFileProvider(apiVirtualPath));
+                // services.AddMvcRazorRuntimeCompilation();
+                try
+                {
+                    services.AddRazorPages().AddRazorRuntimeCompilation();
+                    services.AddControllersWithViews().AddRazorRuntimeCompilation();
+                    services.Configure<MvcRazorRuntimeCompilationOptions>(opts =>
+                    {
+                        CallApiService serviceApi = new CallApiService();
+                        CallTokenService tokenService = new CallTokenService(new ConfigTokenService());
+                        ConfigUrlService serviceUrl = new ConfigUrlService();
+                        CallApiVirtualPath apiVirtualPath = new CallApiVirtualPath(tokenService, serviceUrl, serviceApi);
+                        opts.FileProviders.Add(
+                            new ApiFileProvider(apiVirtualPath));
+                    });
+                    cargado = true;
+                } catch (Exception ex)
+                {
+                    cargado = false;
+                }
+            }
+            services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
+            {
+                var builder = new NpgsqlDbContextOptionsBuilder(opt);
+                builder.SetPostgresVersion(new Version(9, 6));
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("PostgreConnectionmigration"))
+                {
+                    opt.UseNpgsql(environmentVariables["PostgreConnectionmigration"] as string);
+                }
+                else
+                {
+                    opt.UseNpgsql(Configuration.GetConnectionString("PostgreConnectionmigration"));
+                }
+
+
             });
+
+            services.AddScoped<DiscoverItemBDService, DiscoverItemBDService>();
+            services.AddScoped<ProcessDiscoverStateJobBDService, ProcessDiscoverStateJobBDService>();
+
+
             services.AddControllersWithViews(); 
             services.AddSingleton(typeof(ConfigPathLog));
             services.AddSingleton(typeof(ConfigUrlService));
@@ -109,11 +144,20 @@ namespace ApiCargaWebInterface
             app.UseStatusCodePagesWithReExecute("/error/{0}");
             app.UseAuthentication();
             app.UseHttpsRedirection();
-
-            app.UsePathBase("/carga-web");
+            IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+            string proxy = "";
+            if (environmentVariables.Contains("Proxy"))
+            {
+                proxy = environmentVariables["Proxy"] as string;
+            }
+            else
+            {
+                proxy = Configuration.GetConnectionString("Proxy");
+            }
+            app.UsePathBase(proxy);
             app.Use((context, next) =>
             {
-                context.Request.PathBase = "/carga-web";
+                context.Request.PathBase = proxy;
                 return next();
             });
             app.UseStaticFiles();

@@ -70,9 +70,9 @@ namespace ApiCargaWebInterface.Models.Services
         /// Llama al método del api de carga de publicación
         /// </summary>
         /// <param name="rdf">rdf a pasar</param>
-        public void CallDataPublish(IFormFile rdf)
+        public void CallDataPublish(IFormFile rdf, string jobId, bool discoverProcessed)
         {
-            string response = _serviceApi.CallPostApi(_serviceUrl.GetUrl(), $"etl/data-publish", rdf, _token, true);
+            string response = _serviceApi.CallPostApi(_serviceUrl.GetUrl(), $"etl/data-publish?jobId={jobId}&discoverProcessed={discoverProcessed}", rdf, _token, true);
         }
         /// <summary>
         /// Llama al método del api de carga de getRecord

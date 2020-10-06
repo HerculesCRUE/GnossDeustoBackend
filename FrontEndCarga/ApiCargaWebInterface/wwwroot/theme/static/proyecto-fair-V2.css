@@ -1,0 +1,11 @@
+#contenido-principal h1 { font-size: 21px; font-weight: 500; line-height: 1.24; color: #333333; }
+#contenido-principal h2 { margin-top: 5px; font-size: 17px; font-weight: 300; line-height: 1.53; color: #333333; margin-bottom: 20px; }
+#contenido-principal .item { font-family: 'Muli', sans-serif; padding: 25px; border: 1px solid #ddd; margin-bottom: 10px; }
+#contenido-principal .item .cabecera-item { position: relative; cursor: pointer; display: flex;  }
+#contenido-principal .item .cabecera-item h3 { max-width: 80%;font-size: 15px; color: #af1a2e; line-height: 1.27; font-weight: bold; margin: 0; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+#contenido-principal .item .cabecera-item .estrellas { padding-left: 10px; position: relative; flex-grow: 1; }
+#contenido-principal .item .cabecera-item .estrellas img { position: absolute;  top: -16px; }
+#contenido-principal .item .cabecera-item:after { color: #747474; content: "\e313"; font-family: "Material Icons"; position: absolute; right: 0px; top: -6px; font-size: 24px; }
+#contenido-principal .item.desplegado .cabecera-itemafter { content: "\e316"; }
+#contenido-principal .item > div:not(.cabecera-item) { font-size: 15px; color: #747474; height: 0; overflow: hidden; }
+#contenido-principal .item.desplegado > div:not(.cabecera-item) { font-size: 15px; color: #747474; height: auto; }

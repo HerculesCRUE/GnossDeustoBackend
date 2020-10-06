@@ -34,17 +34,6 @@ namespace XUnitTestGestorDocumentacion
             }
         }
 
-        [Fact]
-        public void AddPageOk()
-        {
-            PagesOperationServiceMockService mock = new PagesOperationServiceMockService();
-            FileOperationMockService mockFile = new FileOperationMockService();
-            PageController controllerMock = new PageController(mock, mockFile);
-            int countOld = mock.GetPages().Count;
-            var added = controllerMock.LoadPage("PageNew", "<p>hola</p>", Guid.Empty, null);
-            Assert.True(mock.GetPages().Count > countOld);
-        }
-
 
         [Fact]
         public void DeletePageOk()
@@ -67,17 +56,6 @@ namespace XUnitTestGestorDocumentacion
             int countOld = mock.GetPages().Count;
             var result = ((OkObjectResult)controllerMock.GetPage(mock.GetPages().FirstOrDefault().Route)).Value;
             Assert.True(result != null);
-        }
-
-        [Fact]
-        public void ModifyPageOk()
-        {
-            PagesOperationServiceMockService mock = new PagesOperationServiceMockService();
-            FileOperationMockService mockFile = new FileOperationMockService();
-            PageController controllerMock = new PageController(mock, mockFile);
-            int countOld = mock.GetPages().Count;
-            var added = controllerMock.LoadPage("Modified", "<p>hola</p>", mock.GetPages().FirstOrDefault().PageID, null);
-            Assert.True(mock.GetPage("Modified") != null);
         }
     }
 }

@@ -42,9 +42,60 @@ namespace ApiCargaWebInterface.Controllers
                 Type = "rdf",
                 RepositoryShapes = result.ShapeConfig
             };
+            return View("ObtenerRdf",publishRepositoryModel);
+        }
+        /// <summary>
+        /// Obtiene la página de obtención de un RDF
+        /// </summary>
+        /// <param name="repository">Identificador del repositorio</param>
+        /// <returns></returns>
+        [Route("[Controller]/rdf/{repository}")]
+        public IActionResult ObtenerRdf(Guid repository)
+        {
+            RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(repository);
+            PublishRepositoryModel publishRepositoryModel = new PublishRepositoryModel()
+            {
+                RepositoryId = repository,
+                Id = "",
+                Type = "rdf",
+            };
             return View(publishRepositoryModel);
         }
-
+        /// <summary>
+        /// Obtiene la página para validar un RDF
+        /// </summary>
+        /// <param name="repository">Identificador del repositorio</param>
+        /// <returns></returns>
+        [Route("[Controller]/validate/{repository}")]
+        public IActionResult ValidarRdf(Guid repository)
+        {
+            RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(repository);
+            PublishRepositoryModel publishRepositoryModel = new PublishRepositoryModel()
+            {
+                RepositoryId = repository,
+                Id = "",
+                Type = "rdf",
+                RepositoryShapes = result.ShapeConfig
+            };
+            return View(publishRepositoryModel);
+        }
+        /// <summary>
+        /// Obtiene la página para publicar un RDF
+        /// </summary>
+        /// <param name="repository">Identificador del repositorio</param>
+        /// <returns></returns>
+        [Route("[Controller]/send/{repository}")]
+        public IActionResult PublicarRdf(Guid repository)
+        {
+            RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(repository);
+            PublishRepositoryModel publishRepositoryModel = new PublishRepositoryModel()
+            {
+                RepositoryId = repository,
+                Id = "",
+                Type = "rdf",
+            };
+            return View(publishRepositoryModel);
+        }
         /// <summary>
         /// Obtiene el rdf de un elemento asociado al repositorio
         /// </summary>
@@ -86,7 +137,7 @@ namespace ApiCargaWebInterface.Controllers
                 RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(repositoryId);
                 _callEtlPublishService.ValidateRDFPersonalized(repositoryId, rdfToValidate, validationRDF, shapesList, result.ShapeConfig);
                 
-                return View("Index", new PublishRepositoryModel
+                return View("ValidarRdf", new PublishRepositoryModel
                 {
                     RepositoryId = repositoryId,
                     Id = "",
@@ -115,9 +166,9 @@ namespace ApiCargaWebInterface.Controllers
             try
             {
                 _callEtlPublishService.CallDataValidate(rdfPublish, repositoryId);
-                _callEtlPublishService.CallDataPublish(rdfPublish);
+                _callEtlPublishService.CallDataPublish(rdfPublish,"",true);
                 
-                return View("Index", new PublishRepositoryModel
+                return View("PublicarRdf", new PublishRepositoryModel
                 {
                     RepositoryId = repositoryId,
                     Id = "",
@@ -132,7 +183,7 @@ namespace ApiCargaWebInterface.Controllers
             }
             catch (Exception ex)
             {
-                return View("Index", new PublishRepositoryModel
+                return View("PublicarRdf", new PublishRepositoryModel
                 {
                     RepositoryId = repositoryId,
                     Id = "",

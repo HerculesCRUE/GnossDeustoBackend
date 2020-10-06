@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using GestorDocumentacion.Models.Entities;
 using GestorDocumentacion.Models.Services;
 using GestorDocumentacion.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -20,6 +21,7 @@ namespace GestorDocumentacion.Controllers
     ///</summary>
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class PageController : ControllerBase
     {
         private IPagesOperationsServices _pagesOperationsService;
@@ -79,6 +81,7 @@ namespace GestorDocumentacion.Controllers
         public IActionResult LoadPage(string route, Guid pageId, IFormFile html_page)
         {
             Guid guidPage = Guid.Empty;
+            string content = "";
             bool isNew = false;
             if (Guid.Empty.Equals(pageId))
             {
@@ -89,13 +92,16 @@ namespace GestorDocumentacion.Controllers
             {
                 guidPage = pageId;
             }
-
+            if(html_page != null)
+            {
+                content = _fileOperationsService.ReadFile(html_page);
+            }
             Page page = new Page()
             {
                 LastModified = DateTime.Now,
                 PageID = guidPage,
                 Route = route,
-                Content = _fileOperationsService.ReadFile(html_page)
+                Content = content
             };
             if(!_pagesOperationsService.LoadPage(page, isNew))
             {

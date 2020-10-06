@@ -36,7 +36,7 @@ namespace API_CARGA.Models.Services
         ///</summary>
         ///<param name="rdf">contenido en rdf a publicar</param>
         ///<param name="jobId">En el caso de que haya sido una tarea la que ha lanzado la acción representa el identificador de la tarea</param>
-        ///<param name="jobCreatedDate">En el caso de que haya sido una tarea la que ha lanzado la acción representa la fecha de creación de dicha tarea</param>
-        public void CallDataPublish(string rdf, string jobId = null, DateTime? jobCreatedDate = null, TokenBearer token = null);
+        ///<param name="discoverProcessed">En el caso de que ya se haya procesado el descubrimiento se envía true y se inserta tal cual en BBDD (sin procesar descubrimiento)</param>
+        public void CallDataPublish(string rdf, string jobId = null, bool discoverProcessed=false, TokenBearer token = null);
     }
 }

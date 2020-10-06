@@ -16,7 +16,7 @@ namespace API_CARGA.Models.Entities
     {
         public RepositoryConfig()
         {
-            ///ShapeConfig = new HashSet<ShapeConfig>();
+            //ShapeConfig = new HashSet<ShapeConfig>();
         }
 
         /// <summary>

@@ -17,7 +17,7 @@ using VDS.RDF.Query.Builder;
 using VDS.RDF.Query.Inference;
 using VDS.RDF.Update;
 
-namespace API_DISCOVER.Models.Utility
+namespace API_DISCOVER.Utility
 {
     public static class Discover
     {
@@ -126,7 +126,7 @@ namespace API_DISCOVER.Models.Utility
                 }
 
                 //Integración con apis externos
-                orcidIntegration=ORCIDIntegration(ref dataGraph, ref dataInferenceGraph, reasoner);
+                orcidIntegration = ORCIDIntegration(ref dataGraph, ref dataInferenceGraph, reasoner);
             }
             DateTime discoverEndTime = DateTime.Now;
             DiscoverResult resultado = new DiscoverResult(dataGraph, dataInferenceGraph, ontologyGraph, discoveredEntitiesWithSubject, discoveredEntitiesWithIds, discoveredEntitiesWithBBDD, discoveredEntitiesProbability, (discoverEndTime - discoverInitTime).TotalSeconds, orcidIntegration);
@@ -134,14 +134,17 @@ namespace API_DISCOVER.Models.Utility
             return resultado;
         }
 
+
         /// <summary>
         /// Procesa los resultados del descubrimiento
         /// </summary>
         /// <param name="pDiscoverItem">Objeto con los datos de com procesar el proeso de descubrimiento</param>
         /// <param name="pDiscoverResult">Resultado de la aplicación del descubrimiento</param>
         /// <param name="pDiscoverItemBDService">Clase para gestionar las operaciones de las tareas de descubrimiento</param>
+        /// <param name="pCallCronApiService">Servicio para hacer llamadas a los métodos del apiCron</param>
+        /// <param name="pProcessDiscoverStateJobBDService">Clase para gestionar los estados de descubrimiento de las tareas</param>
         /// <returns></returns>
-        public static void Process(DiscoverItem pDiscoverItem, DiscoverResult pDiscoverResult, DiscoverItemBDService pDiscoverItemBDService)
+        public static void Process(DiscoverItem pDiscoverItem, DiscoverResult pDiscoverResult, DiscoverItemBDService pDiscoverItemBDService, CallCronApiService pCallCronApiService, ProcessDiscoverStateJobBDService pProcessDiscoverStateJobBDService)
         {
             /*
              En función del resultado obtenido se realiza una de las siguientes acciones:
@@ -156,12 +159,13 @@ namespace API_DISCOVER.Models.Utility
 
             if (pDiscoverItem.Publish)
             {
+                DiscoverItem discoverItemBD = pDiscoverItemBDService.GetDiscoverItemById(pDiscoverItem.ID);
                 if (pDiscoverResult.discoveredEntitiesProbability.Count > 0)
                 {
-                    //Hay dudas en la desambiguación, por lo que lo insertamos en la BBDD
-                    pDiscoverItem.Status = DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString();
-                    pDiscoverItem.DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
-                    pDiscoverItem.DiscoverRdf = pDiscoverResult.GetDataGraphRDF();
+                    //Hay dudas en la desambiguación, por lo que lo actualizamos en la BBDD con su estado correspondiente
+                    discoverItemBD.Status = DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString();
+                    discoverItemBD.DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
+                    discoverItemBD.DiscoverRdf = pDiscoverResult.GetDataGraphRDF();
                     foreach (string entityID in pDiscoverResult.discoveredEntitiesProbability.Keys)
                     {
                         DiscoverItem.DiscoverDissambiguation discoverDissambiguation = new DiscoverItem.DiscoverDissambiguation() { IDOrigin = entityID, DissambiguationCandiates = new List<DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate>() };
@@ -169,13 +173,14 @@ namespace API_DISCOVER.Models.Utility
                         {
                             discoverDissambiguation.DissambiguationCandiates.Add(new DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate() { IDCandidate = candidateID, Score = pDiscoverResult.discoveredEntitiesProbability[entityID][candidateID] });
                         }
-                        pDiscoverItem.DissambiguationProblems.Add(discoverDissambiguation);
+                        discoverItemBD.DissambiguationProblems.Add(discoverDissambiguation);
                     }
+                    discoverItemBD.Error = "";
+                    pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBD);
                 }
                 else
                 {
                     //No hay problemas en la reconciliación por lo que procedemos
-
                     #region 1º Eliminamos de la BBD las entidades principales que aparecen en el RDF
                     List<string> mainEntities = new List<string>();
                     string query = @"select distinct * where{?s <http://purl.org/roh/mirror/foaf#primaryTopic> ""true""^^<http://www.w3.org/2001/XMLSchema#boolean>}";
@@ -300,70 +305,107 @@ namespace API_DISCOVER.Models.Utility
 
                     //4º Limpiamos los blanknodes huerfanos, o que no tengan triples
                     DeleteOrphanNodes();
+
+                    //Lo marcamos como procesado en la BBDD y eliminamos sus metadatos
+                    discoverItemBD.Status = DiscoverItem.DiscoverItemStatus.Processed.ToString();
+                    discoverItemBD.DissambiguationProblems = null;
+                    discoverItemBD.DiscoverRdf = null;
+                    discoverItemBD.Rdf = null;
+                    discoverItemBD.Error = "";
+                    pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBD);
+                }
+
+                //Actualizamos el estado de descubrimiento de la tarea si el estado encolado esta en estado Success o Error (ha finalizado)
+                string statusQueueJob = pCallCronApiService.GetJob(pDiscoverItem.JobID).State;
+                if ((statusQueueJob == "Failed" || statusQueueJob == "Succeeded") )
+                {
+                    ProcessDiscoverStateJob processDiscoverStateJob = pProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(pDiscoverItem.JobID);
+                    string state;
+                    //Actualizamos a error si existen items en estado error o con problemas de desambiguación 
+                    if (pDiscoverItemBDService.ExistsDiscoverItemsErrorOrDissambiguatinProblems(pDiscoverItem.JobID))
+                    {
+                        state = "Error";
+                    }
+                    else if(pDiscoverItemBDService.ExistsDiscoverItemsPending(pDiscoverItem.JobID))
+                    {
+                        //Actualizamos a 'Pending' si aún existen items pendientes
+                        state = "Pending";
+                    }else
+                    {
+                        //Actualizamos a Success si no existen items en estado error ni con problemas de desambiguación y no hay ninguno pendiente
+                        state = "Success";
+                    }
+                    if (processDiscoverStateJob != null)
+                    {
+                        processDiscoverStateJob.State = state;
+                        pProcessDiscoverStateJobBDService.ModifyProcessDiscoverStateJob(processDiscoverStateJob);
+                    }
+                    else
+                    {
+                        processDiscoverStateJob = new ProcessDiscoverStateJob() { State = state, JobId = pDiscoverItem.JobID };
+                        pProcessDiscoverStateJobBDService.AddProcessDiscoverStateJob(processDiscoverStateJob);
+                    }
                 }
             }
-            else if (pDiscoverItem.Status == DiscoverItem.DiscoverItemStatus.Pending.ToString())
+            else
             {
                 //Actualizamos en BBDD
                 DiscoverItem discoverItemBD = pDiscoverItemBDService.GetDiscoverItemById(pDiscoverItem.ID);
-                if (discoverItemBD != null)
+                discoverItemBD.DiscoverRdf = pDiscoverResult.GetDataGraphRDF();
+                discoverItemBD.Status = DiscoverItem.DiscoverItemStatus.Processed.ToString();
+                discoverItemBD.DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
+                if (pDiscoverResult.discoveredEntitiesProbability.Count > 0)
                 {
-                    discoverItemBD.DiscoverRdf = pDiscoverResult.GetDataGraphRDF();
-                    discoverItemBD.Status = DiscoverItem.DiscoverItemStatus.Processed.ToString();
-                    discoverItemBD.DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
-                    if (pDiscoverResult.discoveredEntitiesProbability.Count > 0)
+                    //Hay dudas en la desambiguación, por lo que lo almacenamos en la BBDD                    
+                    discoverItemBD.Status = DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString();
+                    foreach (string entityID in pDiscoverResult.discoveredEntitiesProbability.Keys)
                     {
-                        //Hay dudas en la desambiguación, por lo que lo almacenamos en la BBDD                    
-                        discoverItemBD.Status = DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString();
-                        foreach (string entityID in pDiscoverResult.discoveredEntitiesProbability.Keys)
+                        DiscoverItem.DiscoverDissambiguation discoverDissambiguation = new DiscoverItem.DiscoverDissambiguation() { IDOrigin = entityID, DissambiguationCandiates = new List<DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate>() };
+                        foreach (string candidateID in pDiscoverResult.discoveredEntitiesProbability[entityID].Keys)
                         {
-                            DiscoverItem.DiscoverDissambiguation discoverDissambiguation = new DiscoverItem.DiscoverDissambiguation() { IDOrigin = entityID, DissambiguationCandiates = new List<DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate>() };
-                            foreach (string candidateID in pDiscoverResult.discoveredEntitiesProbability[entityID].Keys)
-                            {
-                                discoverDissambiguation.DissambiguationCandiates.Add(new DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate() { IDCandidate = candidateID, Score = pDiscoverResult.discoveredEntitiesProbability[entityID][candidateID] });
-                            }
-                            discoverItemBD.DissambiguationProblems.Add(discoverDissambiguation);
+                            discoverDissambiguation.DissambiguationCandiates.Add(new DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate() { IDCandidate = candidateID, Score = pDiscoverResult.discoveredEntitiesProbability[entityID][candidateID] });
                         }
+                        discoverItemBD.DissambiguationProblems.Add(discoverDissambiguation);
                     }
-                    //Reporte de descubrimiento
-                    discoverItemBD.DiscoverReport = "Time processed (seconds): " + pDiscoverResult.secondsProcessed + "\n";
-                    if (pDiscoverResult.discoveredEntitiesWithSubject != null && pDiscoverResult.discoveredEntitiesWithSubject.Count > 0)
-                    {
-                        discoverItemBD.DiscoverReport += "Entities discover with the same uri: " + pDiscoverResult.discoveredEntitiesWithSubject.Count + "\n";
-                        foreach (string uri in pDiscoverResult.discoveredEntitiesWithSubject)
-                        {
-                            discoverItemBD.DiscoverReport += "\t" + uri + "\n";
-                        }
-                    }
-                    if (pDiscoverResult.discoveredEntitiesWithId != null && pDiscoverResult.discoveredEntitiesWithId.Count > 0)
-                    {
-                        discoverItemBD.DiscoverReport += "Entities discover with some common identifier: " + pDiscoverResult.discoveredEntitiesWithId.Count + "\n";
-                        foreach (string uri in pDiscoverResult.discoveredEntitiesWithId.Keys)
-                        {
-                            discoverItemBD.DiscoverReport += "\t" + uri + " --> " + pDiscoverResult.discoveredEntitiesWithId[uri] + "\n";
-                        }
-                    }
-                    if (pDiscoverResult.discoveredEntitiesWithDataBase != null && pDiscoverResult.discoveredEntitiesWithDataBase.Count > 0)
-                    {
-                        discoverItemBD.DiscoverReport += "Entities discover with reconciliation config: " + pDiscoverResult.discoveredEntitiesWithDataBase.Count + "\n";
-                        foreach (string uri in pDiscoverResult.discoveredEntitiesWithDataBase.Keys)
-                        {
-                            discoverItemBD.DiscoverReport += "\t" + uri + " --> " + pDiscoverResult.discoveredEntitiesWithDataBase[uri] + "\n";
-                        }
-                    }
-                    if (pDiscoverResult.orcidIntegration != null && pDiscoverResult.orcidIntegration.Count > 0)
-                    {
-                        discoverItemBD.DiscoverReport += "Entities with identifiers obtained with ORCID integration: " + pDiscoverResult.orcidIntegration.Count + "\n";
-                        foreach (string uri in pDiscoverResult.orcidIntegration.Keys)
-                        {
-                            foreach (string property in pDiscoverResult.orcidIntegration[uri].Keys)
-                            {
-                                discoverItemBD.DiscoverReport += "\t" + uri + " - " + property + " --> " + pDiscoverResult.orcidIntegration[uri][property] + "\n";
-                            }
-                        }
-                    }
-                    pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBD);
                 }
+                //Reporte de descubrimiento
+                discoverItemBD.DiscoverReport = "Time processed (seconds): " + pDiscoverResult.secondsProcessed + "\n";
+                if (pDiscoverResult.discoveredEntitiesWithSubject != null && pDiscoverResult.discoveredEntitiesWithSubject.Count > 0)
+                {
+                    discoverItemBD.DiscoverReport += "Entities discover with the same uri: " + pDiscoverResult.discoveredEntitiesWithSubject.Count + "\n";
+                    foreach (string uri in pDiscoverResult.discoveredEntitiesWithSubject)
+                    {
+                        discoverItemBD.DiscoverReport += "\t" + uri + "\n";
+                    }
+                }
+                if (pDiscoverResult.discoveredEntitiesWithId != null && pDiscoverResult.discoveredEntitiesWithId.Count > 0)
+                {
+                    discoverItemBD.DiscoverReport += "Entities discover with some common identifier: " + pDiscoverResult.discoveredEntitiesWithId.Count + "\n";
+                    foreach (string uri in pDiscoverResult.discoveredEntitiesWithId.Keys)
+                    {
+                        discoverItemBD.DiscoverReport += "\t" + uri + " --> " + pDiscoverResult.discoveredEntitiesWithId[uri] + "\n";
+                    }
+                }
+                if (pDiscoverResult.discoveredEntitiesWithDataBase != null && pDiscoverResult.discoveredEntitiesWithDataBase.Count > 0)
+                {
+                    discoverItemBD.DiscoverReport += "Entities discover with reconciliation config: " + pDiscoverResult.discoveredEntitiesWithDataBase.Count + "\n";
+                    foreach (string uri in pDiscoverResult.discoveredEntitiesWithDataBase.Keys)
+                    {
+                        discoverItemBD.DiscoverReport += "\t" + uri + " --> " + pDiscoverResult.discoveredEntitiesWithDataBase[uri] + "\n";
+                    }
+                }
+                if (pDiscoverResult.orcidIntegration != null && pDiscoverResult.orcidIntegration.Count > 0)
+                {
+                    discoverItemBD.DiscoverReport += "Entities with identifiers obtained with ORCID integration: " + pDiscoverResult.orcidIntegration.Count + "\n";
+                    foreach (string uri in pDiscoverResult.orcidIntegration.Keys)
+                    {
+                        foreach (string property in pDiscoverResult.orcidIntegration[uri].Keys)
+                        {
+                            discoverItemBD.DiscoverReport += "\t" + uri + " - " + property + " --> " + pDiscoverResult.orcidIntegration[uri][property] + "\n";
+                        }
+                    }
+                }
+                pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBD);
             }
         }
 
@@ -441,10 +483,13 @@ namespace API_DISCOVER.Models.Utility
         /// Obtiene los datos de desambiguación del RDF
         /// </summary>
         /// <param name="pEntitiesRdfTypes">Listado con los sujetos y sus rdf:type (con inferencia)</param>
-        /// <param name="pRohGraph">Grafo en local</param>
+        /// <param name="pTriples">Lista de triples</param>
         /// <returns>Entidades del RDF con sus datos de desambiguación</returns>
-        private static Dictionary<string, List<DisambiguationData>> GetDisambiguationDataRdf(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pRohGraph)
+        private static Dictionary<string, List<DisambiguationData>> GetDisambiguationDataRdf(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, List<Triple> pTriples)
         {
+            Dictionary<string, Dictionary<string, HashSet<string>>> directRels = ExtractRelsFromTriples(pTriples, false);
+            Dictionary<string, Dictionary<string, HashSet<string>>> inverseRels = ExtractRelsFromTriples(pTriples, true);
+
             Dictionary<string, List<DisambiguationData>> disambiguationDataRdf = new Dictionary<string, List<DisambiguationData>>();
             foreach (string entityID in pEntitiesRdfTypes.Keys)
             {
@@ -456,7 +501,7 @@ namespace API_DISCOVER.Models.Utility
                     {
                         foreach (Disambiguation disambiguation in disambiguations)
                         {
-                            DisambiguationData disambiguationData = GetEntityDataForReconciliation(entityID, disambiguation, pRohGraph);
+                            DisambiguationData disambiguationData = GetEntityDataForReconciliation(entityID, disambiguation, directRels, inverseRels);
 
                             if (!disambiguationDataRdf.ContainsKey(entityID))
                             {
@@ -472,7 +517,7 @@ namespace API_DISCOVER.Models.Utility
             }
             //Obtenemos los roh:identifier de todas las entidades           
             Dictionary<string, KeyValuePair<string, string>> disambiguationIdentifiersRdf = new Dictionary<string, KeyValuePair<string, string>>();
-            Dictionary<string, Dictionary<string, HashSet<string>>> identifiersData = GetPropertiesValues(pEntitiesRdfTypes.Keys.ToList(), new List<string> { mPropertyRohIdentifier, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" }, false, pRohGraph);
+            Dictionary<string, Dictionary<string, HashSet<string>>> identifiersData = GetPropertiesValues(pEntitiesRdfTypes.Keys.ToList(), new List<string> { mPropertyRohIdentifier, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" }, false, directRels);
             foreach (string entityId in identifiersData.Keys)
             {
                 if (identifiersData[entityId].ContainsKey(mPropertyRohIdentifier) && identifiersData[entityId].ContainsKey("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"))
@@ -495,11 +540,12 @@ namespace API_DISCOVER.Models.Utility
         /// </summary>
         /// <param name="pSubject">Sujeto</param>
         /// <param name="pDisambiguation">Objeto de desambiguación</param>
-        /// <param name="pGrafo">Grafo en local</param>
+        /// <param name="pDirectRels">Relaciones directas</param>
+        /// <param name="pInverseRels">Relaciones inversas</param>
         /// <returns>Datos para la desambiguación</returns>
-        private static DisambiguationData GetEntityDataForReconciliation(string pSubject, Disambiguation pDisambiguation, RohGraph pGrafo)
+        private static DisambiguationData GetEntityDataForReconciliation(string pSubject, Disambiguation pDisambiguation, Dictionary<string, Dictionary<string, HashSet<string>>> pDirectRels, Dictionary<string, Dictionary<string, HashSet<string>>> pInverseRels)
         {
-            Dictionary<string, DisambiguationData> data = GetEntityDataForReconciliation(new List<string> { pSubject }, pDisambiguation, pGrafo);
+            Dictionary<string, DisambiguationData> data = GetEntityDataForReconciliation(new List<string> { pSubject }, pDisambiguation, pDirectRels, pInverseRels);
             if (data != null && data.ContainsKey(pSubject))
             {
                 return data[pSubject];
@@ -512,19 +558,20 @@ namespace API_DISCOVER.Models.Utility
         /// </summary>
         /// <param name="pSubject">Sujeto</param>
         /// <param name="pDisambiguation">Objeto de desambiguación</param>
-        /// <param name="pGrafo">Grafo en local</param>
+        /// <param name="pDirectRels">Relaciones directas</param>
+        /// <param name="pInverseRels">Relaciones inversas</param>
         /// <returns>Datos para la desambiguación</returns>
-        private static Dictionary<string, DisambiguationData> GetEntityDataForReconciliation(List<string> pSubjects, Disambiguation pDisambiguation, RohGraph pGrafo)
+        private static Dictionary<string, DisambiguationData> GetEntityDataForReconciliation(List<string> pSubjects, Disambiguation pDisambiguation, Dictionary<string, Dictionary<string, HashSet<string>>> pDirectRels, Dictionary<string, Dictionary<string, HashSet<string>>> pInverseRels)
         {
             Dictionary<string, DisambiguationData> response = new Dictionary<string, DisambiguationData>();
             //Propiedades directas
             List<string> properties = pDisambiguation.properties.Where(x => !x.inverse).Select(x => x.property).ToList();
             properties.AddRange(pDisambiguation.identifiers);
-            Dictionary<string, Dictionary<string, HashSet<string>>> propertiesData = GetPropertiesValues(pSubjects, properties, false, pGrafo);
+            Dictionary<string, Dictionary<string, HashSet<string>>> propertiesData = GetPropertiesValues(pSubjects, properties, false, pDirectRels);
 
             //Propiedades inversas
             List<string> inverseProperties = pDisambiguation.properties.Where(x => x.inverse).Select(x => x.property).ToList();
-            Dictionary<string, Dictionary<string, HashSet<string>>> inversePropertiesData = GetPropertiesValues(pSubjects, inverseProperties, true, pGrafo);
+            Dictionary<string, Dictionary<string, HashSet<string>>> inversePropertiesData = GetPropertiesValues(pSubjects, inverseProperties, true, pInverseRels);
 
             //Identificadores
             foreach (string propertyIdentifier in pDisambiguation.identifiers)
@@ -609,20 +656,15 @@ namespace API_DISCOVER.Models.Utility
         }
 
         /// <summary>
-        /// Obtiene N propiedades de N entidades de un grafo en local
+        /// Extrae las relaciones de los triples para procesarlos posteriormente por GetPropertiesValues
         /// </summary>
-        /// <param name="pSubjects">Sujetos</param>
-        /// <param name="pProperties">Propiedades</param>
+        /// <param name="pTriples">Lista de triples</param>
         /// <param name="pInverse">Implica si son inversas</param>
-        /// <param name="pGrafo">Grafo en local</param>
-        /// <returns>Valor de las propiedades para los sujetos introducidos</returns>
-        private static Dictionary<string, Dictionary<string, HashSet<string>>> GetPropertiesValues(List<string> pSubjects, List<string> pProperties, bool pInverse, RohGraph pGrafo)
+        /// <returns>Diccinoario con las relaciones</returns>
+        private static Dictionary<string, Dictionary<string, HashSet<string>>> ExtractRelsFromTriples(List<Triple> pTriples, bool pInverse)
         {
-            Dictionary<string, Dictionary<string, HashSet<string>>> propertyValues = new Dictionary<string, Dictionary<string, HashSet<string>>>();
-            List<Triple> triples = pGrafo.Triples.ToList();
-
             Dictionary<string, Dictionary<string, HashSet<string>>> rels = new Dictionary<string, Dictionary<string, HashSet<string>>>();
-            foreach (Triple triple in triples)
+            foreach (Triple triple in pTriples)
             {
                 string s = triple.Subject.ToString();
                 string p = triple.Predicate.ToString();
@@ -663,6 +705,21 @@ namespace API_DISCOVER.Models.Utility
                     }
                 }
             }
+            return rels;
+        }
+
+        /// <summary>
+        /// Obtiene N propiedades de N entidades de un grafo en local
+        /// </summary>
+        /// <param name="pSubjects">Sujetos</param>
+        /// <param name="pProperties">Propiedades</param>
+        /// <param name="pInverse">Implica si son inversas</param>
+        /// <param name="pRels">Relaciones</param>
+        /// <returns>Valor de las propiedades para los sujetos introducidos</returns>
+        private static Dictionary<string, Dictionary<string, HashSet<string>>> GetPropertiesValues(List<string> pSubjects, List<string> pProperties, bool pInverse, Dictionary<string, Dictionary<string, HashSet<string>>> pRels)
+        {
+            Dictionary<string, Dictionary<string, HashSet<string>>> propertyValues = new Dictionary<string, Dictionary<string, HashSet<string>>>();
+
 
             foreach (string property in pProperties)
             {
@@ -680,19 +737,19 @@ namespace API_DISCOVER.Models.Utility
                     foreach (string propertyIn in propertySplit)
                     {
                         outAux = new HashSet<string>();
-                        foreach (string subjectIn in rels.Keys)
+                        foreach (string subjectIn in pRels.Keys)
                         {
-                            if (rels[subjectIn].ContainsKey(propertyIn) || propertyIn == "?")
+                            if (pRels[subjectIn].ContainsKey(propertyIn) || propertyIn == "?")
                             {
                                 if (inAux.Contains(subjectIn))
                                 {
                                     if (propertyIn != "?")
                                     {
-                                        outAux.UnionWith(rels[subjectIn][propertyIn]);
+                                        outAux.UnionWith(pRels[subjectIn][propertyIn]);
                                     }
                                     else
                                     {
-                                        outAux.UnionWith(rels[subjectIn].Where(x => x.Key != "http://www.w3.org/1999/02/22-rdf-syntax-ns#type").SelectMany(x => x.Value).ToList());
+                                        outAux.UnionWith(pRels[subjectIn].Where(x => x.Key != "http://www.w3.org/1999/02/22-rdf-syntax-ns#type").SelectMany(x => x.Value).ToList());
                                     }
                                 }
                             }
@@ -1340,7 +1397,7 @@ namespace API_DISCOVER.Models.Utility
             pReasoner.Apply(pDataInferenceGraph);
             pEntitiesRdfTypes = LoadEntitiesWithRdfTypes(pDataInferenceGraph, pIncludeBlankNodes);
             pEntitiesRdfType = LoadEntitiesWithRdfType(pDataGraph, pIncludeBlankNodes);
-            pDisambiguationDataRdf = GetDisambiguationDataRdf(pEntitiesRdfTypes, pDataGraph);
+            pDisambiguationDataRdf = GetDisambiguationDataRdf(pEntitiesRdfTypes, pDataGraph.Triples.ToList());
         }
 
         /// <summary>
@@ -2013,7 +2070,7 @@ namespace API_DISCOVER.Models.Utility
         /// <param name="pDataInferenceGraph">Grafo en local en el que aplicar la implementación de ORCID (con inferencia)</param>
         /// <param name="pReasoner">Razonador para la inferencia de la ontología</param>
         /// <returns>Identificadores descubiertos con la integración de ORCID</returns>
-        private static Dictionary<string,Dictionary<string,string>> ORCIDIntegration(ref RohGraph pDataGraph, ref RohGraph pDataInferenceGraph, RohRdfsReasoner pReasoner)
+        private static Dictionary<string, Dictionary<string, string>> ORCIDIntegration(ref RohGraph pDataGraph, ref RohGraph pDataInferenceGraph, RohRdfsReasoner pReasoner)
         {
             Dictionary<string, Dictionary<string, string>> identifiersDiscover = new Dictionary<string, Dictionary<string, string>>();
 
@@ -2079,7 +2136,7 @@ namespace API_DISCOVER.Models.Utility
                         IUriNode p = pDataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
                         ILiteralNode o = pDataGraph.CreateLiteralNode(entityORCID[entityID], new Uri("http://www.w3.org/2001/XMLSchema#string"));
                         pDataGraph.Assert(new Triple(s, p, o));
-                        if(!identifiersDiscover.ContainsKey(entityID))
+                        if (!identifiersDiscover.ContainsKey(entityID))
                         {
                             identifiersDiscover.Add(entityID, new Dictionary<string, string>());
                         }
@@ -2133,144 +2190,147 @@ namespace API_DISCOVER.Models.Utility
                         WebClient webClient = new WebClient();
                         webClient.Headers.Add(HttpRequestHeader.Accept, "application/json");
                         //1.-Hacemos una petición a ORCID al método  ‘expanded - search' con el nombre de la persona
-                        string jsonRespuesta = webClient.DownloadString("https://pub.orcid.org/v3.0/expanded-search?q=" + HttpUtility.UrlEncode(NormalizeName(personWithName[personID])) + "&rows=5");
+                        string jsonRespuesta = webClient.DownloadString("https://pub.orcid.org/v3.0/expanded-search?q=" + HttpUtility.UrlEncode(NormalizeName(personWithName[personID]).Trim()) + "&rows=5");
 
                         ORCIDExpandedSearch expandedSearch = JsonConvert.DeserializeObject<ORCIDExpandedSearch>(jsonRespuesta);
-                        if (expandedSearch.expanded_result.Count > 5)
+                        if (expandedSearch.expanded_result != null)
                         {
-                            expandedSearch.expanded_result = expandedSearch.expanded_result.GetRange(0, 5);
-                        }
-
-                        RohGraph orcidGraph = new RohGraph();
-
-                        foreach (ORCIDExpandedSearch.Result result in expandedSearch.expanded_result)
-                        {
-
-                            string name = result.given_names + " " + result.family_names;
-                            string id = "http://orcid.com/Person/" + result.orcid_id;
-
-                            //comprobamos la similitud del nombre obtenido con el nombre del RDF
-                            //Si no alcanza un mínimo de similitud procedemos con el siguiente resultado que habíamos obtenido con el método 'expanded - search’, así hasta llegar al 5º          
-                            if (!string.IsNullOrEmpty(result.orcid_id) && GetNameSimilarity(name, personWithName[personID]) >= 0.5f)
+                            if (expandedSearch.expanded_result.Count > 5)
                             {
-                                //Si sí que se alcanza esa similitud se procede con el siguiente paso.
+                                expandedSearch.expanded_result = expandedSearch.expanded_result.GetRange(0, 5);
+                            }
 
-                                //Insertamos los datos de la persona (nombre + ORCID)
-                                IUriNode subjectPerson = orcidGraph.CreateUriNode(UriFactory.Create(id));
-                                IUriNode rdftypeProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
-                                IUriNode rdftypePerson = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#Person"));
-                                orcidGraph.Assert(new Triple(subjectPerson, rdftypeProperty, rdftypePerson));
+                            RohGraph orcidGraph = new RohGraph();
 
-                                IUriNode nameProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#name"));
-                                ILiteralNode namePerson = orcidGraph.CreateLiteralNode(name, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                                orcidGraph.Assert(new Triple(subjectPerson, nameProperty, namePerson));
+                            foreach (ORCIDExpandedSearch.Result result in expandedSearch.expanded_result)
+                            {
 
-                                IUriNode orcidProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
-                                ILiteralNode nameOrcid = orcidGraph.CreateLiteralNode(result.orcid_id, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                                orcidGraph.Assert(new Triple(subjectPerson, orcidProperty, nameOrcid));
+                                string name = result.given_names + " " + result.family_names;
+                                string id = "http://orcid.com/Person/" + result.orcid_id;
 
-
-
-                                //Hacemos peticiones al métdo dee ORCID ‘orcid}/ person' y almacenamos en un grafo en local los datos de los identificadores
-                                webClient.Headers.Add(HttpRequestHeader.Accept, "application/json");
-                                string jsonRespuestaOrcidPerson = webClient.DownloadString("https://pub.orcid.org/v3.0/" + result.orcid_id + "/person");
-                                ORCIDPerson person = JsonConvert.DeserializeObject<ORCIDPerson>(jsonRespuestaOrcidPerson);
-
-                                if (person.external_identifiers != null && person.external_identifiers.external_identifier != null)
+                                //comprobamos la similitud del nombre obtenido con el nombre del RDF
+                                //Si no alcanza un mínimo de similitud procedemos con el siguiente resultado que habíamos obtenido con el método 'expanded - search’, así hasta llegar al 5º          
+                                if (!string.IsNullOrEmpty(result.orcid_id) && GetNameSimilarity(name, personWithName[personID]) >= 0.5f)
                                 {
-                                    foreach (ORCIDPerson.ExternalIdentifiers.ExternalIdentifier extIdentifier in person.external_identifiers.external_identifier)
+                                    //Si sí que se alcanza esa similitud se procede con el siguiente paso.
+
+                                    //Insertamos los datos de la persona (nombre + ORCID)
+                                    IUriNode subjectPerson = orcidGraph.CreateUriNode(UriFactory.Create(id));
+                                    IUriNode rdftypeProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+                                    IUriNode rdftypePerson = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#Person"));
+                                    orcidGraph.Assert(new Triple(subjectPerson, rdftypeProperty, rdftypePerson));
+
+                                    IUriNode nameProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#name"));
+                                    ILiteralNode namePerson = orcidGraph.CreateLiteralNode(name, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                    orcidGraph.Assert(new Triple(subjectPerson, nameProperty, namePerson));
+
+                                    IUriNode orcidProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
+                                    ILiteralNode nameOrcid = orcidGraph.CreateLiteralNode(result.orcid_id, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                    orcidGraph.Assert(new Triple(subjectPerson, orcidProperty, nameOrcid));
+
+
+
+                                    //Hacemos peticiones al métdo dee ORCID ‘orcid}/ person' y almacenamos en un grafo en local los datos de los identificadores
+                                    webClient.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                                    string jsonRespuestaOrcidPerson = webClient.DownloadString("https://pub.orcid.org/v3.0/" + result.orcid_id + "/person");
+                                    ORCIDPerson person = JsonConvert.DeserializeObject<ORCIDPerson>(jsonRespuestaOrcidPerson);
+
+                                    if (person.external_identifiers != null && person.external_identifiers.external_identifier != null)
                                     {
-                                        if (extIdentifier.external_id_type == "ResearcherID")
+                                        foreach (ORCIDPerson.ExternalIdentifiers.ExternalIdentifier extIdentifier in person.external_identifiers.external_identifier)
                                         {
-                                            IUriNode researcherProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#researcherId"));
-                                            ILiteralNode nameResearcher = orcidGraph.CreateLiteralNode(extIdentifier.external_id_value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                                            orcidGraph.Assert(new Triple(subjectPerson, researcherProperty, nameResearcher));
-                                        }
-                                        else if (extIdentifier.external_id_type == "Scopus Author ID")
-                                        {
-                                            IUriNode scopusProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#scopusId"));
-                                            ILiteralNode nameScopus = orcidGraph.CreateLiteralNode(extIdentifier.external_id_value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                                            orcidGraph.Assert(new Triple(subjectPerson, scopusProperty, nameScopus));
+                                            if (extIdentifier.external_id_type == "ResearcherID")
+                                            {
+                                                IUriNode researcherProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#researcherId"));
+                                                ILiteralNode nameResearcher = orcidGraph.CreateLiteralNode(extIdentifier.external_id_value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                                orcidGraph.Assert(new Triple(subjectPerson, researcherProperty, nameResearcher));
+                                            }
+                                            else if (extIdentifier.external_id_type == "Scopus Author ID")
+                                            {
+                                                IUriNode scopusProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#scopusId"));
+                                                ILiteralNode nameScopus = orcidGraph.CreateLiteralNode(extIdentifier.external_id_value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                                orcidGraph.Assert(new Triple(subjectPerson, scopusProperty, nameScopus));
+                                            }
                                         }
                                     }
-                                }
 
 
-                                //y 'orcid}/ works’ y almacenamos en un grafo en local los datos de los trabajos realizados.
-                                webClient.Headers.Add(HttpRequestHeader.Accept, "application/json");
-                                string jsonRespuestaOrcidWorks = webClient.DownloadString("https://pub.orcid.org/v3.0/" + result.orcid_id + "/works");
-                                ORCIDWorks works = JsonConvert.DeserializeObject<ORCIDWorks>(jsonRespuestaOrcidWorks);
-                                HashSet<string> worksTitles = new HashSet<string>();
-                                if (works.group != null)
-                                {
-                                    foreach (ORCIDWorks.Group group in works.group)
+                                    //y 'orcid}/ works’ y almacenamos en un grafo en local los datos de los trabajos realizados.
+                                    webClient.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                                    string jsonRespuestaOrcidWorks = webClient.DownloadString("https://pub.orcid.org/v3.0/" + result.orcid_id + "/works");
+                                    ORCIDWorks works = JsonConvert.DeserializeObject<ORCIDWorks>(jsonRespuestaOrcidWorks);
+                                    HashSet<string> worksTitles = new HashSet<string>();
+                                    if (works.group != null)
                                     {
-                                        if (group.work_summary != null)
+                                        foreach (ORCIDWorks.Group group in works.group)
                                         {
-                                            foreach (ORCIDWorks.Group.WorkSummary workSummary in group.work_summary)
+                                            if (group.work_summary != null)
                                             {
-                                                if (workSummary.title != null && workSummary.title.title2 != null && workSummary.title.title2.value != null)
+                                                foreach (ORCIDWorks.Group.WorkSummary workSummary in group.work_summary)
                                                 {
-                                                    worksTitles.Add(workSummary.title.title2.value);
+                                                    if (workSummary.title != null && workSummary.title.title2 != null && workSummary.title.title2.value != null)
+                                                    {
+                                                        worksTitles.Add(workSummary.title.title2.value);
+                                                    }
                                                 }
                                             }
                                         }
                                     }
+                                    foreach (string workTitle in worksTitles)
+                                    {
+                                        IUriNode subjectWork = orcidGraph.CreateUriNode(UriFactory.Create("http://orcid.com/Work/" + Guid.NewGuid()));
+
+                                        IUriNode titleProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#title"));
+                                        ILiteralNode nameTitle = orcidGraph.CreateLiteralNode(workTitle, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                        orcidGraph.Assert(new Triple(subjectWork, titleProperty, nameTitle));
+
+                                        IBlankNode subjectAuthorList = orcidGraph.CreateBlankNode();
+                                        IUriNode rdftypeAuthorList = orcidGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq"));
+                                        orcidGraph.Assert(new Triple(subjectAuthorList, rdftypeProperty, rdftypeAuthorList));
+
+                                        IUriNode authorListProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#authorList"));
+                                        orcidGraph.Assert(new Triple(subjectWork, authorListProperty, subjectAuthorList));
+
+                                        IUriNode firstAuthorProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#_1"));
+                                        orcidGraph.Assert(new Triple(subjectAuthorList, firstAuthorProperty, subjectPerson));
+
+                                        IUriNode rdftypeDocument = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#Document"));
+                                        orcidGraph.Assert(new Triple(subjectWork, rdftypeProperty, rdftypeDocument));
+                                    }
                                 }
-                                foreach (string workTitle in worksTitles)
+                            }
+
+
+                            //Obtenemos los datos del grafo de ORCID
+                            RohGraph dataInferenceGraphORCID;
+                            Dictionary<string, HashSet<string>> entitiesRdfTypesORCID;
+                            Dictionary<string, string> entitiesRdfTypeORCID;
+                            Dictionary<string, List<DisambiguationData>> disambiguationDataORCID;
+                            PrepareData(orcidGraph, pReasoner, out dataInferenceGraphORCID, out entitiesRdfTypesORCID, out entitiesRdfTypeORCID, out disambiguationDataORCID, false);
+
+                            Dictionary<string, string> aux = new Dictionary<string, string>();
+                            Dictionary<string, Dictionary<string, float>> listaEntidadesReconciliadasDudosas;
+                            ReconciliateData(ref aux, out listaEntidadesReconciliadasDudosas, entitiesRdfTypeRDF, disambiguationDataRDF, entitiesRdfTypeORCID, disambiguationDataORCID, ref pDataGraph, true);
+
+                            if (listaEntidadesReconciliadasDudosas.ContainsKey(personID))
+                            {
+                                //Candidatos con un 1 de probabilidad
+                                List<string> canditosSeguros = listaEntidadesReconciliadasDudosas[personID].Where(x => x.Value == 1).ToList().Select(x => x.Key).ToList();
+                                //Candidatos que superan el umbral máximo (excluyendo los anteriores)
+                                List<string> canditosUmbralMaximo = listaEntidadesReconciliadasDudosas[personID].Where(x => x.Value >= mMaxScore).ToList().Select(x => x.Key).ToList().Except(canditosSeguros).ToList();
+
+                                string personIDORCIDGraph = "";
+                                if (canditosSeguros.Count == 1)
                                 {
-                                    IUriNode subjectWork = orcidGraph.CreateUriNode(UriFactory.Create("http://orcid.com/Work/" + Guid.NewGuid()));
-
-                                    IUriNode titleProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#title"));
-                                    ILiteralNode nameTitle = orcidGraph.CreateLiteralNode(workTitle, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                                    orcidGraph.Assert(new Triple(subjectWork, titleProperty, nameTitle));
-
-                                    IBlankNode subjectAuthorList = orcidGraph.CreateBlankNode();
-                                    IUriNode rdftypeAuthorList = orcidGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq"));
-                                    orcidGraph.Assert(new Triple(subjectAuthorList, rdftypeProperty, rdftypeAuthorList));
-
-                                    IUriNode authorListProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#authorList"));
-                                    orcidGraph.Assert(new Triple(subjectWork, authorListProperty, subjectAuthorList));
-
-                                    IUriNode firstAuthorProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#_1"));
-                                    orcidGraph.Assert(new Triple(subjectAuthorList, firstAuthorProperty, subjectPerson));
-
-                                    IUriNode rdftypeDocument = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#Document"));
-                                    orcidGraph.Assert(new Triple(subjectWork, rdftypeProperty, rdftypeDocument));
+                                    personIDORCIDGraph = canditosSeguros[0];
                                 }
-                            }
-                        }
-
-                        //Obtenemos los datos del grafo de ORCID
-                        RohGraph dataInferenceGraphORCID;
-                        Dictionary<string, HashSet<string>> entitiesRdfTypesORCID;
-                        Dictionary<string, string> entitiesRdfTypeORCID;
-                        Dictionary<string, List<DisambiguationData>> disambiguationDataORCID;
-                        PrepareData(orcidGraph, pReasoner, out dataInferenceGraphORCID, out entitiesRdfTypesORCID, out entitiesRdfTypeORCID, out disambiguationDataORCID, false);
-
-                        Dictionary<string, string> aux = new Dictionary<string, string>();
-                        Dictionary<string, Dictionary<string, float>> listaEntidadesReconciliadasDudosas;
-                        ReconciliateData(ref aux, out listaEntidadesReconciliadasDudosas, entitiesRdfTypeRDF, disambiguationDataRDF, entitiesRdfTypeORCID, disambiguationDataORCID, ref pDataGraph, true);
-
-                        if (listaEntidadesReconciliadasDudosas.ContainsKey(personID))
-                        {
-                            //Candidatos con un 1 de probabilidad
-                            List<string> canditosSeguros = listaEntidadesReconciliadasDudosas[personID].Where(x => x.Value == 1).ToList().Select(x => x.Key).ToList();
-                            //Candidatos que superan el umbral máximo (excluyendo los anteriores)
-                            List<string> canditosUmbralMaximo = listaEntidadesReconciliadasDudosas[personID].Where(x => x.Value >= mMaxScore).ToList().Select(x => x.Key).ToList().Except(canditosSeguros).ToList();
-
-                            string personIDORCIDGraph = "";
-                            if (canditosSeguros.Count == 1)
-                            {
-                                personIDORCIDGraph = canditosSeguros[0];
-                            }
-                            else if (canditosUmbralMaximo.Count == 1)
-                            {
-                                personIDORCIDGraph = canditosUmbralMaximo[0];
-                            }
-                            if (!string.IsNullOrEmpty(personIDORCIDGraph))
-                            {
-                                string consultaORCIDGraph = @$"select ?orcid ?researcherid ?scopusid
+                                else if (canditosUmbralMaximo.Count == 1)
+                                {
+                                    personIDORCIDGraph = canditosUmbralMaximo[0];
+                                }
+                                if (!string.IsNullOrEmpty(personIDORCIDGraph))
+                                {
+                                    string consultaORCIDGraph = @$"select ?orcid ?researcherid ?scopusid
                                 where
                                 {{
                                     ?s a <http://purl.org/roh/mirror/foaf#Person>. 
@@ -2278,44 +2338,54 @@ namespace API_DISCOVER.Models.Utility
                                     OPTIONAL{{?s <http://purl.org/roh/mirror/vivo#researcherId> ?researcherid}}
                                     OPTIONAL{{?s <http://purl.org/roh/mirror/vivo#scopusId> ?scopusid}}
                                     Filter(?s = <" + personIDORCIDGraph + ">)" +
-                                    "}";
-                                SparqlResultSet sparqlResultSetORCIDGraph = (SparqlResultSet)orcidGraph.ExecuteQuery(consultaORCIDGraph);
-                                foreach (SparqlResult sparqlResult in sparqlResultSetORCIDGraph.Results)
-                                {
-                                    IUriNode s = pDataGraph.CreateUriNode(UriFactory.Create(personID));
-                                    if (sparqlResult.HasValue("orcid"))
+                                        "}";
+                                    SparqlResultSet sparqlResultSetORCIDGraph = (SparqlResultSet)orcidGraph.ExecuteQuery(consultaORCIDGraph);
+                                    foreach (SparqlResult sparqlResult in sparqlResultSetORCIDGraph.Results)
                                     {
+                                        IUriNode s = pDataGraph.CreateUriNode(UriFactory.Create(personID));
+                                        if (sparqlResult.HasValue("orcid"))
+                                        {
 
-                                        IUriNode p = pDataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
-                                        ILiteralNode o = pDataGraph.CreateLiteralNode(((LiteralNode)sparqlResult["orcid"]).Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                                        pDataGraph.Assert(new Triple(s, p, o));
-                                        if (!identifiersDiscover.ContainsKey(personID))
-                                        {
-                                            identifiersDiscover.Add(personID, new Dictionary<string, string>());
+                                            IUriNode p = pDataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
+                                            ILiteralNode o = pDataGraph.CreateLiteralNode(((LiteralNode)sparqlResult["orcid"]).Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                            pDataGraph.Assert(new Triple(s, p, o));
+                                            if (!identifiersDiscover.ContainsKey(personID))
+                                            {
+                                                identifiersDiscover.Add(personID, new Dictionary<string, string>());
+                                            }
+                                            if (!identifiersDiscover[personID].ContainsKey("http://purl.org/roh#ORCID"))
+                                            {
+                                                identifiersDiscover[personID].Add("http://purl.org/roh#ORCID", ((LiteralNode)sparqlResult["orcid"]).Value);
+                                            }
                                         }
-                                        identifiersDiscover[personID].Add("http://purl.org/roh#ORCID", ((LiteralNode)sparqlResult["orcid"]).Value);
-                                    }
-                                    if (sparqlResult.HasValue("researcherid"))
-                                    {
-                                        IUriNode p = pDataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#researcherId"));
-                                        ILiteralNode o = pDataGraph.CreateLiteralNode(((LiteralNode)sparqlResult["researcherid"]).Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                                        pDataGraph.Assert(new Triple(s, p, o));
-                                        if (!identifiersDiscover.ContainsKey(personID))
+                                        if (sparqlResult.HasValue("researcherid"))
                                         {
-                                            identifiersDiscover.Add(personID, new Dictionary<string, string>());
+                                            IUriNode p = pDataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#researcherId"));
+                                            ILiteralNode o = pDataGraph.CreateLiteralNode(((LiteralNode)sparqlResult["researcherid"]).Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                            pDataGraph.Assert(new Triple(s, p, o));
+                                            if (!identifiersDiscover.ContainsKey(personID))
+                                            {
+                                                identifiersDiscover.Add(personID, new Dictionary<string, string>());
+                                            }
+                                            if (!identifiersDiscover[personID].ContainsKey("http://purl.org/roh/mirror/vivo#researcherId"))
+                                            {
+                                                identifiersDiscover[personID].Add("http://purl.org/roh/mirror/vivo#researcherId", ((LiteralNode)sparqlResult["researcherid"]).Value);
+                                            }
                                         }
-                                        identifiersDiscover[personID].Add("http://purl.org/roh/mirror/vivo#researcherId", ((LiteralNode)sparqlResult["researcherid"]).Value);
-                                    }
-                                    if (sparqlResult.HasValue("scopusid"))
-                                    {
-                                        IUriNode p = pDataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#scopusId"));
-                                        ILiteralNode o = pDataGraph.CreateLiteralNode(((LiteralNode)sparqlResult["scopusid"]).Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                                        pDataGraph.Assert(new Triple(s, p, o));
-                                        if (!identifiersDiscover.ContainsKey(personID))
+                                        if (sparqlResult.HasValue("scopusid"))
                                         {
-                                            identifiersDiscover.Add(personID, new Dictionary<string, string>());
+                                            IUriNode p = pDataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#scopusId"));
+                                            ILiteralNode o = pDataGraph.CreateLiteralNode(((LiteralNode)sparqlResult["scopusid"]).Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                            pDataGraph.Assert(new Triple(s, p, o));
+                                            if (!identifiersDiscover.ContainsKey(personID))
+                                            {
+                                                identifiersDiscover.Add(personID, new Dictionary<string, string>());
+                                            }
+                                            if (!identifiersDiscover[personID].ContainsKey("http://purl.org/roh/mirror/vivo#scopusId"))
+                                            {
+                                                identifiersDiscover[personID].Add("http://purl.org/roh/mirror/vivo#scopusId", ((LiteralNode)sparqlResult["scopusid"]).Value);
+                                            }
                                         }
-                                        identifiersDiscover[personID].Add("http://purl.org/roh/mirror/vivo#scopusId", ((LiteralNode)sparqlResult["scopusid"]).Value);
                                     }
                                 }
                             }

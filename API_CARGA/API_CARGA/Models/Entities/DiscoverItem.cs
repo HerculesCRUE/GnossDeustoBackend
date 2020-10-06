@@ -113,7 +113,6 @@ namespace API_CARGA.Models.Entities
         /// <summary>
         /// RDF original antes del descbrimiento
         /// </summary>
-        [Required]
         public string Rdf { get; set; }
 
         /// <summary>
@@ -130,11 +129,6 @@ namespace API_CARGA.Models.Entities
         /// Identificador de la tarea de la que procede (en caso de que proceda de una tarea)
         /// </summary>
         public string JobID { get; set; }
-
-        /// <summary>
-        /// Fecha de creación de la tarea (en caso de que proceda de una tarea)
-        /// </summary>
-        public string JobCreatedDate { get; set; }
 
         /// <summary>
         /// Indica si hay que publicar el resultado o no 

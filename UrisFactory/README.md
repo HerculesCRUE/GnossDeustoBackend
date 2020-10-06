@@ -70,7 +70,8 @@ Este Api contiene dos controladores.
 			    },  
 			    "resourcesClass": {  
 				    "resourceClass": "Example",
-				    "labelResourceClass": "example",
+					"RdfType": "ExampleRdfType",
+					"labelResourceClass": "example",
 				    "resourceURI": "uriExampleStructure"
 			    }
 		    }
@@ -80,6 +81,24 @@ Este Api contiene dos controladores.
 -------------------------
 Este api esta protegida mediante tokens, por ello para poder usar la interfaz swagger hay que obtener un token, el cual se puede obtener desde https://herc-as-front-desa.atica.um.es/carga-web/Token
 	
+## Configuración en el appsettings.json	
+
+    {
+      "Logging": {
+          "LogLevel": {
+                "Default": "Information",
+                 "Microsoft": "Warning",
+                  "Microsoft.Hosting.Lifetime": "Information"
+                    }
+              },
+        "Authority": "http://localhost:56306",
+         "Scope": "apiUrisFactory",
+          "AllowedHosts": "*"
+    }
+- Scope: Limitación de acceso al api de urisFactory
+
+ Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/UrisFactory/UrisAutoGenerator/appsettings.json
+
 ## Dependencias
 
  - **IdentityServer4**: versión 3.1.2
@@ -242,7 +261,8 @@ El Esquema de URIs tiene que declararse en un formato informático que pueda ser
     			"resourcesClasses": [ 
     				{
     					"resourceClass": {se corresponde con una entidad de ROH},
-    					"labelResourceClass": {opcional, etiqueta de la entidad},
+						"RdfType": "Rdf type al que pertenece en la ontología",
+						"labelResourceClass": {opcional, etiqueta de la entidad},
     					"resourceURI": {nombre de la estructura de URI que aplica}
     				}
     			]
@@ -265,6 +285,7 @@ Las partes del formato anterior son:
 	 - **finalCharacter**. Indica si el componente lleva una barra para la composición de un URI correcto.
  - **resourceClasses**. Tendrá tantos elementos como entidades de ROH necesiten disponer de un URI a través de la Factoría de URIs. Los atributos por los que se declara como se compone el URI para cada entidad son:
 	 - **resourceClass**. Identificador del tipo de entidad.
+	 - **RdfType**. Rdf type al que pertenece en la ontología.
 	 - **labelResourceClass**. Opcional, se declara si se desea que la URL tenga otro texto, habitualmente por requisitos de idioma.
 	 - **resourceURI**. Identifica el elemento uriResourceStructure que se usará para componer el URI de la entidad.
 	 
@@ -357,12 +378,14 @@ Se indica a continuación un ejemplo:
 		    "resourcesClasses": [
 			    {
 				    "resourceClass": "researcher",
-				    "labelResourceClass": "investigador",
+					"RdfType": "researcherType",
+					"labelResourceClass": "investigador",
 				    "resourceURI": "uriResourceStructure"
 			    },
 			    {
 				    "resourceClass": "publication",
-				    "labelResourceClass": "publicacion",
+					"RdfType": "publicationType",
+					"labelResourceClass": "publicacion",
 				    "resourceURI": "uriPublicationStructure"
 			    }
 		    ]

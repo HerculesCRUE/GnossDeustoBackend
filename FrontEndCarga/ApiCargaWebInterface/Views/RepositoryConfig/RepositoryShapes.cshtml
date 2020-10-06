@@ -1,0 +1,102 @@
+﻿@model ApiCargaWebInterface.ViewModels.RepositoryConfigViewModel
+@{
+    ViewData["Title"] = "Repositorios";
+    ViewData["BodyClass"] = "fichaRecurso";
+    var modeloShape = new ApiCargaWebInterface.ViewModels.ShapeConfigCreateModel();
+    modeloShape.RepositoryID = Model.RepositoryConfigID;
+}
+    <div class="row">
+        <div class="col col-12 col-lg-12 col-contenido">
+            <div class="wrapCol">
+                <div class="contenido">
+                    <div class="grupo grupo-programacion">
+                        <h2>Shapes del repositorio <a href="@Url.Action("Details", new {  id=Model.RepositoryConfigID  })"> @Model.Name </a></h2>
+                        <a href="@Url.Action("Create", "ShapeConfig", modeloShape)" class="btn btn-programacion">Crear nuevo Shape</a>
+                        @if (Model != null && Model.ShapeConfig.Count() > 0)
+                        {
+                            int i = 0;
+                            <div class="items tabla">
+                                <div class="cabecera">
+                                    <div class="columna">
+                                        <p>Nombre</p>
+                                    </div>
+                                    <div class="columna acciones">
+                                        <p>Acciones</p>
+                                    </div>
+                                </div>
+                                @foreach (var shape in Model.ShapeConfig)
+                                {
+                                    string idModal = $"modalEliminarShape{i}";
+                                    string target = $"#{idModal}";
+                                    i++;
+                                    <div class="fila">
+                                        <div class="columna principal">
+                                            <p>@shape.Name</p>
+                                        </div>
+                                        <div class="columna acciones">
+                                            <ul>
+                                                <li>
+                                                    <a href="@Url.Action("Details", "ShapeConfig", new {  id=shape.ShapeConfigID  })" class="ver">
+                                                        <i class="material-icons">remove_red_eye</i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Edit", "ShapeConfig", new {  id=shape.ShapeConfigID  })" class="editar">
+                                                        <i class="material-icons">mode_edit</i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript: void(0);" class="borrar" data-toggle="modal" data-target="@target">
+                                                        <i class="material-icons">delete</i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade top-modal eliminar" id="@idModal" tabindex="-1" role="dialog" aria-labelledby="" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Eliminar</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div style="display: block;" id="despAccionRec">
+                                                        <div style="display: block;" class="stateShowForm" id="panels">
+                                                            <div class="loading" id="loading" style="display: none;">
+                                                                <p>Cargando formulario, un momento por favor</p>
+                                                            </div>
+                                                            <div id="menssages" style="display: none;">
+                                                                <div class="ok"></div>
+                                                                <div class="ko"></div>
+                                                            </div>
+                                                            <div class="box form activeForm" id="action" style="display: block;">
+                                                                <div>
+                                                                    <fieldset>
+                                                                        <legend>¿Está seguro que quiere eliminar la validación @shape.Name?</legend>
+                                                                        <div id="eliminar">
+                                                                            <p>
+                                                                                <a href="@Url.Action("Delete", "ShapeConfig", new {  id=shape.ShapeConfigID  })"><input type="text" class="button btn-principal" value="Eliminar"></a>
+                                                                                @*<input type="button" value="Eliminar" class="btn-principal">*@
+                                                                                <input type="button" value="Cancelar" data-dismiss="modal">
+                                                                            </p>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

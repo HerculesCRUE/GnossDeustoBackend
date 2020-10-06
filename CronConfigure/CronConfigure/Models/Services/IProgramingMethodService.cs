@@ -17,8 +17,8 @@ namespace CronConfigure.Models.Services
         ///</summary>
         ///<param name="idRepositoryGuid">identificador del repositorio a sincronizar</param>
         ///<param name="fecha">Fecha desde la que se quiere sincronizar</param>
-        /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones
-        /// <param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
+        /// <param name="pSet">tipo del objeto, usado para filtrar por agrupaciones</param>
+        /// <param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
         public string PublishRepositories(Guid idRepositoryGuid, PerformContext context, DateTime? fecha = null, string pSet = null, string codigoObjeto = null);
         ///<summary>
         ///Método para programar una sincronización recurrente
@@ -27,8 +27,8 @@ namespace CronConfigure.Models.Services
         ///<param name="nombreCron">Nombre de la tarea recurrente</param>
         ///<param name="cronExpression">expresión de recurrencia</param>
         ///<param name="fecha">Fecha desde la que se quiere sincronizar</param>
-        ///<param name="set">tipo del objeto, usado para filtrar por agrupaciones
-        ///<param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
+        ///<param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
+        ///<param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
         public static void ProgramRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime? fecha = null, string set = null, string codigoObjeto = null) { }
         ///<summary>
         ///Método para programar una tarea
@@ -36,8 +36,8 @@ namespace CronConfigure.Models.Services
         ///<param name="idRepository">identificador del repositorio a sincronizar</param>
         ///<param name="fechaInicio">Fecha de la ejecución</param>
         ///<param name="fecha">Fecha desde la que se quiere sincronizar</param>
-        ///<param name="set">tipo del objeto, usado para filtrar por agrupaciones
-        ///<param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
+        ///<param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
+        ///<param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
         public string ProgramPublishRepositoryJob(Guid idRepository, DateTime fechaInicio, DateTime? fecha = null, string set = null, string codigoObjeto = null);
         ///<summary>
         ///Método para programar una tarea con una sincronización recurrente
@@ -47,8 +47,8 @@ namespace CronConfigure.Models.Services
         ///<param name="cronExpression">expresión de recurrencia</param>
         ///<param name="fechaInicio">Fecha en la que se ejecutará la tarea y se activará la tarea recurrente</param>
         ///<param name="fecha">Fecha desde la que se quiere sincronizar</param>
-        ///<param name="set">tipo del objeto, usado para filtrar por agrupaciones
-        ///<param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
+        ///<param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
+        ///<param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
         public void ProgramPublishRepositoryRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime fechaInicio, DateTime? fecha = null, string set = null, string codigoObjeto = null);
 
 

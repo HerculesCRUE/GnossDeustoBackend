@@ -6,7 +6,7 @@
     <link runat="server" rel="icon" type="image/x-icon" href="~/favicon.ico" />
     <title>@ViewData["Title"] - Hércules</title>
     <!--Default-->
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     <link rel="stylesheet" href="~/css/site.css" />
     <!--Fuentes-->
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&amp;display=swap" rel="stylesheet">
@@ -57,6 +57,9 @@
                         </li>
                         <li>
                             <a asp-area="" asp-controller="CheckSystem" asp-action="Index">Comprobación del sistema</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="CMS" asp-action="Index">administración de páginas</a>
                         </li>
                     </ul>
                 </div>

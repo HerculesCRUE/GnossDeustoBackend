@@ -68,6 +68,7 @@ namespace ApiCargaWebInterface.Models.Services
             string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeOAIPMH()}&client_id={_configToken.GetClientIdOAIPMH()}&client_secret={_configToken.GetClientSecretOAIPMH()}";
             return CallTokenIdentity(stringData);
         }
+
         /// <summary>
         /// Llama al api de gestión de tokens
         /// </summary>

@@ -36,6 +36,15 @@ namespace ApiCargaWebInterface.Controllers
             return View();
         }
         /// <summary>
+        /// Devuelve la página de los esquemas
+        /// </summary>
+        /// <returns></returns>
+        [Route("[Controller]/SchemaConfig")]
+        public IActionResult Schema()
+        {
+            return View();
+        }
+        /// <summary>
         /// Obtiene una uri
         /// </summary>
         /// <param name="resourceClass">Resource class o rdfType</param>

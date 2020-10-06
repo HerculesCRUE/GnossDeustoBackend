@@ -1,12 +1,21 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
+| Fecha         | 01/10/2020                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|A20200203 Hércules ASIO Especificación de funciones de Carga| 
+|Descripción|Especificación de funciones de Carga|
+|Versión|0.2|
+|Módulo|API CARGA|
+|Tipo|Especificación|
+|Cambios de la Versión|Actualizada la sección [ARQUITECTURA DE LOS PROCESOS DE CARGA](#arquitectura-de-los-procesos-de-carga)<br/>Modificada la sección [POST etl​/data-publish](#post-etldata-publish)<br/>Añadida la sección [POST etl​/data-validate-personalized](#post-etldata-validate-personalized)<br/>Añadida la sección [POST etl​/load-ontolgy](#post-etlload-ontology)<br/>Añadida la sección [GET etl​/data-discover-state/{identifier}](#get-etldata-discover-stateidentifier)<br/>Añadida la sección [GET etl​/GetOntology](#get-etlgetontology)<br/>|
+
 # Hércules Backend ASIO. Especificación de las funciones de carga
 
 [1 INTRODUCCIÓN](#introducción)
 
 [2 ARQUITECTURA DE LOS PROCESOS DE CARGA](#arquitectura-de-los-procesos-de-carga)
 
-[3 OAI-PMH. Implementación Hércules](#oai-pmh.-implementación-hércules)
+[3 OAI-PMH. Implementación Hércules](#oai-pmh-implementación-hércules)
 
 [3.1 Delete records](#delete-records)
 
@@ -20,27 +29,35 @@
 
 [4 API de Carga](#api-de-carga)
 
-[4.1 API de Carga. ETL](#api-de-carga.-etl)
+[4.1 API de Carga. ETL](#api-de-carga-etl)
 
 [4.1.1 POST etl​/data-publish](#post-etldata-publish)
 
 [4.1.2 POST etl​/data-validate](#post-etldata-validate)
 
-[4.1.3 POST etl​/data-discover](#post-etldata-discover)
+[4.1.3 POST etl​/data-validate-personalized](#post-etldata-validate-personalized)
 
-[4.1.4 GET etl​/GetRecord/{repositoryIdentifier}](#get-etlgetrecordrepositoryidentifier)
+[4.1.4 POST etl​/load-ontolgy](#post-etlload-ontolgy)
 
-[4.1.5 GET etl​/Identify/{repositoryIdentifier}](#get-etlidentifyrepositoryidentifier)
+[4.1.5 POST etl​/data-discover](#post-etldata-discover)
 
-[4.1.6 GET etl​/ListIdentifiers/{repositoryIdentifier}](#get-etllistidentifiersrepositoryidentifier)
+[4.1.6 GET etl​/data-discover-state/{identifier}](#get-etldata-discover-stateidentifier)
 
-[4.1.7 GET etl​/ListMetadataFormats/{repositoryIdentifier}](#get-etllistmetadataformatsrepositoryidentifier)
+[4.1.7 GET etl​/GetRecord/{repositoryIdentifier}](#get-etlgetrecordrepositoryidentifier)
 
-[4.1.8 GET etl​/ListRecords/{repositoryIdentifier}](#get-etllistrecordsrepositoryidentifier)
+[4.1.8 GET etl​/Identify/{repositoryIdentifier}](#get-etlidentifyrepositoryidentifier)
 
-[4.1.9 GET etl​/ListSets/{repositoryIdentifier}](#get-etllistsetsrepositoryidentifier)
+[4.1.9 GET etl​/ListIdentifiers/{repositoryIdentifier}](#get-etllistidentifiersrepositoryidentifier)
 
-[4.2 API de Carga. ETL-CONFIG](#api-de-carga.-repository)
+[4.1.10 GET etl​/ListMetadataFormats/{repositoryIdentifier}](#get-etllistmetadataformatsrepositoryidentifier)
+
+[4.1.11 GET etl​/ListRecords/{repositoryIdentifier}](#get-etllistrecordsrepositoryidentifier)
+
+[4.1.12 GET etl​/ListSets/{repositoryIdentifier}](#get-etllistsetsrepositoryidentifier)
+
+[4.1.13 GET etl​/GetOntology](#get-etlgetontology)
+
+[4.2 API de Carga. ETL-CONFIG](#api-de-carga-repository)
 
 [4.2.1 GET etl-config/​repository](#get-etl-configrepository)
 
@@ -52,11 +69,11 @@
 
 [4.2.5 PUT etl-config/​repository/{identifier}](#put-etl-configrepositoryidentifier)
 
-[4.3 API de Carga. SYNC](#api-de-carga.-sync)
+[4.3 API de Carga. SYNC](#api-de-carga-sync)
 
 [4.3.1 POST sync/execute ](#post-syncexecute)
 
-[4.4 API de Carga. VALIDATION](#api-de-carga.-validation)
+[4.4 API de Carga. VALIDATION](#api-de-carga-validation)
 
 [4.4.1 GET etl​-config/validation](#get-etl-configvalidation)
 
@@ -109,12 +126,14 @@ Este proveedor de datos será accedido por un API de Carga que, además de
 otras, contará con las funciones de *harvesting* o recolección de
 OAI-PMH.
 
-El resto de las funciones del API de Carga se encargan de las funciones
-de conversión, validación, descubrimiento y, finalmente, publicación en
-el RDF Store.
+El API de Carga se encargan de las funciones de conversión y validación; y
+envía a una cola los RDF sobre los que hay que aplicar el descubrimiento.
+
+El API de descubrimiento reconcilia, descubre enlaces y detecta equivalencias;
+y se encarga de enviar los triples definitivos hacia el RDF Store.
 
 Nuestra propuesta cuenta con un nodo central Unidata que recibirá y
-cargará los triples publicados en cada universidad. De esto se encargan
+cargará los triples publicados en cada universidad. De esto se encargarán
 el proceso Sincronizador de cada universidad y un API de Carga en
 Unidata que aceptará y consolidará los datos provenientes de las
 universidades.
@@ -244,18 +263,30 @@ para la extracción, transformación y carga de datos.
 
 ### POST etl​/data-publish
 
-Ejecuta el último paso del proceso de carga, por el que el RDF generado
-se almacena en el Triple Store. Permite cargar una fuente RDF
+Ejecuta el penúltimo paso del proceso de carga, por el que el RDF generado
+se encola en una cola de Rabbit MQ para que posteriormente el servicio de descubimiento
+lo procese y lo almacene en el Triple Store. Permite cargar una fuente RDF
 arbitraria.
 
 ### POST etl​/data-validate
 
 Valida un RDF mediante el shape SHACL configurado
 
+### POST etl​/data-validate-personalized
+
+Valida un RDF mediante el fichero de validación pasado
+
+### POST etl​/load-ontology
+
+Elimina la ontologia cargada y la reemplaza por la nueva
+
 ### POST etl​/data-discover
 
-Reconcilia entidades y descubre enlaces o equivalencias. Permite
-efectuar el descubrimiento en fuentes RDF arbitrarias.
+Aplica el descubrimiento sobre un RDF
+
+### GET etl​/data-discover-state/{identifier}
+
+Obtiene el estado de una tarea de descubrimiento
 
 ### GET etl​/GetRecord/{repositoryIdentifier}
 
@@ -297,6 +328,10 @@ Este método hace de PROXY entre el API y el proveedor OAI-PMH.
 
 Recuperar la estructura establecida de un repositorio en formato XML
 OAI-PMH, útil para la recolección selectiva.
+
+### GET etl​/GetOntology
+
+Devuelve la ontología cargada.
 
 API de Carga. REPOSITORY
 ------------------------

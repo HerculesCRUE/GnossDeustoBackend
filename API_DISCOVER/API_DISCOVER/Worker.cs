@@ -1,26 +1,14 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using API_DISCOVER.Models;
 using API_DISCOVER.Models.Entities;
 using API_DISCOVER.Models.Log;
 using API_DISCOVER.Models.Services;
-using API_DISCOVER.Models.Utility;
-using Microsoft.Extensions.Configuration;
+using API_DISCOVER.Utility;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using VDS.RDF;
-using VDS.RDF.Parsing;
-using VDS.RDF.Query;
-using VDS.RDF.Update;
 
 namespace API_DISCOVER
 {
@@ -68,39 +56,48 @@ namespace API_DISCOVER
 
         private bool ProcessItem(string item)
         {
-            DiscoverItem discoverItem = JsonConvert.DeserializeObject<DiscoverItem>(item);
+            DiscoverItem discoverItem = JsonConvert.DeserializeObject<DiscoverItem>(item);              
             try
             {
                 //Aplicamos el proceso de descubrimiento
                 DiscoverResult resultado = Discover.Init(discoverItem.Rdf, discoverItem.DissambiguationProcessed);
-                Discover.Process(discoverItem, resultado, _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>());
+                Discover.Process(discoverItem, resultado, 
+                    _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>(),
+                    _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallCronApiService>(),
+                    _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<ProcessDiscoverStateJobBDService>()
+                    );
             }
             catch (Exception ex)
             {
                 Log.Error(ex);
 
                 //Se ha producido un error al aplicar el descubrimiento
-                DiscoverItemBDService pDiscoverItemBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>();
+                //Modificamos los datos del DiscoverItem que ha fallado
+                DiscoverItemBDService discoverItemBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>();
+                DiscoverItem discoverItemBBDD = discoverItemBDService.GetDiscoverItemById(discoverItem.ID);
+                discoverItemBBDD.Status = DiscoverItem.DiscoverItemStatus.Error.ToString();
+                discoverItemBBDD.Error = $"{ex.Message}\n{ex.StackTrace}\n";
+                discoverItemBBDD.Rdf = discoverItem.Rdf;
+                discoverItemBBDD.DiscoverRdf = "";
+                discoverItemBBDD.DiscoverReport = "";
+                discoverItemBBDD.DissambiguationProblems = null;
+                discoverItemBDService.ModifyDiscoverItem(discoverItemBBDD);
 
-                DiscoverItem discoverItemBBDD = null;
-                if (discoverItem.ID != Guid.Empty)
+                if (!string.IsNullOrEmpty(discoverItem.JobID))
                 {
-                    discoverItemBBDD = pDiscoverItemBDService.GetDiscoverItemById(discoverItem.ID);
-                }
-                if (discoverItemBBDD != null)
-                {
-                    //Si existe el item en BBDD se actualiza
-                    discoverItemBBDD.Status = DiscoverItem.DiscoverItemStatus.Error.ToString();
-                    discoverItemBBDD.Error = $"{ex.Message}\n{ex.StackTrace}\n";
-                    pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBBDD);
-                }
-                else
-                {
-                    //Si no existe se crea
-                    discoverItemBBDD = discoverItem;
-                    discoverItemBBDD.Status = DiscoverItem.DiscoverItemStatus.Error.ToString();
-                    discoverItemBBDD.Error = $"{ex.Message}\n{ex.StackTrace}\n";
-                    pDiscoverItemBDService.AddDiscoverItem(discoverItemBBDD);
+                    //Si viene de una tarea actualizamos su estado de descubrimiento
+                    ProcessDiscoverStateJobBDService processDiscoverStateJobBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<ProcessDiscoverStateJobBDService>();
+                    ProcessDiscoverStateJob processDiscoverStateJob = processDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(discoverItem.JobID);
+                    if (processDiscoverStateJob != null)
+                    {
+                        processDiscoverStateJob.State = "Error";
+                        processDiscoverStateJobBDService.ModifyProcessDiscoverStateJob(processDiscoverStateJob);
+                    }
+                    else
+                    {
+                        processDiscoverStateJob = new ProcessDiscoverStateJob() { State = "Error", JobId = discoverItem.JobID };
+                        processDiscoverStateJobBDService.AddProcessDiscoverStateJob(processDiscoverStateJob);
+                    }
                 }
             }
             return true;

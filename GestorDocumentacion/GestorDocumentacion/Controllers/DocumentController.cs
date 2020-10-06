@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GestorDocumentacion.Models.Entities;
 using GestorDocumentacion.Models.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,7 @@ namespace GestorDocumentacion.Controllers
     ///</summary>
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class DocumentController : ControllerBase
     {
         private IDocumentsOperationsService _documentsOperationsService;

@@ -1,5 +1,14 @@
 ![](..//Docs/media/CabeceraDocumentosMD.png)
 
+| Fecha         | 01/10/2020                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|API CARGA readme| 
+|Descripción|Manual del servicio API CARGA|
+|Versión|0.2|
+|Módulo|API CARGA|
+|Tipo|Manual|
+|Cambios de la Versión|Añadida la sección [Obtención del Token](#obtención-del-token)<br/>Añadida la sección [Configuración en el appsettings.json](#configuración-en-el-appsettingsjson)|
+
 ## Sobre API CARGA
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
 
@@ -41,8 +50,85 @@ Los datos cargados se pueden consultar en una versión preliminar del servidor L
 
 http://graph.um.es/res/project/RAYD-A-2002-6237
 
+## Configuración en el appsettings.json
 
+    { 
+		"ConnectionStrings": {
+			"PostgreConnectionmigration": ""
+		},
+		"Logging": {
+			"LogLevel": {
+				"Default": "Information",
+				"Microsoft": "Warning",
+				"Microsoft.Hosting.Lifetime": "Information"
+			}
+		},
+		"AllowedHosts": "*",
+		"Urls": "http://0.0.0.0:5100",
+		"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
+		"Sparql": {
+			"Graph": "http://data.um.es/graph/um_cvn",
+			"Endpoint": "http://155.54.239.204:8890/sparql"
+			"QueryParam": "query",
+			"GraphRoh": "http://graph.um.es/graph/research/roh",
+			"GraphRohes": "http://graph.um.es/graph/research/rohes",
+			"GraphRohum": "http://graph.um.es/graph/research/rohum"
+		},
+		"RabbitMQ": {
+			"usernameRabbitMq": "user",
+			"passwordRabbitMq": "pass",
+			"hostnameRabbitMq": "hercules",
+			"uriRabbitMq": "amqp://user:pass@ip:puerto/hercules",
+			"virtualhostRabbitMq": "hercules"
+		},
+		"RabbitQueueName": "HerculesDemoQueue",
+		"Authority": "http://localhost:56306",
+		"ScopeCarga": "apiCarga",
+		"AuthorityGetToken": "http://localhost:56306/connect/token",
+		"GrantType": "client_credentials",
+		"ClientId": "carga",
+		"ClientSecret": "secret",
+		"ScopeOAIPMH": "apiOAIPMH",
+		"ClientIdOAIPMH": "OAIPMH",
+		"ClientSecretOAIPMH": "secretOAIPMH",
+		"ConfigUrlUnidata": "https://localhost:44354/",
+		"ScopeUnidata": "apiUnidata",
+		"ClientIdUnidata": "unidata",
+		"ClientSecretUnidata": "secretUnidata"
+    }
+ - PostgreConnectionmigration: Cadena de conexión a la base de datos PostgreSQL
+ - LogLevel.Default: Nivel de error por defecto
+ - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
+ - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
+ - Urls: Url en la que se va a lanzar la aplicación
+ - ConfigUrl: URL donde está lanzada esta aplicación
+ - Sparql.Graph: Grafo en el que se van a almacenar los triples
+ - Sparql.Endpoint: URL del Endpoint Sparql
+ - Sparql.QueryParam: Parámetro para la query en el Endpoint Sparql
+ - Sparql.GraphRoh: gráfo de la ontologia roh
+ - Sparql.GraphRohes: gráfo de la ontologia rohes
+ - Sparql.GraphRohum: gráfo de la ontologia rohum
+ - RabbitMQ.usernameRabbitMq: usuario para acceder a Rabbit
+ - RabbitMQ.passwordRabbitMq: contraseña del usuario para acceder a Rabbit
+ - RabbitMQ.hostnameRabbitMq: host de Rabbit
+ - RabbitMQ.uriRabbitMq: cadena de conexión para acceder a Rabbit
+ - RabbitMQ.virtualhostRabbitMq: host virtual configurado en Rabbit
+ - RabbitQueueName: Nombre de la cola de Rabbit
+ - Authority: Url de la servicio de identidades
+ - ScopeCarga: Limitación de acceso al api de carga
+ - AuthorityGetToken: Endpoint para la llamada de obtención del token
+ - GrantType: Tipo de concesión de Oauth
+ - ClientId: Id de cliente del api del API CARGA
+ - ClientSecret: "clave" de acceso del api de carga
+ - ScopeOAIPMH: Limitación de acceso al api de OAIPMH
+ - ClientIdOAIPMH: Id de cliente del api de OAIPMH
+ - ClientSecretOAIPMH: "clave" de acceso del api de OAIPMH
+ - ConfigUrlUnidata: URL donde está lanzada la aplicación de unidata
+ - ScopeUnidata: Limitación de acceso al api de unidata
+ - ClientIdUnidata: Id de cliente del api de unidata
+ - ClientSecretUnidata: "clave" de acceso del api de unidata
 
+Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_CARGA/API_CARGA/appsettings.json
 ## Dependencias
 
 - **dotNetRDF**: versión 2.5.1

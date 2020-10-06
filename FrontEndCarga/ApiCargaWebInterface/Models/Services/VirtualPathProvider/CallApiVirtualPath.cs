@@ -23,7 +23,19 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
             _serviceApi = serviceApi;
             if (tokenService != null)
             {
-                _token = tokenService.CallTokenApiDocumentacion();
+                bool tokenCargado = false;
+                while (!tokenCargado) 
+                {
+                    try
+                    {
+                        _token = tokenService.CallTokenApiDocumentacion();
+                        tokenCargado = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        tokenCargado = false;
+                    }
+                }
             }
         }
 
@@ -48,7 +60,15 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
             {
                 method += $"&pageId={pageId}";
             }
-            _serviceApi.CallPostApi(_serviceUrl.GetUrlDocumentacion(), method, pageHtml, _token, true, "html_page");
+            if (pageHtml != null)
+            {
+                _serviceApi.CallPostApi(_serviceUrl.GetUrlDocumentacion(), method, pageHtml, _token, true, "html_page");
+            }
+            else
+            {
+                _serviceApi.CallPostApi(_serviceUrl.GetUrlDocumentacion(), method, pageHtml, _token);
+            }
+            
         }
 
         public void DeletePage(Guid pageId)

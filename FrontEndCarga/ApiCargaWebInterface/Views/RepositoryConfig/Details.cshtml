@@ -27,78 +27,103 @@
 }
 
 
-    <div class="row">
-        <div class="col col-12 col-lg-12 col-contenido">
-            <div class="wrapCol">
-                <div class="header-resource">
-                    <div class="h1-container">
-                        <h1>@Model.Name</h1>
-                        <div class="botones">
-                            <a href="@Url.Action("Index", "Publish", new {repository = Model.RepositoryConfigID })" class="btn btn-sincronizar">Publicación manual</a>
-                            <a href="@Url.Action("Syncro", "Job", new { repositoryId = Model.RepositoryConfigID })" class="btn btn-sincronizar">Sincronizar</a>
-                            <a href="@Url.Action("Edit", new {  id=Model.RepositoryConfigID  })" class="btn btn-editar">Editar</a>
-                            <a href="@Url.Action("Delete", new {  id=Model.RepositoryConfigID  })" class="btn btn-eliminar">Eliminar</a>
-                        </div>
-                        </div>
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <div class="header-resource">
+                <div class="h1-container">
+                    <h1>@Model.Name</h1>
+                    <div class="botones">
+                        <ul>
+                            <li>
+                                <a href="#" class="btn dropdown-toggle" role="button" id="dropdownPublicacion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Publicación manual</a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPublicacion" x-placement="bottom-end" style="position: absolute; transform: translate3d(-126px, 36px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                    <a href="@Url.Action("Index", "Publish", new {repository = Model.RepositoryConfigID })" class="dropdown-item">Obtención de RDFs</a>
+                                    <a href="@Url.Action("ValidarRdf", "Publish", new {repository = Model.RepositoryConfigID })" class="dropdown-item">Validación de RDF</a>
+                                    <a href="@Url.Action("PublicarRdf", "Publish", new {repository = Model.RepositoryConfigID })" class="dropdown-item">Publicación de RDF</a>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Syncro", "Job", new { repositoryId = Model.RepositoryConfigID })" class="btn btn-sincronizar">Sincronizar</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Edit", new {  id=Model.RepositoryConfigID  })" class="btn btn-editar">Editar</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Delete", new {  id=Model.RepositoryConfigID  })" class="btn btn-eliminar">Eliminar</a>
+                            </li>
+                        </ul>
+
                     </div>
-                <div class="contenido">
-                    <div class="grupo grupo-descripcion">
-                        <div class="identifier">
-                            <p class="titulo">Identifier</p>
-                            <p>@Model.RepositoryConfigID</p>
-                        </div>
-                        <div class="outh-token">
-                            <p class="titulo">Oauth token</p>
-                            <p>@Model.OauthToken</p>
-                        </div>
-                        <div class="outh-token">
-                            <p class="titulo">Url</p>
-                            <p>@Model.Url</p>
-                        </div>
-                        <div class="outh-token">
-                            <p class="titulo">Tareas exitosas</p>
-                            <p @clase>@Model.PorcentajeTareas %</p>
-                        </div>
-                        <hr />
+
+                </div>
+            </div>
+            <div class="contenido">
+                <div class="grupo grupo-descripcion">
+                    <div class="identifier">
+                        <p class="titulo">Identifier</p>
+                        <p>@Model.RepositoryConfigID</p>
+                    </div>
+                    <div class="outh-token">
+                        <p class="titulo">Oauth token</p>
+                        <p>@Model.OauthToken</p>
+                    </div>
+                    <div class="outh-token">
+                        <p class="titulo">Url</p>
+                        <p>@Model.Url</p>
+                    </div>
+                    <div class="outh-token">
+                        <p class="titulo">Tareas exitosas</p>
+                        <p @clase>@Model.PorcentajeTareas %</p>
+                    </div>
+                    <hr />
+                    @if (!string.IsNullOrEmpty(Model.LastJob))
+                    {
                         <div class="outh-token">
                             <p class="titulo">Última tarea ejecutada</p>
                             <p>@Model.LastJob</p>
                         </div>
-                        <div class="outh-token">
-                            <p class="titulo">Estado de la última tarea ejecutada</p>
-                            <p>@Model.LastState</p>
-                            @if (Model.LastState.Equals("Failed"))
-                            {
-                                <a href="@Url.Action("DetailsJob", "Job",new { id = Model.LastJob })">
-                                    <p class="text-danger">vea el error</p>
-                                </a>
-                            }
-                        </div>
-
+                        @if (!string.IsNullOrEmpty(Model.LastState))
+                        {
+                            <div class="outh-token">
+                                <p class="titulo">Estado de la última tarea ejecutada</p>
+                                <p>@Model.LastState</p>
+                                @if (Model.LastState.Equals("Failed"))
+                                {
+                                    <a href="@Url.Action("DetailsJob", "Job", new { id = Model.LastJob })">
+                                        <p class="text-danger">vea el error</p>
+                                    </a>
+                                }
+                            </div>
+                        }
+                    }
+                    <div class="outh-token">
+                        <p class="titulo">Ver las configuraciones de validación para el repositorio</p>
+                        <a href="@Url.Action("RepositoryShapes", new {Id = modeloJob.IdRepository })">Validaciones</a>
                     </div>
-                    <div class="grupo grupo-programacion">
-                        <h2>Tareas de sincronización</h2>
-                        <a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea</a>
-                        <partial name="_ListRecurringJobs" model="@Model.ListRecurringJobs" />
-                    </div>
-                    <div class="grupo grupo-programacion">
-                        <h2>Tareas programadas</h2>
-                        @*<a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>*@
-                        <partial name="_ListScheduledJobs" model="@Model.ListScheduledJobs" />
-                    </div>
-                    <div class="grupo grupo-programacion">
-                        <h2>Shapes</h2>
-                        <a href="@Url.Action("Create", "ShapeConfig", modeloShape)" class="btn btn-programacion">Crear nuevo Shape</a>
-                        <partial name="_ListShapes" model="@Model.ShapeConfig" />
-                    </div>
-                    <div class="grupo grupo-programacion">
-                        <h2>Ejecuciones completadas</h2>
-                        <a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>
-                        <partial name="_ListJobs" model="@Model.ListJobs" />
-                    </div>
+                    <hr />
                 </div>
+            <div class="grupo grupo-programacion">
+                <h2>Tareas de sincronización</h2>
+                <a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea</a>
+                <partial name="_ListRecurringJobs" model="@Model.ListRecurringJobs" />
+            </div>
+            <div class="grupo grupo-programacion">
+                <h2>Tareas programadas</h2>
+                @*<a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>*@
+                <partial name="_ListScheduledJobs" model="@Model.ListScheduledJobs" />
+            </div>
+            @*<div class="grupo grupo-programacion">
+                <h2>Shapes</h2>
+                <a href="@Url.Action("Create", "ShapeConfig", modeloShape)" class="btn btn-programacion">Crear nuevo Shape</a>
+                <partial name="_ListShapes" model="@Model.ShapeConfig" />
+            </div>*@
+            <div class="grupo grupo-programacion">
+                <h2>Ejecuciones completadas</h2>
+                @*<a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>*@
+                <partial name="_ListJobs" model="@Model.ListJobs" />
             </div>
         </div>
     </div>
-
-
+</div>
+</div>

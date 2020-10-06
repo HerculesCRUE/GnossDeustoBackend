@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace API_CARGA.Models.Services
 {
@@ -23,12 +24,22 @@ namespace API_CARGA.Models.Services
 
 
         ///<summary>
-        ///Obtiene una item de descubrimiento
+        ///Obtiene un item de descubrimiento
         ///</summary>
         ///<param name="id">Identificador del item</param>
         public DiscoverItem GetDiscoverItemById(Guid id)
         {
             return _context.DiscoverItem.Include(item => item.DissambiguationProblems).ThenInclude(p => p.DissambiguationCandiates).FirstOrDefault(item => item.ID.Equals(id));
+        }
+
+        /// <summary>
+        /// Obtiene los items con error de un Job (sólo obtiene el identificador y el estado)
+        /// </summary>
+        /// <param name="jobId">Identificador del job</param>
+        /// <returns></returns>
+        public List<DiscoverItem> GetDiscoverItemsErrorByJobMini(string jobId)
+        {
+            return _context.DiscoverItem.Where(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Error.ToString() || x.Status == DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString())).Select(x => new DiscoverItem { ID = x.ID, JobID = x.JobID, Status = x.Status }).ToList();
         }
 
         ///<summary>
@@ -58,10 +69,12 @@ namespace API_CARGA.Models.Services
                 discoverItemOriginal.DiscoverRdf = discoverItem.DiscoverRdf;
                 discoverItemOriginal.Error = discoverItem.Error;
                 discoverItemOriginal.JobID = discoverItem.JobID;
-                discoverItemOriginal.JobCreatedDate = discoverItem.JobCreatedDate;
                 discoverItemOriginal.Publish = discoverItem.Publish;
                 discoverItemOriginal.DissambiguationProcessed = discoverItem.DissambiguationProcessed;
                 discoverItemOriginal.DiscoverReport = discoverItem.DiscoverReport;
+                discoverItemOriginal.DissambiguationProblems = discoverItem.DissambiguationProblems;
+                
+
                 _context.SaveChanges();
                 modified = true;
             }
@@ -84,6 +97,14 @@ namespace API_CARGA.Models.Services
                         foreach (var dissambiguationProblem in discoverItem.DissambiguationProblems)
                         {
                             _context.Entry(dissambiguationProblem).State = EntityState.Deleted;
+
+                            if (dissambiguationProblem.DissambiguationCandiates != null)
+                            {
+                                foreach (var dissambiguationCandidate in dissambiguationProblem.DissambiguationCandiates)
+                                {
+                                    _context.Entry(dissambiguationCandidate).State = EntityState.Deleted;
+                                }
+                            }
                         }
                     }
 

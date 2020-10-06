@@ -18,6 +18,7 @@ namespace ApiCargaWebInterface.Models.Services
         public string Url { get; set; }
         public string UrlUris { get; set; }
         public string UrlDocumentacion { get; set; }
+        public string Proxy { get; set; }
         /// <summary>
         /// Obtiene la url del api de carga que ha sido configurada
         /// </summary>
@@ -104,6 +105,35 @@ namespace ApiCargaWebInterface.Models.Services
                 UrlDocumentacion = connectionString;
             }
             return UrlDocumentacion;
+        }
+
+        /// <summary>
+        /// Obtiene la dirección del directoio virtual configurado para el proxy
+        /// </summary>
+        /// <returns>uri del api carga</returns>
+        public string GetProxy()
+        {
+            if (string.IsNullOrEmpty(Proxy))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                string connectionString = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("Proxy"))
+                {
+                    connectionString = environmentVariables["Proxy"] as string;
+                }
+                else
+                {
+                    connectionString = Configuration["Proxy"];
+                }
+
+                Proxy = connectionString;
+            }
+            return Proxy;
         }
     }
 }

@@ -37,9 +37,6 @@ namespace API_CARGA.Migrations
                     b.Property<string>("Error")
                         .HasColumnType("text");
 
-                    b.Property<string>("JobCreatedDate")
-                        .HasColumnType("text");
-
                     b.Property<string>("JobID")
                         .HasColumnType("text");
 
@@ -47,7 +44,6 @@ namespace API_CARGA.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("Rdf")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Status")
