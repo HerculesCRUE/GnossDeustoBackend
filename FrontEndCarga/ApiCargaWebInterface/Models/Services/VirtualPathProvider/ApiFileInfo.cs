@@ -79,6 +79,7 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
                 if (page != null)
                 {
                     _exists = true;
+                    
                     _viewContent = Encoding.UTF8.GetBytes(page.Content);
                     _lastModified = page.LastModified;
                 }

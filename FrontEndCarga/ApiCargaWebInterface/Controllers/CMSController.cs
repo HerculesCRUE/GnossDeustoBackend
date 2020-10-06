@@ -40,7 +40,13 @@ namespace ApiCargaWebInterface.Controllers
             {
                 return NotFound();
             }
-            return View($"/{url}");
+            //Cambiar el contendio de los uses
+            CmsDataViewModel dataModel = new CmsDataViewModel();
+            if (page.Content.Contains("@*<% use"))
+            {
+                dataModel = ReplaceUsesService.PageWithDirectives(page.Content, dataModel);
+            }
+            return View($"/{url}", dataModel);
         }
 
         /// <summary>
@@ -125,7 +131,7 @@ namespace ApiCargaWebInterface.Controllers
                 return View("Create", new_page);
             }
             _documentationApi.CreatePage(new_page.PageId, new_page.Route, new_page.FileHtml);
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", new { route = new_page.Route });
         }
         /// <summary>
         /// Obtiene el esquema de uris configurado
@@ -138,7 +144,7 @@ namespace ApiCargaWebInterface.Controllers
             if (page != null)
             {
                 string name = route.Split("/").Last();
-                var content = new System.IO.MemoryStream(Encoding.ASCII.GetBytes(page.Content));
+                var content = new System.IO.MemoryStream(Encoding.UTF8.GetBytes(page.Content));
                 var contentType = "APPLICATION/octet-stream";
                 var fileName = $"{name}.cshtml";
                 return File(content, contentType, fileName);
