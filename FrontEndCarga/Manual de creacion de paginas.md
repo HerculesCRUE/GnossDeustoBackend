@@ -60,7 +60,9 @@ Mediante la etiqueta
     /%>*@
 
 indicamos que es una llamada a virtoso, **importante respetar los espacios en la etiqueta tanto al principio `@*<%` como al final `/%>*@`.** con directiva sparql dentro de la etiqueta indicamos que es una llamada a virtuoso, la consulta se especifica después separada por un espacio.
+
 Se puede encontrar un ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/paginas/sparql.cshtml
+
 En está página se han añadido varios using para poder deserializar el contenido que hay en la propiedad Results del modelo, el cual está en formato csv, y posteriormente trabjar con los datos obtenidos al deserializar.
 Al final del documento está declarada la calse a deserializar mediante la directiva de razor 
 

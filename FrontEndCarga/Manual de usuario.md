@@ -215,3 +215,5 @@ Al pulsar el botón + aparecerá un formulario para crear páginas con contenido
 A continuación se muestra un ejemplo de una página creada mediante este formulario, con la url /public/gnossdeustobackend/index
 
 ![](img/paginaCreada.png)
+
+Podemos encontrar un pequeño manual de creación de páginas en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/Manual%20de%20creacion%20de%20paginas.md
