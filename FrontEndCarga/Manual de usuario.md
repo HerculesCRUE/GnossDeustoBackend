@@ -3,11 +3,11 @@
 | Fecha         | 01/10/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Cambios en el manual de usuario| 
-|Descripción|cambio en las interfaces e insercción de nuevas páginas|
-|Versión|0.2|
+|Descripción|Creación de páginas y modificación|
+|Versión|0.3|
 |Módulo|FrontEndCarga|
 |Tipo|Manual|
-|Cambios de la Versión| En está versión se han cambiado las interfaces de la vista de un repositorio, la vista detalle de una tarea, la publicación manual se ha divido en 3 interfaces y se han creado las vistas de  obtención de tokens para el acceso a los apis, la vista de errores de descubrimiento incluida en la sección vista de una tarea y la administración de páginas|
+|Cambios de la Versión| En está versión se ha añadido un enlace a un manual para la creación de páginas por parte del usuario|
  
  
 # Manual de usuario del FrontEnd de Carga

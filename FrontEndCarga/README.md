@@ -3,11 +3,11 @@
 | Fecha         | 01/10/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Cambios en la documentación| 
-|Descripción|insercción de controladores|
-|Versión|0.2|
+|Descripción|insercción de configuraciones en el appsettings|
+|Versión|0.3|
 |Módulo|FrontEndCarga|
 |Tipo|Documentación|
-|Cambios de la Versión| Se ha añadido a la documentación controladores nuevos que forman la web y parámetros de configuración nuevos|
+|Cambios de la Versión| Se ha añadido dos configuraciones al appsettings|
 
 
 # Sobre FrontEnd de Carga
@@ -42,6 +42,10 @@ En esta carpeta está disponible el [Manual de Usuario del FrontEnd](https://gith
 				"Microsoft.Hosting.Lifetime": "Information"
 			}
 		},
+		"Sparql": {
+			"Endpoint": "http://localhost:8890/sparql",
+			"QueryParam": "query"
+		},
 		"AllowedHosts": "*",
 		"LogPath": "",
 		"LogPathCarga": "",
@@ -68,6 +72,8 @@ En esta carpeta está disponible el [Manual de Usuario del FrontEnd](https://gith
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
  - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
  - PostgreConnectionmigration: Conexión con la base de datos
+ - Sparql.Endpoint: URL del Endpoint Sparql
+ - Sparql.QueryParam: Parámetro para la query en el Endpoint Sparql
  - LogPath: Ruta donde va a guardar los logs de la aplicación
  - LogPathCarga: Ruta donde escribe los logs el apiCarga
  - LogPathCron: Ruta donde escribe los logs el apiCron
