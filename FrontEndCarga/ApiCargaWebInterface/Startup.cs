@@ -124,7 +124,7 @@ namespace ApiCargaWebInterface
             services.AddScoped(typeof(CallTokenService));
             services.AddScoped(typeof(CallApiVirtualPath));
             services.AddScoped(typeof(CallRepositoryJobService));
-            
+            services.AddScoped(typeof(ReplaceUsesService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

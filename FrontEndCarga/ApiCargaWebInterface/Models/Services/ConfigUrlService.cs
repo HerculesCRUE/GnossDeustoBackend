@@ -19,6 +19,8 @@ namespace ApiCargaWebInterface.Models.Services
         public string UrlUris { get; set; }
         public string UrlDocumentacion { get; set; }
         public string Proxy { get; set; }
+        public string SaprqlEndpoint { get; set; }
+        public string SparqlQuery { get; set; }
         /// <summary>
         /// Obtiene la url del api de carga que ha sido configurada
         /// </summary>
@@ -105,6 +107,63 @@ namespace ApiCargaWebInterface.Models.Services
                 UrlDocumentacion = connectionString;
             }
             return UrlDocumentacion;
+        }
+
+        /// <summary>
+        /// Obtiene el parametro query para Sparql
+        /// </summary>
+        /// <returns>uri del api carga</returns>
+        public string GetSparqlQuery()
+        {
+            if (string.IsNullOrEmpty(SparqlQuery))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                string connectionString = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("SparqlQuery"))
+                {
+                    connectionString = environmentVariables["SparqlQuery"] as string;
+                }
+                else
+                {
+                    connectionString = Configuration["Sparql:QueryParam"];
+                }
+
+                Proxy = connectionString;
+            }
+            return Proxy;
+        }
+
+        /// <summary>
+        /// Obtiene la dirección de sparql
+        /// </summary>
+        public string GetSaprqlEndpoint()
+        {
+            if (string.IsNullOrEmpty(SaprqlEndpoint))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                string connectionString = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("SaprqlEndpoint"))
+                {
+                    connectionString = environmentVariables["SaprqlEndpoint"] as string;
+                }
+                else
+                {
+                    connectionString = Configuration["Sparql:Endpoint"];
+                }
+
+                SaprqlEndpoint = connectionString;
+            }
+            return SaprqlEndpoint;
         }
 
         /// <summary>

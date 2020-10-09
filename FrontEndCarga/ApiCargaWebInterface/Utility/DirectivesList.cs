@@ -7,34 +7,18 @@ namespace ApiCargaWebInterface.Utility
 {
     public class DirectivesList
     {
-        private static string statisticsGrafo = "@*<% use statistics param:grafo /%>*@";
-        private static string statisticsTriples = "@*<% use statistics param:triples /%>*@";
-        private static string statisticsEntidades = "@*<% use statistics param:entidades /%>*@";
-        private static string sparql = "@*<% use sparql /%>*@";
-        private static string directivaJavi = "@*<% use Javi /%>*@";
+        private static string sparql = "@*<% sparql";
+        private static string api = "@*<% api";
 
-        public static string StatisticsGrafo
-        {
-            get { return statisticsGrafo; }
-        }
 
-        public static string StatisticsTriples
+        public static string Api
         {
-            get { return statisticsTriples; }
-        }
-
-        public static string StatisticsEntidades
-        {
-            get { return statisticsEntidades; }
+            get { return api; }
         }
 
         public static string Sparql
         {
             get { return sparql; }
-        }
-        public static string DirectivaJavi
-        {
-            get { return directivaJavi; }
         }
     }
 }

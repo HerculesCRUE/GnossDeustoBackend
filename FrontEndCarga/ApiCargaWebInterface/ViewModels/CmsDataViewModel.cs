@@ -7,7 +7,6 @@ namespace ApiCargaWebInterface.ViewModels
 {
     public class CmsDataViewModel
     {
-        public string Name { get; set; }
-        public string LastName { get; set; }
+        public string Results { get; set; }
     }
 }

@@ -22,9 +22,11 @@ namespace ApiCargaWebInterface.Controllers
     public class CMSController : Controller
     {
         CallApiVirtualPath _documentationApi;
-        public CMSController(CallApiVirtualPath documentationApi)
+        ReplaceUsesService _replaceUsesService;
+        public CMSController(CallApiVirtualPath documentationApi, ReplaceUsesService replaceUsesService)
         {
             _documentationApi = documentationApi;
+            _replaceUsesService = replaceUsesService;
         }
 
         /// <summary>
@@ -42,9 +44,9 @@ namespace ApiCargaWebInterface.Controllers
             }
             //Cambiar el contendio de los uses
             CmsDataViewModel dataModel = new CmsDataViewModel();
-            if (page.Content.Contains("@*<% use"))
+            if (page.Content.Contains("@*<%"))
             {
-                dataModel = ReplaceUsesService.PageWithDirectives(page.Content, dataModel);
+                dataModel = _replaceUsesService.PageWithDirectives(page.Content, dataModel);
             }
             return View($"/{url}", dataModel);
         }
