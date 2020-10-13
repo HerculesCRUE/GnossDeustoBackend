@@ -1,0 +1,57 @@
+@model ApiCargaWebInterface.ViewModels.CmsDataViewModel
+@using Newtonsoft.Json
+@{
+    Layout = "_Layout";
+    ViewData["BodyClass"] = "fichaRecurso";
+    List<JobPage> resultObject = JsonConvert.DeserializeObject<List<JobPage>>(Model.Results);
+    var jobs = resultObject.Where(item => item.ExecutedAt.HasValue).OrderByDescending(item => item.ExecutedAt.Value).Take(2);
+}
+@*<% api https://localhost:44359/Job?type=0&count=100&from=0 /%>*@
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <div class="row">
+                <div class="col col-12 col-lg-12 col-contenido">
+                    <div class="wrapCol">
+                        <h1>Dos últimas tareas ejecutadas</h1>
+                        <div class="contenido">
+                            <div class="grupo grupo-descripcion">
+                                <div class="items tabla">
+                                    <div class="cabecera">
+                                        <div class="columna">
+                                            <p>Identificador</p>
+                                        </div>
+                                        <div class="columna">
+                                            <p>Fecha de ejecución</p>
+                                        </div>
+                                    </div>
+                                    @foreach (var job in jobs)
+                                    {
+                                        <div class="fila">
+                                            <div class="columna principal">
+                                                <p>@job.Id</p>
+                                            </div>
+                                            <div class="columna">
+                                                <p>@job.ExecutedAt.Value</p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@functions{
+    public class JobPage
+    {
+        public string Job { get; set; }
+        public string State { get; set; }
+        public string Id { get; set; }
+        public string ExceptionDetails { get; set; }
+        public DateTime? ExecutedAt { get; set; }
+    }
+}

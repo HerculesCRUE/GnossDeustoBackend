@@ -1,0 +1,66 @@
+@model ApiCargaWebInterface.ViewModels.CmsDataViewModel
+@using CsvHelper
+@using System.Globalization
+@using System.IO
+@using System.Text
+@{
+    Layout = "_Layout";
+    ViewData["BodyClass"] = "fichaRecurso";
+    byte[] byteArray = Encoding.UTF8.GetBytes(Model.Results);
+    MemoryStream stream = new MemoryStream(byteArray);
+    var csvReader = new CsvReader(new StreamReader(stream), CultureInfo.InvariantCulture);
+    var records = csvReader.GetRecords<PruebaSparql>();
+}
+@*<% sparql
+    select ?type count(?s) as ?count
+    where
+    {
+     ?s rdf:type ?type
+     }
+     group by ?type
+    /%>*@
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <div class="row">
+                <div class="col col-12 col-lg-12 col-contenido">
+                    <div class="wrapCol">
+                        <h1>Número de entidades por tipo</h1>
+                        <div class="contenido">
+                            <div class="grupo grupo-descripcion">
+                                <div class="items tabla">
+                                    <div class="cabecera">
+                                        <div class="columna">
+                                            <p>Type</p>
+                                        </div>
+                                        <div class="columna">
+                                            <p>Count</p>
+                                        </div>
+                                    </div>
+                                    @foreach (var fila in records)
+                                    {
+                                        <div class="fila">
+                                            <div class="columna principal">
+                                                <p>@fila.type</p>
+                                            </div>
+                                            <div class="columna">
+                                                <p>@fila.count</p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@functions{
+    public class PruebaSparql
+    {
+        public string type { get; set; }
+        public int count { get; set; }
+    }
+}
