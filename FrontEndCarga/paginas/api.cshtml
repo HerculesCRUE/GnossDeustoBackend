@@ -3,7 +3,8 @@
 @{
     Layout = "_Layout";
     ViewData["BodyClass"] = "fichaRecurso";
-    List<JobPage> resultObject = JsonConvert.DeserializeObject<List<JobPage>>(Model.Results);
+	string result = Model.Results.FirstOrDefault();
+    List<JobPage> resultObject = JsonConvert.DeserializeObject<List<JobPage>>(result);
     var jobs = resultObject.Where(item => item.ExecutedAt.HasValue).OrderByDescending(item => item.ExecutedAt.Value).Take(2);
 }
 @*<% api https://localhost:44359/Job?type=0&count=100&from=0 /%>*@
