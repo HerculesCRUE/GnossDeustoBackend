@@ -46,7 +46,7 @@ Se puede encontrar un ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBac
 
 En está pagina se añade un using a Newtonsoft Json `@using Newtonsoft.Json` para poder deserializar los datos que están en el primer elemento de la lista que se encuentran
  en el modelo en la propiedad Results ya que se encuentran en Json y poder trabajar con la clase obtenida posteriormente.
-Al final del documento está declarada la calse a deserializar mediante la directiva de razor 
+Al final del documento está declarada la clase a deserializar mediante la directiva de razor 
 
     @functions{
     
@@ -77,7 +77,7 @@ A continación se indican los using importados en las vistas para el tratamiento
 	@using System.IO
 	@using System.Text
 	
-Al final del documento está declarada la calse a deserializar mediante la directiva de razor 
+Al final del documento está declarada la clase a deserializar mediante la directiva de razor 
 
     @functions{
     
