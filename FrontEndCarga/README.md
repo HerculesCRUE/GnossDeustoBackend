@@ -100,6 +100,7 @@ Se puede encontrar un el appsettings usado para este servicio sin datos sensible
 ## Dependencias
 
 - **AspNetCore.Security.CAS**: versión 2.0.5
+- **CsvHelper**: versión 15.0.6
 - **dotNetRDF**: versión 2.6.0
 - **Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation**: versión 3.1.8
 - **Microsoft.EntityFrameworkCore**: versión 3.1.8
