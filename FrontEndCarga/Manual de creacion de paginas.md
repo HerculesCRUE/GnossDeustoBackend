@@ -32,7 +32,10 @@ Como curiosidad esta página contiene el código:
 En este tipo de páginas vamos a distinguir dos tipos de llamadas, la obtención de datos con llamadas a los apis o la obtención de datos mediante consultas a virtuoso. Puede haber varias llamadas de estos tipos 
 en las paginas creadas.
 Estas vistas comparten el mismo módelo de datos de página, este modelo es CmsDataViewModel que contiene una propiedad Results, la cual es una lista de string donde se almacena los resultados de la llamadas al api indicado o la 
-consulta a virtuoso.
+consulta a virtuoso. Para incluir este módelo en las paginas hay que incluir en la primera línea:
+
+    @model ApiCargaWebInterface.ViewModels.CmsDataViewModel
+	
 ## Llamadas al Api
 Para este ejemplo vamos a partir de que solo hay una única llamada del tipo api.
 Mediante la etiqueta `@*<% api https://localhost:44359/Job?type=0&count=100&from=0 /%>*@` indicamos que es una llamada al api, 
