@@ -29,24 +29,56 @@ namespace ApiCargaWebInterface.Models.Services
         }
         public CmsDataViewModel PageWithDirectives(string htmlContent, CmsDataViewModel dataModel)
         {
-            
-            if (htmlContent.Contains(DirectivesList.Api))
+            dataModel.Results = new List<string>();
+            Dictionary<int, string>  directiveList = Directives(htmlContent);
+            foreach(var item in directiveList)
             {
-                dataModel.Results = Api(htmlContent);
+                if (item.Value.Equals("api"))
+                {
+                    dataModel.Results.Add(Api(htmlContent, item.Key));
+                }
+                else if (item.Value.Equals("sparql"))
+                {
+                    dataModel.Results.Add(Sparql(htmlContent, item.Key));
+                }
             }
-            else if (htmlContent.Contains(DirectivesList.Sparql))
-            {
-                dataModel.Results = Sparql(htmlContent);
-            }
-
             return dataModel;
         }
 
-        private string Api(string htmlContent)
+        private Dictionary<int, string> Directives(string htmlContent)
         {
-            int first = htmlContent.IndexOf(DirectivesList.Api);
+            Dictionary<int, string> directives = new Dictionary<int, string>();
+            int count = 0;
+            int countFinal = 1;
+            int first = 0;
+            int last = 0;
+            while (count < countFinal)
+            {
+                count = directives.Count;
+                first = htmlContent.IndexOf(DirectivesList.Directive,last);
+                if (first != -1)
+                {
+                    last = htmlContent.IndexOf("/%>*@", first);
+                    string content = htmlContent.Substring(first, last - first);
+                    if (content.Contains("api"))
+                    {
+                        directives.Add(first, "api");
+                    }
+                    else if (content.Contains("sparql"))
+                    {
+                        directives.Add(first, "sparql");
+                    }
+                }
+                countFinal = directives.Count;
+            }  
+            return directives;
+        }
+
+        private string Api(string htmlContent, int ocurrence)
+        {
+            int first = htmlContent.IndexOf(DirectivesList.Api, ocurrence);
             first = first + DirectivesList.Api.Length;
-            int last = htmlContent.LastIndexOf("/%>*@");
+            int last = htmlContent.IndexOf(DirectivesList.EndDirective, first);
             string url = htmlContent.Substring(first, last - first).Trim();
             TokenBearer token = null;
             if (url.Contains(_configUrlService.GetUrl()))
@@ -65,24 +97,15 @@ namespace ApiCargaWebInterface.Models.Services
             return result;
         }
 
-        private string Sparql(string htmlContent)
+        private string Sparql(string htmlContent, int ocurrence)
         {
-            int first = htmlContent.IndexOf(DirectivesList.Sparql);
+            int first = htmlContent.IndexOf(DirectivesList.Sparql, ocurrence);
             first = first + DirectivesList.Sparql.Length;
-            int last = htmlContent.LastIndexOf("/%>*@");
+            int last = htmlContent.IndexOf(DirectivesList.EndDirective, first);
             string query = $"{htmlContent.Substring(first, last - first)}";
 
             string url = $"{_configUrlService.GetSaprqlEndpoint()}?{_configUrlService.GetSparqlQuery()}={query}&format=text/csv";
             string result = _callService.CallGetApi(url, "");
-            byte[] byteArray = Encoding.UTF8.GetBytes(result);
-            MemoryStream stream = new MemoryStream(byteArray);
-            var csvReader = new CsvReader(new StreamReader(stream), CultureInfo.InvariantCulture);
-            var records = csvReader.GetRecords<PruebaSparql>();
-            foreach (var record in records)
-            {
-               int count = record.count;
-                string type = record.type;
-            }
             return result;
         }
 

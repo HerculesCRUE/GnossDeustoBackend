@@ -9,7 +9,8 @@ namespace ApiCargaWebInterface.Utility
     {
         private static string sparql = "@*<% sparql";
         private static string api = "@*<% api";
-
+        private static string directive = "@*<%";
+        private static string endDirective = "/%>*@";
 
         public static string Api
         {
@@ -19,6 +20,15 @@ namespace ApiCargaWebInterface.Utility
         public static string Sparql
         {
             get { return sparql; }
+        }
+
+        public static string Directive
+        {
+            get { return directive; }
+        }
+        public static string EndDirective
+        {
+            get { return endDirective; }
         }
     }
 }
