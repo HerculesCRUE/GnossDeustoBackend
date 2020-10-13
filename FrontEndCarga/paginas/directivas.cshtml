@@ -7,12 +7,12 @@
 @{
     Layout = "_Layout";
     ViewData["BodyClass"] = "fichaRecurso";
-	string resultApi = Model.Results.FirstOrDefault();
+    string resultApi = Model.Results.FirstOrDefault();
     List<JobPage> resultObject = JsonConvert.DeserializeObject<List<JobPage>>(resultApi);
     var jobs = resultObject.Where(item => item.ExecutedAt.HasValue).OrderByDescending(item => item.ExecutedAt.Value).Take(2);
 	
-	string resultSparql = Model.Results[1];
-	byte[] byteArray = Encoding.UTF8.GetBytes(resultSparql);
+    string resultSparql = Model.Results[1];
+    byte[] byteArray = Encoding.UTF8.GetBytes(resultSparql);
     MemoryStream stream = new MemoryStream(byteArray);
     var csvReader = new CsvReader(new StreamReader(stream), CultureInfo.InvariantCulture);
     var records = csvReader.GetRecords<PruebaSparql>();
