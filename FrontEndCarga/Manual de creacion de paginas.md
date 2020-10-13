@@ -13,7 +13,7 @@
 
 Creación de páginas sin contenido dinámico
 ----------------
-Estas páginas contienen únicamente contenido html estático, se puede encontrar un ejemplo en: 
+Este tipo páginas contienen únicamente contenido html estático, se puede encontrar un ejemplo en: 
 https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/paginas/gnossdeustobackend.cshtml
 
 Como curiosidad esta página contiene el código: 
@@ -30,9 +30,9 @@ Como curiosidad esta página contiene el código:
 ----------------
 
 En este tipo de páginas vamos a distinguir dos tipos de llamadas, la obtención de datos con llamadas a los apis o la obtención de datos mediante consultas a virtuoso. Puede haber varias llamadas de estos tipos 
-en las paginas creadas.
+en las páginas creadas.
 Estas vistas comparten el mismo módelo de datos de página, este modelo es CmsDataViewModel que contiene una propiedad Results, la cual es una lista de string donde se almacena los resultados de la llamadas al api indicado o la 
-consulta a virtuoso. Para incluir este módelo en las paginas hay que incluir en la primera línea:
+consulta a virtuoso. Para incluir este módelo en las páginas hay que incluir en la primera línea:
 
     @model ApiCargaWebInterface.ViewModels.CmsDataViewModel
 	
