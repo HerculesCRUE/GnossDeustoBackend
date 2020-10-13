@@ -139,6 +139,10 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
 				"Microsoft.Hosting.Lifetime": "Information"
 			}
 		},
+		"Sparql": {
+			"Endpoint": "http://localhost:8890/sparql",
+			"QueryParam": "query"
+		},
 		"AllowedHosts": "*",
 		"LogPath": "",
 		"LogPathCarga": "",
@@ -165,6 +169,8 @@ ejecutarlo el comando dotnet desde la propia carpeta. Por ejemplo:
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
  - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
  - PostgreConnectionmigration: Conexión con la base de datos
+ - Sparql.Endpoint: URL del Endpoint Sparql
+ - Sparql.QueryParam: Parámetro para la query en el Endpoint Sparql
  - LogPath: Ruta donde va a guardar los logs de la aplicación
  - LogPathCarga: Ruta donde escribe los logs el apiCarga
  - LogPathCron: Ruta donde escribe los logs el apiCron
