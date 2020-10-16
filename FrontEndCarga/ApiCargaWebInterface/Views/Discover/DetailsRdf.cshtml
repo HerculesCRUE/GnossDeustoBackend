@@ -1,0 +1,150 @@
+﻿@model List<ApiCargaWebInterface.ViewModels.DiscoverRdfViewModel>
+
+@{
+    ViewData["Title"] = "Discovery rdf";
+    ViewData["BodyClass"] = "fichaRecurso";
+}
+
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <div class="header-resource">
+                <div class="h1-container">
+                    <h1>Rdf de @Context.Request.Query["itemId"]</h1>
+                </div>
+            </div>
+            <div class="contenido">
+                <div class="grupo grupo-descripcion">
+
+
+                    <div class="estado-tarea">
+
+
+                        @foreach (var item in Model)
+                        {
+                            PintarItem(item);
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@functions
+{
+    void PintarItem(ApiCargaWebInterface.ViewModels.DiscoverRdfViewModel pItem)
+    {
+        <table class="rdftable">
+            <thead class="table-subject">
+                <tr>
+                    <th><span id="@pItem.uriEntity"></span> @pItem.uriEntity</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var stringProperty in pItem.stringPropertiesEntity)
+                {
+                    foreach (var valor in stringProperty.Value)
+                    {
+                        string propiedadAbreviada = stringProperty.Key;
+                        if (propiedadAbreviada.Contains("/"))
+                        {
+                            propiedadAbreviada = propiedadAbreviada.Substring(propiedadAbreviada.LastIndexOf("/") + 1);
+                        }
+                        <tr>
+                            @{
+                                String title = "";
+                            }
+                            @if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
+                            {
+                                title = pItem.communNamePropierties[stringProperty.Key];
+                            }
+                            <td class="" title="@title">
+                                <b>@propiedadAbreviada</b>
+                                <a href="@stringProperty.Key" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                            </td>
+
+                            @if (pItem.urisRdf.Contains(valor))
+                            {
+                                @if (pItem.LoadedEntities.Contains(valor))
+                                {
+                                    <td>
+                                        <a href="#@valor">
+                                            @valor
+                                        </a>
+                                        <a href="@valor" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <a href="#@valor">
+                                            @valor
+                                        </a>
+                                    </td>
+                                }
+
+                            }
+                            else
+                            {
+                                if (stringProperty.Key == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
+                                {
+                                    title = "";
+
+                                    if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
+                                    {
+                                        title = pItem.communNamePropierties[stringProperty.Key];
+                                    }
+
+                                    string valorPropiedadAbreviada = valor;
+                                    if (valorPropiedadAbreviada.Contains("/"))
+                                    {
+                                        valorPropiedadAbreviada = valorPropiedadAbreviada.Substring(valorPropiedadAbreviada.LastIndexOf("/") + 1);
+                                    }
+                                    <td title="@title"><b>@valorPropiedadAbreviada</b></td>
+                                }
+                                else
+                                {
+                                    <td><b>@valor</b></td>
+                                }
+                            }
+
+
+                        </tr>
+                    }
+                }
+                @foreach (var entitiesProperty in pItem.entitiesPropertiesEntity)
+                {
+                    foreach (var valor in entitiesProperty.Value)
+                    {
+                        string propiedadAbreviada = entitiesProperty.Key;
+                        if (propiedadAbreviada.Contains("/"))
+                        {
+                            propiedadAbreviada = propiedadAbreviada.Substring(propiedadAbreviada.LastIndexOf("/") + 1);
+                        }
+                        String title = "";
+
+                        if (pItem.communNamePropierties.ContainsKey(entitiesProperty.Key))
+                        {
+                            title = pItem.communNamePropierties[entitiesProperty.Key];
+                        }
+                        <tr>
+                            <td class="" title="@title">
+                                <b>@propiedadAbreviada</b>
+                            </td>
+                            <td class="">
+                                @{
+                                    PintarItem(valor);
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+
+
+            </tbody>
+        </table>
+    }
+}
