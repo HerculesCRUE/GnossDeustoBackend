@@ -27,7 +27,9 @@ namespace ApiCargaWebInterface.Models.Services
         ///<param name="id">Identificador del item</param>
         public DiscoverItem GetDiscoverItemById(Guid id)
         {
-            return _context.DiscoverItem.Include(item => item.DissambiguationProblems).ThenInclude(p => p.DissambiguationCandiates).FirstOrDefault(item => item.ID.Equals(id));
+            DiscoverItem item = _context.DiscoverItem.Include(item => item.DissambiguationProblems).ThenInclude(p => p.DissambiguationCandiates).FirstOrDefault(item => item.ID.Equals(id));
+            item.LoadedEntities = new List<string>();
+            return item;
         }
         
         /// <summary>
