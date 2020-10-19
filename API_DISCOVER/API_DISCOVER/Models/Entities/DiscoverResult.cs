@@ -24,8 +24,8 @@ namespace API_DISCOVER.Models.Entities
         /// <param name="pDiscoveredEntitiesWithDataBase">Entidades descubiertas con la BBDD</param>
         /// <param name="pDiscoveredEntitiesProbability">Probabilidades de descubriiento</param>
         /// <param name="pSecondsProcessed">Tiempo (en segundos) en procesar el descubrimiento</param>
-        /// <param name="pOrcidIntegration">Datos obtendidos con la integración con ORCID</param>
-        public DiscoverResult(RohGraph pDataGraph,RohGraph pDataInferenceGraph, RohGraph pOntologyGraph, HashSet<string> pDiscoveredEntitiesWithSubject, Dictionary<string, string> pDiscoveredEntitiesWithId, Dictionary<string, KeyValuePair<string, float>> pDiscoveredEntitiesWithDataBase, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability,double pSecondsProcessed,Dictionary<string,Dictionary<string,string>> pOrcidIntegration)
+        /// <param name="pExternalIntegration">Datos obtendidos con las integraciones con fuentes externas</param>
+        public DiscoverResult(RohGraph pDataGraph,RohGraph pDataInferenceGraph, RohGraph pOntologyGraph, HashSet<string> pDiscoveredEntitiesWithSubject, Dictionary<string, string> pDiscoveredEntitiesWithId, Dictionary<string, KeyValuePair<string, float>> pDiscoveredEntitiesWithDataBase, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability,double pSecondsProcessed,Dictionary<string,Dictionary<string,string>> pExternalIntegration)
         {
             dataGraph = pDataGraph;
             dataInferenceGraph = pDataInferenceGraph;
@@ -35,7 +35,7 @@ namespace API_DISCOVER.Models.Entities
             discoveredEntitiesWithDataBase = pDiscoveredEntitiesWithDataBase;
             discoveredEntitiesProbability = pDiscoveredEntitiesProbability;
             secondsProcessed = pSecondsProcessed;
-            orcidIntegration = pOrcidIntegration;
+            externalIntegration = pExternalIntegration;
         }
 
         /// <summary>
@@ -79,9 +79,9 @@ namespace API_DISCOVER.Models.Entities
         public double secondsProcessed { get; }
 
         /// <summary>
-        /// Datos obtendidos con la integración con ORCID
+        /// Datos obtendidos con la integración con fuentes externas
         /// </summary>
-        public Dictionary<string, Dictionary<string, string>> orcidIntegration { get; }
+        public Dictionary<string, Dictionary<string, string>> externalIntegration { get; }
         
 
         /// <summary>

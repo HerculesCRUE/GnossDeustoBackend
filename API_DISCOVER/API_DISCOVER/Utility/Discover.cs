@@ -19,11 +19,12 @@ using VDS.RDF.Update;
 
 namespace API_DISCOVER.Utility
 {
+
     public static class Discover
     {
-        private readonly static List<Disambiguation> mDisambiguationConfigs = LoadDisambiguationConfigs();
         private readonly static float mMaxScore = 0.9f;
         private readonly static float mMinScore = 0.7f;
+        private readonly static List<Disambiguation> mDisambiguationConfigs = LoadDisambiguationConfigs();        
         private readonly static ConfigSparql mConfigSparql = new ConfigSparql();
         private readonly static string mSPARQLEndpoint = mConfigSparql.GetEndpoint();
         private readonly static string mGraph = mConfigSparql.GetGraph();
@@ -69,7 +70,7 @@ namespace API_DISCOVER.Utility
             //Almacenamos las entidades con dudas acerca de su descubrimiento
             Dictionary<string, Dictionary<string, float>> discoveredEntitiesProbability = new Dictionary<string, Dictionary<string, float>>();
 
-            Dictionary<string, Dictionary<string, string>> orcidIntegration = new Dictionary<string, Dictionary<string, string>>();
+            Dictionary<string, Dictionary<string, string>> externalIntegration = new Dictionary<string, Dictionary<string, string>>();
 
             if (!pDissambiguationProcessed)
             {
@@ -125,13 +126,13 @@ namespace API_DISCOVER.Utility
                     {
                         discoveredEntitiesWithBBDD.Add(id, entidadesReconciliadasConBBDDAux[id]);
                     }
-                }
 
-                //Integración con apis externos
-                orcidIntegration = ORCIDIntegration(ref dataGraph, ref dataInferenceGraph, reasoner);
+                    //Integración con apis externos
+                    externalIntegration = ExternalIntegration(ref dataGraph, ref dataInferenceGraph, reasoner);
+                }                
             }
             DateTime discoverEndTime = DateTime.Now;
-            DiscoverResult resultado = new DiscoverResult(dataGraph, dataInferenceGraph, ontologyGraph, discoveredEntitiesWithSubject, discoveredEntitiesWithIds, discoveredEntitiesWithBBDD, discoveredEntitiesProbability, (discoverEndTime - discoverInitTime).TotalSeconds, orcidIntegration);
+            DiscoverResult resultado = new DiscoverResult(dataGraph, dataInferenceGraph, ontologyGraph, discoveredEntitiesWithSubject, discoveredEntitiesWithIds, discoveredEntitiesWithBBDD, discoveredEntitiesProbability, (discoverEndTime - discoverInitTime).TotalSeconds, externalIntegration);
 
             return resultado;
         }
@@ -367,14 +368,14 @@ namespace API_DISCOVER.Utility
                         discoverReport += "\t" + uri + " --> " + pDiscoverResult.discoveredEntitiesWithDataBase[uri] + "\n";
                     }
                 }
-                if (pDiscoverResult.orcidIntegration != null && pDiscoverResult.orcidIntegration.Count > 0)
+                if (pDiscoverResult.externalIntegration != null && pDiscoverResult.externalIntegration.Count > 0)
                 {
-                    discoverReport += "Entities with identifiers obtained with ORCID integration: " + pDiscoverResult.orcidIntegration.Count + "\n";
-                    foreach (string uri in pDiscoverResult.orcidIntegration.Keys)
+                    discoverReport += "Entities with identifiers obtained with External integration: " + pDiscoverResult.externalIntegration.Count + "\n";
+                    foreach (string uri in pDiscoverResult.externalIntegration.Keys)
                     {
-                        foreach (string property in pDiscoverResult.orcidIntegration[uri].Keys)
+                        foreach (string property in pDiscoverResult.externalIntegration[uri].Keys)
                         {
-                            discoverReport += "\t" + uri + " - " + property + " --> " + pDiscoverResult.orcidIntegration[uri][property] + "\n";
+                            discoverReport += "\t" + uri + " - " + property + " --> " + pDiscoverResult.externalIntegration[uri][property] + "\n";
                         }
                     }
                 }
@@ -2060,19 +2061,25 @@ namespace API_DISCOVER.Utility
         #region Integración con APIs externos
 
         /// <summary>
-        /// Integración con ORCID
+        /// Integración con Fuentes externas
         /// </summary>
-        /// <param name="pDataGraph">Grafo en local en el que aplicar la implementación de ORCID</param>
-        /// <param name="pDataInferenceGraph">Grafo en local en el que aplicar la implementación de ORCID (con inferencia)</param>
+        /// <param name="pDataGraph">Grafo en local en el que aplicar la implementación de fuentes externas</param>
+        /// <param name="pDataInferenceGraph">Grafo en local en el que aplicar la implementación de fuentes externas (con inferencia)</param>
         /// <param name="pReasoner">Razonador para la inferencia de la ontología</param>
         /// <returns>Identificadores descubiertos con la integración de ORCID</returns>
-        private static Dictionary<string, Dictionary<string, string>> ORCIDIntegration(ref RohGraph pDataGraph, ref RohGraph pDataInferenceGraph, RohRdfsReasoner pReasoner)
+        private static Dictionary<string, Dictionary<string, string>> ExternalIntegration(ref RohGraph pDataGraph, ref RohGraph pDataInferenceGraph, RohRdfsReasoner pReasoner)
         {
             Dictionary<string, Dictionary<string, string>> identifiersDiscover = new Dictionary<string, Dictionary<string, string>>();
 
-            //Obtenemos las personas del RDF junto con sus nombres (que no tengan cargado el ORCID)
+            //Obtenemos las personas del RDF junto con sus nombres y lo identificadores del RDF
             Dictionary<string, string> personWithName = new Dictionary<string, string>();
-            string query = @"select distinct ?s ?name where{?s a <http://purl.org/roh/mirror/foaf#Person>. ?s <http://purl.org/roh/mirror/foaf#name>  ?name. MINUS{?s <http://purl.org/roh#ORCID> ?orcid }}";
+            string query = @$"s elect distinct ?s ?name 
+                                where
+                                {{
+                                    ?s a <http://purl.org/roh/mirror/foaf#Person>. 
+                                    ?s <http://purl.org/roh/mirror/foaf#name>  ?name. 
+
+                                }}";
             SparqlResultSet sparqlResultSet = (SparqlResultSet)pDataGraph.ExecuteQuery(query.ToString());
             foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
             {
