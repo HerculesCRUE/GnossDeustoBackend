@@ -78,26 +78,24 @@ namespace ApiCargaWebInterface.Controllers
             //Cargamos la ontología
             RohGraph ontologyGraph = new RohGraph();
             ontologyGraph.LoadFromFile("Config/Ontology/roh-v2.owl");
-            SparqlResultSet sparqlResultSet3 = (SparqlResultSet)ontologyGraph.ExecuteQuery("select distinct ?entidad ?nombre where { ?entidad <http://www.w3.org/2000/01/rdf-schema#label> ?nombre. FILTER(lang(?nombre) = 'es')}");
-            
+            SparqlResultSet sparqlResultSetNombresPropiedades = (SparqlResultSet)ontologyGraph.ExecuteQuery("select distinct ?entidad ?nombre where { ?entidad <http://www.w3.org/2000/01/rdf-schema#label> ?nombre. FILTER(lang(?nombre) = 'es')}");
+
             //Guardamos todos los nombres de las propiedades en un diccionario
             Dictionary<string, string> communNamePropierties = new Dictionary<string, string>();
-            foreach (SparqlResult sparqlResult in sparqlResultSet3.Results)
+            foreach (SparqlResult sparqlResult in sparqlResultSetNombresPropiedades.Results)
             {
                 communNamePropierties.Add(sparqlResult["entidad"].ToString(), ((LiteralNode)(sparqlResult["nombre"])).Value);
             }
 
             //Cargamos los datos
-            DiscoverItem discovery = _discoverItemService.GetDiscoverItemById(itemId);
-            discovery.LoadedEntities.Add("http://graph.um.es/res/article/00c26ede-f2f1-4fda-b3fe-96fb1759aaf8");
-            discovery.LoadedEntities.Add("http://graph.um.es/res/article/04587ab5-5f6b-4da9-8297-ef086490b003");
+            DiscoverItem discoveryGraph = _discoverItemService.GetDiscoverItemById(itemId);
             RohGraph dataGraph = new RohGraph();
-            dataGraph.LoadFromString(discovery.DiscoverRdf, new RdfXmlParser());
+            dataGraph.LoadFromString(discoveryGraph.DiscoverRdf, new RdfXmlParser());
 
-            //Guardamos todas las entidades menos blankNodes
+            //Guardamos todas las entidades que no son blankNodes
             List<String> entities = new List<string>();
-            SparqlResultSet sparqlResultSet = (SparqlResultSet)dataGraph.ExecuteQuery("select ?s count(?p) as ?num where { ?s ?p ?o. FILTER (!isBlank(?s)) }group by ?s order by desc(?num) ");
-            foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
+            SparqlResultSet sparqlResultSetListaEntidadesNotBN = (SparqlResultSet)dataGraph.ExecuteQuery("select ?s count(?p) as ?num where { ?s ?p ?o. FILTER (!isBlank(?s)) }group by ?s order by desc(?num) ");
+            foreach (SparqlResult sparqlResult in sparqlResultSetListaEntidadesNotBN.Results)
             {
                 entities.Add(sparqlResult["s"].ToString());
             }
@@ -105,66 +103,70 @@ namespace ApiCargaWebInterface.Controllers
 
             //Guardamos todas las entidades
             List<String> allEntities = new List<string>();
-            SparqlResultSet sparqlResultSet2 = (SparqlResultSet)dataGraph.ExecuteQuery("select distinct ?s where { ?s ?p ?o }");
-            foreach (SparqlResult sparqlResult2 in sparqlResultSet2.Results)
+            SparqlResultSet sparqlResultSetEntidades = (SparqlResultSet)dataGraph.ExecuteQuery("select distinct ?s where { ?s ?p ?o }");
+            foreach (SparqlResult sparqlResult in sparqlResultSetEntidades.Results)
             {
-                allEntities.Add(sparqlResult2["s"].ToString());
+                allEntities.Add(sparqlResult["s"].ToString());
             }
 
             foreach (var idEntity in entities)
             {
-                DiscoverRdfViewModel entidad = createDiscoverRdfViewModel(idEntity, dataGraph, new List<string>(), allEntities, communNamePropierties, discovery.LoadedEntities);
+                DiscoverRdfViewModel entidad = createDiscoverRdfViewModel(idEntity, dataGraph, new List<string>(), allEntities, communNamePropierties, discoveryGraph.LoadedEntities);
                 model.Add(entidad);
             }
             return View(model);
         }
 
         /// <summary>
-        /// Crea un rdf 
+        /// Crea un modelo DiscoverRdfViewModel
         /// </summary>
+        /// <param name="idEntity">Identificador de la entidad de la que crear el modelo</param>
+        /// <param name="dataGraph">Grafo que contiene los datos</param>
+        /// <param name="parents">Lista de ancestros de la entidad</param>
+        /// <param name="allEntities">Listado con todos los identificadores del RDF</param>
+        /// <param name="communNameProperties">Diccionario con los nombres de las propiedades</param>
+        /// <param name="loadedEntities">Lista de entidades cargadas en el triple store</param>
         /// <returns></returns>
-        public DiscoverRdfViewModel createDiscoverRdfViewModel(string idEntity, RohGraph dataGraph,List<string> parents, List<String> allEntities, Dictionary<String, String> communNamePropierties, List<string> loadedEntities)
+        public DiscoverRdfViewModel createDiscoverRdfViewModel(string idEntity, RohGraph dataGraph, List<string> parents, List<string> allEntities, Dictionary<string, string> communNameProperties, List<string> loadedEntities)
         {
+            //Obtenemos todos los triples de la entidad
             SparqlResultSet sparqlResultSet = (SparqlResultSet)dataGraph.ExecuteQuery("select ?p ?o where { <" + idEntity + "> ?p ?o }");
             DiscoverRdfViewModel entidad = new DiscoverRdfViewModel();
             entidad.stringPropertiesEntity = new Dictionary<string, List<string>>();
             entidad.entitiesPropertiesEntity = new Dictionary<string, List<DiscoverRdfViewModel>>();
             entidad.uriEntity = idEntity;
             entidad.urisRdf = allEntities;
-            entidad.communNamePropierties = communNamePropierties;
+            entidad.communNamePropierties = communNameProperties;
             entidad.LoadedEntities = loadedEntities;
 
             foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
             {
-                if (!(sparqlResult["o"] is BlankNode) && !entidad.stringPropertiesEntity.ContainsKey(sparqlResult["p"].ToString()))
+
+                if (sparqlResult["o"] is BlankNode && !parents.Contains(sparqlResult["o"].ToString()))
                 {
-                    entidad.stringPropertiesEntity.Add(sparqlResult["p"].ToString(), new List<string>());
-                }
-                if ((sparqlResult["o"] is BlankNode) && !entidad.entitiesPropertiesEntity.ContainsKey(sparqlResult["p"].ToString()) )
-                {
-                    if (parents.Contains(sparqlResult["o"].ToString()))
+                    if (!entidad.entitiesPropertiesEntity.ContainsKey(sparqlResult["p"].ToString()))
                     {
-                        entidad.stringPropertiesEntity.Add(sparqlResult["p"].ToString(), new List<string>());
-                    }
-                    else
-                    {
+                        //Añadimos la propiedad a 'entitiesPropertiesEntity'
                         entidad.entitiesPropertiesEntity.Add(sparqlResult["p"].ToString(), new List<DiscoverRdfViewModel>());
                     }
-                }
-
-                if (sparqlResult["o"] is LiteralNode)
-                {
-                    entidad.stringPropertiesEntity[sparqlResult["p"].ToString()].Add(((LiteralNode)(sparqlResult["o"])).Value);
-                }
-                else if ((sparqlResult["o"] is BlankNode) && !parents.Contains(sparqlResult["o"].ToString()))
-                {
-                    var childEntity = sparqlResult["o"].ToString();
                     parents.Add(idEntity);
-                    entidad.entitiesPropertiesEntity[sparqlResult["p"].ToString()].Add(createDiscoverRdfViewModel(childEntity, dataGraph, parents, allEntities, communNamePropierties, loadedEntities));
+                    entidad.entitiesPropertiesEntity[sparqlResult["p"].ToString()].Add(createDiscoverRdfViewModel(sparqlResult["o"].ToString(), dataGraph, parents, allEntities, communNameProperties, loadedEntities));
                 }
                 else
                 {
-                    entidad.stringPropertiesEntity[sparqlResult["p"].ToString()].Add(sparqlResult["o"].ToString());
+                    if (!entidad.stringPropertiesEntity.ContainsKey(sparqlResult["p"].ToString()))
+                    {
+                        //Añadimos la propiedad a 'stringPropertiesEntity'
+                        entidad.stringPropertiesEntity.Add(sparqlResult["p"].ToString(), new List<string>());
+
+                        if (sparqlResult["o"] is LiteralNode)
+                        {
+                            entidad.stringPropertiesEntity[sparqlResult["p"].ToString()].Add(((LiteralNode)(sparqlResult["o"])).Value);
+                        }else
+                        {
+                            entidad.stringPropertiesEntity[sparqlResult["p"].ToString()].Add(sparqlResult["o"].ToString());
+                        }
+                    }
                 }
             }
             return entidad;
