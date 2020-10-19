@@ -5,6 +5,8 @@
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace API_CARGA.Models
 {
@@ -33,6 +35,12 @@ namespace API_CARGA.Models
             modelBuilder.Entity<ProcessingJobState>()
                 .HasIndex(u => u.JobId)
                 .IsUnique();
+
+            modelBuilder.Entity<DiscoverItem>()
+            .Property(e => e.LoadedEntities)
+            .HasConversion(
+                v => string.Join('|', v),
+                v => v.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList());
         }
     }
 }

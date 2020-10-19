@@ -150,5 +150,8 @@ namespace API_CARGA.Models.Entities
         /// </summary>
         [ForeignKey("DiscoverItemID")]
         public virtual ICollection<DiscoverDissambiguation> DissambiguationProblems { get; set; }
+
+        
+        public List<string> LoadedEntities { get; set; }
     }
 }

@@ -115,9 +115,11 @@ namespace API_DISCOVER.Utility
                         discoveredEntitiesWithIds.Add(id, entidadesReconciliadasConIdsAux[id]);
                     }
 
-                    //TODO considerar si efectuamos reconciliación dentro del RDF
+                    //2.- Realizamos la reconciliación con los datos del Rpropio RDF
+                    ReconciliateRDF(ref discoveredEntityList, ref entitiesRdfTypes, ref entitiesRdfType, ref disambiguationDataRdf, ref dataGraph, ref dataInferenceGraph, reasoner);
+                    
 
-                    //2.- Realizamos la reconciliación con los datos de la BBDD
+                    //3.- Realizamos la reconciliación con los datos de la BBDD
                     Dictionary<string, KeyValuePair<string, float>> entidadesReconciliadasConBBDDAux = ReconciliateBBDD(ref discoveredEntityList, out discoveredEntitiesProbability, ref entitiesRdfTypes, ref entitiesRdfType, ref disambiguationDataRdf, ref dataGraph, ref dataInferenceGraph, reasoner, namesScore);
                     foreach (string id in entidadesReconciliadasConBBDDAux.Keys)
                     {
@@ -162,20 +164,11 @@ namespace API_DISCOVER.Utility
                 DiscoverItem discoverItemBD = pDiscoverItemBDService.GetDiscoverItemById(pDiscoverItem.ID);
                 if (pDiscoverResult.discoveredEntitiesProbability.Count > 0)
                 {
-                    //Hay dudas en la desambiguación, por lo que lo actualizamos en la BBDD con su estado correspondiente
-                    discoverItemBD.Status = DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString();
-                    discoverItemBD.DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
-                    discoverItemBD.DiscoverRdf = pDiscoverResult.GetDataGraphRDF();
-                    foreach (string entityID in pDiscoverResult.discoveredEntitiesProbability.Keys)
-                    {
-                        DiscoverItem.DiscoverDissambiguation discoverDissambiguation = new DiscoverItem.DiscoverDissambiguation() { IDOrigin = entityID, DissambiguationCandiates = new List<DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate>() };
-                        foreach (string candidateID in pDiscoverResult.discoveredEntitiesProbability[entityID].Keys)
-                        {
-                            discoverDissambiguation.DissambiguationCandiates.Add(new DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate() { IDCandidate = candidateID, Score = pDiscoverResult.discoveredEntitiesProbability[entityID][candidateID] });
-                        }
-                        discoverItemBD.DissambiguationProblems.Add(discoverDissambiguation);
-                    }
-                    discoverItemBD.Error = "";
+                    //Hay dudas en la desambiguación, por lo que lo actualizamos en la BBDD con su estado correspondiente    
+                    discoverItemBD.UpdateDissambiguationProblems(
+                        pDiscoverResult.discoveredEntitiesProbability,
+                        pDiscoverResult.discoveredEntitiesWithDataBase.Keys.Union(pDiscoverResult.discoveredEntitiesWithId.Keys).Union(pDiscoverResult.discoveredEntitiesWithSubject).ToList(),
+                        pDiscoverResult.GetDataGraphRDF());
                     pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBD);
                 }
                 else
@@ -307,11 +300,7 @@ namespace API_DISCOVER.Utility
                     DeleteOrphanNodes();
 
                     //Lo marcamos como procesado en la BBDD y eliminamos sus metadatos
-                    discoverItemBD.Status = DiscoverItem.DiscoverItemStatus.Processed.ToString();
-                    discoverItemBD.DissambiguationProblems = null;
-                    discoverItemBD.DiscoverRdf = null;
-                    discoverItemBD.Rdf = null;
-                    discoverItemBD.Error = "";
+                    discoverItemBD.UpdateProcessed();
                     pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBD);
                 }
 
@@ -350,61 +339,46 @@ namespace API_DISCOVER.Utility
             else
             {
                 //Actualizamos en BBDD
-                DiscoverItem discoverItemBD = pDiscoverItemBDService.GetDiscoverItemById(pDiscoverItem.ID);
-                discoverItemBD.DiscoverRdf = pDiscoverResult.GetDataGraphRDF();
-                discoverItemBD.Status = DiscoverItem.DiscoverItemStatus.Processed.ToString();
-                discoverItemBD.DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
-                if (pDiscoverResult.discoveredEntitiesProbability.Count > 0)
-                {
-                    //Hay dudas en la desambiguación, por lo que lo almacenamos en la BBDD                    
-                    discoverItemBD.Status = DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString();
-                    foreach (string entityID in pDiscoverResult.discoveredEntitiesProbability.Keys)
-                    {
-                        DiscoverItem.DiscoverDissambiguation discoverDissambiguation = new DiscoverItem.DiscoverDissambiguation() { IDOrigin = entityID, DissambiguationCandiates = new List<DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate>() };
-                        foreach (string candidateID in pDiscoverResult.discoveredEntitiesProbability[entityID].Keys)
-                        {
-                            discoverDissambiguation.DissambiguationCandiates.Add(new DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate() { IDCandidate = candidateID, Score = pDiscoverResult.discoveredEntitiesProbability[entityID][candidateID] });
-                        }
-                        discoverItemBD.DissambiguationProblems.Add(discoverDissambiguation);
-                    }
-                }
+                DiscoverItem discoverItemBD = pDiscoverItemBDService.GetDiscoverItemById(pDiscoverItem.ID);               
+
                 //Reporte de descubrimiento
-                discoverItemBD.DiscoverReport = "Time processed (seconds): " + pDiscoverResult.secondsProcessed + "\n";
+                string discoverReport = "Time processed (seconds): " + pDiscoverResult.secondsProcessed + "\n";
                 if (pDiscoverResult.discoveredEntitiesWithSubject != null && pDiscoverResult.discoveredEntitiesWithSubject.Count > 0)
                 {
-                    discoverItemBD.DiscoverReport += "Entities discover with the same uri: " + pDiscoverResult.discoveredEntitiesWithSubject.Count + "\n";
+                    discoverReport += "Entities discover with the same uri: " + pDiscoverResult.discoveredEntitiesWithSubject.Count + "\n";
                     foreach (string uri in pDiscoverResult.discoveredEntitiesWithSubject)
                     {
-                        discoverItemBD.DiscoverReport += "\t" + uri + "\n";
+                        discoverReport += "\t" + uri + "\n";
                     }
                 }
                 if (pDiscoverResult.discoveredEntitiesWithId != null && pDiscoverResult.discoveredEntitiesWithId.Count > 0)
                 {
-                    discoverItemBD.DiscoverReport += "Entities discover with some common identifier: " + pDiscoverResult.discoveredEntitiesWithId.Count + "\n";
+                    discoverReport += "Entities discover with some common identifier: " + pDiscoverResult.discoveredEntitiesWithId.Count + "\n";
                     foreach (string uri in pDiscoverResult.discoveredEntitiesWithId.Keys)
                     {
-                        discoverItemBD.DiscoverReport += "\t" + uri + " --> " + pDiscoverResult.discoveredEntitiesWithId[uri] + "\n";
+                        discoverReport += "\t" + uri + " --> " + pDiscoverResult.discoveredEntitiesWithId[uri] + "\n";
                     }
                 }
                 if (pDiscoverResult.discoveredEntitiesWithDataBase != null && pDiscoverResult.discoveredEntitiesWithDataBase.Count > 0)
                 {
-                    discoverItemBD.DiscoverReport += "Entities discover with reconciliation config: " + pDiscoverResult.discoveredEntitiesWithDataBase.Count + "\n";
+                    discoverReport += "Entities discover with reconciliation config: " + pDiscoverResult.discoveredEntitiesWithDataBase.Count + "\n";
                     foreach (string uri in pDiscoverResult.discoveredEntitiesWithDataBase.Keys)
                     {
-                        discoverItemBD.DiscoverReport += "\t" + uri + " --> " + pDiscoverResult.discoveredEntitiesWithDataBase[uri] + "\n";
+                        discoverReport += "\t" + uri + " --> " + pDiscoverResult.discoveredEntitiesWithDataBase[uri] + "\n";
                     }
                 }
                 if (pDiscoverResult.orcidIntegration != null && pDiscoverResult.orcidIntegration.Count > 0)
                 {
-                    discoverItemBD.DiscoverReport += "Entities with identifiers obtained with ORCID integration: " + pDiscoverResult.orcidIntegration.Count + "\n";
+                    discoverReport += "Entities with identifiers obtained with ORCID integration: " + pDiscoverResult.orcidIntegration.Count + "\n";
                     foreach (string uri in pDiscoverResult.orcidIntegration.Keys)
                     {
                         foreach (string property in pDiscoverResult.orcidIntegration[uri].Keys)
                         {
-                            discoverItemBD.DiscoverReport += "\t" + uri + " - " + property + " --> " + pDiscoverResult.orcidIntegration[uri][property] + "\n";
+                            discoverReport += "\t" + uri + " - " + property + " --> " + pDiscoverResult.orcidIntegration[uri][property] + "\n";
                         }
                     }
                 }
+                discoverItemBD.UpdateReport(pDiscoverResult.discoveredEntitiesProbability, pDiscoverResult.GetDataGraphRDF(), discoverReport);
                 pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBD);
             }
         }
@@ -1580,6 +1554,23 @@ namespace API_DISCOVER.Utility
             return discoveredEntityList;
         }
 
+        //TODO revisar si hacemos desambiguación dentro del RDF
+        private static void ReconciliateRDF(ref Dictionary<string, string> pListaEntidadesReconciliadas, ref Dictionary<string, HashSet<string>> pEntitiesRdfTypes, ref Dictionary<string, string> pEntitiesRdfType, ref Dictionary<string, List<DisambiguationData>> pDisambiguationDataRdf, ref RohGraph pDataGraph, ref RohGraph pDataInferenceGraph, RohRdfsReasoner pReasoner)
+        {
+            PrepareData(pDataGraph, pReasoner, out pDataInferenceGraph, out pEntitiesRdfTypes, out pEntitiesRdfType, out pDisambiguationDataRdf);
+            bool hayQueReprocesar = true;
+            while (hayQueReprocesar)
+            {
+                hayQueReprocesar = false;
+                Dictionary<string, Dictionary<string, float>>  listaEntidadesReconciliadasDudosas = new Dictionary<string, Dictionary<string, float>>();
+                Dictionary<string, KeyValuePair<string, float>> listaEntidadesReconciliadasAux = ReconciliateData(ref pListaEntidadesReconciliadas,out listaEntidadesReconciliadasDudosas, pEntitiesRdfType, pDisambiguationDataRdf, pEntitiesRdfType, pDisambiguationDataRdf, ref pDataGraph,false);
+                if (listaEntidadesReconciliadasAux.Count > 0)
+                {
+                    hayQueReprocesar = true;
+                }
+                PrepareData(pDataGraph, pReasoner, out pDataInferenceGraph, out pEntitiesRdfTypes, out pEntitiesRdfType, out pDisambiguationDataRdf);
+            }
+        }
         /// <summary>
         /// Efectua la reconciliación con los datos proporcionados
         /// </summary>
@@ -1621,7 +1612,7 @@ namespace API_DISCOVER.Utility
                         foreach (DisambiguationData disambiguationData in pDisambiguationDataRdf[entityID_RDF])
                         {
                             //Recorremos los datos de desambiguación del resto de elementos con el mismo rdf:type
-                            foreach (KeyValuePair<string, List<DisambiguationData>> candidato in pDisambiguationDataCandidate.Where(x => (!pExternalIntegration && pEntitiesRdfType[entityID_RDF] == pEntitiesRdfTypeCandidate[x.Key]) || (pExternalIntegration)).ToList())
+                            foreach (KeyValuePair<string, List<DisambiguationData>> candidato in pDisambiguationDataCandidate.Where(x => (!pExternalIntegration && pEntitiesRdfType[entityID_RDF] == pEntitiesRdfTypeCandidate[x.Key] && entityID_RDF!=x.Key) || (pExternalIntegration)).ToList())
                             {
                                 //y la misma configuración de desambiguación
                                 DisambiguationData disambiguationDataCandidato = candidato.Value.FirstOrDefault(x => x.disambiguation == disambiguationData.disambiguation);
@@ -1663,6 +1654,11 @@ namespace API_DISCOVER.Utility
                                         }
                                         if (similarity >= mMinScore)
                                         {
+                                            //No hay que almacenar los candidatos 'inversos' (se guardaría duplicado)
+                                            if(candidatosAux.ContainsKey(candidato.Key) && candidatosAux[candidato.Key].ContainsKey(entityID_RDF))
+                                            {
+                                                continue;
+                                            }
                                             if (!candidatosAux.ContainsKey(entityID_RDF))
                                             {
                                                 candidatosAux.Add(entityID_RDF, new Dictionary<string, float>());

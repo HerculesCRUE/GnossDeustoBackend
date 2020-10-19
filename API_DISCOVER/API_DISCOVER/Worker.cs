@@ -75,12 +75,7 @@ namespace API_DISCOVER
                 //Modificamos los datos del DiscoverItem que ha fallado
                 DiscoverItemBDService discoverItemBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>();
                 DiscoverItem discoverItemBBDD = discoverItemBDService.GetDiscoverItemById(discoverItem.ID);
-                discoverItemBBDD.Status = DiscoverItem.DiscoverItemStatus.Error.ToString();
-                discoverItemBBDD.Error = $"{ex.Message}\n{ex.StackTrace}\n";
-                discoverItemBBDD.Rdf = discoverItem.Rdf;
-                discoverItemBBDD.DiscoverRdf = "";
-                discoverItemBBDD.DiscoverReport = "";
-                discoverItemBBDD.DissambiguationProblems = null;
+                discoverItemBBDD.UpdateError($"{ex.Message}\n{ex.StackTrace}\n", discoverItem.Rdf);
                 discoverItemBDService.ModifyDiscoverItem(discoverItemBBDD);
 
                 if (!string.IsNullOrEmpty(discoverItem.JobID))

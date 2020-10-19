@@ -5,6 +5,8 @@
 
 using API_DISCOVER.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace API_DISCOVER.Models
 {
@@ -22,6 +24,15 @@ namespace API_DISCOVER.Models
             }
            
 
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DiscoverItem>()
+            .Property(e => e.LoadedEntities)
+            .HasConversion(
+                v => string.Join('|', v),
+                v => v.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList());
         }
 
     }

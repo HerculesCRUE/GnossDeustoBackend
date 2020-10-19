@@ -5,6 +5,8 @@
 
 using ApiCargaWebInterface.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace ApiCargaWebInterface.Models
 {
@@ -18,6 +20,13 @@ namespace ApiCargaWebInterface.Models
         {           
 
         }
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DiscoverItem>()
+            .Property(e => e.LoadedEntities)
+            .HasConversion(
+                v => string.Join('|', v),
+                v => v.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList());
+        }
     }
 }

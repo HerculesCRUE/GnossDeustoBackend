@@ -151,7 +151,6 @@ namespace ApiCargaWebInterface.Models.Entities
         [ForeignKey("DiscoverItemID")]
         public virtual ICollection<DiscoverDissambiguation> DissambiguationProblems { get; set; }
 
-        [NotMapped]
         public List<string> LoadedEntities { get; set; }
     }
 }
