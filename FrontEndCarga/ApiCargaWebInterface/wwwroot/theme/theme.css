@@ -1511,3 +1511,4 @@ span.linkext {
 
 .fichaRecurso.detailsRdf .wrapCol .header-resource .h1-container h1{margin-top:0}
 .fichaRecurso.detailsRdf .col-contenido .wrapCol{padding: 20px 40px}
+.detailsRdf td {   vertical-align: top}
