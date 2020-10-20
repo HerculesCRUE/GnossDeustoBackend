@@ -103,7 +103,7 @@ dificultades ni problemas reseñables, por lo que incluirán. Se trata de:
     crear o actualizar recursos (LDPRs), mediante una cabecera Link, una
     relación <http://www.w3.org/ns/ldp#constrainedBy> y un URI que
     defina el conjunto de restricciones. Por ejemplo y como veremos en
-    nuestro caso, un servidor LPD podría rechazar la creación de
+    nuestro caso, un servidor LDP podría rechazar la creación de
     recursos con PUT o POST, por lo que se devolvería esa cabecera Link al
     responder con un código 4xx.
 
@@ -139,7 +139,7 @@ cumplir un servidor LDP no tendría ninguna característica que no deba
 tener un servidor Linked Data, por lo que también lo cumplirá. 
 Se trata de:
 
--   Los recursos RDF deben ser recursos LPD-RS.
+-   Los recursos RDF deben ser recursos LDP-RS.
 
 -   El servidor LDP debe proporcionar una representación RDF de los
     recursos LDP-RS.
@@ -168,7 +168,7 @@ desde un servidor de ficheros.
 
 2.  Sólo necesita un contenedor. 
 
-Según el estándar LPD, la separación en containers tiene sentido 
+Según el estándar LDP, la separación en containers tiene sentido 
 cuando la información se organiza en conceptos que particionan 
 la información. En el ejemplo del estándar hablan de blogs, 
 páginas wiki o productos. Consideramos que no es necesario aplicar
