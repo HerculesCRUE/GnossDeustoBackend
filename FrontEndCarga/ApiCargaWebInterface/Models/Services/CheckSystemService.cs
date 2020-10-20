@@ -58,11 +58,11 @@ namespace ApiCargaWebInterface.Models.Services
             string fileText = null;
             if (api.Equals("Carga"))
             {
-                pathApi = _configPathLog.GetLogPathCarga();
+                pathApi = $"{_configPathLog.GetLogPathBase()}{_configPathLog.GetLogPathCarga()}";
             }
             else if (api.Equals("Cron"))
             {
-                pathApi = _configPathLog.GetLogPathCron();
+                pathApi = $"{_configPathLog.GetLogPathBase()}{_configPathLog.GetLogPathCron()}";
             }
             if (!string.IsNullOrEmpty(pathApi))
             {
@@ -78,7 +78,7 @@ namespace ApiCargaWebInterface.Models.Services
         /// <returns>diccioario con el nombre del fichero y fecha de la última modificación</returns>
         public Dictionary<string, DateTime> GetCronLogs()
         {
-            return GetFiles(_configPathLog.GetLogPathCron());
+            return GetFiles($"{_configPathLog.GetLogPathBase()}{_configPathLog.GetLogPathCron()}");
         }
         /// <summary>
         /// Obtiene una lista de ficheros de log del api carga
@@ -86,7 +86,7 @@ namespace ApiCargaWebInterface.Models.Services
         /// <returns>diccioario con el nombre del fichero y fecha de la última modificación</returns>
         public Dictionary<string, DateTime> GetCargaLogs()
         {
-            return GetFiles(_configPathLog.GetLogPathCarga());
+            return GetFiles($"{_configPathLog.GetLogPathBase()}{_configPathLog.GetLogPathCarga()}");
         }
         /// <summary>
         /// Obtiene una lista de ficheros de una ruta determinada

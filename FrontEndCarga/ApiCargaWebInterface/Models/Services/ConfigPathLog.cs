@@ -21,8 +21,9 @@ namespace ApiCargaWebInterface.Models.Services
         private string _LogPath;
         private string _LogPathCarga;
         private string _LogPathCron;
+        private string _LogPathBase;
         /// <summary>
-        /// Obtiene el path configurado para los logs de la propia aplicación
+        /// Obtiene el nombre de la carpeta configurada para los logs de la propia aplicación
         /// </summary>
         /// <returns>path propio</returns>
         public string GetLogPath()
@@ -49,7 +50,34 @@ namespace ApiCargaWebInterface.Models.Services
             return _LogPath;
         }
         /// <summary>
-        /// Obtiene el path de log configurado para el api carga
+        /// Obtiene el pathBase de log configurado para los apis
+        /// </summary>
+        /// <returns>path de logs del apiCarga</returns>
+        public string GetLogPathBase()
+        {
+            if (string.IsNullOrEmpty(_LogPathBase))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                string logPath = "";
+                if (environmentVariables.Contains("LogPathBase"))
+                {
+                    logPath = environmentVariables["LogPathBase"] as string;
+                }
+                else
+                {
+                    logPath = Configuration["LogPathBase"];
+                }
+                _LogPathBase = logPath;
+            }
+            return _LogPathBase;
+        }
+        /// <summary>
+        /// Obtiene el nombre de la carpeta configurada para el api carga
         /// </summary>
         /// <returns>path de logs del apiCarga</returns>
         public string GetLogPathCarga()
@@ -76,7 +104,7 @@ namespace ApiCargaWebInterface.Models.Services
             return _LogPathCarga;
         }
         /// <summary>
-        /// Obtiene el path de log configurado para el api cron
+        /// Obtiene el nombre de la carpeta configurada para el api cron
         /// </summary>
         /// <returns>path de logs del apiCron</returns>
         public string GetLogPathCron()

@@ -3,6 +3,7 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase que actua de Middleware para la gestión de las excepciones
 using ApiCargaWebInterface.Extra.Exceptions;
+using ApiCargaWebInterface.Models.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -21,13 +22,14 @@ namespace ApiCargaWebInterface.Middlewares
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ConfigPathLog _configPathLog;
         private IConfigurationRoot Configuration { get; set; }
         private string _timeStamp;
         private string _LogPath;
-        public ErrorHandlingMiddleware(RequestDelegate next)
+        public ErrorHandlingMiddleware(RequestDelegate next, ConfigPathLog configPathLog)
         {
             _next = next;
-
+            _configPathLog = configPathLog;
         }
 
         public async Task Invoke(HttpContext context)
@@ -117,26 +119,7 @@ namespace ApiCargaWebInterface.Middlewares
         /// <returns></returns>
         public string GetLogPath()
         {
-            if (string.IsNullOrEmpty(_LogPath))
-            {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                string logPath = "";
-                if (environmentVariables.Contains("LogPath"))
-                {
-                    logPath = environmentVariables["LogPath"] as string;
-                }
-                else
-                {
-                    logPath = Configuration["LogPath"];
-                }
-                _LogPath = logPath;
-            }
-            return _LogPath;
+            return $"{_configPathLog.GetLogPathBase()}{_configPathLog.GetLogPath()}";
         }
     }
 }
