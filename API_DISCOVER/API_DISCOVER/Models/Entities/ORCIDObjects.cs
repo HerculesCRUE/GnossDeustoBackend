@@ -92,6 +92,9 @@ namespace API_DISCOVER.Models.Entities
                 [DataMember(Name = "title")]
                 public Title title { get; set; }
 
+                [DataMember(Name = "external-ids")]
+                public Externalids externalids { get; set; }
+
                 [DataContract]
                 public class Title
                 {
@@ -109,6 +112,29 @@ namespace API_DISCOVER.Models.Entities
                         }
                         [DataMember(Name = "value")]
                         public string value { get; set; }
+                    }
+                }
+
+                [DataContract]
+                public class Externalids
+                {
+                    public Externalids()
+                    {
+                    }
+                    [DataMember(Name = "external-id")]
+                    public List<Externalid> externalid { get; set; }
+
+                    [DataContract]
+                    public class Externalid
+                    {
+                        public Externalid()
+                        {
+                        }
+                        [DataMember(Name = "external-id-type")]
+                        public string externalidtype { get; set; }
+
+                        [DataMember(Name = "external-id-value")]
+                        public string externalidvalue { get; set; }
                     }
                 }
             }
