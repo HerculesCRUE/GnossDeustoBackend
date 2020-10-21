@@ -2242,7 +2242,7 @@ namespace API_DISCOVER.Utility
                                     {
                                         if (!identifiersDiscover[key].ContainsKey(key2))
                                         {
-                                            identifiersDiscover[key].Add(key2, identifiersDiscover[key][key2]);
+                                            identifiersDiscover[key].Add(key2, identifiersDiscoverAux[key][key2]);
                                         }
                                     }
 
