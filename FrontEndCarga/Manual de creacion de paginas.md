@@ -24,7 +24,7 @@ Como curiosidad esta página contiene el código:
     }
 	
  - Layout = "_Layout": Con este código indicamos que coja el Layout compartida con todas las páginas del hércules para tener las páginas de forma homogénea.
- - ViewData["BodyClass"] = "fichaRecurso": Añade la clase fichaRecurso al body de la página (él cuál está en el Layaout) para poder usar los estilos de la clase de la web.
+ - ViewData["BodyClass"] = "fichaRecurso": Añade la clase fichaRecurso al body de la página (él cuál está en el Layout) para poder usar los estilos de la clase de la web.
  
  Creación de páginas con contenido dinámico
 ----------------
