@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 
 namespace ApiCargaWebInterface.Models.Services
 {
@@ -81,14 +82,25 @@ namespace ApiCargaWebInterface.Models.Services
             }
             catch (HttpRequestException)
             {
+                StringBuilder except = new StringBuilder();
+                except.AppendLine($"Url del intento de llamada: {urlBase}{urlMethod} --------- error: ");
                 if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
                 {
-                    throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+                    except.AppendLine(response.Content.ReadAsStringAsync().Result);
+                    throw new HttpRequestException(except.ToString());
                 }
                 else
                 {
-                    throw new HttpRequestException(response.ReasonPhrase);
+                    except.AppendLine(response.ReasonPhrase);
+                    throw new HttpRequestException(except.ToString());
                 }
+            }
+            catch(Exception ex)
+            {
+                StringBuilder except = new StringBuilder();
+                except.AppendLine($"Url del intento de llamada: {urlBase}{urlMethod} --------- error: ");
+                except.AppendLine(ex.Message);
+                throw new Exception(except.ToString());
             }
             return result;
         }

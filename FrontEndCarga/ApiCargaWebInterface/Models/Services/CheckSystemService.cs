@@ -43,6 +43,10 @@ namespace ApiCargaWebInterface.Models.Services
             {
                 return GetCronLogs();
             }
+            else if (api.Equals("Web"))
+            {
+                return GetWebLogs();
+            }
             return null;
         }
         /// <summary>
@@ -64,10 +68,19 @@ namespace ApiCargaWebInterface.Models.Services
             {
                 pathApi = $"{_configPathLog.GetLogPathBase()}{_configPathLog.GetLogPathCron()}";
             }
+            else if (api.Equals("Web"))
+            {
+                pathApi = $"{_configPathLog.GetLogPathBase()}{_configPathLog.GetLogPath()}";
+            }
             if (!string.IsNullOrEmpty(pathApi))
             {
                 path = $"{pathApi}/{log_name}";
-                fileText = File.ReadAllText(path);
+                var stream = File.Open(path, FileMode.Open,FileAccess.Read, FileShare.ReadWrite);
+                var streamReader = new StreamReader(stream);
+                fileText = streamReader.ReadToEnd();
+                streamReader.Close();
+                stream.Close();
+                //fileText = File.ReadAllText(path);
             }
             return fileText;
         }
@@ -87,6 +100,15 @@ namespace ApiCargaWebInterface.Models.Services
         public Dictionary<string, DateTime> GetCargaLogs()
         {
             return GetFiles($"{_configPathLog.GetLogPathBase()}{_configPathLog.GetLogPathCarga()}");
+        }
+
+        /// <summary>
+        /// Obtiene una lista de ficheros de log de la web
+        /// </summary>
+        /// <returns>diccioario con el nombre del fichero y fecha de la última modificación</returns>
+        public Dictionary<string, DateTime> GetWebLogs()
+        {
+            return GetFiles($"{_configPathLog.GetLogPathBase()}{_configPathLog.GetLogPath()}");
         }
         /// <summary>
         /// Obtiene una lista de ficheros de una ruta determinada
