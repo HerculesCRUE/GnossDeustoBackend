@@ -1,11 +1,58 @@
 ﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Net;
 using System.Runtime.Serialization;
 
 namespace API_DISCOVER.Models.Entities
 {
+    /// <summary>
+    /// Clase para interactuar con el API de ORCID
+    /// </summary>
+    public static class ORCID_API
+    {
+        /// <summary>
+        /// Busca personas en el API de ORCID
+        /// </summary>
+        /// <param name="q">Texto a buscar (con urlEncode)</param>
+        /// <returns>Objeto con las personas encontradas</returns>
+        public static ORCIDExpandedSearch ExpandedSearch(string q)
+        {
+            WebClient webClient = new WebClient();
+            webClient.Headers.Add(HttpRequestHeader.Accept, "application/json");
+            string jsonRespuesta = webClient.DownloadString("https://pub.orcid.org/v3.0/expanded-search?q=" + q + "&rows=5");
+            return JsonConvert.DeserializeObject<ORCIDExpandedSearch>(jsonRespuesta);
+        }
+        
+        /// <summary>
+        /// Obtiene los datos de una persona en el API de ORCID
+        /// </summary>
+        /// <param name="id">Identificador de ORCID</param>
+        /// <returns>Objeto con los datos de la persona</returns>
+        public static ORCIDPerson Person(string id)
+        {
+            WebClient webClient = new WebClient();
+            webClient.Headers.Add(HttpRequestHeader.Accept, "application/json");
+            string jsonRespuestaOrcidPerson = webClient.DownloadString("https://pub.orcid.org/v3.0/" + id + "/person");
+            return JsonConvert.DeserializeObject<ORCIDPerson>(jsonRespuestaOrcidPerson);
+        }
+
+        /// <summary>
+        /// Obtiene los trabajos de una persona en el API de ORCID
+        /// </summary>
+        /// <param name="id">Identificador de ORCID</param>
+        /// <returns>Objeto con los datos de las publicaciones</returns>
+        public static ORCIDWorks Works(string id)
+        {
+            WebClient webClient = new WebClient();
+            webClient.Headers.Add(HttpRequestHeader.Accept, "application/json");
+            string jsonRespuestaOrcidWorks = webClient.DownloadString("https://pub.orcid.org/v3.0/" +id + "/works");
+            return JsonConvert.DeserializeObject<ORCIDWorks>(jsonRespuestaOrcidWorks);
+        }
+    }
+
     [DataContract]
     public class ORCIDExpandedSearch
     {
@@ -91,6 +138,8 @@ namespace API_DISCOVER.Models.Entities
                 }
                 [DataMember(Name = "title")]
                 public Title title { get; set; }
+                [DataMember(Name = "put-code")]
+                public string putcode { get; set; }
 
                 [DataMember(Name = "external-ids")]
                 public Externalids externalids { get; set; }
