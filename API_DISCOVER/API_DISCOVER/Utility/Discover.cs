@@ -37,7 +37,6 @@ namespace API_DISCOVER.Utility
         private readonly static string mPropertyRohIdentifier = "http://purl.org/dc/terms/identifier";
 
 
-
         /// <summary>
         /// Realiza el desubrimiento sobre un RDF
         /// </summary>
@@ -211,6 +210,7 @@ namespace API_DISCOVER.Utility
                     //TODO fusionar seq
                     //TODO Reorganizar seq
                     //TODO aplicar estas casisuisticas en la reconciliación de RDF
+                    //TODO eliminar entidades vacías y las ropiedades que apuntan a ellas
 
                     //No hay problemas en la reconciliación por lo que procedemos
                     #region 1º Eliminamos de la BBD las entidades principales que aparecen en el RDF
@@ -2357,7 +2357,7 @@ namespace API_DISCOVER.Utility
         /// <returns></returns>
         private static float GetSimilarity(string pOriginal, string pCandidato, Disambiguation.Property.Type pType, DiscoverCache pDiscoverCache, int? pMaxNumWordsTitle = null)
         {
-            string key = $"{pOriginal}{pCandidato}{pType}{pMaxNumWordsTitle}";
+            string key = $"{pOriginal.GetHashCode().ToString()}{pCandidato.GetHashCode().ToString()}{pType.GetHashCode().ToString()}{pMaxNumWordsTitle}";
             if (pDiscoverCache.Similarity.ContainsKey(key))
             {
                 return pDiscoverCache.Similarity[key];
@@ -2789,16 +2789,7 @@ namespace API_DISCOVER.Utility
 
                 //1.-Hacemos una petición a ORCID al método  ‘expanded - search' con el nombre de la persona
                 string q = HttpUtility.UrlEncode(NormalizeName(nombrePersona.ToLower(), pDiscoverCache, false, true, true).Trim());
-                ORCIDExpandedSearch expandedSearch = null;
-                if (pDiscoverCache.ORCIDExpandedSearch.ContainsKey(q))
-                {
-                    expandedSearch = pDiscoverCache.ORCIDExpandedSearch[q];
-                }
-                else
-                {
-                    expandedSearch = ORCID_API.ExpandedSearch(q);
-                    pDiscoverCache.ORCIDExpandedSearch[q] = expandedSearch;
-                }
+                ORCIDExpandedSearch expandedSearch = SelectORCIDExpandedSearchCache(q, pDiscoverCache);
                 if (expandedSearch.expanded_result != null)
                 {
                     foreach (ORCIDExpandedSearch.Result result in expandedSearch.expanded_result)
@@ -2831,16 +2822,7 @@ namespace API_DISCOVER.Utility
                             orcidGraph.Assert(new Triple(subjectPerson, orcidProperty, nameOrcid));
 
                             //Hacemos peticiones al métdo dee ORCID ‘orcid}/ person' y almacenamos en un grafo en local los datos de los identificadores                       
-                            ORCIDPerson person = null;
-                            if (pDiscoverCache.ORCIDPerson.ContainsKey(result.orcid_id))
-                            {
-                                person = pDiscoverCache.ORCIDPerson[result.orcid_id];
-                            }
-                            else
-                            {
-                                person = ORCID_API.Person(result.orcid_id);
-                                pDiscoverCache.ORCIDPerson[result.orcid_id] = person;
-                            }
+                            ORCIDPerson person = SelectORCIDPersonCache(result.orcid_id, pDiscoverCache);
 
                             if (person.external_identifiers != null && person.external_identifiers.external_identifier != null)
                             {
@@ -2863,16 +2845,7 @@ namespace API_DISCOVER.Utility
 
 
                             //y 'orcid}/ works’ y almacenamos en un grafo en local los datos de los trabajos realizados.
-                            ORCIDWorks works = null;
-                            if (pDiscoverCache.ORCIDWorks.ContainsKey(result.orcid_id))
-                            {
-                                works = pDiscoverCache.ORCIDWorks[result.orcid_id];
-                            }
-                            else
-                            {
-                                works = ORCID_API.Works(result.orcid_id);
-                                pDiscoverCache.ORCIDWorks.Add(result.orcid_id, works);
-                            }
+                            ORCIDWorks works = SelectORCIDWorksCache(result.orcid_id, pDiscoverCache);
                             Dictionary<string, KeyValuePair<string, string>> worksData = new Dictionary<string, KeyValuePair<string, string>>();
                             if (works.group != null)
                             {
@@ -3030,16 +3003,7 @@ namespace API_DISCOVER.Utility
                 queryScopus = queryScopus.Replace(" ", "' '");
                 queryScopus = "'" + queryScopus + "'";
                 string q = HttpUtility.UrlEncode(queryScopus);
-                SCOPUSWorks works = null;
-                if (pDiscoverCache.SCOPUSWorks.ContainsKey(q))
-                {
-                    works = pDiscoverCache.SCOPUSWorks[q];
-                }
-                else
-                {
-                    works = SCOPUS_API.Works(q, mScopusApiKey);
-                    pDiscoverCache.SCOPUSWorks[q] = works;
-                }
+                SCOPUSWorks works = SelectSCOPUSWorksCache(q, pDiscoverCache);
 
                 if (works.entry.Count() > 0)
                 {
@@ -3102,16 +3066,7 @@ namespace API_DISCOVER.Utility
                                         if (estaPublicacionEnDuda || nombresPersonas.Where(x => GetNameSimilarity(x.Value, personName, pDiscoverCache) > 0).Count() > 0)
                                         {
                                             string idPerson = "http://scopus.com/Person/" + author.authid;
-                                            SCOPUSPerson person = null;
-                                            if (pDiscoverCache.SCOPUSPerson.ContainsKey(author.authid))
-                                            {
-                                                person = pDiscoverCache.SCOPUSPerson[author.authid];
-                                            }
-                                            else
-                                            {
-                                                person = SCOPUS_API.Person(author.authid, mScopusApiKey);
-                                                pDiscoverCache.SCOPUSPerson[author.authid] = person;
-                                            }
+                                            SCOPUSPerson person = SelectSCOPUSPersonCache(author.authid, pDiscoverCache);
                                             IUriNode subjectPerson = scopusGraph.CreateUriNode(UriFactory.Create(idPerson));
                                             IUriNode rdftypePerson = scopusGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#Person"));
                                             scopusGraph.Assert(new Triple(subjectPerson, rdftypeProperty, rdftypePerson));
@@ -3221,16 +3176,7 @@ namespace API_DISCOVER.Utility
                 //1.-Hacemos una petición a ORCID al método  ‘expanded - search' con el nombre de la persona
                 string q = nombrePersona.ToLower();
 
-                DBLPAuthors authors = null;
-                if (pDiscoverCache.DBLPAuthors.ContainsKey(q))
-                {
-                    authors = pDiscoverCache.DBLPAuthors[q];
-                }
-                else
-                {
-                    authors = DBLP_API.AuthorSearch(q);
-                    pDiscoverCache.DBLPAuthors[q] = authors;
-                }
+                DBLPAuthors authors = SelectDBLPAuthorsCache(q, pDiscoverCache);
                 if (authors != null && authors.hits != null && authors.hits.hit != null)
                 {
                     foreach (resultHitsHit result in authors.hits.hit)
@@ -3265,17 +3211,7 @@ namespace API_DISCOVER.Utility
                             dblpGraph.Assert(new Triple(subjectPerson, dblpProperty, nameDBLP));
 
                             //Hacemos peticiones al métdo 'person' y almacenamos en un grafo en local los datos de los identificadores                       
-                            DBLPPerson person = null;
-                            if (pDiscoverCache.DBLPPerson.ContainsKey(idPerson))
-                            {
-                                person = pDiscoverCache.DBLPPerson[idPerson];
-                            }
-                            else
-                            {
-                                person = DBLP_API.Person(idPerson);
-                                pDiscoverCache.DBLPPerson[idPerson] = person;
-                            }
-
+                            DBLPPerson person = SelectDBLPPersonCache(idPerson, pDiscoverCache);
                             if (person != null && person.person != null && person.person.url != null)
                             {
                                 foreach (string url in person.person.url)
@@ -3508,6 +3444,159 @@ namespace API_DISCOVER.Utility
             }
             return pDiscoverCache.Sparql[hashCode];
         }
+
+
+        /// <summary>
+        /// Hace una consulta al api de ORCID usando la cache de discover
+        /// </summary>
+        /// <param name="q">texto</param>
+        /// <param name="pDiscoverCache">Caché de Discover</param>
+        /// <returns></returns>
+        private static ORCIDExpandedSearch SelectORCIDExpandedSearchCache(string q, DiscoverCache pDiscoverCache)
+        {
+            string hashCode = q.GetHashCode().ToString();
+            ORCIDExpandedSearch expandedSearch = null;
+            if (pDiscoverCache.ORCIDExpandedSearch.ContainsKey(hashCode))
+            {
+                expandedSearch = pDiscoverCache.ORCIDExpandedSearch[hashCode];
+            }
+            else
+            {
+                expandedSearch = ORCID_API.ExpandedSearch(q);
+                pDiscoverCache.ORCIDExpandedSearch[hashCode] = expandedSearch;
+            }
+            return expandedSearch;
+        }
+
+
+        /// <summary>
+        /// Hace una consulta al api de ORCID usando la cache de discover
+        /// </summary>
+        /// <param name="orcid_id">Identificador de ORCID de la persona</param>
+        /// <param name="pDiscoverCache">Caché de Discover</param>
+        /// <returns></returns>
+        private static ORCIDPerson SelectORCIDPersonCache(string orcid_id, DiscoverCache pDiscoverCache)
+        {
+            ORCIDPerson person = null;
+            if (pDiscoverCache.ORCIDPerson.ContainsKey(orcid_id))
+            {
+                person = pDiscoverCache.ORCIDPerson[orcid_id];
+            }
+            else
+            {
+                person = ORCID_API.Person(orcid_id);
+                pDiscoverCache.ORCIDPerson[orcid_id] = person;
+            }
+            return person;
+        }
+
+        /// <summary>
+        /// Hace una consulta al api de ORCID usando la cache de discover
+        /// </summary>
+        /// <param name="orcid_id">Identificador de ORCID de la persona</param>
+        /// <param name="pDiscoverCache">Caché de Discover</param>
+        /// <returns></returns>
+        private static ORCIDWorks SelectORCIDWorksCache(string orcid_id, DiscoverCache pDiscoverCache)
+        {
+            ORCIDWorks works = null;
+            if (pDiscoverCache.ORCIDWorks.ContainsKey(orcid_id))
+            {
+                works = pDiscoverCache.ORCIDWorks[orcid_id];
+            }
+            else
+            {
+                works = ORCID_API.Works(orcid_id);
+                pDiscoverCache.ORCIDWorks.Add(orcid_id, works);
+            }
+            return works;
+        }
+
+        /// <summary>
+        /// Hace una consulta al api de DBLP usando la cache de discover
+        /// </summary>
+        /// <param name="q">texto</param>
+        /// <param name="pDiscoverCache">Caché de Discover</param>
+        /// <returns></returns>
+        private static DBLPAuthors SelectDBLPAuthorsCache(string q, DiscoverCache pDiscoverCache)
+        {
+            string hashCode = q.GetHashCode().ToString();
+            DBLPAuthors authors = null;
+            if (pDiscoverCache.DBLPAuthors.ContainsKey(hashCode))
+            {
+                authors = pDiscoverCache.DBLPAuthors[hashCode];
+            }
+            else
+            {
+                authors = DBLP_API.AuthorSearch(q);
+                pDiscoverCache.DBLPAuthors[hashCode] = authors;
+            }
+            return authors;
+        }
+
+        /// <summary>
+        /// Hace una consulta al api de DBLP usando la cache de discover
+        /// </summary>
+        /// <param name="idPerson">Identificador de DBLP de la persona</param>
+        /// <param name="pDiscoverCache">Caché de Discover</param>
+        /// <returns></returns>
+        private static DBLPPerson SelectDBLPPersonCache(string idPerson, DiscoverCache pDiscoverCache)
+        {
+            DBLPPerson person = null;
+            if (pDiscoverCache.DBLPPerson.ContainsKey(idPerson))
+            {
+                person = pDiscoverCache.DBLPPerson[idPerson];
+            }
+            else
+            {
+                person = DBLP_API.Person(idPerson);
+                pDiscoverCache.DBLPPerson[idPerson] = person;
+            }
+            return person;
+        }
+
+        /// <summary>
+        /// Hace una consulta al api de SCOPUS usando la cache de discover
+        /// </summary>
+        /// <param name="q">texto</param>
+        /// <param name="pDiscoverCache">Caché de Discover</param>
+        /// <returns></returns>
+        private static SCOPUSWorks SelectSCOPUSWorksCache(string q, DiscoverCache pDiscoverCache)
+        {
+            string hashCode = q.GetHashCode().ToString();
+            SCOPUSWorks works = null;
+            if (pDiscoverCache.SCOPUSWorks.ContainsKey(hashCode))
+            {
+                works = pDiscoverCache.SCOPUSWorks[hashCode];
+            }
+            else
+            {
+                works = SCOPUS_API.Works(q, mScopusApiKey);
+                pDiscoverCache.SCOPUSWorks[hashCode] = works;
+            }
+            return works;
+        }
+
+        /// <summary>
+        /// Hace una consulta al api de SCOPUS usando la cache de discover
+        /// </summary>
+        /// <param name="authid">Identificador de SCOPUS de la persona</param>
+        /// <param name="pDiscoverCache">Caché de Discover</param>
+        /// <returns></returns>
+        private static SCOPUSPerson SelectSCOPUSPersonCache(ulong authid, DiscoverCache pDiscoverCache)
+        {
+            SCOPUSPerson person = null;
+            if (pDiscoverCache.SCOPUSPerson.ContainsKey(authid))
+            {
+                person = pDiscoverCache.SCOPUSPerson[authid];
+            }
+            else
+            {
+                person = SCOPUS_API.Person(authid, mScopusApiKey);
+                pDiscoverCache.SCOPUSPerson[authid] = person;
+            }
+            return person;
+        }
+
 
         /// <summary>
         /// Divide una lista en N listas
