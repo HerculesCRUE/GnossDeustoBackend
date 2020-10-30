@@ -36,6 +36,8 @@ namespace API_DISCOVER.Utility
 
         private readonly static string mPropertyRohIdentifier = "http://purl.org/dc/terms/identifier";
 
+
+
         /// <summary>
         /// Realiza el desubrimiento sobre un RDF
         /// </summary>
@@ -205,6 +207,11 @@ namespace API_DISCOVER.Utility
                 }
                 else
                 {
+                    //TODO reconciliar con todas las clases compatibles
+                    //TODO fusionar seq
+                    //TODO Reorganizar seq
+                    //TODO aplicar estas casisuisticas en la reconciliación de RDF
+
                     //No hay problemas en la reconciliación por lo que procedemos
                     #region 1º Eliminamos de la BBD las entidades principales que aparecen en el RDF
                     List<string> mainEntities = new List<string>();
@@ -1553,7 +1560,7 @@ namespace API_DISCOVER.Utility
                             {
                                 var coincidenciaBBDD = identificadoresBBDDPorRdfType[rdfType].FirstOrDefault(x => x.Value.ContainsKey(property) && x.Value[property].Intersect(identificadoresRDFPorRdfType[rdfType][entityID][property]).Count() > 0);
 
-                                if (coincidenciaBBDD.Key != null && coincidenciaBBDD.Value != null)
+                                if (coincidenciaBBDD.Key != null && coincidenciaBBDD.Value != null && coincidenciaBBDD.Key!= entityID)
                                 {
                                     TripleStore store = new TripleStore();
                                     store.Add(pDataGraph);
@@ -1744,44 +1751,47 @@ namespace API_DISCOVER.Utility
                             urlReconciliada = canditosUmbralMaximo[0];
                         }
 
-                        TripleStore store = new TripleStore();
-                        store.Add(pDataGraph);
-                        //Cambiamos candidato.Key por entityID
-                        SparqlUpdateParser parser = new SparqlUpdateParser();
-                        //Actualizamos los sujetos
-                        SparqlUpdateCommandSet updateSubject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                        if (urlReconciliada != entity)
+                        {
+                            TripleStore store = new TripleStore();
+                            store.Add(pDataGraph);
+                            //Cambiamos candidato.Key por entityID
+                            SparqlUpdateParser parser = new SparqlUpdateParser();
+                            //Actualizamos los sujetos
+                            SparqlUpdateCommandSet updateSubject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
                                                                     INSERT{<" + urlReconciliada + @"> ?p ?o.}
                                                                     WHERE 
                                                                     {
                                                                         ?s ?p ?o.   FILTER(?s = <" + entity + @">)
                                                                     }");
-                        //Actualizamos los objetos
-                        SparqlUpdateCommandSet updateObject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                            //Actualizamos los objetos
+                            SparqlUpdateCommandSet updateObject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
                                                                     INSERT{?s ?p <" + urlReconciliada + @">.}
                                                                     WHERE 
                                                                     {
                                                                         ?s ?p ?o.   FILTER(?o = <" + entity + @">)
                                                                     }");
-                        LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
-                        processor.ProcessCommandSet(updateSubject);
-                        processor.ProcessCommandSet(updateObject);
+                            LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
+                            processor.ProcessCommandSet(updateSubject);
+                            processor.ProcessCommandSet(updateObject);
 
-                        pListaEntidadesReconciliadas.Add(entity, urlReconciliada);
-                        float score = 0;
-                        if (canditosSeguros.Count == 1)
-                        {
-                            score = 1;
-                        }
-                        else
-                        {
-                            score = candidatos[entity][canditosUmbralMaximo[0]];
-                        }
-                        discoveredEntityList.Add(entity, new KeyValuePair<string, float>(urlReconciliada, score));
-                        pHasChanges = true;
-                        if (pListaEntidadesRDFEnriquecer.ContainsKey(entity))
-                        {
-                            pListaEntidadesRDFEnriquecer.Add(urlReconciliada, pListaEntidadesRDFEnriquecer[entity]);
-                            pListaEntidadesRDFEnriquecer.Remove(entity);
+                            pListaEntidadesReconciliadas.Add(entity, urlReconciliada);
+                            float score = 0;
+                            if (canditosSeguros.Count == 1)
+                            {
+                                score = 1;
+                            }
+                            else
+                            {
+                                score = candidatos[entity][canditosUmbralMaximo[0]];
+                            }
+                            discoveredEntityList.Add(entity, new KeyValuePair<string, float>(urlReconciliada, score));
+                            pHasChanges = true;
+                            if (pListaEntidadesRDFEnriquecer.ContainsKey(entity))
+                            {
+                                pListaEntidadesRDFEnriquecer.Add(urlReconciliada, pListaEntidadesRDFEnriquecer[entity]);
+                                pListaEntidadesRDFEnriquecer.Remove(entity);
+                            }
                         }
                     }
                     else if (canditosUmbralMaximo.Count > 1 || canditosUmbralMinimo.Count > 0)
@@ -1789,7 +1799,7 @@ namespace API_DISCOVER.Utility
                         //Si para alguna entidad hay más de un candidato que supere el umbral máximo 
                         //o hay alguna entidad que supere el umbral mínimo pero no alcance el máximo
                         //Lo marcamos para que lo decida el usuario
-                        pDiscoveredEntitiesProbability.Add(entity, candidatos[entity]);
+                        pDiscoveredEntitiesProbability[entity]= candidatos[entity];
                     }
                 }
             }
@@ -2829,7 +2839,7 @@ namespace API_DISCOVER.Utility
                             else
                             {
                                 person = ORCID_API.Person(result.orcid_id);
-                                pDiscoverCache.ORCIDPerson[result.orcid_id]= person;
+                                pDiscoverCache.ORCIDPerson[result.orcid_id] = person;
                             }
 
                             if (person.external_identifiers != null && person.external_identifiers.external_identifier != null)
@@ -3013,11 +3023,11 @@ namespace API_DISCOVER.Utility
             {
                 string tituloPublicacion = nombresPublicaciones[idPublicacionRDF].Trim();
                 string queryScopus = NormalizeName(tituloPublicacion.ToLower(), pDiscoverCache, false, false, false).Trim();
-                while(queryScopus.Contains("  "))
+                while (queryScopus.Contains("  "))
                 {
-                    queryScopus = queryScopus.Replace("  "," ");
+                    queryScopus = queryScopus.Replace("  ", " ");
                 }
-                queryScopus=queryScopus.Replace(" ", "' '");
+                queryScopus = queryScopus.Replace(" ", "' '");
                 queryScopus = "'" + queryScopus + "'";
                 string q = HttpUtility.UrlEncode(queryScopus);
                 SCOPUSWorks works = null;
@@ -3263,7 +3273,7 @@ namespace API_DISCOVER.Utility
                             else
                             {
                                 person = DBLP_API.Person(idPerson);
-                                pDiscoverCache.DBLPPerson[idPerson]= person;
+                                pDiscoverCache.DBLPPerson[idPerson] = person;
                             }
 
                             if (person != null && person.person != null && person.person.url != null)

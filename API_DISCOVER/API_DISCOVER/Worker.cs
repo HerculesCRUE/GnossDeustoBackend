@@ -30,7 +30,7 @@ namespace API_DISCOVER
         }
 
         public Task StartAsync(CancellationToken stoppingToken)
-        {
+        {  
             _logger.LogInformation("Timed Hosted Service running.");
             while (!stoppingToken.IsCancellationRequested)
             {
