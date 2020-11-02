@@ -2144,9 +2144,6 @@ namespace API_DISCOVER.Utility
         private static float GetSimilarity(DisambiguationData pDisambiguationDataOriginal, DisambiguationData pDisambiguationDataCandidate,
             Dictionary<Disambiguation, List<Disambiguation.Property>> pDicPropiedadesObligatoriasDissambiguation, Dictionary<DisambiguationData, List<Disambiguation.Property>> pDicPropiedadesDisambiguationData, Dictionary<string, Dictionary<string, float>> pCandidates, bool pOnlyPositive, DiscoverCache pDiscoverCache)
         {
-            List<Disambiguation.Property> propieadesObligatorias1 = pDisambiguationDataOriginal.disambiguation.properties.Where(x => x.mandatory).ToList();
-            List<Disambiguation.Property> propieadesComunes1 = pDisambiguationDataOriginal.properties.Select(x => x.property).ToList().Intersect(pDisambiguationDataCandidate.properties.Select(x => x.property).ToList()).OrderByDescending(x => x.mandatory).ToList();
-
             List<Disambiguation.Property> propieadesObligatorias = pDicPropiedadesObligatoriasDissambiguation[pDisambiguationDataOriginal.disambiguation];
             List<Disambiguation.Property> propieadesComunes = pDicPropiedadesDisambiguationData[pDisambiguationDataOriginal].Intersect(pDicPropiedadesDisambiguationData[pDisambiguationDataCandidate]).OrderByDescending(x => x.mandatory).ToList();
 
@@ -2350,12 +2347,6 @@ namespace API_DISCOVER.Utility
         /// <returns></returns>
         private static float GetSimilarity(string pOriginal, string pCandidato, Disambiguation.Property.Type pType, DiscoverCache pDiscoverCache, int? pMaxNumWordsTitle = null)
         {
-            string key = $"{pOriginal.GetHashCode().ToString()}{pCandidato.GetHashCode().ToString()}{pType.GetHashCode().ToString()}{pMaxNumWordsTitle}";
-            if (pDiscoverCache.Similarity.ContainsKey(key))
-            {
-                return pDiscoverCache.Similarity[key];
-            }
-
             float similarity = 0;
             switch (pType)
             {
@@ -2443,7 +2434,6 @@ namespace API_DISCOVER.Utility
                     break;
 
             }
-            pDiscoverCache.Similarity[key] = similarity;
             return similarity;
         }
 

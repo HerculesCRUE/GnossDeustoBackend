@@ -30,7 +30,6 @@ namespace API_DISCOVER.Models.Entities
             DBLPAuthors = new Dictionary<string, DBLPAuthors>();
             DBLPPerson = new Dictionary<string, DBLPPerson>();
             NormalizedNames = new Dictionary<string, string>();
-            Similarity = new Dictionary<string, float>();
         }
 
         /// <summary>
@@ -74,7 +73,5 @@ namespace API_DISCOVER.Models.Entities
         public Dictionary<string, DBLPPerson> DBLPPerson { get; set; }
 
         public Dictionary<string, string> NormalizedNames { get; set; }
-
-        public Dictionary<string, float> Similarity { get; set; }
     }
 }
