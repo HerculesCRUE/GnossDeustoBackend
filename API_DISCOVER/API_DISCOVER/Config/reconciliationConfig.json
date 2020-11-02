@@ -169,6 +169,7 @@
     "rdfType": "http://purl.org/roh/mirror/bibo#Document",
     "identifiers": [
       "http://purl.org/roh/mirror/bibo#doi",
+      "http://purl.org/roh#isbn",
       //TODO añadir propiedad
       "http://purl.org/roh#DBLP"
     ],

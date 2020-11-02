@@ -35,8 +35,7 @@ namespace API_DISCOVER.Utility
         private readonly static string mScopusApiKey = mConfigScopus.GetScopusApiKey();
 
         private readonly static string mPropertyRohIdentifier = "http://purl.org/dc/terms/identifier";
-
-
+        
         /// <summary>
         /// Realiza el desubrimiento sobre un RDF
         /// </summary>
@@ -188,8 +187,8 @@ namespace API_DISCOVER.Utility
                     Se obtienen las entidades principales del RDF y se eliminan todos los triples que haya en la BBDD en los que aparezcan como sujeto u objeto.
                     Se eliminan todos los triples cuyo sujeto y predicado estén en el RDF a cargar y estén marcados como monovaluados.
                     Se vuelcan los triples a la BBDD.
-             
-             
+
+
              */
 
             if (pDiscoverItem.Publish)
@@ -205,13 +204,7 @@ namespace API_DISCOVER.Utility
                     pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBD);
                 }
                 else
-                {
-                    //TODO reconciliar con todas las clases compatibles
-                    //TODO fusionar seq
-                    //TODO Reorganizar seq
-                    //TODO aplicar estas casisuisticas en la reconciliación de RDF
-                    //TODO eliminar entidades vacías y las ropiedades que apuntan a ellas
-
+                {                    
                     //No hay problemas en la reconciliación por lo que procedemos
                     #region 1º Eliminamos de la BBD las entidades principales que aparecen en el RDF
                     List<string> mainEntities = new List<string>();
@@ -1560,7 +1553,7 @@ namespace API_DISCOVER.Utility
                             {
                                 var coincidenciaBBDD = identificadoresBBDDPorRdfType[rdfType].FirstOrDefault(x => x.Value.ContainsKey(property) && x.Value[property].Intersect(identificadoresRDFPorRdfType[rdfType][entityID][property]).Count() > 0);
 
-                                if (coincidenciaBBDD.Key != null && coincidenciaBBDD.Value != null && coincidenciaBBDD.Key!= entityID)
+                                if (coincidenciaBBDD.Key != null && coincidenciaBBDD.Value != null && coincidenciaBBDD.Key != entityID)
                                 {
                                     TripleStore store = new TripleStore();
                                     store.Add(pDataGraph);
@@ -1799,7 +1792,7 @@ namespace API_DISCOVER.Utility
                         //Si para alguna entidad hay más de un candidato que supere el umbral máximo 
                         //o hay alguna entidad que supere el umbral mínimo pero no alcance el máximo
                         //Lo marcamos para que lo decida el usuario
-                        pDiscoveredEntitiesProbability[entity]= candidatos[entity];
+                        pDiscoveredEntitiesProbability[entity] = candidatos[entity];
                     }
                 }
             }
@@ -2151,8 +2144,8 @@ namespace API_DISCOVER.Utility
         private static float GetSimilarity(DisambiguationData pDisambiguationDataOriginal, DisambiguationData pDisambiguationDataCandidate,
             Dictionary<Disambiguation, List<Disambiguation.Property>> pDicPropiedadesObligatoriasDissambiguation, Dictionary<DisambiguationData, List<Disambiguation.Property>> pDicPropiedadesDisambiguationData, Dictionary<string, Dictionary<string, float>> pCandidates, bool pOnlyPositive, DiscoverCache pDiscoverCache)
         {
-            //List<Disambiguation.Property> propieadesObligatorias = pDisambiguationDataOriginal.disambiguation.properties.Where(x => x.mandatory).ToList();
-            //List<Disambiguation.Property> propieadesComunes = pDisambiguationDataOriginal.properties.Select(x => x.property).ToList().Intersect(pDisambiguationDataCandidate.properties.Select(x => x.property).ToList()).OrderByDescending(x => x.mandatory).ToList();
+            List<Disambiguation.Property> propieadesObligatorias1 = pDisambiguationDataOriginal.disambiguation.properties.Where(x => x.mandatory).ToList();
+            List<Disambiguation.Property> propieadesComunes1 = pDisambiguationDataOriginal.properties.Select(x => x.property).ToList().Intersect(pDisambiguationDataCandidate.properties.Select(x => x.property).ToList()).OrderByDescending(x => x.mandatory).ToList();
 
             List<Disambiguation.Property> propieadesObligatorias = pDicPropiedadesObligatoriasDissambiguation[pDisambiguationDataOriginal.disambiguation];
             List<Disambiguation.Property> propieadesComunes = pDicPropiedadesDisambiguationData[pDisambiguationDataOriginal].Intersect(pDicPropiedadesDisambiguationData[pDisambiguationDataCandidate]).OrderByDescending(x => x.mandatory).ToList();
@@ -2851,31 +2844,30 @@ namespace API_DISCOVER.Utility
                             {
                                 foreach (ORCIDWorks.Group group in works.group)
                                 {
-                                    if (group.work_summary != null)
+                                    if (group.work_summary != null && group.work_summary.Count > 0)
                                     {
-                                        foreach (ORCIDWorks.Group.WorkSummary workSummary in group.work_summary)
+                                        ORCIDWorks.Group.WorkSummary workSummary = group.work_summary[0];
+
+                                        if (workSummary.title != null && workSummary.title.title2 != null && workSummary.title.title2.value != null)
                                         {
-                                            if (workSummary.title != null && workSummary.title.title2 != null && workSummary.title.title2.value != null)
+                                            string code = workSummary.putcode;
+                                            string title = workSummary.title.title2.value;
+                                            string doi = "";
+                                            if (workSummary.externalids != null && workSummary.externalids.externalid != null)
                                             {
-                                                string code = workSummary.putcode;
-                                                string title = workSummary.title.title2.value;
-                                                string doi = "";
-                                                if (workSummary.externalids != null && workSummary.externalids.externalid != null)
+                                                foreach (ORCIDWorks.Group.WorkSummary.Externalids.Externalid extIdentifier in workSummary.externalids.externalid)
                                                 {
-                                                    foreach (ORCIDWorks.Group.WorkSummary.Externalids.Externalid extIdentifier in workSummary.externalids.externalid)
+                                                    if (extIdentifier.externalidtype == "doi")
                                                     {
-                                                        if (extIdentifier.externalidtype == "doi")
-                                                        {
-                                                            doi = extIdentifier.externalidvalue;
-                                                        }
+                                                        doi = extIdentifier.externalidvalue;
                                                     }
                                                 }
-                                                worksData[code] = new KeyValuePair<string, string>(title, doi);
-                                                if (nombresPublicaciones.Where(x => GetSimilarity(x.Value, title, Disambiguation.Property.Type.title, pDiscoverCache, numWordsTitle) > 0).Count() > 0)
-                                                {
-                                                    //Puede coincidir con alguna publicación del RDF
-                                                    coicidenPulicaciones = true;
-                                                }
+                                            }
+                                            worksData[code] = new KeyValuePair<string, string>(title, doi);
+                                            if (nombresPublicaciones.Where(x => GetSimilarity(x.Value, title, Disambiguation.Property.Type.title, pDiscoverCache, numWordsTitle) > 0).Count() > 0)
+                                            {
+                                                //Puede coincidir con alguna publicación del RDF
+                                                coicidenPulicaciones = true;
                                             }
                                         }
                                     }
