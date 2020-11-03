@@ -35,7 +35,7 @@ namespace API_DISCOVER.Utility
         private readonly static string mScopusApiKey = mConfigScopus.GetScopusApiKey();
 
         private readonly static string mPropertyRohIdentifier = "http://purl.org/dc/terms/identifier";
-        
+
         /// <summary>
         /// Realiza el desubrimiento sobre un RDF
         /// </summary>
@@ -204,7 +204,7 @@ namespace API_DISCOVER.Utility
                     pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBD);
                 }
                 else
-                {                    
+                {
                     //No hay problemas en la reconciliación por lo que procedemos
                     #region 1º Eliminamos de la BBD las entidades principales que aparecen en el RDF
                     List<string> mainEntities = new List<string>();
@@ -2155,8 +2155,9 @@ namespace API_DISCOVER.Utility
                 foreach (Disambiguation.Property propiedad in propieadesComunes)
                 {
                     float similitudActual = 0;
-                    HashSet<string> valorPropiedadesOriginal = new HashSet<string>(pDisambiguationDataOriginal.properties.First(x => x.property == propiedad).values);
-                    HashSet<string> valorPropiedadesCandidato = new HashSet<string>(pDisambiguationDataCandidate.properties.First(x => x.property == propiedad).values);
+                    HashSet<string> valorPropiedadesOriginal = pDisambiguationDataOriginal.properties.First(x => x.property == propiedad).values;
+                    HashSet<string> valorPropiedadesCandidato = pDisambiguationDataCandidate.properties.First(x => x.property == propiedad).values;
+                    
                     float minScore = 0;
                     if (propiedad.mandatory)
                     {
@@ -3681,18 +3682,23 @@ namespace API_DISCOVER.Utility
                         break;
                     }
                 }
-                float coefJaccardGNOSS = score * (indice_desplazamiento / (desplazamiento + indice_desplazamiento));
-                scores.Add(coefJaccardGNOSS);
+                
+                if (score > 0)
+                {
+                    float coefJaccardGNOSS = score * (indice_desplazamiento / (desplazamiento + indice_desplazamiento));
+                    scores.Add(coefJaccardGNOSS);
+                }
+                
             }
-            float similarity = scores.Sum() / Math.Max(source.Length, target.Length);
-            if (similarity > 0.5f)
+            if (scores.Count > 0)
             {
-                return similarity;
+                float similarity = scores.Sum() / Math.Max(source.Length, target.Length);
+                if (similarity > 0.5f)
+                {
+                    return similarity;
+                }
             }
-            else
-            {
-                return 0;
-            }
+            return 0;
         }
 
         /// <summary>
@@ -3702,7 +3708,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pNameB">Nombre B</param>
         /// <returns>Coeficiente</returns>
         private static float CompareSingleName(string pNameA, string pNameB)
-        {
+        {            
             HashSet<string> ngramsNameA = GetNGramas(pNameA, 2);
             HashSet<string> ngramsNameB = GetNGramas(pNameB, 2);
             float tokens_comunes = ngramsNameA.Intersect(ngramsNameB).Count();
