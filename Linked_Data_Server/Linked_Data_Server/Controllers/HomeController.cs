@@ -67,6 +67,11 @@ namespace Linked_Data_Server.Controllers
             {
                 string consulta = "select ?s ?p ?o isBlank(?o) as ?blanknode where { ?s ?p ?o. FILTER(?s in(<>,<" + string.Join(">,<", entidadesCargar) + ">))}";
                 SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
+                if(entidadesCargar.Count==1&& entidadesCargar.First()==url && sparqlObject.results.bindings.Count==0)
+                {
+                    //No existe la entidad
+                    return StatusCode(StatusCodes.Status404NotFound);
+                }
                 foreach (string pendiente in entidadesCargar)
                 {
                     sparqlObjectDictionary.Add(pendiente, sparqlObject);
