@@ -17,6 +17,9 @@ namespace Linked_Data_Server.Models.Services
         public IConfigurationRoot Configuration { get; set; }
         private string NameTitle { get; set; }
         private string ConstrainedByUrl { get; set; }
+        private string SparqlGraph { get; set; }
+        private string SparqlEndpoint { get; set; }
+        private string SparqlQueryParam { get; set; }
 
         ///<summary>
         ///Obtiene el título:NameTitle del fichero appsettings.json
@@ -68,6 +71,83 @@ namespace Linked_Data_Server.Models.Services
 
             }
             return ConstrainedByUrl;
+        }
+
+        ///<summary>
+        ///Obtiene el gráfo configurado en Sparql:Graph del fichero appsettings.json
+        ///</summary>
+        public string GetSparqlGraph()
+        {
+            if (string.IsNullOrEmpty(SparqlGraph))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("Graph"))
+                {
+                    SparqlGraph = environmentVariables["Graph"] as string;
+                }
+                else
+                {
+                    SparqlGraph = Configuration["Sparql:Graph"];
+                }
+
+            }
+            return SparqlGraph;
+        }
+
+        ///<summary>
+        ///Obtiene el endpoint configurado en Sparql:Endpoint del fichero appsettings.json
+        ///</summary>
+        public string GetSparqlEndpoint()
+        {
+            if (SparqlEndpoint == null)
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("Endpoint"))
+                {
+                    SparqlEndpoint = environmentVariables["Endpoint"] as string;
+                }
+                else
+                {
+                    SparqlEndpoint = Configuration["Sparql:Endpoint"];
+                }
+            }
+            return SparqlEndpoint;
+        }
+
+        ///<summary>
+        ///Obtiene el parametro de query configurado en Sparql:QueryParam del fichero appsettings.json
+        ///</summary>
+        public string GetSparqlQueryParam()
+        {
+            if (string.IsNullOrEmpty(SparqlQueryParam))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("QueryParam"))
+                {
+                    SparqlQueryParam = environmentVariables["QueryParam"] as string;
+                }
+                else
+                {
+                    SparqlQueryParam = Configuration["Sparql:QueryParam"];
+                }
+
+            }
+            return SparqlQueryParam;
         }
     }
 

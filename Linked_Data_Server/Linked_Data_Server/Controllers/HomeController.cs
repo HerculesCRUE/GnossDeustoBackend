@@ -2,6 +2,7 @@
 using Linked_Data_Server.Models.Entities;
 using Linked_Data_Server.Models.Services;
 using Linked_Data_Server.Utility;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,19 +13,16 @@ using System.Text;
 using VDS.RDF;
 using VDS.RDF.Query;
 using VDS.RDF.Writing;
+using Microsoft.AspNetCore.Http.Extensions;
+using System.Linq;
+using System.Net.Http;
 
 namespace Linked_Data_Server.Controllers
 {
 
     public class HomeController : Controller
     {
-        private readonly static ConfigSparql mConfigSparql = new ConfigSparql();
         private readonly static ConfigService mConfigService = new ConfigService();
-        private readonly static string mGraph = mConfigSparql.GetGraph();
-        private readonly static string mQueryParam = mConfigSparql.GetQueryParam();
-        private readonly static string mSPARQLEndpoint = mConfigSparql.GetEndpoint();
-        private readonly static string mNameTitle = mConfigService.GetNameTitle();
-        private readonly static string mConstrainedByUrl = mConfigService.GetConstrainedByUrl();
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -34,17 +32,21 @@ namespace Linked_Data_Server.Controllers
 
 
         [Produces("application/rdf+xml", "text/html")]
-        [HttpGet]
-        [HttpHead]
-        [HttpOptions]
         public IActionResult Index()
         {
-            //Meter en url la url del request
-            string url = Request.Path.Value;
-            url = "http://graph.um.es" + url;
+            //Obtenemos la URL de la entidad
+            string url = Request.GetDisplayUrl();
 
-            HttpContext.Response.Headers.Add("Link", "<http://www.w3.org/ns/ldp#BasicContainer>; rel=\"type\", <http://www.w3.org/ns/ldp#Resource>; rel=\"type\", <"+mConstrainedByUrl+">; rel=\"http://www.w3.org/ns/ldp#constrainedBy\"");
-                        
+            //Customizamos Header
+            HttpContext.Response.Headers.Add("Link", "<http://www.w3.org/ns/ldp#BasicContainer>; rel=\"type\", <http://www.w3.org/ns/ldp#Resource>; rel=\"type\", <" + mConfigService.GetConstrainedByUrl() + ">; rel=\"http://www.w3.org/ns/ldp#constrainedBy\"");
+            HashSet<string> methodsAvailable = new HashSet<string>() { "GET", "HEAD", "OPTIONS" };
+            HttpContext.Response.Headers.Add("allow", string.Join(", ",methodsAvailable));
+            if (!methodsAvailable.Contains(Request.HttpContext.Request.Method))
+            {
+                return StatusCode(StatusCodes.Status405MethodNotAllowed);
+            }
+
+
             //Cargamos la ontología
             RohGraph ontologyGraph = new RohGraph();
             ontologyGraph.LoadFromFile("Config/Ontology/roh-v2.owl");
@@ -57,41 +59,39 @@ namespace Linked_Data_Server.Controllers
                 communNamePropierties.Add(sparqlResult["entidad"].ToString(), ((LiteralNode)(sparqlResult["nombre"])).Value);
             }
 
+            //Cargamos las entidades
             Dictionary<string, SparqlObject> sparqlObjectDictionary = new Dictionary<string, SparqlObject>();
-            HashSet<string> pendientes = new HashSet<string>();
-            pendientes.Add(url);
-            List<string> parents = new List<string>();
-
-            while (pendientes.Count > 0)
+            HashSet<string> entidadesCargar = new HashSet<string>() { url };
+            HashSet<string> entidadesCargadas = new HashSet<string>() { url };
+            while (entidadesCargar.Count > 0)
             {
-                string consulta = "select ?s ?p ?o isBlank(?o) as ?blanknode where { ?s ?p ?o. FILTER(?s in(<" + string.Join(">,<",pendientes) + ">))}";
-                SparqlObject sparqlObject = SparqlUtility.SelectData(mSPARQLEndpoint, mGraph, consulta, mQueryParam);
-                
-                foreach(string pendiente in pendientes)
+                string consulta = "select ?s ?p ?o isBlank(?o) as ?blanknode where { ?s ?p ?o. FILTER(?s in(<>,<" + string.Join(">,<", entidadesCargar) + ">))}";
+                SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
+                foreach (string pendiente in entidadesCargar)
                 {
                     sparqlObjectDictionary.Add(pendiente, sparqlObject);
                 }
-                
-                pendientes = new HashSet<string>();
+                entidadesCargar = new HashSet<string>();
                 foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
                 {
-                    if (row["blanknode"].value == "1" && !parents.Contains(row["o"].value))
+                    if (row["blanknode"].value == "1" && !entidadesCargadas.Contains(row["o"].value))
                     {
-                        pendientes.Add(row["o"].value);
-                        parents.Add(row["o"].value);
+                        entidadesCargar.Add(row["o"].value);
+                        entidadesCargadas.Add(row["o"].value);
                     }
                 }
             }
 
-            //Cargamos los datos
+            //Cargamos los datos en un garfo en Local
             RohGraph dataGraph = createDataGraph(url, new List<string>(), false, new RohGraph(), sparqlObjectDictionary);
 
-
+            //Generamos el RDF
             System.IO.StringWriter sw = new System.IO.StringWriter();
             RdfXmlWriter rdfXmlWriter = new RdfXmlWriter();
             rdfXmlWriter.Save(dataGraph, sw);
-            string rdf=sw.ToString();
+            string rdf = sw.ToString();
 
+            //Añadimos la etiquetqa ETag al header
             using (SHA256 sha256Hash = SHA256.Create())
             {
                 string etag = GetHash(sha256Hash, rdf);
@@ -101,18 +101,16 @@ namespace Linked_Data_Server.Controllers
                     HttpContext.Response.StatusCode = 304;
                 }
                 HttpContext.Response.Headers.Add("ETag", etag);
-
             }
 
             if (HttpContext.Request.ContentType == "application/rdf+xml")
             {
+                //Devolvemos en formato RDF
                 return File(Encoding.UTF8.GetBytes(rdf), "text/xml");
             }
             else
             {
-                List<DiscoverRdfViewModel> model = new List<DiscoverRdfViewModel>();
-
-                //Guardamos todas las entidades
+                //Devolvemos en formato HTML
                 List<String> allEntities = new List<string>();
                 SparqlResultSet sparqlResultSetEntidades = (SparqlResultSet)dataGraph.ExecuteQuery("select ?s ?p ?o where { ?s ?p ?o. FILTER (!isBlank(?o)) }");
                 foreach (SparqlResult sparqlResult in sparqlResultSetEntidades.Results)
@@ -122,14 +120,18 @@ namespace Linked_Data_Server.Controllers
                         allEntities.Add(sparqlResult["o"].ToString());
                     }
                 }
-
                 DiscoverRdfViewModel entidad = createDiscoverRdfViewModel(url, dataGraph, new List<string>(), allEntities, communNamePropierties);
-                ViewData["NameTitle"] = mNameTitle;
-                model.Add(entidad);
-                return View(model);
+                KeyValuePair<string, List<string>> titulo = entidad.stringPropertiesEntity.FirstOrDefault(x => x.Key == "http://purl.org/roh#title" || x.Key == "http://purl.org/roh/mirror/foaf#name");
+                ViewData["Title"] = "About: " + url;
+                if (titulo.Key != null)
+                {
+                    ViewData["Title"] = "About: " + titulo.Value[0];
+                }
+                ViewData["NameTitle"] = mConfigService.GetNameTitle();
+                return View(entidad);
             }
-
         }
+
 
         /// <summary>
         /// Crea un grafo en el que se cargan los datos
@@ -168,7 +170,7 @@ namespace Linked_Data_Server.Controllers
                 }
                 else
                 {
-                    if(row["s"].value == idEntity)
+                    if (row["s"].value == idEntity)
                     {
                         IBlankNode s = datagraph.CreateBlankNode(idEntity);
                         IUriNode p = datagraph.CreateUriNode(UriFactory.Create(row["p"].value));
@@ -199,7 +201,7 @@ namespace Linked_Data_Server.Controllers
                             datagraph.Assert(new Triple(s, p, o));
                         }
                     }
-                    
+
                 }
             }
             return datagraph;
