@@ -1,6 +1,10 @@
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+using System.Xml.XPath;
 using API_DISCOVER.Models.Entities;
 using API_DISCOVER.Models.Log;
 using API_DISCOVER.Models.Services;
@@ -56,7 +60,7 @@ namespace API_DISCOVER
 
         private bool ProcessItem(string item)
         {
-            DiscoverItem discoverItem = JsonConvert.DeserializeObject<DiscoverItem>(item);              
+            DiscoverItem discoverItem = JsonConvert.DeserializeObject<DiscoverItem>(item);
             try
             {
                 //Aplicamos el proceso de descubrimiento

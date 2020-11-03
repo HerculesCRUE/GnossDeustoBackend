@@ -176,7 +176,8 @@ A continuación se muestra un fragmento del fichero con la configuración del de
 		"ScopeCron": "apiCron",
 		"ClientId": "Web",
 		"ClientSecret": "master",
-		"ConfigUrlCron": "http://localhost:56255/"
+		"ConfigUrlCron": "http://localhost:56255/",
+		"ScopusApiKey": ""
 	}
 		 
 		 
@@ -199,6 +200,7 @@ A continuación se muestra un fragmento del fichero con la configuración del de
  - ClientId: Id de cliente del api
  - ClientSecret: "clave" de acceso del api
  - ConfigUrlCron: URL donde está lanzada la aplicación CRON
+ - ScopusApiKey: API de Scopus
 
 ## Dependencias
 

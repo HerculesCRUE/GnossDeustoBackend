@@ -7,7 +7,7 @@
 |Versión|0.3|
 |Módulo|FrontEndCarga|
 |Tipo|Documentación|
-|Cambios de la Versión| Se ha añadido dos configuraciones al appsettings|
+|Cambios de la Versión| Se ha añadido configuraciones al appsettings|
 
 
 # Sobre FrontEnd de Carga
@@ -47,6 +47,7 @@ En esta carpeta está disponible el [Manual de Usuario del FrontEnd](https://gith
 			"QueryParam": "query"
 		},
 		"AllowedHosts": "*",
+		"LogPathBase": "",
 		"LogPath": "",
 		"LogPathCarga": "",
 		"LogPathCron": "",
@@ -74,9 +75,10 @@ En esta carpeta está disponible el [Manual de Usuario del FrontEnd](https://gith
  - PostgreConnectionmigration: Conexión con la base de datos
  - Sparql.Endpoint: URL del Endpoint Sparql
  - Sparql.QueryParam: Parámetro para la query en el Endpoint Sparql
- - LogPath: Ruta donde va a guardar los logs de la aplicación
- - LogPathCarga: Ruta donde escribe los logs el apiCarga
- - LogPathCron: Ruta donde escribe los logs el apiCron
+ - LogPathBase: Ruta común para el path donde se almacenan los logs
+ - LogPath: Nombre de la carpeta donde va a guardar los logs de la aplicación
+ - LogPathCarga: Nombre de la carpeta donde escribe los logs el apiCarga
+ - LogPathCron: Nombre de la carpeta donde escribe los logs el apiCron
  - Urls: Url en la que se va a lanzar la aplicación
  - ConfigUrlDocumentacion: Url donde está lanzada la aplicación de apiDocumentacion
  - ConfigUrl: Url donde está lanzada la aplicación API Carga

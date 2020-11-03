@@ -60,6 +60,9 @@
                         <h4 class="list-group-item-heading">Estado del proveedor de tokens: </h4>
                         <p class="list-group-item-text">@tokensText</p>
                     </a>
+                    <a href="@Url.Action("getLogs",new { api = "Web"})" class="list-group-item list-group-item-info">
+                        <h4 class="list-group-item-heading">Logs de la web</h4>
+                    </a>
                 </div>
                 <form asp-action="getReportBasic" method="get">
                     <div class="fieldset actionButtons fieldset03">

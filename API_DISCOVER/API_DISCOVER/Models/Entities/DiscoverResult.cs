@@ -22,10 +22,11 @@ namespace API_DISCOVER.Models.Entities
         /// <param name="pDiscoveredEntitiesWithSubject">Entidades descubiertas con los sujetos</param>
         /// <param name="pDiscoveredEntitiesWithId">Entidades descubiertas con los identificadores</param>
         /// <param name="pDiscoveredEntitiesWithDataBase">Entidades descubiertas con la BBDD</param>
+        /// <param name="pDiscoveredEntitiesWithExternalIntegration">Entidades descubiertas con al integración externa</param>
         /// <param name="pDiscoveredEntitiesProbability">Probabilidades de descubriiento</param>
         /// <param name="pSecondsProcessed">Tiempo (en segundos) en procesar el descubrimiento</param>
         /// <param name="pExternalIntegration">Datos obtendidos con las integraciones con fuentes externas</param>
-        public DiscoverResult(RohGraph pDataGraph,RohGraph pDataInferenceGraph, RohGraph pOntologyGraph, HashSet<string> pDiscoveredEntitiesWithSubject, Dictionary<string, string> pDiscoveredEntitiesWithId, Dictionary<string, KeyValuePair<string, float>> pDiscoveredEntitiesWithDataBase, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability,double pSecondsProcessed,Dictionary<string,Dictionary<string,string>> pExternalIntegration)
+        public DiscoverResult(RohGraph pDataGraph,RohGraph pDataInferenceGraph, RohGraph pOntologyGraph, HashSet<string> pDiscoveredEntitiesWithSubject, Dictionary<string, string> pDiscoveredEntitiesWithId, Dictionary<string, KeyValuePair<string, float>> pDiscoveredEntitiesWithDataBase, Dictionary<string, KeyValuePair<string, float>> pDiscoveredEntitiesWithExternalIntegration, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability,double pSecondsProcessed,Dictionary<string,Dictionary<string,string>> pExternalIntegration)
         {
             dataGraph = pDataGraph;
             dataInferenceGraph = pDataInferenceGraph;
@@ -33,6 +34,7 @@ namespace API_DISCOVER.Models.Entities
             discoveredEntitiesWithSubject = pDiscoveredEntitiesWithSubject;
             discoveredEntitiesWithId = pDiscoveredEntitiesWithId;
             discoveredEntitiesWithDataBase = pDiscoveredEntitiesWithDataBase;
+            discoveredEntitiesWithExternalIntegration = pDiscoveredEntitiesWithExternalIntegration;
             discoveredEntitiesProbability = pDiscoveredEntitiesProbability;
             secondsProcessed = pSecondsProcessed;
             externalIntegration = pExternalIntegration;
@@ -67,6 +69,11 @@ namespace API_DISCOVER.Models.Entities
         /// Entidades descubiertas con la BBDD
         /// </summary>
         public Dictionary<string, KeyValuePair<string, float>> discoveredEntitiesWithDataBase { get; }
+
+        /// <summary>
+        /// Entidades descubiertas con la Integración externa
+        /// </summary>
+        public Dictionary<string, KeyValuePair<string, float>> discoveredEntitiesWithExternalIntegration { get; }
 
         /// <summary>
         /// Probabilidades de descubriiento
