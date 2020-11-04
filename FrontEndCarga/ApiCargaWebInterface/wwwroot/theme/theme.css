@@ -1488,7 +1488,7 @@ img { max-width: 100%; }
     background-color: white;
 }
 
-.detailsRdf .table-subject th span {
+.detailsRdf .table-subject th span.entityHeader {
     display: block;
     position: relative;
     top: -60px;

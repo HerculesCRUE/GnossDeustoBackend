@@ -1,4 +1,4 @@
-﻿@model Linked_Data_Server.Models.Entities.DiscoverRdfViewModel
+﻿@model List<Linked_Data_Server.Models.Entities.DiscoverRdfViewModel>
 @{
     ViewData["BodyClass"] = "fichaRecurso";
 }
@@ -11,8 +11,9 @@
                     <h1>@ViewData["Title"]</h1>
                 </div>
             </div>
-            @{ 
-                PintarItem(Model);
+            @foreach(Linked_Data_Server.Models.Entities.DiscoverRdfViewModel entity in Model)
+            {
+                PintarItem(entity);
             }
         </div>
     </div>
@@ -21,7 +22,7 @@
 {
     void PintarItem(Linked_Data_Server.Models.Entities.DiscoverRdfViewModel pItem)
     {
-        
+
         <div class="contenido">
             <div class="grupo grupo-descripcion">
                 <div class="estado-tarea">

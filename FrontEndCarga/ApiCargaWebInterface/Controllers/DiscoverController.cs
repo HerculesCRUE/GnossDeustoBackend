@@ -157,15 +157,15 @@ namespace ApiCargaWebInterface.Controllers
                     if (!entidad.stringPropertiesEntity.ContainsKey(sparqlResult["p"].ToString()))
                     {
                         //Añadimos la propiedad a 'stringPropertiesEntity'
-                        entidad.stringPropertiesEntity.Add(sparqlResult["p"].ToString(), new List<string>());
-
-                        if (sparqlResult["o"] is LiteralNode)
-                        {
-                            entidad.stringPropertiesEntity[sparqlResult["p"].ToString()].Add(((LiteralNode)(sparqlResult["o"])).Value);
-                        }else
-                        {
-                            entidad.stringPropertiesEntity[sparqlResult["p"].ToString()].Add(sparqlResult["o"].ToString());
-                        }
+                        entidad.stringPropertiesEntity.Add(sparqlResult["p"].ToString(), new List<string>());                        
+                    }
+                    if (sparqlResult["o"] is LiteralNode)
+                    {
+                        entidad.stringPropertiesEntity[sparqlResult["p"].ToString()].Add(((LiteralNode)(sparqlResult["o"])).Value);
+                    }
+                    else
+                    {
+                        entidad.stringPropertiesEntity[sparqlResult["p"].ToString()].Add(sparqlResult["o"].ToString());
                     }
                 }
             }

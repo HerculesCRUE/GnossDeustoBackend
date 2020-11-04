@@ -39,7 +39,14 @@
         <table class="rdftable">
             <thead class="table-subject">
                 <tr>
-                    <th colspan="2"><span id="@pItem.uriEntity"></span> @pItem.uriEntity</th>
+                    @if (pItem.LoadedEntities.Contains(pItem.uriEntity))
+                    {
+                        <th colspan="2"><span class="entityHeader" id="@pItem.uriEntity"></span><span id="@pItem.uriEntity">@pItem.uriEntity</span><a href="@pItem.uriEntity" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a></th>
+                    }
+                    else
+                    {
+                        <th colspan="2"><span class="entityHeader" id="@pItem.uriEntity"></span><span id="@pItem.uriEntity">@pItem.uriEntity</span></th>
+                    }
                 </tr>
             </thead>
 

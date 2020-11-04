@@ -21,25 +21,25 @@ namespace ApiCargaWebInterface.Models.Services
             _context = context;
         }
 
+
         ///<summary>
-        ///Obtiene un item de descubrimiento
+        /// Obtiene un item de descubrimiento
         ///</summary>
         ///<param name="id">Identificador del item</param>
+        ///<remarks>Item de descubrimiento</remarks>
         public DiscoverItem GetDiscoverItemById(Guid id)
         {
-            DiscoverItem item = _context.DiscoverItem.Include(item => item.DissambiguationProblems).ThenInclude(p => p.DissambiguationCandiates).FirstOrDefault(item => item.ID.Equals(id));
-            item.LoadedEntities = new List<string>();
-            return item;
+            return _context.DiscoverItem.Include(item => item.DissambiguationProblems).ThenInclude(p => p.DissambiguationCandiates).FirstOrDefault(item => item.ID.Equals(id));
         }
-        
+
         /// <summary>
         /// Obtiene los items con error de un Job (sólo obtiene el identificador y el estado)
         /// </summary>
         /// <param name="jobId">Identificador del job</param>
-        /// <returns></returns>
+        /// <returns>Lista de Items de descubrimiento (sólo obtiene el identificador y el estado)</returns>
         public List<DiscoverItem> GetDiscoverItemsErrorByJobMini(string jobId)
         {
-            return _context.DiscoverItem.Where(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Error.ToString() || x.Status == DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString())).Select(x=>new DiscoverItem { ID=x.ID,JobID=x.JobID,Status=x.Status}).ToList();
+            return _context.DiscoverItem.Where(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Error.ToString() || x.Status == DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString())).Select(x => new DiscoverItem { ID = x.ID, JobID = x.JobID, Status = x.Status }).ToList();
         }
 
         /// <summary>
@@ -47,9 +47,29 @@ namespace ApiCargaWebInterface.Models.Services
         /// </summary>
         /// <param name="jobId">Identificador del job</param>
         /// <returns></returns>
-        public Dictionary<string,int> GetDiscoverItemsStatesByJob(string jobId)
+        public Dictionary<string, int> GetDiscoverItemsStatesByJob(string jobId)
         {
-            return _context.DiscoverItem.Where(x => x.JobID == jobId).GroupBy(p=>p.Status).Select(g => new { state = g.Key, count = g.Count() }).ToDictionary(k => k.state, i => i.count);
+            return _context.DiscoverItem.Where(x => x.JobID == jobId).GroupBy(p => p.Status).Select(g => new { state = g.Key, count = g.Count() }).ToDictionary(k => k.state, i => i.count);
+        }
+
+        /// <summary>
+        /// Obtiene si existen o no items pendientes de procesar por el descubrimiento para un Job
+        /// </summary>
+        /// <param name="jobId">Identificador del job</param>
+        /// <returns></returns>
+        public bool ExistsDiscoverItemsPending(string jobId)
+        {
+            return _context.DiscoverItem.Any(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Pending.ToString()));
+        }
+
+        /// <summary>
+        /// Obtiene si existen o no items con estado error o procesados con problemas de desambiguación
+        /// </summary>
+        /// <param name="jobId">Identificador del job</param>
+        /// <returns></returns>
+        public bool ExistsDiscoverItemsErrorOrDissambiguatinProblems(string jobId)
+        {
+            return _context.DiscoverItem.Any(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Error.ToString() || x.Status == DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString()));
         }
 
         ///<summary>
@@ -83,6 +103,7 @@ namespace ApiCargaWebInterface.Models.Services
                 discoverItemOriginal.DissambiguationProcessed = discoverItem.DissambiguationProcessed;
                 discoverItemOriginal.DiscoverReport = discoverItem.DiscoverReport;
                 discoverItemOriginal.DissambiguationProblems = discoverItem.DissambiguationProblems;
+
                 _context.SaveChanges();
                 modified = true;
             }

@@ -40,7 +40,7 @@ namespace Linked_Data_Server.Controllers
             //Customizamos Header
             HttpContext.Response.Headers.Add("Link", "<http://www.w3.org/ns/ldp#BasicContainer>; rel=\"type\", <http://www.w3.org/ns/ldp#Resource>; rel=\"type\", <" + mConfigService.GetConstrainedByUrl() + ">; rel=\"http://www.w3.org/ns/ldp#constrainedBy\"");
             HashSet<string> methodsAvailable = new HashSet<string>() { "GET", "HEAD", "OPTIONS" };
-            HttpContext.Response.Headers.Add("allow", string.Join(", ",methodsAvailable));
+            HttpContext.Response.Headers.Add("allow", string.Join(", ", methodsAvailable));
             if (!methodsAvailable.Contains(Request.HttpContext.Request.Method))
             {
                 return StatusCode(StatusCodes.Status405MethodNotAllowed);
@@ -59,36 +59,16 @@ namespace Linked_Data_Server.Controllers
                 communNamePropierties.Add(sparqlResult["entidad"].ToString(), ((LiteralNode)(sparqlResult["nombre"])).Value);
             }
 
-            //Cargamos las entidades
-            Dictionary<string, SparqlObject> sparqlObjectDictionary = new Dictionary<string, SparqlObject>();
-            HashSet<string> entidadesCargar = new HashSet<string>() { url };
-            HashSet<string> entidadesCargadas = new HashSet<string>() { url };
-            while (entidadesCargar.Count > 0)
+            //Cargamos las entidades propias
+            Dictionary<string, SparqlObject> sparqlObjectDictionary = GetEntityData(url);
+            if (sparqlObjectDictionary.Count == 1 && sparqlObjectDictionary[url].results.bindings.Count == 0)
             {
-                string consulta = "select ?s ?p ?o isBlank(?o) as ?blanknode where { ?s ?p ?o. FILTER(?s in(<>,<" + string.Join(">,<", entidadesCargar) + ">))}";
-                SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
-                if(entidadesCargar.Count==1&& entidadesCargar.First()==url && sparqlObject.results.bindings.Count==0)
-                {
-                    //No existe la entidad
-                    return StatusCode(StatusCodes.Status404NotFound);
-                }
-                foreach (string pendiente in entidadesCargar)
-                {
-                    sparqlObjectDictionary.Add(pendiente, sparqlObject);
-                }
-                entidadesCargar = new HashSet<string>();
-                foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
-                {
-                    if (row["blanknode"].value == "1" && !entidadesCargadas.Contains(row["o"].value))
-                    {
-                        entidadesCargar.Add(row["o"].value);
-                        entidadesCargadas.Add(row["o"].value);
-                    }
-                }
+                //No existe la entidad
+                return StatusCode(StatusCodes.Status404NotFound);
             }
-
-            //Cargamos los datos en un garfo en Local
+            //Cargamos los datos en un grafo en Local
             RohGraph dataGraph = createDataGraph(url, new List<string>(), false, new RohGraph(), sparqlObjectDictionary);
+
 
             //Generamos el RDF
             System.IO.StringWriter sw = new System.IO.StringWriter();
@@ -115,9 +95,19 @@ namespace Linked_Data_Server.Controllers
             }
             else
             {
+                //Obtenemos las 10 primeras entidades que apuntan a la entidad
+                List<string> inverseEntities = GetInverseEntities(url, 10);
+                foreach (string inverseEntity in inverseEntities)
+                {
+                    Dictionary<string, SparqlObject> sparqlObjectDictionaryInverse = GetEntityData(inverseEntity);
+                    RohGraph inverseDataGraph = createDataGraph(inverseEntity, new List<string>(), false, new RohGraph(), sparqlObjectDictionaryInverse);
+                    dataGraph.Merge(inverseDataGraph);
+                }
+
+
                 //Devolvemos en formato HTML
                 List<String> allEntities = new List<string>();
-                SparqlResultSet sparqlResultSetEntidades = (SparqlResultSet)dataGraph.ExecuteQuery("select ?s ?p ?o where { ?s ?p ?o. FILTER (!isBlank(?o)) }");
+                SparqlResultSet sparqlResultSetEntidades = (SparqlResultSet)dataGraph.ExecuteQuery("select distinct ?p ?o where { ?s ?p ?o. FILTER (!isBlank(?o)) }");
                 foreach (SparqlResult sparqlResult in sparqlResultSetEntidades.Results)
                 {
                     if ((sparqlResult["o"] is UriNode) && (sparqlResult["p"].ToString() != "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"))
@@ -125,7 +115,11 @@ namespace Linked_Data_Server.Controllers
                         allEntities.Add(sparqlResult["o"].ToString());
                     }
                 }
+
+                //Preparamos el modelo de la entidad principal
+                List<DiscoverRdfViewModel> modelEntities = new List<DiscoverRdfViewModel>();
                 DiscoverRdfViewModel entidad = createDiscoverRdfViewModel(url, dataGraph, new List<string>(), allEntities, communNamePropierties);
+                modelEntities.Add(entidad);
                 KeyValuePair<string, List<string>> titulo = entidad.stringPropertiesEntity.FirstOrDefault(x => x.Key == "http://purl.org/roh#title" || x.Key == "http://purl.org/roh/mirror/foaf#name");
                 ViewData["Title"] = "About: " + url;
                 if (titulo.Key != null)
@@ -133,8 +127,75 @@ namespace Linked_Data_Server.Controllers
                     ViewData["Title"] = "About: " + titulo.Value[0];
                 }
                 ViewData["NameTitle"] = mConfigService.GetNameTitle();
-                return View(entidad);
+
+                //Preparamos el modelo del resto de entidades
+                foreach (string entity in inverseEntities)
+                {
+                    DiscoverRdfViewModel entidadInversa = createDiscoverRdfViewModel(entity, dataGraph, new List<string>(), allEntities, communNamePropierties);
+                    modelEntities.Add(entidadInversa);
+                }
+
+
+                return View(modelEntities);
             }
+        }
+
+        private Dictionary<string, SparqlObject> GetEntityData(string pEntity)
+        {
+            Dictionary<string, SparqlObject> sparqlObjectDictionary = new Dictionary<string, SparqlObject>();
+            HashSet<string> entidadesCargar = new HashSet<string>() { pEntity };
+            HashSet<string> entidadesCargadas = new HashSet<string>() { pEntity };
+            while (entidadesCargar.Count > 0)
+            {
+                string consulta = "select ?s ?p ?o isBlank(?o) as ?blanknode where { ?s ?p ?o. FILTER(?s in(<>,<" + string.Join(">,<", entidadesCargar) + ">))}";
+                SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
+                foreach (string pendiente in entidadesCargar)
+                {
+                    sparqlObjectDictionary.Add(pendiente, sparqlObject);
+                }
+                entidadesCargar = new HashSet<string>();
+                foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+                {
+                    if (row["blanknode"].value == "1" && !entidadesCargadas.Contains(row["o"].value))
+                    {
+                        entidadesCargar.Add(row["o"].value);
+                        entidadesCargadas.Add(row["o"].value);
+                    }
+                }
+            }
+            return sparqlObjectDictionary;
+        }
+
+        private List<string> GetInverseEntities(string pEntity, int pMax)
+        {
+            //Cargamos las primeras 10 entidades (que no sen blanknodes) que apuntan a la entidad            
+            Dictionary<string, bool> entitiesInverseBN = new Dictionary<string, bool>();
+            HashSet<string> nodesEntitiesLoaded = new HashSet<string>();
+            string consulta = "select distinct ?s isBlank(?s) as ?blanknode where { ?s ?p ?o.  FILTER(?o in(<" + pEntity + ">))} limit " + pMax;
+            SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
+            foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+            {
+                entitiesInverseBN.Add(row["s"].value, row["blanknode"].value == "1");
+            }
+            while (entitiesInverseBN.Where(x => x.Value == true).Count() > 0)
+            {
+                consulta = "select distinct ?s isBlank(?s) as ?blanknode where { ?s ?p ?o.  FILTER(?o in(<>,<" + string.Join(">,<", entitiesInverseBN.Where(x => x.Value == true).ToList().Select(x => x.Key)) + ">))}";
+
+                entitiesInverseBN = entitiesInverseBN.Where(pair => pair.Value == false)
+                                     .ToDictionary(pair => pair.Key,
+                                                 pair => pair.Value);
+                sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
+                foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+                {
+                    if (!nodesEntitiesLoaded.Contains(row["s"].value))
+                    {
+                        entitiesInverseBN[row["s"].value] = row["blanknode"].value == "1";
+                    }
+                    nodesEntitiesLoaded.Add(row["s"].value);
+                }
+            }
+            entitiesInverseBN.Remove(pEntity);
+            return entitiesInverseBN.Keys.ToList();
         }
 
 
@@ -250,15 +311,14 @@ namespace Linked_Data_Server.Controllers
                     {
                         //Añadimos la propiedad a 'stringPropertiesEntity'
                         entidad.stringPropertiesEntity.Add(sparqlResult["p"].ToString(), new List<string>());
-
-                        if (sparqlResult["o"] is LiteralNode)
-                        {
-                            entidad.stringPropertiesEntity[sparqlResult["p"].ToString()].Add(((LiteralNode)(sparqlResult["o"])).Value);
-                        }
-                        else
-                        {
-                            entidad.stringPropertiesEntity[sparqlResult["p"].ToString()].Add(sparqlResult["o"].ToString());
-                        }
+                    }
+                    if (sparqlResult["o"] is LiteralNode)
+                    {
+                        entidad.stringPropertiesEntity[sparqlResult["p"].ToString()].Add(((LiteralNode)(sparqlResult["o"])).Value);
+                    }
+                    else
+                    {
+                        entidad.stringPropertiesEntity[sparqlResult["p"].ToString()].Add(sparqlResult["o"].ToString());
                     }
                 }
             }

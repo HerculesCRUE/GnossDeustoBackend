@@ -44,6 +44,17 @@ namespace API_DISCOVER.Models.Services
         }
 
         /// <summary>
+        /// Obtiene el número de items en cada uno de los estados de descubrimiento
+        /// </summary>
+        /// <param name="jobId">Identificador del job</param>
+        /// <returns></returns>
+        public Dictionary<string, int> GetDiscoverItemsStatesByJob(string jobId)
+        {
+            return _context.DiscoverItem.Where(x => x.JobID == jobId).GroupBy(p => p.Status).Select(g => new { state = g.Key, count = g.Count() }).ToDictionary(k => k.state, i => i.count);
+        }
+
+
+        /// <summary>
         /// Obtiene si existen o no items pendientes de procesar por el descubrimiento para un Job
         /// </summary>
         /// <param name="jobId">Identificador del job</param>

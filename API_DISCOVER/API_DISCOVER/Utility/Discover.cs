@@ -199,7 +199,7 @@ namespace API_DISCOVER.Utility
                     //Hay dudas en la desambiguación, por lo que lo actualizamos en la BBDD con su estado correspondiente    
                     discoverItemBD.UpdateDissambiguationProblems(
                         pDiscoverResult.discoveredEntitiesProbability,
-                        pDiscoverResult.discoveredEntitiesWithDataBase.Keys.Union(pDiscoverResult.discoveredEntitiesWithId.Keys).Union(pDiscoverResult.discoveredEntitiesWithSubject).Union(pDiscoverResult.discoveredEntitiesWithExternalIntegration.Keys).ToList(),
+                        pDiscoverResult.discoveredEntitiesWithDataBase.Values.Select(x => x.Key).Union(pDiscoverResult.discoveredEntitiesWithId.Values).Union(pDiscoverResult.discoveredEntitiesWithSubject).Union(pDiscoverResult.discoveredEntitiesWithExternalIntegration.Values.Select(x => x.Key)).ToList(),
                         pDiscoverResult.GetDataGraphRDF());
                     pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBD);
                 }
@@ -1366,11 +1366,13 @@ namespace API_DISCOVER.Utility
         /// <summary>
         /// Limpiamos los blanknodes huerfanos, o que no tengan triples (sólo rdftype)
         /// </summary>
-        private static void DeleteOrphanNodes()
+        private static bool DeleteOrphanNodes()
         {
+            bool cambios = false;
             bool existeNodosHuerfanos = true;
             bool existeNodosSinDatos = true;
-            while (existeNodosHuerfanos || existeNodosSinDatos)
+            bool existeNodosComoObjetoPeroNoComoSujeto = true;
+            while (existeNodosHuerfanos || existeNodosSinDatos || existeNodosComoObjetoPeroNoComoSujeto)
             {
                 existeNodosHuerfanos = false;
                 existeNodosSinDatos = false;
@@ -1385,6 +1387,7 @@ namespace API_DISCOVER.Utility
                                         }}";
                 if (SparqlUtility.SelectData(mSPARQLEndpoint, mGraph, queryASKOrphan, mQueryParam).boolean)
                 {
+                    cambios = true;
                     existeNodosHuerfanos = true;
                     string deleteOrphanNodes = $@"DELETE {{ ?s ?p ?o. }}
                                         WHERE 
@@ -1410,6 +1413,7 @@ namespace API_DISCOVER.Utility
                                         }}";
                 if (SparqlUtility.SelectData(mSPARQLEndpoint, mGraph, queryASKEmpty, mQueryParam).boolean)
                 {
+                    cambios = true;
                     existeNodosSinDatos = true;
                     string deleteEmptyNodes = $@"DELETE {{ ?s ?p ?o. }}
                                         WHERE 
@@ -1424,8 +1428,30 @@ namespace API_DISCOVER.Utility
                                         }}";
                     SparqlUtility.SelectData(mSPARQLEndpoint, mGraph, deleteEmptyNodes, mQueryParam);
                 }
-            }
 
+                //Triples existeNodosComoObjetoPeroNoComoSujeto vacíos
+                string queryASKNotSubject = $@"ASK
+                                        WHERE 
+                                        {{
+                                            ?s ?p ?o.
+                                            FILTER(isblank(?o))
+                                            MINUS{{?o ?y ?z}}
+                                        }}";
+                if (SparqlUtility.SelectData(mSPARQLEndpoint, mGraph, queryASKNotSubject, mQueryParam).boolean)
+                {
+                    cambios = true;
+                    existeNodosComoObjetoPeroNoComoSujeto = true;
+                    string deleteNotSubject = $@"DELETE {{ ?s ?p ?o. }}
+                                        WHERE 
+                                        {{
+                                            ?s ?p ?o.
+                                            FILTER(isblank(?o))
+                                           MINUS{{?o ?y ?z}}
+                                        }}";
+                    SparqlUtility.SelectData(mSPARQLEndpoint, mGraph, deleteNotSubject, mQueryParam);
+                }
+            }
+            return cambios;
         }
 
         #endregion
