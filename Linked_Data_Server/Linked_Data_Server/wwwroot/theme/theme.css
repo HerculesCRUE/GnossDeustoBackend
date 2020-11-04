@@ -5326,12 +5326,6 @@ main {
     background-color: white;
 }
 
-.detailsRdf .table-subject th span {
-    display: block;
-    position: relative;
-    top: -60px;
-    visibility: hidden;
-}
 
 span.linkext {
     display: inline-block;
