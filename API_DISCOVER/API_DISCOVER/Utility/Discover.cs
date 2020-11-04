@@ -1376,6 +1376,7 @@ namespace API_DISCOVER.Utility
             {
                 existeNodosHuerfanos = false;
                 existeNodosSinDatos = false;
+                existeNodosComoObjetoPeroNoComoSujeto = false;
 
                 //Nodos huerfanos
                 string queryASKOrphan = $@"ASK
