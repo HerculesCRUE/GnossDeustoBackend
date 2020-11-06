@@ -20,6 +20,7 @@ namespace Linked_Data_Server.Models.Services
         private string SparqlGraph { get; set; }
         private string SparqlEndpoint { get; set; }
         private string SparqlQueryParam { get; set; }
+        private HashSet<string> PropsTitle { get; set; }
 
         ///<summary>
         ///Obtiene el título:NameTitle del fichero appsettings.json
@@ -148,6 +149,32 @@ namespace Linked_Data_Server.Models.Services
 
             }
             return SparqlQueryParam;
+        }
+
+        ///<summary>
+        ///Obtiene el parametro de PropsTitle configurado en Sparql:QueryParam del fichero appsettings.json
+        ///</summary>
+        public HashSet<string> GetPropsTitle()
+        {
+            if (PropsTitle==null)
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("PropsTitle"))
+                {
+                    PropsTitle = new HashSet<string>(( environmentVariables["PropsTitle"] as string).Split('|'));
+                }
+                else
+                {
+                    PropsTitle = new HashSet<string>(Configuration["PropsTitle"].Split('|'));
+                }
+
+            }
+            return PropsTitle;
         }
     }
 

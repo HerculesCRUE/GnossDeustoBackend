@@ -16,6 +16,7 @@ using VDS.RDF.Writing;
 using Microsoft.AspNetCore.Http.Extensions;
 using System.Linq;
 using System.Net.Http;
+using System.Web;
 
 namespace Linked_Data_Server.Controllers
 {
@@ -36,16 +37,28 @@ namespace Linked_Data_Server.Controllers
         {
             //Obtenemos la URL de la entidad
             string url = Request.GetDisplayUrl();
+            string urlParam= HttpUtility.ParseQueryString(Request.QueryString.Value).Get("url");
+            if(!string.IsNullOrEmpty(urlParam))
+            {
+                url = urlParam;
+            }
+
 
             //Customizamos Header
-            HttpContext.Response.Headers.Add("Link", "<http://www.w3.org/ns/ldp#BasicContainer>; rel=\"type\", <http://www.w3.org/ns/ldp#Resource>; rel=\"type\", <" + mConfigService.GetConstrainedByUrl() + ">; rel=\"http://www.w3.org/ns/ldp#constrainedBy\"");
+            if (!string.IsNullOrEmpty(mConfigService.GetConstrainedByUrl()))
+            {
+                HttpContext.Response.Headers.Add("Link", "<http://www.w3.org/ns/ldp#BasicContainer>; rel=\"type\", <http://www.w3.org/ns/ldp#Resource>; rel=\"type\", <" + mConfigService.GetConstrainedByUrl() + ">; rel=\"http://www.w3.org/ns/ldp#constrainedBy\"");
+            }
+            else
+            {
+                HttpContext.Response.Headers.Add("Link", "<http://www.w3.org/ns/ldp#BasicContainer>; rel=\"type\", <http://www.w3.org/ns/ldp#Resource>; rel=\"type\"");
+            }
             HashSet<string> methodsAvailable = new HashSet<string>() { "GET", "HEAD", "OPTIONS" };
             HttpContext.Response.Headers.Add("allow", string.Join(", ", methodsAvailable));
             if (!methodsAvailable.Contains(Request.HttpContext.Request.Method))
             {
                 return StatusCode(StatusCodes.Status405MethodNotAllowed);
             }
-
 
             //Cargamos la ontología
             RohGraph ontologyGraph = new RohGraph();
@@ -67,8 +80,8 @@ namespace Linked_Data_Server.Controllers
                 return StatusCode(StatusCodes.Status404NotFound);
             }
             //Cargamos los datos en un grafo en Local
-            RohGraph dataGraph = createDataGraph(url, new List<string>(), false, new RohGraph(), sparqlObjectDictionary);
-
+            RohGraph dataGraph = new RohGraph();
+            createDataGraph(url, new List<string>(), false, dataGraph, sparqlObjectDictionary);
 
             //Generamos el RDF
             System.IO.StringWriter sw = new System.IO.StringWriter();
@@ -96,14 +109,7 @@ namespace Linked_Data_Server.Controllers
             else
             {
                 //Obtenemos las 10 primeras entidades que apuntan a la entidad
-                List<string> inverseEntities = GetInverseEntities(url, 10);
-                foreach (string inverseEntity in inverseEntities)
-                {
-                    Dictionary<string, SparqlObject> sparqlObjectDictionaryInverse = GetEntityData(inverseEntity);
-                    RohGraph inverseDataGraph = createDataGraph(inverseEntity, new List<string>(), false, new RohGraph(), sparqlObjectDictionaryInverse);
-                    dataGraph.Merge(inverseDataGraph);
-                }
-
+                HashSet<string> inverseEntities = GetInverseEntities(dataGraph, new HashSet<string>() { url }, new HashSet<string>(sparqlObjectDictionary.Keys), new Dictionary<string, SparqlObject>(), 10);
 
                 //Devolvemos en formato HTML
                 List<String> allEntities = new List<string>();
@@ -120,7 +126,7 @@ namespace Linked_Data_Server.Controllers
                 List<DiscoverRdfViewModel> modelEntities = new List<DiscoverRdfViewModel>();
                 DiscoverRdfViewModel entidad = createDiscoverRdfViewModel(url, dataGraph, new List<string>(), allEntities, communNamePropierties);
                 modelEntities.Add(entidad);
-                KeyValuePair<string, List<string>> titulo = entidad.stringPropertiesEntity.FirstOrDefault(x => x.Key == "http://purl.org/roh#title" || x.Key == "http://purl.org/roh/mirror/foaf#name");
+                KeyValuePair<string, List<string>> titulo = entidad.stringPropertiesEntity.FirstOrDefault(x => mConfigService.GetPropsTitle().Contains(x.Key));
                 ViewData["Title"] = "About: " + url;
                 if (titulo.Key != null)
                 {
@@ -140,6 +146,11 @@ namespace Linked_Data_Server.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene los datos de una entidad para su pintado completo
+        /// </summary>
+        /// <param name="pEntity">URL de la entidad</param>
+        /// <returns>Diccionario con los datos de la entidad</returns>
         private Dictionary<string, SparqlObject> GetEntityData(string pEntity)
         {
             Dictionary<string, SparqlObject> sparqlObjectDictionary = new Dictionary<string, SparqlObject>();
@@ -147,7 +158,7 @@ namespace Linked_Data_Server.Controllers
             HashSet<string> entidadesCargadas = new HashSet<string>() { pEntity };
             while (entidadesCargar.Count > 0)
             {
-                string consulta = "select ?s ?p ?o isBlank(?o) as ?blanknode where { ?s ?p ?o. FILTER(?s in(<>,<" + string.Join(">,<", entidadesCargar) + ">))}";
+                string consulta = "select ?s ?p ?o isBlank(?o) as ?blanknode where { ?s ?p ?o. FILTER(?s in(<>,<" + string.Join(">,<", entidadesCargar) + ">))}order by asc(?s) asc(?p) asc(?o)";
                 SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
                 foreach (string pendiente in entidadesCargar)
                 {
@@ -166,36 +177,70 @@ namespace Linked_Data_Server.Controllers
             return sparqlObjectDictionary;
         }
 
-        private List<string> GetInverseEntities(string pEntity, int pMax)
+        /// <summary>
+        /// Obtiene los datos de las entidades que apuntan a la entidad seleccionada y los carga en pGraph
+        /// </summary>
+        /// <param name="pGraph">Grafo en memoria</param>
+        /// <param name="pEntities">Entidades a las que buscar como objeto</param>
+        /// <param name="pOmitir">Omitir la carga de las entidades pasadas como parámetro</param>
+        /// <param name="pSparqlObject">Diccionario con los datos de las entidades cargadas</param>
+        /// <param name="pMax">Máximo de entidades a buscar</param>
+        /// <returns></returns>
+        private HashSet<string> GetInverseEntities(RohGraph pGraph, HashSet<string> pEntities, HashSet<string> pOmitir, Dictionary<string, SparqlObject> pSparqlObject, int? pMax = null)
         {
-            //Cargamos las primeras 10 entidades (que no sen blanknodes) que apuntan a la entidad            
-            Dictionary<string, bool> entitiesInverseBN = new Dictionary<string, bool>();
-            HashSet<string> nodesEntitiesLoaded = new HashSet<string>();
-            string consulta = "select distinct ?s isBlank(?s) as ?blanknode where { ?s ?p ?o.  FILTER(?o in(<" + pEntity + ">))} limit " + pMax;
+            HashSet<string> entities = new HashSet<string>();
+            HashSet<string> entitiesNotBN = new HashSet<string>();
+            HashSet<string> entitiesBN = new HashSet<string>();
+            string consulta = @$"select distinct ?s ?p ?o isBlank(?s) as ?blanknode where 
+                                {{ 
+                                    ?s ?p ?o. 
+                                    ?s ?p2 ?o2 . 
+                                    ?s ?a ?rdfType . 
+                                    FILTER(
+                                        (
+                                            ?p in (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>,<{string.Join(">,<", mConfigService.GetPropsTitle())}>) 
+                                            OR
+                                            (?p=?p2 AND ?o =?o2)
+                                        )                                          
+                                        AND ?o2 
+                                        in(<>,<{ string.Join(">,<", pEntities) }>)
+                                    )
+                                }} ";
+            if (pMax != null)
+            {
+                consulta += " order by asc(?rdfType) asc(?s) asc(?p) asc(?o) limit " + pMax.Value * 5;
+            }
             SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
+                        
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
             {
-                entitiesInverseBN.Add(row["s"].value, row["blanknode"].value == "1");
-            }
-            while (entitiesInverseBN.Where(x => x.Value == true).Count() > 0)
-            {
-                consulta = "select distinct ?s isBlank(?s) as ?blanknode where { ?s ?p ?o.  FILTER(?o in(<>,<" + string.Join(">,<", entitiesInverseBN.Where(x => x.Value == true).ToList().Select(x => x.Key)) + ">))}";
-
-                entitiesInverseBN = entitiesInverseBN.Where(pair => pair.Value == false)
-                                     .ToDictionary(pair => pair.Key,
-                                                 pair => pair.Value);
-                sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
-                foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+                if(pMax.HasValue && entities.Count==pMax.Value && !entities.Contains(row["s"].value))
                 {
-                    if (!nodesEntitiesLoaded.Contains(row["s"].value))
-                    {
-                        entitiesInverseBN[row["s"].value] = row["blanknode"].value == "1";
-                    }
-                    nodesEntitiesLoaded.Add(row["s"].value);
+                    continue;
                 }
+                if (row["blanknode"].value == "1")
+                {
+                    entitiesBN.Add(row["s"].value);
+                }
+                else
+                {
+                    entitiesNotBN.Add(row["s"].value);
+                }
+                entities.Add(row["s"].value);
+                pSparqlObject[row["s"].value] = sparqlObject;
             }
-            entitiesInverseBN.Remove(pEntity);
-            return entitiesInverseBN.Keys.ToList();
+
+            foreach (string entity in entitiesNotBN)
+            {
+                //Insertamos los triples de las entidades en el grafo
+                createDataGraph(entity, new List<string>(), entitiesBN.Contains(entity), pGraph, pSparqlObject);
+            }
+            if (entitiesBN.Except(pOmitir).Count() > 0)
+            {
+                //Recuperamos mas datos de BBDD
+                entitiesNotBN.UnionWith(GetInverseEntities(pGraph, entitiesBN, new HashSet<string>(pOmitir.Union(entities)), pSparqlObject));
+            }
+            return entitiesNotBN;
         }
 
 
@@ -207,37 +252,38 @@ namespace Linked_Data_Server.Controllers
         /// <param name="isBlank">Booleano que indica si la entidad es un blank node</param>
         /// <param name="datagraph">Grafo donde se cargan los datos</param>
         /// <returns></returns>
-        public RohGraph createDataGraph(string idEntity, List<string> parents, Boolean isBlank, RohGraph datagraph, Dictionary<string, SparqlObject> sparqlObject)
+        public void createDataGraph(string idEntity, List<string> parents, Boolean isBlank, RohGraph datagraph, Dictionary<string, SparqlObject> sparqlObject)
         {
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject[idEntity].results.bindings)
             {
-                if (!isBlank)
+                if (row["s"].value == idEntity)
                 {
-                    IUriNode s = datagraph.CreateUriNode(UriFactory.Create(idEntity));
-                    IUriNode p = datagraph.CreateUriNode(UriFactory.Create(row["p"].value));
+                    if (!isBlank)
+                    {
+                        IUriNode s = datagraph.CreateUriNode(UriFactory.Create(idEntity));
+                        IUriNode p = datagraph.CreateUriNode(UriFactory.Create(row["p"].value));
 
-                    if (row["o"].type == "bnode" && !parents.Contains(row["o"].value))
-                    {
-                        IBlankNode o = datagraph.CreateBlankNode(row["o"].value);
-                        datagraph.Assert(new Triple(s, p, o));
-                        parents.Add(row["o"].value);
-                        createDataGraph(row["o"].value, parents, true, datagraph, sparqlObject);
-                    }
-                    else if (row["o"].type == "typed-literal")
-                    {
-                        ILiteralNode o = datagraph.CreateLiteralNode(row["o"].value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                        datagraph.Assert(new Triple(s, p, o));
+                        if (row["o"].type == "bnode" && !parents.Contains(row["o"].value))
+                        {
+                            IBlankNode o = datagraph.CreateBlankNode(row["o"].value);
+                            datagraph.Assert(new Triple(s, p, o));
+                            parents.Add(row["o"].value);
+                            createDataGraph(row["o"].value, parents, true, datagraph, sparqlObject);
+                        }
+                        else if (row["o"].type == "typed-literal" || row["o"].type == "literal")
+                        {
+                            ILiteralNode o = datagraph.CreateLiteralNode(row["o"].value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                            datagraph.Assert(new Triple(s, p, o));
+                        }
+                        else
+                        {
+                            IUriNode o = datagraph.CreateUriNode(UriFactory.Create(row["o"].value));
+                            datagraph.Assert(new Triple(s, p, o));
+                        }
                     }
                     else
                     {
-                        IUriNode o = datagraph.CreateUriNode(UriFactory.Create(row["o"].value));
-                        datagraph.Assert(new Triple(s, p, o));
-                    }
-                }
-                else
-                {
-                    if (row["s"].value == idEntity)
-                    {
+
                         IBlankNode s = datagraph.CreateBlankNode(idEntity);
                         IUriNode p = datagraph.CreateUriNode(UriFactory.Create(row["p"].value));
 
@@ -256,7 +302,7 @@ namespace Linked_Data_Server.Controllers
                                 datagraph.Assert(new Triple(s, p, o));
                             }
                         }
-                        else if (row["o"].type == "typed-literal")
+                        else if (row["o"].type == "typed-literal" || row["o"].type == "literal")
                         {
                             ILiteralNode o = datagraph.CreateLiteralNode(row["o"].value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
                             datagraph.Assert(new Triple(s, p, o));
@@ -267,10 +313,9 @@ namespace Linked_Data_Server.Controllers
                             datagraph.Assert(new Triple(s, p, o));
                         }
                     }
-
                 }
+
             }
-            return datagraph;
         }
 
         /// <summary>
@@ -287,41 +332,62 @@ namespace Linked_Data_Server.Controllers
             //Obtenemos todos los triples de la entidad
             SparqlResultSet sparqlResultSet = (SparqlResultSet)dataGraph.ExecuteQuery("select ?p ?o where { <" + idEntity + "> ?p ?o }");
             DiscoverRdfViewModel entidad = new DiscoverRdfViewModel();
-            entidad.stringPropertiesEntity = new Dictionary<string, List<string>>();
-            entidad.entitiesPropertiesEntity = new Dictionary<string, List<DiscoverRdfViewModel>>();
             entidad.uriEntity = idEntity;
             entidad.urisRdf = allEntities;
             entidad.communNamePropierties = communNameProperties;
-
+            Dictionary<string, List<string>> stringPropertiesEntityAux = new Dictionary<string, List<string>>();
+            Dictionary<string, List<DiscoverRdfViewModel>> entitiesPropertiesEntityAux = new Dictionary<string, List<DiscoverRdfViewModel>>();
             foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
             {
                 if (sparqlResult["o"] is BlankNode && !parents.Contains(sparqlResult["o"].ToString()))
                 {
-                    if (!entidad.entitiesPropertiesEntity.ContainsKey(sparqlResult["p"].ToString()))
+                    if (!entitiesPropertiesEntityAux.ContainsKey(sparqlResult["p"].ToString()))
                     {
                         //Añadimos la propiedad a 'entitiesPropertiesEntity'
-                        entidad.entitiesPropertiesEntity.Add(sparqlResult["p"].ToString(), new List<DiscoverRdfViewModel>());
+                        entitiesPropertiesEntityAux.Add(sparqlResult["p"].ToString(), new List<DiscoverRdfViewModel>());
                     }
                     parents.Add(idEntity);
-                    entidad.entitiesPropertiesEntity[sparqlResult["p"].ToString()].Add(createDiscoverRdfViewModel(sparqlResult["o"].ToString(), dataGraph, parents, allEntities, communNameProperties));
+                    entitiesPropertiesEntityAux[sparqlResult["p"].ToString()].Add(createDiscoverRdfViewModel(sparqlResult["o"].ToString(), dataGraph, parents, allEntities, communNameProperties));
                 }
                 else
                 {
-                    if (!entidad.stringPropertiesEntity.ContainsKey(sparqlResult["p"].ToString()))
+                    if (!stringPropertiesEntityAux.ContainsKey(sparqlResult["p"].ToString()))
                     {
                         //Añadimos la propiedad a 'stringPropertiesEntity'
-                        entidad.stringPropertiesEntity.Add(sparqlResult["p"].ToString(), new List<string>());
+                        stringPropertiesEntityAux.Add(sparqlResult["p"].ToString(), new List<string>());
                     }
                     if (sparqlResult["o"] is LiteralNode)
                     {
-                        entidad.stringPropertiesEntity[sparqlResult["p"].ToString()].Add(((LiteralNode)(sparqlResult["o"])).Value);
+                        stringPropertiesEntityAux[sparqlResult["p"].ToString()].Add(((LiteralNode)(sparqlResult["o"])).Value);
                     }
                     else
                     {
-                        entidad.stringPropertiesEntity[sparqlResult["p"].ToString()].Add(sparqlResult["o"].ToString());
+                        stringPropertiesEntityAux[sparqlResult["p"].ToString()].Add(sparqlResult["o"].ToString());
                     }
                 }
             }
+            entidad.stringPropertiesEntity = new Dictionary<string, List<string>>();
+            entidad.entitiesPropertiesEntity = new Dictionary<string, List<DiscoverRdfViewModel>>();
+            //Ordenamos 'stringPropertiesEntity', primero el rdf:type, después el título y después el resto
+            HashSet<string> propsOrder = new HashSet<string>();
+            propsOrder.Add("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
+            propsOrder.UnionWith(mConfigService.GetPropsTitle());
+            foreach (string propOrder in propsOrder)
+            {
+                if (stringPropertiesEntityAux.ContainsKey(propOrder))
+                {
+                    entidad.stringPropertiesEntity.Add(propOrder, stringPropertiesEntityAux[propOrder]);
+                    stringPropertiesEntityAux.Remove(propOrder);
+                }
+                if (entitiesPropertiesEntityAux.ContainsKey(propOrder))
+                {
+                    entidad.entitiesPropertiesEntity.Add(propOrder, entitiesPropertiesEntityAux[propOrder]);
+                    entitiesPropertiesEntityAux.Remove(propOrder);
+                }
+            }
+            entidad.stringPropertiesEntity = entidad.stringPropertiesEntity.Concat(stringPropertiesEntityAux).ToDictionary(s => s.Key, s => s.Value);
+            entidad.entitiesPropertiesEntity = entidad.entitiesPropertiesEntity.Concat(entitiesPropertiesEntityAux).ToDictionary(s => s.Key, s => s.Value);
+
             return entidad;
 
         }
@@ -332,7 +398,12 @@ namespace Linked_Data_Server.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
+        /// <summary>
+        /// Generación de Hash para la etiqueta 'ETag'
+        /// </summary>
+        /// <param name="hashAlgorithm"></param>
+        /// <param name="input"></param>
+        /// <returns></returns>
         private static string GetHash(HashAlgorithm hashAlgorithm, string input)
         {
 

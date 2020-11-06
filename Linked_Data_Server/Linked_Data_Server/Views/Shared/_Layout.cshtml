@@ -3,23 +3,33 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link runat="server" rel="icon" type="image/x-icon" href="~/favicon.ico" />
     <title>@ViewData["Title"] - @ViewData["NameTitle"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <!-- PERSONALIZACION TEMA -->
     <link media="screen" type="text/css" rel="stylesheet" href="~/theme/theme.css">
     <link media="screen" type="text/css" rel="stylesheet" href="~/theme/theme2.css">
-    <link rel="alternate" href="@Context.Request.Host@Context.Request.Path" type="application/rdf+xml" title="Structured Descriptor Document (RDF/XML format)"/>
+    <link rel="alternate" href="@Context.Request.Host@Context.Request.Path" type="application/rdf+xml" title="Structured Descriptor Document (RDF/XML format)" />
+    <!--<script src="~/lib/jquery/dist/jquery.min.js"></script>-->
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
 </head>
+
 <body class="fichaRecurso detailsRdf">
     <header id="header">
         <div class="container-fluid">
             <div class="row">
                 <div class="col col01">
-
                     <div class="logo">
                         <a>Hércules</a>
-                    </div>
+                    </div>                    
                 </div>
             </div>
         </div>
@@ -32,12 +42,8 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - Linked_Data_Server 
+            &copy; 2020 - Linked_Data_Server
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
 </body>
 </html>
