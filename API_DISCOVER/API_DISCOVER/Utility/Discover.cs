@@ -1750,11 +1750,11 @@ namespace API_DISCOVER.Utility
             {
                 if (entitiesRdfTypes.ContainsKey(entity))
                 {
-                    List<string> canditosSeguros = candidatos[entity].Where(x => x.Value == 1).ToList().Select(x => x.Key).ToList();
+                    List<string> canditosSeguros = candidatos[entity].Where(x => x.Value == 1).ToList().Select(x => x.Key).Except(new List<string>() { entity }).ToList();
                     //Candidatos que superan el umbral máximo (excluyendo los anteriores)
-                    List<string> canditosUmbralMaximo = candidatos[entity].Where(x => x.Value >= mMaxScore).ToList().Select(x => x.Key).ToList().Except(canditosSeguros).ToList();
+                    List<string> canditosUmbralMaximo = candidatos[entity].Where(x => x.Value >= mMaxScore).ToList().Select(x => x.Key).ToList().Except(canditosSeguros).Except(new List<string>() { entity }).ToList();
                     //Candidatos que superan el umbral mínimo (excluyendo los anteriores)
-                    List<string> canditosUmbralMinimo = candidatos[entity].Where(x => x.Value >= mMinScore).ToList().Select(x => x.Key).ToList().Except(canditosSeguros).Except(canditosUmbralMaximo).ToList();
+                    List<string> canditosUmbralMinimo = candidatos[entity].Where(x => x.Value >= mMinScore).ToList().Select(x => x.Key).ToList().Except(canditosSeguros).Except(canditosUmbralMaximo).Except(new List<string>() { entity }).ToList();
 
 
                     if (canditosSeguros.Count == 1 || canditosUmbralMaximo.Count == 1)
@@ -1771,47 +1771,45 @@ namespace API_DISCOVER.Utility
                             urlReconciliada = canditosUmbralMaximo[0];
                         }
 
-                        if (urlReconciliada != entity)
-                        {
-                            TripleStore store = new TripleStore();
-                            store.Add(pDataGraph);
-                            //Cambiamos candidato.Key por entityID
-                            SparqlUpdateParser parser = new SparqlUpdateParser();
-                            //Actualizamos los sujetos
-                            SparqlUpdateCommandSet updateSubject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+
+                        TripleStore store = new TripleStore();
+                        store.Add(pDataGraph);
+                        //Cambiamos candidato.Key por entityID
+                        SparqlUpdateParser parser = new SparqlUpdateParser();
+                        //Actualizamos los sujetos
+                        SparqlUpdateCommandSet updateSubject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
                                                                     INSERT{<" + urlReconciliada + @"> ?p ?o.}
                                                                     WHERE 
                                                                     {
                                                                         ?s ?p ?o.   FILTER(?s = <" + entity + @">)
                                                                     }");
-                            //Actualizamos los objetos
-                            SparqlUpdateCommandSet updateObject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                        //Actualizamos los objetos
+                        SparqlUpdateCommandSet updateObject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
                                                                     INSERT{?s ?p <" + urlReconciliada + @">.}
                                                                     WHERE 
                                                                     {
                                                                         ?s ?p ?o.   FILTER(?o = <" + entity + @">)
                                                                     }");
-                            LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
-                            processor.ProcessCommandSet(updateSubject);
-                            processor.ProcessCommandSet(updateObject);
+                        LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
+                        processor.ProcessCommandSet(updateSubject);
+                        processor.ProcessCommandSet(updateObject);
 
-                            pListaEntidadesReconciliadas.Add(entity, urlReconciliada);
-                            float score = 0;
-                            if (canditosSeguros.Count == 1)
-                            {
-                                score = 1;
-                            }
-                            else
-                            {
-                                score = candidatos[entity][canditosUmbralMaximo[0]];
-                            }
-                            discoveredEntityList.Add(entity, new KeyValuePair<string, float>(urlReconciliada, score));
-                            pHasChanges = true;
-                            if (pListaEntidadesRDFEnriquecer.ContainsKey(entity))
-                            {
-                                pListaEntidadesRDFEnriquecer.Add(urlReconciliada, pListaEntidadesRDFEnriquecer[entity]);
-                                pListaEntidadesRDFEnriquecer.Remove(entity);
-                            }
+                        pListaEntidadesReconciliadas.Add(entity, urlReconciliada);
+                        float score = 0;
+                        if (canditosSeguros.Count == 1)
+                        {
+                            score = 1;
+                        }
+                        else
+                        {
+                            score = candidatos[entity][canditosUmbralMaximo[0]];
+                        }
+                        discoveredEntityList.Add(entity, new KeyValuePair<string, float>(urlReconciliada, score));
+                        pHasChanges = true;
+                        if (pListaEntidadesRDFEnriquecer.ContainsKey(entity))
+                        {
+                            pListaEntidadesRDFEnriquecer.Add(urlReconciliada, pListaEntidadesRDFEnriquecer[entity]);
+                            pListaEntidadesRDFEnriquecer.Remove(entity);
                         }
                     }
                     else if (canditosUmbralMaximo.Count > 1 || canditosUmbralMinimo.Count > 0)
@@ -2090,11 +2088,11 @@ namespace API_DISCOVER.Utility
             foreach (string entityRDF in candidatos.Keys)
             {
                 //Candidatos con un 1 de probabilidad
-                List<string> canditosSeguros = candidatos[entityRDF].Where(x => x.Value == 1).ToList().Select(x => x.Key).ToList();
+                List<string> canditosSeguros = candidatos[entityRDF].Where(x => x.Value == 1).ToList().Select(x => x.Key).Except(new List<string>() { entityRDF }).ToList();
                 //Candidatos que superan el umbral máximo (excluyendo los anteriores)
-                List<string> canditosUmbralMaximo = candidatos[entityRDF].Where(x => x.Value >= mMaxScore).ToList().Select(x => x.Key).ToList().Except(canditosSeguros).ToList();
+                List<string> canditosUmbralMaximo = candidatos[entityRDF].Where(x => x.Value >= mMaxScore).ToList().Select(x => x.Key).ToList().Except(canditosSeguros).Except(new List<string>() { entityRDF }).ToList();
                 //Candidatos que superan el umbral mínimo (excluyendo los anteriores)
-                List<string> canditosUmbralMinimo = candidatos[entityRDF].Where(x => x.Value >= mMinScore).ToList().Select(x => x.Key).ToList().Except(canditosSeguros).Except(canditosUmbralMaximo).ToList();
+                List<string> canditosUmbralMinimo = candidatos[entityRDF].Where(x => x.Value >= mMinScore).ToList().Select(x => x.Key).ToList().Except(canditosSeguros).Except(canditosUmbralMaximo).Except(new List<string>() { entityRDF }).ToList();
 
 
                 if (!pExternalIntegration && (canditosSeguros.Count == 1 || canditosUmbralMaximo.Count == 1))
@@ -2184,7 +2182,7 @@ namespace API_DISCOVER.Utility
                     float similitudActual = 0;
                     HashSet<string> valorPropiedadesOriginal = pDisambiguationDataOriginal.properties.First(x => x.property == propiedad).values;
                     HashSet<string> valorPropiedadesCandidato = pDisambiguationDataCandidate.properties.First(x => x.property == propiedad).values;
-                    
+
                     float minScore = 0;
                     if (propiedad.mandatory)
                     {
@@ -3709,13 +3707,13 @@ namespace API_DISCOVER.Utility
                         break;
                     }
                 }
-                
+
                 if (score > 0)
                 {
                     float coefJaccardGNOSS = score * (indice_desplazamiento / (desplazamiento + indice_desplazamiento));
                     scores.Add(coefJaccardGNOSS);
                 }
-                
+
             }
             if (scores.Count > 0)
             {
@@ -3735,7 +3733,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pNameB">Nombre B</param>
         /// <returns>Coeficiente</returns>
         private static float CompareSingleName(string pNameA, string pNameB)
-        {            
+        {
             HashSet<string> ngramsNameA = GetNGramas(pNameA, 2);
             HashSet<string> ngramsNameB = GetNGramas(pNameB, 2);
             float tokens_comunes = ngramsNameA.Intersect(ngramsNameB).Count();
