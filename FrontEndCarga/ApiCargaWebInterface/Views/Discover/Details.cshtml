@@ -43,7 +43,7 @@
                         diccionarioValues.Add("idJob", Model.JobId);
                         diccionarioValues.Add("IdDiscoverItem", Model.IdDiscoverItem.ToString());
                     }
-                    <form asp-action="ResolveDiscover" asp-controller="Job" asp-all-route-data="diccionarioValues" method="post">
+                    <form id="formresolve" asp-action="ResolveDiscover" asp-controller="Job" asp-all-route-data="diccionarioValues" method="post">
                         <div class="tabla error">
                             @foreach (var item in Model.DissambiguationProblems)
                             {
@@ -100,14 +100,17 @@
                                 </div>
                             }
                         </div>
-                        <input class="submit principal" type="submit" value="Validar">
+                        @*<input class="oculto" type="submit" value="Validar">*@
                     </form>
-                    <form asp-action="RetryDiscover" asp-controller="Job" asp-all-route-data="diccionarioValues" method="post">
-                        <input class="submit principal" type="submit" value="Reintentar">
+                    <form id="formretry" asp-action="RetryDiscover" asp-controller="Job" asp-all-route-data="diccionarioValues" method="post">
+                        @*<input class="oculto" type="submit" value="Reintentar">*@
                     </form>
-                    <form asp-action="DiscardDiscover" asp-controller="Job" asp-all-route-data="diccionarioValues" method="post">
-                        <input class="submit principal" type="submit" value="Descartar">
+                    <form id="formdiscard" asp-action="DiscardDiscover" asp-controller="Job" asp-all-route-data="diccionarioValues" method="post">
+                        @*<input class="oculto" type="submit" value="Descartar">*@
                     </form>
+                    <input class="submt pricipal" type="submit" value="Validar" onclick="event.preventDefault(); $('#formresolve').submit();">
+                    <input class="submt pricipal" type="submit" value="Reintentar" onclick="event.preventDefault(); $('#formretry').submit();;">
+                    <input class="submt pricipal" type="submit" value="Descartar" onclick="event.preventDefault();$('#formdiscard').submit();;">
                 </div>
                     }
                 </div>

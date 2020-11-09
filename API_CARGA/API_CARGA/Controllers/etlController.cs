@@ -74,7 +74,7 @@ namespace API_CARGA.Controllers
                     discoverItem.DiscoverRdf = rdf.InnerXml;
 
                     _amqpService.PublishMessage(idDiscoverItem);
-                    return Ok(idDiscoverItem);
+                    return Ok();
                 }
                 else
                 {
@@ -82,7 +82,7 @@ namespace API_CARGA.Controllers
                     DiscoverItem discoverItem = new DiscoverItem() { JobID = jobId, Rdf = rdf.InnerXml, Publish = true, DissambiguationProcessed = discoverProcessed, Status = "Pending" };
                     Guid addedID = _discoverItemService.AddDiscoverItem(discoverItem);
                     _amqpService.PublishMessage(addedID);
-                    return Ok(addedID);
+                    return Ok();
                 }
             }
             catch (Exception ex)
