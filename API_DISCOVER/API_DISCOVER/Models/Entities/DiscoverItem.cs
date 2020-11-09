@@ -77,10 +77,43 @@ namespace API_DISCOVER.Models.Entities
             public string IDOrigin { get; set; }
 
             /// <summary>
-            /// Candiatos de desambiguación de desambiguación
+            /// Candiatos de desambiguación
             /// </summary>
             [ForeignKey("DiscoverDissambiguationID")]
             public virtual ICollection<DiscoverDissambiguationCandiate> DissambiguationCandiates { get; set; }
+        }
+
+        ///<summary>
+        ///Representa descartes para un problema de desambiguación en un DiscoverItem
+        ///</summary>
+        public class DiscardDissambiguation
+        {
+            public DiscardDissambiguation()
+            {
+            }
+
+            /// <summary>
+            /// Identificador del problema de desambiguación
+            /// </summary>
+            [Key]
+            public Guid ID { get; set; }
+
+            /// <summary>
+            /// Identificador del discoverItem
+            /// </summary>
+            [Required]
+            public Guid DiscoverItemID { get; set; }
+
+            /// <summary>
+            /// Identificador de la entidad para que le tenemos los descartes
+            /// </summary>
+            [Required]
+            public string IDOrigin { get; set; }
+
+            /// <summary>
+            /// Candidatos descartados cargadas
+            /// </summary>
+            public List<string> DiscardCandidates { get; set; }
         }
 
         public enum DiscoverItemStatus
@@ -104,8 +137,8 @@ namespace API_DISCOVER.Models.Entities
         /// <summary>
         /// Indica el estado del item:
         ///     Pending
-        ///     Processing
         ///     Processed
+        ///     ProcessedDissambiguationProblem
         ///     Error
         /// </summary>
         [Required]
@@ -153,6 +186,12 @@ namespace API_DISCOVER.Models.Entities
         public virtual ICollection<DiscoverDissambiguation> DissambiguationProblems { get; set; }
 
         /// <summary>
+        /// Descartes de desambiguación
+        /// </summary>
+        [ForeignKey("DiscoverItemID")]
+        public virtual ICollection<DiscardDissambiguation> DiscardDissambiguations { get; set; }
+
+        /// <summary>
         /// Entidades cargadas
         /// </summary>
         public List<string> LoadedEntities { get; set; }
@@ -163,7 +202,7 @@ namespace API_DISCOVER.Models.Entities
         /// <param name="pProblems">Problemas de desambiguación</param>
         /// <param name="pLoadedEntities">Entidades ya cargadas en el grafo</param>
         /// <param name="pDiscoverRDF">RDF de descubrimiento</param>
-        public void UpdateDissambiguationProblems(Dictionary<string,Dictionary<string,float>> pProblems,List<string> pLoadedEntities,string pDiscoverRDF)
+        public void UpdateDissambiguationProblems(Dictionary<string, Dictionary<string, float>> pProblems, List<string> pLoadedEntities, string pDiscoverRDF)
         {
             Status = DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString();
             DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
@@ -204,12 +243,48 @@ namespace API_DISCOVER.Models.Entities
         }
 
         /// <summary>
+        /// Modificamos el objeto DiscoverItem para guardarlo cuando hse han seleccionado descartes para la desmbiguación y se va a volver a procesar
+        /// </summary>
+        /// <param name="pDiscards">Problemas de desambiguación</param>
+        /// <param name="pDiscoverRDF">RDF de descubrimiento</param>
+        public void UpdateDissambiguationDiscards(Dictionary<string, List<string>> pDiscards, string pDiscoverRDF)
+        {
+            Status = DiscoverItem.DiscoverItemStatus.Pending.ToString();
+            DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
+            Error = "";
+            DiscoverReport = "";
+            DiscoverRdf = pDiscoverRDF;
+            LoadedEntities = new List<string>();
+            foreach (string idOrigin in pDiscards.Keys)
+            {
+                DiscardDissambiguation discardDissambiguation = DiscardDissambiguations.FirstOrDefault(x => x.IDOrigin == idOrigin);
+                if (discardDissambiguation == null)
+                {
+                    discardDissambiguation = new DiscardDissambiguation();
+                    discardDissambiguation.IDOrigin = idOrigin;
+                    DiscardDissambiguations.Add(discardDissambiguation);
+                }
+                if (discardDissambiguation.DiscardCandidates == null)
+                {
+                    discardDissambiguation.DiscardCandidates = new List<string>();
+                }
+                foreach (string discardCandidate in pDiscards[idOrigin])
+                {
+                    if (!discardDissambiguation.DiscardCandidates.Contains(discardCandidate))
+                    {
+                        discardDissambiguation.DiscardCandidates.Add(discardCandidate);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Modificamos el objeto DiscoverItem para guardarlo cuando se procesa para generar un report
         /// </summary>
         /// <param name="pProblems">Problemas de desambiguación</param>
-        /// <param name="pDiscoverRDF">RDF de descubrimiento</param>        /// 
+        /// <param name="pDiscoverRDF">RDF de descubrimiento</param>     
         /// <param name="pDiscoverReport">Reporte</param>
-        public void UpdateReport(Dictionary<string, Dictionary<string, float>> pProblems,  string pDiscoverRDF,string pDiscoverReport)
+        public void UpdateReport(Dictionary<string, Dictionary<string, float>> pProblems, string pDiscoverRDF, string pDiscoverReport)
         {
             DiscoverRdf = pDiscoverRDF;
             Status = DiscoverItem.DiscoverItemStatus.Processed.ToString();
@@ -254,24 +329,25 @@ namespace API_DISCOVER.Models.Entities
         /// </summary>
         public void UpdateProcessed()
         {
+            DiscardDissambiguations = new List<DiscoverItem.DiscardDissambiguation>();
             DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
             DiscoverReport = "";
             Status = DiscoverItem.DiscoverItemStatus.Processed.ToString();
             DiscoverRdf = null;
             Rdf = null;
+            Error = "";
+            LoadedEntities = new List<string>();
         }
 
         /// <summary>
         /// Modificamos el objeto DiscoverItem para guardarlo cuando se produce un error
         /// </summary>
         /// <param name="pError">Error</param>
-        /// <param name="pRDF">RDF</param>
-        public void UpdateError(string pError,string pRDF)
+        public void UpdateError(string pError)
         {
             Status = DiscoverItem.DiscoverItemStatus.Error.ToString();
             DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
             Error = pError;
-            Rdf = pRDF;
             DiscoverRdf = "";
             DiscoverReport = "";
         }

@@ -36,7 +36,8 @@ namespace ApiCargaWebInterface.Models.Services
         /// <param name="rdfFile">rdf a pasar</param>
         /// <param name="jobId">Identificador de la tarea</param>
         /// <param name="discoverProcessed">Indica si ya está procesado el descubrimiento</param>
-        public void CallDataPublish(IFormFile rdfFile, string jobId, bool discoverProcessed);
+        /// <param name="idDiscoverItem">Identificador del discoverItem, en caso de que se quiera actualizar</param>
+        public void CallDataPublish(IFormFile rdfFile, string jobId, bool discoverProcessed,string idDiscoverItem=null);
         /// <summary>
         /// Sube una ontologia
         /// </summary>

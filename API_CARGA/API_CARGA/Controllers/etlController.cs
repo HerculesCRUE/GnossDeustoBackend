@@ -57,17 +57,33 @@ namespace API_CARGA.Controllers
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult dataPublish(IFormFile rdfFile, string jobId,bool discoverProcessed)
+        public IActionResult dataPublish(IFormFile rdfFile, string jobId, bool discoverProcessed)
         {
             try
             {
-                XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
-                DiscoverItem discoverItem = new DiscoverItem() { JobID = jobId, Publish = true,DissambiguationProcessed=discoverProcessed, Status = "Pending" };
-                Guid addedID = _discoverItemService.AddDiscoverItem(discoverItem);
-                //No guardamos el RDF en la BBDD, sólo en rabbit
-                discoverItem.Rdf = rdf.InnerXml;
-                _amqpService.PublishMessage(discoverItem);
-                return Ok();
+                string idDiscoverItem = Request.Query["idDiscoverItem"].ToString();
+                if (!string.IsNullOrEmpty(idDiscoverItem))
+                {
+                    //Si viene el parametro 'idDiscoverItem' actualizamos un DiscoverItem ya existente.
+                    XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
+
+                    DiscoverItem discoverItem = _discoverItemService.GetDiscoverItemById(new Guid(idDiscoverItem));
+                    discoverItem.DissambiguationProcessed = discoverProcessed;
+                    discoverItem.Publish = true;
+                    discoverItem.Status = "Pending";
+                    discoverItem.DiscoverRdf = rdf.InnerXml;
+
+                    _amqpService.PublishMessage(idDiscoverItem);
+                    return Ok(idDiscoverItem);
+                }
+                else
+                {
+                    XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
+                    DiscoverItem discoverItem = new DiscoverItem() { JobID = jobId, Rdf = rdf.InnerXml, Publish = true, DissambiguationProcessed = discoverProcessed, Status = "Pending" };
+                    Guid addedID = _discoverItemService.AddDiscoverItem(discoverItem);
+                    _amqpService.PublishMessage(addedID);
+                    return Ok(addedID);
+                }
             }
             catch (Exception ex)
             {
@@ -181,9 +197,9 @@ namespace API_CARGA.Controllers
             try
             {
                 XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
-                DiscoverItem discoverItem = new DiscoverItem() { Rdf = rdf.InnerXml, Publish = false, Status = "Pending" };
+                DiscoverItem discoverItem = new DiscoverItem() { Rdf = rdf.InnerXml, Publish = false, DissambiguationProcessed = false, Status = "Pending" };
                 Guid addedID = _discoverItemService.AddDiscoverItem(discoverItem);
-                _amqpService.PublishMessage(discoverItem);
+                _amqpService.PublishMessage(addedID);
                 return Ok(addedID);
             }
             catch (Exception ex)
@@ -221,7 +237,7 @@ namespace API_CARGA.Controllers
                         DissambiguationProblems = new List<DiscoverStateResult.DiscoverDissambiguation>()
                     };
 
-                    foreach(DiscoverItem.DiscoverDissambiguation problem in item.DissambiguationProblems)
+                    foreach (DiscoverItem.DiscoverDissambiguation problem in item.DissambiguationProblems)
                     {
                         DiscoverStateResult.DiscoverDissambiguation discoverDissambiguation = new DiscoverStateResult.DiscoverDissambiguation()
                         {
@@ -230,10 +246,10 @@ namespace API_CARGA.Controllers
                         };
                         foreach (DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate candidate in problem.DissambiguationCandiates)
                         {
-                            discoverDissambiguation.DissambiguationCandiates.Add(new DiscoverStateResult.DiscoverDissambiguation.DiscoverDissambiguationCandiate() 
-                            { 
-                                IDCandidate=candidate.IDCandidate,
-                                Score=candidate.Score
+                            discoverDissambiguation.DissambiguationCandiates.Add(new DiscoverStateResult.DiscoverDissambiguation.DiscoverDissambiguationCandiate()
+                            {
+                                IDCandidate = candidate.IDCandidate,
+                                Score = candidate.Score
                             });
                         }
                         discoverStateResult.DissambiguationProblems.Add(discoverDissambiguation);

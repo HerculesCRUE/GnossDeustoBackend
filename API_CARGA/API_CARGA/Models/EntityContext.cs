@@ -30,14 +30,18 @@ namespace API_CARGA.Models
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<RepositorySync>()
-            //    .HasKey(c => new { c.RepositoryId, c.Set });
             modelBuilder.Entity<ProcessingJobState>()
                 .HasIndex(u => u.JobId)
                 .IsUnique();
 
             modelBuilder.Entity<DiscoverItem>()
             .Property(e => e.LoadedEntities)
+            .HasConversion(
+                v => string.Join('|', v),
+                v => v.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList());
+
+            modelBuilder.Entity<DiscoverItem.DiscardDissambiguation>()
+            .Property(e => e.DiscardCandidates)
             .HasConversion(
                 v => string.Join('|', v),
                 v => v.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList());

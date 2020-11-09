@@ -39,10 +39,9 @@ namespace API_DISCOVER.Utility
         /// <summary>
         /// Realiza el desubrimiento sobre un RDF
         /// </summary>
-        /// <param name="pRDFFile">Fichero RDF</param>
-        /// <param name="pDissambiguationProcessed">Indica si están ya resueltos los problemas de desambiguación</param>
+        /// <param name="pDiscoverItem">Item de descubrimiento</param>
         /// <returns>DiscoverResult con los datos del descubrimiento</returns>
-        public static DiscoverResult Init(string pRDFFile, bool pDissambiguationProcessed)
+        public static DiscoverResult Init(DiscoverItem pDiscoverItem)
         {
             DateTime discoverInitTime = DateTime.Now;
             //Cargamos la ontología
@@ -51,7 +50,27 @@ namespace API_DISCOVER.Utility
 
             //Cargamos datos del RDF
             RohGraph dataGraph = new RohGraph();
-            dataGraph.LoadFromString(pRDFFile, new RdfXmlParser());
+            Dictionary<string, HashSet<string>> discardDissambiguations = new Dictionary<string, HashSet<string>>();
+            if (!string.IsNullOrEmpty(pDiscoverItem.DiscoverRdf))
+            {
+                //Si tenemos valor en DiscoverRdf, trabajamos con este RDF, ya que estamos reprocesando un rdf validado
+                dataGraph.LoadFromString(pDiscoverItem.DiscoverRdf, new RdfXmlParser());
+                if (pDiscoverItem.DiscardDissambiguations != null)
+                {
+                    foreach (DiscoverItem.DiscardDissambiguation discardDissambiguation in pDiscoverItem.DiscardDissambiguations)
+                    {
+                        if (!discardDissambiguations.ContainsKey(discardDissambiguation.IDOrigin))
+                        {
+                            discardDissambiguations.Add(discardDissambiguation.IDOrigin, new HashSet<string>());
+                        }
+                        discardDissambiguations[discardDissambiguation.IDOrigin].UnionWith(discardDissambiguation.DiscardCandidates);
+                    }
+                }
+            }
+            else
+            {
+                dataGraph.LoadFromString(pDiscoverItem.Rdf, new RdfXmlParser());
+            }
 
 
             //Cargamos el razonador para inferir datos en la ontología
@@ -76,7 +95,7 @@ namespace API_DISCOVER.Utility
 
             Dictionary<string, Dictionary<string, string>> externalIntegration = new Dictionary<string, Dictionary<string, string>>();
 
-            if (!pDissambiguationProcessed)
+            if (!pDiscoverItem.DissambiguationProcessed)
             {
                 //Obtenemos los nombres de todas las personas que haya cargadas en la BBDD
                 //Clave ID,
@@ -114,17 +133,17 @@ namespace API_DISCOVER.Utility
                     }
 
                     //1.- Realizamos reconciliación con los identificadores configurados (y el roh:identifier) y marcamos como reconciliadas las entidades seleccionadas para no intentar reconciliarlas posteriormente
-                    Dictionary<string, string> entidadesReconciliadasConIdsAux = ReconciliateIDs(ref hasChanges, ref discoveredEntityList, entitiesRdfType, disambiguationDataRdf, ref dataGraph);
+                    Dictionary<string, string> entidadesReconciliadasConIdsAux = ReconciliateIDs(ref hasChanges, ref discoveredEntityList, entitiesRdfType, disambiguationDataRdf, discardDissambiguations, ref dataGraph);
                     foreach (string id in entidadesReconciliadasConIdsAux.Keys)
                     {
                         discoveredEntitiesWithIds.Add(id, entidadesReconciliadasConIdsAux[id]);
                     }
 
                     //2.- Realizamos la reconciliación con los datos del Propio RDF
-                    ReconciliateRDF(ref hasChanges, ref discoveredEntityList, ref dataGraph, reasoner, discoverCache);
+                    ReconciliateRDF(ref hasChanges, ref discoveredEntityList, ref dataGraph, reasoner,discardDissambiguations, discoverCache);
 
                     //3.- Realizamos la reconciliación con los datos de la BBDD
-                    Dictionary<string, KeyValuePair<string, float>> entidadesReconciliadasConBBDDAux = ReconciliateBBDD(ref hasChanges, ref discoveredEntityList, out discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, discoverCache);
+                    Dictionary<string, KeyValuePair<string, float>> entidadesReconciliadasConBBDDAux = ReconciliateBBDD(ref hasChanges, ref discoveredEntityList, out discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore,discardDissambiguations, discoverCache);
                     foreach (string id in entidadesReconciliadasConBBDDAux.Keys)
                     {
                         discoveredEntitiesWithBBDD.Add(id, entidadesReconciliadasConBBDDAux[id]);
@@ -132,7 +151,7 @@ namespace API_DISCOVER.Utility
 
                     //4.- Realizamos la reconciliación con los datos de las integraciones externas
                     Dictionary<string, KeyValuePair<string, float>> entidadesReconciliadasConIntegracionExternaAux;
-                    Dictionary<string, Dictionary<string, string>> externalIntegrationAux = ExternalIntegration(ref hasChanges, entitiesRdfTypes, ref discoveredEntityList, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discoverCache);
+                    Dictionary<string, Dictionary<string, string>> externalIntegrationAux = ExternalIntegration(ref hasChanges, entitiesRdfTypes, ref discoveredEntityList, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache);
                     foreach (string id in entidadesReconciliadasConIntegracionExternaAux.Keys)
                     {
                         discoveredEntitiesWithExternalIntegration.Add(id, entidadesReconciliadasConIntegracionExternaAux[id]);
@@ -193,15 +212,14 @@ namespace API_DISCOVER.Utility
 
             if (pDiscoverItem.Publish)
             {
-                DiscoverItem discoverItemBD = pDiscoverItemBDService.GetDiscoverItemById(pDiscoverItem.ID);
                 if (pDiscoverResult.discoveredEntitiesProbability.Count > 0)
                 {
                     //Hay dudas en la desambiguación, por lo que lo actualizamos en la BBDD con su estado correspondiente    
-                    discoverItemBD.UpdateDissambiguationProblems(
+                    pDiscoverItem.UpdateDissambiguationProblems(
                         pDiscoverResult.discoveredEntitiesProbability,
                         pDiscoverResult.discoveredEntitiesWithDataBase.Values.Select(x => x.Key).Union(pDiscoverResult.discoveredEntitiesWithId.Values).Union(pDiscoverResult.discoveredEntitiesWithSubject).Union(pDiscoverResult.discoveredEntitiesWithExternalIntegration.Values.Select(x => x.Key)).ToList(),
                         pDiscoverResult.GetDataGraphRDF());
-                    pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBD);
+                    pDiscoverItemBDService.ModifyDiscoverItem(pDiscoverItem);
                 }
                 else
                 {
@@ -332,8 +350,8 @@ namespace API_DISCOVER.Utility
                     DeleteOrphanNodes();
 
                     //Lo marcamos como procesado en la BBDD y eliminamos sus metadatos
-                    discoverItemBD.UpdateProcessed();
-                    pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBD);
+                    pDiscoverItem.UpdateProcessed();
+                    pDiscoverItemBDService.ModifyDiscoverItem(pDiscoverItem);
                 }
 
                 //Actualizamos el estado de descubrimiento de la tarea si el estado encolado esta en estado Success o Error (ha finalizado)
@@ -1487,9 +1505,10 @@ namespace API_DISCOVER.Utility
         /// <param name="pListaEntidadesReconciliadas">Lista con las entidades reconciliadas</param>
         /// <param name="pEntitiesRdfType">Diccionario con las entidades encontradas y su rdf:type (sin inferencia)</param>
         /// <param name="pDisambiguationDataRdf">Datos extraidos del grafo para la reconciliación</param>
+        /// <param name="pDiscardDissambiguations">Descartes para la desambiguación</param>
         /// <param name="pDataGraph">Grafo en local con los datos a procesar</param>
         /// <returns>Lista con las entidades reconciliadas</returns>
-        private static Dictionary<string, string> ReconciliateIDs(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, Dictionary<string, string> pEntitiesRdfType, Dictionary<string, List<DisambiguationData>> pDisambiguationDataRdf, ref RohGraph pDataGraph)
+        private static Dictionary<string, string> ReconciliateIDs(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, Dictionary<string, string> pEntitiesRdfType, Dictionary<string, List<DisambiguationData>> pDisambiguationDataRdf, Dictionary<string, HashSet<string>> pDiscardDissambiguations, ref RohGraph pDataGraph)
         {
             Dictionary<string, string> entidaesReconciliadas = new Dictionary<string, string>();
             Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> identificadoresRDFPorRdfType = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
@@ -1582,32 +1601,35 @@ namespace API_DISCOVER.Utility
 
                                 if (coincidenciaBBDD.Key != null && coincidenciaBBDD.Value != null && coincidenciaBBDD.Key != entityID)
                                 {
-                                    TripleStore store = new TripleStore();
-                                    store.Add(pDataGraph);
+                                    if (pDiscardDissambiguations == null || !pDiscardDissambiguations.ContainsKey(entityID) || !pDiscardDissambiguations[entityID].Contains(coincidenciaBBDD.Key))
+                                    {
+                                        TripleStore store = new TripleStore();
+                                        store.Add(pDataGraph);
+                                        //Cambiamos candidato.Key por entityID
+                                        SparqlUpdateParser parser = new SparqlUpdateParser();
 
-                                    //Cambiamos candidato.Key por entityID
-                                    SparqlUpdateParser parser = new SparqlUpdateParser();
-
-                                    //Actualizamos los sujetos
-                                    SparqlUpdateCommandSet updateSubject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                                        //Actualizamos los sujetos
+                                        SparqlUpdateCommandSet updateSubject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
                                                                                 INSERT{<" + coincidenciaBBDD.Key + @"> ?p ?o.}
                                                                                 WHERE 
                                                                                 {
                                                                                     ?s ?p ?o.   FILTER(?s = <" + entityID + @">)
                                                                                 }");
-                                    //Actualizamos los objetos
-                                    SparqlUpdateCommandSet updateObject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                                        //Actualizamos los objetos
+                                        SparqlUpdateCommandSet updateObject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
                                                                                 INSERT{?s ?p <" + coincidenciaBBDD.Key + @">.}
                                                                                 WHERE 
                                                                                 {
                                                                                     ?s ?p ?o.   FILTER(?o = <" + entityID + @">)
                                                                                 }");
-                                    LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
-                                    processor.ProcessCommandSet(updateSubject);
-                                    processor.ProcessCommandSet(updateObject);
-                                    pListaEntidadesReconciliadas.Add(entityID, coincidenciaBBDD.Key);
-                                    entidaesReconciliadas.Add(entityID, coincidenciaBBDD.Key);
-                                    pHasChanges = true;
+                                        LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
+                                        processor.ProcessCommandSet(updateSubject);
+                                        processor.ProcessCommandSet(updateObject);
+                                        pListaEntidadesReconciliadas.Add(entityID, coincidenciaBBDD.Key);
+                                        entidaesReconciliadas.Add(entityID, coincidenciaBBDD.Key);
+                                        pHasChanges = true;
+
+                                    }
                                 }
                             }
                         }
@@ -1627,9 +1649,10 @@ namespace API_DISCOVER.Utility
         /// <param name="pDataGraph">Grafo en local con los datos del RDF</param>
         /// <param name="pReasoner">Razonador</param>
         /// <param name="pNamesScore">Diccionario con los nombres del RDF y las entidades de la BB con sus scores</param>
+        /// <param name="pDiscardDissambiguations">Descartes de desambiguación</param>
         /// <param name="pDiscoverCache">Caché de discover</param>
         /// <returns>Diccioario con las entidades reconciliadas</returns>
-        private static Dictionary<string, KeyValuePair<string, float>> ReconciliateBBDD(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, out Dictionary<string, Dictionary<string, float>> pListaEntidadesReconciliadasDudosas, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore, DiscoverCache pDiscoverCache)
+        private static Dictionary<string, KeyValuePair<string, float>> ReconciliateBBDD(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, out Dictionary<string, Dictionary<string, float>> pListaEntidadesReconciliadasDudosas, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore,Dictionary<string,HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache)
         {
             Dictionary<string, KeyValuePair<string, float>> discoveredEntityList = new Dictionary<string, KeyValuePair<string, float>>();
             Dictionary<string, HashSet<string>> entitiesRdfTypes;
@@ -1645,7 +1668,7 @@ namespace API_DISCOVER.Utility
                 Dictionary<string, List<DisambiguationData>> disambiguationDataBBDD = GetDisambiguationDataBBDD(out entitiesRdfTypeBBDD, entitiesRdfType.ToDictionary(x => x.Key, x => new HashSet<string>() { x.Value }), new HashSet<string>(pListaEntidadesReconciliadas.Keys.Union(pListaEntidadesReconciliadas.Values)), disambiguationDataRdf, pNamesScore, pDiscoverCache);
 
                 hayQueReprocesar = false;
-                Dictionary<string, KeyValuePair<string, float>> listaEntidadesReconciliadasAux = ReconciliateData(ref pHasChanges, ref pListaEntidadesReconciliadas, out pListaEntidadesReconciliadasDudosas, entitiesRdfType, disambiguationDataRdf, entitiesRdfTypeBBDD, disambiguationDataBBDD, ref pDataGraph, false, pDiscoverCache);
+                Dictionary<string, KeyValuePair<string, float>> listaEntidadesReconciliadasAux = ReconciliateData(ref pHasChanges, ref pListaEntidadesReconciliadas, out pListaEntidadesReconciliadasDudosas, entitiesRdfType, disambiguationDataRdf, entitiesRdfTypeBBDD, disambiguationDataBBDD, ref pDataGraph, false,pDiscardDissambiguations, pDiscoverCache);
                 if (listaEntidadesReconciliadasAux.Count > 0)
                 {
                     hayQueReprocesar = true;
@@ -1667,9 +1690,10 @@ namespace API_DISCOVER.Utility
         /// <param name="pListaEntidadesReconciliadas">Lista con las entidades reconciliadas</param>
         /// <param name="pDataGraph">Grafo en local con los datos del RDF</param>
         /// <param name="pReasoner">Razonador</param>
+        /// <param name="pDiscardDissambiguations">Descartes de desambiguación</param>
         /// <param name="pDiscoverCache">Caché de Discover</param>
         /// <returns>Diccioario con las entidades reconciliadas</returns>
-        private static void ReconciliateRDF(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, DiscoverCache pDiscoverCache)
+        private static void ReconciliateRDF(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner,Dictionary<string,HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache)
         {
             Dictionary<string, List<DisambiguationData>> disambiguationDataRdf;
             Dictionary<string, HashSet<string>> entitiesRdfTypes;
@@ -1681,7 +1705,7 @@ namespace API_DISCOVER.Utility
             {
                 hayQueReprocesar = false;
                 Dictionary<string, Dictionary<string, float>> listaEntidadesReconciliadasDudosas = new Dictionary<string, Dictionary<string, float>>();
-                Dictionary<string, KeyValuePair<string, float>> listaEntidadesReconciliadasAux = ReconciliateData(ref pHasChanges, ref pListaEntidadesReconciliadas, out listaEntidadesReconciliadasDudosas, entitiesRdfType, disambiguationDataRdf, entitiesRdfType, disambiguationDataRdf, ref pDataGraph, false, pDiscoverCache);
+                Dictionary<string, KeyValuePair<string, float>> listaEntidadesReconciliadasAux = ReconciliateData(ref pHasChanges, ref pListaEntidadesReconciliadas, out listaEntidadesReconciliadasDudosas, entitiesRdfType, disambiguationDataRdf, entitiesRdfType, disambiguationDataRdf, ref pDataGraph, false,pDiscardDissambiguations, pDiscoverCache);
                 if (listaEntidadesReconciliadasAux.Count > 0)
                 {
                     hayQueReprocesar = true;
@@ -1703,11 +1727,12 @@ namespace API_DISCOVER.Utility
         /// <param name="pReasoner">Razonador</param>
         /// <param name="pNamesScore">Diccionario con los nombres del RDF y las entidades de la BB con sus scores</param>
         /// <param name="pClasesConSubclases">Diccionario con las clases de la ontología junto con sus subclases</param>
+        /// <param name="pDiscardDissambiguations">Descartes para la desambiguación</param>
         /// <param name="pDiscoverCache">Caché de Discover</param>
         /// <returns>Diccioario con las entidades reconciliadas</returns>
         private static Dictionary<string, KeyValuePair<string, float>> ReconciliateExternalIntegration(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas,
             ref Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, ref RohGraph pDataGraph, Dictionary<string, string> pListaEntidadesRDFEnriquecer, RohGraph pExternalGraph,
-            RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, HashSet<string>> pClasesConSubclases, DiscoverCache pDiscoverCache)
+            RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, HashSet<string>> pClasesConSubclases, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache)
         {
             Dictionary<string, KeyValuePair<string, float>> discoveredEntityList = new Dictionary<string, KeyValuePair<string, float>>();
 
@@ -1744,7 +1769,7 @@ namespace API_DISCOVER.Utility
 
 
             Dictionary<string, Dictionary<string, float>> candidatos;
-            ReconciliateData(ref pHasChanges, ref pListaEntidadesReconciliadas, out candidatos, entitiesRdfType, disambiguationDataRdf, entitiesRdfTypeBBDD, disambiguationDataBBDD, ref pDataGraph, true, pDiscoverCache);
+            ReconciliateData(ref pHasChanges, ref pListaEntidadesReconciliadas, out candidatos, entitiesRdfType, disambiguationDataRdf, entitiesRdfTypeBBDD, disambiguationDataBBDD, ref pDataGraph, true,pDiscardDissambiguations, pDiscoverCache);
 
             foreach (string entity in candidatos.Keys)
             {
@@ -1771,45 +1796,48 @@ namespace API_DISCOVER.Utility
                             urlReconciliada = canditosUmbralMaximo[0];
                         }
 
+                        if (pDiscardDissambiguations == null || !pDiscardDissambiguations.ContainsKey(entity) || !pDiscardDissambiguations[entity].Contains(urlReconciliada))
+                        {
+                            TripleStore store = new TripleStore();
+                            store.Add(pDataGraph);
 
-                        TripleStore store = new TripleStore();
-                        store.Add(pDataGraph);
-                        //Cambiamos candidato.Key por entityID
-                        SparqlUpdateParser parser = new SparqlUpdateParser();
-                        //Actualizamos los sujetos
-                        SparqlUpdateCommandSet updateSubject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                            //Cambiamos candidato.Key por entityID
+                            SparqlUpdateParser parser = new SparqlUpdateParser();
+                            //Actualizamos los sujetos
+                            SparqlUpdateCommandSet updateSubject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
                                                                     INSERT{<" + urlReconciliada + @"> ?p ?o.}
                                                                     WHERE 
                                                                     {
                                                                         ?s ?p ?o.   FILTER(?s = <" + entity + @">)
                                                                     }");
-                        //Actualizamos los objetos
-                        SparqlUpdateCommandSet updateObject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                            //Actualizamos los objetos
+                            SparqlUpdateCommandSet updateObject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
                                                                     INSERT{?s ?p <" + urlReconciliada + @">.}
                                                                     WHERE 
                                                                     {
                                                                         ?s ?p ?o.   FILTER(?o = <" + entity + @">)
                                                                     }");
-                        LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
-                        processor.ProcessCommandSet(updateSubject);
-                        processor.ProcessCommandSet(updateObject);
+                            LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
+                            processor.ProcessCommandSet(updateSubject);
+                            processor.ProcessCommandSet(updateObject);
 
-                        pListaEntidadesReconciliadas.Add(entity, urlReconciliada);
-                        float score = 0;
-                        if (canditosSeguros.Count == 1)
-                        {
-                            score = 1;
-                        }
-                        else
-                        {
-                            score = candidatos[entity][canditosUmbralMaximo[0]];
-                        }
-                        discoveredEntityList.Add(entity, new KeyValuePair<string, float>(urlReconciliada, score));
-                        pHasChanges = true;
-                        if (pListaEntidadesRDFEnriquecer.ContainsKey(entity))
-                        {
-                            pListaEntidadesRDFEnriquecer.Add(urlReconciliada, pListaEntidadesRDFEnriquecer[entity]);
-                            pListaEntidadesRDFEnriquecer.Remove(entity);
+                            pListaEntidadesReconciliadas.Add(entity, urlReconciliada);
+                            float score = 0;
+                            if (canditosSeguros.Count == 1)
+                            {
+                                score = 1;
+                            }
+                            else
+                            {
+                                score = candidatos[entity][canditosUmbralMaximo[0]];
+                            }
+                            discoveredEntityList.Add(entity, new KeyValuePair<string, float>(urlReconciliada, score));
+                            pHasChanges = true;
+                            if (pListaEntidadesRDFEnriquecer.ContainsKey(entity))
+                            {
+                                pListaEntidadesRDFEnriquecer.Add(urlReconciliada, pListaEntidadesRDFEnriquecer[entity]);
+                                pListaEntidadesRDFEnriquecer.Remove(entity);
+                            }
                         }
                     }
                     else if (canditosUmbralMaximo.Count > 1 || canditosUmbralMinimo.Count > 0)
@@ -1962,9 +1990,10 @@ namespace API_DISCOVER.Utility
         /// <param name="pDisambiguationDataCandidate">Datos de los candidatos para actualizar el rdf en local</param>
         /// <param name="pDataGraph">Grafo en local con los datos a procesar</param>
         /// <param name="pExternalIntegration">Indica si es para una integración externa, en ese caso no se hace efectiva la reconciliación y no se aplica la coincidencia de rdftypes incluye la herencia</param>
+        /// <param name="pDiscardDissambiguations">Descartes de desambiguación</param>
         /// <param name="pDiscoverCache">Caché de Discover</param>
         /// <returns>Diccionario de entidades reconciliadas</returns>
-        private static Dictionary<string, KeyValuePair<string, float>> ReconciliateData(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, out Dictionary<string, Dictionary<string, float>> pListaEntidadesReconciliadasDudosas, Dictionary<string, string> pEntitiesRdfType, Dictionary<string, List<DisambiguationData>> pDisambiguationDataRdf, Dictionary<string, string> pEntitiesRdfTypeCandidate, Dictionary<string, List<DisambiguationData>> pDisambiguationDataCandidate, ref RohGraph pDataGraph, bool pExternalIntegration, DiscoverCache pDiscoverCache)
+        private static Dictionary<string, KeyValuePair<string, float>> ReconciliateData(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, out Dictionary<string, Dictionary<string, float>> pListaEntidadesReconciliadasDudosas, Dictionary<string, string> pEntitiesRdfType, Dictionary<string, List<DisambiguationData>> pDisambiguationDataRdf, Dictionary<string, string> pEntitiesRdfTypeCandidate, Dictionary<string, List<DisambiguationData>> pDisambiguationDataCandidate, ref RohGraph pDataGraph, bool pExternalIntegration,Dictionary<string,HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache)
         {
             Dictionary<string, KeyValuePair<string, float>> discoveredEntityList = new Dictionary<string, KeyValuePair<string, float>>();
             pListaEntidadesReconciliadasDudosas = new Dictionary<string, Dictionary<string, float>>();
@@ -2017,6 +2046,19 @@ namespace API_DISCOVER.Utility
                                 {
                                     bool mismaEntidad = false;
                                     bool puedeSerMismaEntidad = true;
+
+                                    if(pDiscardDissambiguations!=null)
+                                    {
+                                        //No intentamos la desambiguación con los descartes
+                                        if(pDiscardDissambiguations.ContainsKey(entityID_RDF) && pDiscardDissambiguations[entityID_RDF].Contains(candidato.Key))
+                                        {
+                                            continue;
+                                        }
+                                        if (pDiscardDissambiguations.ContainsKey(candidato.Key) && pDiscardDissambiguations[candidato.Key].Contains(entityID_RDF))
+                                        {
+                                            continue;
+                                        }
+                                    }
 
                                     //Comprobamos los identificadores
                                     if (disambiguationData.identifiers != null && disambiguationData.identifiers.Count > 0 && disambiguationDataCandidato.identifiers != null && disambiguationDataCandidato.identifiers.Count > 0)
@@ -2108,41 +2150,43 @@ namespace API_DISCOVER.Utility
                     {
                         urlReconciliada = canditosUmbralMaximo[0];
                     }
-
-                    TripleStore store = new TripleStore();
-                    store.Add(pDataGraph);
-                    //Cambiamos candidato.Key por entityID
-                    SparqlUpdateParser parser = new SparqlUpdateParser();
-                    //Actualizamos los sujetos
-                    SparqlUpdateCommandSet updateSubject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                    if (pDiscardDissambiguations == null || !pDiscardDissambiguations.ContainsKey(entityRDF) || !pDiscardDissambiguations[entityRDF].Contains(urlReconciliada))
+                    {
+                        TripleStore store = new TripleStore();
+                        store.Add(pDataGraph);
+                        //Cambiamos candidato.Key por entityID
+                        SparqlUpdateParser parser = new SparqlUpdateParser();
+                        //Actualizamos los sujetos
+                        SparqlUpdateCommandSet updateSubject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
                                                                     INSERT{<" + urlReconciliada + @"> ?p ?o.}
                                                                     WHERE 
                                                                     {
                                                                         ?s ?p ?o.   FILTER(?s = <" + entityRDF + @">)
                                                                     }");
-                    //Actualizamos los objetos
-                    SparqlUpdateCommandSet updateObject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                        //Actualizamos los objetos
+                        SparqlUpdateCommandSet updateObject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
                                                                     INSERT{?s ?p <" + urlReconciliada + @">.}
                                                                     WHERE 
                                                                     {
                                                                         ?s ?p ?o.   FILTER(?o = <" + entityRDF + @">)
                                                                     }");
-                    LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
-                    processor.ProcessCommandSet(updateSubject);
-                    processor.ProcessCommandSet(updateObject);
+                        LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
+                        processor.ProcessCommandSet(updateSubject);
+                        processor.ProcessCommandSet(updateObject);
 
-                    pListaEntidadesReconciliadas.Add(entityRDF, urlReconciliada);
-                    float score = 0;
-                    if (canditosSeguros.Count == 1)
-                    {
-                        score = 1;
+                        pListaEntidadesReconciliadas.Add(entityRDF, urlReconciliada);
+                        float score = 0;
+                        if (canditosSeguros.Count == 1)
+                        {
+                            score = 1;
+                        }
+                        else
+                        {
+                            score = candidatos[entityRDF][canditosUmbralMaximo[0]];
+                        }
+                        discoveredEntityList.Add(entityRDF, new KeyValuePair<string, float>(urlReconciliada, score));
+                        pHasChanges = true;
                     }
-                    else
-                    {
-                        score = candidatos[entityRDF][canditosUmbralMaximo[0]];
-                    }
-                    discoveredEntityList.Add(entityRDF, new KeyValuePair<string, float>(urlReconciliada, score));
-                    pHasChanges = true;
                 }
                 else if (pExternalIntegration || (canditosUmbralMaximo.Count > 1 || canditosUmbralMinimo.Count > 0))
                 {
@@ -2478,11 +2522,12 @@ namespace API_DISCOVER.Utility
         /// <param name="pNamesScore">Diccionario con los nombres del RDF y las entidades de la BB con sus scores</param>
         /// <param name="pOntologyGraph">Grafo en local con los datos de la ontología</param>
         /// <param name="pEntidadesReconciliadasConIntegracionExterna">Entidades reconciliadas con la integración externa</param>
+        /// <param name="pDiscardDissambiguations">Descartes para la desambiguación</param>
         /// <param name="pDiscoverCache">Caché de discover</param>
         /// <returns>Diccionario con las entidades y los identificadores extraídos</returns>
         private static Dictionary<string, Dictionary<string, string>> ExternalIntegration(ref bool pHasChanges, Dictionary<string, HashSet<string>> pEntitiesRdfTypes,
             ref Dictionary<string, string> pListaEntidadesReconciliadas, ref Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner,
-            Dictionary<string, Dictionary<string, float>> pNamesScore, RohGraph pOntologyGraph, out Dictionary<string, KeyValuePair<string, float>> pEntidadesReconciliadasConIntegracionExterna, DiscoverCache pDiscoverCache)
+            Dictionary<string, Dictionary<string, float>> pNamesScore, RohGraph pOntologyGraph, out Dictionary<string, KeyValuePair<string, float>> pEntidadesReconciliadasConIntegracionExterna,Dictionary<string,HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache)
         {
             //Identificadores descubiertos con las integraciones externas
             Dictionary<string, Dictionary<string, string>> identifiersDiscover;
@@ -2500,24 +2545,24 @@ namespace API_DISCOVER.Utility
             externalGraph.Merge(externalGraphORCID);
             bool externalHasChanges = true;
             Dictionary<string, string> externalListaEntidadesReconciliadas = new Dictionary<string, string>();
-            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscoverCache);
+            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
 
             //3º SCOPUS
             //Hacemos las peticiones a SCOPUS de todos los elementos correspondientes para apoyar el proceso de descubrimiento
             RohGraph externalGraphSCOPUS = ExternalIntegrationSCOPUS(pEntitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
             externalGraph.Merge(externalGraphSCOPUS);
-            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscoverCache);
+            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
 
             // 4º DBLP
             //Hacemos las peticiones a DBLP de todos los elementos correspondientes para apoyar el proceso de descubrimiento
             RohGraph externalGraphDBLP = ExternalIntegrationDBLP(pEntitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
             externalGraph.Merge(externalGraphDBLP);
-            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscoverCache);
+            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner,pDiscardDissambiguations, pDiscoverCache);
 
             //Agregamos al RDF los identificadores encontrados en las fuentes externas y almacenamos en 'listaEntidadesRDFEnriquecer' aquellas entidades del RDF 
             //para las que hemos obtenido información adicional con las integraciones externas
             Dictionary<string, string> listaEntidadesRDFEnriquecer;
-            identifiersDiscover = ExternalIntegrationExtractIdentifiers(ref pHasChanges, externalGraph, ref pDataGraph, pListaEntidadesReconciliadas, pReasoner, out listaEntidadesRDFEnriquecer, pDiscoverCache);
+            identifiersDiscover = ExternalIntegrationExtractIdentifiers(ref pHasChanges, externalGraph, ref pDataGraph, pListaEntidadesReconciliadas, pReasoner, out listaEntidadesRDFEnriquecer, pDiscardDissambiguations, pDiscoverCache);
 
             pEntidadesReconciliadasConIntegracionExterna = new Dictionary<string, KeyValuePair<string, float>>();
             if (listaEntidadesRDFEnriquecer.Count > 0)
@@ -2526,7 +2571,7 @@ namespace API_DISCOVER.Utility
                 Dictionary<string, HashSet<string>> clasesConSubclases = ExtractClassWithSubclass(pOntologyGraph);
 
                 //Aplicamos la reconciliación con el RDF 'enriquecido'
-                pEntidadesReconciliadasConIntegracionExterna = ReconciliateExternalIntegration(ref pHasChanges, ref pListaEntidadesReconciliadas, ref pDiscoveredEntitiesProbability, ref pDataGraph, listaEntidadesRDFEnriquecer, externalGraph, pReasoner, pNamesScore, clasesConSubclases, pDiscoverCache);
+                pEntidadesReconciliadasConIntegracionExterna = ReconciliateExternalIntegration(ref pHasChanges, ref pListaEntidadesReconciliadas, ref pDiscoveredEntitiesProbability, ref pDataGraph, listaEntidadesRDFEnriquecer, externalGraph, pReasoner, pNamesScore, clasesConSubclases, pDiscardDissambiguations, pDiscoverCache);
             }
             foreach (string entityID in pDiscoveredEntitiesProbability.Keys.ToList())
             {
@@ -2547,10 +2592,11 @@ namespace API_DISCOVER.Utility
         /// <param name="pListaEntidadesReconciliadas">Lista con las entidades reconciliadas</param>
         /// <param name="pReasoner">Razonador</param>
         /// <param name="pListaEntidadesRDFEnriquecer">Diccionario con las entidades del RDF a enriquecer con los datos de las integraciones externas</param>
+        /// <param name="pDiscardDissambiguations">Descartes de desambiguación</param>
         /// <param name="pDiscoverCache">Caché de Discover</param>
         /// <returns>Diccionario con las entidades y los identificadores extraídos</returns>
         private static Dictionary<string, Dictionary<string, string>> ExternalIntegrationExtractIdentifiers(ref bool pHasChanges, RohGraph pExternalGraph, ref RohGraph pDataGraph,
-            Dictionary<string, string> pListaEntidadesReconciliadas, RohRdfsReasoner pReasoner, out Dictionary<string, string> pListaEntidadesRDFEnriquecer, DiscoverCache pDiscoverCache)
+            Dictionary<string, string> pListaEntidadesReconciliadas, RohRdfsReasoner pReasoner, out Dictionary<string, string> pListaEntidadesRDFEnriquecer,Dictionary<string,HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache)
         {
             Dictionary<string, Dictionary<string, string>> identifiersDiscover = new Dictionary<string, Dictionary<string, string>>();
 
@@ -2570,7 +2616,7 @@ namespace API_DISCOVER.Utility
             //Obtenemos las equivalencias entre los datos externos y el RDF y los almacenamos en
             bool hasChangesAux = false;
             Dictionary<string, Dictionary<string, float>> listaEntidadesDetectadas;
-            ReconciliateData(ref hasChangesAux, ref pListaEntidadesReconciliadas, out listaEntidadesDetectadas, dataEntitiesRdfType, dataDisambiguationDataRdf, externalEntitiesRdfType, externalDisambiguationDataRdf, ref pExternalGraph, true, pDiscoverCache);
+            ReconciliateData(ref hasChangesAux, ref pListaEntidadesReconciliadas, out listaEntidadesDetectadas, dataEntitiesRdfType, dataDisambiguationDataRdf, externalEntitiesRdfType, externalDisambiguationDataRdf, ref pExternalGraph, true, pDiscardDissambiguations, pDiscoverCache);
 
 
             pListaEntidadesRDFEnriquecer = new Dictionary<string, string>();
@@ -2753,48 +2799,43 @@ namespace API_DISCOVER.Utility
                 return externalGraph;
             }
 
-            Dictionary<string, string> nombresPersonas = new Dictionary<string, string>();
-            Dictionary<string, string> nombresPublicaciones = new Dictionary<string, string>();
+            Dictionary<string, string> personasNombres = new Dictionary<string, string>();
+            Dictionary<string, Dictionary<string, string>> personasObras = new Dictionary<string, Dictionary<string, string>>();
             foreach (string entityID in pEntitiesRdfTypes.Keys)
             {
                 if (pEntitiesRdfTypes[entityID].Contains("http://purl.org/roh/mirror/foaf#Person"))
                 {
-                    string queryNombrePersona = @$"select distinct ?name 
+                    string query = @$"select distinct ?person ?name ?doc ?title
                                     where
                                     {{
-                                        <{entityID}> <http://purl.org/roh/mirror/foaf#name> ?name. 
+                                        ?person <http://purl.org/roh/mirror/foaf#name> ?name. 
+                                        ?doc <http://purl.org/roh/mirror/bibo#authorList> ?list. 
+                                        ?doc <http://purl.org/roh#title> ?title. 
+                                        ?list ?enum ?person.
+                                        FILTER(?person =<{entityID}>)
                                     }}";
-                    SparqlResultSet sparqlResultSetNombrePersona = (SparqlResultSet)pDataGraph.ExecuteQuery(queryNombrePersona.ToString());
-                    foreach (SparqlResult sparqlResult in sparqlResultSetNombrePersona.Results)
+                    SparqlResultSet sparqlResultSet = (SparqlResultSet)pDataGraph.ExecuteQuery(query.ToString());
+                    foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
                     {
                         if (sparqlResult["name"] is LiteralNode)
                         {
-                            nombresPersonas[entityID] = ((LiteralNode)sparqlResult["name"]).Value;
+                            personasNombres[entityID] = ((LiteralNode)sparqlResult["name"]).Value;
                         }
-                    }
-                }
-
-                if (pEntitiesRdfTypes[entityID].Contains("http://purl.org/roh/mirror/bibo#Document"))
-                {
-                    string queryTituloDoc = @$"select distinct ?title
-                                where
-                                {{
-                                    <{entityID}> <http://purl.org/roh#title> ?title. 
-                                }}";
-                    SparqlResultSet sparqlResultSetTituloDoc = (SparqlResultSet)pDataGraph.ExecuteQuery(queryTituloDoc.ToString());
-                    foreach (SparqlResult sparqlResult in sparqlResultSetTituloDoc.Results)
-                    {
                         if (sparqlResult["title"] is LiteralNode)
                         {
-                            nombresPublicaciones[entityID] = ((LiteralNode)sparqlResult["title"]).Value;
+                            if(!personasObras.ContainsKey(entityID))
+                            {
+                                personasObras[entityID] = new Dictionary<string, string>();
+                            }
+                            personasObras[entityID][sparqlResult["doc"].ToString()] = ((LiteralNode)sparqlResult["title"]).Value;
                         }
                     }
                 }
             }
 
-            foreach (string idPersonRDF in nombresPersonas.Keys)
+            foreach (string idPersonRDF in personasNombres.Keys)
             {
-                string nombrePersona = nombresPersonas[idPersonRDF].Trim();
+                string nombrePersona = personasNombres[idPersonRDF].Trim();
 
                 //1.-Hacemos una petición a ORCID al método  ‘expanded - search' con el nombre de la persona
                 string q = HttpUtility.UrlEncode(NormalizeName(nombrePersona.ToLower(), pDiscoverCache, false, true, true).Trim());
@@ -2880,7 +2921,7 @@ namespace API_DISCOVER.Utility
                                                 }
                                             }
                                             worksData[code] = new KeyValuePair<string, string>(title, doi);
-                                            if (nombresPublicaciones.Where(x => GetSimilarity(x.Value, title, Disambiguation.Property.Type.title, pDiscoverCache, numWordsTitle) > 0).Count() > 0)
+                                            if (personasObras[idPersonRDF].Where(x => GetSimilarity(x.Value, title, Disambiguation.Property.Type.title, pDiscoverCache, numWordsTitle) > 0).Count() > 0)
                                             {
                                                 //Puede coincidir con alguna publicación del RDF
                                                 coicidenPulicaciones = true;
@@ -2894,7 +2935,7 @@ namespace API_DISCOVER.Utility
                             {
                                 foreach (string workCode in worksData.Keys)
                                 {
-                                    if (estaPersonaEnDuda || nombresPublicaciones.Where(x => GetSimilarity(x.Value, worksData[workCode].Key, Disambiguation.Property.Type.title, pDiscoverCache, numWordsTitle) > 0).Count() > 0)
+                                    if (estaPersonaEnDuda || personasObras[idPersonRDF].Where(x => GetSimilarity(x.Value, worksData[workCode].Key, Disambiguation.Property.Type.title, pDiscoverCache, numWordsTitle) > 0).Count() > 0)
                                     {
                                         IUriNode subjectWork = orcidGraph.CreateUriNode(UriFactory.Create("http://orcid.com/Work/" + workCode));
 
@@ -2961,48 +3002,44 @@ namespace API_DISCOVER.Utility
                 return externalGraph;
             }
 
-            Dictionary<string, string> nombresPersonas = new Dictionary<string, string>();
-            Dictionary<string, string> nombresPublicaciones = new Dictionary<string, string>();
+
+            Dictionary<string, string> publicacionesNombres = new Dictionary<string, string>();
+            Dictionary<string, Dictionary<string, string>> publicacionesAutores = new Dictionary<string, Dictionary<string, string>>();
             foreach (string entityID in pEntitiesRdfTypes.Keys)
             {
-                if (pEntitiesRdfTypes[entityID].Contains("http://purl.org/roh/mirror/foaf#Person"))
-                {
-                    string queryNombrePersona = @$"select distinct ?name 
-                                    where
-                                    {{
-                                        <{entityID}> <http://purl.org/roh/mirror/foaf#name> ?name. 
-                                    }}";
-                    SparqlResultSet sparqlResultSetNombrePersona = (SparqlResultSet)pDataGraph.ExecuteQuery(queryNombrePersona.ToString());
-                    foreach (SparqlResult sparqlResult in sparqlResultSetNombrePersona.Results)
-                    {
-                        if (sparqlResult["name"] is LiteralNode)
-                        {
-                            nombresPersonas[entityID] = ((LiteralNode)sparqlResult["name"]).Value;
-                        }
-                    }
-                }
-
                 if (pEntitiesRdfTypes[entityID].Contains("http://purl.org/roh/mirror/bibo#Document"))
                 {
-                    string queryTituloDoc = @$"select distinct ?title
-                                where
-                                {{
-                                    <{entityID}> <http://purl.org/roh#title> ?title. 
-                                }}";
-                    SparqlResultSet sparqlResultSetTituloDoc = (SparqlResultSet)pDataGraph.ExecuteQuery(queryTituloDoc.ToString());
-                    foreach (SparqlResult sparqlResult in sparqlResultSetTituloDoc.Results)
+                    string query = @$"select distinct ?person ?name ?doc ?title
+                                    where
+                                    {{
+                                        ?person <http://purl.org/roh/mirror/foaf#name> ?name. 
+                                        ?doc <http://purl.org/roh/mirror/bibo#authorList> ?list. 
+                                        ?doc <http://purl.org/roh#title> ?title. 
+                                        ?list ?enum ?person.
+                                        FILTER(?doc =<{entityID}>)
+                                    }}";
+                    SparqlResultSet sparqlResultSet = (SparqlResultSet)pDataGraph.ExecuteQuery(query.ToString());
+                    foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
                     {
                         if (sparqlResult["title"] is LiteralNode)
                         {
-                            nombresPublicaciones[entityID] = ((LiteralNode)sparqlResult["title"]).Value;
+                            publicacionesNombres[entityID] = ((LiteralNode)sparqlResult["title"]).Value;
+                        }
+                        if (sparqlResult["name"] is LiteralNode)
+                        {
+                            if (!publicacionesAutores.ContainsKey(entityID))
+                            {
+                                publicacionesAutores[entityID] = new Dictionary<string, string>();
+                            }
+                            publicacionesAutores[entityID][sparqlResult["person"].ToString()] = ((LiteralNode)sparqlResult["name"]).Value;
                         }
                     }
                 }
             }
 
-            foreach (string idPublicacionRDF in nombresPublicaciones.Keys)
+            foreach (string idPublicacionRDF in publicacionesNombres.Keys)
             {
-                string tituloPublicacion = nombresPublicaciones[idPublicacionRDF].Trim();
+                string tituloPublicacion = publicacionesNombres[idPublicacionRDF].Trim();
                 string queryScopus = NormalizeName(tituloPublicacion.ToLower(), pDiscoverCache, false, false, false).Trim();
                 while (queryScopus.Contains("  "))
                 {
@@ -3060,7 +3097,7 @@ namespace API_DISCOVER.Utility
                                 foreach (WorkAuthor author in work.author)
                                 {
                                     string personName = (author.givenname + " " + author.surname).Trim();
-                                    if (nombresPersonas.Where(x => GetNameSimilarity(x.Value, personName, pDiscoverCache) > 0).Count() > 0)
+                                    if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(x.Value, personName, pDiscoverCache) > 0).Count() > 0)
                                     {
                                         //Puede coincidir con alguna persona del RDF
                                         coicidenAutores = true;
@@ -3071,7 +3108,7 @@ namespace API_DISCOVER.Utility
                                     foreach (WorkAuthor author in work.author)
                                     {
                                         string personName = (author.givenname + " " + author.surname).Trim();
-                                        if (estaPublicacionEnDuda || nombresPersonas.Where(x => GetNameSimilarity(x.Value, personName, pDiscoverCache) > 0).Count() > 0)
+                                        if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(x.Value, personName, pDiscoverCache) > 0).Count() > 0)
                                         {
                                             string idPerson = "http://scopus.com/Person/" + author.authid;
                                             SCOPUSPerson person = SelectSCOPUSPersonCache(author.authid, pDiscoverCache);
@@ -3138,50 +3175,45 @@ namespace API_DISCOVER.Utility
                 return externalGraph;
             }
 
-            Dictionary<string, string> nombresPersonas = new Dictionary<string, string>();
-            Dictionary<string, string> nombresPublicaciones = new Dictionary<string, string>();
+            Dictionary<string, string> personasNombres = new Dictionary<string, string>();
+            Dictionary<string, Dictionary<string, string>> personasObras = new Dictionary<string, Dictionary<string, string>>();
             foreach (string entityID in pEntitiesRdfTypes.Keys)
             {
                 if (pEntitiesRdfTypes[entityID].Contains("http://purl.org/roh/mirror/foaf#Person"))
                 {
-                    string queryNombrePersona = @$"select distinct ?name 
+                    string query = @$"select distinct ?person ?name ?doc ?title
                                     where
                                     {{
-                                        <{entityID}> <http://purl.org/roh/mirror/foaf#name> ?name. 
+                                        ?person <http://purl.org/roh/mirror/foaf#name> ?name. 
+                                        ?doc <http://purl.org/roh/mirror/bibo#authorList> ?list. 
+                                        ?doc <http://purl.org/roh#title> ?title. 
+                                        ?list ?enum ?person.
+                                        FILTER(?person =<{entityID}>)
                                     }}";
-                    SparqlResultSet sparqlResultSetNombrePersona = (SparqlResultSet)pDataGraph.ExecuteQuery(queryNombrePersona.ToString());
-                    foreach (SparqlResult sparqlResult in sparqlResultSetNombrePersona.Results)
+                    SparqlResultSet sparqlResultSet = (SparqlResultSet)pDataGraph.ExecuteQuery(query.ToString());
+                    foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
                     {
                         if (sparqlResult["name"] is LiteralNode)
                         {
-                            nombresPersonas[entityID] = ((LiteralNode)sparqlResult["name"]).Value;
+                            personasNombres[entityID] = ((LiteralNode)sparqlResult["name"]).Value;
                         }
-                    }
-                }
-
-                if (pEntitiesRdfTypes[entityID].Contains("http://purl.org/roh/mirror/bibo#Document"))
-                {
-                    string queryTituloDoc = @$"select distinct ?title
-                                where
-                                {{
-                                    <{entityID}> <http://purl.org/roh#title> ?title. 
-                                }}";
-                    SparqlResultSet sparqlResultSetTituloDoc = (SparqlResultSet)pDataGraph.ExecuteQuery(queryTituloDoc.ToString());
-                    foreach (SparqlResult sparqlResult in sparqlResultSetTituloDoc.Results)
-                    {
                         if (sparqlResult["title"] is LiteralNode)
                         {
-                            nombresPublicaciones[entityID] = ((LiteralNode)sparqlResult["title"]).Value;
+                            if (!personasObras.ContainsKey(entityID))
+                            {
+                                personasObras[entityID] = new Dictionary<string, string>();
+                            }
+                            personasObras[entityID][sparqlResult["doc"].ToString()] = ((LiteralNode)sparqlResult["title"]).Value;
                         }
                     }
                 }
             }
 
-            foreach (string idPersonRDF in nombresPersonas.Keys)
+            foreach (string idPersonRDF in personasNombres.Keys)
             {
-                string nombrePersona = nombresPersonas[idPersonRDF].Trim();
+                string nombrePersona = personasNombres[idPersonRDF].Trim();
 
-                //1.-Hacemos una petición a ORCID al método  ‘expanded - search' con el nombre de la persona
+                //1.-Hacemos una petición a DBLP
                 string q = nombrePersona.ToLower();
 
                 DBLPAuthors authors = SelectDBLPAuthorsCache(q, pDiscoverCache);
@@ -3263,7 +3295,7 @@ namespace API_DISCOVER.Utility
                                     title = dblppersonR.inproceedings.title;
                                 }
 
-                                if (nombresPublicaciones.Where(x => GetSimilarity(x.Value, title, Disambiguation.Property.Type.title, pDiscoverCache, numWordsTitle) > 0).Count() > 0)
+                                if (personasObras[idPersonRDF].Where(x => GetSimilarity(x.Value, title, Disambiguation.Property.Type.title, pDiscoverCache, numWordsTitle) > 0).Count() > 0)
                                 {
                                     //Puede coincidir con alguna publicación del RDF
                                     coicidenPulicaciones = true;
@@ -3324,7 +3356,7 @@ namespace API_DISCOVER.Utility
                                     }
                                     if (!string.IsNullOrEmpty(title) && !string.IsNullOrEmpty(key))
                                     {
-                                        if (estaPersonaEnDuda || nombresPublicaciones.Where(x => GetSimilarity(x.Value, title, Disambiguation.Property.Type.title, pDiscoverCache, numWordsTitle) > 0).Count() > 0)
+                                        if (estaPersonaEnDuda || personasObras[idPersonRDF].Where(x => GetSimilarity(x.Value, title, Disambiguation.Property.Type.title, pDiscoverCache, numWordsTitle) > 0).Count() > 0)
                                         {
                                             IUriNode subjectWork = dblpGraph.CreateUriNode(UriFactory.Create("https://dblp.org/rec/" + key));
 

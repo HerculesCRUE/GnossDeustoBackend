@@ -27,6 +27,12 @@ namespace ApiCargaWebInterface.Models
             .HasConversion(
                 v => string.Join('|', v),
                 v => v.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList());
+
+            modelBuilder.Entity<DiscoverItem.DiscardDissambiguation>()
+            .Property(e => e.DiscardCandidates)
+            .HasConversion(
+                v => string.Join('|', v),
+                v => v.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList());
         }
     }
 }

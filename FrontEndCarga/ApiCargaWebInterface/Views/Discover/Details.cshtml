@@ -5,23 +5,23 @@
     ViewData["BodyClass"] = "fichaRecurso";
 }
 
-    <div class="row">
-        <div class="col col-12 col-lg-12 col-contenido">
-            <div class="wrapCol">
-                <div class="header-resource">
-                    <div class="h1-container">
-                        <h1>Errores de descubrimiento</h1>
-                        <div class="botones">
-                        </div>
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <div class="header-resource">
+                <div class="h1-container">
+                    <h1>Errores de descubrimiento</h1>
+                    <div class="botones">
                     </div>
                 </div>
-                <div class="contenido">
-                    <div class="grupo grupo-descripcion">
-                        @if (!string.IsNullOrEmpty(Model.Error))
-                        {
-                            var diccionarioValues = new Dictionary<string, string>();
-                                    diccionarioValues.Add("idJob", Model.JobId);
-                                    diccionarioValues.Add("IdDiscoverItem", Model.IdDiscoverItem.ToString());
+            </div>
+            <div class="contenido">
+                <div class="grupo grupo-descripcion">
+                    @if (!string.IsNullOrEmpty(Model.Error))
+                    {
+                        var diccionarioValues = new Dictionary<string, string>();
+                        diccionarioValues.Add("idJob", Model.JobId);
+                        diccionarioValues.Add("IdDiscoverItem", Model.IdDiscoverItem.ToString());
                         <div class="estado-tarea">
                             <div class="tabla error">
                                 <div class="fila">
@@ -34,94 +34,87 @@
                                 <input class="submit principal" type="submit" value="Reintentar">
                             </form>
                         </div>
-                        }
-                        else
-                        {
-                            <div class="estado-tarea">
-                                @{
-                                    var diccionarioValues = new Dictionary<string, string>();
-                                    diccionarioValues.Add("idJob", Model.JobId);
-                                    diccionarioValues.Add("IdDiscoverItem", Model.IdDiscoverItem.ToString());
-                                }
-                                <form asp-action="ResolveDiscover" asp-controller="Job" asp-all-route-data="diccionarioValues" method="post">
-                                    <div class="tabla error">
-                                        @*<input type="text" name="idJob" value="@Model.JobId" hidden disabled />
-                                    <input type="text" name="IdDiscoverItem" value="@Model.IdDiscoverItem" hidden disabled />*@
-                                        @*<div class="cabecera">
-                                        <p>Acciones</p>
-                                    </div>*@
-                                        @foreach (var item in Model.DissambiguationProblems)
-                                        {
-                                        <div class="fila">
-                                            <p class="titulo">
-                                                Elige la opción que más se adecue para <a asp-controller="Discover" asp-action="DetailsRdf" asp-route-itemId="@Context.Request.Query["itemId"]" asp-fragment="@item.Key" target="_blank">@item.Key<span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-                                                
-                                            </p>
-                                            @if (Model.DissambiguationProblemsTitles.ContainsKey(item.Key))
-                                            {
-                                                <p class="descripcion">Nombre: @Model.DissambiguationProblemsTitles[item.Key]</p>
-                                            }
-                                            <div class="items tabla">
-                                                <div class="cabecera">
-                                                    <div class="columna principal" style="text-align:left">
-                                                        <p>Opciones</p>
-                                                    </div>
-                                                    <div class="columna" style="text-align:left">
-                                                        <p>confianza</p>
-                                                    </div>
-                                                    <div class="columna" style="text-align:left">
-                                                        <p>Enlaces</p>
-                                                    </div>
-                                                </div>
-                                                <div class="fila">
-                                                    <div class="columna principal">
-                                                        <div class="radio">
-                                                            <label><input type="radio" name="DissambiguationProblemsResolve[@item.Key]" value="" checked> &nbsp; Ninguna opción</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="columna">
-                                                        <a href="" target="_blank"></a>
-                                                    </div>
-                                                </div>
-                                                @foreach (var option in item.Value)
-                                                {
-                                                    string value = option.Split('|').First().Trim();
-                                                    string confianza = option.Split('|').Last().Trim();
-                                                    <div class="fila">
-                                                        <div class="columna principal">
-                                                            <div class="radio">
-                                                                <label><input type="radio" name="DissambiguationProblemsResolve[@item.Key]" value="@value"> &nbsp; @value</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="columna">
-                                                            <p>@confianza</p>
-                                                        </div>
-                                                        <div class="columna">
-                                                            <a href="@value" target="_blank">ver opción <span class="linkext" href="@value" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-                                                        </div>
-                                                    </div>
-                                                }
+                    }
+                    else
+                    {
+                <div class="estado-tarea">
+                    @{
+                        var diccionarioValues = new Dictionary<string, string>();
+                        diccionarioValues.Add("idJob", Model.JobId);
+                        diccionarioValues.Add("IdDiscoverItem", Model.IdDiscoverItem.ToString());
+                    }
+                    <form asp-action="ResolveDiscover" asp-controller="Job" asp-all-route-data="diccionarioValues" method="post">
+                        <div class="tabla error">
+                            @foreach (var item in Model.DissambiguationProblems)
+                            {
+                                <div class="fila">
+                                    <p class="titulo">
+                                        Elige la opción que más se adecue para <a asp-controller="Discover" asp-action="DetailsRdf" asp-route-itemId="@Context.Request.Query["itemId"]" asp-fragment="@item.Key" target="_blank">@item.Key<span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+
+                                    </p>
+                                    @if (Model.DissambiguationProblemsTitles.ContainsKey(item.Key))
+                                    {
+                                        <p class="descripcion">Nombre: @Model.DissambiguationProblemsTitles[item.Key]</p>
+                                    }
+                                    <div class="items tabla">
+                                        <div class="cabecera">
+                                            <div class="columna principal" style="text-align:left">
+                                                <p>Opciones</p>
                                             </div>
-                                            @*<select name="DissambiguationProblemsResolve[@item.Key]">
-            <option value="">Ninguna opción</option>
-            @foreach (var option in item.Value)
-            {
-                string value = option.Split('|').First().Trim();
-                <option value="@value">@option</option>
-            }
-        </select>*@
+                                            <div class="columna" style="text-align:left">
+                                                <p>confianza</p>
+                                            </div>
+                                            <div class="columna" style="text-align:left">
+                                                <p>Enlaces</p>
+                                            </div>
                                         </div>
+                                        <div class="fila">
+                                            <div class="columna principal">
+                                                <div class="radio">
+                                                    <label><input type="radio" name="DissambiguationProblemsResolve[@item.Key]" value="" checked> &nbsp; Ninguna opción</label>
+                                                </div>
+                                            </div>
+                                            <div class="columna">
+                                                <a href="" target="_blank"></a>
+                                            </div>
+                                        </div>
+                                        @foreach (var option in item.Value)
+                                        {
+                                            string value = option.Split('|').First().Trim();
+                                            string confianza = option.Split('|').Last().Trim();
+                                            <div class="fila">
+                                                <div class="columna principal">
+                                                    <div class="radio">
+                                                        <label><input type="radio" name="DissambiguationProblemsResolve[@item.Key]" value="@value"> &nbsp; @value</label>
+                                                    </div>
+                                                </div>
+                                                <div class="columna">
+                                                    <p>@confianza</p>
+                                                </div>
+                                                <div class="columna">
+                                                    <a href="@value" target="_blank">ver opción <span class="linkext" href="@value" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                </div>
+                                            </div>
                                         }
                                     </div>
-                                    <input class="submit principal" type="submit" value="Validar">
-                                </form>
-                            </div>
-                        }
-                    </div>
+                                </div>
+                            }
+                        </div>
+                        <input class="submit principal" type="submit" value="Validar">
+                    </form>
+                    <form asp-action="RetryDiscover" asp-controller="Job" asp-all-route-data="diccionarioValues" method="post">
+                        <input class="submit principal" type="submit" value="Reintentar">
+                    </form>
+                    <form asp-action="DiscardDiscover" asp-controller="Job" asp-all-route-data="diccionarioValues" method="post">
+                        <input class="submit principal" type="submit" value="Descartar">
+                    </form>
+                </div>
+                    }
                 </div>
             </div>
         </div>
     </div>
+</div>
 <div>
     <a href="@Url.Action("DetailsJob","Job", new {  id=Model.JobId  })">Volver a la tarea</a>
 </div>

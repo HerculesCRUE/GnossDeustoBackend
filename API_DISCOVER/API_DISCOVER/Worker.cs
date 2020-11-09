@@ -58,35 +58,44 @@ namespace API_DISCOVER
             _processReady = false;
         }
 
-        private bool ProcessItem(string item)
+        private bool ProcessItem(string itemIDstring)
         {
-            DiscoverItem discoverItem = JsonConvert.DeserializeObject<DiscoverItem>(item);
+            Guid itemID = JsonConvert.DeserializeObject<Guid>(itemIDstring);            
             try
             {
-                //Aplicamos el proceso de descubrimiento
-                DiscoverResult resultado = Discover.Init(discoverItem.Rdf, discoverItem.DissambiguationProcessed);
-                Discover.Process(discoverItem, resultado, 
-                    _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>(),
-                    _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallCronApiService>(),
-                    _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<ProcessDiscoverStateJobBDService>()
-                    );
+               
+                DiscoverItemBDService discoverItemBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>();
+                CallCronApiService callCronApiService=_serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallCronApiService>();
+                ProcessDiscoverStateJobBDService processDiscoverStateJobBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<ProcessDiscoverStateJobBDService>();
+
+                DiscoverItem discoverItem = discoverItemBDService.GetDiscoverItemById(itemID);
+
+                if (discoverItem != null)
+                {
+                    //Aplicamos el proceso de descubrimiento
+                    DiscoverResult resultado = Discover.Init(discoverItem);
+                    Discover.Process(discoverItem, resultado,
+                        discoverItemBDService,
+                        callCronApiService,
+                        processDiscoverStateJobBDService
+                        );
+                }
             }
             catch (Exception ex)
             {
                 Log.Error(ex);
-
                 //Se ha producido un error al aplicar el descubrimiento
                 //Modificamos los datos del DiscoverItem que ha fallado
                 DiscoverItemBDService discoverItemBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>();
-                DiscoverItem discoverItemBBDD = discoverItemBDService.GetDiscoverItemById(discoverItem.ID);
-                discoverItemBBDD.UpdateError($"{ex.Message}\n{ex.StackTrace}\n", discoverItem.Rdf);
+                DiscoverItem discoverItemBBDD = discoverItemBDService.GetDiscoverItemById(itemID);
+                discoverItemBBDD.UpdateError($"{ex.Message}\n{ex.StackTrace}\n");
                 discoverItemBDService.ModifyDiscoverItem(discoverItemBBDD);
 
-                if (!string.IsNullOrEmpty(discoverItem.JobID))
+                if (!string.IsNullOrEmpty(discoverItemBBDD.JobID))
                 {
                     //Si viene de una tarea actualizamos su estado de descubrimiento
                     ProcessDiscoverStateJobBDService processDiscoverStateJobBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<ProcessDiscoverStateJobBDService>();
-                    ProcessDiscoverStateJob processDiscoverStateJob = processDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(discoverItem.JobID);
+                    ProcessDiscoverStateJob processDiscoverStateJob = processDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(discoverItemBBDD.JobID);
                     if (processDiscoverStateJob != null)
                     {
                         processDiscoverStateJob.State = "Error";
@@ -94,7 +103,7 @@ namespace API_DISCOVER
                     }
                     else
                     {
-                        processDiscoverStateJob = new ProcessDiscoverStateJob() { State = "Error", JobId = discoverItem.JobID };
+                        processDiscoverStateJob = new ProcessDiscoverStateJob() { State = "Error", JobId = discoverItemBBDD.JobID };
                         processDiscoverStateJobBDService.AddProcessDiscoverStateJob(processDiscoverStateJob);
                     }
                 }

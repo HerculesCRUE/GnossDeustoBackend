@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.Models.Services;
@@ -269,11 +270,25 @@ namespace ApiCargaWebInterface.Controllers
             string rdfXml= sw.ToString();
             Stream stream =new MemoryStream(Encoding.UTF8.GetBytes(rdfXml));
             FormFile file = new FormFile(stream, 0, stream.Length, "rdfFile", "rdf.xml");
-            //Lo reencolamos corregido
-            _callEDtlPublishService.CallDataPublish(file,idJob,true);
 
-            //Eliminamos el item
-            _discoverItemService.RemoveDiscoverItem(item.ID);
+            //Actualizamos el item
+            Dictionary<string, List<string>> discards = new Dictionary<string, List<string>>();
+            foreach(DiscoverItem.DiscoverDissambiguation dissambiguation in item.DissambiguationProblems)
+            {
+                if(DissambiguationProblemsResolve.ContainsKey(dissambiguation.IDOrigin) && DissambiguationProblemsResolve[dissambiguation.IDOrigin]==null)
+                {
+                    discards.Add(dissambiguation.IDOrigin, dissambiguation.DissambiguationCandiates.Select(x=>x.IDCandidate).ToList());
+                }                
+            }
+
+            item.UpdateDissambiguationDiscards(discards, rdfXml);
+            item.DiscoverRdf = rdfXml;
+            item.Status = "Pending";
+           
+            _discoverItemService.ModifyDiscoverItem(item);
+
+            //Lo reencolamos corregido junto con su identificador
+            _callEDtlPublishService.CallDataPublish(file,idJob,false, IdDiscoverItem);
 
             return RedirectToAction("DetailsJob", "Job", new { id = idJob });
         }
@@ -295,6 +310,20 @@ namespace ApiCargaWebInterface.Controllers
 
             //Eliminamos el item
             _discoverItemService.RemoveDiscoverItem(item.ID);
+            return RedirectToAction("DetailsJob", "Job", new { id = idJob });
+        }
+
+        /// <summary>
+        /// Descarta un problema de descubrimiento que haya fallado
+        /// </summary>
+        /// <param name="IdDiscoverItem">Identificador del item de descubrimiento</param>
+        /// <param name="idJob">Identificador de la tarea a la que eprtenece el item de descubrimiento</param>
+        /// <returns></returns>
+        [HttpPost("[Controller]/{idJob}/discard/{IdDiscoverItem}")]
+        public IActionResult DiscardDiscover(string idJob, string IdDiscoverItem)
+        {
+            //Eliminamos el item
+            _discoverItemService.RemoveDiscoverItem(new Guid(IdDiscoverItem));
             return RedirectToAction("DetailsJob", "Job", new { id = idJob });
 
         }

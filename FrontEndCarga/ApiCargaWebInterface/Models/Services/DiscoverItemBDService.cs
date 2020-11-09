@@ -29,7 +29,7 @@ namespace ApiCargaWebInterface.Models.Services
         ///<remarks>Item de descubrimiento</remarks>
         public DiscoverItem GetDiscoverItemById(Guid id)
         {
-            return _context.DiscoverItem.Include(item => item.DissambiguationProblems).ThenInclude(p => p.DissambiguationCandiates).FirstOrDefault(item => item.ID.Equals(id));
+            return _context.DiscoverItem.Include(item => item.DiscardDissambiguations).Include(item => item.DissambiguationProblems).ThenInclude(p => p.DissambiguationCandiates).FirstOrDefault(item => item.ID.Equals(id));
         }
 
         /// <summary>
@@ -103,6 +103,8 @@ namespace ApiCargaWebInterface.Models.Services
                 discoverItemOriginal.DissambiguationProcessed = discoverItem.DissambiguationProcessed;
                 discoverItemOriginal.DiscoverReport = discoverItem.DiscoverReport;
                 discoverItemOriginal.DissambiguationProblems = discoverItem.DissambiguationProblems;
+                discoverItemOriginal.DiscardDissambiguations = discoverItem.DiscardDissambiguations;
+                discoverItemOriginal.LoadedEntities = discoverItem.LoadedEntities;
 
                 _context.SaveChanges();
                 modified = true;
