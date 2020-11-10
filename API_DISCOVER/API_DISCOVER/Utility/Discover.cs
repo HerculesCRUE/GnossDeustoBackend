@@ -1389,20 +1389,17 @@ namespace API_DISCOVER.Utility
             bool cambios = false;
             bool existeNodosHuerfanos = true;
             bool existeNodosSinDatos = true;
-            bool existeNodosComoObjetoPeroNoComoSujeto = true;
-            while (existeNodosHuerfanos || existeNodosSinDatos || existeNodosComoObjetoPeroNoComoSujeto)
+            while (existeNodosHuerfanos || existeNodosSinDatos)
             {
                 existeNodosHuerfanos = false;
                 existeNodosSinDatos = false;
-                existeNodosComoObjetoPeroNoComoSujeto = false;
 
                 //Nodos huerfanos
                 string queryASKOrphan = $@"ASK
                                         WHERE 
                                         {{
-                                            ?s ?p ?o.
-                                            FILTER(isblank(?s))
-                                            MINUS{{?x ?y ?s}}
+                                            ?s ?p ?o.                                            
+                                            MINUS{{?x ?y ?s. FILTER(isblank(?s))}}
                                         }}";
                 if (SparqlUtility.SelectData(mSPARQLEndpoint, mGraph, queryASKOrphan, mQueryParam).boolean)
                 {
@@ -1412,8 +1409,7 @@ namespace API_DISCOVER.Utility
                                         WHERE 
                                         {{
                                             ?s ?p ?o.
-                                            FILTER(isblank(?s))
-                                            MINUS{{?x ?y ?s}}
+                                            MINUS{{?x ?y ?s. FILTER(isblank(?s))}}
                                         }}";
                     SparqlUtility.SelectData(mSPARQLEndpoint, mGraph, deleteOrphanNodes, mQueryParam);
                 }
@@ -1448,27 +1444,6 @@ namespace API_DISCOVER.Utility
                     SparqlUtility.SelectData(mSPARQLEndpoint, mGraph, deleteEmptyNodes, mQueryParam);
                 }
 
-                //Triples existeNodosComoObjetoPeroNoComoSujeto vacíos
-                string queryASKNotSubject = $@"ASK
-                                        WHERE 
-                                        {{
-                                            ?s ?p ?o.
-                                            FILTER(isblank(?o))
-                                            MINUS{{?o ?y ?z}}
-                                        }}";
-                if (SparqlUtility.SelectData(mSPARQLEndpoint, mGraph, queryASKNotSubject, mQueryParam).boolean)
-                {
-                    cambios = true;
-                    existeNodosComoObjetoPeroNoComoSujeto = true;
-                    string deleteNotSubject = $@"DELETE {{ ?s ?p ?o. }}
-                                        WHERE 
-                                        {{
-                                            ?s ?p ?o.
-                                            FILTER(isblank(?o))
-                                           MINUS{{?o ?y ?z}}
-                                        }}";
-                    SparqlUtility.SelectData(mSPARQLEndpoint, mGraph, deleteNotSubject, mQueryParam);
-                }
             }
             return cambios;
         }
