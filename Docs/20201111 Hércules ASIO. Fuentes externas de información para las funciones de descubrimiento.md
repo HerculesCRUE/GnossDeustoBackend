@@ -85,10 +85,11 @@ la información. Estos procesos tienen problemas de mantenibilidad, ya que puede
 ante cambios menores en el HTML.
 
 **Recolecta** ([FECYT https://recolecta.fecyt.es/](https://recolecta.fecyt.es/)). Las condiciones de uso no impiden la realización 
-de _scraping_ sobre el contenido de la web.
+de _scraping_ sobre el contenido de la web. Contiene publicaciones extraídas de 141 repositorios institucionales
+de España.
 
 **Libros editados en España** ([http://www.mcu.es/webISBN/tituloSimpleFilter.do?cache=init&layout=busquedaisbn&language=es](http://www.mcu.es/webISBN/tituloSimpleFilter.do?cache=init&layout=busquedaisbn&language=es)). Las condiciones
 de uso no impiden la realización de _scraping_ sobre el contenido de la web.
 
-**DOAB** ([https://www.doabooks.org/doab?uiLanguage=en](https://www.doabooks.org/doab?uiLanguage=en) Directorio de libros de acceso abierto. Las condiciones de uso
+**DOAB** ([https://www.doabooks.org/doab?uiLanguage=en](https://www.doabooks.org/doab?uiLanguage=en) Es un directorio de libros con acceso abierto. Las condiciones de uso
 no impiden la realización de _scraping_ sobre el contenido de la web.
