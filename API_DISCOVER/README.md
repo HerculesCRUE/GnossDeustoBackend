@@ -177,7 +177,9 @@ A continuación se muestra un fragmento del fichero con la configuración del de
 		"ClientId": "Web",
 		"ClientSecret": "master",
 		"ConfigUrlCron": "http://localhost:56255/",
-		"ScopusApiKey": ""
+		"ScopusUrl": "https://api.elsevier.com/",
+		"ScopusApiKey": "",
+		"CrossrefUserAgent": "Hercules/API discover (https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_DISCOVER; mailto:<correo>)"
 	}
 		 
 		 
@@ -200,7 +202,10 @@ A continuación se muestra un fragmento del fichero con la configuración del de
  - ClientId: Id de cliente del api
  - ClientSecret: "clave" de acceso del api
  - ConfigUrlCron: URL donde está lanzada la aplicación CRON
- - ScopusApiKey: API de Scopus
+ - ScopusUrl: url del API de Scopus
+ - ScopusApiKey: API key de Scopus
+ - CrossrefUserAgent: User agent a utilizar con el API de crosref 
+ 
 
 ## Dependencias
 
