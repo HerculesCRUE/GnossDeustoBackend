@@ -2,12 +2,7 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Sirve encapsular los datos provenientes del ListIdentifiers
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
 namespace API_DISCOVER.Models.Entities
 {
@@ -29,6 +24,7 @@ namespace API_DISCOVER.Models.Entities
             SCOPUSPerson = new Dictionary<ulong, SCOPUSPerson>();
             DBLPAuthors = new Dictionary<string, DBLPAuthors>();
             DBLPPerson = new Dictionary<string, DBLPPerson>();
+            CROSSREF_Works = new Dictionary<string, CROSSREF_Works>();
             NormalizedNames = new Dictionary<string, string>();
         }
 
@@ -71,6 +67,11 @@ namespace API_DISCOVER.Models.Entities
         /// Caché para peticiones a DBLP
         /// </summary>
         public Dictionary<string, DBLPPerson> DBLPPerson { get; set; }
+
+        /// <summary>
+        /// Caché para peticiones a CROSSREF
+        /// </summary>
+        public Dictionary<string, CROSSREF_Works> CROSSREF_Works { get; set; }
 
         public Dictionary<string, string> NormalizedNames { get; set; }
     }

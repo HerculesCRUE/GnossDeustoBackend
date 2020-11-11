@@ -17,10 +17,11 @@ namespace API_DISCOVER.Models.Entities
         /// </summary>
         /// <param name="id">Identificador de SCOPUS</param>
         /// <param name="ScopusApiKey">ApiKey de Scopus</param>
+        /// <param name="ScopusUrl">Url donde se encuentra el API de scopus</param>
         /// <returns>Objeto con los datos de la persona</returns>
-        public static SCOPUSPerson Person(ulong id, string ScopusApiKey)
+        public static SCOPUSPerson Person(ulong id, string ScopusApiKey,string ScopusUrl)
         {
-            string cadena = $"http://herc-as-front-desa.atica.um.es/bypass/content/author/author_id/{id}?apiKey={ScopusApiKey}";
+            string cadena = $"{ScopusUrl}content/author/author_id/{id}?apiKey={ScopusApiKey}";
             var doc = XElement.Load(cadena);
             XmlSerializer s = new XmlSerializer(typeof(SCOPUSPerson));
             var author = s.Deserialize(doc.CreateReader()) as SCOPUSPerson;
@@ -32,10 +33,11 @@ namespace API_DISCOVER.Models.Entities
         /// </summary>
         /// <param name="q">Texto a buscar (con urlEncode)</param>
         /// <param name="ScopusApiKey">ApiKey de Scopus</param>
+        /// /// <param name="ScopusUrl">Url donde se encuentra el API de scopus</param>
         /// <returns>Objeto con los trabajos</returns>
-        public static SCOPUSWorks Works(string q, string ScopusApiKey)
+        public static SCOPUSWorks Works(string q, string ScopusApiKey, string ScopusUrl)
         {
-            string cadena = $"http://herc-as-front-desa.atica.um.es/bypass/content/search/scopus?query=TITLE({q})&view=COMPLETE&apiKey={ScopusApiKey}&httpAccept=application/xml";
+            string cadena = $"{ScopusUrl}content/search/scopus?query=TITLE({q})&view=COMPLETE&apiKey={ScopusApiKey}&httpAccept=application/xml";
             var doc = XElement.Load(cadena);
             XmlSerializer s = new XmlSerializer(typeof(SCOPUSWorks));
             var article = s.Deserialize(doc.CreateReader()) as SCOPUSWorks;

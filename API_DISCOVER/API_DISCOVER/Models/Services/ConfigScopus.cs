@@ -16,8 +16,10 @@ namespace API_DISCOVER.Models.Services
     {
         public IConfigurationRoot Configuration { get; set; }
         private string ScopusApiKey { get; set; }
+        private string ScopusUrl { get; set; }
+        
         ///<summary>
-        ///Obtiene el gráfo configurado en Sparql:Graph del fichero appsettings.json
+        ///Obtiene el API key de Scopus
         ///</summary>
         public string GetScopusApiKey()
         {
@@ -36,10 +38,34 @@ namespace API_DISCOVER.Models.Services
                 else
                 {
                     ScopusApiKey = Configuration["ScopusApiKey"];
-                }
-                
+                }                                                
             }
             return ScopusApiKey;
+        }
+
+        ///<summary>
+        ///Obtiene el url del API de Scopus
+        ///</summary>
+        public string GetScopusUrl()
+        {
+            if (string.IsNullOrEmpty(ScopusUrl))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ScopusUrl"))
+                {
+                    ScopusUrl = environmentVariables["ScopusUrl"] as string;
+                }
+                else
+                {
+                    ScopusUrl = Configuration["ScopusUrl"];
+                }
+            }
+            return ScopusUrl;
         }
     }
 }
