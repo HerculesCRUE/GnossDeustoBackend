@@ -38,7 +38,7 @@ namespace Linked_Data_Server.Controllers
             string consulta = @$"   select distinct ?s ?o where 
                                     {{
                                         ?s ?p ?o.
-                                        FILTER(?p in (<{string.Join(">,<", mConfigService.GetPropsTitle())}>) AND lcase(?o) like'{q.ToLower()}*')
+                                        FILTER(?p in (<{string.Join(">,<", mConfigService.GetPropsTitle())}>) AND (lcase(?o) like'{q.ToLower()}*' OR lcase(?o) like'* {q.ToLower()}*'))
                                     }}";
             SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)

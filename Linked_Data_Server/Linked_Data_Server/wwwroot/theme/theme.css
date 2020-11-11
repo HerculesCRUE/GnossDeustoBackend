@@ -5336,28 +5336,25 @@ span.linkext {
 }
 
 .detailsRdf .container {
-    max-width: 100%
+    max-width: 100%;
 }
 
-.detailsRdf {
+.detailsRdf table {
+    border-collapse: collapse;
 }
 
-    .detailsRdf table {
-        border-collapse: collapse
+    .detailsRdf table td, .detailsRdf table th {
+        border: 1px solid #eee;
+        padding: 5px;
     }
 
-        .detailsRdf table td {
-            border: 1px solid #eee;
-            padding: 5px
-        }
-
-    .detailsRdf .estado-tarea > table.rdftable {
-        margin-bottom: 20px;
-        display: block
-    }
+.detailsRdf .estado-tarea > table.rdftable {
+    margin-bottom: 20px;
+    display: block;
+}
 
 .fichaRecurso.detailsRdf .wrapCol .header-resource .h1-container h1 {
-    margin-top: 0
+    margin-top: 0;
 }
 
 .fichaRecurso.detailsRdf .col-contenido .wrapCol {

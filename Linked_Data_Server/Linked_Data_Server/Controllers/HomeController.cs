@@ -37,8 +37,8 @@ namespace Linked_Data_Server.Controllers
         {
             //Obtenemos la URL de la entidad
             string url = Request.GetDisplayUrl();
-            string urlParam= HttpUtility.ParseQueryString(Request.QueryString.Value).Get("url");
-            if(!string.IsNullOrEmpty(urlParam))
+            string urlParam = HttpUtility.ParseQueryString(Request.QueryString.Value).Get("url");
+            if (!string.IsNullOrEmpty(urlParam))
             {
                 url = urlParam;
             }
@@ -77,72 +77,78 @@ namespace Linked_Data_Server.Controllers
             if (sparqlObjectDictionary.Count == 1 && sparqlObjectDictionary[url].results.bindings.Count == 0)
             {
                 //No existe la entidad
-                return StatusCode(StatusCodes.Status404NotFound);
-            }
-            //Cargamos los datos en un grafo en Local
-            RohGraph dataGraph = new RohGraph();
-            createDataGraph(url, new List<string>(), false, dataGraph, sparqlObjectDictionary);
-
-            //Generamos el RDF
-            System.IO.StringWriter sw = new System.IO.StringWriter();
-            RdfXmlWriter rdfXmlWriter = new RdfXmlWriter();
-            rdfXmlWriter.Save(dataGraph, sw);
-            string rdf = sw.ToString();
-
-            //Añadimos la etiquetqa ETag al header
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                string etag = GetHash(sha256Hash, rdf);
-                string ifNoneMatch = HttpContext.Request.Headers["If-None-Match"];
-                if (ifNoneMatch == etag)
-                {
-                    HttpContext.Response.StatusCode = 304;
-                }
-                HttpContext.Response.Headers.Add("ETag", etag);
-            }
-
-            if (HttpContext.Request.ContentType == "application/rdf+xml")
-            {
-                //Devolvemos en formato RDF
-                return File(Encoding.UTF8.GetBytes(rdf), "text/xml");
+                HttpContext.Response.StatusCode = 404;
+                ViewData["Title"] = "Error 404 página no encontrada";
+                ViewData["NameTitle"] = mConfigService.GetNameTitle();
+                return View(null);
             }
             else
             {
-                //Obtenemos las 10 primeras entidades que apuntan a la entidad
-                HashSet<string> inverseEntities = GetInverseEntities(dataGraph, new HashSet<string>() { url }, new HashSet<string>(sparqlObjectDictionary.Keys), new Dictionary<string, SparqlObject>(), 10);
+                //Cargamos los datos en un grafo en Local
+                RohGraph dataGraph = new RohGraph();
+                createDataGraph(url, new List<string>(), false, dataGraph, sparqlObjectDictionary);
 
-                //Devolvemos en formato HTML
-                List<String> allEntities = new List<string>();
-                SparqlResultSet sparqlResultSetEntidades = (SparqlResultSet)dataGraph.ExecuteQuery("select distinct ?p ?o where { ?s ?p ?o. FILTER (!isBlank(?o)) }");
-                foreach (SparqlResult sparqlResult in sparqlResultSetEntidades.Results)
+                //Generamos el RDF
+                System.IO.StringWriter sw = new System.IO.StringWriter();
+                RdfXmlWriter rdfXmlWriter = new RdfXmlWriter();
+                rdfXmlWriter.Save(dataGraph, sw);
+                string rdf = sw.ToString();
+
+                //Añadimos la etiquetqa ETag al header
+                using (SHA256 sha256Hash = SHA256.Create())
                 {
-                    if ((sparqlResult["o"] is UriNode) && (sparqlResult["p"].ToString() != "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"))
+                    string etag = GetHash(sha256Hash, rdf);
+                    string ifNoneMatch = HttpContext.Request.Headers["If-None-Match"];
+                    if (ifNoneMatch == etag)
                     {
-                        allEntities.Add(sparqlResult["o"].ToString());
+                        HttpContext.Response.StatusCode = 304;
                     }
+                    HttpContext.Response.Headers.Add("ETag", etag);
                 }
 
-                //Preparamos el modelo de la entidad principal
-                List<DiscoverRdfViewModel> modelEntities = new List<DiscoverRdfViewModel>();
-                DiscoverRdfViewModel entidad = createDiscoverRdfViewModel(url, dataGraph, new List<string>(), allEntities, communNamePropierties);
-                modelEntities.Add(entidad);
-                KeyValuePair<string, List<string>> titulo = entidad.stringPropertiesEntity.FirstOrDefault(x => mConfigService.GetPropsTitle().Contains(x.Key));
-                ViewData["Title"] = "About: " + url;
-                if (titulo.Key != null)
+                if (HttpContext.Request.ContentType == "application/rdf+xml")
                 {
-                    ViewData["Title"] = "About: " + titulo.Value[0];
+                    //Devolvemos en formato RDF
+                    return File(Encoding.UTF8.GetBytes(rdf), "text/xml");
                 }
-                ViewData["NameTitle"] = mConfigService.GetNameTitle();
-
-                //Preparamos el modelo del resto de entidades
-                foreach (string entity in inverseEntities)
+                else
                 {
-                    DiscoverRdfViewModel entidadInversa = createDiscoverRdfViewModel(entity, dataGraph, new List<string>(), allEntities, communNamePropierties);
-                    modelEntities.Add(entidadInversa);
+                    //Obtenemos las 10 primeras entidades que apuntan a la entidad
+                    HashSet<string> inverseEntities = GetInverseEntities(dataGraph, new HashSet<string>() { url }, new HashSet<string>(sparqlObjectDictionary.Keys), new Dictionary<string, SparqlObject>(), 10);
+
+                    //Devolvemos en formato HTML
+                    List<String> allEntities = new List<string>();
+                    SparqlResultSet sparqlResultSetEntidades = (SparqlResultSet)dataGraph.ExecuteQuery("select distinct ?p ?o where { ?s ?p ?o. FILTER (!isBlank(?o)) }");
+                    foreach (SparqlResult sparqlResult in sparqlResultSetEntidades.Results)
+                    {
+                        if ((sparqlResult["o"] is UriNode) && (sparqlResult["p"].ToString() != "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"))
+                        {
+                            allEntities.Add(sparqlResult["o"].ToString());
+                        }
+                    }
+
+                    //Preparamos el modelo de la entidad principal
+                    List<DiscoverRdfViewModel> modelEntities = new List<DiscoverRdfViewModel>();
+                    DiscoverRdfViewModel entidad = createDiscoverRdfViewModel(url, dataGraph, new List<string>(), allEntities, communNamePropierties);
+                    modelEntities.Add(entidad);
+                    KeyValuePair<string, List<string>> titulo = entidad.stringPropertiesEntity.FirstOrDefault(x => mConfigService.GetPropsTitle().Contains(x.Key));
+                    ViewData["Title"] = "About: " + url;
+                    if (titulo.Key != null)
+                    {
+                        ViewData["Title"] = "About: " + titulo.Value[0];
+                    }
+                    ViewData["NameTitle"] = mConfigService.GetNameTitle();
+
+                    //Preparamos el modelo del resto de entidades
+                    foreach (string entity in inverseEntities)
+                    {
+                        DiscoverRdfViewModel entidadInversa = createDiscoverRdfViewModel(entity, dataGraph, new List<string>(), allEntities, communNamePropierties);
+                        modelEntities.Add(entidadInversa);
+                    }
+
+
+                    return View(modelEntities);
                 }
-
-
-                return View(modelEntities);
             }
         }
 
@@ -211,10 +217,10 @@ namespace Linked_Data_Server.Controllers
                 consulta += " order by asc(?rdfType) asc(?s) asc(?p) asc(?o) limit " + pMax.Value * 5;
             }
             SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
-                        
+
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
             {
-                if(pMax.HasValue && entities.Count==pMax.Value && !entities.Contains(row["s"].value))
+                if (pMax.HasValue && entities.Count == pMax.Value && !entities.Contains(row["s"].value))
                 {
                     continue;
                 }

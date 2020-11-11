@@ -43,7 +43,8 @@
                     <h1>@ViewData["Title"]</h1>
                 </div>
             </div>
-            @{
+            @if (Model != null)
+            {
                 int i = 0;
                 foreach (Linked_Data_Server.Models.Entities.DiscoverRdfViewModel entity in Model)
                 {
@@ -93,51 +94,78 @@
                                     {
                                         propiedadAbreviada = propiedadAbreviada.Substring(propiedadAbreviada.LastIndexOf("/") + 1);
                                     }
-                                    <tr>
-                                        @{
-                                            String title = "";
-                                        }
-                                        @if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
+                            <tr>
+                                @{
+                                    String title = "";
+                                }
+                                @if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
+                                {
+                                    title = pItem.communNamePropierties[stringProperty.Key];
+                                }
+                                <td class="" title="@title">
+                                    <b>@propiedadAbreviada</b>
+                                    <a href="@stringProperty.Key" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                </td>
+
+                                @if (pItem.urisRdf.Contains(valor))
+                                {
+                                    <td>
+                                        <a href="@valor">
+                                            @valor
+                                        </a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    if (stringProperty.Key == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
+                                    {
+                                        title = "";
+
+                                        if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
                                         {
                                             title = pItem.communNamePropierties[stringProperty.Key];
                                         }
-                                        <td class="" title="@title">
-                                            <b>@propiedadAbreviada</b>
-                                            <a href="@stringProperty.Key" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-                                        </td>
 
-                                        @if (pItem.urisRdf.Contains(valor))
+                                        string valorPropiedadAbreviada = valor;
+                                        if (valorPropiedadAbreviada.Contains("/"))
                                         {
-                                            <td>
-                                                <a href="@valor">
-                                                    @valor
-                                                </a>
-                                            </td>
+                                            valorPropiedadAbreviada = valorPropiedadAbreviada.Substring(valorPropiedadAbreviada.LastIndexOf("/") + 1);
                                         }
-                                        else
-                                        {
-                                            if (stringProperty.Key == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
-                                            {
-                                                title = "";
+                                        <td title="@title"><b>@valorPropiedadAbreviada</b></td>
+                                    }
+                                    else if (stringProperty.Key == "http://purl.org/roh/mirror/vivo#researcherId")
+                                    {
+                                        string uri = $"http://www.researcherid.com/rid/{valor}";
+                                        <td><b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a></b></td>
+                                    }
+                                    else if (stringProperty.Key == "http://purl.org/roh#ORCID")
+                                    {
+                                        string uri = $"https://orcid.org/{valor}";
+                                        <td><b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a></b></td>
+                                    }
+                                    else if (stringProperty.Key == "http://purl.org/roh/mirror/vivo#scopusId")
+                                    {
+                                        string uri = $"https://www.scopus.com/authid/detail.uri?authorId={valor}";
+                                        <td><b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a></b></td>
+                                    }
+                                    else if (stringProperty.Key == "http://purl.org/roh#DBLP")
+                                    {
+                                        string uri = $"https://dblp.org/pid/{valor}.html";
+                                        <td><b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a></b></td>
+                                    }
+                                    else if (stringProperty.Key == "http://purl.org/roh/mirror/bibo#doi")
+                                    {
+                                        string uri = $"https://doi.org/{valor}";
+                                        <td><b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a></b></td>
+                                    }else
+                                    {
+                                        <td><b>@valor</b></td>
+                                    }
 
-                                                if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
-                                                {
-                                                    title = pItem.communNamePropierties[stringProperty.Key];
-                                                }
 
-                                                string valorPropiedadAbreviada = valor;
-                                                if (valorPropiedadAbreviada.Contains("/"))
-                                                {
-                                                    valorPropiedadAbreviada = valorPropiedadAbreviada.Substring(valorPropiedadAbreviada.LastIndexOf("/") + 1);
-                                                }
-                                                <td title="@title"><b>@valorPropiedadAbreviada</b></td>
-                                            }
-                                            else
-                                            {
-                                                <td><b>@valor</b></td>
-                                            }
-                                        }
-                                    </tr>
+
+                                }
+                            </tr>
                                 }
                             }
                             @foreach (var entitiesProperty in pItem.entitiesPropertiesEntity)
