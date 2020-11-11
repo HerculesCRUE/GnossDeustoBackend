@@ -5364,3 +5364,33 @@ span.linkext {
 .detailsRdf td {
     vertical-align: top
 }
+
+.ui-widget.ui-widget-content {
+    position: fixed !important;
+    width: 513px !important;
+    max-height: calc(100% - 60px);
+    overflow-y: auto;
+    z-index: 801;
+}
+
+.ui-widget.autocomplete {
+    position: fixed;
+    top: 0;
+    left: 236px;
+    z-index: 801;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+    .ui-widget.autocomplete label {
+        display: none;
+    }
+
+    .ui-widget.autocomplete .ui-autocomplete-input {
+        height: 40px;
+        border: 1px solid #fff;
+        border-radius: 2px;
+        padding: 13px;
+        width: 513px;
+    }

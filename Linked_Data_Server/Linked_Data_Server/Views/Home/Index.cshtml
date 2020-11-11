@@ -1,4 +1,4 @@
-﻿@model List<Linked_Data_Server.Models.Entities.DiscoverRdfViewModel>
+﻿@model KeyValuePair<List<Linked_Data_Server.Models.Entities.DiscoverRdfViewModel>,Dictionary<string,string>>
 @{
     ViewData["BodyClass"] = "fichaRecurso";
 }
@@ -19,14 +19,14 @@
                         response($.map(data, function (item) {
                             return {
                                 label: item.Key,
-                                value: item.Value
+                                url: item.Value
                             }
                         }))
                     }
                 })
             },
             select: function (event, ui) {
-                document.location.href = ui.item.value;
+                document.location.href = ui.item.url;
             }
         })
     });
@@ -43,16 +43,16 @@
                     <h1>@ViewData["Title"]</h1>
                 </div>
             </div>
-            @if (Model != null)
+            @if (Model.Key != null)
             {
                 int i = 0;
-                foreach (Linked_Data_Server.Models.Entities.DiscoverRdfViewModel entity in Model)
+                foreach (Linked_Data_Server.Models.Entities.DiscoverRdfViewModel entity in Model.Key)
                 {
                     if (i == 1)
                     {
                         <h2>Entidades relacionadas</h2>
                     }
-                    PintarItem(entity, i > 0);
+                    PintarItem(entity, i > 0,Model.Value);
                     i++;
                 }
             }
@@ -61,7 +61,7 @@
 </div>
 @functions
 {
-    void PintarItem(Linked_Data_Server.Models.Entities.DiscoverRdfViewModel pItem, bool pEntityLink)
+    void PintarItem(Linked_Data_Server.Models.Entities.DiscoverRdfViewModel pItem, bool pEntityLink,Dictionary<string,string> pPropsTransform)
     {
 
         <div class="contenido">
@@ -133,37 +133,15 @@
                                         }
                                         <td title="@title"><b>@valorPropiedadAbreviada</b></td>
                                     }
-                                    else if (stringProperty.Key == "http://purl.org/roh/mirror/vivo#researcherId")
+                                    else if (pPropsTransform.ContainsKey(stringProperty.Key))
                                     {
-                                        string uri = $"http://www.researcherid.com/rid/{valor}";
+                                        string uri = pPropsTransform[stringProperty.Key].Replace("{value}",valor);
                                         <td><b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a></b></td>
                                     }
-                                    else if (stringProperty.Key == "http://purl.org/roh#ORCID")
-                                    {
-                                        string uri = $"https://orcid.org/{valor}";
-                                        <td><b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a></b></td>
-                                    }
-                                    else if (stringProperty.Key == "http://purl.org/roh/mirror/vivo#scopusId")
-                                    {
-                                        string uri = $"https://www.scopus.com/authid/detail.uri?authorId={valor}";
-                                        <td><b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a></b></td>
-                                    }
-                                    else if (stringProperty.Key == "http://purl.org/roh#DBLP")
-                                    {
-                                        string uri = $"https://dblp.org/pid/{valor}.html";
-                                        <td><b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a></b></td>
-                                    }
-                                    else if (stringProperty.Key == "http://purl.org/roh/mirror/bibo#doi")
-                                    {
-                                        string uri = $"https://doi.org/{valor}";
-                                        <td><b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a></b></td>
-                                    }else
+                                    else
                                     {
                                         <td><b>@valor</b></td>
                                     }
-
-
-
                                 }
                             </tr>
                                 }
@@ -190,7 +168,7 @@
                                         </td>
                                         <td class="">
                                             @{
-                                                PintarItem(valor, false);
+                                                PintarItem(valor, false,pPropsTransform);
                                             }
                                         </td>
                                     </tr>

@@ -80,7 +80,7 @@ namespace Linked_Data_Server.Controllers
                 HttpContext.Response.StatusCode = 404;
                 ViewData["Title"] = "Error 404 página no encontrada";
                 ViewData["NameTitle"] = mConfigService.GetNameTitle();
-                return View(null);
+                return View(new KeyValuePair<List<DiscoverRdfViewModel>, Dictionary<string, string>>(null, mConfigService.GetPropsTransform()));
             }
             else
             {
@@ -147,7 +147,7 @@ namespace Linked_Data_Server.Controllers
                     }
 
 
-                    return View(modelEntities);
+                    return View(new KeyValuePair<List<DiscoverRdfViewModel>,Dictionary<string,string>>(modelEntities, mConfigService.GetPropsTransform()));
                 }
             }
         }

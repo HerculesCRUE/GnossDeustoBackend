@@ -22,6 +22,8 @@ namespace Linked_Data_Server.Models.Services
         private string SparqlQueryParam { get; set; }
         private HashSet<string> PropsTitle { get; set; }
 
+        private Dictionary<string,string> PropsTransform { get; set; }
+
         ///<summary>
         ///Obtiene el título:NameTitle del fichero appsettings.json
         ///</summary>
@@ -152,7 +154,7 @@ namespace Linked_Data_Server.Models.Services
         }
 
         ///<summary>
-        ///Obtiene el parametro de PropsTitle configurado en Sparql:QueryParam del fichero appsettings.json
+        ///Obtiene el parametro de PropsTitle
         ///</summary>
         public HashSet<string> GetPropsTitle()
         {
@@ -175,6 +177,39 @@ namespace Linked_Data_Server.Models.Services
 
             }
             return PropsTitle;
+        }
+
+        ///<summary>
+        ///Obtiene el parametro de PropsTransform configurado en Sparql:QueryParam del fichero appsettings.json
+        ///</summary>
+        public Dictionary<string,string> GetPropsTransform()
+        {
+            if (PropsTransform == null)
+            {
+                
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                string propsTransformString;
+                if (environmentVariables.Contains("PropsTransform"))
+                {
+                    propsTransformString = environmentVariables["PropsTransform"] as string;
+                }
+                else
+                {
+                    propsTransformString = Configuration["PropsTransform"];
+                }
+                PropsTransform = new Dictionary<string, string>();
+                foreach(string prop in propsTransformString.Split(new string[] { ";"},StringSplitOptions.RemoveEmptyEntries))
+                {
+                    string[] propin = prop.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+                    PropsTransform[propin[0]] = propin[1];
+                }
+            }
+            return PropsTransform;
         }
     }
 
