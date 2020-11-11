@@ -4,7 +4,7 @@
     "identifiers": [
       "http://purl.org/roh/mirror/vivo#identifier",
       "http://purl.org/roh/mirror/vivo#eRACommonsId",
-      "http://purl.org/roh/mirror/vivo#researcherID",
+      "http://purl.org/roh/mirror/vivo#researcherId",
       "http://purl.org/roh#ORCID",
       "http://purl.org/roh/mirror/vivo#scopusId",
       "http://purl.org/roh#taxID",
@@ -169,9 +169,7 @@
     "rdfType": "http://purl.org/roh/mirror/bibo#Document",
     "identifiers": [
       "http://purl.org/roh/mirror/bibo#doi",
-      "http://purl.org/roh#isbn",
-      //TODO añadir propiedad
-      "http://purl.org/roh#DBLP"
+      "http://purl.org/roh#isbn"
     ],
     "properties": [
       {
