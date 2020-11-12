@@ -76,7 +76,7 @@ los autores. Habitualmente sólo figura uno de los investigadores como _contribu
 es posible usarlo como fuente.
 
 **Global Register of Publishers** ([https://grp.isbn-international.org/](https://grp.isbn-international.org/)). Contiene libros internacionales, 
-con poco contenido en español. Mo tiene API.
+con poco contenido en español. No tiene API.
 
 Fuentes dudosas
 ===============
