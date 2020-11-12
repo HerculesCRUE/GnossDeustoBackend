@@ -25,6 +25,8 @@ namespace API_DISCOVER.Models.Entities
             DBLPAuthors = new Dictionary<string, DBLPAuthors>();
             DBLPPerson = new Dictionary<string, DBLPPerson>();
             CROSSREF_Works = new Dictionary<string, CROSSREF_Works>();
+            PUBMED_WorkSearchByTitle = new Dictionary<string, uint[]>();
+            PUBMED_WorkByID = new Dictionary<uint, PubmedArticleSet>();
             NormalizedNames = new Dictionary<string, string>();
         }
 
@@ -72,6 +74,16 @@ namespace API_DISCOVER.Models.Entities
         /// Caché para peticiones a CROSSREF
         /// </summary>
         public Dictionary<string, CROSSREF_Works> CROSSREF_Works { get; set; }
+
+        /// <summary>
+        /// Caché para peticiones a PUBMED
+        /// </summary>
+        public Dictionary<string, uint[]> PUBMED_WorkSearchByTitle { get; set; }
+
+        /// <summary>
+        /// Caché para peticiones a PUBMED
+        /// </summary>
+        public Dictionary<uint, PubmedArticleSet> PUBMED_WorkByID { get; set; }
 
         public Dictionary<string, string> NormalizedNames { get; set; }
     }

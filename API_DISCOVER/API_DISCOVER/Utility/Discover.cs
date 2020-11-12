@@ -24,8 +24,9 @@ namespace API_DISCOVER.Utility
     /// </summary>
     public static class Discover
     {
-        private readonly static float mMaxScore = 0.9f;
-        private readonly static float mMinScore = 0.7f;
+        private readonly static ConfigService mConfigService = new ConfigService();
+        private readonly static float mMaxScore = mConfigService.GetMaxScore();
+        private readonly static float mMinScore = mConfigService.GetMinScore();
         private readonly static List<Disambiguation> mDisambiguationConfigs = LoadDisambiguationConfigs();
         private readonly static ConfigSparql mConfigSparql = new ConfigSparql();
         private readonly static string mSPARQLEndpoint = mConfigSparql.GetEndpoint();
@@ -2011,7 +2012,7 @@ namespace API_DISCOVER.Utility
                 foreach (string entityID_RDF in pEntitiesRdfType.Keys)
                 {
                     //Si no ha sido ya reconciliada o es una integración externa y contiene datos para su desambiguación procedemos
-                    if ((!pListaEntidadesReconciliadas.ContainsKey(entityID_RDF) ||pExternalIntegration) && pDisambiguationDataRdf.ContainsKey(entityID_RDF))
+                    if ((!pListaEntidadesReconciliadas.ContainsKey(entityID_RDF) || pExternalIntegration) && pDisambiguationDataRdf.ContainsKey(entityID_RDF))
                     {
                         foreach (DisambiguationData disambiguationData in pDisambiguationDataRdf[entityID_RDF])
                         {
@@ -2542,6 +2543,12 @@ namespace API_DISCOVER.Utility
             RohGraph externalGraphCROSSREF = ExternalIntegrationCROSSREF(pEntitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
             externalGraph.Merge(externalGraphCROSSREF);
             ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
+
+            // 6º PUBMED
+            //Hacemos las peticiones a PUBMED de todos los elementos correspondientes para apoyar el proceso de descubrimiento
+            //RohGraph externalGraphPUBMED = ExternalIntegrationPUBMED(pEntitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
+            //externalGraph.Merge(externalGraphPUBMED);
+            //ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
 
             //Agregamos al RDF los identificadores encontrados en las fuentes externas y almacenamos en 'listaEntidadesRDFEnriquecer' aquellas entidades del RDF 
             //para las que hemos obtenido información adicional con las integraciones externas
@@ -3229,8 +3236,7 @@ namespace API_DISCOVER.Utility
                             ILiteralNode namePerson = dblpGraph.CreateLiteralNode(name, new Uri("http://www.w3.org/2001/XMLSchema#string"));
                             dblpGraph.Assert(new Triple(subjectPerson, nameProperty, namePerson));
 
-                            //TODO añadir propiedad a la ontología
-                            IUriNode dblpProperty = dblpGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#DBLP"));
+                            IUriNode dblpProperty = dblpGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#researcherDBLP"));
                             ILiteralNode nameDBLP = dblpGraph.CreateLiteralNode(idPerson.Replace("https://dblp.org/pid/", ""), new Uri("http://www.w3.org/2001/XMLSchema#string"));
                             dblpGraph.Assert(new Triple(subjectPerson, dblpProperty, nameDBLP));
 
@@ -3360,6 +3366,10 @@ namespace API_DISCOVER.Utility
 
                                             IUriNode rdftypeDocument = dblpGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#Document"));
                                             dblpGraph.Assert(new Triple(subjectWork, rdftypeProperty, rdftypeDocument));
+
+                                            IUriNode dblpPropertyResearchObject = dblpGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#roDBLP"));
+                                            ILiteralNode nameResearchObjectDBLP = dblpGraph.CreateLiteralNode(key, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                            dblpGraph.Assert(new Triple(subjectWork, dblpPropertyResearchObject, nameResearchObjectDBLP));
 
                                             foreach (string url in urls)
                                             {
@@ -3580,6 +3590,245 @@ namespace API_DISCOVER.Utility
             }
             return externalGraph;
         }
+
+        /// <summary>
+        /// Integración con el API de PUBMED
+        /// </summary>
+        /// <param name="pEntitiesRdfTypes">Diccionario con las entidades y sus clases (con herencia)</param>
+        /// <param name="pDiscoverCache">Caché de discover</param>
+        /// <param name="pDataGraph">Grafo en local con los datos del RDF</param>
+        /// <param name="pDiscoveredEntitiesProbability">Entidades con probabilidades</param>
+        /// <returns>Grafo con los datos obtenidos de SCOPUS</returns>
+        private static RohGraph ExternalIntegrationPUBMED(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability)
+        {
+            //Sólo debemos obtener datos de las entidades cargadas en el grafo, tanto para las personas como para las obras
+            //Adicionalmente obtendremos todos los autores de las obras que estén en duda (aparecen en 'pDiscoveredEntitiesProbability') pra ayudar en su reconciliación
+
+
+            RohGraph externalGraph = new RohGraph();
+
+            int? numWordsTitle = null;
+            if (mDisambiguationConfigs.FirstOrDefault(x => x.rdfType == "http://purl.org/roh/mirror/bibo#Document") != null &&
+                mDisambiguationConfigs.FirstOrDefault(x => x.rdfType == "http://purl.org/roh/mirror/bibo#Document").properties.FirstOrDefault(x => x.property == "http://purl.org/roh#title") != null &&
+                mDisambiguationConfigs.FirstOrDefault(x => x.rdfType == "http://purl.org/roh/mirror/bibo#Document").properties.FirstOrDefault(x => x.property == "http://purl.org/roh#title").maxNumWordsTitle.HasValue)
+            {
+                numWordsTitle = mDisambiguationConfigs.FirstOrDefault(x => x.rdfType == "http://purl.org/roh/mirror/bibo#Document").properties.FirstOrDefault(x => x.property == "http://purl.org/roh#title").maxNumWordsTitle;
+            }
+            else
+            {
+                //Si no hay configurada similitud de titulo entre documentos no procedemos
+                return externalGraph;
+            }
+
+
+            Dictionary<string, string> publicacionesNombres = new Dictionary<string, string>();
+            Dictionary<string, Dictionary<string, string>> publicacionesAutores = new Dictionary<string, Dictionary<string, string>>();
+            foreach (string entityID in pEntitiesRdfTypes.Keys)
+            {
+                if (pEntitiesRdfTypes[entityID].Contains("http://purl.org/roh/mirror/bibo#Document"))
+                {
+                    string query = @$"select distinct ?person ?name ?doc ?title
+                                    where
+                                    {{
+                                        ?person <http://purl.org/roh/mirror/foaf#name> ?name. 
+                                        ?doc <http://purl.org/roh/mirror/bibo#authorList> ?list. 
+                                        ?doc <http://purl.org/roh#title> ?title. 
+                                        ?list ?enum ?person.
+                                        FILTER(?doc =<{entityID}>)
+                                    }}";
+                    SparqlResultSet sparqlResultSet = (SparqlResultSet)pDataGraph.ExecuteQuery(query.ToString());
+                    foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
+                    {
+                        if (sparqlResult["title"] is LiteralNode)
+                        {
+                            publicacionesNombres[entityID] = ((LiteralNode)sparqlResult["title"]).Value;
+                        }
+                        if (sparqlResult["name"] is LiteralNode)
+                        {
+                            if (!publicacionesAutores.ContainsKey(entityID))
+                            {
+                                publicacionesAutores[entityID] = new Dictionary<string, string>();
+                            }
+                            publicacionesAutores[entityID][sparqlResult["person"].ToString()] = ((LiteralNode)sparqlResult["name"]).Value;
+                        }
+                    }
+                }
+            }
+
+            publicacionesNombres.Add("aa", "blood");
+            publicacionesNombres.Add("bb", "knee");
+            publicacionesNombres.Add("cc", "head");
+
+
+            foreach (string idPublicacionRDF in publicacionesNombres.Keys)
+            {
+                string tituloPublicacion = publicacionesNombres[idPublicacionRDF].Trim();
+                string q = HttpUtility.UrlEncode(tituloPublicacion);
+                uint[] ids_works = SelectPUBMED_WorkSearchByTitle(q, pDiscoverCache);
+                //SCOPUSWorks works = null;
+                if (ids_works != null && ids_works.Count() > 0)
+                {
+                    foreach (uint idWorkInt in ids_works)
+                    {
+                        PubmedArticleSet pubmedArticleSet = SelectPUBMED_GetWorkByID(idWorkInt, pDiscoverCache);
+                        if (pubmedArticleSet != null && pubmedArticleSet.PubmedArticle != null && pubmedArticleSet.PubmedArticle.MedlineCitation != null && pubmedArticleSet.PubmedArticle.MedlineCitation.Article != null)
+                        {
+                            PubmedArticleSetPubmedArticleMedlineCitationArticle article = pubmedArticleSet.PubmedArticle.MedlineCitation.Article;
+                            string title = article.ArticleTitle.Text[0];
+                            PubmedArticleSetPubmedArticleMedlineCitationArticleAuthorListAuthor[] authors = article.AuthorList.Author;
+                            if (authors != null && authors.Count() > 0)
+                            {
+                                if (GetSimilarity(title, tituloPublicacion, Disambiguation.Property.Type.title, pDiscoverCache, numWordsTitle) > 0)
+                                {
+                                    bool estaPublicacionEnDuda = pDiscoveredEntitiesProbability.ContainsKey(idPublicacionRDF);
+                                    bool coicidenAutores = false;
+
+                                    RohGraph pubmedGraph = new RohGraph();
+
+                                    string idWork = "https://pubmed.ncbi.nlm.nih.gov/" + idWorkInt;
+
+                                    IUriNode rdftypeProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+
+                                    IUriNode subjectWork = pubmedGraph.CreateUriNode(UriFactory.Create(idWork));
+
+                                    IUriNode titleProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#title"));
+                                    ILiteralNode nameTitle = pubmedGraph.CreateLiteralNode(title, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                    pubmedGraph.Assert(new Triple(subjectWork, titleProperty, nameTitle));
+
+                                    IBlankNode subjectAuthorList = pubmedGraph.CreateBlankNode();
+                                    IUriNode rdftypeAuthorList = pubmedGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq"));
+                                    pubmedGraph.Assert(new Triple(subjectAuthorList, rdftypeProperty, rdftypeAuthorList));
+
+                                    IUriNode authorListProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#authorList"));
+                                    pubmedGraph.Assert(new Triple(subjectWork, authorListProperty, subjectAuthorList));
+
+                                    IUriNode rdftypeDocument = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#Document"));
+                                    pubmedGraph.Assert(new Triple(subjectWork, rdftypeProperty, rdftypeDocument));
+
+                                    IUriNode pubmedProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#roPubmed"));
+                                    ILiteralNode namePubmed = pubmedGraph.CreateLiteralNode(idWorkInt.ToString(), new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                    pubmedGraph.Assert(new Triple(subjectWork, pubmedProperty, namePubmed));
+
+                                    if(article.ELocationID!=null)
+                                    {
+                                        foreach(PubmedArticleSetPubmedArticleMedlineCitationArticleELocationID elocation in article.ELocationID)
+                                        {
+                                            if(elocation.EIdType=="doi")
+                                            {
+                                                IUriNode doiProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#doi"));
+                                                ILiteralNode nameDoi = pubmedGraph.CreateLiteralNode(elocation.Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                                pubmedGraph.Assert(new Triple(subjectWork, doiProperty, nameDoi));
+                                            }else
+                                            {
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+
+
+                            foreach (PubmedArticleSetPubmedArticleMedlineCitationArticleAuthorListAuthor author in article.AuthorList.Author)
+                            {
+                                if (article.AuthorList.Author[0].Identifier != null)
+                                {
+
+                                }
+
+                            }
+                        }
+                        var z = "aa";
+                        //if (work.author != null)
+                        //{
+                        //    if (GetSimilarity(work.title, tituloPublicacion, Disambiguation.Property.Type.title, pDiscoverCache, numWordsTitle) > 0)
+                        //    {
+                        //        bool estaPublicacionEnDuda = pDiscoveredEntitiesProbability.ContainsKey(idPublicacionRDF);
+                        //        bool coicidenAutores = false;
+
+                        //        RohGraph scopusGraph = new RohGraph();
+
+                        //        string idWork = "http://scopus.com/Work/" + work.identifier.Replace("SCOPUS_ID:", "");
+
+                        //        IUriNode rdftypeProperty = scopusGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+
+                        //        IUriNode subjectWork = scopusGraph.CreateUriNode(UriFactory.Create(idWork));
+
+                        //        IUriNode titleProperty = scopusGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#title"));
+                        //        ILiteralNode nameTitle = scopusGraph.CreateLiteralNode(work.title, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                        //        scopusGraph.Assert(new Triple(subjectWork, titleProperty, nameTitle));
+
+                        //        IBlankNode subjectAuthorList = scopusGraph.CreateBlankNode();
+                        //        IUriNode rdftypeAuthorList = scopusGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq"));
+                        //        scopusGraph.Assert(new Triple(subjectAuthorList, rdftypeProperty, rdftypeAuthorList));
+
+                        //        IUriNode authorListProperty = scopusGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#authorList"));
+                        //        scopusGraph.Assert(new Triple(subjectWork, authorListProperty, subjectAuthorList));
+
+                        //        IUriNode rdftypeDocument = scopusGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#Document"));
+                        //        scopusGraph.Assert(new Triple(subjectWork, rdftypeProperty, rdftypeDocument));
+
+                        //        IUriNode scopusProperty = scopusGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#scopusId"));
+                        //        ILiteralNode nameScopus = scopusGraph.CreateLiteralNode(work.identifier.Replace("SCOPUS_ID:", ""), new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                        //        scopusGraph.Assert(new Triple(subjectWork, scopusProperty, nameScopus));
+
+                        //        if (!string.IsNullOrEmpty(work.doi))
+                        //        {
+                        //            IUriNode doiProperty = scopusGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#doi"));
+                        //            ILiteralNode nameDoi = scopusGraph.CreateLiteralNode(work.doi, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                        //            scopusGraph.Assert(new Triple(subjectWork, doiProperty, nameDoi));
+                        //        }
+
+                        //        foreach (WorkAuthor author in work.author)
+                        //        {
+                        //            string personName = (author.givenname + " " + author.surname).Trim();
+                        //            if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(x.Value, personName, pDiscoverCache) > 0).Count() > 0)
+                        //            {
+                        //                //Puede coincidir con alguna persona del RDF
+                        //                coicidenAutores = true;
+                        //            }
+                        //        }
+                        //        if (estaPublicacionEnDuda || coicidenAutores)
+                        //        {
+                        //            foreach (WorkAuthor author in work.author)
+                        //            {
+                        //                string personName = (author.givenname + " " + author.surname).Trim();
+                        //                if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(x.Value, personName, pDiscoverCache) > 0).Count() > 0)
+                        //                {
+                        //                    string idPerson = "http://scopus.com/Person/" + author.authid;
+                        //                    SCOPUSPerson person = SelectSCOPUSPersonCache(author.authid, pDiscoverCache);
+                        //                    IUriNode subjectPerson = scopusGraph.CreateUriNode(UriFactory.Create(idPerson));
+                        //                    IUriNode rdftypePerson = scopusGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#Person"));
+                        //                    scopusGraph.Assert(new Triple(subjectPerson, rdftypeProperty, rdftypePerson));
+
+                        //                    ILiteralNode nameScopusAuthor = scopusGraph.CreateLiteralNode(author.authid.ToString(), new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                        //                    scopusGraph.Assert(new Triple(subjectWork, scopusProperty, nameScopusAuthor));
+
+                        //                    IUriNode nameProperty = scopusGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#name"));
+                        //                    ILiteralNode namePerson = scopusGraph.CreateLiteralNode(personName, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                        //                    scopusGraph.Assert(new Triple(subjectPerson, nameProperty, namePerson));
+
+                        //                    if (!string.IsNullOrEmpty(person.coredata.orcid))
+                        //                    {
+                        //                        IUriNode orcidProperty = scopusGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
+                        //                        ILiteralNode nameOrcid = scopusGraph.CreateLiteralNode(person.coredata.orcid, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                        //                        scopusGraph.Assert(new Triple(subjectPerson, orcidProperty, nameOrcid));
+                        //                    }
+
+                        //                    IUriNode firstAuthorProperty = scopusGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#_1"));
+                        //                    scopusGraph.Assert(new Triple(subjectAuthorList, firstAuthorProperty, subjectPerson));
+                        //                }
+                        //            }
+                        //            externalGraph.Merge(scopusGraph);
+                        //        }
+                        //    }
+                        //}
+                    }
+                }
+            }
+            return externalGraph;
+        }
+
         #endregion
 
         #region Auxiliares
@@ -3755,28 +4004,6 @@ namespace API_DISCOVER.Utility
         }
 
         /// <summary>
-        /// Hace una consulta al api de CROSSREF usando la cache de discover
-        /// </summary>
-        /// <param name="q">texto</param>
-        /// <param name="pDiscoverCache">Caché de Discover</param>
-        /// <returns></returns>
-        private static CROSSREF_Works SelectCROSSREF_WorksCache(string q, DiscoverCache pDiscoverCache)
-        {
-            string hashCode = q.GetHashCode().ToString();
-            CROSSREF_Works works;
-            if (pDiscoverCache.CROSSREF_Works.ContainsKey(hashCode))
-            {
-                works = pDiscoverCache.CROSSREF_Works[hashCode];
-            }
-            else
-            {
-                works = CROSSREF_API.WorkSearchByContributor(q,mCrossrefUserAgent);
-                pDiscoverCache.CROSSREF_Works[hashCode] = works;
-            }
-            return works;
-        }
-
-        /// <summary>
         /// Hace una consulta al api de DBLP usando la cache de discover
         /// </summary>
         /// <param name="idPerson">Identificador de DBLP de la persona</param>
@@ -3813,7 +4040,7 @@ namespace API_DISCOVER.Utility
             }
             else
             {
-                works = SCOPUS_API.Works(q, mScopusApiKey,mScopusUrl);
+                works = SCOPUS_API.Works(q, mScopusApiKey, mScopusUrl);
                 pDiscoverCache.SCOPUSWorks[hashCode] = works;
             }
             return works;
@@ -3838,6 +4065,71 @@ namespace API_DISCOVER.Utility
                 pDiscoverCache.SCOPUSPerson[authid] = person;
             }
             return person;
+        }
+
+        /// <summary>
+        /// Hace una consulta al api de CROSSREF usando la cache de discover
+        /// </summary>
+        /// <param name="q">texto</param>
+        /// <param name="pDiscoverCache">Caché de Discover</param>
+        /// <returns></returns>
+        private static CROSSREF_Works SelectCROSSREF_WorksCache(string q, DiscoverCache pDiscoverCache)
+        {
+            string hashCode = q.GetHashCode().ToString();
+            CROSSREF_Works works;
+            if (pDiscoverCache.CROSSREF_Works.ContainsKey(hashCode))
+            {
+                works = pDiscoverCache.CROSSREF_Works[hashCode];
+            }
+            else
+            {
+                works = CROSSREF_API.WorkSearchByContributor(q, mCrossrefUserAgent);
+                pDiscoverCache.CROSSREF_Works[hashCode] = works;
+            }
+            return works;
+        }
+
+        /// <summary>
+        /// Hace una consulta al api de PUBMED usando la cache de discover
+        /// </summary>
+        /// <param name="q">texto</param>
+        /// <param name="pDiscoverCache">Caché de Discover</param>
+        /// <returns></returns>
+        private static uint[] SelectPUBMED_WorkSearchByTitle(string q, DiscoverCache pDiscoverCache)
+        {
+            string hashCode = q.GetHashCode().ToString();
+            uint[] ids;
+            if (pDiscoverCache.PUBMED_WorkSearchByTitle.ContainsKey(hashCode))
+            {
+                ids = pDiscoverCache.PUBMED_WorkSearchByTitle[hashCode];
+            }
+            else
+            {
+                ids = PUBMED_API.WorkSearchByTitle(q);
+                pDiscoverCache.PUBMED_WorkSearchByTitle[hashCode] = ids;
+            }
+            return ids;
+        }
+
+        /// <summary>
+        /// Hace una consulta al api de PUBMED usando la cache de discover
+        /// </summary>
+        /// <param name="id">identificador del documento</param>
+        /// <param name="pDiscoverCache">Caché de Discover</param>
+        /// <returns></returns>
+        private static PubmedArticleSet SelectPUBMED_GetWorkByID(uint id, DiscoverCache pDiscoverCache)
+        {
+            PubmedArticleSet article;
+            if (pDiscoverCache.PUBMED_WorkByID.ContainsKey(id))
+            {
+                article = pDiscoverCache.PUBMED_WorkByID[id];
+            }
+            else
+            {
+                article = PUBMED_API.GetWorkByID(id);
+                pDiscoverCache.PUBMED_WorkByID[id] = article;
+            }
+            return article;
         }
 
 
