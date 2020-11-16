@@ -29,7 +29,7 @@ namespace API_DISCOVER.Models.Entities
         }
 
         /// <summary>
-        /// Busca trabajos en el API de ORCID
+        /// Busca trabajos en el API de SCOPUS
         /// </summary>
         /// <param name="q">Texto a buscar (con urlEncode)</param>
         /// <param name="ScopusApiKey">ApiKey de Scopus</param>

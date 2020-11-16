@@ -8,8 +8,8 @@
       "http://purl.org/roh#ORCID",
       "http://purl.org/roh/mirror/vivo#scopusId",
       "http://purl.org/roh#taxID",
-      //TODO añadir propiedad
-      "http://purl.org/roh#DBLP"
+      //TODO añadir propiedad a la ontología
+      "http://purl.org/roh#researcherDBLP"
     ],
     "properties": [
       {
@@ -169,7 +169,13 @@
     "rdfType": "http://purl.org/roh/mirror/bibo#Document",
     "identifiers": [
       "http://purl.org/roh/mirror/bibo#doi",
-      "http://purl.org/roh#isbn"
+      "http://purl.org/roh#isbn",
+      //TODO añadir propiedad a la ontología
+      "http://purl.org/roh#roPubmed",
+      //TODO añadir propiedad a la ontología
+      "http://purl.org/roh#roDBLP",
+      //TODO añadir propiedad a la ontología
+      "http://purl.org/roh#roWOS"
     ],
     "properties": [
       {

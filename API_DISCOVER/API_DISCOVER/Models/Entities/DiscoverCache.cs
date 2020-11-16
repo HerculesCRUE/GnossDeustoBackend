@@ -27,6 +27,7 @@ namespace API_DISCOVER.Models.Entities
             CROSSREF_Works = new Dictionary<string, CROSSREF_Works>();
             PUBMED_WorkSearchByTitle = new Dictionary<string, uint[]>();
             PUBMED_WorkByID = new Dictionary<uint, PubmedArticleSet>();
+            WOSWorks = new Dictionary<string, WOSWorks>();
             NormalizedNames = new Dictionary<string, string>();
         }
 
@@ -84,6 +85,12 @@ namespace API_DISCOVER.Models.Entities
         /// Caché para peticiones a PUBMED
         /// </summary>
         public Dictionary<uint, PubmedArticleSet> PUBMED_WorkByID { get; set; }
+
+        /// <summary>
+        /// Caché para peticiones a WOS
+        /// </summary>
+        public Dictionary<string, WOSWorks> WOSWorks { get; set; }
+
 
         public Dictionary<string, string> NormalizedNames { get; set; }
     }
