@@ -179,7 +179,10 @@ A continuación se muestra un fragmento del fichero con la configuración del de
 		"ConfigUrlCron": "http://localhost:56255/",
 		"ScopusUrl": "https://api.elsevier.com/",
 		"ScopusApiKey": "",
-		"CrossrefUserAgent": "Hercules/API discover (https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_DISCOVER; mailto:<correo>)"
+		"CrossrefUserAgent": "HerculesASIO-University-of-Murcia (https://github.com/HerculesCRUE/GnossDeustoBackend; mailto:<correo>) AsioBot",
+  		"WOSAuthorization": "Basic czAzNjkuZmVjeXQuZXM6VTQ5RDhSWU40d3Mh",
+  		"MaxScore": "0.9",
+  		"MinScore": "0.7"
 	}
 		 
 		 
@@ -205,7 +208,10 @@ A continuación se muestra un fragmento del fichero con la configuración del de
  - ScopusUrl: url del API de Scopus
  - ScopusApiKey: API key de Scopus
  - CrossrefUserAgent: User agent a utilizar con el API de crosref 
- 
+ - WOSAuthorization: Autorización apara el API de Web of Science
+ - MaxScore: Score máximo para la desmbiguación
+ - MinSocre: Score mínimo para la desmbiguación
+  
 
 ## Dependencias
 
