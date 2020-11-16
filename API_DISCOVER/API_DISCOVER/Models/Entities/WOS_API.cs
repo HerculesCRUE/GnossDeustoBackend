@@ -17,9 +17,16 @@ namespace API_DISCOVER.Models.Entities
     /// </summary>
     public static class WOS_API
     {
+        /// <summary>
+        /// Cookie para las peticiones
+        /// </summary>
         private static string _cookie { get; set; }
 
-        private static void ActualizarCookie()
+        /// <summary>
+        /// Genera la cooie para las peticiones al API de WOS
+        /// </summary>
+        /// <param name="authorization"></param>
+        private static void ActualizarCookie(string authorization)
         {
             //Se pueden hacer un máximo de 5 peticiones cada 5 minutos a este método del API, por lo que si falla hacemos un retintento tras 5 minutos            
             for (int i = 0; i < 2; i++)
@@ -30,7 +37,7 @@ namespace API_DISCOVER.Models.Entities
                     string xml = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:auth=\"http://auth.cxf.wokmws.thomsonreuters.com\"><soapenv:Header/><soapenv:Body><auth:authenticate/></soapenv:Body></soapenv:Envelope>";
 
                     HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://search.webofknowledge.com/esti/wokmws/ws/WOKMWSAuthenticate");
-                    request.Headers.Add("Authorization", "Basic czAzNjkuZmVjeXQuZXM6VTQ5RDhSWU40d3Mh");
+                    request.Headers.Add("Authorization", authorization);
                     byte[] bytes = System.Text.Encoding.ASCII.GetBytes(xml);
 
                     // indicate what we are posting in the request
@@ -71,13 +78,19 @@ namespace API_DISCOVER.Models.Entities
             }
         }
 
-        public static WOSWorks Works(string q)
+        /// <summary>
+        /// Busca documentos en función de su título API de WOS 
+        /// </summary>
+        /// <param name="q">Texto a buscar</param>        
+        /// <param name="authorization">Autorización</param>
+        /// <returns>Objeto con los identificadores de los documentos</returns>
+        public static WOSWorks Works(string q,string authorization)
         {
             //Se pueden hacer un máximo de 2 peticiones cada segundo método del API. por lo que tras cada petición dormimos 500ms
             //Si falla refrescamos la cookie y reintenamos
             if (_cookie == null)
             {
-                ActualizarCookie();
+                ActualizarCookie(authorization);
             }
             for (int i = 0; i < 2; i++)
             {
@@ -124,7 +137,7 @@ namespace API_DISCOVER.Models.Entities
                     {
                         throw ex;
                     }
-                    ActualizarCookie();
+                    ActualizarCookie(authorization);
                 }finally
                 {
                     Thread.Sleep(500);

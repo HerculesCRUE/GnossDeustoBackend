@@ -37,6 +37,8 @@ namespace API_DISCOVER.Utility
         private readonly static string mScopusUrl = mConfigScopus.GetScopusUrl();
         private readonly static ConfigCrossref mConfigCrossref = new ConfigCrossref();
         private readonly static string mCrossrefUserAgent = mConfigCrossref.GetCrossrefUserAgent();
+        private readonly static ConfigWOS mConfigWOS = new ConfigWOS();
+        private readonly static string mWOSAuthorization = mConfigWOS.GetWOSAuthorization();
 
         private readonly static string mPropertyRohIdentifier = "http://purl.org/dc/terms/identifier";
 
@@ -2526,35 +2528,35 @@ namespace API_DISCOVER.Utility
 
             //2º ORCID
             //Hacemos las peticiones a ORCID de todos los elementos correspondientes para apoyar el proceso de descubrimiento
-            //RohGraph externalGraphORCID = ExternalIntegrationORCID(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
-            //externalGraph.Merge(externalGraphORCID);
+            RohGraph externalGraphORCID = ExternalIntegrationORCID(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
+            externalGraph.Merge(externalGraphORCID);
             bool externalHasChanges = true;
             Dictionary<string, string> externalListaEntidadesReconciliadas = new Dictionary<string, string>();
-            //ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
+            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
 
-            ////3º SCOPUS
-            ////Hacemos las peticiones a SCOPUS de todos los elementos correspondientes para apoyar el proceso de descubrimiento
-            //RohGraph externalGraphSCOPUS = ExternalIntegrationSCOPUS(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
-            //externalGraph.Merge(externalGraphSCOPUS);
-            //ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
+            //3º SCOPUS
+            //Hacemos las peticiones a SCOPUS de todos los elementos correspondientes para apoyar el proceso de descubrimiento
+            RohGraph externalGraphSCOPUS = ExternalIntegrationSCOPUS(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
+            externalGraph.Merge(externalGraphSCOPUS);
+            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
 
-            //// 4º DBLP
-            ////Hacemos las peticiones a DBLP de todos los elementos correspondientes para apoyar el proceso de descubrimiento
-            //RohGraph externalGraphDBLP = ExternalIntegrationDBLP(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
-            //externalGraph.Merge(externalGraphDBLP);
-            //ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
+            // 4º DBLP
+            //Hacemos las peticiones a DBLP de todos los elementos correspondientes para apoyar el proceso de descubrimiento
+            RohGraph externalGraphDBLP = ExternalIntegrationDBLP(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
+            externalGraph.Merge(externalGraphDBLP);
+            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
 
-            //// 5º CROSSREF
-            ////Hacemos las peticiones a CROSSREF de todos los elementos correspondientes para apoyar el proceso de descubrimiento
-            //RohGraph externalGraphCROSSREF = ExternalIntegrationCROSSREF(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
-            //externalGraph.Merge(externalGraphCROSSREF);
-            //ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
+            // 5º CROSSREF
+            //Hacemos las peticiones a CROSSREF de todos los elementos correspondientes para apoyar el proceso de descubrimiento
+            RohGraph externalGraphCROSSREF = ExternalIntegrationCROSSREF(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
+            externalGraph.Merge(externalGraphCROSSREF);
+            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
 
             // 6º PUBMED
             //Hacemos las peticiones a PUBMED de todos los elementos correspondientes para apoyar el proceso de descubrimiento
-            //RohGraph externalGraphPUBMED = ExternalIntegrationPUBMED(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
-            //externalGraph.Merge(externalGraphPUBMED);
-            //ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
+            RohGraph externalGraphPUBMED = ExternalIntegrationPUBMED(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
+            externalGraph.Merge(externalGraphPUBMED);
+            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
 
             // 7º WOS
             //Hacemos las peticiones a WOS de todos los elementos correspondientes para apoyar el proceso de descubrimiento
@@ -4293,7 +4295,7 @@ namespace API_DISCOVER.Utility
             }
             else
             {
-                works = WOS_API.Works(q);
+                works = WOS_API.Works(q, mWOSAuthorization);
                 pDiscoverCache.WOSWorks[hashCode] = works;
             }
             return works;
