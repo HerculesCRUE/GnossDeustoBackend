@@ -171,6 +171,7 @@ A continuación se muestra un fragmento del fichero con la configuración del de
 			"virtualhostRabbitMq": "hercules"
 		},
 		"RabbitQueueName": "HerculesDemoQueue",
+		"LogPath": "",
 		"Authority": "https://localhost:44354/connect/token",
 		"GrantType": "client_credentials",
 		"ScopeCron": "apiCron",
@@ -199,6 +200,7 @@ A continuación se muestra un fragmento del fichero con la configuración del de
  - RabbitMQ.uriRabbitMq: cadena de conexión para acceder a Rabbit
  - RabbitMQ.virtualhostRabbitMq: host virtual configurado en Rabbit
  - RabbitQueueName: Nombre de la cola de Rabbit
+ - LogPath: Ruta en la que escribir los logs
  - Authority: Url de la servicio de identidades
  - GrantType: Tipo de concesión de Oauth
  - ScopeCron: Limitación de acceso al api CRON
