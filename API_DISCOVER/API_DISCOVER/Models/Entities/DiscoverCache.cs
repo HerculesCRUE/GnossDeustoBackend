@@ -28,6 +28,7 @@ namespace API_DISCOVER.Models.Entities
             PUBMED_WorkSearchByTitle = new Dictionary<string, uint[]>();
             PUBMED_WorkByID = new Dictionary<uint, PubmedArticleSet>();
             WOSWorks = new Dictionary<string, WOSWorks>();
+            RECOLECTAWorks = new Dictionary<string, List<RecolectaDocument>>();
             NormalizedNames = new Dictionary<string, string>();
         }
 
@@ -90,6 +91,11 @@ namespace API_DISCOVER.Models.Entities
         /// Caché para peticiones a WOS
         /// </summary>
         public Dictionary<string, WOSWorks> WOSWorks { get; set; }
+
+        /// <summary>
+        /// Caché para peticiones a RECOLECTA
+        /// </summary>
+        public Dictionary<string, List<RecolectaDocument>> RECOLECTAWorks { get; set; }
 
 
         public Dictionary<string, string> NormalizedNames { get; set; }

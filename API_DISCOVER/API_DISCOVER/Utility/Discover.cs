@@ -2564,6 +2564,12 @@ namespace API_DISCOVER.Utility
             externalGraph.Merge(externalGraphWOS);
             ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
 
+            // 8º WOS
+            //Hacemos las peticiones a RECOLECTA de todos los elementos correspondientes para apoyar el proceso de descubrimiento
+            RohGraph externalGraphRECOLECTA = ExternalIntegrationRECOLECTA(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
+            externalGraph.Merge(externalGraphRECOLECTA);
+            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
+
 
             //Agregamos al RDF los identificadores encontrados en las fuentes externas y almacenamos en 'listaEntidadesRDFEnriquecer' aquellas entidades del RDF 
             //para las que hemos obtenido información adicional con las integraciones externas
@@ -3976,6 +3982,165 @@ namespace API_DISCOVER.Utility
             return externalGraph;
         }
 
+        /// <summary>
+        /// Integración con el API de RECOLECTA
+        /// </summary>
+        /// <param name="pEntitiesRdfTypes">Diccionario con las entidades y sus clases (con herencia)</param>
+        /// <param name="pDiscoverCache">Caché de discover</param>
+        /// <param name="pDataGraph">Grafo en local con los datos del RDF</param>
+        /// <param name="pDiscoveredEntitiesProbability">Entidades con probabilidades</param>
+        /// <returns>Grafo con los datos obtenidos de SCOPUS</returns>
+        private static RohGraph ExternalIntegrationRECOLECTA(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability)
+        {
+            //Sólo debemos obtener datos de las entidades cargadas en el grafo, tanto para las personas como para las obras
+            //Adicionalmente obtendremos todos los autores de las obras que estén en duda (aparecen en 'pDiscoveredEntitiesProbability') pra ayudar en su reconciliación
+
+
+            RohGraph externalGraph = new RohGraph();
+
+            int? numWordsTitle = null;
+            if (mDisambiguationConfigs.FirstOrDefault(x => x.rdfType == "http://purl.org/roh/mirror/bibo#Document") != null &&
+                mDisambiguationConfigs.FirstOrDefault(x => x.rdfType == "http://purl.org/roh/mirror/bibo#Document").properties.FirstOrDefault(x => x.property == "http://purl.org/roh#title") != null &&
+                mDisambiguationConfigs.FirstOrDefault(x => x.rdfType == "http://purl.org/roh/mirror/bibo#Document").properties.FirstOrDefault(x => x.property == "http://purl.org/roh#title").maxNumWordsTitle.HasValue)
+            {
+                numWordsTitle = mDisambiguationConfigs.FirstOrDefault(x => x.rdfType == "http://purl.org/roh/mirror/bibo#Document").properties.FirstOrDefault(x => x.property == "http://purl.org/roh#title").maxNumWordsTitle;
+            }
+            else
+            {
+                //Si no hay configurada similitud de titulo entre documentos no procedemos
+                return externalGraph;
+            }
+
+
+            Dictionary<string, string> publicacionesNombres = new Dictionary<string, string>();
+            Dictionary<string, Dictionary<string, string>> publicacionesAutores = new Dictionary<string, Dictionary<string, string>>();
+            foreach (string entityID in pEntitiesRdfTypes.Keys)
+            {
+                if (pEntitiesRdfTypes[entityID].Contains("http://purl.org/roh/mirror/bibo#Document"))
+                {
+                    string query = @$"select distinct ?person ?name ?doc ?title
+                                    where
+                                    {{
+                                        ?person <http://purl.org/roh/mirror/foaf#name> ?name. 
+                                        ?doc <http://purl.org/roh/mirror/bibo#authorList> ?list. 
+                                        ?doc <http://purl.org/roh#title> ?title. 
+                                        ?list ?enum ?person.
+                                        FILTER(?doc =<{entityID}>)
+                                    }}";
+                    SparqlResultSet sparqlResultSet = (SparqlResultSet)pDataGraph.ExecuteQuery(query.ToString());
+                    foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
+                    {
+                        if (sparqlResult["title"] is LiteralNode)
+                        {
+                            publicacionesNombres[entityID] = ((LiteralNode)sparqlResult["title"]).Value;
+                        }
+                        if (sparqlResult["name"] is LiteralNode)
+                        {
+                            if (!publicacionesAutores.ContainsKey(entityID))
+                            {
+                                publicacionesAutores[entityID] = new Dictionary<string, string>();
+                            }
+                            publicacionesAutores[entityID][sparqlResult["person"].ToString()] = ((LiteralNode)sparqlResult["name"]).Value;
+                        }
+                    }
+                }
+            }
+
+            foreach (string idPublicacionRDF in publicacionesNombres.Keys)
+            {
+                string tituloPublicacion = publicacionesNombres[idPublicacionRDF].Trim();
+                string q = HttpUtility.UrlEncode(NormalizeName(tituloPublicacion, pDiscoverCache, false, false, false));
+
+                List<RecolectaDocument> works = SelectRECOLECTAWorksCache(q, pDiscoverCache);
+
+                if (works.Count() > 0)
+                {
+                    foreach (RecolectaDocument work in works)
+                    {
+                        if (work.authorList != null)
+                        {
+                            if (GetSimilarity(work.title, tituloPublicacion, Disambiguation.Property.Type.title, pDiscoverCache, numWordsTitle) > 0)
+                            {
+                                bool estaPublicacionEnDuda = pDiscoveredEntitiesProbability.ContainsKey(idPublicacionRDF);
+                                bool coicidenAutores = false;
+
+                                RohGraph recolectaGraph = new RohGraph();
+                                string idWork = "http://recolecta.com/Work/" + HttpUtility.UrlEncode(work.title);
+
+                                IUriNode rdftypeProperty = recolectaGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+
+                                IUriNode subjectWork = recolectaGraph.CreateUriNode(UriFactory.Create(idWork));
+
+                                IUriNode titleProperty = recolectaGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#title"));
+                                ILiteralNode nameTitle = recolectaGraph.CreateLiteralNode(work.title, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                recolectaGraph.Assert(new Triple(subjectWork, titleProperty, nameTitle));
+
+                                IBlankNode subjectAuthorList = recolectaGraph.CreateBlankNode();
+                                IUriNode rdftypeAuthorList = recolectaGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq"));
+                                recolectaGraph.Assert(new Triple(subjectAuthorList, rdftypeProperty, rdftypeAuthorList));
+
+                                IUriNode authorListProperty = recolectaGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#authorList"));
+                                recolectaGraph.Assert(new Triple(subjectWork, authorListProperty, subjectAuthorList));
+
+                                IUriNode rdftypeDocument = recolectaGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#Document"));
+                                recolectaGraph.Assert(new Triple(subjectWork, rdftypeProperty, rdftypeDocument));
+
+                                if (work.linkList.Count > 0)
+                                {
+                                    foreach (string link in work.linkList)
+                                    {
+                                        if (link.Trim().StartsWith("http://dx.doi.org/") || link.Trim().StartsWith("http://doi.org/"))
+                                        {
+                                            IUriNode doiProperty = recolectaGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#doi"));
+                                            ILiteralNode nameDoi = recolectaGraph.CreateLiteralNode(link.Trim().Replace("http://dx.doi.org/", "").Replace("http://doi.org/", ""), new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                            recolectaGraph.Assert(new Triple(subjectWork, doiProperty, nameDoi));
+                                        }
+                                    }
+                                }
+
+                                foreach (string personName in work.authorList.Keys)
+                                {
+                                    if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(x.Value, personName, pDiscoverCache) > 0).Count() > 0)
+                                    {
+                                        //Puede coincidir con alguna persona del RDF
+                                        coicidenAutores = true;
+                                    }
+                                }
+                                if (estaPublicacionEnDuda || coicidenAutores)
+                                {
+                                    foreach (string personName in work.authorList.Keys)
+                                    {
+                                        if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(x.Value, personName, pDiscoverCache) > 0).Count() > 0)
+                                        {
+                                            string idPerson = "http://recolecta.com/Person/" + HttpUtility.UrlEncode(work.title);
+                                            IUriNode subjectPerson = recolectaGraph.CreateUriNode(UriFactory.Create(idPerson));
+                                            IUriNode rdftypePerson = recolectaGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#Person"));
+                                            recolectaGraph.Assert(new Triple(subjectPerson, rdftypeProperty, rdftypePerson));
+
+                                            IUriNode nameProperty = recolectaGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#name"));
+                                            ILiteralNode namePerson = recolectaGraph.CreateLiteralNode(personName, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                            recolectaGraph.Assert(new Triple(subjectPerson, nameProperty, namePerson));
+
+                                            if (!string.IsNullOrEmpty(work.authorList[personName]))
+                                            {
+                                                IUriNode orcidProperty = recolectaGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
+                                                ILiteralNode nameOrcid = recolectaGraph.CreateLiteralNode(work.authorList[personName], new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                                recolectaGraph.Assert(new Triple(subjectPerson, orcidProperty, nameOrcid));
+                                            }
+
+                                            IUriNode firstAuthorProperty = recolectaGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#_1"));
+                                            recolectaGraph.Assert(new Triple(subjectAuthorList, firstAuthorProperty, subjectPerson));
+                                        }
+                                    }
+                                    externalGraph.Merge(recolectaGraph);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return externalGraph;
+        }
         #endregion
 
         #region Auxiliares
@@ -4297,6 +4462,28 @@ namespace API_DISCOVER.Utility
             {
                 works = WOS_API.Works(q, mWOSAuthorization);
                 pDiscoverCache.WOSWorks[hashCode] = works;
+            }
+            return works;
+        }
+
+        /// <summary>
+        /// Hace una consulta al api de RECOLECTA usando la cache de discover
+        /// </summary>
+        /// <param name="q">texto</param>
+        /// <param name="pDiscoverCache">Caché de Discover</param>
+        /// <returns></returns>
+        private static List<RecolectaDocument> SelectRECOLECTAWorksCache(string q, DiscoverCache pDiscoverCache)
+        {
+            string hashCode = q.GetHashCode().ToString();
+            List<RecolectaDocument> works = null;
+            if (pDiscoverCache.RECOLECTAWorks.ContainsKey(hashCode))
+            {
+                works = pDiscoverCache.RECOLECTAWorks[hashCode];
+            }
+            else
+            {
+                works = RECOLECTA_API.Works(q);
+                pDiscoverCache.RECOLECTAWorks[hashCode] = works;
             }
             return works;
         }
