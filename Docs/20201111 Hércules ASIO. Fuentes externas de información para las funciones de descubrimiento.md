@@ -65,8 +65,9 @@ institucionales de España.
 **Europeana** (incluye la antigua European Library). Dispone de un API ([https://pro.europeana.eu/page/api-rest-console](https://pro.europeana.eu/page/api-rest-console)), 
 pero no siempre proporciona todos  los autores. Los recursos de algunas fuentes sólo incluyen 
 uno de los investigadores como _contributor_. Usaremos los recursos que declaren a los autores 
-como _creator_ y enlazaremos con el recurso identificado en el portal Linked Open Data de 
-Europeana ([https://pro.europeana.eu/page/linked-open-data](https://pro.europeana.eu/page/linked-open-data)).
+como _creator_ con más fiabilidad que los que sólo incluyen un _contributor_, aunque en ninguno
+de los dos casos incluyen codificación para loa autores (sólo nombre y apellidos), y enlazaremos 
+con el recurso identificado en el portal Linked Open Data de Europeana ([https://pro.europeana.eu/page/linked-open-data](https://pro.europeana.eu/page/linked-open-data)).
 
 Fuentes descartadas
 ===================
