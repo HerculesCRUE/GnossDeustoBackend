@@ -1,6 +1,6 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
-| Fecha         | 01/10/2020                                                   |
+| Fecha         | 19/11/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Fuentes externas de información para las funciones de descubrimiento| 
 |Descripción|El documento indica que fuentes se usan y justifica cuáles se han descartado|
@@ -115,9 +115,8 @@ http://catalogo.bne.es/uhtbin/webcat.
 3.	Libro que están en las dos webs con datos completos en datos.bne.es
 Por último, dos títulos que aparecen en ambos sitios web (Datos y Catálogo), "El Consejo de Derechos 
 Humanos: oportunidades y desafíos" y "El derecho al ambiente como derecho de participación". Ambos 
-documentos aparecen con mucha más información en sus RDFs. 
-http://datos.bne.es/edicion/Mimo0002220308.ttl
-http://datos.bne.es/edicion/bimo0000394982.ttl
+documentos aparecen con mucha más información en sus RDFs (http://datos.bne.es/edicion/Mimo0002220308.ttl y 
+http://datos.bne.es/edicion/bimo0000394982.ttl).
 
 En resumen, parece que el catálogo web contiene datos que podríamos usar pero no todos están en 
 el proyecto de datos enlazados ni con el mismo detalle. Por lo tanto, si quisiéramos usarlos nos 
