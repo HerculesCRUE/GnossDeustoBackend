@@ -121,6 +121,7 @@ http://datos.bne.es/edicion/bimo0000394982.ttl).
 En resumen, parece que el catálogo web de la BNE contiene datos que podríamos usar pero no todos  
 están en el proyecto de datos enlazados ni con el mismo detalle. Por lo tanto, si quisiéramos usarlos  
 nos tendríamos que plantear el _scraping_ sobre el catálogo web, que podría tener problemas técnicos.
+
 Pendiente:
 > Verificar si el _scraping_ es posible técnicamente, ya que los resultados se muestran tras una
 petición POST en la que se envían cookies de sesión.
@@ -132,5 +133,6 @@ de uso, no sería posible por un problema técnico, ya que la lista de resultado
 incluso si sólo se devuelve uno, no proporciona un enlace hacia cada tesis devuelta, sino que 
 se accede mediante un javascript que usa un identificador que no tiene relación con el que luego 
 tiene cada tesis en su acceso directo. 
+
 Pendiente:
 > Contactar con los propietarios del portal.
