@@ -118,9 +118,9 @@ Humanos: oportunidades y desafíos" y "El derecho al ambiente como derecho de pa
 documentos aparecen con mucha más información en sus RDFs (http://datos.bne.es/edicion/Mimo0002220308.ttl y 
 http://datos.bne.es/edicion/bimo0000394982.ttl).
 
-En resumen, parece que el catálogo web contiene datos que podríamos usar pero no todos están en 
-el proyecto de datos enlazados ni con el mismo detalle. Por lo tanto, si quisiéramos usarlos nos 
-tendríamos que plantear el _scraping_ sobre el catálogo web, que podría tener problemas técnicos.
+En resumen, parece que el catálogo web de la BNE contiene datos que podríamos usar pero no todos  
+están en el proyecto de datos enlazados ni con el mismo detalle. Por lo tanto, si quisiéramos usarlos  
+nos tendríamos que plantear el _scraping_ sobre el catálogo web, que podría tener problemas técnicos.
 Pendiente:
 > Verificar si el _scraping_ es posible técnicamente, ya que los resultados se muestran tras una
 petición POST en la que se envían cookies de sesión.
