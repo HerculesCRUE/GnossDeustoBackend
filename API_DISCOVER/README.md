@@ -134,7 +134,7 @@ A continuación se muestra un fragmento del fichero con la configuración del de
  - identifiers: Propiedades que son identificadores de la entidad (si 2 entidades tienen el mismo identificador es la misma entidad, independientemente del resto de propiedades)
  - properties: Listado de propiedades junto con sus características para tener en cuenta en el descubrimiento
  - properties.property:  Propiedad a tener en cuanta en al reconciliación ('@@@' implica un 'salto' y '?' implica que puede ser cualquier propiedad)
- - properties.mandatory: Indica si el cumplimineto de esa propiedad es obligatorio para considerar a dos entidades la misma
+ - properties.mandatory: Indica si el cumplimineto de esa propiedad es condición necesaria para considerar a dos entidades la misma
  - properties.inverse: Si vale 'false' se buscan los valores de las propiedades utilizando la entidad como sujeto, si vale 'true' se buscan los valores de las propiedades utilizando la entidad como objeto
  - properties.type: Es el tipo de igualdad que se debe cumplir 
 	- 0 (equals): Misma entidad o mismo valor de la propiedad
