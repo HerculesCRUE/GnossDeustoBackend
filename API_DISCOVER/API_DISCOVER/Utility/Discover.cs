@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Web;
 using VDS.RDF;
 using VDS.RDF.Parsing;
@@ -2525,51 +2526,35 @@ namespace API_DISCOVER.Utility
             //Obtenemos datos de la BBDD para apoyar el proceso de descubrimiento
             ExternalIntegrationSPARQL(ref pHasChanges, entitiesRdfTypes, pDiscoverCache, ref pDataGraph);
 
+            RohGraph dataGraphClone = pDataGraph.Clone();
+            Dictionary<string, Dictionary<string, float>> discoveredEntitiesProbabilityClone = new Dictionary<string, Dictionary<string, float>>(pDiscoveredEntitiesProbability);
 
-            //2º ORCID
-            //Hacemos las peticiones a ORCID de todos los elementos correspondientes para apoyar el proceso de descubrimiento
-            RohGraph externalGraphORCID = ExternalIntegrationORCID(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
-            externalGraph.Merge(externalGraphORCID);
+
+            HashSet<RohGraph> externalGraphs = new HashSet<RohGraph>();
+            List<Thread> hilosIntegracionesExternas = new List<Thread>();
+            hilosIntegracionesExternas.Add(new Thread(() => { externalGraphs.Add(ExternalIntegrationORCID(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); }));
+            hilosIntegracionesExternas.Add(new Thread(() => { externalGraphs.Add(ExternalIntegrationSCOPUS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); }));
+            hilosIntegracionesExternas.Add(new Thread(() => { externalGraphs.Add(ExternalIntegrationDBLP(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); }));
+            hilosIntegracionesExternas.Add(new Thread(() => { externalGraphs.Add(ExternalIntegrationCROSSREF(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); }));
+            hilosIntegracionesExternas.Add(new Thread(() => { externalGraphs.Add(ExternalIntegrationPUBMED(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); }));
+            hilosIntegracionesExternas.Add(new Thread(() => { externalGraphs.Add(ExternalIntegrationWOS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); }));
+            hilosIntegracionesExternas.Add(new Thread(() => { externalGraphs.Add(ExternalIntegrationRECOLECTA(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); }));
+            foreach (Thread thread in hilosIntegracionesExternas)
+            {
+                thread.Start();
+            }
+            foreach (Thread thread in hilosIntegracionesExternas)
+            {
+                thread.Join();
+            }
+
             bool externalHasChanges = true;
             Dictionary<string, string> externalListaEntidadesReconciliadas = new Dictionary<string, string>();
-            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
-
-            //3º SCOPUS
-            //Hacemos las peticiones a SCOPUS de todos los elementos correspondientes para apoyar el proceso de descubrimiento
-            RohGraph externalGraphSCOPUS = ExternalIntegrationSCOPUS(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
-            externalGraph.Merge(externalGraphSCOPUS);
-            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
-
-            // 4º DBLP
-            //Hacemos las peticiones a DBLP de todos los elementos correspondientes para apoyar el proceso de descubrimiento
-            RohGraph externalGraphDBLP = ExternalIntegrationDBLP(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
-            externalGraph.Merge(externalGraphDBLP);
-            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
-
-            // 5º CROSSREF
-            //Hacemos las peticiones a CROSSREF de todos los elementos correspondientes para apoyar el proceso de descubrimiento
-            RohGraph externalGraphCROSSREF = ExternalIntegrationCROSSREF(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
-            externalGraph.Merge(externalGraphCROSSREF);
-            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
-
-            // 6º PUBMED
-            //Hacemos las peticiones a PUBMED de todos los elementos correspondientes para apoyar el proceso de descubrimiento
-            RohGraph externalGraphPUBMED = ExternalIntegrationPUBMED(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
-            externalGraph.Merge(externalGraphPUBMED);
-            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
-
-            // 7º WOS
-            //Hacemos las peticiones a WOS de todos los elementos correspondientes para apoyar el proceso de descubrimiento
-            RohGraph externalGraphWOS = ExternalIntegrationWOS(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
-            externalGraph.Merge(externalGraphWOS);
-            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
-
-            // 8º WOS
-            //Hacemos las peticiones a RECOLECTA de todos los elementos correspondientes para apoyar el proceso de descubrimiento
-            RohGraph externalGraphRECOLECTA = ExternalIntegrationRECOLECTA(entitiesRdfTypes, pDataGraph, pDiscoverCache, pDiscoveredEntitiesProbability);
-            externalGraph.Merge(externalGraphRECOLECTA);
-            ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
-
+            foreach (RohGraph graph in externalGraphs)
+            {
+                externalGraph.Merge(graph);
+                ReconciliateRDF(ref externalHasChanges, ref externalListaEntidadesReconciliadas, ref externalGraph, pReasoner, pDiscardDissambiguations, pDiscoverCache);
+            }
 
             //Agregamos al RDF los identificadores encontrados en las fuentes externas y almacenamos en 'listaEntidadesRDFEnriquecer' aquellas entidades del RDF 
             //para las que hemos obtenido información adicional con las integraciones externas
@@ -3925,9 +3910,9 @@ namespace API_DISCOVER.Utility
                             ILiteralNode nameWos = wosGraph.CreateLiteralNode(record.UID.Replace("WOS:", ""), new Uri("http://www.w3.org/2001/XMLSchema#string"));
                             wosGraph.Assert(new Triple(subjectWork, wosProperty, nameWos));
 
-                            foreach(recordsRECDynamic_dataCluster_relatedIdentifier identifier in record.dynamic_data.cluster_related.identifiers)
+                            foreach (recordsRECDynamic_dataCluster_relatedIdentifier identifier in record.dynamic_data.cluster_related.identifiers)
                             {
-                                if(identifier.type=="doi")
+                                if (identifier.type == "doi")
                                 {
                                     IUriNode doiProperty = wosGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#doi"));
                                     ILiteralNode nameDoi = wosGraph.CreateLiteralNode(identifier.value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
