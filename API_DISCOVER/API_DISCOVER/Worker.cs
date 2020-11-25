@@ -1,10 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Xml.Serialization;
-using System.Xml.XPath;
 using API_DISCOVER.Models.Entities;
 using API_DISCOVER.Models.Log;
 using API_DISCOVER.Models.Services;
@@ -13,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace API_DISCOVER
 {
