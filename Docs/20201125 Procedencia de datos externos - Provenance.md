@@ -42,9 +42,13 @@ Este triple se cargaría en el grafo principal de ASIO y también en un grafo co
 
 Datos de procedencia
 =============
-El RDF Store contendrá un grafo (http://graph.um.es/graph/provenance) con triples que describirán cada una de las fuentes externas esperadas, de acuerdo a la ontología [PROV-O](https://www.w3.org/TR/prov-o/).
-Con esta información se podrá consultar y mostrar la procedencia de cada dato externo. 
-Por ejemplo:
+El RDF Store contendrá un grafo con triples que describirán cada una de las fuentes externas esperadas, de acuerdo a la ontología [PROV-O](https://www.w3.org/TR/prov-o/). Con esta información se podrá consultar y mostrar la procedencia de cada dato externo. 
+
+Por ejemplo, el nombre del grafo podría ser:
+
+    http://graph.um.es/graph/provenance
+
+Y contendría los siguientes datos:
 
     @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
     @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
