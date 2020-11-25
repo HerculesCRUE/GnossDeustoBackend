@@ -35,7 +35,7 @@ Carga de datos y procedencia
 Los triples generados desde fuentes externas se cargarán en el grafo de ASIO y en un grafo con nombre que identificará a cada fuente externa. Por ejemplo, el triple obtenido con el código ORCID desde una fuente externa podría ser:
 
     roh:res/person/ID1 roh:ORCID "0000-0001-8055-6823"
-Este triple se cargaría en el grafo principal de ASIO y también en un grafo con el que indicaremos la procedencia del dato. Por ejemplo, si el dato se hubiese obtenido de DBLP, el dato se cargaría en los siguientes grafos (según lo descrito en URIs Factory):
+Este triple se cargaría en el grafo principal de ASIO y también en un grafo con el que indicaremos la procedencia del dato. Por ejemplo, si el dato se hubiese obtenido de DBLP, el dato se cargaría en los siguientes grafos (nombrados según lo descrito en URIs Factory):
 
     http://graph.um.es/graph/asio
     http://graph.um.es/graph/dblp
