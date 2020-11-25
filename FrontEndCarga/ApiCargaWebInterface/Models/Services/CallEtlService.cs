@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using VDS.RDF;
 
 namespace ApiCargaWebInterface.Models.Services
 {
@@ -23,6 +24,9 @@ namespace ApiCargaWebInterface.Models.Services
         readonly TokenBearer _token;
         readonly ConfigUrlService _serviceUrl;
         readonly ICallService _serviceApi;
+        static RohGraph ontologia;
+        static string hash;
+
         public CallEtlService(ICallService serviceApi, CallTokenService tokenService, ConfigUrlService serviceUrl)
         {
             _serviceUrl = serviceUrl;
@@ -48,6 +52,27 @@ namespace ApiCargaWebInterface.Models.Services
             }
         }
 
+        /// <summary>
+        /// Comprueba si la ontología ha cambiado. Si es así devuelve la nueva.
+        /// </summary>
+        /// <returns>La ontología actualizada</returns>
+        public RohGraph CallGetOntology()
+        {
+            string response = _serviceApi.CallGetApi(_serviceUrl.GetUrl(), $"etl/getontologyhash", _token);
+            if (response == hash)
+            {
+                return ontologia;
+            }
+            else
+            {
+                string response2 = _serviceApi.CallGetApi(_serviceUrl.GetUrl(), $"etl/getontology", _token);
+                ontologia = new RohGraph();
+                ontologia.LoadFromString(response2);
+                hash = response;
+                return ontologia;
+            }
+        }
+                
         /// <summary>
         /// Valida un rdf
         /// </summary>
@@ -96,20 +121,18 @@ namespace ApiCargaWebInterface.Models.Services
         /// Sube una ontologia
         /// </summary>
         /// <param name="ontology">Ontologia a subir</param>
-        /// <param name="ontologyType">tipo de ontologia; siendo el 0 la ontología roh, el 1 la ontología rohes y el 2 la ontología rohum </param>
-        public void PostOntology(IFormFile ontology, int ontologyType)
+        public void PostOntology(IFormFile ontology)
         {
-            _serviceApi.CallPostApi(_serviceUrl.GetUrl(), $"etl/load-ontology?ontologyType={ontologyType}", ontology, _token, true, "ontology");
+            _serviceApi.CallPostApi(_serviceUrl.GetUrl(), $"etl/load-ontology", ontology, _token, true, "ontology");
         }
 
         /// <summary>
         /// Obtiene una ontologia
         /// </summary>
-        /// <param name="ontologyType">tipo de ontologia; siendo el 0 la ontología roh, el 1 la ontología rohes y el 2 la ontología rohum </param>
         /// <returns></returns>
-        public string GetOntology(int ontologyType)
+        public string GetOntology()
         {
-            string result = _serviceApi.CallGetApi(_serviceUrl.GetUrl(), $"etl/GetOntology?ontology={ontologyType}", _token);
+            string result = _serviceApi.CallGetApi(_serviceUrl.GetUrl(), $"etl/GetOntology", _token);
             return result;
         }
 

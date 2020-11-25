@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VDS.RDF;
 
 namespace ApiCargaWebInterface.Models.Services
 {
@@ -42,14 +43,12 @@ namespace ApiCargaWebInterface.Models.Services
         /// Sube una ontologia
         /// </summary>
         /// <param name="ontology">Ontologia a subir</param>
-        /// <param name="ontologyType">tipo de ontologia; siendo el 0 la ontología roh, el 1 la ontología rohes y el 2 la ontología rohum </param>
-        public void PostOntology(IFormFile ontologyUri, int ontologyType);
+        public void PostOntology(IFormFile ontologyUri);
         /// <summary>
         /// Obtiene una ontologia
         /// </summary>
-        /// <param name="ontologyType">tipo de ontologia; siendo el 0 la ontología roh, el 1 la ontología rohes y el 2 la ontología rohum </param>
         /// <returns></returns>
-        public string GetOntology(int ontologyType);
+        public string GetOntology();
         /// <summary>
         /// Valida un rdf tanto con un rdf de validación personalizado como por una lista de shapes configuradas en el repositorio
         /// </summary>
@@ -59,5 +58,10 @@ namespace ApiCargaWebInterface.Models.Services
         /// <param name="validationShapesList">Lista de shapes de validación</param>
         /// <param name="repositoryShapes">Lista de shapes configuradas en el repositorio</param>
         public void ValidateRDFPersonalized(Guid repositoryId, IFormFile rdfToValidate, IFormFile validationRdf, List<Guid> validationShapesList, List<ShapeConfigViewModel> repositoryShapes);
+        /// <summary>
+        /// Comprueba si la ontología ha cambiado. Si es así devuelve la nueva.
+        /// </summary>
+        /// <returns>La ontología actualizada</returns>
+        public RohGraph CallGetOntology();
     }
 }

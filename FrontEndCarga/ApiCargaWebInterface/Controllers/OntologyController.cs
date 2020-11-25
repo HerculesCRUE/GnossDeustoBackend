@@ -31,15 +31,14 @@ namespace ApiCargaWebInterface.Controllers
         /// Carga una ontología
         /// </summary>
         /// <param name="Ontology_uri">Nueva Ontología</param>
-        /// <param name="ontology_type">Tipo de ontología; siendo el 0 la ontología roh, el 1 la ontología rohes y el 2 la ontología rohum </param>
         /// <returns></returns>
         [HttpPost]
         [Route("[Controller]/load-ontology")]
-        public IActionResult LoadOntology(IFormFile Ontology_uri, int ontology_type)
+        public IActionResult LoadOntology(IFormFile Ontology_uri)
         {
             try
             {
-                _callEDtlPublishService.PostOntology(Ontology_uri, ontology_type);
+                _callEDtlPublishService.PostOntology(Ontology_uri);
                 return View("Index", new OntologyModel
                 {
                     Messagge = $"Ontologia subida"
@@ -57,26 +56,13 @@ namespace ApiCargaWebInterface.Controllers
         /// <summary>
         /// Obtiene la ontología
         /// </summary>
-        /// <param name="ontology_type">Tipo de ontología a obtener; siendo el 0 la ontología roh, el 1 la ontología rohes y el 2 la ontología rohum </param>
         /// <returns></returns>
         [HttpGet]
         [Route("[Controller]/get-ontology")]
-        public IActionResult GetOntology(int ontology_type)
+        public IActionResult GetOntology()
         {
-            var fileName = "";
-            if (ontology_type == 0)
-            {
-                fileName = "roh.owl";
-            }
-            else if (ontology_type == 1)
-            {
-                fileName = "rohes.owl";
-            }
-            else
-            {
-                fileName = "rohum.owl";
-            }
-            var result = _callEDtlPublishService.GetOntology(ontology_type);
+            var fileName = "roh.owl";
+            var result = _callEDtlPublishService.GetOntology();
             if (result != null)
             {
                 var content = new System.IO.MemoryStream(Encoding.ASCII.GetBytes(result));
