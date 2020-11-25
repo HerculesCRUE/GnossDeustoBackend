@@ -3,20 +3,19 @@ using Linked_Data_Server.Models.Entities;
 using Linked_Data_Server.Models.Services;
 using Linked_Data_Server.Utility;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web;
 using VDS.RDF;
 using VDS.RDF.Query;
 using VDS.RDF.Writing;
-using Microsoft.AspNetCore.Http.Extensions;
-using System.Linq;
-using System.Net.Http;
-using System.Web;
 
 namespace Linked_Data_Server.Controllers
 {
@@ -25,12 +24,13 @@ namespace Linked_Data_Server.Controllers
     {
         private readonly static ConfigService mConfigService = new ConfigService();
         private readonly ILogger<HomeController> _logger;
+        private readonly ICallEtlService _callEDtlPublishService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICallEtlService callEDtlPublishService)
         {
+            _callEDtlPublishService = callEDtlPublishService;
             _logger = logger;
         }
-
 
         [Produces("application/rdf+xml", "text/html")]
         public IActionResult Index()
@@ -42,7 +42,6 @@ namespace Linked_Data_Server.Controllers
             {
                 url = urlParam;
             }
-
 
             //Customizamos Header
             if (!string.IsNullOrEmpty(mConfigService.GetConstrainedByUrl()))
@@ -62,7 +61,8 @@ namespace Linked_Data_Server.Controllers
 
             //Cargamos la ontología
             RohGraph ontologyGraph = new RohGraph();
-            ontologyGraph.LoadFromFile("Config/Ontology/roh-v2.owl");
+            //ontologyGraph.LoadFromFile("Config/Ontology/roh-v2.owl");
+            ontologyGraph = _callEDtlPublishService.CallGetOntology();
             SparqlResultSet sparqlResultSetNombresPropiedades = (SparqlResultSet)ontologyGraph.ExecuteQuery("select distinct ?entidad ?nombre where { ?entidad <http://www.w3.org/2000/01/rdf-schema#label> ?nombre. FILTER(lang(?nombre) = 'es')}");
 
             //Guardamos todos los nombres de las propiedades en un diccionario
