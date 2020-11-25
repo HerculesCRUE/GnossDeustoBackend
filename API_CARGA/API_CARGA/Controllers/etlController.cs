@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Xml;
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
@@ -148,31 +150,20 @@ namespace API_CARGA.Controllers
         /// Elimina la ontologia cargada y la reemplaza por la nueva
         /// </summary>
         /// <param name="ontology">Fichero de la nueva ontologia</param>
-        /// <param name="ontologyType">tipo de ontologia; siendo el 0 la ontología roh, el 1 la ontología rohes y el 2 la ontología rohum </param>
         /// <returns></returns>
         [HttpPost("load-ontology")]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult LoadOntology(IFormFile ontology, OntologyEnum ontologyType)
+        public IActionResult LoadOntology(IFormFile ontology)
         {
             try
             {
-                OntologyService.SetOntology(ontology, ontologyType);
+                OntologyService.SetOntology(ontology);
                 string ontologyGraph = "";
-                if (ontologyType.Equals(OntologyEnum.OntologyRoh))
-                {
-                    ontologyGraph = _configSparql.GetGraphRoh();
-                }
-                else if (ontologyType.Equals(OntologyEnum.OntologyRohes))
-                {
-                    ontologyGraph = _configSparql.GetGraphRohes();
-                }
-                else
-                {
-                    ontologyGraph = _configSparql.GetGraphRohum();
-                }
-                SparqlUtility.LoadOntology(_configSparql.GetEndpoint(), ontologyGraph, $"{_configUrlService.GetUrl()}/etl/GetOntology?ontology={ontologyType}", _configSparql.GetQueryParam());
+                ontologyGraph = _configSparql.GetGraphRoh();
+                
+                SparqlUtility.LoadOntology(_configSparql.GetEndpoint(), ontologyGraph, $"{_configUrlService.GetUrl()}/etl/GetOntology", _configSparql.GetQueryParam());
                 return Ok();
             }
             catch (Exception ex)
@@ -455,11 +446,54 @@ namespace API_CARGA.Controllers
         [HttpGet("GetOntology")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetOntology(OntologyEnum ontology)
+        public IActionResult GetOntology()
         {
-            return Ok(OntologyService.GetOntology(ontology));
+            return Ok(OntologyService.GetOntology());
         }
 
+        /// <summary>
+        /// Devuelve el hash de la ontologia cargada     
+        /// </summary>
+        /// <returns>Hash</returns>
+        [HttpGet("GetOntologyHash")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public string GetOntologyHash()
+        {
+            string ontology = OntologyService.GetOntology();
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                string hash = GetHash(sha256Hash, ontology);
+                return hash;
+            }
+        }
+
+        /// <summary>
+        /// Generación de Hash
+        /// </summary>
+        /// <param name="hashAlgorithm"></param>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private static string GetHash(HashAlgorithm hashAlgorithm, string input)
+        {
+
+            // Convert the input string to a byte array and compute the hash.
+            byte[] data = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+            // Create a new Stringbuilder to collect the bytes
+            // and create a string.
+            var sBuilder = new StringBuilder();
+
+            // Loop through each byte of the hashed data
+            // and format each one as a hexadecimal string.
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+
+            // Return the hexadecimal string.
+            return sBuilder.ToString();
+        }
 
         private byte[] getByte(string URL)
         {
