@@ -74,58 +74,6 @@ namespace API_CARGA.Models.Services
         }
 
         ///<summary>
-        ///Obtiene el gráfo configurado en Sparql:GraphRohes del fichero appsettings.json
-        ///</summary>
-        public string GetGraphRohes()
-        {
-            if (string.IsNullOrEmpty(GraphRohes))
-            {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("GraphRohes"))
-                {
-                    GraphRohes = environmentVariables["GraphRohes"] as string;
-                }
-                else
-                {
-                    GraphRohes = Configuration["Sparql:GraphRohes"];
-                }
-
-            }
-            return GraphRohes;
-        }
-
-        ///<summary>
-        ///Obtiene el gráfo configurado en Sparql:GraphRohes del fichero appsettings.json
-        ///</summary>
-        public string GetGraphRohum()
-        {
-            if (string.IsNullOrEmpty(GraphRohum))
-            {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("GraphRohum"))
-                {
-                    GraphRohum = environmentVariables["GraphRohum"] as string;
-                }
-                else
-                {
-                    GraphRohum = Configuration["Sparql:GraphRohum"];
-                }
-
-            }
-            return GraphRohum;
-        }
-
-        ///<summary>
         ///Obtiene el endpoint configurado en Sparql:Endpoint del fichero appsettings.json
         ///</summary>
         public string GetEndpoint()

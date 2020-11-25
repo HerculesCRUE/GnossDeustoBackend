@@ -2,9 +2,9 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase para llamar a los métodos que ofrece el controlador etl del API_CARGA 
-using ApiCargaWebInterface.Extra.Exceptions;
-using ApiCargaWebInterface.Models.Entities;
-using ApiCargaWebInterface.ViewModels;
+using Linked_Data_Server.Extra.Exceptions;
+using Linked_Data_Server.Models.Entities;
+using Linked_Data_Server.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
@@ -14,7 +14,7 @@ using System.Text;
 using System.Xml.Linq;
 using VDS.RDF;
 
-namespace ApiCargaWebInterface.Models.Services
+namespace Linked_Data_Server.Models.Services
 {
     /// <summary>
     /// Clase para llamar a los métodos que ofrece el controlador etl del API_CARGA 

@@ -23,14 +23,6 @@
                                 <input asp-for="Ontology_uri" class="form-control" />
                                 <span asp-validation-for="Ontology_uri" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
-                                <label for="ontology_type" class="control-label">Ontología a cambiar</label>
-                                <select for="ontology_type" id="ontology_type" class="form-control">
-                                    <option value="0">roh.owl</option>
-                                    <option value="1">rohes.owl</option>
-                                    <option value="2">rohum.owl</option>
-                                </select>
-                            </div>
                             <div class="fieldset actionButtons fieldset03">
                                 <fieldset>
                                     <p>
@@ -48,14 +40,6 @@
                         <h1>obtener ontologia</h1>
                         <div class="fieldsetContent">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="form-group">
-                                <label for="ontology_type" class="control-label">Ontología a obtener</label>
-                                <select for="ontology_type" id="ontology_type" class="form-control">
-                                    <option value="0">roh.owl</option>
-                                    <option value="1">rohes.owl</option>
-                                    <option value="2">rohum.owl</option>
-                                </select>
-                            </div>
                             <div class="fieldset actionButtons fieldset03">
                                 <fieldset>
                                     <p>

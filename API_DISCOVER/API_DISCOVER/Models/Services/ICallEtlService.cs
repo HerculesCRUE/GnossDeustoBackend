@@ -2,7 +2,7 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Interfaz para llamar a los métodos que ofrece el controlador etl del API_CARGA 
-using ApiCargaWebInterface.ViewModels;
+using API_DISCOVER.ViewModels;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VDS.RDF;
 
-namespace ApiCargaWebInterface.Models.Services
+namespace API_DISCOVER.Models.Services
 {
     /// <summary>
     /// Interfaz para llamar a los métodos que ofrece el controlador etl del API_CARGA 

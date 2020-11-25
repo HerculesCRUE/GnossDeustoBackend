@@ -1,9 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using API_DISCOVER.Models;
 using API_DISCOVER.Models.Entities;
 using API_DISCOVER.Models.Services;
@@ -12,6 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
+using System;
+using System.Collections;
+using System.IO;
 
 namespace API_DISCOVER
 {
@@ -40,6 +37,7 @@ namespace API_DISCOVER
                     services.AddScoped(typeof(CallCronService));
                     services.AddScoped(typeof(ConfigTokenService));
                     services.AddScoped(typeof(CallTokenService));
+                    services.AddScoped(typeof(CallEtlService));
 
                     services.AddScoped<DiscoverItemBDService, DiscoverItemBDService>();
                     services.AddScoped<ProcessDiscoverStateJobBDService, ProcessDiscoverStateJobBDService>();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Linked_Data_Server.Middlewares;
+using Linked_Data_Server.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,6 +34,11 @@ namespace Linked_Data_Server
             {
                 options.ReturnHttpNotAcceptable = true;
             });
+            services.AddSingleton(typeof(ConfigUrlService));
+            services.AddScoped<ICallService, CallApiService>();
+            services.AddScoped<ICallEtlService, CallEtlService>();
+            services.AddScoped(typeof(ConfigTokenService));
+            services.AddScoped(typeof(CallTokenService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

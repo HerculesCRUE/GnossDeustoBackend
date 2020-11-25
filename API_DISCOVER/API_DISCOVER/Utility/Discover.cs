@@ -40,6 +40,7 @@ namespace API_DISCOVER.Utility
         private readonly static string mCrossrefUserAgent = mConfigCrossref.GetCrossrefUserAgent();
         private readonly static ConfigWOS mConfigWOS = new ConfigWOS();
         private readonly static string mWOSAuthorization = mConfigWOS.GetWOSAuthorization();
+        private readonly static CallEtlService _callEDtlPublishService;
 
         private readonly static string mPropertyRohIdentifier = "http://purl.org/dc/terms/identifier";
 
@@ -53,7 +54,8 @@ namespace API_DISCOVER.Utility
             DateTime discoverInitTime = DateTime.Now;
             //Cargamos la ontología
             RohGraph ontologyGraph = new RohGraph();
-            ontologyGraph.LoadFromFile("Config/Ontology/roh-v2.owl");
+            //ontologyGraph.LoadFromFile("Config/Ontology/roh-v2.owl");
+            ontologyGraph = _callEDtlPublishService.CallGetOntology();
 
             //Cargamos datos del RDF
             RohGraph dataGraph = new RohGraph();

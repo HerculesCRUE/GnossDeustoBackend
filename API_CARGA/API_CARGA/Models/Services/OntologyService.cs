@@ -20,9 +20,7 @@ namespace API_CARGA.Models.Services
     public class OntologyService
     {
 
-        public static string ONTOLOGYROH_PATH = "Config/Ontology/roh-v2.owl";
-        public static string ONTOLOGYROHES_PATH = "Config/Ontology/rohes.owl";
-        public static string ONTOLOGYROHUM_PATH = "Config/Ontology/rohum.owl";
+        public static string ONTOLOGY_PATH = "Config/Ontology/roh-v2.owl";
 
         /// <summary>
         /// Comprueba que un fichero exista remotamente
@@ -51,46 +49,21 @@ namespace API_CARGA.Models.Services
         /// <summary>
         /// Lee el fichero de la ontologia
         /// </summary>
-        /// <param name="ontologyType">Tipo de ontología</param>
         /// <returns>Devuelve el contenido de la ontologia</returns>
-        public static string GetOntology(OntologyEnum ontologyType)
+        public static string GetOntology()
         {
-            if (ontologyType.Equals(OntologyEnum.OntologyRoh))
-            {
-                return File.ReadAllText(ONTOLOGYROH_PATH);
-            }
-            else if (ontologyType.Equals(OntologyEnum.OntologyRohes))
-            {
-                return File.ReadAllText(ONTOLOGYROHES_PATH);
-            }
-            else
-            {
-                return File.ReadAllText(ONTOLOGYROHUM_PATH);
-            }
-            
+            return File.ReadAllText(ONTOLOGY_PATH);
         }
 
         /// <summary>
-        /// Remplaza la ontologia
+        /// Reemplaza la ontologia
         /// </summary>
         /// <param name="newOntology">Nueva ontologia</param>
-        /// <param name="ontologyType">Tipo de ontologia a sustituir</param>
         /// <returns></returns>
-        public static void SetOntology(IFormFile newOntology, OntologyEnum ontologyType)
+        public static void SetOntology(IFormFile newOntology)
         {
             FileStream stream = null;
-            if (ontologyType.Equals(OntologyEnum.OntologyRoh))
-            {
-                stream = File.Create(ONTOLOGYROH_PATH);
-            }
-            else if (ontologyType.Equals(OntologyEnum.OntologyRohes))
-            {
-                stream = File.Create(ONTOLOGYROHES_PATH);
-            }
-            else
-            {
-                stream = File.Create(ONTOLOGYROHUM_PATH);
-            }
+            stream = File.Create(ONTOLOGY_PATH);
             newOntology.CopyTo(stream);
             stream.Close();
         }

@@ -20,9 +20,11 @@ namespace ApiCargaWebInterface.Controllers
     public class DiscoverController : Controller
     {
         readonly DiscoverItemBDService _discoverItemService;
-        public DiscoverController(DiscoverItemBDService iIDiscoverItemService)
+        readonly ICallEtlService _callEDtlPublishService;
+        public DiscoverController(DiscoverItemBDService iIDiscoverItemService, ICallEtlService callEDtlPublishService)
         {
             _discoverItemService = iIDiscoverItemService;
+            _callEDtlPublishService = callEDtlPublishService;
         }
         /// <summary>
         /// Obtiene los detalles de un error de descubrimiento
@@ -77,7 +79,8 @@ namespace ApiCargaWebInterface.Controllers
         {
             //Cargamos la ontología
             RohGraph ontologyGraph = new RohGraph();
-            ontologyGraph.LoadFromFile("Config/Ontology/roh-v2.owl");
+            ontologyGraph = _callEDtlPublishService.CallGetOntology();
+
             SparqlResultSet sparqlResultSetNombresPropiedades = (SparqlResultSet)ontologyGraph.ExecuteQuery("select distinct ?entidad ?nombre where { ?entidad <http://www.w3.org/2000/01/rdf-schema#label> ?nombre. FILTER(lang(?nombre) = 'es')}");
 
             //Guardamos todos los nombres de las propiedades en un diccionario
@@ -136,8 +139,12 @@ namespace ApiCargaWebInterface.Controllers
             entidad.entitiesPropertiesEntity = new Dictionary<string, List<DiscoverRdfViewModel>>();
             entidad.uriEntity = idEntity;
             entidad.urisRdf = allEntities;
-            entidad.communNamePropierties = communNameProperties;
+            entidad.communNamePropierties = communNameProperties;            
             entidad.LoadedEntities = loadedEntities;
+            if (entidad.LoadedEntities == null)
+            {
+                entidad.LoadedEntities = new List<string>();
+            }
 
             foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
             {

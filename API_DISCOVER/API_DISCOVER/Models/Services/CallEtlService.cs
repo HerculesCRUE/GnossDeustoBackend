@@ -2,9 +2,9 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase para llamar a los métodos que ofrece el controlador etl del API_CARGA 
-using ApiCargaWebInterface.Extra.Exceptions;
-using ApiCargaWebInterface.Models.Entities;
-using ApiCargaWebInterface.ViewModels;
+using API_DISCOVER.Extra.Exceptions;
+using API_DISCOVER.Models.Entities;
+using API_DISCOVER.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
@@ -14,7 +14,7 @@ using System.Text;
 using System.Xml.Linq;
 using VDS.RDF;
 
-namespace ApiCargaWebInterface.Models.Services
+namespace API_DISCOVER.Models.Services
 {
     /// <summary>
     /// Clase para llamar a los métodos que ofrece el controlador etl del API_CARGA 
@@ -23,11 +23,11 @@ namespace ApiCargaWebInterface.Models.Services
     {
         readonly TokenBearer _token;
         readonly ConfigUrlService _serviceUrl;
-        readonly ICallService _serviceApi;
+        readonly CallCronService _serviceApi;
         static RohGraph ontologia;
         static string hash;
 
-        public CallEtlService(ICallService serviceApi, CallTokenService tokenService, ConfigUrlService serviceUrl)
+        public CallEtlService(CallCronService serviceApi, CallTokenService tokenService, ConfigUrlService serviceUrl)
         {
             _serviceUrl = serviceUrl;
             _serviceApi = serviceApi;
