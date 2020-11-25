@@ -19,8 +19,8 @@ namespace API_CARGA.Models.Services
     /// </summary>
     public class OntologyService
     {
-
-        public static string ONTOLOGY_PATH = "Config/Ontology/roh-v2.owl";
+        public static string ONTOLOGY_FOLDER = "Config/Ontology/";
+        public static string ONTOLOGY_FILE = "Config/Ontology/roh-v2.owl";
 
         /// <summary>
         /// Comprueba que un fichero exista remotamente
@@ -52,7 +52,7 @@ namespace API_CARGA.Models.Services
         /// <returns>Devuelve el contenido de la ontologia</returns>
         public static string GetOntology()
         {
-            return File.ReadAllText(ONTOLOGY_PATH);
+            return File.ReadAllText(ONTOLOGY_FILE);
         }
 
         /// <summary>
@@ -63,7 +63,8 @@ namespace API_CARGA.Models.Services
         public static void SetOntology(IFormFile newOntology)
         {
             FileStream stream = null;
-            stream = File.Create(ONTOLOGY_PATH);
+            Directory.CreateDirectory(ONTOLOGY_FOLDER);
+            stream = File.Create(ONTOLOGY_FILE);
             newOntology.CopyTo(stream);
             stream.Close();
         }

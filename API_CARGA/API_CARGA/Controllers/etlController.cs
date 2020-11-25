@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using VDS.RDF;
 
 namespace API_CARGA.Controllers
 {
@@ -162,8 +163,9 @@ namespace API_CARGA.Controllers
                 OntologyService.SetOntology(ontology);
                 string ontologyGraph = "";
                 ontologyGraph = _configSparql.GetGraphRoh();
-                
-                SparqlUtility.LoadOntology(_configSparql.GetEndpoint(), ontologyGraph, $"{_configUrlService.GetUrl()}/etl/GetOntology", _configSparql.GetQueryParam());
+                RohGraph graph = new RohGraph();
+                graph.LoadFromString(OntologyService.GetOntology());                
+                SparqlUtility.LoadOntology(graph, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), ontologyGraph);
                 return Ok();
             }
             catch (Exception ex)
