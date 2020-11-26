@@ -172,18 +172,20 @@ A continuación se muestra un fragmento del fichero con la configuración del de
 		},
 		"RabbitQueueName": "HerculesDemoQueue",
 		"LogPath": "",
-		"Authority": "https://localhost:44354/connect/token",
-		"GrantType": "client_credentials",
-		"ScopeCron": "apiCron",
-		"ClientId": "Web",
-		"ClientSecret": "master",
-		"ConfigUrlCron": "http://localhost:56255/",
 		"ScopusUrl": "https://api.elsevier.com/",
 		"ScopusApiKey": "",
-		"CrossrefUserAgent": "HerculesASIO-University-of-Murcia (https://github.com/HerculesCRUE/GnossDeustoBackend; mailto:<correo>) AsioBot",
-  		"WOSAuthorization": "Basic czAzNjkuZmVjeXQuZXM6VTQ5RDhSWU40d3Mh",
-  		"MaxScore": "0.9",
-  		"MinScore": "0.7"
+		"CrossrefUserAgent": "HerculesASIO-University-of-Murcia (https://github.com/HerculesCRUE/GnossDeustoBackend; mailto:<mail>) AsioBot",
+		"WOSAuthorization": "Basic XXXXXXXXXXXXXXXXXXXX",
+		"MaxScore": "0.9",
+		"MinScore": "0.7",  
+		"Authority": "",  
+		"GrantType": "client_credentials",
+		"Scope": "apiCarga",
+		"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
+		"ScopeCron": "apiCron",
+		"ConfigUrlCron": "http://herc-as-front-desa.atica.um.es/cron-config/",
+		"ClientId": "Discover",
+		"ClientSecret": "secretDiscover" 
 	}
 		 
 		 
@@ -201,18 +203,20 @@ A continuación se muestra un fragmento del fichero con la configuración del de
  - RabbitMQ.virtualhostRabbitMq: host virtual configurado en Rabbit
  - RabbitQueueName: Nombre de la cola de Rabbit
  - LogPath: Ruta en la que escribir los logs
- - Authority: Url de la servicio de identidades
- - GrantType: Tipo de concesión de Oauth
- - ScopeCron: Limitación de acceso al api CRON
- - ClientId: Id de cliente del api
- - ClientSecret: "clave" de acceso del api
- - ConfigUrlCron: URL donde está lanzada la aplicación CRON
  - ScopusUrl: url del API de Scopus
  - ScopusApiKey: API key de Scopus
  - CrossrefUserAgent: User agent a utilizar con el API de crosref 
  - WOSAuthorization: Autorización apara el API de Web of Science
  - MaxScore: Score máximo para la desmbiguación
- - MinSocre: Score mínimo para la desmbiguación
+ - MinSocre: Score mínimo para la desmbiguación 
+ - Authority: Url de la servicio de identidades
+ - GrantType: Tipo de concesión de Oauth
+ - Scope: Limitación de acceso al api Carga
+ - ConfigUrl: Url donde está lanzada la aplicación API Carga
+ - ScopeCron: Limitación de acceso al api CRON
+ - ConfigUrlCron: URL donde está lanzada la aplicación CRON
+ - ClientId: Id de cliente del api
+ - ClientSecret: "clave" de acceso del api
   
 
 ## Dependencias
