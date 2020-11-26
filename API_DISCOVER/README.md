@@ -1,13 +1,13 @@
 ![](..//Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 01/10/2020                                                   |
+| Fecha         | 26/11/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|API DISCOVER readme| 
 |Descripción|Manual del servicio API DISCOVER|
-|Versión|0.1|
+|Versión|0.2|
 |Módulo|API DISCOVER|
 |Tipo|Manual|
-|Cambios de la Versión|Creación|
+|Cambios de la Versión|Modificación appsettings.json|
 
 ## Sobre API DISCOVER
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
