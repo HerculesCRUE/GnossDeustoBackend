@@ -1,4 +1,4 @@
-﻿@model KeyValuePair<List<Linked_Data_Server.Models.Entities.DiscoverRdfViewModel>,Dictionary<string,string>>
+﻿@model KeyValuePair<List<Linked_Data_Server.Models.Entities.DiscoverRdfViewModel>, Dictionary<string, string>>
 @{
     ViewData["BodyClass"] = "fichaRecurso";
 }
@@ -52,7 +52,7 @@
                     {
                         <h2>Entidades relacionadas</h2>
                     }
-                    PintarItem(entity, i > 0,Model.Value);
+                    PintarItem(entity, i > 0, Model.Value);
                     i++;
                 }
             }
@@ -61,7 +61,7 @@
 </div>
 @functions
 {
-    void PintarItem(Linked_Data_Server.Models.Entities.DiscoverRdfViewModel pItem, bool pEntityLink,Dictionary<string,string> pPropsTransform)
+    void PintarItem(Linked_Data_Server.Models.Entities.DiscoverRdfViewModel pItem, bool pEntityLink, Dictionary<string, string> pPropsTransform)
     {
 
         <div class="contenido">
@@ -94,56 +94,78 @@
                                     {
                                         propiedadAbreviada = propiedadAbreviada.Substring(propiedadAbreviada.LastIndexOf("/") + 1);
                                     }
-                            <tr>
-                                @{
-                                    String title = "";
-                                }
-                                @if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
-                                {
-                                    title = pItem.communNamePropierties[stringProperty.Key];
-                                }
-                                <td class="" title="@title">
-                                    <b>@propiedadAbreviada</b>
-                                    <a href="@stringProperty.Key" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-                                </td>
+                                    <tr>
+                                        @{
+                                            String title = "";
+                                        }
 
-                                @if (pItem.urisRdf.Contains(valor))
-                                {
-                                    <td>
-                                        <a href="@valor">
-                                            @valor
-                                        </a>
-                                    </td>
-                                }
-                                else
-                                {
-                                    if (stringProperty.Key == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
-                                    {
-                                        title = "";
-
-                                        if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
+                                        @if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
                                         {
                                             title = pItem.communNamePropierties[stringProperty.Key];
                                         }
 
-                                        string valorPropiedadAbreviada = valor;
-                                        if (valorPropiedadAbreviada.Contains("/"))
+                                        <td class="" title="@title">
+                                            <b>@propiedadAbreviada</b>
+                                            <a href="@stringProperty.Key" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                        </td>
+
+                                        @if (pItem.urisRdf.Contains(valor))
                                         {
-                                            valorPropiedadAbreviada = valorPropiedadAbreviada.Substring(valorPropiedadAbreviada.LastIndexOf("/") + 1);
+                                            <td>
+                                                <a href="@valor">
+                                                    @valor
+                                                </a>
+                                            </td>
                                         }
-                                        <td title="@title"><b>@valorPropiedadAbreviada</b></td>
-                                    }
-                                    else if (pPropsTransform.ContainsKey(stringProperty.Key))
-                                    {
-                                        string uri = pPropsTransform[stringProperty.Key].Replace("{value}",valor);
-                                        <td><b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a></b></td>
-                                    }
-                                    else
-                                    {
-                                        <td><b>@valor</b></td>
-                                    }
-                                }
-                            </tr>
+                                        else
+                                        {
+                                            HashSet<string> graphs = new HashSet<string>();
+                                            if (pItem.stringPropertiesEntityGraph.ContainsKey(stringProperty.Key))
+                                            {
+                                                if (pItem.stringPropertiesEntityGraph[stringProperty.Key].ContainsKey(valor))
+                                                {
+                                                    graphs = new HashSet<string>(pItem.stringPropertiesEntityGraph[stringProperty.Key][valor]);
+                                                }
+                                            }
+
+                                            if (stringProperty.Key == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
+                                            {
+                                                title = "";
+
+                                                if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
+                                                {
+                                                    title = pItem.communNamePropierties[stringProperty.Key];
+                                                }
+
+                                                string valorPropiedadAbreviada = valor;
+                                                if (valorPropiedadAbreviada.Contains("/"))
+                                                {
+                                                    valorPropiedadAbreviada = valorPropiedadAbreviada.Substring(valorPropiedadAbreviada.LastIndexOf("/") + 1);
+                                                }
+                                                <td title="@title"><b>@valorPropiedadAbreviada</b></td>
+                                            }
+                                            else if (pPropsTransform.ContainsKey(stringProperty.Key))
+                                            {
+                                                string provenance = "";
+                                                if(graphs.Count>0)
+                                                {
+                                                    provenance = " Provenance: " + string.Join(", ", graphs);
+                                                }
+                                                string uri = pPropsTransform[stringProperty.Key].Replace("{value}", valor);
+
+                                                <td><b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a> @provenance</b></td>
+                                            }
+                                            else
+                                            {
+                                                string provenance = "";
+                                                if(graphs.Count>0)
+                                                {
+                                                    provenance = " Provenance: " + string.Join(", ", graphs);
+                                                }
+                                                <td><b>@valor @provenance</b></td>
+                                            }
+                                        }
+                                    </tr>
                                 }
                             }
                             @foreach (var entitiesProperty in pItem.entitiesPropertiesEntity)
@@ -168,7 +190,7 @@
                                         </td>
                                         <td class="">
                                             @{
-                                                PintarItem(valor, false,pPropsTransform);
+                                                PintarItem(valor, false, pPropsTransform);
                                             }
                                         </td>
                                     </tr>

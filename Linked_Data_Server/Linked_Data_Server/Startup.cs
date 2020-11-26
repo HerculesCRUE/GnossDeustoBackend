@@ -35,8 +35,7 @@ namespace Linked_Data_Server
                 options.ReturnHttpNotAcceptable = true;
             });
             services.AddSingleton(typeof(ConfigUrlService));
-            services.AddScoped<ICallService, CallApiService>();
-            services.AddScoped<ICallEtlService, CallEtlService>();
+            services.AddScoped(typeof(CallEtlApiService));
             services.AddScoped(typeof(ConfigTokenService));
             services.AddScoped(typeof(CallTokenService));
         }

@@ -24,11 +24,11 @@ namespace Linked_Data_Server.Controllers
     {
         private readonly static ConfigService mConfigService = new ConfigService();
         private readonly ILogger<HomeController> _logger;
-        private readonly ICallEtlService _callEDtlPublishService;
+        private readonly CallEtlApiService _callEtlApiService;
 
-        public HomeController(ILogger<HomeController> logger, ICallEtlService callEDtlPublishService)
+        public HomeController(ILogger<HomeController> logger, CallEtlApiService callEtlApiService)
         {
-            _callEDtlPublishService = callEDtlPublishService;
+            _callEtlApiService = callEtlApiService;
             _logger = logger;
         }
 
@@ -60,9 +60,7 @@ namespace Linked_Data_Server.Controllers
             }
 
             //Cargamos la ontología
-            RohGraph ontologyGraph = new RohGraph();
-            //ontologyGraph.LoadFromFile("Config/Ontology/roh-v2.owl");
-            ontologyGraph = _callEDtlPublishService.CallGetOntology();
+            RohGraph ontologyGraph = _callEtlApiService.CallGetOntology();
             SparqlResultSet sparqlResultSetNombresPropiedades = (SparqlResultSet)ontologyGraph.ExecuteQuery("select distinct ?entidad ?nombre where { ?entidad <http://www.w3.org/2000/01/rdf-schema#label> ?nombre. FILTER(lang(?nombre) = 'es')}");
 
             //Guardamos todos los nombres de las propiedades en un diccionario
@@ -113,6 +111,9 @@ namespace Linked_Data_Server.Controllers
                 }
                 else
                 {
+                    //Obtenemos datos del resto de grafos
+                    List<Dictionary<string, SparqlObject.Data>> sparqlObjectDictionaryGraphs = GetEntityDataGraphs(url);
+
                     //Obtenemos las 10 primeras entidades que apuntan a la entidad
                     HashSet<string> inverseEntities = GetInverseEntities(dataGraph, new HashSet<string>() { url }, new HashSet<string>(sparqlObjectDictionary.Keys), new Dictionary<string, SparqlObject>(), 10);
 
@@ -129,7 +130,7 @@ namespace Linked_Data_Server.Controllers
 
                     //Preparamos el modelo de la entidad principal
                     List<DiscoverRdfViewModel> modelEntities = new List<DiscoverRdfViewModel>();
-                    DiscoverRdfViewModel entidad = createDiscoverRdfViewModel(url, dataGraph, new List<string>(), allEntities, communNamePropierties);
+                    DiscoverRdfViewModel entidad = createDiscoverRdfViewModel(url, dataGraph, sparqlObjectDictionaryGraphs, new List<string>(), allEntities, communNamePropierties);
                     modelEntities.Add(entidad);
                     KeyValuePair<string, List<string>> titulo = entidad.stringPropertiesEntity.FirstOrDefault(x => mConfigService.GetPropsTitle().Contains(x.Key));
                     ViewData["Title"] = "About: " + url;
@@ -142,12 +143,12 @@ namespace Linked_Data_Server.Controllers
                     //Preparamos el modelo del resto de entidades
                     foreach (string entity in inverseEntities)
                     {
-                        DiscoverRdfViewModel entidadInversa = createDiscoverRdfViewModel(entity, dataGraph, new List<string>(), allEntities, communNamePropierties);
+                        DiscoverRdfViewModel entidadInversa = createDiscoverRdfViewModel(entity, dataGraph, null, new List<string>(), allEntities, communNamePropierties);
                         modelEntities.Add(entidadInversa);
                     }
 
 
-                    return View(new KeyValuePair<List<DiscoverRdfViewModel>,Dictionary<string,string>>(modelEntities, mConfigService.GetPropsTransform()));
+                    return View(new KeyValuePair<List<DiscoverRdfViewModel>, Dictionary<string, string>>(modelEntities, mConfigService.GetPropsTransform()));
                 }
             }
         }
@@ -178,6 +179,30 @@ namespace Linked_Data_Server.Controllers
                         entidadesCargar.Add(row["o"].value);
                         entidadesCargadas.Add(row["o"].value);
                     }
+                }
+            }
+            return sparqlObjectDictionary;
+        }
+
+        /// <summary>
+        /// Obtiene los datos de otros grafos para una entidad
+        /// </summary>
+        /// <param name="pEntity">URL de la entidad</param>
+        /// <returns>Diccionario con los datos de la entidad en varios grafos</returns>
+        private List<Dictionary<string, SparqlObject.Data>> GetEntityDataGraphs(string pEntity)
+        {
+            List<Dictionary<string, SparqlObject.Data>> sparqlObjectDictionary = new List<Dictionary<string, SparqlObject.Data>>();
+
+            string consulta = $@"
+                select ?s ?p ?o ?g
+                where {{graph ?g{{ ?s ?p ?o. FILTER(?s =<{pEntity}>)}}}}";
+            SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), "", consulta, mConfigService.GetSparqlQueryParam());
+            foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+            {
+                string graph = row["g"].value;
+                if (graph != mConfigService.GetSparqlGraph())
+                {
+                    sparqlObjectDictionary.Add(row);
                 }
             }
             return sparqlObjectDictionary;
@@ -329,11 +354,12 @@ namespace Linked_Data_Server.Controllers
         /// </summary>
         /// <param name="idEntity">Identificador de la entidad de la que crear el modelo</param>
         /// <param name="dataGraph">Grafo que contiene los datos</param>
+        /// <param name="pSparqlObjectDictionaryGraphs">Objeto con los datos de otros grafos</param>
         /// <param name="parents">Lista de ancestros de la entidad</param>
         /// <param name="allEntities">Listado con todos los identificadores del RDF</param>
         /// <param name="communNameProperties">Diccionario con los nombres de las propiedades</param>
         /// <returns></returns>
-        public DiscoverRdfViewModel createDiscoverRdfViewModel(string idEntity, RohGraph dataGraph, List<string> parents, List<string> allEntities, Dictionary<string, string> communNameProperties)
+        public DiscoverRdfViewModel createDiscoverRdfViewModel(string idEntity, RohGraph dataGraph, List<Dictionary<string, SparqlObject.Data>> pSparqlObjectDictionaryGraphs, List<string> parents, List<string> allEntities, Dictionary<string, string> communNameProperties)
         {
             //Obtenemos todos los triples de la entidad
             SparqlResultSet sparqlResultSet = (SparqlResultSet)dataGraph.ExecuteQuery("select ?p ?o where { <" + idEntity + "> ?p ?o }");
@@ -353,7 +379,7 @@ namespace Linked_Data_Server.Controllers
                         entitiesPropertiesEntityAux.Add(sparqlResult["p"].ToString(), new List<DiscoverRdfViewModel>());
                     }
                     parents.Add(idEntity);
-                    entitiesPropertiesEntityAux[sparqlResult["p"].ToString()].Add(createDiscoverRdfViewModel(sparqlResult["o"].ToString(), dataGraph, parents, allEntities, communNameProperties));
+                    entitiesPropertiesEntityAux[sparqlResult["p"].ToString()].Add(createDiscoverRdfViewModel(sparqlResult["o"].ToString(), dataGraph, null, parents, allEntities, communNameProperties));
                 }
                 else
                 {
@@ -393,7 +419,29 @@ namespace Linked_Data_Server.Controllers
             }
             entidad.stringPropertiesEntity = entidad.stringPropertiesEntity.Concat(stringPropertiesEntityAux).ToDictionary(s => s.Key, s => s.Value);
             entidad.entitiesPropertiesEntity = entidad.entitiesPropertiesEntity.Concat(entitiesPropertiesEntityAux).ToDictionary(s => s.Key, s => s.Value);
-
+            entidad.stringPropertiesEntityGraph = new Dictionary<string, Dictionary<string, List<string>>>();
+            if (pSparqlObjectDictionaryGraphs != null)
+            {
+                foreach (Dictionary<string, SparqlObject.Data> fila in pSparqlObjectDictionaryGraphs)
+                {
+                    string s = fila["s"].value;
+                    string p = fila["p"].value;
+                    string o = fila["o"].value;
+                    string g = fila["g"].value;
+                    if (s == entidad.uriEntity)
+                    {
+                        if (!entidad.stringPropertiesEntityGraph.ContainsKey(p))
+                        {
+                            entidad.stringPropertiesEntityGraph.Add(p, new Dictionary<string, List<string>>());
+                        }
+                        if (!entidad.stringPropertiesEntityGraph[p].ContainsKey(o))
+                        {
+                            entidad.stringPropertiesEntityGraph[p].Add(o, new List<string>());
+                        }
+                        entidad.stringPropertiesEntityGraph[p][o].Add(g);
+                    }
+                }
+            }
             return entidad;
 
         }
