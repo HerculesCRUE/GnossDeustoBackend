@@ -258,7 +258,7 @@ The SPARQL Endpoint would answer this way for the External Data Manager:
  - If the query contains attributes marked as identifiers of the entity (as ID or Name for project), it doesn't retrieve data from the Private Data Graph.
  - If the query contains attributes marked as identifiers of the entity, it doesn't retrieve data from the Private Entities Graph.
 
-So, in the example, an External Data Manaher could ask for the aggregated budget by month but not for the budget of ID2 project nor any data from ID3.
+So, in the example, an External Data Manager could ask for the aggregated budget by month but not for the budget of ID2 project nor any data from ID3.
 
 The permissions could be:
 ||Public|Private Data|Private entities|
@@ -266,5 +266,3 @@ The permissions could be:
 |Administrator|X|X|X|
 |External Data Manager|X|Aggregated|Aggregated |
 |Public user|X| | |
-
-
