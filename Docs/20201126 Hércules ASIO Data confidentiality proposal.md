@@ -1,22 +1,34 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
+| Fecha         | 01/10/2020                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Hércules ASIO. Data confidentiality proposal| 
+|Descripción|Proposal for the management of data confidentiality|
+|Versión|1.1|
+|Módulo|Data Load and SPARQL Enpoint|
+|Tipo|Specification|
+|Cambios de la Versión|Added a section to define the management of private attributes and entities|
+
+
 # Hércules Backend ASIO. Data confidentiality proposal
 
-[1 INTRODUCTION](#introduction)
+[INTRODUCTION](#introduction)
 
-[2 Requirements](#requirements)
+[Requirements](#requirements)
 
-[2.1 Data Confidentiality and privacy](#data-confidentiality-and-privacy)
+[Data Confidentiality and privacy](#data-confidentiality-and-privacy)
 
-[2.2 Identified Roles](#identified-roles)
+[Identified Roles](#identified-roles)
 
-[3 RDF Stores secutiry options](#rdf-stores-security-options)
+[RDF Stores secutiry options](#rdf-stores-security-options)
 
-[4 Data confidentiality management](#data-confidentiality-management)
+[Data confidentiality management](#data-confidentiality-management)
 
-[4.1 Confidential entities](#confidential-entities)
+[Confidential entities](#confidential-entities)
 
-[4.2 Confidential attributes](#confidential-attributes)
+[Confidential attributes](#confidential-attributes)
+
+[Confidential Attributes and Entities](confidential-attributes_and-entities)
 
 INTRODUCTION
 ============
@@ -218,3 +230,41 @@ The pros and cons of this proposal:
 | **Linked Data Server**. The public linked data server would show the non-confidential attributes of the entities with some confidential attribute. | **Confidentiality management**. It’s necessary to manage the transfer of the confidential data to external data managers.                              |
 | **Simple confidentiality schema**. It’s enough to define which attribute is confidential.                                                          | **SPARQL Endpoint**. The external data manager can run arbitrary aggregated queries over the public and private data but breaking the confidentiality. |
 | **SPARQL Endpoint**. It’s possible to retrieve the non-confidential data from any entity.                                                          |                                                                                                                                                    |
+
+Confidential Attributes and Entities 
+--------------------
+Finally, there are confidential entities but also confidential data. E.g. the budget of a project is a confidential attribute that can only be retrieved for aggregated queries. Suppose these data for project entities:
+
+**Public Graph**
+|ID|Name|Date|
+|--|--|--|
+|ID1|Name1|Date1|
+|ID2|Name2|Date2|
+
+**Private Data Graph**
+| ID|Budget|
+|--|--|
+|ID1|Budget1|
+|ID2|Budget2|
+|ID3|Budget3|
+
+**Private Entities Graph**
+|ID|Name|Date|
+|--|--|--|
+|ID3|Name3|Date3|
+
+The SPARQL Endpoint would answer this way for the External Data Manager:
+
+ - If the query contains attributes marked as identifiers of the entity (as ID or Name for project), it doesn't retrieve data from the Private Data Graph.
+ - If the query contains attributes marked as identifiers of the entity, it doesn't retrieve data from the Private Entities Graph.
+
+So, in the example, an External Data Manaher could ask for the aggregated budget by month but not for the budget of ID2 project nor any data from ID3.
+
+The permissions could be:
+||Public|Private Data|Private entities|
+|--|--|--|--|
+|Administrator|X|X|X|
+|External Data Manager|X|Aggregated|Aggregated |
+|Public user|X| | |
+
+
