@@ -28,7 +28,7 @@
 
 [Confidential attributes](#confidential-attributes)
 
-[Confidential Attributes and Entities](confidential-attributes_and-entities)
+[Confidential Attributes and Entities](#confidential-attributes-and-entities)
 
 INTRODUCTION
 ============
