@@ -1,13 +1,13 @@
 ![](..//Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 16/11/2020                                                   |
+| Fecha         | 26/11/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|LINKED DATA SERVER readme| 
 |Descripción|Manual del servicio LINKED DATA SERVER|
-|Versión|0.1|
+|Versión|0.2|
 |Módulo|API DISCOVER|
 |Tipo|Manual|
-|Cambios de la Versión|Creación|
+|Cambios de la Versión|Modificación de appsettings.json|
 
 ## Sobre LINKED DATA SERVER
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
@@ -47,7 +47,15 @@ http://155.54.239.204:8890/sparql
 		"NameTitle": "Title",
 		"ConstrainedByUrl": "",
 		"PropsTitle": "http://purl.org/roh#title|http://purl.org/roh/mirror/foaf#name",
-		"PropsTransform": "http://purl.org/roh/mirror/vivo#researcherId|http://www.researcherid.com/rid/{value};http://purl.org/roh#ORCID|https://orcid.org/{value};http://purl.org/roh/mirror/vivo#scopusId|https://www.scopus.com/authid/detail.uri?authorId={value};http://purl.org/roh#researcherDBLP|https://dblp.org/pid/{value}.html;http://purl.org/roh#roDBLP|https://dblp.org/rec/{value}.html;http://purl.org/roh/mirror/bibo#doi|https://doi.org/{value};http://purl.org/roh#roPubmed|https://pubmed.ncbi.nlm.nih.gov/{value}/;"
+		"PropsTransform": "http://purl.org/roh/mirror/vivo#researcherId|http://www.researcherid.com/rid/{value};http://purl.org/roh#ORCID|https://orcid.org/{value};http://purl.org/roh/mirror/vivo#scopusId|https://www.scopus.com/authid/detail.uri?authorId={value};http://purl.org/roh#researcherDBLP|https://dblp.org/pid/{value}.html;http://purl.org/roh#roDBLP|https://dblp.org/rec/{value}.html;http://purl.org/roh/mirror/bibo#doi|https://doi.org/{value};http://purl.org/roh#roPubmed|https://pubmed.ncbi.nlm.nih.gov/{value}/;",		
+		"Authority": "http://localhost:56306/connect/token",
+		"GrantType": "client_credentials",
+  		"Scope": "apiCarga",
+  		"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
+  		"ClientId": "LinkedDataServer",
+  		"ClientSecret": "secretLinkedDataServer"
+		
+		
 	}
 		 
  - LogLevel.Default: Nivel de error por defecto
@@ -61,6 +69,12 @@ http://155.54.239.204:8890/sparql
  - ConstrainedByUrl: Url en la que se encuentran las restricciones ConstrainedBy
  - PropsTitle: Propiedades de la ontología para utilizar como título de las entidades
  - PropsTransform: Propiedades a transformar en la presentación de las entidades
+ - Authority: Endpoint para la llamada de obtención del token
+ - GrantType: Tipo de concesión de Oauth
+ - Scope: Limitación de acceso al api de carga
+ - ConfigUrl: Url donde está lanzada la aplicación API Carga
+ - ClientId: Id de cliente
+ - ClientSecret: "clave" de acceso del cliente
   
 
 ## Dependencias
