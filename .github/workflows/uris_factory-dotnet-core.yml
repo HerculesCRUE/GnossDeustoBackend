@@ -29,7 +29,7 @@ jobs:
         # User defined upload name. Visible in Codecov UI
         # name: # optional
         # Repository upload token - get it from codecov.io. Required only for private repositories
-        token: 18a409349222432d9dbc63c1100a7f34
+        # token: 18a409349222432d9dbc63c1100a7f34
         # Path to coverage file to upload
         # file: UrisFactory
         # Comma-separated list of files to upload
