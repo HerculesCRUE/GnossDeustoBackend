@@ -121,6 +121,30 @@ namespace IdentityServerHecules
                 AllowedScopes = { "apiGestorDocumentacion"},
                 AccessTokenLifetime = 86400
                 //AccessTokenType = AccessTokenType.Reference
+            },
+            new Client
+            {
+                ClientId = "Discover",
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                ClientSecrets =
+                {
+                    new Secret("secretDiscover".Sha256())
+                },
+                AllowedScopes = {"apiCron", "apiCarga"},
+                AccessTokenLifetime = 86400
+                //AccessTokenType = AccessTokenType.Reference
+            },
+            new Client
+            {
+                ClientId = "LinkedDataServer",
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                ClientSecrets =
+                {
+                    new Secret("secretLinkedDataServer".Sha256())
+                },
+                AllowedScopes = {"apiCarga"},
+                AccessTokenLifetime = 86400
+                //AccessTokenType = AccessTokenType.Reference
             }
         };
         }
