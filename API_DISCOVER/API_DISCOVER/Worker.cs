@@ -61,15 +61,16 @@ namespace API_DISCOVER
             {
                
                 DiscoverItemBDService discoverItemBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>();
-                CallCronApiService callCronApiService=_serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallCronApiService>();
                 ProcessDiscoverStateJobBDService processDiscoverStateJobBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<ProcessDiscoverStateJobBDService>();
+                CallCronApiService callCronApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallCronApiService>();
+                CallEtlApiService callEtlApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallEtlApiService>();
 
                 DiscoverItem discoverItem = discoverItemBDService.GetDiscoverItemById(itemID);
 
                 if (discoverItem != null)
                 {
                     //Aplicamos el proceso de descubrimiento
-                    DiscoverResult resultado = Discover.Init(discoverItem);
+                    DiscoverResult resultado = Discover.Init(discoverItem, callEtlApiService);
                     Discover.Process(discoverItem, resultado,
                         discoverItemBDService,
                         callCronApiService,

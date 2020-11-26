@@ -2,6 +2,7 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Sirve encapsular los datos provenientes del ListIdentifiers
+using API_DISCOVER.Models.Entities.ExternalAPIs;
 using System.Collections.Generic;
 
 namespace API_DISCOVER.Models.Entities
@@ -29,6 +30,7 @@ namespace API_DISCOVER.Models.Entities
             PUBMED_WorkByID = new Dictionary<uint, PubmedArticleSet>();
             WOSWorks = new Dictionary<string, WOSWorks>();
             RECOLECTAWorks = new Dictionary<string, List<RecolectaDocument>>();
+            DOAJWorks = new Dictionary<string, DOAJWorks>();
             NormalizedNames = new Dictionary<string, string>();
         }
 
@@ -96,6 +98,11 @@ namespace API_DISCOVER.Models.Entities
         /// Caché para peticiones a RECOLECTA
         /// </summary>
         public Dictionary<string, List<RecolectaDocument>> RECOLECTAWorks { get; set; }
+
+        /// <summary>
+        /// Caché para peticiones a DOAJ
+        /// </summary>
+        public Dictionary<string, DOAJWorks> DOAJWorks { get; set; }
 
 
         public Dictionary<string, string> NormalizedNames { get; set; }

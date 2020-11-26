@@ -10,6 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Services\ConfigUrlCronService.cs" />
+    <Compile Remove="Models\Services\ICallEtlService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="dotNetRDF" Version="2.5.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />

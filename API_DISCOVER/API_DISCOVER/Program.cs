@@ -31,13 +31,11 @@ namespace API_DISCOVER
 
                     IDictionary environmentVariables = Environment.GetEnvironmentVariables();
 
-
-                    services.AddSingleton(typeof(ConfigUrlCronService));
-                    services.AddScoped(typeof(CallCronApiService));
-                    services.AddScoped(typeof(CallCronService));
+                    services.AddSingleton(typeof(ConfigUrlService));
+                    services.AddScoped(typeof(CallCronApiService));                   
+                    services.AddScoped(typeof(CallEtlApiService));
                     services.AddScoped(typeof(ConfigTokenService));
                     services.AddScoped(typeof(CallTokenService));
-                    services.AddScoped(typeof(CallEtlService));
 
                     services.AddScoped<DiscoverItemBDService, DiscoverItemBDService>();
                     services.AddScoped<ProcessDiscoverStateJobBDService, ProcessDiscoverStateJobBDService>();

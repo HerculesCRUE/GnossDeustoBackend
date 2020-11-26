@@ -3,11 +3,9 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Runtime.Serialization;
 
-namespace API_DISCOVER.Models.Entities
+namespace API_DISCOVER.Models.Entities.ExternalAPIs
 {
     /// <summary>
     /// Clase para interactuar con el API de CROSSREF

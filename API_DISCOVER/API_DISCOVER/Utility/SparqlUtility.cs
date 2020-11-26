@@ -63,18 +63,6 @@ namespace API_DISCOVER.Utility
         /// <returns>Lista de triples</returns>
         public static List<string> GetTriplesFromGraph(RohGraph pGraph)
         {
-            //System.IO.StringWriter sw = new System.IO.StringWriter();
-            //NTriplesWriter nTriplesWriter = new NTriplesWriter();
-            //nTriplesWriter.Save(pGraph, sw);
-            //List<string> triplesA = sw.ToString().Split("\n").ToList().Select(x => Regex.Replace(
-            //         x,
-            //         @"\\u(?<Value>[a-zA-Z0-9]{4})",
-            //         m =>
-            //         {
-            //             return ((char)int.Parse(m.Groups["Value"].Value, NumberStyles.HexNumber)).ToString();
-            //         })).ToList();
-
-
             List<string> triples = new List<string>();
             foreach (Triple triple in pGraph.Triples)
             {
@@ -92,7 +80,20 @@ namespace API_DISCOVER.Utility
 
                 if (triple.Object is LiteralNode)
                 {
-                    tripleString += " \"" + ((LiteralNode)triple.Object).Value.Replace("\"", "\\\"") + "\"^^<" + ((LiteralNode)triple.Object).DataType + ">";
+                    Uri datatype = ((LiteralNode)triple.Object).DataType;
+                    string lang = ((LiteralNode)triple.Object).Language;
+                    if (datatype != null)
+                    {
+                        tripleString += " \"" + ((LiteralNode)triple.Object).Value.Replace("\"", "\\\"").Replace("\n", "\\n") + "\"^^<" + datatype + ">";
+                    }
+                    else
+                    {
+                        tripleString += " \"" + ((LiteralNode)triple.Object).Value.Replace("\"", "\\\"").Replace("\n", "\\n") + "\"";
+                    }
+                    if (!string.IsNullOrEmpty(lang))
+                    {
+                        tripleString += "@" + lang;
+                    }
                 }
                 else if (triple.Object is BlankNode)
                 {

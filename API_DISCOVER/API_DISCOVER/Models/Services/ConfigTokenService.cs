@@ -22,13 +22,8 @@ namespace API_DISCOVER.Models.Services
         public string GrantType { get; set; }
         public string Scope { get; set; }
         public string ScopeCron { get; set; }
-        public string ScopeUrisFactory { get; set; }
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }
-        public string ScopeOAIPMH { get; set; }
-        public string ScopeDocumentacion { get; set; }
-        public string ClientIdOAIPMH { get; set; }
-        public string ClientSecretOAIPMH { get; set; }
         public ConfigTokenService()
         {
             var builder = new ConfigurationBuilder()
@@ -60,99 +55,7 @@ namespace API_DISCOVER.Models.Services
             }
             return Authority;
         }
-        /// <summary>
-        /// Obtiene el client secret configurado
-        /// </summary>
-        /// <returns>client secretreturns>
-        internal object GetClientSecretOAIPMH()
-        {
-            if (string.IsNullOrEmpty(ClientSecretOAIPMH))
-            {
-                string clientSecretOAIPMH = "";
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("ClientSecretOAIPMH"))
-                {
-                    clientSecretOAIPMH = environmentVariables["ClientSecretOAIPMH"] as string;
-                }
-                else
-                {
-                    clientSecretOAIPMH = Configuration["ClientSecretOAIPMH"];
-                }
 
-                ClientSecretOAIPMH = clientSecretOAIPMH;
-            }
-            return ClientSecretOAIPMH;
-        }
-        /// <summary>
-        /// Obtiene el Scope del api de documentacion configurado
-        /// </summary>
-        /// <returns>Scope del OAIPMH</returns>
-        internal object GetScopeDocumentacion()
-        {
-            if (string.IsNullOrEmpty(ScopeDocumentacion))
-            {
-                string ScopeDocumentacion = "";
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("ScopeDocumentacion"))
-                {
-                    ScopeDocumentacion = environmentVariables["ScopeDocumentacion"] as string;
-                }
-                else
-                {
-                    ScopeDocumentacion = Configuration["ScopeDocumentacion"];
-                }
-
-                ScopeDocumentacion = ScopeDocumentacion;
-            }
-            return ScopeDocumentacion;
-        }
-
-        /// <summary>
-        /// Obtiene el Scope del OAIPMH configurado
-        /// </summary>
-        /// <returns>Scope del OAIPMH</returns>
-        internal string GetScopeOAIPMH()
-        {
-            if (string.IsNullOrEmpty(ScopeOAIPMH))
-            {
-                string scopeOAIPMH = "";
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("ScopeOAIPMH"))
-                {
-                    scopeOAIPMH = environmentVariables["ScopeOAIPMH"] as string;
-                }
-                else
-                {
-                    scopeOAIPMH = Configuration["ScopeOAIPMH"];
-                }
-
-                ScopeOAIPMH = scopeOAIPMH;
-            }
-            return ScopeOAIPMH;
-        }
-        /// <summary>
-        /// Obtien el cliente id del OAIPMH configurado
-        /// </summary>
-        /// <returns>cliente id del OAIPMH</returns>
-        public string GetClientIdOAIPMH()
-        {
-            if (string.IsNullOrEmpty(ClientIdOAIPMH))
-            {
-                string ScopeOAIPMH = "";
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("ClientIdOAIPMH"))
-                {
-                    ScopeOAIPMH = environmentVariables["ClientIdOAIPMH"] as string;
-                }
-                else
-                {
-                    ScopeOAIPMH = Configuration["ClientIdOAIPMH"];
-                }
-
-                ClientIdOAIPMH = ScopeOAIPMH;
-            }
-            return ClientIdOAIPMH;
-        }
         /// <summary>
         /// Obtiene el grant type configurado
         /// </summary>
@@ -222,29 +125,7 @@ namespace API_DISCOVER.Models.Services
             }
             return ScopeCron;
         }
-        /// <summary>
-        /// Obtiene el scope del urisFactory configurado
-        /// </summary>
-        /// <returns>scope de urisFactory</returns>
-        public string GetScopeUrisFactory()
-        {
-            if (string.IsNullOrEmpty(ScopeUrisFactory))
-            {
-                string scope = "";
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("ScopeUrisFactory"))
-                {
-                    scope = environmentVariables["ScopeUrisFactory"] as string;
-                }
-                else
-                {
-                    scope = Configuration["ScopeUrisFactory"];
-                }
 
-                ScopeUrisFactory = scope;
-            }
-            return ScopeUrisFactory;
-        }
         /// <summary>
         /// Obtiene el cliente id configurado
         /// </summary>
@@ -290,6 +171,6 @@ namespace API_DISCOVER.Models.Services
                 ClientSecret = clientSecret;
             }
             return ClientSecret;
-        } 
+        }
     }
 }

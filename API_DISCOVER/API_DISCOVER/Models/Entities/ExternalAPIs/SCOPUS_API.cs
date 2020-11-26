@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace API_DISCOVER.Models.Entities
+namespace API_DISCOVER.Models.Entities.ExternalAPIs
 {
     /// <summary>
     /// Clase para interactuar con el API de scopus

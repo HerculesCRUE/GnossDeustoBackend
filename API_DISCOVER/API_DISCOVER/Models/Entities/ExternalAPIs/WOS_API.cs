@@ -2,7 +2,6 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -10,7 +9,7 @@ using System.Threading;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace API_DISCOVER.Models.Entities
+namespace API_DISCOVER.Models.Entities.ExternalAPIs
 {
     /// <summary>
     /// Clase para interactuar con el API de WOS

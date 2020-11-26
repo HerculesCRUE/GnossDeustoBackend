@@ -15,19 +15,15 @@ namespace API_DISCOVER.Models.Services
     public class ConfigUrlService
     {
         public IConfigurationRoot Configuration { get; set; }
-        public string Url { get; set; }
-        public string UrlUris { get; set; }
-        public string UrlDocumentacion { get; set; }
-        public string Proxy { get; set; }
-        public string SaprqlEndpoint { get; set; }
-        public string SparqlQuery { get; set; }
+        public string UrlCarga { get; set; }
+        public string UrlCron { get; set; }
         /// <summary>
         /// Obtiene la url del api de carga que ha sido configurada
         /// </summary>
         /// <returns>uri del api carga</returns>
-        public string GetUrl()
+        public string GetUrlCarga()
         {
-            if (string.IsNullOrEmpty(Url))
+            if (string.IsNullOrEmpty(UrlCarga))
             {
                 var builder = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
@@ -44,78 +40,19 @@ namespace API_DISCOVER.Models.Services
                 {
                     connectionString = Configuration["ConfigUrl"];
                 }
-                
-                Url = connectionString;
+
+                UrlCarga = connectionString;
             }
-            return Url;
-        }
-        /// <summary>
-        /// Obtiene la url del api de uris factory que ha sido configurada
-        /// </summary>
-        /// <returns>uri del api uris factory</returns>
-        public string GetUrlUrisFactory()
-        {
-            if (string.IsNullOrEmpty(UrlUris))
-            {
-
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
-                string connectionString = "";
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("ConfigUrlUrisFactory"))
-                {
-                    connectionString = environmentVariables["ConfigUrlUrisFactory"] as string;
-                }
-                else
-                {
-                    connectionString = Configuration["ConfigUrlUrisFactory"];
-                }
-
-                UrlUris = connectionString;
-            }
-            return UrlUris;
+            return UrlCarga;
         }
 
         /// <summary>
-        /// Obtiene la url del api de documentación que ha sido configurada
+        /// Obtiene la url del api de carga que ha sido configurada
         /// </summary>
-        /// <returns>uri del api uris factory</returns>
-        public string GetUrlDocumentacion()
+        /// <returns>uri del api cron</returns>
+        public string GetUrlCron()
         {
-            if (string.IsNullOrEmpty(UrlDocumentacion))
-            {
-
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
-                string connectionString = "";
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("ConfigUrlDocumentacion"))
-                {
-                    connectionString = environmentVariables["ConfigUrlDocumentacion"] as string;
-                }
-                else
-                {
-                    connectionString = Configuration["ConfigUrlDocumentacion"];
-                }
-
-                UrlDocumentacion = connectionString;
-            }
-            return UrlDocumentacion;
-        }
-
-        /// <summary>
-        /// Obtiene el parametro query para Sparql
-        /// </summary>
-        /// <returns>uri del api carga</returns>
-        public string GetSparqlQuery()
-        {
-            if (string.IsNullOrEmpty(SparqlQuery))
+            if (string.IsNullOrEmpty(UrlCron))
             {
                 var builder = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
@@ -124,75 +61,18 @@ namespace API_DISCOVER.Models.Services
                 Configuration = builder.Build();
                 string connectionString = "";
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("SparqlQuery"))
+                if (environmentVariables.Contains("ConfigUrlCron"))
                 {
-                    connectionString = environmentVariables["SparqlQuery"] as string;
+                    connectionString = environmentVariables["ConfigUrlCron"] as string;
                 }
                 else
                 {
-                    connectionString = Configuration["Sparql:QueryParam"];
+                    connectionString = Configuration["ConfigUrlCron"];
                 }
 
-                Proxy = connectionString;
+                UrlCron = connectionString;
             }
-            return Proxy;
-        }
-
-        /// <summary>
-        /// Obtiene la dirección de sparql
-        /// </summary>
-        public string GetSaprqlEndpoint()
-        {
-            if (string.IsNullOrEmpty(SaprqlEndpoint))
-            {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
-                string connectionString = "";
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("SaprqlEndpoint"))
-                {
-                    connectionString = environmentVariables["SaprqlEndpoint"] as string;
-                }
-                else
-                {
-                    connectionString = Configuration["Sparql:Endpoint"];
-                }
-
-                SaprqlEndpoint = connectionString;
-            }
-            return SaprqlEndpoint;
-        }
-
-        /// <summary>
-        /// Obtiene la dirección del directoio virtual configurado para el proxy
-        /// </summary>
-        /// <returns>uri del api carga</returns>
-        public string GetProxy()
-        {
-            if (string.IsNullOrEmpty(Proxy))
-            {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
-                string connectionString = "";
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("Proxy"))
-                {
-                    connectionString = environmentVariables["Proxy"] as string;
-                }
-                else
-                {
-                    connectionString = Configuration["Proxy"];
-                }
-
-                Proxy = connectionString;
-            }
-            return Proxy;
+            return UrlCron;
         }
     }
 }
