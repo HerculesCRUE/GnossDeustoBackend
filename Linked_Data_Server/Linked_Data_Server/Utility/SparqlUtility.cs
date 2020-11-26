@@ -29,7 +29,7 @@ namespace Linked_Data_Server.Utility
 
 
             NameValueCollection parametros = new NameValueCollection();
-            if (string.IsNullOrEmpty(pGraph))
+            if (!string.IsNullOrEmpty(pGraph))
             {
                 parametros.Add("default-graph-uri", pGraph);
             }
