@@ -20,14 +20,14 @@ jobs:
     - name: Build
       run: dotnet build UrisFactory
     - name: Test
-      run: dotnet test UrisFactory
+      run: dotnet test --collect:"XPlat Code Coverage" UrisFactory
     - name: Coverlet coverage test
       # You may pin to the exact commit or the version.
       # uses: b3b00/coverlet-action@bd970298c994a249972008eadee234b9c2a8c462
       uses: b3b00/coverlet-action@1.0.91
       with:
         # output filename
-        output: cobertura.xml
+        output: coverage.cobertura.xml
         # output format : lcov, json, opencover, corbertura, temacity (see coverlet documentation)
         outputFormat: cobertura
         # assemblies, namespances exclusions (see coverlet documentation)
