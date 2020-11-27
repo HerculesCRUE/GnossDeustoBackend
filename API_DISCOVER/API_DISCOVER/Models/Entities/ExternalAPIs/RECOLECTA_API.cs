@@ -41,13 +41,16 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
                             foreach (var node in authorNode.ChildNodes)
                             {
                                 string[] authorData = node.InnerText.Split("|||");
-                                if (authorData.Length > 1)
+                                if (!doc.authorList.ContainsKey(authorData[0]))
                                 {
-                                    doc.authorList.Add(authorData[0], authorData[1]);
-                                }
-                                else
-                                {
-                                    doc.authorList.Add(node.InnerText, "");
+                                    if (authorData.Length > 1)
+                                    {
+                                        doc.authorList.Add(authorData[0], authorData[1]);
+                                    }
+                                    else
+                                    {
+                                        doc.authorList.Add(node.InnerText, "");
+                                    }
                                 }
                             }
                         }

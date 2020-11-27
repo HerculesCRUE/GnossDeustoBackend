@@ -3687,7 +3687,7 @@ namespace API_DISCOVER.Utility
                                     authors.Add(name.display_name);
                                 }
                             }
-                            if (record.static_data.contributors.contributor != null)
+                            if (record.static_data.contributors!=null && record.static_data.contributors.contributor != null)
                             {
                                 foreach (recordsRECStatic_dataContributorsContributor contributor in record.static_data.contributors.contributor)
                                 {
