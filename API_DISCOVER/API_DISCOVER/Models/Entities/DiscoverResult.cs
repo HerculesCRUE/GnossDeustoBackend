@@ -90,16 +90,6 @@ namespace API_DISCOVER.Models.Entities
         /// </summary>
         public Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> externalIntegration { get; }
         
-
-        /// <summary>
-        /// Obtiene la lista de triples del dataGraph
-        /// </summary>
-        /// <returns></returns>
-        public List<string> GetDataGraphTriples()
-        {
-            return SparqlUtility.GetTriplesFromGraph(dataGraph);
-        }
-
         /// <summary>
         /// Obtiene el RDF del dataGraph
         /// </summary>
