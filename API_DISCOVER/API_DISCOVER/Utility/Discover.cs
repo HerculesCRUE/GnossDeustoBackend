@@ -234,7 +234,7 @@ namespace API_DISCOVER.Utility
                 else
                 {
                     AsioPublication asioPublication = new AsioPublication(mSPARQLEndpoint, mQueryParam, mGraph);
-                    asioPublication.PublishRDF(pDiscoverResult.dataGraph,pDiscoverResult.dataInferenceGraph,pDiscoverResult.ontologyGraph, pDiscoverResult.externalIntegration);
+                    asioPublication.PublishRDF(pDiscoverResult.dataGraph, pDiscoverResult.dataInferenceGraph, pDiscoverResult.ontologyGraph, pDiscoverResult.externalIntegration);
                     //Lo marcamos como procesado en la BBDD y eliminamos sus metadatos
                     pDiscoverItem.UpdateProcessed();
                     pDiscoverItemBDService.ModifyDiscoverItem(pDiscoverItem);
@@ -1234,9 +1234,9 @@ namespace API_DISCOVER.Utility
         }
 
 
-        
 
-        
+
+
 
         #endregion
 
@@ -2315,15 +2315,17 @@ namespace API_DISCOVER.Utility
 
             HashSet<RohGraph> externalGraphs = new HashSet<RohGraph>();
             List<Thread> hilosIntegracionesExternas = new List<Thread>();
-            hilosIntegracionesExternas.Add(new Thread(() => { externalGraphs.Add(ExternalIntegrationORCID(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); }));
-            hilosIntegracionesExternas.Add(new Thread(() => { externalGraphs.Add(ExternalIntegrationSCOPUS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); }));
-            hilosIntegracionesExternas.Add(new Thread(() => { externalGraphs.Add(ExternalIntegrationDBLP(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); }));
+
+            Exception exception = null;
+            hilosIntegracionesExternas.Add(new Thread(() => { try { externalGraphs.Add(ExternalIntegrationORCID(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); } catch (Exception ex) { exception = ex; } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { externalGraphs.Add(ExternalIntegrationSCOPUS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); } catch (Exception ex) { exception = ex; } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { externalGraphs.Add(ExternalIntegrationDBLP(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); } catch (Exception ex) { exception = ex; } }));
             //De momento lo omitimos, es muy lento y da timeout casi siempre
-            //hilosIntegracionesExternas.Add(new Thread(() => { externalGraphs.Add(ExternalIntegrationCROSSREF(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); }));
-            hilosIntegracionesExternas.Add(new Thread(() => { externalGraphs.Add(ExternalIntegrationPUBMED(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); }));
-            hilosIntegracionesExternas.Add(new Thread(() => { externalGraphs.Add(ExternalIntegrationWOS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); }));
-            hilosIntegracionesExternas.Add(new Thread(() => { externalGraphs.Add(ExternalIntegrationRECOLECTA(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); }));
-            hilosIntegracionesExternas.Add(new Thread(() => { externalGraphs.Add(ExternalIntegrationDOAJ(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); }));
+            //hilosIntegracionesExternas.Add(new Thread(() => {try{   externalGraphs.Add(ExternalIntegrationCROSSREF(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); } catch (Exception ex) { exception = ex; }}));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { externalGraphs.Add(ExternalIntegrationPUBMED(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); } catch (Exception ex) { exception = ex; } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { externalGraphs.Add(ExternalIntegrationWOS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); } catch (Exception ex) { exception = ex; } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { externalGraphs.Add(ExternalIntegrationRECOLECTA(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); } catch (Exception ex) { exception = ex; } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { externalGraphs.Add(ExternalIntegrationDOAJ(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone)); } catch (Exception ex) { exception = ex; } }));
             foreach (Thread thread in hilosIntegracionesExternas)
             {
                 thread.Start();
@@ -2331,6 +2333,10 @@ namespace API_DISCOVER.Utility
             foreach (Thread thread in hilosIntegracionesExternas)
             {
                 thread.Join();
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             foreach (RohGraph graph in externalGraphs)
@@ -4763,6 +4769,5 @@ namespace API_DISCOVER.Utility
         }
 
         #endregion
-
     }
 }
