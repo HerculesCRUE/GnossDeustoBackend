@@ -24,12 +24,12 @@ jobs:
     - name: Codecov
       # You may pin to the exact commit or the version.
       # uses: codecov/codecov-action@239febf655bba88b16ff5dea1d3135ea8663a1f9
-      uses: codecov/codecov-action@e5277ec5-491c-435b-ad01-1883e35fb366
+      uses: codecov/codecov-action@v1.0.15
       with:
         # User defined upload name. Visible in Codecov UI
         # name: # optional
         # Repository upload token - get it from codecov.io. Required only for private repositories
-        # token: 18a409349222432d9dbc63c1100a7f34
+        token: e5277ec5-491c-435b-ad01-1883e35fb366
         # Path to coverage file to upload
         # file: UrisFactory
         # Comma-separated list of files to upload
