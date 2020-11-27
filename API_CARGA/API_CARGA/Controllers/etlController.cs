@@ -446,6 +446,7 @@ namespace API_CARGA.Controllers
         /// </summary>
         /// <returns>Ontologia</returns>
         [HttpGet("GetOntology")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult GetOntology()
@@ -458,6 +459,7 @@ namespace API_CARGA.Controllers
         /// </summary>
         /// <returns>Hash</returns>
         [HttpGet("GetOntologyHash")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public string GetOntologyHash()
