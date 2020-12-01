@@ -10,8 +10,13 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// <summary>
     /// Clase para interactuar con el API de Recolecta
     /// </summary>
-    public static class RECOLECTA_API
-    {
+    public class RECOLECTA_API : I_ExternalAPI
+    {//TODO cambiar
+        public string Name { get { return "RECOLECTA"; } }
+
+        public string HomePage { get { return "https://recolecta.org/"; } }
+
+        public string Id { get { return "RECOLECTA"; } }
 
         /// <summary>
         /// Busca trabajos en el API de Recolecta

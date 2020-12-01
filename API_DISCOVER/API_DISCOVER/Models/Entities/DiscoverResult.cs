@@ -2,6 +2,7 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 using API_DISCOVER.Utility;
+using System;
 using System.Collections.Generic;
 using VDS.RDF;
 using VDS.RDF.Writing;
@@ -24,9 +25,10 @@ namespace API_DISCOVER.Models.Entities
         /// <param name="pDiscoveredEntitiesWithDataBase">Entidades descubiertas con la BBDD</param>
         /// <param name="pDiscoveredEntitiesWithExternalIntegration">Entidades descubiertas con al integración externa</param>
         /// <param name="pDiscoveredEntitiesProbability">Probabilidades de descubriiento</param>
-        /// <param name="pSecondsProcessed">Tiempo (en segundos) en procesar el descubrimiento</param>
+        /// <param name="pDateStart">Fecha inicio descubirmiento</param>
+        /// <param name="pDateEnd">Fecha fin descubirmiento</param>
         /// <param name="pExternalIntegration">Datos obtendidos con las integraciones con fuentes externas junto con su provenecia</param>
-        public DiscoverResult(RohGraph pDataGraph,RohGraph pDataInferenceGraph, RohGraph pOntologyGraph, HashSet<string> pDiscoveredEntitiesWithSubject, Dictionary<string, string> pDiscoveredEntitiesWithId, Dictionary<string, KeyValuePair<string, float>> pDiscoveredEntitiesWithDataBase, Dictionary<string, KeyValuePair<string, float>> pDiscoveredEntitiesWithExternalIntegration, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability,double pSecondsProcessed, Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> pExternalIntegration)
+        public DiscoverResult(RohGraph pDataGraph,RohGraph pDataInferenceGraph, RohGraph pOntologyGraph, HashSet<string> pDiscoveredEntitiesWithSubject, Dictionary<string, string> pDiscoveredEntitiesWithId, Dictionary<string, KeyValuePair<string, float>> pDiscoveredEntitiesWithDataBase, Dictionary<string, KeyValuePair<string, float>> pDiscoveredEntitiesWithExternalIntegration, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability,DateTime pDateStart,DateTime pDateEnd, Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> pExternalIntegration)
         {
             dataGraph = pDataGraph;
             dataInferenceGraph = pDataInferenceGraph;
@@ -36,7 +38,9 @@ namespace API_DISCOVER.Models.Entities
             discoveredEntitiesWithDataBase = pDiscoveredEntitiesWithDataBase;
             discoveredEntitiesWithExternalIntegration = pDiscoveredEntitiesWithExternalIntegration;
             discoveredEntitiesProbability = pDiscoveredEntitiesProbability;
-            secondsProcessed = pSecondsProcessed;
+            secondsProcessed = (pDateEnd-pDateStart).TotalSeconds;
+            start = pDateStart;
+            end = pDateEnd;
             externalIntegration = pExternalIntegration;
         }
 
@@ -79,6 +83,18 @@ namespace API_DISCOVER.Models.Entities
         /// Probabilidades de descubriiento
         /// </summary>
         public Dictionary<string, Dictionary<string, float>> discoveredEntitiesProbability { get; }
+
+        /// <summary>
+        /// Inicio del descubrimiento
+        /// </summary>
+        public DateTime start { get; }
+
+
+        /// <summary>
+        /// Fin del descubrimiento
+        /// </summary>
+        public DateTime end { get; }
+
 
         /// <summary>
         /// Tiempo (en segundos) en procesar el descubrimiento

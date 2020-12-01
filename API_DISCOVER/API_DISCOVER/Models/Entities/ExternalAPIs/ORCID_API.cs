@@ -11,8 +11,14 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// <summary>
     /// Clase para interactuar con el API de ORCID
     /// </summary>
-    public static class ORCID_API
-    {
+    public class ORCID_API : I_ExternalAPI
+    {//TODO cambiar
+        public string Name { get { return "ORCID"; } }
+
+        public string HomePage { get { return "https://orcid.org/"; } }
+
+        public string Id { get { return "ORCID"; } }
+
         /// <summary>
         /// Busca personas en el API de ORCID
         /// </summary>

@@ -14,12 +14,18 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// <summary>
     /// Clase para interactuar con el API de WOS
     /// </summary>
-    public static class WOS_API
+    public class WOS_API : I_ExternalAPI
     {
         /// <summary>
         /// Cookie para las peticiones
         /// </summary>
         private static string _cookie { get; set; }
+        //TODO cambiar
+        public string Name { get { return "WOS"; } }
+
+        public string HomePage { get { return "https://wos.org/"; } }
+
+        public string Id { get { return "WOS"; } }
 
         /// <summary>
         /// Genera la cooie para las peticiones al API de WOS
@@ -136,8 +142,11 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
                     {
                         throw ex;
                     }
+                    Thread.Sleep(1000);
                     ActualizarCookie(authorization);
-                }finally
+                    Thread.Sleep(1000);
+                }
+                finally
                 {
                     Thread.Sleep(500);
                 }

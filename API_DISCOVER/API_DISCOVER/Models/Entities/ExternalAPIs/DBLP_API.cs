@@ -11,7 +11,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// <summary>
     /// Clase para interactuar con el API de DBLP
     /// </summary>
-    public static class DBLP_API
+    public class DBLP_API : I_ExternalAPI
     {
         private static List<string> properties = new List<string>() {
             "r|article|title",
@@ -19,6 +19,12 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             "r|proceedings|title",
             "r|incollection|title",
             "r|collection|title"};
+        //TODO cambiar
+        public string Name { get { return "DBLP Computer Science Bibliography"; } }
+
+        public string HomePage { get { return "https://dblp.org/"; } }
+
+        public string Id { get { return "DBLP"; } }
 
         /// <summary>
         /// Busca personas en el API de DBLP

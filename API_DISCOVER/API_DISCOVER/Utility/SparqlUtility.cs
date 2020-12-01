@@ -126,7 +126,7 @@ namespace API_DISCOVER.Utility
             foreach (string triple in pTriples)
             {                
                 string[] tripleSplit = triple.Split();
-                if (tripleSplit.Count() >= 4 && (tripleSplit[0].StartsWith("_:") || tripleSplit[2].StartsWith("_:")))
+                if (tripleSplit.Count() >= 3 && (tripleSplit[0].StartsWith("_:") || tripleSplit[2].StartsWith("_:")))
                 {
                     listBlankNodeTriples.Add(triple);
                 }

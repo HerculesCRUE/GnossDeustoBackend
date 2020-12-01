@@ -10,8 +10,14 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// <summary>
     /// Clase para interactuar con el API de CROSSREF
     /// </summary>
-    public static class CROSSREF_API
-    {
+    public class CROSSREF_API:I_ExternalAPI
+    {//TODO cambiar
+        public string Name { get { return "CROSSREF"; } }
+
+        public string HomePage { get { return "http://www.crossref.org"; } }
+
+        public string Id { get { return "CROSSREF"; } }
+
         /// <summary>
         /// Busca documentos en función de sus autores en el API de CROSSREF
         /// </summary>

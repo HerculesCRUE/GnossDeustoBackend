@@ -10,8 +10,15 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// <summary>
     /// Clase para interactuar con el API de scopus
     /// </summary>
-    public static class SCOPUS_API
+    public class SCOPUS_API : I_ExternalAPI
     {
+        //TODO cambiar
+        public string Name { get { return "SCOPUS"; } }
+
+        public string HomePage { get { return "https://scopus.org/"; } }
+
+        public string Id { get { return "SCOPUS"; } }
+
         /// <summary>
         /// Obtiene los datos de una persona en el API de SCOPUS
         /// </summary>
