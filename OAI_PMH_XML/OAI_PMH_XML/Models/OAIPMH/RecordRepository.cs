@@ -207,9 +207,11 @@ namespace OaiPmhNet.Models.OAIPMH
         /// <returns></returns>
         private XML GetXML(string pRoute)
         {
-            string[] routeSplit = pRoute.Split(new string[] { Path.DirectorySeparatorChar.ToString(), "." }, StringSplitOptions.RemoveEmptyEntries);
-            string set = routeSplit[routeSplit.Length - 3];
-            string id = set + "_" + routeSplit[routeSplit.Length - 2];
+            string[] routeSplit = pRoute.Split(new string[] { Path.DirectorySeparatorChar.ToString() }, StringSplitOptions.RemoveEmptyEntries);
+
+            string set = routeSplit[routeSplit.Length - 2];
+            string id = set + "_" + routeSplit[routeSplit.Length - 1];
+            id = id.Substring(0,id.LastIndexOf("."));
             string xml = XElement.Load(pRoute).ToString();
             return new XML(xml, id, set);
         }
