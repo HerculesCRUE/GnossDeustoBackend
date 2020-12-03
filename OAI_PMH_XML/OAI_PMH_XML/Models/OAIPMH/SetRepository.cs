@@ -26,8 +26,8 @@ namespace OaiPmhNet.Models.OAIPMH
             _sets = new List<Set>();
 
             foreach (string dir in Directory.GetDirectories("XML"))
-            {
-                string setName = dir.Substring(dir.LastIndexOf("\\") + 1);
+            {   
+                string setName = dir.Split(Path.DirectorySeparatorChar)[1];
                 Set set = new Set();
                 set.Spec = setName;
                 set.Name = setName;
