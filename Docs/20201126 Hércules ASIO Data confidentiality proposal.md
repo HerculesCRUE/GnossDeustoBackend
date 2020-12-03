@@ -4,10 +4,10 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Hércules ASIO. Data confidentiality proposal| 
 |Descripción|Proposal for the management of data confidentiality|
-|Versión|1.1|
+|Versión|1.2|
 |Módulo|Data Load and SPARQL Enpoint|
 |Tipo|Specification|
-|Cambios de la Versión|Added a section to define the management of private attributes and entities|
+|Cambios de la Versión|Changed in the permissions for public user|
 
 
 # Hércules Backend ASIO. Data confidentiality proposal
@@ -265,4 +265,4 @@ The permissions could be:
 |--|--|--|--|
 |Administrator|X|X|X|
 |External Data Manager|X|Aggregated|Aggregated |
-|Public user|X| | |
+|Public user|X|Aggregated|Aggregated|
