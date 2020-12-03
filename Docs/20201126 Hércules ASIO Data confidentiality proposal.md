@@ -1,6 +1,6 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
-| Fecha         | 01/10/2020                                                   |
+| Fecha         | 03/12/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Hércules ASIO. Data confidentiality proposal| 
 |Descripción|Proposal for the management of data confidentiality|
