@@ -1,13 +1,13 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
-| Fecha         | 25/11/2020                                                   |
+| Fecha         | 03/12/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Hércules ASIO. Procedencia de datos - Provenance| 
 |Descripción|Gestión de la procedencia de los datos incorporados a ASIO desde fuentes externas|
-|Versión|0.1|
+|Versión|1.0|
 |Módulo|API DISCOVER|
 |Tipo|Especificación|
-|Cambios de la Versión|Creación|
+|Cambios de la Versión|Cambios en el modelo de datos para añadir el detalle de la actividad de procedencia que originó el dato|
 
 # Hércules Backend ASIO. Procedencia de datos - Provenance
 
@@ -70,4 +70,25 @@ Y contendría los siguientes datos:
     	foaf:name "DBLP Computer Science Bibliography";
     	foaf:homePage "https://dblp.org/";
     .
+
+En el grafo de ASIO se cargaría los siguientes triples:
+
+    roh:res/researcher/id1 roh:ORCID "00000".
+    
+    roh:res/agent/idAgente1
+	    a prov:SoftwareAgent;
+	    foaf:name "Algoritmo de carga Hércules ASIO";
+    .
+
+Finalmente, los siguientes triples en el grafo de DBLP :
+
+    roh:res/researcher/id1 prov:wasUsedBy _:bnode1.  
+    _:bnode1
+        a prov:Activity;
+        rdf:predicate	roh:ORCID;
+        rdf:object "00000";
+        prov:startedAtTime "2020-04-25T01:30:00Z"^^xsd:dateTime;
+        prov:endedAtTime "2012-04-25T03:40:00Z"^^xsd:dateTime;
+        prov:wasAssociatedWith roh:res/agent/idAgente1;        
+	    prov:wasAssociatedWith roh:res/organization/dblp;
 
