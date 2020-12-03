@@ -35,8 +35,8 @@ namespace OaiPmhNet.Models.OAIPMH
         /// <returns></returns>
         public Record GetRecord(string identifier, string metadataPrefix)
         {
-            string xmlRoute = "XML\\" + identifier.Substring(0, identifier.IndexOf("_"))
-                + "\\" + identifier.Substring(identifier.IndexOf("_") + 1) + ".xml";
+            string xmlRoute = "XML"+ Path.DirectorySeparatorChar + identifier.Substring(0, identifier.IndexOf("_"))
+                + Path.DirectorySeparatorChar + identifier.Substring(identifier.IndexOf("_") + 1) + ".xml";
             if (File.Exists(xmlRoute))
             {
                 Record rec = ToRecord(GetXML(xmlRoute), metadataPrefix);
