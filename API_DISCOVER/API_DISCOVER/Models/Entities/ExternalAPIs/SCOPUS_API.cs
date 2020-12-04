@@ -13,11 +13,11 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     public class SCOPUS_API : I_ExternalAPI
     {
         //TODO cambiar
-        public string Name { get { return "SCOPUS"; } }
+        public string Name { get { return "Scopus"; } }
 
-        public string HomePage { get { return "https://scopus.org/"; } }
+        public string HomePage { get { return "https://www.scopus.com/"; } }
 
-        public string Id { get { return "SCOPUS"; } }
+        public string Id { get { return "scopus"; } }
 
         /// <summary>
         /// Obtiene los datos de una persona en el API de SCOPUS

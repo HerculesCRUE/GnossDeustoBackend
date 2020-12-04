@@ -21,11 +21,11 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
         /// </summary>
         private static string _cookie { get; set; }
         //TODO cambiar
-        public string Name { get { return "WOS"; } }
+        public string Name { get { return "Web of Science"; } }
 
-        public string HomePage { get { return "https://wos.org/"; } }
+        public string HomePage { get { return "http://wos.fecyt.es/"; } }
 
-        public string Id { get { return "WOS"; } }
+        public string Id { get { return "wos"; } }
 
         /// <summary>
         /// Genera la cooie para las peticiones al API de WOS

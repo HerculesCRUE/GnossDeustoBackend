@@ -17,7 +17,7 @@ using API_DISCOVER.Models.Entities;
 
 namespace API_DISCOVER.Utility
 {
-    public static class SparqlUtility
+    public class SparqlUtility:I_SparqlUtility
     {
         public static XmlDocument GetRDFFromFile(IFormFile pRDFFile)
         {
@@ -279,7 +279,7 @@ namespace API_DISCOVER.Utility
             }
         }
 
-        public static SparqlObject SelectData(string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam)
+        public SparqlObject SelectData(string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam)
         {
             SparqlObject datosDBpedia = null;
             string urlConsulta = pSPARQLEndpoint;

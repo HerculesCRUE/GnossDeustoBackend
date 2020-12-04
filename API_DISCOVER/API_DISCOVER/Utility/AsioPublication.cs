@@ -19,17 +19,21 @@ namespace API_DISCOVER.Utility
         private string _QueryParam { get; set; }
         private string _Graph { get; set; }
 
+        private I_SparqlUtility _SparqlUtility { get; set; }
+
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <param name="pSparqlUtility">SPARQL Utility</param>
         /// <param name="pSPARQLEndpoint">SPARQL endpoint</param>
         /// <param name="pQueryParam">Parámetros para las queries</param>
         /// <param name="pGraph">Grafo de carga</param>
-        public AsioPublication(string pSPARQLEndpoint, string pQueryParam, string pGraph)
+        public AsioPublication(I_SparqlUtility pSparqlUtility,string pSPARQLEndpoint, string pQueryParam, string pGraph)
         {
             _SPARQLEndpoint = pSPARQLEndpoint;
             _QueryParam = pQueryParam;
             _Graph = pGraph;
+            _SparqlUtility = pSparqlUtility;
         }
 
         /// <summary>
@@ -122,7 +126,7 @@ namespace API_DISCOVER.Utility
                                                         {{
                                                             {{{string.Join("}UNION{", graphDeletes[graph])}}}
                                                         }}";
-                    SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteProvenance, _QueryParam);
+                    _SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteProvenance, _QueryParam);
                 }
 
                 //Cargamos los nuevos triples
@@ -265,7 +269,7 @@ namespace API_DISCOVER.Utility
                                                                 {{
                                                                     {{{string.Join("}UNION{", deletes)}}}
                                                                 }}";
-                SparqlUtility.SelectData(_SPARQLEndpoint, _Graph, queryDeleteMainEntities, _QueryParam);
+                _SparqlUtility.SelectData(_SPARQLEndpoint, _Graph, queryDeleteMainEntities, _QueryParam);
             }
         }
 
@@ -278,7 +282,7 @@ namespace API_DISCOVER.Utility
         {
             //Obtenemos todos los blanknodes a los que apunta la entidad para luego borrarlos
             HashSet<string> bnodeChildrens = new HashSet<string>();
-            SparqlObject sparqlObject = SparqlUtility.SelectData(_SPARQLEndpoint, _Graph, $"select distinct ?bnode where{{<{pEntity}> ?p ?bnode. FILTER(isblank(?bnode))}}", _QueryParam);
+            SparqlObject sparqlObject = _SparqlUtility.SelectData(_SPARQLEndpoint, _Graph, $"select distinct ?bnode where{{<{pEntity}> ?p ?bnode. FILTER(isblank(?bnode))}}", _QueryParam);
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
             {
                 bnodeChildrens.Add(row["bnode"].value);
@@ -286,7 +290,7 @@ namespace API_DISCOVER.Utility
 
             //Obtenemos todos los grafos en los que está la entidad para eliminar sus triples
             HashSet<string> listGraphs = new HashSet<string>();
-            SparqlObject sparqlObjectGraphs = SparqlUtility.SelectData(_SPARQLEndpoint, "", $"select distinct ?g where{{graph ?g{{?s ?p ?o. FILTER(?s=<{pEntity}> OR ?o=<{pEntity}>)}}}}", _QueryParam);
+            SparqlObject sparqlObjectGraphs = _SparqlUtility.SelectData(_SPARQLEndpoint, "", $"select distinct ?g where{{graph ?g{{?s ?p ?o. FILTER(?s=<{pEntity}> OR ?o=<{pEntity}>)}}}}", _QueryParam);
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObjectGraphs.results.bindings)
             {
                 listGraphs.Add(row["g"].value);
@@ -299,13 +303,13 @@ namespace API_DISCOVER.Utility
                                     {{
                                         <{pEntity}> ?p ?o. 
                                     }}";
-                SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteS, _QueryParam);
+                _SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteS, _QueryParam);
                 string queryDeleteO = $@"DELETE {{ ?s ?p <{pEntity}>. }}
                                     WHERE 
                                     {{
                                         ?s ?p <{pEntity}>. 
                                     }}";
-                SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteO, _QueryParam);
+                _SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteO, _QueryParam);
             }
             foreach (string bnode in bnodeChildrens)
             {
@@ -337,7 +341,7 @@ namespace API_DISCOVER.Utility
                                             MINUS{{?x ?y ?s. FILTER(isblank(?s))}}
                                             MINUS{{?s ?p ?o. FILTER(!isblank(?s))}}
                                         }}";
-                    if (SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryASKOrphan, _QueryParam).boolean)
+                    if (_SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryASKOrphan, _QueryParam).boolean)
                     {
                         existeNodosHuerfanos = true;
                         string deleteOrphanNodes = $@"DELETE {{ ?s ?p ?o. }}
@@ -347,7 +351,7 @@ namespace API_DISCOVER.Utility
                                             MINUS{{?x ?y ?s. FILTER(isblank(?s))}}
                                             MINUS{{?s ?p ?o. FILTER(!isblank(?s))}}
                                         }}";
-                        SparqlUtility.SelectData(_SPARQLEndpoint, graph, deleteOrphanNodes, _QueryParam);
+                        _SparqlUtility.SelectData(_SPARQLEndpoint, graph, deleteOrphanNodes, _QueryParam);
                     }
 
                     //Nodos vacíos
@@ -362,7 +366,7 @@ namespace API_DISCOVER.Utility
                                                 FILTER(?p2 !=<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>)
                                             }}
                                         }}";
-                    if (SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryASKEmpty, _QueryParam).boolean)
+                    if (_SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryASKEmpty, _QueryParam).boolean)
                     {
                         existeNodosSinDatos = true;
                         string deleteEmptyNodes = $@"DELETE {{ ?s ?p ?o. }}
@@ -376,7 +380,7 @@ namespace API_DISCOVER.Utility
                                                 FILTER(?p2 !=<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>)
                                             }}
                                         }}";
-                        SparqlUtility.SelectData(_SPARQLEndpoint, graph, deleteEmptyNodes, _QueryParam);
+                        _SparqlUtility.SelectData(_SPARQLEndpoint, graph, deleteEmptyNodes, _QueryParam);
                     }
                 }
             }

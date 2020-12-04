@@ -17,7 +17,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
 
         public string HomePage { get { return "https://orcid.org/"; } }
 
-        public string Id { get { return "ORCID"; } }
+        public string Id { get { return "orcid"; } }
 
         /// <summary>
         /// Busca personas en el API de ORCID

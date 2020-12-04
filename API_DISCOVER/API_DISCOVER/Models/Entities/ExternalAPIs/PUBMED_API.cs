@@ -11,11 +11,11 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// </summary>
     public class PUBMED_API : I_ExternalAPI
     {//TODO cambiar
-        public string Name { get { return "PUBMED"; } }
+        public string Name { get { return "PubMed"; } }
 
-        public string HomePage { get { return "https://pubmed.org/"; } }
+        public string HomePage { get { return "https://pubmed.ncbi.nlm.nih.gov/"; } }
 
-        public string Id { get { return "PUBMED"; } }
+        public string Id { get { return "pubmed"; } }
 
         /// <summary>
         /// Busca documentos en función de su título API de PUBMED y obtiene sus identificadores

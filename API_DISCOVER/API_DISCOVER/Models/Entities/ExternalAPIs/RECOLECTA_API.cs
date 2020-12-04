@@ -12,11 +12,11 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// </summary>
     public class RECOLECTA_API : I_ExternalAPI
     {//TODO cambiar
-        public string Name { get { return "RECOLECTA"; } }
+        public string Name { get { return "Recolecta"; } }
 
-        public string HomePage { get { return "https://recolecta.org/"; } }
+        public string HomePage { get { return "https://recolecta.fecyt.es/"; } }
 
-        public string Id { get { return "RECOLECTA"; } }
+        public string Id { get { return "recolecta"; } }
 
         /// <summary>
         /// Busca trabajos en el API de Recolecta

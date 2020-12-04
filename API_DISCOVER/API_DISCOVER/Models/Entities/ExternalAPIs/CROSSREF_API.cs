@@ -12,9 +12,9 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// </summary>
     public class CROSSREF_API:I_ExternalAPI
     {//TODO cambiar
-        public string Name { get { return "crossref"; } }
+        public string Name { get { return "Crossref"; } }
 
-        public string HomePage { get { return "http://www.crossref.org"; } }
+        public string HomePage { get { return "https://www.crossref.org/"; } }
 
         public string Id { get { return "crossref"; } }
 

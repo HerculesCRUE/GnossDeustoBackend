@@ -21,7 +21,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
 
         public string HomePage { get { return "https://doaj.org/"; } }
 
-        public string Id { get { return "DOAJ"; } }
+        public string Id { get { return "doaj"; } }
 
         public static DOAJWorks GetWorks(string title)
         {

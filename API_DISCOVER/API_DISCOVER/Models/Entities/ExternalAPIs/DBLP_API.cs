@@ -24,7 +24,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
 
         public string HomePage { get { return "https://dblp.org/"; } }
 
-        public string Id { get { return "DBLP"; } }
+        public string Id { get { return "dblp"; } }
 
         /// <summary>
         /// Busca personas en el API de DBLP
