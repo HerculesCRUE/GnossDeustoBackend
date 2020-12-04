@@ -38,11 +38,11 @@ namespace API_DISCOVER.Utility
         /// <param name="dataGraph">Grafo con los datos a cargar</param>
         /// <param name="dataInferenceGraph">Grafo con los datos a cargar (con inferencia)</param>
         /// <param name="ontologyGraph">Grafo con la ontología</param>
-        /// <param name="pAttributedTo">Siujeto y nombre para atribuir los triples de los apis externos</param>
+        /// <param name="pAttributedTo">Sujeto y nombre para atribuir los triples de los apis externos</param>
         /// <param name="pActivityStartedAtTime">Inicio del proceso</param>
         /// <param name="pActivityEndedAtTime">Fin del proceso</param>
         /// <param name="externalIntegration">Datos extraídos de las integracinoes externas sujeto, propiedad, valor, grafos</param>
-        public void PublishRDF(RohGraph dataGraph, RohGraph dataInferenceGraph, RohGraph ontologyGraph, KeyValuePair<string, string> pAttributedTo, DateTime pActivityStartedAtTime, DateTime pActivityEndedAtTime, Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> externalIntegration)
+        public void PublishRDF(RohGraph dataGraph, RohGraph dataInferenceGraph, RohGraph ontologyGraph, KeyValuePair<string, string>? pAttributedTo, DateTime pActivityStartedAtTime, DateTime pActivityEndedAtTime, Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> externalIntegration)
         {
             // 1º Eliminamos de la BBD las entidades principales que aparecen en el RDF
             HashSet<string> graphs= RemovePrimaryTopics(ref dataGraph);
@@ -52,6 +52,17 @@ namespace API_DISCOVER.Utility
             RemoveMonovaluatedProperties(ontologyGraph, dataInferenceGraph);
 
             //3º Insertamos los triples en la BBDD
+            if (pAttributedTo.HasValue)
+            {
+                //Añadimos triples del softwareagent
+                IUriNode t_subject = dataGraph.CreateUriNode(UriFactory.Create(pAttributedTo.Value.Key));
+                IUriNode t_predicate_rdftype = dataGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+                IUriNode t_object_rdftype = dataGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/ns/prov#SoftwareAgent"));
+                dataGraph.Assert(new Triple(t_subject, t_predicate_rdftype, t_object_rdftype));
+                IUriNode t_predicate_name = dataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#name"));
+                ILiteralNode t_object_name = dataGraph.CreateLiteralNode(pAttributedTo.Value.Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                dataGraph.Assert(new Triple(t_subject, t_predicate_name, t_object_name));
+            }
             SparqlUtility.LoadTriples(SparqlUtility.GetTriplesFromGraph(dataGraph), _SPARQLEndpoint, _QueryParam, _Graph);
 
             //4º Insertamos los triples con provenance en la BBDD
@@ -72,15 +83,17 @@ namespace API_DISCOVER.Utility
                                 graphTriples.Add(graph, new List<string>());
                             }
                             string bNodeid = "_:" + Guid.NewGuid().ToString();
-                            //TODO cambiar propiedades
-                            graphTriples[graph].Add($@"<{t_subject}> <http://www.w3.org/ns/prov#hadActivity> {bNodeid} .");
+
+                            graphTriples[graph].Add($@"<{t_subject}> <http://www.w3.org/ns/prov#wasUsedBy> {bNodeid} .");
                             graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .");
-                            graphTriples[graph].Add($@"{bNodeid} <http://purl.org/roh#propertyURI> <{t_property}>.");
-                            graphTriples[graph].Add($@"{bNodeid} <http://purl.org/roh#propertyValue> ""{ t_object.Replace("\"", "\\\"").Replace("\n", "\\n") }""^^<http://www.w3.org/2001/XMLSchema#string>.");
+                            graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <{t_property}>.");
+                            graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ""{ t_object.Replace("\"", "\\\"").Replace("\n", "\\n") }""^^<http://www.w3.org/2001/XMLSchema#string>.");
                             graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#startedAtTime> ""{ pActivityStartedAtTime }""^^<http://www.w3.org/2001/XMLSchema#datetime>.");
                             graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#endedAtTime> ""{ pActivityEndedAtTime }""^^<http://www.w3.org/2001/XMLSchema#datetime>.");
-                            graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#wasAttributedTo> <{pAttributedTo.Key}>.");
-                            graphTriples[graph].Add($@"<{pAttributedTo.Key}> <http://purl.org/roh/mirror/foaf#name> ""{pAttributedTo.Value.Replace("\"", "\\\"").Replace("\n", "\\n") }""^^<http://www.w3.org/2001/XMLSchema#string>.");
+                            if (pAttributedTo.HasValue)
+                            {
+                                graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#wasAssociatedWith> <{pAttributedTo.Value.Key}>.");
+                            }
 
                             if (!graphDeletes.ContainsKey(graph))
                             {
@@ -90,8 +103,8 @@ namespace API_DISCOVER.Utility
 
                             string stringDelete = $@"   {{
                                                                 ?s ?p ?o. 
-                                                                ?o <http://purl.org/roh#propertyURI> <{t_property}>.
-                                                                ?o <http://purl.org/roh#propertyValue> ""{ t_object.Replace("\"", "\\\"").Replace("\n", "\\n") }""^^<http://www.w3.org/2001/XMLSchema#string>.
+                                                                ?o <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <{t_property}>.
+                                                                ?o <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ""{ t_object.Replace("\"", "\\\"").Replace("\n", "\\n") }""^^<http://www.w3.org/2001/XMLSchema#string>.
                                                                 FILTER(?s = <{t_subject}>)
                                                             }}";
                             graphDeletes[graph].Add(stringDelete);

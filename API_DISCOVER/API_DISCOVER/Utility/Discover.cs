@@ -149,6 +149,7 @@ namespace API_DISCOVER.Utility
                     }
 
                     //2.- Realizamos la reconciliación con los datos del Propio RDF
+                    //TODO eliminar propiedades monovaliads
                     ReconciliateRDF(ref hasChanges, ref discoveredEntityList, ref dataGraph, reasoner, discardDissambiguations, discoverCache);
 
                     //3.- Realizamos la reconciliación con los datos de la BBDD
@@ -234,6 +235,7 @@ namespace API_DISCOVER.Utility
                 else
                 {
                     AsioPublication asioPublication = new AsioPublication(mSPARQLEndpoint, mQueryParam, mGraph);
+                    //TODO usirsfactory
                     asioPublication.PublishRDF(pDiscoverResult.dataGraph, pDiscoverResult.dataInferenceGraph, pDiscoverResult.ontologyGraph,new KeyValuePair<string, string>("http://graph.um.es/res/agent/discover", "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.externalIntegration);
                     //Lo marcamos como procesado en la BBDD y eliminamos sus metadatos
                     pDiscoverItem.UpdateProcessed();
@@ -1477,6 +1479,7 @@ namespace API_DISCOVER.Utility
                 }
                 PrepareData(pDataGraph, pReasoner, out dataInferenceGraph, out entitiesRdfTypes, out entitiesRdfType, out disambiguationDataRdf);
             }
+            //TODO aplicar monovaluados ontología
         }
 
 
@@ -2302,13 +2305,7 @@ namespace API_DISCOVER.Utility
 
             //Identificadores descubiertos con las integraciones externas
             Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> identifiersDiscover;
-
-            RohGraph externalGraph = new RohGraph();
-
-            //1º Propia BBDD
-            //Obtenemos datos de la BBDD para apoyar el proceso de descubrimiento
-            ExternalIntegrationSPARQL(ref pHasChanges, entitiesRdfTypes, pDiscoverCache, ref pDataGraph);
-
+            
             RohGraph dataGraphClone = pDataGraph.Clone();
             Dictionary<string, Dictionary<string, float>> discoveredEntitiesProbabilityClone = new Dictionary<string, Dictionary<string, float>>(pDiscoveredEntitiesProbability);
 
@@ -2340,6 +2337,7 @@ namespace API_DISCOVER.Utility
                 }
             }
 
+            RohGraph externalGraph = new RohGraph();
             foreach (RohGraph graph in externalGraphs)
             {
                 if (graph != null)
@@ -2522,68 +2520,6 @@ namespace API_DISCOVER.Utility
                 }
             }
             return identifiersDiscover;
-        }
-
-
-        /// <summary>
-        /// Integración con los datos cargados previamente en el triple STORE
-        /// </summary>
-        /// <param name="pHasChanges">Indica si se han realizado cambios en pDataGraph</param>
-        /// <param name="pEntitiesRdfTypes">Diccionario con las entidades y sus clases (con herencia)</param>
-        /// <param name="pDiscoverCache">Caché de discover</param>
-        /// <param name="pDataGraph">Grafo en local con los datos del RDF</param>
-        private static void ExternalIntegrationSPARQL(ref bool pHasChanges, Dictionary<string, HashSet<string>> pEntitiesRdfTypes, DiscoverCache pDiscoverCache, ref RohGraph pDataGraph)
-        {
-            foreach (Disambiguation disambiguation in mDisambiguationConfigs)
-            {
-                if (disambiguation.identifiers != null && disambiguation.identifiers.Count > 0)
-                {
-                    Dictionary<string, string> identifiersVars = new Dictionary<string, string>();
-                    foreach (string identifier in disambiguation.identifiers)
-                    {
-                        identifiersVars.Add("?prop" + identifiersVars.Count, identifier);
-                    }
-
-                    List<string> entitiesRDF = pEntitiesRdfTypes.Where(x => x.Value.Contains(disambiguation.rdfType)).Select(x => x.Key).ToList();
-                    if (entitiesRDF.Count > 0)
-                    {
-                        #region Obtenemos los identificadores de la BBDD en caso de que ya estén cargados
-                        string consulta = @$"select ?s {string.Join(" ", identifiersVars.Keys)}
-                                where
-                                {{
-                                    ?s a ?rdfType. ";
-                        foreach (string identifier in identifiersVars.Keys)
-                        {
-                            consulta += @$"OPTIONAL{{?s <{identifiersVars[identifier]}> {identifier}}}";
-                        }
-                        consulta += @$"  Filter(?s in (<{ string.Join(">,<", entitiesRDF) }>))
-                                }}";
-
-                        SparqlObject sparqlObject = SelectDataCache(consulta, pDiscoverCache);
-                        foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
-                        {
-                            string s = row["s"].value;
-                            foreach (string identifier in identifiersVars.Keys)
-                            {
-                                if (row.ContainsKey(identifier.Replace("?", "")))
-                                {
-                                    int numTriplesAntes = pDataGraph.Triples.Count;
-                                    IUriNode t_subject = pDataGraph.CreateUriNode(UriFactory.Create(s));
-                                    IUriNode t_predicate = pDataGraph.CreateUriNode(UriFactory.Create(identifiersVars[identifier]));
-                                    ILiteralNode t_object = pDataGraph.CreateLiteralNode(row[identifier.Replace("?", "")].value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                                    pDataGraph.Assert(new Triple(t_subject, t_predicate, t_object));
-                                    int numTriplesDespues = pDataGraph.Triples.Count;
-                                    if (numTriplesAntes != numTriplesDespues)
-                                    {
-                                        pHasChanges = true;
-                                    }
-                                }
-                            }
-                        }
-                        #endregion
-                    }
-                }
-            }
         }
 
 
