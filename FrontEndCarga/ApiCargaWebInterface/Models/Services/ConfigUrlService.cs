@@ -152,9 +152,9 @@ namespace ApiCargaWebInterface.Models.Services
                 Configuration = builder.Build();
                 string connectionString = "";
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("SaprqlEndpoint"))
+                if (environmentVariables.Contains("SparqlEndpoint"))
                 {
-                    connectionString = environmentVariables["SaprqlEndpoint"] as string;
+                    connectionString = environmentVariables["SparqlEndpoint"] as string;
                 }
                 else
                 {
