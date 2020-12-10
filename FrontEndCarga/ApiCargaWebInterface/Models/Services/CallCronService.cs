@@ -107,7 +107,7 @@ namespace ApiCargaWebInterface.Models.Services
         /// <param name="item">objeto a pasar</param>
         /// <param name="isFile">si el objeto pasado es un fichero</param>
         /// <param name="fileName">nombre del parametro del fichero, en el caso de que el objeto pasado sea un fichero</param>
-        public string CallPostApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false, string fileName = "rdfFile")
+        public string CallPostApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false, string fileName = "rdfFile", bool sparql = false)
         {
             string stringData = JsonConvert.SerializeObject(item);
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");

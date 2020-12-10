@@ -7,6 +7,7 @@ using ApiCargaWebInterface.Utility;
 using ApiCargaWebInterface.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Web;
 
 namespace ApiCargaWebInterface.Models.Services
 {
@@ -122,10 +123,13 @@ namespace ApiCargaWebInterface.Models.Services
             int first = htmlContent.IndexOf(DirectivesList.Sparql, ocurrence);
             first = first + DirectivesList.Sparql.Length;
             int last = htmlContent.IndexOf(DirectivesList.EndDirective, first);
-            string query = $"{htmlContent.Substring(first, last - first)}";
+            string queryS = $"{htmlContent.Substring(first, last - first)}";
 
-            string url = $"{_configUrlService.GetSaprqlEndpoint()}?{_configUrlService.GetSparqlQuery()}={query}&format=text/csv";
-            string result = _callService.CallGetApi(url, "");
+            string url = $"{_configUrlService.GetSaprqlEndpoint()}?{_configUrlService.GetSparqlQuery()}={queryS}&format=text/csv";
+            string consulta = HttpUtility.UrlEncode(queryS);
+            consulta = $"query={consulta}&format=text/csv";
+            //string result = _callService.CallGetApi(url, "");
+            string result = _callService.CallPostApi(_configUrlService.GetSaprqlEndpoint(),"",consulta, sparql : true);
             return result;
         }
 
