@@ -100,3 +100,17 @@ ya que la primera directiva es `@*<% api https://localhost:44359/Job?type=0&coun
     /%>*@
 	
 En el caso de que se que quieran hacer más llamadas el orden de recogida de los datos equivale al orden en el que se uasn esas en llamadas en la vista.
+
+## Varias consultas Sparql
+Se puede encontrar este ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/paginas/Consultas-Sparql.cshtml
+
+En este ejemplo se sigue el mismo proceso que en el ejemplo visto al crear una página con una consulta Sparql, con la salvedad de que en este caso hay que obtener todos los resultados para las consultas realizadas y tratarlos para poder consultar los resultados como se ve en el ejemplo,
+en nuestro modelo de la página tendremos en la posición 0 la primera consulta realizada, en la posición 1 la segunda consulta y así sucesivamente.
+
+## Varias consultas a APIs
+Se puede encontrar este ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/paginas/llamadas-apis.cshtml
+
+En este ejemplo se sigue el mismo proceso que el visto al crear una página con una llamada a un api, excepto que en este caso hay dos llamadas a un api, por lo que hay que obtener y tratar los resultados obtenidos al hacer
+las dos llamadas al api, como en los ejemplos anterior estos resultados obtenidos se corresponderan con la llamada al api según el orden, es decir, en la posición 0 de la lista la primera llamada que aparece en el código de la página, en la posición 1 y así sucesivamente.
+
+

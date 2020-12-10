@@ -1,0 +1,72 @@
+@model ApiCargaWebInterface.ViewModels.CmsDataViewModel
+@using Newtonsoft.Json
+@{
+    Layout = "_Layout";
+    ViewData["BodyClass"] = "fichaRecurso";
+    string result = Model.Results.FirstOrDefault();
+    List<PageList> resultObject = JsonConvert.DeserializeObject<List<PageList>>(result);
+	
+	result = Model.Results[1];
+	Page resultPage = JsonConvert.DeserializeObject<Page>(result);
+    
+}
+@*<% api https://localhost:44364/Page/list /%>*@
+@*<% api https://localhost:44364/Page?route=%2Fpublic%2Findex /%>*@
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <div class="row">
+                <div class="col col-12 col-lg-12 col-contenido">
+                    <div class="wrapCol">
+                        <h1>Listado de páginas públicas</h1>
+                        <div class="contenido">
+                            <div class="grupo grupo-descripcion">
+                                <div class="items tabla">
+                                    <div class="cabecera">
+                                        <div class="columna">
+                                            <p>Ruta</p>
+                                        </div>
+                                        <div class="columna">
+                                            <p>Fecha de modificación</p>
+                                        </div>
+                                    </div>
+                                    @foreach (var pageObject in resultObject)
+                                    {
+                                        <div class="fila">
+                                            <div class="columna principal">
+                                                <p>@pageObject.route</p>
+                                            </div>
+                                            <div class="columna">
+                                                <p>@pageObject.lastModified</p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+						<h1>Información de la página principal</h1>
+								<p> 
+									Ruta: @resultPage.route <br>
+									Identificador: @resultPage.pageID
+								</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@functions{
+    public class PageList
+    {
+        public Guid pageID { get; set; }
+        public string route { get; set; }
+        public DateTime lastModified { get; set; }
+    }
+	
+	public class Page
+	{
+		public Guid pageID { get; set; }
+        public string route { get; set; }
+		public string content { get; set; }
+	}
+}
