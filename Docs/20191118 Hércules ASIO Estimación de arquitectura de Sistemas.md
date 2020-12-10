@@ -168,11 +168,11 @@ disponibilidad (en principio), sería:
 |--------------------------------------------------|-----------------------------------|-----|-----|-------|
 | 1 frontal web para contenido dinámico            | CentOS 7, Apache, …               | 2   | 6   | 50    |
 | 1 frontal web para estáticos y cache web         | CentOS 7, Apache, …               | 2   | 3   | 50    |
-| 1 servidor para tareas y servicios de Backoffice | PostgreSQL …                      | 2   | 4   | 50    |
-| 1 servidor de BBDD SQL                           | CentOS 7, Virtuoso Open Source, … | 3   | 8   | 50    |
-| 1 servidor para RDF Store                        | CentOS 7, Redis, …                | 3   | 14  | 50    |
-| 1 servidor para datos de cache                   | CentOS 7, RabbitMQ, …             | 2   | 4   | 25    |
-| 1 servidor para gestión de colas de eventos      | CentOS 7, Apache, …               | 2   | 1   | 25    |
+| 1 servidor para tareas y servicios de Backoffice | CentOS 7, …                       | 2   | 4   | 50    |
+| 1 servidor de BBDD SQL                           | CentOS 7, PostgreSQL, …           | 3   | 8   | 50    |
+| 1 servidor para RDF Store                        | CentOS 7, Virtuoso Open Source, … | 3   | 14  | 50    |
+| 1 servidor para datos de cache                   | CentOS 7, Redis, …                | 2   | 4   | 25    |
+| 1 servidor para gestión de colas de eventos      | CentOS 7, RabbitMQ, …             | 2   | 1   | 25    |
 | 1 almacenamiento compartido                      | NFS                               |     |     | 50    |
 
 
