@@ -13,13 +13,18 @@
     <!-- MATERIAL ICONS -->
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;op0ubx" media="all">
     <!-- BOOTSTRAP 4 + PROPELLER -->
-    <link rel="stylesheet" href="~/theme/libraries/bootstrap/bootstrap.min.css">
+    @*<link rel="stylesheet" href="~/theme/libraries/bootstrap/bootstrap.min.css">*@
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/theme/libraries/propeller/css/propeller.min.css" media="screen" type="text/css">
     <!-- LIGHTGALLERY -->
     <link media="screen" type="text/css" rel="stylesheet" href="~/theme/libraries/lightgallery/css/lightgallery.min.css">
     <!-- PERSONALIZACION TEMA -->
     <link media="screen" type="text/css" rel="stylesheet" href="~/theme/theme.css">
     <link media="screen" type="text/css" rel="stylesheet" href="~/theme/theme2.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="~/theme/static/style.css">
+    <link rel="stylesheet" href="~/theme/static/style2.css">
+    <link rel="stylesheet" href="~/theme/static/proyecto-fair.css">
     <!-- PERSONALIZACION Javi -->
     <link media="screen" type="text/css" rel="stylesheet" href="~/theme/checkbox_javi.css">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -32,7 +37,7 @@
     </style>
 </head>
 <body class="@ViewData["BodyClass"] comunidad usuarioConectado" cz-shortcut-listen="true">
-    <partial name="_menupersonalizado"/>
+    <partial name="_menupersonalizado" />
     <main role="main">
         <div class="container">
 
@@ -280,10 +285,13 @@
         </div>
     </aside>
     <!--Default-->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="~/theme/static/proyecto-fair.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <partial name="_ValidationScriptsPartial"/>
+    <partial name="_ValidationScriptsPartial" />
     @RenderSection("Scripts", required: false)
 </body>
 </html>
