@@ -32,41 +32,7 @@
     </style>
 </head>
 <body class="@ViewData["BodyClass"] comunidad usuarioConectado" cz-shortcut-listen="true">
-    <header id="header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col col01">
-                    
-                    <div class="logo">
-                        <a href="@Url.Action("Index", "RepositoryConfig")">Hércules</a>
-                    </div>
-                </div>
-                <div class="col col02">
-                    <ul>
-                        <li>
-                            <a asp-area="" asp-controller="RepositoryConfig" asp-action="Index">Repositorios</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="ShapeConfig" asp-action="Index">Shapes</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="UrisFactory" asp-action="Index">Factoria de uris</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="Token" asp-action="Index">Obtener tokens</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="CheckSystem" asp-action="Index">Comprobación del sistema</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="CMS" asp-action="Index">administración de páginas</a>
-                        </li>
-                    </ul>
-                </div>
-                
-            </div>
-        </div>
-    </header>
+    <partial name="_menupersonalizado"/>
     <main role="main">
         <div class="container">
 

@@ -532,6 +532,29 @@ var masHeaderMensaje = {
   }
 };
 
+var autocompletar = {
+  init: function(){
+    this.config();
+    this.comportamiento();
+    return;
+  },
+  config: function(){
+    this.body = body;
+    return;
+  },
+  comportamiento: function(){
+
+    var input = this.body.find('#autocomplete');
+    var autocomplete = this.body.find('.ui-autocomplete');
+
+    input.keyup(function(){
+      autocomplete.show();
+    });
+
+    return;
+  }
+}
+
 function comportamientoCargaFacetasComunidad() {
 
 };
@@ -547,6 +570,10 @@ $(function () {
   closeSidebar.init();
   masOpciones.init();
   metabuscador.init();
+
+  if (window.location.href.indexOf("plantillas") > -1){
+    autocompletar.init();
+  }
 
   if(body.hasClass('fichaPersona')){
     circulosPersona.init();

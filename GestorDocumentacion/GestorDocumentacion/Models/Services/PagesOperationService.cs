@@ -87,10 +87,10 @@ namespace GestorDocumentacion.Models.Services
             {
                 if (page != null && !string.IsNullOrEmpty(page.Content) && !string.IsNullOrEmpty(page.Route) && GetPage(page.Route) == null)
                 {
-                    if (!page.Content.Contains("\"_Layout\""))
-                    {
-                        page.Content = $"{layout.ToString()}{page.Content}";
-                    }
+                    //if (!page.Content.Contains("\"_Layout\""))
+                    //{
+                    //    page.Content = $"{layout.ToString()}{page.Content}";
+                    //}
                     page.LastModified = DateTime.Now;
 
 
@@ -104,10 +104,10 @@ namespace GestorDocumentacion.Models.Services
                 var pageModify = GetPage(page.PageID);
                 if(!string.IsNullOrEmpty(page.Content) && page.Content != pageModify.Content)
                 {
-                    if (!page.Content.Contains("\"_Layout\""))
-                    {
-                        page.Content = $"{layout.ToString()}{page.Content}";
-                    }
+                    //if (!page.Content.Contains("\"_Layout\""))
+                    //{
+                    //    page.Content = $"{layout.ToString()}{page.Content}";
+                    //}
                     pageModify.Content = page.Content;
                     pageModify.LastModified = DateTime.Now;
                 }
