@@ -407,7 +407,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pEntitiesRdfTypes">Listado con los sujetos y sus rdf:type (con inferencia)</param>
         /// <param name="pTriples">Lista de triples</param>
         /// <returns>Entidades del RDF con sus datos de desambiguación</returns>
-        private static Dictionary<string, List<DisambiguationData>> GetDisambiguationDataRdf(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, List<Triple> pTriples)
+        public static Dictionary<string, List<DisambiguationData>> GetDisambiguationDataRdf(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, List<Triple> pTriples)
         {
             Dictionary<string, Dictionary<string, HashSet<string>>> directRels = ExtractRelsFromTriples(pTriples, false);
             Dictionary<string, Dictionary<string, HashSet<string>>> inverseRels = ExtractRelsFromTriples(pTriples, true);
@@ -728,7 +728,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pPersonsWithName">Nombres de todas las personas que hay cargadas en la BBDD, Clave ID, Valor nombre</param>
         /// <param name="pDataGraph">Grafo en local</param>
         /// <param name="pDiscoverCache">Caché de discover</param>
-        private static void LoadNamesScore(ref Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, string> pPersonsWithName, RohGraph pDataGraph, DiscoverCache pDiscoverCache)
+        public static void LoadNamesScore(ref Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, string> pPersonsWithName, RohGraph pDataGraph, DiscoverCache pDiscoverCache)
         {
             HashSet<string> listaNombres = new HashSet<string>();
             string query = @"select distinct ?name where{?s a <http://purl.org/roh/mirror/foaf#Person>. ?s <http://purl.org/roh/mirror/foaf#name>  ?name.}";
@@ -781,7 +781,7 @@ namespace API_DISCOVER.Utility
         /// </summary>
         /// <param name="pSubjects">Lista de identificadores de las entidades a buscar</param>
         /// <returns></returns>
-        private static Dictionary<string, string> LoadEntitiesDB(IEnumerable<string> pSubjects)
+        public static Dictionary<string, string> LoadEntitiesDB(IEnumerable<string> pSubjects)
         {
             Dictionary<string, string> entitiesDB = new Dictionary<string, string>();
             List<List<string>> listaListas = SplitList(pSubjects.ToList(), 500).ToList();
@@ -957,13 +957,13 @@ namespace API_DISCOVER.Utility
                         else if (dataProperty.property.type == Disambiguation.Property.Type.title)
                         {
 
-                            selectProperty = $"\n\t\t\t\tselect ?s count(?p)*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")} as {varScore} where\n\t\t\t\t{{";
-                            orderProperty = $"\n\t\t\t\t}} order by desc (count(?p)*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")})   limit 10";
+                            selectProperty = $"\n\t\t\t\tselect ?s count(?p*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")}) as {varScore} where\n\t\t\t\t{{";
+                            orderProperty = $"\n\t\t\t\t}} group by ?s order by desc (count(?p*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")}))   limit 10";
                         }
                         else
                         {
-                            selectProperty = $"\n\t\t\t\tselect ?s count(distinct ?p)*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")} as {varScore} where\n\t\t\t\t{{";
-                            orderProperty = $"\n\t\t\t\t}}";
+                            selectProperty = $"\n\t\t\t\tselect ?s count(distinct (?p*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")})) as {varScore} where\n\t\t\t\t{{";
+                            orderProperty = $"\n\t\t\t\t}} group by ?s";
                         }
 
 
@@ -1117,7 +1117,7 @@ namespace API_DISCOVER.Utility
                                     filters.Add($" lcase(str(?p)) =lcase(str(<{value}>))");
                                 }
                             }
-                            whereProperty += $"\n\t\t\t\t\tFILTER({ string.Join(" OR ", filters)})";
+                            whereProperty += $"\n\t\t\t\t\tFILTER({ string.Join(" || ", filters)})";
                         }
                         else
                         {
@@ -1133,7 +1133,7 @@ namespace API_DISCOVER.Utility
                                     filters.Add($" ?p =<{value}>");
                                 }
                             }
-                            whereProperty += $"\n\t\t\t\t\tFILTER({ string.Join(" OR ", filters)})";
+                            whereProperty += $"\n\t\t\t\t\tFILTER({ string.Join(" || ", filters)})";
                         }
 
 
@@ -1152,12 +1152,12 @@ namespace API_DISCOVER.Utility
                 #endregion
 
                 string selectSujetos = $"\n\t\tselect ?s ?rdfType ?scoreMandatory where\n\t\t{{";
-                string orderSujetos = $"\n\t\t}}order by desc(?scoreMandatory) limit 10";
+                string orderSujetos = $"\n\t\t}} order by desc(?scoreMandatory) limit 10";
                 if (varsNoMandatory.Count > 0)
                 {
                     string scoresNoMandatory = "(sum(" + string.Join(")+sum(", varsNoMandatory) + "))";
                     selectSujetos = $"\n\t\tselect ?s ?rdfType ?scoreMandatory {scoresNoMandatory} as ?scoreNoMandatory where\n\t\t{{";
-                    orderSujetos = $"\n\t\t}}order by desc(?scoreMandatory) desc {scoresNoMandatory} limit 10";
+                    orderSujetos = $"\n\t\t}}group by ?s ?rdfType ?scoreMandatory order by desc(?scoreMandatory) desc {scoresNoMandatory} limit 10";
                 }
 
                 string consulta = selectSujetos + whereSujetos + orderSujetos;
@@ -1210,7 +1210,7 @@ namespace API_DISCOVER.Utility
         /// Obtiene los nombres de todas las personas
         /// </summary>
         /// <returns></returns>
-        private static Dictionary<string, string> LoadPersonWithName()
+        public static Dictionary<string, string> LoadPersonWithName()
         {
             Dictionary<string, string> personsWithName = new Dictionary<string, string>();
             int numPagination = 10000;
@@ -1276,7 +1276,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pDiscardDissambiguations">Descartes para la desambiguación</param>
         /// <param name="pDataGraph">Grafo en local con los datos a procesar</param>
         /// <returns>Lista con las entidades reconciliadas</returns>
-        private static Dictionary<string, string> ReconciliateIDs(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, Dictionary<string, string> pEntitiesRdfType, Dictionary<string, List<DisambiguationData>> pDisambiguationDataRdf, Dictionary<string, HashSet<string>> pDiscardDissambiguations, ref RohGraph pDataGraph)
+        public static Dictionary<string, string> ReconciliateIDs(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, Dictionary<string, string> pEntitiesRdfType, Dictionary<string, List<DisambiguationData>> pDisambiguationDataRdf, Dictionary<string, HashSet<string>> pDiscardDissambiguations, ref RohGraph pDataGraph)
         {
             Dictionary<string, string> entidaesReconciliadas = new Dictionary<string, string>();
             Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> identificadoresRDFPorRdfType = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
@@ -1342,7 +1342,7 @@ namespace API_DISCOVER.Utility
                         {
                             identificadoresBBDDPorRdfType[rdftype][s].Add(property, new List<string>());
                         }
-                        if (row["identifier"].type == "typed-literal")
+                        if (!string.IsNullOrEmpty(row["identifier"].datatype))
                         {
                             identificadoresBBDDPorRdfType[rdftype][s][property].Add("\"" + row["identifier"].value.Replace("\"", "\\\"") + "\"^^<" + row["identifier"].datatype + ">");
                         }
@@ -1420,7 +1420,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pDiscardDissambiguations">Descartes de desambiguación</param>
         /// <param name="pDiscoverCache">Caché de discover</param>
         /// <returns>Diccioario con las entidades reconciliadas</returns>
-        private static Dictionary<string, KeyValuePair<string, float>> ReconciliateBBDD(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, out Dictionary<string, Dictionary<string, float>> pListaEntidadesReconciliadasDudosas, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache)
+        public static Dictionary<string, KeyValuePair<string, float>> ReconciliateBBDD(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, out Dictionary<string, Dictionary<string, float>> pListaEntidadesReconciliadasDudosas, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache)
         {
             Dictionary<string, KeyValuePair<string, float>> discoveredEntityList = new Dictionary<string, KeyValuePair<string, float>>();
             Dictionary<string, HashSet<string>> entitiesRdfTypes;
@@ -2332,10 +2332,10 @@ namespace API_DISCOVER.Utility
             foreach (Thread thread in hilosIntegracionesExternas)
             {
                 thread.Join();
-                if (exception != null)
-                {
-                    throw exception;
-                }
+                //if (exception != null)
+                //{
+                //    throw exception;
+                //}
             }
 
             RohGraph externalGraph = new RohGraph();

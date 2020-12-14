@@ -14,9 +14,11 @@ using System.Xml;
 using VDS.RDF;
 using VDS.RDF.Parsing;
 using API_DISCOVER.Models.Entities;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_DISCOVER.Utility
 {
+    [ExcludeFromCodeCoverage]
     public class SparqlUtility:I_SparqlUtility
     {
         public static XmlDocument GetRDFFromFile(IFormFile pRDFFile)
