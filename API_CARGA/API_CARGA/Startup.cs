@@ -152,7 +152,7 @@ namespace PRH
             services.AddScoped(typeof(OaiPublishRDFService));
             //services.AddSingleton<IRepositoriesConfigService, RepositoriesConfigMockService>();
             services.AddScoped<IRepositoriesConfigService, RepositoriesConfigBDService>();
-            services.AddScoped<DiscoverItemBDService, DiscoverItemBDService>();
+            services.AddScoped<IDiscoverItemService, DiscoverItemBDService>();
             services.AddSingleton<IRabbitMQService, RabbitMQService>();
             //services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
             services.AddScoped<IShapesConfigService, ShapesConfigBDService>();

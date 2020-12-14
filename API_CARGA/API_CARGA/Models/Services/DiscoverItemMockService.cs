@@ -14,12 +14,19 @@ namespace API_CARGA.Models.Services
     ///<summary>
     ///Clase para gestionar las operaciones de las tareas de descubrimiento
     ///</summary>
-    public class DiscoverItemBDService : IDiscoverItemService
+    public class DiscoverItemMockService : IDiscoverItemService
     {
-        private readonly EntityContext _context;
-        public DiscoverItemBDService(EntityContext context)
+        private List<DiscoverItem> _discoverItems;
+
+        public DiscoverItemMockService()
         {
-            _context = context;
+            _discoverItems = new List<DiscoverItem>();
+            
+            _discoverItems.Add(new DiscoverItem
+            {
+                ID = Guid.NewGuid(),
+                Status = "Pending"
+            });
         }
 
 
@@ -30,7 +37,7 @@ namespace API_CARGA.Models.Services
         ///<remarks>Item de descubrimiento</remarks>
         public DiscoverItem GetDiscoverItemById(Guid id)
         {
-            return _context.DiscoverItem.Include(item => item.DiscardDissambiguations).Include(item => item.DissambiguationProblems).ThenInclude(p => p.DissambiguationCandiates).FirstOrDefault(item => item.ID.Equals(id));
+            return _discoverItems.FirstOrDefault(discoverItem => discoverItem.ID.Equals(id));
         }
 
         /// <summary>
@@ -40,7 +47,7 @@ namespace API_CARGA.Models.Services
         /// <returns>Lista de Items de descubrimiento (sólo obtiene el identificador y el estado)</returns>
         public List<DiscoverItem> GetDiscoverItemsErrorByJobMini(string jobId)
         {
-            return _context.DiscoverItem.Where(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Error.ToString() || x.Status == DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString())).Select(x => new DiscoverItem { ID = x.ID, JobID = x.JobID, Status = x.Status }).ToList();
+            return _discoverItems.Where(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Error.ToString() || x.Status == DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString())).Select(x => new DiscoverItem { ID = x.ID, JobID = x.JobID, Status = x.Status }).ToList();
         }
 
         /// <summary>
@@ -50,7 +57,7 @@ namespace API_CARGA.Models.Services
         /// <returns></returns>
         public Dictionary<string, int> GetDiscoverItemsStatesByJob(string jobId)
         {
-            return _context.DiscoverItem.Where(x => x.JobID == jobId).GroupBy(p => p.Status).Select(g => new { state = g.Key, count = g.Count() }).ToDictionary(k => k.state, i => i.count);
+            return _discoverItems.Where(x => x.JobID == jobId).GroupBy(p => p.Status).Select(g => new { state = g.Key, count = g.Count() }).ToDictionary(k => k.state, i => i.count);
         }
 
         /// <summary>
@@ -60,7 +67,7 @@ namespace API_CARGA.Models.Services
         /// <returns></returns>
         public bool ExistsDiscoverItemsPending(string jobId)
         {
-            return _context.DiscoverItem.Any(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Pending.ToString()));
+            return _discoverItems.Any(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Pending.ToString()));
         }
 
         /// <summary>
@@ -70,7 +77,7 @@ namespace API_CARGA.Models.Services
         /// <returns></returns>
         public bool ExistsDiscoverItemsErrorOrDissambiguatinProblems(string jobId)
         {
-            return _context.DiscoverItem.Any(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Error.ToString() || x.Status == DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString()));
+            return _discoverItems.Any(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Error.ToString() || x.Status == DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString()));
         }
 
         ///<summary>
@@ -79,10 +86,11 @@ namespace API_CARGA.Models.Services
         ///<param name="discoverItem">Item de descubrimiento</param>
         public Guid AddDiscoverItem(DiscoverItem discoverItem)
         {
-            discoverItem.ID = Guid.NewGuid();
-            _context.DiscoverItem.Add(discoverItem);
-            _context.SaveChanges();
-            return discoverItem.ID;
+            Guid discoveritemID = Guid.Empty;
+            discoveritemID = Guid.NewGuid();
+            discoverItem.ID = discoveritemID;
+            _discoverItems.Add(discoverItem);
+            return discoveritemID;
         }
 
         ///<summary>
@@ -107,7 +115,6 @@ namespace API_CARGA.Models.Services
                 discoverItemOriginal.DiscardDissambiguations = discoverItem.DiscardDissambiguations;
                 discoverItemOriginal.LoadedEntities = discoverItem.LoadedEntities;
 
-                _context.SaveChanges();
                 modified = true;
             }
             return modified;
@@ -124,24 +131,7 @@ namespace API_CARGA.Models.Services
                 DiscoverItem discoverItem = GetDiscoverItemById(identifier);
                 if (discoverItem != null)
                 {
-                    if (discoverItem.DissambiguationProblems != null)
-                    {
-                        foreach (var dissambiguationProblem in discoverItem.DissambiguationProblems)
-                        {
-                            _context.Entry(dissambiguationProblem).State = EntityState.Deleted;
-
-                            if (dissambiguationProblem.DissambiguationCandiates != null)
-                            {
-                                foreach (var dissambiguationCandidate in dissambiguationProblem.DissambiguationCandiates)
-                                {
-                                    _context.Entry(dissambiguationCandidate).State = EntityState.Deleted;
-                                }
-                            }
-                        }
-                    }
-
-                    _context.Entry(discoverItem).State = EntityState.Deleted;
-                    _context.SaveChanges();
+                    _discoverItems.Remove(discoverItem);
                 }
                 return true;
             }

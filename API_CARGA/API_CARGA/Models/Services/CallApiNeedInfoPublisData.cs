@@ -28,6 +28,7 @@ namespace API_CARGA.Models.Services
         ///Realizar una llamda Get a una url que tiene como base la configurada en el appSettings.json en la propiedad ConfigUrl
         ///</summary>
         ///<param name="urlMethod">método al que se hace la llamada</param>
+        /// <param name="token"></param>
         //http://herc-as-front-desa.atica.um.es/etl/ListIdentifiers/13131?metadataPrefix=rdf
         public string CallGetApi(string urlMethod, TokenBearer token = null)
         {

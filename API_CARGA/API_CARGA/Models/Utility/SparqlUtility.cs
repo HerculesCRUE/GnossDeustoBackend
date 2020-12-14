@@ -57,20 +57,17 @@ namespace API_CARGA.Models.Utility
         /// </summary>
         /// <param name="pRdfFileContent">XML RDF</param>
         /// <param name="pShapesConfig">Lista de Shapes de validación</param>
+        /// <param name="pOntologyGraph">Grafo con la ontología</param>
         /// <returns>Lista de triples</returns>
-        public static ShapeReport ValidateRDF(string pRdfFileContent, List<ShapeConfig> pShapesConfig)
+        public static ShapeReport ValidateRDF(string pRdfFileContent, List<ShapeConfig> pShapesConfig, RohGraph pOntologyGraph)
         {
-            //Cargamos la ontología
-            RohGraph ontologyGraph = new RohGraph();
-            ontologyGraph.LoadFromFile("Config/Ontology/roh-v2.owl");
-
             //Cargamos datos a validar
             RohGraph dataGraph = new RohGraph();
             dataGraph.LoadFromString(pRdfFileContent, new RdfXmlParser());
 
             //Aplicamos inferencias de la ontologia
             RohRdfsReasoner reasoner = new RohRdfsReasoner();
-            reasoner.Initialise(ontologyGraph);
+            reasoner.Initialise(pOntologyGraph);
             reasoner.Apply(dataGraph);
 
             ShapeReport response = new ShapeReport();
