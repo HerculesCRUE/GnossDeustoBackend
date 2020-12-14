@@ -38,12 +38,13 @@
 </head>
 <body class="@ViewData["BodyClass"] comunidad usuarioConectado" cz-shortcut-listen="true">
     <partial name="_menupersonalizado" />
-    <main role="main">
-        <div class="container">
+    @*<main role="main">*@
+    @Html.Raw(@ViewData["SecondaryMenu"])
+    <div class="container">
 
-            @RenderBody()
-        </div>
-    </main>
+        @RenderBody()
+    </div>
+    @*</main>*@
 
     <div id="footer">
         <div class="container-fluid">

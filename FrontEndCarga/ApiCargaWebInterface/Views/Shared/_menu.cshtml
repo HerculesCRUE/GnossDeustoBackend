@@ -1,35 +1,37 @@
-﻿<header id="header">
+﻿<nav class="navbar navbar-default">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col col01">
-
-                <div class="logo">
-                    <a href="@Url.Action("Index", "RepositoryConfig")">Hércules</a>
-                </div>
-            </div>
-            <div class="col col02">
-                <ul>
-                    <li>
-                        <a asp-area="" asp-controller="RepositoryConfig" asp-action="Index">Repositorios</a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="ShapeConfig" asp-action="Index">Shapes</a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="UrisFactory" asp-action="Index">Factoria de uris</a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Token" asp-action="Index">Obtener tokens</a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="CheckSystem" asp-action="Index">Comprobación del sistema</a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="CMS" asp-action="Index">administración de páginas</a>
-                    </li>
-                </ul>
-            </div>
-
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="@Url.Action("Index", "RepositoryConfig")">Hércules</a>
         </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a asp-area="" asp-controller="RepositoryConfig" asp-action="Index">Repositorios</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="ShapeConfig" asp-action="Index">Shapes</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="UrisFactory" asp-action="Index">Factoria de uris</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Token" asp-action="Index">Obtener tokens</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="CheckSystem" asp-action="Index">Comprobación del sistema</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="CMS" asp-action="Index">administración de páginas</a>
+                </li>
+            </ul>
+        </div>
+
+
     </div>
-</header>
+</nav>

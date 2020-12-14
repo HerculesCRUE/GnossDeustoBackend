@@ -10,6 +10,13 @@ ul.ranking {
 
 div:nth-of-type(4n+3) { border-bottom: 0 !important; padding-bottom: 0 !important;  }
 
+.navbar .nav.navbar-nav > .open > a { background-color: #fff !important; opacity: 1 !important; }
+
+.navbar .navbar-collapse.in { background-color: #fff; border: 1px solid #e1e1e1; }
+.navbar .navbar-collapse.in ul.navbar-nav { display: block; height: 100%; }
+.navbar .navbar-collapse.in ul.navbar-nav > li { }
+.navbar .navbar-collapse.in ul.navbar-nav > li > a { color: #333 !important; }
+
 .nav.nav-tabs { border: 1px solid #d1d1d1; height: 50px; min-height: 50px; padding: 0; margin-bottom: 22px; }
 .nav.nav-tabs .nav-item { height: 100%; }
 .nav.nav-tabs .nav-item .nav-link { font-size: 15px; font-weight: 400; line-height: 28px; color: #747474; margin: 0; border: 0; height: 100%; padding: 10px 22px; }
@@ -17,6 +24,10 @@ div:nth-of-type(4n+3) { border-bottom: 0 !important; padding-bottom: 0 !importan
 
 @media (max-width: 1199px){
     .nav.nav-tabs { display: flex; flex-wrap: wrap; height: 100%; }
+}
+
+@media (max-width: 767px){
+    .container-fluid > .navbar-header { margin: 0 !important; }
 }
 
 #contenido-principal.container { padding: 0; margin-bottom: 20px; }
@@ -28,7 +39,7 @@ div:nth-of-type(4n+3) { border-bottom: 0 !important; padding-bottom: 0 !importan
 #contenido-principal .col h1 { font-size: 19px; font-weight: 700; color: #333; line-height: 23px; margin-top: 0; margin-bottom: 12px; }
 #contenido-principal .col h2 { font-size: 17px; font-weight: 700; color: #333; line-height: 21px; margin-top: 0; margin-bottom: 12px; }
 #contenido-principal .col p { font-size: 15px; font-weight: 400; line-height: 16px; color: #747474; }
-#contenido-principal .col ul { padding-left: 18px; margin: 0; }
+#contenido-principal .col ul { padding-left: 18px; margin-bottom: 20px; }
 
 #contenido-principal .col .imagen { height: 150px; background-color: #f5f5f5; background-position: center !important; background-size: cover !important; object-fit: cover; }
 #contenido-principal .col .bloque,
@@ -64,5 +75,14 @@ div:nth-of-type(4n+3) { border-bottom: 0 !important; padding-bottom: 0 !importan
 .tipo-documento #contenido-principal .col.col-titulo { padding-bottom: 0; }
 .tipo-documento #contenido-principal .col.col-imagen > div { height: 243px; }
 .tipo-documento #contenido-principal .col.col-texto { }
+
+.tipo-documento #contenido-principal table { width: 100%; }
+.tipo-documento #contenido-principal table thead { }
+.tipo-documento #contenido-principal table thead > tr { }
+.tipo-documento #contenido-principal table thead > tr > th { padding: 8px; border: 1px solid #d6d6d6; }
+.tipo-documento #contenido-principal table tbody { }
+.tipo-documento #contenido-principal table tbody > tr { }
+.tipo-documento #contenido-principal table tbody > tr > td { padding: 8px; border: 1px solid #d6d6d6; }
+
 
 /**/

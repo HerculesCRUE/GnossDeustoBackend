@@ -99,7 +99,21 @@ ya que la primera directiva es `@*<% api https://localhost:44359/Job?type=0&coun
     group by ?type
     /%>*@
 	
-En el caso de que se que quieran hacer más llamadas el orden de recogida de los datos equivale al orden en el que se uasn esas en llamadas en la vista.
+En el caso de que se que quieran hacer más llamadas el orden de recogida de los datos equivale al orden en el que se usan esas llamadas en la vista.
+
+En el siguiente fragmento de código tenemos dos bloques, el primer bloque donde se cogen los resultados de la posición 0 (FirstOrDefault) que pertenecen a una llamada del api, ya que la primera llamada del ejemplo es a un api, una vez cogido los datos en la variable resultApi que posteriormente se hace la deserialización de JSON ya que los apis mandan los resultados en este formato, para obtener nuestro objeto deseado. El segundo bloque pertenece a la obtención de datos de una consulta sparql donde cogemos el elemento que se encuentra en la posición 1 (Model.Results[1]) ya que la segunda llamada en el ejemplo se corresponde con una consulta sparql, una vez obtenidos los resultados en resultSparql, hacemos el tratamiento para leer los datos que vienen en formato CSV.
+
+    string resultApi = Model.Results.FirstOrDefault();
+    List<JobPage> resultObject = JsonConvert.DeserializeObject<List<JobPage>>(resultApi);
+    var jobs = resultObject.Where(item => item.ExecutedAt.HasValue).OrderByDescending(item => item.ExecutedAt.Value).Take(2);
+	
+    string resultSparql = Model.Results[1];
+    byte[] byteArray = Encoding.UTF8.GetBytes(resultSparql);
+    MemoryStream stream = new MemoryStream(byteArray);
+    var csvReader = new CsvReader(new StreamReader(stream), CultureInfo.InvariantCulture);
+    var records = csvReader.GetRecords<PruebaSparql>();
+
+
 
 ## Varias consultas Sparql
 Se puede encontrar este ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/paginas/Consultas-Sparql.cshtml

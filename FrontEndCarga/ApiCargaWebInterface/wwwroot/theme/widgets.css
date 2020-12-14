@@ -1,0 +1,83 @@
+/* GENERAL */
+
+/*@import url(https://fonts.googleapis.com/css?family=EB+Garamond);*/
+
+:root {
+	--color-blanco: #FFF;
+	--color-blanco-2: #F2F2F2;
+  --color-negro: #000;
+  --color-gris-3: #333;
+  --color-gris-5: #555;
+  --color-gris-6: #666;
+  --color-gris-7: #777;
+  --color-gris-8: #888;
+  --color-gris-9: #999;
+  --color-gris-c: #CCC;
+  --color-gris-d: #DDD;
+  --color-gris-e: #eee;
+  --color-amarillo: #cccc00;
+  --color-verde: #a3a300;
+  --color-naranja: #f57d19;
+  --color-naranja-oscuro: #C46414;
+	--color-verde-oscuro: #005840;
+	--color-rojo: #d50000;
+}
+
+:focus{outline: 0 !important; }
+	
+	
+/* WIDGET BUSCADOR */
+	
+	.-wbg{background:#FFF; padding:15px; max-width:640px; min-width:150px; border: 1px solid var(--color-verde-oscuro) }
+	.-wbg *{font-family:"Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif; font-size:13px; margin:0; padding:0;}
+	
+	.-wbg-section{}
+	.-wbg-section .-wbg-logo{width: auto; max-width: 330px; height: auto; max-height: 35px; }
+	.-wbg-section .-wbg-encontrar{color:#727272;}
+	
+	.-wbg-finder{background:#EFEBE6; position:relative; margin:3px 0; padding: 5px; }
+	.-wbg-finder input{border:0; height:28px; background-color: #EFEBE6; }
+	.-wbg-finder input#gnoss_txtBusqueda{width:90%; padding:0 6px; font-weight: normal; }
+	.-wbg-finder input#gnoss_btnBuscar{text-indent:-9999px; overflow:hidden; width:38px; height: 38px; position:absolute; top:0; right:0; background: #EFEBE6 url("resources/lupa-gris.png?v=2.2.0037_20160113_1521") no-repeat 7px 7px; border-left: 2px solid #FFF; }
+	.-wbg-finder input.defaultText {color: #AAAAAA; font-size: 12px;}
+	
+	.-wbg-author{color:#FFF; text-align:right; font-size: 13px; margin-top: 15px; margin-right: -15px; margin-bottom: -15px; margin-left: -15px; background-color: var(--color-verde-oscuro); height: 30px; }
+	.-wbg-author img{margin-bottom: -10px; height: 100%; max-width: 70px; }
+	
+	.-wbg-nomComunidad{font-size: 20px; color: var(--color-verde-oscuro); font-weight: bold; text-transform: uppercase; font-family: DidactaliaBold; }
+	
+/* WIDGET NOVEDADES */
+
+	.widget-usuario-gnoss { /*background: none !important; border: 1px solid var(--color-verde-oscuro);*/ }
+	.widget-usuario-gnoss .wrap-widget-usuario-gnoss{ background:white; }
+	.widget-usuario-gnoss h3 { border-bottom: 1px solid #ddd; margin: 0; padding: 15px; font-size: 13px; }
+	.widget-usuario-gnoss h3 a{text-decoration: none; color: #000; }
+	.widget-usuario-head-gnoss img{max-width: 70px; vertical-align: middle; margin: 5px; }
+	.widget-usuario-head-gnoss img.logoCompleto{width: auto; max-width: 100%; margin: 0;}
+
+	#bodyWidget { }	
+	#bodyWidget .resource-list-gnoss {  }
+	#bodyWidget .resource-list-gnoss .resource-gnoss { border-bottom: 1px solid #ddd; padding: 5px 10px; }
+	#bodyWidget .resource-list-gnoss .resource-gnoss .title-gnoss { margin-bottom: 5px; }
+	#bodyWidget .resource-list-gnoss .resource-gnoss .title-gnoss h4 { margin: 0; max-width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+	#bodyWidget .resource-list-gnoss .resource-gnoss .title-gnoss h4 a { text-decoration: none; /*color: #000;*/ font-family: 'Georgia', serif; font-size: 14px; line-height: 1; font-weight: 100; }	
+	#bodyWidget .resource-list-gnoss .resource-gnoss .title-gnoss .resourceType { display: none; }
+
+	#bodyWidget .resource-list-gnoss .resource-gnoss .group-gnoss.author-gnoss { display: table; width: 100%; margin: 0;  }
+	#bodyWidget .resource-list-gnoss .resource-gnoss .group-gnoss.author-gnoss .imagenPublicador { float: none; margin: 0; padding-right: 10px; display: table-cell; vertical-align: middle; width: 40px;  }
+	#bodyWidget .resource-list-gnoss .resource-gnoss .group-gnoss.author-gnoss .imagenPublicador .author-image-gnoss { }
+	#bodyWidget .resource-list-gnoss .resource-gnoss .group-gnoss.author-gnoss .imagenPublicador .author-image-gnoss img { border-radius: 50%; width: 40px; height: 40px; border: 1px solid #f0f0f0; }
+
+	#bodyWidget .resource-list-gnoss .resource-gnoss .group-gnoss.author-gnoss .datosPublicador { margin-top: 0px; display: table-cell; vertical-align: middle; width: 100%; }
+	#bodyWidget .resource-list-gnoss .resource-gnoss .group-gnoss.author-gnoss .datosPublicador a,
+	#bodyWidget .resource-list-gnoss .resource-gnoss .group-gnoss.author-gnoss .datosPublicador p { color: #777; text-decoration: none; font-family: helvetica, arial, sans-serif; font-size: 12px; line-height: 1.5; }
+	#bodyWidget .resource-list-gnoss .resource-gnoss .group-gnoss.author-gnoss .datosPublicador .publicacion-gnoss { margin: 0; }
+
+	#panPie { /*background: var(--color-verde-oscuro);*/ display: table; width: 100%; } 
+	#panPie p { margin: 0; padding: 5px 10px; float: right; }
+	#panPie p a { color: #fff; text-decoration: none; font-size: 13px; }
+	#panPie p a span { background: url('resources/spriteWidgetGnoss.png?v=2.2.0037_20160113_1521') 0 -25px no-repeat; text-indent: -9999em; display: inline-block; width: 60px; height: 15px; vertical-align: middle; opacity: 0.7; }
+	#panPie.default1 p span{background-position:0 -25px}
+	#panPie.default1 p a{color:#fff}
+	#panPie.default2 p span{background-position:0 -50px}
+	#panPie.default2 p a{color:#888}
