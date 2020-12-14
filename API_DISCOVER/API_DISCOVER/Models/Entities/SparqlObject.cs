@@ -2,8 +2,10 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using VDS.RDF.Query;
 
 namespace API_DISCOVER.Models.Entities
 {
@@ -14,6 +16,7 @@ namespace API_DISCOVER.Models.Entities
         public Head head { get; set; }
         public Results results { get; set; }
         public bool boolean { get; set; }
+
 
         [DataContract]
         public class Data

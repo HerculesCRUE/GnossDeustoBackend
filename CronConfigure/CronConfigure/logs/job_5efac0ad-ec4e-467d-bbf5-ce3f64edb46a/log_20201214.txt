@@ -1,0 +1,7 @@
+2020-12-14 09:29:25.357 +01:00 [ERR] One or more errors occurred. (No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.)
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at CronConfigure.Models.Services.CallApiService.CallPostApi(String urlMethod, Object item, TokenBearer token) in C:\GNOSS\Proyectos\Hercules\GnossDeustoBackend-GIT\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\CallApiService.cs:line 45
+   at CronConfigure.Models.Services.ProgramingMethodsService.PublishRepositories(Guid idRepositoryGuid, PerformContext context, Nullable`1 fecha, String pSet, String codigoObjeto) in C:\GNOSS\Proyectos\Hercules\GnossDeustoBackend-GIT\GnossDeustoBackend\CronConfigure\CronConfigure\Models\Services\ProgramingMethodsService.cs:line 72
+

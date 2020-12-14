@@ -53,7 +53,8 @@ namespace API_CARGA.Models.Services
             {
                 RepositoryConfigID = new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"),
                 Name = "ConfigRepository_5",
-                Url = "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH",
+                //Url = "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH",
+                Url = "https://localhost:44308/OAI_PMH",
                 OauthToken = "87f9"
             }) ;
             _configRepositories.Add(new RepositoryConfig

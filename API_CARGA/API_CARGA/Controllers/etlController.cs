@@ -2,14 +2,6 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Contiene los procesos ETL (Extract, Transform and Load) necesarios para la carga de datos.
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Net;
-using System.Security.Cryptography;
-using System.Text;
-using System.Xml;
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
 using API_CARGA.Models.Utility;
@@ -17,6 +9,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Security.Cryptography;
+using System.Text;
+using System.Xml;
 using VDS.RDF;
 
 namespace API_CARGA.Controllers
@@ -30,16 +28,16 @@ namespace API_CARGA.Controllers
     public class etlController : Controller
     {
         private IRepositoriesConfigService _repositoriesConfigService;
-        private DiscoverItemBDService _discoverItemService;
+        private IDiscoverItemService _discoverItemService;
         private IShapesConfigService _shapeConfigService;
         readonly ConfigSparql _configSparql;
         readonly CallUri _callUri;
         readonly ConfigUrlService _configUrlService;
         readonly IRabbitMQService _amqpService;
 
-        public etlController(DiscoverItemBDService iIDiscoverItemService, IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallUri callUri, ConfigUrlService configUrlService, IRabbitMQService amqpService)
+        public etlController(IDiscoverItemService iDiscoverItemService, IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallUri callUri, ConfigUrlService configUrlService, IRabbitMQService amqpService)
         {
-            _discoverItemService = iIDiscoverItemService;
+            _discoverItemService = iDiscoverItemService;
             _repositoriesConfigService = iRepositoriesConfigService;
             _shapeConfigService = iShapeConfigService;
             _configSparql = configSparql;
@@ -64,7 +62,11 @@ namespace API_CARGA.Controllers
         {
             try
             {
-                string idDiscoverItem = Request.Query["idDiscoverItem"].ToString();
+                string idDiscoverItem = null;
+                if (Request != null)
+                {
+                    idDiscoverItem = Request.Query["idDiscoverItem"].ToString();
+                }
                 if (!string.IsNullOrEmpty(idDiscoverItem))
                 {
                     //Si viene el parametro 'idDiscoverItem' actualizamos un DiscoverItem ya existente.
@@ -87,6 +89,7 @@ namespace API_CARGA.Controllers
                     _amqpService.PublishMessage(addedID);
                     return Ok();
                 }
+
             }
             catch (Exception ex)
             {
@@ -111,13 +114,14 @@ namespace API_CARGA.Controllers
             try
             {
                 string rdfFileContent = SparqlUtility.GetTextFromFile(rdfFile);
-                return Ok(SparqlUtility.ValidateRDF(rdfFileContent, _shapeConfigService.GetShapesConfigs().FindAll(x => x.RepositoryID == repositoryIdentifier)));
+                RohGraph ontologyGraph = new RohGraph();
+                ontologyGraph.LoadFromString(OntologyService.GetOntology());
+                return Ok(SparqlUtility.ValidateRDF(rdfFileContent, _shapeConfigService.GetShapesConfigs().FindAll(x => x.RepositoryID == repositoryIdentifier), ontologyGraph));
             }
             catch (Exception ex)
             {
                 return Problem(ex.ToString());
             }
-
         }
 
         /// <summary>
@@ -144,7 +148,6 @@ namespace API_CARGA.Controllers
             {
                 return Problem(ex.ToString());
             }
-
         }
 
         /// <summary>
@@ -164,7 +167,7 @@ namespace API_CARGA.Controllers
                 string ontologyGraph = "";
                 ontologyGraph = _configSparql.GetGraphRoh();
                 RohGraph graph = new RohGraph();
-                graph.LoadFromString(OntologyService.GetOntology());                
+                graph.LoadFromString(OntologyService.GetOntology());
                 SparqlUtility.LoadOntology(graph, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), ontologyGraph);
                 return Ok();
             }
@@ -202,7 +205,7 @@ namespace API_CARGA.Controllers
         }
 
         /// <summary>
-        /// Obtiene el estado de una tarea de descubrimiento descubrimiento
+        /// Obtiene el estado de una tarea de descubrimiento
         /// </summary>
         /// <param name="identifier">Identificador de la tarea de descubrimiento</param>
         /// <returns></returns>
@@ -478,7 +481,7 @@ namespace API_CARGA.Controllers
         /// <param name="hashAlgorithm"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        private static string GetHash(HashAlgorithm hashAlgorithm, string input)
+        public string GetHash(HashAlgorithm hashAlgorithm, string input)
         {
 
             // Convert the input string to a byte array and compute the hash.
@@ -497,17 +500,6 @@ namespace API_CARGA.Controllers
 
             // Return the hexadecimal string.
             return sBuilder.ToString();
-        }
-
-        private byte[] getByte(string URL)
-        {
-            HttpWebRequest wrGETURL = (HttpWebRequest)WebRequest.Create(URL);
-            System.Net.HttpWebResponse webresponse = (HttpWebResponse)wrGETURL.GetResponse();
-            string ct = webresponse.ContentType;
-            Stream objStream = webresponse.GetResponseStream();
-            BinaryReader breader = new BinaryReader(objStream);
-            byte[] buffer = breader.ReadBytes((int)webresponse.ContentLength);
-            return buffer;
         }
     }
 }
