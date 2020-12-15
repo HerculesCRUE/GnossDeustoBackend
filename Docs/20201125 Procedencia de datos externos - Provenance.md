@@ -4,10 +4,10 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Hércules ASIO. Procedencia de datos - Provenance| 
 |Descripción|Gestión de la procedencia de los datos incorporados a ASIO desde fuentes externas|
-|Versión|1.0|
+|Versión|1.1|
 |Módulo|API DISCOVER|
 |Tipo|Especificación|
-|Cambios de la Versión|Cambios en el modelo de datos para añadir el detalle de la actividad de procedencia que originó el dato|
+|Cambios de la Versión|Cambio en el grafo que alojará los triples de provenance|
 
 # Hércules Backend ASIO. Procedencia de datos - Provenance
 
@@ -42,13 +42,9 @@ Este triple se cargaría en el grafo principal de ASIO y también en un grafo co
 
 Datos de procedencia
 =============
-El RDF Store contendrá un grafo con triples que describirán cada una de las fuentes externas esperadas, de acuerdo a la ontología [PROV-O](https://www.w3.org/TR/prov-o/). Con esta información se podrá consultar y mostrar la procedencia de cada dato externo. 
+El grafo de SGI-ASIO alojado en el RDF Store contendrá los triples que describirán cada una de las fuentes externas esperadas, de acuerdo a la ontología [PROV-O](https://www.w3.org/TR/prov-o/). Con esta información se podrá consultar y mostrar la procedencia de cada dato externo. 
 
-Por ejemplo, el nombre del grafo podría ser:
-
-    http://graph.um.es/graph/provenance
-
-Y contendría los siguientes datos:
+Las fuentes de datos se describirán con triples similares a estos:
 
     @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
     @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -71,7 +67,9 @@ Y contendría los siguientes datos:
     	foaf:homePage "https://dblp.org/";
     .
 
-En el grafo de ASIO se cargaría los siguientes triples:
+En el proceso de descubrimiento se pueden incorporar triples desde fuentes externas. Por ejemplo, si se recuperase un código ORCID desde DBLP se cargarían los siguientes triples:
+
+Grafo de SGI-ASIO:
 
     roh:res/researcher/id1 roh:ORCID "00000".
     
@@ -80,7 +78,7 @@ En el grafo de ASIO se cargaría los siguientes triples:
 	    foaf:name "Algoritmo de carga Hércules ASIO";
     .
 
-Finalmente, los siguientes triples en el grafo de DBLP :
+Grafo de DBLP (roh:graph/dblp):
 
     roh:res/researcher/id1 prov:wasUsedBy _:bnode1.  
     _:bnode1
