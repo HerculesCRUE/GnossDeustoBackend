@@ -6,20 +6,6 @@
 }
 
 
-<div id="headerListado">
-    <div class="col col01 col-md-3">
-        <div class="h1-container">
-            <h1>Shapes</h1>
-            <span class="numResultados">( @Model.Count() )</span>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row row-buscador">
-            <div class="col col02 col-md-12">
-            </div>
-        </div>
-    </div>
-</div>
 <div class="row">
     <div class="col col-12 col-lg-12 col-contenido">
         <div class="wrapCol">
@@ -30,6 +16,10 @@
             </div>
             <div class="resource-list compacView">
                 <div class="wrap">
+                   @* <div class="h1-container">*@
+                        <h1>Shapes ( @Model.Count() )</h1>
+                       @* <span class="numResultados">( @Model.Count() )</span>*@
+                    @*</div>*@
                     @foreach (var item in Model)
                     {
 
@@ -38,7 +28,7 @@
                                 <h2>
                                     <a href="@Url.Action("Details", new {  id=item.ShapeConfigID  })">@Html.DisplayFor(modelItem => item.Name)</a>
                                 </h2>
-                                <div class="desc">  
+                                <div class="desc">
                                 </div>
                             </div>
                         </article>

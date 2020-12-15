@@ -58,13 +58,15 @@ namespace ApiCargaWebInterface.Controllers
         public IActionResult Index()
         {
             var pages = _documentationApi.GetPages();
+            pages = pages.OrderBy(item => item.Route).ToList();
             List<PageViewModel> pagesViewModel = new List<PageViewModel>();
             foreach (var page in pages)
             {  
                 PageViewModel pageViewModel = new PageViewModel()
                 {
                     Route = page.Route,
-                    PageId = page.PageId
+                    PageId = page.PageId,
+                    LastModified = page.LastModified
                 };
                 pagesViewModel.Add(pageViewModel);
             }

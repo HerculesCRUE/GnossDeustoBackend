@@ -23,7 +23,9 @@
                                 <h2>
                                     <a href="@Url.Action("Details", new {  route=item.Route  })">@Html.DisplayFor(modelItem => item.Route)</a>
                                 </h2>
-                                
+                                <div class="desc">                                
+                                    <p>Fecha de modificación: @item.LastModified</p>
+                                </div>
                             </div>
                         </article>
                     }
