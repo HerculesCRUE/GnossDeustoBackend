@@ -3,9 +3,11 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase de ejemplo para mostrar el correcto reemplazo de un fichero de configuración
 using Swashbuckle.AspNetCore.Filters;
+using System.Diagnostics.CodeAnalysis;
 
 namespace UrisFactory.ModelExamples
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase de ejemplo para mostrar el correcto reemplazo de un fichero de configuración
     ///</summary>

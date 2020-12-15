@@ -4,11 +4,13 @@
 // Añadir parámetros dinámicamente en Swagger
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Diagnostics.CodeAnalysis;
 using UrisFactory.Models.ConfigEntities;
 using UrisFactory.Models.Services;
 
 namespace UrisFactory.Filters
 {
+    [ExcludeFromCodeCoverage]
     public class AddParametersFilter: IOperationFilter
     {
         private ConfigJsonHandler _configJsonHandler;

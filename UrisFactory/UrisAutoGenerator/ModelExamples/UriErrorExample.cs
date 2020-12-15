@@ -3,8 +3,11 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase de ejemplo para mostrar un error
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace UrisFactory.ModelExamples
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase de ejemplo para mostrar un error
     ///</summary>

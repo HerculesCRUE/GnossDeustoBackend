@@ -6,12 +6,14 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Serilog;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Threading.Tasks;
 using UrisFactory.Extra.Exceptions;
 
 namespace UrisFactory.Middlewares
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase que hace de middleware y gestiona los errores de la aplicación para generar logs
     ///</summary>

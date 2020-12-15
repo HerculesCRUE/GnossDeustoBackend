@@ -3,9 +3,11 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase de ejemplo para mostrar un error a la hora recuperar información sobre una estructura uri
 using Swashbuckle.AspNetCore.Filters;
+using System.Diagnostics.CodeAnalysis;
 
 namespace UrisFactory.ModelExamples
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase de ejemplo para mostrar un error a la hora recuperar información sobre una estructura uri
     ///</summary>

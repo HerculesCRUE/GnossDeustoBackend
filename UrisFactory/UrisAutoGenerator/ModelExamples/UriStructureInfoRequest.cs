@@ -4,11 +4,13 @@
 // Clase de ejemplo para mostrar un ejemplo de estructura uri
 using Swashbuckle.AspNetCore.Filters;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UrisFactory.Models.ConfigEntities;
 using UrisFactory.ViewModels;
 
 namespace UrisFactory.ModelExamples
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase de ejemplo para mostrar un ejemplo de estructura uri
     ///</summary>

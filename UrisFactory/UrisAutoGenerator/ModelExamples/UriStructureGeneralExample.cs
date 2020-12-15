@@ -4,10 +4,12 @@
 // Clase de ejemplo para mostrar un ejemplo del fichero de configuración
 using Swashbuckle.AspNetCore.Filters;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UrisFactory.Models.ConfigEntities;
 
 namespace UrisFactory.ModelExamples
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase de ejemplo para mostrar un ejemplo del fichero de configuración
     ///</summary>

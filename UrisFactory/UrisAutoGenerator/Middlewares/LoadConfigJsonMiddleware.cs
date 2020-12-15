@@ -3,10 +3,12 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase que hace de middleware y carga el fichero de configuración
 using Microsoft.AspNetCore.Http;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace UrisFactory.Middlewares
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase que hace de middleware y carga el fichero de configuración
     ///</summary>
