@@ -20,8 +20,9 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
         /// Cookie para las peticiones
         /// </summary>
         private static string _cookie { get; set; }
-        //TODO cambiar
+       
         public string Name { get { return "Web of Science"; } }
+        public string Description { get { return "Los datos del Grafo de Conocimiento de la investigación que contiene Hércules ASIO provienen del Sistema de Gestión de la Investigación de la Universidad de Murcia."; } }
 
         public string HomePage { get { return "http://wos.fecyt.es/"; } }
 

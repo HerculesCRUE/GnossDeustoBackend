@@ -10,8 +10,10 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// Clase para interactuar con el API de PUBMED
     /// </summary>
     public class PUBMED_API : I_ExternalAPI
-    {//TODO cambiar
+    {
         public string Name { get { return "PubMed"; } }
+
+        public string Description { get { return "PubMed® comprises more than 30 million citations for biomedical literature from MEDLINE, life science journals, and online books."; } }
 
         public string HomePage { get { return "https://pubmed.ncbi.nlm.nih.gov/"; } }
 

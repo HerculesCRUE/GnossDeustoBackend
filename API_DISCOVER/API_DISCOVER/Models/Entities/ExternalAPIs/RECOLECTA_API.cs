@@ -11,8 +11,9 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// Clase para interactuar con el API de Recolecta
     /// </summary>
     public class RECOLECTA_API : I_ExternalAPI
-    {//TODO cambiar
+    {
         public string Name { get { return "Recolecta"; } }
+        public string Description { get { return "RECOLECTA, o Recolector de Ciencia Abierta, es el agregador nacional de repositorios de acceso abierto. En esta plataforma se agrupan a todas las infraestructuras digitales españolas en las que se publican y/o depositan resultados de investigación en acceso abierto. "; } }
 
         public string HomePage { get { return "https://recolecta.fecyt.es/"; } }
 

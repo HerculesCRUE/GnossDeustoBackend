@@ -45,7 +45,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pAttributedTo">Sujeto y nombre para atribuir los triples de los apis externos</param>
         /// <param name="pActivityStartedAtTime">Inicio del proceso</param>
         /// <param name="pActivityEndedAtTime">Fin del proceso</param>
-        /// <param name="externalIntegration">Datos extraídos de las integracinoes externas sujeto, propiedad, valor, grafos</param>
+        /// <param name="externalIntegration">Datos extraídos de las integracinoes externas sujeto, propiedad, valor, identificador fuente externa</param>
         public void PublishRDF(RohGraph dataGraph, RohGraph dataInferenceGraph, RohGraph ontologyGraph, KeyValuePair<string, string>? pAttributedTo, DateTime pActivityStartedAtTime, DateTime pActivityEndedAtTime, Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> externalIntegration)
         {
             // 1º Eliminamos de la BBD las entidades principales que aparecen en el RDF
@@ -79,9 +79,11 @@ namespace API_DISCOVER.Utility
                     foreach (string t_property in externalIntegration[t_subject].Keys)
                     {
                         string t_object = externalIntegration[t_subject][t_property].Key;
-                        HashSet<string> t_graphs = externalIntegration[t_subject][t_property].Value;
-                        foreach (string graph in t_graphs)
+                        HashSet<string> t_sourceids = externalIntegration[t_subject][t_property].Value;
+                        foreach (string sourceId in t_sourceids)
                         {
+                            //TODO urisfactory
+                            string graph= "http://graph.um.es/graph/" + sourceId;
                             if (!graphTriples.ContainsKey(graph))
                             {
                                 graphTriples.Add(graph, new List<string>());
@@ -94,6 +96,10 @@ namespace API_DISCOVER.Utility
                             graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ""{ t_object.Replace("\"", "\\\"").Replace("\n", "\\n") }""^^<http://www.w3.org/2001/XMLSchema#string>.");
                             graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#startedAtTime> ""{ pActivityStartedAtTime }""^^<http://www.w3.org/2001/XMLSchema#datetime>.");
                             graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#endedAtTime> ""{ pActivityEndedAtTime }""^^<http://www.w3.org/2001/XMLSchema#datetime>.");
+                            graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#wasAssociatedWith> <{pAttributedTo.Value.Key}>.");
+                            //TODO urisfactory
+                            graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#wasAssociatedWith> <http://graph.um.es/res/organization/{sourceId}>.");
+                       
                             if (pAttributedTo.HasValue)
                             {
                                 graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#wasAssociatedWith> <{pAttributedTo.Value.Key}>.");

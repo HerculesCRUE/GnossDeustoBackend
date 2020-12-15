@@ -1,5 +1,6 @@
 ﻿using API_DISCOVER.Models.Entities;
 using API_DISCOVER.Models.Entities.ExternalAPIs;
+using API_DISCOVER.Models.Log;
 using API_DISCOVER.Models.Services;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -8,7 +9,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading;
 using System.Web;
@@ -237,7 +237,7 @@ namespace API_DISCOVER.Utility
                 {
                     AsioPublication asioPublication = new AsioPublication(mSparqlUtility, mSPARQLEndpoint, mQueryParam, mGraph);
                     //TODO usirsfactory
-                    asioPublication.PublishRDF(pDiscoverResult.dataGraph, pDiscoverResult.dataInferenceGraph, pDiscoverResult.ontologyGraph,new KeyValuePair<string, string>("http://graph.um.es/res/agent/discover", "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.externalIntegration);
+                    asioPublication.PublishRDF(pDiscoverResult.dataGraph, pDiscoverResult.dataInferenceGraph, pDiscoverResult.ontologyGraph, new KeyValuePair<string, string>("http://graph.um.es/res/agent/discover", "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.externalIntegration);
                     //Lo marcamos como procesado en la BBDD y eliminamos sus metadatos
                     pDiscoverItem.UpdateProcessed();
                     pDiscoverItemBDService.ModifyDiscoverItem(pDiscoverItem);
@@ -951,18 +951,15 @@ namespace API_DISCOVER.Utility
                         }
                         if (dataProperty.property.type == Disambiguation.Property.Type.name)
                         {
-                            //selectProperty = $"\n\t\t\t\tselect ?s count(?p)*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")} as {varScore} where\n\t\t\t\t{{";
-                            //orderProperty = $"\n\t\t\t\t}} order by desc (count(?p)*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")})   limit 10";
                         }
                         else if (dataProperty.property.type == Disambiguation.Property.Type.title)
                         {
-
-                            selectProperty = $"\n\t\t\t\tselect ?s count(?p*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")}) as {varScore} where\n\t\t\t\t{{";
-                            orderProperty = $"\n\t\t\t\t}} group by ?s order by desc (count(?p*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")}))   limit 10";
+                            selectProperty = $"\n\t\t\t\tselect ?s (count(?p)*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")}) as {varScore} where\n\t\t\t\t{{";
+                            orderProperty = $"\n\t\t\t\t}} group by ?s order by desc (count(?p)*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")})   limit 10";
                         }
                         else
                         {
-                            selectProperty = $"\n\t\t\t\tselect ?s count(distinct (?p*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")})) as {varScore} where\n\t\t\t\t{{";
+                            selectProperty = $"\n\t\t\t\tselect ?s (count(distinct ?p)*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")}) as {varScore} where\n\t\t\t\t{{";
                             orderProperty = $"\n\t\t\t\t}} group by ?s";
                         }
 
@@ -2306,7 +2303,7 @@ namespace API_DISCOVER.Utility
 
             //Identificadores descubiertos con las integraciones externas
             Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> identifiersDiscover;
-            
+
             RohGraph dataGraphClone = pDataGraph.Clone();
             Dictionary<string, Dictionary<string, float>> discoveredEntitiesProbabilityClone = new Dictionary<string, Dictionary<string, float>>(pDiscoveredEntitiesProbability);
 
@@ -2315,16 +2312,16 @@ namespace API_DISCOVER.Utility
             HashSet<RohGraph> provenanceGraphs = new HashSet<RohGraph>();
             List<Thread> hilosIntegracionesExternas = new List<Thread>();
 
-            Exception exception = null;
-            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph,RohGraph> data=ExternalIntegrationORCID(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key);provenanceGraphs.Add(data.Value); } catch (Exception ex) { exception = ex; } }));
-            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationSCOPUS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { exception = ex; } }));
-            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationDBLP(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { exception = ex; } }));
+            HashSet<Exception> APIsExceptions = new HashSet<Exception>();
+            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationORCID(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationSCOPUS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationDBLP(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
             //De momento lo omitimos, es muy lento y da timeout casi siempre
-            //hilosIntegracionesExternas.Add(new Thread(() => {try{  KeyValuePair<RohGraph,RohGraph> data=ExternalIntegrationCROSSREF(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key);provenanceGraphs.Add(data.Value);} catch (Exception ex) { exception = ex; }}));
-            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationPUBMED(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { exception = ex; } }));
-            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationWOS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { exception = ex; } }));
-            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationRECOLECTA(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { exception = ex; } }));
-            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationDOAJ(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { exception = ex; } }));
+            //hilosIntegracionesExternas.Add(new Thread(() => {try{  KeyValuePair<RohGraph,RohGraph> data=ExternalIntegrationCROSSREF(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key);provenanceGraphs.Add(data.Value);} catch (Exception ex) {APIsExceptions.Add(ex);  }}));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationPUBMED(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationWOS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationRECOLECTA(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationDOAJ(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
             foreach (Thread thread in hilosIntegracionesExternas)
             {
                 thread.Start();
@@ -2332,10 +2329,11 @@ namespace API_DISCOVER.Utility
             foreach (Thread thread in hilosIntegracionesExternas)
             {
                 thread.Join();
-                //if (exception != null)
-                //{
-                //    throw exception;
-                //}
+            }
+
+            foreach (Exception exception in APIsExceptions)
+            {
+                Log.Error(exception);
             }
 
             RohGraph externalGraph = new RohGraph();
@@ -2495,7 +2493,7 @@ namespace API_DISCOVER.Utility
                                                     }}");
                                             if (resultSetProvenance.Count > 0)
                                             {
-                                                identifiersDiscover[entityRDF][identifiersVars[identifier]] = new KeyValuePair<string, HashSet<string>>(((LiteralNode)sparqlResult[identifier.Replace("?", "")]).Value, new HashSet<string>(resultSetProvenance.Results.ToList().Select(x => x["provenance"].ToString()).ToList()));
+                                                identifiersDiscover[entityRDF][identifiersVars[identifier]] = new KeyValuePair<string, HashSet<string>>(((LiteralNode)sparqlResult[identifier.Replace("?", "")]).Value, new HashSet<string>(resultSetProvenance.Results.ToList().Select(x => ((LiteralNode)x["provenance"]).Value).ToList()));
                                             }
                                             else
                                             {
@@ -2535,7 +2533,7 @@ namespace API_DISCOVER.Utility
         private static KeyValuePair<RohGraph, RohGraph> ExternalIntegrationORCID(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability)
         {
             KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new ORCID_API());
-            string provenanceGraphUri = dataGraph.Key;
+            string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
             //Sólo debemos obtener datos de las entidades cargadas en el grafo, tanto para las personas como para las obras
@@ -2626,7 +2624,7 @@ namespace API_DISCOVER.Utility
                             IUriNode orcidProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
                             ILiteralNode nameOrcid = orcidGraph.CreateLiteralNode(result.orcid_id, new Uri("http://www.w3.org/2001/XMLSchema#string"));
                             orcidGraph.Assert(new Triple(subjectPerson, orcidProperty, nameOrcid));
-                            AddExternalIDProvenance(orcidGraph, subjectPerson, orcidProperty, nameOrcid, provenanceGraphUri);
+                            AddExternalIDProvenance(orcidGraph, subjectPerson, orcidProperty, nameOrcid, provenanceId);
 
                             //Hacemos peticiones al métdo dee ORCID ‘orcid}/ person' y almacenamos en un grafo en local los datos de los identificadores                       
                             ORCIDPerson person = SelectORCIDPersonCache(result.orcid_id, pDiscoverCache);
@@ -2640,14 +2638,14 @@ namespace API_DISCOVER.Utility
                                         IUriNode researcherProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#researcherId"));
                                         ILiteralNode nameResearcher = orcidGraph.CreateLiteralNode(extIdentifier.external_id_value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                         orcidGraph.Assert(new Triple(subjectPerson, researcherProperty, nameResearcher));
-                                        AddExternalIDProvenance(orcidGraph, subjectPerson, researcherProperty, nameResearcher, provenanceGraphUri);
+                                        AddExternalIDProvenance(orcidGraph, subjectPerson, researcherProperty, nameResearcher, provenanceId);
                                     }
                                     else if (extIdentifier.external_id_type == "Scopus Author ID")
                                     {
                                         IUriNode scopusProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#scopusId"));
                                         ILiteralNode nameScopus = orcidGraph.CreateLiteralNode(extIdentifier.external_id_value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                         orcidGraph.Assert(new Triple(subjectPerson, scopusProperty, nameScopus));
-                                        AddExternalIDProvenance(orcidGraph, subjectPerson, scopusProperty, nameScopus, provenanceGraphUri);
+                                        AddExternalIDProvenance(orcidGraph, subjectPerson, scopusProperty, nameScopus, provenanceId);
                                     }
                                 }
                             }
@@ -2720,7 +2718,7 @@ namespace API_DISCOVER.Utility
                                             IUriNode doiProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#doi"));
                                             ILiteralNode nameDoi = orcidGraph.CreateLiteralNode(worksData[workCode].Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                             orcidGraph.Assert(new Triple(subjectWork, doiProperty, nameDoi));
-                                            AddExternalIDProvenance(orcidGraph, subjectWork, doiProperty, nameDoi, provenanceGraphUri);
+                                            AddExternalIDProvenance(orcidGraph, subjectWork, doiProperty, nameDoi, provenanceId);
                                         }
                                     }
                                 }
@@ -2744,7 +2742,7 @@ namespace API_DISCOVER.Utility
         private static KeyValuePair<RohGraph, RohGraph> ExternalIntegrationSCOPUS(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability)
         {
             KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new SCOPUS_API());
-            string provenanceGraphUri = dataGraph.Key;
+            string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
             //Sólo debemos obtener datos de las entidades cargadas en el grafo, tanto para las personas como para las obras
@@ -2848,14 +2846,14 @@ namespace API_DISCOVER.Utility
                                 IUriNode scopusProperty = scopusGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#scopusId"));
                                 ILiteralNode nameScopus = scopusGraph.CreateLiteralNode(work.identifier.Replace("SCOPUS_ID:", ""), new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                 scopusGraph.Assert(new Triple(subjectWork, scopusProperty, nameScopus));
-                                AddExternalIDProvenance(scopusGraph, subjectWork, scopusProperty, nameScopus, provenanceGraphUri);
+                                AddExternalIDProvenance(scopusGraph, subjectWork, scopusProperty, nameScopus, provenanceId);
 
                                 if (!string.IsNullOrEmpty(work.doi))
                                 {
                                     IUriNode doiProperty = scopusGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#doi"));
                                     ILiteralNode nameDoi = scopusGraph.CreateLiteralNode(work.doi, new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                     scopusGraph.Assert(new Triple(subjectWork, doiProperty, nameDoi));
-                                    AddExternalIDProvenance(scopusGraph, subjectWork, doiProperty, nameDoi, provenanceGraphUri);
+                                    AddExternalIDProvenance(scopusGraph, subjectWork, doiProperty, nameDoi, provenanceId);
                                 }
 
                                 foreach (WorkAuthor author in work.author)
@@ -2892,7 +2890,7 @@ namespace API_DISCOVER.Utility
                                                 IUriNode orcidProperty = scopusGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
                                                 ILiteralNode nameOrcid = scopusGraph.CreateLiteralNode(person.coredata.orcid, new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                                 scopusGraph.Assert(new Triple(subjectPerson, orcidProperty, nameOrcid));
-                                                AddExternalIDProvenance(scopusGraph, subjectPerson, orcidProperty, nameOrcid, provenanceGraphUri);
+                                                AddExternalIDProvenance(scopusGraph, subjectPerson, orcidProperty, nameOrcid, provenanceId);
                                             }
 
                                             IUriNode firstAuthorProperty = scopusGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#_1"));
@@ -2922,7 +2920,7 @@ namespace API_DISCOVER.Utility
         private static KeyValuePair<RohGraph, RohGraph> ExternalIntegrationDBLP(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability)
         {
             KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new DBLP_API());
-            string provenanceGraphUri = dataGraph.Key;
+            string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
 
@@ -3015,7 +3013,7 @@ namespace API_DISCOVER.Utility
                             IUriNode dblpProperty = dblpGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#researcherDBLP"));
                             ILiteralNode nameDBLP = dblpGraph.CreateLiteralNode(idPerson.Replace("https://dblp.org/pid/", ""), new Uri("http://www.w3.org/2001/XMLSchema#string"));
                             dblpGraph.Assert(new Triple(subjectPerson, dblpProperty, nameDBLP));
-                            AddExternalIDProvenance(dblpGraph, subjectPerson, dblpProperty, nameDBLP, provenanceGraphUri);
+                            AddExternalIDProvenance(dblpGraph, subjectPerson, dblpProperty, nameDBLP, provenanceId);
 
                             //Hacemos peticiones al métdo 'person' y almacenamos en un grafo en local los datos de los identificadores                       
                             DBLPPerson person = SelectDBLPPersonCache(idPerson, pDiscoverCache);
@@ -3028,14 +3026,14 @@ namespace API_DISCOVER.Utility
                                         IUriNode orcidProperty = dblpGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
                                         ILiteralNode nameORCID = dblpGraph.CreateLiteralNode(url.Replace("https://orcid.org/", ""), new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                         dblpGraph.Assert(new Triple(subjectPerson, orcidProperty, nameORCID));
-                                        AddExternalIDProvenance(dblpGraph, subjectPerson, orcidProperty, nameORCID, provenanceGraphUri);
+                                        AddExternalIDProvenance(dblpGraph, subjectPerson, orcidProperty, nameORCID, provenanceId);
                                     }
                                     else if (url.StartsWith("https://www.researcherid.com/rid/"))
                                     {
                                         IUriNode researcherProperty = dblpGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#researcherId"));
                                         ILiteralNode nameResearcher = dblpGraph.CreateLiteralNode(url.Replace("https://www.researcherid.com/rid/", ""), new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                         dblpGraph.Assert(new Triple(subjectPerson, researcherProperty, nameResearcher));
-                                        AddExternalIDProvenance(dblpGraph, subjectPerson, researcherProperty, nameResearcher, provenanceGraphUri);
+                                        AddExternalIDProvenance(dblpGraph, subjectPerson, researcherProperty, nameResearcher, provenanceId);
                                     }
                                 }
                             }
@@ -3149,7 +3147,7 @@ namespace API_DISCOVER.Utility
                                             IUriNode dblpPropertyResearchObject = dblpGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#roDBLP"));
                                             ILiteralNode nameResearchObjectDBLP = dblpGraph.CreateLiteralNode(key, new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                             dblpGraph.Assert(new Triple(subjectWork, dblpPropertyResearchObject, nameResearchObjectDBLP));
-                                            AddExternalIDProvenance(dblpGraph, subjectWork, dblpPropertyResearchObject, nameResearchObjectDBLP, provenanceGraphUri);
+                                            AddExternalIDProvenance(dblpGraph, subjectWork, dblpPropertyResearchObject, nameResearchObjectDBLP, provenanceId);
 
                                             foreach (string url in urls)
                                             {
@@ -3158,7 +3156,7 @@ namespace API_DISCOVER.Utility
                                                     IUriNode doiProperty = dblpGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#doi"));
                                                     ILiteralNode nameDoi = dblpGraph.CreateLiteralNode(url.Replace("https://doi.org/", ""), new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                                     dblpGraph.Assert(new Triple(subjectWork, doiProperty, nameDoi));
-                                                    AddExternalIDProvenance(dblpGraph, subjectWork, doiProperty, nameDoi, provenanceGraphUri);
+                                                    AddExternalIDProvenance(dblpGraph, subjectWork, doiProperty, nameDoi, provenanceId);
                                                 }
                                             }
                                         }
@@ -3183,16 +3181,16 @@ namespace API_DISCOVER.Utility
         /// <param name="pDataGraph">Grafo en local con los datos del RDF</param>
         /// <param name="pDiscoveredEntitiesProbability">Entidades con probabilidades</param>
         /// <returns>Grafo con los datos obtenidos de CROSSREF</returns>
-        private static KeyValuePair< RohGraph,RohGraph> ExternalIntegrationCROSSREF(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability)
+        private static KeyValuePair<RohGraph, RohGraph> ExternalIntegrationCROSSREF(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability)
         {
-            KeyValuePair<string, RohGraph> dataGraph= CreateProvenanceGraph(new CROSSREF_API());
-            string provenanceGraphUri = dataGraph.Key;
+            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new CROSSREF_API());
+            string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
 
             //Sólo debemos obtener datos de las entidades cargadas en el grafo, tanto para las personas como para las obras
             //Adicionalmente obtendremos todas las obras de las personas que estén en duda (aparecen en 'pDiscoveredEntitiesProbability') pra ayudar en su reconciliación
-            
+
             int? numWordsTitle = null;
             if (mDisambiguationConfigs.FirstOrDefault(x => x.rdfType == "http://purl.org/roh/mirror/bibo#Document") != null &&
                 mDisambiguationConfigs.FirstOrDefault(x => x.rdfType == "http://purl.org/roh/mirror/bibo#Document").properties.FirstOrDefault(x => x.property == "http://purl.org/roh#title") != null &&
@@ -3313,7 +3311,7 @@ namespace API_DISCOVER.Utility
                                     IUriNode orcidProperty = crossrefGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
                                     ILiteralNode nameORCID = crossrefGraph.CreateLiteralNode(authorsORCID[name], new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                     crossrefGraph.Assert(new Triple(subjectPerson, orcidProperty, nameORCID));
-                                    AddExternalIDProvenance(crossrefGraph, subjectPerson, orcidProperty, nameORCID, provenanceGraphUri);
+                                    AddExternalIDProvenance(crossrefGraph, subjectPerson, orcidProperty, nameORCID, provenanceId);
                                 }
 
 
@@ -3361,7 +3359,7 @@ namespace API_DISCOVER.Utility
                                                     IUriNode doiProperty = crossrefGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#doi"));
                                                     ILiteralNode nameDoi = crossrefGraph.CreateLiteralNode(item.DOI, new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                                     crossrefGraph.Assert(new Triple(subjectWork, doiProperty, nameDoi));
-                                                    AddExternalIDProvenance(crossrefGraph, subjectWork, doiProperty, nameDoi, provenanceGraphUri);
+                                                    AddExternalIDProvenance(crossrefGraph, subjectWork, doiProperty, nameDoi, provenanceId);
                                                 }
                                             }
                                         }
@@ -3387,7 +3385,7 @@ namespace API_DISCOVER.Utility
         private static KeyValuePair<RohGraph, RohGraph> ExternalIntegrationPUBMED(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability)
         {
             KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new PUBMED_API());
-            string provenanceGraphUri = dataGraph.Key;
+            string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
             //Sólo debemos obtener datos de las entidades cargadas en el grafo, tanto para las personas como para las obras
@@ -3489,7 +3487,7 @@ namespace API_DISCOVER.Utility
                                     IUriNode pubmedProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#roPubmed"));
                                     ILiteralNode namePubmed = pubmedGraph.CreateLiteralNode(idWorkInt.ToString(), new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                     pubmedGraph.Assert(new Triple(subjectWork, pubmedProperty, namePubmed));
-                                    AddExternalIDProvenance(pubmedGraph, subjectWork, pubmedProperty, namePubmed, provenanceGraphUri);
+                                    AddExternalIDProvenance(pubmedGraph, subjectWork, pubmedProperty, namePubmed, provenanceId);
 
                                     if (article.ELocationID != null)
                                     {
@@ -3500,7 +3498,7 @@ namespace API_DISCOVER.Utility
                                                 IUriNode doiProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#doi"));
                                                 ILiteralNode nameDoi = pubmedGraph.CreateLiteralNode(elocation.Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                                 pubmedGraph.Assert(new Triple(subjectWork, doiProperty, nameDoi));
-                                                AddExternalIDProvenance(pubmedGraph, subjectWork, doiProperty, nameDoi, provenanceGraphUri);
+                                                AddExternalIDProvenance(pubmedGraph, subjectWork, doiProperty, nameDoi, provenanceId);
                                             }
                                         }
                                     }
@@ -3535,7 +3533,7 @@ namespace API_DISCOVER.Utility
                                                     IUriNode orcidProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
                                                     ILiteralNode nameOrcid = pubmedGraph.CreateLiteralNode(author.Identifier.Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                                     pubmedGraph.Assert(new Triple(subjectPerson, orcidProperty, nameOrcid));
-                                                    AddExternalIDProvenance(pubmedGraph, subjectPerson, orcidProperty, nameOrcid, provenanceGraphUri);
+                                                    AddExternalIDProvenance(pubmedGraph, subjectPerson, orcidProperty, nameOrcid, provenanceId);
                                                 }
 
                                                 IUriNode firstAuthorProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#_1"));
@@ -3565,7 +3563,7 @@ namespace API_DISCOVER.Utility
         private static KeyValuePair<RohGraph, RohGraph> ExternalIntegrationWOS(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability)
         {
             KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new SCOPUS_API());
-            string provenanceGraphUri = dataGraph.Key;
+            string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
 
@@ -3695,7 +3693,7 @@ namespace API_DISCOVER.Utility
                             IUriNode wosProperty = wosGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#roWOS"));
                             ILiteralNode nameWos = wosGraph.CreateLiteralNode(record.UID.Replace("WOS:", ""), new Uri("http://www.w3.org/2001/XMLSchema#string"));
                             wosGraph.Assert(new Triple(subjectWork, wosProperty, nameWos));
-                            AddExternalIDProvenance(wosGraph, subjectWork, wosProperty, nameWos, provenanceGraphUri);
+                            AddExternalIDProvenance(wosGraph, subjectWork, wosProperty, nameWos, provenanceId);
 
                             foreach (recordsRECDynamic_dataCluster_relatedIdentifier identifier in record.dynamic_data.cluster_related.identifiers)
                             {
@@ -3704,7 +3702,7 @@ namespace API_DISCOVER.Utility
                                     IUriNode doiProperty = wosGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#doi"));
                                     ILiteralNode nameDoi = wosGraph.CreateLiteralNode(identifier.value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                     wosGraph.Assert(new Triple(subjectWork, doiProperty, nameDoi));
-                                    AddExternalIDProvenance(wosGraph, subjectWork, doiProperty, nameDoi, provenanceGraphUri);
+                                    AddExternalIDProvenance(wosGraph, subjectWork, doiProperty, nameDoi, provenanceId);
                                 }
                             }
 
@@ -3739,7 +3737,7 @@ namespace API_DISCOVER.Utility
                                                 IUriNode identifierProperty = wosGraph.CreateUriNode(UriFactory.Create(identifierPropertyWOS));
                                                 ILiteralNode nameIdentifier = wosGraph.CreateLiteralNode(authorsIdentifiers[personName][identifierPropertyWOS], new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                                 wosGraph.Assert(new Triple(subjectPerson, identifierProperty, nameIdentifier));
-                                                AddExternalIDProvenance(wosGraph, subjectPerson, identifierProperty, nameIdentifier, provenanceGraphUri);
+                                                AddExternalIDProvenance(wosGraph, subjectPerson, identifierProperty, nameIdentifier, provenanceId);
                                             }
                                         }
 
@@ -3767,7 +3765,7 @@ namespace API_DISCOVER.Utility
         private static KeyValuePair<RohGraph, RohGraph> ExternalIntegrationRECOLECTA(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability)
         {
             KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new RECOLECTA_API());
-            string provenanceGraphUri = dataGraph.Key;
+            string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
             //Sólo debemos obtener datos de las entidades cargadas en el grafo, tanto para las personas como para las obras
@@ -3869,7 +3867,7 @@ namespace API_DISCOVER.Utility
                                             IUriNode doiProperty = recolectaGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#doi"));
                                             ILiteralNode nameDoi = recolectaGraph.CreateLiteralNode(link.Trim().Replace("http://dx.doi.org/", "").Replace("http://doi.org/", ""), new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                             recolectaGraph.Assert(new Triple(subjectWork, doiProperty, nameDoi));
-                                            AddExternalIDProvenance(recolectaGraph, subjectWork, doiProperty, nameDoi, provenanceGraphUri);
+                                            AddExternalIDProvenance(recolectaGraph, subjectWork, doiProperty, nameDoi, provenanceId);
                                         }
                                     }
                                 }
@@ -3902,7 +3900,7 @@ namespace API_DISCOVER.Utility
                                                 IUriNode orcidProperty = recolectaGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
                                                 ILiteralNode nameOrcid = recolectaGraph.CreateLiteralNode(work.authorList[personName], new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                                 recolectaGraph.Assert(new Triple(subjectPerson, orcidProperty, nameOrcid));
-                                                AddExternalIDProvenance(recolectaGraph, subjectPerson, orcidProperty, nameOrcid, provenanceGraphUri);
+                                                AddExternalIDProvenance(recolectaGraph, subjectPerson, orcidProperty, nameOrcid, provenanceId);
                                             }
 
                                             IUriNode firstAuthorProperty = recolectaGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#_1"));
@@ -3930,7 +3928,7 @@ namespace API_DISCOVER.Utility
         private static KeyValuePair<RohGraph, RohGraph> ExternalIntegrationDOAJ(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability)
         {
             KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new DOAJ_API());
-            string provenanceGraphUri = dataGraph.Key;
+            string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
             //Sólo debemos obtener datos de las entidades cargadas en el grafo, tanto para las personas como para las obras
@@ -4032,7 +4030,7 @@ namespace API_DISCOVER.Utility
                                         IUriNode doiProperty = doajGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#doi"));
                                         ILiteralNode nameDoi = doajGraph.CreateLiteralNode(identifier.id, new Uri("http://www.w3.org/2001/XMLSchema#string"));
                                         doajGraph.Assert(new Triple(subjectWork, doiProperty, nameDoi));
-                                        AddExternalIDProvenance(doajGraph, subjectWork, doiProperty, nameDoi, provenanceGraphUri);
+                                        AddExternalIDProvenance(doajGraph, subjectWork, doiProperty, nameDoi, provenanceId);
                                     }
                                 }
                             }
@@ -4080,17 +4078,17 @@ namespace API_DISCOVER.Utility
         /// <param name="pSubject">Sujeto</param>
         /// <param name="pProperty">Propiedad</param>
         /// <param name="pValue">Valor</param>
-        /// <param name="pProvenanceUri">Grafo de prevenencia</param>
-        private static void AddExternalIDProvenance(RohGraph pDataGraph, IUriNode pSubject, IUriNode pProperty, ILiteralNode pValue, string pProvenanceUri)
+        /// <param name="pProvenanceId">Identificador de la fuente externa</param>
+        private static void AddExternalIDProvenance(RohGraph pDataGraph, IUriNode pSubject, IUriNode pProperty, ILiteralNode pValue, string pProvenanceId)
         {
-            if (!string.IsNullOrEmpty(pProvenanceUri))
+            if (!string.IsNullOrEmpty(pProvenanceId))
             {
                 IUriNode externalIdProperty = pDataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#externalID"));
                 IBlankNode bnodeExternalId = pDataGraph.CreateBlankNode();
                 pDataGraph.Assert(new Triple(pSubject, externalIdProperty, bnodeExternalId));
                 pDataGraph.Assert(new Triple(bnodeExternalId, pProperty, pValue));
                 IUriNode provenanceProperty = pDataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#provenance"));
-                pDataGraph.Assert(new Triple(bnodeExternalId, provenanceProperty, pDataGraph.CreateUriNode(UriFactory.Create(pProvenanceUri))));
+                pDataGraph.Assert(new Triple(bnodeExternalId, provenanceProperty, pDataGraph.CreateLiteralNode(pProvenanceId, new Uri("http://www.w3.org/2001/XMLSchema#string"))));
             }
         }
 
@@ -4099,6 +4097,7 @@ namespace API_DISCOVER.Utility
             //TODO integrar uris factory
             string provenanceGraph = "http://graph.um.es/graph/" + pExternalAPI.Id;
             RohGraph rohApi = new RohGraph();
+            //TODO integrar urisfactory
             IUriNode subjectOrganization = rohApi.CreateUriNode(UriFactory.Create("http://graph.um.es/res/organization/" + pExternalAPI.Id));
             IUriNode rdftypeProperty = rohApi.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
             IUriNode rdftypeOrganization = rohApi.CreateUriNode(UriFactory.Create("http://www.w3.org/ns/prov#Organization"));
@@ -4106,13 +4105,16 @@ namespace API_DISCOVER.Utility
             IUriNode nameProperty = rohApi.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#name"));
             ILiteralNode nameValue = rohApi.CreateLiteralNode(pExternalAPI.Name, new Uri("http://www.w3.org/2001/XMLSchema#string"));
             rohApi.Assert(new Triple(subjectOrganization, nameProperty, nameValue));
+            IUriNode descriptionProperty = rohApi.CreateUriNode(UriFactory.Create("http://www.w3.org/2000/01/rdf-schema#"));
+            ILiteralNode descriptionValue = rohApi.CreateLiteralNode(pExternalAPI.Description, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+            rohApi.Assert(new Triple(subjectOrganization, descriptionProperty, descriptionValue));
             IUriNode homepageProperty = rohApi.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#homePage"));
             ILiteralNode homepageValue = rohApi.CreateLiteralNode(pExternalAPI.HomePage, new Uri("http://www.w3.org/2001/XMLSchema#string"));
             rohApi.Assert(new Triple(subjectOrganization, homepageProperty, homepageValue));
             IUriNode subjectGraph = rohApi.CreateUriNode(UriFactory.Create(provenanceGraph));
             IUriNode wasAttributedToProperty = rohApi.CreateUriNode(UriFactory.Create("http://www.w3.org/ns/prov#wasAttributedTo"));
             rohApi.Assert(new Triple(subjectGraph, wasAttributedToProperty, subjectOrganization));
-            return new KeyValuePair<string, RohGraph>(provenanceGraph, rohApi);
+            return new KeyValuePair<string, RohGraph>(pExternalAPI.Id, rohApi);
         }
 
         #endregion

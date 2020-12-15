@@ -19,8 +19,9 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             "r|proceedings|title",
             "r|incollection|title",
             "r|collection|title"};
-        //TODO cambiar
+        
         public string Name { get { return "DBLP Computer Science Bibliography"; } }
+        public string Description { get { return "The dblp computer science bibliography is the on-line reference for bibliographic information on major computer science publications. It has evolved from an early small experimental web server to a popular open-data service for the whole computer science community."; } }
 
         public string HomePage { get { return "https://dblp.org/"; } }
 

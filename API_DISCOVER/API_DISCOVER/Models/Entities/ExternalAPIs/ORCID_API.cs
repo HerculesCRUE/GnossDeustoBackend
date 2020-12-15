@@ -12,8 +12,9 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// Clase para interactuar con el API de ORCID
     /// </summary>
     public class ORCID_API : I_ExternalAPI
-    {//TODO cambiar
+    {
         public string Name { get { return "ORCID"; } }
+        public string Description { get { return "ORCID is a nonprofit organization helping create a world in which all who participate in research, scholarship and innovation are uniquely identified and connected to their contributions and affiliations, across disciplines, borders, and time."; } }
 
         public string HomePage { get { return "https://orcid.org/"; } }
 

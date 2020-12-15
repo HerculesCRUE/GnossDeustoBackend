@@ -16,8 +16,10 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// Clase para interactuar con el API de DOAJ
     /// </summary>
     public class DOAJ_API : I_ExternalAPI
-    {//TODO cambiar
+    {
         public string Name { get { return "DOAJ"; } }
+
+        public string Description { get { return "The DOAJ (Directory of Open Access Journals) was launched in 2003 with 300 open access journals. Today, this independent database contains over 15 000 peer-reviewed open access journals covering all areas of science, technology, medicine, social sciences, arts and humanities. Open access journals from all countries and in all languages are welcome to apply for inclusion."; } }
 
         public string HomePage { get { return "https://doaj.org/"; } }
 

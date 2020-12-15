@@ -11,8 +11,9 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// Clase para interactuar con el API de CROSSREF
     /// </summary>
     public class CROSSREF_API:I_ExternalAPI
-    {//TODO cambiar
+    {
         public string Name { get { return "Crossref"; } }
+        public string Description { get { return "Crossref makes research outputs easy to find, cite, link, assess, and reuse. A not-for-profit membership organization that exists to make scholarly communications better."; } }
 
         public string HomePage { get { return "https://www.crossref.org/"; } }
 
