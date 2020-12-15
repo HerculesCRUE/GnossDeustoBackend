@@ -20,7 +20,7 @@ jobs:
     - name: Build
       run: dotnet build UrisFactory
     - name: Test
-      run: dotnet test --collect:"XPlat Code Coverage" UrisFactory --work:"./urisfactory_coverage.xml"
+      run: dotnet test --collect:"XPlat Code Coverage" UrisFactory --output:"./urisfactory_coverage.xml"
     - name: Codecov
       # You may pin to the exact commit or the version.
       # uses: codecov/codecov-action@239febf655bba88b16ff5dea1d3135ea8663a1f9
