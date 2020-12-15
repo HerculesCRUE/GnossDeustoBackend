@@ -6,12 +6,14 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections;
 using System.IO;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_DISCOVER.Models.Services
 {
     /// <summary>
     /// Servicio para obtener las variables de configuración de urls
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class ConfigUrlService
     {
         public IConfigurationRoot Configuration { get; set; }

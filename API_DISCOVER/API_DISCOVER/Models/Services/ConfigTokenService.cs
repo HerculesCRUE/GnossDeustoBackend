@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace API_DISCOVER.Models.Services
     /// <summary>
     /// Clase para la obtención de los datos necesarios para obtener los tokens de acceso 
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class ConfigTokenService
     {
         public IConfigurationRoot Configuration { get; set; }

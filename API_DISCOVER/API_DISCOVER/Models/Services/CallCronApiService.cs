@@ -10,12 +10,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_DISCOVER.Models.Services
 {
     /// <summary>
     /// Servicio para hacer llamadas a los métodos del apiCron
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class CallCronApiService
     {
         readonly ConfigUrlService _serviceUrl;

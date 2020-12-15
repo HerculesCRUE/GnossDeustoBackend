@@ -6,6 +6,7 @@ using API_DISCOVER.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 
@@ -14,6 +15,7 @@ namespace API_DISCOVER.Models.Services
     ///<summary>
     ///Clase para gestionar las operaciones de las tareas de descubrimiento
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class DiscoverItemBDService
     {
         private readonly EntityContext _context;

@@ -150,13 +150,6 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
         {
             get; set;
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("author-profile")]
-        public authorretrievalresponseAuthorprofile authorprofile
-        {
-            get; set;
-        }
     }
 
     /// <remarks/>
@@ -167,40 +160,6 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     {
         /// <remarks/>
         public string orcid
-        {
-            get; set;
-        }
-    }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class authorretrievalresponseAuthorprofile
-    {
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("preferred-name")]
-        public authorretrievalresponseAuthorprofilePreferredname preferredname
-        {
-            get; set;
-        }
-    }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class authorretrievalresponseAuthorprofilePreferredname
-    {
-        /// <remarks/>
-        public string surname
-        {
-            get; set;
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("given-name")]
-        public string givenname
         {
             get; set;
         }

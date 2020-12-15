@@ -10,9 +10,11 @@ using VDS.RDF;
 using VDS.RDF.Parsing;
 using VDS.RDF.Query;
 using VDS.RDF.Update;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_DISCOVER.Utility
 {
+    [ExcludeFromCodeCoverage]
     public class AsioPublication
     {
         private string _SPARQLEndpoint { get; set; }

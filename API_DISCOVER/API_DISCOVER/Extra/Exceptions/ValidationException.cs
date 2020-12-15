@@ -4,12 +4,14 @@
 // Excepción de validación
 using API_DISCOVER.ViewModels;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_DISCOVER.Extra.Exceptions
 {
     /// <summary>
     /// Excepción de validación
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class ValidationException : Exception
     {
         public ShapeReportModel Report { get; set; }

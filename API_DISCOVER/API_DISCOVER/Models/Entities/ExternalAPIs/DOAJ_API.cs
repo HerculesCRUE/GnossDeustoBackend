@@ -63,159 +63,30 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
 
     public class DOAJWorks
     {
-        public int total { get; set; }
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public DateTime timestamp { get; set; }
-        public string query { get; set; }
         public Result[] results { get; set; }
-        public string next { get; set; }
-        public string last { get; set; }
     }
 
     public class Result
     {
-        public DateTime last_updated { get; set; }
         public Bibjson bibjson { get; set; }
-        public DateTime created_date { get; set; }
         public string id { get; set; }
-        public Admin admin { get; set; }
     }
 
     public class Bibjson
     {
         public Identifier[] identifier { get; set; }
-        public Journal journal { get; set; }
-        public string end_page { get; set; }
-        public string[] keywords { get; set; }
-        public string year { get; set; }
-        public string start_page { get; set; }
-        public Subject[] subject { get; set; }
         public DoajAuthor[] author { get; set; }
-        public DoajLink[] link { get; set; }
-        public string _abstract { get; set; }
-        public string title { get; set; }
-        public string month { get; set; }
-
-        public bool active { get; set; }
-        public string country { get; set; }
-        public string publisher { get; set; }
-        public string apc_url { get; set; }
-        public string submission_charges_url { get; set; }
-        public bool allows_fulltext_indexing { get; set; }
-        public int publication_time { get; set; }
-        public Oa_Start oa_start { get; set; }
-        public Apc apc { get; set; }
-        public Editorial_Review editorial_review { get; set; }
-        public Plagiarism_Detection plagiarism_detection { get; set; }
-        public Article_Statistics article_statistics { get; set; }
-        public Author_Copyright author_copyright { get; set; }
-        public Author_Publishing_Rights author_publishing_rights { get; set; }
-        public string[] language { get; set; }
-        public string[] format { get; set; }
-        public string provider { get; set; }
-        public Submission_Charges submission_charges { get; set; }
-        public Archiving_Policy archiving_policy { get; set; }
-        public string[] persistent_identifier_scheme { get; set; }
-        public string[] deposit_policy { get; set; }
-        public string institution { get; set; }
-        public string alternative_title { get; set; }
-    }
-
-    public class Journal
-    {
-        public string volume { get; set; }
-        public string number { get; set; }
-        public string country { get; set; }
-        public string[] issns { get; set; }
-        public string publisher { get; set; }
-        public string[] language { get; set; }
         public string title { get; set; }
     }
-
+    
     public class Identifier
     {
         public string id { get; set; }
         public string type { get; set; }
     }
 
-    public class Subject
-    {
-        public string code { get; set; }
-        public string scheme { get; set; }
-        public string term { get; set; }
-    }
-
     public class DoajAuthor
     {
         public string name { get; set; }
-        public string affiliation { get; set; }
-    }
-
-    public class DoajLink
-    {
-        public string content_type { get; set; }
-        public string type { get; set; }
-        public string url { get; set; }
-    }
-
-    public class Oa_Start
-    {
-        public int year { get; set; }
-    }
-
-    public class Apc
-    {
-        public string currency { get; set; }
-        public int average_price { get; set; }
-    }
-
-    public class Editorial_Review
-    {
-        public string process { get; set; }
-        public string url { get; set; }
-    }
-
-    public class Plagiarism_Detection
-    {
-        public bool detection { get; set; }
-        public string url { get; set; }
-    }
-
-    public class Article_Statistics
-    {
-        public bool statistics { get; set; }
-        public string url { get; set; }
-    }
-
-    public class Author_Copyright
-    {
-        public string copyright { get; set; }
-        public string url { get; set; }
-    }
-
-    public class Author_Publishing_Rights
-    {
-        public string publishing_rights { get; set; }
-        public string url { get; set; }
-    }
-
-    public class Submission_Charges
-    {
-        public string currency { get; set; }
-        public int average_price { get; set; }
-    }
-
-    public class Archiving_Policy
-    {
-        public string url { get; set; }
-        public string nat_lib { get; set; }
-        public string[] known { get; set; }
-    }
-
-    public class Admin
-    {
-        public bool ticked { get; set; }
-        public bool seal { get; set; }
     }
 }

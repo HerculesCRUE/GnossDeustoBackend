@@ -4,6 +4,7 @@
 using API_DISCOVER.Utility;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using VDS.RDF;
 using VDS.RDF.Writing;
 
@@ -12,6 +13,7 @@ namespace API_DISCOVER.Models.Entities
     /// <summary>
     /// Resultado despues de aplicar a un RDF el descubrimiento
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class DiscoverResult
     {
         /// <summary>

@@ -4,6 +4,7 @@
 // Clase que representa un token de acceso
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ namespace API_DISCOVER.Models.Entities
     /// <summary>
     /// Clase que representa un token de acceso
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class TokenBearer
     {
         public string access_token { get; set; }

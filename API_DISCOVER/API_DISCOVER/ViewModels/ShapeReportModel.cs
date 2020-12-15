@@ -4,12 +4,14 @@
 // Datos de reporte de un Shape
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_DISCOVER.ViewModels
 {
     /// <summary>
     /// Datos de reporte de un Shape
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class ShapeReportModel
     {
         public class Result

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -20,6 +21,7 @@ namespace API_DISCOVER.Models.Services
     /// <summary>
     ///  Servicio para hacer llamadas a los métodos del controlador etl del API_CARGA 
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class CallEtlApiService 
     {
         readonly ConfigUrlService _serviceUrl;

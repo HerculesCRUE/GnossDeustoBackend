@@ -4,11 +4,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 
 namespace API_DISCOVER.Models.Log
 {
+    [ExcludeFromCodeCoverage]
     public static class Log
     {
         private static IConfigurationRoot Configuration { get; set; }

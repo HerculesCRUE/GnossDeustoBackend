@@ -10,12 +10,14 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_DISCOVER.Models.Services
 {
     /// <summary>
     /// clase para la obtención de los tokens de acceso
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class CallTokenService
     {
         private ConfigTokenService _configToken;

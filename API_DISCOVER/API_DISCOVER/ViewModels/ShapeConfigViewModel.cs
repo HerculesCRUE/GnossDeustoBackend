@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_DISCOVER.ViewModels
 {
     [Display(Name = "Shape config")]
+    [ExcludeFromCodeCoverage]
     public class ShapeConfigViewModel
     {
         [Display(Name = "Identifier")]

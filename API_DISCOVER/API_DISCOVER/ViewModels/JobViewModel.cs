@@ -3,12 +3,14 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase que sirve para mostrar los datos de una tarea
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_DISCOVER.ViewModels
 {
     /// <summary>
     /// Clase que sirve para mostrar los datos de una tarea
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class JobViewModel
     {
         /// <summary>

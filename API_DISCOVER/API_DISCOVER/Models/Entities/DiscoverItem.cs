@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace API_DISCOVER.Models.Entities
@@ -13,6 +14,7 @@ namespace API_DISCOVER.Models.Entities
     ///<summary>
     ///Representa un item de descubrimiento
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class DiscoverItem
     {
         ///<summary>

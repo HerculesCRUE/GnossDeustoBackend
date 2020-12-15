@@ -253,46 +253,6 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             }
         }
     }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class returnOptionValue
-    {
-
-        private string labelField;
-
-        private string[] valueField;
-
-        /// <remarks/>
-        public string label
-        {
-            get
-            {
-                return this.labelField;
-            }
-            set
-            {
-                this.labelField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("value")]
-        public string[] value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-
     /// <remarks/>
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -330,8 +290,6 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
         private recordsRECStatic_data static_dataField;
 
         private recordsRECDynamic_data dynamic_dataField;
-
-        private string r_id_disclaimerField;
 
         /// <remarks/>
         public string UID
@@ -371,21 +329,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
                 this.dynamic_dataField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string r_id_disclaimer
-        {
-            get
-            {
-                return this.r_id_disclaimerField;
-            }
-            set
-            {
-                this.r_id_disclaimerField = value;
-            }
-        }
-    }
+}
 
     /// <remarks/>
     [System.SerializableAttribute()]
@@ -395,8 +339,6 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     {
 
         private recordsRECStatic_dataSummary summaryField;
-
-        private recordsRECStatic_dataItem itemField;
 
         private recordsRECStatic_dataContributors contributorsField;
 
@@ -410,19 +352,6 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             set
             {
                 this.summaryField = value;
-            }
-        }
-
-        /// <remarks/>
-        public recordsRECStatic_dataItem item
-        {
-            get
-            {
-                return this.itemField;
-            }
-            set
-            {
-                this.itemField = value;
             }
         }
 
@@ -446,25 +375,9 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://scientific.thomsonreuters.com/schema/wok5.4/public/FullRecord")]
     public partial class recordsRECStatic_dataSummary
     {
-
-        private recordsRECStatic_dataSummaryEWUID eWUIDField;
-
         private recordsRECStatic_dataSummaryTitles titlesField;
 
         private recordsRECStatic_dataSummaryNames namesField;
-
-        /// <remarks/>
-        public recordsRECStatic_dataSummaryEWUID EWUID
-        {
-            get
-            {
-                return this.eWUIDField;
-            }
-            set
-            {
-                this.eWUIDField = value;
-            }
-        }
 
         /// <remarks/>
         public recordsRECStatic_dataSummaryTitles titles
@@ -497,99 +410,8 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://scientific.thomsonreuters.com/schema/wok5.4/public/FullRecord")]
-    public partial class recordsRECStatic_dataSummaryEWUID
-    {
-
-        private recordsRECStatic_dataSummaryEWUIDWUID wUIDField;
-
-        private recordsRECStatic_dataSummaryEWUIDEdition[] editionField;
-
-        /// <remarks/>
-        public recordsRECStatic_dataSummaryEWUIDWUID WUID
-        {
-            get
-            {
-                return this.wUIDField;
-            }
-            set
-            {
-                this.wUIDField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("edition")]
-        public recordsRECStatic_dataSummaryEWUIDEdition[] edition
-        {
-            get
-            {
-                return this.editionField;
-            }
-            set
-            {
-                this.editionField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://scientific.thomsonreuters.com/schema/wok5.4/public/FullRecord")]
-    public partial class recordsRECStatic_dataSummaryEWUIDWUID
-    {
-
-        private string coll_idField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string coll_id
-        {
-            get
-            {
-                return this.coll_idField;
-            }
-            set
-            {
-                this.coll_idField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://scientific.thomsonreuters.com/schema/wok5.4/public/FullRecord")]
-    public partial class recordsRECStatic_dataSummaryEWUIDEdition
-    {
-
-        private string valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-
-
-    
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://scientific.thomsonreuters.com/schema/wok5.4/public/FullRecord")]
     public partial class recordsRECStatic_dataSummaryTitles
     {
-
         private recordsRECStatic_dataSummaryTitlesTitle[] titleField;
 
         /// <remarks/>
@@ -681,30 +503,6 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
 
         private string display_nameField;
 
-        private recordsRECStatic_dataSummaryNamesNamePreferred_name preferred_nameField;
-
-        private string full_nameField;
-
-        private string wos_standardField;
-
-        private string first_nameField;
-
-        private string last_nameField;
-
-        private string suffixField;
-
-        private recordsRECStatic_dataSummaryNamesNameDataitemid[] dataitemidsField;
-
-        private string roleField;
-
-        private string reprintField;
-
-        private ulong daisng_idField;
-
-        private bool claim_statusField;
-
-        private bool claim_statusFieldSpecified;
-
         /// <remarks/>
         public string display_name
         {
@@ -718,469 +516,8 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             }
         }
 
-        /// <remarks/>
-        public recordsRECStatic_dataSummaryNamesNamePreferred_name preferred_name
-        {
-            get
-            {
-                return this.preferred_nameField;
-            }
-            set
-            {
-                this.preferred_nameField = value;
-            }
-        }
 
-        /// <remarks/>
-        public string full_name
-        {
-            get
-            {
-                return this.full_nameField;
-            }
-            set
-            {
-                this.full_nameField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string wos_standard
-        {
-            get
-            {
-                return this.wos_standardField;
-            }
-            set
-            {
-                this.wos_standardField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string first_name
-        {
-            get
-            {
-                return this.first_nameField;
-            }
-            set
-            {
-                this.first_nameField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string last_name
-        {
-            get
-            {
-                return this.last_nameField;
-            }
-            set
-            {
-                this.last_nameField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string suffix
-        {
-            get
-            {
-                return this.suffixField;
-            }
-            set
-            {
-                this.suffixField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute("data-item-ids")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("data-item-id", IsNullable = false)]
-        public recordsRECStatic_dataSummaryNamesNameDataitemid[] dataitemids
-        {
-            get
-            {
-                return this.dataitemidsField;
-            }
-            set
-            {
-                this.dataitemidsField = value;
-            }
-        }
-
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string role
-        {
-            get
-            {
-                return this.roleField;
-            }
-            set
-            {
-                this.roleField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string reprint
-        {
-            get
-            {
-                return this.reprintField;
-            }
-            set
-            {
-                this.reprintField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ulong daisng_id
-        {
-            get
-            {
-                return this.daisng_idField;
-            }
-            set
-            {
-                this.daisng_idField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool claim_status
-        {
-            get
-            {
-                return this.claim_statusField;
-            }
-            set
-            {
-                this.claim_statusField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool claim_statusSpecified
-        {
-            get
-            {
-                return this.claim_statusFieldSpecified;
-            }
-            set
-            {
-                this.claim_statusFieldSpecified = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://scientific.thomsonreuters.com/schema/wok5.4/public/FullRecord")]
-    public partial class recordsRECStatic_dataSummaryNamesNamePreferred_name
-    {
-
-        private string full_nameField;
-
-        private string first_nameField;
-
-        private string last_nameField;
-
-        /// <remarks/>
-        public string full_name
-        {
-            get
-            {
-                return this.full_nameField;
-            }
-            set
-            {
-                this.full_nameField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string first_name
-        {
-            get
-            {
-                return this.first_nameField;
-            }
-            set
-            {
-                this.first_nameField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string last_name
-        {
-            get
-            {
-                return this.last_nameField;
-            }
-            set
-            {
-                this.last_nameField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://scientific.thomsonreuters.com/schema/wok5.4/public/FullRecord")]
-    public partial class recordsRECStatic_dataSummaryNamesNameDataitemid
-    {
-
-        private string idtypeField;
-
-        private string typeField;
-
-        private string valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute("id-type")]
-        public string idtype
-        {
-            get
-            {
-                return this.idtypeField;
-            }
-            set
-            {
-                this.idtypeField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string type
-        {
-            get
-            {
-                return this.typeField;
-            }
-            set
-            {
-                this.typeField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-    
-    
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://scientific.thomsonreuters.com/schema/wok5.4/public/FullRecord")]
-    public partial class recordsRECStatic_dataFullrecord_metadataLanguagesLanguage
-    {
-
-        private string typeField;
-
-        private string valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string type
-        {
-            get
-            {
-                return this.typeField;
-            }
-            set
-            {
-                this.typeField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-       
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://scientific.thomsonreuters.com/schema/wok5.4/public/FullRecord")]
-    public partial class recordsRECStatic_dataItem
-    {
-
-        private recordsRECStatic_dataItemIds idsField;
-
-        private string bib_idField;
-
-        private recordsRECStatic_dataItemBib_pagecount bib_pagecountField;
-
-        private string coll_idField;
-
-        /// <remarks/>
-        public recordsRECStatic_dataItemIds ids
-        {
-            get
-            {
-                return this.idsField;
-            }
-            set
-            {
-                this.idsField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string bib_id
-        {
-            get
-            {
-                return this.bib_idField;
-            }
-            set
-            {
-                this.bib_idField = value;
-            }
-        }
-
-        /// <remarks/>
-        public recordsRECStatic_dataItemBib_pagecount bib_pagecount
-        {
-            get
-            {
-                return this.bib_pagecountField;
-            }
-            set
-            {
-                this.bib_pagecountField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string coll_id
-        {
-            get
-            {
-                return this.coll_idField;
-            }
-            set
-            {
-                this.coll_idField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://scientific.thomsonreuters.com/schema/wok5.4/public/FullRecord")]
-    public partial class recordsRECStatic_dataItemIds
-    {
-
-        private string availField;
-
-        private string valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string avail
-        {
-            get
-            {
-                return this.availField;
-            }
-            set
-            {
-                this.availField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://scientific.thomsonreuters.com/schema/wok5.4/public/FullRecord")]
-    public partial class recordsRECStatic_dataItemBib_pagecount
-    {
-
-        private string typeField;
-
-        private ushort valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string type
-        {
-            get
-            {
-                return this.typeField;
-            }
-            set
-            {
-                this.typeField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public ushort Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
+    } 
 
     /// <remarks/>
     [System.SerializableAttribute()]
@@ -1238,14 +575,6 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
 
         private string display_nameField;
 
-        private string full_nameField;
-
-        private string first_nameField;
-
-        private string last_nameField;
-
-        private string roleField;
-
         private string r_idField;
 
         private string orcid_idField;
@@ -1262,60 +591,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
                 this.display_nameField = value;
             }
         }
-
-        /// <remarks/>
-        public string full_name
-        {
-            get
-            {
-                return this.full_nameField;
-            }
-            set
-            {
-                this.full_nameField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string first_name
-        {
-            get
-            {
-                return this.first_nameField;
-            }
-            set
-            {
-                this.first_nameField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string last_name
-        {
-            get
-            {
-                return this.last_nameField;
-            }
-            set
-            {
-                this.last_nameField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string role
-        {
-            get
-            {
-                return this.roleField;
-            }
-            set
-            {
-                this.roleField = value;
-            }
-        }
-
+              
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string r_id
@@ -1427,31 +703,6 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             set
             {
                 this.valueField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://scientific.thomsonreuters.com/schema/wok5.4/public/FullRecord")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://scientific.thomsonreuters.com/schema/wok5.4/public/FullRecord", IsNullable = false)]
-    public partial class records
-    {
-
-        private recordsREC[] rECField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("REC")]
-        public recordsREC[] REC
-        {
-            get
-            {
-                return this.rECField;
-            }
-            set
-            {
-                this.rECField = value;
             }
         }
     }

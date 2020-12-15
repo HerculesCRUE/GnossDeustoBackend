@@ -9,9 +9,11 @@ using Newtonsoft.Json;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_DISCOVER
 {
+    [ExcludeFromCodeCoverage]
     public class Worker : IHostedService, IDisposable
     {
         private readonly ILogger<Worker> _logger;

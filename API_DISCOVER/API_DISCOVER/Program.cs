@@ -9,9 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 using System;
 using System.Collections;
 using System.IO;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_DISCOVER
 {
+    [ExcludeFromCodeCoverage]
     public class Program
     {
         public static void Main(string[] args)

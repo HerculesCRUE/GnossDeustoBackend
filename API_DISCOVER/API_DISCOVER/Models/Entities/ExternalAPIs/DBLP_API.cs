@@ -99,68 +99,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     [System.Xml.Serialization.XmlRootAttribute("result", IsNullable = false)]
     public partial class DBLPAuthors
     {
-
-        private resultQuery queryField;
-
-        private resultStatus statusField;
-
-        private resultTime timeField;
-
-        private resultCompletions completionsField;
-
         private resultHits hitsField;
-
-        /// <remarks/>
-        public resultQuery query
-        {
-            get
-            {
-                return this.queryField;
-            }
-            set
-            {
-                this.queryField = value;
-            }
-        }
-
-        /// <remarks/>
-        public resultStatus status
-        {
-            get
-            {
-                return this.statusField;
-            }
-            set
-            {
-                this.statusField = value;
-            }
-        }
-
-        /// <remarks/>
-        public resultTime time
-        {
-            get
-            {
-                return this.timeField;
-            }
-            set
-            {
-                this.timeField = value;
-            }
-        }
-
-        /// <remarks/>
-        public resultCompletions completions
-        {
-            get
-            {
-                return this.completionsField;
-            }
-            set
-            {
-                this.completionsField = value;
-            }
-        }
 
         /// <remarks/>
         public resultHits hits
@@ -175,287 +114,6 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             }
         }
     }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class resultQuery
-    {
-
-        private ulong idField;
-
-        private string valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ulong id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class resultStatus
-    {
-
-        private ulong codeField;
-
-        private string valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ulong code
-        {
-            get
-            {
-                return this.codeField;
-            }
-            set
-            {
-                this.codeField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class resultTime
-    {
-
-        private string unitField;
-
-        private decimal valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string unit
-        {
-            get
-            {
-                return this.unitField;
-            }
-            set
-            {
-                this.unitField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public decimal Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class resultCompletions
-    {
-
-        private resultCompletionsC[] cField;
-
-        private ulong totalField;
-
-        private ulong computedField;
-
-        private ulong sentField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("c")]
-        public resultCompletionsC[] c
-        {
-            get
-            {
-                return this.cField;
-            }
-            set
-            {
-                this.cField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ulong total
-        {
-            get
-            {
-                return this.totalField;
-            }
-            set
-            {
-                this.totalField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ulong computed
-        {
-            get
-            {
-                return this.computedField;
-            }
-            set
-            {
-                this.computedField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ulong sent
-        {
-            get
-            {
-                return this.sentField;
-            }
-            set
-            {
-                this.sentField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class resultCompletionsC
-    {
-
-        private ulong scField;
-
-        private ulong dcField;
-
-        private ulong ocField;
-
-        private uint idField;
-
-        private string valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ulong sc
-        {
-            get
-            {
-                return this.scField;
-            }
-            set
-            {
-                this.scField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ulong dc
-        {
-            get
-            {
-                return this.dcField;
-            }
-            set
-            {
-                this.dcField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ulong oc
-        {
-            get
-            {
-                return this.ocField;
-            }
-            set
-            {
-                this.ocField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public uint id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-
     /// <remarks/>
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -464,14 +122,6 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     {
 
         private resultHitsHit[] hitField;
-
-        private ulong totalField;
-
-        private ulong computedField;
-
-        private ulong sentField;
-
-        private ulong firstField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("hit")]
@@ -486,62 +136,6 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
                 this.hitField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ulong total
-        {
-            get
-            {
-                return this.totalField;
-            }
-            set
-            {
-                this.totalField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ulong computed
-        {
-            get
-            {
-                return this.computedField;
-            }
-            set
-            {
-                this.computedField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ulong sent
-        {
-            get
-            {
-                return this.sentField;
-            }
-            set
-            {
-                this.sentField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ulong first
-        {
-            get
-            {
-                return this.firstField;
-            }
-            set
-            {
-                this.firstField = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -552,12 +146,6 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     {
 
         private resultHitsHitInfo infoField;
-
-        private string urlField;
-
-        private ulong scoreField;
-
-        private uint idField;
 
         /// <remarks/>
         public resultHitsHitInfo info
@@ -571,48 +159,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
                 this.infoField = value;
             }
         }
-
-        /// <remarks/>
-        public string url
-        {
-            get
-            {
-                return this.urlField;
-            }
-            set
-            {
-                this.urlField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ulong score
-        {
-            get
-            {
-                return this.scoreField;
-            }
-            set
-            {
-                this.scoreField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public uint id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
-            }
-        }
-    }
+}
 
     /// <remarks/>
     [System.SerializableAttribute()]
@@ -620,12 +167,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public partial class resultHitsHitInfo
     {
-
         private string authorField;
-
-        private string[] aliasesField;
-
-        private resultHitsHitInfoNotes notesField;
 
         private string urlField;
 
@@ -641,34 +183,6 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
                 this.authorField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("alias", IsNullable = false)]
-        public string[] aliases
-        {
-            get
-            {
-                return this.aliasesField;
-            }
-            set
-            {
-                this.aliasesField = value;
-            }
-        }
-
-        /// <remarks/>
-        public resultHitsHitInfoNotes notes
-        {
-            get
-            {
-                return this.notesField;
-            }
-            set
-            {
-                this.notesField = value;
-            }
-        }
-
         /// <remarks/>
         public string url
         {
@@ -682,70 +196,6 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             }
         }
     }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class resultHitsHitInfoNotes
-    {
-
-        private resultHitsHitInfoNotesNote noteField;
-
-        /// <remarks/>
-        public resultHitsHitInfoNotesNote note
-        {
-            get
-            {
-                return this.noteField;
-            }
-            set
-            {
-                this.noteField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class resultHitsHitInfoNotesNote
-    {
-
-        private string typeField;
-
-        private string valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string type
-        {
-            get
-            {
-                return this.typeField;
-            }
-            set
-            {
-                this.typeField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-
 
     // NOTA: El código generado puede requerir, como mínimo, .NET Framework 4.5 o .NET Core/Standard 2.0.
     /// <remarks/>
@@ -942,9 +392,4 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             }
         }
     }
-
-
-    
-
-
 }

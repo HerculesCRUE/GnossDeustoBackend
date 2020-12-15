@@ -16,12 +16,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_DISCOVER.Models.Services
 {
     /// <summary>
     /// Clase para conectar con el servidor Rabbi
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class RabbitMQService 
     {
         public delegate bool ReceivedDelegate(string s);
