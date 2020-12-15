@@ -114,17 +114,39 @@ En el siguiente fragmento de código tenemos dos bloques, el primer bloque donde
     var records = csvReader.GetRecords<PruebaSparql>();
 
 
-
 ## Varias consultas Sparql
 Se puede encontrar este ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/paginas/Consultas-Sparql.cshtml
 
 En este ejemplo se sigue el mismo proceso que en el ejemplo visto al crear una página con una consulta Sparql, con la salvedad de que en este caso hay que obtener todos los resultados para las consultas realizadas y tratarlos para poder consultar los resultados como se ve en el ejemplo,
-en nuestro modelo de la página tendremos en la posición 0 la primera consulta realizada, en la posición 1 la segunda consulta y así sucesivamente.
+en nuestro modelo de la página tendremos en la posición 0 la primera consulta realizada, en la posición 1 la segunda consulta y así sucesivamente. En el siguiente ejemplo tenemos dos bloques de código que los dos hacen referencia a consultas sparql, en el primer bloque se deserealizan los datos obtenidos de la primera consulta de la página, usando la clase deseada (PruebaSparql, que contiene una propiedad count como el nombre del campo de los datos que le hemos dado en la consulta) para leer los resultados que han venido en formato CSV. En el segundo bloque se sigue la misma dinámica para leer los datos obtenidos de la segunda consulta realizada en la página.
+
+
+    string result = Model.Results.FirstOrDefault();
+    byte[] byteArray = Encoding.UTF8.GetBytes(result);
+    MemoryStream stream = new MemoryStream(byteArray);
+    var csvReader = new CsvReader(new StreamReader(stream), CultureInfo.InvariantCulture);
+    var records = csvReader.GetRecords<PruebaSparql>();
+    
+    string result2 = Model.Results[1];
+    byteArray = Encoding.UTF8.GetBytes(result2);
+    stream = new MemoryStream(byteArray);
+    csvReader = new CsvReader(new StreamReader(stream), CultureInfo.InvariantCulture);
+    var records2 = csvReader.GetRecords<investigadoresSparql>();
+    
+En el caso de que se quiera añadir más consultas basta con seguir el proceso de uno de estos bloques obteniendo los datos de la posicion x `string resultX = Model.Results[x];` y deserealizando usando el CSVReader con el stream de esos datos y una clase con los parámetros del select
 
 ## Varias consultas a APIs
 Se puede encontrar este ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/paginas/llamadas-apis.cshtml
 
 En este ejemplo se sigue el mismo proceso que el visto al crear una página con una llamada a un api, excepto que en este caso hay dos llamadas a un api, por lo que hay que obtener y tratar los resultados obtenidos al hacer
 las dos llamadas al api, como en los ejemplos anterior estos resultados obtenidos se corresponderan con la llamada al api según el orden, es decir, en la posición 0 de la lista la primera llamada que aparece en el código de la página, en la posición 1 y así sucesivamente.
+
+    string result = Model.Results.FirstOrDefault();
+    List<PageList> resultObject = JsonConvert.DeserializeObject<List<PageList>>(result);
+    
+    result = Model.Results[1];
+    Page resultPage = JsonConvert.DeserializeObject<Page>(result);
+
+En el ejemplo anterior se muestran dos bloques de código donde se recogen datos para dos llamadas a un api, en el primer bloque se cogen los datos de la primera llamada y posteriormente se deserealizan con una clase que sigue el patrón con el que devuelven el api los datos, en el segundo bloque se reutiliza la variable result (debido a que los resultados anteriores los hemos guardado en la variable resultObject) para recoger los datos obtenidos al realizar la llamada al api que aparece en segundo lugar en la página, posteriormente se deserealizan en otra varibale
 
 
