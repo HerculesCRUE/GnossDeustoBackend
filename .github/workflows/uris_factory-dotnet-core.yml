@@ -36,7 +36,7 @@ jobs:
         file: ./urisfactory_coverage.xml
         # files: # optional
         # Directory to search for coverage reports.
-        directory: UrisFactory
+        directory: ./
         # Flag upload to group coverage metrics (e.g. unittests | integration | ui,chrome)
         # flags: # optional
         # Write upload file to path before uploading
