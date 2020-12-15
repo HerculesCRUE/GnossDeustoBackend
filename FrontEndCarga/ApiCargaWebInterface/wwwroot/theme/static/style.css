@@ -10,12 +10,8 @@ ul.ranking {
 
 div:nth-of-type(4n+3) { border-bottom: 0 !important; padding-bottom: 0 !important;  }
 
+.navbar { z-index: 2001; }
 .navbar .nav.navbar-nav > .open > a { background-color: #fff !important; opacity: 1 !important; }
-
-.navbar .navbar-collapse.in { background-color: #fff; border: 1px solid #e1e1e1; }
-.navbar .navbar-collapse.in ul.navbar-nav { display: block; height: 100%; }
-.navbar .navbar-collapse.in ul.navbar-nav > li { }
-.navbar .navbar-collapse.in ul.navbar-nav > li > a { color: #333 !important; }
 
 .nav.nav-tabs { border: 1px solid #d1d1d1; height: 50px; min-height: 50px; padding: 0; margin-bottom: 22px; }
 .nav.nav-tabs .nav-item { height: 100%; }
@@ -26,8 +22,32 @@ div:nth-of-type(4n+3) { border-bottom: 0 !important; padding-bottom: 0 !importan
     .nav.nav-tabs { display: flex; flex-wrap: wrap; height: 100%; }
 }
 
+@media (max-width: 991px){
+    .container-fluid > .navbar-header { margin-right: 0 !important; }
+
+    .navbar-toggle { display: block !important;}
+    .navbar-collapse.collapse { display: none !important; }
+
+    .navbar-collapse.in { display: flex !important; flex-wrap: wrap; border: 1px solid #e1e1e1; background: #fff; box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16); position: absolute; top: 60px; left: 0; z-index: 2000; margin: 0; width: 100%; }
+    .navbar-collapse.in > ul { flex: 0 0 100%; max-width: 100%; display: flex; flex-wrap: wrap; height: 100%; }
+    .navbar-collapse.in > ul > li { flex: 0 0 100%; max-width: 100%; }
+    .navbar-collapse.in > ul > li > a { }
+    .navbar-collapse.in > ul > li.dropdown { }
+    .navbar-collapse.in > ul > li.dropdown > .dropdown-menu { position: relative; border: 0; box-shadow: none; padding: 0; }
+    .navbar-collapse.in > ul > li.dropdown > .dropdown-menu > li { }
+    .navbar-collapse.in > ul > li.dropdown > .dropdown-menu > li > a { color: #333 !important; }
+    .navbar-collapse.in > ul > li > a { color: #333 !important; }
+
+    .navbar-collapse.collapsing > ul { visibility: hidden;}
+}
+
 @media (max-width: 767px){
     .container-fluid > .navbar-header { margin: 0 !important; }
+
+}
+
+@media (max-width: 575px){
+    .navbar-toggle { margin-right: 0; }
 }
 
 #contenido-principal.container { padding: 0; margin-bottom: 20px; }
