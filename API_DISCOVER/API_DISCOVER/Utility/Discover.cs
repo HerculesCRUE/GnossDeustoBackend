@@ -42,6 +42,7 @@ namespace API_DISCOVER.Utility
         private readonly static ConfigWOS mConfigWOS = new ConfigWOS();
         private readonly static string mWOSAuthorization = mConfigWOS.GetWOSAuthorization();
         public static I_SparqlUtility mSparqlUtility = new SparqlUtility();
+        public static bool test = false;
 
 
         private readonly static string mPropertyRohIdentifier = "http://purl.org/dc/terms/identifier";
@@ -2313,15 +2314,15 @@ namespace API_DISCOVER.Utility
             List<Thread> hilosIntegracionesExternas = new List<Thread>();
 
             HashSet<Exception> APIsExceptions = new HashSet<Exception>();
-            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationORCID(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { throw new Exception("ORCID"); APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationORCID(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
             hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationSCOPUS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
-            //hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationDBLP(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { throw new Exception("DBLP"); APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationDBLP(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
             //De momento lo omitimos, es muy lento y da timeout casi siempre
             hilosIntegracionesExternas.Add(new Thread(() => {try{  KeyValuePair<RohGraph,RohGraph> data=ExternalIntegrationCROSSREF(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key);provenanceGraphs.Add(data.Value);} catch (Exception ex) {APIsExceptions.Add(ex);  }}));
-            //hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationPUBMED(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { throw new Exception("PUBMED"); APIsExceptions.Add(ex); } }));
-            //hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationWOS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
-            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationRECOLECTA(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { throw new Exception("RECOLECTA"); APIsExceptions.Add(ex); } }));
-            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationDOAJ(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { throw new Exception("DOAJ"); APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationPUBMED(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationWOS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationRECOLECTA(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationDOAJ(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
             foreach (Thread thread in hilosIntegracionesExternas)
             {
                 thread.Start();
@@ -2331,9 +2332,12 @@ namespace API_DISCOVER.Utility
                 thread.Join();
             }
 
-            foreach (Exception exception in APIsExceptions)
+            if (!test)
             {
-                Log.Error(exception);
+                foreach (Exception exception in APIsExceptions)
+                {
+                    Log.Error(exception);
+                }
             }
 
             RohGraph externalGraph = new RohGraph();
