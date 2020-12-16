@@ -4,9 +4,11 @@
 // Clase que sirve para mostrar los datos de una tarea
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.ViewModels
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase que sirve para mostrar los datos de una tarea
     ///</summary>

@@ -3,9 +3,11 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase que sirve para mostrar los datos de una tarea programada
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.ViewModels
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase que sirve para mostrar los datos de una tarea programada
     ///</summary>

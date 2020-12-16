@@ -6,9 +6,11 @@ using Hangfire.Common;
 using Hangfire.States;
 using Hangfire.Storage;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Filters
 {
+    [ExcludeFromCodeCoverage]
     public class ProlongExpirationTimeAttribute : JobFilterAttribute, IApplyStateFilter
     {
         public void OnStateUnapplied(ApplyStateContext context, IWriteOnlyTransaction transaction)

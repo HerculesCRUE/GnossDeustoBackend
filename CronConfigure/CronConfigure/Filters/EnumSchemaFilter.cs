@@ -5,10 +5,12 @@ using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace CronConfigure.Filters
 {
+    [ExcludeFromCodeCoverage]
     public class EnumSchemaFilter : ISchemaFilter
     {
         public void Apply(OpenApiSchema model, SchemaFilterContext context)

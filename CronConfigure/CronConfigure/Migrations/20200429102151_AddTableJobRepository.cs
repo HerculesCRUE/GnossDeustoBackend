@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CronConfigure.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class AddTableJobRepository : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
