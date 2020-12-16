@@ -29,6 +29,24 @@
 
 [3.6 Detalle del proceso para "http://purl.org/roh/mirror/foaf#Person". Investigadores de un CV](#detalle-del-proceso-para-httppurlorgrohmirrorfoafPerson-investigadores-de-un-cv)
 
+[4 Detalle de los APIs utilizados para el descubrimiento de enlaces](#detalle-de-los-apis-utilizados-para-el-descubrimiento-de-enlaces)
+
+[4.1 Crossref](#user-content-crossref-httpswwwcrossreforg)
+
+[4.2 DBLP Computer Science Bibliography](#user-content-dblp-computer-science-bibliography-httpsdblporg)
+
+[4.3 DOAJ](#configuración-por-tipo-de-entidad)
+
+[4.4 ORCID](#algoritmos-de-similitud-nombres-y-nombres-propios)
+
+[4.5 PubMed](#tipos-de-entidades-en-las-que-aplicar-descubrimiento)
+
+[4.6 Recolecta](#detalle-del-proceso-para-httppurlorgrohmirrorfoafPerson-investigadores-de-un-cv)
+
+[4.7 Scopus](#detalle-del-proceso-para-httppurlorgrohmirrorfoafPerson-investigadores-de-un-cv)
+
+[4.8 Web of Science](#detalle-del-proceso-para-httppurlorgrohmirrorfoafPerson-investigadores-de-un-cv)
+
 Introducción
 ============
 El API Descubrimiento ofrece unas funciones que son parte del proceso de carga. Estas funciones se dividen en 3 grupos:
