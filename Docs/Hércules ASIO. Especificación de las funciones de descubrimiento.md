@@ -219,20 +219,36 @@ Una vez explicadas las configuraciones de similitud que actuarán para este caso
     
 Detalle de los APIs utilizados para el descubrimiento de enlaces
 --------------------
+
 1. Crossref (https://www.crossref.org/)	
-	Crossref makes research outputs easy to find, cite, link, assess, and reuse. A not-for-profit membership organization that exists to make scholarly communications better.
+
+Crossref makes research outputs easy to find, cite, link, assess, and reuse. A not-for-profit membership organization that exists to make scholarly communications better.
+
 2. DBLP Computer Science Bibliography (https://dblp.org/)	
-	The dblp computer science bibliography is the on-line reference for bibliographic information on major computer science publications. It has evolved from an early small experimental web server to a popular open-data service for the whole computer science community.
+
+The dblp computer science bibliography is the on-line reference for bibliographic information on major computer science publications. It has evolved from an early small experimental web server to a popular open-data service for the whole computer science community.
+
 3. DOAJ (https://doaj.org/)	
-	The DOAJ (Directory of Open Access Journals) was launched in 2003 with 300 open access journals. Today, this independent database contains over 15 000 peer-reviewed open access journals covering all areas of science, technology, medicine, social sciences, arts and humanities. Open access journals from all countries and in all languages are welcome to apply for inclusion.
+
+The DOAJ (Directory of Open Access Journals) was launched in 2003 with 300 open access journals. Today, this independent database contains over 15 000 peer-reviewed open access journals covering all areas of science, technology, medicine, social sciences, arts and humanities. Open access journals from all countries and in all languages are welcome to apply for inclusion.
+
 4. ORCID (https://orcid.org/)	
-	ORCID is a nonprofit organization helping create a world in which all who participate in research, scholarship and innovation are uniquely identified and connected to their contributions and affiliations, across disciplines, borders, and time.
+
+ORCID is a nonprofit organization helping create a world in which all who participate in research, scholarship and innovation are uniquely identified and connected to their contributions and affiliations, across disciplines, borders, and time.
+
 5. PubMed (https://pubmed.ncbi.nlm.nih.gov/)	
-	PubMed® comprises more than 30 million citations for biomedical literature from MEDLINE, life science journals, and online books.
+
+PubMed® comprises more than 30 million citations for biomedical literature from MEDLINE, life science journals, and online books.
+
 6. Recolecta (https://recolecta.fecyt.es/)	
-	RECOLECTA, o Recolector de Ciencia Abierta, es el agregador nacional de repositorios de acceso abierto. En esta plataforma se agrupan a todas las infraestructuras digitales españolas en las que se publican y/o depositan resultados de investigación en acceso abierto. 
+
+RECOLECTA, o Recolector de Ciencia Abierta, es el agregador nacional de repositorios de acceso abierto. En esta plataforma se agrupan a todas las infraestructuras digitales españolas en las que se publican y/o depositan resultados de investigación en acceso abierto. 
+
 7. Scopus (https://www.scopus.com/)	
-	Scopus is the largest abstract and citation database of peer-reviewed literature: scientific journals, books and conference proceedings. Delivering a comprehensive overview of the world's research output in the fields of science, technology, medicine, social sciences, and arts and humanities, Scopus features smart tools to track, analyze and visualize research.
+
+Scopus is the largest abstract and citation database of peer-reviewed literature: scientific journals, books and conference proceedings. Delivering a comprehensive overview of the world's research output in the fields of science, technology, medicine, social sciences, and arts and humanities, Scopus features smart tools to track, analyze and visualize research.
+
 8. Web of Science (http://wos.fecyt.es/)	
-	FECYT provides access to Web of Science, the world’s largest publisher-neutral citation index and research intelligence platform
+
+FECYT provides access to Web of Science, the world’s largest publisher-neutral citation index and research intelligence platform
 
