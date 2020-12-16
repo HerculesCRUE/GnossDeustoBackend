@@ -117,52 +117,7 @@ Y vemos como han aplicado correctamente estos permisos.
 Ya tenemos RabbitMQ listo para trabajar en nuestro entorno.
 
 
-## Preparación de Trifid
 
-Para poner en marcha el servicio de linked tenemos que crear una imagen docker con la configuración adecuada para nuestro entorno. En la home del usuario descargamos el paquete de trifid con este comando:
-
-	wget http://herc-as-front-desa.atica.um.es/docs/trifid.tar.gz
-	
-Después lo  descomprimimimos:
-
-	tar xzvf http://herc-as-front-desa.atica.um.es/docs/trifid.tar.gz
-	
-Una vez descomprimido entramos en el directorio trifid.
-
-	cd trifid
-	
-Y editamos el archivo config-custom.json indicando la ip de nuestra máquina en el sparqlEndpointUrl y en datasetBaseUrl.
-
-	{
- 		"baseConfig": "trifid:config-sparql.json", // inherit the default sparql config
-  		"sparqlEndpointUrl": "http://ip_de_nuestra_máquina:8890/sparql", // overrides SPARQL endpoint
-  		"datasetBaseUrl": "http://graph.um.es/", // enables "proxy" mode.
-  		"listener": {
-   		"port": 8081
-  		}
-	}
-
-Una vez ajustados los parametros tenemos que construir la imagen con el siguiente comando:
-	
-	docker build -t trifid .
-	
-Con la imagen ya construida la ponemos en marcha con este comando:
-
-	docker run -d -p 80:8081 --name trifid trifid
-	
-Con este comando lo quecemos es exponer el puerto 8081 interno de trifid por el puerto 80 público.
-
-Una vez levantado podemos hacer una simple comprobación entrando a su interfaz web en http://ip_de_nuestra_maquina.
-
-![](http://herc-as-front-desa.atica.um.es/docs/trifid.png)
-	
-Para que este sistema funcioane correctamente debemos añadir a la resolucion de nombres local del equipo desde donde vamos a ajecutar las pruebas una línea que asocie graph.um.es con la máquina donde tengamos los servicios.
-
-	ip_de_nuestra_maquina graph.um.es
-	
-Ejemplo de datos:
-
-![](http://herc-as-front-desa.atica.um.es/docs/trifid1.png)
 
 ## Despliegue de los servicios
 
