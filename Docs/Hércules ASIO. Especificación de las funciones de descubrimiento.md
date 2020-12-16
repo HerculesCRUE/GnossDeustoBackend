@@ -218,7 +218,7 @@ Una vez explicadas las configuraciones de similitud que actuarán para este caso
     3. En el caso de que ni siquiera se haya alcanzado el umbral mínimo de similitud, se considera que se trata de un investigador nuevo en el sistema por lo que se procede a su carga como si se tratase de una entidad nueva, además se cargará en el sistema con información adicional obtenida en el descubrimiento (de Unidata o de los APIs) en el caso de que se haya encontrado (ORCID, áreas temáticas, etc.). 
     
 Detalle de los APIs utilizados para el descubrimiento de enlaces
---------------------
+===================
 El funcionamiento es similar en el uso de todos los APIs, se obtienen del RDF a cargar los documentos junto con sus autores y se buscan en los diferente APIs las coincidencias de documentos+autores, no se buscan los nombres de las personas ni los nombres de los autores si no existe una relación entre ambos ya que la coincidencia de un nombre o un título por sí solos no es suficiente para considerarlos la misma entidad.
 
 Las pequeñas diferencias en los usos de los APIs están derivadas de la naturaleza propia de cada uno de ellos (en alguno se puede buscar por documentos, en otros por personas...).
@@ -226,49 +226,49 @@ Las pequeñas diferencias en los usos de los APIs están derivadas de la natural
 A continuación se detallan los diferentes APIs utilizados junto con su URL, una breve descripción y el uso que hacemos dentro del servicio de escubrimiento:
 
 1. Crossref (https://www.crossref.org/)	
-
+--------------------
 Crossref makes research outputs easy to find, cite, link, assess, and reuse. A not-for-profit membership organization that exists to make scholarly communications better.
 
 Dentro de discover se hacen llamadas al método del API 'https://api.crossref.org/works?query.author={nombre_autor}&rows=200' y se obtienen las publicaciones que tienen como autor el parámetro pasado.
 
 2. DBLP Computer Science Bibliography (https://dblp.org/)	
-
+--------------------
 The dblp computer science bibliography is the on-line reference for bibliographic information on major computer science publications. It has evolved from an early small experimental web server to a popular open-data service for the whole computer science community.
 
 Dentro de discover se hacen llamadas al método del API 'https://dblp.org/search/author/api?q={nombre_autor}&h=5' y se obtienen los autores junto con sus publicaciones, a continuación se llama al método 'https://dblp.org/pid/{id_autor}' con los identificadores de DBLP de los autores para obtener más metadatos.
 
 3. DOAJ (https://doaj.org/)	
-
+--------------------
 The DOAJ (Directory of Open Access Journals) was launched in 2003 with 300 open access journals. Today, this independent database contains over 15 000 peer-reviewed open access journals covering all areas of science, technology, medicine, social sciences, arts and humanities. Open access journals from all countries and in all languages are welcome to apply for inclusion.
 
 Dentro de discover se hacen llamadas a los métodos del API 'https://doaj.org/api/v2/search/articles/title:{nombre_documento}' y 'https://doaj.org/api/v2/search/journals/title:{nombre_documento}' y se obtienen las publicaciones junto con sus autores.
 
 4. ORCID (https://orcid.org/)	
-
+--------------------
 ORCID is a nonprofit organization helping create a world in which all who participate in research, scholarship and innovation are uniquely identified and connected to their contributions and affiliations, across disciplines, borders, and time.
 
 Dentro de discover se hacen llamadas al método del API 'https://pub.orcid.org/v3.0/expanded-search?q={nombre_autor}&rows=5' para obtener los identificadores de los autores y posteriormente se hacen llamadas a los métodos del API 'https://pub.orcid.org/v3.0/{id_autor}/person' y 'https://pub.orcid.org/v3.0/{id_autor}/works para obtener metadatos de los autores y sus obras respectivamente.
 
 5. PubMed (https://pubmed.ncbi.nlm.nih.gov/)	
-
+--------------------
 PubMed® comprises more than 30 million citations for biomedical literature from MEDLINE, life science journals, and online books.
 
 Dentro de discover se hacen llamadas al método del API 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?term={nombre_documento}&field=title&sort=relevance&retmax=10' con el que obtenemo los IDs de los documentos y posteriormente se hacen llamadas al método del API 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id={id_documento}&retmode=xml' con los identificadores de los documentos y obtenemos los documetnos junto con sus autores.
 
 6. Recolecta (https://recolecta.fecyt.es/)	
-
+--------------------
 RECOLECTA, o Recolector de Ciencia Abierta, es el agregador nacional de repositorios de acceso abierto. En esta plataforma se agrupan a todas las infraestructuras digitales españolas en las que se publican y/o depositan resultados de investigación en acceso abierto. 
 
 Dentro de discover se hacen llamadas al método del API 'https://buscador.recolecta.fecyt.es/buscador-recolecta?search_api_fulltext={nombre_documento}' y se obtienen las publicaciones junto con sus autores.
 
 7. Scopus (https://www.scopus.com/)	
-
+--------------------
 Scopus is the largest abstract and citation database of peer-reviewed literature: scientific journals, books and conference proceedings. Delivering a comprehensive overview of the world's research output in the fields of science, technology, medicine, social sciences, and arts and humanities, Scopus features smart tools to track, analyze and visualize research.
 
 Dentro de discover se hacen llamadas al método del API 'https://api.elsevier.com/content/search/scopus?query=TITLE({nombre_documento})&view=COMPLETE&apiKey={ScopusApiKey}&httpAccept=application/xml' y se obtienen las publicaciones junto con sus autores, posteriormente se llama al método del API 'https://api.elsevier.com/content/author/author_id/{id_autor}?apiKey={ScopusApiKey} para obtener metadaos de los autores.
 
 8. Web of Science (http://wos.fecyt.es/)	
-
+--------------------
 FECYT provides access to Web of Science, the world’s largest publisher-neutral citation index and research intelligence platform
 
 Dentro de discover se hacen llamadas al método del API 'http://search.webofknowledge.com/esti/wokmws/ws/WokSearch' con los nombres de las publicaciones y se obtienen las publicaciones junto con sus autores.
