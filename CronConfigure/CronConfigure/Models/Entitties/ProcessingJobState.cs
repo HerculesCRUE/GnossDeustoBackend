@@ -5,10 +5,11 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Models.Entitties
 {
-
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para obtener información sobre el estado en el que se encuntra la sincronización lanzada por una tarea
     ///</summary>

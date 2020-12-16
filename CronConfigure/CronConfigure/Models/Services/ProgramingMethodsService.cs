@@ -9,10 +9,12 @@ using Hangfire.Server;
 using Newtonsoft.Json;
 using Serilog;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace CronConfigure.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para la programación de tareas
     ///</summary>

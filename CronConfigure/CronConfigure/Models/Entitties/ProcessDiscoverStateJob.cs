@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 /// <summary>
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 /// </summary>
 namespace CronConfigure.Models.Entitties
 {
+    [ExcludeFromCodeCoverage]
     [Table("ProcessDiscoverStateJob")]
     public class ProcessDiscoverStateJob
     {

@@ -4,6 +4,7 @@
 // Clase para gestionar los distintos tipos de tareas
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using CronConfigure.Models.Entitties;
 using CronConfigure.Models.Enumeracion;
@@ -15,6 +16,7 @@ using NCrontab;
 
 namespace CronConfigure.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para gestionar los distintos tipos de tareas
     ///</summary>
