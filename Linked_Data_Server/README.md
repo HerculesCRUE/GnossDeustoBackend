@@ -68,8 +68,8 @@ http://155.54.239.204:8890/sparql
  - Sparql.QueryParam: Parámetro para la query en el Endpoint Sparql
  - NameTitle: Nombre para mostrar en el título de la página tras el nombre de la entidad
  - ConstrainedByUrl: Url en la que se encuentran las restricciones ConstrainedBy
- - PropsTitle: Propiedades de la ontología para utilizar como título de las entidades
- - PropsTransform: Propiedades a transformar en la presentación de las entidades, estas propiedades se transformarán según lo especificado y se transformrán en URLs
+ - PropsTitle: Propiedades de la ontología para utilizar como título de las entidades, es decir, en la presentación de la web, serán las propiedades utilizadas para representar las entidades. Generalmente http://purl.org/roh/mirror/foaf#name para las personas y http://purl.org/roh#title para el resto de entidades
+ - PropsTransform: Propiedades a transformar en la presentación web de las entidades, estas propiedades se visualizarán transformadan según esta especiicación y se serán enlaces externos, por ejemplo: 'http://purl.org/roh#ORCID|https://orcid.org/{value}' implica que el valor de la propiedad 'http://purl.org/roh#ORCID' cuando se visualice en la web se presentará así https://orcid.org/{valor_de_la_propiedad} y se mostrará como un enlace clicable
  - Authority: Endpoint para la llamada de obtención del token
  - GrantType: Tipo de concesión de Oauth
  - Scope: Limitación de acceso al api de carga
