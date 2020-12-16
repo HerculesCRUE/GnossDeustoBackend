@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.Models.Enumeracion
 {
-    [ExcludeFromCodeCoverage]
     public enum JobType
     {
         All = 0,
