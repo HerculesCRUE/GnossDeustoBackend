@@ -211,6 +211,7 @@ namespace XUnitTestProjectAPI_DISCOVER
 			Discover.test = true;
 			Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> externalIds = Discover.ExternalIntegration(ref hasChanges, ref discoveredEntityList, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache);
 			Assert.True(true);
+			//TODO, no funciona correctamente al lanzar las pruebas desde el servidor
 			//if (hasChanges == true)
 			//{
 			//	int suma = 0;
