@@ -1,13 +1,13 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
-| Fecha         | 01/10/2020                                                   |
+| Fecha         | 16/12/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Hércules ASIO. Especificación de las funciones de descubrimiento| 
 |Descripción|Especificación de las funciones de descubrimiento|
-|Versión|0.1|
+|Versión|0.2|
 |Módulo|API DISCOVER|
 |Tipo|Especificación|
-|Cambios de la Versión|Creación|
+|Cambios de la Versión|Explicación de los diferentes apis externos|
 
 # Hércules Backend ASIO. Especificación de las funciones de descubrimiento
 
@@ -209,10 +209,30 @@ Una vez explicadas las configuraciones de similitud que actuarán para este caso
 2. En segundo lugar, se intenta la reconciliación en base a similitudes entre la entidad a cargar y las entidades cargadas en ASIO. Para ello se buscan candidatos dentro del grafo de ASIO de la universidad que cumplan la primera restricción 'similitud por nombre' (http://purl.org/roh/mirror/foaf#name) y de todos ellos obtenemos sus publicaciones (http://purl.org/roh#correspondingAuthorOf). Una vez obtenidos todos los candidatos obenemos la probabilidad de que se trate de la misma entidad sobre cada uno de ellos.
     1. En caso de encontrar sólo un investigador cuya similitud supere el umbral máximo de similitud (0.9) se considera que es la misma entidad por lo que terminamos la reconciliación. 
     2. En caso de encontrar más de investigador que supere el umbral máximo de similitud (0.9) o algún investigador que supere el umbral mínimo de similitud (0.7) pero no alcance el umbral máximo de similitud (0.9) no podemos reconciliar la entidad automáticamente. 
-3. (Pendiente de implementar) En tercer lugar, se intenta la reconciliación en base al descubrimiento de enlaces, para ello se busca información en Unidata y en los APIs de descubrimiento de enlaces (ORCID, DBLP, DIALNET, DOI...) del investigador a cargar y de los investigadores cargados (en caso de que se haya encontrado algún investigador cargado que supere el umbral mínimo de similitud).  
+3. En tercer lugar, se intenta la reconciliación en base al descubrimiento de enlaces, para ello se busca información en Unidata (Pendiente de implementar) y en los APIs de descubrimiento de enlaces (Crossref, DBLP Computer Science Bibliography, DOAJ, ORCID, PubMed, Recolecta, Scopus y Web of Science) del investigador a cargar y de los investigadores cargados (en caso de que se haya encontrado algún investigador cargado que supere el umbral mínimo de similitud).  
     1. En caso de que a través de Unidata o de los APIs de descubrimiento de enlaces se encuentren identificadores para el investigador se vuelve a proceder con el punto 1 de la reconciliación y si se encuentra algún investigador cargado en ASIO que comparta identificador (ORCID) se considera que es la misma entidad por lo que terminamos la reconciliación. 
     2. En caso de que a través del descubrimiento se encuentre al investigador y papers publicados por el mismo, se vuelve a intentar la reconciliación del punto 2. En este punto podríamos tener que en el grafo cargado había un investigador cuyo nombre alcanzaba el umbral mínimo de similitud con el investigador a cargar, pero no tuviesen ningún paper cargado en común con el paper que se está cargando, sin embargo, tras obtener la información adicional del descubrimiento podríamos obtener varios papers del investigador a cargar y alguno de ellos coincidiese con el paper que tiene la entidad que ya estaba cargada en el grafo de la universidad. Por lo tanto, se considera que es la misma entidad por lo que terminamos la reconciliación. 
 4. Si tras todos estos intentos de reconciliación no se ha conseguido encontrar el investigador se procede del siguiente modo: 
     1. En caso de que no se haya encontrado el umbral máximo de similitud del investigador, pero sí que se haya alcanzado el umbral mínimo se pondrá la carga de RDF en el que estaba la entidad en ‘cuarentena’ a la espera de que un administrador decida si se trata de la misma entidad o no. 
     2. En caso de que se haya encontrado más de una entidad que supere el umbral máximo se pondrá la carga de RDF en el que estaba la entidad en ‘cuarentena’ a la espera de que un administrador decida cuál de las entidades es la equivalente. 
     3. En el caso de que ni siquiera se haya alcanzado el umbral mínimo de similitud, se considera que se trata de un investigador nuevo en el sistema por lo que se procede a su carga como si se tratase de una entidad nueva, además se cargará en el sistema con información adicional obtenida en el descubrimiento (de Unidata o de los APIs) en el caso de que se haya encontrado (ORCID, áreas temáticas, etc.). 
+    
+Detalle de los APIs utilizados para el descubrimiento de enlaces
+--------------------
+-	Crossref (https://www.crossref.org/)	
+	Crossref makes research outputs easy to find, cite, link, assess, and reuse. A not-for-profit membership organization that exists to make scholarly communications better.
+-	DBLP Computer Science Bibliography (https://dblp.org/)	
+	The dblp computer science bibliography is the on-line reference for bibliographic information on major computer science publications. It has evolved from an early small experimental web server to a popular open-data service for the whole computer science community.
+-	DOAJ (https://doaj.org/)	
+	The DOAJ (Directory of Open Access Journals) was launched in 2003 with 300 open access journals. Today, this independent database contains over 15 000 peer-reviewed open access journals covering all areas of science, technology, medicine, social sciences, arts and humanities. Open access journals from all countries and in all languages are welcome to apply for inclusion.
+-	ORCID (https://orcid.org/)	
+	ORCID is a nonprofit organization helping create a world in which all who participate in research, scholarship and innovation are uniquely identified and connected to their contributions and affiliations, across disciplines, borders, and time.
+-	PubMed (https://pubmed.ncbi.nlm.nih.gov/)	
+	PubMed® comprises more than 30 million citations for biomedical literature from MEDLINE, life science journals, and online books.
+-	Recolecta (https://recolecta.fecyt.es/)	
+	RECOLECTA, o Recolector de Ciencia Abierta, es el agregador nacional de repositorios de acceso abierto. En esta plataforma se agrupan a todas las infraestructuras digitales españolas en las que se publican y/o depositan resultados de investigación en acceso abierto. 
+-	Scopus (https://www.scopus.com/)	
+	Scopus is the largest abstract and citation database of peer-reviewed literature: scientific journals, books and conference proceedings. Delivering a comprehensive overview of the world's research output in the fields of science, technology, medicine, social sciences, and arts and humanities, Scopus features smart tools to track, analyze and visualize research.
+-	Web of Science (http://wos.fecyt.es/)	
+	FECYT provides access to Web of Science, the world’s largest publisher-neutral citation index and research intelligence platform
+
