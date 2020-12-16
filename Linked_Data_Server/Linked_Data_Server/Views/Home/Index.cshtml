@@ -5,6 +5,18 @@
 
 <script>
     $(function () {
+        $('.linkprovenancea').click(function( event ) {
+            event.preventDefault();
+            var provenanceTable = $(this).parent().find('.provenancetable');
+            if ($(provenanceTable).is(":visible")) {
+                provenanceTable.hide(200);
+            } else {
+                provenanceTable.show(200);
+            }
+        });
+
+
+         
         $("#autocomplete").autocomplete({
             minLength: 3,
             source: function (request, response) {
@@ -119,15 +131,6 @@
                                         }
                                         else
                                         {
-                                            HashSet<string> graphs = new HashSet<string>();
-                                            if (pItem.stringPropertiesEntityGraph.ContainsKey(stringProperty.Key))
-                                            {
-                                                if (pItem.stringPropertiesEntityGraph[stringProperty.Key].ContainsKey(valor))
-                                                {
-                                                    graphs = new HashSet<string>(pItem.stringPropertiesEntityGraph[stringProperty.Key][valor]);
-                                                }
-                                            }
-
                                             if (stringProperty.Key == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
                                             {
                                                 title = "";
@@ -146,23 +149,75 @@
                                             }
                                             else if (pPropsTransform.ContainsKey(stringProperty.Key))
                                             {
-                                                string provenance = "";
-                                                if(graphs.Count>0)
-                                                {
-                                                    provenance = " Provenance: " + string.Join(", ", graphs);
-                                                }
                                                 string uri = pPropsTransform[stringProperty.Key].Replace("{value}", valor);
 
-                                                <td><b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a> @provenance</b></td>
+                                    <td>
+                                        <b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a></b>
+                                        @{
+                                            List<Linked_Data_Server.Models.Entities.DiscoverRdfViewModel.ProvenanceData> provenanceData = pItem.provenanceData.Where(x => x.property == stringProperty.Key && x.value == valor).ToList();
+                                            if (provenanceData.Count() > 0)
+                                            {
+                                                <a href="#" class="linkprovenancea"><span class="linkprovenance">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                @*<img src="/theme/resources/provenance.png" class="btProvenance" alt="Provenance" />*@
+                                                @*<img src="~/theme/resources/provenance.png" alt="Provenance">*@
+                                                <table class="provenancetable" style="display:none">
+                                                    <thead class="table-subject">
+                                                        <tr>
+                                                            <th colspan="2">
+                                                                <span>Provenance</span>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (Linked_Data_Server.Models.Entities.DiscoverRdfViewModel.ProvenanceData provenanceDataIn in provenanceData)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    <b>@provenanceDataIn.date.ToString("G", System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"))</b>
+                                                                </td>
+                                                                <td><b>@provenanceDataIn.organization</b></td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            }
+                                        }
+                                    </td>
                                             }
                                             else
                                             {
-                                                string provenance = "";
-                                                if(graphs.Count>0)
-                                                {
-                                                    provenance = " Provenance: " + string.Join(", ", graphs);
-                                                }
-                                                <td><b>@valor @provenance</b></td>
+                                    <td>
+                                        <b>@valor</b>
+                                        @{
+                                            List<Linked_Data_Server.Models.Entities.DiscoverRdfViewModel.ProvenanceData> provenanceData = pItem.provenanceData.Where(x => x.property == stringProperty.Key && x.value == valor).ToList();
+                                            if (provenanceData.Count() > 0)
+                                            {
+                                                <a href="#"  class="linkprovenancea"><span class="linkprovenance">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                @*<img src="/theme/resources/provenance.png" class="btProvenance" alt="Provenance" />*@
+                                                @*<img src="~/theme/resources/provenance.png" alt="Provenance">*@
+                                                <table class="provenancetable" style="display:none">
+                                                    <thead class="table-subject">
+                                                        <tr>
+                                                            <th colspan="2">
+                                                                <span>Provenance</span>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (Linked_Data_Server.Models.Entities.DiscoverRdfViewModel.ProvenanceData provenanceDataIn in provenanceData)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    <b>@provenanceDataIn.date.ToString("G", System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"))</b>
+                                                                </td>
+                                                                <td><b>@provenanceDataIn.organization</b></td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            }
+                                        }
+                                    </td>
                                             }
                                         }
                                     </tr>

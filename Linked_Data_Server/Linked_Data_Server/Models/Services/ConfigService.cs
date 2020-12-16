@@ -23,6 +23,7 @@ namespace Linked_Data_Server.Models.Services
         private HashSet<string> PropsTitle { get; set; }
 
         private Dictionary<string,string> PropsTransform { get; set; }
+        private string UrlHome { get; set; }
 
         ///<summary>
         ///Obtiene el título:NameTitle del fichero appsettings.json
@@ -210,6 +211,32 @@ namespace Linked_Data_Server.Models.Services
                 }
             }
             return PropsTransform;
+        }
+
+        ///<summary>
+        ///Obtiene el título:UrlHome del fichero appsettings.json
+        ///</summary>
+        public string GetUrlHome()
+        {
+            if (string.IsNullOrEmpty(UrlHome))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("UrlHome"))
+                {
+                    UrlHome = environmentVariables["UrlHome"] as string;
+                }
+                else
+                {
+                    UrlHome = Configuration["UrlHome"];
+                }
+
+            }
+            return UrlHome;
         }
     }
 
