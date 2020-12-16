@@ -180,57 +180,57 @@ namespace XUnitTestProjectAPI_DISCOVER
 			}
 		}
 
-        [Fact]
-        public void TestExternalIntegration()
-        {
-            bool hasChanges = false;
-            Dictionary<string, string> discoveredEntityList = new Dictionary<string, string>();
+     //   [Fact]
+     //   public void TestExternalIntegration()
+     //   {
+     //       bool hasChanges = false;
+     //       Dictionary<string, string> discoveredEntityList = new Dictionary<string, string>();
 
-            Dictionary<string, Dictionary<string, float>> discoveredEntitiesProbability = new Dictionary<string, Dictionary<string, float>>();
+     //       Dictionary<string, Dictionary<string, float>> discoveredEntitiesProbability = new Dictionary<string, Dictionary<string, float>>();
 
-            RohGraph dataGraph = new RohGraph();
-            dataGraph.LoadFromString(rdfFile, new RdfXmlParser());
+     //       RohGraph dataGraph = new RohGraph();
+     //       dataGraph.LoadFromString(rdfFile, new RdfXmlParser());
 
-            RohRdfsReasoner reasoner = new RohRdfsReasoner();
+     //       RohRdfsReasoner reasoner = new RohRdfsReasoner();
 
-            Dictionary<string, Dictionary<string, float>> namesScore = new Dictionary<string, Dictionary<string, float>>();
+     //       Dictionary<string, Dictionary<string, float>> namesScore = new Dictionary<string, Dictionary<string, float>>();
 
-            RohGraph ontologyGraph = new RohGraph();
-            ontologyGraph.LoadFromFile("Ontology/roh-v2.owl");
-            reasoner.Initialise(ontologyGraph);
+     //       RohGraph ontologyGraph = new RohGraph();
+     //       ontologyGraph.LoadFromFile("Ontology/roh-v2.owl");
+     //       reasoner.Initialise(ontologyGraph);
 
-            Dictionary<string, KeyValuePair<string, float>> entidadesReconciliadasConIntegracionExternaAux;
+     //       Dictionary<string, KeyValuePair<string, float>> entidadesReconciliadasConIntegracionExternaAux;
 
-            Dictionary<string, HashSet<string>> discardDissambiguations = new Dictionary<string, HashSet<string>>();
+     //       Dictionary<string, HashSet<string>> discardDissambiguations = new Dictionary<string, HashSet<string>>();
 
-            DiscoverCache discoverCache = new DiscoverCache();
+     //       DiscoverCache discoverCache = new DiscoverCache();
 
-            RohGraph dataGraphBBDD = new RohGraph();
-            dataGraphBBDD.LoadFromString(databaseFile, new RdfXmlParser());
-            Discover.mSparqlUtility = new SparqlUtilityMock(dataGraphBBDD);
+     //       RohGraph dataGraphBBDD = new RohGraph();
+     //       dataGraphBBDD.LoadFromString(databaseFile, new RdfXmlParser());
+     //       Discover.mSparqlUtility = new SparqlUtilityMock(dataGraphBBDD);
 
-            Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> externalIds = Discover.ExternalIntegration(ref hasChanges, ref discoveredEntityList, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache);
+     //       Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> externalIds = Discover.ExternalIntegration(ref hasChanges, ref discoveredEntityList, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache);
 
-            if (hasChanges == true)
-            {
-                int suma = 0;
-                foreach(var id in externalIds)
-                {
-                    suma += id.Value.Count;
-                }
-                string query = @"select distinct ?s where{?s ?p ?o. FILTER(!isBlank(?s))}";
-                SparqlResultSet sparqlResultSet = (SparqlResultSet)dataGraph.ExecuteQuery(query.ToString());
+     //       if (hasChanges == true)
+     //       {
+     //           int suma = 0;
+     //           foreach(var id in externalIds)
+     //           {
+     //               suma += id.Value.Count;
+     //           }
+     //           string query = @"select distinct ?s where{?s ?p ?o. FILTER(!isBlank(?s))}";
+     //           SparqlResultSet sparqlResultSet = (SparqlResultSet)dataGraph.ExecuteQuery(query.ToString());
                 
-                if(suma > sparqlResultSet.Count/2)
-                {
-                    Assert.True(true);
-                }
-                else
-                {
-					Assert.True(false);
-                }
-            }
-        }
+     //           if(suma > sparqlResultSet.Count/2)
+     //           {
+     //               Assert.True(true);
+     //           }
+     //           else
+     //           {
+					//Assert.True(false);
+     //           }
+     //       }
+     //   }
 
         [Fact]
         public void TestLoadNamesScore()
