@@ -5,12 +5,15 @@
 using Microsoft.EntityFrameworkCore;
 using CronConfigure.Models.Hangfire;
 using CronConfigure.Models.Entitties;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Models
 {
     /// <summary>
     /// Contexto de hangfire para la base de datos
     /// </summary>
+    /// 
+    [ExcludeFromCodeCoverage]
     public class HangfireEntityContext : DbContext
     {
         public DbSet<AggregatedCounter> AggregatedCounter { get; set; }

@@ -10,10 +10,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Models.Entitties
 {
-    [ExcludeFromCodeCoverage]
+
     ///<summary>
     ///Representa un item de descubrimiento
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class DiscoverItem
     {
         ///<summary>
