@@ -54,7 +54,7 @@ http://155.54.239.204:8890/sparql
   		"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
   		"ClientId": "LinkedDataServer",
   		"ClientSecret": "secretLinkedDataServer",
-		"UrlHome": "https://herc-as-front-desa.atica.um.es/carga-web/public/gnossdeustobackend/home"
+		"UrlHome": "https://herc-as-front-desa.atica.um.es/carga-web"
 		
 		
 	}
