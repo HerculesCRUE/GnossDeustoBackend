@@ -1,0 +1,518 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Services.CallCronApiService
+  commentId: T:API_DISCOVER.Models.Services.CallCronApiService
+  id: CallCronApiService
+  parent: API_DISCOVER.Models.Services
+  children:
+  - API_DISCOVER.Models.Services.CallCronApiService.#ctor(API_DISCOVER.Models.Services.ConfigUrlService,API_DISCOVER.Models.Services.CallTokenService)
+  - API_DISCOVER.Models.Services.CallCronApiService.CallGetApi(System.String,API_DISCOVER.Models.Entities.TokenBearer)
+  - API_DISCOVER.Models.Services.CallCronApiService.GetJob(System.String)
+  langs:
+  - csharp
+  - vb
+  name: CallCronApiService
+  nameWithType: CallCronApiService
+  fullName: API_DISCOVER.Models.Services.CallCronApiService
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/CallCronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: CallCronApiService
+    path: Models/Services/CallCronApiService.cs
+    startLine: 19
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nServicio para hacer llamadas a los métodos del apiCron\n"
+  example: []
+  syntax:
+    content: public class CallCronApiService
+    content.vb: Public Class CallCronApiService
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Services.CallCronApiService.#ctor(API_DISCOVER.Models.Services.ConfigUrlService,API_DISCOVER.Models.Services.CallTokenService)
+  commentId: M:API_DISCOVER.Models.Services.CallCronApiService.#ctor(API_DISCOVER.Models.Services.ConfigUrlService,API_DISCOVER.Models.Services.CallTokenService)
+  id: '#ctor(API_DISCOVER.Models.Services.ConfigUrlService,API_DISCOVER.Models.Services.CallTokenService)'
+  parent: API_DISCOVER.Models.Services.CallCronApiService
+  langs:
+  - csharp
+  - vb
+  name: CallCronApiService(ConfigUrlService, CallTokenService)
+  nameWithType: CallCronApiService.CallCronApiService(ConfigUrlService, CallTokenService)
+  fullName: API_DISCOVER.Models.Services.CallCronApiService.CallCronApiService(API_DISCOVER.Models.Services.ConfigUrlService, API_DISCOVER.Models.Services.CallTokenService)
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/CallCronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Services/CallCronApiService.cs
+    startLine: 24
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  syntax:
+    content: public CallCronApiService(ConfigUrlService serviceUrl, CallTokenService tokenService)
+    parameters:
+    - id: serviceUrl
+      type: API_DISCOVER.Models.Services.ConfigUrlService
+    - id: tokenService
+      type: API_DISCOVER.Models.Services.CallTokenService
+    content.vb: Public Sub New(serviceUrl As ConfigUrlService, tokenService As CallTokenService)
+  overload: API_DISCOVER.Models.Services.CallCronApiService.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Services.CallCronApiService.GetJob(System.String)
+  commentId: M:API_DISCOVER.Models.Services.CallCronApiService.GetJob(System.String)
+  id: GetJob(System.String)
+  parent: API_DISCOVER.Models.Services.CallCronApiService
+  langs:
+  - csharp
+  - vb
+  name: GetJob(String)
+  nameWithType: CallCronApiService.GetJob(String)
+  fullName: API_DISCOVER.Models.Services.CallCronApiService.GetJob(System.String)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/CallCronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetJob
+    path: Models/Services/CallCronApiService.cs
+    startLine: 38
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nObtiene una tarea\n"
+  example: []
+  syntax:
+    content: public JobViewModel GetJob(string id)
+    parameters:
+    - id: id
+      type: System.String
+      description: identificador de la tarea
+    return:
+      type: API_DISCOVER.ViewModels.JobViewModel
+      description: una tarea
+    content.vb: Public Function GetJob(id As String) As JobViewModel
+  overload: API_DISCOVER.Models.Services.CallCronApiService.GetJob*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Services.CallCronApiService.CallGetApi(System.String,API_DISCOVER.Models.Entities.TokenBearer)
+  commentId: M:API_DISCOVER.Models.Services.CallCronApiService.CallGetApi(System.String,API_DISCOVER.Models.Entities.TokenBearer)
+  id: CallGetApi(System.String,API_DISCOVER.Models.Entities.TokenBearer)
+  parent: API_DISCOVER.Models.Services.CallCronApiService
+  langs:
+  - csharp
+  - vb
+  name: CallGetApi(String, TokenBearer)
+  nameWithType: CallCronApiService.CallGetApi(String, TokenBearer)
+  fullName: API_DISCOVER.Models.Services.CallCronApiService.CallGetApi(System.String, API_DISCOVER.Models.Entities.TokenBearer)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/CallCronApiService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: CallGetApi
+    path: Models/Services/CallCronApiService.cs
+    startLine: 49
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nHace una petición get al apiCron\n"
+  example: []
+  syntax:
+    content: public string CallGetApi(string urlMethod, TokenBearer token = null)
+    parameters:
+    - id: urlMethod
+      type: System.String
+      description: Url del método dentro del apiCron
+    - id: token
+      type: API_DISCOVER.Models.Entities.TokenBearer
+      description: token bearer de seguridad
+    return:
+      type: System.String
+    content.vb: Public Function CallGetApi(urlMethod As String, token As TokenBearer = Nothing) As String
+  overload: API_DISCOVER.Models.Services.CallCronApiService.CallGetApi*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.Models.Services
+  commentId: N:API_DISCOVER.Models.Services
+  name: API_DISCOVER.Models.Services
+  nameWithType: API_DISCOVER.Models.Services
+  fullName: API_DISCOVER.Models.Services
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Services.CallCronApiService.#ctor*
+  commentId: Overload:API_DISCOVER.Models.Services.CallCronApiService.#ctor
+  name: CallCronApiService
+  nameWithType: CallCronApiService.CallCronApiService
+  fullName: API_DISCOVER.Models.Services.CallCronApiService.CallCronApiService
+- uid: API_DISCOVER.Models.Services.ConfigUrlService
+  commentId: T:API_DISCOVER.Models.Services.ConfigUrlService
+  parent: API_DISCOVER.Models.Services
+  name: ConfigUrlService
+  nameWithType: ConfigUrlService
+  fullName: API_DISCOVER.Models.Services.ConfigUrlService
+- uid: API_DISCOVER.Models.Services.CallTokenService
+  commentId: T:API_DISCOVER.Models.Services.CallTokenService
+  parent: API_DISCOVER.Models.Services
+  name: CallTokenService
+  nameWithType: CallTokenService
+  fullName: API_DISCOVER.Models.Services.CallTokenService
+- uid: API_DISCOVER.Models.Services.CallCronApiService.GetJob*
+  commentId: Overload:API_DISCOVER.Models.Services.CallCronApiService.GetJob
+  name: GetJob
+  nameWithType: CallCronApiService.GetJob
+  fullName: API_DISCOVER.Models.Services.CallCronApiService.GetJob
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: API_DISCOVER.ViewModels.JobViewModel
+  commentId: T:API_DISCOVER.ViewModels.JobViewModel
+  parent: API_DISCOVER.ViewModels
+  name: JobViewModel
+  nameWithType: JobViewModel
+  fullName: API_DISCOVER.ViewModels.JobViewModel
+- uid: API_DISCOVER.ViewModels
+  commentId: N:API_DISCOVER.ViewModels
+  name: API_DISCOVER.ViewModels
+  nameWithType: API_DISCOVER.ViewModels
+  fullName: API_DISCOVER.ViewModels
+- uid: API_DISCOVER.Models.Services.CallCronApiService.CallGetApi*
+  commentId: Overload:API_DISCOVER.Models.Services.CallCronApiService.CallGetApi
+  name: CallGetApi
+  nameWithType: CallCronApiService.CallGetApi
+  fullName: API_DISCOVER.Models.Services.CallCronApiService.CallGetApi
+- uid: API_DISCOVER.Models.Entities.TokenBearer
+  commentId: T:API_DISCOVER.Models.Entities.TokenBearer
+  parent: API_DISCOVER.Models.Entities
+  name: TokenBearer
+  nameWithType: TokenBearer
+  fullName: API_DISCOVER.Models.Entities.TokenBearer
+- uid: API_DISCOVER.Models.Entities
+  commentId: N:API_DISCOVER.Models.Entities
+  name: API_DISCOVER.Models.Entities
+  nameWithType: API_DISCOVER.Models.Entities
+  fullName: API_DISCOVER.Models.Entities

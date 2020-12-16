@@ -1,0 +1,107 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Utility.I_SparqlUtility
+  commentId: T:API_DISCOVER.Utility.I_SparqlUtility
+  id: I_SparqlUtility
+  parent: API_DISCOVER.Utility
+  children:
+  - API_DISCOVER.Utility.I_SparqlUtility.SelectData(System.String,System.String,System.String,System.String)
+  langs:
+  - csharp
+  - vb
+  name: I_SparqlUtility
+  nameWithType: I_SparqlUtility
+  fullName: API_DISCOVER.Utility.I_SparqlUtility
+  type: Interface
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/I_SparqlUtility.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: I_SparqlUtility
+    path: Utility/I_SparqlUtility.cs
+    startLine: 19
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  syntax:
+    content: public interface I_SparqlUtility
+    content.vb: Public Interface I_SparqlUtility
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: API_DISCOVER.Utility.I_SparqlUtility.SelectData(System.String,System.String,System.String,System.String)
+  commentId: M:API_DISCOVER.Utility.I_SparqlUtility.SelectData(System.String,System.String,System.String,System.String)
+  id: SelectData(System.String,System.String,System.String,System.String)
+  parent: API_DISCOVER.Utility.I_SparqlUtility
+  langs:
+  - csharp
+  - vb
+  name: SelectData(String, String, String, String)
+  nameWithType: I_SparqlUtility.SelectData(String, String, String, String)
+  fullName: API_DISCOVER.Utility.I_SparqlUtility.SelectData(System.String, System.String, System.String, System.String)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/I_SparqlUtility.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: SelectData
+    path: Utility/I_SparqlUtility.cs
+    startLine: 21
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  syntax:
+    content: SparqlObject SelectData(string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam)
+    parameters:
+    - id: pSPARQLEndpoint
+      type: System.String
+    - id: pGraph
+      type: System.String
+    - id: pConsulta
+      type: System.String
+    - id: pQueryParam
+      type: System.String
+    return:
+      type: API_DISCOVER.Models.Entities.SparqlObject
+    content.vb: Function SelectData(pSPARQLEndpoint As String, pGraph As String, pConsulta As String, pQueryParam As String) As SparqlObject
+  overload: API_DISCOVER.Utility.I_SparqlUtility.SelectData*
+references:
+- uid: API_DISCOVER.Utility
+  commentId: N:API_DISCOVER.Utility
+  name: API_DISCOVER.Utility
+  nameWithType: API_DISCOVER.Utility
+  fullName: API_DISCOVER.Utility
+- uid: API_DISCOVER.Utility.I_SparqlUtility.SelectData*
+  commentId: Overload:API_DISCOVER.Utility.I_SparqlUtility.SelectData
+  name: SelectData
+  nameWithType: I_SparqlUtility.SelectData
+  fullName: API_DISCOVER.Utility.I_SparqlUtility.SelectData
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: API_DISCOVER.Models.Entities.SparqlObject
+  commentId: T:API_DISCOVER.Models.Entities.SparqlObject
+  parent: API_DISCOVER.Models.Entities
+  name: SparqlObject
+  nameWithType: SparqlObject
+  fullName: API_DISCOVER.Models.Entities.SparqlObject
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Entities
+  commentId: N:API_DISCOVER.Models.Entities
+  name: API_DISCOVER.Models.Entities
+  nameWithType: API_DISCOVER.Models.Entities
+  fullName: API_DISCOVER.Models.Entities

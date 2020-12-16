@@ -1,0 +1,65 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Services.RabbitMQService.ReceivedDelegate
+  commentId: T:API_DISCOVER.Models.Services.RabbitMQService.ReceivedDelegate
+  id: RabbitMQService.ReceivedDelegate
+  parent: API_DISCOVER.Models.Services
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: RabbitMQService.ReceivedDelegate
+  nameWithType: RabbitMQService.ReceivedDelegate
+  fullName: API_DISCOVER.Models.Services.RabbitMQService.ReceivedDelegate
+  type: Delegate
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/RabbitMQService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ReceivedDelegate
+    path: Models/Services/RabbitMQService.cs
+    startLine: 28
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  syntax:
+    content: public delegate bool ReceivedDelegate(string s);
+    parameters:
+    - id: s
+      type: System.String
+    return:
+      type: System.Boolean
+    content.vb: Public Delegate Function ReceivedDelegate(s As String) As Boolean
+  modifiers.csharp:
+  - public
+  - delegate
+  modifiers.vb:
+  - Public
+  - Delegate
+references:
+- uid: API_DISCOVER.Models.Services
+  commentId: N:API_DISCOVER.Models.Services
+  name: API_DISCOVER.Models.Services
+  nameWithType: API_DISCOVER.Models.Services
+  fullName: API_DISCOVER.Models.Services
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System

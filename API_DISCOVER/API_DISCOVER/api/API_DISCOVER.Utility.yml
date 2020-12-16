@@ -1,0 +1,52 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Utility
+  commentId: N:API_DISCOVER.Utility
+  id: API_DISCOVER.Utility
+  children:
+  - API_DISCOVER.Utility.AsioPublication
+  - API_DISCOVER.Utility.Discover
+  - API_DISCOVER.Utility.I_SparqlUtility
+  - API_DISCOVER.Utility.SparqlUtility
+  - API_DISCOVER.Utility.SparqlUtilityMock
+  langs:
+  - csharp
+  - vb
+  name: API_DISCOVER.Utility
+  nameWithType: API_DISCOVER.Utility
+  fullName: API_DISCOVER.Utility
+  type: Namespace
+  assemblies:
+  - API_DISCOVER
+references:
+- uid: API_DISCOVER.Utility.AsioPublication
+  commentId: T:API_DISCOVER.Utility.AsioPublication
+  name: AsioPublication
+  nameWithType: AsioPublication
+  fullName: API_DISCOVER.Utility.AsioPublication
+- uid: API_DISCOVER.Utility.Discover
+  commentId: T:API_DISCOVER.Utility.Discover
+  name: Discover
+  nameWithType: Discover
+  fullName: API_DISCOVER.Utility.Discover
+- uid: API_DISCOVER.Utility.I_SparqlUtility
+  commentId: T:API_DISCOVER.Utility.I_SparqlUtility
+  parent: API_DISCOVER.Utility
+  name: I_SparqlUtility
+  nameWithType: I_SparqlUtility
+  fullName: API_DISCOVER.Utility.I_SparqlUtility
+- uid: API_DISCOVER.Utility.SparqlUtility
+  commentId: T:API_DISCOVER.Utility.SparqlUtility
+  name: SparqlUtility
+  nameWithType: SparqlUtility
+  fullName: API_DISCOVER.Utility.SparqlUtility
+- uid: API_DISCOVER.Utility.SparqlUtilityMock
+  commentId: T:API_DISCOVER.Utility.SparqlUtilityMock
+  name: SparqlUtilityMock
+  nameWithType: SparqlUtilityMock
+  fullName: API_DISCOVER.Utility.SparqlUtilityMock
+- uid: API_DISCOVER.Utility
+  commentId: N:API_DISCOVER.Utility
+  name: API_DISCOVER.Utility
+  nameWithType: API_DISCOVER.Utility
+  fullName: API_DISCOVER.Utility

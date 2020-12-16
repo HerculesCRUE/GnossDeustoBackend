@@ -1,0 +1,650 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API
+  commentId: T:API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API
+  id: PUBMED_API
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs
+  children:
+  - API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Description
+  - API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.GetWorkByID(System.UInt32)
+  - API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.HomePage
+  - API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Id
+  - API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Name
+  - API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.WorkSearchByTitle(System.String)
+  langs:
+  - csharp
+  - vb
+  name: PUBMED_API
+  nameWithType: PUBMED_API
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/PUBMED_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: PUBMED_API
+    path: Models/Entities/ExternalAPIs/PUBMED_API.cs
+    startLine: 11
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  summary: "\nClase para interactuar con el API de PUBMED\n"
+  example: []
+  syntax:
+    content: 'public class PUBMED_API : I_ExternalAPI'
+    content.vb: >-
+      Public Class PUBMED_API
+          Implements I_ExternalAPI
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Name
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Name
+  id: Name
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: PUBMED_API.Name
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Name
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/PUBMED_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Name
+    path: Models/Entities/ExternalAPIs/PUBMED_API.cs
+    startLine: 13
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public string Name { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Name As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Name*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Description
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Description
+  id: Description
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: PUBMED_API.Description
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Description
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/PUBMED_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Description
+    path: Models/Entities/ExternalAPIs/PUBMED_API.cs
+    startLine: 15
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public string Description { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Description As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Description*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.HomePage
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.HomePage
+  id: HomePage
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API
+  langs:
+  - csharp
+  - vb
+  name: HomePage
+  nameWithType: PUBMED_API.HomePage
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.HomePage
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/PUBMED_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: HomePage
+    path: Models/Entities/ExternalAPIs/PUBMED_API.cs
+    startLine: 17
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public string HomePage { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property HomePage As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.HomePage*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Id
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Id
+  id: Id
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: PUBMED_API.Id
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Id
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/PUBMED_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Id
+    path: Models/Entities/ExternalAPIs/PUBMED_API.cs
+    startLine: 19
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public string Id { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Id As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Id*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.WorkSearchByTitle(System.String)
+  commentId: M:API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.WorkSearchByTitle(System.String)
+  id: WorkSearchByTitle(System.String)
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API
+  langs:
+  - csharp
+  - vb
+  name: WorkSearchByTitle(String)
+  nameWithType: PUBMED_API.WorkSearchByTitle(String)
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.WorkSearchByTitle(System.String)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/PUBMED_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: WorkSearchByTitle
+    path: Models/Entities/ExternalAPIs/PUBMED_API.cs
+    startLine: 26
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  summary: "\nBusca documentos en función de su título API de PUBMED y obtiene sus identificadores\n"
+  example: []
+  syntax:
+    content: public static uint[] WorkSearchByTitle(string q)
+    parameters:
+    - id: q
+      type: System.String
+      description: Texto a buscar
+    return:
+      type: System.UInt32[]
+      description: Objeto con los identificadores de los documentos
+    content.vb: Public Shared Function WorkSearchByTitle(q As String) As UInteger()
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.WorkSearchByTitle*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.GetWorkByID(System.UInt32)
+  commentId: M:API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.GetWorkByID(System.UInt32)
+  id: GetWorkByID(System.UInt32)
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API
+  langs:
+  - csharp
+  - vb
+  name: GetWorkByID(UInt32)
+  nameWithType: PUBMED_API.GetWorkByID(UInt32)
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.GetWorkByID(System.UInt32)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/PUBMED_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetWorkByID
+    path: Models/Entities/ExternalAPIs/PUBMED_API.cs
+    startLine: 40
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  summary: "\nObtiene un documento a través de su identificador\n"
+  example: []
+  syntax:
+    content: public static PubmedArticleSet GetWorkByID(uint id)
+    parameters:
+    - id: id
+      type: System.UInt32
+      description: Identificador
+    return:
+      type: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSet
+      description: Documento
+    content.vb: Public Shared Function GetWorkByID(id As UInteger) As PubmedArticleSet
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.GetWorkByID*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs
+  commentId: N:API_DISCOVER.Models.Entities.ExternalAPIs
+  name: API_DISCOVER.Models.Entities.ExternalAPIs
+  nameWithType: API_DISCOVER.Models.Entities.ExternalAPIs
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Name*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Name
+  name: Name
+  nameWithType: PUBMED_API.Name
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Name
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Description*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Description
+  name: Description
+  nameWithType: PUBMED_API.Description
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Description
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.HomePage*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.HomePage
+  name: HomePage
+  nameWithType: PUBMED_API.HomePage
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.HomePage
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Id*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Id
+  name: Id
+  nameWithType: PUBMED_API.Id
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.Id
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.WorkSearchByTitle*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.WorkSearchByTitle
+  name: WorkSearchByTitle
+  nameWithType: PUBMED_API.WorkSearchByTitle
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.WorkSearchByTitle
+- uid: System.UInt32[]
+  isExternal: true
+  name: UInt32[]
+  nameWithType: UInt32[]
+  fullName: System.UInt32[]
+  nameWithType.vb: UInt32()
+  fullName.vb: System.UInt32()
+  name.vb: UInt32()
+  spec.csharp:
+  - uid: System.UInt32
+    name: UInt32
+    nameWithType: UInt32
+    fullName: System.UInt32
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.UInt32
+    name: UInt32
+    nameWithType: UInt32
+    fullName: System.UInt32
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.GetWorkByID*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.GetWorkByID
+  name: GetWorkByID
+  nameWithType: PUBMED_API.GetWorkByID
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API.GetWorkByID
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  name: UInt32
+  nameWithType: UInt32
+  fullName: System.UInt32
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSet
+  commentId: T:API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSet
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs
+  name: PubmedArticleSet
+  nameWithType: PubmedArticleSet
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSet

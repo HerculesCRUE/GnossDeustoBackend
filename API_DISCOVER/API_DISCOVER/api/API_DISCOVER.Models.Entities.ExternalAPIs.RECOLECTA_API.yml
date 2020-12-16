@@ -1,0 +1,651 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API
+  commentId: T:API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API
+  id: RECOLECTA_API
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs
+  children:
+  - API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Description
+  - API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.HomePage
+  - API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Id
+  - API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Name
+  - API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Works(System.String)
+  langs:
+  - csharp
+  - vb
+  name: RECOLECTA_API
+  nameWithType: RECOLECTA_API
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/RECOLECTA_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: RECOLECTA_API
+    path: Models/Entities/ExternalAPIs/RECOLECTA_API.cs
+    startLine: 12
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  summary: "\nClase para interactuar con el API de Recolecta\n"
+  example: []
+  syntax:
+    content: 'public class RECOLECTA_API : I_ExternalAPI'
+    content.vb: >-
+      Public Class RECOLECTA_API
+          Implements I_ExternalAPI
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Name
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Name
+  id: Name
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: RECOLECTA_API.Name
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Name
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/RECOLECTA_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Name
+    path: Models/Entities/ExternalAPIs/RECOLECTA_API.cs
+    startLine: 14
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public string Name { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Name As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Name*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Description
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Description
+  id: Description
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: RECOLECTA_API.Description
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Description
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/RECOLECTA_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Description
+    path: Models/Entities/ExternalAPIs/RECOLECTA_API.cs
+    startLine: 15
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public string Description { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Description As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Description*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.HomePage
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.HomePage
+  id: HomePage
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API
+  langs:
+  - csharp
+  - vb
+  name: HomePage
+  nameWithType: RECOLECTA_API.HomePage
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.HomePage
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/RECOLECTA_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: HomePage
+    path: Models/Entities/ExternalAPIs/RECOLECTA_API.cs
+    startLine: 17
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public string HomePage { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property HomePage As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.HomePage*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Id
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Id
+  id: Id
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: RECOLECTA_API.Id
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Id
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/RECOLECTA_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Id
+    path: Models/Entities/ExternalAPIs/RECOLECTA_API.cs
+    startLine: 19
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public string Id { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Id As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Id*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Works(System.String)
+  commentId: M:API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Works(System.String)
+  id: Works(System.String)
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API
+  langs:
+  - csharp
+  - vb
+  name: Works(String)
+  nameWithType: RECOLECTA_API.Works(String)
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Works(System.String)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/RECOLECTA_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Works
+    path: Models/Entities/ExternalAPIs/RECOLECTA_API.cs
+    startLine: 26
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  summary: "\nBusca trabajos en el API de Recolecta\n"
+  example: []
+  syntax:
+    content: public static List<RecolectaDocument> Works(string q)
+    parameters:
+    - id: q
+      type: System.String
+      description: Texto a buscar (con urlEncode)
+    return:
+      type: System.Collections.Generic.List{API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument}
+      description: Objeto con los trabajos
+    content.vb: Public Shared Function Works(q As String) As List(Of RecolectaDocument)
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Works*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs
+  commentId: N:API_DISCOVER.Models.Entities.ExternalAPIs
+  name: API_DISCOVER.Models.Entities.ExternalAPIs
+  nameWithType: API_DISCOVER.Models.Entities.ExternalAPIs
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Name*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Name
+  name: Name
+  nameWithType: RECOLECTA_API.Name
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Name
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Description*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Description
+  name: Description
+  nameWithType: RECOLECTA_API.Description
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Description
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.HomePage*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.HomePage
+  name: HomePage
+  nameWithType: RECOLECTA_API.HomePage
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.HomePage
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Id*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Id
+  name: Id
+  nameWithType: RECOLECTA_API.Id
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Id
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Works*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Works
+  name: Works
+  nameWithType: RECOLECTA_API.Works
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API.Works
+- uid: System.Collections.Generic.List{API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument}
+  commentId: T:System.Collections.Generic.List{API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<RecolectaDocument>
+  nameWithType: List<RecolectaDocument>
+  fullName: System.Collections.Generic.List<API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument>
+  nameWithType.vb: List(Of RecolectaDocument)
+  fullName.vb: System.Collections.Generic.List(Of API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument)
+  name.vb: List(Of RecolectaDocument)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument
+    name: RecolectaDocument
+    nameWithType: RecolectaDocument
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument
+    name: RecolectaDocument
+    nameWithType: RecolectaDocument
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic

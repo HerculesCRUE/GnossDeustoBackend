@@ -1,0 +1,520 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson
+  commentId: T:API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson
+  id: Bibjson
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs
+  children:
+  - API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.author
+  - API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.identifier
+  - API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.title
+  langs:
+  - csharp
+  - vb
+  name: Bibjson
+  nameWithType: Bibjson
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/DOAJ_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Bibjson
+    path: Models/Entities/ExternalAPIs/DOAJ_API.cs
+    startLine: 74
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public class Bibjson
+    content.vb: Public Class Bibjson
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.identifier
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.identifier
+  id: identifier
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson
+  langs:
+  - csharp
+  - vb
+  name: identifier
+  nameWithType: Bibjson.identifier
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.identifier
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/DOAJ_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: identifier
+    path: Models/Entities/ExternalAPIs/DOAJ_API.cs
+    startLine: 76
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public Identifier[] identifier { get; set; }
+    parameters: []
+    return:
+      type: API_DISCOVER.Models.Entities.ExternalAPIs.Identifier[]
+    content.vb: Public Property identifier As Identifier()
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.identifier*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.author
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.author
+  id: author
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson
+  langs:
+  - csharp
+  - vb
+  name: author
+  nameWithType: Bibjson.author
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.author
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/DOAJ_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: author
+    path: Models/Entities/ExternalAPIs/DOAJ_API.cs
+    startLine: 77
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public DoajAuthor[] author { get; set; }
+    parameters: []
+    return:
+      type: API_DISCOVER.Models.Entities.ExternalAPIs.DoajAuthor[]
+    content.vb: Public Property author As DoajAuthor()
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.author*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.title
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.title
+  id: title
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson
+  langs:
+  - csharp
+  - vb
+  name: title
+  nameWithType: Bibjson.title
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.title
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/DOAJ_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: title
+    path: Models/Entities/ExternalAPIs/DOAJ_API.cs
+    startLine: 78
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public string title { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property title As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.title*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs
+  commentId: N:API_DISCOVER.Models.Entities.ExternalAPIs
+  name: API_DISCOVER.Models.Entities.ExternalAPIs
+  nameWithType: API_DISCOVER.Models.Entities.ExternalAPIs
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.identifier*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.identifier
+  name: identifier
+  nameWithType: Bibjson.identifier
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.identifier
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Identifier[]
+  isExternal: true
+  name: Identifier[]
+  nameWithType: Identifier[]
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Identifier[]
+  nameWithType.vb: Identifier()
+  fullName.vb: API_DISCOVER.Models.Entities.ExternalAPIs.Identifier()
+  name.vb: Identifier()
+  spec.csharp:
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.Identifier
+    name: Identifier
+    nameWithType: Identifier
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Identifier
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.Identifier
+    name: Identifier
+    nameWithType: Identifier
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Identifier
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.author*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.author
+  name: author
+  nameWithType: Bibjson.author
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.author
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.DoajAuthor[]
+  isExternal: true
+  name: DoajAuthor[]
+  nameWithType: DoajAuthor[]
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.DoajAuthor[]
+  nameWithType.vb: DoajAuthor()
+  fullName.vb: API_DISCOVER.Models.Entities.ExternalAPIs.DoajAuthor()
+  name.vb: DoajAuthor()
+  spec.csharp:
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.DoajAuthor
+    name: DoajAuthor
+    nameWithType: DoajAuthor
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.DoajAuthor
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.DoajAuthor
+    name: DoajAuthor
+    nameWithType: DoajAuthor
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.DoajAuthor
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.title*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.title
+  name: title
+  nameWithType: Bibjson.title
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson.title
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String

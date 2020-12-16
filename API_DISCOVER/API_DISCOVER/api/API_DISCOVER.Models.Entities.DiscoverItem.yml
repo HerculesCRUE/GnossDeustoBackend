@@ -1,0 +1,1638 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Entities.DiscoverItem
+  commentId: T:API_DISCOVER.Models.Entities.DiscoverItem
+  id: DiscoverItem
+  parent: API_DISCOVER.Models.Entities
+  children:
+  - API_DISCOVER.Models.Entities.DiscoverItem.#ctor
+  - API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguations
+  - API_DISCOVER.Models.Entities.DiscoverItem.DiscoverRdf
+  - API_DISCOVER.Models.Entities.DiscoverItem.DiscoverReport
+  - API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProblems
+  - API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProcessed
+  - API_DISCOVER.Models.Entities.DiscoverItem.Error
+  - API_DISCOVER.Models.Entities.DiscoverItem.ID
+  - API_DISCOVER.Models.Entities.DiscoverItem.JobID
+  - API_DISCOVER.Models.Entities.DiscoverItem.LoadedEntities
+  - API_DISCOVER.Models.Entities.DiscoverItem.Publish
+  - API_DISCOVER.Models.Entities.DiscoverItem.Rdf
+  - API_DISCOVER.Models.Entities.DiscoverItem.Status
+  - API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationDiscards(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.String)
+  - API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationProblems(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},System.Collections.Generic.List{System.String},System.String)
+  - API_DISCOVER.Models.Entities.DiscoverItem.UpdateError(System.String)
+  - API_DISCOVER.Models.Entities.DiscoverItem.UpdateProcessed
+  - API_DISCOVER.Models.Entities.DiscoverItem.UpdateReport(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},System.String,System.String)
+  langs:
+  - csharp
+  - vb
+  name: DiscoverItem
+  nameWithType: DiscoverItem
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: DiscoverItem
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 16
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nRepresenta un item de descubrimiento\n"
+  example: []
+  syntax:
+    content: public class DiscoverItem
+    content.vb: Public Class DiscoverItem
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.#ctor
+  commentId: M:API_DISCOVER.Models.Entities.DiscoverItem.#ctor
+  id: '#ctor'
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: DiscoverItem()
+  nameWithType: DiscoverItem.DiscoverItem()
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItem()
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 128
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: public DiscoverItem()
+    content.vb: Public Sub New
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.ID
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverItem.ID
+  id: ID
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: ID
+  nameWithType: DiscoverItem.ID
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.ID
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ID
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 135
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nIdentificador del item\n"
+  example: []
+  syntax:
+    content: >-
+      [Key]
+
+      public Guid ID { get; set; }
+    parameters: []
+    return:
+      type: System.Guid
+    content.vb: >-
+      <Key>
+
+      Public Property ID As Guid
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.ID*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.KeyAttribute
+    ctor: System.ComponentModel.DataAnnotations.KeyAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.Status
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverItem.Status
+  id: Status
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: Status
+  nameWithType: DiscoverItem.Status
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.Status
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Status
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 145
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nIndica el estado del item:\nPending\nProcessed\nProcessedDissambiguationProblem\nError\n"
+  example: []
+  syntax:
+    content: >-
+      [Required]
+
+      public string Status { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <Required>
+
+      Public Property Status As String
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.Status*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.RequiredAttribute
+    ctor: System.ComponentModel.DataAnnotations.RequiredAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.Rdf
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverItem.Rdf
+  id: Rdf
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: Rdf
+  nameWithType: DiscoverItem.Rdf
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.Rdf
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Rdf
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 151
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nRDF original antes del descbrimiento\n"
+  example: []
+  syntax:
+    content: public string Rdf { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Rdf As String
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.Rdf*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverRdf
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverItem.DiscoverRdf
+  id: DiscoverRdf
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: DiscoverRdf
+  nameWithType: DiscoverItem.DiscoverRdf
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverRdf
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: DiscoverRdf
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 156
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nRDF final tras el descubrimiento\n"
+  example: []
+  syntax:
+    content: public string DiscoverRdf { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DiscoverRdf As String
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverRdf*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.Error
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverItem.Error
+  id: Error
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: Error
+  nameWithType: DiscoverItem.Error
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.Error
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Error
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 161
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nError\n"
+  example: []
+  syntax:
+    content: public string Error { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Error As String
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.Error*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.JobID
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverItem.JobID
+  id: JobID
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: JobID
+  nameWithType: DiscoverItem.JobID
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.JobID
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: JobID
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 166
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nIdentificador de la tarea de la que procede (en caso de que proceda de una tarea)\n"
+  example: []
+  syntax:
+    content: public string JobID { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property JobID As String
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.JobID*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.Publish
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverItem.Publish
+  id: Publish
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: Publish
+  nameWithType: DiscoverItem.Publish
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.Publish
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Publish
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 171
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nIndica si hay que publicar el resultado o no \n"
+  example: []
+  syntax:
+    content: public bool Publish { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property Publish As Boolean
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.Publish*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProcessed
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProcessed
+  id: DissambiguationProcessed
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: DissambiguationProcessed
+  nameWithType: DiscoverItem.DissambiguationProcessed
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProcessed
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: DissambiguationProcessed
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 176
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nIndica si están ya resueltos los problemas de desambiguación\n"
+  example: []
+  syntax:
+    content: public bool DissambiguationProcessed { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property DissambiguationProcessed As Boolean
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProcessed*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverReport
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverItem.DiscoverReport
+  id: DiscoverReport
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: DiscoverReport
+  nameWithType: DiscoverItem.DiscoverReport
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverReport
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: DiscoverReport
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 181
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nReporte de las tareas del descubrimiento\n"
+  example: []
+  syntax:
+    content: public string DiscoverReport { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DiscoverReport As String
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverReport*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProblems
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProblems
+  id: DissambiguationProblems
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: DissambiguationProblems
+  nameWithType: DiscoverItem.DissambiguationProblems
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProblems
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: DissambiguationProblems
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 186
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nProblemas de desambiguación\n"
+  example: []
+  syntax:
+    content: >-
+      [ForeignKey("DiscoverItemID")]
+
+      public virtual ICollection<DiscoverItem.DiscoverDissambiguation> DissambiguationProblems { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.ICollection{API_DISCOVER.Models.Entities.DiscoverItem.DiscoverDissambiguation}
+    content.vb: >-
+      <ForeignKey("DiscoverItemID")>
+
+      Public Overridable Property DissambiguationProblems As ICollection(Of DiscoverItem.DiscoverDissambiguation)
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProblems*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.Schema.ForeignKeyAttribute
+    ctor: System.ComponentModel.DataAnnotations.Schema.ForeignKeyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: DiscoverItemID
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguations
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguations
+  id: DiscardDissambiguations
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: DiscardDissambiguations
+  nameWithType: DiscoverItem.DiscardDissambiguations
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguations
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: DiscardDissambiguations
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 192
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nDescartes de desambiguación\n"
+  example: []
+  syntax:
+    content: >-
+      [ForeignKey("DiscoverItemID")]
+
+      public virtual ICollection<DiscoverItem.DiscardDissambiguation> DiscardDissambiguations { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.ICollection{API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguation}
+    content.vb: >-
+      <ForeignKey("DiscoverItemID")>
+
+      Public Overridable Property DiscardDissambiguations As ICollection(Of DiscoverItem.DiscardDissambiguation)
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguations*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.Schema.ForeignKeyAttribute
+    ctor: System.ComponentModel.DataAnnotations.Schema.ForeignKeyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: DiscoverItemID
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.LoadedEntities
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverItem.LoadedEntities
+  id: LoadedEntities
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: LoadedEntities
+  nameWithType: DiscoverItem.LoadedEntities
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.LoadedEntities
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: LoadedEntities
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 198
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nEntidades cargadas\n"
+  example: []
+  syntax:
+    content: public List<string> LoadedEntities { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{System.String}
+    content.vb: Public Property LoadedEntities As List(Of String)
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.LoadedEntities*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationProblems(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},System.Collections.Generic.List{System.String},System.String)
+  commentId: M:API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationProblems(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},System.Collections.Generic.List{System.String},System.String)
+  id: UpdateDissambiguationProblems(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},System.Collections.Generic.List{System.String},System.String)
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: UpdateDissambiguationProblems(Dictionary<String, Dictionary<String, Single>>, List<String>, String)
+  nameWithType: DiscoverItem.UpdateDissambiguationProblems(Dictionary<String, Dictionary<String, Single>>, List<String>, String)
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationProblems(System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.Dictionary<System.String, System.Single>>, System.Collections.Generic.List<System.String>, System.String)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: UpdateDissambiguationProblems
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 206
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nModificamos el objeto DiscoverItem para guardarlo cuando ha habido problemas de desambiguación\n"
+  example: []
+  syntax:
+    content: public void UpdateDissambiguationProblems(Dictionary<string, Dictionary<string, float>> pProblems, List<string> pLoadedEntities, string pDiscoverRDF)
+    parameters:
+    - id: pProblems
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}
+      description: Problemas de desambiguación
+    - id: pLoadedEntities
+      type: System.Collections.Generic.List{System.String}
+      description: Entidades ya cargadas en el grafo
+    - id: pDiscoverRDF
+      type: System.String
+      description: RDF de descubrimiento
+    content.vb: Public Sub UpdateDissambiguationProblems(pProblems As Dictionary(Of String, Dictionary(Of String, Single)), pLoadedEntities As List(Of String), pDiscoverRDF As String)
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationProblems*
+  nameWithType.vb: DiscoverItem.UpdateDissambiguationProblems(Dictionary(Of String, Dictionary(Of String, Single)), List(Of String), String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationProblems(System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.Dictionary(Of System.String, System.Single)), System.Collections.Generic.List(Of System.String), System.String)
+  name.vb: UpdateDissambiguationProblems(Dictionary(Of String, Dictionary(Of String, Single)), List(Of String), String)
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationDiscards(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.String)
+  commentId: M:API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationDiscards(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.String)
+  id: UpdateDissambiguationDiscards(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.String)
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: UpdateDissambiguationDiscards(Dictionary<String, List<String>>, String)
+  nameWithType: DiscoverItem.UpdateDissambiguationDiscards(Dictionary<String, List<String>>, String)
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationDiscards(System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.List<System.String>>, System.String)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: UpdateDissambiguationDiscards
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 251
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nModificamos el objeto DiscoverItem para guardarlo cuando hse han seleccionado descartes para la desmbiguación y se va a volver a procesar\n"
+  example: []
+  syntax:
+    content: public void UpdateDissambiguationDiscards(Dictionary<string, List<string>> pDiscards, string pDiscoverRDF)
+    parameters:
+    - id: pDiscards
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}}
+      description: Problemas de desambiguación
+    - id: pDiscoverRDF
+      type: System.String
+      description: RDF de descubrimiento
+    content.vb: Public Sub UpdateDissambiguationDiscards(pDiscards As Dictionary(Of String, List(Of String)), pDiscoverRDF As String)
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationDiscards*
+  nameWithType.vb: DiscoverItem.UpdateDissambiguationDiscards(Dictionary(Of String, List(Of String)), String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationDiscards(System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.List(Of System.String)), System.String)
+  name.vb: UpdateDissambiguationDiscards(Dictionary(Of String, List(Of String)), String)
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.UpdateReport(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},System.String,System.String)
+  commentId: M:API_DISCOVER.Models.Entities.DiscoverItem.UpdateReport(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},System.String,System.String)
+  id: UpdateReport(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},System.String,System.String)
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: UpdateReport(Dictionary<String, Dictionary<String, Single>>, String, String)
+  nameWithType: DiscoverItem.UpdateReport(Dictionary<String, Dictionary<String, Single>>, String, String)
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.UpdateReport(System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.Dictionary<System.String, System.Single>>, System.String, System.String)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: UpdateReport
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 288
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nModificamos el objeto DiscoverItem para guardarlo cuando se procesa para generar un report\n"
+  example: []
+  syntax:
+    content: public void UpdateReport(Dictionary<string, Dictionary<string, float>> pProblems, string pDiscoverRDF, string pDiscoverReport)
+    parameters:
+    - id: pProblems
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}
+      description: Problemas de desambiguación
+    - id: pDiscoverRDF
+      type: System.String
+      description: RDF de descubrimiento
+    - id: pDiscoverReport
+      type: System.String
+      description: Reporte
+    content.vb: Public Sub UpdateReport(pProblems As Dictionary(Of String, Dictionary(Of String, Single)), pDiscoverRDF As String, pDiscoverReport As String)
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.UpdateReport*
+  nameWithType.vb: DiscoverItem.UpdateReport(Dictionary(Of String, Dictionary(Of String, Single)), String, String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: API_DISCOVER.Models.Entities.DiscoverItem.UpdateReport(System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.Dictionary(Of System.String, System.Single)), System.String, System.String)
+  name.vb: UpdateReport(Dictionary(Of String, Dictionary(Of String, Single)), String, String)
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.UpdateProcessed
+  commentId: M:API_DISCOVER.Models.Entities.DiscoverItem.UpdateProcessed
+  id: UpdateProcessed
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: UpdateProcessed()
+  nameWithType: DiscoverItem.UpdateProcessed()
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.UpdateProcessed()
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: UpdateProcessed
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 331
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nModificamos el objeto DiscoverItem para guardarlo cuando se procesa correctamente\n"
+  example: []
+  syntax:
+    content: public void UpdateProcessed()
+    content.vb: Public Sub UpdateProcessed
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.UpdateProcessed*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.UpdateError(System.String)
+  commentId: M:API_DISCOVER.Models.Entities.DiscoverItem.UpdateError(System.String)
+  id: UpdateError(System.String)
+  parent: API_DISCOVER.Models.Entities.DiscoverItem
+  langs:
+  - csharp
+  - vb
+  name: UpdateError(String)
+  nameWithType: DiscoverItem.UpdateError(String)
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.UpdateError(System.String)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: UpdateError
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 347
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nModificamos el objeto DiscoverItem para guardarlo cuando se produce un error\n"
+  example: []
+  syntax:
+    content: public void UpdateError(string pError)
+    parameters:
+    - id: pError
+      type: System.String
+      description: Error
+    content.vb: Public Sub UpdateError(pError As String)
+  overload: API_DISCOVER.Models.Entities.DiscoverItem.UpdateError*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.Models.Entities
+  commentId: N:API_DISCOVER.Models.Entities
+  name: API_DISCOVER.Models.Entities
+  nameWithType: API_DISCOVER.Models.Entities
+  fullName: API_DISCOVER.Models.Entities
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.#ctor*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.#ctor
+  name: DiscoverItem
+  nameWithType: DiscoverItem.DiscoverItem
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItem
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.ID*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.ID
+  name: ID
+  nameWithType: DiscoverItem.ID
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.ID
+- uid: System.Guid
+  commentId: T:System.Guid
+  parent: System
+  isExternal: true
+  name: Guid
+  nameWithType: Guid
+  fullName: System.Guid
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.Status*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.Status
+  name: Status
+  nameWithType: DiscoverItem.Status
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.Status
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.Rdf*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.Rdf
+  name: Rdf
+  nameWithType: DiscoverItem.Rdf
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.Rdf
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverRdf*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.DiscoverRdf
+  name: DiscoverRdf
+  nameWithType: DiscoverItem.DiscoverRdf
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverRdf
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.Error*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.Error
+  name: Error
+  nameWithType: DiscoverItem.Error
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.Error
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.JobID*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.JobID
+  name: JobID
+  nameWithType: DiscoverItem.JobID
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.JobID
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.Publish*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.Publish
+  name: Publish
+  nameWithType: DiscoverItem.Publish
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.Publish
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProcessed*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProcessed
+  name: DissambiguationProcessed
+  nameWithType: DiscoverItem.DissambiguationProcessed
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProcessed
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverReport*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.DiscoverReport
+  name: DiscoverReport
+  nameWithType: DiscoverItem.DiscoverReport
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverReport
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProblems*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProblems
+  name: DissambiguationProblems
+  nameWithType: DiscoverItem.DissambiguationProblems
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DissambiguationProblems
+- uid: System.Collections.Generic.ICollection{API_DISCOVER.Models.Entities.DiscoverItem.DiscoverDissambiguation}
+  commentId: T:System.Collections.Generic.ICollection{API_DISCOVER.Models.Entities.DiscoverItem.DiscoverDissambiguation}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.ICollection`1
+  name: ICollection<DiscoverItem.DiscoverDissambiguation>
+  nameWithType: ICollection<DiscoverItem.DiscoverDissambiguation>
+  fullName: System.Collections.Generic.ICollection<API_DISCOVER.Models.Entities.DiscoverItem.DiscoverDissambiguation>
+  nameWithType.vb: ICollection(Of DiscoverItem.DiscoverDissambiguation)
+  fullName.vb: System.Collections.Generic.ICollection(Of API_DISCOVER.Models.Entities.DiscoverItem.DiscoverDissambiguation)
+  name.vb: ICollection(Of DiscoverItem.DiscoverDissambiguation)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverDissambiguation
+    name: DiscoverItem.DiscoverDissambiguation
+    nameWithType: DiscoverItem.DiscoverDissambiguation
+    fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverDissambiguation
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverDissambiguation
+    name: DiscoverItem.DiscoverDissambiguation
+    nameWithType: DiscoverItem.DiscoverDissambiguation
+    fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverDissambiguation
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.ICollection`1
+  commentId: T:System.Collections.Generic.ICollection`1
+  isExternal: true
+  name: ICollection<T>
+  nameWithType: ICollection<T>
+  fullName: System.Collections.Generic.ICollection<T>
+  nameWithType.vb: ICollection(Of T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T)
+  name.vb: ICollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguations*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguations
+  name: DiscardDissambiguations
+  nameWithType: DiscoverItem.DiscardDissambiguations
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguations
+- uid: System.Collections.Generic.ICollection{API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguation}
+  commentId: T:System.Collections.Generic.ICollection{API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguation}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.ICollection`1
+  name: ICollection<DiscoverItem.DiscardDissambiguation>
+  nameWithType: ICollection<DiscoverItem.DiscardDissambiguation>
+  fullName: System.Collections.Generic.ICollection<API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguation>
+  nameWithType.vb: ICollection(Of DiscoverItem.DiscardDissambiguation)
+  fullName.vb: System.Collections.Generic.ICollection(Of API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguation)
+  name.vb: ICollection(Of DiscoverItem.DiscardDissambiguation)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguation
+    name: DiscoverItem.DiscardDissambiguation
+    nameWithType: DiscoverItem.DiscardDissambiguation
+    fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguation
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguation
+    name: DiscoverItem.DiscardDissambiguation
+    nameWithType: DiscoverItem.DiscardDissambiguation
+    fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguation
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.LoadedEntities*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.LoadedEntities
+  name: LoadedEntities
+  nameWithType: DiscoverItem.LoadedEntities
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.LoadedEntities
+- uid: System.Collections.Generic.List{System.String}
+  commentId: T:System.Collections.Generic.List{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<String>
+  nameWithType: List<String>
+  fullName: System.Collections.Generic.List<System.String>
+  nameWithType.vb: List(Of String)
+  fullName.vb: System.Collections.Generic.List(Of System.String)
+  name.vb: List(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationProblems*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationProblems
+  name: UpdateDissambiguationProblems
+  nameWithType: DiscoverItem.UpdateDissambiguationProblems
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationProblems
+- uid: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, Dictionary<String, Single>>
+  nameWithType: Dictionary<String, Dictionary<String, Single>>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.Dictionary<System.String, System.Single>>
+  nameWithType.vb: Dictionary(Of String, Dictionary(Of String, Single))
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.Dictionary(Of System.String, System.Single))
+  name.vb: Dictionary(Of String, Dictionary(Of String, Single))
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Single
+    name: Single
+    nameWithType: Single
+    fullName: System.Single
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Single
+    name: Single
+    nameWithType: Single
+    fullName: System.Single
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationDiscards*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationDiscards
+  name: UpdateDissambiguationDiscards
+  nameWithType: DiscoverItem.UpdateDissambiguationDiscards
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.UpdateDissambiguationDiscards
+- uid: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, List<String>>
+  nameWithType: Dictionary<String, List<String>>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.List<System.String>>
+  nameWithType.vb: Dictionary(Of String, List(Of String))
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.List(Of System.String))
+  name.vb: Dictionary(Of String, List(Of String))
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.UpdateReport*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.UpdateReport
+  name: UpdateReport
+  nameWithType: DiscoverItem.UpdateReport
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.UpdateReport
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.UpdateProcessed*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.UpdateProcessed
+  name: UpdateProcessed
+  nameWithType: DiscoverItem.UpdateProcessed
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.UpdateProcessed
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.UpdateError*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverItem.UpdateError
+  name: UpdateError
+  nameWithType: DiscoverItem.UpdateError
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.UpdateError

@@ -1,0 +1,47 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.ViewModels
+  commentId: N:API_DISCOVER.ViewModels
+  id: API_DISCOVER.ViewModels
+  children:
+  - API_DISCOVER.ViewModels.JobViewModel
+  - API_DISCOVER.ViewModels.ShapeConfigViewModel
+  - API_DISCOVER.ViewModels.ShapeReportModel
+  - API_DISCOVER.ViewModels.ShapeReportModel.Result
+  langs:
+  - csharp
+  - vb
+  name: API_DISCOVER.ViewModels
+  nameWithType: API_DISCOVER.ViewModels
+  fullName: API_DISCOVER.ViewModels
+  type: Namespace
+  assemblies:
+  - API_DISCOVER
+references:
+- uid: API_DISCOVER.ViewModels.JobViewModel
+  commentId: T:API_DISCOVER.ViewModels.JobViewModel
+  parent: API_DISCOVER.ViewModels
+  name: JobViewModel
+  nameWithType: JobViewModel
+  fullName: API_DISCOVER.ViewModels.JobViewModel
+- uid: API_DISCOVER.ViewModels.ShapeConfigViewModel
+  commentId: T:API_DISCOVER.ViewModels.ShapeConfigViewModel
+  name: ShapeConfigViewModel
+  nameWithType: ShapeConfigViewModel
+  fullName: API_DISCOVER.ViewModels.ShapeConfigViewModel
+- uid: API_DISCOVER.ViewModels.ShapeReportModel
+  commentId: T:API_DISCOVER.ViewModels.ShapeReportModel
+  parent: API_DISCOVER.ViewModels
+  name: ShapeReportModel
+  nameWithType: ShapeReportModel
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result
+  commentId: T:API_DISCOVER.ViewModels.ShapeReportModel.Result
+  name: ShapeReportModel.Result
+  nameWithType: ShapeReportModel.Result
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result
+- uid: API_DISCOVER.ViewModels
+  commentId: N:API_DISCOVER.ViewModels
+  name: API_DISCOVER.ViewModels
+  nameWithType: API_DISCOVER.ViewModels
+  fullName: API_DISCOVER.ViewModels

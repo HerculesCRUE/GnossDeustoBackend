@@ -1,0 +1,554 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Entities.RabbitMQInfo
+  commentId: T:API_DISCOVER.Models.Entities.RabbitMQInfo
+  id: RabbitMQInfo
+  parent: API_DISCOVER.Models.Entities
+  children:
+  - API_DISCOVER.Models.Entities.RabbitMQInfo.HostNameRabbitMq
+  - API_DISCOVER.Models.Entities.RabbitMQInfo.PasswordRabbitMq
+  - API_DISCOVER.Models.Entities.RabbitMQInfo.UriRabbitMq
+  - API_DISCOVER.Models.Entities.RabbitMQInfo.UsernameRabbitMq
+  - API_DISCOVER.Models.Entities.RabbitMQInfo.VirtualHostRabbitMq
+  langs:
+  - csharp
+  - vb
+  name: RabbitMQInfo
+  nameWithType: RabbitMQInfo
+  fullName: API_DISCOVER.Models.Entities.RabbitMQInfo
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RabbitMQInfo.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: RabbitMQInfo
+    path: Models/Entities/RabbitMQInfo.cs
+    startLine: 7
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: public class RabbitMQInfo
+    content.vb: Public Class RabbitMQInfo
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Entities.RabbitMQInfo.UsernameRabbitMq
+  commentId: P:API_DISCOVER.Models.Entities.RabbitMQInfo.UsernameRabbitMq
+  id: UsernameRabbitMq
+  parent: API_DISCOVER.Models.Entities.RabbitMQInfo
+  langs:
+  - csharp
+  - vb
+  name: UsernameRabbitMq
+  nameWithType: RabbitMQInfo.UsernameRabbitMq
+  fullName: API_DISCOVER.Models.Entities.RabbitMQInfo.UsernameRabbitMq
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RabbitMQInfo.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: UsernameRabbitMq
+    path: Models/Entities/RabbitMQInfo.cs
+    startLine: 10
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: public string UsernameRabbitMq { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property UsernameRabbitMq As String
+  overload: API_DISCOVER.Models.Entities.RabbitMQInfo.UsernameRabbitMq*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.RabbitMQInfo.PasswordRabbitMq
+  commentId: P:API_DISCOVER.Models.Entities.RabbitMQInfo.PasswordRabbitMq
+  id: PasswordRabbitMq
+  parent: API_DISCOVER.Models.Entities.RabbitMQInfo
+  langs:
+  - csharp
+  - vb
+  name: PasswordRabbitMq
+  nameWithType: RabbitMQInfo.PasswordRabbitMq
+  fullName: API_DISCOVER.Models.Entities.RabbitMQInfo.PasswordRabbitMq
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RabbitMQInfo.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: PasswordRabbitMq
+    path: Models/Entities/RabbitMQInfo.cs
+    startLine: 12
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: public string PasswordRabbitMq { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PasswordRabbitMq As String
+  overload: API_DISCOVER.Models.Entities.RabbitMQInfo.PasswordRabbitMq*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.RabbitMQInfo.VirtualHostRabbitMq
+  commentId: P:API_DISCOVER.Models.Entities.RabbitMQInfo.VirtualHostRabbitMq
+  id: VirtualHostRabbitMq
+  parent: API_DISCOVER.Models.Entities.RabbitMQInfo
+  langs:
+  - csharp
+  - vb
+  name: VirtualHostRabbitMq
+  nameWithType: RabbitMQInfo.VirtualHostRabbitMq
+  fullName: API_DISCOVER.Models.Entities.RabbitMQInfo.VirtualHostRabbitMq
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RabbitMQInfo.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: VirtualHostRabbitMq
+    path: Models/Entities/RabbitMQInfo.cs
+    startLine: 14
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: public string VirtualHostRabbitMq { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VirtualHostRabbitMq As String
+  overload: API_DISCOVER.Models.Entities.RabbitMQInfo.VirtualHostRabbitMq*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.RabbitMQInfo.HostNameRabbitMq
+  commentId: P:API_DISCOVER.Models.Entities.RabbitMQInfo.HostNameRabbitMq
+  id: HostNameRabbitMq
+  parent: API_DISCOVER.Models.Entities.RabbitMQInfo
+  langs:
+  - csharp
+  - vb
+  name: HostNameRabbitMq
+  nameWithType: RabbitMQInfo.HostNameRabbitMq
+  fullName: API_DISCOVER.Models.Entities.RabbitMQInfo.HostNameRabbitMq
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RabbitMQInfo.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: HostNameRabbitMq
+    path: Models/Entities/RabbitMQInfo.cs
+    startLine: 16
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: public string HostNameRabbitMq { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property HostNameRabbitMq As String
+  overload: API_DISCOVER.Models.Entities.RabbitMQInfo.HostNameRabbitMq*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.RabbitMQInfo.UriRabbitMq
+  commentId: P:API_DISCOVER.Models.Entities.RabbitMQInfo.UriRabbitMq
+  id: UriRabbitMq
+  parent: API_DISCOVER.Models.Entities.RabbitMQInfo
+  langs:
+  - csharp
+  - vb
+  name: UriRabbitMq
+  nameWithType: RabbitMQInfo.UriRabbitMq
+  fullName: API_DISCOVER.Models.Entities.RabbitMQInfo.UriRabbitMq
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RabbitMQInfo.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: UriRabbitMq
+    path: Models/Entities/RabbitMQInfo.cs
+    startLine: 18
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: public string UriRabbitMq { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property UriRabbitMq As String
+  overload: API_DISCOVER.Models.Entities.RabbitMQInfo.UriRabbitMq*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.Models.Entities
+  commentId: N:API_DISCOVER.Models.Entities
+  name: API_DISCOVER.Models.Entities
+  nameWithType: API_DISCOVER.Models.Entities
+  fullName: API_DISCOVER.Models.Entities
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Entities.RabbitMQInfo.UsernameRabbitMq*
+  commentId: Overload:API_DISCOVER.Models.Entities.RabbitMQInfo.UsernameRabbitMq
+  name: UsernameRabbitMq
+  nameWithType: RabbitMQInfo.UsernameRabbitMq
+  fullName: API_DISCOVER.Models.Entities.RabbitMQInfo.UsernameRabbitMq
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: API_DISCOVER.Models.Entities.RabbitMQInfo.PasswordRabbitMq*
+  commentId: Overload:API_DISCOVER.Models.Entities.RabbitMQInfo.PasswordRabbitMq
+  name: PasswordRabbitMq
+  nameWithType: RabbitMQInfo.PasswordRabbitMq
+  fullName: API_DISCOVER.Models.Entities.RabbitMQInfo.PasswordRabbitMq
+- uid: API_DISCOVER.Models.Entities.RabbitMQInfo.VirtualHostRabbitMq*
+  commentId: Overload:API_DISCOVER.Models.Entities.RabbitMQInfo.VirtualHostRabbitMq
+  name: VirtualHostRabbitMq
+  nameWithType: RabbitMQInfo.VirtualHostRabbitMq
+  fullName: API_DISCOVER.Models.Entities.RabbitMQInfo.VirtualHostRabbitMq
+- uid: API_DISCOVER.Models.Entities.RabbitMQInfo.HostNameRabbitMq*
+  commentId: Overload:API_DISCOVER.Models.Entities.RabbitMQInfo.HostNameRabbitMq
+  name: HostNameRabbitMq
+  nameWithType: RabbitMQInfo.HostNameRabbitMq
+  fullName: API_DISCOVER.Models.Entities.RabbitMQInfo.HostNameRabbitMq
+- uid: API_DISCOVER.Models.Entities.RabbitMQInfo.UriRabbitMq*
+  commentId: Overload:API_DISCOVER.Models.Entities.RabbitMQInfo.UriRabbitMq
+  name: UriRabbitMq
+  nameWithType: RabbitMQInfo.UriRabbitMq
+  fullName: API_DISCOVER.Models.Entities.RabbitMQInfo.UriRabbitMq

@@ -1,0 +1,28 @@
+### YamlMime:ManagedReference
+items:
+- uid: VDS.RDF
+  commentId: N:VDS.RDF
+  id: VDS.RDF
+  children:
+  - VDS.RDF.RohGraph
+  langs:
+  - csharp
+  - vb
+  name: VDS.RDF
+  nameWithType: VDS.RDF
+  fullName: VDS.RDF
+  type: Namespace
+  assemblies:
+  - API_DISCOVER
+references:
+- uid: VDS.RDF.RohGraph
+  commentId: T:VDS.RDF.RohGraph
+  parent: VDS.RDF
+  name: RohGraph
+  nameWithType: RohGraph
+  fullName: VDS.RDF.RohGraph
+- uid: VDS.RDF
+  commentId: N:VDS.RDF
+  name: VDS.RDF
+  nameWithType: VDS.RDF
+  fullName: VDS.RDF

@@ -1,0 +1,28 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Extra.Exceptions
+  commentId: N:API_DISCOVER.Extra.Exceptions
+  id: API_DISCOVER.Extra.Exceptions
+  children:
+  - API_DISCOVER.Extra.Exceptions.BadRequestException
+  - API_DISCOVER.Extra.Exceptions.ValidationException
+  langs:
+  - csharp
+  - vb
+  name: API_DISCOVER.Extra.Exceptions
+  nameWithType: API_DISCOVER.Extra.Exceptions
+  fullName: API_DISCOVER.Extra.Exceptions
+  type: Namespace
+  assemblies:
+  - API_DISCOVER
+references:
+- uid: API_DISCOVER.Extra.Exceptions.BadRequestException
+  commentId: T:API_DISCOVER.Extra.Exceptions.BadRequestException
+  name: BadRequestException
+  nameWithType: BadRequestException
+  fullName: API_DISCOVER.Extra.Exceptions.BadRequestException
+- uid: API_DISCOVER.Extra.Exceptions.ValidationException
+  commentId: T:API_DISCOVER.Extra.Exceptions.ValidationException
+  name: ValidationException
+  nameWithType: ValidationException
+  fullName: API_DISCOVER.Extra.Exceptions.ValidationException

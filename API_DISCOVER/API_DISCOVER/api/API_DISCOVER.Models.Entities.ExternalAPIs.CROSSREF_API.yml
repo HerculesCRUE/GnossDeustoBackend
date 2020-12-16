@@ -1,0 +1,573 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API
+  commentId: T:API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API
+  id: CROSSREF_API
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs
+  children:
+  - API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Description
+  - API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.HomePage
+  - API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Id
+  - API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Name
+  - API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.WorkSearchByContributor(System.String,System.String)
+  langs:
+  - csharp
+  - vb
+  name: CROSSREF_API
+  nameWithType: CROSSREF_API
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/CROSSREF_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: CROSSREF_API
+    path: Models/Entities/ExternalAPIs/CROSSREF_API.cs
+    startLine: 12
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  summary: "\nClase para interactuar con el API de CROSSREF\n"
+  example: []
+  syntax:
+    content: 'public class CROSSREF_API : I_ExternalAPI'
+    content.vb: >-
+      Public Class CROSSREF_API
+          Implements I_ExternalAPI
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Name
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Name
+  id: Name
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: CROSSREF_API.Name
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Name
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/CROSSREF_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Name
+    path: Models/Entities/ExternalAPIs/CROSSREF_API.cs
+    startLine: 14
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public string Name { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Name As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Name*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Description
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Description
+  id: Description
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: CROSSREF_API.Description
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Description
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/CROSSREF_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Description
+    path: Models/Entities/ExternalAPIs/CROSSREF_API.cs
+    startLine: 15
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public string Description { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Description As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Description*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.HomePage
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.HomePage
+  id: HomePage
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API
+  langs:
+  - csharp
+  - vb
+  name: HomePage
+  nameWithType: CROSSREF_API.HomePage
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.HomePage
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/CROSSREF_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: HomePage
+    path: Models/Entities/ExternalAPIs/CROSSREF_API.cs
+    startLine: 17
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public string HomePage { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property HomePage As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.HomePage*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Id
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Id
+  id: Id
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: CROSSREF_API.Id
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Id
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/CROSSREF_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Id
+    path: Models/Entities/ExternalAPIs/CROSSREF_API.cs
+    startLine: 19
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public string Id { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Id As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Id*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.WorkSearchByContributor(System.String,System.String)
+  commentId: M:API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.WorkSearchByContributor(System.String,System.String)
+  id: WorkSearchByContributor(System.String,System.String)
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API
+  langs:
+  - csharp
+  - vb
+  name: WorkSearchByContributor(String, String)
+  nameWithType: CROSSREF_API.WorkSearchByContributor(String, String)
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.WorkSearchByContributor(System.String, System.String)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/CROSSREF_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: WorkSearchByContributor
+    path: Models/Entities/ExternalAPIs/CROSSREF_API.cs
+    startLine: 27
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  summary: "\nBusca documentos en función de sus autores en el API de CROSSREF\n"
+  example: []
+  syntax:
+    content: public static CROSSREF_Works WorkSearchByContributor(string q, string CrossrefUserAgent)
+    parameters:
+    - id: q
+      type: System.String
+      description: Texto a buscar
+    - id: CrossrefUserAgent
+      type: System.String
+      description: user agent para usar en las peticiones al API de CROSSREF
+    return:
+      type: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_Works
+      description: Objeto con los documentos y las personas
+    content.vb: Public Shared Function WorkSearchByContributor(q As String, CrossrefUserAgent As String) As CROSSREF_Works
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.WorkSearchByContributor*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs
+  commentId: N:API_DISCOVER.Models.Entities.ExternalAPIs
+  name: API_DISCOVER.Models.Entities.ExternalAPIs
+  nameWithType: API_DISCOVER.Models.Entities.ExternalAPIs
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Name*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Name
+  name: Name
+  nameWithType: CROSSREF_API.Name
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Name
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Description*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Description
+  name: Description
+  nameWithType: CROSSREF_API.Description
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Description
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.HomePage*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.HomePage
+  name: HomePage
+  nameWithType: CROSSREF_API.HomePage
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.HomePage
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Id*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Id
+  name: Id
+  nameWithType: CROSSREF_API.Id
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.Id
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.WorkSearchByContributor*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.WorkSearchByContributor
+  name: WorkSearchByContributor
+  nameWithType: CROSSREF_API.WorkSearchByContributor
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API.WorkSearchByContributor
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_Works
+  commentId: T:API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_Works
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs
+  name: CROSSREF_Works
+  nameWithType: CROSSREF_Works
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_Works

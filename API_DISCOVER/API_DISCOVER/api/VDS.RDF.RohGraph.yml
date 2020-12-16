@@ -1,0 +1,3742 @@
+### YamlMime:ManagedReference
+items:
+- uid: VDS.RDF.RohGraph
+  commentId: T:VDS.RDF.RohGraph
+  id: RohGraph
+  parent: VDS.RDF
+  children:
+  - VDS.RDF.RohGraph.#ctor
+  - VDS.RDF.RohGraph.#ctor(System.Boolean)
+  - VDS.RDF.RohGraph.#ctor(VDS.RDF.BaseTripleCollection)
+  - VDS.RDF.RohGraph.#ctor(VDS.RDF.BaseTripleCollection,System.Boolean)
+  - VDS.RDF.RohGraph.Clone
+  - VDS.RDF.RohGraph.GetNextBlankNodeID
+  langs:
+  - csharp
+  - vb
+  name: RohGraph
+  nameWithType: RohGraph
+  fullName: VDS.RDF.RohGraph
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RohGraph.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: RohGraph
+    path: Models/Entities/RohGraph.cs
+    startLine: 9
+  assemblies:
+  - API_DISCOVER
+  namespace: VDS.RDF
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class RohGraph : Graph, IGraph, INodeFactory, IDisposable, IXmlSerializable, ISerializable
+    content.vb: >-
+      <Serializable>
+
+      Public Class RohGraph
+          Inherits Graph
+          Implements IGraph, INodeFactory, IDisposable, IXmlSerializable, ISerializable
+  inheritance:
+  - System.Object
+  - VDS.RDF.BaseGraph
+  - VDS.RDF.Graph
+  implements:
+  - VDS.RDF.IGraph
+  - VDS.RDF.INodeFactory
+  - System.IDisposable
+  - System.Xml.Serialization.IXmlSerializable
+  - System.Runtime.Serialization.ISerializable
+  inheritedMembers:
+  - VDS.RDF.Graph.Assert(VDS.RDF.Triple)
+  - VDS.RDF.Graph.Assert(System.Collections.Generic.IEnumerable{VDS.RDF.Triple})
+  - VDS.RDF.Graph.Retract(VDS.RDF.Triple)
+  - VDS.RDF.Graph.Retract(System.Collections.Generic.IEnumerable{VDS.RDF.Triple})
+  - VDS.RDF.Graph.GetUriNode(System.Uri)
+  - VDS.RDF.Graph.GetUriNode(System.String)
+  - VDS.RDF.Graph.GetLiteralNode(System.String)
+  - VDS.RDF.Graph.GetLiteralNode(System.String,System.String)
+  - VDS.RDF.Graph.GetLiteralNode(System.String,System.Uri)
+  - VDS.RDF.Graph.GetBlankNode(System.String)
+  - VDS.RDF.Graph.GetTriples(VDS.RDF.INode)
+  - VDS.RDF.Graph.GetTriples(System.Uri)
+  - VDS.RDF.Graph.GetTriplesWithSubject(VDS.RDF.INode)
+  - VDS.RDF.Graph.GetTriplesWithSubject(System.Uri)
+  - VDS.RDF.Graph.GetTriplesWithPredicate(VDS.RDF.INode)
+  - VDS.RDF.Graph.GetTriplesWithPredicate(System.Uri)
+  - VDS.RDF.Graph.GetTriplesWithObject(VDS.RDF.INode)
+  - VDS.RDF.Graph.GetTriplesWithObject(System.Uri)
+  - VDS.RDF.Graph.GetTriplesWithSubjectPredicate(VDS.RDF.INode,VDS.RDF.INode)
+  - VDS.RDF.Graph.GetTriplesWithSubjectObject(VDS.RDF.INode,VDS.RDF.INode)
+  - VDS.RDF.Graph.GetTriplesWithPredicateObject(VDS.RDF.INode,VDS.RDF.INode)
+  - VDS.RDF.BaseGraph._triples
+  - VDS.RDF.BaseGraph._nsmapper
+  - VDS.RDF.BaseGraph._baseuri
+  - VDS.RDF.BaseGraph._bnodemapper
+  - VDS.RDF.BaseGraph.Clear
+  - VDS.RDF.BaseGraph.CreateBlankNode
+  - VDS.RDF.BaseGraph.CreateBlankNode(System.String)
+  - VDS.RDF.BaseGraph.CreateLiteralNode(System.String)
+  - VDS.RDF.BaseGraph.CreateLiteralNode(System.String,System.String)
+  - VDS.RDF.BaseGraph.CreateLiteralNode(System.String,System.Uri)
+  - VDS.RDF.BaseGraph.CreateUriNode
+  - VDS.RDF.BaseGraph.CreateUriNode(System.Uri)
+  - VDS.RDF.BaseGraph.CreateUriNode(System.String)
+  - VDS.RDF.BaseGraph.CreateVariableNode(System.String)
+  - VDS.RDF.BaseGraph.CreateGraphLiteralNode
+  - VDS.RDF.BaseGraph.CreateGraphLiteralNode(VDS.RDF.IGraph)
+  - VDS.RDF.BaseGraph.ContainsTriple(VDS.RDF.Triple)
+  - VDS.RDF.BaseGraph.Merge(VDS.RDF.IGraph)
+  - VDS.RDF.BaseGraph.Merge(VDS.RDF.IGraph,System.Boolean)
+  - VDS.RDF.BaseGraph.Equals(System.Object)
+  - VDS.RDF.BaseGraph.Equals(VDS.RDF.IGraph,System.Collections.Generic.Dictionary{VDS.RDF.INode,VDS.RDF.INode}@)
+  - VDS.RDF.BaseGraph.IsSubGraphOf(VDS.RDF.IGraph)
+  - VDS.RDF.BaseGraph.IsSubGraphOf(VDS.RDF.IGraph,System.Collections.Generic.Dictionary{VDS.RDF.INode,VDS.RDF.INode}@)
+  - VDS.RDF.BaseGraph.HasSubGraph(VDS.RDF.IGraph)
+  - VDS.RDF.BaseGraph.HasSubGraph(VDS.RDF.IGraph,System.Collections.Generic.Dictionary{VDS.RDF.INode,VDS.RDF.INode}@)
+  - VDS.RDF.BaseGraph.Difference(VDS.RDF.IGraph)
+  - VDS.RDF.BaseGraph.ResolveQName(System.String)
+  - VDS.RDF.BaseGraph.OnTripleAsserted(System.Object,VDS.RDF.TripleEventArgs)
+  - VDS.RDF.BaseGraph.RaiseTripleAsserted(VDS.RDF.TripleEventArgs)
+  - VDS.RDF.BaseGraph.RaiseTripleAsserted(VDS.RDF.Triple)
+  - VDS.RDF.BaseGraph.OnTripleRetracted(System.Object,VDS.RDF.TripleEventArgs)
+  - VDS.RDF.BaseGraph.RaiseTripleRetracted(VDS.RDF.TripleEventArgs)
+  - VDS.RDF.BaseGraph.RaiseTripleRetracted(VDS.RDF.Triple)
+  - VDS.RDF.BaseGraph.RaiseGraphChanged(VDS.RDF.TripleEventArgs)
+  - VDS.RDF.BaseGraph.RaiseGraphChanged
+  - VDS.RDF.BaseGraph.RaiseClearRequested
+  - VDS.RDF.BaseGraph.RaiseCleared
+  - VDS.RDF.BaseGraph.RaiseMergeRequested
+  - VDS.RDF.BaseGraph.RaiseMerged
+  - VDS.RDF.BaseGraph.AttachEventHandlers(VDS.RDF.BaseTripleCollection)
+  - VDS.RDF.BaseGraph.DetachEventHandlers(VDS.RDF.BaseTripleCollection)
+  - VDS.RDF.BaseGraph.Dispose
+  - VDS.RDF.BaseGraph.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  - VDS.RDF.BaseGraph.GetSchema
+  - VDS.RDF.BaseGraph.ReadXml(System.Xml.XmlReader)
+  - VDS.RDF.BaseGraph.WriteXml(System.Xml.XmlWriter)
+  - VDS.RDF.BaseGraph.Triples
+  - VDS.RDF.BaseGraph.Nodes
+  - VDS.RDF.BaseGraph.AllNodes
+  - VDS.RDF.BaseGraph.NamespaceMap
+  - VDS.RDF.BaseGraph.BaseUri
+  - VDS.RDF.BaseGraph.IsEmpty
+  - VDS.RDF.BaseGraph.TripleAsserted
+  - VDS.RDF.BaseGraph.TripleRetracted
+  - VDS.RDF.BaseGraph.Changed
+  - VDS.RDF.BaseGraph.ClearRequested
+  - VDS.RDF.BaseGraph.Cleared
+  - VDS.RDF.BaseGraph.MergeRequested
+  - VDS.RDF.BaseGraph.Merged
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: VDS.RDF.RohGraph.#ctor
+  commentId: M:VDS.RDF.RohGraph.#ctor
+  id: '#ctor'
+  parent: VDS.RDF.RohGraph
+  langs:
+  - csharp
+  - vb
+  name: RohGraph()
+  nameWithType: RohGraph.RohGraph()
+  fullName: VDS.RDF.RohGraph.RohGraph()
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RohGraph.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Entities/RohGraph.cs
+    startLine: 16
+  assemblies:
+  - API_DISCOVER
+  namespace: VDS.RDF
+  summary: "\nCreates a new instance of a Graph.\n"
+  example: []
+  syntax:
+    content: public RohGraph()
+    content.vb: Public Sub New
+  overload: VDS.RDF.RohGraph.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: VDS.RDF.RohGraph.#ctor(System.Boolean)
+  commentId: M:VDS.RDF.RohGraph.#ctor(System.Boolean)
+  id: '#ctor(System.Boolean)'
+  parent: VDS.RDF.RohGraph
+  langs:
+  - csharp
+  - vb
+  name: RohGraph(Boolean)
+  nameWithType: RohGraph.RohGraph(Boolean)
+  fullName: VDS.RDF.RohGraph.RohGraph(System.Boolean)
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RohGraph.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Entities/RohGraph.cs
+    startLine: 23
+  assemblies:
+  - API_DISCOVER
+  namespace: VDS.RDF
+  summary: "\nCreates a new instance of a Graph with an optionally empty Namespace Map.\n"
+  example: []
+  syntax:
+    content: public RohGraph(bool emptyNamespaceMap)
+    parameters:
+    - id: emptyNamespaceMap
+      type: System.Boolean
+      description: Whether the Namespace Map should be empty.
+    content.vb: Public Sub New(emptyNamespaceMap As Boolean)
+  overload: VDS.RDF.RohGraph.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: VDS.RDF.RohGraph.#ctor(VDS.RDF.BaseTripleCollection)
+  commentId: M:VDS.RDF.RohGraph.#ctor(VDS.RDF.BaseTripleCollection)
+  id: '#ctor(VDS.RDF.BaseTripleCollection)'
+  parent: VDS.RDF.RohGraph
+  langs:
+  - csharp
+  - vb
+  name: RohGraph(BaseTripleCollection)
+  nameWithType: RohGraph.RohGraph(BaseTripleCollection)
+  fullName: VDS.RDF.RohGraph.RohGraph(VDS.RDF.BaseTripleCollection)
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RohGraph.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Entities/RohGraph.cs
+    startLine: 30
+  assemblies:
+  - API_DISCOVER
+  namespace: VDS.RDF
+  summary: "\nCreates a new instance of a Graph using the given Triple Collection.\n"
+  example: []
+  syntax:
+    content: public RohGraph(BaseTripleCollection tripleCollection)
+    parameters:
+    - id: tripleCollection
+      type: VDS.RDF.BaseTripleCollection
+      description: Triple Collection.
+    content.vb: Public Sub New(tripleCollection As BaseTripleCollection)
+  overload: VDS.RDF.RohGraph.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: VDS.RDF.RohGraph.#ctor(VDS.RDF.BaseTripleCollection,System.Boolean)
+  commentId: M:VDS.RDF.RohGraph.#ctor(VDS.RDF.BaseTripleCollection,System.Boolean)
+  id: '#ctor(VDS.RDF.BaseTripleCollection,System.Boolean)'
+  parent: VDS.RDF.RohGraph
+  langs:
+  - csharp
+  - vb
+  name: RohGraph(BaseTripleCollection, Boolean)
+  nameWithType: RohGraph.RohGraph(BaseTripleCollection, Boolean)
+  fullName: VDS.RDF.RohGraph.RohGraph(VDS.RDF.BaseTripleCollection, System.Boolean)
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RohGraph.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Entities/RohGraph.cs
+    startLine: 38
+  assemblies:
+  - API_DISCOVER
+  namespace: VDS.RDF
+  summary: "\nCreates a new instance of a Graph using the given Triple Collection and an optionally empty Namespace Map.\n"
+  example: []
+  syntax:
+    content: public RohGraph(BaseTripleCollection tripleCollection, bool emptyNamespaceMap)
+    parameters:
+    - id: tripleCollection
+      type: VDS.RDF.BaseTripleCollection
+      description: Triple Collection.
+    - id: emptyNamespaceMap
+      type: System.Boolean
+      description: Whether the Namespace Map should be empty.
+    content.vb: Public Sub New(tripleCollection As BaseTripleCollection, emptyNamespaceMap As Boolean)
+  overload: VDS.RDF.RohGraph.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: VDS.RDF.RohGraph.GetNextBlankNodeID
+  commentId: M:VDS.RDF.RohGraph.GetNextBlankNodeID
+  id: GetNextBlankNodeID
+  parent: VDS.RDF.RohGraph
+  langs:
+  - csharp
+  - vb
+  name: GetNextBlankNodeID()
+  nameWithType: RohGraph.GetNextBlankNodeID()
+  fullName: VDS.RDF.RohGraph.GetNextBlankNodeID()
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RohGraph.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetNextBlankNodeID
+    path: Models/Entities/RohGraph.cs
+    startLine: 45
+  assemblies:
+  - API_DISCOVER
+  namespace: VDS.RDF
+  summary: "\nCreates a new unused Blank Node ID and returns it.\n"
+  example: []
+  syntax:
+    content: public override string GetNextBlankNodeID()
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Overrides Function GetNextBlankNodeID As String
+  overridden: VDS.RDF.BaseGraph.GetNextBlankNodeID
+  overload: VDS.RDF.RohGraph.GetNextBlankNodeID*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: VDS.RDF.RohGraph.Clone
+  commentId: M:VDS.RDF.RohGraph.Clone
+  id: Clone
+  parent: VDS.RDF.RohGraph
+  langs:
+  - csharp
+  - vb
+  name: Clone()
+  nameWithType: RohGraph.Clone()
+  fullName: VDS.RDF.RohGraph.Clone()
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RohGraph.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Clone
+    path: Models/Entities/RohGraph.cs
+    startLine: 52
+  assemblies:
+  - API_DISCOVER
+  namespace: VDS.RDF
+  syntax:
+    content: public RohGraph Clone()
+    return:
+      type: VDS.RDF.RohGraph
+    content.vb: Public Function Clone As RohGraph
+  overload: VDS.RDF.RohGraph.Clone*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: VDS.RDF
+  commentId: N:VDS.RDF
+  name: VDS.RDF
+  nameWithType: VDS.RDF
+  fullName: VDS.RDF
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: VDS.RDF.BaseGraph
+  commentId: T:VDS.RDF.BaseGraph
+  parent: VDS.RDF
+  isExternal: true
+  name: BaseGraph
+  nameWithType: BaseGraph
+  fullName: VDS.RDF.BaseGraph
+- uid: VDS.RDF.Graph
+  commentId: T:VDS.RDF.Graph
+  parent: VDS.RDF
+  isExternal: true
+  name: Graph
+  nameWithType: Graph
+  fullName: VDS.RDF.Graph
+- uid: VDS.RDF.IGraph
+  commentId: T:VDS.RDF.IGraph
+  parent: VDS.RDF
+  isExternal: true
+  name: IGraph
+  nameWithType: IGraph
+  fullName: VDS.RDF.IGraph
+- uid: VDS.RDF.INodeFactory
+  commentId: T:VDS.RDF.INodeFactory
+  parent: VDS.RDF
+  isExternal: true
+  name: INodeFactory
+  nameWithType: INodeFactory
+  fullName: VDS.RDF.INodeFactory
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Xml.Serialization.IXmlSerializable
+  commentId: T:System.Xml.Serialization.IXmlSerializable
+  parent: System.Xml.Serialization
+  isExternal: true
+  name: IXmlSerializable
+  nameWithType: IXmlSerializable
+  fullName: System.Xml.Serialization.IXmlSerializable
+- uid: System.Runtime.Serialization.ISerializable
+  commentId: T:System.Runtime.Serialization.ISerializable
+  parent: System.Runtime.Serialization
+  isExternal: true
+  name: ISerializable
+  nameWithType: ISerializable
+  fullName: System.Runtime.Serialization.ISerializable
+- uid: VDS.RDF.Graph.Assert(VDS.RDF.Triple)
+  commentId: M:VDS.RDF.Graph.Assert(VDS.RDF.Triple)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: Assert(Triple)
+  nameWithType: Graph.Assert(Triple)
+  fullName: VDS.RDF.Graph.Assert(VDS.RDF.Triple)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.Assert(VDS.RDF.Triple)
+    name: Assert
+    nameWithType: Graph.Assert
+    fullName: VDS.RDF.Graph.Assert
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.Assert(VDS.RDF.Triple)
+    name: Assert
+    nameWithType: Graph.Assert
+    fullName: VDS.RDF.Graph.Assert
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.Assert(System.Collections.Generic.IEnumerable{VDS.RDF.Triple})
+  commentId: M:VDS.RDF.Graph.Assert(System.Collections.Generic.IEnumerable{VDS.RDF.Triple})
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: Assert(IEnumerable<Triple>)
+  nameWithType: Graph.Assert(IEnumerable<Triple>)
+  fullName: VDS.RDF.Graph.Assert(System.Collections.Generic.IEnumerable<VDS.RDF.Triple>)
+  nameWithType.vb: Graph.Assert(IEnumerable(Of Triple))
+  fullName.vb: VDS.RDF.Graph.Assert(System.Collections.Generic.IEnumerable(Of VDS.RDF.Triple))
+  name.vb: Assert(IEnumerable(Of Triple))
+  spec.csharp:
+  - uid: VDS.RDF.Graph.Assert(System.Collections.Generic.IEnumerable{VDS.RDF.Triple})
+    name: Assert
+    nameWithType: Graph.Assert
+    fullName: VDS.RDF.Graph.Assert
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.Assert(System.Collections.Generic.IEnumerable{VDS.RDF.Triple})
+    name: Assert
+    nameWithType: Graph.Assert
+    fullName: VDS.RDF.Graph.Assert
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.Retract(VDS.RDF.Triple)
+  commentId: M:VDS.RDF.Graph.Retract(VDS.RDF.Triple)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: Retract(Triple)
+  nameWithType: Graph.Retract(Triple)
+  fullName: VDS.RDF.Graph.Retract(VDS.RDF.Triple)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.Retract(VDS.RDF.Triple)
+    name: Retract
+    nameWithType: Graph.Retract
+    fullName: VDS.RDF.Graph.Retract
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.Retract(VDS.RDF.Triple)
+    name: Retract
+    nameWithType: Graph.Retract
+    fullName: VDS.RDF.Graph.Retract
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.Retract(System.Collections.Generic.IEnumerable{VDS.RDF.Triple})
+  commentId: M:VDS.RDF.Graph.Retract(System.Collections.Generic.IEnumerable{VDS.RDF.Triple})
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: Retract(IEnumerable<Triple>)
+  nameWithType: Graph.Retract(IEnumerable<Triple>)
+  fullName: VDS.RDF.Graph.Retract(System.Collections.Generic.IEnumerable<VDS.RDF.Triple>)
+  nameWithType.vb: Graph.Retract(IEnumerable(Of Triple))
+  fullName.vb: VDS.RDF.Graph.Retract(System.Collections.Generic.IEnumerable(Of VDS.RDF.Triple))
+  name.vb: Retract(IEnumerable(Of Triple))
+  spec.csharp:
+  - uid: VDS.RDF.Graph.Retract(System.Collections.Generic.IEnumerable{VDS.RDF.Triple})
+    name: Retract
+    nameWithType: Graph.Retract
+    fullName: VDS.RDF.Graph.Retract
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.Retract(System.Collections.Generic.IEnumerable{VDS.RDF.Triple})
+    name: Retract
+    nameWithType: Graph.Retract
+    fullName: VDS.RDF.Graph.Retract
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetUriNode(System.Uri)
+  commentId: M:VDS.RDF.Graph.GetUriNode(System.Uri)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetUriNode(Uri)
+  nameWithType: Graph.GetUriNode(Uri)
+  fullName: VDS.RDF.Graph.GetUriNode(System.Uri)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetUriNode(System.Uri)
+    name: GetUriNode
+    nameWithType: Graph.GetUriNode
+    fullName: VDS.RDF.Graph.GetUriNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetUriNode(System.Uri)
+    name: GetUriNode
+    nameWithType: Graph.GetUriNode
+    fullName: VDS.RDF.Graph.GetUriNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetUriNode(System.String)
+  commentId: M:VDS.RDF.Graph.GetUriNode(System.String)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetUriNode(String)
+  nameWithType: Graph.GetUriNode(String)
+  fullName: VDS.RDF.Graph.GetUriNode(System.String)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetUriNode(System.String)
+    name: GetUriNode
+    nameWithType: Graph.GetUriNode
+    fullName: VDS.RDF.Graph.GetUriNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetUriNode(System.String)
+    name: GetUriNode
+    nameWithType: Graph.GetUriNode
+    fullName: VDS.RDF.Graph.GetUriNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetLiteralNode(System.String)
+  commentId: M:VDS.RDF.Graph.GetLiteralNode(System.String)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetLiteralNode(String)
+  nameWithType: Graph.GetLiteralNode(String)
+  fullName: VDS.RDF.Graph.GetLiteralNode(System.String)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetLiteralNode(System.String)
+    name: GetLiteralNode
+    nameWithType: Graph.GetLiteralNode
+    fullName: VDS.RDF.Graph.GetLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetLiteralNode(System.String)
+    name: GetLiteralNode
+    nameWithType: Graph.GetLiteralNode
+    fullName: VDS.RDF.Graph.GetLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetLiteralNode(System.String,System.String)
+  commentId: M:VDS.RDF.Graph.GetLiteralNode(System.String,System.String)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetLiteralNode(String, String)
+  nameWithType: Graph.GetLiteralNode(String, String)
+  fullName: VDS.RDF.Graph.GetLiteralNode(System.String, System.String)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetLiteralNode(System.String,System.String)
+    name: GetLiteralNode
+    nameWithType: Graph.GetLiteralNode
+    fullName: VDS.RDF.Graph.GetLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetLiteralNode(System.String,System.String)
+    name: GetLiteralNode
+    nameWithType: Graph.GetLiteralNode
+    fullName: VDS.RDF.Graph.GetLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetLiteralNode(System.String,System.Uri)
+  commentId: M:VDS.RDF.Graph.GetLiteralNode(System.String,System.Uri)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetLiteralNode(String, Uri)
+  nameWithType: Graph.GetLiteralNode(String, Uri)
+  fullName: VDS.RDF.Graph.GetLiteralNode(System.String, System.Uri)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetLiteralNode(System.String,System.Uri)
+    name: GetLiteralNode
+    nameWithType: Graph.GetLiteralNode
+    fullName: VDS.RDF.Graph.GetLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetLiteralNode(System.String,System.Uri)
+    name: GetLiteralNode
+    nameWithType: Graph.GetLiteralNode
+    fullName: VDS.RDF.Graph.GetLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetBlankNode(System.String)
+  commentId: M:VDS.RDF.Graph.GetBlankNode(System.String)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetBlankNode(String)
+  nameWithType: Graph.GetBlankNode(String)
+  fullName: VDS.RDF.Graph.GetBlankNode(System.String)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetBlankNode(System.String)
+    name: GetBlankNode
+    nameWithType: Graph.GetBlankNode
+    fullName: VDS.RDF.Graph.GetBlankNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetBlankNode(System.String)
+    name: GetBlankNode
+    nameWithType: Graph.GetBlankNode
+    fullName: VDS.RDF.Graph.GetBlankNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetTriples(VDS.RDF.INode)
+  commentId: M:VDS.RDF.Graph.GetTriples(VDS.RDF.INode)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetTriples(INode)
+  nameWithType: Graph.GetTriples(INode)
+  fullName: VDS.RDF.Graph.GetTriples(VDS.RDF.INode)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetTriples(VDS.RDF.INode)
+    name: GetTriples
+    nameWithType: Graph.GetTriples
+    fullName: VDS.RDF.Graph.GetTriples
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetTriples(VDS.RDF.INode)
+    name: GetTriples
+    nameWithType: Graph.GetTriples
+    fullName: VDS.RDF.Graph.GetTriples
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetTriples(System.Uri)
+  commentId: M:VDS.RDF.Graph.GetTriples(System.Uri)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetTriples(Uri)
+  nameWithType: Graph.GetTriples(Uri)
+  fullName: VDS.RDF.Graph.GetTriples(System.Uri)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetTriples(System.Uri)
+    name: GetTriples
+    nameWithType: Graph.GetTriples
+    fullName: VDS.RDF.Graph.GetTriples
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetTriples(System.Uri)
+    name: GetTriples
+    nameWithType: Graph.GetTriples
+    fullName: VDS.RDF.Graph.GetTriples
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetTriplesWithSubject(VDS.RDF.INode)
+  commentId: M:VDS.RDF.Graph.GetTriplesWithSubject(VDS.RDF.INode)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetTriplesWithSubject(INode)
+  nameWithType: Graph.GetTriplesWithSubject(INode)
+  fullName: VDS.RDF.Graph.GetTriplesWithSubject(VDS.RDF.INode)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetTriplesWithSubject(VDS.RDF.INode)
+    name: GetTriplesWithSubject
+    nameWithType: Graph.GetTriplesWithSubject
+    fullName: VDS.RDF.Graph.GetTriplesWithSubject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetTriplesWithSubject(VDS.RDF.INode)
+    name: GetTriplesWithSubject
+    nameWithType: Graph.GetTriplesWithSubject
+    fullName: VDS.RDF.Graph.GetTriplesWithSubject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetTriplesWithSubject(System.Uri)
+  commentId: M:VDS.RDF.Graph.GetTriplesWithSubject(System.Uri)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetTriplesWithSubject(Uri)
+  nameWithType: Graph.GetTriplesWithSubject(Uri)
+  fullName: VDS.RDF.Graph.GetTriplesWithSubject(System.Uri)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetTriplesWithSubject(System.Uri)
+    name: GetTriplesWithSubject
+    nameWithType: Graph.GetTriplesWithSubject
+    fullName: VDS.RDF.Graph.GetTriplesWithSubject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetTriplesWithSubject(System.Uri)
+    name: GetTriplesWithSubject
+    nameWithType: Graph.GetTriplesWithSubject
+    fullName: VDS.RDF.Graph.GetTriplesWithSubject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetTriplesWithPredicate(VDS.RDF.INode)
+  commentId: M:VDS.RDF.Graph.GetTriplesWithPredicate(VDS.RDF.INode)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetTriplesWithPredicate(INode)
+  nameWithType: Graph.GetTriplesWithPredicate(INode)
+  fullName: VDS.RDF.Graph.GetTriplesWithPredicate(VDS.RDF.INode)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetTriplesWithPredicate(VDS.RDF.INode)
+    name: GetTriplesWithPredicate
+    nameWithType: Graph.GetTriplesWithPredicate
+    fullName: VDS.RDF.Graph.GetTriplesWithPredicate
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetTriplesWithPredicate(VDS.RDF.INode)
+    name: GetTriplesWithPredicate
+    nameWithType: Graph.GetTriplesWithPredicate
+    fullName: VDS.RDF.Graph.GetTriplesWithPredicate
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetTriplesWithPredicate(System.Uri)
+  commentId: M:VDS.RDF.Graph.GetTriplesWithPredicate(System.Uri)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetTriplesWithPredicate(Uri)
+  nameWithType: Graph.GetTriplesWithPredicate(Uri)
+  fullName: VDS.RDF.Graph.GetTriplesWithPredicate(System.Uri)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetTriplesWithPredicate(System.Uri)
+    name: GetTriplesWithPredicate
+    nameWithType: Graph.GetTriplesWithPredicate
+    fullName: VDS.RDF.Graph.GetTriplesWithPredicate
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetTriplesWithPredicate(System.Uri)
+    name: GetTriplesWithPredicate
+    nameWithType: Graph.GetTriplesWithPredicate
+    fullName: VDS.RDF.Graph.GetTriplesWithPredicate
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetTriplesWithObject(VDS.RDF.INode)
+  commentId: M:VDS.RDF.Graph.GetTriplesWithObject(VDS.RDF.INode)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetTriplesWithObject(INode)
+  nameWithType: Graph.GetTriplesWithObject(INode)
+  fullName: VDS.RDF.Graph.GetTriplesWithObject(VDS.RDF.INode)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetTriplesWithObject(VDS.RDF.INode)
+    name: GetTriplesWithObject
+    nameWithType: Graph.GetTriplesWithObject
+    fullName: VDS.RDF.Graph.GetTriplesWithObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetTriplesWithObject(VDS.RDF.INode)
+    name: GetTriplesWithObject
+    nameWithType: Graph.GetTriplesWithObject
+    fullName: VDS.RDF.Graph.GetTriplesWithObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetTriplesWithObject(System.Uri)
+  commentId: M:VDS.RDF.Graph.GetTriplesWithObject(System.Uri)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetTriplesWithObject(Uri)
+  nameWithType: Graph.GetTriplesWithObject(Uri)
+  fullName: VDS.RDF.Graph.GetTriplesWithObject(System.Uri)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetTriplesWithObject(System.Uri)
+    name: GetTriplesWithObject
+    nameWithType: Graph.GetTriplesWithObject
+    fullName: VDS.RDF.Graph.GetTriplesWithObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetTriplesWithObject(System.Uri)
+    name: GetTriplesWithObject
+    nameWithType: Graph.GetTriplesWithObject
+    fullName: VDS.RDF.Graph.GetTriplesWithObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetTriplesWithSubjectPredicate(VDS.RDF.INode,VDS.RDF.INode)
+  commentId: M:VDS.RDF.Graph.GetTriplesWithSubjectPredicate(VDS.RDF.INode,VDS.RDF.INode)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetTriplesWithSubjectPredicate(INode, INode)
+  nameWithType: Graph.GetTriplesWithSubjectPredicate(INode, INode)
+  fullName: VDS.RDF.Graph.GetTriplesWithSubjectPredicate(VDS.RDF.INode, VDS.RDF.INode)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetTriplesWithSubjectPredicate(VDS.RDF.INode,VDS.RDF.INode)
+    name: GetTriplesWithSubjectPredicate
+    nameWithType: Graph.GetTriplesWithSubjectPredicate
+    fullName: VDS.RDF.Graph.GetTriplesWithSubjectPredicate
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetTriplesWithSubjectPredicate(VDS.RDF.INode,VDS.RDF.INode)
+    name: GetTriplesWithSubjectPredicate
+    nameWithType: Graph.GetTriplesWithSubjectPredicate
+    fullName: VDS.RDF.Graph.GetTriplesWithSubjectPredicate
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetTriplesWithSubjectObject(VDS.RDF.INode,VDS.RDF.INode)
+  commentId: M:VDS.RDF.Graph.GetTriplesWithSubjectObject(VDS.RDF.INode,VDS.RDF.INode)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetTriplesWithSubjectObject(INode, INode)
+  nameWithType: Graph.GetTriplesWithSubjectObject(INode, INode)
+  fullName: VDS.RDF.Graph.GetTriplesWithSubjectObject(VDS.RDF.INode, VDS.RDF.INode)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetTriplesWithSubjectObject(VDS.RDF.INode,VDS.RDF.INode)
+    name: GetTriplesWithSubjectObject
+    nameWithType: Graph.GetTriplesWithSubjectObject
+    fullName: VDS.RDF.Graph.GetTriplesWithSubjectObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetTriplesWithSubjectObject(VDS.RDF.INode,VDS.RDF.INode)
+    name: GetTriplesWithSubjectObject
+    nameWithType: Graph.GetTriplesWithSubjectObject
+    fullName: VDS.RDF.Graph.GetTriplesWithSubjectObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Graph.GetTriplesWithPredicateObject(VDS.RDF.INode,VDS.RDF.INode)
+  commentId: M:VDS.RDF.Graph.GetTriplesWithPredicateObject(VDS.RDF.INode,VDS.RDF.INode)
+  parent: VDS.RDF.Graph
+  isExternal: true
+  name: GetTriplesWithPredicateObject(INode, INode)
+  nameWithType: Graph.GetTriplesWithPredicateObject(INode, INode)
+  fullName: VDS.RDF.Graph.GetTriplesWithPredicateObject(VDS.RDF.INode, VDS.RDF.INode)
+  spec.csharp:
+  - uid: VDS.RDF.Graph.GetTriplesWithPredicateObject(VDS.RDF.INode,VDS.RDF.INode)
+    name: GetTriplesWithPredicateObject
+    nameWithType: Graph.GetTriplesWithPredicateObject
+    fullName: VDS.RDF.Graph.GetTriplesWithPredicateObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Graph.GetTriplesWithPredicateObject(VDS.RDF.INode,VDS.RDF.INode)
+    name: GetTriplesWithPredicateObject
+    nameWithType: Graph.GetTriplesWithPredicateObject
+    fullName: VDS.RDF.Graph.GetTriplesWithPredicateObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph._triples
+  commentId: F:VDS.RDF.BaseGraph._triples
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: _triples
+  nameWithType: BaseGraph._triples
+  fullName: VDS.RDF.BaseGraph._triples
+- uid: VDS.RDF.BaseGraph._nsmapper
+  commentId: F:VDS.RDF.BaseGraph._nsmapper
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: _nsmapper
+  nameWithType: BaseGraph._nsmapper
+  fullName: VDS.RDF.BaseGraph._nsmapper
+- uid: VDS.RDF.BaseGraph._baseuri
+  commentId: F:VDS.RDF.BaseGraph._baseuri
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: _baseuri
+  nameWithType: BaseGraph._baseuri
+  fullName: VDS.RDF.BaseGraph._baseuri
+- uid: VDS.RDF.BaseGraph._bnodemapper
+  commentId: F:VDS.RDF.BaseGraph._bnodemapper
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: _bnodemapper
+  nameWithType: BaseGraph._bnodemapper
+  fullName: VDS.RDF.BaseGraph._bnodemapper
+- uid: VDS.RDF.BaseGraph.Clear
+  commentId: M:VDS.RDF.BaseGraph.Clear
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: Clear()
+  nameWithType: BaseGraph.Clear()
+  fullName: VDS.RDF.BaseGraph.Clear()
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.Clear
+    name: Clear
+    nameWithType: BaseGraph.Clear
+    fullName: VDS.RDF.BaseGraph.Clear
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.Clear
+    name: Clear
+    nameWithType: BaseGraph.Clear
+    fullName: VDS.RDF.BaseGraph.Clear
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.CreateBlankNode
+  commentId: M:VDS.RDF.BaseGraph.CreateBlankNode
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: CreateBlankNode()
+  nameWithType: BaseGraph.CreateBlankNode()
+  fullName: VDS.RDF.BaseGraph.CreateBlankNode()
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.CreateBlankNode
+    name: CreateBlankNode
+    nameWithType: BaseGraph.CreateBlankNode
+    fullName: VDS.RDF.BaseGraph.CreateBlankNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.CreateBlankNode
+    name: CreateBlankNode
+    nameWithType: BaseGraph.CreateBlankNode
+    fullName: VDS.RDF.BaseGraph.CreateBlankNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.CreateBlankNode(System.String)
+  commentId: M:VDS.RDF.BaseGraph.CreateBlankNode(System.String)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: CreateBlankNode(String)
+  nameWithType: BaseGraph.CreateBlankNode(String)
+  fullName: VDS.RDF.BaseGraph.CreateBlankNode(System.String)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.CreateBlankNode(System.String)
+    name: CreateBlankNode
+    nameWithType: BaseGraph.CreateBlankNode
+    fullName: VDS.RDF.BaseGraph.CreateBlankNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.CreateBlankNode(System.String)
+    name: CreateBlankNode
+    nameWithType: BaseGraph.CreateBlankNode
+    fullName: VDS.RDF.BaseGraph.CreateBlankNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.CreateLiteralNode(System.String)
+  commentId: M:VDS.RDF.BaseGraph.CreateLiteralNode(System.String)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: CreateLiteralNode(String)
+  nameWithType: BaseGraph.CreateLiteralNode(String)
+  fullName: VDS.RDF.BaseGraph.CreateLiteralNode(System.String)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.CreateLiteralNode(System.String)
+    name: CreateLiteralNode
+    nameWithType: BaseGraph.CreateLiteralNode
+    fullName: VDS.RDF.BaseGraph.CreateLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.CreateLiteralNode(System.String)
+    name: CreateLiteralNode
+    nameWithType: BaseGraph.CreateLiteralNode
+    fullName: VDS.RDF.BaseGraph.CreateLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.CreateLiteralNode(System.String,System.String)
+  commentId: M:VDS.RDF.BaseGraph.CreateLiteralNode(System.String,System.String)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: CreateLiteralNode(String, String)
+  nameWithType: BaseGraph.CreateLiteralNode(String, String)
+  fullName: VDS.RDF.BaseGraph.CreateLiteralNode(System.String, System.String)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.CreateLiteralNode(System.String,System.String)
+    name: CreateLiteralNode
+    nameWithType: BaseGraph.CreateLiteralNode
+    fullName: VDS.RDF.BaseGraph.CreateLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.CreateLiteralNode(System.String,System.String)
+    name: CreateLiteralNode
+    nameWithType: BaseGraph.CreateLiteralNode
+    fullName: VDS.RDF.BaseGraph.CreateLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.CreateLiteralNode(System.String,System.Uri)
+  commentId: M:VDS.RDF.BaseGraph.CreateLiteralNode(System.String,System.Uri)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: CreateLiteralNode(String, Uri)
+  nameWithType: BaseGraph.CreateLiteralNode(String, Uri)
+  fullName: VDS.RDF.BaseGraph.CreateLiteralNode(System.String, System.Uri)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.CreateLiteralNode(System.String,System.Uri)
+    name: CreateLiteralNode
+    nameWithType: BaseGraph.CreateLiteralNode
+    fullName: VDS.RDF.BaseGraph.CreateLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.CreateLiteralNode(System.String,System.Uri)
+    name: CreateLiteralNode
+    nameWithType: BaseGraph.CreateLiteralNode
+    fullName: VDS.RDF.BaseGraph.CreateLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.CreateUriNode
+  commentId: M:VDS.RDF.BaseGraph.CreateUriNode
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: CreateUriNode()
+  nameWithType: BaseGraph.CreateUriNode()
+  fullName: VDS.RDF.BaseGraph.CreateUriNode()
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.CreateUriNode
+    name: CreateUriNode
+    nameWithType: BaseGraph.CreateUriNode
+    fullName: VDS.RDF.BaseGraph.CreateUriNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.CreateUriNode
+    name: CreateUriNode
+    nameWithType: BaseGraph.CreateUriNode
+    fullName: VDS.RDF.BaseGraph.CreateUriNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.CreateUriNode(System.Uri)
+  commentId: M:VDS.RDF.BaseGraph.CreateUriNode(System.Uri)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: CreateUriNode(Uri)
+  nameWithType: BaseGraph.CreateUriNode(Uri)
+  fullName: VDS.RDF.BaseGraph.CreateUriNode(System.Uri)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.CreateUriNode(System.Uri)
+    name: CreateUriNode
+    nameWithType: BaseGraph.CreateUriNode
+    fullName: VDS.RDF.BaseGraph.CreateUriNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.CreateUriNode(System.Uri)
+    name: CreateUriNode
+    nameWithType: BaseGraph.CreateUriNode
+    fullName: VDS.RDF.BaseGraph.CreateUriNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.CreateUriNode(System.String)
+  commentId: M:VDS.RDF.BaseGraph.CreateUriNode(System.String)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: CreateUriNode(String)
+  nameWithType: BaseGraph.CreateUriNode(String)
+  fullName: VDS.RDF.BaseGraph.CreateUriNode(System.String)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.CreateUriNode(System.String)
+    name: CreateUriNode
+    nameWithType: BaseGraph.CreateUriNode
+    fullName: VDS.RDF.BaseGraph.CreateUriNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.CreateUriNode(System.String)
+    name: CreateUriNode
+    nameWithType: BaseGraph.CreateUriNode
+    fullName: VDS.RDF.BaseGraph.CreateUriNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.CreateVariableNode(System.String)
+  commentId: M:VDS.RDF.BaseGraph.CreateVariableNode(System.String)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: CreateVariableNode(String)
+  nameWithType: BaseGraph.CreateVariableNode(String)
+  fullName: VDS.RDF.BaseGraph.CreateVariableNode(System.String)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.CreateVariableNode(System.String)
+    name: CreateVariableNode
+    nameWithType: BaseGraph.CreateVariableNode
+    fullName: VDS.RDF.BaseGraph.CreateVariableNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.CreateVariableNode(System.String)
+    name: CreateVariableNode
+    nameWithType: BaseGraph.CreateVariableNode
+    fullName: VDS.RDF.BaseGraph.CreateVariableNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.CreateGraphLiteralNode
+  commentId: M:VDS.RDF.BaseGraph.CreateGraphLiteralNode
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: CreateGraphLiteralNode()
+  nameWithType: BaseGraph.CreateGraphLiteralNode()
+  fullName: VDS.RDF.BaseGraph.CreateGraphLiteralNode()
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.CreateGraphLiteralNode
+    name: CreateGraphLiteralNode
+    nameWithType: BaseGraph.CreateGraphLiteralNode
+    fullName: VDS.RDF.BaseGraph.CreateGraphLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.CreateGraphLiteralNode
+    name: CreateGraphLiteralNode
+    nameWithType: BaseGraph.CreateGraphLiteralNode
+    fullName: VDS.RDF.BaseGraph.CreateGraphLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.CreateGraphLiteralNode(VDS.RDF.IGraph)
+  commentId: M:VDS.RDF.BaseGraph.CreateGraphLiteralNode(VDS.RDF.IGraph)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: CreateGraphLiteralNode(IGraph)
+  nameWithType: BaseGraph.CreateGraphLiteralNode(IGraph)
+  fullName: VDS.RDF.BaseGraph.CreateGraphLiteralNode(VDS.RDF.IGraph)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.CreateGraphLiteralNode(VDS.RDF.IGraph)
+    name: CreateGraphLiteralNode
+    nameWithType: BaseGraph.CreateGraphLiteralNode
+    fullName: VDS.RDF.BaseGraph.CreateGraphLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.CreateGraphLiteralNode(VDS.RDF.IGraph)
+    name: CreateGraphLiteralNode
+    nameWithType: BaseGraph.CreateGraphLiteralNode
+    fullName: VDS.RDF.BaseGraph.CreateGraphLiteralNode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.ContainsTriple(VDS.RDF.Triple)
+  commentId: M:VDS.RDF.BaseGraph.ContainsTriple(VDS.RDF.Triple)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: ContainsTriple(Triple)
+  nameWithType: BaseGraph.ContainsTriple(Triple)
+  fullName: VDS.RDF.BaseGraph.ContainsTriple(VDS.RDF.Triple)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.ContainsTriple(VDS.RDF.Triple)
+    name: ContainsTriple
+    nameWithType: BaseGraph.ContainsTriple
+    fullName: VDS.RDF.BaseGraph.ContainsTriple
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.ContainsTriple(VDS.RDF.Triple)
+    name: ContainsTriple
+    nameWithType: BaseGraph.ContainsTriple
+    fullName: VDS.RDF.BaseGraph.ContainsTriple
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.Merge(VDS.RDF.IGraph)
+  commentId: M:VDS.RDF.BaseGraph.Merge(VDS.RDF.IGraph)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: Merge(IGraph)
+  nameWithType: BaseGraph.Merge(IGraph)
+  fullName: VDS.RDF.BaseGraph.Merge(VDS.RDF.IGraph)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.Merge(VDS.RDF.IGraph)
+    name: Merge
+    nameWithType: BaseGraph.Merge
+    fullName: VDS.RDF.BaseGraph.Merge
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.Merge(VDS.RDF.IGraph)
+    name: Merge
+    nameWithType: BaseGraph.Merge
+    fullName: VDS.RDF.BaseGraph.Merge
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.Merge(VDS.RDF.IGraph,System.Boolean)
+  commentId: M:VDS.RDF.BaseGraph.Merge(VDS.RDF.IGraph,System.Boolean)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: Merge(IGraph, Boolean)
+  nameWithType: BaseGraph.Merge(IGraph, Boolean)
+  fullName: VDS.RDF.BaseGraph.Merge(VDS.RDF.IGraph, System.Boolean)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.Merge(VDS.RDF.IGraph,System.Boolean)
+    name: Merge
+    nameWithType: BaseGraph.Merge
+    fullName: VDS.RDF.BaseGraph.Merge
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.Merge(VDS.RDF.IGraph,System.Boolean)
+    name: Merge
+    nameWithType: BaseGraph.Merge
+    fullName: VDS.RDF.BaseGraph.Merge
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.Equals(System.Object)
+  commentId: M:VDS.RDF.BaseGraph.Equals(System.Object)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: BaseGraph.Equals(Object)
+  fullName: VDS.RDF.BaseGraph.Equals(System.Object)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.Equals(System.Object)
+    name: Equals
+    nameWithType: BaseGraph.Equals
+    fullName: VDS.RDF.BaseGraph.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.Equals(System.Object)
+    name: Equals
+    nameWithType: BaseGraph.Equals
+    fullName: VDS.RDF.BaseGraph.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.Equals(VDS.RDF.IGraph,System.Collections.Generic.Dictionary{VDS.RDF.INode,VDS.RDF.INode}@)
+  commentId: M:VDS.RDF.BaseGraph.Equals(VDS.RDF.IGraph,System.Collections.Generic.Dictionary{VDS.RDF.INode,VDS.RDF.INode}@)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: Equals(IGraph, Dictionary<INode, INode>)
+  nameWithType: BaseGraph.Equals(IGraph, Dictionary<INode, INode>)
+  fullName: VDS.RDF.BaseGraph.Equals(VDS.RDF.IGraph, System.Collections.Generic.Dictionary<VDS.RDF.INode, VDS.RDF.INode>)
+  nameWithType.vb: BaseGraph.Equals(IGraph, Dictionary(Of INode, INode))
+  fullName.vb: VDS.RDF.BaseGraph.Equals(VDS.RDF.IGraph, System.Collections.Generic.Dictionary(Of VDS.RDF.INode, VDS.RDF.INode))
+  name.vb: Equals(IGraph, Dictionary(Of INode, INode))
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.Equals(VDS.RDF.IGraph,System.Collections.Generic.Dictionary{VDS.RDF.INode,VDS.RDF.INode}@)
+    name: Equals
+    nameWithType: BaseGraph.Equals
+    fullName: VDS.RDF.BaseGraph.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.Equals(VDS.RDF.IGraph,System.Collections.Generic.Dictionary{VDS.RDF.INode,VDS.RDF.INode}@)
+    name: Equals
+    nameWithType: BaseGraph.Equals
+    fullName: VDS.RDF.BaseGraph.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.IsSubGraphOf(VDS.RDF.IGraph)
+  commentId: M:VDS.RDF.BaseGraph.IsSubGraphOf(VDS.RDF.IGraph)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: IsSubGraphOf(IGraph)
+  nameWithType: BaseGraph.IsSubGraphOf(IGraph)
+  fullName: VDS.RDF.BaseGraph.IsSubGraphOf(VDS.RDF.IGraph)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.IsSubGraphOf(VDS.RDF.IGraph)
+    name: IsSubGraphOf
+    nameWithType: BaseGraph.IsSubGraphOf
+    fullName: VDS.RDF.BaseGraph.IsSubGraphOf
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.IsSubGraphOf(VDS.RDF.IGraph)
+    name: IsSubGraphOf
+    nameWithType: BaseGraph.IsSubGraphOf
+    fullName: VDS.RDF.BaseGraph.IsSubGraphOf
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.IsSubGraphOf(VDS.RDF.IGraph,System.Collections.Generic.Dictionary{VDS.RDF.INode,VDS.RDF.INode}@)
+  commentId: M:VDS.RDF.BaseGraph.IsSubGraphOf(VDS.RDF.IGraph,System.Collections.Generic.Dictionary{VDS.RDF.INode,VDS.RDF.INode}@)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: IsSubGraphOf(IGraph, Dictionary<INode, INode>)
+  nameWithType: BaseGraph.IsSubGraphOf(IGraph, Dictionary<INode, INode>)
+  fullName: VDS.RDF.BaseGraph.IsSubGraphOf(VDS.RDF.IGraph, System.Collections.Generic.Dictionary<VDS.RDF.INode, VDS.RDF.INode>)
+  nameWithType.vb: BaseGraph.IsSubGraphOf(IGraph, Dictionary(Of INode, INode))
+  fullName.vb: VDS.RDF.BaseGraph.IsSubGraphOf(VDS.RDF.IGraph, System.Collections.Generic.Dictionary(Of VDS.RDF.INode, VDS.RDF.INode))
+  name.vb: IsSubGraphOf(IGraph, Dictionary(Of INode, INode))
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.IsSubGraphOf(VDS.RDF.IGraph,System.Collections.Generic.Dictionary{VDS.RDF.INode,VDS.RDF.INode}@)
+    name: IsSubGraphOf
+    nameWithType: BaseGraph.IsSubGraphOf
+    fullName: VDS.RDF.BaseGraph.IsSubGraphOf
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.IsSubGraphOf(VDS.RDF.IGraph,System.Collections.Generic.Dictionary{VDS.RDF.INode,VDS.RDF.INode}@)
+    name: IsSubGraphOf
+    nameWithType: BaseGraph.IsSubGraphOf
+    fullName: VDS.RDF.BaseGraph.IsSubGraphOf
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.HasSubGraph(VDS.RDF.IGraph)
+  commentId: M:VDS.RDF.BaseGraph.HasSubGraph(VDS.RDF.IGraph)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: HasSubGraph(IGraph)
+  nameWithType: BaseGraph.HasSubGraph(IGraph)
+  fullName: VDS.RDF.BaseGraph.HasSubGraph(VDS.RDF.IGraph)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.HasSubGraph(VDS.RDF.IGraph)
+    name: HasSubGraph
+    nameWithType: BaseGraph.HasSubGraph
+    fullName: VDS.RDF.BaseGraph.HasSubGraph
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.HasSubGraph(VDS.RDF.IGraph)
+    name: HasSubGraph
+    nameWithType: BaseGraph.HasSubGraph
+    fullName: VDS.RDF.BaseGraph.HasSubGraph
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.HasSubGraph(VDS.RDF.IGraph,System.Collections.Generic.Dictionary{VDS.RDF.INode,VDS.RDF.INode}@)
+  commentId: M:VDS.RDF.BaseGraph.HasSubGraph(VDS.RDF.IGraph,System.Collections.Generic.Dictionary{VDS.RDF.INode,VDS.RDF.INode}@)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: HasSubGraph(IGraph, Dictionary<INode, INode>)
+  nameWithType: BaseGraph.HasSubGraph(IGraph, Dictionary<INode, INode>)
+  fullName: VDS.RDF.BaseGraph.HasSubGraph(VDS.RDF.IGraph, System.Collections.Generic.Dictionary<VDS.RDF.INode, VDS.RDF.INode>)
+  nameWithType.vb: BaseGraph.HasSubGraph(IGraph, Dictionary(Of INode, INode))
+  fullName.vb: VDS.RDF.BaseGraph.HasSubGraph(VDS.RDF.IGraph, System.Collections.Generic.Dictionary(Of VDS.RDF.INode, VDS.RDF.INode))
+  name.vb: HasSubGraph(IGraph, Dictionary(Of INode, INode))
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.HasSubGraph(VDS.RDF.IGraph,System.Collections.Generic.Dictionary{VDS.RDF.INode,VDS.RDF.INode}@)
+    name: HasSubGraph
+    nameWithType: BaseGraph.HasSubGraph
+    fullName: VDS.RDF.BaseGraph.HasSubGraph
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.HasSubGraph(VDS.RDF.IGraph,System.Collections.Generic.Dictionary{VDS.RDF.INode,VDS.RDF.INode}@)
+    name: HasSubGraph
+    nameWithType: BaseGraph.HasSubGraph
+    fullName: VDS.RDF.BaseGraph.HasSubGraph
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.INode
+    name: INode
+    nameWithType: INode
+    fullName: VDS.RDF.INode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.Difference(VDS.RDF.IGraph)
+  commentId: M:VDS.RDF.BaseGraph.Difference(VDS.RDF.IGraph)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: Difference(IGraph)
+  nameWithType: BaseGraph.Difference(IGraph)
+  fullName: VDS.RDF.BaseGraph.Difference(VDS.RDF.IGraph)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.Difference(VDS.RDF.IGraph)
+    name: Difference
+    nameWithType: BaseGraph.Difference
+    fullName: VDS.RDF.BaseGraph.Difference
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.Difference(VDS.RDF.IGraph)
+    name: Difference
+    nameWithType: BaseGraph.Difference
+    fullName: VDS.RDF.BaseGraph.Difference
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.ResolveQName(System.String)
+  commentId: M:VDS.RDF.BaseGraph.ResolveQName(System.String)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: ResolveQName(String)
+  nameWithType: BaseGraph.ResolveQName(String)
+  fullName: VDS.RDF.BaseGraph.ResolveQName(System.String)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.ResolveQName(System.String)
+    name: ResolveQName
+    nameWithType: BaseGraph.ResolveQName
+    fullName: VDS.RDF.BaseGraph.ResolveQName
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.ResolveQName(System.String)
+    name: ResolveQName
+    nameWithType: BaseGraph.ResolveQName
+    fullName: VDS.RDF.BaseGraph.ResolveQName
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.OnTripleAsserted(System.Object,VDS.RDF.TripleEventArgs)
+  commentId: M:VDS.RDF.BaseGraph.OnTripleAsserted(System.Object,VDS.RDF.TripleEventArgs)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: OnTripleAsserted(Object, TripleEventArgs)
+  nameWithType: BaseGraph.OnTripleAsserted(Object, TripleEventArgs)
+  fullName: VDS.RDF.BaseGraph.OnTripleAsserted(System.Object, VDS.RDF.TripleEventArgs)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.OnTripleAsserted(System.Object,VDS.RDF.TripleEventArgs)
+    name: OnTripleAsserted
+    nameWithType: BaseGraph.OnTripleAsserted
+    fullName: VDS.RDF.BaseGraph.OnTripleAsserted
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.TripleEventArgs
+    name: TripleEventArgs
+    nameWithType: TripleEventArgs
+    fullName: VDS.RDF.TripleEventArgs
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.OnTripleAsserted(System.Object,VDS.RDF.TripleEventArgs)
+    name: OnTripleAsserted
+    nameWithType: BaseGraph.OnTripleAsserted
+    fullName: VDS.RDF.BaseGraph.OnTripleAsserted
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.TripleEventArgs
+    name: TripleEventArgs
+    nameWithType: TripleEventArgs
+    fullName: VDS.RDF.TripleEventArgs
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.RaiseTripleAsserted(VDS.RDF.TripleEventArgs)
+  commentId: M:VDS.RDF.BaseGraph.RaiseTripleAsserted(VDS.RDF.TripleEventArgs)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: RaiseTripleAsserted(TripleEventArgs)
+  nameWithType: BaseGraph.RaiseTripleAsserted(TripleEventArgs)
+  fullName: VDS.RDF.BaseGraph.RaiseTripleAsserted(VDS.RDF.TripleEventArgs)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.RaiseTripleAsserted(VDS.RDF.TripleEventArgs)
+    name: RaiseTripleAsserted
+    nameWithType: BaseGraph.RaiseTripleAsserted
+    fullName: VDS.RDF.BaseGraph.RaiseTripleAsserted
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.TripleEventArgs
+    name: TripleEventArgs
+    nameWithType: TripleEventArgs
+    fullName: VDS.RDF.TripleEventArgs
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.RaiseTripleAsserted(VDS.RDF.TripleEventArgs)
+    name: RaiseTripleAsserted
+    nameWithType: BaseGraph.RaiseTripleAsserted
+    fullName: VDS.RDF.BaseGraph.RaiseTripleAsserted
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.TripleEventArgs
+    name: TripleEventArgs
+    nameWithType: TripleEventArgs
+    fullName: VDS.RDF.TripleEventArgs
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.RaiseTripleAsserted(VDS.RDF.Triple)
+  commentId: M:VDS.RDF.BaseGraph.RaiseTripleAsserted(VDS.RDF.Triple)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: RaiseTripleAsserted(Triple)
+  nameWithType: BaseGraph.RaiseTripleAsserted(Triple)
+  fullName: VDS.RDF.BaseGraph.RaiseTripleAsserted(VDS.RDF.Triple)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.RaiseTripleAsserted(VDS.RDF.Triple)
+    name: RaiseTripleAsserted
+    nameWithType: BaseGraph.RaiseTripleAsserted
+    fullName: VDS.RDF.BaseGraph.RaiseTripleAsserted
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.RaiseTripleAsserted(VDS.RDF.Triple)
+    name: RaiseTripleAsserted
+    nameWithType: BaseGraph.RaiseTripleAsserted
+    fullName: VDS.RDF.BaseGraph.RaiseTripleAsserted
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.OnTripleRetracted(System.Object,VDS.RDF.TripleEventArgs)
+  commentId: M:VDS.RDF.BaseGraph.OnTripleRetracted(System.Object,VDS.RDF.TripleEventArgs)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: OnTripleRetracted(Object, TripleEventArgs)
+  nameWithType: BaseGraph.OnTripleRetracted(Object, TripleEventArgs)
+  fullName: VDS.RDF.BaseGraph.OnTripleRetracted(System.Object, VDS.RDF.TripleEventArgs)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.OnTripleRetracted(System.Object,VDS.RDF.TripleEventArgs)
+    name: OnTripleRetracted
+    nameWithType: BaseGraph.OnTripleRetracted
+    fullName: VDS.RDF.BaseGraph.OnTripleRetracted
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.TripleEventArgs
+    name: TripleEventArgs
+    nameWithType: TripleEventArgs
+    fullName: VDS.RDF.TripleEventArgs
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.OnTripleRetracted(System.Object,VDS.RDF.TripleEventArgs)
+    name: OnTripleRetracted
+    nameWithType: BaseGraph.OnTripleRetracted
+    fullName: VDS.RDF.BaseGraph.OnTripleRetracted
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.TripleEventArgs
+    name: TripleEventArgs
+    nameWithType: TripleEventArgs
+    fullName: VDS.RDF.TripleEventArgs
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.RaiseTripleRetracted(VDS.RDF.TripleEventArgs)
+  commentId: M:VDS.RDF.BaseGraph.RaiseTripleRetracted(VDS.RDF.TripleEventArgs)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: RaiseTripleRetracted(TripleEventArgs)
+  nameWithType: BaseGraph.RaiseTripleRetracted(TripleEventArgs)
+  fullName: VDS.RDF.BaseGraph.RaiseTripleRetracted(VDS.RDF.TripleEventArgs)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.RaiseTripleRetracted(VDS.RDF.TripleEventArgs)
+    name: RaiseTripleRetracted
+    nameWithType: BaseGraph.RaiseTripleRetracted
+    fullName: VDS.RDF.BaseGraph.RaiseTripleRetracted
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.TripleEventArgs
+    name: TripleEventArgs
+    nameWithType: TripleEventArgs
+    fullName: VDS.RDF.TripleEventArgs
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.RaiseTripleRetracted(VDS.RDF.TripleEventArgs)
+    name: RaiseTripleRetracted
+    nameWithType: BaseGraph.RaiseTripleRetracted
+    fullName: VDS.RDF.BaseGraph.RaiseTripleRetracted
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.TripleEventArgs
+    name: TripleEventArgs
+    nameWithType: TripleEventArgs
+    fullName: VDS.RDF.TripleEventArgs
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.RaiseTripleRetracted(VDS.RDF.Triple)
+  commentId: M:VDS.RDF.BaseGraph.RaiseTripleRetracted(VDS.RDF.Triple)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: RaiseTripleRetracted(Triple)
+  nameWithType: BaseGraph.RaiseTripleRetracted(Triple)
+  fullName: VDS.RDF.BaseGraph.RaiseTripleRetracted(VDS.RDF.Triple)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.RaiseTripleRetracted(VDS.RDF.Triple)
+    name: RaiseTripleRetracted
+    nameWithType: BaseGraph.RaiseTripleRetracted
+    fullName: VDS.RDF.BaseGraph.RaiseTripleRetracted
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.RaiseTripleRetracted(VDS.RDF.Triple)
+    name: RaiseTripleRetracted
+    nameWithType: BaseGraph.RaiseTripleRetracted
+    fullName: VDS.RDF.BaseGraph.RaiseTripleRetracted
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.RaiseGraphChanged(VDS.RDF.TripleEventArgs)
+  commentId: M:VDS.RDF.BaseGraph.RaiseGraphChanged(VDS.RDF.TripleEventArgs)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: RaiseGraphChanged(TripleEventArgs)
+  nameWithType: BaseGraph.RaiseGraphChanged(TripleEventArgs)
+  fullName: VDS.RDF.BaseGraph.RaiseGraphChanged(VDS.RDF.TripleEventArgs)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.RaiseGraphChanged(VDS.RDF.TripleEventArgs)
+    name: RaiseGraphChanged
+    nameWithType: BaseGraph.RaiseGraphChanged
+    fullName: VDS.RDF.BaseGraph.RaiseGraphChanged
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.TripleEventArgs
+    name: TripleEventArgs
+    nameWithType: TripleEventArgs
+    fullName: VDS.RDF.TripleEventArgs
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.RaiseGraphChanged(VDS.RDF.TripleEventArgs)
+    name: RaiseGraphChanged
+    nameWithType: BaseGraph.RaiseGraphChanged
+    fullName: VDS.RDF.BaseGraph.RaiseGraphChanged
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.TripleEventArgs
+    name: TripleEventArgs
+    nameWithType: TripleEventArgs
+    fullName: VDS.RDF.TripleEventArgs
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.RaiseGraphChanged
+  commentId: M:VDS.RDF.BaseGraph.RaiseGraphChanged
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: RaiseGraphChanged()
+  nameWithType: BaseGraph.RaiseGraphChanged()
+  fullName: VDS.RDF.BaseGraph.RaiseGraphChanged()
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.RaiseGraphChanged
+    name: RaiseGraphChanged
+    nameWithType: BaseGraph.RaiseGraphChanged
+    fullName: VDS.RDF.BaseGraph.RaiseGraphChanged
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.RaiseGraphChanged
+    name: RaiseGraphChanged
+    nameWithType: BaseGraph.RaiseGraphChanged
+    fullName: VDS.RDF.BaseGraph.RaiseGraphChanged
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.RaiseClearRequested
+  commentId: M:VDS.RDF.BaseGraph.RaiseClearRequested
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: RaiseClearRequested()
+  nameWithType: BaseGraph.RaiseClearRequested()
+  fullName: VDS.RDF.BaseGraph.RaiseClearRequested()
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.RaiseClearRequested
+    name: RaiseClearRequested
+    nameWithType: BaseGraph.RaiseClearRequested
+    fullName: VDS.RDF.BaseGraph.RaiseClearRequested
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.RaiseClearRequested
+    name: RaiseClearRequested
+    nameWithType: BaseGraph.RaiseClearRequested
+    fullName: VDS.RDF.BaseGraph.RaiseClearRequested
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.RaiseCleared
+  commentId: M:VDS.RDF.BaseGraph.RaiseCleared
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: RaiseCleared()
+  nameWithType: BaseGraph.RaiseCleared()
+  fullName: VDS.RDF.BaseGraph.RaiseCleared()
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.RaiseCleared
+    name: RaiseCleared
+    nameWithType: BaseGraph.RaiseCleared
+    fullName: VDS.RDF.BaseGraph.RaiseCleared
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.RaiseCleared
+    name: RaiseCleared
+    nameWithType: BaseGraph.RaiseCleared
+    fullName: VDS.RDF.BaseGraph.RaiseCleared
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.RaiseMergeRequested
+  commentId: M:VDS.RDF.BaseGraph.RaiseMergeRequested
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: RaiseMergeRequested()
+  nameWithType: BaseGraph.RaiseMergeRequested()
+  fullName: VDS.RDF.BaseGraph.RaiseMergeRequested()
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.RaiseMergeRequested
+    name: RaiseMergeRequested
+    nameWithType: BaseGraph.RaiseMergeRequested
+    fullName: VDS.RDF.BaseGraph.RaiseMergeRequested
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.RaiseMergeRequested
+    name: RaiseMergeRequested
+    nameWithType: BaseGraph.RaiseMergeRequested
+    fullName: VDS.RDF.BaseGraph.RaiseMergeRequested
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.RaiseMerged
+  commentId: M:VDS.RDF.BaseGraph.RaiseMerged
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: RaiseMerged()
+  nameWithType: BaseGraph.RaiseMerged()
+  fullName: VDS.RDF.BaseGraph.RaiseMerged()
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.RaiseMerged
+    name: RaiseMerged
+    nameWithType: BaseGraph.RaiseMerged
+    fullName: VDS.RDF.BaseGraph.RaiseMerged
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.RaiseMerged
+    name: RaiseMerged
+    nameWithType: BaseGraph.RaiseMerged
+    fullName: VDS.RDF.BaseGraph.RaiseMerged
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.AttachEventHandlers(VDS.RDF.BaseTripleCollection)
+  commentId: M:VDS.RDF.BaseGraph.AttachEventHandlers(VDS.RDF.BaseTripleCollection)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: AttachEventHandlers(BaseTripleCollection)
+  nameWithType: BaseGraph.AttachEventHandlers(BaseTripleCollection)
+  fullName: VDS.RDF.BaseGraph.AttachEventHandlers(VDS.RDF.BaseTripleCollection)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.AttachEventHandlers(VDS.RDF.BaseTripleCollection)
+    name: AttachEventHandlers
+    nameWithType: BaseGraph.AttachEventHandlers
+    fullName: VDS.RDF.BaseGraph.AttachEventHandlers
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.BaseTripleCollection
+    name: BaseTripleCollection
+    nameWithType: BaseTripleCollection
+    fullName: VDS.RDF.BaseTripleCollection
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.AttachEventHandlers(VDS.RDF.BaseTripleCollection)
+    name: AttachEventHandlers
+    nameWithType: BaseGraph.AttachEventHandlers
+    fullName: VDS.RDF.BaseGraph.AttachEventHandlers
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.BaseTripleCollection
+    name: BaseTripleCollection
+    nameWithType: BaseTripleCollection
+    fullName: VDS.RDF.BaseTripleCollection
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.DetachEventHandlers(VDS.RDF.BaseTripleCollection)
+  commentId: M:VDS.RDF.BaseGraph.DetachEventHandlers(VDS.RDF.BaseTripleCollection)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: DetachEventHandlers(BaseTripleCollection)
+  nameWithType: BaseGraph.DetachEventHandlers(BaseTripleCollection)
+  fullName: VDS.RDF.BaseGraph.DetachEventHandlers(VDS.RDF.BaseTripleCollection)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.DetachEventHandlers(VDS.RDF.BaseTripleCollection)
+    name: DetachEventHandlers
+    nameWithType: BaseGraph.DetachEventHandlers
+    fullName: VDS.RDF.BaseGraph.DetachEventHandlers
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.BaseTripleCollection
+    name: BaseTripleCollection
+    nameWithType: BaseTripleCollection
+    fullName: VDS.RDF.BaseTripleCollection
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.DetachEventHandlers(VDS.RDF.BaseTripleCollection)
+    name: DetachEventHandlers
+    nameWithType: BaseGraph.DetachEventHandlers
+    fullName: VDS.RDF.BaseGraph.DetachEventHandlers
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.BaseTripleCollection
+    name: BaseTripleCollection
+    nameWithType: BaseTripleCollection
+    fullName: VDS.RDF.BaseTripleCollection
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.Dispose
+  commentId: M:VDS.RDF.BaseGraph.Dispose
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: Dispose()
+  nameWithType: BaseGraph.Dispose()
+  fullName: VDS.RDF.BaseGraph.Dispose()
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.Dispose
+    name: Dispose
+    nameWithType: BaseGraph.Dispose
+    fullName: VDS.RDF.BaseGraph.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.Dispose
+    name: Dispose
+    nameWithType: BaseGraph.Dispose
+    fullName: VDS.RDF.BaseGraph.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  commentId: M:VDS.RDF.BaseGraph.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: GetObjectData(SerializationInfo, StreamingContext)
+  nameWithType: BaseGraph.GetObjectData(SerializationInfo, StreamingContext)
+  fullName: VDS.RDF.BaseGraph.GetObjectData(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+    name: GetObjectData
+    nameWithType: BaseGraph.GetObjectData
+    fullName: VDS.RDF.BaseGraph.GetObjectData
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Runtime.Serialization.SerializationInfo
+    name: SerializationInfo
+    nameWithType: SerializationInfo
+    fullName: System.Runtime.Serialization.SerializationInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Runtime.Serialization.StreamingContext
+    name: StreamingContext
+    nameWithType: StreamingContext
+    fullName: System.Runtime.Serialization.StreamingContext
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+    name: GetObjectData
+    nameWithType: BaseGraph.GetObjectData
+    fullName: VDS.RDF.BaseGraph.GetObjectData
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Runtime.Serialization.SerializationInfo
+    name: SerializationInfo
+    nameWithType: SerializationInfo
+    fullName: System.Runtime.Serialization.SerializationInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Runtime.Serialization.StreamingContext
+    name: StreamingContext
+    nameWithType: StreamingContext
+    fullName: System.Runtime.Serialization.StreamingContext
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.GetSchema
+  commentId: M:VDS.RDF.BaseGraph.GetSchema
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: GetSchema()
+  nameWithType: BaseGraph.GetSchema()
+  fullName: VDS.RDF.BaseGraph.GetSchema()
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.GetSchema
+    name: GetSchema
+    nameWithType: BaseGraph.GetSchema
+    fullName: VDS.RDF.BaseGraph.GetSchema
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.GetSchema
+    name: GetSchema
+    nameWithType: BaseGraph.GetSchema
+    fullName: VDS.RDF.BaseGraph.GetSchema
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.ReadXml(System.Xml.XmlReader)
+  commentId: M:VDS.RDF.BaseGraph.ReadXml(System.Xml.XmlReader)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: ReadXml(XmlReader)
+  nameWithType: BaseGraph.ReadXml(XmlReader)
+  fullName: VDS.RDF.BaseGraph.ReadXml(System.Xml.XmlReader)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.ReadXml(System.Xml.XmlReader)
+    name: ReadXml
+    nameWithType: BaseGraph.ReadXml
+    fullName: VDS.RDF.BaseGraph.ReadXml
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.ReadXml(System.Xml.XmlReader)
+    name: ReadXml
+    nameWithType: BaseGraph.ReadXml
+    fullName: VDS.RDF.BaseGraph.ReadXml
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.WriteXml(System.Xml.XmlWriter)
+  commentId: M:VDS.RDF.BaseGraph.WriteXml(System.Xml.XmlWriter)
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: WriteXml(XmlWriter)
+  nameWithType: BaseGraph.WriteXml(XmlWriter)
+  fullName: VDS.RDF.BaseGraph.WriteXml(System.Xml.XmlWriter)
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.WriteXml(System.Xml.XmlWriter)
+    name: WriteXml
+    nameWithType: BaseGraph.WriteXml
+    fullName: VDS.RDF.BaseGraph.WriteXml
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.WriteXml(System.Xml.XmlWriter)
+    name: WriteXml
+    nameWithType: BaseGraph.WriteXml
+    fullName: VDS.RDF.BaseGraph.WriteXml
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.BaseGraph.Triples
+  commentId: P:VDS.RDF.BaseGraph.Triples
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: Triples
+  nameWithType: BaseGraph.Triples
+  fullName: VDS.RDF.BaseGraph.Triples
+- uid: VDS.RDF.BaseGraph.Nodes
+  commentId: P:VDS.RDF.BaseGraph.Nodes
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: Nodes
+  nameWithType: BaseGraph.Nodes
+  fullName: VDS.RDF.BaseGraph.Nodes
+- uid: VDS.RDF.BaseGraph.AllNodes
+  commentId: P:VDS.RDF.BaseGraph.AllNodes
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: AllNodes
+  nameWithType: BaseGraph.AllNodes
+  fullName: VDS.RDF.BaseGraph.AllNodes
+- uid: VDS.RDF.BaseGraph.NamespaceMap
+  commentId: P:VDS.RDF.BaseGraph.NamespaceMap
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: NamespaceMap
+  nameWithType: BaseGraph.NamespaceMap
+  fullName: VDS.RDF.BaseGraph.NamespaceMap
+- uid: VDS.RDF.BaseGraph.BaseUri
+  commentId: P:VDS.RDF.BaseGraph.BaseUri
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: BaseUri
+  nameWithType: BaseGraph.BaseUri
+  fullName: VDS.RDF.BaseGraph.BaseUri
+- uid: VDS.RDF.BaseGraph.IsEmpty
+  commentId: P:VDS.RDF.BaseGraph.IsEmpty
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: IsEmpty
+  nameWithType: BaseGraph.IsEmpty
+  fullName: VDS.RDF.BaseGraph.IsEmpty
+- uid: VDS.RDF.BaseGraph.TripleAsserted
+  commentId: E:VDS.RDF.BaseGraph.TripleAsserted
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: TripleAsserted
+  nameWithType: BaseGraph.TripleAsserted
+  fullName: VDS.RDF.BaseGraph.TripleAsserted
+- uid: VDS.RDF.BaseGraph.TripleRetracted
+  commentId: E:VDS.RDF.BaseGraph.TripleRetracted
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: TripleRetracted
+  nameWithType: BaseGraph.TripleRetracted
+  fullName: VDS.RDF.BaseGraph.TripleRetracted
+- uid: VDS.RDF.BaseGraph.Changed
+  commentId: E:VDS.RDF.BaseGraph.Changed
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: Changed
+  nameWithType: BaseGraph.Changed
+  fullName: VDS.RDF.BaseGraph.Changed
+- uid: VDS.RDF.BaseGraph.ClearRequested
+  commentId: E:VDS.RDF.BaseGraph.ClearRequested
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: ClearRequested
+  nameWithType: BaseGraph.ClearRequested
+  fullName: VDS.RDF.BaseGraph.ClearRequested
+- uid: VDS.RDF.BaseGraph.Cleared
+  commentId: E:VDS.RDF.BaseGraph.Cleared
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: Cleared
+  nameWithType: BaseGraph.Cleared
+  fullName: VDS.RDF.BaseGraph.Cleared
+- uid: VDS.RDF.BaseGraph.MergeRequested
+  commentId: E:VDS.RDF.BaseGraph.MergeRequested
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: MergeRequested
+  nameWithType: BaseGraph.MergeRequested
+  fullName: VDS.RDF.BaseGraph.MergeRequested
+- uid: VDS.RDF.BaseGraph.Merged
+  commentId: E:VDS.RDF.BaseGraph.Merged
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: Merged
+  nameWithType: BaseGraph.Merged
+  fullName: VDS.RDF.BaseGraph.Merged
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Xml.Serialization
+  commentId: N:System.Xml.Serialization
+  isExternal: true
+  name: System.Xml.Serialization
+  nameWithType: System.Xml.Serialization
+  fullName: System.Xml.Serialization
+- uid: System.Runtime.Serialization
+  commentId: N:System.Runtime.Serialization
+  isExternal: true
+  name: System.Runtime.Serialization
+  nameWithType: System.Runtime.Serialization
+  fullName: System.Runtime.Serialization
+- uid: VDS.RDF.RohGraph.#ctor*
+  commentId: Overload:VDS.RDF.RohGraph.#ctor
+  name: RohGraph
+  nameWithType: RohGraph.RohGraph
+  fullName: VDS.RDF.RohGraph.RohGraph
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: VDS.RDF.BaseTripleCollection
+  commentId: T:VDS.RDF.BaseTripleCollection
+  parent: VDS.RDF
+  isExternal: true
+  name: BaseTripleCollection
+  nameWithType: BaseTripleCollection
+  fullName: VDS.RDF.BaseTripleCollection
+- uid: VDS.RDF.BaseGraph.GetNextBlankNodeID
+  commentId: M:VDS.RDF.BaseGraph.GetNextBlankNodeID
+  parent: VDS.RDF.BaseGraph
+  isExternal: true
+  name: GetNextBlankNodeID()
+  nameWithType: BaseGraph.GetNextBlankNodeID()
+  fullName: VDS.RDF.BaseGraph.GetNextBlankNodeID()
+  spec.csharp:
+  - uid: VDS.RDF.BaseGraph.GetNextBlankNodeID
+    name: GetNextBlankNodeID
+    nameWithType: BaseGraph.GetNextBlankNodeID
+    fullName: VDS.RDF.BaseGraph.GetNextBlankNodeID
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.BaseGraph.GetNextBlankNodeID
+    name: GetNextBlankNodeID
+    nameWithType: BaseGraph.GetNextBlankNodeID
+    fullName: VDS.RDF.BaseGraph.GetNextBlankNodeID
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.RohGraph.GetNextBlankNodeID*
+  commentId: Overload:VDS.RDF.RohGraph.GetNextBlankNodeID
+  name: GetNextBlankNodeID
+  nameWithType: RohGraph.GetNextBlankNodeID
+  fullName: VDS.RDF.RohGraph.GetNextBlankNodeID
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: VDS.RDF.RohGraph.Clone*
+  commentId: Overload:VDS.RDF.RohGraph.Clone
+  name: Clone
+  nameWithType: RohGraph.Clone
+  fullName: VDS.RDF.RohGraph.Clone
+- uid: VDS.RDF.RohGraph
+  commentId: T:VDS.RDF.RohGraph
+  parent: VDS.RDF
+  name: RohGraph
+  nameWithType: RohGraph
+  fullName: VDS.RDF.RohGraph

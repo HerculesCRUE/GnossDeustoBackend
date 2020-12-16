@@ -1,0 +1,278 @@
+### YamlMime:TableOfContent
+- uid: API_DISCOVER
+  name: API_DISCOVER
+  items:
+  - uid: API_DISCOVER.Program
+    name: Program
+  - uid: API_DISCOVER.Worker
+    name: Worker
+- uid: API_DISCOVER.Extra.Exceptions
+  name: API_DISCOVER.Extra.Exceptions
+  items:
+  - uid: API_DISCOVER.Extra.Exceptions.BadRequestException
+    name: BadRequestException
+  - uid: API_DISCOVER.Extra.Exceptions.ValidationException
+    name: ValidationException
+- uid: API_DISCOVER.Models
+  name: API_DISCOVER.Models
+  items:
+  - uid: API_DISCOVER.Models.EntityContext
+    name: EntityContext
+- uid: API_DISCOVER.Models.Entities
+  name: API_DISCOVER.Models.Entities
+  items:
+  - uid: API_DISCOVER.Models.Entities.Disambiguation
+    name: Disambiguation
+  - uid: API_DISCOVER.Models.Entities.Disambiguation.Property
+    name: Disambiguation.Property
+  - uid: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+    name: Disambiguation.Property.Type
+  - uid: API_DISCOVER.Models.Entities.DisambiguationData
+    name: DisambiguationData
+  - uid: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty
+    name: DisambiguationData.DataProperty
+  - uid: API_DISCOVER.Models.Entities.DiscoverCache
+    name: DiscoverCache
+  - uid: API_DISCOVER.Models.Entities.DiscoverItem
+    name: DiscoverItem
+  - uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscardDissambiguation
+    name: DiscoverItem.DiscardDissambiguation
+  - uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverDissambiguation
+    name: DiscoverItem.DiscoverDissambiguation
+  - uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate
+    name: DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate
+  - uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus
+    name: DiscoverItem.DiscoverItemStatus
+  - uid: API_DISCOVER.Models.Entities.DiscoverResult
+    name: DiscoverResult
+  - uid: API_DISCOVER.Models.Entities.ProcessDiscoverStateJob
+    name: ProcessDiscoverStateJob
+  - uid: API_DISCOVER.Models.Entities.RabbitMQInfo
+    name: RabbitMQInfo
+  - uid: API_DISCOVER.Models.Entities.SparqlObject
+    name: SparqlObject
+  - uid: API_DISCOVER.Models.Entities.SparqlObject.Data
+    name: SparqlObject.Data
+  - uid: API_DISCOVER.Models.Entities.SparqlObject.Head
+    name: SparqlObject.Head
+  - uid: API_DISCOVER.Models.Entities.SparqlObject.Results
+    name: SparqlObject.Results
+  - uid: API_DISCOVER.Models.Entities.TokenBearer
+    name: TokenBearer
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs
+  name: API_DISCOVER.Models.Entities.ExternalAPIs
+  items:
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.Author
+    name: Author
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.authorretrievalresponseCoredata
+    name: authorretrievalresponseCoredata
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.Bibjson
+    name: Bibjson
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_API
+    name: CROSSREF_API
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_Works
+    name: CROSSREF_Works
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.DBLP_API
+    name: DBLP_API
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.DBLPAuthors
+    name: DBLPAuthors
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.DBLPPerson
+    name: DBLPPerson
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.dblppersonPerson
+    name: dblppersonPerson
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.dblppersonR
+    name: dblppersonR
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.dblppersonRDocument
+    name: dblppersonRDocument
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.DOAJ_API
+    name: DOAJ_API
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.DoajAuthor
+    name: DoajAuthor
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.DOAJWorks
+    name: DOAJWorks
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.EnvelopeBody
+    name: EnvelopeBody
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.eSearchResult
+    name: eSearchResult
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.Identifier
+    name: Identifier
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.Item
+    name: Item
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.Message
+    name: Message
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCID_API
+    name: ORCID_API
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDExpandedSearch
+    name: ORCIDExpandedSearch
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDExpandedSearch.Result
+    name: ORCIDExpandedSearch.Result
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDPerson
+    name: ORCIDPerson
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDPerson.ExternalIdentifiers
+    name: ORCIDPerson.ExternalIdentifiers
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDPerson.ExternalIdentifiers.ExternalIdentifier
+    name: ORCIDPerson.ExternalIdentifiers.ExternalIdentifier
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks
+    name: ORCIDWorks
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group
+    name: ORCIDWorks.Group
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary
+    name: ORCIDWorks.Group.WorkSummary
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.Externalids
+    name: ORCIDWorks.Group.WorkSummary.Externalids
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.Externalids.Externalid
+    name: ORCIDWorks.Group.WorkSummary.Externalids.Externalid
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.Title
+    name: ORCIDWorks.Group.WorkSummary.Title
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.Title.Title2
+    name: ORCIDWorks.Group.WorkSummary.Title.Title2
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.PUBMED_API
+    name: PUBMED_API
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSet
+    name: PubmedArticleSet
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSetPubmedArticle
+    name: PubmedArticleSetPubmedArticle
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSetPubmedArticleMedlineCitation
+    name: PubmedArticleSetPubmedArticleMedlineCitation
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSetPubmedArticleMedlineCitationArticle
+    name: PubmedArticleSetPubmedArticleMedlineCitationArticle
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSetPubmedArticleMedlineCitationArticleArticleTitle
+    name: PubmedArticleSetPubmedArticleMedlineCitationArticleArticleTitle
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSetPubmedArticleMedlineCitationArticleAuthorList
+    name: PubmedArticleSetPubmedArticleMedlineCitationArticleAuthorList
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSetPubmedArticleMedlineCitationArticleAuthorListAuthor
+    name: PubmedArticleSetPubmedArticleMedlineCitationArticleAuthorListAuthor
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSetPubmedArticleMedlineCitationArticleAuthorListAuthorIdentifier
+    name: PubmedArticleSetPubmedArticleMedlineCitationArticleAuthorListAuthorIdentifier
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSetPubmedArticleMedlineCitationArticleELocationID
+    name: PubmedArticleSetPubmedArticleMedlineCitationArticleELocationID
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.RECOLECTA_API
+    name: RECOLECTA_API
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument
+    name: RecolectaDocument
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.recordsREC
+    name: recordsREC
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.recordsRECDynamic_data
+    name: recordsRECDynamic_data
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.recordsRECDynamic_dataCluster_related
+    name: recordsRECDynamic_dataCluster_related
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.recordsRECDynamic_dataCluster_relatedIdentifier
+    name: recordsRECDynamic_dataCluster_relatedIdentifier
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.recordsRECStatic_data
+    name: recordsRECStatic_data
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.recordsRECStatic_dataContributors
+    name: recordsRECStatic_dataContributors
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.recordsRECStatic_dataContributorsContributor
+    name: recordsRECStatic_dataContributorsContributor
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.recordsRECStatic_dataContributorsContributorName
+    name: recordsRECStatic_dataContributorsContributorName
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.recordsRECStatic_dataSummary
+    name: recordsRECStatic_dataSummary
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.recordsRECStatic_dataSummaryNames
+    name: recordsRECStatic_dataSummaryNames
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.recordsRECStatic_dataSummaryNamesName
+    name: recordsRECStatic_dataSummaryNamesName
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.recordsRECStatic_dataSummaryTitles
+    name: recordsRECStatic_dataSummaryTitles
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.recordsRECStatic_dataSummaryTitlesTitle
+    name: recordsRECStatic_dataSummaryTitlesTitle
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.Result
+    name: Result
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.resultHits
+    name: resultHits
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.resultHitsHit
+    name: resultHitsHit
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.resultHitsHitInfo
+    name: resultHitsHitInfo
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.return
+    name: return
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.returnRecords
+    name: returnRecords
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUS_API
+    name: SCOPUS_API
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSPerson
+    name: SCOPUSPerson
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSWorks
+    name: SCOPUSWorks
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.searchResponse
+    name: searchResponse
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.Work
+    name: Work
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.WorkAuthor
+    name: WorkAuthor
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.WOS_API
+    name: WOS_API
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.WOSWorks
+    name: WOSWorks
+- uid: API_DISCOVER.Models.Log
+  name: API_DISCOVER.Models.Log
+  items:
+  - uid: API_DISCOVER.Models.Log.Log
+    name: Log
+- uid: API_DISCOVER.Models.Services
+  name: API_DISCOVER.Models.Services
+  items:
+  - uid: API_DISCOVER.Models.Services.CallCronApiService
+    name: CallCronApiService
+  - uid: API_DISCOVER.Models.Services.CallEtlApiService
+    name: CallEtlApiService
+  - uid: API_DISCOVER.Models.Services.CallTokenService
+    name: CallTokenService
+  - uid: API_DISCOVER.Models.Services.ConfigCrossref
+    name: ConfigCrossref
+  - uid: API_DISCOVER.Models.Services.ConfigScopus
+    name: ConfigScopus
+  - uid: API_DISCOVER.Models.Services.ConfigService
+    name: ConfigService
+  - uid: API_DISCOVER.Models.Services.ConfigSparql
+    name: ConfigSparql
+  - uid: API_DISCOVER.Models.Services.ConfigTokenService
+    name: ConfigTokenService
+  - uid: API_DISCOVER.Models.Services.ConfigUrlService
+    name: ConfigUrlService
+  - uid: API_DISCOVER.Models.Services.ConfigWOS
+    name: ConfigWOS
+  - uid: API_DISCOVER.Models.Services.DiscoverItemBDService
+    name: DiscoverItemBDService
+  - uid: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService
+    name: ProcessDiscoverStateJobBDService
+  - uid: API_DISCOVER.Models.Services.RabbitMQService
+    name: RabbitMQService
+  - uid: API_DISCOVER.Models.Services.RabbitMQService.ReceivedDelegate
+    name: RabbitMQService.ReceivedDelegate
+  - uid: API_DISCOVER.Models.Services.RabbitMQService.ShutDownDelegate
+    name: RabbitMQService.ShutDownDelegate
+- uid: API_DISCOVER.Utility
+  name: API_DISCOVER.Utility
+  items:
+  - uid: API_DISCOVER.Utility.AsioPublication
+    name: AsioPublication
+  - uid: API_DISCOVER.Utility.Discover
+    name: Discover
+  - uid: API_DISCOVER.Utility.I_SparqlUtility
+    name: I_SparqlUtility
+  - uid: API_DISCOVER.Utility.SparqlUtility
+    name: SparqlUtility
+  - uid: API_DISCOVER.Utility.SparqlUtilityMock
+    name: SparqlUtilityMock
+- uid: API_DISCOVER.ViewModels
+  name: API_DISCOVER.ViewModels
+  items:
+  - uid: API_DISCOVER.ViewModels.JobViewModel
+    name: JobViewModel
+  - uid: API_DISCOVER.ViewModels.ShapeConfigViewModel
+    name: ShapeConfigViewModel
+  - uid: API_DISCOVER.ViewModels.ShapeReportModel
+    name: ShapeReportModel
+  - uid: API_DISCOVER.ViewModels.ShapeReportModel.Result
+    name: ShapeReportModel.Result
+- uid: VDS.RDF
+  name: VDS.RDF
+  items:
+  - uid: VDS.RDF.RohGraph
+    name: RohGraph
+- uid: VDS.RDF.Query.Inference
+  name: VDS.RDF.Query.Inference
+  items:
+  - uid: VDS.RDF.Query.Inference.RohRdfsReasoner
+    name: RohRdfsReasoner

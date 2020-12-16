@@ -1,0 +1,574 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.ViewModels.ShapeReportModel
+  commentId: T:API_DISCOVER.ViewModels.ShapeReportModel
+  id: ShapeReportModel
+  parent: API_DISCOVER.ViewModels
+  children:
+  - API_DISCOVER.ViewModels.ShapeReportModel.conforms
+  - API_DISCOVER.ViewModels.ShapeReportModel.results
+  - API_DISCOVER.ViewModels.ShapeReportModel.severity
+  langs:
+  - csharp
+  - vb
+  name: ShapeReportModel
+  nameWithType: ShapeReportModel
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/ViewModels/ShapeReportModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ShapeReportModel
+    path: ViewModels/ShapeReportModel.cs
+    startLine: 13
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.ViewModels
+  summary: "\nDatos de reporte de un Shape\n"
+  example: []
+  syntax:
+    content: public class ShapeReportModel
+    content.vb: Public Class ShapeReportModel
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.severity
+  commentId: P:API_DISCOVER.ViewModels.ShapeReportModel.severity
+  id: severity
+  parent: API_DISCOVER.ViewModels.ShapeReportModel
+  langs:
+  - csharp
+  - vb
+  name: severity
+  nameWithType: ShapeReportModel.severity
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.severity
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/ViewModels/ShapeReportModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: severity
+    path: ViewModels/ShapeReportModel.cs
+    startLine: 62
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.ViewModels
+  summary: "\nSeveridad\n"
+  example: []
+  syntax:
+    content: public string severity { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property severity As String
+  overload: API_DISCOVER.ViewModels.ShapeReportModel.severity*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.conforms
+  commentId: P:API_DISCOVER.ViewModels.ShapeReportModel.conforms
+  id: conforms
+  parent: API_DISCOVER.ViewModels.ShapeReportModel
+  langs:
+  - csharp
+  - vb
+  name: conforms
+  nameWithType: ShapeReportModel.conforms
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.conforms
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/ViewModels/ShapeReportModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: conforms
+    path: ViewModels/ShapeReportModel.cs
+    startLine: 67
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.ViewModels
+  summary: "\nIndica si no se incumple ninguna restricción\n"
+  example: []
+  syntax:
+    content: public bool conforms { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property conforms As Boolean
+  overload: API_DISCOVER.ViewModels.ShapeReportModel.conforms*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.results
+  commentId: P:API_DISCOVER.ViewModels.ShapeReportModel.results
+  id: results
+  parent: API_DISCOVER.ViewModels.ShapeReportModel
+  langs:
+  - csharp
+  - vb
+  name: results
+  nameWithType: ShapeReportModel.results
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.results
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/ViewModels/ShapeReportModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: results
+    path: ViewModels/ShapeReportModel.cs
+    startLine: 72
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.ViewModels
+  summary: "\nLista con las validaciones que no han pasado\n"
+  example: []
+  syntax:
+    content: public List<ShapeReportModel.Result> results { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{API_DISCOVER.ViewModels.ShapeReportModel.Result}
+    content.vb: Public Property results As List(Of ShapeReportModel.Result)
+  overload: API_DISCOVER.ViewModels.ShapeReportModel.results*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.ViewModels
+  commentId: N:API_DISCOVER.ViewModels
+  name: API_DISCOVER.ViewModels
+  nameWithType: API_DISCOVER.ViewModels
+  fullName: API_DISCOVER.ViewModels
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.severity*
+  commentId: Overload:API_DISCOVER.ViewModels.ShapeReportModel.severity
+  name: severity
+  nameWithType: ShapeReportModel.severity
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.severity
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.conforms*
+  commentId: Overload:API_DISCOVER.ViewModels.ShapeReportModel.conforms
+  name: conforms
+  nameWithType: ShapeReportModel.conforms
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.conforms
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.results*
+  commentId: Overload:API_DISCOVER.ViewModels.ShapeReportModel.results
+  name: results
+  nameWithType: ShapeReportModel.results
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.results
+- uid: System.Collections.Generic.List{API_DISCOVER.ViewModels.ShapeReportModel.Result}
+  commentId: T:System.Collections.Generic.List{API_DISCOVER.ViewModels.ShapeReportModel.Result}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<ShapeReportModel.Result>
+  nameWithType: List<ShapeReportModel.Result>
+  fullName: System.Collections.Generic.List<API_DISCOVER.ViewModels.ShapeReportModel.Result>
+  nameWithType.vb: List(Of ShapeReportModel.Result)
+  fullName.vb: System.Collections.Generic.List(Of API_DISCOVER.ViewModels.ShapeReportModel.Result)
+  name.vb: List(Of ShapeReportModel.Result)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: API_DISCOVER.ViewModels.ShapeReportModel.Result
+    name: ShapeReportModel.Result
+    nameWithType: ShapeReportModel.Result
+    fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: API_DISCOVER.ViewModels.ShapeReportModel.Result
+    name: ShapeReportModel.Result
+    nameWithType: ShapeReportModel.Result
+    fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic

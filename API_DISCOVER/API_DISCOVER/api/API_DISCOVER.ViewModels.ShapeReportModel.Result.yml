@@ -1,0 +1,700 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result
+  commentId: T:API_DISCOVER.ViewModels.ShapeReportModel.Result
+  id: ShapeReportModel.Result
+  parent: API_DISCOVER.ViewModels
+  children:
+  - API_DISCOVER.ViewModels.ShapeReportModel.Result.focusNode
+  - API_DISCOVER.ViewModels.ShapeReportModel.Result.message
+  - API_DISCOVER.ViewModels.ShapeReportModel.Result.resultPath
+  - API_DISCOVER.ViewModels.ShapeReportModel.Result.resultValue
+  - API_DISCOVER.ViewModels.ShapeReportModel.Result.severity
+  - API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeID
+  - API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeName
+  - API_DISCOVER.ViewModels.ShapeReportModel.Result.sourceShape
+  langs:
+  - csharp
+  - vb
+  name: ShapeReportModel.Result
+  nameWithType: ShapeReportModel.Result
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/ViewModels/ShapeReportModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Result
+    path: ViewModels/ShapeReportModel.cs
+    startLine: 16
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.ViewModels
+  syntax:
+    content: public class Result
+    content.vb: Public Class Result
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.severity
+  commentId: P:API_DISCOVER.ViewModels.ShapeReportModel.Result.severity
+  id: severity
+  parent: API_DISCOVER.ViewModels.ShapeReportModel.Result
+  langs:
+  - csharp
+  - vb
+  name: severity
+  nameWithType: ShapeReportModel.Result.severity
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.severity
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/ViewModels/ShapeReportModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: severity
+    path: ViewModels/ShapeReportModel.cs
+    startLine: 21
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.ViewModels
+  summary: "\nSeveridad\n"
+  example: []
+  syntax:
+    content: public string severity { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property severity As String
+  overload: API_DISCOVER.ViewModels.ShapeReportModel.Result.severity*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.focusNode
+  commentId: P:API_DISCOVER.ViewModels.ShapeReportModel.Result.focusNode
+  id: focusNode
+  parent: API_DISCOVER.ViewModels.ShapeReportModel.Result
+  langs:
+  - csharp
+  - vb
+  name: focusNode
+  nameWithType: ShapeReportModel.Result.focusNode
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.focusNode
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/ViewModels/ShapeReportModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: focusNode
+    path: ViewModels/ShapeReportModel.cs
+    startLine: 26
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.ViewModels
+  summary: "\nNodo \n"
+  example: []
+  syntax:
+    content: public string focusNode { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property focusNode As String
+  overload: API_DISCOVER.ViewModels.ShapeReportModel.Result.focusNode*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.resultValue
+  commentId: P:API_DISCOVER.ViewModels.ShapeReportModel.Result.resultValue
+  id: resultValue
+  parent: API_DISCOVER.ViewModels.ShapeReportModel.Result
+  langs:
+  - csharp
+  - vb
+  name: resultValue
+  nameWithType: ShapeReportModel.Result.resultValue
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.resultValue
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/ViewModels/ShapeReportModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: resultValue
+    path: ViewModels/ShapeReportModel.cs
+    startLine: 31
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.ViewModels
+  summary: "\nResultado\n"
+  example: []
+  syntax:
+    content: public string resultValue { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property resultValue As String
+  overload: API_DISCOVER.ViewModels.ShapeReportModel.Result.resultValue*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.message
+  commentId: P:API_DISCOVER.ViewModels.ShapeReportModel.Result.message
+  id: message
+  parent: API_DISCOVER.ViewModels.ShapeReportModel.Result
+  langs:
+  - csharp
+  - vb
+  name: message
+  nameWithType: ShapeReportModel.Result.message
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.message
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/ViewModels/ShapeReportModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: message
+    path: ViewModels/ShapeReportModel.cs
+    startLine: 36
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.ViewModels
+  summary: "\nMensaje de error\n"
+  example: []
+  syntax:
+    content: public string message { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property message As String
+  overload: API_DISCOVER.ViewModels.ShapeReportModel.Result.message*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.resultPath
+  commentId: P:API_DISCOVER.ViewModels.ShapeReportModel.Result.resultPath
+  id: resultPath
+  parent: API_DISCOVER.ViewModels.ShapeReportModel.Result
+  langs:
+  - csharp
+  - vb
+  name: resultPath
+  nameWithType: ShapeReportModel.Result.resultPath
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.resultPath
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/ViewModels/ShapeReportModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: resultPath
+    path: ViewModels/ShapeReportModel.cs
+    startLine: 41
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.ViewModels
+  summary: "\nPath del resultado\n"
+  example: []
+  syntax:
+    content: public string resultPath { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property resultPath As String
+  overload: API_DISCOVER.ViewModels.ShapeReportModel.Result.resultPath*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeName
+  commentId: P:API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeName
+  id: shapeName
+  parent: API_DISCOVER.ViewModels.ShapeReportModel.Result
+  langs:
+  - csharp
+  - vb
+  name: shapeName
+  nameWithType: ShapeReportModel.Result.shapeName
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeName
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/ViewModels/ShapeReportModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: shapeName
+    path: ViewModels/ShapeReportModel.cs
+    startLine: 46
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.ViewModels
+  summary: "\nNombre del Shape\n"
+  example: []
+  syntax:
+    content: public string shapeName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property shapeName As String
+  overload: API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeName*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.sourceShape
+  commentId: P:API_DISCOVER.ViewModels.ShapeReportModel.Result.sourceShape
+  id: sourceShape
+  parent: API_DISCOVER.ViewModels.ShapeReportModel.Result
+  langs:
+  - csharp
+  - vb
+  name: sourceShape
+  nameWithType: ShapeReportModel.Result.sourceShape
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.sourceShape
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/ViewModels/ShapeReportModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: sourceShape
+    path: ViewModels/ShapeReportModel.cs
+    startLine: 51
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.ViewModels
+  summary: "\nIdentificador del shape SHACL\n"
+  example: []
+  syntax:
+    content: public string sourceShape { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property sourceShape As String
+  overload: API_DISCOVER.ViewModels.ShapeReportModel.Result.sourceShape*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeID
+  commentId: P:API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeID
+  id: shapeID
+  parent: API_DISCOVER.ViewModels.ShapeReportModel.Result
+  langs:
+  - csharp
+  - vb
+  name: shapeID
+  nameWithType: ShapeReportModel.Result.shapeID
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeID
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/ViewModels/ShapeReportModel.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: shapeID
+    path: ViewModels/ShapeReportModel.cs
+    startLine: 56
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.ViewModels
+  summary: "\nIdentificador de la configuración del Shape configurado\n"
+  example: []
+  syntax:
+    content: public Guid shapeID { get; set; }
+    parameters: []
+    return:
+      type: System.Guid
+    content.vb: Public Property shapeID As Guid
+  overload: API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeID*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.ViewModels
+  commentId: N:API_DISCOVER.ViewModels
+  name: API_DISCOVER.ViewModels
+  nameWithType: API_DISCOVER.ViewModels
+  fullName: API_DISCOVER.ViewModels
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.severity*
+  commentId: Overload:API_DISCOVER.ViewModels.ShapeReportModel.Result.severity
+  name: severity
+  nameWithType: ShapeReportModel.Result.severity
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.severity
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.focusNode*
+  commentId: Overload:API_DISCOVER.ViewModels.ShapeReportModel.Result.focusNode
+  name: focusNode
+  nameWithType: ShapeReportModel.Result.focusNode
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.focusNode
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.resultValue*
+  commentId: Overload:API_DISCOVER.ViewModels.ShapeReportModel.Result.resultValue
+  name: resultValue
+  nameWithType: ShapeReportModel.Result.resultValue
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.resultValue
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.message*
+  commentId: Overload:API_DISCOVER.ViewModels.ShapeReportModel.Result.message
+  name: message
+  nameWithType: ShapeReportModel.Result.message
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.message
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.resultPath*
+  commentId: Overload:API_DISCOVER.ViewModels.ShapeReportModel.Result.resultPath
+  name: resultPath
+  nameWithType: ShapeReportModel.Result.resultPath
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.resultPath
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeName*
+  commentId: Overload:API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeName
+  name: shapeName
+  nameWithType: ShapeReportModel.Result.shapeName
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeName
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.sourceShape*
+  commentId: Overload:API_DISCOVER.ViewModels.ShapeReportModel.Result.sourceShape
+  name: sourceShape
+  nameWithType: ShapeReportModel.Result.sourceShape
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.sourceShape
+- uid: API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeID*
+  commentId: Overload:API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeID
+  name: shapeID
+  nameWithType: ShapeReportModel.Result.shapeID
+  fullName: API_DISCOVER.ViewModels.ShapeReportModel.Result.shapeID
+- uid: System.Guid
+  commentId: T:System.Guid
+  parent: System
+  isExternal: true
+  name: Guid
+  nameWithType: Guid
+  fullName: System.Guid

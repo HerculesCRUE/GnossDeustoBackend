@@ -1,0 +1,598 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Work
+  commentId: T:API_DISCOVER.Models.Entities.ExternalAPIs.Work
+  id: Work
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs
+  children:
+  - API_DISCOVER.Models.Entities.ExternalAPIs.Work.author
+  - API_DISCOVER.Models.Entities.ExternalAPIs.Work.doi
+  - API_DISCOVER.Models.Entities.ExternalAPIs.Work.error
+  - API_DISCOVER.Models.Entities.ExternalAPIs.Work.identifier
+  - API_DISCOVER.Models.Entities.ExternalAPIs.Work.title
+  langs:
+  - csharp
+  - vb
+  name: Work
+  nameWithType: Work
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Work
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/SCOPUS_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Work
+    path: Models/Entities/ExternalAPIs/SCOPUS_API.cs
+    startLine: 73
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  remarks: ''
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class Work
+    content.vb: >-
+      <Serializable>
+
+      Public Class Work
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Work.identifier
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.Work.identifier
+  id: identifier
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.Work
+  langs:
+  - csharp
+  - vb
+  name: identifier
+  nameWithType: Work.identifier
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Work.identifier
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/SCOPUS_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: identifier
+    path: Models/Entities/ExternalAPIs/SCOPUS_API.cs
+    startLine: 79
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  remarks: ''
+  example: []
+  syntax:
+    content: public string identifier { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property identifier As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.Work.identifier*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Work.title
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.Work.title
+  id: title
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.Work
+  langs:
+  - csharp
+  - vb
+  name: title
+  nameWithType: Work.title
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Work.title
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/SCOPUS_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: title
+    path: Models/Entities/ExternalAPIs/SCOPUS_API.cs
+    startLine: 86
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  remarks: ''
+  example: []
+  syntax:
+    content: public string title { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property title As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.Work.title*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Work.doi
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.Work.doi
+  id: doi
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.Work
+  langs:
+  - csharp
+  - vb
+  name: doi
+  nameWithType: Work.doi
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Work.doi
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/SCOPUS_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: doi
+    path: Models/Entities/ExternalAPIs/SCOPUS_API.cs
+    startLine: 93
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  remarks: ''
+  example: []
+  syntax:
+    content: public string doi { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property doi As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.Work.doi*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Work.author
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.Work.author
+  id: author
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.Work
+  langs:
+  - csharp
+  - vb
+  name: author
+  nameWithType: Work.author
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Work.author
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/SCOPUS_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: author
+    path: Models/Entities/ExternalAPIs/SCOPUS_API.cs
+    startLine: 100
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  remarks: ''
+  example: []
+  syntax:
+    content: public WorkAuthor[] author { get; set; }
+    parameters: []
+    return:
+      type: API_DISCOVER.Models.Entities.ExternalAPIs.WorkAuthor[]
+    content.vb: Public Property author As WorkAuthor()
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.Work.author*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Work.error
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.Work.error
+  id: error
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.Work
+  langs:
+  - csharp
+  - vb
+  name: error
+  nameWithType: Work.error
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Work.error
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/SCOPUS_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: error
+    path: Models/Entities/ExternalAPIs/SCOPUS_API.cs
+    startLine: 107
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public string error { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property error As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.Work.error*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs
+  commentId: N:API_DISCOVER.Models.Entities.ExternalAPIs
+  name: API_DISCOVER.Models.Entities.ExternalAPIs
+  nameWithType: API_DISCOVER.Models.Entities.ExternalAPIs
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Work.identifier*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.Work.identifier
+  name: identifier
+  nameWithType: Work.identifier
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Work.identifier
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Work.title*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.Work.title
+  name: title
+  nameWithType: Work.title
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Work.title
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Work.doi*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.Work.doi
+  name: doi
+  nameWithType: Work.doi
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Work.doi
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Work.author*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.Work.author
+  name: author
+  nameWithType: Work.author
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Work.author
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.WorkAuthor[]
+  isExternal: true
+  name: WorkAuthor[]
+  nameWithType: WorkAuthor[]
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.WorkAuthor[]
+  nameWithType.vb: WorkAuthor()
+  fullName.vb: API_DISCOVER.Models.Entities.ExternalAPIs.WorkAuthor()
+  name.vb: WorkAuthor()
+  spec.csharp:
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.WorkAuthor
+    name: WorkAuthor
+    nameWithType: WorkAuthor
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.WorkAuthor
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.WorkAuthor
+    name: WorkAuthor
+    nameWithType: WorkAuthor
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.WorkAuthor
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.Work.error*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.Work.error
+  name: error
+  nameWithType: Work.error
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.Work.error

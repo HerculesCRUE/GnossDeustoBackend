@@ -1,0 +1,1947 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Utility.Discover
+  commentId: T:API_DISCOVER.Utility.Discover
+  id: Discover
+  parent: API_DISCOVER.Utility
+  children:
+  - API_DISCOVER.Utility.Discover.ExternalIntegration(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}@,VDS.RDF.RohGraph@,VDS.RDF.Query.Inference.RohRdfsReasoner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},VDS.RDF.RohGraph,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Single}}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},API_DISCOVER.Models.Entities.DiscoverCache)
+  - API_DISCOVER.Utility.Discover.GetDisambiguationDataRdf(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},System.Collections.Generic.List{VDS.RDF.Triple})
+  - API_DISCOVER.Utility.Discover.Init(API_DISCOVER.Models.Entities.DiscoverItem,API_DISCOVER.Models.Services.CallEtlApiService)
+  - API_DISCOVER.Utility.Discover.LoadEntitiesDB(System.Collections.Generic.IEnumerable{System.String})
+  - API_DISCOVER.Utility.Discover.LoadNamesScore(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}@,System.Collections.Generic.Dictionary{System.String,System.String},VDS.RDF.RohGraph,API_DISCOVER.Models.Entities.DiscoverCache)
+  - API_DISCOVER.Utility.Discover.LoadPersonWithName
+  - API_DISCOVER.Utility.Discover.mSparqlUtility
+  - API_DISCOVER.Utility.Discover.PrepareData(VDS.RDF.RohGraph,VDS.RDF.Query.Inference.RohRdfsReasoner,VDS.RDF.RohGraph@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}}@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.DisambiguationData}}@,System.Boolean)
+  - API_DISCOVER.Utility.Discover.Process(API_DISCOVER.Models.Entities.DiscoverItem,API_DISCOVER.Models.Entities.DiscoverResult,API_DISCOVER.Models.Services.DiscoverItemBDService,API_DISCOVER.Models.Services.CallCronApiService,API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService)
+  - API_DISCOVER.Utility.Discover.ReconciliateBBDD(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}@,VDS.RDF.RohGraph@,VDS.RDF.Query.Inference.RohRdfsReasoner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},API_DISCOVER.Models.Entities.DiscoverCache)
+  - API_DISCOVER.Utility.Discover.ReconciliateIDs(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.DisambiguationData}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},VDS.RDF.RohGraph@)
+  - API_DISCOVER.Utility.Discover.ReconciliateRDF(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,VDS.RDF.RohGraph@,VDS.RDF.Query.Inference.RohRdfsReasoner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},API_DISCOVER.Models.Entities.DiscoverCache)
+  - API_DISCOVER.Utility.Discover.test
+  langs:
+  - csharp
+  - vb
+  name: Discover
+  nameWithType: Discover
+  fullName: API_DISCOVER.Utility.Discover
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/Discover.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Discover
+    path: Utility/Discover.cs
+    startLine: 26
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  summary: "\nClase para el descubrimiento\n"
+  example: []
+  syntax:
+    content: public static class Discover
+    content.vb: Public Module Discover
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: API_DISCOVER.Utility.Discover.mSparqlUtility
+  commentId: F:API_DISCOVER.Utility.Discover.mSparqlUtility
+  id: mSparqlUtility
+  parent: API_DISCOVER.Utility.Discover
+  langs:
+  - csharp
+  - vb
+  name: mSparqlUtility
+  nameWithType: Discover.mSparqlUtility
+  fullName: API_DISCOVER.Utility.Discover.mSparqlUtility
+  type: Field
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/Discover.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: mSparqlUtility
+    path: Utility/Discover.cs
+    startLine: 43
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  syntax:
+    content: public static I_SparqlUtility mSparqlUtility
+    return:
+      type: API_DISCOVER.Utility.I_SparqlUtility
+    content.vb: Public Shared mSparqlUtility As I_SparqlUtility
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: API_DISCOVER.Utility.Discover.test
+  commentId: F:API_DISCOVER.Utility.Discover.test
+  id: test
+  parent: API_DISCOVER.Utility.Discover
+  langs:
+  - csharp
+  - vb
+  name: test
+  nameWithType: Discover.test
+  fullName: API_DISCOVER.Utility.Discover.test
+  type: Field
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/Discover.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: test
+    path: Utility/Discover.cs
+    startLine: 44
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  syntax:
+    content: public static bool test
+    return:
+      type: System.Boolean
+    content.vb: Public Shared test As Boolean
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: API_DISCOVER.Utility.Discover.Init(API_DISCOVER.Models.Entities.DiscoverItem,API_DISCOVER.Models.Services.CallEtlApiService)
+  commentId: M:API_DISCOVER.Utility.Discover.Init(API_DISCOVER.Models.Entities.DiscoverItem,API_DISCOVER.Models.Services.CallEtlApiService)
+  id: Init(API_DISCOVER.Models.Entities.DiscoverItem,API_DISCOVER.Models.Services.CallEtlApiService)
+  parent: API_DISCOVER.Utility.Discover
+  langs:
+  - csharp
+  - vb
+  name: Init(DiscoverItem, CallEtlApiService)
+  nameWithType: Discover.Init(DiscoverItem, CallEtlApiService)
+  fullName: API_DISCOVER.Utility.Discover.Init(API_DISCOVER.Models.Entities.DiscoverItem, API_DISCOVER.Models.Services.CallEtlApiService)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/Discover.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Init
+    path: Utility/Discover.cs
+    startLine: 55
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  summary: "\nRealiza el desubrimiento sobre un RDF\n"
+  example: []
+  syntax:
+    content: public static DiscoverResult Init(DiscoverItem pDiscoverItem, CallEtlApiService pCallEtlApiService)
+    parameters:
+    - id: pDiscoverItem
+      type: API_DISCOVER.Models.Entities.DiscoverItem
+      description: Item de descubrimiento
+    - id: pCallEtlApiService
+      type: API_DISCOVER.Models.Services.CallEtlApiService
+      description: 'Servicio para hacer llamadas a los métodos del controlador etl del API_CARGA '
+    return:
+      type: API_DISCOVER.Models.Entities.DiscoverResult
+      description: DiscoverResult con los datos del descubrimiento
+    content.vb: Public Shared Function Init(pDiscoverItem As DiscoverItem, pCallEtlApiService As CallEtlApiService) As DiscoverResult
+  overload: API_DISCOVER.Utility.Discover.Init*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: API_DISCOVER.Utility.Discover.Process(API_DISCOVER.Models.Entities.DiscoverItem,API_DISCOVER.Models.Entities.DiscoverResult,API_DISCOVER.Models.Services.DiscoverItemBDService,API_DISCOVER.Models.Services.CallCronApiService,API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService)
+  commentId: M:API_DISCOVER.Utility.Discover.Process(API_DISCOVER.Models.Entities.DiscoverItem,API_DISCOVER.Models.Entities.DiscoverResult,API_DISCOVER.Models.Services.DiscoverItemBDService,API_DISCOVER.Models.Services.CallCronApiService,API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService)
+  id: Process(API_DISCOVER.Models.Entities.DiscoverItem,API_DISCOVER.Models.Entities.DiscoverResult,API_DISCOVER.Models.Services.DiscoverItemBDService,API_DISCOVER.Models.Services.CallCronApiService,API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService)
+  parent: API_DISCOVER.Utility.Discover
+  langs:
+  - csharp
+  - vb
+  name: Process(DiscoverItem, DiscoverResult, DiscoverItemBDService, CallCronApiService, ProcessDiscoverStateJobBDService)
+  nameWithType: Discover.Process(DiscoverItem, DiscoverResult, DiscoverItemBDService, CallCronApiService, ProcessDiscoverStateJobBDService)
+  fullName: API_DISCOVER.Utility.Discover.Process(API_DISCOVER.Models.Entities.DiscoverItem, API_DISCOVER.Models.Entities.DiscoverResult, API_DISCOVER.Models.Services.DiscoverItemBDService, API_DISCOVER.Models.Services.CallCronApiService, API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/Discover.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Process
+    path: Utility/Discover.cs
+    startLine: 212
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  summary: "\nProcesa los resultados del descubrimiento\n"
+  example: []
+  syntax:
+    content: public static void Process(DiscoverItem pDiscoverItem, DiscoverResult pDiscoverResult, DiscoverItemBDService pDiscoverItemBDService, CallCronApiService pCallCronApiService, ProcessDiscoverStateJobBDService pProcessDiscoverStateJobBDService)
+    parameters:
+    - id: pDiscoverItem
+      type: API_DISCOVER.Models.Entities.DiscoverItem
+      description: Objeto con los datos de com procesar el proeso de descubrimiento
+    - id: pDiscoverResult
+      type: API_DISCOVER.Models.Entities.DiscoverResult
+      description: Resultado de la aplicación del descubrimiento
+    - id: pDiscoverItemBDService
+      type: API_DISCOVER.Models.Services.DiscoverItemBDService
+      description: Clase para gestionar las operaciones de las tareas de descubrimiento
+    - id: pCallCronApiService
+      type: API_DISCOVER.Models.Services.CallCronApiService
+      description: Servicio para hacer llamadas a los métodos del apiCron
+    - id: pProcessDiscoverStateJobBDService
+      type: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService
+      description: Clase para gestionar los estados de descubrimiento de las tareas
+    content.vb: Public Shared Sub Process(pDiscoverItem As DiscoverItem, pDiscoverResult As DiscoverResult, pDiscoverItemBDService As DiscoverItemBDService, pCallCronApiService As CallCronApiService, pProcessDiscoverStateJobBDService As ProcessDiscoverStateJobBDService)
+  overload: API_DISCOVER.Utility.Discover.Process*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: API_DISCOVER.Utility.Discover.GetDisambiguationDataRdf(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},System.Collections.Generic.List{VDS.RDF.Triple})
+  commentId: M:API_DISCOVER.Utility.Discover.GetDisambiguationDataRdf(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},System.Collections.Generic.List{VDS.RDF.Triple})
+  id: GetDisambiguationDataRdf(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},System.Collections.Generic.List{VDS.RDF.Triple})
+  parent: API_DISCOVER.Utility.Discover
+  langs:
+  - csharp
+  - vb
+  name: GetDisambiguationDataRdf(Dictionary<String, HashSet<String>>, List<Triple>)
+  nameWithType: Discover.GetDisambiguationDataRdf(Dictionary<String, HashSet<String>>, List<Triple>)
+  fullName: API_DISCOVER.Utility.Discover.GetDisambiguationDataRdf(System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.HashSet<System.String>>, System.Collections.Generic.List<VDS.RDF.Triple>)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/Discover.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetDisambiguationDataRdf
+    path: Utility/Discover.cs
+    startLine: 410
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  summary: "\nObtiene los datos de desambiguación del RDF\n"
+  example: []
+  syntax:
+    content: public static Dictionary<string, List<DisambiguationData>> GetDisambiguationDataRdf(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, List<Triple> pTriples)
+    parameters:
+    - id: pEntitiesRdfTypes
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}}
+      description: Listado con los sujetos y sus rdf:type (con inferencia)
+    - id: pTriples
+      type: System.Collections.Generic.List{VDS.RDF.Triple}
+      description: Lista de triples
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.DisambiguationData}}
+      description: Entidades del RDF con sus datos de desambiguación
+    content.vb: Public Shared Function GetDisambiguationDataRdf(pEntitiesRdfTypes As Dictionary(Of String, HashSet(Of String)), pTriples As List(Of Triple)) As Dictionary(Of String, List(Of DisambiguationData))
+  overload: API_DISCOVER.Utility.Discover.GetDisambiguationDataRdf*
+  nameWithType.vb: Discover.GetDisambiguationDataRdf(Dictionary(Of String, HashSet(Of String)), List(Of Triple))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: API_DISCOVER.Utility.Discover.GetDisambiguationDataRdf(System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.HashSet(Of System.String)), System.Collections.Generic.List(Of VDS.RDF.Triple))
+  name.vb: GetDisambiguationDataRdf(Dictionary(Of String, HashSet(Of String)), List(Of Triple))
+- uid: API_DISCOVER.Utility.Discover.LoadNamesScore(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}@,System.Collections.Generic.Dictionary{System.String,System.String},VDS.RDF.RohGraph,API_DISCOVER.Models.Entities.DiscoverCache)
+  commentId: M:API_DISCOVER.Utility.Discover.LoadNamesScore(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}@,System.Collections.Generic.Dictionary{System.String,System.String},VDS.RDF.RohGraph,API_DISCOVER.Models.Entities.DiscoverCache)
+  id: LoadNamesScore(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}@,System.Collections.Generic.Dictionary{System.String,System.String},VDS.RDF.RohGraph,API_DISCOVER.Models.Entities.DiscoverCache)
+  parent: API_DISCOVER.Utility.Discover
+  langs:
+  - csharp
+  - vb
+  name: LoadNamesScore(ref Dictionary<String, Dictionary<String, Single>>, Dictionary<String, String>, RohGraph, DiscoverCache)
+  nameWithType: Discover.LoadNamesScore(ref Dictionary<String, Dictionary<String, Single>>, Dictionary<String, String>, RohGraph, DiscoverCache)
+  fullName: API_DISCOVER.Utility.Discover.LoadNamesScore(ref System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.Dictionary<System.String, System.Single>>, System.Collections.Generic.Dictionary<System.String, System.String>, VDS.RDF.RohGraph, API_DISCOVER.Models.Entities.DiscoverCache)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/Discover.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: LoadNamesScore
+    path: Utility/Discover.cs
+    startLine: 731
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  summary: "\nCarga los pesos de los nombres del RDF con sus equivalentes en la BBDD\n"
+  example: []
+  syntax:
+    content: public static void LoadNamesScore(ref Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, string> pPersonsWithName, RohGraph pDataGraph, DiscoverCache pDiscoverCache)
+    parameters:
+    - id: pNamesScore
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}
+      description: Diccionario con los nombres del RDF y las entidades de la BB con sus scores
+    - id: pPersonsWithName
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: Nombres de todas las personas que hay cargadas en la BBDD, Clave ID, Valor nombre
+    - id: pDataGraph
+      type: VDS.RDF.RohGraph
+      description: Grafo en local
+    - id: pDiscoverCache
+      type: API_DISCOVER.Models.Entities.DiscoverCache
+      description: Caché de discover
+    content.vb: Public Shared Sub LoadNamesScore(ByRef pNamesScore As Dictionary(Of String, Dictionary(Of String, Single)), pPersonsWithName As Dictionary(Of String, String), pDataGraph As RohGraph, pDiscoverCache As DiscoverCache)
+  overload: API_DISCOVER.Utility.Discover.LoadNamesScore*
+  nameWithType.vb: Discover.LoadNamesScore(ByRef Dictionary(Of String, Dictionary(Of String, Single)), Dictionary(Of String, String), RohGraph, DiscoverCache)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: API_DISCOVER.Utility.Discover.LoadNamesScore(ByRef System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.Dictionary(Of System.String, System.Single)), System.Collections.Generic.Dictionary(Of System.String, System.String), VDS.RDF.RohGraph, API_DISCOVER.Models.Entities.DiscoverCache)
+  name.vb: LoadNamesScore(ByRef Dictionary(Of String, Dictionary(Of String, Single)), Dictionary(Of String, String), RohGraph, DiscoverCache)
+- uid: API_DISCOVER.Utility.Discover.LoadEntitiesDB(System.Collections.Generic.IEnumerable{System.String})
+  commentId: M:API_DISCOVER.Utility.Discover.LoadEntitiesDB(System.Collections.Generic.IEnumerable{System.String})
+  id: LoadEntitiesDB(System.Collections.Generic.IEnumerable{System.String})
+  parent: API_DISCOVER.Utility.Discover
+  langs:
+  - csharp
+  - vb
+  name: LoadEntitiesDB(IEnumerable<String>)
+  nameWithType: Discover.LoadEntitiesDB(IEnumerable<String>)
+  fullName: API_DISCOVER.Utility.Discover.LoadEntitiesDB(System.Collections.Generic.IEnumerable<System.String>)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/Discover.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: LoadEntitiesDB
+    path: Utility/Discover.cs
+    startLine: 784
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  summary: "\nObtiente los sujetos que están cargados en la BBDD SPARQL junto con su rdf:type\n"
+  example: []
+  syntax:
+    content: public static Dictionary<string, string> LoadEntitiesDB(IEnumerable<string> pSubjects)
+    parameters:
+    - id: pSubjects
+      type: System.Collections.Generic.IEnumerable{System.String}
+      description: Lista de identificadores de las entidades a buscar
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: ''
+    content.vb: Public Shared Function LoadEntitiesDB(pSubjects As IEnumerable(Of String)) As Dictionary(Of String, String)
+  overload: API_DISCOVER.Utility.Discover.LoadEntitiesDB*
+  nameWithType.vb: Discover.LoadEntitiesDB(IEnumerable(Of String))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: API_DISCOVER.Utility.Discover.LoadEntitiesDB(System.Collections.Generic.IEnumerable(Of System.String))
+  name.vb: LoadEntitiesDB(IEnumerable(Of String))
+- uid: API_DISCOVER.Utility.Discover.LoadPersonWithName
+  commentId: M:API_DISCOVER.Utility.Discover.LoadPersonWithName
+  id: LoadPersonWithName
+  parent: API_DISCOVER.Utility.Discover
+  langs:
+  - csharp
+  - vb
+  name: LoadPersonWithName()
+  nameWithType: Discover.LoadPersonWithName()
+  fullName: API_DISCOVER.Utility.Discover.LoadPersonWithName()
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/Discover.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: LoadPersonWithName
+    path: Utility/Discover.cs
+    startLine: 1210
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  summary: "\nObtiene los nombres de todas las personas\n"
+  example: []
+  syntax:
+    content: public static Dictionary<string, string> LoadPersonWithName()
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: ''
+    content.vb: Public Shared Function LoadPersonWithName As Dictionary(Of String, String)
+  overload: API_DISCOVER.Utility.Discover.LoadPersonWithName*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: API_DISCOVER.Utility.Discover.PrepareData(VDS.RDF.RohGraph,VDS.RDF.Query.Inference.RohRdfsReasoner,VDS.RDF.RohGraph@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}}@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.DisambiguationData}}@,System.Boolean)
+  commentId: M:API_DISCOVER.Utility.Discover.PrepareData(VDS.RDF.RohGraph,VDS.RDF.Query.Inference.RohRdfsReasoner,VDS.RDF.RohGraph@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}}@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.DisambiguationData}}@,System.Boolean)
+  id: PrepareData(VDS.RDF.RohGraph,VDS.RDF.Query.Inference.RohRdfsReasoner,VDS.RDF.RohGraph@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}}@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.DisambiguationData}}@,System.Boolean)
+  parent: API_DISCOVER.Utility.Discover
+  langs:
+  - csharp
+  - vb
+  name: PrepareData(RohGraph, RohRdfsReasoner, out RohGraph, out Dictionary<String, HashSet<String>>, out Dictionary<String, String>, out Dictionary<String, List<DisambiguationData>>, Boolean)
+  nameWithType: Discover.PrepareData(RohGraph, RohRdfsReasoner, out RohGraph, out Dictionary<String, HashSet<String>>, out Dictionary<String, String>, out Dictionary<String, List<DisambiguationData>>, Boolean)
+  fullName: API_DISCOVER.Utility.Discover.PrepareData(VDS.RDF.RohGraph, VDS.RDF.Query.Inference.RohRdfsReasoner, out VDS.RDF.RohGraph, out System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.HashSet<System.String>>, out System.Collections.Generic.Dictionary<System.String, System.String>, out System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.List<API_DISCOVER.Models.Entities.DisambiguationData>>, System.Boolean)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/Discover.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: PrepareData
+    path: Utility/Discover.cs
+    startLine: 1256
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  summary: "\nMétodo que prepara los datos para efectuar la reconciliación\n"
+  example: []
+  syntax:
+    content: public static void PrepareData(RohGraph pDataGraph, RohRdfsReasoner pReasoner, out RohGraph pDataInferenceGraph, out Dictionary<string, HashSet<string>> pEntitiesRdfTypes, out Dictionary<string, string> pEntitiesRdfType, out Dictionary<string, List<DisambiguationData>> pDisambiguationDataRdf, bool pIncludeBlankNodes = false)
+    parameters:
+    - id: pDataGraph
+      type: VDS.RDF.RohGraph
+      description: Grafo en local con los datos a procesar
+    - id: pReasoner
+      type: VDS.RDF.Query.Inference.RohRdfsReasoner
+      description: Razonador para la inferencia de la ontología
+    - id: pDataInferenceGraph
+      type: VDS.RDF.RohGraph
+      description: Grafo en local con los datos a procesar (con la inferencia de la ontología)
+    - id: pEntitiesRdfTypes
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}}
+      description: Diccionario con las entidades encontradas y sus rdf:type (con inferencia)
+    - id: pEntitiesRdfType
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: Diccionario con las entidades encontradas y su rdf:type (sin inferencia)
+    - id: pDisambiguationDataRdf
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.DisambiguationData}}
+      description: Datos extraidos del grafo para la reconciliación
+    - id: pIncludeBlankNodes
+      type: System.Boolean
+      description: indica si hay que incluir los blanknodes
+    content.vb: Public Shared Sub PrepareData(pDataGraph As RohGraph, pReasoner As RohRdfsReasoner, ByRef pDataInferenceGraph As RohGraph, ByRef pEntitiesRdfTypes As Dictionary(Of String, HashSet(Of String)), ByRef pEntitiesRdfType As Dictionary(Of String, String), ByRef pDisambiguationDataRdf As Dictionary(Of String, List(Of DisambiguationData)), pIncludeBlankNodes As Boolean = False)
+  overload: API_DISCOVER.Utility.Discover.PrepareData*
+  nameWithType.vb: Discover.PrepareData(RohGraph, RohRdfsReasoner, ByRef RohGraph, ByRef Dictionary(Of String, HashSet(Of String)), ByRef Dictionary(Of String, String), ByRef Dictionary(Of String, List(Of DisambiguationData)), Boolean)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: API_DISCOVER.Utility.Discover.PrepareData(VDS.RDF.RohGraph, VDS.RDF.Query.Inference.RohRdfsReasoner, ByRef VDS.RDF.RohGraph, ByRef System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.HashSet(Of System.String)), ByRef System.Collections.Generic.Dictionary(Of System.String, System.String), ByRef System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.List(Of API_DISCOVER.Models.Entities.DisambiguationData)), System.Boolean)
+  name.vb: PrepareData(RohGraph, RohRdfsReasoner, ByRef RohGraph, ByRef Dictionary(Of String, HashSet(Of String)), ByRef Dictionary(Of String, String), ByRef Dictionary(Of String, List(Of DisambiguationData)), Boolean)
+- uid: API_DISCOVER.Utility.Discover.ReconciliateIDs(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.DisambiguationData}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},VDS.RDF.RohGraph@)
+  commentId: M:API_DISCOVER.Utility.Discover.ReconciliateIDs(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.DisambiguationData}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},VDS.RDF.RohGraph@)
+  id: ReconciliateIDs(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.DisambiguationData}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},VDS.RDF.RohGraph@)
+  parent: API_DISCOVER.Utility.Discover
+  langs:
+  - csharp
+  - vb
+  name: ReconciliateIDs(ref Boolean, ref Dictionary<String, String>, Dictionary<String, String>, Dictionary<String, List<DisambiguationData>>, Dictionary<String, HashSet<String>>, ref RohGraph)
+  nameWithType: Discover.ReconciliateIDs(ref Boolean, ref Dictionary<String, String>, Dictionary<String, String>, Dictionary<String, List<DisambiguationData>>, Dictionary<String, HashSet<String>>, ref RohGraph)
+  fullName: API_DISCOVER.Utility.Discover.ReconciliateIDs(ref System.Boolean, ref System.Collections.Generic.Dictionary<System.String, System.String>, System.Collections.Generic.Dictionary<System.String, System.String>, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.List<API_DISCOVER.Models.Entities.DisambiguationData>>, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.HashSet<System.String>>, ref VDS.RDF.RohGraph)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/Discover.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ReconciliateIDs
+    path: Utility/Discover.cs
+    startLine: 1276
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  summary: "\nEfectua la reconciliación con los identificadores\n"
+  example: []
+  syntax:
+    content: public static Dictionary<string, string> ReconciliateIDs(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, Dictionary<string, string> pEntitiesRdfType, Dictionary<string, List<DisambiguationData>> pDisambiguationDataRdf, Dictionary<string, HashSet<string>> pDiscardDissambiguations, ref RohGraph pDataGraph)
+    parameters:
+    - id: pHasChanges
+      type: System.Boolean
+      description: Indica si se han realizado cambios en pDataGraph
+    - id: pListaEntidadesReconciliadas
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: Lista con las entidades reconciliadas
+    - id: pEntitiesRdfType
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: Diccionario con las entidades encontradas y su rdf:type (sin inferencia)
+    - id: pDisambiguationDataRdf
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.DisambiguationData}}
+      description: Datos extraidos del grafo para la reconciliación
+    - id: pDiscardDissambiguations
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}}
+      description: Descartes para la desambiguación
+    - id: pDataGraph
+      type: VDS.RDF.RohGraph
+      description: Grafo en local con los datos a procesar
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: Lista con las entidades reconciliadas
+    content.vb: Public Shared Function ReconciliateIDs(ByRef pHasChanges As Boolean, ByRef pListaEntidadesReconciliadas As Dictionary(Of String, String), pEntitiesRdfType As Dictionary(Of String, String), pDisambiguationDataRdf As Dictionary(Of String, List(Of DisambiguationData)), pDiscardDissambiguations As Dictionary(Of String, HashSet(Of String)), ByRef pDataGraph As RohGraph) As Dictionary(Of String, String)
+  overload: API_DISCOVER.Utility.Discover.ReconciliateIDs*
+  nameWithType.vb: Discover.ReconciliateIDs(ByRef Boolean, ByRef Dictionary(Of String, String), Dictionary(Of String, String), Dictionary(Of String, List(Of DisambiguationData)), Dictionary(Of String, HashSet(Of String)), ByRef RohGraph)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: API_DISCOVER.Utility.Discover.ReconciliateIDs(ByRef System.Boolean, ByRef System.Collections.Generic.Dictionary(Of System.String, System.String), System.Collections.Generic.Dictionary(Of System.String, System.String), System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.List(Of API_DISCOVER.Models.Entities.DisambiguationData)), System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.HashSet(Of System.String)), ByRef VDS.RDF.RohGraph)
+  name.vb: ReconciliateIDs(ByRef Boolean, ByRef Dictionary(Of String, String), Dictionary(Of String, String), Dictionary(Of String, List(Of DisambiguationData)), Dictionary(Of String, HashSet(Of String)), ByRef RohGraph)
+- uid: API_DISCOVER.Utility.Discover.ReconciliateBBDD(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}@,VDS.RDF.RohGraph@,VDS.RDF.Query.Inference.RohRdfsReasoner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},API_DISCOVER.Models.Entities.DiscoverCache)
+  commentId: M:API_DISCOVER.Utility.Discover.ReconciliateBBDD(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}@,VDS.RDF.RohGraph@,VDS.RDF.Query.Inference.RohRdfsReasoner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},API_DISCOVER.Models.Entities.DiscoverCache)
+  id: ReconciliateBBDD(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}@,VDS.RDF.RohGraph@,VDS.RDF.Query.Inference.RohRdfsReasoner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},API_DISCOVER.Models.Entities.DiscoverCache)
+  parent: API_DISCOVER.Utility.Discover
+  langs:
+  - csharp
+  - vb
+  name: ReconciliateBBDD(ref Boolean, ref Dictionary<String, String>, out Dictionary<String, Dictionary<String, Single>>, ref RohGraph, RohRdfsReasoner, Dictionary<String, Dictionary<String, Single>>, Dictionary<String, HashSet<String>>, DiscoverCache)
+  nameWithType: Discover.ReconciliateBBDD(ref Boolean, ref Dictionary<String, String>, out Dictionary<String, Dictionary<String, Single>>, ref RohGraph, RohRdfsReasoner, Dictionary<String, Dictionary<String, Single>>, Dictionary<String, HashSet<String>>, DiscoverCache)
+  fullName: API_DISCOVER.Utility.Discover.ReconciliateBBDD(ref System.Boolean, ref System.Collections.Generic.Dictionary<System.String, System.String>, out System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.Dictionary<System.String, System.Single>>, ref VDS.RDF.RohGraph, VDS.RDF.Query.Inference.RohRdfsReasoner, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.Dictionary<System.String, System.Single>>, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.HashSet<System.String>>, API_DISCOVER.Models.Entities.DiscoverCache)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/Discover.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ReconciliateBBDD
+    path: Utility/Discover.cs
+    startLine: 1420
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  summary: "\nReconcilia el RDF con la BBDD\n"
+  example: []
+  syntax:
+    content: public static Dictionary<string, KeyValuePair<string, float>> ReconciliateBBDD(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, out Dictionary<string, Dictionary<string, float>> pListaEntidadesReconciliadasDudosas, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache)
+    parameters:
+    - id: pHasChanges
+      type: System.Boolean
+      description: Indica si se han realizado cambios en pDataGraph
+    - id: pListaEntidadesReconciliadas
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: Lista con las entidades reconciliadas
+    - id: pListaEntidadesReconciliadasDudosas
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}
+      description: Lista con las entidades dudosas
+    - id: pDataGraph
+      type: VDS.RDF.RohGraph
+      description: Grafo en local con los datos del RDF
+    - id: pReasoner
+      type: VDS.RDF.Query.Inference.RohRdfsReasoner
+      description: Razonador
+    - id: pNamesScore
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}
+      description: Diccionario con los nombres del RDF y las entidades de la BB con sus scores
+    - id: pDiscardDissambiguations
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}}
+      description: Descartes de desambiguación
+    - id: pDiscoverCache
+      type: API_DISCOVER.Models.Entities.DiscoverCache
+      description: Caché de discover
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Single}}
+      description: Diccioario con las entidades reconciliadas
+    content.vb: Public Shared Function ReconciliateBBDD(ByRef pHasChanges As Boolean, ByRef pListaEntidadesReconciliadas As Dictionary(Of String, String), ByRef pListaEntidadesReconciliadasDudosas As Dictionary(Of String, Dictionary(Of String, Single)), ByRef pDataGraph As RohGraph, pReasoner As RohRdfsReasoner, pNamesScore As Dictionary(Of String, Dictionary(Of String, Single)), pDiscardDissambiguations As Dictionary(Of String, HashSet(Of String)), pDiscoverCache As DiscoverCache) As Dictionary(Of String, KeyValuePair(Of String, Single))
+  overload: API_DISCOVER.Utility.Discover.ReconciliateBBDD*
+  nameWithType.vb: Discover.ReconciliateBBDD(ByRef Boolean, ByRef Dictionary(Of String, String), ByRef Dictionary(Of String, Dictionary(Of String, Single)), ByRef RohGraph, RohRdfsReasoner, Dictionary(Of String, Dictionary(Of String, Single)), Dictionary(Of String, HashSet(Of String)), DiscoverCache)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: API_DISCOVER.Utility.Discover.ReconciliateBBDD(ByRef System.Boolean, ByRef System.Collections.Generic.Dictionary(Of System.String, System.String), ByRef System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.Dictionary(Of System.String, System.Single)), ByRef VDS.RDF.RohGraph, VDS.RDF.Query.Inference.RohRdfsReasoner, System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.Dictionary(Of System.String, System.Single)), System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.HashSet(Of System.String)), API_DISCOVER.Models.Entities.DiscoverCache)
+  name.vb: ReconciliateBBDD(ByRef Boolean, ByRef Dictionary(Of String, String), ByRef Dictionary(Of String, Dictionary(Of String, Single)), ByRef RohGraph, RohRdfsReasoner, Dictionary(Of String, Dictionary(Of String, Single)), Dictionary(Of String, HashSet(Of String)), DiscoverCache)
+- uid: API_DISCOVER.Utility.Discover.ReconciliateRDF(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,VDS.RDF.RohGraph@,VDS.RDF.Query.Inference.RohRdfsReasoner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},API_DISCOVER.Models.Entities.DiscoverCache)
+  commentId: M:API_DISCOVER.Utility.Discover.ReconciliateRDF(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,VDS.RDF.RohGraph@,VDS.RDF.Query.Inference.RohRdfsReasoner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},API_DISCOVER.Models.Entities.DiscoverCache)
+  id: ReconciliateRDF(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,VDS.RDF.RohGraph@,VDS.RDF.Query.Inference.RohRdfsReasoner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},API_DISCOVER.Models.Entities.DiscoverCache)
+  parent: API_DISCOVER.Utility.Discover
+  langs:
+  - csharp
+  - vb
+  name: ReconciliateRDF(ref Boolean, ref Dictionary<String, String>, ref RohGraph, RohRdfsReasoner, Dictionary<String, HashSet<String>>, DiscoverCache)
+  nameWithType: Discover.ReconciliateRDF(ref Boolean, ref Dictionary<String, String>, ref RohGraph, RohRdfsReasoner, Dictionary<String, HashSet<String>>, DiscoverCache)
+  fullName: API_DISCOVER.Utility.Discover.ReconciliateRDF(ref System.Boolean, ref System.Collections.Generic.Dictionary<System.String, System.String>, ref VDS.RDF.RohGraph, VDS.RDF.Query.Inference.RohRdfsReasoner, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.HashSet<System.String>>, API_DISCOVER.Models.Entities.DiscoverCache)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/Discover.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ReconciliateRDF
+    path: Utility/Discover.cs
+    startLine: 1461
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  summary: "\nReconcilia el RDF con datos del propio RDF\n"
+  example: []
+  syntax:
+    content: public static void ReconciliateRDF(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache)
+    parameters:
+    - id: pHasChanges
+      type: System.Boolean
+      description: Indica si se han realizado cambios en pDataGraph
+    - id: pListaEntidadesReconciliadas
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: Lista con las entidades reconciliadas
+    - id: pDataGraph
+      type: VDS.RDF.RohGraph
+      description: Grafo en local con los datos del RDF
+    - id: pReasoner
+      type: VDS.RDF.Query.Inference.RohRdfsReasoner
+      description: Razonador
+    - id: pDiscardDissambiguations
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}}
+      description: Descartes de desambiguación
+    - id: pDiscoverCache
+      type: API_DISCOVER.Models.Entities.DiscoverCache
+      description: Caché de Discover
+    content.vb: Public Shared Sub ReconciliateRDF(ByRef pHasChanges As Boolean, ByRef pListaEntidadesReconciliadas As Dictionary(Of String, String), ByRef pDataGraph As RohGraph, pReasoner As RohRdfsReasoner, pDiscardDissambiguations As Dictionary(Of String, HashSet(Of String)), pDiscoverCache As DiscoverCache)
+  overload: API_DISCOVER.Utility.Discover.ReconciliateRDF*
+  nameWithType.vb: Discover.ReconciliateRDF(ByRef Boolean, ByRef Dictionary(Of String, String), ByRef RohGraph, RohRdfsReasoner, Dictionary(Of String, HashSet(Of String)), DiscoverCache)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: API_DISCOVER.Utility.Discover.ReconciliateRDF(ByRef System.Boolean, ByRef System.Collections.Generic.Dictionary(Of System.String, System.String), ByRef VDS.RDF.RohGraph, VDS.RDF.Query.Inference.RohRdfsReasoner, System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.HashSet(Of System.String)), API_DISCOVER.Models.Entities.DiscoverCache)
+  name.vb: ReconciliateRDF(ByRef Boolean, ByRef Dictionary(Of String, String), ByRef RohGraph, RohRdfsReasoner, Dictionary(Of String, HashSet(Of String)), DiscoverCache)
+- uid: API_DISCOVER.Utility.Discover.ExternalIntegration(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}@,VDS.RDF.RohGraph@,VDS.RDF.Query.Inference.RohRdfsReasoner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},VDS.RDF.RohGraph,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Single}}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},API_DISCOVER.Models.Entities.DiscoverCache)
+  commentId: M:API_DISCOVER.Utility.Discover.ExternalIntegration(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}@,VDS.RDF.RohGraph@,VDS.RDF.Query.Inference.RohRdfsReasoner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},VDS.RDF.RohGraph,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Single}}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},API_DISCOVER.Models.Entities.DiscoverCache)
+  id: ExternalIntegration(System.Boolean@,System.Collections.Generic.Dictionary{System.String,System.String}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}@,VDS.RDF.RohGraph@,VDS.RDF.Query.Inference.RohRdfsReasoner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}},VDS.RDF.RohGraph,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Single}}@,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}},API_DISCOVER.Models.Entities.DiscoverCache)
+  parent: API_DISCOVER.Utility.Discover
+  langs:
+  - csharp
+  - vb
+  name: ExternalIntegration(ref Boolean, ref Dictionary<String, String>, ref Dictionary<String, Dictionary<String, Single>>, ref RohGraph, RohRdfsReasoner, Dictionary<String, Dictionary<String, Single>>, RohGraph, out Dictionary<String, KeyValuePair<String, Single>>, Dictionary<String, HashSet<String>>, DiscoverCache)
+  nameWithType: Discover.ExternalIntegration(ref Boolean, ref Dictionary<String, String>, ref Dictionary<String, Dictionary<String, Single>>, ref RohGraph, RohRdfsReasoner, Dictionary<String, Dictionary<String, Single>>, RohGraph, out Dictionary<String, KeyValuePair<String, Single>>, Dictionary<String, HashSet<String>>, DiscoverCache)
+  fullName: API_DISCOVER.Utility.Discover.ExternalIntegration(ref System.Boolean, ref System.Collections.Generic.Dictionary<System.String, System.String>, ref System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.Dictionary<System.String, System.Single>>, ref VDS.RDF.RohGraph, VDS.RDF.Query.Inference.RohRdfsReasoner, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.Dictionary<System.String, System.Single>>, VDS.RDF.RohGraph, out System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.KeyValuePair<System.String, System.Single>>, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.HashSet<System.String>>, API_DISCOVER.Models.Entities.DiscoverCache)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/Discover.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ExternalIntegration
+    path: Utility/Discover.cs
+    startLine: 2293
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  summary: "\nMétodo para el descubrimiento con los APIs externos\n"
+  example: []
+  syntax:
+    content: public static Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> ExternalIntegration(ref bool pHasChanges, ref Dictionary<string, string> pListaEntidadesReconciliadas, ref Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore, RohGraph pOntologyGraph, out Dictionary<string, KeyValuePair<string, float>> pEntidadesReconciliadasConIntegracionExterna, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache)
+    parameters:
+    - id: pHasChanges
+      type: System.Boolean
+      description: Indica si se han realizado cambios en pDataGraph
+    - id: pListaEntidadesReconciliadas
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: Lista con las entidades reconciliadas
+    - id: pDiscoveredEntitiesProbability
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}
+      description: Lista con las entidades dudosas
+    - id: pDataGraph
+      type: VDS.RDF.RohGraph
+      description: Grafo en local con los datos del RDF
+    - id: pReasoner
+      type: VDS.RDF.Query.Inference.RohRdfsReasoner
+      description: Razonador
+    - id: pNamesScore
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}
+      description: Diccionario con los nombres del RDF y las entidades de la BB con sus scores
+    - id: pOntologyGraph
+      type: VDS.RDF.RohGraph
+      description: Grafo en local con los datos de la ontología
+    - id: pEntidadesReconciliadasConIntegracionExterna
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Single}}
+      description: Entidades reconciliadas con la integración externa
+    - id: pDiscardDissambiguations
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}}
+      description: Descartes para la desambiguación
+    - id: pDiscoverCache
+      type: API_DISCOVER.Models.Entities.DiscoverCache
+      description: Caché de discover
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.HashSet{System.String}}}}
+      description: Diccionario con las entidades y los identificadores extraídos, junto con su provenencia
+    content.vb: Public Shared Function ExternalIntegration(ByRef pHasChanges As Boolean, ByRef pListaEntidadesReconciliadas As Dictionary(Of String, String), ByRef pDiscoveredEntitiesProbability As Dictionary(Of String, Dictionary(Of String, Single)), ByRef pDataGraph As RohGraph, pReasoner As RohRdfsReasoner, pNamesScore As Dictionary(Of String, Dictionary(Of String, Single)), pOntologyGraph As RohGraph, ByRef pEntidadesReconciliadasConIntegracionExterna As Dictionary(Of String, KeyValuePair(Of String, Single)), pDiscardDissambiguations As Dictionary(Of String, HashSet(Of String)), pDiscoverCache As DiscoverCache) As Dictionary(Of String, Dictionary(Of String, KeyValuePair(Of String, HashSet(Of String))))
+  overload: API_DISCOVER.Utility.Discover.ExternalIntegration*
+  nameWithType.vb: Discover.ExternalIntegration(ByRef Boolean, ByRef Dictionary(Of String, String), ByRef Dictionary(Of String, Dictionary(Of String, Single)), ByRef RohGraph, RohRdfsReasoner, Dictionary(Of String, Dictionary(Of String, Single)), RohGraph, ByRef Dictionary(Of String, KeyValuePair(Of String, Single)), Dictionary(Of String, HashSet(Of String)), DiscoverCache)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: API_DISCOVER.Utility.Discover.ExternalIntegration(ByRef System.Boolean, ByRef System.Collections.Generic.Dictionary(Of System.String, System.String), ByRef System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.Dictionary(Of System.String, System.Single)), ByRef VDS.RDF.RohGraph, VDS.RDF.Query.Inference.RohRdfsReasoner, System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.Dictionary(Of System.String, System.Single)), VDS.RDF.RohGraph, ByRef System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.KeyValuePair(Of System.String, System.Single)), System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.HashSet(Of System.String)), API_DISCOVER.Models.Entities.DiscoverCache)
+  name.vb: ExternalIntegration(ByRef Boolean, ByRef Dictionary(Of String, String), ByRef Dictionary(Of String, Dictionary(Of String, Single)), ByRef RohGraph, RohRdfsReasoner, Dictionary(Of String, Dictionary(Of String, Single)), RohGraph, ByRef Dictionary(Of String, KeyValuePair(Of String, Single)), Dictionary(Of String, HashSet(Of String)), DiscoverCache)
+references:
+- uid: API_DISCOVER.Utility
+  commentId: N:API_DISCOVER.Utility
+  name: API_DISCOVER.Utility
+  nameWithType: API_DISCOVER.Utility
+  fullName: API_DISCOVER.Utility
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Utility.I_SparqlUtility
+  commentId: T:API_DISCOVER.Utility.I_SparqlUtility
+  parent: API_DISCOVER.Utility
+  name: I_SparqlUtility
+  nameWithType: I_SparqlUtility
+  fullName: API_DISCOVER.Utility.I_SparqlUtility
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: API_DISCOVER.Utility.Discover.Init*
+  commentId: Overload:API_DISCOVER.Utility.Discover.Init
+  name: Init
+  nameWithType: Discover.Init
+  fullName: API_DISCOVER.Utility.Discover.Init
+- uid: API_DISCOVER.Models.Entities.DiscoverItem
+  commentId: T:API_DISCOVER.Models.Entities.DiscoverItem
+  parent: API_DISCOVER.Models.Entities
+  name: DiscoverItem
+  nameWithType: DiscoverItem
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem
+- uid: API_DISCOVER.Models.Services.CallEtlApiService
+  commentId: T:API_DISCOVER.Models.Services.CallEtlApiService
+  parent: API_DISCOVER.Models.Services
+  name: CallEtlApiService
+  nameWithType: CallEtlApiService
+  fullName: API_DISCOVER.Models.Services.CallEtlApiService
+- uid: API_DISCOVER.Models.Entities.DiscoverResult
+  commentId: T:API_DISCOVER.Models.Entities.DiscoverResult
+  parent: API_DISCOVER.Models.Entities
+  name: DiscoverResult
+  nameWithType: DiscoverResult
+  fullName: API_DISCOVER.Models.Entities.DiscoverResult
+- uid: API_DISCOVER.Models.Entities
+  commentId: N:API_DISCOVER.Models.Entities
+  name: API_DISCOVER.Models.Entities
+  nameWithType: API_DISCOVER.Models.Entities
+  fullName: API_DISCOVER.Models.Entities
+- uid: API_DISCOVER.Models.Services
+  commentId: N:API_DISCOVER.Models.Services
+  name: API_DISCOVER.Models.Services
+  nameWithType: API_DISCOVER.Models.Services
+  fullName: API_DISCOVER.Models.Services
+- uid: API_DISCOVER.Utility.Discover.Process*
+  commentId: Overload:API_DISCOVER.Utility.Discover.Process
+  name: Process
+  nameWithType: Discover.Process
+  fullName: API_DISCOVER.Utility.Discover.Process
+- uid: API_DISCOVER.Models.Services.DiscoverItemBDService
+  commentId: T:API_DISCOVER.Models.Services.DiscoverItemBDService
+  parent: API_DISCOVER.Models.Services
+  name: DiscoverItemBDService
+  nameWithType: DiscoverItemBDService
+  fullName: API_DISCOVER.Models.Services.DiscoverItemBDService
+- uid: API_DISCOVER.Models.Services.CallCronApiService
+  commentId: T:API_DISCOVER.Models.Services.CallCronApiService
+  parent: API_DISCOVER.Models.Services
+  name: CallCronApiService
+  nameWithType: CallCronApiService
+  fullName: API_DISCOVER.Models.Services.CallCronApiService
+- uid: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService
+  commentId: T:API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService
+  parent: API_DISCOVER.Models.Services
+  name: ProcessDiscoverStateJobBDService
+  nameWithType: ProcessDiscoverStateJobBDService
+  fullName: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService
+- uid: API_DISCOVER.Utility.Discover.GetDisambiguationDataRdf*
+  commentId: Overload:API_DISCOVER.Utility.Discover.GetDisambiguationDataRdf
+  name: GetDisambiguationDataRdf
+  nameWithType: Discover.GetDisambiguationDataRdf
+  fullName: API_DISCOVER.Utility.Discover.GetDisambiguationDataRdf
+- uid: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.HashSet{System.String}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, HashSet<String>>
+  nameWithType: Dictionary<String, HashSet<String>>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.HashSet<System.String>>
+  nameWithType.vb: Dictionary(Of String, HashSet(Of String))
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.HashSet(Of System.String))
+  name.vb: Dictionary(Of String, HashSet(Of String))
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List{VDS.RDF.Triple}
+  commentId: T:System.Collections.Generic.List{VDS.RDF.Triple}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<Triple>
+  nameWithType: List<Triple>
+  fullName: System.Collections.Generic.List<VDS.RDF.Triple>
+  nameWithType.vb: List(Of Triple)
+  fullName.vb: System.Collections.Generic.List(Of VDS.RDF.Triple)
+  name.vb: List(Of Triple)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: VDS.RDF.Triple
+    name: Triple
+    nameWithType: Triple
+    fullName: VDS.RDF.Triple
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.DisambiguationData}}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.DisambiguationData}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, List<DisambiguationData>>
+  nameWithType: Dictionary<String, List<DisambiguationData>>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.List<API_DISCOVER.Models.Entities.DisambiguationData>>
+  nameWithType.vb: Dictionary(Of String, List(Of DisambiguationData))
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.List(Of API_DISCOVER.Models.Entities.DisambiguationData))
+  name.vb: Dictionary(Of String, List(Of DisambiguationData))
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: API_DISCOVER.Models.Entities.DisambiguationData
+    name: DisambiguationData
+    nameWithType: DisambiguationData
+    fullName: API_DISCOVER.Models.Entities.DisambiguationData
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: API_DISCOVER.Models.Entities.DisambiguationData
+    name: DisambiguationData
+    nameWithType: DisambiguationData
+    fullName: API_DISCOVER.Models.Entities.DisambiguationData
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Utility.Discover.LoadNamesScore*
+  commentId: Overload:API_DISCOVER.Utility.Discover.LoadNamesScore
+  name: LoadNamesScore
+  nameWithType: Discover.LoadNamesScore
+  fullName: API_DISCOVER.Utility.Discover.LoadNamesScore
+- uid: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Single}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, Dictionary<String, Single>>
+  nameWithType: Dictionary<String, Dictionary<String, Single>>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.Dictionary<System.String, System.Single>>
+  nameWithType.vb: Dictionary(Of String, Dictionary(Of String, Single))
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.Dictionary(Of System.String, System.Single))
+  name.vb: Dictionary(Of String, Dictionary(Of String, Single))
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Single
+    name: Single
+    nameWithType: Single
+    fullName: System.Single
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Single
+    name: Single
+    nameWithType: Single
+    fullName: System.Single
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.Dictionary{System.String,System.String}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, String>
+  nameWithType: Dictionary<String, String>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.String>
+  nameWithType.vb: Dictionary(Of String, String)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.String)
+  name.vb: Dictionary(Of String, String)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.RohGraph
+  commentId: T:VDS.RDF.RohGraph
+  parent: VDS.RDF
+  name: RohGraph
+  nameWithType: RohGraph
+  fullName: VDS.RDF.RohGraph
+- uid: API_DISCOVER.Models.Entities.DiscoverCache
+  commentId: T:API_DISCOVER.Models.Entities.DiscoverCache
+  parent: API_DISCOVER.Models.Entities
+  name: DiscoverCache
+  nameWithType: DiscoverCache
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache
+- uid: VDS.RDF
+  commentId: N:VDS.RDF
+  name: VDS.RDF
+  nameWithType: VDS.RDF
+  fullName: VDS.RDF
+- uid: API_DISCOVER.Utility.Discover.LoadEntitiesDB*
+  commentId: Overload:API_DISCOVER.Utility.Discover.LoadEntitiesDB
+  name: LoadEntitiesDB
+  nameWithType: Discover.LoadEntitiesDB
+  fullName: API_DISCOVER.Utility.Discover.LoadEntitiesDB
+- uid: System.Collections.Generic.IEnumerable{System.String}
+  commentId: T:System.Collections.Generic.IEnumerable{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<String>
+  nameWithType: IEnumerable<String>
+  fullName: System.Collections.Generic.IEnumerable<System.String>
+  nameWithType.vb: IEnumerable(Of String)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of System.String)
+  name.vb: IEnumerable(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Utility.Discover.LoadPersonWithName*
+  commentId: Overload:API_DISCOVER.Utility.Discover.LoadPersonWithName
+  name: LoadPersonWithName
+  nameWithType: Discover.LoadPersonWithName
+  fullName: API_DISCOVER.Utility.Discover.LoadPersonWithName
+- uid: API_DISCOVER.Utility.Discover.PrepareData*
+  commentId: Overload:API_DISCOVER.Utility.Discover.PrepareData
+  name: PrepareData
+  nameWithType: Discover.PrepareData
+  fullName: API_DISCOVER.Utility.Discover.PrepareData
+- uid: VDS.RDF.Query.Inference.RohRdfsReasoner
+  commentId: T:VDS.RDF.Query.Inference.RohRdfsReasoner
+  parent: VDS.RDF.Query.Inference
+  name: RohRdfsReasoner
+  nameWithType: RohRdfsReasoner
+  fullName: VDS.RDF.Query.Inference.RohRdfsReasoner
+- uid: VDS.RDF.Query.Inference
+  commentId: N:VDS.RDF.Query.Inference
+  name: VDS.RDF.Query.Inference
+  nameWithType: VDS.RDF.Query.Inference
+  fullName: VDS.RDF.Query.Inference
+- uid: API_DISCOVER.Utility.Discover.ReconciliateIDs*
+  commentId: Overload:API_DISCOVER.Utility.Discover.ReconciliateIDs
+  name: ReconciliateIDs
+  nameWithType: Discover.ReconciliateIDs
+  fullName: API_DISCOVER.Utility.Discover.ReconciliateIDs
+- uid: API_DISCOVER.Utility.Discover.ReconciliateBBDD*
+  commentId: Overload:API_DISCOVER.Utility.Discover.ReconciliateBBDD
+  name: ReconciliateBBDD
+  nameWithType: Discover.ReconciliateBBDD
+  fullName: API_DISCOVER.Utility.Discover.ReconciliateBBDD
+- uid: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Single}}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Single}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, KeyValuePair<String, Single>>
+  nameWithType: Dictionary<String, KeyValuePair<String, Single>>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.KeyValuePair<System.String, System.Single>>
+  nameWithType.vb: Dictionary(Of String, KeyValuePair(Of String, Single))
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.KeyValuePair(Of System.String, System.Single))
+  name.vb: Dictionary(Of String, KeyValuePair(Of String, Single))
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Single
+    name: Single
+    nameWithType: Single
+    fullName: System.Single
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Single
+    name: Single
+    nameWithType: Single
+    fullName: System.Single
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Utility.Discover.ReconciliateRDF*
+  commentId: Overload:API_DISCOVER.Utility.Discover.ReconciliateRDF
+  name: ReconciliateRDF
+  nameWithType: Discover.ReconciliateRDF
+  fullName: API_DISCOVER.Utility.Discover.ReconciliateRDF
+- uid: API_DISCOVER.Utility.Discover.ExternalIntegration*
+  commentId: Overload:API_DISCOVER.Utility.Discover.ExternalIntegration
+  name: ExternalIntegration
+  nameWithType: Discover.ExternalIntegration
+  fullName: API_DISCOVER.Utility.Discover.ExternalIntegration
+- uid: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.HashSet{System.String}}}}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.HashSet{System.String}}}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, Dictionary<String, KeyValuePair<String, HashSet<String>>>>
+  nameWithType: Dictionary<String, Dictionary<String, KeyValuePair<String, HashSet<String>>>>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.KeyValuePair<System.String, System.Collections.Generic.HashSet<System.String>>>>
+  nameWithType.vb: Dictionary(Of String, Dictionary(Of String, KeyValuePair(Of String, HashSet(Of String))))
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.KeyValuePair(Of System.String, System.Collections.Generic.HashSet(Of System.String))))
+  name.vb: Dictionary(Of String, Dictionary(Of String, KeyValuePair(Of String, HashSet(Of String))))
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )

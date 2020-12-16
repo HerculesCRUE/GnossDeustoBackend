@@ -1,0 +1,645 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService
+  commentId: T:API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService
+  id: ProcessDiscoverStateJobBDService
+  parent: API_DISCOVER.Models.Services
+  children:
+  - API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.#ctor(API_DISCOVER.Models.EntityContext)
+  - API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.AddProcessDiscoverStateJob(API_DISCOVER.Models.Entities.ProcessDiscoverStateJob)
+  - API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobById(System.Guid)
+  - API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(System.String)
+  - API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.ModifyProcessDiscoverStateJob(API_DISCOVER.Models.Entities.ProcessDiscoverStateJob)
+  - API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.RemoveDiscoverItem(System.Guid)
+  langs:
+  - csharp
+  - vb
+  name: ProcessDiscoverStateJobBDService
+  nameWithType: ProcessDiscoverStateJobBDService
+  fullName: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/ProcessDiscoverStateJobBDService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ProcessDiscoverStateJobBDService
+    path: Models/Services/ProcessDiscoverStateJobBDService.cs
+    startLine: 16
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nClase para gestionar los estados de descubrimiento de las tareas\n"
+  example: []
+  syntax:
+    content: public class ProcessDiscoverStateJobBDService
+    content.vb: Public Class ProcessDiscoverStateJobBDService
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.#ctor(API_DISCOVER.Models.EntityContext)
+  commentId: M:API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.#ctor(API_DISCOVER.Models.EntityContext)
+  id: '#ctor(API_DISCOVER.Models.EntityContext)'
+  parent: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService
+  langs:
+  - csharp
+  - vb
+  name: ProcessDiscoverStateJobBDService(EntityContext)
+  nameWithType: ProcessDiscoverStateJobBDService.ProcessDiscoverStateJobBDService(EntityContext)
+  fullName: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.ProcessDiscoverStateJobBDService(API_DISCOVER.Models.EntityContext)
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/ProcessDiscoverStateJobBDService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Services/ProcessDiscoverStateJobBDService.cs
+    startLine: 19
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  syntax:
+    content: public ProcessDiscoverStateJobBDService(EntityContext context)
+    parameters:
+    - id: context
+      type: API_DISCOVER.Models.EntityContext
+    content.vb: Public Sub New(context As EntityContext)
+  overload: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobById(System.Guid)
+  commentId: M:API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobById(System.Guid)
+  id: GetProcessDiscoverStateJobById(System.Guid)
+  parent: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService
+  langs:
+  - csharp
+  - vb
+  name: GetProcessDiscoverStateJobById(Guid)
+  nameWithType: ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobById(Guid)
+  fullName: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobById(System.Guid)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/ProcessDiscoverStateJobBDService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetProcessDiscoverStateJobById
+    path: Models/Services/ProcessDiscoverStateJobBDService.cs
+    startLine: 29
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nObtiene un estado de descubrimiento de una tarea a través de su identificador\n"
+  example: []
+  syntax:
+    content: public ProcessDiscoverStateJob GetProcessDiscoverStateJobById(Guid id)
+    parameters:
+    - id: id
+      type: System.Guid
+      description: Identificador del estado de descubrimiento de la tarea
+    return:
+      type: API_DISCOVER.Models.Entities.ProcessDiscoverStateJob
+    content.vb: Public Function GetProcessDiscoverStateJobById(id As Guid) As ProcessDiscoverStateJob
+  overload: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobById*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(System.String)
+  commentId: M:API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(System.String)
+  id: GetProcessDiscoverStateJobByIdJob(System.String)
+  parent: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService
+  langs:
+  - csharp
+  - vb
+  name: GetProcessDiscoverStateJobByIdJob(String)
+  nameWithType: ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(String)
+  fullName: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(System.String)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/ProcessDiscoverStateJobBDService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetProcessDiscoverStateJobByIdJob
+    path: Models/Services/ProcessDiscoverStateJobBDService.cs
+    startLine: 38
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nObtiene un estado de descubrimiento de una tarea a través de su idJob\n"
+  example: []
+  syntax:
+    content: public ProcessDiscoverStateJob GetProcessDiscoverStateJobByIdJob(string idJob)
+    parameters:
+    - id: idJob
+      type: System.String
+    return:
+      type: API_DISCOVER.Models.Entities.ProcessDiscoverStateJob
+    content.vb: Public Function GetProcessDiscoverStateJobByIdJob(idJob As String) As ProcessDiscoverStateJob
+  overload: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.AddProcessDiscoverStateJob(API_DISCOVER.Models.Entities.ProcessDiscoverStateJob)
+  commentId: M:API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.AddProcessDiscoverStateJob(API_DISCOVER.Models.Entities.ProcessDiscoverStateJob)
+  id: AddProcessDiscoverStateJob(API_DISCOVER.Models.Entities.ProcessDiscoverStateJob)
+  parent: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService
+  langs:
+  - csharp
+  - vb
+  name: AddProcessDiscoverStateJob(ProcessDiscoverStateJob)
+  nameWithType: ProcessDiscoverStateJobBDService.AddProcessDiscoverStateJob(ProcessDiscoverStateJob)
+  fullName: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.AddProcessDiscoverStateJob(API_DISCOVER.Models.Entities.ProcessDiscoverStateJob)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/ProcessDiscoverStateJobBDService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: AddProcessDiscoverStateJob
+    path: Models/Services/ProcessDiscoverStateJobBDService.cs
+    startLine: 47
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nAñade un estado de descubrimiento de una tarea\n"
+  example: []
+  syntax:
+    content: public Guid AddProcessDiscoverStateJob(ProcessDiscoverStateJob processDiscoverStateJob)
+    parameters:
+    - id: processDiscoverStateJob
+      type: API_DISCOVER.Models.Entities.ProcessDiscoverStateJob
+      description: Estado de descubrimiento de una tarea
+    return:
+      type: System.Guid
+    content.vb: Public Function AddProcessDiscoverStateJob(processDiscoverStateJob As ProcessDiscoverStateJob) As Guid
+  overload: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.AddProcessDiscoverStateJob*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.ModifyProcessDiscoverStateJob(API_DISCOVER.Models.Entities.ProcessDiscoverStateJob)
+  commentId: M:API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.ModifyProcessDiscoverStateJob(API_DISCOVER.Models.Entities.ProcessDiscoverStateJob)
+  id: ModifyProcessDiscoverStateJob(API_DISCOVER.Models.Entities.ProcessDiscoverStateJob)
+  parent: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService
+  langs:
+  - csharp
+  - vb
+  name: ModifyProcessDiscoverStateJob(ProcessDiscoverStateJob)
+  nameWithType: ProcessDiscoverStateJobBDService.ModifyProcessDiscoverStateJob(ProcessDiscoverStateJob)
+  fullName: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.ModifyProcessDiscoverStateJob(API_DISCOVER.Models.Entities.ProcessDiscoverStateJob)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/ProcessDiscoverStateJobBDService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ModifyProcessDiscoverStateJob
+    path: Models/Services/ProcessDiscoverStateJobBDService.cs
+    startLine: 62
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nModifica un estado de descubrimiento de una tarea\n"
+  example: []
+  syntax:
+    content: public bool ModifyProcessDiscoverStateJob(ProcessDiscoverStateJob processDiscoverStateJob)
+    parameters:
+    - id: processDiscoverStateJob
+      type: API_DISCOVER.Models.Entities.ProcessDiscoverStateJob
+      description: Estado de descubrimiento de una tarea
+    return:
+      type: System.Boolean
+    content.vb: Public Function ModifyProcessDiscoverStateJob(processDiscoverStateJob As ProcessDiscoverStateJob) As Boolean
+  overload: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.ModifyProcessDiscoverStateJob*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.RemoveDiscoverItem(System.Guid)
+  commentId: M:API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.RemoveDiscoverItem(System.Guid)
+  id: RemoveDiscoverItem(System.Guid)
+  parent: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService
+  langs:
+  - csharp
+  - vb
+  name: RemoveDiscoverItem(Guid)
+  nameWithType: ProcessDiscoverStateJobBDService.RemoveDiscoverItem(Guid)
+  fullName: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.RemoveDiscoverItem(System.Guid)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/ProcessDiscoverStateJobBDService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: RemoveDiscoverItem
+    path: Models/Services/ProcessDiscoverStateJobBDService.cs
+    startLine: 80
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nElimina un estado de descubrimiento de una tarea\n"
+  example: []
+  syntax:
+    content: public bool RemoveDiscoverItem(Guid id)
+    parameters:
+    - id: id
+      type: System.Guid
+      description: Identificador del estado de descubrimiento de la tarea
+    return:
+      type: System.Boolean
+    content.vb: Public Function RemoveDiscoverItem(id As Guid) As Boolean
+  overload: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.RemoveDiscoverItem*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.Models.Services
+  commentId: N:API_DISCOVER.Models.Services
+  name: API_DISCOVER.Models.Services
+  nameWithType: API_DISCOVER.Models.Services
+  fullName: API_DISCOVER.Models.Services
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.#ctor*
+  commentId: Overload:API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.#ctor
+  name: ProcessDiscoverStateJobBDService
+  nameWithType: ProcessDiscoverStateJobBDService.ProcessDiscoverStateJobBDService
+  fullName: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.ProcessDiscoverStateJobBDService
+- uid: API_DISCOVER.Models.EntityContext
+  commentId: T:API_DISCOVER.Models.EntityContext
+  parent: API_DISCOVER.Models
+  name: EntityContext
+  nameWithType: EntityContext
+  fullName: API_DISCOVER.Models.EntityContext
+- uid: API_DISCOVER.Models
+  commentId: N:API_DISCOVER.Models
+  name: API_DISCOVER.Models
+  nameWithType: API_DISCOVER.Models
+  fullName: API_DISCOVER.Models
+- uid: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobById*
+  commentId: Overload:API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobById
+  name: GetProcessDiscoverStateJobById
+  nameWithType: ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobById
+  fullName: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobById
+- uid: System.Guid
+  commentId: T:System.Guid
+  parent: System
+  isExternal: true
+  name: Guid
+  nameWithType: Guid
+  fullName: System.Guid
+- uid: API_DISCOVER.Models.Entities.ProcessDiscoverStateJob
+  commentId: T:API_DISCOVER.Models.Entities.ProcessDiscoverStateJob
+  parent: API_DISCOVER.Models.Entities
+  name: ProcessDiscoverStateJob
+  nameWithType: ProcessDiscoverStateJob
+  fullName: API_DISCOVER.Models.Entities.ProcessDiscoverStateJob
+- uid: API_DISCOVER.Models.Entities
+  commentId: N:API_DISCOVER.Models.Entities
+  name: API_DISCOVER.Models.Entities
+  nameWithType: API_DISCOVER.Models.Entities
+  fullName: API_DISCOVER.Models.Entities
+- uid: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob*
+  commentId: Overload:API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob
+  name: GetProcessDiscoverStateJobByIdJob
+  nameWithType: ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob
+  fullName: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.AddProcessDiscoverStateJob*
+  commentId: Overload:API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.AddProcessDiscoverStateJob
+  name: AddProcessDiscoverStateJob
+  nameWithType: ProcessDiscoverStateJobBDService.AddProcessDiscoverStateJob
+  fullName: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.AddProcessDiscoverStateJob
+- uid: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.ModifyProcessDiscoverStateJob*
+  commentId: Overload:API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.ModifyProcessDiscoverStateJob
+  name: ModifyProcessDiscoverStateJob
+  nameWithType: ProcessDiscoverStateJobBDService.ModifyProcessDiscoverStateJob
+  fullName: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.ModifyProcessDiscoverStateJob
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.RemoveDiscoverItem*
+  commentId: Overload:API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.RemoveDiscoverItem
+  name: RemoveDiscoverItem
+  nameWithType: ProcessDiscoverStateJobBDService.RemoveDiscoverItem
+  fullName: API_DISCOVER.Models.Services.ProcessDiscoverStateJobBDService.RemoveDiscoverItem

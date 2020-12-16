@@ -1,0 +1,823 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Utility.AsioPublication
+  commentId: T:API_DISCOVER.Utility.AsioPublication
+  id: AsioPublication
+  parent: API_DISCOVER.Utility
+  children:
+  - API_DISCOVER.Utility.AsioPublication.#ctor(API_DISCOVER.Utility.I_SparqlUtility,System.String,System.String,System.String)
+  - API_DISCOVER.Utility.AsioPublication.PublishRDF(VDS.RDF.RohGraph,VDS.RDF.RohGraph,VDS.RDF.RohGraph,System.Nullable{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.DateTime,System.DateTime,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.HashSet{System.String}}}})
+  langs:
+  - csharp
+  - vb
+  name: AsioPublication
+  nameWithType: AsioPublication
+  fullName: API_DISCOVER.Utility.AsioPublication
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/AsioPublication.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: AsioPublication
+    path: Utility/AsioPublication.cs
+    startLine: 16
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  syntax:
+    content: public class AsioPublication
+    content.vb: Public Class AsioPublication
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Utility.AsioPublication.#ctor(API_DISCOVER.Utility.I_SparqlUtility,System.String,System.String,System.String)
+  commentId: M:API_DISCOVER.Utility.AsioPublication.#ctor(API_DISCOVER.Utility.I_SparqlUtility,System.String,System.String,System.String)
+  id: '#ctor(API_DISCOVER.Utility.I_SparqlUtility,System.String,System.String,System.String)'
+  parent: API_DISCOVER.Utility.AsioPublication
+  langs:
+  - csharp
+  - vb
+  name: AsioPublication(I_SparqlUtility, String, String, String)
+  nameWithType: AsioPublication.AsioPublication(I_SparqlUtility, String, String, String)
+  fullName: API_DISCOVER.Utility.AsioPublication.AsioPublication(API_DISCOVER.Utility.I_SparqlUtility, System.String, System.String, System.String)
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/AsioPublication.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Utility/AsioPublication.cs
+    startLine: 32
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  summary: "\nConstructor\n"
+  example: []
+  syntax:
+    content: public AsioPublication(I_SparqlUtility pSparqlUtility, string pSPARQLEndpoint, string pQueryParam, string pGraph)
+    parameters:
+    - id: pSparqlUtility
+      type: API_DISCOVER.Utility.I_SparqlUtility
+      description: SPARQL Utility
+    - id: pSPARQLEndpoint
+      type: System.String
+      description: SPARQL endpoint
+    - id: pQueryParam
+      type: System.String
+      description: Parámetros para las queries
+    - id: pGraph
+      type: System.String
+      description: Grafo de carga
+    content.vb: Public Sub New(pSparqlUtility As I_SparqlUtility, pSPARQLEndpoint As String, pQueryParam As String, pGraph As String)
+  overload: API_DISCOVER.Utility.AsioPublication.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Utility.AsioPublication.PublishRDF(VDS.RDF.RohGraph,VDS.RDF.RohGraph,VDS.RDF.RohGraph,System.Nullable{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.DateTime,System.DateTime,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.HashSet{System.String}}}})
+  commentId: M:API_DISCOVER.Utility.AsioPublication.PublishRDF(VDS.RDF.RohGraph,VDS.RDF.RohGraph,VDS.RDF.RohGraph,System.Nullable{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.DateTime,System.DateTime,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.HashSet{System.String}}}})
+  id: PublishRDF(VDS.RDF.RohGraph,VDS.RDF.RohGraph,VDS.RDF.RohGraph,System.Nullable{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.DateTime,System.DateTime,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.HashSet{System.String}}}})
+  parent: API_DISCOVER.Utility.AsioPublication
+  langs:
+  - csharp
+  - vb
+  name: PublishRDF(RohGraph, RohGraph, RohGraph, Nullable<KeyValuePair<String, String>>, DateTime, DateTime, Dictionary<String, Dictionary<String, KeyValuePair<String, HashSet<String>>>>)
+  nameWithType: AsioPublication.PublishRDF(RohGraph, RohGraph, RohGraph, Nullable<KeyValuePair<String, String>>, DateTime, DateTime, Dictionary<String, Dictionary<String, KeyValuePair<String, HashSet<String>>>>)
+  fullName: API_DISCOVER.Utility.AsioPublication.PublishRDF(VDS.RDF.RohGraph, VDS.RDF.RohGraph, VDS.RDF.RohGraph, System.Nullable<System.Collections.Generic.KeyValuePair<System.String, System.String>>, System.DateTime, System.DateTime, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.KeyValuePair<System.String, System.Collections.Generic.HashSet<System.String>>>>)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/AsioPublication.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: PublishRDF
+    path: Utility/AsioPublication.cs
+    startLine: 50
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  summary: "\nPublica un RDF en Asio aplicado todos losprocedimientos pertinentes\n"
+  example: []
+  syntax:
+    content: public void PublishRDF(RohGraph dataGraph, RohGraph dataInferenceGraph, RohGraph ontologyGraph, KeyValuePair<string, string>? pAttributedTo, DateTime pActivityStartedAtTime, DateTime pActivityEndedAtTime, Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> externalIntegration)
+    parameters:
+    - id: dataGraph
+      type: VDS.RDF.RohGraph
+      description: Grafo con los datos a cargar
+    - id: dataInferenceGraph
+      type: VDS.RDF.RohGraph
+      description: Grafo con los datos a cargar (con inferencia)
+    - id: ontologyGraph
+      type: VDS.RDF.RohGraph
+      description: Grafo con la ontología
+    - id: pAttributedTo
+      type: System.Nullable{System.Collections.Generic.KeyValuePair{System.String,System.String}}
+      description: Sujeto y nombre para atribuir los triples de los apis externos
+    - id: pActivityStartedAtTime
+      type: System.DateTime
+      description: Inicio del proceso
+    - id: pActivityEndedAtTime
+      type: System.DateTime
+      description: Fin del proceso
+    - id: externalIntegration
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.HashSet{System.String}}}}
+      description: Datos extraídos de las integracinoes externas sujeto, propiedad, valor, identificador fuente externa
+    content.vb: Public Sub PublishRDF(dataGraph As RohGraph, dataInferenceGraph As RohGraph, ontologyGraph As RohGraph, pAttributedTo As KeyValuePair(Of String, String)?, pActivityStartedAtTime As Date, pActivityEndedAtTime As Date, externalIntegration As Dictionary(Of String, Dictionary(Of String, KeyValuePair(Of String, HashSet(Of String)))))
+  overload: API_DISCOVER.Utility.AsioPublication.PublishRDF*
+  nameWithType.vb: AsioPublication.PublishRDF(RohGraph, RohGraph, RohGraph, Nullable(Of KeyValuePair(Of String, String)), DateTime, DateTime, Dictionary(Of String, Dictionary(Of String, KeyValuePair(Of String, HashSet(Of String)))))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: API_DISCOVER.Utility.AsioPublication.PublishRDF(VDS.RDF.RohGraph, VDS.RDF.RohGraph, VDS.RDF.RohGraph, System.Nullable(Of System.Collections.Generic.KeyValuePair(Of System.String, System.String)), System.DateTime, System.DateTime, System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.KeyValuePair(Of System.String, System.Collections.Generic.HashSet(Of System.String)))))
+  name.vb: PublishRDF(RohGraph, RohGraph, RohGraph, Nullable(Of KeyValuePair(Of String, String)), DateTime, DateTime, Dictionary(Of String, Dictionary(Of String, KeyValuePair(Of String, HashSet(Of String)))))
+references:
+- uid: API_DISCOVER.Utility
+  commentId: N:API_DISCOVER.Utility
+  name: API_DISCOVER.Utility
+  nameWithType: API_DISCOVER.Utility
+  fullName: API_DISCOVER.Utility
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Utility.AsioPublication.#ctor*
+  commentId: Overload:API_DISCOVER.Utility.AsioPublication.#ctor
+  name: AsioPublication
+  nameWithType: AsioPublication.AsioPublication
+  fullName: API_DISCOVER.Utility.AsioPublication.AsioPublication
+- uid: API_DISCOVER.Utility.I_SparqlUtility
+  commentId: T:API_DISCOVER.Utility.I_SparqlUtility
+  parent: API_DISCOVER.Utility
+  name: I_SparqlUtility
+  nameWithType: I_SparqlUtility
+  fullName: API_DISCOVER.Utility.I_SparqlUtility
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: API_DISCOVER.Utility.AsioPublication.PublishRDF*
+  commentId: Overload:API_DISCOVER.Utility.AsioPublication.PublishRDF
+  name: PublishRDF
+  nameWithType: AsioPublication.PublishRDF
+  fullName: API_DISCOVER.Utility.AsioPublication.PublishRDF
+- uid: VDS.RDF.RohGraph
+  commentId: T:VDS.RDF.RohGraph
+  parent: VDS.RDF
+  name: RohGraph
+  nameWithType: RohGraph
+  fullName: VDS.RDF.RohGraph
+- uid: System.Nullable{System.Collections.Generic.KeyValuePair{System.String,System.String}}
+  commentId: T:System.Nullable{System.Collections.Generic.KeyValuePair{System.String,System.String}}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<KeyValuePair<String, String>>
+  nameWithType: Nullable<KeyValuePair<String, String>>
+  fullName: System.Nullable<System.Collections.Generic.KeyValuePair<System.String, System.String>>
+  nameWithType.vb: Nullable(Of KeyValuePair(Of String, String))
+  fullName.vb: System.Nullable(Of System.Collections.Generic.KeyValuePair(Of System.String, System.String))
+  name.vb: Nullable(Of KeyValuePair(Of String, String))
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.HashSet{System.String}}}}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.HashSet{System.String}}}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, Dictionary<String, KeyValuePair<String, HashSet<String>>>>
+  nameWithType: Dictionary<String, Dictionary<String, KeyValuePair<String, HashSet<String>>>>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.KeyValuePair<System.String, System.Collections.Generic.HashSet<System.String>>>>
+  nameWithType.vb: Dictionary(Of String, Dictionary(Of String, KeyValuePair(Of String, HashSet(Of String))))
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.KeyValuePair(Of System.String, System.Collections.Generic.HashSet(Of System.String))))
+  name.vb: Dictionary(Of String, Dictionary(Of String, KeyValuePair(Of String, HashSet(Of String))))
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF
+  commentId: N:VDS.RDF
+  name: VDS.RDF
+  nameWithType: VDS.RDF
+  fullName: VDS.RDF
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic

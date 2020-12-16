@@ -1,0 +1,178 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+  commentId: T:API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+  id: Disambiguation.Property.Type
+  parent: API_DISCOVER.Models.Entities
+  children:
+  - API_DISCOVER.Models.Entities.Disambiguation.Property.Type.equals
+  - API_DISCOVER.Models.Entities.Disambiguation.Property.Type.ignoreCaseSensitive
+  - API_DISCOVER.Models.Entities.Disambiguation.Property.Type.name
+  - API_DISCOVER.Models.Entities.Disambiguation.Property.Type.title
+  langs:
+  - csharp
+  - vb
+  name: Disambiguation.Property.Type
+  nameWithType: Disambiguation.Property.Type
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+  type: Enum
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/Disambiguation.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Type
+    path: Models/Entities/Disambiguation.cs
+    startLine: 62
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: public enum Type
+    content.vb: Public Enum Type
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.Type.equals
+  commentId: F:API_DISCOVER.Models.Entities.Disambiguation.Property.Type.equals
+  id: equals
+  parent: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+  langs:
+  - csharp
+  - vb
+  name: equals
+  nameWithType: Disambiguation.Property.Type.equals
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.Type.equals
+  type: Field
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/Disambiguation.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: equals
+    path: Models/Entities/Disambiguation.cs
+    startLine: 65
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: equals = 0
+    return:
+      type: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.Type.ignoreCaseSensitive
+  commentId: F:API_DISCOVER.Models.Entities.Disambiguation.Property.Type.ignoreCaseSensitive
+  id: ignoreCaseSensitive
+  parent: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+  langs:
+  - csharp
+  - vb
+  name: ignoreCaseSensitive
+  nameWithType: Disambiguation.Property.Type.ignoreCaseSensitive
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.Type.ignoreCaseSensitive
+  type: Field
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/Disambiguation.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ignoreCaseSensitive
+    path: Models/Entities/Disambiguation.cs
+    startLine: 67
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: ignoreCaseSensitive = 1
+    return:
+      type: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.Type.name
+  commentId: F:API_DISCOVER.Models.Entities.Disambiguation.Property.Type.name
+  id: name
+  parent: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+  langs:
+  - csharp
+  - vb
+  name: name
+  nameWithType: Disambiguation.Property.Type.name
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.Type.name
+  type: Field
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/Disambiguation.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: name
+    path: Models/Entities/Disambiguation.cs
+    startLine: 69
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: name = 2
+    return:
+      type: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.Type.title
+  commentId: F:API_DISCOVER.Models.Entities.Disambiguation.Property.Type.title
+  id: title
+  parent: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+  langs:
+  - csharp
+  - vb
+  name: title
+  nameWithType: Disambiguation.Property.Type.title
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.Type.title
+  type: Field
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/Disambiguation.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: title
+    path: Models/Entities/Disambiguation.cs
+    startLine: 71
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: title = 3
+    return:
+      type: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: API_DISCOVER.Models.Entities
+  commentId: N:API_DISCOVER.Models.Entities
+  name: API_DISCOVER.Models.Entities
+  nameWithType: API_DISCOVER.Models.Entities
+  fullName: API_DISCOVER.Models.Entities
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+  commentId: T:API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+  parent: API_DISCOVER.Models.Entities
+  name: Disambiguation.Property.Type
+  nameWithType: Disambiguation.Property.Type
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.Type

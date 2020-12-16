@@ -1,0 +1,1984 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Entities.DiscoverCache
+  commentId: T:API_DISCOVER.Models.Entities.DiscoverCache
+  id: DiscoverCache
+  parent: API_DISCOVER.Models.Entities
+  children:
+  - API_DISCOVER.Models.Entities.DiscoverCache.#ctor
+  - API_DISCOVER.Models.Entities.DiscoverCache.CROSSREF_Works
+  - API_DISCOVER.Models.Entities.DiscoverCache.DBLPAuthors
+  - API_DISCOVER.Models.Entities.DiscoverCache.DBLPPerson
+  - API_DISCOVER.Models.Entities.DiscoverCache.DOAJWorks
+  - API_DISCOVER.Models.Entities.DiscoverCache.NormalizedNames
+  - API_DISCOVER.Models.Entities.DiscoverCache.ORCIDExpandedSearch
+  - API_DISCOVER.Models.Entities.DiscoverCache.ORCIDPerson
+  - API_DISCOVER.Models.Entities.DiscoverCache.ORCIDWorks
+  - API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkByID
+  - API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkSearchByTitle
+  - API_DISCOVER.Models.Entities.DiscoverCache.RECOLECTAWorks
+  - API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSPerson
+  - API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSWorks
+  - API_DISCOVER.Models.Entities.DiscoverCache.Sparql
+  - API_DISCOVER.Models.Entities.DiscoverCache.WOSWorks
+  langs:
+  - csharp
+  - vb
+  name: DiscoverCache
+  nameWithType: DiscoverCache
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: DiscoverCache
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 12
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nObjeto para cachear las peticiones a diversos APIs de Discover\n"
+  example: []
+  syntax:
+    content: public class DiscoverCache
+    content.vb: Public Class DiscoverCache
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.#ctor
+  commentId: M:API_DISCOVER.Models.Entities.DiscoverCache.#ctor
+  id: '#ctor'
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: DiscoverCache()
+  nameWithType: DiscoverCache.DiscoverCache()
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.DiscoverCache()
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 17
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nConstructor\n"
+  example: []
+  syntax:
+    content: public DiscoverCache()
+    content.vb: Public Sub New
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.Sparql
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverCache.Sparql
+  id: Sparql
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: Sparql
+  nameWithType: DiscoverCache.Sparql
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.Sparql
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Sparql
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 39
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nCaché para las consultas SPARQL\n"
+  example: []
+  syntax:
+    content: public Dictionary<int, SparqlObject> Sparql { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.Int32,API_DISCOVER.Models.Entities.SparqlObject}
+    content.vb: Public Property Sparql As Dictionary(Of Integer, SparqlObject)
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.Sparql*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.ORCIDExpandedSearch
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverCache.ORCIDExpandedSearch
+  id: ORCIDExpandedSearch
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: ORCIDExpandedSearch
+  nameWithType: DiscoverCache.ORCIDExpandedSearch
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.ORCIDExpandedSearch
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ORCIDExpandedSearch
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 44
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nCaché para peticiones a ORCID\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, ORCIDExpandedSearch> ORCIDExpandedSearch { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDExpandedSearch}
+    content.vb: Public Property ORCIDExpandedSearch As Dictionary(Of String, ORCIDExpandedSearch)
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.ORCIDExpandedSearch*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.ORCIDPerson
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverCache.ORCIDPerson
+  id: ORCIDPerson
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: ORCIDPerson
+  nameWithType: DiscoverCache.ORCIDPerson
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.ORCIDPerson
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ORCIDPerson
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 49
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nCaché para peticiones a ORCID\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, ORCIDPerson> ORCIDPerson { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDPerson}
+    content.vb: Public Property ORCIDPerson As Dictionary(Of String, ORCIDPerson)
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.ORCIDPerson*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.ORCIDWorks
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverCache.ORCIDWorks
+  id: ORCIDWorks
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: ORCIDWorks
+  nameWithType: DiscoverCache.ORCIDWorks
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.ORCIDWorks
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ORCIDWorks
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 54
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nCaché para peticiones a ORCID\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, ORCIDWorks> ORCIDWorks { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks}
+    content.vb: Public Property ORCIDWorks As Dictionary(Of String, ORCIDWorks)
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.ORCIDWorks*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSWorks
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSWorks
+  id: SCOPUSWorks
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: SCOPUSWorks
+  nameWithType: DiscoverCache.SCOPUSWorks
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSWorks
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: SCOPUSWorks
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 59
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nCaché para peticiones a SCOPUS\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, SCOPUSWorks> SCOPUSWorks { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSWorks}
+    content.vb: Public Property SCOPUSWorks As Dictionary(Of String, SCOPUSWorks)
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSWorks*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSPerson
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSPerson
+  id: SCOPUSPerson
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: SCOPUSPerson
+  nameWithType: DiscoverCache.SCOPUSPerson
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSPerson
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: SCOPUSPerson
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 64
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nCaché para peticiones a SCOPUS\n"
+  example: []
+  syntax:
+    content: public Dictionary<ulong, SCOPUSPerson> SCOPUSPerson { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.UInt64,API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSPerson}
+    content.vb: Public Property SCOPUSPerson As Dictionary(Of ULong, SCOPUSPerson)
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSPerson*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.DBLPAuthors
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverCache.DBLPAuthors
+  id: DBLPAuthors
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: DBLPAuthors
+  nameWithType: DiscoverCache.DBLPAuthors
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.DBLPAuthors
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: DBLPAuthors
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 69
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nCaché para peticiones a DBLP\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, DBLPAuthors> DBLPAuthors { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.DBLPAuthors}
+    content.vb: Public Property DBLPAuthors As Dictionary(Of String, DBLPAuthors)
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.DBLPAuthors*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.DBLPPerson
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverCache.DBLPPerson
+  id: DBLPPerson
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: DBLPPerson
+  nameWithType: DiscoverCache.DBLPPerson
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.DBLPPerson
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: DBLPPerson
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 74
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nCaché para peticiones a DBLP\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, DBLPPerson> DBLPPerson { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.DBLPPerson}
+    content.vb: Public Property DBLPPerson As Dictionary(Of String, DBLPPerson)
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.DBLPPerson*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.CROSSREF_Works
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverCache.CROSSREF_Works
+  id: CROSSREF_Works
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: CROSSREF_Works
+  nameWithType: DiscoverCache.CROSSREF_Works
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.CROSSREF_Works
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: CROSSREF_Works
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 79
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nCaché para peticiones a CROSSREF\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, CROSSREF_Works> CROSSREF_Works { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_Works}
+    content.vb: Public Property CROSSREF_Works As Dictionary(Of String, CROSSREF_Works)
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.CROSSREF_Works*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkSearchByTitle
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkSearchByTitle
+  id: PUBMED_WorkSearchByTitle
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: PUBMED_WorkSearchByTitle
+  nameWithType: DiscoverCache.PUBMED_WorkSearchByTitle
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkSearchByTitle
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: PUBMED_WorkSearchByTitle
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 84
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nCaché para peticiones a PUBMED\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, uint[]> PUBMED_WorkSearchByTitle { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.UInt32[]}
+    content.vb: Public Property PUBMED_WorkSearchByTitle As Dictionary(Of String, UInteger())
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkSearchByTitle*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkByID
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkByID
+  id: PUBMED_WorkByID
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: PUBMED_WorkByID
+  nameWithType: DiscoverCache.PUBMED_WorkByID
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkByID
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: PUBMED_WorkByID
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 89
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nCaché para peticiones a PUBMED\n"
+  example: []
+  syntax:
+    content: public Dictionary<uint, PubmedArticleSet> PUBMED_WorkByID { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.UInt32,API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSet}
+    content.vb: Public Property PUBMED_WorkByID As Dictionary(Of UInteger, PubmedArticleSet)
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkByID*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.WOSWorks
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverCache.WOSWorks
+  id: WOSWorks
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: WOSWorks
+  nameWithType: DiscoverCache.WOSWorks
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.WOSWorks
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: WOSWorks
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 94
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nCaché para peticiones a WOS\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, WOSWorks> WOSWorks { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.WOSWorks}
+    content.vb: Public Property WOSWorks As Dictionary(Of String, WOSWorks)
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.WOSWorks*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.RECOLECTAWorks
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverCache.RECOLECTAWorks
+  id: RECOLECTAWorks
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: RECOLECTAWorks
+  nameWithType: DiscoverCache.RECOLECTAWorks
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.RECOLECTAWorks
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: RECOLECTAWorks
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 99
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nCaché para peticiones a RECOLECTA\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, List<RecolectaDocument>> RECOLECTAWorks { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument}}
+    content.vb: Public Property RECOLECTAWorks As Dictionary(Of String, List(Of RecolectaDocument))
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.RECOLECTAWorks*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.DOAJWorks
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverCache.DOAJWorks
+  id: DOAJWorks
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: DOAJWorks
+  nameWithType: DiscoverCache.DOAJWorks
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.DOAJWorks
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: DOAJWorks
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 104
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nCaché para peticiones a DOAJ\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, DOAJWorks> DOAJWorks { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.DOAJWorks}
+    content.vb: Public Property DOAJWorks As Dictionary(Of String, DOAJWorks)
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.DOAJWorks*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.NormalizedNames
+  commentId: P:API_DISCOVER.Models.Entities.DiscoverCache.NormalizedNames
+  id: NormalizedNames
+  parent: API_DISCOVER.Models.Entities.DiscoverCache
+  langs:
+  - csharp
+  - vb
+  name: NormalizedNames
+  nameWithType: DiscoverCache.NormalizedNames
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.NormalizedNames
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverCache.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: NormalizedNames
+    path: Models/Entities/DiscoverCache.cs
+    startLine: 107
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: public Dictionary<string, string> NormalizedNames { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+    content.vb: Public Property NormalizedNames As Dictionary(Of String, String)
+  overload: API_DISCOVER.Models.Entities.DiscoverCache.NormalizedNames*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.Models.Entities
+  commentId: N:API_DISCOVER.Models.Entities
+  name: API_DISCOVER.Models.Entities
+  nameWithType: API_DISCOVER.Models.Entities
+  fullName: API_DISCOVER.Models.Entities
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.#ctor*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.#ctor
+  name: DiscoverCache
+  nameWithType: DiscoverCache.DiscoverCache
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.DiscoverCache
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.Sparql*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.Sparql
+  name: Sparql
+  nameWithType: DiscoverCache.Sparql
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.Sparql
+- uid: System.Collections.Generic.Dictionary{System.Int32,API_DISCOVER.Models.Entities.SparqlObject}
+  commentId: T:System.Collections.Generic.Dictionary{System.Int32,API_DISCOVER.Models.Entities.SparqlObject}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<Int32, SparqlObject>
+  nameWithType: Dictionary<Int32, SparqlObject>
+  fullName: System.Collections.Generic.Dictionary<System.Int32, API_DISCOVER.Models.Entities.SparqlObject>
+  nameWithType.vb: Dictionary(Of Int32, SparqlObject)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.Int32, API_DISCOVER.Models.Entities.SparqlObject)
+  name.vb: Dictionary(Of Int32, SparqlObject)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.SparqlObject
+    name: SparqlObject
+    nameWithType: SparqlObject
+    fullName: API_DISCOVER.Models.Entities.SparqlObject
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.SparqlObject
+    name: SparqlObject
+    nameWithType: SparqlObject
+    fullName: API_DISCOVER.Models.Entities.SparqlObject
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.ORCIDExpandedSearch*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.ORCIDExpandedSearch
+  name: ORCIDExpandedSearch
+  nameWithType: DiscoverCache.ORCIDExpandedSearch
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.ORCIDExpandedSearch
+- uid: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDExpandedSearch}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDExpandedSearch}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, ORCIDExpandedSearch>
+  nameWithType: Dictionary<String, ORCIDExpandedSearch>
+  fullName: System.Collections.Generic.Dictionary<System.String, API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDExpandedSearch>
+  nameWithType.vb: Dictionary(Of String, ORCIDExpandedSearch)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDExpandedSearch)
+  name.vb: Dictionary(Of String, ORCIDExpandedSearch)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDExpandedSearch
+    name: ORCIDExpandedSearch
+    nameWithType: ORCIDExpandedSearch
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDExpandedSearch
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDExpandedSearch
+    name: ORCIDExpandedSearch
+    nameWithType: ORCIDExpandedSearch
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDExpandedSearch
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.ORCIDPerson*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.ORCIDPerson
+  name: ORCIDPerson
+  nameWithType: DiscoverCache.ORCIDPerson
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.ORCIDPerson
+- uid: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDPerson}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDPerson}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, ORCIDPerson>
+  nameWithType: Dictionary<String, ORCIDPerson>
+  fullName: System.Collections.Generic.Dictionary<System.String, API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDPerson>
+  nameWithType.vb: Dictionary(Of String, ORCIDPerson)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDPerson)
+  name.vb: Dictionary(Of String, ORCIDPerson)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDPerson
+    name: ORCIDPerson
+    nameWithType: ORCIDPerson
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDPerson
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDPerson
+    name: ORCIDPerson
+    nameWithType: ORCIDPerson
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDPerson
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.ORCIDWorks*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.ORCIDWorks
+  name: ORCIDWorks
+  nameWithType: DiscoverCache.ORCIDWorks
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.ORCIDWorks
+- uid: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, ORCIDWorks>
+  nameWithType: Dictionary<String, ORCIDWorks>
+  fullName: System.Collections.Generic.Dictionary<System.String, API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks>
+  nameWithType.vb: Dictionary(Of String, ORCIDWorks)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks)
+  name.vb: Dictionary(Of String, ORCIDWorks)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks
+    name: ORCIDWorks
+    nameWithType: ORCIDWorks
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks
+    name: ORCIDWorks
+    nameWithType: ORCIDWorks
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSWorks*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSWorks
+  name: SCOPUSWorks
+  nameWithType: DiscoverCache.SCOPUSWorks
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSWorks
+- uid: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSWorks}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSWorks}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, SCOPUSWorks>
+  nameWithType: Dictionary<String, SCOPUSWorks>
+  fullName: System.Collections.Generic.Dictionary<System.String, API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSWorks>
+  nameWithType.vb: Dictionary(Of String, SCOPUSWorks)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSWorks)
+  name.vb: Dictionary(Of String, SCOPUSWorks)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSWorks
+    name: SCOPUSWorks
+    nameWithType: SCOPUSWorks
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSWorks
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSWorks
+    name: SCOPUSWorks
+    nameWithType: SCOPUSWorks
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSWorks
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSPerson*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSPerson
+  name: SCOPUSPerson
+  nameWithType: DiscoverCache.SCOPUSPerson
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.SCOPUSPerson
+- uid: System.Collections.Generic.Dictionary{System.UInt64,API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSPerson}
+  commentId: T:System.Collections.Generic.Dictionary{System.UInt64,API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSPerson}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<UInt64, SCOPUSPerson>
+  nameWithType: Dictionary<UInt64, SCOPUSPerson>
+  fullName: System.Collections.Generic.Dictionary<System.UInt64, API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSPerson>
+  nameWithType.vb: Dictionary(Of UInt64, SCOPUSPerson)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.UInt64, API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSPerson)
+  name.vb: Dictionary(Of UInt64, SCOPUSPerson)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.UInt64
+    name: UInt64
+    nameWithType: UInt64
+    fullName: System.UInt64
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSPerson
+    name: SCOPUSPerson
+    nameWithType: SCOPUSPerson
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSPerson
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.UInt64
+    name: UInt64
+    nameWithType: UInt64
+    fullName: System.UInt64
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSPerson
+    name: SCOPUSPerson
+    nameWithType: SCOPUSPerson
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.SCOPUSPerson
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.DBLPAuthors*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.DBLPAuthors
+  name: DBLPAuthors
+  nameWithType: DiscoverCache.DBLPAuthors
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.DBLPAuthors
+- uid: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.DBLPAuthors}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.DBLPAuthors}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, DBLPAuthors>
+  nameWithType: Dictionary<String, DBLPAuthors>
+  fullName: System.Collections.Generic.Dictionary<System.String, API_DISCOVER.Models.Entities.ExternalAPIs.DBLPAuthors>
+  nameWithType.vb: Dictionary(Of String, DBLPAuthors)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, API_DISCOVER.Models.Entities.ExternalAPIs.DBLPAuthors)
+  name.vb: Dictionary(Of String, DBLPAuthors)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.DBLPAuthors
+    name: DBLPAuthors
+    nameWithType: DBLPAuthors
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.DBLPAuthors
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.DBLPAuthors
+    name: DBLPAuthors
+    nameWithType: DBLPAuthors
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.DBLPAuthors
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.DBLPPerson*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.DBLPPerson
+  name: DBLPPerson
+  nameWithType: DiscoverCache.DBLPPerson
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.DBLPPerson
+- uid: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.DBLPPerson}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.DBLPPerson}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, DBLPPerson>
+  nameWithType: Dictionary<String, DBLPPerson>
+  fullName: System.Collections.Generic.Dictionary<System.String, API_DISCOVER.Models.Entities.ExternalAPIs.DBLPPerson>
+  nameWithType.vb: Dictionary(Of String, DBLPPerson)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, API_DISCOVER.Models.Entities.ExternalAPIs.DBLPPerson)
+  name.vb: Dictionary(Of String, DBLPPerson)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.DBLPPerson
+    name: DBLPPerson
+    nameWithType: DBLPPerson
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.DBLPPerson
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.DBLPPerson
+    name: DBLPPerson
+    nameWithType: DBLPPerson
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.DBLPPerson
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.CROSSREF_Works*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.CROSSREF_Works
+  name: CROSSREF_Works
+  nameWithType: DiscoverCache.CROSSREF_Works
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.CROSSREF_Works
+- uid: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_Works}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_Works}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, CROSSREF_Works>
+  nameWithType: Dictionary<String, CROSSREF_Works>
+  fullName: System.Collections.Generic.Dictionary<System.String, API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_Works>
+  nameWithType.vb: Dictionary(Of String, CROSSREF_Works)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_Works)
+  name.vb: Dictionary(Of String, CROSSREF_Works)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_Works
+    name: CROSSREF_Works
+    nameWithType: CROSSREF_Works
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_Works
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_Works
+    name: CROSSREF_Works
+    nameWithType: CROSSREF_Works
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.CROSSREF_Works
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkSearchByTitle*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkSearchByTitle
+  name: PUBMED_WorkSearchByTitle
+  nameWithType: DiscoverCache.PUBMED_WorkSearchByTitle
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkSearchByTitle
+- uid: System.Collections.Generic.Dictionary{System.String,System.UInt32[]}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.UInt32[]}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, UInt32[]>
+  nameWithType: Dictionary<String, UInt32[]>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.UInt32[]>
+  nameWithType.vb: Dictionary(Of String, UInt32())
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.UInt32())
+  name.vb: Dictionary(Of String, UInt32())
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.UInt32
+    name: UInt32
+    nameWithType: UInt32
+    fullName: System.UInt32
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.UInt32
+    name: UInt32
+    nameWithType: UInt32
+    fullName: System.UInt32
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkByID*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkByID
+  name: PUBMED_WorkByID
+  nameWithType: DiscoverCache.PUBMED_WorkByID
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.PUBMED_WorkByID
+- uid: System.Collections.Generic.Dictionary{System.UInt32,API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSet}
+  commentId: T:System.Collections.Generic.Dictionary{System.UInt32,API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSet}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<UInt32, PubmedArticleSet>
+  nameWithType: Dictionary<UInt32, PubmedArticleSet>
+  fullName: System.Collections.Generic.Dictionary<System.UInt32, API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSet>
+  nameWithType.vb: Dictionary(Of UInt32, PubmedArticleSet)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.UInt32, API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSet)
+  name.vb: Dictionary(Of UInt32, PubmedArticleSet)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.UInt32
+    name: UInt32
+    nameWithType: UInt32
+    fullName: System.UInt32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSet
+    name: PubmedArticleSet
+    nameWithType: PubmedArticleSet
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSet
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.UInt32
+    name: UInt32
+    nameWithType: UInt32
+    fullName: System.UInt32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSet
+    name: PubmedArticleSet
+    nameWithType: PubmedArticleSet
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.PubmedArticleSet
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.WOSWorks*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.WOSWorks
+  name: WOSWorks
+  nameWithType: DiscoverCache.WOSWorks
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.WOSWorks
+- uid: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.WOSWorks}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.WOSWorks}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, WOSWorks>
+  nameWithType: Dictionary<String, WOSWorks>
+  fullName: System.Collections.Generic.Dictionary<System.String, API_DISCOVER.Models.Entities.ExternalAPIs.WOSWorks>
+  nameWithType.vb: Dictionary(Of String, WOSWorks)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, API_DISCOVER.Models.Entities.ExternalAPIs.WOSWorks)
+  name.vb: Dictionary(Of String, WOSWorks)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.WOSWorks
+    name: WOSWorks
+    nameWithType: WOSWorks
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.WOSWorks
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.WOSWorks
+    name: WOSWorks
+    nameWithType: WOSWorks
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.WOSWorks
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.RECOLECTAWorks*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.RECOLECTAWorks
+  name: RECOLECTAWorks
+  nameWithType: DiscoverCache.RECOLECTAWorks
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.RECOLECTAWorks
+- uid: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument}}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, List<RecolectaDocument>>
+  nameWithType: Dictionary<String, List<RecolectaDocument>>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.List<API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument>>
+  nameWithType.vb: Dictionary(Of String, List(Of RecolectaDocument))
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.List(Of API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument))
+  name.vb: Dictionary(Of String, List(Of RecolectaDocument))
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument
+    name: RecolectaDocument
+    nameWithType: RecolectaDocument
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument
+    name: RecolectaDocument
+    nameWithType: RecolectaDocument
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.RecolectaDocument
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.DOAJWorks*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.DOAJWorks
+  name: DOAJWorks
+  nameWithType: DiscoverCache.DOAJWorks
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.DOAJWorks
+- uid: System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.DOAJWorks}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,API_DISCOVER.Models.Entities.ExternalAPIs.DOAJWorks}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, DOAJWorks>
+  nameWithType: Dictionary<String, DOAJWorks>
+  fullName: System.Collections.Generic.Dictionary<System.String, API_DISCOVER.Models.Entities.ExternalAPIs.DOAJWorks>
+  nameWithType.vb: Dictionary(Of String, DOAJWorks)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, API_DISCOVER.Models.Entities.ExternalAPIs.DOAJWorks)
+  name.vb: Dictionary(Of String, DOAJWorks)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.DOAJWorks
+    name: DOAJWorks
+    nameWithType: DOAJWorks
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.DOAJWorks
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: API_DISCOVER.Models.Entities.ExternalAPIs.DOAJWorks
+    name: DOAJWorks
+    nameWithType: DOAJWorks
+    fullName: API_DISCOVER.Models.Entities.ExternalAPIs.DOAJWorks
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.DiscoverCache.NormalizedNames*
+  commentId: Overload:API_DISCOVER.Models.Entities.DiscoverCache.NormalizedNames
+  name: NormalizedNames
+  nameWithType: DiscoverCache.NormalizedNames
+  fullName: API_DISCOVER.Models.Entities.DiscoverCache.NormalizedNames
+- uid: System.Collections.Generic.Dictionary{System.String,System.String}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, String>
+  nameWithType: Dictionary<String, String>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.String>
+  nameWithType.vb: Dictionary(Of String, String)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.String)
+  name.vb: Dictionary(Of String, String)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )

@@ -1,0 +1,556 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Utility.SparqlUtilityMock
+  commentId: T:API_DISCOVER.Utility.SparqlUtilityMock
+  id: SparqlUtilityMock
+  parent: API_DISCOVER.Utility
+  children:
+  - API_DISCOVER.Utility.SparqlUtilityMock.#ctor(VDS.RDF.RohGraph)
+  - API_DISCOVER.Utility.SparqlUtilityMock.SelectData(System.String,System.String,System.String,System.String)
+  langs:
+  - csharp
+  - vb
+  name: SparqlUtilityMock
+  nameWithType: SparqlUtilityMock
+  fullName: API_DISCOVER.Utility.SparqlUtilityMock
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/SparqlUtilityMock.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: SparqlUtilityMock
+    path: Utility/SparqlUtilityMock.cs
+    startLine: 7
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  syntax:
+    content: 'public class SparqlUtilityMock : I_SparqlUtility'
+    content.vb: >-
+      Public Class SparqlUtilityMock
+          Implements I_SparqlUtility
+  inheritance:
+  - System.Object
+  implements:
+  - API_DISCOVER.Utility.I_SparqlUtility
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Utility.SparqlUtilityMock.#ctor(VDS.RDF.RohGraph)
+  commentId: M:API_DISCOVER.Utility.SparqlUtilityMock.#ctor(VDS.RDF.RohGraph)
+  id: '#ctor(VDS.RDF.RohGraph)'
+  parent: API_DISCOVER.Utility.SparqlUtilityMock
+  langs:
+  - csharp
+  - vb
+  name: SparqlUtilityMock(RohGraph)
+  nameWithType: SparqlUtilityMock.SparqlUtilityMock(RohGraph)
+  fullName: API_DISCOVER.Utility.SparqlUtilityMock.SparqlUtilityMock(VDS.RDF.RohGraph)
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/SparqlUtilityMock.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Utility/SparqlUtilityMock.cs
+    startLine: 11
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  syntax:
+    content: public SparqlUtilityMock(RohGraph dataGraph)
+    parameters:
+    - id: dataGraph
+      type: VDS.RDF.RohGraph
+    content.vb: Public Sub New(dataGraph As RohGraph)
+  overload: API_DISCOVER.Utility.SparqlUtilityMock.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Utility.SparqlUtilityMock.SelectData(System.String,System.String,System.String,System.String)
+  commentId: M:API_DISCOVER.Utility.SparqlUtilityMock.SelectData(System.String,System.String,System.String,System.String)
+  id: SelectData(System.String,System.String,System.String,System.String)
+  parent: API_DISCOVER.Utility.SparqlUtilityMock
+  langs:
+  - csharp
+  - vb
+  name: SelectData(String, String, String, String)
+  nameWithType: SparqlUtilityMock.SelectData(String, String, String, String)
+  fullName: API_DISCOVER.Utility.SparqlUtilityMock.SelectData(System.String, System.String, System.String, System.String)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Utility/SparqlUtilityMock.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: SelectData
+    path: Utility/SparqlUtilityMock.cs
+    startLine: 16
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Utility
+  syntax:
+    content: public SparqlObject SelectData(string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam)
+    parameters:
+    - id: pSPARQLEndpoint
+      type: System.String
+    - id: pGraph
+      type: System.String
+    - id: pConsulta
+      type: System.String
+    - id: pQueryParam
+      type: System.String
+    return:
+      type: API_DISCOVER.Models.Entities.SparqlObject
+    content.vb: Public Function SelectData(pSPARQLEndpoint As String, pGraph As String, pConsulta As String, pQueryParam As String) As SparqlObject
+  overload: API_DISCOVER.Utility.SparqlUtilityMock.SelectData*
+  implements:
+  - API_DISCOVER.Utility.I_SparqlUtility.SelectData(System.String,System.String,System.String,System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.Utility
+  commentId: N:API_DISCOVER.Utility
+  name: API_DISCOVER.Utility
+  nameWithType: API_DISCOVER.Utility
+  fullName: API_DISCOVER.Utility
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: API_DISCOVER.Utility.I_SparqlUtility
+  commentId: T:API_DISCOVER.Utility.I_SparqlUtility
+  parent: API_DISCOVER.Utility
+  name: I_SparqlUtility
+  nameWithType: I_SparqlUtility
+  fullName: API_DISCOVER.Utility.I_SparqlUtility
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Utility.SparqlUtilityMock.#ctor*
+  commentId: Overload:API_DISCOVER.Utility.SparqlUtilityMock.#ctor
+  name: SparqlUtilityMock
+  nameWithType: SparqlUtilityMock.SparqlUtilityMock
+  fullName: API_DISCOVER.Utility.SparqlUtilityMock.SparqlUtilityMock
+- uid: VDS.RDF.RohGraph
+  commentId: T:VDS.RDF.RohGraph
+  parent: VDS.RDF
+  name: RohGraph
+  nameWithType: RohGraph
+  fullName: VDS.RDF.RohGraph
+- uid: VDS.RDF
+  commentId: N:VDS.RDF
+  name: VDS.RDF
+  nameWithType: VDS.RDF
+  fullName: VDS.RDF
+- uid: API_DISCOVER.Utility.SparqlUtilityMock.SelectData*
+  commentId: Overload:API_DISCOVER.Utility.SparqlUtilityMock.SelectData
+  name: SelectData
+  nameWithType: SparqlUtilityMock.SelectData
+  fullName: API_DISCOVER.Utility.SparqlUtilityMock.SelectData
+- uid: API_DISCOVER.Utility.I_SparqlUtility.SelectData(System.String,System.String,System.String,System.String)
+  commentId: M:API_DISCOVER.Utility.I_SparqlUtility.SelectData(System.String,System.String,System.String,System.String)
+  parent: API_DISCOVER.Utility.I_SparqlUtility
+  isExternal: true
+  name: SelectData(String, String, String, String)
+  nameWithType: I_SparqlUtility.SelectData(String, String, String, String)
+  fullName: API_DISCOVER.Utility.I_SparqlUtility.SelectData(System.String, System.String, System.String, System.String)
+  spec.csharp:
+  - uid: API_DISCOVER.Utility.I_SparqlUtility.SelectData(System.String,System.String,System.String,System.String)
+    name: SelectData
+    nameWithType: I_SparqlUtility.SelectData
+    fullName: API_DISCOVER.Utility.I_SparqlUtility.SelectData
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: API_DISCOVER.Utility.I_SparqlUtility.SelectData(System.String,System.String,System.String,System.String)
+    name: SelectData
+    nameWithType: I_SparqlUtility.SelectData
+    fullName: API_DISCOVER.Utility.I_SparqlUtility.SelectData
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: API_DISCOVER.Models.Entities.SparqlObject
+  commentId: T:API_DISCOVER.Models.Entities.SparqlObject
+  parent: API_DISCOVER.Models.Entities
+  name: SparqlObject
+  nameWithType: SparqlObject
+  fullName: API_DISCOVER.Models.Entities.SparqlObject
+- uid: API_DISCOVER.Models.Entities
+  commentId: N:API_DISCOVER.Models.Entities
+  name: API_DISCOVER.Models.Entities
+  nameWithType: API_DISCOVER.Models.Entities
+  fullName: API_DISCOVER.Models.Entities

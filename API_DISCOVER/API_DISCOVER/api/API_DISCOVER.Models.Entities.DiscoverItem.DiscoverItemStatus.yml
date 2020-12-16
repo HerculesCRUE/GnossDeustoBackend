@@ -1,0 +1,178 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus
+  commentId: T:API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus
+  id: DiscoverItem.DiscoverItemStatus
+  parent: API_DISCOVER.Models.Entities
+  children:
+  - API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.Error
+  - API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.Pending
+  - API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.Processed
+  - API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem
+  langs:
+  - csharp
+  - vb
+  name: DiscoverItem.DiscoverItemStatus
+  nameWithType: DiscoverItem.DiscoverItemStatus
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus
+  type: Enum
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: DiscoverItemStatus
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 120
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: public enum DiscoverItemStatus
+    content.vb: Public Enum DiscoverItemStatus
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.Pending
+  commentId: F:API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.Pending
+  id: Pending
+  parent: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus
+  langs:
+  - csharp
+  - vb
+  name: Pending
+  nameWithType: DiscoverItem.DiscoverItemStatus.Pending
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.Pending
+  type: Field
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Pending
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 122
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: Pending = 0
+    return:
+      type: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.Processed
+  commentId: F:API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.Processed
+  id: Processed
+  parent: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus
+  langs:
+  - csharp
+  - vb
+  name: Processed
+  nameWithType: DiscoverItem.DiscoverItemStatus.Processed
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.Processed
+  type: Field
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Processed
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 123
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: Processed = 1
+    return:
+      type: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem
+  commentId: F:API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem
+  id: ProcessedDissambiguationProblem
+  parent: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus
+  langs:
+  - csharp
+  - vb
+  name: ProcessedDissambiguationProblem
+  nameWithType: DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem
+  type: Field
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ProcessedDissambiguationProblem
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 124
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: ProcessedDissambiguationProblem = 2
+    return:
+      type: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.Error
+  commentId: F:API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.Error
+  id: Error
+  parent: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus
+  langs:
+  - csharp
+  - vb
+  name: Error
+  nameWithType: DiscoverItem.DiscoverItemStatus.Error
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus.Error
+  type: Field
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DiscoverItem.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Error
+    path: Models/Entities/DiscoverItem.cs
+    startLine: 125
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: Error = 3
+    return:
+      type: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: API_DISCOVER.Models.Entities
+  commentId: N:API_DISCOVER.Models.Entities
+  name: API_DISCOVER.Models.Entities
+  nameWithType: API_DISCOVER.Models.Entities
+  fullName: API_DISCOVER.Models.Entities
+- uid: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus
+  commentId: T:API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus
+  parent: API_DISCOVER.Models.Entities
+  name: DiscoverItem.DiscoverItemStatus
+  nameWithType: DiscoverItem.DiscoverItemStatus
+  fullName: API_DISCOVER.Models.Entities.DiscoverItem.DiscoverItemStatus

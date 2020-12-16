@@ -1,0 +1,572 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary
+  commentId: T:API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary
+  id: ORCIDWorks.Group.WorkSummary
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs
+  children:
+  - API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.#ctor
+  - API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.externalids
+  - API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.putcode
+  - API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.title
+  langs:
+  - csharp
+  - vb
+  name: ORCIDWorks.Group.WorkSummary
+  nameWithType: ORCIDWorks.Group.WorkSummary
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/ORCID_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: WorkSummary
+    path: Models/Entities/ExternalAPIs/ORCID_API.cs
+    startLine: 139
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: >-
+      [DataContract]
+
+      public class WorkSummary
+    content.vb: >-
+      <DataContract>
+
+      Public Class WorkSummary
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.Runtime.Serialization.DataContractAttribute
+    ctor: System.Runtime.Serialization.DataContractAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.#ctor
+  commentId: M:API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.#ctor
+  id: '#ctor'
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary
+  langs:
+  - csharp
+  - vb
+  name: WorkSummary()
+  nameWithType: ORCIDWorks.Group.WorkSummary.WorkSummary()
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.WorkSummary()
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/ORCID_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Entities/ExternalAPIs/ORCID_API.cs
+    startLine: 142
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: public WorkSummary()
+    content.vb: Public Sub New
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.title
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.title
+  id: title
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary
+  langs:
+  - csharp
+  - vb
+  name: title
+  nameWithType: ORCIDWorks.Group.WorkSummary.title
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.title
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/ORCID_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: title
+    path: Models/Entities/ExternalAPIs/ORCID_API.cs
+    startLine: 145
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: >-
+      [DataMember(Name = "title")]
+
+      public ORCIDWorks.Group.WorkSummary.Title title { get; set; }
+    parameters: []
+    return:
+      type: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.Title
+    content.vb: >-
+      <DataMember(Name:="title")>
+
+      Public Property title As ORCIDWorks.Group.WorkSummary.Title
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.title*
+  attributes:
+  - type: System.Runtime.Serialization.DataMemberAttribute
+    ctor: System.Runtime.Serialization.DataMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: title
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.putcode
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.putcode
+  id: putcode
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary
+  langs:
+  - csharp
+  - vb
+  name: putcode
+  nameWithType: ORCIDWorks.Group.WorkSummary.putcode
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.putcode
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/ORCID_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: putcode
+    path: Models/Entities/ExternalAPIs/ORCID_API.cs
+    startLine: 147
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: >-
+      [DataMember(Name = "put-code")]
+
+      public string putcode { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <DataMember(Name:="put-code")>
+
+      Public Property putcode As String
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.putcode*
+  attributes:
+  - type: System.Runtime.Serialization.DataMemberAttribute
+    ctor: System.Runtime.Serialization.DataMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: put-code
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.externalids
+  commentId: P:API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.externalids
+  id: externalids
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary
+  langs:
+  - csharp
+  - vb
+  name: externalids
+  nameWithType: ORCIDWorks.Group.WorkSummary.externalids
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.externalids
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/ExternalAPIs/ORCID_API.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: externalids
+    path: Models/Entities/ExternalAPIs/ORCID_API.cs
+    startLine: 150
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities.ExternalAPIs
+  syntax:
+    content: >-
+      [DataMember(Name = "external-ids")]
+
+      public ORCIDWorks.Group.WorkSummary.Externalids externalids { get; set; }
+    parameters: []
+    return:
+      type: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.Externalids
+    content.vb: >-
+      <DataMember(Name:="external-ids")>
+
+      Public Property externalids As ORCIDWorks.Group.WorkSummary.Externalids
+  overload: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.externalids*
+  attributes:
+  - type: System.Runtime.Serialization.DataMemberAttribute
+    ctor: System.Runtime.Serialization.DataMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: external-ids
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs
+  commentId: N:API_DISCOVER.Models.Entities.ExternalAPIs
+  name: API_DISCOVER.Models.Entities.ExternalAPIs
+  nameWithType: API_DISCOVER.Models.Entities.ExternalAPIs
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.#ctor*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.#ctor
+  name: WorkSummary
+  nameWithType: ORCIDWorks.Group.WorkSummary.WorkSummary
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.WorkSummary
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.title*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.title
+  name: title
+  nameWithType: ORCIDWorks.Group.WorkSummary.title
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.title
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.Title
+  commentId: T:API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.Title
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs
+  name: ORCIDWorks.Group.WorkSummary.Title
+  nameWithType: ORCIDWorks.Group.WorkSummary.Title
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.Title
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.putcode*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.putcode
+  name: putcode
+  nameWithType: ORCIDWorks.Group.WorkSummary.putcode
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.putcode
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.externalids*
+  commentId: Overload:API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.externalids
+  name: externalids
+  nameWithType: ORCIDWorks.Group.WorkSummary.externalids
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.externalids
+- uid: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.Externalids
+  commentId: T:API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.Externalids
+  parent: API_DISCOVER.Models.Entities.ExternalAPIs
+  name: ORCIDWorks.Group.WorkSummary.Externalids
+  nameWithType: ORCIDWorks.Group.WorkSummary.Externalids
+  fullName: API_DISCOVER.Models.Entities.ExternalAPIs.ORCIDWorks.Group.WorkSummary.Externalids

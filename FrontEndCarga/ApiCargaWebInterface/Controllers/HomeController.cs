@@ -9,6 +9,7 @@ using ApiCargaWebInterface.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using ApiCargaWebInterface.Models.Services;
 
 namespace ApiCargaWebInterface.Controllers
 {
@@ -29,7 +30,9 @@ namespace ApiCargaWebInterface.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            ConfigUrlService urlService = new ConfigUrlService();
+            string routeProxy = $"{urlService.GetProxy()}/public/gnossdeustobackend/home";
+            return Redirect(routeProxy);
         }
 
         public IActionResult Privacy()

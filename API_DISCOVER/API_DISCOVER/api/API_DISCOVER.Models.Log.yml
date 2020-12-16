@@ -1,0 +1,22 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Log
+  commentId: N:API_DISCOVER.Models.Log
+  id: API_DISCOVER.Models.Log
+  children:
+  - API_DISCOVER.Models.Log.Log
+  langs:
+  - csharp
+  - vb
+  name: API_DISCOVER.Models.Log
+  nameWithType: API_DISCOVER.Models.Log
+  fullName: API_DISCOVER.Models.Log
+  type: Namespace
+  assemblies:
+  - API_DISCOVER
+references:
+- uid: API_DISCOVER.Models.Log.Log
+  commentId: T:API_DISCOVER.Models.Log.Log
+  name: Log
+  nameWithType: Log
+  fullName: API_DISCOVER.Models.Log.Log

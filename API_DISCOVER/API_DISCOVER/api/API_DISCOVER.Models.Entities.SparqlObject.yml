@@ -1,0 +1,520 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Entities.SparqlObject
+  commentId: T:API_DISCOVER.Models.Entities.SparqlObject
+  id: SparqlObject
+  parent: API_DISCOVER.Models.Entities
+  children:
+  - API_DISCOVER.Models.Entities.SparqlObject.#ctor
+  - API_DISCOVER.Models.Entities.SparqlObject.boolean
+  - API_DISCOVER.Models.Entities.SparqlObject.head
+  - API_DISCOVER.Models.Entities.SparqlObject.results
+  langs:
+  - csharp
+  - vb
+  name: SparqlObject
+  nameWithType: SparqlObject
+  fullName: API_DISCOVER.Models.Entities.SparqlObject
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/SparqlObject.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: SparqlObject
+    path: Models/Entities/SparqlObject.cs
+    startLine: 11
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: public class SparqlObject
+    content.vb: Public Class SparqlObject
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Entities.SparqlObject.#ctor
+  commentId: M:API_DISCOVER.Models.Entities.SparqlObject.#ctor
+  id: '#ctor'
+  parent: API_DISCOVER.Models.Entities.SparqlObject
+  langs:
+  - csharp
+  - vb
+  name: SparqlObject()
+  nameWithType: SparqlObject.SparqlObject()
+  fullName: API_DISCOVER.Models.Entities.SparqlObject.SparqlObject()
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/SparqlObject.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Entities/SparqlObject.cs
+    startLine: 13
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: public SparqlObject()
+    content.vb: Public Sub New
+  overload: API_DISCOVER.Models.Entities.SparqlObject.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.SparqlObject.head
+  commentId: P:API_DISCOVER.Models.Entities.SparqlObject.head
+  id: head
+  parent: API_DISCOVER.Models.Entities.SparqlObject
+  langs:
+  - csharp
+  - vb
+  name: head
+  nameWithType: SparqlObject.head
+  fullName: API_DISCOVER.Models.Entities.SparqlObject.head
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/SparqlObject.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: head
+    path: Models/Entities/SparqlObject.cs
+    startLine: 15
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: public SparqlObject.Head head { get; set; }
+    parameters: []
+    return:
+      type: API_DISCOVER.Models.Entities.SparqlObject.Head
+    content.vb: Public Property head As SparqlObject.Head
+  overload: API_DISCOVER.Models.Entities.SparqlObject.head*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.SparqlObject.results
+  commentId: P:API_DISCOVER.Models.Entities.SparqlObject.results
+  id: results
+  parent: API_DISCOVER.Models.Entities.SparqlObject
+  langs:
+  - csharp
+  - vb
+  name: results
+  nameWithType: SparqlObject.results
+  fullName: API_DISCOVER.Models.Entities.SparqlObject.results
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/SparqlObject.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: results
+    path: Models/Entities/SparqlObject.cs
+    startLine: 16
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: public SparqlObject.Results results { get; set; }
+    parameters: []
+    return:
+      type: API_DISCOVER.Models.Entities.SparqlObject.Results
+    content.vb: Public Property results As SparqlObject.Results
+  overload: API_DISCOVER.Models.Entities.SparqlObject.results*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.SparqlObject.boolean
+  commentId: P:API_DISCOVER.Models.Entities.SparqlObject.boolean
+  id: boolean
+  parent: API_DISCOVER.Models.Entities.SparqlObject
+  langs:
+  - csharp
+  - vb
+  name: boolean
+  nameWithType: SparqlObject.boolean
+  fullName: API_DISCOVER.Models.Entities.SparqlObject.boolean
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/SparqlObject.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: boolean
+    path: Models/Entities/SparqlObject.cs
+    startLine: 17
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  syntax:
+    content: public bool boolean { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property boolean As Boolean
+  overload: API_DISCOVER.Models.Entities.SparqlObject.boolean*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.Models.Entities
+  commentId: N:API_DISCOVER.Models.Entities
+  name: API_DISCOVER.Models.Entities
+  nameWithType: API_DISCOVER.Models.Entities
+  fullName: API_DISCOVER.Models.Entities
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Entities.SparqlObject.#ctor*
+  commentId: Overload:API_DISCOVER.Models.Entities.SparqlObject.#ctor
+  name: SparqlObject
+  nameWithType: SparqlObject.SparqlObject
+  fullName: API_DISCOVER.Models.Entities.SparqlObject.SparqlObject
+- uid: API_DISCOVER.Models.Entities.SparqlObject.head*
+  commentId: Overload:API_DISCOVER.Models.Entities.SparqlObject.head
+  name: head
+  nameWithType: SparqlObject.head
+  fullName: API_DISCOVER.Models.Entities.SparqlObject.head
+- uid: API_DISCOVER.Models.Entities.SparqlObject.Head
+  commentId: T:API_DISCOVER.Models.Entities.SparqlObject.Head
+  parent: API_DISCOVER.Models.Entities
+  name: SparqlObject.Head
+  nameWithType: SparqlObject.Head
+  fullName: API_DISCOVER.Models.Entities.SparqlObject.Head
+- uid: API_DISCOVER.Models.Entities.SparqlObject.results*
+  commentId: Overload:API_DISCOVER.Models.Entities.SparqlObject.results
+  name: results
+  nameWithType: SparqlObject.results
+  fullName: API_DISCOVER.Models.Entities.SparqlObject.results
+- uid: API_DISCOVER.Models.Entities.SparqlObject.Results
+  commentId: T:API_DISCOVER.Models.Entities.SparqlObject.Results
+  parent: API_DISCOVER.Models.Entities
+  name: SparqlObject.Results
+  nameWithType: SparqlObject.Results
+  fullName: API_DISCOVER.Models.Entities.SparqlObject.Results
+- uid: API_DISCOVER.Models.Entities.SparqlObject.boolean*
+  commentId: Overload:API_DISCOVER.Models.Entities.SparqlObject.boolean
+  name: boolean
+  nameWithType: SparqlObject.boolean
+  fullName: API_DISCOVER.Models.Entities.SparqlObject.boolean
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean

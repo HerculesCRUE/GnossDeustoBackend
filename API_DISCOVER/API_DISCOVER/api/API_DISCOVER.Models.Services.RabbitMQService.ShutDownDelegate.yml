@@ -1,0 +1,40 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Services.RabbitMQService.ShutDownDelegate
+  commentId: T:API_DISCOVER.Models.Services.RabbitMQService.ShutDownDelegate
+  id: RabbitMQService.ShutDownDelegate
+  parent: API_DISCOVER.Models.Services
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: RabbitMQService.ShutDownDelegate
+  nameWithType: RabbitMQService.ShutDownDelegate
+  fullName: API_DISCOVER.Models.Services.RabbitMQService.ShutDownDelegate
+  type: Delegate
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/RabbitMQService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ShutDownDelegate
+    path: Models/Services/RabbitMQService.cs
+    startLine: 30
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  syntax:
+    content: public delegate void ShutDownDelegate();
+    content.vb: Public Delegate Sub ShutDownDelegate
+  modifiers.csharp:
+  - public
+  - delegate
+  modifiers.vb:
+  - Public
+  - Delegate
+references:
+- uid: API_DISCOVER.Models.Services
+  commentId: N:API_DISCOVER.Models.Services
+  name: API_DISCOVER.Models.Services
+  nameWithType: API_DISCOVER.Models.Services
+  fullName: API_DISCOVER.Models.Services

@@ -1,0 +1,855 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property
+  commentId: T:API_DISCOVER.Models.Entities.Disambiguation.Property
+  id: Disambiguation.Property
+  parent: API_DISCOVER.Models.Entities
+  children:
+  - API_DISCOVER.Models.Entities.Disambiguation.Property.#ctor(System.String,System.Boolean,System.Boolean,API_DISCOVER.Models.Entities.Disambiguation.Property.Type,System.Nullable{System.Int32},System.Nullable{System.Single},System.Nullable{System.Single})
+  - API_DISCOVER.Models.Entities.Disambiguation.Property.inverse
+  - API_DISCOVER.Models.Entities.Disambiguation.Property.mandatory
+  - API_DISCOVER.Models.Entities.Disambiguation.Property.maxNumWordsTitle
+  - API_DISCOVER.Models.Entities.Disambiguation.Property.property
+  - API_DISCOVER.Models.Entities.Disambiguation.Property.scoreNegative
+  - API_DISCOVER.Models.Entities.Disambiguation.Property.scorePositive
+  - API_DISCOVER.Models.Entities.Disambiguation.Property.type
+  langs:
+  - csharp
+  - vb
+  name: Disambiguation.Property
+  nameWithType: Disambiguation.Property
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/Disambiguation.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Property
+    path: Models/Entities/Disambiguation.cs
+    startLine: 28
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nPropiedades utilizadas para apoyar en la realización de la desambiguación\n"
+  example: []
+  syntax:
+    content: public class Property
+    content.vb: Public Class Property
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.#ctor(System.String,System.Boolean,System.Boolean,API_DISCOVER.Models.Entities.Disambiguation.Property.Type,System.Nullable{System.Int32},System.Nullable{System.Single},System.Nullable{System.Single})
+  commentId: M:API_DISCOVER.Models.Entities.Disambiguation.Property.#ctor(System.String,System.Boolean,System.Boolean,API_DISCOVER.Models.Entities.Disambiguation.Property.Type,System.Nullable{System.Int32},System.Nullable{System.Single},System.Nullable{System.Single})
+  id: '#ctor(System.String,System.Boolean,System.Boolean,API_DISCOVER.Models.Entities.Disambiguation.Property.Type,System.Nullable{System.Int32},System.Nullable{System.Single},System.Nullable{System.Single})'
+  parent: API_DISCOVER.Models.Entities.Disambiguation.Property
+  langs:
+  - csharp
+  - vb
+  name: Property(String, Boolean, Boolean, Disambiguation.Property.Type, Nullable<Int32>, Nullable<Single>, Nullable<Single>)
+  nameWithType: Disambiguation.Property.Property(String, Boolean, Boolean, Disambiguation.Property.Type, Nullable<Int32>, Nullable<Single>, Nullable<Single>)
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.Property(System.String, System.Boolean, System.Boolean, API_DISCOVER.Models.Entities.Disambiguation.Property.Type, System.Nullable<System.Int32>, System.Nullable<System.Single>, System.Nullable<System.Single>)
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/Disambiguation.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Entities/Disambiguation.cs
+    startLine: 40
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nConstructor\n"
+  example: []
+  syntax:
+    content: public Property(string pProperty, bool pMandatory, bool pInverse, Disambiguation.Property.Type pType, int? pMaxNumWordsTitle, float? pScorePositive, float? pScoreNegative)
+    parameters:
+    - id: pProperty
+      type: System.String
+      description: Url de la propiedad utilizada
+    - id: pMandatory
+      type: System.Boolean
+      description: Indica si es obligatorio que se cumpla esta restricción para considerar la desambiguación
+    - id: pInverse
+      type: System.Boolean
+      description: Indica si la propiedad es inverse, es decir, la entidad que se intenta desambiguar es el objeto de propiedad
+    - id: pType
+      type: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+      description: Tipo de desambiguación a aplicar
+    - id: pMaxNumWordsTitle
+      type: System.Nullable{System.Int32}
+      description: Número de palabras a partir de la cual la similitud de tipo &apos;title&apos; obtiene la máxima puntuación
+    - id: pScorePositive
+      type: System.Nullable{System.Single}
+      description: Puntuación positiva de la propiedad en la desambiguación (entre 0 y 1)
+    - id: pScoreNegative
+      type: System.Nullable{System.Single}
+      description: Puntuación negativa de la propiedad en la desambiguación (entre 0 y 1)
+    content.vb: Public Sub New(pProperty As String, pMandatory As Boolean, pInverse As Boolean, pType As Disambiguation.Property.Type, pMaxNumWordsTitle As Integer?, pScorePositive As Single?, pScoreNegative As Single?)
+  overload: API_DISCOVER.Models.Entities.Disambiguation.Property.#ctor*
+  nameWithType.vb: Disambiguation.Property.Property(String, Boolean, Boolean, Disambiguation.Property.Type, Nullable(Of Int32), Nullable(Of Single), Nullable(Of Single))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: API_DISCOVER.Models.Entities.Disambiguation.Property.Property(System.String, System.Boolean, System.Boolean, API_DISCOVER.Models.Entities.Disambiguation.Property.Type, System.Nullable(Of System.Int32), System.Nullable(Of System.Single), System.Nullable(Of System.Single))
+  name.vb: Property(String, Boolean, Boolean, Disambiguation.Property.Type, Nullable(Of Int32), Nullable(Of Single), Nullable(Of Single))
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.property
+  commentId: P:API_DISCOVER.Models.Entities.Disambiguation.Property.property
+  id: property
+  parent: API_DISCOVER.Models.Entities.Disambiguation.Property
+  langs:
+  - csharp
+  - vb
+  name: property
+  nameWithType: Disambiguation.Property.property
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.property
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/Disambiguation.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: property
+    path: Models/Entities/Disambiguation.cs
+    startLine: 76
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nUrl de la propiedad utilizada\n"
+  example: []
+  syntax:
+    content: public string property { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property property As String
+  overload: API_DISCOVER.Models.Entities.Disambiguation.Property.property*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.mandatory
+  commentId: P:API_DISCOVER.Models.Entities.Disambiguation.Property.mandatory
+  id: mandatory
+  parent: API_DISCOVER.Models.Entities.Disambiguation.Property
+  langs:
+  - csharp
+  - vb
+  name: mandatory
+  nameWithType: Disambiguation.Property.mandatory
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.mandatory
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/Disambiguation.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: mandatory
+    path: Models/Entities/Disambiguation.cs
+    startLine: 80
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nIndica si es obligatorio que se cumpla esta restricción para considerar la desambiguación\n"
+  example: []
+  syntax:
+    content: public bool mandatory { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property mandatory As Boolean
+  overload: API_DISCOVER.Models.Entities.Disambiguation.Property.mandatory*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.inverse
+  commentId: P:API_DISCOVER.Models.Entities.Disambiguation.Property.inverse
+  id: inverse
+  parent: API_DISCOVER.Models.Entities.Disambiguation.Property
+  langs:
+  - csharp
+  - vb
+  name: inverse
+  nameWithType: Disambiguation.Property.inverse
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.inverse
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/Disambiguation.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: inverse
+    path: Models/Entities/Disambiguation.cs
+    startLine: 84
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nIndica si la propiedad es inverse, es decir, la entidad que se intenta desambiguar es el objeto de propiedad\n"
+  example: []
+  syntax:
+    content: public bool inverse { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property inverse As Boolean
+  overload: API_DISCOVER.Models.Entities.Disambiguation.Property.inverse*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.type
+  commentId: P:API_DISCOVER.Models.Entities.Disambiguation.Property.type
+  id: type
+  parent: API_DISCOVER.Models.Entities.Disambiguation.Property
+  langs:
+  - csharp
+  - vb
+  name: type
+  nameWithType: Disambiguation.Property.type
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.type
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/Disambiguation.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: type
+    path: Models/Entities/Disambiguation.cs
+    startLine: 88
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nTipo de desambiguación a aplicar\n"
+  example: []
+  syntax:
+    content: public Disambiguation.Property.Type type { get; set; }
+    parameters: []
+    return:
+      type: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+    content.vb: Public Property type As Disambiguation.Property.Type
+  overload: API_DISCOVER.Models.Entities.Disambiguation.Property.type*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.maxNumWordsTitle
+  commentId: P:API_DISCOVER.Models.Entities.Disambiguation.Property.maxNumWordsTitle
+  id: maxNumWordsTitle
+  parent: API_DISCOVER.Models.Entities.Disambiguation.Property
+  langs:
+  - csharp
+  - vb
+  name: maxNumWordsTitle
+  nameWithType: Disambiguation.Property.maxNumWordsTitle
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.maxNumWordsTitle
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/Disambiguation.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: maxNumWordsTitle
+    path: Models/Entities/Disambiguation.cs
+    startLine: 92
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nNúmero de palabras a partir de la cual la similitud de tipo &apos;title&apos; obtiene la máxima puntuación\n"
+  example: []
+  syntax:
+    content: public int? maxNumWordsTitle { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int32}
+    content.vb: Public Property maxNumWordsTitle As Integer?
+  overload: API_DISCOVER.Models.Entities.Disambiguation.Property.maxNumWordsTitle*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.scorePositive
+  commentId: P:API_DISCOVER.Models.Entities.Disambiguation.Property.scorePositive
+  id: scorePositive
+  parent: API_DISCOVER.Models.Entities.Disambiguation.Property
+  langs:
+  - csharp
+  - vb
+  name: scorePositive
+  nameWithType: Disambiguation.Property.scorePositive
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.scorePositive
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/Disambiguation.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: scorePositive
+    path: Models/Entities/Disambiguation.cs
+    startLine: 96
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nPuntuación positiva de la propiedad en la desambiguación (entre 0 y 1)\n"
+  example: []
+  syntax:
+    content: public float? scorePositive { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Single}
+    content.vb: Public Property scorePositive As Single?
+  overload: API_DISCOVER.Models.Entities.Disambiguation.Property.scorePositive*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.scoreNegative
+  commentId: P:API_DISCOVER.Models.Entities.Disambiguation.Property.scoreNegative
+  id: scoreNegative
+  parent: API_DISCOVER.Models.Entities.Disambiguation.Property
+  langs:
+  - csharp
+  - vb
+  name: scoreNegative
+  nameWithType: Disambiguation.Property.scoreNegative
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.scoreNegative
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/Disambiguation.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: scoreNegative
+    path: Models/Entities/Disambiguation.cs
+    startLine: 100
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nPuntuación negativa de la propiedad en la desambiguación (entre 0 y 1)\n"
+  example: []
+  syntax:
+    content: public float? scoreNegative { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Single}
+    content.vb: Public Property scoreNegative As Single?
+  overload: API_DISCOVER.Models.Entities.Disambiguation.Property.scoreNegative*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.Models.Entities
+  commentId: N:API_DISCOVER.Models.Entities
+  name: API_DISCOVER.Models.Entities
+  nameWithType: API_DISCOVER.Models.Entities
+  fullName: API_DISCOVER.Models.Entities
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.#ctor*
+  commentId: Overload:API_DISCOVER.Models.Entities.Disambiguation.Property.#ctor
+  name: Property
+  nameWithType: Disambiguation.Property.Property
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.Property
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+  commentId: T:API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+  parent: API_DISCOVER.Models.Entities
+  name: Disambiguation.Property.Type
+  nameWithType: Disambiguation.Property.Type
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.Type
+- uid: System.Nullable{System.Int32}
+  commentId: T:System.Nullable{System.Int32}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<Int32>
+  nameWithType: Nullable<Int32>
+  fullName: System.Nullable<System.Int32>
+  nameWithType.vb: Nullable(Of Int32)
+  fullName.vb: System.Nullable(Of System.Int32)
+  name.vb: Nullable(Of Int32)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Nullable{System.Single}
+  commentId: T:System.Nullable{System.Single}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<Single>
+  nameWithType: Nullable<Single>
+  fullName: System.Nullable<System.Single>
+  nameWithType.vb: Nullable(Of Single)
+  fullName.vb: System.Nullable(Of System.Single)
+  name.vb: Nullable(Of Single)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Single
+    name: Single
+    nameWithType: Single
+    fullName: System.Single
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Single
+    name: Single
+    nameWithType: Single
+    fullName: System.Single
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.property*
+  commentId: Overload:API_DISCOVER.Models.Entities.Disambiguation.Property.property
+  name: property
+  nameWithType: Disambiguation.Property.property
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.property
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.mandatory*
+  commentId: Overload:API_DISCOVER.Models.Entities.Disambiguation.Property.mandatory
+  name: mandatory
+  nameWithType: Disambiguation.Property.mandatory
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.mandatory
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.inverse*
+  commentId: Overload:API_DISCOVER.Models.Entities.Disambiguation.Property.inverse
+  name: inverse
+  nameWithType: Disambiguation.Property.inverse
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.inverse
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.type*
+  commentId: Overload:API_DISCOVER.Models.Entities.Disambiguation.Property.type
+  name: type
+  nameWithType: Disambiguation.Property.type
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.type
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.maxNumWordsTitle*
+  commentId: Overload:API_DISCOVER.Models.Entities.Disambiguation.Property.maxNumWordsTitle
+  name: maxNumWordsTitle
+  nameWithType: Disambiguation.Property.maxNumWordsTitle
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.maxNumWordsTitle
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.scorePositive*
+  commentId: Overload:API_DISCOVER.Models.Entities.Disambiguation.Property.scorePositive
+  name: scorePositive
+  nameWithType: Disambiguation.Property.scorePositive
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.scorePositive
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property.scoreNegative*
+  commentId: Overload:API_DISCOVER.Models.Entities.Disambiguation.Property.scoreNegative
+  name: scoreNegative
+  nameWithType: Disambiguation.Property.scoreNegative
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property.scoreNegative

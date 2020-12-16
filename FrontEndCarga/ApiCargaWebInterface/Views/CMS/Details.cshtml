@@ -43,6 +43,6 @@
     </div>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a href="@Url.Action("Create", new {  page_id=Model.PageId, route=Model.RouteProxyLess  })" class="btn btn-editar">Editar</a>) |
     <a asp-action="Index">Back to List</a>
 </div>

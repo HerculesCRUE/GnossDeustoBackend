@@ -1,0 +1,525 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Services.ConfigSparql
+  commentId: T:API_DISCOVER.Models.Services.ConfigSparql
+  id: ConfigSparql
+  parent: API_DISCOVER.Models.Services
+  children:
+  - API_DISCOVER.Models.Services.ConfigSparql.Configuration
+  - API_DISCOVER.Models.Services.ConfigSparql.GetEndpoint
+  - API_DISCOVER.Models.Services.ConfigSparql.GetGraph
+  - API_DISCOVER.Models.Services.ConfigSparql.GetQueryParam
+  langs:
+  - csharp
+  - vb
+  name: ConfigSparql
+  nameWithType: ConfigSparql
+  fullName: API_DISCOVER.Models.Services.ConfigSparql
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/ConfigSparql.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ConfigSparql
+    path: Models/Services/ConfigSparql.cs
+    startLine: 14
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nClase para obtener la configuración necesaria para el uso de Sparql\n"
+  example: []
+  syntax:
+    content: public class ConfigSparql
+    content.vb: Public Class ConfigSparql
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Services.ConfigSparql.Configuration
+  commentId: P:API_DISCOVER.Models.Services.ConfigSparql.Configuration
+  id: Configuration
+  parent: API_DISCOVER.Models.Services.ConfigSparql
+  langs:
+  - csharp
+  - vb
+  name: Configuration
+  nameWithType: ConfigSparql.Configuration
+  fullName: API_DISCOVER.Models.Services.ConfigSparql.Configuration
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/ConfigSparql.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Configuration
+    path: Models/Services/ConfigSparql.cs
+    startLine: 16
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  syntax:
+    content: public IConfigurationRoot Configuration { get; set; }
+    parameters: []
+    return:
+      type: Microsoft.Extensions.Configuration.IConfigurationRoot
+    content.vb: Public Property Configuration As IConfigurationRoot
+  overload: API_DISCOVER.Models.Services.ConfigSparql.Configuration*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Services.ConfigSparql.GetGraph
+  commentId: M:API_DISCOVER.Models.Services.ConfigSparql.GetGraph
+  id: GetGraph
+  parent: API_DISCOVER.Models.Services.ConfigSparql
+  langs:
+  - csharp
+  - vb
+  name: GetGraph()
+  nameWithType: ConfigSparql.GetGraph()
+  fullName: API_DISCOVER.Models.Services.ConfigSparql.GetGraph()
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/ConfigSparql.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetGraph
+    path: Models/Services/ConfigSparql.cs
+    startLine: 23
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nObtiene el gráfo configurado en Sparql:Graph del fichero appsettings.json\n"
+  example: []
+  syntax:
+    content: public string GetGraph()
+    return:
+      type: System.String
+    content.vb: Public Function GetGraph As String
+  overload: API_DISCOVER.Models.Services.ConfigSparql.GetGraph*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Services.ConfigSparql.GetEndpoint
+  commentId: M:API_DISCOVER.Models.Services.ConfigSparql.GetEndpoint
+  id: GetEndpoint
+  parent: API_DISCOVER.Models.Services.ConfigSparql
+  langs:
+  - csharp
+  - vb
+  name: GetEndpoint()
+  nameWithType: ConfigSparql.GetEndpoint()
+  fullName: API_DISCOVER.Models.Services.ConfigSparql.GetEndpoint()
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/ConfigSparql.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetEndpoint
+    path: Models/Services/ConfigSparql.cs
+    startLine: 49
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nObtiene el endpoint configurado en Sparql:Endpoint del fichero appsettings.json\n"
+  example: []
+  syntax:
+    content: public string GetEndpoint()
+    return:
+      type: System.String
+    content.vb: Public Function GetEndpoint As String
+  overload: API_DISCOVER.Models.Services.ConfigSparql.GetEndpoint*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Services.ConfigSparql.GetQueryParam
+  commentId: M:API_DISCOVER.Models.Services.ConfigSparql.GetQueryParam
+  id: GetQueryParam
+  parent: API_DISCOVER.Models.Services.ConfigSparql
+  langs:
+  - csharp
+  - vb
+  name: GetQueryParam()
+  nameWithType: ConfigSparql.GetQueryParam()
+  fullName: API_DISCOVER.Models.Services.ConfigSparql.GetQueryParam()
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/ConfigSparql.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: GetQueryParam
+    path: Models/Services/ConfigSparql.cs
+    startLine: 74
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nObtiene el parametro de query configurado en Sparql:QueryParam del fichero appsettings.json\n"
+  example: []
+  syntax:
+    content: public string GetQueryParam()
+    return:
+      type: System.String
+    content.vb: Public Function GetQueryParam As String
+  overload: API_DISCOVER.Models.Services.ConfigSparql.GetQueryParam*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.Models.Services
+  commentId: N:API_DISCOVER.Models.Services
+  name: API_DISCOVER.Models.Services
+  nameWithType: API_DISCOVER.Models.Services
+  fullName: API_DISCOVER.Models.Services
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Services.ConfigSparql.Configuration*
+  commentId: Overload:API_DISCOVER.Models.Services.ConfigSparql.Configuration
+  name: Configuration
+  nameWithType: ConfigSparql.Configuration
+  fullName: API_DISCOVER.Models.Services.ConfigSparql.Configuration
+- uid: Microsoft.Extensions.Configuration.IConfigurationRoot
+  commentId: T:Microsoft.Extensions.Configuration.IConfigurationRoot
+  parent: Microsoft.Extensions.Configuration
+  isExternal: true
+  name: IConfigurationRoot
+  nameWithType: IConfigurationRoot
+  fullName: Microsoft.Extensions.Configuration.IConfigurationRoot
+- uid: Microsoft.Extensions.Configuration
+  commentId: N:Microsoft.Extensions.Configuration
+  isExternal: true
+  name: Microsoft.Extensions.Configuration
+  nameWithType: Microsoft.Extensions.Configuration
+  fullName: Microsoft.Extensions.Configuration
+- uid: API_DISCOVER.Models.Services.ConfigSparql.GetGraph*
+  commentId: Overload:API_DISCOVER.Models.Services.ConfigSparql.GetGraph
+  name: GetGraph
+  nameWithType: ConfigSparql.GetGraph
+  fullName: API_DISCOVER.Models.Services.ConfigSparql.GetGraph
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: API_DISCOVER.Models.Services.ConfigSparql.GetEndpoint*
+  commentId: Overload:API_DISCOVER.Models.Services.ConfigSparql.GetEndpoint
+  name: GetEndpoint
+  nameWithType: ConfigSparql.GetEndpoint
+  fullName: API_DISCOVER.Models.Services.ConfigSparql.GetEndpoint
+- uid: API_DISCOVER.Models.Services.ConfigSparql.GetQueryParam*
+  commentId: Overload:API_DISCOVER.Models.Services.ConfigSparql.GetQueryParam
+  name: GetQueryParam
+  nameWithType: ConfigSparql.GetQueryParam
+  fullName: API_DISCOVER.Models.Services.ConfigSparql.GetQueryParam

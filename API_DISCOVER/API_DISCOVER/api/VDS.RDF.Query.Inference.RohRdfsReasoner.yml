@@ -1,0 +1,683 @@
+### YamlMime:ManagedReference
+items:
+- uid: VDS.RDF.Query.Inference.RohRdfsReasoner
+  commentId: T:VDS.RDF.Query.Inference.RohRdfsReasoner
+  id: RohRdfsReasoner
+  parent: VDS.RDF.Query.Inference
+  children:
+  - VDS.RDF.Query.Inference.RohRdfsReasoner.#ctor
+  - VDS.RDF.Query.Inference.RohRdfsReasoner.Apply(VDS.RDF.IGraph)
+  - VDS.RDF.Query.Inference.RohRdfsReasoner.Apply(VDS.RDF.IGraph,VDS.RDF.IGraph)
+  - VDS.RDF.Query.Inference.RohRdfsReasoner.Initialise(VDS.RDF.IGraph)
+  langs:
+  - csharp
+  - vb
+  name: RohRdfsReasoner
+  nameWithType: RohRdfsReasoner
+  fullName: VDS.RDF.Query.Inference.RohRdfsReasoner
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RohRdfsReasoner.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: RohRdfsReasoner
+    path: Models/Entities/RohRdfsReasoner.cs
+    startLine: 22
+  assemblies:
+  - API_DISCOVER
+  namespace: VDS.RDF.Query.Inference
+  summary: "\nAn Inference Engine which uses RDFS reasoning.\n"
+  remarks: "\n<p>\nDoes basic RDFS inferencing using the schema taken from the Graph(s) which are provided in calls to the reasoners <xref href=\"VDS.RDF.Query.Inference.StaticRdfsReasoner.Initialise(VDS.RDF.IGraph)\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n<p>\nTypes of inference performed are as follows:.\n</p>\n<ul>\n<li>Class hierarchy reasoning - asserts additional types triples for anything that is typed as the subclass of a class.</li>\n<li>Property hierarchy reasoning - asserts additional property triples for anything where the predicate is a subproperty of a defined property</li>   \n</ul>\n"
+  example: []
+  syntax:
+    content: 'public class RohRdfsReasoner : IInferenceEngine'
+    content.vb: >-
+      Public Class RohRdfsReasoner
+          Implements IInferenceEngine
+  inheritance:
+  - System.Object
+  implements:
+  - VDS.RDF.Query.Inference.IInferenceEngine
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: VDS.RDF.Query.Inference.RohRdfsReasoner.#ctor
+  commentId: M:VDS.RDF.Query.Inference.RohRdfsReasoner.#ctor
+  id: '#ctor'
+  parent: VDS.RDF.Query.Inference.RohRdfsReasoner
+  langs:
+  - csharp
+  - vb
+  name: RohRdfsReasoner()
+  nameWithType: RohRdfsReasoner.RohRdfsReasoner()
+  fullName: VDS.RDF.Query.Inference.RohRdfsReasoner.RohRdfsReasoner()
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RohRdfsReasoner.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Entities/RohRdfsReasoner.cs
+    startLine: 31
+  assemblies:
+  - API_DISCOVER
+  namespace: VDS.RDF.Query.Inference
+  summary: "\nCreates a new instance of the Static RdfsReasoner.\n"
+  example: []
+  syntax:
+    content: public RohRdfsReasoner()
+    content.vb: Public Sub New
+  overload: VDS.RDF.Query.Inference.RohRdfsReasoner.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: VDS.RDF.Query.Inference.RohRdfsReasoner.Apply(VDS.RDF.IGraph)
+  commentId: M:VDS.RDF.Query.Inference.RohRdfsReasoner.Apply(VDS.RDF.IGraph)
+  id: Apply(VDS.RDF.IGraph)
+  parent: VDS.RDF.Query.Inference.RohRdfsReasoner
+  langs:
+  - csharp
+  - vb
+  name: Apply(IGraph)
+  nameWithType: RohRdfsReasoner.Apply(IGraph)
+  fullName: VDS.RDF.Query.Inference.RohRdfsReasoner.Apply(VDS.RDF.IGraph)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RohRdfsReasoner.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Apply
+    path: Models/Entities/RohRdfsReasoner.cs
+    startLine: 45
+  assemblies:
+  - API_DISCOVER
+  namespace: VDS.RDF.Query.Inference
+  summary: "\nApplies inference to the given Graph and outputs the inferred information to that Graph.\n"
+  example: []
+  syntax:
+    content: public virtual void Apply(IGraph g)
+    parameters:
+    - id: g
+      type: VDS.RDF.IGraph
+      description: Graph.
+    content.vb: Public Overridable Sub Apply(g As IGraph)
+  overload: VDS.RDF.Query.Inference.RohRdfsReasoner.Apply*
+  implements:
+  - VDS.RDF.Query.Inference.IInferenceEngine.Apply(VDS.RDF.IGraph)
+  modifiers.csharp:
+  - public
+  - virtual
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: VDS.RDF.Query.Inference.RohRdfsReasoner.Apply(VDS.RDF.IGraph,VDS.RDF.IGraph)
+  commentId: M:VDS.RDF.Query.Inference.RohRdfsReasoner.Apply(VDS.RDF.IGraph,VDS.RDF.IGraph)
+  id: Apply(VDS.RDF.IGraph,VDS.RDF.IGraph)
+  parent: VDS.RDF.Query.Inference.RohRdfsReasoner
+  langs:
+  - csharp
+  - vb
+  name: Apply(IGraph, IGraph)
+  nameWithType: RohRdfsReasoner.Apply(IGraph, IGraph)
+  fullName: VDS.RDF.Query.Inference.RohRdfsReasoner.Apply(VDS.RDF.IGraph, VDS.RDF.IGraph)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RohRdfsReasoner.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Apply
+    path: Models/Entities/RohRdfsReasoner.cs
+    startLine: 55
+  assemblies:
+  - API_DISCOVER
+  namespace: VDS.RDF.Query.Inference
+  summary: "\nApplies inference to the Input Graph and outputs the inferred information to the Output Graph.\n"
+  example: []
+  syntax:
+    content: public virtual void Apply(IGraph input, IGraph output)
+    parameters:
+    - id: input
+      type: VDS.RDF.IGraph
+      description: Graph to apply inference to.
+    - id: output
+      type: VDS.RDF.IGraph
+      description: Graph inferred information is output to.
+    content.vb: Public Overridable Sub Apply(input As IGraph, output As IGraph)
+  overload: VDS.RDF.Query.Inference.RohRdfsReasoner.Apply*
+  implements:
+  - VDS.RDF.Query.Inference.IInferenceEngine.Apply(VDS.RDF.IGraph,VDS.RDF.IGraph)
+  modifiers.csharp:
+  - public
+  - virtual
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: VDS.RDF.Query.Inference.RohRdfsReasoner.Initialise(VDS.RDF.IGraph)
+  commentId: M:VDS.RDF.Query.Inference.RohRdfsReasoner.Initialise(VDS.RDF.IGraph)
+  id: Initialise(VDS.RDF.IGraph)
+  parent: VDS.RDF.Query.Inference.RohRdfsReasoner
+  langs:
+  - csharp
+  - vb
+  name: Initialise(IGraph)
+  nameWithType: RohRdfsReasoner.Initialise(IGraph)
+  fullName: VDS.RDF.Query.Inference.RohRdfsReasoner.Initialise(VDS.RDF.IGraph)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/RohRdfsReasoner.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: Initialise
+    path: Models/Entities/RohRdfsReasoner.cs
+    startLine: 115
+  assemblies:
+  - API_DISCOVER
+  namespace: VDS.RDF.Query.Inference
+  summary: "\nImports any Class heirarchy information from the given Graph into the Reasoners Knowledge Base in order to initialise the Reasoner.\n"
+  remarks: "\nLooks for Triples defining things to be classes and those defining that something is a subClass of something.\n"
+  example: []
+  syntax:
+    content: public void Initialise(IGraph g)
+    parameters:
+    - id: g
+      type: VDS.RDF.IGraph
+      description: Graph to import from.
+    content.vb: Public Sub Initialise(g As IGraph)
+  overload: VDS.RDF.Query.Inference.RohRdfsReasoner.Initialise*
+  implements:
+  - VDS.RDF.Query.Inference.IInferenceEngine.Initialise(VDS.RDF.IGraph)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: VDS.RDF.Query.Inference.StaticRdfsReasoner.Initialise(VDS.RDF.IGraph)
+  commentId: M:VDS.RDF.Query.Inference.StaticRdfsReasoner.Initialise(VDS.RDF.IGraph)
+  isExternal: true
+- uid: VDS.RDF.Query.Inference
+  commentId: N:VDS.RDF.Query.Inference
+  name: VDS.RDF.Query.Inference
+  nameWithType: VDS.RDF.Query.Inference
+  fullName: VDS.RDF.Query.Inference
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: VDS.RDF.Query.Inference.IInferenceEngine
+  commentId: T:VDS.RDF.Query.Inference.IInferenceEngine
+  parent: VDS.RDF.Query.Inference
+  isExternal: true
+  name: IInferenceEngine
+  nameWithType: IInferenceEngine
+  fullName: VDS.RDF.Query.Inference.IInferenceEngine
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: VDS.RDF.Query.Inference.RohRdfsReasoner.#ctor*
+  commentId: Overload:VDS.RDF.Query.Inference.RohRdfsReasoner.#ctor
+  name: RohRdfsReasoner
+  nameWithType: RohRdfsReasoner.RohRdfsReasoner
+  fullName: VDS.RDF.Query.Inference.RohRdfsReasoner.RohRdfsReasoner
+- uid: VDS.RDF.Query.Inference.RohRdfsReasoner.Apply*
+  commentId: Overload:VDS.RDF.Query.Inference.RohRdfsReasoner.Apply
+  name: Apply
+  nameWithType: RohRdfsReasoner.Apply
+  fullName: VDS.RDF.Query.Inference.RohRdfsReasoner.Apply
+- uid: VDS.RDF.Query.Inference.IInferenceEngine.Apply(VDS.RDF.IGraph)
+  commentId: M:VDS.RDF.Query.Inference.IInferenceEngine.Apply(VDS.RDF.IGraph)
+  parent: VDS.RDF.Query.Inference.IInferenceEngine
+  isExternal: true
+  name: Apply(IGraph)
+  nameWithType: IInferenceEngine.Apply(IGraph)
+  fullName: VDS.RDF.Query.Inference.IInferenceEngine.Apply(VDS.RDF.IGraph)
+  spec.csharp:
+  - uid: VDS.RDF.Query.Inference.IInferenceEngine.Apply(VDS.RDF.IGraph)
+    name: Apply
+    nameWithType: IInferenceEngine.Apply
+    fullName: VDS.RDF.Query.Inference.IInferenceEngine.Apply
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Query.Inference.IInferenceEngine.Apply(VDS.RDF.IGraph)
+    name: Apply
+    nameWithType: IInferenceEngine.Apply
+    fullName: VDS.RDF.Query.Inference.IInferenceEngine.Apply
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.IGraph
+  commentId: T:VDS.RDF.IGraph
+  parent: VDS.RDF
+  isExternal: true
+  name: IGraph
+  nameWithType: IGraph
+  fullName: VDS.RDF.IGraph
+- uid: VDS.RDF
+  commentId: N:VDS.RDF
+  name: VDS.RDF
+  nameWithType: VDS.RDF
+  fullName: VDS.RDF
+- uid: VDS.RDF.Query.Inference.IInferenceEngine.Apply(VDS.RDF.IGraph,VDS.RDF.IGraph)
+  commentId: M:VDS.RDF.Query.Inference.IInferenceEngine.Apply(VDS.RDF.IGraph,VDS.RDF.IGraph)
+  parent: VDS.RDF.Query.Inference.IInferenceEngine
+  isExternal: true
+  name: Apply(IGraph, IGraph)
+  nameWithType: IInferenceEngine.Apply(IGraph, IGraph)
+  fullName: VDS.RDF.Query.Inference.IInferenceEngine.Apply(VDS.RDF.IGraph, VDS.RDF.IGraph)
+  spec.csharp:
+  - uid: VDS.RDF.Query.Inference.IInferenceEngine.Apply(VDS.RDF.IGraph,VDS.RDF.IGraph)
+    name: Apply
+    nameWithType: IInferenceEngine.Apply
+    fullName: VDS.RDF.Query.Inference.IInferenceEngine.Apply
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Query.Inference.IInferenceEngine.Apply(VDS.RDF.IGraph,VDS.RDF.IGraph)
+    name: Apply
+    nameWithType: IInferenceEngine.Apply
+    fullName: VDS.RDF.Query.Inference.IInferenceEngine.Apply
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: VDS.RDF.Query.Inference.RohRdfsReasoner.Initialise*
+  commentId: Overload:VDS.RDF.Query.Inference.RohRdfsReasoner.Initialise
+  name: Initialise
+  nameWithType: RohRdfsReasoner.Initialise
+  fullName: VDS.RDF.Query.Inference.RohRdfsReasoner.Initialise
+- uid: VDS.RDF.Query.Inference.IInferenceEngine.Initialise(VDS.RDF.IGraph)
+  commentId: M:VDS.RDF.Query.Inference.IInferenceEngine.Initialise(VDS.RDF.IGraph)
+  parent: VDS.RDF.Query.Inference.IInferenceEngine
+  isExternal: true
+  name: Initialise(IGraph)
+  nameWithType: IInferenceEngine.Initialise(IGraph)
+  fullName: VDS.RDF.Query.Inference.IInferenceEngine.Initialise(VDS.RDF.IGraph)
+  spec.csharp:
+  - uid: VDS.RDF.Query.Inference.IInferenceEngine.Initialise(VDS.RDF.IGraph)
+    name: Initialise
+    nameWithType: IInferenceEngine.Initialise
+    fullName: VDS.RDF.Query.Inference.IInferenceEngine.Initialise
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: VDS.RDF.Query.Inference.IInferenceEngine.Initialise(VDS.RDF.IGraph)
+    name: Initialise
+    nameWithType: IInferenceEngine.Initialise
+    fullName: VDS.RDF.Query.Inference.IInferenceEngine.Initialise
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: VDS.RDF.IGraph
+    name: IGraph
+    nameWithType: IGraph
+    fullName: VDS.RDF.IGraph
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )

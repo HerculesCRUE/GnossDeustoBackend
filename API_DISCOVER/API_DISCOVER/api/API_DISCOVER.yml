@@ -1,0 +1,28 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER
+  commentId: N:API_DISCOVER
+  id: API_DISCOVER
+  children:
+  - API_DISCOVER.Program
+  - API_DISCOVER.Worker
+  langs:
+  - csharp
+  - vb
+  name: API_DISCOVER
+  nameWithType: API_DISCOVER
+  fullName: API_DISCOVER
+  type: Namespace
+  assemblies:
+  - API_DISCOVER
+references:
+- uid: API_DISCOVER.Program
+  commentId: T:API_DISCOVER.Program
+  name: Program
+  nameWithType: Program
+  fullName: API_DISCOVER.Program
+- uid: API_DISCOVER.Worker
+  commentId: T:API_DISCOVER.Worker
+  name: Worker
+  nameWithType: Worker
+  fullName: API_DISCOVER.Worker

@@ -1,0 +1,28 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models
+  commentId: N:API_DISCOVER.Models
+  id: API_DISCOVER.Models
+  children:
+  - API_DISCOVER.Models.EntityContext
+  langs:
+  - csharp
+  - vb
+  name: API_DISCOVER.Models
+  nameWithType: API_DISCOVER.Models
+  fullName: API_DISCOVER.Models
+  type: Namespace
+  assemblies:
+  - API_DISCOVER
+references:
+- uid: API_DISCOVER.Models.EntityContext
+  commentId: T:API_DISCOVER.Models.EntityContext
+  parent: API_DISCOVER.Models
+  name: EntityContext
+  nameWithType: EntityContext
+  fullName: API_DISCOVER.Models.EntityContext
+- uid: API_DISCOVER.Models
+  commentId: N:API_DISCOVER.Models
+  name: API_DISCOVER.Models
+  nameWithType: API_DISCOVER.Models
+  fullName: API_DISCOVER.Models

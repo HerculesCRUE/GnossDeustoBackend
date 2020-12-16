@@ -1,0 +1,573 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty
+  commentId: T:API_DISCOVER.Models.Entities.DisambiguationData.DataProperty
+  id: DisambiguationData.DataProperty
+  parent: API_DISCOVER.Models.Entities
+  children:
+  - API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.#ctor(API_DISCOVER.Models.Entities.Disambiguation.Property,System.Collections.Generic.HashSet{System.String})
+  - API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.property
+  - API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.values
+  langs:
+  - csharp
+  - vb
+  name: DisambiguationData.DataProperty
+  nameWithType: DisambiguationData.DataProperty
+  fullName: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DisambiguationData.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: DataProperty
+    path: Models/Entities/DisambiguationData.cs
+    startLine: 23
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nDatos de una propiedad para apoyar en la realización de la desambiguación\n"
+  example: []
+  syntax:
+    content: public class DataProperty
+    content.vb: Public Class DataProperty
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.#ctor(API_DISCOVER.Models.Entities.Disambiguation.Property,System.Collections.Generic.HashSet{System.String})
+  commentId: M:API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.#ctor(API_DISCOVER.Models.Entities.Disambiguation.Property,System.Collections.Generic.HashSet{System.String})
+  id: '#ctor(API_DISCOVER.Models.Entities.Disambiguation.Property,System.Collections.Generic.HashSet{System.String})'
+  parent: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty
+  langs:
+  - csharp
+  - vb
+  name: DataProperty(Disambiguation.Property, HashSet<String>)
+  nameWithType: DisambiguationData.DataProperty.DataProperty(Disambiguation.Property, HashSet<String>)
+  fullName: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.DataProperty(API_DISCOVER.Models.Entities.Disambiguation.Property, System.Collections.Generic.HashSet<System.String>)
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DisambiguationData.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Entities/DisambiguationData.cs
+    startLine: 30
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nConstructor\n"
+  example: []
+  syntax:
+    content: public DataProperty(Disambiguation.Property pProperty, HashSet<string> pValues)
+    parameters:
+    - id: pProperty
+      type: API_DISCOVER.Models.Entities.Disambiguation.Property
+      description: Propiedad para apoyar en la realización de la desambiguación
+    - id: pValues
+      type: System.Collections.Generic.HashSet{System.String}
+      description: Valores de la propiedad para apoyar en la realización de la desambiguación
+    content.vb: Public Sub New(pProperty As Disambiguation.Property, pValues As HashSet(Of String))
+  overload: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.#ctor*
+  nameWithType.vb: DisambiguationData.DataProperty.DataProperty(Disambiguation.Property, HashSet(Of String))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.DataProperty(API_DISCOVER.Models.Entities.Disambiguation.Property, System.Collections.Generic.HashSet(Of System.String))
+  name.vb: DataProperty(Disambiguation.Property, HashSet(Of String))
+- uid: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.property
+  commentId: P:API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.property
+  id: property
+  parent: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty
+  langs:
+  - csharp
+  - vb
+  name: property
+  nameWithType: DisambiguationData.DataProperty.property
+  fullName: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.property
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DisambiguationData.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: property
+    path: Models/Entities/DisambiguationData.cs
+    startLine: 38
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nPropiedad para apoyar en la realización de la desambiguación\n"
+  example: []
+  syntax:
+    content: public Disambiguation.Property property { get; set; }
+    parameters: []
+    return:
+      type: API_DISCOVER.Models.Entities.Disambiguation.Property
+    content.vb: Public Property property As Disambiguation.Property
+  overload: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.property*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.values
+  commentId: P:API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.values
+  id: values
+  parent: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty
+  langs:
+  - csharp
+  - vb
+  name: values
+  nameWithType: DisambiguationData.DataProperty.values
+  fullName: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.values
+  type: Property
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Entities/DisambiguationData.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: values
+    path: Models/Entities/DisambiguationData.cs
+    startLine: 42
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Entities
+  summary: "\nValores de la propiedad para apoyar en la realización de la desambiguación\n"
+  example: []
+  syntax:
+    content: public HashSet<string> values { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.HashSet{System.String}
+    content.vb: Public Property values As HashSet(Of String)
+  overload: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.values*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.Models.Entities
+  commentId: N:API_DISCOVER.Models.Entities
+  name: API_DISCOVER.Models.Entities
+  nameWithType: API_DISCOVER.Models.Entities
+  fullName: API_DISCOVER.Models.Entities
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.#ctor*
+  commentId: Overload:API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.#ctor
+  name: DataProperty
+  nameWithType: DisambiguationData.DataProperty.DataProperty
+  fullName: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.DataProperty
+- uid: API_DISCOVER.Models.Entities.Disambiguation.Property
+  commentId: T:API_DISCOVER.Models.Entities.Disambiguation.Property
+  parent: API_DISCOVER.Models.Entities
+  name: Disambiguation.Property
+  nameWithType: Disambiguation.Property
+  fullName: API_DISCOVER.Models.Entities.Disambiguation.Property
+- uid: System.Collections.Generic.HashSet{System.String}
+  commentId: T:System.Collections.Generic.HashSet{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.HashSet`1
+  name: HashSet<String>
+  nameWithType: HashSet<String>
+  fullName: System.Collections.Generic.HashSet<System.String>
+  nameWithType.vb: HashSet(Of String)
+  fullName.vb: System.Collections.Generic.HashSet(Of System.String)
+  name.vb: HashSet(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.HashSet`1
+  commentId: T:System.Collections.Generic.HashSet`1
+  isExternal: true
+  name: HashSet<T>
+  nameWithType: HashSet<T>
+  fullName: System.Collections.Generic.HashSet<T>
+  nameWithType.vb: HashSet(Of T)
+  fullName.vb: System.Collections.Generic.HashSet(Of T)
+  name.vb: HashSet(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.property*
+  commentId: Overload:API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.property
+  name: property
+  nameWithType: DisambiguationData.DataProperty.property
+  fullName: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.property
+- uid: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.values*
+  commentId: Overload:API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.values
+  name: values
+  nameWithType: DisambiguationData.DataProperty.values
+  fullName: API_DISCOVER.Models.Entities.DisambiguationData.DataProperty.values

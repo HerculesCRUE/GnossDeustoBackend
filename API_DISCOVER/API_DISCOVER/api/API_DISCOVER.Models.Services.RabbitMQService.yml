@@ -1,0 +1,571 @@
+### YamlMime:ManagedReference
+items:
+- uid: API_DISCOVER.Models.Services.RabbitMQService
+  commentId: T:API_DISCOVER.Models.Services.RabbitMQService
+  id: RabbitMQService
+  parent: API_DISCOVER.Models.Services
+  children:
+  - API_DISCOVER.Models.Services.RabbitMQService.#ctor(Microsoft.Extensions.Options.IOptions{API_DISCOVER.Models.Entities.RabbitMQInfo})
+  - API_DISCOVER.Models.Services.RabbitMQService.ListenToQueue(API_DISCOVER.Models.Services.RabbitMQService.ReceivedDelegate,API_DISCOVER.Models.Services.RabbitMQService.ShutDownDelegate)
+  - API_DISCOVER.Models.Services.RabbitMQService.PublishMessage(System.Object)
+  langs:
+  - csharp
+  - vb
+  name: RabbitMQService
+  nameWithType: RabbitMQService
+  fullName: API_DISCOVER.Models.Services.RabbitMQService
+  type: Class
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/RabbitMQService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: RabbitMQService
+    path: Models/Services/RabbitMQService.cs
+    startLine: 25
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nClase para conectar con el servidor Rabbi\n"
+  example: []
+  syntax:
+    content: public class RabbitMQService
+    content.vb: Public Class RabbitMQService
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: API_DISCOVER.Models.Services.RabbitMQService.#ctor(Microsoft.Extensions.Options.IOptions{API_DISCOVER.Models.Entities.RabbitMQInfo})
+  commentId: M:API_DISCOVER.Models.Services.RabbitMQService.#ctor(Microsoft.Extensions.Options.IOptions{API_DISCOVER.Models.Entities.RabbitMQInfo})
+  id: '#ctor(Microsoft.Extensions.Options.IOptions{API_DISCOVER.Models.Entities.RabbitMQInfo})'
+  parent: API_DISCOVER.Models.Services.RabbitMQService
+  langs:
+  - csharp
+  - vb
+  name: RabbitMQService(IOptions<RabbitMQInfo>)
+  nameWithType: RabbitMQService.RabbitMQService(IOptions<RabbitMQInfo>)
+  fullName: API_DISCOVER.Models.Services.RabbitMQService.RabbitMQService(Microsoft.Extensions.Options.IOptions<API_DISCOVER.Models.Entities.RabbitMQInfo>)
+  type: Constructor
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/RabbitMQService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: .ctor
+    path: Models/Services/RabbitMQService.cs
+    startLine: 42
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nConstructor de la clase que configura los datos necesarios para conectarse con rabbit\n"
+  example: []
+  syntax:
+    content: public RabbitMQService(IOptions<RabbitMQInfo> ampOptionsSnapshot)
+    parameters:
+    - id: ampOptionsSnapshot
+      type: Microsoft.Extensions.Options.IOptions{API_DISCOVER.Models.Entities.RabbitMQInfo}
+      description: Opciones de configuracion para Rabbit
+    content.vb: Public Sub New(ampOptionsSnapshot As IOptions(Of RabbitMQInfo))
+  overload: API_DISCOVER.Models.Services.RabbitMQService.#ctor*
+  nameWithType.vb: RabbitMQService.RabbitMQService(IOptions(Of RabbitMQInfo))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: API_DISCOVER.Models.Services.RabbitMQService.RabbitMQService(Microsoft.Extensions.Options.IOptions(Of API_DISCOVER.Models.Entities.RabbitMQInfo))
+  name.vb: RabbitMQService(IOptions(Of RabbitMQInfo))
+- uid: API_DISCOVER.Models.Services.RabbitMQService.ListenToQueue(API_DISCOVER.Models.Services.RabbitMQService.ReceivedDelegate,API_DISCOVER.Models.Services.RabbitMQService.ShutDownDelegate)
+  commentId: M:API_DISCOVER.Models.Services.RabbitMQService.ListenToQueue(API_DISCOVER.Models.Services.RabbitMQService.ReceivedDelegate,API_DISCOVER.Models.Services.RabbitMQService.ShutDownDelegate)
+  id: ListenToQueue(API_DISCOVER.Models.Services.RabbitMQService.ReceivedDelegate,API_DISCOVER.Models.Services.RabbitMQService.ShutDownDelegate)
+  parent: API_DISCOVER.Models.Services.RabbitMQService
+  langs:
+  - csharp
+  - vb
+  name: ListenToQueue(RabbitMQService.ReceivedDelegate, RabbitMQService.ShutDownDelegate)
+  nameWithType: RabbitMQService.ListenToQueue(RabbitMQService.ReceivedDelegate, RabbitMQService.ShutDownDelegate)
+  fullName: API_DISCOVER.Models.Services.RabbitMQService.ListenToQueue(API_DISCOVER.Models.Services.RabbitMQService.ReceivedDelegate, API_DISCOVER.Models.Services.RabbitMQService.ShutDownDelegate)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/RabbitMQService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: ListenToQueue
+    path: Models/Services/RabbitMQService.cs
+    startLine: 73
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  syntax:
+    content: public void ListenToQueue(RabbitMQService.ReceivedDelegate receivedFunction, RabbitMQService.ShutDownDelegate shutdownFunction)
+    parameters:
+    - id: receivedFunction
+      type: API_DISCOVER.Models.Services.RabbitMQService.ReceivedDelegate
+    - id: shutdownFunction
+      type: API_DISCOVER.Models.Services.RabbitMQService.ShutDownDelegate
+    content.vb: Public Sub ListenToQueue(receivedFunction As RabbitMQService.ReceivedDelegate, shutdownFunction As RabbitMQService.ShutDownDelegate)
+  overload: API_DISCOVER.Models.Services.RabbitMQService.ListenToQueue*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: API_DISCOVER.Models.Services.RabbitMQService.PublishMessage(System.Object)
+  commentId: M:API_DISCOVER.Models.Services.RabbitMQService.PublishMessage(System.Object)
+  id: PublishMessage(System.Object)
+  parent: API_DISCOVER.Models.Services.RabbitMQService
+  langs:
+  - csharp
+  - vb
+  name: PublishMessage(Object)
+  nameWithType: RabbitMQService.PublishMessage(Object)
+  fullName: API_DISCOVER.Models.Services.RabbitMQService.PublishMessage(System.Object)
+  type: Method
+  source:
+    remote:
+      path: API_DISCOVER/API_DISCOVER/Models/Services/RabbitMQService.cs
+      branch: master
+      repo: https://github.com/HerculesCRUE/GnossDeustoBackend.git
+    id: PublishMessage
+    path: Models/Services/RabbitMQService.cs
+    startLine: 121
+  assemblies:
+  - API_DISCOVER
+  namespace: API_DISCOVER.Models.Services
+  summary: "\nEncola un objeto en Rabbbit\n"
+  example: []
+  syntax:
+    content: public void PublishMessage(object message)
+    parameters:
+    - id: message
+      type: System.Object
+      description: Objeto a encolar
+    content.vb: Public Sub PublishMessage(message As Object)
+  overload: API_DISCOVER.Models.Services.RabbitMQService.PublishMessage*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: API_DISCOVER.Models.Services
+  commentId: N:API_DISCOVER.Models.Services
+  name: API_DISCOVER.Models.Services
+  nameWithType: API_DISCOVER.Models.Services
+  fullName: API_DISCOVER.Models.Services
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: API_DISCOVER.Models.Services.RabbitMQService.#ctor*
+  commentId: Overload:API_DISCOVER.Models.Services.RabbitMQService.#ctor
+  name: RabbitMQService
+  nameWithType: RabbitMQService.RabbitMQService
+  fullName: API_DISCOVER.Models.Services.RabbitMQService.RabbitMQService
+- uid: Microsoft.Extensions.Options.IOptions{API_DISCOVER.Models.Entities.RabbitMQInfo}
+  commentId: T:Microsoft.Extensions.Options.IOptions{API_DISCOVER.Models.Entities.RabbitMQInfo}
+  parent: Microsoft.Extensions.Options
+  definition: Microsoft.Extensions.Options.IOptions`1
+  name: IOptions<RabbitMQInfo>
+  nameWithType: IOptions<RabbitMQInfo>
+  fullName: Microsoft.Extensions.Options.IOptions<API_DISCOVER.Models.Entities.RabbitMQInfo>
+  nameWithType.vb: IOptions(Of RabbitMQInfo)
+  fullName.vb: Microsoft.Extensions.Options.IOptions(Of API_DISCOVER.Models.Entities.RabbitMQInfo)
+  name.vb: IOptions(Of RabbitMQInfo)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.IOptions`1
+    name: IOptions
+    nameWithType: IOptions
+    fullName: Microsoft.Extensions.Options.IOptions
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: API_DISCOVER.Models.Entities.RabbitMQInfo
+    name: RabbitMQInfo
+    nameWithType: RabbitMQInfo
+    fullName: API_DISCOVER.Models.Entities.RabbitMQInfo
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.IOptions`1
+    name: IOptions
+    nameWithType: IOptions
+    fullName: Microsoft.Extensions.Options.IOptions
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: API_DISCOVER.Models.Entities.RabbitMQInfo
+    name: RabbitMQInfo
+    nameWithType: RabbitMQInfo
+    fullName: API_DISCOVER.Models.Entities.RabbitMQInfo
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Extensions.Options.IOptions`1
+  commentId: T:Microsoft.Extensions.Options.IOptions`1
+  isExternal: true
+  name: IOptions<TOptions>
+  nameWithType: IOptions<TOptions>
+  fullName: Microsoft.Extensions.Options.IOptions<TOptions>
+  nameWithType.vb: IOptions(Of TOptions)
+  fullName.vb: Microsoft.Extensions.Options.IOptions(Of TOptions)
+  name.vb: IOptions(Of TOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.IOptions`1
+    name: IOptions
+    nameWithType: IOptions
+    fullName: Microsoft.Extensions.Options.IOptions
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TOptions
+    nameWithType: TOptions
+    fullName: TOptions
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.IOptions`1
+    name: IOptions
+    nameWithType: IOptions
+    fullName: Microsoft.Extensions.Options.IOptions
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TOptions
+    nameWithType: TOptions
+    fullName: TOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Extensions.Options
+  commentId: N:Microsoft.Extensions.Options
+  isExternal: true
+  name: Microsoft.Extensions.Options
+  nameWithType: Microsoft.Extensions.Options
+  fullName: Microsoft.Extensions.Options
+- uid: API_DISCOVER.Models.Services.RabbitMQService.ListenToQueue*
+  commentId: Overload:API_DISCOVER.Models.Services.RabbitMQService.ListenToQueue
+  name: ListenToQueue
+  nameWithType: RabbitMQService.ListenToQueue
+  fullName: API_DISCOVER.Models.Services.RabbitMQService.ListenToQueue
+- uid: API_DISCOVER.Models.Services.RabbitMQService.ReceivedDelegate
+  commentId: T:API_DISCOVER.Models.Services.RabbitMQService.ReceivedDelegate
+  parent: API_DISCOVER.Models.Services
+  name: RabbitMQService.ReceivedDelegate
+  nameWithType: RabbitMQService.ReceivedDelegate
+  fullName: API_DISCOVER.Models.Services.RabbitMQService.ReceivedDelegate
+- uid: API_DISCOVER.Models.Services.RabbitMQService.ShutDownDelegate
+  commentId: T:API_DISCOVER.Models.Services.RabbitMQService.ShutDownDelegate
+  parent: API_DISCOVER.Models.Services
+  name: RabbitMQService.ShutDownDelegate
+  nameWithType: RabbitMQService.ShutDownDelegate
+  fullName: API_DISCOVER.Models.Services.RabbitMQService.ShutDownDelegate
+- uid: API_DISCOVER.Models.Services.RabbitMQService.PublishMessage*
+  commentId: Overload:API_DISCOVER.Models.Services.RabbitMQService.PublishMessage
+  name: PublishMessage
+  nameWithType: RabbitMQService.PublishMessage
+  fullName: API_DISCOVER.Models.Services.RabbitMQService.PublishMessage

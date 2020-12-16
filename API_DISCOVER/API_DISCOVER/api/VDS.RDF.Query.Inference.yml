@@ -1,0 +1,28 @@
+### YamlMime:ManagedReference
+items:
+- uid: VDS.RDF.Query.Inference
+  commentId: N:VDS.RDF.Query.Inference
+  id: VDS.RDF.Query.Inference
+  children:
+  - VDS.RDF.Query.Inference.RohRdfsReasoner
+  langs:
+  - csharp
+  - vb
+  name: VDS.RDF.Query.Inference
+  nameWithType: VDS.RDF.Query.Inference
+  fullName: VDS.RDF.Query.Inference
+  type: Namespace
+  assemblies:
+  - API_DISCOVER
+references:
+- uid: VDS.RDF.Query.Inference.RohRdfsReasoner
+  commentId: T:VDS.RDF.Query.Inference.RohRdfsReasoner
+  parent: VDS.RDF.Query.Inference
+  name: RohRdfsReasoner
+  nameWithType: RohRdfsReasoner
+  fullName: VDS.RDF.Query.Inference.RohRdfsReasoner
+- uid: VDS.RDF.Query.Inference
+  commentId: N:VDS.RDF.Query.Inference
+  name: VDS.RDF.Query.Inference
+  nameWithType: VDS.RDF.Query.Inference
+  fullName: VDS.RDF.Query.Inference
