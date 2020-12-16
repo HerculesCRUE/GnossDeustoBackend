@@ -35,17 +35,17 @@
 
 [4.2 DBLP Computer Science Bibliography](#user-content-dblp-computer-science-bibliography-httpsdblporg)
 
-[4.3 DOAJ](#configuración-por-tipo-de-entidad)
+[4.3 DOAJ](#user-content-doaj-httpsdoajorg)
 
-[4.4 ORCID](#algoritmos-de-similitud-nombres-y-nombres-propios)
+[4.4 ORCID](#user-content-orcid-httpsorcidorg)
 
-[4.5 PubMed](#tipos-de-entidades-en-las-que-aplicar-descubrimiento)
+[4.5 PubMed](#user-content-pubmed-httpspubmedncbinlmnihgov)
 
-[4.6 Recolecta](#detalle-del-proceso-para-httppurlorgrohmirrorfoafPerson-investigadores-de-un-cv)
+[4.6 Recolecta](#user-content-recolecta-httpsrecolectafecytes)
 
-[4.7 Scopus](#detalle-del-proceso-para-httppurlorgrohmirrorfoafPerson-investigadores-de-un-cv)
+[4.7 Scopus](#user-content-scopus-httpswwwscopuscom)
 
-[4.8 Web of Science](#detalle-del-proceso-para-httppurlorgrohmirrorfoafPerson-investigadores-de-un-cv)
+[4.8 Web of Science](#user-content-web-of-science-httpwosfecytes)
 
 Introducción
 ============
