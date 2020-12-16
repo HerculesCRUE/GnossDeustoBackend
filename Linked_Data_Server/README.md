@@ -1,10 +1,10 @@
 ![](..//Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 26/11/2020                                                   |
+| Fecha         | 16/12/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|LINKED DATA SERVER readme| 
 |Descripción|Manual del servicio LINKED DATA SERVER|
-|Versión|0.2|
+|Versión|0.3|
 |Módulo|API DISCOVER|
 |Tipo|Manual|
 |Cambios de la Versión|Modificación de appsettings.json|
@@ -53,7 +53,8 @@ http://155.54.239.204:8890/sparql
   		"Scope": "apiCarga",
   		"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
   		"ClientId": "LinkedDataServer",
-  		"ClientSecret": "secretLinkedDataServer"
+  		"ClientSecret": "secretLinkedDataServer",
+		"UrlHome": "https://herc-as-front-desa.atica.um.es/carga-web/public/gnossdeustobackend/home"
 		
 		
 	}
@@ -68,13 +69,14 @@ http://155.54.239.204:8890/sparql
  - NameTitle: Nombre para mostrar en el título de la página tras el nombre de la entidad
  - ConstrainedByUrl: Url en la que se encuentran las restricciones ConstrainedBy
  - PropsTitle: Propiedades de la ontología para utilizar como título de las entidades
- - PropsTransform: Propiedades a transformar en la presentación de las entidades
+ - PropsTransform: Propiedades a transformar en la presentación de las entidades, estas propiedades se transformarán según lo especificado y se transformrán en URLs
  - Authority: Endpoint para la llamada de obtención del token
  - GrantType: Tipo de concesión de Oauth
  - Scope: Limitación de acceso al api de carga
  - ConfigUrl: Url donde está lanzada la aplicación API Carga
  - ClientId: Id de cliente
  - ClientSecret: "clave" de acceso del cliente
+ - UrlHome: Url con la que enlazar el logo de la cabecera 'Hércules'
   
 
 ## Dependencias
