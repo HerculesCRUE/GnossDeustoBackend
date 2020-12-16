@@ -44,7 +44,7 @@ http://155.54.239.204:8890/sparql
 			"QueryParam": "query"
 		},
 		"LogPath": "",
-		"NameTitle": "Title",
+		"NameTitle": "Hércules",
 		"ConstrainedByUrl": "",
 		"PropsTitle": "http://purl.org/roh#title|http://purl.org/roh/mirror/foaf#name",
 		"PropsTransform": "http://purl.org/roh/mirror/vivo#researcherId|http://www.researcherid.com/rid/{value};http://purl.org/roh#ORCID|https://orcid.org/{value};http://purl.org/roh/mirror/vivo#scopusId|https://www.scopus.com/authid/detail.uri?authorId={value};http://purl.org/roh#researcherDBLP|https://dblp.org/pid/{value}.html;http://purl.org/roh#roDBLP|https://dblp.org/rec/{value}.html;http://purl.org/roh/mirror/bibo#doi|https://doi.org/{value};http://purl.org/roh#roPubmed|https://pubmed.ncbi.nlm.nih.gov/{value}/;",		
