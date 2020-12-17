@@ -6,12 +6,15 @@ using API_CARGA.Models.Entities;
 using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_CARGA.ModelExamples
 {
     ///<summary>
     ///Sirve para mostrar un ejemplo de respuesta de una lista de repositorios 
     ///</summary>
+    ///
+    [ExcludeFromCodeCoverage]
     public class ConfigRepositoriesResponse : IExamplesProvider<List<RepositoryConfig>>
     {
         public List<RepositoryConfig> GetExamples()

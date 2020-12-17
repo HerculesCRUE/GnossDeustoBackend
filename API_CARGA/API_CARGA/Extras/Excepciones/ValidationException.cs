@@ -4,6 +4,7 @@
 // Excepción para indicar que ha fallado la validación de un RDF
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 /// <summary>
@@ -11,6 +12,8 @@ using System.Threading.Tasks;
 /// </summary>
 namespace API_CARGA.Extras.Excepciones
 {
+
+    [ExcludeFromCodeCoverage]
     public class ValidationException : Exception
     {
         public ValidationException()

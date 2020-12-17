@@ -3,12 +3,15 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Sirve encapsular los datos provenientes del ListIdentifiers
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_CARGA.Models.Entities
 {
     ///<summary>
     ///Sirve encapsular los datos provenientes del ListIdentifiers
     ///</summary>
+    ///
+    [ExcludeFromCodeCoverage]
     public class IdentifierOAIPMH
     {
         public string Identifier { get; set; }

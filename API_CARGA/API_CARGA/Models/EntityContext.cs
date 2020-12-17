@@ -6,10 +6,12 @@ using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace API_CARGA.Models
 {
+    [ExcludeFromCodeCoverage]
     public class EntityContext : DbContext
     {
         private string _defaultSchema;

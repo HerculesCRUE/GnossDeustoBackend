@@ -5,12 +5,15 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_CARGA.Models.Entities
 {
     /// <summary>
     /// Datos de una sincornización sobre un repositorio
     /// </summary>
+    /// 
+    [ExcludeFromCodeCoverage]
     [Table("Sincronizacion_Repositorio")]
     public class RepositorySync
     {

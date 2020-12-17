@@ -6,12 +6,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_CARGA.Models.Entities
 {
     ///<summary>
     ///Representa el estao de un item de descubrimiento
     ///</summary>
+    ///
+    [ExcludeFromCodeCoverage]
     public class DiscoverStateResult
     {
         ///<summary>

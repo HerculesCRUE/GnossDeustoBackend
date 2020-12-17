@@ -4,12 +4,15 @@
 // Sirve para mostrar un error de respuesta al intentar modificar un repositorio que no existe
 using API_CARGA.ViewModel;
 using Swashbuckle.AspNetCore.Filters;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_CARGA.ModelExamples
 {
     ///<summary>
     ///Sirve para mostrar un error de respuesta al intentar modificar un repositorio que no existe
     ///</summary>
+    ///
+    [ExcludeFromCodeCoverage]
     public class ModifyRepositoryErrorResponse : IExamplesProvider<ErrorExample>
     {
         public ErrorExample GetExamples()

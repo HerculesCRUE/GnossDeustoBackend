@@ -5,12 +5,15 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_CARGA.Models.Entities
 {
     /// <summary>
     /// Clase para guardar información sobre el estado en el que se encuntra la sincronización lanzada por una tarea
     /// </summary>
+    /// 
+    [ExcludeFromCodeCoverage]
     public class ProcessingJobState
     {
         /// <summary>

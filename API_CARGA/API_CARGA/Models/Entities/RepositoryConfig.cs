@@ -6,12 +6,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_CARGA.Models.Entities
 {
     /// <summary>
     /// Datos de configuración de un repositorio OAI-PMH
     /// </summary>
+    /// 
+    [ExcludeFromCodeCoverage]
     public class RepositoryConfig
     {
         public RepositoryConfig()

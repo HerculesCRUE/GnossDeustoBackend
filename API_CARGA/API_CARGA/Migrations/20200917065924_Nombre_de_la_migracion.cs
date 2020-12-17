@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_CARGA.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class Nombre_de_la_migracion : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

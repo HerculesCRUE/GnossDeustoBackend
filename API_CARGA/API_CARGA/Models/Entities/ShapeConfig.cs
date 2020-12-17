@@ -4,12 +4,15 @@
 // Datos de configuración de una validación SHACL
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_CARGA.Models.Entities
 {
     /// <summary>
     /// Datos de configuración de una validación SHACL
     /// </summary>
+    /// 
+    [ExcludeFromCodeCoverage]
     public class ShapeConfig
     {
         /// <summary>

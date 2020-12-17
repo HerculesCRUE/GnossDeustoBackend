@@ -4,12 +4,15 @@
 // Sirve para mostrar un error al añadir un repositorio con un nombre repetido
 using API_CARGA.ViewModel;
 using Swashbuckle.AspNetCore.Filters;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_CARGA.ModelExamples
 {
     ///<summary>
     ///Sirve para mostrar un error al añadir un repositorio con un nombre repetido
     ///</summary>
+    ///
+    [ExcludeFromCodeCoverage]
     public class AddRepositoryErrorResponse : IExamplesProvider<ErrorExample>
     {
         public ErrorExample GetExamples()

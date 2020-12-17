@@ -4,12 +4,15 @@
 // Sirve para mostrar un error al añadir un shape
 using API_CARGA.ViewModel;
 using Swashbuckle.AspNetCore.Filters;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_CARGA.ModelExamples
 {
     ///<summary>
     ///Sirve para mostrar un error al añadir un shape
     ///</summary>
+    ///
+    [ExcludeFromCodeCoverage]
     public class AddShapeConfigErrorResponse : IExamplesProvider<ErrorExample>
     {
         public ErrorExample GetExamples()

@@ -5,6 +5,7 @@
 using API_CARGA.Models.Entities;
 using Swashbuckle.AspNetCore.Filters;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace API_CARGA.ModelExamples
@@ -12,6 +13,8 @@ namespace API_CARGA.ModelExamples
     ///<summary>
     ///Sirve para mostrar un ejemplo de respuesta de un Shape
     ///</summary>
+    ///
+    [ExcludeFromCodeCoverage]
     public class ShapeConfigResponse : IExamplesProvider<ShapeConfig>
     {
         public ShapeConfig GetExamples()

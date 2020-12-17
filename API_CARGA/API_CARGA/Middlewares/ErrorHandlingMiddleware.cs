@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Serilog;
 using System;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace API_CARGA.Middlewares
     ///<summary>
     ///Clase que actua de Middleware para la gestión de las excepciones
     ///</summary>
+    ///
+    [ExcludeFromCodeCoverage]
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;

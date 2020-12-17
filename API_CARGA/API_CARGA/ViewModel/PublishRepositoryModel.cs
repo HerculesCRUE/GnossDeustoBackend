@@ -4,12 +4,15 @@
 // Clase para pasar datos entre apis
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_CARGA.ViewModel
 {
     /// <summary>
     /// Clase para pasar datos entre apis
     /// </summary>
+    /// 
+    [ExcludeFromCodeCoverage]
     public class PublishRepositoryModel
     {
         [Required]
