@@ -14,6 +14,7 @@ namespace API_CARGA.Models.Entities
     ///Representa el estao de un item de descubrimiento
     ///</summary>
     ///
+
     [ExcludeFromCodeCoverage]
     public class DiscoverStateResult
     {

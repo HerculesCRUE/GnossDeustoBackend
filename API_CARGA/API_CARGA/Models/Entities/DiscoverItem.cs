@@ -15,6 +15,7 @@ namespace API_CARGA.Models.Entities
     ///Representa un item de descubrimiento
     ///</summary>
     ///
+
     [ExcludeFromCodeCoverage]
     public class DiscoverItem
     {
