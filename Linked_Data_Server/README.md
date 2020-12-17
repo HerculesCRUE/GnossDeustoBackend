@@ -29,7 +29,14 @@ El Linked Data Server de ASIO, desarrollado en tecnologías .Net Core, quedará 
 El Linked Data Server de ASIO cumple la especificación LDP:
 [Hércules Backend ASIO. Evaluación de cumplimiento Linked Data Platform (LDP)](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/20200415%20H%C3%A9rcules%20ASIO%20Evaluaci%C3%B3n%20de%20cumplimiento%20Linked%20Data%20Platform.md)
  
- 
+Ejemplos de resolución de URIs
+-----------------------
+
+Se puede comprobar el funcionamiento del servidor mediante los siguientes ejemplos (actualizable):
+- [http://graph.um.es/res/person/63ec870e-9908-49b9-9242-07a449bc562f](http://graph.um.es/res/person/63ec870e-9908-49b9-9242-07a449bc562f) Investigador con publicaciones e identificadores externos.
+- [http://graph.um.es/res/article/a248813c-cfe9-4208-8009-87464d6cfade](http://graph.um.es/res/article/a248813c-cfe9-4208-8009-87464d6cfade) Artículo con DOI y otros identificadores obtenidos desde fuentes externas.
+- [http://graph.um.es/res/project/5d35f1da-6eee-49e3-a350-54447ab24344](http://graph.um.es/res/project/5d35f1da-6eee-49e3-a350-54447ab24344) Proyecto de investigación.
+
 *Conexión a Triple Store*
 -------------------------
 
