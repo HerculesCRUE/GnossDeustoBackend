@@ -1,0 +1,596 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GestorDocumentacion</name>
+    </assembly>
+    <members>
+        <member name="T:GestorDocumentacion.Controllers.DocumentController">
+            <summary>
+            Controlador para la gestión de documentos
+            </summary>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.DocumentController.GetDocument(System.Guid)">
+            <summary>
+            Devuelve el pdf cargado
+            </summary>
+            <param name="id">identificador del documento html</param>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.DocumentController.GetDocuments">
+            <summary>
+            Devuelve una lista de los documentos guardados.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.DocumentController.LoadDocument(System.String,System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Carga o modifica un documento
+            </summary>
+            <param name="name">Nombre nuevo del documento</param>
+            <param name="documentId">Identificador del documento a modificar, en el caso de que se quiera añadir una nueva hay que dejar este campo vacio</param>
+            <param name="pdf">Documento pdf</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.DocumentController.DeleteDocument(System.Guid)">
+            <summary>
+            Elimina una página web.
+            </summary>
+            <param name="pageId">Identificador de la página html</param>
+            <returns></returns>
+        </member>
+        <member name="T:GestorDocumentacion.Controllers.PageController">
+            <summary>
+            Controlador para la gestión de páginas
+            </summary>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.PageController.GetPage(System.String)">
+            <summary>
+            Devuelve el HTML de una página web, incluyendo sus metadatos.
+            </summary>
+            <param name="route">Ruta configurada para el archivo</param>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.PageController.GetPages">
+            <summary>
+            Devuelve una lista de las páginas web cargadas.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.PageController.LoadPage(System.String,System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Carga o modifica una página web e incluye información acerca de la página, como la URL, metadatos title o description, etc.
+            </summary>
+            <param name="route">Ruta nueva de la página</param>
+            <param name="pageId">Identificador de la página a modificar, en el caso de que se quiera añadir una nueva hay que dejar este campo vacio</param>
+            <param name="html_page">Contenido html de la página</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.PageController.DeletePage(System.Guid)">
+            <summary>
+            Elimina una página web.
+            </summary>
+            <param name="pageId">Identificador de la página html</param>
+            <returns></returns>
+        </member>
+        <member name="T:GestorDocumentacion.Controllers.TemplateController">
+            <summary>
+            Controlador para la gestión de plantillas
+            </summary>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.TemplateController.GetTemplate(System.Guid)">
+            <summary>
+            Devuelve una plantilla HTML, incluyendo sus metadatos.
+            </summary>
+            <param name="templateId">identificador de la plantilla html</param>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.TemplateController.GetTemplates">
+            <summary>
+            Devuelve una lista de las plantillas cargadas.
+            </summary>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.TemplateController.LoadTemplate(System.String,System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Carga o modifica una plantilla web e incluye información acerca de la plantilla, como metadatos title o description.
+            </summary>
+            <param name="name">Nombre nuevo de la página </param>
+            <param name="templateId">Identificador de la plantilla a modificar, en el caso de que se quiera añadir una nueva hay que dejar este campo vacío</param>
+            <param name="html_template">Contenido html de la plantilla</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestorDocumentacion.Controllers.TemplateController.DeleteTemplate(System.Guid)">
+            <summary>
+            Elimina una plantilla
+            </summary>
+            <param name="templateID">Identificador de la plantilla a eliminar</param>
+            <returns></returns>
+        </member>
+        <member name="T:GestorDocumentacion.Models.EntityContext">
+            <summary>
+            Modelo de Base de datos
+            </summary>
+        </member>
+        <member name="T:GestorDocumentacion.Models.Services.DocumentsOperationsMockService">
+            <summary>
+            Clase para la gestión de los documentos
+            </summary>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.DocumentsOperationsMockService.DeleteDocument(System.Guid)">
+            <summary>
+            Elimina un objeto documento y el documento enlazado a él
+            </summary>
+            <param name="documentId">Identificador del documento</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.DocumentsOperationsMockService.GetDocument(System.String)">
+            <summary>
+            Obtiene un documento por su nombre
+            </summary>
+            <param name="name">Nombre del documento a obtener</param>
+            <returns>Un objeto documento</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.DocumentsOperationsMockService.GetDocumentBytes(System.Guid)">
+            <summary>
+            Obtiene los bytes de un documento
+            </summary>
+            <param name="documentId">Identificador del documento a obtener</param>
+            <returns>contenido del fichero</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.DocumentsOperationsMockService.GetDocument(System.Guid)">
+            <summary>
+            Obtiene un documento por su Identificador
+            </summary>
+            <param name="documentId">Identificador del documento a obtener</param>
+            <returns>Un objeto documento</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.DocumentsOperationsMockService.GetDocuments">
+            <summary>
+            Obtiene una lista de documentos
+            </summary>
+            <returns>Lista de objetos documento</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.DocumentsOperationsMockService.LoadDocument(GestorDocumentacion.Models.Entities.Document,System.Boolean,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Carga o modifica un documento
+            </summary>
+            <param name="document">Documento nuevo o a modificar</param>
+            <param name="isNew">Si el documento es nuevo</param>
+            <param name="documentFile">Contenido del fichero</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.DocumentsOperationsMockService.GetDocumentInfo(System.Guid)">
+            <summary>
+            Obtiene el nombre del documento y su contenido
+            </summary>
+            <param name="documentId">Identificador del documento</param>
+            <returns>Un diccionario en el que en la clave es el nombre del documento y el valor el contenido del fichero</returns>
+        </member>
+        <member name="T:GestorDocumentacion.Models.Services.DocumentsOperationsService">
+            <summary>
+            Clase para la gestión de los documentos
+            </summary>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.DocumentsOperationsService.DeleteDocument(System.Guid)">
+            <summary>
+            Elimina un objeto documento y el documento enlazado a él
+            </summary>
+            <param name="documentId">Identificador del documento</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.DocumentsOperationsService.GetDocument(System.String)">
+            <summary>
+            Obtiene un documento por su nombre
+            </summary>
+            <param name="name">Nombre del documento a obtener</param>
+            <returns>Un objeto documento</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.DocumentsOperationsService.GetDocumentBytes(System.Guid)">
+            <summary>
+            Obtiene los bytes de un documento
+            </summary>
+            <param name="documentId">Identificador del documento a obtener</param>
+            <returns>contenido del fichero</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.DocumentsOperationsService.GetDocument(System.Guid)">
+            <summary>
+            Obtiene un documento por su Identificador
+            </summary>
+            <param name="documentId">Identificador del documento a obtener</param>
+            <returns>Un objeto documento</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.DocumentsOperationsService.GetDocuments">
+            <summary>
+            Obtiene una lista de documentos
+            </summary>
+            <returns>Lista de objetos documento</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.DocumentsOperationsService.LoadDocument(GestorDocumentacion.Models.Entities.Document,System.Boolean,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Carga o modifica un documento
+            </summary>
+            <param name="document">Documento nuevo o a modificar</param>
+            <param name="isNew">Si el documento es nuevo</param>
+            <param name="documentFile">Contenido del fichero</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.DocumentsOperationsService.GetDocumentInfo(System.Guid)">
+            <summary>
+            Obtiene el nombre del documento y su contenido
+            </summary>
+            <param name="documentId">Identificador del documento</param>
+            <returns>Un diccionario en el que en la clave es el nombre del documento y el valor el contenido del fichero</returns>
+        </member>
+        <member name="T:GestorDocumentacion.Models.Services.FileOperationMockService">
+            <summary>
+            Clase para la gestión de archivos
+            </summary>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.FileOperationMockService.ReadFile(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Devuelve el contenido en texto de un fichero
+            </summary>
+            <param name="file">Fichero a leer</param>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.FileOperationMockService.DeleteDocument(System.String)">
+            <summary>
+            Elimina un fichero
+            </summary>
+            <param name="route">Ruta del fichero</param>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.FileOperationMockService.SaveDocument(System.String,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Guarda un fichero
+            </summary>
+            <param name="route">Ruta donde guardar</param>
+            <param name="document">documento a guardar</param>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.FileOperationMockService.ReadDocument(System.String)">
+            <summary>
+            Lee los bytes de un fichero
+            </summary>
+            <param name="route">Ruta del fichero</param>
+        </member>
+        <member name="T:GestorDocumentacion.Models.Services.FileOperationsService">
+            <summary>
+            Clase para la gestión de archivos
+            </summary>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.FileOperationsService.ReadFile(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Devuelve el contenido en texto de un fichero
+            </summary>
+            <param name="file">Fichero a leer</param>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.FileOperationsService.DeleteDocument(System.String)">
+            <summary>
+            Elimina un fichero
+            </summary>
+            <param name="route">Ruta del fichero</param>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.FileOperationsService.SaveDocument(System.String,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Guarda un fichero
+            </summary>
+            <param name="route">Ruta donde guardar</param>
+            <param name="document">documento a guardar</param>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.FileOperationsService.ReadDocument(System.String)">
+            <summary>
+            Lee los bytes de un fichero
+            </summary>
+            <param name="route">Ruta del fichero</param>
+        </member>
+        <member name="T:GestorDocumentacion.Models.Services.IDocumentsOperationsService">
+            <summary>
+            Interfaz para el servicio de los documentos
+            </summary>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IDocumentsOperationsService.DeleteDocument(System.Guid)">
+            <summary>
+            Elimina un objeto documento y el documento enlazado a él
+            </summary>
+            <param name="documentId">Identificador del documento</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IDocumentsOperationsService.GetDocument(System.String)">
+            <summary>
+            Obtiene un documento por su nombre
+            </summary>
+            <param name="name">Nombre del documento a obtener</param>
+            <returns>Un objeto documento</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IDocumentsOperationsService.GetDocumentBytes(System.Guid)">
+            <summary>
+            Obtiene los bytes de un documento
+            </summary>
+            <param name="documentId">Identificador del documento a obtener</param>
+            <returns>contenido del fichero</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IDocumentsOperationsService.GetDocument(System.Guid)">
+            <summary>
+            Obtiene un documento por su Identificador
+            </summary>
+            <param name="documentId">Identificador del documento a obtener</param>
+            <returns>Un objeto documento</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IDocumentsOperationsService.GetDocuments">
+            <summary>
+            Obtiene una lista de documentos
+            </summary>
+            <returns>Lista de objetos documento</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IDocumentsOperationsService.GetDocumentInfo(System.Guid)">
+            <summary>
+            Obtiene el nombre del documento y su contenido
+            </summary>
+            <param name="documentId">Identificador del documento</param>
+            <returns>Un diccionario en el que en la clave es el nombre del documento y el valor el contenido del fichero</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IDocumentsOperationsService.LoadDocument(GestorDocumentacion.Models.Entities.Document,System.Boolean,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Carga o modifica un documento
+            </summary>
+            <param name="document">Documento nuevo o a modificar</param>
+            <param name="isNew">Si el documento es nuevo</param>
+            <param name="documentFile">Contenido del fichero</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IFileOperationService.ReadFile(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Devuelve el contenido en texto de un fichero
+            </summary>
+            <param name="file">Fichero a leer</param>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IFileOperationService.DeleteDocument(System.String)">
+            <summary>
+            Elimina un fichero
+            </summary>
+            <param name="route">Ruta del fichero</param>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IFileOperationService.SaveDocument(System.String,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Guarda un fichero
+            </summary>
+            <param name="route">Ruta donde guardar</param>
+            <param name="document">documento a guardar</param>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IFileOperationService.ReadDocument(System.String)">
+            <summary>
+            Lee los bytes de un fichero
+            </summary>
+            <param name="route">Ruta del fichero</param>
+        </member>
+        <member name="T:GestorDocumentacion.Models.Services.IPagesOperationsServices">
+            <summary>
+            Interfaz para la gestión de paginas
+            </summary>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IPagesOperationsServices.GetPage(System.String)">
+            <summary>
+            Obtiene una página por su ruta
+            </summary>
+            <param name="route">Ruta de la página a obtener</param>
+            <returns>Un objeto página</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IPagesOperationsServices.GetPage(System.Guid)">
+            <summary>
+            Obtiene una página por su identificador
+            </summary>
+            <param name="pageID">Identificador de la página a obtener</param>
+            <returns>Un objeto página</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IPagesOperationsServices.LoadPage(GestorDocumentacion.Models.Entities.Page,System.Boolean)">
+            <summary>
+            Carga o modifica una página
+            </summary>
+            <param name="page">página nueva o a modificar</param>
+            <param name="isNew">Si el documento es nuevo</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IPagesOperationsServices.GetPages">
+            <summary>
+            Obtiene una lista de páginas
+            </summary>
+            <returns>Lista de objetos página</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.IPagesOperationsServices.DeletePage(System.Guid)">
+            <summary>
+            Elimina una página
+            </summary>
+            <param name="pageID">Identificador de la página a eliminar</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+        <member name="T:GestorDocumentacion.Models.Services.ITemplatesOperationsServices">
+            <summary>
+            Interfaz  para la gestión de plantillas
+            </summary>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.ITemplatesOperationsServices.GetTemplate(System.String)">
+            <summary>
+            Obtiene una plantilla por su nombre
+            </summary>
+            <param name="name">Nombre de la plantilla a obtener</param>
+            <returns>Un objeto página</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.ITemplatesOperationsServices.GetTemplate(System.Guid)">
+            <summary>
+            Obtiene una plantilla por su nombre
+            </summary>
+            <param name="templateID">Identificador de la plantilla a obtener</param>
+            <returns>Un objeto página</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.ITemplatesOperationsServices.LoadTemplate(GestorDocumentacion.Models.Entities.Template,System.Boolean)">
+            <summary>
+            Carga o modifica una plantilla
+            </summary>
+            <param name="template">plantilla nueva o a modificar</param>
+            <param name="isNew">Si el documento es nuevo</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.ITemplatesOperationsServices.GetTemplates">
+            <summary>
+            Obtiene una lista de plantillas
+            </summary>
+            <returns>Lista de objetos plantilla</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.ITemplatesOperationsServices.DeleteTemplate(System.Guid)">
+            <summary>
+            Elimina una plantilla
+            </summary>
+            <param name="templateID">Identificador de la plantilla a eliminar</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+        <member name="T:GestorDocumentacion.Models.Services.PagesOperationService">
+            <summary>
+            Clase para la gestión de páginas
+            </summary>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.PagesOperationService.DeletePage(System.Guid)">
+            <summary>
+            Elimina una página
+            </summary>
+            <param name="pageID">Identificador de la página a eliminar</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.PagesOperationService.GetPage(System.String)">
+            <summary>
+            Obtiene una página por su nombre
+            </summary>
+            <param name="route">Ruta de la página a obtener</param>
+            <returns>Un objeto página</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.PagesOperationService.GetPage(System.Guid)">
+            <summary>
+            Obtiene una página por su identificador
+            </summary>
+            <param name="pageID">Identificador de la página a obtener</param>
+            <returns>Un objeto página</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.PagesOperationService.GetPages">
+            <summary>
+            Obtiene una lista de páginas
+            </summary>
+            <returns>Lista de objetos página</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.PagesOperationService.LoadPage(GestorDocumentacion.Models.Entities.Page,System.Boolean)">
+            <summary>
+            Carga o modifica una página
+            </summary>
+            <param name="page">página nueva o a modificar</param>
+            <param name="isNew">Si el documento es nuevo</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.PagesOperationServiceMockService.DeletePage(System.Guid)">
+            <summary>
+            Elimina una página
+            </summary>
+            <param name="pageID">Identificador de la página a eliminar</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.PagesOperationServiceMockService.GetPage(System.String)">
+            <summary>
+            Obtiene una página por su nombre
+            </summary>
+            <param name="route">Ruta de la página a obtener</param>
+            <returns>Un objeto página</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.PagesOperationServiceMockService.GetPage(System.Guid)">
+            <summary>
+            Obtiene una página por su identificador
+            </summary>
+            <param name="pageID">Identificador de la página a obtener</param>
+            <returns>Un objeto página</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.PagesOperationServiceMockService.GetPages">
+            <summary>
+            Obtiene una lista de páginas
+            </summary>
+            <returns>Lista de objetos página</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.PagesOperationServiceMockService.LoadPage(GestorDocumentacion.Models.Entities.Page,System.Boolean)">
+            <summary>
+            Carga o modifica una página
+            </summary>
+            <param name="page">página nueva o a modificar</param>
+            <param name="isNew">Si el documento es nuevo</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+        <member name="T:GestorDocumentacion.Models.Services.TemplatesOperationMockService">
+            <summary>
+            Clase para la simulación de la gestión de plantillas
+            </summary>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.TemplatesOperationMockService.DeleteTemplate(System.Guid)">
+            <summary>
+            Elimina una plantilla
+            </summary>
+            <param name="templateID">Identificador de la plantilla</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.TemplatesOperationMockService.GetTemplate(System.String)">
+            <summary>
+            Obtiene una plantilla a partir de su nombre
+            </summary>
+            <param name="name">Nombre de la plantila</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.TemplatesOperationMockService.GetTemplate(System.Guid)">
+            <summary>
+            Obtiene una plantilla a partir de su identificador
+            </summary>
+            <param name="templateID">Identificador de la plantilla</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.TemplatesOperationMockService.GetTemplates">
+            <summary>
+            Obtiene una lista de plantillas
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.TemplatesOperationMockService.LoadTemplate(GestorDocumentacion.Models.Entities.Template,System.Boolean)">
+            <summary>
+            Carga una nueva plantilla o modifica una existente
+            </summary>
+            <param name="template">Datos nuevos de la plantilla</param>
+            <param name="isNew">Indica si la plantilla es nueva o no</param>
+            <returns></returns>
+        </member>
+        <member name="T:GestorDocumentacion.Models.Services.TemplatesOperationsService">
+            <summary>
+            Clase para la gestión de plantillas
+            </summary>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.TemplatesOperationsService.DeleteTemplate(System.Guid)">
+            <summary>
+            Elimina una plantilla
+            </summary>
+            <param name="templateID">Identificador de la plantilla a eliminar</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.TemplatesOperationsService.GetTemplate(System.String)">
+            <summary>
+            Obtiene una plantilla por su nombre
+            </summary>
+            <param name="name">Nombre de la plantilla a obtener</param>
+            <returns>Un objeto página</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.TemplatesOperationsService.GetTemplate(System.Guid)">
+            <summary>
+            Obtiene una plantilla por su nombre
+            </summary>
+            <param name="templateID">Identificador de la plantilla a obtener</param>
+            <returns>Un objeto página</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.TemplatesOperationsService.GetTemplates">
+            <summary>
+            Obtiene una lista de plantillas
+            </summary>
+            <returns>Lista de objetos plantilla</returns>
+        </member>
+        <member name="M:GestorDocumentacion.Models.Services.TemplatesOperationsService.LoadTemplate(GestorDocumentacion.Models.Entities.Template,System.Boolean)">
+            <summary>
+            Carga o modifica una plantilla
+            </summary>
+            <param name="template">plantilla nueva o a modificar</param>
+            <param name="isNew">Si el documento es nuevo</param>
+            <returns>Si se ha realizado con exito</returns>
+        </member>
+    </members>
+</doc>
