@@ -18,63 +18,63 @@ namespace XUnitTestAPI_CARGA
 {
     public class UnitTestOperationsEtl
     {
-        [Fact]
+        //[Fact]
 
-        public void DataPublish()
-        {
-            ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-            RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            ConfigTokenService configTokenService = new ConfigTokenService();
-            CallTokenService callTokenService = new CallTokenService(configTokenService);
-            CallUri callUri = new CallUri(callTokenService);
-            ConfigSparql configSparql = new ConfigSparql();
-            configSparql.Endpoint = "";
-            RabbitMQMockService mockRabbit = new RabbitMQMockService();
-            DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, mockRabbit);
+        //public void DataPublish()
+        //{
+        //    ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
+        //    RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
+        //    ConfigTokenService configTokenService = new ConfigTokenService();
+        //    CallTokenService callTokenService = new CallTokenService(configTokenService);
+        //    CallUri callUri = new CallUri(callTokenService);
+        //    ConfigSparql configSparql = new ConfigSparql();
+        //    configSparql.Endpoint = "";
+        //    RabbitMQMockService mockRabbit = new RabbitMQMockService();
+        //    DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
+        //    etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, mockRabbit);
 
-            var stream = new MemoryStream();
-            var writer = new StreamWriter(stream);
-            writer.Write(rdfFile);
-            writer.Flush();
-            stream.Position = 0;
-            var file = new FormFile(stream, 0, stream.Length, null, "rdf.xml");
+        //    var stream = new MemoryStream();
+        //    var writer = new StreamWriter(stream);
+        //    writer.Write(rdfFile);
+        //    writer.Flush();
+        //    stream.Position = 0;
+        //    var file = new FormFile(stream, 0, stream.Length, null, "rdf.xml");
 
-            etlController.dataPublish(file,"x",false);
-            Assert.True(true);
-        }
+        //    etlController.dataPublish(file,"x",false);
+        //    Assert.True(true);
+        //}
 
-        [Fact]
-        public void DataPublishError()
-        {
-            ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-            RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            ConfigSparql configSparql = new ConfigSparql();
-            ConfigTokenService configTokenService = new ConfigTokenService();
-            CallTokenService callTokenService = new CallTokenService(configTokenService);
-            CallUri callUri = new CallUri(callTokenService);
-            configSparql.Endpoint = "";
-            DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, null);
+        //[Fact]
+        //public void DataPublishError()
+        //{
+        //    ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
+        //    RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
+        //    ConfigSparql configSparql = new ConfigSparql();
+        //    ConfigTokenService configTokenService = new ConfigTokenService();
+        //    CallTokenService callTokenService = new CallTokenService(configTokenService);
+        //    CallUri callUri = new CallUri(callTokenService);
+        //    configSparql.Endpoint = "";
+        //    DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
+        //    etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, null);
 
-            try
-            {
-                var response = etlController.dataPublish(null,"x",false);
-                if (response is BadRequestObjectResult)
-                {
-                    Assert.True(true);
-                }
-                else
-                {
-                    Assert.True(false);
-                }
-            }
-            catch(Exception)
-            {
-                Assert.True(true);
-            }
+        //    try
+        //    {
+        //        var response = etlController.dataPublish(null,"x",false);
+        //        if (response is BadRequestObjectResult)
+        //        {
+        //            Assert.True(true);
+        //        }
+        //        else
+        //        {
+        //            Assert.True(false);
+        //        }
+        //    }
+        //    catch(Exception)
+        //    {
+        //        Assert.True(true);
+        //    }
           
-        }
+        //}
 
         [Fact]
         public void DataValidate()
@@ -222,69 +222,69 @@ namespace XUnitTestAPI_CARGA
             }
         }
 
-        [Fact]
-        public void dataDiscover()
-        {
-            ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-            RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            ConfigSparql configSparql = new ConfigSparql();
-            ConfigTokenService configTokenService = new ConfigTokenService();
-            CallTokenService callTokenService = new CallTokenService(configTokenService);
-            CallUri callUri = new CallUri(callTokenService);
-            configSparql.Endpoint = "";
-            RabbitMQMockService mockRabbit = new RabbitMQMockService();
-            DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, mockRabbit);
+        //[Fact]
+        //public void dataDiscover()
+        //{
+        //    ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
+        //    RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
+        //    ConfigSparql configSparql = new ConfigSparql();
+        //    ConfigTokenService configTokenService = new ConfigTokenService();
+        //    CallTokenService callTokenService = new CallTokenService(configTokenService);
+        //    CallUri callUri = new CallUri(callTokenService);
+        //    configSparql.Endpoint = "";
+        //    RabbitMQMockService mockRabbit = new RabbitMQMockService();
+        //    DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
+        //    etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, mockRabbit);
 
-            MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
-            writer.Write(rdfFile);
-            writer.Flush();
-            stream.Position = 0;
-            FormFile file = new FormFile(stream, 0, stream.Length, null, "rdf.xml");
-            etlController.dataDiscover(file);
-            Assert.True(true);
-        }
+        //    MemoryStream stream = new MemoryStream();
+        //    StreamWriter writer = new StreamWriter(stream);
+        //    writer.Write(rdfFile);
+        //    writer.Flush();
+        //    stream.Position = 0;
+        //    FormFile file = new FormFile(stream, 0, stream.Length, null, "rdf.xml");
+        //    etlController.dataDiscover(file);
+        //    Assert.True(true);
+        //}
 
-        [Fact]
-        public void dataDiscoverState()
-        {
-            ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-            RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            ConfigSparql configSparql = new ConfigSparql();
-            ConfigTokenService configTokenService = new ConfigTokenService();
-            CallTokenService callTokenService = new CallTokenService(configTokenService);
-            CallUri callUri = new CallUri(callTokenService);
-            configSparql.Endpoint = "";
-            RabbitMQMockService mockRabbit = new RabbitMQMockService();
-            DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, mockRabbit);
+        //[Fact]
+        //public void dataDiscoverState()
+        //{
+        //    ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
+        //    RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
+        //    ConfigSparql configSparql = new ConfigSparql();
+        //    ConfigTokenService configTokenService = new ConfigTokenService();
+        //    CallTokenService callTokenService = new CallTokenService(configTokenService);
+        //    CallUri callUri = new CallUri(callTokenService);
+        //    configSparql.Endpoint = "";
+        //    RabbitMQMockService mockRabbit = new RabbitMQMockService();
+        //    DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
+        //    etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, mockRabbit);
 
-            DiscoverItem discoverItem = new DiscoverItem();
-            discoverItem.ID = Guid.NewGuid();
-            discoverItem.Status = "Pending";
-            discoverItem.DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
+        //    DiscoverItem discoverItem = new DiscoverItem();
+        //    discoverItem.ID = Guid.NewGuid();
+        //    discoverItem.Status = "Pending";
+        //    discoverItem.DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
 
-            discoverItem.DissambiguationProblems.Add(new DiscoverItem.DiscoverDissambiguation
-            {
-                ID = Guid.NewGuid(),
-                DiscoverItemID = discoverItem.ID,
-                DissambiguationCandiates = new List<DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate>()
-            });
+        //    discoverItem.DissambiguationProblems.Add(new DiscoverItem.DiscoverDissambiguation
+        //    {
+        //        ID = Guid.NewGuid(),
+        //        DiscoverItemID = discoverItem.ID,
+        //        DissambiguationCandiates = new List<DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate>()
+        //    });
 
-            foreach(var item in discoverItem.DissambiguationProblems)
-            {
-                item.DissambiguationCandiates.Add(new DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate
-                {
-                    ID = Guid.NewGuid(),
-                    DiscoverDissambiguationID = item.ID
-                });
-            }
+        //    foreach(var item in discoverItem.DissambiguationProblems)
+        //    {
+        //        item.DissambiguationCandiates.Add(new DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate
+        //        {
+        //            ID = Guid.NewGuid(),
+        //            DiscoverDissambiguationID = item.ID
+        //        });
+        //    }
 
-            discoverItemService.AddDiscoverItem(discoverItem);
-            etlController.dataDiscoverState(discoverItem.ID);
-            Assert.True(true);
-        }
+        //    discoverItemService.AddDiscoverItem(discoverItem);
+        //    etlController.dataDiscoverState(discoverItem.ID);
+        //    Assert.True(true);
+        //}
         private string rdfFile
         {
             get
