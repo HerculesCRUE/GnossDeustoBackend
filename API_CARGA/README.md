@@ -10,6 +10,8 @@
 |Cambios de la Versión|Añadida la sección [Obtención del Token](#obtención-del-token)<br/>Añadida la sección [Configuración en el appsettings.json](#configuración-en-el-appsettingsjson)|
 
 ## Sobre API CARGA
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20API_CARGA/badge.svg)
+
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
 
 Accesible en el entorno de desarrollo en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/carga/swagger/index.html.
