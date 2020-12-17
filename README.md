@@ -2,6 +2,8 @@
 
 
 ## Sobre GnossDeustoBackend
+[![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
+
 Éste es el repositorio del proyecto Hércules ASIO en el que se incluyen los siguientes programas y servicios
 
  - [API_CARGA](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA "API_CARGA"): Servicio web que realiza las tareas de carga/configuración.
@@ -30,6 +32,3 @@ Todas las aplicaciones aquí descritas pueden usarse de dos formas distintas:
 
 Las [instrucciones de configuración e instalación](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Configuraci%C3%B3n%20e%20Instalaci%C3%B3n.md) son el punto de partida para 
 comenzar a usar los desarrollos de Hércules ASIO
-
-### Código cubierto
-[![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)

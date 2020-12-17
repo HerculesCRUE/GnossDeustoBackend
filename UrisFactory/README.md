@@ -1,7 +1,7 @@
 ![](.//docs/media/CabeceraDocumentosMD.png)
 
 # Acerca de UrisFactory
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/.NET%20Core/badge.svg)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20UrisFactory/badge.svg)
 
 La documentación que explica la Especificación de URIs Hércules y las Buenas prácticas de URis está en:
 
