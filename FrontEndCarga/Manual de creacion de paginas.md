@@ -21,10 +21,14 @@ Como curiosidad esta página contiene el código:
     @{
     Layout = "_Layout";
     ViewData["BodyClass"] = "fichaRecurso";
+    ViewData["Title"] = "Proyecto ASIO";
+    ViewData["MetaData"] = "<meta name=\"description\" content=\"Web pública del Proyecto Hércules ASIO de la Universidad de Murcia\">";
     }
 	
  - Layout = "_Layout": Con este código indicamos que coja el Layout compartida con todas las páginas del hércules para tener las páginas de forma homogénea.
  - ViewData["BodyClass"] = "fichaRecurso": Añade la clase fichaRecurso al body de la página (él cuál está en el Layout) para poder usar los estilos de la clase de la web.
+ - ViewData["Title"]: Añade un título a la página definido por el usuario, este título es visible desde la pestaña del navegador.
+ - ViewData["MetaData"]: Añade etiquetas de metadatos a la cabecera
  
  Creación de páginas con contenido dinámico
 ----------------
