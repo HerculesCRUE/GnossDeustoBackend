@@ -221,6 +221,70 @@ A continuación se muestra un fragmento del fichero con la configuración del de
  - ClientSecret: "clave" de acceso del api
   
 
+# Comprobaciones y pruebas
+
+Para comprobar el correcto funcionamiento del servicio API DISCOVER, se utilizarán un conjunto de 5 RDF's en formato xml que están disponibles en [este enlace](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_DISCOVER/xml_descubrimiento.zip).
+
+Realizaremos las pruebas accediendo con el método /etl/data-publish, que podemos probar desde Swagger siguiendo estos pasos:
+
+ - Pulsamos en el método /etl/data-publish
+ - Seleccionamos Try it out
+ - Hay que completar los siguientes campos
+	 - jobID: indicamos el identificador de una tarea existente para que podamos desde la misma comprobar si se ha realizado correctamente el descubrimiento
+	 - discoverProcessed: seleccionamos false
+	 - rdfFile: seleccionaremos los RDF's de uno en uno para irlos cargando.
+ - Al realizar el descubrimiento del primer RDF se realizara lo siguiente:
+	 - Un investigador (Diego López de Ipiña) sube su CV con publicaciones y coautores (Diego Casado-Mansilla)
+	 - Se enriquecen los identificadores de los elementos encontrados en las fuentes externas de información
+	 - No se encuentra nada en el grafo porque es la primera entidad cargada
+
+Comprobamos que se ha realizado correctamente el descubrimiento buscando tanto a Diego López de Ipiña como a Diego Casado-Mansilla, ambos aparecerán con su información correspondiente.
+
+ - Al subir el segundo RDF:
+	 - Un investigador (Esteban Sota) sube su CV con sus publicaciones y sus coautores (Diego Casado-Mansilla)
+	 - En este caso las publicaciones del RDF son inventadas, así que no ayudan a la reconciliación, porque no se van a encontrar en las fuentes externas
+	 - Pero Diego Casado-Mansilla tiene el ORCID en el RDF, por lo que reconoce la entidad cargada previamente con ese mismo identificador (se cargó enriquecida en el paso anterior). 
+	 
+Buscando a Diego Casado-Mansilla nos muestra correctamente la nueva entidad
+
+ - Con el descubrimiento del tercer RDF:
+	 - Una investigadora (Oihane Gómez-Carmona) sube su CV con sus publicaciones y sus coautores (Diego Casado-Mansilla)
+	 - En este caso se enriquecen los identificadores de los elementos encontrados en las fuentes externas
+	 - Reconoce a “Diego Casado” porque, aunque no estaba en el grafo ninguna de las publicaciones del RDF de Ohiane ni tiene ningún identificador (ORCID u otros), se ha encontrado en las fuentes externas que este autor más sus publicaciones coinciden con el autor ya cargado más sus publicaciones
+
+Buscando a Diego Casado-Mansilla nos muestra correctamente la nueva entidad
+
+- En el descubrimiento del cuarto RDF:
+	 - Un investigador (Álvaro Palacios) sube su CV con sus publicaciones y sus coautores (Diego Casado-Mansilla)
+	 - En este caso las publicaciones del RDF son inventadas y no están cargadas previamente en el grafo ni se encontrarán en las fuentes externas, por lo que habrá que desambiguar a Diego Casado-Mansilla manualmente porque no hay datos suficientes (en este caso se tratará del mismo Diego)
+	 - Además, también se propondrá para la desambiguación manual un documento llamado ‘Documento de prueba con título inventado’, ya que en el segundo caso se ha cargado un documento con el mismo nombre que no tiene en común ningún autor (en este caso no se tratará del mismo documento)
+ - Con el ultimo RDF:
+	 - Un investigador (Diego Casado-Mansilla) sube su CV con todas sus publicaciones y sus coautores. Contiene las publicaciones y los coautores que se habían cargado en los pasos anteriores además de otras nuevas
+	 - En este caso las publicaciones y autores que ya estaban cargados se reconocen y se desambiguan automáticamente y las publicaciones nuevas se cargan
+	 - Además, cabe destacar que este caso 'Diego López de Ipiña’ se cita como 'D. López de Ipiña' y también es reconocido y actualiza las propiedades monoevaluada
+
+Si revisamos a Diego López de Ipiña vemos que se ha modificado su nombre correctamente.
+
+Si queremos eliminar los datos subidos en estas pruebas, hay que ejecutar las siguiente sentencias en el RDF Store:
+
+    with <http://graph.um.es/graph/sgi>
+    DELETE
+     { ?s ?p ?o }
+    WHERE
+     { ?s ?p ?o .
+     ?s <http://purl.org/roh/mirror/foaf#prueba> ?x
+     }
+Y posteriormente:
+
+    with <http://graph.um.es/graph/sgi>
+    DELETE { ?s ?p ?o. }
+    WHERE 
+    {
+    	?s ?p ?o.
+    	MINUS{?x ?y ?s. FILTER(isblank(?s))}
+    	MINUS{?s ?p ?o. FILTER(!isblank(?s))}
+    }
+
 ## Dependencias
 
 - **dotNetRDF**: versión 2.5.1
