@@ -13,6 +13,7 @@
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
 
 ![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20API_DISCOVER/badge.svg)
+[![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI&flag=discover)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
 
 La documentación de la librería está disponible en: 
 http://herc-as-front-desa.atica.um.es/api-discover/library/api/API_DISCOVER.Utility.Discover.html
