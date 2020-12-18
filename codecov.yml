@@ -2,44 +2,44 @@ coverage:
   status:
     project:
       default:
-        target: 70%
-      APICARGA:
-        target: 50%
+        target: auto
+      carga:
+        target: auto
        flags:
-          - APICARGA
-      URISFACTORY:
-        target: 70%
+          - carga
+      uris:
+        target: auto
         flags:
-          - URISFACTORY
-      DISCOVER:
-        target: 70%
+          - uris
+      discover:
+        target: auto
         flags:
-          - DISCOVER
-      CRON:
-        target: 40%
+          - discover
+      cron:
+        target: auto
         flags:
-          - CRON
+          - cron
 comment:
   layout: "reach, diff, flags, files"
   behavior: default
-  require_changes: false  
+  require_changes: false
   require_base: yes
-  require_head: yes       
+  require_head: yes
   branches: null
 flags:
-  APICARGA:
+  carga:
     paths:
       - API_CARGA
     carryforward: false
-  URISFACTORY:
+  uris:
     paths:
       - UrisFactory
     carryforward: false
-  CRON:
+  cron:
     paths:
       - CronConfigure
     carryforward: false
-  DISCOVER:
+  discover:
     paths:
       - API_DISCOVER
     carryforward: false
