@@ -1,0 +1,44 @@
+coverage:
+  status:
+    project:
+      default: off
+      carga:
+        target: auto
+        flags:
+          - carga
+      uris:
+        target: auto
+        flags:
+          - uris
+      discover:
+        target: auto
+        flags:
+          - discover
+      cron:
+        target: auto
+        flags:
+          - cron
+comment:
+  layout: "reach, diff, flags, files"
+  behavior: default
+  require_changes: false
+  require_base: yes
+  require_head: yes
+  branches: null
+flags:
+  carga:
+    paths:
+      - app/API_CARGA/
+    carryforward: false
+  uris:
+    paths:
+      - app/UrisFactory/
+    carryforward: false
+  cron:
+    paths:
+      - app/CronConfigure/
+    carryforward: false
+  discover:
+    paths:
+      - app/API_DISCOVER/
+    carryforward: false
