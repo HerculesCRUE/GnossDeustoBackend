@@ -28,17 +28,17 @@ comment:
 flags:
   carga:
     paths:
-      - app/API_CARGA/
+      - API_CARGA/
     carryforward: false
   uris:
     paths:
-      - app/UrisFactory/
+      - UrisFactory/
     carryforward: false
   cron:
     paths:
-      - app/CronConfigure/
+      - CronConfigure/
     carryforward: false
   discover:
     paths:
-      - app/API_DISCOVER/
+      - API_DISCOVER/
     carryforward: false
