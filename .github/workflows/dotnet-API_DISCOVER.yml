@@ -39,6 +39,7 @@ jobs:
         directory: API_DISCOVER
         # Flag upload to group coverage metrics (e.g. unittests | integration | ui,chrome)
         # flags: # optional
+        flags: discover
         # Write upload file to path before uploading
         # path_to_write_report: # optional
         # Environment variables to tag the upload with (e.g. PYTHON | OS,PYTHON)
