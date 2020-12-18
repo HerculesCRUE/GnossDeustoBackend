@@ -1,11 +1,12 @@
+codecov:
+  require_ci_to_pass: yes
 coverage:
   status:
     project:
-      default:
-        target: auto
+      default: off
       carga:
         target: auto
-       flags:
+        flags:
           - carga
       uris:
         target: auto
