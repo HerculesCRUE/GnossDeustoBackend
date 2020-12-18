@@ -2,6 +2,7 @@
 
 # Acerca de UrisFactory
 ![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20UrisFactory/badge.svg)
+[![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI&flag=uris)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
 
 La documentación que explica la Especificación de URIs Hércules y las Buenas prácticas de URis está en:
 
