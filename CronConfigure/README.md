@@ -12,6 +12,7 @@
 
 # Acerca de CronConfigure
 ![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20CronConfigure/badge.svg)
+[![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI&flag=cron)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
 
 Accesible desde: [http://herc-as-front-desa.atica.um.es/cron-config/swagger/index.html](http://herc-as-front-desa.atica.um.es/cron-config/swagger/index.html)
 Es un api para la gestión y configuración del programado de tareas, tanto de ejecución recurrente como ejecución única sobre los repositorios configurados.
