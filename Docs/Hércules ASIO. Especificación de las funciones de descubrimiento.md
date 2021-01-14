@@ -4,10 +4,10 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Hércules ASIO. Especificación de las funciones de descubrimiento| 
 |Descripción|Especificación de las funciones de descubrimiento|
-|Versión|0.2|
+|Versión|0.3|
 |Módulo|API DISCOVER|
 |Tipo|Especificación|
-|Cambios de la Versión|Explicación de los diferentes apis externos|
+|Cambios de la Versión|Añadidos ejemplos en las configuraciones por tipo de entidad|
 
 # Hércules Backend ASIO. Especificación de las funciones de descubrimiento
 
@@ -117,7 +117,18 @@ Configuración por tipo de entidad
 -------------------
 Para la reconciliación de entidades se realiza una configuración por cada tipo de entidad de las propiedades que deben coincidir para considerar que se trata de la misma entidad. Estas propiedades pueden ser directas o inversas y pueden tener N saltos (ver formato de configuración para entidad de tipo persona en [Formato de configuración en el fichero reconciliationConfig.json](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_DISCOVER/README.md#formato-de-configuraci%C3%B3n-en-el-fichero-reconciliationconfigjson)).
 Esta concidencia puede ser de 4 tipos:
-1.	Equals: El valor de la propiedad es exactamente el mismo.
+1.	Equals: El valor de la propiedad es exactamente el mismo. Sirve para cualquier tipo de valor de propiedad: textos, fechas, otras entidades...
+	Ejemplo:
+	{
+		"property": "http://purl.org/roh#participates",
+		"mandatory": false,
+		"inverse": false,
+		"type": 0,
+		"maxNumWordsTitle": null,
+		"scorePositive": 0.5,
+		"scoreNegative": null
+	}
+	
 2.	IgnoreCaseSensitive: El valor de la propiedad es exactamente el mismo (ignorando mayúsculas y minúsculas).
 3.	Name: Utilizado para nombres de personas, tiene en cuenta abreviaturas, más o menos apellidos.... El detalle del algoritmo está en el apartado [Algoritmos de similitud. Nombres y nombres propios](#algoritmos-de-similitud-nombres-y-nombres-propios)
 4.	Title: Utilizado para nombres/títulos en los que el valor debe ser el mismo ignorando caracteres especiales, mayúsculas, minúsculas y acentos.
