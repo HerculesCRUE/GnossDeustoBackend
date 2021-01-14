@@ -119,6 +119,7 @@ Para la reconciliación de entidades se realiza una configuración por cada tipo
 Esta concidencia puede ser de 4 tipos:
 1.	Equals: El valor de la propiedad es exactamente el mismo. Sirve para cualquier tipo de valor de propiedad: textos, fechas, otras entidades...
 	Ejemplo:
+	
 	{
 		"property": "http://purl.org/roh#participates",
 		"mandatory": false,
