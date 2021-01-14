@@ -120,6 +120,13 @@ Esta concidencia puede ser de 4 tipos:
 1.	Equals: El valor de la propiedad es exactamente el mismo. Sirve para cualquier tipo de valor de propiedad: textos, fechas, otras entidades...
 	Ejemplo:
 	
+	
+
+
+    http://purl.org/roh#Accreditation (Acreditación)
+        http://purl.org/roh#LanguageCertificate (Certificado de Idioma)
+    http://purl.org/roh#Activity (Actividad)
+    
 	{
 		"property": "http://purl.org/roh#participates",
 		"mandatory": false,
