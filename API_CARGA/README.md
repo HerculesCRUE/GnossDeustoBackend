@@ -13,6 +13,11 @@
 ![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20API_CARGA/badge.svg)
 [![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI&flag=carga)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
 
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=API_CARGA)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=API_CARGA&metric=bugs)](https://sonarcloud.io/dashboard?id=API_CARGA)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=API_CARGA&metric=security_rating)](https://sonarcloud.io/dashboard?id=API_CARGA)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=API_CARGA&metric=ncloc)](https://sonarcloud.io/dashboard?id=API_CARGA)
+
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
 
 Accesible en el entorno de desarrollo en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/carga/swagger/index.html.
