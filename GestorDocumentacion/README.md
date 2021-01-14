@@ -17,6 +17,7 @@
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=GestorDocumentacion&metric=bugs)](https://sonarcloud.io/dashboard?id=GestorDocumentacion)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=GestorDocumentacion&metric=security_rating)](https://sonarcloud.io/dashboard?id=GestorDocumentacion)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=GestorDocumentacion&metric=ncloc)](https://sonarcloud.io/dashboard?id=GestorDocumentacion)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=GestorDocumentacion&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=GestorDocumentacion)
 
 Este módulo se usa para cargar páginas HTML y servirlas a través de la web a modo de un gestor de contenidos, en el que los usuarios pueden subir páginas html con una ruta
 determinada y luego acceder a esas páginas a través de la web (https://herc-as-front-desa.atica.um.es/carga-web), estas operaciones están disponibles en el controlador Page
