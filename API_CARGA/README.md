@@ -18,6 +18,7 @@
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=API_CARGA&metric=bugs)](https://sonarcloud.io/dashboard?id=API_CARGA)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=API_CARGA&metric=security_rating)](https://sonarcloud.io/dashboard?id=API_CARGA)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=API_CARGA&metric=ncloc)](https://sonarcloud.io/dashboard?id=API_CARGA)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=API_CARGA&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=API_CARGA)
 
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
 
