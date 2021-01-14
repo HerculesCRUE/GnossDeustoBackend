@@ -20,6 +20,7 @@
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=API_DISCOVER&metric=bugs)](https://sonarcloud.io/dashboard?id=API_DISCOVER)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=API_DISCOVER&metric=security_rating)](https://sonarcloud.io/dashboard?id=API_DISCOVER)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=API_DISCOVER&metric=ncloc)](https://sonarcloud.io/dashboard?id=API_DISCOVER)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=API_DISCOVER&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=API_DISCOVER)
 
 La documentación de la librería está disponible en: 
 http://herc-as-front-desa.atica.um.es/api-discover/library/api/API_DISCOVER.Utility.Discover.html
