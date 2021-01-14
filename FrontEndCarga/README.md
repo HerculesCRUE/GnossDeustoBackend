@@ -16,6 +16,7 @@
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=FrontEndCarga&metric=bugs)](https://sonarcloud.io/dashboard?id=FrontEndCarga)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=FrontEndCarga&metric=security_rating)](https://sonarcloud.io/dashboard?id=FrontEndCarga)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=FrontEndCarga&metric=ncloc)](https://sonarcloud.io/dashboard?id=FrontEndCarga)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=FrontEndCarga&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=FrontEndCarga)
 
 Este módulo constituye el interfaz Web de administración de las cargas de datos en la plataforma Hércules ASIO. Esta aplicación web realizada mediante el patrón MVC (módelo-vista-controlador) esta formado por diferentes controladores que se comunican con los diferentes apis creados en este proyecto. Estos controladores dividen su ámbito en la gestión de errores, de los repositorios, de los shapes, de las tareas, la gestión de la factoria de uris, etc.:
   - ErrorController: Gestiona los errores para devolver una página 404 o 500 según la excepción que se genera.
