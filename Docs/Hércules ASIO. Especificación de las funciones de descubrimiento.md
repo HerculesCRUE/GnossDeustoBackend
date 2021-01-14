@@ -117,30 +117,84 @@ Configuración por tipo de entidad
 -------------------
 Para la reconciliación de entidades se realiza una configuración por cada tipo de entidad de las propiedades que deben coincidir para considerar que se trata de la misma entidad. Estas propiedades pueden ser directas o inversas y pueden tener N saltos (ver formato de configuración para entidad de tipo persona en [Formato de configuración en el fichero reconciliationConfig.json](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_DISCOVER/README.md#formato-de-configuraci%C3%B3n-en-el-fichero-reconciliationconfigjson)).
 Esta concidencia puede ser de 4 tipos:
-1.	Equals: El valor de la propiedad es exactamente el mismo. Sirve para cualquier tipo de valor de propiedad: textos, fechas, otras entidades...
-	Ejemplo:
-	
-	
+1.	Equals (0): El valor de la propiedad es exactamente el mismo. Sirve para cualquier tipo de valor de propiedad: textos, fechas, otras entidades...
 
-
-    http://purl.org/roh#Accreditation (Acreditación)
-        http://purl.org/roh#LanguageCertificate (Certificado de Idioma)
-    http://purl.org/roh#Activity (Actividad)
-    
+Ejemplo:
+	
 	{
-		"property": "http://purl.org/roh#participates",
-		"mandatory": false,
-		"inverse": false,
-		"type": 0,
-		"maxNumWordsTitle": null,
-		"scorePositive": 0.5,
-		"scoreNegative": null
+		"rdfType": "http://purl.org/roh/mirror/foaf#Person",
+		"properties": [
+		{
+			"property": "http://purl.org/roh/mirror/bibo#authorList@@@?",
+			"mandatory": false,
+			"inverse": true,
+			"type": 0,
+			"maxNumWordsTitle": null,
+			"scorePositive": 0.5,
+			"scoreNegative": null
+		}
+	}
+Está configuración sería para comparar los documentos de los que una persona es autor.	
+	
+2.	IgnoreCaseSensitive (1): El valor de la propiedad es exactamente el mismo (ignorando mayúsculas y minúsculas).
+
+Ejemplo:
+	
+	{
+		"rdfType": "http://purl.org/roh/mirror/foaf#Person",
+		"properties": [
+		{
+			"property": "http://purl.org/roh/mirror/foaf#name",
+			"mandatory": true,
+			"inverse": false,
+			"type": 1,
+			"maxNumWordsTitle": null,
+			"scorePositive": 0.89,
+			"scoreNegative": null
+		}
+	}
+Está configuración sería para comparar los nombres de las personas ignorando las mayúsculas y minúsculas.
+
+3.	Name (2): Utilizado para nombres de personas, tiene en cuenta abreviaturas, más o menos apellidos.... El detalle del algoritmo está en el apartado [Algoritmos de similitud. Nombres y nombres propios](#algoritmos-de-similitud-nombres-y-nombres-propios)
+
+Ejemplo:
+	
+	{
+		"rdfType": "http://purl.org/roh/mirror/foaf#Person",
+		"properties": [
+		{
+			"property": "http://purl.org/roh/mirror/foaf#name",
+			"mandatory": true,
+			"inverse": false,
+			"type": 2,
+			"maxNumWordsTitle": null,
+			"scorePositive": 0.89,
+			"scoreNegative": null
+		}
 	}
 	
-2.	IgnoreCaseSensitive: El valor de la propiedad es exactamente el mismo (ignorando mayúsculas y minúsculas).
-3.	Name: Utilizado para nombres de personas, tiene en cuenta abreviaturas, más o menos apellidos.... El detalle del algoritmo está en el apartado [Algoritmos de similitud. Nombres y nombres propios](#algoritmos-de-similitud-nombres-y-nombres-propios)
-4.	Title: Utilizado para nombres/títulos en los que el valor debe ser el mismo ignorando caracteres especiales, mayúsculas, minúsculas y acentos.
+Está configuración sería para comparar los nombres de las personas utilizando al algoritmo especificado en el apartado [3.4 Algoritmos de similitud. Nombres y nombres propios](#algoritmos-de-similitud-nombres-y-nombres-propios).
+	
+4.	Title (3): Utilizado para nombres/títulos en los que el valor debe ser el mismo ignorando caracteres especiales, mayúsculas, minúsculas y acentos.
     1.	En este caso, además hay que establecer el nº de palabras para considerar que la similitud es del 100%.
+   
+Ejemplo:
+	
+	{
+		"rdfType": "http://purl.org/roh/mirror/bibo#Document",
+		"properties": [
+		{
+			"property": "http://purl.org/roh#title",
+			"mandatory": true,
+			"inverse": false,
+			"type": 3,
+			"maxNumWordsTitle": 10,
+			"scorePositive": 0.9,
+			"scoreNegative": null
+	      	}
+	}
+
+Está configuración sería para comparar los títulos de los documetnos ignorando caracteres especiales, mayúsculas, minúsculas y acentos.
 
 Algoritmos de similitud. Nombres y nombres propios
 --------------
