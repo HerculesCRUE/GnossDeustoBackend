@@ -11,8 +11,14 @@
 
 
 # Acerca de CronConfigure
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=CronConfigure)
+
 ![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20CronConfigure/badge.svg)
 [![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI&flag=cron)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=CronConfigure&metric=bugs)](https://sonarcloud.io/dashboard?id=CronConfigure)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=CronConfigure&metric=security_rating)](https://sonarcloud.io/dashboard?id=CronConfigure)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=CronConfigure&metric=ncloc)](https://sonarcloud.io/dashboard?id=CronConfigure)
 
 Accesible desde: [http://herc-as-front-desa.atica.um.es/cron-config/swagger/index.html](http://herc-as-front-desa.atica.um.es/cron-config/swagger/index.html)
 Es un api para la gestión y configuración del programado de tareas, tanto de ejecución recurrente como ejecución única sobre los repositorios configurados.
