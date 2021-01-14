@@ -12,8 +12,14 @@
 ## Sobre API DISCOVER
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
 
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=API_DISCOVER)
+
 ![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20API_DISCOVER/badge.svg)
 [![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI&flag=discover)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=API_DISCOVER&metric=bugs)](https://sonarcloud.io/dashboard?id=API_DISCOVER)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=API_DISCOVER&metric=security_rating)](https://sonarcloud.io/dashboard?id=API_DISCOVER)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=API_DISCOVER&metric=ncloc)](https://sonarcloud.io/dashboard?id=API_DISCOVER)
 
 La documentación de la librería está disponible en: 
 http://herc-as-front-desa.atica.um.es/api-discover/library/api/API_DISCOVER.Utility.Discover.html
