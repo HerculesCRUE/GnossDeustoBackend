@@ -12,6 +12,12 @@
 
 # Sobre api IdentityServer
 
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=IdentityServerHercules)
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=IdentityServerHercules&metric=bugs)](https://sonarcloud.io/dashboard?id=IdentityServerHercules)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=IdentityServerHercules&metric=security_rating)](https://sonarcloud.io/dashboard?id=IdentityServerHercules)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=IdentityServerHercules&metric=ncloc)](https://sonarcloud.io/dashboard?id=IdentityServerHercules)
+
 Este módulo es el encargado de la securización mediante tokens para los apis que forman el proyecto, este api valida los tokens de seguridad y proporciona nuevos tokens de acceso.
 
 ## Configuración en el appsettings.json
