@@ -10,6 +10,13 @@
 |Cambios de la Versión|Presentación y motivación del desarrollo de Linked Data Server|
 
 ## LINKED DATA SERVER de ASIO
+
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=LinkedDataServer)
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=LinkedDataServer&metric=bugs)](https://sonarcloud.io/dashboard?id=LinkedDataServer)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=LinkedDataServer&metric=security_rating)](https://sonarcloud.io/dashboard?id=LinkedDataServer)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=LinkedDataServer&metric=ncloc)](https://sonarcloud.io/dashboard?id=LinkedDataServer)
+
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
 
 LINKED DATA SERVER es un componente de ASIO desarrollado en .Net Core que proporciona el servicio de datos enlazados de Hércules ASIO.
