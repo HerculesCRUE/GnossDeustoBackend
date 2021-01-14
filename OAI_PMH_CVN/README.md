@@ -1,6 +1,13 @@
 ![](..//Docs/media/CabeceraDocumentosMD.png)
 
 ## Acerca de OAI PMH CVN
+
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=OAI_PMH_CVN)
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=OAI_PMH_CVN&metric=bugs)](https://sonarcloud.io/dashboard?id=OAI_PMH_CVN)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=OAI_PMH_CVN&metric=security_rating)](https://sonarcloud.io/dashboard?id=OAI_PMH_CVN)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=OAI_PMH_CVN&metric=ncloc)](https://sonarcloud.io/dashboard?id=OAI_PMH_CVN)
+
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
 
 Accesible en pruebas en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/swagger/index.html.
