@@ -1,8 +1,16 @@
 ![](.//docs/media/CabeceraDocumentosMD.png)
 
 # Acerca de UrisFactory
+
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=UrisFactory)
+
 ![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20UrisFactory/badge.svg)
 [![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI&flag=uris)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=UrisFactory&metric=bugs)](https://sonarcloud.io/dashboard?id=UrisFactory)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=UrisFactory&metric=security_rating)](https://sonarcloud.io/dashboard?id=UrisFactory)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=UrisFactory&metric=ncloc)](https://sonarcloud.io/dashboard?id=UrisFactory)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=UrisFactory&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=UrisFactory)
 
 La documentación que explica la Especificación de URIs Hércules y las Buenas prácticas de URis está en:
 
