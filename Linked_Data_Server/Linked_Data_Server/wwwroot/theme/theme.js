@@ -532,8 +532,43 @@ var masHeaderMensaje = {
   }
 };
 
-function comportamientoCargaFacetasComunidad() {
+function comportamientoLinkedDataServer() {
+    $('.linkprovenancea').click(function (event) {
+        event.preventDefault();
+        var provenanceTable = $(this).parent().find('.provenancetable');
+        if ($(provenanceTable).is(":visible")) {
+            provenanceTable.hide(200);
+        } else {
+            provenanceTable.show(200);
+        }
+    });
 
+
+
+    $("#autocomplete").autocomplete({
+        minLength: 3,
+        source: function (request, response) {
+            $.ajax({
+                url: "/autocomplete",
+                type: "GET",
+                dataType: "json",
+                data: {
+                    q: request.term
+                },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.Key,
+                            url: item.Value
+                        }
+                    }))
+                }
+            })
+        },
+        select: function (event, ui) {
+            document.location.href = ui.item.url;
+        }
+    })
 };
 
 $.fn.reverse = [].reverse;
@@ -542,7 +577,7 @@ var body;
 
 $(function () {
   body = $('body');
-
+  comportamientoLinkedDataServer();
   bodyScrolling.init();
   closeSidebar.init();
   masOpciones.init();

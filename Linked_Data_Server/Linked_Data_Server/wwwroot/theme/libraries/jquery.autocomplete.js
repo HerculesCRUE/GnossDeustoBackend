@@ -515,7 +515,7 @@ $.Autocompleter = function(input, options) {
 			return requestAutocompletarPersonalizado(term, success, failure, options, cache, cont, lastWord, parse, normalize);
 		}
 	
-	    term = replaceAll(replaceAll(replaceAll(term, '%', '%25'), '#', '%23'), '+', "%2B");
+	    //term = replaceAll(replaceAll(replaceAll(term, '%', '%25'), '#', '%23'), '+', "%2B");
 		if (!options.matchCase)
 			term = term.toLowerCase();
 		var data = null;
