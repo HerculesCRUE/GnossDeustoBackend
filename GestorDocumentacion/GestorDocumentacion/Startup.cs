@@ -149,7 +149,7 @@ namespace GestorDocumentacion
             });
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("v1/swagger.json", "Uris factory");
+                c.SwaggerEndpoint("v1/swagger.json", "Gestor Documentacion");
             });
             app.UseEndpoints(endpoints =>
             {
