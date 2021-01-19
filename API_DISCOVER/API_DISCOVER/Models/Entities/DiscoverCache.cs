@@ -31,6 +31,7 @@ namespace API_DISCOVER.Models.Entities
             WOSWorks = new Dictionary<string, WOSWorks>();
             RECOLECTAWorks = new Dictionary<string, List<RecolectaDocument>>();
             DOAJWorks = new Dictionary<string, DOAJWorks>();
+            DBPEDIAData = new Dictionary<string, DBPEDIAData>();
             NormalizedNames = new Dictionary<string, string>();
         }
 
@@ -104,6 +105,10 @@ namespace API_DISCOVER.Models.Entities
         /// </summary>
         public Dictionary<string, DOAJWorks> DOAJWorks { get; set; }
 
+        /// <summary>
+        /// Caché para peticiones a DBPEDIA
+        /// </summary>
+        public Dictionary<string, DBPEDIAData> DBPEDIAData { get; set; }
 
         public Dictionary<string, string> NormalizedNames { get; set; }
     }

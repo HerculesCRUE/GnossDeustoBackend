@@ -209,7 +209,7 @@ namespace XUnitTestProjectAPI_DISCOVER
 			dataGraphBBDD.LoadFromString(databaseFile, new RdfXmlParser());
 			Discover.mSparqlUtility = new SparqlUtilityMock(dataGraphBBDD);
 			Discover.test = true;
-			Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> externalIds = Discover.ExternalIntegration(ref hasChanges, ref discoveredEntityList, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache);
+			Dictionary<string, Dictionary<string, List<KeyValuePair<string, HashSet<string>>>>> externalIds = Discover.ExternalIntegration(ref hasChanges, ref discoveredEntityList, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache);
 			Assert.True(true);
 			//TODO, no funciona correctamente al lanzar las pruebas desde el servidor
 			//if (hasChanges == true)
@@ -468,7 +468,8 @@ namespace XUnitTestProjectAPI_DISCOVER
        					xmlns:foaf=""http://purl.org/roh/mirror/foaf#""
        					xmlns:roh=""http://purl.org/roh#""
        					xmlns:bibo=""http://purl.org/roh/mirror/bibo#""
-       					xmlns:rdf=""http://www.w3.org/1999/02/22-rdf-syntax-ns#"">
+       					xmlns:rdf=""http://www.w3.org/1999/02/22-rdf-syntax-ns#""
+						xmlns:geo=""http://purl.org/roh/mirror/geonames#"">
 					<foaf:Person rdf:about=""http://graph.um.es/res/person/c8a16863-a606-48e3-a858-9def000380c0"">
 						<foaf:name rdf:datatype=""&xsd;string"">Diego Casado-Mansilla</foaf:name>
 						<roh:correspondingAuthorOf rdf:resource=""http://graph.um.es/res/document/76c8f70c-50ea-4de0-b3b6-5bcf4fdb829e""/>
@@ -584,6 +585,9 @@ namespace XUnitTestProjectAPI_DISCOVER
 					<rdf:Seq rdf:nodeID=""N5c342df56893442da790bd591df1c245"">
 						<rdf:_1 rdf:resource=""http://graph.um.es/res/person/c8a16863-a606-48e3-a858-9def000380c0"" />
 					</rdf:Seq>
+					<geo:Feature rdf:about=""http://graph.um.es/res/feature/86769078-ccc8-47dd-83aa-a472666b262a"">
+						<roh:title rdf:datatype=""&xsd;string"" >Logroño</roh:title>
+					</geo:Feature>
 				</rdf:RDF>
 				";
                 return rdfFile;

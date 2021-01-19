@@ -104,7 +104,7 @@ namespace API_DISCOVER.Utility
             //Almacenamos las entidades con dudas acerca de su descubrimiento
             Dictionary<string, Dictionary<string, float>> discoveredEntitiesProbability = new Dictionary<string, Dictionary<string, float>>();
 
-            Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> externalIntegration = new Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>>();
+            Dictionary<string, Dictionary<string, List<KeyValuePair<string, HashSet<string>>>>> externalIntegration = new Dictionary<string, Dictionary<string,List< KeyValuePair<string, HashSet<string>>>>>();
 
             if (!pDiscoverItem.DissambiguationProcessed)
             {
@@ -164,7 +164,7 @@ namespace API_DISCOVER.Utility
                     //4.- Realizamos la reconciliación con los datos de las integraciones externas
                     Dictionary<string, KeyValuePair<string, float>> entidadesReconciliadasConIntegracionExternaAux;
 
-                    Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> externalIntegrationAux = ExternalIntegration(ref hasChanges, ref discoveredEntityList, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache);
+                    Dictionary<string, Dictionary<string, List<KeyValuePair<string, HashSet<string>>>>> externalIntegrationAux = ExternalIntegration(ref hasChanges, ref discoveredEntityList, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache);
                     foreach (string id in entidadesReconciliadasConIntegracionExternaAux.Keys)
                     {
                         discoveredEntitiesWithExternalIntegration.Add(id, entidadesReconciliadasConIntegracionExternaAux[id]);
@@ -2291,7 +2291,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pDiscardDissambiguations">Descartes para la desambiguación</param>
         /// <param name="pDiscoverCache">Caché de discover</param>
         /// <returns>Diccionario con las entidades y los identificadores extraídos, junto con su provenencia</returns>
-        public static Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> ExternalIntegration(ref bool pHasChanges,
+        public static Dictionary<string, Dictionary<string, List<KeyValuePair<string, HashSet<string>>>>> ExternalIntegration(ref bool pHasChanges,
             ref Dictionary<string, string> pListaEntidadesReconciliadas, ref Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner,
             Dictionary<string, Dictionary<string, float>> pNamesScore, RohGraph pOntologyGraph, out Dictionary<string, KeyValuePair<string, float>> pEntidadesReconciliadasConIntegracionExterna, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache)
         {
@@ -2303,7 +2303,7 @@ namespace API_DISCOVER.Utility
 
 
             //Identificadores descubiertos con las integraciones externas
-            Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> identifiersDiscover;
+            Dictionary<string, Dictionary<string, List<KeyValuePair<string, HashSet<string>>>>> identifiersDiscover;
 
             RohGraph dataGraphClone = pDataGraph.Clone();
             Dictionary<string, Dictionary<string, float>> discoveredEntitiesProbabilityClone = new Dictionary<string, Dictionary<string, float>>(pDiscoveredEntitiesProbability);
@@ -2323,6 +2323,7 @@ namespace API_DISCOVER.Utility
             hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationWOS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
             hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationRECOLECTA(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
             hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationDOAJ(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { KeyValuePair<RohGraph, RohGraph> data = ExternalIntegrationDBPEDIA(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.Key); provenanceGraphs.Add(data.Value); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
             foreach (Thread thread in hilosIntegracionesExternas)
             {
                 thread.Start();
@@ -2396,10 +2397,10 @@ namespace API_DISCOVER.Utility
         /// <param name="pDiscardDissambiguations">Descartes de desambiguación</param>
         /// <param name="pDiscoverCache">Caché de Discover</param>
         /// <returns>Diccionario con las entidades y los identificadores extraídos y sus provenencias</returns>
-        private static Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> ExternalIntegrationExtractIdentifiers(ref bool pHasChanges, RohGraph pExternalGraph, ref RohGraph pDataGraph,
+        private static Dictionary<string, Dictionary<string, List<KeyValuePair<string, HashSet<string>>>>> ExternalIntegrationExtractIdentifiers(ref bool pHasChanges, RohGraph pExternalGraph, ref RohGraph pDataGraph,
             Dictionary<string, string> pListaEntidadesReconciliadas, RohRdfsReasoner pReasoner, out Dictionary<string, string> pListaEntidadesRDFEnriquecer, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache)
         {
-            Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> identifiersDiscover = new Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>>();
+            Dictionary<string, Dictionary<string, List<KeyValuePair<string, HashSet<string>>>>> identifiersDiscover = new Dictionary<string, Dictionary<string, List<KeyValuePair<string, HashSet<string>>>>>();
 
             //Preparamos los datos del RDF
             RohGraph externalInferenceGraph = new RohGraph();
@@ -2418,8 +2419,7 @@ namespace API_DISCOVER.Utility
             bool hasChangesAux = false;
             Dictionary<string, Dictionary<string, float>> listaEntidadesDetectadas;
             ReconciliateData(ref hasChangesAux, ref pListaEntidadesReconciliadas, out listaEntidadesDetectadas, dataEntitiesRdfType, dataDisambiguationDataRdf, externalEntitiesRdfType, externalDisambiguationDataRdf, ref pExternalGraph, true, pDiscardDissambiguations, pDiscoverCache);
-
-
+            
             pListaEntidadesRDFEnriquecer = new Dictionary<string, string>();
 
             //Añadimos los identificadores a las entidades que corrspondan
@@ -2485,7 +2485,7 @@ namespace API_DISCOVER.Utility
                                             int numtriplesDespues = pDataGraph.Triples.Count;
                                             if (!identifiersDiscover.ContainsKey(entityRDF))
                                             {
-                                                identifiersDiscover[entityRDF] = new Dictionary<string, KeyValuePair<string, HashSet<string>>>();
+                                                identifiersDiscover[entityRDF] = new Dictionary<string, List<KeyValuePair<string, HashSet<string>>>>();
                                             }
                                             //Obtenemos la provenencia en caso de que esté disponible
                                             SparqlResultSet resultSetProvenance = (SparqlResultSet)pExternalGraph.ExecuteQuery(
@@ -2497,11 +2497,11 @@ namespace API_DISCOVER.Utility
                                                     }}");
                                             if (resultSetProvenance.Count > 0)
                                             {
-                                                identifiersDiscover[entityRDF][identifiersVars[identifier]] = new KeyValuePair<string, HashSet<string>>(((LiteralNode)sparqlResult[identifier.Replace("?", "")]).Value, new HashSet<string>(resultSetProvenance.Results.ToList().Select(x => ((LiteralNode)x["provenance"]).Value).ToList()));
+                                                identifiersDiscover[entityRDF][identifiersVars[identifier]] = new List<KeyValuePair<string, HashSet<string>>>() { new KeyValuePair<string, HashSet<string>>(((LiteralNode)sparqlResult[identifier.Replace("?", "")]).Value, new HashSet<string>(resultSetProvenance.Results.ToList().Select(x => ((LiteralNode)x["provenance"]).Value).ToList())) };
                                             }
                                             else
                                             {
-                                                identifiersDiscover[entityRDF][identifiersVars[identifier]] = new KeyValuePair<string, HashSet<string>>(((LiteralNode)sparqlResult[identifier.Replace("?", "")]).Value, new HashSet<string>());
+                                                identifiersDiscover[entityRDF][identifiersVars[identifier]] = new List<KeyValuePair<string, HashSet<string>>>() { new KeyValuePair<string, HashSet<string>>(((LiteralNode)sparqlResult[identifier.Replace("?", "")]).Value, new HashSet<string>()) };
                                             }
 
                                             //Si se ha añadido un triple es que se ha insertado
@@ -2522,6 +2522,50 @@ namespace API_DISCOVER.Utility
                     }
                 }
             }
+
+
+            HashSet<string> identificadores = new HashSet<string>();
+
+            // Se insertan en pDataGraph los triples existentes en pExternalGraph y que su sujeto este en pDataGraph
+            foreach(var triple in pDataGraph.Triples.ToList())
+            {
+                foreach(var tripleext in pExternalGraph.Triples)
+                {
+                    if(triple.Subject.ToString() == tripleext.Subject.ToString() && !(tripleext.Object is BlankNode))
+                    {
+                        identificadores.Add(tripleext.Subject.ToString());
+                        IUriNode subject = pDataGraph.CreateUriNode(UriFactory.Create(tripleext.Subject.ToString()));
+                        IUriNode property = pDataGraph.CreateUriNode(UriFactory.Create(tripleext.Predicate.ToString()));
+                        IUriNode value = pDataGraph.CreateUriNode(UriFactory.Create(tripleext.Object.ToString()));
+                        pDataGraph.Assert(new Triple(subject, property, value));
+                    }
+                }
+            }
+
+            foreach(string id in identificadores)
+            {
+                SparqlResultSet resultSetProvenance = (SparqlResultSet)pExternalGraph.ExecuteQuery(
+                                                    $@" select distinct ?provenance ?propValue where 
+                                                    {{
+                                                        <{id}> <http://purl.org/roh#externalID> ?externalID.   
+                                                        ?externalID <http://www.w3.org/2002/07/owl#sameAs> ?propValue.
+                                                        ?externalID <http://purl.org/roh#provenance> ?provenance.
+                                                    }}");
+                if (resultSetProvenance.Count > 0)
+                {
+                    // Insertamos los datos de resulSetProvenance en identifiersDiscover
+                    identifiersDiscover[id] = new Dictionary<string,List< KeyValuePair<string, HashSet<string>>>>();
+                    identifiersDiscover[id].Add("http://www.w3.org/2002/07/owl#sameAs", new List<KeyValuePair<string, HashSet<string>>>());
+
+                    foreach(var result in resultSetProvenance)
+                    {
+                        identifiersDiscover[id]["http://www.w3.org/2002/07/owl#sameAs"].Add(new KeyValuePair<string, HashSet<string>>(result["propValue"].ToString(), new HashSet<string>()));
+                        identifiersDiscover[id]["http://www.w3.org/2002/07/owl#sameAs"].Last().Value.Add(((LiteralNode)result["provenance"]).Value);
+                    }
+                }
+            }
+
+
             return identifiersDiscover;
         }
 
@@ -4076,6 +4120,65 @@ namespace API_DISCOVER.Utility
         }
 
         /// <summary>
+        /// Integración con el API de DBPEDIA
+        /// </summary>
+        /// <param name="pEntitiesRdfTypes">Diccionario con las entidades y sus clases (con herencia)</param>
+        /// <param name="pDiscoverCache">Caché de discover</param>
+        /// <param name="pDataGraph">Grafo en local con los datos del RDF</param>
+        /// <param name="pDiscoveredEntitiesProbability">Entidades con probabilidades</param>
+        /// <returns>Grafo con los datos obtenidos de DBPEDIA</returns>
+        private static KeyValuePair<RohGraph, RohGraph> ExternalIntegrationDBPEDIA(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability)
+        {
+            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new DBPEDIA_API());
+            string provenanceId = dataGraph.Key;
+            RohGraph provenanceGraph = dataGraph.Value;
+            RohGraph externalGraph = new RohGraph();
+
+            foreach (string entityID in pEntitiesRdfTypes.Keys)
+            {
+                if (pEntitiesRdfTypes[entityID].Contains("http://purl.org/roh/mirror/geonames#Feature")|| pEntitiesRdfTypes[entityID].Contains("http://purl.org/roh/mirror/foaf#Organization"))
+                {
+                    DBPEDIAData data = new DBPEDIAData();
+
+                    string query = @$"select *
+                                    where
+                                    {{
+                                        <{entityID}> 
+                                        <http://purl.org/roh#title>  
+                                        ?o
+                                    }}";
+                    SparqlResultSet sparqlResultSet = (SparqlResultSet)pDataGraph.ExecuteQuery(query.ToString());
+                    foreach(var sparqlResult in sparqlResultSet)
+                    {
+                        // Busca en el API de DBPEDIA
+                        data = SelectDBPEDIAWorksCache(((LiteralNode)sparqlResult["o"]).Value, pDiscoverCache);
+                    }
+
+                    if (data.uri_dbpedia != null) 
+                    {
+                        // Inserta en el grafo si tiene uri de dbpedia
+                        IUriNode subjectEntity = externalGraph.CreateUriNode(UriFactory.Create(entityID));
+                        IUriNode sameAsProperty = externalGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/2002/07/owl#sameAs"));
+                        IUriNode sameAsValue = externalGraph.CreateUriNode(UriFactory.Create(data.uri_dbpedia));
+                        externalGraph.Assert(new Triple(subjectEntity, sameAsProperty, sameAsValue));
+                        AddExternalIDProvenance(externalGraph, subjectEntity, sameAsProperty, sameAsValue, provenanceId);
+                    }
+                    if (data.uri_geonames != null)
+                    {
+                        // Inserta en el grafo si tiene uri de geonames
+                        IUriNode subjectEntity = externalGraph.CreateUriNode(UriFactory.Create(entityID));
+                        IUriNode sameAsProperty = externalGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/2002/07/owl#sameAs"));
+                        IUriNode sameAsValue = externalGraph.CreateUriNode(UriFactory.Create(data.uri_geonames));
+                        externalGraph.Assert(new Triple(subjectEntity, sameAsProperty, sameAsValue));
+                        AddExternalIDProvenance(externalGraph, subjectEntity, sameAsProperty, sameAsValue, provenanceId);
+                    } 
+                }
+            }        
+
+            return new KeyValuePair<RohGraph, RohGraph>(externalGraph, provenanceGraph);
+        }
+
+        /// <summary>
         /// Añade los triples para conocer la proveniencia de los enriquecimientos con APIs externos
         /// </summary>
         /// <param name="pDataGraph">Grafo con los datos</param>
@@ -4083,7 +4186,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pProperty">Propiedad</param>
         /// <param name="pValue">Valor</param>
         /// <param name="pProvenanceId">Identificador de la fuente externa</param>
-        private static void AddExternalIDProvenance(RohGraph pDataGraph, IUriNode pSubject, IUriNode pProperty, ILiteralNode pValue, string pProvenanceId)
+        private static void AddExternalIDProvenance(RohGraph pDataGraph, IUriNode pSubject, IUriNode pProperty, INode pValue, string pProvenanceId)
         {
             if (!string.IsNullOrEmpty(pProvenanceId))
             {
@@ -4486,6 +4589,28 @@ namespace API_DISCOVER.Utility
             {
                 works = DOAJ_API.GetWorks(q);
                 pDiscoverCache.DOAJWorks[hashCode] = works;
+            }
+            return works;
+        }
+
+        /// <summary>
+        /// Hace una consulta al api de DBPEDIA usando la cache de discover
+        /// </summary>
+        /// <param name="q">texto</param>
+        /// <param name="pDiscoverCache">Caché de Discover</param>
+        /// <returns></returns>
+        private static DBPEDIAData SelectDBPEDIAWorksCache(string q, DiscoverCache pDiscoverCache)
+        {
+            string hashCode = q.GetHashCode().ToString();
+            DBPEDIAData works = null;
+            if (pDiscoverCache.DBPEDIAData.ContainsKey(hashCode))
+            {
+                works = pDiscoverCache.DBPEDIAData[hashCode];
+            }
+            else
+            {
+                works = DBPEDIA_API.Search(q);
+                pDiscoverCache.DBPEDIAData[hashCode] = works;
             }
             return works;
         }

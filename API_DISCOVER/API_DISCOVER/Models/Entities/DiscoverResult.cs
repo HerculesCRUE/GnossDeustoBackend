@@ -30,7 +30,7 @@ namespace API_DISCOVER.Models.Entities
         /// <param name="pDateStart">Fecha inicio descubirmiento</param>
         /// <param name="pDateEnd">Fecha fin descubirmiento</param>
         /// <param name="pExternalIntegration">Datos obtendidos con las integraciones con fuentes externas junto con su provenecia</param>
-        public DiscoverResult(RohGraph pDataGraph,RohGraph pDataInferenceGraph, RohGraph pOntologyGraph, HashSet<string> pDiscoveredEntitiesWithSubject, Dictionary<string, string> pDiscoveredEntitiesWithId, Dictionary<string, KeyValuePair<string, float>> pDiscoveredEntitiesWithDataBase, Dictionary<string, KeyValuePair<string, float>> pDiscoveredEntitiesWithExternalIntegration, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability,DateTime pDateStart,DateTime pDateEnd, Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> pExternalIntegration)
+        public DiscoverResult(RohGraph pDataGraph,RohGraph pDataInferenceGraph, RohGraph pOntologyGraph, HashSet<string> pDiscoveredEntitiesWithSubject, Dictionary<string, string> pDiscoveredEntitiesWithId, Dictionary<string, KeyValuePair<string, float>> pDiscoveredEntitiesWithDataBase, Dictionary<string, KeyValuePair<string, float>> pDiscoveredEntitiesWithExternalIntegration, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability,DateTime pDateStart,DateTime pDateEnd, Dictionary<string, Dictionary<string,List< KeyValuePair<string, HashSet<string>>>>> pExternalIntegration)
         {
             dataGraph = pDataGraph;
             dataInferenceGraph = pDataInferenceGraph;
@@ -106,7 +106,7 @@ namespace API_DISCOVER.Models.Entities
         /// <summary>
         /// Datos obtendidos con la integración con fuentes externas junto con su provenencia
         /// </summary>
-        public Dictionary<string, Dictionary<string, KeyValuePair<string, HashSet<string>>>> externalIntegration { get; }
+        public Dictionary<string, Dictionary<string, List<KeyValuePair<string, HashSet<string>>>>> externalIntegration { get; }
         
         /// <summary>
         /// Obtiene el RDF del dataGraph
