@@ -1,0 +1,15 @@
+﻿{
+  "ConfigTables": [
+    {
+      "rdfType": "http://purl.org/roh/mirror/foaf#Person",
+      "tables": [
+        {
+          "name": "Documentos",
+          "fields": [ "ID", "Título", "RdfType" ],
+          "query": "select ?ID ?Nombre ?RdfType where { ?ID <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?lista ?p <{ENTITY_ID}>. ?ID <http://purl.org/roh#title> ?Nombre. ?ID a ?RdfType. } "
+        }
+      ]
+    }
+  ]
+
+}

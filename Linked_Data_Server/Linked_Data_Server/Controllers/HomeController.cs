@@ -6,17 +6,20 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 using System.Web;
 using VDS.RDF;
 using VDS.RDF.Query;
 using VDS.RDF.Writing;
+using VDS.RDF.Query.Inference;
+using static Linked_Data_Server.Models.Entities.Linked_Data_Server_Config;
 
 namespace Linked_Data_Server.Controllers
 {
@@ -26,6 +29,7 @@ namespace Linked_Data_Server.Controllers
         private readonly static ConfigService mConfigService = new ConfigService();
         private readonly ILogger<HomeController> _logger;
         private readonly CallEtlApiService _callEtlApiService;
+        private readonly static Linked_Data_Server_Config mLinkedConfigs = LoadLinked_Data_Server_Config();
 
         public HomeController(ILogger<HomeController> logger, CallEtlApiService callEtlApiService)
         {
@@ -113,6 +117,10 @@ namespace Linked_Data_Server.Controllers
                 }
                 else
                 {
+                    
+                    List<Table> tableList = ObtenerConfigTables(ontologyGraph, dataGraph, mLinkedConfigs, url);
+                    
+                    
                     //Obtenemos datos del resto de grafos
                     Dictionary<string, List<Dictionary<string, SparqlObject.Data>>> sparqlObjectDictionaryGraphs = GetEntityDataGraphs(url);
 
@@ -148,9 +156,7 @@ namespace Linked_Data_Server.Controllers
                         DiscoverRdfViewModel entidadInversa = createDiscoverRdfViewModel(entity, dataGraph, null, new List<string>(), allEntities, communNamePropierties);
                         modelEntities.Add(entidadInversa);
                     }
-
-
-                    return View(new KeyValuePair<List<DiscoverRdfViewModel>, Dictionary<string, string>>(modelEntities, mConfigService.GetPropsTransform()));
+                    return View(new Tuple<List<DiscoverRdfViewModel>, Dictionary<string, string>,List<Table>>(modelEntities, mConfigService.GetPropsTransform(),tableList));
                 }
             }
         }
@@ -485,6 +491,87 @@ namespace Linked_Data_Server.Controllers
 
             // Return the hexadecimal string.
             return sBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Cargamos las configuraciones 
+        /// </summary>
+        /// <returns></returns>
+        private static Linked_Data_Server_Config LoadLinked_Data_Server_Config()
+        {
+            return JsonConvert.DeserializeObject<Linked_Data_Server_Config>(System.IO.File.ReadAllText("Config/Linked_Data_Server_Config.json"));
+        }
+
+
+        /// <summary>
+        /// Obtiene las tablas 
+        /// </summary>
+        /// <param name="pEntity">URL de la entidad</param>
+        /// <param name="configtables">Tablas de configuración</param>
+        /// <returns></returns>
+        private List<Table> LoadTables(string pEntity, Linked_Data_Server_Config.ConfigTable configtables)
+        {
+            List<Table> tableList = new List<Table>();
+            
+            foreach(var tableConfig in configtables.tables)
+            {
+                Table table = new Table();
+                table.Rows = new List<Table.Row>();
+                table.Header = new List<string>();
+                table.Name = tableConfig.name;
+                foreach(var field in tableConfig.fields)
+                {
+                    table.Header.Add(field);
+                }
+                string consulta = tableConfig.query.Replace("{ENTITY_ID}", pEntity);
+                SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
+
+                foreach (var result in sparqlObject.results.bindings)
+                {
+                    Table.Row rowlist = new Table.Row();
+                    rowlist.fields = new List<string>();
+                    foreach (var row in result)
+                    {
+                        rowlist.fields.Add(row.Value.value);
+                    }
+                    table.Rows.Add(rowlist);
+                }
+                tableList.Add(table);
+            }
+
+            return tableList;
+        }
+
+        /// <summary>
+        /// Obtiene las tablas 
+        /// </summary>
+        /// <param name="dataGraph">Grafo que contiene los datos</param>
+        /// <param name="mLinkedConfigs">Configuración de las tablas</param>
+        /// <param name="ontologyGraph">Grafo con la ontología</param>
+        /// <param name="pEntity">URL de la entidad</param>
+        /// <returns></returns>
+        private List<Table> ObtenerConfigTables(RohGraph ontologyGraph, RohGraph dataGraph, Linked_Data_Server_Config mLinkedConfigs, string pEntity)
+        {
+            List<Table> tableList = new List<Table>();
+            
+            RohRdfsReasoner reasoner = new RohRdfsReasoner();
+            reasoner.Initialise(ontologyGraph);
+
+            //Cargamos los datos con inferencia
+            RohGraph dataInferenceGraph = dataGraph.Clone();
+            reasoner.Apply(dataInferenceGraph);
+
+            foreach (ConfigTable configtable in mLinkedConfigs.ConfigTables)
+            {
+                //Comprobamos si dataInferenceGraph contiene el rdfType de configTable
+                SparqlResultSet result = (SparqlResultSet)dataInferenceGraph.ExecuteQuery("select ?p ?o where {?s ?p <" + configtable.rdfType + "> }");
+                if(result.Count() > 0)
+                {
+                    //Obtiene los datos para las tablas
+                    tableList.AddRange(LoadTables(pEntity, configtable));
+                }
+            }
+            return tableList;
         }
     }
 }

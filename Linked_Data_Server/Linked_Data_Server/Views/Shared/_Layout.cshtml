@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="alternate" href="@Context.Request.Host@Context.Request.Path" type="application/rdf+xml" title="Structured Descriptor Document (RDF/XML format)" />
 
+    <link rel="stylesheet" href="~/lib/datatables/datatables.min.css"/>
 </head>
 
 <body class="fichaRecurso detailsRdf">
@@ -139,6 +140,7 @@
     @*<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>*@
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="~/theme/static/proyecto-fair.js"></script>
+    <script src="~/lib/datatables/datatables.min.js"></script>    
     <partial name="_ValidationScriptsPartial" />
     @RenderSection("Scripts", required: false)
 </body>
