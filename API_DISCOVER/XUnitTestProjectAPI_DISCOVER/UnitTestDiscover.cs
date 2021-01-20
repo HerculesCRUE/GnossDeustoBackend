@@ -9,6 +9,7 @@ using API_DISCOVER.Models.Entities;
 using VDS.RDF.Query;
 using API_DISCOVER.Models.Services;
 using System.Linq;
+using API_DISCOVER.Models.Entities.Discover;
 
 namespace XUnitTestProjectAPI_DISCOVER
 {
@@ -156,7 +157,7 @@ namespace XUnitTestProjectAPI_DISCOVER
         {
             bool hasChanges = false;
 
-            Dictionary<string, string> discoveredEntityList = new Dictionary<string, string>();
+			ReconciliationData reconciliateData = new ReconciliationData();
 
             RohGraph dataGraph = new RohGraph();
             dataGraph.LoadFromString(rdfFileRecon, new RdfXmlParser());
@@ -167,9 +168,9 @@ namespace XUnitTestProjectAPI_DISCOVER
 
             DiscoverCache discoverCache = new DiscoverCache();
 
-            Discover.ReconciliateRDF(ref hasChanges, ref discoveredEntityList, ref dataGraph, reasoner, discardDissambiguations, discoverCache);
+            Discover.ReconciliateRDF(ref hasChanges, ref reconciliateData, ref dataGraph, reasoner, discardDissambiguations, discoverCache);
 			if(hasChanges == true){
-				if(discoveredEntityList.ContainsKey("http://graph.um.es/res/person/e12d2a31-e285-459a-9d71-2d4a45329532") && discoveredEntityList.ContainsValue("http://graph.um.es/res/person/aaad2a31-e285-459a-9d71-2d4a45329532") && dataGraph.Triples.Count == 89)
+				if(reconciliateData.reconciliatedEntityList.ContainsKey("http://graph.um.es/res/person/e12d2a31-e285-459a-9d71-2d4a45329532") && reconciliateData.reconciliatedEntityList.ContainsValue("http://graph.um.es/res/person/aaad2a31-e285-459a-9d71-2d4a45329532") && dataGraph.Triples.Count == 89)
 				{
 					Assert.True(true);
                 }
@@ -184,7 +185,8 @@ namespace XUnitTestProjectAPI_DISCOVER
 		public void TestExternalIntegration()
 		{
 			bool hasChanges = false;
-			Dictionary<string, string> discoveredEntityList = new Dictionary<string, string>();
+			ReconciliationData reconciliateData = new ReconciliationData();
+			DiscoverLinkData discoverLinkData = new DiscoverLinkData();
 
 			Dictionary<string, Dictionary<string, float>> discoveredEntitiesProbability = new Dictionary<string, Dictionary<string, float>>();
 
@@ -199,7 +201,7 @@ namespace XUnitTestProjectAPI_DISCOVER
 			ontologyGraph.LoadFromFile("Ontology/roh-v2.owl");
 			reasoner.Initialise(ontologyGraph);
 
-			Dictionary<string, KeyValuePair<string, float>> entidadesReconciliadasConIntegracionExternaAux;
+			Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux;
 
 			Dictionary<string, HashSet<string>> discardDissambiguations = new Dictionary<string, HashSet<string>>();
 
@@ -209,7 +211,7 @@ namespace XUnitTestProjectAPI_DISCOVER
 			dataGraphBBDD.LoadFromString(databaseFile, new RdfXmlParser());
 			Discover.mSparqlUtility = new SparqlUtilityMock(dataGraphBBDD);
 			Discover.test = true;
-			Dictionary<string, Dictionary<string, List<KeyValuePair<string, HashSet<string>>>>> externalIds = Discover.ExternalIntegration(ref hasChanges, ref discoveredEntityList, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache);
+			Dictionary<string,List<DiscoverLinkData.PropertyData>> externalIds = Discover.ExternalIntegration(ref hasChanges, ref reconciliateData,ref discoverLinkData, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache);
 			Assert.True(true);
 			//TODO, no funciona correctamente al lanzar las pruebas desde el servidor
 			//if (hasChanges == true)
@@ -242,7 +244,7 @@ namespace XUnitTestProjectAPI_DISCOVER
             dataGraphBBDD.LoadFromString(databaseFile, new RdfXmlParser()); 
 
             Discover.mSparqlUtility = new SparqlUtilityMock(dataGraphBBDD);
-            Dictionary<string, string> personsWithName = Discover.LoadPersonWithName();
+            Dictionary<string, string> personsWithName = Discover.LoadPersonWithName("","","");
 
 
             RohGraph dataGraph = new RohGraph();
@@ -289,7 +291,7 @@ namespace XUnitTestProjectAPI_DISCOVER
                 }
             }
 
-            List<string> entidadesCargadas = Discover.LoadEntitiesDB(entitiesRdfType.Keys.ToList().Except(discoveredEntityList.Keys.Union(discoveredEntityList.Values))).Keys.ToList();
+            List<string> entidadesCargadas = Discover.LoadEntitiesDB(entitiesRdfType.Keys.ToList().Except(discoveredEntityList.Keys.Union(discoveredEntityList.Values)),"","","").Keys.ToList();
 			int suma = 0;
 			foreach(var entity in entitiesRdfType)
             {
@@ -314,7 +316,7 @@ namespace XUnitTestProjectAPI_DISCOVER
         {
             bool hasChanges = false;
 
-            Dictionary<string, string> discoveredEntityList = new Dictionary<string, string>();
+			ReconciliationData reconciliationData = new ReconciliationData();
 
             Dictionary<string, string> entitiesRdfType = new Dictionary<string, string>();
 
@@ -342,7 +344,7 @@ namespace XUnitTestProjectAPI_DISCOVER
 			Discover.PrepareData(dataGraph, reasoner, out dataInferenceGraph, out entitiesRdfTypes, out entitiesRdfType, out disambiguationDataRdf, false);
 
 
-			Dictionary<string, string> entidadesReconciliadasConIdsAux = Discover.ReconciliateIDs(ref hasChanges, ref discoveredEntityList, entitiesRdfType, disambiguationDataRdf, discardDissambiguations, ref dataGraph); 
+			Dictionary<string, string> entidadesReconciliadasConIdsAux = Discover.ReconciliateIDs(ref hasChanges, ref reconciliationData, entitiesRdfType, disambiguationDataRdf, discardDissambiguations, ref dataGraph); 
 
 			if(entidadesReconciliadasConIdsAux.Count == 1 && entidadesReconciliadasConIdsAux.ContainsKey("http://graph.um.es/res/person/c8a16863-a606-48e3-a858-9def000380c0") && entidadesReconciliadasConIdsAux.ContainsValue("http://graph.um.es/res/person/aaa16863-a606-48e3-a858-9def000380c0") && hasChanges == true)
             {
@@ -360,9 +362,9 @@ namespace XUnitTestProjectAPI_DISCOVER
         {
             bool hasChanges = false;
 
-            Dictionary<string, string> discoveredEntityList = new Dictionary<string, string>();
+			ReconciliationData reconciliationData = new ReconciliationData();
 
-            Dictionary<string, Dictionary<string, float>> discoveredEntitiesProbability = new Dictionary<string, Dictionary<string, float>>();
+			Dictionary<string, Dictionary<string, float>> discoveredEntitiesProbability = new Dictionary<string, Dictionary<string, float>>();
 
             RohGraph dataGraph = new RohGraph();
             dataGraph.LoadFromString(rdfFileRecon, new RdfXmlParser());
@@ -379,10 +381,10 @@ namespace XUnitTestProjectAPI_DISCOVER
             dataGraphBBDD.LoadFromString(rdfFile, new RdfXmlParser());
             Discover.mSparqlUtility = new SparqlUtilityMock(dataGraphBBDD);
 
-            Discover.ReconciliateBBDD(ref hasChanges, ref discoveredEntityList, out discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, discardDissambiguations, discoverCache);
+            Discover.ReconciliateBBDD(ref hasChanges, ref reconciliationData, out discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, discardDissambiguations, discoverCache);
 			if (hasChanges == true)
 			{
-				if (discoveredEntityList.ContainsKey("http://graph.um.es/res/person/aaad2a31-e285-459a-9d71-2d4a45329532") && discoveredEntityList.ContainsValue("http://graph.um.es/res/person/e12d2a31-e285-459a-9d71-2d4a45329532") && dataGraph.Triples.Count == 89)
+				if (reconciliationData.reconciliatedEntityList.ContainsKey("http://graph.um.es/res/person/aaad2a31-e285-459a-9d71-2d4a45329532") && reconciliationData.reconciliatedEntityList.ContainsValue("http://graph.um.es/res/person/e12d2a31-e285-459a-9d71-2d4a45329532") && dataGraph.Triples.Count == 89)
 				{
 					Assert.True(true);
                 }

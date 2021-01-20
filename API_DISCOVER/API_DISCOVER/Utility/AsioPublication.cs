@@ -11,6 +11,7 @@ using VDS.RDF.Parsing;
 using VDS.RDF.Query;
 using VDS.RDF.Update;
 using System.Diagnostics.CodeAnalysis;
+using API_DISCOVER.Models.Entities.Discover;
 
 namespace API_DISCOVER.Utility
 {
@@ -47,8 +48,8 @@ namespace API_DISCOVER.Utility
         /// <param name="pAttributedTo">Sujeto y nombre para atribuir los triples de los apis externos</param>
         /// <param name="pActivityStartedAtTime">Inicio del proceso</param>
         /// <param name="pActivityEndedAtTime">Fin del proceso</param>
-        /// <param name="externalIntegration">Datos extraídos de las integracinoes externas sujeto, propiedad, valor, identificador fuente externa</param>
-        public void PublishRDF(RohGraph dataGraph, RohGraph dataInferenceGraph, RohGraph ontologyGraph, KeyValuePair<string, string>? pAttributedTo, DateTime pActivityStartedAtTime, DateTime pActivityEndedAtTime, Dictionary<string, Dictionary<string,List< KeyValuePair<string, HashSet<string>>>>> externalIntegration)
+        /// <param name="pDiscoverLinkData">Datos para trabajar con el descubrimiento de enlaces</param>
+        public void PublishRDF(RohGraph dataGraph, RohGraph dataInferenceGraph, RohGraph ontologyGraph, KeyValuePair<string, string>? pAttributedTo, DateTime pActivityStartedAtTime, DateTime pActivityEndedAtTime, DiscoverLinkData pDiscoverLinkData)
         {
             // 1º Eliminamos de la BBD las entidades principales que aparecen en el RDF
             HashSet<string> graphs= RemovePrimaryTopics(ref dataGraph);
@@ -72,15 +73,16 @@ namespace API_DISCOVER.Utility
             SparqlUtility.LoadTriples(SparqlUtility.GetTriplesFromGraph(dataGraph), _SPARQLEndpoint, _QueryParam, _Graph);
 
             //4º Insertamos los triples con provenance en la BBDD
-            if (externalIntegration != null)
+            if (pDiscoverLinkData != null && pDiscoverLinkData.entitiesProperties!=null)
             {
                 Dictionary<string, List<string>> graphDeletes = new Dictionary<string, List<string>>();
                 Dictionary<string, List<string>> graphTriples = new Dictionary<string, List<string>>();
-                foreach (string t_subject in externalIntegration.Keys)
+                foreach (string t_subject in pDiscoverLinkData.entitiesProperties.Keys)
                 {
-                    foreach (string t_property in externalIntegration[t_subject].Keys)
+                    foreach (DiscoverLinkData.PropertyData property in pDiscoverLinkData.entitiesProperties[t_subject])
                     {
-                        foreach (var prop in externalIntegration[t_subject][t_property])
+                        string t_property = property.property;
+                        foreach (var prop in property.valueProvenance)
                         {
                             string t_object = prop.Key;
                             HashSet<string> t_sourceids = prop.Value;

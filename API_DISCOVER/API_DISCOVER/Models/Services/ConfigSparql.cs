@@ -18,6 +18,10 @@ namespace API_DISCOVER.Models.Services
         private string Graph { get; set; }
         private string Endpoint { get; set; }
         private string QueryParam { get; set; }
+        private string UnidataGraph { get; set; }
+        private string UnidataEndpoint { get; set; }
+        private string UnidataQueryParam { get; set; }
+
         ///<summary>
         ///Obtiene el gráfo configurado en Sparql:Graph del fichero appsettings.json
         ///</summary>
@@ -94,5 +98,83 @@ namespace API_DISCOVER.Models.Services
             }
             return QueryParam;
         }
+
+        ///<summary>
+        ///Obtiene el gráfo configurado en SparqlUnidata:Graph del fichero appsettings.json
+        ///</summary>
+        public string GetUnidataGraph()
+        {
+            if (string.IsNullOrEmpty(UnidataGraph))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("UnidataGraph"))
+                {
+                    UnidataGraph = environmentVariables["UnidataGraph"] as string;
+                }
+                else
+                {
+                    UnidataGraph = Configuration["SparqlUnidata:Graph"];
+                }
+
+            }
+            return UnidataGraph;
+        }
+
+        ///<summary>
+        ///Obtiene el endpoint configurado en Sparql:Endpoint del fichero appsettings.json
+        ///</summary>
+        public string GetUnidataEndpoint()
+        {
+            if (UnidataEndpoint == null)
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("UnidataEndpoint"))
+                {
+                    UnidataEndpoint = environmentVariables["UnidataEndpoint"] as string;
+                }
+                else
+                {
+                    UnidataEndpoint = Configuration["SparqlUnidata:Endpoint"];
+                }
+            }
+            return UnidataEndpoint;
+        }
+
+        ///<summary>
+        ///Obtiene el parametro de query configurado en Sparql:QueryParam del fichero appsettings.json
+        ///</summary>
+        public string GetUnidataQueryParam()
+        {
+            if (string.IsNullOrEmpty(UnidataQueryParam))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("UnidataQueryParam"))
+                {
+                    UnidataQueryParam = environmentVariables["UnidataQueryParam"] as string;
+                }
+                else
+                {
+                    UnidataQueryParam = Configuration["SparqlUnidata:QueryParam"];
+                }
+
+            }
+            return UnidataQueryParam;
+        }
+
     }
 }

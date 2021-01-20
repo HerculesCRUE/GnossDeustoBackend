@@ -1,6 +1,7 @@
 ﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+using API_DISCOVER.Models.Entities.Discover;
 using API_DISCOVER.Utility;
 using System;
 using System.Collections.Generic;
@@ -22,28 +23,22 @@ namespace API_DISCOVER.Models.Entities
         /// <param name="pDataGraph">Grafo con los datos</param>
         /// <param name="pDataInferenceGraph">Grafo con los datos (con inferencia)</param>
         /// <param name="pOntologyGraph">Grafo con la ontología</param>
-        /// <param name="pDiscoveredEntitiesWithSubject">Entidades descubiertas con los sujetos</param>
-        /// <param name="pDiscoveredEntitiesWithId">Entidades descubiertas con los identificadores</param>
-        /// <param name="pDiscoveredEntitiesWithDataBase">Entidades descubiertas con la BBDD</param>
-        /// <param name="pDiscoveredEntitiesWithExternalIntegration">Entidades descubiertas con al integración externa</param>
+        /// <param name="pReconciliationData">Datos obtenidos de la reconciliación</param>
         /// <param name="pDiscoveredEntitiesProbability">Probabilidades de descubriiento</param>
         /// <param name="pDateStart">Fecha inicio descubirmiento</param>
         /// <param name="pDateEnd">Fecha fin descubirmiento</param>
-        /// <param name="pExternalIntegration">Datos obtendidos con las integraciones con fuentes externas junto con su provenecia</param>
-        public DiscoverResult(RohGraph pDataGraph,RohGraph pDataInferenceGraph, RohGraph pOntologyGraph, HashSet<string> pDiscoveredEntitiesWithSubject, Dictionary<string, string> pDiscoveredEntitiesWithId, Dictionary<string, KeyValuePair<string, float>> pDiscoveredEntitiesWithDataBase, Dictionary<string, KeyValuePair<string, float>> pDiscoveredEntitiesWithExternalIntegration, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability,DateTime pDateStart,DateTime pDateEnd, Dictionary<string, Dictionary<string,List< KeyValuePair<string, HashSet<string>>>>> pExternalIntegration)
+        /// <param name="pDiscoverLinkData">Datos para trabajar con el descubrimiento de enlaces</param>
+        public DiscoverResult(RohGraph pDataGraph,RohGraph pDataInferenceGraph, RohGraph pOntologyGraph, ReconciliationData pReconciliationData, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability,DateTime pDateStart,DateTime pDateEnd, DiscoverLinkData pDiscoverLinkData)
         {
             dataGraph = pDataGraph;
             dataInferenceGraph = pDataInferenceGraph;
             ontologyGraph = pOntologyGraph;
-            discoveredEntitiesWithSubject = pDiscoveredEntitiesWithSubject;
-            discoveredEntitiesWithId = pDiscoveredEntitiesWithId;
-            discoveredEntitiesWithDataBase = pDiscoveredEntitiesWithDataBase;
-            discoveredEntitiesWithExternalIntegration = pDiscoveredEntitiesWithExternalIntegration;
+            reconciliationData = pReconciliationData;
             discoveredEntitiesProbability = pDiscoveredEntitiesProbability;
             secondsProcessed = (pDateEnd-pDateStart).TotalSeconds;
             start = pDateStart;
             end = pDateEnd;
-            externalIntegration = pExternalIntegration;
+            discoverLinkData = pDiscoverLinkData;
         }
 
         /// <summary>
@@ -62,24 +57,9 @@ namespace API_DISCOVER.Models.Entities
         public RohGraph ontologyGraph { get; set; }
 
         /// <summary>
-        /// Entidades descubiertas con los sujetos
+        /// Datos obtenidos de la reconciliacion
         /// </summary>
-        public HashSet<string> discoveredEntitiesWithSubject { get; }
-
-        /// <summary>
-        /// Entidades descubiertas con los identificadores
-        /// </summary>
-        public Dictionary<string, string> discoveredEntitiesWithId { get; }
-
-        /// <summary>
-        /// Entidades descubiertas con la BBDD
-        /// </summary>
-        public Dictionary<string, KeyValuePair<string, float>> discoveredEntitiesWithDataBase { get; }
-
-        /// <summary>
-        /// Entidades descubiertas con la Integración externa
-        /// </summary>
-        public Dictionary<string, KeyValuePair<string, float>> discoveredEntitiesWithExternalIntegration { get; }
+        public ReconciliationData reconciliationData { get; set; }
 
         /// <summary>
         /// Probabilidades de descubriiento
@@ -106,7 +86,7 @@ namespace API_DISCOVER.Models.Entities
         /// <summary>
         /// Datos obtendidos con la integración con fuentes externas junto con su provenencia
         /// </summary>
-        public Dictionary<string, Dictionary<string, List<KeyValuePair<string, HashSet<string>>>>> externalIntegration { get; }
+        public DiscoverLinkData discoverLinkData { get; }
         
         /// <summary>
         /// Obtiene el RDF del dataGraph
