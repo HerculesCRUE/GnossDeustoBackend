@@ -452,7 +452,10 @@ namespace Linked_Data_Server.Controllers
                     provenanceData.property = fila["predicado"].value;
                     provenanceData.value = fila["objeto"].value;
                     provenanceData.date = Convert.ToDateTime(fila["fecha"].value, CultureInfo.InvariantCulture);
-                    provenanceData.organization = fila["nameOrg"].value;
+                    if (fila.ContainsKey("nameOrg"))
+                    {
+                        provenanceData.organization = fila["nameOrg"].value;
+                    }
                     entidad.provenanceData.Add(provenanceData);
                 }
             }
