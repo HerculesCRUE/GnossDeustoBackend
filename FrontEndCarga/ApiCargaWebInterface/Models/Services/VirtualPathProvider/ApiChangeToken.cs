@@ -40,7 +40,9 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
                         }
                         else
                         {
-                            return page.LastModified > LastRequested(_viewPath, true).Value;
+                            DateTime lastRequest = LastRequested(_viewPath, true).Value;
+                            bool changed = page.LastModified > lastRequest;
+                            return changed;
                         }
                     }
                     else

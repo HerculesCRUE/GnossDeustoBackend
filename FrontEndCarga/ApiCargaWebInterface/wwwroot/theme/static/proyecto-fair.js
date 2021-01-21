@@ -43,6 +43,36 @@ var bodyScrolling = {
     }
 };
 
+var linkTabs = {
+  init: function(){
+    this.config();
+    this.comportamiento();
+    return;
+  },
+  config: function(){
+    this.body = body;
+    this.header = this.body.find('.navbar');
+    this.tabs = this.body.find('.nav-tabs');
+    return;
+  },
+  comportamiento: function(){
+    
+    // get the tab from url
+    var hash = window.location.hash;
+    var hashSplit = hash.substr(0, 1);
+    var seccion = hash.substr(1);
+    
+    window.addEventListener('hashchange',()=>{
+      if(hashSplit == "#"){
+        var tab = this.tabs.find('#' + seccion + '-tab');
+        tab.trigger('click');
+      }
+    });
+
+    return;
+  }
+};
+
 var body;
 
 $(document).ready(function () {
@@ -51,4 +81,8 @@ $(document).ready(function () {
 
     bodyScrolling.init();
     limpiarEstilosInline.init();
+
+    if(body.hasClass('tipo-documento')){
+      linkTabs.init();
+    }
 });
