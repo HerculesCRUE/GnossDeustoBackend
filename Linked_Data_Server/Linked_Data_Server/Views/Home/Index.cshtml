@@ -4,7 +4,7 @@
     ViewData["BodyClass"] = "fichaRecurso";
 }
 
-<div class="row">    
+<div class="row">
     <div class="col col-12 col-lg-12 col-contenido">
         <div class="wrapCol">
             <div class="header-resource">
@@ -37,7 +37,26 @@
                                         <tr>
                                             @foreach (var field in row.fields)
                                             {
-                                                <td>@field</td>
+                                                @if (Uri.IsWellFormedUriString(field, UriKind.Absolute))
+                                                {
+                                                    Uri uri = new Uri(field);
+                                                    if (Context.Request.Host.Value == uri.Host)
+                                                    {
+                                                        <td>
+                                                            <a href="@field">@field</a>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <a href="@field" target="_blank">@field</a>
+                                                        </td>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <td>@field</td>
+                                                }
                                             }
                                         </tr>
                                     }
@@ -248,7 +267,7 @@
 
                 </div>
 
-                
+
 
             </div>
         </div>
