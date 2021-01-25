@@ -10,6 +10,30 @@
         }
       ]
     }
-  ]
-
+  ],
+  "ExcludeRelatedEntity": [ "http://purl.org/roh/mirror/foaf#Person" ],
+  "ConfigGraph": {
+    "Icons": [
+      {
+        "rdfType": "http://purl.org/roh/mirror/foaf#Person",
+        "icon": "person-grafo-hercules.svg"
+      }
+    ],
+    "Graphs": [
+      {
+        "rdfType": "http://purl.org/roh/mirror/foaf#Person",
+        "propName": "http://purl.org/roh/mirror/foaf#name",
+        "properties": [
+          {
+            "name": "Coautores",
+            "query": "select distinct ?id ?name ?rdftype where{ ?doc <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?lista ?autor <{ENTITY_ID}>.?lista ?autores2 ?id. ?id a ?rdftype. FILTER(?rdftype= <http://purl.org/roh/mirror/foaf#Person>). ?id <http://purl.org/roh/mirror/foaf#name> ?name. filter(?id!=<{ENTITY_ID}>)} limit 5"
+          },
+          {
+            "name": "Autor de",
+            "query": "select distinct ?id ?name ?rdftype where{ ?doc <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?doc <http://purl.org/roh#title> ?name. ?lista ?id <{ENTITY_ID}>. ?doc a ?rdftype filter(?id!=<{ENTITY_ID}>)} limit 5"
+          }
+        ]
+      }
+    ]
+  }
 }
