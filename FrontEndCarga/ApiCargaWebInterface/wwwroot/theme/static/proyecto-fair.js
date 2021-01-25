@@ -57,13 +57,20 @@ var linkTabs = {
   },
   comportamiento: function(){
     
-    // get the tab from url
     var hash = window.location.hash;
     var hashSplit = hash.substr(0, 1);
     var seccion = hash.substr(1);
     
+    if(hashSplit == "#"){
+      var tab = this.tabs.find('#' + seccion + '-tab');
+      tab.trigger('click');
+    }
+
     window.addEventListener('hashchange',()=>{
-      if(hashSplit == "#"){
+      var newhash = window.location.hash;
+      var newhashSplit = newhash.substr(0, 1);
+      var seccion = newhash.substr(1);
+      if(newhashSplit == "#"){
         var tab = this.tabs.find('#' + seccion + '-tab');
         tab.trigger('click');
       }
