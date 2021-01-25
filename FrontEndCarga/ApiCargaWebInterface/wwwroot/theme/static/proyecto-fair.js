@@ -43,6 +43,43 @@ var bodyScrolling = {
     }
 };
 
+var linkTabs = {
+  init: function(){
+    this.config();
+    this.comportamiento();
+    return;
+  },
+  config: function(){
+    this.body = body;
+    this.header = this.body.find('.navbar');
+    this.tabs = this.body.find('.nav-tabs');
+    return;
+  },
+  comportamiento: function(){
+    
+    var hash = window.location.hash;
+    var hashSplit = hash.substr(0, 1);
+    var seccion = hash.substr(1);
+    
+    if(hashSplit == "#"){
+      var tab = this.tabs.find('#' + seccion + '-tab');
+      tab.trigger('click');
+    }
+
+    window.addEventListener('hashchange',()=>{
+      var newhash = window.location.hash;
+      var newhashSplit = newhash.substr(0, 1);
+      var seccion = newhash.substr(1);
+      if(newhashSplit == "#"){
+        var tab = this.tabs.find('#' + seccion + '-tab');
+        tab.trigger('click');
+      }
+    });
+
+    return;
+  }
+};
+
 var body;
 
 $(document).ready(function () {
@@ -51,4 +88,8 @@ $(document).ready(function () {
 
     bodyScrolling.init();
     limpiarEstilosInline.init();
+
+    if(body.hasClass('tipo-documento')){
+      linkTabs.init();
+    }
 });

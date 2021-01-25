@@ -6,7 +6,7 @@
         {
           "name": "Documentos",
           "fields": [ "ID", "Título", "RdfType" ],
-          "query": "select ?ID ?Nombre ?RdfType where { ?ID <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?lista ?p <{ENTITY_ID}>. ?ID <http://purl.org/roh#title> ?Nombre. ?ID a ?RdfType. } "
+          "query": "select distinct ?ID ?Nombre ?RdfType where { {?ID <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?lista ?p <{ENTITY_ID}>.}UNION{?ID <http://purl.org/roh#correspondingAuthor> <{ENTITY_ID}>.} ?ID <http://purl.org/roh#title> ?Nombre. ?ID a ?RdfType. } "
         }
       ]
     }
