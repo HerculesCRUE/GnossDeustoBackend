@@ -27,7 +27,7 @@
 
 
 
-
+var pintados = 0;
 (function () {
 
     Renderer = function (canvas) {
@@ -47,8 +47,13 @@
             },
 
             redraw: function () {
-
                 if (!particleSystem) return
+
+                pintados++;
+                if ((pintados > 300)) {
+                    particleSystem.stop();
+                    return;
+                }
 
                 gfx.clear() // convenience ƒ: clears the whole canvas rect
 
@@ -182,7 +187,7 @@
                 // set up a handler object that will initially listen for mousedowns then
                 // for moves and mouseups while dragging
                 var handler = {
-                    mousemove: function (e) {
+                    mousemove: function (e) {                        
                         if (!mouse_is_down) {
                             var pos = $(canvas).offset();
                             _mouseP = arbor.Point(e.pageX - pos.left, e.pageY - pos.top)
@@ -195,6 +200,8 @@
                             } else {
                                 dom.removeClass('linkable')
                             }
+                        } else {
+                            pintados = 0;
                         }
                         return false
                     },
