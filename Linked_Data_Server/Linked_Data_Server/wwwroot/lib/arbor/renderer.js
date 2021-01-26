@@ -39,7 +39,7 @@
         var that = {
             init: function (system) {
                 particleSystem = system
-                particleSystem.screenSize(canvas.width, canvas.height)
+                particleSystem.screenSize(canvas.width-100, canvas.height)
                 particleSystem.screenPadding(40)
 
                 that.initMouseHandling()
@@ -55,17 +55,6 @@
                 // draw the nodes & save their bounds for edge drawing
                 var nodeBoxes = {}
                 particleSystem.eachNode(function (node, pt) {
-
-
-                    // node: {mass:#, p:{x,y}, name:"", data:{}}
-                    // pt:   {x:#, y:#}  node position in screen coords
-
-                    // Load extra info
-                    var image = node.data.image
-                    var imageH = node.data.image_h
-                    var imageW = node.data.image_w
-                    var radius = 15
-
                     // determine the box size and round off the coords if we'll be 
                     // drawing a text label (awful alignment jitter otherwise...)
                     var label = node.data.label
