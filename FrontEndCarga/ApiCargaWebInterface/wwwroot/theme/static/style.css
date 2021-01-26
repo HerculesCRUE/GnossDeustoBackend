@@ -176,6 +176,9 @@ div:nth-of-type(4n+3) { border-bottom: 0 !important; padding-bottom: 0 !importan
 .dashboard #contenido-principal .row { margin-left: 0; margin-right: 0; margin-bottom: 20px; border-bottom: 1px solid #d9d9d9; }
 .dashboard #contenido-principal .col { padding: 0 37px; }
 
+.dashboard #contenido-principal h2,
+.dashboard #contenido-principal h2 a { font-size: 17px; font-weight: 700; line-height: 21px; letter-spacing: .68px; color: #333; text-transform: uppercase; }
+
 .dashboard .entidades {  }
 .dashboard .entidades > div { display: flex; flex-wrap: wrap; align-items: center; margin-left: -16px; margin-right: -16px; }
 .dashboard .entidades > div p { flex: 0 0 calc(33.33% - 32px); max-width: calc(33.33% - 32px); padding: 66px 40px 20px 40px; border: 1px solid #e5e5e5; margin: 0 16px; }
