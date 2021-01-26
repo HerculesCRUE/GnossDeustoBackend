@@ -13,6 +13,7 @@ namespace Linked_Data_Server.Models.Entities
             public string shape { get; set; }
             public string label { get; set; }
             public string image { get; set; }
+            public string link { get; set; }
         }
 
         public class Relation

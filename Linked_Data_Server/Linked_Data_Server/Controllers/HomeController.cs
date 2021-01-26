@@ -666,12 +666,12 @@ namespace Linked_Data_Server.Controllers
                 }
                 if (iconPrincipal != "")
                 {
-                    ArborGraph.Node nodePrincipal = new ArborGraph.Node() { color = "red", label = pNameEntity, image = iconPrincipal };
+                    ArborGraph.Node nodePrincipal = new ArborGraph.Node() { color = "red", label = pNameEntity, image = iconPrincipal , link = pEntity};
                     arborGraph.nodes.Add(pEntity, nodePrincipal);
                 }
                 else
                 {
-                    ArborGraph.Node nodePrincipal = new ArborGraph.Node() { color = "red", label = pNameEntity };
+                    ArborGraph.Node nodePrincipal = new ArborGraph.Node() { color = "red", label = pNameEntity, link = pEntity };
                     arborGraph.nodes.Add(pEntity, nodePrincipal);
                 }
 
@@ -693,12 +693,12 @@ namespace Linked_Data_Server.Controllers
                         }
                         if (icon != "")
                         {
-                            ArborGraph.Node node = new ArborGraph.Node() { label = result["name"].value, image = icon };
+                            ArborGraph.Node node = new ArborGraph.Node() { label = result["name"].value, image = icon, link = result["id"].value};
                             arborGraph.nodes.Add(result["name"].value, node);
                         }
                         else
                         {
-                            ArborGraph.Node node = new ArborGraph.Node() { label = result["name"].value };
+                            ArborGraph.Node node = new ArborGraph.Node() { label = result["name"].value , link = result["id"].value };
                             arborGraph.nodes.Add(result["name"].value, node);
                         }
                         relations.Add(result["name"].value, new ArborGraph.Relation(property.name));

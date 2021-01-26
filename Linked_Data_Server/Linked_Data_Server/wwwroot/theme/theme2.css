@@ -1,3 +1,7 @@
+canvas.linkable {
+    cursor: pointer;
+}
+
 span.linkext {
     display: inline-block;
     content: "";
