@@ -23,7 +23,7 @@ namespace Linked_Data_Server.Models.Entities
             }
             public string name { get; set; }
         }
-
+        public string Name { get; set; }
         public Dictionary<string, Node> nodes { get; set; }
         public Dictionary<string, Dictionary<string, Relation>> edges { get; set; }
     }

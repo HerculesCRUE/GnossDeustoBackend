@@ -56,7 +56,7 @@
                 var nodeBoxes = {}
                 particleSystem.eachNode(function (node, pt) {
 
-                    
+
                     // node: {mass:#, p:{x,y}, name:"", data:{}}
                     // pt:   {x:#, y:#}  node position in screen coords
 
@@ -69,7 +69,7 @@
                     // determine the box size and round off the coords if we'll be 
                     // drawing a text label (awful alignment jitter otherwise...)
                     var label = node.data.label, image = new Image();
-                    var w = 30;
+                    var w = 20;
                     if (!("" + label).match(/^[ \t]*$/)) {
                         pt.x = Math.floor(pt.x)
                         pt.y = Math.floor(pt.y)
@@ -81,16 +81,6 @@
                     if (node.data.color) ctx.fillStyle = node.data.color
                     else ctx.fillStyle = "rgba(0,0,0,.2)"
                     if (node.data.color == 'none') ctx.fillStyle = "white"
-                    /*
-                    if (node.data.shape == 'dot') {
-                        gfx.oval(pt.x - w / 2, pt.y - w / 2, w, w, { fill: ctx.fillStyle })
-                        nodeBoxes[node.name] = [pt.x - w / 2, pt.y - w / 2, w, w]
-                    } else {
-                        gfx.rect(pt.x - w / 2, pt.y - 10, w, 20, 4, { fill: ctx.fillStyle })
-                        nodeBoxes[node.name] = [pt.x - w / 2, pt.y - 11, w, 22]
-                    }*/
-
-                    
 
                     // draw the text
                     if (label) {
@@ -98,22 +88,22 @@
                         ctx.textBaseline = 'top';
                         ctx.fillStyle = "black"
                         if (node.data.color == 'none') ctx.fillStyle = '#333333'
-                        ajusteDeTexto(ctx, label, pt.x + 5 + 5, pt.y + 3, 100, 12);
+                        ajusteDeTexto(ctx, label, pt.x + (w/2) + 5, pt.y-(w/2), 100, 12);
                         //ctx.fillText(label || "", pt.x, pt.y + 4)
                         //ctx.fillText(label || "", pt.x, pt.y + 4)
                     }
-                    if (image) {
-                        if (image == "dot") {
-                            if (node.data.color) ctx.fillStyle = node.data.color
-                            else ctx.fillStyle = "rgba(0,0,0,.2)"
-                            if (node.data.color == 'none') ctx.fillStyle = "grey"
-                            gfx.oval(pt.x - w / 2, pt.y - w / 2, w, w, { fill: ctx.fillStyle })
-                            nodeBoxes[node.name] = [pt.x - w / 2, pt.y - w / 2, w, w]
-                        }
+                    if (node.data.image) {
                         // Custom image loading function
                         var pic = new Image()
                         pic.src = "iconos/" + node.data.image
                         ctx.drawImage(pic, pt.x - w / 2, pt.y - w / 2);
+                        nodeBoxes[node.name] = [pt.x - w / 2, pt.y - w / 2, w, w]
+
+                    } else {
+                        if (node.data.color) ctx.fillStyle = node.data.color
+                        else ctx.fillStyle = "rgba(0,0,0,.2)"
+                        if (node.data.color == 'none') ctx.fillStyle = "grey"
+                        gfx.oval(pt.x - w / 2, pt.y - w / 2, w, w, { fill: ctx.fillStyle })
                         nodeBoxes[node.name] = [pt.x - w / 2, pt.y - w / 2, w, w]
                     }
                 })
