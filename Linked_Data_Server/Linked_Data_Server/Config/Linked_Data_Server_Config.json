@@ -29,7 +29,7 @@
             "properties": [
               {
                 "name": "Coautor",
-                "query": "select distinct ?id ?name ?rdftype where{ ?doc <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?lista ?autor <{ENTITY_ID}>.?lista ?autores2 ?id. ?id a ?rdftype. FILTER(?rdftype= <http://purl.org/roh/mirror/foaf#Person>). ?id <http://purl.org/roh/mirror/foaf#name> ?name. filter(?id!=<{ENTITY_ID}>)} limit 5"
+                "query": "select distinct ?id ?name ?rdftype where{ ?doc <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?lista ?autor <{ENTITY_ID}>.?lista ?autores2 ?id. ?id a ?rdftype. FILTER(?rdftype= <http://purl.org/roh/mirror/foaf#Person>). ?id <http://purl.org/roh/mirror/foaf#name> ?name. filter(?id!=<{ENTITY_ID}>)} limit 10"
               }
             ]
           }
