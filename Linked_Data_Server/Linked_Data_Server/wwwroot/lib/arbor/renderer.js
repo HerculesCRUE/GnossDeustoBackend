@@ -76,7 +76,7 @@ var pintados = 0;
 
                     // draw the text
                     if (label) {
-                        if (node.data.main) { ctx.fillStyle = "red"; } else {
+                        if (node.data.main) { ctx.fillStyle = "#af1a2e"; } else {
                             ctx.fillStyle = "black"
                         }
                         ctx.font = "12px Helvetica";
