@@ -104,11 +104,6 @@ namespace Linked_Data_Server.Models.Entities
                 /// rdf:type al que afecta
                 /// </summary>
                 public string rdfType { get; set; }
-
-                /// <summary>
-                /// Propiedad para pintar en el nombre del elemento
-                /// </summary>
-                public string propName { get; set; }
             }
 
             public List<Icon> icons { get; set; }

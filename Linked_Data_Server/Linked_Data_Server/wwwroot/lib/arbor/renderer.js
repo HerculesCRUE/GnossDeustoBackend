@@ -39,7 +39,7 @@
         var that = {
             init: function (system) {
                 particleSystem = system
-                particleSystem.screenSize(canvas.width, canvas.height)
+                particleSystem.screenSize(canvas.width - 100, canvas.height)
                 particleSystem.screenPadding(40)
 
                 that.initMouseHandling()
@@ -60,11 +60,6 @@
                     // node: {mass:#, p:{x,y}, name:"", data:{}}
                     // pt:   {x:#, y:#}  node position in screen coords
 
-                    // Load extra info
-                    var image = node.data.image
-                    var imageH = node.data.image_h
-                    var imageW = node.data.image_w
-                    var radius = 15
 
                     // determine the box size and round off the coords if we'll be 
                     // drawing a text label (awful alignment jitter otherwise...)
@@ -84,18 +79,21 @@
 
                     // draw the text
                     if (label) {
-                        ctx.font = "12px Helvetica"
+                        if (node.data.main) { ctx.fillStyle = "red"; } else {
+                            ctx.fillStyle = "black"
+                        }
+                        ctx.font = "12px Helvetica";
                         ctx.textBaseline = 'top';
-                        ctx.fillStyle = "black"
+
                         if (node.data.color == 'none') ctx.fillStyle = '#333333'
-                        ajusteDeTexto(ctx, label, pt.x + (w/2) + 5, pt.y-(w/2), 100, 12);
+                        ajusteDeTexto(ctx, label, pt.x + (w / 2) + 5, pt.y - (w / 2), 100, 12);
                         //ctx.fillText(label || "", pt.x, pt.y + 4)
                         //ctx.fillText(label || "", pt.x, pt.y + 4)
                     }
                     if (node.data.image) {
                         // Custom image loading function
-                        var pic = new Image()
-                        pic.src = "iconos/" + node.data.image
+                        var pic = new Image(w, w)
+                        pic.src = "/iconos/" + node.data.image
                         ctx.drawImage(pic, pt.x - w / 2, pt.y - w / 2);
                         nodeBoxes[node.name] = [pt.x - w / 2, pt.y - w / 2, w, w]
 
@@ -282,7 +280,7 @@
                 $(canvas).mousedown(handler.mousedown);
                 $(canvas).mousemove(handler.mousemove);
 
-            
+
             }
 
         }
