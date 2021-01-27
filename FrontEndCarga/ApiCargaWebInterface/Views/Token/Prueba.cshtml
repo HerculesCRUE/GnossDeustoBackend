@@ -1,0 +1,150 @@
+﻿@model ApiCargaWebInterface.ViewModels.CmsDataViewModel
+@using CsvHelper
+@using System.Globalization
+@using System.IO
+@using System.Text
+@{ Layout = "_Layout";
+    ViewData["BodyClass"] = "tipo-documento";
+    ViewData["Title"] = "Grafo de Conocimiento de ASIO";
+    ViewData["SecondaryMenu"] = "<ul class=\"nav nav-tabs container\" id=\"myTab\" role=\"tablist\"> <li class=\"nav-item active\" role=\"presentation\"> <a class=\"nav-link\" id=\"seccion1-tab\" data-toggle=\"tab\" href=\"#seccion-panel\" role=\"tab\" aria-controls=\"seccion\" aria-selected=\"true\">Estadísticas generales</a> </li> <li class=\"nav-item\" role=\"presentation\"> <a class=\"nav-link\" id=\"seccion2-tab\" data-toggle=\"tab\" href=\"#seccion2-panel\" role=\"tab\" aria-controls=\"seccion2\" aria-selected=\"false\">Resumen del Grafo ASIO-SGI</a> </li> <li class=\"nav-item\" role=\"presentation\">        <a class=\"nav-link\" id=\"seccion3-tab\" data-toggle=\"tab\" href=\"#seccion3-panel\" role=\"tab\" aria-controls=\"seccion3\" aria-selected=\"false\">Entidades del Grafo ASIO-SGI</a> </li> <li class=\"nav-item\" role=\"presentation\"> <a class=\"nav-link\" id=\"seccion4-tab\" data-toggle=\"tab\" href=\"#seccion4-panel\" role=\"tab\" aria-controls=\"seccion4\" aria-selected=\"false\">Datos del Grafo ASIO-SGI</a>    </li> </ul>";
+}
+
+<div class="tab-content">
+    <!-- Sección de Estadísticas generales, contiene información acerca de los triples y grafos (triples por grafo y PROV) \-->
+    <div class="tab-pane active" id="seccion-panel" role="tabpanel" aria-labelledby="seccion-tab">
+        <div class="row">
+            <div class="col col-12">
+                <h1>Datos disponibles en el grafo de conocimiento de Hércules ASIO-SGI</h1>
+                <p>
+                    Como resultado del proyecto Hércules ASIO, los datos generados por la actividad investigadora de la Universidad de Murcia están disponibles en un grafo de conocimiento. Los datos de este grafo pueden consultarse mediante un SPARQL Endpoint, mientras que sus entidades y relaciones están accesibles como datos enlazados y abiertos (Linked Open Data). El RDF Store cuenta actualmente con
+                   
+                    triples, repartidos en los siguientes grafos:
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Grafo</th>
+                            <th>Origen</th>
+                            <th>Número de triples</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Sección de Resumen del Grafo SGI, entidades destacadas y alguna gráfica, por diseñar y decidir \-->
+    <div class="tab-pane" id="seccion2-panel" role="tabpanel" aria-labelledby="seccion2-tab">
+        <div class="row">
+            <div class="col col-12">
+                <h2>Resumen del Grafo de Conocimiento ASIO-SGI</h2>
+            </div>
+            <div class="col col-12 col-md-6 col-texto">
+                <p>Resumen del grafo ASIO-SGI, entidades destacadas y alguna gráfica.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Sección de Entidades del Grafo SGI, listado completo de todas las entidades del grafo, indicando cuántas hay de cada una \-->
+    <div class="tab-pane" id="seccion3-panel" role="tabpanel" aria-labelledby="seccion3-tab">
+        <div class="row">
+            <div class="col col-12">
+                <h2>Entidades del Grafo de Conocimiento ASIO-SGI</h2>
+                <p>Listado de entidades con total de entidades.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Entidad</th>
+                            <th>Tipo</th>
+                            <th>Número de triples</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Sección de Datos del Grafo SGI, acceso a los volcados, ejemplos SPARQL, uso de Linked Data Server, acceso a FAIR \-->
+    <div class="tab-pane" id="seccion4-panel" role="tabpanel" aria-labelledby="seccion4-tab">
+        <div class="row">
+            <div class="col col-12 col-titulo">
+                <h2>Datos del Grafo de Conocimiento ASIO-SGI</h2>
+                <p>Los datos del grafo pueden consultarse mediante un SPARQL Endpoint, mientras que sus entidades y relaciones están accesibles como datos enlazados y abiertos (Linked Open Data). Esto convierte los datos de ASIO SGI en un conjunto de datos FAIR.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-12">
+                <h2>Consultas SPARQL</h2>
+            </div>
+            <div class="col col-12 col-md-6 col-texto">
+                <p><a href="https://www.w3.org/TR/sparql11-overview/" target="_blank">SPARQL (<strong>S</strong>PARQL <strong>P</strong>rotocol and <strong>R</strong>DF <strong>Q</strong>uery <strong>L</strong>anguage)</a> es el lenguaje de consulta para RDF y también el protocolo con el que se envían las consultas y se reciben los resultados.</p>
+                <p>Hércules ASIO dispone de un SPARQL Endpoint público, que permite realizar consultas SPARQL sobre los datos del grafo ASIO-SGI y que se encuentra disponible en la siguiente URL:</p>
+                <p><a href="http://155.54.239.204:8890/sparql">http://155.54.239.204:8890/sparql</a></p>
+                <p>
+                    Se indican a continuación algunos ejemplos de consultas:
+                    <ul>
+                        <li>
+                            <a href="http://155.54.239.204:8890/sparql?default-graph-uri=&amp;query=select+%3Fs+count%28%3Fo%29+as+%3Fatributos+from+%3Chttp%3A%2F%2Fgraph.um.es%2Fgraph%2Fum_sgi%3E%0D%0Awhere+%7B%3Fs+a+%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23Person%3E.%0D%0A%3Fs+%3Fp+%3Fo%0D%0A%7D%0D%0Aorder+by+DESC%28%3Fatributos%29%0D%0ALIMIT+100%0D%0A&amp;should-sponge=&amp;format=text%2Fhtml&amp;timeout=0&amp;debug=on&amp;run=+Run+Query+">Obtener los 100 investigadores con más atributos (más datos)</a>.
+                        </li>
+                        <li>
+                            <a href="http://155.54.239.204:8890/sparql?default-graph-uri=&amp;query=select+*+from+%3Chttp%3A%2F%2Fgraph.um.es%2Fgraph%2Fum_sgi%3E%0D%0Awhere+%7B+%3Chttp%3A%2F%2Fgraph.um.es%2Fres%2Fperson%2F1602%3E+%3Fp+%3Fo%7D%0D%0A%0D%0A&amp;should-sponge=&amp;format=text%2Fhtml&amp;timeout=0&amp;debug=on&amp;run=+Run+Query+">Obtener los atributos de un investigador</a>.
+                        </li>
+                    </ul>
+                </p>
+            </div>
+            <div class="col col-12 col-md-6 col-imagen">
+                <div class="imagen"><img src="http://herc-as-front-desa.atica.um.es/docs/sparql.svg" alt="SPARQL" height="240" style="display:block;margin-left:auto;margin-right:auto;"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-12">
+                <h2>Linked Data Server</h2>
+            </div>
+            <div class="col col-12 col-md-6 col-imagen">
+                <div class="imagen"><img src="http://herc-as-front-desa.atica.um.es/docs/knowledgegraph.png" alt="Linked Data Server" height="240" style="display:block;margin-left:auto;margin-right:auto;"></div>
+            </div>
+            <div class="col col-12 col-md-6 col-texto">
+                <p>Linked Data Server es un <a href="https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Linked_Data_Server" target="_blank">componente de ASIO desarrollado en .Net Core</a> que proporciona el servicio de datos enlazados de Hércules ASIO.</p>
+                <p>Linked Data Server proporciona acceso a los datos de las entidades del grafo para personas y máquinas, que pueden obtener la representación RDF de la entidad si la petición solicita "application/rdf+xml", y cumple la especificación LDP: <a href="https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/20200415%20H%C3%A9rcules%20ASIO%20Evaluaci%C3%B3n%20de%20cumplimiento%20Linked%20Data%20Platform.md">Hércules Backend ASIO. Evaluación de cumplimiento Linked Data Platform (LDP)</a></p>
+                <p>Se puede comprobar el funcionamiento del servidor mediante los siguientes ejemplos:</p>
+                <ul>
+                    <li>Investigador con publicaciones e identificadores externos. <a href="http://graph.um.es/res/person/63ec870e-9908-49b9-9242-07a449bc562f" rel="nofollow">http://graph.um.es/res/person/63ec870e-9908-49b9-9242-07a449bc562f</a> </li>
+                    <li>Artículo con DOI y otros identificadores obtenidos desde fuentes externas. <a href="http://graph.um.es/res/article/a248813c-cfe9-4208-8009-87464d6cfade" rel="nofollow">http://graph.um.es/res/article/a248813c-cfe9-4208-8009-87464d6cfade</a></li>
+                    <li>Proyecto de investigación. <a href="http://graph.um.es/res/project/5d35f1da-6eee-49e3-a350-54447ab24344" rel="nofollow">http://graph.um.es/res/project/5d35f1da-6eee-49e3-a350-54447ab24344</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-12">
+                <h2>Datos FAIR</h2>
+            </div>
+            <div class="col col-12 col-md-6 col-texto">
+                <p>Los <a href="https://doi.org/10.25504/FAIRsharing.WWI10U" target="_blank">Principios FAIR</a> proporcionan directrices para la publicación de recursos digitales tales como conjuntos de datos, códigos, flujos de trabajo y objetos de investigación, de manera que sean localizables, accesibles, interoperables y reutilizables (FAIR).</p>
+                <p>Hoy en día, la mejor manera de publicar datos FAIR es hacerlo mediante Linked Data, teniendo especial cuidado de generar datos y metadatos de alta calidad, mejorando así la reusabilidad de los datos para máquinas y, como consecuencia y en última instancia, para humanos.</p>
+                <p>En el documento de <a href="https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/fair/Docs/Entregable%20EF2-1.6_%20documento%20de%20an%C3%A1lisis%20de%20m%C3%A9todos%20FAIR.md" target="_blank">Análisis de métodos FAIR</a> se puede consultar cómo se alinea Hércules ASIO con los principios FAIR.</p>
+            </div>
+            <div class="col col-12 col-md-6 col-imagen">
+                <div class="imagen"><img src="http://herc-as-front-desa.atica.um.es/docs/FairData.png" alt="Go FAIR Data" height="240" style="display:block;margin-left:auto;margin-right:auto;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@functions{ public class PruebaSparql
+            {
+                public int count { get; set; }
+            }
+
+            public class grafosASIO
+            {
+                public string graph { get; set; }
+                public string nameOrganizationGraph { get; set; }
+                public int numTriples { get; set; }
+            }
+
+            public class entidadesGrafo
+            {
+                public string entity { get; set; }
+                public string type { get; set; }
+                public int numTriples { get; set; }
+            } }

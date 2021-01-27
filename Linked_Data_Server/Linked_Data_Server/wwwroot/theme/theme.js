@@ -615,6 +615,19 @@ $(function () {
         }
     });
 
+    if (datosGraficas != null) {
+        for (var i = 0;i < datosGraficas.length; i++) {
+            var datosGrafica = datosGraficas[i];
+            var sys = arbor.ParticleSystem(1000, 400, 1);
+            sys.parameters({ gravity: true });
+            sys.renderer = Renderer("#arborgraph_"+i);
+            sys.graft(datosGrafica);
+
+        }
+    }
+
+
+    
 });
 
 

@@ -6,10 +6,34 @@
         {
           "name": "Documentos",
           "fields": [ "ID", "Título", "RdfType" ],
-          "query": "select ?ID ?Nombre ?RdfType where { ?ID <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?lista ?p <{ENTITY_ID}>. ?ID <http://purl.org/roh#title> ?Nombre. ?ID a ?RdfType. } "
+          "query": "select distinct ?ID ?Nombre ?RdfType where { {?ID <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?lista ?p <{ENTITY_ID}>.}UNION{?ID <http://purl.org/roh#correspondingAuthor> <{ENTITY_ID}>.} ?ID <http://purl.org/roh#title> ?Nombre. ?ID a ?RdfType. } "
         }
       ]
     }
-  ]
-
+  ],
+  "ExcludeRelatedEntity": [ "http://purl.org/roh/mirror/foaf#Person" ],
+  "ConfigArborGraphs": {
+    "icons": [
+      {
+        "rdfType": "http://purl.org/roh/mirror/foaf#Person",
+        "icon": "person-grafo-hercules.svg"
+      }
+    ],
+    "arborGraphsRdfType": [
+      {
+        "rdfType": "http://purl.org/roh/mirror/foaf#Person",
+        "arborGraphs": [
+          {
+            "name": "Coautores",
+            "properties": [
+              {
+                "name": "Coautor",
+                "query": "select distinct ?coautorID_1 as ?level1 ?coautorID_2 as ?level2 where { ?doc <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?lista ?autores ?coautorID_1. ?lista ?autores2 ?coautorID_2. FILTER(?coautorID_1 in (?coautorID_A)) FILTER(?coautorID_2 in (?coautorID_B)) FILTER(?coautorID_1 != ?coautorID_2 ) { select ?coautorID_A where { ?doc_A <http://purl.org/roh/mirror/bibo#authorList> ?lista_A. ?lista_A ?autor_A <{ENTITY_ID}>. ?lista_A ?autores2_A ?coautorID_A. ?coautorID_A a ?rdftype_A. FILTER(?rdftype_A = <http://purl.org/roh/mirror/foaf#Person>). ?coautorID_A <http://purl.org/roh/mirror/foaf#name> ?name_A. filter(?coautorID_A !=<{ENTITY_ID}>) } order by desc (count(distinct ?doc_A )) asc(?coautorID_A) limit 10 } { select ?coautorID_B where { ?doc_B <http://purl.org/roh/mirror/bibo#authorList> ?lista_B. ?lista_B ?autor_B <{ENTITY_ID}>. ?lista_B ?autores2_B ?coautorID_B. ?coautorID_B a ?rdftype_B. FILTER(?rdftype_B = <http://purl.org/roh/mirror/foaf#Person>). ?coautorID_B <http://purl.org/roh/mirror/foaf#name> ?name. filter(?coautorID_B !=<{ENTITY_ID}>) } order by desc (count(distinct ?doc_B )) asc(?coautorID_B ) limit 10 } }"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

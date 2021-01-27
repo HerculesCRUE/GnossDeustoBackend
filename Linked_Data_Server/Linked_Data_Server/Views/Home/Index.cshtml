@@ -1,10 +1,15 @@
-﻿@model Tuple<List<Linked_Data_Server.Models.Entities.DiscoverRdfViewModel>, Dictionary<string, string>, List<Linked_Data_Server.Models.Entities.Table>>
+﻿@model Linked_Data_Server.Models.Entities.EntityModelTemplate
 
 @{
     ViewData["BodyClass"] = "fichaRecurso";
-}
+    //List<string> graficas = Model.Item4.Nodes;
 
-<div class="row">    
+}
+<script>    
+    var datosGraficas =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.arborGraphs));
+</script>
+
+<div class="row">
     <div class="col col-12 col-lg-12 col-contenido">
         <div class="wrapCol">
             <div class="header-resource">
@@ -12,56 +17,35 @@
                     <h1>@ViewData["Title"]</h1>
                 </div>
             </div>
-            @if (Model.Item1 != null)
+            @if (Model.linkedDataRDF != null)
             {
                 int i = 0;
-                foreach (Linked_Data_Server.Models.Entities.DiscoverRdfViewModel entity in Model.Item1)
+                foreach (Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel entity in Model.linkedDataRDF)
                 {
                     if (i == 1)
                     {
-                        @foreach (var table in Model.Item3)
-                        {
-                            <h2>@table.Name</h2>
-                            <table class="display datatable">
-                                <thead>
-                                    <tr>
-                                        @foreach (var header in table.Header)
-                                        {
-                                            <th>@header</th>
-                                        }
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var row in table.Rows)
-                                    {
-                                        <tr>
-                                            @foreach (var field in row.fields)
-                                            {
-                                                <td>@field</td>
-                                            }
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        }
+                        PintarTablas(Model.tables);
+                        PintarArborGraphs(Model.arborGraphs);
                         <h2>Entidades relacionadas</h2>
                     }
-                    PintarItem(entity, i > 0, Model.Item2);
+                    PintarItem(entity, i > 0, Model.propsTransform);
                     i++;
                 }
+                if (i == 1)
+                {
+                    PintarTablas(Model.tables);
+                    PintarArborGraphs(Model.arborGraphs);
+                }
             }
-
-
 
         </div>
     </div>
 </div>
 
 
-
 @functions
 {
-    void PintarItem(Linked_Data_Server.Models.Entities.DiscoverRdfViewModel pItem, bool pEntityLink, Dictionary<string, string> pPropsTransform)
+    void PintarItem(Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel pItem, bool pEntityLink, Dictionary<string, string> pPropsTransform)
     {
 
         <div class="contenido">
@@ -144,7 +128,7 @@
                                                 <td>
                                                     <b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a></b>
                                                     @{
-                                                        List<Linked_Data_Server.Models.Entities.DiscoverRdfViewModel.ProvenanceData> provenanceData = pItem.provenanceData.Where(x => x.property == stringProperty.Key && x.value == valor).ToList();
+                                                        List<Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel.ProvenanceData> provenanceData = pItem.provenanceData.Where(x => x.property == stringProperty.Key && x.value == valor).ToList();
                                                         if (provenanceData.Count() > 0)
                                                         {
                                                             <a href="#" class="linkprovenancea"><span class="linkprovenance">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
@@ -159,7 +143,7 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    @foreach (Linked_Data_Server.Models.Entities.DiscoverRdfViewModel.ProvenanceData provenanceDataIn in provenanceData)
+                                                                    @foreach (Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel.ProvenanceData provenanceDataIn in provenanceData)
                                                                     {
                                                                         <tr>
                                                                             <td>
@@ -179,7 +163,7 @@
                                                 <td>
                                                     <b>@valor</b>
                                                     @{
-                                                        List<Linked_Data_Server.Models.Entities.DiscoverRdfViewModel.ProvenanceData> provenanceData = pItem.provenanceData.Where(x => x.property == stringProperty.Key && x.value == valor).ToList();
+                                                        List<Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel.ProvenanceData> provenanceData = pItem.provenanceData.Where(x => x.property == stringProperty.Key && x.value == valor).ToList();
                                                         if (provenanceData.Count() > 0)
                                                         {
                                                             <a href="#" class="linkprovenancea"><span class="linkprovenance">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
@@ -194,7 +178,7 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    @foreach (Linked_Data_Server.Models.Entities.DiscoverRdfViewModel.ProvenanceData provenanceDataIn in provenanceData)
+                                                                    @foreach (Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel.ProvenanceData provenanceDataIn in provenanceData)
                                                                     {
                                                                         <tr>
                                                                             <td>
@@ -248,10 +232,91 @@
 
                 </div>
 
-                
+
 
             </div>
         </div>
     }
+
+    void PintarTablas(List<Linked_Data_Server.Models.Entities.Table> pTables)
+    {
+        foreach (var table in pTables)
+        {
+            <h2>@table.Name</h2>
+            <table class="display datatable">
+                <thead>
+                    <tr>
+                        @foreach (var header in table.Header)
+                        {
+                            <th>@header</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var row in table.Rows)
+                    {
+                        <tr>
+                            @foreach (var field in row.fields)
+                            {
+                                @if (Uri.IsWellFormedUriString(field, UriKind.Absolute))
+                                {
+                                    Uri uri = new Uri(field);
+
+                                    if (Context.Request.Host.Value == uri.Host)
+                                    {
+                                        <td>
+                                            <a href="@field">@field</a>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <a href="@field" target="_blank">@field</a>
+                                        </td>
+                                    }
+                                }
+                                else
+                                {
+                                    @if (Uri.IsWellFormedUriString(field, UriKind.Absolute))
+                                    {
+                                        Uri uri = new Uri(field);
+                                        if (Context.Request.Host.Value == uri.Host)
+                                        {
+                                            <td>
+                                                <a href="@field">@field</a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <a href="@field" target="_blank">@field</a>
+                                            </td>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <td>@field</td>
+                                    }
+                                }
+
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+
+    void PintarArborGraphs(List<Linked_Data_Server.Models.Entities.ArborGraph> pArborGraphs)
+    {
+        int i = 0;
+        foreach (var arborGraph in pArborGraphs)
+        {
+            <h2>@arborGraph.Name</h2>
+            <canvas id="arborgraph_@i" width="800" height="600"></canvas>
+                                                        i++;
+                                                    }
+                                                }
+
 }
 

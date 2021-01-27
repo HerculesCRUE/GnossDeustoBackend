@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Linked_Data_Server.Models.Entities
 {
-    public class DiscoverRdfViewModel
+    public class LinkedDataRdfViewModel
     {
         public class ProvenanceData
         {
@@ -17,7 +17,7 @@ namespace Linked_Data_Server.Models.Entities
 
         public Dictionary<string, List<string>> stringPropertiesEntity { get; set; }
         public List<ProvenanceData> provenanceData { get; set; }
-        public Dictionary<string, List<DiscoverRdfViewModel>> entitiesPropertiesEntity { get; set; }
+        public Dictionary<string, List<LinkedDataRdfViewModel>> entitiesPropertiesEntity { get; set; }
         public Dictionary<string, string> communNamePropierties { get; set; }
         public List<string> LoadedEntities { get; set; }
     }

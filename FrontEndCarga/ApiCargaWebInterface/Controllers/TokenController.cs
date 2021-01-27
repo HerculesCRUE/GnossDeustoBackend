@@ -33,6 +33,10 @@ namespace ApiCargaWebInterface.Controllers
             tokenViewModel.TokenOptions = LoadTokenList();
             return View(tokenViewModel);
         }
+        public IActionResult Prueba()
+        {
+            return View();
+        }
         /// <summary>
         /// Obtiene un token para el api pasado
         /// </summary>
