@@ -27,7 +27,7 @@
 
 
 
-
+var pintados = 0;
 (function () {
 
     Renderer = function (canvas) {
@@ -38,29 +38,26 @@
 
         var that = {
             init: function (system) {
-                particleSystem = system
-                particleSystem.screenSize(canvas.width - 100, canvas.height)
-                particleSystem.screenPadding(40)
-
-                that.initMouseHandling()
-
+                particleSystem = system;
+                particleSystem.screenSize(canvas.width - 100, canvas.height);
+                particleSystem.screenPadding(40);
+                that.initMouseHandling();
             },
 
             redraw: function () {
-
                 if (!particleSystem) return
+
+                pintados++;
+                if ((pintados > 300)) {
+                    particleSystem.stop();
+                    return;
+                }
 
                 gfx.clear() // convenience ƒ: clears the whole canvas rect
 
                 // draw the nodes & save their bounds for edge drawing
                 var nodeBoxes = {}
                 particleSystem.eachNode(function (node, pt) {
-
-
-                    // node: {mass:#, p:{x,y}, name:"", data:{}}
-                    // pt:   {x:#, y:#}  node position in screen coords
-
-
                     // determine the box size and round off the coords if we'll be 
                     // drawing a text label (awful alignment jitter otherwise...)
                     var label = node.data.label
@@ -92,7 +89,7 @@
                     }
                     if (node.data.image) {
                         // Custom image loading function
-                        var pic = new Image(w, w)
+                        var pic = new Image()
                         pic.src = "/iconos/" + node.data.image
                         ctx.drawImage(pic, pt.x - w / 2, pt.y - w / 2);
                         nodeBoxes[node.name] = [pt.x - w / 2, pt.y - w / 2, w, w]
@@ -191,7 +188,7 @@
                 // set up a handler object that will initially listen for mousedowns then
                 // for moves and mouseups while dragging
                 var handler = {
-                    mousemove: function (e) {
+                    mousemove: function (e) {                        
                         if (!mouse_is_down) {
                             var pos = $(canvas).offset();
                             _mouseP = arbor.Point(e.pageX - pos.left, e.pageY - pos.top)
@@ -204,6 +201,8 @@
                             } else {
                                 dom.removeClass('linkable')
                             }
+                        } else {
+                            pintados = 0;
                         }
                         return false
                     },
