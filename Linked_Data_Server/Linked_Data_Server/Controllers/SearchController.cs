@@ -1,37 +1,18 @@
-﻿using Linked_Data_Server.Models;
-using Linked_Data_Server.Models.Entities;
+﻿using Linked_Data_Server.Models.Entities;
 using Linked_Data_Server.Models.Services;
 using Linked_Data_Server.Utility;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Security.Cryptography;
-using System.Text;
-using VDS.RDF;
-using VDS.RDF.Query;
-using VDS.RDF.Writing;
-using Microsoft.AspNetCore.Http.Extensions;
 using System.Linq;
-using System.Net.Http;
-using System.Web;
+using System.Threading.Tasks;
 
 namespace Linked_Data_Server.Controllers
 {
-
-    public class AutocompleteController : Controller
+    public class SearchController : Controller
     {
         private readonly static ConfigService mConfigService = new ConfigService();
-        private readonly ILogger<HomeController> _logger;
-
-        public AutocompleteController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-
+        [HttpPost]
         public IActionResult Index(string q)
         {
             List<KeyValuePair<string, string>> response = new List<KeyValuePair<string, string>>();
@@ -45,7 +26,8 @@ namespace Linked_Data_Server.Controllers
             {
                 response.Add(new KeyValuePair<string, string>(row["o"].value, row["s"].value));
             }
-            return Json(response);
+            ViewData["Title"] = "Buscador de " + q;
+            return View(response);
         }
     }
 }

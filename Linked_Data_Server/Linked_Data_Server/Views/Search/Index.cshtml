@@ -1,0 +1,24 @@
+﻿@model List<KeyValuePair<string, string>>
+
+@{
+    ViewData["BodyClass"] = "Buscador";
+}
+<div>
+    <h1>@ViewData["Title"]</h1>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+        </tr>
+
+        @foreach (var entity in Model)
+        {
+            <tr>
+                <td><a href="@entity.Value" target="_blank">@entity.Value</a></td>
+                <td>@entity.Key</td>
+            </tr>
+        }
+
+
+    </table>
+</div>
