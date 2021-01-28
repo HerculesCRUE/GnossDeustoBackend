@@ -679,12 +679,12 @@ namespace Linked_Data_Server.Controllers
                 }
                 if (iconPrincipal != "")
                 {
-                    ArborGraph.Node nodePrincipal = new ArborGraph.Node() { main = true, color = "red", label = pNameEntity, image = iconPrincipal, link = pEntity };
+                    ArborGraph.Node nodePrincipal = new ArborGraph.Node() { main = true, color = "#af1a2e", label = pNameEntity, image = iconPrincipal, link = pEntity };
                     arborGraph.nodes.Add(pEntity, nodePrincipal);
                 }
                 else
                 {
-                    ArborGraph.Node nodePrincipal = new ArborGraph.Node() { main = true, color = "red", label = pNameEntity, link = pEntity };
+                    ArborGraph.Node nodePrincipal = new ArborGraph.Node() { main = true, color = "#af1a2e", label = pNameEntity, link = pEntity };
                     arborGraph.nodes.Add(pEntity, nodePrincipal);
                 }
 
@@ -790,8 +790,8 @@ namespace Linked_Data_Server.Controllers
 
                 // Colores para pintar las relaciones según el nivel
                 List<string> colors = new List<string>();
+                colors.Add("#af1a2e");
                 colors.Add("#ccc");
-                colors.Add("red");
                 colors.Add("blue");
                 colors.Add("green");
                 colors.Add("yellow");

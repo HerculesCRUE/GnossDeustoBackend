@@ -31,7 +31,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pSPARQLEndpoint">SPARQL endpoint</param>
         /// <param name="pQueryParam">Parámetros para las queries</param>
         /// <param name="pGraph">Grafo de carga</param>
-        public AsioPublication(I_SparqlUtility pSparqlUtility,string pSPARQLEndpoint, string pQueryParam, string pGraph)
+        public AsioPublication(I_SparqlUtility pSparqlUtility, string pSPARQLEndpoint, string pQueryParam, string pGraph)
         {
             _SPARQLEndpoint = pSPARQLEndpoint;
             _QueryParam = pQueryParam;
@@ -52,11 +52,14 @@ namespace API_DISCOVER.Utility
         public void PublishRDF(RohGraph dataGraph, RohGraph dataInferenceGraph, RohGraph ontologyGraph, KeyValuePair<string, string>? pAttributedTo, DateTime pActivityStartedAtTime, DateTime pActivityEndedAtTime, DiscoverLinkData pDiscoverLinkData)
         {
             // 1º Eliminamos de la BBD las entidades principales que aparecen en el RDF
-            HashSet<string> graphs= RemovePrimaryTopics(ref dataGraph);
+            HashSet<string> graphs = RemovePrimaryTopics(ref dataGraph);
             graphs.Add(_Graph);
 
             // 2º Eliminamos todos los triples de la BBDD cuyo sujeto y predicado estén en el RDF a cargar y estén marcados como monovaluados.
-            RemoveMonovaluatedProperties(ontologyGraph, dataInferenceGraph);
+            if (ontologyGraph != null && dataInferenceGraph != null)
+            {
+                RemoveMonovaluatedProperties(ontologyGraph, dataInferenceGraph);
+            }
 
             //3º Insertamos los triples en la BBDD
             if (pAttributedTo.HasValue)
@@ -73,7 +76,7 @@ namespace API_DISCOVER.Utility
             SparqlUtility.LoadTriples(SparqlUtility.GetTriplesFromGraph(dataGraph), _SPARQLEndpoint, _QueryParam, _Graph);
 
             //4º Insertamos los triples con provenance en la BBDD
-            if (pDiscoverLinkData != null && pDiscoverLinkData.entitiesProperties!=null)
+            if (pDiscoverLinkData != null && pDiscoverLinkData.entitiesProperties != null)
             {
                 Dictionary<string, List<string>> graphDeletes = new Dictionary<string, List<string>>();
                 Dictionary<string, List<string>> graphTriples = new Dictionary<string, List<string>>();
@@ -95,13 +98,20 @@ namespace API_DISCOVER.Utility
                                     graphTriples.Add(graph, new List<string>());
                                 }
                                 string bNodeid = "_:" + Guid.NewGuid().ToString();
-
+                                //TODO UriNode
                                 graphTriples[graph].Add($@"<{t_subject}> <http://www.w3.org/ns/prov#wasUsedBy> {bNodeid} .");
                                 graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .");
                                 graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <{t_property}>.");
-                                graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ""{ t_object.Replace("\"", "\\\"").Replace("\n", "\\n") }""^^<http://www.w3.org/2001/XMLSchema#string>.");
-                                graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#startedAtTime> ""{ pActivityStartedAtTime }""^^<http://www.w3.org/2001/XMLSchema#datetime>.");
-                                graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#endedAtTime> ""{ pActivityEndedAtTime }""^^<http://www.w3.org/2001/XMLSchema#datetime>.");
+                                if (Uri.IsWellFormedUriString(t_object, UriKind.Absolute))
+                                {
+                                    graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <{ t_object}>.");
+                                }
+                                else
+                                {
+                                    graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ""{ t_object.Replace("\"", "\\\"").Replace("\n", "\\n") }""^^<http://www.w3.org/2001/XMLSchema#string>.");
+                                }
+                                graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#startedAtTime> ""{ pActivityStartedAtTime.ToString("yyyy-MM-ddTHH:mm:ss.fffzzz") }""^^<http://www.w3.org/2001/XMLSchema#datetime>.");
+                                graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#endedAtTime> ""{ pActivityEndedAtTime.ToString("yyyy-MM-ddTHH:mm:ss.fffzzz") }""^^<http://www.w3.org/2001/XMLSchema#datetime>.");
                                 graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#wasAssociatedWith> <{pAttributedTo.Value.Key}>.");
                                 //TODO urisfactory
                                 graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#wasAssociatedWith> <http://graph.um.es/res/organization/{sourceId}>.");
@@ -116,14 +126,16 @@ namespace API_DISCOVER.Utility
                                     graphDeletes.Add(graph, new List<string>());
                                 }
 
-
-                                string stringDelete = $@"   {{
+                                if (!Uri.IsWellFormedUriString(t_object, UriKind.Absolute))
+                                {
+                                    string stringDelete = $@"   {{
                                                                 ?s ?p ?o. 
                                                                 ?o <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <{t_property}>.
                                                                 ?o <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ""{ t_object.Replace("\"", "\\\"").Replace("\n", "\\n") }""^^<http://www.w3.org/2001/XMLSchema#string>.
                                                                 FILTER(?s = <{t_subject}>)
                                                             }}";
-                                graphDeletes[graph].Add(stringDelete);
+                                    graphDeletes[graph].Add(stringDelete);
+                                }
 
                             }
                         }
@@ -276,7 +288,7 @@ namespace API_DISCOVER.Utility
                     }
                 }
 
-                
+
                 string queryDeleteMainEntities = $@"    DELETE {{ ?s ?p ?o. }}
                                                                 WHERE 
                                                                 {{
