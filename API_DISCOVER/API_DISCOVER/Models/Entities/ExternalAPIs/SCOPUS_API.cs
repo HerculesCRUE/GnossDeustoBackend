@@ -40,7 +40,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
         /// </summary>
         /// <param name="q">Texto a buscar (con urlEncode)</param>
         /// <param name="ScopusApiKey">ApiKey de Scopus</param>
-        /// /// <param name="ScopusUrl">Url donde se encuentra el API de scopus</param>
+        /// <param name="ScopusUrl">Url donde se encuentra el API de scopus</param>
         /// <returns>Objeto con los trabajos</returns>
         public static SCOPUSWorks Works(string q, string ScopusApiKey, string ScopusUrl)
         {

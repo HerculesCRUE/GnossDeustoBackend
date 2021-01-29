@@ -12,6 +12,7 @@ using VDS.RDF.Query;
 using VDS.RDF.Update;
 using System.Diagnostics.CodeAnalysis;
 using API_DISCOVER.Models.Entities.Discover;
+using VDS.RDF.Query.Inference;
 
 namespace API_DISCOVER.Utility
 {
@@ -21,59 +22,72 @@ namespace API_DISCOVER.Utility
         private string _SPARQLEndpoint { get; set; }
         private string _QueryParam { get; set; }
         private string _Graph { get; set; }
+        private string _Username { get; set; }
+        private string _Password { get; set; }
 
-        private I_SparqlUtility _SparqlUtility { get; set; }
+        private readonly I_SparqlUtility _SparqlUtility = new SparqlUtility();
+
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="pSparqlUtility">SPARQL Utility</param>
         /// <param name="pSPARQLEndpoint">SPARQL endpoint</param>
         /// <param name="pQueryParam">Parámetros para las queries</param>
         /// <param name="pGraph">Grafo de carga</param>
-        public AsioPublication(I_SparqlUtility pSparqlUtility, string pSPARQLEndpoint, string pQueryParam, string pGraph)
+        /// <param name="pUsername">Usuario SPARQL</param>
+        /// <param name="pPassword">Password SPARQL</param>
+        public AsioPublication(string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
         {
             _SPARQLEndpoint = pSPARQLEndpoint;
             _QueryParam = pQueryParam;
             _Graph = pGraph;
-            _SparqlUtility = pSparqlUtility;
+            _Username = pUsername;
+            _Password = pPassword;
         }
 
         /// <summary>
         /// Publica un RDF en Asio aplicado todos losprocedimientos pertinentes
         /// </summary>
-        /// <param name="dataGraph">Grafo con los datos a cargar</param>
-        /// <param name="dataInferenceGraph">Grafo con los datos a cargar (con inferencia)</param>
-        /// <param name="ontologyGraph">Grafo con la ontología</param>
+        /// <param name="pDataGraph">Grafo con los datos a cargar</param>
+        /// <param name="pOntologyGraph">Grafo con la ontología</param>
         /// <param name="pAttributedTo">Sujeto y nombre para atribuir los triples de los apis externos</param>
         /// <param name="pActivityStartedAtTime">Inicio del proceso</param>
         /// <param name="pActivityEndedAtTime">Fin del proceso</param>
         /// <param name="pDiscoverLinkData">Datos para trabajar con el descubrimiento de enlaces</param>
-        public void PublishRDF(RohGraph dataGraph, RohGraph dataInferenceGraph, RohGraph ontologyGraph, KeyValuePair<string, string>? pAttributedTo, DateTime pActivityStartedAtTime, DateTime pActivityEndedAtTime, DiscoverLinkData pDiscoverLinkData)
+        public void PublishRDF(RohGraph pDataGraph,RohGraph pOntologyGraph, KeyValuePair<string, string>? pAttributedTo, DateTime pActivityStartedAtTime, DateTime pActivityEndedAtTime, DiscoverLinkData pDiscoverLinkData)
         {
+            RohGraph inferenceDataGraph = null;
+            if (pOntologyGraph != null)
+            {
+                pDataGraph.Clone();
+                RohRdfsReasoner reasoner = new RohRdfsReasoner();
+                reasoner.Initialise(pOntologyGraph);
+                reasoner.Apply(inferenceDataGraph);
+            }
+
             // 1º Eliminamos de la BBD las entidades principales que aparecen en el RDF
-            HashSet<string> graphs = RemovePrimaryTopics(ref dataGraph);
+            HashSet<string> graphs = RemovePrimaryTopics(ref pDataGraph);
             graphs.Add(_Graph);
 
             // 2º Eliminamos todos los triples de la BBDD cuyo sujeto y predicado estén en el RDF a cargar y estén marcados como monovaluados.
-            if (ontologyGraph != null && dataInferenceGraph != null)
+            if (pOntologyGraph != null && inferenceDataGraph != null)
             {
-                RemoveMonovaluatedProperties(ontologyGraph, dataInferenceGraph);
+                RemoveMonovaluatedProperties(pOntologyGraph, inferenceDataGraph);
             }
 
             //3º Insertamos los triples en la BBDD
             if (pAttributedTo.HasValue)
             {
                 //Añadimos triples del softwareagent
-                IUriNode t_subject = dataGraph.CreateUriNode(UriFactory.Create(pAttributedTo.Value.Key));
-                IUriNode t_predicate_rdftype = dataGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
-                IUriNode t_object_rdftype = dataGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/ns/prov#SoftwareAgent"));
-                dataGraph.Assert(new Triple(t_subject, t_predicate_rdftype, t_object_rdftype));
-                IUriNode t_predicate_name = dataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#name"));
-                ILiteralNode t_object_name = dataGraph.CreateLiteralNode(pAttributedTo.Value.Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                dataGraph.Assert(new Triple(t_subject, t_predicate_name, t_object_name));
+                IUriNode t_subject = pDataGraph.CreateUriNode(UriFactory.Create(pAttributedTo.Value.Key));
+                IUriNode t_predicate_rdftype = pDataGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+                IUriNode t_object_rdftype = pDataGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/ns/prov#SoftwareAgent"));
+                pDataGraph.Assert(new Triple(t_subject, t_predicate_rdftype, t_object_rdftype));
+                IUriNode t_predicate_name = pDataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#name"));
+                ILiteralNode t_object_name = pDataGraph.CreateLiteralNode(pAttributedTo.Value.Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                pDataGraph.Assert(new Triple(t_subject, t_predicate_name, t_object_name));
             }
-            SparqlUtility.LoadTriples(SparqlUtility.GetTriplesFromGraph(dataGraph), _SPARQLEndpoint, _QueryParam, _Graph);
+            SparqlUtility.LoadTriples(SparqlUtility.GetTriplesFromGraph(pDataGraph), _SPARQLEndpoint, _QueryParam, _Graph, _Username, _Password);
 
             //4º Insertamos los triples con provenance en la BBDD
             if (pDiscoverLinkData != null && pDiscoverLinkData.entitiesProperties != null)
@@ -98,7 +112,6 @@ namespace API_DISCOVER.Utility
                                     graphTriples.Add(graph, new List<string>());
                                 }
                                 string bNodeid = "_:" + Guid.NewGuid().ToString();
-                                //TODO UriNode
                                 graphTriples[graph].Add($@"<{t_subject}> <http://www.w3.org/ns/prov#wasUsedBy> {bNodeid} .");
                                 graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .");
                                 graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <{t_property}>.");
@@ -151,13 +164,13 @@ namespace API_DISCOVER.Utility
                                                         {{
                                                             {{{string.Join("}UNION{", graphDeletes[graph])}}}
                                                         }}";
-                    _SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteProvenance, _QueryParam);
+                    _SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteProvenance, _QueryParam, _Username, _Password);
                 }
 
                 //Cargamos los nuevos triples
                 foreach (string graph in graphTriples.Keys)
                 {
-                    SparqlUtility.LoadTriples(graphTriples[graph], _SPARQLEndpoint, _QueryParam, graph);
+                    SparqlUtility.LoadTriples(graphTriples[graph], _SPARQLEndpoint, _QueryParam, graph, _Username, _Password);
                 }
             }
 
@@ -168,14 +181,14 @@ namespace API_DISCOVER.Utility
         /// <summary>
         /// Elimina los triples http://purl.org/roh/mirror/foaf#primaryTopic del RDF a cargar y los triples que tenían cagados en la BBDD
         /// </summary>
-        /// <param name="dataGraph">Grafo con los datos a cargar</param>
+        /// <param name="pDataGraph">Grafo con los datos a cargar</param>
         /// <returns>Lista de grafos afectados</returns>
-        private HashSet<string> RemovePrimaryTopics(ref RohGraph dataGraph)
+        private HashSet<string> RemovePrimaryTopics(ref RohGraph pDataGraph)
         {
             HashSet<string> graphs = new HashSet<string>();
             List<string> mainEntities = new List<string>();
             string query = @"select distinct * where{?s <http://purl.org/roh/mirror/foaf#primaryTopic> ""true""^^<http://www.w3.org/2001/XMLSchema#boolean>}";
-            SparqlResultSet sparqlResultSet = (SparqlResultSet)dataGraph.ExecuteQuery(query.ToString());
+            SparqlResultSet sparqlResultSet = (SparqlResultSet)pDataGraph.ExecuteQuery(query.ToString());
             foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
             {
                 mainEntities.Add(sparqlResult["s"].ToString());
@@ -193,7 +206,7 @@ namespace API_DISCOVER.Utility
             //Eliminamos el triple que marca las entidades principales para que no se inserte en la BBDD
             {
                 TripleStore store = new TripleStore();
-                store.Add(dataGraph);
+                store.Add(pDataGraph);
                 SparqlUpdateParser parser = new SparqlUpdateParser();
                 //Actualizamos los sujetos
                 SparqlUpdateCommandSet updateSubject = parser.ParseFromString(
@@ -211,14 +224,14 @@ namespace API_DISCOVER.Utility
         /// <summary>
         /// Elimina todos los triples de la BBDD cuyo sujeto y predicado estén en el RDF a cargar y estén marcados como monovaluados.
         /// </summary>
-        /// <param name="ontologyGraph">Grafo con la ontología</param>
-        /// <param name="dataInferenceGraph">Grafo con los datos a cargar (con inferencia)</param>
-        private void RemoveMonovaluatedProperties(RohGraph ontologyGraph, RohGraph dataInferenceGraph)
+        /// <param name="pOntologyGraph">Grafo con la ontología</param>
+        /// <param name="pDataInferenceGraph">Grafo con los datos a cargar (con inferencia)</param>
+        private void RemoveMonovaluatedProperties(RohGraph pOntologyGraph, RohGraph pDataInferenceGraph)
         {
             //1º Obtnemos las propiedades monovaluadas de las clases
             Dictionary<string, HashSet<string>> classMonovaluateProperty = new Dictionary<string, HashSet<string>>();
 
-            SparqlResultSet sparqlResultSet2 = (SparqlResultSet)ontologyGraph.ExecuteQuery(
+            SparqlResultSet sparqlResultSet2 = (SparqlResultSet)pOntologyGraph.ExecuteQuery(
                 @"  select distinct ?class ?onProperty
                                 {
                                     ?class a <http://www.w3.org/2002/07/owl#Class>.
@@ -251,7 +264,7 @@ namespace API_DISCOVER.Utility
             Dictionary<string, HashSet<string>> entityMonovaluateProperty = new Dictionary<string, HashSet<string>>();
             foreach (string clas in classMonovaluateProperty.Keys)
             {
-                SparqlResultSet sparqlResultSet3 = (SparqlResultSet)dataInferenceGraph.ExecuteQuery(
+                SparqlResultSet sparqlResultSet3 = (SparqlResultSet)pDataInferenceGraph.ExecuteQuery(
                     @$" select distinct ?entityID ?property
                                     {{
                                         ?entityID a <{clas}>.
@@ -294,7 +307,7 @@ namespace API_DISCOVER.Utility
                                                                 {{
                                                                     {{{string.Join("}UNION{", deletes)}}}
                                                                 }}";
-                _SparqlUtility.SelectData(_SPARQLEndpoint, _Graph, queryDeleteMainEntities, _QueryParam);
+                _SparqlUtility.SelectData(_SPARQLEndpoint, _Graph, queryDeleteMainEntities, _QueryParam, _Username, _Password);
             }
         }
 
@@ -307,7 +320,7 @@ namespace API_DISCOVER.Utility
         {
             //Obtenemos todos los blanknodes a los que apunta la entidad para luego borrarlos
             HashSet<string> bnodeChildrens = new HashSet<string>();
-            SparqlObject sparqlObject = _SparqlUtility.SelectData(_SPARQLEndpoint, _Graph, $"select distinct ?bnode where{{<{pEntity}> ?p ?bnode. FILTER(isblank(?bnode))}}", _QueryParam);
+            SparqlObject sparqlObject = _SparqlUtility.SelectData(_SPARQLEndpoint, _Graph, $"select distinct ?bnode where{{<{pEntity}> ?p ?bnode. FILTER(isblank(?bnode))}}", _QueryParam, _Username, _Password);
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
             {
                 bnodeChildrens.Add(row["bnode"].value);
@@ -315,7 +328,7 @@ namespace API_DISCOVER.Utility
 
             //Obtenemos todos los grafos en los que está la entidad para eliminar sus triples
             HashSet<string> listGraphs = new HashSet<string>();
-            SparqlObject sparqlObjectGraphs = _SparqlUtility.SelectData(_SPARQLEndpoint, "", $"select distinct ?g where{{graph ?g{{?s ?p ?o. FILTER(?s=<{pEntity}> OR ?o=<{pEntity}>)}}}}", _QueryParam);
+            SparqlObject sparqlObjectGraphs = _SparqlUtility.SelectData(_SPARQLEndpoint, "", $"select distinct ?g where{{graph ?g{{?s ?p ?o. FILTER(?s=<{pEntity}> OR ?o=<{pEntity}>)}}}}", _QueryParam, _Username, _Password);
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObjectGraphs.results.bindings)
             {
                 listGraphs.Add(row["g"].value);
@@ -328,13 +341,13 @@ namespace API_DISCOVER.Utility
                                     {{
                                         <{pEntity}> ?p ?o. 
                                     }}";
-                _SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteS, _QueryParam);
+                _SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteS, _QueryParam, _Username, _Password);
                 string queryDeleteO = $@"DELETE {{ ?s ?p <{pEntity}>. }}
                                     WHERE 
                                     {{
                                         ?s ?p <{pEntity}>. 
                                     }}";
-                _SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteO, _QueryParam);
+                _SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteO, _QueryParam, _Username, _Password);
             }
             foreach (string bnode in bnodeChildrens)
             {
@@ -346,10 +359,10 @@ namespace API_DISCOVER.Utility
         /// <summary>
         /// Limpiamos los blanknodes huerfanos, o que no tengan triples (sólo rdftype)
         /// </summary>
-        /// <param name="graphs">Lista de grafos en los que ejecutar</param>
-        private void DeleteOrphanNodes(HashSet<string> graphs)
+        /// <param name="pGraphs">Lista de grafos en los que ejecutar</param>
+        private void DeleteOrphanNodes(HashSet<string> pGraphs)
         {
-            foreach (string graph in graphs)
+            foreach (string graph in pGraphs)
             {
                 bool existeNodosHuerfanos = true;
                 bool existeNodosSinDatos = true;
@@ -366,7 +379,7 @@ namespace API_DISCOVER.Utility
                                             MINUS{{?x ?y ?s. FILTER(isblank(?s))}}
                                             MINUS{{?s ?p ?o. FILTER(!isblank(?s))}}
                                         }}";
-                    if (_SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryASKOrphan, _QueryParam).boolean)
+                    if (_SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryASKOrphan, _QueryParam, _Username, _Password).boolean)
                     {
                         existeNodosHuerfanos = true;
                         string deleteOrphanNodes = $@"DELETE {{ ?s ?p ?o. }}
@@ -376,7 +389,7 @@ namespace API_DISCOVER.Utility
                                             MINUS{{?x ?y ?s. FILTER(isblank(?s))}}
                                             MINUS{{?s ?p ?o. FILTER(!isblank(?s))}}
                                         }}";
-                        _SparqlUtility.SelectData(_SPARQLEndpoint, graph, deleteOrphanNodes, _QueryParam);
+                        _SparqlUtility.SelectData(_SPARQLEndpoint, graph, deleteOrphanNodes, _QueryParam, _Username, _Password);
                     }
 
                     //Nodos vacíos
@@ -391,7 +404,7 @@ namespace API_DISCOVER.Utility
                                                 FILTER(?p2 !=<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>)
                                             }}
                                         }}";
-                    if (_SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryASKEmpty, _QueryParam).boolean)
+                    if (_SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryASKEmpty, _QueryParam, _Username, _Password).boolean)
                     {
                         existeNodosSinDatos = true;
                         string deleteEmptyNodes = $@"DELETE {{ ?s ?p ?o. }}
@@ -405,10 +418,120 @@ namespace API_DISCOVER.Utility
                                                 FILTER(?p2 !=<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>)
                                             }}
                                         }}";
-                        _SparqlUtility.SelectData(_SPARQLEndpoint, graph, deleteEmptyNodes, _QueryParam);
+                        _SparqlUtility.SelectData(_SPARQLEndpoint, graph, deleteEmptyNodes, _QueryParam, _Username, _Password);
                     }
                 }
             }
         }
+
+        /// <summary>
+        /// Agrega los SameAs hacia unidata para las entidades que no lo tengan creado
+        /// </summary>
+        /// <param name="pGraph">Grafo</param>
+        /// <param name="pUnidataDomain">Uri para transformar las URLs de las entidades antes de cargar en Unidata</param>
+        /// <param name="pUnidataUriTransform">Uri para transformar las URLs de las entidades antes de cargar en Unidata</param>
+        /// <returns></returns>
+        public static RohGraph CreateUnidataSameAs(RohGraph pGraph, string pUnidataDomain, string pUnidataUriTransform)
+        {
+            HashSet<string> entities = new HashSet<string>();
+            SparqlResultSet sparqlResultSet = (SparqlResultSet)pGraph.ExecuteQuery(@"select ?s where{?s a ?rdftype. FILTER(!isBlank(?rdftype)) FILTER(!isBlank(?s))}");
+            foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
+            {
+                entities.Add(sparqlResult["s"].ToString());
+            }
+
+            RohGraph graph = pGraph.Clone();
+            foreach (string entity in entities)
+            {
+                //Si no tiene un sameAs apuntando a Unidata lo creamos
+                if (graph.Triples.ToList().Where(x => x.Subject.ToString() == entity && x.Predicate.ToString() == "http://www.w3.org/2002/07/owl#sameAs" && x.Object is UriNode && x.Object.ToString().StartsWith(pUnidataDomain)).Count() == 0)
+                {
+                    IUriNode t_subject = graph.CreateUriNode(UriFactory.Create(entity));
+                    IUriNode t_predicate = graph.CreateUriNode(UriFactory.Create("http://www.w3.org/2002/07/owl#sameAs"));
+                    Uri oldUri = new Uri(entity);
+                    string uriUnidata = entity.Replace(oldUri.Scheme + "://" + oldUri.Host, pUnidataUriTransform);
+                    IUriNode t_object = graph.CreateUriNode(UriFactory.Create(uriUnidata));
+                    graph.Assert(new Triple(t_subject, t_predicate, t_object));
+                }
+            }
+            return graph;
+        }
+
+        /// <summary>
+        /// Prepara el grafo para su carga en Unidata, para ello coge las URIs de Unidata del SameAs y la aplica a los sujetos y los antiguos sujetos se agregan al SameAs
+        /// </summary>
+        /// <param name="pGraph">Grafo</param>
+        /// <param name="pUnidataDomain">Dominio de Unidata</param>
+        /// <param name="pUnidataUriTransform">Uri para transformar las URLs de las entidades antes de cargar en Unidata en caso de que no exisa la URI de Unidata</param>
+        /// <returns></returns>
+        public static RohGraph TransformUrisToUnidata(RohGraph pGraph, string pUnidataDomain, string pUnidataUriTransform)
+        {
+            HashSet<string> entities = new HashSet<string>();
+            SparqlResultSet sparqlResultSet = (SparqlResultSet)pGraph.ExecuteQuery(@"select ?s where{?s a ?rdftype. FILTER(!isBlank(?rdftype)) FILTER(!isBlank(?s))}");
+            foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
+            {
+                entities.Add(sparqlResult["s"].ToString());
+            }
+
+            RohGraph unidataGraph = pGraph.Clone();
+            foreach (string entity in entities)
+            {
+                Uri oldUri = new Uri(entity);
+                string uriUnidata = entity.Replace(oldUri.Scheme + "://" + oldUri.Host, pUnidataUriTransform);
+                SparqlResultSet sparqlResultSetSameAs = (SparqlResultSet)unidataGraph.ExecuteQuery(@"select ?sameAs where{?s <http://www.w3.org/2002/07/owl#sameAs> ?sameAs. FILTER(?s=<"+entity+">)}");
+                foreach (SparqlResult sparqlResult in sparqlResultSetSameAs.Results)
+                {
+                    if(sparqlResult["sameAs"].ToString().StartsWith(pUnidataDomain))
+                    {
+                        uriUnidata = sparqlResult["sameAs"].ToString();
+                    }
+                }
+
+                
+                TripleStore store = new TripleStore();
+                store.Add(unidataGraph);
+                LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
+                SparqlUpdateParser parser = new SparqlUpdateParser();
+
+                #region 1º Cambiamos las URLs por las URLs de Unidata
+                //Actualizamos los sujetos
+                SparqlUpdateCommandSet updateSubject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                                                                                INSERT{<" + uriUnidata + @"> ?p ?o.}
+                                                                                WHERE 
+                                                                                {
+                                                                                    ?s ?p ?o.   FILTER(?s = <" + entity + @">)
+                                                                                }");
+                //Actualizamos los objetos
+                SparqlUpdateCommandSet updateObject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                                                                                INSERT{?s ?p <" + uriUnidata + @">.}
+                                                                                WHERE 
+                                                                                {
+                                                                                    ?s ?p ?o.   FILTER(?o = <" + entity + @">)
+                                                                                }");
+                processor.ProcessCommandSet(updateSubject);
+                processor.ProcessCommandSet(updateObject);
+                #endregion
+
+                #region 2º Añadimos el sujeto actual como sameAs
+                IUriNode t_subject = unidataGraph.CreateUriNode(UriFactory.Create(uriUnidata));
+                IUriNode t_predicate = unidataGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/2002/07/owl#sameAs"));
+                IUriNode t_object = unidataGraph.CreateUriNode(UriFactory.Create(entity));
+                unidataGraph.Assert(new Triple(t_subject, t_predicate, t_object));
+                #endregion
+
+                #region 3º Eliminamos el SameAs de Unidata
+                //Eliminamos SameAs de Unidata
+                SparqlUpdateCommandSet deleteUnidataSameAs = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                                                                                WHERE 
+                                                                                {
+                                                                                    ?s ?p ?o.   FILTER( ?p =<http://www.w3.org/2002/07/owl#sameAs>) FILTER( ?o = <" + uriUnidata + @">)
+                                                                                }");
+
+                processor.ProcessCommandSet(deleteUnidataSameAs);
+                #endregion
+            }
+            return unidataGraph;
+        }
+
     }
 }
