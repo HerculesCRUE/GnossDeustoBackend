@@ -4,10 +4,10 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|LINKED DATA SERVER readme| 
 |Descripción|Manual del servicio LINKED DATA SERVER|
-|Versión|0.4|
+|Versión|0.5|
 |Módulo|API DISCOVER|
 |Tipo|Manual|
-|Cambios de la Versión|Presentación y motivación del desarrollo de Linked Data Server|
+|Cambios de la Versión|Cambios en la configuración|
 
 ## LINKED DATA SERVER de ASIO
 
@@ -73,8 +73,6 @@ http://155.54.239.204:8890/sparql
 		"LogPath": "",
 		"NameTitle": "Hércules",
 		"ConstrainedByUrl": "",
-		"PropsTitle": "http://purl.org/roh#title|http://purl.org/roh/mirror/foaf#name",
-		"PropsTransform": "http://purl.org/roh/mirror/vivo#researcherId|http://www.researcherid.com/rid/{value};http://purl.org/roh#ORCID|https://orcid.org/{value};http://purl.org/roh/mirror/vivo#scopusId|https://www.scopus.com/authid/detail.uri?authorId={value};http://purl.org/roh#researcherDBLP|https://dblp.org/pid/{value}.html;http://purl.org/roh#roDBLP|https://dblp.org/rec/{value}.html;http://purl.org/roh/mirror/bibo#doi|https://doi.org/{value};http://purl.org/roh#roPubmed|https://pubmed.ncbi.nlm.nih.gov/{value}/;",		
 		"Authority": "http://localhost:56306/connect/token",
 		"GrantType": "client_credentials",
 		"Scope": "apiCarga",
@@ -94,8 +92,6 @@ Las opciones de configuración son:
  - Sparql.QueryParam: Parámetro para la query en el Endpoint Sparql
  - NameTitle: Nombre para mostrar en el título de la página tras el nombre de la entidad
  - ConstrainedByUrl: Url en la que se encuentran las restricciones ConstrainedBy
- - PropsTitle: Propiedades de la ontología para utilizar como título de las entidades en la presentación de la web. Generalmente http://purl.org/roh/mirror/foaf#name para las personas y http://purl.org/roh#title para el resto de entidades
- - PropsTransform: Propiedades cuya presentación en la web se transforma. Se visualizarán transformadas como enlaces externos según lo especificado en esta configuración. Por ejemplo: 'http://purl.org/roh#ORCID|https://orcid.org/{value}' indica que el valor de la propiedad 'http://purl.org/roh#ORCID' se visualizará como un hipervínculo en la web: https://orcid.org/{valor_de_la_propiedad}
  - Authority: Endpoint para la llamada de obtención del token
  - GrantType: Tipo de concesión de Oauth
  - Scope: Limitación de acceso al api de carga
