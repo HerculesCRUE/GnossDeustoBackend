@@ -1,6 +1,6 @@
 ![](..//Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 26/11/2020                                                   |
+| Fecha         | 29/01/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|API DISCOVER readme| 
 |Descripción|Manual del servicio API DISCOVER|
