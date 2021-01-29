@@ -225,7 +225,7 @@ namespace Linked_Data_Server.Controllers
             Dictionary<string, List<Dictionary<string, SparqlObject.Data>>> sparqlObjectDictionary = new Dictionary<string, List<Dictionary<string, SparqlObject.Data>>>();
 
             string consulta = $@"
-                    select ?predicado ?objeto ?fecha ?nameOrg where
+                    select distinct ?predicado ?objeto ?fecha ?nameOrg where
                     {{
                         <{pEntity}> <http://www.w3.org/ns/prov#wasUsedBy> ?action.
                         ?action a <http://www.w3.org/ns/prov#Activity>.
