@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Linked_Data_Server.Models.Entities
+namespace Linked_Data_Server.Models.Services
 {
     /// <summary>
     /// Configuración para la presentación de las fichas de Linked_Data_Server
@@ -125,6 +122,32 @@ namespace Linked_Data_Server.Models.Entities
         /// Lista de entidades excluidas para pintar las entidades relacionadas
         /// </summary>
         public List<string> ExcludeRelatedEntity { get; set; }
+
+        public List<string> PropsTitle { get; set; }
+
+        /// <summary>
+        /// Propiedades que transformar
+        /// </summary>
+        public List<PropertyTransform> PropsTransform { get; set; }
+
+        public class PropertyTransform
+        {
+            public PropertyTransform(string pProperty, string pTransform)
+            {
+                property = pProperty;
+                transform = pTransform;
+            }
+
+            /// <summary>
+            /// Propiedad que transformar
+            /// </summary>
+            public string property { get; set; }
+
+            /// <summary>
+            /// Propiedad en la que transformar
+            /// </summary>
+            public string transform { get; set; }
+        }
     }
 
 }

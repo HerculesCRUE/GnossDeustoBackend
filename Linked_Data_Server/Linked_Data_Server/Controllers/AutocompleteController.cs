@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace Linked_Data_Server.Controllers
 {
@@ -24,6 +25,7 @@ namespace Linked_Data_Server.Controllers
     public class AutocompleteController : Controller
     {
         private readonly static ConfigService mConfigService = new ConfigService();
+        private readonly static Config_Linked_Data_Server mLinked_Data_Server_Config = LoadLinked_Data_Server_Config();
         private readonly ILogger<HomeController> _logger;
 
         public AutocompleteController(ILogger<HomeController> logger)
@@ -38,7 +40,7 @@ namespace Linked_Data_Server.Controllers
             string consulta = @$"   select distinct ?s ?o where 
                                     {{
                                         ?s ?p ?o.
-                                        FILTER(?p in (<{string.Join(">,<", mConfigService.GetPropsTitle())}>) AND (lcase(?o) like'{q.ToLower()}*' OR lcase(?o) like'* {q.ToLower()}*'))
+                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>) AND (lcase(?o) like'{q.ToLower()}*' OR lcase(?o) like'* {q.ToLower()}*'))
                                     }}limit 10";
             SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
@@ -46,6 +48,15 @@ namespace Linked_Data_Server.Controllers
                 response.Add(new KeyValuePair<string, string>(row["o"].value, row["s"].value));
             }
             return Json(response);
+        }
+
+        /// <summary>
+        /// Cargamos las configuraciones 
+        /// </summary>
+        /// <returns></returns>
+        private static Config_Linked_Data_Server LoadLinked_Data_Server_Config()
+        {
+            return JsonConvert.DeserializeObject<Config_Linked_Data_Server>(System.IO.File.ReadAllText("Config/Linked_Data_Server_Config.json"));
         }
     }
 }

@@ -35,5 +35,37 @@
         ]
       }
     ]
-  }
+  },
+
+  "PropsTitle": [ "http://purl.org/roh#title", "http://purl.org/roh/mirror/foaf#name" ],
+  "PropsTransform": [
+    {
+      "property": "http://purl.org/roh/mirror/vivo#researcherId",
+      "transform": "http://www.researcherid.com/rid/{value}"
+    },
+    {
+      "property": "http://purl.org/roh#ORCID",
+      "transform": "https://orcid.org/{value}"
+    },
+    {
+      "property": "http://purl.org/roh/mirror/vivo#scopusId",
+      "transform": "https://www.scopus.com/authid/detail.uri?authorId={value}"
+    },
+    {
+      "property": "http://purl.org/roh#researcherDBLP",
+      "transform": "https://dblp.org/pid/{value}.html"
+    },
+    {
+      "property": "http://purl.org/roh#roDBLP",
+      "transform": "https://dblp.org/rec/{value}.html"
+    },
+    {
+      "property": "http://purl.org/roh/mirror/bibo#doi",
+      "transform": "https://doi.org/{value}"
+    },
+    {
+      "property": "http://purl.org/roh#roPubmed",
+      "transform": "https://pubmed.ncbi.nlm.nih.gov/{value}/"
+    }
+  ]
 }

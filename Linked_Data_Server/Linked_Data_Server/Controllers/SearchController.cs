@@ -2,6 +2,7 @@
 using Linked_Data_Server.Models.Services;
 using Linked_Data_Server.Utility;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace Linked_Data_Server.Controllers
     public class SearchController : Controller
     {
         private readonly static ConfigService mConfigService = new ConfigService();
+        private readonly static Config_Linked_Data_Server mLinked_Data_Server_Config = LoadLinked_Data_Server_Config();
+
         [HttpGet]
         public IActionResult Index(string q, int pagina)
         {
@@ -27,7 +30,7 @@ namespace Linked_Data_Server.Controllers
                                     {{
                                         ?s ?p ?o.
                                         ?s a ?rdfType.
-                                        FILTER(?p in (<{string.Join(">,<", mConfigService.GetPropsTitle())}>) AND (lcase(?o) like'{q.ToLower()}*' OR lcase(?o) like'* {q.ToLower()}*'))
+                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>) AND (lcase(?o) like'{q.ToLower()}*' OR lcase(?o) like'* {q.ToLower()}*'))
                                     }}OFFSET {(pagina-1)*10} limit 11";
 
             SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
@@ -50,5 +53,15 @@ namespace Linked_Data_Server.Controllers
             ViewData["Title"] = "Resultados para '" + q+"'";
             return View(searchModelTemplate);
         }
+
+        /// <summary>
+        /// Cargamos las configuraciones 
+        /// </summary>
+        /// <returns></returns>
+        private static Config_Linked_Data_Server LoadLinked_Data_Server_Config()
+        {
+            return JsonConvert.DeserializeObject<Config_Linked_Data_Server>(System.IO.File.ReadAllText("Config/Linked_Data_Server_Config.json"));
+        }
     }
+
 }
