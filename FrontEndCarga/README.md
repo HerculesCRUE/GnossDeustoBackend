@@ -73,7 +73,8 @@ En esta carpeta está disponible el [Manual de Usuario del FrontEnd](https://git
 		"ClientIdOAIPMH": "OAIPMH",
 		"ClientSecretOAIPMH": "secretOAIPMH",
 		"ClientSecret": "master",
-		"Proxy": "/carga-web"
+		"Proxy": "/carga-web",
+		"UnidataDomain": "http://graph.unidata.es"
 	}
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
@@ -102,6 +103,7 @@ En esta carpeta está disponible el [Manual de Usuario del FrontEnd](https://git
  - ClientSecretOAIPMH: "clave" de acceso del cliente de OAIPMH
  - ClientSecret: "clave" de acceso del cliente
  - Proxy: directorio virtual que se ha configurado para el proxy inverso, en caso de que no se haya configurado dejar vacío.
+ - UnidataDomain: Dominio del Linked Data server de Unidata
  
 Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/ApiCargaWebInterface/appsettings.json
 
