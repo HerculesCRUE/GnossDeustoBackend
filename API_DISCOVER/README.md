@@ -4,7 +4,7 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|API DISCOVER readme| 
 |Descripción|Manual del servicio API DISCOVER|
-|Versión|0.2|
+|Versión|0.3|
 |Módulo|API DISCOVER|
 |Tipo|Manual|
 |Cambios de la Versión|Modificación appsettings.json|
@@ -171,7 +171,16 @@ A continuación se muestra un fragmento del fichero con la configuración del de
 		"Sparql": {
 			"Graph": "http://HerculesDemo.com",
 			"Endpoint": "http://155.54.239.204:8890/sparql",
-			"QueryParam": "query"
+			"QueryParam": "query",
+			"Username": "",
+    			"Password": ""
+		},
+		"SparqlUnidata": {
+			"Graph": "http://HerculesDemo.com",
+			"Endpoint": "http://155.54.239.204:8890/sparql",
+			"QueryParam": "query",
+			"Username": "",
+    			"Password": ""
 		},
 		"RabbitMQ": {
 			"usernameRabbitMq": "user",
@@ -195,7 +204,11 @@ A continuación se muestra un fragmento del fichero con la configuración del de
 		"ScopeCron": "apiCron",
 		"ConfigUrlCron": "http://herc-as-front-desa.atica.um.es/cron-config/",
 		"ClientId": "Discover",
-		"ClientSecret": "secretDiscover" 
+		"ClientSecret": "secretDiscover",
+		"UnidataDomain": "http://graph.unidata.es",
+  		"UnidataUriTransform": "http://graph.unidata.es/um",  
+  		"LaunchDiscoverLoadedEntitiesCronExpression": "0 0 8 ? * MON",//Los lunes a las 08:00
+  		"SleepSecondsAfterProcessEntityDiscoverLoadedEntities": "5"
 	}
 		 
 		 
@@ -206,6 +219,13 @@ A continuación se muestra un fragmento del fichero con la configuración del de
  - Sparql.Graph: Grafo en el que se van a almacenar los triples
  - Sparql.Endpoint: URL del Endpoint Sparql
  - Sparql.QueryParam: Parámetro para la query en el Endpoint Sparql
+ - Sparql.Username: Usuario para el Endpoint Sparql
+ - Sparql.Password: Password para el Endpoint Sparql 
+ - SparqlUnidata.Graph: Grafo en el que se van a almacenar los triples (en Unidata)
+ - SparqlUnidata.Endpoint: URL del Endpoint Sparql (en Unidata)
+ - SparqlUnidata.QueryParam: Parámetro para la query en el Endpoint Sparql (en Unidata)
+ - SparqlUnidata.Username: Usuario para el Endpoint Sparql
+ - SparqlUnidata.Password: Password para el Endpoint Sparql 
  - RabbitMQ.usernameRabbitMq: usuario para acceder a Rabbit
  - RabbitMQ.passwordRabbitMq: contraseña del usuario para acceder a Rabbit
  - RabbitMQ.hostnameRabbitMq: host de Rabbit
@@ -227,6 +247,10 @@ A continuación se muestra un fragmento del fichero con la configuración del de
  - ConfigUrlCron: URL donde está lanzada la aplicación CRON
  - ClientId: Id de cliente del api
  - ClientSecret: "clave" de acceso del api
+ - UnidataDomain: Dominio de Unidata
+ - UnidataUriTransform: Transformación del dominio actual para cargar los triples en Unidata 
+ - LaunchDiscoverLoadedEntitiesCronExpression: Expresión Cron para representar cuando debe lanzarse el proceso de descubrimiento de enlaces
+ - SleepSecondsAfterProcessEntityDiscoverLoadedEntities": Segundos para 'dormir' tras procesar una entidad por el proceso de descubrimiento de enlaces
   
 
 # Comprobaciones y pruebas
