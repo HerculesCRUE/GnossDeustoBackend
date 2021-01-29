@@ -20,9 +20,6 @@ namespace Linked_Data_Server.Models.Services
         private string SparqlGraph { get; set; }
         private string SparqlEndpoint { get; set; }
         private string SparqlQueryParam { get; set; }
-        private HashSet<string> PropsTitle { get; set; }
-
-        private Dictionary<string,string> PropsTransform { get; set; }
         private string UrlHome { get; set; }
 
         ///<summary>
@@ -154,64 +151,6 @@ namespace Linked_Data_Server.Models.Services
             return SparqlQueryParam;
         }
 
-        ///<summary>
-        ///Obtiene el parametro de PropsTitle
-        ///</summary>
-        public HashSet<string> GetPropsTitle()
-        {
-            if (PropsTitle==null)
-            {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("PropsTitle"))
-                {
-                    PropsTitle = new HashSet<string>(( environmentVariables["PropsTitle"] as string).Split('|'));
-                }
-                else
-                {
-                    PropsTitle = new HashSet<string>(Configuration["PropsTitle"].Split('|'));
-                }
-
-            }
-            return PropsTitle;
-        }
-
-        ///<summary>
-        ///Obtiene el parametro de PropsTransform configurado en Sparql:QueryParam del fichero appsettings.json
-        ///</summary>
-        public Dictionary<string,string> GetPropsTransform()
-        {
-            if (PropsTransform == null)
-            {
-                
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                string propsTransformString;
-                if (environmentVariables.Contains("PropsTransform"))
-                {
-                    propsTransformString = environmentVariables["PropsTransform"] as string;
-                }
-                else
-                {
-                    propsTransformString = Configuration["PropsTransform"];
-                }
-                PropsTransform = new Dictionary<string, string>();
-                foreach(string prop in propsTransformString.Split(new string[] { ";"},StringSplitOptions.RemoveEmptyEntries))
-                {
-                    string[] propin = prop.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
-                    PropsTransform[propin[0]] = propin[1];
-                }
-            }
-            return PropsTransform;
-        }
 
         ///<summary>
         ///Obtiene el título:UrlHome del fichero appsettings.json

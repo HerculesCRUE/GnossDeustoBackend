@@ -158,7 +158,7 @@ namespace Linked_Data_Server.Controllers
                     List<LinkedDataRdfViewModel> modelEntities = new List<LinkedDataRdfViewModel>();
                     LinkedDataRdfViewModel entidad = createLinkedDataRdfViewModel(url, dataGraph, sparqlObjectDictionaryGraphs, new List<string>(), allEntities, communNamePropierties);
                     modelEntities.Add(entidad);
-                    KeyValuePair<string, List<string>> titulo = entidad.stringPropertiesEntity.FirstOrDefault(x => mConfigService.GetPropsTitle().Contains(x.Key));
+                    KeyValuePair<string, List<string>> titulo = entidad.stringPropertiesEntity.FirstOrDefault(x => mLinked_Data_Server_Config.PropsTitle.Contains(x.Key));
                     ViewData["Title"] = "About: " + url;
                     if (titulo.Key != null)
                     {
@@ -176,7 +176,7 @@ namespace Linked_Data_Server.Controllers
 
                     EntityModelTemplate entityModel = new EntityModelTemplate();
                     entityModel.linkedDataRDF = modelEntities;
-                    entityModel.propsTransform = mConfigService.GetPropsTransform();
+                    entityModel.propsTransform = mLinked_Data_Server_Config.PropsTransform;
                     entityModel.tables = dataTables;
                     entityModel.arborGraphs = dataArborGrahs;
                     return View(entityModel);
@@ -272,7 +272,7 @@ namespace Linked_Data_Server.Controllers
                                     ?s ?a ?rdfType . 
                                     FILTER(
                                         (
-                                            ?p in (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>,<{string.Join(">,<", mConfigService.GetPropsTitle())}>) 
+                                            ?p in (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>,<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>) 
                                             OR
                                             (?p=?p2 AND ?o =?o2)
                                         )                                          
@@ -450,7 +450,7 @@ namespace Linked_Data_Server.Controllers
             //Ordenamos 'stringPropertiesEntity', primero el rdf:type, después el título y después el resto
             HashSet<string> propsOrder = new HashSet<string>();
             propsOrder.Add("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
-            propsOrder.UnionWith(mConfigService.GetPropsTitle());
+            propsOrder.UnionWith(mLinked_Data_Server_Config.PropsTitle);
             foreach (string propOrder in propsOrder)
             {
                 if (stringPropertiesEntityAux.ContainsKey(propOrder))
@@ -589,7 +589,11 @@ namespace Linked_Data_Server.Controllers
                         SparqlResultSet result = (SparqlResultSet)pDataInferenceGraph.ExecuteQuery("select * where {<" + pEntity + "> ?p <" + arborGraphRdfType.rdfType + "> }");
                         if (result.Count() > 0)
                         {
-                            HashSet<string> propsTitle = mConfigService.GetPropsTitle();
+                            HashSet<string> propsTitle = new HashSet<string>();
+                            foreach(var propTitle in mLinked_Data_Server_Config.PropsTitle)
+                            {
+                                propsTitle.Add(propTitle);
+                            }
                             //Obtenemos el nombre a mostrar
                             SparqlResultSet resultName = (SparqlResultSet)pDataInferenceGraph.ExecuteQuery("select ?o where {<" + pEntity + "> ?propTitle ?o. FILTER(?propTitle in(<" + string.Join(">,<", propsTitle) + ">)) }");
                             if (resultName.Results.Count > 0)
@@ -709,7 +713,7 @@ namespace Linked_Data_Server.Controllers
                         }
                     }
 
-                    string consultaNamesRdfType = "select distinct ?s ?name ?rdftype where {?s a ?rdftype.?s ?propTitle ?name. FILTER(?s in (<" + string.Join(">,<", nodesName.Keys) + ">)) Filter(?propTitle in (<" + string.Join(">,<", mConfigService.GetPropsTitle()) + ">))}";
+                    string consultaNamesRdfType = "select distinct ?s ?name ?rdftype where {?s a ?rdftype.?s ?propTitle ?name. FILTER(?s in (<" + string.Join(">,<", nodesName.Keys) + ">)) Filter(?propTitle in (<" + string.Join(">,<", mLinked_Data_Server_Config.PropsTitle) + ">))}";
                     SparqlObject sparqlObjecDataNamesRdfType = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consultaNamesRdfType, mConfigService.GetSparqlQueryParam());
                     foreach (var result in sparqlObjecDataNamesRdfType.results.bindings)
                     {
