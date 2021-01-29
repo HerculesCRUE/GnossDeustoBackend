@@ -12,22 +12,43 @@ namespace Linked_Data_Server.Controllers
     public class SearchController : Controller
     {
         private readonly static ConfigService mConfigService = new ConfigService();
-        [HttpPost]
-        public IActionResult Index(string q)
+        [HttpGet]
+        public IActionResult Index(string q, int pagina)
         {
-            List<KeyValuePair<string, string>> response = new List<KeyValuePair<string, string>>();
-            string consulta = @$"   select distinct ?s ?o where 
+            SearchModelTemplate searchModelTemplate = new SearchModelTemplate();
+            searchModelTemplate.entidades = new Dictionary<string, SearchModelTemplate.Entidad>();
+
+            if(pagina == 0)
+            {
+                pagina = 1;
+            }
+
+            string consulta = @$"   select distinct ?s ?o ?rdfType where 
                                     {{
                                         ?s ?p ?o.
+                                        ?s a ?rdfType.
                                         FILTER(?p in (<{string.Join(">,<", mConfigService.GetPropsTitle())}>) AND (lcase(?o) like'{q.ToLower()}*' OR lcase(?o) like'* {q.ToLower()}*'))
-                                    }}limit 10";
+                                    }}OFFSET {(pagina-1)*10} limit 11";
+
             SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
             {
-                response.Add(new KeyValuePair<string, string>(row["o"].value, row["s"].value));
+
+                searchModelTemplate.entidades.Add(row["s"].value, new SearchModelTemplate.Entidad(row["o"].value, row["rdfType"].value));
             }
-            ViewData["Title"] = "Buscador de " + q;
-            return View(response);
+
+            if (pagina > 1)
+            {
+                searchModelTemplate.paginaAnterior = pagina - 1;
+            }
+            if (sparqlObject.results.bindings.Count()==11)
+            {
+                searchModelTemplate.paginaSiguiente = pagina + 1;
+                searchModelTemplate.entidades.Remove(searchModelTemplate.entidades.Last().Key);
+            }
+            
+            ViewData["Title"] = "Resultados para '" + q+"'";
+            return View(searchModelTemplate);
         }
     }
 }

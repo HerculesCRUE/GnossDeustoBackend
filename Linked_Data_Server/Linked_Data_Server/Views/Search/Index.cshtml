@@ -1,4 +1,4 @@
-﻿@model List<KeyValuePair<string, string>>
+﻿@model Linked_Data_Server.Models.Entities.SearchModelTemplate
 
 @{
     ViewData["BodyClass"] = "Buscador";
@@ -7,18 +7,26 @@
     <h1>@ViewData["Title"]</h1>
     <table>
         <tr>
-            <th>Id</th>
             <th>Nombre</th>
+            <th>rdfType</th>
         </tr>
 
-        @foreach (var entity in Model)
+        @foreach (var entity in Model.entidades)
         {
             <tr>
-                <td><a href="@entity.Value" target="_blank">@entity.Value</a></td>
-                <td>@entity.Key</td>
+                <td><a href="@entity.Key" target="_blank">@entity.Value.name</a></td>
+                <td>@entity.Value.rdfType</td>
             </tr>
         }
 
 
     </table>
+    @if (Model.paginaAnterior != 0)
+    {
+        <a class="btn"href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@Model.paginaAnterior">Anterior</a>
+    }
+    @if (Model.paginaSiguiente != 0)
+    {
+        <a class="btn" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@Model.paginaSiguiente">Siguiente</a>
+    }
 </div>

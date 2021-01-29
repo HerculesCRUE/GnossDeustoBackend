@@ -61,7 +61,7 @@
                 </button>
                 <a class="navbar-brand" href="@ViewBag.UrlHome">Hércules</a>
                 <div class="autocomplete ui-widget">
-                    <form asp-controller="Search" asp-action="Index">
+                    <form asp-controller="Search" asp-action="Index" method="get">
 
                         <label for="autocomplete">Search: </label>
                         <input id="autocomplete" class="ui-autocomplete-input" autocomplete="off" name="q">

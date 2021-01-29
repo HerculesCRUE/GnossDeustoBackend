@@ -2,6 +2,10 @@ canvas.linkable {
     cursor: pointer;
 }
 
+.btn{
+    margin-right:5px
+}
+
 span.linkext {
     display: inline-block;
     content: "";
