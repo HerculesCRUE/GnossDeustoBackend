@@ -14,7 +14,7 @@
         @foreach (var entity in Model.entidades)
         {
             <tr>
-                <td><a href="@entity.Key" target="_blank">@entity.Value.name</a></td>
+                <td><a href="@entity.Key" >@entity.Value.name</a></td>
                 <td>@entity.Value.rdfType</td>
             </tr>
         }
