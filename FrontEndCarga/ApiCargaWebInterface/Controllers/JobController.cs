@@ -24,17 +24,19 @@ namespace ApiCargaWebInterface.Controllers
     /// Controlador para gestionar las llamadas relacionandas con el Api cron
     /// </summary>
     public class JobController : Controller
-    {       
+    {
         readonly CallCronApiService _serviceApi;
+        readonly ConfigUnidataPrefix _unidataPrefix;
         readonly DiscoverItemBDService _discoverItemService;
         readonly ProcessDiscoverStateJobBDService _processDiscoverStateJobBDService;
         readonly ICallEtlService _callEDtlPublishService;
-        public JobController(DiscoverItemBDService iIDiscoverItemService, ProcessDiscoverStateJobBDService iProcessDiscoverStateJobBDService, CallCronApiService serviceApi, ICallEtlService callEDtlPublishService)
+        public JobController(DiscoverItemBDService iIDiscoverItemService, ProcessDiscoverStateJobBDService iProcessDiscoverStateJobBDService, CallCronApiService serviceApi, ICallEtlService callEDtlPublishService, ConfigUnidataPrefix unidataPrefix)
         {
             _serviceApi = serviceApi;
             _discoverItemService = iIDiscoverItemService;
             _processDiscoverStateJobBDService = iProcessDiscoverStateJobBDService;
             _callEDtlPublishService = callEDtlPublishService;
+            _unidataPrefix = unidataPrefix;
         }
         /// <summary>
         /// Devuelve una página principal con una lista de tareas vacía
@@ -76,7 +78,7 @@ namespace ApiCargaWebInterface.Controllers
         {
             var job = _serviceApi.GetJob(id);
             ProcessDiscoverStateJob stateJob = _processDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(job.Id);
-            if(stateJob!=null)
+            if (stateJob != null)
             {
                 job.DiscoverState = stateJob.State;
             }
@@ -84,8 +86,8 @@ namespace ApiCargaWebInterface.Controllers
             {
                 job.IdRepository = repository_id;
             }
-            job.DiscoverStates= _discoverItemService.GetDiscoverItemsStatesByJob(id);
-            var discoverItemsErrorMini= _discoverItemService.GetDiscoverItemsErrorByJobMini(id);
+            job.DiscoverStates = _discoverItemService.GetDiscoverItemsStatesByJob(id);
+            var discoverItemsErrorMini = _discoverItemService.GetDiscoverItemsErrorByJobMini(id);
             job.DiscoverItemsMini = discoverItemsErrorMini;
             return View(job);
         }
@@ -243,52 +245,64 @@ namespace ApiCargaWebInterface.Controllers
             {
                 if (!string.IsNullOrEmpty(DissambiguationProblemsResolve[uriOriginal]))
                 {
-                    SparqlUpdateParser parser = new SparqlUpdateParser();
-                    //Actualizamos los sujetos
-                    SparqlUpdateCommandSet updateSubject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                    //En caso de que la resolución sea una URI de Unidata añadimos el SameAs                
+                    if (!string.IsNullOrEmpty(_unidataPrefix.GetUnidataDomain()) && DissambiguationProblemsResolve[uriOriginal].StartsWith(_unidataPrefix.GetUnidataDomain()))
+                    {
+                        IUriNode t_subject = dataGraph.CreateUriNode(UriFactory.Create(uriOriginal));
+                        IUriNode t_predicate = dataGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/2002/07/owl#sameAs"));
+                        IUriNode t_object = dataGraph.CreateUriNode(UriFactory.Create(DissambiguationProblemsResolve[uriOriginal]));
+                        dataGraph.Assert(new Triple(t_subject, t_predicate, t_object));
+                    }
+                    else
+                    {
+                        //En caso de que la resolución NO sea una URI de Unidata modificamos las URLs
+                        SparqlUpdateParser parser = new SparqlUpdateParser();
+                        //Actualizamos los sujetos
+                        SparqlUpdateCommandSet updateSubject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
                                                                     INSERT{<" + DissambiguationProblemsResolve[uriOriginal] + @"> ?p ?o.}
                                                                     WHERE 
                                                                     {
                                                                         ?s ?p ?o.   FILTER(?s = <" + uriOriginal + @">)
                                                                     }");
-                    //Actualizamos los objetos
-                    SparqlUpdateCommandSet updateObject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                        //Actualizamos los objetos
+                        SparqlUpdateCommandSet updateObject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
                                                                     INSERT{?s ?p <" + DissambiguationProblemsResolve[uriOriginal] + @">.}
                                                                     WHERE 
                                                                     {
                                                                         ?s ?p ?o.   FILTER(?o = <" + uriOriginal + @">)
                                                                     }");
-                    LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
-                    processor.ProcessCommandSet(updateSubject);
-                    processor.ProcessCommandSet(updateObject);
+                        LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
+                        processor.ProcessCommandSet(updateSubject);
+                        processor.ProcessCommandSet(updateObject);
+                    }
                 }
             }
-            
+
             System.IO.StringWriter sw = new System.IO.StringWriter();
             RdfXmlWriter rdfXmlWriter = new RdfXmlWriter();
             rdfXmlWriter.Save(dataGraph, sw);
-            string rdfXml= sw.ToString();
-            Stream stream =new MemoryStream(Encoding.UTF8.GetBytes(rdfXml));
+            string rdfXml = sw.ToString();
+            Stream stream = new MemoryStream(Encoding.UTF8.GetBytes(rdfXml));
             FormFile file = new FormFile(stream, 0, stream.Length, "rdfFile", "rdf.xml");
 
             //Actualizamos el item
             Dictionary<string, List<string>> discards = new Dictionary<string, List<string>>();
-            foreach(DiscoverItem.DiscoverDissambiguation dissambiguation in item.DissambiguationProblems)
+            foreach (DiscoverItem.DiscoverDissambiguation dissambiguation in item.DissambiguationProblems)
             {
-                if(DissambiguationProblemsResolve.ContainsKey(dissambiguation.IDOrigin) && DissambiguationProblemsResolve[dissambiguation.IDOrigin]==null)
+                if (DissambiguationProblemsResolve.ContainsKey(dissambiguation.IDOrigin) && DissambiguationProblemsResolve[dissambiguation.IDOrigin] == null)
                 {
-                    discards.Add(dissambiguation.IDOrigin, dissambiguation.DissambiguationCandiates.Select(x=>x.IDCandidate).ToList());
-                }                
+                    discards.Add(dissambiguation.IDOrigin, dissambiguation.DissambiguationCandiates.Select(x => x.IDCandidate).ToList());
+                }
             }
 
             item.UpdateDissambiguationDiscards(discards, rdfXml);
             item.DiscoverRdf = rdfXml;
             item.Status = "Pending";
-           
+
             _discoverItemService.ModifyDiscoverItem(item);
 
             //Lo reencolamos corregido junto con su identificador
-            _callEDtlPublishService.CallDataPublish(file,idJob,false, IdDiscoverItem);
+            _callEDtlPublishService.CallDataPublish(file, idJob, false, IdDiscoverItem);
 
             return RedirectToAction("DetailsJob", "Job", new { id = idJob });
         }
