@@ -207,8 +207,24 @@ http://graph.um.es/graph/um_cvn
 
 		}
 
+**Consultas con 'UNION'**	
 
+1. Consulta que devuelve todas las entidades de las que dos investigadores forman parte de su lista de autores (OR).
 
+		select distinct ?s from <http://graph.um.es/graph/um_cvn>
+		where 
+		{ 
+			{
+				?s <http://purl.org/roh/mirror/bibo#authorList> ?lista.
+				?lista ?item <http://graph.um.es/res/person/1949f7bb-70d9-4e2b-94a4-a54b0df96312>.
+			}
+			UNION
+			{
+				?s <http://purl.org/roh/mirror/bibo#authorList> ?lista.
+				?lista ?item <http://graph.um.es/res/person/b63b9762-cdea-4348-8a37-64a0a92d8c2c>.
+			}
+		}
+		
 
 GRAFO DE DATOS DE SISTEMAS DE LA UM
 ===================================
