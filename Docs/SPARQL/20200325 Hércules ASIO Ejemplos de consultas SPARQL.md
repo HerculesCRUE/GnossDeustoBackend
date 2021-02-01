@@ -151,6 +151,14 @@ http://graph.um.es/graph/um_cvn
                       	?persona <http://purl.org/roh/mirror/foaf#name> ?nombrePersona.				
 		}group by (?persona and ?nombrePersona ) order by desc (?numDoc)
 		
+2.Consulta que obtiene el número de entidades por cada rdf:type		
+		
+		select ?tipo count(distinct ?entidad ) as ?numEntidades from <http://graph.um.es/graph/um_cvn>
+		where 
+		{
+			?entidad a ?tipo.	
+		}group by (?tipo ) order by desc (?numEntidades)
+		
 **Consultas con 'FILTER'**	
 
 1. Consulta que devuelve todas las entidades de las que dos investigadores forman parte de su lista de autores (OR).
