@@ -55,31 +55,78 @@ El grafo de los datos cargados desde CVN es:
 
 http://graph.um.es/graph/um_cvn
 
-**Consulta que devuelve los URIs de los investigadores cargados**.
+**Consultas por rdf:type**
 
-	select * from <http://graph.um.es/graph/um_cvn>
-	where {?s a <http://purl.org/roh/mirror/foaf#Person>}
+1. Consulta que devuelve los URIs de los investigadores cargados.
 
-**Consulta que devuelve todos los triples de un investigador**.
+		select * from <http://graph.um.es/graph/um_cvn>
+		where 
+		{
+			?s a <http://purl.org/roh/mirror/foaf#Person>
+		}
+		
+2. Consulta que devuelve los URIs de los artículos académicos cargados.
 
-	select * from <http://graph.um.es/graph/um_cvn>
-	where { <http://graph.um.es/res/person/f6544839-0e1e-4e4b-bc5d-70199198a50f> ?p ?o}
+		select * from <http://graph.um.es/graph/um_cvn>
+		where 
+		{
+			?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/roh/mirror/bibo#AcademicArticle>
+		}
+		
+3. Consulta que devuelve los URIs de todos los documentos (utilizando inferencia).
 
-**Consulta que devuelve todas las entidades de las que el investigador
-es objeto**.
+		define input:inference "rohontology"
+		select * from <http://graph.um.es/graph/um_cvn>
+		where 
+		{
+			?s a  <http://purl.org/roh/mirror/bibo#Document>
+		}
 
-	select * from <http://graph.um.es/graph/um_cvn>
-	where {
-		?s ?p <http://graph.um.es/res/person/f6544839-0e1e-4e4b-bc5d-70199198a50f>.
-		?s a ?rdftype.
-	}
 
-**Consulta que devuelve todos los triples un artículo.**
+**Consultas por sujeto**
 
-	select * from <http://graph.um.es/graph/um_cvn>
-	where {
-		<http://graph.um.es/res/article/54abcda1-55bf-4896-ab2f-41b63a1dc135> ?p ?o.
-	}
+1. Consulta que devuelve todos los triples directos de una persona.
+
+		select * from <http://graph.um.es/graph/um_cvn>
+		where 
+		{ 
+			<http://graph.um.es/res/person/1949f7bb-70d9-4e2b-94a4-a54b0df96312> ?p ?o
+		}
+	
+2. Consulta que devuelve todos los triples directos de un artículo.
+
+		select * from <http://graph.um.es/graph/um_cvn>
+		where 
+		{
+			<http://graph.um.es/res/article/01fbc549-2173-4078-b51f-55311ecc5df8> ?p ?o.
+		}	
+	
+3. Consulta que devuelve todos los autores de un artículo.	
+	
+		select distinct * from <http://graph.um.es/graph/um_cvn>
+		where 
+		{
+			<http://graph.um.es/res/article/01fbc549-2173-4078-b51f-55311ecc5df8> <http://purl.org/roh/mirror/bibo#authorList> ?lista.
+			?lista ?propLista ?persona.
+			?persona <http://purl.org/roh/mirror/foaf#name> ?nombrePersona.	
+		}	
+	
+**Consultas por objeto**
+
+1. Consulta que devuelve todas las entidades de las que el investigador es objeto.
+
+		select * from <http://graph.um.es/graph/um_cvn>
+		where 
+		{ 
+			?s ?p <http://graph.um.es/res/person/1949f7bb-70d9-4e2b-94a4-a54b0df96312>
+		}
+
+2. Consulta que devuelve todas las entidades de las que el artículo es objeto.
+
+		select * from <http://graph.um.es/graph/um_cvn>
+		where {
+			?s ?p <http://graph.um.es/res/article/01fbc549-2173-4078-b51f-55311ecc5df8>.
+		}
 
 GRAFO DE DATOS DE SISTEMAS DE LA UM
 ===================================
