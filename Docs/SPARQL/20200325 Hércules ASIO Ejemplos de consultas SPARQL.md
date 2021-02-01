@@ -4,6 +4,8 @@
 
 [INTRODUCCIÓN](#introduccion)
 
+[GRAFOS DE ASIO](#grafos-de-asio)
+
 [GRAFO DE DATOS DE CVN](#grafo-de-datos-de-cvn)
 
 [GRAFO DE DATOS DE SISTEMAS DE LA UM](#grafo-de-datos-de-sistemas-de-la-um)
@@ -20,12 +22,38 @@ más datos.
 
 La URL del SPARQL endpoint es http://155.54.239.204:8890/sparql
 
+En la siguiente URL: https://docs.data.world/tutorials/sparql/introduction.html se encuentra un tutorial sobre SPARQL
+
+GRAFOS DE ASIO
+=====================
+
+Con la siguiente query se listan los diferentes grafos cargados:
+
+	select distinct ?g 
+	where {
+		graph ?g
+		{?s ?p ?o}
+	}
+
+Los grafos relevantes para las queries descritas en los siguientes ejemplos son los siguientes:
+- http://graph.um.es/graph/research/roh: Grafo con la ontología
+- http://graph.um.es/graph/um_cvn: Grafo con los catod cargados de CVN de la UM.
+- http://graph.um.es/graph/um_sgi: Grafo de los datos importados desde los sistemas de la UM:
+
+Con la siguiente instrucción: 
+
+	rdfs_rule_set ('rohontology', 'http://graph.um.es/graph/research/roh') ;
+	
+Se han cargado las reglas de inferencia de la ontología, para utilizarlas en el SPARQL endpoint hay que incluir al inicio de la query la instrucción:	
+
+	define input:inference "rohontology"
+
 GRAFO DE DATOS DE CVN
 =====================
 
 El grafo de los datos cargados desde CVN es:
 
-http://graph.um.es/graph/um/cvn
+http://graph.um.es/graph/um_cvn
 
 **Consulta que devuelve los URIs de los investigadores cargados**.
 
