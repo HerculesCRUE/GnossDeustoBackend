@@ -37,7 +37,7 @@ Con la siguiente query se listan los diferentes grafos cargados:
 
 Los grafos relevantes para las queries descritas en los siguientes ejemplos son los siguientes:
 - http://graph.um.es/graph/research/roh: Grafo con la ontología
-- http://graph.um.es/graph/um_cvn: Grafo con los catod cargados de CVN de la UM.
+- http://graph.um.es/graph/um_cvn: Grafo con los datos cargados de CVN de la UM.
 - http://graph.um.es/graph/um_sgi: Grafo de los datos importados desde los sistemas de la UM:
 
 Con la siguiente instrucción: 
@@ -124,9 +124,91 @@ http://graph.um.es/graph/um_cvn
 2. Consulta que devuelve todas las entidades de las que el artículo es objeto.
 
 		select * from <http://graph.um.es/graph/um_cvn>
-		where {
+		where 
+		{
 			?s ?p <http://graph.um.es/res/article/01fbc549-2173-4078-b51f-55311ecc5df8>.
 		}
+		
+3. Consulta que devuelve todas las entidades de las que el investigador forma parte de su lista de autores.
+
+		select distinct ?s from <http://graph.um.es/graph/um_cvn>
+		where 
+		{ 
+			?s <http://purl.org/roh/mirror/bibo#authorList> ?lista.
+			?lista ?item <http://graph.um.es/res/person/1949f7bb-70d9-4e2b-94a4-a54b0df96312>
+		}
+		
+**Consultas con agrupación**
+
+1. Consulta que obtiene todas las personas junto con el número de entidades de las que es parte como autor
+		
+		select ?persona ?nombrePersona count(distinct ?doc) as ?numDoc from <http://graph.um.es/graph/um_cvn>
+		where 
+		{
+			?persona a <http://purl.org/roh/mirror/foaf#Person>.
+			?doc <http://purl.org/roh/mirror/bibo#authorList> ?lista.
+		     	?lista ?item ?persona.
+                      	?persona <http://purl.org/roh/mirror/foaf#name> ?nombrePersona.				
+		}group by (?persona and ?nombrePersona ) order by desc (?numDoc)
+		
+**Consultas con 'FILTER'**	
+
+1. Consulta que devuelve todas las entidades de las que dos investigadores forman parte de su lista de autores (OR).
+
+		select distinct ?s from <http://graph.um.es/graph/um_cvn>
+		where 
+		{ 
+			?s <http://purl.org/roh/mirror/bibo#authorList> ?lista.
+			?lista ?item ?autor.
+			FILTER(?autor in (<http://graph.um.es/res/person/1949f7bb-70d9-4e2b-94a4-a54b0df96312>,<http://graph.um.es/res/person/b63b9762-cdea-4348-8a37-64a0a92d8c2c>))
+			
+		}
+		
+2. Consulta que devuelve todas las entidades de las que dos investigadores forman parte de su lista de autores (AND).
+
+		select distinct ?s from <http://graph.um.es/graph/um_cvn>
+		where 
+		{ 
+			?s <http://purl.org/roh/mirror/bibo#authorList> ?lista.
+			?lista ?item ?autor.
+			FILTER(?autor =<http://graph.um.es/res/person/1949f7bb-70d9-4e2b-94a4-a54b0df96312>)
+                    	?lista ?item2 ?autor2.			
+			FILTER(?autor2 =<http://graph.um.es/res/person/c305b739-a36d-45db-ae87-186600b3cbde>)			
+		}
+
+**Consultas con LIKE**	
+
+1. Consulta que devuelve todas las personas que contiene la palabra 'juan' y 'antonio' en el nombre
+		
+		select * from <http://graph.um.es/graph/um_cvn>
+		where 
+		{
+			?persona a <http://purl.org/roh/mirror/foaf#Person>.
+                      	?persona <http://purl.org/roh/mirror/foaf#name> ?nombrePersona.	
+			FILTER (lcase(?nombrePersona) like'%juan%' AND lcase(?nombrePersona) like'%antonio%')			
+		}
+		
+**Consultas con OPTIONAL**	
+
+1. Consulta que devuelve todos los triples de primer nivel y opcionalmente los autores de un artículo
+		
+		select * from <http://graph.um.es/graph/um_cvn>
+		where 
+		{
+			?s ?p ?o.
+		      	OPTIONAL
+			{
+				?s ?p ?lista.
+				?lista ?porpLista ?autor.
+				?autor <http://purl.org/roh/mirror/foaf#name> ?nombreAutor
+				FILTER(?p=<http://purl.org/roh/mirror/bibo#authorList>)
+			}
+			FILTER(?s =<http://graph.um.es/res/article/01fbc549-2173-4078-b51f-55311ecc5df8>)
+
+		}
+
+
+
 
 GRAFO DE DATOS DE SISTEMAS DE LA UM
 ===================================
@@ -150,7 +232,12 @@ http://graph.um.es/graph/um_sgi
 	select * from <http://graph.um.es/graph/um_sgi>
 	where {
 		?s ?p ?o.
-		OPTIONAL{?o ?p2 ?o2 OPTIONAL{?o2 ?p3 ?o3}}
+		
+		
+		
+		
+		
+		L{?o ?p2 ?o2 OPTIONAL{?o2 ?p3 ?o3}}
 		FILTER(?s=<http://graph.um.es/res/project/12307>)
 	}
 	order by asc(?s) asc(?p) asc(?o) asc(?p2) asc(?o2) asc(?p3) asc(?o3)
