@@ -74,8 +74,6 @@ namespace GestorDocumentacion.Models.Services
         public List<Page> GetPages()
         {
             var consulta = _context.Page.Where(item => item.Route.Contains("Public"));
-            var contexto = GetDbContext(consulta);
-            EntityContext contextoEntity = (EntityContext)contexto;
             return _context.Page.ToList();
         }
         /// <summary>
