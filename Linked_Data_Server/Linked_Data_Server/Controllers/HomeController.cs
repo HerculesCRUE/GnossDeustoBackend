@@ -108,11 +108,12 @@ namespace Linked_Data_Server.Controllers
                     }
                     HttpContext.Response.Headers.Add("ETag", etag);
                 }
-
-                if (HttpContext.Request.ContentType == "application/rdf+xml")
+                Microsoft.Extensions.Primitives.StringValues stringvalues;
+                HttpContext.Request.Headers.TryGetValue("accept", out stringvalues);
+                if (stringvalues == "application/rdf+xml")
                 {
                     //Devolvemos en formato RDF
-                    return File(Encoding.UTF8.GetBytes(rdf), "text/xml");
+                    return File(Encoding.UTF8.GetBytes(rdf), "application/rdf+xml");
                 }
                 else
                 {
