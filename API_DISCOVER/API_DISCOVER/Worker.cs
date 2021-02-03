@@ -32,11 +32,6 @@ namespace API_DISCOVER
 
         public Task StartAsync(CancellationToken stoppingToken)
         {
-            DiscoverItemBDService discoverItemBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>();
-            ProcessDiscoverStateJobBDService processDiscoverStateJobBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<ProcessDiscoverStateJobBDService>();
-            CallCronApiService callCronApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallCronApiService>();
-            CallEtlApiService callEtlApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallEtlApiService>();
-
             _logger.LogInformation("Timed Hosted Service running.");
             while (!stoppingToken.IsCancellationRequested)
             {
@@ -65,7 +60,7 @@ namespace API_DISCOVER
                                 {
                                     Thread.Sleep((time.Value.DateTime - DateTimeOffset.UtcNow));
                                     Discover descubrimiento = new Discover(_logger, _serviceScopeFactory);
-                                    descubrimiento.ApplyDiscoverLoadedEntities(callEtlApiService, ConfigService.GetSleepSecondsAfterProcessEntityDiscoverLoadedEntities());
+                                    descubrimiento.ApplyDiscoverLoadedEntities(ConfigService.GetSleepSecondsAfterProcessEntityDiscoverLoadedEntities());
                                 }
                             }
                             catch (Exception ex)
