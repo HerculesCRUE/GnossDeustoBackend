@@ -102,8 +102,14 @@ namespace IdentityServerHecules
                 });
 
             services.AddTransient<IPersistedGrantStore, PersistedGrantStore>();
-            services.AddTransient<IPersistedGrantServiceP, PersistedGrantServiceP>(); 
+            services.AddTransient<IPersistedGrantServiceP, PersistedGrantServiceP>();
             ////////
+            ///
+            var sp = services.BuildServiceProvider();
+
+            // Resolve the services from the service provider
+            var context = sp.GetService<ConfigurationDbContext>();
+            InitializeDatabase(context);
             services.AddControllers();
         }
 
@@ -114,8 +120,6 @@ namespace IdentityServerHecules
             {
                 app.UseDeveloperExceptionPage();
             }
-            InitializeDatabase(app);
-
 
             app.UseIdentityServer();
             app.UseHttpsRedirection();
@@ -130,57 +134,53 @@ namespace IdentityServerHecules
             });
         }
 
-        private void InitializeDatabase(IApplicationBuilder app)
+        private void InitializeDatabase(ConfigurationDbContext context)
         {
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+
+            context.Database.Migrate();
+            if (context.Clients.Any())
             {
-                serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
-
-                var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
-                context.Database.Migrate();
-                if (context.Clients.Any())
+                foreach (var client in context.Clients)
                 {
-                    foreach (var client in context.Clients)
-                    {
-                        context.Clients.Remove(client);
-                    }
-                    context.SaveChanges();
+                    context.Clients.Remove(client);
                 }
-
-                if (!context.Clients.Any())
-                {
-                    foreach (var client in Config.GetClients())
-                    {
-                        context.Clients.Add(client.ToEntity());
-                    }
-                    context.SaveChanges();
-                }
-
-                //if (!context.IdentityResources.Any())
-                //{
-                //    foreach (var resource in Config.GetIdentityResources())
-                //    {
-                //        context.IdentityResources.Add(resource.ToEntity());
-                //    }
-                //    context.SaveChanges();
-                //}
-                if (context.ApiResources.Any())
-                {
-                    foreach (var resource in context.ApiResources)
-                    {
-                        context.ApiResources.Remove(resource);
-                    }
-                    context.SaveChanges();
-                }
-                if (!context.ApiResources.Any())
-                {
-                    foreach (var resource in Config.GetApiResources())
-                    {
-                        context.ApiResources.Add(resource.ToEntity());
-                    }
-                    context.SaveChanges();
-                }
+                context.SaveChanges();
             }
+
+            if (!context.Clients.Any())
+            {
+                foreach (var client in Config.GetClients())
+                {
+                    context.Clients.Add(client.ToEntity());
+                }
+                context.SaveChanges();
+            }
+
+            //if (!context.IdentityResources.Any())
+            //{
+            //    foreach (var resource in Config.GetIdentityResources())
+            //    {
+            //        context.IdentityResources.Add(resource.ToEntity());
+            //    }
+            //    context.SaveChanges();
+            //}
+            if (context.ApiResources.Any())
+            {
+                foreach (var resource in context.ApiResources)
+                {
+                    context.ApiResources.Remove(resource);
+                }
+                context.SaveChanges();
+            }
+            if (!context.ApiResources.Any())
+            {
+                foreach (var resource in Config.GetApiResources())
+                {
+                    context.ApiResources.Add(resource.ToEntity());
+                }
+                context.SaveChanges();
+            }
+
         }
     }
 }
