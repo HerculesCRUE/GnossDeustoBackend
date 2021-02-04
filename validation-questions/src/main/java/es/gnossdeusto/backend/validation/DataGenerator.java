@@ -135,7 +135,7 @@ public class DataGenerator {
 		// }
 	}
 
-	public static Model getModel(String ontFile, String dataFile, String uneskos) {
+	public static Model getModel(String ontFile, String dataFile, String uneskos) throws InvalidOntologyException {
 
 		Reasoner reasoner = PelletReasonerFactory.theInstance().create();
 
@@ -157,12 +157,8 @@ public class DataGenerator {
 
 		// print validation report
 		ValidityReport report = model.validate();
-		try {
-			printIterator(report.getReports(), "Validation Results");
-		} catch (InvalidOntologyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		printIterator(report.getReports(), "Validation Results");
+		
 			
 	        return model;
 		}
