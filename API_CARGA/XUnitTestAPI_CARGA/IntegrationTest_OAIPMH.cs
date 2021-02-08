@@ -20,7 +20,7 @@ namespace XUnitTestAPI_CARGA
         //public void TestGetRecord()
         //{
         //    ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-        //    RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();            
+        //    RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
         //    ConfigTokenService configTokenService = new ConfigTokenService();
         //    CallTokenService callTokenService = new CallTokenService(configTokenService);
         //    CallUri callUri = new CallUri(callTokenService);
@@ -61,8 +61,8 @@ namespace XUnitTestAPI_CARGA
         //    CallUri callUri = new CallUri(callTokenService);
         //    RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
         //    DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-        //    etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, null, callUri , null, null);
-        //    FileContentResult resultesponse = (FileContentResult)etlController.ListIdentifiers(new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"),"rdf", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(1));
+        //    etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, null, callUri, null, null);
+        //    FileContentResult resultesponse = (FileContentResult)etlController.ListIdentifiers(new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"), "rdf", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(1));
         //    string respuesta = Encoding.Default.GetString(resultesponse.FileContents);
         //    XDocument respuestaXML = XDocument.Parse(respuesta.Substring(respuesta.IndexOf("<OAI-PMH ")));
         //    XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
@@ -108,7 +108,7 @@ namespace XUnitTestAPI_CARGA
 
         //[Fact]
         //public void TestListSets()
-        //{           
+        //{
         //    ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
         //    RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
         //    ConfigTokenService configTokenService = new ConfigTokenService();
