@@ -23,17 +23,18 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 import es.gnossdeusto.backend.validation.DataGenerator;
+import es.gnossdeusto.backend.validation.InvalidOntologyException;
 
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
 public class ValidationQuestionsTest {
-	
+
 	private static Model data;
-	
+
 	@BeforeClass
-	public static void loadModel() {
+	public static void loadModel() throws InvalidOntologyException {
 		data = DataGenerator.getModel(System.getProperty("ontFile"), System.getProperty("dataFile"), System.getProperty("uneskos"));
 		// data = DataGenerator.getInferredModel(System.getProperty("ontFile"), System.getProperty("dataFile"));
 	}
