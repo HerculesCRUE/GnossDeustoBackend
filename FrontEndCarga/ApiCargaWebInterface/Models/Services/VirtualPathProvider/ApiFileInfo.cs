@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.FileProviders;
- 
+using Serilog;
+
 namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
 {
     /// <summary>
@@ -74,6 +76,8 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
         {
             try
             {
+                Stopwatch sw = new Stopwatch();
+                sw.Start(); // Iniciar la medición.
                 var page = _apiVirtualPath.GetPage(viewPath);
                 
                 if (page != null)
@@ -83,6 +87,8 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
                     _viewContent = Encoding.UTF8.GetBytes(page.Content);
                     _lastModified = page.LastModified;
                 }
+                sw.Stop();
+                Log.Information($"Api file info: obtener la ruta: {viewPath} : {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
             }
             catch (Exception ex)
             {

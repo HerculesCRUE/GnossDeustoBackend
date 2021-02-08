@@ -4,6 +4,8 @@
 // Controlador para gestionar elar las páginas creadas por los usuarios
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,7 @@ using ApiCargaWebInterface.ViewModels;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace ApiCargaWebInterface.Controllers
 {
@@ -36,18 +39,26 @@ namespace ApiCargaWebInterface.Controllers
         /// <returns></returns>
         [HttpGet("{*url}", Order = int.MaxValue)]
         public IActionResult GetRoute(string url)
-        {
+        {            
+            Stopwatch sw = new Stopwatch(); // Creación del Stopwatch.
+            sw.Start(); // Iniciar la medición.
             var page = _documentationApi.GetPage($"/{url}");
             if(page == null)
             {
                 return NotFound();
             }
+            sw.Stop();
+            Log.Information($"Tiempo pasado al hacer GetPage de {url} : {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
             //Cambiar el contendio de los uses
             CmsDataViewModel dataModel = new CmsDataViewModel();
+            sw = new Stopwatch(); // Creación del Stopwatch.
+            sw.Start(); // Iniciar la medición.
             if (page.Content.Contains("@*<%"))
             {
                 dataModel = _replaceUsesService.PageWithDirectives(page.Content, dataModel);
             }
+            sw.Stop();
+            Log.Information($"cargar las directivas de la página : {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
             return View($"/{url}", dataModel);
         }
 

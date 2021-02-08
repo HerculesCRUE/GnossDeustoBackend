@@ -91,7 +91,6 @@ namespace ApiCargaWebInterface.Models.Services
         {
             if (string.IsNullOrEmpty(ScopeDocumentacion))
             {
-                string ScopeDocumentacion = "";
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("ScopeDocumentacion"))
                 {
@@ -101,8 +100,6 @@ namespace ApiCargaWebInterface.Models.Services
                 {
                     ScopeDocumentacion = Configuration["ScopeDocumentacion"];
                 }
-
-                ScopeDocumentacion = ScopeDocumentacion;
             }
             return ScopeDocumentacion;
         }

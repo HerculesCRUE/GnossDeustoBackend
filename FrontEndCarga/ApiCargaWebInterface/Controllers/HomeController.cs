@@ -32,6 +32,7 @@ namespace ApiCargaWebInterface.Controllers
         {
             ConfigUrlService urlService = new ConfigUrlService();
             string routeProxy = $"{urlService.GetProxy()}/public/gnossdeustobackend/home";
+            //string routeProxy = $"{urlService.GetProxy()}/CMS";
             return Redirect(routeProxy);
         }
 

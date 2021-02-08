@@ -18,6 +18,7 @@
     <PackageReference Include="NCrontab" Version="3.3.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
+    <PackageReference Include="Serilog.Sinks.Map" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>

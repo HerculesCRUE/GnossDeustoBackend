@@ -5,8 +5,11 @@
 using ApiCargaWebInterface.Models.Entities;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,8 +31,12 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
                 {
                     try
                     {
+                        Stopwatch sw = new Stopwatch();
+                        sw.Start(); // Iniciar la medición.
                         _token = tokenService.CallTokenApiDocumentacion();
                         tokenCargado = true;
+                        sw.Stop();
+                        Log.Information($"llamar al token de documentacion : {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
                     }
                     catch (Exception ex)
                     {

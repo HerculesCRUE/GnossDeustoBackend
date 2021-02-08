@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Serilog;
+using Serilog.Events;
 using System;
 using System.Collections;
 using System.IO;
@@ -57,12 +58,12 @@ namespace ApiCargaWebInterface.Middlewares
             if (ex is BadRequestException)
             {
                 code = HttpStatusCode.BadRequest;
-                Log.Information($"{ex.Message}\n");
+                Log.Error($"{ex.Message}\n");
             }
 
             if (code != HttpStatusCode.InternalServerError)
             {
-                Log.Information($"{ex.Message}\n");
+                Log.Error($"{ex.Message}\n");
             }
             else
             {
@@ -91,7 +92,13 @@ namespace ApiCargaWebInterface.Middlewares
             {
                 Directory.CreateDirectory(pathDirectory);
             }
-            Log.Logger = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.File($"{pathDirectory}/log_{pTimestamp}.txt").CreateLogger();
+           // Log.Logger = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.File($"{pathDirectory}/log_{pTimestamp}.txt").CreateLogger();
+            Log.Logger = new LoggerConfiguration().WriteTo.Logger(x =>
+            {
+                x.WriteTo.File($"{pathDirectory}/log_{pTimestamp}.txt");
+                x.Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Error);
+            })
+           .CreateLogger();
         }
         /// <summary>
         /// Devuleve una cadena con el día/mes/año

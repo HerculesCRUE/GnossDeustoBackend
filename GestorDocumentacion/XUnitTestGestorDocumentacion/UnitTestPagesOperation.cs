@@ -44,7 +44,7 @@ namespace XUnitTestGestorDocumentacion
             Page pageNew = new Page()
             {
                 Content = "<p>hola</p>",
-                Route = "pages/newPage.html",
+                Route = "/pages/page1.html",
                 PageID = Guid.NewGuid()
             };
             bool added = mock.LoadPage(pageNew, true);
@@ -64,7 +64,7 @@ namespace XUnitTestGestorDocumentacion
         public void GetPageByName()
         {
             PagesOperationServiceMockService mock = new PagesOperationServiceMockService();
-            Assert.True(mock.GetPage("Page1") != null);
+            Assert.True(mock.GetPage("/pages/page1.html") != null);
         }
 
         [Fact]

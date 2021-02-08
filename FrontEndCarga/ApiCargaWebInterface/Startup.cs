@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
+using Serilog;
+using Serilog.Events;
 using System;
 using System.Collections;
 using System.Reflection;
@@ -65,7 +67,15 @@ namespace ApiCargaWebInterface
                     options.ServiceHost = serviceHost;
                 });
             bool cargado = false;
-            while (!cargado) 
+            ConfigPathLog configPathLog = new ConfigPathLog();
+            string pathError = $"{configPathLog.GetLogPathBase()}{configPathLog.GetLogPath()}";
+            Log.Logger = new LoggerConfiguration().WriteTo.Logger(x =>
+            {
+                x.WriteTo.File($"{pathError}/log_Tiempos_Info.txt");
+                x.Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Information);
+            })
+            .CreateLogger();
+            while (!cargado)
             {
                 // services.AddMvcRazorRuntimeCompilation();
                 try
@@ -77,12 +87,14 @@ namespace ApiCargaWebInterface
                         CallApiService serviceApi = new CallApiService();
                         CallTokenService tokenService = new CallTokenService(new ConfigTokenService());
                         ConfigUrlService serviceUrl = new ConfigUrlService();
+                        
                         CallApiVirtualPath apiVirtualPath = new CallApiVirtualPath(tokenService, serviceUrl, serviceApi);
                         opts.FileProviders.Add(
                             new ApiFileProvider(apiVirtualPath));
                     });
                     cargado = true;
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     cargado = false;
                 }

@@ -1,8 +1,11 @@
 ﻿using ApiCargaWebInterface.Models.Entities;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Primitives;
+using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
    
@@ -28,28 +31,43 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
         {
             get
             {
-
                 try
                 {
-                    PageInfo page = _apiVirtualPath.GetPage(_viewPath);
-                    if (page != null)
+                   
+                    if (!_viewPath.EndsWith(".cshtml") || _viewPath.Contains("_menupersonalizado")) 
                     {
-                        if (!LastRequested(_viewPath).HasValue)
+                        Stopwatch sw = new Stopwatch(); // Creación del Stopwatch.
+                        sw.Start(); // Iniciar la medición.
+                        PageInfo page = _apiVirtualPath.GetPage(_viewPath);
+                        if (page != null)
                         {
-                            return false;
+                            if (!LastRequested(_viewPath).HasValue)
+                            {
+                                sw.Stop();
+                                Log.Information($"comprobar si ha cambiado la página {_viewPath}: {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
+                                return false;
+                            }
+                            else
+                            {
+                                DateTime lastRequest = LastRequested(_viewPath, true).Value;
+                                bool changed = page.LastModified > lastRequest;
+                                sw.Stop();
+                                Log.Information($"comprobar si ha cambiado la página {_viewPath}: {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
+                                return changed;
+                            }
                         }
                         else
                         {
-                            DateTime lastRequest = LastRequested(_viewPath, true).Value;
-                            bool changed = page.LastModified > lastRequest;
-                            return changed;
+                            sw.Stop();
+                            Log.Information($"comprobar si ha cambiado la página {_viewPath}: {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
+                            return false;
                         }
                     }
                     else
                     {
                         return false;
                     }
-
+                    
                 }
                 catch (Exception)
                 {
