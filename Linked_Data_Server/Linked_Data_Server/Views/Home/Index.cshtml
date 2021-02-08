@@ -2,12 +2,12 @@
 
 @{
     ViewData["BodyClass"] = "fichaRecurso";
-    //List<string> graficas = Model.Item4.Nodes;
 
 }
 <script>
 
     var datosGraficas =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.arborGraphs));
+
 </script>
 
 <div class="row">
