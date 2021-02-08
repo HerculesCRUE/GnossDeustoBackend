@@ -33,7 +33,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             string consulta = "select * where {?s <http://www.w3.org/2000/01/rdf-schema#label> '" + q + "'@es. MINUS{?s <http://dbpedia.org/ontology/wikiPageDisambiguates> ?dis} OPTIONAL {?s <http://www.w3.org/2002/07/owl#sameAs> ?geonames.FILTER(?geonames like'http://sws.geonames.org*')}}";
             string QueryParam = "query";
             SparqlUtility utility = new SparqlUtility();
-            SparqlObject sparqlObject = utility.SelectData(SPARQLEndpoint, Graph, consulta, QueryParam);
+            SparqlObject sparqlObject = utility.SelectData(SPARQLEndpoint, Graph, consulta, QueryParam,"","");
             DBPEDIAData dBPEDIAData = new DBPEDIAData();
 
             foreach(var result in sparqlObject.results.bindings)

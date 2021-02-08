@@ -21,7 +21,7 @@ namespace GestorDocumentacion.Controllers
     ///</summary>
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
+    //[Authorize]
     public class PageController : ControllerBase
     {
         private IPagesOperationsServices _pagesOperationsService;

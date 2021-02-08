@@ -37,6 +37,10 @@ namespace ApiCargaWebInterface.Controllers
         {
             return View();
         }
+        public IActionResult Graficas()
+        {
+            return View();
+        }
         /// <summary>
         /// Obtiene un token para el api pasado
         /// </summary>

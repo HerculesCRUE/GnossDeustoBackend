@@ -119,7 +119,9 @@ namespace API_DISCOVER.Utility
         /// <param name="pSPARQLEndpoint">Endpoint SPARQL</param>
         /// <param name="pQueryParam">Query param</param>
         /// <param name="pGraph">Grafo</param>
-        public static void LoadTriples(List<string> pTriples, string pSPARQLEndpoint, string pQueryParam, string pGraph)
+        /// <param name="pUsername">Usuario</param>
+        /// <param name="pPassword">Password</param>
+        public static void LoadTriples(List<string> pTriples, string pSPARQLEndpoint, string pQueryParam, string pGraph,string pUsername,string pPassword)
         {
             int maxTriples = 500;
 
@@ -144,7 +146,7 @@ namespace API_DISCOVER.Utility
                 List<List<string>> listaListasTriples = SplitList(listNotBlankNodeTriples, maxTriples).ToList();
                 foreach (List<string> listaTriples in listaListasTriples)
                 {
-                    InsertData(pSPARQLEndpoint, pGraph, listaTriples, pQueryParam);
+                    InsertData(pSPARQLEndpoint, pGraph, listaTriples, pQueryParam,pUsername,pPassword);
                 }
             }
 
@@ -230,7 +232,7 @@ namespace API_DISCOVER.Utility
                     {
                         triplesInsert.Add(listBlankNodeTriples[i]);
                     }
-                    InsertData(pSPARQLEndpoint, pGraph, triplesInsert, pQueryParam);
+                    InsertData(pSPARQLEndpoint, pGraph, triplesInsert, pQueryParam,pUsername,pPassword);
                 }
             }
 
@@ -238,7 +240,7 @@ namespace API_DISCOVER.Utility
            
         }
 
-        private static void InsertData(string pSPARQLEndpoint, string pGraph, List<string> triplesInsert, string pQueryParam)
+        private static void InsertData(string pSPARQLEndpoint, string pGraph, List<string> triplesInsert, string pQueryParam,string pUsername,string pPassword)
         {
             string query = "";
             query += $" INSERT INTO <{pGraph}>";
@@ -257,6 +259,10 @@ namespace API_DISCOVER.Utility
                 NameValueCollection parametros = new NameValueCollection();
                 parametros.Add(pQueryParam, query);
                 WebClient webClient = new WebClient();
+                if (!string.IsNullOrEmpty(pUsername) && !string.IsNullOrEmpty(pPassword))
+                {
+                    webClient.Credentials = new System.Net.NetworkCredential(pUsername, pPassword);
+                }
                 try
                 {
                     webClient.UploadValues(url, "POST", parametros);
@@ -281,14 +287,18 @@ namespace API_DISCOVER.Utility
             }
         }
 
-        public SparqlObject SelectData(string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam)
+        public SparqlObject SelectData(string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam, string pUsername, string pPassword)
         {
-            SparqlObject datosDBpedia = null;
+            SparqlObject datosSPARQL = null;
             string urlConsulta = pSPARQLEndpoint;
             WebClient webClient = new WebClient();
             webClient.Encoding = Encoding.UTF8;
             webClient.Headers.Add(HttpRequestHeader.ContentType, "application/x-www-form-urlencoded");
 
+            if (!string.IsNullOrEmpty(pUsername) && !string.IsNullOrEmpty(pPassword))
+            {
+                webClient.Credentials = new System.Net.NetworkCredential(pUsername, pPassword);
+            }
 
             NameValueCollection parametros = new NameValueCollection();
             parametros.Add("default-graph-uri", pGraph);
@@ -319,9 +329,9 @@ namespace API_DISCOVER.Utility
 
             if (!string.IsNullOrEmpty(jsonRespuesta))
             {
-                datosDBpedia = JsonConvert.DeserializeObject<SparqlObject>(jsonRespuesta);
+                datosSPARQL = JsonConvert.DeserializeObject<SparqlObject>(jsonRespuesta);
             }
-            return datosDBpedia;
+            return datosSPARQL;
         }
 
         /// <summary>

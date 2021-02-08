@@ -112,6 +112,7 @@ namespace ApiCargaWebInterface
             services.AddSingleton(typeof(ConfigPathLog));
             services.AddSingleton(typeof(ConfigUrlService));
             services.AddSingleton(typeof(ConfigUrlCronService));
+            services.AddSingleton(typeof(ConfigUnidataPrefix));
             services.AddScoped<ICallRepositoryConfigService, CallRepositoryConfigApiService>();
             services.AddScoped<ICallUrisFactoryApiService, CallUrisFactoryApiService>(); 
             services.AddScoped<ICallService, CallApiService>();

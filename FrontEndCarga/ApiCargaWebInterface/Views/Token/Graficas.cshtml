@@ -1,0 +1,297 @@
+﻿@{ Layout = "_Layout";
+    ViewData["Title"] = "Test de Gráficos";
+    ViewData["link_scripts"] = "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.2/d3.min.js\"></script>";
+    ViewData["BodyClass"] = "dashboard";
+    List<Grafica> listaValores = new List<Grafica>();
+    Grafica g1 = new Grafica();
+    g1.Label = "Europeo";
+    g1.Value = 45;
+    g1.Color = "#f30000";
+    Grafica g2 = new Grafica();
+    g2.Label = "Nacional";
+    g2.Value = 29;
+    g2.Color = "#0600f3";
+    Grafica g3 = new Grafica();
+    g3.Label = "Regional";
+    g3.Value = 8;
+    g3.Color = "#00b109";
+    Grafica g4 = new Grafica();
+    g4.Label = "Convocatoria";
+    g4.Value = 8;
+    g4.Color = "#14e4b4";
+    Grafica g5 = new Grafica();
+    g5.Label = "Otros";
+    g5.Value = 8;
+    g5.Color = "#0fe7fb";
+    listaValores.Add(g1);
+    listaValores.Add(g2);
+    listaValores.Add(g3);
+    listaValores.Add(g4);
+    listaValores.Add(g5);
+    string content = "";
+    foreach (Grafica grafica in listaValores)
+    {
+        content += "{\"label\" : \""+grafica.Label+ "\",\"value\": " + grafica.Value + ",\"color\": \"" + grafica.Color + "\"},";
+    }
+    content = content.Remove(content.Length - 1);
+    string f = "";
+}
+<div class="row">
+    <div class="col col-12">
+        <h2>
+            <a href="javascript: void(0);">Producción científica</a>
+        </h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eleifend, ex elementum molestie varius, purus erat imperdiet nunc, in scelerisque ipsum ante ac risus. <a href="javascript: void(0);">Praesent et metus id eros rhoncus maximus nec</a> porta ante. In posuere nunc neque, non maximus ipsum placerat quis.</p>
+        <div class="entidades">
+            <div>
+                <p>
+                    <a href="javascript: void(0);">
+                        <span class="numResultados">256</span>
+                        Papers
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript: void(0);">
+                        <span class="numResultados">3.328</span>
+                        Conferencias
+                    </a>
+                </p>
+                <p>
+                    <a href="javascript: void(0);">
+                        <span class="numResultados">110</span>
+                        Proyectos
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-12">
+        <h2>
+            <a href="javascript: void(0);">Proyectos por año</a>
+        </h2>
+        <div class="graficos">
+            <img src="http://herc-as-front-desa.atica.um.es/imagenes/barchart-demo.svg" alt="">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-12">
+        <h2>
+            <a href="javascript: void(0);">Proyectos</a>
+        </h2>
+        <div class="graficos">
+            <div id="pieChart"></div>
+            <div id="pieChart2"></div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-12">
+        <h2>
+            <a href="javascript: void(0);">Investigador</a>
+        </h2>
+        <p>Mapa y grafo de realizaciones</p>
+        <img src="http://herc-as-front-desa.atica.um.es/imagenes/grafo.png" alt="">
+    </div>
+</div>
+
+<script src="~/theme/static/d3pie.min.js"></script>
+<script>
+    var pie = new d3pie("pieChart", {
+        "header": {
+            "title": {
+                "text": "Por convocatoria",
+                "fontSize": 20,
+                "font": "open sans"
+            },
+            "subtitle": {
+                "text": ".",
+                "color": "#ffffff",
+                "fontSize": 12,
+                "font": "open sans"
+            },
+            "titleSubtitlePadding": 9
+        },
+        "footer": {
+            "color": "#999999",
+            "fontSize": 10,
+            "font": "open sans",
+            "location": "bottom-left"
+        },
+        "size": {
+            "canvasHeight": 260,
+            "canvasWidth": 380,
+            "pieInnerRadius": "37%",
+            "pieOuterRadius": "92%"
+        },
+        "data": {
+            "sortOrder": "value-desc",
+            "content": [ @Html.Raw(content)
+            ]
+        },
+        "labels": {
+            "outer": {
+                "pieDistance": 20
+            },
+            "inner": {
+                "hideWhenLessThanPercentage": 3
+            },
+            "mainLabel": {
+                "fontSize": 11
+            },
+            "percentage": {
+                "color": "#ffffff",
+                "decimalPlaces": 0
+            },
+            "value": {
+                "color": "#adadad",
+                "fontSize": 11
+            },
+            "lines": {
+                "enabled": true
+            },
+            "truncation": {
+                "enabled": true,
+                "truncateLength": 12
+            }
+        },
+        "tooltips": {
+            "enabled": true,
+            "type": "placeholder",
+            "string": "{label}: {value}, {percentage}%"
+        },
+        "effects": {
+            "pullOutSegmentOnClick": {
+                "effect": "none",
+                "speed": 400,
+                "size": 8
+            }
+        },
+        "misc": {
+            "gradient": {
+                "enabled": true,
+                "percentage": 100
+            }
+        },
+        "callbacks": {
+            onClickSegment: function (info) {
+                console.log("click:", info);
+            }
+        }
+    });
+
+    var pie = new d3pie("pieChart2", {
+        "header": {
+            "title": {
+                "text": "Por Área/Disciplina",
+                "fontSize": 20,
+                "font": "open sans"
+            },
+            "subtitle": {
+                "text": ".",
+                "color": "#ffffff",
+                "fontSize": 12,
+                "font": "open sans"
+            },
+            "titleSubtitlePadding": 9
+        },
+        "footer": {
+            "color": "#999999",
+            "fontSize": 10,
+            "font": "open sans",
+            "location": "bottom-left"
+        },
+        "size": {
+            "canvasHeight": 260,
+            "canvasWidth": 380,
+            "pieInnerRadius": "37%",
+            "pieOuterRadius": "92%"
+        },
+        "data": {
+            "sortOrder": "value-desc",
+            "content": [
+                {
+                    "label": "Química",
+                    "value": 40,
+                    "color": "#f30000"
+                },
+                {
+                    "label": "Biología",
+                    "value": 34,
+                    "color": "#0600f3"
+                },
+                {
+                    "label": "Medio ambiente",
+                    "value": 12,
+                    "color": "#00b109"
+                },
+                {
+                    "label": "Economía circular",
+                    "value": 8,
+                    "color": "#14e4b4"
+                },
+                {
+                    "label": "Otros",
+                    "value": 4,
+                    "color": "#0fe7fb"
+                }
+            ]
+        },
+        "labels": {
+            "outer": {
+                "pieDistance": 20
+            },
+            "inner": {
+                "hideWhenLessThanPercentage": 3
+            },
+            "mainLabel": {
+                "fontSize": 11
+            },
+            "percentage": {
+                "color": "#ffffff",
+                "decimalPlaces": 0
+            },
+            "value": {
+                "color": "#adadad",
+                "fontSize": 11
+            },
+            "lines": {
+                "enabled": true
+            },
+            "truncation": {
+                "enabled": true,
+                "truncateLength": 12
+            }
+        },
+        "tooltips": {
+            "enabled": true,
+            "type": "placeholder",
+            "string": "{label}: {value}, {percentage}%"
+        },
+        "effects": {
+            "pullOutSegmentOnClick": {
+                "effect": "none",
+                "speed": 400,
+                "size": 8
+            }
+        },
+        "misc": {
+            "gradient": {
+                "enabled": true,
+                "percentage": 100
+            }
+        },
+        "callbacks": {
+            onClickSegment: function (info) {
+                console.log("click:", info);
+            }
+        }
+    });</script>
+@functions{ public class Grafica
+            {
+                public string Label { get; set; }
+                public int Value { get; set; }
+                public string Color { get; set; }
+            } }

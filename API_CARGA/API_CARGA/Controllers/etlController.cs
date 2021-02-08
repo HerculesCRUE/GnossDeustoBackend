@@ -481,7 +481,7 @@ namespace API_CARGA.Controllers
         /// <param name="hashAlgorithm"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        public string GetHash(HashAlgorithm hashAlgorithm, string input)
+        private string GetHash(HashAlgorithm hashAlgorithm, string input)
         {
 
             // Convert the input string to a byte array and compute the hash.

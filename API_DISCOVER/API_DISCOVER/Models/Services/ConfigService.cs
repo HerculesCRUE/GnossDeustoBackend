@@ -18,6 +18,10 @@ namespace API_DISCOVER.Models.Services
         public IConfigurationRoot Configuration { get; set; }
         private float MaxScore { get; set; }
         private float MinScore { get; set; }
+        private string UnidataDomain { get; set; }
+        private string UnidataUriTransform { get; set; }    
+        private string LaunchDiscoverLoadedEntitiesCronExpression { get; set; }
+        private int? SleepSecondsAfterProcessEntityDiscoverLoadedEntities { get; set; }
 
         ///<summary>
         ///Obtiene el MaxScore
@@ -70,5 +74,122 @@ namespace API_DISCOVER.Models.Services
             }
             return MinScore;
         }
+
+        /// <summary>
+        /// Obtiene la url del dominio de Unidata
+        /// </summary>
+        /// <returns>uri del dominio de Unidata</returns>
+        public string GetUnidataDomain()
+        {
+            if (string.IsNullOrEmpty(UnidataDomain))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                string connectionString = "";
+                if (environmentVariables.Contains("UnidataDomain"))
+                {
+                    connectionString = environmentVariables["UnidataDomain"] as string;
+                }
+                else
+                {
+                    connectionString = Configuration["UnidataDomain"];
+                }
+                UnidataDomain = connectionString;
+            }
+            return UnidataDomain;
+        }
+
+        /// <summary>
+        /// Uri por la que se sustituirá el dominio de las URLs para cargarlas en Unidata
+        /// </summary>
+        /// <returns>Uri por la que se sustituirá el dominio de las URLs para cargarlas en Unidata</returns>
+        public string GetUnidataUriTransform()
+        {
+            if (string.IsNullOrEmpty(UnidataUriTransform))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                string connectionString = "";
+                if (environmentVariables.Contains("UnidataUriTransform"))
+                {
+                    connectionString = environmentVariables["UnidataUriTransform"] as string;
+                }
+                else
+                {
+                    connectionString = Configuration["UnidataUriTransform"];
+                }
+                UnidataUriTransform = connectionString;
+            }
+            return UnidataUriTransform;
+        }
+
+        /// <summary>
+        /// Expresión Cron para representar cuando debe lanzarse el proceso de descubrimiento de enlaces
+        /// </summary>
+        /// <returns>Expresión Cron</returns>
+        public string GetLaunchDiscoverLoadedEntitiesCronExpression()
+        {
+            if (string.IsNullOrEmpty(LaunchDiscoverLoadedEntitiesCronExpression))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                string dataString = "";
+                if (environmentVariables.Contains("LaunchDiscoverLoadedEntitiesCronExpression"))
+                {
+                    dataString = environmentVariables["LaunchDiscoverLoadedEntitiesCronExpression"] as string;
+                }
+                else
+                {
+                    dataString = Configuration["LaunchDiscoverLoadedEntitiesCronExpression"];
+                }
+                LaunchDiscoverLoadedEntitiesCronExpression = dataString;
+            }
+            return LaunchDiscoverLoadedEntitiesCronExpression;
+        }
+
+        /// <summary>
+        /// Segundos para 'dormir' tras procesar una entidad por el proceso de descubrimiento de enlaces
+        /// </summary>
+        /// <returns>Segundos</returns>
+        public int GetSleepSecondsAfterProcessEntityDiscoverLoadedEntities()
+        {
+            if (!SleepSecondsAfterProcessEntityDiscoverLoadedEntities.HasValue)
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                string dataString = "";
+                if (environmentVariables.Contains("SleepSecondsAfterProcessEntityDiscoverLoadedEntities"))
+                {
+                    dataString = environmentVariables["SleepSecondsAfterProcessEntityDiscoverLoadedEntities"] as string;
+                }
+                else
+                {
+                    dataString = Configuration["SleepSecondsAfterProcessEntityDiscoverLoadedEntities"];
+                }
+                int numOut;
+                int.TryParse(dataString, out numOut);
+                SleepSecondsAfterProcessEntityDiscoverLoadedEntities = numOut;
+            }
+            return SleepSecondsAfterProcessEntityDiscoverLoadedEntities.Value;
+        }
+
+
+
     }
 }

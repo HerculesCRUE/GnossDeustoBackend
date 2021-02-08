@@ -4,9 +4,13 @@
 // Clase para la gestión de páginas
 using GestorDocumentacion.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -69,6 +73,7 @@ namespace GestorDocumentacion.Models.Services
         /// <returns>Lista de objetos página</returns>
         public List<Page> GetPages()
         {
+            var consulta = _context.Page.Where(item => item.Route.Contains("Public"));
             return _context.Page.ToList();
         }
         /// <summary>

@@ -4,10 +4,10 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|LINKED DATA SERVER readme| 
 |Descripción|Manual del servicio LINKED DATA SERVER|
-|Versión|0.4|
+|Versión|0.5|
 |Módulo|API DISCOVER|
 |Tipo|Manual|
-|Cambios de la Versión|Presentación y motivación del desarrollo de Linked Data Server|
+|Cambios de la Versión|Cambios en la configuración|
 
 ## LINKED DATA SERVER de ASIO
 
@@ -73,8 +73,6 @@ http://155.54.239.204:8890/sparql
 		"LogPath": "",
 		"NameTitle": "Hércules",
 		"ConstrainedByUrl": "",
-		"PropsTitle": "http://purl.org/roh#title|http://purl.org/roh/mirror/foaf#name",
-		"PropsTransform": "http://purl.org/roh/mirror/vivo#researcherId|http://www.researcherid.com/rid/{value};http://purl.org/roh#ORCID|https://orcid.org/{value};http://purl.org/roh/mirror/vivo#scopusId|https://www.scopus.com/authid/detail.uri?authorId={value};http://purl.org/roh#researcherDBLP|https://dblp.org/pid/{value}.html;http://purl.org/roh#roDBLP|https://dblp.org/rec/{value}.html;http://purl.org/roh/mirror/bibo#doi|https://doi.org/{value};http://purl.org/roh#roPubmed|https://pubmed.ncbi.nlm.nih.gov/{value}/;",		
 		"Authority": "http://localhost:56306/connect/token",
 		"GrantType": "client_credentials",
 		"Scope": "apiCarga",
@@ -94,8 +92,6 @@ Las opciones de configuración son:
  - Sparql.QueryParam: Parámetro para la query en el Endpoint Sparql
  - NameTitle: Nombre para mostrar en el título de la página tras el nombre de la entidad
  - ConstrainedByUrl: Url en la que se encuentran las restricciones ConstrainedBy
- - PropsTitle: Propiedades de la ontología para utilizar como título de las entidades en la presentación de la web. Generalmente http://purl.org/roh/mirror/foaf#name para las personas y http://purl.org/roh#title para el resto de entidades
- - PropsTransform: Propiedades cuya presentación en la web se transforma. Se visualizarán transformadas como enlaces externos según lo especificado en esta configuración. Por ejemplo: 'http://purl.org/roh#ORCID|https://orcid.org/{value}' indica que el valor de la propiedad 'http://purl.org/roh#ORCID' se visualizará como un hipervínculo en la web: https://orcid.org/{valor_de_la_propiedad}
  - Authority: Endpoint para la llamada de obtención del token
  - GrantType: Tipo de concesión de Oauth
  - Scope: Limitación de acceso al api de carga
@@ -104,7 +100,93 @@ Las opciones de configuración son:
  - ClientSecret: "clave" de acceso del cliente
  - UrlHome: Url con la que enlazar el logo de la cabecera 'Hércules'
 
-  
+## Configuración de Linked_Data_Server_Config.json
+
+    {
+		"ConfigTables": [
+			{
+			  "rdfType": "http://purl.org/roh/mirror/foaf#Person",
+			  "tables": [
+				{
+				 "name": "Documentos",
+          			 "fields": [ "ID", "Título", "RdfType" ],
+           			 "query": "select distinct ?ID ?Nombre ?RdfType where { {?ID <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?lista ?p <{ENTITY_ID}>.}UNION{?ID <http://purl.org/roh#correspondingAuthor> <{ENTITY_ID}>.} ?ID <http://purl.org/roh#title> ?Nombre. ?ID a ?RdfType. } "
+       				 }
+			   ]
+			}
+		 ],
+		 "ExcludeRelatedEntity": [ "http://purl.org/roh/mirror/foaf#Person" ],
+		 "ConfigArborGraphs": {
+			 "icons": [
+      				{
+					"rdfType": "http://purl.org/roh/mirror/foaf#Person",
+					"icon": "person-grafo-hercules.svg"
+      				 }
+    			   ],
+			  "arborGraphsRdfType": [
+			  	{
+					"rdfType": "http://purl.org/roh/mirror/foaf#Person",
+					"arborGraphs": [
+				  		{
+						    "name": "Coautores",
+						    "properties": [
+				      			{
+								"name": "Coautor",
+								"query": "select distinct ?coautorID_1 as ?level1 ?coautorID_2 as ?level2 where { ?doc <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?lista ?autores ?coautorID_1. ?lista ?autores2 ?coautorID_2. FILTER(?coautorID_1 in (?coautorID_A)) FILTER(?coautorID_2 in (?coautorID_B)) FILTER(?coautorID_1 != ?coautorID_2 ) { select ?coautorID_A where { ?doc_A <http://purl.org/roh/mirror/bibo#authorList> ?lista_A. ?lista_A ?autor_A <{ENTITY_ID}>. ?lista_A ?autores2_A ?coautorID_A. ?coautorID_A a ?rdftype_A. FILTER(?rdftype_A = <http://purl.org/roh/mirror/foaf#Person>). ?coautorID_A <http://purl.org/roh/mirror/foaf#name> ?name_A. filter(?coautorID_A !=<{ENTITY_ID}>) } order by desc (count(distinct ?doc_A )) asc(?coautorID_A) limit 10 } { select ?coautorID_B where { ?doc_B <http://purl.org/roh/mirror/bibo#authorList> ?lista_B. ?lista_B ?autor_B <{ENTITY_ID}>. ?lista_B ?autores2_B ?coautorID_B. ?coautorID_B a ?rdftype_B. FILTER(?rdftype_B = <http://purl.org/roh/mirror/foaf#Person>). ?coautorID_B <http://purl.org/roh/mirror/foaf#name> ?name. filter(?coautorID_B !=<{ENTITY_ID}>) } order by desc (count(distinct ?doc_B )) asc(?coautorID_B ) limit 10 } }"
+				      			  }
+				    		      ]
+				  		 }
+					 ]
+			      	  }
+			     ]
+		 },
+		 "PropsTitle": [ "http://purl.org/roh#title", "http://purl.org/roh/mirror/foaf#name" ],
+		 "PropsTransform": [
+			    {
+				      "property": "http://purl.org/roh/mirror/vivo#researcherId",
+				      "transform": "http://www.researcherid.com/rid/{value}"
+			    },
+			    {
+				      "property": "http://purl.org/roh#ORCID",
+				      "transform": "https://orcid.org/{value}"
+			    },
+			    {
+				      "property": "http://purl.org/roh/mirror/vivo#scopusId",
+				      "transform": "https://www.scopus.com/authid/detail.uri?authorId={value}"
+			    },
+			    {
+				      "property": "http://purl.org/roh#researcherDBLP",
+				      "transform": "https://dblp.org/pid/{value}.html"
+			    },
+			    {
+				      "property": "http://purl.org/roh#roDBLP",
+				      "transform": "https://dblp.org/rec/{value}.html"
+			    },
+			    {
+				      "property": "http://purl.org/roh/mirror/bibo#doi",
+				      "transform": "https://doi.org/{value}"
+			    },
+			    {
+				      "property": "http://purl.org/roh#roPubmed",
+				      "transform": "https://pubmed.ncbi.nlm.nih.gov/{value}/"
+			    }
+		 ]
+	}
+
+Las opciones de configuración son: 
+ - ConfigTables.rdfType: Si la entidad es del mismo rdfType, se muestra la tabla
+ - ConfigTables.tables.name: Nombre de la tabla a mostrar
+ - ConfigTables.tables.fields: Nombre de los campos a mostrar en la tabla
+ - ConfigTables.tables.query: Consulta que obtiene los datos a mostrar en la tabla
+ - ExcludeRelatedEntity: Entidades relacionadas a excluir
+ - ConfigArborGraphs.icons: Icono a mostrar en el gráfico según su rdfType
+ - arborGraphsRdfType.rdfType: rdfType de la entidad principal del gráfico
+ - arborGraphsRdfType.arborGraps.name: Nombre del gráfico a mostrar
+ - arborGraphsRdfType.arborGraps.properties.name: Nombre de las propiedades del gráfico
+ - arborGraphsRdfType.arborGraps.properties.query: Consulta que obtiene los datos a mostrar en el gráfico
+ - PropsTitle: Propiedades de la ontología para utilizar como título de las entidades en la presentación de la web. Generalmente http://purl.org/roh/mirror/foaf#name para las personas y http://purl.org/roh#title para el resto de entidades
+ - PropsTransform.property: Propiedades cuya presentación en la web se transforma. Se visualizarán transformadas como enlaces externos según lo especificado en PropsTransform.transform
+ - PropsTransform.transform: Las propiedades especificadas en PropsTransform.property se visualizarán como un hipervínculo en la web según lo especificado en esta configuración
 
 ## Dependencias
 

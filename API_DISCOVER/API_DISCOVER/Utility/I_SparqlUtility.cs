@@ -19,6 +19,6 @@ namespace API_DISCOVER.Utility
 {
     public interface I_SparqlUtility
     {
-        public SparqlObject SelectData(string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam);
+        public SparqlObject SelectData(string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam,string pUsername,string pPassword);
     }
 }
