@@ -1,4 +1,4 @@
-name: Sonar_FrontEndCarga
+name: Sonar_Web
 on:
   push:
     branches:
@@ -43,5 +43,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"FrontEndCarga" /o:"hercules-asio-gnoss" /d:sonar.login="${{ secrets.SONAR_TOKEN_FRONTEND }}" /d:sonar.host.url="https://sonarcloud.io"
-           dotnet build FrontEndCarga
+           dotnet build src/Hercules.Asio.Web
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_FRONTEND }}"

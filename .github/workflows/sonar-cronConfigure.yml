@@ -1,4 +1,4 @@
-name: Sonar_CronConfigure
+name: Sonar_Cron
 on:
   push:
     branches:
@@ -43,5 +43,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"CronConfigure" /o:"hercules-asio-gnoss" /d:sonar.login="${{ secrets.SONAR_TOKEN_CRON }}" /d:sonar.host.url="https://sonarcloud.io"
-           dotnet build CronConfigure
+           dotnet build src/Hercules.Asio.Cron
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_CRON }}"

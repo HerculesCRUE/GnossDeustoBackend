@@ -43,5 +43,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"LinkedDataServer" /o:"hercules-asio-gnoss" /d:sonar.login="${{ secrets.SONAR_TOKEN_LINKED_DATA }}" /d:sonar.host.url="https://sonarcloud.io"
-           dotnet build Linked_Data_Server
+           dotnet build src/Hercules.Asio.LinkedDataServer
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_LINKED_DATA }}"
