@@ -129,6 +129,7 @@ handling of RDF/SPARQL linked data, but would provide useful additions.
 The handling of security for any information system is critical.
 TripleStores might include their own security mechanisms, or those might
 have to be handled separately.
+
 | Function                       | Weight | Description                                                                                                                                                                                                                                              |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Data encryption                | 2      | This relates to whether the system provides options to encrypt the data in the store, and the strength of the encryption.                                                                                                                                |
