@@ -17,23 +17,28 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
 {
     public class CallApiVirtualPath
     {
-        readonly TokenBearer _token;
+        private TokenBearer _token;
         readonly ConfigUrlService _serviceUrl;
         readonly ICallService _serviceApi;
+        readonly CallTokenService _tokenService;
         public CallApiVirtualPath(CallTokenService tokenService, ConfigUrlService serviceUrl, ICallService serviceApi)
         {
             _serviceUrl = serviceUrl;
             _serviceApi = serviceApi;
-            if (tokenService != null)
+            _tokenService = tokenService;
+        }
+        private void LoadToken()
+        {
+            if (_token == null)
             {
                 bool tokenCargado = false;
-                while (!tokenCargado) 
+                while (!tokenCargado)
                 {
                     try
                     {
                         Stopwatch sw = new Stopwatch();
                         sw.Start(); // Iniciar la medición.
-                        _token = tokenService.CallTokenApiDocumentacion();
+                        _token = _tokenService.CallTokenApiDocumentacion();
                         tokenCargado = true;
                         sw.Stop();
                         Log.Information($"llamar al token de documentacion : {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
@@ -45,9 +50,9 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
                 }
             }
         }
-
         public PageInfo GetPage(string route)
         {
+            LoadToken();
             string result = _serviceApi.CallGetApi(_serviceUrl.GetUrlDocumentacion(), $"page?route={route}", _token);
             PageInfo resultObject = JsonConvert.DeserializeObject<PageInfo>(result);
             return resultObject;
@@ -55,6 +60,7 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
 
         public List<PageInfo> GetPages()
         {
+            LoadToken();
             string result = _serviceApi.CallGetApi(_serviceUrl.GetUrlDocumentacion(), $"page/list", _token);
             List<PageInfo> resultObject = JsonConvert.DeserializeObject<List<PageInfo>>(result);
             return resultObject;
@@ -62,6 +68,7 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
 
         public void CreatePage(Guid pageId,string route, IFormFile pageHtml)
         {
+            LoadToken();
             string method = $"page/load?route={route}";
             if (!Guid.Empty.Equals(pageId))
             {
@@ -80,6 +87,7 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
 
         public void DeletePage(Guid pageId)
         {
+            LoadToken();
             _serviceApi.CallDeleteApi(_serviceUrl.GetUrlDocumentacion(), $"page/delete?pageId={pageId}",_token);
         }
     }
