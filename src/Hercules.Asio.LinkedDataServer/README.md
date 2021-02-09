@@ -1,10 +1,10 @@
 ![](..//Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 16/12/2020                                                   |
+| Fecha         | 09/02/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|LINKED DATA SERVER readme| 
 |Descripción|Manual del servicio LINKED DATA SERVER|
-|Versión|0.5|
+|Versión|0.6|
 |Módulo|API DISCOVER|
 |Tipo|Manual|
 |Cambios de la Versión|Cambios en la configuración|
@@ -71,14 +71,9 @@ http://155.54.239.204:8890/sparql
 			"QueryParam": "query"
 		},
 		"LogPath": "",
+		"OntologyGraph": "http://graph.um.es/graph/research/roh",
 		"NameTitle": "Hércules",
-		"ConstrainedByUrl": "",
-		"Authority": "http://localhost:56306/connect/token",
-		"GrantType": "client_credentials",
-		"Scope": "apiCarga",
-		"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
-		"ClientId": "LinkedDataServer",
-		"ClientSecret": "secretLinkedDataServer",
+		"ConstrainedByUrl": "",		
 		"UrlHome": "https://herc-as-front-desa.atica.um.es/carga-web"
 	}
 
@@ -90,14 +85,9 @@ Las opciones de configuración son:
  - Sparql.Graph: Grafo en el que se van a consultar los triples
  - Sparql.Endpoint: URL del Endpoint Sparql
  - Sparql.QueryParam: Parámetro para la query en el Endpoint Sparql
+ - OntologyGraph: Grafo del Endpoint Sparql en el que está cargada la ontología
  - NameTitle: Nombre para mostrar en el título de la página tras el nombre de la entidad
- - ConstrainedByUrl: Url en la que se encuentran las restricciones ConstrainedBy
- - Authority: Endpoint para la llamada de obtención del token
- - GrantType: Tipo de concesión de Oauth
- - Scope: Limitación de acceso al api de carga
- - ConfigUrl: Url donde se ejecuta la aplicación API Carga
- - ClientId: Id de cliente
- - ClientSecret: "clave" de acceso del cliente
+ - ConstrainedByUrl: Url en la que se encuentran las restricciones ConstrainedBy 
  - UrlHome: Url con la que enlazar el logo de la cabecera 'Hércules'
 
 ## Configuración de Linked_Data_Server_Config.json
