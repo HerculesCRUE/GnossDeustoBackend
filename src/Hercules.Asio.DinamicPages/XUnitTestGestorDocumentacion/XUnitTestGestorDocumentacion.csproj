@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GestorDocumentacion\GestorDocumentacion.csproj" />
+    <ProjectReference Include="..\GestorDocumentacion\Hercules.Asio.DinamicPages.csproj" />
   </ItemGroup>
 
 </Project>
