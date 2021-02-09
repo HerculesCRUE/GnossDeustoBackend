@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\API_CARGA\API_CARGA.csproj" />
+    <ProjectReference Include="..\API_CARGA\Hercules.Asio.Api.Carga.csproj" />
   </ItemGroup>
 
 </Project>

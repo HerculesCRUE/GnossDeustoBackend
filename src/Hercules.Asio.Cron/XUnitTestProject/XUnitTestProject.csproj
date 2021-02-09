@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CronConfigure\CronConfigure.csproj" />
+    <ProjectReference Include="..\CronConfigure\Hercules.Asio.Cron.csproj" />
   </ItemGroup>
 
 </Project>

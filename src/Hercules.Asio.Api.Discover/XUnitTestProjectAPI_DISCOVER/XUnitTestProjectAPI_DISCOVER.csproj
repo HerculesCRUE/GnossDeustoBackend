@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\API_DISCOVER\API_DISCOVER.csproj" />
+    <ProjectReference Include="..\API_DISCOVER\Hercules.Asio.Api.Discover.csproj" />
   </ItemGroup>
 
   <ItemGroup>

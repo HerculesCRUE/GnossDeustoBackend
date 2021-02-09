@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UrisAutoGenerator\UrisFactory.csproj" />
+    <ProjectReference Include="..\UrisAutoGenerator\Hercules.Asio.UrisFactory.csproj" />
   </ItemGroup>
 
   <ItemGroup>

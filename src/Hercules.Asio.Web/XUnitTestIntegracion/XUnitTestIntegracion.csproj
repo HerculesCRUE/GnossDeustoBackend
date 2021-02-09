@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ApiCargaWebInterface\ApiCargaWebInterface.csproj" />
+    <ProjectReference Include="..\ApiCargaWebInterface\Hercules.Asio.Web.csproj" />
   </ItemGroup>
 
 </Project>
