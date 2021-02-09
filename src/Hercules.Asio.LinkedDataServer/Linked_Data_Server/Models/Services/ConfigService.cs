@@ -21,6 +21,7 @@ namespace Linked_Data_Server.Models.Services
         private string SparqlEndpoint { get; set; }
         private string SparqlQueryParam { get; set; }
         private string UrlHome { get; set; }
+        private string OntologyGraph { get; set; }
 
         ///<summary>
         ///Obtiene el título:NameTitle del fichero appsettings.json
@@ -176,6 +177,32 @@ namespace Linked_Data_Server.Models.Services
 
             }
             return UrlHome;
+        }
+
+        ///<summary>
+        ///Obtiene el grafo de la ontología:OntologyGraph del fichero appsettings.json
+        ///</summary>
+        public string GetOntologyGraph()
+        {
+            if (string.IsNullOrEmpty(NameTitle))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("OntologyGraph"))
+                {
+                    NameTitle = environmentVariables["OntologyGraph"] as string;
+                }
+                else
+                {
+                    NameTitle = Configuration["OntologyGraph"];
+                }
+
+            }
+            return NameTitle;
         }
     }
 

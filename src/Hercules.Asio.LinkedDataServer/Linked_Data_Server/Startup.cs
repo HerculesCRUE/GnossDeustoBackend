@@ -34,10 +34,6 @@ namespace Linked_Data_Server
             {
                 options.ReturnHttpNotAcceptable = true;
             });
-            services.AddSingleton(typeof(ConfigUrlService));
-            services.AddScoped(typeof(CallEtlApiService));
-            services.AddScoped(typeof(ConfigTokenService));
-            services.AddScoped(typeof(CallTokenService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

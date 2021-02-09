@@ -27,12 +27,10 @@ namespace Linked_Data_Server.Controllers
     {
         private readonly static ConfigService mConfigService = new ConfigService();
         private readonly ILogger<HomeController> _logger;
-        private readonly CallEtlApiService _callEtlApiService;
         private readonly static Config_Linked_Data_Server mLinked_Data_Server_Config = LoadLinked_Data_Server_Config();
 
-        public HomeController(ILogger<HomeController> logger, CallEtlApiService callEtlApiService)
+        public HomeController(ILogger<HomeController> logger)
         {
-            _callEtlApiService = callEtlApiService;
             _logger = logger;
         }
 
@@ -65,7 +63,7 @@ namespace Linked_Data_Server.Controllers
             }
 
             //Cargamos la ontología
-            RohGraph ontologyGraph = _callEtlApiService.CallGetOntology();
+            RohGraph ontologyGraph = LoadGraph(mConfigService.GetOntologyGraph());
             SparqlResultSet sparqlResultSetNombresPropiedades = (SparqlResultSet)ontologyGraph.ExecuteQuery("select distinct ?entidad ?nombre where { ?entidad <http://www.w3.org/2000/01/rdf-schema#label> ?nombre. FILTER(lang(?nombre) = 'es')}");
 
             //Guardamos todos los nombres de las propiedades en un diccionario
@@ -126,7 +124,7 @@ namespace Linked_Data_Server.Controllers
                     Dictionary<string, List<Dictionary<string, SparqlObject.Data>>> sparqlObjectDictionaryGraphs = GetEntityDataGraphs(url);
 
                     //Obtenemos las tablas configuradas
-                    List<Table> dataTables = GetDataTables(dataGraph, url);
+                    List<Table> dataTables = GetDataTables(dataInferenceGraph, url);
 
                     //Obtenemos los arborGrah configurados
                     List<ArborGraph> dataArborGrahs = GetDataArborGraphs(dataInferenceGraph, dataGraph, url);
@@ -530,8 +528,6 @@ namespace Linked_Data_Server.Controllers
         }
 
 
-
-
         /// <summary>
         /// Obtiene de la BBDD los datos configurados para pintar las tablas
         /// </summary>
@@ -591,7 +587,7 @@ namespace Linked_Data_Server.Controllers
                         if (result.Count() > 0)
                         {
                             HashSet<string> propsTitle = new HashSet<string>();
-                            foreach(var propTitle in mLinked_Data_Server_Config.PropsTitle)
+                            foreach (var propTitle in mLinked_Data_Server_Config.PropsTitle)
                             {
                                 propsTitle.Add(propTitle);
                             }
@@ -661,7 +657,7 @@ namespace Linked_Data_Server.Controllers
         /// <param name="pNameEntity">Nombre de la entidad</param>
         /// <param name="pRdfType">RdfTypes de la entidad</param>
         /// <returns>Lista de los arborGraphs rellenados</returns>
-        public List<ArborGraph> LoadGraphs(string pEntity, Config_Linked_Data_Server.ConfigArborGraph.ArborGraphRdfType pArborGraphRdfType, string pNameEntity, string pRdfType)
+        private List<ArborGraph> LoadGraphs(string pEntity, Config_Linked_Data_Server.ConfigArborGraph.ArborGraphRdfType pArborGraphRdfType, string pNameEntity, string pRdfType)
         {
             List<ArborGraph> arborGraphs = new List<ArborGraph>();
 
@@ -815,6 +811,52 @@ namespace Linked_Data_Server.Controllers
                 arborGraphs.Add(arborGraph);
             }
             return arborGraphs;
+        }
+
+        private RohGraph LoadGraph(string pGraph)
+        {
+            RohGraph dataGraph = new RohGraph();
+            string consulta = "select ?s ?p ?o where { ?s ?p ?o. }";
+            SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), pGraph, consulta, mConfigService.GetSparqlQueryParam());
+
+            foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+            {
+                SparqlObject.Data sDB = row["s"];
+                SparqlObject.Data pDB = row["p"];
+                SparqlObject.Data oDB = row["o"];                
+                #region S
+                INode sG = null;
+                if (sDB.type == "bnode")
+                {
+                    sG = dataGraph.CreateBlankNode(sDB.value);
+                }
+                else if (sDB.type == "uri")
+                {
+                    sG = dataGraph.CreateUriNode(UriFactory.Create(sDB.value));
+                }
+                #endregion
+                #region P
+                INode pG = dataGraph.CreateUriNode(UriFactory.Create(pDB.value));
+                #endregion
+                #region O
+                INode oG = null;
+                if (oDB.type == "bnode")
+                {
+                    oG = dataGraph.CreateBlankNode(oDB.value);
+                }
+                else if (oDB.type == "typed-literal" || oDB.type == "literal")
+                {
+                    oG = dataGraph.CreateLiteralNode(row["o"].value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                }
+                else if (oDB.type == "uri")
+                {
+                    oG = dataGraph.CreateUriNode(UriFactory.Create(oDB.value));
+                }
+                #endregion
+                dataGraph.Assert(sG, pG, oG);
+            }
+            return dataGraph;
+
         }
     }
 }
