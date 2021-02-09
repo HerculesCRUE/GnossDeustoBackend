@@ -28,17 +28,17 @@ comment:
 flags:
   carga:
     paths:
-      - src/Hercules.Asio.Api.Carga/
+      - ApiCarga/
     carryforward: false
   uris:
     paths:
-      - src/Hercules.Asio.UrisFactory/
+      - UrisFactory/
     carryforward: false
   cron:
     paths:
-      - src/Hercules.Asio.Cron/
+      - Cron/
     carryforward: false
   discover:
     paths:
-      - src/Hercules.Asio.Api.Discover/
+      - Discover/
     carryforward: false
