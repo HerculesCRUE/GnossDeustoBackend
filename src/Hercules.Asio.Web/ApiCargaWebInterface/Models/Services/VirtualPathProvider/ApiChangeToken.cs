@@ -36,14 +36,14 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
 
                     if (!_viewPath.EndsWith(".cshtml") || _viewPath.Contains("Views/Shared/_menupersonalizado.cshtml"))
                     {
-                        Stopwatch sw = new Stopwatch(); // Creación del Stopwatch.
-                        sw.Start(); // Iniciar la medición.
+                        //Stopwatch sw = new Stopwatch(); // Creación del Stopwatch.
+                        //sw.Start(); // Iniciar la medición.
 
 
                         if (!LastRequested(_viewPath).HasValue)
                         {
-                            sw.Stop();
-                            Log.Information($"comprobar si ha cambiado la página {_viewPath}: {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
+                            //sw.Stop();
+                            //Log.Information($"comprobar si ha cambiado la página {_viewPath}: {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
                             return false;
                         }
                         else
@@ -58,20 +58,20 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
                                 {
                                     DateTime lastRequest = LastRequested(_viewPath, true).Value;
                                     bool changed = page.LastModified > lastRequest;
-                                    sw.Stop();
-                                    Log.Information($"comprobar si ha cambiado la página {_viewPath}: {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
+                                    //sw.Stop();
+                                    //Log.Information($"comprobar si ha cambiado la página {_viewPath}: {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
                                     return changed;
                                 }
                                 else
                                 {
-                                    sw.Stop();
-                                    Log.Information($"comprobar si ha cambiado la página {_viewPath}: {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
+                                    //sw.Stop();
+                                    //Log.Information($"comprobar si ha cambiado la página {_viewPath}: {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
                                     return false;
                                 }
                             }
                             else
                             {
-                                sw.Stop();
+                                //sw.Stop();
                                 return false;
                             }
                         }

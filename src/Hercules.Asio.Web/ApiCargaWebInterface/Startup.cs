@@ -67,20 +67,14 @@ namespace ApiCargaWebInterface
                     options.ServiceHost = serviceHost;
                 });
             bool cargado = false;
-            ConfigPathLog configPathLog = new ConfigPathLog();
-            string pathError = $"{configPathLog.GetLogPathBase()}{configPathLog.GetLogPath()}";
-            Log.Logger = new LoggerConfiguration().WriteTo.Logger(x =>
-            {
-                x.WriteTo.File($"{pathError}/log_Tiempos_Info.txt");
-                x.Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Information);
-            })
-            .CreateLogger();
-
-            //CallApiService serviceApi = new CallApiService();
-            //CallTokenService tokenService = new CallTokenService(new ConfigTokenService());
-            //ConfigUrlService serviceUrl = new ConfigUrlService();
-
-            //CallApiVirtualPath apiVirtualPath = new CallApiVirtualPath(tokenService, serviceUrl, serviceApi);
+            //ConfigPathLog configPathLog = new ConfigPathLog();
+            //string pathError = $"{configPathLog.GetLogPathBase()}{configPathLog.GetLogPath()}";
+            //Log.Logger = new LoggerConfiguration().WriteTo.Logger(x =>
+            //{
+            //    x.WriteTo.File($"{pathError}/log_Tiempos_Info.txt");
+            //    x.Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Information);
+            //})
+            //.CreateLogger();
             
             services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
             {

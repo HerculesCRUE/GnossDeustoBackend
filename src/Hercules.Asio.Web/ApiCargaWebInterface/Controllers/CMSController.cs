@@ -40,25 +40,25 @@ namespace ApiCargaWebInterface.Controllers
         [HttpGet("{*url}", Order = int.MaxValue)]
         public IActionResult GetRoute(string url)
         {            
-            Stopwatch sw = new Stopwatch(); // Creación del Stopwatch.
-            sw.Start(); // Iniciar la medición.
+            //Stopwatch sw = new Stopwatch(); // Creación del Stopwatch.
+            //sw.Start(); // Iniciar la medición.
             var page = _documentationApi.GetPage($"/{url}");
             if(page == null)
             {
                 return NotFound();
             }
-            sw.Stop();
-            Log.Information($"Tiempo pasado al hacer GetPage de {url} : {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
+            //sw.Stop();
+            //Log.Information($"Tiempo pasado al hacer GetPage de {url} : {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
             //Cambiar el contendio de los uses
             CmsDataViewModel dataModel = new CmsDataViewModel();
-            sw = new Stopwatch(); // Creación del Stopwatch.
-            sw.Start(); // Iniciar la medición.
+            //sw = new Stopwatch(); // Creación del Stopwatch.
+            //sw.Start(); // Iniciar la medición.
             if (page.Content.Contains("@*<%"))
             {
                 dataModel = _replaceUsesService.PageWithDirectives(page.Content, dataModel);
             }
-            sw.Stop();
-            Log.Information($"cargar las directivas de la página : {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
+            //sw.Stop();
+            //Log.Information($"cargar las directivas de la página : {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
             return View($"/{url}", dataModel);
         }
 

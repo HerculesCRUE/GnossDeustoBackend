@@ -76,8 +76,8 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
         {
             try
             {
-                Stopwatch sw = new Stopwatch();
-                sw.Start(); // Iniciar la medición.
+                //Stopwatch sw = new Stopwatch();
+                //sw.Start(); // Iniciar la medición.
                 var page = _apiVirtualPath.GetPage(viewPath);
                 
                 if (page != null)
@@ -87,8 +87,8 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
                     _viewContent = Encoding.UTF8.GetBytes(page.Content);
                     _lastModified = page.LastModified;
                 }
-                sw.Stop();
-                Log.Information($"Api file info: obtener la ruta: {viewPath} : {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
+                //sw.Stop();
+                //Log.Information($"Api file info: obtener la ruta: {viewPath} : {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
             }
             catch (Exception ex)
             {
