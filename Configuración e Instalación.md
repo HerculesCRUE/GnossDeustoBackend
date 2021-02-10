@@ -12,7 +12,8 @@ El documento enlaza con otras instrucciones que permiten desplegar los
 ## índice
 
  - [Configuración del entorno](#configuración-del-entorno)
-	 - [Instalar PostgreSQL](#instalar-postgreSQL)
+	 - [Instalar PostgreSQL](#instalar-postgresql)
+	 - [Instalar Virtuoso](#instalar-virtuoso)
    	 - [Instalar dotnet](#instalar-dotnet)
    	 - [HTPP + proxy](#htpp-+-proxy)
    	 - [Instalar Git](#instalar-git)
@@ -24,6 +25,7 @@ El documento enlaza con otras instrucciones que permiten desplegar los
 		- [Creación de servicios](#creación-de-servicios)
 
 ## Configuración del entorno
+
 ### Instalar PostgreSQL
 
 Para realizar la instalación de PostgreSQL en CentOS, utilizamos el comando yum install:
@@ -76,6 +78,155 @@ Para cerrar la sesión del motor de bases de datos utilizamos la instrucción \q
     $
 
 También podría desplegarse la imagen docker de [PostegreSQL] (https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/docker-images).
+
+### Instalar Virtuoso
+
+Instalación del servidor Virtuoso:
+    
+    yum update 
+    yum upgrade
+    yum install –y epel epel-release 
+    yum groupinstall 'Development Tools'
+    yum install wget sysstat autoconf.noarch automake.noarch libedit.x86_64 flex.x86_64 bison.x86_64 bison-runtime.x86_64 bison-devel.x86_64 gperf.x86_64 gawk.x86_64 m4.x86_64 libitm47-static.x86_64 libitm47-devel.x86_64 make.x86_64 MAKEDEV.x86_64 openssl.x86_64 openssl-devel.x86_64 openssl-devel glib2-devel.x86_64 glib2.x86_64 libedit* libtool-ltdl-devel* libtool* gcc* tcl nano libitm bash-completion net-tools
+    cd /opt/
+    git clone git://github.com/openlink/virtuoso-opensource.git -b develop/7
+    cd virtuoso-opensource/
+    ./autogen.sh
+    CFLAGS="-O2 -m64"
+    export CFLAGS
+    ./configure --prefix=/opt/virtuoso/
+    make
+    make install
+
+Configuración del servidor Virtuoso:
+        
+    nano /opt/virtuoso/var/lib/virtuoso/db/virtuoso.initdb
+        
+Editamos o añadirmos los siguientes parametros:
+        
+    [Database]
+    MaxCheckpointRemap = 250000
+        
+    [Parameters]
+    StopCompilerWhenXOverRunTime = 1
+    MaxOptimizeLayouts           = 100
+    MaxClientConnections         = 100
+    CheckpointInterval           = -1
+    SchedulerInterval            = 1
+    DirsAllowed                  = ., ../vad, ./dumps
+    ThreadCleanupInterval        = 1
+    ResourcesCleanupInterval     = 1
+    ThreadsPerQuery              = 8
+    NumberOfBuffers               = 340000 (DEPENDE DE LA RAM)
+    MaxDirtyBuffers               = 250000 (DEPENDE DE LA RAM)
+        
+    [HTTPServer]
+    EnableRequestTrap            = 0
+    MaxClientConnections         = 50
+    ServerThreads                = 50
+    
+    [Zero Config]
+    ServerName                   = hercules.gnoss.net
+        
+    [SPARQL]
+    ResultSetMaxRows             = 10000
+    MaxQueryCostEstimationTime   = 99999999999999999999999999999999999999999999       ; in seconds
+    MaxQueryExecutionTime        = 99999999999999999999999999999999999999999999       ; in seconds
+        
+    [I18N]
+    XAnyNormalization            = 3
+        
+    [Flags]
+    enable_joins_only            = 1
+        
+Configuración del servicio:
+        
+    cd /etc/systemd/system/
+    nano virtuoso.service
+        
+En la edición del fichero anterior pegamos el siguiente contenido:
+
+    # ***UnDemonio.service***
+    [Unit]
+    Description=Demonio de Virtuoso
+    After=multi-user.target
+    [Service]
+    Type=simple
+    ExecStart=/bin/virtuoso_ha
+    User=root
+    WorkingDirectory= /opt/virtuoso/var/lib/virtuoso/db
+    Restart=on-failure
+    StandardOutput=syslog
+    StandardError=syslog
+    [Install]
+    WantedBy=multi-user.target
+
+Creamos a continuación el script de ejecución:
+
+    nano /bin/virtuoso_ha 
+        
+Y pegamos el siguiente contenido:
+        
+    #!/bin/bash
+    while true
+        do
+        cuenta=`ps -A | grep -c virtuoso-t`
+        if test "$cuenta" = 0
+        then
+        # ulimit -c unlimited
+        cd /opt/virtuoso/var/lib/virtuoso/db/
+        /opt/virtuoso/bin/virtuoso-t
+        fi
+        sleep 3
+    done
+    
+Damos permiso de ejecución al fichero recién creado:
+    
+    chmod +x /bin/virtuoso_ha
+        
+Activamos y arrancamos el servicio:
+    
+    systemctl enable virtuoso.service
+    systemctl start virtuoso.service
+        
+Definimos una contraseña para el usuario dba de Virtuoso:
+    
+    /opt/virtuoso/bin/isql
+    set PASSWORD dba *password*;
+        
+Finalmente probamos el servidor desde un navegador:
+    
+    http://IP_DEL_SERVIDOR:8890
+        
+El último paso sería configurar la ejecución de checkpoint de Virtuoso, ya que a veces es preferible
+que no sea Virtuoso quien gestione esto, ya que no se tiene el control de la hora exacta en que se 
+hace el proceso.
+
+Editaríamos el siguiente fichero:
+    
+    nano /sbin/checkpoint
+        
+Y pegando el siguiente contenido:
+        
+    sleep 5
+    echo 'checkpoint;' > /tmp/checkpoint
+    /opt/virtuoso/bin/isql 1111 dba I8dTzVSnsn4MP /tmp/checkpoint        
+    
+A continuación damos permisos de ejecución al fichero anterior:
+        
+    chmod +x /sbin/checkpoint
+        
+Añadimos el programa recién creado a crontab
+        
+    nano /etc/crontab
+        
+Y pegamos el siguiente contenido (por ejemplo, para que se haga a los 15 minutos de cada hora):
+    
+    15 * * * * root /sbin/checkpoint
+        
+Y por último reiniciamos crond:
+        
+    systemctl restart crond
 
 ### Instalar dotnet
 
