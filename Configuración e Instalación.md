@@ -77,7 +77,7 @@ Para cerrar la sesión del motor de bases de datos utilizamos la instrucción \q
     testdb=> \q
     $
 
-También podría desplegarse la imagen docker de [PostegreSQL] (https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/docker-images).
+También podría desplegarse la imagen docker de [PostegreSQL](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images).
 
 ### Instalar Virtuoso
 
