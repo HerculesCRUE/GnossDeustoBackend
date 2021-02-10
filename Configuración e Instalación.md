@@ -98,9 +98,9 @@ Instalación del servidor Virtuoso:
     make
     make install
 
-Configuración del servidor Virtuoso:
+Configuración del servidor Virtuoso editando el fichero .ini:
         
-    nano /opt/virtuoso/var/lib/virtuoso/db/virtuoso.initdb
+    nano /opt/virtuoso/var/lib/virtuoso/db/virtuoso.ini
         
 Editamos o añadirmos los siguientes parametros:
         
@@ -146,7 +146,7 @@ Configuración del servicio:
         
 En la edición del fichero anterior pegamos el siguiente contenido:
 
-    # ***UnDemonio.service***
+    # ***Virtuoso.Service***
     [Unit]
     Description=Demonio de Virtuoso
     After=multi-user.target
@@ -154,7 +154,7 @@ En la edición del fichero anterior pegamos el siguiente contenido:
     Type=simple
     ExecStart=/bin/virtuoso_ha
     User=root
-    WorkingDirectory= /opt/virtuoso/var/lib/virtuoso/db
+    WorkingDirectory=/opt/virtuoso/var/lib/virtuoso/db
     Restart=on-failure
     StandardOutput=syslog
     StandardError=syslog
@@ -198,8 +198,8 @@ Finalmente probamos el servidor desde un navegador:
     
     http://IP_DEL_SERVIDOR:8890
         
-El último paso sería configurar la ejecución de checkpoint de Virtuoso, ya que a veces es preferible
-que no sea Virtuoso quien gestione esto, ya que no se tiene el control de la hora exacta en que se 
+El último paso sería configurar la ejecución de [checkpoint de Virtuoso](http://docs.openlinksw.com/virtuoso/checkpointparams/), ya que a veces es preferible
+que no sea Virtuoso quien gestione este proceso, ya que no se tiene el control de la hora exacta en que se 
 hace el proceso.
 
 Editaríamos el siguiente fichero:
