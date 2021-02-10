@@ -19,7 +19,7 @@ namespace XUnitTestAPI_CARGA
             {
                 var options = new DbContextOptionsBuilder<EntityContext>().UseInMemoryDatabase(databaseName: "MockDataBase").Options;
                 EntityContext context = new EntityContext(options, true);
-                OaiPublishRDFService rdfService = new OaiPublishRDFService(context, new CallMockNeedPublishData(), null);
+                OaiPublishRDFService rdfService = new OaiPublishRDFService(context, new CallMockNeedPublishData(), null, new ConfigUrlService());
                 rdfService.PublishRepositories(Guid.NewGuid());
                 Assert.True(true);
             }

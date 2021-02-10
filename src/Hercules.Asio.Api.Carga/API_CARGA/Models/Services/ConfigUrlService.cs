@@ -17,6 +17,8 @@ namespace API_CARGA.Models.Services
         public IConfigurationRoot Configuration { get; set; }
         public string Url { get; set; }
         private string UrlUnidata { get; set; }
+        private string ConfigUrlXmlConverter { get; set; }
+
         ///<summary>
         ///Obtiene la url configurada en ConfigUrl del fichero appsettings.json
         ///</summary>
@@ -69,6 +71,31 @@ namespace API_CARGA.Models.Services
             }
             return UrlUnidata;
         }
-        
+        ///<summary>
+        ///Obtiene la url configurada en ConfigUrlXmlConverter del fichero appsettings.json
+        ///</summary>
+        public string GetUrlXmlConverter()
+        {
+            if (string.IsNullOrEmpty(ConfigUrlXmlConverter))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                string connectionString = "";
+                if (environmentVariables.Contains("ConfigUrlXmlConverter"))
+                {
+                    connectionString = environmentVariables["ConfigUrlXmlConverter"] as string;
+                }
+                else
+                {
+                    connectionString = Configuration["ConfigUrlXmlConverter"];
+                }
+                ConfigUrlXmlConverter = connectionString;
+            }
+            return ConfigUrlXmlConverter;
+        }
     }
 }

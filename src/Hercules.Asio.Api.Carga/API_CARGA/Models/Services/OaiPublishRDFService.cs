@@ -4,11 +4,14 @@
 // Clase para crear una sincronización 
 using API_CARGA.Extras.Excepciones;
 using API_CARGA.Models.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Xml.Linq;
 
@@ -22,7 +25,9 @@ namespace API_CARGA.Models.Services
         readonly EntityContext _context;
         readonly ICallNeedPublishData _publishData;
         readonly TokenBearer _token;
-        public OaiPublishRDFService(EntityContext context, ICallNeedPublishData publishData, CallTokenService tokenService)
+        readonly ConfigUrlService _configUrlService;
+
+        public OaiPublishRDFService(EntityContext context, ICallNeedPublishData publishData, CallTokenService tokenService, ConfigUrlService configUrlService)
         {
             if (tokenService != null)
             {
@@ -30,6 +35,7 @@ namespace API_CARGA.Models.Services
             }
             _context = context;
             _publishData = publishData;
+            _configUrlService = configUrlService;
         }
 
         /// <summary>
@@ -45,16 +51,42 @@ namespace API_CARGA.Models.Services
         {
             bool validationException = false;
             StringBuilder exception = new StringBuilder();
-            List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
-            if (codigoObjeto == null)
-            {
-                listIdentifier = CallListIdentifier(identifier, set, fechaFrom);
-            }
+
             IdentifierOAIPMH lastSyncro = null;
             try
             {
+                //Obtenemos los metadataformat del repositorio
+                List<string> metadataformats = CallListMetadataFormats(identifier);
+
+                //SI los metadataformat contienen "rdf" trtabajamos con el
+                string metadataformat = "";
+                if (metadataformats.Contains("rdf"))
+                {
+                    metadataformat = "rdf";
+                }
+                else
+                {
+                    //Si no, hacemos una peticion al servicio conversor para que nos liste los tipos disponible
+                    List<string> types = JsonConvert.DeserializeObject<List<string>>(CallGetConfigurationsFiles());
+                    bool ismetadata = false;
+                    foreach(string format in metadataformats)
+                    {
+                        if (types.Contains(format))
+                        {
+                            //En caso de que si haya alguno procedemos a llamar al metodo de conversion con ese formato
+                            metadataformat = format;
+                            ismetadata = true;
+                        }
+                    }
+                    if (!ismetadata)
+                    {
+                        //Si en el conversor no hay ningún tipo de los que vienen del OAI-PMH lanzamos exception
+                        throw new Exception("Los metadataformat " + string.Join(",", metadataformats) + " no son válidos.");
+                    }
+                }
                 if (codigoObjeto == null)
                 {
+                    List<IdentifierOAIPMH> listIdentifier = CallListIdentifier(identifier, metadataformat, set, fechaFrom);
                     int totalCount = listIdentifier.Count();
                     foreach (IdentifierOAIPMH identifierOAIPMH in listIdentifier)
                     {
@@ -62,10 +94,20 @@ namespace API_CARGA.Models.Services
                         {
                             AddProcessingState(identifierOAIPMH.Identifier, identifier, jobId, listIdentifier.IndexOf(identifierOAIPMH), totalCount);
                         }
-                        string rdf = CallGetRecord(identifier, identifierOAIPMH.Identifier);
+                        string record = CallGetRecord(identifier,metadataformat, identifierOAIPMH.Identifier);
+
+                        string rdf = "";
+
+                        if(metadataformat == "rdf")
+                        {
+                            rdf = record;
+                        }
+                        else
+                        {
+                            rdf = CallXMLConverter(record, metadataformat);
+                        }
                         try
                         {
-
                             _publishData.CallDataValidate(rdf, identifier, _token);
                             _publishData.CallDataPublish(rdf, jobId, true, _token);
                         }
@@ -88,7 +130,16 @@ namespace API_CARGA.Models.Services
                 }
                 else
                 {
-                    string rdf = CallGetRecord(identifier, codigoObjeto);
+                    string record = CallGetRecord(identifier, metadataformat, codigoObjeto);
+                    string rdf = "";
+                    if (metadataformat == "rdf")
+                    {
+                        rdf = record;
+                    }
+                    else
+                    {
+                        rdf = CallXMLConverter(record, metadataformat);
+                    }
                     _publishData.CallDataValidate(rdf, identifier, _token);
                     _publishData.CallDataPublish(rdf, jobId, false, _token);
                 }
@@ -192,15 +243,37 @@ namespace API_CARGA.Models.Services
         }
 
         /// <summary>
+        /// Obtiene una lista de los metadataformats disponibles
+        /// </summary>
+        /// <param name="identifierRepo">Identificador del repositorio</param>
+        /// <returns>Lista de identificadores</returns>
+        public List<string> CallListMetadataFormats(Guid identifierRepo)
+        {
+            string uri = $"etl/ListMetadataFormats/{identifierRepo}";
+            List<string> listMetadataFormats = new List<string>();
+            string xml = _publishData.CallGetApi(uri, _token);
+            XDocument respuestaXML = XDocument.Load(new StringReader(xml));
+            XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
+            XElement listIdentifierElement = respuestaXML.Root.Element(nameSpace + "ListMetadataFormats");
+            IEnumerable<XElement> listMetadataFormat= listIdentifierElement.Descendants(nameSpace + "metadataFormat");
+            foreach (var metadataFormat in listMetadataFormat)
+            {
+                listMetadataFormats.Add( metadataFormat.Element(nameSpace + "metadataPrefix").Value);
+            }
+            return listMetadataFormats;
+        }
+
+        /// <summary>
         /// Obtiene una lista de identificadores
         /// </summary>
         /// <param name="identifierRepo">Identificador del repositorio</param>
+        /// <param name="metadataPrefix">metadataPrefix</param>
         /// <param name="fechaFrom">fecha a partir de la cual se debe actualizar</param>
         /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
         /// <returns>Lista de identificadores</returns>
-        public List<IdentifierOAIPMH> CallListIdentifier(Guid identifierRepo, string set = null, DateTime? fechaFrom = null)
+        public List<IdentifierOAIPMH> CallListIdentifier(Guid identifierRepo,string metadataPrefix, string set = null, DateTime? fechaFrom = null)
         {
-            string uri = $"etl/ListIdentifiers/{identifierRepo}?metadataPrefix=rdf";
+            string uri = $"etl/ListIdentifiers/{identifierRepo}?metadataPrefix={metadataPrefix}";
             if (set != null)
             {
                 uri += $"&set={set}";
@@ -211,22 +284,41 @@ namespace API_CARGA.Models.Services
                 uri += $"&from={fechaFrom.Value.ToString("u",CultureInfo.InvariantCulture)}&until={until.ToString("u", CultureInfo.InvariantCulture)}";
             }
             List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
-            string xml = _publishData.CallGetApi(uri, _token);
-            XDocument respuestaXML = XDocument.Load(new StringReader(xml));
-            XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
-            XElement listIdentifierElement = respuestaXML.Root.Element(nameSpace + "ListIdentifiers");
-            IEnumerable<XElement> listHeader = listIdentifierElement.Descendants(nameSpace + "header");
-            foreach (var header in listHeader)
+            
+            string resumptionToken = "";
+            while (resumptionToken!=null)
             {
-                string identifier = header.Element(nameSpace + "identifier").Value;
-                string fecha = header.Element(nameSpace + "datestamp").Value;
-                DateTime fechaSincro = DateTime.Parse(fecha).ToUniversalTime();
-                IdentifierOAIPMH identifierOAIPMH = new IdentifierOAIPMH()
+                string xml;
+                if (resumptionToken == "")
                 {
-                    Fecha = fechaSincro,
-                    Identifier = identifier
-                };
-                listIdentifier.Add(identifierOAIPMH);
+                     xml = _publishData.CallGetApi(uri, _token);
+                }
+                else
+                {
+                    xml = _publishData.CallGetApi($"etl/ListIdentifiers/{identifierRepo}?resumptionToken={resumptionToken}", _token);
+                }
+                XDocument respuestaXML = XDocument.Load(new StringReader(xml));
+                XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
+                XElement listIdentifierElement = respuestaXML.Root.Element(nameSpace + "ListIdentifiers");
+                IEnumerable<XElement> listHeader = listIdentifierElement.Descendants(nameSpace + "header");
+                foreach (var header in listHeader)
+                {
+                    string identifier = header.Element(nameSpace + "identifier").Value;
+                    string fecha = header.Element(nameSpace + "datestamp").Value;
+                    DateTime fechaSincro = DateTime.Parse(fecha).ToUniversalTime();
+                    IdentifierOAIPMH identifierOAIPMH = new IdentifierOAIPMH()
+                    {
+                        Fecha = fechaSincro,
+                        Identifier = identifier
+                    };
+                    listIdentifier.Add(identifierOAIPMH);
+                }
+                resumptionToken = null;
+                XElement resumptionTokenElement = listIdentifierElement.Element(nameSpace + "resumptionToken");
+                if(resumptionTokenElement!=null && resumptionTokenElement.Value != "")
+                {
+                    resumptionToken = resumptionTokenElement.Value;
+                }
             }
             return listIdentifier;
         }
@@ -235,17 +327,53 @@ namespace API_CARGA.Models.Services
         /// Obtiene el rdf del identificador en el repositorio
         /// </summary>
         /// <param name="repoIdentifier">Identificador del repositorio</param>
+        /// <param name="metadataPrefix">metadataPrefix</param>
         /// <param name="identifier">Identificador del elemento</param>
         /// <returns>RDF</returns>
-        public string CallGetRecord(Guid repoIdentifier, string identifier)
+        public string CallGetRecord(Guid repoIdentifier,string metadataPrefix, string identifier)
         {
-            string respuesta = _publishData.CallGetApi($"etl/GetRecord/{repoIdentifier}?identifier={identifier}&&metadataPrefix=rdf", _token);
+            string respuesta = _publishData.CallGetApi($"etl/GetRecord/{repoIdentifier}?identifier={identifier}&metadataPrefix={metadataPrefix}", _token);
             XDocument respuestaXML = XDocument.Parse(respuesta);
             XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
             string rdf = respuestaXML.Root.Element(nameSpace + "GetRecord").Descendants(nameSpace + "metadata").First().FirstNode.ToString();
+            rdf=rdf.Replace("xmlns=\""+ nameSpace+"\"", "");
             return rdf;
         }
 
-        
+        /// <summary>
+        /// Obtiene el rdf 
+        /// </summary>
+        /// <param name="record">fichero XML</param>
+        /// <param name="type">configuración del xml</param>
+        /// <returns></returns>
+        public string CallXMLConverter(string record, string type)
+        {
+            byte[] bytedata = Encoding.UTF8.GetBytes(record);
+            var webClient = new WebClient();
+            string boundary = "------------------------" + DateTime.Now.Ticks.ToString("x");
+            webClient.Headers.Add("Content-Type", "multipart/form-data; boundary=" + boundary);
+            var fileData = webClient.Encoding.GetString(bytedata);
+            var package = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n{3}\r\n--{0}--\r\n", boundary, "pXmlFile", "text/xml", fileData);
+
+            var nfile = webClient.Encoding.GetBytes(package);
+
+            byte[] resp = webClient.UploadData(_configUrlService.GetUrlXmlConverter()+"Convert?pType=" + type, "POST", nfile);
+
+
+            string respuesta = System.Text.Encoding.UTF8.GetString(resp);
+            return respuesta;
+        }
+
+        /// <summary>
+        /// Llama al método ConfigurationsFilesList del servicio Conversor_XML_RDF
+        /// </summary>
+        /// <returns>Lista de configuraciones</returns>
+        public string CallGetConfigurationsFiles()
+        {
+            HttpClient client = new HttpClient();
+            var response = client.PostAsync($"{_configUrlService.GetUrlXmlConverter()}ConfigurationFilesList", null).Result;
+            response.EnsureSuccessStatusCode();
+            return response.Content.ReadAsStringAsync().Result;
+        }
     }
 }

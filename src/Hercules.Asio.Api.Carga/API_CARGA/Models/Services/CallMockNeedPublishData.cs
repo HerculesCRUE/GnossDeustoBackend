@@ -120,6 +120,9 @@ namespace API_CARGA.Models.Services
                 rdfFile.Append("</OAI-PMH>");
 
                 xml = rdfFile.ToString();
+            }else if (urlMethod.Contains("ListMetadataFormats"))
+            {
+                xml = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>  <OAI-PMH xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd\" xmlns=\"http://www.openarchives.org/OAI/2.0/\">    <responseDate>2021-02-10T14:24:38Z</responseDate>    <request verb=\"ListMetadataFormats\">http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH</request>    <ListMetadataFormats>      <metadataFormat>        <metadataPrefix>rdf</metadataPrefix>      </metadataFormat>    </ListMetadataFormats>  </OAI-PMH>";
             }
 
             return xml;
