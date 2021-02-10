@@ -13,10 +13,10 @@ El documento enlaza con otras instrucciones que permiten desplegar los
 
  - [Configuración del entorno](#configuración-del-entorno)
 	 - [Instalar PostgreSQL](#instalar-postgresql)
+	 - [Instalar Git](#instalar-git)
 	 - [Instalar Virtuoso](#instalar-virtuoso)
    	 - [Instalar dotnet](#instalar-dotnet)
-   	 - [HTPP + proxy](#htpp-+-proxy)
-   	 - [Instalar Git](#instalar-git)
+   	 - [HTPP + proxy](#htpp-+-proxy)   	 
 - [Descarga de los proyectos](#descarga-de-los-proyectos)
 - [Instalación](#instalación)
 	- [Configuración de los apis](#configuración-de-los-apis)
@@ -78,6 +78,12 @@ Para cerrar la sesión del motor de bases de datos utilizamos la instrucción \q
     $
 
 También podría desplegarse la imagen docker de [PostgreSQL](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images).
+
+### Instalar Git
+
+Para instalar Git basta con ejecutar el siguiente comando:
+
+    yum install git
 
 ### Instalar Virtuoso
 
@@ -295,13 +301,6 @@ Por último Activamos el servicio HTTPD y lo iniciamos con estos comandos:
 
  - `systemctl enable httpd`
  - `systemctl start httpd`
-
-### Instalar Git
-
-Para instalar Git basta con ejecutar el siguiente comando:
-
-    yum install git
-
 
 ## Descarga de los proyectos
 
