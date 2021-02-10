@@ -1,4 +1,4 @@
-name: Sonar_OAI_PMH_CVN
+name: Sonar_CVN2OAI_PMH
 on:
   push:
     branches:
@@ -43,5 +43,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"OAI_PMH_CVN" /o:"hercules-asio-gnoss" /d:sonar.login="${{ secrets.SONAR_TOKEN_OAI_PMH_CVN }}" /d:sonar.host.url="https://sonarcloud.io"
-           dotnet build OAI_PMH_CVN
+           dotnet build src/Hercules.Asio.CVN2OAI_PMH
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_OAI_PMH_CVN }}"

@@ -5,9 +5,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\$(Configuration)\GestorDocumentacion.xml</DocumentationFile>
-  </PropertyGroup>
+
 
   <ItemGroup>
     <PackageReference Include="IdentityServer4" Version="4.0.4" />

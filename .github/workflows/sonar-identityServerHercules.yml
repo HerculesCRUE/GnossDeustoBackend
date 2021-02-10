@@ -1,4 +1,4 @@
-name: Sonar_IdentityServerHercules
+name: Sonar_IdentityServer
 on:
   push:
     branches:
@@ -43,5 +43,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"IdentityServerHercules" /o:"hercules-asio-gnoss" /d:sonar.login="${{ secrets.SONAR_TOKEN_IDENTITY }}" /d:sonar.host.url="https://sonarcloud.io"
-           dotnet build IdentityServerHecules
+           dotnet build src/Hercules.Asio.IdentityServer
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_IDENTITY }}"

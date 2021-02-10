@@ -358,7 +358,7 @@ Scopus (https://www.scopus.com/)
 --------------------
 Scopus is the largest abstract and citation database of peer-reviewed literature: scientific journals, books and conference proceedings. Delivering a comprehensive overview of the world's research output in the fields of science, technology, medicine, social sciences, and arts and humanities, Scopus features smart tools to track, analyze and visualize research.
 
-Dentro de discover se hacen llamadas al método del API 'https://api.elsevier.com/content/search/scopus?query=TITLE({nombre_documento})&view=COMPLETE&apiKey={ScopusApiKey}&httpAccept=application/xml' y se obtienen las publicaciones junto con sus autores, posteriormente se llama al método del API 'https://api.elsevier.com/content/author/author_id/{id_autor}?apiKey={ScopusApiKey} para obtener metadaos de los autores.
+Dentro de discover se hacen llamadas al método del API 'https://api.elsevier.com/content/search/scopus?query=TITLE({nombre_documento})&view=COMPLETE&apiKey={ScopusApiKey}&httpAccept=application/xml' y se obtienen las publicaciones junto con sus autores, posteriormente se llama al método del API 'https://api.elsevier.com/content/author/author_id/{id_autor}?apiKey={ScopusApiKey} para obtener metadatos de los autores.
 
 Web of Science (http://wos.fecyt.es/)	
 --------------------

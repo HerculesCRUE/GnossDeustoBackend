@@ -43,5 +43,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"API_CARGA" /o:"hercules-asio-gnoss" /d:sonar.login="${{ secrets.SONAR_TOKEN_CARGA }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build API_CARGA
+          dotnet build src/Hercules.Asio.Api.Carga
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_CARGA }}"

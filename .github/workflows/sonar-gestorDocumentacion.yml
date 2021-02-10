@@ -1,4 +1,4 @@
-name: Sonar_GestorDocumentacion
+name: Sonar_DinamicPages
 on:
   push:
     branches:
@@ -43,5 +43,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"GestorDocumentacion" /o:"hercules-asio-gnoss" /d:sonar.login="${{ secrets.SONAR_TOKEN_DOCUMENTACION }}" /d:sonar.host.url="https://sonarcloud.io"
-           dotnet build GestorDocumentacion
+           dotnet build src/Hercules.Asio.DinamicPages
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_DOCUMENTACION }}"

@@ -481,6 +481,7 @@ namespace API_CARGA.Controllers
         /// <param name="hashAlgorithm"></param>
         /// <param name="input"></param>
         /// <returns></returns>
+         [NonAction]
         public string GetHash(HashAlgorithm hashAlgorithm, string input)
         {
 

@@ -31,8 +31,8 @@ namespace XUnitTestUrisFactory
             queryString.Add("identifier", "123d");
             ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
             UriFormer uriFormer = new UriFormer(configJsonHandler.GetUrisConfig());
-            string uri = uriFormer.GetURI("gradoOtorgado", queryString, true);
-            string uriResultante = "http://graph.um.es/res/awarded-degree/123d";
+            string uri = uriFormer.GetURI("http://purl.org/roh/mirror/vivo#AdvisorRole", queryString, true);
+            string uriResultante = "http://graph.um.es/res/advisor-role/123d";
 
             Assert.True(uriResultante.Equals(uri));
         }

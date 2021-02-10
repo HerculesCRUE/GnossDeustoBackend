@@ -43,5 +43,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"UrisFactory" /o:"hercules-asio-gnoss" /d:sonar.login="${{ secrets.SONAR_TOKEN_URIS }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build UrisFactory
+          dotnet build src/Hercules.Asio.UrisFactory
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_URIS }}"
