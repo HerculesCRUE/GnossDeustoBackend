@@ -36,8 +36,10 @@ namespace Linked_Data_Server.Controllers
             SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
             {
-
-                searchModelTemplate.entidades.Add(row["s"].value, new SearchModelTemplate.Entidad(row["o"].value, row["rdfType"].value));
+                if (!searchModelTemplate.entidades.ContainsKey(row["s"].value))
+                {
+                    searchModelTemplate.entidades.Add(row["s"].value, new SearchModelTemplate.Entidad(row["o"].value, row["rdfType"].value));
+                }
             }
 
             if (pagina > 1)

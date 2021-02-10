@@ -184,7 +184,7 @@ namespace Linked_Data_Server.Models.Services
         ///</summary>
         public string GetOntologyGraph()
         {
-            if (string.IsNullOrEmpty(NameTitle))
+            if (string.IsNullOrEmpty(OntologyGraph))
             {
                 var builder = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
@@ -194,15 +194,15 @@ namespace Linked_Data_Server.Models.Services
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("OntologyGraph"))
                 {
-                    NameTitle = environmentVariables["OntologyGraph"] as string;
+                    OntologyGraph = environmentVariables["OntologyGraph"] as string;
                 }
                 else
                 {
-                    NameTitle = Configuration["OntologyGraph"];
+                    OntologyGraph = Configuration["OntologyGraph"];
                 }
 
             }
-            return NameTitle;
+            return OntologyGraph;
         }
     }
 
