@@ -6,9 +6,6 @@ Este documento explica cómo configurar el entorno en el que desplegar los
 módulos desarrollados una vez descargados desde GIT y posteriormente
 compilados.
 
-El documento enlaza con otras instrucciones que permiten desplegar los 
-[módulos ya compilados](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Build) o las [imágenes docker](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/docker-images).
-
 ## índice
 
  - [Configuración del entorno](#configuración-del-entorno)
