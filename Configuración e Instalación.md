@@ -324,17 +324,17 @@ y su posterior compilación.Empezamos descargando el repositorio de git, con el 
 Tras realizar este comando de git, se nos pedirá nuestra autenticación para verificar que tenemos acceso al repositorio. 
 Una vez realizado tendremos descargada una carpeta GnossDeustoBackend con los diferentes proyectos:
 
- - **API_CARGA**: se encuentra en API_CARGA/API_CARGA.
+ - **API_CARGA**: se encuentra en GnossDeustoBackend/src
  - **FrontEndCarga**: se encuentra en FrontEndCarga/ApiCargaWebInterface.
  - **OAI_PMH_CVN**: se encuentra en OAI_PMH_CVN/OAI_PMH_CVN
  - **UrisFactory:** se encuentra en UrisFactory/UrisAutoGenerator
  - **UrisFactory:** se encuentra en CronConfigure/CronConfigure
+ - **UrisFactory:** se encuentra en CronConfigure/CronConfigure
+ - **UrisFactory:** se encuentra en CronConfigure/CronConfigure
+ - **UrisFactory:** se encuentra en CronConfigure/CronConfigure
+ - **UrisFactory:** se encuentra en CronConfigure/CronConfigure
+ - **UrisFactory:** se encuentra en CronConfigure/CronConfigure
  
-Las rutas anteriores son las que hay que compilar y ejecutar con los comandos dotnet, por lo que hay que tenerlas en cuenta.
-
-Los proyectos anteriores se pueden [descargar ya compilados](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Build) 
-y ejecutarlos mediante las instrucciones de la carpeta [Build](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Build).
-
 ## Instalación
 
 ### Configuración de los Apis
@@ -420,3 +420,51 @@ Por último ejecutamos estos comandos en el directorio donde estamos.
  - `systemctl start “nombre del archivo.service”`
 
 De este modo no nos tendremos que preocupar de que nuestras aplicaciones se ejecuten porque serán servicios controlados por el sistema.
+
+### HTTP + proxy
+
+Para poder utilizar las aplicaciones debemos instalar un proxy que redirija las peticiones que hagamos al servidor apache al puerto donde tengamos levantada nuestra aplicación.
+Primero instalamos httpd con este comando:
+
+    yum install httpd mod_ssl
+
+Para que nuestro proxy funcione correctamente debemos ejecutar el siguiente comando:
+
+    /usr/sbin/setsebool -P httpd_can_network_connect 1
+
+Para más información sobre el paso anterior:
+https://unix.stackexchange.com/questions/174593/centos-7-httpd-failed-to-make-connection-with-backend
+Lo primero que debemos hacer es indicar a httpd que use los módulos del proxy. Para ello debemos añadir estas líneas en /etc/httpd/conf/httpd.conf
+
+    LoadModule proxy_module modules/mod_proxy.so
+    LoadModule proxy_http_module modules/mod_proxy_http.so
+
+Una vez hecho esto tenemos que hacer un archivo de configuración para redirigir las peticiones a httpd hacia el sitio correcto. Para ello creamos un archivo .conf en /etc/httpd/conf.d con un contenido como este:
+
+    <VirtualHost *:80>
+        ServerName pruebasdotnet.gnoss.com
+        #URIS
+        ProxyPass /uris http://127.0.0.1:5000
+        ProxyPassReverse /uris http://127.0.0.1:5000
+        #CARGA
+        ProxyPass /carga http://127.0.0.1:5100
+        ProxyPassReverse /carga http://127.0.0.1:5100
+        #SAML
+        ProxyPass /loginsir http://127.0.0.1:5101
+        ProxyPassReverse /loginsir http://127.0.0.1:5101
+        #OAI-PMH
+        ProxyPass /oai-pmh-cvn http://127.0.0.1:5102
+        ProxyPassReverse /oai-pmh-cvn http://127.0.0.1:5102
+        #CARGA-WEB
+        ProxyPass /carga-web http://127.0.0.1:5103
+        ProxyPassReverse /carga-web http://127.0.0.1:5103
+        #CVN
+        ProxyPass /cvn http://127.0.0.1:5104
+        ProxyPassReverse /cvn http://127.0.0.1:5104
+    </VirtualHost>
+
+Con esta configuración conseguimos que lo que se pida a través del puerto 80 a pruebasdotnet.gnoss.com/uris el proxy lo redirija a localhost:5000 que es donde nuestra aplicación URIS está a la escucha.
+Por último Activamos el servicio HTTPD y lo iniciamos con estos comandos:
+
+ - `systemctl enable httpd`
+ - `systemctl start httpd`
