@@ -104,7 +104,8 @@ http://graph.um.es/res/project/RAYD-A-2002-6237
 		"ConfigUrlUnidata": "https://localhost:44354/",
 		"ScopeUnidata": "apiUnidata",
 		"ClientIdUnidata": "unidata",
-		"ClientSecretUnidata": "secretUnidata"
+		"ClientSecretUnidata": "secretUnidata",
+		"ConfigUrlXmlConverter": "https://localhost:44339/Conversor/"
     }
  - PostgreConnectionmigration: Cadena de conexión a la base de datos PostgreSQL
  - LogLevel.Default: Nivel de error por defecto
@@ -137,8 +138,9 @@ http://graph.um.es/res/project/RAYD-A-2002-6237
  - ScopeUnidata: Limitación de acceso al api de unidata
  - ClientIdUnidata: Id de cliente del api de unidata
  - ClientSecretUnidata: "clave" de acceso del api de unidata
+ - ConfigUrlXmlConverter: URL donse está lanzada la aplicación CONVERSOR_XML_RDF
 
-Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_CARGA/API_CARGA/appsettings.json
+Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.Api.Carga/API_CARGA/appsettings.json
 ## Dependencias
 
 - **dotNetRDF**: versión 2.5.1

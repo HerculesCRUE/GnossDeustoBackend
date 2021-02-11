@@ -36,12 +36,12 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
                 {
                     try
                     {
-                        Stopwatch sw = new Stopwatch();
-                        sw.Start(); // Iniciar la medición.
+                        //Stopwatch sw = new Stopwatch();
+                        //sw.Start(); // Iniciar la medición.
                         _token = _tokenService.CallTokenApiDocumentacion();
                         tokenCargado = true;
-                        sw.Stop();
-                        Log.Information($"llamar al token de documentacion : {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
+                        //sw.Stop();
+                        //Log.Information($"llamar al token de documentacion : {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
                     }
                     catch (Exception ex)
                     {

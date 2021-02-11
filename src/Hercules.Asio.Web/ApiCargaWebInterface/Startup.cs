@@ -67,38 +67,15 @@ namespace ApiCargaWebInterface
                     options.ServiceHost = serviceHost;
                 });
             bool cargado = false;
-            ConfigPathLog configPathLog = new ConfigPathLog();
-            string pathError = $"{configPathLog.GetLogPathBase()}{configPathLog.GetLogPath()}";
-            Log.Logger = new LoggerConfiguration().WriteTo.Logger(x =>
-            {
-                x.WriteTo.File($"{pathError}/log_Tiempos_Info.txt");
-                x.Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Information);
-            })
-            .CreateLogger();
-            while (!cargado)
-            {
-                // services.AddMvcRazorRuntimeCompilation();
-                try
-                {
-                    services.AddRazorPages().AddRazorRuntimeCompilation();
-                    services.AddControllersWithViews().AddRazorRuntimeCompilation();
-                    services.Configure<MvcRazorRuntimeCompilationOptions>(opts =>
-                    {
-                        CallApiService serviceApi = new CallApiService();
-                        CallTokenService tokenService = new CallTokenService(new ConfigTokenService());
-                        ConfigUrlService serviceUrl = new ConfigUrlService();
-                        
-                        CallApiVirtualPath apiVirtualPath = new CallApiVirtualPath(tokenService, serviceUrl, serviceApi);
-                        opts.FileProviders.Add(
-                            new ApiFileProvider(apiVirtualPath));
-                    });
-                    cargado = true;
-                }
-                catch (Exception ex)
-                {
-                    cargado = false;
-                }
-            }
+            //ConfigPathLog configPathLog = new ConfigPathLog();
+            //string pathError = $"{configPathLog.GetLogPathBase()}{configPathLog.GetLogPath()}";
+            //Log.Logger = new LoggerConfiguration().WriteTo.Logger(x =>
+            //{
+            //    x.WriteTo.File($"{pathError}/log_Tiempos_Info.txt");
+            //    x.Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Information);
+            //})
+            //.CreateLogger();
+            
             services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
             {
                 var builder = new NpgsqlDbContextOptionsBuilder(opt);
@@ -138,6 +115,30 @@ namespace ApiCargaWebInterface
             services.AddScoped(typeof(CallApiVirtualPath));
             services.AddScoped(typeof(CallRepositoryJobService));
             services.AddScoped(typeof(ReplaceUsesService));
+            var sp = services.BuildServiceProvider();
+
+            // Resolve the services from the service provider
+            var virtualProvider = sp.GetService<CallApiVirtualPath>();
+            while (!cargado)
+            {
+                // services.AddMvcRazorRuntimeCompilation();
+                try
+                {
+                    services.AddRazorPages().AddRazorRuntimeCompilation();
+                    services.AddControllersWithViews().AddRazorRuntimeCompilation();
+                    services.Configure<MvcRazorRuntimeCompilationOptions>(opts =>
+                    {
+
+                        opts.FileProviders.Add(
+                            new ApiFileProvider(virtualProvider));
+                    });
+                    cargado = true;
+                }
+                catch (Exception ex)
+                {
+                    cargado = false;
+                }
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

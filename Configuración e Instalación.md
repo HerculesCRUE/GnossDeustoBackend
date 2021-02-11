@@ -6,16 +6,14 @@ Este documento explica cómo configurar el entorno en el que desplegar los
 módulos desarrollados una vez descargados desde GIT y posteriormente
 compilados.
 
-El documento enlaza con otras instrucciones que permiten desplegar los 
-[módulos ya compilados](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Build) o las [imágenes docker](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/docker-images).
-
 ## índice
 
  - [Configuración del entorno](#configuración-del-entorno)
-	 - [Instalar PostgreSQL](#instalar-postgreSQL)
+	 - [Instalar PostgreSQL](#instalar-postgresql)
+	 - [Instalar Git](#instalar-git)
+	 - [Instalar Virtuoso](#instalar-virtuoso)
    	 - [Instalar dotnet](#instalar-dotnet)
-   	 - [HTPP + proxy](#htpp-+-proxy)
-   	 - [Instalar Git](#instalar-git)
+   	 - [HTTP + proxy](#http-+-proxy)   	 
 - [Descarga de los proyectos](#descarga-de-los-proyectos)
 - [Instalación](#instalación)
 	- [Configuración de los apis](#configuración-de-los-apis)
@@ -24,58 +22,233 @@ El documento enlaza con otras instrucciones que permiten desplegar los
 		- [Creación de servicios](#creación-de-servicios)
 
 ## Configuración del entorno
+
 ### Instalar PostgreSQL
 
 Para realizar la instalación de PostgreSQL en CentOS, utilizamos el comando yum install:
-
-    sudo yum install postgresql-server postgresql-contrib
+	
+	sudo yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+	sudo yum update
+	sudo yum -y install postgresql12-server
 
 En centos debemos inicializar la base de datos manualmente ejecutando el comando initdb de PostgreSQL:
 
-    sudo -u postgres pg_ctl initdb -D /var/lib/pgsql/data
+	sudo /usr/pgsql-12/bin/postgresql-12-setup initdb	
+	sudo systemctl enable postgresql-12
+	sudo systemctl start postgresql-12
+	
+Probamos la conexión:
 
+	sudo -u postgres -i psql
+	
+Y salimos con exit.
+
+Añadimos un usuario llamado hercules al sistema y nos logueamos con el:
+	
+	sudo adduser hercules
+
+Ahora vamos a crear un rol para nuestro usuario "hercules":
+	
+	sudo -u postgres -i createuser --interactive
+	Ingrese el nombre del rol a agregar: hercules
+	¿Será el nuevo rol un superusuario? (s/n) s
+
+Y creamos la base de datos:
+
+	sudo -u postgres -i createdb hercules -O hercules
+
+Nos logueamos como hercules
+
+	su hercules
+
+Probamos la conexion del rol hercules y establecemos el password "hercules":
+
+	psql
+	psql (12.3)
+	Digite «help» para obtener ayuda.
+	hercules=#\password
+	Ingrese la nueva contraseña:
+	Ingrésela nuevamente:
+	
 Ahora que PostgreSQL ha sido instalado correctamente, debemos asegurarnos que esté configurado para iniciar sesión desde localhost. Para esto, abrimos el archivo pg_hba.conf ubicado en el directorio de configuración y lo modificamos de la siguiente forma:
 
-    # TYPE  DATABASE        USER            ADDRESS                 METHOD
+	sudo nano /var/lib/pgsql/12/data/pg_hba.conf
+ 	
+	# TYPE  DATABASE        USER            ADDRESS                 METHOD
+    	
+	# "local" is for Unix domain socket connections only
+    	
+	local   all             postgres                                peer
+	
+	local   all             all                                     md5
+    	
+	# IPv4 local connections:
+    	
+	host    all             all             127.0.0.1/32            md5
+    	
+	# IPv6 local connections:
+    	
+	host    all             all             ::1/128                 md5
+
+Para acabar, hacemos un restart de PostgreSQL:
+
+	sudo systemctl reload postgresql-12
+
+También podría desplegarse la imagen docker de [PostgreSQL](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images).
+
+### Instalar Git
+
+Para instalar Git basta con ejecutar el siguiente comando:
+
+    yum install git
+
+### Instalar Virtuoso
+
+Instalación del servidor Virtuoso:
     
-    # "local" is for Unix domain socket connections only
-    local   all             all                                     peer
-    # IPv4 local connections:
-    host    all             all             127.0.0.1/32            md5
-    # IPv6 local connections:
-    host    all             all             ::1/128                 md5
+    yum update 
+    yum upgrade
+    yum install –y epel-release 
+    yum groupinstall 'Development Tools'
+    yum install wget sysstat autoconf.noarch automake.noarch libedit.x86_64 flex.x86_64 bison.x86_64 bison-runtime.x86_64 bison-devel.x86_64 gperf.x86_64 gawk.x86_64 m4.x86_64 libitm47-static.x86_64 libitm47-devel.x86_64 make.x86_64 MAKEDEV.x86_64 openssl.x86_64 openssl-devel.x86_64 openssl-devel glib2-devel.x86_64 glib2.x86_64 libedit* libtool-ltdl-devel* libtool* gcc* tcl nano libitm bash-completion net-tools
+    cd /opt/
+    git clone git://github.com/openlink/virtuoso-opensource.git -b develop/7
+    cd virtuoso-opensource/
+    ./autogen.sh
+    CFLAGS="-O2 -m64"
+    export CFLAGS
+    ./configure --prefix=/opt/virtuoso/
+    make
+    make install
 
-Si la aplicación se encuentra en un servidor diferente debemos añadir otra línea idéntica a la de localhost pero indicando la ip del servidor remoto.
-Como se puede apreciar, el método de autenticación para las dos últimas entradas debe ser md5 en lugar de peer, ident o trust. Esto permitirá a cualquier aplicación web configurada para acceder a una base de datos específica a través del host localhost.
-Este archivo de configuración se encuentra en :
+Configuración del servidor Virtuoso editando el fichero .ini:
+        
+    nano /opt/virtuoso/var/lib/virtuoso/db/virtuoso.ini
+        
+Editamos o añadirmos los siguientes parametros:
+        
+    [Database]
+    MaxCheckpointRemap = 250000
+        
+    [Parameters]
+    StopCompilerWhenXOverRunTime = 1
+    MaxOptimizeLayouts           = 100
+    MaxClientConnections         = 100
+    CheckpointInterval           = -1
+    SchedulerInterval            = 1
+    DirsAllowed                  = ., ../vad, ./dumps
+    ThreadCleanupInterval        = 1
+    ResourcesCleanupInterval     = 1
+    ThreadsPerQuery              = 8
+    NumberOfBuffers               = 340000 (DEPENDE DE LA RAM)
+    MaxDirtyBuffers               = 250000 (DEPENDE DE LA RAM)
+        
+    [HTTPServer]
+    EnableRequestTrap            = 0
+    MaxClientConnections         = 50
+    ServerThreads                = 50
+    
+    [Zero Config]
+    ServerName                   = hercules.gnoss.net
+        
+    [SPARQL]
+    ResultSetMaxRows             = 10000
+    MaxQueryCostEstimationTime   = 99999999999999999999999999999999999999999999       ; in seconds
+    MaxQueryExecutionTime        = 99999999999999999999999999999999999999999999       ; in seconds
+        
+    [I18N]
+    XAnyNormalization            = 3
+        
+    [Flags]
+    enable_joins_only            = 1
+        
+Configuración del servicio:
+        
+    cd /etc/systemd/system/
+    nano virtuoso.service
+        
+En la edición del fichero anterior pegamos el siguiente contenido:
 
-    /var/lib/pgsql/data/pg_hba.conf
+    # ***Virtuoso.Service***
+    [Unit]
+    Description=Demonio de Virtuoso
+    After=multi-user.target
+    [Service]
+    Type=simple
+    ExecStart=/bin/virtuoso_ha
+    User=root
+    WorkingDirectory=/opt/virtuoso/var/lib/virtuoso/db
+    Restart=on-failure
+    StandardOutput=syslog
+    StandardError=syslog
+    [Install]
+    WantedBy=multi-user.target
 
-Para finalizar, vamos a probar que PostgreSQL esté funcionando correctamente. Para esto vamos a crear una base de datos con su respectivo usuario.
-Para crear un usuario utilizamos el comando createuser de PostgreSQL:
+Creamos a continuación el script de ejecución:
 
-    $ sudo -u postgres createuser -P -d testdb-user
-    Enter password for new role:
-    Enter it again:
+    nano /bin/virtuoso_ha 
+        
+Y pegamos el siguiente contenido:
+        
+    #!/bin/bash
+    while true
+        do
+        cuenta=`ps -A | grep -c virtuoso-t`
+        if test "$cuenta" = 0
+        then
+        # ulimit -c unlimited
+        cd /opt/virtuoso/var/lib/virtuoso/db/
+        /opt/virtuoso/bin/virtuoso-t
+        fi
+        sleep 3
+    done
+    
+Damos permiso de ejecución al fichero recién creado:
+    
+    chmod +x /bin/virtuoso_ha
+        
+Activamos y arrancamos el servicio:
+    
+    systemctl enable virtuoso.service
+    systemctl start virtuoso.service
+        
+Definimos una contraseña para el usuario dba de Virtuoso:
+    
+    /opt/virtuoso/bin/isql
+    set PASSWORD dba *password*;
+        
+Finalmente probamos el servidor desde un navegador:
+    
+    http://IP_DEL_SERVIDOR:8890
+        
+El último paso sería configurar la ejecución de [checkpoint de Virtuoso](http://docs.openlinksw.com/virtuoso/checkpointparams/), ya que a veces es preferible
+que no sea Virtuoso quien gestione este proceso, ya que no se tiene el control de la hora exacta de ejecución.
 
-Para crear una base de datos utilizamos el comando createdb de PostgreSQL, indicando el nombre del usuario que acabamos de crear y escribiendo su contraseña cuando se nos pida:
-
-    $ createdb testdb -U testdb-user -h localhost
-    Password:
-
-Con la base de datos y el usuario creados, será posible iniciar sesión en la base de datos, utilizando el comando psql:
-
-    $ psql testdb -U testdb-user -h localhost
-    Password for user testdb-user:
-    testdb=>
-
-Ejecutamos el comando psql indicándole el nombre de la base de datos (testdb), el nombre de usuario (-U testdb-user) y el host (-h localhost).
-Para cerrar la sesión del motor de bases de datos utilizamos la instrucción \q o la combinación de teclas CTRL-D:
-
-    testdb=> \q
-    $
-
-También podría desplegarse la imagen docker de [PostegreSQL] (https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/docker-images).
+Editaríamos el siguiente fichero:
+    
+    nano /sbin/checkpoint
+        
+Y pegando el siguiente contenido:
+        
+    sleep 5
+    echo 'checkpoint;' > /tmp/checkpoint
+    /opt/virtuoso/bin/isql 1111 dba I8dTzVSnsn4MP /tmp/checkpoint        
+    
+A continuación damos permisos de ejecución al fichero anterior:
+        
+    chmod +x /sbin/checkpoint
+        
+Añadimos el programa recién creado a crontab
+        
+    nano /etc/crontab
+        
+Y pegamos el siguiente contenido (por ejemplo, para que se haga a los 15 minutos de cada hora):
+    
+    15 * * * * root /sbin/checkpoint
+        
+Y por último reiniciamos crond:
+        
+    systemctl restart crond
 
 ### Instalar dotnet
 
@@ -97,6 +270,11 @@ Instalación del entorno de ejecución de .NET Core
 Actualice los productos disponibles para la instalación y, después, instale el entorno de ejecución de .NET Core. En el terminal, ejecute el comando siguiente.
 sudo yum install dotnet-runtime-3.1
 
+Proceso en Centos 8
+
+	sudo dnf install dotnet-sdk-3.1
+	sudo dnf install aspnetcore-runtime-3.1
+	sudo dnf install dotnet-runtime-3.1
 
 ### HTTP + proxy
 
@@ -109,35 +287,63 @@ Para que nuestro proxy funcione correctamente debemos ejecutar el siguiente coma
 
     /usr/sbin/setsebool -P httpd_can_network_connect 1
 
-Para más información sobre el paso anterior:
-https://unix.stackexchange.com/questions/174593/centos-7-httpd-failed-to-make-connection-with-backend
-Lo primero que debemos hacer es indicar a httpd que use los módulos del proxy. Para ello debemos añadir estas líneas en /etc/httpd/conf/httpd.conf
-
-    LoadModule proxy_module modules/mod_proxy.so
-    LoadModule proxy_http_module modules/mod_proxy_http.so
-
 Una vez hecho esto tenemos que hacer un archivo de configuración para redirigir las peticiones a httpd hacia el sitio correcto. Para ello creamos un archivo .conf en /etc/httpd/conf.d con un contenido como este:
 
     <VirtualHost *:80>
         ServerName pruebasdotnet.gnoss.com
-        #URIS
-        ProxyPass /uris http://127.0.0.1:5000
-        ProxyPassReverse /uris http://127.0.0.1:5000
-        #CARGA
-        ProxyPass /carga http://127.0.0.1:5100
-        ProxyPassReverse /carga http://127.0.0.1:5100
-        #SAML
-        ProxyPass /loginsir http://127.0.0.1:5101
-        ProxyPassReverse /loginsir http://127.0.0.1:5101
-        #OAI-PMH
-        ProxyPass /oai-pmh-cvn http://127.0.0.1:5102
-        ProxyPassReverse /oai-pmh-cvn http://127.0.0.1:5102
-        #CARGA-WEB
-        ProxyPass /carga-web http://127.0.0.1:5103
-        ProxyPassReverse /carga-web http://127.0.0.1:5103
-        #CVN
-        ProxyPass /cvn http://127.0.0.1:5104
-        ProxyPassReverse /cvn http://127.0.0.1:5104
+	
+	#APIURIS
+    	ProxyPass /uris http://127.0.0.1:5000
+    	ProxyPassReverse /uris http://127.0.0.1:5000
+
+    	#APICARGA
+    	ProxyPass /carga http://127.0.0.1:5100
+    	ProxyPassReverse /carga http://127.0.0.1:5100
+
+    	#APIFRONTCARGA
+    	ProxyPass /carga-web http://127.0.0.1:5103
+    	ProxyPassReverse /carga-web http://127.0.0.1:5103
+
+    	#APICRON
+    	ProxyPass /cron-config http://127.0.0.1:5107
+    	ProxyPassReverse /cron-config http://127.0.0.1:5107
+
+    	#OAI-PMH-CVN
+    	ProxyPass /oai-pmh-cvn http://127.0.0.1:5102
+    	ProxyPassReverse /oai-pmh-cvn http://127.0.0.1:5102
+
+    	#OAI-PMH-XML
+    	ProxyPass /oai-pmh-xml http://127.0.0.1:5110
+    	ProxyPassReverse /oai-pmh-xml http://127.0.0.1:5110
+
+    	#CVN
+    	ProxyPass /cvn http://127.0.0.1:5104
+    	ProxyPassReverse /cvn http://127.0.0.1:5104
+    	ProxyPass /cvn_swagger http://127.0.0.1:8080
+    	ProxyPassReverse /cvn_swagger http://127.0.0.1:8080
+
+    	#BRIDGE
+    	ProxyPass /fairmetrics_bridge http://127.0.0.1:5200
+    	ProxyPassReverse /fairmetrics_bridge http://127.0.0.1:5200
+    	ProxyPass /bridgeswagger http://127.0.0.1:8082
+    	ProxyPassReverse /bridgeswagger http://127.0.0.1:8082
+
+    	#CLIENTE-TOKEN
+    	ProxyPass /clientetoken http://127.0.0.1:5105
+    	ProxyPassReverse /clientetoken http://127.0.0.1:5105
+
+    	#IDENTITY-SERVER
+    	ProxyPass /identityserver http://127.0.0.1:5108
+    	ProxyPassReverse /identityserver http://127.0.0.1:5108
+
+    	#UNIDATA
+    	ProxyPass /unidata http://127.0.0.1:5106
+    	ProxyPassReverse /unidata http://127.0.0.1:5106
+
+    	#APIGESDOC
+    	ProxyPass /documentacion http://127.0.0.1:5109
+    	ProxyPassReverse /documentacion http://127.0.0.1:5109
+	
     </VirtualHost>
 
 Con esta configuración conseguimos que lo que se pida a través del puerto 80 a pruebasdotnet.gnoss.com/uris el proxy lo redirija a localhost:5000 que es donde nuestra aplicación URIS está a la escucha.
@@ -145,13 +351,6 @@ Por último Activamos el servicio HTTPD y lo iniciamos con estos comandos:
 
  - `systemctl enable httpd`
  - `systemctl start httpd`
-
-### Instalar Git
-
-Para instalar Git basta con ejecutar el siguiente comando:
-
-    yum install git
-
 
 ## Descarga de los proyectos
 
@@ -163,48 +362,75 @@ y su posterior compilación.Empezamos descargando el repositorio de git, con el 
 Tras realizar este comando de git, se nos pedirá nuestra autenticación para verificar que tenemos acceso al repositorio. 
 Una vez realizado tendremos descargada una carpeta GnossDeustoBackend con los diferentes proyectos:
 
- - **API_CARGA**: se encuentra en API_CARGA/API_CARGA.
- - **FrontEndCarga**: se encuentra en FrontEndCarga/ApiCargaWebInterface.
- - **OAI_PMH_CVN**: se encuentra en OAI_PMH_CVN/OAI_PMH_CVN
- - **UrisFactory:** se encuentra en UrisFactory/UrisAutoGenerator
- - **UrisFactory:** se encuentra en CronConfigure/CronConfigure
+ - **triplestore-assessment-interface**: se encuentra en GnossDeustoBackend/src/Benchmark/triplestore-assessment-interface
+ - **cvn**: se encuentra en GnossDeustoBackend/src/cvn
+ - **bridge**: se encuentra en GnossDeustoBackend/src/fair/bridge
+ - **API_CARGA**: se encuentra en GnossDeustoBackend/src/Hercules.Asio.Api.Carga/API_CARGA
+ - **API_DISCOVER**: se encuentra en GnossDeustoBackend/src/Hercules.Asio.Api.Discover/API_DISCOVER
+ - **CronConfigure**: se encuentra en GnossDeustoBackend/src/Hercules.Asio.Cron/CronConfigure
+ - **OAI_PMH_CVN:** se encuentra en GnossDeustoBackend/src/Hercules.Asio.CVN2OAI_PMH/OAI_PMH_CVN
+ - **GestorDocumentacion:** se encuentra en GnossDeustoBackend/src/Hercules.Asio.DinamicPages/GestorDocumentacion
+ - **IdentityServerHecules:** se encuentra en GnossDeustoBackend/src/Hercules.Asio.IdentityServer/IdentityServerHecules
+ - **Linked_Data_Server:** se encuentra en GnossDeustoBackend/src/Hercules.Asio.LinkedDataServer/Linked_Data_Server
+ - **UrisAutoGenerator:** se encuentra en GnossDeustoBackend/src/Hercules.Asio.UrisFactory/UrisAutoGenerator
+ - **ApiCargaWebInterface:** se encuentra en GnossDeustoBackend/src/Hercules.Asio.Web/ApiCargaWebInterface
+ - **Api_Unidata:** se encuentra en GnossDeustoBackend/src/Unidata/Api_Unidata/Api_Unidata
  
-Las rutas anteriores son las que hay que compilar y ejecutar con los comandos dotnet, por lo que hay que tenerlas en cuenta.
-
-Los proyectos anteriores se pueden [descargar ya compilados](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Build) 
-y ejecutarlos mediante las instrucciones de la carpeta [Build](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Build).
-
 ## Instalación
 
-### Configuración de los Apis
+### Configuración de los apis
 
 Antes de ejecutar los apis deberíamos configurar los elementos necesarios para que funcionen correctamente, por ello habrá que configurar los apis que aparecen a continuación:
 
  - **API_CARGA**: En este api tendremos que configurar las cadenas de conexión de postgresql ("PostgreConnection" y "PostgreConnectionmigration"), en el fichero appsettings.json que se encuentra en la raíz del proyecto. Estas cadenas de conexión deberán ir dentro de "ConnectionStrings", quedando: 
- >
-    "ConnectionStrings": {
-       "PostgreConnection": "Host=ip_del_servidor;Database=nombre_de_la_base_de_datos;Username=usuario;Password=contraseña",
-       "PostgreConnectionmigration": "Host=ip_del_servidor;Database=nombre_de_la_base_de_datos;Username=usuario;Password=contraseña"
-    },
-Además, habrá que configurar en el fichero SparqlConfig.json los datos de configración del endpoint Sparql contra el que se realizarán las publicaciones, quedando:
->
-    {
-      "graph": "nombre_del_grafo_para_las_publicaciones",
-      "endpoint": "url_del_endpoint_sparql",
-      "queryparam": "nombre_del_parametro_para_la_query"
+```json
+{
+  "ConnectionStrings": {
+    "PostgreConnectionmigration": "Username=hercules;Password=hercules;Host=localhost;Port=5432;Database=hercules;Pooling=true"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
     }
-
-    
- - **FrontEndCarga**: tendremos que configurar la ubicación del API_CARGA y del CronConfigure al que deben hacer las llamadas mediante el parámetro “ConfigURL” y "ConfigUrlCron" en el appsettings.json que se encontrará en la raíz del proyecto. Ejemplo: `"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/","ConfigUrlCron": "https://localhost:44359/"`
- 
-  - **OAI_PMH_CVN**: En este api tendremos que configurar en el fichero OAI_PMH_CVN_Config.json la url del repositorio de curriculums CVN-XML de la UM y el servicio de CVN-ROH encargado de transformar los CVN-XML al formato RDF ROH, quedando: 
- >
-    {
-      "XML_CVN_Repository": "url_repositorio_curriculums_CVN-XML_UM",
-      "CVN_ROH_converter": "url_CVN-ROH"
-    }
-
-Las opciones de configuración de los [módulos ya compilados están en la carpeta Build](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Build).
+  },
+  "AllowedHosts": "*",
+  "Urls": "http://0.0.0.0:5100",
+  "ConfigUrl": "http://pruebasdotnet.gnoss.com/carga/",
+  "Sparql": {
+    "Graph": "http://data.um.es/graph/um_cvn",
+    "GraphUnidata": "http://data.um.es/graph/unidata",
+    "Endpoint": "http://localhost:8890/sparql",
+    "QueryParam": "query",
+    "GraphRoh": "http://graph.um.es/graph/research/roh",
+    "GraphRohes": "http://graph.um.es/graph/research/rohes",
+    "GraphRohum": "http://graph.um.es/graph/research/rohum"
+  },
+  "RabbitMQ": {
+    "usernameRabbitMq": "",
+    "passwordRabbitMq": "",
+    "hostnameRabbitMq": "pruebas",
+    "uriRabbitMq": "",
+    "virtualhostRabbitMq": "pruebas"
+  },
+  "RabbitQueueName": "HerculesDemoQueue",
+  "Authority": "http://localhost:56306",
+  "ScopeCarga": "apiCarga",
+  "AuthorityGetToken": "http://localhost:56306/connect/token",
+  "GrantType": "client_credentials",
+  "ClientId": "carga",
+  "ClientSecret": "secret",
+  "ScopeOAIPMH": "apiOAIPMH",
+  "ClientIdOAIPMH": "OAIPMH",
+  "ClientSecretOAIPMH": "secretOAIPMH",
+  "ConfigUrlUnidata": "https://localhost:44354/",
+  "ScopeUnidata": "apiUnidata",
+  "ClientIdUnidata": "unidata",
+  "ClientSecretUnidata": "secretUnidata",
+  "ConfigUrlXmlConverter": "https://localhost:44339/Conversor/"
+}
+```
 
 ### Control de aplicaciones
 
@@ -259,3 +485,4 @@ Por último ejecutamos estos comandos en el directorio donde estamos.
  - `systemctl start “nombre del archivo.service”`
 
 De este modo no nos tendremos que preocupar de que nuestras aplicaciones se ejecuten porque serán servicios controlados por el sistema.
+

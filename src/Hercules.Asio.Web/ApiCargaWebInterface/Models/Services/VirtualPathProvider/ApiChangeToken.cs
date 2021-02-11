@@ -33,35 +33,49 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
             {
                 try
                 {
-                   
-                    if (!_viewPath.EndsWith(".cshtml") || _viewPath.Contains("_menupersonalizado")) 
+
+                    if (!_viewPath.EndsWith(".cshtml") || _viewPath.Contains("Views/Shared/_menupersonalizado.cshtml"))
                     {
-                        Stopwatch sw = new Stopwatch(); // Creación del Stopwatch.
-                        sw.Start(); // Iniciar la medición.
-                        PageInfo page = _apiVirtualPath.GetPage(_viewPath);
-                        if (page != null)
+                        //Stopwatch sw = new Stopwatch(); // Creación del Stopwatch.
+                        //sw.Start(); // Iniciar la medición.
+
+
+                        if (!LastRequested(_viewPath).HasValue)
                         {
-                            if (!LastRequested(_viewPath).HasValue)
-                            {
-                                sw.Stop();
-                                Log.Information($"comprobar si ha cambiado la página {_viewPath}: {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
-                                return false;
-                            }
-                            else
-                            {
-                                DateTime lastRequest = LastRequested(_viewPath, true).Value;
-                                bool changed = page.LastModified > lastRequest;
-                                sw.Stop();
-                                Log.Information($"comprobar si ha cambiado la página {_viewPath}: {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
-                                return changed;
-                            }
+                            //sw.Stop();
+                            //Log.Information($"comprobar si ha cambiado la página {_viewPath}: {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
+                            return false;
                         }
                         else
                         {
-                            sw.Stop();
-                            Log.Information($"comprobar si ha cambiado la página {_viewPath}: {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
-                            return false;
+                            DateTime lastRequested = LastRequested(_viewPath).Value;
+                            DateTime now = DateTime.Now;
+                            var minutos = (now - lastRequested).TotalMinutes;
+                            if (minutos > 1) 
+                            {
+                                PageInfo page = _apiVirtualPath.GetPage(_viewPath);
+                                if (page != null)
+                                {
+                                    DateTime lastRequest = LastRequested(_viewPath, true).Value;
+                                    bool changed = page.LastModified > lastRequest;
+                                    //sw.Stop();
+                                    //Log.Information($"comprobar si ha cambiado la página {_viewPath}: {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
+                                    return changed;
+                                }
+                                else
+                                {
+                                    //sw.Stop();
+                                    //Log.Information($"comprobar si ha cambiado la página {_viewPath}: {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                //sw.Stop();
+                                return false;
+                            }
                         }
+                       
                     }
                     else
                     {
