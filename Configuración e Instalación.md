@@ -16,7 +16,7 @@ El documento enlaza con otras instrucciones que permiten desplegar los
 	 - [Instalar Git](#instalar-git)
 	 - [Instalar Virtuoso](#instalar-virtuoso)
    	 - [Instalar dotnet](#instalar-dotnet)
-   	 - [HTPP + proxy](#htpp-+-proxy)   	 
+   	 - [HTTP + proxy](#htpp-+-proxy)   	 
 - [Descarga de los proyectos](#descarga-de-los-proyectos)
 - [Instalación](#instalación)
 	- [Configuración de los apis](#configuración-de-los-apis)
@@ -29,53 +29,57 @@ El documento enlaza con otras instrucciones que permiten desplegar los
 ### Instalar PostgreSQL
 
 Para realizar la instalación de PostgreSQL en CentOS, utilizamos el comando yum install:
-
-    sudo yum install postgresql-server postgresql-contrib
+	
+	sudo yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+	sudo yum update
+	sudo yum -y install postgresql12-server
 
 En centos debemos inicializar la base de datos manualmente ejecutando el comando initdb de PostgreSQL:
 
-    sudo -u postgres pg_ctl initdb -D /var/lib/pgsql/data
+	sudo /usr/pgsql-12/bin/postgresql-12-setup initdb	
+	sudo systemctl enable postgresql-12
+	sudo systemctl start postgresql-12
+	
+Probamos la conexión:
 
+	sudo -u postgres -i psql
+	
+Y salimos con exit.
+
+Ahora vamos a crear un rol para nuestro usuario "hercules":
+	
+	sudo -u postgres -i createuser --interactive
+	Ingrese el nombre del rol a agregar: hercules
+	¿Será el nuevo rol un superusuario? (s/n) s
+
+Y creamos la base de datos:
+
+	sudo -u postgres -i createdb hercules -O hercules
+
+Probamos la conexion del rol hercules y establecemos el password "hercules":
+
+	psql
+	psql (12.3)
+	Digite «help» para obtener ayuda.
+	hercules=#\password
+	Ingrese la nueva contraseña:
+	Ingrésela nuevamente:
+	
 Ahora que PostgreSQL ha sido instalado correctamente, debemos asegurarnos que esté configurado para iniciar sesión desde localhost. Para esto, abrimos el archivo pg_hba.conf ubicado en el directorio de configuración y lo modificamos de la siguiente forma:
 
-    # TYPE  DATABASE        USER            ADDRESS                 METHOD
-    
-    # "local" is for Unix domain socket connections only
-    local   all             all                                     peer
-    # IPv4 local connections:
-    host    all             all             127.0.0.1/32            md5
-    # IPv6 local connections:
-    host    all             all             ::1/128                 md5
+	sudo nano /var/lib/pgsql/12/data/pg_hba.conf
+ 	# TYPE  DATABASE        USER            ADDRESS                 METHOD
+    	# "local" is for Unix domain socket connections only
+    	local   all             postgres                                peer
+	local   all             all                                     md5
+    	# IPv4 local connections:
+    	host    all             all             127.0.0.1/32            md5
+    	# IPv6 local connections:
+    	host    all             all             ::1/128                 md5
 
-Si la aplicación se encuentra en un servidor diferente debemos añadir otra línea idéntica a la de localhost pero indicando la ip del servidor remoto.
-Como se puede apreciar, el método de autenticación para las dos últimas entradas debe ser md5 en lugar de peer, ident o trust. Esto permitirá a cualquier aplicación web configurada para acceder a una base de datos específica a través del host localhost.
-Este archivo de configuración se encuentra en :
+Para acabar, hacemos un restart de PostgreSQL:
 
-    /var/lib/pgsql/data/pg_hba.conf
-
-Para finalizar, vamos a probar que PostgreSQL esté funcionando correctamente. Para esto vamos a crear una base de datos con su respectivo usuario.
-Para crear un usuario utilizamos el comando createuser de PostgreSQL:
-
-    $ sudo -u postgres createuser -P -d testdb-user
-    Enter password for new role:
-    Enter it again:
-
-Para crear una base de datos utilizamos el comando createdb de PostgreSQL, indicando el nombre del usuario que acabamos de crear y escribiendo su contraseña cuando se nos pida:
-
-    $ createdb testdb -U testdb-user -h localhost
-    Password:
-
-Con la base de datos y el usuario creados, será posible iniciar sesión en la base de datos, utilizando el comando psql:
-
-    $ psql testdb -U testdb-user -h localhost
-    Password for user testdb-user:
-    testdb=>
-
-Ejecutamos el comando psql indicándole el nombre de la base de datos (testdb), el nombre de usuario (-U testdb-user) y el host (-h localhost).
-Para cerrar la sesión del motor de bases de datos utilizamos la instrucción \q o la combinación de teclas CTRL-D:
-
-    testdb=> \q
-    $
+	sudo systemctl reload postgresql-12
 
 También podría desplegarse la imagen docker de [PostgreSQL](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images).
 
