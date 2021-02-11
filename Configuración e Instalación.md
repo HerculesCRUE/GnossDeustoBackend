@@ -376,30 +376,28 @@ Una vez realizado tendremos descargada una carpeta GnossDeustoBackend con los di
 Antes de ejecutar los apis deberíamos configurar los elementos necesarios para que funcionen correctamente, por ello habrá que configurar los apis que aparecen a continuación:
 
  - **API_CARGA**: En este api tendremos que configurar las cadenas de conexión de postgresql ("PostgreConnection" y "PostgreConnectionmigration"), en el fichero appsettings.json que se encuentra en la raíz del proyecto. Estas cadenas de conexión deberán ir dentro de "ConnectionStrings", quedando: 
- >
-    "ConnectionStrings": {
-       "PostgreConnection": "Host=ip_del_servidor;Database=nombre_de_la_base_de_datos;Username=usuario;Password=contraseña",
-       "PostgreConnectionmigration": "Host=ip_del_servidor;Database=nombre_de_la_base_de_datos;Username=usuario;Password=contraseña"
-    },
-Además, habrá que configurar en el fichero SparqlConfig.json los datos de configración del endpoint Sparql contra el que se realizarán las publicaciones, quedando:
->
-    {
-      "graph": "nombre_del_grafo_para_las_publicaciones",
-      "endpoint": "url_del_endpoint_sparql",
-      "queryparam": "nombre_del_parametro_para_la_query"
-    }
-
-    
- - **FrontEndCarga**: tendremos que configurar la ubicación del API_CARGA y del CronConfigure al que deben hacer las llamadas mediante el parámetro “ConfigURL” y "ConfigUrlCron" en el appsettings.json que se encontrará en la raíz del proyecto. Ejemplo: `"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/","ConfigUrlCron": "https://localhost:44359/"`
  
-  - **OAI_PMH_CVN**: En este api tendremos que configurar en el fichero OAI_PMH_CVN_Config.json la url del repositorio de curriculums CVN-XML de la UM y el servicio de CVN-ROH encargado de transformar los CVN-XML al formato RDF ROH, quedando: 
- >
-    {
-      "XML_CVN_Repository": "url_repositorio_curriculums_CVN-XML_UM",
-      "CVN_ROH_converter": "url_CVN-ROH"
+{
+  "ConnectionStrings": {
+    //"PostgreConnection": "Username=hercules;Password=hercules;Host=localhost;Port=5432;Database=hercules;Pooling=true",
+    //"PostgreConnectionmigration": "Username=hercules;Password=hercules;Host=localhost;Port=5432;Database=hercules;Pooling=true"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
     }
-
-Las opciones de configuración de los [módulos ya compilados están en la carpeta Build](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Build).
+  },
+  "AllowedHosts": "*",
+  "Urls": "http://0.0.0.0:5100",
+  //"ConfigUrl": "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/",
+  "Sparql": {
+    //"Graph": "http://data.um.es/graph/um_cvn",
+    //"Endpoint": "http://155.54.239.204:8890/sparql",
+    //"QueryParam": "query"
+  }
+}
 
 ### Control de aplicaciones
 
