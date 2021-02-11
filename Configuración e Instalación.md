@@ -287,13 +287,6 @@ Para que nuestro proxy funcione correctamente debemos ejecutar el siguiente coma
 
     /usr/sbin/setsebool -P httpd_can_network_connect 1
 
-Para más información sobre el paso anterior:
-https://unix.stackexchange.com/questions/174593/centos-7-httpd-failed-to-make-connection-with-backend
-Lo primero que debemos hacer es indicar a httpd que use los módulos del proxy. Para ello debemos añadir estas líneas en /etc/httpd/conf/httpd.conf
-
-    LoadModule proxy_module modules/mod_proxy.so
-    LoadModule proxy_http_module modules/mod_proxy_http.so
-
 Una vez hecho esto tenemos que hacer un archivo de configuración para redirigir las peticiones a httpd hacia el sitio correcto. Para ello creamos un archivo .conf en /etc/httpd/conf.d con un contenido como este:
 
     <VirtualHost *:80>
