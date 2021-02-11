@@ -16,7 +16,7 @@ El documento enlaza con otras instrucciones que permiten desplegar los
 	 - [Instalar Git](#instalar-git)
 	 - [Instalar Virtuoso](#instalar-virtuoso)
    	 - [Instalar dotnet](#instalar-dotnet)
-   	 - [HTTP + proxy](#htpp-+-proxy)   	 
+   	 - [HTTP + proxy](#http-+-proxy)   	 
 - [Descarga de los proyectos](#descarga-de-los-proyectos)
 - [Instalación](#instalación)
 	- [Configuración de los apis](#configuración-de-los-apis)
