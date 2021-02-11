@@ -46,8 +46,6 @@ Y salimos con exit.
 Añadimos un usuario llamado hercules al sistema y nos logueamos con el:
 	
 	sudo adduser hercules
-	
-	su hercules
 
 Ahora vamos a crear un rol para nuestro usuario "hercules":
 	
@@ -58,6 +56,10 @@ Ahora vamos a crear un rol para nuestro usuario "hercules":
 Y creamos la base de datos:
 
 	sudo -u postgres -i createdb hercules -O hercules
+
+Nos logueamos como hercules
+
+	su hercules
 
 Probamos la conexion del rol hercules y establecemos el password "hercules":
 
