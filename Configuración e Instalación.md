@@ -304,7 +304,7 @@ Una vez hecho esto tenemos que hacer un archivo de configuración para redirigir
     	ProxyPass /carga-web http://127.0.0.1:5103
     	ProxyPassReverse /carga-web http://127.0.0.1:5103
 
-    	APICRON
+    	#APICRON
     	ProxyPass /cron-config http://127.0.0.1:5107
     	ProxyPassReverse /cron-config http://127.0.0.1:5107
 
