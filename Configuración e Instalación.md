@@ -270,6 +270,13 @@ Instalación del entorno de ejecución de .NET Core
 Actualice los productos disponibles para la instalación y, después, instale el entorno de ejecución de .NET Core. En el terminal, ejecute el comando siguiente.
 sudo yum install dotnet-runtime-3.1
 
+Proceso en Centos 8
+
+	sudo yum install dotnet-sdk-3.1
+	sudo yum install aspnetcore-runtime-3.1
+	sudo yum install dotnet-runtime-3.1
+
+
 ### HTTP + proxy
 
 Para poder utilizar las aplicaciones debemos instalar un proxy que redirija las peticiones que hagamos al servidor apache al puerto donde tengamos levantada nuestra aplicación.
