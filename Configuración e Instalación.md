@@ -43,6 +43,12 @@ Probamos la conexión:
 	
 Y salimos con exit.
 
+Añadimos un usuario llamado hercules al sistema y nos logueamos con el:
+	
+	sudo adduser hercules
+	
+	su hercules
+
 Ahora vamos a crear un rol para nuestro usuario "hercules":
 	
 	sudo -u postgres -i createuser --interactive
