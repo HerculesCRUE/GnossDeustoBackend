@@ -68,14 +68,22 @@ Probamos la conexion del rol hercules y establecemos el password "hercules":
 Ahora que PostgreSQL ha sido instalado correctamente, debemos asegurarnos que esté configurado para iniciar sesión desde localhost. Para esto, abrimos el archivo pg_hba.conf ubicado en el directorio de configuración y lo modificamos de la siguiente forma:
 
 	sudo nano /var/lib/pgsql/12/data/pg_hba.conf
- 	# TYPE  DATABASE        USER            ADDRESS                 METHOD
-    	# "local" is for Unix domain socket connections only
-    	local   all             postgres                                peer
+ 	
+	# TYPE  DATABASE        USER            ADDRESS                 METHOD
+    	
+	# "local" is for Unix domain socket connections only
+    	
+	local   all             postgres                                peer
+	
 	local   all             all                                     md5
-    	# IPv4 local connections:
-    	host    all             all             127.0.0.1/32            md5
-    	# IPv6 local connections:
-    	host    all             all             ::1/128                 md5
+    	
+	# IPv4 local connections:
+    	
+	host    all             all             127.0.0.1/32            md5
+    	
+	# IPv6 local connections:
+    	
+	host    all             all             ::1/128                 md5
 
 Para acabar, hacemos un restart de PostgreSQL:
 
