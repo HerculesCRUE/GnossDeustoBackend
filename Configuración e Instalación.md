@@ -100,7 +100,7 @@ Instalación del servidor Virtuoso:
     
     yum update 
     yum upgrade
-    yum install –y epel epel-release 
+    yum install –y epel-release 
     yum groupinstall 'Development Tools'
     yum install wget sysstat autoconf.noarch automake.noarch libedit.x86_64 flex.x86_64 bison.x86_64 bison-runtime.x86_64 bison-devel.x86_64 gperf.x86_64 gawk.x86_64 m4.x86_64 libitm47-static.x86_64 libitm47-devel.x86_64 make.x86_64 MAKEDEV.x86_64 openssl.x86_64 openssl-devel.x86_64 openssl-devel glib2-devel.x86_64 glib2.x86_64 libedit* libtool-ltdl-devel* libtool* gcc* tcl nano libitm bash-completion net-tools
     cd /opt/
