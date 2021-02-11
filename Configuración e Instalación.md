@@ -272,10 +272,9 @@ sudo yum install dotnet-runtime-3.1
 
 Proceso en Centos 8
 
-	sudo yum install dotnet-sdk-3.1
-	sudo yum install aspnetcore-runtime-3.1
-	sudo yum install dotnet-runtime-3.1
-
+	sudo dnf install dotnet-sdk-3.1
+	sudo dnf install aspnetcore-runtime-3.1
+	sudo dnf install dotnet-runtime-3.1
 
 ### HTTP + proxy
 
