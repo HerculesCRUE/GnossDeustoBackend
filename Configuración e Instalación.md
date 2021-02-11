@@ -287,24 +287,59 @@ Una vez hecho esto tenemos que hacer un archivo de configuración para redirigir
 
     <VirtualHost *:80>
         ServerName pruebasdotnet.gnoss.com
-        #URIS
-        ProxyPass /uris http://127.0.0.1:5000
-        ProxyPassReverse /uris http://127.0.0.1:5000
-        #CARGA
-        ProxyPass /carga http://127.0.0.1:5100
-        ProxyPassReverse /carga http://127.0.0.1:5100
-        #SAML
-        ProxyPass /loginsir http://127.0.0.1:5101
-        ProxyPassReverse /loginsir http://127.0.0.1:5101
-        #OAI-PMH
-        ProxyPass /oai-pmh-cvn http://127.0.0.1:5102
-        ProxyPassReverse /oai-pmh-cvn http://127.0.0.1:5102
-        #CARGA-WEB
-        ProxyPass /carga-web http://127.0.0.1:5103
-        ProxyPassReverse /carga-web http://127.0.0.1:5103
-        #CVN
-        ProxyPass /cvn http://127.0.0.1:5104
-        ProxyPassReverse /cvn http://127.0.0.1:5104
+	
+	#APIURIS
+    	ProxyPass /uris http://127.0.0.1:5000
+    	ProxyPassReverse /uris http://127.0.0.1:5000
+
+    	#APICARGA
+    	ProxyPass /carga http://127.0.0.1:5100
+    	ProxyPassReverse /carga http://127.0.0.1:5100
+
+    	#APIFRONTCARGA
+    	ProxyPass /carga-web http://127.0.0.1:5103
+    	ProxyPassReverse /carga-web http://127.0.0.1:5103
+
+    	APICRON
+    	ProxyPass /cron-config http://127.0.0.1:5107
+    	ProxyPassReverse /cron-config http://127.0.0.1:5107
+
+    	#OAI-PMH-CVN
+    	ProxyPass /oai-pmh-cvn http://127.0.0.1:5102
+    	ProxyPassReverse /oai-pmh-cvn http://127.0.0.1:5102
+
+    	#OAI-PMH-XML
+    	ProxyPass /oai-pmh-xml http://127.0.0.1:5110
+    	ProxyPassReverse /oai-pmh-xml http://127.0.0.1:5110
+
+    	#CVN
+    	ProxyPass /cvn http://127.0.0.1:5104
+    	ProxyPassReverse /cvn http://127.0.0.1:5104
+    	ProxyPass /cvn_swagger http://127.0.0.1:8080
+    	ProxyPassReverse /cvn_swagger http://127.0.0.1:8080
+
+    	#BRIDGE
+    	ProxyPass /fairmetrics_bridge http://127.0.0.1:5200
+    	ProxyPassReverse /fairmetrics_bridge http://127.0.0.1:5200
+    	ProxyPass /bridgeswagger http://127.0.0.1:8082
+    	ProxyPassReverse /bridgeswagger http://127.0.0.1:8082
+
+    	#CLIENTE-TOKEN
+    	ProxyPass /clientetoken http://127.0.0.1:5105
+    	ProxyPassReverse /clientetoken http://127.0.0.1:5105
+
+    	#IDENTITY-SERVER
+    	ProxyPass /identityserver http://127.0.0.1:5108
+    	ProxyPassReverse /identityserver http://127.0.0.1:5108
+
+    	#UNIDATA
+    	ProxyPass /unidata http://127.0.0.1:5106
+    	ProxyPassReverse /unidata http://127.0.0.1:5106
+
+    	#APIGESDOC
+    	ProxyPass /documentacion http://127.0.0.1:5109
+    	ProxyPassReverse /documentacion http://127.0.0.1:5109
+	
     </VirtualHost>
 
 Con esta configuración conseguimos que lo que se pida a través del puerto 80 a pruebasdotnet.gnoss.com/uris el proxy lo redirija a localhost:5000 que es donde nuestra aplicación URIS está a la escucha.
