@@ -265,6 +265,54 @@ Instalación del entorno de ejecución de .NET Core
 Actualice los productos disponibles para la instalación y, después, instale el entorno de ejecución de .NET Core. En el terminal, ejecute el comando siguiente.
 sudo yum install dotnet-runtime-3.1
 
+### HTTP + proxy
+
+Para poder utilizar las aplicaciones debemos instalar un proxy que redirija las peticiones que hagamos al servidor apache al puerto donde tengamos levantada nuestra aplicación.
+Primero instalamos httpd con este comando:
+
+    yum install httpd mod_ssl
+
+Para que nuestro proxy funcione correctamente debemos ejecutar el siguiente comando:
+
+    /usr/sbin/setsebool -P httpd_can_network_connect 1
+
+Para más información sobre el paso anterior:
+https://unix.stackexchange.com/questions/174593/centos-7-httpd-failed-to-make-connection-with-backend
+Lo primero que debemos hacer es indicar a httpd que use los módulos del proxy. Para ello debemos añadir estas líneas en /etc/httpd/conf/httpd.conf
+
+    LoadModule proxy_module modules/mod_proxy.so
+    LoadModule proxy_http_module modules/mod_proxy_http.so
+
+Una vez hecho esto tenemos que hacer un archivo de configuración para redirigir las peticiones a httpd hacia el sitio correcto. Para ello creamos un archivo .conf en /etc/httpd/conf.d con un contenido como este:
+
+    <VirtualHost *:80>
+        ServerName pruebasdotnet.gnoss.com
+        #URIS
+        ProxyPass /uris http://127.0.0.1:5000
+        ProxyPassReverse /uris http://127.0.0.1:5000
+        #CARGA
+        ProxyPass /carga http://127.0.0.1:5100
+        ProxyPassReverse /carga http://127.0.0.1:5100
+        #SAML
+        ProxyPass /loginsir http://127.0.0.1:5101
+        ProxyPassReverse /loginsir http://127.0.0.1:5101
+        #OAI-PMH
+        ProxyPass /oai-pmh-cvn http://127.0.0.1:5102
+        ProxyPassReverse /oai-pmh-cvn http://127.0.0.1:5102
+        #CARGA-WEB
+        ProxyPass /carga-web http://127.0.0.1:5103
+        ProxyPassReverse /carga-web http://127.0.0.1:5103
+        #CVN
+        ProxyPass /cvn http://127.0.0.1:5104
+        ProxyPassReverse /cvn http://127.0.0.1:5104
+    </VirtualHost>
+
+Con esta configuración conseguimos que lo que se pida a través del puerto 80 a pruebasdotnet.gnoss.com/uris el proxy lo redirija a localhost:5000 que es donde nuestra aplicación URIS está a la escucha.
+Por último Activamos el servicio HTTPD y lo iniciamos con estos comandos:
+
+ - `systemctl enable httpd`
+ - `systemctl start httpd`
+
 ## Descarga de los proyectos
 
 En esta apartado se explica como desplegar mediante la descarga de los proyectos
@@ -375,50 +423,3 @@ Por último ejecutamos estos comandos en el directorio donde estamos.
 
 De este modo no nos tendremos que preocupar de que nuestras aplicaciones se ejecuten porque serán servicios controlados por el sistema.
 
-### HTTP + proxy
-
-Para poder utilizar las aplicaciones debemos instalar un proxy que redirija las peticiones que hagamos al servidor apache al puerto donde tengamos levantada nuestra aplicación.
-Primero instalamos httpd con este comando:
-
-    yum install httpd mod_ssl
-
-Para que nuestro proxy funcione correctamente debemos ejecutar el siguiente comando:
-
-    /usr/sbin/setsebool -P httpd_can_network_connect 1
-
-Para más información sobre el paso anterior:
-https://unix.stackexchange.com/questions/174593/centos-7-httpd-failed-to-make-connection-with-backend
-Lo primero que debemos hacer es indicar a httpd que use los módulos del proxy. Para ello debemos añadir estas líneas en /etc/httpd/conf/httpd.conf
-
-    LoadModule proxy_module modules/mod_proxy.so
-    LoadModule proxy_http_module modules/mod_proxy_http.so
-
-Una vez hecho esto tenemos que hacer un archivo de configuración para redirigir las peticiones a httpd hacia el sitio correcto. Para ello creamos un archivo .conf en /etc/httpd/conf.d con un contenido como este:
-
-    <VirtualHost *:80>
-        ServerName pruebasdotnet.gnoss.com
-        #URIS
-        ProxyPass /uris http://127.0.0.1:5000
-        ProxyPassReverse /uris http://127.0.0.1:5000
-        #CARGA
-        ProxyPass /carga http://127.0.0.1:5100
-        ProxyPassReverse /carga http://127.0.0.1:5100
-        #SAML
-        ProxyPass /loginsir http://127.0.0.1:5101
-        ProxyPassReverse /loginsir http://127.0.0.1:5101
-        #OAI-PMH
-        ProxyPass /oai-pmh-cvn http://127.0.0.1:5102
-        ProxyPassReverse /oai-pmh-cvn http://127.0.0.1:5102
-        #CARGA-WEB
-        ProxyPass /carga-web http://127.0.0.1:5103
-        ProxyPassReverse /carga-web http://127.0.0.1:5103
-        #CVN
-        ProxyPass /cvn http://127.0.0.1:5104
-        ProxyPassReverse /cvn http://127.0.0.1:5104
-    </VirtualHost>
-
-Con esta configuración conseguimos que lo que se pida a través del puerto 80 a pruebasdotnet.gnoss.com/uris el proxy lo redirija a localhost:5000 que es donde nuestra aplicación URIS está a la escucha.
-Por último Activamos el servicio HTTPD y lo iniciamos con estos comandos:
-
- - `systemctl enable httpd`
- - `systemctl start httpd`
