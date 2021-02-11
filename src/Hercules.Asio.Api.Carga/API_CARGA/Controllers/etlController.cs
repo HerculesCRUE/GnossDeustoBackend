@@ -31,17 +31,17 @@ namespace API_CARGA.Controllers
         private IDiscoverItemService _discoverItemService;
         private IShapesConfigService _shapeConfigService;
         readonly ConfigSparql _configSparql;
-        readonly CallUri _callUri;
+        readonly CallOAIPMH _callOAIPMH;
         readonly ConfigUrlService _configUrlService;
         readonly IRabbitMQService _amqpService;
 
-        public etlController(IDiscoverItemService iDiscoverItemService, IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallUri callUri, ConfigUrlService configUrlService, IRabbitMQService amqpService)
+        public etlController(IDiscoverItemService iDiscoverItemService, IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallOAIPMH callOAIPMH, ConfigUrlService configUrlService, IRabbitMQService amqpService)
         {
             _discoverItemService = iDiscoverItemService;
             _repositoriesConfigService = iRepositoriesConfigService;
             _shapeConfigService = iShapeConfigService;
             _configSparql = configSparql;
-            _callUri = callUri;
+            _callOAIPMH = callOAIPMH;
             _configUrlService = configUrlService;
             _amqpService = amqpService;
         }
@@ -278,7 +278,7 @@ namespace API_CARGA.Controllers
             RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
             string uri = repositoryConfig.Url;
             uri += $"?verb=GetRecord&identifier={identifier}&metadataPrefix={metadataPrefix}";
-            byte[] array = _callUri.GetUri(uri);
+            byte[] array = _callOAIPMH.GetUri(uri);
             //byte[] array = getByte(uri);
             return File(array, "application/xml");
         }
@@ -299,7 +299,7 @@ namespace API_CARGA.Controllers
             string uri = repositoryConfig.Url;
             uri += $"?verb=Identify";
             //byte[] array = getByte(uri);
-            byte[] array = _callUri.GetUri(uri);
+            byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
 
@@ -315,7 +315,6 @@ namespace API_CARGA.Controllers
         /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("ListIdentifiers/{repositoryIdentifier}")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public FileResult ListIdentifiers(Guid repositoryIdentifier, string metadataPrefix = null, DateTime? from = null, DateTime? until = null, string set = null, string resumptionToken = null)
@@ -343,8 +342,7 @@ namespace API_CARGA.Controllers
             {
                 uri += $"&resumptionToken={resumptionToken}";
             }
-            //byte[] array = getByte(uri);
-            byte[] array = _callUri.GetUri(uri);
+            byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
 
@@ -370,7 +368,7 @@ namespace API_CARGA.Controllers
                 uri += $"&identifier={identifier}";
             }
             //byte[] array = getByte(uri);
-            byte[] array = _callUri.GetUri(uri);
+            byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
 
@@ -415,7 +413,7 @@ namespace API_CARGA.Controllers
                 uri += $"&resumptionToken={resumptionToken}";
             }
             //byte[] array = getByte(uri);
-            byte[] array = _callUri.GetUri(uri);
+            byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
 
@@ -440,7 +438,7 @@ namespace API_CARGA.Controllers
                 uri += $"&resumptionToken={resumptionToken}";
             }
             //byte[] array = getByte(uri);
-            byte[] array = _callUri.GetUri(uri);
+            byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
 

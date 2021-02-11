@@ -75,6 +75,7 @@ namespace API_CARGA.Models.Services
         ///<param name="rdf">contenido en rdf a publicar</param>
         ///<param name="jobId">En el caso de que haya sido una tarea la que ha lanzado la acción representa el identificador de la tarea</param>
         ///<param name="discoverProcessed">En el caso de que ya se haya procesado el descubrimiento se envía true y se inserta tal cual en BBDD (sin procesar descubrimiento)</param>
+        ///<param name="token">Token</param>
         public void CallDataPublish(string rdf, string jobId = null, bool discoverProcessed = false, TokenBearer token = null)
         {
             var bytes = Encoding.UTF8.GetBytes(rdf);
