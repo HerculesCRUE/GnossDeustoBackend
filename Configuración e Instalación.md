@@ -275,16 +275,19 @@ y su posterior compilación.Empezamos descargando el repositorio de git, con el 
 Tras realizar este comando de git, se nos pedirá nuestra autenticación para verificar que tenemos acceso al repositorio. 
 Una vez realizado tendremos descargada una carpeta GnossDeustoBackend con los diferentes proyectos:
 
- - **API_CARGA**: se encuentra en GnossDeustoBackend/src
- - **FrontEndCarga**: se encuentra en FrontEndCarga/ApiCargaWebInterface.
- - **OAI_PMH_CVN**: se encuentra en OAI_PMH_CVN/OAI_PMH_CVN
- - **UrisFactory:** se encuentra en UrisFactory/UrisAutoGenerator
- - **UrisFactory:** se encuentra en CronConfigure/CronConfigure
- - **UrisFactory:** se encuentra en CronConfigure/CronConfigure
- - **UrisFactory:** se encuentra en CronConfigure/CronConfigure
- - **UrisFactory:** se encuentra en CronConfigure/CronConfigure
- - **UrisFactory:** se encuentra en CronConfigure/CronConfigure
- - **UrisFactory:** se encuentra en CronConfigure/CronConfigure
+ - **triplestore-assessment-interface**: se encuentra en GnossDeustoBackend/src/Benchmark/triplestore-assessment-interface
+ - **cvn**: se encuentra en GnossDeustoBackend/src/cvn
+ - **bridge**: se encuentra en GnossDeustoBackend/src/fair/bridge
+ - **API_CARGA**: se encuentra en GnossDeustoBackend/src/Hercules.Asio.Api.Carga/API_CARGA
+ - **API_DISCOVER**: se encuentra en GnossDeustoBackend/src/Hercules.Asio.Api.Discover/API_DISCOVER
+ - **CronConfigure**: se encuentra en GnossDeustoBackend/src/Hercules.Asio.Cron/CronConfigure
+ - **OAI_PMH_CVN:** se encuentra en GnossDeustoBackend/src/Hercules.Asio.CVN2OAI_PMH/OAI_PMH_CVN
+ - **GestorDocumentacion:** se encuentra en GnossDeustoBackend/src/Hercules.Asio.DinamicPages/GestorDocumentacion
+ - **IdentityServerHecules:** se encuentra en GnossDeustoBackend/src/Hercules.Asio.IdentityServer/IdentityServerHecules
+ - **Linked_Data_Server:** se encuentra en GnossDeustoBackend/src/Hercules.Asio.LinkedDataServer/Linked_Data_Server
+ - **UrisAutoGenerator:** se encuentra en GnossDeustoBackend/src/Hercules.Asio.UrisFactory/UrisAutoGenerator
+ - **ApiCargaWebInterface:** se encuentra en GnossDeustoBackend/src/Hercules.Asio.Web/ApiCargaWebInterface
+ - **Api_Unidata:** se encuentra en GnossDeustoBackend/src/Unidata/Api_Unidata/Api_Unidata
  
 ## Instalación
 
