@@ -339,7 +339,7 @@ Una vez realizado tendremos descargada una carpeta GnossDeustoBackend con los di
  
 ## Instalación
 
-### Configuración de los Apis
+### Configuración de los apis
 
 Antes de ejecutar los apis deberíamos configurar los elementos necesarios para que funcionen correctamente, por ello habrá que configurar los apis que aparecen a continuación:
 
