@@ -376,7 +376,7 @@ Una vez realizado tendremos descargada una carpeta GnossDeustoBackend con los di
 Antes de ejecutar los apis deberíamos configurar los elementos necesarios para que funcionen correctamente, por ello habrá que configurar los apis que aparecen a continuación:
 
  - **API_CARGA**: En este api tendremos que configurar las cadenas de conexión de postgresql ("PostgreConnection" y "PostgreConnectionmigration"), en el fichero appsettings.json que se encuentra en la raíz del proyecto. Estas cadenas de conexión deberán ir dentro de "ConnectionStrings", quedando: 
- 
+< 
 {
   "ConnectionStrings": {
     //"PostgreConnection": "Username=hercules;Password=hercules;Host=localhost;Port=5432;Database=hercules;Pooling=true",
@@ -398,6 +398,7 @@ Antes de ejecutar los apis deberíamos configurar los elementos necesarios para 
     //"QueryParam": "query"
   }
 }
+>
 
 ### Control de aplicaciones
 
