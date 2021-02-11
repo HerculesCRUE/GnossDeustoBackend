@@ -379,8 +379,7 @@ Antes de ejecutar los apis deberíamos configurar los elementos necesarios para 
 ```json
 {
   "ConnectionStrings": {
-    //"PostgreConnection": "Username=hercules;Password=hercules;Host=localhost;Port=5432;Database=hercules;Pooling=true",
-    //"PostgreConnectionmigration": "Username=hercules;Password=hercules;Host=localhost;Port=5432;Database=hercules;Pooling=true"
+    "PostgreConnectionmigration": "Username=hercules;Password=hercules;Host=localhost;Port=5432;Database=hercules;Pooling=true"
   },
   "Logging": {
     "LogLevel": {
@@ -391,12 +390,38 @@ Antes de ejecutar los apis deberíamos configurar los elementos necesarios para 
   },
   "AllowedHosts": "*",
   "Urls": "http://0.0.0.0:5100",
-  //"ConfigUrl": "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/",
+  "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
   "Sparql": {
-    //"Graph": "http://data.um.es/graph/um_cvn",
-    //"Endpoint": "http://155.54.239.204:8890/sparql",
-    //"QueryParam": "query"
-  }
+    "Graph": "http://data.um.es/graph/um_cvn",
+    "GraphUnidata": "http://data.um.es/graph/unidata",
+    "Endpoint": "http://localhost:8890/sparql",
+    "QueryParam": "query",
+    "GraphRoh": "http://graph.um.es/graph/research/roh",
+    "GraphRohes": "http://graph.um.es/graph/research/rohes",
+    "GraphRohum": "http://graph.um.es/graph/research/rohum"
+  },
+  "RabbitMQ": {
+    "usernameRabbitMq": "",
+    "passwordRabbitMq": "",
+    "hostnameRabbitMq": "pruebas",
+    "uriRabbitMq": "",
+    "virtualhostRabbitMq": "pruebas"
+  },
+  "RabbitQueueName": "HerculesDemoQueue",
+  "Authority": "http://localhost:56306",
+  "ScopeCarga": "apiCarga",
+  "AuthorityGetToken": "http://localhost:56306/connect/token",
+  "GrantType": "client_credentials",
+  "ClientId": "carga",
+  "ClientSecret": "secret",
+  "ScopeOAIPMH": "apiOAIPMH",
+  "ClientIdOAIPMH": "OAIPMH",
+  "ClientSecretOAIPMH": "secretOAIPMH",
+  "ConfigUrlUnidata": "https://localhost:44354/",
+  "ScopeUnidata": "apiUnidata",
+  "ClientIdUnidata": "unidata",
+  "ClientSecretUnidata": "secretUnidata",
+  "ConfigUrlXmlConverter": "https://localhost:44339/Conversor/"
 }
 ```
 
