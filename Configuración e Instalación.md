@@ -397,7 +397,7 @@ Antes de ejecutar los apis deberíamos configurar los elementos necesarios para 
   },
   "AllowedHosts": "*",
   "Urls": "http://0.0.0.0:5100",
-  "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
+  "ConfigUrl": "http://pruebasdotnet.gnoss.com/carga/",
   "Sparql": {
     "Graph": "http://data.um.es/graph/um_cvn",
     "GraphUnidata": "http://data.um.es/graph/unidata",
