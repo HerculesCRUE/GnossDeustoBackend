@@ -42,6 +42,8 @@ namespace API_CARGA.Models.Entities
         public string Url { get; set; }
         [ForeignKey("RepositoryID")]
         public virtual ICollection<ShapeConfig> ShapeConfig { get; set; }
+        [ForeignKey("RepositoryID")]
+        public virtual ICollection<RepositoryConfigSet> RepositoryConfigSet { get; set; }
 
 
     }

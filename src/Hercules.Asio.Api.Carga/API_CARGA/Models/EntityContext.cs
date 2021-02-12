@@ -16,6 +16,7 @@ namespace API_CARGA.Models
     {
         private string _defaultSchema;
         public DbSet<RepositoryConfig> RepositoryConfig { get; set; }
+        public DbSet<RepositoryConfigSet> RepositoryConfigSet { get; set; }
         public DbSet<DiscoverItem> DiscoverItem { get; set; }
         public DbSet<ShapeConfig> ShapeConfig { get; set; }
         public DbSet<RepositorySync> RepositorySync { get; set; }

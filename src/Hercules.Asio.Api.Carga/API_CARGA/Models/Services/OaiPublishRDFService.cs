@@ -4,6 +4,7 @@
 // Clase para crear una sincronización 
 using API_CARGA.Extras.Excepciones;
 using API_CARGA.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -111,22 +112,17 @@ namespace API_CARGA.Models.Services
                             _publishData.CallDataValidate(rdf, identifier, _token);
                             _publishData.CallDataPublish(rdf, jobId, true, _token);
                         }
-                        catch (ValidationException ex)
+                        catch (Exception ex)
                         {
                             validationException = true;
-                            if (string.IsNullOrEmpty(codigoObjeto) && lastSyncro != null)
-                            {
-                                AddSyncro(lastSyncro, set, identifier);
-                            }
                             exception.AppendLine(ex.Message);
                         }
                         lastSyncro = identifierOAIPMH;
-
-                    }
-                    if (lastSyncro != null)
-                    {
-                        AddSyncro(lastSyncro, set, identifier);
-                    }
+                        if (lastSyncro != null)
+                        {
+                            AddSyncro(lastSyncro, set, identifier);
+                        }
+                    }                    
                 }
                 else
                 {
@@ -150,11 +146,7 @@ namespace API_CARGA.Models.Services
 
             }
             catch (Exception ex)
-            {
-                if (string.IsNullOrEmpty(codigoObjeto) && lastSyncro != null)
-                {
-                    AddSyncro(lastSyncro, set, identifier);
-                }
+            {               
                 throw new Exception(ex.Message);
             }
 
@@ -168,6 +160,50 @@ namespace API_CARGA.Models.Services
         /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
         private void AddSyncro(IdentifierOAIPMH lastSyncro, string set, Guid repositoryId)
         {
+            //Actualizamos la fecha de la última sincronización           
+            RepositoryConfig repositoryConfig = _context.RepositoryConfig.Include(item => item.RepositoryConfigSet).FirstOrDefault(x => x.RepositoryConfigID == repositoryId);
+            if (set != null)
+            {
+                //En caso de que venga el set
+                if(repositoryConfig.RepositoryConfigSet.FirstOrDefault(x => x.Set == set) != null)
+                {
+                    //actualizamos la fila de la tabla RepositoryConfigSet con la fecha
+                    repositoryConfig.RepositoryConfigSet.FirstOrDefault(x => x.Set == set).LastUpdate = lastSyncro.Fecha;
+                }
+                else
+                {
+                    //Creamos la fila de la tabla RepositoryConfigSet con la fecha
+                    repositoryConfig.RepositoryConfigSet.Add(new RepositoryConfigSet()
+                    {
+                        RepositoryConfigSetID = Guid.NewGuid(),
+                        LastUpdate = lastSyncro.Fecha,
+                        RepositoryID = repositoryId,
+                        Set = set
+                    }); 
+                }
+            }
+            else
+            {
+                //En caso de que no venga el set
+                if (repositoryConfig.RepositoryConfigSet.FirstOrDefault(x => x.Set == "-") != null)
+                {
+                    //Actualizamos la fila de la tabla RepositoryConfigSet(con el campo set '-') con la fecha
+                    repositoryConfig.RepositoryConfigSet.FirstOrDefault(x => x.Set == "-").LastUpdate = lastSyncro.Fecha;
+                }
+                else
+                {
+                    //Creamos la fila de la tabla RepositoryConfigSet con la fecha
+                    repositoryConfig.RepositoryConfigSet.Add(new RepositoryConfigSet()
+                    {
+                        RepositoryConfigSetID = Guid.NewGuid(),
+                        LastUpdate = lastSyncro.Fecha,
+                        RepositoryID=repositoryId,
+                        Set = "-"
+                    });
+                }
+            }
+
+
             if (_context.RepositorySync.Any(item => item.RepositoryId.Equals(repositoryId)))
             {
                 if (!string.IsNullOrEmpty(set))
@@ -320,6 +356,8 @@ namespace API_CARGA.Models.Services
                     resumptionToken = resumptionTokenElement.Value;
                 }
             }
+            listIdentifier = listIdentifier.OrderBy(x => x.Fecha).ToList();
+            
             return listIdentifier;
         }
 
