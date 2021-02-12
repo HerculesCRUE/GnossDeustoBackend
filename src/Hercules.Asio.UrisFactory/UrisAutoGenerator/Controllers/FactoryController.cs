@@ -4,6 +4,7 @@
 // Controlador encargado de generar una uri válida para una resource class y un identificador ORCID
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -46,13 +47,30 @@ namespace UrisFactory.Controllers
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(UrisFactoryErrorReponse))]
         public IActionResult GenerateUri(string resource_class, string identifier, EleccionUri eleccion_uri)
         {
+            if(!System.Uri.IsWellFormedUriString(identifier,System.UriKind.Relative) )
+            {
+                identifier = HttpUtility.UrlEncode(identifier);
+            }
+            
             Dictionary<string, string> queryDictionary = new Dictionary<string, string>();
             if (HttpContext != null)
             {
                 var queryString = HttpContext.Request.Query.ToList();
                 foreach (var value in queryString)
                 {
-                    queryDictionary.Add(value.Key, value.Value.FirstOrDefault());
+                    if (value.Key == "identifier")
+                    {
+                        string valueAux = value.Value.FirstOrDefault();
+                        if (!System.Uri.IsWellFormedUriString(valueAux, System.UriKind.Relative))
+                        {
+                            valueAux = HttpUtility.UrlEncode(valueAux);
+                        }
+                        queryDictionary.Add(value.Key, valueAux);
+                    }
+                    else
+                    {
+                        queryDictionary.Add(value.Key, value.Value.FirstOrDefault());
+                    }
                 }
             }
             else
