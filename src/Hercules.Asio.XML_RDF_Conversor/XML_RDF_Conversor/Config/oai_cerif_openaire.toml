@@ -1,0 +1,250 @@
+# PERSONAS
+[[entities]]
+rdftype = "http://purl.org/roh/mirror/foaf#Person" 
+nameSpace = "https://www.openaire.eu/cerif-profile/1.1/"
+source = "ns:Person"
+id = "@id"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/foaf#name" 
+	source = "ns:PersonName/ns:FirstNames ns:PersonName/ns:FamilyNames"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/foaf#gender" 
+	source = "ns:Gender"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/foaf#mbox" 
+	source = "ns:ElectronicAddress"
+
+	[[entities.subentities]]
+	property = "http://purl.org/roh/mirror/vivo#relatedBy"
+	inverseProperty = "http://purl.org/roh/mirror/vivo#relates"
+
+		[[entities.subentities.entities]]
+		rdftype = "http://purl.org/roh/mirror/vivo#Position"
+		source = "ns:Affiliation" 
+
+		[[entities.subentities.entities.subentities]]
+		property = "http://purl.org/roh/mirror/vivo#relates"
+
+			[[entities.subentities.entities.subentities.entities]]
+			rdftype = "http://purl.org/roh/mirror/foaf#Organization"
+			source = "ns:OrgUnit" 
+			id = "@id"
+
+				[[entities.subentities.entities.subentities.entities.properties]]
+				property = "http://purl.org/roh#title" 
+				source = "ns:Name"
+
+				[[entities.subentities.entities.subentities.entities.properties]]
+				property = "http://purl.org/roh/mirror/vivo#identifier" 
+				source = "ns:Identifier"
+
+				[[entities.subentities.entities.subentities.entities.subentities]]
+				property = "http://purl.org/roh/mirror/obo/ro#BFO_0000051"
+
+					[[entities.subentities.entities.subentities.entities.subentities.entities]]
+					rdftype="http://purl.org/roh/mirror/foaf#Organization" 
+					source = "ns:PartOf/ns:OrgUnit"
+					id = "@id"
+
+						[[entities.subentities.entities.subentities.entities.subentities.entities.properties]]
+						property = "http://purl.org/roh#title" 
+						source = "ns:Name"
+
+# PROYECTOS
+[[entities]]
+rdftype = "http://purl.org/roh/mirror/vivo#Project" 
+nameSpace = "https://www.openaire.eu/cerif-profile/1.1/"
+source = "ns:Project"
+id = "@id"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh#title" 
+	source = "ns:Title"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/vivo#identifier" 
+	source = "ns:Identifier"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh#projectStatus" 
+	source = "ns:Status"	
+
+	[[entities.subentities]]
+	property = "http://purl.org/roh/mirror/vivo#dateTimeInterval"
+
+		[[entities.subentities.entities]]
+		rdftype = "http://purl.org/roh/mirror/vivo#DateTimeInterval"
+		property = "http://purl.org/roh/mirror/vivo#start" 
+		datatype="http://www.w3.org/2001/XMLSchema#datetime"
+		source = "ns:StartDate" 
+
+# ORGANIZACIONES
+[[entities]]
+rdftype = "http://purl.org/roh/mirror/foaf#Organization" 
+nameSpace = "https://www.openaire.eu/cerif-profile/1.1/"
+source = "ns:OrgUnit"
+id = "@id"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh#title" 
+	source = "ns:Name"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/vivo#identifier" 
+	source = "ns:Identifier"
+
+	[[entities.subentities]]
+	property = "http://purl.org/roh/mirror/obo/ro#BFO_0000051"
+
+		[[entities.subentities.entities]]
+		rdftype="http://purl.org/roh/mirror/foaf#Organization" 
+		source = "ns:PartOf/ns:OrgUnit"
+		id = "@id"
+
+			[[entities.subentities.entities.properties]]
+			property = "http://purl.org/roh#title" 
+			source = "ns:Name"
+
+# PUBLICACIONES
+[[entities]]
+rdftypeproperty = "ns:Type"	
+nameSpace = "https://www.openaire.eu/cerif-profile/1.1/"
+source = "ns:Publication"
+id = "@id"
+
+	[[entities.mappingrdftype]]	
+	nameSpace = "https://www.openaire.eu/cerif-profile/vocab/COAR_Publication_Types"
+	source = "http://purl.org/coar/resource_type/c_6501"
+	target = "http://purl.org/roh/mirror/bibo#AcademicArticle"
+
+	[[entities.mappingrdftype]]
+	nameSpace = "https://www.openaire.eu/cerif-profile/vocab/COAR_Publication_Types"
+	source = "http://purl.org/coar/resource_type/c_0640"
+	target = "http://purl.org/roh/mirror/bibo#Journal"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh#title" 
+	source = "ns:Title"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/bibo#pageStart" 
+	source = "ns:StartPage"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/vivo#dateTime" 
+	source = "ns:PublicationDate"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/bibo#pageEnd" 
+	source = "ns:EndPage"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/bibo#doi" 
+	source = "ns:DOI"
+
+	[[entities.subentities]]
+	property = "http://purl.org/roh/mirror/bibo#authorList"
+	
+		[[entities.subentities.entities]]
+		rdftype="http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq" 
+		source="ns:Authors"
+
+			[[entities.subentities.entities.subentities]]
+			
+				[[entities.subentities.entities.subentities.entities]]
+				rdftype="http://purl.org/roh/mirror/foaf#Person"  
+				nameSpace = "https://www.openaire.eu/cerif-profile/1.1/"
+				source = "ns:Author/ns:Person"
+				id = "@id"
+
+					[[entities.subentities.entities.subentities.entities.properties]]
+					property = "http://purl.org/roh/mirror/foaf#name" 
+					source = "ns:PersonName/ns:FirstNames ns:PersonName/ns:FamilyNames"
+	
+	[[entities.subentities]]
+	property = "http://purl.org/roh/mirror/obo/ro#BFO_0000051"
+
+		[[entities.subentities.entities]]
+		rdftype="http://purl.org/roh/mirror/vivo#Project"
+		nameSpace = "https://www.openaire.eu/cerif-profile/1.1/"
+		source = "ns:OriginatesFrom/ns:Project"
+		id = "@id"
+
+			[[entities.subentities.entities.properties]]
+			property = "http://purl.org/roh#title" 
+			source = "ns:Title"
+
+			[[entities.subentities.entities.properties]]
+			property = "http://purl.org/roh/mirror/vivo#identifier" 
+			source = "ns:Identifier"
+
+	[[entities.subentities]]
+	property = "http://purl.org/roh/mirror/vivo#hasPublicationVenue"
+
+		[[entities.subentities.entities]]
+		rdftypeproperty = "ns:Type"
+		nameSpace = "https://www.openaire.eu/cerif-profile/1.1/"
+		source = "ns:PublishedIn/ns:Publication"
+		id = "@id"
+
+			[[entities.subentities.entities.mappingrdftype]]	
+			nameSpace = "https://www.openaire.eu/cerif-profile/vocab/COAR_Publication_Types"
+			source = "http://purl.org/coar/resource_type/c_6501"
+			target = "http://purl.org/roh/mirror/bibo#AcademicArticle"
+
+			[[entities.subentities.entities.mappingrdftype]]
+			nameSpace = "https://www.openaire.eu/cerif-profile/vocab/COAR_Publication_Types"
+			source = "http://purl.org/coar/resource_type/c_0640"
+			target = "http://purl.org/roh/mirror/bibo#Journal"
+
+			[[entities.subentities.entities.properties]]
+			property = "http://purl.org/roh#title" 
+			source = "ns:Title"
+
+# PRODUCTOS
+[[entities]]
+rdftype = "http://purl.org/roh#Activity" 
+nameSpace = "https://www.openaire.eu/cerif-profile/1.1/"
+source = "ns:Product"
+id = "@id"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh#title" 
+	source = "ns:Name"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/vivo#description" 
+	source = "ns:Description"
+
+	[[entities.subentities]]
+	inverseProperty = "http://purl.org/roh#participates"
+
+		[[entities.subentities.entities]]
+		rdftype = "http://purl.org/roh/mirror/vivo#Project" 
+		nameSpace = "https://www.openaire.eu/cerif-profile/1.1/"
+		source = "ns:OriginatesFrom/ns:Project"
+		id = "@id"
+
+			[[entities.subentities.entities.properties]]
+			property = "http://purl.org/roh#title" 
+			source = "ns:Title"
+
+			[[entities.subentities.entities.properties]]
+			property = "http://purl.org/roh/mirror/vivo#identifier" 
+			source = "ns:Identifier"
+
+	[[entities.subentities]]
+	property = "http://purl.org/roh#participatedBy"
+
+		[[entities.subentities.entities]]
+		rdftype = "http://purl.org/roh/mirror/foaf#Person" 
+		nameSpace = "https://www.openaire.eu/cerif-profile/1.1/"
+		source = "ns:Creators/ns:Creator/ns:Person"
+		id = "@id"
+
+			[[entities.subentities.entities.properties]]
+			property = "http://purl.org/roh/mirror/foaf#name" 
+			source = "ns:PersonName/ns:FirstNames ns:PersonName/ns:FamilyNames"
