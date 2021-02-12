@@ -43,6 +43,10 @@ Probamos la conexión:
 	
 Y salimos con exit.
 
+Añadimos un usuario llamado hercules al sistema y nos logueamos con el:
+	
+	sudo adduser hercules
+
 Ahora vamos a crear un rol para nuestro usuario "hercules":
 	
 	sudo -u postgres -i createuser --interactive
@@ -52,6 +56,10 @@ Ahora vamos a crear un rol para nuestro usuario "hercules":
 Y creamos la base de datos:
 
 	sudo -u postgres -i createdb hercules -O hercules
+
+Nos logueamos como hercules
+
+	su hercules
 
 Probamos la conexion del rol hercules y establecemos el password "hercules":
 
@@ -262,6 +270,12 @@ Instalación del entorno de ejecución de .NET Core
 Actualice los productos disponibles para la instalación y, después, instale el entorno de ejecución de .NET Core. En el terminal, ejecute el comando siguiente.
 sudo yum install dotnet-runtime-3.1
 
+Proceso en Centos 8
+
+	sudo dnf install dotnet-sdk-3.1
+	sudo dnf install aspnetcore-runtime-3.1
+	sudo dnf install dotnet-runtime-3.1
+
 ### HTTP + proxy
 
 Para poder utilizar las aplicaciones debemos instalar un proxy que redirija las peticiones que hagamos al servidor apache al puerto donde tengamos levantada nuestra aplicación.
@@ -272,13 +286,6 @@ Primero instalamos httpd con este comando:
 Para que nuestro proxy funcione correctamente debemos ejecutar el siguiente comando:
 
     /usr/sbin/setsebool -P httpd_can_network_connect 1
-
-Para más información sobre el paso anterior:
-https://unix.stackexchange.com/questions/174593/centos-7-httpd-failed-to-make-connection-with-backend
-Lo primero que debemos hacer es indicar a httpd que use los módulos del proxy. Para ello debemos añadir estas líneas en /etc/httpd/conf/httpd.conf
-
-    LoadModule proxy_module modules/mod_proxy.so
-    LoadModule proxy_http_module modules/mod_proxy_http.so
 
 Una vez hecho esto tenemos que hacer un archivo de configuración para redirigir las peticiones a httpd hacia el sitio correcto. Para ello creamos un archivo .conf en /etc/httpd/conf.d con un contenido como este:
 
@@ -297,7 +304,7 @@ Una vez hecho esto tenemos que hacer un archivo de configuración para redirigir
     	ProxyPass /carga-web http://127.0.0.1:5103
     	ProxyPassReverse /carga-web http://127.0.0.1:5103
 
-    	APICRON
+    	#APICRON
     	ProxyPass /cron-config http://127.0.0.1:5107
     	ProxyPassReverse /cron-config http://127.0.0.1:5107
 
@@ -390,7 +397,7 @@ Antes de ejecutar los apis deberíamos configurar los elementos necesarios para 
   },
   "AllowedHosts": "*",
   "Urls": "http://0.0.0.0:5100",
-  "ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
+  "ConfigUrl": "http://pruebasdotnet.gnoss.com/carga/",
   "Sparql": {
     "Graph": "http://data.um.es/graph/um_cvn",
     "GraphUnidata": "http://data.um.es/graph/unidata",

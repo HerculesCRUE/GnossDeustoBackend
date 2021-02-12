@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 namespace API_CARGA.Models.Services
 {
 
-    public class CallUri
+    public class CallOAIPMH
     {
         readonly TokenBearer _token;
-        public CallUri(CallTokenService tokenService)
+        public CallOAIPMH(CallTokenService tokenService)
         {
             if (tokenService != null)
             {
