@@ -10,16 +10,6 @@
 |Cambios de la Versión|Primera subida|
 
 ## Sobre XML RDF Conversor
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=API_CARGA)
-
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20API_CARGA/badge.svg)
-[![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI&flag=carga)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
-
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=API_CARGA&metric=bugs)](https://sonarcloud.io/dashboard?id=API_CARGA)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=API_CARGA&metric=security_rating)](https://sonarcloud.io/dashboard?id=API_CARGA)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=API_CARGA&metric=ncloc)](https://sonarcloud.io/dashboard?id=API_CARGA)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=API_CARGA&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=API_CARGA)
-
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
 
 Accesible en el entorno de desarrollo en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/uris/swagger/index.html.
@@ -48,14 +38,34 @@ XML RDF Conversor es un servicio web que contiene únicamente un controlador, cu
  
 ## Configuración en los ficheros TOML
     
-	[[entities]] # [[Objeto1]]
-	rdftype = "http://purl.org/roh/mirror/foaf#Person" # Propiedad del Objeto1 = "Asignación"
-	id = "ID" 
-	source = "Persona" 
-
-		[[entities.properties]] # [[Objeto1.Objeto2]]
-		property = "http://purl.org/roh/mirror/foaf#name" # Propiedad del Objeto2 = "Asignación"
-		source = "nombre"
+	[[entities]]
+	rdftype = "rdftype" # Tipo de la ontología.
+	id = "@id" # Propiedad id del nodo.
+	nameSpace = "nameSpace" # Espacio de nombres del nodo.
+	source = "source" # Nombre del nodo.
+	datatype = "datatype" # Tipo de la propiedad. Si no aparece, por defecto es de tipo string.
+	
+		[[entities.mappingrdftype]] 
+		nameSpace = "nameSpace" # Espacio de nombres del nodo.
+		source = "source" # Valor del nodo.
+		target = "target" # Valor al que hay que cambiar.
+		
+		[[entities.properties]] 
+		property = "property" # Tipo de la propiedad en la ontología.
+		source = "source" # Nombre del nodo.
+		
+		[[entities.subentities]]
+		property = "property" # Propiedad de la subentidad a la que apunta.
+		inverseProperty = "inverseProperty" # Propiedad que indica si es inversa. Si no aparece, es que es directa.
+		
+			[[entities.subentities.entities]] # Exactamente igual que la propiedad "entities" ya que es un lista de "Entity".
+			rdftype = "rdftype" 
+			id = "id" 
+			nameSpace = "nameSpace" 
+			source = "source" 
+			property = "property" 
+			datatype = "datatype"
+	
     
 Un fichero TOML (.toml) es un tipo de fichero de configuración que tiene como función mapear datos de forma sencilla.
 Los ficheros TOML utilizados en la aplicación siguen una estructura similar al ejemplo de arriba.
@@ -87,8 +97,7 @@ Realizaremos las pruebas accediendo a dos métodos:
 - Seleccionamos "Try it out".
 - Hay que completar los siguientes campos:
 	- pType: Indicamos el fichero de configuración que se quiera utilizar. En nuestro caso, se le indicará "XML_ASIO".
-	- pXmlFile: Seleccionaremos un XML perteneciente a ASIO. [XMLs de ASIO](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.Api.Discover/xml_descubrimiento.zip)
-- En el caso se quiera realizar la prueba con "oai_cerif_openaire", hay que escoger un XML de: **TODO**
+	- pXmlFile: Seleccionaremos un XML perteneciente a ASIO. 
 - Una vez introducidos ambos parametros correctamente, pulsamos "Execute".
 - Como resultado nos mostrará el RDF generado. Para descargarlo, pulsamos sobre el botón de "Download" situado en la parte inferior derecha.
 
