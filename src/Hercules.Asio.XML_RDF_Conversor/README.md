@@ -61,10 +61,7 @@ XML RDF Conversor es un servicio web que contiene únicamente un controlador, cu
 			rdftype = "rdftype" 
 			id = "id" 
 			nameSpace = "nameSpace" 
-			source = "source" 
-			property = "property" 
-			datatype = "datatype"
-	
+			source = "source" 	
     
 Un fichero TOML (.toml) es un tipo de fichero de configuración que tiene como función mapear datos de forma sencilla.
 Los ficheros TOML utilizados en la aplicación siguen una estructura similar al ejemplo de arriba.
