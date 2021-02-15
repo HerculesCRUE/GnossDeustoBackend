@@ -43,7 +43,6 @@ XML RDF Conversor es un servicio web que contiene únicamente un controlador, cu
 	id = "@id" # Propiedad id del nodo.
 	nameSpace = "nameSpace" # Espacio de nombres del nodo.
 	source = "source" # Nombre del nodo.
-	datatype = "datatype" # Tipo de la propiedad. Si no aparece, por defecto es de tipo string.
 	
 		[[entities.mappingrdftype]] 
 		nameSpace = "nameSpace" # Espacio de nombres del nodo.
