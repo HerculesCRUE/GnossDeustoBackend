@@ -101,6 +101,10 @@
                         <p class="titulo">Ver las configuraciones de validación para el repositorio</p>
                         <a href="@Url.Action("RepositoryShapes", new {Id = modeloJob.IdRepository })">Validaciones</a>
                     </div>
+                    <div>
+                        <p class="titulo">Datos de la última sincronización de un set</p>
+                        <partial name="_RepositoryConfigSet" model="@Model.RepositoryConfigSet" />
+                    </div>
                     <hr />
                 </div>
             <div class="grupo grupo-programacion">

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ApiCargaWebInterface.ViewModels.RepositoryConfigSetViewModel>
+
+@if (Model != null && Model.Count() > 0)
+{
+    int i = 0;
+    <div class="items tabla">
+        <div class="cabecera">
+            <div class="columna">
+                <p>Set</p>
+            </div>
+            <div class="columna">
+                <p>Last Update</p>
+            </div>
+        </div>
+        @foreach (var set in Model)
+        {
+            string idModal = $"modalEliminar{i}";
+            string target = $"#{idModal}";
+            i++;
+            <div class="fila">
+                <div class="columna principal">
+                    <p>@set.Set</p>
+                </div>
+                <div class="columna">
+                    <p>@set.LastUpdate</p>
+                </div>
+            </div>
+        }
+    </div>
+}
+

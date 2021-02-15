@@ -30,6 +30,7 @@ namespace ApiCargaWebInterface.ViewModels
         public List<JobViewModel> ListJobs { get; set; }
         [Display(Name = "Tareas Programadas")]
         public List<ScheduledJobViewModel> ListScheduledJobs { get; set; }
-
+        [Display(Name = "Datos de la última sincronización de un set")]
+        public List<RepositoryConfigSetViewModel> RepositoryConfigSet { get; set; }
     }
 }
