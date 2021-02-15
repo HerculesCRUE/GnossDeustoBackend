@@ -68,7 +68,7 @@ namespace XUnitTestProject
             ICronApiService cron = new MockCronApiService();
             IProgramingMethodService methodService = new MockProgramingMethodService();
             JobController controller = new JobController(cron, methodService, null);
-            var result = controller.AddExecution(Guid.NewGuid().ToString(), "07/05/2022 12:36", "07/05/2001 12:36", null,"12");
+            var result = controller.AddExecution(Guid.NewGuid().ToString(), "07/05/2022 12:36", null,"12");
             if (result is BadRequestObjectResult)
             {
                 Assert.True(((BadRequestObjectResult)result).Value.Equals("falta el tipo de objeto"));

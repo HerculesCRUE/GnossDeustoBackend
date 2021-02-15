@@ -38,7 +38,6 @@ namespace CronConfigure.Controllers
         /// <param name="nombre_job">nombre de la tarea recurrente, no puede haber varias tareas con el mismo nombre, este nombre es elegido por el usuario que crea la tarea recurrente</param>
         /// <param name="fecha_inicio">momento a partir del cúal empieza la sincronización,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
         /// <param name="cron_expression">el parametro cron_expresion sigue un patrón de 5 atributos, separados por espacios entre sí: * * * * *. El primero corresponde al minuto, el segundo a la hora, a continuación el día del mes, seguido por el mes y posteriormente el día del mes. Un ejemplo sería: */15 * * * * que correspondería a cada 15 minutos, para probar las expresisiones se puede acudir a https://crontab.guru/</param>
-        /// <param name="fecha">fecha a partir de la cual se debe actualizar,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
         /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones, este parametro se puede obtener de http://herc-as-front-desa.atica.um.es/carga/etl/ListSets/{identificador_del_repositorio}</param>
         /// <param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro, este parametro se puede obtener en la respuesta identifier que da el método http://herc-as-front-desa.atica.um.es/carga/etl/ListIdentifiers/{identificador_del_repositorio}?metadataPrefix=rdf</param>
         /// <returns></returns> 
@@ -46,11 +45,10 @@ namespace CronConfigure.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
-        public IActionResult AddExecution(string id_repository, string nombre_job, string fecha_inicio, string cron_expression, string fecha = null, string set = null, string codigo_objeto = null)
+        public IActionResult AddExecution(string id_repository, string nombre_job, string fecha_inicio, string cron_expression, string set = null, string codigo_objeto = null)
         {
             Guid idRep = Guid.Empty;
             DateTime fechaInicio = DateTime.Now;
-            DateTime? fechaDateTime = null;
             if (codigo_objeto != null && set == null)
             {
                 return BadRequest("falta el tipo de objeto");
@@ -67,17 +65,6 @@ namespace CronConfigure.Controllers
                 }
             }
 
-            if (fecha != null)
-            {
-                try
-                {
-                    fechaDateTime = DateTime.ParseExact(fecha, "dd/MM/yyyy HH:mm", null);
-                }
-                catch (Exception)
-                {
-                    return BadRequest("fecha de sincronzación inválida");
-                }
-            }
             try
             {
                 idRep = new Guid(id_repository);
@@ -100,8 +87,7 @@ namespace CronConfigure.Controllers
                 var correct = CrontabSchedule.TryParse(cron_expression);
                 if (correct != null)
                 {
-                    //BackgroundJob.Schedule(() => ExampleService.PonerEnCola(nombre_job, nombre_fichero, cron_expression, execute_inmediatly), fechaInicio);
-                    _programingMethodsService.ProgramPublishRepositoryRecurringJob(idRep, nombre_job, cron_expression, fechaInicio,fechaDateTime,set,codigo_objeto);
+                    _programingMethodsService.ProgramPublishRepositoryRecurringJob(idRep, nombre_job, cron_expression, fechaInicio,set,codigo_objeto);
                 }
                 else
                 {

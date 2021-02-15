@@ -35,7 +35,7 @@ namespace API_CARGA.Models.Services
         ///<param name="id">Identificador del repositorio</param>
         public RepositoryConfig GetRepositoryConfigById(Guid id)
         {
-            return _context.RepositoryConfig.Include(item => item.ShapeConfig).FirstOrDefault(repository => repository.RepositoryConfigID.Equals(id));
+            return _context.RepositoryConfig.Include(item => item.ShapeConfig).Include(item => item.RepositoryConfigSet).FirstOrDefault(repository => repository.RepositoryConfigID.Equals(id));
         }
 
         ///<summary>

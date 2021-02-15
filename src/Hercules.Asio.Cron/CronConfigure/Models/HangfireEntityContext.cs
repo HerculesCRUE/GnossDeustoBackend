@@ -4,8 +4,8 @@
 // Contexto para la base de datos
 using Microsoft.EntityFrameworkCore;
 using CronConfigure.Models.Hangfire;
-using CronConfigure.Models.Entitties;
 using System.Diagnostics.CodeAnalysis;
+using CronConfigure.Models.Entitties;
 
 namespace CronConfigure.Models
 {
@@ -31,6 +31,9 @@ namespace CronConfigure.Models
         public DbSet<ProcessingJobState> ProcessingJobState { get; set; }
         public DbSet<ProcessDiscoverStateJob> ProcessDiscoverStateJob { get; set; }
         public DbSet<DiscoverItem> DiscoverItem { get; set; }
+        public DbSet<RepositoryConfig> RepositoryConfig { get; set; }
+        public DbSet<ShapeConfig> ShapeConfig { get; set; }
+        public DbSet<RepositoryConfigSet> RepositoryConfigSet { get; set; }
         public HangfireEntityContext(DbContextOptions<HangfireEntityContext> options)
             : base(options) 
         {

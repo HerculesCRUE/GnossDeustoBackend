@@ -48,7 +48,6 @@ namespace CronConfigure.Controllers
         /// </summary>
         /// <param name="fecha_ejecucion">fecha en la que se ejecutará la tarea,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
         /// <param name="id_repository">identificador del repositorio,  este parametro se puede obtener con el método http://herc-as-front-desa.atica.um.es/carga/etl-config/Repository</param>
-        /// <param name="fecha">fecha a partir de la cual se debe actualizar,el formato de fecha es: dd/MM/yyyy hh:mm ejemplo de formato de fecha: 07/05/2020 12:23</param>
         /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones, este parametro se puede obtener de http://herc-as-front-desa.atica.um.es/carga/etl/ListSets/{identificador_del_repositorio}</param>
         /// <param name="codigo_objeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro, este parametro se puede obtener en la respuesta identifier que da el método http://herc-as-front-desa.atica.um.es/carga/etl/ListIdentifiers/{identificador_del_repositorio}?metadataPrefix=rdf</param>
         /// <returns>identificador de la tarea creada</returns> 
@@ -56,7 +55,7 @@ namespace CronConfigure.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpPost]
-        public IActionResult AddScheduledJob(string fecha_ejecucion, string id_repository, string fecha = null, string set = null, string codigo_objeto = null)
+        public IActionResult AddScheduledJob(string fecha_ejecucion, string id_repository, string set = null, string codigo_objeto = null)
         {
             DateTime fechaInicio = DateTime.Now;
             DateTime? fechaDateTime = null;
@@ -79,17 +78,6 @@ namespace CronConfigure.Controllers
             {
                 return BadRequest("La fecha de ejecución es obligatoria");
             }
-            if (fecha != null)
-            {
-                try
-                {
-                    fechaDateTime = DateTime.ParseExact(fecha, "dd/MM/yyyy HH:mm", null);
-                }
-                catch (Exception)
-                {
-                    return BadRequest("fecha de sincronzación inválida");
-                }
-            }
             Guid idRep = Guid.Empty;
             try
             {
@@ -99,7 +87,7 @@ namespace CronConfigure.Controllers
             {
                 return BadRequest("identificador invalido");
             }
-            return Ok(_programingMethodsService.ProgramPublishRepositoryJob(idRep, fechaInicio, fechaDateTime, set, codigo_objeto));
+            return Ok(_programingMethodsService.ProgramPublishRepositoryJob(idRep, fechaInicio,  set, codigo_objeto));
             
         }
 

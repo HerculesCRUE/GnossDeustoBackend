@@ -12,17 +12,17 @@ namespace CronConfigure.Models.Services
     ///</summary>
     public class MockProgramingMethodService : IProgramingMethodService
     {
-        public string ProgramPublishRepositoryJob(Guid idRepository, DateTime fechaInicio, DateTime? fecha = null, string set = null, string codigoObjeto = null)
+        public string ProgramPublishRepositoryJob(Guid idRepository, DateTime fechaInicio, string set = null, string codigoObjeto = null)
         {
             return "";
         }
 
-        public void ProgramPublishRepositoryRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime fechaInicio, DateTime? fecha = null, string set = null, string codigoObjeto = null)
+        public void ProgramPublishRepositoryRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime fechaInicio, string set = null, string codigoObjeto = null)
         {
            
         }
 
-        public string PublishRepositories(Guid idRepositoryGuid, PerformContext context, DateTime? fecha = null, string pSet = null, string codigoObjeto = null)
+        public string PublishRepositories(Guid idRepositoryGuid, PerformContext context, string pSet = null, string codigoObjeto = null)
         {
             return "";
         }
