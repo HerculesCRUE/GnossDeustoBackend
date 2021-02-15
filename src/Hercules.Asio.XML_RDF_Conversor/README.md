@@ -1,163 +1,106 @@
 ![](..//Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 01/10/2020                                                   |
+| Fecha         | 12/02/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
-|Titulo|API CARGA readme| 
-|Descripción|Manual del servicio API CARGA|
-|Versión|0.2|
-|Módulo|API CARGA|
+|Titulo|XML RDF Conversor readme| 
+|Descripción|Manual del servicio XML RDF Conversor|
+|Versión|0.1|
+|Módulo|XML RDF Conversor|
 |Tipo|Manual|
-|Cambios de la Versión|Añadida la sección [Obtención del Token](#obtención-del-token)<br/>Añadida la sección [Configuración en el appsettings.json](#configuración-en-el-appsettingsjson)|
+|Cambios de la Versión|Primera subida|
 
-## Sobre API CARGA
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=API_CARGA)
-
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20API_CARGA/badge.svg)
-[![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI&flag=carga)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
-
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=API_CARGA&metric=bugs)](https://sonarcloud.io/dashboard?id=API_CARGA)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=API_CARGA&metric=security_rating)](https://sonarcloud.io/dashboard?id=API_CARGA)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=API_CARGA&metric=ncloc)](https://sonarcloud.io/dashboard?id=API_CARGA)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=API_CARGA&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=API_CARGA)
-
+## Sobre XML RDF Conversor
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
 
-Accesible en el entorno de desarrollo en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/carga/swagger/index.html.
+Accesible en el entorno de desarrollo en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/uris/swagger/index.html.
 
-La documentación de la librería está disponible en: 
-http://herc-as-front-desa.atica.um.es/api-carga/library/api/API_CARGA.Controllers.html
-
-API CARGA es un servicio web que contienen 4 controladores, utilizados cada uno de ellos para su propio propósito:
- - etlController: Contiene los procesos ETL (Extract, Transform and Load) necesarios para la carga de datos.
- - repositoryController: Contiene los procesos necesarios para la gestión de los repositorios OAI-PMH (creación, modificación, eliminación...).
- - syncController: Contiene los procesos necesarios para la ejecución de las sincronizaciones.
- - ValidationController: Contiene los procesos necesarios para la gestión de las validaciones  (creación, modificación, eliminación...). La carpeta [Validaciones](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA/Validaciones) contiene información sobre los [shapes SHACL](https://www.w3.org/TR/shacl/) definidos para validar.
- 
-Para una especificación más detallada del servicio se puede consultar la siguiente documentación: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/20200203%20H%C3%A9rcules%20ASIO%20Especificaci%C3%B3n%20de%20funciones%20de%20Carga.md
- 
-Esta aplicación se encarga de sincronizar los datos de un repositorio OAI-PMH con el RDF Store. Obtiene todas las entidades actualizadas desde la última sincronización, solicita al repositorio OAI-PMH todos sus datos y los inserta en el RDF Store.
-
-Los resultados de las pruebas unitarias se pueden consultar en [ResultsTest](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA/ResultsTest).
-
-Las librerías compiladas se encuentran en la carpeta [librerías](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/libraries).
-
-*Obtención del Token*
--------------------------
-Este api esta protegida mediante tokens, por ello para poder usar la interfaz swagger hay que obtener un token, el cual se puede obtener desde https://herc-as-front-desa.atica.um.es/carga-web/Token
-
-*Conexión a Triple Store*
--------------------------
-
-Como no es necesario ningún conector específico para actualizar un RDF Store ya que, por definición, deben tener un SPARQL Endpoint, no se ha creado ninguna librería específica de conexión al RDF Store. Las actualizaciones se realizan vía peticiones HTTP al SPARQL Endpoint.
-
-El SPARQL Endpoint provisional se encuentra disponible en un servidor de la Universidad de Murcia, con acceso protegido por una VPN en la siguiente URL:
-
-http://155.54.239.204:8890/sparql
-
-Hay ejemplos de consultas en el documento [20200325 Hércules ASIO Ejemplos de consultas](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/SPARQL/20200325%20H%C3%A9rcules%20ASIO%20Ejemplos%20de%20consultas%20SPARQL.md)
-
-Los datos cargados se pueden consultar en una versión preliminar del servidor Linked Data, soportado por [Trifid](https://github.com/zazuko/trifid), desplegado en los servidores de la Universidad de Murcia. Por ejemplo:
-
-http://graph.um.es/res/project/RAYD-A-2002-6237
+XML RDF Conversor es un servicio web que contiene únicamente un controlador, cuyo propósito es:
+ - ConversorController: Permite obtener un un archivo RDF mediante un XML dado.
 
 ## Configuración en el appsettings.json
 
     { 
-		"ConnectionStrings": {
-			"PostgreConnectionmigration": ""
-		},
 		"Logging": {
-			"LogLevel": {
-				"Default": "Information",
-				"Microsoft": "Warning",
-				"Microsoft.Hosting.Lifetime": "Information"
-			}
-		},
-		"AllowedHosts": "*",
-		"Urls": "http://0.0.0.0:5100",
-		"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
-		"Sparql": {
-			"Graph": "http://data.um.es/graph/um_cvn",
-			"Endpoint": "http://155.54.239.204:8890/sparql"
-			"QueryParam": "query",
-			"GraphRoh": "http://graph.um.es/graph/research/roh",
-			"GraphRohes": "http://graph.um.es/graph/research/rohes",
-			"GraphRohum": "http://graph.um.es/graph/research/rohum"
-		},
-		"RabbitMQ": {
-			"usernameRabbitMq": "user",
-			"passwordRabbitMq": "pass",
-			"hostnameRabbitMq": "hercules",
-			"uriRabbitMq": "amqp://user:pass@ip:puerto/hercules",
-			"virtualhostRabbitMq": "hercules"
-		},
-		"RabbitQueueName": "HerculesDemoQueue",
-		"Authority": "http://localhost:56306",
-		"ScopeCarga": "apiCarga",
-		"AuthorityGetToken": "http://localhost:56306/connect/token",
-		"GrantType": "client_credentials",
-		"ClientId": "carga",
-		"ClientSecret": "secret",
-		"ScopeOAIPMH": "apiOAIPMH",
-		"ClientIdOAIPMH": "OAIPMH",
-		"ClientSecretOAIPMH": "secretOAIPMH",
-		"ConfigUrlUnidata": "https://localhost:44354/",
-		"ScopeUnidata": "apiUnidata",
-		"ClientIdUnidata": "unidata",
-		"ClientSecretUnidata": "secretUnidata",
-		"ConfigUrlXmlConverter": "https://localhost:44339/Conversor/"
+		    "LogLevel": {
+		      "Default": "Information",
+		      "Microsoft": "Warning",
+		      "Microsoft.Hosting.Lifetime": "Information"
+		    }
+		  },
+		  "AllowedHosts": "*",
+		  "UrlUrisFactory": "http://herc-as-front-desa.atica.um.es/uris/"
     }
- - PostgreConnectionmigration: Cadena de conexión a la base de datos PostgreSQL
- - LogLevel.Default: Nivel de error por defecto
- - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
- - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
- - Urls: Url en la que se va a lanzar la aplicación
- - ConfigUrl: URL donde está lanzada esta aplicación
- - Sparql.Graph: Grafo en el que se van a almacenar los triples
- - Sparql.Endpoint: URL del Endpoint Sparql
- - Sparql.QueryParam: Parámetro para la query en el Endpoint Sparql
- - Sparql.GraphRoh: gráfo de la ontologia roh
- - Sparql.GraphRohes: gráfo de la ontologia rohes
- - Sparql.GraphRohum: gráfo de la ontologia rohum
- - RabbitMQ.usernameRabbitMq: usuario para acceder a Rabbit
- - RabbitMQ.passwordRabbitMq: contraseña del usuario para acceder a Rabbit
- - RabbitMQ.hostnameRabbitMq: host de Rabbit
- - RabbitMQ.uriRabbitMq: cadena de conexión para acceder a Rabbit
- - RabbitMQ.virtualhostRabbitMq: host virtual configurado en Rabbit
- - RabbitQueueName: Nombre de la cola de Rabbit
- - Authority: Url de la servicio de identidades
- - ScopeCarga: Limitación de acceso al api de carga
- - AuthorityGetToken: Endpoint para la llamada de obtención del token
- - GrantType: Tipo de concesión de Oauth
- - ClientId: Id de cliente del api del API CARGA
- - ClientSecret: "clave" de acceso del api de carga
- - ScopeOAIPMH: Limitación de acceso al api de OAIPMH
- - ClientIdOAIPMH: Id de cliente del api de OAIPMH
- - ClientSecretOAIPMH: "clave" de acceso del api de OAIPMH
- - ConfigUrlUnidata: URL donde está lanzada la aplicación de unidata
- - ScopeUnidata: Limitación de acceso al api de unidata
- - ClientIdUnidata: Id de cliente del api de unidata
- - ClientSecretUnidata: "clave" de acceso del api de unidata
- - ConfigUrlXmlConverter: URL donse está lanzada la aplicación CONVERSOR_XML_RDF
+    
+ - LogLevel.Default: Nivel de error por defecto.
+ - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft.
+ - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host.
+ - UrlUrisFactory: URL dónde está lanzada la aplicación.
+ 
+## Configuración en los ficheros TOML
+    
+	[[entities]]
+	rdftype = "rdftype" # Tipo de la ontología.
+	id = "@id" # Propiedad id del nodo.
+	nameSpace = "nameSpace" # Espacio de nombres del nodo.
+	source = "source" # Nombre del nodo.
+	
+		[[entities.mappingrdftype]] 
+		nameSpace = "nameSpace" # Espacio de nombres del nodo.
+		source = "source" # Valor del nodo.
+		target = "target" # Valor al que hay que cambiar.
+		
+		[[entities.properties]] 
+		property = "property" # Tipo de la propiedad en la ontología.
+		source = "source" # Nombre del nodo.
+		
+		[[entities.subentities]]
+		property = "property" # Propiedad de la subentidad a la que apunta.
+		inverseProperty = "inverseProperty" # Propiedad que indica si es inversa. Si no aparece, es que es directa.
+		
+			[[entities.subentities.entities]] # Exactamente igual que la propiedad "entities" ya que es un lista de "Entity".
+			rdftype = "rdftype" 
+			id = "id" 
+			nameSpace = "nameSpace" 
+			source = "source" 	
+    
+Un fichero TOML (.toml) es un tipo de fichero de configuración que tiene como función mapear datos de forma sencilla.
+Los ficheros TOML utilizados en la aplicación siguen una estructura similar al ejemplo de arriba.
 
-Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.Api.Carga/API_CARGA/appsettings.json
+## Comprobaciones y pruebas
+
+Realizaremos las pruebas accediendo a dos métodos:
+- /Conversor/ConfigurationFilesList: Nos muestra un listado de todos los archivos de configuración que existen.
+- /Conversor/Convert: Permite convertir archivos XML en RDF.
+
+## /Conversor/ConfigurationFilesList    
+
+- Pulsamos en el método /Conversor/ConfigurationFilesList.
+- Seleccionamos "Try it out".
+- Pulsamos al botón "Execute".
+- Al ejecutar el método, se realizará lo siguiente:
+	- Mostrará una lista con los nombres de los diferentes archivos de configuración que hay.
+	
+		[
+		"oai_cerif_openaire", 
+		"XML_ASIO"
+		]
+		
+- Según el tipo de ejemplo que queramos realizar, escogeremos uno u otro. En este caso, se realizará con "XML_ASIO".
+
+## /Conversor/Convert
+
+- Pulsamos en el método /Conversor/Conversor/Convert.
+- Seleccionamos "Try it out".
+- Hay que completar los siguientes campos:
+	- pType: Indicamos el fichero de configuración que se quiera utilizar. En nuestro caso, se le indicará "XML_ASIO".
+	- pXmlFile: Seleccionaremos un XML perteneciente a ASIO. 
+- Una vez introducidos ambos parametros correctamente, pulsamos "Execute".
+- Como resultado nos mostrará el RDF generado. Para descargarlo, pulsamos sobre el botón de "Download" situado en la parte inferior derecha.
+
 ## Dependencias
 
-- **dotNetRDF**: versión 2.5.1
-- **IdentityServer4**: versión 3.1.2
-- **IdentityServer4.EntityFramework**: versión 3.1.2
-- **Microsoft.AspNetCore.Mvc.Formatters.Json**: versión 2.2.0
-- **Microsoft.AspNetCore.Mvc.NewtonsoftJson**: versión 3.0.0
-- **Microsoft.EntityFrameworkCore**: versión 3.1.4
-- **Microsoft.EntityFrameworkCore.SqlServer**: versión 3.1.2
-- **Microsoft.EntityFrameworkCore.Tools**: versión 3.1.2
-- **Microsoft.Extensions.Logging.Debug**: versión 3.0.0
-- **Microsoft.VisualStudio.Web.CodeGeneration.Design**: versión 3.0.0
-- **Npgsql.EntityFrameworkCore.PostgreSQL**: versión 3.1.2
-- **OaiPmhNet**: versión 0.4.1
-- **Serilog.AspNetCore**: versión 3.2.0
-- **Swashbuckle.AspNetCore**: versión 5.0.0
-- **Swashbuckle.AspNetCore.Annotations**: versión 5.0.0
-- **Swashbuckle.AspNetCore.Filters**: versión 5.0.2
-- **Swashbuckle.AspNetCore.SwaggerGen**: versión 5.0.0
-- **Swashbuckle.AspNetCore.SwaggerUI**: versión 5.0.0
+- **dotNetRDF**: versión 2.6.0
+- **Nett**: versión 0.15.0
+- **Swashbuckle.AspNetCore.Swagger**: versión 5.6.3
+- **Swashbuckle.AspNetCore.SwaggerGen**: versión 5.6.3
+- **Swashbuckle.AspNetCore.SwaggerUI**: versión 5.6.3
