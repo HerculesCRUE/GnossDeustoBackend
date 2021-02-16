@@ -46,7 +46,7 @@ namespace CronConfigure.Models.Services
         public string PublishRepositories(Guid idRepositoryGuid, PerformContext context,  string pSet = null, string codigoObjeto = null)
         {
             string idRepository = idRepositoryGuid.ToString();
-            RepositoryConfig repositoryConfig = _context.RepositoryConfig.Include(item => item.ShapeConfig).FirstOrDefault(x => x.RepositoryConfigID == idRepositoryGuid);
+            RepositoryConfig repositoryConfig = _context.RepositoryConfig.Include(item => item.RepositoryConfigSet).FirstOrDefault(x => x.RepositoryConfigID == idRepositoryGuid);
             //Nos quedariamos con la fecha de la fila que tenga en el 'set' lo que viene en el pSet, si viene nulo, habría que coger la fila que tenga '-' en caso de que exista
             DateTime? fecha=null;
             string setAux = "-";
