@@ -1,0 +1,48 @@
+[[entities]]
+rdftype = "http://purl.org/roh/mirror/bibo#Book"
+source = "Libro"
+id = "@id"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/foaf#title"
+	source = "Titulo"
+	
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/foaf#description"
+	source = "Descripcion"
+	
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/foaf#pages"
+	source = "NumeroPaginas"
+	
+	[[entities.subentities]]
+	property = "http://purl.org/roh/mirror/obo/ro#author"
+
+		[[entities.subentities.entities]]
+		rdftype="http://purl.org/roh/mirror/foaf#Person" 
+		source = "Autor"
+
+			[[entities.subentities.entities.properties]]
+			property = "http://purl.org/roh#name" 
+			source = "Nombre"
+			
+			[[entities.subentities.entities.properties]]
+			property = "http://purl.org/roh#nationality" 
+			source = "Nacionalidad"
+	
+	[[entities.subentities]]
+	property = "http://purl.org/roh/mirror/bibo#genres"
+	
+		[[entities.subentities.entities]]
+		rdftype = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq" 
+		source = "Generos"
+
+			[[entities.subentities.entities.subentities]]
+			
+				[[entities.subentities.entities.subentities.entities]]
+				rdftype = "http://purl.org/roh/mirror/foaf#genre"  
+				source = "Genero"
+				
+					[[entities.subentities.entities.subentities.entities.properties]]
+					property = "http://purl.org/roh/mirror/foaf#type" 
+					source = "Tipo"

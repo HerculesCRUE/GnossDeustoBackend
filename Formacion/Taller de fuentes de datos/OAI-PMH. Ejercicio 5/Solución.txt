@@ -1,0 +1,24 @@
+Dentro de RecordRepository modificamos lo que introducimos en el ejercicio anterior por lo siguiente
+
+List<XML> listxml = new List<XML>();
+
+if (arguments.Verb == OaiVerb.ListIdentifiers.ToString())
+{
+    //ListIdentifiers
+    HashSet<string> files = GetXMLFiles(arguments.Set);
+    foreach (string file in files)
+    {
+        listxml.Add(GetXML(file));
+    }
+    container.Records = listxml.Select(r => ToIdentifiersRecord(r));
+}
+else
+{
+    //ListRecords
+    HashSet<string> files = GetXMLFiles(arguments.Set);
+    foreach (string file in files)
+    {                    
+        listxml.Add(GetXML(file));
+    }
+    container.Records = listxml.Select(r => ToRecord(r, arguments.MetadataPrefix));
+}

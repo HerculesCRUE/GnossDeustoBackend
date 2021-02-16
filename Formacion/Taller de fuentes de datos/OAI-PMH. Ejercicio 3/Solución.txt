@@ -1,0 +1,4 @@
+En el constructor de MetadataFormatRepository añadimos el siguiente código para dar de alta el metadataformat
+
+MetadataFormat xml = new MetadataFormat("XML_ASIO", "", "", "");
+_dictionary.Add("XML_ASIO", xml);

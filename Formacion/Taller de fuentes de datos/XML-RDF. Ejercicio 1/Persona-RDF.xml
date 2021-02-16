@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-16"?>
+  <!DOCTYPE rdf:RDF [
+	<!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+  <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+  <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+  
+]>
+
+  <rdf:RDF xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:ns0="http://purl.org/roh/mirror/foaf#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <ns0:Organization rdf:about="http://graph.um.es/res/foaf_organization/527">
+      <ns1:country rdf:datatype="&xsd;string" xmlns:ns1="http://purl.org/roh#">España</ns1:country>
+      <ns2:locality rdf:datatype="&xsd;string" xmlns:ns2="http://purl.org/roh#">Logroño</ns2:locality>
+      <ns3:title rdf:datatype="&xsd;string" xmlns:ns3="http://purl.org/roh#">RIAM - GNOSS</ns3:title>
+    </ns0:Organization>
+    <ns0:Person rdf:about="http://graph.um.es/res/person/001">
+      <ns4:languageList rdf:nodeID="autos1" xmlns:ns4="http://purl.org/roh/mirror/bibo#" />
+      <ns0:age rdf:datatype="&xsd;string">30</ns0:age>
+      <ns0:gender rdf:datatype="&xsd;string">Masculino</ns0:gender>
+      <ns0:mbox rdf:datatype="&xsd;string">juanmf@gmail.com</ns0:mbox>
+      <ns0:name rdf:datatype="&xsd;string">Juan</ns0:name>
+      <ns0:secondSurname rdf:datatype="&xsd;string">Fernández</ns0:secondSurname>
+      <ns0:surname rdf:datatype="&xsd;string">Martínez</ns0:surname>
+      <ns5:workAt rdf:resource="http://graph.um.es/res/foaf_organization/527" xmlns:ns5="http://purl.org/roh/mirror/obo/ro#" />
+      <ns6:birthDate rdf:datatype="&xsd;datetime" xmlns:ns6="http://purl.org/roh/mirror/vivo#">14-02-1991</ns6:birthDate>
+    </ns0:Person>
+    <ns0:Language rdf:nodeID="autos2">
+      <ns0:abbreviation rdf:datatype="&xsd;string">ESP</ns0:abbreviation>
+      <ns0:name rdf:datatype="&xsd;string">Castellano</ns0:name>
+    </ns0:Language>
+    <rdf:Seq rdf:nodeID="autos1">
+      <rdf:_1 rdf:nodeID="autos2" />
+      <rdf:_2 rdf:nodeID="autos3" />
+    </rdf:Seq>
+    <ns0:Language rdf:nodeID="autos3">
+      <ns0:abbreviation rdf:datatype="&xsd;string">ENG</ns0:abbreviation>
+      <ns0:name rdf:datatype="&xsd;string">Inglés</ns0:name>
+    </ns0:Language>
+  </rdf:RDF>

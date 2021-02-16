@@ -1,0 +1,10 @@
+En el constructor de SetRepository añadimos el siguiente código para que liste cada una de las carpetas
+
+foreach (string setName in GetXMLSets())
+{   
+	Set set = new Set();
+	set.Spec = setName;
+	set.Name = setName;
+	set.Description = setName;
+	_sets.Add(set);
+}

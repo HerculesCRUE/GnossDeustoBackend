@@ -1,0 +1,8 @@
+Dentro del método 'GetRecord' de RecordRepository.cs añadimos después de la reación de la ruta del XML el siguiente código:
+
+if (File.Exists(xmlRoute))
+{
+	
+	Record rec = ToRecord(GetXML(xmlRoute), metadataPrefix);
+	return rec;
+}

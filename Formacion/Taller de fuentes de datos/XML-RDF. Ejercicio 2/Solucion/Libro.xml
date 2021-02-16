@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Libro id="002">
+	<Titulo>Frankenstein</Titulo>
+	<Descripcion>El moderno Prometeo</Descripcion>
+	<Autor>
+		<Nombre>Mary Shelley</Nombre>
+		<Nacionalidad>Inglesa</Nacionalidad>
+	</Autor>
+	<NumeroPaginas>301</NumeroPaginas>
+	<Generos>
+		<Genero>
+			<Tipo>Ciencia Ficción</Tipo>
+		</Genero>
+		<Genero>
+			<Tipo>Horror</Tipo>
+		</Genero>
+	</Generos>
+</Libro>

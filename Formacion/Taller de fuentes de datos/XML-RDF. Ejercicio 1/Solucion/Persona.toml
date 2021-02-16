@@ -1,0 +1,74 @@
+[[entities]]
+rdftype = "http://purl.org/roh/mirror/foaf#Person"
+source = "Persona"
+id = "@id"
+
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/foaf#name"
+	source = "Nombre"
+	
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/foaf#surname"
+	source = "Primer_Apellido"
+	
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/foaf#secondSurname"
+	source = "Segundo_Apellido"
+	
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/foaf#gender"
+	source = "Genero"
+	
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/foaf#age"
+	source = "Edad"
+	
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/vivo#birthDate"
+	datatype = "http://www.w3.org/2001/XMLSchema#datetime"
+	source = "FechaNacimiento"
+	
+	[[entities.properties]]
+	property = "http://purl.org/roh/mirror/foaf#mbox"
+	source = "Correo"
+	
+	[[entities.subentities]]
+	property = "http://purl.org/roh/mirror/obo/ro#workAt"
+
+		[[entities.subentities.entities]]
+		rdftype="http://purl.org/roh/mirror/foaf#Organization" 
+		source = "Organizacion"
+		id = "@id"
+
+			[[entities.subentities.entities.properties]]
+			property = "http://purl.org/roh#title" 
+			source = "Titulo"
+			
+			[[entities.subentities.entities.properties]]
+			property = "http://purl.org/roh#locality" 
+			source = "Localidad"
+			
+			[[entities.subentities.entities.properties]]
+			property = "http://purl.org/roh#country" 
+			source = "Pais"
+
+	[[entities.subentities]]
+	property = "http://purl.org/roh/mirror/bibo#languageList"
+	
+		[[entities.subentities.entities]]
+		rdftype = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq" 
+		source = "ListaIdiomas"
+
+			[[entities.subentities.entities.subentities]]
+			
+				[[entities.subentities.entities.subentities.entities]]
+				rdftype = "http://purl.org/roh/mirror/foaf#Language"  
+				source = "Idioma"
+				
+					[[entities.subentities.entities.subentities.entities.properties]]
+					property = "http://purl.org/roh/mirror/foaf#name" 
+					source = "Nombre"
+
+					[[entities.subentities.entities.subentities.entities.properties]]
+					property = "http://purl.org/roh/mirror/foaf#abbreviation" 
+					source = "Abreviatura"	

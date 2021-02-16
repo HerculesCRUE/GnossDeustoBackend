@@ -1,0 +1,8 @@
+En el constructor de OAI_PMHController se le dan valores a la variable '_configOAI' para indicar difeferentes configuraciones: después de la línea '_configOAI = OaiConfiguration.Instance;'
+
+
+_configOAI.SupportSets = true;
+_configOAI.RepositoryName = "OAI_PMH_XML";
+_configOAI.Granularity = "yyyy-MM-ddTHH:mm:ssZ";
+_configOAI.AdminEmails = new string[] { "correoprueba@correo.com" };
+_configOAI.DeletedRecord = "persistent";

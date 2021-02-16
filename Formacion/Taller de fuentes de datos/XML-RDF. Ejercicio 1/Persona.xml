@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Persona id="001">
+	<Nombre>Juan</Nombre>
+	<Primer_Apellido>Martínez</Primer_Apellido>
+	<Segundo_Apellido>Fernández</Segundo_Apellido>
+	<Genero>Masculino</Genero>
+	<Edad>30</Edad>	
+	<FechaNacimiento>14-02-1991</FechaNacimiento>
+	<Correo>juanmf@gmail.com</Correo>
+	<Organizacion id="527">
+		<Titulo>RIAM - GNOSS</Titulo>
+		<Localidad>Logroño</Localidad>
+		<Pais>España</Pais>
+	</Organizacion>
+	<ListaIdiomas>
+		<Idioma>
+			<Nombre>Castellano</Nombre>
+			<Abreviatura>ESP</Abreviatura>
+		</Idioma>
+		<Idioma>
+			<Nombre>Inglés</Nombre>
+			<Abreviatura>ENG</Abreviatura>
+		</Idioma>
+	</ListaIdiomas>
+</Persona>

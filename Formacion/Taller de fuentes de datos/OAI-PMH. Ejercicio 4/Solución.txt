@@ -1,0 +1,12 @@
+Centro de RecordRepository, en el método 'GetRecords' antes de 'container.Records = container.Records.Where(x => x.Header.Datestamp > inicio).ToList();' añadimos:
+
+
+List<XML> listxml = new List<XML>();
+
+//ListIdentifiers
+HashSet<string> files = GetXMLFiles(arguments.Set);
+foreach (string file in files)
+{
+	listxml.Add(GetXML(file));
+}
+container.Records = listxml.Select(r => ToIdentifiersRecord(r));

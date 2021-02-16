@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-16"?>
+  <!DOCTYPE rdf:RDF [
+	<!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+  <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+  <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+  
+]>
+
+  <rdf:RDF xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:ns0="http://purl.org/roh/mirror/bibo#" xmlns:ns1="http://purl.org/roh/mirror/foaf#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <ns0:Book rdf:about="http://graph.um.es/res/book/002">
+      <ns0:genres rdf:nodeID="d44064eb-9888-4598-ace9-31e612abe2a8" />
+      <ns1:description rdf:datatype="&xsd;string">El moderno Prometeo</ns1:description>
+      <ns1:pages rdf:datatype="&xsd;string">301</ns1:pages>
+      <ns1:title rdf:datatype="&xsd;string">Frankenstein</ns1:title>
+      <ns2:author rdf:nodeID="c43f89b4-4979-4674-9928-dd97b287df2f" xmlns:ns2="http://purl.org/roh/mirror/obo/ro#" />
+    </ns0:Book>
+    <ns1:Person rdf:nodeID="c43f89b4-4979-4674-9928-dd97b287df2f">
+      <ns3:name rdf:datatype="&xsd;string" xmlns:ns3="http://purl.org/roh#">Mary Shelley</ns3:name>
+      <ns4:nationality rdf:datatype="&xsd;string" xmlns:ns4="http://purl.org/roh#">Inglesa</ns4:nationality>
+    </ns1:Person>
+    <rdf:Seq rdf:nodeID="d44064eb-9888-4598-ace9-31e612abe2a8">
+      <rdf:_1 rdf:nodeID="e6e30c84-585b-41db-ba5b-4c9a46cb160f" />
+      <rdf:_2 rdf:nodeID="fcdebafa-b5a9-4c17-aee2-e989a2e15b91" />
+    </rdf:Seq>
+    <ns1:genre rdf:nodeID="e6e30c84-585b-41db-ba5b-4c9a46cb160f">
+      <ns1:type rdf:datatype="&xsd;string">Ciencia Ficción</ns1:type>
+    </ns1:genre>
+    <ns1:genre rdf:nodeID="fcdebafa-b5a9-4c17-aee2-e989a2e15b91">
+      <ns1:type rdf:datatype="&xsd;string">Horror</ns1:type>
+    </ns1:genre>
+  </rdf:RDF>
