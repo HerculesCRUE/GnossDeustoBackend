@@ -409,7 +409,7 @@ namespace API_CARGA.Models.Services
         public string CallGetConfigurationsFiles()
         {
             HttpClient client = new HttpClient();
-            var response = client.PostAsync($"{_configUrlService.GetUrlXmlConverter()}ConfigurationFilesList", null).Result;
+            var response = client.PostAsync($"{_configUrlService.GetUrlXmlConverter()}conversor/ConfigurationFilesList", null).Result;
             response.EnsureSuccessStatusCode();
             return response.Content.ReadAsStringAsync().Result;
         }
