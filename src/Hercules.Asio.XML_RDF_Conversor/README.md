@@ -102,7 +102,6 @@ Realizaremos las pruebas accediendo a dos métodos:
 ## Dependencias
 
 - **dotNetRDF**: versión 2.6.0
-- **Nett**: versión 0.15.0
 - **Swashbuckle.AspNetCore.Swagger**: versión 5.6.3
 - **Swashbuckle.AspNetCore.SwaggerGen**: versión 5.6.3
 - **Swashbuckle.AspNetCore.SwaggerUI**: versión 5.6.3
