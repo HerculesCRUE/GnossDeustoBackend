@@ -36,35 +36,58 @@ XML RDF Conversor es un servicio web que contiene únicamente un controlador, cu
  - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host.
  - UrlUrisFactory: URL dónde está lanzada la aplicación.
  
-## Configuración en los ficheros TOML
+## Configuración en los ficheros JSON
     
-	[[entities]]
-	rdftype = "rdftype" # Tipo de la ontología.
-	id = "@id" # Propiedad id del nodo.
-	nameSpace = "nameSpace" # Espacio de nombres del nodo.
-	source = "source" # Nombre del nodo.
-	
-		[[entities.mappingrdftype]] 
-		nameSpace = "nameSpace" # Espacio de nombres del nodo.
-		source = "source" # Valor del nodo.
-		target = "target" # Valor al que hay que cambiar.
-		
-		[[entities.properties]] 
-		property = "property" # Tipo de la propiedad en la ontología.
-		source = "source" # Nombre del nodo.
-		
-		[[entities.subentities]]
-		property = "property" # Propiedad de la subentidad a la que apunta.
-		inverseProperty = "inverseProperty" # Propiedad que indica si es inversa. Si no aparece, es que es directa.
-		
-			[[entities.subentities.entities]] # Exactamente igual que la propiedad "entities" ya que es un lista de "Entity".
-			rdftype = "rdftype" 
-			id = "id" 
-			nameSpace = "nameSpace" 
-			source = "source" 	
-    
-Un fichero TOML (.toml) es un tipo de fichero de configuración que tiene como función mapear datos de forma sencilla.
-Los ficheros TOML utilizados en la aplicación siguen una estructura similar al ejemplo de arriba.
+	{
+		"entities": [{
+			"rdftype": "rdftype",
+			"rdftypeproperty": "rdftype",
+			"id": "id",
+			"nameSpace": "nameSpace",
+			"source": "source",
+			"property": "property",
+			"datatype": "datatype",
+			"properties": [{
+					"property": "property",
+					"source": "source",
+					"datatype": "datatype"
+				}
+			],
+			"subentities": [{
+					"property": "property",
+					"inverseProperty": "inverseProperty",
+					"entities": [{}]
+				}
+			],
+			"mappingrdftype": [{
+					"nameSpace": "nameSpace",
+					"source": "source",
+					"target": "target"
+				}
+			]
+		}]		
+	}
+
+- Entities
+	- rdftype: Tipo de la ontología.
+	- rdftypeproperty: Tipo del rdf del cual habrá que obtener del mapa.
+	- id: Propiedad id del nodo.
+	- nameSpace: Espacio de nombres del nodo.
+	- source: Nombre del nodo.
+	- property: Propiedad la cual hay que acceder y no se encuentra en el nodo.
+	- datatype: Tipo de dato de la propiedad que hay que acceder.
+- Properties
+	- property: Tipo de la propiedad en la ontología.
+	- source: Nombre del nodo.
+	- datatype: Tipo de la propiedad. String por defecto.
+- Subentities
+	- property: Propiedad de la subentidad a la que apunta.
+	- inverseProperty: Propiedad que indica si es inversa. Si no aparece, es que es directa.
+	- entities: Listado de subentidades de tipo Entity.
+- Mappingrdftype
+	- nameSpace: Espacio de nombre del nodo.
+	- source: Contenido de la etiqueta en la cual se le ha de aplicar el target.
+	- target: IRI del tipo de la entidad a la que apunta.
 
 ## Comprobaciones y pruebas
 
@@ -100,7 +123,6 @@ Realizaremos las pruebas accediendo a dos métodos:
 ## Dependencias
 
 - **dotNetRDF**: versión 2.6.0
-- **Nett**: versión 0.15.0
 - **Swashbuckle.AspNetCore.Swagger**: versión 5.6.3
 - **Swashbuckle.AspNetCore.SwaggerGen**: versión 5.6.3
 - **Swashbuckle.AspNetCore.SwaggerUI**: versión 5.6.3

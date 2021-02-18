@@ -1,109 +1,24 @@
-// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
-// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
-// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
-// Test unitario del etl controller
-using API_CARGA.Controllers;
+ï»¿using API_CARGA.Controllers;
 using API_CARGA.Models.Entities;
-using API_CARGA.Models.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Security.Cryptography;
+using System.Linq;
 using System.Text;
-using Xunit;
+using System.Threading.Tasks;
 
-namespace XUnitTestAPI_CARGA
+namespace WebCargaDLL.Controllers
 {
-    public class UnitTestOperationsEtl
+    [ApiController]
+    [Route("[controller]")]
+    public class PruebaController : ControllerBase
     {
-        //[Fact]
-
-        //public void DataPublish()
-        //{
-        //    ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-        //    RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-        //    ConfigTokenService configTokenService = new ConfigTokenService();
-        //    CallTokenService callTokenService = new CallTokenService(configTokenService);
-        //    CallUri callUri = new CallUri(callTokenService);
-        //    ConfigSparql configSparql = new ConfigSparql();
-        //    configSparql.Endpoint = "";
-        //    RabbitMQMockService mockRabbit = new RabbitMQMockService();
-        //    DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-        //    etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, mockRabbit);
-
-        //    var stream = new MemoryStream();
-        //    var writer = new StreamWriter(stream);
-        //    writer.Write(rdfFile);
-        //    writer.Flush();
-        //    stream.Position = 0;
-        //    var file = new FormFile(stream, 0, stream.Length, null, "rdf.xml");
-
-        //    etlController.dataPublish(file, "x", false);
-        //    Assert.True(true);
-        //}
-
-        //[Fact]
-        //public void DataPublishError()
-        //{
-        //    ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-        //    RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-        //    ConfigSparql configSparql = new ConfigSparql();
-        //    ConfigTokenService configTokenService = new ConfigTokenService();
-        //    CallTokenService callTokenService = new CallTokenService(configTokenService);
-        //    CallUri callUri = new CallUri(callTokenService);
-        //    configSparql.Endpoint = "";
-        //    DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-        //    etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, null);
-
-        //    try
-        //    {
-        //        var response = etlController.dataPublish(null, "x", false);
-        //        if (response is BadRequestObjectResult)
-        //        {
-        //            Assert.True(true);
-        //        }
-        //        else
-        //        {
-        //            Assert.True(false);
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        Assert.True(true);
-        //    }
-
-        //}
-
-        [Fact]
-        public void DataValidate()
-        {
-            ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-            RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            ConfigSparql configSparql = new ConfigSparql();
-            configSparql.Endpoint = "";
-            DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null, null);
-
-            var stream = new MemoryStream();
-            var writer = new StreamWriter(stream);
-            writer.Write(rdfFile);
-            writer.Flush();
-            stream.Position = 0;
-            var file = new FormFile(stream, 0, stream.Length, null, "rdf.xml");
-            ShapeReport report = (ShapeReport)((OkObjectResult)etlController.dataValidate(file,new Guid("390cde26-b39d-41c8-89e0-b87c207d8cf2"))).Value;
-            if (!report.conforms && report.results.Count > 0)
-            {
-                Assert.True(true);
-            }else
-            {
-                Assert.True(false);
-            }
-        }
-
-        [Fact]
-        public void DataValidateValidationFileOK()
+       
+        [HttpGet]
+        public IActionResult ExampleOk()
         {
             etlController etlController = new etlController(null, null, null, null, null, null, null);
 
@@ -121,18 +36,11 @@ namespace XUnitTestAPI_CARGA
             stream2.Position = 0;
             var file2 = new FormFile(stream2, 0, stream2.Length, null, "validation.xml");
             ShapeReport report = (ShapeReport)((OkObjectResult)etlController.dataValidate(file, file2)).Value;
-            if (report.conforms && report.results.Count == 0)
-            {
-                Assert.True(true);
-            }
-            else
-            {
-                Assert.True(false);
-            }
+            return Ok();
         }
-
-        [Fact]
-        public void DataValidateValidationFileKO()
+        [HttpGet]
+        [Route("errorValidation")]
+        public IActionResult ExampleError()
         {
             etlController etlController = new etlController(null, null, null, null, null, null, null);
 
@@ -150,132 +58,10 @@ namespace XUnitTestAPI_CARGA
             stream2.Position = 0;
             var file2 = new FormFile(stream2, 0, stream2.Length, null, "validationKO.xml");
             ShapeReport report = (ShapeReport)((OkObjectResult)etlController.dataValidate(file, file2)).Value;
-            if (!report.conforms && report.results.Count > 0)
-            {
-                Assert.True(true);
-            }
-            else
-            {
-                Assert.True(false);
-            }
+            return Ok();
         }
 
-        [Fact]
-        public void GetOntology()
-        {
-            ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-            RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            ConfigSparql configSparql = new ConfigSparql();
-            configSparql.Endpoint = "";
-            DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null, null);
-
-            etlController.GetOntology();
-            Assert.True(true);
-        }
-
-        [Fact]
-        public void GetOntologyHash()
-        {
-            ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-            RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            ConfigSparql configSparql = new ConfigSparql();
-            configSparql.Endpoint = "";
-            DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null, null);
-
-            var response = etlController.GetOntologyHash();
-            if (response != null)
-            {
-                Assert.True(true);
-            }
-        }
-
-        [Fact]
-        public void GetHash()
-        {
-            ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-            RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            ConfigSparql configSparql = new ConfigSparql();
-            configSparql.Endpoint = "";
-            DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null, null);
-
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                string ontologyFile = File.ReadAllText("Config/Ontology/roh-v2.owl");
-                var response = etlController.GetHash(sha256Hash, ontologyFile);
-                if (response != null)
-                {
-                    Assert.True(true);
-                }
-            }
-        }
-
-        //[Fact]
-        //public void dataDiscover()
-        //{
-        //    ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-        //    RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-        //    ConfigSparql configSparql = new ConfigSparql();
-        //    ConfigTokenService configTokenService = new ConfigTokenService();
-        //    CallTokenService callTokenService = new CallTokenService(configTokenService);
-        //    CallUri callUri = new CallUri(callTokenService);
-        //    configSparql.Endpoint = "";
-        //    RabbitMQMockService mockRabbit = new RabbitMQMockService();
-        //    DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-        //    etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, mockRabbit);
-
-        //    MemoryStream stream = new MemoryStream();
-        //    StreamWriter writer = new StreamWriter(stream);
-        //    writer.Write(rdfFile);
-        //    writer.Flush();
-        //    stream.Position = 0;
-        //    FormFile file = new FormFile(stream, 0, stream.Length, null, "rdf.xml");
-        //    etlController.dataDiscover(file);
-        //    Assert.True(true);
-        //}
-
-        //[Fact]
-        //public void dataDiscoverState()
-        //{
-        //    ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-        //    RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-        //    ConfigSparql configSparql = new ConfigSparql();
-        //    ConfigTokenService configTokenService = new ConfigTokenService();
-        //    CallTokenService callTokenService = new CallTokenService(configTokenService);
-        //    CallUri callUri = new CallUri(callTokenService);
-        //    configSparql.Endpoint = "";
-        //    RabbitMQMockService mockRabbit = new RabbitMQMockService();
-        //    DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-        //    etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, callUri, null, mockRabbit);
-
-        //    DiscoverItem discoverItem = new DiscoverItem();
-        //    discoverItem.ID = Guid.NewGuid();
-        //    discoverItem.Status = "Pending";
-        //    discoverItem.DissambiguationProblems = new List<DiscoverItem.DiscoverDissambiguation>();
-
-        //    discoverItem.DissambiguationProblems.Add(new DiscoverItem.DiscoverDissambiguation
-        //    {
-        //        ID = Guid.NewGuid(),
-        //        DiscoverItemID = discoverItem.ID,
-        //        DissambiguationCandiates = new List<DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate>()
-        //    });
-
-        //    foreach(var item in discoverItem.DissambiguationProblems)
-        //    {
-        //        item.DissambiguationCandiates.Add(new DiscoverItem.DiscoverDissambiguation.DiscoverDissambiguationCandiate
-        //        {
-        //            ID = Guid.NewGuid(),
-        //            DiscoverDissambiguationID = item.ID
-        //        });
-        //    }
-
-        //    discoverItemService.AddDiscoverItem(discoverItem);
-        //    etlController.dataDiscoverState(discoverItem.ID);
-        //    Assert.True(true);
-        //}
-        private string rdfFile
+        private static string rdfFile
         {
             get
             {
@@ -347,7 +133,7 @@ namespace XUnitTestAPI_CARGA
             }
         }
 
-        private string validationFile
+        private static string validationFile
         {
             get
             {
@@ -367,7 +153,7 @@ namespace XUnitTestAPI_CARGA
             }
         }
 
-        private string validationFileKO
+        private static string validationFileKO
         {
             get
             {
@@ -386,7 +172,5 @@ namespace XUnitTestAPI_CARGA
                 return validationFile.ToString();
             }
         }
-
-        
     }
 }

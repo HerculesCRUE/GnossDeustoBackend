@@ -173,7 +173,7 @@ namespace API_CARGA.Models.Services
                 else
                 {
                     //Creamos la fila de la tabla RepositoryConfigSet con la fecha
-                    repositoryConfig.RepositoryConfigSet.Add(new RepositoryConfigSet()
+                    _context.RepositoryConfigSet.Add(new RepositoryConfigSet()
                     {
                         RepositoryConfigSetID = Guid.NewGuid(),
                         LastUpdate = lastSyncro.Fecha,
@@ -395,7 +395,7 @@ namespace API_CARGA.Models.Services
 
             var nfile = webClient.Encoding.GetBytes(package);
 
-            byte[] resp = webClient.UploadData(_configUrlService.GetUrlXmlConverter()+"Convert?pType=" + type, "POST", nfile);
+            byte[] resp = webClient.UploadData(_configUrlService.GetUrlXmlConverter()+"Conversor/Convert?pType=" + type, "POST", nfile);
 
 
             string respuesta = System.Text.Encoding.UTF8.GetString(resp);

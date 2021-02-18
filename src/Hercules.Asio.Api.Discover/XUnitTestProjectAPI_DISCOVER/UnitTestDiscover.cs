@@ -70,23 +70,11 @@ namespace XUnitTestProjectAPI_DISCOVER
             RohGraph ontologyGraph = new RohGraph();
             ontologyGraph.LoadFromFile("Ontology/roh-v2.owl");
 
-            //Cargamos configuraciones necesarias
-            ConfigService ConfigService = new ConfigService();
-            float maxScore = ConfigService.GetMaxScore();
-            float minScore = ConfigService.GetMinScore();
-            ConfigScopus ConfigScopus = new ConfigScopus();
-            string ScopusApiKey = ConfigScopus.GetScopusApiKey();
-            string ScopusUrl = ConfigScopus.GetScopusUrl();
-            ConfigCrossref ConfigCrossref = new ConfigCrossref();
-            string CrossrefUserAgent = ConfigCrossref.GetCrossrefUserAgent();
-            ConfigWOS ConfigWOS = new ConfigWOS();
-            string WOSAuthorization = ConfigWOS.GetWOSAuthorization();
-
             DiscoverUtility discoverUtility = new DiscoverUtility();
             discoverUtility.test = true;
 
             //Aplicamos el descubrimiento de enlaces
-            Dictionary<string, List<DiscoverLinkData.PropertyData>> discoverLinks= discoverUtility.ApplyDiscoverLinks(ref dataGraph, ontologyGraph, minScore, maxScore, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization);
+            Dictionary<string, List<DiscoverLinkData.PropertyData>> discoverLinks= discoverUtility.ApplyDiscoverLinks(ref dataGraph, ontologyGraph, 0.7f, 0.9f, "", "", "HerculesASIO-University-of-Murcia (https://github.com/HerculesCRUE/GnossDeustoBackend; mailto:<mail>) AsioBot", "");
 
             //En 'discoverLinks' estarán los datos que se han recuperado de las integraciones externas junto con su provenance
             //En 'dataGraph' estará el grafo modificado tras el descubrimiento de enlaces
