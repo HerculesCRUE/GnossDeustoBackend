@@ -1,0 +1,45 @@
+#region  Ejercicio 4.2
+//Añadimos propiedad http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+IUriNode rdftypeProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+IUriNode rdftypePerson = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#Person"));
+orcidGraph.Assert(new Triple(subjectPerson, rdftypeProperty, rdftypePerson));
+
+//Añadimos propiedad http://purl.org/roh/mirror/foaf#name
+IUriNode nameProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#name"));
+ILiteralNode namePerson = orcidGraph.CreateLiteralNode(name, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+orcidGraph.Assert(new Triple(subjectPerson, nameProperty, namePerson));
+
+//Añadimos propiedad http://purl.org/roh#ORCID
+IUriNode orcidProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
+ILiteralNode nameOrcid = orcidGraph.CreateLiteralNode(result.orcid_id, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+orcidGraph.Assert(new Triple(subjectPerson, orcidProperty, nameOrcid));
+
+AddExternalIDProvenance(orcidGraph, subjectPerson, orcidProperty, nameOrcid, provenanceId);
+
+
+//Hacemos peticiones al métdo dee ORCID ‘orcid}/ person' y almacenamos en un grafo en local los datos de los identificadores                       
+ORCIDPerson person = SelectORCIDPersonCache(result.orcid_id, pDiscoverCache);
+
+if (person.external_identifiers != null && person.external_identifiers.external_identifier != null)
+{
+	foreach (ORCIDPerson.ExternalIdentifiers.ExternalIdentifier extIdentifier in person.external_identifiers.external_identifier)
+	{
+		if (extIdentifier.external_id_type == "ResearcherID")
+		{
+			//Añadimos propiedad http://purl.org/roh/mirror/vivo#researcherId
+			IUriNode researcherProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#researcherId"));
+			ILiteralNode nameResearcher = orcidGraph.CreateLiteralNode(extIdentifier.external_id_value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+			orcidGraph.Assert(new Triple(subjectPerson, researcherProperty, nameResearcher));
+			AddExternalIDProvenance(orcidGraph, subjectPerson, researcherProperty, nameResearcher, provenanceId);
+		}
+		else if (extIdentifier.external_id_type == "Scopus Author ID")
+		{
+			//Añadimos propiedad http://purl.org/roh/mirror/vivo#scopusId
+			IUriNode scopusProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#scopusId"));
+			ILiteralNode nameScopus = orcidGraph.CreateLiteralNode(extIdentifier.external_id_value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+			orcidGraph.Assert(new Triple(subjectPerson, scopusProperty, nameScopus));
+			AddExternalIDProvenance(orcidGraph, subjectPerson, scopusProperty, nameScopus, provenanceId);
+		}
+	}
+}
+#endregion

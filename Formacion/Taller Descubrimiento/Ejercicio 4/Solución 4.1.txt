@@ -1,0 +1,11 @@
+#region Ejercicio 4.1
+string query = @$"select distinct ?person ?name ?doc ?title
+				where
+				{{
+					?person <http://purl.org/roh/mirror/foaf#name> ?name. 
+					?doc <http://purl.org/roh#title> ?title. 
+					?doc <http://purl.org/roh/mirror/bibo#authorList> ?list. 
+					?list ?enum ?person.
+					FILTER(?person =<{entityID}>)
+				}}";
+#endregion

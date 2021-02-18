@@ -1,0 +1,13 @@
+#region Realizar una consulta para obtener los títulos de los documentos de una persona conociendo el nombre de la persona
+string queryTitles = @$"select ?title
+						where
+						{{
+							?person <http://purl.org/roh/mirror/foaf#name> ?nombre. 
+							?doc <http://purl.org/roh/mirror/bibo#authorList> ?list. 
+							?doc <http://purl.org/roh#title> ?title. 
+							?list ?enum ?person.
+							Filter(?nombre='Mi Nombre')
+						}}";
+SparqlResultSet sparqlResultSetTitles = (SparqlResultSet)dataGraph.ExecuteQuery(queryTitles.ToString());
+List<string> titulos = sparqlResultSetTitles.Results.Select(x => ((LiteralNode)x["title"]).Value).ToList();
+#endregion

@@ -1,0 +1,34 @@
+#region  Ejercicio 4.3
+//Añadimos propiedad http://purl.org/roh#title
+IUriNode titleProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#title"));
+ILiteralNode nameTitle = orcidGraph.CreateLiteralNode(worksData[workCode].Key, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+orcidGraph.Assert(new Triple(subjectWork, titleProperty, nameTitle));
+
+//Añadimos propiedad http://www.w3.org/1999/02/22-rdf-syntax-ns#type con valor http://purl.org/roh/mirror/bibo#Document"
+IUriNode rdftypeDocument = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#Document"));
+orcidGraph.Assert(new Triple(subjectWork, rdftypeProperty, rdftypeDocument));
+
+//Añadimos entidad http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq con blankNode para la lista de autores
+IBlankNode subjectAuthorList = orcidGraph.CreateBlankNode();
+IUriNode rdftypeAuthorList = orcidGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq"));
+orcidGraph.Assert(new Triple(subjectAuthorList, rdftypeProperty, rdftypeAuthorList));
+
+//Añadimos propiedad http://purl.org/roh/mirror/bibo#authorList a la obra y como objeto la entidad Seq
+IUriNode authorListProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#authorList"));
+orcidGraph.Assert(new Triple(subjectWork, authorListProperty, subjectAuthorList));
+
+//Añadimos propiedad http://www.w3.org/1999/02/22-rdf-syntax-ns#_1 dentro de la entidad Seq que apupnte al autor
+IUriNode firstAuthorProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#_1"));
+orcidGraph.Assert(new Triple(subjectAuthorList, firstAuthorProperty, subjectPerson));
+
+
+
+if (!string.IsNullOrEmpty(worksData[workCode].Value))
+{
+	//Añadimos propiedad http://purl.org/roh/mirror/bibo#doi con el valor del doi (worksData[workCode].Value)
+	IUriNode doiProperty = orcidGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#doi"));
+	ILiteralNode nameDoi = orcidGraph.CreateLiteralNode(worksData[workCode].Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+	orcidGraph.Assert(new Triple(subjectWork, doiProperty, nameDoi));
+	AddExternalIDProvenance(orcidGraph, subjectWork, doiProperty, nameDoi, provenanceId);
+}
+#endregion 

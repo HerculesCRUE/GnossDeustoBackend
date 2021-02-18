@@ -1,0 +1,41 @@
+#region Añadir a dataGraph los triples necesarios para cargar una entidad de tipo persona con tu nombre y 2 documentos en los que figures en su lista de autores          
+IUriNode propRdfType = dataGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+IUriNode biboDocument = dataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#Document"));
+IUriNode propItem1 = dataGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#_1"));
+
+//Entidad persona
+IUriNode entityPerson = dataGraph.CreateUriNode(UriFactory.Create("http://graph.um.es/res/person/yo"));
+IUriNode foafPerson = dataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#Person"));
+dataGraph.Assert(new Triple(entityPerson, propRdfType, foafPerson));
+
+IUriNode propFoafName = dataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#name"));
+ILiteralNode objectNombrePersona = dataGraph.CreateLiteralNode("Mi Nombre", new Uri("http://www.w3.org/2001/XMLSchema#string"));
+dataGraph.Assert(new Triple(entityPerson, propFoafName, objectNombrePersona));
+
+List<string> docs = new List<string>() { "Documento1", "Documento2", };
+foreach (string doc in docs)
+{
+	IUriNode entityDoc = dataGraph.CreateUriNode(UriFactory.Create("http://graph.um.es/res/document/" + Guid.NewGuid()));
+	dataGraph.Assert(new Triple(entityDoc, propRdfType, biboDocument));
+
+	IUriNode propRohTitle = dataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#title"));
+	ILiteralNode objectTittleDoc = dataGraph.CreateLiteralNode(doc, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+	dataGraph.Assert(new Triple(entityDoc, propRohTitle, objectTittleDoc));
+
+	//Lista de autores
+	IBlankNode entityListaAutores = dataGraph.CreateBlankNode();
+	IUriNode rdfSeq = dataGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq"));
+	dataGraph.Assert(new Triple(entityListaAutores, propRdfType, rdfSeq));
+
+	//Doc apunta a lista
+	IUriNode propAuthorList = dataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#authorList"));
+	dataGraph.Assert(new Triple(entityDoc, propAuthorList, entityListaAutores));
+
+	//La lista apunta a la persona
+	dataGraph.Assert(new Triple(entityListaAutores, propItem1, entityPerson));
+}
+System.IO.StringWriter sw2 = new System.IO.StringWriter();
+RdfXmlWriter rdfXmlWriter2 = new RdfXmlWriter();
+rdfXmlWriter2.Save(dataGraph, sw2);
+string grafoTexto2 = sw2.ToString();
+#endregion
