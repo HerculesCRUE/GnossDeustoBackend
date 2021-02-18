@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hercules.Asio.UrisFactory</name>
+    </assembly>
+    <members>
+        <member name="T:UrisFactory.Controllers.FactoryController">
+            <summary>
+            Controlador encargado de generar una uri válida para una resource class y un identificador ORCID
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Controllers.FactoryController.GenerateUri(System.String,System.String,UrisFactory.Extra.Enum.EleccionUri)">
+            <summary>
+            Genera una Uri con la estructura asociada a la resource class pasada con el identificador como parametro, ejemplo de uso: con la llamada: "http://herc-as-front-desa.atica.um.es/uris/Factory?resource_class=Article&amp;identifier=1231d", se obtiene http://graph.um.es/res/article/1231d
+            </summary>
+            <param name="resource_class">nombre de la resource class o rdfType que especifica la estructura de uris a usar, el listado de resource class se pueden obtener a través de http://herc-as-front-desa.atica.um.es/uris/Schema, en el apartado ResourcesClasses-> ResourceClass; ejemplo: Article</param>
+            <param name="identifier">identifier, es un cadena que representa un ORCID</param>
+            <param name="eleccion_uri">los valores posibles son 0 y 1, este valor indican si el parametro resource_class pasado es un resource class o si por lo contrario es el rdfType, el 0 indica que es un resource class mientras que el 1 es para indicar que es rdfType</param>
+        </member>
+        <member name="T:UrisFactory.Controllers.SchemaController">
+            <summary>
+            Controlador encargado de gerstionar el esquema de Uris, que ofrece métodos para la consulta de este esquema y su modificación
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Controllers.SchemaController.GetSchema">
+            <summary>
+            Obtiene el fichero de configuración de los esquemas configurados
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Controllers.SchemaController.ReplaceSchemaConfig(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Reemplaza el fichero de configuración por otro fichero dado, para ver la estrucutura del fichero, se recomienda ver el fichero dado por: http://herc-as-front-desa.atica.um.es/uris/Schema
+            </summary>
+            <remarks>
+            Se puede encontrar un ejemplo del fichero como plantilla en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/UrisFactory/docs/20191211%20Esquema%20de%20URIs.json
+             </remarks>
+            <param name="newSchemaConfig">nuevo fichero de configuración</param>
+        </member>
+        <member name="M:UrisFactory.Controllers.SchemaController.GetUriStructureInfo(System.String)">
+            <summary>
+            Obtiene la estrucutra uri y las resources class asociadas a esa estructura R
+            </summary>
+            <param name="name">nombre de la estructura uri, se pueden obtener a través del método http://herc-as-front-desa.atica.um.es/uris/Schema, en los objetos UriStructures, Name</param>
+        </member>
+        <member name="M:UrisFactory.Controllers.SchemaController.DeleteUriStructure(System.String)">
+            <summary>
+            Borra la estrcutura uri y las resource class asociadas a esa estructura
+            </summary>
+            <param name="name">nombre de la estructura uri a eliminar, se pueden obtener a través del método http://herc-as-front-desa.atica.um.es/uris/Schema, en los objetos UriStructures, Name</param>
+        </member>
+        <member name="M:UrisFactory.Controllers.SchemaController.AddUriStructure(UrisFactory.ViewModels.InfoUriStructure)">
+            <summary>
+            Añade una nueva estructura de uris y una reource class asociada a esta nueva estrucutra 
+            </summary>
+            <param name="infoUriStructure">objeto que contiene una estrucutura nueva y una resource class asociada a esa estructura</param>
+        </member>
+        <member name="T:UrisFactory.Extra.Exceptions.FailedLoadConfigJsonException">
+            <summary>
+            Excepción para indicar que ha fallado la carga del fichero de configuración
+            </summary>
+        </member>
+        <member name="T:UrisFactory.Extra.Exceptions.ParametersNotConfiguredException">
+            <summary>
+            Excepción para indicar que hay parametros configurados
+            </summary>
+        </member>
+        <member name="T:UrisFactory.Extra.Exceptions.UriStructureBadInfoException">
+            <summary>
+            Excepción para indicar que no concuerdan los datos de la estructura uri
+            </summary>
+        </member>
+        <member name="T:UrisFactory.Extra.Exceptions.UriStructureConfiguredException">
+            <summary>
+            Excepción para indicar que hay un fallo con la configuración de la estructura Uri
+            </summary>
+        </member>
+        <member name="T:UrisFactory.Models.ConfigEntities.Characters">
+            <summary>
+            Objeto que representa a un objeto que hay dentro de la estructura Characters del fichero json de configuración
+            </summary>
+        </member>
+        <member name="T:UrisFactory.Models.ConfigEntities.Component">
+            <summary>
+            Objeto que representa a un objeto que hay dentro de la estructura Components del fichero json de configuración
+            </summary>
+        </member>
+        <member name="T:UrisFactory.Models.ConfigEntities.ResourcesClass">
+            <summary>
+            Objeto que representa a un objeto que hay dentro de la estructura ResourcesClasses del fichero json de configuración
+            </summary>
+        </member>
+        <member name="T:UrisFactory.Models.ConfigEntities.UriComponentsList">
+            <summary>
+            almacena los nombres 
+            </summary>
+        </member>
+        <member name="T:UrisFactory.Models.ConfigEntities.UriStructure">
+            <summary>
+            Objeto que representa a un objeto que hay dentro de la estructura UriStructures del fichero json de configuración, que simula una estructura uri
+            </summary>
+        </member>
+        <member name="T:UrisFactory.Models.ConfigEntities.UriStructureGeneral">
+            <summary>
+            Objeto que simula el fichero Json de configuración
+            </summary>
+        </member>
+        <member name="T:UrisFactory.Models.Services.ConfigJsonHandler">
+            <summary>
+            Esta clase sirve para gestionar el fichero de configuración de las uris
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.#ctor">
+            <summary>
+            Este constructor inicializa las clases con la información necesaria a partir del fichero json
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.#ctor(System.String)">
+            <summary>
+            Este constructor inicializa las clases con la información necesaria a partir de una cadena de texto emulando el json del fichero de configuracion
+            </summary>
+            <param name="json">cadena de texto emulando el json del fichero de configuracion</param>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.InitializerConfigJson">
+            <summary>
+            Método para cargar la clase general de estructuras Uri a partir del fichero json de configuración
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.InitializerConfigJson(System.String)">
+            <summary>
+            Método para cargar la clase general de estructuras Uri a partir de una cadena de texto emulando el json del fichero de configuracion
+            </summary>
+            <param name="json">cadena de texto emulando el json del fichero de configuracion</param>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.GetUrisConfig">
+            <summary>
+            Devuelve el objeto con la estructura general del fichero de configuracion
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.LoadConfigJson">
+            <summary>
+            carga el objeto con la estructura general a partir del fichero de configuracion
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.LoadConfigJson(System.String)">
+            <summary>
+            carga el objeto con la estructura general a partir de una cadena de texto emulando el json del fichero de configuracion
+            </summary>
+            <param name="json">cadena de texto emulando el json del fichero de configuracion</param>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.IsCorrectFormedUriStructure">
+            <summary>
+            Comprueba que el objeto cargado tenga los elementos adecuados
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.IsCorrectFormedUriStructure(UrisFactory.Models.ConfigEntities.UriStructureGeneral)">
+            <summary>
+            Comprueba que el la estructura general de uris pasado por parametros sea correcto cargado tenga los elementos adecuados
+            </summary>
+            <param name="uriSchema">estructura general de uris a comprobar su validez</param>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.DeleteUriStructureInfo(UrisFactory.Models.ConfigEntities.UriStructure,System.Collections.Generic.List{UrisFactory.Models.ConfigEntities.ResourcesClass})">
+            <summary>
+            Elimina del objeto de uris, una estructura uri con sus resourceClass asociadas
+            </summary>
+            <param name="uriStructure">estructura de uris a añadir</param>
+            <param name="resourcesClass">lista de resource class asociadas a uriStructure</param>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.DeleteUriStructureInfo(System.String)">
+            <summary>
+            Elimina del objeto de uris, una estructura uri a partir de su nombre
+            </summary>
+            <param name="name">nombre de la estructura uri a eliminar</param>
+            <exception cref="T:UrisFactory.Extra.Exceptions.UriStructureConfiguredException">UriStructure not exist in config file</exception>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.ExistUriStructure(System.String)">
+            <summary>
+            Comprueba que existe una estrucutra de uri
+            </summary>
+            <param name="name">nombre de la estructura uri a comprobar si existe</param>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.GetUriStructure(System.String)">
+            <summary>
+            Obtiene una estructura uri
+            </summary>
+            <param name="name">nombre de la estructura uri a traer</param>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.GetResourceClass(System.String)">
+            <summary>
+            Obtiene una lista de ResourceClass asociadas a una estructura uri
+            </summary>
+            <param name="name">nombre de la estructura uri</param>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ConfigJsonHandler.AddUriStructureInfo(UrisFactory.Models.ConfigEntities.UriStructure,UrisFactory.Models.ConfigEntities.ResourcesClass)">
+            <summary>
+            Añade del objeto de uris una estructura de uris y una resource class asiciada a esa estrcutura
+            </summary>
+            <param name="uriStructure">estructura uri</param>
+            <param name="resourcesClass">resource class asociada a uriStructure</param>
+            <exception cref="T:UrisFactory.Extra.Exceptions.UriStructureConfiguredException">UriStructure Already exist in config file</exception>
+            <exception cref="T:UrisFactory.Extra.Exceptions.UriStructureBadInfoException">there is a mismatch between uriStructure and resourceClass given</exception>
+        </member>
+        <member name="T:UrisFactory.Models.Services.ISchemaConfigOperations">
+            <summary>
+            Interfaz para las operaciones con el fichero de configuración
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ISchemaConfigOperations.GetContentType">
+            <summary>
+            Obtiene el content type del fichero
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ISchemaConfigOperations.GetFileSchemaData">
+            <summary>
+            Obtiene los bytes con el fichero de configuracion
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigFile(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Guarda el fichero de configuracion
+            </summary>
+            <param name="formFile">cadena de texto emulando el json del fichero de configuracion</param>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ISchemaConfigOperations.SaveConfigJson">
+            <summary>
+            Guarda el fichero de configuracion
+            </summary>
+        </member>
+        <member name="T:UrisFactory.Models.Services.ReaderConfigJson">
+            <summary>
+            Transforma el texto en formato Json del fichero en un objeto de estrcutura de uris general, utilizable por el programa
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ReaderConfigJson.Read">
+            <summary>
+            Lee el contenido del fichero de configuración y lo transforma en un objeto de tipo UriStructureGeneral
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.ReaderConfigJson.Read(System.String)">
+            <summary>
+            Lee el contenido de una cadena de texto en formato Json y lo transforma en un objeto de tipo UriStructureGeneral
+            </summary>
+            <param name="texto">cadena de texto en formato Json</param>
+        </member>
+        <member name="T:UrisFactory.Models.Services.SchemaConfigFileOperations">
+            <summary>
+            Clase para la gestión de las operaciones con el fichero de configuración
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.SchemaConfigFileOperations.GetContentType">
+            <summary>
+            Obtiene el content type del fichero
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.SchemaConfigFileOperations.GetFileSchemaData">
+            <summary>
+            Obtiene los bytes con el fichero de configuracion
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigFile(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Guarda el fichero de configuracion
+            </summary>
+            <param name="formFile">cadena de texto emulando el json del fichero de configuracion</param>
+        </member>
+        <member name="M:UrisFactory.Models.Services.SchemaConfigFileOperations.SaveConfigJson">
+            <summary>
+            Guarda el fichero de configuracion
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.SchemaConfigFileOperations.CreateStream">
+            <summary>
+            Crea un file stream para su posterior uso
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.SchemaConfigFileOperations.replacePreviousSchemaConfig(System.IO.FileStream)">
+            <summary>
+            Reemplaza la copia de seguridad que se ha hecho del anterior esquema por un esquema nuevo
+            </summary>
+            <param name="stream">file stream del fichero</param>
+        </member>
+        <member name="T:UrisFactory.Models.Services.UriFormer">
+            <summary>
+            Clase encargada de generar las uris
+            </summary>
+        </member>
+        <member name="M:UrisFactory.Models.Services.UriFormer.GetURI(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Boolean)">
+            <summary>
+            Devuelve una uri a partir de una resourceClass y y una lista de valores
+            </summary>
+            <param name="resourceClass">nombre de la resourceClass a usar para generar la uri</param>
+            <param name="queryString">diccionario con los valores cogidos de la url de la petición</param>
+        </member>
+        <member name="M:UrisFactory.Models.Services.UriFormer.GetUriByStructure(UrisFactory.Models.ConfigEntities.UriStructure,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Genera una uri
+            </summary>
+            <param name="urlStructure">estructura URL para la construcción de la uri</param>
+            <param name="parsedCharacter">Character a usar pra la generación de la uri, este character debe estar configurado en el fichero de configuración</param>
+            <param name="parsedResourceClass">etiqueta a mostrar en la uri de la resource class de la cual queremos generar la uri</param>
+            <param name="queryString">diccionario con los valores cogidos de la url de la petición</param>
+        </member>
+        <member name="M:UrisFactory.Models.Services.UriFormer.ParserCharacter(System.Collections.Generic.List{UrisFactory.Models.ConfigEntities.Component})">
+            <summary>
+            devuelve el Character que usa una estructura Uri
+            </summary>
+            <param name="pUriStructureComponents">componentes de la estructura uri</param>
+        </member>
+        <member name="M:UrisFactory.Models.Services.UriFormer.ParserResourceClass(System.String)">
+            <summary>
+            devuelve un objeto ResourceClass a partir del nombre de resource class
+            </summary>
+            <param name="pResourceClass">nombre del objeto a devolver</param>
+        </member>
+        <member name="M:UrisFactory.Models.Services.UriFormer.ParserResourceClassRdfType(System.String)">
+            <summary>
+            devuelve un objeto ResourceClass a partir del RDFType
+            </summary>
+            <param name="pRdfType">rdftype del objeto a devolver</param>
+        </member>
+        <member name="T:UrisFactory.ViewModels.InfoUriStructure">
+            <summary>
+            Clase usada para devolver una estructura uri desde los controladores
+            </summary>
+        </member>
+    </members>
+</doc>
