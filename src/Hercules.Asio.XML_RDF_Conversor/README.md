@@ -46,7 +46,7 @@ XML RDF Conversor es un servicio web que contiene únicamente un controlador, cu
 			"nameSpace": "nameSpace",
 			"source": "source",
 			"property": "property",
-			"datatype": "datatype"
+			"datatype": "datatype",
 			"properties": [{
 					"property": "property",
 					"source": "source",
@@ -67,6 +67,27 @@ XML RDF Conversor es un servicio web que contiene únicamente un controlador, cu
 			]
 		}]		
 	}
+
+Entities
+- rdftype: Tipo de la ontología.
+- rdftypeproperty: Tipo del rdf del cual habrá que obtener del mapa.
+- id: Propiedad id del nodo.
+- nameSpace: Espacio de nombres del nodo.
+- source: Nombre del nodo.
+- property: Propiedad la cual hay que acceder y no se encuentra en el nodo.
+- datatype: Tipo de dato de la propiedad que hay que acceder.
+Properties
+- property: Tipo de la propiedad en la ontología.
+- source: Nombre del nodo.
+- datatype: Tipo de la propiedad. String por defecto.
+Subentities
+- property: Propiedad de la subentidad a la que apunta.
+- inverseProperty: Propiedad que indica si es inversa. Si no aparece, es que es directa.
+- entities: Listado de subentidades de tipo Entity.
+Mappingrdftype
+- nameSpace: Espacio de nombre del nodo.
+- source: Contenido de la etiqueta en la cual se le ha de aplicar el target.
+- target: IRI del tipo de la entidad a la que apunta.
 
 ## Comprobaciones y pruebas
 
