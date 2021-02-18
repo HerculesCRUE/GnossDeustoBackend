@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -10,8 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="UrisFactory">
-      <HintPath>..\..\..\EjemploLibraryUrisFactory\UrisFactoryLibraryExample\UrisFactoryLibraryExample\Libraries\UrisFactory.dll</HintPath>
+    <Reference Include="Hercules.Asio.UrisFactory">
+      <HintPath>Libraries\Hercules.Asio.UrisFactory.dll</HintPath>
     </Reference>
   </ItemGroup>
 
