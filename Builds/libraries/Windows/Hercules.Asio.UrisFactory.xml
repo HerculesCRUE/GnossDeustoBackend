@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>UrisFactory</name>
+        <name>Hercules.Asio.UrisFactory</name>
     </assembly>
     <members>
         <member name="T:UrisFactory.Controllers.FactoryController">

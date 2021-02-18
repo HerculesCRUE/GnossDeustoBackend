@@ -105,12 +105,7 @@ namespace XUnitTestAPI_CARGA
         [Fact]
         public void DataValidateValidationFileOK()
         {
-            ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-            RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            ConfigSparql configSparql = new ConfigSparql();
-            configSparql.Endpoint = "";
-            DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null, null);
+            etlController etlController = new etlController(null, null, null, null, null, null, null);
 
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
@@ -139,12 +134,7 @@ namespace XUnitTestAPI_CARGA
         [Fact]
         public void DataValidateValidationFileKO()
         {
-            ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
-            RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            ConfigSparql configSparql = new ConfigSparql();
-            configSparql.Endpoint = "";
-            DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null, null);
+            etlController etlController = new etlController(null, null, null, null, null, null, null);
 
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
