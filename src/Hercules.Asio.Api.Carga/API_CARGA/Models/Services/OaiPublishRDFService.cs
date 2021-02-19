@@ -95,6 +95,30 @@ namespace API_CARGA.Models.Services
                         {
                             AddProcessingState(identifierOAIPMH.Identifier, identifier, jobId, listIdentifier.IndexOf(identifierOAIPMH), totalCount);
                         }
+                        if(set == "openaire_cris_orgunits")
+                        {
+                            string[] cadena = identifierOAIPMH.Identifier.Split(":");
+                            identifierOAIPMH.Identifier = cadena[0] + ":" + cadena[1] + ":OrgUnits/" + cadena[2];
+                        }
+                        else if(set == "openaire_cris_publications")
+                        {
+                            string[] cadena = identifierOAIPMH.Identifier.Split(":");
+                            identifierOAIPMH.Identifier = cadena[0] + ":" + cadena[1] + ":Publications/" + cadena[2];
+                        }
+                        else if(set == "openaire_cris_projects")
+                        {
+                            string[] cadena = identifierOAIPMH.Identifier.Split(":");
+                            identifierOAIPMH.Identifier = cadena[0] + ":" + cadena[1] + ":Projects/" + cadena[2];
+                        }else if (set == "openaire_cris_products")
+                        {
+                            string[] cadena = identifierOAIPMH.Identifier.Split(":");
+                            identifierOAIPMH.Identifier = cadena[0] + ":" + cadena[1] + ":Products/" + cadena[2];
+                        }else if (set == "openaire_cris_persons")
+                        {
+                            string[] cadena = identifierOAIPMH.Identifier.Split(":");
+                            identifierOAIPMH.Identifier = cadena[0] + ":" + cadena[1] + ":Persons/" + cadena[2];
+                        }
+
                         string record = CallGetRecord(identifier,metadataformat, identifierOAIPMH.Identifier);
 
                         string rdf = "";
@@ -193,7 +217,7 @@ namespace API_CARGA.Models.Services
                 else
                 {
                     //Creamos la fila de la tabla RepositoryConfigSet con la fecha
-                    repositoryConfig.RepositoryConfigSet.Add(new RepositoryConfigSet()
+                    _context.RepositoryConfigSet.Add(new RepositoryConfigSet()
                     {
                         RepositoryConfigSetID = Guid.NewGuid(),
                         LastUpdate = lastSyncro.Fecha,
