@@ -93,11 +93,11 @@ namespace API_CARGA.Models.Services
                     {
                         if (granularity.ToUpper() == "YYYY-MM-DD")
                         {
-                            fechaFromString = $"&from={fechaFrom.Value.ToString("YYYY-MM-DD")}";
+                            fechaFromString = $"{fechaFrom.Value.ToString("yyyy-MM-dd")}";
                         }
                         else
                         {
-                            fechaFromString = $"&from={fechaFrom.Value.ToString("u", CultureInfo.InvariantCulture).Replace(" ", "T")}";
+                            fechaFromString = $"{fechaFrom.Value.ToString("u", CultureInfo.InvariantCulture).Replace(" ", "T")}";
                         }
                     }
 
@@ -111,28 +111,23 @@ namespace API_CARGA.Models.Services
                         }
                         if (set == "openaire_cris_orgunits")
                         {
-                            string[] cadena = identifierOAIPMH.Identifier.Split(":");
-                            identifierOAIPMH.Identifier = cadena[0] + ":" + cadena[1] + ":OrgUnits/" + cadena[2];
+                            identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:OrgUnits/");
                         }
                         else if (set == "openaire_cris_publications")
                         {
-                            string[] cadena = identifierOAIPMH.Identifier.Split(":");
-                            identifierOAIPMH.Identifier = cadena[0] + ":" + cadena[1] + ":Publications/" + cadena[2];
+                            identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Publications/");
                         }
                         else if (set == "openaire_cris_projects")
                         {
-                            string[] cadena = identifierOAIPMH.Identifier.Split(":");
-                            identifierOAIPMH.Identifier = cadena[0] + ":" + cadena[1] + ":Projects/" + cadena[2];
+                            identifierOAIPMH.Identifier=identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Projects/");
                         }
                         else if (set == "openaire_cris_products")
                         {
-                            string[] cadena = identifierOAIPMH.Identifier.Split(":");
-                            identifierOAIPMH.Identifier = cadena[0] + ":" + cadena[1] + ":Products/" + cadena[2];
+                            identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Products/");
                         }
                         else if (set == "openaire_cris_persons")
                         {
-                            string[] cadena = identifierOAIPMH.Identifier.Split(":");
-                            identifierOAIPMH.Identifier = cadena[0] + ":" + cadena[1] + ":Persons/" + cadena[2];
+                            identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Persons/");
                         }
 
                         string record = CallGetRecord(identifier, metadataformat, identifierOAIPMH.Identifier);
