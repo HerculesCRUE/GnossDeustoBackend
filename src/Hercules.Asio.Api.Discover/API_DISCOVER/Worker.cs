@@ -1,5 +1,5 @@
 using API_DISCOVER.Models.Entities;
-using API_DISCOVER.Models.Log;
+using API_DISCOVER.Models.Logging;
 using API_DISCOVER.Models.Services;
 using API_DISCOVER.Utility;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Diagnostics.CodeAnalysis;
 using Quartz;
+using API_DISCOVER.Models.Logging;
 
 namespace API_DISCOVER
 {
@@ -65,7 +66,7 @@ namespace API_DISCOVER
                             }
                             catch (Exception ex)
                             {
-                                Log.Error(ex);
+                                Logging.Error(ex);
                             }
                         }).Start();
                         _processDiscoverLoadedEntities = true;
@@ -73,7 +74,7 @@ namespace API_DISCOVER
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex);
+                    Logging.Error(ex);
                 }
                 Thread.Sleep(1000);
             }

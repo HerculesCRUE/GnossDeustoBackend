@@ -1,7 +1,7 @@
 ﻿using API_DISCOVER.Models.Entities;
 using API_DISCOVER.Models.Entities.Discover;
 using API_DISCOVER.Models.Entities.ExternalAPIs;
-using API_DISCOVER.Models.Log;
+using API_DISCOVER.Models.Logging;
 using API_DISCOVER.Models.Services;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -2458,7 +2458,7 @@ namespace API_DISCOVER.Utility
             {
                 foreach (Exception exception in APIsExceptions)
                 {
-                    Log.Error(exception);
+                    Logging.Error(exception);
                 }
             }
 

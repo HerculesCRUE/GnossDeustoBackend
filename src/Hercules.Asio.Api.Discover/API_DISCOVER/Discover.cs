@@ -12,7 +12,6 @@ using System.IO;
 using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
-using API_DISCOVER.Models.Log;
 using VDS.RDF;
 using System.Collections.Generic;
 using VDS.RDF.Parsing;
@@ -23,6 +22,7 @@ using System.Linq;
 using VDS.RDF.Query;
 using VDS.RDF.Update;
 using System.Threading;
+using API_DISCOVER.Models.Logging;
 
 namespace API_DISCOVER
 {
@@ -62,7 +62,6 @@ namespace API_DISCOVER
                 CallEtlApiService callEtlApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallEtlApiService>();
 
                 DiscoverItem discoverItem = discoverItemBDService.GetDiscoverItemById(itemID);
-
                 if (discoverItem != null)
                 {
                     //Aplicamos el proceso de descubrimiento
@@ -76,7 +75,7 @@ namespace API_DISCOVER
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Logging.Error(ex);
                 //Se ha producido un error al aplicar el descubrimiento
                 //Modificamos los datos del DiscoverItem que ha fallado
                 DiscoverItemBDService discoverItemBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>();
@@ -661,7 +660,7 @@ namespace API_DISCOVER
                 }
                 catch (Exception exception)
                 {
-                    Log.Error(exception);
+                    Logging.Error(exception);
                 }
                 Thread.Sleep(pSecondsSleep * 1000);
             }
