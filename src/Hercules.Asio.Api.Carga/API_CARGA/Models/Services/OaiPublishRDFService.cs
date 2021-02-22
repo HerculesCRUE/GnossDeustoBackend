@@ -97,7 +97,7 @@ namespace API_CARGA.Models.Services
                         }
                         else
                         {
-                            fechaFromString = $"&from={fechaFrom.Value.ToString("u", CultureInfo.InvariantCulture).Replace(" ","T")}";
+                            fechaFromString = $"&from={fechaFrom.Value.ToString("u", CultureInfo.InvariantCulture).Replace(" ", "T")}";
                         }
                     }
 
@@ -156,6 +156,7 @@ namespace API_CARGA.Models.Services
                         {
                             validationException = true;
                             exception.AppendLine(ex.Message);
+                            throw ex;
                         }
                         lastSyncro = identifierOAIPMH;
                         if (lastSyncro != null)
@@ -426,7 +427,7 @@ namespace API_CARGA.Models.Services
         /// <returns>RDF</returns>
         public string CallGetRecord(Guid repoIdentifier, string metadataPrefix, string identifier)
         {
-            string respuesta = _publishData.CallGetApi($"etl/GetRecord/{repoIdentifier}?identifier={identifier}&metadataPrefix={metadataPrefix}", _token);
+            string respuesta = _publishData.CallGetApi($"etl/GetRecord/{repoIdentifier}?identifier={System.Web.HttpUtility.UrlEncode(identifier)}&metadataPrefix={metadataPrefix}", _token);
             XDocument respuestaXML = XDocument.Parse(respuesta);
             XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
             string rdf = respuestaXML.Root.Element(nameSpace + "GetRecord").Descendants(nameSpace + "metadata").First().FirstNode.ToString();
