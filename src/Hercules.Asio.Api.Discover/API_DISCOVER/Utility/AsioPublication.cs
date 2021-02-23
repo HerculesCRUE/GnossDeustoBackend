@@ -175,7 +175,7 @@ namespace API_DISCOVER.Utility
             }
 
             //5º Limpiamos los blanknodes huerfanos, o que no tengan triples
-            DeleteOrphanNodes(graphs);
+            //DeleteOrphanNodes(graphs);
         }
 
         /// <summary>
