@@ -7,12 +7,12 @@ using VDS.RDF.Writing;
 using System.Xml;
 using System.IO;
 using System.Text;
-using Nett;
 using System.Net;
 using System.Web;
 using System.Collections;
 using Microsoft.Extensions.Configuration;
-using Conversor_XML_RDF.Models.ConfigToml;
+using Conversor_XML_RDF.Models.ConfigJson;
+using Newtonsoft.Json;
 
 namespace Conversor_XML_RDF.Controllers
 {
@@ -34,9 +34,9 @@ namespace Conversor_XML_RDF.Controllers
         private static string urlUrisFactory { get; set; }
 
         /// <summary>
-        /// Permite visualizar una lista con los archivos de configuración TOML disponibles.
+        /// Permite visualizar una lista con los archivos de configuración JSON disponibles.
         /// </summary>
-        /// <returns>Lista con los nombres de los ficheros TOML de configuración.</returns>
+        /// <returns>Lista con los nombres de los ficheros JSON de configuración.</returns>
         [HttpPost("ConfigurationFilesList")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -47,10 +47,10 @@ namespace Conversor_XML_RDF.Controllers
 
         /// <summary>
         /// Permite convertir un archivo XML a RDF.
-        /// Se requiere una configuración previa del archivo TOML.
+        /// Se requiere una configuración previa del archivo JSON.
         /// </summary>
         /// <param name="pXmlFile">Archivo XML que se desea convertir.</param>
-        /// <param name="pType">Nombre del TOML que se desea cargar la configuración.</param>
+        /// <param name="pType">Nombre del JSON que se desea cargar la configuración.</param>
         /// <returns>Fichero RDF.</returns>
         [HttpPost("Convert")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -65,31 +65,20 @@ namespace Conversor_XML_RDF.Controllers
                     urlUrisFactory = LoadUrlUrisFactoryConfig();
                 }
 
-                // Ruta del fichero de configuración TOML.
-                string rutaToml = String.Empty;
+                // Ruta del fichero de configuración JSON.
+                string rutaJson = String.Empty;
                 List<string> listaConfiguraciones = ConfigFilesList();
                 if (listaConfiguraciones.Contains(pType))
                 {
-                    rutaToml = "Config/" + pType + ".toml";
+                    rutaJson = "Config/" + pType + ".json";
                 }
                 else
                 {
-                    return Problem("El fichero de configuración TOML no existe.");
+                    return Problem("El fichero de configuración JSON no existe.");
                 }
 
-                // Lectura del archivo de configuración TOML.
-                StringBuilder resultToml = new StringBuilder();
-                using (StreamReader reader = new StreamReader(rutaToml))
-                {
-                    while (reader.Peek() >= 0)
-                    {
-                        resultToml.AppendLine(reader.ReadLine());
-                    }
-                }
-                string ficheroToml = resultToml.ToString();
-
-                // Conversión a TOML.
-                ConversorConfig objToml = Toml.ReadString<ConversorConfig>(ficheroToml);
+                // Conversión a JSON.
+                ConversorConfig objJson = JsonConvert.DeserializeObject<ConversorConfig>(System.IO.File.ReadAllText(rutaJson));
 
                 // Lectura del archivo XML.
                 StringBuilder resultXml = new StringBuilder();
@@ -111,7 +100,7 @@ namespace Conversor_XML_RDF.Controllers
 
                 // Creación del RDF virtual.                
                 RohGraph dataGraph = new RohGraph();
-                CreateEntities(dataGraph, objToml.entities, documento, nsmgr); // Método Recursivo.
+                CreateEntities(dataGraph, objJson.entities, documento, nsmgr); // Método Recursivo.
 
                 // Consulta de comprobación.
                 Object consulta = dataGraph.ExecuteQuery("SELECT * WHERE {?s ?p ?o}");
@@ -160,109 +149,125 @@ namespace Conversor_XML_RDF.Controllers
 
                     foreach (XmlNode nodo in listaEntidades)
                     {
-                        // Entidades.
-                        string uriEntity = GetURI(entidad, nodo, pNsmgr); // Obtención del URI.
-                        listaEntities.Add(uriEntity);
-
-                        INode sujeto = CreateINode(uriEntity, pDataGraph); // Creación de UriNode o BlankNode.
-                        INode propRdftype = pDataGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
-                        INode rdfType;
-
-                        if (entidad.rdftype != null)
+                        // Comprobar si un hijo en concreto está vacío o no.
+                        bool comprobar = true;
+                        if (!string.IsNullOrEmpty(entidad.comprobarSubentidad))
                         {
-                            rdfType = pDataGraph.CreateUriNode(UriFactory.Create(entidad.rdftype));
-                        }
-                        else
-                        {
-                            if (entidad.rdftypeproperty != null)
+                            foreach (XmlNode child in nodo.ChildNodes)
                             {
-                                rdfType = pDataGraph.CreateUriNode(UriFactory.Create(GetTarget(entidad, nodo, pNsmgr)));
+                                if (child.Name == entidad.comprobarSubentidad && child.ChildNodes.Count <= 0)
+                                {
+                                    comprobar = false;
+                                }
+                            }
+                        }
+
+                        if (nodo.ChildNodes.Count > 0 && comprobar == true)
+                        {
+                            // Entidades.
+                            string uriEntity = GetURI(entidad, nodo, pNsmgr); // Obtención del URI.
+                            listaEntities.Add(uriEntity);
+
+                            INode sujeto = CreateINode(uriEntity, pDataGraph); // Creación de UriNode o BlankNode.
+                            INode propRdftype = pDataGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+                            INode rdfType;
+
+                            if (entidad.rdftype != null)
+                            {
+                                rdfType = pDataGraph.CreateUriNode(UriFactory.Create(entidad.rdftype));
                             }
                             else
                             {
-                                throw new Exception("No se ha podido obtener el rdf:type de la entidad: " + nodo.Name);
-                            }
-                        }
-
-                        pDataGraph.Assert(new Triple(sujeto, propRdftype, rdfType)); // Creación del Triple.
-
-
-                        // Propiedades.
-                        if (entidad.property != null)
-                        {
-                            INode prop = pDataGraph.CreateUriNode(UriFactory.Create(entidad.property));
-                            INode val = CreateINodeType(pDataGraph, nodo.InnerText, entidad.datatype);
-                            pDataGraph.Assert(new Triple(sujeto, prop, val)); // Creación del Triple.
-                        }
-
-                        if (entidad.properties != null)
-                        {
-                            foreach (Property propiedad in entidad.properties)
-                            {
-                                string value = string.Empty;
-
-                                foreach (string source in propiedad.source.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries))
+                                if (entidad.rdftypeproperty != null)
                                 {
-                                    if (!string.IsNullOrEmpty(entidad.nameSpace))
-                                    {
-                                        pNsmgr.AddNamespace("ns", entidad.nameSpace);
-                                    }
-
-                                    XmlNode node = nodo.SelectSingleNode(source, pNsmgr);
-
-                                    if (node != null)
-                                    {
-                                        value += " " + node.InnerText;
-                                    }
+                                    rdfType = pDataGraph.CreateUriNode(UriFactory.Create(GetTarget(entidad, nodo, pNsmgr)));
                                 }
-
-                                value = value.Trim();
-
-                                if (!string.IsNullOrEmpty(value))
+                                else
                                 {
-                                    IUriNode predicado = pDataGraph.CreateUriNode(UriFactory.Create(propiedad.property));
-                                    ILiteralNode objeto = CreateILiteralNodeType(pDataGraph, value, propiedad.datatype);
-                                    pDataGraph.Assert(new Triple(sujeto, predicado, objeto)); // Creación del Triple.
+                                    throw new Exception("No se ha podido obtener el rdf:type de la entidad: " + nodo.Name);
                                 }
                             }
-                        }
 
-                        // Subentidades.
-                        if (entidad.subentities != null)
-                        {
-                            foreach (Subentity subentity in entidad.subentities)
+                            pDataGraph.Assert(new Triple(sujeto, propRdftype, rdfType)); // Creación del Triple.
+
+
+                            // Propiedades.
+                            if (entidad.property != null)
                             {
-                                List<string> listado = CreateEntities(pDataGraph, subentity.entities, nodo, pNsmgr); // Método recursivo.
+                                INode prop = pDataGraph.CreateUriNode(UriFactory.Create(entidad.property));
+                                INode val = CreateINodeType(pDataGraph, nodo.InnerText, entidad.datatype);
+                                pDataGraph.Assert(new Triple(sujeto, prop, val)); // Creación del Triple.
+                            }
 
-                                int numSeq = 1; // Número de la secuencia.
-
-                                foreach (string ent in listado)
+                            if (entidad.properties != null)
+                            {
+                                foreach (Property propiedad in entidad.properties)
                                 {
-                                    string property = subentity.property;
+                                    string value = string.Empty;
 
-                                    // Si el rdftype es de tipo secuencia, crea la propiedad + número de Seq.
-                                    if (entidad.rdftype == "http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq")
+                                    foreach (string source in propiedad.source.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries))
                                     {
-                                        property = "http://www.w3.org/1999/02/22-rdf-syntax-ns#_" + numSeq;
+                                        if (!string.IsNullOrEmpty(entidad.nameSpace))
+                                        {
+                                            pNsmgr.AddNamespace("ns", entidad.nameSpace);
+                                        }
+
+                                        XmlNode node = nodo.SelectSingleNode(source, pNsmgr);
+
+                                        if (node != null)
+                                        {
+                                            value += " " + node.InnerText;
+                                        }
                                     }
 
-                                    INode objeto = CreateINode(ent, pDataGraph);
+                                    value = value.Trim();
 
-                                    // Propiedad Directa.
-                                    if (!string.IsNullOrEmpty(property))
+                                    if (!string.IsNullOrEmpty(value))
                                     {
-                                        INode predicado = pDataGraph.CreateUriNode(UriFactory.Create(property));
+                                        IUriNode predicado = pDataGraph.CreateUriNode(UriFactory.Create(propiedad.property));
+                                        ILiteralNode objeto = CreateILiteralNodeType(pDataGraph, value, propiedad.datatype);
                                         pDataGraph.Assert(new Triple(sujeto, predicado, objeto)); // Creación del Triple.
                                     }
+                                }
+                            }
 
-                                    // Propiedad Inversa.
-                                    if (!string.IsNullOrEmpty(subentity.inverseProperty))
+                            // Subentidades.
+                            if (entidad.subentities != null)
+                            {
+                                foreach (Subentity subentity in entidad.subentities)
+                                {
+                                    List<string> listado = CreateEntities(pDataGraph, subentity.entities, nodo, pNsmgr); // Método recursivo.
+
+                                    int numSeq = 1; // Número de la secuencia.
+
+                                    foreach (string ent in listado)
                                     {
-                                        INode predicadoInverso = pDataGraph.CreateUriNode(UriFactory.Create(subentity.inverseProperty));
-                                        pDataGraph.Assert(new Triple(objeto, predicadoInverso, sujeto)); // Creación del Triple.
-                                    }
+                                        string property = subentity.property;
 
-                                    numSeq++;
+                                        // Si el rdftype es de tipo secuencia, crea la propiedad + número de Seq.
+                                        if (entidad.rdftype == "http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq")
+                                        {
+                                            property = "http://www.w3.org/1999/02/22-rdf-syntax-ns#_" + numSeq;
+                                        }
+
+                                        INode objeto = CreateINode(ent, pDataGraph);
+
+                                        // Propiedad Directa.
+                                        if (!string.IsNullOrEmpty(property))
+                                        {
+                                            INode predicado = pDataGraph.CreateUriNode(UriFactory.Create(property));
+                                            pDataGraph.Assert(new Triple(sujeto, predicado, objeto)); // Creación del Triple.
+                                        }
+
+                                        // Propiedad Inversa.
+                                        if (!string.IsNullOrEmpty(subentity.inverseProperty))
+                                        {
+                                            INode predicadoInverso = pDataGraph.CreateUriNode(UriFactory.Create(subentity.inverseProperty));
+                                            pDataGraph.Assert(new Triple(objeto, predicadoInverso, sujeto)); // Creación del Triple.
+                                        }
+
+                                        numSeq++;
+                                    }
                                 }
                             }
                         }
@@ -337,7 +342,6 @@ namespace Conversor_XML_RDF.Controllers
         /// <returns>URI de la entidad.</returns>
         private string GetURI(Entity pEntidad, XmlNode pNodo, XmlNamespaceManager pNsmgr)
         {
-
             if (string.IsNullOrEmpty(pEntidad.id))
             {
                 return Guid.NewGuid().ToString(); // Generación de GUID aleatorio.
@@ -414,7 +418,7 @@ namespace Conversor_XML_RDF.Controllers
         }
 
         /// <summary>
-        /// Devuelve un listado con todos los ficheros de configuración TOML disponibles.
+        /// Devuelve un listado con todos los ficheros de configuración JSON disponibles.
         /// </summary>
         /// <returns>Lista con el nombre de los ficheros disponibles.</returns>
         private List<string> ConfigFilesList()

@@ -1,0 +1,415 @@
+{
+  "entities": [
+    {
+      "rdftype": "http://purl.org/roh/mirror/foaf#Person",
+      "id": "@id",
+      "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+      "source": "ns:Person",
+      "properties": [
+        {
+          "property": "http://purl.org/roh/mirror/foaf#name",
+          "source": "ns:PersonName/ns:FirstNames ns:PersonName/ns:FamilyNames"
+        },
+        {
+          "property": "http://purl.org/roh/mirror/foaf#gender",
+          "source": "ns:Gender"
+        },
+        {
+          "property": "http://purl.org/roh/mirror/foaf#mbox",
+          "source": "ns:ElectronicAddress"
+        }
+      ],
+      "subentities": [
+        {
+          "property": "http://purl.org/roh/mirror/vivo#relatedBy",
+          "inverseProperty": "http://purl.org/roh/mirror/vivo#relates",
+          "entities": [
+            {
+              "rdftype": "http://purl.org/roh/mirror/vivo#Position",
+              "source": "ns:Affiliation",
+              "subentities": [
+                {
+                  "property": "http://purl.org/roh/mirror/vivo#relates",
+                  "entities": [
+                    {
+                      "rdftype": "http://purl.org/roh/mirror/foaf#Organization",
+                      "id": "@id",
+                      "source": "ns:OrgUnit",
+                      "properties": [
+                        {
+                          "property": "http://purl.org/roh#title",
+                          "source": "ns:Name"
+                        },
+                        {
+                          "property": "http://purl.org/roh/mirror/vivo#identifier",
+                          "source": "ns:Identifier"
+                        }
+                      ],
+                      "subentities": [
+                        {
+                          "property": "http://purl.org/roh/mirror/obo/ro#BFO_0000051",
+                          "entities": [
+                            {
+                              "rdftype": "http://purl.org/roh/mirror/foaf#Organization",
+                              "id": "@id",
+                              "source": "ns:PartOf/ns:OrgUnit",
+                              "properties": [
+                                {
+                                  "property": "http://purl.org/roh#title",
+                                  "source": "ns:Name"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rdftype": "http://purl.org/roh/mirror/vivo#Project",
+      "id": "@id",
+      "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+      "source": "ns:Project",
+      "properties": [
+        {
+          "property": "http://purl.org/roh#title",
+          "source": "ns:Title"
+        },
+        {
+          "property": "http://purl.org/roh/mirror/vivo#identifier",
+          "source": "ns:Identifier"
+        },
+        {
+          "property": "http://purl.org/roh#projectStatus",
+          "source": "ns:Status"
+        },
+        {
+          "property": "http://purl.org/roh/mirror/vivo#description",
+          "source": "ns:Abstract"
+        }
+      ],
+      "subentities": [
+        {
+          "property": "http://purl.org/roh/mirror/vivo#dateTimeInterval",
+          "entities": [
+            {
+              "rdftype": "http://purl.org/roh/mirror/vivo#DateTimeInterval",
+              "source": "ns:StartDate",
+              "property": "http://purl.org/roh/mirror/vivo#start",
+              "datatype": "http://www.w3.org/2001/XMLSchema#datetime"
+            }
+          ]
+        },
+        {
+          "property": "http://purl.org/roh/mirror/vivo#relates",
+          "inverseProperty": "http://purl.org/roh/mirror/vivo#relatedBy",
+          "entities": [
+            {
+              "rdftype": "http://purl.org/roh/mirror/vivo#LeaderRole",
+              "source": "ns:Consortium/ns:Coordinator",
+              "subentities": [
+                {
+                  "property": "http://purl.org/roh/mirror/obo/ro#RO_0000052",
+                  "inverseProperty": "http://purl.org/roh#hasRole",
+                  "entities": [
+                    {
+                      "rdftype": "http://purl.org/roh/mirror/foaf#Organization",
+                      "id": "@id",
+                      "source": "ns:OrgUnit",
+                      "properties": [
+                        {
+                          "property": "http://purl.org/roh#title",
+                          "source": "ns:Name"
+                        },
+                        {
+                          "property": "http://purl.org/roh/mirror/vivo#identifier",
+                          "source": "ns:Identifier"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "rdftype": "http://purl.org/roh/mirror/vivo#MemberRole",
+              "source": "ns:Consortium/ns:Partner",
+              "subentities": [
+                {
+                  "property": "http://purl.org/roh/mirror/obo/ro#RO_0000052",
+                  "inverseProperty": "http://purl.org/roh#hasRole",
+                  "entities": [
+                    {
+                      "rdftype": "http://purl.org/roh/mirror/foaf#Organization",
+                      "id": "@id",
+                      "source": "ns:OrgUnit",
+                      "properties": [
+                        {
+                          "property": "http://purl.org/roh#title",
+                          "source": "ns:Name"
+                        },
+                        {
+                          "property": "http://purl.org/roh/mirror/vivo#identifier",
+                          "source": "ns:Identifier"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "property": "http://purl.org/roh/mirror/vivo#relates",
+          "inverseProperty": "http://purl.org/roh/mirror/vivo#relatedBy",
+          "entities": [
+            {
+              "rdftype": "http://purl.org/roh/mirror/vivo#MemberRole",
+              "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+              "source": "ns:Team/ns:Member",
+              "comprobarSubentidad": "Person",
+              "subentities": [
+                {
+                  "property": "http://purl.org/roh/mirror/obo/ro#RO_0000052",
+                  "inverseProperty": "http://purl.org/roh#hasRole",
+                  "entities": [
+                    {
+                      "rdftype": "http://purl.org/roh/mirror/foaf#Person",
+                      "id": "@id",
+                      "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+                      "source": "ns:Person",
+                      "properties": [
+                        {
+                          "property": "http://purl.org/roh/mirror/foaf#name",
+                          "source": "ns:PersonName/ns:FirstNames ns:PersonName/ns:FamilyNames"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rdftype": "http://purl.org/roh/mirror/foaf#Organization",
+      "id": "@id",
+      "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+      "source": "ns:OrgUnit",
+      "properties": [
+        {
+          "property": "http://purl.org/roh#title",
+          "source": "ns:Name"
+        },
+        {
+          "property": "http://purl.org/roh/mirror/vivo#identifier",
+          "source": "ns:Identifier"
+        }
+      ],
+      "subentities": [
+        {
+          "property": "http://purl.org/roh/mirror/obo/ro#BFO_0000051",
+          "entities": [
+            {
+              "rdftype": "http://purl.org/roh/mirror/foaf#Organization",
+              "id": "@id",
+              "source": "ns:PartOf/ns:OrgUnit",
+              "properties": [
+                {
+                  "property": "http://purl.org/roh#title",
+                  "source": "ns:Name"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rdftypeproperty": "ns:Type",
+      "mappingrdftype": [
+        {
+          "nameSpace": "https://www.openaire.eu/cerif-profile/vocab/COAR_Publication_Types",
+          "source": "http://purl.org/coar/resource_type/c_6501",
+          "target": "http://purl.org/roh/mirror/bibo#AcademicArticle"
+        },
+        {
+          "nameSpace": "https://www.openaire.eu/cerif-profile/vocab/COAR_Publication_Types",
+          "source": "http://purl.org/coar/resource_type/c_0640",
+          "target": "http://purl.org/roh/mirror/bibo#Journal"
+        }
+      ],
+      "id": "@id",
+      "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+      "source": "ns:Publication",
+      "properties": [
+        {
+          "property": "http://purl.org/roh#title",
+          "source": "ns:Title"
+        },
+        {
+          "property": "http://purl.org/roh/mirror/bibo#pageStart",
+          "source": "ns:StartPage"
+        },
+        {
+          "property": "http://purl.org/roh/mirror/vivo#dateTime",
+          "source": "ns:PublicationDate"
+        },
+        {
+          "property": "http://purl.org/roh/mirror/bibo#pageEnd",
+          "source": "ns:EndPage"
+        },
+        {
+          "property": "http://purl.org/roh/mirror/bibo#doi",
+          "source": "ns:DOI"
+        }
+      ],
+      "subentities": [
+        {
+          "property": "http://purl.org/roh/mirror/bibo#authorList",
+          "entities": [
+            {
+              "rdftype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq",
+              "source": "ns:Authors",
+              "subentities": [
+                {
+                  "entities": [
+                    {
+                      "rdftype": "http://purl.org/roh/mirror/foaf#Person",
+                      "id": "@id",
+                      "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+                      "source": "ns:Author/ns:Person",
+                      "properties": [
+                        {
+                          "property": "http://purl.org/roh/mirror/foaf#name",
+                          "source": "ns:PersonName/ns:FirstNames ns:PersonName/ns:FamilyNames"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "property": "http://purl.org/roh/mirror/obo/ro#BFO_0000051",
+          "entities": [
+            {
+              "rdftype": "http://purl.org/roh/mirror/vivo#Project",
+              "id": "@id",
+              "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+              "source": "ns:OriginatesFrom/ns:Project",
+              "properties": [
+                {
+                  "property": "http://purl.org/roh#title",
+                  "source": "ns:Title"
+                },
+                {
+                  "property": "http://purl.org/roh/mirror/vivo#identifier",
+                  "source": "ns:Identifier"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "property": "http://purl.org/roh/mirror/vivo#hasPublicationVenue",
+          "entities": [
+            {
+              "rdftypeproperty": "ns:Type",
+              "mappingrdftype": [
+                {
+                  "nameSpace": "https://www.openaire.eu/cerif-profile/vocab/COAR_Publication_Types",
+                  "source": "http://purl.org/coar/resource_type/c_6501",
+                  "target": "http://purl.org/roh/mirror/bibo#AcademicArticle"
+                },
+                {
+                  "nameSpace": "https://www.openaire.eu/cerif-profile/vocab/COAR_Publication_Types",
+                  "source": "http://purl.org/coar/resource_type/c_0640",
+                  "target": "http://purl.org/roh/mirror/bibo#Journal"
+                }
+              ],
+              "id": "@id",
+              "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+              "source": "ns:PublishedIn/ns:Publication",
+              "properties": [
+                {
+                  "property": "http://purl.org/roh#title",
+                  "source": "ns:Title"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rdftype": "http://purl.org/roh#Activity",
+      "id": "@id",
+      "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+      "source": "ns:Product",
+      "properties": [
+        {
+          "property": "http://purl.org/roh#title",
+          "source": "ns:Name"
+        },
+        {
+          "property": "http://purl.org/roh/mirror/vivo#description",
+          "source": "ns:Description"
+        }
+      ],
+      "subentities": [
+        {
+          "inverseProperty": "http://purl.org/roh#participates",
+          "entities": [
+            {
+              "rdftype": "http://purl.org/roh/mirror/vivo#Project",
+              "id": "@id",
+              "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+              "source": "ns:OriginatesFrom/ns:Project",
+              "properties": [
+                {
+                  "property": "http://purl.org/roh#title",
+                  "source": "ns:Title"
+                },
+                {
+                  "property": "http://purl.org/roh/mirror/vivo#identifier",
+                  "source": "ns:Identifier"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "property": "http://purl.org/roh#participatedBy",
+          "inverseProperty": "http://purl.org/roh#participates",
+          "entities": [
+            {
+              "rdftype": "http://purl.org/roh/mirror/foaf#Person",
+              "id": "@id",
+              "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+              "source": "ns:Creators/ns:Creator/ns:Person",
+              "properties": [
+                {
+                  "property": "http://purl.org/roh/mirror/foaf#name",
+                  "source": "ns:PersonName/ns:FirstNames ns:PersonName/ns:FamilyNames"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

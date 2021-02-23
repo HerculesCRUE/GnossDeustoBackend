@@ -1,4 +1,4 @@
-﻿namespace Conversor_XML_RDF.Models.ConfigToml
+﻿namespace Conversor_XML_RDF.Models.ConfigJson
 {
     /// <summary>
     /// Clase encargada de almacenar el listado de entidades.
@@ -56,7 +56,9 @@
         /// Listado de subentidades que puede tener la entidad.
         /// </summary>
         public Subentity[] subentities { get; set; }
-        
+
+        public string comprobarSubentidad { get; set; }
+
     }
 
     /// <summary>
