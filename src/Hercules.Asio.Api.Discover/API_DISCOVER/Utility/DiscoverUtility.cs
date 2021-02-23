@@ -969,16 +969,16 @@ namespace API_DISCOVER.Utility
                             {
                                 if (charsSubstitute[value].Count > 1)
                                 {
-                                    filter = $"REPLACE({filter},'[{string.Join("", charsSubstitute[value]).Replace("\\", "\\\\").Replace("'", "\\'").Replace("[", "\\\\[").Replace("]", "\\\\]").Replace("-", "\\\\-")}]','{value}')";
+                                    filter = $"REPLACE({filter},'[{string.Join("", charsSubstitute[value]).Replace("\\", "\\\\").Replace("'", "\\'").Replace("[", "\\\\[").Replace("]", "\\\\]").Replace("-", "\\\\-").Replace("\n", "\\\\n").Replace("\t", "\\\\t")}]','{value}')";
                                 }
                                 else
                                 {
-                                    filter = $"REPLACE({filter},'{charsSubstitute[value].First().ToString().Replace("\\", "\\\\").Replace("'", "\\'").Replace("[", "\\\\[").Replace("]", "\\\\]").Replace("-", "\\\\-")}','{value}')";
+                                    filter = $"REPLACE({filter},'{charsSubstitute[value].First().ToString().Replace("\\", "\\\\").Replace("'", "\\'").Replace("[", "\\\\[").Replace("]", "\\\\]").Replace("-", "\\\\-").Replace("\n", "\\\\n").Replace("\t", "\\\\t")}','{value}')";
                                 }
                             }
                             if (charsRemove.Count > 0)
                             {
-                                filter = $"REPLACE({filter},'[{string.Join("", charsRemove).Replace("\\", "\\\\").Replace("'", "\\'").Replace("[", "\\\\[").Replace("]", "\\\\]").Replace("-", "\\\\-")}]','')";
+                                filter = $"REPLACE({filter},'[{string.Join("", charsRemove).Replace("\\", "\\\\").Replace("'", "\\'").Replace("[", "\\\\[").Replace("]", "\\\\]").Replace("-", "\\\\-").Replace("\n", "\\\\n").Replace("\t", "\\\\t")}]','')";
                             }
 
                             whereProperty += $"\n\t\t\t\t\tFILTER({filter} ='{text}')";
@@ -5363,6 +5363,8 @@ namespace API_DISCOVER.Utility
             { 'ñ', 'n' },
             { '\\', null },
             { '/', null },
+            { '\n', null },
+            { '\t', null },
         };
 
         /// <summary>

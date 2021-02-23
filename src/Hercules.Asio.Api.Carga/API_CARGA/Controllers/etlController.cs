@@ -23,6 +23,7 @@ namespace API_CARGA.Controllers
     /// Contiene los procesos ETL (Extract, Transform and Load) necesarios para la carga de datos.
     /// </summary>
     [ApiController]
+    [Authorize]
     [Route("[controller]")]
 
     public class etlController : Controller
@@ -55,7 +56,6 @@ namespace API_CARGA.Controllers
         /// <param name="discoverProcessed">Indica si ya está procesado el descubrimiento</param>
         /// <returns></returns>
         [HttpPost("data-publish")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult dataPublish(IFormFile rdfFile, string jobId, bool discoverProcessed)
@@ -105,7 +105,6 @@ namespace API_CARGA.Controllers
         /// <param name="repositoryIdentifier">Identificador del repositorio para seleccionar los Shapes (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns></returns>
         [HttpPost("data-validate")]
-        [Authorize]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ShapeReport))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -132,7 +131,6 @@ namespace API_CARGA.Controllers
         /// <param name="validationFile">Fichero de validación</param>
         /// <returns></returns>
         [HttpPost("data-validate-personalized")]
-        [Authorize]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(ShapeReport))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -156,7 +154,6 @@ namespace API_CARGA.Controllers
         /// <param name="ontology">Fichero de la nueva ontologia</param>
         /// <returns></returns>
         [HttpPost("load-ontology")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult LoadOntology(IFormFile ontology)
@@ -185,7 +182,6 @@ namespace API_CARGA.Controllers
         /// <param name="rdfFile">Fichero RDF</param>
         /// <returns></returns>
         [HttpPost("data-discover")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult dataDiscover(IFormFile rdfFile)
@@ -210,7 +206,6 @@ namespace API_CARGA.Controllers
         /// <param name="identifier">Identificador de la tarea de descubrimiento</param>
         /// <returns></returns>
         [HttpGet("data-discover-state/{identifier}")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(DiscoverStateResult))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -270,14 +265,13 @@ namespace API_CARGA.Controllers
         /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("GetRecord/{repositoryIdentifier}")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public FileResult GetRecord(Guid repositoryIdentifier, string identifier, string metadataPrefix)
         {
             RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
             string uri = repositoryConfig.Url;
-            uri += $"?verb=GetRecord&identifier={identifier}&metadataPrefix={metadataPrefix}";
+            uri += $"?verb=GetRecord&identifier={System.Web.HttpUtility.UrlEncode(identifier)}&metadataPrefix={metadataPrefix}";
             byte[] array = _callOAIPMH.GetUri(uri);
             //byte[] array = getByte(uri);
             return File(array, "application/xml");
@@ -290,7 +284,6 @@ namespace API_CARGA.Controllers
         /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("Identify/{repositoryIdentifier}")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public FileResult Identify(Guid repositoryIdentifier)
@@ -317,7 +310,7 @@ namespace API_CARGA.Controllers
         [HttpGet("ListIdentifiers/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public FileResult ListIdentifiers(Guid repositoryIdentifier, string metadataPrefix = null, DateTime? from = null, DateTime? until = null, string set = null, string resumptionToken = null)
+        public FileResult ListIdentifiers(Guid repositoryIdentifier, string metadataPrefix = null, string from = null, string until = null, string set = null, string resumptionToken = null)
         {
             RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
             string uri = repositoryConfig.Url;
@@ -326,13 +319,13 @@ namespace API_CARGA.Controllers
             {
                 uri += $"&metadataPrefix={metadataPrefix}";
             }
-            if (from.HasValue)
+            if (!string.IsNullOrEmpty(from))
             {
-                uri += $"&from={from.Value.ToString("u", CultureInfo.InvariantCulture)}";
+                uri += $"&from={from}";
             }
-            if (until.HasValue)
+            if (!string.IsNullOrEmpty(until))
             {
-                uri += $"&until={until.Value.ToString("u", CultureInfo.InvariantCulture)}";
+                uri += $"&until={until}";
             }
             if (set != null)
             {
@@ -355,7 +348,6 @@ namespace API_CARGA.Controllers
         /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("ListMetadataFormats/{repositoryIdentifier}")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public FileResult ListMetadataFormats(Guid repositoryIdentifier, string identifier = null)
@@ -384,10 +376,9 @@ namespace API_CARGA.Controllers
         /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("ListRecords/{repositoryIdentifier}")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public FileResult ListRecords(Guid repositoryIdentifier, string metadataPrefix, DateTime? from = null, DateTime? until = null, string set = null, string resumptionToken = null)
+        public FileResult ListRecords(Guid repositoryIdentifier, string metadataPrefix, string from = null, string until = null, string set = null, string resumptionToken = null)
         {
             RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
             string uri = repositoryConfig.Url;
@@ -396,13 +387,13 @@ namespace API_CARGA.Controllers
             {
                 uri += $"&metadataPrefix={metadataPrefix}";
             }
-            if (from.HasValue)
+            if (!string.IsNullOrEmpty(from))
             {
-                uri += $"&from={from.Value.ToString("u", CultureInfo.InvariantCulture)}";
+                uri += $"&from={from}";
             }
-            if (until.HasValue)
+            if (!string.IsNullOrEmpty(until))
             {
-                uri += $"&until={until.Value.ToString("u", CultureInfo.InvariantCulture)}";
+                uri += $"&until={until}";
             }
             if (set != null)
             {
@@ -425,7 +416,6 @@ namespace API_CARGA.Controllers
         /// <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
         /// <returns>XML devuelto por el repositorio OAI-PMH</returns>
         [HttpGet("ListSets/{repositoryIdentifier}")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public FileResult ListSets(Guid repositoryIdentifier, string resumptionToken = null)
@@ -447,7 +437,6 @@ namespace API_CARGA.Controllers
         /// </summary>
         /// <returns>Ontologia</returns>
         [HttpGet("GetOntology")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult GetOntology()
@@ -460,7 +449,6 @@ namespace API_CARGA.Controllers
         /// </summary>
         /// <returns>Hash</returns>
         [HttpGet("GetOntologyHash")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public string GetOntologyHash()

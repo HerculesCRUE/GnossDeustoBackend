@@ -58,6 +58,7 @@ namespace API_CARGA.Models.Services
             {
                 //Obtenemos los metadataformat del repositorio
                 List<string> metadataformats = CallListMetadataFormats(identifier);
+                string granularity = CallGranularity(identifier);
 
                 //SI los metadataformat contienen "rdf" trtabajamos con el
                 string metadataformat = "";
@@ -70,7 +71,7 @@ namespace API_CARGA.Models.Services
                     //Si no, hacemos una peticion al servicio conversor para que nos liste los tipos disponible
                     List<string> types = JsonConvert.DeserializeObject<List<string>>(CallGetConfigurationsFiles());
                     bool ismetadata = false;
-                    foreach(string format in metadataformats)
+                    foreach (string format in metadataformats)
                     {
                         if (types.Contains(format))
                         {
@@ -87,7 +88,20 @@ namespace API_CARGA.Models.Services
                 }
                 if (codigoObjeto == null)
                 {
-                    List<IdentifierOAIPMH> listIdentifier = CallListIdentifier(identifier, metadataformat, set, fechaFrom);
+                    string fechaFromString = null;
+                    if (fechaFrom.HasValue)
+                    {
+                        if (granularity.ToUpper() == "YYYY-MM-DD")
+                        {
+                            fechaFromString = $"{fechaFrom.Value.ToString("yyyy-MM-dd")}";
+                        }
+                        else
+                        {
+                            fechaFromString = $"{fechaFrom.Value.ToString("u", CultureInfo.InvariantCulture).Replace(" ", "T")}";
+                        }
+                    }
+
+                    List<IdentifierOAIPMH> listIdentifier = CallListIdentifier(identifier, metadataformat, set, fechaFromString);
                     int totalCount = listIdentifier.Count();
                     foreach (IdentifierOAIPMH identifierOAIPMH in listIdentifier)
                     {
@@ -95,35 +109,32 @@ namespace API_CARGA.Models.Services
                         {
                             AddProcessingState(identifierOAIPMH.Identifier, identifier, jobId, listIdentifier.IndexOf(identifierOAIPMH), totalCount);
                         }
-                        if(set == "openaire_cris_orgunits")
+                        if (set == "openaire_cris_orgunits")
                         {
-                            string[] cadena = identifierOAIPMH.Identifier.Split(":");
-                            identifierOAIPMH.Identifier = cadena[0] + ":" + cadena[1] + ":OrgUnits/" + cadena[2];
+                            identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:OrgUnits/");
                         }
-                        else if(set == "openaire_cris_publications")
+                        else if (set == "openaire_cris_publications")
                         {
-                            string[] cadena = identifierOAIPMH.Identifier.Split(":");
-                            identifierOAIPMH.Identifier = cadena[0] + ":" + cadena[1] + ":Publications/" + cadena[2];
+                            identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Publications/");
                         }
-                        else if(set == "openaire_cris_projects")
+                        else if (set == "openaire_cris_projects")
                         {
-                            string[] cadena = identifierOAIPMH.Identifier.Split(":");
-                            identifierOAIPMH.Identifier = cadena[0] + ":" + cadena[1] + ":Projects/" + cadena[2];
-                        }else if (set == "openaire_cris_products")
+                            identifierOAIPMH.Identifier=identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Projects/");
+                        }
+                        else if (set == "openaire_cris_products")
                         {
-                            string[] cadena = identifierOAIPMH.Identifier.Split(":");
-                            identifierOAIPMH.Identifier = cadena[0] + ":" + cadena[1] + ":Products/" + cadena[2];
-                        }else if (set == "openaire_cris_persons")
+                            identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Products/");
+                        }
+                        else if (set == "openaire_cris_persons")
                         {
-                            string[] cadena = identifierOAIPMH.Identifier.Split(":");
-                            identifierOAIPMH.Identifier = cadena[0] + ":" + cadena[1] + ":Persons/" + cadena[2];
+                            identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Persons/");
                         }
 
-                        string record = CallGetRecord(identifier,metadataformat, identifierOAIPMH.Identifier);
+                        string record = CallGetRecord(identifier, metadataformat, identifierOAIPMH.Identifier);
 
                         string rdf = "";
 
-                        if(metadataformat == "rdf")
+                        if (metadataformat == "rdf")
                         {
                             rdf = record;
                         }
@@ -140,13 +151,14 @@ namespace API_CARGA.Models.Services
                         {
                             validationException = true;
                             exception.AppendLine(ex.Message);
+                            throw ex;
                         }
                         lastSyncro = identifierOAIPMH;
                         if (lastSyncro != null)
                         {
                             AddSyncro(lastSyncro, set, identifier);
                         }
-                    }                    
+                    }
                 }
                 else
                 {
@@ -170,7 +182,7 @@ namespace API_CARGA.Models.Services
 
             }
             catch (Exception ex)
-            {               
+            {
                 throw new Exception(ex.Message);
             }
 
@@ -189,7 +201,7 @@ namespace API_CARGA.Models.Services
             if (set != null)
             {
                 //En caso de que venga el set
-                if(repositoryConfig.RepositoryConfigSet.FirstOrDefault(x => x.Set == set) != null)
+                if (repositoryConfig.RepositoryConfigSet.FirstOrDefault(x => x.Set == set) != null)
                 {
                     //actualizamos la fila de la tabla RepositoryConfigSet con la fecha
                     repositoryConfig.RepositoryConfigSet.FirstOrDefault(x => x.Set == set).LastUpdate = lastSyncro.Fecha;
@@ -203,7 +215,7 @@ namespace API_CARGA.Models.Services
                         LastUpdate = lastSyncro.Fecha,
                         RepositoryID = repositoryId,
                         Set = set
-                    }); 
+                    });
                 }
             }
             else
@@ -221,7 +233,7 @@ namespace API_CARGA.Models.Services
                     {
                         RepositoryConfigSetID = Guid.NewGuid(),
                         LastUpdate = lastSyncro.Fecha,
-                        RepositoryID=repositoryId,
+                        RepositoryID = repositoryId,
                         Set = "-"
                     });
                 }
@@ -281,7 +293,7 @@ namespace API_CARGA.Models.Services
         public void AddProcessingState(string identifierOAIPMH, Guid repositoryId, string jobId, int index, int totalOfElements)
         {
             var processingJobState = _context.ProcessingJobState.FirstOrDefault(item => item.JobId.Equals(jobId));
-            if(processingJobState == null)
+            if (processingJobState == null)
             {
                 ProcessingJobState processingJobStateNew = new ProcessingJobState()
                 {
@@ -315,12 +327,28 @@ namespace API_CARGA.Models.Services
             XDocument respuestaXML = XDocument.Load(new StringReader(xml));
             XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
             XElement listIdentifierElement = respuestaXML.Root.Element(nameSpace + "ListMetadataFormats");
-            IEnumerable<XElement> listMetadataFormat= listIdentifierElement.Descendants(nameSpace + "metadataFormat");
+            IEnumerable<XElement> listMetadataFormat = listIdentifierElement.Descendants(nameSpace + "metadataFormat");
             foreach (var metadataFormat in listMetadataFormat)
             {
-                listMetadataFormats.Add( metadataFormat.Element(nameSpace + "metadataPrefix").Value);
+                listMetadataFormats.Add(metadataFormat.Element(nameSpace + "metadataPrefix").Value);
             }
             return listMetadataFormats;
+        }
+
+        /// <summary>
+        /// Obtiene la granularidad
+        /// </summary>
+        /// <param name="identifierRepo">Identificador del repositorio</param>
+        /// <returns>Lista de identificadores</returns>
+        public string CallGranularity(Guid identifierRepo)
+        {
+            string uri = $"etl/Identify/{identifierRepo}";
+            List<string> listMetadataFormats = new List<string>();
+            string xml = _publishData.CallGetApi(uri, _token);
+            XDocument respuestaXML = XDocument.Load(new StringReader(xml));
+            XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
+            XElement identify = respuestaXML.Root.Element(nameSpace + "Identify");
+            return identify.Element(nameSpace + "granularity").Value;
         }
 
         /// <summary>
@@ -331,7 +359,7 @@ namespace API_CARGA.Models.Services
         /// <param name="fechaFrom">fecha a partir de la cual se debe actualizar</param>
         /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
         /// <returns>Lista de identificadores</returns>
-        public List<IdentifierOAIPMH> CallListIdentifier(Guid identifierRepo,string metadataPrefix, string set = null, DateTime? fechaFrom = null)
+        public List<IdentifierOAIPMH> CallListIdentifier(Guid identifierRepo, string metadataPrefix, string set = null, string fechaFrom = null)
         {
             string uri = $"etl/ListIdentifiers/{identifierRepo}?metadataPrefix={metadataPrefix}";
             if (set != null)
@@ -340,18 +368,18 @@ namespace API_CARGA.Models.Services
             }
             if (fechaFrom != null)
             {
-                DateTime until = DateTime.Now.AddYears(1);
-                uri += $"&from={fechaFrom.Value.ToString("u",CultureInfo.InvariantCulture)}&until={until.ToString("u", CultureInfo.InvariantCulture)}";
+                //uri += $"&from={fechaFrom.Value.ToString("u",CultureInfo.InvariantCulture)}";
+                uri += $"&from={fechaFrom}";
             }
             List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
-            
+
             string resumptionToken = "";
-            while (resumptionToken!=null)
+            while (resumptionToken != null)
             {
                 string xml;
                 if (resumptionToken == "")
                 {
-                     xml = _publishData.CallGetApi(uri, _token);
+                    xml = _publishData.CallGetApi(uri, _token);
                 }
                 else
                 {
@@ -365,7 +393,7 @@ namespace API_CARGA.Models.Services
                 {
                     string identifier = header.Element(nameSpace + "identifier").Value;
                     string fecha = header.Element(nameSpace + "datestamp").Value;
-                    DateTime fechaSincro = DateTime.Parse(fecha).ToUniversalTime();
+                    DateTime fechaSincro = DateTime.Parse(fecha);
                     IdentifierOAIPMH identifierOAIPMH = new IdentifierOAIPMH()
                     {
                         Fecha = fechaSincro,
@@ -375,13 +403,13 @@ namespace API_CARGA.Models.Services
                 }
                 resumptionToken = null;
                 XElement resumptionTokenElement = listIdentifierElement.Element(nameSpace + "resumptionToken");
-                if(resumptionTokenElement!=null && resumptionTokenElement.Value != "")
+                if (resumptionTokenElement != null && resumptionTokenElement.Value != "")
                 {
                     resumptionToken = resumptionTokenElement.Value;
                 }
             }
             listIdentifier = listIdentifier.OrderBy(x => x.Fecha).ToList();
-            
+
             return listIdentifier;
         }
 
@@ -392,13 +420,13 @@ namespace API_CARGA.Models.Services
         /// <param name="metadataPrefix">metadataPrefix</param>
         /// <param name="identifier">Identificador del elemento</param>
         /// <returns>RDF</returns>
-        public string CallGetRecord(Guid repoIdentifier,string metadataPrefix, string identifier)
+        public string CallGetRecord(Guid repoIdentifier, string metadataPrefix, string identifier)
         {
-            string respuesta = _publishData.CallGetApi($"etl/GetRecord/{repoIdentifier}?identifier={identifier}&metadataPrefix={metadataPrefix}", _token);
+            string respuesta = _publishData.CallGetApi($"etl/GetRecord/{repoIdentifier}?identifier={System.Web.HttpUtility.UrlEncode(identifier)}&metadataPrefix={metadataPrefix}", _token);
             XDocument respuestaXML = XDocument.Parse(respuesta);
             XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
             string rdf = respuestaXML.Root.Element(nameSpace + "GetRecord").Descendants(nameSpace + "metadata").First().FirstNode.ToString();
-            rdf=rdf.Replace("xmlns=\""+ nameSpace+"\"", "");
+            rdf = rdf.Replace("xmlns=\"" + nameSpace + "\"", "");
             return rdf;
         }
 
@@ -419,7 +447,7 @@ namespace API_CARGA.Models.Services
 
             var nfile = webClient.Encoding.GetBytes(package);
 
-            byte[] resp = webClient.UploadData(_configUrlService.GetUrlXmlConverter()+"Conversor/Convert?pType=" + type, "POST", nfile);
+            byte[] resp = webClient.UploadData(_configUrlService.GetUrlXmlConverter() + "Conversor/Convert?pType=" + type, "POST", nfile);
 
 
             string respuesta = System.Text.Encoding.UTF8.GetString(resp);

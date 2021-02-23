@@ -59,7 +59,7 @@ namespace API_DISCOVER.Utility
             RohGraph inferenceDataGraph = null;
             if (pOntologyGraph != null)
             {
-                pDataGraph.Clone();
+                inferenceDataGraph=pDataGraph.Clone();
                 RohRdfsReasoner reasoner = new RohRdfsReasoner();
                 reasoner.Initialise(pOntologyGraph);
                 reasoner.Apply(inferenceDataGraph);
@@ -175,7 +175,7 @@ namespace API_DISCOVER.Utility
             }
 
             //5º Limpiamos los blanknodes huerfanos, o que no tengan triples
-            DeleteOrphanNodes(graphs);
+            //DeleteOrphanNodes(graphs);
         }
 
         /// <summary>
