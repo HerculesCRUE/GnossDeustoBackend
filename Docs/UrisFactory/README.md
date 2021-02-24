@@ -19,6 +19,6 @@ Formato de la especificación de un esquema de URIs usando JSON.
 
 [20191211 Esquema de URIs sample.json](20191211%20Esquema%20de%20URIs%20sample.json)
 
-Ejemplo de un esquema de URIs usando el formato anterior. La librería usa el fichero [UrisConfig.json](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Hercules.Asio.UrisFactory/UrisAutoGenerator/Config/UrisConfig.json), 
+Ejemplo de un esquema de URIs usando el formato anterior. La librería usa el fichero [UrisConfig.json](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.UrisFactory/UrisAutoGenerator/Config/UrisConfig.json), 
 almacenado como parte del proyecto de código en la carpeta 
-[GnossDeustoBackend/UrisFactory/UrisAutoGenerator/Config/](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Hercules.Asio.UrisFactory/UrisAutoGenerator/Config) del proyecto de código.
+[GnossDeustoBackend/UrisFactory/UrisAutoGenerator/Config/](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.UrisFactory/UrisAutoGenerator/Config) del proyecto de código.
