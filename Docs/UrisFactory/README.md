@@ -2,7 +2,7 @@
 
 # Documentación de UrisFactory
 
-Esta carpeta contiene los siguientes documentos:
+Esta carpeta contiene los siguientes documentos y anexos:
 
 [Especificación Esquema de URIs.md](Especificaci%C3%B3n%20Esquema%20de%20URIs.md)
 
