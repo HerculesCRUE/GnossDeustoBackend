@@ -13,7 +13,7 @@ Describe la Especificación del Esquema de URIs para el proyecto Hércules ASIO.
 El presente documento describe las buenas prácticas en la definición de los URI para el 
 proyecto Hércules ASIO y tiene en cuenta la [Especificación del Esquema de URIs](Especificaci%C3%B3n%20Esquema%20de%20URIs.md).
 
-[20191211 Esquema de URIs.json](20191211%20Esquema%20de%20URIs.json)
+[20191211 Esquema de URIs.json](20191211 Esquema de URIs.json)
 
 Formato de la especificación de un esquema de URIs usando JSON.
 
