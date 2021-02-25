@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Api_Unidata</name>
+    </assembly>
+    <members>
+        <member name="M:Api_Unidata.Controllers.UnidataController.LoadTriples(System.Collections.Generic.List{System.String})">
+            <summary>
+            Carga los triples en el grafo unidata
+            </summary>
+            <param name="triples">Lista de triples a insertar</param>
+        </member>
+        <member name="T:Api_Unidata.Middlewares.ErrorHandlingMiddleware">
+            <summary>
+            Clase que actua de Middleware para la gestión de las excepciones
+            </summary>
+        </member>
+        <member name="T:Api_Unidata.Models.Services.ConfigSparql">
+            <summary>
+            Clase para obtener la configuración necesaria para el uso de Sparql
+            </summary>
+        </member>
+        <member name="M:Api_Unidata.Models.Services.ConfigSparql.GetGraphUnidata">
+            <summary>
+            Obtiene el gráfo de unidata configurado en GraphUnidata del fichero appsettings.json
+            </summary>
+        </member>
+        <member name="M:Api_Unidata.Models.Services.ConfigSparql.GetEndpointUnidata">
+            <summary>
+            Obtiene el endpoint configurado en Sparql:Endpoint del fichero appsettings.json
+            </summary>
+        </member>
+        <member name="M:Api_Unidata.Models.Services.ConfigSparql.GetQueryParam">
+            <summary>
+            Obtiene el parametro de query configurado en Sparql:QueryParam del fichero appsettings.json
+            </summary>
+        </member>
+    </members>
+</doc>
