@@ -5,6 +5,7 @@
 Esta carpeta contiene los siguientes documentos:
 
 [Especificación Esquema de URIs.md](Especificaci%C3%B3n%20Esquema%20de%20URIs.md)
+
 [Especificación Esquema de URIs.md](Especificación Esquema de URIs.md)
 
 Describe la Especificación del Esquema de URIs para el proyecto Hércules ASIO.
