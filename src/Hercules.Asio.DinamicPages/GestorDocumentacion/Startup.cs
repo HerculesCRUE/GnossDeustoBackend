@@ -68,7 +68,6 @@ namespace GestorDocumentacion
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.
             })
                .AddIdentityServerAuthentication(options =>
                {
