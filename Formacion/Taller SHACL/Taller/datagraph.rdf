@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-16"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+	<!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+	<!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+]>
+<rdf:RDF xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:foaf="http://purl.org/roh/mirror/foaf#"  xmlns:vivo="http://purl.org/roh/mirror/vivo#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:roh="http://purl.org/roh#" xmlns:oboro="http://purl.org/roh/mirror/obo/ro#">
+  <foaf:Organization rdf:about="http://graph.um.es/res/foaf_organization/21040000">
+    <roh:title rdf:datatype="&xsd;string">Institute for Water and  Wetland Research</roh:title>
+  </foaf:Organization>
+  <foaf:Organization rdf:about="http://graph.um.es/res/foaf_organization/21040400">
+    <roh:title rdf:datatype="&xsd;string" >Animal Ecology &amp; Ecophysiology</roh:title>
+    <oboro:BFO_0000051 rdf:resource="http://graph.um.es/res/foaf_organization/21040000" />
+    <vivo:identifier rdf:datatype="&xsd;string">http://www.ru.nl/science</vivo:identifier>
+  </foaf:Organization>
+  <foaf:Person rdf:about="http://graph.um.es/res/person/1491480">
+    <foaf:name rdf:datatype="&xsd;string">S.J.G. Vriend</foaf:name>
+	<vivo:identifier rdf:datatype="&xsd;string">0001-0002-1357-1854</vivo:identifier>
+    <vivo:relatedBy rdf:nodeID="fc129e73-7f85-40e1-8710-980d1f071315" />
+  </foaf:Person>
+  <foaf:Person rdf:about="http://graph.um.es/res/person/14914801">
+    <foaf:name rdf:datatype="&xsd;int">23</foaf:name>
+	<vivo:identifier rdf:datatype="&xsd;string">https://orcid.org/0001-0002-1357-1854</vivo:identifier>
+    <vivo:relatedBy rdf:nodeID="fc129e73-7f85-40e1-8710-980d1f071316" />
+  </foaf:Person>
+  <foaf:Person rdf:about="http://graph.um.es/res/person/14914802">
+    <vivo:relatedBy rdf:nodeID="fc129e73-7f85-40e1-8710-980d1f071317" />
+  </foaf:Person>
+  <vivo:Position rdf:nodeID="fc129e73-7f85-40e1-8710-980d1f071315">
+    <vivo:relates rdf:resource="http://graph.um.es/res/foaf_organization/21040400" />
+    <vivo:relates rdf:resource="http://graph.um.es/res/person/1491480" />
+  </vivo:Position>
+  <vivo:Position rdf:nodeID="fc129e73-7f85-40e1-8710-980d1f071316">
+    <vivo:relates rdf:resource="http://graph.um.es/res/foaf_organization/21040400" />
+    <vivo:relates rdf:resource="http://graph.um.es/res/person/14914801" />
+  </vivo:Position>
+  <vivo:Position rdf:nodeID="fc129e73-7f85-40e1-8710-980d1f071317">
+    <vivo:relates rdf:resource="http://graph.um.es/res/foaf_organization/21040400" />
+  </vivo:Position>
+</rdf:RDF>
