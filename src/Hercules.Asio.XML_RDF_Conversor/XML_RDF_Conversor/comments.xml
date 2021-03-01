@@ -1,0 +1,310 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hercules.Asio.XML_RDF_Conversor</name>
+    </assembly>
+    <members>
+        <member name="T:Conversor_XML_RDF.Controllers.ConversorController">
+            <summary>
+            Controlador encargado para hacer una conversión de ficheros XML a RDF.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Controllers.ConversorController.Configuration">
+            <summary>
+            Propiedad encargada de almacenar la configuración.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Controllers.ConversorController.urlUrisFactory">
+            <summary>
+            Propiedad encargada de almacenar la URL del servicio de UrisFactory.
+            </summary>
+        </member>
+        <member name="M:Conversor_XML_RDF.Controllers.ConversorController.ConfigurationFilesList">
+            <summary>
+            Permite visualizar una lista con los archivos de configuración TOML disponibles.
+            </summary>
+            <returns>Lista con los nombres de los ficheros TOML de configuración.</returns>
+        </member>
+        <member name="M:Conversor_XML_RDF.Controllers.ConversorController.Convert(Microsoft.AspNetCore.Http.IFormFile,System.String)">
+            <summary>
+            Permite convertir un archivo XML a RDF.
+            Se requiere una configuración previa del archivo TOML.
+            </summary>
+            <param name="pXmlFile">Archivo XML que se desea convertir.</param>
+            <param name="pType">Nombre del TOML que se desea cargar la configuración.</param>
+            <returns>Fichero RDF.</returns>
+        </member>
+        <member name="M:Conversor_XML_RDF.Controllers.ConversorController.CreateEntities(VDS.RDF.RohGraph,Conversor_XML_RDF.Models.ConfigToml.Entity[],System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <summary>
+            Crea todas las entidades ontológicas del XML.
+            </summary>
+            <param name="pDataGraph">Grafo.</param>
+            <param name="pLista">Lista de entidades.</param>
+            <param name="pNodo">Nodo del que se va a hacer la búsqueda.</param>
+            <param name="pNsmgr">Namespace del nodo.</param>
+            <returns>Lista de entidades.</returns>
+        </member>
+        <member name="M:Conversor_XML_RDF.Controllers.ConversorController.CreateINode(System.String,VDS.RDF.RohGraph)">
+            <summary>
+            Crea un UriNode o BlankNode a partir de una entidad.
+            </summary>
+            <param name="pEntidad">Entidad en cuestión.</param>
+            <param name="pDataGraph">Grafo.</param>
+            <returns>UriNode o BlankNode.</returns>
+        </member>
+        <member name="M:Conversor_XML_RDF.Controllers.ConversorController.CreateINodeType(VDS.RDF.RohGraph,System.String,System.String)">
+            <summary>
+            Crea un LiteralNode según el tipo de dato del contenido.
+            </summary>
+            <param name="pDataGraph">Grafo.</param>
+            <param name="pContenido">Contenido del nodo.</param>
+            <param name="pDatatype">Tipo del dato del contenido.</param>
+            <returns>Nodo construido según el tipo de dato.</returns>
+        </member>
+        <member name="M:Conversor_XML_RDF.Controllers.ConversorController.CreateILiteralNodeType(VDS.RDF.RohGraph,System.String,System.String)">
+            <summary>
+            Crea un LiteralNode según el tipo de dato del contenido.
+            </summary>
+            <param name="pDataGraph">Grafo.</param>
+            <param name="pContenido">Contenido del nodo.</param>
+            <param name="pDatatype">Tipo del dato del contenido.</param>
+            <returns>Nodo construido según el tipo de dato.</returns>
+        </member>
+        <member name="M:Conversor_XML_RDF.Controllers.ConversorController.GetURI(Conversor_XML_RDF.Models.ConfigToml.Entity,System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <summary>
+            Obtiene la URI a partir del ID.
+            </summary>
+            <param name="pEntidad">Entidad que se le quiera obtener el ID.</param>
+            <param name="pNodo">Nodo dónde se almacena el ID.</param>
+            <param name="pNsmgr">Namespace del nodo.</param>
+            <returns>URI de la entidad.</returns>
+        </member>
+        <member name="M:Conversor_XML_RDF.Controllers.ConversorController.GetTarget(Conversor_XML_RDF.Models.ConfigToml.Entity,System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <summary>
+            Obtiene el target de la entidad.
+            </summary>
+            <param name="pEntidad">Entidad en la que se le quiere obtener el target.</param>
+            <param name="pNodo">Nodo.</param>
+            <param name="pNsmgr">Namespace del nodo.</param>
+            <returns>Devuelve el tipo de rdf que es.</returns>
+        </member>
+        <member name="M:Conversor_XML_RDF.Controllers.ConversorController.GetURL(System.String,System.String)">
+            <summary>
+            Obtiene la URI del grafo.
+            </summary>
+            <param name="pRdfType">Tipo del RDF.</param>
+            <param name="pId">ID.</param>
+            <returns>String con la URI del grafo construida.</returns>
+        </member>
+        <member name="M:Conversor_XML_RDF.Controllers.ConversorController.ConfigFilesList">
+            <summary>
+            Devuelve un listado con todos los ficheros de configuración TOML disponibles.
+            </summary>
+            <returns>Lista con el nombre de los ficheros disponibles.</returns>
+        </member>
+        <member name="M:Conversor_XML_RDF.Controllers.ConversorController.LoadUrlUrisFactoryConfig">
+            <summary>
+            Permite cargar la URL de la configuración del fichero appsetings.json.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Conversor_XML_RDF.Models.ConfigToml.ConversorConfig">
+            <summary>
+            Clase encargada de almacenar el listado de entidades.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.ConversorConfig.entities">
+            <summary>
+            Lista de entidades.
+            </summary>
+        </member>
+        <member name="T:Conversor_XML_RDF.Models.ConfigToml.Entity">
+            <summary>
+            Clase encarga de almacenar la infomración de la entidad.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Entity.rdftype">
+            <summary>
+            Tipo del rdf al que apunta.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Entity.rdftypeproperty">
+            <summary>
+            Tipo del rdf del cual habrá que obtener del mapa.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Entity.mappingrdftype">
+            <summary>
+            Mapa con los datos a cambiar.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Entity.id">
+            <summary>
+            ID de la entidad.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Entity.nameSpace">
+            <summary>
+            Espacio de nombre de la entidad.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Entity.source">
+            <summary>
+            Namespace + Nombre de la etiqueta.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Entity.property">
+            <summary>
+            Propiedad la cual hay que acceder y no se encuentra en el nodo.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Entity.datatype">
+            <summary>
+            Tipo de dato de la propiedad que hay que acceder.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Entity.properties">
+            <summary>
+            Listado de propiedades que puede tener la entidad.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Entity.subentities">
+            <summary>
+            Listado de subentidades que puede tener la entidad.
+            </summary>
+        </member>
+        <member name="T:Conversor_XML_RDF.Models.ConfigToml.Property">
+            <summary>
+            Clase encargada de almacenar la infomación de las propiedades.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Property.property">
+            <summary>
+            IRI de la propiedad en cuestión.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Property.source">
+            <summary>
+            Namespace + Nombre de la etiqueta.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Property.datatype">
+            <summary>
+            Tipo de la propiedad.
+            </summary>
+        </member>
+        <member name="T:Conversor_XML_RDF.Models.ConfigToml.Subentity">
+            <summary>
+            Clase encargada de almacenar las subentidades.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Subentity.property">
+            <summary>
+            Propiedad directa. IRI del tipo de la entidad a la que apunta.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Subentity.inverseProperty">
+            <summary>
+            Propiedad inversa. IRI del tipo de la entidad a la que apunta.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Subentity.entities">
+            <summary>
+            Lista de subentidades.
+            </summary>
+        </member>
+        <member name="T:Conversor_XML_RDF.Models.ConfigToml.Mapping">
+            <summary>
+            Clase encargada de mapear.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Mapping.nameSpace">
+            <summary>
+            Espacio de nombre (xmlns) del nodo del XML.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Mapping.source">
+            <summary>
+            Contenido de la etiqueta en la cual se le ha de aplicar el target.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ConfigToml.Mapping.target">
+            <summary>
+            IRI del tipo de la entidad a la que apunta.
+            </summary>
+        </member>
+        <member name="T:Conversor_XML_RDF.Models.ErrorViewModel">
+            <summary>
+            Error.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ErrorViewModel.RequestId">
+            <summary>
+            Id.
+            </summary>
+        </member>
+        <member name="P:Conversor_XML_RDF.Models.ErrorViewModel.ShowRequestId">
+            <summary>
+            Permite visualizar el id.
+            </summary>
+        </member>
+        <member name="T:Conversor_XML_RDF.Program">
+            <summary>
+            Clase encargada de inicializar el servicio.
+            </summary>
+        </member>
+        <member name="M:Conversor_XML_RDF.Program.Main(System.String[])">
+            <summary>
+            Main.
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:Conversor_XML_RDF.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Permite crear un host.
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Conversor_XML_RDF.Startup">
+            <summary>
+            Startup.
+            </summary>
+        </member>
+        <member name="M:Conversor_XML_RDF.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Guarda la configuración.
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:Conversor_XML_RDF.Startup.Configuration">
+            <summary>
+            Propiedad para acceder a la configuración.
+            </summary>
+        </member>
+        <member name="M:Conversor_XML_RDF.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services">Services.</param>
+        </member>
+        <member name="M:Conversor_XML_RDF.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">ApplicationBuilder.</param>
+            <param name="env">Environment.</param>
+        </member>
+        <member name="T:VDS.RDF.RohGraph">
+            <summary>
+            Grafo.
+            </summary>
+        </member>
+        <member name="M:VDS.RDF.RohGraph.GetNextBlankNodeID">
+            <summary>
+            Crea un nuevo Blank Node ID sin usar y lo devuelve.
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
