@@ -14,5 +14,5 @@ COPY Config/Ontology/roh-v2.owl out/Config/Ontology/
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "ApiCargaWebInterface.dll"]
+ENTRYPOINT ["dotnet", "Hercules.Asio.Web.dll"]
 
