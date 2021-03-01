@@ -47,16 +47,18 @@ El repositorio de desarrollo de la Arquitectura Semántica del proyecto Hércule
  
  ### Diagrama de componentes del proyecto:
  
-
 <img src="Docs/media/Hércules ASIO Diagrama de componentes.png" />
-
-
-Todas las aplicaciones aquí descritas pueden usarse de dos formas distintas: 
-  - Como un API, instalando la aplicación como se describe más abajo y llamando a su Endpoint.
-  - Como una [librería](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/libraries), añadiendo el ensamblado DLL a la solución de código fuente y usando las clases y métodos definidos en él. 
-  
 
 ### Configuración e instalación
 
-Las [instrucciones de configuración e instalación](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Configuraci%C3%B3n%20e%20Instalaci%C3%B3n.md) son el punto de partida para 
-comenzar a usar los desarrollos de Hércules ASIO
+Las [instrucciones de configuración e instalación](Configuracion-e-Instalacion.md) son el punto de partida para comenzar a usar los desarrollos de Hércules ASIO.
+
+Todas las aplicaciones aquí descritas pueden usarse de dos formas distintas: 
+  - Como un API, instalando la aplicación y llamando a su Endpoint.
+  - Como una [librería](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/libraries), añadiendo el ensamblado DLL a la solución de código fuente y usando las clases y métodos definidos.
+
+## Documentación del Backend SGI
+
+La documentación del backend se puede consultar en la carpeta [Docs](Docs/).
+
+Además, la carpeta de [formación](Formacion/) contiene el material usado en las jornadas de formación del proyecto ASIO.
