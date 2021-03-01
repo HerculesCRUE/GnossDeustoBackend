@@ -11,6 +11,7 @@
 
 ## DOCUMENTACIÓN DE HÉRCULES ASIO BACKEND SGI
 
+La carpeta Docs contiene los siguientes documentos:
 
  - [Entrega parcial Manual de comprobaciones y Carga inicial](Entrega-parcial-Manual-decomprobaciones-y-Carga-inicial.md)
  - [Hercules TripleStore Benchmark deliverable report](Hercules-TripleStore-Benchmark-deliverable-report.md)
