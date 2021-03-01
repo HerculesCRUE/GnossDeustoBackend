@@ -72,7 +72,6 @@ namespace GestorDocumentacion
                .AddIdentityServerAuthentication(options =>
                {
                    options.Authority = authority;
-                   //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
                    options.RequireHttpsMetadata = false;
                    options.ApiName = scope;
                });
@@ -97,6 +96,8 @@ namespace GestorDocumentacion
                 options.OperationFilter<SecurityRequirementsOperationFilter>();
             });
 
+            services.AddSwaggerExamples();
+
             services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
             {
                 var builder = new NpgsqlDbContextOptionsBuilder(opt);
@@ -118,7 +119,7 @@ namespace GestorDocumentacion
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
 
-            services.AddScoped<IPagesOperationsServices, PagesOperationService>(); 
+            services.AddScoped<IPagesOperationsServices, PagesOperationService>();
             services.AddScoped<ITemplatesOperationsServices, TemplatesOperationsService>();
             services.AddScoped<IDocumentsOperationsService, DocumentsOperationsService>();
             services.AddScoped<IFileOperationService, FileOperationsService>();
