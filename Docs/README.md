@@ -13,16 +13,16 @@
 
 La carpeta Docs contiene los siguientes documentos:
 
- - [Entrega parcial Manual de comprobaciones y Carga inicial](Entrega-parcial-Manual-decomprobaciones-y-Carga-inicial.md)
+ - [Hercules ASIO Especificación de funciones de Carga](Hercules-ASIO-Especificacion-de-funciones-de-Carga.md)
+ - [Hércules ASIO Especificación de las funciones de descubrimiento.md](Hercules-ASIO-Especificacion-de-las-funciones-de-descubrimiento.md)
+ - [Hercules ASIO Fuentes externas de información para las funciones de descubrimiento.md](Hercules-ASIO-Fuentes-externas-de-informacion-para-las-funciones-de-descubrimiento.md)
+ - [Procedencia-de-datos-externos-Provenance.md](Procedencia-de-datos-externos-Provenance.md)
+ - [Hércules ASIO Evaluación de cumplimiento Linked Data Platform.md](Hercules-ASIO-Evaluacion-de-cumplimiento-Linked-Data-Platform.md)
  - [Hercules TripleStore Benchmark deliverable report](Hercules-TripleStore-Benchmark-deliverable-report.md)
  - [Hercules ASIO Data confidentiality proposal](Hercules-ASIO-Data-confidentiality-proposal.md)
- - [Hercules ASIO Especificación de funciones de Carga](Hercules-ASIO-Especificacion-de-funciones-de-Carga.md)
  - [Hercules ASIO Estimación de arquitectura de Sistemas.md](Hercules-ASIO-Estimacion-de-arquitectura-de-Sistemas.md)
  - [Hercules ASIO Modelo de multilingüismo.md](Hercules-ASIO-Modelo-de-multilinguismo.md)
- - [Hercules ASIO Fuentes externas de información para las funciones de descubrimiento.md](Hercules-ASIO-Fuentes-externas-de-informacion-para-las-funciones-de-descubrimiento.md)
- - [Hércules ASIO Evaluación de cumplimiento Linked Data Platform.md](Hercules-ASIO-Evaluacion-de-cumplimiento-Linked-Data-Platform.md)
- - [Hércules ASIO Especificación de las funciones de descubrimiento.md](Hercules-ASIO-Especificacion-de-las-funciones-de-descubrimiento.md)
- - [Procedencia-de-datos-externos-Provenance.md](Procedencia-de-datos-externos-Provenance.md)
+ - [Entrega parcial Manual de comprobaciones y Carga inicial](Entrega-parcial-Manual-decomprobaciones-y-Carga-inicial.md)
  - [Benchmark](Benhmark/)
  - FAIR
     - [EF2-1.6 DOCUMENTO DE ANÁLISIS DE MÉTODOS FAIR.pdf](FAIR/EF2-1.6%20DOCUMENTO%20DE%20AN%C3%81LISIS%20DE%20M%C3%89TODOS%20FAIR.pdf)
