@@ -72,7 +72,6 @@ namespace GestorDocumentacion
                .AddIdentityServerAuthentication(options =>
                {
                    options.Authority = authority;
-                   //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
                    options.RequireHttpsMetadata = false;
                    options.ApiName = scope;
                });
@@ -84,7 +83,7 @@ namespace GestorDocumentacion
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
-                options.ExampleFilters();
+                //options.ExampleFilters();
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
@@ -96,6 +95,7 @@ namespace GestorDocumentacion
                 });
                 options.OperationFilter<SecurityRequirementsOperationFilter>();
             });
+
 
             services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
             {
@@ -118,7 +118,7 @@ namespace GestorDocumentacion
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
 
-            services.AddScoped<IPagesOperationsServices, PagesOperationService>(); 
+            services.AddScoped<IPagesOperationsServices, PagesOperationService>();
             services.AddScoped<ITemplatesOperationsServices, TemplatesOperationsService>();
             services.AddScoped<IDocumentsOperationsService, DocumentsOperationsService>();
             services.AddScoped<IFileOperationService, FileOperationsService>();

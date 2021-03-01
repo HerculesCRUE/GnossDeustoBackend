@@ -1,10 +1,31 @@
 ![](./Docs/media/CabeceraDocumentosMD.png)
 
+# Hércules ASIO. Arquitectura Semántica e Infraestructura Ontológica
 
-## Sobre GnossDeustoBackend
+El objetivo del Proyecto ASIO es adquirir un servicio de I+D consistente en el desarrollo de soluciones innovadoras para la Universidad de Murcia en relación al reto de Arquitectura Semántica e Infraestructura Ontológica. En concreto, se pretende desarrollar e incorporar soluciones que superen las actualmente disponibles en el mercado.
+
+La solución ASIO es susceptible de ser utilizada en el futuro de forma regular tanto por la Universidad de Murcia como por las restantes Universidades que forman parte de la CRUE con necesidades y competencias similares, ya que como proceso de compra pública precomercial, el objetivo ha sido alcanzar una solución innovadora dirigida específicamente a los retos y necesidades que afectan al sector público y que persiguen la dinamización de la I+D+i.
+
+El proyecto Infraestructura Ontológica de la información del Sistema Universitario Español consiste en crear una red de ontologías que describa con fidelidad y alta granularidad los datos del dominio de la Gestión de la Investigación.
+
+El proyecto Arquitectura Semántica de Datos del SUE ha consistido en desarrollar una plataforma eficiente para almacenar, gestionar y publicar los datos del SGI (Sistema de Gestión de la Investigación), basándose en la Infraestructura Ontológica, con la capacidad de sincronizar instancias instaladas en diferentes Universidades.
+
+Dado de los demás proyectos que componen HÉRCULES dependen tanto de la Infraestructura Ontológica, como de la Arquitectura Semántica de Datos, el proyecto ASIO interactúa con los desarrollos y resultados de los demás proyectos HÉRCULES: desarrollo de un Prototipo Innovador de Gestión de la Investigación para Universidades y Enriquecimiento de Datos y Métodos de Análisis.
+
+## Desarrollo de Hércules ASIO
+
+Hércules ASIO es un proyecto de software libre alojado en dos repositorios públicos de GitHub:
+
+ - [GitHub de Infraestructura Ontológica](https://github.com/HerculesCRUE/GnossDeustoOnto). Este repositorio aloja la Red de Ontologías Hércules - ROH y tiene los siguientes documentos principales: 
+   - [Tutorial de la Red de Ontologías Hércules (ROH)](https://github.com/HerculesCRUE/GnossDeustoOnto/tree/master/Documentation). Se   trata de una documentación explicativa, generada como primera lectura recomendada. El documento ilustra con diagramas como se relacionan entre sí las entidades principales de ROH. También incluye una tabla por cada entidad, en la que se indican las subclases y propiedades de tipo object y datatype.
+   - [ROH Reference Specification](https://github.com/HerculesCRUE/GnossDeustoOnto/blob/master/Documentation/1-%20OntologyDocumentation.pdf). Este documento   detalla, en formato tabular, las subclases y propiedades de tipo  object y datatype de cada concepto de la ontología ROH. 
+ - **GitHub de  Arquitectura Semántica (Backend SGI)**. Se trata del presente repositorio, que contiene los componentes de software que, junto con el software base de sistemas y bases de datos, constituyen la arquitectura semántica del proyecto ASIO.
+
+## Desarrollo del Backend SGI
+
 [![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
 
-Éste es el repositorio del proyecto Hércules ASIO en el que se incluyen los siguientes programas y servicios
+El repositorio de desarrollo de la Arquitectura Semántica del proyecto Hércules ASIO (Backend SGI) contiene los siguientes programas y servicios:
 
  - [Hercules.Asio.Api.Carga](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Api.Carga): servicio web que contiene 4 controladores:
    - etlController: Contiene los procesos ETL (Extract, Transform and Load) necesarios para la carga de datos.
