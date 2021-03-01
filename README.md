@@ -46,7 +46,7 @@ El repositorio de desarrollo de la Arquitectura Semántica del proyecto Hércule
  - [Hercules.Asio.LinkedDataServer](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.LinkedDataServer): proporciona el servicio de datos enlazados de Hércules ASIO.
  
 
-### Diagrama de componentes del proyecto:
+### Diagrama de componentes del proyecto
  
 <img src="Docs/media/Hércules ASIO Diagrama de componentes.png" />
 
