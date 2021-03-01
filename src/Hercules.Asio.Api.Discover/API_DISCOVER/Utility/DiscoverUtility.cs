@@ -4550,6 +4550,8 @@ namespace API_DISCOVER.Utility
             IUriNode subjectGraph = rohApi.CreateUriNode(UriFactory.Create(provenanceGraph));
             IUriNode wasAttributedToProperty = rohApi.CreateUriNode(UriFactory.Create("http://www.w3.org/ns/prov#wasAttributedTo"));
             rohApi.Assert(new Triple(subjectGraph, wasAttributedToProperty, subjectOrganization));
+            IUriNode rdftypeGraph = rohApi.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#Graph"));
+            rohApi.Assert(new Triple(subjectGraph, rdftypeProperty, rdftypeGraph));
             return new KeyValuePair<string, RohGraph>(pExternalAPI.Id, rohApi);
         }
 
