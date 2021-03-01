@@ -83,7 +83,7 @@ namespace GestorDocumentacion
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
-                options.ExampleFilters();
+                //options.ExampleFilters();
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
@@ -96,7 +96,6 @@ namespace GestorDocumentacion
                 options.OperationFilter<SecurityRequirementsOperationFilter>();
             });
 
-            services.AddSwaggerExamples();
 
             services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
             {
