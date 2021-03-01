@@ -45,7 +45,8 @@ El repositorio de desarrollo de la Arquitectura Semántica del proyecto Hércule
  - [Hercules.Asio.IdentityServer](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.IdentityServer):encargado de la securización mediante tokens para los apis que forman el proyecto.
  - [Hercules.Asio.LinkedDataServer](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.LinkedDataServer): proporciona el servicio de datos enlazados de Hércules ASIO.
  
- ### Diagrama de componentes del proyecto:
+
+### Diagrama de componentes del proyecto:
  
 <img src="Docs/media/Hércules ASIO Diagrama de componentes.png" />
 
