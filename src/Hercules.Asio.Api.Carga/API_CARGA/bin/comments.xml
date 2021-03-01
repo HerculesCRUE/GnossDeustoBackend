@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>API_CARGA</name>
+        <name>Hercules.Asio.Api.Carga</name>
     </assembly>
     <members>
         <member name="T:API_CARGA.Controllers.etlController">
@@ -37,12 +37,11 @@
             <param name="validationFile">Fichero de validación</param>
             <returns></returns>
         </member>
-        <member name="M:API_CARGA.Controllers.etlController.LoadOntology(Microsoft.AspNetCore.Http.IFormFile,API_CARGA.Models.Entities.OntologyEnum)">
+        <member name="M:API_CARGA.Controllers.etlController.LoadOntology(Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
             Elimina la ontologia cargada y la reemplaza por la nueva
             </summary>
             <param name="ontology">Fichero de la nueva ontologia</param>
-            <param name="ontologyType">tipo de ontologia; siendo el 0 la ontología roh, el 1 la ontología rohes y el 2 la ontología rohum </param>
             <returns></returns>
         </member>
         <member name="M:API_CARGA.Controllers.etlController.dataDiscover(Microsoft.AspNetCore.Http.IFormFile)">
@@ -54,7 +53,7 @@
         </member>
         <member name="M:API_CARGA.Controllers.etlController.dataDiscoverState(System.Guid)">
             <summary>
-            Obtiene el estado de una tarea de descubrimiento descubrimiento
+            Obtiene el estado de una tarea de descubrimiento
             </summary>
             <param name="identifier">Identificador de la tarea de descubrimiento</param>
             <returns></returns>
@@ -77,7 +76,7 @@
             <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
             <returns>XML devuelto por el repositorio OAI-PMH</returns>
         </member>
-        <member name="M:API_CARGA.Controllers.etlController.ListIdentifiers(System.Guid,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.String)">
+        <member name="M:API_CARGA.Controllers.etlController.ListIdentifiers(System.Guid,System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Este método hace de PROXY entre el API y el proveedor OAI-PMH.
             Es una forma abreviada de ListRecords, que recupera solo encabezados en formato XML OAI-PMH en lugar de registros.        
@@ -99,7 +98,7 @@
             <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
             <returns>XML devuelto por el repositorio OAI-PMH</returns>
         </member>
-        <member name="M:API_CARGA.Controllers.etlController.ListRecords(System.Guid,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.String)">
+        <member name="M:API_CARGA.Controllers.etlController.ListRecords(System.Guid,System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Este método hace de PROXY entre el API y el proveedor OAI-PMH.
             Recupera registros del repositorio en formato XML OAI-PMH.        
@@ -121,11 +120,25 @@
             <param name="repositoryIdentifier">Identificador del repositorio OAI-PMH (los repositorios disponibles están en /etl-config/repository)</param>
             <returns>XML devuelto por el repositorio OAI-PMH</returns>
         </member>
-        <member name="M:API_CARGA.Controllers.etlController.GetOntology(API_CARGA.Models.Entities.OntologyEnum)">
+        <member name="M:API_CARGA.Controllers.etlController.GetOntology">
             <summary>
             Devuelve la ontologia cargada     
             </summary>
             <returns>Ontologia</returns>
+        </member>
+        <member name="M:API_CARGA.Controllers.etlController.GetOntologyHash">
+            <summary>
+            Devuelve el hash de la ontologia cargada     
+            </summary>
+            <returns>Hash</returns>
+        </member>
+        <member name="M:API_CARGA.Controllers.etlController.GetHash(System.Security.Cryptography.HashAlgorithm,System.String)">
+            <summary>
+            Generación de Hash
+            </summary>
+            <param name="hashAlgorithm"></param>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="T:API_CARGA.Controllers.repositoryController">
             <summary>
@@ -228,51 +241,61 @@
             <summary>
             Clase que actua de Middleware para la gestión de las excepciones
             </summary>
+            
         </member>
         <member name="T:API_CARGA.ModelExamples.AddRepositoryErrorResponse">
             <summary>
             Sirve para mostrar un error al añadir un repositorio con un nombre repetido
             </summary>
+            
         </member>
         <member name="T:API_CARGA.ModelExamples.AddShapeConfigErrorResponse">
             <summary>
             Sirve para mostrar un error al añadir un shape
             </summary>
+            
         </member>
         <member name="T:API_CARGA.ModelExamples.ConfigRepositoriesResponse">
             <summary>
             Sirve para mostrar un ejemplo de respuesta de una lista de repositorios 
             </summary>
+            
         </member>
         <member name="T:API_CARGA.ModelExamples.ConfigRepositoryResponse">
             <summary>
             Sirve para mostrar un ejemplo de respuesta de un repositorios
             </summary>
+            
         </member>
         <member name="T:API_CARGA.ModelExamples.ModifyRepositoryErrorResponse">
             <summary>
             Sirve para mostrar un error de respuesta al intentar modificar un repositorio que no existe
             </summary>
+            
         </member>
         <member name="T:API_CARGA.ModelExamples.ModifyShapeConfigErrorResponse">
             <summary>
             Sirve para mostrar un error de respuesta al intentar modificar un repositorio que no existe
             </summary>
+            
         </member>
         <member name="T:API_CARGA.ModelExamples.ShapeConfigResponse">
             <summary>
             Sirve para mostrar un ejemplo de respuesta de un Shape
             </summary>
+            
         </member>
         <member name="T:API_CARGA.ModelExamples.ShapesConfigsResponse">
             <summary>
             Sirve para mostrar un ejemplo de respuesta de una lista de Shapes
             </summary>
+            
         </member>
         <member name="T:API_CARGA.Models.Entities.DiscoverItem">
             <summary>
             Representa un item de descubrimiento
             </summary>
+            
         </member>
         <member name="T:API_CARGA.Models.Entities.DiscoverItem.DiscoverDissambiguation">
             <summary>
@@ -451,6 +474,7 @@
             <summary>
             Representa el estao de un item de descubrimiento
             </summary>
+            
         </member>
         <member name="T:API_CARGA.Models.Entities.DiscoverStateResult.DiscoverDissambiguation">
             <summary>
@@ -525,11 +549,13 @@
             <summary>
             Sirve encapsular los datos provenientes del ListIdentifiers
             </summary>
+            
         </member>
         <member name="T:API_CARGA.Models.Entities.ProcessingJobState">
             <summary>
             Clase para guardar información sobre el estado en el que se encuntra la sincronización lanzada por una tarea
             </summary>
+            
         </member>
         <member name="P:API_CARGA.Models.Entities.ProcessingJobState.Id">
             <summary>
@@ -565,6 +591,7 @@
             <summary>
             Datos de configuración de un repositorio OAI-PMH
             </summary>
+            
         </member>
         <member name="P:API_CARGA.Models.Entities.RepositoryConfig.RepositoryConfigID">
             <summary>
@@ -586,15 +613,42 @@
             url del repositorio
             </summary>
         </member>
+        <member name="T:API_CARGA.Models.Entities.RepositoryConfigSet">
+            <summary>
+            Datos de la última sincronización de un set
+            </summary>
+        </member>
+        <member name="P:API_CARGA.Models.Entities.RepositoryConfigSet.RepositoryConfigSetID">
+            <summary>
+            Identificador del set de la sincronización
+            </summary>
+        </member>
+        <member name="P:API_CARGA.Models.Entities.RepositoryConfigSet.Set">
+            <summary>
+            Nombre del set de la sincronización
+            </summary>
+        </member>
+        <member name="P:API_CARGA.Models.Entities.RepositoryConfigSet.LastUpdate">
+            <summary>
+            Fecha del último elemento del set sincronizado
+            </summary>
+        </member>
+        <member name="P:API_CARGA.Models.Entities.RepositoryConfigSet.RepositoryID">
+            <summary>
+            Identificador del repositorio
+            </summary>
+        </member>
         <member name="T:API_CARGA.Models.Entities.RepositorySync">
             <summary>
             Datos de una sincornización sobre un repositorio
             </summary>
+            
         </member>
         <member name="T:API_CARGA.Models.Entities.ShapeConfig">
             <summary>
             Datos de configuración de una validación SHACL
             </summary>
+            
         </member>
         <member name="P:API_CARGA.Models.Entities.ShapeConfig.ShapeConfigID">
             <summary>
@@ -620,6 +674,7 @@
             <summary>
             Datos de reporte de un Shape
             </summary>
+            
         </member>
         <member name="P:API_CARGA.Models.Entities.ShapeReport.Result.severity">
             <summary>
@@ -686,6 +741,7 @@
             Realizar una llamda Get a una url que tiene como base la configurada en el appSettings.json en la propiedad ConfigUrl
             </summary>
             <param name="urlMethod">método al que se hace la llamada</param>
+             <param name="token"></param>
         </member>
         <member name="M:API_CARGA.Models.Services.CallApiNeedInfoPublisData.CallDataPublish(System.String,System.String,System.Boolean,API_CARGA.Models.Entities.TokenBearer)">
             <summary>
@@ -694,6 +750,7 @@
             <param name="rdf">contenido en rdf a publicar</param>
             <param name="jobId">En el caso de que haya sido una tarea la que ha lanzado la acción representa el identificador de la tarea</param>
             <param name="discoverProcessed">En el caso de que ya se haya procesado el descubrimiento se envía true y se inserta tal cual en BBDD (sin procesar descubrimiento)</param>
+            <param name="token">Token</param>
         </member>
         <member name="M:API_CARGA.Models.Services.CallApiNeedInfoPublisData.CallDataValidate(System.String,System.Guid,API_CARGA.Models.Entities.TokenBearer)">
             <summary>
@@ -745,6 +802,13 @@
             </summary>
             <param name="urlMethod">método a llamar</param>
         </member>
+        <member name="M:API_CARGA.Models.Services.CallOAIPMH.GetUri(System.String)">
+            <summary>
+            Obtiene el resultado
+            </summary>
+            <param name="url">url a llamar</param>
+            <returns></returns>
+        </member>
         <member name="T:API_CARGA.Models.Services.CallTokenService">
             <summary>
             clase para la obtención de los tokens de acceso
@@ -771,13 +835,6 @@
             </summary>
             <param name="stringData">Datos con el scope, el cliente id, el grantType y el secret</param>
         </member>
-        <member name="M:API_CARGA.Models.Services.CallUri.GetUri(System.String)">
-            <summary>
-            Obtiene el resultado
-            </summary>
-            <param name="url">url a llamar</param>
-            <returns></returns>
-        </member>
         <member name="T:API_CARGA.Models.Services.ConfigSparql">
             <summary>
             Clase para obtener la configuración necesaria para el uso de Sparql
@@ -791,16 +848,6 @@
         <member name="M:API_CARGA.Models.Services.ConfigSparql.GetGraphRoh">
             <summary>
             Obtiene el gráfo configurado en Sparql:GraphRoh del fichero appsettings.json
-            </summary>
-        </member>
-        <member name="M:API_CARGA.Models.Services.ConfigSparql.GetGraphRohes">
-            <summary>
-            Obtiene el gráfo configurado en Sparql:GraphRohes del fichero appsettings.json
-            </summary>
-        </member>
-        <member name="M:API_CARGA.Models.Services.ConfigSparql.GetGraphRohum">
-            <summary>
-            Obtiene el gráfo configurado en Sparql:GraphRohes del fichero appsettings.json
             </summary>
         </member>
         <member name="M:API_CARGA.Models.Services.ConfigSparql.GetEndpoint">
@@ -888,6 +935,11 @@
             Obtiene la url configurada en ConfigUrlUnidata del fichero appsettings.json
             </summary>
         </member>
+        <member name="M:API_CARGA.Models.Services.ConfigUrlService.GetUrlXmlConverter">
+            <summary>
+            Obtiene la url configurada en ConfigUrlXmlConverter del fichero appsettings.json
+            </summary>
+        </member>
         <member name="T:API_CARGA.Models.Services.DiscoverItemBDService">
             <summary>
             Clase para gestionar las operaciones de las tareas de descubrimiento
@@ -946,6 +998,64 @@
             </summary>
             <param name="identifier">Identificador del item</param>
         </member>
+        <member name="T:API_CARGA.Models.Services.DiscoverItemMockService">
+            <summary>
+            Clase para gestionar las operaciones de las tareas de descubrimiento
+            </summary>
+        </member>
+        <member name="M:API_CARGA.Models.Services.DiscoverItemMockService.GetDiscoverItemById(System.Guid)">
+            <summary>
+             Obtiene un item de descubrimiento
+            </summary>
+            <param name="id">Identificador del item</param>
+            <remarks>Item de descubrimiento</remarks>
+        </member>
+        <member name="M:API_CARGA.Models.Services.DiscoverItemMockService.GetDiscoverItemsErrorByJobMini(System.String)">
+            <summary>
+            Obtiene los items con error de un Job (sólo obtiene el identificador y el estado)
+            </summary>
+            <param name="jobId">Identificador del job</param>
+            <returns>Lista de Items de descubrimiento (sólo obtiene el identificador y el estado)</returns>
+        </member>
+        <member name="M:API_CARGA.Models.Services.DiscoverItemMockService.GetDiscoverItemsStatesByJob(System.String)">
+            <summary>
+            Obtiene el número de items en cada uno de los estados de descubrimiento
+            </summary>
+            <param name="jobId">Identificador del job</param>
+            <returns></returns>
+        </member>
+        <member name="M:API_CARGA.Models.Services.DiscoverItemMockService.ExistsDiscoverItemsPending(System.String)">
+            <summary>
+            Obtiene si existen o no items pendientes de procesar por el descubrimiento para un Job
+            </summary>
+            <param name="jobId">Identificador del job</param>
+            <returns></returns>
+        </member>
+        <member name="M:API_CARGA.Models.Services.DiscoverItemMockService.ExistsDiscoverItemsErrorOrDissambiguatinProblems(System.String)">
+            <summary>
+            Obtiene si existen o no items con estado error o procesados con problemas de desambiguación
+            </summary>
+            <param name="jobId">Identificador del job</param>
+            <returns></returns>
+        </member>
+        <member name="M:API_CARGA.Models.Services.DiscoverItemMockService.AddDiscoverItem(API_CARGA.Models.Entities.DiscoverItem)">
+            <summary>
+            Añade un item de descubrimiento
+            </summary>
+            <param name="discoverItem">Item de descubrimiento</param>
+        </member>
+        <member name="M:API_CARGA.Models.Services.DiscoverItemMockService.ModifyDiscoverItem(API_CARGA.Models.Entities.DiscoverItem)">
+            <summary>
+            Modifica una item de descubrimiento
+            </summary>
+            <param name="discoverItem">tem de descubrimiento a modificar con los datos nuevos</param>
+        </member>
+        <member name="M:API_CARGA.Models.Services.DiscoverItemMockService.RemoveDiscoverItem(System.Guid)">
+            <summary>
+            Elimina un discoverItem
+            </summary>
+            <param name="identifier">Identificador del item</param>
+        </member>
         <member name="T:API_CARGA.Models.Services.ICallNeedPublishData">
             <summary>
             Clase que sirve para realizar las llamadas necesarias al controlador etl para poder realizar una sincronización
@@ -995,6 +1105,64 @@
             <param name="token">token bearer en caso de que sea necesario para la autenticación</param>
             <param name="isFile">si el objeto pasado es un fichero</param>
             <param name="fileName">nombre del parametro del fichero</param>
+        </member>
+        <member name="T:API_CARGA.Models.Services.IDiscoverItemService">
+            <summary>
+            Interfaz para gestionar las operaciones de las tareas de descubrimiento
+            </summary>
+        </member>
+        <member name="M:API_CARGA.Models.Services.IDiscoverItemService.GetDiscoverItemById(System.Guid)">
+            <summary>
+             Obtiene un item de descubrimiento
+            </summary>
+            <param name="id">Identificador del item</param>
+            <remarks>Item de descubrimiento</remarks>
+        </member>
+        <member name="M:API_CARGA.Models.Services.IDiscoverItemService.GetDiscoverItemsErrorByJobMini(System.String)">
+            <summary>
+            Obtiene los items con error de un Job (sólo obtiene el identificador y el estado)
+            </summary>
+            <param name="jobId">Identificador del job</param>
+            <returns>Lista de Items de descubrimiento (sólo obtiene el identificador y el estado)</returns>
+        </member>
+        <member name="M:API_CARGA.Models.Services.IDiscoverItemService.GetDiscoverItemsStatesByJob(System.String)">
+            <summary>
+            Obtiene el número de items en cada uno de los estados de descubrimiento
+            </summary>
+            <param name="jobId">Identificador del job</param>
+            <returns></returns>
+        </member>
+        <member name="M:API_CARGA.Models.Services.IDiscoverItemService.ExistsDiscoverItemsPending(System.String)">
+            <summary>
+            Obtiene si existen o no items pendientes de procesar por el descubrimiento para un Job
+            </summary>
+            <param name="jobId">Identificador del job</param>
+            <returns></returns>
+        </member>
+        <member name="M:API_CARGA.Models.Services.IDiscoverItemService.ExistsDiscoverItemsErrorOrDissambiguatinProblems(System.String)">
+            <summary>
+            Obtiene si existen o no items con estado error o procesados con problemas de desambiguación
+            </summary>
+            <param name="jobId">Identificador del job</param>
+            <returns></returns>
+        </member>
+        <member name="M:API_CARGA.Models.Services.IDiscoverItemService.AddDiscoverItem(API_CARGA.Models.Entities.DiscoverItem)">
+            <summary>
+            Añade un item de descubrimiento
+            </summary>
+            <param name="discoverItem">Item de descubrimiento</param>
+        </member>
+        <member name="M:API_CARGA.Models.Services.IDiscoverItemService.ModifyDiscoverItem(API_CARGA.Models.Entities.DiscoverItem)">
+            <summary>
+            Modifica una item de descubrimiento
+            </summary>
+            <param name="discoverItem">tem de descubrimiento a modificar con los datos nuevos</param>
+        </member>
+        <member name="M:API_CARGA.Models.Services.IDiscoverItemService.RemoveDiscoverItem(System.Guid)">
+            <summary>
+            Elimina un discoverItem
+            </summary>
+            <param name="identifier">Identificador del item</param>
         </member>
         <member name="M:API_CARGA.Models.Services.IRabbitMQService.PublishMessage(System.Object)">
             <summary>
@@ -1104,48 +1272,69 @@
             <param name="index">Número del elemento que se está procesando</param>
             <param name="totalOfElements">Elementos a procesar</param>
         </member>
-        <member name="M:API_CARGA.Models.Services.OaiPublishRDFService.CallListIdentifier(System.Guid,System.String,System.Nullable{System.DateTime})">
+        <member name="M:API_CARGA.Models.Services.OaiPublishRDFService.CallListMetadataFormats(System.Guid)">
+            <summary>
+            Obtiene una lista de los metadataformats disponibles
+            </summary>
+            <param name="identifierRepo">Identificador del repositorio</param>
+            <returns>Lista de identificadores</returns>
+        </member>
+        <member name="M:API_CARGA.Models.Services.OaiPublishRDFService.CallGranularity(System.Guid)">
+            <summary>
+            Obtiene la granularidad
+            </summary>
+            <param name="identifierRepo">Identificador del repositorio</param>
+            <returns>Lista de identificadores</returns>
+        </member>
+        <member name="M:API_CARGA.Models.Services.OaiPublishRDFService.CallListIdentifier(System.Guid,System.String,System.String,System.String)">
             <summary>
             Obtiene una lista de identificadores
             </summary>
             <param name="identifierRepo">Identificador del repositorio</param>
+            <param name="metadataPrefix">metadataPrefix</param>
             <param name="fechaFrom">fecha a partir de la cual se debe actualizar</param>
             <param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
             <returns>Lista de identificadores</returns>
         </member>
-        <member name="M:API_CARGA.Models.Services.OaiPublishRDFService.CallGetRecord(System.Guid,System.String)">
+        <member name="M:API_CARGA.Models.Services.OaiPublishRDFService.CallGetRecord(System.Guid,System.String,System.String)">
             <summary>
             Obtiene el rdf del identificador en el repositorio
             </summary>
             <param name="repoIdentifier">Identificador del repositorio</param>
+            <param name="metadataPrefix">metadataPrefix</param>
             <param name="identifier">Identificador del elemento</param>
             <returns>RDF</returns>
+        </member>
+        <member name="M:API_CARGA.Models.Services.OaiPublishRDFService.CallXMLConverter(System.String,System.String)">
+            <summary>
+            Obtiene el rdf 
+            </summary>
+            <param name="record">fichero XML</param>
+            <param name="type">configuración del xml</param>
+            <returns></returns>
+        </member>
+        <member name="M:API_CARGA.Models.Services.OaiPublishRDFService.CallGetConfigurationsFiles">
+            <summary>
+            Llama al método ConfigurationsFilesList del servicio Conversor_XML_RDF
+            </summary>
+            <returns>Lista de configuraciones</returns>
         </member>
         <member name="T:API_CARGA.Models.Services.OntologyService">
             <summary>
             Contiene los métodos necesarios para poder cargar una ontologia
             </summary>
         </member>
-        <member name="M:API_CARGA.Models.Services.OntologyService.RemoteFileExists(System.String)">
-            <summary>
-            Comprueba que un fichero exista remotamente
-            </summary>
-            <param name="url">Ulr del fichero</param>
-            <returns></returns>
-        </member>
-        <member name="M:API_CARGA.Models.Services.OntologyService.GetOntology(API_CARGA.Models.Entities.OntologyEnum)">
+        <member name="M:API_CARGA.Models.Services.OntologyService.GetOntology">
             <summary>
             Lee el fichero de la ontologia
             </summary>
-            <param name="ontologyType">Tipo de ontología</param>
             <returns>Devuelve el contenido de la ontologia</returns>
         </member>
-        <member name="M:API_CARGA.Models.Services.OntologyService.SetOntology(Microsoft.AspNetCore.Http.IFormFile,API_CARGA.Models.Entities.OntologyEnum)">
+        <member name="M:API_CARGA.Models.Services.OntologyService.SetOntology(Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
-            Remplaza la ontologia
+            Reemplaza la ontologia
             </summary>
             <param name="newOntology">Nueva ontologia</param>
-            <param name="ontologyType">Tipo de ontologia a sustituir</param>
             <returns></returns>
         </member>
         <member name="T:API_CARGA.Models.Services.RabbitMQMockService">
@@ -1316,27 +1505,72 @@
             </summary>
             <param name="identifier">Identificador del shape a eliminar</param>
         </member>
-        <member name="M:API_CARGA.Models.Utility.SparqlUtility.ValidateRDF(System.String,System.Collections.Generic.List{API_CARGA.Models.Entities.ShapeConfig})">
+        <member name="M:API_CARGA.Models.Utility.SparqlUtility.ValidateRDF(System.String,System.Collections.Generic.List{API_CARGA.Models.Entities.ShapeConfig},VDS.RDF.RohGraph,System.Boolean)">
             <summary>
-            Valida un RDF
+            Valida un RDF con una lista de Shapes configurados
             </summary>
             <param name="pRdfFileContent">XML RDF</param>
             <param name="pShapesConfig">Lista de Shapes de validación</param>
+            <param name="pOntologyGraph">Grafo con la ontología</param>
+            <param name="pApplyOntologyValidation">Aplica las validaciones de la ontología</param>
             <returns>Lista de triples</returns>
         </member>
         <member name="M:API_CARGA.Models.Utility.SparqlUtility.ValidateRDF(System.String,System.String,System.String)">
             <summary>
-            Valida un RDF
+            Valida un RDF con un shape arbitrario
             </summary>
             <param name="pRdfFileContent">XML RDF</param>
             <param name="pValidation">Validación a realizar</param>
-            <param name="pValidatoinFileName">Nombre del fichero de validación</param>
+            <param name="pValidationFileName">Nombre del fichero de validación</param>
             <returns>Lista de triples</returns>
+        </member>
+        <member name="M:API_CARGA.Models.Utility.SparqlUtility.ValidateRDF(System.String,VDS.RDF.RohGraph)">
+            <summary>
+            Valida un RDF con las restriciones de la ontología
+            </summary>
+            <param name="pRdfFileContent">XML RDF</param>
+            <param name="pOntologyGraph">Grafo con la ontología</param>
+            <returns>Lista de triples</returns>
+        </member>
+        <member name="M:API_CARGA.Models.Utility.SparqlUtility.LoadOntology(VDS.RDF.RohGraph,System.String,System.String,System.String)">
+            <summary>
+            Carga una ontología en un SPARQL endpoint
+            </summary>
+            <param name="pOntology">Ontología</param>
+            <param name="pSPARQLEndpoint">Endpoint SPARQL</param>
+            <param name="pQueryParam">Query param</param>
+            <param name="pGraph">Grafo</param>
+        </member>
+        <member name="M:API_CARGA.Models.Utility.SparqlUtility.LoadTriples(System.Collections.Generic.List{System.String},System.String,System.String,System.String)">
+            <summary>
+            Carga los triples en un PARQL endpoint
+            </summary>
+            <param name="pTriples">Triples a inertar</param>
+            <param name="pSPARQLEndpoint">Endpoint SPARQL</param>
+            <param name="pQueryParam">Query param</param>
+            <param name="pGraph">Grafo</param>
+        </member>
+        <member name="M:API_CARGA.Models.Utility.SparqlUtility.GetTriplesFromGraph(VDS.RDF.RohGraph)">
+            <summary>
+            Obtiene los triples de un RDF
+            </summary>
+            <param name="pXMLRDF">XML RDF</param>
+            <returns>Lista de triples</returns>
+        </member>
+        <member name="M:API_CARGA.Models.Utility.SparqlUtility.SplitList``1(System.Collections.Generic.List{``0},System.Int32)">
+            <summary>
+            Divide una lista en N listas
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="pItems">Lista</param>
+            <param name="pSize">Tamaño máximo de las sublistas devueltas</param>
+            <returns>Lista de listas</returns>
         </member>
         <member name="T:API_CARGA.ViewModel.PublishRepositoryModel">
             <summary>
             Clase para pasar datos entre apis
             </summary>
+            
         </member>
         <member name="M:VDS.RDF.RohGraph.GetNextBlankNodeID">
             <summary>

@@ -105,58 +105,66 @@ namespace API_CARGA.Models.Services
                     int totalCount = listIdentifier.Count();
                     foreach (IdentifierOAIPMH identifierOAIPMH in listIdentifier)
                     {
-                        if (!string.IsNullOrEmpty(jobId))
+                        int numExceptions = 0;
+                        bool ok = false;
+                        while (!ok)
                         {
-                            AddProcessingState(identifierOAIPMH.Identifier, identifier, jobId, listIdentifier.IndexOf(identifierOAIPMH), totalCount);
-                        }
-                        if (set == "openaire_cris_orgunits")
-                        {
-                            identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:OrgUnits/");
-                        }
-                        else if (set == "openaire_cris_publications")
-                        {
-                            identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Publications/");
-                        }
-                        else if (set == "openaire_cris_projects")
-                        {
-                            identifierOAIPMH.Identifier=identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Projects/");
-                        }
-                        else if (set == "openaire_cris_products")
-                        {
-                            identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Products/");
-                        }
-                        else if (set == "openaire_cris_persons")
-                        {
-                            identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Persons/");
-                        }
+                            try
+                            {
+                                if (!string.IsNullOrEmpty(jobId))
+                                {
+                                    AddProcessingState(identifierOAIPMH.Identifier, identifier, jobId, listIdentifier.IndexOf(identifierOAIPMH), totalCount);
+                                }
+                                if (set == "openaire_cris_orgunits" && !identifierOAIPMH.Identifier.Contains("OrgUnits/"))
+                                {
+                                    identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:OrgUnits/");
+                                }
+                                else if (set == "openaire_cris_publications" && !identifierOAIPMH.Identifier.Contains("Publications/"))
+                                {
+                                    identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Publications/");
+                                }
+                                else if (set == "openaire_cris_projects" && !identifierOAIPMH.Identifier.Contains("Projects/"))
+                                {
+                                    identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Projects/");
+                                }
+                                else if (set == "openaire_cris_products" && !identifierOAIPMH.Identifier.Contains("Products/"))
+                                {
+                                    identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Products/");
+                                }
+                                else if (set == "openaire_cris_persons" && !identifierOAIPMH.Identifier.Contains("Persons/"))
+                                {
+                                    identifierOAIPMH.Identifier = identifierOAIPMH.Identifier.Replace("oai:metis.ru.nl:", "oai:metis.ru.nl:Persons/");
+                                }
 
-                        string record = CallGetRecord(identifier, metadataformat, identifierOAIPMH.Identifier);
+                                string record = CallGetRecord(identifier, metadataformat, identifierOAIPMH.Identifier);
 
-                        string rdf = "";
+                                string rdf = "";
 
-                        if (metadataformat == "rdf")
-                        {
-                            rdf = record;
-                        }
-                        else
-                        {
-                            rdf = CallXMLConverter(record, metadataformat);
-                        }
-                        try
-                        {
-                            _publishData.CallDataValidate(rdf, identifier, _token);
-                            _publishData.CallDataPublish(rdf, jobId, true, _token);
-                        }
-                        catch (Exception ex)
-                        {
-                            validationException = true;
-                            exception.AppendLine(ex.Message);
-                            throw ex;
-                        }
-                        lastSyncro = identifierOAIPMH;
-                        if (lastSyncro != null)
-                        {
-                            AddSyncro(lastSyncro, set, identifier);
+                                if (metadataformat == "rdf")
+                                {
+                                    rdf = record;
+                                }
+                                else
+                                {
+                                    rdf = CallXMLConverter(record, metadataformat);
+                                }
+
+                                _publishData.CallDataValidate(rdf, identifier, _token);
+                                _publishData.CallDataPublish(rdf, jobId, true, _token);
+
+                                lastSyncro = identifierOAIPMH;
+                                AddSyncro(lastSyncro, set, identifier);
+                                ok = true;
+                            }
+                            catch (Exception ex)
+                            {
+                                ok = false;
+                                numExceptions++;
+                                if (numExceptions >= 10)
+                                {
+                                    throw ex;
+                                }
+                            }
                         }
                     }
                 }
@@ -343,7 +351,6 @@ namespace API_CARGA.Models.Services
         public string CallGranularity(Guid identifierRepo)
         {
             string uri = $"etl/Identify/{identifierRepo}";
-            List<string> listMetadataFormats = new List<string>();
             string xml = _publishData.CallGetApi(uri, _token);
             XDocument respuestaXML = XDocument.Load(new StringReader(xml));
             XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
@@ -368,7 +375,6 @@ namespace API_CARGA.Models.Services
             }
             if (fechaFrom != null)
             {
-                //uri += $"&from={fechaFrom.Value.ToString("u",CultureInfo.InvariantCulture)}";
                 uri += $"&from={fechaFrom}";
             }
             List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
@@ -409,7 +415,10 @@ namespace API_CARGA.Models.Services
                 }
             }
             listIdentifier = listIdentifier.OrderBy(x => x.Fecha).ToList();
-
+            if (!string.IsNullOrEmpty(fechaFrom))
+            {
+                listIdentifier.RemoveAll(x => x.Fecha < DateTime.Parse(fechaFrom));
+            }
             return listIdentifier;
         }
 
