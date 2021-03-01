@@ -20,7 +20,7 @@
  - [Hercules ASIO Modelo de multilingüismo.md](Hercules-ASIO-Modelo-de-multilinguismo.md)
  - [Hercules ASIO Fuentes externas de información para las funciones de descubrimiento.md](Hercules-ASIO-Fuentes-externas-de-informacion-para-las-funciones-de-descubrimiento.md)
  - [Hércules ASIO Evaluación de cumplimiento Linked Data Platform.md](Hercules-ASIO-Evaluacion-de-cumplimiento-Linked-Data-Platform.md)
- - [Hércules ASIO. Especificación de las funciones de descubrimiento.md](Hercules-ASIO-Especificacion-de-las-funciones-de-descubrimiento.md)
+ - [Hércules ASIO Especificación de las funciones de descubrimiento.md](Hercules-ASIO-Especificacion-de-las-funciones-de-descubrimiento.md)
  - [Procedencia-de-datos-externos-Provenance.md](Procedencia-de-datos-externos-Provenance.md)
  - [Benchmark](Benhmark/)
  - FAIR
