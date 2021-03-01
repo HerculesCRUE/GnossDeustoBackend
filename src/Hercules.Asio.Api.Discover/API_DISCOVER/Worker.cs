@@ -11,7 +11,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Diagnostics.CodeAnalysis;
 using Quartz;
-using API_DISCOVER.Models.Logging;
 
 namespace API_DISCOVER
 {

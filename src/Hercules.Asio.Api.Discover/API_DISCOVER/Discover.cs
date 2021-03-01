@@ -233,7 +233,7 @@ namespace API_DISCOVER
                     discoverUtility.ReconciliateBBDD(ref hasChanges, ref reconciliationData, out reconciliationEntitiesProbability, ontologyGraph, ref dataGraph, reasoner, namesScore, discardDissambiguations, discoverCache, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
 
                     //4.- Realizamos la reconciliación con los datos de las integraciones externas
-                    //discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref reconciliationEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
+                    discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref reconciliationEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
 
                     //Eliminamos de las probabilidades aquellos que ya estén reconciliados
                     foreach (string key in reconciliationData.reconciliatedEntityList.Keys)
@@ -313,12 +313,12 @@ namespace API_DISCOVER
                     //TODO urisfactory
                     asioPublication.PublishRDF(pDiscoverResult.dataGraph, pDiscoverResult.ontologyGraph, new KeyValuePair<string, string>("http://graph.um.es/res/agent/discover", "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.discoverLinkData);
 
-                    ////Publicamos en UNIDATA
-                    //AsioPublication asioPublicationUnidata = new AsioPublication(Unidata_SPARQLEndpoint, Unidata_SPARQLQueryParam, Unidata_SPARQLGraph, Unidata_SPARQLUsername, Unidata_SPARQLPassword);
-                    //// Prepara el grafo para su carga en Unidata, para ello coge las URIs de Unidata del SameAs y la aplica a los sujetos y los antiguos sujetos se agregan al SameAs
-                    //RohGraph unidataGraph = AsioPublication.TransformUrisToUnidata(pDiscoverResult.dataGraph, UnidataDomain, UnidataUriTransform);
-                    ////TODO urisfactory
-                    //asioPublicationUnidata.PublishRDF(unidataGraph, pDiscoverResult.ontologyGraph, new KeyValuePair<string, string>("http://graph.um.es/res/agent/discover", "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.discoverLinkData);
+                    //Publicamos en UNIDATA
+                    AsioPublication asioPublicationUnidata = new AsioPublication(Unidata_SPARQLEndpoint, Unidata_SPARQLQueryParam, Unidata_SPARQLGraph, Unidata_SPARQLUsername, Unidata_SPARQLPassword);
+                    // Prepara el grafo para su carga en Unidata, para ello coge las URIs de Unidata del SameAs y la aplica a los sujetos y los antiguos sujetos se agregan al SameAs
+                    RohGraph unidataGraph = AsioPublication.TransformUrisToUnidata(pDiscoverResult.dataGraph, UnidataDomain, UnidataUriTransform);
+                    //TODO urisfactory
+                    asioPublicationUnidata.PublishRDF(unidataGraph, pDiscoverResult.ontologyGraph, new KeyValuePair<string, string>("http://graph.um.es/res/agent/discover", "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.discoverLinkData);
 
 
                     //Lo marcamos como procesado en la BBDD y eliminamos sus metadatos

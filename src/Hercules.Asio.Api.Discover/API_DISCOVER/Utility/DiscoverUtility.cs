@@ -2441,7 +2441,7 @@ namespace API_DISCOVER.Utility
             //De momento lo omitimos, es muy lento y da timeout casi siempre
             //hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationCROSSREF(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone,pCrossrefUserAgent,pMinScore,pMaxScore); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
             hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationPUBMED(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pMinScore, pMaxScore); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
-            //hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationWOS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pWOSAuthorization, pMinScore, pMaxScore); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationWOS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pWOSAuthorization, pMinScore, pMaxScore); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
             hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationRECOLECTA(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pMinScore, pMaxScore); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
             hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationDOAJ(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pMinScore, pMaxScore); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
             hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationDBPEDIA(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
@@ -4762,6 +4762,7 @@ namespace API_DISCOVER.Utility
         /// <returns></returns>
         public List<string> GetPersonList(string pSPARQLEndpoint, string pGraph, string pQueryParam, string pUsername, string pPassword)
         {
+            //TODO +10000
             List<string> listaPersonas = new List<string>();
 
             string consulta = @"SELECT ?s WHERE { ?s a <http://purl.org/roh/mirror/foaf#Person>. }";

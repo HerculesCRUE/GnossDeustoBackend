@@ -86,11 +86,11 @@ namespace API_DISCOVER.Utility
                     string lang = ((LiteralNode)triple.Object).Language;
                     if (datatype != null)
                     {
-                        tripleString += " \"" + ((LiteralNode)triple.Object).Value.Replace("\"", "\\\"").Replace("\n", "\\n") + "\"^^<" + datatype + ">";
+                        tripleString += " \"" + ((LiteralNode)triple.Object).Value.Replace("\\", "\\\\").Replace("\"", "\\\"").Replace("\n", "\\n") + "\"^^<" + datatype + ">";
                     }
                     else
                     {
-                        tripleString += " \"" + ((LiteralNode)triple.Object).Value.Replace("\"", "\\\"").Replace("\n", "\\n") + "\"";
+                        tripleString += " \"" + ((LiteralNode)triple.Object).Value.Replace("\\", "\\\\").Replace("\"", "\\\"").Replace("\n", "\\n") + "\"";
                     }
                     if (!string.IsNullOrEmpty(lang))
                     {
