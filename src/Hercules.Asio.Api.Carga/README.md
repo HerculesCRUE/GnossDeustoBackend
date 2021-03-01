@@ -33,7 +33,7 @@ API CARGA es un servicio web que contienen 4 controladores, utilizados cada uno 
  - syncController: Contiene los procesos necesarios para la ejecución de las sincronizaciones.
  - ValidationController: Contiene los procesos necesarios para la gestión de las validaciones  (creación, modificación, eliminación...). La carpeta [Validaciones](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA/Validaciones) contiene información sobre los [shapes SHACL](https://www.w3.org/TR/shacl/) definidos para validar.
  
-Para una especificación más detallada del servicio se puede consultar la siguiente documentación: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/20200203%20H%C3%A9rcules%20ASIO%20Especificaci%C3%B3n%20de%20funciones%20de%20Carga.md
+Para una especificación más detallada del servicio se puede consultar la siguiente documentación: [Hercules-ASIO-Especificacion-de-funciones-de-Carga.md](../../Docs/Hercules-ASIO-Especificacion-de-funciones-de-Carga.md)
  
 Esta aplicación se encarga de sincronizar los datos de un repositorio OAI-PMH con el RDF Store. Obtiene todas las entidades actualizadas desde la última sincronización, solicita al repositorio OAI-PMH todos sus datos y los inserta en el RDF Store.
 
@@ -54,9 +54,9 @@ El SPARQL Endpoint provisional se encuentra disponible en un servidor de la Univ
 
 http://155.54.239.204:8890/sparql
 
-Hay ejemplos de consultas en el documento [20200325 Hércules ASIO Ejemplos de consultas](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/SPARQL/20200325%20H%C3%A9rcules%20ASIO%20Ejemplos%20de%20consultas%20SPARQL.md)
+Hay ejemplos de consultas en el documento [20200325 Hércules ASIO Ejemplos de consultas](../../Docs/SPARQL/Hercules-ASIO-Ejemplos-de-consultas-SPARQL.md)
 
-Los datos cargados se pueden consultar en una versión preliminar del servidor Linked Data, soportado por [Trifid](https://github.com/zazuko/trifid), desplegado en los servidores de la Universidad de Murcia. Por ejemplo:
+Los datos cargados se pueden consultar en una versión preliminar del servidor Linked Data, soportado por Trifid *Editar Esteban*, desplegado en los servidores de la Universidad de Murcia. Por ejemplo:
 
 http://graph.um.es/res/project/RAYD-A-2002-6237
 
