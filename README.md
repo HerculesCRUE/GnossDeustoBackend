@@ -19,7 +19,7 @@ Hércules ASIO es un proyecto de software libre alojado en dos repositorios púb
  - [GitHub de Infraestructura Ontológica](https://github.com/HerculesCRUE/GnossDeustoOnto). Este repositorio aloja la Red de Ontologías Hércules - ROH y tiene los siguientes documentos principales: 
    - [Tutorial de la Red de Ontologías Hércules (ROH)](https://github.com/HerculesCRUE/GnossDeustoOnto/tree/master/Documentation). Se   trata de una documentación explicativa, generada como primera lectura recomendada. El documento ilustra con diagramas como se relacionan entre sí las entidades principales de ROH. También incluye una tabla por cada entidad, en la que se indican las subclases y propiedades de tipo object y datatype.
    - [ROH Reference Specification](https://github.com/HerculesCRUE/GnossDeustoOnto/blob/master/Documentation/1-%20OntologyDocumentation.pdf). Este documento   detalla, en formato tabular, las subclases y propiedades de tipo  object y datatype de cada concepto de la ontología ROH. 
- - GitHub de  Arquitectura Semántica. Se trata del presente repositorio, que contiene los componentes de software que, junto con el software base de sistemas y bases de datos, constituyen la arquitectura semántica del proyecto ASIO.
+ - **GitHub de  Arquitectura Semántica (Backend SGI)**. Se trata del presente repositorio, que contiene los componentes de software que, junto con el software base de sistemas y bases de datos, constituyen la arquitectura semántica del proyecto ASIO.
 
 ## Desarrollo del Backend SGI
 
