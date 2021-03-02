@@ -290,19 +290,16 @@ Para que nuestro proxy funcione correctamente debemos ejecutar el siguiente coma
 Una vez hecho esto tenemos que hacer un archivo de configuración para redirigir las peticiones a httpd hacia el sitio correcto. Para ello creamos un archivo .conf en /etc/httpd/conf.d con un contenido como este:
 
     <VirtualHost *:80>
-        ServerName pruebasdotnet.gnoss.com
+        
+	ServerName pruebasdotnet.gnoss.com
 	
-	#APIURIS
+    	#APIURIS
     	ProxyPass /uris http://127.0.0.1:5000
     	ProxyPassReverse /uris http://127.0.0.1:5000
 
     	#APICARGA
     	ProxyPass /carga http://127.0.0.1:5100
     	ProxyPassReverse /carga http://127.0.0.1:5100
-
-    	#APIFRONTCARGA
-    	ProxyPass /carga-web http://127.0.0.1:5103
-    	ProxyPassReverse /carga-web http://127.0.0.1:5103
 
     	#APICRON
     	ProxyPass /cron-config http://127.0.0.1:5107
@@ -333,8 +330,12 @@ Una vez hecho esto tenemos que hacer un archivo de configuración para redirigir
     	ProxyPassReverse /clientetoken http://127.0.0.1:5105
 
     	#IDENTITY-SERVER
-    	ProxyPass /identityserver http://127.0.0.1:5108
-    	ProxyPassReverse /identityserver http://127.0.0.1:5108
+    	#ProxyPass /identityserver http://127.0.0.1:5108
+    	#ProxyPassReverse /identityserver http://127.0.0.1:5108
+
+    	#SAML
+    	ProxyPass /loginsir http://127.0.0.1:5101
+	ProxyPassReverse /loginsir http://127.0.0.1:5101
 
     	#UNIDATA
     	ProxyPass /unidata http://127.0.0.1:5106
@@ -343,8 +344,34 @@ Una vez hecho esto tenemos que hacer un archivo de configuración para redirigir
     	#APIGESDOC
     	ProxyPass /documentacion http://127.0.0.1:5109
     	ProxyPassReverse /documentacion http://127.0.0.1:5109
+
+    	#APIGESDOCUNIDATA
+    	ProxyPass /docunidata http://127.0.0.1:5112
+    	ProxyPassReverse /docunidata http://127.0.0.1:5112
+
+    	#BYPASS
+    	ProxyPass /bypass http://127.0.0.1:5111
+    	ProxyPassReverse /bypass http://127.0.0.1:5111
+
+    	#XMLRDFCONVERSOR
+    	ProxyPass /conversor_xml_rdf http://127.0.0.1:5114
+    	ProxyPassReverse /conversor_xml_rdf http://127.0.0.1:5114
 	
     </VirtualHost>
+
+Y añadir al ssl.conf estas líneas:
+
+	#APIFRONTCARGA
+	ProxyPass /carga-web http://127.0.0.1:5103
+	ProxyPassReverse /carga-web http://127.0.0.1:5103
+
+	#BENCHMARK
+	ProxyPass /benchmark http://127.0.0.1:8401
+	ProxyPassReverse /benchmark http://127.0.0.1:8401
+
+	#SPARQL
+	ProxyPass /sparql http://155.54.239.204:8890/sparql
+	ProxyPassReverse /sparql http://155.54.239.204:8890/sparql
 
 Con esta configuración conseguimos que lo que se pida a través del puerto 80 a pruebasdotnet.gnoss.com/uris el proxy lo redirija a localhost:5000 que es donde nuestra aplicación URIS está a la escucha.
 Por último Activamos el servicio HTTPD y lo iniciamos con estos comandos:
