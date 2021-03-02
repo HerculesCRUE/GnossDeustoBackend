@@ -3,13 +3,13 @@
 | Fecha         | 01/10/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Prueba del entorno y carga inicial| 
-|Descripción|Manual de pruebas para la revisión y carga de datos inicial despues del despliegue|
+|Descripción|Manual de pruebas para la revisión y carga de datos inicial despues del despliegue. Entrega parcial de octubre de 2020. Pendiente de actualizar para la entrega final|
 |Versión|0.1|
 |Módulo|Despliegue|
 |Tipo|Manual|
 |Cambios de la Versión|Creación|
 
-# Prueba del entorno y carga inicial
+# Hércules ASIO Backend SGI. Prueba del entorno y carga inicial
 
 Hay que realizar una modificación en el host de la maquina desde la que estemos accediendo añadiendo que el dominio graph.um.es responda de la IP de la maquina dodne hemos instalado el servicio de trifid.
 
