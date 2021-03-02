@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ using CronConfigure.Models.Services;
 using Hangfire;
 using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -32,12 +34,14 @@ namespace CronConfigure
     [ExcludeFromCodeCoverage]
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
+            _env = env;
+        }                
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -81,10 +85,17 @@ namespace CronConfigure
                     InvisibilityTimeout = TimeSpan.FromDays(1)
                 }));
 
-            services.AddAuthentication(options => {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
+            if (_env.IsDevelopment())
+            {
+                services.AddSingleton<IAuthorizationHandler, AllowAnonymous>();
+            }
+            else
+            {
+                services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
                 .AddIdentityServerAuthentication(options =>
                 {
                     options.Authority = authority;
@@ -92,7 +103,8 @@ namespace CronConfigure
                     options.RequireHttpsMetadata = false;
                     options.ApiName = scope;
                 });
-            services.AddAuthorization();
+                services.AddAuthorization();
+            }
             services.AddHangfireServer();
 
             services.AddSwaggerGen(options =>
@@ -185,6 +197,19 @@ namespace CronConfigure
             {
                 endpoints.MapControllers();
             });
+        }
+    }
+
+    public class AllowAnonymous : IAuthorizationHandler
+    {
+        public Task HandleAsync(AuthorizationHandlerContext context)
+        {
+            foreach (IAuthorizationRequirement requirement in context.PendingRequirements.ToList())
+            {
+                context.Succeed(requirement);
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

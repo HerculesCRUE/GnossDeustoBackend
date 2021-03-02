@@ -22,13 +22,13 @@ namespace CronConfigure.Middlewares
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
-        private IConfigurationRoot Configuration { get; set; }
+        private IConfiguration _configuration { get; set; }
         private string _timeStamp;
         private string _LogPath;
-        public ErrorHandlingMiddleware(RequestDelegate next)
+        public ErrorHandlingMiddleware(RequestDelegate next, IConfiguration configuration)
         {
             _next = next;
-
+            _configuration = configuration;
         }
 
         public async Task Invoke(HttpContext context /* other dependencies */)
@@ -52,17 +52,6 @@ namespace CronConfigure.Middlewares
             }
             CreateLoggin(_timeStamp);
             var code = HttpStatusCode.InternalServerError;
-
-            //if (ex is ParametersNotConfiguredException)
-            //{
-            //    code = HttpStatusCode.BadRequest;
-            //    Log.Information($"{ex.Message}\n");
-            //}
-            //else if (ex is FailedLoadConfigJsonException)
-            //{
-            //    code = HttpStatusCode.InternalServerError;
-            //    Log.Information($"{ex.Message}\n");
-            //}
 
             var result = JsonConvert.SerializeObject(new { error = "Internal server error" });
             if (code != HttpStatusCode.InternalServerError)
@@ -111,11 +100,6 @@ namespace CronConfigure.Middlewares
         {
             if (string.IsNullOrEmpty(_LogPath))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 string logPath = "";
                 if (environmentVariables.Contains("LogPath"))
@@ -124,7 +108,7 @@ namespace CronConfigure.Middlewares
                 }
                 else
                 {
-                    logPath = Configuration["LogPath"];
+                    logPath = _configuration["LogPath"];
                 }
                 _LogPath = logPath;
             }

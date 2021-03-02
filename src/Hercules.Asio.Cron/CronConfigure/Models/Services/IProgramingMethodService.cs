@@ -3,6 +3,7 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Interfaz para la programación de tareas
 using Hangfire.Server;
+using Microsoft.Extensions.Configuration;
 using System;
 
 namespace CronConfigure.Models.Services
@@ -43,9 +44,10 @@ namespace CronConfigure.Models.Services
         ///<param name="nombreCron">Nombre de la tarea recurrente</param>
         ///<param name="cronExpression">expresión de recurrencia</param>
         ///<param name="fechaInicio">Fecha en la que se ejecutará la tarea y se activará la tarea recurrente</param>
+        ///<param name="configuration">Configuración</param>
         ///<param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
         ///<param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
-        public void ProgramPublishRepositoryRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime fechaInicio, string set = null, string codigoObjeto = null);
+        public void ProgramPublishRepositoryRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime fechaInicio, IConfiguration configuration, string set = null, string codigoObjeto = null);
 
 
     }

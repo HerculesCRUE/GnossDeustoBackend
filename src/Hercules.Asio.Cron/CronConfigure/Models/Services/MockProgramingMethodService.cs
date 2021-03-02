@@ -3,6 +3,7 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase que sirve de mock del ProgramingMethodService para la realización de los test
 using Hangfire.Server;
+using Microsoft.Extensions.Configuration;
 using System;
 
 namespace CronConfigure.Models.Services
@@ -17,7 +18,7 @@ namespace CronConfigure.Models.Services
             return "";
         }
 
-        public void ProgramPublishRepositoryRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime fechaInicio, string set = null, string codigoObjeto = null)
+        public void ProgramPublishRepositoryRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime fechaInicio, IConfiguration configuration, string set = null, string codigoObjeto = null)
         {
            
         }

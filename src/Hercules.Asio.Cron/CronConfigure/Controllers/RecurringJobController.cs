@@ -7,6 +7,7 @@ using CronConfigure.Models.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using NCrontab;
 
 namespace CronConfigure.Controllers
@@ -23,12 +24,14 @@ namespace CronConfigure.Controllers
         public ICronApiService _cronApiService;
         private IProgramingMethodService _programingMethodsService;
         private IRepositoryCronService _repositoryCronService;
+        private IConfiguration _configuration { get; set; }
 
-        public RecurringJobController(ICronApiService cronApiService, IProgramingMethodService programingMethodsService, IRepositoryCronService repositoryCronService)
+        public RecurringJobController(ICronApiService cronApiService, IProgramingMethodService programingMethodsService, IRepositoryCronService repositoryCronService, IConfiguration configuration)
         {
             _cronApiService = cronApiService;
             _programingMethodsService = programingMethodsService;
             _repositoryCronService = repositoryCronService;
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -87,7 +90,7 @@ namespace CronConfigure.Controllers
                 var correct = CrontabSchedule.TryParse(cron_expression);
                 if (correct != null)
                 {
-                    _programingMethodsService.ProgramPublishRepositoryRecurringJob(idRep, nombre_job, cron_expression, fechaInicio,set,codigo_objeto);
+                    _programingMethodsService.ProgramPublishRepositoryRecurringJob(idRep, nombre_job, cron_expression, fechaInicio, _configuration, set,codigo_objeto);
                 }
                 else
                 {

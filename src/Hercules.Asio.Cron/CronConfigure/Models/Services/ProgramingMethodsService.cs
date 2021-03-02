@@ -7,10 +7,15 @@ using CronConfigure.Models.Entitties;
 using Hangfire;
 using Hangfire.Server;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Serilog;
 using System;
+using System.Collections;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 
 namespace CronConfigure.Models.Services
@@ -29,6 +34,7 @@ namespace CronConfigure.Models.Services
         {
             _serviceApi = serviceApi;
             _context = context;
+            
             if (tokenService != null)
             {
                 _token = tokenService.CallTokenCarga();
@@ -136,11 +142,12 @@ namespace CronConfigure.Models.Services
         ///<param name="idRepository">identificador del repositorio a sincronizar</param>
         ///<param name="nombreCron">Nombre de la tarea recurrente</param>
         ///<param name="cronExpression">expresión de recurrencia</param>
+        ///<param name="configuration">Configuración</param>
         ///<param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
         ///<param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
-        public static void ProgramRecurringJob(Guid idRepository, string nombreCron, string cronExpression, string set = null, string codigoObjeto = null)
+        public static void ProgramRecurringJob(Guid idRepository, string nombreCron, string cronExpression, IConfiguration configuration, string set = null, string codigoObjeto = null)
         {
-            ConfigUrlService serviceUrl = new ConfigUrlService();
+            ConfigUrlService serviceUrl = new ConfigUrlService(configuration);
             CallApiService serviceApi = new CallApiService(serviceUrl);
             ProgramingMethodsService service = new ProgramingMethodsService(serviceApi, null, null);
 
@@ -175,11 +182,12 @@ namespace CronConfigure.Models.Services
         ///<param name="nombreCron">Nombre de la tarea recurrente</param>
         ///<param name="cronExpression">expresión de recurrencia</param>
         ///<param name="fechaInicio">Fecha en la que se ejecutará la tarea y se activará la tarea recurrente</param>
+        ///<param name="configuration">COnfiguración</param>
         ///<param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
         ///<param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
-        public void ProgramPublishRepositoryRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime fechaInicio, string set = null, string codigoObjeto = null)
+        public void ProgramPublishRepositoryRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime fechaInicio, IConfiguration configuration, string set = null, string codigoObjeto = null)
         {
-            string id = BackgroundJob.Schedule(() => ProgramRecurringJob(idRepository, nombreCron, cronExpression, set, codigoObjeto), fechaInicio);
+            string id = BackgroundJob.Schedule(() => ProgramRecurringJob(idRepository, nombreCron, cronExpression, configuration, set, codigoObjeto), fechaInicio);
             JobRepository jobRepository = new JobRepository()
             {
                 IdJob = $"{id}_{nombreCron}_{cronExpression}",

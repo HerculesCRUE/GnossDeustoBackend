@@ -85,7 +85,7 @@ namespace XUnitTestProject
         {
             ICronApiService cron = new MockCronApiService();
             IProgramingMethodService methodService = new MockProgramingMethodService();
-            RecurringJobController controller = new RecurringJobController(cron, methodService, null);
+            RecurringJobController controller = new RecurringJobController(cron, methodService, null,null);
             var result = controller.AddExecution(Guid.NewGuid().ToString(),"prueba_job", "07/05/2022 12:36", "*/15 * * * *", "07/05/2001 12:36");
             if (result is BadRequestObjectResult)
             {
@@ -102,7 +102,7 @@ namespace XUnitTestProject
         {
             ICronApiService cron = new MockCronApiService();
             IProgramingMethodService methodService = new MockProgramingMethodService();
-            RecurringJobController controller = new RecurringJobController(cron, methodService, null);
+            RecurringJobController controller = new RecurringJobController(cron, methodService, null, null);
             var result = controller.AddExecution(Guid.NewGuid().ToString(), "prueba_job", "07/05/2022 12:36", "*/15 * * *", "07/05/2001 12:36");
             if (result is BadRequestObjectResult)
             {
@@ -119,7 +119,7 @@ namespace XUnitTestProject
         {
             ICronApiService cron = new MockCronApiService();
             IProgramingMethodService methodService = new MockProgramingMethodService();
-            RecurringJobController controller = new RecurringJobController(cron, methodService, null);
+            RecurringJobController controller = new RecurringJobController(cron, methodService, null, null);
             var result = controller.AddExecution(Guid.NewGuid().ToString(), "0", "07/05/2022 12:36", " */ 15 * * * *", "07/05/2001 12:36");
             if (result is BadRequestObjectResult)
             {

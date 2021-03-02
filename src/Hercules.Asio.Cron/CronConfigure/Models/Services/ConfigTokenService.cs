@@ -17,20 +17,16 @@ namespace CronConfigure.Models.Services
     /// </summary> 
     public class ConfigTokenService
     {
-        public IConfigurationRoot Configuration { get; set; }
         public string Authority { get; set; }
         public string GrantType { get; set; }
         public string Scope { get; set; }
         public string ScopeCron { get; set; }
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }
-        public ConfigTokenService()
+        private IConfiguration _configuration { get; set; }
+        public ConfigTokenService(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-            Configuration = builder.Build();
+            _configuration = configuration;
         }
         /// <summary>
         /// obtiene el endpoint para la llamada de obtención del token
@@ -47,7 +43,7 @@ namespace CronConfigure.Models.Services
                 }
                 else
                 {
-                    authority = Configuration["AuthorityGetToken"];
+                    authority = _configuration["AuthorityGetToken"];
                 }
 
                 Authority = authority;
@@ -69,7 +65,7 @@ namespace CronConfigure.Models.Services
                 }
                 else
                 {
-                    grantType = Configuration["GrantType"];
+                    grantType = _configuration["GrantType"];
                 }
 
                 GrantType = grantType;
@@ -92,7 +88,7 @@ namespace CronConfigure.Models.Services
                 }
                 else
                 {
-                    scope = Configuration["ScopeCarga"];
+                    scope = _configuration["ScopeCarga"];
                 }
 
                 Scope = scope;
@@ -115,7 +111,7 @@ namespace CronConfigure.Models.Services
                 }
                 else
                 {
-                    clientId = Configuration["ClientId"];
+                    clientId = _configuration["ClientId"];
                 }
 
                 ClientId = clientId;
@@ -138,7 +134,7 @@ namespace CronConfigure.Models.Services
                 }
                 else
                 {
-                    clientSecret = Configuration["ClientSecret"];
+                    clientSecret = _configuration["ClientSecret"];
                 }
 
                 ClientSecret = clientSecret;

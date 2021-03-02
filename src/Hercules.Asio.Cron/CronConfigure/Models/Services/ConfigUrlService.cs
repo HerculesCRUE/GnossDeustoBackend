@@ -13,8 +13,14 @@ namespace CronConfigure.Models.Services
     /// </summary>
     public class ConfigUrlService
     {
-        public IConfigurationRoot Configuration { get; set; }
+        private IConfiguration _configuration { get; set; }
         public string Url { get; set; }
+
+        public ConfigUrlService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         ///<summary>
         ///Método que obtiene la ConfigUrl configurada
         ///</summary>
@@ -22,11 +28,6 @@ namespace CronConfigure.Models.Services
         {
             if (string.IsNullOrEmpty(Url))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 string connectionString = "";
                 if (environmentVariables.Contains("ConfigUrl"))
@@ -35,7 +36,7 @@ namespace CronConfigure.Models.Services
                 }
                 else
                 {
-                    connectionString = Configuration["ConfigUrl"];
+                    connectionString = _configuration["ConfigUrl"];
                 }
                 Url = connectionString;
             }
