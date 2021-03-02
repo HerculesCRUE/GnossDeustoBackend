@@ -117,55 +117,27 @@ Y vemos como han aplicado correctamente estos permisos.
 Ya tenemos RabbitMQ listo para trabajar en nuestro entorno.
 
 
-
-
 ## Despliegue de los servicios
 
-Este es el listado de imágenes docker de las aplicaciones incluidas en GnossDeustoBackend:
+Para simplificar el despliegue de los servicios, hemos creado un script que debemos descargar en nuestra máquina. Partiendo desde la home del usurio (ej. /home/usuario/).
 
-- [FrontEndCarga](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/FrontEndCarga "FrontEndCarga") - Interfaz web para la parte de Repository y Validation del API_CARGA: http://herc-as-front-desa.atica.um.es/docs/apifrontcarga.tar.gz
- - [UrisFactory](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/UrisFactory "UrisFactory") - Servicio que genera las uris de los recursos: http://herc-as-front-desa.atica.um.es/docs/apiuris.tar.gz
- - [API_CARGA](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA "API_CARGA") - Servicio web que realiza las tareas de carga/configuración: http://herc-as-front-desa.atica.um.es/docs/apicarga.tar.gz
- - [API_IDENTITY](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/IdentityServerHecules "API_IDENTITY") - 
-API que proporciona los tokens de acceso para las diferntes APIs securizadas: http://herc-as-front-desa.atica.um.es/docs/apiidentity.tar.gz
- - [API_UNIDATA](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Unidata/Api_Unidata "API_UNIDATA") - 
-API que publica los RDF en el nodo central unidata: http://herc-as-front-desa.atica.um.es/docs/apiunidata.tar.gz
- - [CronConfigure](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/CronConfigure) - Servicio Web que realiza la creación de tareas para la sincronización de un repositorio: http://herc-as-front-desa.atica.um.es/docs/apicron.tar.gz
- - [OAI_PMH_CVN](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/OAI_PMH_CVN "OAI_PMH_CVN") - Servicio OAI-PMH para la obtención de invstigadores de la Universidad de Murcia: http://herc-as-front-desa.atica.um.es/docs/apioaipmh.tar.gz
- - [OAI_PMH_XML](https://github.com/HerculesCRUE/oai-pmh "OAI_PMH_XML") - sirve XML ubicados dentro del propio servicio: http://herc-as-front-desa.atica.um.es/docs/apioaipmhxml.tar.gz
- - [cvn](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/cvn) - Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH: http://herc-as-front-desa.atica.um.es/docs/apicvn.tar.gz
-- [Bridge](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/fair/bridge) - Bridge para métricas fair: http://herc-as-front-desa.atica.um.es/docs/apibridge.tar.gz
-- [BrideSwagger](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/fair/bridge) - Interfaz swagger para el bridge: http://herc-as-front-desa.atica.um.es/docs/bridgeswagger.tar.gz
-- [GestorDocumentacion](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/GestorDocumentacion) - Interfaz para la gestion de la documentación: http://herc-as-front-desa.atica.um.es/docs/apigesdoc.tar.gz
-- [API_DISCOVER](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_DISCOVER) - Aplica el descubrimiento de los RDFs y los publica en virtuoso.
-: http://herc-as-front-desa.atica.um.es/docs/apidiscover.tar.gz
-- [Linked_Data_Server](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Linked_Data_Server "Linked_Data_Server") - Aplica el descubrimiento de los RDFs y los publica en virtuoso.
-: http://herc-as-front-desa.atica.um.es/docs/apidiscover.tar.gz
-
-
-Para simplificar el despliegue de estos servicios tenemos que hacer un directorio en el home del usuario que se llame por ejemplo "Servicios" yluego entramos en el.
-
-	mkdir servicios
-	cd servicios
-
-Una vez en el directorio "Servicios" nos descargamos el script que descarga las imágenes para posteriormente cargarlas en Docker.
+	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios/actualizar.sh
 	
-	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios/carga_imagenes.sh
-	
-Le damos permisos de ejecución y lo ejecutamos:
+Este escript clonará los repositorios necesarios y luego generará las imágenes docker automáticamente. Le debemos dar permisos de ejecución.
 
-	chmod +x carga_imagenes.sh
-	./carga_imagenes.sh
+	chmod +x actualizar.sh
 
-Una vez cargadas las imágenes en este mismo directorio nos bajamos el yml de los servicios.
-	
+Depués creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock1 porque en el script actualizar.sh así se llama papero podemos jugar con estos valores. Después lo descargamos.
+
+	mkdir dock1
+	cd dock1
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios/docker-compose.yml
 	
-Antes de lentar los servicios debemos editar este archivo y reemplezar "ip_de_nuestra_maquina" por la ip de la máquina donde estemos levantando los servicios. Asi todos los servicios se podran comunicar conrrectamente entre ellos.	
+Antes de lentar los servicios debemos editar este archivo y reemplezar "herc-as-front-desa.atica.um.es" por la ip de la máquina donde estemos levantando los servicios. Asi todos los servicios se podran comunicar conrrectamente entre ellos.	
 
-Con la ip ajustada ya podemos deplegar el docker-compose como de costumbre con este comando:
+Con la ip ajustada ya podemos ejecutar script que nos prepara el entorno.
 
-	docker-compose up -d
+	./actualizar.sh
 
 Ahora si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz web para poder hacer cargas.
 
