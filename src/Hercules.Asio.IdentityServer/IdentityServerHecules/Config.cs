@@ -22,6 +22,9 @@ namespace IdentityServerHecules
         {
             return new List<Client>
         {
+                //ClientId es el parámetro del servicio que solicita acceso 'client_id'
+                //ClientSecrets es el parámetro del servicio que solicita acceso 'client_secret'
+                //AllowedScopes son los scopes a los que se le da acceso
             new Client
             {
                 ClientId = "client",
@@ -32,7 +35,6 @@ namespace IdentityServerHecules
                 },
                 AllowedScopes = {"api1"},
                 AccessTokenLifetime = 86400
-                //AccessTokenType = AccessTokenType.Reference
             },
             new Client
             {
@@ -42,9 +44,8 @@ namespace IdentityServerHecules
                 {
                     new Secret("secret".Sha256())
                 },
-                AllowedScopes = {"apiCarga"},
+                AllowedScopes = {"apiCarga","apiConversor"},
                 AccessTokenLifetime = 86400
-                //AccessTokenType = AccessTokenType.Reference
             },
             new Client
             {
@@ -56,7 +57,6 @@ namespace IdentityServerHecules
                 },
                 AllowedScopes = {"apiCron"},
                 AccessTokenLifetime = 86400
-                //AccessTokenType = AccessTokenType.Reference
             }
             ,
             new Client
@@ -69,7 +69,6 @@ namespace IdentityServerHecules
                 },
                 AllowedScopes = {"apiCron", "apiCarga", "apiUrisFactory", "apiGestorDocumentacion"},
                 AccessTokenLifetime = 86400
-                //AccessTokenType = AccessTokenType.Reference
             },
             new Client
             {
@@ -81,7 +80,6 @@ namespace IdentityServerHecules
                 },
                 AllowedScopes = { "apiUrisFactory"},
                 AccessTokenLifetime = 86400
-                //AccessTokenType = AccessTokenType.Reference
             }
             ,
             new Client
@@ -94,7 +92,6 @@ namespace IdentityServerHecules
                 },
                 AllowedScopes = { "apiOAIPMH"},
                 AccessTokenLifetime = 86400
-                //AccessTokenType = AccessTokenType.Reference
             }
             ,
             new Client
