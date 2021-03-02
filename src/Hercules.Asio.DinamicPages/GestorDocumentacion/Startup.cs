@@ -13,11 +13,13 @@ using GestorDocumentacion.Middlewares;
 using GestorDocumentacion.Models;
 using GestorDocumentacion.Models.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,12 +34,14 @@ namespace GestorDocumentacion
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -64,23 +68,32 @@ namespace GestorDocumentacion
                 scope = Configuration["Scope"];
             }
 
-            services.AddAuthentication(options =>
+            if (_env.IsDevelopment())
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-               .AddIdentityServerAuthentication(options =>
-               {
-                   options.Authority = authority;
-                   options.RequireHttpsMetadata = false;
-                   options.ApiName = scope;
-               });
-            services.AddAuthorization();
+                services.AddSingleton<IAuthorizationHandler, AllowAnonymous>();
+            }
+            else
+            {
+                services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                }).AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = authority;
+                    options.RequireHttpsMetadata = false;
+                    options.ApiName = scope;
+                });
+                services.AddAuthorization();
+            }
 
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Gestor documentacion", Version = "v1" });
-                options.IncludeXmlComments(string.Format(@"{0}comments.xml", System.AppDomain.CurrentDomain.BaseDirectory));
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
+                options.ExampleFilters();
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
@@ -93,6 +106,7 @@ namespace GestorDocumentacion
                 options.OperationFilter<SecurityRequirementsOperationFilter>();
             });
 
+            services.AddSwaggerExamples();
 
             services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
             {
@@ -154,6 +168,18 @@ namespace GestorDocumentacion
             {
                 endpoints.MapControllers();
             });
+        }
+    }
+    public class AllowAnonymous : IAuthorizationHandler
+    {
+        public Task HandleAsync(AuthorizationHandlerContext context)
+        {
+            foreach (IAuthorizationRequirement requirement in context.PendingRequirements.ToList())
+            {
+                context.Succeed(requirement);
+            }
+
+            return Task.CompletedTask;
         }
     }
 }
