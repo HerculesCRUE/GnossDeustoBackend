@@ -67,7 +67,7 @@ namespace IdentityServerHecules
                 {
                     new Secret("master".Sha256())
                 },
-                AllowedScopes = {"apiCron", "apiCarga","apiUrisFactory","apiGestorDocumentacion"},
+                AllowedScopes = {"apiCron", "apiCarga", "apiUrisFactory", "apiGestorDocumentacion"},
                 AccessTokenLifetime = 86400
                 //AccessTokenType = AccessTokenType.Reference
             },
@@ -145,6 +145,18 @@ namespace IdentityServerHecules
                 AllowedScopes = {"apiCarga"},
                 AccessTokenLifetime = 86400
                 //AccessTokenType = AccessTokenType.Reference
+            },
+            new Client
+            {
+                ClientId = "conversor",
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                ClientSecrets =
+                {
+                    new Secret("secretConversor".Sha256())
+                },
+                AllowedScopes = {"apiConversor", "apiCarga"},
+                AccessTokenLifetime = 86400,
+                //AccessTokenType = AccessTokenType.Reference
             }
         };
         }
@@ -154,7 +166,7 @@ namespace IdentityServerHecules
         {
             return new List<ApiResource>
         {
-            new ApiResource("api1", "My Api"),new ApiResource("apiCarga", "My ApiCarga"),new ApiResource("apiCron", "My ApiCron"),new ApiResource("apiUrisFactory", "My ApiUrisFactory"),new ApiResource("apiOAIPMH", "My apiOAIPMH"),new ApiResource("apiUnidata", "My apiUnidata"),new ApiResource("apiGestorDocumentacion", "My apiDocumentacion")
+            new ApiResource("api1", "My Api"),new ApiResource("apiCarga", "My ApiCarga"),new ApiResource("apiCron", "My ApiCron"),new ApiResource("apiUrisFactory", "My ApiUrisFactory"),new ApiResource("apiOAIPMH", "My apiOAIPMH"),new ApiResource("apiUnidata", "My apiUnidata"),new ApiResource("apiGestorDocumentacion", "My apiDocumentacion"),new ApiResource("apiConversor", "My apiConversor")
         };
         }
     }
