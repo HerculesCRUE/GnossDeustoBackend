@@ -333,10 +333,6 @@ Una vez hecho esto tenemos que hacer un archivo de configuración para redirigir
     	#ProxyPass /identityserver http://127.0.0.1:5108
     	#ProxyPassReverse /identityserver http://127.0.0.1:5108
 
-    	#SAML
-    	ProxyPass /loginsir http://127.0.0.1:5101
-	ProxyPassReverse /loginsir http://127.0.0.1:5101
-
     	#UNIDATA
     	ProxyPass /unidata http://127.0.0.1:5106
     	ProxyPassReverse /unidata http://127.0.0.1:5106
