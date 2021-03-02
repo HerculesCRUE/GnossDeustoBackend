@@ -1,0 +1,138 @@
+﻿@model ApiCargaWebInterface.ViewModels.PublishRepositoryModel
+@{
+
+    ViewData["Title"] = "Publish";
+
+    ViewData["BodyClass"] = "formulario";
+}
+    <div class="row">
+        <div class="col col-12 col-lg-12 col-contenido">
+            <div class="wrapCol">
+                @if (!string.IsNullOrEmpty(Model.Result))
+                {
+                    <p>@Model.Result </p>
+                }
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <form asp-action="GetRDF" method="get">
+                                <div class="fieldset fieldset01">
+                                    <fieldset class="mediumLabels">
+                                        <h1>Obtener rdf</h1>
+                                        <div class="fieldsetContent">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <div class="form-group">
+                                                <label asp-for="Id" class="control-label"></label>
+                                                <input asp-for="Id" class="form-control" />
+                                                <span asp-validation-for="Id" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Type" class="control-label"></label>
+                                                <input asp-for="Type" class="form-control" />
+                                                <span asp-validation-for="Type" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group" hidden>
+                                                <label asp-for="RepositoryId" class="control-label"></label>
+                                                <input asp-for="RepositoryId" class="form-control" readonly />
+                                                <span asp-validation-for="RepositoryId" class="text-danger"></span>
+                                            </div>
+                                            <div class="fieldset actionButtons fieldset03">
+                                                <fieldset>
+                                                    <p>
+                                                        <input class="submit principal" type="submit" value="Obtener rdf">
+                                                    </p>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <form asp-action="ValidateRdf" method="post" enctype="multipart/form-data">
+                                <div class="fieldset fieldset01">
+                                    <fieldset class="mediumLabels">
+                                        <h1>Validar un RDF</h1>
+                                        <div class="fieldsetContent">
+                                            <div class="form-group">
+                                                <div class="form-group" hidden>
+                                                    <label asp-for="RepositoryId" class="control-label"></label>
+                                                    <input asp-for="RepositoryId" class="form-control" readonly />
+                                                    <span asp-validation-for="RepositoryId" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="rdfToValidate" class="control-label">RDF a validar</label>
+                                                    <input type="file" for="rdfToValidate" class="form-control" id="rdfToValidate" name="rdfToValidate" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="validationRDF" class="control-label">RDF de validación</label>
+                                                    <input type="file" for="validationRDF" class="form-control" id="validationRDF" name="validationRDF" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <h6>Elige de entre los shapes configurados en el repositorio los que quieres usar para esta validación</h6>
+                                                        @foreach (var shape in Model.RepositoryShapes)
+                                                        {
+                                                            <input type="checkbox" id="@shape.Name" name="shapesList" value="@shape.ShapeConfigID">
+                                                            <label for="@shape.Name">@shape.Name</label>
+                                                            <br />
+                                                        }
+                                                </div>
+                                            </div>
+                                            <div class="fieldset actionButtons fieldset03">
+                                                <fieldset>
+                                                    <p>
+                                                        <input class="submit principal" type="submit" value="validar RDF">
+                                                    </p>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-text"></p>
+                            <form asp-action="PublishRdf" method="post" enctype="multipart/form-data">
+                                <div class="fieldset fieldset01">
+                                    <fieldset class="mediumLabels">
+                                        <h1>Publicar un RDF</h1>
+                                        <div class="fieldsetContent">
+                                            <div class="form-group">
+                                                <div class="form-group" hiddden>
+                                                    <label asp-for="RepositoryId" class="control-label"></label>
+                                                    <input asp-for="RepositoryId" class="form-control" readonly />
+                                                    <span asp-validation-for="RepositoryId" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="rdfPublish" class="control-label">RDF a publicar</label>
+                                                    <input type="file" for="rdfPublish" class="form-control" id="rdfPublish" name="rdfPublish" />
+                                                </div>
+                                            </div>
+                                            <div class="fieldset actionButtons fieldset03">
+                                                <fieldset>
+                                                    <p>
+                                                        <input class="submit principal" type="submit" value="Publicar RDF">
+                                                    </p>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

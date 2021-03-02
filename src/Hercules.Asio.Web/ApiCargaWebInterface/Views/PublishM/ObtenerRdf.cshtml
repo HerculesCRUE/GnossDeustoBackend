@@ -1,0 +1,47 @@
+﻿@model ApiCargaWebInterface.ViewModels.PublishRepositoryModel
+@{
+
+    ViewData["Title"] = "Obtener RDF";
+
+    ViewData["BodyClass"] = "formulario";
+}
+
+    <div class="row">
+        <div class="col col-12 col-lg-12 col-contenido">
+            <div class="wrapCol">
+                <form asp-action="GetRDF" method="get">
+                    <div class="fieldset fieldset01">
+                        <fieldset class="mediumLabels">
+                            <h1>Obtener rdf</h1>
+                            <div class="fieldsetContent">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="Id" class="control-label"></label>
+                                    <input asp-for="Id" class="form-control" />
+                                    <span asp-validation-for="Id" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Type" class="control-label"></label>
+                                    <input asp-for="Type" class="form-control" />
+                                    <span asp-validation-for="Type" class="text-danger"></span>
+                                </div>
+                                <div class="form-group" hidden>
+                                    <label asp-for="RepositoryId" class="control-label"></label>
+                                    <input asp-for="RepositoryId" class="form-control" readonly />
+                                    <span asp-validation-for="RepositoryId" class="text-danger"></span>
+                                </div>
+                                <div class="fieldset actionButtons fieldset03">
+                                    <fieldset>
+                                        <p>
+                                            <input class="submit principal" type="submit" value="Obtener rdf">
+                                        </p>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </form>
+                <a href="@Url.Action("ValidarRdf", new {repository = Model.RepositoryId })"> Validar RDF --></a>
+            </div>
+        </div>
+    </div>

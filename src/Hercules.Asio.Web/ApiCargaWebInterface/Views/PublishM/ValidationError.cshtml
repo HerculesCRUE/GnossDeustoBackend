@@ -1,0 +1,53 @@
+﻿@model ApiCargaWebInterface.ViewModels.ShapeReportModel
+
+@{
+    ViewData["Title"] = "Error de validación";
+    ViewData["BodyClass"] = "fichaRecurso";
+}
+    <div class="row">
+        <div class="col col-12 col-lg-12 col-contenido">
+            <div class="wrapCol">
+                <div class="header-resource">
+                    <div class="h1-container">
+                        <h1>ValidationError</h1>
+                    </div>
+                </div>
+                <div class="contenido">
+                    <div class="grupo grupo-descripcion">
+                        <div class="severity">
+                            <p class="titulo">Mayor Severidad</p>
+                            <p>@Model.severity</p>
+                        </div>
+                        <div class="conforms">
+                            <p class="titulo">Estado de la validación</p>
+                            <p>@Model.conforms</p>
+                        </div>
+                        
+                        <div class="results">
+                            @foreach (var result in Model.results)
+                            {
+                                <hr />
+                                <div class="result">
+                                    <p class="titulo">Mensaje</p>
+                                    <p>@result.message</p>
+                                    <p class="titulo">Path</p>
+                                    <p>@result.resultPath</p>
+                                    <p class="titulo">Severity</p>
+                                    <p>@result.severity</p>
+                                    <p class="titulo">Nombre del shape</p>
+                                    <p>@result.shapeName</p>
+                                    <p class="titulo">Identificador de shape</p>
+                                    <p>@result.shapeID</p>
+                                    <p class="titulo">fuente del shape</p>
+                                    <p>@result.sourceShape</p>
+                                    <p class="titulo">Nodo</p>
+                                    <p>@result.focusNode</p>
+                                </div>
+                                <br />
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
