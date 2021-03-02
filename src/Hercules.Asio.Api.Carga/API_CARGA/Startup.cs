@@ -5,14 +5,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Net;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 using API_CARGA.Middlewares;
 using API_CARGA.ModelExamples;
 using API_CARGA.Models;
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
+using Hercules.Asio.Api.Carga.Models.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -31,12 +35,15 @@ namespace PRH
     [ExcludeFromCodeCoverage]
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+        private IConfiguration _configuration { get; }
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            _configuration = configuration;
+            _env = env;
         }
 
-        public IConfiguration Configuration { get; }
         //<summary>
         // This method gets called by the runtime. Use this method to add services to the container.
         //</summary>
@@ -50,7 +57,7 @@ namespace PRH
             }
             else
             {
-                authority = Configuration["Authority"];
+                authority = _configuration["Authority"];
             }
             string scope = "";
             if (environmentVariables.Contains("ScopeCarga"))
@@ -59,25 +66,34 @@ namespace PRH
             }
             else
             {
-                scope = Configuration["ScopeCarga"];
+                scope = _configuration["ScopeCarga"];
             }
             services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 options.JsonSerializerOptions.IgnoreNullValues=true;
             });
-            services.AddAuthentication(options => {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
+
+            if (_env.IsDevelopment())
+            {
+                services.AddSingleton<IAuthorizationHandler, AllowAnonymous>();
+            }
+            else
+            {
+                services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
                 .AddIdentityServerAuthentication(options =>
                 {
                     options.Authority = authority;
-                    //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
                     options.RequireHttpsMetadata = false;
                     options.ApiName = scope;
                 });
-            services.AddAuthorization();
+                services.AddAuthorization();
+            }
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API de carga", Version = "v1",Description= "API de carga" });
@@ -121,7 +137,7 @@ namespace PRH
                 }
                 else
                 {
-                    opt.UseNpgsql(Configuration.GetConnectionString("PostgreConnectionmigration"));
+                    opt.UseNpgsql(_configuration.GetConnectionString("PostgreConnectionmigration"));
                 }
                 
 
@@ -145,7 +161,7 @@ namespace PRH
             }
             else
             {
-                services.Configure<RabbitMQInfo>(Configuration.GetSection("RabbitMQ"));
+                services.Configure<RabbitMQInfo>(_configuration.GetSection("RabbitMQ"));
             }
             
             //services.AddSingleton<RabbitMQService>();
@@ -162,9 +178,9 @@ namespace PRH
             services.AddScoped<ICallService, CallApiService>();
             services.AddScoped(typeof(ConfigTokenService));
             services.AddScoped(typeof(CallTokenService));
-            services.AddScoped(typeof(CallApiUnidata));
             services.AddScoped(typeof(CallApiService));
-            services.AddScoped(typeof(CallOAIPMH)); 
+            services.AddScoped(typeof(CallOAIPMH));
+            services.AddScoped(typeof(CallConversor));
             //services.AddSingleton<ISyncConfigService, SyncConfigMockService>();
 
         }
@@ -207,6 +223,18 @@ namespace PRH
             {
                 endpoints.MapControllers();
             });
+        }
+    }
+    public class AllowAnonymous : IAuthorizationHandler
+    {
+        public Task HandleAsync(AuthorizationHandlerContext context)
+        {
+            foreach (IAuthorizationRequirement requirement in context.PendingRequirements.ToList())
+            {
+                context.Succeed(requirement);
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

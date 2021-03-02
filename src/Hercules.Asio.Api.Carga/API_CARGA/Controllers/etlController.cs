@@ -5,6 +5,7 @@
 using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
 using API_CARGA.Models.Utility;
+using Hercules.Asio.Api.Carga.Models.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,16 +34,18 @@ namespace API_CARGA.Controllers
         private IShapesConfigService _shapeConfigService;
         readonly ConfigSparql _configSparql;
         readonly CallOAIPMH _callOAIPMH;
+        readonly CallConversor _callConversor;
         readonly ConfigUrlService _configUrlService;
         readonly IRabbitMQService _amqpService;
 
-        public etlController(IDiscoverItemService iDiscoverItemService, IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallOAIPMH callOAIPMH, ConfigUrlService configUrlService, IRabbitMQService amqpService)
+        public etlController(IDiscoverItemService iDiscoverItemService, IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallOAIPMH callOAIPMH, CallConversor callConversor, ConfigUrlService configUrlService, IRabbitMQService amqpService)
         {
             _discoverItemService = iDiscoverItemService;
             _repositoriesConfigService = iRepositoriesConfigService;
             _shapeConfigService = iShapeConfigService;
             _configSparql = configSparql;
             _callOAIPMH = callOAIPMH;
+            _callConversor = callConversor;
             _configUrlService = configUrlService;
             _amqpService = amqpService;
         }

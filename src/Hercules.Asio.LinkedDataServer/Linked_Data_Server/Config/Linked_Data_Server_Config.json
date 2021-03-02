@@ -9,6 +9,21 @@
           "query": "select distinct ?ID ?Nombre ?RdfType where { {?ID <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?lista ?p <{ENTITY_ID}>.}UNION{?ID <http://purl.org/roh#correspondingAuthor> <{ENTITY_ID}>.} ?ID <http://purl.org/roh#title> ?Nombre. ?ID a ?RdfType. } "
         }
       ]
+    },
+    {
+      "rdfType": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Graph",
+      "tables": [
+        {
+          "name": "Organizacion de atribución",
+          "fields": [ "Nombre", "Página" ],
+          "query": "select distinct ?nameOrg ?homepage where {?s <http://www.w3.org/ns/prov#wasAttributedTo> ?orgAttribution. FILTER(?s=<{ENTITY_ID}>).OPTIONAL{?orgAttribution <http://purl.org/roh/mirror/foaf#name> ?nameOrg.}OPTIONAL{?orgAttribution <http://purl.org/roh/mirror/foaf#homePage> ?homepage.}}"
+        },
+        {
+          "name": "Lista de entidades",
+          "fields": [ "RdfType", "Número" ],
+          "query": "select ?o count(?s) as ?num from <{ENTITY_ID}> where {?s a ?o}order by desc(?num) "
+        }
+      ]
     }
   ],
   "ExcludeRelatedEntity": [ "http://purl.org/roh/mirror/foaf#Person" ],

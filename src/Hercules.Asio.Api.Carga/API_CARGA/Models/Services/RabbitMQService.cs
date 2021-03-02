@@ -3,7 +3,9 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase para conectar con el servidor Rabbit
 using API_CARGA.Models.Entities;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -27,17 +29,16 @@ namespace API_CARGA.Models.Services
         private readonly ConnectionFactory connectionFactory;
         private string queueName;
 
+        private IConfiguration _configuration { get; set; }
+
         /// <summary>
         /// Constructor de la clase que configura los datos necesarios para conectarse con rabbit
         /// </summary>
         /// <param name="ampOptionsSnapshot">Opciones de configuracion para Rabbit</param>
-        public RabbitMQService(IOptions<RabbitMQInfo> ampOptionsSnapshot)
+        public RabbitMQService(IOptions<RabbitMQInfo> ampOptionsSnapshot, IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
+            _configuration = configuration;
 
-            IConfigurationRoot Configuration = builder.Build();
             IDictionary environmentVariables = Environment.GetEnvironmentVariables();
             if (environmentVariables.Contains("RabbitQueueName"))
             {
@@ -45,7 +46,7 @@ namespace API_CARGA.Models.Services
             }
             else
             {
-                queueName = Configuration["RabbitQueueName"];
+                queueName = _configuration["RabbitQueueName"];
             }
 
             amqpInfo = ampOptionsSnapshot.Value;

@@ -785,12 +785,6 @@
             <param name="isFile">si el objeto pasado es un fichero</param>
             <param name="fileName">nombre del parametro del fichero</param>
         </member>
-        <member name="M:API_CARGA.Models.Services.CallApiUnidata.LoadTriples(System.Collections.Generic.List{System.String})">
-            <summary>
-            Carga los triples en el gráfo unidata
-            </summary>
-            <param name="triplesInsertar">triples a insertar</param>
-        </member>
         <member name="T:API_CARGA.Models.Services.CallMockNeedPublishData">
             <summary>
             Clase que hace de Mock para el uso de la clase CallApiNeedPublishData de forma ficticia
@@ -824,9 +818,9 @@
             Obtiene el token de acceso al api de OAIPMH
             </summary>
         </member>
-        <member name="M:API_CARGA.Models.Services.CallTokenService.CallTokenUnidata">
+        <member name="M:API_CARGA.Models.Services.CallTokenService.CallTokenConversor">
             <summary>
-            Obtiene el token de acceso al api de Unidata
+            Obtiene el token de acceso al api de OAIPMH
             </summary>
         </member>
         <member name="M:API_CARGA.Models.Services.CallTokenService.CallTokenIdentity(System.String)">
@@ -834,6 +828,14 @@
             Realiza la llamada para la obtención del token de acceso con el endpoint configurado en AuthorityGetToken
             </summary>
             <param name="stringData">Datos con el scope, el cliente id, el grantType y el secret</param>
+        </member>
+        <member name="M:API_CARGA.Models.Services.CallTokenService.TokenAppsettings(System.String,System.String)">
+            <summary>
+            Obtiene los parametros desde el appsettings.
+            </summary>
+            <param name="pTypeToken">Tipo del token.</param>
+            <param name="pAccessToken">Token.</param>
+            <returns></returns>
         </member>
         <member name="T:API_CARGA.Models.Services.ConfigSparql">
             <summary>
@@ -905,19 +907,19 @@
             obtiene la id del cliente de OAIPMH
             </summary>
         </member>
-        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetScopeUnidata">
+        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetScopeConversor">
             <summary>
-            obtiene la limitación de acceso al api de unidata
+            Obtiene la limitación de acceso al conversor.
             </summary> 
         </member>
-        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetClientIdUnidata">
+        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetClientSecretConversor">
             <summary>
-            obtiene el id de cliente del api de carga
-            </summary> 
+            Obtiene la "clave" de acceso del conversor.
+            </summary>
         </member>
-        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetClientSecretUnidata">
+        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetClientIdConversor">
             <summary>
-            obtiene la "clave" de acceso del api de carga
+            Obtiene la ID del cliente Conversor.
             </summary>
         </member>
         <member name="T:API_CARGA.Models.Services.ConfigUrlService">
@@ -928,11 +930,6 @@
         <member name="M:API_CARGA.Models.Services.ConfigUrlService.GetUrl">
             <summary>
             Obtiene la url configurada en ConfigUrl del fichero appsettings.json
-            </summary>
-        </member>
-        <member name="M:API_CARGA.Models.Services.ConfigUrlService.GetUrlUnidata">
-            <summary>
-            Obtiene la url configurada en ConfigUrlUnidata del fichero appsettings.json
             </summary>
         </member>
         <member name="M:API_CARGA.Models.Services.ConfigUrlService.GetUrlXmlConverter">
@@ -1347,7 +1344,7 @@
             Clase para conectar con el servidor Rabbi
             </summary>
         </member>
-        <member name="M:API_CARGA.Models.Services.RabbitMQService.#ctor(Microsoft.Extensions.Options.IOptions{API_CARGA.Models.Entities.RabbitMQInfo})">
+        <member name="M:API_CARGA.Models.Services.RabbitMQService.#ctor(Microsoft.Extensions.Options.IOptions{API_CARGA.Models.Entities.RabbitMQInfo},Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             Constructor de la clase que configura los datos necesarios para conectarse con rabbit
             </summary>
@@ -1505,31 +1502,22 @@
             </summary>
             <param name="identifier">Identificador del shape a eliminar</param>
         </member>
-        <member name="M:API_CARGA.Models.Utility.SparqlUtility.ValidateRDF(System.String,System.Collections.Generic.List{API_CARGA.Models.Entities.ShapeConfig},VDS.RDF.RohGraph,System.Boolean)">
+        <member name="M:API_CARGA.Models.Utility.SparqlUtility.ValidateRDF(System.String,System.Collections.Generic.List{API_CARGA.Models.Entities.ShapeConfig},VDS.RDF.RohGraph)">
             <summary>
-            Valida un RDF con una lista de Shapes configurados
+            Valida un RDF
             </summary>
             <param name="pRdfFileContent">XML RDF</param>
             <param name="pShapesConfig">Lista de Shapes de validación</param>
             <param name="pOntologyGraph">Grafo con la ontología</param>
-            <param name="pApplyOntologyValidation">Aplica las validaciones de la ontología</param>
             <returns>Lista de triples</returns>
         </member>
         <member name="M:API_CARGA.Models.Utility.SparqlUtility.ValidateRDF(System.String,System.String,System.String)">
             <summary>
-            Valida un RDF con un shape arbitrario
+            Valida un RDF
             </summary>
             <param name="pRdfFileContent">XML RDF</param>
             <param name="pValidation">Validación a realizar</param>
-            <param name="pValidationFileName">Nombre del fichero de validación</param>
-            <returns>Lista de triples</returns>
-        </member>
-        <member name="M:API_CARGA.Models.Utility.SparqlUtility.ValidateRDF(System.String,VDS.RDF.RohGraph)">
-            <summary>
-            Valida un RDF con las restriciones de la ontología
-            </summary>
-            <param name="pRdfFileContent">XML RDF</param>
-            <param name="pOntologyGraph">Grafo con la ontología</param>
+            <param name="pValidatoinFileName">Nombre del fichero de validación</param>
             <returns>Lista de triples</returns>
         </member>
         <member name="M:API_CARGA.Models.Utility.SparqlUtility.LoadOntology(VDS.RDF.RohGraph,System.String,System.String,System.String)">
@@ -1571,6 +1559,13 @@
             Clase para pasar datos entre apis
             </summary>
             
+        </member>
+        <member name="M:Hercules.Asio.Api.Carga.Models.Services.CallConversor.GetUri(System.String)">
+            <summary>
+            Obtiene el resultado
+            </summary>
+            <param name="url">url a llamar</param>
+            <returns></returns>
         </member>
         <member name="M:VDS.RDF.RohGraph.GetNextBlankNodeID">
             <summary>

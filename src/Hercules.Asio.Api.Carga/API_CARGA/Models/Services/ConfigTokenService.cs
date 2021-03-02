@@ -2,7 +2,9 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase para la obtención de los datos necesarios para obtener el token de acceso a los apis de apiCarga y OAIPMH_CVN
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +19,6 @@ namespace API_CARGA.Models.Services
     /// </summary> 
     public class ConfigTokenService
     {
-        public IConfigurationRoot Configuration { get; set; }
         private string Authority { get; set; }
         private string GrantType { get; set; }
         private string Scope { get; set; }
@@ -27,17 +28,15 @@ namespace API_CARGA.Models.Services
         private string ClientIdOAIPMH { get; set; }
         private string ClientSecret { get; set; }
         private string ClientSecretOAIPMH { get; set; }
-        private string ClientIdUnidata { get; set; }
-        private string ClientSecretUnidata { get; set; }
-        private string ScopeUnidata { get; set; }
-        
-        public ConfigTokenService()
-        {
-            var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
+        private string ScopeConversor { get; set; }
+        private string ClientIdConversor { get; set; }
+        private string ClientSecretConversor { get; set; }
 
-            Configuration = builder.Build();
+        private IConfiguration _configuration { get; }
+
+        public ConfigTokenService(IConfiguration configuration)
+        {
+            _configuration = configuration;
         }
         /// <summary>
         /// obtiene el endpoint para la llamada de obtención del token
@@ -54,7 +53,7 @@ namespace API_CARGA.Models.Services
                 }
                 else
                 {
-                    authority = Configuration["AuthorityGetToken"];
+                    authority = _configuration["AuthorityGetToken"];
                 }
 
                 Authority = authority;
@@ -77,7 +76,7 @@ namespace API_CARGA.Models.Services
                 }
                 else
                 {
-                    grantType = Configuration["GrantType"];
+                    grantType = _configuration["GrantType"];
                 }
 
                 GrantType = grantType;
@@ -100,7 +99,7 @@ namespace API_CARGA.Models.Services
                 }
                 else
                 {
-                    scope = Configuration["ScopeCarga"];
+                    scope = _configuration["ScopeCarga"];
                 }
 
                 Scope = scope;
@@ -123,7 +122,7 @@ namespace API_CARGA.Models.Services
                 }
                 else
                 {
-                    clientId = Configuration["ClientId"];
+                    clientId = _configuration["ClientId"];
                 }
 
                 ClientId = clientId;
@@ -146,7 +145,7 @@ namespace API_CARGA.Models.Services
                 }
                 else
                 {
-                    clientSecret = Configuration["ClientSecret"];
+                    clientSecret = _configuration["ClientSecret"];
                 }
 
                 ClientSecret = clientSecret;
@@ -169,7 +168,7 @@ namespace API_CARGA.Models.Services
                 }
                 else
                 {
-                    scope = Configuration["ScopeOAIPMH"];
+                    scope = _configuration["ScopeOAIPMH"];
                 }
 
                 ScopeOAIPMH = scope;
@@ -192,7 +191,7 @@ namespace API_CARGA.Models.Services
                 }
                 else
                 {
-                    clientSecret = Configuration["ClientSecretOAIPMH"];
+                    clientSecret = _configuration["ClientSecretOAIPMH"];
                 }
 
                 ClientSecretOAIPMH = clientSecret;
@@ -215,7 +214,7 @@ namespace API_CARGA.Models.Services
                 }
                 else
                 {
-                    clientId = Configuration["ClientIdOAIPMH"];
+                    clientId = _configuration["ClientIdOAIPMH"];
                 }
 
                 ClientIdOAIPMH = clientId;
@@ -223,75 +222,73 @@ namespace API_CARGA.Models.Services
             return ClientIdOAIPMH;
         }
 
-
-
         /// <summary>
-        /// obtiene la limitación de acceso al api de unidata
+        /// Obtiene la limitación de acceso al conversor.
         /// </summary> 
-        public string GetScopeUnidata()
+        public string GetScopeConversor()
         {
-            if (string.IsNullOrEmpty(ScopeUnidata))
+            if (string.IsNullOrEmpty(ScopeConversor))
             {
                 string scope = "";
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("ScopeUnidata"))
+                if (environmentVariables.Contains("ScopeConversor"))
                 {
-                    scope = environmentVariables["ScopeUnidata"] as string;
+                    scope = environmentVariables["ScopeConversor"] as string;
                 }
                 else
                 {
-                    scope = Configuration["ScopeUnidata"];
+                    scope = _configuration["ScopeConversor"];
                 }
 
-                ScopeUnidata = scope;
+                ScopeConversor = scope;
             }
-            return ScopeUnidata;
+            return ScopeConversor;
         }
 
         /// <summary>
-        /// obtiene el id de cliente del api de carga
-        /// </summary> 
-        public string GetClientIdUnidata()
-        {
-            if (string.IsNullOrEmpty(ClientIdUnidata))
-            {
-                string clientId = "";
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("ClientIdUnidata"))
-                {
-                    clientId = environmentVariables["ClientIdUnidata"] as string;
-                }
-                else
-                {
-                    clientId = Configuration["ClientIdUnidata"];
-                }
-
-                ClientIdUnidata = clientId;
-            }
-            return ClientIdUnidata;
-        }
-
-        /// <summary>
-        /// obtiene la "clave" de acceso del api de carga
+        /// Obtiene la "clave" de acceso del conversor.
         /// </summary>
-        public string GetClientSecretUnidata()
+        public string GetClientSecretConversor()
         {
-            if (string.IsNullOrEmpty(ClientSecretUnidata))
+            if (string.IsNullOrEmpty(ClientSecretConversor))
             {
                 string clientSecret = "";
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("ClientSecretUnidata"))
+                if (environmentVariables.Contains("ClientSecretConversor"))
                 {
-                    clientSecret = environmentVariables["ClientSecretUnidata"] as string;
+                    clientSecret = environmentVariables["ClientSecretConversor"] as string;
                 }
                 else
                 {
-                    clientSecret = Configuration["ClientSecretUnidata"];
+                    clientSecret = _configuration["ClientSecretConversor"];
                 }
 
-                ClientSecretUnidata = clientSecret;
+                ClientSecretConversor = clientSecret;
             }
-            return ClientSecretUnidata;
+            return ClientSecretConversor;
+        }
+
+        /// <summary>
+        /// Obtiene la ID del cliente Conversor.
+        /// </summary>
+        public string GetClientIdConversor()
+        {
+            if (string.IsNullOrEmpty(ClientIdConversor))
+            {
+                string clientId = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ClientIdConversor"))
+                {
+                    clientId = environmentVariables["ClientIdConversor"] as string;
+                }
+                else
+                {
+                    clientId = _configuration["ClientIdConversor"];
+                }
+
+                ClientIdConversor = clientId;
+            }
+            return ClientIdConversor;
         }
     }
 }

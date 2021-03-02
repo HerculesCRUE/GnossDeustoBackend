@@ -4,6 +4,7 @@
 // Clase para crear una sincronización 
 using API_CARGA.Extras.Excepciones;
 using API_CARGA.Models.Entities;
+using Hercules.Asio.Api.Carga.Models.Services;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
@@ -27,12 +28,14 @@ namespace API_CARGA.Models.Services
         readonly ICallNeedPublishData _publishData;
         readonly TokenBearer _token;
         readonly ConfigUrlService _configUrlService;
+        readonly CallConversor _callConversor;
 
         public OaiPublishRDFService(EntityContext context, ICallNeedPublishData publishData, CallTokenService tokenService, ConfigUrlService configUrlService)
         {
             if (tokenService != null)
             {
                 _token = tokenService.CallTokenCarga();
+                _callConversor = new CallConversor(tokenService);
             }
             _context = context;
             _publishData = publishData;
@@ -469,10 +472,7 @@ namespace API_CARGA.Models.Services
         /// <returns>Lista de configuraciones</returns>
         public string CallGetConfigurationsFiles()
         {
-            HttpClient client = new HttpClient();
-            var response = client.PostAsync($"{_configUrlService.GetUrlXmlConverter()}conversor/ConfigurationFilesList", null).Result;
-            response.EnsureSuccessStatusCode();
-            return response.Content.ReadAsStringAsync().Result;
+            return _callConversor.GetUri($"{_configUrlService.GetUrlXmlConverter()}/Conversor/ConfigurationFilesList");
         }
     }
 }

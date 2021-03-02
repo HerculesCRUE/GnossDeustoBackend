@@ -19,6 +19,8 @@ namespace Linked_Data_Server.Models.Entities
         public List<ProvenanceData> provenanceData { get; set; }
         public Dictionary<string, List<LinkedDataRdfViewModel>> entitiesPropertiesEntity { get; set; }
         public Dictionary<string, string> communNamePropierties { get; set; }
+        public Dictionary<string, string> entitiesNames { get; set; }
+        
         public List<string> LoadedEntities { get; set; }
     }
 }
