@@ -53,6 +53,7 @@ namespace Conversor_XML_RDF.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public List<string> ConfigurationFilesList()
         {
+            return null;
             return ConfigFilesList();
         }
 
