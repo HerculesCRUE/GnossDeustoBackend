@@ -2,7 +2,9 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase para obtener la configuración necesaria para el uso de Sparql
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections;
 using System.IO;
@@ -19,8 +21,14 @@ namespace API_CARGA.Models.Services
         public string Endpoint { get; set; }
         private string QueryParam { get; set; }
         private string GraphRoh { get; set; }
-        private string GraphRohes { get; set; }
-        private string GraphRohum { get; set; }
+
+        private IConfiguration _configuration { get; set; }
+
+        public ConfigSparql(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         ///<summary>
         ///Obtiene el gráfo configurado en Sparql:Graph del fichero appsettings.json
         ///</summary>
@@ -28,11 +36,6 @@ namespace API_CARGA.Models.Services
         {
             if (string.IsNullOrEmpty(Graph))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("Graph"))
                 {
@@ -40,7 +43,7 @@ namespace API_CARGA.Models.Services
                 }
                 else
                 {
-                    Graph = Configuration["Sparql:Graph"];
+                    Graph = _configuration["Sparql:Graph"];
                 }
                 
             }
@@ -54,11 +57,6 @@ namespace API_CARGA.Models.Services
         {
             if (string.IsNullOrEmpty(GraphRoh))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("GraphRoh"))
                 {
@@ -66,7 +64,7 @@ namespace API_CARGA.Models.Services
                 }
                 else
                 {
-                    GraphRoh = Configuration["Sparql:GraphRoh"];
+                    GraphRoh = _configuration["Sparql:GraphRoh"];
                 }
 
             }
@@ -80,11 +78,6 @@ namespace API_CARGA.Models.Services
         {
             if (Endpoint==null)
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("Endpoint"))
                 {
@@ -92,7 +85,7 @@ namespace API_CARGA.Models.Services
                 }
                 else
                 {
-                    Endpoint = Configuration["Sparql:Endpoint"];
+                    Endpoint = _configuration["Sparql:Endpoint"];
                 }
             }
             return Endpoint;
@@ -105,11 +98,6 @@ namespace API_CARGA.Models.Services
         {
             if (string.IsNullOrEmpty(QueryParam))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("QueryParam"))
                 {
@@ -117,7 +105,7 @@ namespace API_CARGA.Models.Services
                 }
                 else
                 {
-                    QueryParam = Configuration["Sparql:QueryParam"];
+                    QueryParam = _configuration["Sparql:QueryParam"];
                 }
 
             }

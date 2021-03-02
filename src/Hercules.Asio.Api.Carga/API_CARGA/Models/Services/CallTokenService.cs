@@ -3,9 +3,14 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // clase para la obtención de los tokens de acceso
 using API_CARGA.Models.Entities;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -17,10 +22,15 @@ namespace API_CARGA.Models.Services
     /// </summary>
     public class CallTokenService
     {
-        private ConfigTokenService _configToken;
-        public CallTokenService(ConfigTokenService configToken)
+        private ConfigTokenService _configToken; 
+        readonly IWebHostEnvironment _env;
+        private IConfiguration _configuration { get; }
+
+        public CallTokenService(ConfigTokenService configToken, IWebHostEnvironment env,IConfiguration configuration)
         {
             _configToken = configToken;
+            _env = env;
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -28,8 +38,15 @@ namespace API_CARGA.Models.Services
         /// </summary>
         public TokenBearer CallTokenCarga()
         {
-            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeCarga()}&client_id={_configToken.GetClientIdCarga()}&client_secret={_configToken.GetClientSecretCarga()}";
-            return CallTokenIdentity(stringData);
+            if (_env.IsDevelopment())
+            {
+                return TokenAppsettings("TokenTypeCarga", "AccessTokenCarga");
+            }
+            else
+            {
+                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeCarga()}&client_id={_configToken.GetClientIdCarga()}&client_secret={_configToken.GetClientSecretCarga()}";
+                return CallTokenIdentity(stringData);
+            }
         }
 
         /// <summary>
@@ -37,16 +54,31 @@ namespace API_CARGA.Models.Services
         /// </summary>
         public TokenBearer CallTokenOAIPMH()
         {
-            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeOAIPMH()}&client_id={_configToken.GetClientIdOAIPMH()}&client_secret={_configToken.GetClientSecretOAIPMH()}";
-            return CallTokenIdentity(stringData);
+            if (_env.IsDevelopment())
+            {
+                return TokenAppsettings("TokenTypeOAIPMH", "AccessTokenOAIPMH");
+            }
+            else
+            {
+                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeOAIPMH()}&client_id={_configToken.GetClientIdOAIPMH()}&client_secret={_configToken.GetClientSecretOAIPMH()}";
+                return CallTokenIdentity(stringData);
+            }
         }
+
         /// <summary>
-        /// Obtiene el token de acceso al api de Unidata
+        /// Obtiene el token de acceso al api de OAIPMH
         /// </summary>
-        public TokenBearer CallTokenUnidata()
+        public TokenBearer CallTokenConversor()
         {
-            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeUnidata()}&client_id={_configToken.GetClientIdUnidata()}&client_secret={_configToken.GetClientSecretUnidata()}";
-            return CallTokenIdentity(stringData);
+            if (_env.IsDevelopment())
+            {
+                return TokenAppsettings("TokenTypeConversor", "AccessTokenConversor");
+            }
+            else
+            {
+                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeConversor()}&client_id={_configToken.GetClientIdConversor()}&client_secret={_configToken.GetClientSecretConversor()}";
+                return CallTokenIdentity(stringData);
+            }
         }
 
         /// <summary>
@@ -79,6 +111,31 @@ namespace API_CARGA.Models.Services
                     throw new HttpRequestException(response.ReasonPhrase);
                 }
             }
+        }
+
+        /// <summary>
+        /// Obtiene los parametros desde el appsettings.
+        /// </summary>
+        /// <param name="pTypeToken">Tipo del token.</param>
+        /// <param name="pAccessToken">Token.</param>
+        /// <returns></returns>
+        private TokenBearer TokenAppsettings(string pTypeToken, string pAccessToken)
+        {
+            IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+            TokenBearer token = new TokenBearer();
+
+            if (environmentVariables.Contains(pAccessToken) && environmentVariables.Contains(pTypeToken))
+            {
+                token.access_token = environmentVariables[pAccessToken] as string;
+                token.token_type = environmentVariables[pTypeToken] as string;
+            }
+            else
+            {
+                token.access_token = _configuration[pAccessToken];
+                token.token_type = _configuration[pTypeToken];
+            }
+
+            return token;
         }
     }
 }
