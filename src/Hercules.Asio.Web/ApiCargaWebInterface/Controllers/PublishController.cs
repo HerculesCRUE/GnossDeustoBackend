@@ -17,11 +17,11 @@ namespace ApiCargaWebInterface.Controllers
     /// <summary>
     /// Controlador para la publicación manual y la validacion de los rdf
     /// </summary>
-    public class PublishMController : Controller
+    public class PublishController : Controller
     {
         ICallEtlService _callEtlPublishService;
         readonly ICallRepositoryConfigService _serviceApi;
-        public PublishMController(ICallEtlService callDtlPublishService, ICallRepositoryConfigService serviceApi)
+        public PublishController(ICallEtlService callDtlPublishService, ICallRepositoryConfigService serviceApi)
         {
             _callEtlPublishService = callDtlPublishService;
             _serviceApi = serviceApi;
