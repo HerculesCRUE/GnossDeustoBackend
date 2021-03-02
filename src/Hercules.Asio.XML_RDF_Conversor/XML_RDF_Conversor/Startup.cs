@@ -1,14 +1,24 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Net;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Conversor_XML_RDF.Controllers;
+using Hercules.Asio.XML_RDF_Conversor.Models.Middlewares;
+using Hercules.Asio.XML_RDF_Conversor.Models.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace Conversor_XML_RDF
 {
@@ -17,13 +27,16 @@ namespace Conversor_XML_RDF
     /// </summary>
     public class Startup
     {
+        private readonly IWebHostEnvironment _env;
+
         /// <summary>
         /// Guarda la configuración.
         /// </summary>
         /// <param name="configuration"></param>
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
         /// <summary>
         /// Propiedad para acceder a la configuración.
@@ -35,13 +48,80 @@ namespace Conversor_XML_RDF
         /// <param name="services">Services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            // Obtención de la autorización del Identify.            
+            IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+            string authority = "";
+            if (environmentVariables.Contains("Authority"))
+            {
+                authority = environmentVariables["Authority"] as string;
+            }
+            else
+            {
+                authority = Configuration["Authority"];
+            }
+
+            string scope = "";
+            if (environmentVariables.Contains("Scope"))
+            {
+                scope = environmentVariables["Scope"] as string;
+            }
+            else
+            {
+                scope = Configuration["Scope"];
+            }
+
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                options.JsonSerializerOptions.IgnoreNullValues = true;
+            });
+            
+            if (_env.IsDevelopment())
+            {
+                services.AddSingleton<IAuthorizationHandler, AllowAnonymous>();
+            }
+            else
+            {            
+                services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = authority;
+                    options.RequireHttpsMetadata = false;
+                    options.ApiName = scope;
+                });
+                services.AddAuthorization();        
+            }
+
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Conversor XML RDF", Version = "v1", Description = "Conversor XML RDF" });
-                c.IncludeXmlComments(string.Format(@"{0}comments.xml", System.AppDomain.CurrentDomain.BaseDirectory));                
+                c.IncludeXmlComments(string.Format(@"{0}comments.xml", System.AppDomain.CurrentDomain.BaseDirectory));
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme."
+                });
+                c.OperationFilter<SecurityRequirementsOperationFilter>();
             });
+
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
+            });
+
+            services.AddScoped(typeof(ConfigTokenService));
+            services.AddScoped(typeof(CallTokenService));
         }
+
         /// <summary>
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// </summary>
@@ -59,6 +139,9 @@ namespace Conversor_XML_RDF
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseAuthentication();
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware)); // Logs y errores.
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -81,6 +164,17 @@ namespace Conversor_XML_RDF
             {
                 endpoints.MapControllers();
             });
+        }
+    }
+    public class AllowAnonymous : IAuthorizationHandler
+    {
+        public Task HandleAsync(AuthorizationHandlerContext context)
+        {
+            foreach (IAuthorizationRequirement requirement in context.PendingRequirements.ToList())
+            {
+                context.Succeed(requirement);
+            }
+            return Task.CompletedTask;
         }
     }
 }

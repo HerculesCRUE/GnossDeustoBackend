@@ -13,6 +13,9 @@ using System.Collections;
 using Microsoft.Extensions.Configuration;
 using Conversor_XML_RDF.Models.ConfigJson;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
+using Hercules.Asio.XML_RDF_Conversor.Models.Services;
+using Hercules.Asio.XML_RDF_Conversor.Models.Entities;
 
 namespace Conversor_XML_RDF.Controllers
 {
@@ -21,17 +24,25 @@ namespace Conversor_XML_RDF.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class ConversorController : Controller
     {
         /// <summary>
         /// Propiedad encargada de almacenar la configuración.
         /// </summary>
-        public IConfigurationRoot Configuration { get; set; }
+        public IConfiguration _configuration { get; set; }
 
         /// <summary>
         /// Propiedad encargada de almacenar la URL del servicio de UrisFactory.
         /// </summary>
         private static string urlUrisFactory { get; set; }
+
+        readonly CallTokenService _tokenService;
+        public ConversorController(CallTokenService tokenService, IConfiguration configuration)
+        {
+            _tokenService = tokenService;
+            _configuration = configuration;
+        }
 
         /// <summary>
         /// Permite visualizar una lista con los archivos de configuración JSON disponibles.
@@ -450,9 +461,7 @@ namespace Conversor_XML_RDF.Controllers
             }
             else
             {
-                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
-                Configuration = builder.Build();
-                return Configuration["UrlUrisFactory"];
+                return _configuration["UrlUrisFactory"];
             }
         }
     }
