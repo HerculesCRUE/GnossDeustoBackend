@@ -14,13 +14,20 @@ namespace ApiCargaWebInterface.Models.Services
     /// </summary>
     public class ConfigUrlService
     {
-        public IConfigurationRoot Configuration { get; set; }
         public string Url { get; set; }
         public string UrlUris { get; set; }
         public string UrlDocumentacion { get; set; }
         public string Proxy { get; set; }
         public string SaprqlEndpoint { get; set; }
         public string SparqlQuery { get; set; }
+
+        private IConfiguration _configuration { get; set; }
+
+        public ConfigUrlService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         /// <summary>
         /// Obtiene la url del api de carga que ha sido configurada
         /// </summary>
@@ -29,11 +36,6 @@ namespace ApiCargaWebInterface.Models.Services
         {
             if (string.IsNullOrEmpty(Url))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 string connectionString = "";
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("ConfigUrl"))
@@ -42,9 +44,9 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    connectionString = Configuration["ConfigUrl"];
+                    connectionString = _configuration["ConfigUrl"];
                 }
-                
+
                 Url = connectionString;
             }
             return Url;
@@ -57,12 +59,6 @@ namespace ApiCargaWebInterface.Models.Services
         {
             if (string.IsNullOrEmpty(UrlUris))
             {
-
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 string connectionString = "";
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("ConfigUrlUrisFactory"))
@@ -71,7 +67,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    connectionString = Configuration["ConfigUrlUrisFactory"];
+                    connectionString = _configuration["ConfigUrlUrisFactory"];
                 }
 
                 UrlUris = connectionString;
@@ -87,12 +83,6 @@ namespace ApiCargaWebInterface.Models.Services
         {
             if (string.IsNullOrEmpty(UrlDocumentacion))
             {
-
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 string connectionString = "";
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("ConfigUrlDocumentacion"))
@@ -101,7 +91,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    connectionString = Configuration["ConfigUrlDocumentacion"];
+                    connectionString = _configuration["ConfigUrlDocumentacion"];
                 }
 
                 UrlDocumentacion = connectionString;
@@ -117,11 +107,6 @@ namespace ApiCargaWebInterface.Models.Services
         {
             if (string.IsNullOrEmpty(SparqlQuery))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 string connectionString = "";
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("SparqlQuery"))
@@ -130,7 +115,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    connectionString = Configuration["Sparql:QueryParam"];
+                    connectionString = _configuration["Sparql:QueryParam"];
                 }
 
                 Proxy = connectionString;
@@ -145,11 +130,6 @@ namespace ApiCargaWebInterface.Models.Services
         {
             if (string.IsNullOrEmpty(SaprqlEndpoint))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 string connectionString = "";
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("SparqlEndpoint"))
@@ -158,7 +138,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    connectionString = Configuration["Sparql:Endpoint"];
+                    connectionString = _configuration["Sparql:Endpoint"];
                 }
 
                 SaprqlEndpoint = connectionString;
@@ -174,11 +154,6 @@ namespace ApiCargaWebInterface.Models.Services
         {
             if (string.IsNullOrEmpty(Proxy))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 string connectionString = "";
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("Proxy"))
@@ -187,7 +162,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    connectionString = Configuration["Proxy"];
+                    connectionString = _configuration["Proxy"];
                 }
 
                 Proxy = connectionString;

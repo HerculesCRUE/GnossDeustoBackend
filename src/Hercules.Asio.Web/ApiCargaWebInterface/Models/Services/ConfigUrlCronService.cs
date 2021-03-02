@@ -14,8 +14,14 @@ namespace ApiCargaWebInterface.Models.Services
     /// </summary>
     public class ConfigUrlCronService
     {
-        public IConfigurationRoot Configuration { get; set; }
         public string Url { get; set; }
+
+        private IConfiguration _configuration { get; set; }
+
+        public ConfigUrlCronService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         /// <summary>
         /// Obtiene la url del api de cron que ha sido configurada
         /// </summary>
@@ -24,11 +30,6 @@ namespace ApiCargaWebInterface.Models.Services
         {
             if (string.IsNullOrEmpty(Url))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 string connectionString = "";
                 if (environmentVariables.Contains("ConfigUrlCron"))
@@ -37,7 +38,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    connectionString = Configuration["ConfigUrlCron"];
+                    connectionString = _configuration["ConfigUrlCron"];
                 }
                 Url = connectionString;
             }

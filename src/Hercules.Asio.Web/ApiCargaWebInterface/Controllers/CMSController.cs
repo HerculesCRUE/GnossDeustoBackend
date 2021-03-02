@@ -26,10 +26,12 @@ namespace ApiCargaWebInterface.Controllers
     {
         CallApiVirtualPath _documentationApi;
         ReplaceUsesService _replaceUsesService;
-        public CMSController(CallApiVirtualPath documentationApi, ReplaceUsesService replaceUsesService)
+        ConfigUrlService _configUrlService;
+        public CMSController(CallApiVirtualPath documentationApi, ReplaceUsesService replaceUsesService,ConfigUrlService configUrlService)
         {
             _documentationApi = documentationApi;
             _replaceUsesService = replaceUsesService;
+            _configUrlService = configUrlService;
         }
 
         /// <summary>
@@ -91,8 +93,7 @@ namespace ApiCargaWebInterface.Controllers
         public IActionResult Details(string route)
         {
             var page = _documentationApi.GetPage(route);
-            ConfigUrlService urlService = new ConfigUrlService();
-            string routeProxy = $"{urlService.GetProxy()}{page.Route}";
+            string routeProxy = $"{_configUrlService.GetProxy()}{page.Route}";
             PageViewModel pageViewModel = new PageViewModel()
             {
                 Route = routeProxy,

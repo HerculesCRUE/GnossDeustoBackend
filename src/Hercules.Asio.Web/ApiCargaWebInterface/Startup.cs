@@ -62,19 +62,11 @@ namespace ApiCargaWebInterface
                 })
                 .AddCAS(options =>
                 {
-                    options.CasServerUrlBase = casBaseUrl;  // Set in `appsettings.json` file.
+                    options.CasServerUrlBase = casBaseUrl; 
                     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.ServiceHost = serviceHost;
                 });
             bool cargado = false;
-            //ConfigPathLog configPathLog = new ConfigPathLog();
-            //string pathError = $"{configPathLog.GetLogPathBase()}{configPathLog.GetLogPath()}";
-            //Log.Logger = new LoggerConfiguration().WriteTo.Logger(x =>
-            //{
-            //    x.WriteTo.File($"{pathError}/log_Tiempos_Info.txt");
-            //    x.Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Information);
-            //})
-            //.CreateLogger();
             
             services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
             {

@@ -3,9 +3,14 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // clase para la obtención de los tokens de acceso
 using ApiCargaWebInterface.Models.Entities;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -19,9 +24,14 @@ namespace ApiCargaWebInterface.Models.Services
     public class CallTokenService
     {
         private ConfigTokenService _configToken;
-        public CallTokenService(ConfigTokenService configToken)
+        readonly IWebHostEnvironment _env;
+        private IConfiguration _configuration { get; set; }
+
+        public CallTokenService(ConfigTokenService configToken, IWebHostEnvironment env, IConfiguration configuration)
         {
             _configToken = configToken;
+            _env = env;
+            _configuration = configuration;
         }
         /// <summary>
         /// Obtiene un token de seguridad de acceso para el Api carga
@@ -29,8 +39,15 @@ namespace ApiCargaWebInterface.Models.Services
         /// <returns>Token bearer</returns>
         public TokenBearer CallTokenCarga()
         {
-            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScope()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
-            return CallTokenIdentity(stringData);
+            if (_env.IsDevelopment())
+            {
+                return TokenAppsettings("TokenTypeCarga", "AccessTokenCarga");
+            }
+            else
+            {
+                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScope()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+                return CallTokenIdentity(stringData);
+            }
         }
         /// <summary>
         /// Obtiene un token de seguridad de acceso para el Api cron
@@ -38,8 +55,15 @@ namespace ApiCargaWebInterface.Models.Services
         /// <returns>Token bearer</returns>
         public TokenBearer CallTokenCron()
         {
-            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeCron()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
-            return CallTokenIdentity(stringData);
+            if (_env.IsDevelopment())
+            {
+                return TokenAppsettings("TokenTypeCron", "AccessTokenCron");
+            }
+            else
+            {
+                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeCron()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+                return CallTokenIdentity(stringData);
+            }
         }
         /// <summary>
         /// Obtiene un token de seguridad de acceso para el Api de uris
@@ -47,8 +71,15 @@ namespace ApiCargaWebInterface.Models.Services
         /// <returns>Token bearer</returns>
         public TokenBearer CallTokenUrisFactory()
         {
-            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeUrisFactory()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
-            return CallTokenIdentity(stringData);
+            if (_env.IsDevelopment())
+            {
+                return TokenAppsettings("TokenTypeUrisFactory", "AccessTokenUrisFactory");
+            }
+            else
+            {
+                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeUrisFactory()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+                return CallTokenIdentity(stringData);
+            }
         }
         /// <summary>
         /// Obtiene un token de seguridad de acceso para el Api de uris
@@ -56,8 +87,17 @@ namespace ApiCargaWebInterface.Models.Services
         /// <returns>Token bearer</returns>
         public TokenBearer CallTokenApiDocumentacion()
         {
-            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeDocumentacion()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
-            return CallTokenIdentity(stringData);
+            if (_env.IsDevelopment())
+            {
+                return TokenAppsettings("TokenTypeDocumentacion", "AccessTokenDocumentacion");
+            }
+            else
+            {
+                {
+                    string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeDocumentacion()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+                    return CallTokenIdentity(stringData);
+                }
+            }
         }
         /// <summary>
         /// Obtiene un token de seguridad de acceso para el Api OAIPMH
@@ -65,8 +105,31 @@ namespace ApiCargaWebInterface.Models.Services
         /// <returns>Token bearer</returns>
         public TokenBearer CallTokenOAIPMH()
         {
-            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeOAIPMH()}&client_id={_configToken.GetClientIdOAIPMH()}&client_secret={_configToken.GetClientSecretOAIPMH()}";
-            return CallTokenIdentity(stringData);
+            if (_env.IsDevelopment())
+            {
+                return TokenAppsettings("TokenTypeOAIPMH", "AccessTokenOAIPMH");
+            }
+            else
+            {
+                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeOAIPMH()}&client_id={_configToken.GetClientIdOAIPMH()}&client_secret={_configToken.GetClientSecretOAIPMH()}";
+                return CallTokenIdentity(stringData);
+            }
+        }
+        /// <summary>
+        /// Obtiene un token de seguridad de acceso para el Conversor.
+        /// </summary>
+        /// <returns>Token bearer</returns>
+        public TokenBearer CallTokenConversor()
+        {
+            if (_env.IsDevelopment())
+            {
+                return TokenAppsettings("TokenTypeConversor", "AccessTokenConversor");
+            }
+            else
+            {
+                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeConversor()}&client_id={_configToken.GetClientIdConversor()}&client_secret={_configToken.GetClientSecretConversor()}";
+                return CallTokenIdentity(stringData);
+            }
         }
 
         /// <summary>
@@ -102,6 +165,31 @@ namespace ApiCargaWebInterface.Models.Services
                     throw new HttpRequestException(response.ReasonPhrase);
                 }
             }
+        }
+
+        /// <summary>
+        /// Obtiene los parametros desde el appsettings.
+        /// </summary>
+        /// <param name="pTypeToken">Tipo del token.</param>
+        /// <param name="pAccessToken">Token.</param>
+        /// <returns></returns>
+        private TokenBearer TokenAppsettings(string pTypeToken, string pAccessToken)
+        {
+            IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+            TokenBearer token = new TokenBearer();
+
+            if (environmentVariables.Contains(pAccessToken) && environmentVariables.Contains(pTypeToken))
+            {
+                token.access_token = environmentVariables[pAccessToken] as string;
+                token.token_type = environmentVariables[pTypeToken] as string;
+            }
+            else
+            {
+                token.access_token = _configuration[pAccessToken];
+                token.token_type = _configuration[pTypeToken];
+            }
+
+            return token;
         }
     }
 }

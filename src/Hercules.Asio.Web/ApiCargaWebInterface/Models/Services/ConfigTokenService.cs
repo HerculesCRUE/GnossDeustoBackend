@@ -17,7 +17,6 @@ namespace ApiCargaWebInterface.Models.Services
     /// </summary>
     public class ConfigTokenService
     {
-        public IConfigurationRoot Configuration { get; set; }
         public string Authority { get; set; }
         public string GrantType { get; set; }
         public string Scope { get; set; }
@@ -29,13 +28,13 @@ namespace ApiCargaWebInterface.Models.Services
         public string ScopeDocumentacion { get; set; }
         public string ClientIdOAIPMH { get; set; }
         public string ClientSecretOAIPMH { get; set; }
-        public ConfigTokenService()
+        private string ScopeConversor { get; set; }
+        private string ClientIdConversor { get; set; }
+        private string ClientSecretConversor { get; set; }
+        private IConfiguration _configuration { get; set; }
+        public ConfigTokenService(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-            Configuration = builder.Build();
+            _configuration = configuration;
         }
         /// <summary>
         /// obtiene el authority configurado
@@ -53,7 +52,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    authority = Configuration["Authority"];
+                    authority = _configuration["Authority"];
                 }
 
                 Authority = authority;
@@ -76,7 +75,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    clientSecretOAIPMH = Configuration["ClientSecretOAIPMH"];
+                    clientSecretOAIPMH = _configuration["ClientSecretOAIPMH"];
                 }
 
                 ClientSecretOAIPMH = clientSecretOAIPMH;
@@ -98,7 +97,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    ScopeDocumentacion = Configuration["ScopeDocumentacion"];
+                    ScopeDocumentacion = _configuration["ScopeDocumentacion"];
                 }
             }
             return ScopeDocumentacion;
@@ -120,7 +119,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    scopeOAIPMH = Configuration["ScopeOAIPMH"];
+                    scopeOAIPMH = _configuration["ScopeOAIPMH"];
                 }
 
                 ScopeOAIPMH = scopeOAIPMH;
@@ -143,7 +142,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    ScopeOAIPMH = Configuration["ClientIdOAIPMH"];
+                    ScopeOAIPMH = _configuration["ClientIdOAIPMH"];
                 }
 
                 ClientIdOAIPMH = ScopeOAIPMH;
@@ -166,7 +165,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    grantType = Configuration["GrantType"];
+                    grantType = _configuration["GrantType"];
                 }
 
                 GrantType = grantType;
@@ -189,7 +188,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    scope = Configuration["Scope"];
+                    scope = _configuration["Scope"];
                 }
 
                 Scope = scope;
@@ -212,7 +211,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    scope = Configuration["ScopeCron"];
+                    scope = _configuration["ScopeCron"];
                 }
 
                 ScopeCron = scope;
@@ -235,7 +234,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    scope = Configuration["ScopeUrisFactory"];
+                    scope = _configuration["ScopeUrisFactory"];
                 }
 
                 ScopeUrisFactory = scope;
@@ -258,7 +257,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    clientId = Configuration["ClientId"];
+                    clientId = _configuration["ClientId"];
                 }
 
                 ClientId = clientId;
@@ -281,12 +280,81 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    clientSecret = Configuration["ClientSecret"];
+                    clientSecret = _configuration["ClientSecret"];
                 }
 
                 ClientSecret = clientSecret;
             }
             return ClientSecret;
-        } 
+        }
+
+        /// <summary>
+        /// Obtiene la limitación de acceso al conversor.
+        /// </summary> 
+        public string GetScopeConversor()
+        {
+            if (string.IsNullOrEmpty(ScopeConversor))
+            {
+                string scope = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ScopeConversor"))
+                {
+                    scope = environmentVariables["ScopeConversor"] as string;
+                }
+                else
+                {
+                    scope = _configuration["ScopeConversor"];
+                }
+
+                ScopeConversor = scope;
+            }
+            return ScopeConversor;
+        }
+
+        /// <summary>
+        /// Obtiene la "clave" de acceso del conversor.
+        /// </summary>
+        public string GetClientSecretConversor()
+        {
+            if (string.IsNullOrEmpty(ClientSecretConversor))
+            {
+                string clientSecret = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ClientSecretConversor"))
+                {
+                    clientSecret = environmentVariables["ClientSecretConversor"] as string;
+                }
+                else
+                {
+                    clientSecret = _configuration["ClientSecretConversor"];
+                }
+
+                ClientSecretConversor = clientSecret;
+            }
+            return ClientSecretConversor;
+        }
+
+        /// <summary>
+        /// Obtiene la ID del cliente Conversor.
+        /// </summary>
+        public string GetClientIdConversor()
+        {
+            if (string.IsNullOrEmpty(ClientIdConversor))
+            {
+                string clientId = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ClientIdConversor"))
+                {
+                    clientId = environmentVariables["ClientIdConversor"] as string;
+                }
+                else
+                {
+                    clientId = _configuration["ClientIdConversor"];
+                }
+
+                ClientIdConversor = clientId;
+            }
+            return ClientIdConversor;
+        }
     }
 }

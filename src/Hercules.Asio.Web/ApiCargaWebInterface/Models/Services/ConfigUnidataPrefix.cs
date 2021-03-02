@@ -14,9 +14,14 @@ namespace ApiCargaWebInterface.Models.Services
     /// </summary>
     public class ConfigUnidataPrefix
     {
-        public IConfigurationRoot Configuration { get; set; }
         private string UnidataDomain { get; set; }
-        
+        private IConfiguration _configuration { get; set; }
+
+        public ConfigUnidataPrefix(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         /// <summary>
         /// Obtiene la url del dominio de Unidata
         /// </summary>
@@ -25,11 +30,6 @@ namespace ApiCargaWebInterface.Models.Services
         {
             if (string.IsNullOrEmpty(UnidataDomain))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 string connectionString = "";
                 if (environmentVariables.Contains("UnidataDomain"))
@@ -38,7 +38,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    connectionString = Configuration["UnidataDomain"];
+                    connectionString = _configuration["UnidataDomain"];
                 }
                 UnidataDomain = connectionString;
             }

@@ -17,11 +17,17 @@ namespace ApiCargaWebInterface.Models.Services
     /// </summary>
     public class ConfigPathLog
     {
-        private IConfigurationRoot Configuration { get; set; }
         private string _LogPath;
         private string _LogPathCarga;
         private string _LogPathCron;
         private string _LogPathBase;
+        private IConfiguration _configuration { get; set; }
+
+        public ConfigPathLog(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         /// <summary>
         /// Obtiene el nombre de la carpeta configurada para los logs de la propia aplicación
         /// </summary>
@@ -30,11 +36,6 @@ namespace ApiCargaWebInterface.Models.Services
         {
             if (string.IsNullOrEmpty(_LogPath))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 string logPath = "";
                 if (environmentVariables.Contains("LogPath"))
@@ -43,7 +44,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    logPath = Configuration["LogPath"];
+                    logPath = _configuration["LogPath"];
                 }
                 _LogPath = logPath;
             }
@@ -57,11 +58,6 @@ namespace ApiCargaWebInterface.Models.Services
         {
             if (string.IsNullOrEmpty(_LogPathBase))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 string logPath = "";
                 if (environmentVariables.Contains("LogPathBase"))
@@ -70,7 +66,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    logPath = Configuration["LogPathBase"];
+                    logPath = _configuration["LogPathBase"];
                 }
                 _LogPathBase = logPath;
             }
@@ -84,11 +80,6 @@ namespace ApiCargaWebInterface.Models.Services
         {
             if (string.IsNullOrEmpty(_LogPathCarga))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 string logPath = "";
                 if (environmentVariables.Contains("LogPathCarga"))
@@ -97,7 +88,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    logPath = Configuration["LogPathCarga"];
+                    logPath = _configuration["LogPathCarga"];
                 }
                 _LogPathCarga = logPath;
             }
@@ -111,11 +102,6 @@ namespace ApiCargaWebInterface.Models.Services
         {
             if (string.IsNullOrEmpty(_LogPathCron))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 string logPath = "";
                 if (environmentVariables.Contains("LogPathCron"))
@@ -124,7 +110,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else
                 {
-                    logPath = Configuration["LogPathCron"];
+                    logPath = _configuration["LogPathCron"];
                 }
                 _LogPathCron = logPath;
             }

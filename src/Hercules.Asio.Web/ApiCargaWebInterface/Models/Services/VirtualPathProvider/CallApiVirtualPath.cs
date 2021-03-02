@@ -3,10 +3,14 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Servicio para obtener las variables de configuración de urls
 using ApiCargaWebInterface.Models.Entities;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Serilog;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -21,6 +25,7 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
         readonly ConfigUrlService _serviceUrl;
         readonly ICallService _serviceApi;
         readonly CallTokenService _tokenService;
+
         public CallApiVirtualPath(CallTokenService tokenService, ConfigUrlService serviceUrl, ICallService serviceApi)
         {
             _serviceUrl = serviceUrl;
@@ -66,7 +71,7 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
             return resultObject;
         }
 
-        public void CreatePage(Guid pageId,string route, IFormFile pageHtml)
+        public void CreatePage(Guid pageId, string route, IFormFile pageHtml)
         {
             LoadToken();
             string method = $"page/load?route={route}";
@@ -82,13 +87,13 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
             {
                 _serviceApi.CallPostApi(_serviceUrl.GetUrlDocumentacion(), method, pageHtml, _token);
             }
-            
+
         }
 
         public void DeletePage(Guid pageId)
         {
             LoadToken();
-            _serviceApi.CallDeleteApi(_serviceUrl.GetUrlDocumentacion(), $"page/delete?pageId={pageId}",_token);
+            _serviceApi.CallDeleteApi(_serviceUrl.GetUrlDocumentacion(), $"page/delete?pageId={pageId}", _token);
         }
     }
 }

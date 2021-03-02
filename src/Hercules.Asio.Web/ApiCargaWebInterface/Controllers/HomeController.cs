@@ -16,6 +16,7 @@ namespace ApiCargaWebInterface.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        ConfigUrlService _configUrlService;
         [AllowAnonymous]
         [Route("login")]
         public async Task Login(string returnUrl)
@@ -23,16 +24,15 @@ namespace ApiCargaWebInterface.Controllers
             var props = new AuthenticationProperties { RedirectUri = returnUrl };
             await HttpContext.ChallengeAsync("CAS", props);
         }
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ConfigUrlService configUrlService)
         {
             _logger = logger;
+            _configUrlService = configUrlService;
         }
 
         public IActionResult Index()
         {
-            ConfigUrlService urlService = new ConfigUrlService();
-            string routeProxy = $"{urlService.GetProxy()}/public/gnossdeustobackend/home";
-            //string routeProxy = $"{urlService.GetProxy()}/CMS";
+            string routeProxy = $"{_configUrlService.GetProxy()}/public/gnossdeustobackend/home";
             return Redirect(routeProxy);
         }
 

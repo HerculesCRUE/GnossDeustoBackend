@@ -73,10 +73,16 @@ namespace ApiCargaWebInterface.Controllers
             {
                 token = _callTokenService.CallTokenApiDocumentacion();
             }
+            else if (token_Type.Equals((int)TokensEnum.TokenConversor))
+            {
+                token = _callTokenService.CallTokenConversor();
+            }
+
             if (token != null)
             {
                 tokenViewModel.Token = $"{token.token_type} {token.access_token}";
             }
+
             tokenViewModel.TokenOptions = LoadTokenList();
             return View("Index",tokenViewModel);
         }
@@ -88,11 +94,12 @@ namespace ApiCargaWebInterface.Controllers
         private Dictionary<int, string> LoadTokenList()
         {
             Dictionary<int, string> tokensList = new Dictionary<int, string>();
-            tokensList.Add((int)TokensEnum.TokenCarga, "token de api carga");
-            tokensList.Add((int)TokensEnum.TokenUrisFactory, "token de uris factory");
-            tokensList.Add((int)TokensEnum.TokenCron, "token de cron configure");
-            tokensList.Add((int)TokensEnum.TokenOAIPMH, "token de api OAIPMH");
-            tokensList.Add((int)TokensEnum.TokenDocumentacion, "token de api documentacion");
+            tokensList.Add((int)TokensEnum.TokenCarga, "Token de API CARGA");
+            tokensList.Add((int)TokensEnum.TokenUrisFactory, "Token de URIS FACTORY");
+            tokensList.Add((int)TokensEnum.TokenCron, "Token de CRON CONFIGURE");
+            tokensList.Add((int)TokensEnum.TokenOAIPMH, "Token de API OAIPMH");
+            tokensList.Add((int)TokensEnum.TokenDocumentacion, "Token de API DOCUMENTACIÓN");
+            tokensList.Add((int)TokensEnum.TokenConversor, "Token de CONVERSOR XML-RDF");
             return tokensList;
         }
     }
