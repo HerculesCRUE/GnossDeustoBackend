@@ -114,22 +114,23 @@ namespace Linked_Data_Server.Controllers
                 RdfXmlWriter rdfXmlWriter = new RdfXmlWriter();
                 rdfXmlWriter.Save(dataGraph, sw);
                 string rdf = sw.ToString();
-
-                //Añadimos la etiquetqa ETag al header
-                using (SHA256 sha256Hash = SHA256.Create())
-                {
-                    string etag = GetHash(sha256Hash, rdf);
-                    string ifNoneMatch = HttpContext.Request.Headers["If-None-Match"];
-                    if (ifNoneMatch == etag)
-                    {
-                        HttpContext.Response.StatusCode = 304;
-                    }
-                    HttpContext.Response.Headers.Add("ETag", etag);
-                }
+                
                 Microsoft.Extensions.Primitives.StringValues stringvalues;
                 HttpContext.Request.Headers.TryGetValue("accept", out stringvalues);
                 if (stringvalues == "application/rdf+xml")
                 {
+					//Añadimos la etiquetqa ETag al header
+					using (SHA256 sha256Hash = SHA256.Create())
+					{
+						string etag = GetHash(sha256Hash, rdf);
+						string ifNoneMatch = HttpContext.Request.Headers["If-None-Match"];
+						if (ifNoneMatch == etag)
+						{
+							HttpContext.Response.StatusCode = 304;
+						}
+						HttpContext.Response.Headers.Add("ETag", etag);
+					}
+					
                     //Devolvemos en formato RDF
                     return File(Encoding.UTF8.GetBytes(rdf), "application/rdf+xml");
                 }
@@ -198,6 +199,23 @@ namespace Linked_Data_Server.Controllers
                     entityModel.propsTransform = mLinked_Data_Server_Config.PropsTransform;
                     entityModel.tables = dataTables;
                     entityModel.arborGraphs = dataArborGrahs;
+					
+					//Añadimos la etiquetqa ETag al header
+                    using (SHA256 sha256Hash = SHA256.Create())
+                    {
+                        string stringToHash = JsonConvert.SerializeObject(entityModel.linkedDataRDF);
+                        stringToHash += JsonConvert.SerializeObject(entityModel.propsTransform);
+                        stringToHash += JsonConvert.SerializeObject(entityModel.tables);
+                        stringToHash += JsonConvert.SerializeObject(entityModel.arborGraphs);
+                        string etag = GetHash(sha256Hash, stringToHash);
+                        string ifNoneMatch = HttpContext.Request.Headers["If-None-Match"];
+                        if (ifNoneMatch == etag)
+                        {
+                            HttpContext.Response.StatusCode = 304;
+                        }
+                        HttpContext.Response.Headers.Add("ETag", etag);
+                    }
+					
                     return View(entityModel);
                 }
             }
