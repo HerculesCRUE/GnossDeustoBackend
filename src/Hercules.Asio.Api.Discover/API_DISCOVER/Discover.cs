@@ -307,7 +307,8 @@ namespace API_DISCOVER
                 else
                 {
                     //Creamos los SameAs hacia unidata para las entidades que NO lo tengan hacia Unidata                       
-                    pDiscoverResult.dataGraph = AsioPublication.CreateUnidataSameAs(pDiscoverResult.dataGraph, UnidataDomain, UnidataUriTransform);
+                    //TODO descomentar
+                    //pDiscoverResult.dataGraph = AsioPublication.CreateUnidataSameAs(pDiscoverResult.dataGraph, UnidataDomain, UnidataUriTransform);
 
                     //Publicamos en el SGI
                     AsioPublication asioPublication = new AsioPublication(SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
