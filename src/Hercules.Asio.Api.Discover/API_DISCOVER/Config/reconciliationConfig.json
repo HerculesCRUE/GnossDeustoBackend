@@ -179,7 +179,7 @@
         "inverse": false,
         "type": 3,
         "maxNumWordsTitle": 10,
-        "scorePositive": 0.9,
+        "scorePositive": 0.89,
         "scoreNegative": null
       },
       {
