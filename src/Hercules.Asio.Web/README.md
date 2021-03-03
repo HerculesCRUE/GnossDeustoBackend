@@ -33,7 +33,7 @@ Hay una versión disponible en el entorno de pruebas de la Universidad de Murcia
 https://herc-as-front-desa.atica.um.es/carga-web.
 
 
-En esta carpeta está disponible el [Manual de Usuario del FrontEnd](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/Manual%20de%20usuario.md).
+En esta carpeta está disponible el [Manual de Usuario del FrontEnd](Manual-de-usuario.md).
 
 ## Configuración en el appsettings.json
  >

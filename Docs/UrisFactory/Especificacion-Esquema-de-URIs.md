@@ -107,7 +107,7 @@ asunto poco relevante.
 Los URI generados por ASIO serán resueltos con el protocolo HTTP por el
 servidor Linked Data de ASIO, que será implementado cumpliendo la 
 recomendación LDP, según se indica en el documento [Evaluación de 
-cumplimiento Linked Data Platform (LDP)](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/20200415%20H%C3%A9rcules%20ASIO%20Evaluaci%C3%B3n%20de%20cumplimiento%20Linked%20Data%20Platform.md).
+cumplimiento Linked Data Platform (LDP)](../Hercules-ASIO-Evaluacion-de-cumplimiento-Linked-Data-Platform.md).
 
 Estructura del Esquema de URIs
 ==============================

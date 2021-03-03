@@ -22,8 +22,7 @@
 Introducción y criterios de utilización
 =======================================
 El proceso de descubrimiento usa fuentes externas de información para reconciliar, 
-descubrir y detectar equivalencias (ver [Hércules Backend ASIO. Especificación de 
-las funciones de descubrimiento](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/H%C3%A9rcules%20ASIO.%20Especificaci%C3%B3n%20de%20las%20funciones%20de%20descubrimiento.md)).
+descubrir y detectar equivalencias (ver [Hercules-ASIO.-Especificacion-de-las-funciones-de-descubrimiento](Hercules-ASIO.-Especificacion-de-las-funciones-de-descubrimiento.md)).
 
 La información proporcionada por estas fuentes permite identificar y desambiguar a los 
 investigadores y sus resultados de investigación, y obtener información adicional, 

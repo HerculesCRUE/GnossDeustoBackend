@@ -28,7 +28,7 @@ http://herc-as-front-desa.atica.um.es/api-discover/library/api/API_DISCOVER.Util
 API DISCOVER es un servicio encargado de aplicar el descubrimiento sobre los RDF de carga para su posterior publicación la BBDD.
  
 Para una especificación más detallada acerca del funcionaminto del descubrimiento se puede consultar la siguiente documentación:
-[Hércules Backend ASIO. Especificación de las funciones de descubrimiento](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/H%C3%A9rcules%20ASIO.%20Especificaci%C3%B3n%20de%20las%20funciones%20de%20descubrimiento.md)
+[Hércules Backend ASIO. Especificación de las funciones de descubrimiento](../../Docs/Hercules-ASIO.-Especificacion-de-las-funciones-de-descubrimiento.md)
  
 *Conexión a Triple Store*
 -------------------------
@@ -39,7 +39,7 @@ El SPARQL Endpoint provisional se encuentra disponible en un servidor de la Univ
 
 http://155.54.239.204:8890/sparql
 
-Hay ejemplos de consultas en el documento [20200325 Hércules ASIO Ejemplos de consultas](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/SPARQL/20200325%20H%C3%A9rcules%20ASIO%20Ejemplos%20de%20consultas%20SPARQL.md)
+Hay ejemplos de consultas en el documento [20200325 Hércules ASIO Ejemplos de consultas](../../Docs//SPARQL/Hercules-ASIO-Ejemplos-de-consultas-SPARQL.md)
 
 Los datos cargados se pueden consultar en una versión preliminar del servidor Linked Data, soportado por [Trifid](https://github.com/zazuko/trifid), desplegado en los servidores de la Universidad de Murcia. Por ejemplo:
 
