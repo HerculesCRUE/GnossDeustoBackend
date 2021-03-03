@@ -15,7 +15,7 @@ Hay que realizar una modificación en el host de la maquina desde la que estemos
 
 Una vez desplegados y configurados todos los contenedores, como se indica en el documento [Despliegue del backend con Docker](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/docker-images), podemos realizar las pruebas necesarias para comprobar todos los servicios están respondiendo correctamente, para ello accederemos vía el interfaz web y realizaremos una carga inicial, y comprobaremos en virtuoso que los datos se hayan obtenido correctamente. 
 
-El primer paso es acceder a la interfaz web de los servicios dados de alta, por ejemplo: http://ip_de_nuestra_máquina:5103, todas las funcionalidades disponibles en el interfaz web se detallan en el documento [Manual de usuario del FrontEnd de Carga](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/Manual%20de%20usuario.md#administraci%C3%B3n-de-p%C3%A1ginas)
+El primer paso es acceder a la interfaz web de los servicios dados de alta, por ejemplo: http://ip_de_nuestra_máquina:5103, todas las funcionalidades disponibles en el interfaz web se detallan en el documento [Manual de usuario del FrontEnd de Carga](../src\Hercules.Asio.Web/Manual-de-usuario.md#administraci%C3%B3n-de-p%C3%A1ginas)
 
 Comprobamos que podemos acceder al endpoint de virtuoso accediendo a http://ip_de_nuestra_máquina:8089/sparql y comprobamos que no hay cargado ningún dato con la siguiente con la siguiente consulta:
 ```
