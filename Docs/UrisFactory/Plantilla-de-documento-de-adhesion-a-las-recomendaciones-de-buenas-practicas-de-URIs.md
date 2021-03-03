@@ -51,7 +51,7 @@ de Hércules ASIO cumplen con las siguientes condiciones:
     que el recurso ha sido eliminado.
     
 -   Los URIs se construirán siguiendo la [Especificación del Esquema de URIs
-    de Hércules](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/UrisFactory/docs/Especificaci%C3%B3n%20Esquema%20de%20URIs.md) y las recomendaciones de normalización de las 
+    de Hércules](Especificacion-Esquema-de-URIs.md) y las recomendaciones de normalización de las 
     Buenas prácticas de URIs de Hércules.
     
 -   Los recursos persistentes continuarán estando disponibles durante la
@@ -85,7 +85,7 @@ INTRODUCCIÓN
 
 El presente documento describe las buenas prácticas en la definición de los URI
 para el proyecto Hércules ASIO y tiene en cuenta lo indicado en la 
-[Especificación del Esquema de URIs de Hércules](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/UrisFactory/docs/Especificaci%C3%B3n%20Esquema%20de%20URIs.md).
+[Especificación del Esquema de URIs de Hércules](Especificacion-Esquema-de-URIs.md).
 
 En su elaboración aplicamos las recomendaciones de la [Norma
 Técnica de Interoperabilidad de Reutilización de recursos de la

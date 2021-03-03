@@ -216,4 +216,4 @@ A continuación se muestra un ejemplo de una página creada mediante este formul
 
 ![](img/paginaCreada.png)
 
-Podemos encontrar un pequeño manual de creación de páginas en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/Manual%20de%20creacion%20de%20paginas.md
+Disponemos de un pequeño [manual de creación de páginas](Manual-de-creacion-de-paginas.md)

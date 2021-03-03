@@ -4,16 +4,14 @@
 
 Esta carpeta contiene los siguientes documentos:
 
-[Especificación Esquema de URIs.md](Especificaci%C3%B3n%20Esquema%20de%20URIs.md)
-
-[Especificación Esquema de URIs.md](Especificación Esquema de URIs.md)
+[Especificación Esquema de URIs.md](Especificacion-Esquema-de-URIs.md)
 
 Describe la Especificación del Esquema de URIs para el proyecto Hércules ASIO.
 
-[Buenas prácticas URIs.md](Buenas%20pr%C3%A1cticas%20URIs.md)
+[Buenas prácticas URIs.md](Buenas-practicas-URIs.md)
 
 El presente documento describe las buenas prácticas en la definición de los URI para el 
-proyecto Hércules ASIO y tiene en cuenta la [Especificación del Esquema de URIs](Especificaci%C3%B3n%20Esquema%20de%20URIs.md).
+proyecto Hércules ASIO y tiene en cuenta la [Especificación del Esquema de URIs](Especificacion-Esquema-de-URIs.md).
 
 [20191211 Esquema de URIs.json](20191211%20Esquema%20de%20URIs.json)
 

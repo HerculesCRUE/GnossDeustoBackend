@@ -35,7 +35,7 @@ Por tanto, ya que íbamos a tener un visualizador de RDF y que la integración d
 El Linked Data Server de ASIO, desarrollado en tecnologías .Net Core, quedará disponible para la comunidad de desarrolladores como un software abierto y reutilizable en cualquier otro proyecto de Linked Data que necesite un servicio desarrollado en el _stack_ tecnológico de Microsoft.
 
 El Linked Data Server de ASIO cumple la especificación LDP:
-[Hércules Backend ASIO. Evaluación de cumplimiento Linked Data Platform (LDP)](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/20200415%20H%C3%A9rcules%20ASIO%20Evaluaci%C3%B3n%20de%20cumplimiento%20Linked%20Data%20Platform.md)
+[Hércules Backend ASIO. Evaluación de cumplimiento Linked Data Platform (LDP)](../../Docs/Hercules-ASIO-Evaluacion-de-cumplimiento-Linked-Data-Platform.md)
  
 Ejemplos de resolución de URIs
 -----------------------

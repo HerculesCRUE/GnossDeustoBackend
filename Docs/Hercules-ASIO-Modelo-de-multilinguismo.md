@@ -107,9 +107,9 @@ interpretable por humanos, si bien podría el tipo de código puede ser
 reconocido por algunos (un ORCID o un DNI). En cuanto a la parte
 descriptiva del URI (http://data.um.es/res/**project**/{código}), el
 proyecto ASIO cuenta con unas buenas prácticas y un Esquema de URIs (ver
-[20191220 Hércules ASIO Especificación Esquema de URIs y Buenas
+[Hércules ASIO Especificación Esquema de URIs y Buenas
 prácticas
-URIs](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/UrisFactory/docs/20191220%20H%C3%A9rcules%20ASIO%20Especificaci%C3%B3n%20Esquema%20de%20URIs%20y%20Buenas%20pr%C3%A1cticas%20URIs.md)
+URIs](UrisFactory/Buenas-practicas-URIs.md)
 y [20191211 Esquema de
 URIs.json](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/UrisFactory/docs/20191211%20Esquema%20de%20URIs.json))
 que propone URIs descriptivos en un único idioma con caracteres ASCII no
