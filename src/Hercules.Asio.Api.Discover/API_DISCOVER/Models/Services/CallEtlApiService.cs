@@ -5,11 +5,16 @@
 using API_DISCOVER.Extra.Exceptions;
 using API_DISCOVER.Models.Entities;
 using API_DISCOVER.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -26,16 +31,16 @@ namespace API_DISCOVER.Models.Services
     {
         readonly ConfigUrlService _serviceUrl;
         readonly TokenBearer _token;
-        
+
         static RohGraph ontologia;
         static string hash;
 
-        public CallEtlApiService(ConfigUrlService serviceUrl,CallTokenService tokenService)
+        public CallEtlApiService(ConfigUrlService serviceUrl, CallTokenService tokenService)
         {
             _serviceUrl = serviceUrl;
             if (tokenService != null)
-            {
-                _token = tokenService.CallTokenCarga();
+            {                
+                _token = tokenService.CallTokenCarga();   
             }
         }
 

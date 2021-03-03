@@ -11,6 +11,11 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using System.Collections;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace API_DISCOVER.Models.Services
 {
@@ -21,9 +26,12 @@ namespace API_DISCOVER.Models.Services
     public class CallTokenService
     {
         private ConfigTokenService _configToken;
-        public CallTokenService(ConfigTokenService configToken)
+        readonly IHostEnvironment _env;
+
+        public CallTokenService(ConfigTokenService configToken, IHostEnvironment env)
         {
             _configToken = configToken;
+            _env = env;
         }
         
         /// <summary>
@@ -32,8 +40,16 @@ namespace API_DISCOVER.Models.Services
         /// <returns>Token bearer</returns>
         public TokenBearer CallTokenCarga()
         {
-            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScope()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
-            return CallTokenIdentity(stringData);
+            //TODO no funciona bien en depuración
+            if (_env.IsDevelopment())
+            {
+                return TokenAppsettings("TokenTypeCarga", "AccessTokenCarga");
+            }
+            else
+            {
+                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScope()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+                return CallTokenIdentity(stringData);
+            }
         }
         /// <summary>
         /// Obtiene un token de seguridad de acceso para el Api cron
@@ -41,8 +57,15 @@ namespace API_DISCOVER.Models.Services
         /// <returns>Token bearer</returns>
         public TokenBearer CallTokenCron()
         {
-            string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeCron()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
-            return CallTokenIdentity(stringData);
+            if (_env.IsDevelopment())
+            {
+                return TokenAppsettings("TokenTypeCron", "AccessTokenCron");
+            }
+            else
+            {
+                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeCron()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+                return CallTokenIdentity(stringData);
+            }
         }
         /// <summary>
         /// Llama al api de gestión de tokens
@@ -75,6 +98,36 @@ namespace API_DISCOVER.Models.Services
                     throw new HttpRequestException(response.ReasonPhrase);
                 }
             }
+        }
+
+        /// <summary>
+        /// Obtiene los parametros desde el appsettings.
+        /// </summary>
+        /// <param name="pTypeToken">Tipo del token.</param>
+        /// <param name="pAccessToken">Token.</param>
+        /// <returns></returns>
+        private TokenBearer TokenAppsettings(string pTypeToken, string pAccessToken)
+        {
+            IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+            TokenBearer token = new TokenBearer();
+
+            if (environmentVariables.Contains(pAccessToken) && environmentVariables.Contains(pTypeToken))
+            {
+                token.access_token = environmentVariables[pAccessToken] as string;
+                token.token_type = environmentVariables[pTypeToken] as string;
+            }
+            else
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                IConfigurationRoot Configuration = builder.Build();
+                token.access_token = Configuration[pAccessToken];
+                token.token_type = Configuration[pTypeToken];
+            }
+
+            return token;
         }
     }
 }

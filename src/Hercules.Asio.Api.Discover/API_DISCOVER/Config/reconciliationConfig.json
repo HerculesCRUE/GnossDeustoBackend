@@ -2,7 +2,6 @@
   {
     "rdfType": "http://purl.org/roh/mirror/foaf#Person",
     "identifiers": [
-      "http://purl.org/roh/mirror/vivo#identifier",
       "http://purl.org/roh/mirror/vivo#eRACommonsId",
       "http://purl.org/roh/mirror/vivo#researcherId",
       "http://purl.org/roh#ORCID",
@@ -88,9 +87,7 @@
   },
   {
     "rdfType": "http://purl.org/roh/mirror/foaf#Organization",
-    "identifiers": [
-      "http://purl.org/roh/mirror/vivo#identifier"
-    ],
+    "identifiers": [],
     "properties": [
       {
         "property": "http://purl.org/roh#title",
@@ -132,9 +129,7 @@
   },
   {
     "rdfType": "http://purl.org/roh/mirror/vivo#Project",
-    "identifiers": [
-      "http://purl.org/roh/mirror/vivo#identifier"
-    ],
+    "identifiers": [],
     "properties": [
       {
         "property": "http://purl.org/roh#title",
@@ -272,9 +267,7 @@
   },
   {
     "rdfType": "http://purl.org/roh#Activity",
-    "identifiers": [
-      "http://purl.org/roh/mirror/vivo#identifier"
-    ],
+    "identifiers": [],
     "properties": [
       {
         "property": "http://purl.org/roh#title",

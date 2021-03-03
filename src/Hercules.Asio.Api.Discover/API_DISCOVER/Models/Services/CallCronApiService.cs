@@ -11,6 +11,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Hosting;
+using System.Collections;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace API_DISCOVER.Models.Services
 {
@@ -27,7 +32,7 @@ namespace API_DISCOVER.Models.Services
             _serviceUrl = serviceUrl;
             if (tokenService != null)
             {
-                _token = tokenService.CallTokenCron();
+                _token = tokenService.CallTokenCron();                
             }
         }
         
