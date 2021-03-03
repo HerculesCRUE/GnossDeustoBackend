@@ -16,8 +16,7 @@ namespace Hercules.Asio.Api.Carga.Models.Services
         {
             if (tokenService != null)
             {
-                //TODO descomentar
-                //_token = tokenService.CallTokenConversor();
+                _token = tokenService.CallTokenConversor();
             }
         }
 
