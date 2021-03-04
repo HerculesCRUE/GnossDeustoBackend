@@ -58,15 +58,6 @@ namespace GestorDocumentacion
             {
                 authority = Configuration["Authority"];
             }
-            string scope = "";
-            if (environmentVariables.Contains("Scope"))
-            {
-                scope = environmentVariables["Scope"] as string;
-            }
-            else
-            {
-                scope = Configuration["Scope"];
-            }
 
             if (_env.IsDevelopment())
             {
@@ -82,7 +73,7 @@ namespace GestorDocumentacion
                 {
                     options.Authority = authority;
                     options.RequireHttpsMetadata = false;
-                    options.ApiName = scope;
+                    options.ApiName = "apiGestorDocumentacion";
                 });
                 services.AddAuthorization();
             }
