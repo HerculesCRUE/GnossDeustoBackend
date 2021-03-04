@@ -8,7 +8,7 @@
 
 [3 SERVICIO OAI-PMH PARA CARGA DE CVN](#servicio-oai-pmh-para-carga-de-cvn)
 
-[3.1 ACTUALIZACIÓN DE DATOS DESDE EL REPOSITORIO CVN(#actualización-de-datos-desde-el-repositorio-cvn)
+[3.1 ACTUALIZACIÓN DE DATOS DESDE EL REPOSITORIO CVN](#actualización-de-datos-desde-el-repositorio-cvn)
 
 [4 CARGA INICIAL DE DATOS DE LA UNIVERSIDAD DE MURCIA](#carga-inicial-de-datos-de-la-universidad-de-murcia)
 
