@@ -63,16 +63,6 @@ En esta carpeta está disponible el [Manual de Usuario del FrontEnd](Manual-de-u
 		"ConfigUrlCron": "http://herc-as-front-desa.atica.um.es/cron-config/",
 		"ConfigUrlUrisFactory": "http://herc-as-front-desa.atica.um.es/uris/",
 		"Authority": "http://localhost:56306/connect/token",
-		"GrantType": "client_credentials",
-		"Scope": "apiCarga",
-		"ScopeCron": "apiCron",
-		"ScopeUrisFactory": "apiUrisFactory",
-		"ScopeDocumentacion": "apiGestorDocumentacion",
-		"ScopeOAIPMH": "apiOAIPMH",
-		"ClientId": "Web",
-		"ClientIdOAIPMH": "OAIPMH",
-		"ClientSecretOAIPMH": "secretOAIPMH",
-		"ClientSecret": "master",
 		"Proxy": "/carga-web",
 		"UnidataDomain": "http://graph.unidata.es"
 	}
@@ -92,16 +82,6 @@ En esta carpeta está disponible el [Manual de Usuario del FrontEnd](Manual-de-u
  - ConfigUrlCron: Url donde está lanzada la aplicación CronConfigure
  - ConfigUrlUrisFactory: Url donde está lanzada la aplicación UrisFactory
  - Authority: Endpoint para la llamada de obtención del token
- - GrantType: Tipo de concesión de Oauth
- - Scope: Limitación de acceso al api de carga
- - ScopeCron: Limitación de acceso al api de cron
- - ScopeDocumentacion: Limitación de acceso al api de documentación
- - ScopeOAIPMH: Limitación de acceso al api de OAIPMH
- - ScopeUrisFactory: Limitación de acceso al api de urisFactory
- - ClientId: Id de cliente, en este caso se ha configurado un cliente que pueda acceder a todas las apis que usa la web
- - ClientIdOAIPMH: Id de cliente de OAIPMH
- - ClientSecretOAIPMH: "clave" de acceso del cliente de OAIPMH
- - ClientSecret: "clave" de acceso del cliente
  - Proxy: directorio virtual que se ha configurado para el proxy inverso, en caso de que no se haya configurado dejar vacío.
  - UnidataDomain: Dominio del Linked Data server de Unidata
  
