@@ -22,20 +22,9 @@ namespace IdentityServerHecules
         {
             return new List<Client>
         {
-                //ClientId es el parámetro del servicio que solicita acceso 'client_id'
-                //ClientSecrets es el parámetro del servicio que solicita acceso 'client_secret'
-                //AllowedScopes son los scopes a los que se le da acceso
-            new Client
-            {
-                ClientId = "client",
-                AllowedGrantTypes = GrantTypes.ClientCredentials,
-                ClientSecrets =
-                {
-                    new Secret("secret".Sha256())
-                },
-                AllowedScopes = {"api1"},
-                AccessTokenLifetime = 86400
-            },
+                //ClientId es el parámetro del servicio que solicita acceso a través de 'client_id'
+                //ClientSecrets es el parámetro del servicio que solicita acceso a través de 'client_secret'
+                //AllowedScopes son los scopes a los que se le da acceso al servicio
             new Client
             {
                 ClientId = "carga",
@@ -44,7 +33,7 @@ namespace IdentityServerHecules
                 {
                     new Secret("secret".Sha256())
                 },
-                AllowedScopes = {"apiCarga","apiConversor"},
+                AllowedScopes = {"apiCarga","apiConversor","apiOAIPMH"},
                 AccessTokenLifetime = 86400
             },
             new Client
@@ -78,35 +67,8 @@ namespace IdentityServerHecules
                 {
                     new Secret("secretUris".Sha256())
                 },
-                AllowedScopes = { "apiUrisFactory"},
                 AccessTokenLifetime = 86400
-            }
-            ,
-            new Client
-            {
-                ClientId = "OAIPMH",
-                AllowedGrantTypes = GrantTypes.ClientCredentials,
-                ClientSecrets =
-                {
-                    new Secret("secretOAIPMH".Sha256())
-                },
-                AllowedScopes = { "apiOAIPMH"},
-                AccessTokenLifetime = 86400
-            }
-            ,
-            new Client
-            {
-                ClientId = "unidata",
-                AllowedGrantTypes = GrantTypes.ClientCredentials,
-                ClientSecrets =
-                {
-                    new Secret("secretUnidata".Sha256())
-                },
-                AllowedScopes = { "apiUnidata"},
-                AccessTokenLifetime = 86400
-                //AccessTokenType = AccessTokenType.Reference
-            }
-             ,
+            },
             new Client
             {
                 ClientId = "GestorDocumentacion",
@@ -117,7 +79,6 @@ namespace IdentityServerHecules
                 },
                 AllowedScopes = { "apiGestorDocumentacion"},
                 AccessTokenLifetime = 86400
-                //AccessTokenType = AccessTokenType.Reference
             },
             new Client
             {
@@ -129,19 +90,6 @@ namespace IdentityServerHecules
                 },
                 AllowedScopes = {"apiCron", "apiCarga"},
                 AccessTokenLifetime = 86400
-                //AccessTokenType = AccessTokenType.Reference
-            },
-            new Client
-            {
-                ClientId = "LinkedDataServer",
-                AllowedGrantTypes = GrantTypes.ClientCredentials,
-                ClientSecrets =
-                {
-                    new Secret("secretLinkedDataServer".Sha256())
-                },
-                AllowedScopes = {"apiCarga"},
-                AccessTokenLifetime = 86400
-                //AccessTokenType = AccessTokenType.Reference
             },
             new Client
             {
@@ -151,9 +99,8 @@ namespace IdentityServerHecules
                 {
                     new Secret("secretConversor".Sha256())
                 },
-                AllowedScopes = {"apiConversor", "apiCarga"},
+                AllowedScopes = { "apiUrisFactory"},
                 AccessTokenLifetime = 86400,
-                //AccessTokenType = AccessTokenType.Reference
             }
         };
         }
@@ -163,7 +110,7 @@ namespace IdentityServerHecules
         {
             return new List<ApiResource>
         {
-            new ApiResource("api1", "My Api"),new ApiResource("apiCarga", "My ApiCarga"),new ApiResource("apiCron", "My ApiCron"),new ApiResource("apiUrisFactory", "My ApiUrisFactory"),new ApiResource("apiOAIPMH", "My apiOAIPMH"),new ApiResource("apiUnidata", "My apiUnidata"),new ApiResource("apiGestorDocumentacion", "My apiDocumentacion"),new ApiResource("apiConversor", "My apiConversor")
+            new ApiResource("apiCarga", "API de Carga"),new ApiResource("apiCron", "API Cron configure"),new ApiResource("apiUrisFactory", "API UrisFactory"),new ApiResource("apiOAIPMH", "API OAIPMH cvn"),new ApiResource("apiGestorDocumentacion", "API GEstor de documentación"),new ApiResource("apiConversor", "API conversor XML RDF")
         };
         }
     }
