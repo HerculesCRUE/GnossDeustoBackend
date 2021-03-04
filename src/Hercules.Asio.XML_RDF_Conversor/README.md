@@ -12,7 +12,7 @@
 ## Sobre XML RDF Conversor
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
 
-Accesible en el entorno de desarrollo en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/uris/swagger/index.html.
+Accesible en el entorno de desarrollo en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/conversor_xml_rdf/swagger/index.html.
 
 XML RDF Conversor es un servicio web que contiene únicamente un controlador, cuyo propósito es:
  - ConversorController: Permite obtener un un archivo RDF mediante un XML dado.
