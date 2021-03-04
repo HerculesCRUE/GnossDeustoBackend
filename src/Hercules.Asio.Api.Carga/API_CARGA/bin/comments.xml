@@ -862,66 +862,6 @@
             Obtiene el parametro de query configurado en Sparql:QueryParam del fichero appsettings.json
             </summary>
         </member>
-        <member name="T:API_CARGA.Models.Services.ConfigTokenService">
-            <summary>
-            Clase para la obtención de los datos necesarios para obtener el token de acceso a los apis de apiCarga y OAIPMH_CVN
-            </summary> 
-        </member>
-        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetAuthorityGetToken">
-            <summary>
-            obtiene el endpoint para la llamada de obtención del token
-            </summary> 
-        </member>
-        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetGrantType">
-            <summary>
-            obtiene el tipo de concesión de Oauth
-            </summary> 
-        </member>
-        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetScopeCarga">
-            <summary>
-            obtiene la limitación de acceso al api de carga
-            </summary> 
-        </member>
-        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetClientIdCarga">
-            <summary>
-            obtiene el id de cliente del api de carga
-            </summary> 
-        </member>
-        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetClientSecretCarga">
-            <summary>
-            obtiene la "clave" de acceso del api de carga
-            </summary>
-        </member>
-        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetScopeOAIPMH">
-            <summary>
-            obtiene la limitación de acceso al api de OAIPMH
-            </summary> 
-        </member>
-        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetClientSecretOAIPMH">
-            <summary>
-            obtiene la "clave" de acceso del api de OAIPMH
-            </summary>
-        </member>
-        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetClientIdOAIPMH">
-            <summary>
-            obtiene la id del cliente de OAIPMH
-            </summary>
-        </member>
-        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetScopeConversor">
-            <summary>
-            Obtiene la limitación de acceso al conversor.
-            </summary> 
-        </member>
-        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetClientSecretConversor">
-            <summary>
-            Obtiene la "clave" de acceso del conversor.
-            </summary>
-        </member>
-        <member name="M:API_CARGA.Models.Services.ConfigTokenService.GetClientIdConversor">
-            <summary>
-            Obtiene la ID del cliente Conversor.
-            </summary>
-        </member>
         <member name="T:API_CARGA.Models.Services.ConfigUrlService">
             <summary>
             Clase usada para obtener las urlsConfiguradas

@@ -22,13 +22,11 @@ namespace API_CARGA.Models.Services
     /// </summary>
     public class CallTokenService
     {
-        private ConfigTokenService _configToken; 
         readonly IWebHostEnvironment _env;
         private IConfiguration _configuration { get; }
 
-        public CallTokenService(ConfigTokenService configToken, IWebHostEnvironment env,IConfiguration configuration)
+        public CallTokenService(IWebHostEnvironment env,IConfiguration configuration)
         {
-            _configToken = configToken;
             _env = env;
             _configuration = configuration;
         }
@@ -44,7 +42,7 @@ namespace API_CARGA.Models.Services
             }
             else
             {
-                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeCarga()}&client_id={_configToken.GetClientIdCarga()}&client_secret={_configToken.GetClientSecretCarga()}";
+                string stringData = $"grant_type=client_credentials&scope=apiCarga&client_id=carga&client_secret=secret";
                 return CallTokenIdentity(stringData);
             }
         }
@@ -60,7 +58,7 @@ namespace API_CARGA.Models.Services
             }
             else
             {
-                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeOAIPMH()}&client_id={_configToken.GetClientIdOAIPMH()}&client_secret={_configToken.GetClientSecretOAIPMH()}";
+                string stringData = $"grant_type=client_credentials&scope=apiOAIPMH&client_id=carga&client_secret=secret";
                 return CallTokenIdentity(stringData);
             }
         }
@@ -76,7 +74,7 @@ namespace API_CARGA.Models.Services
             }
             else
             {
-                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeConversor()}&client_id={_configToken.GetClientIdConversor()}&client_secret={_configToken.GetClientSecretConversor()}";
+                string stringData = $"grant_type=client_credentials&scope=apiConversor&client_id=carga&client_secret=secret";
                 return CallTokenIdentity(stringData);
             }
         }
@@ -93,7 +91,18 @@ namespace API_CARGA.Models.Services
             {
                 HttpClient client = new HttpClient();
                 client.Timeout = TimeSpan.FromDays(1);
-                string authority = _configToken.GetAuthorityGetToken();
+
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                string authority = "";
+                if (environmentVariables.Contains("Authority"))
+                {
+                    authority = environmentVariables["Authority"] as string;
+                }
+                else
+                {
+                    authority = _configuration["Authority"];
+                }
+                authority += "/connect/token";
                 response = client.PostAsync($"{authority}", contentData).Result;
                 response.EnsureSuccessStatusCode();
                 string result = response.Content.ReadAsStringAsync().Result;

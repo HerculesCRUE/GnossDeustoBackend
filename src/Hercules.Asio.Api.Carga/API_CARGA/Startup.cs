@@ -59,15 +59,6 @@ namespace PRH
             {
                 authority = _configuration["Authority"];
             }
-            string scope = "";
-            if (environmentVariables.Contains("ScopeCarga"))
-            {
-                scope = environmentVariables["ScopeCarga"] as string;
-            }
-            else
-            {
-                scope = _configuration["ScopeCarga"];
-            }
             services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -89,7 +80,7 @@ namespace PRH
                 {
                     options.Authority = authority;
                     options.RequireHttpsMetadata = false;
-                    options.ApiName = scope;
+                    options.ApiName = "apiCarga";
                 });
                 services.AddAuthorization();
             }
@@ -176,7 +167,6 @@ namespace PRH
             services.AddScoped<IShapesConfigService, ShapesConfigBDService>();
             services.AddScoped<ICallNeedPublishData, CallApiNeedInfoPublisData>();
             services.AddScoped<ICallService, CallApiService>();
-            services.AddScoped(typeof(ConfigTokenService));
             services.AddScoped(typeof(CallTokenService));
             services.AddScoped(typeof(CallApiService));
             services.AddScoped(typeof(CallOAIPMH));

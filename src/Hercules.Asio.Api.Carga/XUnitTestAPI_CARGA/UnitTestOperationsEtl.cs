@@ -7,6 +7,7 @@ using API_CARGA.Models.Entities;
 using API_CARGA.Models.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -81,10 +82,10 @@ namespace XUnitTestAPI_CARGA
         {
             ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            ConfigSparql configSparql = new ConfigSparql();
+            ConfigSparql configSparql = new ConfigSparql(null);
             configSparql.Endpoint = "";
             DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null, null);
+            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql,null, null, null, null);
 
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
@@ -105,7 +106,7 @@ namespace XUnitTestAPI_CARGA
         [Fact]
         public void DataValidateValidationFileOK()
         {
-            etlController etlController = new etlController(null, null, null, null, null, null, null);
+            etlController etlController = new etlController(null, null, null, null, null, null,null, null);
 
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
@@ -134,7 +135,7 @@ namespace XUnitTestAPI_CARGA
         [Fact]
         public void DataValidateValidationFileKO()
         {
-            etlController etlController = new etlController(null, null, null, null, null, null, null);
+            etlController etlController = new etlController(null,null, null, null, null, null, null, null);
 
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
@@ -165,10 +166,10 @@ namespace XUnitTestAPI_CARGA
         {
             ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            ConfigSparql configSparql = new ConfigSparql();
+            ConfigSparql configSparql = new ConfigSparql(null);
             configSparql.Endpoint = "";
             DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null, null);
+            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null, null,null);
 
             etlController.GetOntology();
             Assert.True(true);
@@ -179,10 +180,10 @@ namespace XUnitTestAPI_CARGA
         {
             ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            ConfigSparql configSparql = new ConfigSparql();
+            ConfigSparql configSparql = new ConfigSparql(null);
             configSparql.Endpoint = "";
             DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null, null);
+            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql,null, null, null, null);
 
             var response = etlController.GetOntologyHash();
             if (response != null)
@@ -196,10 +197,10 @@ namespace XUnitTestAPI_CARGA
         {
             ShapesConfigMockService shapesConfigMockService = new ShapesConfigMockService();
             RepositoriesConfigMockService repositoriesConfigMockService = new RepositoriesConfigMockService();
-            ConfigSparql configSparql = new ConfigSparql();
+            ConfigSparql configSparql = new ConfigSparql(null);
             configSparql.Endpoint = "";
             DiscoverItemMockService discoverItemService = new DiscoverItemMockService();
-            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql, null, null, null);
+            etlController etlController = new etlController(discoverItemService, repositoriesConfigMockService, shapesConfigMockService, configSparql,null, null, null, null);
 
             using (SHA256 sha256Hash = SHA256.Create())
             {

@@ -232,7 +232,7 @@ namespace API_CARGA.Models.Services
             else
             {
                 //En caso de que no venga el set
-                if (repositoryConfig.RepositoryConfigSet.FirstOrDefault(x => x.Set == "-") != null)
+                if (repositoryConfig!=null && repositoryConfig.RepositoryConfigSet.FirstOrDefault(x => x.Set == "-") != null)
                 {
                     //Actualizamos la fila de la tabla RepositoryConfigSet(con el campo set '-') con la fecha
                     repositoryConfig.RepositoryConfigSet.FirstOrDefault(x => x.Set == "-").LastUpdate = lastSyncro.Fecha;

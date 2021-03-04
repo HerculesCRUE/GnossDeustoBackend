@@ -124,6 +124,10 @@ namespace API_CARGA.Models.Services
             {
                 xml = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>  <OAI-PMH xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd\" xmlns=\"http://www.openarchives.org/OAI/2.0/\">    <responseDate>2021-02-10T14:24:38Z</responseDate>    <request verb=\"ListMetadataFormats\">http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH</request>    <ListMetadataFormats>      <metadataFormat>        <metadataPrefix>rdf</metadataPrefix>      </metadataFormat>    </ListMetadataFormats>  </OAI-PMH>";
             }
+            if (urlMethod.Contains("Identify"))
+            {
+                xml = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?><OAI-PMH xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd\" xmlns=\"http://www.openarchives.org/OAI/2.0/\"><responseDate>2021-03-04T16:26:09Z</responseDate><request verb=\"Identify\">http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH</request><Identify>      <repositoryName>OAI_PMH_CVN</repositoryName><baseURL>http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH</baseURL><protocolVersion>2.0</protocolVersion><adminEmail>test@domain.ch</adminEmail>      <earliestDatestamp>1987-02-16T00:00:00Z</earliestDatestamp><deletedRecord>no</deletedRecord><granularity>YYYY-MM-DDThh:mm:ssZ</granularity></Identify></OAI-PMH>";
+            }
 
             return xml;
         }
