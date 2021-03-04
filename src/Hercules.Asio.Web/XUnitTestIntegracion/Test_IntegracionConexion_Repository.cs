@@ -1,6 +1,8 @@
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
+using Microsoft.Extensions.Configuration;
 using System;
+using System.IO;
 using Xunit;
 
 namespace XUnitTestIntegracion
@@ -12,7 +14,13 @@ namespace XUnitTestIntegracion
         {
             try
             {
-                ConfigUrlService configUrl = new ConfigUrlService();
+                var builder = new ConfigurationBuilder()
+                   .SetBasePath(Directory.GetCurrentDirectory())
+                   .AddJsonFile("appsettings.Development.json");
+
+                IConfiguration Configuration = builder.Build();
+
+                ConfigUrlService configUrl = new ConfigUrlService(Configuration);
                 CallApiService callService = new CallApiService();
                 CallRepositoryConfigApiService callRepository = new CallRepositoryConfigApiService(callService, null, configUrl);
                 var resultado = callRepository.GetRepositoryConfigs();
@@ -29,7 +37,13 @@ namespace XUnitTestIntegracion
         {
             try
             {
-                ConfigUrlService configUrl = new ConfigUrlService();
+                var builder = new ConfigurationBuilder()
+                   .SetBasePath(Directory.GetCurrentDirectory())
+                   .AddJsonFile("appsettings.Development.json");
+
+                IConfiguration Configuration = builder.Build();
+
+                ConfigUrlService configUrl = new ConfigUrlService(Configuration);
                 CallApiService callService = new CallApiService();
                 CallRepositoryConfigApiService callRepository = new CallRepositoryConfigApiService(callService, null, configUrl);
                 Guid id = Guid.NewGuid();
@@ -47,7 +61,13 @@ namespace XUnitTestIntegracion
         {
             try
             {
-                ConfigUrlService configUrl = new ConfigUrlService();
+                var builder = new ConfigurationBuilder()
+                   .SetBasePath(Directory.GetCurrentDirectory())
+                   .AddJsonFile("appsettings.Development.json");
+
+                IConfiguration Configuration = builder.Build();
+
+                ConfigUrlService configUrl = new ConfigUrlService(Configuration);
                 CallApiService callService = new CallApiService();
                 CallRepositoryConfigApiService callRepository = new CallRepositoryConfigApiService(callService, null, configUrl);
                 Guid id = Guid.NewGuid();
@@ -65,7 +85,13 @@ namespace XUnitTestIntegracion
         {
             try
             {
-                ConfigUrlService configUrl = new ConfigUrlService();
+                var builder = new ConfigurationBuilder()
+                   .SetBasePath(Directory.GetCurrentDirectory())
+                   .AddJsonFile("appsettings.Development.json");
+
+                IConfiguration Configuration = builder.Build();
+
+                ConfigUrlService configUrl = new ConfigUrlService(Configuration);
                 CallApiService callService = new CallApiService();
                 CallRepositoryConfigApiService callRepository = new CallRepositoryConfigApiService(callService, null, configUrl);
                 RepositoryConfigViewModel item = new RepositoryConfigViewModel()
@@ -88,7 +114,13 @@ namespace XUnitTestIntegracion
         {
             try
             {
-                ConfigUrlService configUrl = new ConfigUrlService();
+                var builder = new ConfigurationBuilder()
+                   .SetBasePath(Directory.GetCurrentDirectory())
+                   .AddJsonFile("appsettings.Development.json");
+
+                IConfiguration Configuration = builder.Build();
+
+                ConfigUrlService configUrl = new ConfigUrlService(Configuration);
                 CallApiService callService = new CallApiService();
                 CallRepositoryConfigApiService callRepository = new CallRepositoryConfigApiService(callService, null, configUrl);
                 RepositoryConfigViewModel item = new RepositoryConfigViewModel()

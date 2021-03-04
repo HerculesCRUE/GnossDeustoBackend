@@ -45,7 +45,7 @@ namespace ApiCargaWebInterface.Models.Services
             }
             else
             {
-                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScope()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+                string stringData = $"grant_type=client_credentials&scope=apiCarga&client_id=Web&client_secret=master";
                 return CallTokenIdentity(stringData);
             }
         }
@@ -61,7 +61,7 @@ namespace ApiCargaWebInterface.Models.Services
             }
             else
             {
-                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeCron()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+                string stringData = $"grant_type=client_credentials&scope=apiCron&client_id=Web&client_secret=master";
                 return CallTokenIdentity(stringData);
             }
         }
@@ -77,7 +77,7 @@ namespace ApiCargaWebInterface.Models.Services
             }
             else
             {
-                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeUrisFactory()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+                string stringData = $"grant_type=client_credentials&scope=apiUrisFactory&client_id=Web&client_secret=master";
                 return CallTokenIdentity(stringData);
             }
         }
@@ -94,7 +94,7 @@ namespace ApiCargaWebInterface.Models.Services
             else
             {
                 {
-                    string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeDocumentacion()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+                    string stringData = $"grant_type=client_credentials&scope=apiGestorDocumentacion&client_id=Web&client_secret=master";
                     return CallTokenIdentity(stringData);
                 }
             }
@@ -111,7 +111,7 @@ namespace ApiCargaWebInterface.Models.Services
             }
             else
             {
-                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeOAIPMH()}&client_id={_configToken.GetClientIdOAIPMH()}&client_secret={_configToken.GetClientSecretOAIPMH()}";
+                string stringData = $"grant_type=client_credentials&scope=apiOAIPMH&client_id=Web&client_secret=master";
                 return CallTokenIdentity(stringData);
             }
         }
@@ -127,7 +127,7 @@ namespace ApiCargaWebInterface.Models.Services
             }
             else
             {
-                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeConversor()}&client_id={_configToken.GetClientIdConversor()}&client_secret={_configToken.GetClientSecretConversor()}";
+                string stringData = $"grant_type=client_credentials&scope=apiConversor&client_id=Web&client_secret=master";
                 return CallTokenIdentity(stringData);
             }
         }
@@ -147,7 +147,7 @@ namespace ApiCargaWebInterface.Models.Services
                 //var authString = Convert.ToBase64String(Encoding.UTF8.GetBytes("admin:Root12345678"));
                 //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authString);
                 client.Timeout = TimeSpan.FromDays(1);
-                string authority = _configToken.GetAuthority();
+                string authority = _configToken.GetAuthority()+ "/connect/token";
                 response = client.PostAsync($"{authority}", contentData).Result;
                 response.EnsureSuccessStatusCode();
                 string result = response.Content.ReadAsStringAsync().Result;
