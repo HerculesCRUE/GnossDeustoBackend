@@ -44,7 +44,7 @@ namespace IdentityServerHecules
                 {
                     new Secret("secretCron".Sha256())
                 },
-                AllowedScopes = {"apiCron"},
+                AllowedScopes = {"apiCron","apiCarga"},
                 AccessTokenLifetime = 86400
             }
             ,

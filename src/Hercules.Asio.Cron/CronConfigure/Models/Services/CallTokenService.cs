@@ -43,7 +43,7 @@ namespace CronConfigure.Models.Services
             }
             else
             {
-                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeCarga()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+                string stringData = $"grant_type=client_credentials&scope=apiCarga&client_id=cron&client_secret=secretCron";
                 return CallTokenIdentity(stringData);
             }
         }
@@ -60,7 +60,7 @@ namespace CronConfigure.Models.Services
             {
                 HttpClient client = new HttpClient();
                 client.Timeout = TimeSpan.FromDays(1);
-                string authority = _configToken.GetAuthorityGetToken();
+                string authority = _configToken.GetAuthority()+"/connect/token";
                 response = client.PostAsync($"{authority}", contentData).Result;
                 response.EnsureSuccessStatusCode();
                 string result = response.Content.ReadAsStringAsync().Result;

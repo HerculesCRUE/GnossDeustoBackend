@@ -31,115 +31,24 @@ namespace CronConfigure.Models.Services
         /// <summary>
         /// obtiene el endpoint para la llamada de obtención del token
         /// </summary> 
-        public string GetAuthorityGetToken()
+        public string GetAuthority()
         {
             if (string.IsNullOrEmpty(Authority))
             {
                 string authority = "";
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("AuthorityGetToken"))
+                if (environmentVariables.Contains("Authority"))
                 {
-                    authority = environmentVariables["AuthorityGetToken"] as string;
+                    authority = environmentVariables["Authority"] as string;
                 }
                 else
                 {
-                    authority = _configuration["AuthorityGetToken"];
+                    authority = _configuration["Authority"];
                 }
 
                 Authority = authority;
             }
             return Authority;
-        }
-        /// <summary>
-        /// obtiene el tipo de concesión de Oauth
-        /// </summary> 
-        public string GetGrantType()
-        {
-            if (string.IsNullOrEmpty(GrantType))
-            {
-                string grantType = "";
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("GrantType"))
-                {
-                    grantType = environmentVariables["GrantType"] as string;
-                }
-                else
-                {
-                    grantType = _configuration["GrantType"];
-                }
-
-                GrantType = grantType;
-            }
-            return GrantType;
-        }
-
-        /// <summary>
-        /// obtiene la limitación de acceso al api de carga
-        /// </summary> 
-        public string GetScopeCarga()
-        {
-            if (string.IsNullOrEmpty(Scope))
-            {
-                string scope = "";
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("ScopeCarga"))
-                {
-                    scope = environmentVariables["ScopeCarga"] as string;
-                }
-                else
-                {
-                    scope = _configuration["ScopeCarga"];
-                }
-
-                Scope = scope;
-            }
-            return Scope;
-        }
-
-        /// <summary>
-        /// obtiene el id de cliente del api de carga
-        /// </summary> 
-        public string GetClientId()
-        {
-            if (string.IsNullOrEmpty(ClientId))
-            {
-                string clientId = "";
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("ClientId"))
-                {
-                    clientId = environmentVariables["ClientId"] as string;
-                }
-                else
-                {
-                    clientId = _configuration["ClientId"];
-                }
-
-                ClientId = clientId;
-            }
-            return ClientId;
-        }
-
-        /// <summary>
-        /// obtiene la "clave" de acceso del api de carga
-        /// </summary>
-        public string GetClientSecret()
-        {
-            if (string.IsNullOrEmpty(ClientSecret))
-            {
-                string clientSecret = "";
-                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-                if (environmentVariables.Contains("ClientSecret"))
-                {
-                    clientSecret = environmentVariables["ClientSecret"] as string;
-                }
-                else
-                {
-                    clientSecret = _configuration["ClientSecret"];
-                }
-
-                ClientSecret = clientSecret;
-            }
-            return ClientSecret;
         }
     }
 }

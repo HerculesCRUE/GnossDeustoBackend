@@ -66,15 +66,6 @@ namespace CronConfigure
             {
                 authority = Configuration["Authority"];
             }
-            string scope = "";
-            if (environmentVariables.Contains("Scope"))
-            {
-                scope = environmentVariables["Scope"] as string;
-            }
-            else
-            {
-                scope = Configuration["Scope"];
-            }
             //Add Hangfire services.
             services.AddHangfire((isp, configuration) => configuration
                 .SetDataCompatibilityLevel(CompatibilityLevel.Version_110)
@@ -101,7 +92,7 @@ namespace CronConfigure
                     options.Authority = authority;
                     //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
                     options.RequireHttpsMetadata = false;
-                    options.ApiName = scope;
+                    options.ApiName = "apiCron";
                 });
                 services.AddAuthorization();
             }
