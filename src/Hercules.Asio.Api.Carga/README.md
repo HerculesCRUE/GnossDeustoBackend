@@ -77,7 +77,7 @@ http://graph.um.es/res/project/RAYD-A-2002-6237
 		"Urls": "http://0.0.0.0:5100",
 		"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
 		"Sparql": {
-			"Graph": "http://data.um.es/graph/um_cvn",
+			"Graph": "http://data.um.es/graph/sgi",
 			"Endpoint": "http://155.54.239.204:8890/sparql"
 			"QueryParam": "query",
 			"GraphRoh": "http://graph.um.es/graph/research/roh",
@@ -92,20 +92,8 @@ http://graph.um.es/res/project/RAYD-A-2002-6237
 			"virtualhostRabbitMq": "hercules"
 		},
 		"RabbitQueueName": "HerculesDemoQueue",
-		"Authority": "http://localhost:56306",
-		"ScopeCarga": "apiCarga",
-		"AuthorityGetToken": "http://localhost:56306/connect/token",
-		"GrantType": "client_credentials",
-		"ClientId": "carga",
-		"ClientSecret": "secret",
-		"ScopeOAIPMH": "apiOAIPMH",
-		"ClientIdOAIPMH": "OAIPMH",
-		"ClientSecretOAIPMH": "secretOAIPMH",
-		"ConfigUrlUnidata": "https://localhost:44354/",
-		"ScopeUnidata": "apiUnidata",
-		"ClientIdUnidata": "unidata",
-		"ClientSecretUnidata": "secretUnidata",
-		"ConfigUrlXmlConverter": "https://localhost:44339/Conversor/"
+		"Authority": "http://herc-as-front-desa.atica.um.es:5108",
+		"ConfigUrlXmlConverter": "http://herc-as-front-desa.atica.um.es/conversor_xml_rdf/"
     }
  - PostgreConnectionmigration: Cadena de conexión a la base de datos PostgreSQL
  - LogLevel.Default: Nivel de error por defecto
@@ -126,18 +114,6 @@ http://graph.um.es/res/project/RAYD-A-2002-6237
  - RabbitMQ.virtualhostRabbitMq: host virtual configurado en Rabbit
  - RabbitQueueName: Nombre de la cola de Rabbit
  - Authority: Url de la servicio de identidades
- - ScopeCarga: Limitación de acceso al api de carga
- - AuthorityGetToken: Endpoint para la llamada de obtención del token
- - GrantType: Tipo de concesión de Oauth
- - ClientId: Id de cliente del api del API CARGA
- - ClientSecret: "clave" de acceso del api de carga
- - ScopeOAIPMH: Limitación de acceso al api de OAIPMH
- - ClientIdOAIPMH: Id de cliente del api de OAIPMH
- - ClientSecretOAIPMH: "clave" de acceso del api de OAIPMH
- - ConfigUrlUnidata: URL donde está lanzada la aplicación de unidata
- - ScopeUnidata: Limitación de acceso al api de unidata
- - ClientIdUnidata: Id de cliente del api de unidata
- - ClientSecretUnidata: "clave" de acceso del api de unidata
  - ConfigUrlXmlConverter: URL donse está lanzada la aplicación CONVERSOR_XML_RDF
 
 Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.Api.Carga/API_CARGA/appsettings.json

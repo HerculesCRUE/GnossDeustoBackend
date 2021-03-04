@@ -62,13 +62,7 @@ Este api esta protegida mediante tokens, por ello para poder usar la interfaz sw
 		"AllowedHosts": "*",
 		"Urls": "http://0.0.0.0:5107",
 		"ConfigUrl": "http://herc-as-front-desa.atica.um.es/carga/",
-		"Authority": "http://localhost:56306",
-		"AuthorityGetToken": "http://localhost:56306/connect/token",
-		"Scope": "apiCron",
-		"ScopeCarga": "apiCarga",
-		"GrantType": "client_credentials",
-		"ClientId": "carga",
-		"ClientSecret": "secret"
+		"Authority": "http://herc-as-front-desa.atica.um.es:5108",
     }
  - HangfireConnection: Cadena de conexión a la base de datos PostgreSQL de tareas programadas
  - LogLevel.Default: Nivel de error por defecto
@@ -77,13 +71,6 @@ Este api esta protegida mediante tokens, por ello para poder usar la interfaz sw
  - Urls: Url en la que se va a lanzar la aplicación
  - ConfigUrl: Url donde está lanzada la aplicación API Carga
  - Authority: Url de la servicio de identidades
- - AuthorityGetToken: Endpoint para la llamada de obtención del token
- - GrantType: Tipo de concesión de Oauth
- - Scope: Limitación de acceso al api de cron
- - ScopeCarga: Limitación de acceso al api de carga
- - ScopeUrisFactory: Limitación de acceso al api de urisFactory
- - ClientId: Id de cliente, en este caso se ha configurado un cliente que pueda acceder a todas las apis que usa la web
- - ClientSecret: "clave" de acceso del cliente
  
  Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/CronConfigure/CronConfigure/appsettings.json
 
