@@ -68,10 +68,12 @@ namespace Hercules.Asio.XML_RDF_Conversor
             
             if (_env.IsDevelopment())
             {
+                throw new Exception("A");
                 services.AddSingleton<IAuthorizationHandler, AllowAnonymous>();
             }
             else
-            {            
+            {
+                throw new Exception("B");
                 services.AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
