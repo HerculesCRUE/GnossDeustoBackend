@@ -1500,11 +1500,19 @@
             </summary>
             
         </member>
-        <member name="M:Hercules.Asio.Api.Carga.Models.Services.CallConversor.GetUri(System.String)">
+        <member name="M:Hercules.Asio.Api.Carga.Models.Services.CallConversor.GetString(System.String)">
             <summary>
             Obtiene el resultado
             </summary>
             <param name="url">url a llamar</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hercules.Asio.Api.Carga.Models.Services.CallConversor.GetRDF(System.String,System.String,System.String)">
+            <summary>
+            Obtiene el resultado
+            </summary>
+            <param name="pRecord">XML con el record</param>
+            <param name="pType">Tipo</param>
             <returns></returns>
         </member>
         <member name="M:VDS.RDF.RohGraph.GetNextBlankNodeID">

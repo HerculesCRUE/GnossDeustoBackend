@@ -450,20 +450,7 @@ namespace API_CARGA.Models.Services
         /// <returns></returns>
         public string CallXMLConverter(string record, string type)
         {
-            byte[] bytedata = Encoding.UTF8.GetBytes(record);
-            var webClient = new WebClient();
-            string boundary = "------------------------" + DateTime.Now.Ticks.ToString("x");
-            webClient.Headers.Add("Content-Type", "multipart/form-data; boundary=" + boundary);
-            var fileData = webClient.Encoding.GetString(bytedata);
-            var package = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n{3}\r\n--{0}--\r\n", boundary, "pXmlFile", "text/xml", fileData);
-
-            var nfile = webClient.Encoding.GetBytes(package);
-
-            byte[] resp = webClient.UploadData(_configUrlService.GetUrlXmlConverter() + "Conversor/Convert?pType=" + type, "POST", nfile);
-
-
-            string respuesta = System.Text.Encoding.UTF8.GetString(resp);
-            return respuesta;
+            return _callConversor.GetRDF(record,type,_configUrlService.GetUrlXmlConverter());
         }
 
         /// <summary>
@@ -472,7 +459,7 @@ namespace API_CARGA.Models.Services
         /// <returns>Lista de configuraciones</returns>
         public string CallGetConfigurationsFiles()
         {
-            return _callConversor.GetUri($"{_configUrlService.GetUrlXmlConverter()}/Conversor/ConfigurationFilesList");
+            return _callConversor.GetString($"{_configUrlService.GetUrlXmlConverter()}/Conversor/ConfigurationFilesList");
         }
     }
 }
