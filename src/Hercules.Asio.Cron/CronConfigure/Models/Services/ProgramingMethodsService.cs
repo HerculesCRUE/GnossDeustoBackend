@@ -29,12 +29,13 @@ namespace CronConfigure.Models.Services
         private CallApiService _serviceApi;
         private HangfireEntityContext _context;
         readonly TokenBearer _token;
+        readonly ConfigUrlService _configUrlService;
 
-        public ProgramingMethodsService(CallApiService serviceApi, HangfireEntityContext context, CallTokenService tokenService)
+        public ProgramingMethodsService(CallApiService serviceApi, HangfireEntityContext context, CallTokenService tokenService, ConfigUrlService configUrlService)
         {
             _serviceApi = serviceApi;
             _context = context;
-            
+            _configUrlService = configUrlService;
             if (tokenService != null)
             {
                 _token = tokenService.CallTokenCarga();
@@ -142,16 +143,12 @@ namespace CronConfigure.Models.Services
         ///<param name="idRepository">identificador del repositorio a sincronizar</param>
         ///<param name="nombreCron">Nombre de la tarea recurrente</param>
         ///<param name="cronExpression">expresión de recurrencia</param>
-        ///<param name="configuration">Configuración</param>
         ///<param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
         ///<param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
-        public static void ProgramRecurringJob(Guid idRepository, string nombreCron, string cronExpression, IConfiguration configuration, string set = null, string codigoObjeto = null)
+        public void ProgramRecurringJob(Guid idRepository, string nombreCron, string cronExpression, string set = null, string codigoObjeto = null)
         {
-            ConfigUrlService serviceUrl = new ConfigUrlService(configuration);
-            CallApiService serviceApi = new CallApiService(serviceUrl);
-            ProgramingMethodsService service = new ProgramingMethodsService(serviceApi, null, null);
-
-            RecurringJob.AddOrUpdate(nombreCron, () => service.PublishRepositories(idRepository, null, set, codigoObjeto), cronExpression);
+            CallApiService serviceApi = new CallApiService(_configUrlService);
+            RecurringJob.AddOrUpdate(nombreCron, () => PublishRepositories(idRepository, null, set, codigoObjeto), cronExpression);
         }
 
         ///<summary>
@@ -187,7 +184,7 @@ namespace CronConfigure.Models.Services
         ///<param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
         public void ProgramPublishRepositoryRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime fechaInicio, IConfiguration configuration, string set = null, string codigoObjeto = null)
         {
-            string id = BackgroundJob.Schedule(() => ProgramRecurringJob(idRepository, nombreCron, cronExpression, configuration, set, codigoObjeto), fechaInicio);
+            string id = BackgroundJob.Schedule(() => ProgramRecurringJob(idRepository, nombreCron, cronExpression, set, codigoObjeto), fechaInicio);
             JobRepository jobRepository = new JobRepository()
             {
                 IdJob = $"{id}_{nombreCron}_{cronExpression}",
