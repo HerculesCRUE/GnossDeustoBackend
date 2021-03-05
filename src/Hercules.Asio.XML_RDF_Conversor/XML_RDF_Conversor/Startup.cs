@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Conversor_XML_RDF.Controllers;
+using Hercules.Asio.XML_RDF_Conversor.Controllers;
 using Hercules.Asio.XML_RDF_Conversor.Models.Middlewares;
 using Hercules.Asio.XML_RDF_Conversor.Models.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,7 +20,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 
-namespace Conversor_XML_RDF
+namespace Hercules.Asio.XML_RDF_Conversor
 {
     /// <summary>
     /// Startup.
@@ -60,16 +60,6 @@ namespace Conversor_XML_RDF
                 authority = Configuration["Authority"];
             }
 
-            string scope = "";
-            if (environmentVariables.Contains("Scope"))
-            {
-                scope = environmentVariables["Scope"] as string;
-            }
-            else
-            {
-                scope = Configuration["Scope"];
-            }
-
             services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -91,12 +81,17 @@ namespace Conversor_XML_RDF
                 {
                     options.Authority = authority;
                     options.RequireHttpsMetadata = false;
-                    options.ApiName = scope;
+                    options.ApiName = "apiConversor";
                 });
                 services.AddAuthorization();        
             }
 
             services.AddControllersWithViews();
+            services.AddSingleton(typeof(ConfigUrlService));
+            services.AddScoped(typeof(CallApiService));
+            services.AddScoped(typeof(CallUrisFactoryApiService));
+            services.AddScoped(typeof(CallTokenService));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Conversor XML RDF", Version = "v1", Description = "Conversor XML RDF" });
@@ -117,9 +112,6 @@ namespace Conversor_XML_RDF
             {
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
-
-            services.AddScoped(typeof(ConfigTokenService));
-            services.AddScoped(typeof(CallTokenService));
         }
 
         /// <summary>

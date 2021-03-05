@@ -11,13 +11,13 @@ using System.Net;
 using System.Web;
 using System.Collections;
 using Microsoft.Extensions.Configuration;
-using Conversor_XML_RDF.Models.ConfigJson;
+using Hercules.Asio.XML_RDF_Conversor.Models.ConfigJson;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
 using Hercules.Asio.XML_RDF_Conversor.Models.Services;
 using Hercules.Asio.XML_RDF_Conversor.Models.Entities;
 
-namespace Conversor_XML_RDF.Controllers
+namespace Hercules.Asio.XML_RDF_Conversor.Controllers
 {
     /// <summary>
     /// Controlador encargado para hacer una conversión de ficheros XML a RDF.
@@ -27,21 +27,18 @@ namespace Conversor_XML_RDF.Controllers
     [Authorize]
     public class ConversorController : Controller
     {
+        //clase para realizar llamadas al api de uris factory
+        CallUrisFactoryApiService _callUrisFactoryService;
+
         /// <summary>
         /// Propiedad encargada de almacenar la configuración.
         /// </summary>
         public IConfiguration _configuration { get; set; }
 
-        /// <summary>
-        /// Propiedad encargada de almacenar la URL del servicio de UrisFactory.
-        /// </summary>
-        private static string urlUrisFactory { get; set; }
-
-        readonly CallTokenService _tokenService;
-        public ConversorController(CallTokenService tokenService, IConfiguration configuration)
+        public ConversorController(IConfiguration configuration, CallUrisFactoryApiService callUrisFactoryService)
         {
-            _tokenService = tokenService;
             _configuration = configuration;
+            _callUrisFactoryService = callUrisFactoryService;
         }
 
         /// <summary>
@@ -70,12 +67,6 @@ namespace Conversor_XML_RDF.Controllers
         {
             try
             {
-                // Carga la URL de la configuración.
-                if (string.IsNullOrEmpty(urlUrisFactory))
-                {
-                    urlUrisFactory = LoadUrlUrisFactoryConfig();
-                }
-
                 // Ruta del fichero de configuración JSON.
                 string rutaJson = String.Empty;
                 List<string> listaConfiguraciones = ConfigFilesList();
@@ -412,20 +403,9 @@ namespace Conversor_XML_RDF.Controllers
         /// <param name="pId">ID.</param>
         /// <returns>String con la URI del grafo construida.</returns>
         private string GetURL(string pRdfType, string pId)
-        {
-            string requestUrl = $"{urlUrisFactory}Factory?resource_class={HttpUtility.UrlEncode(pRdfType)}&identifier={HttpUtility.UrlEncode(pId)}&eleccion_uri=1";
-            HttpWebRequest request = HttpWebRequest.CreateHttp(requestUrl);
-
-            string responseBodyFromRemoteServer;
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-            {
-                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                {
-                    responseBodyFromRemoteServer = reader.ReadToEnd();
-                }
-            }
-
-            return responseBodyFromRemoteServer;
+        {           
+            string url = _callUrisFactoryService.GetUri(HttpUtility.UrlEncode(pRdfType), HttpUtility.UrlEncode(pId), UriGetEnum.RDFtype);
+            return url;
         }
 
         /// <summary>
@@ -445,24 +425,6 @@ namespace Conversor_XML_RDF.Controllers
             }
 
             return listaFicheros;
-        }
-
-        /// <summary>
-        /// Permite cargar la URL de la configuración del fichero appsetings.json.
-        /// </summary>
-        /// <returns></returns>
-        private string LoadUrlUrisFactoryConfig()
-        {
-            IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-
-            if (environmentVariables.Contains("UrlUrisFactory"))
-            {
-                return environmentVariables["UrlUrisFactory"] as string;
-            }
-            else
-            {
-                return _configuration["UrlUrisFactory"];
-            }
         }
     }
 }

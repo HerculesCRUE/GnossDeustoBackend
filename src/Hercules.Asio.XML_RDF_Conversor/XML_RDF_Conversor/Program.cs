@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Conversor_XML_RDF
+namespace Hercules.Asio.XML_RDF_Conversor
 {
     /// <summary>
     /// Clase encargada de inicializar el servicio.

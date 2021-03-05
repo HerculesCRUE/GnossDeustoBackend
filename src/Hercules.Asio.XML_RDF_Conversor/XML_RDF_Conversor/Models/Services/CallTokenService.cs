@@ -1,48 +1,56 @@
-﻿using Hercules.Asio.XML_RDF_Conversor.Models.Entities;
+﻿// Copyright (c) UTE GNOSS - UNIVERSIDAD DE DEUSTO
+// Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
+// Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
+// clase para la obtención de los tokens de acceso
+using Hercules.Asio.XML_RDF_Conversor.Models.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
 {
+    /// <summary>
+    /// clase para la obtención de los tokens de acceso
+    /// </summary>
     public class CallTokenService
     {
-        private ConfigTokenService _configToken;
         readonly IWebHostEnvironment _env;
-        private IConfiguration _configuration { get; set; }
+        private IConfiguration _configuration { get; }
 
-        public CallTokenService(ConfigTokenService configToken, IWebHostEnvironment env, IConfiguration configuration)
+        public CallTokenService(IWebHostEnvironment env,IConfiguration configuration)
         {
-            _configToken = configToken;
             _env = env;
             _configuration = configuration;
         }
 
         /// <summary>
-        /// Obtiene el token de acceso del conversor.
+        /// Obtiene el token de acceso al api de OAIPMH
         /// </summary>
-        public TokenBearer CallTokenConversor()
+        public TokenBearer CallTokenUrisFactory()
         {
             if (_env.IsDevelopment())
             {
-                return TokenAppsettings("TokenType", "AccessToken");
+                return TokenAppsettings("TokenTypeUrisFactory", "AccessTokenUrisFactory");
             }
             else
             {
-                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeConversor()}&client_id={_configToken.GetClientIdConversor()}&client_secret={_configToken.GetClientSecretConversor()}";
+                string stringData = $"grant_type=client_credentials&scope=apiUrisFactory&client_id=conversor&client_secret=secretConversor";
                 return CallTokenIdentity(stringData);
             }
         }
 
         /// <summary>
-        /// Realiza la llamada para la obtención del token de acceso con el endpoint configurado en AuthorityGetToken.
+        /// Realiza la llamada para la obtención del token de acceso con el endpoint configurado en AuthorityGetToken
         /// </summary>
-        /// <param name="stringData">Datos con el scope, el cliente id, el grantType y el secret.</param>
+        /// <param name="stringData">Datos con el scope, el cliente id, el grantType y el secret</param>
         private TokenBearer CallTokenIdentity(string stringData)
         {
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
@@ -51,7 +59,18 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
             {
                 HttpClient client = new HttpClient();
                 client.Timeout = TimeSpan.FromDays(1);
-                string authority = _configToken.GetAuthorityGetToken();
+
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                string authority = "";
+                if (environmentVariables.Contains("Authority"))
+                {
+                    authority = environmentVariables["Authority"] as string;
+                }
+                else
+                {
+                    authority = _configuration["Authority"];
+                }
+                authority += "/connect/token";
                 response = client.PostAsync($"{authority}", contentData).Result;
                 response.EnsureSuccessStatusCode();
                 string result = response.Content.ReadAsStringAsync().Result;

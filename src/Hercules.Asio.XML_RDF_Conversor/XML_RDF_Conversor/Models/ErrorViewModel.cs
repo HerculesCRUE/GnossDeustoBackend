@@ -1,6 +1,6 @@
 using System;
 
-namespace Conversor_XML_RDF.Models
+namespace Hercules.Asio.XML_RDF_Conversor.Models
 {
     /// <summary>
     /// Error.

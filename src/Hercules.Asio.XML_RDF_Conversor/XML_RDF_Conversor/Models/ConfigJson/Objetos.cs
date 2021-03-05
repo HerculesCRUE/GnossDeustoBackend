@@ -1,4 +1,4 @@
-﻿namespace Conversor_XML_RDF.Models.ConfigJson
+﻿namespace Hercules.Asio.XML_RDF_Conversor.Models.ConfigJson
 {
     /// <summary>
     /// Clase encargada de almacenar el listado de entidades.
