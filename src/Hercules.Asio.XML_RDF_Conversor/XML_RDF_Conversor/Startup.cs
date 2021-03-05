@@ -86,12 +86,6 @@ namespace Hercules.Asio.XML_RDF_Conversor
                 services.AddAuthorization();        
             }
 
-            services.AddControllersWithViews();
-            services.AddSingleton(typeof(ConfigUrlService));
-            services.AddScoped(typeof(CallApiService));
-            services.AddScoped(typeof(CallUrisFactoryApiService));
-            services.AddScoped(typeof(CallTokenService));
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Conversor XML RDF", Version = "v1", Description = "Conversor XML RDF" });
@@ -112,6 +106,13 @@ namespace Hercules.Asio.XML_RDF_Conversor
             {
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
+
+
+            services.AddSingleton(typeof(ConfigUrlService));
+            services.AddScoped(typeof(CallApiService));
+            services.AddScoped(typeof(CallUrisFactoryApiService));
+            services.AddScoped(typeof(CallTokenService));
+
         }
 
         /// <summary>
