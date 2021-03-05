@@ -88,8 +88,6 @@ $(document).ready(function () {
 
     bodyScrolling.init();
     limpiarEstilosInline.init();
-
-    if(body.hasClass('tipo-documento')){
-      linkTabs.init();
-    }
+    linkTabs.init();
+    
 });

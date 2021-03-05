@@ -611,7 +611,7 @@ img { max-width: 100%; }
   .listado > main { padding-top: 80px; }
   .listado .col-facetas { display: none; }
   .listado h1 { font-size: 21px; font-weight: 700; color: #000; line-height: 26px; padding-left: 105px; }
-  .listado .btn-mas-recursos { width: 70px; height: 70px; border-radius: 35px; box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16); background-color: var(--c-azul); display: flex; align-items: center; justify-content: center; text-decoration: none; position: absolute; right: 22px; top: 50%; }
+  .listado .btn-mas-recursos { width: 70px; height: 70px; border-radius: 35px; box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16); background-color: var(--c-azul); display: flex; align-items: center; justify-content: center; text-decoration: none; position: fixed; right: 22px; bottom: 40%; }
   .listado .btn-mas-recursos .material-icons { font-size: 38px; color: #fbfbfb; }
 
   .col-facetas { position: fixed; top: 120px; left: 0; transition: all .3s ease-in-out; max-height: calc(100vh - 120px); padding: 0; overflow-y: auto; }
@@ -847,11 +847,13 @@ img { max-width: 100%; }
   .fichaRecurso .wrapCol .header-resource .h1-container { display: flex; flex-wrap: wrap; }
   .fichaRecurso .wrapCol .header-resource .h1-container .tipo { font-size: 14px; font-weight: 400; color: #808080; margin-bottom: 11px; position: relative; }
   .fichaRecurso .wrapCol .header-resource .h1-container .tipo:before { content: '\E0AF'; font-family: 'Material Icons'; font-size: 24px; color: #808080; position: absolute; top: 50%; transform: translateY(-50%); left: -35px; font-weight: normal; }
-  .fichaRecurso .wrapCol .header-resource .h1-container h1 { color: #000; margin-bottom: 0; position: relative; font-weight: 700; font-size: 21px; margin-top: 74px; }
+  .fichaRecurso .wrapCol .header-resource .h1-container h1 { color: #000; margin-bottom: 0; position: relative; font-weight: 700; font-size: 21px; margin-top: 74px !important; }
 
   .fichaRecurso .wrapCol .header-resource .h1-container .botones { position: absolute; top: 0; right: 0; }
-  .fichaRecurso .wrapCol .header-resource .h1-container .botones ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; align-items: center; }
-  .fichaRecurso .wrapCol .header-resource .h1-container .botones ul li { margin-right: 2px; }
+  .fichaRecurso .wrapCol .header-resource .h1-container .botones > ul { list-style: none; padding: 0 !important; margin: 0 !important; display: flex; flex-wrap: wrap; align-items: center; }
+  .fichaRecurso .wrapCol .header-resource .h1-container .botones > ul > li { margin-right: 2px; }
+  .fichaRecurso .wrapCol .header-resource .h1-container .botones > ul > li > a { }
+  .fichaRecurso .wrapCol .header-resource .h1-container .botones > ul > li > a .caret { margin-left: 10px; }
 
   .fichaRecurso .wrapCol .header-resource .fecha { font-family: Roboto, 'sans-serif'; font-weight: 300; font-size: 14px; color: #808080; position: absolute; top: 0; right: 0; margin: 0; }
 
@@ -859,7 +861,7 @@ img { max-width: 100%; }
   .fichaRecurso .wrapCol .acciones-recurso > ul { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; flex: 0 0 calc(100% - 30px); max-width: calc(100% - 30px); }
   .fichaRecurso .wrapCol .acciones-recurso > ul li { padding: 0 10px; }
   .fichaRecurso .wrapCol .acciones-recurso > ul li a { font-size: 14px; color: #666; font-weight: 500; text-decoration: none; }
-  .fichaRecurso .wrapCol .acciones-recurso > ul li a:before { content: ''; display: inline-block; vertical-align: bottom; font-family: 'Material Icons'; color: #808080; font-size: 20px; line-height: 22px; margin-right: 10px; transition: color .3s ease-in-out; }
+  .fichaRecurso .wrapCol .acciones-recurso > ul li a:before { content: ''; display: inline-block; vertical-align: bottom; font-family: 'Material Icons'; color: #808080; font-size: 20px; line-height: 22px; margin-right: 10px; transition: color .3s ease-in-out; -webkit-transition: color .3s ease-in-out; -moz-transition: color .3s ease-in-out; -ms-transition: color .3s ease-in-out; -o-transition: color .3s ease-in-out; }
   .fichaRecurso .wrapCol .acciones-recurso > ul li a:hover,
   .fichaRecurso .wrapCol .acciones-recurso > ul li a:hover:before { color: var(--c-rojo); }
   .fichaRecurso .wrapCol .acciones-recurso > ul li a.descargar:before { content: '\E2C0'; }
@@ -872,12 +874,12 @@ img { max-width: 100%; }
   .fichaRecurso .wrapCol .acciones-recurso > ul li a.vincular:before { content: '\E24D'; }
   .fichaRecurso .wrapCol .acciones-recurso > .mas-opciones { flex: 0 0 30px; max-width: 30px; }
 
-  .fichaRecurso .wrapCol .contenido * { font-weight: 400; color: #666; font-size: 15px; line-height: 18px; }
+  .fichaRecurso .wrapCol .contenido * { font-weight: 400; /*color: #666;*/ font-size: 15px; line-height: 18px; }
   .fichaRecurso .wrapCol .contenido *:last-child { margin-bottom: 0; }
-  .fichaRecurso .wrapCol .contenido h2 { font-size: 15px; font-weight: 700; text-transform: uppercase; color: #333; margin-bottom: 25px; }
+  .fichaRecurso .wrapCol .contenido h2 { font-size: 15px; font-weight: 700; text-transform: uppercase; color: #333; margin-bottom: 25px !important; }
   .fichaRecurso .wrapCol .contenido strong { font-weight: 600; }
   .fichaRecurso .wrapCol .contenido img { }
-  .fichaRecurso .wrapCol .contenido a { color: var(--c-rojo); text-decoration: underline; }
+  .fichaRecurso .wrapCol .contenido a { color: var(--c-rojo); /*text-decoration: underline;*/ }
   .fichaRecurso .wrapCol .contenido ol,
   .fichaRecurso .wrapCol .contenido ul { padding-left: 30px; }
   .fichaRecurso .wrapCol .contenido ol li,
@@ -935,10 +937,10 @@ img { max-width: 100%; }
   .fichaRecurso .wrapCol .contenido .items.tabla .fila .columna.principal p { font-weight: 500; color: #666; opacity: 1; }
   .fichaRecurso .wrapCol .contenido .items.tabla .cabecera .columna.acciones,
   .fichaRecurso .wrapCol .contenido .items.tabla .fila .columna.acciones { width: 20%; text-align: right; }
-  .fichaRecurso .wrapCol .contenido .items.tabla .fila .columna.acciones ul { list-style: none; padding: 0; margin: 0; display: flex; align-items: center; justify-content: flex-end; }
+  .fichaRecurso .wrapCol .contenido .items.tabla .fila .columna.acciones ul { list-style: none; padding: 0 !important; margin: 0 !important; display: flex; align-items: center; justify-content: flex-end; }
   .fichaRecurso .wrapCol .contenido .items.tabla .fila .columna.acciones ul li { padding-left: 22px; }
   .fichaRecurso .wrapCol .contenido .items.tabla .fila .columna.acciones ul li:first-child { padding-left: 0; }
-  .fichaRecurso .wrapCol .contenido .items.tabla .fila .columna.acciones ul li a { color: var(--c-azul); text-decoration: none; display: inline-block; vertical-align: top; }
+  .fichaRecurso .wrapCol .contenido .items.tabla .fila .columna.acciones ul li a { color: #666; text-decoration: none; display: inline-block; vertical-align: top; }
   .fichaRecurso .wrapCol .contenido .items.tabla .fila .columna.acciones ul li a .material-icons { font-size: 24px; }
   .fichaRecurso .wrapCol .contenido .items.tabla .fila .columna.acciones ul li .dropdown {  }
   .fichaRecurso .wrapCol .contenido .items.tabla .fila .columna.acciones ul li .dropdown .dropdown-toggle { display: flex; font-size: 0; }
@@ -963,16 +965,17 @@ img { max-width: 100%; }
   .fichaRecurso .wrapCol .listas { margin-top: 97px; margin-left: -103px; margin-right: -45px; padding: 80px 100px; background: #f5f5f5; }
 
   /* POPUP ELIMINAR */
-    .fichaRecurso #modalEliminar { bottom: inherit; }
-    .fichaRecurso #modalEliminar .modal-dialog { margin: 0; width: 600px; max-width: 600px; }
-    .fichaRecurso #modalEliminar .modal-content { border: 0; }
-    .fichaRecurso #modalEliminar .modal-content .modal-header { height: 60px; background-color: var(--c-rojo); margin: 0; padding: 21px 41px; }
-    .fichaRecurso #modalEliminar .modal-content .modal-header h5 { font-size: 15px; font-weight: 500; line-height: 18px; color: #fff; text-transform: uppercase; }
-    .fichaRecurso #modalEliminar .modal-content .modal-header .close { color: #fff; }
-    .fichaRecurso #modalEliminar .modal-content .modal-body { margin: 0; padding: 25px 42px 80px 42px; }
-    .fichaRecurso #modalEliminar .modal-content .modal-body .form legend { font-size: 17px; font-weight: 700; line-height: 21px; color: #000; margin-bottom: 17px; }
-    .fichaRecurso #modalEliminar .modal-content .modal-body .form input[type="button"] { font-size: 13px; font-weight: 400; background: none; border: 0; color: var(--c-rojo); }
-    .fichaRecurso #modalEliminar .modal-content .modal-body .form .btn-principal { font-size: 14px !important; font-weight: 700 !important; line-height: 18px; background: var(--c-rojo) !important; color: #fff !important; border: 0; border-radius: 1px; padding: 10px 30px; }
+  .modal.eliminar { bottom: inherit; }
+  .modal.eliminar .modal-dialog { margin: 0; width: 600px; max-width: 600px; }
+  .modal.eliminar .modal-content { border: 0; }
+  .modal.eliminar .modal-content .modal-header { height: 60px; background-color: var(--c-rojo); margin: 0; padding: 21px 41px; position: relative; }
+  .modal.eliminar .modal-content .modal-header h5 { font-size: 15px; font-weight: 500; line-height: 18px; color: #fff; text-transform: uppercase; }
+  .modal.eliminar .modal-content .modal-header .close { color: #fff; opacity: 1; padding: 0; margin: 0; position: absolute; top: 21px; right: 41px; }
+  .modal.eliminar .modal-content .modal-header .close > span { font-size: 30px; }
+  .modal.eliminar .modal-content .modal-body { margin: 0; padding: 25px 42px 80px 42px; }
+  .modal.eliminar .modal-content .modal-body .form legend { font-size: 17px; font-weight: 700; line-height: 21px; color: #000; margin-bottom: 17px; border: 0; }
+  .modal.eliminar .modal-content .modal-body .form input[type="button"] { font-size: 13px; font-weight: 400; background: none; border: 0; color: var(--c-rojo); }
+  .modal.eliminar .modal-content .modal-body .form .btn-principal { font-size: 14px !important; font-weight: 700 !important; line-height: 18px; background: var(--c-rojo) !important; color: #fff !important; border: 0; border-radius: 1px; padding: 10px 30px; }
   /**/
 
   .ui-widget.autocomplete { position: fixed; top: 0; left: 236px; z-index: 801; height: 60px; display: flex; align-items: center; }
@@ -999,6 +1002,7 @@ img { max-width: 100%; }
     .fichaRecurso .wrapCol .btn { font-size: 0; padding: 6px 10px; }
     .fichaRecurso .wrapCol .btn::before { padding: 0; }
     .fichaRecurso .wrapCol .header-resource .h1-container .botones select { font-size: 13px; }
+    .fichaRecurso .wrapCol .header-resource .h1-container .botones > ul > li > a .caret { margin-left: 0; }
 
     .ui-widget { height: 52px; }
     .ui-widget:before { top: 6px; }
