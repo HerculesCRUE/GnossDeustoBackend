@@ -45,7 +45,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
         /// Permite visualizar una lista con los archivos de configuración JSON disponibles.
         /// </summary>
         /// <returns>Lista con los nombres de los ficheros JSON de configuración.</returns>
-        [HttpPost("ConfigurationFilesList")]
+        [HttpGet("ConfigurationFilesList")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public List<string> ConfigurationFilesList()
