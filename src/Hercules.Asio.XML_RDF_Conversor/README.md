@@ -34,7 +34,7 @@ XML RDF Conversor es un servicio web que contiene únicamente un controlador, cu
  - LogLevel.Default: Nivel de error por defecto.
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft.
  - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host.
- - UrlUrisFactory: URL dónde está lanzada la aplicación.
+ - UrlUrisFactory: URL dónde está lanzada la aplicación UrisFactory.
  
 ## Configuración en los ficheros JSON
     
