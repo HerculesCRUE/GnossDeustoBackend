@@ -81,7 +81,7 @@ namespace Hercules.Asio.XML_RDF_Conversor
                 {
                     options.Authority = authority;
                     options.RequireHttpsMetadata = false;
-                    options.ApiName = "apiCarga";
+                    options.ApiName = "apiConversor";
                 });
                 services.AddAuthorization();        
             }
