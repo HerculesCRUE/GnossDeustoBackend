@@ -80,7 +80,7 @@ namespace PRH
                 {
                     options.Authority = authority;
                     options.RequireHttpsMetadata = false;
-                    options.ApiName = "apiCarga";
+                    options.ApiName = "apiConversor";
                 });
                 services.AddAuthorization();
             }
