@@ -17,7 +17,7 @@ La suite de pruebas utilizará las siguientes fuentes de datos:
  se puede interrogar mediante un servicio OAI-PMH. El servicio contesta con datos en formato CERIF-XML y 
  contiene personas, organizaciones, proyectos, publicacione y productos (actividades) de investigación.
 
-[TODO definir completamente el proceso de pruebas de las cargas, con pantallazos]
+[TODO: definir completamente el proceso de pruebas de las cargas, con pantallazos]
 
 A grandes rasgos, los pasos para probar las cargas son:
 - Vaciar el grafo en el que se van a cargar los datos.
