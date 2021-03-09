@@ -4,9 +4,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -24,16 +27,20 @@ namespace PRH
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+        public IConfiguration _configuration { get; }
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            _configuration = configuration;
+            _env = env;
         }
 
-        public IConfiguration Configuration { get; }
-    
+        
+
 
         public void ConfigureServices(IServiceCollection services)
-        {               
+        {
             services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -46,33 +53,30 @@ namespace PRH
             }
             else
             {
-                authority = Configuration["Authority"];
+                authority = _configuration["Authority"];
             }
-            string scope = "";
-            if (environmentVariables.Contains("Scope"))
+            if (_env.IsDevelopment())
             {
-                scope = environmentVariables["Scope"] as string;
+                services.AddSingleton<IAuthorizationHandler, AllowAnonymous>();
             }
             else
             {
-                scope = Configuration["Scope"];
-            }
-
-            services.AddAuthentication(options => {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
+                services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
                 .AddIdentityServerAuthentication(options =>
                 {
                     options.Authority = authority;
-                    //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
                     options.RequireHttpsMetadata = false;
-                    options.ApiName = scope;
+                    options.ApiName = "apiOAIPMH";
                 });
-            services.AddAuthorization();
+                services.AddAuthorization();
+            }
             services.AddSwaggerGen(c =>
-            { 
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "OAI-PMH cvn", Version = "v1",Description= "Open Archives Initiative Protocol for Metadata Harvesting" });
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "OAI-PMH cvn", Version = "v1", Description = "Open Archives Initiative Protocol for Metadata Harvesting" });
                 c.IncludeXmlComments(string.Format(@"{0}comments.xml", System.AppDomain.CurrentDomain.BaseDirectory));
                 c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
@@ -132,6 +136,18 @@ namespace PRH
             {
                 endpoints.MapControllers();
             });
+        }
+    }
+    public class AllowAnonymous : IAuthorizationHandler
+    {
+        public Task HandleAsync(AuthorizationHandlerContext context)
+        {
+            foreach (IAuthorizationRequirement requirement in context.PendingRequirements.ToList())
+            {
+                context.Succeed(requirement);
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

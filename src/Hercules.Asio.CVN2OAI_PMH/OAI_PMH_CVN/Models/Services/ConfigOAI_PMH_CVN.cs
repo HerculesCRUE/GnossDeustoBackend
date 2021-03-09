@@ -11,19 +11,20 @@ namespace OAI_PMH_CVN.Models.Services
 {
     public class ConfigOAI_PMH_CVN
     {
-        public IConfigurationRoot Configuration { get; set; }
+        public IConfiguration _configuration { get; set; }
         private string XML_CVN_Repository { get; set; }
         private string CVN_ROH_converter { get; set; }
         private string ConfigUrl { get; set; }
+
+        public ConfigOAI_PMH_CVN(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public string GetXML_CVN_Repository()
         {
             if (string.IsNullOrEmpty(XML_CVN_Repository))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("XML_CVN_Repository"))
                 {
@@ -31,7 +32,7 @@ namespace OAI_PMH_CVN.Models.Services
                 }
                 else
                 {
-                    XML_CVN_Repository = Configuration["XML_CVN_Repository"];
+                    XML_CVN_Repository = _configuration["XML_CVN_Repository"];
                 }
             }
             return XML_CVN_Repository;
@@ -41,11 +42,6 @@ namespace OAI_PMH_CVN.Models.Services
         {
             if (string.IsNullOrEmpty(CVN_ROH_converter))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("CVN_ROH_converter"))
                 {
@@ -53,7 +49,7 @@ namespace OAI_PMH_CVN.Models.Services
                 }
                 else
                 {
-                    CVN_ROH_converter = Configuration["CVN_ROH_converter"];
+                    CVN_ROH_converter = _configuration["CVN_ROH_converter"];
                 }
             }
             return CVN_ROH_converter;
@@ -63,11 +59,6 @@ namespace OAI_PMH_CVN.Models.Services
         {
             if (string.IsNullOrEmpty(ConfigUrl))
             {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-
-                Configuration = builder.Build();
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("ConfigUrl"))
                 {
@@ -75,7 +66,7 @@ namespace OAI_PMH_CVN.Models.Services
                 }
                 else
                 {
-                    ConfigUrl = Configuration["ConfigUrl"];
+                    ConfigUrl = _configuration["ConfigUrl"];
                 }
             }
             return ConfigUrl;

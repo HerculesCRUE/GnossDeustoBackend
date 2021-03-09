@@ -61,6 +61,10 @@ namespace OAI_PMH.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public FileResult Get(OaiVerb verb, string identifier = "", string metadataPrefix = "", string from = "", string until = "", string set = "", string resumptionToken = "")
         {
+            if(!string.IsNullOrEmpty(from) && string.IsNullOrEmpty(until))
+            {
+                until = "3000-01-01T00:00:00Z";
+            }
             //CONFIG OAI-PMH
             _configOAI.BaseUrl = () =>
             {

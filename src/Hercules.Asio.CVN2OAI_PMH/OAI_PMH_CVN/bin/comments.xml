@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>OAI_PMH_CVN</name>
+        <name>Hercules.Asio.CVN2OAI_PMH</name>
     </assembly>
     <members>
         <member name="T:OAI_PMH.Controllers.OAI_PMHController">
