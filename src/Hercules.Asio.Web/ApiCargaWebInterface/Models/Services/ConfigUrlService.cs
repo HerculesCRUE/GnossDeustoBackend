@@ -118,9 +118,9 @@ namespace ApiCargaWebInterface.Models.Services
                     connectionString = _configuration["Sparql:QueryParam"];
                 }
 
-                Proxy = connectionString;
+                SparqlQuery = connectionString;
             }
-            return Proxy;
+            return SparqlQuery;
         }
 
         /// <summary>
