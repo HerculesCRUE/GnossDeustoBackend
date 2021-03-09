@@ -13,5 +13,6 @@ namespace UrisFactory.Models.ConfigEntities
         public string RdfType { get; set; }
         public string LabelResourceClass { get; set; }
         public string ResourceURI { get; set; }
+        public bool BlankNode { get; set; }
     }
 }

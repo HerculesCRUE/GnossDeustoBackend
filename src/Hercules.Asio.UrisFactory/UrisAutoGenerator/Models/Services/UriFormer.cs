@@ -3,6 +3,7 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Clase encargada de generar las uris
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UrisFactory.Extra.Exceptions;
@@ -26,9 +27,9 @@ namespace UrisFactory.Models.Services
         {
             get
             {
-                return _uristructure;    
+                return _uristructure;
             }
-            
+
         }
 
         ///<summary>
@@ -36,19 +37,17 @@ namespace UrisFactory.Models.Services
         ///</summary>
         ///<param name="resourceClass">nombre de la resourceClass a usar para generar la uri</param>
         ///<param name="queryString">diccionario con los valores cogidos de la url de la petición</param>
-        public string GetURI(string resourceClass, Dictionary<string, string> queryString, bool isRdfType = false)
+        public string GetURI(string resourceClass, Dictionary<string, string> queryString)
         {
             string uri = "";
             ResourcesClass resourceClassObject = null;
-            if (!isRdfType)
-            {
-                resourceClassObject = ParserResourceClass(resourceClass);
-            }
-            else
+
+            resourceClassObject = ParserResourceClass(resourceClass);
+
+            if (resourceClassObject == null)
             {
                 resourceClassObject = ParserResourceClassRdfType(resourceClass);
             }
-            
 
             if (resourceClassObject != null)
             {
@@ -99,31 +98,45 @@ namespace UrisFactory.Models.Services
                 switch (componentName)
                 {
                     case UriComponentsList.Base:
-                        uri =$"{uri}{UriStructure.Base}{component.FinalCharacter}";
+                        uri = $"{uri}{UriStructure.Base}{component.FinalCharacter}";
                         break;
                     case UriComponentsList.Character:
                         uri = $"{uri}{parsedCharacter}{component.FinalCharacter}";
                         break;
                     case UriComponentsList.ResourceClass:
-                        uri = $"{uri}{parsedResourceClass}{component.FinalCharacter}";
+                        ResourcesClass resource = ParserResourceClass(queryString["resource_class"]);
+                        if (resource != null && resource.BlankNode == true)
+                        {
+                            uri = "_:";
+                        }
+                        else
+                        {
+                            uri = $"{uri}{parsedResourceClass}{component.FinalCharacter}";
+                        }
                         break;
                     case UriComponentsList.Identifier:
                         containsKey = queryString.ContainsKey(UriComponentsList.Identifier);
-                        if(!containsKey && component.Mandatory)
+                        string id = string.Empty;
+                        if (!containsKey && component.Mandatory)
                         {
                             error = true;
-                        }else if (containsKey)
-                        {
-                            string id = queryString[UriComponentsList.Identifier];
-                            uri = $"{uri}{id}{component.FinalCharacter}";
                         }
+                        else if (containsKey)
+                        {
+                            id = queryString[UriComponentsList.Identifier];
+                        }
+                        else
+                        {
+                            id = Guid.NewGuid().ToString();                            
+                        }
+                        uri = $"{uri}{id}{component.FinalCharacter}";
                         break;
                     default:
                         containsKey = queryString.ContainsKey(componentName);
                         if (!containsKey && component.Mandatory)
                         {
-                            error = true; 
-                            errorMessage = $"{errorMessage} parameter {componentName} missing \n"; 
+                            error = true;
+                            errorMessage = $"{errorMessage} parameter {componentName} missing \n";
                         }
                         else if (containsKey)
                         {
@@ -149,15 +162,15 @@ namespace UrisFactory.Models.Services
             string labelCharacter = null;
             string uriComponentValue = pUriStructureComponents.FirstOrDefault(component => component.UriComponent.Equals(UriComponentsList.Character)).UriComponentValue;
             string[] parameters = uriComponentValue.Split('@');
-            if(parameters.Length == 2)
+            if (parameters.Length == 2)
             {
                 string character = parameters[1].ToLower();
                 Characters characterObject = UriStructure.Characters.FirstOrDefault(charac => charac.Character.Equals(character));
-                if(characterObject != null)
+                if (characterObject != null)
                 {
                     labelCharacter = characterObject.LabelCharacter;
                 }
-            }  
+            }
             return labelCharacter;
         }
 

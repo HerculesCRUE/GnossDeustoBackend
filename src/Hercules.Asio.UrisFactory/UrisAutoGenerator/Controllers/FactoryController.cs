@@ -37,7 +37,6 @@ namespace UrisFactory.Controllers
         ///</summary>
         ///<param name="resource_class">nombre de la resource class o rdfType que especifica la estructura de uris a usar, el listado de resource class se pueden obtener a través de http://herc-as-front-desa.atica.um.es/uris/Schema, en el apartado ResourcesClasses-> ResourceClass; ejemplo: Article</param>
         ///<param name="identifier">identifier, es un cadena que representa un ORCID</param>
-        ///<param name="eleccion_uri">los valores posibles son 0 y 1, este valor indican si el parametro resource_class pasado es un resource class o si por lo contrario es el rdfType, el 0 indica que es un resource class mientras que el 1 es para indicar que es rdfType</param>
         [HttpGet(Name= "GenerateUri")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -45,7 +44,7 @@ namespace UrisFactory.Controllers
         [SwaggerResponseExample(StatusCodes.Status200OK, typeof(UrisFactoryResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Example", typeof(UriErrorExample))]
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(UrisFactoryErrorReponse))]
-        public IActionResult GenerateUri(string resource_class, string identifier, EleccionUri eleccion_uri)
+        public IActionResult GenerateUri(string resource_class, string identifier)
         {
             if(!System.Uri.IsWellFormedUriString(identifier,System.UriKind.Relative) )
             {
@@ -80,14 +79,8 @@ namespace UrisFactory.Controllers
 
             UriFormer uriFormer = new UriFormer(_configJsonHandler.GetUrisConfig());
             string uri = "";
-            if (eleccion_uri.Equals(EleccionUri.RDFtype))
-            {
-                uri = uriFormer.GetURI(resource_class, queryDictionary, true);
-            }
-            else
-            {
-                uri = uriFormer.GetURI(resource_class, queryDictionary);
-            }
+            
+             uri = uriFormer.GetURI(resource_class, queryDictionary);            
             
             return Ok(uri);
         }

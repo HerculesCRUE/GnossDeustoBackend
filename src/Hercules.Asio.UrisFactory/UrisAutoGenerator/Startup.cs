@@ -6,9 +6,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -28,12 +31,14 @@ namespace UrisFactory
     [ExcludeFromCodeCoverage]
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -50,28 +55,27 @@ namespace UrisFactory
             {
                 authority = Configuration["Authority"];
             }
-            string scope = "";
-            if (environmentVariables.Contains("Scope"))
+
+            if (_env.IsDevelopment())
             {
-                scope = environmentVariables["Scope"] as string;
+                services.AddSingleton<IAuthorizationHandler, AllowAnonymous>();
             }
             else
             {
-                scope = Configuration["Scope"];
-            }
-
-            services.AddAuthentication(options => {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
+                services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
                 .AddIdentityServerAuthentication(options =>
                 {
                     options.Authority = authority;
                     //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
                     options.RequireHttpsMetadata = false;
-                    options.ApiName = scope;
+                    options.ApiName = "apiUrisFactory";
                 });
-            services.AddAuthorization();
+                services.AddAuthorization();
+            }
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Uris factory", Version = "v1"});
@@ -148,6 +152,18 @@ namespace UrisFactory
             {
                 endpoints.MapControllers();
             });
+        }
+    }
+    public class AllowAnonymous : IAuthorizationHandler
+    {
+        public Task HandleAsync(AuthorizationHandlerContext context)
+        {
+            foreach (IAuthorizationRequirement requirement in context.PendingRequirements.ToList())
+            {
+                context.Succeed(requirement);
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

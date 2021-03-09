@@ -95,7 +95,7 @@
         "inverse": false,
         "type": 3,
         "maxNumWordsTitle": 0,
-        "scorePositive": 0.9,
+        "scorePositive": 1,
         "scoreNegative": null
       },
       {
