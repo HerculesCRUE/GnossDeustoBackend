@@ -400,15 +400,19 @@ namespace API_CARGA.Models.Services
                 IEnumerable<XElement> listHeader = listIdentifierElement.Descendants(nameSpace + "header");
                 foreach (var header in listHeader)
                 {
-                    string identifier = header.Element(nameSpace + "identifier").Value;
-                    string fecha = header.Element(nameSpace + "datestamp").Value;
-                    DateTime fechaSincro = DateTime.Parse(fecha);
-                    IdentifierOAIPMH identifierOAIPMH = new IdentifierOAIPMH()
+                    if (header.Attribute("status")==null || header.Attribute("status").Value != "deleted")
                     {
-                        Fecha = fechaSincro,
-                        Identifier = identifier
-                    };
-                    listIdentifier.Add(identifierOAIPMH);
+                        header.Attribute(nameSpace + "status");
+                        string identifier = header.Element(nameSpace + "identifier").Value;
+                        string fecha = header.Element(nameSpace + "datestamp").Value;
+                        DateTime fechaSincro = DateTime.Parse(fecha);
+                        IdentifierOAIPMH identifierOAIPMH = new IdentifierOAIPMH()
+                        {
+                            Fecha = fechaSincro,
+                            Identifier = identifier
+                        };
+                        listIdentifier.Add(identifierOAIPMH);
+                    }
                 }
                 resumptionToken = null;
                 XElement resumptionTokenElement = listIdentifierElement.Element(nameSpace + "resumptionToken");
