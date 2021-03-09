@@ -152,19 +152,20 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
                     foreach (XmlNode nodo in listaEntidades)
                     {
                         // Comprobar si un hijo en concreto está vacío o no.
-                        bool comprobar = true;
+                        bool tieneHijoComprobado = true;
                         if (!string.IsNullOrEmpty(entidad.comprobarSubentidad))
                         {
+                            tieneHijoComprobado = false;
                             foreach (XmlNode child in nodo.ChildNodes)
                             {
-                                if (child.Name == entidad.comprobarSubentidad && child.ChildNodes.Count <= 0)
+                                if (child.Name == entidad.comprobarSubentidad)
                                 {
-                                    comprobar = false;
+                                    tieneHijoComprobado = true;
                                 }
                             }
                         }
 
-                        if (nodo.ChildNodes.Count > 0 && comprobar == true)
+                        if (nodo.ChildNodes.Count > 0 && tieneHijoComprobado == true)
                         {
                             // Entidades.
                             string uriEntity = GetURI(entidad, nodo, pNsmgr); // Obtención del URI.
@@ -207,18 +208,25 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
                                 {
                                     string value = string.Empty;
 
-                                    foreach (string source in propiedad.source.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries))
+                                    if (string.IsNullOrEmpty(propiedad.source))
                                     {
-                                        if (!string.IsNullOrEmpty(entidad.nameSpace))
+                                        value = nodo.InnerText;
+                                    }
+                                    else
+                                    {
+                                        foreach (string source in propiedad.source.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries))
                                         {
-                                            pNsmgr.AddNamespace("ns", entidad.nameSpace);
-                                        }
+                                            if (!string.IsNullOrEmpty(entidad.nameSpace))
+                                            {
+                                                pNsmgr.AddNamespace("ns", entidad.nameSpace);
+                                            }
 
-                                        XmlNode node = nodo.SelectSingleNode(source, pNsmgr);
+                                            XmlNode node = nodo.SelectSingleNode(source, pNsmgr);
 
-                                        if (node != null)
-                                        {
-                                            value += " " + node.InnerText;
+                                            if (node != null)
+                                            {
+                                                value += " " + node.InnerText;
+                                            }
                                         }
                                     }
 

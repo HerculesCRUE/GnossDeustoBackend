@@ -17,6 +17,10 @@
         {
           "property": "http://purl.org/roh/mirror/foaf#mbox",
           "source": "ns:ElectronicAddress"
+        },
+        {
+          "property": "http://purl.org/roh#crisIdentifier",
+          "source": "@id"
         }
       ],
       "subentities": [
@@ -41,8 +45,8 @@
                           "source": "ns:Name"
                         },
                         {
-                          "property": "http://purl.org/roh/mirror/vivo#identifier",
-                          "source": "ns:Identifier"
+                          "property": "http://purl.org/roh#crisIdentifier",
+                          "source": "@id"
                         }
                       ],
                       "subentities": [
@@ -57,6 +61,10 @@
                                 {
                                   "property": "http://purl.org/roh#title",
                                   "source": "ns:Name"
+                                },
+                                {
+                                  "property": "http://purl.org/roh#crisIdentifier",
+                                  "source": "@id"
                                 }
                               ]
                             }
@@ -83,16 +91,16 @@
           "source": "ns:Title"
         },
         {
-          "property": "http://purl.org/roh/mirror/vivo#identifier",
-          "source": "ns:Identifier"
-        },
-        {
           "property": "http://purl.org/roh#projectStatus",
           "source": "ns:Status"
         },
         {
           "property": "http://purl.org/roh/mirror/vivo#description",
           "source": "ns:Abstract"
+        },
+        {
+          "property": "http://purl.org/roh#crisIdentifier",
+          "source": "@id"
         }
       ],
       "subentities": [
@@ -129,8 +137,8 @@
                           "source": "ns:Name"
                         },
                         {
-                          "property": "http://purl.org/roh/mirror/vivo#identifier",
-                          "source": "ns:Identifier"
+                          "property": "http://purl.org/roh#crisIdentifier",
+                          "source": "@id"
                         }
                       ]
                     }
@@ -156,8 +164,8 @@
                           "source": "ns:Name"
                         },
                         {
-                          "property": "http://purl.org/roh/mirror/vivo#identifier",
-                          "source": "ns:Identifier"
+                          "property": "http://purl.org/roh#crisIdentifier",
+                          "source": "@id"
                         }
                       ]
                     }
@@ -175,7 +183,6 @@
               "rdftype": "http://purl.org/roh/mirror/vivo#MemberRole",
               "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
               "source": "ns:Team/ns:Member",
-              "comprobarSubentidad": "Person",
               "subentities": [
                 {
                   "property": "http://purl.org/roh/mirror/obo/ro#RO_0000052",
@@ -190,6 +197,22 @@
                         {
                           "property": "http://purl.org/roh/mirror/foaf#name",
                           "source": "ns:PersonName/ns:FirstNames ns:PersonName/ns:FamilyNames"
+                        },
+                        {
+                          "property": "http://purl.org/roh#crisIdentifier",
+                          "source": "@id"
+                        }
+                      ]
+                    },
+                    {
+                      "rdftype": "http://purl.org/roh/mirror/foaf#Person",
+                      "id": "@id",
+                      "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+                      "source": "ns:DisplayName",
+                      "properties": [
+                        {
+                          "property": "http://purl.org/roh/mirror/foaf#name",
+                          "source": ""
                         }
                       ]
                     }
@@ -212,8 +235,8 @@
           "source": "ns:Name"
         },
         {
-          "property": "http://purl.org/roh/mirror/vivo#identifier",
-          "source": "ns:Identifier"
+          "property": "http://purl.org/roh#crisIdentifier",
+          "source": "@id"
         }
       ],
       "subentities": [
@@ -228,6 +251,10 @@
                 {
                   "property": "http://purl.org/roh#title",
                   "source": "ns:Name"
+                },
+                {
+                  "property": "http://purl.org/roh#crisIdentifier",
+                  "source": "@id"
                 }
               ]
             }
@@ -272,6 +299,10 @@
         {
           "property": "http://purl.org/roh/mirror/bibo#doi",
           "source": "ns:DOI"
+        },
+        {
+          "property": "http://purl.org/roh#crisIdentifier",
+          "source": "@id"
         }
       ],
       "subentities": [
@@ -293,6 +324,27 @@
                         {
                           "property": "http://purl.org/roh/mirror/foaf#name",
                           "source": "ns:PersonName/ns:FirstNames ns:PersonName/ns:FamilyNames"
+                        },
+                        {
+                          "property": "http://purl.org/roh#crisIdentifier",
+                          "source": "@id"
+                        }
+                      ]
+                    },
+                    {
+                      "rdftype": "http://purl.org/roh/mirror/foaf#Person",
+                      "id": "@id",
+                      "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+                      "source": "ns:Author",
+                      "comprobarSubentidad": "DisplayName",
+                      "properties": [
+                        {
+                          "property": "http://purl.org/roh/mirror/foaf#name",
+                          "source": "ns:DisplayName"
+                        },
+                        {
+                          "property": "http://purl.org/roh#crisIdentifier",
+                          "source": "@id"
                         }
                       ]
                     }
@@ -316,8 +368,8 @@
                   "source": "ns:Title"
                 },
                 {
-                  "property": "http://purl.org/roh/mirror/vivo#identifier",
-                  "source": "ns:Identifier"
+                  "property": "http://purl.org/roh#crisIdentifier",
+                  "source": "@id"
                 }
               ]
             }
@@ -347,6 +399,10 @@
                 {
                   "property": "http://purl.org/roh#title",
                   "source": "ns:Title"
+                },
+                {
+                  "property": "http://purl.org/roh#crisIdentifier",
+                  "source": "@id"
                 }
               ]
             }
@@ -367,6 +423,10 @@
         {
           "property": "http://purl.org/roh/mirror/vivo#description",
           "source": "ns:Description"
+        },
+        {
+          "property": "http://purl.org/roh#crisIdentifier",
+          "source": "@id"
         }
       ],
       "subentities": [
@@ -384,8 +444,8 @@
                   "source": "ns:Title"
                 },
                 {
-                  "property": "http://purl.org/roh/mirror/vivo#identifier",
-                  "source": "ns:Identifier"
+                  "property": "http://purl.org/roh#crisIdentifier",
+                  "source": "@id"
                 }
               ]
             }
@@ -404,6 +464,27 @@
                 {
                   "property": "http://purl.org/roh/mirror/foaf#name",
                   "source": "ns:PersonName/ns:FirstNames ns:PersonName/ns:FamilyNames"
+                },
+                {
+                  "property": "http://purl.org/roh#crisIdentifier",
+                  "source": "@id"
+                }
+              ]
+            },
+            {
+              "rdftype": "http://purl.org/roh/mirror/foaf#Person",
+              "id": "@id",
+              "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+              "source": "ns:Creators/ns:Creator",
+              "comprobarSubentidad": "DisplayName",
+              "properties": [
+                {
+                  "property": "http://purl.org/roh/mirror/foaf#name",
+                  "source": "ns:DisplayName"
+                },
+                {
+                  "property": "http://purl.org/roh#crisIdentifier",
+                  "source": "@id"
                 }
               ]
             }
