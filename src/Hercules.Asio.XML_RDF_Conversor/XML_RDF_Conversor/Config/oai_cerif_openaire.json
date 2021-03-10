@@ -1,6 +1,7 @@
 {
   "entities": [
     {
+      "mainEntity": true,
       "rdftype": "http://purl.org/roh/mirror/foaf#Person",
       "id": "@id",
       "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
@@ -77,6 +78,7 @@
       ]
     },
     {
+      "mainEntity": true,
       "rdftype": "http://purl.org/roh/mirror/vivo#Project",
       "id": "@id",
       "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
@@ -221,6 +223,7 @@
       ]
     },
     {
+      "mainEntity": true,
       "rdftype": "http://purl.org/roh/mirror/foaf#Organization",
       "id": "@id",
       "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
@@ -259,6 +262,7 @@
       ]
     },
     {
+      "mainEntity": true,
       "rdftypeproperty": "ns:Type",
       "mappingrdftype": [
         {
@@ -407,6 +411,7 @@
       ]
     },
     {
+      "mainEntity": true,
       "rdftype": "http://purl.org/roh#Activity",
       "id": "@id",
       "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",

@@ -117,6 +117,11 @@
             Clase encarga de almacenar la infomración de la entidad.
             </summary>
         </member>
+        <member name="P:Hercules.Asio.XML_RDF_Conversor.Models.ConfigJson.Entity.mainEntity">
+            <summary>
+            Define si estamos en la entidad principal o no.
+            </summary>
+        </member>
         <member name="P:Hercules.Asio.XML_RDF_Conversor.Models.ConfigJson.Entity.rdftype">
             <summary>
             Tipo del rdf al que apunta.
@@ -165,6 +170,11 @@
         <member name="P:Hercules.Asio.XML_RDF_Conversor.Models.ConfigJson.Entity.subentities">
             <summary>
             Listado de subentidades que puede tener la entidad.
+            </summary>
+        </member>
+        <member name="P:Hercules.Asio.XML_RDF_Conversor.Models.ConfigJson.Entity.comprobarSubentidad">
+            <summary>
+            Permite comprobar si es necesario acceder a las subentidades.
             </summary>
         </member>
         <member name="T:Hercules.Asio.XML_RDF_Conversor.Models.ConfigJson.Property">

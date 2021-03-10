@@ -194,7 +194,15 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
                             pDataGraph.Assert(new Triple(sujeto, propRdftype, rdfType)); // Creación del Triple.
 
 
-                            // Propiedades.
+                            // --- Propiedades.
+                            // Si es la entidad inicial, se le agrega un triple en concreto.
+                            if (entidad.mainEntity)
+                            {     
+                                IUriNode predicado = pDataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#primaryTopic"));
+                                ILiteralNode objeto = CreateILiteralNodeType(pDataGraph, "true", "http://www.w3.org/2001/XMLSchema#boolean");
+                                pDataGraph.Assert(new Triple(sujeto, predicado, objeto)); // Creación del Triple.
+                            }
+
                             if (entidad.property != null)
                             {
                                 INode prop = pDataGraph.CreateUriNode(UriFactory.Create(entidad.property));
@@ -241,7 +249,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
                                 }
                             }
 
-                            // Subentidades.
+                            // --- Subentidades.
                             if (entidad.subentities != null)
                             {
                                 foreach (Subentity subentity in entidad.subentities)

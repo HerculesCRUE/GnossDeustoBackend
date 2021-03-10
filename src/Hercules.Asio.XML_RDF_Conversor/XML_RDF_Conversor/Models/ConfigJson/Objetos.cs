@@ -17,6 +17,10 @@
     public class Entity
     {
         /// <summary>
+        /// Define si estamos en la entidad principal o no.
+        /// </summary>
+        public bool mainEntity { get; set; }
+        /// <summary>
         /// Tipo del rdf al que apunta.
         /// </summary>
         public string rdftype { get; set; }
@@ -56,9 +60,10 @@
         /// Listado de subentidades que puede tener la entidad.
         /// </summary>
         public Subentity[] subentities { get; set; }
-
+        /// <summary>
+        /// Permite comprobar si es necesario acceder a las subentidades.
+        /// </summary>
         public string comprobarSubentidad { get; set; }
-
     }
 
     /// <summary>
