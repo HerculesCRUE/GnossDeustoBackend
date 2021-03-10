@@ -17,6 +17,7 @@ from cvn.config import entity as config_entity
 from cvn.config.ontology import OntologyConfig, Ontology, DataType
 from cvn.utils import xmltree
 import logging
+#import requests
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB máx.
@@ -43,21 +44,18 @@ def v1_convert():
     # Comprobar el archivo que nos llega
     # Comprobar los argumentos
 
+    #uri = "https://localhost:44387/connect/token"
+    #payload = {'grant_type': 'client_credentials', 'scope': 'apiConversorPython', 'client_id': 'conversorPython', 'client_secret': 'secretConversorPython'}
+    #url = "https://localhost:44387/connect/token?grant_type=client_credentials&scope=apiConversorPython&client_id=conversorPython&client_secret=secretConversorPython"
+    #response = requests.get(uri, params=payload)
+
     input_xml = request.get_data().decode()
 
     if request.get_data() is None:
         return make_validation_error("An xml file is required as binary body data.")
 
-    if request.args.get('orcid') is None:
-        return make_validation_error("The orcid parameter is required.")
-
-    # Validar si es una ID de ORCID real
-    pattern = re.compile('0000-000(1-[5-9]|2-[0-9]|3-[0-4])\d{3}-\d{3}[\dX]')
-    if not pattern.match(request.args.get('orcid')):
-        return make_validation_error("The orcid field has an invalid format.")
-
     # Guardar algunos parámetros en el diccionario para luego generar bien el resultado
-    params = {'orcid': request.args.get('orcid'), 'format': "xml"}
+    params = {'format': "xml"}
 
     # Si se especifica el formato, solo permitir ciertos valores
     if request.args.get('format') is not None:
@@ -127,7 +125,7 @@ def v1_convert():
     primary_entity = None
     for entity_config in entities_config['entities']:
         generated_entity = config_entity.init_entity_from_serialized_toml(entity_config)
-        if generated_entity.primary:  # La entidad primnaria (la de la persona del CVN la guardamos por separado)
+        if generated_entity.primary:  # La entidad primaria (la de la persona del CVN la guardamos por separado)
             primary_entity = generated_entity
         else:
             entities.append(generated_entity)
@@ -141,8 +139,23 @@ def v1_convert():
         # Para cada tipo de entidad buscamos en el árbol las que tengan el código
         entity.generate_and_add_to_ontology(ontology_config, root)
 
+    resultadoQuery1 = [None]
+    resultadoQuery2 = [None]
+
+    while len(resultadoQuery1) > 0 or len(resultadoQuery2) > 0:
+        # Query para obtener las entidades que NO tengan rdftype.
+        resultadoQuery1 = review_triples("SELECT DISTINCT ?entity WHERE {?entity ?p ?o. MINUS{?entity a ?rdftype}}", g)
+        # Query para obtener las entidades que únicamente tengan rdftype.
+        resultadoQuery2 = review_triples("SELECT ?entity WHERE {?entity ?p ?o. } GROUP BY ?entity HAVING (COUNT(*) = 1)", g)
+
     return make_response(g.serialize(format=params['format']), 200)
 
+def review_triples (query, grafo):
+    resultadoQuery = grafo.query(query)
+    for fila in resultadoQuery:
+        grafo.remove((fila[0], None, None))
+        grafo.remove((None, None, fila[0]))
+    return resultadoQuery
 
 def get_sources_from_property(current_property, node):
     # Declaramos un dict. para que podamos guardar los valores de los sources

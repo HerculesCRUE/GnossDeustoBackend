@@ -12,6 +12,8 @@ import urllib.parse
 import cvn.utils.xmltree as xmltree
 import cvn.webserver as web_server
 import logging
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Caché de URIs generadas
 # TODO mover a un servicio externo, o hacer algo más elaborado
@@ -35,7 +37,9 @@ def generate_uri(resource_class, identifier):
     if cache_id in cached_uris:
         return cached_uris[cache_id]
 
-    api_response = requests.get("http://herc-as-front-desa.atica.um.es/uris/Factory", params={
+    # http://herc-as-front-desa.atica.um.es/uris/Factory
+    # Quitar verify=False
+    api_response = requests.get("https://localhost:44340/Factory", verify=False, params={
         'resource_class': resource_class,
         'identifier': identifier
     })  # TODO comprobar que lo que devuelve es de hecho una URL bien formateada
@@ -180,6 +184,12 @@ def init_entity_from_serialized_toml(config, parent=None):
     return entity
 
 
+def comprobar_propiedad(propiedad):
+    if propiedad is not None and len(propiedad) > 0:
+        return True
+    return False
+
+
 class Entity:
     # TODO todo el tema de la id y la URI
     def __init__(self, code, ontology, classname, parent=None, identifier_config_resource=None,
@@ -264,7 +274,6 @@ class Entity:
             self.clear_values()
 
     def get_property_values_from_node(self, item_node, skip_subentities_with_subcode):
-        node = item_node
         for property_item in self.properties:
             property_item.get_value_from_node(item_node)
         self.xml_item = item_node
@@ -307,17 +316,21 @@ class Entity:
         return self.generated_identifier
 
     def get_uri(self):
-        if self.is_blank_node():
-            if self.node is None:
-                self.node = BNode()
-            return self.node
-        if self.should_cache():
-            if cvn_entity_cache.get_current_entity_cache().in_cache(self.get_cache_id().lower()):
-                return cvn_entity_cache.get_current_entity_cache().get(self.get_cache_id().lower())
-            else:
-                uri = URIRef(self.get_identifier())
-                cvn_entity_cache.get_current_entity_cache().add_to_cache(self.get_cache_id().lower(), uri)
-                return uri
+        uri_urisfactory = self.get_identifier()
+        # Si el UrisFactory devuelve "_:", es un BlankNode.
+        if "_:" in uri_urisfactory:
+            if self.is_blank_node():
+                if self.node is None:
+                    self.node = BNode(uri_urisfactory)
+                return self.node
+        else:
+            if self.should_cache():
+                if cvn_entity_cache.get_current_entity_cache().in_cache(self.get_cache_id().lower()):
+                    return cvn_entity_cache.get_current_entity_cache().get(self.get_cache_id().lower())
+                else:
+                    uri = URIRef(self.get_identifier())
+                    cvn_entity_cache.get_current_entity_cache().add_to_cache(self.get_cache_id().lower(), uri)
+                    return uri
         return URIRef(self.get_identifier())
 
     def generate_entity_triple(self, ontology_config):
@@ -327,32 +340,40 @@ class Entity:
         triples = []
         default_type = ontology_config.get_default_data_type()
         for property_item in self.properties:
-            if property_item.should_generate():
 
-                # Valores por defecto: el tipo de datos definido como default y la propiedad como string simplón
-                literal_type = ontology_config.get_ontology(default_type.ontology).term(default_type.name)
-                property_value = str(property_item.formatted_value)
+            # Si tiene como segundo apellido "-", no lo pone.
+            if property_item.formatted_value is not None and len(property_item.formatted_value) > 0 and property_item.formatted_value[-1] == "-":
+                property_item.formatted_value = property_item.formatted_value[0: len(property_item.formatted_value) - 2]
 
-                # ¿Tiene la propiedad un tipo de dato específico? Si no, nos quedamos con el default
-                if property_item.data_type is not None:
-                    # El tipo de dato definido para la propiedad, ¿existe? - si no, el default
-                    data_type = ontology_config.get_data_type(property_item.data_type)
-                    if data_type is not None:
-                        # Intentamos convertir el string en su tipo de dato correspondiente
-                        try:
-                            property_value = (data_type.get_python_type())(property_value)
-                            literal_type = ontology_config.get_ontology(data_type.ontology).term(data_type.name)
-                        except TypeError:
-                            pass
+            # Si la propiedad está vacía, no la añade.
+            if comprobar_propiedad(property_item.formatted_value):
 
-                        if data_type.force:
-                            literal_type = ontology_config.get_ontology(data_type.ontology).term(data_type.name)
+                if property_item.should_generate():
 
-                triple = self.get_uri(), \
-                         ontology_config.get_ontology(property_item.ontology).term(property_item.name), \
-                         Literal(property_value, datatype=literal_type)
+                    # Valores por defecto: el tipo de datos definido como default y la propiedad como string simplón
+                    literal_type = ontology_config.get_ontology(default_type.ontology).term(default_type.name)
+                    property_value = str(property_item.formatted_value)
 
-                triples.append(triple)
+                    # ¿Tiene la propiedad un tipo de dato específico? Si no, nos quedamos con el default
+                    if property_item.data_type is not None:
+                        # El tipo de dato definido para la propiedad, ¿existe? - si no, el default
+                        data_type = ontology_config.get_data_type(property_item.data_type)
+                        if data_type is not None:
+                            # Intentamos convertir el string en su tipo de dato correspondiente
+                            try:
+                                property_value = (data_type.get_python_type())(property_value)
+                                literal_type = ontology_config.get_ontology(data_type.ontology).term(data_type.name)
+                            except TypeError:
+                                pass
+
+                            if data_type.force:
+                                literal_type = ontology_config.get_ontology(data_type.ontology).term(data_type.name)
+
+                    triple = self.get_uri(), \
+                             ontology_config.get_ontology(property_item.ontology).term(property_item.name), \
+                             Literal(property_value, datatype=literal_type)
+
+                    triples.append(triple)
         return triples
 
     def generate_relationship_triples(self, ontology_config):
@@ -410,24 +431,29 @@ class Entity:
             return
 
         if self.uri is None:
-            ontology_config.graph.add(self.generate_entity_triple(ontology_config))
             # Propiedades
-            for triple in self.generate_property_triples(ontology_config):
-                ontology_config.graph.add(triple)
+            propiedades = self.generate_property_triples(ontology_config)
+
+            # Relaciones
+            relationship_triples = self.generate_relationship_triples(ontology_config)
+
+            if len(propiedades) > 0 or len(relationship_triples) > 0:
+                for triple in propiedades:
+                    ontology_config.graph.add(triple)
+                for triple in relationship_triples:
+                    ontology_config.graph.add(triple)
+
+                tripleEntidad = self.generate_entity_triple(ontology_config)
+                ontology_config.graph.add(tripleEntidad)
+
+            # Subentidades
+            for subentity in self.subentities:
+                if skip_subentities_with_subcode and subentity.sub_code:
+                    subentity.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
+                else:
+                    subentity.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
         else:
-            print("a")
-
-        # Relaciones
-        relationship_triples = self.generate_relationship_triples(ontology_config)
-        for triple in relationship_triples:
-            ontology_config.graph.add(triple)
-
-        # Subentidades
-        for subentity in self.subentities:
-            if skip_subentities_with_subcode and subentity.sub_code:
-                subentity.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
-            else:
-                subentity.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
+            print("Uri inválida.")
 
     def get_property_dict(self, format_safe=False):
         properties = {}
@@ -440,7 +466,6 @@ class Entity:
         return properties
 
     def should_generate(self):
-
         if (len(self.properties) > 0) and self.are_properties_empty():
             return False
 
