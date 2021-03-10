@@ -1,0 +1,1799 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CVNSubtype xmlns="http://cv.normalizado.org/CVNSubtype" xmlns:cvn="http://cv.normalizado.org/cvn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://cv.normalizado.org/CVNSubtype Subtypes.xsd">
+	<Subtype xmlns="" version="1.4.0">
+		<Item code="001">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Aportaciones más relevantes del CV docencia</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>002</CodeSubtype1>
+		</Item>
+		<Item code="003">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ayudas y Becas Obtenidas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>007</CodeSubtype1>
+		</Item>
+		<Item code="054">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Protocolos y Otros materiales de atención de salud</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>009</CodeSubtype1>
+		</Item>
+		<Item code="167">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Publicación en Revista</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>009</CodeSubtype1>
+			<CodeSubtype2>125</CodeSubtype2>
+		</Item>
+		<Item code="119">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Libro y/o Manual</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>009</CodeSubtype1>
+			<CodeSubtype2>126</CodeSubtype2>
+		</Item>
+		<Item code="168">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Publicación Períodica</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>009</CodeSubtype1>
+			<CodeSubtype2>127</CodeSubtype2>
+		</Item>
+		<Item code="111">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Documento o Informe científico-técnico</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>009</CodeSubtype1>
+			<CodeSubtype2>128</CodeSubtype2>
+		</Item>
+		<Item code="114">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Grabaciones Sonoras</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>009</CodeSubtype1>
+			<CodeSubtype2>131</CodeSubtype2>
+		</Item>
+		<Item code="144">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Peliculas y Videograbaciones</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>009</CodeSubtype1>
+			<CodeSubtype2>132</CodeSubtype2>
+		</Item>
+		<Item code="165">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Software</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>009</CodeSubtype1>
+			<CodeSubtype2>133</CodeSubtype2>
+		</Item>
+		<Item code="006">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Catálogo de obra artística</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>012</CodeSubtype1>
+		</Item>
+		<Item code="007">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Comité Científico asesores, Sociedades Científica</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>014</CodeSubtype1>
+		</Item>
+		<Item code="008">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Congreso</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>015</CodeSubtype1>
+		</Item>
+		<Item code="086">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Comunicación</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>015</CodeSubtype1>
+			<CodeSubtype2>155</CodeSubtype2>
+		</Item>
+		<Item code="091">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Conferencia y demás aportaciones no publicadas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>015</CodeSubtype1>
+			<CodeSubtype2>164</CodeSubtype2>
+		</Item>
+		<Item code="156">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Poster</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>015</CodeSubtype1>
+			<CodeSubtype2>165</CodeSubtype2>
+		</Item>
+		<Item code="101">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Demostración de Producto o Servicio</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>015</CodeSubtype1>
+			<CodeSubtype2>167</CodeSubtype2>
+		</Item>
+		<Item code="152">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>015</CodeSubtype1>
+			<CodeSubtype2>178</CodeSubtype2>
+		</Item>
+		<Item code="134">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Participación en Mesa Redonda</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>015</CodeSubtype1>
+			<CodeSubtype2>213</CodeSubtype2>
+		</Item>
+		<Item code="186">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia en sesión plenaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>015</CodeSubtype1>
+			<CodeSubtype2>243</CodeSubtype2>
+		</Item>
+		<Item code="187">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia en sesión no plenaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>015</CodeSubtype1>
+			<CodeSubtype2>244</CodeSubtype2>
+		</Item>
+		<Item code="010">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Convenios de colaboración</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>016</CodeSubtype1>
+		</Item>
+		<Item code="011">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Curso</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>018</CodeSubtype1>
+		</Item>
+		<Item code="138">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Participación en Mesa Redonda</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>018</CodeSubtype1>
+			<CodeSubtype2>158</CodeSubtype2>
+		</Item>
+		<Item code="150">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>018</CodeSubtype1>
+			<CodeSubtype2>192</CodeSubtype2>
+		</Item>
+		<Item code="085">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Comunicación</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>018</CodeSubtype1>
+			<CodeSubtype2>210</CodeSubtype2>
+		</Item>
+		<Item code="088">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Conferencia y demás aportaciones no publicadas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>018</CodeSubtype1>
+			<CodeSubtype2>219</CodeSubtype2>
+		</Item>
+		<Item code="160">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Poster</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>018</CodeSubtype1>
+			<CodeSubtype2>220</CodeSubtype2>
+		</Item>
+		<Item code="102">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Demostración de Producto o Servicio</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>018</CodeSubtype1>
+			<CodeSubtype2>222</CodeSubtype2>
+		</Item>
+		<Item code="188">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia en sesión plenaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>018</CodeSubtype1>
+			<CodeSubtype2>245</CodeSubtype2>
+		</Item>
+		<Item code="189">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia en sesión no plenaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>018</CodeSubtype1>
+			<CodeSubtype2>246</CodeSubtype2>
+		</Item>
+		<Item code="012">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Cursos, Programas o Seminarios</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>019</CodeSubtype1>
+		</Item>
+		<Item code="146">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Perfecionamiento Docente</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>019</CodeSubtype1>
+			<CodeSubtype2>053</CodeSubtype2>
+		</Item>
+		<Item code="096">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Cursos de Especializacion</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>019</CodeSubtype1>
+			<CodeSubtype2>057</CodeSubtype2>
+		</Item>
+		<Item code="133">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Para la mejora de la atención de Salud para Profesionales Sanitarios</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>019</CodeSubtype1>
+			<CodeSubtype2>058</CodeSubtype2>
+		</Item>
+		<Item code="163">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Programa de Formación Sanitaria Especializada</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>019</CodeSubtype1>
+			<CodeSubtype2>059</CodeSubtype2>
+		</Item>
+		<Item code="162">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Programa de Formación de I+D  y/o Postformación Sanitaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>019</CodeSubtype1>
+			<CodeSubtype2>060</CodeSubtype2>
+		</Item>
+		<Item code="014">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Docencia Internacional</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>027</CodeSubtype1>
+		</Item>
+		<Item code="015">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Docencia No Oficial</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>028</CodeSubtype1>
+		</Item>
+		<Item code="016">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Docencia Oficial</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>029</CodeSubtype1>
+		</Item>
+		<Item code="020">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Artículo científico</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>035</CodeSubtype1>
+		</Item>
+		<Item code="021">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Experiencia de Atención de salud en otros Paises Extranjeros</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>036</CodeSubtype1>
+		</Item>
+		<Item code="022">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Experiencia en cooperación sanitaria en paises en desarrollo</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>037</CodeSubtype1>
+		</Item>
+		<Item code="023">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Experiencia Sanitaria en Cooperación de Atención de Salud en países en desarrollo</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>038</CodeSubtype1>
+		</Item>
+		<Item code="024">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Experiencia Sanitaria en Instituciones de la UE</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>039</CodeSubtype1>
+		</Item>
+		<Item code="025">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Experiencia Sanitaria en Instituciones en las OMS</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>040</CodeSubtype1>
+		</Item>
+		<Item code="026">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Experiencia Sanitaria en Otros Organismos Internacionales</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>041</CodeSubtype1>
+		</Item>
+		<Item code="027">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Experiencia sanitaria en otros Paises Extranjeros</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>042</CodeSubtype1>
+		</Item>
+		<Item code="029">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Gestión en I+D+I</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>045</CodeSubtype1>
+		</Item>
+		<Item code="031">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Jornada</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>049</CodeSubtype1>
+		</Item>
+		<Item code="093">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Conferencia y demás aportaciones no publicadas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>049</CodeSubtype1>
+			<CodeSubtype2>156</CodeSubtype2>
+		</Item>
+		<Item code="154">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Poster</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>049</CodeSubtype1>
+			<CodeSubtype2>157</CodeSubtype2>
+		</Item>
+		<Item code="136">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Participación en Mesa Redonda</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>049</CodeSubtype1>
+			<CodeSubtype2>182</CodeSubtype2>
+		</Item>
+		<Item code="147">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>049</CodeSubtype1>
+			<CodeSubtype2>201</CodeSubtype2>
+		</Item>
+		<Item code="081">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Comunicación</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>049</CodeSubtype1>
+			<CodeSubtype2>202</CodeSubtype2>
+		</Item>
+		<Item code="097">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Demostracion de Producto o Servicio</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>049</CodeSubtype1>
+			<CodeSubtype2>206</CodeSubtype2>
+		</Item>
+		<Item code="190">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia en sesión plenaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>049</CodeSubtype1>
+			<CodeSubtype2>247</CodeSubtype2>
+		</Item>
+		<Item code="191">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia en sesión no plenaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>049</CodeSubtype1>
+			<CodeSubtype2>248</CodeSubtype2>
+		</Item>
+		<Item code="019">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Elaboracion de Material Docente</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>050</CodeSubtype1>
+		</Item>
+		<Item code="166">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Publicación en Revista</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>050</CodeSubtype1>
+			<CodeSubtype2>111</CodeSubtype2>
+		</Item>
+		<Item code="118">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Libro y/o Manual</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>050</CodeSubtype1>
+			<CodeSubtype2>112</CodeSubtype2>
+		</Item>
+		<Item code="169">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Publicación Períodica</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>050</CodeSubtype1>
+			<CodeSubtype2>113</CodeSubtype2>
+		</Item>
+		<Item code="112">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Documento o Informe científico-técnico</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>050</CodeSubtype1>
+			<CodeSubtype2>115</CodeSubtype2>
+		</Item>
+		<Item code="123">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Material Cartográfico</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>050</CodeSubtype1>
+			<CodeSubtype2>117</CodeSubtype2>
+		</Item>
+		<Item code="131">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Música impresa</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>050</CodeSubtype1>
+			<CodeSubtype2>118</CodeSubtype2>
+		</Item>
+		<Item code="115">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Grabaciones Sonoras</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>050</CodeSubtype1>
+			<CodeSubtype2>119</CodeSubtype2>
+		</Item>
+		<Item code="145">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Peliculas y Videograbaciones</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>050</CodeSubtype1>
+			<CodeSubtype2>120</CodeSubtype2>
+		</Item>
+		<Item code="164">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Software</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>050</CodeSubtype1>
+			<CodeSubtype2>121</CodeSubtype2>
+		</Item>
+		<Item code="037">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Modalidad know how</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>057</CodeSubtype1>
+		</Item>
+		<Item code="038">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Modalidad Propiedad Industrial</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>058</CodeSubtype1>
+		</Item>
+		<Item code="108">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Diseños Industriales</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>058</CodeSubtype1>
+			<CodeSubtype2>013</CodeSubtype2>
+		</Item>
+		<Item code="122">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Marcas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>058</CodeSubtype1>
+			<CodeSubtype2>020</CodeSubtype2>
+		</Item>
+		<Item code="141">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Patente de Invención</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>058</CodeSubtype1>
+			<CodeSubtype2>026</CodeSubtype2>
+		</Item>
+		<Item code="126">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Modelo de Utilidad</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>058</CodeSubtype1>
+			<CodeSubtype2>235</CodeSubtype2>
+		</Item>
+		<Item code="128">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Modelo Industrial</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>058</CodeSubtype1>
+			<CodeSubtype2>236</CodeSubtype2>
+		</Item>
+		<Item code="177">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Variedades Vegetales</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>058</CodeSubtype1>
+			<CodeSubtype2>240</CodeSubtype2>
+		</Item>
+		<Item code="039">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Modalidad Propiedad Intelectual</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>059</CodeSubtype1>
+		</Item>
+		<Item code="104">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Derechos conexos,  (p. ej. los del intérprete)</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>059</CodeSubtype1>
+			<CodeSubtype2>011</CodeSubtype2>
+		</Item>
+		<Item code="105">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Derechos de autor –“copyrights"</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>059</CodeSubtype1>
+			<CodeSubtype2>012</CodeSubtype2>
+		</Item>
+		<Item code="041">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Organización de actividades de I+D+I</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>066</CodeSubtype1>
+		</Item>
+		<Item code="042">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Otras Actividades / Meritos no incluidos en relacion con la experiencia docente</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>070</CodeSubtype1>
+		</Item>
+		<Item code="043">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Otras Actividades / Meritos no incluidos en relacion con la experiencia especializada sanitaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>071</CodeSubtype1>
+		</Item>
+		<Item code="047">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Pertenecia Honorífica a Sociedades Científica y Profesionales - Consejo Editoriales</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>076</CodeSubtype1>
+		</Item>
+		<Item code="048">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Pertenecia mediante procesos selectivos a Redes Temáticas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>077</CodeSubtype1>
+		</Item>
+		<Item code="049">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Pertenencia de Cuota a Sociedades Científica</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>078</CodeSubtype1>
+		</Item>
+		<Item code="051">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Prácticas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>079</CodeSubtype1>
+		</Item>
+		<Item code="063">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Seminario</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>081</CodeSubtype1>
+		</Item>
+		<Item code="151">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>081</CodeSubtype1>
+			<CodeSubtype2>154</CodeSubtype2>
+		</Item>
+		<Item code="139">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Participación en Mesa Redonda</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>081</CodeSubtype1>
+			<CodeSubtype2>166</CodeSubtype2>
+		</Item>
+		<Item code="092">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Conferencia y demás aportaciones no publicadas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>081</CodeSubtype1>
+			<CodeSubtype2>180</CodeSubtype2>
+		</Item>
+		<Item code="155">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Poster</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>081</CodeSubtype1>
+			<CodeSubtype2>181</CodeSubtype2>
+		</Item>
+		<Item code="100">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Demostración de Producto o Servicio</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>081</CodeSubtype1>
+			<CodeSubtype2>183</CodeSubtype2>
+		</Item>
+		<Item code="083">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Comunicación</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>081</CodeSubtype1>
+			<CodeSubtype2>218</CodeSubtype2>
+		</Item>
+		<Item code="192">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia en sesión plenaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>081</CodeSubtype1>
+			<CodeSubtype2>249</CodeSubtype2>
+		</Item>
+		<Item code="193">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia en sesión no plenaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>081</CodeSubtype1>
+			<CodeSubtype2>250</CodeSubtype2>
+		</Item>
+		<Item code="055">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Proyecto Final de Carrera</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>084</CodeSubtype1>
+		</Item>
+		<Item code="061">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Representación Nacional en Foros y Comités Internacionales</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>089</CodeSubtype1>
+		</Item>
+		<Item code="058">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Publicación Periódica</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>092</CodeSubtype1>
+		</Item>
+		<Item code="172">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Revista Científica</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>092</CodeSubtype1>
+			<CodeSubtype2>092</CodeSubtype2>
+		</Item>
+		<Item code="161">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Prensa</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>092</CodeSubtype1>
+			<CodeSubtype2>093</CodeSubtype2>
+		</Item>
+		<Item code="173">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Revistas de difusión General</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>092</CodeSubtype1>
+			<CodeSubtype2>094</CodeSubtype2>
+		</Item>
+		<Item code="065">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Taller de trabajo</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>097</CodeSubtype1>
+		</Item>
+		<Item code="148">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>097</CodeSubtype1>
+			<CodeSubtype2>162</CodeSubtype2>
+		</Item>
+		<Item code="087">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Comunicación</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>097</CodeSubtype1>
+			<CodeSubtype2>163</CodeSubtype2>
+		</Item>
+		<Item code="094">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Conferencia y demás aportaciones no publicadas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>097</CodeSubtype1>
+			<CodeSubtype2>194</CodeSubtype2>
+		</Item>
+		<Item code="157">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Poster</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>097</CodeSubtype1>
+			<CodeSubtype2>195</CodeSubtype2>
+		</Item>
+		<Item code="103">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Demostración de Producto o Servicio</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>097</CodeSubtype1>
+			<CodeSubtype2>197</CodeSubtype2>
+		</Item>
+		<Item code="140">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Participación en Mesa Redonda</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>097</CodeSubtype1>
+			<CodeSubtype2>205</CodeSubtype2>
+		</Item>
+		<Item code="194">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia en sesión plenaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>097</CodeSubtype1>
+			<CodeSubtype2>251</CodeSubtype2>
+		</Item>
+		<Item code="195">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia en sesión no plenaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>097</CodeSubtype1>
+			<CodeSubtype2>252</CodeSubtype2>
+		</Item>
+		<Item code="066">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Tesina</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>099</CodeSubtype1>
+		</Item>
+		<Item code="067">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Tesis Doctoral</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>100</CodeSubtype1>
+		</Item>
+		<Item code="071">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Trabajo conducente a obtención de DEA</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>104</CodeSubtype1>
+		</Item>
+		<Item code="018">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Informe científico-técnico</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>111</CodeSubtype1>
+		</Item>
+		<Item code="032">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Libro o monografía científica</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>112</CodeSubtype1>
+		</Item>
+		<Item code="129">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Monografía</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>112</CodeSubtype1>
+			<CodeSubtype2>081</CodeSubtype2>
+		</Item>
+		<Item code="073">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Anuario</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>112</CodeSubtype1>
+			<CodeSubtype2>082</CodeSubtype2>
+		</Item>
+		<Item code="076">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Atlas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>112</CodeSubtype1>
+			<CodeSubtype2>083</CodeSubtype2>
+		</Item>
+		<Item code="106">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Diccionario común</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>112</CodeSubtype1>
+			<CodeSubtype2>084</CodeSubtype2>
+		</Item>
+		<Item code="107">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Directorio</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>112</CodeSubtype1>
+			<CodeSubtype2>085</CodeSubtype2>
+		</Item>
+		<Item code="175">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Tesauro</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>112</CodeSubtype1>
+			<CodeSubtype2>086</CodeSubtype2>
+		</Item>
+		<Item code="077">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Bibliografía</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>112</CodeSubtype1>
+			<CodeSubtype2>087</CodeSubtype2>
+		</Item>
+		<Item code="116">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Guía</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>112</CodeSubtype1>
+			<CodeSubtype2>088</CodeSubtype2>
+		</Item>
+		<Item code="080">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Catálogo</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>112</CodeSubtype1>
+			<CodeSubtype2>090</CodeSubtype2>
+		</Item>
+		<Item code="170">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Publicación Seriada</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>112</CodeSubtype1>
+			<CodeSubtype2>091</CodeSubtype2>
+		</Item>
+		<Item code="200">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Manual</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>112</CodeSubtype1>
+			<CodeSubtype2>257</CodeSubtype2>
+		</Item>
+		<Item code="033">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Libro de Actas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>113</CodeSubtype1>
+		</Item>
+		<Item code="201">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Libro de prácticas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>113</CodeSubtype1>
+			<CodeSubtype2>258</CodeSubtype2>
+		</Item>
+		<Item code="028">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Exposicion</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>116</CodeSubtype1>
+		</Item>
+		<Item code="082">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Comunicación</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>116</CodeSubtype1>
+			<CodeSubtype2>193</CodeSubtype2>
+		</Item>
+		<Item code="135">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Participación en Mesa Redonda</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>116</CodeSubtype1>
+			<CodeSubtype2>196</CodeSubtype2>
+		</Item>
+		<Item code="090">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Conferencia y demás aportaciones no publicadas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>116</CodeSubtype1>
+			<CodeSubtype2>211</CodeSubtype2>
+		</Item>
+		<Item code="159">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Poster</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>116</CodeSubtype1>
+			<CodeSubtype2>212</CodeSubtype2>
+		</Item>
+		<Item code="099">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Demostración de Producto o Servicio</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>116</CodeSubtype1>
+			<CodeSubtype2>214</CodeSubtype2>
+		</Item>
+		<Item code="153">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>116</CodeSubtype1>
+			<CodeSubtype2>217</CodeSubtype2>
+		</Item>
+		<Item code="196">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia en sesión plenaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>116</CodeSubtype1>
+			<CodeSubtype2>253</CodeSubtype2>
+		</Item>
+		<Item code="197">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia en sesión no plenaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>116</CodeSubtype1>
+			<CodeSubtype2>254</CodeSubtype2>
+		</Item>
+		<Item code="062">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Secreto Empresarial (Industrial)</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>118</CodeSubtype1>
+		</Item>
+		<Item code="176">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Variedades Vegetales</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>118</CodeSubtype1>
+			<CodeSubtype2>038</CodeSubtype2>
+		</Item>
+		<Item code="109">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Diseños Industriales</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>118</CodeSubtype1>
+			<CodeSubtype2>237</CodeSubtype2>
+		</Item>
+		<Item code="121">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Marcas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>118</CodeSubtype1>
+			<CodeSubtype2>238</CodeSubtype2>
+		</Item>
+		<Item code="142">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Patente de Invención</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>118</CodeSubtype1>
+			<CodeSubtype2>239</CodeSubtype2>
+		</Item>
+		<Item code="125">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Modelo de Utilidad</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>118</CodeSubtype1>
+			<CodeSubtype2>241</CodeSubtype2>
+		</Item>
+		<Item code="127">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Modelo Industrial</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>118</CodeSubtype1>
+			<CodeSubtype2>242</CodeSubtype2>
+		</Item>
+		<Item code="057">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Revista</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>123</CodeSubtype1>
+		</Item>
+		<Item code="074">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Artículo/s</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>123</CodeSubtype1>
+			<CodeSubtype2>069</CodeSubtype2>
+		</Item>
+		<Item code="075">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Artículos en prensa</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>123</CodeSubtype1>
+			<CodeSubtype2>070</CodeSubtype2>
+		</Item>
+		<Item code="113">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Editorial</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>123</CodeSubtype1>
+			<CodeSubtype2>071</CodeSubtype2>
+		</Item>
+		<Item code="124">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Meeting-Abstract</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>123</CodeSubtype1>
+			<CodeSubtype2>072</CodeSubtype2>
+		</Item>
+		<Item code="078">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Book-Review</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>123</CodeSubtype1>
+			<CodeSubtype2>073</CodeSubtype2>
+		</Item>
+		<Item code="117">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Letters</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>123</CodeSubtype1>
+			<CodeSubtype2>074</CodeSubtype2>
+		</Item>
+		<Item code="174">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Software-Review</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>123</CodeSubtype1>
+			<CodeSubtype2>075</CodeSubtype2>
+		</Item>
+		<Item code="095">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Corrección</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>123</CodeSubtype1>
+			<CodeSubtype2>076</CodeSubtype2>
+		</Item>
+		<Item code="132">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Nota</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>123</CodeSubtype1>
+			<CodeSubtype2>078</CodeSubtype2>
+		</Item>
+		<Item code="171">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Review</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>123</CodeSubtype1>
+			<CodeSubtype2>079</CodeSubtype2>
+		</Item>
+		<Item code="056">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Proyectos de I+D+I</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>124</CodeSubtype1>
+		</Item>
+		<Item code="009">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Contratos I+D+I</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>125</CodeSubtype1>
+		</Item>
+		<Item code="002">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ayudas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>126</CodeSubtype1>
+		</Item>
+		<Item code="059">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Reconocimiento a la Carrera profesional o empresarial</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>127</CodeSubtype1>
+		</Item>
+		<Item code="072">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Tramos de investigacion reconocido</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>128</CodeSubtype1>
+		</Item>
+		<Item code="064">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Situación profesional actual</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>129</CodeSubtype1>
+		</Item>
+		<Item code="005">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Cargos y actividades desempeñadas anteriores al actual</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>130</CodeSubtype1>
+		</Item>
+		<Item code="017">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Doctor</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>131</CodeSubtype1>
+		</Item>
+		<Item code="069">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Titulado Superior</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>132</CodeSubtype1>
+		</Item>
+		<Item code="068">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Titulado Medio</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>133</CodeSubtype1>
+		</Item>
+		<Item code="034">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Máster</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>134</CodeSubtype1>
+		</Item>
+		<Item code="050">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Postgrado</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>135</CodeSubtype1>
+		</Item>
+		<Item code="013">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>DEA</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>137</CodeSubtype1>
+		</Item>
+		<Item code="035">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Material Cartográfico</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>143</CodeSubtype1>
+		</Item>
+		<Item code="120">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Mapa Topográfico</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>143</CodeSubtype1>
+			<CodeSubtype2>098</CodeSubtype2>
+		</Item>
+		<Item code="079">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Carta Nautica</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>143</CodeSubtype1>
+			<CodeSubtype2>099</CodeSubtype2>
+		</Item>
+		<Item code="040">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Música impresa</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>144</CodeSubtype1>
+		</Item>
+		<Item code="030">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Grabaciones Sonoras</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>145</CodeSubtype1>
+		</Item>
+		<Item code="130">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Música</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>145</CodeSubtype1>
+			<CodeSubtype2>102</CodeSubtype2>
+		</Item>
+		<Item code="046">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Peliculas y Videograbaciones</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>146</CodeSubtype1>
+		</Item>
+		<Item code="110">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Documental Científico-Técnico o divulgativo</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>146</CodeSubtype1>
+			<CodeSubtype2>103</CodeSubtype2>
+		</Item>
+		<Item code="143">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Pelicula Ficción</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>146</CodeSubtype1>
+			<CodeSubtype2>104</CodeSubtype2>
+		</Item>
+		<Item code="053">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Software</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>147</CodeSubtype1>
+		</Item>
+		<Item code="004">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Capítulo de libro</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>148</CodeSubtype1>
+		</Item>
+		<Item code="045">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Otras Actividades de Divulgación</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>150</CodeSubtype1>
+		</Item>
+		<Item code="098">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Demostracion de Producto o Servicio</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>150</CodeSubtype1>
+			<CodeSubtype2>159</CodeSubtype2>
+		</Item>
+		<Item code="084">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Comunicación</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>150</CodeSubtype1>
+			<CodeSubtype2>179</CodeSubtype2>
+		</Item>
+		<Item code="089">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Conferencia y demás aportaciones no publicadas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>150</CodeSubtype1>
+			<CodeSubtype2>203</CodeSubtype2>
+		</Item>
+		<Item code="158">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Poster</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>150</CodeSubtype1>
+			<CodeSubtype2>204</CodeSubtype2>
+		</Item>
+		<Item code="149">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>150</CodeSubtype1>
+			<CodeSubtype2>209</CodeSubtype2>
+		</Item>
+		<Item code="137">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Participación en Mesa Redonda</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>150</CodeSubtype1>
+			<CodeSubtype2>221</CodeSubtype2>
+		</Item>
+		<Item code="198">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia en sesión plenaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>150</CodeSubtype1>
+			<CodeSubtype2>255</CodeSubtype2>
+		</Item>
+		<Item code="199">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ponencia en sesión no plenaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>150</CodeSubtype1>
+			<CodeSubtype2>256</CodeSubtype2>
+		</Item>
+		<Item code="070">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Titulos y Premios obtenidos que acrediten la calidad profesional</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>164</CodeSubtype1>
+		</Item>
+		<Item code="052">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Premios de Innovación docente</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>169</CodeSubtype1>
+		</Item>
+		<Item code="060">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Reconocimiento y acreditaciones de la actividad docente y complementos obtenidos</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>170</CodeSubtype1>
+		</Item>
+		<Item code="036">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Material Gráfico</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>172</CodeSubtype1>
+		</Item>
+		<Item code="178">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Extensión Universitaria</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>173</CodeSubtype1>
+		</Item>
+		<Item code="179">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Especialidad</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>174</CodeSubtype1>
+		</Item>
+		<Item code="180">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Apuntes</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>175</CodeSubtype1>
+		</Item>
+		<Item code="181">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Entrevistas en medios comunicación</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>176</CodeSubtype1>
+		</Item>
+		<Item code="182">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Ferias y exhibiciones</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>177</CodeSubtype1>
+		</Item>
+		<Item code="183">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Conferencias impartidas</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>178</CodeSubtype1>
+		</Item>
+		<Item code="184">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Estancias</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>179</CodeSubtype1>
+		</Item>
+		<Item code="185">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Juegos didácticos</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>180</CodeSubtype1>
+		</Item>
+		<Item code="202">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Artículo de enciclopedia</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>181</CodeSubtype1>
+		</Item>
+		<Item code="203">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Artículo de divulgación</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>182</CodeSubtype1>
+		</Item>
+		<Item code="204">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Traducción</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>183</CodeSubtype1>
+		</Item>
+		<Item code="205">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Reseña</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>184</CodeSubtype1>
+		</Item>
+		<Item code="206">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Revisión bibliográfica</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>185</CodeSubtype1>
+		</Item>
+		<Item code="207">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Libro de divulgación</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>186</CodeSubtype1>
+		</Item>
+		<Item code="208">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Edición científica</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>187</CodeSubtype1>
+		</Item>
+		<Item code="209">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Diccionario científico</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>188</CodeSubtype1>
+		</Item>
+		<Item code="OTHERS">
+			<Name>
+				<NameDetail lang="spa">
+					<Name>Otros</Name>
+				</NameDetail>
+			</Name>
+			<CodeSubtype1>OTHERS</CodeSubtype1>
+			<CodeSubtype2>OTHERS</CodeSubtype2>
+		</Item>
+	</Subtype>
+</CVNSubtype>

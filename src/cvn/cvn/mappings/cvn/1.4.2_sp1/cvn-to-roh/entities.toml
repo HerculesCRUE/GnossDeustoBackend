@@ -1,0 +1,1930 @@
+[[entities]]
+code = "000.010.000.000"
+displayname = "foaf:Person"
+primary = true
+id.resource = "Person"
+id.format = "{identifier}"
+cache = "foaf:person"
+
+    # DEBUG -- para marcar a la persona primaria del CVN.
+    # Eliminar, sustituir o cambiar según proceda.
+    [[entities.properties]]
+    displayname = "foaf:primaryTopic"
+    datatype = "xsd:boolean"
+
+        # Debug: este código no existe, pero lo sobreescribimos con "value"
+        [[entities.properties.sources]]
+        code = "000.010.000.020"
+        name = "debug"
+        value = "true"
+
+    [[entities.properties]]
+    displayname = "foaf:name"
+    format = "{name} {familyName} {secondFamilyName}"
+
+        [[entities.properties.sources]]
+        code = "000.010.000.020"
+        name = "name"
+
+        [[entities.properties.sources]]
+        code = "000.010.000.010"
+        name = "familyName"
+        bean = "FirstFamilyName"
+
+        [[entities.properties.sources]]
+        code = "000.010.000.010"
+        name = "secondFamilyName"
+        bean = "SecondFamilyName"
+
+    [[entities.subentities]]
+    displayname = "vcard:Individual"
+
+        [[entities.subentities.relationships]]
+        direct = "roh:contactInfoOf"
+        inverse = "roh:hasContactInfo"
+
+        [[entities.subentities.subentities]]
+        displayname = "vcard:Address"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse = "vcard:hasAddress"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "vcard:postalCode"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "000.010.000.160"
+                name = "postalCode"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "vcard:address"
+            format = "{address} {extended}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "000.010.000.140"
+                name = "address"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "000.010.000.150"
+                name = "extended"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "vcard:city"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "000.010.000.170"
+                name = "locality"
+
+            # TODO obtener valor mapeando las tablas de definición del XML
+            # por ejemplo, si la comunidad autónoma es ES21, ser capaz de generar tripletas
+            # TODO Comunidad Autónoma
+            # TODO País
+
+        [[entities.subentities.subentities]]
+        displayname = "vcard:Email"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse = "vcard:hasEmail"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "vcard:email"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "000.010.000.230"
+                name = "email"
+
+        [[entities.subentities.subentities]]
+        displayname = "vcard:Phone"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse = "vcard:hasPhone"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "vcard:phone"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "000.010.000.240"
+                name = "cellphone"
+
+        [[entities.subentities.subentities]]
+        displayname = "vcard:Fax"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse = "vcard:hasRelated"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "vcard:fax"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "000.010.000.240"
+                name = "cellphone"
+
+        [[entities.subentities.subentities]]
+        displayname = "vcard:Name"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse = "vcard:hasName"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "vcard:givenName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "000.010.000.020"
+                name = "name"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "vcard:familyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "000.010.000.010"
+                bean = "FirstFamilyName"
+                name = "name"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "rohes:secondFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "000.010.000.010"
+                bean = "SecondFamilyName"
+                name = "name"
+
+    # TODO Sustituir por subclase VCARD cuando sepamos lo de la extensión
+    [[entities.properties]] # Teléfono
+    ontology = "foaf"
+    name = "phone"
+    format = "tel:{number}{extension}"
+
+        [[entities.properties.sources]] # Número
+        code = "000.010.000.210"
+        name = "number"
+        bean = "Number"
+
+        [[entities.properties.sources]] # Extensión
+        code = "000.010.000.210"
+        name = "extension"
+        bean = "Extension"
+        format = ",{value}"
+
+    # TODO Sustituir por subclase VCARD
+    [[entities.properties]]
+    ontology = "foaf"
+    name = "homepage"
+    format = "{homepage}"
+
+        [[entities.properties.sources]]
+        code = "000.010.000.250"
+        name = "homepage"
+        bean = "Value"
+
+[[entities]]
+code = "030.010.000.000"
+displayname = "vivo:TeacherRole"
+
+    [[entities.relationships]]
+    direct = "oboro:RO_000052"
+    inverse = "oboro:RO_000053"
+    link_to_cvn_person = true
+
+    [[entities.subentities]]
+    displayname = "vivo:Course"
+
+        [[entities.subentities.relationships]]
+        direct = "obobfo:BFO_0000055"
+        inverse = "obobfo:BFO_0000054"
+
+        [[entities.subentities.properties]]
+        displayname = "roh:title"
+        format = "{title}"
+
+            [[entities.subentities.properties.sources]]
+            code = "030.010.000.160"
+            name = "title"
+
+        [[entities.subentities.properties]]
+        displayname = "vivo:courseCredits"
+
+            [[entities.subentities.properties.conditions]]
+            type = "bean_value_equals"
+            code = "030.010.000.210"
+            bean = "Value"
+            value = "000"
+
+            [[entities.subentities.properties.sources]]
+            code = "030.010.000.220"
+            name = "credits"
+
+        [[entities.subentities.properties]]
+        displayname = "vivo:courseHours"
+
+            [[entities.subentities.properties.conditions]]
+            type = "bean_value_equals"
+            code = "030.010.000.210"
+            bean = "Value"
+            value = "010"
+
+            [[entities.subentities.properties.sources]]
+            code = "030.010.000.220"
+            name = "hours"
+
+        [[entities.subentities.subentities]]
+        displayname = "vivo:AcademicDegree"
+        id.resource = "AcademicDegree"
+        cache = "roh:title"
+
+            [[entities.subentities.subentities.relationships]]
+            direct = "oboro:BFO_0000050"
+            inverse = "oboro:BFO_0000051"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "roh:title"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.010.000.020"
+                bean = "Name"
+                name = "title"
+
+            [[entities.subentities.subentities.subentities]]
+            displayname = "foaf:Organization"
+            id.resource = "Organization"
+            id.format = "{roh:title}"
+            cache = "roh:title"
+
+                [[entities.subentities.subentities.subentities.relationships]]
+                direct = "vivo:relates"
+                inverse = "vivo:relates"
+
+                [[entities.subentities.subentities.subentities.properties]]
+                displayname = "roh:title"
+
+                    [[entities.subentities.subentities.subentities.properties.sources]]
+                    code = "030.010.000.540"
+                    bean = "Name"
+                    name = "name"
+
+    [[entities.subentities]]
+    displayname = "vivo:DateTimeInterval"
+
+        [[entities.subentities.relationships]]
+        inverse = "vivo:dateTimeInterval"
+
+        [[entities.subentities.subentities]]
+        displayname = "vivo:DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse = "vivo:start"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "vivo:dateTime"
+            format = "{start}"
+            datatype = "xsd:datetime"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.010.000.550"
+                name = "start"
+                bean = "Value"
+
+        [[entities.subentities.subentities]]
+        displayname = "vivo:DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse = "vivo:end"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "vivo:dateTime"
+            format = "{end}"
+            datatype = "xsd:datetime"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.010.000.610"
+                name = "end"
+                bean = "Value"
+
+# Dirección de tesis doctoral
+[[entities]]
+code = "030.040.000.000"
+displayname = "roh:PhDSupervisingRelationship"
+
+    [[entities.conditions]]
+    type = "bean_value_equals"
+    code = "030.040.000.010"
+    bean = "Value"
+    value = "000"
+
+    [[entities.subentities]]
+    displayname = "roh:SupervisorRole"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relates"
+        inverse = "vivo:relates"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relatedBy"
+        inverse = "oboro:RO_0000052"
+        link_to_cvn_person = true
+
+    [[entities.subentities]]
+    displayname = "roh:SupervisorRole"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relates"
+        inverse = "vivo:relates"
+
+        [[entities.subentities.subentities]]
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+        [[entities.subentities.subentities.relationships]]
+        direct = "vivo:relatedBy"
+        inverse = "oboro:RO_0000052"
+
+        [[entities.subentities.subentities.properties]]
+        displayname = "foaf:name"
+        format = "{name} {familyName} {secondFamilyName}"
+
+            [[entities.subentities.subentities.properties.sources]]
+            code = "030.040.000.180"
+            name = "name"
+            bean = "GivenName"
+
+            [[entities.subentities.subentities.properties.sources]]
+            code = "030.040.000.180"
+            name = "familyName"
+            bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}FirstFamilyName"
+
+            [[entities.subentities.subentities.properties.sources]]
+            code = "030.040.000.180"
+            name = "secondFamilyName"
+            bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
+
+    [[entities.subentities]]
+    displayname = "roh:SuperviseeRole"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relates"
+        inverse = "vivo:relates"
+
+        [[entities.subentities.subentities]]
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+        [[entities.subentities.subentities.relationships]]
+        direct = "vivo:relatedBy"
+        inverse = "oboro:RO_0000052"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "foaf:name"
+            format = "{name} {familyName} {secondFamilyName}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "name"
+                bean = "GivenName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "familyName"
+                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}FirstFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "secondFamilyName"
+                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
+
+    [[entities.subentities]]
+    displayname = "vivo:PhDThesis"
+    id.resource = "PhDThesis"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:producedBy"
+        inverse = "vivo:produces"
+
+        [[entities.subentities.properties]]
+        displayname = "roh:title"
+
+            [[entities.subentities.properties.sources]]
+            code = "030.040.000.030"
+            name = "title"
+
+        [[entities.subentities.subentities]]
+        displayname = "roh:ThesisMetric"
+
+            [[entities.subentities.subentities.relationships]]
+            direct = "roh:metricOf"
+            inverse = "roh:hasMetric"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "roh:mark"
+            format = "{mark}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.150"
+                name = "mark"
+
+        [[entities.subentities.subentities]]
+        displayname = "vivo:ThesisViva"
+
+            [[entities.subentities.subentities.relationships]]
+            direct = "bibo:presents"
+            inverse = "bibo:presentedAt"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "vivo:dateTime"
+            datatype = "xsd:datetime"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.140"
+                name = "date"
+
+        [[entities.subentities.subentities]]
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+        [[entities.subentities.subentities.relationships]]
+        direct = "vivo:correspondingAuthor"
+        inverse = "vivo:correspondingAuthorOf"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "foaf:name"
+            format = "{name} {familyName} {secondFamilyName}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "name"
+                bean = "GivenName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "familyName"
+                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}FirstFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "secondFamilyName"
+                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
+
+# Dirección de tesis doctoral
+[[entities]]
+code = "030.040.000.000"
+displayname = "roh:DegreeSupervisingRelationship"
+
+    [[entities.conditions]]
+    type = "bean_value_equals"
+    code = "030.040.000.010"
+    bean = "Value"
+    value = "055"
+
+    [[entities.subentities]]
+    displayname = "roh:SupervisorRole"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relates"
+        inverse = "vivo:relates"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relatedBy"
+        inverse = "oboro:RO_0000052"
+        link_to_cvn_person = true
+
+    [[entities.subentities]]
+    displayname = "roh:SupervisorRole"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relates"
+        inverse = "vivo:relates"
+
+        [[entities.subentities.subentities]]
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+        [[entities.subentities.subentities.relationships]]
+        direct = "vivo:relatedBy"
+        inverse = "oboro:RO_0000052"
+
+        [[entities.subentities.subentities.properties]]
+        displayname = "foaf:name"
+        format = "{name} {familyName} {secondFamilyName}"
+
+            [[entities.subentities.subentities.properties.sources]]
+            code = "030.040.000.180"
+            name = "name"
+            bean = "GivenName"
+
+            [[entities.subentities.subentities.properties.sources]]
+            code = "030.040.000.180"
+            name = "familyName"
+            bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}FirstFamilyName"
+
+            [[entities.subentities.subentities.properties.sources]]
+            code = "030.040.000.180"
+            name = "secondFamilyName"
+            bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
+
+    [[entities.subentities]]
+    displayname = "roh:SuperviseeRole"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relates"
+        inverse = "vivo:relates"
+
+        [[entities.subentities.subentities]]
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+        [[entities.subentities.subentities.relationships]]
+        direct = "vivo:relatedBy"
+        inverse = "oboro:RO_0000052"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "foaf:name"
+            format = "{name} {familyName} {secondFamilyName}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "name"
+                bean = "GivenName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "familyName"
+                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}FirstFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "secondFamilyName"
+                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
+
+    [[entities.subentities]]
+    displayname = "roh:DegreeThesis"
+    id.resource = "DegreeThesis"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:producedBy"
+        inverse = "vivo:produces"
+
+        [[entities.subentities.properties]]
+        displayname = "roh:title"
+
+            [[entities.subentities.properties.sources]]
+            code = "030.040.000.030"
+            name = "title"
+
+        [[entities.subentities.subentities]]
+        displayname = "roh:ThesisMetric"
+
+            [[entities.subentities.subentities.relationships]]
+            direct = "roh:metricOf"
+            inverse = "roh:hasMetric"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "roh:mark"
+            format = "{mark}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.150"
+                name = "mark"
+
+        [[entities.subentities.subentities]]
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+        [[entities.subentities.subentities.relationships]]
+        direct = "vivo:correspondingAuthor"
+        inverse = "vivo:correspondingAuthorOf"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "foaf:name"
+            format = "{name} {familyName} {secondFamilyName}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "name"
+                bean = "GivenName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "familyName"
+                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}FirstFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "030.040.000.120"
+                name = "secondFamilyName"
+                bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
+
+[[entities]]
+code = "050.020.010.000"
+ontology = "vivo"
+classname = "Project"
+id.resource = "Project"
+
+    [[entities.subentities]] # Autonómicos
+    displayname = "geonames:Feature"
+    uri = "http://sws.geonames.org/2510769/"
+
+        [[entities.subentities.conditions]]
+        type = "bean_value_equals"
+        code = "050.020.010.040"
+        value = "000"
+
+        [[entities.subentities.relationships]]
+        inverse = "geonames:locatedIn"
+
+    [[entities.subentities]] # Nacionales
+    displayname = "geonames:Feature"
+    uri = "http://sws.geonames.org/2510769/"
+
+        [[entities.subentities.conditions]]
+        type = "bean_value_equals"
+        code = "050.020.010.040"
+        value = "010"
+
+        [[entities.subentities.relationships]]
+        inverse = "geonames:locatedIn"
+
+    [[entities.subentities]] # UE
+    displayname = "geonames:Feature"
+    uri = "http://sws.geonames.org/6695072/"
+
+        [[entities.subentities.conditions]]
+        type = "bean_value_equals"
+        code = "050.020.010.040"
+        value = "020"
+
+        [[entities.subentities.relationships]]
+        inverse = "geonames:locatedIn"
+
+    [[entities.subentities]] # Internacional no UE
+    displayname = "geonames:Feature"
+    uri = "http://sws.geonames.org/6295630/"
+
+        [[entities.subentities.conditions]]
+        type = "bean_value_equals"
+        code = "050.020.010.040"
+        value = "030"
+
+        [[entities.subentities.relationships]]
+        inverse = "geonames:locatedIn"
+
+    [[entities.properties]]
+    ontology = "roh"
+    name = "title"
+    format = "{title}"
+    required = true
+
+        [[entities.properties.sources]]
+        code = "050.020.010.010"
+        name = "title"
+        bean = "Value"
+
+    [[entities.properties]]
+    ontology = "vivo"
+    name = "description"
+    format = "{description}"
+
+        [[entities.properties.sources]]
+        code = "050.020.010.340"
+        name = "description"
+        bean = "Value"
+
+    [[entities.subentities]]
+    ontology = "roh"
+    classname = "Funding"
+
+        [[entities.subentities.relationships]]
+        ontology = "roh"
+        name = "supports"
+        inverse_ontology = "roh"
+        inverse_name = "isSupportedBy"
+
+        [[entities.subentities.properties]]
+        ontology = "vivo"
+        name = "identifier"
+        format = "{identifier}"
+
+            [[entities.subentities.properties.sources]]
+            code = "050.020.010.260"
+            name = "identifier"
+            bean = "Value"
+
+        [[entities.subentities.subentities]]
+        ontology = "roh"
+        classname = "FundingAmount"
+
+            [[entities.subentities.subentities.relationships]]
+            ontology = "oboro"
+            name = "BFO_0000050"
+            inverse_ontology = "oboro"
+            inverse_name = "BFO_0000051"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "roh"
+            name = "monetaryAmount"
+            format = "{monetary_amount}"
+            datatype = "xsd:decimal"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "050.020.010.290"
+                name = "monetary_amount"
+                bean = "Value"
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "MemberRole"
+
+        [[entities.subentities.relationships]]
+        ontology = "vivo"
+        name = "relates"
+        inverse_ontology = "vivo"
+        inverse_name = "relates"
+
+        [[entities.subentities.relationships]]
+        ontology = "roh"
+        name = "roleOf"
+        inverse_ontology = "roh"
+        inverse_name = "hasRole"
+        link_to_cvn_person = true
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeInterval"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "dateTimeInterval"
+
+            [[entities.subentities.subentities.subentities]]
+            ontology = "vivo"
+            classname = "DateTimeValue"
+
+                [[entities.subentities.subentities.subentities.relationships]]
+                inverse_ontology = "vivo"
+                inverse_name = "start"
+
+                [[entities.subentities.subentities.subentities.properties]]
+                ontology = "vivo"
+                name = "dateTime"
+                format = "{start}"
+                datatype = "xsd:datetime"
+
+                    [[entities.subentities.subentities.subentities.properties.sources]]
+                    code = "050.020.010.270"
+                    name = "start"
+                    bean = "Value"
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "DateTimeInterval"
+
+        [[entities.subentities.relationships]]
+        inverse_ontology = "vivo"
+        inverse_name = "dateTimeInterval"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "start"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{start}"
+            datatype = "xsd:datetime"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "050.020.010.270"
+                name = "start"
+                bean = "Value"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "end"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{end}"
+            datatype = "xsd:datetime"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "050.020.010.410"
+                name = "end"
+                bean = "Value"
+
+    [[entities.subentities]]
+    displayname = "vivo:PrincipalInvestigatorRole"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relates"
+        inverse = "vivo:relatedBy"
+
+        [[entities.subentities.subentities]]
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+            [[entities.subentities.subentities.relationships]]
+            direct = "vivo:relatedBy"
+            inverse = "vivo:relates"
+
+            [[entities.subentities.subentities.properties]]
+                displayname = "foaf:name"
+                format = "{name} {familyName} {secondFamilyName}"
+
+                    [[entities.subentities.subentities.properties.sources]]
+                    code = "050.020.010.140"
+                    name = "name"
+                    bean = "GivenName"
+
+                    [[entities.subentities.subentities.properties.sources]]
+                    code = "050.020.010.140"
+                    name = "familyName"
+                    bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}FirstFamilyName"
+
+                    [[entities.subentities.subentities.properties.sources]]
+                    code = "050.020.010.140"
+                    name = "secondFamilyName"
+                    bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
+
+# Contratos, convenios o proyectos de I+D+i no competitivos con Administraciones o entidades públicas o privadas
+[[entities]]
+code = "050.020.020.000"
+ontology = "vivo"
+classname = "Project"
+id.resource = "Project"
+
+    [[entities.properties]]
+    ontology = "roh"
+    name = "title"
+    format = "{title}"
+
+        [[entities.properties.sources]]
+        code = "050.020.020.010"
+        name = "title"
+        bean = "Value"
+
+    [[entities.properties]]
+    ontology = "vivo"
+    name = "description"
+    format = "{description}"
+
+        [[entities.properties.sources]]
+        code = "050.020.020.300"
+        name = "description"
+        bean = "Value"
+
+    [[entities.subentities]]
+    ontology = "roh"
+    classname = "Funding"
+
+        [[entities.subentities.relationships]]
+        ontology = "roh"
+        name = "supports"
+        inverse_ontology = "roh"
+        inverse_name = "isSupportedBy"
+
+        [[entities.subentities.properties]]
+        ontology = "vivo"
+        name = "identifier"
+        format = "{identifier}"
+
+            [[entities.subentities.properties.sources]]
+            code = "050.020.020.110"
+            name = "identifier"
+            bean = "Value"
+
+        [[entities.subentities.subentities]]
+        ontology = "roh"
+        classname = "FundingAmount"
+
+            [[entities.subentities.subentities.relationships]]
+            ontology = "oboro"
+            name = "BFO_0000050"
+            inverse_ontology = "oboro"
+            inverse_name = "BFO_0000051"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "roh"
+            name = "monetaryAmount"
+            format = "{monetary_amount}"
+            datatype = "xsd:decimal"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "050.020.020.200"
+                name = "monetary_amount"
+                bean = "Value"
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "MemberRole"
+
+        [[entities.subentities.relationships]]
+        ontology = "vivo"
+        name = "relates"
+        inverse_ontology = "vivo"
+        inverse_name = "relates"
+
+        [[entities.subentities.relationships]]
+        ontology = "roh"
+        name = "roleOf"
+        inverse_ontology = "roh"
+        inverse_name = "hasRole"
+        link_to_cvn_person = true
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeInterval"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "dateTimeInterval"
+
+            [[entities.subentities.subentities.subentities]]
+            ontology = "vivo"
+            classname = "DateTimeValue"
+
+                [[entities.subentities.subentities.subentities.relationships]]
+                inverse_ontology = "vivo"
+                inverse_name = "start"
+
+                [[entities.subentities.subentities.subentities.properties]]
+                ontology = "vivo"
+                name = "dateTime"
+                format = "{start}"
+                datatype = "xsd:datetime"
+
+                    [[entities.subentities.subentities.subentities.properties.sources]]
+                    code = "050.020.020.180"
+                    name = "start"
+                    bean = "Value"
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "DateTimeInterval"
+
+        [[entities.subentities.relationships]]
+        inverse_ontology = "vivo"
+        inverse_name = "dateTimeInterval"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "start"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{start}"
+            datatype = "xsd:datetime"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "050.020.020.180"
+                name = "start"
+                bean = "Value"
+
+        # TODO fecha finalización
+
+    [[entities.subentities]]
+    displayname = "vivo:PrincipalInvestigatorRole"
+
+        [[entities.subentities.relationships]]
+        direct = "vivo:relates"
+        inverse = "vivo:relatedBy"
+
+        [[entities.subentities.subentities]]
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+            [[entities.subentities.subentities.relationships]]
+            direct = "vivo:relatedBy"
+            inverse = "vivo:relates"
+
+            [[entities.subentities.subentities.properties]]
+                displayname = "foaf:name"
+                format = "{name} {familyName} {secondFamilyName}"
+
+                    [[entities.subentities.subentities.properties.sources]]
+                    code = "050.020.020.250"
+                    name = "name"
+                    bean = "GivenName"
+
+                    [[entities.subentities.subentities.properties.sources]]
+                    code = "050.020.020.250"
+                    name = "familyName"
+                    bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}FirstFamilyName"
+
+                    [[entities.subentities.subentities.properties.sources]]
+                    code = "050.020.020.250"
+                    name = "secondFamilyName"
+                    bean = "CvnFamilyNameBean/{http://codes.cvn.fecyt.es/beans}SecondFamilyName"
+# Publicaciones, documentos científicos y técnicos
+# AcademicArticle
+[[entities]]
+code = "060.010.010.000"
+ontology = "bibo"
+classname = "AcademicArticle"
+id.resource = "Article"
+id.format = "{vivo:doi}"
+cache = "roh:title"
+
+    [[entities.conditions]]
+    type = "bean_value_equals"
+    code = "060.010.010.010"
+    value = "020"
+
+    [[entities.relationships]]
+    ontology = "roh"
+    name = "correspondingAuthor"
+    inverse_ontology = "roh"
+    inverse_name = "correspondingAuthorOf"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    displayname = "vivo:doi"
+    format = "{doi}"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.400"
+        name = "doi"
+
+    [[entities.properties]]
+    displayname = "roh:title"
+    format = "{title}"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.030"
+        name = "title"
+        bean = "Value"
+
+    [[entities.properties]]
+    displayname = "vivo:description"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.290"
+        name = "description"
+
+    [[entities.properties]]
+    ontology = "vivo"
+    name = "dateTime"
+    format = "{publication_date}"
+    datatype = "xsd:datetime"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.140"
+        name = "publication_date"
+        bean = "Value"
+
+    [[entities.properties]]
+    displayname = "bibo:pageStart"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.090"
+        name = "initialpage"
+        bean = "InitialPage"
+
+    [[entities.properties]]
+    displayname = "bibo:pageEnd"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.090"
+        name = "finalpage"
+        bean = "FinalPage"
+
+    [[entities.subentities]]
+    displayname = "rdf:Seq"
+
+        [[entities.subentities.relationships]]
+        inverse = "bibo:authorList"
+
+        [[entities.subentities.subentities]]
+        code = "060.010.010.040"
+        subcode = true
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse = "rdf:{roh_dummy}"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "roh:dummy" # (no existe, pero como esta propiedad no se convierte en tripletas, da igual)
+            hidden = true
+
+                [[entities.subentities.subentities.properties.sources]]
+                name = "order"
+                bean = "SignatureOrder"
+                format = "_{value}"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "foaf:name"
+            format = "{name} {familyName} {secondFamilyName}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                name = "name"
+                bean = "GivenName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.010.040"
+                name = "familyName"
+                bean = "FirstFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.010.040"
+                name = "secondFamilyName"
+                bean = "SecondFamilyName"
+
+## Book Chapter/Section
+[[entities]]
+code = "060.010.010.000"
+ontology = "bibo"
+classname = "BookSection"
+id.resource = "BookSection"
+id.format = "{vivo:doi}"
+
+    [[entities.conditions]]
+    type = "bean_value_equals"
+    code = "060.010.010.010"
+    value = "004"
+
+    [[entities.relationships]]
+    ontology = "roh"
+    name = "correspondingAuthor"
+    inverse_ontology = "roh"
+    inverse_name = "correspondingAuthorOf"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    displayname = "vivo:doi"
+    format = "{doi}"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.400"
+        name = "doi"
+
+    [[entities.properties]]
+    displayname = "roh:title"
+    format = "{title}"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.030"
+        name = "title"
+        bean = "Value"
+
+    [[entities.properties]]
+    displayname = "vivo:description"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.290"
+        name = "description"
+
+    [[entities.properties]]
+    ontology = "vivo"
+    name = "dateTime"
+    format = "{publication_date}"
+    datatype = "xsd:datetime"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.140"
+        name = "publication_date"
+        bean = "Value"
+
+    [[entities.properties]]
+    displayname = "bibo:pageStart"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.090"
+        name = "initialpage"
+        bean = "InitialPage"
+
+    [[entities.properties]]
+    displayname = "bibo:pageEnd"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.090"
+        name = "finalpage"
+        bean = "FinalPage"
+
+    [[entities.subentities]]
+    displayname = "rdf:Seq"
+
+        [[entities.subentities.relationships]]
+        inverse = "bibo:authorList"
+
+        [[entities.subentities.subentities]]
+        code = "060.010.010.040"
+        subcode = true
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse = "rdf:{roh_dummy}"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "roh:dummy" # (no existe, pero como esta propiedad no se convierte en tripletas, da igual)
+            hidden = true
+
+                [[entities.subentities.subentities.properties.sources]]
+                name = "order"
+                bean = "SignatureOrder"
+                format = "_{value}"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "foaf:name"
+            format = "{name} {familyName} {secondFamilyName}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                name = "name"
+                bean = "GivenName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.010.040"
+                name = "familyName"
+                bean = "FirstFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.010.040"
+                name = "secondFamilyName"
+                bean = "SecondFamilyName"
+
+## Book Chapter/Section
+[[entities]]
+code = "060.010.010.000"
+ontology = "bibo"
+classname = "Book"
+id.resource = "Book"
+id.format = "{vivo:doi}"
+
+    [[entities.conditions]]
+    type = "bean_value_equals"
+    code = "060.010.010.010"
+    value = "032"
+
+    [[entities.relationships]]
+    ontology = "roh"
+    name = "correspondingAuthor"
+    inverse_ontology = "roh"
+    inverse_name = "correspondingAuthorOf"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    displayname = "vivo:doi"
+    format = "{doi}"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.400"
+        name = "doi"
+
+    [[entities.properties]]
+    displayname = "roh:title"
+    format = "{title}"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.030"
+        name = "title"
+        bean = "Value"
+
+    [[entities.properties]]
+    displayname = "vivo:description"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.290"
+        name = "description"
+
+    [[entities.properties]]
+    ontology = "vivo"
+    name = "dateTime"
+    format = "{publication_date}"
+    datatype = "xsd:datetime"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.140"
+        name = "publication_date"
+        bean = "Value"
+
+    [[entities.properties]]
+    displayname = "bibo:pageStart"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.090"
+        name = "initialpage"
+        bean = "InitialPage"
+
+    [[entities.properties]]
+    displayname = "bibo:pageEnd"
+
+        [[entities.properties.sources]]
+        code = "060.010.010.090"
+        name = "finalpage"
+        bean = "FinalPage"
+
+    [[entities.subentities]]
+    displayname = "rdf:Seq"
+
+        [[entities.subentities.relationships]]
+        inverse = "bibo:authorList"
+
+        [[entities.subentities.subentities]]
+        code = "060.010.010.040"
+        subcode = true
+        displayname = "foaf:Person"
+        id.resource = "Person"
+        cache = "foaf:name"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse = "rdf:{roh_dummy}"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "roh:dummy" # (no existe, pero como esta propiedad no se convierte en tripletas, da igual)
+            hidden = true
+
+                [[entities.subentities.subentities.properties.sources]]
+                name = "order"
+                bean = "SignatureOrder"
+                format = "_{value}"
+
+            [[entities.subentities.subentities.properties]]
+            displayname = "foaf:name"
+            format = "{name} {familyName} {secondFamilyName}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                name = "name"
+                bean = "GivenName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.010.040"
+                name = "familyName"
+                bean = "FirstFamilyName"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.010.040"
+                name = "secondFamilyName"
+                bean = "SecondFamilyName"
+
+# Trabajos presentados en congresos nacionales o internacionales
+[[entities]]
+code = "060.010.020.000"
+displayname = "bibo:Conference"
+id.resource = "Conference"
+id.format = "{roh:title}"
+
+    [[entities.relationships]]
+    direct = "roh:participatedBy"
+    inverse = "roh:participates"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    displayname = "roh:title"
+    required = true
+
+        [[entities.properties.sources]]
+        code = "060.010.020.100"
+        name = "name"
+
+    # TODO Comunidad autónoma, país
+
+    [[entities.properties]]
+    displayname = "vcard:locality"
+
+        [[entities.properties.sources]]
+        code = "060.010.020.180"
+        name = "city"
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "DateTimeInterval"
+
+        [[entities.subentities.relationships]]
+        inverse_ontology = "vivo"
+        inverse_name = "dateTimeInterval"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "start"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{start}"
+            datatype = "xsd:datetime"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.020.190"
+                name = "start"
+                bean = "Value"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "end"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{end}"
+            datatype = "xsd:datetime"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "060.010.020.380"
+                name = "end"
+                bean = "Value"
+
+        [[entities.subentities]]
+        displayname = "vivo:ConferencePaper"
+        id.resource = "ConferencePaper"
+
+            [[entities.subentities.relationships]]
+            direct = "bibo:presentedAt"
+            inverse = "bibo:presents"
+
+            # TODO lista de autores
+
+            [[entities.subentities.properties]]
+            displayname = "roh:title"
+
+                [[entities.subentities.properties.sources]]
+                code = "060.010.020.030"
+                name = "title"
+
+# TODO Trabajos presentados en jornadas, seminarios, talleres de trabajo y/o cursos nacionales o internacionales
+# TODO Gestión I+D+i
+
+# Posición actual
+[[entities]]
+code = "010.010.000.000"
+ontology = "vivo"
+classname = "Position"
+id.resource = "Position"
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "DateTimeInterval"
+
+        [[entities.subentities.relationships]]
+        inverse_ontology = "vivo"
+        inverse_name = "dateTimeInterval"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "start"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{start}"
+            datatype = "xsd:datetime"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "010.010.000.180"
+                name = "start"
+                bean = "Value"
+
+    [[entities.subentities]]
+    ontology = "foaf"
+    classname = "Organization"
+    id.resource = "Organization"
+    id.format = "{roh:title}"
+    cache = "roh:title"
+
+        [[entities.subentities.relationships]]
+        ontology = "vivo"
+        name = "relates"
+        inverse_ontology = "vivo"
+        inverse_name = "relatedBy"
+
+        [[entities.subentities.properties]]
+        ontology = "roh"
+        name = "title"
+        format = "{name}"
+
+            [[entities.subentities.properties.sources]]
+            code = "010.010.000.020"
+            name = "name"
+            bean = "Name"
+
+    [[entities.relationships]]
+    inverse_ontology = "roh"
+    inverse_name = "hasPosition"
+    ontology = "roh"
+    name = "positionOf"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    ontology = "vivo"
+    name = "hrJobTitle"
+    format = "{title}"
+
+        [[entities.properties.sources]]
+        code = "010.010.000.170"
+        name = "title"
+        bean = "Value"
+
+
+# Posiciones en el pasado
+[[entities]]
+code = "010.020.000.000"
+ontology = "vivo"
+classname = "Position"
+id.resource = "Position"
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "DateTimeInterval"
+
+        [[entities.subentities.relationships]]
+        inverse_ontology = "vivo"
+        inverse_name = "dateTimeInterval"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "start"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{start}"
+            datatype = "xsd:datetime"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "010.020.000.180"
+                name = "start"
+                bean = "Value"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "DateTimeValue"
+
+            [[entities.subentities.subentities.relationships]]
+            inverse_ontology = "vivo"
+            inverse_name = "end"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "vivo"
+            name = "dateTime"
+            format = "{end}"
+            datatype = "xsd:datetime"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "010.020.000.310"
+                name = "end"
+                bean = "Value"
+
+    [[entities.subentities]]
+    ontology = "foaf"
+    classname = "Organization"
+    id.resource = "Organization"
+    id.format = "{roh:title}"
+    cache = "roh:title"
+
+        [[entities.subentities.relationships]]
+        ontology = "vivo"
+        name = "relates"
+        inverse_ontology = "vivo"
+        inverse_name = "relatedBy"
+
+        [[entities.subentities.properties]]
+        ontology = "roh"
+        name = "title"
+        format = "{name}"
+
+            [[entities.subentities.properties.sources]]
+            code = "010.020.000.020"
+            name = "name"
+            bean = "Name"
+
+    [[entities.relationships]]
+    inverse_ontology = "roh"
+    inverse_name = "hasPosition"
+    ontology = "roh"
+    name = "positionOf"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    ontology = "vivo"
+    name = "hrJobTitle"
+    format = "{title}"
+
+        [[entities.properties.sources]]
+        code = "010.020.000.170"
+        name = "title"
+        bean = "Value"
+
+    [[entities.properties]]
+    ontology = "vivo"
+    name = "description"
+    format = "{description}"
+
+        [[entities.properties.sources]]
+        code = "010.020.000.260"
+        name = "description"
+        bean = "Value"
+
+[[entities]] # Formación académica recibida
+code = "020.010.010.000"
+ontology = "vivo"
+classname = "AwardedDegree"
+
+    [[entities.relationships]]
+    ontology = "vivo"
+    name = "relates"
+    inverse_ontology = "vivo"
+    inverse_name = "relates"
+    link_to_cvn_person = true
+
+
+    [[entities.criteria.property]]
+    ontology = "vivo"
+    name = "relates"
+    inverse_ontology = "vivo"
+    inverse_name = "relates"
+    link_to_cvn_person = true
+
+    [[entities.subentities]]
+    displayname = "vivo:DateTimeValue"
+
+        [[entities.subentities.relationships]]
+        inverse = "vivo:dateTimeValue"
+
+        [[entities.subentities.properties]]
+        ontology = "vivo"
+        name = "dateTime"
+        format = "{date}"
+        datatype = "xsd:datetime"
+
+        [[entities.subentities.properties.sources]]
+        code = "020.010.010.130"
+        name = "date"
+        bean = "Value"
+
+    # [[entities.properties]]
+    # ontology = "vivo"
+    # name = "dateTime"
+    # format = "{date}"
+    # datatype = "xsd:datetime"
+
+    #     [[entities.properties.sources]]
+    #     code = "020.010.010.130"
+    #     name = "date"
+    #     bean = "Value"
+
+    [[entities.subentities]]
+    ontology = "vivo"
+    classname = "AcademicDegree"
+    id.resource = "AcademicDegree"
+    id.format = "{title}"
+
+        # Solo "Titulados Superiores" = 950
+        [[entities.conditions]]
+        type = "bean_value_equals"
+        code = "020.010.010.010"
+        value = "950"
+
+        [[entities.subentities.relationships]]
+        ontology = "vivo"
+        name = "relates"
+
+        [[entities.subentities.properties]]
+        ontology = "roh"
+        name = "title"
+        format = "{title}"
+
+            [[entities.subentities.properties.sources]]
+            code = "020.010.010.030"
+            name = "title"
+            bean = "Name"
+
+        [[entities.subentities.subentities]]
+        ontology = "vivo"
+        classname = "University"
+        id.resource = "University"
+        id.format = "{name}"
+
+            [[entities.subentities.subentities.relationships]]
+            ontology = "roh"
+            name = "awards"
+            inverse_ontology = "roh"
+            inverse_name = "awardedBy"
+
+            [[entities.subentities.subentities.properties]]
+            ontology = "roh"
+            name = "title"
+            format = "{title}"
+
+                [[entities.subentities.subentities.properties.sources]]
+                code = "020.010.010.090"
+                name = "title"
+                bean = "Name"
+
+[[entities]] # Doctorado
+code = "020.010.020.000"
+ontology = "roh"
+classname = "PhDThesis"
+id.resource = "PhDThesis"
+
+    [[entities.properties]]
+    ontology = "vivo"
+    name = "dateTime"
+    format = "{date}"
+    datatype = "xsd:datetime"
+
+        [[entities.properties.sources]]
+        code = "020.010.020.140"
+        name = "date"
+        bean = "Value"
+
+    [[entities.properties]]
+    ontology = "roh"
+    name = "title"
+    format = "{title}"
+
+        [[entities.properties.sources]]
+        code = "020.010.020.160"
+        name = "title"
+        bean = "Value"
+
+    [[entities.subentities]]
+    ontology = "roh"
+    classname = "ThesisMetric"
+
+        [[entities.subentities.relationships]]
+        ontology = "roh"
+        name = "metricOf"
+        inverse_ontology = "roh"
+        inverse_name = "hasMetric"
+
+        [[entities.subentities.properties]]
+        ontology = "roh"
+        name = "mark"
+        format = "{mark}"
+
+            [[entities.subentities.properties.sources]]
+            code = "020.010.020.190"
+            name = "mark"
+
+    [[entities.subentities]]
+    displayname = "foaf:Organization"
+    id.resource = "Organization"
+    id.format = "{roh:title}"
+    cache = "roh:title"
+
+        [[entities.subentities.properties]]
+        displayname = "roh:title"
+        format = "{name}"
+
+            [[entities.subentities.properties.sources]]
+            code = "030.010.000.540"
+            bean = "Name"
+            name = "name"
+
+    [[entities.subentities]]
+    ontology = "roh"
+    classname = "DegreeHomologation"
+
+        # TODO cambiar por la relación real
+        [[entities.subentities.relationships]]
+        ontology = "vivo"
+        name = "relates"
+        inverse_ontology = "vivo"
+        inverse_name = "relates"
+
+        [[entities.subentities.properties]]
+        ontology = "vivo"
+        name = "dateIssued"
+        format = "{date}"
+
+            [[entities.subentities.properties.sources]]
+            code = "020.010.020.250"
+            name = "date"
+
+
+[[entities]] # Certificado de idiomas
+code = "020.060.000.000"
+displayname = "roh:LanguageCertificate"
+
+    [[entities.conditions]]
+    type = "bean_value_equals"
+    code = "020.060.000.010"
+    bean = "Identification"
+    value = "eus"
+
+    [[entities.relationships]]
+    direct = "roh:hasAccreditation"
+    inverse = "roh:accreditationOf"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    displayname = "roh:language"
+
+        [[entities.properties.sources]]
+        code = "020.060.000.010"
+        name = "language"
+        bean = "Identification"
+
+    [[entities.properties]]
+    displayname = "roh:readingSkill"
+
+        [[entities.properties.sources]]
+        code = "020.060.000.130"
+        name = "skill"
+        bean = "Value"
+
+    [[entities.properties]]
+    displayname = "roh:spokenInteractionSkill"
+
+        [[entities.properties.sources]]
+        code = "020.060.000.140"
+        name = "skill"
+        bean = "Value"
+
+    [[entities.properties]]
+    displayname = "roh:speakingSkill"
+
+        [[entities.properties.sources]]
+        code = "020.060.000.150"
+        name = "skill"
+        bean = "Value"
+
+    [[entities.properties]]
+    displayname = "roh:writingSkill"
+
+        [[entities.properties.sources]]
+        code = "020.060.000.160"
+        name = "skill"
+        bean = "Value"
+
+    [[entities.properties]]
+    displayname = "roh:listeningSkill"
+
+        [[entities.properties.sources]]
+        code = "020.060.000.120"
+        name = "skill"
+        bean = "Value"
+
+[[entities]]
+code = "060.030.100.000"
+displayname = "roh:Award"
+
+    [[entities.relationships]]
+    direct = "roh:accreditationOf"
+    inverse = "roh:hasAccreditation"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    displayname = "roh:title"
+
+        [[entities.properties.sources]]
+        code = "060.030.100.010"
+        name = "title"
+
+    [[entities.properties]]
+    displayname = "vivo:dateTime"
+    datatype = "xsd:datetime"
+
+        [[entities.properties.sources]]
+        code = "060.030.100.040"
+        name = "dateTime"
+
+[[entities]]
+code = "070.010.000.000"
+displayname = "roh:CurriculumVitae"
+
+    [[entities.relationships]]
+    inverse = "roh:hasCV"
+    link_to_cvn_person = true
+
+    [[entities.properties]]
+    displayname = "vivo:description"
+
+        [[entities.properties.sources]]
+        code = "070.010.000.010"
+        name = "description"

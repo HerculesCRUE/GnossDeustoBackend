@@ -1,0 +1,26 @@
+[[datatypes]]
+ontology = "xsd"
+name = "string"
+python_type = "str"
+default = true
+
+[[datatypes]]
+ontology = "xsd"
+name = "float"
+python_type = "float"
+
+[[datatypes]]
+ontology = "xsd"
+name = "decimal"
+python_type = "decimal.Decimal"
+
+[[datatypes]]
+ontology = "xsd"
+name = "datetime"
+python_type = "str"
+force = true
+
+[[datatypes]]
+ontology = "xsd"
+name = "boolean"
+python_type = "bool"
