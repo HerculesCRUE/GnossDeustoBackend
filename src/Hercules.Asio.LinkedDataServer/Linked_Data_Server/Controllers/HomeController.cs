@@ -38,7 +38,8 @@ namespace Linked_Data_Server.Controllers
         public IActionResult Index()
         {
             //Obtenemos la URL de la entidad
-            string url = Request.GetDisplayUrl();
+            string url = Request.GetEncodedUrl();
+            //string url = Request.GetDisplayUrl();
             string urlParam = HttpUtility.ParseQueryString(Request.QueryString.Value).Get("url");
             if (!string.IsNullOrEmpty(urlParam))
             {
