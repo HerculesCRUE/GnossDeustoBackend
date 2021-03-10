@@ -53,6 +53,10 @@
         /// </summary>
         public string datatype { get; set; }
         /// <summary>
+        /// Transformación
+        /// </summary>
+        public string transform { get; set; }
+        /// <summary>
         /// Listado de propiedades que puede tener la entidad.
         /// </summary>
         public Property[] properties { get; set; }
@@ -83,6 +87,10 @@
         /// Tipo de la propiedad.
         /// </summary>
         public string datatype { get; set; }
+        /// <summary>
+        /// Transformación
+        /// </summary>
+        public string transform { get; set; }
     }
 
     /// <summary>

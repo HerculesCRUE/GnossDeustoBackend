@@ -37,11 +37,10 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
         /// </summary>
         /// <param name="resourceClass">Resource class o rdfType</param>
         /// <param name="identifier">Identificador</param>
-        /// <param name="uriGetEnum">Configurador para indicar si el parametro pasado en resourceClass es un</param>
         /// <returns>uri</returns>
-        public string GetUri(string resourceClass, string identifier, UriGetEnum uriGetEnum)
+        public string GetUri(string resourceClass, string identifier)
         {
-            string result = _serviceApi.CallGetApi(_serviceUrl.GetUrlUrisFactory(),$"{_urlFactory}?identifier={identifier}&resource_class={resourceClass}&eleccion_uri={uriGetEnum}", _token);
+            string result = _serviceApi.CallGetApi(_serviceUrl.GetUrlUrisFactory(),$"{_urlFactory}?identifier={identifier}&resource_class={resourceClass}", _token);
             return result;
         }
     }

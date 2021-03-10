@@ -47,22 +47,14 @@
             <param name="pDataGraph">Grafo.</param>
             <returns>UriNode o BlankNode.</returns>
         </member>
-        <member name="M:Hercules.Asio.XML_RDF_Conversor.Controllers.ConversorController.CreateINodeType(VDS.RDF.RohGraph,System.String,System.String)">
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Controllers.ConversorController.CreateILiteralNodeType(VDS.RDF.RohGraph,System.String,System.String,System.String)">
             <summary>
             Crea un LiteralNode según el tipo de dato del contenido.
             </summary>
             <param name="pDataGraph">Grafo.</param>
             <param name="pContenido">Contenido del nodo.</param>
             <param name="pDatatype">Tipo del dato del contenido.</param>
-            <returns>Nodo construido según el tipo de dato.</returns>
-        </member>
-        <member name="M:Hercules.Asio.XML_RDF_Conversor.Controllers.ConversorController.CreateILiteralNodeType(VDS.RDF.RohGraph,System.String,System.String)">
-            <summary>
-            Crea un LiteralNode según el tipo de dato del contenido.
-            </summary>
-            <param name="pDataGraph">Grafo.</param>
-            <param name="pContenido">Contenido del nodo.</param>
-            <param name="pDatatype">Tipo del dato del contenido.</param>
+            <param name="pTransform">Transformación del contenido</param>
             <returns>Nodo construido según el tipo de dato.</returns>
         </member>
         <member name="M:Hercules.Asio.XML_RDF_Conversor.Controllers.ConversorController.GetURI(Hercules.Asio.XML_RDF_Conversor.Models.ConfigJson.Entity,System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
@@ -162,6 +154,11 @@
             Tipo de dato de la propiedad que hay que acceder.
             </summary>
         </member>
+        <member name="P:Hercules.Asio.XML_RDF_Conversor.Models.ConfigJson.Entity.transform">
+            <summary>
+            Transformación
+            </summary>
+        </member>
         <member name="P:Hercules.Asio.XML_RDF_Conversor.Models.ConfigJson.Entity.properties">
             <summary>
             Listado de propiedades que puede tener la entidad.
@@ -195,6 +192,11 @@
         <member name="P:Hercules.Asio.XML_RDF_Conversor.Models.ConfigJson.Property.datatype">
             <summary>
             Tipo de la propiedad.
+            </summary>
+        </member>
+        <member name="P:Hercules.Asio.XML_RDF_Conversor.Models.ConfigJson.Property.transform">
+            <summary>
+            Transformación
             </summary>
         </member>
         <member name="T:Hercules.Asio.XML_RDF_Conversor.Models.ConfigJson.Subentity">
@@ -325,13 +327,12 @@
             clase para realizar llamadas al api de uris factory
             </summary>
         </member>
-        <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallUrisFactoryApiService.GetUri(System.String,System.String,Hercules.Asio.XML_RDF_Conversor.Models.Entities.UriGetEnum)">
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallUrisFactoryApiService.GetUri(System.String,System.String)">
             <summary>
             Obtiene una rui
             </summary>
             <param name="resourceClass">Resource class o rdfType</param>
             <param name="identifier">Identificador</param>
-            <param name="uriGetEnum">Configurador para indicar si el parametro pasado en resourceClass es un</param>
             <returns>uri</returns>
         </member>
         <member name="T:Hercules.Asio.XML_RDF_Conversor.Models.Services.ConfigUrlService">

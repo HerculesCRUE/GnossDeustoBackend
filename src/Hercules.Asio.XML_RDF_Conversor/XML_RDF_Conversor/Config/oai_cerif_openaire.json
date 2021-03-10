@@ -23,7 +23,6 @@
       "subentities": [
         {
           "property": "http://purl.org/roh/mirror/vivo#relatedBy",
-          "inverseProperty": "http://purl.org/roh/mirror/vivo#relates",
           "entities": [
             {
               "rdftype": "http://purl.org/roh/mirror/vivo#Position",
@@ -48,7 +47,7 @@
                       ],
                       "subentities": [
                         {
-                          "property": "http://purl.org/roh/mirror/obo/ro#BFO_0000051",
+                          "property": "http://purl.org/roh/mirror/obo/ro#BFO_0000050",
                           "entities": [
                             {
                               "rdftype": "http://purl.org/roh/mirror/foaf#Organization",
@@ -107,23 +106,72 @@
           "entities": [
             {
               "rdftype": "http://purl.org/roh/mirror/vivo#DateTimeInterval",
-              "source": "ns:StartDate",
-              "property": "http://purl.org/roh/mirror/vivo#start",
-              "datatype": "http://www.w3.org/2001/XMLSchema#datetime"
+              "subentities": [
+                {
+                  "property": "http://purl.org/roh/mirror/vivo#start",                  
+                  "entities": [
+                    {
+                      "rdftype": "http://purl.org/roh/mirror/vivo#DateTimeValue",
+                      "property": "http://purl.org/roh/mirror/vivo#dateTime",
+                      "source": "ns:StartDate",
+                      "datatype": "http://www.w3.org/2001/XMLSchema#datetime",
+                      "transform": "{value}T00:00:00.000+00:00"
+                    }
+                  ]
+                },
+                {
+                  "property": "http://purl.org/roh/mirror/vivo#end",                 
+                  "entities": [
+                    {
+                      "rdftype": "http://purl.org/roh/mirror/vivo#DateTimeValue",
+                      "property": "http://purl.org/roh/mirror/vivo#dateTime",
+                      "source": "ns:EndDate",
+                      "datatype": "http://www.w3.org/2001/XMLSchema#datetime",
+                      "transform": "{value}T00:00:00.000+00:00"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
         {
           "property": "http://purl.org/roh/mirror/vivo#relates",
-          "inverseProperty": "http://purl.org/roh/mirror/vivo#relatedBy",
+          "entities": [
+            {
+              "rdftype": "http://purl.org/roh/mirror/vivo#EditorRole",
+              "source": "ns:Publishers/ns:Publisher",
+              "subentities": [
+                {
+                  "property": "http://purl.org/roh#roleOf",
+                  "entities": [
+                    {
+                      "rdftype": "http://purl.org/roh/mirror/foaf#Organization",
+                      "id": "@id",
+                      "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+                      "source": "ns:DisplayName",
+                      "properties": [
+                        {
+                          "property": "http://purl.org/roh#title",
+                          "source": ""
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "property": "http://purl.org/roh/mirror/vivo#relates",
           "entities": [
             {
               "rdftype": "http://purl.org/roh/mirror/vivo#LeaderRole",
               "source": "ns:Consortium/ns:Coordinator",
               "subentities": [
                 {
-                  "property": "http://purl.org/roh/mirror/obo/ro#RO_0000052",
-                  "inverseProperty": "http://purl.org/roh#hasRole",
+                  "property": "http://purl.org/roh#roleOf",
                   "entities": [
                     {
                       "rdftype": "http://purl.org/roh/mirror/foaf#Organization",
@@ -149,8 +197,7 @@
               "source": "ns:Consortium/ns:Partner",
               "subentities": [
                 {
-                  "property": "http://purl.org/roh/mirror/obo/ro#RO_0000052",
-                  "inverseProperty": "http://purl.org/roh#hasRole",
+                  "property": "http://purl.org/roh#roleOf",
                   "entities": [
                     {
                       "rdftype": "http://purl.org/roh/mirror/foaf#Organization",
@@ -175,7 +222,6 @@
         },
         {
           "property": "http://purl.org/roh/mirror/vivo#relates",
-          "inverseProperty": "http://purl.org/roh/mirror/vivo#relatedBy",
           "entities": [
             {
               "rdftype": "http://purl.org/roh/mirror/vivo#MemberRole",
@@ -183,8 +229,7 @@
               "source": "ns:Team/ns:Member",
               "subentities": [
                 {
-                  "property": "http://purl.org/roh/mirror/obo/ro#RO_0000052",
-                  "inverseProperty": "http://purl.org/roh#hasRole",
+                  "property": "http://purl.org/roh#roleOf",
                   "entities": [
                     {
                       "rdftype": "http://purl.org/roh/mirror/foaf#Person",
@@ -240,7 +285,7 @@
       ],
       "subentities": [
         {
-          "property": "http://purl.org/roh/mirror/obo/ro#BFO_0000051",
+          "property": "http://purl.org/roh/mirror/obo/ro#BFO_0000050",
           "entities": [
             {
               "rdftype": "http://purl.org/roh/mirror/foaf#Organization",
@@ -286,15 +331,19 @@
         },
         {
           "property": "http://purl.org/roh/mirror/bibo#pageStart",
+          "datatype": "http://www.w3.org/2001/XMLSchema#int",
           "source": "ns:StartPage"
         },
         {
-          "property": "http://purl.org/roh/mirror/vivo#dateTime",
-          "source": "ns:PublicationDate"
+          "property": "http://purl.org/roh/mirror/bibo#pageEnd",
+          "datatype": "http://www.w3.org/2001/XMLSchema#int",
+          "source": "ns:EndPage"
         },
         {
-          "property": "http://purl.org/roh/mirror/bibo#pageEnd",
-          "source": "ns:EndPage"
+          "property": "http://purl.org/roh/mirror/vivo#dateTime",
+          "source": "ns:PublicationDate",
+          "datatype": "http://www.w3.org/2001/XMLSchema#datetime",
+          "transform": "{value}-01-01T00:00:00.000+00:00"
         },
         {
           "property": "http://purl.org/roh/mirror/bibo#doi",
@@ -355,7 +404,7 @@
           ]
         },
         {
-          "property": "http://purl.org/roh/mirror/obo/ro#BFO_0000051",
+          "property": "http://purl.org/roh/mirror/obo/ro#BFO_0000050",
           "entities": [
             {
               "rdftype": "http://purl.org/roh/mirror/vivo#Project",
@@ -433,7 +482,6 @@
       "subentities": [
         {
           "property": "http://purl.org/roh#participatedBy",
-          "inverseProperty": "http://purl.org/roh#participates",
           "entities": [
             {
               "rdftype": "http://purl.org/roh/mirror/vivo#Project",
@@ -455,7 +503,6 @@
         },
         {
           "property": "http://purl.org/roh#participatedBy",
-          "inverseProperty": "http://purl.org/roh#participates",
           "entities": [
             {
               "rdftype": "http://purl.org/roh/mirror/foaf#Person",
@@ -491,7 +538,70 @@
               ]
             }
           ]
+        },
+        {
+          "property": "http://purl.org/roh/mirror/vivo#relates",
+          "entities": [
+            {
+              "rdftype": "http://purl.org/roh/mirror/vivo#EditorRole",
+              "source": "ns:Publishers/ns:Publisher",
+              "subentities": [
+                {
+                  "property": "http://purl.org/roh#roleOf",
+                  "entities": [
+                    {
+                      "rdftype": "http://purl.org/roh/mirror/foaf#Organization",
+                      "id": "@id",
+                      "nameSpace": "https://www.openaire.eu/cerif-profile/1.1/",
+                      "source": "ns:DisplayName",
+                      "properties": [
+                        {
+                          "property": "http://purl.org/roh#title",
+                          "source": ""
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "property": "http://purl.org/roh/mirror/vivo#dateTimeInterval",
+          "entities": [
+            {
+              "rdftype": "http://purl.org/roh/mirror/vivo#DateTimeInterval",
+              "subentities": [
+                {
+                  "property": "http://purl.org/roh/mirror/vivo#start",
+                  "entities": [
+                    {
+                      "rdftype": "http://purl.org/roh/mirror/vivo#DateTimeValue",
+                      "property": "http://purl.org/roh/mirror/vivo#dateTime",
+                      "source": "ns:VersionInfo",
+                      "datatype": "http://www.w3.org/2001/XMLSchema#datetime",
+                      "transform": "{regex|[^ ]*$|endregex}-01-01T00:00:00.000+00:00"
+                    }
+                  ]
+                },
+                {
+                  "property": "http://purl.org/roh/mirror/vivo#end",
+                  "entities": [
+                    {
+                      "rdftype": "http://purl.org/roh/mirror/vivo#DateTimeValue",
+                      "property": "http://purl.org/roh/mirror/vivo#dateTime",
+                      "source": "ns:VersionInfo",
+                      "datatype": "http://www.w3.org/2001/XMLSchema#datetime",
+                      "transform": "{regex|[^ ]*$|endregex}-12-31T00:00:00.000+00:00"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
+
       ]
     }
   ]

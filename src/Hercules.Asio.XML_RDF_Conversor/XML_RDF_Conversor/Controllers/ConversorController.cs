@@ -16,6 +16,8 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
 using Hercules.Asio.XML_RDF_Conversor.Models.Services;
 using Hercules.Asio.XML_RDF_Conversor.Models.Entities;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Hercules.Asio.XML_RDF_Conversor.Controllers
 {
@@ -146,8 +148,15 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
                     {
                         pNsmgr.AddNamespace("ns", entidad.nameSpace);
                     }
-
-                    XmlNodeList listaEntidades = pNodo.SelectNodes(entidad.source, pNsmgr);
+                    List<XmlNode> listaEntidades = new List<XmlNode>();
+                    if (string.IsNullOrEmpty(entidad.source))
+                    {
+                        listaEntidades.Add(pNodo);
+                    }
+                    else
+                    {
+                        listaEntidades = new List<XmlNode>(pNodo.SelectNodes(entidad.source, pNsmgr).Cast<XmlNode>());
+                    }
 
                     foreach (XmlNode nodo in listaEntidades)
                     {
@@ -197,7 +206,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
                             // --- Propiedades.
                             // Si es la entidad inicial, se le agrega un triple en concreto.
                             if (entidad.mainEntity)
-                            {     
+                            {
                                 IUriNode predicado = pDataGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#primaryTopic"));
                                 ILiteralNode objeto = CreateILiteralNodeType(pDataGraph, "true", "http://www.w3.org/2001/XMLSchema#boolean");
                                 pDataGraph.Assert(new Triple(sujeto, predicado, objeto)); // Creación del Triple.
@@ -206,7 +215,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
                             if (entidad.property != null)
                             {
                                 INode prop = pDataGraph.CreateUriNode(UriFactory.Create(entidad.property));
-                                INode val = CreateINodeType(pDataGraph, nodo.InnerText, entidad.datatype);
+                                INode val = CreateILiteralNodeType(pDataGraph, nodo.InnerText, entidad.datatype, entidad.transform);
                                 pDataGraph.Assert(new Triple(sujeto, prop, val)); // Creación del Triple.
                             }
 
@@ -243,7 +252,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
                                     if (!string.IsNullOrEmpty(value))
                                     {
                                         IUriNode predicado = pDataGraph.CreateUriNode(UriFactory.Create(propiedad.property));
-                                        ILiteralNode objeto = CreateILiteralNodeType(pDataGraph, value, propiedad.datatype);
+                                        ILiteralNode objeto = CreateILiteralNodeType(pDataGraph, value, propiedad.datatype, propiedad.transform);
                                         pDataGraph.Assert(new Triple(sujeto, predicado, objeto)); // Creación del Triple.
                                     }
                                 }
@@ -319,28 +328,26 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
         /// <param name="pDataGraph">Grafo.</param>
         /// <param name="pContenido">Contenido del nodo.</param>
         /// <param name="pDatatype">Tipo del dato del contenido.</param>
+        /// <param name="pTransform">Transformación del contenido</param>
         /// <returns>Nodo construido según el tipo de dato.</returns>
-        private INode CreateINodeType(RohGraph pDataGraph, string pContenido, string pDatatype)
+        private ILiteralNode CreateILiteralNodeType(RohGraph pDataGraph, string pContenido, string pDatatype, string pTransform = null)
         {
-            if (string.IsNullOrEmpty(pDatatype))
+            if (!string.IsNullOrEmpty(pTransform))
             {
-                return pDataGraph.CreateLiteralNode(pContenido, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-            }
-            else
-            {
-                return pDataGraph.CreateLiteralNode(pContenido, new Uri(pDatatype));
-            }
-        }
+                if (pTransform.Contains("{value}"))
+                {
+                    pContenido = pTransform.Replace("{value}", pContenido);
+                }
+                if(pTransform.Contains("{regex|"))
+                {
+                    string regString = pTransform.Substring(pTransform.IndexOf("{regex|") + 7);
+                    regString= regString.Substring(0, regString.IndexOf("|endregex}"));
 
-        /// <summary>
-        /// Crea un LiteralNode según el tipo de dato del contenido.
-        /// </summary>
-        /// <param name="pDataGraph">Grafo.</param>
-        /// <param name="pContenido">Contenido del nodo.</param>
-        /// <param name="pDatatype">Tipo del dato del contenido.</param>
-        /// <returns>Nodo construido según el tipo de dato.</returns>
-        private ILiteralNode CreateILiteralNodeType(RohGraph pDataGraph, string pContenido, string pDatatype)
-        {
+                    Regex regex = new Regex(regString);
+                    Match match = regex.Match(pContenido);
+                    pContenido = pTransform.Replace("{regex|"+regString+ "|endregex}", match.Value);
+                }                
+            }
             if (string.IsNullOrEmpty(pDatatype))
             {
                 return pDataGraph.CreateLiteralNode(pContenido, new Uri("http://www.w3.org/2001/XMLSchema#string"));
@@ -419,8 +426,8 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
         /// <param name="pId">ID.</param>
         /// <returns>String con la URI del grafo construida.</returns>
         private string GetURL(string pRdfType, string pId)
-        {           
-            string url = _callUrisFactoryService.GetUri(HttpUtility.UrlEncode(pRdfType), HttpUtility.UrlEncode(pId), UriGetEnum.RDFtype);
+        {
+            string url = _callUrisFactoryService.GetUri(HttpUtility.UrlEncode(pRdfType), HttpUtility.UrlEncode(pId));
             return url;
         }
 
