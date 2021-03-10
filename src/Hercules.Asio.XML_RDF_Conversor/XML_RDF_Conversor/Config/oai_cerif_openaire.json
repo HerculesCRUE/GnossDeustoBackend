@@ -15,10 +15,6 @@
           "source": "ns:Gender"
         },
         {
-          "property": "http://purl.org/roh/mirror/foaf#mbox",
-          "source": "ns:ElectronicAddress"
-        },
-        {
           "property": "http://purl.org/roh#crisIdentifier",
           "source": "@id"
         }
@@ -431,6 +427,7 @@
       ],
       "subentities": [
         {
+          "property": "http://purl.org/roh#participatedBy",
           "inverseProperty": "http://purl.org/roh#participates",
           "entities": [
             {
