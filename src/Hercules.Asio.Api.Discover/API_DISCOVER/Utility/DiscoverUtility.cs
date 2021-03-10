@@ -179,7 +179,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pUnidata_SPARQLGraph">Grafo en el que hacer la consulta de Unidata</param>
         /// <param name="pUnidata_SPARQLUsername">Usuario para el endpoint SPARQL de Unidata</param>
         /// <param name="pUnidata_SPARQLPassword">Password para el endpoint SPARQL de Unidata</param> 
-        public void ApplyEquivalenceDiscover(ref RohGraph pDataGraph, RohGraph pOntologyGraph, out Dictionary<string, Dictionary<string, float>> pReconciliationEntitiesProbability,string pUnidataDomain,float pMinScore,float pMaxScore, string pUnidata_SPARQLEndpoint, string pUnidata_SPARQLQueryParam, string pUnidata_SPARQLGraph, string pUnidata_SPARQLUsername, string pUnidata_SPARQLPassword)
+        public void ApplyEquivalenceDiscover(ref RohGraph pDataGraph, RohGraph pOntologyGraph, out Dictionary<string, Dictionary<string, float>> pReconciliationEntitiesProbability, string pUnidataDomain, float pMinScore, float pMaxScore, string pUnidata_SPARQLEndpoint, string pUnidata_SPARQLQueryParam, string pUnidata_SPARQLGraph, string pUnidata_SPARQLUsername, string pUnidata_SPARQLPassword)
         {
             //Cargamos el razonador para inferir datos en la ontología
             RohRdfsReasoner reasoner = new RohRdfsReasoner();
@@ -2524,7 +2524,7 @@ namespace API_DISCOVER.Utility
                     {
                         if (!pDiscoverLinkData.entitiesProperties[id].Exists(x => x.property == propertyData.property))
                         {
-                            pDiscoverLinkData.entitiesProperties[id].Add(new DiscoverLinkData.PropertyData() { property = propertyData.property });
+                            pDiscoverLinkData.entitiesProperties[id].Add(new DiscoverLinkData.PropertyData() { property = propertyData.property, valueProvenance = new Dictionary<string, HashSet<string>>() });
                         }
                         foreach (string value in propertyData.valueProvenance.Keys)
                         {
