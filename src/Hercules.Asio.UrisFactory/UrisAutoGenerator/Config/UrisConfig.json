@@ -8,29 +8,71 @@
 		{
 			"Character": "kos",
 			"LabelCharacter": "kos"
+		},
+		{
+			"Character": "graph",
+			"LabelCharacter": "graph"
 		}
 	],
-	"UriStructures": [{
+	"UriStructures": [
+		{
 			"Name": "uriResourceStructure",
-			"Components": [{
+			"Components": [
+				{
 					"UriComponent": "base",
 					"UriComponentValue": "base",
 					"UriComponentOrder": 1,
 					"Mandatory": true,
 					"FinalCharacter": "/"
-				}, {
+				},
+				{
 					"UriComponent": "character",
 					"UriComponentValue": "character@RESOURCE",
 					"UriComponentOrder": 2,
 					"Mandatory": true,
 					"FinalCharacter": "/"
-				}, {
+				},
+				{
 					"UriComponent": "resourceClass",
 					"UriComponentValue": "resourceClass@RESOURCECLASS",
 					"UriComponentOrder": 3,
 					"Mandatory": true,
 					"FinalCharacter": "/"
-				}, {
+				},
+				{
+					"UriComponent": "identifier",
+					"UriComponentValue": "@ID",
+					"UriComponentOrder": 4,
+					"Mandatory": false,
+					"FinalCharacter": ""
+				}
+			]
+		},
+		{
+			"Name": "uriKosStructure",
+			"Components": [
+				{
+					"UriComponent": "base",
+					"UriComponentValue": "base",
+					"UriComponentOrder": 1,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				},
+				{
+					"UriComponent": "character",
+					"UriComponentValue": "character@KOS",
+					"UriComponentOrder": 2,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				},
+				{
+					"UriComponent": "resourceClass",
+					"UriComponentValue": "resourceClass@RESOURCECLASS",
+					"UriComponentOrder": 3,
+					"Mandatory": true,
+					"FinalCharacter": "/"
+				},
+				{
 					"UriComponent": "identifier",
 					"UriComponentValue": "@ID",
 					"UriComponentOrder": 4,
@@ -38,1131 +80,1430 @@
 					"FinalCharacter": ""
 				}
 			]
-		}, {
-			"Name": "uriKosStructure",
-			"Components": [{
+		},
+		{
+			"Name": "uriGraphStructure",
+			"Components": [
+				{
 					"UriComponent": "base",
 					"UriComponentValue": "base",
 					"UriComponentOrder": 1,
 					"Mandatory": true,
 					"FinalCharacter": "/"
-				}, {
+				},
+				{
 					"UriComponent": "character",
-					"UriComponentValue": "character@KOS",
+					"UriComponentValue": "character@GRAPH",
 					"UriComponentOrder": 2,
 					"Mandatory": true,
 					"FinalCharacter": "/"
-				}, {
-					"UriComponent": "resourceClass",
-					"UriComponentValue": "resourceClass@RESOURCECLASS",
-					"UriComponentOrder": 3,
-					"Mandatory": true,
-					"FinalCharacter": "/"
-				}, {
+				},
+				{
 					"UriComponent": "identifier",
 					"UriComponentValue": "@ID",
-					"UriComponentOrder": 4,
+					"UriComponentOrder": 3,
 					"Mandatory": true,
 					"FinalCharacter": ""
 				}
 			]
 		}
 	],
-	"ResourcesClasses": [{
+	"ResourcesClasses": [
+		{
 			"ResourceClass": "Abstract",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Abstract",
 			"LabelResourceClass": "abstract",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "AcademicAccreditation",
 			"RdfType": "http://purl.org/roh#AcademicAccreditation",
 			"LabelResourceClass": "academic-accreditation",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "AcademicArticle",
 			"RdfType": "http://purl.org/roh/mirror/bibo#AcademicArticle",
 			"LabelResourceClass": "academic-article",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "AcademicDegree",
 			"RdfType": "http://purl.org/roh/mirror/vivo#AcademicDegree",
 			"LabelResourceClass": "academic-degree",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "AcademicDepartment",
 			"RdfType": "http://purl.org/roh/mirror/vivo#AcademicDepartment",
 			"LabelResourceClass": "academic-department",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Accreditation",
 			"RdfType": "http://purl.org/roh#Accreditation",
 			"LabelResourceClass": "accreditation",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "AccreditationIssuer",
 			"RdfType": "http://purl.org/roh#AccreditationIssuer",
 			"LabelResourceClass": "accreditation-issuer",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Activity",
 			"RdfType": "http://purl.org/roh#Activity",
 			"LabelResourceClass": "activity",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Address",
 			"RdfType": "http://purl.org/roh/mirror/vcard#Address",
 			"LabelResourceClass": "address",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "AdministratorRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#AdministratorRole",
 			"LabelResourceClass": "administrator-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "AdviseeRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#AdviseeRole",
 			"LabelResourceClass": "advisee-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "AdvisingRelationship",
 			"RdfType": "http://purl.org/roh/mirror/vivo#AdvisingRelationship",
 			"LabelResourceClass": "advising-relationship",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "AdvisorRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#AdvisorRole",
 			"LabelResourceClass": "advisor-role",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Agent",
 			"RdfType": "http://purl.org/roh/mirror/foaf#Agent",
 			"LabelResourceClass": "agent",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Article",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Article",
 			"LabelResourceClass": "article",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "AttendeeRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#AttendeeRole",
 			"LabelResourceClass": "attendee-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "AuditeeRole",
 			"RdfType": "http://purl.org/roh#AuditeeRole",
 			"LabelResourceClass": "auditee-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "AuditingRelationship",
 			"RdfType": "http://purl.org/roh#AuditingRelationship",
 			"LabelResourceClass": "auditing-relationship",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "AuditorRole",
 			"RdfType": "http://purl.org/roh#AuditorRole",
 			"LabelResourceClass": "auditor-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Award",
 			"RdfType": "http://purl.org/roh#Award",
 			"LabelResourceClass": "award",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "AwardedDegree",
 			"RdfType": "http://purl.org/roh/mirror/vivo#AwardedDegree",
 			"LabelResourceClass": "awarded-degree",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "BachelorDegree",
 			"RdfType": "http://purl.org/roh#BachelorDegree",
 			"LabelResourceClass": "bachelors-degree",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "BFO_0000008",
 			"RdfType": "http://purl.org/roh/mirror/obo/bfo#BFO_0000008",
 			"LabelResourceClass": "temporal-region",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "BFO_0000023",
 			"RdfType": "http://purl.org/roh/mirror/obo/bfo#BFO_0000023",
 			"LabelResourceClass": "role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "BFO_0000038",
 			"RdfType": "http://purl.org/roh/mirror/obo/bfo#BFO_0000038",
 			"LabelResourceClass": "one-dimensional-temporal-region",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "BFO_0000148",
 			"RdfType": "http://purl.org/roh/mirror/obo/bfo#BFO_0000148",
 			"LabelResourceClass": "zero-dimensional-temporal-region",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "bibo_Document",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Document",
 			"LabelResourceClass": "bibo-document",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Book",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Book",
 			"LabelResourceClass": "book",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "BookSection",
 			"RdfType": "http://purl.org/roh/mirror/bibo#BookSection",
 			"LabelResourceClass": "book-section",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Center",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Center",
 			"LabelResourceClass": "center",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Certificate",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Certificate",
 			"LabelResourceClass": "certificate",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Chapter",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Chapter",
 			"LabelResourceClass": "chapter",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "CollectedDocument",
 			"RdfType": "http://purl.org/roh/mirror/bibo#CollectedDocument",
 			"LabelResourceClass": "collected-document",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Collection",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Collection",
 			"LabelResourceClass": "collection",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Company",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Company",
 			"LabelResourceClass": "company",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Competition",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Competition",
 			"LabelResourceClass": "competition",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ConceptScheme",
 			"RdfType": "http://www.w3.org/2004/02/skos/core#ConceptScheme",
 			"LabelResourceClass": "conceptscheme",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Conference",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Conference",
 			"LabelResourceClass": "conference",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ConferencePaper",
 			"RdfType": "http://purl.org/roh/mirror/vivo#ConferencePaper",
 			"LabelResourceClass": "conference-paper",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ConferencePoster",
 			"RdfType": "http://purl.org/roh/mirror/vivo#ConferencePoster",
 			"LabelResourceClass": "conference-poster",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Consortium",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Consortium",
 			"LabelResourceClass": "consortium",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Contract",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Contract",
 			"LabelResourceClass": "contract",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "CoPrincipalInvestigatorRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#CoPrincipalInvestigatorRole",
 			"LabelResourceClass": "co-principal-investigator-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Course",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Course",
 			"LabelResourceClass": "course",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "CourseCertificate",
 			"RdfType": "http://purl.org/roh#CourseCertificate",
 			"LabelResourceClass": "course-certificate",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "CurriculumVitae",
 			"RdfType": "http://purl.org/roh#CurriculumVitae",
 			"LabelResourceClass": "curriculum-vitae",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Dataset",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Dataset",
 			"LabelResourceClass": "dataset",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "DateTimeInterval",
 			"RdfType": "http://purl.org/roh/mirror/vivo#DateTimeInterval",
 			"LabelResourceClass": "date/time-interval",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "DateTimeValue",
 			"RdfType": "http://purl.org/roh/mirror/vivo#DateTimeValue",
 			"LabelResourceClass": "date/time-value",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "DegreeHomologation",
 			"RdfType": "http://purl.org/roh#DegreeHomologation",
 			"LabelResourceClass": "degree-homologation",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "DegreeMetric",
 			"RdfType": "http://purl.org/roh#DegreeMetric",
 			"LabelResourceClass": "degree-metric",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "DegreeSupervisingRelationship",
 			"RdfType": "http://purl.org/roh#DegreeSupervisingRelationship",
 			"LabelResourceClass": "degree-supervising-relationship",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "DegreeThesis",
 			"RdfType": "http://purl.org/roh#DegreeThesis",
 			"LabelResourceClass": "degree-thesis",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Department",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Department",
 			"LabelResourceClass": "department",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "DoctoralDegree",
 			"RdfType": "http://purl.org/roh#DoctoralDegree",
 			"LabelResourceClass": "doctoral-degree",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Document",
 			"RdfType": "http://purl.org/roh/mirror/foaf#Document",
 			"LabelResourceClass": "document",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "DocumentPart",
 			"RdfType": "http://purl.org/roh/mirror/bibo#DocumentPart",
 			"LabelResourceClass": "document-part",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Dossier",
 			"RdfType": "http://purl.org/roh#Dossier",
 			"LabelResourceClass": "dossier",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "EditedBook",
 			"RdfType": "http://purl.org/roh/mirror/bibo#EditedBook",
 			"LabelResourceClass": "edited-book",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "EditorialArticle",
 			"RdfType": "http://purl.org/roh/mirror/vivo#EditorialArticle",
 			"LabelResourceClass": "editorial-article",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "EditorRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#EditorRole",
 			"LabelResourceClass": "editor-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Email",
 			"RdfType": "http://purl.org/roh/mirror/vcard#Email",
 			"LabelResourceClass": "email",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Equipment",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Equipment",
 			"LabelResourceClass": "equipment",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0000005",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000005",
 			"LabelResourceClass": "service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0000071",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000071",
 			"LabelResourceClass": "software",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0000224",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000224",
 			"LabelResourceClass": "funding-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ERO_0000225",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000225",
 			"LabelResourceClass": "educator-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ERO_0000391",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000391",
 			"LabelResourceClass": "access-service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0000392",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000392",
 			"LabelResourceClass": "storage-service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0000393",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000393",
 			"LabelResourceClass": "training-service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0000394",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000394",
 			"LabelResourceClass": "material-processing-service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0000395",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000395",
 			"LabelResourceClass": "material-analysis-service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0000396",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000396",
 			"LabelResourceClass": "material-production-service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0000783",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000783",
 			"LabelResourceClass": "student-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ERO_0000784",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000784",
 			"LabelResourceClass": "undergraduate-student_role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ERO_0000785",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000785",
 			"LabelResourceClass": "graduate-student-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ERO_0000786",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000786",
 			"LabelResourceClass": "high-school-student-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ERO_0000787",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000787",
 			"LabelResourceClass": "employee-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ERO_0000788",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000788",
 			"LabelResourceClass": "faculty-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ERO_0000789",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000789",
 			"LabelResourceClass": "staff-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ERO_0000790",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000790",
 			"LabelResourceClass": "post-baccalaureate-trainee",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ERO_0000914",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0000914",
 			"LabelResourceClass": "post-graduate-student-trainee-role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ERO_0001254",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0001254",
 			"LabelResourceClass": "transport-service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0001255",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0001255",
 			"LabelResourceClass": "support-service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0001256",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0001256",
 			"LabelResourceClass": "material-storage-service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0001257",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0001257",
 			"LabelResourceClass": "data-storage-service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0001258",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0001258",
 			"LabelResourceClass": "maintenance-service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0001259",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0001259",
 			"LabelResourceClass": "material-maintenance-service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0001260",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0001260",
 			"LabelResourceClass": "data-maintenance-service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0001261",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0001261",
 			"LabelResourceClass": "analysis-service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0001262",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0001262",
 			"LabelResourceClass": "data_analysis_service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ERO_0001263",
 			"RdfType": "http://purl.org/roh/mirror/obo/ero#ERO_0001263",
 			"LabelResourceClass": "material_modification_service",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "EthicalAudit",
 			"RdfType": "http://purl.org/roh#EthicalAudit",
 			"LabelResourceClass": "ethicalaudit",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "EthicalReport",
 			"RdfType": "http://purl.org/roh#EthicalReport",
 			"LabelResourceClass": "ethicalreport",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "EthicalValidation",
 			"RdfType": "http://purl.org/roh#EthicalValidation",
 			"LabelResourceClass": "ethicalvalidation",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "EthicsCommittee",
 			"RdfType": "http://purl.org/roh#EthicsCommittee",
 			"LabelResourceClass": "ethics_comitee",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "EvaluationSummary",
 			"RdfType": "http://purl.org/roh#EvaluationSummary",
 			"LabelResourceClass": "evaluation_summary",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Exhibit",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Exhibit",
 			"LabelResourceClass": "exhibit",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Expense",
 			"RdfType": "http://purl.org/roh#Expense",
 			"LabelResourceClass": "expense",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ExpenseClassification",
 			"RdfType": "http://purl.org/roh#ExpenseClassification",
 			"LabelResourceClass": "expense_classification",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ExternalMemberRole",
 			"RdfType": "http://purl.org/roh#ExternalMemberRole",
 			"LabelResourceClass": "external_member_role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Facility",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Facility",
 			"LabelResourceClass": "facility",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "FacultyAdministrativePosition",
 			"RdfType": "http://purl.org/roh/mirror/vivo#FacultyAdministrativePosition",
 			"LabelResourceClass": "faculty_administrative_position",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "FacultyMentoringRelationship",
 			"RdfType": "http://purl.org/roh/mirror/vivo#FacultyMentoringRelationship",
 			"LabelResourceClass": "faculty_mentoring_relationship",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "FacultyPosition",
 			"RdfType": "http://purl.org/roh/mirror/vivo#FacultyPosition",
 			"LabelResourceClass": "faculty_position",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "FacultyPositionEmeritus",
 			"RdfType": "http://purl.org/roh#FacultyPositionEmeritus",
 			"LabelResourceClass": "faculty_position_emeritus",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Feature",
 			"RdfType": "http://purl.org/roh/mirror/geonames#Feature",
 			"LabelResourceClass": "feature",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "foaf_Organization",
 			"RdfType": "http://purl.org/roh/mirror/foaf#Organization",
 			"LabelResourceClass": "foaf_organization",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Foundation",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Foundation",
 			"LabelResourceClass": "foundation",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Funding",
 			"RdfType": "http://purl.org/roh#Funding",
 			"LabelResourceClass": "funding",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "FundingAmount",
 			"RdfType": "http://purl.org/roh#FundingAmount",
 			"LabelResourceClass": "funding_amount",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "FundingOrganization",
 			"RdfType": "http://purl.org/roh/mirror/vivo#FundingOrganization",
 			"LabelResourceClass": "funding_organization",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "FundingProgram",
 			"RdfType": "http://purl.org/roh#FundingProgram",
 			"LabelResourceClass": "funding_program",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "FundingProgramClassification",
 			"RdfType": "http://purl.org/roh#FundingProgramClassification",
 			"LabelResourceClass": "funding_program_classification",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "FundingSource",
 			"RdfType": "http://purl.org/roh#FundingSource",
 			"LabelResourceClass": "funding_source",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "GovernmentAgency",
 			"RdfType": "http://purl.org/roh/mirror/vivo#GovernmentAgency",
 			"LabelResourceClass": "government_agency",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "GraduateAdvisingRelationship",
 			"RdfType": "http://purl.org/roh/mirror/vivo#GraduateAdvisingRelationship",
 			"LabelResourceClass": "graduate_advising_relationship",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Grant",
 			"RdfType": "http://purl.org/roh#Grant",
 			"LabelResourceClass": "grant",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Group",
 			"RdfType": "http://purl.org/roh/mirror/vcard#Group",
 			"LabelResourceClass": "group",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Hearing",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Hearing",
 			"LabelResourceClass": "hearing",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "IAO_0000013",
 			"RdfType": "http://purl.org/roh/mirror/obo/iao#IAO_0000013",
 			"LabelResourceClass": "journal_article",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "IAO_0000030",
 			"RdfType": "http://purl.org/roh/mirror/obo/iao#IAO_0000030",
 			"LabelResourceClass": "information_content_entity",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Image",
 			"RdfType": "http://purl.org/roh/mirror/foaf#Image",
 			"LabelResourceClass": "image",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Individual",
 			"RdfType": "http://purl.org/roh/mirror/vcard#Individual",
 			"LabelResourceClass": "individual",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Institute",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Institute",
 			"LabelResourceClass": "institute",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Internship",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Internship",
 			"LabelResourceClass": "internship",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Interview",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Interview",
 			"LabelResourceClass": "interview",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "InvestigatorRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#InvestigatorRole",
 			"LabelResourceClass": "investigator_role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "InvitedTalk",
 			"RdfType": "http://purl.org/roh/mirror/vivo#InvitedTalk",
 			"LabelResourceClass": "invited_talk",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Invoice",
 			"RdfType": "http://purl.org/roh#Invoice",
 			"LabelResourceClass": "invoice",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Issue",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Issue",
 			"LabelResourceClass": "issue",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Journal",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Journal",
 			"LabelResourceClass": "journal",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Justification",
 			"RdfType": "http://purl.org/roh#Justification",
 			"LabelResourceClass": "justification",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Kind",
 			"RdfType": "http://purl.org/roh/mirror/vcard#Kind",
 			"LabelResourceClass": "kind",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "LanguageCertificate",
 			"RdfType": "http://purl.org/roh#LanguageCertificate",
 			"LabelResourceClass": "language_certificate",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "LargeEnterprise",
 			"RdfType": "http://purl.org/roh#LargeEnterprise",
 			"LabelResourceClass": "large_enterprise",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "LeaderRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#LeaderRole",
 			"LabelResourceClass": "leader_role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "LibrarianPosition",
 			"RdfType": "http://purl.org/roh/mirror/vivo#LibrarianPosition",
 			"LabelResourceClass": "librarian_position",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "LibrarianPositionEmeritus",
 			"RdfType": "http://purl.org/roh#LibrarianPositionEmeritus",
 			"LabelResourceClass": "librarian_position_emeritus",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "License",
 			"RdfType": "http://purl.org/roh/mirror/vivo#License",
 			"LabelResourceClass": "license",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "List",
 			"RdfType": "http://www.w3.org/1999/02/22-rdf-syntax-ns#List",
 			"LabelResourceClass": "list",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Loan",
 			"RdfType": "http://purl.org/roh#Loan",
 			"LabelResourceClass": "loan",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Location",
 			"RdfType": "http://purl.org/roh/mirror/vcard#Location",
 			"LabelResourceClass": "location",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Magazine",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Magazine",
 			"LabelResourceClass": "magazine",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ManagementUnit",
 			"RdfType": "http://purl.org/roh#ManagementUnit",
 			"LabelResourceClass": "managementunit",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "MasterDegree",
 			"RdfType": "http://purl.org/roh#MasterDegree",
 			"LabelResourceClass": "master's_degree",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "MasterSupervisingRelationship",
 			"RdfType": "http://purl.org/roh#MasterSupervisingRelationship",
 			"LabelResourceClass": "master_supervising_relationship",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "MasterThesis",
 			"RdfType": "http://purl.org/roh#MasterThesis",
 			"LabelResourceClass": "master_thesis",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "MediumEnterprise",
 			"RdfType": "http://purl.org/roh#MediumEnterprise",
 			"LabelResourceClass": "medium_enterprise",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Meeting",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Meeting",
 			"LabelResourceClass": "meeting",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "MemberRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#MemberRole",
 			"LabelResourceClass": "member_role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Metric",
 			"RdfType": "http://purl.org/roh#Metric",
 			"LabelResourceClass": "metric",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "MicroEnterprise",
 			"RdfType": "http://purl.org/roh#MicroEnterprise",
 			"LabelResourceClass": "micro_enterprise",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Name",
 			"RdfType": "http://purl.org/roh/mirror/vcard#Name",
 			"LabelResourceClass": "name",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "NonAcademicPosition",
 			"RdfType": "http://purl.org/roh/mirror/vivo#NonAcademicPosition",
 			"LabelResourceClass": "non-academic_position",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "NonFacultyAcademicPosition",
 			"RdfType": "http://purl.org/roh/mirror/vivo#NonFacultyAcademicPosition",
 			"LabelResourceClass": "non-faculty_academic_position",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Organization",
 			"RdfType": "http://purl.org/roh/mirror/vcard#Organization",
 			"LabelResourceClass": "organization",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "OrganizerRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#OrganizerRole",
 			"LabelResourceClass": "organizer_role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Outsourcing",
 			"RdfType": "http://purl.org/roh#Outsourcing",
 			"LabelResourceClass": "outsourcing",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "PanelTalk",
 			"RdfType": "http://purl.org/roh#PanelTalk",
 			"LabelResourceClass": "panel_talk",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
+			"ResourceClass": "PatentContract",
+			"RdfType": "http://purl.org/roh#PatentContract",
+			"LabelResourceClass": "patent_contract",
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Patent",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Patent",
 			"LabelResourceClass": "patent",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "PeerReviewerRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#PeerReviewerRole",
 			"LabelResourceClass": "peer_reviewer_role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Performance",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Performance",
 			"LabelResourceClass": "performance",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Periodical",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Periodical",
 			"LabelResourceClass": "periodical",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Person",
 			"RdfType": "http://purl.org/roh/mirror/foaf#Person",
 			"LabelResourceClass": "person",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "PersonContract",
 			"RdfType": "http://purl.org/roh#PersonContract",
 			"LabelResourceClass": "person_contract",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "PersonExpense",
 			"RdfType": "http://purl.org/roh#PersonExpense",
 			"LabelResourceClass": "person_expense",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "PhDSupervisingRelationship",
 			"RdfType": "http://purl.org/roh#PhDSupervisingRelationship",
 			"LabelResourceClass": "phd_supervising_relationship",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "PhDThesis",
 			"RdfType": "http://purl.org/roh#PhDThesis",
 			"LabelResourceClass": "phd_thesis",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "PhDThesisMetric",
 			"RdfType": "http://purl.org/roh#PhDThesisMetric",
 			"LabelResourceClass": "phd_thesis_metric",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
+			"ResourceClass": "ThesisMetric",
+			"RdfType": "http://purl.org/roh#Thesis_Metric",
+			"LabelResourceClass": "thesis_metric",
+			"ResourceURI": "uriResourceStructure"
+		},
+		{
 			"ResourceClass": "Position",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Position",
 			"LabelResourceClass": "position",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "PostdocOrFellowAdvisingRelationship",
 			"RdfType": "http://purl.org/roh/mirror/vivo#PostdocOrFellowAdvisingRelationship",
 			"LabelResourceClass": "postdoc_or_fellow_advising_relationship",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "PostdocPosition",
 			"RdfType": "http://purl.org/roh/mirror/vivo#PostdocPosition",
 			"LabelResourceClass": "postdoctoral_position",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Presentation",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Presentation",
 			"LabelResourceClass": "presentation",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "PresenterRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#PresenterRole",
 			"LabelResourceClass": "presenter_role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "PrimaryPosition",
 			"RdfType": "http://purl.org/roh/mirror/vivo#PrimaryPosition",
 			"LabelResourceClass": "primary_position",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "PrincipalInvestigatorRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#PrincipalInvestigatorRole",
 			"LabelResourceClass": "principal_investigator_role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Proceedings",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Proceedings",
 			"LabelResourceClass": "proceedings",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Project",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Project",
 			"LabelResourceClass": "project",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ProjectClassification",
 			"RdfType": "http://purl.org/roh#ProjectClassification",
 			"LabelResourceClass": "project_classification",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ProjectContract",
 			"RdfType": "http://purl.org/roh#ProjectContract",
 			"LabelResourceClass": "project_contract",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ProjectExpense",
 			"RdfType": "http://purl.org/roh#ProjectExpense",
 			"LabelResourceClass": "project_expense",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "PublicationMetric",
 			"RdfType": "http://purl.org/roh#PublicationMetric",
 			"LabelResourceClass": "publication_metric",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "RefundableAdvance",
 			"RdfType": "http://purl.org/roh#RefundableAdvance",
 			"LabelResourceClass": "refundableadvance",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Relationship",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Relationship",
 			"LabelResourceClass": "relationship",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Report",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Report",
 			"LabelResourceClass": "report",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ResearchAccreditation",
 			"RdfType": "http://purl.org/roh#ResearchAccreditation",
 			"LabelResourceClass": "research_accreditation",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ResearcherPosition",
 			"RdfType": "http://purl.org/roh#ResearcherPosition",
 			"LabelResourceClass": "researcher_position",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ResearcherRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#ResearcherRole",
 			"LabelResourceClass": "researcher_role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ResearchGroup",
 			"RdfType": "http://purl.org/roh#ResearchGroup",
 			"LabelResourceClass": "research_group",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ResearchObject",
 			"RdfType": "http://purl.org/roh#ResearchObject",
 			"LabelResourceClass": "research_object",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ResearchObjectExpense",
 			"RdfType": "http://purl.org/roh#ResearchObjectExpense",
 			"LabelResourceClass": "research_object_expense",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ResearchProposal",
 			"RdfType": "http://purl.org/roh/mirror/vivo#ResearchProposal",
 			"LabelResourceClass": "research_proposal",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Reservable",
 			"RdfType": "http://purl.org/roh#Reservable",
 			"LabelResourceClass": "reservable",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ReservableConsumerRole",
 			"RdfType": "http://purl.org/roh#ReservableConsumerRole",
 			"LabelResourceClass": "reservableconsumerrole",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ReservableProviderRole",
 			"RdfType": "http://purl.org/roh#ReservableProviderRole",
 			"LabelResourceClass": "reservableproviderrole",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ReservationRelationship",
 			"RdfType": "http://purl.org/roh#ReservationRelationship",
 			"LabelResourceClass": "reservation_relationship",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "ReviewerRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#ReviewerRole",
 			"LabelResourceClass": "reviewer_role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Seq",
 			"RdfType": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq",
 			"LabelResourceClass": "seq",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "SmallEnterprise",
 			"RdfType": "http://purl.org/roh#SmallEnterprise",
 			"LabelResourceClass": "small_enterprise",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "SuperviseeRole",
 			"RdfType": "http://purl.org/roh#SuperviseeRole",
 			"LabelResourceClass": "supervisee_role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "SupervisingRelationship",
 			"RdfType": "http://purl.org/roh#SupervisingRelationship",
 			"LabelResourceClass": "supervising_relationship",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "SupervisorRole",
 			"RdfType": "http://purl.org/roh#SupervisorRole",
 			"LabelResourceClass": "supervisor_role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "TeacherRole",
 			"RdfType": "http://purl.org/roh/mirror/vivo#TeacherRole",
 			"LabelResourceClass": "teacher_role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "Thesis",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Thesis",
 			"LabelResourceClass": "thesis",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Thesis_Metric",
 			"RdfType": "http://purl.org/roh#Thesis_Metric",
 			"LabelResourceClass": "thesis_metric",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ThesisViva",
 			"RdfType": "http://purl.org/roh#ThesisViva",
 			"LabelResourceClass": "thesis_viva",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ThirdPartyContractorRole",
 			"RdfType": "http://purl.org/roh#ThirdPartyContractorRole",
 			"LabelResourceClass": "third_party_contractor_role",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "UndergraduateAdvisingRelationship",
 			"RdfType": "http://purl.org/roh/mirror/vivo#UndergraduateAdvisingRelationship",
 			"LabelResourceClass": "undergraduate_advising_relationship",
-			"ResourceURI": "uriResourceStructure"
-		}, {
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
+		},
+		{
 			"ResourceClass": "UNESCOKnowledgeArea",
 			"RdfType": "http://purl.org/roh#UNESCOKnowledgeArea",
 			"LabelResourceClass": "unesco_knowledge_area",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "University",
 			"RdfType": "http://purl.org/roh/mirror/vivo#University",
 			"LabelResourceClass": "university",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Webpage",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Webpage",
 			"LabelResourceClass": "webpage",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Workshop",
 			"RdfType": "http://purl.org/roh/mirror/bibo#Workshop",
 			"LabelResourceClass": "workshop",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "WorkshopPaper",
 			"RdfType": "http://purl.org/roh#WorkshopPaper",
 			"LabelResourceClass": "workshop_paper",
 			"ResourceURI": "uriResourceStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "HRClassification",
 			"RdfType": "",
 			"LabelResourceClass": "hr",
 			"ResourceURI": "uriKosStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Concept",
 			"RdfType": "",
 			"LabelResourceClass": "concept",
 			"ResourceURI": "uriKosStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "KnowledgeArea",
 			"RdfType": "",
 			"LabelResourceClass": "knowledge-area",
 			"ResourceURI": "uriKosStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "ResearchLine",
 			"RdfType": "",
 			"LabelResourceClass": "research-line",
 			"ResourceURI": "uriKosStructure"
-		}, {
+		},
+		{
 			"ResourceClass": "Keyword",
 			"RdfType": "",
 			"LabelResourceClass": "keyword",
 			"ResourceURI": "uriKosStructure"
+		},
+		{
+			"ResourceClass": "Graph",
+			"RdfType": "",
+			"LabelResourceClass": "graph",
+			"ResourceURI": "uriGraphStructure"
 		}
 	]
 }
