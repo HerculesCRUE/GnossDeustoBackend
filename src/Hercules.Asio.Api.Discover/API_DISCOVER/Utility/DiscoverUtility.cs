@@ -2524,7 +2524,11 @@ namespace API_DISCOVER.Utility
                     {
                         if (!pDiscoverLinkData.entitiesProperties[id].Exists(x => x.property == propertyData.property))
                         {
-                            pDiscoverLinkData.entitiesProperties[id].Add(new DiscoverLinkData.PropertyData() { property = propertyData.property, valueProvenance = new Dictionary<string, HashSet<string>>() });
+                            pDiscoverLinkData.entitiesProperties[id].Add(new DiscoverLinkData.PropertyData() { property = propertyData.property});
+                        }
+                        if(pDiscoverLinkData.entitiesProperties[id].FirstOrDefault(x => x.property == propertyData.property).valueProvenance==null)
+                        {
+                            pDiscoverLinkData.entitiesProperties[id].FirstOrDefault(x => x.property == propertyData.property).valueProvenance = new Dictionary<string, HashSet<string>>();
                         }
                         foreach (string value in propertyData.valueProvenance.Keys)
                         {
