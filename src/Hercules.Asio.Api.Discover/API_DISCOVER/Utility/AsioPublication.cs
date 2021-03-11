@@ -327,9 +327,9 @@ namespace API_DISCOVER.Utility
                 bnodeChildrens.Add(row["bnode"].value);
             }
 
-            //Obtenemos todos los grafos en los que está la entidad para eliminar sus triples
+            //Obtenemos todos los grafos en los que está la entidad como sujeto para eliminar sus triples
             HashSet<string> listGraphs = new HashSet<string>();
-            SparqlObject sparqlObjectGraphs = _SparqlUtility.SelectData(_SPARQLEndpoint, "", $"select distinct ?g where{{graph ?g{{?s ?p ?o. FILTER(?s=<{pEntity}> OR ?o=<{pEntity}>)}}}}", _QueryParam, _Username, _Password);
+            SparqlObject sparqlObjectGraphs = _SparqlUtility.SelectData(_SPARQLEndpoint, "", $"select distinct ?g where{{graph ?g{{?s ?p ?o. FILTER( ?s in(<>,<{pEntity}>) )}}}}", _QueryParam, _Username, _Password);
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObjectGraphs.results.bindings)
             {
                 listGraphs.Add(row["g"].value);
