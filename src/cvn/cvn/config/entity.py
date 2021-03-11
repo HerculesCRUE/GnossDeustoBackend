@@ -12,8 +12,6 @@ import urllib.parse
 import cvn.utils.xmltree as xmltree
 import cvn.webserver as web_server
 import logging
-import urllib3
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Caché de URIs generadas
 # TODO mover a un servicio externo, o hacer algo más elaborado
@@ -36,10 +34,9 @@ def generate_uri(resource_class, identifier):
     cache_id = resource_class + "." + identifier
     if cache_id in cached_uris:
         return cached_uris[cache_id]
-
-    # http://herc-as-front-desa.atica.um.es/uris/Factory
+     
     # Quitar verify=False
-    api_response = requests.get("https://localhost:44340/Factory", verify=False, params={
+    api_response = requests.get("http://herc-as-front-desa.atica.um.es/uris/Factory", params={
         'resource_class': resource_class,
         'identifier': identifier
     })  # TODO comprobar que lo que devuelve es de hecho una URL bien formateada
