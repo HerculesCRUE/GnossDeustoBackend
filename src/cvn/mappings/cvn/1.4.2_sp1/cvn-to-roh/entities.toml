@@ -81,45 +81,6 @@ cache = "foaf:person"
             # TODO País
 
         [[entities.subentities.subentities]]
-        displayname = "vcard:Email"
-
-            [[entities.subentities.subentities.relationships]]
-            inverse = "vcard:hasEmail"
-
-            [[entities.subentities.subentities.properties]]
-            displayname = "vcard:email"
-
-                [[entities.subentities.subentities.properties.sources]]
-                code = "000.010.000.230"
-                name = "email"
-
-        [[entities.subentities.subentities]]
-        displayname = "vcard:Phone"
-
-            [[entities.subentities.subentities.relationships]]
-            inverse = "vcard:hasPhone"
-
-            [[entities.subentities.subentities.properties]]
-            displayname = "vcard:phone"
-
-                [[entities.subentities.subentities.properties.sources]]
-                code = "000.010.000.240"
-                name = "cellphone"
-
-        [[entities.subentities.subentities]]
-        displayname = "vcard:Fax"
-
-            [[entities.subentities.subentities.relationships]]
-            inverse = "vcard:hasRelated"
-
-            [[entities.subentities.subentities.properties]]
-            displayname = "vcard:fax"
-
-                [[entities.subentities.subentities.properties.sources]]
-                code = "000.010.000.240"
-                name = "cellphone"
-
-        [[entities.subentities.subentities]]
         displayname = "vcard:Name"
 
             [[entities.subentities.subentities.relationships]]
@@ -147,23 +108,6 @@ cache = "foaf:person"
                 code = "000.010.000.010"
                 bean = "SecondFamilyName"
                 name = "name"
-
-    # TODO Sustituir por subclase VCARD cuando sepamos lo de la extensión
-    [[entities.properties]] # Teléfono
-    ontology = "foaf"
-    name = "phone"
-    format = "tel:{number}{extension}"
-
-        [[entities.properties.sources]] # Número
-        code = "000.010.000.210"
-        name = "number"
-        bean = "Number"
-
-        [[entities.properties.sources]] # Extensión
-        code = "000.010.000.210"
-        name = "extension"
-        bean = "Extension"
-        format = ",{value}"
 
     # TODO Sustituir por subclase VCARD
     [[entities.properties]]
