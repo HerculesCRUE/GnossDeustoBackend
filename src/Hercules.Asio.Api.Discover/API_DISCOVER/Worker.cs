@@ -42,7 +42,7 @@ namespace API_DISCOVER
                     {
                         var scope = _serviceScopeFactory.CreateScope();
                         RabbitMQService rabbitMQService = scope.ServiceProvider.GetRequiredService<RabbitMQService>();
-                        Discover descubrimiento = new Discover(_logger,_serviceScopeFactory);
+                        Discover descubrimiento = new Discover(_logger, _serviceScopeFactory);
                         rabbitMQService.ListenToQueue(new RabbitMQService.ReceivedDelegate(descubrimiento.ProcessItem), new RabbitMQService.ShutDownDelegate(OnShutDown));
                         _processRabbitReady = true;
                     }
@@ -52,7 +52,7 @@ namespace API_DISCOVER
                         {
                             try
                             {
-                                ConfigService ConfigService = new ConfigService();    
+                                ConfigService ConfigService = new ConfigService();
                                 //Todos los lunes a la 8:00 sería "0 0 8 ? * MON"
                                 var expression = new CronExpression(ConfigService.GetLaunchDiscoverLoadedEntitiesCronExpression());
                                 DateTimeOffset? time = expression.GetTimeAfter(DateTimeOffset.UtcNow);
@@ -61,7 +61,7 @@ namespace API_DISCOVER
                                 {
                                     Thread.Sleep((time.Value.DateTime - DateTimeOffset.UtcNow));
                                     Discover descubrimiento = new Discover(_logger, _serviceScopeFactory);
-                                    descubrimiento.ApplyDiscoverLoadedEntities(ConfigService.GetSleepSecondsAfterProcessEntityDiscoverLoadedEntities());
+                                    descubrimiento.ApplyDiscoverLoadedEntities(ConfigService.GetSleepSecondsAfterProcessEntityDiscoverLoadedEntities(), _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallUrisFactoryApiService>());
                                 }
                             }
                             catch (Exception ex)
@@ -84,7 +84,7 @@ namespace API_DISCOVER
         private void OnShutDown()
         {
             _processRabbitReady = false;
-        }        
+        }
 
 
         public Task StopAsync(CancellationToken stoppingToken)

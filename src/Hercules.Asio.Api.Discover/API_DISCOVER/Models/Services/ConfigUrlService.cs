@@ -19,6 +19,7 @@ namespace API_DISCOVER.Models.Services
         public IConfigurationRoot Configuration { get; set; }
         public string UrlCarga { get; set; }
         public string UrlCron { get; set; }
+        public string UrlUrisFactory { get; set; }
         /// <summary>
         /// Obtiene la url del api de carga que ha sido configurada
         /// </summary>
@@ -75,6 +76,35 @@ namespace API_DISCOVER.Models.Services
                 UrlCron = connectionString;
             }
             return UrlCron;
+        }
+
+        /// <summary>
+        /// Obtiene la url del urisFactory
+        /// </summary>
+        /// <returns>uri del api cron</returns>
+        public string GetUrlUrisFactory()
+        {
+            if (string.IsNullOrEmpty(UrlUrisFactory))
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                string connectionString = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ConfigUrlUrisFactory"))
+                {
+                    connectionString = environmentVariables["ConfigUrlUrisFactory"] as string;
+                }
+                else
+                {
+                    connectionString = Configuration["ConfigUrlUrisFactory"];
+                }
+
+                UrlUrisFactory = connectionString;
+            }
+            return UrlUrisFactory;
         }
     }
 }

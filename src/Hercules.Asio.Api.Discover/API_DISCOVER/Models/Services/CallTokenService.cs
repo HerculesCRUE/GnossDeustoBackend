@@ -40,14 +40,13 @@ namespace API_DISCOVER.Models.Services
         /// <returns>Token bearer</returns>
         public TokenBearer CallTokenCarga()
         {
-            //TODO no funciona bien en depuración
             if (_env.IsDevelopment())
             {
                 return TokenAppsettings("TokenTypeCarga", "AccessTokenCarga");
             }
             else
             {
-                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScope()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+                string stringData = $"grant_type=client_credentials&scope=apiCarga&client_id=Discover&client_secret=secretDiscover";
                 return CallTokenIdentity(stringData);
             }
         }
@@ -63,10 +62,28 @@ namespace API_DISCOVER.Models.Services
             }
             else
             {
-                string stringData = $"grant_type={_configToken.GetGrantType()}&scope={_configToken.GetScopeCron()}&client_id={_configToken.GetClientId()}&client_secret={_configToken.GetClientSecret()}";
+                string stringData = $"grant_type=client_credentials&scope=apiCron&client_id=Discover&client_secret=secretDiscover";
                 return CallTokenIdentity(stringData);
             }
         }
+
+        /// <summary>
+        /// Obtiene el token de acceso al api de OAIPMH
+        /// </summary>
+        public TokenBearer CallTokenUrisFactory()
+        {
+            if (_env.IsDevelopment())
+            {
+                return TokenAppsettings("TokenTypeUrisFactory", "AccessTokenUrisFactory");
+            }
+            else
+            {
+                string stringData = $"grant_type=client_credentials&scope=apiUrisFactory&client_id=Discover&client_secret=secretDiscover";
+                return CallTokenIdentity(stringData);
+            }
+        }
+
+
         /// <summary>
         /// Llama al api de gestión de tokens
         /// </summary>

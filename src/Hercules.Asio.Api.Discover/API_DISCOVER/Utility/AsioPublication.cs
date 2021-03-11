@@ -13,6 +13,7 @@ using VDS.RDF.Update;
 using System.Diagnostics.CodeAnalysis;
 using API_DISCOVER.Models.Entities.Discover;
 using VDS.RDF.Query.Inference;
+using API_DISCOVER.Models.Services;
 
 namespace API_DISCOVER.Utility
 {
@@ -54,7 +55,8 @@ namespace API_DISCOVER.Utility
         /// <param name="pActivityStartedAtTime">Inicio del proceso</param>
         /// <param name="pActivityEndedAtTime">Fin del proceso</param>
         /// <param name="pDiscoverLinkData">Datos para trabajar con el descubrimiento de enlaces</param>
-        public void PublishRDF(RohGraph pDataGraph,RohGraph pOntologyGraph, KeyValuePair<string, string>? pAttributedTo, DateTime pActivityStartedAtTime, DateTime pActivityEndedAtTime, DiscoverLinkData pDiscoverLinkData)
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
+        public void PublishRDF(RohGraph pDataGraph,RohGraph pOntologyGraph, KeyValuePair<string, string>? pAttributedTo, DateTime pActivityStartedAtTime, DateTime pActivityEndedAtTime, DiscoverLinkData pDiscoverLinkData, CallUrisFactoryApiService pCallUrisFactoryApiService)
         {
             RohGraph inferenceDataGraph = null;
             if (pOntologyGraph != null)
@@ -65,7 +67,7 @@ namespace API_DISCOVER.Utility
                 reasoner.Apply(inferenceDataGraph);
             }
 
-            // 1º Eliminamos de la BBD las entidades principales que aparecen en el RDF
+            // 1º Eliminamos de la BBDD las entidades principales que aparecen en el RDF
             HashSet<string> graphs = RemovePrimaryTopics(ref pDataGraph);
             graphs.Add(_Graph);
 
@@ -105,8 +107,7 @@ namespace API_DISCOVER.Utility
                             HashSet<string> t_sourceids = prop.Value;
                             foreach (string sourceId in t_sourceids)
                             {
-                                //TODO urisfactory
-                                string graph = "http://graph.um.es/graph/" + sourceId;
+                                string graph = pCallUrisFactoryApiService.GetUri("Graph", sourceId);
                                 if (!graphTriples.ContainsKey(graph))
                                 {
                                     graphTriples.Add(graph, new List<string>());
@@ -126,8 +127,8 @@ namespace API_DISCOVER.Utility
                                 graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#startedAtTime> ""{ pActivityStartedAtTime.ToString("yyyy-MM-ddTHH:mm:ss.fffzzz") }""^^<http://www.w3.org/2001/XMLSchema#datetime>.");
                                 graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#endedAtTime> ""{ pActivityEndedAtTime.ToString("yyyy-MM-ddTHH:mm:ss.fffzzz") }""^^<http://www.w3.org/2001/XMLSchema#datetime>.");
                                 graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#wasAssociatedWith> <{pAttributedTo.Value.Key}>.");
-                                //TODO urisfactory
-                                graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#wasAssociatedWith> <http://graph.um.es/res/organization/{sourceId}>.");
+                            
+                                graphTriples[graph].Add($@"{bNodeid} <http://www.w3.org/ns/prov#wasAssociatedWith> <{pCallUrisFactoryApiService.GetUri("http://purl.org/roh/mirror/foaf#Organization", sourceId)}>.");
 
                                 if (pAttributedTo.HasValue)
                                 {
@@ -199,7 +200,7 @@ namespace API_DISCOVER.Utility
             {
                 foreach (string mainEntity in mainEntities)
                 {
-                    graphs.UnionWith(DeleteEntity(mainEntity));
+                    graphs.UnionWith(DeleteUpdatedEntity(mainEntity));
                 }
             }
 
@@ -312,11 +313,11 @@ namespace API_DISCOVER.Utility
         }
 
         /// <summary>
-        /// Elimina una entidad de la BBDD (y sus blank nodes de forma recursiva)
+        /// Elimina una entidad actualizada de la BBDD (y sus blank nodes de forma recursiva) (no elimina los triples en los que es objeto)
         /// </summary>
         /// <param name="pEntity">Entida</param>
         /// <returns>Lista de grafos afectados</returns>
-        private HashSet<string> DeleteEntity(string pEntity)
+        private HashSet<string> DeleteUpdatedEntity(string pEntity)
         {
             //Obtenemos todos los blanknodes a los que apunta la entidad para luego borrarlos
             HashSet<string> bnodeChildrens = new HashSet<string>();
@@ -342,16 +343,10 @@ namespace API_DISCOVER.Utility
                                         <{pEntity}> ?p ?o. 
                                     }}";
                 _SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteS, _QueryParam, _Username, _Password);
-                string queryDeleteO = $@"DELETE {{ ?s ?p <{pEntity}>. }}
-                                    WHERE 
-                                    {{
-                                        ?s ?p <{pEntity}>. 
-                                    }}";
-                _SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteO, _QueryParam, _Username, _Password);
             }
             foreach (string bnode in bnodeChildrens)
             {
-                DeleteEntity(bnode);
+                DeleteUpdatedEntity(bnode);
             }
             return listGraphs;
         }

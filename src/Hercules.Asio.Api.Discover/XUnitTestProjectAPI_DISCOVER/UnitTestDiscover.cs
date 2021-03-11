@@ -73,8 +73,9 @@ namespace XUnitTestProjectAPI_DISCOVER
             DiscoverUtility discoverUtility = new DiscoverUtility();
             discoverUtility.test = true;
 
+            CallUrisFactoryApiMockService callUrisFactoryApiMockService = new CallUrisFactoryApiMockService();
             //Aplicamos el descubrimiento de enlaces
-            Dictionary<string, List<DiscoverLinkData.PropertyData>> discoverLinks= discoverUtility.ApplyDiscoverLinks(ref dataGraph, ontologyGraph, 0.7f, 0.9f, "", "", "HerculesASIO-University-of-Murcia (https://github.com/HerculesCRUE/GnossDeustoBackend; mailto:<mail>) AsioBot", "");
+            Dictionary<string, List<DiscoverLinkData.PropertyData>> discoverLinks= discoverUtility.ApplyDiscoverLinks(ref dataGraph, ontologyGraph, 0.7f, 0.9f, "", "", "HerculesASIO-University-of-Murcia (https://github.com/HerculesCRUE/GnossDeustoBackend; mailto:<mail>) AsioBot", "Basic czAzNjkuZmVjeXQuZXM6VTQ5RDhSWU40d3Mh", callUrisFactoryApiMockService);
 
             //En 'discoverLinks' estarán los datos que se han recuperado de las integraciones externas junto con su provenance
             //En 'dataGraph' estará el grafo modificado tras el descubrimiento de enlaces

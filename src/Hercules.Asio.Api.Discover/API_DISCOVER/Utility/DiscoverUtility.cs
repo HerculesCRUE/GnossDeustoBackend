@@ -146,9 +146,10 @@ namespace API_DISCOVER.Utility
         /// <param name="pScopusUrl">Url donde se encuentra el API de scopus</param>
         /// <param name="pCrossrefUserAgent">user agent para usar en las peticiones al API de CROSSREF</param>
         /// <param name="pWOSAuthorization">Autorización</param>
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns></returns>
         public Dictionary<string, List<DiscoverLinkData.PropertyData>> ApplyDiscoverLinks(ref RohGraph pDataGraph, RohGraph pOntologyGraph,
-            float pMinScore, float pMaxScore, string pScopusApiKey, string pScopusUrl, string pCrossrefUserAgent, string pWOSAuthorization)
+            float pMinScore, float pMaxScore, string pScopusApiKey, string pScopusUrl, string pCrossrefUserAgent, string pWOSAuthorization, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
             //Cargamos el razonador para inferir datos en la ontología
             RohRdfsReasoner reasoner = new RohRdfsReasoner();
@@ -161,7 +162,7 @@ namespace API_DISCOVER.Utility
             ReconciliationData reconciliationData = new ReconciliationData();
             DiscoverLinkData discoverLinkData = new DiscoverLinkData();
             Dictionary<string, Dictionary<string, float>> reconciliationEntitiesProbability = new Dictionary<string, Dictionary<string, float>>();
-            return ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref reconciliationEntitiesProbability, ref pDataGraph, reasoner, null, pOntologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux, null, discoverCache, pScopusApiKey, pScopusUrl, pCrossrefUserAgent, pWOSAuthorization, pMinScore, pMaxScore, null, null, null, null, null, false);
+            return ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref reconciliationEntitiesProbability, ref pDataGraph, reasoner, null, pOntologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux, null, discoverCache, pScopusApiKey, pScopusUrl, pCrossrefUserAgent, pWOSAuthorization, pMinScore, pMaxScore, null, null, null, null, null, pCallUrisFactoryApiService, false);
 
         }
 
@@ -323,7 +324,7 @@ namespace API_DISCOVER.Utility
                     }
                 }
             }
-            //Obtenemos los roh:identifier de todas las entidades           
+            //Obtenemos los 'http://purl.org/roh#crisIdentifier' de todas las entidades           
             Dictionary<string, KeyValuePair<string, string>> disambiguationIdentifiersRdf = new Dictionary<string, KeyValuePair<string, string>>();
             Dictionary<string, Dictionary<string, HashSet<string>>> identifiersData = GetPropertiesValues(pEntitiesRdfTypes.Keys.ToList(), new List<string> { mPropertySGIRohCrisIdentifier, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" }, false, directRels);
             foreach (string entityId in identifiersData.Keys)
@@ -333,11 +334,16 @@ namespace API_DISCOVER.Utility
                     if (!disambiguationDataRdf.ContainsKey(entityId))
                     {
                         disambiguationDataRdf.Add(entityId, new List<DisambiguationData>());
+                        disambiguationDataRdf[entityId].Add(new DisambiguationData());
                     }
-                    DisambiguationData data_roh_identifier = new DisambiguationData();
-                    data_roh_identifier.identifiers = new Dictionary<string, HashSet<string>>();
-                    data_roh_identifier.identifiers.Add(mPropertySGIRohCrisIdentifier, identifiersData[entityId][mPropertySGIRohCrisIdentifier]);
-                    disambiguationDataRdf[entityId].Add(data_roh_identifier);
+                    foreach (DisambiguationData disambiguationData in disambiguationDataRdf[entityId])
+                    {
+                        if (disambiguationData.identifiers == null)
+                        {
+                            disambiguationData.identifiers = new Dictionary<string, HashSet<string>>();
+                        }
+                        disambiguationData.identifiers.Add(mPropertySGIRohCrisIdentifier, identifiersData[entityId][mPropertySGIRohCrisIdentifier]);
+                    }
                 }
             }
             return disambiguationDataRdf;
@@ -1061,6 +1067,18 @@ namespace API_DISCOVER.Utility
                     string scoresNoMandatory = "(sum(" + string.Join(")+sum(", varsNoMandatory) + "))";
                     selectSujetos = $"\n\t\tselect ?s ?rdfType ?scoreMandatory {scoresNoMandatory} as ?scoreNoMandatory where\n\t\t{{";
                     orderSujetos = $"\n\t\t}}group by ?s ?rdfType ?scoreMandatory order by desc(?scoreMandatory) desc {scoresNoMandatory} limit 10";
+                }
+                //TODO revisar con Unidata
+                if (pDisambiguationData.identifiers != null && pDisambiguationData.identifiers.Count>0)
+                {
+                    whereSujetos += "\n\t\t\tMINUS\n\t\t\t{";
+                    int i = 0;
+                    foreach(string propertyId in pDisambiguationData.identifiers.Keys)
+                    {
+                        i++;
+                        whereSujetos += $"\n\t\t\t\t?s <{ propertyId }> ?property_{i}.";
+                    }
+                    whereSujetos += "\n\t\t\t}";
                 }
 
                 string consulta = selectSujetos + whereSujetos + orderSujetos;
@@ -2406,13 +2424,14 @@ namespace API_DISCOVER.Utility
         /// <param name="pGraph">Grafo</param>
         /// <param name="pUsername">Usuario</param>
         /// <param name="pPassword">Password</param>
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <param name="pApplyReconcilation">Booleano que indica si aplicamos la reconciliación con los datos obtenidos de las integraciones externas</param>
         /// <returns>Diccionario con las entidades y los identificadores extraídos, junto con su provenencia</returns>
         public Dictionary<string, List<DiscoverLinkData.PropertyData>> ExternalIntegration(ref bool pHasChanges,
             ref ReconciliationData pReconciliationData, ref DiscoverLinkData pDiscoverLinkData, ref Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner,
             Dictionary<string, Dictionary<string, float>> pNamesScore, RohGraph pOntologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> pEntidadesReconciliadasConIntegracionExterna,
             Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, string pScopusApiKey, string pScopusUrl, string pCrossrefUserAgent, string pWOSAuthorization,
-            float pMinScore, float pMaxScore, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword, bool pApplyReconcilation = true)
+            float pMinScore, float pMaxScore, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword, ICallUrisFactoryApiService pCallUrisFactoryApiService, bool pApplyReconcilation = true)
 
         {
             RohGraph dataInferenceGraph;
@@ -2435,16 +2454,16 @@ namespace API_DISCOVER.Utility
 
             HashSet<Exception> APIsExceptions = new HashSet<Exception>();
 
-            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationORCID(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pMinScore, pMaxScore); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
-            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationSCOPUS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pScopusApiKey, pScopusUrl, pMinScore, pMaxScore); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
-            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationDBLP(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pMinScore, pMaxScore); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationORCID(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pMinScore, pMaxScore, pCallUrisFactoryApiService); if (data.externalGraph.Triples.Count > 0) { externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationSCOPUS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pScopusApiKey, pScopusUrl, pMinScore, pMaxScore, pCallUrisFactoryApiService); if (data.externalGraph.Triples.Count > 0) { externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationDBLP(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pMinScore, pMaxScore, pCallUrisFactoryApiService); if (data.externalGraph.Triples.Count > 0) { externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } } catch (Exception ex) { APIsExceptions.Add(ex); } }));
             //De momento lo omitimos, es muy lento y da timeout casi siempre
-            //hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationCROSSREF(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone,pCrossrefUserAgent,pMinScore,pMaxScore); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
-            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationPUBMED(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pMinScore, pMaxScore); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
-            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationWOS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pWOSAuthorization, pMinScore, pMaxScore); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
-            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationRECOLECTA(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pMinScore, pMaxScore); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
-            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationDOAJ(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pMinScore, pMaxScore); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
-            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationDBPEDIA(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone); externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            //hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationCROSSREF(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone,pCrossrefUserAgent,pMinScore,pMaxScore,pCallUrisFactoryApiService);if (data.externalGraph.Triples.Count > 0) { externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); }} catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationPUBMED(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pMinScore, pMaxScore, pCallUrisFactoryApiService); if (data.externalGraph.Triples.Count > 0) { externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationWOS(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pWOSAuthorization, pMinScore, pMaxScore, pCallUrisFactoryApiService); if (data.externalGraph.Triples.Count > 0) { externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationRECOLECTA(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pMinScore, pMaxScore, pCallUrisFactoryApiService); if (data.externalGraph.Triples.Count > 0) { externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationDOAJ(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pMinScore, pMaxScore, pCallUrisFactoryApiService); if (data.externalGraph.Triples.Count > 0) { externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } } catch (Exception ex) { APIsExceptions.Add(ex); } }));
+            hilosIntegracionesExternas.Add(new Thread(() => { try { ExternalIntegrationData data = ExternalIntegrationDBPEDIA(entitiesRdfTypes, dataGraphClone, pDiscoverCache, discoveredEntitiesProbabilityClone, pCallUrisFactoryApiService); if (data.externalGraph.Triples.Count > 0) { externalGraphs.Add(data.externalGraph); provenanceGraphs.Add(data.provenanceGraph); } } catch (Exception ex) { APIsExceptions.Add(ex); } }));
             foreach (Thread thread in hilosIntegracionesExternas)
             {
                 thread.Start();
@@ -2524,9 +2543,9 @@ namespace API_DISCOVER.Utility
                     {
                         if (!pDiscoverLinkData.entitiesProperties[id].Exists(x => x.property == propertyData.property))
                         {
-                            pDiscoverLinkData.entitiesProperties[id].Add(new DiscoverLinkData.PropertyData() { property = propertyData.property});
+                            pDiscoverLinkData.entitiesProperties[id].Add(new DiscoverLinkData.PropertyData() { property = propertyData.property });
                         }
-                        if(pDiscoverLinkData.entitiesProperties[id].FirstOrDefault(x => x.property == propertyData.property).valueProvenance==null)
+                        if (pDiscoverLinkData.entitiesProperties[id].FirstOrDefault(x => x.property == propertyData.property).valueProvenance == null)
                         {
                             pDiscoverLinkData.entitiesProperties[id].FirstOrDefault(x => x.property == propertyData.property).valueProvenance = new Dictionary<string, HashSet<string>>();
                         }
@@ -2879,10 +2898,11 @@ namespace API_DISCOVER.Utility
         /// <param name="pDiscoveredEntitiesProbability">Entidades con probabilidades</param>        /// 
         /// <param name="pMinScore">Puntuación mínima para considerar a una entidad candidata</param>
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de ORCID</returns>
-        private ExternalIntegrationData ExternalIntegrationORCID(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore)
+        private ExternalIntegrationData ExternalIntegrationORCID(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
-            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new ORCID_API());
+            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new ORCID_API(), pCallUrisFactoryApiService);
             string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
@@ -3092,10 +3112,11 @@ namespace API_DISCOVER.Utility
         /// <param name="pScopusUrl">Url donde se encuentra el API de scopus</param>
         /// <param name="pMinScore">Puntuación mínima para considerar a una entidad candidata</param>
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de SCOPUS</returns>
-        private ExternalIntegrationData ExternalIntegrationSCOPUS(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, string pScopusApiKey, string pScopusUrl, float pMinScore, float pMaxScore)
+        private ExternalIntegrationData ExternalIntegrationSCOPUS(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, string pScopusApiKey, string pScopusUrl, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
-            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new SCOPUS_API());
+            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new SCOPUS_API(), pCallUrisFactoryApiService);
             string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
@@ -3270,10 +3291,11 @@ namespace API_DISCOVER.Utility
         /// <param name="pDiscoveredEntitiesProbability">Entidades con probabilidades</param>
         /// <param name="pMinScore">Puntuación mínima para considerar a una entidad candidata</param>
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de DBLP</returns>
-        private ExternalIntegrationData ExternalIntegrationDBLP(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore)
+        private ExternalIntegrationData ExternalIntegrationDBLP(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
-            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new DBLP_API());
+            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new DBLP_API(), pCallUrisFactoryApiService);
             string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
@@ -3537,10 +3559,11 @@ namespace API_DISCOVER.Utility
         /// <param name="pCrossrefUserAgent">user agent para usar en las peticiones al API de CROSSREF</param>
         /// <param name="pMinScore">Puntuación mínima para considerar a una entidad candidata</param>
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de CROSSREF</returns>
-        private ExternalIntegrationData ExternalIntegrationCROSSREF(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, string pCrossrefUserAgent, float pMinScore, float pMaxScore)
+        private ExternalIntegrationData ExternalIntegrationCROSSREF(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, string pCrossrefUserAgent, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
-            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new CROSSREF_API());
+            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new CROSSREF_API(), pCallUrisFactoryApiService);
             string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
@@ -3740,10 +3763,11 @@ namespace API_DISCOVER.Utility
         /// <param name="pDiscoveredEntitiesProbability">Entidades con probabilidades</param>
         /// <param name="pMinScore">Puntuación mínima para considerar a una entidad candidata</param>
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de SCOPUS</returns>
-        private ExternalIntegrationData ExternalIntegrationPUBMED(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore)
+        private ExternalIntegrationData ExternalIntegrationPUBMED(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
-            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new PUBMED_API());
+            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new PUBMED_API(), pCallUrisFactoryApiService);
             string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
@@ -3921,10 +3945,11 @@ namespace API_DISCOVER.Utility
         /// <param name="pWOSAuthorization">Autorización</param>
         /// <param name="pMinScore">Puntuación mínima para considerar a una entidad candidata</param>
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de SCOPUS</returns>
-        private ExternalIntegrationData ExternalIntegrationWOS(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, string pWOSAuthorization, float pMinScore, float pMaxScore)
+        private ExternalIntegrationData ExternalIntegrationWOS(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, string pWOSAuthorization, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
-            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new WOS_API());
+            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new WOS_API(), pCallUrisFactoryApiService);
             string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
@@ -4125,10 +4150,11 @@ namespace API_DISCOVER.Utility
         /// <param name="pDiscoveredEntitiesProbability">Entidades con probabilidades</param>
         /// <param name="pMinScore">Puntuación mínima para considerar a una entidad candidata</param>
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de SCOPUS</returns>
-        private ExternalIntegrationData ExternalIntegrationRECOLECTA(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore)
+        private ExternalIntegrationData ExternalIntegrationRECOLECTA(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
-            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new RECOLECTA_API());
+            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new RECOLECTA_API(), pCallUrisFactoryApiService);
             string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
@@ -4290,10 +4316,11 @@ namespace API_DISCOVER.Utility
         /// <param name="pDiscoveredEntitiesProbability">Entidades con probabilidades</param>
         /// <param name="pMinScore">Puntuación mínima para considerar a una entidad candidata</param>
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de SCOPUS</returns>
-        private ExternalIntegrationData ExternalIntegrationDOAJ(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore)
+        private ExternalIntegrationData ExternalIntegrationDOAJ(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
-            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new DOAJ_API());
+            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new DOAJ_API(), pCallUrisFactoryApiService);
             string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
@@ -4447,10 +4474,11 @@ namespace API_DISCOVER.Utility
         /// <param name="pDiscoverCache">Caché de discover</param>
         /// <param name="pDataGraph">Grafo en local con los datos del RDF</param>
         /// <param name="pDiscoveredEntitiesProbability">Entidades con probabilidades</param>
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de DBPEDIA</returns>
-        private ExternalIntegrationData ExternalIntegrationDBPEDIA(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability)
+        private ExternalIntegrationData ExternalIntegrationDBPEDIA(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
-            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new DBPEDIA_API());
+            KeyValuePair<string, RohGraph> dataGraph = CreateProvenanceGraph(new DBPEDIA_API(), pCallUrisFactoryApiService);
             string provenanceId = dataGraph.Key;
             RohGraph provenanceGraph = dataGraph.Value;
             RohGraph externalGraph = new RohGraph();
@@ -4531,14 +4559,13 @@ namespace API_DISCOVER.Utility
         /// Crea los datos de provenencia de un API Externo
         /// </summary>
         /// <param name="pExternalAPI"></param>
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns></returns>
-        private KeyValuePair<string, RohGraph> CreateProvenanceGraph(I_ExternalAPI pExternalAPI)
+        private KeyValuePair<string, RohGraph> CreateProvenanceGraph(I_ExternalAPI pExternalAPI, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
-            //TODO urisfactory
-            string provenanceGraph = "http://graph.um.es/graph/" + pExternalAPI.Id;
+            string provenanceGraph = pCallUrisFactoryApiService.GetUri("Graph", pExternalAPI.Id);
             RohGraph rohApi = new RohGraph();
-            //TODO urisfactory
-            IUriNode subjectOrganization = rohApi.CreateUriNode(UriFactory.Create("http://graph.um.es/res/organization/" + pExternalAPI.Id));
+            IUriNode subjectOrganization = rohApi.CreateUriNode(UriFactory.Create(pCallUrisFactoryApiService.GetUri("http://purl.org/roh/mirror/foaf#Organization", pExternalAPI.Id)));
             IUriNode rdftypeProperty = rohApi.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
             IUriNode rdftypeOrganization = rohApi.CreateUriNode(UriFactory.Create("http://www.w3.org/ns/prov#Organization"));
             rohApi.Assert(new Triple(subjectOrganization, rdftypeProperty, rdftypeOrganization));
@@ -4768,18 +4795,26 @@ namespace API_DISCOVER.Utility
         /// <returns></returns>
         public List<string> GetPersonList(string pSPARQLEndpoint, string pGraph, string pQueryParam, string pUsername, string pPassword)
         {
-            //TODO +10000
             List<string> listaPersonas = new List<string>();
 
-            string consulta = @"SELECT ?s WHERE { ?s a <http://purl.org/roh/mirror/foaf#Person>. }";
+            int numPagination = 10000;
+            int offset = 0;
+            int numResulados = numPagination;
 
-            SparqlObject sparqlObject = mSparqlUtility.SelectData(pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
-
-            foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+            while (numResulados == numPagination)
             {
-                listaPersonas.Add(row["s"].value);
+                string consulta = @$"select * where{{SELECT ?s WHERE {{ ?s a <http://purl.org/roh/mirror/foaf#Person>. }}order by ?s }}offset {offset} limit {numPagination}";
+                SparqlObject sparqlObject = mSparqlUtility.SelectData(pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
+                numResulados = sparqlObject.results.bindings.Count;
+                if (sparqlObject.results.bindings.Count > 0)
+                {
+                    offset += numPagination;
+                    foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+                    {
+                        listaPersonas.Add(row["s"].value);
+                    }
+                }
             }
-
             return listaPersonas;
         }
 

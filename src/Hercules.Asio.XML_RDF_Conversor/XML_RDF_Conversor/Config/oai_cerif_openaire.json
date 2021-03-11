@@ -404,7 +404,7 @@
           ]
         },
         {
-          "property": "http://purl.org/roh/mirror/obo/ro#BFO_0000050",
+          "property": "http://purl.org/roh#producedBy",
           "entities": [
             {
               "rdftype": "http://purl.org/roh/mirror/vivo#Project",

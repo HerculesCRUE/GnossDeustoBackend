@@ -35,6 +35,8 @@ namespace API_DISCOVER
         private readonly ILogger<Worker> _logger;
         private readonly IServiceScopeFactory _serviceScopeFactory;
 
+        private readonly static string mPropertySGIRohCrisIdentifier = "http://purl.org/roh#crisIdentifier";
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -60,15 +62,18 @@ namespace API_DISCOVER
                 ProcessDiscoverStateJobBDService processDiscoverStateJobBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<ProcessDiscoverStateJobBDService>();
                 CallCronApiService callCronApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallCronApiService>();
                 CallEtlApiService callEtlApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallEtlApiService>();
+                CallUrisFactoryApiService callUrisFactoryApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallUrisFactoryApiService>();
 
                 DiscoverItem discoverItem = discoverItemBDService.GetDiscoverItemById(itemID);
+
                 if (discoverItem != null)
                 {
                     //Aplicamos el proceso de descubrimiento
-                    DiscoverResult resultado = Init(discoverItem, callEtlApiService);
+                    DiscoverResult resultado = Init(discoverItem, callEtlApiService, callUrisFactoryApiService);
                     Process(discoverItem, resultado,
                         discoverItemBDService,
                         callCronApiService,
+                        callUrisFactoryApiService,
                         processDiscoverStateJobBDService
                         );
                 }
@@ -104,14 +109,14 @@ namespace API_DISCOVER
 
         }
 
-
         /// <summary>
         /// Realiza el proceso completo de desubrimiento sobre un RDF
         /// </summary>
         /// <param name="pDiscoverItem">Item de descubrimiento</param>
         /// <param name="pCallEtlApiService">Servicio para hacer llamadas a los métodos del controlador etl del API_CARGA </param>
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>DiscoverResult con los datos del descubrimiento</returns>
-        private DiscoverResult Init(DiscoverItem pDiscoverItem, CallEtlApiService pCallEtlApiService)
+        private DiscoverResult Init(DiscoverItem pDiscoverItem, CallEtlApiService pCallEtlApiService, CallUrisFactoryApiService pCallUrisFactoryApiService)
         {
             #region Cargamos configuraciones
             ConfigSparql ConfigSparql = new ConfigSparql();
@@ -233,7 +238,7 @@ namespace API_DISCOVER
                     discoverUtility.ReconciliateBBDD(ref hasChanges, ref reconciliationData, out reconciliationEntitiesProbability, ontologyGraph, ref dataGraph, reasoner, namesScore, discardDissambiguations, discoverCache, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
 
                     //4.- Realizamos la reconciliación con los datos de las integraciones externas
-                    discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref reconciliationEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
+                    discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref reconciliationEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword,pCallUrisFactoryApiService);
 
                     //Eliminamos de las probabilidades aquellos que ya estén reconciliados
                     foreach (string key in reconciliationData.reconciliatedEntityList.Keys)
@@ -243,10 +248,11 @@ namespace API_DISCOVER
                 }
 
                 //5.-Realizamos la detección de equivalencias con Unidata
-                //TODO descomentar
+                //TODO descomentar cuando esté habilitaado Unidata
+                //TODO descomentar y revisar en unidata no tienen roh:identifier
                 //discoverUtility.EquivalenceDiscover(ontologyGraph, ref dataGraph, reasoner, discoverCache, ref reconciliationEntitiesProbability, discardDissambiguations, UnidataDomain, MinScore, MaxScore, Unidata_SPARQLEndpoint, Unidata_SPARQLQueryParam, Unidata_SPARQLGraph, Unidata_SPARQLUsername, Unidata_SPARQLPassword);
             }
-
+            //TODO comrpobar cuando esté habilitaado Unidata
             DateTime discoverEndTime = DateTime.Now;
             DiscoverResult resultado = new DiscoverResult(dataGraph, dataInferenceGraph, ontologyGraph, reconciliationData, reconciliationEntitiesProbability, discoverInitTime, discoverEndTime, discoverLinkData);
 
@@ -261,9 +267,10 @@ namespace API_DISCOVER
         /// <param name="pDiscoverResult">Resultado de la aplicación del descubrimiento</param>
         /// <param name="pDiscoverItemBDService">Clase para gestionar las operaciones de las tareas de descubrimiento</param>
         /// <param name="pCallCronApiService">Servicio para hacer llamadas a los métodos del apiCron</param>
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <param name="pProcessDiscoverStateJobBDService">Clase para gestionar los estados de descubrimiento de las tareas</param>
         /// <returns></returns>
-        public void Process(DiscoverItem pDiscoverItem, DiscoverResult pDiscoverResult, DiscoverItemBDService pDiscoverItemBDService, CallCronApiService pCallCronApiService, ProcessDiscoverStateJobBDService pProcessDiscoverStateJobBDService)
+        public void Process(DiscoverItem pDiscoverItem, DiscoverResult pDiscoverResult, DiscoverItemBDService pDiscoverItemBDService, CallCronApiService pCallCronApiService,CallUrisFactoryApiService pCallUrisFactoryApiService, ProcessDiscoverStateJobBDService pProcessDiscoverStateJobBDService)
         {
             #region Cargamos configuraciones
             ConfigSparql ConfigSparql = new ConfigSparql();
@@ -306,23 +313,43 @@ namespace API_DISCOVER
                 }
                 else
                 {
+                    string urlDiscoverAgent = pCallUrisFactoryApiService.GetUri("Agent", "discover");
+
                     //Creamos los SameAs hacia unidata para las entidades que NO lo tengan hacia Unidata                       
-                    //TODO descomentar
+                    //TODO descomentar cuando esté habilitaado Unidata
                     //pDiscoverResult.dataGraph = AsioPublication.CreateUnidataSameAs(pDiscoverResult.dataGraph, UnidataDomain, UnidataUriTransform);
 
                     //Publicamos en el SGI
-                    AsioPublication asioPublication = new AsioPublication(SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
-                    //TODO urisfactory
-                    asioPublication.PublishRDF(pDiscoverResult.dataGraph, pDiscoverResult.ontologyGraph, new KeyValuePair<string, string>("http://graph.um.es/res/agent/discover", "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.discoverLinkData);
+                    AsioPublication asioPublication = new AsioPublication(SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);   
 
-                    //TODO descomentar
-                    ////Publicamos en UNIDATA
-                    //AsioPublication asioPublicationUnidata = new AsioPublication(Unidata_SPARQLEndpoint, Unidata_SPARQLQueryParam, Unidata_SPARQLGraph, Unidata_SPARQLUsername, Unidata_SPARQLPassword);
-                    //// Prepara el grafo para su carga en Unidata, para ello coge las URIs de Unidata del SameAs y la aplica a los sujetos y los antiguos sujetos se agregan al SameAs
-                    //RohGraph unidataGraph = AsioPublication.TransformUrisToUnidata(pDiscoverResult.dataGraph, UnidataDomain, UnidataUriTransform);
-                    ////TODO urisfactory
-                    //asioPublicationUnidata.PublishRDF(unidataGraph, pDiscoverResult.ontologyGraph, new KeyValuePair<string, string>("http://graph.um.es/res/agent/discover", "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.discoverLinkData);
+                    asioPublication.PublishRDF(pDiscoverResult.dataGraph, pDiscoverResult.ontologyGraph, new KeyValuePair<string, string>(urlDiscoverAgent, "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.discoverLinkData,pCallUrisFactoryApiService);
 
+
+
+                    //TODO descomentar cuando esté habilitaado Unidata
+                    if (false)
+                    {
+                        //Publicamos en UNIDATA
+                        AsioPublication asioPublicationUnidata = new AsioPublication(Unidata_SPARQLEndpoint, Unidata_SPARQLQueryParam, Unidata_SPARQLGraph, Unidata_SPARQLUsername, Unidata_SPARQLPassword);
+                        // Prepara el grafo para su carga en Unidata, para ello coge las URIs de Unidata del SameAs y la aplica a los sujetos y los antiguos sujetos se agregan al SameAs
+                        RohGraph unidataGraph = AsioPublication.TransformUrisToUnidata(pDiscoverResult.dataGraph, UnidataDomain, UnidataUriTransform);
+                        //Eliminamos los triples de crisIdentifier ya que no hay que volcarlos en unidata
+                        {
+                            TripleStore store = new TripleStore();
+                            store.Add(unidataGraph);
+                            SparqlUpdateParser parser = new SparqlUpdateParser();
+                            //Actualizamos los sujetos
+                            SparqlUpdateCommandSet updateSubject = parser.ParseFromString(
+                                    @"  DELETE { ?s ?p ?o. }
+                                    WHERE 
+                                    {
+                                        ?s ?p ?o. FILTER(?p =<"+ mPropertySGIRohCrisIdentifier + @">)
+                                    }");
+                            LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
+                            processor.ProcessCommandSet(updateSubject);
+                        }
+                        asioPublicationUnidata.PublishRDF(unidataGraph, pDiscoverResult.ontologyGraph, new KeyValuePair<string, string>(urlDiscoverAgent, "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.discoverLinkData, pCallUrisFactoryApiService);
+                    }
 
                     //Lo marcamos como procesado en la BBDD y eliminamos sus metadatos
                     pDiscoverItem.UpdateProcessed();
@@ -427,7 +454,8 @@ namespace API_DISCOVER
         /// Aplica el descubrimiento sobre las entidades cargadas en el SGI
         /// </summary>
         /// <param name="pSecondsSleep">Segundos para dormir después de procesar una entidad</param>
-        public void ApplyDiscoverLoadedEntities(int pSecondsSleep)
+        /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
+        public void ApplyDiscoverLoadedEntities(int pSecondsSleep, CallUrisFactoryApiService pCallUrisFactoryApiService)
         {
             CallEtlApiService callEtlApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallEtlApiService>();
 
@@ -496,7 +524,7 @@ namespace API_DISCOVER
                     //Obtención de la integración externa
                     ReconciliationData reconciliationData = new ReconciliationData();
                     DiscoverLinkData discoverLinkData = new DiscoverLinkData();
-                    Dictionary<string, List<DiscoverLinkData.PropertyData>> integration = discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword, false);
+                    Dictionary<string, List<DiscoverLinkData.PropertyData>> integration = discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword, pCallUrisFactoryApiService,false);
 
                     //Limpiamos 'integration' para no insertar triples en caso de que ya estén cargados
                     foreach (string entity in integration.Keys.ToList())
@@ -572,10 +600,9 @@ namespace API_DISCOVER
                                 }
 
                                 foreach (string org in propertyData.valueProvenance[valor])
-                                {
-                                    //TODO urisfactory
+                                {                                    
                                     //Agregamos los datos de las organizaciones
-                                    SparqlResultSet sparqlResultSetOrgs = (SparqlResultSet)dataGraph.ExecuteQuery("select ?s ?p ?o where {?s ?p ?o. FILTER(?s=<http://graph.um.es/res/organization/" + org + ">)}");
+                                    SparqlResultSet sparqlResultSetOrgs = (SparqlResultSet)dataGraph.ExecuteQuery("select ?s ?p ?o where {?s ?p ?o. FILTER(?s=<"+ pCallUrisFactoryApiService.GetUri("http://purl.org/roh/mirror/foaf#Organization", org) + ">)}");
                                     foreach (SparqlResult sparqlResult in sparqlResultSetOrgs.Results)
                                     {
                                         INode sOrg = dataGraphIntegration.CreateUriNode(UriFactory.Create(sparqlResult["s"].ToString()));
@@ -601,11 +628,11 @@ namespace API_DISCOVER
                     if (integration.Count > 0)
                     {
                         //Si hay datos nuevos los cargamos
+                        string urlDiscoverAgent = pCallUrisFactoryApiService.GetUri("Agent", "discover");
 
                         //Publicamos en el SGI
                         AsioPublication asioPublication = new AsioPublication(SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
-                        //TODO urisfactory
-                        asioPublication.PublishRDF(dataGraphIntegration, null, new KeyValuePair<string, string>("http://graph.um.es/res/agent/discover", "Algoritmos de descubrimiento"), startTime, endTime, discoverLinkData);
+                        asioPublication.PublishRDF(dataGraphIntegration, null, new KeyValuePair<string, string>(urlDiscoverAgent, "Algoritmos de descubrimiento"), startTime, endTime, discoverLinkData, pCallUrisFactoryApiService);
 
 
                         //Preparamos los datos para cargarlos en Unidata
@@ -649,7 +676,7 @@ namespace API_DISCOVER
                         }
                         #endregion
 
-                        //TODO descomentar
+                        //TODO descomentar cuando esté habilitaado Unidata
                         ////Si hay triples para cargar en Unidata procedemos
                         //if (unidataGraph.Triples.ToList().Count > 0)
                         //{
@@ -657,8 +684,7 @@ namespace API_DISCOVER
                         //    AsioPublication asioPublicationUnidata = new AsioPublication(Unidata_SPARQLEndpoint, Unidata_SPARQLQueryParam, Unidata_SPARQLGraph, Unidata_SPARQLUsername, Unidata_SPARQLPassword);
                         //    // Prepara el grafo para su carga en Unidata, para ello coge las URIs de Unidata del SameAs y la aplica a los sujetos y los antiguos sujetos se agregan al SameAs
                         //    unidataGraph = AsioPublication.TransformUrisToUnidata(unidataGraph, UnidataDomain, UnidataUriTransform);
-                        //    //TODO urisfactory
-                        //    asioPublicationUnidata.PublishRDF(unidataGraph, null, new KeyValuePair<string, string>("http://graph.um.es/res/agent/discover", "Algoritmos de descubrimiento"), startTime, endTime, discoverLinkData);
+                        //    asioPublicationUnidata.PublishRDF(unidataGraph, null, new KeyValuePair<string, string>(urlDiscoverAgent, "Algoritmos de descubrimiento"), startTime, endTime, discoverLinkData,pCallUrisFactoryApiService);
                         //}
                     }
                 }
