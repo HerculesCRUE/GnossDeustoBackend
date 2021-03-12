@@ -151,8 +151,8 @@ namespace API_CARGA.Models.Services
                                 {
                                     rdf = CallXMLConverter(record, metadataformat);
                                 }
-
-                                _publishData.CallDataValidate(rdf, identifier, _token);
+                                //TODO descomentar
+                                //_publishData.CallDataValidate(rdf, identifier, _token);
                                 _publishData.CallDataPublish(rdf, jobId, true, _token);
 
                                 lastSyncro = identifierOAIPMH;
