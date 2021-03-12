@@ -332,6 +332,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
         /// <returns>Nodo construido según el tipo de dato.</returns>
         private ILiteralNode CreateILiteralNodeType(RohGraph pDataGraph, string pContenido, string pDatatype, string pTransform = null)
         {
+            pContenido = pContenido.Trim();
             if (!string.IsNullOrEmpty(pTransform))
             {
                 if (pTransform.Contains("{value}"))
