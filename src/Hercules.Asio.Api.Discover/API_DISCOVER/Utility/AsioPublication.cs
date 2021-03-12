@@ -176,7 +176,8 @@ namespace API_DISCOVER.Utility
             }
 
             //5º Limpiamos los blanknodes huerfanos, o que no tengan triples
-            DeleteOrphanNodes(graphs);
+            //TODO mover a una tarea que se ejecute continuamente
+            //DeleteOrphanNodes(graphs);
         }
 
         /// <summary>
@@ -195,7 +196,7 @@ namespace API_DISCOVER.Utility
                 mainEntities.Add(sparqlResult["s"].ToString());
             }
 
-            //Se eliminan todas las referncias a las entidades principales junto con sus blanknodes de forma recursiva
+            //Se eliminan todas las referncias a las entidades principales
             if (mainEntities.Count > 0)
             {
                 foreach (string mainEntity in mainEntities)
@@ -313,20 +314,12 @@ namespace API_DISCOVER.Utility
         }
 
         /// <summary>
-        /// Elimina una entidad actualizada de la BBDD (y sus blank nodes de forma recursiva) (no elimina los triples en los que es objeto)
+        /// Elimina una entidad actualizada de la BBDD (no elimina los triples en los que es objeto)
         /// </summary>
         /// <param name="pEntity">Entida</param>
         /// <returns>Lista de grafos afectados</returns>
         private HashSet<string> DeleteUpdatedEntity(string pEntity)
         {
-            //Obtenemos todos los blanknodes a los que apunta la entidad para luego borrarlos
-            HashSet<string> bnodeChildrens = new HashSet<string>();
-            SparqlObject sparqlObject = _SparqlUtility.SelectData(_SPARQLEndpoint, _Graph, $"select distinct ?bnode where{{<{pEntity}> ?p ?bnode. FILTER(isblank(?bnode))}}", _QueryParam, _Username, _Password);
-            foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
-            {
-                bnodeChildrens.Add(row["bnode"].value);
-            }
-
             //Obtenemos todos los grafos en los que está la entidad como sujeto para eliminar sus triples
             HashSet<string> listGraphs = new HashSet<string>();
             SparqlObject sparqlObjectGraphs = _SparqlUtility.SelectData(_SPARQLEndpoint, "", $"select distinct ?g where{{graph ?g{{?s ?p ?o. FILTER( ?s in(<>,<{pEntity}>) )}}}}", _QueryParam, _Username, _Password);
@@ -343,10 +336,6 @@ namespace API_DISCOVER.Utility
                                         <{pEntity}> ?p ?o. 
                                     }}";
                 _SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteS, _QueryParam, _Username, _Password);
-            }
-            foreach (string bnode in bnodeChildrens)
-            {
-                DeleteUpdatedEntity(bnode);
             }
             return listGraphs;
         }
