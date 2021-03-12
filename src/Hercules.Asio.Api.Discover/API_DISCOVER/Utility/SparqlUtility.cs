@@ -15,6 +15,7 @@ using VDS.RDF;
 using VDS.RDF.Parsing;
 using API_DISCOVER.Models.Entities;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 
 namespace API_DISCOVER.Utility
 {
@@ -318,6 +319,7 @@ namespace API_DISCOVER.Utility
                 }
                 catch (Exception ex)
                 {
+                    Thread.Sleep(10000);
                     exception = ex;
                 }
             }
