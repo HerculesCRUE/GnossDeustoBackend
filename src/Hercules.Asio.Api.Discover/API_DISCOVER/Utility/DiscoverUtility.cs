@@ -90,7 +90,7 @@ namespace API_DISCOVER.Utility
 
             //Cache del proceso de descubrimiento
             DiscoverCache discoverCache = new DiscoverCache();
-            DiscoverCache discoverCacheGlobal = new DiscoverCache();
+            DiscoverCacheGlobal discoverCacheGlobal = new DiscoverCacheGlobal();
 
             //Almacenamos las entidades con dudas acerca de su reconciliación
             pReconciliationEntitiesProbability = new Dictionary<string, Dictionary<string, float>>();
@@ -159,7 +159,7 @@ namespace API_DISCOVER.Utility
 
             //Cache del proceso de descubrimiento
             DiscoverCache discoverCache = new DiscoverCache();
-            DiscoverCache discoverCacheGlobal = new DiscoverCache();
+            DiscoverCacheGlobal discoverCacheGlobal = new DiscoverCacheGlobal();
 
             bool hasChanges = false;
             ReconciliationData reconciliationData = new ReconciliationData();
@@ -191,7 +191,7 @@ namespace API_DISCOVER.Utility
 
             //Cache del proceso de descubrimiento
             DiscoverCache discoverCache = new DiscoverCache();
-            DiscoverCache discoverCacheGlobal = new DiscoverCache();
+            DiscoverCacheGlobal discoverCacheGlobal = new DiscoverCacheGlobal();
             pReconciliationEntitiesProbability = new Dictionary<string, Dictionary<string, float>>();
 
             EquivalenceDiscover(pOntologyGraph, ref pDataGraph, reasoner, discoverCache, discoverCacheGlobal, ref pReconciliationEntitiesProbability, null, pUnidataDomain, pMinScore, pMaxScore, pUnidata_SPARQLEndpoint, pUnidata_SPARQLQueryParam, pUnidata_SPARQLGraph, pUnidata_SPARQLUsername, pUnidata_SPARQLPassword);
@@ -616,7 +616,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pDiscoverCacheGlobal">Cachñe global de descubrimiento</param>
         /// <param name="pMinScore">Puntuación mínima para considerar a una entidad candidata</param>
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
-        public void LoadNamesScore(ref Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, string> pPersonsWithName, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, float pMinScore, float pMaxScore)
+        public void LoadNamesScore(ref Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, string> pPersonsWithName, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, float pMinScore, float pMaxScore)
         {
             HashSet<string> listaNombres = new HashSet<string>();
             string query = @"select distinct ?name where{?s a <http://purl.org/roh/mirror/foaf#Person>. ?s <http://purl.org/roh/mirror/foaf#name>  ?name.}";
@@ -1369,7 +1369,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pUsername">Usuario</param>
         /// <param name="pPassword">Password</param>
         /// <returns>Diccioario con las entidades reconciliadas</returns>
-        public Dictionary<string, ReconciliationData.ReconciliationScore> ReconciliateBBDD(ref bool pHasChanges, ref ReconciliationData pReconciliationData, out Dictionary<string, Dictionary<string, float>> pListaEntidadesReconciliadasDudosas, RohGraph pOntologyGraph, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, float pMinScore, float pMaxScore, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
+        public Dictionary<string, ReconciliationData.ReconciliationScore> ReconciliateBBDD(ref bool pHasChanges, ref ReconciliationData pReconciliationData, out Dictionary<string, Dictionary<string, float>> pListaEntidadesReconciliadasDudosas, RohGraph pOntologyGraph, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, float pMinScore, float pMaxScore, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
         {
             Dictionary<string, ReconciliationData.ReconciliationScore> discoveredEntityList = new Dictionary<string, ReconciliationData.ReconciliationScore>();
             Dictionary<string, HashSet<string>> entitiesRdfTypes;
@@ -1418,7 +1418,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pMinScore">Puntuación mínima para considerar a una entidad candidata</param>
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
         /// <returns>Diccioario con las entidades reconciliadas</returns>
-        public void ReconciliateRDF(ref bool pHasChanges, ref ReconciliationData pReconciliationData, RohGraph pOntologyGraph, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, float pMinScore, float pMaxScore)
+        public void ReconciliateRDF(ref bool pHasChanges, ref ReconciliationData pReconciliationData, RohGraph pOntologyGraph, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, float pMinScore, float pMaxScore)
         {
             Dictionary<string, List<DisambiguationData>> disambiguationDataRdf;
             Dictionary<string, HashSet<string>> entitiesRdfTypes;
@@ -1467,7 +1467,7 @@ namespace API_DISCOVER.Utility
         /// <returns>Diccioario con las entidades reconciliadas</returns>
         private Dictionary<string, ReconciliationData.ReconciliationScore> ReconciliateExternalIntegration(ref bool pHasChanges, ref ReconciliationData pReconciliationData,
             ref Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, RohGraph pOntologyGraph, ref RohGraph pDataGraph, Dictionary<string, string> pListaEntidadesRDFEnriquecer, RohGraph pExternalGraph,
-            RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, HashSet<string>> pClasesConSubclases, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, float pMinScore, float pMaxScore, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
+            RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, HashSet<string>> pClasesConSubclases, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, float pMinScore, float pMaxScore, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
         {
             Dictionary<string, ReconciliationData.ReconciliationScore> discoveredEntityList = new Dictionary<string, ReconciliationData.ReconciliationScore>();
 
@@ -1732,7 +1732,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pMinScore">Puntuación mínima para considerar a una entidad candidata</param>
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
         /// <returns>Diccionario de entidades reconciliadas</returns>
-        private Dictionary<string, ReconciliationData.ReconciliationScore> ReconciliateData(ref bool pHasChanges, ref ReconciliationData pReconciliationData, out Dictionary<string, Dictionary<string, float>> pListaEntidadesReconciliadasDudosas, Dictionary<string, string> pEntitiesRdfType, Dictionary<string, List<DisambiguationData>> pDisambiguationDataRdf, Dictionary<string, string> pEntitiesRdfTypeCandidate, Dictionary<string, List<DisambiguationData>> pDisambiguationDataCandidate, RohGraph pOntologyGraph, ref RohGraph pDataGraph, bool pExternalIntegration, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, float pMinScore, float pMaxScore)
+        private Dictionary<string, ReconciliationData.ReconciliationScore> ReconciliateData(ref bool pHasChanges, ref ReconciliationData pReconciliationData, out Dictionary<string, Dictionary<string, float>> pListaEntidadesReconciliadasDudosas, Dictionary<string, string> pEntitiesRdfType, Dictionary<string, List<DisambiguationData>> pDisambiguationDataRdf, Dictionary<string, string> pEntitiesRdfTypeCandidate, Dictionary<string, List<DisambiguationData>> pDisambiguationDataCandidate, RohGraph pOntologyGraph, ref RohGraph pDataGraph, bool pExternalIntegration, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, float pMinScore, float pMaxScore)
         {
             Dictionary<string, ReconciliationData.ReconciliationScore> discoveredEntityList = new Dictionary<string, ReconciliationData.ReconciliationScore>();
             pListaEntidadesReconciliadasDudosas = new Dictionary<string, Dictionary<string, float>>();
@@ -1955,7 +1955,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
         /// <returns></returns>
         private float GetSimilarity(DisambiguationData pDisambiguationDataOriginal, DisambiguationData pDisambiguationDataCandidate,
-            Dictionary<Disambiguation, List<Disambiguation.Property>> pDicPropiedadesObligatoriasDissambiguation, Dictionary<DisambiguationData, List<Disambiguation.Property>> pDicPropiedadesDisambiguationData, Dictionary<string, Dictionary<string, float>> pCandidates, bool pOnlyPositive, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, float pMinScore, float pMaxScore)
+            Dictionary<Disambiguation, List<Disambiguation.Property>> pDicPropiedadesObligatoriasDissambiguation, Dictionary<DisambiguationData, List<Disambiguation.Property>> pDicPropiedadesDisambiguationData, Dictionary<string, Dictionary<string, float>> pCandidates, bool pOnlyPositive, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, float pMinScore, float pMaxScore)
         {
             List<Disambiguation.Property> propieadesObligatorias = pDicPropiedadesObligatoriasDissambiguation[pDisambiguationDataOriginal.disambiguation];
             List<Disambiguation.Property> propieadesComunes = pDicPropiedadesDisambiguationData[pDisambiguationDataOriginal].Intersect(pDicPropiedadesDisambiguationData[pDisambiguationDataCandidate]).OrderByDescending(x => x.mandatory).ToList();
@@ -2162,7 +2162,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
         /// <param name="pMaxNumWordsTitle">Número de palabras a partir de la cual la similitud de tipo 'title' obtiene la máxima puntuación</param>
         /// <returns></returns>
-        private float GetSimilarity(string pOriginal, string pCandidato, Disambiguation.Property.Type pType, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, float pMinScore, float pMaxScore, int? pMaxNumWordsTitle = null)
+        private float GetSimilarity(string pOriginal, string pCandidato, Disambiguation.Property.Type pType, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, float pMinScore, float pMaxScore, int? pMaxNumWordsTitle = null)
         {
             float similarity = 0;
             switch (pType)
@@ -2445,7 +2445,7 @@ namespace API_DISCOVER.Utility
         public Dictionary<string, List<DiscoverLinkData.PropertyData>> ExternalIntegration(ref bool pHasChanges,
             ref ReconciliationData pReconciliationData, ref DiscoverLinkData pDiscoverLinkData, ref Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner,
             Dictionary<string, Dictionary<string, float>> pNamesScore, RohGraph pOntologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> pEntidadesReconciliadasConIntegracionExterna,
-            Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, string pScopusApiKey, string pScopusUrl, string pCrossrefUserAgent, string pWOSAuthorization,
+            Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, string pScopusApiKey, string pScopusUrl, string pCrossrefUserAgent, string pWOSAuthorization,
             float pMinScore, float pMaxScore, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword, ICallUrisFactoryApiService pCallUrisFactoryApiService, bool pApplyReconcilation = true)
 
         {
@@ -2596,7 +2596,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
         /// <returns>Diccionario con las entidades y los identificadores extraídos y sus provenencias</returns>
         private Dictionary<string, List<DiscoverLinkData.PropertyData>> ExternalIntegrationExtractIdentifiers(ref bool pHasChanges, RohGraph pExternalGraph, RohGraph pOntologyGraph, ref RohGraph pDataGraph,
-            Dictionary<string, string> pListaEntidadesReconciliadas, RohRdfsReasoner pReasoner, out Dictionary<string, string> pListaEntidadesRDFEnriquecer, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, float pMinScore, float pMaxScore)
+            Dictionary<string, string> pListaEntidadesReconciliadas, RohRdfsReasoner pReasoner, out Dictionary<string, string> pListaEntidadesRDFEnriquecer, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, float pMinScore, float pMaxScore)
         {
             Dictionary<string, List<DiscoverLinkData.PropertyData>> identifiersDiscover = new Dictionary<string, List<DiscoverLinkData.PropertyData>>();
 
@@ -2917,7 +2917,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
         /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de ORCID</returns>
-        private ExternalIntegrationData ExternalIntegrationORCID(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
+        private ExternalIntegrationData ExternalIntegrationORCID(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
             string provenanceId = new ORCID_API().Id;
             RohGraph externalGraph = new RohGraph();
@@ -3137,7 +3137,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
         /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de SCOPUS</returns>
-        private ExternalIntegrationData ExternalIntegrationSCOPUS(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGloabl, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, string pScopusApiKey, string pScopusUrl, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
+        private ExternalIntegrationData ExternalIntegrationSCOPUS(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGloabl, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, string pScopusApiKey, string pScopusUrl, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
             string provenanceId = new SCOPUS_API().Id;
             RohGraph externalGraph = new RohGraph();
@@ -3322,7 +3322,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
         /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de DBLP</returns>
-        private ExternalIntegrationData ExternalIntegrationDBLP(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
+        private ExternalIntegrationData ExternalIntegrationDBLP(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
             string provenanceId = new DBLP_API().Id;
             RohGraph externalGraph = new RohGraph();
@@ -3596,7 +3596,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
         /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de CROSSREF</returns>
-        private ExternalIntegrationData ExternalIntegrationCROSSREF(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, string pCrossrefUserAgent, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
+        private ExternalIntegrationData ExternalIntegrationCROSSREF(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, string pCrossrefUserAgent, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
             string provenanceId = new CROSSREF_API().Id;
             RohGraph externalGraph = new RohGraph();
@@ -3806,7 +3806,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
         /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de SCOPUS</returns>
-        private ExternalIntegrationData ExternalIntegrationPUBMED(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
+        private ExternalIntegrationData ExternalIntegrationPUBMED(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
             string provenanceId = new PUBMED_API().Id;
             RohGraph externalGraph = new RohGraph();
@@ -3994,7 +3994,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
         /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de SCOPUS</returns>
-        private ExternalIntegrationData ExternalIntegrationWOS(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, string pWOSAuthorization, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
+        private ExternalIntegrationData ExternalIntegrationWOS(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, string pWOSAuthorization, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
             string provenanceId = new WOS_API().Id;
             RohGraph externalGraph = new RohGraph();
@@ -4205,7 +4205,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
         /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de SCOPUS</returns>
-        private ExternalIntegrationData ExternalIntegrationRECOLECTA(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
+        private ExternalIntegrationData ExternalIntegrationRECOLECTA(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
             string provenanceId = new RECOLECTA_API().Id;
             RohGraph externalGraph = new RohGraph();
@@ -4377,7 +4377,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pMaxScore">Puntuación mínima para considerar una entidad candidata como correcta</param>
         /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>Grafo con los datos obtenidos de SCOPUS</returns>
-        private ExternalIntegrationData ExternalIntegrationDOAJ(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
+        private ExternalIntegrationData ExternalIntegrationDOAJ(Dictionary<string, HashSet<string>> pEntitiesRdfTypes, RohGraph pDataGraph, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, float pMinScore, float pMaxScore, ICallUrisFactoryApiService pCallUrisFactoryApiService)
         {
             string provenanceId = new DOAJ_API().Id;
             RohGraph externalGraph = new RohGraph();
@@ -4677,7 +4677,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pGraph">Grafo</param>
         /// <param name="pUsername">Usuario</param>
         /// <param name="pPassword">Password</param>
-        public void EquivalenceDiscover(RohGraph pOntologyGraph, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, ref Dictionary<string, Dictionary<string, float>> pListaEntidadesReconciliadasDudosas, Dictionary<string, HashSet<string>> pDiscardDissambiguations, string pUnidataDomain, float pMinScore, float pMaxScore, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
+        public void EquivalenceDiscover(RohGraph pOntologyGraph, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, ref Dictionary<string, Dictionary<string, float>> pListaEntidadesReconciliadasDudosas, Dictionary<string, HashSet<string>> pDiscardDissambiguations, string pUnidataDomain, float pMinScore, float pMaxScore, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
         {
             Dictionary<string, string> equivalences = new Dictionary<string, string>();
 
@@ -5488,7 +5488,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pDiscoverCacheGlobal">Caché global para el descubrimiento</param>
         /// <param name="pMinScore">Score mínimo para devolver valor</param>
         /// <returns>Scores</returns>
-        private float GetNameSimilarity(string pNombreA, string pNombreB, DiscoverCache pDiscoverCache, DiscoverCache pDiscoverCacheGlobal, float pMinScore)
+        private float GetNameSimilarity(string pNombreA, string pNombreB, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, float pMinScore)
         {
             float indice_desplazamiento = 5;
             float scoreMin = 0.5f;
@@ -5568,7 +5568,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pNameB">Nombre B</param>
         /// <param name="pDiscoverCacheGlobal">Caché Global</param>
         /// <returns>Coeficiente</returns>
-        private float CompareSingleName(string pNameA, string pNameB, DiscoverCache pDiscoverCacheGlobal)
+        private float CompareSingleName(string pNameA, string pNameB, DiscoverCacheGlobal pDiscoverCacheGlobal)
         {
             string key = $"{pNameA}_{pNameB}";
             if (pDiscoverCacheGlobal.CoefJackard.ContainsKey(key))
@@ -5591,7 +5591,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pNgramSize">Tamaño de los ngramas</param>
         /// <param name="pDiscoverCacheGlobal">Caché global</param>
         /// <returns>Lista de ngramas</returns>
-        private HashSet<string> GetNGramas(string pText, int pNgramSize, DiscoverCache pDiscoverCacheGlobal)
+        private HashSet<string> GetNGramas(string pText, int pNgramSize, DiscoverCacheGlobal pDiscoverCacheGlobal)
         {
             string key = $"{pText}_{pNgramSize}";
             if (pDiscoverCacheGlobal.NGrams.ContainsKey(key))
@@ -5659,7 +5659,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pPropername">Indica si es un nombre propio (personas)</param>
         /// <param name="pReplaceNumbers">Reemplazar numeros</param>
         /// <returns>Texto normalizado</returns>
-        private string NormalizeName(string text, DiscoverCache pDiscoverCacheGlobal, bool eliminaracentos = true, bool pPropername = true, bool pReplaceNumbers = true)
+        private string NormalizeName(string text, DiscoverCacheGlobal pDiscoverCacheGlobal, bool eliminaracentos = true, bool pPropername = true, bool pReplaceNumbers = true)
         {
             string key = $"{eliminaracentos}{pPropername}{pReplaceNumbers}{text}";
             if (pDiscoverCacheGlobal.NormalizedNames.ContainsKey(key))

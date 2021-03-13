@@ -23,6 +23,8 @@ using VDS.RDF.Query;
 using VDS.RDF.Update;
 using System.Threading;
 using API_DISCOVER.Models.Logging;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.InteropServices;
 
 namespace API_DISCOVER
 {
@@ -116,7 +118,7 @@ namespace API_DISCOVER
         public static Dictionary<string, string> personsWithName { get; set; }
 
         //TODO mover a otro sitio
-        public static DiscoverCache discoverCacheGlobal = new DiscoverCache();
+        public static DiscoverCacheGlobal discoverCacheGlobal { get; set; }
 
         /// <summary>
         /// Realiza el proceso completo de desubrimiento sobre un RDF
@@ -211,6 +213,55 @@ namespace API_DISCOVER
             if (personsWithName == null)
             {
                 personsWithName = discoverUtility.LoadPersonWithName(SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
+            }
+
+            //TODO revisar
+            if(discoverCacheGlobal==null)
+            {
+                discoverCacheGlobal = new DiscoverCacheGlobal();
+            }else
+            {                
+                //Aprox 100MB
+                if(discoverCacheGlobal.CoefJackard.Count>2400000)
+                {
+                    discoverCacheGlobal.CoefJackard.Clear();
+                }
+                if (discoverCacheGlobal.NGrams.Count > 500000)
+                {
+                    discoverCacheGlobal.NGrams.Clear();
+                }
+                if (discoverCacheGlobal.NormalizedNames.Count > 500000)
+                {
+                    discoverCacheGlobal.NormalizedNames.Clear();
+                }
+                //long size = 0;
+                //long size1 = 0;
+                //long size2 = 0;
+                //long size3 = 0;
+                //using (Stream s = new MemoryStream())
+                //{
+                //    BinaryFormatter formatter = new BinaryFormatter();
+                //    formatter.Serialize(s, discoverCacheGlobal);
+                //    size = s.Length;
+                //}
+                //using (Stream s = new MemoryStream())
+                //{
+                //    BinaryFormatter formatter = new BinaryFormatter();
+                //    formatter.Serialize(s, discoverCacheGlobal.CoefJackard);
+                //    size1 = s.Length;
+                //}
+                //using (Stream s = new MemoryStream())
+                //{
+                //    BinaryFormatter formatter = new BinaryFormatter();
+                //    formatter.Serialize(s, discoverCacheGlobal.NGrams);
+                //    size2 = s.Length;
+                //}
+                //using (Stream s = new MemoryStream())
+                //{
+                //    BinaryFormatter formatter = new BinaryFormatter();
+                //    formatter.Serialize(s, discoverCacheGlobal.NormalizedNames);
+                //    size3 = s.Length;
+                //}                
             }
 
             if (!pDiscoverItem.DissambiguationProcessed)
@@ -533,7 +584,7 @@ namespace API_DISCOVER
                     Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux;
                     Dictionary<string, HashSet<string>> discardDissambiguations = new Dictionary<string, HashSet<string>>();
                     DiscoverCache discoverCache = new DiscoverCache();
-                    DiscoverCache discoverCacheGlobal = new DiscoverCache();
+                    DiscoverCacheGlobal discoverCacheGlobal = new DiscoverCacheGlobal();
                     RohGraph ontologyGraph = callEtlApiService.CallGetOntology();
                     RohRdfsReasoner reasoner = new RohRdfsReasoner();
                     reasoner.Initialise(ontologyGraph);
