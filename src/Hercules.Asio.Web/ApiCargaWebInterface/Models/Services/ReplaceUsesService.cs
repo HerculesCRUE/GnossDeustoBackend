@@ -97,16 +97,19 @@ namespace ApiCargaWebInterface.Models.Services
             int last = htmlContent.IndexOf(DirectivesList.EndDirective, first);
             string url = htmlContent.Substring(first, last - first).Trim();
             TokenBearer token = null;
-            if (url.Contains(_configUrlService.GetUrl()))
+            if (url.Contains(_configUrlService.GetUrl()) || url.Contains("{URL_APICARGA}"))
             {
+                url = url.Replace("{URL_APICARGA}", _configUrlService.GetUrl());
                 token = _callTokenService.CallTokenCarga();
             }
-            else if (url.Contains(_configUrlService.GetUrlDocumentacion()))
+            else if (url.Contains(_configUrlService.GetUrlDocumentacion()) || url.Contains("{URL_DOCUMENTACION}"))
             {
+                url = url.Replace("{URL_DOCUMENTACION}", _configUrlService.GetUrlDocumentacion());
                 token = _callTokenService.CallTokenApiDocumentacion();
             }
-            else if (url.Contains(_configUrlCronService.GetUrl()))
+            else if (url.Contains(_configUrlCronService.GetUrl())||url.Contains("{URL_CRON}"))
             {
+                url = url.Replace("{URL_CRON}", _configUrlCronService.GetUrl());
                 token = _callTokenService.CallTokenCron();
             }
             string result = _callService.CallGetApi(url, "", token);
@@ -124,11 +127,9 @@ namespace ApiCargaWebInterface.Models.Services
             first = first + DirectivesList.Sparql.Length;
             int last = htmlContent.IndexOf(DirectivesList.EndDirective, first);
             string queryS = $"{htmlContent.Substring(first, last - first)}";
-
-            string url = $"{_configUrlService.GetSaprqlEndpoint()}?{_configUrlService.GetSparqlQuery()}={queryS}&format=text/csv";
+            queryS = queryS.Replace("{URL_GRAPH}", _configUrlService.GetGraph());
             string consulta = HttpUtility.UrlEncode(queryS);
             consulta = $"query={consulta}&format=text/csv";
-            //string result = _callService.CallGetApi(url, "");
             string result = _callService.CallPostApi(_configUrlService.GetSaprqlEndpoint(),"",consulta, sparql : true);
             return result;
         }

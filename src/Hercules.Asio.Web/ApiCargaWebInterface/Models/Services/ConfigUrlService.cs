@@ -20,6 +20,7 @@ namespace ApiCargaWebInterface.Models.Services
         public string Proxy { get; set; }
         public string SaprqlEndpoint { get; set; }
         public string SparqlQuery { get; set; }
+        public string Graph { get; set; }
 
         private IConfiguration _configuration { get; set; }
 
@@ -144,6 +145,27 @@ namespace ApiCargaWebInterface.Models.Services
                 SaprqlEndpoint = connectionString;
             }
             return SaprqlEndpoint;
+        }
+
+        ///<summary>
+        ///Obtiene el gráfo configurado en Sparql:Graph del fichero appsettings.json
+        ///</summary>
+        public string GetGraph()
+        {
+            if (string.IsNullOrEmpty(Graph))
+            {
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("Graph"))
+                {
+                    Graph = environmentVariables["Graph"] as string;
+                }
+                else
+                {
+                    Graph = _configuration["Sparql:Graph"];
+                }
+
+            }
+            return Graph;
         }
 
         /// <summary>
