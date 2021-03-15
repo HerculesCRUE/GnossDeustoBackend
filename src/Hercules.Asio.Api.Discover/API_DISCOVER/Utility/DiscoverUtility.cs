@@ -5602,8 +5602,8 @@ namespace API_DISCOVER.Utility
             if (scores.Count > 0)
             {
                 float similarity = scores.Sum() / maxLength;
-                //TODO cambiar por >pMinScore cuando se resuelva lo de las iniciales
-                if (similarity >= pMinScore)
+                //TODO cambiar por >=pMinScore cuando se resuelva lo de las iniciales
+                if (similarity > 0.75f)
                 {
                     return similarity;
                 }
