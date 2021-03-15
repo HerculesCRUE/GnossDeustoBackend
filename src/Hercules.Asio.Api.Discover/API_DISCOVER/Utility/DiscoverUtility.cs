@@ -657,7 +657,7 @@ namespace API_DISCOVER.Utility
                     pNamesScore[nombre] = pNamesScore[nombre].OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
                     if (pNamesScore[nombre].Count > 10)
                     {
-                        pNamesScore[nombre].ToList().GetRange(0, 10).ToDictionary(x => x.Key, x => x.Value);
+                        pNamesScore[nombre]=pNamesScore[nombre].ToList().GetRange(0, 10).ToDictionary(x => x.Key, x => x.Value);
                     }
                 }
             }
@@ -5602,8 +5602,7 @@ namespace API_DISCOVER.Utility
             if (scores.Count > 0)
             {
                 float similarity = scores.Sum() / maxLength;
-                //TODO cambiar por >=pMinScore cuando se resuelva lo de las iniciales
-                if (similarity > 0.75f)
+                if (similarity >= pMinScore)
                 {
                     return similarity;
                 }
