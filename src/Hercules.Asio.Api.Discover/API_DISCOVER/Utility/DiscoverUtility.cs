@@ -5602,7 +5602,8 @@ namespace API_DISCOVER.Utility
             if (scores.Count > 0)
             {
                 float similarity = scores.Sum() / maxLength;
-                if (similarity >= pMinScore)
+                //TODO cAmbiar por if (similarity >= pMinScore)
+                if (similarity >= 0.75f)
                 {
                     return similarity;
                 }
