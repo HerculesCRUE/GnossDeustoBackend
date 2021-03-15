@@ -117,6 +117,9 @@ namespace API_DISCOVER
         //TODO mover a otro sitio
         public static Dictionary<string, string> personsWithName { get; set; }
 
+        //TODO mover a otro sitio rdftype,title norm,id
+        public static Dictionary<string, Dictionary<string,HashSet<string>>> entitiesWithTitle { get; set; }
+
         //TODO mover a otro sitio
         public static DiscoverCacheGlobal discoverCacheGlobal { get; set; }
 
@@ -215,8 +218,13 @@ namespace API_DISCOVER
                 personsWithName = discoverUtility.LoadPersonWithName(SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
             }
 
+            if (entitiesWithTitle == null)
+            {
+                entitiesWithTitle = discoverUtility.LoadEntitiesWithTitle(SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
+            }
+
             //TODO revisar
-            if(discoverCacheGlobal==null)
+            if (discoverCacheGlobal==null)
             {
                 discoverCacheGlobal = new DiscoverCacheGlobal();
             }else
@@ -302,10 +310,10 @@ namespace API_DISCOVER
                     discoverUtility.ReconciliateRDF(ref hasChanges, ref reconciliationData, ontologyGraph, ref dataGraph, reasoner, discardDissambiguations, discoverCache,discoverCacheGlobal, MinScore, MaxScore);
 
                     //3.- Realizamos la reconciliación con los datos de la BBDD
-                    discoverUtility.ReconciliateBBDD(ref hasChanges, ref reconciliationData, out reconciliationEntitiesProbability, ontologyGraph, ref dataGraph, reasoner, namesScore, discardDissambiguations, discoverCache,discoverCacheGlobal, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
+                    discoverUtility.ReconciliateBBDD(ref hasChanges, ref reconciliationData, out reconciliationEntitiesProbability, ontologyGraph, ref dataGraph, reasoner, namesScore, entitiesWithTitle, discardDissambiguations, discoverCache,discoverCacheGlobal, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
 
                     //4.- Realizamos la reconciliación con los datos de las integraciones externas
-                    discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref reconciliationEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache,discoverCacheGlobal, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword,pCallUrisFactoryApiService);
+                    //discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref reconciliationEntitiesProbability, ref dataGraph, reasoner, namesScore,entitiesWithTitle, ontologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache,discoverCacheGlobal, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword,pCallUrisFactoryApiService);
 
                     //Eliminamos de las probabilidades aquellos que ya estén reconciliados
                     foreach (string key in reconciliationData.reconciliatedEntityList.Keys)
@@ -397,7 +405,34 @@ namespace API_DISCOVER
                     {
                         string s = sparqlResult["s"].ToString();
                         string nombre = sparqlResult["name"].ToString();
+                        if(sparqlResult["name"] is ILiteralNode)
+                        {
+                            nombre = ((ILiteralNode)sparqlResult["name"]).Value;
+                        }
                         personsWithName[s] = nombre;
+                    }
+
+                    //TODO Lógica titles
+                    SparqlResultSet sparqlResultSetTitles = (SparqlResultSet)pDiscoverResult.dataGraph.ExecuteQuery("select * where {?s a ?rdftype. ?s <http://purl.org/roh#title> ?title}");
+                    foreach (SparqlResult sparqlResult in sparqlResultSetTitles.Results)
+                    {
+                        string s = sparqlResult["s"].ToString();
+                        string rdftype = sparqlResult["rdftype"].ToString();
+                        string title = sparqlResult["title"].ToString();
+                        if (sparqlResult["title"] is ILiteralNode)
+                        {
+                            title = ((ILiteralNode)sparqlResult["title"]).Value;
+                        }
+                        title  = DiscoverUtility.NormalizeTitle(title);
+                        if (!entitiesWithTitle.ContainsKey(rdftype))
+                        {
+                            entitiesWithTitle.Add(rdftype, new Dictionary<string, HashSet<string>>());
+                        }
+                        if (!entitiesWithTitle[rdftype].ContainsKey(title))
+                        {
+                            entitiesWithTitle[rdftype].Add(title, new HashSet<string>());
+                        }
+                        entitiesWithTitle[rdftype][title].Add(s);
                     }
 
                     //TODO descomentar cuando esté habilitaado Unidata
@@ -599,7 +634,7 @@ namespace API_DISCOVER
                     //Obtención de la integración externa
                     ReconciliationData reconciliationData = new ReconciliationData();
                     DiscoverLinkData discoverLinkData = new DiscoverLinkData();
-                    Dictionary<string, List<DiscoverLinkData.PropertyData>> integration = discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache, discoverCacheGlobal, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword, pCallUrisFactoryApiService,false);
+                    Dictionary<string, List<DiscoverLinkData.PropertyData>> integration = discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore,entitiesWithTitle, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache, discoverCacheGlobal, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword, pCallUrisFactoryApiService,false);
 
                     //Limpiamos 'integration' para no insertar triples en caso de que ya estén cargados
                     foreach (string entity in integration.Keys.ToList())

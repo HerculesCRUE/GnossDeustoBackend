@@ -81,10 +81,13 @@ namespace API_DISCOVER.Utility
             //Datos para trabajar con la reconciliación
             ReconciliationData reconciliationData = new ReconciliationData();
 
+            //TODO
             //Obtenemos los nombres de todas las personas que haya cargadas en la BBDD
             //Clave ID,
             //Valor nombre
             Dictionary<string, string> personsWithName = LoadPersonWithName(pSPARQLEndpoint, pSPARQLGraph, pSPARQLQueryParam, pSPARQLUsername, pSPARQLPassword);
+
+            Dictionary<string, Dictionary<string, HashSet<string>>> entitiesWithTitle = LoadEntitiesWithTitle(pSPARQLEndpoint, pSPARQLGraph, pSPARQLQueryParam, pSPARQLUsername, pSPARQLPassword);
 
             bool hasChanges = true;
 
@@ -126,7 +129,7 @@ namespace API_DISCOVER.Utility
                 ReconciliateRDF(ref hasChanges, ref reconciliationData, pOntologyGraph, ref pDataGraph, reasoner, null, discoverCache, discoverCacheGlobal, pMinScore, pMaxScore);
 
                 //3.- Realizamos la reconciliación con los datos de la BBDD
-                ReconciliateBBDD(ref hasChanges, ref reconciliationData, out pReconciliationEntitiesProbability, pOntologyGraph, ref pDataGraph, reasoner, namesScore, null, discoverCache, discoverCacheGlobal, pMinScore, pMaxScore, pSPARQLEndpoint, pSPARQLQueryParam, pSPARQLGraph, pSPARQLUsername, pSPARQLPassword);
+                ReconciliateBBDD(ref hasChanges, ref reconciliationData, out pReconciliationEntitiesProbability, pOntologyGraph, ref pDataGraph, reasoner, namesScore, entitiesWithTitle, null, discoverCache, discoverCacheGlobal, pMinScore, pMaxScore, pSPARQLEndpoint, pSPARQLQueryParam, pSPARQLGraph, pSPARQLUsername, pSPARQLPassword);
 
                 //Eliminamos de las probabilidades aquellos que ya estén reconciliados
                 foreach (string key in reconciliationData.reconciliatedEntityList.Keys)
@@ -165,7 +168,7 @@ namespace API_DISCOVER.Utility
             ReconciliationData reconciliationData = new ReconciliationData();
             DiscoverLinkData discoverLinkData = new DiscoverLinkData();
             Dictionary<string, Dictionary<string, float>> reconciliationEntitiesProbability = new Dictionary<string, Dictionary<string, float>>();
-            return ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref reconciliationEntitiesProbability, ref pDataGraph, reasoner, null, pOntologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux, null, discoverCache, discoverCacheGlobal, pScopusApiKey, pScopusUrl, pCrossrefUserAgent, pWOSAuthorization, pMinScore, pMaxScore, null, null, null, null, null, pCallUrisFactoryApiService, false);
+            return ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref reconciliationEntitiesProbability, ref pDataGraph, reasoner, null,null, pOntologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux, null, discoverCache, discoverCacheGlobal, pScopusApiKey, pScopusUrl, pCrossrefUserAgent, pWOSAuthorization, pMinScore, pMaxScore, null, null, null, null, null, pCallUrisFactoryApiService, false);
 
         }
 
@@ -726,6 +729,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pListaEntidadesOmitir">lista de entidades que hay que omitir al buscar candidatos</param>
         /// <param name="pDisambiguationDataRdf">datos de desambiguación del RDF</param>
         /// <param name="pNamesScore">Diccionario con los nombres del RDF y las entidades de la BB con sus scores</param>
+        /// <param name="pEntitiesWithTitle">Entidades con su título</param>
         /// <param name="pSPARQLEndpoint">Endpoint SPARQL</param>
         /// <param name="pQueryParam">Query param</param>
         /// <param name="pGraph">Grafo</param>
@@ -733,7 +737,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pPassword">Password</param>
         /// <param name="pDiscoverCache">Caché de Discover</param>
         /// <returns>Diccionario con los candidatos encontrados y sus datos para apoyar la desambiguación</returns>
-        private Dictionary<string, List<DisambiguationData>> GetDisambiguationDataBBDD(out Dictionary<string, string> pEntitiesRdfTypeBBDD, Dictionary<string, HashSet<string>> pEntitiesRdfType, HashSet<string> pListaEntidadesOmitir, Dictionary<string, List<DisambiguationData>> pDisambiguationDataRdf, Dictionary<string, Dictionary<string, float>> pNamesScore, DiscoverCache pDiscoverCache, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
+        private Dictionary<string, List<DisambiguationData>> GetDisambiguationDataBBDD(out Dictionary<string, string> pEntitiesRdfTypeBBDD, Dictionary<string, HashSet<string>> pEntitiesRdfType, HashSet<string> pListaEntidadesOmitir, Dictionary<string, List<DisambiguationData>> pDisambiguationDataRdf, Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, Dictionary<string, HashSet<string>>> pEntitiesWithTitle, DiscoverCache pDiscoverCache, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
         {
             Dictionary<string, List<DisambiguationData>> disambiguationDataBBDD = new Dictionary<string, List<DisambiguationData>>();
             pEntitiesRdfTypeBBDD = new Dictionary<string, string>();
@@ -744,7 +748,7 @@ namespace API_DISCOVER.Utility
                     foreach (DisambiguationData disambiguationData in pDisambiguationDataRdf[entityID])
                     {
                         Dictionary<string, string> rdfTypesReturn;
-                        Dictionary<string, DisambiguationData> datosCandidatos = GetEntityDataForReconciliationBBDD(pEntitiesRdfType[entityID], out rdfTypesReturn, disambiguationData, pNamesScore, pDiscoverCache, pSPARQLEndpoint, pQueryParam, pGraph, pUsername, pPassword);
+                        Dictionary<string, DisambiguationData> datosCandidatos = GetEntityDataForReconciliationBBDD(pEntitiesRdfType[entityID], out rdfTypesReturn, disambiguationData, pNamesScore, pEntitiesWithTitle, pDiscoverCache, pSPARQLEndpoint, pQueryParam, pGraph, pUsername, pPassword);
                         foreach (string key in datosCandidatos.Keys)
                         {
                             if (!disambiguationDataBBDD.ContainsKey(key))
@@ -767,6 +771,7 @@ namespace API_DISCOVER.Utility
         /// <param name="rdfTypesReturn">rdf:type de los candidatos</param>
         /// <param name="pDisambiguationData">Datos de desambiguación</param>
         /// <param name="pNamesScore">Diccionario con los nombres del RDF y las entidades de la BB con sus scores</param>
+        /// <param name="pEntitiesWithTitle">Entidades con su título</param>
         /// <param name="pDiscoverCache">Caché de Discover</param>
         /// <param name="pSPARQLEndpoint">Endpoint SPARQL</param>
         /// <param name="pQueryParam">Query param</param>
@@ -774,7 +779,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pUsername">Usuario</param>
         /// <param name="pPassword">Password</param>
         /// <returns></returns>
-        private Dictionary<string, DisambiguationData> GetEntityDataForReconciliationBBDD(HashSet<string> pRdfTypes, out Dictionary<string, string> rdfTypesReturn, DisambiguationData pDisambiguationData, Dictionary<string, Dictionary<string, float>> pNamesScore, DiscoverCache pDiscoverCache, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
+        private Dictionary<string, DisambiguationData> GetEntityDataForReconciliationBBDD(HashSet<string> pRdfTypes, out Dictionary<string, string> rdfTypesReturn, DisambiguationData pDisambiguationData, Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, Dictionary<string, HashSet<string>>> pEntitiesWithTitle, DiscoverCache pDiscoverCache, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
         {
             rdfTypesReturn = new Dictionary<string, string>();
             Dictionary<string, DisambiguationData> returnDisambiguationData = new Dictionary<string, DisambiguationData>();
@@ -881,8 +886,6 @@ namespace API_DISCOVER.Utility
                         }
                         else if (dataProperty.property.type == Disambiguation.Property.Type.title)
                         {
-                            selectProperty = $"\n\t\t\t\tselect ?s (count(?p)*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")}) as {varScore} where\n\t\t\t\t{{";
-                            orderProperty = $"\n\t\t\t\t}} group by ?s order by desc (count(?p)*{dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")})   limit 10";
                         }
                         else
                         {
@@ -950,52 +953,37 @@ namespace API_DISCOVER.Utility
                         }
                         if (dataProperty.property.type == Disambiguation.Property.Type.title)
                         {
+                            //TODO vacío
                             string text = dataProperty.values.First();
                             if (text.StartsWith("\""))
                             {
                                 text = text.Substring(1, text.LastIndexOf("\"") - 1);
                             }
-                            text = text.ToLower();
-                            string filter = "lcase(str(?p))";
-
-                            Dictionary<char, List<char>> charsSubstitute = new Dictionary<char, List<char>>();
-                            List<char> charsRemove = new List<char>();
-                            foreach (char value in charRemovePropertyTitle.Keys)
+                            text = NormalizeTitle(text);
+                            whereProperty = "";
+                            List<string> filtersTitle = new List<string>();
+                            foreach (string rdfType in pRdfTypes)
                             {
-                                if (charRemovePropertyTitle[value].HasValue)
+                                if (pEntitiesWithTitle.ContainsKey(rdfType) && pEntitiesWithTitle[rdfType].ContainsKey(text))
                                 {
-                                    text = text.Replace(value, charRemovePropertyTitle[value].Value);
-                                    if (!charsSubstitute.ContainsKey(charRemovePropertyTitle[value].Value))
+                                    foreach (string id in pEntitiesWithTitle[rdfType][text])
                                     {
-                                        charsSubstitute.Add(charRemovePropertyTitle[value].Value, new List<char>());
+                                        filtersTitle.Add(@$"  {{
+					                                BIND(<{id}> as ?s)
+					                                BIND({dataProperty.property.scorePositive.Value.ToString().Replace(",", ".")} as ?scoreMandatory)
+				                                }}");
                                     }
-                                    charsSubstitute[charRemovePropertyTitle[value].Value].Add(value);
+                                    whereProperty = string.Join("UNION", filtersTitle);
                                 }
-                                else
-                                {
-                                    text = text.Replace(value.ToString(), "");
-                                    charsRemove.Add(value);
-                                }
-
                             }
-
-                            foreach (char value in charsSubstitute.Keys)
+                            if(filtersTitle.Count>0)
                             {
-                                if (charsSubstitute[value].Count > 1)
-                                {
-                                    filter = $"REPLACE({filter},'[{string.Join("", charsSubstitute[value]).Replace("\\", "\\\\").Replace("'", "\\'").Replace("[", "\\\\[").Replace("]", "\\\\]").Replace("-", "\\\\-").Replace("\n", "\\\\n").Replace("\t", "\\\\t")}]','{value}')";
-                                }
-                                else
-                                {
-                                    filter = $"REPLACE({filter},'{charsSubstitute[value].First().ToString().Replace("\\", "\\\\").Replace("'", "\\'").Replace("[", "\\\\[").Replace("]", "\\\\]").Replace("-", "\\\\-").Replace("\n", "\\\\n").Replace("\t", "\\\\t")}','{value}')";
-                                }
+                                whereProperty = string.Join("UNION", filtersTitle);
                             }
-                            if (charsRemove.Count > 0)
+                            else
                             {
-                                filter = $"REPLACE({filter},'[{string.Join("", charsRemove).Replace("\\", "\\\\").Replace("'", "\\'").Replace("[", "\\\\[").Replace("]", "\\\\]").Replace("-", "\\\\-").Replace("\n", "\\\\n").Replace("\t", "\\\\t")}]','')";
+                                break;
                             }
-
-                            whereProperty += $"\n\t\t\t\t\tFILTER({filter} ='{text}')";
                         }
                         else if (dataProperty.property.type == Disambiguation.Property.Type.name)
                         {
@@ -1017,6 +1005,9 @@ namespace API_DISCOVER.Utility
 				                                }}");
                                 }
                                 whereProperty = string.Join("UNION", filtersName);
+                            }else
+                            {
+                                break;
                             }
 
                         }
@@ -1057,7 +1048,10 @@ namespace API_DISCOVER.Utility
                         string filterProperty = selectProperty + whereProperty + orderProperty;
                         if (dataProperty.property.mandatory)
                         {
-                            whereSujetosMandatory.Add($"\n\t\t\t{{{ filterProperty}\n\t\t\t}}");
+                            if (filterProperty.Count() > 0)
+                            {
+                                whereSujetosMandatory.Add($"\n\t\t\t{{{ filterProperty}\n\t\t\t}}");
+                            }
                         }
                         else
                         {
@@ -1169,6 +1163,52 @@ namespace API_DISCOVER.Utility
             }
             return personsWithName;
         }
+        /// <summary>
+        /// Obtiene los titulos de todas las entidades
+        /// </summary>
+        /// <param name="pSPARQLEndpoint">Endpoint SPARQL</param>
+        /// <param name="pGraph">Grafo en el que hacer la consulta</param>
+        /// <param name="pQueryParam">Parámetro para la query</param>
+        /// <param name="pUsername">Usuario</param>
+        /// <param name="pPassword">Password</param>
+        /// <returns></returns>
+        public Dictionary<string, Dictionary<string, HashSet<string>>> LoadEntitiesWithTitle(string pSPARQLEndpoint, string pGraph, string pQueryParam, string pUsername, string pPassword)
+        {
+            Dictionary<string, Dictionary<string, HashSet<string>>> entitiesWithTitle = new Dictionary<string, Dictionary<string, HashSet<string>>>();
+            int numPagination = 10000;
+            int offset = 0;
+            int numResulados = numPagination;
+            while (numResulados == numPagination)
+            {
+                string consulta = $"select * where{{select * where {{?s a ?rdftype. ?s <http://purl.org/roh#title> ?title}}order by ?s }}offset {offset} limit {numPagination}";
+                SparqlObject sparqlObject = mSparqlUtility.SelectData(pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
+                numResulados = sparqlObject.results.bindings.Count;
+                if (sparqlObject.results.bindings.Count > 0)
+                {
+                    offset += numPagination;
+                    foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+                    {
+                        string s = row["s"].value;
+                        string rdftype = row["rdftype"].value;
+                        string title = row["title"].value;
+
+                        title=NormalizeTitle(title);
+
+                        if (!entitiesWithTitle.ContainsKey(rdftype))
+                        {
+                            entitiesWithTitle.Add(rdftype,new Dictionary<string, HashSet<string>>());
+                        }
+                        if (!entitiesWithTitle[rdftype].ContainsKey(title))
+                        {
+                            entitiesWithTitle[rdftype].Add(title,new HashSet<string>());
+                        }
+                        entitiesWithTitle[rdftype][title].Add(s);
+                    }
+                }
+            }
+            return entitiesWithTitle;
+        }
+
 
         #endregion
 
@@ -1358,6 +1398,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pDataGraph">Grafo en local con los datos del RDF</param>
         /// <param name="pReasoner">Razonador</param>
         /// <param name="pNamesScore">Diccionario con los nombres del RDF y las entidades de la BB con sus scores</param>
+        /// <param name="pEntitiesWithTitle">Entidades con su título</param>
         /// <param name="pDiscardDissambiguations">Descartes de desambiguación</param>
         /// <param name="pDiscoverCache">Caché de discover</param>
         /// <param name="pDiscoverCacheGlobal">Caché global de discover</param>
@@ -1369,7 +1410,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pUsername">Usuario</param>
         /// <param name="pPassword">Password</param>
         /// <returns>Diccioario con las entidades reconciliadas</returns>
-        public Dictionary<string, ReconciliationData.ReconciliationScore> ReconciliateBBDD(ref bool pHasChanges, ref ReconciliationData pReconciliationData, out Dictionary<string, Dictionary<string, float>> pListaEntidadesReconciliadasDudosas, RohGraph pOntologyGraph, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, float pMinScore, float pMaxScore, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
+        public Dictionary<string, ReconciliationData.ReconciliationScore> ReconciliateBBDD(ref bool pHasChanges, ref ReconciliationData pReconciliationData, out Dictionary<string, Dictionary<string, float>> pListaEntidadesReconciliadasDudosas, RohGraph pOntologyGraph, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, Dictionary<string, HashSet<string>>> pEntitiesWithTitle, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, float pMinScore, float pMaxScore, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
         {
             Dictionary<string, ReconciliationData.ReconciliationScore> discoveredEntityList = new Dictionary<string, ReconciliationData.ReconciliationScore>();
             Dictionary<string, HashSet<string>> entitiesRdfTypes;
@@ -1382,7 +1423,7 @@ namespace API_DISCOVER.Utility
             while (hayQueReprocesar)
             {
                 Dictionary<string, string> entitiesRdfTypeBBDD;
-                Dictionary<string, List<DisambiguationData>> disambiguationDataBBDD = GetDisambiguationDataBBDD(out entitiesRdfTypeBBDD, entitiesRdfType.ToDictionary(x => x.Key, x => new HashSet<string>() { x.Value }), new HashSet<string>(pReconciliationData.reconciliatedEntityList.Keys.Union(pReconciliationData.reconciliatedEntityList.Values)), disambiguationDataRdf, pNamesScore, pDiscoverCache, pSPARQLEndpoint, pQueryParam, pGraph, pUsername, pPassword);
+                Dictionary<string, List<DisambiguationData>> disambiguationDataBBDD = GetDisambiguationDataBBDD(out entitiesRdfTypeBBDD, entitiesRdfType.ToDictionary(x => x.Key, x => new HashSet<string>() { x.Value }), new HashSet<string>(pReconciliationData.reconciliatedEntityList.Keys.Union(pReconciliationData.reconciliatedEntityList.Values)), disambiguationDataRdf, pNamesScore,pEntitiesWithTitle, pDiscoverCache, pSPARQLEndpoint, pQueryParam, pGraph, pUsername, pPassword);
 
                 hayQueReprocesar = false;
                 Dictionary<string, ReconciliationData.ReconciliationScore> listaEntidadesReconciliadasAux = ReconciliateData(ref pHasChanges, ref pReconciliationData, out pListaEntidadesReconciliadasDudosas, entitiesRdfType, disambiguationDataRdf, entitiesRdfTypeBBDD, disambiguationDataBBDD, pOntologyGraph, ref pDataGraph, false, pDiscardDissambiguations, pDiscoverCache, pDiscoverCacheGlobal, pMinScore, pMaxScore);
@@ -1453,6 +1494,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pExternalGraph">Grafo en local con los datos de los APIs externos</param>
         /// <param name="pReasoner">Razonador</param>
         /// <param name="pNamesScore">Diccionario con los nombres del RDF y las entidades de la BB con sus scores</param>
+        /// <param name="pEntitiesWithTitle">Entidades con su título</param>
         /// <param name="pClasesConSubclases">Diccionario con las clases de la ontología junto con sus subclases</param>
         /// <param name="pDiscardDissambiguations">Descartes para la desambiguación</param>
         /// <param name="pDiscoverCache">Caché de Discover</param>
@@ -1467,7 +1509,7 @@ namespace API_DISCOVER.Utility
         /// <returns>Diccioario con las entidades reconciliadas</returns>
         private Dictionary<string, ReconciliationData.ReconciliationScore> ReconciliateExternalIntegration(ref bool pHasChanges, ref ReconciliationData pReconciliationData,
             ref Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, RohGraph pOntologyGraph, ref RohGraph pDataGraph, Dictionary<string, string> pListaEntidadesRDFEnriquecer, RohGraph pExternalGraph,
-            RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore, Dictionary<string, HashSet<string>> pClasesConSubclases, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, float pMinScore, float pMaxScore, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
+            RohRdfsReasoner pReasoner, Dictionary<string, Dictionary<string, float>> pNamesScore,Dictionary<string,Dictionary<string, HashSet<string>>> pEntitiesWithTitle, Dictionary<string, HashSet<string>> pClasesConSubclases, Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, float pMinScore, float pMaxScore, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
         {
             Dictionary<string, ReconciliationData.ReconciliationScore> discoveredEntityList = new Dictionary<string, ReconciliationData.ReconciliationScore>();
 
@@ -1500,7 +1542,7 @@ namespace API_DISCOVER.Utility
 
 
             Dictionary<string, string> entitiesRdfTypeBBDD;
-            Dictionary<string, List<DisambiguationData>> disambiguationDataBBDD = GetDisambiguationDataBBDD(out entitiesRdfTypeBBDD, entitiesRdfTypeSubclases, new HashSet<string>(pReconciliationData.reconciliatedEntityList.Keys.Union(pReconciliationData.reconciliatedEntityList.Values)), disambiguationDataRdf, pNamesScore, pDiscoverCache, pSPARQLEndpoint, pQueryParam, pGraph, pUsername, pPassword);
+            Dictionary<string, List<DisambiguationData>> disambiguationDataBBDD = GetDisambiguationDataBBDD(out entitiesRdfTypeBBDD, entitiesRdfTypeSubclases, new HashSet<string>(pReconciliationData.reconciliatedEntityList.Keys.Union(pReconciliationData.reconciliatedEntityList.Values)), disambiguationDataRdf, pNamesScore,pEntitiesWithTitle, pDiscoverCache, pSPARQLEndpoint, pQueryParam, pGraph, pUsername, pPassword);
 
             Dictionary<string, Dictionary<string, float>> candidatos;
             ReconciliateData(ref pHasChanges, ref pReconciliationData, out candidatos, entitiesRdfType, disambiguationDataRdf, entitiesRdfTypeBBDD, disambiguationDataBBDD, pOntologyGraph, ref pDataGraph, true, pDiscardDissambiguations, pDiscoverCache, pDiscoverCacheGlobal, pMinScore, pMaxScore);
@@ -2423,6 +2465,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pDataGraph">Grafo en local con los datos del RDF</param>
         /// <param name="pReasoner">Razonador</param>
         /// <param name="pNamesScore">Diccionario con los nombres del RDF y las entidades de la BB con sus scores</param>
+        /// <param name="pEntitiesWithTitle">Entidades con su título</param>
         /// <param name="pOntologyGraph">Grafo en local con los datos de la ontología</param>
         /// <param name="pEntidadesReconciliadasConIntegracionExterna">Entidades reconciliadas con la integración externa</param>
         /// <param name="pDiscardDissambiguations">Descartes para la desambiguación</param>
@@ -2444,7 +2487,7 @@ namespace API_DISCOVER.Utility
         /// <returns>Diccionario con las entidades y los identificadores extraídos, junto con su provenencia</returns>
         public Dictionary<string, List<DiscoverLinkData.PropertyData>> ExternalIntegration(ref bool pHasChanges,
             ref ReconciliationData pReconciliationData, ref DiscoverLinkData pDiscoverLinkData, ref Dictionary<string, Dictionary<string, float>> pDiscoveredEntitiesProbability, ref RohGraph pDataGraph, RohRdfsReasoner pReasoner,
-            Dictionary<string, Dictionary<string, float>> pNamesScore, RohGraph pOntologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> pEntidadesReconciliadasConIntegracionExterna,
+            Dictionary<string, Dictionary<string, float>> pNamesScore,Dictionary<string,Dictionary<string, HashSet<string>>> pEntitiesWithTitle, RohGraph pOntologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> pEntidadesReconciliadasConIntegracionExterna,
             Dictionary<string, HashSet<string>> pDiscardDissambiguations, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, string pScopusApiKey, string pScopusUrl, string pCrossrefUserAgent, string pWOSAuthorization,
             float pMinScore, float pMaxScore, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword, ICallUrisFactoryApiService pCallUrisFactoryApiService, bool pApplyReconcilation = true)
 
@@ -2530,7 +2573,7 @@ namespace API_DISCOVER.Utility
                     //Cargamos todas las subclases que hay dentro de cada clase
                     Dictionary<string, HashSet<string>> clasesConSubclases = ExtractClassWithSubclass(pOntologyGraph);
                     //Aplicamos la reconciliación con el RDF 'enriquecido'
-                    pEntidadesReconciliadasConIntegracionExterna = ReconciliateExternalIntegration(ref pHasChanges, ref pReconciliationData, ref pDiscoveredEntitiesProbability, pOntologyGraph, ref pDataGraph, listaEntidadesRDFEnriquecer, externalGraph, pReasoner, pNamesScore, clasesConSubclases, pDiscardDissambiguations, pDiscoverCache, pDiscoverCacheGlobal, pMinScore, pMaxScore, pSPARQLEndpoint, pQueryParam, pGraph, pUsername, pPassword);
+                    pEntidadesReconciliadasConIntegracionExterna = ReconciliateExternalIntegration(ref pHasChanges, ref pReconciliationData, ref pDiscoveredEntitiesProbability, pOntologyGraph, ref pDataGraph, listaEntidadesRDFEnriquecer, externalGraph, pReasoner, pNamesScore,pEntitiesWithTitle, clasesConSubclases, pDiscardDissambiguations, pDiscoverCache, pDiscoverCacheGlobal, pMinScore, pMaxScore, pSPARQLEndpoint, pQueryParam, pGraph, pUsername, pPassword);
                 }
                 foreach (string entityID in pDiscoveredEntitiesProbability.Keys.ToList())
                 {
@@ -4772,6 +4815,7 @@ namespace API_DISCOVER.Utility
             //Clave ID,
             //Valor nombre
             Dictionary<string, string> personsWithName = LoadPersonWithName(pSPARQLEndpoint, pGraph, pQueryParam, pUsername, pPassword);
+            Dictionary<string, Dictionary<string, HashSet<string>>> entitiesWithTitle = LoadEntitiesWithTitle(pSPARQLEndpoint,pGraph,pQueryParam,pUsername,pPassword);
 
             //Aplicamos la reconciliación para la detección de equivalencias hasta que dejemos de detectar equivalencias
             bool hasChanges = true;
@@ -4783,7 +4827,7 @@ namespace API_DISCOVER.Utility
                 Dictionary<string, Dictionary<string, float>> unidataNamesScore = new Dictionary<string, Dictionary<string, float>>();
                 LoadNamesScore(ref unidataNamesScore, personsWithName, dataInferenceGraph, pDiscoverCache, pDiscoverCacheGlobal, pMinScore, pMaxScore);
                 ReconciliateIDs(ref hasChanges, ref reconciliationData, entitiesRdfType, disambiguationDataRdf, pDiscardDissambiguations, pOntologyGraph, ref datagraphClone, pDiscoverCache, pSPARQLEndpoint, pQueryParam, pGraph, pUsername, pPassword);
-                ReconciliateBBDD(ref hasChanges, ref reconciliationData, out listaEntidadesReconciliadasDudosas, pOntologyGraph, ref datagraphClone, pReasoner, unidataNamesScore, pDiscardDissambiguations, pDiscoverCache, pDiscoverCacheGlobal, pMinScore, pMaxScore, pSPARQLEndpoint, pQueryParam, pGraph, pUsername, pPassword);
+                ReconciliateBBDD(ref hasChanges, ref reconciliationData, out listaEntidadesReconciliadasDudosas, pOntologyGraph, ref datagraphClone, pReasoner, unidataNamesScore,entitiesWithTitle, pDiscardDissambiguations, pDiscoverCache, pDiscoverCacheGlobal, pMinScore, pMaxScore, pSPARQLEndpoint, pQueryParam, pGraph, pUsername, pPassword);
             }
 
             foreach (string key in reconciliationData.reconciliatedEntityList.Keys)
@@ -5521,14 +5565,19 @@ namespace API_DISCOVER.Utility
                 {
                     string word2 = target[j];
                     bool word2Inicial = word2.Length == 1;
-                    if (wordInicial || word2Inicial)
+                    //Alguna de las dos es inicial
+                    if (wordInicial || word2Inicial) 
                     {
-                        if (word[0] == word2[0])
+                        //No son las dos iniciales
+                        if (wordInicial!=word2Inicial)
                         {
-                            score = scoreMin;
-                            indexTarget = j + 1;
-                            desplazamiento = Math.Abs(j - i);
-                            break;
+                            if (word[0] == word2[0])
+                            {
+                                score = scoreMin;
+                                indexTarget = j + 1;
+                                desplazamiento = Math.Abs(j - i);
+                                break;
+                            }
                         }
                     }
                     float scoreSingleName = CompareSingleName(word, word2, pDiscoverCacheGlobal);
@@ -5715,6 +5764,36 @@ namespace API_DISCOVER.Utility
             }
             pDiscoverCacheGlobal.NormalizedNames[key] = stringreturn;
             return stringreturn;
+        }
+
+        /// <summary>
+        /// Normaliza un texto (título)
+        /// </summary>
+        /// <param name="pTitle">título a normalizar</param>
+        /// <returns>titulo normalizado</returns>
+        public static string NormalizeTitle(string pTitle)
+        {
+            pTitle = pTitle.ToLower();
+            Dictionary<char, List<char>> charsSubstitute = new Dictionary<char, List<char>>();
+            List<char> charsRemove = new List<char>();
+            foreach (char value in charRemovePropertyTitle.Keys)
+            {
+                if (charRemovePropertyTitle[value].HasValue)
+                {
+                    pTitle = pTitle.Replace(value, charRemovePropertyTitle[value].Value);
+                    if (!charsSubstitute.ContainsKey(charRemovePropertyTitle[value].Value))
+                    {
+                        charsSubstitute.Add(charRemovePropertyTitle[value].Value, new List<char>());
+                    }
+                    charsSubstitute[charRemovePropertyTitle[value].Value].Add(value);
+                }
+                else
+                {
+                    pTitle = pTitle.Replace(value.ToString(), "");
+                    charsRemove.Add(value);
+                }
+            }
+            return pTitle;
         }
 
         #endregion
