@@ -307,12 +307,15 @@ namespace API_DISCOVER
                     discoverUtility.ReconciliateIDs(ref hasChanges, ref reconciliationData, entitiesRdfType, disambiguationDataRdf, discardDissambiguations, ontologyGraph, ref dataGraph, discoverCache, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
 
                     //2.- Realizamos la reconciliación con los datos del Propio RDF
-                    discoverUtility.ReconciliateRDF(ref hasChanges, ref reconciliationData, ontologyGraph, ref dataGraph, reasoner, discardDissambiguations, discoverCache,discoverCacheGlobal, MinScore, MaxScore);
+                    //TODO descomentar
+                    //discoverUtility.ReconciliateRDF(ref hasChanges, ref reconciliationData, ontologyGraph, ref dataGraph, reasoner, discardDissambiguations, discoverCache,discoverCacheGlobal, MinScore, MaxScore);
 
                     //3.- Realizamos la reconciliación con los datos de la BBDD
-                    discoverUtility.ReconciliateBBDD(ref hasChanges, ref reconciliationData, out reconciliationEntitiesProbability, ontologyGraph, ref dataGraph, reasoner, namesScore, entitiesWithTitle, discardDissambiguations, discoverCache,discoverCacheGlobal, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
+                    //TODO descomentar
+                    //discoverUtility.ReconciliateBBDD(ref hasChanges, ref reconciliationData, out reconciliationEntitiesProbability, ontologyGraph, ref dataGraph, reasoner, namesScore, entitiesWithTitle, discardDissambiguations, discoverCache,discoverCacheGlobal, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
 
                     //4.- Realizamos la reconciliación con los datos de las integraciones externas
+                    //TODO descomentar
                     //discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref reconciliationEntitiesProbability, ref dataGraph, reasoner, namesScore,entitiesWithTitle, ontologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache,discoverCacheGlobal, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword,pCallUrisFactoryApiService);
 
                     //Eliminamos de las probabilidades aquellos que ya estén reconciliados
