@@ -642,8 +642,7 @@ namespace API_DISCOVER.Utility
                 {
                     float similarity = GetNameSimilarity(nombre, pPersonsWithName[personBBDD], pDiscoverCache, pDiscoverCacheGlobal, 0.5f);
                     //Mapear la similitud de 0.5--1 hacia mMinScore -- 1;
-                    //TODO cambiar
-                    if (similarity > 0.5f)
+                    if (similarity > 0)
                     {
                         similarity = pMinScore + ((1 - pMinScore) / (0.5f / (similarity - 0.5f)));
                         pNamesScore[nombre].Add(personBBDD, GetNameSimilarity(nombre, pPersonsWithName[personBBDD], pDiscoverCache, pDiscoverCacheGlobal, 0.5f));
@@ -5603,6 +5602,7 @@ namespace API_DISCOVER.Utility
             if (scores.Count > 0)
             {
                 float similarity = scores.Sum() / maxLength;
+                //TODO cambiar por >pMinScore cuando se resuelva lo de las iniciales
                 if (similarity >= pMinScore)
                 {
                     return similarity;
