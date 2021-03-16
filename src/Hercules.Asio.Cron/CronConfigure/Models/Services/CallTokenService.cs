@@ -39,6 +39,7 @@ namespace CronConfigure.Models.Services
         {
             if (_env.IsDevelopment())
             {
+                Console.WriteLine("Ha entrado por development");
                 return TokenAppsettings("TokenTypeCarga", "AccessTokenCarga");
             }
             else
@@ -54,6 +55,7 @@ namespace CronConfigure.Models.Services
         /// <param name="stringData">Datos con el scope, el cliente id, el grantType y el secret</param>
         private TokenBearer CallTokenIdentity(string stringData)
         {
+            Console.WriteLine($"CallTokenIdentity string data: {stringData}");
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
             HttpResponseMessage response = null;
             try
@@ -61,6 +63,7 @@ namespace CronConfigure.Models.Services
                 HttpClient client = new HttpClient();
                 client.Timeout = TimeSpan.FromDays(1);
                 string authority = _configToken.GetAuthority()+"/connect/token";
+                Console.WriteLine($"CallTokenIdentity authority {authority}");
                 response = client.PostAsync($"{authority}", contentData).Result;
                 response.EnsureSuccessStatusCode();
                 string result = response.Content.ReadAsStringAsync().Result;
