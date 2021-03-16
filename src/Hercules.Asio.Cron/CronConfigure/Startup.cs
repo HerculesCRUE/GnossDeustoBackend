@@ -104,12 +104,12 @@ namespace CronConfigure
                 logPath = environmentVariables["LogPath"] as string;
             }
 
-            Log.Logger = new LoggerConfiguration().WriteTo.Logger(x =>
-            {
-                x.WriteTo.File($"{logPath}/log_info.txt");
-                x.Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Information);
-            })
-           .CreateLogger();
+           // Log.Logger = new LoggerConfiguration().WriteTo.Logger(x =>
+           // {
+           //     x.WriteTo.File($"{logPath}/log_info.txt");
+           //     x.Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Information);
+           // })
+           //.CreateLogger();
             services.AddHangfireServer();
 
             services.AddSwaggerGen(options =>
