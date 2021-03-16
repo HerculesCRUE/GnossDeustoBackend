@@ -27,6 +27,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
+using Serilog;
+using Serilog.Events;
 using Swashbuckle.AspNetCore.Filters;
 
 namespace CronConfigure
@@ -96,6 +98,18 @@ namespace CronConfigure
                 });
                 services.AddAuthorization();
             }
+            string logPath = "";
+            if (environmentVariables.Contains("LogPath"))
+            {
+                logPath = environmentVariables["LogPath"] as string;
+            }
+
+            Log.Logger = new LoggerConfiguration().WriteTo.Logger(x =>
+            {
+                x.WriteTo.File($"{logPath}/log_info.txt");
+                x.Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Information);
+            })
+           .CreateLogger();
             services.AddHangfireServer();
 
             services.AddSwaggerGen(options =>
