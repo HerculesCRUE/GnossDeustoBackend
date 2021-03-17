@@ -66,7 +66,6 @@ Depués de desplegar, como en el caso anterior vamos a hacer la comprobación de
 	
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/postgre/04_docker_ps.png)
 
-	
 ## Despliegue de RabbitMQ
 
 RabbitMQ lo desplegaremos con la misma mecánica que en los casos anteriores.
@@ -138,6 +137,27 @@ Antes de lentar los servicios debemos editar este archivo y reemplezar "herc-as-
 Con la ip ajustada ya podemos ejecutar script que nos prepara el entorno.
 
 	./actualizar.sh
+	
+Cuando accedamos por primera vez el frontal web nos debería fallar porque no tenemos las vistas personalizadas cargadas en la base de datos. Para conseguir esto tenemos que hacer estos sencillos pasos:
+
+Primero nos vajamos un script sql con los insert necesarios desde la máquina donde tenemos PostgreSQL instalado.
+
+	wget http://herc-as-front-desa.atica.um.es/docs/vistas.sql
+	
+Ahora tenemos que modificar los inserts ajustando los enlaces http y https y poner los adecuados para nuestro entorno.
+
+Una vez modificado el script tenemos que ejecutar estos comandos:
+
+**docker cp vistas.sql postgresql_db_1:/
+
+docker exec -it postgresql_db_1 bash
+
+su postgres
+
+psql -f vistas.sql
+
+INSERT 0 14**
+
 
 Ahora si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz web para poder hacer cargas.
 
