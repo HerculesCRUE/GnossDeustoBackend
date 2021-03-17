@@ -2,5 +2,4 @@ environs==4.0.0
 Flask==1.0.2
 Flask-Bootstrap==3.3.7.1
 flask_accept==0.0.6
-rdflib-jsonld==0.4.0
 SPARQLWrapper==1.8.2
