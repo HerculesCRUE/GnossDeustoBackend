@@ -2,6 +2,7 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Esta clase sirve para gestionar el fichero de configuración de las uris
+using Hercules.Asio.UrisFactory.Models.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,14 @@ namespace UrisFactory.Models.Services
     public class ConfigJsonHandler
     {
         private UriStructureGeneral _uriSchema;
+        private readonly ConfigService _configService;
 
         ///<summary>
         ///Este constructor inicializa las clases con la información necesaria a partir del fichero json
         ///</summary>
-        public ConfigJsonHandler()
+        public ConfigJsonHandler(ConfigService configService)
         {
+            _configService = configService;
             InitializerConfigJson();
         }
 
@@ -77,6 +80,11 @@ namespace UrisFactory.Models.Services
             try
             {
                 _uriSchema = ReaderConfigJson.Read();
+                string baseUrl = _configService.GetBase();
+                if (!string.IsNullOrEmpty(baseUrl))
+                {
+                    _uriSchema.Base = baseUrl;
+                }
                 if (!IsCorrectFormedUriStructure())
                 {
                     throw new FailedLoadConfigJsonException("Could not load config file, the structure is not correctly");

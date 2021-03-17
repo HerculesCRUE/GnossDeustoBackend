@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using Serilog;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -39,6 +40,7 @@ namespace CronConfigure.Models.Services
         {
             if (_env.IsDevelopment())
             {
+                //Log.Information("Ha entrado por development");
                 return TokenAppsettings("TokenTypeCarga", "AccessTokenCarga");
             }
             else
@@ -54,6 +56,7 @@ namespace CronConfigure.Models.Services
         /// <param name="stringData">Datos con el scope, el cliente id, el grantType y el secret</param>
         private TokenBearer CallTokenIdentity(string stringData)
         {
+            //Log.Information($"CallTokenIdentity string data: {stringData}");
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
             HttpResponseMessage response = null;
             try
@@ -61,6 +64,7 @@ namespace CronConfigure.Models.Services
                 HttpClient client = new HttpClient();
                 client.Timeout = TimeSpan.FromDays(1);
                 string authority = _configToken.GetAuthority()+"/connect/token";
+                //Log.Information($"CallTokenIdentity authority {authority}");
                 response = client.PostAsync($"{authority}", contentData).Result;
                 response.EnsureSuccessStatusCode();
                 string result = response.Content.ReadAsStringAsync().Result;

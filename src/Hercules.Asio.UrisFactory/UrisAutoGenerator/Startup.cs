@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
+using Hercules.Asio.UrisFactory.Models.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -109,7 +110,7 @@ namespace UrisFactory
             services.AddSwaggerExamplesFromAssemblyOf<AddUriStructureResponse>();
             services.AddSwaggerExamplesFromAssemblyOf<AddUriStructureErrorResponse>();
 
-
+            services.AddSingleton(typeof(ConfigService));
             services.AddSingleton(typeof(ConfigJsonHandler));
             services.AddScoped<ISchemaConfigOperations, SchemaConfigFileOperations>();
         }

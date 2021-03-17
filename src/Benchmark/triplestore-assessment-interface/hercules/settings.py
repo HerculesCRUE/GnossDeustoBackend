@@ -23,6 +23,6 @@ SPARQL_SETTINGS = {
     "data-sources" : [{
     	# Example local endpoint
         "protocol" : "sparql",
-             "url" : "http://192.168.99.102:8890/sparql"
+             "url" : "http://155.54.239.221:8890/sparql"
     }]
 }
