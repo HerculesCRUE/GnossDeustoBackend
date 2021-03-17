@@ -90,7 +90,7 @@ var pintados = 0;
                     if (node.data.image) {
                         // Custom image loading function
                         var pic = new Image()
-                        pic.src = "/iconos/" + node.data.image
+                        pic.src = "/carga-web/iconos/" + node.data.image
                         ctx.drawImage(pic, pt.x - w / 2, pt.y - w / 2);
                         nodeBoxes[node.name] = [pt.x - w / 2, pt.y - w / 2, w, w]
 
