@@ -148,16 +148,15 @@ Ahora tenemos que modificar los inserts ajustando los enlaces http y https y pon
 
 Una vez modificado el script tenemos que ejecutar estos comandos:
 
-**docker cp vistas.sql postgresql_db_1:/
+	docker exec -it postgresql_db_1 bash
 
-docker exec -it postgresql_db_1 bash
+	su postgres
 
-su postgres
+	psql -f vistas.sql
 
-psql -f vistas.sql
+Si todo ha ido bien veremos el recuento de los inserts con este formato:
 
-INSERT 0 14**
-
+	INSERT 0 14
 
 Ahora si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz web para poder hacer cargas.
 
