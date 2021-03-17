@@ -12,4 +12,4 @@ app = create_app()
 
 # If we're running in stand alone mode, run the application
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=cfg['server'].get('port', 5000), debug=True)
+    app.run(host='localhost', port=cfg['server'].get('port', 5000), debug=True)
