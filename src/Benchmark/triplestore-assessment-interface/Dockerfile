@@ -7,4 +7,4 @@ COPY . /benchmark
 
 RUN python setup.py install
 
-CMD [ "python", "./server.py" ]
+CMD [ "python", "server.py" ]
