@@ -209,28 +209,16 @@ namespace API_DISCOVER
             //Almacenamos las entidades con dudas acerca de su reonciliación
             Dictionary<string, Dictionary<string, float>> reconciliationEntitiesProbability = new Dictionary<string, Dictionary<string, float>>();
 
-            //TODO revisar
-            //Obtenemos los nombres de todas las personas que haya cargadas en la BBDD
-            //Clave ID,
-            //Valor nombre
-            if (personsWithName == null)
-            {
-                personsWithName = discoverUtility.LoadPersonWithName(SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
-            }
-
-            if (entitiesWithTitle == null)
-            {
-                entitiesWithTitle = discoverUtility.LoadEntitiesWithTitle(SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
-            }
 
             //TODO revisar
-            if (discoverCacheGlobal==null)
+            if (discoverCacheGlobal == null)
             {
                 discoverCacheGlobal = new DiscoverCacheGlobal();
-            }else
-            {                
+            }
+            else
+            {
                 //Aprox 100MB
-                if(discoverCacheGlobal.CoefJackard.Count>2400000)
+                if (discoverCacheGlobal.CoefJackard.Count > 2400000)
                 {
                     discoverCacheGlobal.CoefJackard.Clear();
                 }
@@ -242,35 +230,23 @@ namespace API_DISCOVER
                 {
                     discoverCacheGlobal.NormalizedNames.Clear();
                 }
-                //long size = 0;
-                //long size1 = 0;
-                //long size2 = 0;
-                //long size3 = 0;
-                //using (Stream s = new MemoryStream())
-                //{
-                //    BinaryFormatter formatter = new BinaryFormatter();
-                //    formatter.Serialize(s, discoverCacheGlobal);
-                //    size = s.Length;
-                //}
-                //using (Stream s = new MemoryStream())
-                //{
-                //    BinaryFormatter formatter = new BinaryFormatter();
-                //    formatter.Serialize(s, discoverCacheGlobal.CoefJackard);
-                //    size1 = s.Length;
-                //}
-                //using (Stream s = new MemoryStream())
-                //{
-                //    BinaryFormatter formatter = new BinaryFormatter();
-                //    formatter.Serialize(s, discoverCacheGlobal.NGrams);
-                //    size2 = s.Length;
-                //}
-                //using (Stream s = new MemoryStream())
-                //{
-                //    BinaryFormatter formatter = new BinaryFormatter();
-                //    formatter.Serialize(s, discoverCacheGlobal.NormalizedNames);
-                //    size3 = s.Length;
-                //}                
             }
+
+            //TODO revisar
+            //Obtenemos los nombres de todas las personas que haya cargadas en la BBDD
+            //Clave ID,
+            //Valor nombre
+            if (personsWithName == null)
+            {
+                personsWithName = discoverUtility.LoadPersonWithName(SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
+            }
+
+            if (entitiesWithTitle == null)
+            {
+                entitiesWithTitle = discoverUtility.LoadEntitiesWithTitle(discoverCacheGlobal, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
+            }
+
+            
 
             if (!pDiscoverItem.DissambiguationProcessed)
             {
@@ -307,12 +283,10 @@ namespace API_DISCOVER
                     discoverUtility.ReconciliateIDs(ref hasChanges, ref reconciliationData, entitiesRdfType, disambiguationDataRdf, discardDissambiguations, ontologyGraph, ref dataGraph, discoverCache, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
 
                     //2.- Realizamos la reconciliación con los datos del Propio RDF
-                    //TODO descomentar
-                    //discoverUtility.ReconciliateRDF(ref hasChanges, ref reconciliationData, ontologyGraph, ref dataGraph, reasoner, discardDissambiguations, discoverCache,discoverCacheGlobal, MinScore, MaxScore);
+                    discoverUtility.ReconciliateRDF(ref hasChanges, ref reconciliationData, ontologyGraph, ref dataGraph, reasoner, discardDissambiguations, discoverCache,discoverCacheGlobal, MinScore, MaxScore);
 
                     //3.- Realizamos la reconciliación con los datos de la BBDD
-                    //TODO descomentar
-                    //discoverUtility.ReconciliateBBDD(ref hasChanges, ref reconciliationData, out reconciliationEntitiesProbability, ontologyGraph, ref dataGraph, reasoner, namesScore, entitiesWithTitle, discardDissambiguations, discoverCache,discoverCacheGlobal, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
+                    discoverUtility.ReconciliateBBDD(ref hasChanges, ref reconciliationData, out reconciliationEntitiesProbability, ontologyGraph, ref dataGraph, reasoner, namesScore, entitiesWithTitle, discardDissambiguations, discoverCache,discoverCacheGlobal, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
 
                     //4.- Realizamos la reconciliación con los datos de las integraciones externas
                     //TODO descomentar
@@ -426,7 +400,7 @@ namespace API_DISCOVER
                         {
                             title = ((ILiteralNode)sparqlResult["title"]).Value;
                         }
-                        title  = DiscoverUtility.NormalizeTitle(title);
+                        title  = DiscoverUtility.NormalizeTitle(title,discoverCacheGlobal);
                         if (!entitiesWithTitle.ContainsKey(rdftype))
                         {
                             entitiesWithTitle.Add(rdftype, new Dictionary<string, HashSet<string>>());

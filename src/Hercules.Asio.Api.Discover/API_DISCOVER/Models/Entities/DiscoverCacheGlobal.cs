@@ -20,6 +20,7 @@ namespace API_DISCOVER.Models.Entities
         public DiscoverCacheGlobal()
         {
             NormalizedNames = new Dictionary<string, string>();
+            NormalizedTitles = new Dictionary<string, string>();
             NGrams = new Dictionary<string, HashSet<string>>();
             CoefJackard = new Dictionary<string, float>();
         }
@@ -27,6 +28,11 @@ namespace API_DISCOVER.Models.Entities
         /// Caché para los nombres normalizados
         /// </summary>
         public Dictionary<string, string> NormalizedNames { get; set; }
+
+        /// <summary>
+        /// Caché para los titulos normalizados
+        /// </summary>
+        public Dictionary<string, string> NormalizedTitles { get; set; }
 
         /// <summary>
         /// Caché para los n-gramas
