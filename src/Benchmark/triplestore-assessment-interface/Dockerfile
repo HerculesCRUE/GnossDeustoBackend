@@ -7,4 +7,6 @@ COPY . /benchmark
 
 RUN pip install -r requirements.txt
 
-CMD [ "python3.6.6", "server.py" ]
+RUN python setup.py install
+
+CMD [ "python", "server.py" ]
