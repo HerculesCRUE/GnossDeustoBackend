@@ -200,7 +200,7 @@ El resto de peticiones se harán por https y bastaria con editar el ssl.conf y e
 
 Por último, para que la aplicación disponga de los archivos necesarios tenemos que meter estos estilos en la capeta publica de Apache.
 
-	wget http://herc-as-front-desa.atica.um.es/docs/static.tar.gz
+	wget http://herc-as-front-desa.atica.um.es/docs/contenido.tar.gz
 
 ## Despliegue de los servicios
 
