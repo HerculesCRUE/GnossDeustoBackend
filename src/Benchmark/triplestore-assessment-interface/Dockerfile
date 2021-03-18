@@ -1,10 +1,10 @@
-FROM python:3.6.6
+FROM python:3.6
 RUN mkdir /benchmark
 
 WORKDIR /benchmark
 
 COPY . /benchmark
 
-RUN python setup.py install
+RUN python3.6 setup.py install
 
-CMD [ "python", "server.py" ]
+CMD [ "python3.6", "server.py" ]
