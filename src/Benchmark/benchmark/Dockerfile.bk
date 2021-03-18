@@ -1,0 +1,13 @@
+FROM python:3
+
+RUN mkdir /benchmark
+
+WORKDIR /benchmark
+
+COPY requirements.txt /benchmark
+
+RUN pip install -r requirements.txt
+
+COPY . /benchmark 
+
+CMD [ "python", "./server.py" ]
