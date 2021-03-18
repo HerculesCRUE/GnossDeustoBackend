@@ -84,13 +84,13 @@ WHERE {{
 }}
 """
 	data = sparql(query)
-	qcats = data.query(f"""
+	qcats = data.query(f""
 {PREFIXES}
 SELECT DISTINCT ?category WHERE {{
   [] a asio:CriterionCategory ; skos:broader ?category
   . ?category a asio:CriterionCategory
 }} ORDER BY ?category
-	""")
+	"")
 	for row in qcats:
 		cat = row.category
 		catdesc = {
