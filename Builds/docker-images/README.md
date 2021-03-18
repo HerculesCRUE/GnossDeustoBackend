@@ -115,6 +115,92 @@ Y vemos como han aplicado correctamente estos permisos.
 
 Ya tenemos RabbitMQ listo para trabajar en nuestro entorno.
 
+## Preparación de Apache
+
+Para que el Linked Data Server funcione de manera adecuada tenemos que preparar un archivo de configuracion de Apache con estos datos. Esta configuración hace basicamente que lo que se pida por http se re dirija al servidor de Linked Data Server que en este caso estaria en la misma máquina y en su puerto establecido "8081"
+
+	<VirtualHost *:80>
+    		ServerName linkeddata2test.um.es
+		DocumentRoot "/var/www/html"
+    		ProxyPreserveHost On
+    		ProxyPass / http://127.0.0.1:8081/
+    		ProxyPassReverse / http://127.0.0.1:8081/
+    		Timeout 5400
+    		ProxyTimeout 5400
+    		<Proxy *>
+        		Order deny,allow
+        		Allow from all
+        	Require all granted
+    		</Proxy>
+	</VirtualHost>
+
+El resto de peticiones se harán por https y bastaria con editar el ssl.conf y editar o añadir estas líneas:
+
+	ServerName linkeddata2test.um.es:443
+
+	#APIFRONTCARGA
+	ProxyPass /carga-web http://ip_del_servicio:5103
+	ProxyPassReverse /carga-web http://ip_del_servicio:5103
+
+	#APICARGA
+	ProxyPass /carga http://ip_del_servicio:5100
+	ProxyPassReverse /carga http://ip_del_servicio:5100
+
+	#BENCHMARK
+	ProxyPass /benchmark http://ip_del_servicio:8401
+	ProxyPassReverse /benchmark http://ip_del_servicio:8401
+
+	#OAI-PMH-CVN
+	ProxyPass /oai-pmh-cvn http://ip_del_servicio:5102
+	ProxyPassReverse /oai-pmh-cvn http://ip_del_servicio:5102
+
+	#CRON
+	ProxyPass /cron-config http://ip_del_servicio:5107
+	ProxyPassReverse /cron-config http://ip_del_servicio:5107
+
+	#DOCUMENTACION
+	ProxyPass /documentacion http://ip_del_servicio:5109
+	ProxyPassReverse /documentacion http://ip_del_servicio:5109
+
+	#IDENTITY-SERVER
+	ProxyPass /identityserver http://ip_del_servicio:5108
+	ProxyPassReverse /identityserver http://ip_del_servicio:5108
+
+	#APIURIS
+	ProxyPass /uris http://ip_del_servicio:5000
+	ProxyPassReverse /uris http://ip_del_servicio:5000
+
+	#XMLRDFCONVERSOR
+	ProxyPass /conversor_xml_rdf http://ip_del_servicio:5114
+	ProxyPassReverse /conversor_xml_rdf http://ip_del_servicio:5114
+
+	#UNIDATA
+	ProxyPass /unidata http://ip_del_servicio:5106
+	ProxyPassReverse /unidata http://ip_del_servicio:5106
+
+	#CVN
+	ProxyPass /cvn http://ip_del_servicio:5104
+	ProxyPassReverse /cvn http://ip_del_servicio:5104
+	ProxyPass /cvn_swagger http://ip_del_servicio:8080
+	ProxyPassReverse /cvn_swagger http://ip_del_servicio:8080  
+
+	#BRIDGE
+	ProxyPass /fairmetrics_bridge http://ip_del_servicio:5200
+	ProxyPassReverse /fairmetrics_bridge http://ip_del_servicio:5200
+	ProxyPass /bridgeswagger http://ip_del_servicio:8082
+	ProxyPassReverse /bridgeswagger http://ip_del_servicio:8082
+
+	#VIRTUOSO1
+	ProxyPass /sparql http://ip_del_servicio:8890/sparql
+	ProxyPassReverse /sparql http://ip_del_servicio:8890/sparql
+
+	#VIRTUOSO2
+	ProxyPass /sparql2 http://ip_del_servicio:8890/sparql
+	ProxyPassReverse /sparql2 http://ip_del_servicio:8890/sparql
+
+Por último, para que la aplicación disponga de los archivos necesarios tenemos que meter estos estilos en la capeta publica de Apache.
+
+	wget http://herc-as-front-desa.atica.um.es/docs/contenido.tar.gz
 
 ## Despliegue de los servicios
 
