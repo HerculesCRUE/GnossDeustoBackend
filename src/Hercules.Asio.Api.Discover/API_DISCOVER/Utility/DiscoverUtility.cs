@@ -5538,22 +5538,10 @@ namespace API_DISCOVER.Utility
         private float GetNameSimilarity(string pNombreA, string pNombreB, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, float pMinScore)
         {
             float indice_desplazamiento = 5;
-            float scoreMin = 0.5f;
-
-            
+            float scoreMin = 0.5f;            
 
             string nombreANormalizado = NormalizeName(pNombreA, pDiscoverCacheGlobal);
             string nombreBNormalizado = NormalizeName(pNombreB, pDiscoverCacheGlobal);
-
-            //TODO cambiar
-            if (nombreANormalizado == nombreBNormalizado)
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
 
             string[] nombreANormalizadoSplit = nombreANormalizado.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
             string[] nombreBNormalizadoSplit = nombreBNormalizado.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
@@ -5595,7 +5583,7 @@ namespace API_DISCOVER.Utility
                             }
                         }
                     }
-                    float scoreSingleName = CompareSingleName(word, word2, pDiscoverCacheGlobal);
+                    float scoreSingleName = CompareSingleName(word, word2,pDiscoverCache, pDiscoverCacheGlobal);
                     if (scoreSingleName >= scoreMin)
                     {
                         score = scoreSingleName;
@@ -5631,21 +5619,22 @@ namespace API_DISCOVER.Utility
         /// </summary>
         /// <param name="pNameA">Nombre A</param>
         /// <param name="pNameB">Nombre B</param>
+        /// <param name="pDiscoverCache">Caché Global</param>
         /// <param name="pDiscoverCacheGlobal">Caché Global</param>
         /// <returns>Coeficiente</returns>
-        private float CompareSingleName(string pNameA, string pNameB, DiscoverCacheGlobal pDiscoverCacheGlobal)
+        private float CompareSingleName(string pNameA, string pNameB, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal)
         {
             string key = $"{pNameA}_{pNameB}";
-            if (pDiscoverCacheGlobal.CoefJackard.ContainsKey(key))
+            if (pDiscoverCache.CoefJackard.ContainsKey(key))
             {
-                return pDiscoverCacheGlobal.CoefJackard[key];
+                return pDiscoverCache.CoefJackard[key];
             }
             HashSet<string> ngramsNameA = GetNGramas(pNameA, 2, pDiscoverCacheGlobal);
             HashSet<string> ngramsNameB = GetNGramas(pNameB, 2, pDiscoverCacheGlobal);
             float tokens_comunes = ngramsNameA.Intersect(ngramsNameB).Count();
             float union_tokens = ngramsNameA.Union(ngramsNameB).Count();
             float coeficiente_jackard = tokens_comunes / union_tokens;
-            pDiscoverCacheGlobal.CoefJackard[key] = coeficiente_jackard;
+            pDiscoverCache.CoefJackard[key] = coeficiente_jackard;
             return coeficiente_jackard;
         }
 

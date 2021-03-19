@@ -218,10 +218,6 @@ namespace API_DISCOVER
             else
             {
                 //Aprox 100MB
-                if (discoverCacheGlobal.CoefJackard.Count > 2400000)
-                {
-                    discoverCacheGlobal.CoefJackard.Clear();
-                }
                 if (discoverCacheGlobal.NGrams.Count > 500000)
                 {
                     discoverCacheGlobal.NGrams.Clear();

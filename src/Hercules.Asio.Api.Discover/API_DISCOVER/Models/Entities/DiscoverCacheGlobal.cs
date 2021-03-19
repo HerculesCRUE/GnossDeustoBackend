@@ -22,7 +22,6 @@ namespace API_DISCOVER.Models.Entities
             NormalizedNames = new Dictionary<string, string>();
             NormalizedTitles = new Dictionary<string, string>();
             NGrams = new Dictionary<string, HashSet<string>>();
-            CoefJackard = new Dictionary<string, float>();
         }
         /// <summary>
         /// Caché para los nombres normalizados
@@ -38,10 +37,5 @@ namespace API_DISCOVER.Models.Entities
         /// Caché para los n-gramas
         /// </summary>
         public Dictionary<string, HashSet<string>> NGrams { get; set; }
-
-        /// <summary>
-        /// Caché para los coeficientes Jackard
-        /// </summary>
-        public Dictionary<string, float> CoefJackard { get; set; }
     }
 }
