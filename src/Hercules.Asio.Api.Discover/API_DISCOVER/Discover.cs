@@ -410,38 +410,43 @@ namespace API_DISCOVER
                     pDiscoverItemBDService.ModifyDiscoverItem(pDiscoverItem);
                 }
 
-                //Actualizamos el estado de descubrimiento de la tarea si el estado encolado esta en estado Success o Error (ha finalizado)
-                string statusQueueJob = pCallCronApiService.GetJob(pDiscoverItem.JobID).State;
-                if ((statusQueueJob == "Failed" || statusQueueJob == "Succeeded"))
-                {
-                    ProcessDiscoverStateJob processDiscoverStateJob = pProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(pDiscoverItem.JobID);
-                    string state;
-                    //Actualizamos a error si existen items en estado error o con problemas de desambiguación 
-                    if (pDiscoverItemBDService.ExistsDiscoverItemsErrorOrDissambiguatinProblems(pDiscoverItem.JobID))
-                    {
-                        state = "Error";
-                    }
-                    else if (pDiscoverItemBDService.ExistsDiscoverItemsPending(pDiscoverItem.JobID))
-                    {
-                        //Actualizamos a 'Pending' si aún existen items pendientes
-                        state = "Pending";
-                    }
-                    else
-                    {
-                        //Actualizamos a Success si no existen items en estado error ni con problemas de desambiguación y no hay ninguno pendiente
-                        state = "Success";
-                    }
-                    if (processDiscoverStateJob != null)
-                    {
-                        processDiscoverStateJob.State = state;
-                        pProcessDiscoverStateJobBDService.ModifyProcessDiscoverStateJob(processDiscoverStateJob);
-                    }
-                    else
-                    {
-                        processDiscoverStateJob = new ProcessDiscoverStateJob() { State = state, JobId = pDiscoverItem.JobID };
-                        pProcessDiscoverStateJobBDService.AddProcessDiscoverStateJob(processDiscoverStateJob);
-                    }
-                }
+                //Actualizamos el estado de descubrimiento de la tarea si el estado encolado esta en estado Succeeded o Failed (ha finalizado)
+
+                Thread thread = new Thread(() =>
+                 {
+                     string statusQueueJob = pCallCronApiService.GetJob(pDiscoverItem.JobID).State;
+                     if ((statusQueueJob == "Failed" || statusQueueJob == "Succeeded"))
+                     {
+                         ProcessDiscoverStateJob processDiscoverStateJob = pProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(pDiscoverItem.JobID);
+                         string state;
+                        //Actualizamos a error si existen items en estado error o con problemas de desambiguación 
+                        if (pDiscoverItemBDService.ExistsDiscoverItemsErrorOrDissambiguatinProblems(pDiscoverItem.JobID))
+                         {
+                             state = "Error";
+                         }
+                         else if (pDiscoverItemBDService.ExistsDiscoverItemsPending(pDiscoverItem.JobID))
+                         {
+                            //Actualizamos a 'Pending' si aún existen items pendientes
+                            state = "Pending";
+                         }
+                         else
+                         {
+                            //Actualizamos a Success si no existen items en estado error ni con problemas de desambiguación y no hay ninguno pendiente
+                            state = "Success";
+                         }
+                         if (processDiscoverStateJob != null)
+                         {
+                             processDiscoverStateJob.State = state;
+                             pProcessDiscoverStateJobBDService.ModifyProcessDiscoverStateJob(processDiscoverStateJob);
+                         }
+                         else
+                         {
+                             processDiscoverStateJob = new ProcessDiscoverStateJob() { State = state, JobId = pDiscoverItem.JobID };
+                             pProcessDiscoverStateJobBDService.AddProcessDiscoverStateJob(processDiscoverStateJob);
+                         }
+                     }
+                 });
+                thread.Start();
             }
             else
             {

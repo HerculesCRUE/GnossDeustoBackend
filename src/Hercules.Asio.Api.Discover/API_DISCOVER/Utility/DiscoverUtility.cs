@@ -634,12 +634,10 @@ namespace API_DISCOVER.Utility
                 pNamesScore.Add(nombre, new Dictionary<string, float>());
                 foreach (string personBBDD in pDiscoverCacheGlobal.PersonsNormalizedNames.Keys)
                 {
-                    float similarity = GetNameSimilarity(normalizedName, pDiscoverCacheGlobal.PersonsNormalizedNames[personBBDD], pDiscoverCache, pDiscoverCacheGlobal, 0.5f);
-                    //Mapear la similitud de 0.5--1 hacia mMinScore -- 1;
+                    float similarity = GetNameSimilarity(normalizedName, pDiscoverCacheGlobal.PersonsNormalizedNames[personBBDD], pDiscoverCache, pDiscoverCacheGlobal);                    
                     if (similarity > 0)
                     {
-                        similarity = pMinScore + ((1 - pMinScore) / (0.5f / (similarity - 0.5f)));
-                        pNamesScore[nombre].Add(personBBDD, GetNameSimilarity(normalizedName, pDiscoverCacheGlobal.PersonsNormalizedNames[personBBDD], pDiscoverCache, pDiscoverCacheGlobal, 0.5f));
+                        pNamesScore[nombre].Add(personBBDD, similarity);
                     }
                 }
                 if (pNamesScore[nombre].Count == 0)
@@ -2223,7 +2221,7 @@ namespace API_DISCOVER.Utility
                         {
                             candidatoAux = candidatoAux.Substring(1, candidatoAux.LastIndexOf("\"^^") - 1).Trim(new char[] { ' ', '-' });
                         }
-                        similarity = GetNameSimilarity(NormalizeName(originalAux), NormalizeName(candidatoAux), pDiscoverCache, pDiscoverCacheGlobal, 0.5f);
+                        similarity = GetNameSimilarity(NormalizeName(originalAux), NormalizeName(candidatoAux), pDiscoverCache, pDiscoverCacheGlobal);
                     }
                     break;
                 case Disambiguation.Property.Type.title:
@@ -3020,7 +3018,7 @@ namespace API_DISCOVER.Utility
 
                         //comprobamos la similitud del nombre obtenido con el nombre del RDF
                         //Si no alcanza un mínimo de similitud procedemos con el siguiente resultado que habíamos obtenido con el método 'expanded - search’, así hasta llegar al 5º          
-                        if (!string.IsNullOrEmpty(result.orcid_id) && GetNameSimilarity(NormalizeName(name), NormalizeName(nombrePersona), pDiscoverCache, pDiscoverCacheGlobal, 0.5f) > 0)
+                        if (!string.IsNullOrEmpty(result.orcid_id) && GetNameSimilarity(NormalizeName(name), NormalizeName(nombrePersona), pDiscoverCache, pDiscoverCacheGlobal) > 0)
                         {
                             bool estaPersonaEnDuda = pDiscoveredEntitiesProbability.ContainsKey(idPersonRDF);
                             bool coicidenPulicaciones = false;
@@ -3287,7 +3285,7 @@ namespace API_DISCOVER.Utility
                                 foreach (WorkAuthor author in work.author)
                                 {
                                     string personName = (author.givenname + " " + author.surname).Trim();
-                                    if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName(personName), pDiscoverCache, pDiscoverCacheGloabl, 0.5f) > 0).Count() > 0)
+                                    if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName(personName), pDiscoverCache, pDiscoverCacheGloabl) > 0).Count() > 0)
                                     {
                                         //Puede coincidir con alguna persona del RDF
                                         coicidenAutores = true;
@@ -3298,7 +3296,7 @@ namespace API_DISCOVER.Utility
                                     foreach (WorkAuthor author in work.author)
                                     {
                                         string personName = (author.givenname + " " + author.surname).Trim();
-                                        if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName(personName), pDiscoverCache, pDiscoverCacheGloabl, 0.5f) > 0).Count() > 0)
+                                        if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName(personName), pDiscoverCache, pDiscoverCacheGloabl) > 0).Count() > 0)
                                         {
                                             string idPerson = "http://scopus.com/Person/" + author.authid;
                                             SCOPUSPerson person = SelectSCOPUSPersonCache(author.authid, pDiscoverCache, pScopusApiKey, pScopusUrl);
@@ -3426,7 +3424,7 @@ namespace API_DISCOVER.Utility
 
                         //comprobamos la similitud del nombre obtenido con el nombre del RDF
                         //Si no alcanza un mínimo de similitud procedemos con el siguiente resultado que habíamos obtenido con el método 
-                        if (GetNameSimilarity(NormalizeName(name), NormalizeName(nombrePersona), pDiscoverCache, pDiscoverCacheGlobal, 0.5f) > 0)
+                        if (GetNameSimilarity(NormalizeName(name), NormalizeName(nombrePersona), pDiscoverCache, pDiscoverCacheGlobal) > 0)
                         {
                             bool estaPersonaEnDuda = pDiscoveredEntitiesProbability.ContainsKey(idPersonRDF);
                             bool coicidenPulicaciones = false;
@@ -3732,7 +3730,7 @@ namespace API_DISCOVER.Utility
 
                             //comprobamos la similitud del nombre obtenido con el nombre del RDF
                             //Si no alcanza un mínimo de similitud procedemos con el siguiente resultado que habíamos obtenido con el método 
-                            if (GetNameSimilarity(NormalizeName(name), NormalizeName( nombrePersona), pDiscoverCache, pDiscoverCacheGlobal, 0.5f) > 0)
+                            if (GetNameSimilarity(NormalizeName(name), NormalizeName( nombrePersona), pDiscoverCache, pDiscoverCacheGlobal) > 0)
                             {
                                 bool estaPersonaEnDuda = pDiscoveredEntitiesProbability.ContainsKey(idPersonRDF);
                                 bool coicidenPulicaciones = false;
@@ -3960,7 +3958,7 @@ namespace API_DISCOVER.Utility
                                     foreach (PubmedArticleSetPubmedArticleMedlineCitationArticleAuthorListAuthor author in article.AuthorList.Author)
                                     {
                                         string personName = (author.ForeName + " " + author.LastName).Trim();
-                                        if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( personName), pDiscoverCache, pDiscoverCacheGlobal, 0.5f) > 0).Count() > 0)
+                                        if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( personName), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
                                         {
                                             //Puede coincidir con alguna persona del RDF
                                             coicidenAutores = true;
@@ -3971,7 +3969,7 @@ namespace API_DISCOVER.Utility
                                         foreach (PubmedArticleSetPubmedArticleMedlineCitationArticleAuthorListAuthor author in article.AuthorList.Author)
                                         {
                                             string personName = (author.ForeName + " " + author.LastName).Trim();
-                                            if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( personName), pDiscoverCache, pDiscoverCacheGlobal, 0.5f) > 0).Count() > 0)
+                                            if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( personName), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
                                             {
                                                 string idPerson = "http://pubmed.org/" + HttpUtility.UrlEncode(personName);
                                                 IUriNode subjectPerson = pubmedGraph.CreateUriNode(UriFactory.Create(idPerson));
@@ -4172,7 +4170,7 @@ namespace API_DISCOVER.Utility
 
                             foreach (string author in authors)
                             {
-                                if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( author), pDiscoverCache, pDiscoverCacheGlobal, 0.5f) > 0).Count() > 0)
+                                if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( author), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
                                 {
                                     //Puede coincidir con alguna persona del RDF
                                     coicidenAutores = true;
@@ -4183,7 +4181,7 @@ namespace API_DISCOVER.Utility
                             {
                                 foreach (string personName in authors)
                                 {
-                                    if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( personName), pDiscoverCache, pDiscoverCacheGlobal, 0.5f) > 0).Count() > 0)
+                                    if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( personName), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
                                     {
                                         string idPerson = "http://wos.com/Person/" + HttpUtility.UrlEncode(personName);
                                         IUriNode subjectPerson = wosGraph.CreateUriNode(UriFactory.Create(idPerson));
@@ -4347,7 +4345,7 @@ namespace API_DISCOVER.Utility
 
                                 foreach (string personName in work.authorList.Keys)
                                 {
-                                    if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( personName), pDiscoverCache, pDiscoverCacheGlobal, 0.5f) > 0).Count() > 0)
+                                    if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( personName), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
                                     {
                                         //Puede coincidir con alguna persona del RDF
                                         coicidenAutores = true;
@@ -4357,7 +4355,7 @@ namespace API_DISCOVER.Utility
                                 {
                                     foreach (string personName in work.authorList.Keys)
                                     {
-                                        if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( personName), pDiscoverCache, pDiscoverCacheGlobal, 0.5f) > 0).Count() > 0)
+                                        if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( personName), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
                                         {
                                             string idPerson = "http://recolecta.com/Person/" + HttpUtility.UrlEncode(work.title);
                                             IUriNode subjectPerson = recolectaGraph.CreateUriNode(UriFactory.Create(idPerson));
@@ -4521,7 +4519,7 @@ namespace API_DISCOVER.Utility
                             {
                                 foreach (DoajAuthor author in record.bibjson.author)
                                 {
-                                    if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( author.name), pDiscoverCache, pDiscoverCacheGlobal, 0.5f) > 0).Count() > 0)
+                                    if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( author.name), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
                                     {
                                         //Puede coincidir con alguna persona del RDF
                                         coicidenAutores = true;
@@ -4532,7 +4530,7 @@ namespace API_DISCOVER.Utility
                             {
                                 foreach (DoajAuthor author in record.bibjson.author)
                                 {
-                                    if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( author.name), pDiscoverCache, pDiscoverCacheGlobal, 0.5f) > 0).Count() > 0)
+                                    if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( author.name), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
                                     {
                                         string idPerson = "http://doaj.org/" + HttpUtility.UrlEncode(author.name);
                                         IUriNode subjectPerson = doajGraph.CreateUriNode(UriFactory.Create(idPerson));
@@ -5519,12 +5517,14 @@ namespace API_DISCOVER.Utility
         /// <param name="pNombreBNormalizado">Nombre B normalizado</param>
         /// <param name="pDiscoverCache">Caché de descubrimiento</param>
         /// <param name="pDiscoverCacheGlobal">Caché global para el descubrimiento</param>
-        /// <param name="pMinScore">Score mínimo para devolver valor</param>
         /// <returns>Scores</returns>
-        private float GetNameSimilarity(string pNombreANormalizado, string pNombreBNormalizado, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal, float pMinScore)
+        private float GetNameSimilarity(string pNombreANormalizado, string pNombreBNormalizado, DiscoverCache pDiscoverCache, DiscoverCacheGlobal pDiscoverCacheGlobal)
         {
             float indice_desplazamiento = 5;
+            //score min por similitud de palabra
             float scoreMin = 0.5f;
+            //score minimo general para devolver valor
+            float scoreMinGeneral = 0.7f;
 
             string[] nombreANormalizadoSplit = pNombreANormalizado.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
             string[] nombreBNormalizadoSplit = pNombreBNormalizado.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
@@ -5539,9 +5539,10 @@ namespace API_DISCOVER.Utility
             }
 
             int maxLength = Math.Max(source.Length, target.Length);
-            int minScores = (int)(maxLength * pMinScore);
+            float minScores = (float)(maxLength * scoreMinGeneral);
             int indexTarget = 0;
             List<float> scores = new List<float>();
+            int scoresCount = 0;
             for (int i = 0; i < source.Length; i++)
             {
                 float score = 0;
@@ -5580,6 +5581,7 @@ namespace API_DISCOVER.Utility
                 {
                     float coefJaccardGNOSS = score * (indice_desplazamiento / (desplazamiento + indice_desplazamiento));
                     scores.Add(coefJaccardGNOSS);
+                    scoresCount++;
                 }
                 if (maxLength - i - 1 + scores.Count < minScores)
                 {
