@@ -1245,28 +1245,34 @@ namespace API_DISCOVER.Utility
         {
             Dictionary<string, string> entidaesReconciliadas = new Dictionary<string, string>();
             Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> identificadoresRDFPorRdfType = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>();
+
+            HashSet<string> listaEntidadesOmitir = new HashSet<string>(pReconciliationData.reconciliatedEntityList.Keys.Union(pReconciliationData.reconciliatedEntityList.Values));
+
             foreach (string entityID in pDisambiguationDataRdf.Keys)
             {
-                foreach (DisambiguationData disambiguationData in pDisambiguationDataRdf[entityID])
+                if (!listaEntidadesOmitir.Contains(entityID))
                 {
-                    if (disambiguationData.identifiers.Count > 0)
+                    foreach (DisambiguationData disambiguationData in pDisambiguationDataRdf[entityID])
                     {
-                        string rdfType = pEntitiesRdfType[entityID];
-                        if (!identificadoresRDFPorRdfType.ContainsKey(rdfType))
+                        if (disambiguationData.identifiers.Count > 0)
                         {
-                            identificadoresRDFPorRdfType.Add(rdfType, new Dictionary<string, Dictionary<string, List<string>>>());
-                        }
-                        if (!identificadoresRDFPorRdfType[rdfType].ContainsKey(entityID))
-                        {
-                            identificadoresRDFPorRdfType[rdfType].Add(entityID, new Dictionary<string, List<string>>());
-                        }
-                        foreach (string property in disambiguationData.identifiers.Keys)
-                        {
-                            if (!identificadoresRDFPorRdfType[rdfType][entityID].ContainsKey(property))
+                            string rdfType = pEntitiesRdfType[entityID];
+                            if (!identificadoresRDFPorRdfType.ContainsKey(rdfType))
                             {
-                                identificadoresRDFPorRdfType[rdfType][entityID].Add(property, new List<string>());
+                                identificadoresRDFPorRdfType.Add(rdfType, new Dictionary<string, Dictionary<string, List<string>>>());
                             }
-                            identificadoresRDFPorRdfType[rdfType][entityID][property].AddRange(disambiguationData.identifiers[property]);
+                            if (!identificadoresRDFPorRdfType[rdfType].ContainsKey(entityID))
+                            {
+                                identificadoresRDFPorRdfType[rdfType].Add(entityID, new Dictionary<string, List<string>>());
+                            }
+                            foreach (string property in disambiguationData.identifiers.Keys)
+                            {
+                                if (!identificadoresRDFPorRdfType[rdfType][entityID].ContainsKey(property))
+                                {
+                                    identificadoresRDFPorRdfType[rdfType][entityID].Add(property, new List<string>());
+                                }
+                                identificadoresRDFPorRdfType[rdfType][entityID][property].AddRange(disambiguationData.identifiers[property]);
+                            }
                         }
                     }
                 }
