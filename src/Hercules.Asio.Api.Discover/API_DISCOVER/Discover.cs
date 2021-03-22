@@ -411,6 +411,7 @@ namespace API_DISCOVER
                 }
 
                 //Actualizamos el estado de descubrimiento de la tarea si el estado encolado esta en estado Succeeded o Failed (ha finalizado)
+                //TODO cambiar por query a BBDD
                 string statusQueueJob = pCallCronApiService.GetJob(pDiscoverItem.JobID).State;
                 if ((statusQueueJob == "Failed" || statusQueueJob == "Succeeded"))
                 {
@@ -558,7 +559,6 @@ namespace API_DISCOVER
                     RohGraph dataGraph = discoverUtility.GetDataGraphPersonLoadedForDiscover(person, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
                     //Clonamos el grafo original para hacer luego comprobaciones
                     RohGraph originalDataGraph = dataGraph.Clone();
-
                     RohGraph ontologyGraph = callEtlApiService.CallGetOntology();
                     RohRdfsReasoner reasoner = new RohRdfsReasoner();
                     reasoner.Initialise(ontologyGraph);
@@ -572,16 +572,11 @@ namespace API_DISCOVER
                     Dictionary<string, HashSet<string>> discardDissambiguations = new Dictionary<string, HashSet<string>>();
                     DiscoverCache discoverCache = new DiscoverCache();
                     DiscoverCacheGlobal discoverCacheGlobal = new DiscoverCacheGlobal();
-                    discoverUtility.LoadPersonWithName(discoverCacheGlobal, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
-                    //Aquí se almacenarán los nombres de las personas del RDF, junto con los candidatos de la BBDD y su score
-                    Dictionary<string, Dictionary<string, float>> namesScore = new Dictionary<string, Dictionary<string, float>>();
-                    discoverUtility.LoadNamesScore(ref namesScore, dataInferenceGraph, discoverCache, discoverCacheGlobal, MinScore, MaxScore);
-
 
                     //Obtención de la integración externa
                     ReconciliationData reconciliationData = new ReconciliationData();
                     DiscoverLinkData discoverLinkData = new DiscoverLinkData();
-                    Dictionary<string, List<DiscoverLinkData.PropertyData>> integration = discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache, discoverCacheGlobal, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword, pCallUrisFactoryApiService, false);
+                    Dictionary<string, List<DiscoverLinkData.PropertyData>> integration = discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref discoveredEntitiesProbability, ref dataGraph, reasoner, null, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache, discoverCacheGlobal, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword, pCallUrisFactoryApiService, false);
 
                     //Limpiamos 'integration' para no insertar triples en caso de que ya estén cargados
                     foreach (string entity in integration.Keys.ToList())
