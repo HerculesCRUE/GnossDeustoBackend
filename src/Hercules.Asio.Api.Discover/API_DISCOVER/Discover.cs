@@ -38,6 +38,8 @@ namespace API_DISCOVER
         private readonly IServiceScopeFactory _serviceScopeFactory;
 
         private readonly static string mPropertySGIRohCrisIdentifier = "http://purl.org/roh#crisIdentifier";
+        private DiscoverItemBDService _discoverItemBDService { get; }
+        private ProcessDiscoverStateJobBDService _processDiscoverStateJobBDService { get; }
 
         /// <summary>
         /// Constructor
@@ -48,6 +50,9 @@ namespace API_DISCOVER
         {
             _logger = logger;
             _serviceScopeFactory = serviceScopeFactory;
+            _discoverItemBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>();
+            _processDiscoverStateJobBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<ProcessDiscoverStateJobBDService>();
+
         }
 
         /// <summary>
@@ -60,23 +65,21 @@ namespace API_DISCOVER
             Guid itemID = JsonConvert.DeserializeObject<Guid>(itemIDstring);
             try
             {
-                DiscoverItemBDService discoverItemBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>();
-                ProcessDiscoverStateJobBDService processDiscoverStateJobBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<ProcessDiscoverStateJobBDService>();
                 CallCronApiService callCronApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallCronApiService>();
                 CallEtlApiService callEtlApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallEtlApiService>();
                 CallUrisFactoryApiService callUrisFactoryApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallUrisFactoryApiService>();
 
-                DiscoverItem discoverItem = discoverItemBDService.GetDiscoverItemById(itemID);
+                DiscoverItem discoverItem = _discoverItemBDService.GetDiscoverItemById(itemID);
 
                 if (discoverItem != null)
                 {
                     //Aplicamos el proceso de descubrimiento
                     DiscoverResult resultado = Init(discoverItem, callEtlApiService, callUrisFactoryApiService);
                     Process(discoverItem, resultado,
-                        discoverItemBDService,
+                        _discoverItemBDService,
                         callCronApiService,
                         callUrisFactoryApiService,
-                        processDiscoverStateJobBDService
+                        _processDiscoverStateJobBDService
                         );
                 }
             }
