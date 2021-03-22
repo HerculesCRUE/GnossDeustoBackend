@@ -206,8 +206,6 @@ namespace API_DISCOVER
             Dictionary<string, Dictionary<string, float>> reconciliationEntitiesProbability = new Dictionary<string, Dictionary<string, float>>();
 
             //Cargamos la caché global
-            //TODO elminar blanknodes
-            //TODO enlaces externos
             if (_discoverCacheGlobal == null)
             {
                 _discoverCacheGlobal = new DiscoverCacheGlobal();

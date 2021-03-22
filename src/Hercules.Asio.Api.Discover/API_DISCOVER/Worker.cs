@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using System.Diagnostics.CodeAnalysis;
 using Quartz;
 using API_DISCOVER.Models.Logging;
+using System.Collections.Generic;
+using API_DISCOVER.Models.Entities.ExternalAPIs;
 
 namespace API_DISCOVER
 {
@@ -23,6 +25,7 @@ namespace API_DISCOVER
         private Timer _timer;
         private bool _processRabbitReady = false;
         private bool _processDiscoverLoadedEntities = false;
+        private bool _processRemoveBlankNodes = false;
 
 
         public Worker(ILogger<Worker> logger, IServiceScopeFactory serviceScopeFactory)
@@ -59,9 +62,10 @@ namespace API_DISCOVER
 
                                 if (time.HasValue)
                                 {
-                                    Thread.Sleep((time.Value.DateTime - DateTimeOffset.UtcNow));
+                                    Thread.Sleep((time.Value.UtcDateTime - DateTimeOffset.UtcNow));
                                     Discover descubrimiento = new Discover(_logger, _serviceScopeFactory);
                                     descubrimiento.ApplyDiscoverLoadedEntities(ConfigService.GetSleepSecondsAfterProcessEntityDiscoverLoadedEntities(), _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallUrisFactoryApiService>());
+                                    _processDiscoverLoadedEntities = false;
                                 }
                             }
                             catch (Exception ex)
@@ -70,6 +74,63 @@ namespace API_DISCOVER
                             }
                         }).Start();
                         _processDiscoverLoadedEntities = true;
+                    }
+                    if (!_processRemoveBlankNodes)
+                    {
+                        new Thread(() =>
+                        {
+                            try
+                            {
+                                #region Cargamos configuraciones
+                                ConfigSparql ConfigSparql = new ConfigSparql();
+                                string SGI_SPARQLEndpoint = ConfigSparql.GetEndpoint();
+                                string SGI_SPARQLGraph = ConfigSparql.GetGraph();
+                                string SGI_SPARQLQueryParam = ConfigSparql.GetQueryParam();
+                                string SGI_SPARQLUsername = ConfigSparql.GetUsername();
+                                string SGI_SPARQLPassword = ConfigSparql.GetPassword();
+                                #endregion
+                                var expression = new CronExpression("0 0 * ? * *");
+                                DateTimeOffset? time = expression.GetTimeAfter(DateTimeOffset.UtcNow);
+                                CallUrisFactoryApiService callUrisFactoryApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallUrisFactoryApiService>();
+                                HashSet<string> graphs = new HashSet<string>();
+                                ORCID_API orcid_api = new ORCID_API();
+                                CROSSREF_API crossref_api = new CROSSREF_API();
+                                DBLP_API dblp_api = new DBLP_API();
+                                DBPEDIA_API dbpedia_api = new DBPEDIA_API();
+                                DOAJ_API doaj_api = new DOAJ_API();
+                                PUBMED_API pubmed_api = new PUBMED_API();
+                                RECOLECTA_API recolecta_api = new RECOLECTA_API();
+                                SCOPUS_API scopus_api = new SCOPUS_API();
+                                WOS_API wos_api = new WOS_API();
+                                graphs.Add(callUrisFactoryApiService.GetUri("Graph", orcid_api.Id));
+                                graphs.Add(callUrisFactoryApiService.GetUri("Graph", crossref_api.Id));
+                                graphs.Add(callUrisFactoryApiService.GetUri("Graph", dblp_api.Id));
+                                graphs.Add(callUrisFactoryApiService.GetUri("Graph", dbpedia_api.Id));
+                                graphs.Add(callUrisFactoryApiService.GetUri("Graph", doaj_api.Id));
+                                graphs.Add(callUrisFactoryApiService.GetUri("Graph", pubmed_api.Id));
+                                graphs.Add(callUrisFactoryApiService.GetUri("Graph", recolecta_api.Id));
+                                graphs.Add(callUrisFactoryApiService.GetUri("Graph", scopus_api.Id));
+                                graphs.Add(callUrisFactoryApiService.GetUri("Graph", wos_api.Id));
+                                graphs.Add(SGI_SPARQLGraph);
+
+                                if (time.HasValue)
+                                {
+                                    Thread.Sleep((time.Value.UtcDateTime - DateTimeOffset.UtcNow));
+
+                                    AsioPublication asioPublication = new AsioPublication(SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
+                                    foreach (string graph in graphs)
+                                    {
+                                        asioPublication.DeleteOrphanNodes(new HashSet<string>() { graph });
+                                    }
+                                    _processRemoveBlankNodes = false;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Logging.Error(ex);
+                            }
+                        }).Start();
+                        _processRemoveBlankNodes = true;
                     }
                 }
                 catch (Exception ex)
