@@ -40,6 +40,8 @@ namespace API_DISCOVER
         private readonly static string mPropertySGIRohCrisIdentifier = "http://purl.org/roh#crisIdentifier";
         private DiscoverItemBDService _discoverItemBDService { get; }
         private ProcessDiscoverStateJobBDService _processDiscoverStateJobBDService { get; }
+        private RohGraph _ontologyGraph { get; set; }
+        public static DiscoverCacheGlobal _discoverCacheGlobal { get; set; }
 
         /// <summary>
         /// Constructor
@@ -115,16 +117,7 @@ namespace API_DISCOVER
         }
 
         //TODO mover a otro sitio
-        private static RohGraph ontologyGraph {get;set;}
 
-        //TODO mover a otro sitio
-        public static Dictionary<string, string> personsWithName { get; set; }
-
-        //TODO mover a otro sitio rdftype,title norm,id
-        public static Dictionary<string, Dictionary<string,HashSet<string>>> entitiesWithTitle { get; set; }
-
-        //TODO mover a otro sitio
-        public static DiscoverCacheGlobal discoverCacheGlobal { get; set; }
 
         /// <summary>
         /// Realiza el proceso completo de desubrimiento sobre un RDF
@@ -165,9 +158,9 @@ namespace API_DISCOVER
             DateTime discoverInitTime = DateTime.Now;
 
             //Cargamos la ontología  
-            if (ontologyGraph == null)
+            if (_ontologyGraph == null)
             {
-                ontologyGraph = pCallEtlApiService.CallGetOntology();
+                _ontologyGraph = pCallEtlApiService.CallGetOntology();
             }
 
             //Cargamos datos del RDF
@@ -197,7 +190,7 @@ namespace API_DISCOVER
 
             //Cargamos el razonador para inferir datos en la ontología
             RohRdfsReasoner reasoner = new RohRdfsReasoner();
-            reasoner.Initialise(ontologyGraph);
+            reasoner.Initialise(_ontologyGraph);
 
             //Cargamos los datos con inferencia
             RohGraph dataInferenceGraph = dataGraph.Clone();
@@ -212,40 +205,16 @@ namespace API_DISCOVER
             //Almacenamos las entidades con dudas acerca de su reonciliación
             Dictionary<string, Dictionary<string, float>> reconciliationEntitiesProbability = new Dictionary<string, Dictionary<string, float>>();
 
-
-            //TODO revisar
-            if (discoverCacheGlobal == null)
+            //Cargamos la caché global
+            //TODO elminar blanknodes
+            //TODO enlaces externos
+            if (_discoverCacheGlobal == null)
             {
-                discoverCacheGlobal = new DiscoverCacheGlobal();
-            }
-            else
-            {
-                //Aprox 100MB
-                if (discoverCacheGlobal.NGrams.Count > 500000)
-                {
-                    discoverCacheGlobal.NGrams.Clear();
-                }
-                if (discoverCacheGlobal.NormalizedNames.Count > 500000)
-                {
-                    discoverCacheGlobal.NormalizedNames.Clear();
-                }
+                _discoverCacheGlobal = new DiscoverCacheGlobal();
+                discoverUtility.LoadPersonWithName(_discoverCacheGlobal, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
+                discoverUtility.LoadEntitiesWithTitle(_discoverCacheGlobal, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
             }
 
-            //TODO revisar
-            //Obtenemos los nombres de todas las personas que haya cargadas en la BBDD
-            //Clave ID,
-            //Valor nombre
-            if (personsWithName == null)
-            {
-                personsWithName = discoverUtility.LoadPersonWithName(SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
-            }
-
-            if (entitiesWithTitle == null)
-            {
-                entitiesWithTitle = discoverUtility.LoadEntitiesWithTitle(discoverCacheGlobal, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
-            }
-
-            
 
             if (!pDiscoverItem.DissambiguationProcessed)
             {
@@ -268,7 +237,7 @@ namespace API_DISCOVER
                     //Carga los scores de las personas
                     //Aquí se almacenarán los nombres de las personas del RDF, junto con los candidatos de la BBDD y su score
                     Dictionary<string, Dictionary<string, float>> namesScore = new Dictionary<string, Dictionary<string, float>>();
-                    discoverUtility.LoadNamesScore(ref namesScore, personsWithName, dataInferenceGraph, discoverCache, discoverCacheGlobal, MinScore, MaxScore);
+                    discoverUtility.LoadNamesScore(ref namesScore, dataInferenceGraph, discoverCache, _discoverCacheGlobal, MinScore, MaxScore);
 
                     //0.- Macamos como reconciliadas aquellas que ya estén cargadas en la BBDD con los mismos identificadores
                     List<string> entidadesCargadas = discoverUtility.LoadEntitiesDB(entitiesRdfType.Keys.ToList().Except(reconciliationData.reconciliatedEntityList.Keys.Union(reconciliationData.reconciliatedEntityList.Values)), SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword).Keys.ToList();
@@ -279,13 +248,13 @@ namespace API_DISCOVER
                     }
 
                     //1.- Realizamos reconciliación con los identificadores configurados (y el roh:identifier) y marcamos como reconciliadas las entidades seleccionadas para no intentar reconciliarlas posteriormente
-                    discoverUtility.ReconciliateIDs(ref hasChanges, ref reconciliationData, entitiesRdfType, disambiguationDataRdf, discardDissambiguations, ontologyGraph, ref dataGraph, discoverCache, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
+                    discoverUtility.ReconciliateIDs(ref hasChanges, ref reconciliationData, entitiesRdfType, disambiguationDataRdf, discardDissambiguations, _ontologyGraph, ref dataGraph, discoverCache, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
 
                     //2.- Realizamos la reconciliación con los datos del Propio RDF
-                    discoverUtility.ReconciliateRDF(ref hasChanges, ref reconciliationData, ontologyGraph, ref dataGraph, reasoner, discardDissambiguations, discoverCache,discoverCacheGlobal, MinScore, MaxScore);
+                    discoverUtility.ReconciliateRDF(ref hasChanges, ref reconciliationData, _ontologyGraph, ref dataGraph, reasoner, discardDissambiguations, discoverCache, _discoverCacheGlobal, MinScore, MaxScore);
 
                     //3.- Realizamos la reconciliación con los datos de la BBDD
-                    discoverUtility.ReconciliateBBDD(ref hasChanges, ref reconciliationData, out reconciliationEntitiesProbability, ontologyGraph, ref dataGraph, reasoner, namesScore, entitiesWithTitle, discardDissambiguations, discoverCache,discoverCacheGlobal, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
+                    discoverUtility.ReconciliateBBDD(ref hasChanges, ref reconciliationData, out reconciliationEntitiesProbability, _ontologyGraph, ref dataGraph, reasoner, namesScore, discardDissambiguations, discoverCache, _discoverCacheGlobal, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
 
                     //4.- Realizamos la reconciliación con los datos de las integraciones externas
                     //TODO descomentar
@@ -305,7 +274,7 @@ namespace API_DISCOVER
             }
             //TODO comrpobar cuando esté habilitaado Unidata
             DateTime discoverEndTime = DateTime.Now;
-            DiscoverResult resultado = new DiscoverResult(dataGraph, dataInferenceGraph, ontologyGraph, reconciliationData, reconciliationEntitiesProbability, discoverInitTime, discoverEndTime, discoverLinkData);
+            DiscoverResult resultado = new DiscoverResult(dataGraph, dataInferenceGraph, _ontologyGraph, reconciliationData, reconciliationEntitiesProbability, discoverInitTime, discoverEndTime, discoverLinkData);
 
             return resultado;
         }
@@ -321,7 +290,7 @@ namespace API_DISCOVER
         /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <param name="pProcessDiscoverStateJobBDService">Clase para gestionar los estados de descubrimiento de las tareas</param>
         /// <returns></returns>
-        public void Process(DiscoverItem pDiscoverItem, DiscoverResult pDiscoverResult, DiscoverItemBDService pDiscoverItemBDService, CallCronApiService pCallCronApiService,CallUrisFactoryApiService pCallUrisFactoryApiService, ProcessDiscoverStateJobBDService pProcessDiscoverStateJobBDService)
+        public void Process(DiscoverItem pDiscoverItem, DiscoverResult pDiscoverResult, DiscoverItemBDService pDiscoverItemBDService, CallCronApiService pCallCronApiService, CallUrisFactoryApiService pCallUrisFactoryApiService, ProcessDiscoverStateJobBDService pProcessDiscoverStateJobBDService)
         {
             #region Cargamos configuraciones
             ConfigSparql ConfigSparql = new ConfigSparql();
@@ -371,9 +340,9 @@ namespace API_DISCOVER
                     //pDiscoverResult.dataGraph = AsioPublication.CreateUnidataSameAs(pDiscoverResult.dataGraph, UnidataDomain, UnidataUriTransform);
 
                     //Publicamos en el SGI
-                    AsioPublication asioPublication = new AsioPublication(SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);   
+                    AsioPublication asioPublication = new AsioPublication(SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
 
-                    asioPublication.PublishRDF(pDiscoverResult.dataGraph, pDiscoverResult.ontologyGraph, new KeyValuePair<string, string>(urlDiscoverAgent, "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.discoverLinkData,pCallUrisFactoryApiService);
+                    asioPublication.PublishRDF(pDiscoverResult.dataGraph, pDiscoverResult.ontologyGraph, new KeyValuePair<string, string>(urlDiscoverAgent, "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.discoverLinkData, pCallUrisFactoryApiService);
 
                     //TODO Lógica nombres de personas
                     SparqlResultSet sparqlResultSet = (SparqlResultSet)pDiscoverResult.dataGraph.ExecuteQuery("select ?s ?name where {?s a <http://purl.org/roh/mirror/foaf#Person>. ?s <http://purl.org/roh/mirror/foaf#name> ?name}");
@@ -381,11 +350,11 @@ namespace API_DISCOVER
                     {
                         string s = sparqlResult["s"].ToString();
                         string nombre = sparqlResult["name"].ToString();
-                        if(sparqlResult["name"] is ILiteralNode)
+                        if (sparqlResult["name"] is ILiteralNode)
                         {
                             nombre = ((ILiteralNode)sparqlResult["name"]).Value;
                         }
-                        personsWithName[s] = nombre;
+                        _discoverCacheGlobal.PersonsNormalizedNames[s] = DiscoverUtility.NormalizeName(nombre);
                     }
 
                     //TODO Lógica titles
@@ -399,16 +368,16 @@ namespace API_DISCOVER
                         {
                             title = ((ILiteralNode)sparqlResult["title"]).Value;
                         }
-                        title  = DiscoverUtility.NormalizeTitle(title,discoverCacheGlobal);
-                        if (!entitiesWithTitle.ContainsKey(rdftype))
+                        title = DiscoverUtility.NormalizeTitle(title);
+                        if (!_discoverCacheGlobal.EntitiesNormalizedTitles.ContainsKey(rdftype))
                         {
-                            entitiesWithTitle.Add(rdftype, new Dictionary<string, HashSet<string>>());
+                            _discoverCacheGlobal.EntitiesNormalizedTitles.Add(rdftype, new Dictionary<string, HashSet<string>>());
                         }
-                        if (!entitiesWithTitle[rdftype].ContainsKey(title))
+                        if (!_discoverCacheGlobal.EntitiesNormalizedTitles[rdftype].ContainsKey(title))
                         {
-                            entitiesWithTitle[rdftype].Add(title, new HashSet<string>());
+                            _discoverCacheGlobal.EntitiesNormalizedTitles[rdftype].Add(title, new HashSet<string>());
                         }
-                        entitiesWithTitle[rdftype][title].Add(s);
+                        _discoverCacheGlobal.EntitiesNormalizedTitles[rdftype][title].Add(s);
                     }
 
                     //TODO descomentar cuando esté habilitaado Unidata
@@ -428,7 +397,7 @@ namespace API_DISCOVER
                                     @"  DELETE { ?s ?p ?o. }
                                     WHERE 
                                     {
-                                        ?s ?p ?o. FILTER(?p =<"+ mPropertySGIRohCrisIdentifier + @">)
+                                        ?s ?p ?o. FILTER(?p =<" + mPropertySGIRohCrisIdentifier + @">)
                                     }");
                             LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
                             processor.ProcessCommandSet(updateSubject);
@@ -589,6 +558,13 @@ namespace API_DISCOVER
                     RohGraph dataGraph = discoverUtility.GetDataGraphPersonLoadedForDiscover(person, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
                     //Clonamos el grafo original para hacer luego comprobaciones
                     RohGraph originalDataGraph = dataGraph.Clone();
+
+                    RohGraph ontologyGraph = callEtlApiService.CallGetOntology();
+                    RohRdfsReasoner reasoner = new RohRdfsReasoner();
+                    reasoner.Initialise(ontologyGraph);
+                    RohGraph dataInferenceGraph = dataGraph.Clone();
+                    reasoner.Apply(dataInferenceGraph);
+
                     bool hasChanges = false;
                     //Dictionary<string, string> discoveredEntityList = new Dictionary<string, string>();
                     Dictionary<string, Dictionary<string, float>> discoveredEntitiesProbability = new Dictionary<string, Dictionary<string, float>>();
@@ -596,21 +572,16 @@ namespace API_DISCOVER
                     Dictionary<string, HashSet<string>> discardDissambiguations = new Dictionary<string, HashSet<string>>();
                     DiscoverCache discoverCache = new DiscoverCache();
                     DiscoverCacheGlobal discoverCacheGlobal = new DiscoverCacheGlobal();
-                    RohGraph ontologyGraph = callEtlApiService.CallGetOntology();
-                    RohRdfsReasoner reasoner = new RohRdfsReasoner();
-                    reasoner.Initialise(ontologyGraph);
-                    RohGraph dataInferenceGraph = dataGraph.Clone();
-                    reasoner.Apply(dataInferenceGraph);
-                    Dictionary<string, string> personsWithName = discoverUtility.LoadPersonWithName(SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
-
+                    discoverUtility.LoadPersonWithName(discoverCacheGlobal, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
                     //Aquí se almacenarán los nombres de las personas del RDF, junto con los candidatos de la BBDD y su score
                     Dictionary<string, Dictionary<string, float>> namesScore = new Dictionary<string, Dictionary<string, float>>();
-                    discoverUtility.LoadNamesScore(ref namesScore, personsWithName, dataInferenceGraph, discoverCache,discoverCacheGlobal, MinScore, MaxScore);
+                    discoverUtility.LoadNamesScore(ref namesScore, dataInferenceGraph, discoverCache, discoverCacheGlobal, MinScore, MaxScore);
+
 
                     //Obtención de la integración externa
                     ReconciliationData reconciliationData = new ReconciliationData();
                     DiscoverLinkData discoverLinkData = new DiscoverLinkData();
-                    Dictionary<string, List<DiscoverLinkData.PropertyData>> integration = discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore,entitiesWithTitle, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache, discoverCacheGlobal, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword, pCallUrisFactoryApiService,false);
+                    Dictionary<string, List<DiscoverLinkData.PropertyData>> integration = discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref discoveredEntitiesProbability, ref dataGraph, reasoner, namesScore, ontologyGraph, out entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache, discoverCacheGlobal, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword, pCallUrisFactoryApiService, false);
 
                     //Limpiamos 'integration' para no insertar triples en caso de que ya estén cargados
                     foreach (string entity in integration.Keys.ToList())
@@ -686,9 +657,9 @@ namespace API_DISCOVER
                                 }
 
                                 foreach (string org in propertyData.valueProvenance[valor])
-                                {                                    
+                                {
                                     //Agregamos los datos de las organizaciones
-                                    SparqlResultSet sparqlResultSetOrgs = (SparqlResultSet)dataGraph.ExecuteQuery("select ?s ?p ?o where {?s ?p ?o. FILTER(?s=<"+ pCallUrisFactoryApiService.GetUri("http://purl.org/roh/mirror/foaf#Organization", org) + ">)}");
+                                    SparqlResultSet sparqlResultSetOrgs = (SparqlResultSet)dataGraph.ExecuteQuery("select ?s ?p ?o where {?s ?p ?o. FILTER(?s=<" + pCallUrisFactoryApiService.GetUri("http://purl.org/roh/mirror/foaf#Organization", org) + ">)}");
                                     foreach (SparqlResult sparqlResult in sparqlResultSetOrgs.Results)
                                     {
                                         INode sOrg = dataGraphIntegration.CreateUriNode(UriFactory.Create(sparqlResult["s"].ToString()));

@@ -19,19 +19,19 @@ namespace API_DISCOVER.Models.Entities
         /// </summary>
         public DiscoverCacheGlobal()
         {
-            NormalizedNames = new Dictionary<string, string>();
-            NormalizedTitles = new Dictionary<string, string>();
+            PersonsNormalizedNames = new Dictionary<string, string>();
+            EntitiesNormalizedTitles = new Dictionary<string, Dictionary<string, HashSet<string>>>();
             NGrams = new Dictionary<string, HashSet<string>>();
         }
         /// <summary>
-        /// Caché para los nombres normalizados
+        /// Caché para los nombres normalizados (ID,Nombre normalizado)
         /// </summary>
-        public Dictionary<string, string> NormalizedNames { get; set; }
+        public Dictionary<string, string> PersonsNormalizedNames { get; set; }
 
         /// <summary>
-        /// Caché para los titulos normalizados
+        /// Caché para los titulos normalizados (rdftype,Título normalizado,ID)
         /// </summary>
-        public Dictionary<string, string> NormalizedTitles { get; set; }
+        public Dictionary<string, Dictionary<string, HashSet<string>>> EntitiesNormalizedTitles { get; set; }
 
         /// <summary>
         /// Caché para los n-gramas
