@@ -634,7 +634,7 @@ namespace API_DISCOVER.Utility
                 pNamesScore.Add(nombre, new Dictionary<string, float>());
                 foreach (string personBBDD in pDiscoverCacheGlobal.PersonsNormalizedNames.Keys)
                 {
-                    float similarity = GetNameSimilarity(normalizedName, pDiscoverCacheGlobal.PersonsNormalizedNames[personBBDD], pDiscoverCache, pDiscoverCacheGlobal);                    
+                    float similarity = GetNameSimilarity(normalizedName, pDiscoverCacheGlobal.PersonsNormalizedNames[personBBDD], pDiscoverCache, pDiscoverCacheGlobal);
                     if (similarity > 0)
                     {
                         pNamesScore[nombre].Add(personBBDD, similarity);
@@ -1904,27 +1904,16 @@ namespace API_DISCOVER.Utility
 
             foreach (string entityRDF in candidatos.Keys)
             {
-                //Candidatos con un 1 de probabilidad
-                List<string> canditosSeguros = candidatos[entityRDF].Where(x => x.Value == 1).ToList().Select(x => x.Key).Except(new List<string>() { entityRDF }).ToList();
                 //Candidatos que superan el umbral máximo (excluyendo los anteriores)
-                List<string> canditosUmbralMaximo = candidatos[entityRDF].Where(x => x.Value >= pMaxScore).ToList().Select(x => x.Key).ToList().Except(canditosSeguros).Except(new List<string>() { entityRDF }).ToList();
+                List<string> canditosUmbralMaximo = candidatos[entityRDF].Where(x => x.Value >= pMaxScore).OrderByDescending(x => x.Value).ThenBy(x => x.Key).ToList().Select(x => x.Key).ToList().Except(new List<string>() { entityRDF }).ToList();
                 //Candidatos que superan el umbral mínimo (excluyendo los anteriores)
-                List<string> canditosUmbralMinimo = candidatos[entityRDF].Where(x => x.Value >= pMinScore).ToList().Select(x => x.Key).ToList().Except(canditosSeguros).Except(canditosUmbralMaximo).Except(new List<string>() { entityRDF }).ToList();
+                List<string> canditosUmbralMinimo = candidatos[entityRDF].Where(x => x.Value >= pMinScore).OrderByDescending(x => x.Value).ThenBy(x => x.Key).ToList().Select(x => x.Key).ToList().Except(canditosUmbralMaximo).Except(new List<string>() { entityRDF }).ToList();
 
 
-                if (!pExternalIntegration && (canditosSeguros.Count == 1 || canditosUmbralMaximo.Count == 1))
+                if (!pExternalIntegration && (canditosUmbralMaximo.Count > 0))
                 {
-                    //Si sólo hay un candidato seguro
-                    //O sólo un candidato supera el umbral máximo realizamos la reconciliación
-                    string urlReconciliada = null;
-                    if (canditosSeguros.Count == 1)
-                    {
-                        urlReconciliada = canditosSeguros[0];
-                    }
-                    else
-                    {
-                        urlReconciliada = canditosUmbralMaximo[0];
-                    }
+                    //Cogemos el candidato con mayor puntuación que haya sobrepasado el umbral máximo
+                    string urlReconciliada = canditosUmbralMaximo[0];
                     if (pDiscardDissambiguations == null || !pDiscardDissambiguations.ContainsKey(entityRDF) || !pDiscardDissambiguations[entityRDF].Contains(urlReconciliada))
                     {
                         TripleStore store = new TripleStore();
@@ -1950,26 +1939,85 @@ namespace API_DISCOVER.Utility
                         processor.ProcessCommandSet(updateObject);
 
                         pReconciliationData.reconciliatedEntityList.Add(entityRDF, urlReconciliada);
-                        float score = 0;
-                        if (canditosSeguros.Count == 1)
-                        {
-                            score = 1;
-                        }
-                        else
-                        {
-                            score = candidatos[entityRDF][canditosUmbralMaximo[0]];
-                        }
+                        float score = candidatos[entityRDF][canditosUmbralMaximo[0]];
                         discoveredEntityList.Add(entityRDF, new ReconciliationData.ReconciliationScore() { uri = urlReconciliada, score = score });
                         pHasChanges = true;
                     }
                 }
-                else if (pExternalIntegration || (canditosUmbralMaximo.Count > 1 || canditosUmbralMinimo.Count > 0))
+                else if (pExternalIntegration || (canditosUmbralMaximo.Count == 0 && canditosUmbralMinimo.Count > 0))
                 {
-                    //Si para alguna entidad hay más de un candidato que supere el umbral máximo 
-                    //o hay alguna entidad que supere el umbral mínimo pero no alcance el máximo
+                    //Si para alguna entidad hay alguna otra entidad que supere el umbral mínimo pero no alcance el máximo
                     //Lo marcamos para que lo decida el usuario
                     pListaEntidadesReconciliadasDudosas.Add(entityRDF, candidatos[entityRDF]);
                 }
+
+                ////TODO antiguo:
+                ////Candidatos con un 1 de probabilidad
+                //List<string> canditosSeguros = candidatos[entityRDF].Where(x => x.Value == 1).ToList().Select(x => x.Key).Except(new List<string>() { entityRDF }).ToList();
+                ////Candidatos que superan el umbral máximo (excluyendo los anteriores)
+                //List<string> canditosUmbralMaximo = candidatos[entityRDF].Where(x => x.Value >= pMaxScore).ToList().Select(x => x.Key).ToList().Except(canditosSeguros).Except(new List<string>() { entityRDF }).ToList();
+                ////Candidatos que superan el umbral mínimo (excluyendo los anteriores)
+                //List<string> canditosUmbralMinimo = candidatos[entityRDF].Where(x => x.Value >= pMinScore).ToList().Select(x => x.Key).ToList().Except(canditosSeguros).Except(canditosUmbralMaximo).Except(new List<string>() { entityRDF }).ToList();
+
+
+                //if (!pExternalIntegration && (canditosSeguros.Count == 1 || canditosUmbralMaximo.Count == 1))
+                //{
+                //    //Si sólo hay un candidato seguro
+                //    //O sólo un candidato supera el umbral máximo realizamos la reconciliación
+                //    string urlReconciliada = null;
+                //    if (canditosSeguros.Count == 1)
+                //    {
+                //        urlReconciliada = canditosSeguros[0];
+                //    }
+                //    else
+                //    {
+                //        urlReconciliada = canditosUmbralMaximo[0];
+                //    }
+                //    if (pDiscardDissambiguations == null || !pDiscardDissambiguations.ContainsKey(entityRDF) || !pDiscardDissambiguations[entityRDF].Contains(urlReconciliada))
+                //    {
+                //        TripleStore store = new TripleStore();
+                //        store.Add(pDataGraph);
+                //        //Cambiamos candidato.Key por entityID
+                //        SparqlUpdateParser parser = new SparqlUpdateParser();
+                //        //Actualizamos los sujetos
+                //        SparqlUpdateCommandSet updateSubject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                //                                                    INSERT{<" + urlReconciliada + @"> ?p ?o.}
+                //                                                    WHERE 
+                //                                                    {
+                //                                                        ?s ?p ?o.   FILTER(?s = <" + entityRDF + @">)
+                //                                                    }");
+                //        //Actualizamos los objetos
+                //        SparqlUpdateCommandSet updateObject = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                //                                                    INSERT{?s ?p <" + urlReconciliada + @">.}
+                //                                                    WHERE 
+                //                                                    {
+                //                                                        ?s ?p ?o.   FILTER(?o = <" + entityRDF + @">)
+                //                                                    }");
+                //        LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
+                //        processor.ProcessCommandSet(updateSubject);
+                //        processor.ProcessCommandSet(updateObject);
+
+                //        pReconciliationData.reconciliatedEntityList.Add(entityRDF, urlReconciliada);
+                //        float score = 0;
+                //        if (canditosSeguros.Count == 1)
+                //        {
+                //            score = 1;
+                //        }
+                //        else
+                //        {
+                //            score = candidatos[entityRDF][canditosUmbralMaximo[0]];
+                //        }
+                //        discoveredEntityList.Add(entityRDF, new ReconciliationData.ReconciliationScore() { uri = urlReconciliada, score = score });
+                //        pHasChanges = true;
+                //    }
+                //}
+                //else if (pExternalIntegration || (canditosUmbralMaximo.Count > 1 || canditosUmbralMinimo.Count > 0))
+                //{
+                //    //Si para alguna entidad hay más de un candidato que supere el umbral máximo 
+                //    //o hay alguna entidad que supere el umbral mínimo pero no alcance el máximo
+                //    //Lo marcamos para que lo decida el usuario
+                //    pListaEntidadesReconciliadasDudosas.Add(entityRDF, candidatos[entityRDF]);
+                //}
             }
             //Hacemos limpieza tras la reconciliación
             RemoveMonovaluatedPropertiesOrphanNodesAndEmptyNodes(pOntologyGraph, ref pDataGraph);
@@ -3736,7 +3784,7 @@ namespace API_DISCOVER.Utility
 
                             //comprobamos la similitud del nombre obtenido con el nombre del RDF
                             //Si no alcanza un mínimo de similitud procedemos con el siguiente resultado que habíamos obtenido con el método 
-                            if (GetNameSimilarity(NormalizeName(name), NormalizeName( nombrePersona), pDiscoverCache, pDiscoverCacheGlobal) > 0)
+                            if (GetNameSimilarity(NormalizeName(name), NormalizeName(nombrePersona), pDiscoverCache, pDiscoverCacheGlobal) > 0)
                             {
                                 bool estaPersonaEnDuda = pDiscoveredEntitiesProbability.ContainsKey(idPersonRDF);
                                 bool coicidenPulicaciones = false;
@@ -3912,95 +3960,98 @@ namespace API_DISCOVER.Utility
                         {
                             PubmedArticleSetPubmedArticleMedlineCitationArticle article = pubmedArticleSet.PubmedArticle.MedlineCitation.Article;
                             string title = article.ArticleTitle.Text[0];
-                            PubmedArticleSetPubmedArticleMedlineCitationArticleAuthorListAuthor[] authors = article.AuthorList.Author;
-                            if (authors != null && authors.Count() > 0)
+                            if (article.AuthorList != null)
                             {
-                                if (GetSimilarity(title, tituloPublicacion, Disambiguation.Property.Type.title, pDiscoverCache, pDiscoverCacheGlobal, pMinScore, pMaxScore, numWordsTitle) > 0)
+                                PubmedArticleSetPubmedArticleMedlineCitationArticleAuthorListAuthor[] authors = article.AuthorList.Author;
+                                if (authors != null && authors.Count() > 0)
                                 {
-                                    bool estaPublicacionEnDuda = pDiscoveredEntitiesProbability.ContainsKey(idPublicacionRDF);
-                                    bool coicidenAutores = false;
-
-                                    RohGraph pubmedGraph = new RohGraph();
-
-                                    string idWork = "https://pubmed.ncbi.nlm.nih.gov/" + idWorkInt;
-
-                                    IUriNode rdftypeProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
-
-                                    IUriNode subjectWork = pubmedGraph.CreateUriNode(UriFactory.Create(idWork));
-
-                                    IUriNode titleProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#title"));
-                                    ILiteralNode nameTitle = pubmedGraph.CreateLiteralNode(title, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                                    pubmedGraph.Assert(new Triple(subjectWork, titleProperty, nameTitle));
-
-                                    IBlankNode subjectAuthorList = pubmedGraph.CreateBlankNode();
-                                    IUriNode rdftypeAuthorList = pubmedGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq"));
-                                    pubmedGraph.Assert(new Triple(subjectAuthorList, rdftypeProperty, rdftypeAuthorList));
-
-                                    IUriNode authorListProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#authorList"));
-                                    pubmedGraph.Assert(new Triple(subjectWork, authorListProperty, subjectAuthorList));
-
-                                    IUriNode rdftypeDocument = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#Document"));
-                                    pubmedGraph.Assert(new Triple(subjectWork, rdftypeProperty, rdftypeDocument));
-
-                                    IUriNode pubmedProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#roPubmed"));
-                                    ILiteralNode namePubmed = pubmedGraph.CreateLiteralNode(idWorkInt.ToString(), new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                                    pubmedGraph.Assert(new Triple(subjectWork, pubmedProperty, namePubmed));
-                                    AddExternalIDProvenance(pubmedGraph, subjectWork, pubmedProperty, namePubmed, provenanceId);
-
-                                    if (article.ELocationID != null)
+                                    if (GetSimilarity(title, tituloPublicacion, Disambiguation.Property.Type.title, pDiscoverCache, pDiscoverCacheGlobal, pMinScore, pMaxScore, numWordsTitle) > 0)
                                     {
-                                        foreach (PubmedArticleSetPubmedArticleMedlineCitationArticleELocationID elocation in article.ELocationID)
+                                        bool estaPublicacionEnDuda = pDiscoveredEntitiesProbability.ContainsKey(idPublicacionRDF);
+                                        bool coicidenAutores = false;
+
+                                        RohGraph pubmedGraph = new RohGraph();
+
+                                        string idWork = "https://pubmed.ncbi.nlm.nih.gov/" + idWorkInt;
+
+                                        IUriNode rdftypeProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+
+                                        IUriNode subjectWork = pubmedGraph.CreateUriNode(UriFactory.Create(idWork));
+
+                                        IUriNode titleProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#title"));
+                                        ILiteralNode nameTitle = pubmedGraph.CreateLiteralNode(title, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                        pubmedGraph.Assert(new Triple(subjectWork, titleProperty, nameTitle));
+
+                                        IBlankNode subjectAuthorList = pubmedGraph.CreateBlankNode();
+                                        IUriNode rdftypeAuthorList = pubmedGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq"));
+                                        pubmedGraph.Assert(new Triple(subjectAuthorList, rdftypeProperty, rdftypeAuthorList));
+
+                                        IUriNode authorListProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#authorList"));
+                                        pubmedGraph.Assert(new Triple(subjectWork, authorListProperty, subjectAuthorList));
+
+                                        IUriNode rdftypeDocument = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#Document"));
+                                        pubmedGraph.Assert(new Triple(subjectWork, rdftypeProperty, rdftypeDocument));
+
+                                        IUriNode pubmedProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#roPubmed"));
+                                        ILiteralNode namePubmed = pubmedGraph.CreateLiteralNode(idWorkInt.ToString(), new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                        pubmedGraph.Assert(new Triple(subjectWork, pubmedProperty, namePubmed));
+                                        AddExternalIDProvenance(pubmedGraph, subjectWork, pubmedProperty, namePubmed, provenanceId);
+
+                                        if (article.ELocationID != null)
                                         {
-                                            if (elocation.EIdType == "doi")
+                                            foreach (PubmedArticleSetPubmedArticleMedlineCitationArticleELocationID elocation in article.ELocationID)
                                             {
-                                                IUriNode doiProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#doi"));
-                                                ILiteralNode nameDoi = pubmedGraph.CreateLiteralNode(elocation.Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                                                pubmedGraph.Assert(new Triple(subjectWork, doiProperty, nameDoi));
-                                                AddExternalIDProvenance(pubmedGraph, subjectWork, doiProperty, nameDoi, provenanceId);
+                                                if (elocation.EIdType == "doi")
+                                                {
+                                                    IUriNode doiProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/bibo#doi"));
+                                                    ILiteralNode nameDoi = pubmedGraph.CreateLiteralNode(elocation.Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                                    pubmedGraph.Assert(new Triple(subjectWork, doiProperty, nameDoi));
+                                                    AddExternalIDProvenance(pubmedGraph, subjectWork, doiProperty, nameDoi, provenanceId);
+                                                }
                                             }
                                         }
-                                    }
 
-                                    foreach (PubmedArticleSetPubmedArticleMedlineCitationArticleAuthorListAuthor author in article.AuthorList.Author)
-                                    {
-                                        string personName = (author.ForeName + " " + author.LastName).Trim();
-                                        if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( personName), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
-                                        {
-                                            //Puede coincidir con alguna persona del RDF
-                                            coicidenAutores = true;
-                                        }
-                                    }
-                                    if (estaPublicacionEnDuda || coicidenAutores)
-                                    {
                                         foreach (PubmedArticleSetPubmedArticleMedlineCitationArticleAuthorListAuthor author in article.AuthorList.Author)
                                         {
                                             string personName = (author.ForeName + " " + author.LastName).Trim();
-                                            if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( personName), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
+                                            if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName(personName), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
                                             {
-                                                string idPerson = "http://pubmed.org/" + HttpUtility.UrlEncode(personName);
-                                                IUriNode subjectPerson = pubmedGraph.CreateUriNode(UriFactory.Create(idPerson));
-                                                IUriNode rdftypePerson = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#Person"));
-                                                pubmedGraph.Assert(new Triple(subjectPerson, rdftypeProperty, rdftypePerson));
-
-                                                IUriNode nameProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#name"));
-                                                ILiteralNode namePerson = pubmedGraph.CreateLiteralNode(personName, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                                                pubmedGraph.Assert(new Triple(subjectPerson, nameProperty, namePerson));
-
-                                                if (author.Identifier != null && author.Identifier.Source == "ORCID")
-                                                {
-                                                    IUriNode orcidProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
-                                                    ILiteralNode nameOrcid = pubmedGraph.CreateLiteralNode(author.Identifier.Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                                                    pubmedGraph.Assert(new Triple(subjectPerson, orcidProperty, nameOrcid));
-                                                    AddExternalIDProvenance(pubmedGraph, subjectPerson, orcidProperty, nameOrcid, provenanceId);
-                                                }
-
-                                                IUriNode firstAuthorProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#_1"));
-                                                pubmedGraph.Assert(new Triple(subjectAuthorList, firstAuthorProperty, subjectPerson));
+                                                //Puede coincidir con alguna persona del RDF
+                                                coicidenAutores = true;
                                             }
                                         }
-                                        externalGraph.Merge(pubmedGraph);
-                                    }
+                                        if (estaPublicacionEnDuda || coicidenAutores)
+                                        {
+                                            foreach (PubmedArticleSetPubmedArticleMedlineCitationArticleAuthorListAuthor author in article.AuthorList.Author)
+                                            {
+                                                string personName = (author.ForeName + " " + author.LastName).Trim();
+                                                if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName(personName), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
+                                                {
+                                                    string idPerson = "http://pubmed.org/" + HttpUtility.UrlEncode(personName);
+                                                    IUriNode subjectPerson = pubmedGraph.CreateUriNode(UriFactory.Create(idPerson));
+                                                    IUriNode rdftypePerson = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#Person"));
+                                                    pubmedGraph.Assert(new Triple(subjectPerson, rdftypeProperty, rdftypePerson));
 
+                                                    IUriNode nameProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#name"));
+                                                    ILiteralNode namePerson = pubmedGraph.CreateLiteralNode(personName, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                                    pubmedGraph.Assert(new Triple(subjectPerson, nameProperty, namePerson));
+
+                                                    if (author.Identifier != null && author.Identifier.Source == "ORCID")
+                                                    {
+                                                        IUriNode orcidProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh#ORCID"));
+                                                        ILiteralNode nameOrcid = pubmedGraph.CreateLiteralNode(author.Identifier.Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                                        pubmedGraph.Assert(new Triple(subjectPerson, orcidProperty, nameOrcid));
+                                                        AddExternalIDProvenance(pubmedGraph, subjectPerson, orcidProperty, nameOrcid, provenanceId);
+                                                    }
+
+                                                    IUriNode firstAuthorProperty = pubmedGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#_1"));
+                                                    pubmedGraph.Assert(new Triple(subjectAuthorList, firstAuthorProperty, subjectPerson));
+                                                }
+                                            }
+                                            externalGraph.Merge(pubmedGraph);
+                                        }
+
+                                    }
                                 }
                             }
                         }
@@ -4093,7 +4144,7 @@ namespace API_DISCOVER.Utility
                 WOSWorks works = SelectWOSWorksCache(q, pDiscoverCache, pWOSAuthorization);
 
 
-                if (works.Body.searchResponse.@return.records.records.Count() > 0)
+                if (works != null && works.Body.searchResponse.@return.records.records.Count() > 0)
                 {
                     foreach (recordsREC record in works.Body.searchResponse.@return.records.records)
                     {
@@ -4176,7 +4227,7 @@ namespace API_DISCOVER.Utility
 
                             foreach (string author in authors)
                             {
-                                if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( author), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
+                                if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName(author), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
                                 {
                                     //Puede coincidir con alguna persona del RDF
                                     coicidenAutores = true;
@@ -4187,7 +4238,7 @@ namespace API_DISCOVER.Utility
                             {
                                 foreach (string personName in authors)
                                 {
-                                    if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( personName), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
+                                    if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName(personName), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
                                     {
                                         string idPerson = "http://wos.com/Person/" + HttpUtility.UrlEncode(personName);
                                         IUriNode subjectPerson = wosGraph.CreateUriNode(UriFactory.Create(idPerson));
@@ -4351,7 +4402,7 @@ namespace API_DISCOVER.Utility
 
                                 foreach (string personName in work.authorList.Keys)
                                 {
-                                    if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( personName), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
+                                    if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName(personName), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
                                     {
                                         //Puede coincidir con alguna persona del RDF
                                         coicidenAutores = true;
@@ -4361,7 +4412,7 @@ namespace API_DISCOVER.Utility
                                 {
                                     foreach (string personName in work.authorList.Keys)
                                     {
-                                        if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( personName), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
+                                        if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName(personName), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
                                         {
                                             string idPerson = "http://recolecta.com/Person/" + HttpUtility.UrlEncode(work.title);
                                             IUriNode subjectPerson = recolectaGraph.CreateUriNode(UriFactory.Create(idPerson));
@@ -4525,7 +4576,7 @@ namespace API_DISCOVER.Utility
                             {
                                 foreach (DoajAuthor author in record.bibjson.author)
                                 {
-                                    if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( author.name), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
+                                    if (publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName(author.name), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
                                     {
                                         //Puede coincidir con alguna persona del RDF
                                         coicidenAutores = true;
@@ -4536,7 +4587,7 @@ namespace API_DISCOVER.Utility
                             {
                                 foreach (DoajAuthor author in record.bibjson.author)
                                 {
-                                    if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName( author.name), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
+                                    if (estaPublicacionEnDuda || publicacionesAutores[idPublicacionRDF].Where(x => GetNameSimilarity(NormalizeName(x.Value), NormalizeName(author.name), pDiscoverCache, pDiscoverCacheGlobal) > 0).Count() > 0)
                                     {
                                         string idPerson = "http://doaj.org/" + HttpUtility.UrlEncode(author.name);
                                         IUriNode subjectPerson = doajGraph.CreateUriNode(UriFactory.Create(idPerson));
