@@ -87,7 +87,7 @@ Y podemos probar a cargar el interfaz web de rabbitmq con http://ip_de_nuestra_m
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/rabbitmq/01_rabbitmq_login.png)
 
-Ahora debemos loguearnos con usurio "guest" y password "password", que son los que estan ajustados en el yml, y procederemos a crear un virtual host seguiendo estos sencillos pasos:
+Ahora debemos loguearnos con usurio "guest" y password "guest", que son los que estan ajustados en el yml, y procederemos a crear un virtual host seguiendo estos sencillos pasos:
 
 Ya logueados vamos a la sección "Admin".
 
