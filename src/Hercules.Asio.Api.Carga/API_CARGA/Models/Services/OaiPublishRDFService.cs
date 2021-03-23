@@ -15,6 +15,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Xml.Linq;
 
 namespace API_CARGA.Models.Services
@@ -106,6 +107,7 @@ namespace API_CARGA.Models.Services
 
                     List<IdentifierOAIPMH> listIdentifier = CallListIdentifier(identifier, metadataformat, set, fechaFromString);
                     int totalCount = listIdentifier.Count();
+
                     foreach (IdentifierOAIPMH identifierOAIPMH in listIdentifier)
                     {
                         int numExceptions = 0;
@@ -140,9 +142,7 @@ namespace API_CARGA.Models.Services
                                 }
 
                                 string record = CallGetRecord(identifier, metadataformat, identifierOAIPMH.Identifier);
-
                                 string rdf = "";
-
                                 if (metadataformat == "rdf")
                                 {
                                     rdf = record;
@@ -155,8 +155,12 @@ namespace API_CARGA.Models.Services
                                 //_publishData.CallDataValidate(rdf, identifier, _token);
                                 _publishData.CallDataPublish(rdf, jobId, true, _token);
 
+
                                 lastSyncro = identifierOAIPMH;
-                                AddSyncro(lastSyncro, set, identifier);
+                                if (!string.IsNullOrEmpty(jobId))
+                                {
+                                    AddSyncro(lastSyncro, set, identifier);
+                                }
                                 ok = true;
                             }
                             catch (Exception ex)
@@ -165,6 +169,7 @@ namespace API_CARGA.Models.Services
                                 numExceptions++;
                                 if (numExceptions >= 10)
                                 {
+                                    break;
                                     throw ex;
                                 }
                             }
@@ -232,7 +237,7 @@ namespace API_CARGA.Models.Services
             else
             {
                 //En caso de que no venga el set
-                if (repositoryConfig!=null && repositoryConfig.RepositoryConfigSet.FirstOrDefault(x => x.Set == "-") != null)
+                if (repositoryConfig != null && repositoryConfig.RepositoryConfigSet.FirstOrDefault(x => x.Set == "-") != null)
                 {
                     //Actualizamos la fila de la tabla RepositoryConfigSet(con el campo set '-') con la fecha
                     repositoryConfig.RepositoryConfigSet.FirstOrDefault(x => x.Set == "-").LastUpdate = lastSyncro.Fecha;
@@ -381,7 +386,7 @@ namespace API_CARGA.Models.Services
                 uri += $"&from={fechaFrom}";
             }
             List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
-
+            
             string resumptionToken = "";
             while (resumptionToken != null)
             {
@@ -400,7 +405,7 @@ namespace API_CARGA.Models.Services
                 IEnumerable<XElement> listHeader = listIdentifierElement.Descendants(nameSpace + "header");
                 foreach (var header in listHeader)
                 {
-                    if (header.Attribute("status")==null || header.Attribute("status").Value != "deleted")
+                    if (header.Attribute("status") == null || header.Attribute("status").Value != "deleted")
                     {
                         header.Attribute(nameSpace + "status");
                         string identifier = header.Element(nameSpace + "identifier").Value;
@@ -454,7 +459,7 @@ namespace API_CARGA.Models.Services
         /// <returns></returns>
         public string CallXMLConverter(string record, string type)
         {
-            return _callConversor.GetRDF(record,type,_configUrlService.GetUrlXmlConverter());
+            return _callConversor.GetRDF(record, type, _configUrlService.GetUrlXmlConverter());
         }
 
         /// <summary>
@@ -463,7 +468,7 @@ namespace API_CARGA.Models.Services
         /// <returns>Lista de configuraciones</returns>
         public string CallGetConfigurationsFiles()
         {
-            return _callConversor.GetString($"{_configUrlService.GetUrlXmlConverter()}/Conversor/ConfigurationFilesList");
+            return _callConversor.GetString($"{_configUrlService.GetUrlXmlConverter()}Conversor/ConfigurationFilesList");
         }
     }
 }

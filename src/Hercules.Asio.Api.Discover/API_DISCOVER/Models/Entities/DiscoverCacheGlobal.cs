@@ -19,23 +19,23 @@ namespace API_DISCOVER.Models.Entities
         /// </summary>
         public DiscoverCacheGlobal()
         {
-            NormalizedNames = new Dictionary<string, string>();
+            PersonsNormalizedNames = new Dictionary<string, string>();
+            EntitiesNormalizedTitles = new Dictionary<string, Dictionary<string, HashSet<string>>>();
             NGrams = new Dictionary<string, HashSet<string>>();
-            CoefJackard = new Dictionary<string, float>();
         }
         /// <summary>
-        /// Caché para los nombres normalizados
+        /// Caché para los nombres normalizados (ID,Nombre normalizado)
         /// </summary>
-        public Dictionary<string, string> NormalizedNames { get; set; }
+        public Dictionary<string, string> PersonsNormalizedNames { get; set; }
+
+        /// <summary>
+        /// Caché para los titulos normalizados (rdftype,Título normalizado,ID)
+        /// </summary>
+        public Dictionary<string, Dictionary<string, HashSet<string>>> EntitiesNormalizedTitles { get; set; }
 
         /// <summary>
         /// Caché para los n-gramas
         /// </summary>
         public Dictionary<string, HashSet<string>> NGrams { get; set; }
-
-        /// <summary>
-        /// Caché para los coeficientes Jackard
-        /// </summary>
-        public Dictionary<string, float> CoefJackard { get; set; }
     }
 }

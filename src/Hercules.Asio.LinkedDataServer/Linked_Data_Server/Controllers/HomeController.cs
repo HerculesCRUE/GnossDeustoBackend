@@ -100,7 +100,7 @@ namespace Linked_Data_Server.Controllers
             {
                 //No existe la entidad
                 HttpContext.Response.StatusCode = 404;
-                ViewData["Title"] = "Error 404 página no encontrada";
+                ViewData["Title"] = "Error 404 página no encontrada para la entidad "+ url;
                 ViewData["NameTitle"] = mConfigService.GetNameTitle();
                 return View(new EntityModelTemplate());
             }

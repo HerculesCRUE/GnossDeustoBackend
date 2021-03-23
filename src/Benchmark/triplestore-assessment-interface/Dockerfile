@@ -6,6 +6,8 @@ WORKDIR /benchmark
 
 COPY . /benchmark
 
+RUN pip install -r requirements.txt
+
 RUN python setup.py install
 
-CMD [ "python", "./server.py" ]
+CMD [ "python", "server.py" ]

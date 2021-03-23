@@ -344,7 +344,7 @@ namespace API_DISCOVER.Utility
         /// Limpiamos los blanknodes huerfanos, o que no tengan triples (sólo rdftype)
         /// </summary>
         /// <param name="pGraphs">Lista de grafos en los que ejecutar</param>
-        private void DeleteOrphanNodes(HashSet<string> pGraphs)
+        public void DeleteOrphanNodes(HashSet<string> pGraphs)
         {
             foreach (string graph in pGraphs)
             {

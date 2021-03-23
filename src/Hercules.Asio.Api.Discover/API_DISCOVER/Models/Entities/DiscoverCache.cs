@@ -32,6 +32,7 @@ namespace API_DISCOVER.Models.Entities
             RECOLECTAWorks = new Dictionary<string, List<RecolectaDocument>>();
             DOAJWorks = new Dictionary<string, DOAJWorks>();
             DBPEDIAData = new Dictionary<string, DBPEDIAData>();
+            CoefJackard = new Dictionary<string, float>();
         }
 
         /// <summary>
@@ -108,5 +109,11 @@ namespace API_DISCOVER.Models.Entities
         /// Caché para peticiones a DBPEDIA
         /// </summary>
         public Dictionary<string, DBPEDIAData> DBPEDIAData { get; set; }
+
+
+        /// <summary>
+        /// Caché para los coeficientes Jackard
+        /// </summary>
+        public Dictionary<string, float> CoefJackard { get; set; }
     }
 }
