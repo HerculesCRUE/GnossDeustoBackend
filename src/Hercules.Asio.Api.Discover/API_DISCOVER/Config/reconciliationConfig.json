@@ -18,7 +18,7 @@
         "type": 2,
         "maxNumWordsTitle": null,
         //"scorePositive": 0.89,
-        "scorePositive": 1,
+        "scorePositive": 0.95,
         "scoreNegative": null
       },
       {
