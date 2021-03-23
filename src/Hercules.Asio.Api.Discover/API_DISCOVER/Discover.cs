@@ -25,6 +25,7 @@ using System.Threading;
 using API_DISCOVER.Models.Logging;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.InteropServices;
+using API_DISCOVER.Models.Entities.ExternalAPIs;
 
 namespace API_DISCOVER
 {
@@ -270,7 +271,7 @@ namespace API_DISCOVER
             //TODO comrpobar cuando esté habilitaado Unidata
             DateTime discoverEndTime = DateTime.Now;
             DiscoverResult resultado = new DiscoverResult(dataGraph, dataInferenceGraph, _ontologyGraph, reconciliationData, reconciliationEntitiesProbability, discoverInitTime, discoverEndTime, discoverLinkData);
-
+            
             return resultado;
         }
 
@@ -542,7 +543,7 @@ namespace API_DISCOVER
             //Cargar todas las personas en la lista de manera aleatoria.
             List<string> personList = discoverUtility.GetPersonList(SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
             List<string> randomPersonList = GetRandomOrderList(personList);
-
+            RohGraph ontologyGraph = callEtlApiService.CallGetOntology();
             foreach (string person in randomPersonList)
             {
                 try
@@ -554,7 +555,7 @@ namespace API_DISCOVER
                     RohGraph dataGraph = discoverUtility.GetDataGraphPersonLoadedForDiscover(person, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
                     //Clonamos el grafo original para hacer luego comprobaciones
                     RohGraph originalDataGraph = dataGraph.Clone();
-                    RohGraph ontologyGraph = callEtlApiService.CallGetOntology();
+                    
                     RohRdfsReasoner reasoner = new RohRdfsReasoner();
                     reasoner.Initialise(ontologyGraph);
                     RohGraph dataInferenceGraph = dataGraph.Clone();
@@ -648,8 +649,8 @@ namespace API_DISCOVER
 
                                 foreach (string org in propertyData.valueProvenance[valor])
                                 {
-                                    //Agregamos los datos de las organizaciones
-                                    SparqlResultSet sparqlResultSetOrgs = (SparqlResultSet)dataGraph.ExecuteQuery("select ?s ?p ?o where {?s ?p ?o. FILTER(?s=<" + pCallUrisFactoryApiService.GetUri("http://purl.org/roh/mirror/foaf#Organization", org) + ">)}");
+                                    //Agregamos los datos de las organizaciones y los grafos
+                                    SparqlResultSet sparqlResultSetOrgs = (SparqlResultSet)dataGraph.ExecuteQuery("select ?s ?p ?o where {?s ?p ?o. FILTER(?s in(<" + pCallUrisFactoryApiService.GetUri("http://purl.org/roh/mirror/foaf#Organization", org) + ">,<" + pCallUrisFactoryApiService.GetUri("Graph", org) + "> ))}");
                                     foreach (SparqlResult sparqlResult in sparqlResultSetOrgs.Results)
                                     {
                                         INode sOrg = dataGraphIntegration.CreateUriNode(UriFactory.Create(sparqlResult["s"].ToString()));

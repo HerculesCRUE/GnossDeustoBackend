@@ -27,6 +27,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
         public string HomePage { get { return "http://wos.fecyt.es/"; } }
 
         public string Id { get { return "wos"; } }
+        private static DateTime dateActive = DateTime.UtcNow;
 
         /// <summary>
         /// Genera la cooie para las peticiones al API de WOS
@@ -34,6 +35,10 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
         /// <param name="authorization"></param>
         private static void ActualizarCookie(string authorization)
         {
+            if(dateActive>DateTime.UtcNow)
+            {
+                return;
+            }
             //Se pueden hacer un máximo de 5 peticiones cada 5 minutos a este método del API, por lo que si falla hacemos un retintento tras 5 minutos            
             for (int i = 0; i < 2; i++)
             {
@@ -79,7 +84,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
                     {
                         throw ex;
                     }
-                    Thread.Sleep(300000);
+                    dateActive= DateTime.UtcNow.AddMinutes(5);
                 }
             }
         }
@@ -92,6 +97,10 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
         /// <returns>Objeto con los identificadores de los documentos</returns>
         public static WOSWorks Works(string q,string authorization)
         {
+            if (dateActive > DateTime.UtcNow)
+            {
+                return null;
+            }
             //Se pueden hacer un máximo de 2 peticiones cada segundo método del API. por lo que tras cada petición dormimos 500ms
             //Si falla refrescamos la cookie y reintenamos
             if (_cookie == null)

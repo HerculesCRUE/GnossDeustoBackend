@@ -21,6 +21,7 @@ namespace API_DISCOVER.Models.Services
     {
         readonly TokenBearer _token;
         readonly ConfigUrlService _serviceUrl;
+        private static Dictionary<string, string> _urisCache;
         public CallUrisFactoryApiService(CallTokenService tokenService,ConfigUrlService serviceUrl)
         {
             _serviceUrl = serviceUrl;
@@ -28,6 +29,7 @@ namespace API_DISCOVER.Models.Services
             {
                 _token = tokenService.CallTokenUrisFactory();
             }
+            _urisCache = new Dictionary<string, string>();
         }
 
         /// <summary>
@@ -38,7 +40,13 @@ namespace API_DISCOVER.Models.Services
         /// <returns>uri</returns>
         public string GetUri(string resourceClass, string identifier)
         {
+            string key = $"{resourceClass}_{identifier}";
+            if(_urisCache.ContainsKey(key))
+            {
+                return _urisCache[key];
+            }
             string result = CallGetApi($"Factory?identifier={HttpUtility.UrlEncode(identifier)}&resource_class={HttpUtility.UrlEncode(resourceClass)}", _token);
+            _urisCache[key] = result;
             return result;
         }
 
