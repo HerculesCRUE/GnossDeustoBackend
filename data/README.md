@@ -94,6 +94,7 @@ En el caso del repositorio de la universidad de Radbound se configurarán difere
 ![](../Docs/media/SincroCrearTarea.jpg)
 
 Se crearán 4 tareas diferentes desde la siguiente página:
+
 ![](../Docs/media/SincroCrearTareaFin.jpg)
 
 Para cada tarea hay que especificar el set de objetos a sincronizar, el nombre y la expresión cron que definirá la frecuencia con la que se ejecutará.
@@ -112,8 +113,24 @@ El nombre puede ser cualquiera y la expresión cron podría valer 0 9 * * *, que
 
 Monitorizar el estado de la carga
 ---------------------
-Monitorizar el estado de la carga, desde las páginas de administración.
+Para monitorizar el estado de la carga se deberá acceder a l página del repositorio y en la parte inferior se ve el estado de las tareas ejecutadas:
+
+![](../Docs/media/MonitorizarEstadoCarga.jpg)
+
+Si se pulsa sobre una tarea en concreto se puede ver el detalle de la tarea:
+
+![](../Docs/media/DetalleTarea.jpg)
+
+Y en el caso de que haya algún problema de desambiguación se puede acceder a la página del problema de desambiguación y proceder manualmente:
+
+![](../Docs/media/DetalleProblemaDesambiguacion.jpg)
+
+
 
 Comprobación de los datos en el grafo
 ---------------------
-Comprobación de los datos en el grafo, mediante consultas SPARQL, y desde las páginas de Linked Data Server.
+Para comprobar los datos de la carga se pueden realizar consultas SPARQL y/o acceder al Linked Data Server para verificar los datos. 
+
+En el Linked Data Server se pueden buscar las entidades cargadas o se puede acceder a la página del grafo http://graph.um.es/graph/sgi y observar el número de entidades que hay cargadas en el sistema:
+
+![](../Docs/media/LinkedDataServerEntidades.jpg)
