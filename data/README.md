@@ -64,25 +64,49 @@ Para ello en el sparql endpoint configurado hay que localizar el grafo en el que
 Crear repositorios
 ---------------------
 Creación del repositorio fuente de datos desde las páginas de administración.
+
 En la url: https://herc-as-front-desa.atica.um.es/carga-web/RepositoryConfig hay que crear los tres repositorios:
 
 - OAI-PMH del SGI. 
+- 
 ![](../Docs/media/RepositorioXML.jpg)
 
 - OAI-PMH para CVNs de la Universidad de Murcia. 
+- 
 ![](../Docs/media/RepositorioCVN.jpg)
  
-- CERIF de Radboud.
+- CERIF de Radbound.
 ![](../Docs/media/RepositorioRadbound.jpg)
  
 -Así es como debería quedar finalmente una vez dados de alta todos los repositorios:
+
 ![](../Docs/media/ListaRepositorios.jpg)
 
 
 Sincronizar repositorio
 ---------------------
 Las sincronizaciones de los repositorios de SGI y de CVN se ejecutarán una única vez, ya que no contienen datos cambiantes, para ello se entrará en la página de ambos repositorios y se pulsará sobre el botón de sincronización:
+
 ![](../Docs/media/SincroXML-CVN.jpg)
+
+En el caso del repositorio de la universidad de Radbound se configurarán diferentes tareas de sincronización para sincronizar cada uno de los diferentes elementos que vendrán desde el repositorio OAI-PMH. Para ello desde la página del repositorio se pulsará sobre el botón de crear nueva tarea:
+
+![](../Docs/media/SincroCrearTarea.jpg)
+
+Se crearán 4 tareas diferentes desde la siguiente página:
+![](../Docs/media/SincroCrearTareaFin.jpg)
+
+Para cada tarea hay que especificar el set de objetos a sincronizar, el nombre y la expresión cron que definirá la frecuencia con la que se ejecutará.
+
+El nombre puede ser cualquiera y la expresión cron podría valer 0 9 * * *, que ejecutaría la tarea todos los días a las 9:00 (hora UTC), para los sets hay que utilizar los definidos a continuación:
+
+ Set para proyectos: openaire_cris_projects
+ 
+ Set para publicaciones: openaire_cris_publications
+ 
+ Set para productos: openaire_cris_products
+ 
+ Set para organizaciones: openaire_cris_orgunits
 
 
 
