@@ -78,9 +78,7 @@ namespace UrisFactory.Controllers
             }
 
             UriFormer uriFormer = new UriFormer(_configJsonHandler.GetUrisConfig());
-            string uri = "";
-            
-             uri = uriFormer.GetURI(resource_class, queryDictionary);            
+            string uri = uriFormer.GetURI(resource_class, queryDictionary);            
             
             return Ok(uri);
         }

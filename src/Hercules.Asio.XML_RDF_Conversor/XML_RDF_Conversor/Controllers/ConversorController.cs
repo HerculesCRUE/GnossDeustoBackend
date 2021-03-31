@@ -370,7 +370,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
         {
             if (string.IsNullOrEmpty(pEntidad.id))
             {
-                return Guid.NewGuid().ToString(); // Generación de GUID aleatorio.
+                return "N"+ Guid.NewGuid().ToString(); // Generación de GUID aleatorio para blanknode.
             }
             else
             {

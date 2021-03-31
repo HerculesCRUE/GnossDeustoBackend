@@ -40,9 +40,7 @@ namespace UrisFactory.Models.Services
         public string GetURI(string resourceClass, Dictionary<string, string> queryString)
         {
             string uri = "";
-            ResourcesClass resourceClassObject = null;
-
-            resourceClassObject = ParserResourceClass(resourceClass);
+            ResourcesClass resourceClassObject = ParserResourceClass(resourceClass);
 
             if (resourceClassObject == null)
             {
@@ -51,25 +49,22 @@ namespace UrisFactory.Models.Services
 
             if (resourceClassObject != null)
             {
-                string parsedLabelResourceClass = resourceClassObject.LabelResourceClass;
-                string resourceURL = resourceClassObject.ResourceURI;
-
-                UriStructure urlStructure = UriStructure.UriStructures.FirstOrDefault(structure => structure.Name.Equals(resourceURL));
+                UriStructure urlStructure = UriStructure.UriStructures.FirstOrDefault(structure => structure.Name.Equals(resourceClassObject.ResourceURI));
                 if (urlStructure != null)
                 {
                     string parsedCharacter = ParserCharacter(urlStructure.Components.ToList());
                     if (!string.IsNullOrEmpty(parsedCharacter))
                     {
-                        uri = GetUriByStructure(urlStructure, parsedCharacter, parsedLabelResourceClass, queryString);
+                        uri = GetUriByStructure(urlStructure, parsedCharacter, resourceClassObject, queryString);
                     }
                     else
                     {
-                        throw new ParametersNotConfiguredException($"Character for {resourceURL} not configured");
+                        throw new ParametersNotConfiguredException($"Character for {resourceClassObject.ResourceURI} not configured");
                     }
                 }
                 else
                 {
-                    throw new ParametersNotConfiguredException($"Structure for {resourceURL} not configured");
+                    throw new ParametersNotConfiguredException($"Structure for {resourceClassObject.ResourceURI} not configured");
                 }
                 return uri;
             }
@@ -84,9 +79,9 @@ namespace UrisFactory.Models.Services
         ///</summary>
         ///<param name="urlStructure">estructura URL para la construcción de la uri</param>
         ///<param name="parsedCharacter">Character a usar pra la generación de la uri, este character debe estar configurado en el fichero de configuración</param>
-        ///<param name="parsedResourceClass">etiqueta a mostrar en la uri de la resource class de la cual queremos generar la uri</param>
+        ///<param name="resourceClassObject">Resource class object</param>
         ///<param name="queryString">diccionario con los valores cogidos de la url de la petición</param>
-        private string GetUriByStructure(UriStructure urlStructure, string parsedCharacter, string parsedResourceClass, Dictionary<string, string> queryString)
+        private string GetUriByStructure(UriStructure urlStructure, string parsedCharacter, ResourcesClass resourceClassObject, Dictionary<string, string> queryString)
         {
             string uri = "";
             bool error = false;
@@ -104,14 +99,13 @@ namespace UrisFactory.Models.Services
                         uri = $"{uri}{parsedCharacter}{component.FinalCharacter}";
                         break;
                     case UriComponentsList.ResourceClass:
-                        ResourcesClass resource = ParserResourceClass(queryString["resource_class"]);
-                        if (resource != null && resource.BlankNode == true)
+                        if (resourceClassObject != null && resourceClassObject.BlankNode == true)
                         {
-                            uri = "_:";
+                            uri = "N";
                         }
                         else
                         {
-                            uri = $"{uri}{parsedResourceClass}{component.FinalCharacter}";
+                            uri = $"{uri}{resourceClassObject.LabelResourceClass}{component.FinalCharacter}";
                         }
                         break;
                     case UriComponentsList.Identifier:
@@ -121,7 +115,7 @@ namespace UrisFactory.Models.Services
                         {
                             error = true;
                         }
-                        else if (containsKey)
+                        else if (containsKey && !string.IsNullOrEmpty(queryString[UriComponentsList.Identifier]))
                         {
                             id = queryString[UriComponentsList.Identifier];
                         }
