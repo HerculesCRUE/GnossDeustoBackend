@@ -45,6 +45,8 @@ La suite de pruebas utilizará las siguientes fuentes de datos:
  se puede interrogar mediante un servicio OAI-PMH. El servicio contesta con datos en formato CERIF-XML y 
  contiene personas, organizaciones, proyectos, publicacione y productos (actividades) de investigación.
  
+Para ilustrar estos ejemplos se utilizará la instancia instalada en el entorno de desarrollo.
+ 
 Pasos
 ============
 
@@ -52,15 +54,37 @@ Los pasos para llevar a cabo las pruebas de carga son los siguientes:
 
 Vaciar el grafo
 ---------------------
-Vaciar el grafo en el que se van a cargar los datos.
+Vaciar el grafo en el que se van a cargar los datos en caso de que tenga datos previamente cargados.
+Para ello en el sparql endpoint configurado hay que localizar el grafo en el que se va a realizar la carga y vaciarlo mediante la siguiente instrucción:
+      
+      En el SPARQL endpoint http://155.54.239.204:8890/sparql-auth hay que ejecutar la siguiente instrucción:
+
+      clear graph <http://graph.um.es/graph/sgi>
 
 Crear repositorios
 ---------------------
 Creación del repositorio fuente de datos desde las páginas de administración.
+En la url: https://herc-as-front-desa.atica.um.es/carga-web/RepositoryConfig hay que crear los tres repositorios:
+
+- OAI-PMH del SGI. 
+![](../Docs/media/RepositorioXML.jpg)
+
+- OAI-PMH para CVNs de la Universidad de Murcia. 
+![](../Docs/media/RepositorioCVN.jpg)
+ 
+- CERIF de Radboud.
+![](../Docs/media/RepositorioRadbound.jpg)
+ 
+-Así es como debería quedar finalmente una vez dados de alta todos los repositorios:
+![](../Docs/media/ListaRepositorios.jpg)
+
 
 Sincronizar repositorio
 ---------------------
-Sincronizar todo el repositorio, sin crear una tarea de sincronización, desde las páginas de administración.
+Las sincronizaciones de los repositorios de SGI y de CVN se ejecutarán una única vez, ya que no contienen datos cambiantes, para ello se entrará en la página de ambos repositorios y se pulsará sobre el botón de sincronización:
+![](../Docs/media/SincroXML-CVN.jpg)
+
+
 
 Monitorizar el estado de la carga
 ---------------------
