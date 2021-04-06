@@ -40,7 +40,7 @@ La suite de pruebas utilizará las siguientes fuentes de datos:
  las entidades definidas mediante los esquemas XSD con los datos de los ficheros XML, según se indica en
  el proyecto [OAI-PMH de Hércules](https://github.com/HerculesCRUE/oai-pmh). 
  - OAI-PMH para CVNs de la Universidad de Murcia. Carga las entidades de la producción y actividad científica 
- de un investigador, según lo que se puede definir en un cv normalizado (estándar CVN).
+ de un investigador, según lo que se puede definir en un cv normalizado ([estándar CVN](https://cvn.fecyt.es/)).
  - CERIF de Radboud. Se trata de un repositorio de investigación de la Universidad de Radboud, al que 
  se puede interrogar mediante un servicio OAI-PMH. El servicio contesta con datos en formato CERIF-XML y 
  contiene personas, organizaciones, proyectos, publicaciones y productos (actividades) de investigación.
