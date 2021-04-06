@@ -114,7 +114,7 @@ El nombre puede ser cualquiera y la expresión cron podría valer 0 9 * * *, que
 
 Monitorizar el estado de la carga
 ---------------------
-Para monitorizar el estado de la carga se deberá acceder a l página del repositorio y en la parte inferior se ve el estado de las tareas ejecutadas:
+Para monitorizar el estado de la carga se deberá acceder a la página del repositorio y en la parte inferior se ve el estado de las tareas ejecutadas:
 
 ![](../Docs/media/MonitorizarEstadoCarga.jpg)
 
