@@ -68,24 +68,25 @@ Creación del repositorio fuente de datos desde las páginas de administración.
 En la url: https://herc-as-front-desa.atica.um.es/carga-web/RepositoryConfig hay que crear los tres repositorios:
 
 - OAI-PMH del SGI. 
-- 
+
 ![](../Docs/media/RepositorioXML.jpg)
 
 - OAI-PMH para CVNs de la Universidad de Murcia. 
-- 
+
 ![](../Docs/media/RepositorioCVN.jpg)
  
 - CERIF de Radbound.
+
 ![](../Docs/media/RepositorioRadbound.jpg)
  
--Así es como debería quedar finalmente una vez dados de alta todos los repositorios:
+- Así es como debería quedar finalmente una vez dados de alta todos los repositorios:
 
 ![](../Docs/media/ListaRepositorios.jpg)
 
 
 Sincronizar repositorios
 ---------------------
-Las sincronizaciones de los repositorios de SGI y de CVN se ejecutarán una única vez, ya que no contienen datos cambiantes, para ello se entrará en la página de ambos repositorios y se pulsará sobre el botón de sincronización:
+Las sincronizaciones de los repositorios de SGI y de CVN se ejecutarán una única vez, ya que sus datos no cambian. Para ello se entrará en la página de ambos repositorios y se pulsará sobre el botón de sincronización:
 
 ![](../Docs/media/SincroXML-CVN.jpg)
 
