@@ -4,7 +4,7 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Hércules ASIO. Test Suite de carga de datos| 
 |Descripción|Test Suite de carga de datos|
-|Versión|0.1|
+|Versión|1.0|
 |Módulo|Test|
 |Tipo|Manual|
 |Cambios de la Versión|Creación|
