@@ -19,7 +19,7 @@
 
 [2.2 Crear repositorios](#crear-repositorios)
 
-[2.3 Sincronizar repositorio](#sincronizar-repositorio)
+[2.3 Sincronizar repositorios](#sincronizar-repositorios)
 
 [2.4 Monitorizar el estado de la carga](#monitorizar-el-estado-de-la-carga)
 
@@ -83,7 +83,7 @@ En la url: https://herc-as-front-desa.atica.um.es/carga-web/RepositoryConfig hay
 ![](../Docs/media/ListaRepositorios.jpg)
 
 
-Sincronizar repositorio
+Sincronizar repositorios
 ---------------------
 Las sincronizaciones de los repositorios de SGI y de CVN se ejecutarán una única vez, ya que no contienen datos cambiantes, para ello se entrará en la página de ambos repositorios y se pulsará sobre el botón de sincronización:
 
