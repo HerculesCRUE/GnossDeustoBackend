@@ -17,7 +17,7 @@
 
 [2.1 Vaciar el grafo](#vaciar-el-grafo)
 
-[2.2 Crear reposiotrios](#crear-repositorios)
+[2.2 Crear repositorios](#crear-repositorios)
 
 [2.3 Sincronizar repositorio](#sincronizar-repositorio)
 
