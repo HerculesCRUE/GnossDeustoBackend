@@ -43,7 +43,7 @@ La suite de pruebas utilizará las siguientes fuentes de datos:
  de un investigador, según lo que se puede definir en un cv normalizado (estándar CVN).
  - CERIF de Radboud. Se trata de un repositorio de investigación de la Universidad de Radboud, al que 
  se puede interrogar mediante un servicio OAI-PMH. El servicio contesta con datos en formato CERIF-XML y 
- contiene personas, organizaciones, proyectos, publicacione y productos (actividades) de investigación.
+ contiene personas, organizaciones, proyectos, publicaciones y productos (actividades) de investigación.
  
 Para ilustrar estos ejemplos se utilizará la instancia instalada en el entorno de desarrollo.
  
