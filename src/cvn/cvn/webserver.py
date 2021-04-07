@@ -17,6 +17,7 @@ from cvn.config import entity as config_entity
 from cvn.config.ontology import OntologyConfig, Ontology, DataType
 from cvn.utils import xmltree
 import logging
+import cvn.config.entitycache as cvn_entity_cache
 #import requests
 
 app = Flask(__name__)
@@ -68,6 +69,8 @@ def v1_convert():
     except Exception as e:
         return make_error_response("Error while parsing the XML.")
 
+    # Lipiamos la cache
+    cvn_entity_cache.get_current_entity_cache().__init__()
     # ---
     # Grafo y ontologías
     # ---
@@ -139,23 +142,51 @@ def v1_convert():
         # Para cada tipo de entidad buscamos en el árbol las que tengan el código
         entity.generate_and_add_to_ontology(ontology_config, root)
 
-    resultadoQuery1 = [None]
-    resultadoQuery2 = [None]
 
-    while len(resultadoQuery1) > 0 or len(resultadoQuery2) > 0:
+    numdeleted=1
+    while numdeleted > 0:
+        numdeleted = 0
         # Query para obtener las entidades que NO tengan rdftype.
-        resultadoQuery1 = review_triples("SELECT DISTINCT ?entity WHERE {?entity ?p ?o. MINUS{?entity a ?rdftype}}", g)
+        numdeleted += remove_entities_without_rdftype(g)
         # Query para obtener las entidades que únicamente tengan rdftype.
-        resultadoQuery2 = review_triples("SELECT ?entity WHERE {?entity ?p ?o. } GROUP BY ?entity HAVING (COUNT(*) = 1)", g)
+        numdeleted += remove_empty_entities(g)
 
     return make_response(g.serialize(format=params['format']), 200)
 
-def review_triples (query, grafo):
-    resultadoQuery = grafo.query(query)
+
+def remove_entities_without_rdftype(grafo):
+    dicentities={}
+    totalentities = []
+    entitieswithrdftype = []
+    numdeleted=0
+
+
+    for triple in grafo:
+        sujeto = str(triple[0])
+        if sujeto not in totalentities:
+            totalentities.append(sujeto)
+            dicentities[sujeto] = triple[0]
+
+    resultadoQuery = grafo.query("SELECT DISTINCT ?entity WHERE {?entity a ?rdftype}")
+    for fila in resultadoQuery:
+        sujeto = str(fila[0])
+        if sujeto not in entitieswithrdftype:
+            entitieswithrdftype.append(sujeto)
+    for entity in totalentities:
+        if entity not in entitieswithrdftype:
+            numdeleted = numdeleted + 1
+            grafo.remove((dicentities[entity], None, None))
+            grafo.remove((None, None, dicentities[entity]))
+    return numdeleted
+
+
+def remove_empty_entities(grafo):
+    resultadoQuery = grafo.query("SELECT ?entity WHERE {?entity ?p ?o. } GROUP BY ?entity HAVING (COUNT(*) = 1)")
     for fila in resultadoQuery:
         grafo.remove((fila[0], None, None))
         grafo.remove((None, None, fila[0]))
-    return resultadoQuery
+    return len(resultadoQuery)
+
 
 def get_sources_from_property(current_property, node):
     # Declaramos un dict. para que podamos guardar los valores de los sources
