@@ -382,7 +382,8 @@
 			"ResourceClass": "Course",
 			"RdfType": "http://purl.org/roh/mirror/vivo#Course",
 			"LabelResourceClass": "course",
-			"ResourceURI": "uriResourceStructure"
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
 		},
 		{
 			"ResourceClass": "CourseCertificate",
@@ -406,13 +407,15 @@
 			"ResourceClass": "DateTimeInterval",
 			"RdfType": "http://purl.org/roh/mirror/vivo#DateTimeInterval",
 			"LabelResourceClass": "date/time-interval",
-			"ResourceURI": "uriResourceStructure"
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
 		},
 		{
 			"ResourceClass": "DateTimeValue",
 			"RdfType": "http://purl.org/roh/mirror/vivo#DateTimeValue",
 			"LabelResourceClass": "date/time-value",
-			"ResourceURI": "uriResourceStructure"
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
 		},
 		{
 			"ResourceClass": "DegreeHomologation",
@@ -796,13 +799,15 @@
 			"ResourceClass": "Funding",
 			"RdfType": "http://purl.org/roh#Funding",
 			"LabelResourceClass": "funding",
-			"ResourceURI": "uriResourceStructure"
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
 		},
 		{
 			"ResourceClass": "FundingAmount",
 			"RdfType": "http://purl.org/roh#FundingAmount",
 			"LabelResourceClass": "funding_amount",
-			"ResourceURI": "uriResourceStructure"
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
 		},
 		{
 			"ResourceClass": "FundingOrganization",
