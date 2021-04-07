@@ -3,8 +3,8 @@
 | Fecha         | 31/03/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Hércules ASIO. Test Suite de carga de datos| 
-|Descripción|MTest Suite de carga de datos|
-|Versión|0.1|
+|Descripción|Test Suite de carga de datos|
+|Versión|1.0|
 |Módulo|Test|
 |Tipo|Manual|
 |Cambios de la Versión|Creación|
@@ -17,9 +17,9 @@
 
 [2.1 Vaciar el grafo](#vaciar-el-grafo)
 
-[2.2 Crear reposiotrios](#crear-repositorios)
+[2.2 Crear repositorios](#crear-repositorios)
 
-[2.3 Sincronizar repositorio](#sincronizar-repositorio)
+[2.3 Sincronizar repositorios](#sincronizar-repositorios)
 
 [2.4 Monitorizar el estado de la carga](#monitorizar-el-estado-de-la-carga)
 
@@ -40,10 +40,10 @@ La suite de pruebas utilizará las siguientes fuentes de datos:
  las entidades definidas mediante los esquemas XSD con los datos de los ficheros XML, según se indica en
  el proyecto [OAI-PMH de Hércules](https://github.com/HerculesCRUE/oai-pmh). 
  - OAI-PMH para CVNs de la Universidad de Murcia. Carga las entidades de la producción y actividad científica 
- de un investigador, según lo que se puede definir en un cv normalizado (estándar CVN).
+ de un investigador, según lo que se puede definir en un cv normalizado ([estándar CVN](https://cvn.fecyt.es/)).
  - CERIF de Radboud. Se trata de un repositorio de investigación de la Universidad de Radboud, al que 
  se puede interrogar mediante un servicio OAI-PMH. El servicio contesta con datos en formato CERIF-XML y 
- contiene personas, organizaciones, proyectos, publicacione y productos (actividades) de investigación.
+ contiene personas, organizaciones, proyectos, publicaciones y productos (actividades) de investigación.
  
 Para ilustrar estos ejemplos se utilizará la instancia instalada en el entorno de desarrollo.
  
@@ -68,24 +68,25 @@ Creación del repositorio fuente de datos desde las páginas de administración.
 En la url: https://herc-as-front-desa.atica.um.es/carga-web/RepositoryConfig hay que crear los tres repositorios:
 
 - OAI-PMH del SGI. 
-- 
+
 ![](../Docs/media/RepositorioXML.jpg)
 
 - OAI-PMH para CVNs de la Universidad de Murcia. 
-- 
+
 ![](../Docs/media/RepositorioCVN.jpg)
  
 - CERIF de Radbound.
+
 ![](../Docs/media/RepositorioRadbound.jpg)
  
--Así es como debería quedar finalmente una vez dados de alta todos los repositorios:
+- Así es como debería quedar finalmente una vez dados de alta todos los repositorios:
 
 ![](../Docs/media/ListaRepositorios.jpg)
 
 
-Sincronizar repositorio
+Sincronizar repositorios
 ---------------------
-Las sincronizaciones de los repositorios de SGI y de CVN se ejecutarán una única vez, ya que no contienen datos cambiantes, para ello se entrará en la página de ambos repositorios y se pulsará sobre el botón de sincronización:
+Las sincronizaciones de los repositorios de SGI y de CVN se ejecutarán una única vez, ya que sus datos no cambian. Para ello se entrará en la página de ambos repositorios y se pulsará sobre el botón de sincronización:
 
 ![](../Docs/media/SincroXML-CVN.jpg)
 
@@ -113,7 +114,7 @@ El nombre puede ser cualquiera y la expresión cron podría valer 0 9 * * *, que
 
 Monitorizar el estado de la carga
 ---------------------
-Para monitorizar el estado de la carga se deberá acceder a l página del repositorio y en la parte inferior se ve el estado de las tareas ejecutadas:
+Para monitorizar el estado de la carga se deberá acceder a la página del repositorio y en la parte inferior se ve el estado de las tareas ejecutadas:
 
 ![](../Docs/media/MonitorizarEstadoCarga.jpg)
 
