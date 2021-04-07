@@ -4,7 +4,7 @@ displayname = "foaf:Person"
 primary = true
 id.resource = "Person"
 id.format = "{identifier}"
-cache = "foaf:person"
+cache = "foaf:name"
 
     # DEBUG -- para marcar a la persona primaria del CVN.
     # Eliminar, sustituir o cambiar según proceda.
