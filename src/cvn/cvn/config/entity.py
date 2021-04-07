@@ -315,11 +315,11 @@ class Entity:
     def get_uri(self):
         uri_urisfactory = self.get_identifier()
         # Si el UrisFactory devuelve "_:", es un BlankNode.
-        if "_:" in uri_urisfactory:
-            if self.is_blank_node():
-                if self.node is None:
-                    self.node = BNode(uri_urisfactory)
-                return self.node
+        if uri_urisfactory[0] == "N":
+            #if self.is_blank_node():
+            if self.node is None:
+                self.node = BNode(uri_urisfactory)
+            return self.node
         else:
             if self.should_cache():
                 if cvn_entity_cache.get_current_entity_cache().in_cache(self.get_cache_id().lower()):
