@@ -1099,6 +1099,7 @@ ontology = "bibo"
 classname = "BookSection"
 id.resource = "BookSection"
 id.format = "{vivo:doi}"
+cache = "roh:title"
 
     [[entities.conditions]]
     type = "bean_value_equals"
@@ -1213,6 +1214,7 @@ ontology = "bibo"
 classname = "Book"
 id.resource = "Book"
 id.format = "{vivo:doi}"
+cache = "roh:title"
 
     [[entities.conditions]]
     type = "bean_value_equals"
@@ -1398,6 +1400,7 @@ id.format = "{roh:title}"
         [[entities.subentities]]
         displayname = "vivo:ConferencePaper"
         id.resource = "ConferencePaper"
+        cache = "roh:title"
 
             [[entities.subentities.relationships]]
             direct = "bibo:presentedAt"
