@@ -1,10 +1,10 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
-| Fecha         | 01/10/2020                                                   |
+| Fecha         | 12/04/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Prueba del entorno y carga inicial| 
 |Descripción|Manual de pruebas para la revisión y carga de datos inicial despues del despliegue. Entrega parcial de octubre de 2020. Pendiente de actualizar para la entrega final|
-|Versión|0.1|
+|Versión|1.0|
 |Módulo|Despliegue|
 |Tipo|Manual|
 |Cambios de la Versión|Creación|
