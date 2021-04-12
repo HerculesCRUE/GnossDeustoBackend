@@ -4,10 +4,10 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Hércules ASIO. Especificación de las funciones de descubrimiento| 
 |Descripción|Especificación de las funciones de descubrimiento|
-|Versión|0.3|
+|Versión|1.0|
 |Módulo|API DISCOVER|
 |Tipo|Especificación|
-|Cambios de la Versión|Añadidos ejemplos en las configuraciones por tipo de entidad|
+|Cambios de la Versión|Añadida justificación del método elegido|
 
 # Hércules Backend ASIO. Especificación de las funciones de descubrimiento
 
@@ -29,23 +29,31 @@
 
 [3.6 Detalle del proceso para "http://purl.org/roh/mirror/foaf#Person". Investigadores de un CV](#detalle-del-proceso-para-httppurlorgrohmirrorfoafPerson-investigadores-de-un-cv)
 
-[4 Detalle de los APIs utilizados para el descubrimiento de enlaces](#detalle-de-los-apis-utilizados-para-el-descubrimiento-de-enlaces)
+[4 Justificación del método elegido](#justificación-del-método-elegido)
 
-[4.1 Crossref](#user-content-crossref-httpswwwcrossreforg)
+[4.1 Resultados obtenidos](#resultados-obtenidos)
 
-[4.2 DBLP Computer Science Bibliography](#user-content-dblp-computer-science-bibliography-httpsdblporg)
+[4.2 Comparación con resultados obtenidos contra benchmarks](#comparación-con-resultados-obtenidos-contra-benchmarks)
 
-[4.3 DOAJ](#user-content-doaj-httpsdoajorg)
+[4.3 Conclusiones](#conclusiones)
 
-[4.4 ORCID](#user-content-orcid-httpsorcidorg)
+[5 Detalle de los APIs utilizados para el descubrimiento de enlaces](#detalle-de-los-apis-utilizados-para-el-descubrimiento-de-enlaces)
 
-[4.5 PubMed](#user-content-pubmed-httpspubmedncbinlmnihgov)
+[5.1 Crossref](#user-content-crossref-httpswwwcrossreforg)
 
-[4.6 Recolecta](#user-content-recolecta-httpsrecolectafecytes)
+[5.2 DBLP Computer Science Bibliography](#user-content-dblp-computer-science-bibliography-httpsdblporg)
 
-[4.7 Scopus](#user-content-scopus-httpswwwscopuscom)
+[5.3 DOAJ](#user-content-doaj-httpsdoajorg)
 
-[4.8 Web of Science](#user-content-web-of-science-httpwosfecytes)
+[5.4 ORCID](#user-content-orcid-httpsorcidorg)
+
+[5.5 PubMed](#user-content-pubmed-httpspubmedncbinlmnihgov)
+
+[5.6 Recolecta](#user-content-recolecta-httpsrecolectafecytes)
+
+[5.7 Scopus](#user-content-scopus-httpswwwscopuscom)
+
+[5.8 Web of Science](#user-content-web-of-science-httpwosfecytes)
 
 Introducción
 ============
@@ -306,7 +314,92 @@ Una vez explicadas las configuraciones de similitud que actuarán para este caso
 4. Si tras todos estos intentos de reconciliación no se ha conseguido encontrar el investigador se procede del siguiente modo: 
     1. En caso de que no se haya encontrado el umbral máximo de similitud del investigador, pero sí que se haya alcanzado el umbral mínimo se pondrá la carga de RDF en el que estaba la entidad en ‘cuarentena’ a la espera de que un administrador decida si se trata de la misma entidad o no. 
     2. En caso de que se haya encontrado más de una entidad que supere el umbral máximo se pondrá la carga de RDF en el que estaba la entidad en ‘cuarentena’ a la espera de que un administrador decida cuál de las entidades es la equivalente. 
-    3. En el caso de que ni siquiera se haya alcanzado el umbral mínimo de similitud, se considera que se trata de un investigador nuevo en el sistema por lo que se procede a su carga como si se tratase de una entidad nueva, además se cargará en el sistema con información adicional obtenida en el descubrimiento (de Unidata o de los APIs) en el caso de que se haya encontrado (ORCID, áreas temáticas, etc.). 
+    3. En el caso de que ni siquiera se haya alcanzado el umbral mínimo de similitud, se considera que se trata de un investigador nuevo en el sistema por lo que se procede a su carga como si se tratase de una entidad nueva, además se cargará en el sistema con información adicional obtenida en el descubrimiento (de Unidata o de los APIs) en el caso de que se haya encontrado (ORCID, áreas temáticas, etc.).
+
+
+Justificación del método elegido
+===================
+
+De los tres procesos de descubrimiento, la reconciliación podría haberse afrontado mediante algún desarrollo que utilizase técnicas de _machine learning_ autónomo o supervisado. Sin embargo y como se ha explicado en el apartado anterior, se ha optado por un método que utiliza un conjunto de reglas predefinidas sobre las que un administrador o desarrollador podría actuar cambiando ciertos parámetros o mediante reprogramación de algunos comportamientos.
+
+Consideramos que el problema que hay que solucionar en este caso tiene unas características específicas que lo hacen adecuado para un sistema de reglas que, en cualquier caso, si hace uso de la naturaleza de grafo de los datos para obtener sus resultados. Estas características son:
+
+- La información provendrá, en la mayoría de los casos, de un SGI (preferentemente Hércules SGI), por lo que podemos esperar un conformado de los datos correcto.
+- Disponemos de sistemas externos con los que obtener información adicional para el proceso de reconciliación (descubrimiento de enlaces), en las que los usuarios y sistemas publican con un nivel de calidad de datos alto.
+- La información incorpora, frecuentemente, datos de códigos únicos y ampliamente aceptados para investigadores (ORCID y otros) y documentos (DOI).
+- En el peor de los casos, los datos vendrán de la autoedición de su CV por parte de los investigadores (formato CVN). En principio, esto supone un interés alto por parte del usuario en la generación de información precisa y, por tanto, una alta corrección en los datos.
+
+Es decir, no se trata de desarrollar un sistema "ciego" de reconciliación en el que la calidad de los datos es incierta, sino que se trata de información altamente formalizada y susceptible de ser reconciliada mediante reglas que tienen en cuenta su tipología y las relaciones entre las entidades y sus datos.
+
+Resultados obtenidos
+--------------
+
+El método elegido se ha puesto a prueba con los curriculum proporcionados por la UM en formato CVN. Este sería el caso más complicado de resolución, ya que en un mismo CV nos encontraremos con muchas publicaciones, ROs y, especialmente, investigadores para los que, generalmente, solo se dispone de nombre y apellidos.
+
+En el caso del CVN, la reconciliación se hace en dos pasos. En primer lugar, dentro del propio curriculum, ya que se pueden repetir entidades, particularmente personas. En segundo, con las entidades ya existentes en el grafo. Los resultados han sido:
+
+|Reconciliación de artículos dentro del CV| |
+|:----|:----|
+|Artículos diferentes en el CV|934|
+|Artículos diferentes en el CV (reconciliación en el CV)|876|
+|Artículos reconciliados dentro del CV|58|
+|Artículos reconciliados dentro del CV que no eran correctos (fallos)|0|
+|Artículos NO reconciliados dentro del CV (fallos)|7|
+|Precisión|1|
+|Cobertura|0,9920|
+
+|Reconciliación de artículos con existentes en el grafo| |
+|:----|:----|
+|Artículos reconciliados con la BBDD|33|
+|Artículos reconciliados dentro de la BBDD que no eran correctos (fallos)|0|
+|Articulos NO reconciliados con la BBDD (propuestos para reconciliar manualmente)|0|
+|Precisión|1|
+|Cobertura|1|
+
+|Reconciliación de personas dentro del CV| |
+|:----|:----|
+|Personas diferentes en el CV|868|
+|Personas diferentes en el CV (reconciliación RDF)|831|
+|Personas reconciliadas dentro del CV|37|
+|Personas reconciliados dentro del CV que no eran correctos (fallos)|2|
+|Personas NO reconciliadas dentro del CV (fallos)|41|
+|Precisión|0,9977|
+|Cobertura|0,9507|
+
+|Reconciliación de personas con existentes en el grafo| |
+|:----|:----|
+|Personas reconciliadas con la BBDD|47|
+|Personas reconciliadas dentro de la BBDD que no eran correctas (fallos)|0|
+|Personas NO reconciliadas con la BBDD (propuestas para reconciliar manualmente)|12|
+|Precisión|1|
+|Cobertura|0,7966|
+
+
+La explicación de los fallos es:
+- Cobertura de artículos reconciliados en el CV (0,9920). Se trata de errores ortográficos ya que dentro del curriculum los títulos tienen que ser iguales para considerarse el mismo.
+- Precisión de personas reconciliadas en el CV (0,9977). Los investigadores comparten parte del nombre y tienen coautores en común.
+- Cobertura de personas reconciliadas en el CV (0,9507). Las personas tienen el mismo nombre, pero no tienen resultados de investigación en común. Con esta información, tampoco una persona en un proceso manual podría asegurar de que se trata de la misma persona.
+- Cobertura de personas reconciliadas con personas existentes en el grafo (0,7966). El sistema no las ha reconocido con suficiente fiabilidad, pero las propone para una resolución manual.
+
+Comparación con resultados obtenidos contra benchmarks
+--------------------
+
+Hemos tomado como referencia los resultados de [Ontology Alignment Evaluation Initiative (OAEI)](http://oaei.ontologymatching.org/), en relación con el problema de _instance matching_ para el track SPIMBENCH en los años [2019](https://project-hobbit.eu/challenges/om2019/) y [2020](https://hobbit-project.github.io/OAEI_2020.html#spimbench-1).
+
+Como se puede ver, los resultados de 2020 son algo mejores, oscilando los resultados de precisión entre 0,8349 y 0,9383 en 2019; y 0,8349 y 1 en 2020. En cuanto a cobertura, va de 0,7625 a 1 en 2019; y de 0,7095 a 1 en 2020.
+
+Como se puede observar, los resultados obtenidos mediante reglas son comparables, en este caso, a los que se obtienen contra el benchmark SPIMBENCH de referencia en OAEI.
+
+Conclusiones
+-----------
+
+Los algoritmos y aproximaciones utilizados contra SPIMBENCH, de propósito general, necesitarían adaptarse a algunas peculiaridades de los datos. Por ejemplo, se puede dar el caso de dos entidades con el mismo o muy parecido nombre sean distintas (publicaciones y autores con nombres muy parecidos); y que dos entidades sean muy parecidas en nombre y compartan autores, pero sean distintas en realidad (p.e. publicaciones con un nombre en el que sólo varía el año, siendo el resto del título igual y compartiendo autores).
+
+También cabe citar que los algoritmos utilizados contra SPIMBENCH necesitarían una arquitectura más compleja para obtener un resultado dudosamente mejor que con la solución que proponemos.
+
+La solución propuesta, basada en reglas, sería configurable para resolver otros problemas, pero está especialmente adaptada al caso que nos ocupa, lo que ofrece un resultado muy similar al que ofrecería una revisión humana. Además, los parámetros del sistema son configurables, según lo indicado anteriormente, lo que ofrecería la posibilidad de generar un funcionamiento más o menos desatendido. Por ejemplo, se podría reducir el umbral de decisión para que la reconciliación con los investigadores ya cargados en el grafo fuera más automática.
+
+
     
 Detalle de los APIs utilizados para el descubrimiento de enlaces
 ===================
