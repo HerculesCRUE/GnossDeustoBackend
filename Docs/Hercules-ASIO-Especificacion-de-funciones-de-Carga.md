@@ -89,7 +89,7 @@ INTRODUCCIÓN
 ============
 
 Este documento contiene la especificación de las funciones de carga del 
-proyecto Hércules ASIO ([API Carga](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA)), e incluye la descripción de la implementación 
+proyecto Hércules ASIO ([API Carga](../src/Hercules.Asio.Api.Carga)), e incluye la descripción de la implementación 
 del [protocolo OAI-PMH](https://www.openarchives.org/pmh/)(Open Archive Initiative -- Protocol for Metadata Harvesting) 
 para el intercambio de datos desde el SGI hacia el Backend. 
 Los formatos de metadatos que devuelve el protocolo OAI-PMH se corresponden
