@@ -111,7 +111,7 @@ proyecto ASIO cuenta con unas buenas prácticas y un Esquema de URIs (ver
 prácticas
 URIs](UrisFactory/Buenas-practicas-URIs.md)
 y [20191211 Esquema de
-URIs.json](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/UrisFactory/docs/20191211%20Esquema%20de%20URIs.json))
+URIs.json](UrisFactory/20191211%20Esquema%20de%20URIs.json))
 que propone URIs descriptivos en un único idioma con caracteres ASCII no
 extendidos.
 
