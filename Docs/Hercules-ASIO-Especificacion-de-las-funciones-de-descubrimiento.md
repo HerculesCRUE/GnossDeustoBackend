@@ -407,7 +407,7 @@ El funcionamiento es similar en el uso de todos los APIs, se obtienen del RDF a 
 
 Las pequeñas diferencias en los usos de los APIs están derivadas de la naturaleza propia de cada uno de ellos (en alguno se puede buscar por documentos, en otros por personas...).
 
-Los datos incorporados desde fuentes externas se cargan junto con triples que indican su procedencia, según lo especificado en el documento [Hércules Backend ASIO. Procedencia de datos - Provenance](Procedencia-de-datos-externos-Provenance.md).
+Los datos incorporados desde fuentes externas se cargan junto con triples que indican su procedencia, según lo especificado en el documento [Hércules Backend ASIO. Procedencia de datos - Provenance](Hercules-ASIO-Procedencia-de-datos-externos-Provenance.md).
 
 A continuación se detallan los diferentes APIs utilizados junto con su URL, una breve descripción y el uso que hacemos dentro del servicio de descubrimiento:
 
