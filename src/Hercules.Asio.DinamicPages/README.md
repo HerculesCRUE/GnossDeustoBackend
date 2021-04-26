@@ -81,5 +81,5 @@ Se puede encontrar un el appsettings usado para este servicio sin datos sensible
 - **Swashbuckle.AspNetCore.Annotations**: versión 5.5.1
 - **Swashbuckle.AspNetCore.Filters**: versión 5.5.2
 - **Swashbuckle.AspNetCore.Swagger**: versión 5.5.1
-- **Swashbuckle.AspNetCore.SwaggerGen **: versión 5.5.1
-- **Swashbuckle.AspNetCore.SwaggerUi **: versión 5.5.1
+- **Swashbuckle.AspNetCore.SwaggerGen**: versión 5.5.1
+- **Swashbuckle.AspNetCore.SwaggerUi**: versión 5.5.1
