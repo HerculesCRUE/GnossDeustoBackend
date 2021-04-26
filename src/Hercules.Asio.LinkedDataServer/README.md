@@ -1,10 +1,10 @@
-![](..//Docs/media/CabeceraDocumentosMD.png)
+![](../../Docs/media/CabeceraDocumentosMD.png)
 
 | Fecha         | 09/02/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|LINKED DATA SERVER readme| 
 |Descripción|Manual del servicio LINKED DATA SERVER|
-|Versión|0.6|
+|Versión|1|
 |Módulo|API DISCOVER|
 |Tipo|Manual|
 |Cambios de la Versión|Cambios en la configuración|
@@ -40,10 +40,10 @@ El Linked Data Server de ASIO cumple la especificación LDP:
 Ejemplos de resolución de URIs
 -----------------------
 
-Se puede comprobar el funcionamiento del servidor mediante los siguientes ejemplos (actualizable):
-- [http://graph.um.es/res/person/63ec870e-9908-49b9-9242-07a449bc562f](http://graph.um.es/res/person/63ec870e-9908-49b9-9242-07a449bc562f) Investigador con publicaciones e identificadores externos.
-- [http://graph.um.es/res/article/a248813c-cfe9-4208-8009-87464d6cfade](http://graph.um.es/res/article/a248813c-cfe9-4208-8009-87464d6cfade) Artículo con DOI y otros identificadores obtenidos desde fuentes externas.
-- [http://graph.um.es/res/project/5d35f1da-6eee-49e3-a350-54447ab24344](http://graph.um.es/res/project/5d35f1da-6eee-49e3-a350-54447ab24344) Proyecto de investigación.
+Se puede comprobar el funcionamiento del servidor mediante los siguientes ejemplos:
+- [http://graph.um.es/res/person/1003187](http://graph.um.es/res/person/1003187) Investigador con publicaciones.
+- [http://graph.um.es/res/academic-article/161158](http://graph.um.es/res/academic-article/161158) Artículo científico.
+- [http://graph.um.es/res/project/RADBOUDUMC](http://graph.um.es/res/project/RADBOUDUMC) Proyecto de investigación.
 
 *Conexión a Triple Store*
 -------------------------
