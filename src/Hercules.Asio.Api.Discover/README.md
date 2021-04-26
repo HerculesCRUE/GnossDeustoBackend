@@ -48,7 +48,7 @@ http://graph.um.es/res/project/RAYD-A-2002-6237
 ## Formato de configuración en el fichero reconciliationConfig.json
 En este fichero se configuran, por cada una de las clases de la ontología, las propiedades a tener en cuenta para realizar el descubrimiento con los datos que ya están cargados en el Triple Store.
 
-Este fichero se encuentra aqui: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_DISCOVER/API_DISCOVER/Config/reconciliationConfig.json.
+Este fichero se encuentra aqui: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.Api.Discover/API_DISCOVER/Config/reconciliationConfig.json
 
 A continuación se muestra un fragmento del fichero con la configuración del descubrimiento para las entidades del tipo 'http://purl.org/roh/mirror/foaf#Person'
 
