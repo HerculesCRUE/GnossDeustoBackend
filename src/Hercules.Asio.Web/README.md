@@ -85,7 +85,7 @@ En esta carpeta está disponible el [Manual de Usuario del FrontEnd](Manual-de-u
  - Proxy: directorio virtual que se ha configurado para el proxy inverso, en caso de que no se haya configurado dejar vacío.
  - UnidataDomain: Dominio del Linked Data server de Unidata
  
-Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/ApiCargaWebInterface/appsettings.json
+Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.Web/ApiCargaWebInterface/appsettings.json
 
 ## Dependencias
 
