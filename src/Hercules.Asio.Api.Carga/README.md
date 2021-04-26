@@ -1,10 +1,10 @@
 ![](..//Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 01/10/2020                                                   |
+| Fecha         | 14/04/20201                                                  |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|API CARGA readme| 
-|Descripción|Manual del servicio API CARGA|
-|Versión|0.2|
+|Descripción|Manual del servicio API CARGA. Corrección de enlaces|
+|Versión|1|
 |Módulo|API CARGA|
 |Tipo|Manual|
 |Cambios de la Versión|Añadida la sección [Obtención del Token](#obtención-del-token)<br/>Añadida la sección [Configuración en el appsettings.json](#configuración-en-el-appsettingsjson)|
