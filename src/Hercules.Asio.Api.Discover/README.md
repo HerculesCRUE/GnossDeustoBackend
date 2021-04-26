@@ -39,7 +39,7 @@ El SPARQL Endpoint provisional se encuentra disponible en un servidor de la Univ
 
 http://155.54.239.204:8890/sparql
 
-Hay ejemplos de consultas en el documento [20200325 Hércules ASIO Ejemplos de consultas](../../Docs//SPARQL/Hercules-ASIO-Ejemplos-de-consultas-SPARQL.md)
+Hay ejemplos de consultas en el documento [20200325 Hércules ASIO Ejemplos de consultas](../../Docs/SPARQL/Hercules-ASIO-Ejemplos-de-consultas-SPARQL.md)
 
 Los datos cargados se pueden consultar en una versión preliminar del servidor Linked Data, soportado por [Trifid](https://github.com/zazuko/trifid), desplegado en los servidores de la Universidad de Murcia. Por ejemplo:
 
@@ -255,7 +255,7 @@ A continuación se muestra un fragmento del fichero con la configuración del de
 
 # Comprobaciones y pruebas
 
-Para comprobar el correcto funcionamiento del servicio API DISCOVER, se utilizarán un conjunto de 5 RDF's en formato xml que están disponibles en [este enlace](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_DISCOVER/xml_descubrimiento.zip).
+Para comprobar el correcto funcionamiento del servicio API DISCOVER, se utilizarán un conjunto de 5 RDF's en formato xml que están disponibles en [este enlace](xml_descubrimiento.zip).
 
 Realizaremos las pruebas accediendo con el método /etl/data-publish, que podemos probar desde Swagger siguiendo estos pasos:
 
