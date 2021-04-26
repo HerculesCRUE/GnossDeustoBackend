@@ -1,10 +1,10 @@
-![](../Docs/media/CabeceraDocumentosMD.png)
+![](../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 01/10/2020                                                   |
+| Fecha         | 14/04/2021                                                |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|versión inicial| 
 |Descripción|Documentación del gestor de documentación|
-|Versión|0.1|
+|Versión|1|
 |Módulo|GestorDocumentacion|
 |Tipo|Documentación|
 |Cambios de la Versión|Creación|
@@ -27,7 +27,7 @@ determinada y luego acceder a esas páginas a través de la web (https://herc-as
 	 - *Post:* /Page/loadpage: Carga una nueva página o modifica un página existente
 	 - *Delete:* /Page/Delete: Elimina una página dando su identificador
 
- La documentación de la librería está disponible en:
+La documentación de la librería está disponible en:
 
 http://herc-as-front-desa.atica.um.es/apiGestorDocumentacion/api/GestorDocumentacion.Controllers.html
 
@@ -65,7 +65,7 @@ Este api esta protegida mediante tokens, por ello para poder usar la interfaz sw
  - Authority: Url donde está instalado el IdentityServer
  - Scope: Limitación de acceso al api de documentacion
  
- Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.DinamicPages/GestorDocumentacion/appsettings.json
+Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.DinamicPages/GestorDocumentacion/appsettings.json
 
 ## Dependencias
 
