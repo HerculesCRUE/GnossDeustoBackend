@@ -14,7 +14,7 @@
 Creación de páginas sin contenido dinámico
 ----------------
 Este tipo páginas contienen únicamente contenido html estático, se puede encontrar un ejemplo en: 
-https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/paginas/gnossdeustobackend.cshtml
+https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Web/paginas/gnossdeustobackend.cshtml
 
 Como curiosidad esta página contiene el código: 
 
@@ -46,7 +46,7 @@ Mediante la etiqueta `@*<% api https://localhost:44359/Job?type=0&count=100&from
 **importante respetar los espacios en la etiqueta tanto al principio `@*<%` como al final `/%>*@`.** con directiva api dentro de la etiqueta indicamos que es una llamada al api, la llamada se especifica después 
 de la directiva api separada por un espacio.
 
-Se puede encontrar un ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/paginas/api.cshtml
+Se puede encontrar un ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Web/paginas/api.cshtml
 
 En está pagina se añade un using a Newtonsoft Json `@using Newtonsoft.Json` para poder deserializar los datos que están en el primer elemento de la lista que se encuentran
  en el modelo en la propiedad Results ya que se encuentran en Json y poder trabajar con la clase obtenida posteriormente.
@@ -71,7 +71,7 @@ Mediante la etiqueta
 
 indicamos que es una llamada a virtoso, **importante respetar los espacios en la etiqueta tanto al principio `@*<%` como al final `/%>*@`.** con directiva sparql dentro de la etiqueta indicamos que es una llamada a virtuoso, la consulta se especifica después separada por un espacio.
 
-Se puede encontrar un ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/paginas/sparql.cshtml
+Se puede encontrar un ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Web/paginas/sparql.cshtml
 
 En está página se han añadido varios using para poder deserializar el contenido que hay en el primer elemento de la propiedad Results del modelo, el cual está en formato csv, y posteriormente trabjar con los datos obtenidos al deserializar.
 A continación se indican los using importados en las vistas para el tratamiento de los datos llegados en csv.
@@ -88,7 +88,7 @@ Al final del documento está declarada la clase a deserializar mediante la direc
     }
 	
 ## Consultas mixtas
-Se puede encontrar este ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/paginas/directivas.cshtml
+Se puede encontrar este ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Web/paginas/directivas.cshtml
 
 En este ejemplo se han puesto todos los using vistos en este documento para tratar información tanto en json como csv y se han usado las dos directivas vistas, para hacer una llamada a un api 
 y hacer una consulta a virtuoso. En este caso en la propiedad Results del modelo tenemos una lista de dos objetos, el primer elemento de la lista corresponde al resultado en json de la llamada api,
@@ -119,7 +119,7 @@ En el siguiente fragmento de código tenemos dos bloques, el primer bloque donde
 
 
 ## Varias consultas Sparql
-Se puede encontrar este ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/paginas/Consultas-Sparql.cshtml
+Se puede encontrar este ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Web/paginas/Consultas-Sparql.cshtml
 
 En este ejemplo se sigue el mismo proceso que en el ejemplo visto al crear una página con una consulta Sparql, con la salvedad de que en este caso hay que obtener todos los resultados para las consultas realizadas y tratarlos para poder consultar los resultados como se ve en el ejemplo,
 en nuestro modelo de la página tendremos en la posición 0 la primera consulta realizada, en la posición 1 la segunda consulta y así sucesivamente. En el siguiente ejemplo tenemos dos bloques de código que los dos hacen referencia a consultas sparql, en el primer bloque se deserealizan los datos obtenidos de la primera consulta de la página, usando la clase deseada (PruebaSparql, que contiene una propiedad count como el nombre del campo de los datos que le hemos dado en la consulta) para leer los resultados que han venido en formato CSV. En el segundo bloque se sigue la misma dinámica para leer los datos obtenidos de la segunda consulta realizada en la página.
@@ -140,7 +140,7 @@ en nuestro modelo de la página tendremos en la posición 0 la primera consulta 
 En el caso de que se quiera añadir más consultas basta con seguir el proceso de uno de estos bloques obteniendo los datos de la posicion x `string resultX = Model.Results[x];` y deserealizando usando el CSVReader con el stream de esos datos y una clase con los parámetros del select
 
 ## Varias consultas a APIs
-Se puede encontrar este ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/FrontEndCarga/paginas/llamadas-apis.cshtml
+Se puede encontrar este ejemplo en: https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Web/paginas/llamadas-apis.cshtml
 
 En este ejemplo se sigue el mismo proceso que el visto al crear una página con una llamada a un api, excepto que en este caso hay dos llamadas a un api, por lo que hay que obtener y tratar los resultados obtenidos al hacer
 las dos llamadas al api, como en los ejemplos anterior estos resultados obtenidos se corresponderan con la llamada al api según el orden, es decir, en la posición 0 de la lista la primera llamada que aparece en el código de la página, en la posición 1 y así sucesivamente.
