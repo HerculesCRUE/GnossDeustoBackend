@@ -56,9 +56,9 @@ http://155.54.239.204:8890/sparql
 
 Hay ejemplos de consultas en el documento [20200325 Hércules ASIO Ejemplos de consultas](../../Docs/SPARQL/Hercules-ASIO-Ejemplos-de-consultas-SPARQL.md)
 
-Los datos cargados se pueden consultar en una versión preliminar del servidor Linked Data, soportado por Trifid *Editar Esteban*, desplegado en los servidores de la Universidad de Murcia. Por ejemplo:
+Los datos cargados se pueden consultar en una versión preliminar del servidor Linked Data, soportado por el servidor [Linked Data desarrollado](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.LinkedDataServer), desplegado en los servidores de la Universidad de Murcia. Por ejemplo:
 
-http://graph.um.es/res/project/RAYD-A-2002-6237
+http://graph.um.es/res/project/RADBOUDUMC
 
 ## Configuración en el appsettings.json
 
