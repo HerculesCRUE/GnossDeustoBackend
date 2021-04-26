@@ -12,7 +12,7 @@ En la carpeta [Docs](../../Docs/Benchmark/) del Benchmark se pueden consultar lo
 
 La aplicación de Benchmark está desplegada en:
 
-http://herc-as-front-desa.atica.um.es/benchmark
+https://herc-as-front-desa.atica.um.es/benchmark
 
 This folder includes the code, ontologies and data for the triple store assessement tool, including:
 
