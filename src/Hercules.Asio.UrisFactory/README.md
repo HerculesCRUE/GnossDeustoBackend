@@ -14,7 +14,7 @@
 
 La documentación que explica la Especificación de URIs Hércules y las Buenas prácticas de URis está en:
 
-https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Docs/UrisFactory
+[Docs/UrisFactory](../../Docs/UrisFactory)
 
 La librería se utiliza como un servicio web, accesible en pruebas en esta dirección a través de swagger: 
 
@@ -24,9 +24,9 @@ La documentación de la librería está disponible en:
 
 http://herc-as-front-desa.atica.um.es/uris-factory/library/api/UrisFactory.Controllers.html
 
-Los resultados de las pruebas unitarias se pueden consultar en [ResultsTest](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.UrisFactory/ResultsTest).
+Los resultados de las pruebas unitarias se pueden consultar en [ResultsTest](ResultsTest).
 
-La librería compilada se encuentra en la carpeta [librerías](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/libraries).
+La librería compilada se encuentra en la carpeta [librerías](../../Builds/libraries).
 
 Este Api contiene dos controladores.
 
@@ -107,7 +107,9 @@ Este api esta protegida mediante tokens, por ello para poder usar la interfaz sw
     }
 - Scope: Limitación de acceso al api de urisFactory
 
- Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.UrisFactory/UrisAutoGenerator/appsettings.json
+ Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: 
+ 
+ [UrisAutoGenerator/appsettings.json](UrisAutoGenerator/appsettings.json)
 
 ## Dependencias
 
