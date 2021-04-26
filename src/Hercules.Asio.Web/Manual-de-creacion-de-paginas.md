@@ -1,10 +1,10 @@
-![](../Docs/media/CabeceraDocumentosMD.png)
+![](../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 01/10/2020                                                   |
+| Fecha         | 14/04/2021                                                 |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|versión inicial| 
 |Descripción|Documentación de creación de páginas por parte del usuario|
-|Versión|0.1|
+|Versión|1|
 |Módulo|FrontEndCarga|
 |Tipo|Manual|
 |Cambios de la Versión|Creación|
