@@ -21,4 +21,4 @@ Formato de la especificación de un esquema de URIs usando JSON.
 
 Ejemplo de un esquema de URIs usando el formato anterior. La librería usa el fichero [UrisConfig.json](../../src/Hercules.Asio.UrisFactory/UrisAutoGenerator/Config/UrisConfig.json), 
 almacenado como parte del proyecto de código en la carpeta 
-[GnossDeustoBackend/UrisFactory/UrisAutoGenerator/Config/](../../src/Hercules.Asio.UrisFactory/UrisAutoGenerator/Config) del proyecto de código.
+[src/Hercules.Asio.UrisFactory/UrisAutoGenerator/Config](../../src/Hercules.Asio.UrisFactory/UrisAutoGenerator/Config) del proyecto de código.
