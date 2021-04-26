@@ -29,7 +29,7 @@ La carpeta Docs contiene los siguientes documentos:
     - [EF2.1-7 MÉTRICAS FAIR I- SOFTWARE Y DOCUMENTACIÓN DE MÉTRICAS.pdf](FAIR/EF2.1-7.%20M%C3%89TRICAS%20FAIR%20I-%20SOFTWARE%20Y%20DOCUMENTACI%C3%93N%20DE%20M%C3%89TRICAS.pdf)
    - [EF2.1-7. MÉTRICAS FAIR I SOFTWARE Y DOCUMENTACIÓN DE MÉTRICAS](FAIR/EF2.1-7.-METRICAS-FAIR-I-SOFTWARE-Y-DOCUMENTACION-DE-METRICAS.md)
    - [Entregable EF2-1.6 APÉNDICE Métricas publicadas por FAIRmetrics.pdf](FAIR/Entregable%20EF2-1.6%20AP%C3%89NDICE%20M%C3%A9tricas%20publicadas%20por%20FAIRmetrics.pdf)
-   - [Entregable EF2-1.6_Documento de análisis de métodos FAIR](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/FAIR/Entregable-EF2-1.6_-documento-de-analisis-de-metodos-FAIR.md)
+   - [Entregable EF2-1.6_Documento de análisis de métodos FAIR](FAIR/Entregable-EF2-1.6_-documento-de-analisis-de-metodos-FAIR.md)
  - SPARQL
    - [Hércules ASIO Ejemplos de consultas SPARQL](SPARQL/Hercules-ASIO-Ejemplos-de-consultas-SPARQL.md)
  - [UrisFactory](UrisFactory/)
@@ -49,10 +49,10 @@ Además de los documentos de características generales contenidos en esta carpe
  - [Linked data server](../src/Hercules.Asio.LinkedDataServer)
  - [Uris Factory](../Hercules.Asio.UrisFactory)
  - [Asio Web](../src/Hercules.Asio.Web)
- - [XML RDF Conversor]../src/Hercules.Asio.XML_RDF_Conversor)
+ - [XML RDF Conversor](../src/Hercules.Asio.XML_RDF_Conversor)
  - [CVN](../src/cvn)
-	 - /src/cvn/docs
-	 - /src/cvn/docs/api
-	 - /src/cvn/docs/config
+	 - [Documentos](../src/cvn/docs)
+	 - [API](../src/cvn/docs/api)
+	 - [Config](../src/cvn/docs/config)
  - [Fair](../src/fair)
- - [Bridge](../fair/bridge)
+ - [Bridge](../src/fair/bridge)
