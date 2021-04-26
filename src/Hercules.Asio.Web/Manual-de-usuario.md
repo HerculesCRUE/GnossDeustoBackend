@@ -1,10 +1,10 @@
-![](../Docs/media/CabeceraDocumentosMD.png)
+![](../../Docs/media/CabeceraDocumentosMD.png)
  
-| Fecha         | 01/10/2020                                                   |
+| Fecha         | 14/04/2021                                                  |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Cambios en el manual de usuario| 
 |Descripción|Creación de páginas y modificación|
-|Versión|0.3|
+|Versión|1|
 |Módulo|FrontEndCarga|
 |Tipo|Manual|
 |Cambios de la Versión| En está versión se ha añadido un enlace a un manual para la creación de páginas por parte del usuario|
@@ -42,7 +42,9 @@ Está web es el punto de entrada de los usuarios para administrar sus repositori
 
 Para cada repositorio el usuario podrá añadir validaciones, tareas programadas y tareas recurrentes. 
 
-Además, desde el menú superior puede acceder también al listado de validaciones (shapes) y a la administración de la factoría de uris, desde donde se podrá administrar los esquemas de URIs. 
+Además, desde el menú superior puede acceder también al listado de validaciones (shapes) y a la administración de la factoría de uris, desde donde se podrá administrar los esquemas de URIs.
+
+También se puede consultar el [manual de creación de páginas](Manual-de-creacion-de-paginas.md)
 
 Página principal. Listado de repositorios
 -----------------------------------------
@@ -215,5 +217,3 @@ Al pulsar el botón + aparecerá un formulario para crear páginas con contenido
 A continuación se muestra un ejemplo de una página creada mediante este formulario, con la url /public/gnossdeustobackend/index
 
 ![](img/paginaCreada.png)
-
-Disponemos de un pequeño [manual de creación de páginas](Manual-de-creacion-de-paginas.md)
