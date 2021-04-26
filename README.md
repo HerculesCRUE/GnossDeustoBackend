@@ -27,23 +27,23 @@ Hércules ASIO es un proyecto de software libre alojado en dos repositorios púb
 
 El repositorio de desarrollo de la Arquitectura Semántica del proyecto Hércules ASIO (Backend SGI) contiene los siguientes programas y servicios:
 
- - [Hercules.Asio.Api.Carga](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Api.Carga): servicio web que contiene 4 controladores:
+ - [Hercules.Asio.Api.Carga](/src/Hercules.Asio.Api.Carga): servicio web que contiene 4 controladores:
    - etlController: Contiene los procesos ETL (Extract, Transform and Load) necesarios para la carga de datos.
    - repositoryController: Contiene los procesos necesarios para la gestión de los repositorios OAI-PMH (creación, modificación, eliminación...).
    - syncController: Contiene los procesos necesarios para la ejecución de las sincronizaciones.
    - ValidationController: Contiene los procesos necesarios para la gestión de las validaciones (creación, modificación, eliminación...). La carpeta    Validaciones contiene información sobre los shapes SHACL definidos para validar.
-- [Hercules.Asio.Api.Discover](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Api.Discover): Ofrece las siguientes funciones, que forman parte del proceso de carga:
+- [Hercules.Asio.Api.Discover](/src/Hercules.Asio.Api.Discover): Ofrece las siguientes funciones, que forman parte del proceso de carga:
    - Reconciliación de entidades, que evita la duplicación de entidades.
    - Descubrimiento de enlaces, que genera enlaces hacia datasets externos y ofrece información de ayuda en la reconciliación de entidades.
    - Detección de equivalencias, entre nodos Unidata.
- - [Hercules.Asio.Web](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Web): interfaz Web de administración de las cargas de datos en la plataforma Hércules ASIO.
- - [Hercules.Asio.CVN2OAI_PMH](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.CVN2OAI_PMH): Sirve los datos de los curículums de los investigadores de la Universidad de Murcia en formato RDF y dublin core.
- - [Hercules.Asio.UrisFactory](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.UrisFactory): Servicio que genera URIs según el esquema definido en ASIO.
- - [cvn](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/cvn): Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH.
- - [Hercules.Asio.Cron](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Cron): Es un api para la gestión y configuración del programado de tareas, tanto de ejecución recurrente como ejecución única sobre los repositorios configurados.
- - [Hercules.Asio.DynamicPages](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.DinamicPages): Servicio web para la creación de páginas de contenido html y su posterior visualización.
- - [Hercules.Asio.IdentityServer](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.IdentityServer):encargado de la securización mediante tokens para los apis que forman el proyecto.
- - [Hercules.Asio.LinkedDataServer](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.LinkedDataServer): proporciona el servicio de datos enlazados de Hércules ASIO.
+ - [Hercules.Asio.Web](/src/Hercules.Asio.Web): interfaz Web de administración de las cargas de datos en la plataforma Hércules ASIO.
+ - [Hercules.Asio.CVN2OAI_PMH](/src/Hercules.Asio.CVN2OAI_PMH): Sirve los datos de los curículums de los investigadores de la Universidad de Murcia en formato RDF y dublin core.
+ - [Hercules.Asio.UrisFactory](/src/Hercules.Asio.UrisFactory): Servicio que genera URIs según el esquema definido en ASIO.
+ - [cvn](/src/cvn): Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH.
+ - [Hercules.Asio.Cron](/src/Hercules.Asio.Cron): Es un api para la gestión y configuración del programado de tareas, tanto de ejecución recurrente como ejecución única sobre los repositorios configurados.
+ - [Hercules.Asio.DynamicPages](/src/Hercules.Asio.DinamicPages): Servicio web para la creación de páginas de contenido html y su posterior visualización.
+ - [Hercules.Asio.IdentityServer](/src/Hercules.Asio.IdentityServer):encargado de la securización mediante tokens para los apis que forman el proyecto.
+ - [Hercules.Asio.LinkedDataServer](/src/Hercules.Asio.LinkedDataServer): proporciona el servicio de datos enlazados de Hércules ASIO.
  
 
 ### Diagrama de componentes del proyecto
@@ -56,7 +56,7 @@ Las [instrucciones de configuración e instalación](Configuracion-e-Instalacion
 
 Todas las aplicaciones aquí descritas pueden usarse de dos formas distintas: 
   - Como un API, instalando la aplicación y llamando a su Endpoint.
-  - Como una [librería](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/libraries), añadiendo el ensamblado DLL a la solución de código fuente y usando las clases y métodos definidos.
+  - Como una [librería](/Builds/libraries), añadiendo el ensamblado DLL a la solución de código fuente y usando las clases y métodos definidos.
 
 ## Documentación del Backend SGI
 
