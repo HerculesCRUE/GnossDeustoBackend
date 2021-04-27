@@ -1,6 +1,6 @@
 ![](./media/CabeceraDocumentosMD.png)
 
-# Plantilla de documento de adhesión a las recomendaciones de buenas prácticas de URIs.md
+# Plantilla de documento de adhesión a las recomendaciones de buenas prácticas de URIs
 
 La *Universidad X* ha implantado el backend del proyecto Hércules Arquitectura
 Semántica e Infraestructura Ontológica (ASIO en adelante) para hacer accesible, 
