@@ -12,6 +12,12 @@ El proyecto Arquitectura Semántica de Datos del SUE ha consistido en desarrolla
 
 Dado de los demás proyectos que componen HÉRCULES dependen tanto de la Infraestructura Ontológica, como de la Arquitectura Semántica de Datos, el proyecto ASIO interactúa con los desarrollos y resultados de los demás proyectos HÉRCULES: desarrollo de un Prototipo Innovador de Gestión de la Investigación para Universidades y Enriquecimiento de Datos y Métodos de Análisis.
 
+## Documentación del Backend SGI
+
+La documentación del backend se puede consultar en la carpeta [Docs](Docs/).
+
+Además, la carpeta de [formación](Formacion/) contiene el material usado en las jornadas de formación del proyecto ASIO.
+
 ## Desarrollo de Hércules ASIO
 
 Hércules ASIO es un proyecto de software libre alojado en dos repositorios públicos de GitHub:
@@ -25,7 +31,10 @@ Hércules ASIO es un proyecto de software libre alojado en dos repositorios púb
 
 [![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
 
+
 El repositorio de desarrollo de la Arquitectura Semántica del proyecto Hércules ASIO (Backend SGI) contiene los siguientes programas y servicios:
+
+<img src="Docs/media/Hércules ASIO Diagrama de componentes.png" />
 
  - [Hercules.Asio.Api.Carga](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Api.Carga): servicio web que contiene 4 controladores:
    - etlController: Contiene los procesos ETL (Extract, Transform and Load) necesarios para la carga de datos.
@@ -44,11 +53,6 @@ El repositorio de desarrollo de la Arquitectura Semántica del proyecto Hércule
  - [Hercules.Asio.DynamicPages](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.DinamicPages): Servicio web para la creación de páginas de contenido html y su posterior visualización.
  - [Hercules.Asio.IdentityServer](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.IdentityServer):encargado de la securización mediante tokens para los apis que forman el proyecto.
  - [Hercules.Asio.LinkedDataServer](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.LinkedDataServer): proporciona el servicio de datos enlazados de Hércules ASIO.
- 
-
-### Diagrama de componentes del proyecto
- 
-<img src="Docs/media/Hércules ASIO Diagrama de componentes.png" />
 
 ### Configuración e instalación
 
@@ -58,8 +62,3 @@ Todas las aplicaciones aquí descritas pueden usarse de dos formas distintas:
   - Como un API, instalando la aplicación y llamando a su Endpoint.
   - Como una [librería](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/libraries), añadiendo el ensamblado DLL a la solución de código fuente y usando las clases y métodos definidos.
 
-## Documentación del Backend SGI
-
-La documentación del backend se puede consultar en la carpeta [Docs](Docs/).
-
-Además, la carpeta de [formación](Formacion/) contiene el material usado en las jornadas de formación del proyecto ASIO.
