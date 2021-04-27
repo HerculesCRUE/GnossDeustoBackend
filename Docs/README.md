@@ -18,7 +18,7 @@ La carpeta Docs contiene los siguientes documentos:
  - [Hercules ASIO Fuentes externas de información para las funciones de descubrimiento](Hercules-ASIO-Fuentes-externas-de-informacion-para-las-funciones-de-descubrimiento.md)
  - [Hércules ASIO Procedencia de datos externos - Provenance](Hercules-ASIO-Procedencia-de-datos-externos-Provenance.md)
  - [Hércules ASIO Evaluación de cumplimiento Linked Data Platform](Hercules-ASIO-Evaluacion-de-cumplimiento-Linked-Data-Platform.md)
- - [Hércules ASIo TripleStore Benchmark deliverable report](Hercules-TripleStore-Benchmark-deliverable-report.md)
+ - [Hércules ASIO TripleStore Benchmark deliverable report](Hercules-TripleStore-Benchmark-deliverable-report.md)
  - [Hércules ASIO Data confidentiality proposal](Hercules-ASIO-Data-confidentiality-proposal.md)
  - [Hércules ASIO Estimación de arquitectura de Sistemas](Hercules-ASIO-Estimacion-de-arquitectura-de-Sistemas.md)
  - [Hércules ASIO Modelo de multilingüismo](Hercules-ASIO-Modelo-de-multilinguismo.md)
