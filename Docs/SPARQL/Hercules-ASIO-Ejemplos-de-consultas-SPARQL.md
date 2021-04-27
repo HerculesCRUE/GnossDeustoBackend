@@ -20,7 +20,7 @@ El documento no es exhaustivo, sino que contiene ejemplos de consultas de
 recuperación de la información, e irá evolucionando según el sistema vaya incorporando
 más datos.
 
-La URL del SPARQL endpoint es http://155.54.239.204:8890/sparql
+La URL del SPARQL endpoint es http://155.54.239.221:8890/sparql
 
 En la siguiente URL: https://docs.data.world/tutorials/sparql/introduction.html se encuentra un tutorial sobre SPARQL
 
@@ -37,8 +37,7 @@ Con la siguiente query se listan los diferentes grafos cargados:
 
 Los grafos relevantes para las queries descritas en los siguientes ejemplos son los siguientes:
 - http://graph.um.es/graph/research/roh: Grafo con la ontología
-- http://graph.um.es/graph/um_cvn: Grafo con los datos cargados de CVN de la UM.
-- http://graph.um.es/graph/um_sgi: Grafo de los datos importados desde los sistemas de la UM:
+- http://linkeddata2test.um.es/graph/sgi: Grafo de los datos importados desde los sistemas de la UM:
 
 Con la siguiente instrucción: 
 
@@ -47,19 +46,20 @@ Con la siguiente instrucción:
 Se han cargado las reglas de inferencia de la ontología, para utilizarlas en el SPARQL endpoint hay que incluir al inicio de la query la instrucción:	
 
 	define input:inference "rohontology"
+		
 
-GRAFO DE DATOS DE CVN
-=====================
+GRAFO DE DATOS DE SISTEMAS DE LA UM
+===================================
 
-El grafo de los datos cargados desde CVN es:
+El grafo de los datos importados desde los sistemas de la UM es:
 
-http://graph.um.es/graph/um_cvn
+http://linkeddata2test.um.es/graph/sgi
 
 **Consultas por rdf:type**
 
 1. Consulta que devuelve los URIs de los investigadores cargados.
 
-		select * from <http://graph.um.es/graph/um_cvn>
+		select * from <http://linkeddata2test.um.es/graph/sgi>
 		where 
 		{
 			?s a <http://purl.org/roh/mirror/foaf#Person>
@@ -67,19 +67,19 @@ http://graph.um.es/graph/um_cvn
 		
 2. Consulta que devuelve los URIs de los artículos académicos cargados.
 
-		select * from <http://graph.um.es/graph/um_cvn>
+		select * from <http://linkeddata2test.um.es/graph/sgi>
 		where 
 		{
 			?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/roh/mirror/bibo#AcademicArticle>
 		}
 		
-3. Consulta que devuelve los URIs de todos los documentos (utilizando inferencia).
+3. Consulta que devuelve los URIs de todas las organizaciones (utilizando inferencia).
 
 		define input:inference "rohontology"
-		select * from <http://graph.um.es/graph/um_cvn>
+		select * from <http://linkeddata2test.um.es/graph/sgi>
 		where 
 		{
-			?s a  <http://purl.org/roh/mirror/bibo#Document>
+			?s a  <http://purl.org/roh/mirror/foaf#Organization>
 		}
 
 
@@ -87,26 +87,26 @@ http://graph.um.es/graph/um_cvn
 
 1. Consulta que devuelve todos los triples directos de una persona.
 
-		select * from <http://graph.um.es/graph/um_cvn>
+		select * from <http://linkeddata2test.um.es/graph/sgi>
 		where 
 		{ 
-			<http://graph.um.es/res/person/1949f7bb-70d9-4e2b-94a4-a54b0df96312> ?p ?o
+			<http://linkeddata2test.um.es/res/person/1602> ?p ?o
 		}
 	
 2. Consulta que devuelve todos los triples directos de un artículo.
 
-		select * from <http://graph.um.es/graph/um_cvn>
+		select * from <http://linkeddata2test.um.es/graph/sgi>
 		where 
-		{
-			<http://graph.um.es/res/article/01fbc549-2173-4078-b51f-55311ecc5df8> ?p ?o.
+		{ 
+			<http://linkeddata2test.um.es/res/academic-article/50209> ?p ?o
 		}	
 	
 3. Consulta que devuelve todos los autores de un artículo.	
 	
-		select distinct * from <http://graph.um.es/graph/um_cvn>
+		select distinct * from <http://linkeddata2test.um.es/graph/sgi>
 		where 
 		{
-			<http://graph.um.es/res/article/01fbc549-2173-4078-b51f-55311ecc5df8> <http://purl.org/roh/mirror/bibo#authorList> ?lista.
+			<http://linkeddata2test.um.es/res/academic-article/50209> <http://purl.org/roh/mirror/bibo#authorList> ?lista.
 			?lista ?propLista ?persona.
 			?persona <http://purl.org/roh/mirror/foaf#name> ?nombrePersona.	
 		}	
@@ -115,34 +115,26 @@ http://graph.um.es/graph/um_cvn
 
 1. Consulta que devuelve todas las entidades de las que el investigador es objeto.
 
-		select * from <http://graph.um.es/graph/um_cvn>
+		select * from <http://linkeddata2test.um.es/graph/sgi>
 		where 
 		{ 
-			?s ?p <http://graph.um.es/res/person/1949f7bb-70d9-4e2b-94a4-a54b0df96312>
-		}
-
-2. Consulta que devuelve todas las entidades de las que el artículo es objeto.
-
-		select * from <http://graph.um.es/graph/um_cvn>
-		where 
-		{
-			?s ?p <http://graph.um.es/res/article/01fbc549-2173-4078-b51f-55311ecc5df8>.
+			?s ?p <http://linkeddata2test.um.es/res/person/1602>
 		}
 		
-3. Consulta que devuelve todas las entidades de las que el investigador forma parte de su lista de autores.
+2. Consulta que devuelve todas las entidades de las que el investigador forma parte de su lista de autores.
 
-		select distinct ?s from <http://graph.um.es/graph/um_cvn>
+		select distinct ?s from <http://linkeddata2test.um.es/graph/sgi>
 		where 
 		{ 
 			?s <http://purl.org/roh/mirror/bibo#authorList> ?lista.
-			?lista ?item <http://graph.um.es/res/person/1949f7bb-70d9-4e2b-94a4-a54b0df96312>
+			?lista ?item <http://linkeddata2test.um.es/res/person/1602>
 		}
 		
 **Consultas con agrupación**
 
 1. Consulta que obtiene todas las personas junto con el número de entidades de las que es parte como autor
 		
-		select ?persona ?nombrePersona count(distinct ?doc) as ?numDoc from <http://graph.um.es/graph/um_cvn>
+		select ?persona ?nombrePersona count(distinct ?doc) as ?numDoc from <http://linkeddata2test.um.es/graph/sgi>
 		where 
 		{
 			?persona a <http://purl.org/roh/mirror/foaf#Person>.
@@ -153,7 +145,7 @@ http://graph.um.es/graph/um_cvn
 		
 2.Consulta que obtiene el número de entidades por cada rdf:type		
 		
-		select ?tipo count(distinct ?entidad ) as ?numEntidades from <http://graph.um.es/graph/um_cvn>
+		select ?tipo count(distinct ?entidad ) as ?numEntidades from <http://linkeddata2test.um.es/graph/sgi>
 		where 
 		{
 			?entidad a ?tipo.	
@@ -163,32 +155,32 @@ http://graph.um.es/graph/um_cvn
 
 1. Consulta que devuelve todas las entidades de las que dos investigadores forman parte de su lista de autores (OR).
 
-		select distinct ?s from <http://graph.um.es/graph/um_cvn>
+		select distinct ?s from <http://linkeddata2test.um.es/graph/sgi>
 		where 
 		{ 
 			?s <http://purl.org/roh/mirror/bibo#authorList> ?lista.
 			?lista ?item ?autor.
-			FILTER(?autor in (<http://graph.um.es/res/person/1949f7bb-70d9-4e2b-94a4-a54b0df96312>,<http://graph.um.es/res/person/b63b9762-cdea-4348-8a37-64a0a92d8c2c>))
+			FILTER(?autor in (<http://linkeddata2test.um.es/res/person/1602>,<http://linkeddata2test.um.es/res/person/3906>))
 			
 		}
 		
 2. Consulta que devuelve todas las entidades de las que dos investigadores forman parte de su lista de autores (AND).
 
-		select distinct ?s from <http://graph.um.es/graph/um_cvn>
+		select distinct ?s from <http://linkeddata2test.um.es/graph/sgi>
 		where 
 		{ 
 			?s <http://purl.org/roh/mirror/bibo#authorList> ?lista.
 			?lista ?item ?autor.
-			FILTER(?autor =<http://graph.um.es/res/person/1949f7bb-70d9-4e2b-94a4-a54b0df96312>)
+			FILTER(?autor =<http://linkeddata2test.um.es/res/person/1602>)
                     	?lista ?item2 ?autor2.			
-			FILTER(?autor2 =<http://graph.um.es/res/person/c305b739-a36d-45db-ae87-186600b3cbde>)			
+			FILTER(?autor2 =<http://linkeddata2test.um.es/res/person/3906>)			
 		}
 
 **Consultas con LIKE**	
 
 1. Consulta que devuelve todas las personas que contiene la palabra 'juan' y 'antonio' en el nombre
 		
-		select * from <http://graph.um.es/graph/um_cvn>
+		select * from <http://linkeddata2test.um.es/graph/sgi>
 		where 
 		{
 			?persona a <http://purl.org/roh/mirror/foaf#Person>.
@@ -200,7 +192,7 @@ http://graph.um.es/graph/um_cvn
 
 1. Consulta que devuelve todos los triples de primer nivel y opcionalmente los autores de un artículo
 		
-		select * from <http://graph.um.es/graph/um_cvn>
+		select * from <http://linkeddata2test.um.es/graph/sgi>
 		where 
 		{
 			?s ?p ?o.
@@ -211,7 +203,7 @@ http://graph.um.es/graph/um_cvn
 				?autor <http://purl.org/roh/mirror/foaf#name> ?nombreAutor
 				FILTER(?p=<http://purl.org/roh/mirror/bibo#authorList>)
 			}
-			FILTER(?s =<http://graph.um.es/res/article/01fbc549-2173-4078-b51f-55311ecc5df8>)
+			FILTER(?s =<http://linkeddata2test.um.es/res/academic-article/50209>)
 
 		}
 
@@ -219,89 +211,38 @@ http://graph.um.es/graph/um_cvn
 
 1. Consulta que devuelve todas las entidades de las que dos investigadores forman parte de su lista de autores (OR).
 
-		select distinct ?s from <http://graph.um.es/graph/um_cvn>
+		select distinct ?s from  <http://linkeddata2test.um.es/graph/sgi>
 		where 
 		{ 
 			{
 				?s <http://purl.org/roh/mirror/bibo#authorList> ?lista.
-				?lista ?item <http://graph.um.es/res/person/1949f7bb-70d9-4e2b-94a4-a54b0df96312>.
+				?lista ?item <http://linkeddata2test.um.es/res/person/1602>.
 			}
 			UNION
 			{
 				?s <http://purl.org/roh/mirror/bibo#authorList> ?lista.
-				?lista ?item <http://graph.um.es/res/person/b63b9762-cdea-4348-8a37-64a0a92d8c2c>.
+				?lista ?item <http://linkeddata2test.um.es/res/person/3906>.
 			}
 		}
-		
 
-GRAFO DE DATOS DE SISTEMAS DE LA UM
-===================================
-
-El grafo de los datos importados desde los sistemas de la UM es:
-
-http://graph.um.es/graph/um_sgi
 
 **Consulta que devuelve los URIs de todos los proyectos**.
 
-	select * from <http://graph.um.es/graph/um_sgi>
+	select * from <http://linkeddata2test.um.es/graph/sgi>
 	where { ?s a <http://purl.org/roh/mirror/vivo#Project>}
 
 **Consulta que cuenta los proyectos cargados**.
 
-	select count(*) from <http://graph.um.es/graph/um_sgi>
+	select count(*) from <http://linkeddata2test.um.es/graph/sgi>
 	where { ?s a <http://purl.org/roh/mirror/vivo#Project>}
 
 **Consulta que devuelve los datos de un proyecto (hasta 3 niveles)** 
 
-	select * from <http://graph.um.es/graph/um_sgi>
-	where {
-		?s ?p ?o.
-		
-		
-		
-		
-		
-		L{?o ?p2 ?o2 OPTIONAL{?o2 ?p3 ?o3}}
-		FILTER(?s=<http://graph.um.es/res/project/12307>)
-	}
-	order by asc(?s) asc(?p) asc(?o) asc(?p2) asc(?o2) asc(?p3) asc(?o3)
-	
-**Consulta que devuelve los URIs de todas las conferencias**.
-
-	select * from <http://graph.um.es/graph/um_sgi>
-	where { ?s a <http://purl.org/roh/mirror/bibo#Conference>}
-
-**Consulta que cuenta las conferencias cargadas**.
-
-	select count(*) from <http://graph.um.es/graph/um_sgi>
-	where { ?s a <http://purl.org/roh/mirror/bibo#Conference>}
-
-**Consulta que devuelve los datos de una conferencia (hasta 3 niveles)**
-
-	select * from <http://graph.um.es/graph/um_sgi>
+	select * from <http://linkeddata2test.um.es/graph/sgi>
 	where {
 		?s ?p ?o.
 		OPTIONAL{?o ?p2 ?o2 OPTIONAL{?o2 ?p3 ?o3}}
-		FILTER(?s=<http://graph.um.es/res/conference/12670>)
+		FILTER(?s=<http://linkeddata2test.um.es/res/project/12532>)
 	}
 	order by asc(?s) asc(?p) asc(?o) asc(?p2) asc(?o2) asc(?p3) asc(?o3)
 	
-**Consulta que devuelve los URIs de todos los artículos**.
-
-	select * from <http://graph.um.es/graph/um_sgi>
-	where { ?s a <http://purl.org/roh/mirror/bibo#Article>}
-
-**Consulta que cuenta los artículos cargados**.
-
-	select count(*) from <http://graph.um.es/graph/um_sgi>
-	where { ?s a <http://purl.org/roh/mirror/bibo#Article>}
-
-**Consulta que devuelve los datos de un artículo (hasta 3 niveles)** 
-
-	select * from <http://graph.um.es/graph/um_sgi>
-	where {
-		?s ?p ?o.
-		OPTIONAL{?o ?p2 ?o2 OPTIONAL{?o2 ?p3 ?o3}}
-		FILTER(?s=<http://graph.um.es/res/article/44357>)
-	}
-	order by asc(?s) asc(?p) asc(?o) asc(?p2) asc(?o2) asc(?p3) asc(?o3)	
