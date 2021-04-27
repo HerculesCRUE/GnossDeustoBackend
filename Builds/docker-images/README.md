@@ -1,4 +1,13 @@
-![](..//Docs/media/CabeceraDocumentosMD.png)
+![](../../Docs/media/CabeceraDocumentosMD.png)
+
+| Fecha         | 14/4/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Despliegue de ASIO Backend de SGI con Docker| 
+|Descripción|Instrucciones para instalar ASIO mediante el despliegue de instancias docker|
+|Versión|1.1|
+|Módulo|Documentación|
+|Tipo|Manual|
+|Cambios de la Versión|Anadida la cabecera|
 
 # Despliegue del backend con Docker
 
