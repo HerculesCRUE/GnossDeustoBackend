@@ -3,11 +3,11 @@
 | Fecha         | 01/03/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Resumen de Documentación de ASIO Backend SGI| 
-|Descripción|Actualización de nombres y enlaces|
-|Versión|3|
+|Descripción|Inventario de la documentación|
+|Versión|3.1|
 |Módulo|Documentación|
 |Tipo|Manual|
-|Cambios de la Versión|Creación|
+|Cambios de la Versión|Revisión de enlaces|
 
 ## DOCUMENTACIÓN DE HÉRCULES ASIO BACKEND SGI
 
