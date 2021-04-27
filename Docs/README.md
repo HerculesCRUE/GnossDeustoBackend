@@ -33,6 +33,9 @@ La carpeta Docs contiene los siguientes documentos:
  - SPARQL
    - [Hércules ASIO Ejemplos de consultas SPARQL](SPARQL/Hercules-ASIO-Ejemplos-de-consultas-SPARQL.md)
  - [UrisFactory](UrisFactory/)
+   - [Buenas prácticas del esquema de URIs](UrisFactory/Buenas-practicas-URIs.md)
+   - [Especificación de Esquema de URIs](UrisFactory/Especificacion-Esquema-de-URIs.md)
+   - [Plantilla de documento de adhesión a las recomendaciones de buenas prácticas de URIs](UrisFactory/Plantilla-de-documento-de-adhesion-a-las-recomendaciones-de-buenas-practicas-de-URIs.md)
 
 
 Además de los documentos de características generales contenidos en esta carpeta, el proyecto Hércules ASIO cuenta con documentación asociada a cada componente, en las siguientes rutas: 
@@ -51,8 +54,8 @@ Además de los documentos de características generales contenidos en esta carpe
  - [Asio Web](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Web)
  - [XML RDF Conversor](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.XML_RDF_Conversor)
  - [CVN](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/cvn)
-	 - /src/cvn/docs
-	 - /src/cvn/docs/api
-	 - /src/cvn/docs/config
+	 - [Docs](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/cvn/docs)
+	 - [API](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/cvn/docs/api)
+	 - [Config](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/cvn/docs/config)
  - [Fair](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/fair)
  - [Bridge](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/fair/bridge)
