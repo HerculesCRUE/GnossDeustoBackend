@@ -4,10 +4,10 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Prueba del entorno y carga inicial| 
 |Descripción|Manual de pruebas para la revisión y carga de datos inicial despues del despliegue. Entrega parcial de octubre de 2020. Pendiente de actualizar para la entrega final|
-|Versión|0.1|
+|Versión|0.2|
 |Módulo|Despliegue|
 |Tipo|Manual|
-|Cambios de la Versión|Creación|
+|Cambios de la Versión|Obsoleto, sustituido por [Entrega Final Manual de comprobaciones y Carga inicial](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/Hercules-ASIO-Entrega-Final-Manual-de-comprobaciones-y-Carga-inicial.md)|
 
 # Hércules ASIO Backend SGI. Prueba del entorno y carga inicial
 
