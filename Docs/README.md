@@ -22,7 +22,7 @@ La carpeta Docs contiene los siguientes documentos:
  - [Hércules ASIO Data confidentiality proposal](Hercules-ASIO-Data-confidentiality-proposal.md)
  - [Hércules ASIO Estimación de arquitectura de Sistemas](Hercules-ASIO-Estimacion-de-arquitectura-de-Sistemas.md)
  - [Hércules ASIO Modelo de multilingüismo](Hercules-ASIO-Modelo-de-multilinguismo.md)
- - [Hércules ASIO Entrega parcial Manual de comprobaciones y Carga inicial](Hercules-ASIO-Entrega-parcial-Manual-de-comprobaciones-y-Carga-inicial.md)
+ - [Hércules ASIO Entrega final Manual de comprobaciones y Carga inicial](Hercules-ASIO-Entrega-Final-Manual-de-comprobaciones-y-Carga-inicial.md)
  - [Hércules ASIO Benchmark](Benchmark/)
  - FAIR
     - [EF2-1.6 DOCUMENTO DE ANÁLISIS DE MÉTODOS FAIR.pdf](FAIR/EF2-1.6%20DOCUMENTO%20DE%20AN%C3%81LISIS%20DE%20M%C3%89TODOS%20FAIR.pdf)
