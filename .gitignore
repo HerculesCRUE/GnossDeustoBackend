@@ -290,3 +290,7 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 UrisFactory/UrisAutoGenerator/logs/log_202041.txt
+/.metadata/
+
+.project
+.vscode/
