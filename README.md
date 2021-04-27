@@ -12,9 +12,9 @@ El proyecto Arquitectura Semántica de Datos del SUE ha consistido en desarrolla
 
 Dado de los demás proyectos que componen HÉRCULES dependen tanto de la Infraestructura Ontológica, como de la Arquitectura Semántica de Datos, el proyecto ASIO interactúa con los desarrollos y resultados de los demás proyectos HÉRCULES: desarrollo de un Prototipo Innovador de Gestión de la Investigación para Universidades y Enriquecimiento de Datos y Métodos de Análisis.
 
-## Documentación del Backend SGI
+## Documentación de Hércules ASIO Backend SGI
 
-La documentación del backend se puede consultar en la carpeta [Docs](Docs/).
+La documentación de ASIO Backend SGI se puede consultar en la carpeta [Docs](Docs/).
 
 Además, la carpeta de [formación](Formacion/) contiene el material usado en las jornadas de formación del proyecto ASIO.
 
@@ -27,7 +27,7 @@ Hércules ASIO es un proyecto de software libre alojado en dos repositorios púb
    - [ROH Reference Specification](https://github.com/HerculesCRUE/GnossDeustoOnto/blob/master/Documentation/1-%20OntologyDocumentation.pdf). Este documento   detalla, en formato tabular, las subclases y propiedades de tipo  object y datatype de cada concepto de la ontología ROH. 
  - **GitHub de  Arquitectura Semántica (Backend SGI)**. Se trata del presente repositorio, que contiene los componentes de software que, junto con el software base de sistemas y bases de datos, constituyen la arquitectura semántica del proyecto ASIO.
 
-## Desarrollo del Backend SGI
+## Desarrollo de Hércules ASIO Backend SGI
 
 [![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
 
@@ -54,7 +54,7 @@ El repositorio de desarrollo de la Arquitectura Semántica del proyecto Hércule
  - [Hercules.Asio.IdentityServer](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.IdentityServer):encargado de la securización mediante tokens para los apis que forman el proyecto.
  - [Hercules.Asio.LinkedDataServer](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.LinkedDataServer): proporciona el servicio de datos enlazados de Hércules ASIO.
 
-### Configuración e instalación
+### Hércules ASIO Backend SGI. Configuración e instalación
 
 Para utilizar los desarrollos de Hércules ASIO se puede comenzar con las instrucciones de [Prueba del entorno y Carga inicial](Docs/Hercules-ASIO-Entrega-Final-Manual-de-comprobaciones-y-Carga-inicial.md) o con el [Despliegue del backend con Docker](Builds/docker-images). También es posible seguir las [instrucciones de configuración e instalación](Configuracion-e-Instalacion.md) para instalar los módulos de forma más convencional.
 
