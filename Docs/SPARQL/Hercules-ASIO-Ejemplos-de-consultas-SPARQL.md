@@ -6,8 +6,6 @@
 
 [GRAFOS DE ASIO](#grafos-de-asio)
 
-[GRAFO DE DATOS DE CVN](#grafo-de-datos-de-cvn)
-
 [GRAFO DE DATOS DE SISTEMAS DE LA UM](#grafo-de-datos-de-sistemas-de-la-um)
 
 Introducción
