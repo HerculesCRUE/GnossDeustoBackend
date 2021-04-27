@@ -129,5 +129,5 @@ Este api esta protegida mediante tokens, por ello para poder usar la interfaz sw
 	 
 # Hércules backend asio. ESPECIFICACIÓN DE ESQUEMA DE URIS
 
-Ver la documentación en (Especificación de Esquema de URIs)[../../Docs/UrisFactory/Especificacion-Esquema-de-URIs.md]
+Ver la documentación en [Especificación de Esquema de URIs](../../Docs/UrisFactory/Especificacion-Esquema-de-URIs.md)
 
