@@ -17,11 +17,15 @@ La carpeta Docs contiene los siguientes documentos:
  - [Hércules ASIO Especificación de las funciones de descubrimiento](Hercules-ASIO-Especificacion-de-las-funciones-de-descubrimiento.md)
  - [Hercules ASIO Fuentes externas de información para las funciones de descubrimiento](Hercules-ASIO-Fuentes-externas-de-informacion-para-las-funciones-de-descubrimiento.md)
  - [Hércules ASIO Procedencia de datos externos - Provenance](Hercules-ASIO-Procedencia-de-datos-externos-Provenance.md)
- - [Hércules ASIO Evaluación de cumplimiento Linked Data Platform](Hercules-ASIO-Evaluacion-de-cumplimiento-Linked-Data-Platform.md)
- - [Hércules ASIo TripleStore Benchmark deliverable report](Hercules-TripleStore-Benchmark-deliverable-report.md)
- - [Hércules ASIO Data confidentiality proposal](Hercules-ASIO-Data-confidentiality-proposal.md)
- - [Hércules ASIO Estimación de arquitectura de Sistemas](Hercules-ASIO-Estimacion-de-arquitectura-de-Sistemas.md)
+ - [UrisFactory](UrisFactory/)
+   - [Buenas prácticas del esquema de URIs](UrisFactory/Buenas-practicas-URIs.md)
+   - [Especificación de Esquema de URIs](UrisFactory/Especificacion-Esquema-de-URIs.md)
+   - [Plantilla de documento de adhesión a las recomendaciones de buenas prácticas de URIs](UrisFactory/Plantilla-de-documento-de-adhesion-a-las-recomendaciones-de-buenas-practicas-de-URIs.md)
  - [Hércules ASIO Modelo de multilingüismo](Hercules-ASIO-Modelo-de-multilinguismo.md)
+ - [Hércules ASIO Evaluación de cumplimiento Linked Data Platform](Hercules-ASIO-Evaluacion-de-cumplimiento-Linked-Data-Platform.md)
+ - [Hércules ASIO Data confidentiality proposal](Hercules-ASIO-Data-confidentiality-proposal.md)
+ - [Hércules ASIO TripleStore Benchmark deliverable report](Hercules-TripleStore-Benchmark-deliverable-report.md)
+ - [Hércules ASIO Estimación de arquitectura de Sistemas](Hercules-ASIO-Estimacion-de-arquitectura-de-Sistemas.md)
  - [Hércules ASIO Entrega final Manual de comprobaciones y Carga inicial](Hercules-ASIO-Entrega-Final-Manual-de-comprobaciones-y-Carga-inicial.md)
  - [Hércules ASIO Benchmark](Benchmark/)
  - FAIR
@@ -32,11 +36,6 @@ La carpeta Docs contiene los siguientes documentos:
    - [Entregable EF2-1.6_Documento de análisis de métodos FAIR](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/FAIR/Entregable-EF2-1.6_-documento-de-analisis-de-metodos-FAIR.md)
  - SPARQL
    - [Hércules ASIO Ejemplos de consultas SPARQL](SPARQL/Hercules-ASIO-Ejemplos-de-consultas-SPARQL.md)
- - [UrisFactory](UrisFactory/)
-   - [Buenas prácticas del esquema de URIs](UrisFactory/Buenas-practicas-URIs.md)
-   - [Especificación de Esquema de URIs](UrisFactory/Especificacion-Esquema-de-URIs.md)
-   - [Plantilla de documento de adhesión a las recomendaciones de buenas prácticas de URIs](UrisFactory/Plantilla-de-documento-de-adhesion-a-las-recomendaciones-de-buenas-practicas-de-URIs.md)
-
 
 Además de los documentos de características generales contenidos en esta carpeta, el proyecto Hércules ASIO cuenta con documentación asociada a cada componente, en las siguientes rutas: 
 
