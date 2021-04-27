@@ -56,7 +56,7 @@ El repositorio de desarrollo de la Arquitectura Semántica del proyecto Hércule
 
 ### Configuración e instalación
 
-Para comenzar a usar los desarrollos de Hércules ASIO se puede comenzar con las instrucciones de [Prueba del entorno y Carga inicial](Docs/Hercules-ASIO-Entrega-Final-Manual-de-comprobaciones-y-Carga-inicial.md) o con el [Despliegue del backend con Docker](Builds/docker-images). También es posible seguir las [instrucciones de configuración e instalación](Configuracion-e-Instalacion.md) para instalar los módulos de forma más convencional.
+Para utilizar los desarrollos de Hércules ASIO se puede comenzar con las instrucciones de [Prueba del entorno y Carga inicial](Docs/Hercules-ASIO-Entrega-Final-Manual-de-comprobaciones-y-Carga-inicial.md) o con el [Despliegue del backend con Docker](Builds/docker-images). También es posible seguir las [instrucciones de configuración e instalación](Configuracion-e-Instalacion.md) para instalar los módulos de forma más convencional.
 
 Todas las aplicaciones aquí descritas pueden usarse de dos formas distintas: 
   - Como un API, instalando la aplicación y llamando a su Endpoint.
