@@ -149,7 +149,7 @@ public class ValidationQuestionsDynamicTest {
 					ae.printStackTrace();
 					System.out.println("ERROR\n");
 					System.out.println(result);
-					// throw new AssertionError();
+					throw ae;
 				}
 			};
 			
