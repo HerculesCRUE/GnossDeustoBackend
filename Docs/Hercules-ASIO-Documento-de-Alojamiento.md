@@ -1,4 +1,4 @@
-![](../media/CabeceraDocumentosMD.png)
+![](media/CabeceraDocumentosMD.png)
 
 | Fecha         | 3/5/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
@@ -27,7 +27,7 @@ Este documento va dirigido al personal técnico encargado del mantenimiento de l
 
 El diagrama de la solución, a falta de definir los nombres reales de los servidores, sería el siguiente:
 
-[](../media/media/Hércules%20ASIO%20Arquitectura%20física%20genérica.png)
+[](media/media/Hércules%20ASIO%20Arquitectura%20física%20genérica.png)
 
 En el diagrama se incluyen ejemplos de servicios y URLs a las que contestarían algunos de los componentes. 
 
