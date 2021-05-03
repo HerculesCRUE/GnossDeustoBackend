@@ -2,12 +2,12 @@
 
 | Fecha         | 01/10/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
-|Titulo|Cambios en la documentación| 
+|Titulo|Manual de configuración de CRON| 
 |Descripción|configuración de appsettings|
 |Versión|1|
 |Módulo|CronConfigure|
 |Tipo|Documentación|
-|Cambios de la Versión| Se ha añadido a la documentación los parámetros de configuración nuevos|
+|Cambios de la Versión|Se han añadido a la documentación los parámetros de configuración nuevos|
 
 
 # Acerca de CronConfigure
