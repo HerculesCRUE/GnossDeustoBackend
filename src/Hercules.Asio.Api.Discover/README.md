@@ -2,7 +2,7 @@
 
 | Fecha         | 29/01/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
-|Titulo|API DISCOVER readme| 
+|Titulo|API DISCOVER| 
 |Descripción|Manual del servicio API DISCOVER|
 |Versión|1|
 |Módulo|API DISCOVER|
