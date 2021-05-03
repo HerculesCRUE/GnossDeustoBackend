@@ -25,6 +25,7 @@ La carpeta Docs contiene los siguientes documentos:
  - [Hércules ASIO Evaluación de cumplimiento Linked Data Platform](Hercules-ASIO-Evaluacion-de-cumplimiento-Linked-Data-Platform.md)
  - [Hércules ASIO Data confidentiality proposal](Hercules-ASIO-Data-confidentiality-proposal.md)
  - [Hércules ASIO TripleStore Benchmark deliverable report](Hercules-TripleStore-Benchmark-deliverable-report.md)
+ - [Hércules ASIO Documento de alojamiento](Hercules-ASIO-Documento-de-Alojamiento.md)
  - [Hércules ASIO Estimación de arquitectura de Sistemas](Hercules-ASIO-Estimacion-de-arquitectura-de-Sistemas.md)
  - [Hércules ASIO Entrega final Manual de comprobaciones y Carga inicial](Hercules-ASIO-Entrega-Final-Manual-de-comprobaciones-y-Carga-inicial.md)
  - [Hércules ASIO Benchmark](Benchmark/)
