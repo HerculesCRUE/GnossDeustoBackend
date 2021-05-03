@@ -1,10 +1,10 @@
-![](..//Docs/media/CabeceraDocumentosMD.png)
+![](../../Docs/media/CabeceraDocumentosMD.png)
 
 | Fecha         | 01/10/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Cambios en la documentación| 
 |Descripción|configuración de appsettings|
-|Versión|0.2|
+|Versión|1|
 |Módulo|CronConfigure|
 |Tipo|Documentación|
 |Cambios de la Versión| Se ha añadido a la documentación los parámetros de configuración nuevos|
