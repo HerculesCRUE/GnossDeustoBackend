@@ -1,6 +1,6 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
-| Fecha         | 16/12/2020                                                   |
+| Fecha         | 14/4/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Hércules ASIO. Especificación de las funciones de descubrimiento| 
 |Descripción|Especificación de las funciones de descubrimiento|
