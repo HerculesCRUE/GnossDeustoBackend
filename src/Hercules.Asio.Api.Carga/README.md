@@ -1,4 +1,4 @@
-![](..//Docs/media/CabeceraDocumentosMD.png)
+![](../Docs/Docs/media/CabeceraDocumentosMD.png)
 
 | Fecha         | 14/04/20201                                                  |
 | ------------- | ------------------------------------------------------------ |
