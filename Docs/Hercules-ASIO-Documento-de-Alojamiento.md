@@ -186,4 +186,37 @@ El resto de peticiones las podríamos gestionar por SSL añadiendo estas líneas
     ProxyPass /sparql2 http://10.0.0.222:8890/sparql
     ProxyPassReverse /sparql2 http://10.0.0.222:8890/sparql
 
+3.2.2 Inventario hardware
+-------------------------
+
+Los servidores tendrían las siguientes características físicas y software instalado:
+
+|Nombre del Servidor|Función|Características|
+|:----|:----|:----|
+|Proxy Inverso|Proxy Inverso|Centos 8  2 Cores, RAM 4 GB, 50GB. Apache|
+|HAProxy|Balanceo Interno|Centos 8  2 Cores, RAM 2 GB, 50GB. HAProxy|
+|Web pública 1|Instanciar webs públicas|Centos 8  4 Cores, RAM 4 GB, 50GB. Docker version 19.03.5 + docker-compose|
+|Web pública 2|Instanciar webs públicas|Centos 8  4 Cores, RAM 4 GB, 50GB. Docker version 19.03.5 + docker-compose|
+|Web privada|Instanciar servicios de back y web privada|Centos 8  4 Cores, RAM 8 GB, 50GB. Docker version 19.03.5 + docker-compose|
+|RDF Store 1|RDF Store|Centos 8  4 Cores, RAM 9 GB, 50GB. P.e. Virtuoso  07.20.3230|
+|RDF Store 2|RDF Store|Centos 8  4 Cores, RAM 9 GB, 50GB. P.e. Virtuoso  07.20.3230|
+|RabbitMQ|Gestor de colas|Centos 8  2 Cores, RAM 2 GB, 50Gb. Docker version 19.03.5 + docker-compose|
+|PostgreSQL|Base de datos SQL|Centos 8  2 Cores, RAM 5 GB, 50Gb. Docker version 19.03.5 + docker-compose|
+
+3.2.3 Reglas de servicio
+---------------------
+
+Tendríamos las siguientes reglas de red:
+
+|Elemento A Servidor|Módulo que precisa comunicación|Elemento B servidor|Módulo que precisa comunicación|Dirección de la Comunicación|Tipo de Tráfico|Puerto|
+|:----|:----|:----|:----|:----|:----|:----|
+|Proxy|Proxy |Web privada|Web privada|A->B|TCP|80|
+|Proxy|Proxy|HAProxy|HAProxy|A->B|TCP|80|
+|HAProxy|HAProxy|Web pública 1 y 2|Web pública|A->B|TCP|80|
+|HAProxy|HAProxy|RDF Store 1 y 2|Virtuoso|A->B|TCP|8890|
+|Web pública 1 y 2|Web pública|Web privada|Web privada|A->B|TCP|5108, 5100, 5107, 5000, 5109|
+|Web pública 1 y 2|Web pública|PostgreSQL|PostgreSQL|A->B|TCP|5432|
+|Web privada|Web privada|RabbitMQ|RabbitMQ|A->B|TCP|5672|
+|Web privada|Web privada|PostgreSQL|PostgreSQL|A->B|TCP|5432|
+|Web privada|Web privada|RDF Store 1 y 2|P.e. Virtuoso|A->B|TCP|8890|
 
