@@ -2,12 +2,12 @@
 
 | Fecha         | 12/02/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
-|Titulo|XML RDF Conversor readme| 
+|Titulo|XML RDF Conversor| 
 |Descripción|Manual del servicio XML RDF Conversor|
-|Versión|0.1|
+|Versión|1|
 |Módulo|XML RDF Conversor|
 |Tipo|Manual|
-|Cambios de la Versión|Primera subida|
+|Cambios de la Versión|Creación|
 
 ## Sobre XML RDF Conversor
 [<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
