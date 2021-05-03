@@ -113,5 +113,77 @@ El inventario de aplicaciones back es:
 | |- Detección de equivalencias, entre nodos Unidata.|
 
 
+3.2	ENTORNO DE PRODUCCIÓN
+---------------------
+
+3.2.1	Configuración de los servicios web de Apache
+-------------------------------------
+
+Para que nos funcione correctamente el Linked data server podemos ver este ejemplo de configuración. 
+Lo que hacemos con esto es que las peticiones que llegan por http al dominio raiz las redirija al linked data server.
+
+    <VirtualHost *:80>
+    ServerName linkeddata.domain
+    DocumentRoot "/var/www/html"
+    ProxyPreserveHost On
+    ProxyPass / http://127.0.0.1:8081/
+    ProxyPassReverse / http://127.0.0.1:8081	
+     Timeout 5400
+    ProxyTimeout 5400
+        <Proxy *>
+            Order deny,allow
+            Allow from all
+            Require all granted
+        </Proxy>
+    </VirtualHost>
+
+El resto de peticiones las podríamos gestionar por SSL añadiendo estas líneas al archivo ssl.conf. Podemos ver las redirecciones de proxy a diversos servicios y interfaces sparql.
+
+    #APIFRONTCARGA
+    ProxyPass /carga-web http://127.0.0.1:5103
+    ProxyPassReverse /carga-web http://127.0.0.1:5103
+    #APICARGA
+    ProxyPass /carga http://155.54.239.219:5100
+    ProxyPassReverse /carga http://155.54.239.219:5100
+    #BENCHMARK
+    ProxyPass /benchmark http://127.0.0.1:8401
+    ProxyPassReverse /benchmark http://127.0.0.1:8401
+    #OAI-PMH-CVN
+    ProxyPass /oai-pmh-cvn http://155.54.239.219:5102
+    ProxyPassReverse /oai-pmh-cvn http://155.54.239.219:5102
+    #CRON
+    ProxyPass /cron-config http://155.54.239.219:5107
+    ProxyPassReverse /cron-config http://155.54.239.219:5107
+    #DOCUMENTACION
+    ProxyPass /documentacion http://155.54.239.219:5109
+    ProxyPassReverse /documentacion http://155.54.239.219:5109
+    #IDENTITY-SERVER
+    ProxyPass /identityserver http://155.54.239.219:5108
+    ProxyPassReverse /identityserver http://155.54.239.219:5108
+    #APIURIS
+    ProxyPass /uris http://155.54.239.219:5000
+    ProxyPassReverse /uris http://155.54.239.219:5000
+    #XMLRDFCONVERSOR
+    ProxyPass /conversor_xml_rdf http://155.54.239.219:5114
+    ProxyPassReverse /conversor_xml_rdf http://155.54.239.219:5114
+    #UNIDATA
+    ProxyPass /unidata http://155.54.239.219:5106
+    ProxyPassReverse /unidata http://155.54.239.219:5106
+    #CVN
+    ProxyPass /cvn http://127.0.0.1:5104
+    ProxyPassReverse /cvn http://127.0.0.1:5104
+    ProxyPass /cvn_swagger http://127.0.0.1:8080
+    ProxyPassReverse /cvn_swagger http://127.0.0.1:8080  
+    #BRIDGE
+    ProxyPass /fairmetrics_bridge http://155.54.239.219:5200
+    ProxyPassReverse /fairmetrics_bridge http://155.54.239.219:5200
+    ProxyPass /bridgeswagger http://155.54.239.219:8082
+    ProxyPassReverse /bridgeswagger http://155.54.239.219:8082
+    #VIRTUOSO1
+    ProxyPass /sparql http://155.54.239.221:8890/sparql
+    ProxyPassReverse /sparql http://155.54.239.221:8890/sparql
+    #VIRTUOSO2
+    ProxyPass /sparql2 http://155.54.239.222:8890/sparql
+    ProxyPassReverse /sparql2 http://155.54.239.222:8890/sparql
 
 
