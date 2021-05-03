@@ -267,7 +267,7 @@ Y definirse el escenario de restauración, que debería incluir los pasos que lo
 
 Se describen a continuación los parámetros a monitorizar en los servidores, y las webs cuyo servicio habrá que comprobar.
 
-4.2.1	Indicadores y umbrales de los servidores
+4.2.1 Indicadores y umbrales de los servidores
 ------------------------
 
 Las indicadores y umbrales a tener en cuenta podrían ser:
@@ -286,4 +286,58 @@ Las indicadores y umbrales a tener en cuenta podrían ser:
 | |Chequeo HTTP Puerto 8890|Servicio Web sparql endpoint; P.e. en Nagios: check_http -I $HOSTADDRESS$  -p 8890 -j HEAD -w 1 -c 2 -t 120)| |
 | |Estado de los buffers|Controlar el estado de los buffers con la función sys_stat('st_db_used_buffers')|Warning: 80%; Critical: 90%|
 | | |Controlar lecturas de disco con la función sys_stat('disk_reads')|Warning: 80%; Critical: 90%|
+
+4.2.2 Indicadores y umbrales de los servicios Web
+-----------------------
+
+Se monitorizará el estado de los servicios Web de ASIO controlando la respuesta a las siguientes peticiones, que se realizarán con un agente Web que se comporte como un BOT:
+
+|Indicador a Monitorizar|Descripción breve|Umbral Crítical|
+|:----|:----|:----|
+|Web|https://linkeddata2test.um.es/benchmark|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata2test.um.es/carga/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata2test.um.es/oai-pmh-cvn/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata2test.um.es/cron-config/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata2test.um.es/documentacion/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |http://linkeddata2test.um.es/identity/connect/token |<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |http://linkeddata2test.um.es/graph/sgi|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata2test.um.es/uris/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata2test.um.es/uris/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata2test.um.es/carga-web/public/gnossdeustobackend/home|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata2test.um.es/conversor_xml_rdf/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata2test.um.es/unidata/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata2test.um.es/bridgeswagger/v1/ui/#/|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+
+4.2.3 Información específica de disponibilidad
+--------------------
+
+El sistema estará disponible si se puede:
+- Actualizar los datos del grafo desde el proceso de sincronización.
+- Administrar la plataforma mediante las utilidades de administración.
+- Se pueden consultar los datos del grafo mediante el servidor Linked Data y el punto SPARQL.
+- Se pueden consultar las páginas de la web pública.
+
+El sistema se podría considerar parcialmente disponible si alguna de las funciones anteriores estuviera fallando. Por ejemplo, se podría soportar que la actualización diaria fallase un día si los procesos de consulta web siguen funcionando.
+
+
+|Funciones/transacciones críticas|
+|:----|
+|Función/Transacción|Actividades que la componen|
+|Actualización de datos|Lectura de datos, descubrimiento y carga. Habría que establecer cuál es el periodo de caída soportable, en función de las necesidades de la universidad.|
+
+4.3	POSIBLES PROBLEMAS Y SOLUCIONES
+----------------------
+
+En este apartado se consignan algunos problemas esperables y sus soluciones. La lista debería ser mantenida y ampliada por los técnicos de la UM durante la vida del proyecto:
+
+|Posibles problemas y soluciones|
+|:----|
+|Problema|Solución|
+|Virtuoso no contesta, aunque el proceso está levantado|Intentar conectar a traves del interfaz iSQL para hacer una salida ordenada ( checkpoint; shutdown; ). Si no es posible conectarse, hay que reiniciar el proceso.|
+|Las páginas de la web pública no se actualizan tras subir una nueva página personalizada, después de esperar un minuto|Reiniciar los procesos de Docker: docker-compose down –v; docker-compose up -d|
+|Espacio en disco agotado|Si nos quedamos sin espacio en disco tenemos que averiguar la causa. En el caso de los frontales web, probablemente sea algún log. En caso de bases de datos es posible que hayan aumentado los datos y tenga que ampliarse el disco.|
+|Al intentar ejecutar el entorno por primera vez, el primer acceso puede fallar porque aún no tiene las vistas cargadas|Al ejecutarlo la primera vez se generará el esquema de la base datos. Cargar las vistas tras la primera ejecución.|
+|Faltan archivos estáticos (estilos, imágenes, javascript)|Configurar un servicio apache que se encargue de servir estos ficheros.|
+|El servicio **identity** falla|Comprobar que en la configuración se ha escrito sin la barra final en las configuraciones de docker: “Authority: http://155.54.239.219:5108”|
+
 
