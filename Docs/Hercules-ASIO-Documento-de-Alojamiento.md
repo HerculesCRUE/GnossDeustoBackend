@@ -12,8 +12,8 @@
 ## Hércules ASIO. Documento de alojamiento
 
 
-1. INTRODUCCIÓN
-============
+1 INTRODUCCIÓN
+===============
 
 Este documento describe una solución de alojamiento genérica para el sistema Hércules ASIO dentro de la infraestructura de una universidad.
 Se contemplan dentro del mismo aspectos de diseño del sistema (arquitectura software y hardware), particularidades
@@ -22,8 +22,8 @@ para su explotación y monitorización, así como aspectos de seguridad y capaci
 Este documento va dirigido al personal técnico encargado del mantenimiento de la Hércules ASIO en la universidad.
 
 
-2. Descripción de la solución
-==========================
+2 Descripción de la solución
+========================
 
 El diagrama de la solución, a falta de definir los nombres reales de los servidores, sería el siguiente:
 ![](media/Hércules%20ASIO%20Arquitectura%20física%20genérica.png)
