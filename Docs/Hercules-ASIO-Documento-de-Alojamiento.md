@@ -139,8 +139,8 @@ El inventario de aplicaciones públicas es:
 
 |Dominio|Nombre|Ruta de la aplicación|Rol de la Aplicación|
 |:----|:----|:----|:----|
-|linkeddata2.um.es|apifrontcarga|/carga-web|Front-end público|
-|linkeddata2.um.es|linkeddataserver|/graph/sgi|Proporciona el servicio de datos enlazados de Hércules ASIO.|
+|linkeddata.domain|apifrontcarga|/carga-web|Front-end público|
+|linkeddata.domain|linkeddataserver|/graph/sgi|Proporciona el servicio de datos enlazados de Hércules ASIO.|
 
 El inventario de aplicaciones back es:
 
@@ -333,19 +333,19 @@ Se monitorizará el estado de los servicios Web de ASIO controlando la respuesta
 
 |Indicador a Monitorizar|Descripción breve|Umbral Crítical|
 |:----|:----|:----|
-|Web|https://linkeddata2test.um.es/benchmark|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
-| |https://linkeddata2test.um.es/carga/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
-| |https://linkeddata2test.um.es/oai-pmh-cvn/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
-| |https://linkeddata2test.um.es/cron-config/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
-| |https://linkeddata2test.um.es/documentacion/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
-| |http://linkeddata2test.um.es/identity/connect/token |<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
-| |http://linkeddata2test.um.es/graph/sgi|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
-| |https://linkeddata2test.um.es/uris/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
-| |https://linkeddata2test.um.es/uris/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
-| |https://linkeddata2test.um.es/carga-web/public/gnossdeustobackend/home|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
-| |https://linkeddata2test.um.es/conversor_xml_rdf/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
-| |https://linkeddata2test.um.es/unidata/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
-| |https://linkeddata2test.um.es/bridgeswagger/v1/ui/#/|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+|Web|https://linkeddata.domain/benchmark|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata.domain/carga/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata.domain/oai-pmh-cvn/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata.domain/cron-config/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata.domain/documentacion/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |http://linkeddata.domain/identity/connect/token |<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |http://linkeddata.domain/graph/sgi|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata.domain/uris/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata.domain/uris/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata.domain/carga-web/public/gnossdeustobackend/home|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata.domain/conversor_xml_rdf/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata.domain/unidata/swagger/index.html|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
+| |https://linkeddata.domain/bridgeswagger/v1/ui/#/|<> HTTP STATUS 200; Warning 2 seg.; Critical 4 seg|
 
 4.2.3 Información específica de disponibilidad
 --------------------
@@ -367,7 +367,7 @@ El sistema se podría considerar parcialmente disponible si alguna de las funcio
 4.3	POSIBLES PROBLEMAS Y SOLUCIONES
 ----------------------
 
-En este apartado se consignan algunos problemas esperables y sus soluciones. La lista debería ser mantenida y ampliada por los técnicos de la UM durante la vida del proyecto:
+En este apartado se consignan algunos problemas esperables y sus soluciones. La lista debería ser mantenida y ampliada por los técnicos de la Universidad durante la vida del proyecto:
 
 |Posibles problemas y soluciones| |
 |:----|:----|
