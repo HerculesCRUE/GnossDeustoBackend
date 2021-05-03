@@ -2,7 +2,7 @@
 
 | Fecha         | 14/04/2021                                                |
 | ------------- | ------------------------------------------------------------ |
-|Titulo|versión inicial| 
+|Titulo|Gestor de documentación| 
 |Descripción|Documentación del gestor de documentación|
 |Versión|1|
 |Módulo|GestorDocumentacion|
