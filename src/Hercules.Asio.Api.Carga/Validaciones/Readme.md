@@ -1,4 +1,4 @@
-![](../../Docs/media/CabeceraDocumentosMD.png)
+![](../../../Docs/media/CabeceraDocumentosMD.png)
 
 # Gestión de validaciones
 
