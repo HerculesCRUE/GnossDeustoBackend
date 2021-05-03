@@ -320,8 +320,8 @@ El sistema estará disponible si se puede:
 El sistema se podría considerar parcialmente disponible si alguna de las funciones anteriores estuviera fallando. Por ejemplo, se podría soportar que la actualización diaria fallase un día si los procesos de consulta web siguen funcionando.
 
 
-|Funciones/transacciones críticas|
-|:----|
+|Funciones/transacciones críticas| |
+|:----|:----|
 |Función/Transacción|Actividades que la componen|
 |Actualización de datos|Lectura de datos, descubrimiento y carga. Habría que establecer cuál es el periodo de caída soportable, en función de las necesidades de la universidad.|
 
@@ -330,8 +330,8 @@ El sistema se podría considerar parcialmente disponible si alguna de las funcio
 
 En este apartado se consignan algunos problemas esperables y sus soluciones. La lista debería ser mantenida y ampliada por los técnicos de la UM durante la vida del proyecto:
 
-|Posibles problemas y soluciones|
-|:----|
+|Posibles problemas y soluciones| |
+|:----|:----|
 |Problema|Solución|
 |Virtuoso no contesta, aunque el proceso está levantado|Intentar conectar a traves del interfaz iSQL para hacer una salida ordenada ( checkpoint; shutdown; ). Si no es posible conectarse, hay que reiniciar el proceso.|
 |Las páginas de la web pública no se actualizan tras subir una nueva página personalizada, después de esperar un minuto|Reiniciar los procesos de Docker: docker-compose down –v; docker-compose up -d|
