@@ -2,7 +2,7 @@
 
 | Fecha         | 01/10/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
-|Titulo|Manual de configuración de CRON| 
+|Titulo|Descripción de CRON| 
 |Descripción|configuración de appsettings|
 |Versión|1|
 |Módulo|CronConfigure|
