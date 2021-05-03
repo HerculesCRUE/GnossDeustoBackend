@@ -2,7 +2,7 @@
 
 | Fecha         | 14/04/2021                                                 |
 | ------------- | ------------------------------------------------------------ |
-|Titulo|LINKED DATA SERVER readme| 
+|Titulo|LINKED DATA SERVER| 
 |Descripción|Manual del servicio LINKED DATA SERVER|
 |Versión|1|
 |Módulo|API DISCOVER|
