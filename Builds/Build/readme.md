@@ -1,4 +1,4 @@
-![](../Docs/media/CabeceraDocumentosMD.png)
+![](../../../Docs/media/CabeceraDocumentosMD.png)
 
 # Compilados de los entregables software
 Esta carpeta contiene los compilados de los entregables de software desarrollados
