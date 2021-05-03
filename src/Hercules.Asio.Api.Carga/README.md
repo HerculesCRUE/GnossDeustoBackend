@@ -3,7 +3,7 @@
 | Fecha         | 14/04/20201                                                  |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|API CARGA readme| 
-|Descripción|Manual del servicio API CARGA. Corrección de enlaces|
+|Descripción|Manual del servicio API CARGA|
 |Versión|1|
 |Módulo|API CARGA|
 |Tipo|Manual|
