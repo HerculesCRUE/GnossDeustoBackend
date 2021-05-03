@@ -2,9 +2,9 @@
 
 | Fecha         | 01/10/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
-|Titulo|Cambios en la documentación| 
-|Descripción|insercción de configuraciones en el appsettings|
-|Versión|0.3|
+|Titulo|Frontend de carga| 
+|Descripción|Módulo del interfaz de administración de las cargas|
+|Versión|1|
 |Módulo|FrontEndCarga|
 |Tipo|Documentación|
 |Cambios de la Versión| Se ha añadido configuraciones al appsettings|
