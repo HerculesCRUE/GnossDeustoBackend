@@ -2,9 +2,9 @@
  
 | Fecha         | 14/04/2021                                                  |
 | ------------- | ------------------------------------------------------------ |
-|Titulo|Cambios en el manual de usuario| 
-|Descripción|Creación de páginas y modificación|
-|Versión|1|
+|Titulo|Manual de uso del Frontend de cargas| 
+|Descripción|Creación de repositorios|
+|Versión|1.1|
 |Módulo|FrontEndCarga|
 |Tipo|Manual|
 |Cambios de la Versión| En está versión se ha añadido un enlace a un manual para la creación de páginas por parte del usuario|
