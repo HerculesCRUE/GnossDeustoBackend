@@ -17,17 +17,17 @@
 
 [2.1 INTRODUCCIÓN AL PRODUCTO](#21-introducción-al-producto)
 
-[2.2 ARQUITECTURA DE LA SOLUCIÓN SOFTWARE](#22arquitectura-de-la-solución-software)
+[2.2 ARQUITECTURA DE LA SOLUCIÓN SOFTWARE](#22-arquitectura-de-la-solución-software)
 
-[2.3 DEPENDENCIAS CON OTRAS APLICACIONES O SISTEMAS](#23dependencias-con-otras-aplicaciones-o-sistemas)
+[2.3 DEPENDENCIAS CON OTRAS APLICACIONES O SISTEMAS](#23-dependencias-con-otras-aplicaciones-o-sistemas)
 
 [3 DESPLIEGUE DE LA SOLUCIÓN](#3-despliegue-de-la-solución)
 
 [3.1 DESPLIEGUE DE SOFTWARE](#31-despliegue-de-software)
 
-[3.2 ENTORNO DE PRODUCCIÓN](#32entorno-de-producción)
+[3.2 ENTORNO DE PRODUCCIÓN](#32-entorno-de-producción)
 
-[3.2.1 Configuración de los servicios web de Apache](#321configuración-de-los-servicios-web-de-apache)
+[3.2.1 Configuración de los servicios web de Apache](#321-configuración-de-los-servicios-web-de-apache)
 
 [3.2.2 Inventario hardware](#322-inventario-hardware)
 
@@ -37,9 +37,9 @@
 
 [4 NECESIDADES ESPECIALES DE EXPLOTACIÓN](#4-necesidades-especiales-de-explotación)
 
-[4.1 BACKUPS Y RECUPERACIÓN](#41backups-y-recuperación)
+[4.1 BACKUPS Y RECUPERACIÓN](#41-backups-y-recuperación)
 
-[4.2 MONITORIZACIÓN](#42monitorización)
+[4.2 MONITORIZACIÓN](#42-monitorización)
 
 [4.2.1 Indicadores y umbrales de los servidores](#421-indicadores-y-umbrales-de-los-servidores)
 
@@ -47,7 +47,7 @@
 
 [4.2.3 Información específica de disponibilidad](#423-información-específica-de-disponibilidad)
 
-[4.3 POSIBLES PROBLEMAS Y SOLUCIONES](#43posibles-problemas-y-soluciones)
+[4.3 POSIBLES PROBLEMAS Y SOLUCIONES](#43-posibles-problemas-y-soluciones)
 
 
 
@@ -77,7 +77,7 @@ con procesos de incorporación de datos del ámbito de la gestión de la investi
 como el futuro Hércules SGI, en un almacenamiento RDF Store; y con unos interfaces web que presentan el 
 proyecto y permiten consultar el grafo de conocimiento almacenado en formato de triples en el RDF Store.
 
-2.2	ARQUITECTURA DE LA SOLUCIÓN SOFTWARE
+2.2 ARQUITECTURA DE LA SOLUCIÓN SOFTWARE
 ---------------------------------
 
 La Arquitectura Semántica de ASIO cuenta con los siguientes componentes lógicos:
@@ -90,7 +90,7 @@ La Arquitectura Semántica de ASIO cuenta con los siguientes componentes lógico
 -	Frontal Web que realiza la función de Proxy inverso hacia las aplicaciones Web, redirigiendo a los frontales públicos o privados en función de la URL.
 -	Balanceo de carga con HAProxy (o similar).
 
-2.3	DEPENDENCIAS CON OTRAS APLICACIONES O SISTEMAS
+2.3 DEPENDENCIAS CON OTRAS APLICACIONES O SISTEMAS
 -------------------------------------
 
 La Arquitectura Semántica de ASIO no depende de otras aplicaciones para su funcionamiento, más allá de
@@ -152,10 +152,10 @@ El inventario de aplicaciones back es:
 | |- Detección de equivalencias, entre nodos Unidata.|
 
 
-3.2	ENTORNO DE PRODUCCIÓN
+3.2 ENTORNO DE PRODUCCIÓN
 ---------------------
 
-3.2.1	Configuración de los servicios web de Apache
+3.2.1 Configuración de los servicios web de Apache
 -------------------------------------
 
 Para que nos funcione correctamente el Linked data server podemos ver este ejemplo de configuración. 
@@ -287,7 +287,7 @@ El proceso de escritura en alta disponibilidad tiene los siguientes pasos:
 4 NECESIDADES ESPECIALES DE EXPLOTACIÓN
 =======================
  
-4.1	BACKUPS Y RECUPERACIÓN
+4.1 BACKUPS Y RECUPERACIÓN
 -----------------
 
 Tendrían que establecerse los siguientes Backups, ajustados al procedimiento de sistemas en vigor:
@@ -301,7 +301,7 @@ Y definirse el escenario de restauración, que debería incluir los pasos que lo
 - Recuperación de la última copia de seguridad de la BBDD de PostgreSQL con la definición de procesos de carga.
 - Si fuera necesario, reinstalación de los servicios Web y Aplicaciones.
 
-4.2	MONITORIZACIÓN
+4.2 MONITORIZACIÓN
 ---------------
 
 Se describen a continuación los parámetros a monitorizar en los servidores, y las webs cuyo servicio habrá que comprobar.
@@ -364,7 +364,7 @@ El sistema se podría considerar parcialmente disponible si alguna de las funcio
 |Función/Transacción|Actividades que la componen|
 |Actualización de datos|Lectura de datos, descubrimiento y carga. Habría que establecer cuál es el periodo de caída soportable, en función de las necesidades de la universidad.|
 
-4.3	POSIBLES PROBLEMAS Y SOLUCIONES
+4.3 POSIBLES PROBLEMAS Y SOLUCIONES
 ----------------------
 
 En este apartado se consignan algunos problemas esperables y sus soluciones. La lista debería ser mantenida y ampliada por los técnicos de la Universidad durante la vida del proyecto:
