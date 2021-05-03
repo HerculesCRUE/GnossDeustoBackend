@@ -1,4 +1,4 @@
-![](.//docs/media/CabeceraDocumentosMD.png)
+![](../../docs/media/CabeceraDocumentosMD.png)
 
 # Acerca de UrisFactory
 
