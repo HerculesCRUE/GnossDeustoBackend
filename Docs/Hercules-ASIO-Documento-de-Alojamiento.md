@@ -83,7 +83,7 @@ proyecto y permiten consultar el grafo de conocimiento almacenado en formato de 
 La Arquitectura Semántica de ASIO cuenta con los siguientes componentes lógicos:
 
 -	Frontal Web público, que incluye la web de presentación del proyecto, el servidor Linked Data, datos FAIR, Benchmark RDF Store y acceso a un punto SPARQL.
--	Frontal Web privado, que incluye las funciones de administración.
+-	Frontal Web privado, que incluye las funciones de administración de ASIO.
 -	Base de datos relacional con PostgreSQL para el almacenamiento y gestión de la información de administración de la plataforma.
 -	RDF Store con Openlink Virtuoso, para el almacenamiento, gestión y consulta de los datos del grafo de conocimiento.
 -	Gestión de colas de eventos con RabbitMQ.
