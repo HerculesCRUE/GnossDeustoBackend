@@ -2,9 +2,9 @@
 
 | Fecha         | 01/10/2020                                                   |
 | ------------- | ------------------------------------------------------------ |
-|Titulo|versión inicial| 
+|Titulo|API Identity Server| 
 |Descripción|Documentación del IdentityServer|
-|Versión|0.1|
+|Versión|1|
 |Módulo|IdentityServerHercules|
 |Tipo|Documentación|
 |Cambios de la Versión|Creación|
