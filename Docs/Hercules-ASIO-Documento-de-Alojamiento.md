@@ -96,3 +96,22 @@ El inventario de aplicaciones es:
 |linkeddata.domain|FAIR|/|Librería y frontal de FAIR Metrics|
 
 
+El inventario de aplicaciones públicas es:
+
+|Dominio|Nombre|Ruta de la aplicación|Rol de la Aplicación|
+|:----|:----|:----|:----|
+|linkeddata2.um.es|apifrontcarga|/carga-web|Front-end público|
+|linkeddata2.um.es|linkeddataserver|/graph/sgi|Proporciona el servicio de datos enlazados de Hércules ASIO.|
+
+El inventario de aplicaciones back es:
+
+|Nombre|Rol de la Aplicación|
+|:----|:----|
+|apidiscover|Aplicación que ofrece las siguientes funciones del proceso de carga:|
+| |- Reconciliación de entidades, que evita la duplicación de entidades.|
+| |- Descubrimiento de enlaces, que genera enlaces hacia datasets externos y ofrece información de ayuda en la reconciliación de entidades.|
+| |- Detección de equivalencias, entre nodos Unidata.|
+
+
+
+
