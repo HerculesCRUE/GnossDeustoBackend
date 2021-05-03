@@ -1,13 +1,13 @@
 ![](..//Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 27/4/2021                                                   |
+| Fecha         | 3/5/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Resumen de Documentación de ASIO Backend SGI| 
 |Descripción|Inventario de la documentación|
-|Versión|3.1|
+|Versión|3.2|
 |Módulo|Documentación|
 |Tipo|Manual|
-|Cambios de la Versión|Revisión de enlaces|
+|Cambios de la Versión|Agrupación de documentos como partes del entregable Manual de uso del Backend SGI|
 
 ## DOCUMENTACIÓN DE HÉRCULES ASIO BACKEND SGI
 
@@ -38,24 +38,39 @@ La carpeta Docs contiene los siguientes documentos:
  - SPARQL
    - [Hércules ASIO Ejemplos de consultas SPARQL](SPARQL/Hercules-ASIO-Ejemplos-de-consultas-SPARQL.md)
 
-Además de los documentos de características generales contenidos en esta carpeta, el proyecto Hércules ASIO cuenta con documentación asociada a cada componente, en las siguientes rutas: 
+Además de los documentos de características generales contenidos en esta carpeta, el proyecto Hércules ASIO cuenta con documentación asociada a cada componente.
 
- - [Librerias](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/libraries)
- - [Docker](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images)
- - [Prerrequisitos de instalación](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/Build)
- - [API CARGA](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Api.Carga)
- - [API DISCOVER](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Api.Discover)
- - [OAI PMH CVN](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.CVN2OAI_PMH)
- - [CRON](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Cron)
- - [Dinamic Pages](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.DinamicPages)
- - [Identity Server](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.IdentityServer)
+El entregable **Manual de uso del backend SGI** consta del siguiente contenido: 
+ 
+ - [Docker. Instrucciones para instalar ASIO mediante el despliegue de instancias docker](../Builds/docker-images)
+ - [Prerrequisitos de instalación](../Builds/Build)
+ - [Hércules ASIO Documento de alojamiento](Hercules-ASIO-Documento-de-Alojamiento.md)
+ - [Hércules ASIO Estimación de arquitectura de Sistemas](Hercules-ASIO-Estimacion-de-arquitectura-de-Sistemas.md)
+ - [Hércules ASIO Entrega final Manual de comprobaciones y Carga inicial](Hercules-ASIO-Entrega-Final-Manual-de-comprobaciones-y-Carga-inicial.md)
+ - [API CARGA. Manual del servicio](../src/Hercules.Asio.Api.Carga)
+ - [API DISCOVER. Manual del servicio](../src/Hercules.Asio.Api.Discover)
+ - [OAI PMH CVN. Manual del servicio](../src/Hercules.Asio.CVN2OAI_PMH)
+ - [URIs Factory](UrisFactory)
+	 - [Buenas prácticas del esquema de URIs](UrisFactory/Buenas-practicas-URIs.md)
+	 - [Especificación de Esquema de URIs](UrisFactory/Especificacion-Esquema-de-URIs.md)
+ - [Librerías](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/libraries)
+	 - [Ejemplo de uso de la libreria UrisFactory](Examples/UrisFactoryLibraryExample)
+ - [Manual de uso del Frontend de cargas](../src/Hercules.Asio.Web/Manual-de-usuario.md)
+ - [Manual de creación de páginas](../src/Hercules.Asio.Web/Manual-de-creacion-de-paginas.md)
+ - [Linked data server. Manual de configuración](../src/Hercules.Asio.LinkedDataServer) 
  - [Linked data server](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.LinkedDataServer)
- - [Uris Factory](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.UrisFactory)
- - [Asio Web](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Web)
- - [XML RDF Conversor](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.XML_RDF_Conversor)
- - [CVN](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/cvn)
-	 - [Docs](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/cvn/docs)
-	 - [API](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/cvn/docs/api)
-	 - [Config](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/cvn/docs/config)
- - [Fair](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/fair)
- - [Bridge](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/fair/bridge)
+ - CVN
+	 - [Instalación y configuración del servicio](../src/cvn)
+	 - [Configuración del mapeo CVN-ROH](../src/cvn/docs/config)
+ - SPARQL
+	 [Hércules ASIO Ejemplos de consultas SPARQL](SPARQL/Hercules-ASIO-Ejemplos-de-consultas-SPARQL.md)
+	 
+Además, disponemos de **documentación técnica de los componentes** en las siguientes rutas:
+
+ - [CRON. Manual de configuración](../src/Hercules.Asio.Cron)
+ - [Dynamic Pages. Gestor de documentación](../src/Hercules.Asio.DinamicPages)
+ - [API Identity Server](../src/Hercules.Asio.IdentityServer)
+ - [Uris Factory](../src/Hercules.Asio.UrisFactory)
+ - [Asio Web. Frontend de cargas y administración de páginas](../src/Hercules.Asio.Web)
+ - [XML RDF Conversor](../src/Hercules.Asio.XML_RDF_Conversor)
+ - [Fair](../src/fair)
