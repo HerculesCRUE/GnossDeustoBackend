@@ -34,7 +34,7 @@ La carpeta Docs contiene los siguientes documentos:
     - [EF2.1-7 MÉTRICAS FAIR I- SOFTWARE Y DOCUMENTACIÓN DE MÉTRICAS.pdf](FAIR/EF2.1-7.%20M%C3%89TRICAS%20FAIR%20I-%20SOFTWARE%20Y%20DOCUMENTACI%C3%93N%20DE%20M%C3%89TRICAS.pdf)
    - [EF2.1-7. MÉTRICAS FAIR I SOFTWARE Y DOCUMENTACIÓN DE MÉTRICAS](FAIR/EF2.1-7.-METRICAS-FAIR-I-SOFTWARE-Y-DOCUMENTACION-DE-METRICAS.md)
    - [Entregable EF2-1.6 APÉNDICE Métricas publicadas por FAIRmetrics.pdf](FAIR/Entregable%20EF2-1.6%20AP%C3%89NDICE%20M%C3%A9tricas%20publicadas%20por%20FAIRmetrics.pdf)
-   - [Entregable EF2-1.6_Documento de análisis de métodos FAIR](FAIR/Entregable-EF2-1.6_-documento-de-analisis-de-metodos-FAIR.md)
+   - [Entregable EF2-1.6_Documento de análisis de métodos FAIR](FAIR/Entregable-EF2-1.6-documento-de-analisis-de-metodos-FAIR.md)
  - SPARQL
    - [Hércules ASIO Ejemplos de consultas SPARQL](SPARQL/Hercules-ASIO-Ejemplos-de-consultas-SPARQL.md)
 
