@@ -1,10 +1,10 @@
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 29/01/2020                                                   |
+| Fecha         | 29/01/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|API DISCOVER readme| 
 |Descripción|Manual del servicio API DISCOVER|
-|Versión|0.3|
+|Versión|1|
 |Módulo|API DISCOVER|
 |Tipo|Manual|
 |Cambios de la Versión|Modificación appsettings.json|
