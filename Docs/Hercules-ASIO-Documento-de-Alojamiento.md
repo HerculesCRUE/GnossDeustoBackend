@@ -83,27 +83,16 @@ El inventario de aplicaciones es:
 
 |Nombre del dominio|Nombre de la aplicación|Ruta de la aplicación|Rol de la Aplicación|
 |:----|:----|:----|:----|
-|linkeddata2.um.es|apicarga|/carga|Procesos ETL; gestión de repositorios; gestor de sincronizaciones; procesos de validación|
-|linkeddata2.um.es|
-| |apicron|/cron-config|Gestión de la programación de tareas|
-|linkeddata2.um.es|
-| |apiuris|/uris|Generación de URIs según el Esquema de URIs Hércules|
-|linkeddata2.um.es|
-| |apiidentity|/identityserver|Securización mediante tokens|
-|linkeddata2.um.es|
-| |apigesdoc|/documentacion|Servicio web para la creación de páginas de contenido html y su posterior visualización.|
-|linkeddata2.um.es|
-| |apifrontcarga|/carga-web|Front-end privado|
-|linkeddata2.um.es|
-| |xmlrdfconversor|/conversor_xml_rdf|Conversor de XML a RDF|
-|linkeddata2.um.es|
-| |apicvn|/cvn|Conversión de CVN a RDF|
-|linkeddata2.um.es|
-| |apioaipmh|/oai-pmh-cvn|Sirve los datos de los curículums de los investigadores de la Universidad de Murcia en formato RDF y dublin core|
-|linkeddata2.um.es|
-| |apioaipmhxml|/oai-pmh-xml|
-| |Versión preliminar del servicio OAI-PMH de Hércules SGI, simula el servicio de datos|
-|linkeddata2.um.es|
-| |FAIR|/|Librería y frontal de FAIR Metrics|
+|linkeddata.domain|apicarga|/carga|Procesos ETL; gestión de repositorios; gestor de sincronizaciones; procesos de validación|
+|linkeddata.domain|apicron|/cron-config|Gestión de la programación de tareas|
+|linkeddata.domain|apiuris|/uris|Generación de URIs según el Esquema de URIs Hércules|
+|linkeddata.domain|apiidentity|/identityserver|Securización mediante tokens|
+|linkeddata.domain|apigesdoc|/documentacion|Servicio web para la creación de páginas de contenido html y su posterior visualización.|
+|linkeddata.domain|apifrontcarga|/carga-web|Front-end privado|
+|linkeddata.domain|xmlrdfconversor|/conversor_xml_rdf|Conversor de XML a RDF|
+|linkeddata.domain|apicvn|/cvn|Conversión de CVN a RDF|
+|linkeddata.domain|apioaipmh|/oai-pmh-cvn|Sirve los datos de los curículums de los investigadores de la universidad en formato RDF y dublin core|
+|linkeddata.domain|apioaipmhxml|/oai-pmh-xml|Versión preliminar del servicio OAI-PMH de Hércules SGI, simula el servicio de datos|
+|linkeddata.domain|FAIR|/|Librería y frontal de FAIR Metrics|
 
 
