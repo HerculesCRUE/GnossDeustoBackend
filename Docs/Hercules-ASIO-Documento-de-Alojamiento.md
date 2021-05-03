@@ -4,7 +4,7 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Documento de alojamiento| 
 |Descripción|Documento genérico para el despliegue de la arquitectura física|
-|Versión|31|
+|Versión|1|
 |Módulo|Documentación|
 |Tipo|Manual|
 |Cambios de la Versión|Creación del documento|
