@@ -137,53 +137,53 @@ Lo que hacemos con esto es que las peticiones que llegan por http al dominio rai
         </Proxy>
     </VirtualHost>
 
-El resto de peticiones las podríamos gestionar por SSL añadiendo estas líneas al archivo ssl.conf. Podemos ver las redirecciones de proxy a diversos servicios y interfaces sparql.
+El resto de peticiones las podríamos gestionar por SSL añadiendo estas líneas al archivo ssl.conf. Podemos ver las redirecciones de proxy a diversos servicios y interfaces sparql (con IPs locales supuestas en 10.0.0.x):
 
     #APIFRONTCARGA
     ProxyPass /carga-web http://127.0.0.1:5103
     ProxyPassReverse /carga-web http://127.0.0.1:5103
     #APICARGA
-    ProxyPass /carga http://155.54.239.219:5100
-    ProxyPassReverse /carga http://155.54.239.219:5100
+    ProxyPass /carga http://10.0.0.219:5100
+    ProxyPassReverse /carga http://10.0.0.219:5100
     #BENCHMARK
     ProxyPass /benchmark http://127.0.0.1:8401
     ProxyPassReverse /benchmark http://127.0.0.1:8401
     #OAI-PMH-CVN
-    ProxyPass /oai-pmh-cvn http://155.54.239.219:5102
-    ProxyPassReverse /oai-pmh-cvn http://155.54.239.219:5102
+    ProxyPass /oai-pmh-cvn http://10.0.0.219:5102
+    ProxyPassReverse /oai-pmh-cvn http://10.0.0.219:5102
     #CRON
-    ProxyPass /cron-config http://155.54.239.219:5107
-    ProxyPassReverse /cron-config http://155.54.239.219:5107
+    ProxyPass /cron-config http://10.0.0.219:5107
+    ProxyPassReverse /cron-config http://10.0.0.219:5107
     #DOCUMENTACION
-    ProxyPass /documentacion http://155.54.239.219:5109
-    ProxyPassReverse /documentacion http://155.54.239.219:5109
+    ProxyPass /documentacion http://10.0.0.219:5109
+    ProxyPassReverse /documentacion http://10.0.0.219:5109
     #IDENTITY-SERVER
-    ProxyPass /identityserver http://155.54.239.219:5108
-    ProxyPassReverse /identityserver http://155.54.239.219:5108
+    ProxyPass /identityserver http://10.0.0.219:5108
+    ProxyPassReverse /identityserver http://10.0.0.219:5108
     #APIURIS
-    ProxyPass /uris http://155.54.239.219:5000
-    ProxyPassReverse /uris http://155.54.239.219:5000
+    ProxyPass /uris http://10.0.0.219:5000
+    ProxyPassReverse /uris http://10.0.0.219:5000
     #XMLRDFCONVERSOR
-    ProxyPass /conversor_xml_rdf http://155.54.239.219:5114
-    ProxyPassReverse /conversor_xml_rdf http://155.54.239.219:5114
+    ProxyPass /conversor_xml_rdf http://10.0.0.219:5114
+    ProxyPassReverse /conversor_xml_rdf http://10.0.0.219:5114
     #UNIDATA
-    ProxyPass /unidata http://155.54.239.219:5106
-    ProxyPassReverse /unidata http://155.54.239.219:5106
+    ProxyPass /unidata http://10.0.0.219:5106
+    ProxyPassReverse /unidata http://10.0.0.219:5106
     #CVN
     ProxyPass /cvn http://127.0.0.1:5104
     ProxyPassReverse /cvn http://127.0.0.1:5104
     ProxyPass /cvn_swagger http://127.0.0.1:8080
     ProxyPassReverse /cvn_swagger http://127.0.0.1:8080  
     #BRIDGE
-    ProxyPass /fairmetrics_bridge http://155.54.239.219:5200
-    ProxyPassReverse /fairmetrics_bridge http://155.54.239.219:5200
-    ProxyPass /bridgeswagger http://155.54.239.219:8082
-    ProxyPassReverse /bridgeswagger http://155.54.239.219:8082
+    ProxyPass /fairmetrics_bridge http://10.0.0.219:5200
+    ProxyPassReverse /fairmetrics_bridge http://10.0.0.219:5200
+    ProxyPass /bridgeswagger http://10.0.0.219:8082
+    ProxyPassReverse /bridgeswagger http://10.0.0.219:8082
     #VIRTUOSO1
-    ProxyPass /sparql http://155.54.239.221:8890/sparql
-    ProxyPassReverse /sparql http://155.54.239.221:8890/sparql
+    ProxyPass /sparql http://10.0.0.221:8890/sparql
+    ProxyPassReverse /sparql http://10.0.0.221:8890/sparql
     #VIRTUOSO2
-    ProxyPass /sparql2 http://155.54.239.222:8890/sparql
-    ProxyPassReverse /sparql2 http://155.54.239.222:8890/sparql
+    ProxyPass /sparql2 http://10.0.0.222:8890/sparql
+    ProxyPassReverse /sparql2 http://10.0.0.222:8890/sparql
 
 
