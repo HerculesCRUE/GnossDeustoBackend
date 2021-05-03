@@ -244,3 +244,46 @@ El proceso de escritura en alta disponibilidad tiene los siguientes pasos:
 - Al mismo tiempo se añade un evento en la cola de replicación, con las instrucciones para realizar la actualización de datos.
 - El mismo proceso de escritura cuenta con un hilo que se encarga leer los eventos de la cola y los procesa.
 - Cada evento procesado genera una actualización de datos en el RDF Store establecido como réplica. 
+
+4 NECESIDADES ESPECIALES DE EXPLOTACIÓN
+=======================
+ 
+4.1	BACKUPS Y RECUPERACIÓN
+-----------------
+
+Tendrían que establecerse los siguientes Backups, ajustados al procedimiento de sistemas en vigor:
+- Backup estándar de servidores: 
+- Backup estándar BBDD PostgreSQL: 
+- BBDD RDF Store: 
+
+Y definirse el escenario de restauración, que debería incluir los pasos que los responsables de sistemas determinen, que podrían ser:
+- Si fuera necesario, reinstalación del sistema operativo y software base.
+- Recuperación de la última copia de seguridad del grafo.
+- Recuperación de la última copia de seguridad de la BBDD de PostgreSQL con la definición de procesos de carga.
+- Si fuera necesario, reinstalación de los servicios Web y Aplicaciones.
+
+4.2	MONITORIZACIÓN
+---------------
+
+Se describen a continuación los parámetros a monitorizar en los servidores, y las webs cuyo servicio habrá que comprobar.
+
+4.2.1	Indicadores y umbrales de los servidores
+------------------------
+
+Las indicadores y umbrales a tener en cuenta podrían ser:
+
+|Servidor|Indicador a Monitorizar|Descripción breve|Umbral|
+|:----|:----|:----|:----|
+|Frontales Web|Uso de RAM| |Warning: 95% 5 últimos minutos; Critical: 99% 5 últimos minutos|
+| |Uso de CPU| |Warning: 95% 5 últimos minutos; Critical: 99% 5 últimos minutos|
+| |Disco| |Warning: 80%; Critical: 90%|
+| |Proceso de docker|Estado proceso docker se encuentre en ejecución| |
+|PostgreSQL|Uso de RAM| |Warning: 95% 5 últimos minutos; Critical: 99% 5 últimos minutos|
+| |Uso de CPU| |Warning: 95% 5 últimos minutos; Critical: 99% 5 últimos minutos|
+| |Disco| |Warning: 80%; Critical: 90%|
+| |Proceso de postgresql|Estado proceso postgresql se encuentre en ejecución| |
+|RDF Store|P.e. virtuoso-t|Estado proceso virtuoso-t running| |
+| |Chequeo HTTP Puerto 8890|Servicio Web sparql endpoint; P.e. en Nagios: check_http -I $HOSTADDRESS$  -p 8890 -j HEAD -w 1 -c 2 -t 120)| |
+| |Estado de los buffers|Controlar el estado de los buffers con la función sys_stat('st_db_used_buffers')|Warning: 80%; Critical: 90%|
+| | |Controlar lecturas de disco con la función sys_stat('disk_reads')|Warning: 80%; Critical: 90%|
+
