@@ -220,3 +220,27 @@ Tendríamos las siguientes reglas de red:
 |Web privada|Web privada|PostgreSQL|PostgreSQL|A->B|TCP|5432|
 |Web privada|Web privada|RDF Store 1 y 2|P.e. Virtuoso|A->B|TCP|8890|
 
+3.2.4 Elementos en alta disponibilidad
+-------------------
+
+Se dispone de la siguiente arquitectura para proporcionar alta disponibilidad en los procesos de lectura de datos:
+
+![](media/Hércules%20ASIO%20Arquitectura%20alta%20disponibilidad.png)
+
+Los componentes son:
+
+- Proxy. Se trata de un proxy inverso con balanceo que redirige las peticiones hacia 2 servidores que alojan los Docker que proporcionan los servicios Web. Cada frontal web público devuelve una cabecera que informa de cuál está contestando
+- HAProxy. Se trata de un balanceo interno que recibe las peticiones de lectura de datos hacia los servidores RDF Store y las balancea hacia los dos servidores (con Virtuoso) que cuentan con la misma información y pueden contestar indistintamente. Este componente detecta si uno de los servidores está caído temporalmente (por ejemplo, en el proceso de checkpoint de Virtuoso) y redirige el tráfico hacia el otro servidor. Cada RDF Store devuelve una cabecera que informa de qué servidor está contestando.
+
+Con la arquitectura anterior se podrían añadir más servidores frontales Web y también más RDF Store de lectura. Para disponer 
+de un balanceo de lectura con 2 o más RDF Store es necesario disponer de un proceso de escritura que se encargue
+de que los datos de los servidores tengan la misma información. El siguiente diagrama explica este proceso:
+ 
+![](media/Hércules%20ASIO%20Proceso%20alta%20disponibilidad.png)
+
+El proceso de escritura en alta disponibilidad tiene los siguientes pasos:
+
+- Actualiza los datos directamente en el RDF Store establecido como máster.
+- Al mismo tiempo se añade un evento en la cola de replicación, con las instrucciones para realizar la actualización de datos.
+- El mismo proceso de escritura cuenta con un hilo que se encarga leer los eventos de la cola y los procesa.
+- Cada evento procesado genera una actualización de datos en el RDF Store establecido como réplica. 
