@@ -40,6 +40,9 @@ La carpeta Docs contiene los siguientes documentos:
 
 Además de los documentos de características generales contenidos en esta carpeta, el proyecto Hércules ASIO cuenta con documentación asociada a cada componente.
 
+Manual de uso del Backend SGI
+=======================
+
 El entregable **Manual de uso del backend SGI** consta del siguiente contenido: 
  
  - [Docker. Instrucciones para instalar ASIO mediante el despliegue de instancias docker](../Builds/docker-images)
@@ -65,6 +68,9 @@ El entregable **Manual de uso del backend SGI** consta del siguiente contenido:
  - SPARQL
 	 [Hércules ASIO Ejemplos de consultas SPARQL](SPARQL/Hercules-ASIO-Ejemplos-de-consultas-SPARQL.md)
 	 
+Documentación técnica de los componentes
+---------------------------
+
 Además, disponemos de **documentación técnica de los componentes** en las siguientes rutas:
 
  - [CRON. Manual de configuración](../src/Hercules.Asio.Cron)
