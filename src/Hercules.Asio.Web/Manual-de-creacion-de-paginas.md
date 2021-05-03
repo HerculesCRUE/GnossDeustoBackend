@@ -2,7 +2,7 @@
 
 | Fecha         | 14/04/2021                                                 |
 | ------------- | ------------------------------------------------------------ |
-|Titulo|versión inicial| 
+|Titulo|Manual de creación de páginas| 
 |Descripción|Documentación de creación de páginas por parte del usuario|
 |Versión|1|
 |Módulo|FrontEndCarga|
