@@ -58,3 +58,26 @@ La Arquitectura Semántica de ASIO no depende de otras aplicaciones para su func
 las fuentes de información externas que se configuren en su momento para la incorporación de datos de
 gestión de la investigación.
 
+3 Despliegue de la solución
+======================
+
+3.1 Despliegue de Software
+---------------------
+
+Se indican los nombres sugeridos para los servidores, que tendrán que sustituirse por los 
+definitivos, y el software más relevante de cada servidor.
+
+|Servidor|Componente|SO|Software|
+|:----|:----|:----|:----|
+|Proxy|Proxy Inverso|Linux Centos 8|Apache|
+|Web Pública 1|Web Pública |Linux Centos 8|Docker (.Net Core 3.1)|
+|Web Pública 2|Web Pública |Linux Centos 8|Docker (.Net Core 3.1)|
+|Web privada |Web privada|Linux Centos 8|Docker (Net Core 3.1)|
+|HAPorxy|HAProxy|Linux Centos 8|HAProxy|
+|PostgreSQL|PostgreSQL|Linux Centos|Docker (PostgreSQL)|
+|RDF Store 1|RDF Store|Linux Centos 8|P.e. Virtuoso  07.20.3230|
+|RDF Store 2|RDF Store|Linux Centos 8|PP.e. Virtuoso 07.20.3230|
+|RabbitMQ|Gestión de colas|Linux Centos 8|Docker (RabbitMQ)|
+
+
+
