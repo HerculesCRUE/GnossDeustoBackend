@@ -80,7 +80,7 @@ Ahora solamente necesitamos añadir un interfaz que sea autenticado y ejecutado 
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/breadcrumb.png)
 
-Una vez ahí desplegamos y buscamos el /sparql-auth
+Una vez ahí desplegamos el interfaz 0.0.0.0:8890 y buscamos el /sparql-auth
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/sparql-auth0.png)
 
@@ -88,6 +88,7 @@ Y lo editamos para dejarlos de la siguiente manera:
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/sparql-auth.png)
 
+Ahora si vamos a http://ip_de_nuestra_maquina:8890/sparql-auth y nos autenticamos con el usuario "UPDATE" podremos hacer modificaciones a través de esa interfaz.
 	
 ## Despliegue de PostgreSQL
 
