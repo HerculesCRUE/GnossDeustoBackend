@@ -79,6 +79,9 @@ Con estos comando creamos el usuario "UPDATE", le damos permisos, ajustamos lect
 Ahora solamente necesitamos añadir un interfaz que sea autenticado y ejecutado por UPDATE con el que se puedan hacer modificaciones. Para ello accedemos a http://ip_de_nuestra_maquina:8890/conductor y nos logueamos con el usuario dba (en esta guía dba / mysecret).
 
 
+![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/breadcrumb.png)
+
+
 
 	
 ## Despliegue de PostgreSQL
