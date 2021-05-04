@@ -57,6 +57,24 @@ Y podemos hacer una sencilla comprobación de que funciona entrando en la interf
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/02_web.png)
 
+Con esta configuración básica tendremos un interfaz sparql que se lanzará de manera anónima y con permisos exclusivamente de lectura. Para poder tener un interfaz sparql adicional con el que podamos hacer modificación de datos, lo primero que debemos hacer es acceder al interfaz isql de virtuoso entrando al docker.
+
+	docker exec -it virtuoso bash
+	cd ../bin/
+	isql 1111 dba mysecret
+
+Una vez aquí podremos ver esto:
+
+![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/isql.png)
+
+Con estos comando creamos el usuario "UPDATE", le damos permisos, ajustamos lectura para nobody y modificar para "UPDATE"
+	
+	DB.DBA.USER_CREATE ('UPDATE', 'Bn4wQ6aD');
+	grant SPARQL_SELECT to "UPDATE";
+	grant SPARQL_UPDATE to "UPDATE";
+	grant SPARQL_SPONGE to "UPDATE";	
+	DB.DBA.RDF_DEFAULT_USER_PERMS_SET ('nobody', 1);
+	DB.DBA.RDF_DEFAULT_USER_PERMS_SET ('UPDATE', 3);
 	
 ## Despliegue de PostgreSQL
 
@@ -69,7 +87,7 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-postgresql/docker-compose.yml
 	docker-compose up -d
 	
-Depués de desplegar, como en el caso anterior vamos a hacer la comprobación de que el contenedor está levantado pero en esta ocasión vamos a usar el comando docker-compose ps que se limita a mostrar información solo de los procesos de este yml.
+Después de desplegar, como en el caso anterior vamos a hacer la comprobación de que el contenedor está levantado pero en esta ocasión vamos a usar el comando docker-compose ps que se limita a mostrar información solo de los procesos de este yml.
 	
 	docker-compose ps
 	
