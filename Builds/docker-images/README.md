@@ -275,7 +275,7 @@ Este escript clonará los repositorios necesarios y luego generará las imágene
 
 	chmod +x actualizar-front.sh
 
-Depués creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock1 porque en el script actualizar.sh así se llama papero podemos jugar con estos valores. Después lo descargamos.
+Depués creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-front porque en el script actualizar.sh así se llama papero podemos jugar con estos valores. Después lo descargamos.
 
 	mkdir dock-front
 	cd dock-front
