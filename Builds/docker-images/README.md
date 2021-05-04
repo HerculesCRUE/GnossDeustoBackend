@@ -76,7 +76,7 @@ Con estos comando creamos el usuario "UPDATE", le damos permisos, ajustamos lect
 	DB.DBA.RDF_DEFAULT_USER_PERMS_SET ('nobody', 1);
 	DB.DBA.RDF_DEFAULT_USER_PERMS_SET ('UPDATE', 3);
 	
-Ahora solamente necesitamos añadir un interfaz que sea autenticado y ejecutado por UPDATE con el que se puedan hacer modificaciones. Para ello accedemos a http://ip_de_nuestra_maquina:8890/conductor y nos logueamos con el usuario dba (en esta guía dba / mysecret). Y vamos a la sección indicada en la captura:
+Ahora solamente necesitamos añadir un interfaz que sea autenticado y ejecutado por UPDATE con el que se puedan hacer modificaciones. Para ello accedemos a http://ip_de_nuestra_maquina:8890/conductor y nos logueamos con el usuario dba (en esta guía dba / mysecret). Seguido vamos a la sección indicada en la captura:
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/breadcrumb.png)
 
