@@ -5,9 +5,9 @@
 Contamos con la siguiente documentación:
 
 
-[Documento de Análisis de métodos FAIR](../../DocsFAIR/Entregable-EF2-1.6_-documento-de-analisis-de-metodos-FAIR.md)
+[Documento de Análisis de métodos FAIR](../../Docs/FAIR/Entregable-EF2-1.6_-documento-de-analisis-de-metodos-FAIR.md)
 
-[Métricas FAIR. Software y documentación](../../DocsFAIR/EF2.1-7.-METRICAS-FAIR-I-SOFTWARE-Y-DOCUMENTACION-DE-METRICAS.md)
+[Métricas FAIR. Software y documentación](../../Docs/FAIR/EF2.1-7.-METRICAS-FAIR-I-SOFTWARE-Y-DOCUMENTACION-DE-METRICAS.md)
 
 Hay una instancia disponible de la [aplicación y librería FAIR Metrics](https://github.com/FAIRMetrics/Metrics) 
 instanciada en los servidores de la Universidad de Murcia:
