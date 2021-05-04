@@ -243,6 +243,52 @@ Por último, para que la aplicación disponga de los archivos necesarios tenemos
 
 	wget http://herc-as-front-desa.atica.um.es/docs/contenido.tar.gz
 
+## Despliegue de los servicios de back
+
+Para simplificar el despliegue de los servicios de back, hemos creado un script que debemos descargar en nuestra máquinas para servicios de back. Partiendo desde la home del usurio (ej. /home/usuario/).
+
+	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios/actualizar.sh
+	
+Este escript clonará los repositorios necesarios y luego generará las imágenes docker automáticamente. Le debemos dar permisos de ejecución.
+
+	chmod +x actualizar.sh
+
+Depués creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock1 porque en el script actualizar.sh así se llama papero podemos jugar con estos valores. Después lo descargamos.
+
+	mkdir dock1
+	cd dock1
+	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios/docker-compose.yml
+	
+Antes de lentar los servicios debemos editar este archivo y reemplezar "herc-as-front-desa.atica.um.es" por la ip de la máquina donde estemos levantando los servicios. Asi todos los servicios se podran comunicar conrrectamente entre ellos.	
+
+Con la ip ajustada ya podemos ejecutar script que nos prepara el entorno.
+
+	./actualizar.sh
+	
+Cuando accedamos por primera vez el frontal web nos debería fallar porque no tenemos las vistas personalizadas cargadas en la base de datos. Para conseguir esto tenemos que hacer estos sencillos pasos:
+
+Primero nos vajamos un script sql con los insert necesarios desde la máquina donde tenemos PostgreSQL instalado.
+
+	wget http://herc-as-front-desa.atica.um.es/docs/vistas.sql
+	
+Ahora tenemos que modificar los inserts ajustando los enlaces http y https y poner los adecuados para nuestro entorno.
+
+Una vez modificado el script tenemos que ejecutar estos comandos:
+
+	docker exec -it postgresql_db_1 bash
+
+	su postgres
+
+	psql -f vistas.sql
+
+Si todo ha ido bien veremos el recuento de los inserts con este formato:
+
+	INSERT 0 14
+
+Ahora si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz web para poder hacer cargas.
+
+![](http://herc-as-front-desa.atica.um.es/docs/capturas/front.png)
+
 ## Despliegue de los servicios
 
 Para simplificar el despliegue de los servicios, hemos creado un script que debemos descargar en nuestra máquina. Partiendo desde la home del usurio (ej. /home/usuario/).
