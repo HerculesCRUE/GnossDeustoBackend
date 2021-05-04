@@ -1,3 +1,5 @@
+![](../../Docs/media/CabeceraDocumentosMD.png)
+
 # Libraries
 Aquí se encuentran las dll de los proyectos desarrollados, tanto en [Windows](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/libraries/Windows) como en [Linux](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/libraries/Linux).
 
