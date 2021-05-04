@@ -76,6 +76,11 @@ Con estos comando creamos el usuario "UPDATE", le damos permisos, ajustamos lect
 	DB.DBA.RDF_DEFAULT_USER_PERMS_SET ('nobody', 1);
 	DB.DBA.RDF_DEFAULT_USER_PERMS_SET ('UPDATE', 3);
 	
+Ahora solamente necesitamos añadir un interfaz que sea autenticado y ejecutado por UPDATE con el que se puedan hacer modificaciones. Para ello accedemos a http://ip_de_nuestra_maquina:8890/conductor y nos logueamos con el usuario dba (en esta guía dba / mysecret).
+
+
+
+	
 ## Despliegue de PostgreSQL
 
 El procedimiento para desplegar PostgreSQL es similar al de virtuso. Utilizaremos docker-compose con su respectivo yml. En esta plantilla no es necesario ajustar nada aunque podemos ajustar el password que queramos en el parámetro "POSTGRES_PASSWORD" del docker-compose.yml, cosa que tenemos que tener en cuenta a la hora de ajustar el yml de los servicios que veremos más adelante.
