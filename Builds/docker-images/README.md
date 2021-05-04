@@ -84,7 +84,7 @@ Una vez ahí desplegamos el interfaz 0.0.0.0:8890 y buscamos el /sparql-auth
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/sparql-auth0.png)
 
-Y lo editamos para dejarlos de la siguiente manera:
+Y lo editamos para dejarlos de la siguiente manera (con modificar el Realm y poner UPDATE sería suficiente):
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/sparql-auth.png)
 
