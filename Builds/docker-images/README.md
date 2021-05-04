@@ -253,19 +253,17 @@ Este escript clonará los repositorios necesarios y luego generará las imágene
 
 	chmod +x actualizar-back.sh
 
-Depués creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock1 porque en el script actualizar.sh así se llama papero podemos jugar con estos valores. Después lo descargamos.
+Depués creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-back porque en el script actualizar-back.sh así se llama papero podemos jugar con estos valores. Después lo descargamos.
 
 	mkdir dock-back
 	cd dock-back
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios-back/docker-compose.yml
 	
-Antes de lentar los servicios debemos editar este archivo y reemplezar "herc-as-front-desa.atica.um.es" por la ip de la máquina donde estemos levantando los servicios. Asi todos los servicios se podran comunicar conrrectamente entre ellos.	
+Antes de lentar los servicios debemos editar este archivo y reemplezar "ip_del_servicio" por la ip de la máquina donde estemos levantando los servicios. Asi todos los servicios se podran comunicar conrrectamente entre ellos.	
 
 Con la ip ajustada ya podemos ejecutar script que nos prepara el entorno.
 
 	./actualizar-back.sh
-	
-
 
 ## Despliegue de los servicios
 
