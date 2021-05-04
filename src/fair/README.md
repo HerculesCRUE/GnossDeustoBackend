@@ -5,7 +5,7 @@
 Contamos con la siguiente documentación:
 
 
-[Documento de Análisis de métodos FAIR](../../Docs/FAIR/Entregable-EF2-1.6_-documento-de-analisis-de-metodos-FAIR.md)
+[Documento de Análisis de métodos FAIR](../../Docs/FAIR/Entregable-EF2-1.6-documento-de-analisis-de-metodos-FAIR.md)
 
 [Métricas FAIR. Software y documentación](../../Docs/FAIR/EF2.1-7.-METRICAS-FAIR-I-SOFTWARE-Y-DOCUMENTACION-DE-METRICAS.md)
 
