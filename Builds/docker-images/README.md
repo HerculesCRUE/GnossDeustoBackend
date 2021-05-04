@@ -265,27 +265,27 @@ Con la ip ajustada ya podemos ejecutar script que nos prepara el entorno.
 
 	./actualizar-back.sh
 
-## Despliegue de los servicios
+## Despliegue de los servicios front
 
-Para simplificar el despliegue de los servicios, hemos creado un script que debemos descargar en nuestra máquina. Partiendo desde la home del usurio (ej. /home/usuario/).
+Para simplificar el despliegue de los servicios de front, hemos creado un script que debemos descargar en nuestra máquina donde queramos alojar los servicios de front. Partiendo desde la home del usurio (ej. /home/usuario/).
 
-	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios/actualizar.sh
+	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios-front/actualizar-front.sh
 	
 Este escript clonará los repositorios necesarios y luego generará las imágenes docker automáticamente. Le debemos dar permisos de ejecución.
 
-	chmod +x actualizar.sh
+	chmod +x actualizar-front.sh
 
 Depués creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock1 porque en el script actualizar.sh así se llama papero podemos jugar con estos valores. Después lo descargamos.
 
-	mkdir dock1
-	cd dock1
-	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios/docker-compose.yml
+	mkdir dock-front
+	cd dock-front
+	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios-front/docker-compose.yml
 	
-Antes de lentar los servicios debemos editar este archivo y reemplezar "herc-as-front-desa.atica.um.es" por la ip de la máquina donde estemos levantando los servicios. Asi todos los servicios se podran comunicar conrrectamente entre ellos.	
+Antes de lentar los servicios debemos editar este archivo y reemplezar "ip_del_servicio" por la ip de la máquina donde estemos levantando los servicios. Asi todos los servicios se podran comunicar conrrectamente entre ellos.	
 
 Con la ip ajustada ya podemos ejecutar script que nos prepara el entorno.
 
-	./actualizar.sh
+	./actualizar-front.sh
 	
 Cuando accedamos por primera vez el frontal web nos debería fallar porque no tenemos las vistas personalizadas cargadas en la base de datos. Para conseguir esto tenemos que hacer estos sencillos pasos:
 
