@@ -310,3 +310,151 @@ Si todo ha ido bien veremos el recuento de los inserts con este formato:
 Ahora si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz web para poder hacer cargas.
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/front.png)
+
+## Ejemplo de configuración de HAProxy
+
+Para implementar la alta disponibilidad tanto de los frontales web, como de Virtuoso podemos colocarlos duplicados detrás de un HAProxy. Aquí podemos ver un ejemplo de configuración:
+#---------------------------------------------------------------------
+# Example configuration for a possible web application.  See the
+# full configuration options online.
+#
+#   http://haproxy.1wt.eu/download/1.4/doc/configuration.txt
+#
+#---------------------------------------------------------------------
+
+#---------------------------------------------------------------------
+# Global settings
+#---------------------------------------------------------------------
+global
+    # to have these messages end up in /var/log/haproxy.log you will
+    # need to:
+    #
+    # 1) configure syslog to accept network log events.  This is done
+    #    by adding the '-r' option to the SYSLOGD_OPTIONS in
+    #    /etc/sysconfig/syslog
+    #
+    # 2) configure local2 events to go to the /var/log/haproxy.log
+    #   file. A line like the following can be added to
+    #   /etc/sysconfig/syslog
+    #
+    #    local2.*                       /var/log/haproxy.log
+    #
+    log         127.0.0.1 local2
+
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    maxconn     4000
+    user        haproxy
+    group       haproxy
+    daemon
+
+    # turn on stats unix socket
+    stats socket /var/lib/haproxy/stats
+
+#---------------------------------------------------------------------
+# common defaults that all the 'listen' and 'backend' sections will
+# use if not designated in their block
+#---------------------------------------------------------------------
+defaults
+    mode                    http
+    log                     global
+    option                  httplog
+    option                  dontlognull
+    option http-server-close
+    option forwardfor       except 127.0.0.0/8
+    option                  redispatch
+    retries                 3
+    timeout http-request    10s
+    timeout queue           1m
+    timeout connect         10s
+    timeout client          1m
+    timeout server          1m
+    timeout http-keep-alive 10s
+    timeout check           10s
+    maxconn                 3000
+
+#WEB
+
+listen hercules443
+    bind ip_del_haproxy:443
+    mode tcp
+    option tcplog
+    option redispatch
+    option clitcpka
+    option srvtcpka
+    option tcpka
+    timeout client 3s
+    retries 2
+    balance roundrobin 
+    hash-type consistent
+    stick-table type ip size 1m expire 1h
+    stick on src
+    timeout connect 3s
+    timeout server 3s
+    server nodo1 ip_del_nodo1_web:443 check inter 3s fall 1 rise 2
+    server nodo2 ip_del_nodo2_web:443 check inter 3s fall 1 rise 2
+
+listen hercules:80
+    bind ip_del_haproxy:80
+    mode tcp
+    option tcplog
+    option redispatch
+    option clitcpka
+    option srvtcpka
+    option tcpka
+    timeout client 3s
+    retries 2
+    balance roundrobin
+    hash-type consistent
+    stick-table type ip size 1m expire 1h
+    stick on src
+    timeout connect 3s
+    timeout server 3s
+    server nodo1 ip_del_nodo1_web:80 check inter 3s fall 1 rise 2
+    server nodo2 ip_del_nodo1_web:80 check inter 3s fall 1 rise 2
+
+#VIRTUOSO
+
+listen VirtuosoLecturaProGnoss
+    stats enable
+    bind ip_del_haproxy:8890
+    option forwardfor except 127.0.0.0/8
+    mode http
+    balance roundrobin
+    option httpclose
+    option redispatch
+    retries 2
+    option forwardfor
+    option httpchk HEAD /sparql
+    http-check expect status 200
+    http-response add-header X-App-Server %b_%s
+    server v1pro v1pro:8890 check inter 3s fall 1 rise 2 
+    server v2pro v2pro:8890 check inter 3s fall 1 rise 2 
+	
+listen VirtuosoLecturaProGnoss1111
+    bind ip_del_haproxy:1111
+    mode tcp
+    option tcplog
+    option redispatch
+    option clitcpka
+    option srvtcpka
+    option tcpka
+    timeout client 3s
+    retries 2
+    balance source
+    hash-type consistent
+    stick-table type ip size 1m expire 1h
+    stick on src
+    timeout connect 3s
+    timeout server 3s   
+    server v1pro v1pro:1111 check inter 3s fall 1 rise 2 
+    server v2pro v2pro:1111 check inter 3s fall 1 rise 2 
+
+#STATS
+
+listen stats
+    bind *:9999
+    stats enable
+    stats uri /stats
+    stats auth admin:admin
+   
