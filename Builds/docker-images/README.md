@@ -1,18 +1,18 @@
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 14/4/2021                                                   |
+| Fecha         | 5/5/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Despliegue de ASIO Backend de SGI con Docker| 
 |Descripción|Instrucciones para instalar ASIO mediante el despliegue de instancias docker|
-|Versión|1.1|
+|Versión|1.2|
 |Módulo|Documentación|
 |Tipo|Manual|
-|Cambios de la Versión|Anadida la cabecera|
+|Cambios de la Versión|Modificado el documento para indicar cómo se instalaría cada componente en diferentes servidores, si fuera el caso|
 
-# Despliegue del backend con Docker
+# Despliegue de ASIO Backend SGI con Docker
 
 ## Requisitos previos
-Para hacer funcionar el backend será necesario tener instalado en nuestro servidor:
+Para hacer funcionar el Backend será necesario tener instalado en nuestro servidor:
 
 * Docker (podemos seguir la documentacion oficial dependiendo de nuestra dristrubución de Linux) 
     - Centos https://docs.docker.com/engine/install/centos/
@@ -30,24 +30,28 @@ Para hacer funcionar el backend será necesario tener instalado en nuestro servi
 * Servidor de Liked Data (en este ejemplo Trifid desplegada con Docker)
 
 * Acceso a http://curriculumpruebas.um.es/curriculum/rest/v1/auth desde la máquina donde vayamos a desplegar.
+
+La arquitectura puede corresponder con un diagrama similar al siguiente (descrito en detalle en [Hércules ASIO Documento de alojamiento](../../Docs/Hercules-ASIO-Documento-de-Alojamiento.md)):
+
+![](../../Docs/media/Hércules%20ASIO%20Arquitectura%20física%20genérica.png)
  
 ## Despliegue de Virtuoso
 
-Como base de datos de triples vamos a utilizar Virtuoso, para desplegarlo, obtendremos el fichero yml con todas las configuraciones necesarias para su despliegue, desde este ficheor podemos realizar varios ajustos para la configuración del contenedor y virtuoso las más importantes son las siguientes:
+Como base de datos de triples vamos a utilizar Virtuoso. Para desplegarlo obtendremos el fichero YML con todas las configuraciones necesarias para su despliegue, desde este fichero podemos realizar varios ajustes para la configuración del contenedor y de Virtuoso. Las más importantes son las siguientes:
 * DBA_PASSWORD: mysecret - Ajusta la clave para el usuario dba.
 * VIRT_Parameters_NumberOfBuffers: 100000 - Nivel de buffer ajustado para 1 GB de RAM, para más RAM se incrementaria proporcionalmente.
 * VIRT_Parameters_MaxDirtyBuffers: 60000 - Nivel de buffer ajustado para 1 GB de RAM, para más RAM se incrementaria proporcionalmente.
 * VIRT_Parameters_MaxClientConnections: 100 - Máximo de conexiones por el puerto 1111.
 * VIRT_HTTPServer_MaxClientConnections: 50 - Máximo de conexiones por el puerto 8890.
 
-Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a contener el docker-compose.yml, entramos en el directorio, descargamos el yml y levantamos el docker con los siguientes comandos: 
+Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a contener el docker-compose.yml, entramos en el directorio, descargamos el fichero YML y levantamos el docker con los siguientes comandos: 
 
 	mkdir virtuoso
 	cd virtuoso
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-virtuoso/docker-compose.yml
 	docker-compose up -d
 	
-Un vez deplegado podemos ver el proceso de docker con este comando:
+Un vez desplegado podemos ver el proceso de docker con este comando:
 
 	docker ps
 	
@@ -67,7 +71,7 @@ Una vez aquí podremos ver esto:
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/isql.png)
 
-Con estos comando creamos el usuario "UPDATE", le damos permisos, ajustamos lectura para nobody y modificar para "UPDATE"
+Con estos comando creamos el usuario "UPDATE", le damos permisos, ajustamos lectura para nobody y modificación para "UPDATE":
 	
 	DB.DBA.USER_CREATE ('UPDATE', 'Bn4wQ6aD');
 	grant SPARQL_SELECT to "UPDATE";
@@ -76,7 +80,7 @@ Con estos comando creamos el usuario "UPDATE", le damos permisos, ajustamos lect
 	DB.DBA.RDF_DEFAULT_USER_PERMS_SET ('nobody', 1);
 	DB.DBA.RDF_DEFAULT_USER_PERMS_SET ('UPDATE', 3);
 	
-Ahora solamente necesitamos añadir un interfaz que sea autenticado y ejecutado por UPDATE con el que se puedan hacer modificaciones. Para ello accedemos a http://ip_de_nuestra_maquina:8890/conductor y nos logueamos con el usuario dba (en esta guía dba / mysecret). Seguido vamos a la sección indicada en la captura:
+Ahora solamente necesitamos añadir un interfaz que sea autenticado y ejecutado por UPDATE con el que se puedan hacer modificaciones. Para ello accedemos a http://ip_de_nuestra_maquina:8890/conductor y hacemos login con el usuario dba (en esta guía dba / mysecret). A continuación vamos a la sección indicada en la captura:
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/breadcrumb.png)
 
@@ -84,7 +88,7 @@ Una vez ahí desplegamos el interfaz 0.0.0.0:8890 y buscamos el /sparql-auth
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/sparql-auth0.png)
 
-Y lo editamos para dejarlos de la siguiente manera (con modificar el Realm y poner UPDATE sería suficiente):
+Y lo editamos para dejarlo de la siguiente manera (con modificar el Realm y poner UPDATE sería suficiente):
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/sparql-auth.png)
 
@@ -92,7 +96,7 @@ Ahora si vamos a http://ip_de_nuestra_maquina:8890/sparql-auth y nos autenticamo
 	
 ## Despliegue de PostgreSQL
 
-El procedimiento para desplegar PostgreSQL es similar al de virtuso. Utilizaremos docker-compose con su respectivo yml. En esta plantilla no es necesario ajustar nada aunque podemos ajustar el password que queramos en el parámetro "POSTGRES_PASSWORD" del docker-compose.yml, cosa que tenemos que tener en cuenta a la hora de ajustar el yml de los servicios que veremos más adelante.
+El procedimiento para desplegar PostgreSQL es similar al de Virtuoso. Utilizaremos docker-compose con su respectivo YML. En esta plantilla no es necesario ajustar nada aunque podemos establecer el password que queramos en el parámetro "POSTGRES_PASSWORD" del fichero docker-compose.yml, cosa que tenemos que tener en cuenta a la hora de ajustar el YML de los servicios que veremos más adelante.
 
 Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml, entramos en el directorio, descargamos el yml y levantamos el docker con los siguientes comandos: 
 
@@ -101,7 +105,7 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-postgresql/docker-compose.yml
 	docker-compose up -d
 	
-Después de desplegar, como en el caso anterior vamos a hacer la comprobación de que el contenedor está levantado pero en esta ocasión vamos a usar el comando docker-compose ps que se limita a mostrar información solo de los procesos de este yml.
+Después de desplegar, como en el caso anterior, vamos a hacer la comprobación de que el contenedor está levantado pero en esta ocasión vamos a usar el comando docker-compose ps que se limita a mostrar información solo de los procesos de este yml.
 	
 	docker-compose ps
 	
@@ -109,9 +113,9 @@ Después de desplegar, como en el caso anterior vamos a hacer la comprobación d
 
 ## Despliegue de RabbitMQ
 
-RabbitMQ lo desplegaremos con la misma mecánica que en los casos anteriores.
+RabbitMQ lo desplegaremos con la misma mecánica que en los dos casos anteriores.
 
-Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml, entramos en el directorio, descargamos el yml y levantamos el docker con los siguientes comandos: 
+Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio que va a conetener el docker-compose.yml, entramos en el directorio, descargamos el YML y levantamos el docker con los siguientes comandos: 
 	
 	mkdir rabbitmq
 	cd rabbitmq
@@ -128,17 +132,17 @@ Y podemos probar a cargar el interfaz web de rabbitmq con http://ip_de_nuestra_m
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/rabbitmq/01_rabbitmq_login.png)
 
-Ahora debemos loguearnos con usurio "guest" y password "guest", que son los que estan ajustados en el yml, y procederemos a crear un virtual host seguiendo estos sencillos pasos:
+Ahora debemos hacer login con usurio "guest" y password "guest", que son los que estan ajustados en el yml, y procederemos a crear un virtual host seguiendo estos pasos:
 
 Ya logueados vamos a la sección "Admin".
 
 ![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/2.png)
 
-Una vez logueados pinchamos en "Virtual Hosts".
+Una vez hecho el login, hacemos clic en "Virtual Hosts".
 
 ![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/3.png)
 
-Escribimos el nombre del virtual host. En nuestro caso "hercules" porque es el que está ajustado en el docker-compose.yml de servicios. Después pinchamos en "Add virtual host".
+Escribimos el nombre del virtual host. En nuestro caso "hercules" porque es el que está ajustado en el docker-compose.yml de servicios. Después hacemos clic en "Add virtual host".
 
 ![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/4.png)
 
@@ -239,7 +243,7 @@ El resto de peticiones se harán por https y bastaria con editar el ssl.conf y e
 	ProxyPass /sparql2 http://ip_del_servicio:8890/sparql
 	ProxyPassReverse /sparql2 http://ip_del_servicio:8890/sparql
 
-Por último, para que la aplicación disponga de los archivos necesarios tenemos que meter estos estilos en la capeta publica de Apache.
+Por último, para que la aplicación disponga de los archivos necesarios tenemos que subir estos estilos en la capeta publica de Apache.
 
 	wget http://herc-as-front-desa.atica.um.es/docs/contenido.tar.gz
 
@@ -253,15 +257,15 @@ Este escript clonará los repositorios necesarios y luego generará las imágene
 
 	chmod +x actualizar-back.sh
 
-Depués creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-back porque en el script actualizar-back.sh así se llama papero podemos jugar con estos valores. Después lo descargamos.
+Depués creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-back porque en el script actualizar-back.sh así se llama, pero podríamos cambiar estos valores. Después lo descargamos.
 
 	mkdir dock-back
 	cd dock-back
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios-back/docker-compose.yml
 	
-Antes de lentar los servicios debemos editar este archivo y reemplezar "ip_del_servicio" por la ip de la máquina donde estemos levantando los servicios. Asi todos los servicios se podran comunicar conrrectamente entre ellos.	
+Antes de levantar los servicios debemos editar este archivo y reemplezar "ip_del_servicio" por la ip de la máquina donde estemos levantando los servicios. Así todos los servicios se podran comunicar correctamente entre ellos.	
 
-Con la ip ajustada ya podemos ejecutar script que nos prepara el entorno.
+Con la ip ajustada ya podemos ejecutar el script que nos prepara el entorno.
 
 	./actualizar-back.sh
 
@@ -281,19 +285,19 @@ Depués creamos el directorio donde vamos a alojar el docker-compose.yml que va 
 	cd dock-front
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios-front/docker-compose.yml
 	
-Antes de lentar los servicios debemos editar este archivo y reemplezar "ip_del_servicio" por la ip de la máquina donde estemos levantando los servicios. Asi todos los servicios se podran comunicar conrrectamente entre ellos.	
+Antes de levantar los servicios debemos editar este archivo y reemplezar "ip_del_servicio" por la ip de la máquina donde estemos levantando los servicios. Asi todos los servicios se podran comunicar correctamente entre ellos.	
 
-Con la ip ajustada ya podemos ejecutar script que nos prepara el entorno.
+Con la ip ajustada ya podemos ejecutar el script que nos prepara el entorno.
 
 	./actualizar-front.sh
 	
-Cuando accedamos por primera vez el frontal web nos debería fallar porque no tenemos las vistas personalizadas cargadas en la base de datos. Para conseguir esto tenemos que hacer estos sencillos pasos:
+Cuando accedamos por primera vez el frontal web nos debería fallar porque aún falta la carga en BBDD de las vistas personalizadas. Para conseguir esto tenemos que hacer estos pasos:
 
-Primero nos vajamos un script sql con los insert necesarios desde la máquina donde tenemos PostgreSQL instalado.
+Primero nos bajamos un script SQL con los INSERT necesarios desde la máquina donde tenemos PostgreSQL instalado.
 
 	wget http://herc-as-front-desa.atica.um.es/docs/vistas.sql
 	
-Ahora tenemos que modificar los inserts ajustando los enlaces http y https y poner los adecuados para nuestro entorno.
+Ahora tenemos que modificar los INSERT ajustando los enlaces http y https y poner los adecuados para nuestro entorno.
 
 Una vez modificado el script tenemos que ejecutar estos comandos:
 
@@ -309,13 +313,17 @@ Si todo ha ido bien veremos el recuento de los inserts con este formato:
 
 	INSERT 0 14
 
-Ahora si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz web para poder hacer cargas.
+Ahora, si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz web para poder hacer cargas.
 
 ![](http://herc-as-front-desa.atica.um.es/docs/capturas/front.png)
 
 ## Ejemplo de configuración de HAProxy
 
-Para implementar la alta disponibilidad tanto de los frontales web, como de Virtuoso podemos colocarlos duplicados detrás de un HAProxy. Aquí podemos ver un ejemplo de configuración:
+Para implementar la alta disponibilidad tanto de los frontales web, como de Virtuoso podemos colocarlos duplicados detrás de un HAProxy, como se ilustra en la siguiente imagen y se explica en el apartado de [Elementos de alta disponibilidad](../../Docs/Hercules-ASIO-Documento-de-Alojamiento.md#324-elementos-en-alta-disponibilidad) del "Documento de alojamiento".
+
+![](../../Docs/media/Hércules%20ASIO%20Arquitectura%20alta%20disponibilidad.png)
+
+Aquí podemos ver un ejemplo de configuración:
 
 	defaults
 	    mode                    http
