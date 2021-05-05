@@ -418,3 +418,11 @@ Para implementar la alta disponibilidad tanto de los frontales web, como de Virt
 	    stats uri /stats
 	    stats auth admin:admin
 
+En el bloque web podemos ver dos front, uno por el puerto 80 y el otro por el 443 que deben apuntar a los frontales web.
+
+En el bloque Virtuoso, tenenos dos front (1111 y 8890) que apuntan a los dos Virtuosos.
+
+Para que este sistema funcione correctamente debemos añadir a la resulución de nombres de la máquina (/etc/hosts) las siguientes líneas:
+
+	ip_virtuoso_1 v1pro
+	ip_virtuoso_2 v2pro
