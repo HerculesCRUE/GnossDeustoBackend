@@ -297,6 +297,8 @@ Ahora tenemos que modificar los inserts ajustando los enlaces http y https y pon
 
 Una vez modificado el script tenemos que ejecutar estos comandos:
 
+	docker cp vistas.sql postgresql_db_1:/vistas.sql
+
 	docker exec -it postgresql_db_1 bash
 
 	su postgres
