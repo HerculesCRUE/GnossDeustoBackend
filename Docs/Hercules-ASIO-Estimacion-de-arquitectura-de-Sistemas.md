@@ -1,5 +1,15 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
+| Fecha         | 3/3/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Estimación de Arquitectura de Sistemas| 
+|Descripción|arquitectura de sistemas del Backend SGI del proyecto Hércules ASIO, para su despliegue en la infraestructura de cada universidad|
+|Versión|1.1|
+|Módulo|Documentación|
+|Tipo|Documentación|
+|Cambios de la Versión|Reordenación de la documentación y cambio de rutas|
+
+
 # Hércules Backend ASIO. Estimación de Arquitectura de Sistemas
 
 [1 INTRODUCCIÓN](#introducción)
