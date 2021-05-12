@@ -1,3 +1,16 @@
+
+![](../../Docs/media/CabeceraDocumentosMD.png)
+
+| Fecha         | 3/3/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Servicio conversor de XML CVN a triples ROH| 
+|Descripción|Especificación del servicio conversor de XML CVN a triples ROH|
+|Versión|1.1|
+|Módulo|API Carga|
+|Tipo|Especificación|
+|Cambios de la Versión|Reordenación de la documentación y cambio de rutas|
+
+
 Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH.
 
 http://herc-as-front-desa.atica.um.es:8080/v1/ui/#/default/convert_post
