@@ -1,5 +1,15 @@
 ![](./media/CabeceraDocumentosMD.png)
 
+| Fecha         | 3/5/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Documentación de UrisFactory| 
+|Descripción|Inventario de la documentación de Urisfactory|
+|Versión|1.3|
+|Módulo|Documentación|
+|Tipo|Manual|
+|Cambios de la Versión|Reordenación de la documentación y cambio de ruta|
+
+
 # Documentación de UrisFactory
 
 Esta carpeta contiene los siguientes documentos:
