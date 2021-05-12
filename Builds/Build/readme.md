@@ -1,5 +1,15 @@
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
+| Fecha         | 3/3/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Compilados de los entregables software| 
+|Descripción|Inventario de compilados de los entregables software|
+|Versión|1.2|
+|Módulo|ASIO|
+|Tipo|Documentación|
+|Cambios de la Versión|Reordenación de la documentación y cambio de rutas|
+
+
 # Compilados de los entregables software
 Esta carpeta contiene los compilados de los entregables de software desarrollados
 en .Net Core y sus instrucciones de instalación y ejecución.
