@@ -1,5 +1,15 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
+| Fecha         | 3/3/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Métricas FAIR I- software y documentación de métricas| 
+|Descripción|Definición y desarrollo de un módulo de métricas FAIR para evaluación automatizada de los recursos (ontologías o datos)|
+|Versión|1.1|
+|Módulo|FAIR Metrics|
+|Tipo|Especificación|
+|Cambios de la Versión|Reordenación de la documentación y cambio de rutas|
+
+
 # Hércules Backend ASIO. EF2.1-7. Métricas FAIR I- software y documentación de métricas
 
 Contents
