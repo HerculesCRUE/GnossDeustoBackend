@@ -1,5 +1,15 @@
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
+| Fecha         | 3/5/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|OAI PMH CVN| 
+|Descripción|servicio web basado en OAI-PMH ([https://www.openarchives.org/OAI/openarchivesprotocol.html](https://www.openarchives.org/OAI/openarchivesprotocol.html)) que sirve los datos de los currículums de los investigadores de la Universidad de Murcia en formato RDF y dublin core|
+|Versión|1.6|
+|Módulo|Documentación|
+|Tipo|Especificación|
+|Cambios de la Versión|Cambios de enlaces|
+
+
 ## Acerca de OAI PMH CVN
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=OAI_PMH_CVN)
