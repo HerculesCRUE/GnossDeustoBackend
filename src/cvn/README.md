@@ -1,7 +1,7 @@
 
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 3/3/2021                                                   |
+| Fecha         | 8/2/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Servicio conversor de XML CVN a triples ROH| 
 |Descripción|Especificación del servicio conversor de XML CVN a triples ROH|
