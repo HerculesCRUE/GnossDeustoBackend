@@ -1,5 +1,15 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
+| Fecha         | 3/3/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Análisis de métodos FAIR| 
+|Descripción|Documento de análisis de métodos FAIR|
+|Versión|1.2|
+|Módulo|FAIR Metrics|
+|Tipo|Especificación|
+|Cambios de la Versión|Reordenación de la documentación y cambio de rutas|
+
+
 # Hércules Backend ASIO. EF2.1-6. Documento de Análisis de métodos FAIR
 
 Contents
