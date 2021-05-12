@@ -1,13 +1,13 @@
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 14/04/20201                                                  |
+| Fecha         | 12/05/20201                                                  |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|API CARGA readme| 
 |Descripción|Manual del servicio API CARGA|
-|Versión|1|
+|Versión|1.1|
 |Módulo|API CARGA|
 |Tipo|Manual|
-|Cambios de la Versión|Añadida la sección [Obtención del Token](#obtención-del-token)<br/>Añadida la sección [Configuración en el appsettings.json](#configuración-en-el-appsettingsjson)|
+|Cambios de la Versión|Corregido el enlace a la carpeta Validaciones|
 
 ## Sobre API CARGA
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=API_CARGA)
@@ -31,7 +31,7 @@ API CARGA es un servicio web que contienen 4 controladores, utilizados cada uno 
  - etlController: Contiene los procesos ETL (Extract, Transform and Load) necesarios para la carga de datos.
  - repositoryController: Contiene los procesos necesarios para la gestión de los repositorios OAI-PMH (creación, modificación, eliminación...).
  - syncController: Contiene los procesos necesarios para la ejecución de las sincronizaciones.
- - ValidationController: Contiene los procesos necesarios para la gestión de las validaciones  (creación, modificación, eliminación...). La carpeta [Validaciones](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA/Validaciones) contiene información sobre los [shapes SHACL](https://www.w3.org/TR/shacl/) definidos para validar.
+ - ValidationController: Contiene los procesos necesarios para la gestión de las validaciones  (creación, modificación, eliminación...). La carpeta [Validaciones](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Api.Carga/Validaciones) contiene información sobre los [shapes SHACL](https://www.w3.org/TR/shacl/) definidos para validar.
  
 Para una especificación más detallada del servicio se puede consultar la siguiente documentación: [Hercules-ASIO-Especificacion-de-funciones-de-Carga.md](../../Docs/Hercules-ASIO-Especificacion-de-funciones-de-Carga.md)
  
