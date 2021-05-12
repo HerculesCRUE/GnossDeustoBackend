@@ -1,5 +1,15 @@
 ![](../../../Docs/media/CabeceraDocumentosMD.png)
 
+| Fecha         | 12/05/20201                                                  |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|API CARGA Gestión de Validaciones| 
+|Descripción|Manual de la gestión de validaciones del API de Carga|
+|Versión|1.2|
+|Módulo|API CARGA|
+|Tipo|Manual|
+|Cambios de la Versión|Revisión de enlaces|
+
+
 # Gestión de validaciones
 
 Las validaciones se efectuan mediante [Shapes SHACL](https://www.w3.org/TR/shacl/).	
