@@ -5,8 +5,8 @@
 |Titulo|Benchmark RDF Store| 
 |Descripción|Desarrollo del módulo de benchmark de RDF Store|
 |Versión|1.3|
-|Módulo|Documentación|
-|Tipo|Manual|
+|Módulo|Benchmark|
+|Tipo|Software|
 |Cambios de la Versión|Reordenación de la documentación y cambio de ruta|
 
 ## Benchmark RDF Store
