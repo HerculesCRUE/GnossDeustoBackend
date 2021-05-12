@@ -3,7 +3,7 @@
 | Fecha         | 3/5/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Documentación de UrisFactory| 
-|Descripción|Inventario de la documentación de Urisfactory|
+|Descripción|Inventario de la documentación de UrisFactory|
 |Versión|1.3|
 |Módulo|Documentación|
 |Tipo|Manual|
