@@ -1,7 +1,16 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
-# Hércules Backend ASIO. Evaluación de cumplimiento Linked Data Platform (LDP)
+| Fecha         | 1/03/20201                                                  |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Evaluación de cumplimiento Linked Data Platform (LDP)| 
+|Descripción|inked Data Platform (LDP) es una especificación de datos enlazados (Linked Data) que define un conjunto de reglas para operaciones HTTP sobre recursos web|
+|Versión|1.1|
+|Módulo|Documentación|
+|Tipo|Documentación|
+|Cambios de la Versión|Cambios en la estructura de la documentación|
 
+
+# Hércules Backend ASIO. Evaluación de cumplimiento Linked Data Platform (LDP)
 
 [INTRODUCCIÓN](#introducción)
 
