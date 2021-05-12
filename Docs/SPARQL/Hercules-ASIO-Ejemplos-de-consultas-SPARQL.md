@@ -1,4 +1,14 @@
-![](..//media/CabeceraDocumentosMD.png)
+![](../media/CabeceraDocumentosMD.png)
+
+| Fecha         | 27/4/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Especificación de Esquema de URIs| 
+|Descripción|Especificación del Esquema de URIs para el proyecto Hércules ASIO|
+|Versión|1.4|
+|Módulo|Documentación|
+|Tipo|Especificación|
+|Cambios de la Versión|Cambios en las consultas|
+
 
 # Hércules Backend ASIO. Ejemplos de consultas sparql
 
