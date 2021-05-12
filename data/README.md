@@ -1,13 +1,13 @@
 ![](../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 16/04/2021                                                   |
+| Fecha         | 12/05/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Hércules ASIO. Test Suite de carga de datos| 
 |Descripción|Test Suite de carga de datos|
-|Versión|1.1|
+|Versión|1.2|
 |Módulo|Test|
 |Tipo|Manual|
-|Cambios de la Versión|Creación|
+|Cambios de la Versión|Modificada la introducción|
 
 # Hércules ASIO. Test Suite de carga de datos
 
@@ -30,10 +30,7 @@
 Introducción
 ============
 
-Esta carpeta contiene los datos, programas y manuales para la ejecución la ejecución de las pruebas
-de carga de datos en la Arquitectura Semántica de ASIO.
-
-Este documento constituye el manual para la ejecución de las pruebas.
+Este documento constituye el manual para la ejecución de las pruebas de carga de datos en la Arquitectura Semántica de ASIO.
 
 La suite de pruebas utilizará las siguientes fuentes de datos:
  - OAI-PMH del SGI. Simula el comportamiento que tendría la actualización desde Hércules SGI y carga 
