@@ -1,3 +1,15 @@
+![](../../Docs/media/CabeceraDocumentosMD.png)
+
+| Fecha         | 8/2/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Configuración del mapeo CVN-ROH| 
+|Descripción|Instrucciones de configuración del mapeo CVN-ROH|
+|Versión|1.1|
+|Módulo|API Carga|
+|Tipo|Manual|
+|Cambios de la Versión|Reordenación de la documentación y cambio de rutas|
+
+
 # Configuración del mapeo CVN-ROH
 
 Para que la herramienta no se quede atrás, y debido al gran número de mejoras que la ontología recibe constantemente, se ha visto necesario que la lógica que sigue este programa sea fácilmente configurable, de modo que en el futuro se pueda adaptar para nuevas versiones tanto de la especificación CVN como de la ontología.
