@@ -868,7 +868,14 @@ var pmdSidebar = function ($) {
     }
     new pmdSidebar(arg);
   };
-  $.fn[NAME] = plugInFunction;
+    $.fn[NAME] = plugInFunction;
+
+    // Resaltar en que página estamos situados.
+    $('a[href="' + document.location.pathname + '"]').attr('style', 'font-weight: 400;opacity:1');
+    if ($('.dropdown-menu a[href="' + document.location.pathname + '"]').length > 0) {
+        $('.dropdown a').attr('style', 'font-weight: 400;opacity:1');
+        $('a[href="' + document.location.pathname + '"]').attr('style', 'font-weight: 800;opacity:1')
+    }
   return pmdSidebar;
 
 }(jQuery)();

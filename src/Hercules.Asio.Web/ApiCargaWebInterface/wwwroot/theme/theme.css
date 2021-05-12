@@ -611,7 +611,7 @@ img { max-width: 100%; }
   .listado > main { padding-top: 80px; }
   .listado .col-facetas { display: none; }
   .listado h1 { font-size: 21px; font-weight: 700; color: #000; line-height: 26px; padding-left: 105px; }
-  .listado .btn-mas-recursos { width: 70px; height: 70px; border-radius: 35px; box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16); background-color: var(--c-azul); display: flex; align-items: center; justify-content: center; text-decoration: none; position: fixed; right: 22px; bottom: 40%; }
+  .listado .btn-mas-recursos { width: 70px; height: 70px; border-radius: 35px; box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16); background-color: var(--c-azul); display: flex; align-items: center; justify-content: center; text-decoration: none; position: fixed; left: 22px; bottom: 40%; }
   .listado .btn-mas-recursos .material-icons { font-size: 38px; color: #fbfbfb; }
 
   .col-facetas { position: fixed; top: 120px; left: 0; transition: all .3s ease-in-out; max-height: calc(100vh - 120px); padding: 0; overflow-y: auto; }

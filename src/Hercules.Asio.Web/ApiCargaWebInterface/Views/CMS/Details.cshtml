@@ -19,7 +19,7 @@
                             <li>
                                 <a href="@Url.Action("Delete", new {  page_id=Model.PageId  })" class="btn btn-eliminar">Eliminar</a>
                             </li>
-                        </ul>  
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -39,10 +39,7 @@
                     </div>
                 </div>
             </div>
+            <a asp-action="Index">Back to List</a>
         </div>
     </div>
-</div>
-<div>
-    <a href="@Url.Action("Create", new {  page_id=Model.PageId, route=Model.RouteProxyLess  })" class="btn btn-editar">Editar</a>) |
-    <a asp-action="Index">Back to List</a>
 </div>

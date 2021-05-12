@@ -1,9 +1,9 @@
 ﻿@model ApiCargaWebInterface.ViewModels.GetTokenViewModel
 @{
 
-        ViewData["Title"] = "get token";
+    ViewData["Title"] = "get token";
 
-        ViewData["BodyClass"] = "formulario";
+    ViewData["BodyClass"] = "formulario";
 }
 <div class="row">
     <div class="col col-12 col-lg-12 col-contenido">
@@ -11,7 +11,7 @@
             <form asp-action="GetToken" method="get">
                 <div class="fieldset fieldset01">
                     <fieldset class="mediumLabels">
-                        <h1>Obtener token</h1>
+                        <h1>Administración > Obtener token</h1>
                         <div class="fieldsetContent">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
@@ -27,12 +27,18 @@
                                 <fieldset>
                                     <p>
                                         <input class="submit principal" type="submit" value="obtener token">
+                                        @{
+                                            if (!string.IsNullOrEmpty(Model.Token))
+                                            {
+                                                <button class="copiarToken" onclick="CopiarToken(event)">copiar token</button>
+                                            }
+                                        }
                                     </p>
                                 </fieldset>
                             </div>
                             @if (!string.IsNullOrEmpty(Model.Token))
                             {
-                                <p class="text text-info" style="word-wrap: break-word;">
+                                <p class="text text-info">
                                     @Model.Token
                                 </p>
                             }
@@ -44,6 +50,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    function CopiarToken(event) {
+        event.preventDefault();
+        var str = document.getElementsByClassName("text text-info")[0].innerText;
+        var el = document.createElement('textarea');
+        el.value = str;
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+    }
+</script>
 
 
 

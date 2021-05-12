@@ -124,7 +124,8 @@ div:nth-of-type(4n+3) { /*border-bottom: 0 !important; padding-bottom: 0 !import
 #contenido-principal .col { padding: 0 15px; }
 #contenido-principal .col h1 { font-size: 19px; font-weight: 700; color: #333; line-height: 23px; margin-top: 0; margin-bottom: 12px; }
 #contenido-principal .col h2 { font-size: 17px; font-weight: 700; color: #333; line-height: 21px; margin-top: 0; margin-bottom: 12px; }
-#contenido-principal .col div > p { font-size: 15px; font-weight: 400; line-height: 16px; color: #747474; }
+#contenido-principal .col div > p { font-size: 15px; font-weight: 400; line-height: 16px; color: #747474; word-break: break-all }
+.copiarToken { background-color: #8c1525; color: #fff; height: 38px; font-size: 14px; font-weight: 400; /* color: var(--c-rojo); */ border: none; border-radius: 1px; /* background-color: #fff; */ min-width: 143px;}
 #contenido-principal .col ul { padding-left: 18px; margin-bottom: 20px; }
 
 #contenido-principal .col .imagen { /*height: 150px;*/ background-color: #f5f5f5; background-position: center !important; background-size: cover !important; object-fit: cover; }
@@ -138,6 +139,11 @@ div:nth-of-type(4n+3) { /*border-bottom: 0 !important; padding-bottom: 0 !import
 #contenido-principal .col .bloque-texto .contenido { padding: 17px 30px; }
 #contenido-principal .col .bloque-texto .contenido h2 { overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
 #contenido-principal .col .bloque-texto .contenido p { font-size: 15px; margin: 0; }
+
+.list-group-item-info {
+    color: #31708f;
+    background-color: transparent;
+}
 
 @media (max-width: 1199px){
     #contenido-principal .col { padding-bottom: 20px; }
