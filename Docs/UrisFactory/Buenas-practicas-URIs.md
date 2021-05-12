@@ -1,5 +1,15 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
+| Fecha         | 3/3/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Buenas prácticas del esquema de URIs| 
+|Descripción|Buenas prácticas en la definición de los URI para el proyecto Hércules ASIO|
+|Versión|1.2|
+|Módulo|Documentación|
+|Tipo|Manual|
+|Cambios de la Versión|Reordenación de la documentación y cambio de ruta|
+
+
 # Hércules Backend ASIO. Buenas prácticas del esquema de URIs
 
 [INTRODUCCIÓN](#introducción)
