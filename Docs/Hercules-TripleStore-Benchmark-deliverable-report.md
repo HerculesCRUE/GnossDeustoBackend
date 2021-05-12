@@ -1,5 +1,15 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
+| Fecha         | 3/3/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|TripleStore Benchmark deliverable report| 
+|Descripción|Report on the creation of a TripleStore assessment framework and on the results obtained from applying this framework to several modern TripleStore|
+|Versión|1.1|
+|Módulo|Documentación|
+|Tipo|Especificación|
+|Cambios de la Versión|Reordenación de la documentación y cambio de rutas|
+
+
 # Hércules Backend ASIO. TripleStore Benchmark deliverable report
 
 We report here on the creation of a TripleStore assessment framework and
