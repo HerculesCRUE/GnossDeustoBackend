@@ -4,10 +4,10 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Fuentes externas de información para las funciones de descubrimiento| 
 |Descripción|El documento indica que fuentes se usan y justifica cuáles se han descartado|
-|Versión|0.2|
+|Versión|1|
 |Módulo|API DISCOVER|
 |Tipo|Documento|
-|Cambios de la Versión|Cambios en Recolecta, Europeana, BNE y Teseo|
+|Cambios de la Versión|Mejoras en la estructura de la documentación|
 
 # Hércules Backend ASIO. Fuentes externas de información para las funciones de descubrimiento
 
