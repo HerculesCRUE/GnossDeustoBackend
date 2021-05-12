@@ -6,7 +6,7 @@
 |Descripción|Especificación del Esquema de URIs para el proyecto Hércules ASIO|
 |Versión|1.2|
 |Módulo|Documentación|
-|Tipo|Manual|
+|Tipo|Especificación|
 |Cambios de la Versión|Reordenación de la documentación y cambio de ruta|
 
 
