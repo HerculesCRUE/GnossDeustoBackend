@@ -1,5 +1,15 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
+| Fecha         | 21/4/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Modelo de Multilingüismo| 
+|Descripción|El desarrollo de la Red de Ontologías Hércules (ROH) en el proyecto Hércules ASIO debe contemplar el uso de diversos idiomas|
+|Versión|1.3|
+|Módulo|Documentación|
+|Tipo|Especificación|
+|Cambios de la Versión|Reordenación de la documentación y cambio de rutas|
+
+
 # Hércules Backend ASIO. Modelo de Multilingüismo
 
 [1 INTRODUCCIÓN](#introducción)
