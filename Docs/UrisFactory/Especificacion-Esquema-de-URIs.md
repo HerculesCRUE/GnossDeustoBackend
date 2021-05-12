@@ -1,5 +1,15 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
+| Fecha         | 3/3/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Especificación de Esquema de URIs| 
+|Descripción|Especificación del Esquema de URIs para el proyecto Hércules ASIO|
+|Versión|1.2|
+|Módulo|Documentación|
+|Tipo|Manual|
+|Cambios de la Versión|Reordenación de la documentación y cambio de ruta|
+
+
 # Hércules Backend ASIO. Especificación de Esquema de URIs
 
 [1 INTRODUCCIÓN](#introducción)
