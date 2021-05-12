@@ -1,5 +1,15 @@
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
+| Fecha         | 4/5/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Librerías| 
+|Descripción|DLL de los proyectos desarrollados, tanto en Windows como en Linux|
+|Versión|1.2|
+|Módulo|ASIO|
+|Tipo|Especificación|
+|Cambios de la Versión|Cambios de enlaces|
+
+
 # Libraries
 Aquí se encuentran las dll de los proyectos desarrollados, tanto en [Windows](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/libraries/Windows) como en [Linux](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/libraries/Linux).
 
