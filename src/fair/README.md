@@ -1,9 +1,18 @@
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
+| Fecha         | 4/5/2021                                                   |
+| ------------- | ------------------------------------------------------------ |
+|Titulo|Métricas FAIR| 
+|Descripción|Documentación y resultados|
+|Versión|1.4|
+|Módulo|FAIR Metrics|
+|Tipo|Documentación|
+|Cambios de la Versión|Revisión de enlaces|
+
+
 # Métricas FAIR
 
 Contamos con la siguiente documentación:
-
 
 [Documento de Análisis de métodos FAIR](../../Docs/FAIR/Entregable-EF2-1.6-documento-de-analisis-de-metodos-FAIR.md)
 
