@@ -1,6 +1,6 @@
 ![](../../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 12/05/20201                                                  |
+| Fecha         | 3/05/20201                                                  |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|API CARGA Gestión de Validaciones| 
 |Descripción|Manual de la gestión de validaciones del API de Carga|
