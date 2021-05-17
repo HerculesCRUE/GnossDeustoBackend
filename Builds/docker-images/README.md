@@ -143,11 +143,11 @@ Una vez añadido entramos en sus ajustes.
 
 Le damos permisos al usuario que acabamos de creqar. En nuestro caso "hercules".
 
-![](./docs/docker-rabbitmq/rmq/paso-6.png)
+![](./docs/docker-rabbitmq/rmq/paso-5.png)
 
 Y vemos como han aplicado correctamente estos permisos.
 
-![](./docs/docker-rabbitmq/rmq/7.png)
+![](./docs/docker-rabbitmq/rmq/paso-6.png)
 
 Ya tenemos RabbitMQ listo para trabajar en nuestro entorno.
 
