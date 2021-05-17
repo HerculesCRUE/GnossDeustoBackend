@@ -139,7 +139,7 @@ El siguiente paso es añadir un virtual host para nuestro proyecto. En este ejem
 
 Una vez añadido entramos en sus ajustes.
 
-![](./docs/docker-rabbitmq/rmq/paso-5.png)
+![](./docs/docker-rabbitmq/rmq/5.png)
 
 Le damos permisos al usuario que acabamos de creqar. En nuestro caso "hercules".
 
