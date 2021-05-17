@@ -128,9 +128,9 @@ Ahora debemos hacer login con usurio "guest" y password "guest", que son los que
 
 ![](./docs/docker-rabbitmq/rmq/paso-1.png)
 
-Una vez hecho el login, vamos a crear un usuario para conectar a las colas. En nuestro ejemplo lo vamos a llamar "hercules". Para ellos vamos a pestaña admin y hacemos clik en "users"
+Añadimos el nombre de usuario, en nuestos ejemplo "hercules" y una pass. Después hacemos clik "add user".
 
-![](./docs/docker-rabbitmq/rmq/3.png)
+![](./docs/docker-rabbitmq/rmq/paso-2.png)
 
 Escribimos el nombre del virtual host. En nuestro caso "hercules" porque es el que está ajustado en el docker-compose.yml de servicios. Después hacemos clic en "Add virtual host".
 
