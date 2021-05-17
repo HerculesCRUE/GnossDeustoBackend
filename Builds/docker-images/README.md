@@ -14,7 +14,7 @@
 ## Requisitos previos
 Para hacer funcionar el Backend será necesario tener instalado en nuestro servidor:
 
-* Docker (podemos seguir la documentacion oficial dependiendo de nuestra dristrubución de Linuxx) 
+* Docker (podemos seguir la documentacion oficial dependiendo de nuestra dristrubución de Linux) 
     - Centos https://docs.docker.com/engine/install/centos/
     - Ubuntu https://docs.docker.com/engine/install/ubuntu/
     - Debian https://docs.docker.com/engine/install/debian/
@@ -47,11 +47,11 @@ Un vez desplegado podemos ver el proceso de docker con este comando:
 
 	docker ps
 	
-![](http://https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/virtuoso/01_docker_ps.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/virtuoso/01_docker_ps.png)
 
 Y podemos hacer una sencilla comprobación de que funciona entrando en la interfaz web con http://ip_de_nuestra_maquina:8890
 
-![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/02_web.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/virtuoso/02_web.png)
 
 Con esta configuración básica tendremos un interfaz sparql que se lanzará de manera anónima y con permisos exclusivamente de lectura. Para poder tener un interfaz sparql adicional con el que podamos hacer modificación de datos, lo primero que debemos hacer es acceder al interfaz isql de virtuoso entrando al docker.
 
@@ -61,7 +61,7 @@ Con esta configuración básica tendremos un interfaz sparql que se lanzará de 
 
 Una vez aquí podremos ver esto:
 
-![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/isql.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/virtuoso/isql.png)
 
 Con estos comando creamos el usuario "UPDATE", le damos permisos, ajustamos lectura para nobody y modificación para "UPDATE":
 	
@@ -74,15 +74,15 @@ Con estos comando creamos el usuario "UPDATE", le damos permisos, ajustamos lect
 	
 Ahora solamente necesitamos añadir un interfaz que sea autenticado y ejecutado por UPDATE con el que se puedan hacer modificaciones. Para ello accedemos a http://ip_de_nuestra_maquina:8890/conductor y hacemos login con el usuario dba (en esta guía dba / mysecret). A continuación vamos a la sección indicada en la captura:
 
-![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/breadcrumb.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/virtuoso/breadcrumb.png)
 
 Una vez ahí desplegamos el interfaz 0.0.0.0:8890 y buscamos el /sparql-auth
 
-![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/sparql-auth0.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/virtuoso/sparql-auth0.png)
 
 Y lo editamos para dejarlo de la siguiente manera (con modificar el Realm y poner UPDATE sería suficiente):
 
-![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/sparql-auth.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/virtuoso/sparql-auth.png)
 
 Ahora si vamos a http://ip_de_nuestra_maquina:8890/sparql-auth y nos autenticamos con el usuario "UPDATE" podremos hacer modificaciones a través de esa interfaz.
 	
@@ -94,14 +94,14 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 
 	mkdir postgresql
 	cd postgresql
-	wget http://herc-as-front-desa.atica.um.es/docs/docker-postgresql/docker-compose.yml
+	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-postgresql/docker-compose.yml
 	docker-compose up -d
 	
 Después de desplegar, como en el caso anterior, vamos a hacer la comprobación de que el contenedor está levantado pero en esta ocasión vamos a usar el comando docker-compose ps que se limita a mostrar información solo de los procesos de este yml.
 	
 	docker-compose ps
 	
-![](http://herc-as-front-desa.atica.um.es/docs/capturas/postgre/04_docker_ps.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/postgre/04_docker_ps.png)
 
 ## Despliegue de RabbitMQ
 
@@ -111,44 +111,44 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 	
 	mkdir rabbitmq
 	cd rabbitmq
-	wget http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/docker-compose.yml
+	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-imagesdocs/docker-rabbitmq/docker-compose.yml
 	docker-compose up -d
 	
 Una vez levantado podemos hacer la comprobación de que esta el contenedor levantado con este comando:
 
 	docker-compose ps
 
-![](http://herc-as-front-desa.atica.um.es/docs/capturas/rabbitmq/00_rabbitq_docker_ps.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/rabbitmq/00_rabbitq_docker_ps.png)
 
 Y podemos probar a cargar el interfaz web de rabbitmq con http://ip_de_nuestra_maquina:15672 y ver como nos sale la pantalla de login.
 
-![](http://herc-as-front-desa.atica.um.es/docs/capturas/rabbitmq/01_rabbitmq_login.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/rabbitmq/01_rabbitmq_login.png)
 
 Ahora debemos hacer login con usurio "guest" y password "guest", que son los que estan ajustados en el yml, y procederemos a crear un virtual host seguiendo estos pasos:
 
 Ya logueados vamos a la sección "Admin".
 
-![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/2.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-rabbitmq/rmq/2.png)
 
 Una vez hecho el login, hacemos clic en "Virtual Hosts".
 
-![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/3.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-rabbitmq/rmq/3.png)
 
 Escribimos el nombre del virtual host. En nuestro caso "hercules" porque es el que está ajustado en el docker-compose.yml de servicios. Después hacemos clic en "Add virtual host".
 
-![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/4.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-rabbitmq/rmq/4.png)
 
 Una vez añadido entramos en sus ajustes.
 
-![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/5.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-rabbitmq/rmq/5.png)
 
 Le damos permisos al usuario guest. En nuestro caso "guest" porque es el que está ajustado en el docker-compose.yml de servicios.
 
-![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/6.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-rabbitmq/rmq/6.png)
 
 Y vemos como han aplicado correctamente estos permisos.
 
-![](http://herc-as-front-desa.atica.um.es/docs/docker-rabbitmq/rmq/7.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-rabbitmq/rmq/7.png)
 
 Ya tenemos RabbitMQ listo para trabajar en nuestro entorno.
 
@@ -237,13 +237,13 @@ El resto de peticiones se harán por https y bastaria con editar el ssl.conf y e
 
 Por último, para que la aplicación disponga de los archivos necesarios tenemos que subir estos estilos en la capeta publica de Apache.
 
-	wget http://herc-as-front-desa.atica.um.es/docs/contenido.tar.gz
+	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/contenido.tar.gz
 
 ## Despliegue de los servicios de back
 
 Para simplificar el despliegue de los servicios de back, hemos creado un script que debemos descargar en nuestra máquinas para servicios de back. Partiendo desde la home del usurio (ej. /home/usuario/).
 
-	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios-back/actualizar-back.sh
+	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-servicios-back/actualizar-back.sh
 	
 Este escript clonará los repositorios necesarios y luego generará las imágenes docker automáticamente. Le debemos dar permisos de ejecución.
 
@@ -253,7 +253,7 @@ Depués creamos el directorio donde vamos a alojar el docker-compose.yml que va 
 
 	mkdir dock-back
 	cd dock-back
-	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios-back/docker-compose.yml
+	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-servicios-back/docker-compose.yml
 	
 Antes de levantar los servicios debemos editar este archivo y reemplezar "ip_del_servicio" por la ip de la máquina donde estemos levantando los servicios. Así todos los servicios se podran comunicar correctamente entre ellos.	
 
@@ -265,7 +265,7 @@ Con la ip ajustada ya podemos ejecutar el script que nos prepara el entorno.
 
 Para simplificar el despliegue de los servicios de front, hemos creado un script que debemos descargar en la máquina donde queramos alojar los servicios de front. Partiendo desde la home del usurio (ej. /home/usuario/).
 
-	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios-front/actualizar-front.sh
+	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-servicios-front/actualizar-front.sh
 	
 Este script clonará los repositorios necesarios y luego generará las imágenes docker automáticamente. Le debemos dar permisos de ejecución.
 
@@ -275,7 +275,7 @@ Después creamos el directorio donde vamos a alojar el docker-compose.yml que va
 
 	mkdir dock-front
 	cd dock-front
-	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios-front/docker-compose.yml
+	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-servicios-front/docker-compose.yml
 	
 Antes de levantar los servicios debemos editar este archivo y reemplazar "ip_del_servicio" por la IP de la máquina donde estemos levantando cada servicio. Haríamos lo mismo con todos los servicios para que se puedan comunicar correctamente entre ellos.	
 
@@ -287,7 +287,7 @@ Cuando accedamos por primera vez el frontal web nos debería fallar porque aún 
 
 Primero nos bajamos un script SQL con los INSERT necesarios desde la máquina donde tenemos PostgreSQL instalado.
 
-	wget http://herc-as-front-desa.atica.um.es/docs/vistas.sql
+	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/vistas.sql
 	
 Ahora tenemos que modificar los INSERT ajustando los enlaces http y https y poner los adecuados para nuestro entorno.
 
@@ -307,7 +307,7 @@ Si todo ha ido bien veremos el recuento de los inserts con este formato:
 
 Ahora, si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz web para poder hacer cargas.
 
-![](http://herc-as-front-desa.atica.um.es/docs/capturas/front.png)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/front.png)
 
 ## Ejemplo de configuración de HAProxy
 
