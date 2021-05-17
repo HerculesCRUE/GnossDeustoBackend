@@ -1,13 +1,13 @@
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 5/5/2021                                                   |
+| Fecha         | 17/5/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Despliegue de ASIO Backend de SGI con Docker| 
 |Descripción|Instrucciones para instalar ASIO mediante el despliegue de instancias docker|
-|Versión|1.2|
+|Versión|1.3|
 |Módulo|Documentación|
 |Tipo|Manual|
-|Cambios de la Versión|Modificado el documento para indicar cómo se instalaría cada componente en diferentes servidores, si fuera el caso|
+|Cambios de la Versión|Modificada la introducción para eliminar prerequisitos sobrantes|
 
 # Despliegue de ASIO Backend SGI con Docker
 
@@ -21,15 +21,7 @@ Para hacer funcionar el Backend será necesario tener instalado en nuestro servi
     
 * docker-compose https://docs.docker.com/compose/install/  
 
-* Base de datos RDF (en este ejemplo, Virtuoso desplegado con Docker)
-
-* Base de datos SQL (en este ejemplo PostgreSQL desplegada con Docker)
-
-* Gestor de colas (en este ejemplo RabbitMQ desplegada con Docker)
-
-* Servidor de Liked Data (en este ejemplo Trifid desplegada con Docker)
-
-* Acceso a http://curriculumpruebas.um.es/curriculum/rest/v1/auth desde la máquina donde vayamos a desplegar.
+* Acceso a http://curriculumpruebas.um.es/curriculum/rest/v1/auth desde la máquina donde vayamos a desplegar, si se quiere tener acceso al servicio de la UM que proporciona curriculum en formato CVN.
 
 La arquitectura puede corresponder con un diagrama similar al siguiente (descrito en detalle en [Hércules ASIO Documento de alojamiento](../../Docs/Hercules-ASIO-Documento-de-Alojamiento.md)):
 
