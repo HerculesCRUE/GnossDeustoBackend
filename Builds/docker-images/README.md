@@ -263,15 +263,15 @@ Con la ip ajustada ya podemos ejecutar el script que nos prepara el entorno.
 
 ## Despliegue de los servicios front
 
-Para simplificar el despliegue de los servicios de front, hemos creado un script que debemos descargar en nuestra máquina donde queramos alojar los servicios de front. Partiendo desde la home del usurio (ej. /home/usuario/).
+Para simplificar el despliegue de los servicios de front, hemos creado un script que debemos descargar en la máquina donde queramos alojar los servicios de front. Partiendo desde la home del usurio (ej. /home/usuario/).
 
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios-front/actualizar-front.sh
 	
-Este escript clonará los repositorios necesarios y luego generará las imágenes docker automáticamente. Le debemos dar permisos de ejecución.
+Este script clonará los repositorios necesarios y luego generará las imágenes docker automáticamente. Le debemos dar permisos de ejecución.
 
 	chmod +x actualizar-front.sh
 
-Depués creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-front porque en el script actualizar.sh así se llama papero podemos jugar con estos valores. Después lo descargamos.
+Después creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-front porque en el script actualizar.sh así se llama papero podemos jugar con estos valores. Después lo descargamos.
 
 	mkdir dock-front
 	cd dock-front
