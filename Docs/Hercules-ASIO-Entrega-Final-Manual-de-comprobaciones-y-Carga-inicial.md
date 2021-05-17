@@ -11,7 +11,7 @@
 
 # Hércules ASIO Backend SGI. Prueba del entorno y carga inicial
 
-Como primer paso para la carga inicial, hay que realizar una modificación en el host de la maquina desde la que estemos accediendo, añadiendo en una nueva linea el dominio graph.um.es y que el mismo responda de la IP de la maquina dodne hemos instalado el servicio de trifid.
+En el caso de que se quiera realizar una prueba de carga con un dominio preliminar, se podría añadir en el fichero hosts una nueva línea con el dominio graph.um.es apuntando a la IP del servidor en el que hubiéramos instalado el servicio de Linked Data.
 
 Una vez desplegados y configurados todos los contenedores, como se indica en el documento [Despliegue del backend con Docker](../Builds/docker-images), podemos realizar las pruebas necesarias para comprobar todos los servicios están respondiendo correctamente, para ello accederemos vía el interfaz web y realizaremos una carga inicial, y comprobaremos en virtuoso que los datos se hayan obtenido correctamente. 
 
