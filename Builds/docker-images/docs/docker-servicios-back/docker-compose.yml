@@ -7,8 +7,8 @@ services:
     ports:
       - 5100:5100
     environment:
-      PostgreConnection: "Username=postgres;Password=postgres;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
-      PostgreConnectionmigration: "Username=postgres;Password=postgres;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
+      PostgreConnection: "Username=usuario;Password=pass;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
+      PostgreConnectionmigration: "Username=usuario;Password=pass;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
       ConfigUrl: "http://ip_del_servicio:5100/"
       Graph: "http://linkeddata2test.um.es/graph/sgi"
       GraphUnidata: "http://data.um.es/graph/unidata"
@@ -34,7 +34,7 @@ services:
     ports:
       - 5107:5107
     environment:
-      HangfireConnection: "Username=postgres;Password=postgres;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false" 
+      HangfireConnection: "Username=usuario;Password=pass;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false" 
       ConfigUrl: "http://ip_del_servicio:5100/"
       Authority: "http://ip_del_servicio:5108"
       LogPath: "/app/logs"
@@ -56,7 +56,7 @@ services:
     ports: 
       - 5108:5108
     environment:
-      PostgreConnection: "Username=postgres;Password=postgres;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
+      PostgreConnection: "Username=usuario;Password=pass;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
     volumes:
       - /home/$USER/dock1/logs/apiidentity:/app/logs
       
@@ -79,23 +79,23 @@ services:
     environment:
       LogPath: "/app/logs"
       Authority: "http://ip_del_servicio:5108"
-      PostgreConnectionmigration: "Username=postgres;Password=postgres;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
+      PostgreConnectionmigration: "Username=usaurio;Password=pass;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
     volumes:
        - /home/$USER/dock1/logs/apigesdoc:/app/logs
 
   apidiscover:
     image: apidiscover
     environment:
-      PostgreConnectionmigration: "Username=postgres;Password=postgres;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
+      PostgreConnectionmigration: "Username=usuario;Password=pass;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
       Graph: "http://linkeddata2test.um.es/graph/sgi"
       Endpoint: "http://ip_del_servicio:8890/sparql"
       QueryParam: "query"
       Username: "UPDATE"
       Password: "Bn4wQ6aD"
-      usernameRabbitMq: "mqadmin"
-      passwordRabbitMq: "fip35ZvqqXwhYVVCR6Bq"
+      usernameRabbitMq: "usuario"
+      passwordRabbitMq: "pass"
       hostnameRabbitMq: "hercules"
-      uriRabbitMq: "amqp://guest:fip35ZvqqXwhYVVCR6Bq@ip_del_servicio:5672/hercules"
+      uriRabbitMq: "amqp://usuario:pass@ip_del_servicio:5672/hercules"
       virtualhostRabbitMq: "hercules"
       RabbitQueueName: "HerculesDemoQueue1"
       LogPath: "/app/logs"
