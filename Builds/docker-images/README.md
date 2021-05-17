@@ -271,15 +271,15 @@ Este script clonará los repositorios necesarios y luego generará las imágenes
 
 	chmod +x actualizar-front.sh
 
-Después creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-front porque en el script actualizar.sh así se llama papero podemos jugar con estos valores. Después lo descargamos.
+Después creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-front porque en el script actualizar.sh así se llama, pero podríamos cambiar con estos valores. Después lo descargamos.
 
 	mkdir dock-front
 	cd dock-front
 	wget http://herc-as-front-desa.atica.um.es/docs/docker-servicios-front/docker-compose.yml
 	
-Antes de levantar los servicios debemos editar este archivo y reemplezar "ip_del_servicio" por la ip de la máquina donde estemos levantando los servicios. Asi todos los servicios se podran comunicar correctamente entre ellos.	
+Antes de levantar los servicios debemos editar este archivo y reemplazar "ip_del_servicio" por la IP de la máquina donde estemos levantando cada servicio. Haríamos lo mismo con todos los servicios para que se puedan comunicar correctamente entre ellos.	
 
-Con la ip ajustada ya podemos ejecutar el script que nos prepara el entorno.
+Con las IPs ajustadas ya podemos ejecutar el script que nos prepara el entorno.
 
 	./actualizar-front.sh
 	
