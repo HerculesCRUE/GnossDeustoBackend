@@ -111,7 +111,7 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 	
 	mkdir rabbitmq
 	cd rabbitmq
-	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-imagesdocs/docker-rabbitmq/docker-compose.yml
+	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-rabbitmq/docker-compose.yml
 	docker-compose up -d
 	
 Una vez levantado podemos hacer la comprobación de que esta el contenedor levantado con este comando:
