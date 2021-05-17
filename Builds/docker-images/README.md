@@ -51,7 +51,7 @@ Un vez desplegado podemos ver el proceso de docker con este comando:
 
 Y podemos hacer una sencilla comprobación de que funciona entrando en la interfaz web con http://ip_de_nuestra_maquina:8890
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/virtuoso/02_web.png)
+![](./docs/capturas/virtuoso/02_web.png)
 
 Con esta configuración básica tendremos un interfaz sparql que se lanzará de manera anónima y con permisos exclusivamente de lectura. Para poder tener un interfaz sparql adicional con el que podamos hacer modificación de datos, lo primero que debemos hacer es acceder al interfaz isql de virtuoso entrando al docker.
 
@@ -61,7 +61,7 @@ Con esta configuración básica tendremos un interfaz sparql que se lanzará de 
 
 Una vez aquí podremos ver esto:
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/virtuoso/isql.png)
+![](./docs/capturas/virtuoso/isql.png)
 
 Con estos comando creamos el usuario "UPDATE", le damos permisos, ajustamos lectura para nobody y modificación para "UPDATE":
 	
@@ -74,15 +74,15 @@ Con estos comando creamos el usuario "UPDATE", le damos permisos, ajustamos lect
 	
 Ahora solamente necesitamos añadir un interfaz que sea autenticado y ejecutado por UPDATE con el que se puedan hacer modificaciones. Para ello accedemos a http://ip_de_nuestra_maquina:8890/conductor y hacemos login con el usuario dba (en esta guía dba / mysecret). A continuación vamos a la sección indicada en la captura:
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/virtuoso/breadcrumb.png)
+![](./docs/capturas/virtuoso/breadcrumb.png)
 
 Una vez ahí desplegamos el interfaz 0.0.0.0:8890 y buscamos el /sparql-auth
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/virtuoso/sparql-auth0.png)
+![](./docs/capturas/virtuoso/sparql-auth0.png)
 
 Y lo editamos para dejarlo de la siguiente manera (con modificar el Realm y poner UPDATE sería suficiente):
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/virtuoso/sparql-auth.png)
+![](./docs/capturas/virtuoso/sparql-auth.png)
 
 Ahora si vamos a http://ip_de_nuestra_maquina:8890/sparql-auth y nos autenticamos con el usuario "UPDATE" podremos hacer modificaciones a través de esa interfaz.
 	
@@ -101,7 +101,7 @@ Después de desplegar, como en el caso anterior, vamos a hacer la comprobación 
 	
 	docker-compose ps
 	
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/postgre/04_docker_ps.png)
+![](./docs/capturas/postgre/04_docker_ps.png)
 
 ## Despliegue de RabbitMQ
 
@@ -118,37 +118,37 @@ Una vez levantado podemos hacer la comprobación de que esta el contenedor levan
 
 	docker-compose ps
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/rabbitmq/00_rabbitq_docker_ps.png)
+![](./docs/capturas/rabbitmq/00_rabbitq_docker_ps.png)
 
 Y podemos probar a cargar el interfaz web de rabbitmq con http://ip_de_nuestra_maquina:15672 y ver como nos sale la pantalla de login.
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/rabbitmq/01_rabbitmq_login.png)
+![](./docs/capturas/rabbitmq/01_rabbitmq_login.png)
 
 Ahora debemos hacer login con usurio "guest" y password "guest", que son los que estan ajustados en el yml, y procederemos a crear un virtual host seguiendo estos pasos:
 
 Ya logueados vamos a la sección "Admin".
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-rabbitmq/rmq/2.png)
+![](./docs/docker-rabbitmq/rmq/2.png)
 
 Una vez hecho el login, hacemos clic en "Virtual Hosts".
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-rabbitmq/rmq/3.png)
+![](./docs/docker-rabbitmq/rmq/3.png)
 
 Escribimos el nombre del virtual host. En nuestro caso "hercules" porque es el que está ajustado en el docker-compose.yml de servicios. Después hacemos clic en "Add virtual host".
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-rabbitmq/rmq/4.png)
+![](./docs/docker-rabbitmq/rmq/4.png)
 
 Una vez añadido entramos en sus ajustes.
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-rabbitmq/rmq/5.png)
+![](./docs/docker-rabbitmq/rmq/5.png)
 
 Le damos permisos al usuario guest. En nuestro caso "guest" porque es el que está ajustado en el docker-compose.yml de servicios.
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-rabbitmq/rmq/6.png)
+![](./docs/docker-rabbitmq/rmq/6.png)
 
 Y vemos como han aplicado correctamente estos permisos.
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-rabbitmq/rmq/7.png)
+![](./docs/docker-rabbitmq/rmq/7.png)
 
 Ya tenemos RabbitMQ listo para trabajar en nuestro entorno.
 
