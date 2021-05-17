@@ -124,11 +124,9 @@ Y podemos probar a cargar el interfaz web de rabbitmq con http://ip_de_nuestra_m
 
 ![](./docs/capturas/rabbitmq/01_rabbitmq_login.png)
 
-Ahora debemos hacer login con usurio "guest" y password "guest", que son los que estan ajustados en el yml, y procederemos a crear un virtual host seguiendo estos pasos:
+Ahora debemos hacer login con usurio "guest" y password "guest", que son los que vienen por defecto aunque los podemos cambiar más adelante. Ya logueados vamos a la sección "Admin" y hacemos clik en "users".
 
-Ya logueados vamos a la sección "Admin".
-
-![](./docs/docker-rabbitmq/rmq/2.png)
+![](./docs/docker-rabbitmq/rmq/paso-1.png)
 
 Una vez hecho el login, vamos a crear un usuario para conectar a las colas. En nuestro ejemplo lo vamos a llamar "hercules". Para ellos vamos a pestaña admin y hacemos clik en "users"
 
