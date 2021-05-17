@@ -133,8 +133,7 @@ Hacemos clik en "add user, añadimos el nombre de usuario, en nuestos ejemplo "h
 ![](./docs/docker-rabbitmq/rmq/paso-2.png)
 ![](./docs/docker-rabbitmq/rmq/paso-3.png)
 
-
-Escribimos el nombre del virtual host. En nuestro caso "hercules" porque es el que está ajustado en el docker-compose.yml de servicios. Después hacemos clic en "Add virtual host".
+El siguiente paso es añadir un virtual host para nuestro proyecto. En este ejemplo o llamaremos "hercules". Para ello vamos a la sección "Virtual host", escribimos el nombre y lo añadimos.
 
 ![](./docs/docker-rabbitmq/rmq/4.png)
 
