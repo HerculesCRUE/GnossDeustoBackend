@@ -13,7 +13,7 @@ services:
       ConfigUrlUrisFactory: "http://ip_del_servicio:5000/"
       ConfigUrlDocumentacion: "http://ip_del_servicio:5109/"
       Authority: "http://ip_del_servicio:5108"
-      PostgreConnectionmigration: "Username=postgres;Password=postgres;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
+      PostgreConnectionmigration: "Username=usuario;Password=pass;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
       SparqlEndpoint: "http://ip_del_servicio:8890/sparql"
       SparqlQuery: "query"
       LogPathBase: "/app/logs/"
