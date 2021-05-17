@@ -128,9 +128,11 @@ Ahora debemos hacer login con usurio "guest" y password "guest", que son los que
 
 ![](./docs/docker-rabbitmq/rmq/paso-1.png)
 
-Añadimos el nombre de usuario, en nuestos ejemplo "hercules" y una pass. Después hacemos clik "add user".
+Hacemos clik en "add user, añadimos el nombre de usuario, en nuestos ejemplo "hercules" y una pass. Después hacemos clik "add user" de nuevo.
 
 ![](./docs/docker-rabbitmq/rmq/paso-2.png)
+![](./docs/docker-rabbitmq/rmq/paso-3.png)
+
 
 Escribimos el nombre del virtual host. En nuestro caso "hercules" porque es el que está ajustado en el docker-compose.yml de servicios. Después hacemos clic en "Add virtual host".
 
