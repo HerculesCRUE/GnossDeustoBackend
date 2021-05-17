@@ -130,7 +130,7 @@ Ya logueados vamos a la sección "Admin".
 
 ![](./docs/docker-rabbitmq/rmq/2.png)
 
-Una vez hecho el login, hacemos clic en "Virtual Hosts".
+Una vez hecho el login, vamos a crear un usuario para conectar a las colas. En nuestro ejemplo lo vamos a llamar "hercules". Para ellos vamos a pestaña admin y hacemos clik en "users"
 
 ![](./docs/docker-rabbitmq/rmq/3.png)
 
@@ -142,7 +142,7 @@ Una vez añadido entramos en sus ajustes.
 
 ![](./docs/docker-rabbitmq/rmq/5.png)
 
-Le damos permisos al usuario guest. En nuestro caso "guest" porque es el que está ajustado en el docker-compose.yml de servicios.
+Le damos permisos al usuario que acabamos de creqar. En nuestro caso "hercules".
 
 ![](./docs/docker-rabbitmq/rmq/6.png)
 
