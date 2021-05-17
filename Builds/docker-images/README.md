@@ -135,15 +135,15 @@ Hacemos clik en "add user, añadimos el nombre de usuario, en nuestos ejemplo "h
 
 El siguiente paso es añadir un virtual host para nuestro proyecto. En este ejemplo o llamaremos "hercules". Para ello vamos a la sección "Virtual host", escribimos el nombre y lo añadimos.
 
-![](./docs/docker-rabbitmq/rmq/4.png)
+![](./docs/docker-rabbitmq/rmq/paso-4.png)
 
 Una vez añadido entramos en sus ajustes.
 
-![](./docs/docker-rabbitmq/rmq/5.png)
+![](./docs/docker-rabbitmq/rmq/paso-5.png)
 
 Le damos permisos al usuario que acabamos de creqar. En nuestro caso "hercules".
 
-![](./docs/docker-rabbitmq/rmq/6.png)
+![](./docs/docker-rabbitmq/rmq/paso-6.png)
 
 Y vemos como han aplicado correctamente estos permisos.
 
