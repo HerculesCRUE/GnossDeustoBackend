@@ -14,7 +14,7 @@
 ## Requisitos previos
 Para hacer funcionar el Backend será necesario tener instalado en nuestro servidor:
 
-* Docker (podemos seguir la documentacion oficial dependiendo de nuestra dristrubución de Linux) 
+* Docker (podemos seguir la documentacion oficial dependiendo de nuestra dristrubución de Linuxx) 
     - Centos https://docs.docker.com/engine/install/centos/
     - Ubuntu https://docs.docker.com/engine/install/ubuntu/
     - Debian https://docs.docker.com/engine/install/debian/
