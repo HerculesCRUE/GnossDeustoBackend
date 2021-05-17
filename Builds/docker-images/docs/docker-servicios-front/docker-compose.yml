@@ -1,0 +1,206 @@
+version: '3.8'
+
+services:
+        
+  apifrontcarga:
+    image: apifrontcarga
+    ports:
+      - 5103:5103
+    environment:
+      Graph: "http://linkeddata2test.um.es/graph/sgi"
+      ConfigUrl: "http://ip_del_servicio:5100/"
+      ConfigUrlCron: "http://ip_del_servicio:5107/"
+      ConfigUrlUrisFactory: "http://ip_del_servicio:5000/"
+      ConfigUrlDocumentacion: "http://ip_del_servicio:5109/"
+      Authority: "http://ip_del_servicio:5108"
+      PostgreConnectionmigration: "Username=postgres;Password=postgres;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
+      SparqlEndpoint: "http://ip_del_servicio:8890/sparql"
+      SparqlQuery: "query"
+      LogPathBase: "/app/logs/"
+      LogPath: "apifrontcarga"
+      LogPathCarga: "apicarga"
+      LogPathCron: "apicron"
+      Proxy: "/carga-web" 
+    volumes:
+       - /home/$USER/dock1/logs/apifrontcarga:/app/logs
+     
+  linkeddataserver:
+    image: linkeddataserver
+    ports:
+      - 8081:80
+    environment:
+      Endpoint: "http://ip_del_servicio:8890/sparql"
+      QueryParam: "query"
+      Graph: "http://linkeddata2test.um.es/graph/sgi"
+      NameTitle: "Hércules"
+      ConstrainedByUrl: "https://ip_del_servicio:5103/public/gnossdeustobackend/linked-data-server-constraints" 
+      OntologyGraph: "http://graph.um.es/graph/research/roh"      
+      UrlHome: "https://linkeddata2test.um.es/carga-web"
+    volumes:
+       - /home/$USER/dock1/logs/linkeddataserver:/app/logs
+
+  benchmark:
+    image: benchmark
+    ports:
+      - 8401:8401
+
+  apicarga:
+    image: apicarga
+    ports:
+      - 5100:5100
+    environment:
+      PostgreConnection: "Username=postgres;Password=postgres;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
+      PostgreConnectionmigration: "Username=postgres;Password=postgres;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
+      ConfigUrl: "http://ip_del_servicio:5100/"
+      Graph: "http://linkeddata2test.um.es/graph/sgi"
+      GraphUnidata: "http://data.um.es/graph/unidata"
+      Endpoint: "http://ip_del_servicio:8890/sparql"
+      QueryParam: "query"
+      GraphRoh: "http://graph.um.es/graph/research/roh"
+      GraphRohes: "http://graph.um.es/graph/research/rohes"
+      GraphRohum: "http://graph.um.es/graph/research/rohum"
+      Authority: "http://ip_del_servicio:5108/"
+      LogPath: "/app/logs"
+      usernameRabbitMq: "mqadmin"
+      passwordRabbitMq: "fip35ZvqqXwhYVVCR6Bq"
+      hostnameRabbitMq: "hercules"
+      uriRabbitMq: "amqp://mqadmin:fip35ZvqqXwhYVVCR6Bq@ip_del_servicio:5672/hercules"
+      virtualhostRabbitMq: "hercules"
+      RabbitQueueName: "HerculesDemoQueue1"
+      ConfigUrlXmlConverter: "http://ip_del_servicio:5110/"
+    volumes:
+      - /home/$USER/dock1/logs/apicarga:/app/logs
+
+  apicron:
+    image: apicron
+    ports:
+      - 5107:5107
+    environment:
+      HangfireConnection: "Username=postgres;Password=postgres;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false" 
+      ConfigUrl: "http://ip_del_servicio:5100/"
+      Authority: "http://ip_del_servicio:5108"
+      LogPath: "/app/logs"
+    volumes:
+      - /home/$USER/dock1/logs/apicron:/app/logs
+  
+  apiuris:
+    image: apiuris
+    ports:
+      - 5000:5000
+    environment:
+      Authority: "http://ip_del_servicio:5108"
+      Base: "http://linkeddata2test.um.es"
+    volumes:
+      - /home/$USER/dock1/logs/apiuris:/app/logs
+
+  apiidentity:
+    image: apiidentity
+    ports: 
+      - 5108:5108
+    environment:
+      PostgreConnection: "Username=postgres;Password=postgres;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
+    volumes:
+      - /home/$USER/dock1/logs/apiidentity:/app/logs
+      
+  apiunidata:
+    image: apiunidata
+    ports:
+      - 5106:5106
+    environment:
+      GraphUnidata: "http://data.um.es/graph/unidata"
+      EndpointUnidata: "http://ip_del_servicio:8890/sparql"
+      Authority: "http://ip_del_servicio:5108"
+      AuthorityGetToken: "http://ip_del_servicio:5108/connect/token"
+    volumes:
+       - /home/$USER/dock1/logs/apiunidata:/app/logs
+
+  apigesdoc:
+    image: apigesdoc
+    ports:
+      - 5109:5109
+    environment:
+      LogPath: "/app/logs"
+      Authority: "http://ip_del_servicio:5108"
+      PostgreConnectionmigration: "Username=postgres;Password=postgres;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
+    volumes:
+       - /home/$USER/dock1/logs/apigesdoc:/app/logs
+
+  apidiscover:
+    image: apidiscover
+    environment:
+      PostgreConnectionmigration: "Username=postgres;Password=postgres;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
+      Graph: "http://linkeddata2test.um.es/graph/sgi"
+      Endpoint: "http://ip_del_servicio:8890/sparql"
+      QueryParam: "query"
+      Username: "UPDATE"
+      Password: "Bn4wQ6aD"
+      usernameRabbitMq: "mqadmin"
+      passwordRabbitMq: "fip35ZvqqXwhYVVCR6Bq"
+      hostnameRabbitMq: "hercules"
+      uriRabbitMq: "amqp://guest:fip35ZvqqXwhYVVCR6Bq@ip_del_servicio:5672/hercules"
+      virtualhostRabbitMq: "hercules"
+      RabbitQueueName: "HerculesDemoQueue1"
+      LogPath: "/app/logs"
+      Authority: "http://ip_del_servicio:5108/connect/token"
+      ConfigUrlCron: "http://ip_del_servicio:5107/"
+      ConfigUrlUrisFactory: "http://ip_del_servicio:5000/"
+      ScopusApiKey: "75f4ab3fac56f42ac83cdeb7c98882ca"
+      ScopusUrl: "https://api.elsevier.com/"
+      CrossrefUserAgent: "HerculesASIO-University-of-Murcia (https://github.com/HerculesCRUE/GnossDeustoBackend; mailto:alvaropalacios@gnoss.com) AsioBot"
+      MaxScore: "0.9"
+      MinScore: "0.7"
+      WOSAuthorization: "Basic czAzNjkuZmVjeXQuZXM6VTQ5RDhSWU40d3Mh"
+      Scope: "apiCarga"
+      ConfigUrl: "http://ip_del_servicio:5100/"
+      UnidataDomain: "http://graphunidata.um.es"
+      UnidataUriTransform: "http://graphunidata.um.es/um"
+      LaunchDiscoverLoadedEntitiesCronExpression: "0 0 8 ? * MON"
+      SleepSecondsAfterProcessEntityDiscoverLoadedEntities: "5"
+      UnidataGraph: "http://graphunidata.um.es/graph/sgi"
+      UnidataEndpoint: "http://ip_del_servicio:8890/sparql/"
+      UnidataQueryParam: "query"
+      UnidataUsername: ""
+      UnidataPassword: ""
+    volumes:
+       - /home/$USER/dock1/logs/apidiscover:/app/logs
+
+  xmlrdfconversor:
+    image: xmlrdfconversor
+    ports:
+      - 5114:5114
+    environment:
+      UrlUrisFactory: "http://ip_del_servicio:5000/"
+      Authority: "http://ip_del_servicio:5108"
+
+  apicvn:
+    image: apicvn
+    ports:
+      - 5104:5104
+
+  apioaipmh:
+    image: apioaipmh
+    ports:
+      - 5102:80
+    environment:
+      XML_CVN_Repository: "http://curriculumpruebas.um.es/curriculum/rest/v1/auth/"
+      CVN_ROH_converter: "http://ip_del_servicio:5104/v1/convert"
+      ConfigUrl: "http://ip_del_servicio:5110/OAI_PMH"
+      Authority: "http://ip_del_servicio:5108"
+      Scope: "apiOAIPMH"
+
+  apioaipmhxml:
+    image: apioaipmhxml
+    ports:
+      - 5110:80
+    environment:
+      ConfigUrl: "http://ip_del_servicio:5110/OAI_PMH"
+
+  apibridge:
+    image: apibridge
+    ports:
+      - 5200:5200
+
+  briggeswagger:
+    image: bridgeswagger
+    ports:
+      - 8082:8080
