@@ -47,7 +47,7 @@ Un vez desplegado podemos ver el proceso de docker con este comando:
 
 	docker ps
 	
-![](http://herc-as-front-desa.atica.um.es/docs/capturas/virtuoso/01_docker_ps.png)
+![](http://https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/virtuoso/01_docker_ps.png)
 
 Y podemos hacer una sencilla comprobación de que funciona entrando en la interfaz web con http://ip_de_nuestra_maquina:8890
 
