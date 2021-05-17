@@ -40,7 +40,7 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 
 	mkdir virtuoso
 	cd virtuoso
-	wget http://herc-as-front-desa.atica.um.es/docs/docker-virtuoso/docker-compose.yml
+	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-virtuoso/docker-compose.yml
 	docker-compose up -d
 	
 Un vez desplegado podemos ver el proceso de docker con este comando:
