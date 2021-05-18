@@ -3,7 +3,7 @@
 | Fecha         | 18/05/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Descripción del servicio Sparql Replication| 
-|Descripción|configuración de appsettings|
+|Descripción|Manual del servicio Sparql Replication|
 |Versión|1|
 |Módulo|SparqlReplication|
 |Tipo|Documentación|
