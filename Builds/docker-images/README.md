@@ -244,17 +244,21 @@ Para simplificar el despliegue de los servicios de back, hemos creado un script 
 
 	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-servicios-back/actualizar-back.sh
 	
-Este escript clonará los repositorios necesarios y luego generará las imágenes docker automáticamente. Le debemos dar permisos de ejecución.
+Este script clonará los repositorios necesarios y luego generará las imágenes docker automáticamente. Le debemos dar permisos de ejecución.
 
 	chmod +x actualizar-back.sh
 
-Depués creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-back porque en el script actualizar-back.sh así se llama, pero podríamos cambiar estos valores. Después lo descargamos.
+Después creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-back porque en el script actualizar-back.sh así se llama, pero podríamos cambiar estos valores. Después lo descargamos.
 
 	mkdir dock-back
 	cd dock-back
 	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-servicios-back/docker-compose.yml
 	
-Antes de levantar los servicios debemos editar este archivo y reemplezar "ip_del_servicio" por la ip de la máquina donde estemos levantando los servicios. Así todos los servicios se podran comunicar correctamente entre ellos. Si vamos a usar un interfaz SPARQL distinto al indicado en este ejemplo debemos modificar los parametros de SPARQL Endpoint para que apunten al servidor RDF indicado. También debemos indicar las conexiones a PostgreSQL y RabbitMQ que hayamos determindado anteriormente.
+Antes de levantar los servicios debemos editar este archivo y reemplazar "ip_del_servicio" por la ip de la máquina donde estemos levantando los servicios, para que todos los servicios se puedan comunicar correctamente entre ellos.
+
+También debemos indicar las conexiones a PostgreSQL y RabbitMQ que hayamos determinado anteriormente.
+
+**NOTA**: Si fuésemos a usar un interfaz SPARQL distinto al indicado en este ejemplo deberíamos modificar los parametros de SPARQL Endpoint para que apunten al servidor RDF instalado. 
 
 Con la ip ajustada ya podemos ejecutar el script que nos prepara el entorno.
 
@@ -270,13 +274,17 @@ Este script clonará los repositorios necesarios y luego generará las imágenes
 
 	chmod +x actualizar-front.sh
 
-Después creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-front porque en el script actualizar.sh así se llama, pero podríamos cambiar con estos valores. Después lo descargamos.
+Después creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-front porque en el script actualizar.sh se llama así, pero podríamos cambiar con estos valores. Después lo descargamos.
 
 	mkdir dock-front
 	cd dock-front
 	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-servicios-front/docker-compose.yml
 	
-Antes de levantar los servicios debemos editar este archivo y reemplazar "ip_del_servicio" por la IP de la máquina donde estemos levantando cada servicio. Haríamos lo mismo con todos los servicios para que se puedan comunicar correctamente entre ellos. Si vamos a usar un interfaz SPARQL distinto al indicado en este ejemplo debemos modificar los parametros de SPARQL Endpoint para que apunten al servidor RDF indicado. También debemos indicar las conexiones a PostgreSQL y RabbitMQ que hayamos determindado anteriormente.	
+Antes de levantar los servicios debemos editar este archivo y reemplazar "ip_del_servicio" por la IP de la máquina donde estemos levantando cada servicio. Haríamos lo mismo con todos los servicios para que se puedan comunicar correctamente entre ellos.
+
+También debemos indicar las conexiones a PostgreSQL y RabbitMQ que hayamos determindado anteriormente.	
+
+**NOTA**: Si fuésemos a usar un interfaz SPARQL distinto al indicado en este ejemplo deberíamos modificar los parametros de SPARQL Endpoint para que apunten al servidor RDF instalado.
 
 Con las IPs ajustadas ya podemos ejecutar el script que nos prepara el entorno.
 
