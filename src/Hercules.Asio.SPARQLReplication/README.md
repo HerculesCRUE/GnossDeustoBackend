@@ -12,6 +12,8 @@
 
 # Acerca de SparqlReplication
 
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20Hercules.Asio.SPARQLReplication/badge.svg)
+
 El proyecto SparqlReplication es una apliación en segundo plano que se encarga de insertar instruciones SPARQL en un SPARQL Endpoint. Su uso principal es usarlo como sistema de replicación, para replicar las instruciones SPARQL de inserción, modificación o eliminación que se han ejecutado previamente sobre una base de datos RDF (maestro), en otra base de datos RDF (réplica). 
 Cuando arranca la aplicación, se queda escuchando los eventos que se envían a una cola de RabbitMQ. Cada evento que llega a esa cola, será una instrucción SPARQL que se replicará en el servidor SPARQL réplica. 
 Tanto el servidor de RabbitMQ, como el nombre de la cola y el SPARQL Endpoint de la base de datos réplica son configurables. 
