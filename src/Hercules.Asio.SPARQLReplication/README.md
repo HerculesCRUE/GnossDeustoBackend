@@ -3,11 +3,11 @@
 | Fecha         | 18/05/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Descripción del servicio Sparql Replication| 
-|Descripción|Manual del servicio Sparql Replication|
+|Descripción|Manual del servicio de background de replicación Sparql|
 |Versión|1|
 |Módulo|SparqlReplication|
 |Tipo|Documentación|
-|Cambios de la Versión|Creado nuevo servicio de background de replicación SPARQL|
+|Cambios de la Versión|Creación del documento|
 
 
 # Acerca de SparqlReplication
