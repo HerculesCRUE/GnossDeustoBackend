@@ -282,7 +282,7 @@ Después creamos el directorio donde vamos a alojar el docker-compose.yml que va
 	
 Antes de levantar los servicios debemos editar este archivo y reemplazar "ip_del_servicio" por la IP de la máquina donde estemos levantando cada servicio. Haríamos lo mismo con todos los servicios para que se puedan comunicar correctamente entre ellos.
 
-También debemos indicar las conexiones a PostgreSQL y RabbitMQ que hayamos determindado anteriormente.	
+También debemos indicar las conexiones a PostgreSQL y RabbitMQ que hayamos determinado anteriormente.	
 
 **NOTA**: Si fuésemos a usar un interfaz SPARQL distinto al indicado en este ejemplo deberíamos modificar los parametros de SPARQL Endpoint para que apunten al servidor RDF instalado.
 
