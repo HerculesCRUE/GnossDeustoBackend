@@ -14,14 +14,13 @@
 
 ![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20Hercules.Asio.SPARQLReplication/badge.svg)
 
-El proyecto SparqlReplication es una apliación en segundo plano que se encarga de insertar instruciones SPARQL en un SPARQL Endpoint. Su uso principal es usarlo como sistema de replicación, para replicar las instruciones SPARQL de inserción, modificación o eliminación que se han ejecutado previamente sobre una base de datos RDF (maestro), en otra base de datos RDF (réplica). 
-Cuando arranca la aplicación, se queda escuchando los eventos que se envían a una cola de RabbitMQ. Cada evento que llega a esa cola, será una instrucción SPARQL que se replicará en el servidor SPARQL réplica. 
+El proyecto SparqlReplication es una aplicación en segundo plano que se encarga de ejecutar instrucciones SPARQL en un SPARQL Endpoint. Su función es servir como sistema de replicación, que repita las instruciones SPARQL de inserción, modificación o eliminación que se han ejecutado previamente sobre una base de datos RDF (maestro), en otra(s) base(s) de datos RDF (réplicas). 
+Cuando arranca la aplicación se queda escuchando los eventos que se envían a una cola de RabbitMQ. Cada evento que llega a esa cola será una instrucción SPARQL que se ejecutará en el o los servidores SPARQL réplica. 
 Tanto el servidor de RabbitMQ, como el nombre de la cola y el SPARQL Endpoint de la base de datos réplica son configurables. 
 
-Las aplicaciones que escriben datos en el servidor maestro, inmediatamente después de ejecutar cada instrucción SPARQL, deben enviar un mensaje a la cola donde está escuchando este servicio para que se repliquen de manera inmediata en la base de datos RDF réplica. 
+Las aplicaciones que escriben datos en el servidor maestro deben enviar un mensaje a la cola inmediatamente después de ejecutar cada instrucción SPARQL. El servicio estará _escuchando_ esta cola para replicar de manera inmediata en la base de datos RDF réplica. 
 
 La aplicación tiene una clase Worker, que es la encargada de escuchar la cola e insertar las acciones en la base de datos RDF réplica. 
-
 
 ## Configuración en el appsettings.json
     {
@@ -51,7 +50,7 @@ La aplicación tiene una clase Worker, que es la encargada de escuchar la cola e
  - RabbitMQ.VirtualHost: Virtual host al que está asociado la cola
  - RabbitMQ.QueueName: Nombre de la cola
  
- Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.SPARQLReplication/Hercules.Asio.SPARQLReplication/appsettings.json
+Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.SPARQLReplication/Hercules.Asio.SPARQLReplication/appsettings.json
 
 
 ## Dependencias
