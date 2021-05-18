@@ -154,7 +154,8 @@ En la siguiente imágen se muestran los datos de una tarea recurrente:
 Listado de validaciones
 -----------------
 
-Para obtener más información de los validaciones puedes consultar: https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA/Validaciones
+Para obtener más información de los validaciones puedes consultar: https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.Api.Carga/Validaciones
+
 Desde esta página se muestra el listado general de validaciones. Desde este listado se puede acceder al detalle de una validación concreta. 
 
 ![](img/shapes.png)
@@ -166,7 +167,8 @@ Para poder acceder a su información y poder editarla o eliminar el shape tendre
 Factoría de URIs
 ----------------
 
-Para acceder a la información explicativa sobre las uris y el esquema de uris se puede acceder desde: https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/UrisFactory
+Para acceder a la información explicativa sobre las uris y el esquema de uris se puede acceder desde: https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.UrisFactory
+
 Interfaz desde la que se puede:
  - Obtener un URI.
  - Descargar el archivo el archivo de configuración de los URIs.
