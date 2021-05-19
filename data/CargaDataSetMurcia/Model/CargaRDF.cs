@@ -132,7 +132,7 @@ namespace CargaDataSetMurcia.Model
                     Graph g = new Graph();
                     g.LoadFromFile(file);
                     grafoCarga.Merge(g);
-                    if (numEntities >= 1000)
+                    if (numEntities >= 200)
                     {
                         CargarGrafo(grafoCarga, pSparqlASIO, pSparqlASIO_Graph, pUriUrisFactory);
                         numEntities = 0;
