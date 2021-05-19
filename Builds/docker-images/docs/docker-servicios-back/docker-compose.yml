@@ -27,7 +27,7 @@ services:
       RabbitQueueName: "HerculesDemoQueue1"
       ConfigUrlXmlConverter: "http://ip_del_servicio:5110/"
     volumes:
-      - /home/$USER/dock1/logs/apicarga:/app/logs
+      - /home/$USER/dock-back/logs/apicarga:/app/logs
 
   apicron:
     image: apicron
@@ -39,7 +39,7 @@ services:
       Authority: "http://ip_del_servicio:5108"
       LogPath: "/app/logs"
     volumes:
-      - /home/$USER/dock1/logs/apicron:/app/logs
+      - /home/$USER/dock-back/logs/apicron:/app/logs
   
   apiuris:
     image: apiuris
@@ -49,7 +49,7 @@ services:
       Authority: "http://ip_del_servicio:5108"
       Base: "http://linkeddata2test.um.es"
     volumes:
-      - /home/$USER/dock1/logs/apiuris:/app/logs
+      - /home/$USER/dock-back/logs/apiuris:/app/logs
 
   apiidentity:
     image: apiidentity
@@ -58,7 +58,7 @@ services:
     environment:
       PostgreConnection: "Username=usuario;Password=pass;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
     volumes:
-      - /home/$USER/dock1/logs/apiidentity:/app/logs
+      - /home/$USER/dock-back/logs/apiidentity:/app/logs
       
   apiunidata:
     image: apiunidata
@@ -70,7 +70,7 @@ services:
       Authority: "http://ip_del_servicio:5108"
       AuthorityGetToken: "http://ip_del_servicio:5108/connect/token"
     volumes:
-       - /home/$USER/dock1/logs/apiunidata:/app/logs
+       - /home/$USER/dock-back/logs/apiunidata:/app/logs
 
   apigesdoc:
     image: apigesdoc
@@ -81,7 +81,7 @@ services:
       Authority: "http://ip_del_servicio:5108"
       PostgreConnectionmigration: "Username=usaurio;Password=pass;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
     volumes:
-       - /home/$USER/dock1/logs/apigesdoc:/app/logs
+       - /home/$USER/dock-back/logs/apigesdoc:/app/logs
 
   apidiscover:
     image: apidiscover
@@ -120,7 +120,7 @@ services:
       UnidataUsername: ""
       UnidataPassword: ""
     volumes:
-       - /home/$USER/dock1/logs/apidiscover:/app/logs
+       - /home/$USER/dock-back/logs/apidiscover:/app/logs
 
   xmlrdfconversor:
     image: xmlrdfconversor
