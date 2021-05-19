@@ -44,22 +44,25 @@ Carga Dataset Murcia es una aplicación de consola encargada de la carga de los 
  - SparqlASIO_2.Password: Password del Sparql endpoint
  
  Funcionamiento:
+ 
  1º- Se realizan las configuraciones correspondientes en fichero appsettings
+ 
  2º- Se añaden dentro de la carpeta 'Dataset' los ficheros corresponfientes a la exportación de los datos de Murcia, tiene que contener los siguientes ficheros:
-	Articulos.xml
-	Autores articulos.xml
-	Autores congresos.xml
-	Autores exposiciones.xml
-	Centros.xml
-	Congresos.xml
-	Departamentos.xml
-	Equipos proyectos.xml
-	Exposiciones.xml
-	Fechas equipos proyectos.xml
-	Fechas proyectos.xml
-	Personas.xml
-	Proyectos.xml
+- Articulos.xml
+- Autores articulos.xml
+- Autores congresos.xml
+- Autores exposiciones.xml
+- Centros.xml
+- Congresos.xml
+- Departamentos.xml
+- Equipos proyectos.xml
+- Exposiciones.xml
+- Fechas equipos proyectos.xml
+- Fechas proyectos.xml
+- Personas.xml
+- Proyectos.xml 
 3º Se ejecuta la aplicación
+
 4º La aplicación leera los ficheros dentro de la carpeta 'Dataset' y generará una nueva carpeta llamada 'RDF' con los RDF correspondientes de ese Dataset y finalmente volcara los datos a las BBDD rdf
  
  
