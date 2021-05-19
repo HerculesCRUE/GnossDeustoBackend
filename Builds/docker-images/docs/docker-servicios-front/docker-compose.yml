@@ -22,7 +22,7 @@ services:
       LogPathCron: "apicron"
       Proxy: "/carga-web" 
     volumes:
-       - /home/$USER/dock1/logs/apifrontcarga:/app/logs
+       - /home/$USER/dock-front/logs/apifrontcarga:/app/logs
      
   linkeddataserver:
     image: linkeddataserver
@@ -37,7 +37,7 @@ services:
       OntologyGraph: "http://graph.um.es/graph/research/roh"      
       UrlHome: "https://linkeddata2test.um.es/carga-web"
     volumes:
-       - /home/$USER/dock1/logs/linkeddataserver:/app/logs
+       - /home/$USER/dock-front/logs/linkeddataserver:/app/logs
 
   benchmark:
     image: benchmark
