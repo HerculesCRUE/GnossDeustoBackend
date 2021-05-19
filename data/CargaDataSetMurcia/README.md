@@ -7,7 +7,7 @@
 |Versión|1|
 |Módulo|Carga Dataset Murcia|
 |Tipo|Manual|
-|Creación|Creación|
+|Cambios en la versión|Creación|
 
 ## Sobre Carga Dataset Murcia
 
