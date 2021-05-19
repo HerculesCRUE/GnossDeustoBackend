@@ -242,7 +242,7 @@ Por último, para que la aplicación disponga de los archivos necesarios tenemos
 
 Para simplificar el despliegue de los servicios de back, hemos creado un script que debemos descargar en nuestra máquinas para servicios de back. Partiendo desde la home del usurio (ej. /home/usuario/).
 
-	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-servicios-back/actualizar-back.sh
+	wget https://raw.githubusercontent.com/HerculesCRUE/GnossDeustoBackend/master/Builds/docker-images/docs/docker-servicios-back/actualizar-back.sh
 	
 Este script clonará los repositorios necesarios y luego generará las imágenes docker automáticamente. Le debemos dar permisos de ejecución.
 
@@ -252,7 +252,7 @@ Después creamos el directorio donde vamos a alojar el docker-compose.yml que va
 
 	mkdir dock-back
 	cd dock-back
-	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-servicios-back/docker-compose.yml
+	wget https://raw.githubusercontent.com/HerculesCRUE/GnossDeustoBackend/master/Builds/docker-images/docs/docker-servicios-back/docker-compose.yml
 	
 Antes de levantar los servicios debemos editar este archivo y reemplazar "ip_del_servicio" por la ip de la máquina donde estemos levantando los servicios, para que todos los servicios se puedan comunicar correctamente entre ellos.
 
@@ -268,7 +268,7 @@ Con la ip ajustada ya podemos ejecutar el script que nos prepara el entorno.
 
 Para simplificar el despliegue de los servicios de front, hemos creado un script que debemos descargar en la máquina donde queramos alojar los servicios de front. Partiendo desde la home del usurio (ej. /home/usuario/).
 
-	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-servicios-front/actualizar-front.sh
+	wget https://raw.githubusercontent.com/HerculesCRUE/GnossDeustoBackend/master/Builds/docker-images/docs/docker-servicios-front/actualizar-front.sh
 	
 Este script clonará los repositorios necesarios y luego generará las imágenes docker automáticamente. Le debemos dar permisos de ejecución.
 
@@ -278,7 +278,7 @@ Después creamos el directorio donde vamos a alojar el docker-compose.yml que va
 
 	mkdir dock-front
 	cd dock-front
-	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-servicios-front/docker-compose.yml
+	wget https://raw.githubusercontent.com/HerculesCRUE/GnossDeustoBackend/master/Builds/docker-images/docs/docker-servicios-front/docker-compose.yml
 	
 Antes de levantar los servicios debemos editar este archivo y reemplazar "ip_del_servicio" por la IP de la máquina donde estemos levantando cada servicio. Haríamos lo mismo con todos los servicios para que se puedan comunicar correctamente entre ellos.
 
@@ -294,7 +294,7 @@ Cuando accedamos por primera vez el frontal web nos debería fallar porque aún 
 
 Primero nos bajamos un script SQL con los INSERT necesarios desde la máquina donde tenemos PostgreSQL instalado.
 
-	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/vistas.sql
+	wget https://raw.githubusercontent.com/HerculesCRUE/GnossDeustoBackend/master/Builds/docker-images/docs/docker-postgresql/vistas.sql
 	
 Ahora tenemos que modificar los INSERT ajustando los enlaces http y https y poner los adecuados para nuestro entorno.
 
