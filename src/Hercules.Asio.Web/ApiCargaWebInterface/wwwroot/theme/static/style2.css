@@ -122,7 +122,7 @@ p { font-size: 17px; font-weight: 300; color: #333; line-height: 20px; margin-bo
     height: auto;
 }
 
-ui-menu {
+.ui-menu {
     list-style: none;
     padding: 0;
     margin: 0;
