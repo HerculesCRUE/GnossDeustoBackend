@@ -40,7 +40,7 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 
 	mkdir virtuoso
 	cd virtuoso
-	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-virtuoso/docker-compose.yml
+	wget https://raw.githubusercontent.com/HerculesCRUE/GnossDeustoBackend/master/Builds/docker-images/docs/docker-virtuoso/docker-compose.yml
 	docker-compose up -d
 	
 Un vez desplegado podemos ver el proceso de docker con este comando:
@@ -94,7 +94,7 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 
 	mkdir postgresql
 	cd postgresql
-	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-postgresql/docker-compose.yml
+	wget https://raw.githubusercontent.com/HerculesCRUE/GnossDeustoBackend/master/Builds/docker-images/docs/docker-postgresql/docker-compose.yml
 	docker-compose up -d
 	
 Después de desplegar, como en el caso anterior, vamos a hacer la comprobación de que el contenedor está levantado pero en esta ocasión vamos a usar el comando docker-compose ps que se limita a mostrar información solo de los procesos de este yml.
@@ -111,7 +111,7 @@ Partiendo desde la home del usurio (ej. /home/usuario/) creamos el directorio qu
 	
 	mkdir rabbitmq
 	cd rabbitmq
-	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/docker-rabbitmq/docker-compose.yml
+	wget https://raw.githubusercontent.com/HerculesCRUE/GnossDeustoBackend/master/Builds/docker-images/docs/docker-rabbitmq/docker-compose.yml
 	docker-compose up -d
 	
 Una vez levantado podemos hacer la comprobación de que esta el contenedor levantado con este comando:
