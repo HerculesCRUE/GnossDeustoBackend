@@ -49,7 +49,7 @@ El entregable **Manual de uso del backend SGI** consta del siguiente contenido:
  - [Prerrequisitos de instalación](../Builds/Build)
  - [Hércules ASIO Documento de alojamiento](Hercules-ASIO-Documento-de-Alojamiento.md)
  - [Hércules ASIO Estimación de arquitectura de Sistemas](Hercules-ASIO-Estimacion-de-arquitectura-de-Sistemas.md)
- - [Hércules ASIO Entrega final Manual de comprobaciones y Carga inicial](Hercules-ASIO-Entrega-Final-Manual-de-comprobaciones-y-Carga-inicial.md)
+ - [Hércules ASIO Test Suite de carga de datos](../data/README.md)
  - [API CARGA. Manual del servicio de carga y validaciones](../src/Hercules.Asio.Api.Carga)
  - [API DISCOVER. Manual del servicio](../src/Hercules.Asio.Api.Discover)
  - [OAI PMH CVN. Manual del servicio](../src/Hercules.Asio.CVN2OAI_PMH)

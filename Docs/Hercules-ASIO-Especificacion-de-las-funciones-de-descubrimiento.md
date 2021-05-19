@@ -55,6 +55,9 @@
 
 [5.8 Web of Science](#user-content-web-of-science-httpwosfecytes)
 
+[5.9 DBpedia](#user-content-dbpedia-httpswwwdbpediaorg)
+
+
 Introducción
 ============
 El API Descubrimiento ofrece unas funciones que son parte del proceso de carga. Estas funciones se dividen en 3 grupos:
@@ -458,4 +461,10 @@ Web of Science (http://wos.fecyt.es/)
 FECYT provides access to Web of Science, the world’s largest publisher-neutral citation index and research intelligence platform
 
 Dentro de discover se hacen llamadas al método del API 'http://search.webofknowledge.com/esti/wokmws/ws/WokSearch' con los nombres de las publicaciones y se obtienen las publicaciones junto con sus autores.
+
+DBpedia (https://www.dbpedia.org/)	
+--------------------
+DBpedia es un proyecto para la extracción de datos de Wikipedia para proponer una versión Web semántica.
+
+Dentro de discover se hacen llamadas al SPARQL endpoint de DBpedia https://dbpedia.org/sparql para obtener SameAs de los lugares y de las organizaciones
 

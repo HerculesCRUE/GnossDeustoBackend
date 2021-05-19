@@ -1,10 +1,10 @@
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 12/02/2021                                                   |
+| Fecha         | 19/05/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|XML RDF Conversor| 
 |Descripción|Manual del servicio XML RDF Conversor|
-|Versión|1|
+|Versión|2|
 |Módulo|XML RDF Conversor|
 |Tipo|Manual|
 |Cambios de la Versión|Creación|
@@ -68,26 +68,30 @@ XML RDF Conversor es un servicio web que contiene únicamente un controlador, cu
 		}]		
 	}
 
-- Entities
-	- rdftype: Tipo de la ontología.
-	- rdftypeproperty: Tipo del rdf del cual habrá que obtener del mapa.
-	- id: Propiedad id del nodo.
+- Entities: Lista cada una de las entidades que tienen mapeo
+	- rdftype: IRI del Tipo de la ontología a cargar (debe estar especificado éste o 'rdftypeproperty' para realizar el mapeo hacia el rdftype).
+	- rdftypeproperty: Elemento del XML que se utilizará para mapear el rdftype, si está especificado también debe estar especificado 'Mappingrdftype'.
+	- id: Elemento del XML del que se cogerá el identificador del elemento.
 	- nameSpace: Espacio de nombres del nodo.
-	- source: Nombre del nodo.
+	- source: Elemento del XML que se considerará para crear la entidad.
 	- property: Propiedad la cual hay que acceder y no se encuentra en el nodo.
-	- datatype: Tipo de dato de la propiedad que hay que acceder.
-- Properties
-	- property: Tipo de la propiedad en la ontología.
-	- source: Nombre del nodo.
+	- datatype: Tipo de dato de la propiedad que hay que crear.
+	- transform: Transformación que hay que realizar del texto obtenido del XML
+- Properties: Listado de propiedades de la entidad (de tipo literal)
+	- property: IRI de la propiedad en la ontología.
+	- source: Nombre del nodo del que obtener la propiedad.
 	- datatype: Tipo de la propiedad. String por defecto.
-- Subentities
-	- property: Propiedad de la subentidad a la que apunta.
+	- transform: Transformación que hay que realizar del texto obtenido del XML
+- Subentities: Listado de propiedades de la entidad que apuntan a otras entidades (no tipo literal)
+	- property: IRI de la propiedad de la subentidad a la que apunta.
 	- inverseProperty: Propiedad que indica si es inversa. Si no aparece, es que es directa.
 	- entities: Listado de subentidades de tipo Entity.
-- Mappingrdftype
+- Mappingrdftype: Mapeo para obtener el rdftype de la entidad
 	- nameSpace: Espacio de nombre del nodo.
-	- source: Contenido de la etiqueta en la cual se le ha de aplicar el target.
+	- source: Contenido del XML al que se le aplicará el mapeo.
 	- target: IRI del tipo de la entidad a la que apunta.
+
+Se puede ver un ejemplo completo con la configuración para la Universidad de Radboud [aquí](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.XML_RDF_Conversor/XML_RDF_Conversor/Config/oai_cerif_openaire.json)
 
 ## Comprobaciones y pruebas
 

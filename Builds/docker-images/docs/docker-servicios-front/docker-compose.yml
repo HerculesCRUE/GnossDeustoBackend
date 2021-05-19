@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+        
+  apifrontcarga:
+    image: apifrontcarga
+    ports:
+      - 5103:5103
+    environment:
+      Graph: "http://linkeddata2test.um.es/graph/sgi"
+      ConfigUrl: "http://ip_del_servicio:5100/"
+      ConfigUrlCron: "http://ip_del_servicio:5107/"
+      ConfigUrlUrisFactory: "http://ip_del_servicio:5000/"
+      ConfigUrlDocumentacion: "http://ip_del_servicio:5109/"
+      Authority: "http://ip_del_servicio:5108"
+      PostgreConnectionmigration: "Username=usuario;Password=pass;Host=ip_del_servicio;Port=5432;Database=postgres;Pooling=false"
+      SparqlEndpoint: "http://ip_del_servicio:8890/sparql"
+      SparqlQuery: "query"
+      LogPathBase: "/app/logs/"
+      LogPath: "apifrontcarga"
+      LogPathCarga: "apicarga"
+      LogPathCron: "apicron"
+      Proxy: "/carga-web" 
+    volumes:
+       - /home/$USER/dock-front/logs/apifrontcarga:/app/logs
+     
+  linkeddataserver:
+    image: linkeddataserver
+    ports:
+      - 8081:80
+    environment:
+      Endpoint: "http://ip_del_servicio:8890/sparql"
+      QueryParam: "query"
+      Graph: "http://linkeddata2test.um.es/graph/sgi"
+      NameTitle: "Hércules"
+      ConstrainedByUrl: "https://ip_del_servicio:5103/public/gnossdeustobackend/linked-data-server-constraints" 
+      OntologyGraph: "http://graph.um.es/graph/research/roh"      
+      UrlHome: "https://linkeddata2test.um.es/carga-web"
+    volumes:
+       - /home/$USER/dock-front/logs/linkeddataserver:/app/logs
+
+  benchmark:
+    image: benchmark
+    ports:
+      - 8401:8401
