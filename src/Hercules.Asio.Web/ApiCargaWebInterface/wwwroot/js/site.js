@@ -4,11 +4,6 @@
 // Write your JavaScript code.
 $(function () {
 
-    //peticion ajax a 
-    ///autocomplete/GetUrlSearch
-    //
-    $('#formautocompletelds').attr('action', 'xx')
-
     $.ajax({
         url: "/carga-web/autocomplete/GetUrlSearch",
         type: "GET",
