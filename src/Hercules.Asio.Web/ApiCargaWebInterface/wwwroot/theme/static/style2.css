@@ -102,3 +102,22 @@ p { font-size: 17px; font-weight: 300; color: #333; line-height: 20px; margin-bo
   }
 
 /**/
+
+.ui-widget.autocomplete {
+   position:static;
+}
+
+.ui-widget.autocomplete:before {
+    position: static;
+}
+
+.ui-widget-content {
+    border: 1px solid #dddddd;
+    background: #ffffff;
+    color: #333333;
+}
+
+.ui-widget.ui-widget-content {
+    z-index: 10000;
+    height: auto;
+}
