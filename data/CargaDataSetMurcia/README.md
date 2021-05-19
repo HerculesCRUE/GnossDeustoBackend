@@ -61,6 +61,7 @@ Carga Dataset Murcia es una aplicación de consola encargada de la carga de los 
 - Fechas proyectos.xml
 - Personas.xml
 - Proyectos.xml 
+
 3º Se ejecuta la aplicación
 
 4º La aplicación leera los ficheros dentro de la carpeta 'Dataset' y generará una nueva carpeta llamada 'RDF' con los RDF correspondientes de ese Dataset y finalmente volcara los datos a las BBDD rdf
