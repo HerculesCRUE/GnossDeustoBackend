@@ -872,10 +872,9 @@ var pmdSidebar = function ($) {
 
     // Resaltar en que página estamos situados.
     $('a[href="' + document.location.pathname + '"]').attr('style', 'font-weight: 400;opacity:1');
-    if ($('.dropdown-menu a[href="' + document.location.pathname + '"]').length > 0) {
-        $('.dropdown a').attr('style', 'font-weight: 400;opacity:1');
-        $('a[href="' + document.location.pathname + '"]').attr('style', 'font-weight: 800;opacity:1')
-    }
+    $('.dropdown-menu a[href="' + document.location.pathname + '"]').attr('style', 'font-weight: 800;opacity:1');
+    $('.dropdown-menu a[href="' + document.location.pathname + '"]').closest('.dropdown').find('a.dropdown-toggle').attr('style', 'font-weight: 400;opacity:1');
+    
   return pmdSidebar;
 
 }(jQuery)();

@@ -121,3 +121,11 @@ p { font-size: 17px; font-weight: 300; color: #333; line-height: 20px; margin-bo
     z-index: 10000;
     height: auto;
 }
+
+ui-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    outline: 0;
+}
