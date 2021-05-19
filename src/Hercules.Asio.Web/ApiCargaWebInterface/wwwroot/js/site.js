@@ -10,7 +10,7 @@ $(function () {
     $('#formautocompletelds').attr('action', 'xx')
 
     $.ajax({
-        url: "/autocomplete/GetUrlSearch",
+        url: "/carga-web/autocomplete/GetUrlSearch",
         type: "GET",
         dataType: "json",
         success: function (data) {
@@ -22,7 +22,7 @@ $(function () {
         minLength: 3,
         source: function (request, response) {
             $.ajax({
-                url: "/autocomplete",
+                url: "/carga-web/autocomplete",
                 type: "GET",
                 dataType: "json",
                 data: {
