@@ -55,6 +55,9 @@
 
 [5.8 Web of Science](#user-content-web-of-science-httpwosfecytes)
 
+[5.9 DBpedia](#user-content-dbpedia-httpswwwdbpediaorg)
+
+
 Introducción
 ============
 El API Descubrimiento ofrece unas funciones que son parte del proceso de carga. Estas funciones se dividen en 3 grupos:
@@ -454,6 +457,12 @@ Scopus is the largest abstract and citation database of peer-reviewed literature
 Dentro de discover se hacen llamadas al método del API 'https://api.elsevier.com/content/search/scopus?query=TITLE({nombre_documento})&view=COMPLETE&apiKey={ScopusApiKey}&httpAccept=application/xml' y se obtienen las publicaciones junto con sus autores, posteriormente se llama al método del API 'https://api.elsevier.com/content/author/author_id/{id_autor}?apiKey={ScopusApiKey} para obtener metadatos de los autores.
 
 Web of Science (http://wos.fecyt.es/)	
+--------------------
+FECYT provides access to Web of Science, the world’s largest publisher-neutral citation index and research intelligence platform
+
+Dentro de discover se hacen llamadas al método del API 'http://search.webofknowledge.com/esti/wokmws/ws/WokSearch' con los nombres de las publicaciones y se obtienen las publicaciones junto con sus autores.
+
+DBpedia (https://www.dbpedia.org/)	
 --------------------
 FECYT provides access to Web of Science, the world’s largest publisher-neutral citation index and research intelligence platform
 
