@@ -464,7 +464,7 @@ Dentro de discover se hacen llamadas al método del API 'http://search.webofknow
 
 DBpedia (https://www.dbpedia.org/)	
 --------------------
-FECYT provides access to Web of Science, the world’s largest publisher-neutral citation index and research intelligence platform
+DBpedia es un proyecto para la extracción de datos de Wikipedia para proponer una versión Web semántica.
 
-Dentro de discover se hacen llamadas al método del API 'http://search.webofknowledge.com/esti/wokmws/ws/WokSearch' con los nombres de las publicaciones y se obtienen las publicaciones junto con sus autores.
+Dentro de discover se hacen llamadas al SPARQL endpoint de DBpedia https://dbpedia.org/sparql para obtener SameAs de los lugares y de las organizaciones
 
