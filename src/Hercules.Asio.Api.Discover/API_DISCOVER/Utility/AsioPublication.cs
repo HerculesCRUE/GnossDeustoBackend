@@ -77,6 +77,9 @@ namespace API_DISCOVER.Utility
                 RemoveMonovaluatedProperties(pOntologyGraph, inferenceDataGraph);
             }
 
+            //Actualizamos la propiedad http://www.w3.org/ns/prov#endedAtTime de todos los recursos con IRI que vamos a cargar
+            UpdateEndedAtTime(ref pDataGraph, pActivityEndedAtTime);
+
             //3º Insertamos los triples en la BBDD
             if (pAttributedTo.HasValue)
             {
@@ -221,6 +224,57 @@ namespace API_DISCOVER.Utility
                 processor.ProcessCommandSet(updateSubject);
             }
             return graphs;
+        }
+
+        /// <summary>
+        /// Actualiza la propiedad http://www.w3.org/ns/prov#endedAtTime para las entidades a cargar
+        /// </summary>
+        /// <param name="pDataGraph">Grafo</param>
+        /// <param name="pActivityEndedAtTime">Fecha de carga</param>
+        private void UpdateEndedAtTime(ref RohGraph pDataGraph, DateTime pActivityEndedAtTime)
+        {
+            string endedAtTimeProperty = "http://www.w3.org/ns/prov#endedAtTime";
+
+            //Eliminamos de la BBDD
+            HashSet<string> subjects = new HashSet<string>();
+            {
+                SparqlResultSet sparqlResultSet = (SparqlResultSet)pDataGraph.ExecuteQuery("select distinct ?s where{?s ?p ?o. FILTER(isURI(?s))}");
+                foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
+                {
+                    string s = sparqlResult["s"].ToString();
+                    subjects.Add(s);
+                }
+            }
+
+            //Ejecutamos las eliminaciones de 100 en 100 y añadimos los triples al Grafo de carga 
+            while (subjects.Count > 0)
+            {
+                List<string> deletes = new List<string>();
+                foreach (string entityID in subjects.ToList())
+                {
+                    IUriNode t_subject = pDataGraph.CreateUriNode(UriFactory.Create(entityID));
+                    IUriNode t_predicate = pDataGraph.CreateUriNode(UriFactory.Create(endedAtTimeProperty));
+                    ILiteralNode t_object = pDataGraph.CreateLiteralNode(pActivityEndedAtTime.ToString("yyyy-MM-ddTHH:mm:ss.fffzzz"),new Uri("http://www.w3.org/2001/XMLSchema#datetime"));
+                    pDataGraph.Assert(new Triple(t_subject, t_predicate, t_object));
+                   
+                    string stringDelete = $@"   {{
+                                                                ?s ?p ?o. 
+                                                                FILTER(?s = <{entityID}> AND ?p =<{endedAtTimeProperty}>)
+                                                            }}";
+                    deletes.Add(stringDelete);
+                    subjects.Remove(entityID);
+                    if (deletes.Count >= 100)
+                    {
+                        break;
+                    }
+                }
+                string queryDeleteEndedAtTime = $@"    DELETE {{ ?s ?p ?o. }}
+                                                                WHERE 
+                                                                {{
+                                                                    {{{string.Join("}UNION{", deletes)}}}
+                                                                }}";
+                _SparqlUtility.SelectData(_SPARQLEndpoint, _Graph, queryDeleteEndedAtTime, _QueryParam, _Username, _Password);
+            }
         }
 
         /// <summary>
