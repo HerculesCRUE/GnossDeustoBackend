@@ -26,9 +26,9 @@
 
 [Conexión a Triple Store](#conexión-a-triple-store)
 
-[Configuración de appsettings.json](#configuración-de-appsettings.json)
+[Configuración de appsettings.json](#configuración-de-appsettingsjson)
 
-[Configuración de Linked_Data_Server_Config.json](#configuración-de-linked-data-server-config.json)
+[Configuración de Linked_Data_Server_Config.json](#configuración-de-linked-data-server-configjson)
 
 [Dependencias](#dependencias)
 
