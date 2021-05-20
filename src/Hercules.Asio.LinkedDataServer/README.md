@@ -71,6 +71,7 @@ El SPARQL Endpoint provisional se encuentra disponible en un servidor de la Univ
 http://155.54.239.204:8890/sparql
 
 ## Configuración de appsettings.json
+Este es el fichero de configuración general del servicio en el que se establecen las configuraciones referentes al endpoint SPARQL y otrsa configuraciones generales
 
     {
 		"Logging": {
@@ -107,6 +108,8 @@ Las opciones de configuración son:
  - UrlHome: Url con la que enlazar el logo de la cabecera 'Hércules'
 
 ## Configuración de Linked_Data_Server_Config.json
+En este fichero se pueden configurar las personalizaciones a aplicar en las fichas de las entidades en función de su rdf:type
+
 
     {
 		"ConfigTables": [
@@ -180,19 +183,31 @@ Las opciones de configuración son:
 	}
 
 Las opciones de configuración son: 
- - ConfigTables.rdfType: Si la entidad es del mismo rdfType, se muestra la tabla
- - ConfigTables.tables.name: Nombre de la tabla a mostrar
- - ConfigTables.tables.fields: Nombre de los campos a mostrar en la tabla
- - ConfigTables.tables.query: Consulta que obtiene los datos a mostrar en la tabla
- - ExcludeRelatedEntity: Entidades relacionadas a excluir
- - ConfigArborGraphs.icons: Icono a mostrar en el gráfico según su rdfType
- - arborGraphsRdfType.rdfType: rdfType de la entidad principal del gráfico
- - arborGraphsRdfType.arborGraps.name: Nombre del gráfico a mostrar
- - arborGraphsRdfType.arborGraps.properties.name: Nombre de las propiedades del gráfico
- - arborGraphsRdfType.arborGraps.properties.query: Consulta que obtiene los datos a mostrar en el gráfico
+ - ConfigTables: En esta sección se definen las tablas que se mostrarán en la fichas de la entidades en función de los siguientes parámetros:
+ 	- ConfigTables.rdfType: rdf:type de las entidades a las que afectará esta configuración.
+ 	- ConfigTables.tables: Tablas que se mostrarán en las entidades que tengan el rdf:type especificado en el punto anterior.
+ 		- ConfigTables.tables.name: Nombre de la tabla a mostrar.
+ 		- ConfigTables.tables.fields: Nombre de los campos a mostrar en la tabla.
+ 		- ConfigTables.tables.query: Consulta que obtiene los datos a mostrar en la tabla.
+ 		- 
+ - ExcludeRelatedEntity: rdf:type de las entidades en las que queramos que no se incluya la sección 'Entidades relacionadas'
+
+ - ConfigArborGraphs: En esta sección se definen los gráficos de grafo que se mostrarán en la fichas de la entidades en función de los siguientes parámetros:
+	 - ConfigArborGraphs.icons: Icono a mostrar en el gráfico según su rdf:type
+		- ConfigArborGraphs.icons.rdfType: rdf:type de la entidad a la que se le quiere aplicar el icono.
+		- ConfigArborGraphs.icons.icono: Icono a mostrar en el gráfico según su rdfType.
+	- ConfigArborGraphs.arborGraphsRdfType: Configuración de los gráficos de grafo en función del rdf:type.
+		- ConfigArborGraphs.arborGraphsRdfType.rdfType: rdf:type de las entidades a las que afectará esta configuración.
+		- ConfigArborGraphs.arborGraphsRdfType.arborGraps: Gráficos que se mostrarán en las entidades que tengan el rdf:type especificado en el punto anterior.
+			- ConfigArborGraphs.arborGraphsRdfType.arborGraps.name: Nombre del gráfico a mostrar
+			- ConfigArborGraphs.arborGraphsRdfType.arborGraps.properties: Propiedades a mostrar en el grafo
+			- ConfigArborGraphs.arborGraphsRdfType.arborGraps.properties.name: Nombre de la propiedad
+			- ConfigArborGraphs.arborGraphsRdfType.arborGraps.properties.query: Consulta que obtiene los datos a mostrar en el gráfico
+
  - PropsTitle: Propiedades de la ontología para utilizar como título de las entidades en la presentación de la web. Generalmente http://purl.org/roh/mirror/foaf#name para las personas y http://purl.org/roh#title para el resto de entidades
- - PropsTransform.property: Propiedades cuya presentación en la web se transforma. Se visualizarán transformadas como enlaces externos según lo especificado en PropsTransform.transform
- - PropsTransform.transform: Las propiedades especificadas en PropsTransform.property se visualizarán como un hipervínculo en la web según lo especificado en esta configuración
+ - PropsTransform: Propiedades que serán transformadas en la visualizació de las fichas de las entidades.
+ 	- PropsTransform.property: Propiedades cuya presentación en la web se transforma. Se visualizarán transformadas como enlaces externos según lo especificado en PropsTransform.transform
+ 	- PropsTransform.transform: Las propiedades especificadas en PropsTransform.property se visualizarán como un hipervínculo en la web según lo especificado en esta configuración
 
 ## Dependencias
 
