@@ -131,8 +131,27 @@ namespace CargaDataSetMurcia.Model
                     numProcesados++;
                     Graph g = new Graph();
                     g.LoadFromFile(file);
+
+                    HashSet<string> asioSubjects = new HashSet<string>();
+                    {
+                        SparqlResultSet sparqlResultSet = (SparqlResultSet)g.ExecuteQuery("select distinct ?s where{?s ?p ?o. FILTER(isURI(?s)) MINUS {?s2 ?p2 ?s }}");
+                        foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
+                        {
+                            string s = sparqlResult["s"].ToString();
+                            asioSubjects.Add(s);
+                        }
+                    }
+                    //Modificamos el grafo para añadir la fecha de actualización
+                    foreach (string id in asioSubjects)
+                    {
+                        INode sSameAs = g.CreateUriNode(UriFactory.Create(id));
+                        INode pSameAs = g.CreateUriNode(UriFactory.Create("http://www.w3.org/ns/prov#endedAtTime"));
+                        INode oSameAs = g.CreateLiteralNode(DateTime.UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss.fffzzzzz"), UriFactory.Create("http://www.w3.org/2001/XMLSchema#datetime"));
+                        g.Assert(new Triple(sSameAs, pSameAs, oSameAs));
+                    }
+
                     grafoCarga.Merge(g);
-                    if (numEntities >= 200)
+                    if (numEntities >= 100)
                     {
                         CargarGrafo(grafoCarga, pSparqlASIO, pSparqlASIO_Graph, pUriUrisFactory);
                         numEntities = 0;
@@ -643,7 +662,7 @@ namespace CargaDataSetMurcia.Model
                             elemento.HORASDEDICADAS = node.SelectSingleNode("HORASDEDICADAS").InnerText;
                             break;
                         case "CODTIPOMOTIVOCAMBIOFECHA":
-                            elemento.CODTIPOMOTIVOCAMBIOFECHA = node.SelectSingleNode("CODTIPOMOTIVOCAMBIOFECHA").InnerText;
+                            //elemento.CODTIPOMOTIVOCAMBIOFECHA = node.SelectSingleNode("CODTIPOMOTIVOCAMBIOFECHA").InnerText;
                             break;
                         case "MOTIVOCAMBIOFECHA":
                             elemento.MOTIVOCAMBIOFECHA = node.SelectSingleNode("MOTIVOCAMBIOFECHA").InnerText;

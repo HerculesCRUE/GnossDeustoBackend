@@ -35,7 +35,7 @@ namespace CargaDataSetMurcia.Model
         /// <param name="pPassword">Password</param>
         public static void LoadTriples(List<string> pTriples, string pSPARQLEndpoint, string pGraph, string pUsername, string pPassword)
         {
-            int maxTriples = 500;
+            int maxTriples = 1000;
 
             List<string> listNotBlankNodeTriples = new List<string>();
             List<string> listBlankNodeTriples = new List<string>();
