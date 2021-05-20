@@ -280,6 +280,11 @@ Ahora podemos estabeces límites en nuestros sitios de Apache. A continuacón po
  	MaxConnPerIP 2 // Como máximo dos conexiones por IP  
  	NoIPLimit image / * // Sin restricción de conexión IP en archivos de imagen
 
+Estos dos módulos son bastante potentes y podemos ver mas configuraciones en los siguientes enlaces:
+
+	https://svn.apache.org/repos/asf/httpd/sandbox/mod_bw/mod_bw.txt
+	https://dominia.org/djao/limitipconn2-README
+
 ## Despliegue de los servicios de back
 
 Para simplificar el despliegue de los servicios de back, hemos creado un script que debemos descargar en nuestra máquinas para servicios de back. Partiendo desde la home del usurio (ej. /home/usuario/).
