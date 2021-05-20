@@ -30,6 +30,8 @@
 
 [Configuración de Linked_Data_Server_Config.json](#configuración-de-linked-data-server-configjson)
 
+[Vista de las fichas](#vista-de-las-fichas)
+
 [Dependencias](#dependencias)
 
 
@@ -209,7 +211,7 @@ Las opciones de configuración son:
  	- PropsTransform.property: Propiedades cuya presentación en la web se transforma. Se visualizarán transformadas como enlaces externos según lo especificado en PropsTransform.transform
  	- PropsTransform.transform: Las propiedades especificadas en PropsTransform.property se visualizarán como un hipervínculo en la web según lo especificado en esta configuración
 
-##
+## Vista de las fichas
 
 La vista que se utiliza para la presentación de las entidades del Linked Data Server es la siguiente: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.LinkedDataServer/Linked_Data_Server/Views/Home/Index.cshtml
 
