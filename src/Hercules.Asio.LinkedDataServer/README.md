@@ -191,7 +191,7 @@ Las opciones de configuración son:
  		- ConfigTables.tables.name: Nombre de la tabla a mostrar.
  		- ConfigTables.tables.fields: Nombre de los campos a mostrar en la tabla.
  		- ConfigTables.tables.query: Consulta que obtiene los datos a mostrar en la tabla.
- 		- 
+		
  - ExcludeRelatedEntity: rdf:type de las entidades en las que queramos que no se incluya la sección 'Entidades relacionadas'
 
  - ConfigArborGraphs: En esta sección se definen los gráficos de grafo que se mostrarán en la fichas de la entidades en función de los siguientes parámetros:
