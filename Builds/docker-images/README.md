@@ -238,7 +238,7 @@ Por último, para que la aplicación disponga de los archivos necesarios tenemos
 
 	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/contenido.tar.gz
 
-###Limitar Apach###
+###### Limitar Apache
 
 Si
 
