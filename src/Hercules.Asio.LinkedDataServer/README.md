@@ -20,7 +20,7 @@
 
 ## LINKED DATA SERVER de ASIO
 
-ó[Introducción](#introduccion)
+[Introducción](#introducción)
 
 [Ejemplos de resolución de URIs](#ejemplos-de-resolución-de-uris) 
 
