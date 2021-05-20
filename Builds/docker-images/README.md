@@ -238,10 +238,57 @@ Por último, para que la aplicación disponga de los archivos necesarios tenemos
 
 	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/contenido.tar.gz
 
+###### Limitar Apache
+
+Si queremos poner limitaciones de ancho de banda o limitar las conexiones por IP de nuestro Apache, debemos instalar los módulos mod_limitipconn y mod_bw siguiendo las instruccione que vienen a continuación. Antes de comenzar debemos tener los devel de Apache instalados. 
+En RHEL:
+
+	yum -y install httpd-devel
+	
+En Ubuntu:
+
+	apt install apache-devel
+
+Descargamos los módulos en la ruta que queramos:
+
+	wget http://dominia.org/djao/limit/mod_limitipconn-0.24.tar.bz2  
+	wget http://ivn.cl/files/source/mod_bw-0.92.tgz  
+
+Descomprimimos e instalamos:
+
+	tar xvf mod_limitipconn-0.24.tar.bz2
+	cd mod_limitipconn-0.24  
+	sudo apxs -c -i -a mod_limitipconn.c  
+	cd ..  
+	tar xvf mod_bw-0.92.tgz  
+	
+Para poder el segundo módulos debemos editar el archivo mod_bw.c y sustituir remote_addr por client_addr (tres ocurrencias). Una vez hecho esto podemos instalarlo:
+
+	apxs -c -i mod_bw.c 
+
+Para activar los módulos debemos editar el httpd.conf y añadir estas dos líneas:
+
+	ExtendedStatus On
+	LoadModule limitipconn_module modules/mod_limitipconn.so
+	LoadModule bw_module modules/mod_bw.so
+
+Ahora podemos estabeces límites en nuestros sitios de Apache. A continuacón podemos ver un ejemplo:
+
+	BandwidthModule On // Abrir mod_bw  
+ 	ForceBandWidthModule On // Igual que el anterior  
+ 	LargeFileLimit .rar 1 100000 // Limite todos los archivos rar para descargar 100K por segundo  
+ 	MaxConnPerIP 2 // Como máximo dos conexiones por IP  
+ 	NoIPLimit image / * // Sin restricción de conexión IP en archivos de imagen
+
+Estos dos módulos son bastante potentes y podemos ver mas configuraciones en los siguientes enlaces:
+
+	https://svn.apache.org/repos/asf/httpd/sandbox/mod_bw/mod_bw.txt
+	https://dominia.org/djao/limitipconn2-README
+
 ## Despliegue de los servicios de back
 
 Para simplificar el despliegue de los servicios de back, hemos creado un script que debemos descargar en nuestra máquinas para servicios de back. Partiendo desde la home del usurio (ej. /home/usuario/).
-
+	
 	wget https://raw.githubusercontent.com/HerculesCRUE/GnossDeustoBackend/master/Builds/docker-images/docs/docker-servicios-back/actualizar-back.sh
 	
 Este script clonará los repositorios necesarios y luego generará las imágenes docker automáticamente. Le debemos dar permisos de ejecución.
