@@ -1,0 +1,19 @@
+<EntityDescriptor cacheDuration="PT1H" entityID="http://herc-as-front-desa.atica.um.es/login/metadataasio.xml" xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
+	<SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+		<AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://herc-as-front-desa.atica.um.es/login/Auth/AssertionConsumerService" isDefault="true" index="0" />
+		<AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="http://herc-as-front-desa.atica.um.es/login/Auth/AssertionConsumerService" isDefault="false" index="1" />
+		<AttributeConsumingService index="0" isDefault="true">
+			<ServiceName xml:lang="en">SP</ServiceName>
+			<RequestedAttribute isRequired="true" Name="urn:rol" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified" FriendlyName="Roles" />
+		</AttributeConsumingService>
+		<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:emailAddress</NameIDFormat>
+	</SPSSODescriptor>
+	<Organization>
+		<OrganizationName xml:lang="es">GNOSS</OrganizationName>
+		<OrganizationDisplayName xml:lang="es">GNOSS</OrganizationDisplayName>
+		<OrganizationURL xml:lang="es">https://www.gnoss.com/</OrganizationURL>
+	</Organization>
+	<ContactPerson contactType="other">
+		<EmailAddress>alvaropalacios@gnoss.com</EmailAddress>
+	</ContactPerson>
+</EntityDescriptor>

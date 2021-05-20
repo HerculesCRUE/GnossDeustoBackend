@@ -15,6 +15,7 @@ docker build -t xmlrdfconversor src/Hercules.Asio.XML_RDF_Conversor/XML_RDF_Conv
 docker build -t apicvn src/cvn/
 docker build -t apibridge src/fair/bridge/
 docker build -t bridgeswagger src/fair/bridge/codegen_server/
+docker build -t herculessaml src/Hercules.Asio.SAML/Hercules-SAML/
 cd ..
 cd oai-pmh
 git pull https://github.com/HerculesCRUE/oai-pmh.git

@@ -24,6 +24,8 @@
 
 [Vista de una tarea](#vista-de-una-tarea)
 
+[Resolución de problemas de desambiguación](#resolución-de-problemas-de-desambiguación)
+
 [Vista de una tarea recurrente](#vista-de-una-tarea-recurrente)
 
 [Listado de validaciones](#listado-de-validaciones)
@@ -128,6 +130,9 @@ estos errores.
 En la siguiente imágen se muestra un error de ejecución que se haya podido dar por un error puntual, se puede volver a lanzar pulsando el botón de reintentar.
 
 ![](img/DiscoverError.png)
+
+Resolución de problemas de desambiguación
+-----------------------------
 
 A continuación se muestra un error en el que se requiere la intervención del usuario eligiendo la opción que sea correcta enter las opciones disponibles o no elegir ninguna opción
 en el caso de que no sea ninguna la opción correcta. En esta pantalla se muestra la confianza de las opciones siendo 1 la más alta, además se puede visualizar los datos de 

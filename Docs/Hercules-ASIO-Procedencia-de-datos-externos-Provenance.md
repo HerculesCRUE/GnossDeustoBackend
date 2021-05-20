@@ -1,13 +1,13 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
-| Fecha         | 03/12/2020                                                   |
+| Fecha         | 19/05/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Hércules ASIO. Procedencia de datos - Provenance| 
 |Descripción|Gestión de la procedencia de los datos incorporados a ASIO desde fuentes externas|
-|Versión|1.1|
+|Versión|1.2|
 |Módulo|API DISCOVER|
 |Tipo|Especificación|
-|Cambios de la Versión|Cambio en el grafo que alojará los triples de provenance|
+|Cambios de la Versión|Añadida información acerca del tratamiento de los datos provenientes del SGI|
 
 # Hércules Backend ASIO. Procedencia de datos - Provenance
 
@@ -22,7 +22,13 @@
 Introducción
 ============
 La información de Hércules ASIO procederá, en su mayor parte, del sistema SGI de la universidad, previsiblemente Hércules SGI. Sin embargo, las funciones de descubrimiento van a incorporar datos procedentes de fuentes de información externas a Hércules.
-En este documento se explica como se gestionará la información de procedencia de estos datos, para que su origen se pueda saber en cualquier momento.
+En este documento se explica como se gestionará la información de procedencia de estos datos externos, para que su origen se pueda saber en cualquier momento.
+
+En cuanto a los datos "internos", que serán los procedentes del SGI de la universidad, el sistema de carga se limitará a indicar la fecha de carga mediante el atributo prov:endedAtTime sin describir la procedencia completa de cada entidad. Por ejemplo:
+
+    roh:res/researcher/id1 prov:endedAtTime "2021-04-25T03:40:00Z"^^xsd:dateTime;
+
+Generar más triples de procedencia para cada entidad, indicando el agente o la organización, supondría una sobrecarga de datos en el sistema sin justificación desde el punto de vista de la explotación de la información, ya que están implícitos por el origen SGI de los datos. 
 
 Datos externos
 ==========
