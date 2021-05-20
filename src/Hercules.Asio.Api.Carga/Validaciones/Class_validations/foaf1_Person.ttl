@@ -10,12 +10,12 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix bibo: <http://purl.org/roh/mirror/bibo#>.
 @prefix foaf: <https://xmlns.com/foaf/0.1/>.
-@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix vivo: <http://purl.org/roh/mirror/vivo#>.
 @prefix skos1: <http://purl.org/roh/mirror/skos#>.
 @prefix terms: <http://purl.org/dc/terms/>.
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>.
+@prefix schema: <https://schema.org/>.
 @prefix uneskos: <http://purl.org/umu/uneskos#>.
 @prefix skos-thes: <http://purl.org/iso25964/skos-thes#>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
@@ -28,9 +28,12 @@ roh:foaf1_PersonShape
 	sh:property roh:someValuesDataType__foaf1__Person__foaf1__firstName;
 	sh:property roh:someValuesDataType__foaf1__Person__foaf1__surname;
 	sh:property roh:someValuesDataType__foaf1__Person__vivo__identifier;
+	sh:property roh:someValuesDataType__foaf1__Person__foaf1__name;
 	sh:property roh:allValuesDataType__foaf1__Person__foaf1__surname;
+	sh:property roh:allValuesDataType__foaf1__Person__vivo__identifier;
+	sh:property roh:allValuesDataType__foaf1__Person__foaf1__name;
 	sh:property roh:allValuesDataType__foaf1__Person__foaf1__firstName;
-	sh:property roh:allValuesDataType__foaf1__Person__vivo__identifier.
+	sh:property roh:maxCardinalityfoaf1__Person__foaf1__name.
 roh:someValuesDataType__foaf1__Person__foaf1__firstName 
 	sh:severity sh:Violation;
 	sh:path foaf1:firstName;
@@ -52,15 +55,30 @@ roh:someValuesDataType__foaf1__Person__vivo__identifier
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
 	].
+roh:someValuesDataType__foaf1__Person__foaf1__name 
+	sh:severity sh:Violation;
+	sh:path foaf1:name;
+	sh:qualifiedMinCount  1;
+	sh:qualifiedValueShape [
+		sh:datatype xsd:string;
+	].
 roh:allValuesDataType__foaf1__Person__foaf1__surname 
 	sh:severity sh:Violation;
 	sh:path foaf1:surname;
-	sh:datatype xsd:string.
-roh:allValuesDataType__foaf1__Person__foaf1__firstName 
-	sh:severity sh:Violation;
-	sh:path foaf1:firstName;
 	sh:datatype xsd:string.
 roh:allValuesDataType__foaf1__Person__vivo__identifier 
 	sh:severity sh:Violation;
 	sh:path vivo:identifier;
 	sh:datatype xsd:string.
+roh:allValuesDataType__foaf1__Person__foaf1__name 
+	sh:severity sh:Violation;
+	sh:path foaf1:name;
+	sh:datatype xsd:string.
+roh:allValuesDataType__foaf1__Person__foaf1__firstName 
+	sh:severity sh:Violation;
+	sh:path foaf1:firstName;
+	sh:datatype xsd:string.
+roh:maxCardinalityfoaf1__Person__foaf1__name 
+	sh:severity sh:Violation;
+	sh:path foaf1:name;
+	sh:maxCount  1.

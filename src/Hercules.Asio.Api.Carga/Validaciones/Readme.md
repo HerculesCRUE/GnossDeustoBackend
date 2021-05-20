@@ -1,13 +1,13 @@
 ![](../../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 3/05/20201                                                  |
+| Fecha         | 20/05/20201                                                  |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|API CARGA Gestión de Validaciones| 
 |Descripción|Manual de la gestión de validaciones del API de Carga|
 |Versión|1.2|
 |Módulo|API CARGA|
 |Tipo|Manual|
-|Cambios de la Versión|Revisión de enlaces|
+|Cambios de la Versión|Actualización de las validaciones|
 
 
 # Gestión de validaciones
@@ -58,12 +58,14 @@ Las validaciones se efectuan mediante [Shapes SHACL](https://www.w3.org/TR/shacl
 		]
 	}
 	
-7.- En esta carpeta se encuentran todas las validaciones extraídas de la ontología a fecha 15/5/2020.
+7.- En esta carpeta se encuentran todas las validaciones extraídas de la ontología a fecha 20/5/2021.
 
 	domain.ttl: Contiene todas las validaciones de restricciones de dominio extraídas del OWL de la ontología ROH.
 	rangeDataType.ttl: Contiene todas las validaciones de restricciones de rango de dataTypes extraídas del OWL de la ontología ROH.
 	rangeObject.ttl: Contiene todas las validaciones de restricciones de rango de objetos extraídas del OWL de la ontología ROH.
-	Class_validations: Contiene todas las validaciones propias de cada una de las clases del OWL de la ontología ROH.
+	Class_validations: Carpeta con todas las validaciones propias de cada una de las clases del OWL de la ontología ROH.
+	backup: Carpeta con un backup de las validaciones extraídas de la ontología a fecha 15/5/2020.
+	Radboud: Carpeta con validaciones para los datos de la Universidad de Radboud.
 	
 8.- Las validaciones cargadas en las configuraciones se corresponden con las validaciones del repositorio OAI_PMH_CVN, cuyo identificador es 5efac0ad-ec4e-467d-bbf5-ce3f64edb46a.
 Se pueden consultar con esta petición:

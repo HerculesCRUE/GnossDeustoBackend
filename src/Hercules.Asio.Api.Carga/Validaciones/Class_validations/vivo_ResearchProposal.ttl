@@ -10,12 +10,12 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix bibo: <http://purl.org/roh/mirror/bibo#>.
 @prefix foaf: <https://xmlns.com/foaf/0.1/>.
-@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix vivo: <http://purl.org/roh/mirror/vivo#>.
 @prefix skos1: <http://purl.org/roh/mirror/skos#>.
 @prefix terms: <http://purl.org/dc/terms/>.
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>.
+@prefix schema: <https://schema.org/>.
 @prefix uneskos: <http://purl.org/umu/uneskos#>.
 @prefix skos-thes: <http://purl.org/iso25964/skos-thes#>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
@@ -33,7 +33,7 @@ roh:allValuesClass__vivo__ResearchProposal__vivo__relates
 	sh:path vivo:relates;
 	sh:or ( 
 		[sh:class roh:ProjectContract]
-		[sh:class roh:Justification]
 		[sh:class vivo:Project]
+		[sh:class roh:Justification]
 		[sh:class vivo:ResearchProposal]
 	) .

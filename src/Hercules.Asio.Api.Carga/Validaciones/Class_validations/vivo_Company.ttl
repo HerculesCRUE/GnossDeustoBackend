@@ -22,19 +22,21 @@
 @prefix roh: <http://purl.org/roh#>.
 @prefix foaf1: <http://purl.org/roh/mirror/foaf#>.
 @prefix vcard: <http://purl.org/roh/mirror/vcard#>.
-roh:bibo_BookShape
+@prefix geonames: <http://purl.org/roh/mirror/geonames#>.
+@prefix ero: <http://purl.org/roh/mirror/obo/ero#>.
+roh:vivo_CompanyShape
 	a sh:NodeShape ;
-	sh:targetClass bibo:Book ;
-	sh:property roh:someValuesDataType__bibo__Book__roh__isbn;
-	sh:property roh:allValuesDataType__bibo__Book__roh__isbn.
-roh:someValuesDataType__bibo__Book__roh__isbn 
+	sh:targetClass vivo:Company ;
+	sh:property roh:someValuesDataType__vivo__Company__roh__publicCompany;
+	sh:property roh:allValuesDataType__vivo__Company__roh__publicCompany.
+roh:someValuesDataType__vivo__Company__roh__publicCompany 
 	sh:severity sh:Violation;
-	sh:path roh:isbn;
+	sh:path roh:publicCompany;
 	sh:qualifiedMinCount  1;
 	sh:qualifiedValueShape [
-		sh:datatype xsd:string;
+		sh:datatype xsd:boolean;
 	].
-roh:allValuesDataType__bibo__Book__roh__isbn 
+roh:allValuesDataType__vivo__Company__roh__publicCompany 
 	sh:severity sh:Violation;
-	sh:path roh:isbn;
-	sh:datatype xsd:string.
+	sh:path roh:publicCompany;
+	sh:datatype xsd:boolean.

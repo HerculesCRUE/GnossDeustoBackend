@@ -10,35 +10,36 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix bibo: <http://purl.org/roh/mirror/bibo#>.
 @prefix foaf: <https://xmlns.com/foaf/0.1/>.
-@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix vivo: <http://purl.org/roh/mirror/vivo#>.
 @prefix skos1: <http://purl.org/roh/mirror/skos#>.
 @prefix terms: <http://purl.org/dc/terms/>.
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>.
+@prefix schema: <https://schema.org/>.
 @prefix uneskos: <http://purl.org/umu/uneskos#>.
 @prefix skos-thes: <http://purl.org/iso25964/skos-thes#>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
 @prefix roh: <http://purl.org/roh#>.
 @prefix foaf1: <http://purl.org/roh/mirror/foaf#>.
+@prefix vcard: <http://purl.org/roh/mirror/vcard#>.
 roh:roh_LanguageCertificateShape
 	a sh:NodeShape ;
 	sh:targetClass roh:LanguageCertificate ;
-	sh:property roh:someValuesDataType__roh__LanguageCertificate__roh__listeningSkill;
-	sh:property roh:someValuesDataType__roh__LanguageCertificate__roh__readingSkill;
-	sh:property roh:someValuesDataType__roh__LanguageCertificate__roh__spokenInteractionSkill;
-	sh:property roh:someValuesDataType__roh__LanguageCertificate__roh__speakingSkill;
-	sh:property roh:someValuesDataType__roh__LanguageCertificate__roh__writingSkill;
 	sh:property roh:someValuesDataType__roh__LanguageCertificate__roh__language;
-	sh:property roh:allValuesDataType__roh__LanguageCertificate__roh__readingSkill;
-	sh:property roh:allValuesDataType__roh__LanguageCertificate__roh__listeningSkill;
-	sh:property roh:allValuesDataType__roh__LanguageCertificate__roh__writingSkill;
+	sh:property roh:someValuesDataType__roh__LanguageCertificate__roh__readingSkill;
+	sh:property roh:someValuesDataType__roh__LanguageCertificate__roh__speakingSkill;
+	sh:property roh:someValuesDataType__roh__LanguageCertificate__roh__spokenInteractionSkill;
+	sh:property roh:someValuesDataType__roh__LanguageCertificate__roh__listeningSkill;
+	sh:property roh:someValuesDataType__roh__LanguageCertificate__roh__writingSkill;
+	sh:property roh:allValuesDataType__roh__LanguageCertificate__roh__language;
 	sh:property roh:allValuesDataType__roh__LanguageCertificate__roh__spokenInteractionSkill;
-	sh:property roh:allValuesDataType__roh__LanguageCertificate__roh__speakingSkill;
-	sh:property roh:allValuesDataType__roh__LanguageCertificate__roh__language.
-roh:someValuesDataType__roh__LanguageCertificate__roh__listeningSkill 
+	sh:property roh:allValuesDataType__roh__LanguageCertificate__roh__writingSkill;
+	sh:property roh:allValuesDataType__roh__LanguageCertificate__roh__listeningSkill;
+	sh:property roh:allValuesDataType__roh__LanguageCertificate__roh__readingSkill;
+	sh:property roh:allValuesDataType__roh__LanguageCertificate__roh__speakingSkill.
+roh:someValuesDataType__roh__LanguageCertificate__roh__language 
 	sh:severity sh:Violation;
-	sh:path roh:listeningSkill;
+	sh:path roh:language;
 	sh:qualifiedMinCount  1;
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
@@ -50,6 +51,13 @@ roh:someValuesDataType__roh__LanguageCertificate__roh__readingSkill
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
 	].
+roh:someValuesDataType__roh__LanguageCertificate__roh__speakingSkill 
+	sh:severity sh:Violation;
+	sh:path roh:speakingSkill;
+	sh:qualifiedMinCount  1;
+	sh:qualifiedValueShape [
+		sh:datatype xsd:string;
+	].
 roh:someValuesDataType__roh__LanguageCertificate__roh__spokenInteractionSkill 
 	sh:severity sh:Violation;
 	sh:path roh:spokenInteractionSkill;
@@ -57,9 +65,9 @@ roh:someValuesDataType__roh__LanguageCertificate__roh__spokenInteractionSkill
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
 	].
-roh:someValuesDataType__roh__LanguageCertificate__roh__speakingSkill 
+roh:someValuesDataType__roh__LanguageCertificate__roh__listeningSkill 
 	sh:severity sh:Violation;
-	sh:path roh:speakingSkill;
+	sh:path roh:listeningSkill;
 	sh:qualifiedMinCount  1;
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
@@ -71,34 +79,27 @@ roh:someValuesDataType__roh__LanguageCertificate__roh__writingSkill
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
 	].
-roh:someValuesDataType__roh__LanguageCertificate__roh__language 
+roh:allValuesDataType__roh__LanguageCertificate__roh__language 
 	sh:severity sh:Violation;
 	sh:path roh:language;
-	sh:qualifiedMinCount  1;
-	sh:qualifiedValueShape [
-		sh:datatype xsd:string;
-	].
-roh:allValuesDataType__roh__LanguageCertificate__roh__readingSkill 
-	sh:severity sh:Violation;
-	sh:path roh:readingSkill;
-	sh:datatype xsd:string.
-roh:allValuesDataType__roh__LanguageCertificate__roh__listeningSkill 
-	sh:severity sh:Violation;
-	sh:path roh:listeningSkill;
-	sh:datatype xsd:string.
-roh:allValuesDataType__roh__LanguageCertificate__roh__writingSkill 
-	sh:severity sh:Violation;
-	sh:path roh:writingSkill;
 	sh:datatype xsd:string.
 roh:allValuesDataType__roh__LanguageCertificate__roh__spokenInteractionSkill 
 	sh:severity sh:Violation;
 	sh:path roh:spokenInteractionSkill;
 	sh:datatype xsd:string.
+roh:allValuesDataType__roh__LanguageCertificate__roh__writingSkill 
+	sh:severity sh:Violation;
+	sh:path roh:writingSkill;
+	sh:datatype xsd:string.
+roh:allValuesDataType__roh__LanguageCertificate__roh__listeningSkill 
+	sh:severity sh:Violation;
+	sh:path roh:listeningSkill;
+	sh:datatype xsd:string.
+roh:allValuesDataType__roh__LanguageCertificate__roh__readingSkill 
+	sh:severity sh:Violation;
+	sh:path roh:readingSkill;
+	sh:datatype xsd:string.
 roh:allValuesDataType__roh__LanguageCertificate__roh__speakingSkill 
 	sh:severity sh:Violation;
 	sh:path roh:speakingSkill;
-	sh:datatype xsd:string.
-roh:allValuesDataType__roh__LanguageCertificate__roh__language 
-	sh:severity sh:Violation;
-	sh:path roh:language;
 	sh:datatype xsd:string.

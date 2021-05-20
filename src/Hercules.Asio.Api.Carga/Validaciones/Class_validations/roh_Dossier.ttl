@@ -10,37 +10,31 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix bibo: <http://purl.org/roh/mirror/bibo#>.
 @prefix foaf: <https://xmlns.com/foaf/0.1/>.
-@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix vivo: <http://purl.org/roh/mirror/vivo#>.
 @prefix skos1: <http://purl.org/roh/mirror/skos#>.
 @prefix terms: <http://purl.org/dc/terms/>.
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>.
+@prefix schema: <https://schema.org/>.
 @prefix uneskos: <http://purl.org/umu/uneskos#>.
 @prefix skos-thes: <http://purl.org/iso25964/skos-thes#>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
 @prefix roh: <http://purl.org/roh#>.
 @prefix foaf1: <http://purl.org/roh/mirror/foaf#>.
+@prefix vcard: <http://purl.org/roh/mirror/vcard#>.
 roh:roh_DossierShape
 	a sh:NodeShape ;
 	sh:targetClass roh:Dossier ;
 	sh:property roh:someValuesDataType__roh__Dossier__roh__title;
-	sh:property roh:someValuesDataType__roh__Dossier__vivo__description;
 	sh:property roh:someValuesDataType__roh__Dossier__vivo__identifier;
+	sh:property roh:someValuesDataType__roh__Dossier__vivo__description;
 	sh:property roh:allValuesDataType__roh__Dossier__roh__title;
-	sh:property roh:allValuesDataType__roh__Dossier__vivo__identifier;
 	sh:property roh:allValuesDataType__roh__Dossier__vivo__description;
+	sh:property roh:allValuesDataType__roh__Dossier__vivo__identifier;
 	sh:property roh:allValuesClass__roh__Dossier__vivo__relates.
 roh:someValuesDataType__roh__Dossier__roh__title 
 	sh:severity sh:Violation;
 	sh:path roh:title;
-	sh:qualifiedMinCount  1;
-	sh:qualifiedValueShape [
-		sh:datatype xsd:string;
-	].
-roh:someValuesDataType__roh__Dossier__vivo__description 
-	sh:severity sh:Violation;
-	sh:path vivo:description;
 	sh:qualifiedMinCount  1;
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
@@ -52,23 +46,30 @@ roh:someValuesDataType__roh__Dossier__vivo__identifier
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
 	].
+roh:someValuesDataType__roh__Dossier__vivo__description 
+	sh:severity sh:Violation;
+	sh:path vivo:description;
+	sh:qualifiedMinCount  1;
+	sh:qualifiedValueShape [
+		sh:datatype xsd:string;
+	].
 roh:allValuesDataType__roh__Dossier__roh__title 
 	sh:severity sh:Violation;
 	sh:path roh:title;
-	sh:datatype xsd:string.
-roh:allValuesDataType__roh__Dossier__vivo__identifier 
-	sh:severity sh:Violation;
-	sh:path vivo:identifier;
 	sh:datatype xsd:string.
 roh:allValuesDataType__roh__Dossier__vivo__description 
 	sh:severity sh:Violation;
 	sh:path vivo:description;
 	sh:datatype xsd:string.
+roh:allValuesDataType__roh__Dossier__vivo__identifier 
+	sh:severity sh:Violation;
+	sh:path vivo:identifier;
+	sh:datatype xsd:string.
 roh:allValuesClass__roh__Dossier__vivo__relates 
 	sh:severity sh:Violation;
 	sh:path vivo:relates;
 	sh:or ( 
-		[sh:class bibo:Report]
 		[sh:class vivo:Project]
+		[sh:class bibo:Report]
 		[sh:class roh:ProjectContract]
 	) .

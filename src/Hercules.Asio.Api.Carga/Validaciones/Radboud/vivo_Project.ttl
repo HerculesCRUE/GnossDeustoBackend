@@ -1,0 +1,38 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix bibo: <http://purl.org/roh/mirror/bibo#>.
+@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix vivo: <http://purl.org/roh/mirror/vivo#>.
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix roh: <http://purl.org/roh#>.
+@prefix bfo: <http://purl.org/roh/mirror/obo/bfo#>.
+roh:vivo_ProjectShape
+	a sh:NodeShape ;
+	sh:targetClass vivo:Project ;
+	sh:property roh:someValuesDataType__vivo__Project__roh__title;
+	sh:property roh:allValuesDataType__vivo__Project__roh__title;	
+	sh:property roh:allValuesClass__vivo__Project__vivo__dateTimeInterval;
+	sh:property roh:allValuesClass__vivo__Project__vivo__relates.	
+roh:someValuesDataType__vivo__Project__roh__title 
+	sh:severity sh:Violation;
+	sh:path roh:title;
+	sh:qualifiedMinCount  1;
+	sh:qualifiedValueShape [
+		sh:datatype xsd:string;
+	].
+roh:allValuesDataType__vivo__Project__roh__title 
+	sh:severity sh:Violation;
+	sh:path roh:title;
+	sh:datatype xsd:string.
+roh:allValuesClass__vivo__Project__vivo__dateTimeInterval 
+	sh:severity sh:Violation;
+	sh:path vivo:dateTimeInterval;
+	sh:class vivo:DateTimeInterval.
+roh:allValuesClass__vivo__Project__vivo__relates 
+	sh:severity sh:Violation;
+	sh:path vivo:relates;
+	sh:class bfo:BFO_0000023.

@@ -1,0 +1,62 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix bibo: <http://purl.org/roh/mirror/bibo#>.
+@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix vivo: <http://purl.org/roh/mirror/vivo#>.
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix roh: <http://purl.org/roh#>.
+roh:bibo_DocumentShape
+	a sh:NodeShape ;
+	sh:targetClass bibo:Document ;
+	sh:property roh:someValuesDataType__bibo__Document__roh__title;
+	sh:property roh:allValuesDataType__bibo__Document__roh__title;	
+	sh:property roh:allValuesDataType__bibo__Document__bibo__doi;
+	sh:property roh:allValuesDataType__bibo__Document__bibo__pageEnd;
+	sh:property roh:allValuesDataType__bibo__Document__bibo__pageStart;
+	sh:property roh:allValuesDataType__bibo__Document__vivo__dateTime;	
+	sh:property roh:allValuesClass__bibo__Document__vivo__hasPublicationVenue;
+	sh:property roh:allValuesClass__bibo__Document__bibo__authorList;
+	sh:property roh:allValuesClass__bibo__Document__roh__producedBy.	
+roh:someValuesDataType__bibo__Document__roh__title 
+	sh:severity sh:Violation;
+	sh:path roh:title;
+	sh:qualifiedMinCount  1;
+	sh:qualifiedValueShape [
+		sh:datatype xsd:string;
+	].
+roh:allValuesDataType__bibo__Document__roh__title 
+	sh:severity sh:Violation;
+	sh:path roh:title;
+	sh:datatype xsd:string.
+roh:allValuesDataType__bibo__Document__bibo__doi 
+	sh:severity sh:Violation;
+	sh:path roh:title;
+	sh:datatype xsd:string.
+roh:allValuesDataType__bibo__Document__bibo__pageEnd 
+	sh:severity sh:Violation;
+	sh:path roh:title;
+	sh:datatype xsd:string.
+roh:allValuesDataType__bibo__Document__bibo__pageStart 
+	sh:severity sh:Violation;
+	sh:path roh:title;
+	sh:datatype xsd:string.
+roh:allValuesDataType__bibo__Document__vivo__dateTime 
+	sh:severity sh:Violation;
+	sh:path vivo:dateTime;
+	sh:datatype xsd:datetime.
+roh:allValuesClass__bibo__Document__vivo__hasPublicationVenue 
+	sh:severity sh:Violation;
+	sh:path vivo:hasPublicationVenue;
+	sh:class bibo:Document.
+roh:allValuesClass__bibo__Document__bibo__authorList 
+	sh:severity sh:Violation;
+	sh:path bibo:authorList;
+	sh:class rdf:Seq.
+roh:allValuesClass__bibo__Document__roh__producedBy 
+	sh:severity sh:Violation;
+	sh:path roh:producedBy;
+	sh:class vivo:Project.

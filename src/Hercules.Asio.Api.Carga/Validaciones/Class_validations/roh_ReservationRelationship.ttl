@@ -22,19 +22,29 @@
 @prefix roh: <http://purl.org/roh#>.
 @prefix foaf1: <http://purl.org/roh/mirror/foaf#>.
 @prefix vcard: <http://purl.org/roh/mirror/vcard#>.
-roh:bibo_BookShape
+roh:roh_ReservationRelationshipShape
 	a sh:NodeShape ;
-	sh:targetClass bibo:Book ;
-	sh:property roh:someValuesDataType__bibo__Book__roh__isbn;
-	sh:property roh:allValuesDataType__bibo__Book__roh__isbn.
-roh:someValuesDataType__bibo__Book__roh__isbn 
+	sh:targetClass roh:ReservationRelationship ;
+	sh:property roh:someValuesClass__roh__ReservationRelationship__vivo__relates;
+	sh:property roh:allValuesClass__roh__ReservationRelationship__vivo__relates.
+roh:someValuesClass__roh__ReservationRelationship__vivo__relates 
 	sh:severity sh:Violation;
-	sh:path roh:isbn;
+	sh:path vivo:relates;
 	sh:qualifiedMinCount  1;
 	sh:qualifiedValueShape [
-		sh:datatype xsd:string;
+		sh:or ( 
+			[sh:class roh:Reservable]
+			[sh:class foaf1:Organization]
+			[sh:class roh:ReservableProviderRole]
+			[sh:class roh:ReservableConsumerRole]
+		) 
 	].
-roh:allValuesDataType__bibo__Book__roh__isbn 
+roh:allValuesClass__roh__ReservationRelationship__vivo__relates 
 	sh:severity sh:Violation;
-	sh:path roh:isbn;
-	sh:datatype xsd:string.
+	sh:path vivo:relates;
+	sh:or ( 
+		[sh:class roh:Reservable]
+		[sh:class roh:ReservableProviderRole]
+		[sh:class roh:ReservableConsumerRole]
+		[sh:class foaf1:Organization]
+	) .

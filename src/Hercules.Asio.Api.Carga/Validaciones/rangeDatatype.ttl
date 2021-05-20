@@ -10,12 +10,12 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix bibo: <http://purl.org/roh/mirror/bibo#>.
 @prefix foaf: <https://xmlns.com/foaf/0.1/>.
-@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix vivo: <http://purl.org/roh/mirror/vivo#>.
 @prefix skos1: <http://purl.org/roh/mirror/skos#>.
 @prefix terms: <http://purl.org/dc/terms/>.
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>.
+@prefix schema: <https://schema.org/>.
 @prefix uneskos: <http://purl.org/umu/uneskos#>.
 @prefix skos-thes: <http://purl.org/iso25964/skos-thes#>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
@@ -31,6 +31,14 @@ roh:rangeDatatyperoh__birthdateShape
 roh:rangeDatatyperoh__cumLaudeShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:cumLaude ;
+	sh:datatype xsd:boolean.
+roh:rangeDatatyperoh__dedicationPercentageShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:dedicationPercentage ;
+	sh:datatype xsd:double.
+roh:rangeDatatyperoh__excellenceLabelShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:excellenceLabel ;
 	sh:datatype xsd:boolean.
 roh:rangeDatatyperoh__foreseenJustificationDateShape
 	a sh:NodeShape ;
@@ -48,17 +56,9 @@ roh:rangeDatatyperoh__languageShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:language ;
 	sh:datatype xsd:string.
-roh:rangeDatatyperoh__excellenceLabelShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:excellenceLabel ;
-	sh:datatype xsd:boolean.
 roh:rangeDatatyperoh__markShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:mark ;
-	sh:datatype xsd:string.
-roh:rangeDatatyperoh__modalityShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:modality ;
 	sh:datatype xsd:string.
 roh:rangeDatatyperoh__monetaryAmountShape
 	a sh:NodeShape ;
@@ -68,37 +68,45 @@ roh:rangeDatatyperoh__needsEthicalValidationShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:needsEthicalValidation ;
 	sh:datatype xsd:boolean.
+roh:rangeDatatyperoh__modalityShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:modality ;
+	sh:datatype xsd:string.
+roh:rangeDatatyperoh__isStartupShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:isStartup ;
+	sh:datatype xsd:boolean.
 roh:rangeDatatyperoh__publicFundingShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:publicFunding ;
 	sh:datatype xsd:boolean.
-roh:rangeDatatyperoh__rankingShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:ranking ;
-	sh:datatype xsd:string.
 roh:rangeDatatyperoh__researchLineShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:researchLine ;
 	sh:datatype xsd:string.
+roh:rangeDatatyperoh__rankingShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:ranking ;
+	sh:datatype xsd:string.
+roh:rangeDatatyperoh__publicCompanyShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:publicCompany ;
+	sh:datatype xsd:boolean.
 roh:rangeDatatypebibo__issueShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  bibo:issue ;
-	sh:nodeKind sh:Literal.
-roh:rangeDatatypebibo__pageEndShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  bibo:pageEnd ;
 	sh:nodeKind sh:Literal.
 roh:rangeDatatypebibo__pageStartShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  bibo:pageStart ;
 	sh:nodeKind sh:Literal.
-roh:rangeDatatypefoaf1__firstNameShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  foaf1:firstName ;
-	sh:nodeKind sh:Literal.
 roh:rangeDatatypebibo__volumeShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  bibo:volume ;
+	sh:nodeKind sh:Literal.
+roh:rangeDatatypefoaf1__firstNameShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  foaf1:firstName ;
 	sh:nodeKind sh:Literal.
 roh:rangeDatatypefoaf1__genderShape
 	a sh:NodeShape ;
@@ -108,11 +116,19 @@ roh:rangeDatatypefoaf1__nameShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  foaf1:name ;
 	sh:nodeKind sh:Literal.
-roh:rangeDatatypevivo__dateTimeShape
+roh:rangeDatatypevcard__localityShape
 	a sh:NodeShape ;
-	sh:targetObjectsOf  vivo:dateTime ;
-	sh:datatype xsd:dateTime.
+	sh:targetObjectsOf  vcard:locality ;
+	sh:datatype xsd:string.
+roh:rangeDatatypebibo__pageEndShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  bibo:pageEnd ;
+	sh:nodeKind sh:Literal.
 roh:rangeDatatypefoaf1__surnameShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  foaf1:surname ;
 	sh:nodeKind sh:Literal.
+roh:rangeDatatypevivo__dateTimeShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  vivo:dateTime ;
+	sh:datatype xsd:dateTime.

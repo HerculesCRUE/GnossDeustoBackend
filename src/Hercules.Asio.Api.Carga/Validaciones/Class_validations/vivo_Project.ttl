@@ -10,12 +10,12 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix bibo: <http://purl.org/roh/mirror/bibo#>.
 @prefix foaf: <https://xmlns.com/foaf/0.1/>.
-@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix vivo: <http://purl.org/roh/mirror/vivo#>.
 @prefix skos1: <http://purl.org/roh/mirror/skos#>.
 @prefix terms: <http://purl.org/dc/terms/>.
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>.
+@prefix schema: <https://schema.org/>.
 @prefix uneskos: <http://purl.org/umu/uneskos#>.
 @prefix skos-thes: <http://purl.org/iso25964/skos-thes#>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
@@ -27,16 +27,17 @@
 roh:vivo_ProjectShape
 	a sh:NodeShape ;
 	sh:targetClass vivo:Project ;
-	sh:property roh:someValuesDataType__vivo__Project__roh__title;
-	sh:property roh:someValuesDataType__vivo__Project__vivo__freetextKeyword;
 	sh:property roh:someValuesDataType__vivo__Project__vivo__identifier;
-	sh:property roh:allValuesDataType__vivo__Project__roh__title;
+	sh:property roh:someValuesDataType__vivo__Project__vivo__freetextKeyword;
+	sh:property roh:someValuesDataType__vivo__Project__roh__title;
 	sh:property roh:allValuesDataType__vivo__Project__vivo__identifier;
 	sh:property roh:allValuesDataType__vivo__Project__vivo__freetextKeyword;
-	sh:property roh:allValuesClass__vivo__Project__vivo__relatedBy.
-roh:someValuesDataType__vivo__Project__roh__title 
+	sh:property roh:allValuesDataType__vivo__Project__roh__title;
+	sh:property roh:allValuesClass__vivo__Project__vivo__relatedBy;
+	sh:property roh:maxCardinalityvivo__Project__vivo__dateTimeInterval.
+roh:someValuesDataType__vivo__Project__vivo__identifier 
 	sh:severity sh:Violation;
-	sh:path roh:title;
+	sh:path vivo:identifier;
 	sh:qualifiedMinCount  1;
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
@@ -48,17 +49,13 @@ roh:someValuesDataType__vivo__Project__vivo__freetextKeyword
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
 	].
-roh:someValuesDataType__vivo__Project__vivo__identifier 
+roh:someValuesDataType__vivo__Project__roh__title 
 	sh:severity sh:Violation;
-	sh:path vivo:identifier;
+	sh:path roh:title;
 	sh:qualifiedMinCount  1;
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
 	].
-roh:allValuesDataType__vivo__Project__roh__title 
-	sh:severity sh:Violation;
-	sh:path roh:title;
-	sh:datatype xsd:string.
 roh:allValuesDataType__vivo__Project__vivo__identifier 
 	sh:severity sh:Violation;
 	sh:path vivo:identifier;
@@ -67,11 +64,19 @@ roh:allValuesDataType__vivo__Project__vivo__freetextKeyword
 	sh:severity sh:Violation;
 	sh:path vivo:freetextKeyword;
 	sh:datatype xsd:string.
+roh:allValuesDataType__vivo__Project__roh__title 
+	sh:severity sh:Violation;
+	sh:path roh:title;
+	sh:datatype xsd:string.
 roh:allValuesClass__vivo__Project__vivo__relatedBy 
 	sh:severity sh:Violation;
 	sh:path vivo:relatedBy;
 	sh:or ( 
-		[sh:class roh:Justification]
 		[sh:class roh:Dossier]
-		[sh:class bfo:BFO_0000023]
+		[sh:class roh:Justification]
+		[sh:class roh:EthicalReport]
 	) .
+roh:maxCardinalityvivo__Project__vivo__dateTimeInterval 
+	sh:severity sh:Violation;
+	sh:path vivo:dateTimeInterval;
+	sh:maxCount  1.

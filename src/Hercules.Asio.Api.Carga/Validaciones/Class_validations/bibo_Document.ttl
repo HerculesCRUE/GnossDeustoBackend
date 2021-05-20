@@ -10,25 +10,68 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix bibo: <http://purl.org/roh/mirror/bibo#>.
 @prefix foaf: <https://xmlns.com/foaf/0.1/>.
-@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix vivo: <http://purl.org/roh/mirror/vivo#>.
 @prefix skos1: <http://purl.org/roh/mirror/skos#>.
 @prefix terms: <http://purl.org/dc/terms/>.
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>.
+@prefix schema: <https://schema.org/>.
 @prefix uneskos: <http://purl.org/umu/uneskos#>.
 @prefix skos-thes: <http://purl.org/iso25964/skos-thes#>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
 @prefix roh: <http://purl.org/roh#>.
 @prefix foaf1: <http://purl.org/roh/mirror/foaf#>.
+@prefix vcard: <http://purl.org/roh/mirror/vcard#>.
 roh:bibo_DocumentShape
 	a sh:NodeShape ;
 	sh:targetClass bibo:Document ;
-	sh:property roh:allValuesClass__bibo__Document__vivo__hasPublicationVenue.
+	sh:property roh:someValuesDataType__bibo__Document__roh__title;
+	sh:property roh:allValuesDataType__bibo__Document__roh__title;
+	sh:property roh:allValuesClass__bibo__Document__vivo__hasPublicationVenue;
+	sh:property roh:maxQualifiedCardinalityDataType__bibo__Document__vivo__dateTime;
+	sh:property roh:maxQualifiedCardinalityDataType__bibo__Document__bibo__pageEnd;
+	sh:property roh:maxQualifiedCardinalityDataType__bibo__Document__bibo__pageStart;
+	sh:property roh:maxCardinalitybibo__Document__bibo__authorList.
+roh:someValuesDataType__bibo__Document__roh__title 
+	sh:severity sh:Violation;
+	sh:path roh:title;
+	sh:qualifiedMinCount  1;
+	sh:qualifiedValueShape [
+		sh:datatype xsd:string;
+	].
+roh:allValuesDataType__bibo__Document__roh__title 
+	sh:severity sh:Violation;
+	sh:path roh:title;
+	sh:datatype xsd:string.
 roh:allValuesClass__bibo__Document__vivo__hasPublicationVenue 
 	sh:severity sh:Violation;
 	sh:path vivo:hasPublicationVenue;
 	sh:or ( 
-		[sh:class bibo:Book]
 		[sh:class bibo:Collection]
+		[sh:class bibo:Book]
 	) .
+roh:maxQualifiedCardinalityDataType__bibo__Document__vivo__dateTime 
+	sh:severity sh:Violation;
+	sh:path vivo:dateTime;
+	sh:qualifiedMaxCount  1;
+	sh:qualifiedValueShape [
+		sh:datatype xsd:dateTime;
+	].
+roh:maxQualifiedCardinalityDataType__bibo__Document__bibo__pageEnd 
+	sh:severity sh:Violation;
+	sh:path bibo:pageEnd;
+	sh:qualifiedMaxCount  1;
+	sh:qualifiedValueShape [
+		sh:datatype xsd:int;
+	].
+roh:maxQualifiedCardinalityDataType__bibo__Document__bibo__pageStart 
+	sh:severity sh:Violation;
+	sh:path bibo:pageStart;
+	sh:qualifiedMaxCount  1;
+	sh:qualifiedValueShape [
+		sh:datatype xsd:int;
+	].
+roh:maxCardinalitybibo__Document__bibo__authorList 
+	sh:severity sh:Violation;
+	sh:path bibo:authorList;
+	sh:maxCount  1.

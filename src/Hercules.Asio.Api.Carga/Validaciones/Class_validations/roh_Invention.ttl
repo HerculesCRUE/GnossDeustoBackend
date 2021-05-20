@@ -22,19 +22,45 @@
 @prefix roh: <http://purl.org/roh#>.
 @prefix foaf1: <http://purl.org/roh/mirror/foaf#>.
 @prefix vcard: <http://purl.org/roh/mirror/vcard#>.
-roh:bibo_BookShape
+roh:roh_InventionShape
 	a sh:NodeShape ;
-	sh:targetClass bibo:Book ;
-	sh:property roh:someValuesDataType__bibo__Book__roh__isbn;
-	sh:property roh:allValuesDataType__bibo__Book__roh__isbn.
-roh:someValuesDataType__bibo__Book__roh__isbn 
+	sh:targetClass roh:Invention ;
+	sh:property roh:someValuesDataType__roh__Invention__roh__title;
+	sh:property roh:someValuesDataType__roh__Invention__vivo__identifier;
+	sh:property roh:someValuesDataType__roh__Invention__vivo__freetextKeyword;
+	sh:property roh:allValuesDataType__roh__Invention__vivo__freetextKeyword;
+	sh:property roh:allValuesDataType__roh__Invention__roh__title;
+	sh:property roh:allValuesDataType__roh__Invention__vivo__identifier.
+roh:someValuesDataType__roh__Invention__roh__title 
 	sh:severity sh:Violation;
-	sh:path roh:isbn;
+	sh:path roh:title;
 	sh:qualifiedMinCount  1;
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
 	].
-roh:allValuesDataType__bibo__Book__roh__isbn 
+roh:someValuesDataType__roh__Invention__vivo__identifier 
 	sh:severity sh:Violation;
-	sh:path roh:isbn;
+	sh:path vivo:identifier;
+	sh:qualifiedMinCount  1;
+	sh:qualifiedValueShape [
+		sh:datatype xsd:string;
+	].
+roh:someValuesDataType__roh__Invention__vivo__freetextKeyword 
+	sh:severity sh:Violation;
+	sh:path vivo:freetextKeyword;
+	sh:qualifiedMinCount  1;
+	sh:qualifiedValueShape [
+		sh:datatype xsd:string;
+	].
+roh:allValuesDataType__roh__Invention__vivo__freetextKeyword 
+	sh:severity sh:Violation;
+	sh:path vivo:freetextKeyword;
+	sh:datatype xsd:string.
+roh:allValuesDataType__roh__Invention__roh__title 
+	sh:severity sh:Violation;
+	sh:path roh:title;
+	sh:datatype xsd:string.
+roh:allValuesDataType__roh__Invention__vivo__identifier 
+	sh:severity sh:Violation;
+	sh:path vivo:identifier;
 	sh:datatype xsd:string.

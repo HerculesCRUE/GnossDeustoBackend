@@ -1,0 +1,24 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix roh: <http://purl.org/roh#>.
+@prefix foaf: <http://purl.org/roh/mirror/foaf#>.
+roh:foaf_PersonShape
+	a sh:NodeShape ;
+	sh:targetClass foaf:Person ;
+	sh:property roh:someValuesDataType__foaf__Person__foaf__name;
+	sh:property roh:allValuesDataType__foaf__Person__foaf__name.
+roh:someValuesDataType__foaf__Person__foaf__name 
+	sh:severity sh:Violation;
+	sh:path foaf:name;
+	sh:qualifiedMinCount  1;
+	sh:qualifiedValueShape [
+		sh:datatype xsd:string;
+	].
+roh:allValuesDataType__foaf__Person__foaf__name 
+	sh:severity sh:Violation;
+	sh:path foaf:name;
+	sh:datatype xsd:string.

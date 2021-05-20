@@ -10,25 +10,29 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix bibo: <http://purl.org/roh/mirror/bibo#>.
 @prefix foaf: <https://xmlns.com/foaf/0.1/>.
-@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix vivo: <http://purl.org/roh/mirror/vivo#>.
 @prefix skos1: <http://purl.org/roh/mirror/skos#>.
 @prefix terms: <http://purl.org/dc/terms/>.
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>.
+@prefix schema: <https://schema.org/>.
 @prefix uneskos: <http://purl.org/umu/uneskos#>.
 @prefix skos-thes: <http://purl.org/iso25964/skos-thes#>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
 @prefix roh: <http://purl.org/roh#>.
 @prefix foaf1: <http://purl.org/roh/mirror/foaf#>.
+@prefix vcard: <http://purl.org/roh/mirror/vcard#>.
 roh:roh_ActivityShape
 	a sh:NodeShape ;
 	sh:targetClass roh:Activity ;
 	sh:property roh:someValuesDataType__roh__Activity__vivo__identifier;
 	sh:property roh:someValuesDataType__roh__Activity__roh__title;
-	sh:property roh:allValuesClass__roh__Activity__vivo__relates;
 	sh:property roh:allValuesDataType__roh__Activity__roh__title;
-	sh:property roh:allValuesDataType__roh__Activity__vivo__identifier.
+	sh:property roh:allValuesClass__roh__Activity__vivo__relates;
+	sh:property roh:allValuesDataType__roh__Activity__vivo__identifier;
+	sh:property roh:maxQualifiedCardinalityDataType__roh__Activity__vcard__locality;
+	sh:property roh:maxCardinalityroh__Activity__ro__RO_0001025;
+	sh:property roh:maxCardinalityroh__Activity__vivo__dateTimeInterval.
 roh:someValuesDataType__roh__Activity__vivo__identifier 
 	sh:severity sh:Violation;
 	sh:path vivo:identifier;
@@ -43,6 +47,10 @@ roh:someValuesDataType__roh__Activity__roh__title
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
 	].
+roh:allValuesDataType__roh__Activity__roh__title 
+	sh:severity sh:Violation;
+	sh:path roh:title;
+	sh:datatype xsd:string.
 roh:allValuesClass__roh__Activity__vivo__relates 
 	sh:severity sh:Violation;
 	sh:path vivo:relates;
@@ -50,11 +58,22 @@ roh:allValuesClass__roh__Activity__vivo__relates
 		[sh:class bfo:BFO_0000023]
 		[sh:class roh:Expense]
 	) .
-roh:allValuesDataType__roh__Activity__roh__title 
-	sh:severity sh:Violation;
-	sh:path roh:title;
-	sh:datatype xsd:string.
 roh:allValuesDataType__roh__Activity__vivo__identifier 
 	sh:severity sh:Violation;
 	sh:path vivo:identifier;
 	sh:datatype xsd:string.
+roh:maxQualifiedCardinalityDataType__roh__Activity__vcard__locality 
+	sh:severity sh:Violation;
+	sh:path vcard:locality;
+	sh:qualifiedMaxCount  1;
+	sh:qualifiedValueShape [
+		sh:datatype xsd:string;
+	].
+roh:maxCardinalityroh__Activity__ro__RO_0001025 
+	sh:severity sh:Violation;
+	sh:path ro:RO_0001025;
+	sh:maxCount  1.
+roh:maxCardinalityroh__Activity__vivo__dateTimeInterval 
+	sh:severity sh:Violation;
+	sh:path vivo:dateTimeInterval;
+	sh:maxCount  1.

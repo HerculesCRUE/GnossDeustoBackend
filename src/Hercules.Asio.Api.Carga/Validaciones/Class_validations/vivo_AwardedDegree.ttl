@@ -10,12 +10,12 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix bibo: <http://purl.org/roh/mirror/bibo#>.
 @prefix foaf: <https://xmlns.com/foaf/0.1/>.
-@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix vivo: <http://purl.org/roh/mirror/vivo#>.
 @prefix skos1: <http://purl.org/roh/mirror/skos#>.
 @prefix terms: <http://purl.org/dc/terms/>.
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>.
+@prefix schema: <https://schema.org/>.
 @prefix uneskos: <http://purl.org/umu/uneskos#>.
 @prefix skos-thes: <http://purl.org/iso25964/skos-thes#>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
@@ -27,19 +27,14 @@
 roh:vivo_AwardedDegreeShape
 	a sh:NodeShape ;
 	sh:targetClass vivo:AwardedDegree ;
-	sh:property roh:someValuesClass__vivo__AwardedDegree__roh__awardedBy;
 	sh:property roh:someValuesClass__vivo__AwardedDegree__vivo__dateTimeValue;
-	sh:property roh:someValuesClass__vivo__AwardedDegree__vivo__relates;
-	sh:property roh:allValuesClass__vivo__AwardedDegree__vivo__dateTimeValue;
+	sh:property roh:someValuesClass__vivo__AwardedDegree__roh__awardedBy;
 	sh:property roh:allValuesClass__vivo__AwardedDegree__roh__awardedBy;
-	sh:property roh:allValuesClass__vivo__AwardedDegree__vivo__relates.
-roh:someValuesClass__vivo__AwardedDegree__roh__awardedBy 
-	sh:severity sh:Violation;
-	sh:path roh:awardedBy;
-	sh:qualifiedMinCount  1;
-	sh:qualifiedValueShape [
-		sh:class vivo:University;
-	].
+	sh:property roh:allValuesClass__vivo__AwardedDegree__vivo__relates;
+	sh:property roh:allValuesClass__vivo__AwardedDegree__vivo__dateTimeValue;
+	sh:property roh:qualifiedCardinalityClass__vivo__AwardedDegree__vivo__relates;
+	sh:property roh:maxQualifiedCardinalityClass__vivo__AwardedDegree__vivo__dateTimeValue;
+	sh:property roh:maxQualifiedCardinalityClass__vivo__AwardedDegree__roh__awardedBy.
 roh:someValuesClass__vivo__AwardedDegree__vivo__dateTimeValue 
 	sh:severity sh:Violation;
 	sh:path vivo:dateTimeValue;
@@ -47,20 +42,13 @@ roh:someValuesClass__vivo__AwardedDegree__vivo__dateTimeValue
 	sh:qualifiedValueShape [
 		sh:class vivo:DateTimeValue;
 	].
-roh:someValuesClass__vivo__AwardedDegree__vivo__relates 
+roh:someValuesClass__vivo__AwardedDegree__roh__awardedBy 
 	sh:severity sh:Violation;
-	sh:path vivo:relates;
+	sh:path roh:awardedBy;
 	sh:qualifiedMinCount  1;
 	sh:qualifiedValueShape [
-		sh:or ( 
-			[sh:class vivo:AcademicDegree]
-			[sh:class foaf1:Person]
-		) 
+		sh:class vivo:University;
 	].
-roh:allValuesClass__vivo__AwardedDegree__vivo__dateTimeValue 
-	sh:severity sh:Violation;
-	sh:path vivo:dateTimeValue;
-	sh:class vivo:DateTimeValue.
 roh:allValuesClass__vivo__AwardedDegree__roh__awardedBy 
 	sh:severity sh:Violation;
 	sh:path roh:awardedBy;
@@ -72,3 +60,32 @@ roh:allValuesClass__vivo__AwardedDegree__vivo__relates
 		[sh:class foaf1:Person]
 		[sh:class vivo:AcademicDegree]
 	) .
+roh:allValuesClass__vivo__AwardedDegree__vivo__dateTimeValue 
+	sh:severity sh:Violation;
+	sh:path vivo:dateTimeValue;
+	sh:class vivo:DateTimeValue.
+roh:qualifiedCardinalityClass__vivo__AwardedDegree__vivo__relates 
+	sh:severity sh:Violation;
+	sh:path vivo:relates;
+	sh:qualifiedMinCount  1;
+	sh:qualifiedMaxCount  1;
+	sh:qualifiedValueShape [
+		sh:or ( 
+			[sh:class vivo:AcademicDegree]
+			[sh:class foaf1:Person]
+		) 
+	].
+roh:maxQualifiedCardinalityClass__vivo__AwardedDegree__vivo__dateTimeValue 
+	sh:severity sh:Violation;
+	sh:path vivo:dateTimeValue;
+	sh:qualifiedMaxCount  1;
+	sh:qualifiedValueShape [
+		sh:class vivo:DateTimeValue;
+	].
+roh:maxQualifiedCardinalityClass__vivo__AwardedDegree__roh__awardedBy 
+	sh:severity sh:Violation;
+	sh:path roh:awardedBy;
+	sh:qualifiedMaxCount  1;
+	sh:qualifiedValueShape [
+		sh:class vivo:University;
+	].

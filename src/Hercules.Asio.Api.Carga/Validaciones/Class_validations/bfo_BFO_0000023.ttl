@@ -10,12 +10,12 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix bibo: <http://purl.org/roh/mirror/bibo#>.
 @prefix foaf: <https://xmlns.com/foaf/0.1/>.
-@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix vivo: <http://purl.org/roh/mirror/vivo#>.
 @prefix skos1: <http://purl.org/roh/mirror/skos#>.
 @prefix terms: <http://purl.org/dc/terms/>.
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>.
+@prefix schema: <https://schema.org/>.
 @prefix uneskos: <http://purl.org/umu/uneskos#>.
 @prefix skos-thes: <http://purl.org/iso25964/skos-thes#>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
@@ -27,8 +27,8 @@ roh:bfo_BFO_0000023Shape
 	a sh:NodeShape ;
 	sh:targetClass bfo:BFO_0000023 ;
 	sh:property roh:someValuesClass__bfo__BFO_0000023__ro__RO_0000052;
-	sh:property roh:allValuesClass__bfo__BFO_0000023__vivo__relatedBy;
-	sh:property roh:allValuesClass__bfo__BFO_0000023__ro__RO_0000052.
+	sh:property roh:allValuesClass__bfo__BFO_0000023__ro__RO_0000052;
+	sh:property roh:allValuesClass__bfo__BFO_0000023__vivo__relatedBy.
 roh:someValuesClass__bfo__BFO_0000023__ro__RO_0000052 
 	sh:severity sh:Violation;
 	sh:path ro:RO_0000052;
@@ -36,14 +36,15 @@ roh:someValuesClass__bfo__BFO_0000023__ro__RO_0000052
 	sh:qualifiedValueShape [
 		sh:class foaf1:Person;
 	].
-roh:allValuesClass__bfo__BFO_0000023__vivo__relatedBy 
-	sh:severity sh:Violation;
-	sh:path vivo:relatedBy;
-	sh:or ( 
-		[sh:class vivo:Relationship]
-		[sh:class vivo:Project]
-	) .
 roh:allValuesClass__bfo__BFO_0000023__ro__RO_0000052 
 	sh:severity sh:Violation;
 	sh:path ro:RO_0000052;
 	sh:class foaf1:Person.
+roh:allValuesClass__bfo__BFO_0000023__vivo__relatedBy 
+	sh:severity sh:Violation;
+	sh:path vivo:relatedBy;
+	sh:or ( 
+		[sh:class vivo:Project]
+		[sh:class vivo:Relationship]
+		[sh:class roh:PatentApplication]
+	) .

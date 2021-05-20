@@ -22,19 +22,24 @@
 @prefix roh: <http://purl.org/roh#>.
 @prefix foaf1: <http://purl.org/roh/mirror/foaf#>.
 @prefix vcard: <http://purl.org/roh/mirror/vcard#>.
-roh:bibo_BookShape
+@prefix geonames: <http://purl.org/roh/mirror/geonames#>.
+@prefix ero: <http://purl.org/roh/mirror/obo/ero#>.
+roh:vivo_DateTimeIntervalShape
 	a sh:NodeShape ;
-	sh:targetClass bibo:Book ;
-	sh:property roh:someValuesDataType__bibo__Book__roh__isbn;
-	sh:property roh:allValuesDataType__bibo__Book__roh__isbn.
-roh:someValuesDataType__bibo__Book__roh__isbn 
+	sh:targetClass vivo:DateTimeInterval ;
+	sh:property roh:maxQualifiedCardinalityClass__vivo__DateTimeInterval__vivo__start;
+	sh:property roh:maxQualifiedCardinalityClass__vivo__DateTimeInterval__vivo__end.
+roh:maxQualifiedCardinalityClass__vivo__DateTimeInterval__vivo__start 
 	sh:severity sh:Violation;
-	sh:path roh:isbn;
-	sh:qualifiedMinCount  1;
+	sh:path vivo:start;
+	sh:qualifiedMaxCount  1;
 	sh:qualifiedValueShape [
-		sh:datatype xsd:string;
+		sh:class vivo:DateTimeValue;
 	].
-roh:allValuesDataType__bibo__Book__roh__isbn 
+roh:maxQualifiedCardinalityClass__vivo__DateTimeInterval__vivo__end 
 	sh:severity sh:Violation;
-	sh:path roh:isbn;
-	sh:datatype xsd:string.
+	sh:path vivo:end;
+	sh:qualifiedMaxCount  1;
+	sh:qualifiedValueShape [
+		sh:class vivo:DateTimeValue;
+	].

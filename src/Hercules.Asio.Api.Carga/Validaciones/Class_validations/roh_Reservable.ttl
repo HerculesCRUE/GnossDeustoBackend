@@ -22,19 +22,32 @@
 @prefix roh: <http://purl.org/roh#>.
 @prefix foaf1: <http://purl.org/roh/mirror/foaf#>.
 @prefix vcard: <http://purl.org/roh/mirror/vcard#>.
-roh:bibo_BookShape
+roh:roh_ReservableShape
 	a sh:NodeShape ;
-	sh:targetClass bibo:Book ;
-	sh:property roh:someValuesDataType__bibo__Book__roh__isbn;
-	sh:property roh:allValuesDataType__bibo__Book__roh__isbn.
-roh:someValuesDataType__bibo__Book__roh__isbn 
+	sh:targetClass roh:Reservable ;
+	sh:property roh:someValuesDataType__roh__Reservable__roh__title;
+	sh:property roh:someValuesClass__roh__Reservable__vivo__dateTimeInterval;
+	sh:property roh:allValuesClass__roh__Reservable__vivo__dateTimeInterval;
+	sh:property roh:allValuesDataType__roh__Reservable__roh__title.
+roh:someValuesDataType__roh__Reservable__roh__title 
 	sh:severity sh:Violation;
-	sh:path roh:isbn;
+	sh:path roh:title;
 	sh:qualifiedMinCount  1;
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
 	].
-roh:allValuesDataType__bibo__Book__roh__isbn 
+roh:someValuesClass__roh__Reservable__vivo__dateTimeInterval 
 	sh:severity sh:Violation;
-	sh:path roh:isbn;
+	sh:path vivo:dateTimeInterval;
+	sh:qualifiedMinCount  1;
+	sh:qualifiedValueShape [
+		sh:class vivo:DateTimeInterval;
+	].
+roh:allValuesClass__roh__Reservable__vivo__dateTimeInterval 
+	sh:severity sh:Violation;
+	sh:path vivo:dateTimeInterval;
+	sh:class vivo:DateTimeInterval.
+roh:allValuesDataType__roh__Reservable__roh__title 
+	sh:severity sh:Violation;
+	sh:path roh:title;
 	sh:datatype xsd:string.

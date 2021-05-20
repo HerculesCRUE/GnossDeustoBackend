@@ -10,12 +10,12 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix bibo: <http://purl.org/roh/mirror/bibo#>.
 @prefix foaf: <https://xmlns.com/foaf/0.1/>.
-@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix vivo: <http://purl.org/roh/mirror/vivo#>.
 @prefix skos1: <http://purl.org/roh/mirror/skos#>.
 @prefix terms: <http://purl.org/dc/terms/>.
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>.
+@prefix schema: <https://schema.org/>.
 @prefix uneskos: <http://purl.org/umu/uneskos#>.
 @prefix skos-thes: <http://purl.org/iso25964/skos-thes#>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
@@ -25,20 +25,20 @@
 roh:foaf1_OrganizationShape
 	a sh:NodeShape ;
 	sh:targetClass foaf1:Organization ;
-	sh:property roh:someValuesClass__foaf1__Organization__roh__hasContactInfo;
+	sh:property roh:someValuesDataType__foaf1__Organization__vivo__description;
 	sh:property roh:someValuesDataType__foaf1__Organization__foaf1__title;
 	sh:property roh:someValuesDataType__foaf1__Organization__vivo__identifier;
-	sh:property roh:someValuesDataType__foaf1__Organization__vivo__description;
-	sh:property roh:allValuesClass__foaf1__Organization__roh__hasContactInfo;
-	sh:property roh:allValuesDataType__foaf1__Organization__foaf1__title;
+	sh:property roh:someValuesClass__foaf1__Organization__roh__hasContactInfo;
 	sh:property roh:allValuesDataType__foaf1__Organization__vivo__identifier;
-	sh:property roh:allValuesDataType__foaf1__Organization__vivo__description.
-roh:someValuesClass__foaf1__Organization__roh__hasContactInfo 
+	sh:property roh:allValuesDataType__foaf1__Organization__vivo__description;
+	sh:property roh:allValuesDataType__foaf1__Organization__foaf1__title;
+	sh:property roh:allValuesClass__foaf1__Organization__roh__hasContactInfo.
+roh:someValuesDataType__foaf1__Organization__vivo__description 
 	sh:severity sh:Violation;
-	sh:path roh:hasContactInfo;
+	sh:path vivo:description;
 	sh:qualifiedMinCount  1;
 	sh:qualifiedValueShape [
-		sh:class vcard:Organization;
+		sh:datatype xsd:string;
 	].
 roh:someValuesDataType__foaf1__Organization__foaf1__title 
 	sh:severity sh:Violation;
@@ -54,21 +54,13 @@ roh:someValuesDataType__foaf1__Organization__vivo__identifier
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
 	].
-roh:someValuesDataType__foaf1__Organization__vivo__description 
-	sh:severity sh:Violation;
-	sh:path vivo:description;
-	sh:qualifiedMinCount  1;
-	sh:qualifiedValueShape [
-		sh:datatype xsd:string;
-	].
-roh:allValuesClass__foaf1__Organization__roh__hasContactInfo 
+roh:someValuesClass__foaf1__Organization__roh__hasContactInfo 
 	sh:severity sh:Violation;
 	sh:path roh:hasContactInfo;
-	sh:class vcard:Organization.
-roh:allValuesDataType__foaf1__Organization__foaf1__title 
-	sh:severity sh:Violation;
-	sh:path foaf1:title;
-	sh:datatype xsd:string.
+	sh:qualifiedMinCount  1;
+	sh:qualifiedValueShape [
+		sh:class vcard:Organization;
+	].
 roh:allValuesDataType__foaf1__Organization__vivo__identifier 
 	sh:severity sh:Violation;
 	sh:path vivo:identifier;
@@ -77,3 +69,11 @@ roh:allValuesDataType__foaf1__Organization__vivo__description
 	sh:severity sh:Violation;
 	sh:path vivo:description;
 	sh:datatype xsd:string.
+roh:allValuesDataType__foaf1__Organization__foaf1__title 
+	sh:severity sh:Violation;
+	sh:path foaf1:title;
+	sh:datatype xsd:string.
+roh:allValuesClass__foaf1__Organization__roh__hasContactInfo 
+	sh:severity sh:Violation;
+	sh:path roh:hasContactInfo;
+	sh:class vcard:Organization.

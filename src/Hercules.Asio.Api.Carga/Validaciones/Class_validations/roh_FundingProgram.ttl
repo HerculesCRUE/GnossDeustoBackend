@@ -10,37 +10,38 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix bibo: <http://purl.org/roh/mirror/bibo#>.
 @prefix foaf: <https://xmlns.com/foaf/0.1/>.
-@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix vivo: <http://purl.org/roh/mirror/vivo#>.
 @prefix skos1: <http://purl.org/roh/mirror/skos#>.
 @prefix terms: <http://purl.org/dc/terms/>.
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>.
+@prefix schema: <https://schema.org/>.
 @prefix uneskos: <http://purl.org/umu/uneskos#>.
 @prefix skos-thes: <http://purl.org/iso25964/skos-thes#>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
 @prefix roh: <http://purl.org/roh#>.
 @prefix foaf1: <http://purl.org/roh/mirror/foaf#>.
+@prefix vcard: <http://purl.org/roh/mirror/vcard#>.
 roh:roh_FundingProgramShape
 	a sh:NodeShape ;
 	sh:targetClass roh:FundingProgram ;
-	sh:property roh:someValuesClass__roh__FundingProgram__roh__promotedBy;
 	sh:property roh:someValuesDataType__roh__FundingProgram__vivo__identifier;
+	sh:property roh:someValuesClass__roh__FundingProgram__roh__promotedBy;
 	sh:property roh:allValuesClass__roh__FundingProgram__roh__promotedBy;
 	sh:property roh:allValuesDataType__roh__FundingProgram__vivo__identifier.
-roh:someValuesClass__roh__FundingProgram__roh__promotedBy 
-	sh:severity sh:Violation;
-	sh:path roh:promotedBy;
-	sh:qualifiedMinCount  1;
-	sh:qualifiedValueShape [
-		sh:class vivo:FundingOrganization;
-	].
 roh:someValuesDataType__roh__FundingProgram__vivo__identifier 
 	sh:severity sh:Violation;
 	sh:path vivo:identifier;
 	sh:qualifiedMinCount  1;
 	sh:qualifiedValueShape [
 		sh:datatype xsd:string;
+	].
+roh:someValuesClass__roh__FundingProgram__roh__promotedBy 
+	sh:severity sh:Violation;
+	sh:path roh:promotedBy;
+	sh:qualifiedMinCount  1;
+	sh:qualifiedValueShape [
+		sh:class vivo:FundingOrganization;
 	].
 roh:allValuesClass__roh__FundingProgram__roh__promotedBy 
 	sh:severity sh:Violation;

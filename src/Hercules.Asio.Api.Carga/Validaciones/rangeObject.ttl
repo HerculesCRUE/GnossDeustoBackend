@@ -10,12 +10,12 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix bibo: <http://purl.org/roh/mirror/bibo#>.
 @prefix foaf: <https://xmlns.com/foaf/0.1/>.
-@prefix iao1: <http://purl.org/roh/mirror/obo/iao#>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix vivo: <http://purl.org/roh/mirror/vivo#>.
 @prefix skos1: <http://purl.org/roh/mirror/skos#>.
 @prefix terms: <http://purl.org/dc/terms/>.
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>.
+@prefix schema: <https://schema.org/>.
 @prefix uneskos: <http://purl.org/umu/uneskos#>.
 @prefix skos-thes: <http://purl.org/iso25964/skos-thes#>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
@@ -28,46 +28,50 @@ roh:rangeClassroh__CVOfShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:CVOf ;
 	sh:class foaf1:Person.
-roh:rangeClassroh__accreditationOfShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:accreditationOf ;
-	sh:class foaf1:Agent.
-roh:rangeClassroh__awardedByShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:awardedBy ;
-	sh:class vivo:University.
 roh:rangeClassroh__awardsShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:awards ;
 	sh:class vivo:AwardedDegree.
-roh:rangeClassroh__contractSigningDateShape
+roh:rangeClassroh__awardedByShape
 	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:contractSigningDate ;
-	sh:class vivo:DateTimeValue.
-roh:rangeClassroh__contractSigningDateOfShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:contractSigningDateOf ;
-	sh:class vivo:Contract.
-roh:rangeClassroh__correspondingAuthorShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:correspondingAuthor ;
-	sh:class foaf1:Person.
+	sh:targetObjectsOf  roh:awardedBy ;
+	sh:class vivo:University.
 roh:rangeClassroh__contactInfoOfShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:contactInfoOf ;
 	sh:class foaf1:Agent.
+roh:rangeClassroh__accreditationOfShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:accreditationOf ;
+	sh:class foaf1:Agent.
+roh:rangeClassroh__correspondingAuthorShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:correspondingAuthor ;
+	sh:class foaf1:Person.
+roh:rangeClassroh__correspondingOrganizationShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:correspondingOrganization ;
+	sh:class foaf1:Organization.
+roh:rangeClassroh__contractSigningDateShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:contractSigningDate ;
+	sh:class vivo:DateTimeValue.
 roh:rangeClassroh__grantedByShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:grantedBy ;
 	sh:class roh:FundingAmount.
+roh:rangeClassroh__correspondingOrganizationOfShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:correspondingOrganizationOf ;
+	sh:class iao:IAO_0000030.
+roh:rangeClassroh__contractSigningDateOfShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:contractSigningDateOf ;
+	sh:class vivo:Contract.
 roh:rangeClassroh__grantsShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:grants ;
 	sh:class foaf1:Organization.
-roh:rangeClassroh__hasAccreditationShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:hasAccreditation ;
-	sh:class roh:Accreditation.
 roh:rangeClassroh__hasCVShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:hasCV ;
@@ -76,6 +80,22 @@ roh:rangeClassroh__hasContactInfoShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:hasContactInfo ;
 	sh:class vcard:Kind.
+roh:rangeClassroh__hasAccreditationShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:hasAccreditation ;
+	sh:class roh:Accreditation.
+roh:rangeClassroh__hasCompanyCategorizationShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:hasCompanyCategorization ;
+	sh:class roh:CompanyClassification.
+roh:rangeClassroh__hasHRClassificationShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:hasHRClassification ;
+	sh:class roh:HRClassification.
+roh:rangeClassroh__hasFundingProgramClassificationShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:hasFundingProgramClassification ;
+	sh:class roh:FundingProgramClassification.
 roh:rangeClassroh__hasContractShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:hasContract ;
@@ -84,22 +104,30 @@ roh:rangeClassroh__hasKnowledgeAreaShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:hasKnowledgeArea ;
 	sh:class skos:Concept.
-roh:rangeClassroh__hasInfrastructureShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:hasInfrastructure ;
-	sh:class roh:Infrastructure.
 roh:rangeClassroh__hasMetricShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:hasMetric ;
 	sh:class roh:Metric.
+roh:rangeClassroh__hasProjectCategorizationShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:hasProjectCategorization ;
+	sh:class roh:ProjectClassification.
 roh:rangeClassroh__hasPositionShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:hasPosition ;
 	sh:class vivo:Position.
+roh:rangeClassroh__hasReservableShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:hasReservable ;
+	sh:class roh:Reservable.
 roh:rangeClassroh__hasRoleShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:hasRole ;
 	sh:class bfo:BFO_0000023.
+roh:rangeClassroh__hasSpinoffShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:hasSpinoff ;
+	sh:class vivo:Company.
 roh:rangeClassroh__infrastructureOfShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:infrastructureOf ;
@@ -108,14 +136,18 @@ roh:rangeClassroh__isProvidedByShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:isProvidedBy ;
 	sh:class foaf1:Organization.
-roh:rangeClassroh__issuedByShape
+roh:rangeClassroh__isSpinfoffOfShape
 	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:issuedBy ;
-	sh:class roh:AccreditationIssuer.
+	sh:targetObjectsOf  roh:isSpinfoffOf ;
+	sh:class foaf1:Organization.
 roh:rangeClassroh__isSupportedByShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:isSupportedBy ;
 	sh:class roh:Funding.
+roh:rangeClassroh__issuedByShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:issuedBy ;
+	sh:class roh:AccreditationIssuer.
 roh:rangeClassroh__issuesShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:issues ;
@@ -124,10 +156,6 @@ roh:rangeClassroh__metricOfShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:metricOf ;
 	sh:class roh:ResearchObject.
-roh:rangeClassroh__ownerOrganizationOfShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:ownerOrganizationOf ;
-	sh:class bibo:Patent.
 roh:rangeClassroh__ownerOrganizationShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:ownerOrganization ;
@@ -136,103 +164,102 @@ roh:rangeClassroh__participatesShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:participates ;
 	sh:class roh:Activity.
-roh:rangeClassroh__positionOfShape
+roh:rangeClassroh__ownerOrganizationOfShape
 	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:positionOf ;
-	sh:class foaf1:Person.
+	sh:targetObjectsOf  roh:ownerOrganizationOf ;
+	sh:class bibo:Patent.
 roh:rangeClassroh__producedByShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:producedBy ;
 	sh:class owl:Thing.
-roh:rangeClassroh__promotedByShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:promotedBy ;
-	sh:class vivo:FundingOrganization.
-roh:rangeClassroh__providesShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:provides ;
-	sh:class ero:ERO_0000005.
-roh:rangeClassroh__roleOfShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:roleOf ;
-	sh:class foaf1:Agent.
 roh:rangeClassroh__supervisedByShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:supervisedBy ;
 	sh:class foaf1:Person.
-roh:rangeClassroh__supervisorOfShape
+roh:rangeClassroh__providesShape
 	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:supervisorOf ;
-	sh:class bibo:Thesis.
-roh:rangeClassfoaf1__homepageShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  foaf1:homepage ;
-	sh:class foaf1:Document.
+	sh:targetObjectsOf  roh:provides ;
+	sh:class ero:ERO_0000005.
 roh:rangeClassroh__spendsShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  roh:spends ;
 	sh:class roh:Expense.
-roh:rangeClassfoaf1__mboxShape
+roh:rangeClassroh__promotedByShape
 	a sh:NodeShape ;
-	sh:targetObjectsOf  foaf1:mbox ;
-	sh:class owl:Thing.
+	sh:targetObjectsOf  roh:promotedBy ;
+	sh:class vivo:FundingOrganization.
+roh:rangeClassroh__projectCategorizationOfShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:projectCategorizationOf ;
+	sh:class vivo:Project.
+roh:rangeClassroh__positionOfShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:positionOf ;
+	sh:class foaf1:Person.
+roh:rangeClassroh__roleOfShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:roleOf ;
+	sh:class foaf1:Agent.
+roh:rangeClassroh__supervisorOfShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:supervisorOf ;
+	sh:class bibo:Thesis.
 roh:rangeClassfoaf1__imgShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  foaf1:img ;
 	sh:class foaf1:Image.
+roh:rangeClassfoaf1__mboxShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  foaf1:mbox ;
+	sh:class owl:Thing.
+roh:rangeClassfoaf1__homepageShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  foaf1:homepage ;
+	sh:class foaf1:Document.
 roh:rangeClassgeonames__locatedInShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  geonames:locatedIn ;
 	sh:class geonames:Feature.
-roh:rangeClassvivo__affiliatedOrganizationShape
+roh:rangeClassvcard__hasAddressShape
 	a sh:NodeShape ;
-	sh:targetObjectsOf  vivo:affiliatedOrganization ;
-	sh:class foaf1:Organization.
-roh:rangeClassvivo__dateIssuedShape
+	sh:targetObjectsOf  vcard:hasAddress ;
+	sh:class vcard:Address.
+roh:rangeClassvcard__hasEmailShape
 	a sh:NodeShape ;
-	sh:targetObjectsOf  vivo:dateIssued ;
-	sh:class vivo:DateTimeValue.
-roh:rangeClassvivo__degreeCandidacyShape
+	sh:targetObjectsOf  vcard:hasEmail ;
+	sh:class vcard:Email.
+roh:rangeClassvcard__hasNameShape
 	a sh:NodeShape ;
-	sh:targetObjectsOf  vivo:degreeCandidacy ;
-	sh:class vivo:AcademicDegree.
-roh:rangeClassbfo__BFO_0000054Shape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  bfo:BFO_0000054 ;
-	sh:class roh:Activity.
-roh:rangeClassvivo__hasPredecessorOrganizationShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  vivo:hasPredecessorOrganization ;
-	sh:class foaf1:Organization.
-roh:rangeClassvivo__endShape
-	a sh:NodeShape ;
-	sh:targetObjectsOf  vivo:end ;
-	sh:class vivo:DateTimeValue.
+	sh:targetObjectsOf  vcard:hasName ;
+	sh:class vcard:Name.
 roh:rangeClassbfo__BFO_0000055Shape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  bfo:BFO_0000055 ;
 	sh:class bfo:BFO_0000023.
-roh:rangeClassroh__promotesShape
+roh:rangeClassvivo__affiliatedOrganizationShape
 	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:promotes ;
-	sh:or ( 
-		[sh:class roh:FundingProgram]
-		[sh:class roh:FundingSource]
-	). 
-roh:rangeClassroh__supportsShape
+	sh:targetObjectsOf  vivo:affiliatedOrganization ;
+	sh:class foaf1:Organization.
+roh:rangeClassvivo__degreeCandidacyShape
 	a sh:NodeShape ;
-	sh:targetObjectsOf  roh:supports ;
-	sh:or ( 
-		[sh:class roh:PersonContract]
-		[sh:class vivo:Project]
-	). 
-roh:rangeClassbibo__authorListShape
+	sh:targetObjectsOf  vivo:degreeCandidacy ;
+	sh:class vivo:AcademicDegree.
+roh:rangeClassvivo__dateIssuedShape
 	a sh:NodeShape ;
-	sh:targetObjectsOf  bibo:authorList ;
-	sh:or ( 
-		[sh:class rdf:Seq]
-		[sh:class rdf:List]
-	). 
+	sh:targetObjectsOf  vivo:dateIssued ;
+	sh:class vivo:DateTimeValue.
+roh:rangeClassbfo__BFO_0000054Shape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  bfo:BFO_0000054 ;
+	sh:class roh:Activity.
+roh:rangeClassvivo__endShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  vivo:end ;
+	sh:class vivo:DateTimeValue.
+roh:rangeClassvivo__hasPredecessorOrganizationShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  vivo:hasPredecessorOrganization ;
+	sh:class foaf1:Organization.
 roh:rangeClassvivo__hasSuccessorOrganizationShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  vivo:hasSuccessorOrganization ;
@@ -241,10 +268,31 @@ roh:rangeClassvivo__startShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  vivo:start ;
 	sh:class vivo:DateTimeValue.
+roh:rangeClassbibo__authorListShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  bibo:authorList ;
+	sh:or ( 
+		[sh:class rdf:List]
+		[sh:class rdf:Seq]
+	). 
+roh:rangeClassroh__supportsShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:supports ;
+	sh:or ( 
+		[sh:class vivo:Project]
+		[sh:class roh:PersonContract]
+	). 
+roh:rangeClassroh__promotesShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf  roh:promotes ;
+	sh:or ( 
+		[sh:class roh:FundingProgram]
+		[sh:class roh:FundingSource]
+	). 
 roh:rangeClassbibo__editorListShape
 	a sh:NodeShape ;
 	sh:targetObjectsOf  bibo:editorList ;
 	sh:or ( 
-		[sh:class rdf:List]
 		[sh:class rdf:Seq]
+		[sh:class rdf:List]
 	). 
