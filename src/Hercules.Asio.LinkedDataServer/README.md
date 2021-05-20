@@ -20,11 +20,11 @@
 
 ## LINKED DATA SERVER de ASIO
 
-[Introducción](#introduccion)
+ó[Introducción](#introduccion)
 
 [Ejemplos de resolución de URIs](#ejemplos-de-resolución-de-uris) 
 
-[Conexión a Triple Store](#conexión-a-triplestore)
+[Conexión a Triple Store](#conexión-a-triple-store)
 
 [Configuración de appsettings.json](#configuración-de-appsettings.json)
 
