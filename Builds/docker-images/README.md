@@ -238,6 +238,10 @@ Por último, para que la aplicación disponga de los archivos necesarios tenemos
 
 	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/contenido.tar.gz
 
+###Limitar Apach###
+
+Si
+
 ## Despliegue de los servicios de back
 
 Para simplificar el despliegue de los servicios de back, hemos creado un script que debemos descargar en nuestra máquinas para servicios de back. Partiendo desde la home del usurio (ej. /home/usuario/).
