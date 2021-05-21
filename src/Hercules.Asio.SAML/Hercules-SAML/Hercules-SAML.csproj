@@ -5,6 +5,10 @@
     <RootNamespace>Hercules_SAML</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\comments.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Include="wwwroot\metadataasio.xml" />
   </ItemGroup>
