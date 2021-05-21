@@ -91,11 +91,8 @@ Para acceder a este formulario, se puede acceder desde la vista de un repositori
 para crear una tarea asociada al repositorio.
 ![](img/crearTarea.png)
 Los datos a introducir en este formulario son:
- - **Fecha de inicio:** fecha a partir de la cual se ejecutará.
- - **fecha de última sincronización:** fecha a partir de la cual se debe actualizar. Opcional.
  - **Set:** tipo del objeto, usado para filtrar por agrupaciones, este parametro se puede obtener de http://herc-as-front-desa.atica.um.es/carga/etl/ListSets/{identificador_del_repositorio}.Opcional.
- - **Código de objeto:** codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro, este parametro se puede obtener en la respuesta identifier que da el método http://herc-as-front-desa.atica.um.es/carga/etl/ListIdentifiers/{identificador_del_repositorio}?metadataPrefix=rdf. Opcional.
- - **Nombre del trabajo:** Nombre que se le va a dar a la tarea de sincronización. Obligatorio para tarea recurrente.
+ - **Nombre de la tarea:** Nombre que se le va a dar a la tarea de sincronización. Obligatorio para tarea recurrente.
  - **Expresión del cron:** Recurrencia de la tarea. Obligatorio para tarea recurrente.
 
 Desde esta interfaz se pueden crear varios tipos de tarea según los datos que se introduzcan:
