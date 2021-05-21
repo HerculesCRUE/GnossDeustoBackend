@@ -20,5 +20,4 @@ services:
             - "8890:8890"
         volumes:
             - /var/container-data/virtuoso/db:/database   
-        user: ${CURRENT_UID}
         restart: always
