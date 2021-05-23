@@ -1,3 +1,4 @@
+using System.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +67,18 @@ namespace Hercules_SAML
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+            string proxy = "";
+            if (environmentVariables.Contains("Proxy"))
+            {
+                proxy = environmentVariables["Proxy"] as string;
+            }
+            else
+            {
+                proxy = Configuration["Proxy"];
+            }
+            app.UsePathBase(proxy);
+
             app.UseStaticFiles();
 
             app.UseRouting();
