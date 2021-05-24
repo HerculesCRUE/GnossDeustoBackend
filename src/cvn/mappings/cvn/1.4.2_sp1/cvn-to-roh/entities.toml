@@ -1406,14 +1406,56 @@ id.format = "{roh:title}"
             direct = "bibo:presentedAt"
             inverse = "bibo:presents"
 
-            # TODO lista de autores
-
             [[entities.subentities.properties]]
             displayname = "roh:title"
 
                 [[entities.subentities.properties.sources]]
                 code = "060.010.020.030"
                 name = "title"
+
+            [[entities.subentities.subentities]]
+            displayname = "rdf:Seq"
+
+                [[entities.subentities.subentities.relationships]]
+                inverse = "bibo:authorList"
+
+                [[entities.subentities.subentities.subentities]]
+                code = "060.010.020.040"
+                subcode = true
+                displayname = "foaf:Person"
+                id.resource = "Person"
+                cache = "foaf:name"
+
+                    [[entities.subentities.subentities.subentities.relationships]]
+                    inverse = "rdf:{roh_dummy}"
+
+                    [[entities.subentities.subentities.subentities.properties]]
+                    displayname = "roh:dummy" # (no existe, pero como esta propiedad no se convierte en tripletas, da igual)
+                    hidden = true
+
+                        [[entities.subentities.subentities.subentities.properties.sources]]
+                        name = "order"
+                        bean = "SignatureOrder"
+                        format = "_{value}"
+
+                    [[entities.subentities.subentities.subentities.properties]]
+                    displayname = "foaf:name"
+                    format = "{name} {familyName} {secondFamilyName}"
+
+                        [[entities.subentities.subentities.subentities.properties.sources]]
+                        name = "name"
+                        bean = "GivenName"
+
+                        [[entities.subentities.subentities.subentities.properties.sources]]
+                        code = "060.010.020.040"
+                        name = "familyName"
+                        bean = "FirstFamilyName"
+
+                        [[entities.subentities.subentities.subentities.properties.sources]]
+                        code = "060.010.020.040"
+                        name = "secondFamilyName"
+                        bean = "SecondFamilyName"
+
 
 # TODO Trabajos presentados en jornadas, seminarios, talleres de trabajo y/o cursos nacionales o internacionales
 # TODO Gestión I+D+i
