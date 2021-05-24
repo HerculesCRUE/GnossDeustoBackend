@@ -117,7 +117,7 @@ namespace API_DISCOVER
                                 {
                                     Thread.Sleep((time.Value.UtcDateTime - DateTimeOffset.UtcNow));
 
-                                    AsioPublication asioPublication = new AsioPublication(SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
+                                    AsioPublication asioPublication = new AsioPublication(SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword, _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<RabbitMQService>());
                                     foreach (string graph in graphs)
                                     {
                                         asioPublication.DeleteOrphanNodes(new HashSet<string>() { graph });

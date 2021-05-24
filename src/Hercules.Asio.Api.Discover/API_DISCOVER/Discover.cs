@@ -336,9 +336,9 @@ namespace API_DISCOVER
                     //pDiscoverResult.dataGraph = AsioPublication.CreateUnidataSameAs(pDiscoverResult.dataGraph, UnidataDomain, UnidataUriTransform);
 
                     //Publicamos en el SGI
-                    AsioPublication asioPublication = new AsioPublication(SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
+                    AsioPublication asioPublication = new AsioPublication(SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword, _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<RabbitMQService>());
 
-                    asioPublication.PublishRDF(pDiscoverResult.dataGraph, pDiscoverResult.ontologyGraph, new KeyValuePair<string, string>(urlDiscoverAgent, "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.discoverLinkData, pCallUrisFactoryApiService);
+                    asioPublication.PublishRDF(_serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<RabbitMQService>(), pDiscoverResult.dataGraph, pDiscoverResult.ontologyGraph, new KeyValuePair<string, string>(urlDiscoverAgent, "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.discoverLinkData, pCallUrisFactoryApiService);
 
                     //TODO Lógica nombres de personas
                     SparqlResultSet sparqlResultSet = (SparqlResultSet)pDiscoverResult.dataGraph.ExecuteQuery("select ?s ?name where {?s a <http://purl.org/roh/mirror/foaf#Person>. ?s <http://purl.org/roh/mirror/foaf#name> ?name}");
@@ -380,7 +380,7 @@ namespace API_DISCOVER
                     if (false)
                     {
                         //Publicamos en UNIDATA
-                        AsioPublication asioPublicationUnidata = new AsioPublication(Unidata_SPARQLEndpoint, Unidata_SPARQLQueryParam, Unidata_SPARQLGraph, Unidata_SPARQLUsername, Unidata_SPARQLPassword);
+                        AsioPublication asioPublicationUnidata = new AsioPublication(Unidata_SPARQLEndpoint, Unidata_SPARQLQueryParam, Unidata_SPARQLGraph, Unidata_SPARQLUsername, Unidata_SPARQLPassword, _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<RabbitMQService>());
                         // Prepara el grafo para su carga en Unidata, para ello coge las URIs de Unidata del SameAs y la aplica a los sujetos y los antiguos sujetos se agregan al SameAs
                         RohGraph unidataGraph = AsioPublication.TransformUrisToUnidata(pDiscoverResult.dataGraph, UnidataDomain, UnidataUriTransform);
                         //Eliminamos los triples de crisIdentifier ya que no hay que volcarlos en unidata
@@ -398,7 +398,7 @@ namespace API_DISCOVER
                             LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
                             processor.ProcessCommandSet(updateSubject);
                         }
-                        asioPublicationUnidata.PublishRDF(unidataGraph, pDiscoverResult.ontologyGraph, new KeyValuePair<string, string>(urlDiscoverAgent, "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.discoverLinkData, pCallUrisFactoryApiService);
+                        asioPublicationUnidata.PublishRDF(_serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<RabbitMQService>(), unidataGraph, pDiscoverResult.ontologyGraph, new KeyValuePair<string, string>(urlDiscoverAgent, "Algoritmos de descubrimiento"), pDiscoverResult.start, pDiscoverResult.end, pDiscoverResult.discoverLinkData, pCallUrisFactoryApiService);
                     }
 
                     //Lo marcamos como procesado en la BBDD y eliminamos sus metadatos
@@ -679,52 +679,53 @@ namespace API_DISCOVER
                         string urlDiscoverAgent = pCallUrisFactoryApiService.GetUri("Agent", "discover");
 
                         //Publicamos en el SGI
-                        AsioPublication asioPublication = new AsioPublication(SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
-                        asioPublication.PublishRDF(dataGraphIntegration, null, new KeyValuePair<string, string>(urlDiscoverAgent, "Algoritmos de descubrimiento"), startTime, endTime, discoverLinkData, pCallUrisFactoryApiService);
-
-
-                        //Preparamos los datos para cargarlos en Unidata
-                        RohGraph unidataGraph = dataGraphIntegration.Clone();
-                        #region Si no tiene un sameAs apuntando a Unidata lo eliminamos, no hay que cargar la entidad
-                        SparqlResultSet sparqlResultSet = (SparqlResultSet)unidataGraph.ExecuteQuery("select ?s ?rdftype ?sameas where {?s a ?rdftype. OPTIONAL{?s <http://www.w3.org/2002/07/owl#sameAs> ?sameAS} }");
-                        Dictionary<string, bool> entidadesConSameAsUnidata = new Dictionary<string, bool>();
-                        foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
-                        {
-                            string s = sparqlResult["s"].ToString();
-                            if (!entidadesConSameAsUnidata.ContainsKey(s))
-                            {
-                                entidadesConSameAsUnidata.Add(s, false);
-                            }
-                            if (sparqlResult.Variables.Contains("sameas"))
-                            {
-                                if (sparqlResult["sameas"].ToString().StartsWith(UnidataDomain))
-                                {
-                                    entidadesConSameAsUnidata[s] = true;
-                                }
-                            }
-                        }
-                        TripleStore store = new TripleStore();
-                        store.Add(unidataGraph);
-                        foreach (string entity in entidadesConSameAsUnidata.Keys)
-                        {
-                            if (!entidadesConSameAsUnidata[entity])
-                            {
-                                //Cambiamos candidato.Key por entityID
-                                SparqlUpdateParser parser = new SparqlUpdateParser();
-                                SparqlUpdateCommandSet delete = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
-                                                                                WHERE 
-                                                                                {
-                                                                                    ?s ?p ?o. 
-                                                                                    FILTER(?s = <" + entity + @">)
-                                                                                
-                                                                                }");
-                                LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
-                                processor.ProcessCommandSet(delete);
-                            }
-                        }
-                        #endregion
+                        AsioPublication asioPublication = new AsioPublication(SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword, _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<RabbitMQService>());
+                        asioPublication.PublishRDF(_serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<RabbitMQService>(), dataGraphIntegration, null, new KeyValuePair<string, string>(urlDiscoverAgent, "Algoritmos de descubrimiento"), startTime, endTime, discoverLinkData, pCallUrisFactoryApiService);
 
                         //TODO descomentar cuando esté habilitaado Unidata
+
+                        //Preparamos los datos para cargarlos en Unidata
+                        //RohGraph unidataGraph = dataGraphIntegration.Clone();
+                        //#region Si no tiene un sameAs apuntando a Unidata lo eliminamos, no hay que cargar la entidad
+                        //SparqlResultSet sparqlResultSet = (SparqlResultSet)unidataGraph.ExecuteQuery("select ?s ?rdftype ?sameas where {?s a ?rdftype. OPTIONAL{?s <http://www.w3.org/2002/07/owl#sameAs> ?sameAS} }");
+                        //Dictionary<string, bool> entidadesConSameAsUnidata = new Dictionary<string, bool>();
+                        //foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
+                        //{
+                        //    string s = sparqlResult["s"].ToString();
+                        //    if (!entidadesConSameAsUnidata.ContainsKey(s))
+                        //    {
+                        //        entidadesConSameAsUnidata.Add(s, false);
+                        //    }
+                        //    if (sparqlResult.Variables.Contains("sameas"))
+                        //    {
+                        //        if (sparqlResult["sameas"].ToString().StartsWith(UnidataDomain))
+                        //        {
+                        //            entidadesConSameAsUnidata[s] = true;
+                        //        }
+                        //    }
+                        //}
+                        //TripleStore store = new TripleStore();
+                        //store.Add(unidataGraph);
+                        //foreach (string entity in entidadesConSameAsUnidata.Keys)
+                        //{
+                        //    if (!entidadesConSameAsUnidata[entity])
+                        //    {
+                        //        //Cambiamos candidato.Key por entityID
+                        //        SparqlUpdateParser parser = new SparqlUpdateParser();
+                        //        SparqlUpdateCommandSet delete = parser.ParseFromString(@"DELETE { ?s ?p ?o. }
+                        //                                                        WHERE 
+                        //                                                        {
+                        //                                                            ?s ?p ?o. 
+                        //                                                            FILTER(?s = <" + entity + @">)
+
+                        //                                                        }");
+                        //        LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
+                        //        processor.ProcessCommandSet(delete);
+                        //    }
+                        //}
+                        //#endregion
+
+
                         ////Si hay triples para cargar en Unidata procedemos
                         //if (unidataGraph.Triples.ToList().Count > 0)
                         //{

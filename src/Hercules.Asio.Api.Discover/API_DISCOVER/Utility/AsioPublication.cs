@@ -25,6 +25,7 @@ namespace API_DISCOVER.Utility
         private string _Graph { get; set; }
         private string _Username { get; set; }
         private string _Password { get; set; }
+        private RabbitMQService _RabbitMQService { get; set; }
 
         private readonly I_SparqlUtility _SparqlUtility = new SparqlUtility();
 
@@ -37,13 +38,14 @@ namespace API_DISCOVER.Utility
         /// <param name="pGraph">Grafo de carga</param>
         /// <param name="pUsername">Usuario SPARQL</param>
         /// <param name="pPassword">Password SPARQL</param>
-        public AsioPublication(string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
+        public AsioPublication(string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword, RabbitMQService pRabbitMQService)
         {
             _SPARQLEndpoint = pSPARQLEndpoint;
             _QueryParam = pQueryParam;
             _Graph = pGraph;
             _Username = pUsername;
             _Password = pPassword;
+            _RabbitMQService = pRabbitMQService;
         }
 
         /// <summary>
@@ -56,7 +58,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pActivityEndedAtTime">Fin del proceso</param>
         /// <param name="pDiscoverLinkData">Datos para trabajar con el descubrimiento de enlaces</param>
         /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
-        public void PublishRDF(RohGraph pDataGraph,RohGraph pOntologyGraph, KeyValuePair<string, string>? pAttributedTo, DateTime pActivityStartedAtTime, DateTime pActivityEndedAtTime, DiscoverLinkData pDiscoverLinkData, CallUrisFactoryApiService pCallUrisFactoryApiService)
+        public void PublishRDF(RabbitMQService pRabbitMQService, RohGraph pDataGraph,RohGraph pOntologyGraph, KeyValuePair<string, string>? pAttributedTo, DateTime pActivityStartedAtTime, DateTime pActivityEndedAtTime, DiscoverLinkData pDiscoverLinkData, CallUrisFactoryApiService pCallUrisFactoryApiService)
         {
             RohGraph inferenceDataGraph = null;
             if (pOntologyGraph != null)
@@ -92,7 +94,7 @@ namespace API_DISCOVER.Utility
                 ILiteralNode t_object_name = pDataGraph.CreateLiteralNode(pAttributedTo.Value.Value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
                 pDataGraph.Assert(new Triple(t_subject, t_predicate_name, t_object_name));
             }
-            SparqlUtility.LoadTriples(SparqlUtility.GetTriplesFromGraph(pDataGraph), _SPARQLEndpoint, _QueryParam, _Graph, _Username, _Password);
+            SparqlUtility.LoadTriples(pRabbitMQService, SparqlUtility.GetTriplesFromGraph(pDataGraph), _SPARQLEndpoint, _QueryParam, _Graph, _Username, _Password);
 
             //4º Insertamos los triples con provenance en la BBDD
             if (pDiscoverLinkData != null && pDiscoverLinkData.entitiesProperties != null)
@@ -168,13 +170,13 @@ namespace API_DISCOVER.Utility
                                                         {{
                                                             {{{string.Join("}UNION{", graphDeletes[graph])}}}
                                                         }}";
-                    _SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteProvenance, _QueryParam, _Username, _Password);
+                    _SparqlUtility.SelectData(pRabbitMQService, _SPARQLEndpoint, graph, queryDeleteProvenance, _QueryParam, _Username, _Password);
                 }
 
                 //Cargamos los nuevos triples
                 foreach (string graph in graphTriples.Keys)
                 {
-                    SparqlUtility.LoadTriples(graphTriples[graph], _SPARQLEndpoint, _QueryParam, graph, _Username, _Password);
+                    SparqlUtility.LoadTriples(pRabbitMQService, graphTriples[graph], _SPARQLEndpoint, _QueryParam, graph, _Username, _Password);
                 }
             }
 
@@ -363,7 +365,7 @@ namespace API_DISCOVER.Utility
                                                                 {{
                                                                     {{{string.Join("}UNION{", deletes)}}}
                                                                 }}";
-                _SparqlUtility.SelectData(_SPARQLEndpoint, _Graph, queryDeleteMainEntities, _QueryParam, _Username, _Password);
+                _SparqlUtility.SelectData(_RabbitMQService,_SPARQLEndpoint, _Graph, queryDeleteMainEntities, _QueryParam, _Username, _Password);
             }
         }
 
@@ -376,7 +378,7 @@ namespace API_DISCOVER.Utility
         {
             //Obtenemos todos los grafos en los que está la entidad como sujeto para eliminar sus triples
             HashSet<string> listGraphs = new HashSet<string>();
-            SparqlObject sparqlObjectGraphs = _SparqlUtility.SelectData(_SPARQLEndpoint, "", $"select distinct ?g where{{graph ?g{{?s ?p ?o. FILTER( ?s in(<>,<{pEntity}>) )}}}}", _QueryParam, _Username, _Password);
+            SparqlObject sparqlObjectGraphs = _SparqlUtility.SelectData(_RabbitMQService, _SPARQLEndpoint, "", $"select distinct ?g where{{graph ?g{{?s ?p ?o. FILTER( ?s in(<>,<{pEntity}>) )}}}}", _QueryParam, _Username, _Password);
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObjectGraphs.results.bindings)
             {
                 listGraphs.Add(row["g"].value);
@@ -389,7 +391,7 @@ namespace API_DISCOVER.Utility
                                     {{
                                         <{pEntity}> ?p ?o. 
                                     }}";
-                _SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryDeleteS, _QueryParam, _Username, _Password);
+                _SparqlUtility.SelectData(_RabbitMQService, _SPARQLEndpoint, graph, queryDeleteS, _QueryParam, _Username, _Password);
             }
             return listGraphs;
         }
@@ -408,7 +410,6 @@ namespace API_DISCOVER.Utility
                 {
                     existeNodosHuerfanos = false;
                     existeNodosSinDatos = false;
-
                     //Nodos huerfanos
                     string queryASKOrphan = $@"ASK
                                         WHERE 
@@ -417,7 +418,7 @@ namespace API_DISCOVER.Utility
                                             MINUS{{?x ?y ?s. FILTER(isblank(?s))}}
                                             MINUS{{?s ?p ?o. FILTER(!isblank(?s))}}
                                         }}";
-                    if (_SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryASKOrphan, _QueryParam, _Username, _Password).boolean)
+                    if (_SparqlUtility.SelectData(_RabbitMQService, _SPARQLEndpoint, graph, queryASKOrphan, _QueryParam, _Username, _Password).boolean)
                     {
                         existeNodosHuerfanos = true;
                         string deleteOrphanNodes = $@"DELETE {{ ?s ?p ?o. }}
@@ -427,7 +428,7 @@ namespace API_DISCOVER.Utility
                                             MINUS{{?x ?y ?s. FILTER(isblank(?s))}}
                                             MINUS{{?s ?p ?o. FILTER(!isblank(?s))}}
                                         }}";
-                        _SparqlUtility.SelectData(_SPARQLEndpoint, graph, deleteOrphanNodes, _QueryParam, _Username, _Password);
+                        _SparqlUtility.SelectData(_RabbitMQService, _SPARQLEndpoint, graph, deleteOrphanNodes, _QueryParam, _Username, _Password);
                     }
 
                     //Nodos vacíos
@@ -442,7 +443,7 @@ namespace API_DISCOVER.Utility
                                                 FILTER(?p2 !=<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>)
                                             }}
                                         }}";
-                    if (_SparqlUtility.SelectData(_SPARQLEndpoint, graph, queryASKEmpty, _QueryParam, _Username, _Password).boolean)
+                    if (_SparqlUtility.SelectData(_RabbitMQService, _SPARQLEndpoint, graph, queryASKEmpty, _QueryParam, _Username, _Password).boolean)
                     {
                         existeNodosSinDatos = true;
                         string deleteEmptyNodes = $@"DELETE {{ ?s ?p ?o. }}
@@ -456,7 +457,7 @@ namespace API_DISCOVER.Utility
                                                 FILTER(?p2 !=<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>)
                                             }}
                                         }}";
-                        _SparqlUtility.SelectData(_SPARQLEndpoint, graph, deleteEmptyNodes, _QueryParam, _Username, _Password);
+                        _SparqlUtility.SelectData(_RabbitMQService, _SPARQLEndpoint, graph, deleteEmptyNodes, _QueryParam, _Username, _Password);
                     }
                 }
             }
