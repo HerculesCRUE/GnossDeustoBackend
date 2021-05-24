@@ -21,6 +21,8 @@ namespace API_CARGA.Models.Services
         public string Endpoint { get; set; }
         private string QueryParam { get; set; }
         private string GraphRoh { get; set; }
+        private string Username { get; set; }
+        private string Password { get; set; }
 
         private IConfiguration _configuration { get; set; }
 
@@ -110,6 +112,48 @@ namespace API_CARGA.Models.Services
 
             }
             return QueryParam;
+        }
+
+        ///<summary>
+        ///Obtiene el parametro de usuario en Sparql:Username del fichero appsettings.json
+        ///</summary>
+        public string GetUsername()
+        {
+            if (string.IsNullOrEmpty(Username))
+            {
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("Username"))
+                {
+                    Username = environmentVariables["Username"] as string;
+                }
+                else
+                {
+                    Username = _configuration["Sparql:Username"];
+                }
+
+            }
+            return Username;
+        }
+
+        ///<summary>
+        ///Obtiene el parametro de password en Sparql:Password del fichero appsettings.json
+        ///</summary>
+        public string GetPassword()
+        {
+            if (string.IsNullOrEmpty(Password))
+            {
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("Password"))
+                {
+                    Password = environmentVariables["Password"] as string;
+                }
+                else
+                {
+                    Password = _configuration["Sparql:Password"];
+                }
+
+            }
+            return Password;
         }
     }
 }

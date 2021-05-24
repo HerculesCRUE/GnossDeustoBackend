@@ -81,7 +81,7 @@ namespace API_CARGA.Controllers
                     discoverItem.Status = "Pending";
                     discoverItem.DiscoverRdf = rdf.InnerXml;
 
-                    _amqpService.PublishMessage(idDiscoverItem);
+                    _amqpService.PublishMessage(idDiscoverItem,((RabbitMQService)_amqpService).queueName);
                     return Ok();
                 }
                 else
@@ -89,7 +89,7 @@ namespace API_CARGA.Controllers
                     XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
                     DiscoverItem discoverItem = new DiscoverItem() { JobID = jobId, Rdf = rdf.InnerXml, Publish = true, DissambiguationProcessed = discoverProcessed, Status = "Pending" };
                     Guid addedID = _discoverItemService.AddDiscoverItem(discoverItem);
-                    _amqpService.PublishMessage(addedID);
+                    _amqpService.PublishMessage(addedID, ((RabbitMQService)_amqpService).queueName);
                     return Ok();
                 }
 
@@ -168,7 +168,7 @@ namespace API_CARGA.Controllers
                 ontologyGraph = _configSparql.GetGraphRoh();
                 RohGraph graph = new RohGraph();
                 graph.LoadFromString(OntologyService.GetOntology());
-                SparqlUtility.LoadOntology(graph, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), ontologyGraph);
+                SparqlUtility.LoadOntology((RabbitMQService)_amqpService,graph, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), ontologyGraph, _configSparql.GetUsername(), _configSparql.GetPassword());
                 return Ok();
             }
             catch (Exception ex)
@@ -194,7 +194,7 @@ namespace API_CARGA.Controllers
                 XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
                 DiscoverItem discoverItem = new DiscoverItem() { Rdf = rdf.InnerXml, Publish = false, DissambiguationProcessed = false, Status = "Pending" };
                 Guid addedID = _discoverItemService.AddDiscoverItem(discoverItem);
-                _amqpService.PublishMessage(addedID);
+                _amqpService.PublishMessage(addedID,((RabbitMQService)_amqpService).queueName);
                 return Ok(addedID);
             }
             catch (Exception ex)

@@ -178,11 +178,14 @@ namespace API_CARGA.Models.Utility
         /// <summary>
         /// Carga una ontología en un SPARQL endpoint
         /// </summary>
+        /// <param name="pRabbitMQService">Configuración de rabbit</param>
         /// <param name="pOntology">Ontología</param>
         /// <param name="pSPARQLEndpoint">Endpoint SPARQL</param>
         /// <param name="pQueryParam">Query param</param>
         /// <param name="pGraph">Grafo</param>
-        public static void LoadOntology(RohGraph pOntology, string pSPARQLEndpoint, string pQueryParam, string pGraph)
+        /// <param name="pUsername">Usuario</param>
+        /// <param name="pPassword">Password</param>
+        public static void LoadOntology(RabbitMQService pRabbitMQService, RohGraph pOntology, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
         {
             //Eliminamos los datos anteriores
             string query = "";
@@ -192,6 +195,10 @@ namespace API_CARGA.Models.Utility
             NameValueCollection parametros = new NameValueCollection();
             parametros.Add(pQueryParam, query);
             WebClient webClient = new WebClient();
+            if (!string.IsNullOrEmpty(pUsername) && !string.IsNullOrEmpty(pPassword))
+            {
+                webClient.Credentials = new System.Net.NetworkCredential(pUsername, pPassword);
+            }
             try
             {
                 webClient.UploadValues(url, "POST", parametros);
@@ -214,18 +221,26 @@ namespace API_CARGA.Models.Utility
                 webClient.Dispose();
             }
 
+            if (!string.IsNullOrEmpty(pRabbitMQService.queueNameVirtuoso))
+            {
+                pRabbitMQService.PublishMessage(new RabbitVirtuosoObject(pGraph, query), pRabbitMQService.queueNameVirtuoso);
+            }
+
             //Cargamos la ontología
-            SparqlUtility.LoadTriples(SparqlUtility.GetTriplesFromGraph(pOntology), pSPARQLEndpoint, pQueryParam, pGraph);
+            SparqlUtility.LoadTriples(pRabbitMQService, SparqlUtility.GetTriplesFromGraph(pOntology), pSPARQLEndpoint, pQueryParam, pGraph, pUsername, pPassword);
         }
 
         /// <summary>
         /// Carga los triples en un PARQL endpoint
         /// </summary>
+        /// <param name="pRabbitMQService">Configuración de rabbit</param>
         /// <param name="pTriples">Triples a inertar</param>
         /// <param name="pSPARQLEndpoint">Endpoint SPARQL</param>
         /// <param name="pQueryParam">Query param</param>
         /// <param name="pGraph">Grafo</param>
-        public static void LoadTriples(List<string> pTriples, string pSPARQLEndpoint, string pQueryParam, string pGraph)
+        /// <param name="pUsername">Usuario</param>
+        /// <param name="pPassword">Password</param>
+        public static void LoadTriples(RabbitMQService pRabbitMQService, List<string> pTriples, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
         {
             int maxTriples = 500;
 
@@ -250,7 +265,7 @@ namespace API_CARGA.Models.Utility
                 List<List<string>> listaListasTriples = SplitList(listNotBlankNodeTriples, maxTriples).ToList();
                 foreach (List<string> listaTriples in listaListasTriples)
                 {
-                    InsertData(pSPARQLEndpoint, pGraph, listaTriples, pQueryParam);
+                    InsertData(pRabbitMQService, pSPARQLEndpoint, pGraph, listaTriples, pQueryParam, pUsername, pPassword);
                 }
             }
 
@@ -336,12 +351,12 @@ namespace API_CARGA.Models.Utility
                     {
                         triplesInsert.Add(listBlankNodeTriples[i]);
                     }
-                    InsertData(pSPARQLEndpoint, pGraph, triplesInsert, pQueryParam);
+                    InsertData(pRabbitMQService, pSPARQLEndpoint, pGraph, triplesInsert, pQueryParam, pUsername, pPassword);
                 }
             }
         }
 
-        private static void InsertData(string pSPARQLEndpoint, string pGraph, List<string> triplesInsert, string pQueryParam)
+        private static void InsertData(RabbitMQService pRabbitMQService, string pSPARQLEndpoint, string pGraph, List<string> triplesInsert, string pQueryParam, string pUsername, string pPassword)
         {
             string query = "";
             query += $" INSERT INTO <{pGraph}>";
@@ -360,6 +375,10 @@ namespace API_CARGA.Models.Utility
                 NameValueCollection parametros = new NameValueCollection();
                 parametros.Add(pQueryParam, query);
                 WebClient webClient = new WebClient();
+                if (!string.IsNullOrEmpty(pUsername) && !string.IsNullOrEmpty(pPassword))
+                {
+                    webClient.Credentials = new System.Net.NetworkCredential(pUsername, pPassword);
+                }
                 try
                 {
                     webClient.UploadValues(url, "POST", parametros);
@@ -380,6 +399,10 @@ namespace API_CARGA.Models.Utility
                 finally
                 {
                     webClient.Dispose();
+                }
+                if (!string.IsNullOrEmpty(pRabbitMQService.queueNameVirtuoso))
+                {
+                    pRabbitMQService.PublishMessage(new RabbitVirtuosoObject(pGraph, query), pRabbitMQService.queueNameVirtuoso);
                 }
             }
         }

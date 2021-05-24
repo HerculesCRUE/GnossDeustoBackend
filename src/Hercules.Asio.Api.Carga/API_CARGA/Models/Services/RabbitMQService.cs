@@ -27,7 +27,8 @@ namespace API_CARGA.Models.Services
 
         private readonly RabbitMQInfo amqpInfo;
         private readonly ConnectionFactory connectionFactory;
-        private string queueName;
+        public string queueName { get; set; }
+        public string queueNameVirtuoso { get; set; }
 
         private IConfiguration _configuration { get; set; }
 
@@ -49,6 +50,15 @@ namespace API_CARGA.Models.Services
                 queueName = _configuration["RabbitQueueName"];
             }
 
+            if (environmentVariables.Contains("RabbitQueueNameVirtuoso"))
+            {
+                queueNameVirtuoso = environmentVariables["RabbitQueueNameVirtuoso"] as string;
+            }
+            else
+            {
+                queueNameVirtuoso = _configuration["RabbitQueueNameVirtuoso"];
+            }
+
             amqpInfo = ampOptionsSnapshot.Value;
 
             connectionFactory = new ConnectionFactory
@@ -65,14 +75,15 @@ namespace API_CARGA.Models.Services
         /// Encola un objeto en Rabbbit
         /// </summary>
         /// <param name="message">Objeto a encolar</param>
-        public void PublishMessage(object message)
+        /// <param name="pQueue">Cola</param>
+        public void PublishMessage(object message, string pQueue)
         {
             using (var conn = connectionFactory.CreateConnection())
             {
                 using (var channel = conn.CreateModel())
                 {
                     channel.QueueDeclare(
-                        queue: queueName,
+                        queue: pQueue,
                         durable: false,
                         exclusive: false,
                         autoDelete: false,
@@ -83,7 +94,7 @@ namespace API_CARGA.Models.Services
                     var body = Encoding.UTF8.GetBytes(jsonPayload);
 
                     channel.BasicPublish(exchange: "",
-                        routingKey: queueName,
+                        routingKey: pQueue,
                         basicProperties: null,
                         body: body
                     );
