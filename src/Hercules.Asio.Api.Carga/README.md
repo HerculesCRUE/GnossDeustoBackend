@@ -92,6 +92,7 @@ http://graph.um.es/res/project/RADBOUDUMC
 			"virtualhostRabbitMq": "hercules"
 		},
 		"RabbitQueueName": "HerculesDemoQueue",
+		"RabbitQueueNameVirtuoso": "HerculesQueueVirtuoso",
 		"Authority": "http://herc-as-front-desa.atica.um.es:5108",
 		"ConfigUrlXmlConverter": "http://herc-as-front-desa.atica.um.es/conversor_xml_rdf/"
     }
@@ -107,12 +108,15 @@ http://graph.um.es/res/project/RADBOUDUMC
  - Sparql.GraphRoh: gráfo de la ontologia roh
  - Sparql.GraphRohes: gráfo de la ontologia rohes
  - Sparql.GraphRohum: gráfo de la ontologia rohum
+ - Sparql.Username: Usuario para el Endpoint Sparql
+ - Sparql.Password: Password para el Endpoint Sparql 
  - RabbitMQ.usernameRabbitMq: usuario para acceder a Rabbit
  - RabbitMQ.passwordRabbitMq: contraseña del usuario para acceder a Rabbit
  - RabbitMQ.hostnameRabbitMq: host de Rabbit
  - RabbitMQ.uriRabbitMq: cadena de conexión para acceder a Rabbit
  - RabbitMQ.virtualhostRabbitMq: host virtual configurado en Rabbit
- - RabbitQueueName: Nombre de la cola de Rabbit
+ - RabbitQueueName: Nombre de la cola de Rabbit para la carga de RDFs
+ - RabbitQueueNameVirtuoso: Nombre de la cola de Rabbit para la replicación de la BBDD RDF
  - Authority: Url de la servicio de identidades
  - ConfigUrlXmlConverter: URL donse está lanzada la aplicación CONVERSOR_XML_RDF
 
