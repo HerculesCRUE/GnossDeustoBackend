@@ -1,4 +1,5 @@
 ﻿using API_DISCOVER.Models.Entities;
+using API_DISCOVER.Models.Services;
 using System.Collections.Generic;
 using VDS.RDF;
 using VDS.RDF.Query;
@@ -14,7 +15,7 @@ namespace API_DISCOVER.Utility
             _dataGraph = dataGraph;
         }
 
-        public SparqlObject SelectData(string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam,string pUsername,string pPassword)
+        public SparqlObject SelectData(RabbitMQService pRabbitMQService, string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam,string pUsername,string pPassword)
         {
             SparqlResultSet sparqlResultSet = (SparqlResultSet)_dataGraph.ExecuteQuery(pConsulta.ToString());
             SparqlObject sparqlObject = new SparqlObject();

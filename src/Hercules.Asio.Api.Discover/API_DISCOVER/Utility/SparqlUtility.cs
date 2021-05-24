@@ -16,6 +16,8 @@ using VDS.RDF.Parsing;
 using API_DISCOVER.Models.Entities;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
+using API_DISCOVER.Models.Services;
+using Hercules.Asio.Api.Discover.Models.Entities;
 
 namespace API_DISCOVER.Utility
 {
@@ -122,7 +124,7 @@ namespace API_DISCOVER.Utility
         /// <param name="pGraph">Grafo</param>
         /// <param name="pUsername">Usuario</param>
         /// <param name="pPassword">Password</param>
-        public static void LoadTriples(List<string> pTriples, string pSPARQLEndpoint, string pQueryParam, string pGraph,string pUsername,string pPassword)
+        public static void LoadTriples(RabbitMQService pRabbitMQService, List<string> pTriples, string pSPARQLEndpoint, string pQueryParam, string pGraph,string pUsername,string pPassword)
         {
             int maxTriples = 500;
 
@@ -147,7 +149,7 @@ namespace API_DISCOVER.Utility
                 List<List<string>> listaListasTriples = SplitList(listNotBlankNodeTriples, maxTriples).ToList();
                 foreach (List<string> listaTriples in listaListasTriples)
                 {
-                    InsertData(pSPARQLEndpoint, pGraph, listaTriples, pQueryParam,pUsername,pPassword);
+                    InsertData(pRabbitMQService, pSPARQLEndpoint, pGraph, listaTriples, pQueryParam,pUsername,pPassword);
                 }
             }
 
@@ -233,7 +235,7 @@ namespace API_DISCOVER.Utility
                     {
                         triplesInsert.Add(listBlankNodeTriples[i]);
                     }
-                    InsertData(pSPARQLEndpoint, pGraph, triplesInsert, pQueryParam,pUsername,pPassword);
+                    InsertData(pRabbitMQService, pSPARQLEndpoint, pGraph, triplesInsert, pQueryParam,pUsername,pPassword);
                 }
             }
 
@@ -241,7 +243,7 @@ namespace API_DISCOVER.Utility
            
         }
 
-        private static void InsertData(string pSPARQLEndpoint, string pGraph, List<string> triplesInsert, string pQueryParam,string pUsername,string pPassword)
+        private static void InsertData(RabbitMQService pRabbitMQService, string pSPARQLEndpoint, string pGraph, List<string> triplesInsert, string pQueryParam,string pUsername,string pPassword)
         {
             string query = "";
             query += $" INSERT INTO <{pGraph}>";
@@ -285,10 +287,16 @@ namespace API_DISCOVER.Utility
                 {
                     webClient.Dispose();
                 }
+                if (!string.IsNullOrEmpty(pRabbitMQService.queueNameVirtuoso))
+                {
+                    pRabbitMQService.PublishMessage(new RabbitVirtuosoObject(pGraph, query), pRabbitMQService.queueNameVirtuoso);
+                }
+
             }
+
         }
 
-        public SparqlObject SelectData(string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam, string pUsername, string pPassword)
+        public SparqlObject SelectData(RabbitMQService pRabbitMQService, string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam, string pUsername, string pPassword)
         {
             SparqlObject datosSPARQL = null;
             string urlConsulta = pSPARQLEndpoint;
@@ -333,6 +341,11 @@ namespace API_DISCOVER.Utility
             {
                 datosSPARQL = JsonConvert.DeserializeObject<SparqlObject>(jsonRespuesta);
             }
+            if (!string.IsNullOrEmpty(pRabbitMQService.queueNameVirtuoso) && ( pConsulta.ToLower().Trim().StartsWith("delete ") || pConsulta.ToLower().Trim().StartsWith("insert ")))
+            {
+                pRabbitMQService.PublishMessage(new RabbitVirtuosoObject(pGraph, pConsulta), pRabbitMQService.queueNameVirtuoso);
+            }
+
             return datosSPARQL;
         }
 
@@ -349,6 +362,11 @@ namespace API_DISCOVER.Utility
             {
                 yield return pItems.GetRange(i, Math.Min(pSize, pItems.Count - i));
             }
+        }
+
+        public SparqlObject SelectData(string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam, string pUsername, string pPassword)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -14,11 +14,12 @@ using System.Xml;
 using VDS.RDF;
 using VDS.RDF.Parsing;
 using API_DISCOVER.Models.Entities;
+using API_DISCOVER.Models.Services;
 
 namespace API_DISCOVER.Utility
 {
     public interface I_SparqlUtility
     {
-        public SparqlObject SelectData(string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam,string pUsername,string pPassword);
+        public SparqlObject SelectData(RabbitMQService pRabbitMQService, string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam, string pUsername, string pPassword);
     }
 }

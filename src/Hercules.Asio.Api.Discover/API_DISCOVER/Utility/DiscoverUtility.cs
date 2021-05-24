@@ -676,7 +676,7 @@ namespace API_DISCOVER.Utility
             foreach (List<string> listaIn in listaListas)
             {
                 string consulta = "select distinct ?s ?rdftype where{?s a ?rdftype. Filter(?s in (<" + string.Join(">,<", listaIn) + ">))}";
-                SparqlObject sparqlObject = mSparqlUtility.SelectData(pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
+                SparqlObject sparqlObject = mSparqlUtility.SelectData(null,pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
                 foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
                 {
                     entitiesDB[row["s"].value] = row["rdftype"].value;
@@ -702,7 +702,7 @@ namespace API_DISCOVER.Utility
             foreach (List<string> listaIn in listaListas)
             {
                 string consulta = "select distinct ?s ?sameAs where{ ?s <http://www.w3.org/2002/07/owl#sameAs> ?sameAs Filter(?sameAs in (<" + string.Join(">,<", listaIn) + ">))}";
-                SparqlObject sparqlObject = mSparqlUtility.SelectData(pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
+                SparqlObject sparqlObject = mSparqlUtility.SelectData(null, pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
                 foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
                 {
                     string s = row["s"].value;
@@ -1141,7 +1141,7 @@ namespace API_DISCOVER.Utility
             while (numResulados == numPagination)
             {
                 string consulta = $"select * where{{select * where {{?s a <http://purl.org/roh/mirror/foaf#Person>. ?s <http://purl.org/roh/mirror/foaf#name> ?name}}order by ?s }}offset {offset} limit {numPagination}";
-                SparqlObject sparqlObject = mSparqlUtility.SelectData(pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
+                SparqlObject sparqlObject = mSparqlUtility.SelectData(null, pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
                 numResulados = sparqlObject.results.bindings.Count;
                 if (sparqlObject.results.bindings.Count > 0)
                 {
@@ -1174,7 +1174,7 @@ namespace API_DISCOVER.Utility
             while (numResulados == numPagination)
             {
                 string consulta = $"select * where{{select * where {{?s a ?rdftype. ?s <http://purl.org/roh#title> ?title}}order by ?s }}offset {offset} limit {numPagination}";
-                SparqlObject sparqlObject = mSparqlUtility.SelectData(pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
+                SparqlObject sparqlObject = mSparqlUtility.SelectData(null, pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
                 numResulados = sparqlObject.results.bindings.Count;
                 if (sparqlObject.results.bindings.Count > 0)
                 {
@@ -4962,7 +4962,7 @@ namespace API_DISCOVER.Utility
             while (numResulados == numPagination)
             {
                 string consulta = @$"select * where{{SELECT ?s WHERE {{ ?s a <http://purl.org/roh/mirror/foaf#Person>. }}order by ?s }}offset {offset} limit {numPagination}";
-                SparqlObject sparqlObject = mSparqlUtility.SelectData(pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
+                SparqlObject sparqlObject = mSparqlUtility.SelectData(null, pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
                 numResulados = sparqlObject.results.bindings.Count;
                 if (sparqlObject.results.bindings.Count > 0)
                 {
@@ -4996,7 +4996,7 @@ namespace API_DISCOVER.Utility
 
             //Hacer la consulta para obtener los IDs de los documentos
             string consulta = @"SELECT ?s WHERE { ?s <http://purl.org/roh/mirror/bibo#authorList> ?autorList. ?autorList ?item <" + pPersonID + ">. }";
-            SparqlObject sparqlObject = mSparqlUtility.SelectData(pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
+            SparqlObject sparqlObject = mSparqlUtility.SelectData(null, pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
             {
                 listaDocs.Add(row["s"].value);
@@ -5104,7 +5104,7 @@ namespace API_DISCOVER.Utility
             while (entidadesCargar.Count > 0)
             {
                 string consulta = "select ?s ?p ?o isBlank(?o) as ?blanknode where { ?s ?p ?o. FILTER(?s in(<>,<" + string.Join(">,<", entidadesCargar) + ">))}order by asc(?s) asc(?p) asc(?o)";
-                SparqlObject sparqlObject = mSparqlUtility.SelectData(pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
+                SparqlObject sparqlObject = mSparqlUtility.SelectData(null, pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
                 foreach (string pendiente in entidadesCargar)
                 {
                     sparqlObjectDictionary.Add(pendiente, sparqlObject);
@@ -5207,7 +5207,7 @@ namespace API_DISCOVER.Utility
             int hashCode = (pSPARQLEndpoint + "_" + pGraph + "_" + pConsulta).GetHashCode();
             if (!pDiscoverCache.Sparql.ContainsKey(hashCode))
             {
-                pDiscoverCache.Sparql.Add(hashCode, mSparqlUtility.SelectData(pSPARQLEndpoint, pGraph, pConsulta, pQueryParam, pUsername, pPassword));
+                pDiscoverCache.Sparql.Add(hashCode, mSparqlUtility.SelectData(null, pSPARQLEndpoint, pGraph, pConsulta, pQueryParam, pUsername, pPassword));
             }
             return pDiscoverCache.Sparql[hashCode];
         }
