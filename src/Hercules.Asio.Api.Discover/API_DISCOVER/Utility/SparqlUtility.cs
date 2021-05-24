@@ -342,7 +342,7 @@ namespace API_DISCOVER.Utility
             {
                 datosSPARQL = JsonConvert.DeserializeObject<SparqlObject>(jsonRespuesta);
             }
-            if (!string.IsNullOrEmpty(pRabbitMQService.queueNameVirtuoso) && ( pConsulta.ToLower().Trim().StartsWith("delete ") || pConsulta.ToLower().Trim().StartsWith("insert ")))
+            if (pRabbitMQService != null && !string.IsNullOrEmpty(pRabbitMQService.queueNameVirtuoso) && ( pConsulta.ToLower().Trim().StartsWith("delete ") || pConsulta.ToLower().Trim().StartsWith("insert ")))
             {
                 pRabbitMQService.PublishMessage(new RabbitVirtuosoObject(pGraph, pConsulta), pRabbitMQService.queueNameVirtuoso);
             }
