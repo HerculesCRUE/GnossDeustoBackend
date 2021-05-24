@@ -78,6 +78,11 @@ namespace Hercules_SAML
                 proxy = Configuration["Proxy"];
             }
             app.UsePathBase(proxy);
+            app.Use((context, next) =>
+            {
+                context.Request.PathBase = proxy;
+                return next();
+            });
 
             app.UseStaticFiles();
 
