@@ -25,6 +25,9 @@ services:
       uriRabbitMq: "amqp://hercules:pass_hercules@ip_del_servicio:5672/hercules"
       virtualhostRabbitMq: "hercules"
       RabbitQueueName: "HerculesDemoQueue1"
+      RabbitQueueNameVirtuoso: "HerculesQueueVirtuoso"
+      Username: "UPDATE"
+      Password: "password_usuario_UPDATE"
       ConfigUrlXmlConverter: "http://ip_del_servicio:5110/"
     volumes:
       - /home/$USER/dock-back/logs/apicarga:/app/logs
@@ -98,6 +101,7 @@ services:
       uriRabbitMq: "amqp://hercules:pass_hercules@ip_del_servicio:5672/hercules"
       virtualhostRabbitMq: "hercules"
       RabbitQueueName: "HerculesDemoQueue1"
+      RabbitQueueNameVirtuoso: "HerculesQueueVirtuoso"
       LogPath: "/app/logs"
       Authority: "http://ip_del_servicio:5108/connect/token"
       ConfigUrlCron: "http://ip_del_servicio:5107/"
