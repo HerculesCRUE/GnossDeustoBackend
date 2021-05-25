@@ -190,6 +190,7 @@ A continuación se muestra un fragmento del fichero con la configuración del de
 			"virtualhostRabbitMq": "hercules"
 		},
 		"RabbitQueueName": "HerculesDemoQueue",
+		"RabbitQueueNameVirtuoso": "HerculesQueueVirtuoso",
 		"LogPath": "",
 		"ScopusUrl": "https://api.elsevier.com/",
 		"ScopusApiKey": "",
@@ -231,7 +232,8 @@ A continuación se muestra un fragmento del fichero con la configuración del de
  - RabbitMQ.hostnameRabbitMq: host de Rabbit
  - RabbitMQ.uriRabbitMq: cadena de conexión para acceder a Rabbit
  - RabbitMQ.virtualhostRabbitMq: host virtual configurado en Rabbit
- - RabbitQueueName: Nombre de la cola de Rabbit
+ - RabbitQueueName: Nombre de la cola de Rabbit para la carga de RDFs
+ - RabbitQueueNameVirtuoso: Nombre de la cola de Rabbit para la replicación de la BBDD RDF
  - LogPath: Ruta en la que escribir los logs
  - ScopusUrl: url del API de Scopus
  - ScopusApiKey: API key de Scopus
