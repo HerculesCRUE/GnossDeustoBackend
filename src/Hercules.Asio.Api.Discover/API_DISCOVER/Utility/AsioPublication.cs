@@ -275,7 +275,7 @@ namespace API_DISCOVER.Utility
                                                                 {{
                                                                     {{{string.Join("}UNION{", deletes)}}}
                                                                 }}";
-                _SparqlUtility.SelectData(_SPARQLEndpoint, _Graph, queryDeleteEndedAtTime, _QueryParam, _Username, _Password);
+                _SparqlUtility.SelectData(_RabbitMQService,_SPARQLEndpoint, _Graph, queryDeleteEndedAtTime, _QueryParam, _Username, _Password);
             }
         }
 

@@ -118,6 +118,7 @@ namespace API_DISCOVER.Utility
         /// <summary>
         /// Carga los triples en un PARQL endpoint
         /// </summary>
+        /// <param name="pRabbitMQService">Configuración de rabbit</param>
         /// <param name="pTriples">Triples a inertar</param>
         /// <param name="pSPARQLEndpoint">Endpoint SPARQL</param>
         /// <param name="pQueryParam">Query param</param>
@@ -341,7 +342,7 @@ namespace API_DISCOVER.Utility
             {
                 datosSPARQL = JsonConvert.DeserializeObject<SparqlObject>(jsonRespuesta);
             }
-            if (!string.IsNullOrEmpty(pRabbitMQService.queueNameVirtuoso) && ( pConsulta.ToLower().Trim().StartsWith("delete ") || pConsulta.ToLower().Trim().StartsWith("insert ")))
+            if (pRabbitMQService != null && !string.IsNullOrEmpty(pRabbitMQService.queueNameVirtuoso) && ( pConsulta.ToLower().Trim().StartsWith("delete ") || pConsulta.ToLower().Trim().StartsWith("insert ")))
             {
                 pRabbitMQService.PublishMessage(new RabbitVirtuosoObject(pGraph, pConsulta), pRabbitMQService.queueNameVirtuoso);
             }

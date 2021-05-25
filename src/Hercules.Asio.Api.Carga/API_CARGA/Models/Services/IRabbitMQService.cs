@@ -11,6 +11,9 @@ namespace API_CARGA.Models.Services
         /// Encola un objeto en Rabbbit
         /// </summary>
         /// <param name="message">Objeto a encolar</param>
-        public void PublishMessage(object message);
+        /// <param name="queue">Cola</param>
+        public void PublishMessage(object message,string queue);
+        public string queueName { get; set; }
+        public string queueNameVirtuoso { get; set; }
     }
 }

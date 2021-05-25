@@ -10,7 +10,9 @@ namespace API_CARGA.Models.Services
     /// </summary>
     public class RabbitMQMockService : IRabbitMQService
     {
-        public void PublishMessage(object message)
+        public string queueName { get; set; }
+        public string queueNameVirtuoso { get; set; }
+        public void PublishMessage(object message,string queue)
         {
             
         }

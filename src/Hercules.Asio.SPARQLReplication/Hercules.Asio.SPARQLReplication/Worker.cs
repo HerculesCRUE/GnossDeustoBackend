@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,6 +28,8 @@ namespace Hercules.Asio.SPARQLReplication
         private string QueueName;
         private IConfiguration _configuration;
         private string _urlSparqlServer;
+        private string _userSparqlServer;
+        private string _passwordSparqlServer;
         IDictionary _environmentVariables;
         public Worker(IServiceProvider services, ILogger<Worker> logger)
         {
@@ -39,7 +42,7 @@ namespace Hercules.Asio.SPARQLReplication
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             _configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true).Build();
-            _urlSparqlServer = GetConfiguration("UrlSparqlServer");
+            _urlSparqlServer = GetConfiguration("SparqlServer:Url");
             _connectionFactory = new ConnectionFactory();
 
             _connectionFactory.HostName = GetConfiguration("RabbitMQ:Hostname");
@@ -47,6 +50,8 @@ namespace Hercules.Asio.SPARQLReplication
             _connectionFactory.Password = GetConfiguration("RabbitMQ:Password");
             _connectionFactory.VirtualHost = GetConfiguration("RabbitMQ:VirtualHost");
             QueueName = GetConfiguration("RabbitMQ:QueueName");
+            _userSparqlServer = GetConfiguration("SparqlServer:User");
+            _passwordSparqlServer = GetConfiguration("SparqlServer:Password");
             _connectionFactory.Port = AmqpTcpEndpoint.UseDefaultPort;
             _connectionFactory.DispatchConsumersAsync = true;
 
@@ -129,6 +134,10 @@ namespace Hercules.Asio.SPARQLReplication
                         new KeyValuePair<string, string>("timeout", "0"),
                         new KeyValuePair<string, string>("default-graph-uri", queryVirtuoso.graph)
                     });
+
+                    var base64EncodedAuthenticationString = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes($"{_userSparqlServer}:{_passwordSparqlServer}"));
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64EncodedAuthenticationString);
+
 
                     response = await client.PostAsync(_urlSparqlServer, requestContent);
                     respuesta = await response.Content.ReadAsStringAsync();

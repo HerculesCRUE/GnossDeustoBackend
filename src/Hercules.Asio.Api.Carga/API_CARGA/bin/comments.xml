@@ -862,6 +862,16 @@
             Obtiene el parametro de query configurado en Sparql:QueryParam del fichero appsettings.json
             </summary>
         </member>
+        <member name="M:API_CARGA.Models.Services.ConfigSparql.GetUsername">
+            <summary>
+            Obtiene el parametro de usuario en Sparql:Username del fichero appsettings.json
+            </summary>
+        </member>
+        <member name="M:API_CARGA.Models.Services.ConfigSparql.GetPassword">
+            <summary>
+            Obtiene el parametro de password en Sparql:Password del fichero appsettings.json
+            </summary>
+        </member>
         <member name="T:API_CARGA.Models.Services.ConfigUrlService">
             <summary>
             Clase usada para obtener las urlsConfiguradas
@@ -1101,11 +1111,12 @@
             </summary>
             <param name="identifier">Identificador del item</param>
         </member>
-        <member name="M:API_CARGA.Models.Services.IRabbitMQService.PublishMessage(System.Object)">
+        <member name="M:API_CARGA.Models.Services.IRabbitMQService.PublishMessage(System.Object,System.String)">
             <summary>
             Encola un objeto en Rabbbit
             </summary>
             <param name="message">Objeto a encolar</param>
+            <param name="queue">Cola</param>
         </member>
         <member name="T:API_CARGA.Models.Services.IRepositoriesConfigService">
             <summary>
@@ -1290,11 +1301,12 @@
             </summary>
             <param name="ampOptionsSnapshot">Opciones de configuracion para Rabbit</param>
         </member>
-        <member name="M:API_CARGA.Models.Services.RabbitMQService.PublishMessage(System.Object)">
+        <member name="M:API_CARGA.Models.Services.RabbitMQService.PublishMessage(System.Object,System.String)">
             <summary>
             Encola un objeto en Rabbbit
             </summary>
             <param name="message">Objeto a encolar</param>
+            <param name="pQueue">Cola</param>
         </member>
         <member name="T:API_CARGA.Models.Services.RepositoriesConfigBDService">
             <summary>
@@ -1460,23 +1472,29 @@
             <param name="pValidatoinFileName">Nombre del fichero de validación</param>
             <returns>Lista de triples</returns>
         </member>
-        <member name="M:API_CARGA.Models.Utility.SparqlUtility.LoadOntology(VDS.RDF.RohGraph,System.String,System.String,System.String)">
+        <member name="M:API_CARGA.Models.Utility.SparqlUtility.LoadOntology(API_CARGA.Models.Services.RabbitMQService,VDS.RDF.RohGraph,System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Carga una ontología en un SPARQL endpoint
             </summary>
+            <param name="pRabbitMQService">Configuración de rabbit</param>
             <param name="pOntology">Ontología</param>
             <param name="pSPARQLEndpoint">Endpoint SPARQL</param>
             <param name="pQueryParam">Query param</param>
             <param name="pGraph">Grafo</param>
+            <param name="pUsername">Usuario</param>
+            <param name="pPassword">Password</param>
         </member>
-        <member name="M:API_CARGA.Models.Utility.SparqlUtility.LoadTriples(System.Collections.Generic.List{System.String},System.String,System.String,System.String)">
+        <member name="M:API_CARGA.Models.Utility.SparqlUtility.LoadTriples(API_CARGA.Models.Services.RabbitMQService,System.Collections.Generic.List{System.String},System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Carga los triples en un PARQL endpoint
             </summary>
+            <param name="pRabbitMQService">Configuración de rabbit</param>
             <param name="pTriples">Triples a inertar</param>
             <param name="pSPARQLEndpoint">Endpoint SPARQL</param>
             <param name="pQueryParam">Query param</param>
             <param name="pGraph">Grafo</param>
+            <param name="pUsername">Usuario</param>
+            <param name="pPassword">Password</param>
         </member>
         <member name="M:API_CARGA.Models.Utility.SparqlUtility.GetTriplesFromGraph(VDS.RDF.RohGraph)">
             <summary>
