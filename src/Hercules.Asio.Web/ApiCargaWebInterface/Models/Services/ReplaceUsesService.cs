@@ -5,6 +5,7 @@
 using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.Utility;
 using ApiCargaWebInterface.ViewModels;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Web;
@@ -32,8 +33,9 @@ namespace ApiCargaWebInterface.Models.Services
         /// </summary>
         /// <param name="htmlContent">html de la página con las directivas</param>
         /// <param name="dataModel">modelo donde cargar los datos</param>
+        /// <param name="request">request</param>
         /// <returns>Modelo con los datos cargados</returns>
-        public CmsDataViewModel PageWithDirectives(string htmlContent, CmsDataViewModel dataModel)
+        public CmsDataViewModel PageWithDirectives(string htmlContent, CmsDataViewModel dataModel,HttpRequest request)
         {
             dataModel.Results = new List<string>();
             Dictionary<int, string>  directiveList = Directives(htmlContent);
@@ -45,7 +47,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else if (item.Value.Equals("sparql"))
                 {
-                    dataModel.Results.Add(Sparql(htmlContent, item.Key));
+                    dataModel.Results.Add(Sparql(htmlContent, item.Key,request));
                 }
             }
             return dataModel;
@@ -120,13 +122,26 @@ namespace ApiCargaWebInterface.Models.Services
         /// </summary>
         /// <param name="htmlContent">contenido html</param>
         /// <param name="ocurrence">Posición de la cual hay que mirar</param>
+        /// <param name="request">Request</param>
         /// <returns>Resultado de la llamada en formato csv</returns>
-        private string Sparql(string htmlContent, int ocurrence)
+        private string Sparql(string htmlContent, int ocurrence, HttpRequest request)
         {
             int first = htmlContent.IndexOf(DirectivesList.Sparql, ocurrence);
             first = first + DirectivesList.Sparql.Length;
             int last = htmlContent.IndexOf(DirectivesList.EndDirective, first);
             string queryS = $"{htmlContent.Substring(first, last - first)}";
+            while(queryS.Contains("{GET_PARAM_"))
+            {
+                string param = queryS.Substring(queryS.IndexOf("{GET_PARAM_"));
+                param = param.Substring(0,param.IndexOf("}")+1);
+                string paramGet = param.Trim('{').Trim('}').Replace("GET_PARAM_", "");
+                string value = "";
+                if(request.Query.ContainsKey(paramGet))
+                {
+                    value = request.Query[paramGet].ToString();
+                }
+                queryS=queryS.Replace(param,value);
+            }
             queryS = queryS.Replace("{URL_GRAPH}", _configUrlService.GetGraph());
             string consulta = HttpUtility.UrlEncode(queryS);
             consulta = $"query={consulta}&format=text/csv";
