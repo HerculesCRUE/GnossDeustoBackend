@@ -32,7 +32,7 @@ namespace ApiCargaWebInterface.Controllers
 
         public IActionResult Index()
         {
-            string routeProxy = $"{_configUrlService.GetProxy()}/public/gnossdeustobackend/home";
+            string routeProxy = $"{_configUrlService.GetProxy()}/public/home";
             return Redirect(routeProxy);
         }
 
