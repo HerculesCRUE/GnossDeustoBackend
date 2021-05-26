@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ApiCargaWebInterface.Extra.Exceptions;
+using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
@@ -18,6 +19,7 @@ namespace ApiCargaWebInterface.Controllers
     /// <summary>
     /// Controlador repositorios OAIPMH
     /// </summary>
+    [ClaimRequirement("Administrator","true")]    
     public class RepositoryConfigController : Controller
     {
         readonly ICallRepositoryConfigService _serviceApi;

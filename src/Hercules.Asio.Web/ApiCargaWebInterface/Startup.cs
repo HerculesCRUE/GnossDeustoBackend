@@ -3,6 +3,7 @@ using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.Models.Services.VirtualPathProvider;
 using AspNetCore.Security.CAS;
+using Hercules.Asio.Web.Middlewares;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,7 @@ namespace ApiCargaWebInterface
         }
 
         public IConfiguration Configuration { get; }
+        private string configUrlSAML { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -43,6 +45,24 @@ namespace ApiCargaWebInterface
             else
             {
                 casBaseUrl = Configuration["CasBaseUrl"];
+            }
+
+            if (environmentVariables.Contains("ConfigUrlSAML"))
+            {
+                configUrlSAML = environmentVariables["ConfigUrlSAML"] as string;
+            }
+            else
+            {
+                configUrlSAML = Configuration["ConfigUrlSAML"];
+            }
+
+            if (!string.IsNullOrEmpty(configUrlSAML))
+            {
+                services.AddDistributedMemoryCache();
+                services.AddSession(options =>
+                {
+                    options.IdleTimeout = TimeSpan.FromMinutes(20); // Tiempo de expiración   
+                });
             }
 
             string serviceHost = "";
@@ -146,7 +166,7 @@ namespace ApiCargaWebInterface
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));            
             app.UseStatusCodePagesWithReExecute("/error/{0}");
             app.UseAuthentication();
             app.UseHttpsRedirection();
@@ -167,7 +187,13 @@ namespace ApiCargaWebInterface
                 return next();
             });
             app.UseStaticFiles();
-            
+
+            if (!string.IsNullOrEmpty(configUrlSAML))
+            {
+                app.UseSession();
+                app.UseMiddleware(typeof(SessionMiddleware));
+            }            
+
             app.UseRouting();
 
             app.UseAuthorization();

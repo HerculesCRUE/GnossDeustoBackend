@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.Models.Services.VirtualPathProvider;
 using ApiCargaWebInterface.ViewModels;
@@ -22,6 +23,7 @@ namespace ApiCargaWebInterface.Controllers
     /// <summary>
     /// Controlador para gestionar elar las páginas creadas por los usuarios
     /// </summary>
+    [ClaimRequirement("Administrator", "true")]
     public class CMSController : Controller
     {
         CallApiVirtualPath _documentationApi;

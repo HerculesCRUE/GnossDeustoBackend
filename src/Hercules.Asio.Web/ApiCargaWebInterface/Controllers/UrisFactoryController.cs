@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using ApiCargaWebInterface.Extra.Exceptions;
+using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
@@ -20,7 +21,8 @@ namespace ApiCargaWebInterface.Controllers
     /// Controlador encargado de gestionar las operaciones de la factoria de uris
     /// </summary>
     //[Authorize]
-    public class UrisFactoryController : Controller
+    [ClaimRequirement("Administrator", "true")]
+    public class UrisFactoryController:Controller
     {
         ICallUrisFactoryApiService _callUrisFactoryService;
         public UrisFactoryController(ICallUrisFactoryApiService callUrisFactoryService)

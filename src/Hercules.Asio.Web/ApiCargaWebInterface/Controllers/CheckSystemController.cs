@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
@@ -17,6 +18,7 @@ namespace ApiCargaWebInterface.Controllers
     /// <summary>
     /// Controlador para verificar el estado del sistema
     /// </summary>
+    [ClaimRequirement("Administrator","true")]
     public class CheckSystemController : Controller
     {
         CheckSystemService _checkSystemService;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Hercules_SAML.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Hercules_SAML.Controllers
 {
@@ -20,6 +21,30 @@ namespace Hercules_SAML.Controllers
 
         public IActionResult Index()
         {
+            if (User != null && User.Claims.Count() > 0)
+            {
+                CookieOptions cookieOptions = new CookieOptions();
+                cookieOptions.Expires = DateTime.Now.AddMinutes(1);
+                cookieOptions.Secure = false;
+                string guid = new Guid().ToString();
+
+                if (User.Claims.FirstOrDefault(x => x.Type == "grupos" && x.Value == "gnoss-test") != null) // TODO: Obtenerlo del appsettings.
+                {
+                    guid += "_true";
+                }
+                else
+                {
+                    guid += "_false";
+                }
+
+                Response.Cookies.Append("cookie_saml", guid, cookieOptions);
+                Response.Redirect("https://herc-as-front-desa.atica.um.es/carga-web/public/home/");
+            }
+            else
+            {
+                Response.Redirect("http://herc-as-front-desa.atica.um.es/login/Auth/Login/");
+            }
+
             return View();
         }
 
@@ -28,10 +53,6 @@ namespace Hercules_SAML.Controllers
             return View();
         }
 
-        public IActionResult Claims()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
