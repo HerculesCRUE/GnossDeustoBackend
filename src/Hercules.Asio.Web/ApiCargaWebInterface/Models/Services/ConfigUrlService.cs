@@ -195,7 +195,7 @@ namespace ApiCargaWebInterface.Models.Services
 
         public string GetUrlSAMLLogin()
         {
-            if (string.IsNullOrEmpty(Proxy))
+            if (string.IsNullOrEmpty(UrlSAMLLogin))
             {
                 string connectionString = "";
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
