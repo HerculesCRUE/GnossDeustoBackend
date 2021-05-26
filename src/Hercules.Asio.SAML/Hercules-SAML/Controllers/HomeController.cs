@@ -38,11 +38,11 @@ namespace Hercules_SAML.Controllers
                 }
 
                 Response.Cookies.Append("cookie_saml", guid, cookieOptions);
-                Response.Redirect("https://herc-as-front-desa.atica.um.es/carga-web/public/home/");
+                //Response.Redirect("https://herc-as-front-desa.atica.um.es/carga-web/public/home");
             }
             else
             {
-                Response.Redirect("http://herc-as-front-desa.atica.um.es/login/Auth/Login/");
+                //Response.Redirect("http://herc-as-front-desa.atica.um.es/login/Auth/Login");
             }
 
             return View();
