@@ -30,8 +30,9 @@ namespace ApiCargaWebInterface.Models
             Claim claim = context.HttpContext.User.Claims.FirstOrDefault(c => c.Type == _claim.Type);
             if (claim==null)
             {
+                string urlLogin = context.HttpContext.RequestServices.GetRequiredService<ConfigUrlService>().GetUrlSAMLLogin();
                 string url = context.HttpContext.Request.Scheme + "://" + context.HttpContext.Request.Host + context.HttpContext.Request.Path;
-                context.Result = new RedirectResult(context.HttpContext.RequestServices.GetRequiredService<ConfigUrlService>().GetUrlSAMLLogin()+"?returnUrl="+url);
+                context.Result = new RedirectResult(urlLogin + "?returnUrl="+url);
             }
             else if(claim.Value!= _claim.Value)
             {

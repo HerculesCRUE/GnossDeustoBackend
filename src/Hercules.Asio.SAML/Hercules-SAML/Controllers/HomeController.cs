@@ -7,28 +7,33 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Hercules_SAML.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using System.Collections;
+using Hercules_SAML.Services;
 
 namespace Hercules_SAML.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        readonly ConfigClaimService _ConfigUrlService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ConfigClaimService configUrlService)
         {
             _logger = logger;
+            _ConfigUrlService = configUrlService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string returnUrl = null)
         {
             if (User != null && User.Claims.Count() > 0)
             {
                 CookieOptions cookieOptions = new CookieOptions();
-                cookieOptions.Expires = DateTime.Now.AddMinutes(1);
+                cookieOptions.Expires = DateTime.Now.AddMinutes(1); // Tiempo de la cookie.
                 cookieOptions.Secure = false;
-                string guid = new Guid().ToString();
+                string guid = Guid.NewGuid().ToString();
 
-                if (User.Claims.FirstOrDefault(x => x.Type == "grupos" && x.Value == "gnoss-test") != null) // TODO: Obtenerlo del appsettings.
+                if (User.Claims.FirstOrDefault(x => x.Type == _ConfigUrlService.GetClaim() && x.Value == _ConfigUrlService.GetValue()) != null)
                 {
                     guid += "_true";
                 }
@@ -38,11 +43,15 @@ namespace Hercules_SAML.Controllers
                 }
 
                 Response.Cookies.Append("cookie_saml", guid, cookieOptions);
-                //Response.Redirect("https://herc-as-front-desa.atica.um.es/carga-web/public/home");
+
+                if (!string.IsNullOrEmpty(returnUrl))
+                {
+                    Response.Redirect(returnUrl);
+                }
             }
             else
             {
-                //Response.Redirect("http://herc-as-front-desa.atica.um.es/login/Auth/Login");
+                Response.Redirect(Url.Content("~/Auth/Login") + "?returnUrl=" + Url.Content("~/") + "?returnUrl=" + returnUrl);
             }
 
             return View();

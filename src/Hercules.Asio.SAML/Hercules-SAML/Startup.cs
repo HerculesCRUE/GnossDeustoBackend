@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using ITfoxtec.Identity.Saml2;
 using ITfoxtec.Identity.Saml2.Schemas.Metadata;
 using ITfoxtec.Identity.Saml2.MvcCore.Configuration;
+using Hercules_SAML.Services;
 
 namespace Hercules_SAML
 {
@@ -52,6 +53,7 @@ namespace Hercules_SAML
             });
 
             services.AddSaml2();
+            services.AddSingleton(typeof(ConfigClaimService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
