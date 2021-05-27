@@ -10,9 +10,9 @@ namespace Hercules_SAML.Models
         private string _defaultSchema;
         public DbSet<TokenSAML> TokenSAML { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public EntityContext(DbContextOptions options)
+           : base(options)
         {
-            
         }
     }
 }
