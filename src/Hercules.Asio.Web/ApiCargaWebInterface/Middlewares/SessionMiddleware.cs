@@ -31,7 +31,7 @@ namespace Hercules.Asio.Web.Middlewares
                     string cookieValue = httpContext.Request.Cookies["cookie_saml"];
                     if (cookieValue.Contains("_"))
                     {
-                        string guidString = smlstatus.Substring(0, smlstatus.IndexOf("_"));
+                        string guidString = cookieValue.Substring(0, cookieValue.IndexOf("_"));
                         Guid guidToken;
                         if (Guid.TryParse(guidString, out guidToken))
                         {
@@ -50,9 +50,7 @@ namespace Hercules.Asio.Web.Middlewares
 
             if (!string.IsNullOrEmpty(smlstatus))
             {
-                string guid = smlstatus.Substring(0, smlstatus.IndexOf("_"));
                 string status = smlstatus.Substring(smlstatus.IndexOf("_") + 1);
-                //cargar pagina con normalidad o mostrar pagina sin acceso
                 httpContext.User.Identities.FirstOrDefault().AddClaim(new Claim("Administrator", status));
             }
 
