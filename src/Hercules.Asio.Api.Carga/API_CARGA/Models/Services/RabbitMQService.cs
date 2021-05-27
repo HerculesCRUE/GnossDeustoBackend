@@ -84,7 +84,7 @@ namespace API_CARGA.Models.Services
                 {
                     channel.QueueDeclare(
                         queue: pQueue,
-                        durable: false,
+                        durable: true,
                         exclusive: false,
                         autoDelete: false,
                         arguments: null
