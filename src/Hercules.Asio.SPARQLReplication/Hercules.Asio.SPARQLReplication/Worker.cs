@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -42,16 +43,16 @@ namespace Hercules.Asio.SPARQLReplication
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             _configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true).Build();
-            _urlSparqlServer = GetConfiguration("SparqlServer:Url");
+            _urlSparqlServer = GetConfiguration("SparqlServer_Url");
             _connectionFactory = new ConnectionFactory();
 
-            _connectionFactory.HostName = GetConfiguration("RabbitMQ:Hostname");
-            _connectionFactory.UserName = GetConfiguration("RabbitMQ:User");
-            _connectionFactory.Password = GetConfiguration("RabbitMQ:Password");
-            _connectionFactory.VirtualHost = GetConfiguration("RabbitMQ:VirtualHost");
-            QueueName = GetConfiguration("RabbitMQ:QueueName");
-            _userSparqlServer = GetConfiguration("SparqlServer:User");
-            _passwordSparqlServer = GetConfiguration("SparqlServer:Password");
+            _connectionFactory.HostName = GetConfiguration("RabbitMQ_Hostname");
+            _connectionFactory.UserName = GetConfiguration("RabbitMQ_User");
+            _connectionFactory.Password = GetConfiguration("RabbitMQ_Password");
+            _connectionFactory.VirtualHost = GetConfiguration("RabbitMQ_VirtualHost");
+            QueueName = GetConfiguration("RabbitMQ_QueueName");
+            _userSparqlServer = GetConfiguration("SparqlServer_User");
+            _passwordSparqlServer = GetConfiguration("SparqlServer_Password");
             _connectionFactory.Port = AmqpTcpEndpoint.UseDefaultPort;
             _connectionFactory.DispatchConsumersAsync = true;
 
@@ -120,43 +121,52 @@ namespace Hercules.Asio.SPARQLReplication
         {
             //deserialize
             QueryVirtuoso queryVirtuoso = System.Text.Json.JsonSerializer.Deserialize<QueryVirtuoso>(query);
-            string respuesta = "";
-            HttpResponseMessage response = null;
-            using (HttpClient client = new HttpClient())
+
+            try
             {
-                try
+
+                WebClient webClient = new WebClient();
+                webClient.Encoding = Encoding.UTF8;
+                webClient.Headers.Add(HttpRequestHeader.ContentType, "application/x-www-form-urlencoded");
+
+                if (!string.IsNullOrEmpty(_userSparqlServer) && !string.IsNullOrEmpty(_passwordSparqlServer))
                 {
-                    client.DefaultRequestHeaders.Add("ContentType", "application/x-www-form-urlencoded");
-                    var requestContent = new FormUrlEncodedContent(new[]
-                    {
-                        new KeyValuePair<string, string>("query", queryVirtuoso.query),
-                        new KeyValuePair<string, string>("format", "text/html"),
-                        new KeyValuePair<string, string>("timeout", "0"),
-                        new KeyValuePair<string, string>("default-graph-uri", queryVirtuoso.graph)
-                    });
-
-                    var base64EncodedAuthenticationString = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes($"{_userSparqlServer}:{_passwordSparqlServer}"));
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64EncodedAuthenticationString);
-
-
-                    response = await client.PostAsync(_urlSparqlServer, requestContent);
-                    respuesta = await response.Content.ReadAsStringAsync();
-
-                    return respuesta;
+                    webClient.Credentials = new System.Net.NetworkCredential(_userSparqlServer, _passwordSparqlServer);
                 }
-                catch (Exception e)
+
+                NameValueCollection parametros = new NameValueCollection();
+                parametros.Add("default-graph-uri", queryVirtuoso.graph);
+                parametros.Add("query", queryVirtuoso.query);
+                parametros.Add("format", "application/sparql-results+json");
+
+                byte[] responseArray = null;
+                int numIntentos = 0;
+                Exception exception = null;
+                while (responseArray == null && numIntentos < 5)
                 {
-                    _logger.LogError(default, e, e.Message);
-                    if (response == null)
+                    numIntentos++;
+                    try
                     {
-                        response = new HttpResponseMessage();
+                        responseArray = webClient.UploadValues(_urlSparqlServer, "POST", parametros);
+                        exception = null;
                     }
-                    response.StatusCode = HttpStatusCode.InternalServerError;
-                    response.ReasonPhrase = string.Format("Request failed");
-                    throw new Exception(response.ReasonPhrase + " - " + response.StatusCode);
+                    catch (Exception ex)
+                    {
+                        Thread.Sleep(10000);
+                        exception = ex;
+                    }
                 }
+                if (exception != null)
+                {
+                    throw exception;
+                }
+                return "";
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(default, e, e.Message);
+                throw;
             }
         }
-
     }
 }
