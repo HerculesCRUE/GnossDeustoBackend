@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
@@ -16,6 +17,7 @@ namespace ApiCargaWebInterface.Controllers
     /// <summary>
     /// Controlador para obtener los tokens de acceso a los diferentes apis
     /// </summary>
+    [ClaimRequirement("Administrator", "true")]
     public class TokenController : Controller
     {
         CallTokenService _callTokenService;

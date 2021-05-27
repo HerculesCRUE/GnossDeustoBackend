@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.Models.Services.VirtualPathProvider;
 using ApiCargaWebInterface.ViewModels;
@@ -21,7 +22,7 @@ namespace ApiCargaWebInterface.Controllers
 {
     /// <summary>
     /// Controlador para gestionar elar las páginas creadas por los usuarios
-    /// </summary>
+    /// </summary>    
     public class CMSController : Controller
     {
         CallApiVirtualPath _documentationApi;
@@ -62,6 +63,7 @@ namespace ApiCargaWebInterface.Controllers
         /// Obtiene el listado de las páginas creadas
         /// </summary>
         /// <returns></returns>
+        [ClaimRequirement("Administrator", "true")]
         public IActionResult Index()
         {
             var pages = _documentationApi.GetPages();
@@ -84,6 +86,7 @@ namespace ApiCargaWebInterface.Controllers
         /// </summary>
         /// <param name="route">Ruta de la página</param>
         /// <returns></returns>
+        [ClaimRequirement("Administrator", "true")]
         public IActionResult Details(string route)
         {
             var page = _documentationApi.GetPage(route);
@@ -102,6 +105,7 @@ namespace ApiCargaWebInterface.Controllers
         /// </summary>
         /// <param name="page_id">Identificador de la página</param>
         /// <returns></returns>
+        [ClaimRequirement("Administrator", "true")]
         public IActionResult Delete(Guid page_id)
         {
             _documentationApi.DeletePage(page_id);
@@ -113,6 +117,7 @@ namespace ApiCargaWebInterface.Controllers
         /// <param name="page_id">Identificador de la página en el caso que sea una edición</param>
         /// <param name="route">Ruta de la página en el caso de que sea una edición</param>
         /// <returns></returns>
+        [ClaimRequirement("Administrator", "true")]
         [HttpGet]
         public IActionResult Create(Guid page_id, string route)
         {
@@ -128,6 +133,7 @@ namespace ApiCargaWebInterface.Controllers
         /// </summary>
         /// <param name="new_page">Datos nuevos de la página</param>
         /// <returns></returns>
+        [ClaimRequirement("Administrator", "true")]
         [HttpPost]
         public IActionResult Create(PageViewModel new_page)
         {
@@ -147,6 +153,7 @@ namespace ApiCargaWebInterface.Controllers
         /// Obtiene el esquema de uris configurado
         /// </summary>
         /// <returns></returns>
+        [ClaimRequirement("Administrator", "true")]
         [HttpGet("[Controller]/download/page")]
         public IActionResult DownloadHtml(string route)
         {

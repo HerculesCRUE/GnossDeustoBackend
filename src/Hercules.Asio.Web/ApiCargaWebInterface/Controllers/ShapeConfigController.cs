@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using ApiCargaWebInterface.Extra.Exceptions;
+using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,7 @@ namespace ApiCargaWebInterface.Controllers
     /// <summary>
     /// Controlador de los shapes (configuración de validación)
     /// </summary>
+    [ClaimRequirement("Administrator", "true")]
     public class ShapeConfigController : Controller
     {
         readonly ICallShapeConfigService _serviceApi;

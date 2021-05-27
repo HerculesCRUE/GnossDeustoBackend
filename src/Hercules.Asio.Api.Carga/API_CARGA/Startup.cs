@@ -116,7 +116,7 @@ namespace PRH
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
 
-            
+
             services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
             {
                 var builder = new NpgsqlDbContextOptionsBuilder(opt);
@@ -133,6 +133,8 @@ namespace PRH
                 
 
             });
+
+            
             if (environmentVariables.Contains("uriRabbitMq"))
             {
                 string uriRabbitMq = environmentVariables["uriRabbitMq"] as string;
@@ -178,8 +180,9 @@ namespace PRH
         //<summary>
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         //</summary>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, EntityContext entityContext)
         {
+            entityContext.Migrate();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

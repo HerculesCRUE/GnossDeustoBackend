@@ -21,15 +21,15 @@ namespace API_CARGA.Models
         public DbSet<ShapeConfig> ShapeConfig { get; set; }
         public DbSet<RepositorySync> RepositorySync { get; set; }
         public DbSet<ProcessingJobState> ProcessingJobState { get; set; }
-        public EntityContext(DbContextOptions options, bool memory = false)
+        public DbSet<TokenSAML> TokenSAML { get; set; }
+        public EntityContext(DbContextOptions options)
             : base(options)
         {
-            if (!memory)
-            {
-                Database.Migrate();
-            }
-           
+        }
 
+        public void Migrate()
+        {
+            Database.Migrate();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
