@@ -13,6 +13,10 @@ using ITfoxtec.Identity.Saml2;
 using ITfoxtec.Identity.Saml2.Schemas.Metadata;
 using ITfoxtec.Identity.Saml2.MvcCore.Configuration;
 using Hercules_SAML.Services;
+using Hercules_SAML.Models.Services;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using Hercules_SAML.Models;
 
 namespace Hercules_SAML
 {
@@ -51,6 +55,22 @@ namespace Hercules_SAML
                     throw new Exception("IdPSsoDescriptor not loaded from metadata.");
                 }
             });
+
+            services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
+            {
+                var builder = new NpgsqlDbContextOptionsBuilder(opt);
+                builder.SetPostgresVersion(new Version(9, 6));
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("PostgreConnectionmigration"))
+                {
+                    opt.UseNpgsql(environmentVariables["PostgreConnectionmigration"] as string);
+                }
+                else
+                {
+                    opt.UseNpgsql(Configuration.GetConnectionString("PostgreConnectionmigration"));
+                }
+            });            
+            services.AddScoped<TokenSAMLBDService, TokenSAMLBDService>();
 
             services.AddSaml2();
             services.AddSingleton(typeof(ConfigClaimService));
