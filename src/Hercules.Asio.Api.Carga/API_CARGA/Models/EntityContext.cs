@@ -21,6 +21,7 @@ namespace API_CARGA.Models
         public DbSet<ShapeConfig> ShapeConfig { get; set; }
         public DbSet<RepositorySync> RepositorySync { get; set; }
         public DbSet<ProcessingJobState> ProcessingJobState { get; set; }
+        public DbSet<TokenSAML> TokenSAML { get; set; }
         public EntityContext(DbContextOptions options, bool memory = false)
             : base(options)
         {
