@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System.Collections;
 using Hercules_SAML.Services;
+using Hercules_SAML.Models.Entities;
+using Hercules_SAML.Models.Services;
 
 namespace Hercules_SAML.Controllers
 {
@@ -17,11 +19,13 @@ namespace Hercules_SAML.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         readonly ConfigClaimService _ConfigUrlService;
+        readonly TokenSAMLBDService _TokenSAMLBDService;
 
-        public HomeController(ILogger<HomeController> logger, ConfigClaimService configUrlService)
+        public HomeController(ILogger<HomeController> logger, ConfigClaimService configUrlService, TokenSAMLBDService tokenSAMLBDService)
         {
             _logger = logger;
             _ConfigUrlService = configUrlService;
+            _TokenSAMLBDService = tokenSAMLBDService;
         }
 
         public IActionResult Index(string returnUrl = null)
@@ -33,8 +37,10 @@ namespace Hercules_SAML.Controllers
                     CookieOptions cookieOptions = new CookieOptions();
                     cookieOptions.Expires = DateTime.Now.AddMinutes(1); // Tiempo de la cookie.
                     cookieOptions.Secure = false;
-                    string guid = Guid.NewGuid().ToString();
 
+                    // Creación del token.
+                    Guid token = Guid.NewGuid();
+                    string guid = token.ToString();
                     if (User.Claims.FirstOrDefault(x => x.Type == _ConfigUrlService.GetClaim() && x.Value == _ConfigUrlService.GetValue()) != null)
                     {
                         guid += "_true";
@@ -43,6 +49,9 @@ namespace Hercules_SAML.Controllers
                     {
                         guid += "_false";
                     }
+
+                    // Agrega el token a la BBDD.
+                    _TokenSAMLBDService.AddTokenSAML(token);
 
                     Response.Cookies.Append("cookie_saml", guid, cookieOptions);
                     Response.Redirect(returnUrl);
