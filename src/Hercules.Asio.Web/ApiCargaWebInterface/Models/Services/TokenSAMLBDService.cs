@@ -33,6 +33,18 @@ namespace ApiCargaWebInterface.Models.Services
         }
 
         ///<summary>
+        ///Añade un item token SAML
+        ///</summary>
+        ///<param name="id">Id</param>
+        public void AddTokenSAML(Guid id)
+        {
+            TokenSAML tokenSAml = new TokenSAML();
+            tokenSAml.Token = id;
+            _context.TokenSAML.Add(tokenSAml);
+            _context.SaveChanges();
+        }
+
+        ///<summary>
         ///Elimina un token
         ///</summary>
         ///<param name="tokenSAML">Token SAML</param>

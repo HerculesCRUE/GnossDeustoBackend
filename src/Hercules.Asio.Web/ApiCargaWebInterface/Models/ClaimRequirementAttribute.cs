@@ -26,17 +26,20 @@ namespace ApiCargaWebInterface.Models
         }
         public void OnAuthorization(AuthorizationFilterContext context)
         {
+            string urlLogin = context.HttpContext.RequestServices.GetRequiredService<ConfigUrlService>().GetUrlSAMLLogin();
 
-            Claim claim = context.HttpContext.User.Claims.FirstOrDefault(c => c.Type == _claim.Type);
-            if (claim==null)
+            if (!string.IsNullOrEmpty(urlLogin))
             {
-                string urlLogin = context.HttpContext.RequestServices.GetRequiredService<ConfigUrlService>().GetUrlSAMLLogin();
-                string url = context.HttpContext.RequestServices.GetRequiredService<ConfigUrlService>().GetUrlFront() + context.HttpContext.RequestServices.GetRequiredService<ConfigUrlService>().GetProxy() + "/" + context.HttpContext.Request.Path;
-                context.Result = new RedirectResult(urlLogin + "?returnUrl=" +url);
-            }
-            else if(claim.Value!= _claim.Value)
-            {
-                context.Result = new ForbidResult();
+                Claim claim = context.HttpContext.User.Claims.FirstOrDefault(c => c.Type == _claim.Type);
+                if (claim == null)
+                {
+                    string url = context.HttpContext.RequestServices.GetRequiredService<ConfigUrlService>().GetUrlFront() + context.HttpContext.RequestServices.GetRequiredService<ConfigUrlService>().GetProxy() + "/" + context.HttpContext.Request.Path;
+                    context.Result = new RedirectResult(urlLogin + "?returnUrl=" + url);
+                }
+                else if (claim.Value != _claim.Value)
+                {
+                    context.Result = new ForbidResult();
+                }
             }
         }
     }
