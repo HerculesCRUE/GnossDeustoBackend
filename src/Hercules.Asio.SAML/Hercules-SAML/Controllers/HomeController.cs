@@ -26,32 +26,31 @@ namespace Hercules_SAML.Controllers
 
         public IActionResult Index(string returnUrl = null)
         {
-            if (User != null && User.Claims.Count() > 0)
+            if (!string.IsNullOrEmpty(returnUrl))
             {
-                CookieOptions cookieOptions = new CookieOptions();
-                cookieOptions.Expires = DateTime.Now.AddMinutes(1); // Tiempo de la cookie.
-                cookieOptions.Secure = false;
-                string guid = Guid.NewGuid().ToString();
-
-                if (User.Claims.FirstOrDefault(x => x.Type == _ConfigUrlService.GetClaim() && x.Value == _ConfigUrlService.GetValue()) != null)
+                if (User != null && User.Claims.Count() > 0)
                 {
-                    guid += "_true";
+                    CookieOptions cookieOptions = new CookieOptions();
+                    cookieOptions.Expires = DateTime.Now.AddMinutes(1); // Tiempo de la cookie.
+                    cookieOptions.Secure = false;
+                    string guid = Guid.NewGuid().ToString();
+
+                    if (User.Claims.FirstOrDefault(x => x.Type == _ConfigUrlService.GetClaim() && x.Value == _ConfigUrlService.GetValue()) != null)
+                    {
+                        guid += "_true";
+                    }
+                    else
+                    {
+                        guid += "_false";
+                    }
+
+                    Response.Cookies.Append("cookie_saml", guid, cookieOptions);
+                    Response.Redirect(returnUrl);
                 }
                 else
                 {
-                    guid += "_false";
+                    Response.Redirect(Url.Content("~/Auth/Login") + "?returnUrl=" + Url.Content("~/") + "?returnUrl=" + returnUrl);
                 }
-
-                Response.Cookies.Append("cookie_saml", guid, cookieOptions);
-
-                if (!string.IsNullOrEmpty(returnUrl))
-                {
-                    Response.Redirect(returnUrl);
-                }
-            }
-            else
-            {
-                Response.Redirect(Url.Content("~/Auth/Login") + "?returnUrl=" + Url.Content("~/") + "?returnUrl=" + returnUrl);
             }
 
             return View();
