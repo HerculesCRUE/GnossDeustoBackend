@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace API_CARGA.Models.Entities
-{ 
-    class RabbitVirtuosoObject
+{
+    public class RabbitVirtuosoObject
     {
-        private string graph { get; set; }
-        private string query { get; set; }
+        public string graph { get; set; }
+        public string query { get; set; }
 
         public RabbitVirtuosoObject(string pGraph, string pQuery)
         {
