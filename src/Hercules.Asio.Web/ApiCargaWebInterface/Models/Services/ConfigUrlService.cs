@@ -18,6 +18,7 @@ namespace ApiCargaWebInterface.Models.Services
         public string UrlUris { get; set; }
         public string UrlDocumentacion { get; set; }
         public string UrlSAMLLogin { get; set; }
+        public string UrlFront { get; set; }
         public string Proxy { get; set; }
         public string SaprqlEndpoint { get; set; }
         public string SparqlQuery { get; set; }
@@ -211,6 +212,26 @@ namespace ApiCargaWebInterface.Models.Services
                 UrlSAMLLogin = connectionString;
             }
             return UrlSAMLLogin;
+        }
+
+        public string GetUrlFront()
+        {
+            if (string.IsNullOrEmpty(UrlFront))
+            {
+                string connectionString = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ConfigUrlFront"))
+                {
+                    connectionString = environmentVariables["ConfigUrlFront"] as string;
+                }
+                else
+                {
+                    connectionString = _configuration["ConfigUrlFront"];
+                }
+
+                UrlFront = connectionString;
+            }
+            return UrlFront;
         }
     }
 }

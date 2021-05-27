@@ -31,8 +31,8 @@ namespace ApiCargaWebInterface.Models
             if (claim==null)
             {
                 string urlLogin = context.HttpContext.RequestServices.GetRequiredService<ConfigUrlService>().GetUrlSAMLLogin();
-                string url = context.HttpContext.Request.Scheme + "://" + context.HttpContext.Request.Host + context.HttpContext.Request.Path;
-                context.Result = new RedirectResult(urlLogin + "?returnUrl="+url);
+                string url = context.HttpContext.RequestServices.GetRequiredService<ConfigUrlService>().GetUrlFront() + context.HttpContext.RequestServices.GetRequiredService<ConfigUrlService>().GetProxy() + "/" + context.HttpContext.Request.Path;
+                context.Result = new RedirectResult(urlLogin + "?returnUrl=" +url);
             }
             else if(claim.Value!= _claim.Value)
             {
