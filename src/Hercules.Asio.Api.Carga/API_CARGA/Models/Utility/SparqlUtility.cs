@@ -223,7 +223,7 @@ namespace API_CARGA.Models.Utility
 
             if (!string.IsNullOrEmpty(pRabbitMQService.queueNameVirtuoso))
             {
-                pRabbitMQService.PublishMessage(new RabbitVirtuosoObject(pGraph, query), pRabbitMQService.queueNameVirtuoso);
+                pRabbitMQService.PublishMessage(new RabbitVirtuosoObject(pGraph, query), pRabbitMQService.queueNameVirtuoso, true);
             }
 
             //Cargamos la ontología
@@ -402,7 +402,7 @@ namespace API_CARGA.Models.Utility
                 }
                 if (!string.IsNullOrEmpty(pRabbitMQService.queueNameVirtuoso))
                 {
-                    pRabbitMQService.PublishMessage(new RabbitVirtuosoObject(pGraph, query), pRabbitMQService.queueNameVirtuoso);
+                    pRabbitMQService.PublishMessage(new RabbitVirtuosoObject(pGraph, query), pRabbitMQService.queueNameVirtuoso,true);
                 }
             }
         }

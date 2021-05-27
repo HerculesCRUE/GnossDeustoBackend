@@ -1111,12 +1111,13 @@
             </summary>
             <param name="identifier">Identificador del item</param>
         </member>
-        <member name="M:API_CARGA.Models.Services.IRabbitMQService.PublishMessage(System.Object,System.String)">
+        <member name="M:API_CARGA.Models.Services.IRabbitMQService.PublishMessage(System.Object,System.String,System.Boolean)">
             <summary>
             Encola un objeto en Rabbbit
             </summary>
             <param name="message">Objeto a encolar</param>
             <param name="queue">Cola</param>
+            <param name="pDurable">Durable</param>
         </member>
         <member name="T:API_CARGA.Models.Services.IRepositoriesConfigService">
             <summary>
@@ -1301,7 +1302,7 @@
             </summary>
             <param name="ampOptionsSnapshot">Opciones de configuracion para Rabbit</param>
         </member>
-        <member name="M:API_CARGA.Models.Services.RabbitMQService.PublishMessage(System.Object,System.String)">
+        <member name="M:API_CARGA.Models.Services.RabbitMQService.PublishMessage(System.Object,System.String,System.Boolean)">
             <summary>
             Encola un objeto en Rabbbit
             </summary>
