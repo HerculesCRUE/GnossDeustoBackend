@@ -12,7 +12,8 @@ namespace API_CARGA.Models.Services
         /// </summary>
         /// <param name="message">Objeto a encolar</param>
         /// <param name="queue">Cola</param>
-        public void PublishMessage(object message,string queue);
+        /// <param name="pDurable">Durable</param>
+        public void PublishMessage(object message,string queue, bool pDurable=false);
         public string queueName { get; set; }
         public string queueNameVirtuoso { get; set; }
     }

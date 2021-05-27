@@ -12,7 +12,7 @@ namespace API_CARGA.Models.Services
     {
         public string queueName { get; set; }
         public string queueNameVirtuoso { get; set; }
-        public void PublishMessage(object message,string queue)
+        public void PublishMessage(object message,string queue,bool durable)
         {
             
         }

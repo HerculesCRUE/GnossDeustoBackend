@@ -76,7 +76,7 @@ namespace API_CARGA.Models.Services
         /// </summary>
         /// <param name="message">Objeto a encolar</param>
         /// <param name="pQueue">Cola</param>
-        public void PublishMessage(object message, string pQueue)
+        public void PublishMessage(object message, string pQueue,bool pDurable=false)
         {
             using (var conn = connectionFactory.CreateConnection())
             {
@@ -84,7 +84,7 @@ namespace API_CARGA.Models.Services
                 {
                     channel.QueueDeclare(
                         queue: pQueue,
-                        durable: true,
+                        durable: pDurable,
                         exclusive: false,
                         autoDelete: false,
                         arguments: null
