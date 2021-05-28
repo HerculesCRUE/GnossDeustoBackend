@@ -10,7 +10,7 @@
 |Cambios de la Versión|Creación del documento|
 
 
-# Acerca de SparqlReplication
+# Acerca de SAML
 
 ![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20Hercules.Asio.SPARQLReplication/badge.svg)
 
@@ -20,31 +20,31 @@ Cuando un usuario intenta acceder a una página privada, se le redigirá al SSO 
 Dependiendo del tipo de usuario que sea, le dará unos privilegios u otros. Tras loguearse, volverá a la página a la cual ha intentado acceder.
 
 ## Configuración en el appsettings.json
-  {
+    {
 	  "ConnectionStrings": {
-      "PostgreConnection": "",
-      "PostgreConnectionmigration": ""
-    },
-    "Logging": {
-      "LogLevel": {
-        "Default": "Information",
-        "Microsoft": "Warning",
-        "Microsoft.Hosting.Lifetime": "Information"
-      }
-    },
-    "Saml2": {
-      "IdPMetadata": "",
-      "Issuer": "",
-      "SignatureAlgorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
-      "CertificateValidationMode": "ChainTrust",
-      "RevocationMode": "NoCheck"
-    },
-    "Proxy": "/login",
-    "Claim": "",
-    "Value": "",
-    "AllowedHosts": "*",
-    "Urls": "http://0.0.0.0:5115"
-   }
+		"PostgreConnection": "",
+		"PostgreConnectionmigration": ""
+	  },
+	  "Logging": {
+		"LogLevel": {
+		  "Default": "Information",
+		  "Microsoft": "Warning",
+		  "Microsoft.Hosting.Lifetime": "Information"
+		}
+	  },
+	  "Saml2": {
+		"IdPMetadata": "",
+		"Issuer": "",
+		"SignatureAlgorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+		"CertificateValidationMode": "ChainTrust",
+		"RevocationMode": "NoCheck",
+	  },
+	  "Proxy": "/login",
+	  "Claim": "",
+	  "Value": "",
+	  "AllowedHosts": "*",
+	  "Urls": "http://0.0.0.0:5115"
+    }
   
 - ConnectionStrings.PostgreConnection: PostgreConnectionmigration: Cadena de conexión a la base de datos PostgreSQL.
 - ConnectionStrings.PostgreConnectionmigration: PostgreConnectionmigration: Cadena de conexión a la base de datos PostgreSQL.
