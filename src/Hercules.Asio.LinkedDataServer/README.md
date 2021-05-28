@@ -89,6 +89,14 @@ Este es el fichero de configuración general del servicio en el que se establece
 			"Endpoint": "http://127.0.0.1:8890/sparql",
 			"QueryParam": "query"
 		},
+		"Sparql1": {
+			"Endpoint": "http://127.0.0.1:8890/sparql",
+			"XAppServer": "1"
+  		},
+		"Sparql2": {
+			"Endpoint": "http://127.0.0.1:8890/sparql",
+			"XAppServer": "2"
+  		},
 		"LogPath": "",
 		"OntologyGraph": "http://graph.um.es/graph/research/roh",
 		"NameTitle": "Hércules",
@@ -102,8 +110,14 @@ Las opciones de configuración son:
  - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
  - LogPath: Ruta en la que escribir los logs
  - Sparql.Graph: Grafo en el que se van a consultar los triples
- - Sparql.Endpoint: URL del Endpoint Sparql
+ - Sparql.Endpoint: URL del Endpoint Sparql (HAPRoxy en caso de que haya replicación)
  - Sparql.QueryParam: Parámetro para la query en el Endpoint Sparql
+ - Sparql1: Datos de configruación del endpoint 1, en caso de que haya replicación (no es obligatorio)
+ - Sparql1.Endpoint: URL del Endpoint Sparql 1
+ - Sparql1.XAppServer: Nombre devuelto en la cabecera 'X-App-Server' del HAProxy para el Endpoint Sparql 1
+ - Sparql2: Datos de configruación del endpoint 1, en caso de que haya replicación (no es obligatorio)
+ - Sparql2.Endpoint: URL del Endpoint Sparql 2
+ - Sparql2.XAppServer: Nombre devuelto en la cabecera 'X-App-Server' del HAProxy para el Endpoint Sparql 2
  - OntologyGraph: Grafo del Endpoint Sparql en el que está cargada la ontología
  - NameTitle: Nombre para mostrar en el título de la página tras el nombre de la entidad
  - ConstrainedByUrl: Url en la que se encuentran las restricciones ConstrainedBy 
