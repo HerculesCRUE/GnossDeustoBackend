@@ -56,20 +56,17 @@ namespace ApiCargaWebInterface
                 configUrlSAML = Configuration["ConfigUrlSAML"];
             }
 
-            if (!string.IsNullOrEmpty(configUrlSAML))
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
             {
-                services.AddDistributedMemoryCache();
-                services.AddSession(options =>
-                {
-                    options.IdleTimeout = TimeSpan.FromMinutes(20); // Tiempo de expiración   
+                options.IdleTimeout = TimeSpan.FromMinutes(20); // Tiempo de expiración   
                 });
 
-                services.Configure<CookiePolicyOptions>(options =>
-                {
-                    options.CheckConsentNeeded = context => false;
-                    options.MinimumSameSitePolicy = SameSiteMode.None;
-                });
-            }
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => false;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
 
             string serviceHost = "";
             if (environmentVariables.Contains("ServiceHost"))
@@ -88,12 +85,12 @@ namespace ApiCargaWebInterface
                 })
                 .AddCAS(options =>
                 {
-                    options.CasServerUrlBase = casBaseUrl; 
+                    options.CasServerUrlBase = casBaseUrl;
                     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.ServiceHost = serviceHost;
                 });
             bool cargado = false;
-            
+
             services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
             {
                 var builder = new NpgsqlDbContextOptionsBuilder(opt);
@@ -114,16 +111,16 @@ namespace ApiCargaWebInterface
             services.AddScoped<TokenSAMLBDService, TokenSAMLBDService>();
 
 
-            services.AddControllersWithViews(); 
+            services.AddControllersWithViews();
             services.AddSingleton(typeof(ConfigPathLog));
             services.AddSingleton(typeof(ConfigUrlService));
             services.AddSingleton(typeof(ConfigUrlCronService));
             services.AddSingleton(typeof(ConfigUnidataPrefix));
             services.AddScoped<ICallRepositoryConfigService, CallRepositoryConfigApiService>();
-            services.AddScoped<ICallUrisFactoryApiService, CallUrisFactoryApiService>(); 
+            services.AddScoped<ICallUrisFactoryApiService, CallUrisFactoryApiService>();
             services.AddScoped<ICallService, CallApiService>();
             services.AddScoped<ICallEtlService, CallEtlService>();
-            services.AddScoped<ICallShapeConfigService, CallShapeConfigApiService>(); 
+            services.AddScoped<ICallShapeConfigService, CallShapeConfigApiService>();
             services.AddScoped(typeof(CallCronApiService));
             services.AddScoped(typeof(CheckSystemService));
             services.AddScoped(typeof(CallCronService));
@@ -171,7 +168,7 @@ namespace ApiCargaWebInterface
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseMiddleware(typeof(ErrorHandlingMiddleware));            
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseStatusCodePagesWithReExecute("/error/{0}");
             app.UseAuthentication();
             app.UseHttpsRedirection();
@@ -195,9 +192,9 @@ namespace ApiCargaWebInterface
 
             app.UseSession();
             if (!string.IsNullOrEmpty(configUrlSAML))
-            {                
+            {
                 app.UseMiddleware(typeof(SessionMiddleware));
-            }            
+            }
 
             app.UseRouting();
 
@@ -206,7 +203,7 @@ namespace ApiCargaWebInterface
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages(
-                    
+
                     );
                 //endpoints.MapControllers();
                 endpoints.MapControllerRoute(
