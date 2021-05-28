@@ -31,24 +31,26 @@ La aplicación tiene una clase Worker, que es la encargada de escuchar la cola e
 		  "Microsoft.Hosting.Lifetime": "Information"
 		}
 	  },
-	  "UrlSparqlServer": "http://192.168.2.3:8890/sparql",
-	  "RabbitMQ": {
-		"Hostname": "192.168.2.4",
-		"User": "",
-		"Password": "",
-		"VirtualHost": "hercules",
-		"QueueName": "SparqlReplication"
-	  }
-	}
+	  "SparqlServer_Url": "http://192.168.2.3:8890/sparql",
+	  "SparqlServer_User": "",
+	  "SparqlServer_Password": "",
+	  "RabbitMQ_Hostname": "192.168.2.4",
+	  "RabbitMQ_User": "",
+	  "RabbitMQ_Password": "",
+	  "RabbitMQ_VirtualHost": "hercules",
+	  "RabbitMQ_QueueName": "HerculesQueueVirtuoso"
+    }
  - LogLevel.Default: Nivel de error por defecto
  - LogLevel.Microsoft: Nivel de error para los errores propios de Microsoft
  - LogLevel.Microsoft.Hosting.Lifetime: Nivel de error para los errores de host
- - UrlSparqlServer: Sparql endpoint de la base de datos RDF réplica
- - RabbitMQ.Hostname: IP o url del servidor RabbitMQ
- - RabbitMQ.User: Usuario de RabbitMQ
- - RabbitMQ.Password: contraseña del usuario
- - RabbitMQ.VirtualHost: Virtual host al que está asociado la cola
- - RabbitMQ.QueueName: Nombre de la cola
+ - SparqlServer_Url: Sparql endpoint de la base de datos RDF réplica
+ - SparqlServer_User: Usuario del sparql endpoint de la base de datos RDF réplica
+ - SparqlServer_Password: Password del sparql endpoint de la base de datos RDF réplica
+ - RabbitMQ_Hostname: IP o url del servidor RabbitMQ
+ - RabbitMQ_User: Usuario de RabbitMQ
+ - RabbitMQ_Password: contraseña del usuario
+ - RabbitMQ_VirtualHost: Virtual host al que está asociado la cola
+ - RabbitMQ_QueueName: Nombre de la cola
  
 Se puede encontrar un el appsettings usado para este servicio sin datos sensibles en: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.SPARQLReplication/Hercules.Asio.SPARQLReplication/appsettings.json
 
