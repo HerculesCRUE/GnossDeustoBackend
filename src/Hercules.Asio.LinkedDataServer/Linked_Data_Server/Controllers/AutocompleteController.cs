@@ -42,7 +42,8 @@ namespace Linked_Data_Server.Controllers
                                         ?s ?p ?o.
                                         FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>) AND (lcase(?o) like'{q.ToLower()}*' OR lcase(?o) like'* {q.ToLower()}*'))
                                     }}limit 10";
-            SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
+            string pXAppServer = "";
+            SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta,ref pXAppServer);
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
             {
                 response.Add(new KeyValuePair<string, string>(row["o"].value, row["s"].value));

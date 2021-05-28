@@ -19,6 +19,10 @@ namespace Linked_Data_Server.Models.Services
         private string ConstrainedByUrl { get; set; }
         private string SparqlGraph { get; set; }
         private string SparqlEndpoint { get; set; }
+        private string SparqlEndpoint1 { get; set; }
+        private string XAppServer1 { get; set; }
+        private string SparqlEndpoint2 { get; set; }
+        private string XAppServer2 { get; set; }
         private string SparqlQueryParam { get; set; }
         private string UrlHome { get; set; }
         private string OntologyGraph { get; set; }
@@ -126,6 +130,97 @@ namespace Linked_Data_Server.Models.Services
             return SparqlEndpoint;
         }
 
+        public string GetSparqlEndpoint1()
+        {
+            if (SparqlEndpoint1 == null)
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("Endpoint1"))
+                {
+                    SparqlEndpoint1 = environmentVariables["Endpoint1"] as string;
+                }
+                else
+                {
+                    SparqlEndpoint1 = Configuration["Sparql1:Endpoint"];
+                }
+            }
+            return SparqlEndpoint1;
+        }
+
+        public string GetSparqlEndpoint2()
+        {
+            if (SparqlEndpoint2 == null)
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("Endpoint2"))
+                {
+                    SparqlEndpoint2 = environmentVariables["Endpoint2"] as string;
+                }
+                else
+                {
+                    SparqlEndpoint2 = Configuration["Sparql2:Endpoint"];
+                }
+            }
+            return SparqlEndpoint2;
+        }
+
+        public string GetXAppServer1()
+        {
+            if (XAppServer1 == null)
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("XAppServer1"))
+                {
+                    XAppServer1 = environmentVariables["XAppServer1"] as string;
+                }
+                else
+                {
+                    XAppServer1 = Configuration["Sparql1:XAppServer"];
+                }
+            }
+            return XAppServer1;
+        }
+
+
+        public string GetXAppServer2()
+        {
+            if (XAppServer2 == null)
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                Configuration = builder.Build();
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("XAppServer2"))
+                {
+                    XAppServer2 = environmentVariables["XAppServer2"] as string;
+                }
+                else
+                {
+                    XAppServer2 = Configuration["Sparql2:XAppServer"];
+                }
+            }
+            return XAppServer2;
+        }
+
+        
+
         ///<summary>
         ///Obtiene el parametro de query configurado en Sparql:QueryParam del fichero appsettings.json
         ///</summary>
@@ -151,7 +246,6 @@ namespace Linked_Data_Server.Models.Services
             }
             return SparqlQueryParam;
         }
-
 
         ///<summary>
         ///Obtiene el título:UrlHome del fichero appsettings.json

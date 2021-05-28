@@ -14,15 +14,26 @@ using System.Xml;
 using VDS.RDF;
 using VDS.RDF.Parsing;
 using Linked_Data_Server.Models.Entities;
+using Linked_Data_Server.Models.Services;
 
 namespace Linked_Data_Server.Utility
 {
     public static class SparqlUtility
     {
-        public static SparqlObject SelectData(string pSPARQLEndpoint, string pGraph, string pConsulta, string pQueryParam)
+        public static SparqlObject SelectData(ConfigService pConfigService, string pGraph, string pConsulta, ref string pXAppServer)
         {
             SparqlObject datosDBpedia = null;
-            string urlConsulta = pSPARQLEndpoint;
+            string urlConsulta = pConfigService.GetSparqlEndpoint();
+            if(!string.IsNullOrEmpty(pXAppServer))
+            {
+                if (pConfigService.GetXAppServer1()==pXAppServer)
+                {
+                    urlConsulta = pConfigService.GetSparqlEndpoint1();
+                }else if (pConfigService.GetXAppServer2() == pXAppServer)
+                {
+                    urlConsulta = pConfigService.GetSparqlEndpoint2();
+                }
+            }
             WebClient webClient = new WebClient();
             webClient.Encoding = Encoding.UTF8;
             webClient.Headers.Add(HttpRequestHeader.ContentType, "application/x-www-form-urlencoded");
@@ -33,7 +44,7 @@ namespace Linked_Data_Server.Utility
             {
                 parametros.Add("default-graph-uri", pGraph);
             }
-            parametros.Add(pQueryParam, pConsulta);
+            parametros.Add(pConfigService.GetSparqlQueryParam(), pConsulta);
             parametros.Add("format", "application/sparql-results+json");
            
             byte[] responseArray = null;
@@ -45,6 +56,10 @@ namespace Linked_Data_Server.Utility
                 try
                 {
                     responseArray = webClient.UploadValues(urlConsulta, "POST", parametros);
+                    if (webClient.ResponseHeaders["X-App-Server"] != null)
+                    {
+                        pXAppServer = webClient.ResponseHeaders["X-App-Server"];
+                    }
                     exception = null;
                 }
                 catch (Exception ex)
