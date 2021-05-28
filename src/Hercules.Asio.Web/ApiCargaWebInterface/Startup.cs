@@ -193,9 +193,9 @@ namespace ApiCargaWebInterface
             });
             app.UseStaticFiles();
 
+            app.UseSession();
             if (!string.IsNullOrEmpty(configUrlSAML))
-            {
-                app.UseSession();
+            {                
                 app.UseMiddleware(typeof(SessionMiddleware));
             }            
 
