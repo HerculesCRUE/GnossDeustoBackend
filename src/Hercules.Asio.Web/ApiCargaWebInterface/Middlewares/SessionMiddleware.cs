@@ -42,6 +42,7 @@ namespace Hercules.Asio.Web.Middlewares
                                 httpContext.Session.SetString("session_saml", httpContext.Request.Cookies["cookie_saml"]);
                                 smlstatus = httpContext.Session.GetString("session_saml");
                                 tokenSAMLBDService.RemoveTokenSAML(tokenSAMLBBDD);
+                                httpContext.Response.Cookies.Delete("cookie_saml");
                             }
                         }
                     }

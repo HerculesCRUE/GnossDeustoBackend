@@ -63,6 +63,12 @@ namespace ApiCargaWebInterface
                 {
                     options.IdleTimeout = TimeSpan.FromMinutes(20); // Tiempo de expiración   
                 });
+
+                services.Configure<CookiePolicyOptions>(options =>
+                {
+                    options.CheckConsentNeeded = context => false;
+                    options.MinimumSameSitePolicy = SameSiteMode.None;
+                });
             }
 
             string serviceHost = "";
@@ -101,8 +107,6 @@ namespace ApiCargaWebInterface
                 {
                     opt.UseNpgsql(Configuration.GetConnectionString("PostgreConnectionmigration"));
                 }
-
-
             });
 
             services.AddScoped<DiscoverItemBDService, DiscoverItemBDService>();
