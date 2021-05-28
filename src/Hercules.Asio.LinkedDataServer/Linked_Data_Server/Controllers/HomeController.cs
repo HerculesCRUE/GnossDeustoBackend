@@ -37,6 +37,7 @@ namespace Linked_Data_Server.Controllers
         [Produces("application/rdf+xml", "text/html")]
         public IActionResult Index()
         {
+            string pXAppServer = "";
             //Obtenemos la URL de la entidad
             string url = Request.GetEncodedUrl();
             //string url = Request.GetDisplayUrl();
@@ -63,8 +64,8 @@ namespace Linked_Data_Server.Controllers
                 return StatusCode(StatusCodes.Status405MethodNotAllowed);
             }
 
-            //Cargamos la ontología
-            RohGraph ontologyGraph = LoadGraph(mConfigService.GetOntologyGraph());
+            //Cargamos la ontología y obtenemos la afinidad
+            RohGraph ontologyGraph = LoadGraph(mConfigService.GetOntologyGraph(), mConfigService,ref pXAppServer);
             SparqlResultSet sparqlResultSetNombresPropiedades = (SparqlResultSet)ontologyGraph.ExecuteQuery(@"select distinct ?entidad ?nombre lang(?nombre) as ?lang where 
                                                                                                             { 
                                                                                                                 ?entidad <http://www.w3.org/2000/01/rdf-schema#label> ?nombre. 
@@ -86,7 +87,7 @@ namespace Linked_Data_Server.Controllers
                     {
                         communNamePropierties[entity] = ((LiteralNode)filas.FirstOrDefault(x => x["lang"].ToString() == "en")["nombre"]).Value.ToString();
                     }
-                    else if (filas.FirstOrDefault(x => string.IsNullOrEmpty(x["lang"].ToString()))!=null)
+                    else if (filas.FirstOrDefault(x => string.IsNullOrEmpty(x["lang"].ToString())) != null)
                     {
                         communNamePropierties[entity] = ((LiteralNode)filas.FirstOrDefault(x => string.IsNullOrEmpty(x["lang"].ToString()))["nombre"]).Value.ToString();
                     }
@@ -95,12 +96,12 @@ namespace Linked_Data_Server.Controllers
 
             //Cargamos las entidades propias
             Dictionary<string, string> entitiesNames;
-            Dictionary<string, SparqlObject> sparqlObjectDictionary = GetEntityData(url,out entitiesNames);
+            Dictionary<string, SparqlObject> sparqlObjectDictionary = GetEntityData(url, out entitiesNames, mConfigService,ref pXAppServer);
             if (sparqlObjectDictionary.Count == 1 && sparqlObjectDictionary[url].results.bindings.Count == 0)
             {
                 //No existe la entidad
                 HttpContext.Response.StatusCode = 404;
-                ViewData["Title"] = "Error 404 página no encontrada para la entidad "+ url;
+                ViewData["Title"] = "Error 404 página no encontrada para la entidad " + url;
                 ViewData["NameTitle"] = mConfigService.GetNameTitle();
                 return View(new EntityModelTemplate());
             }
@@ -115,23 +116,23 @@ namespace Linked_Data_Server.Controllers
                 RdfXmlWriter rdfXmlWriter = new RdfXmlWriter();
                 rdfXmlWriter.Save(dataGraph, sw);
                 string rdf = sw.ToString();
-                
+
                 Microsoft.Extensions.Primitives.StringValues stringvalues;
                 HttpContext.Request.Headers.TryGetValue("accept", out stringvalues);
                 if (stringvalues == "application/rdf+xml")
                 {
-					//Añadimos la etiquetqa ETag al header
-					using (SHA256 sha256Hash = SHA256.Create())
-					{
-						string etag = GetHash(sha256Hash, rdf);
-						string ifNoneMatch = HttpContext.Request.Headers["If-None-Match"];
-						if (ifNoneMatch == etag)
-						{
-							HttpContext.Response.StatusCode = 304;
-						}
-						HttpContext.Response.Headers.Add("ETag", etag);
-					}
-					
+                    //Añadimos la etiquetqa ETag al header
+                    using (SHA256 sha256Hash = SHA256.Create())
+                    {
+                        string etag = GetHash(sha256Hash, rdf);
+                        string ifNoneMatch = HttpContext.Request.Headers["If-None-Match"];
+                        if (ifNoneMatch == etag)
+                        {
+                            HttpContext.Response.StatusCode = 304;
+                        }
+                        HttpContext.Response.Headers.Add("ETag", etag);
+                    }
+
                     //Devolvemos en formato RDF
                     return File(Encoding.UTF8.GetBytes(rdf), "application/rdf+xml");
                 }
@@ -143,13 +144,13 @@ namespace Linked_Data_Server.Controllers
                     reasoner.Apply(dataInferenceGraph);
 
                     //Obtenemos datos del resto de grafos (para los provenance)
-                    Dictionary<string, List<Dictionary<string, SparqlObject.Data>>> sparqlObjectDictionaryGraphs = GetEntityDataGraphs(url);
+                    Dictionary<string, List<Dictionary<string, SparqlObject.Data>>> sparqlObjectDictionaryGraphs = GetEntityDataGraphs(url, mConfigService,ref pXAppServer);
 
                     //Obtenemos las tablas configuradas
-                    List<Table> dataTables = GetDataTables(dataInferenceGraph, url);
+                    List<Table> dataTables = GetDataTables(dataInferenceGraph, url, mConfigService,ref pXAppServer);
 
                     //Obtenemos los arborGrah configurados
-                    List<ArborGraph> dataArborGrahs = GetDataArborGraphs(dataInferenceGraph, dataGraph, url);
+                    List<ArborGraph> dataArborGrahs = GetDataArborGraphs(dataInferenceGraph, dataGraph, url, mConfigService,ref pXAppServer);
 
                     //Obtenemos las 10 primeras entidades que apuntan a la entidad
                     HashSet<string> inverseEntities = new HashSet<string>();
@@ -161,7 +162,7 @@ namespace Linked_Data_Server.Controllers
                     }
                     if (mLinked_Data_Server_Config.ExcludeRelatedEntity.Intersect(rdfTypesEntity).Count() == 0)
                     {
-                        inverseEntities = GetInverseEntities(dataGraph, new HashSet<string>() { url }, new HashSet<string>(sparqlObjectDictionary.Keys), new Dictionary<string, SparqlObject>(), 10);
+                        inverseEntities = GetInverseEntities(dataGraph, new HashSet<string>() { url }, new HashSet<string>(sparqlObjectDictionary.Keys), new Dictionary<string, SparqlObject>(), mConfigService,ref pXAppServer, 10);
                     }
 
                     //Devolvemos en formato HTML
@@ -177,7 +178,7 @@ namespace Linked_Data_Server.Controllers
 
                     //Preparamos el modelo de la entidad principal
                     List<LinkedDataRdfViewModel> modelEntities = new List<LinkedDataRdfViewModel>();
-                    LinkedDataRdfViewModel entidad = createLinkedDataRdfViewModel(url, dataGraph, sparqlObjectDictionaryGraphs, new List<string>(), allEntities, communNamePropierties,entitiesNames);
+                    LinkedDataRdfViewModel entidad = createLinkedDataRdfViewModel(url, dataGraph, sparqlObjectDictionaryGraphs, new List<string>(), allEntities, communNamePropierties, entitiesNames);
                     modelEntities.Add(entidad);
                     KeyValuePair<string, List<string>> titulo = entidad.stringPropertiesEntity.FirstOrDefault(x => mLinked_Data_Server_Config.PropsTitle.Contains(x.Key));
                     ViewData["Title"] = "About: " + url;
@@ -190,7 +191,7 @@ namespace Linked_Data_Server.Controllers
                     //Preparamos el modelo del resto de entidades
                     foreach (string entity in inverseEntities)
                     {
-                        LinkedDataRdfViewModel entidadInversa = createLinkedDataRdfViewModel(entity, dataGraph, null, new List<string>(), allEntities, communNamePropierties,entitiesNames);
+                        LinkedDataRdfViewModel entidadInversa = createLinkedDataRdfViewModel(entity, dataGraph, null, new List<string>(), allEntities, communNamePropierties, entitiesNames);
                         modelEntities.Add(entidadInversa);
                     }
 
@@ -200,8 +201,8 @@ namespace Linked_Data_Server.Controllers
                     entityModel.propsTransform = mLinked_Data_Server_Config.PropsTransform;
                     entityModel.tables = dataTables;
                     entityModel.arborGraphs = dataArborGrahs;
-					
-					//Añadimos la etiquetqa ETag al header
+
+                    //Añadimos la etiquetqa ETag al header
                     using (SHA256 sha256Hash = SHA256.Create())
                     {
                         string stringToHash = JsonConvert.SerializeObject(entityModel.linkedDataRDF);
@@ -216,7 +217,7 @@ namespace Linked_Data_Server.Controllers
                         }
                         HttpContext.Response.Headers.Add("ETag", etag);
                     }
-					
+
                     return View(entityModel);
                 }
             }
@@ -228,7 +229,7 @@ namespace Linked_Data_Server.Controllers
         /// <param name="pEntity">URL de la entidad</param>
         /// <param name="pEntitiesNames">Lista con los nombres de las entidades a las que se apunta</param>
         /// <returns>Diccionario con los datos de la entidad</returns>
-        private Dictionary<string, SparqlObject> GetEntityData(string pEntity,out Dictionary<string, string> pEntitiesNames)
+        private Dictionary<string, SparqlObject> GetEntityData(string pEntity, out Dictionary<string, string> pEntitiesNames, ConfigService pConfigService, ref string pXAppServer)
         {
             pEntitiesNames = new Dictionary<string, string>();
             Dictionary<string, SparqlObject> sparqlObjectDictionary = new Dictionary<string, SparqlObject>();
@@ -247,7 +248,7 @@ namespace Linked_Data_Server.Controllers
                                             FILTER(?propTitle in(<{ string.Join(">,<", mLinked_Data_Server_Config.PropsTitle) }>)).
                                         }}
                                     }}order by asc(?s) asc(?p) asc(?o)";
-                SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
+                SparqlObject sparqlObject = SparqlUtility.SelectData(pConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
                 foreach (string pendiente in entidadesCargar)
                 {
                     sparqlObjectDictionary.Add(pendiente, sparqlObject);
@@ -255,7 +256,7 @@ namespace Linked_Data_Server.Controllers
                 entidadesCargar = new HashSet<string>();
                 foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
                 {
-                    if(row.ContainsKey("oTitle")&& row.ContainsKey("o"))
+                    if (row.ContainsKey("oTitle") && row.ContainsKey("o"))
                     {
                         pEntitiesNames[row["o"].value] = row["oTitle"].value;
                     }
@@ -274,7 +275,7 @@ namespace Linked_Data_Server.Controllers
         /// </summary>
         /// <param name="pEntity">URL de la entidad</param>
         /// <returns>Diccionario con los datos de la entidad en varios grafos</returns>
-        private Dictionary<string, List<Dictionary<string, SparqlObject.Data>>> GetEntityDataGraphs(string pEntity)
+        private Dictionary<string, List<Dictionary<string, SparqlObject.Data>>> GetEntityDataGraphs(string pEntity, ConfigService pConfigService, ref string pXAppServer)
         {
             Dictionary<string, List<Dictionary<string, SparqlObject.Data>>> sparqlObjectDictionary = new Dictionary<string, List<Dictionary<string, SparqlObject.Data>>>();
 
@@ -293,7 +294,7 @@ namespace Linked_Data_Server.Controllers
                            ?org <http://purl.org/roh/mirror/foaf#name> ?nameOrg
                         }}
                     }}order by ?action";
-            SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), "", consulta, mConfigService.GetSparqlQueryParam());
+            SparqlObject sparqlObject = SparqlUtility.SelectData(pConfigService, "", consulta,ref pXAppServer);
             if (sparqlObject.results.bindings.Count > 0)
             {
                 sparqlObjectDictionary.Add(pEntity, new List<Dictionary<string, SparqlObject.Data>>());
@@ -314,7 +315,7 @@ namespace Linked_Data_Server.Controllers
         /// <param name="pSparqlObject">Diccionario con los datos de las entidades cargadas</param>
         /// <param name="pMax">Máximo de entidades a buscar</param>
         /// <returns></returns>
-        private HashSet<string> GetInverseEntities(RohGraph pGraph, HashSet<string> pEntities, HashSet<string> pOmitir, Dictionary<string, SparqlObject> pSparqlObject, int? pMax = null)
+        private HashSet<string> GetInverseEntities(RohGraph pGraph, HashSet<string> pEntities, HashSet<string> pOmitir, Dictionary<string, SparqlObject> pSparqlObject, ConfigService pConfigService, ref string pXAppServer, int? pMax = null)
         {
             HashSet<string> entities = new HashSet<string>();
             HashSet<string> entitiesNotBN = new HashSet<string>();
@@ -338,7 +339,7 @@ namespace Linked_Data_Server.Controllers
             {
                 consulta += " order by asc(?rdfType) asc(?s) asc(?p) asc(?o) limit " + pMax.Value * 5;
             }
-            SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
+            SparqlObject sparqlObject = SparqlUtility.SelectData(pConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
 
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
             {
@@ -370,7 +371,7 @@ namespace Linked_Data_Server.Controllers
             if (entitiesBN.Except(pOmitir).Count() > 0)
             {
                 //Recuperamos mas datos de BBDD
-                entitiesNotBN.UnionWith(GetInverseEntities(pGraph, entitiesBN, new HashSet<string>(pOmitir.Union(entities)), pSparqlObject));
+                entitiesNotBN.UnionWith(GetInverseEntities(pGraph, entitiesBN, new HashSet<string>(pOmitir.Union(entities)), pSparqlObject, pConfigService,ref pXAppServer));
             }
             return entitiesNotBN;
         }
@@ -461,7 +462,7 @@ namespace Linked_Data_Server.Controllers
         /// <param name="communNameProperties">Diccionario con los nombres de las propiedades</param>
         /// <param name="entitiesNames">Nombres de las entiadades a las que se apunta</param>
         /// <returns></returns>
-        public LinkedDataRdfViewModel createLinkedDataRdfViewModel(string idEntity, RohGraph dataGraph, Dictionary<string, List<Dictionary<string, SparqlObject.Data>>> pSparqlObjectDictionaryGraphs, List<string> parents, List<string> allEntities, Dictionary<string, string> communNameProperties,Dictionary<string,string> entitiesNames)
+        public LinkedDataRdfViewModel createLinkedDataRdfViewModel(string idEntity, RohGraph dataGraph, Dictionary<string, List<Dictionary<string, SparqlObject.Data>>> pSparqlObjectDictionaryGraphs, List<string> parents, List<string> allEntities, Dictionary<string, string> communNameProperties, Dictionary<string, string> entitiesNames)
         {
             //Obtenemos todos los triples de la entidad
             SparqlResultSet sparqlResultSet = (SparqlResultSet)dataGraph.ExecuteQuery("select ?p ?o where { <" + idEntity + "> ?p ?o }");
@@ -482,7 +483,7 @@ namespace Linked_Data_Server.Controllers
                         entitiesPropertiesEntityAux.Add(sparqlResult["p"].ToString(), new List<LinkedDataRdfViewModel>());
                     }
                     parents.Add(idEntity);
-                    entitiesPropertiesEntityAux[sparqlResult["p"].ToString()].Add(createLinkedDataRdfViewModel(sparqlResult["o"].ToString(), dataGraph, null, parents, allEntities, communNameProperties,entitiesNames));
+                    entitiesPropertiesEntityAux[sparqlResult["p"].ToString()].Add(createLinkedDataRdfViewModel(sparqlResult["o"].ToString(), dataGraph, null, parents, allEntities, communNameProperties, entitiesNames));
                 }
                 else
                 {
@@ -591,7 +592,7 @@ namespace Linked_Data_Server.Controllers
         /// <param name="pDataInferenceGraph">Grafo que contiene los datos (con inferencia)</param>
         /// <param name="pEntity">URL de la entidad</param>
         /// <returns></returns>
-        private List<Table> GetDataTables(RohGraph pDataInferenceGraph, string pEntity)
+        private List<Table> GetDataTables(RohGraph pDataInferenceGraph, string pEntity, ConfigService pConfigService, ref string pXAppServer)
         {
             List<Table> tableList = new List<Table>();
             try
@@ -603,7 +604,7 @@ namespace Linked_Data_Server.Controllers
                     if (result.Count() > 0)
                     {
                         //Obtiene los datos para las tablas
-                        tableList.AddRange(LoadTables(pEntity, configtable));
+                        tableList.AddRange(LoadTables(pEntity, configtable, pConfigService,ref pXAppServer));
                     }
                 }
             }
@@ -622,7 +623,7 @@ namespace Linked_Data_Server.Controllers
         /// <param name="pDataGraph">Grafo que contiene los datos</param>
         /// <param name="pEntity">URL de la entidad</param>
         /// <returns>Lista con los datos para pintar los gráficos</returns>
-        private List<ArborGraph> GetDataArborGraphs(RohGraph pDataInferenceGraph, RohGraph pDataGraph, string pEntity)
+        private List<ArborGraph> GetDataArborGraphs(RohGraph pDataInferenceGraph, RohGraph pDataGraph, string pEntity, ConfigService pConfigService, ref string pXAppServer)
         {
             List<ArborGraph> arborGraphList = new List<ArborGraph>();
             try
@@ -652,7 +653,7 @@ namespace Linked_Data_Server.Controllers
                             SparqlResultSet resultName = (SparqlResultSet)pDataInferenceGraph.ExecuteQuery("select ?o where {<" + pEntity + "> ?propTitle ?o. FILTER(?propTitle in(<" + string.Join(">,<", propsTitle) + ">)) }");
                             if (resultName.Results.Count > 0)
                             {
-                                arborGraphList.AddRange(LoadGraphs(pEntity, arborGraphRdfType, ((LiteralNode)(resultName.Results[0]["o"])).Value, rdfType));
+                                arborGraphList.AddRange(LoadGraphs(pEntity, arborGraphRdfType, ((LiteralNode)(resultName.Results[0]["o"])).Value, rdfType, pConfigService, ref pXAppServer));
                             }
                         }
 
@@ -674,7 +675,7 @@ namespace Linked_Data_Server.Controllers
         /// <param name="pEntity">URL de la entidad</param>
         /// <param name="pConfigtables">Tablas de configuración para la entidad</param>
         /// <returns>Lista con las tablas</returns>
-        private List<Table> LoadTables(string pEntity, Config_Linked_Data_Server.ConfigTable pConfigtables)
+        private List<Table> LoadTables(string pEntity, Config_Linked_Data_Server.ConfigTable pConfigtables, ConfigService pConfigService, ref string pXAppServer)
         {
             List<Table> tableList = new List<Table>();
 
@@ -689,7 +690,7 @@ namespace Linked_Data_Server.Controllers
                     table.Header.Add(field);
                 }
                 string consulta = tableConfig.query.Replace("{ENTITY_ID}", pEntity);
-                SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
+                SparqlObject sparqlObject = SparqlUtility.SelectData(pConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
 
                 foreach (var result in sparqlObject.results.bindings)
                 {
@@ -714,7 +715,7 @@ namespace Linked_Data_Server.Controllers
         /// <param name="pNameEntity">Nombre de la entidad</param>
         /// <param name="pRdfType">RdfTypes de la entidad</param>
         /// <returns>Lista de los arborGraphs rellenados</returns>
-        private List<ArborGraph> LoadGraphs(string pEntity, Config_Linked_Data_Server.ConfigArborGraph.ArborGraphRdfType pArborGraphRdfType, string pNameEntity, string pRdfType)
+        private List<ArborGraph> LoadGraphs(string pEntity, Config_Linked_Data_Server.ConfigArborGraph.ArborGraphRdfType pArborGraphRdfType, string pNameEntity, string pRdfType, ConfigService pConfigService, ref string pXAppServer)
         {
             List<ArborGraph> arborGraphs = new List<ArborGraph>();
 
@@ -750,7 +751,7 @@ namespace Linked_Data_Server.Controllers
                 foreach (Config_Linked_Data_Server.ConfigArborGraph.ArborGraphRdfType.ArborGraph.Property property in arborGrahConfig.properties)
                 {
                     string consulta = property.query.Replace("{ENTITY_ID}", pEntity);
-                    SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
+                    SparqlObject sparqlObject = SparqlUtility.SelectData(pConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
 
                     Dictionary<string, string> nodesName = new Dictionary<string, string>();
                     Dictionary<string, string> nodesRdfType = new Dictionary<string, string>();
@@ -768,7 +769,7 @@ namespace Linked_Data_Server.Controllers
                     }
 
                     string consultaNamesRdfType = "select distinct ?s ?name ?rdftype where {?s a ?rdftype.?s ?propTitle ?name. FILTER(?s in (<" + string.Join(">,<", nodesName.Keys) + ">)) Filter(?propTitle in (<" + string.Join(">,<", mLinked_Data_Server_Config.PropsTitle) + ">))}";
-                    SparqlObject sparqlObjecDataNamesRdfType = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consultaNamesRdfType, mConfigService.GetSparqlQueryParam());
+                    SparqlObject sparqlObjecDataNamesRdfType = SparqlUtility.SelectData(pConfigService, mConfigService.GetSparqlGraph(), consultaNamesRdfType,ref pXAppServer);
                     foreach (var result in sparqlObjecDataNamesRdfType.results.bindings)
                     {
                         nodesName[result["s"].value] = result["name"].value;
@@ -870,11 +871,11 @@ namespace Linked_Data_Server.Controllers
             return arborGraphs;
         }
 
-        private RohGraph LoadGraph(string pGraph)
+        private RohGraph LoadGraph(string pGraph, ConfigService pConfigService, ref string pXAppServer)
         {
             RohGraph dataGraph = new RohGraph();
             string consulta = "select ?s ?p ?o where { ?s ?p ?o. }";
-            SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), pGraph, consulta, mConfigService.GetSparqlQueryParam());
+            SparqlObject sparqlObject = SparqlUtility.SelectData(pConfigService, pGraph, consulta, ref pXAppServer );
 
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
             {

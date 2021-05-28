@@ -32,8 +32,8 @@ namespace Linked_Data_Server.Controllers
                                         ?s a ?rdfType.
                                         FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>) AND (lcase(?o) like'{q.ToLower()}*' OR lcase(?o) like'* {q.ToLower()}*'))
                                     }}OFFSET {(pagina-1)*10} limit 11";
-
-            SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService.GetSparqlEndpoint(), mConfigService.GetSparqlGraph(), consulta, mConfigService.GetSparqlQueryParam());
+            string pXAppServer = "";
+            SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta,ref pXAppServer);
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
             {
                 if (!searchModelTemplate.entidades.ContainsKey(row["s"].value))
