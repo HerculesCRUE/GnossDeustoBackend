@@ -17,7 +17,6 @@ namespace Hercules.Asio.Web.Controllers
             _ConfigUrlService = configUrlService;
         }
 
-        [HttpPost]
         public IActionResult Index()
         {
             HttpContext.Session.Remove("session_saml");            
