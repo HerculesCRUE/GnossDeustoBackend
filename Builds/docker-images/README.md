@@ -173,6 +173,12 @@ Ya tenemos RabbitMQ listo para trabajar en nuestro entorno.
 La instalación de Apache la podemos hacer desde los repositorios de nuestro sistema operativo. En este ejemplo podemos ver como instalar Apache, junto al módulo SSL en Centos o Red Hat.
 
 	yum -y install httpd mod24_ssl
+	
+Si lo queremos instalar en Ubuntu o Debian debemos ejecutar los siguientes comandos:
+
+	apt-get update
+	apt-get install apache2 openssl
+	a2enmod ssl
 
 Para que el Linked Data Server funcione de manera adecuada tenemos que preparar un archivo de configuracion de Apache con estos datos. Esta configuración hace basicamente que lo que se pida por http se re dirija al servidor de Linked Data Server que en este caso estaria en la misma máquina y en su puerto establecido "8081"
 
