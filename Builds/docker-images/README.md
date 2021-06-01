@@ -11,12 +11,19 @@
 
 ## Índice
 [Requisitos previos](#requisitos-previos)
+
 [Despliegue de Virtuoso](#despliegue-de-virtuoso)
+
 [Despliegue de PostgreSQL](#despliegue-de-postgresql)
+
 [Despliegue de RabbitMQ](#despliegue-de-rabbitmq)
+
 [Preparación de Apache](#preparacion-de-apache)
+
 [Despliegue de los servicios de back](#despliegue-de-los-servicios-de-back)
+
 [Despliegue de los servicios front](#despliegue-de-los-servicios-front)
+
 [Ejemplo de configuración de HAProxy](#ejemplo-de-configuración-de-haproxy)
 
 # Despliegue de ASIO Backend SGI con Docker
