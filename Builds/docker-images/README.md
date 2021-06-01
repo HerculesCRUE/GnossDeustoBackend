@@ -18,7 +18,7 @@
 
 [Despliegue de RabbitMQ](#despliegue-de-rabbitmq)
 
-   [Preparación de Apache](#preparación-de-apache)
+ - [Preparación de Apache](#preparación-de-apache)
 
 [Limitar Apache](#limitar-apache)
 
