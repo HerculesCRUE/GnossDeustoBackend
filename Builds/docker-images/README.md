@@ -18,7 +18,7 @@
 
 [Despliegue de RabbitMQ](#despliegue-de-rabbitmq)
 
-[Preparación de Apache](#preparacion-de-apache)
+[Preparación de Apache](#preparación-de-apache)
 
 [Despliegue de los servicios de back](#despliegue-de-los-servicios-de-back)
 
