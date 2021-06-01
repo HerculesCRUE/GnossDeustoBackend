@@ -20,6 +20,8 @@
 
 [Preparación de Apache](#preparación-de-apache)
 
+	[Limitar Apache](#limitar-apache)
+
 [Despliegue de los servicios de back](#despliegue-de-los-servicios-de-back)
 
 [Despliegue de los servicios front](#despliegue-de-los-servicios-front)
@@ -299,7 +301,7 @@ Para activar los módulos debemos editar el httpd.conf y añadir estas dos líne
 	LoadModule limitipconn_module modules/mod_limitipconn.so
 	LoadModule bw_module modules/mod_bw.so
 
-Ahora podemos estabeces límites en nuestros sitios de Apache. A continuacón podemos ver un ejemplo:
+Ahora podemos establecer límites en nuestros sitios de Apache. A continuacón podemos ver un ejemplo:
 
 	BandwidthModule On // Abrir mod_bw  
  	ForceBandWidthModule On // Igual que el anterior  
