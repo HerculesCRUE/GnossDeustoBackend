@@ -269,7 +269,7 @@ Por último, para que la aplicación disponga de los archivos necesarios tenemos
 
 ###### Limitar Apache
 
-Si queremos poner limitaciones de ancho de banda o limitar las conexiones por IP de nuestro Apache, debemos instalar los módulos mod_limitipconn y mod_bw siguiendo las instruccione que vienen a continuación. Antes de comenzar debemos tener los devel de Apache instalados. 
+Si queremos poner límitees de ancho de banda o de conexiones por IP de nuestro Apache, debemos instalar los módulos mod_limitipconn y mod_bw siguiendo las instrucciones que vienen a continuación. Antes de comenzar debemos tener los *devel* de Apache instalados. 
 En RHEL:
 
 	yum -y install httpd-devel
