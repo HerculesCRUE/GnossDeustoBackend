@@ -9,6 +9,9 @@
 |Tipo|Manual|
 |Cambios de la Versión|Modificada la introducción para eliminar prerequisitos sobrantes|
 
+[Requisitos previos](#requisitos-previos)
+
+
 # Despliegue de ASIO Backend SGI con Docker
 
 ## Requisitos previos
