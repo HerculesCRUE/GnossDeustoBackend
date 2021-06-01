@@ -1,21 +1,28 @@
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 17/5/2021                                                   |
+| Fecha         | 01/06/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Despliegue de ASIO Backend de SGI con Docker| 
 |Descripción|Instrucciones para instalar ASIO mediante el despliegue de instancias docker|
-|Versión|1.3|
+|Versión|1.4|
 |Módulo|Documentación|
 |Tipo|Manual|
-|Cambios de la Versión|Modificada la introducción para eliminar prerequisitos sobrantes|
+|Cambios de la Versión|Añadidas instrucciones para instalar Apache. Añadir índice.|
 
+## Índice
 [Requisitos previos](#requisitos-previos)
-
+[Despliegue de Virtuoso](#despliegue-de-virtuoso)
+[Despliegue de PostgreSQL](#despliegue-de-postgresql)
+[Despliegue de RabbitMQ](#despliegue-de-rabbitmq)
+[Preparación de Apache](#preparacion-de-apache)
+[Despliegue de los servicios de back](#despliegue-de-los-servicios-de-back)
+[Despliegue de los servicios front](#despliegue-de-los-servicios-front)
+[Ejemplo de configuración de HAProxy](#ejemplo-de-configuración-de-haproxy)
 
 # Despliegue de ASIO Backend SGI con Docker
 
 ## Requisitos previos
-Para hacer funcionar el Backend será necesario tener instalado en nuestro servidor:
+En este manual recomendamos instalar algunos de los componenetes de ASIO mediante Docker. Para instalar con Docker el servidor debería tener instalado:  
 
 * Docker (podemos seguir la documentacion oficial dependiendo de nuestra dristrubución de Linux) 
     - Centos https://docs.docker.com/engine/install/centos/
