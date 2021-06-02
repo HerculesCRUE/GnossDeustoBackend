@@ -2,6 +2,7 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Test unitario del fichero de configuración
+using Hercules.Asio.UrisFactory.Models.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -27,7 +28,8 @@ namespace XUnitTestUrisFactory
         {
             try
             {
-                ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+                ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+                ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
                 ISchemaConfigOperations schemaConfigOperations = new SchemaConfigMemoryOperations(configJsonHandler);
                 SchemaController schemaController = new SchemaController(configJsonHandler, schemaConfigOperations);
                 var result = schemaController.GetSchema();
@@ -42,7 +44,8 @@ namespace XUnitTestUrisFactory
         [Fact]
         public void TestFormedJson()
         {
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             ISchemaConfigOperations schemaConfigOperations = new SchemaConfigMemoryOperations(configJsonHandler);
             SchemaController schemaController = new SchemaController(configJsonHandler, schemaConfigOperations);
             var stream = new MemoryStream();
@@ -65,7 +68,8 @@ namespace XUnitTestUrisFactory
         [Fact]
         public void TestBadFormedJson()
         {
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             ISchemaConfigOperations schemaConfigOperations = new SchemaConfigMemoryOperations(configJsonHandler);
             SchemaController schemaController = new SchemaController(configJsonHandler, schemaConfigOperations);
             var stream = new MemoryStream();
@@ -88,7 +92,8 @@ namespace XUnitTestUrisFactory
         [Fact]
         public void TestGetUriController()
         {
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             ISchemaConfigOperations schemaConfigOperations = new SchemaConfigMemoryOperations(configJsonHandler);
             SchemaController schemaController = new SchemaController(configJsonHandler, schemaConfigOperations);
             var result = schemaController.GetUriStructureInfo("uriResourceStructure");
@@ -105,7 +110,8 @@ namespace XUnitTestUrisFactory
         [Fact]
         public void TestGetUriFailController()
         {
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             ISchemaConfigOperations schemaConfigOperations = new SchemaConfigMemoryOperations(configJsonHandler);
             SchemaController schemaController = new SchemaController(configJsonHandler, schemaConfigOperations);
             var result = schemaController.GetUriStructureInfo("uriResourceStructur");
@@ -122,7 +128,8 @@ namespace XUnitTestUrisFactory
         [Fact]
         public void TestGetSchemaFileData()
         {
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             ISchemaConfigOperations schemaConfigOperations = new SchemaConfigMemoryOperations(configJsonHandler);
             var bytesSchema = schemaConfigOperations.GetFileSchemaData();
             var bytesAsString = Encoding.UTF8.GetString(bytesSchema);
@@ -134,7 +141,8 @@ namespace XUnitTestUrisFactory
         [Fact]
         public void TestDeleteUriStructureOk()
         {
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             UriStructureGeneral uriSchema = configJsonHandler.GetUrisConfig();
             int oldResourcesClassesCount = uriSchema.ResourcesClasses.Count;
             int oldUriStructuresCount = uriSchema.UriStructures.Count;
@@ -155,7 +163,8 @@ namespace XUnitTestUrisFactory
         [Fact]
         public void TestDeleteUriStructureOkController()
         {
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             ISchemaConfigOperations schemaConfigOperations = new SchemaConfigMemoryOperations(configJsonHandler);
             SchemaController schemaController = new SchemaController(configJsonHandler, schemaConfigOperations);
             var result = schemaController.DeleteUriStructure("uriResourceStructure");
@@ -172,14 +181,16 @@ namespace XUnitTestUrisFactory
         [Fact]
         public void TestDeleteUriStructureNoNameFoundError()
         {
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             Assert.Throws<UriStructureConfiguredException>(() => configJsonHandler.DeleteUriStructureInfo("badName"));
         }
 
         [Fact]
         public void TestAddUriStructureOk()
         {
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             UriStructureGeneral uriSchema = configJsonHandler.GetUrisConfig();
             UriStructure newUriStructure = CreateUriStructureExample("newUriExample");
             ResourcesClass newResourcesClass = CreateResourceClassExample("newUriExample", "rsp", "pipaon");
@@ -195,7 +206,8 @@ namespace XUnitTestUrisFactory
         [Fact]
         public void TestAddUriStructureOkController()
         {
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             ISchemaConfigOperations schemaConfigOperations = new SchemaConfigMemoryOperations(configJsonHandler);
             SchemaController schemaController = new SchemaController(configJsonHandler, schemaConfigOperations);
             UriStructure newUriStructure = CreateUriStructureExample("newUriExample");
@@ -220,7 +232,8 @@ namespace XUnitTestUrisFactory
         public void TestAddUriStructureFailMatchNamesController()
         {
 
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             ISchemaConfigOperations schemaConfigOperations = new SchemaConfigMemoryOperations(configJsonHandler);
             SchemaController schemaController = new SchemaController(configJsonHandler, schemaConfigOperations);
             UriStructure newUriStructure = CreateUriStructureExample("newUriExamp");
@@ -244,7 +257,8 @@ namespace XUnitTestUrisFactory
         [Fact]
         public void TestAddUriStructureFailMatchNames()
         {
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             UriStructure newUriStructure = CreateUriStructureExample("newUriExamp");
             ResourcesClass newResourcesClass = CreateResourceClassExample("newUriExample", "rsp", "pipaon");
             Assert.Throws<UriStructureBadInfoException>(() => configJsonHandler.AddUriStructureInfo(newUriStructure, newResourcesClass));
@@ -253,7 +267,8 @@ namespace XUnitTestUrisFactory
         [Fact]
         public void TestAddUriStructureFailUriStructureConfiguredException()
         {
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             UriStructure newUriStructure = CreateUriStructureExample("uriResourceStructure");
             ResourcesClass newResourcesClass = CreateResourceClassExample("uriResourceStructure", "rsp", "");
             Assert.Throws<UriStructureConfiguredException>(() => configJsonHandler.AddUriStructureInfo(newUriStructure, newResourcesClass));
@@ -262,7 +277,8 @@ namespace XUnitTestUrisFactory
         [Fact]
         public void TestAddUriStructureFailUriStructureBadInfoException()
         {
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             UriStructure newUriStructure = CreateUriStructureExample("newUriExample");
             ResourcesClass newResourcesClass = CreateResourceClassExample("newUriExample", "rsp", "");
             Assert.Throws<UriStructureBadInfoException>(() => configJsonHandler.AddUriStructureInfo(newUriStructure, newResourcesClass));

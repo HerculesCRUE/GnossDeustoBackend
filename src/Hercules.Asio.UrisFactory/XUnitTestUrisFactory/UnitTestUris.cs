@@ -2,6 +2,7 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Test unitarios de la creación de uris
+using Hercules.Asio.UrisFactory.Models.Services;
 using System.Collections.Generic;
 using UrisFactory.Extra.Exceptions;
 using UrisFactory.Models.Services;
@@ -16,7 +17,8 @@ namespace XUnitTestUrisFactory
         {
             Dictionary<string, string> queryString = new Dictionary<string, string>();
             queryString.Add("identifier", "123d");
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             UriFormer uriFormer = new UriFormer(configJsonHandler.GetUrisConfig());
             string uri = uriFormer.GetURI("AcademicDegree", queryString);
             string uriResultante = "http://graph.um.es/res/academic-degree/123d";
@@ -29,9 +31,10 @@ namespace XUnitTestUrisFactory
         {
             Dictionary<string, string> queryString = new Dictionary<string, string>();
             queryString.Add("identifier", "123d");
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             UriFormer uriFormer = new UriFormer(configJsonHandler.GetUrisConfig());
-            string uri = uriFormer.GetURI("http://purl.org/roh/mirror/vivo#AdvisorRole", queryString, true);
+            string uri = uriFormer.GetURI("http://purl.org/roh/mirror/vivo#AdvisorRole", queryString);
             string uriResultante = "http://graph.um.es/res/advisor-role/123d";
 
             Assert.True(uriResultante.Equals(uri));
@@ -51,7 +54,8 @@ namespace XUnitTestUrisFactory
         {
             Dictionary<string, string> queryString = new Dictionary<string, string>();
             queryString.Add("identifier", "123d");
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             UriFormer uriFormer = new UriFormer(configJsonHandler.GetUrisConfig());
             Assert.Throws<ParametersNotConfiguredException>(() => uriFormer.GetURI("resea", queryString));
         }
@@ -61,7 +65,8 @@ namespace XUnitTestUrisFactory
         {
             Dictionary<string, string> queryString = new Dictionary<string, string>();
             queryString.Add("identifier", "123d");
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             UriFormer uriFormer = new UriFormer(configJsonHandler.GetUrisConfig());
             Assert.Throws<ParametersNotConfiguredException>(() => uriFormer.GetURI("publication", queryString));
         }

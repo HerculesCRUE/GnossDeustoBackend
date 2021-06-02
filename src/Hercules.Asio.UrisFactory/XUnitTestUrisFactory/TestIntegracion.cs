@@ -2,6 +2,7 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Test de integración del fichero de configuración
+using Hercules.Asio.UrisFactory.Models.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,8 @@ namespace XUnitTestUrisFactory
         [Fact]
         public void TestGetSchemaFileData()
         {
-            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+            ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+            ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
             SchemaConfigFileOperations schemaConfigFileOperations = new SchemaConfigFileOperations(configJsonHandler);
             var bytesSchema = schemaConfigFileOperations.GetFileSchemaData();
             var bytesAsString = Encoding.UTF8.GetString(bytesSchema);

@@ -2,6 +2,7 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Test de integración del fichero de configuración
+using Hercules.Asio.UrisFactory.Models.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,8 @@ namespace XUnitTestUrisFactory.Integration
         {
             try
             {
-                ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+                ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+                ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
                 IsDeleting = true;
                 CreateBackUpConfig();
                 UriStructureGeneral uriSchema = configJsonHandler.GetUrisConfig();
@@ -69,7 +71,8 @@ namespace XUnitTestUrisFactory.Integration
         {
             try
             {
-                ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+                ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+                ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
                 CreateBackUpConfig();
                 Assert.Throws<UriStructureConfiguredException>(() => configJsonHandler.DeleteUriStructureInfo("badName"));
                 SchemaConfigFileOperations schemaConfigFileOperations = new SchemaConfigFileOperations(configJsonHandler);
@@ -87,7 +90,8 @@ namespace XUnitTestUrisFactory.Integration
         {
             try
             {
-                ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+                ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+                ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
                 CreateBackUpConfig();
                 UriStructureGeneral uriSchema = configJsonHandler.GetUrisConfig();
                 UriStructure newUriStructure = CreateUriStructureExample("newUriExample");
@@ -112,7 +116,8 @@ namespace XUnitTestUrisFactory.Integration
         {
             try
             {
-                ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+                ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+                ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
                 CreateBackUpConfig();
                 UriStructure newUriStructure = CreateUriStructureExample("newUriExamp");
                 ResourcesClass newResourcesClass = CreateResourceClassExample("newUriExample", "rsp", "pipaon");
@@ -128,7 +133,8 @@ namespace XUnitTestUrisFactory.Integration
         {
             try
             {
-                ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+                ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+                ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
                 CreateBackUpConfig();
                 UriStructure newUriStructure = CreateUriStructureExample("uriResourceStructure");
                 ResourcesClass newResourcesClass = CreateResourceClassExample("uriResourceStructure", "rsp", "");
@@ -144,7 +150,8 @@ namespace XUnitTestUrisFactory.Integration
         {
             try
             {
-                ConfigJsonHandler configJsonHandler = new ConfigJsonHandler();
+                ConfigService configService = new ConfigService(ConfigService.GetBuildConfiguration());
+                ConfigJsonHandler configJsonHandler = new ConfigJsonHandler(configService);
                 CreateBackUpConfig();
                 UriStructure newUriStructure = CreateUriStructureExample("newUriExample");
                 ResourcesClass newResourcesClass = CreateResourceClassExample("newUriExample", "rsp", "");

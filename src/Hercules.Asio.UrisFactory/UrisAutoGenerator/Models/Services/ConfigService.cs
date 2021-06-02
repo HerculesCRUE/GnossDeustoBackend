@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,6 +16,15 @@ namespace Hercules.Asio.UrisFactory.Models.Services
         public ConfigService(IConfiguration configuration)
         {
             _configuration = configuration;
+        }
+
+        public static IConfiguration GetBuildConfiguration()
+        {
+            var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+            return builder.Build();
         }
 
         ///<summary>
