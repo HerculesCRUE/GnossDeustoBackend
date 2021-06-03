@@ -181,6 +181,10 @@ Si lo queremos instalar en Ubuntu o Debian debemos ejecutar los siguientes coman
 	apt-get update
 	apt-get install apache2 openssl
 	a2enmod ssl
+	a2enmod proxy
+	a2enmod proxy_http
+	a2enmod proxy_balancer
+	a2enmod lbmethod_byrequests
 
 Para que el Linked Data Server funcione de manera adecuada tenemos que preparar un archivo de configuracion de Apache con estos datos. Esta configuración hace basicamente que lo que se pida por http se re dirija al servidor de Linked Data Server que en este caso estaria en la misma máquina y en su puerto establecido "8081"
 
