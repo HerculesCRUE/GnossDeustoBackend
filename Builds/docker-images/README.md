@@ -176,6 +176,10 @@ La instalación de Apache la podemos hacer desde los repositorios de nuestro sis
 
 	yum -y install httpd mod24_ssl
 	
+En Centos o RHEL necesitamos ejecutar este comando para que Apache pueda realizar conexiones y así pueda funcionar de proxy inverso:
+
+	/usr/sbin/setsebool -P httpd_can_network_connect 1
+	
 Si lo queremos instalar en Ubuntu o Debian debemos ejecutar los siguientes comandos:
 
 	apt-get update
