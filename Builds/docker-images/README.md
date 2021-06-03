@@ -199,7 +199,11 @@ Para que el Linked Data Server funcione de manera adecuada tenemos que preparar 
     		</Proxy>
 	</VirtualHost>
 
-El resto de peticiones se harán por https y bastaria con editar el ssl.conf y editar o añadir estas líneas:
+Si usamos Apache en Ubuntu deberemos activar el sitio por defecto ssl con este comando:
+
+	s2ensite default-ssl
+
+Ahora debemos añadir estas líneas a la configuración ssl. En RHEL lo encontraremos en "/etc/httpd/conf.d/ssl.conf", en Ubuntu "/etc/apache2/sites-enabled/default-ssl.conf".
 
 	ServerName linkeddata2test.um.es:443
 
