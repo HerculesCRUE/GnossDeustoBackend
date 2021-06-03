@@ -84,37 +84,37 @@ namespace XUnitTestProjectAPI_DISCOVER
         /// <summary>
         /// Test para probar el proceso de descubrimiento de enlaces sobre un grafo
         /// </summary>
-        [Fact]
-        public void TestEquivalenceDiscover()
-        {
-            //Cargamos el RDF sobre el que aplicar el reconocimiento de enlaces
-            RohGraph dataGraph = new RohGraph();
-            dataGraph.LoadFromString(System.IO.File.ReadAllText("rdfFiles/rdfFile.rdf"), new RdfXmlParser());
+        //[Fact]
+        //public void TestEquivalenceDiscover()
+        //{
+        //    //Cargamos el RDF sobre el que aplicar el reconocimiento de enlaces
+        //    RohGraph dataGraph = new RohGraph();
+        //    dataGraph.LoadFromString(System.IO.File.ReadAllText("rdfFiles/rdfFile.rdf"), new RdfXmlParser());
 
-            //TODO cargar ejemplo
-            //Cargamos el RDF que simula la BBDD de Unidata
-            //Si se quiere ejecutar sobre la BBDD no habría que modificar discoverUtility.mSparqlUtility y sería necesario especificar los datos del SPARQL endpoint
-            RohGraph dataGraphBBDD = new RohGraph();
-            dataGraphBBDD.LoadFromString(System.IO.File.ReadAllText("rdfFiles/rdfFile.rdf"), new RdfXmlParser());
+        //    //TODO cargar ejemplo
+        //    //Cargamos el RDF que simula la BBDD de Unidata
+        //    //Si se quiere ejecutar sobre la BBDD no habría que modificar discoverUtility.mSparqlUtility y sería necesario especificar los datos del SPARQL endpoint
+        //    RohGraph dataGraphBBDD = new RohGraph();
+        //    dataGraphBBDD.LoadFromString(System.IO.File.ReadAllText("rdfFiles/rdfFile.rdf"), new RdfXmlParser());
 
-            //Cargamos el RDF de la ontología
-            RohGraph ontologyGraph = new RohGraph();
-            ontologyGraph.LoadFromFile("Ontology/roh-v2.owl");
+        //    //Cargamos el RDF de la ontología
+        //    RohGraph ontologyGraph = new RohGraph();
+        //    ontologyGraph.LoadFromFile("Ontology/roh-v2.owl");
 
-            //Cargamos configuraciones necesarias
-            ConfigService ConfigService = new ConfigService();
-            float maxScore = ConfigService.GetMaxScore();
-            float minScore = ConfigService.GetMinScore();
-            string unidataDomain=ConfigService.GetUnidataDomain();
+        //    //Cargamos configuraciones necesarias
+        //    ConfigService ConfigService = new ConfigService();
+        //    float maxScore = ConfigService.GetMaxScore();
+        //    float minScore = ConfigService.GetMinScore();
+        //    string unidataDomain=ConfigService.GetUnidataDomain();
 
-            DiscoverUtility discoverUtility = new DiscoverUtility();
-            discoverUtility.mSparqlUtility = new SparqlUtilityMock(dataGraphBBDD);
-            discoverUtility.test = true;
+        //    DiscoverUtility discoverUtility = new DiscoverUtility();
+        //    discoverUtility.mSparqlUtility = new SparqlUtilityMock(dataGraphBBDD);
+        //    discoverUtility.test = true;
 
-            //Aplicamos el descubrimiento de equivalencias
-            //Los datos de configuración de SPARQL se mandan vacíos porque utilizamos el MOCK
-            discoverUtility.ApplyEquivalenceDiscover( ref dataGraph, ontologyGraph,out Dictionary<string,Dictionary<string,float>> reconciliationEntitiesProbability,unidataDomain,minScore,maxScore,"","","","","");
-        }
+        //    //Aplicamos el descubrimiento de equivalencias
+        //    //Los datos de configuración de SPARQL se mandan vacíos porque utilizamos el MOCK
+        //    discoverUtility.ApplyEquivalenceDiscover( ref dataGraph, ontologyGraph,out Dictionary<string,Dictionary<string,float>> reconciliationEntitiesProbability,unidataDomain,minScore,maxScore,"","","","","");
+        //}
 
         //[Fact]
         //public void TestPrepareData()
