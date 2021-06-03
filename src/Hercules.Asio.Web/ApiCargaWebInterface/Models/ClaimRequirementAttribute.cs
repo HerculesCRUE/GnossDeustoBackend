@@ -38,7 +38,8 @@ namespace ApiCargaWebInterface.Models
                 }
                 else if (claim.Value != _claim.Value)
                 {
-                    context.Result = new ForbidResult();
+                    string url = context.HttpContext.RequestServices.GetRequiredService<ConfigUrlService>().GetUrlFront() + context.HttpContext.RequestServices.GetRequiredService<ConfigUrlService>().GetProxy() + "/access-denied";
+                    context.Result = new RedirectResult(url);
                 }
             }
         }
