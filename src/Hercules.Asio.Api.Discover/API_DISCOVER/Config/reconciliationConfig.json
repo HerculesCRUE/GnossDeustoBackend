@@ -17,8 +17,8 @@
         "inverse": false,
         "type": 2,
         "maxNumWordsTitle": null,
-        //"scorePositive": 0.89,
-        "scorePositive": 0.95,
+        "scorePositive": 0.89,
+        //"scorePositive": 0.95,
         "scoreNegative": null
       },
       {
