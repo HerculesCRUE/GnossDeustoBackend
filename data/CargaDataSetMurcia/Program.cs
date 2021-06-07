@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using VDS.RDF;
 
 namespace CargaDataSetMurcia
 {
@@ -23,7 +24,12 @@ namespace CargaDataSetMurcia
 
             SparqlConfig sparqlASIO_1 = GetSparqlASIO_1();
             SparqlConfig sparqlASIO_2 = GetSparqlASIO_2();
+            SparqlConfig sparqlUnidata_1 = GetSparqlUnidata_1();
+            SparqlConfig sparqlUnidata_2 = GetSparqlUnidata_2();
             string sparqlASIO_Graph = GetSparqlASIO_Graph();
+            string sparqlUnidata_Graph = GetSparqlUnidata_Graph();
+            string sparqlASIO_Domain = GetSparqlASIO_Domain();
+            string sparqlUnidata_Domain = GetSparqlUnidata_Domain();
             string urlUrisFactory = GetUrlUrisFactory();
 
             List<SparqlConfig> sparqlASIO = new List<SparqlConfig>();
@@ -35,12 +41,33 @@ namespace CargaDataSetMurcia
             {
                 sparqlASIO.Add(sparqlASIO_2);
             }
-            if(sparqlASIO.Count==0)
+            if (sparqlASIO.Count == 0)
             {
                 throw new Exception("No existen endpointsparql de ASIO configurados");
             }
 
-            if(string.IsNullOrEmpty(urlUrisFactory))
+            List<SparqlConfig> sparqlUnidata = new List<SparqlConfig>();
+            if (sparqlUnidata_1 != null && !string.IsNullOrEmpty(sparqlUnidata_Graph))
+            {
+                sparqlUnidata.Add(sparqlUnidata_1);
+            }
+            if (sparqlUnidata_2 != null && !string.IsNullOrEmpty(sparqlUnidata_Graph))
+            {
+                sparqlUnidata.Add(sparqlUnidata_2);
+            }
+            if (sparqlUnidata.Count > 0)
+            {
+                if (string.IsNullOrEmpty(sparqlUnidata_Graph))
+                {
+                    throw new Exception("No está configurado el grafo de Unidata");
+                }
+                if (string.IsNullOrEmpty(sparqlUnidata_Domain))
+                {
+                    throw new Exception("No está configurada el dominio de Unidata");
+                }
+            }
+
+            if (string.IsNullOrEmpty(urlUrisFactory))
             {
                 throw new Exception("No está configurada la Url de UrisFactory");
             }
@@ -48,9 +75,28 @@ namespace CargaDataSetMurcia
             {
                 throw new Exception("No está configurado el grafo de ASIO");
             }
+            if (string.IsNullOrEmpty(sparqlASIO_Domain))
+            {
+                throw new Exception("No está configurada el dominio de ASIO");
+            }
+
+            Graph g = new Graph();
+            g.LoadFromFile("C:\\Cargas\\roh-v2.owl");
+            
+
+            foreach (SparqlConfig sparqlConfig in sparqlASIO)
+            {
+                SparqlUtility.LoadTriples(SparqlUtility.GetTriplesFromGraph(g), sparqlConfig.endpoint, "http://graph.um.es/graph/research/roh", sparqlConfig.username, sparqlConfig.pass);
+            }
+            foreach (SparqlConfig sparqlConfig in sparqlUnidata)
+            {
+
+                SparqlUtility.LoadTriples(SparqlUtility.GetTriplesFromGraph(g), sparqlConfig.endpoint, "http://graph.um.es/graph/research/roh", sparqlConfig.username, sparqlConfig.pass);
+            }
+
 
             CargaRDF.GenerarRDF(urlUrisFactory);
-            CargaRDF.PublicarRDF(urlUrisFactory, sparqlASIO, sparqlASIO_Graph);
+            CargaRDF.PublicarRDF(urlUrisFactory, sparqlASIO, sparqlASIO_Graph, sparqlASIO_Domain, sparqlUnidata, sparqlUnidata_Graph, sparqlUnidata_Domain);
 
         }
 
@@ -81,10 +127,52 @@ namespace CargaDataSetMurcia
             return null;
         }
 
+        public static SparqlConfig GetSparqlUnidata_1()
+        {
+            SparqlConfig config = new SparqlConfig();
+            config.endpoint = configuration["SparqlUnidata_1:Endpoint"];
+            config.username = configuration["SparqlUnidata_1:Username"];
+            config.pass = configuration["SparqlUnidata_1:Password"];
+            if (!string.IsNullOrEmpty(config.endpoint))
+            {
+                return config;
+            }
+            return null;
+        }
+
+        public static SparqlConfig GetSparqlUnidata_2()
+        {
+            SparqlConfig config = new SparqlConfig();
+            config.endpoint = configuration["SparqlUnidata_2:Endpoint"];
+            config.username = configuration["SparqlUnidata_2:Username"];
+            config.pass = configuration["SparqlUnidata_2:Password"];
+            if (!string.IsNullOrEmpty(config.endpoint))
+            {
+                return config;
+            }
+            return null;
+        }
+
         public static string GetSparqlASIO_Graph()
         {
             return configuration["SparqlASIO_Graph"];
         }
+
+        public static string GetSparqlUnidata_Graph()
+        {
+            return configuration["SparqlUnidata_Graph"];
+        }
+
+        public static string GetSparqlASIO_Domain()
+        {
+            return configuration["SparqlASIO_Domain"];
+        }
+
+        public static string GetSparqlUnidata_Domain()
+        {
+            return configuration["SparqlUnidata_Domain"];
+        }
+
         public static string GetUrlUrisFactory()
         {
             return configuration["UrlUrisFactory"];
