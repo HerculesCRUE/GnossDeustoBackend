@@ -124,7 +124,10 @@ div:nth-of-type(4n+3) { /*border-bottom: 0 !important; padding-bottom: 0 !import
 #contenido-principal .col { padding: 0 15px; }
 #contenido-principal .col h1 { font-size: 19px; font-weight: 700; color: #333; line-height: 23px; margin-top: 0; margin-bottom: 12px; }
 #contenido-principal .col h2 { font-size: 17px; font-weight: 700; color: #333; line-height: 21px; margin-top: 0; margin-bottom: 12px; }
-#contenido-principal .col div > p { font-size: 15px; font-weight: 400; line-height: 16px; color: #747474; word-break: break-all }
+#contenido-principal .col div > p { font-size: 15px; font-weight: 400; line-height: 16px; color: #747474; }
+    #contenido-principal .col div > p.break-all {
+        word-break: break-all
+    }
 .copiarToken { background-color: #8c1525; color: #fff; height: 38px; font-size: 14px; font-weight: 400; /* color: var(--c-rojo); */ border: none; border-radius: 1px; /* background-color: #fff; */ min-width: 143px;}
 #contenido-principal .col ul { padding-left: 18px; margin-bottom: 20px; }
 
