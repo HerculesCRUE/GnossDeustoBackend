@@ -168,8 +168,7 @@ namespace API_CARGA.Models.Services
                                 numExceptions++;
                                 if (numExceptions >= 10)
                                 {
-                                    break;
-                                    throw ex;
+                                    throw ex;                              
                                 }
                             }
                         }
