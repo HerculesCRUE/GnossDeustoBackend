@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace ApiCargaWebInterface.ViewModels
 {
-    public class resultCreated
+    public class JobCreated
     {
         public string Id{ get; set; }
+        public Guid RepositoryID { get; set; }
       
     }
 }

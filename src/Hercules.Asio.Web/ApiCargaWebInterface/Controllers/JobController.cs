@@ -140,20 +140,12 @@ namespace ApiCargaWebInterface.Controllers
             {
                 if (jobModel.Nombre_job != null)
                 {
-                    _serviceApi.CreateRecurringJob(jobModel);
-                    resultCreated item = new resultCreated()
-                    {
-                        Id = jobModel.Nombre_job
-                    };
+                    _serviceApi.CreateRecurringJob(jobModel);                   
                     return RedirectToAction("Details", "RepositoryConfig", new { id = jobModel.IdRepository });
                 }
                 else
                 {
                     string id = _serviceApi.CreateJob(jobModel);
-                    resultCreated item = new resultCreated()
-                    {
-                        Id = id
-                    };
                     return RedirectToAction("Details", "RepositoryConfig", new { id = jobModel.IdRepository });
                 }
             }
