@@ -951,7 +951,7 @@ img { max-width: 100%; }
   .fichaRecurso .wrapCol .contenido .grupo.grupo-ejecuciones .items.tabla .columna.principal { width: 15%; }
 
 .fichaRecurso .wrapCol .btn, input.submt {
-    font-size: 13px;
+    font-size: 13px !important;
     font-weight: 400;
     color: #333333 !important;
     border-radius: 4px;
