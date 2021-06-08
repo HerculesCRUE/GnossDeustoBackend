@@ -1,4 +1,4 @@
-<EntityDescriptor cacheDuration="PT1H" entityID="ASIO-SAML" xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
+<EntityDescriptor cacheDuration="PT1H" entityID="ASIO-SAML-DES" xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
 	<SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
 		<AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://herc-as-front-desa.atica.um.es/login/Auth/AssertionConsumerService" isDefault="true" index="0" />
 		<AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="http://herc-as-front-desa.atica.um.es/login/Auth/AssertionConsumerService" isDefault="false" index="1" />
