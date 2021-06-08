@@ -11,15 +11,17 @@
             <div class="header-resource">
                 <div class="h1-container">
                     <h1>Tarea de sincronización creada</h1>
-                    <div>
-                        <dl class="row">
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.Id)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.Id)
-                            </dd>
-                        </dl>
+                </div>
+            </div>
+            <div class="contenido">
+                <div class="grupo grupo-identificador">
+                    <div class="identifier">
+                        <p class="titulo">@Html.DisplayNameFor(model => model.Id)</p>
+                        <p>@Html.DisplayFor(model => model.Id)</p>
+                    </div>
+                </div>
+                <div class="grupo grupo-back">
+                    <div class="back">
                         <p><a href="@Url.Action("Index","RepositoryConfig", new {  id=Model.RepositoryID  })">Volver al repositorio</a></p>
                     </div>
                 </div>
