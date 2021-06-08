@@ -83,7 +83,14 @@
                     </div>
                     <div class="outh-token">
                         <p class="titulo">Tareas exitosas</p>
-                        <p @clase>@Model.PorcentajeTareas %</p>
+                        @if (Model.ListJobs == null || Model.ListJobs.Count == 0)
+                        {
+                            <p @clase>Aún no se ha ejecutado ninguna tarea</p>
+                        }
+                        else
+                        {
+                            <p @clase>@Model.PorcentajeTareas %</p>
+                        }
                     </div>
                     <hr />
                     @if (!string.IsNullOrEmpty(Model.LastJob))
