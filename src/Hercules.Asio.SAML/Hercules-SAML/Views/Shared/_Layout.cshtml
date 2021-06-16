@@ -36,10 +36,8 @@
                                     <span class="navbar-text">Hello</span>
                                 }
                             </li>
-                            <li>
-                                <form class="form-inline" asp-controller="Auth" asp-action="Logout">
-                                    <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-                                </form>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Auth" asp-action="Logout">Logout</a>
                             </li>
                         }
                         else

@@ -53,17 +53,10 @@ namespace Hercules_SAML
         [Route("Logout")]
         public async Task<IActionResult> Logout(string returnUrl = null)
         {
-            var binding = new Saml2PostBinding();
+            var binding = new Saml2RedirectBinding();
+            binding.SetRelayStateQuery(new Dictionary<string, string> { { relayStateReturnUrl, returnUrl ?? Url.Content("~/") } });
             var saml2LogoutRequest = await new Saml2LogoutRequest(config, User).DeleteSession(HttpContext);
-            IActionResult actionresult= binding.Bind(saml2LogoutRequest).ToActionResult();
-            if (string.IsNullOrEmpty(returnUrl))
-            {
-                return actionresult;
-            }
-            else
-            {
-                return Redirect(returnUrl);
-            }
+            return binding.Bind(saml2LogoutRequest).ToActionResult();
         }
     }
 }
