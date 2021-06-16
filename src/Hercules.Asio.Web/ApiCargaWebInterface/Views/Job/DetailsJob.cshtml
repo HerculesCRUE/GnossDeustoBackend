@@ -51,7 +51,7 @@
                         </div>
                         <div class="Exception">
                             <p class="titulo">Excepción</p>
-                            <p>@Model.ExceptionDetails</p>
+                            <p>@Html.Raw(Model.ExceptionDetails)</p>
                         </div>
                         @if (Model.State.Equals("Processing"))
                         {
