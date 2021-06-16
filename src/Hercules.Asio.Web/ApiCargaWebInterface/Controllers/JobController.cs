@@ -10,9 +10,11 @@ using System.Text;
 using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
+using Hercules.Asio.Web.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NCrontab;
+using Newtonsoft.Json;
 using VDS.RDF;
 using VDS.RDF.Parsing;
 using VDS.RDF.Update;
@@ -46,7 +48,7 @@ namespace ApiCargaWebInterface.Controllers
         {
             List<CreateRecurringJobViewModel> lista = new List<CreateRecurringJobViewModel>();
             return View(lista);
-        }        
+        }
 
         /// <summary>
         /// Obtiene los detalles de una tarea
@@ -69,6 +71,26 @@ namespace ApiCargaWebInterface.Controllers
             job.DiscoverStates = _discoverItemService.GetDiscoverItemsStatesByJob(id);
             var discoverItemsErrorMini = _discoverItemService.GetDiscoverItemsErrorByJobMini(id);
             job.DiscoverItemsMini = discoverItemsErrorMini;
+
+            try
+            {
+                ExceptionDetails exceptionDetails = JsonConvert.DeserializeObject<ExceptionDetails>(job.ExceptionDetails);
+                if (exceptionDetails != null && !string.IsNullOrEmpty(exceptionDetails.detail))
+                {
+                    ShapeReport shapeReport= JsonConvert.DeserializeObject<ShapeReport>(exceptionDetails.detail);
+                    if (shapeReport != null && !shapeReport.conforms && shapeReport.results!=null && shapeReport.results.Count>0)
+                    {
+                        job.ExceptionDetails = JsonConvert.SerializeObject(shapeReport);
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+
+
             return View(job);
         }
 
