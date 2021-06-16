@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
@@ -258,7 +259,7 @@ namespace API_CARGA.Controllers
             }
         }
 
-
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recupera un registro de metadatos individual del repositorio en formato XML OAI-PMH.        
@@ -279,7 +280,7 @@ namespace API_CARGA.Controllers
             //byte[] array = getByte(uri);
             return File(array, "application/xml");
         }
-
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Obtiene la información del repositorio OAI-PMH configurado en formato XML OAI-PMH.
@@ -298,7 +299,7 @@ namespace API_CARGA.Controllers
             byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
-
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Es una forma abreviada de ListRecords, que recupera solo encabezados en formato XML OAI-PMH en lugar de registros.        
@@ -342,7 +343,7 @@ namespace API_CARGA.Controllers
             return File(array, "application/xml");
         }
 
-
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recupera los formatos de metadatos disponibles del repositorio en formato XML OAI-PMH.        
@@ -366,7 +367,7 @@ namespace API_CARGA.Controllers
             byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
-
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recupera registros del repositorio en formato XML OAI-PMH.        
@@ -411,6 +412,7 @@ namespace API_CARGA.Controllers
             return File(array, "application/xml");
         }
 
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recuperar la estructura establecida de un repositorio en formato XML OAI-PMH, útil para la recolección selectiva.        
