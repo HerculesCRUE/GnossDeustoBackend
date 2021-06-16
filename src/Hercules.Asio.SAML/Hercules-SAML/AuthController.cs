@@ -44,7 +44,7 @@ namespace Hercules_SAML
                 throw new AuthenticationException($"SAML Response status: {saml2AuthnResponse.Status}");
             }
             binding.Unbind(Request.ToGenericHttpRequest(), saml2AuthnResponse);
-            //await saml2AuthnResponse.CreateSession(HttpContext, claimsTransform: (claimsPrincipal) => ClaimsTransform.Transform(claimsPrincipal));
+            await saml2AuthnResponse.CreateSession(HttpContext, claimsTransform: (claimsPrincipal) => ClaimsTransform.Transform(claimsPrincipal));
 
             var relayStateQuery = binding.GetRelayStateQuery();
             var returnUrl = relayStateQuery.ContainsKey(relayStateReturnUrl) ? relayStateQuery[relayStateReturnUrl] : Url.Content("~/");
