@@ -99,19 +99,17 @@ namespace ApiCargaWebInterface.Controllers
                         foreach (ShapeReport.Result result in shapeReport.results)
                         {
                             job.ExceptionDetails += @$"{{<br>";
-                            job.ExceptionDetails += @$"""&nbsp;&nbsp;severity"":""{result.severity}"",<br>";
-                            job.ExceptionDetails += @$"""&nbsp;&nbsp;focusNode"":""{result.focusNode}"",<br>";
-                            job.ExceptionDetails += @$"""&nbsp;&nbsp;resultValue"":""{result.resultValue}"",<br>";
-                            job.ExceptionDetails += @$"""&nbsp;&nbsp;message"":""{result.message}"",<br>";
-                            job.ExceptionDetails += @$"""&nbsp;&nbsp;resultPath"":""{result.resultPath}"",<br>";
-                            job.ExceptionDetails += @$"""&nbsp;&nbsp;shapeName"":""{result.shapeName}"",<br>";
-                            job.ExceptionDetails += @$"""&nbsp;&nbsp;sourceShape"":""{result.sourceShape}"",<br>";
-                            job.ExceptionDetails += @$"""&nbsp;&nbsp;shapeID"":""{result.shapeID}"",<br>";
+                            job.ExceptionDetails += @$"&nbsp;&nbsp;""severity"":""{result.severity}"",<br>";
+                            job.ExceptionDetails += @$"&nbsp;&nbsp;""focusNode"":""{result.focusNode}"",<br>";
+                            job.ExceptionDetails += @$"&nbsp;&nbsp;""resultValue"":""{result.resultValue}"",<br>";
+                            job.ExceptionDetails += @$"&nbsp;&nbsp;""message"":""{result.message}"",<br>";
+                            job.ExceptionDetails += @$"&nbsp;&nbsp;""resultPath"":""{result.resultPath}"",<br>";
+                            job.ExceptionDetails += @$"&nbsp;&nbsp;""shapeName"":""{result.shapeName}"",<br>";
+                            job.ExceptionDetails += @$"&nbsp;&nbsp;""sourceShape"":""{result.sourceShape}"",<br>";
+                            job.ExceptionDetails += @$"&nbsp;&nbsp;""shapeID"":""{result.shapeID}"",<br>";
                             job.ExceptionDetails += @$"""}}<br>";
                         }
                         job.ExceptionDetails += @$"""]<br>";
-
-                        job.ExceptionDetails += JsonConvert.SerializeObject(shapeReport);
                     }
                 }
             }
