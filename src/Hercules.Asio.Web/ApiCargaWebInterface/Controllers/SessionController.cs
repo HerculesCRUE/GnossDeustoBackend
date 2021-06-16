@@ -17,10 +17,25 @@ namespace Hercules.Asio.Web.Controllers
             _ConfigUrlService = configUrlService;
         }
 
-        public IActionResult Index()
+        public IActionResult Login()
+        {
+            string urlLogin = _ConfigUrlService.GetUrlSAMLLogin();
+
+            if (!string.IsNullOrEmpty(urlLogin))
+            {
+                string url = _ConfigUrlService.GetUrlFront() + _ConfigUrlService.GetProxy() + HttpContext.Request.Path;
+                return Redirect(urlLogin + "?returnUrl=" + url);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public IActionResult Logout()
         {
             HttpContext.Session.Remove("session_saml");
-            return Redirect( _ConfigUrlService.GetUrlSAMLLogin() + "/Auth/Logout");
+            return Redirect(_ConfigUrlService.GetUrlSAMLLogin() + "/Auth/Logout");
             //return Redirect(_ConfigUrlService.GetUrlFront() + _ConfigUrlService.GetProxy());
         }
     }
