@@ -12,10 +12,10 @@ namespace CronConfigure.Models.Entitties
 {
 
     [ExcludeFromCodeCoverage]
+
     ///<summary>
     ///Representa un item de descubrimiento
     ///</summary>
-
     public class DiscoverItem
     {
         ///<summary>

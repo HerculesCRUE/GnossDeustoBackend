@@ -3,9 +3,11 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Excepion
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Exceptions
 {
+    [ExcludeFromCodeCoverage]
     public class BadRequestException : Exception
     {
         public BadRequestException()
