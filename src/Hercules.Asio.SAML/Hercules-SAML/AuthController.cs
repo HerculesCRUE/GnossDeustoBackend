@@ -54,10 +54,10 @@ namespace Hercules_SAML
         [Route("Logout")]
         public async Task<IActionResult> Logout()
         {
-            return Redirect(config.SingleLogoutDestination.Scheme + "://" + config.SingleLogoutDestination.Host + "/cas/logout?service="+ config.Issuer);
-            //var binding = new Saml2PostBinding();            
-            //var saml2LogoutRequest = await new Saml2LogoutRequest(config, User).DeleteSession(HttpContext);
-            //return binding.Bind(saml2LogoutRequest).ToActionResult();            
+            //return Redirect(config.SingleLogoutDestination.Scheme + "://" + config.SingleLogoutDestination.Host + "/cas/logout?service="+ config.Issuer);
+            var binding = new Saml2PostBinding();            
+            var saml2LogoutRequest = await new Saml2LogoutRequest(config, User).DeleteSession(HttpContext);
+            return binding.Bind(saml2LogoutRequest).ToActionResult();            
         }
     }
 }
