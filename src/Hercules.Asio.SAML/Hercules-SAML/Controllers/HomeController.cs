@@ -54,6 +54,7 @@ namespace Hercules_SAML.Controllers
                     _TokenSAMLBDService.AddTokenSAML(token);
 
                     Response.Cookies.Append("cookie_saml", guid, cookieOptions);
+                    HttpContext.Session.Clear();
                     Response.Redirect(returnUrl);
                 }
                 else
