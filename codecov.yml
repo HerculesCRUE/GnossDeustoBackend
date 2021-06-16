@@ -18,6 +18,10 @@ coverage:
         target: auto
         flags:
           - cron
+      pages:
+        target: auto
+        flags:
+          - pages
 comment:
   layout: "reach, diff, flags, files"
   behavior: default
@@ -41,4 +45,7 @@ flags:
   discover:
     paths:
       - src/Hercules.Asio.Api.Discover
+  pages:
+    paths:
+      -src/Hercules.Asio.DinamicPages
     carryforward: false
