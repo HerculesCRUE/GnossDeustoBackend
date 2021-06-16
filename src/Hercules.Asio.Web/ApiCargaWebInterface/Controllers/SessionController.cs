@@ -23,7 +23,7 @@ namespace Hercules.Asio.Web.Controllers
 
             if (!string.IsNullOrEmpty(urlLogin))
             {
-                string url = _ConfigUrlService.GetUrlFront() + _ConfigUrlService.GetProxy() + HttpContext.Request.Path;
+                string url = _ConfigUrlService.GetUrlFront() + _ConfigUrlService.GetProxy();
                 return Redirect(urlLogin + "?returnUrl=" + url);
             }
             else
