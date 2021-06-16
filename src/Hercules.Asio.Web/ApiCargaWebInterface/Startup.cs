@@ -3,6 +3,7 @@ using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.Models.Services.VirtualPathProvider;
 using AspNetCore.Security.CAS;
+using Hercules.Asio.Web.ActionFilter;
 using Hercules.Asio.Web.Middlewares;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -111,7 +112,10 @@ namespace ApiCargaWebInterface
             services.AddScoped<TokenSAMLBDService, TokenSAMLBDService>();
 
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options => {
+                options.Filters.Add<ViewBagActionFilter>();
+            });
+
             services.AddSingleton(typeof(ConfigPathLog));
             services.AddSingleton(typeof(ConfigUrlService));
             services.AddSingleton(typeof(ConfigUrlCronService));
