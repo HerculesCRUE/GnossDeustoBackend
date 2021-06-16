@@ -179,6 +179,8 @@ namespace API_CARGA.Controllers
 
         }
 
+        [ExcludeFromCodeCoverage]
+        //No se puede ejecuar el test desde gitHub
 
         /// <summary>
         /// Aplica el descubrimiento sobre un RDF
@@ -203,6 +205,9 @@ namespace API_CARGA.Controllers
                 return Problem(ex.ToString());
             }
         }
+
+        [ExcludeFromCodeCoverage]
+        //No se puede ejecuar el test desde gitHub
 
         /// <summary>
         /// Obtiene el estado de una tarea de descubrimiento
