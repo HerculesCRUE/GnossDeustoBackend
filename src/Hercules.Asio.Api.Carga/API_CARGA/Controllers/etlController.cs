@@ -50,6 +50,8 @@ namespace API_CARGA.Controllers
             _configUrlService = configUrlService;
             _amqpService = amqpService;
         }
+        [ExcludeFromCodeCoverage]
+        //No se puede ejecuar el test desde gitHub
 
         /// <summary>
         /// Ejecuta el penúltimo paso del proceso de carga, por el que el RDF generado se encola en una cola de Rabbit MQ para que posteriormente el servicio de descubimiento lo procese y lo almacene en el Triple Store. Permite cargar una fuente RDF arbitraria.
