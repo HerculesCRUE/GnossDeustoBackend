@@ -11,16 +11,16 @@ using System.Linq;
 
 namespace API_CARGA.Models.Entities
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Representa un item de descubrimiento
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class DiscoverItem
     {
-        [ExcludeFromCodeCoverage]
         ///<summary>
         ///Representa un problema de desambiguación en un DiscoverItem
         ///</summary>
+        [ExcludeFromCodeCoverage]
         public class DiscoverDissambiguation
         {
             ///<summary>
