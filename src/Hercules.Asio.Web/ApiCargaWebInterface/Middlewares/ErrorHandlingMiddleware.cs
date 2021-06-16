@@ -24,9 +24,7 @@ namespace ApiCargaWebInterface.Middlewares
     {
         private readonly RequestDelegate _next;
         private readonly ConfigPathLog _configPathLog;
-        private IConfigurationRoot Configuration { get; set; }
         private string _timeStamp;
-        private string _LogPath;
         public ErrorHandlingMiddleware(RequestDelegate next, ConfigPathLog configPathLog)
         {
             _next = next;
@@ -92,7 +90,7 @@ namespace ApiCargaWebInterface.Middlewares
             {
                 Directory.CreateDirectory(pathDirectory);
             }
-           // Log.Logger = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.File($"{pathDirectory}/log_{pTimestamp}.txt").CreateLogger();
+           
             Log.Logger = new LoggerConfiguration().WriteTo.Logger(x =>
             {
                 x.WriteTo.File($"{pathDirectory}/log_{pTimestamp}.txt");

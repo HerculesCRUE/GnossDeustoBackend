@@ -100,7 +100,7 @@ namespace ApiCargaWebInterface.Models.Services
                 StringBuilder except = new StringBuilder();
                 except.AppendLine($"Url del intento de llamada: {urlBase}{urlMethod} --------- error: ");
                 except.AppendLine(ex.Message);
-                throw new Exception(except.ToString());
+                throw new ArgumentNullException(except.ToString());
             }
             return result;
         }
@@ -157,7 +157,7 @@ namespace ApiCargaWebInterface.Models.Services
                 result = response.Content.ReadAsStringAsync().Result;
                 return result;
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 if (response.StatusCode.Equals(HttpStatusCode.BadRequest))
                 {

@@ -75,6 +75,9 @@ namespace API_CARGA.Models.Services
             return _context.DiscoverItem.Any(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Error.ToString() || x.Status == DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString()));
         }
 
+        [ExcludeFromCodeCoverage]
+        //Se está usando en partes del código que no se pueden analizar porque no se pueden hacer test unitarios de esos métodos
+
         ///<summary>
         ///Añade un item de descubrimiento
         ///</summary>

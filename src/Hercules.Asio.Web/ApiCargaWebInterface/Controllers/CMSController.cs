@@ -25,9 +25,9 @@ namespace ApiCargaWebInterface.Controllers
     /// </summary>    
     public class CMSController : Controller
     {
-        CallApiVirtualPath _documentationApi;
-        ReplaceUsesService _replaceUsesService;
-        ConfigUrlService _configUrlService;
+        readonly CallApiVirtualPath _documentationApi;
+        readonly ReplaceUsesService _replaceUsesService;
+        readonly ConfigUrlService _configUrlService;
         public CMSController(CallApiVirtualPath documentationApi, ReplaceUsesService replaceUsesService,ConfigUrlService configUrlService)
         {
             _documentationApi = documentationApi;

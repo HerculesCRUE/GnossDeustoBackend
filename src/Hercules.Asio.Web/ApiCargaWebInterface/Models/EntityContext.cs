@@ -12,7 +12,6 @@ namespace ApiCargaWebInterface.Models
 {
     public class EntityContext : DbContext
     {
-        private string _defaultSchema;
         public DbSet<DiscoverItem> DiscoverItem { get; set; }
         public DbSet<ProcessDiscoverStateJob> ProcessDiscoverStateJob { get; set; }
         public DbSet<TokenSAML> TokenSAML { get; set; }

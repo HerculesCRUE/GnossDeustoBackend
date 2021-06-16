@@ -19,7 +19,7 @@ namespace ApiCargaWebInterface.Controllers
     /// </summary>
     public class PublishController : Controller
     {
-        ICallEtlService _callEtlPublishService;
+        readonly ICallEtlService _callEtlPublishService;
         readonly ICallRepositoryConfigService _serviceApi;
         public PublishController(ICallEtlService callDtlPublishService, ICallRepositoryConfigService serviceApi)
         {
@@ -34,13 +34,12 @@ namespace ApiCargaWebInterface.Controllers
         [Route("[Controller]/{repository}")]
         public IActionResult Index(Guid repository)
         {
-            RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(repository);
             PublishRepositoryModel publishRepositoryModel = new PublishRepositoryModel()
             {
                 RepositoryId = repository,
                 Id = "",
                 Type = "rdf",
-                RepositoryShapes = result.ShapeConfig
+                RepositoryShapes = _serviceApi.GetRepositoryConfig(repository).ShapeConfig
             };
             return View("ObtenerRdf",publishRepositoryModel);
         }
@@ -69,13 +68,12 @@ namespace ApiCargaWebInterface.Controllers
         [Route("[Controller]/validate/{repository}")]
         public IActionResult ValidarRdf(Guid repository)
         {
-            RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(repository);
             PublishRepositoryModel publishRepositoryModel = new PublishRepositoryModel()
             {
                 RepositoryId = repository,
                 Id = "",
                 Type = "rdf",
-                RepositoryShapes = result.ShapeConfig
+                RepositoryShapes = _serviceApi.GetRepositoryConfig(repository).ShapeConfig
             };
             return View(publishRepositoryModel);
         }
@@ -181,7 +179,7 @@ namespace ApiCargaWebInterface.Controllers
             {
                 return View("ValidationError", vEx.Report);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View("PublicarRdf", new PublishRepositoryModel
                 {

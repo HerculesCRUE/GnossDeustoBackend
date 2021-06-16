@@ -26,7 +26,6 @@ namespace ApiCargaWebInterface.Controllers
             {
                 return View("Error404", feature.OriginalPath);
 
-                //string route = "";
                 //if (feature != null)
                 //{
                 //    route = feature.OriginalPath;

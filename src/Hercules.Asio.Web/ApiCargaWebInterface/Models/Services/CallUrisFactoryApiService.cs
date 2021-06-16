@@ -92,7 +92,6 @@ namespace ApiCargaWebInterface.Models.Services
                 infoUriStructure = infoUriStructure
             };
             string result = _serviceApi.CallPutApi(_serviceUrl.GetUrlUrisFactory(), $"{_urlSchema}", infoUriStructure, _token);
-           // return result;
         }
     }
 }

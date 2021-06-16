@@ -15,11 +15,11 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
     /// </summary>
     public class ApiFileInfo : IFileInfo
     {
-        private string _viewPath;
+        readonly private string _viewPath;
         private byte[] _viewContent;
         private DateTimeOffset _lastModified;
         private bool _exists;
-        private CallApiVirtualPath _apiVirtualPath;
+        readonly private CallApiVirtualPath _apiVirtualPath;
 
         public ApiFileInfo(CallApiVirtualPath apiVirtualPath, string viewPath)
         {
@@ -76,8 +76,6 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
         {
             try
             {
-                //Stopwatch sw = new Stopwatch();
-                //sw.Start(); // Iniciar la medición.
                 var page = _apiVirtualPath.GetPage(viewPath);
                 
                 if (page != null)
@@ -86,11 +84,10 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
                     
                     _viewContent = Encoding.UTF8.GetBytes(page.Content);
                     _lastModified = page.LastModified;
-                }
-                //sw.Stop();
+                }                
                 //Log.Information($"Api file info: obtener la ruta: {viewPath} : {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // if something went wrong, Exists will be false
             }

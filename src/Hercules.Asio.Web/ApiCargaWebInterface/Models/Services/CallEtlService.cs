@@ -24,8 +24,8 @@ namespace ApiCargaWebInterface.Models.Services
         readonly TokenBearer _token;
         readonly ConfigUrlService _serviceUrl;
         readonly ICallService _serviceApi;
-        static RohGraph ontologia;
-        static string hash;
+        RohGraph ontologia;
+        string hash;
 
         public CallEtlService(ICallService serviceApi, CallTokenService tokenService, ConfigUrlService serviceUrl)
         {
@@ -98,9 +98,9 @@ namespace ApiCargaWebInterface.Models.Services
         /// <param name="jobId">Identificador de la tarea</param>
         /// <param name="discoverProcessed">Indica si ya está procesado el descubrimiento</param>
         /// <param name="idDiscoverItem">Identificador del discoverItem, en caso de que se quiera actualizar</param>
-        public void CallDataPublish(IFormFile rdf, string jobId, bool discoverProcessed, string idDiscoverItem = null)
+        public void CallDataPublish(IFormFile rdfFile, string jobId, bool discoverProcessed, string idDiscoverItem = null)
         {
-            string response = _serviceApi.CallPostApi(_serviceUrl.GetUrl(), $"etl/data-publish?jobId={jobId}&discoverProcessed={discoverProcessed}&idDiscoverItem={idDiscoverItem}", rdf, _token, true);
+            string response = _serviceApi.CallPostApi(_serviceUrl.GetUrl(), $"etl/data-publish?jobId={jobId}&discoverProcessed={discoverProcessed}&idDiscoverItem={idDiscoverItem}", rdfFile, _token, true);
         }
         /// <summary>
         /// Llama al método del api de carga de getRecord
@@ -120,10 +120,10 @@ namespace ApiCargaWebInterface.Models.Services
         /// <summary>
         /// Sube una ontologia
         /// </summary>
-        /// <param name="ontology">Ontologia a subir</param>
-        public void PostOntology(IFormFile ontology)
+        /// <param name="ontologyUri">Ontologia a subir</param>
+        public void PostOntology(IFormFile ontologyUri)
         {
-            _serviceApi.CallPostApi(_serviceUrl.GetUrl(), $"etl/load-ontology", ontology, _token, true, "ontology");
+            _serviceApi.CallPostApi(_serviceUrl.GetUrl(), $"etl/load-ontology", ontologyUri, _token, true, "ontology");
         }
 
         /// <summary>

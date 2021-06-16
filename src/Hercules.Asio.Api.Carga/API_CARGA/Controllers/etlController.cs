@@ -30,13 +30,11 @@ namespace API_CARGA.Controllers
 
     public class etlController : Controller
     {
-        private IRepositoriesConfigService _repositoriesConfigService;
-        private IDiscoverItemService _discoverItemService;
-        private IShapesConfigService _shapeConfigService;
+        readonly private IRepositoriesConfigService _repositoriesConfigService;
+        readonly private IDiscoverItemService _discoverItemService;
+        readonly private IShapesConfigService _shapeConfigService;
         readonly ConfigSparql _configSparql;
         readonly CallOAIPMH _callOAIPMH;
-        readonly CallConversor _callConversor;
-        readonly ConfigUrlService _configUrlService;
         readonly IRabbitMQService _amqpService;
 
         public etlController(IDiscoverItemService iDiscoverItemService, IRepositoriesConfigService iRepositoriesConfigService, IShapesConfigService iShapeConfigService, ConfigSparql configSparql, CallOAIPMH callOAIPMH, CallConversor callConversor, ConfigUrlService configUrlService, IRabbitMQService amqpService)
@@ -46,10 +44,9 @@ namespace API_CARGA.Controllers
             _shapeConfigService = iShapeConfigService;
             _configSparql = configSparql;
             _callOAIPMH = callOAIPMH;
-            _callConversor = callConversor;
-            _configUrlService = configUrlService;
             _amqpService = amqpService;
         }
+
         [ExcludeFromCodeCoverage]
         //No se puede ejecuar el test desde gitHub
 
@@ -286,11 +283,12 @@ namespace API_CARGA.Controllers
             string uri = repositoryConfig.Url;
             uri += $"?verb=GetRecord&identifier={System.Web.HttpUtility.UrlEncode(identifier)}&metadataPrefix={metadataPrefix}";
             byte[] array = _callOAIPMH.GetUri(uri);
-            //byte[] array = getByte(uri);
             return File(array, "application/xml");
         }
+
         [ExcludeFromCodeCoverage]
         //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
+
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Obtiene la información del repositorio OAI-PMH configurado en formato XML OAI-PMH.
@@ -305,10 +303,10 @@ namespace API_CARGA.Controllers
             RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
             string uri = repositoryConfig.Url;
             uri += $"?verb=Identify";
-            //byte[] array = getByte(uri);
             byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
+
         [ExcludeFromCodeCoverage]
         //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
 
@@ -377,10 +375,10 @@ namespace API_CARGA.Controllers
             {
                 uri += $"&identifier={identifier}";
             }
-            //byte[] array = getByte(uri);
             byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
+
         [ExcludeFromCodeCoverage]
         //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
 
@@ -423,13 +421,13 @@ namespace API_CARGA.Controllers
             {
                 uri += $"&resumptionToken={resumptionToken}";
             }
-            //byte[] array = getByte(uri);
             byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
 
         [ExcludeFromCodeCoverage]
         //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
+
 
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
@@ -450,7 +448,6 @@ namespace API_CARGA.Controllers
             {
                 uri += $"&resumptionToken={resumptionToken}";
             }
-            //byte[] array = getByte(uri);
             byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }

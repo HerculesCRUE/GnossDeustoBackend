@@ -15,8 +15,8 @@ namespace ApiCargaWebInterface.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        ConfigUrlService _configUrlService;
+        readonly ILogger<HomeController> _logger;
+        readonly ConfigUrlService _configUrlService;
         [AllowAnonymous]
         [Route("login")]
         public async Task Login(string returnUrl)
