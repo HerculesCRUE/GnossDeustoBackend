@@ -1,4 +1,4 @@
-name: Build and test dinamic pages
+name: Build and test Hercules.Asio.DinamicPages
 
 on:
   push:
