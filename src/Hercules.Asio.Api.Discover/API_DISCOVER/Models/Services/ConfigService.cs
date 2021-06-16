@@ -5,6 +5,7 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 
@@ -74,7 +75,8 @@ namespace API_DISCOVER.Models.Services
             }
             return MinScore;
         }
-
+        //No se van a hacer llamadas externas en un test unitatio
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Obtiene la url del dominio de Unidata
         /// </summary>
@@ -103,6 +105,8 @@ namespace API_DISCOVER.Models.Services
             return UnidataDomain;
         }
 
+        //No se van a hacer llamadas externas en un test unitatio
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Uri por la que se sustituirá el dominio de las URLs para cargarlas en Unidata
         /// </summary>
@@ -130,7 +134,8 @@ namespace API_DISCOVER.Models.Services
             }
             return UnidataUriTransform;
         }
-
+        //No se van a hacer llamadas a otro servicio
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Expresión Cron para representar cuando debe lanzarse el proceso de descubrimiento de enlaces
         /// </summary>
@@ -159,6 +164,7 @@ namespace API_DISCOVER.Models.Services
             return LaunchDiscoverLoadedEntitiesCronExpression;
         }
 
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Segundos para 'dormir' tras procesar una entidad por el proceso de descubrimiento de enlaces
         /// </summary>

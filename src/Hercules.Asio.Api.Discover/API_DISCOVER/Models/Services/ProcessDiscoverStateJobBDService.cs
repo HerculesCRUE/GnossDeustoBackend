@@ -6,11 +6,14 @@ using API_DISCOVER.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 
 namespace API_DISCOVER.Models.Services
 {
+    //No se van a hacer llamadas a BD en un test unitario
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para gestionar los estados de descubrimiento de las tareas
     ///</summary>

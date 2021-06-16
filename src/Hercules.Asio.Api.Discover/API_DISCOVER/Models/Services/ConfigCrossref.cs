@@ -5,10 +5,13 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace API_DISCOVER.Models.Services
 {
+    //No se van a hacer llamadas a BD en un test unitario
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para obtener la configuración necesaria para el uso del API de CROSSREF
     ///</summary>
