@@ -5,11 +5,9 @@
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Interfaz para la programación de tareas
     ///</summary>
