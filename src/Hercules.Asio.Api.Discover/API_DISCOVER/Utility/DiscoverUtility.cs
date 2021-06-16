@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -684,6 +685,8 @@ namespace API_DISCOVER.Utility
             }
             return entitiesDB;
         }
+        //Solo se ejecuta desde EquivalenceDiscover
+        [ExcludeFromCodeCoverage]
 
         /// <summary>
         /// Obtiente los sujetos que están cargados en la BBDD SPARQL para los que tienen los identificadores en el campo SameAs
@@ -4745,6 +4748,8 @@ namespace API_DISCOVER.Utility
         #endregion
 
         #region Métodos de detección de equivalencias
+        //No se puede ejecutar desde GitHub
+        [ExcludeFromCodeCoverage]
 
         /// <summary>
         /// Realizamos la detección de equivalencias con Unidata, caragaremos los SameAs correspondientes de las entidades hacia el nodo Unidata
@@ -4909,6 +4914,8 @@ namespace API_DISCOVER.Utility
                 }
             }
         }
+        // solo se ejecuta desde EquivalenceDiscover
+        [ExcludeFromCodeCoverage]
 
         /// <summary>
         /// Obtiente los sameAs de os sujetos pasados como parámetro
