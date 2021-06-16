@@ -208,6 +208,8 @@ namespace API_DISCOVER.Utility
         #endregion
 
         #region Interacción con RohGraph
+        //Se ejecuta desde PrepareData
+        [ExcludeFromCodeCoverage]
 
         /// <summary>
         /// Obtiene las entidades con sus rdf:type (con la inferencia)
@@ -237,7 +239,8 @@ namespace API_DISCOVER.Utility
             }
             return entitiesRdfTypes;
         }
-
+        //Se ejecuta desde PrepareData
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Obtiene las entidades con su rdf:type
         /// </summary>
@@ -265,7 +268,8 @@ namespace API_DISCOVER.Utility
             }
             return entitiesRdfType;
         }
-
+        //Se ejecuta desde PrepareData
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Obtiene los datos de desambiguación del RDF
         /// </summary>
@@ -1206,6 +1210,8 @@ namespace API_DISCOVER.Utility
         #endregion
 
         #region Métodos de reconciliacion
+        //No se puede ejecutar desde GitHub
+        [ExcludeFromCodeCoverage]
 
         /// <summary>
         /// Método que prepara los datos para efectuar la reconciliación
@@ -1442,7 +1448,7 @@ namespace API_DISCOVER.Utility
             }
             return discoveredEntityList;
         }
-
+        
         /// <summary>
         /// Reconcilia el RDF con datos del propio RDF
         /// </summary>
