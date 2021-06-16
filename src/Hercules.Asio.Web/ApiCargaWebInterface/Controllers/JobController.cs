@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
@@ -25,6 +26,7 @@ namespace ApiCargaWebInterface.Controllers
     /// <summary>
     /// Controlador para gestionar las llamadas relacionandas con el Api cron
     /// </summary>
+    [ClaimRequirement("Administrator", "true")]
     public class JobController : Controller
     {
         readonly CallCronApiService _serviceApi;
@@ -80,17 +82,20 @@ namespace ApiCargaWebInterface.Controllers
                     ShapeReport shapeReport= JsonConvert.DeserializeObject<ShapeReport>(exceptionDetails.detail);
                     if (shapeReport != null && !shapeReport.conforms && shapeReport.results!=null && shapeReport.results.Count>0)
                     {
-                        job.ExceptionDetails = JsonConvert.SerializeObject(shapeReport);
+                        job.ExceptionDetails = "Se ha producido violaciones de los Shapes:<br>";
+                        foreach (ShapeReport.Result result in shapeReport.results)
+                        {
+                            job.ExceptionDetails += result.shapeName+"<br>";
+                        }
+                        job.ExceptionDetails += "Mas detalles a continuación:<br>";
+                        job.ExceptionDetails += JsonConvert.SerializeObject(shapeReport);
                     }
                 }
-
             }
             catch (Exception)
             {
 
             }
-
-
             return View(job);
         }
 
