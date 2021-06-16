@@ -19,8 +19,9 @@ namespace Hercules.Asio.Web.Controllers
 
         public IActionResult Index()
         {
-            HttpContext.Session.Remove("session_saml");            
-            return Redirect(_ConfigUrlService.GetUrlFront() + _ConfigUrlService.GetProxy());
+            HttpContext.Session.Remove("session_saml");
+            return Redirect( _ConfigUrlService.GetUrlSAMLLogin() + "/Auth/Logout");
+            //return Redirect(_ConfigUrlService.GetUrlFront() + _ConfigUrlService.GetProxy());
         }
     }
 }
