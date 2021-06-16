@@ -25,7 +25,7 @@ namespace ApiCargaWebInterface.Controllers
         readonly ConfigUrlService _ConfigUrlService;
 
         /// <summary>
-        /// Constructor.
+        /// Constructor
         /// </summary>
         /// <param name="configUrlService"></param>
         public AutocompleteController(ConfigUrlService configUrlService)
