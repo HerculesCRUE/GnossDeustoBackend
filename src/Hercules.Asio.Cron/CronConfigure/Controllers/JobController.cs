@@ -3,6 +3,7 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Controlador para gestionar las tareas ejecutadas y poder crear tareas nuevas
 using System;
+using System.Diagnostics.CodeAnalysis;
 using CronConfigure.Models.Enumeracion;
 using CronConfigure.Models.Services;
 using Hangfire;
@@ -81,7 +82,7 @@ namespace CronConfigure.Controllers
 
             return Ok(id);
         }
-
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Vuelve a ejecutar una tarea ya ejecutada o programada
         /// </summary>
@@ -103,7 +104,7 @@ namespace CronConfigure.Controllers
                 return BadRequest("el job no se encuentra en la lista de ejecutados");
             }
         }
-
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// devuelve una lista de tareas paginadas
         /// </summary>
@@ -119,7 +120,7 @@ namespace CronConfigure.Controllers
             return Ok(_cronApiService.GetJobs(type, from, count));
 
         }
-
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// devuelve una tarea
         /// </summary>
@@ -134,7 +135,7 @@ namespace CronConfigure.Controllers
 
         }
 
-
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Obtiene un listado de tareas ejecutadas de un repositorio
         /// </summary>

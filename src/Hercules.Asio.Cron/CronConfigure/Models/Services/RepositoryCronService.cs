@@ -6,11 +6,13 @@ using CronConfigure.ViewModels;
 using NCrontab;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CronConfigure.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para obtener la información de las tareas vinculadas a un repositorio
     ///</summary>

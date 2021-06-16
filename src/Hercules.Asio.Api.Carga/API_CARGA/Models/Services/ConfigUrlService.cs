@@ -7,10 +7,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace API_CARGA.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase usada para obtener las urlsConfiguradas
     ///</summary>

@@ -6,11 +6,13 @@ using API_CARGA.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para gestionar los shapes en base de datos 
     ///</summary>

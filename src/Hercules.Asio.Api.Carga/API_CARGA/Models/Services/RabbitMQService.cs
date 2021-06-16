@@ -12,6 +12,7 @@ using RabbitMQ.Client;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     /// <summary>
     /// Clase para conectar con el servidor Rabbi
     /// </summary>

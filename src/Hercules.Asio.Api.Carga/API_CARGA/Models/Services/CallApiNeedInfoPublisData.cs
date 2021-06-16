@@ -6,12 +6,14 @@ using API_CARGA.Models.Entities;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase que sirve para realizar las llamadas necesarias al controlador etl para poder realizar una sincronización
     ///</summary>

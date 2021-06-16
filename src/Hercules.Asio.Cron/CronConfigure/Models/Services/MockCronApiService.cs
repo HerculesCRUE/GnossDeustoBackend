@@ -5,6 +5,7 @@
 using CronConfigure.Models.Enumeracion;
 using CronConfigure.ViewModels;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Models.Services
 {
@@ -63,32 +64,38 @@ namespace CronConfigure.Models.Services
                 return false;
             }
         }
-
+        [ExcludeFromCodeCoverage]
+        //Exluido del analisis porque el metodo no se usa en ningun test pero debe estar porque hereda de una interfaz
         public JobViewModel GetJob(string id)
         {
             return new JobViewModel();
         }
-
+        [ExcludeFromCodeCoverage]
+        //Exluido del analisis porque el metodo no se usa en ningun test pero debe estar porque hereda de una interfaz
         public JobViewModel GetJobData(string id)
         {
             throw new System.NotImplementedException();
         }
-
+        [ExcludeFromCodeCoverage]
+        //Exluido del analisis porque el metodo no se usa en ningun test pero debe estar porque hereda de una interfaz
         public List<JobViewModel> GetJobs(JobType type, int from, int count)
         {
             return new List<JobViewModel>();
         }
-
+        [ExcludeFromCodeCoverage]
+        //Exluido del analisis porque el metodo no se usa en ningun test pero debe estar porque hereda de una interfaz
         public List<JobViewModel> GetJobsOfRecurringJob(string recurringJob)
         {
             return new List<JobViewModel>();
         }
-
+        [ExcludeFromCodeCoverage]
+        //Exluido del analisis porque el metodo no se usa en ningun test pero debe estar porque hereda de una interfaz
         public List<RecurringJobViewModel> GetRecurringJobs()
         {
             return new List<RecurringJobViewModel>();
         }
-
+        [ExcludeFromCodeCoverage]
+        //Exluido del analisis porque el metodo no se usa en ningun test pero debe estar porque hereda de una interfaz
         public RecurringJobViewModel GetRecurringJobs(string id)
         {
             return new RecurringJobViewModel();

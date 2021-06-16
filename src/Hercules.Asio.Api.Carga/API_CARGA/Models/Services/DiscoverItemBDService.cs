@@ -6,11 +6,13 @@ using API_CARGA.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 
 namespace API_CARGA.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para gestionar las operaciones de las tareas de descubrimiento
     ///</summary>

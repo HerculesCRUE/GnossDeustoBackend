@@ -5,6 +5,7 @@
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Models.Services
 {
@@ -20,6 +21,7 @@ namespace CronConfigure.Models.Services
         /// <param name="pSet">tipo del objeto, usado para filtrar por agrupaciones</param>
         /// <param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
         public string PublishRepositories(Guid idRepositoryGuid, PerformContext context,  string pSet = null, string codigoObjeto = null);
+        [ExcludeFromCodeCoverage]
         ///<summary>
         ///Método para programar una sincronización recurrente
         ///</summary>
