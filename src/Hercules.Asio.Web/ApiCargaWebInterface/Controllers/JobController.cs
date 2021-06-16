@@ -46,27 +46,7 @@ namespace ApiCargaWebInterface.Controllers
         {
             List<CreateRecurringJobViewModel> lista = new List<CreateRecurringJobViewModel>();
             return View(lista);
-        }
-        /// <summary>
-        /// Devuelve la página de creación de una tarea con el idetificador del repositorio asociado
-        /// </summary>
-        /// <param name="IdRepository">Identificador del repositorio</param>
-        /// <returns></returns>
-        public IActionResult Create(Guid? IdRepository = null)
-        {
-            if (IdRepository.HasValue)
-            {
-                CreateJobViewModel createJobViewModel = new CreateJobViewModel()
-                {
-                    IdRepository = IdRepository.Value
-                };
-                return View(createJobViewModel);
-            }
-            else
-            {
-                return View();
-            }
-        }
+        }        
 
         /// <summary>
         /// Obtiene los detalles de una tarea
@@ -108,6 +88,27 @@ namespace ApiCargaWebInterface.Controllers
         }
 
         /// <summary>
+        /// Devuelve la página de creación de una tarea con el idetificador del repositorio asociado
+        /// </summary>
+        /// <param name="IdRepository">Identificador del repositorio</param>
+        /// <returns></returns>
+        public IActionResult Create(Guid? IdRepository = null)
+        {
+            if (IdRepository.HasValue)
+            {
+                CreateJobViewModel createJobViewModel = new CreateJobViewModel()
+                {
+                    IdRepository = IdRepository.Value
+                };
+                return View(createJobViewModel);
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        /// <summary>
         /// Crea una tarea nueva
         /// </summary>
         /// <param name="jobModel">Detalles de la tarea a crear</param>
@@ -145,7 +146,6 @@ namespace ApiCargaWebInterface.Controllers
                 }
                 else
                 {
-                    string id = _serviceApi.CreateJob(jobModel);
                     return RedirectToAction("Details", "RepositoryConfig", new { id = jobModel.IdRepository });
                 }
             }

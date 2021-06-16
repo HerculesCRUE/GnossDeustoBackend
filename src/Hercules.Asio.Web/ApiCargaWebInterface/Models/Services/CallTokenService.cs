@@ -23,7 +23,7 @@ namespace ApiCargaWebInterface.Models.Services
     /// </summary>
     public class CallTokenService
     {
-        private ConfigTokenService _configToken;
+        readonly private ConfigTokenService _configToken;
         readonly IWebHostEnvironment _env;
         private IConfiguration _configuration { get; set; }
 
@@ -144,7 +144,6 @@ namespace ApiCargaWebInterface.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
-                //var authString = Convert.ToBase64String(Encoding.UTF8.GetBytes("admin:Root12345678"));
                 //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authString);
                 client.Timeout = TimeSpan.FromDays(1);
                 string authority = _configToken.GetAuthority()+ "/connect/token";

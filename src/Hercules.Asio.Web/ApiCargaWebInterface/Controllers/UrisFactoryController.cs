@@ -24,7 +24,7 @@ namespace ApiCargaWebInterface.Controllers
     [ClaimRequirement("Administrator", "true")]
     public class UrisFactoryController:Controller
     {
-        ICallUrisFactoryApiService _callUrisFactoryService;
+        readonly ICallUrisFactoryApiService _callUrisFactoryService;
         public UrisFactoryController(ICallUrisFactoryApiService callUrisFactoryService)
         {
             _callUrisFactoryService = callUrisFactoryService;

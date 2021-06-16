@@ -17,10 +17,10 @@ namespace ApiCargaWebInterface.Models.Services
     /// </summary>
     public class CheckSystemService
     {
-        private CallCronApiService _callCronApiService;
-        private ICallRepositoryConfigService _callRepositoryConfigService;
-        private CallTokenService _callTokenService;
-        private ConfigPathLog _configPathLog;
+        readonly private CallCronApiService _callCronApiService;
+        readonly private ICallRepositoryConfigService _callRepositoryConfigService;
+        readonly private CallTokenService _callTokenService;
+        readonly private ConfigPathLog _configPathLog;
         public CheckSystemService(CallCronApiService callCronApiService, ICallRepositoryConfigService callRepositoryConfigService, CallTokenService callTokenService, ConfigPathLog configPathLog)
         {
             _callCronApiService = callCronApiService;
@@ -80,7 +80,6 @@ namespace ApiCargaWebInterface.Models.Services
                 fileText = streamReader.ReadToEnd();
                 streamReader.Close();
                 stream.Close();
-                //fileText = File.ReadAllText(path);
             }
             return fileText;
         }

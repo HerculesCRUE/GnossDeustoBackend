@@ -22,7 +22,7 @@ namespace API_CARGA.Controllers
     [Authorize]
     public class syncController : Controller
     {
-        private OaiPublishRDFService _oaiPublishRDFService;
+        readonly private OaiPublishRDFService _oaiPublishRDFService;
         public syncController(OaiPublishRDFService oaiPublishRDFService)
         {
             _oaiPublishRDFService = oaiPublishRDFService;

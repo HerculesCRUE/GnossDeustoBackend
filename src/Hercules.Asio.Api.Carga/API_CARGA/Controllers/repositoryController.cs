@@ -24,7 +24,7 @@ namespace API_CARGA.Controllers
     [Route("etl-config/[controller]")]
     public class repositoryController : ControllerBase
     {
-        private IRepositoriesConfigService _repositoriesConfigService;
+        readonly private IRepositoriesConfigService _repositoriesConfigService;
 
         public repositoryController(IRepositoriesConfigService iRepositoriesConfigService)
         {

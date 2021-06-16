@@ -13,7 +13,7 @@ namespace API_CARGA.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
+            // No hace nada.
         }
     }
 }

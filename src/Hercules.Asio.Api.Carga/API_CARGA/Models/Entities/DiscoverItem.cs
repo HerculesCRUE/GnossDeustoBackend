@@ -12,11 +12,9 @@ using System.Linq;
 namespace API_CARGA.Models.Entities
 {
     [ExcludeFromCodeCoverage]
-
     ///<summary>
     ///Representa un item de descubrimiento
     ///</summary>
-    ///
     public class DiscoverItem
     {
         [ExcludeFromCodeCoverage]
