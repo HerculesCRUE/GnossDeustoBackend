@@ -12,6 +12,9 @@ using System.Collections;
 using Hercules_SAML.Services;
 using Hercules_SAML.Models.Entities;
 using Hercules_SAML.Models.Services;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using System.Security.Principal;
 
 namespace Hercules_SAML.Controllers
 {
@@ -53,7 +56,8 @@ namespace Hercules_SAML.Controllers
                     // Agrega el token a la BBDD.
                     _TokenSAMLBDService.AddTokenSAML(token);
 
-                    Response.Cookies.Append("cookie_saml", guid, cookieOptions);                    
+                    Response.Cookies.Append("cookie_saml", guid, cookieOptions);
+                    HttpContext.User = new GenericPrincipal(new GenericIdentity(string.Empty), null);
                     Response.Redirect(returnUrl);
                 }
                 else
