@@ -55,9 +55,7 @@ namespace Hercules_SAML.Controllers
 
                     // Agrega el token a la BBDD.
                     _TokenSAMLBDService.AddTokenSAML(token);
-
                     Response.Cookies.Append("cookie_saml", guid, cookieOptions);
-                    HttpContext.User = new GenericPrincipal(new GenericIdentity(string.Empty), null);
                     Response.Redirect(returnUrl);
                 }
                 else
