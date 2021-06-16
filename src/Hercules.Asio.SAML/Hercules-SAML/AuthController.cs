@@ -55,10 +55,10 @@ namespace Hercules_SAML
         {
             var binding = new Saml2PostBinding();
             var saml2LogoutRequest = await new Saml2LogoutRequest(config, User).DeleteSession(HttpContext);
-            return binding.Bind(saml2LogoutRequest).ToActionResult();
+            IActionResult actionresult= binding.Bind(saml2LogoutRequest).ToActionResult();
             if (string.IsNullOrEmpty(returnUrl))
             {
-                return Redirect("~/");
+                return actionresult;
             }
             else
             {
