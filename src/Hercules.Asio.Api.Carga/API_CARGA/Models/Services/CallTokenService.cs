@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -17,6 +18,7 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     /// <summary>
     /// clase para la obtención de los tokens de acceso
     /// </summary>

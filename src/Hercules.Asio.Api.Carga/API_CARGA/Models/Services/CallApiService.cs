@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     /// <summary>
     /// Clase para hacer llamadas api
     /// </summary>

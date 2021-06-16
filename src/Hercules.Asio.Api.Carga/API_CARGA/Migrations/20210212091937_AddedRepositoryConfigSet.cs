@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API_CARGA.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class AddedRepositoryConfigSet : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
