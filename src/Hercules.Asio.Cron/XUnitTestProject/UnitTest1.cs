@@ -149,6 +149,55 @@ namespace XUnitTestProject
         }
 
         [Fact]
+        public void TestControllerScheduledJobGetScheduledJobs()
+        {
+            ICronApiService cron = new MockCronApiService();
+            IProgramingMethodService methodService = new MockProgramingMethodService();
+            ScheduledJobController controller = new ScheduledJobController(cron, methodService, null);
+            var result = controller.GetScheduledJobs(0,2);
+            if (result is BadRequestObjectResult)
+            {
+                Assert.True(false);
+            }
+            else
+            {
+                Assert.True(true);
+            }
+        }
+        [Fact]
+        public void TestControllerScheduledEnqueuedScheduledJob()
+        {
+            ICronApiService cron = new MockCronApiService();
+            IProgramingMethodService methodService = new MockProgramingMethodService();
+            ScheduledJobController controller = new ScheduledJobController(cron, methodService, null);
+            var result = controller.EnqueuedScheduledJob("12we");
+            if (result is BadRequestObjectResult)
+            {
+                Assert.True(false);
+            }
+            else
+            {
+                Assert.True(true);
+            }
+        }
+        [Fact]
+        public void TestControllerScheduledDeleteScheduledJob()
+        {
+            ICronApiService cron = new MockCronApiService();
+            IProgramingMethodService methodService = new MockProgramingMethodService();
+            ScheduledJobController controller = new ScheduledJobController(cron, methodService, null);
+            var result = controller.DeleteScheduledJob("12we");
+            if (result is BadRequestObjectResult)
+            {
+                Assert.True(false);
+            }
+            else
+            {
+                Assert.True(true);
+            }
+        }
+
+        [Fact]
         public void TestControllerScheduledJobFailWithoutDate()
         {
             ICronApiService cron = new MockCronApiService();

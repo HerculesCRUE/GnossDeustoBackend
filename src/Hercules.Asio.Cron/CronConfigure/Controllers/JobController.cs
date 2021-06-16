@@ -104,7 +104,7 @@ namespace CronConfigure.Controllers
                 return BadRequest("el job no se encuentra en la lista de ejecutados");
             }
         }
-
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// devuelve una lista de tareas paginadas
         /// </summary>
@@ -120,7 +120,7 @@ namespace CronConfigure.Controllers
             return Ok(_cronApiService.GetJobs(type, from, count));
 
         }
-
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// devuelve una tarea
         /// </summary>
@@ -135,7 +135,7 @@ namespace CronConfigure.Controllers
 
         }
 
-
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Obtiene un listado de tareas ejecutadas de un repositorio
         /// </summary>
