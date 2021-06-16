@@ -19,6 +19,7 @@ namespace API_CARGA.Models.Entities
     ///
     public class DiscoverItem
     {
+        [ExcludeFromCodeCoverage]
         ///<summary>
         ///Representa un problema de desambiguación en un DiscoverItem
         ///</summary>

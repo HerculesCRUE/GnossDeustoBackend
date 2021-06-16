@@ -3,6 +3,7 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Contiene los procesos necesarios para la ejecución de las sincronizaciones.
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using API_CARGA.Models.Services;
 using API_CARGA.ViewModel;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API_CARGA.Controllers
 {
+    [ExcludeFromCodeCoverage]
     /// <summary>
     /// Contiene los procesos necesarios para la ejecución de las sincronizaciones.
     /// </summary>
