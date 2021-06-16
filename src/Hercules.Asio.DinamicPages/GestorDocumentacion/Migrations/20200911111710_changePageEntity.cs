@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GestorDocumentacion.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class changePageEntity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

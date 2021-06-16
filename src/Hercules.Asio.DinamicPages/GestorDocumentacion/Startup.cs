@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -32,6 +33,7 @@ using Swashbuckle.AspNetCore.Filters;
 
 namespace GestorDocumentacion
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         private readonly IWebHostEnvironment _env;
