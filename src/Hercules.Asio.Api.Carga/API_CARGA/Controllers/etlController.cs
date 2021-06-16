@@ -260,6 +260,8 @@ namespace API_CARGA.Controllers
         }
 
         [ExcludeFromCodeCoverage]
+        //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
+
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recupera un registro de metadatos individual del repositorio en formato XML OAI-PMH.        
@@ -281,6 +283,7 @@ namespace API_CARGA.Controllers
             return File(array, "application/xml");
         }
         [ExcludeFromCodeCoverage]
+        //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Obtiene la información del repositorio OAI-PMH configurado en formato XML OAI-PMH.
@@ -300,6 +303,8 @@ namespace API_CARGA.Controllers
             return File(array, "application/xml");
         }
         [ExcludeFromCodeCoverage]
+        //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
+
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Es una forma abreviada de ListRecords, que recupera solo encabezados en formato XML OAI-PMH en lugar de registros.        
@@ -344,6 +349,8 @@ namespace API_CARGA.Controllers
         }
 
         [ExcludeFromCodeCoverage]
+        //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
+
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recupera los formatos de metadatos disponibles del repositorio en formato XML OAI-PMH.        
@@ -368,6 +375,8 @@ namespace API_CARGA.Controllers
             return File(array, "application/xml");
         }
         [ExcludeFromCodeCoverage]
+        //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
+
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recupera registros del repositorio en formato XML OAI-PMH.        
@@ -413,6 +422,8 @@ namespace API_CARGA.Controllers
         }
 
         [ExcludeFromCodeCoverage]
+        //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
+
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recuperar la estructura establecida de un repositorio en formato XML OAI-PMH, útil para la recolección selectiva.        
