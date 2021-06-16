@@ -6,10 +6,13 @@ using API_CARGA.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace API_CARGA.Models.Services
 {
+    [ExcludeFromCodeCoverage]
+
     ///<summary>
     ///Clase para gestionar las operaciones en base de datos de los repositorios 
     ///</summary>
