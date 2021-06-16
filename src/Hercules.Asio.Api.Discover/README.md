@@ -14,7 +14,7 @@
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=API_DISCOVER)
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20API_DISCOVER/badge.svg)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20Hercules.Asio.Api.Discover/badge.svg)
 [![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI&flag=discover)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
 
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=API_DISCOVER&metric=bugs)](https://sonarcloud.io/dashboard?id=API_DISCOVER)
