@@ -8,12 +8,14 @@ using Newtonsoft.Json;
 using Serilog;
 using System;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
 namespace GestorDocumentacion.Middlewares
 {
+    [ExcludeFromCodeCoverage]
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;

@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace GestorDocumentacion.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     /// <summary>
     /// Clase para la gestión de los documentos
     /// </summary>
