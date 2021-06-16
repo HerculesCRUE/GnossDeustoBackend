@@ -15,7 +15,7 @@
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=GestorDocumentacion)
 
 ![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20Hercules.Asio.DinamicPages/badge.svg)
-[![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI&flag=pages)]
+![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI&flag=pages)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=GestorDocumentacion&metric=bugs)](https://sonarcloud.io/dashboard?id=GestorDocumentacion)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=GestorDocumentacion&metric=security_rating)](https://sonarcloud.io/dashboard?id=GestorDocumentacion)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=GestorDocumentacion&metric=ncloc)](https://sonarcloud.io/dashboard?id=GestorDocumentacion)
