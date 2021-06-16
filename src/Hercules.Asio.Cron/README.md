@@ -13,7 +13,7 @@
 # Acerca de CronConfigure
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=CronConfigure)
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20CronConfigure/badge.svg)
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20Hercules.Asio.Cron/badge.svg)
 [![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI&flag=cron)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
 
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=CronConfigure&metric=bugs)](https://sonarcloud.io/dashboard?id=CronConfigure)
