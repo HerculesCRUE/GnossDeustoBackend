@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Security.Authentication;
+using System;
 
 namespace Hercules_SAML
 {
@@ -51,12 +52,11 @@ namespace Hercules_SAML
         }
 
         [Route("Logout")]
-        public async Task<IActionResult> Logout(string returnUrl = null)
+        public async Task<IActionResult> Logout()
         {
-            var binding = new Saml2RedirectBinding();
-            binding.SetRelayStateQuery(new Dictionary<string, string> { { relayStateReturnUrl, returnUrl ?? Url.Content("~/") } });
+            var binding = new Saml2PostBinding();            
             var saml2LogoutRequest = await new Saml2LogoutRequest(config, User).DeleteSession(HttpContext);
-            return binding.Bind(saml2LogoutRequest).ToActionResult();
+            return binding.Bind(saml2LogoutRequest).ToActionResult();            
         }
     }
 }
