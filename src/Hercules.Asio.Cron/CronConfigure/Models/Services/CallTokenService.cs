@@ -11,6 +11,7 @@ using Serilog;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -18,6 +19,7 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     /// <summary>
     /// Clase para la obtención de los tokens de acceso
     /// </summary>

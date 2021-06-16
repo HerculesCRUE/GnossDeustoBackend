@@ -6,11 +6,13 @@ using CronConfigure.Exceptions;
 using CronConfigure.Models.Entitties;
 using Newtonsoft.Json;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Http;
 
 namespace CronConfigure.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Sirve para hacer llamadas a un API cuya url base esta configurada en UrlConfig del appSettings.json
     ///</summary>

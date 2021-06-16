@@ -5,9 +5,11 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 namespace CronConfigure.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     /// <summary>
     /// Obtiene las configuraciones de las url base
     /// </summary>
