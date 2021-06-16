@@ -20,7 +20,7 @@ namespace ApiCargaWebInterface.Controllers
     [ClaimRequirement("Administrator", "true")]
     public class TokenController : Controller
     {
-        CallTokenService _callTokenService;
+        readonly CallTokenService _callTokenService;
         public TokenController(CallTokenService callTokenService)
         {
             _callTokenService = callTokenService;

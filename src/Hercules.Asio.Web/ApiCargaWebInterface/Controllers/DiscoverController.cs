@@ -79,8 +79,7 @@ namespace ApiCargaWebInterface.Controllers
         public IActionResult DetailsRdf(Guid itemId)
         {
             //Cargamos la ontología
-            RohGraph ontologyGraph = new RohGraph();
-            ontologyGraph = _callEDtlPublishService.CallGetOntology();
+            RohGraph ontologyGraph = _callEDtlPublishService.CallGetOntology();
 
             SparqlResultSet sparqlResultSetNombresPropiedades = (SparqlResultSet)ontologyGraph.ExecuteQuery("select distinct ?entidad ?nombre where { ?entidad <http://www.w3.org/2000/01/rdf-schema#label> ?nombre. FILTER(lang(?nombre) = 'es')}");
 

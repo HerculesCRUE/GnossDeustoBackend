@@ -16,8 +16,8 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
     /// </summary>
     public class ApiChangeToken : IChangeToken
     {
-        private CallApiVirtualPath _apiVirtualPath;
-        private string _viewPath;
+        readonly private CallApiVirtualPath _apiVirtualPath;
+        readonly private string _viewPath;
         private static Dictionary<string, DateTime?> _pageLastRequested = new Dictionary<string, DateTime?>();
 
         public ApiChangeToken(CallApiVirtualPath apiVirtualPath, string viewPath)
@@ -63,29 +63,14 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
         {
             return EmptyDisposable.Instance;
         }
-
-        private DateTime? LastRequested(string path, bool changeResquested = false)
-        {
-            DateTime? lastRequested = null;
-            if (_pageLastRequested.ContainsKey(path))
-            {
-                lastRequested = _pageLastRequested[path];
-                if (changeResquested)
-                {
-                    _pageLastRequested[path] = DateTime.Now;
-                }
-            }
-            else
-            {
-                _pageLastRequested.Add(path, DateTime.Now);
-            }
-            return lastRequested;
-        }
     }
     internal class EmptyDisposable : IDisposable
     {
         public static EmptyDisposable Instance { get; } = new EmptyDisposable();
         private EmptyDisposable() { }
-        public void Dispose() { }
+        public void Dispose() 
+        {
+            // No hace nada.
+        }
     }
 }

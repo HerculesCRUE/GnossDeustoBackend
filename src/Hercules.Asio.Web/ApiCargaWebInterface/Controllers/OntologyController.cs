@@ -21,7 +21,7 @@ namespace ApiCargaWebInterface.Controllers
             return View();
         }
 
-        ICallEtlService _callEDtlPublishService;
+        readonly ICallEtlService _callEDtlPublishService;
         public OntologyController(ICallEtlService callEDtlPublishService)
         {
             _callEDtlPublishService = callEDtlPublishService;
@@ -44,7 +44,7 @@ namespace ApiCargaWebInterface.Controllers
                     Messagge = $"Ontologia subida"
                 });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View("Index", new OntologyModel
                 {

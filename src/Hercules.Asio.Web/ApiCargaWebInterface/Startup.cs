@@ -135,7 +135,6 @@ namespace ApiCargaWebInterface
             var virtualProvider = sp.GetService<CallApiVirtualPath>();
             while (!cargado)
             {
-                // services.AddMvcRazorRuntimeCompilation();
                 try
                 {
                     services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -148,7 +147,7 @@ namespace ApiCargaWebInterface
                     });
                     cargado = true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     cargado = false;
                 }
@@ -205,7 +204,6 @@ namespace ApiCargaWebInterface
                 endpoints.MapRazorPages(
 
                     );
-                //endpoints.MapControllers();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

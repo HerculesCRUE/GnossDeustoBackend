@@ -24,26 +24,23 @@ namespace Hercules.Asio.Web.Middlewares
             string smlstatus = httpContext.Session.GetString("session_saml");
 
             // Si no existe, se mira en la cookie.
-            if (string.IsNullOrEmpty(smlstatus))
+            if (string.IsNullOrEmpty(smlstatus) && httpContext.Request.Cookies.ContainsKey("cookie_saml"))
             {
-                if (httpContext.Request.Cookies.ContainsKey("cookie_saml"))
+                string cookieValue = httpContext.Request.Cookies["cookie_saml"];
+                if (cookieValue.Contains("_"))
                 {
-                    string cookieValue = httpContext.Request.Cookies["cookie_saml"];
-                    if (cookieValue.Contains("_"))
+                    string guidString = cookieValue.Substring(0, cookieValue.IndexOf("_"));
+                    Guid guidToken;
+                    if (Guid.TryParse(guidString, out guidToken))
                     {
-                        string guidString = cookieValue.Substring(0, cookieValue.IndexOf("_"));
-                        Guid guidToken;
-                        if (Guid.TryParse(guidString, out guidToken))
+                        TokenSAML tokenSAMLBBDD = tokenSAMLBDService.GetTokenSAML(guidToken);
+                        if (tokenSAMLBBDD != null)
                         {
-                            TokenSAML tokenSAMLBBDD = tokenSAMLBDService.GetTokenSAML(guidToken);
-                            if (tokenSAMLBBDD != null)
-                            {
-                                // Si existe en la cookie Y el token esta en la BBDD, se guarda en la sesión.
-                                httpContext.Session.SetString("session_saml", httpContext.Request.Cookies["cookie_saml"]);
-                                smlstatus = httpContext.Session.GetString("session_saml");
-                                tokenSAMLBDService.RemoveTokenSAML(tokenSAMLBBDD);
-                                httpContext.Response.Cookies.Delete("cookie_saml");
-                            }
+                            // Si existe en la cookie Y el token esta en la BBDD, se guarda en la sesión.
+                            httpContext.Session.SetString("session_saml", httpContext.Request.Cookies["cookie_saml"]);
+                            smlstatus = httpContext.Session.GetString("session_saml");
+                            tokenSAMLBDService.RemoveTokenSAML(tokenSAMLBBDD);
+                            httpContext.Response.Cookies.Delete("cookie_saml");
                         }
                     }
                 }

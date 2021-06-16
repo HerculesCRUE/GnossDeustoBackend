@@ -21,7 +21,7 @@ namespace ApiCargaWebInterface.Controllers
     [ClaimRequirement("Administrator","true")]
     public class CheckSystemController : Controller
     {
-        CheckSystemService _checkSystemService;
+        readonly CheckSystemService _checkSystemService;
         public CheckSystemController(CheckSystemService checkSystemService)
         {
             _checkSystemService = checkSystemService;

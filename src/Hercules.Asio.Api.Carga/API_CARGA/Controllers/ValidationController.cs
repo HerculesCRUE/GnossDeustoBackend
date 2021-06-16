@@ -26,7 +26,7 @@ namespace API_CARGA.Controllers
     [Authorize]
     public class ValidationController : ControllerBase
     {
-        IShapesConfigService _shapeConfigService;
+        readonly IShapesConfigService _shapeConfigService;
         public ValidationController(IShapesConfigService iShapeConfigService)
         {
             _shapeConfigService = iShapeConfigService;
