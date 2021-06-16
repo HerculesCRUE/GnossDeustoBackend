@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Security.Authentication;
-using System;
 
 namespace Hercules_SAML
 {
@@ -51,54 +50,20 @@ namespace Hercules_SAML
             return Redirect(returnUrl);
         }
 
-        [HttpPost("Logout")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
+        [Route("Logout")]
+        public async Task<IActionResult> Logout(string returnUrl = null)
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Redirect(Url.Content("~/"));
-            }
-
             var binding = new Saml2PostBinding();
             var saml2LogoutRequest = await new Saml2LogoutRequest(config, User).DeleteSession(HttpContext);
             return binding.Bind(saml2LogoutRequest).ToActionResult();
-        }
-
-        [Route("LoggedOut")]
-        public IActionResult LoggedOut()
-        {
-            var binding = new Saml2PostBinding();
-            binding.Unbind(Request.ToGenericHttpRequest(), new Saml2LogoutResponse(config));
-
-            return Redirect(Url.Content("~/"));
-        }
-
-        [Route("SingleLogout")]
-        public async Task<IActionResult> SingleLogout()
-        {
-            Saml2StatusCodes status;
-            var requestBinding = new Saml2PostBinding();
-            var logoutRequest = new Saml2LogoutRequest(config, User);
-            try
+            if (string.IsNullOrEmpty(returnUrl))
             {
-                requestBinding.Unbind(Request.ToGenericHttpRequest(), logoutRequest);
-                status = Saml2StatusCodes.Success;
-                await logoutRequest.DeleteSession(HttpContext);
+                return Redirect("~/");
             }
-            catch (Exception exc)
+            else
             {
-                status = Saml2StatusCodes.RequestDenied;
+                return Redirect(returnUrl);
             }
-
-            var responsebinding = new Saml2PostBinding();
-            responsebinding.RelayState = requestBinding.RelayState;
-            var saml2LogoutResponse = new Saml2LogoutResponse(config)
-            {
-                InResponseToAsString = logoutRequest.IdAsString,
-                Status = status,
-            };
-            return responsebinding.Bind(saml2LogoutResponse).ToActionResult();
         }
     }
 }
