@@ -82,6 +82,7 @@ namespace CronConfigure.Controllers
 
             return Ok(id);
         }
+        //Se requiere llamada a otros servicios y el uso de BD
         [ExcludeFromCodeCoverage]
         /// <summary>
         /// Vuelve a ejecutar una tarea ya ejecutada o programada
@@ -120,6 +121,8 @@ namespace CronConfigure.Controllers
             return Ok(_cronApiService.GetJobs(type, from, count));
 
         }
+
+        //Se requiere el uso de BD
         [ExcludeFromCodeCoverage]
         /// <summary>
         /// devuelve una tarea
@@ -134,7 +137,7 @@ namespace CronConfigure.Controllers
             return Ok(_cronApiService.GetJob(id));
 
         }
-
+        //Se requiere llamada a otros servicios
         [ExcludeFromCodeCoverage]
         /// <summary>
         /// Obtiene un listado de tareas ejecutadas de un repositorio
