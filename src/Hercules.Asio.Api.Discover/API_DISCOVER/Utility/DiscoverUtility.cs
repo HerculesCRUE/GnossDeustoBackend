@@ -681,7 +681,7 @@ namespace API_DISCOVER.Utility
             foreach (List<string> listaIn in listaListas)
             {
                 string consulta = "select distinct ?s ?rdftype where{?s a ?rdftype. Filter(?s in (<" + string.Join(">,<", listaIn) + ">))}";
-                SparqlObject sparqlObject = mSparqlUtility.SelectData(null,pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
+                SparqlObject sparqlObject = mSparqlUtility.SelectData(null, pSPARQLEndpoint, pGraph, consulta, pQueryParam, pUsername, pPassword);
                 foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
                 {
                     entitiesDB[row["s"].value] = row["rdftype"].value;
@@ -1448,7 +1448,7 @@ namespace API_DISCOVER.Utility
             }
             return discoveredEntityList;
         }
-        
+
         /// <summary>
         /// Reconcilia el RDF con datos del propio RDF
         /// </summary>
@@ -2506,6 +2506,7 @@ namespace API_DISCOVER.Utility
         #endregion
 
         #region Integración con APIs externos (Descubrimiento de enlaces)
+        [ExcludeFromCodeCoverageAttribute]
         /// <summary>
         /// Método para el descubrimiento con los APIs externos
         /// </summary>
@@ -2671,7 +2672,7 @@ namespace API_DISCOVER.Utility
 
             return identifiersDiscover;
         }
-
+        [ExcludeFromCodeCoverageAttribute]
         /// <summary>
         /// Extrae los identificadores obtenidos de las integraciones externas y los almacena en el Grafo a cargar
         /// </summary>
@@ -2997,7 +2998,8 @@ namespace API_DISCOVER.Utility
             }
             return identifiersDiscover;
         }
-
+        //Se requiere llamar a un api externo
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Integración con el API de ORCID
         /// </summary>
