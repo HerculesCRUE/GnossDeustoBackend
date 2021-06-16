@@ -10,6 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API_CARGA.Migrations
 {
     [ExcludeFromCodeCoverage]
+
     [DbContext(typeof(EntityContext))]
     partial class EntityContextModelSnapshot : ModelSnapshot
     {

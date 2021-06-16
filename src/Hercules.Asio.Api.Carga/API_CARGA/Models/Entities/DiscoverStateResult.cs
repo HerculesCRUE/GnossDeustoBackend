@@ -11,6 +11,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace API_CARGA.Models.Entities
 {
     [ExcludeFromCodeCoverage]
+
     ///<summary>
     ///Representa el estao de un item de descubrimiento
     ///</summary>

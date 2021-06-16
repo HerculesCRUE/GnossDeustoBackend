@@ -5,13 +5,14 @@
 using API_CARGA.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
-
+    [ExcludeFromCodeCoverage]
     public class CallOAIPMH
     {
         readonly TokenBearer _token;
