@@ -5,10 +5,12 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace API_DISCOVER.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para obtener la configuración necesaria para el uso de Sparql
     ///</summary>

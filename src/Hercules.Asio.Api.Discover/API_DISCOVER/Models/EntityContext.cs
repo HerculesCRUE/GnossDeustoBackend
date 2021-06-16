@@ -6,10 +6,12 @@
 using API_DISCOVER.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace API_DISCOVER.Models
 {
+    [ExcludeFromCodeCoverage]
     public class EntityContext : DbContext
     {
         private string _defaultSchema;

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -207,6 +208,8 @@ namespace API_DISCOVER.Utility
         #endregion
 
         #region Interacción con RohGraph
+        //Se ejecuta desde PrepareData
+        [ExcludeFromCodeCoverage]
 
         /// <summary>
         /// Obtiene las entidades con sus rdf:type (con la inferencia)
@@ -236,7 +239,8 @@ namespace API_DISCOVER.Utility
             }
             return entitiesRdfTypes;
         }
-
+        //Se ejecuta desde PrepareData
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Obtiene las entidades con su rdf:type
         /// </summary>
@@ -264,7 +268,8 @@ namespace API_DISCOVER.Utility
             }
             return entitiesRdfType;
         }
-
+        //Se ejecuta desde PrepareData
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Obtiene los datos de desambiguación del RDF
         /// </summary>
@@ -684,6 +689,8 @@ namespace API_DISCOVER.Utility
             }
             return entitiesDB;
         }
+        //Solo se ejecuta desde EquivalenceDiscover
+        [ExcludeFromCodeCoverage]
 
         /// <summary>
         /// Obtiente los sujetos que están cargados en la BBDD SPARQL para los que tienen los identificadores en el campo SameAs
@@ -1203,6 +1210,8 @@ namespace API_DISCOVER.Utility
         #endregion
 
         #region Métodos de reconciliacion
+        //No se puede ejecutar desde GitHub
+        [ExcludeFromCodeCoverage]
 
         /// <summary>
         /// Método que prepara los datos para efectuar la reconciliación
@@ -1439,7 +1448,7 @@ namespace API_DISCOVER.Utility
             }
             return discoveredEntityList;
         }
-
+        
         /// <summary>
         /// Reconcilia el RDF con datos del propio RDF
         /// </summary>
@@ -4745,6 +4754,8 @@ namespace API_DISCOVER.Utility
         #endregion
 
         #region Métodos de detección de equivalencias
+        //No se puede ejecutar desde GitHub
+        [ExcludeFromCodeCoverage]
 
         /// <summary>
         /// Realizamos la detección de equivalencias con Unidata, caragaremos los SameAs correspondientes de las entidades hacia el nodo Unidata
@@ -4909,6 +4920,8 @@ namespace API_DISCOVER.Utility
                 }
             }
         }
+        // solo se ejecuta desde EquivalenceDiscover
+        [ExcludeFromCodeCoverage]
 
         /// <summary>
         /// Obtiente los sameAs de os sujetos pasados como parámetro
