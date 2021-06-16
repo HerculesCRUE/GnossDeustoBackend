@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -174,6 +175,8 @@ namespace API_CARGA.Models.Utility
             }
             return response;
         }
+        [ExcludeFromCodeCoverage]
+        //No se puede hacer una llamada Post en un test unitario
 
         /// <summary>
         /// Carga una ontología en un SPARQL endpoint
@@ -229,6 +232,8 @@ namespace API_CARGA.Models.Utility
             //Cargamos la ontología
             SparqlUtility.LoadTriples(pRabbitMQService, SparqlUtility.GetTriplesFromGraph(pOntology), pSPARQLEndpoint, pQueryParam, pGraph, pUsername, pPassword);
         }
+        [ExcludeFromCodeCoverage]
+        //Se le llama desde LoadOntology 
 
         /// <summary>
         /// Carga los triples en un PARQL endpoint
@@ -355,7 +360,8 @@ namespace API_CARGA.Models.Utility
                 }
             }
         }
-
+        [ExcludeFromCodeCoverage]
+        //Se le llama desde LoadTriples
         private static void InsertData(RabbitMQService pRabbitMQService, string pSPARQLEndpoint, string pGraph, List<string> triplesInsert, string pQueryParam, string pUsername, string pPassword)
         {
             string query = "";
