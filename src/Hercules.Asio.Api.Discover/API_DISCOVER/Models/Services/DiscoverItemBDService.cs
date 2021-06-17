@@ -19,6 +19,10 @@ namespace API_DISCOVER.Models.Services
     public class DiscoverItemBDService
     {
         private readonly EntityContext _context;
+        /// <summary>
+        /// DiscoverItemBDService
+        /// </summary>
+        /// <param name="context"></param>
         public DiscoverItemBDService(EntityContext context)
         {
             _context = context;

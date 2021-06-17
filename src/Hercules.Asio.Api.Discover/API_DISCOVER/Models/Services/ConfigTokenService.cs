@@ -19,8 +19,17 @@ namespace API_DISCOVER.Models.Services
     [ExcludeFromCodeCoverage]
     public class ConfigTokenService
     {
+        /// <summary>
+        /// Configuration
+        /// </summary>
         public IConfigurationRoot Configuration { get; set; }
+        /// <summary>
+        /// Authority
+        /// </summary>
         public string Authority { get; set; }
+        /// <summary>
+        /// ConfigTokenService
+        /// </summary>
         public ConfigTokenService()
         {
             var builder = new ConfigurationBuilder()

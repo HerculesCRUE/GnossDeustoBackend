@@ -14,6 +14,9 @@ namespace API_DISCOVER.Models.Services
     ///</summary>
     public class ConfigScopus
     {
+        /// <summary>
+        /// Configuration
+        /// </summary>
         public IConfigurationRoot Configuration { get; set; }
         private string ScopusApiKey { get; set; }
         private string ScopusUrl { get; set; }

@@ -25,9 +25,14 @@ namespace API_DISCOVER.Models.Services
     [ExcludeFromCodeCoverage]
     public class CallTokenService
     {
-        private ConfigTokenService _configToken;
+        readonly private ConfigTokenService _configToken;
         readonly IHostEnvironment _env;
 
+        /// <summary>
+        /// CallTokenService
+        /// </summary>
+        /// <param name="configToken"></param>
+        /// <param name="env"></param>
         public CallTokenService(ConfigTokenService configToken, IHostEnvironment env)
         {
             _configToken = configToken;

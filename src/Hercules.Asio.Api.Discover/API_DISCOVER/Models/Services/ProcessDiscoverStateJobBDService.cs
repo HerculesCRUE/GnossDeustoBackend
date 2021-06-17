@@ -12,14 +12,17 @@ using System.Reflection;
 
 namespace API_DISCOVER.Models.Services
 {
-    //No se van a hacer llamadas a BD en un test unitario
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para gestionar los estados de descubrimiento de las tareas
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class ProcessDiscoverStateJobBDService
     {
         private readonly EntityContext _context;
+        /// <summary>
+        /// ProcessDiscoverStateJobBDService
+        /// </summary>
+        /// <param name="context"></param>
         public ProcessDiscoverStateJobBDService(EntityContext context)
         {
             _context = context;
@@ -93,7 +96,7 @@ namespace API_DISCOVER.Models.Services
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

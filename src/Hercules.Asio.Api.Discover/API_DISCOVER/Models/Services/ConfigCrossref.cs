@@ -10,13 +10,15 @@ using System.IO;
 
 namespace API_DISCOVER.Models.Services
 {
-    //No se van a hacer llamadas a BD en un test unitario
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para obtener la configuración necesaria para el uso del API de CROSSREF
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class ConfigCrossref
     {
+        /// <summary>
+        /// Configuration
+        /// </summary>
         public IConfigurationRoot Configuration { get; set; }
         private string CrossrefUserAgent { get; set; }
         

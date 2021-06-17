@@ -11,23 +11,39 @@ using System.Linq;
 
 namespace API_DISCOVER.Models
 {
+    /// <summary>
+    /// EntityContext
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class EntityContext : DbContext
     {
-        private string _defaultSchema;
+        /// <summary>
+        /// DiscoverItem
+        /// </summary>
         public DbSet<DiscoverItem> DiscoverItem { get; set; }
+        /// <summary>
+        /// ProcessDiscoverStateJob
+        /// </summary>
         public DbSet<ProcessDiscoverStateJob> ProcessDiscoverStateJob { get; set; }
+        /// <summary>
+        /// EntityContext
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="memory"></param>
         public EntityContext(DbContextOptions options, bool memory = false)
             : base(options)
         {
             if (!memory)
             {
                 Database.Migrate();
-            }
-           
+            }        
 
         }
 
+        /// <summary>
+        /// OnModelCreating
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DiscoverItem>()
@@ -42,6 +58,5 @@ namespace API_DISCOVER.Models
                 v => string.Join('|', v),
                 v => v.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList());
         }
-
     }
 }

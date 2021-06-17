@@ -15,15 +15,20 @@ using System.Web;
 
 namespace API_DISCOVER.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     /// <summary>
     /// clase para realizar llamadas al api de uris factory
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class CallUrisFactoryApiService : ICallUrisFactoryApiService
     {
         readonly TokenBearer _token;
         readonly ConfigUrlService _serviceUrl;
         private static Dictionary<string, string> _urisCache;
+        /// <summary>
+        /// CallUrisFactoryApiService
+        /// </summary>
+        /// <param name="tokenService"></param>
+        /// <param name="serviceUrl"></param>
         public CallUrisFactoryApiService(CallTokenService tokenService,ConfigUrlService serviceUrl)
         {
             _serviceUrl = serviceUrl;

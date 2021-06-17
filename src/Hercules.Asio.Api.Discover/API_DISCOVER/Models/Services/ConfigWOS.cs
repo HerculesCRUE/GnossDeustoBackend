@@ -10,13 +10,15 @@ using System.IO;
 
 namespace API_DISCOVER.Models.Services
 {
-    //No se necesita esta configuracion para los test
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para obtener la configuración necesaria para el uso del API de WOS
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class ConfigWOS
     {
+        /// <summary>
+        /// Configuration
+        /// </summary>
         public IConfigurationRoot Configuration { get; set; }
         private string WOSAuthorization { get; set; }
 

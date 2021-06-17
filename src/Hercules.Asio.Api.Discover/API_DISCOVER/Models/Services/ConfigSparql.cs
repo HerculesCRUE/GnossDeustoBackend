@@ -10,20 +10,21 @@ using System.IO;
 
 namespace API_DISCOVER.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para obtener la configuración necesaria para el uso de Sparql
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class ConfigSparql
     {
+        /// <summary>
+        /// Configuration
+        /// </summary>
         public IConfigurationRoot Configuration { get; set; }
         private string Graph { get; set; }
         private string Endpoint { get; set; }
         private string QueryParam { get; set; }
         private string Username { get; set; }
         private string Password { get; set; }
-
-
         private string UnidataGraph { get; set; }
         private string UnidataEndpoint { get; set; }
         private string UnidataQueryParam { get; set; }

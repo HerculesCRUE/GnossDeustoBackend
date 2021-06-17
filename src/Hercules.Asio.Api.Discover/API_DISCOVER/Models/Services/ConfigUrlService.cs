@@ -16,9 +16,21 @@ namespace API_DISCOVER.Models.Services
     [ExcludeFromCodeCoverage]
     public class ConfigUrlService
     {
+        /// <summary>
+        /// Configuration
+        /// </summary>
         public IConfigurationRoot Configuration { get; set; }
+        /// <summary>
+        /// UrlCarga
+        /// </summary>
         public string UrlCarga { get; set; }
+        /// <summary>
+        /// UrlCron
+        /// </summary>
         public string UrlCron { get; set; }
+        /// <summary>
+        /// UrlUrisFactory
+        /// </summary>
         public string UrlUrisFactory { get; set; }
         /// <summary>
         /// Obtiene la url del api de carga que ha sido configurada

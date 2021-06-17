@@ -27,6 +27,11 @@ namespace API_DISCOVER.Models.Services
     {
         readonly ConfigUrlService _serviceUrl;
         readonly TokenBearer _token;
+        /// <summary>
+        /// CallCronApiService
+        /// </summary>
+        /// <param name="serviceUrl"></param>
+        /// <param name="tokenService"></param>
         public CallCronApiService(ConfigUrlService serviceUrl, CallTokenService tokenService)
         {
             _serviceUrl = serviceUrl;

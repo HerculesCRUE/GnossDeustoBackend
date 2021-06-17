@@ -35,6 +35,11 @@ namespace API_DISCOVER.Models.Services
         static RohGraph ontologia;
         static string hash;
 
+        /// <summary>
+        /// CallEtlApiService
+        /// </summary>
+        /// <param name="serviceUrl"></param>
+        /// <param name="tokenService"></param>
         public CallEtlApiService(ConfigUrlService serviceUrl, CallTokenService tokenService)
         {
             _serviceUrl = serviceUrl;

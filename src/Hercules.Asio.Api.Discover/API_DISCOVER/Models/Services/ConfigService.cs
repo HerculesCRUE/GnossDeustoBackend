@@ -16,6 +16,9 @@ namespace API_DISCOVER.Models.Services
     ///</summary>
     public class ConfigService
     {
+        /// <summary>
+        /// Configuration
+        /// </summary>
         public IConfigurationRoot Configuration { get; set; }
         private float MaxScore { get; set; }
         private float MinScore { get; set; }
@@ -75,12 +78,12 @@ namespace API_DISCOVER.Models.Services
             }
             return MinScore;
         }
-        //No se van a hacer llamadas externas en un test unitatio
-        [ExcludeFromCodeCoverage]
+        
         /// <summary>
         /// Obtiene la url del dominio de Unidata
         /// </summary>
         /// <returns>uri del dominio de Unidata</returns>
+        [ExcludeFromCodeCoverage]
         public string GetUnidataDomain()
         {
             if (string.IsNullOrEmpty(UnidataDomain))
@@ -105,12 +108,11 @@ namespace API_DISCOVER.Models.Services
             return UnidataDomain;
         }
 
-        //No se van a hacer llamadas externas en un test unitatio
-        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Uri por la que se sustituirá el dominio de las URLs para cargarlas en Unidata
         /// </summary>
         /// <returns>Uri por la que se sustituirá el dominio de las URLs para cargarlas en Unidata</returns>
+        [ExcludeFromCodeCoverage]
         public string GetUnidataUriTransform()
         {
             if (string.IsNullOrEmpty(UnidataUriTransform))
@@ -134,12 +136,12 @@ namespace API_DISCOVER.Models.Services
             }
             return UnidataUriTransform;
         }
-        //No se van a hacer llamadas a otro servicio
-        [ExcludeFromCodeCoverage]
+
         /// <summary>
         /// Expresión Cron para representar cuando debe lanzarse el proceso de descubrimiento de enlaces
         /// </summary>
         /// <returns>Expresión Cron</returns>
+        [ExcludeFromCodeCoverage]
         public string GetLaunchDiscoverLoadedEntitiesCronExpression()
         {
             if (string.IsNullOrEmpty(LaunchDiscoverLoadedEntitiesCronExpression))
@@ -164,11 +166,11 @@ namespace API_DISCOVER.Models.Services
             return LaunchDiscoverLoadedEntitiesCronExpression;
         }
 
-        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Segundos para 'dormir' tras procesar una entidad por el proceso de descubrimiento de enlaces
         /// </summary>
         /// <returns>Segundos</returns>
+        [ExcludeFromCodeCoverage]
         public int GetSleepSecondsAfterProcessEntityDiscoverLoadedEntities()
         {
             if (!SleepSecondsAfterProcessEntityDiscoverLoadedEntities.HasValue)
@@ -194,8 +196,5 @@ namespace API_DISCOVER.Models.Services
             }
             return SleepSecondsAfterProcessEntityDiscoverLoadedEntities.Value;
         }
-
-
-
     }
 }

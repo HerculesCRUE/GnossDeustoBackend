@@ -26,8 +26,15 @@ namespace API_DISCOVER.Models.Services
     [ExcludeFromCodeCoverage]
     public class RabbitMQService 
     {
+        /// <summary>
+        /// ReceivedDelegate
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public delegate bool ReceivedDelegate(string s);
-
+        /// <summary>
+        /// ShutDownDelegate
+        /// </summary>
         public delegate void ShutDownDelegate();
 
         private IConnection connection = null;
@@ -35,6 +42,9 @@ namespace API_DISCOVER.Models.Services
         private readonly RabbitMQInfo amqpInfo;
         private readonly ConnectionFactory connectionFactory;
         private string queueName;
+        /// <summary>
+        /// queueNameVirtuoso
+        /// </summary>
         public string queueNameVirtuoso { get; set; }
 
         /// <summary>
@@ -81,6 +91,11 @@ namespace API_DISCOVER.Models.Services
             connection = connectionFactory.CreateConnection();
         }
 
+        /// <summary>
+        /// ListenToQueue
+        /// </summary>
+        /// <param name="receivedFunction"></param>
+        /// <param name="shutdownFunction"></param>
         public void ListenToQueue(ReceivedDelegate receivedFunction, ShutDownDelegate shutdownFunction)
         {
             IModel channel = connection.CreateModel();

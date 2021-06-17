@@ -10,6 +10,9 @@ using System.Text;
 
 namespace API_DISCOVER.Models.Logging
 {
+    /// <summary>
+    /// Logging
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public static class Logging
     {
@@ -17,6 +20,11 @@ namespace API_DISCOVER.Models.Logging
         private static string _timeStamp;
         private static string _LogPath;
 
+        /// <summary>
+        /// Error
+        /// </summary>
+        /// <param name="pException"></param>
+        /// <param name="pExtraInfo"></param>
         public static void Error(Exception pException,string pExtraInfo=null)
         {
             if (string.IsNullOrEmpty(_timeStamp) || !_timeStamp.Equals(CreateTimeStamp()))
@@ -60,6 +68,10 @@ namespace API_DISCOVER.Models.Logging
             return timeStamp;
         }
 
+        /// <summary>
+        /// GetLogPath
+        /// </summary>
+        /// <returns></returns>
         public static string GetLogPath()
         {
             if (string.IsNullOrEmpty(_LogPath))
