@@ -217,6 +217,11 @@ namespace CronConfigure
     /// </summary>
     public class AllowAnonymous : IAuthorizationHandler
     {
+        /// <summary>
+        /// HandleAsync
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public Task HandleAsync(AuthorizationHandlerContext context)
         {
             foreach (IAuthorizationRequirement requirement in context.PendingRequirements.ToList())

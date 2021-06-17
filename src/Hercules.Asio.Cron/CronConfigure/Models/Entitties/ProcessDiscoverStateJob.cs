@@ -9,18 +9,28 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
-/// <summary>
-/// Clase para asociar una tarea con su estado de descubrimiento
-/// </summary>
+
 namespace CronConfigure.Models.Entitties
 {
+    /// <summary>
+    /// Clase para asociar una tarea con su estado de descubrimiento
+    /// </summary>
     [ExcludeFromCodeCoverage]
     [Table("ProcessDiscoverStateJob")]
     public class ProcessDiscoverStateJob
     {
+        /// <summary>
+        /// Id
+        /// </summary>
         [Key]
         public Guid Id { get; set; }
+        /// <summary>
+        /// JobId
+        /// </summary>
         public string JobId { get; set; }
+        /// <summary>
+        /// State
+        /// </summary>
         public string State { get; set; }
     }
 }

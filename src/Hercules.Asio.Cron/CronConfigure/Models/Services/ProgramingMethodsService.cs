@@ -54,6 +54,7 @@ namespace CronConfigure.Models.Services
         ///</summary>
         ///<param name="idRepositoryGuid">identificador del repositorio a sincronizar</param>
         /// <param name="pSet">tipo del objeto, usado para filtrar por agrupaciones</param>
+        /// <param name="context">context</param>
         /// <param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
         [AutomaticRetry(Attempts = 0, DelaysInSeconds = new int[] { 3600 })]
         [ProlongExpirationTime]

@@ -18,7 +18,7 @@ namespace CronConfigure.Controllers
     [Authorize]
     public class ScheduledJobController : ControllerBase
     {
-        private ICronApiService _cronApiService;
+        readonly private ICronApiService _cronApiService;
         readonly private IProgramingMethodService _programingMethodsService;
         readonly private IRepositoryCronService _repositoryCronService;
 

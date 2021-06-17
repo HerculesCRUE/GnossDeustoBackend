@@ -11,7 +11,7 @@ namespace CronConfigure
     /// Program
     /// </summary>
     [ExcludeFromCodeCoverage]
-    public class Program
+    public static class Program
     {
         /// <summary>
         /// Main

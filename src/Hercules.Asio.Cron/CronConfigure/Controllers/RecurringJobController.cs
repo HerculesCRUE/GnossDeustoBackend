@@ -20,7 +20,7 @@ namespace CronConfigure.Controllers
     [Authorize]
     public class RecurringJobController : ControllerBase
     {
-        private ICronApiService _cronApiService;
+        readonly private ICronApiService _cronApiService;
         readonly private IProgramingMethodService _programingMethodsService;
         readonly private IRepositoryCronService _repositoryCronService;
         private IConfiguration _configuration { get; set; }
