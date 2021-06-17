@@ -55,7 +55,7 @@ namespace CronConfigure.Models.Services
             }
             catch (HttpRequestException)
             {
-                if (response.StatusCode.Equals(HttpStatusCode.BadRequest))
+                if (response != null && response.StatusCode.Equals(HttpStatusCode.BadRequest))
                 {
                     throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
                 }
