@@ -44,4 +44,4 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"SPARQLReplication" /o:"hercules-asio-gnoss" /d:sonar.login="${{ secrets.SONAR_TOKEN_REPLICATION }}" /d:sonar.host.url="https://sonarcloud.io"
            dotnet build src/Hercules.Asio.SPARQLReplication/Hercules.Asio.SPARQLReplication/
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_REPLICATION }}"
