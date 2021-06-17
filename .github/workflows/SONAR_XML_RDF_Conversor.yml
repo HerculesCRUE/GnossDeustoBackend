@@ -1,4 +1,4 @@
-name: Sonar_SPRQL_Replication
+name: SONAR_XML_RDF_Conversor
 on:
   push:
     branches:
@@ -39,9 +39,9 @@ jobs:
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_REPLICATION }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_XML_RDF_Conversor }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"SPARQLReplication" /o:"hercules-asio-gnoss" /d:sonar.login="${{ secrets.SONAR_TOKEN_REPLICATION }}" /d:sonar.host.url="https://sonarcloud.io"
-           dotnet build src/Hercules.Asio.SPARQLReplication/Hercules.Asio.SPARQLReplication/
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_REPLICATION }}"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"XML_RDF_Conversor" /o:"hercules-asio-gnoss" /d:sonar.login="${{ secrets.SONAR_TOKEN_XML_RDF_Conversor }}" /d:sonar.host.url="https://sonarcloud.io"
+           dotnet build src/Hercules.Asio.XML_RDF_Conversor
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_XML_RDF_Conversor }}"
