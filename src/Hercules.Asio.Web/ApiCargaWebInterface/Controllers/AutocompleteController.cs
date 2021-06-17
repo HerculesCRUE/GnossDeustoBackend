@@ -39,6 +39,12 @@ namespace ApiCargaWebInterface.Controllers
             Uri url = new Uri(_ConfigUrlService.GetGraph());
             string urlPeticion = $@"{url.Scheme}://{url.Host}/autocomplete?q={q}";
 
+            // Compruebo que la URL esté bien formada.
+            if (!Uri.IsWellFormedUriString(urlPeticion, UriKind.Absolute))
+            {
+                return BadRequest();
+            }
+
             // Hace la petición.
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlPeticion);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();

@@ -42,9 +42,14 @@ namespace ApiCargaWebInterface.Models.Services
                     client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
                 }
                 string url = _serviceUrl.GetUrl();
-                response = client.DeleteAsync($"{url}{urlMethod}").Result;
-                response.EnsureSuccessStatusCode();
-                result = response.Content.ReadAsStringAsync().Result;
+
+                // Compruebo que la URL esté bien formada.
+                if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
+                {
+                    response = client.DeleteAsync($"{url}{urlMethod}").Result;
+                    response.EnsureSuccessStatusCode();
+                    result = response.Content.ReadAsStringAsync().Result;
+                }                
             }
             catch (HttpRequestException)
             {
@@ -78,11 +83,15 @@ namespace ApiCargaWebInterface.Models.Services
                 {
                     client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
                 }
-
                 string url = _serviceUrl.GetUrl();
-                response = client.GetAsync($"{url}{urlMethod}").Result;
-                response.EnsureSuccessStatusCode();
-                result = response.Content.ReadAsStringAsync().Result;
+
+                // Compruebo que la URL esté bien formada.
+                if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
+                {                    
+                    response = client.GetAsync($"{url}{urlMethod}").Result;
+                    response.EnsureSuccessStatusCode();
+                    result = response.Content.ReadAsStringAsync().Result;
+                }
             }
             catch (HttpRequestException)
             {
@@ -121,9 +130,14 @@ namespace ApiCargaWebInterface.Models.Services
                     client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
                 }
                 string url = _serviceUrl.GetUrl();
-                response = client.PostAsync($"{url}{urlMethod}", contentData).Result;
-                response.EnsureSuccessStatusCode();
-                result = response.Content.ReadAsStringAsync().Result;
+
+                // Compruebo que la URL esté bien formada.
+                if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
+                {
+                    response = client.PostAsync($"{url}{urlMethod}", contentData).Result;
+                    response.EnsureSuccessStatusCode();
+                    result = response.Content.ReadAsStringAsync().Result;
+                }
                 return result;
             }
             catch (HttpRequestException)
