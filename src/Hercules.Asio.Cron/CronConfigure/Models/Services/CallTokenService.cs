@@ -19,16 +19,22 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     /// <summary>
     /// Clase para la obtención de los tokens de acceso
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class CallTokenService
     {
-        private ConfigTokenService _configToken; 
+        readonly private ConfigTokenService _configToken; 
         readonly IWebHostEnvironment _env;
         private IConfiguration _configuration { get; set; }
 
+        /// <summary>
+        /// CallTokenService
+        /// </summary>
+        /// <param name="configToken"></param>
+        /// <param name="env"></param>
+        /// <param name="configuration"></param>
         public CallTokenService(ConfigTokenService configToken, IWebHostEnvironment env, IConfiguration configuration)
         {
             _configToken = configToken;
@@ -42,7 +48,6 @@ namespace CronConfigure.Models.Services
         {
             if (_env.IsDevelopment())
             {
-                //Log.Information("Ha entrado por development");
                 return TokenAppsettings("TokenTypeCarga", "AccessTokenCarga");
             }
             else
@@ -58,7 +63,6 @@ namespace CronConfigure.Models.Services
         /// <param name="stringData">Datos con el scope, el cliente id, el grantType y el secret</param>
         private TokenBearer CallTokenIdentity(string stringData)
         {
-            //Log.Information($"CallTokenIdentity string data: {stringData}");
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
             HttpResponseMessage response = null;
             try
@@ -66,7 +70,6 @@ namespace CronConfigure.Models.Services
                 HttpClient client = new HttpClient();
                 client.Timeout = TimeSpan.FromDays(1);
                 string authority = _configToken.GetAuthority()+"/connect/token";
-                //Log.Information($"CallTokenIdentity authority {authority}");
                 response = client.PostAsync($"{authority}", contentData).Result;
                 response.EnsureSuccessStatusCode();
                 string result = response.Content.ReadAsStringAsync().Result;

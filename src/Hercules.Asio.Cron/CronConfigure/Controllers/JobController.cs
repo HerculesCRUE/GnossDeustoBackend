@@ -21,9 +21,10 @@ namespace CronConfigure.Controllers
     [Authorize]
     public class JobController : ControllerBase
     {
-        private ICronApiService _cronApiService;
-        private IProgramingMethodService _programingMethodsService;
-        private IRepositoryCronService _repositoryCronService;
+        readonly private ICronApiService _cronApiService;
+        readonly private IProgramingMethodService _programingMethodsService;
+        readonly private IRepositoryCronService _repositoryCronService;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -52,7 +53,6 @@ namespace CronConfigure.Controllers
         public IActionResult AddExecution(string id_repository, string fecha_inicio = null, string set = null, string codigo_objeto = null)
         {
             DateTime fechaInicio = DateTime.Now;
-            DateTime? fechaDateTime = null;
             if (codigo_objeto != null && set == null)
             {
                 return BadRequest("falta el tipo de objeto");
@@ -82,8 +82,7 @@ namespace CronConfigure.Controllers
 
             return Ok(id);
         }
-        //Se requiere llamada a otros servicios y el uso de BD
-        [ExcludeFromCodeCoverage]
+        
         /// <summary>
         /// Vuelve a ejecutar una tarea ya ejecutada o programada
         /// </summary>
@@ -93,6 +92,7 @@ namespace CronConfigure.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("{id}")]
+        [ExcludeFromCodeCoverage]
         public IActionResult AddExecution(string id)
         {
             if (_cronApiService.ExistJob(id))
@@ -105,7 +105,7 @@ namespace CronConfigure.Controllers
                 return BadRequest("el job no se encuentra en la lista de ejecutados");
             }
         }
-        [ExcludeFromCodeCoverage]
+
         /// <summary>
         /// devuelve una lista de tareas paginadas
         /// </summary>
@@ -116,14 +116,13 @@ namespace CronConfigure.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ExcludeFromCodeCoverage]
         public IActionResult GetJobs(JobType type, int count, int from = 0)
         {
             return Ok(_cronApiService.GetJobs(type, from, count));
 
         }
 
-        //Se requiere el uso de BD
-        [ExcludeFromCodeCoverage]
         /// <summary>
         /// devuelve una tarea
         /// </summary>
@@ -132,13 +131,13 @@ namespace CronConfigure.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ExcludeFromCodeCoverage]
         public IActionResult GetJob(string id)
         {
             return Ok(_cronApiService.GetJob(id));
 
         }
-        //Se requiere llamada a otros servicios
-        [ExcludeFromCodeCoverage]
+
         /// <summary>
         /// Obtiene un listado de tareas ejecutadas de un repositorio
         /// </summary>
@@ -148,6 +147,7 @@ namespace CronConfigure.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("repository/{id}")]
+        [ExcludeFromCodeCoverage]
         public IActionResult GetJobsOfRepository(string id)
         {
                 
@@ -157,7 +157,7 @@ namespace CronConfigure.Controllers
                 idRep = new Guid(id);
                 return Ok(_repositoryCronService.GetAllJobs(idRep));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest("identificador invalido");
             }

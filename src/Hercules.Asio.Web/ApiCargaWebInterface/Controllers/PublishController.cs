@@ -51,7 +51,6 @@ namespace ApiCargaWebInterface.Controllers
         [Route("[Controller]/rdf/{repository}")]
         public IActionResult ObtenerRdf(Guid repository)
         {
-            RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(repository);
             PublishRepositoryModel publishRepositoryModel = new PublishRepositoryModel()
             {
                 RepositoryId = repository,

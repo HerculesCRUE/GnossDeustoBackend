@@ -35,7 +35,5 @@ namespace API_CARGA.Models.Entities
         /// Definición del shape SHACL
         /// </summary>
         public string Shape { get; set; }
-
-        //public virtual RepositoryConfig RepositoryConfig { get; set; }
     }
 }

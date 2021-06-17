@@ -18,10 +18,10 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     /// <summary>
     /// clase para la obtención de los tokens de acceso
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class CallTokenService
     {
         readonly IWebHostEnvironment _env;

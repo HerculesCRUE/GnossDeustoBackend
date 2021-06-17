@@ -12,14 +12,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_CARGA.Controllers
-{
-    [ExcludeFromCodeCoverage]
+{    
     /// <summary>
     /// Contiene los procesos necesarios para la ejecución de las sincronizaciones.
     /// </summary>
     [ApiController]
     [Route("[Controller]")]
     [Authorize]
+    [ExcludeFromCodeCoverage]
     public class syncController : Controller
     {
         readonly private OaiPublishRDFService _oaiPublishRDFService;

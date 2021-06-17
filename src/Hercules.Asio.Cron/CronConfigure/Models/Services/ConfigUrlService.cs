@@ -9,15 +9,21 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 namespace CronConfigure.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     /// <summary>
     /// Obtiene las configuraciones de las url base
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class ConfigUrlService
     {
         private IConfiguration _configuration { get; set; }
+        /// <summary>
+        /// Url
+        /// </summary>
         public string Url { get; set; }
-
+        /// <summary>
+        /// ConfigUrlService
+        /// </summary>
+        /// <param name="configuration"></param>
         public ConfigUrlService(IConfiguration configuration)
         {
             _configuration = configuration;

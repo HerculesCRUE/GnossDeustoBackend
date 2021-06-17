@@ -17,6 +17,9 @@ namespace Api_Unidata.Models.Services
     ///</summary>
     public class ConfigSparql
     {
+        /// <summary>
+        /// Configuración.
+        /// </summary>
         public IConfigurationRoot Configuration { get; set; }
         private string GraphUnidata { get; set; }
         private string EndpointUnidata { get; set; }

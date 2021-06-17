@@ -35,7 +35,5 @@ namespace CronConfigure.Models.Entitties
         /// Definición del shape SHACL
         /// </summary>
         public string Shape { get; set; }
-
-        //public virtual RepositoryConfig RepositoryConfig { get; set; }
     }
 }

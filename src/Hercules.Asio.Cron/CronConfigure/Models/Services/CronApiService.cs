@@ -16,13 +16,18 @@ using NCrontab;
 
 namespace CronConfigure.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para gestionar los distintos tipos de tareas
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class CronApiService : ICronApiService
     {
-        private HangfireEntityContext _context;
+        readonly private HangfireEntityContext _context;
+
+        /// <summary>
+        /// CronApiService
+        /// </summary>
+        /// <param name="context"></param>
         public CronApiService(HangfireEntityContext context)
         {
             _context = context;
@@ -54,6 +59,16 @@ namespace CronConfigure.Models.Services
                 recurringJobsView.Add(recurringJobViewModel);
             }
             return recurringJobsView;
+        }
+
+        ///<summary>
+        ///Obtiene una tarea recurrente
+        ///</summary>
+        ///<param name="id">nombre de la tarea recurrente</param>
+        public RecurringJobViewModel GetRecurringJobs(string id)
+        {
+            RecurringJobViewModel recurringJob = GetRecurringJobs().FirstOrDefault(item => item.Id.Equals(id));
+            return recurringJob;
         }
 
         ///<summary>
@@ -159,16 +174,6 @@ namespace CronConfigure.Models.Services
         public void EnqueueJob(string id)
         {
             BackgroundJob.Requeue(id);
-        }
-
-        ///<summary>
-        ///Obtiene una tarea recurrente
-        ///</summary>
-        ///<param name="id">nombre de la tarea recurrente</param>
-        public RecurringJobViewModel GetRecurringJobs(string id)
-        {
-            RecurringJobViewModel recurringJob = GetRecurringJobs().FirstOrDefault(item => item.Id.Equals(id));
-            return recurringJob;
         }
 
         ///<summary>

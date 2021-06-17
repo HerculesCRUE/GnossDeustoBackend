@@ -20,13 +20,12 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     /// <summary>
     /// Clase para conectar con el servidor Rabbi
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class RabbitMQService : IRabbitMQService
     {
-
         private readonly RabbitMQInfo amqpInfo;
         private readonly ConnectionFactory connectionFactory;
         public string queueName { get; set; }
@@ -38,6 +37,7 @@ namespace API_CARGA.Models.Services
         /// Constructor de la clase que configura los datos necesarios para conectarse con rabbit
         /// </summary>
         /// <param name="ampOptionsSnapshot">Opciones de configuracion para Rabbit</param>
+        /// <param name="configuration">Configuración.</param>
         public RabbitMQService(IOptions<RabbitMQInfo> ampOptionsSnapshot, IConfiguration configuration)
         {
             _configuration = configuration;
@@ -74,18 +74,19 @@ namespace API_CARGA.Models.Services
         }
 
         /// <summary>
-        /// Encola un objeto en Rabbbit
+        /// Encola un objeto en Rabbit
         /// </summary>
         /// <param name="message">Objeto a encolar</param>
-        /// <param name="pQueue">Cola</param>
-        public void PublishMessage(object message, string pQueue,bool pDurable=false)
+        /// <param name="queue">Cola</param>
+        /// <param name="pDurable">Sí es durable o no</param>
+        public void PublishMessage(object message, string queue, bool pDurable=false)
         {
             using (var conn = connectionFactory.CreateConnection())
             {
                 using (var channel = conn.CreateModel())
                 {
                     channel.QueueDeclare(
-                        queue: pQueue,
+                        queue: queue,
                         durable: pDurable,
                         exclusive: false,
                         autoDelete: false,
@@ -96,7 +97,7 @@ namespace API_CARGA.Models.Services
                     var body = Encoding.UTF8.GetBytes(jsonPayload);
 
                     channel.BasicPublish(exchange: "",
-                        routingKey: pQueue,
+                        routingKey: queue,
                         basicProperties: null,
                         body: body
                     );

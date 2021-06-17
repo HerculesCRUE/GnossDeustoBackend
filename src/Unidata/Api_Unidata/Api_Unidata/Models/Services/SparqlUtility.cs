@@ -9,14 +9,28 @@ using VDS.RDF;
 
 namespace Api_Unidata.Models.Services
 {
-    public class SparqlUtility
+    /// <summary>
+    /// SparqlUtility.
+    /// </summary>
+    public static class SparqlUtility
     {
+        /// <summary>
+        /// Carga los triples.
+        /// </summary>
+        /// <param name="triplesInsert"></param>
         public static void LoadTriples(List<string> triplesInsert)
         {
             ConfigSparql config = new ConfigSparql();
             InsertData(config.GetEndpointUnidata(), config.GetGraphUnidata(), triplesInsert, config.GetQueryParam());
         }
 
+        /// <summary>
+        /// Inserta los datos.
+        /// </summary>
+        /// <param name="pSPARQLEndpoint"></param>
+        /// <param name="pGraph"></param>
+        /// <param name="triplesInsert"></param>
+        /// <param name="pQueryParam"></param>
         private static void InsertData(string pSPARQLEndpoint, string pGraph, List<string> triplesInsert, string pQueryParam)
         {
             string query = "";
@@ -45,7 +59,7 @@ namespace Api_Unidata.Models.Services
                     if (ex.Response != null)
                     {
                         string response = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
-                        throw new Exception(response);
+                        throw new ArgumentNullException(response);
                     }
                     throw ex;
                 }

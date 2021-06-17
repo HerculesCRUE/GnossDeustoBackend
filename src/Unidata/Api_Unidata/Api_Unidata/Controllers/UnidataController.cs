@@ -12,10 +12,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api_Unidata.Controllers
 {
-    [Authorize]
     /// <summary>
     /// Controlador para cargar triples en el grafo unidata
     /// </summary>
+    [Authorize]
     public class UnidataController : Controller
     {
         /// <summary>

@@ -10,12 +10,10 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Models.Entitties
 {
-
-    [ExcludeFromCodeCoverage]
-
     ///<summary>
     ///Representa un item de descubrimiento
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class DiscoverItem
     {
         ///<summary>
@@ -28,6 +26,9 @@ namespace CronConfigure.Models.Entitties
             ///</summary>
             public class DiscoverDissambiguationCandiate
             {
+                /// <summary>
+                /// DiscoverDissambiguationCandiate.
+                /// </summary>
                 public DiscoverDissambiguationCandiate()
                 {
                 }
@@ -57,6 +58,9 @@ namespace CronConfigure.Models.Entitties
                 public float Score { get; set; }
             }
 
+            /// <summary>
+            /// DiscoverDissambiguation.
+            /// </summary>
             public DiscoverDissambiguation()
             {
             }
@@ -86,14 +90,32 @@ namespace CronConfigure.Models.Entitties
             public virtual ICollection<DiscoverDissambiguationCandiate> DissambiguationCandiates { get; set; }
         }
 
+        /// <summary>
+        /// DiscoverItemStatus.
+        /// </summary>
         public enum DiscoverItemStatus
         {
+            /// <summary>
+            /// Pending
+            /// </summary>
             Pending,
+            /// <summary>
+            /// Processed
+            /// </summary>
             Processed,
+            /// <summary>
+            /// ProcessedDissambiguationProblem
+            /// </summary>
             ProcessedDissambiguationProblem,
+            /// <summary>
+            /// Error
+            /// </summary>
             Error
         }
 
+        /// <summary>
+        /// DiscoverItem.
+        /// </summary>
         public DiscoverItem()
         {
         }

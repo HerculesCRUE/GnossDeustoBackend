@@ -14,21 +14,38 @@ namespace CronConfigure.Models.Services
     ///</summary>
     public class MockCronApiService : ICronApiService
     {
+        /// <summary>
+        /// DeleteJob
+        /// </summary>
+        /// <param name="id"></param>
         public void DeleteJob(string id)
         {
-           
+           // Método sobreescrito.
         }
 
+        /// <summary>
+        /// DeleteRecurringJob
+        /// </summary>
+        /// <param name="id"></param>
         public void DeleteRecurringJob(string id)
         {
-            
+            // Método sobreescrito.
         }
 
+        /// <summary>
+        /// EnqueueJob
+        /// </summary>
+        /// <param name="id"></param>
         public void EnqueueJob(string id)
         {
-            
+            // Método sobreescrito.
         }
 
+        /// <summary>
+        /// ExistJob
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool ExistJob(string id)
         {
             if (id != "0")
@@ -41,6 +58,11 @@ namespace CronConfigure.Models.Services
             }
         }
 
+        /// <summary>
+        /// ExistRecurringJob
+        /// </summary>
+        /// <param name="recurringJob"></param>
+        /// <returns></returns>
         public bool ExistRecurringJob(string recurringJob)
         {
             if (recurringJob == "0")
@@ -53,6 +75,11 @@ namespace CronConfigure.Models.Services
             }
         }
 
+        /// <summary>
+        /// ExistScheduledJob
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool ExistScheduledJob(string id)
         {
             if (id != "0")
@@ -64,43 +91,80 @@ namespace CronConfigure.Models.Services
                 return false;
             }
         }
+
+        /// <summary>
+        /// GetJob
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ExcludeFromCodeCoverage]
-        //Exluido del analisis porque el metodo no se usa en ningun test pero debe estar porque hereda de una interfaz
         public JobViewModel GetJob(string id)
         {
             return new JobViewModel();
         }
+
+        /// <summary>
+        /// GetJobData
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ExcludeFromCodeCoverage]
-        //Exluido del analisis porque el metodo no se usa en ningun test pero debe estar porque hereda de una interfaz
         public JobViewModel GetJobData(string id)
         {
             throw new System.NotImplementedException();
         }
+
+        /// <summary>
+        /// GetJobs
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="from"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         [ExcludeFromCodeCoverage]
-        //Exluido del analisis porque el metodo no se usa en ningun test pero debe estar porque hereda de una interfaz
         public List<JobViewModel> GetJobs(JobType type, int from, int count)
         {
             return new List<JobViewModel>();
         }
+
+        /// <summary>
+        /// GetJobsOfRecurringJob
+        /// </summary>
+        /// <param name="recurringJob"></param>
+        /// <returns></returns>
         [ExcludeFromCodeCoverage]
-        //Exluido del analisis porque el metodo no se usa en ningun test pero debe estar porque hereda de una interfaz
         public List<JobViewModel> GetJobsOfRecurringJob(string recurringJob)
         {
             return new List<JobViewModel>();
         }
+
+        /// <summary>
+        /// GetRecurringJobs
+        /// </summary>
+        /// <returns></returns>
         [ExcludeFromCodeCoverage]
-        //Exluido del analisis porque el metodo no se usa en ningun test pero debe estar porque hereda de una interfaz
         public List<RecurringJobViewModel> GetRecurringJobs()
         {
             return new List<RecurringJobViewModel>();
         }
+
+        /// <summary>
+        /// GetRecurringJobs
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ExcludeFromCodeCoverage]
-        //Exluido del analisis porque el metodo no se usa en ningun test pero debe estar porque hereda de una interfaz
         public RecurringJobViewModel GetRecurringJobs(string id)
         {
             return new RecurringJobViewModel();
         }
 
+        /// <summary>
+        /// GetScheduledJobs
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         public List<ScheduledJobViewModel> GetScheduledJobs(int from, int count)
         {
             return new List<ScheduledJobViewModel>();

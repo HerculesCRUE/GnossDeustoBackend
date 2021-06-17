@@ -23,7 +23,7 @@ namespace XUnitTestAPI_CARGA
                 rdfService.PublishRepositories(Guid.NewGuid());
                 Assert.True(true);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Assert.True(false);
             }

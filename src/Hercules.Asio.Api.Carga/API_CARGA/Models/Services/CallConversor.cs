@@ -68,6 +68,7 @@ namespace Hercules.Asio.Api.Carga.Models.Services
         /// </summary>
         /// <param name="pRecord">XML con el record</param>
         /// <param name="pType">Tipo</param>
+        /// <param name="pUrlConversor">Url del conversor</param>
         /// <returns></returns>
         public string GetRDF(string pRecord,string pType,string pUrlConversor)
         {
@@ -103,7 +104,6 @@ namespace Hercules.Asio.Api.Carga.Models.Services
                     throw new HttpRequestException(response.ReasonPhrase);
                 }
             }
-            return result;
         }
     }
 }

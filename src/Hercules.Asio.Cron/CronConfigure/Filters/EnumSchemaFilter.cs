@@ -10,17 +10,25 @@ using System.Linq;
 
 namespace CronConfigure.Filters
 {
+    /// <summary>
+    /// EnumSchemaFilter.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class EnumSchemaFilter : ISchemaFilter
     {
-        public void Apply(OpenApiSchema model, SchemaFilterContext context)
+        /// <summary>
+        /// Apply.
+        /// </summary>
+        /// <param name="schema"></param>
+        /// <param name="context"></param>
+        public void Apply(OpenApiSchema schema, SchemaFilterContext context)
         {
             if (context.Type.IsEnum)
             {
-                model.Enum.Clear();
+                schema.Enum.Clear();
                 Enum.GetNames(context.Type)
                     .ToList()
-                    .ForEach(n => model.Enum.Add(new OpenApiString(n)));
+                    .ForEach(n => schema.Enum.Add(new OpenApiString(n)));
             }
         }
     }

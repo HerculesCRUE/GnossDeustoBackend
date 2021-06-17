@@ -16,10 +16,10 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     /// <summary>
     /// Clase para hacer llamadas api
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class CallApiService : ICallService
     {
         /// <summary>

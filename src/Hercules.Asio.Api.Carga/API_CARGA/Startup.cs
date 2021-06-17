@@ -157,24 +157,19 @@ namespace PRH
                 services.Configure<RabbitMQInfo>(_configuration.GetSection("RabbitMQ"));
             }
             
-            //services.AddSingleton<RabbitMQService>();
             services.AddSingleton(typeof(ConfigUrlService));
             services.AddSingleton(typeof(ConfigSparql));
             services.AddScoped(typeof(OaiPublishRDFService));
-            //services.AddSingleton<IRepositoriesConfigService, RepositoriesConfigMockService>();
             services.AddScoped<IRepositoriesConfigService, RepositoriesConfigBDService>();
             services.AddScoped<IDiscoverItemService, DiscoverItemBDService>();
             services.AddSingleton<IRabbitMQService, RabbitMQService>();
-            //services.AddSingleton<IShapesConfigService, ShapesConfigMockService>();
             services.AddScoped<IShapesConfigService, ShapesConfigBDService>();
             services.AddScoped<ICallNeedPublishData, CallApiNeedInfoPublisData>();
             services.AddScoped<ICallService, CallApiService>();
             services.AddScoped(typeof(CallTokenService));
             services.AddScoped(typeof(CallApiService));
             services.AddScoped(typeof(CallOAIPMH));
-            services.AddScoped(typeof(CallConversor));
-            //services.AddSingleton<ISyncConfigService, SyncConfigMockService>();
-
+            services.AddScoped(typeof(CallConversor));            
         }
 
         //<summary>

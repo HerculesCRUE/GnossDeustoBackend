@@ -7,10 +7,18 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Filters
 {
+    /// <summary>
+    /// HangfireDashboardNoAuthorizationFilter.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class HangfireDashboardNoAuthorizationFilter : IDashboardAuthorizationFilter
     {
-        public bool Authorize(DashboardContext dashboardContext)
+        /// <summary>
+        /// Authorize.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public bool Authorize(DashboardContext context)
         {
             return true;
         }

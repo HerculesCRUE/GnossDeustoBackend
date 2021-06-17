@@ -4,9 +4,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CronConfigure.Migrations
 {
+    /// <summary>
+    /// addDate.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public partial class addDate : Migration
     {
+        /// <summary>
+        /// Up.
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<DateTime>(
@@ -17,6 +24,10 @@ namespace CronConfigure.Migrations
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
         }
 
+        /// <summary>
+        /// Down.
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(

@@ -13,19 +13,41 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     /// <summary>
     /// Clase para la obtención de los datos necesarios para obtener el token de acceso al apiCarga
     /// </summary> 
+    [ExcludeFromCodeCoverage]
     public class ConfigTokenService
     {
+        /// <summary>
+        /// Authority
+        /// </summary>
         public string Authority { get; set; }
+        /// <summary>
+        /// GrantType
+        /// </summary>
         public string GrantType { get; set; }
+        /// <summary>
+        /// Scope
+        /// </summary>
         public string Scope { get; set; }
+        /// <summary>
+        /// ScopeCron
+        /// </summary>
         public string ScopeCron { get; set; }
+        /// <summary>
+        /// ClientId
+        /// </summary>
         public string ClientId { get; set; }
+        /// <summary>
+        /// ClientSecret
+        /// </summary>
         public string ClientSecret { get; set; }
         private IConfiguration _configuration { get; set; }
+        /// <summary>
+        /// ConfigTokenService
+        /// </summary>
+        /// <param name="configuration"></param>
         public ConfigTokenService(IConfiguration configuration)
         {
             _configuration = configuration;

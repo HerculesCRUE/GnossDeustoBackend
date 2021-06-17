@@ -12,10 +12,10 @@ using System.IO;
 
 namespace API_CARGA.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase usada para obtener las urlsConfiguradas
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class ConfigUrlService
     {
         public IConfigurationRoot Configuration { get; set; }

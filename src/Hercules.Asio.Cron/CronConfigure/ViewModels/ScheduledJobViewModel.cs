@@ -7,16 +7,31 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.ViewModels
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase que sirve para mostrar los datos de una tarea programada
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class ScheduledJobViewModel
     {
+        /// <summary>
+        /// Key
+        /// </summary>
         public string Key { get; set; }
+        /// <summary>
+        /// Job
+        /// </summary>
         public string Job { get; set; }
+        /// <summary>
+        /// EnqueueAt
+        /// </summary>
         public DateTime EnqueueAt { get; set; }
+        /// <summary>
+        /// InScheduledState
+        /// </summary>
         public bool InScheduledState { get; set; }
+        /// <summary>
+        /// ScheduledAt
+        /// </summary>
         public DateTime? ScheduledAt { get; set; }
     }
 }

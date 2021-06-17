@@ -9,18 +9,27 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Models.Hangfire
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase usada por Hangfire para el guardado de las tareas
     ///</summary>
+    [ExcludeFromCodeCoverage]
     [Table("server", Schema = "hangfire")]
     public partial class Server
     {
+        /// <summary>
+        /// Id
+        /// </summary>
         [StringLength(100)]
         public string Id { get; set; }
 
+        /// <summary>
+        /// Data
+        /// </summary>
         public string Data { get; set; }
 
+        /// <summary>
+        /// LastHeartbeat
+        /// </summary>
         public DateTime LastHeartbeat { get; set; }
     }
 }

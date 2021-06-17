@@ -12,13 +12,17 @@ using System.Net.Http;
 
 namespace CronConfigure.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Sirve para hacer llamadas a un API cuya url base esta configurada en UrlConfig del appSettings.json
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class CallApiService
     {
         readonly ConfigUrlService _serviceUrl;
+        /// <summary>
+        /// CallApiService
+        /// </summary>
+        /// <param name="serviceUrl"></param>
         public CallApiService(ConfigUrlService serviceUrl)
         {
             _serviceUrl = serviceUrl;

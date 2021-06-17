@@ -15,7 +15,8 @@ namespace API_CARGA.Models.Services
     ///</summary>
     public class ShapesConfigMockService : IShapesConfigService
     {
-        private List<ShapeConfig> _listShapesConfig;
+        readonly private List<ShapeConfig> _listShapesConfig;
+
         ///<summary>
         ///Inicializa la lista de shapes
         ///</summary>
@@ -85,47 +86,47 @@ namespace API_CARGA.Models.Services
             personShape.AppendLine("@prefix foaf1: <http://purl.org/roh/mirror/foaf#>.");
             personShape.AppendLine("@prefix vcard: <http://purl.org/roh/mirror/vcard#>.");
             personShape.AppendLine("roh:foaf1_PersonShape");
-            personShape.AppendLine("	a sh:NodeShape ;");
-            personShape.AppendLine("	sh:targetClass foaf1:Person ;");
-            personShape.AppendLine("	sh:property roh:someValuesDataType__foaf1__Person__foaf1__firstName;");
-            personShape.AppendLine("	sh:property roh:someValuesDataType__foaf1__Person__vivo__identifier;");
-            personShape.AppendLine("	sh:property roh:someValuesDataType__foaf1__Person__foaf1__surname;");
-            personShape.AppendLine("	sh:property roh:allValuesDataType__foaf1__Person__foaf1__surname;");
-            personShape.AppendLine("	sh:property roh:allValuesDataType__foaf1__Person__foaf1__firstName;");
-            personShape.AppendLine("	sh:property roh:allValuesDataType__foaf1__Person__vivo__identifier.");
+            personShape.AppendLine("\ta sh:NodeShape ;");
+            personShape.AppendLine("\th:targetClass foaf1:Person ;");
+            personShape.AppendLine("\th:property roh:someValuesDataType__foaf1__Person__foaf1__firstName;");
+            personShape.AppendLine("\tsh:property roh:someValuesDataType__foaf1__Person__vivo__identifier;");
+            personShape.AppendLine("\tsh:property roh:someValuesDataType__foaf1__Person__foaf1__surname;");
+            personShape.AppendLine("\tsh:property roh:allValuesDataType__foaf1__Person__foaf1__surname;");
+            personShape.AppendLine("\tsh:property roh:allValuesDataType__foaf1__Person__foaf1__firstName;");
+            personShape.AppendLine("\tsh:property roh:allValuesDataType__foaf1__Person__vivo__identifier.");
             personShape.AppendLine("roh:someValuesDataType__foaf1__Person__foaf1__firstName ");
-            personShape.AppendLine("	sh:severity sh:Violation;");
-            personShape.AppendLine("	sh:path foaf1:firstName;");
-            personShape.AppendLine("	sh:qualifiedMinCount  1;");
-            personShape.AppendLine("	sh:qualifiedValueShape [");
-            personShape.AppendLine("		sh:datatype xsd:string;");
-            personShape.AppendLine("	].");
+            personShape.AppendLine("\tsh:severity sh:Violation;");
+            personShape.AppendLine("\tsh:path foaf1:firstName;");
+            personShape.AppendLine("\tsh:qualifiedMinCount  1;");
+            personShape.AppendLine("\tsh:qualifiedValueShape [");
+            personShape.AppendLine("\t\tsh:datatype xsd:string;");
+            personShape.AppendLine("\t].");
             personShape.AppendLine("roh:someValuesDataType__foaf1__Person__vivo__identifier ");
-            personShape.AppendLine("	sh:severity sh:Violation;");
-            personShape.AppendLine("	sh:path vivo:identifier;");
-            personShape.AppendLine("	sh:qualifiedMinCount  1;");
-            personShape.AppendLine("	sh:qualifiedValueShape [");
-            personShape.AppendLine("		sh:datatype xsd:string;");
-            personShape.AppendLine("	].");
+            personShape.AppendLine("\tsh:severity sh:Violation;");
+            personShape.AppendLine("\tsh:path vivo:identifier;");
+            personShape.AppendLine("\tsh:qualifiedMinCount  1;");
+            personShape.AppendLine("\tsh:qualifiedValueShape [");
+            personShape.AppendLine("\t\tsh:datatype xsd:string;");
+            personShape.AppendLine("\t].");
             personShape.AppendLine("roh:someValuesDataType__foaf1__Person__foaf1__surname ");
-            personShape.AppendLine("	sh:severity sh:Violation;");
-            personShape.AppendLine("	sh:path foaf1:surname;");
-            personShape.AppendLine("	sh:qualifiedMinCount  1;");
-            personShape.AppendLine("	sh:qualifiedValueShape [");
-            personShape.AppendLine("		sh:datatype xsd:string;");
-            personShape.AppendLine("	].");
+            personShape.AppendLine("\tsh:severity sh:Violation;");
+            personShape.AppendLine("\tsh:path foaf1:surname;");
+            personShape.AppendLine("\tsh:qualifiedMinCount  1;");
+            personShape.AppendLine("\tsh:qualifiedValueShape [");
+            personShape.AppendLine("\t\tsh:datatype xsd:string;");
+            personShape.AppendLine("\t].");
             personShape.AppendLine("roh:allValuesDataType__foaf1__Person__foaf1__surname ");
-            personShape.AppendLine("	sh:severity sh:Violation;");
-            personShape.AppendLine("	sh:path foaf1:surname;");
-            personShape.AppendLine("	sh:datatype xsd:string.");
+            personShape.AppendLine("\tsh:severity sh:Violation;");
+            personShape.AppendLine("\tsh:path foaf1:surname;");
+            personShape.AppendLine("\tsh:datatype xsd:string.");
             personShape.AppendLine("roh:allValuesDataType__foaf1__Person__foaf1__firstName ");
-            personShape.AppendLine("	sh:severity sh:Violation;");
-            personShape.AppendLine("	sh:path foaf1:firstName;");
-            personShape.AppendLine("	sh:datatype xsd:string.");
+            personShape.AppendLine("\tsh:severity sh:Violation;");
+            personShape.AppendLine("\tsh:path foaf1:firstName;");
+            personShape.AppendLine("\tsh:datatype xsd:string.");
             personShape.AppendLine("roh:allValuesDataType__foaf1__Person__vivo__identifier ");
-            personShape.AppendLine("	sh:severity sh:Violation;");
-            personShape.AppendLine("	sh:path vivo:identifier;");
-            personShape.AppendLine("	sh:datatype xsd:string.");
+            personShape.AppendLine("\tsh:severity sh:Violation;");
+            personShape.AppendLine("\tsh:path vivo:identifier;");
+            personShape.AppendLine("\tsh:datatype xsd:string.");
 
             _listShapesConfig.Add(new ShapeConfig()
             {
@@ -142,8 +143,7 @@ namespace API_CARGA.Models.Services
         ///<param name="shapeConfig">Shape a añadir</param>
         public Guid AddShapeConfig(ShapeConfig shapeConfig)
         {
-            Guid addedID = Guid.Empty;
-            addedID = Guid.NewGuid();
+            Guid addedID = Guid.NewGuid();
             shapeConfig.ShapeConfigID = addedID;
             _listShapesConfig.Add(shapeConfig);
             return addedID;

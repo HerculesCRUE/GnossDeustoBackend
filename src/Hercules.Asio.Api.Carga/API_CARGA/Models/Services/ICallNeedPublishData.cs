@@ -17,6 +17,7 @@ namespace API_CARGA.Models.Services
         ///Realizar una llamda Get a una url que tiene como base la configurada en el appSettings.json en la propiedad ConfigUrl
         ///</summary>
         ///<param name="urlMethod">método al que se hace la llamada</param>
+        ///<param name="token">token</param>
         public string CallGetApi(string urlMethod, TokenBearer token = null);
         ///<summary>
         ///Realizar una llamda Post para enviar un fichero
@@ -24,12 +25,14 @@ namespace API_CARGA.Models.Services
         ///<param name="urlMethod">método a llamar</param>
         ///<param name="item">Objeto con el fichero</param>
         ///<param name="parameters">parametros adicionales en formato queryString</param>
+        ///<param name = "token" >token</param>
         public string CallPostApiFile(string urlMethod, MultipartFormDataContent item, TokenBearer token = null, string parameters = null);
         ///<summary>
         ///Realizar una llamda Post al método /etl/data-validate para verificar un rdf
         ///</summary>
         ///<param name="rdf">contenido en rdf a publicar</param>
         ///<param name="repositoryIdentifier">Identificador del repositorio</param>
+        ///<param name="token">token</param>
         public void CallDataValidate(string rdf, Guid repositoryIdentifier, TokenBearer token = null);
         ///<summary>
         ///Realizar una llamda Post al método /etl/data-publish para publicar un rdf
@@ -37,6 +40,7 @@ namespace API_CARGA.Models.Services
         ///<param name="rdf">contenido en rdf a publicar</param>
         ///<param name="jobId">En el caso de que haya sido una tarea la que ha lanzado la acción representa el identificador de la tarea</param>
         ///<param name="discoverProcessed">En el caso de que ya se haya procesado el descubrimiento se envía true y se inserta tal cual en BBDD (sin procesar descubrimiento)</param>
+        ///<param name="token">token</param>
         public void CallDataPublish(string rdf, string jobId = null, bool discoverProcessed=false, TokenBearer token = null);
     }
 }

@@ -18,10 +18,10 @@ namespace CronConfigure.Models.Services
         ///Método para la sincronización de repositorios
         ///</summary>
         ///<param name="idRepositoryGuid">identificador del repositorio a sincronizar</param>
+        ///<param name="context">contexto</param>
         /// <param name="pSet">tipo del objeto, usado para filtrar por agrupaciones</param>
         /// <param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
         public string PublishRepositories(Guid idRepositoryGuid, PerformContext context,  string pSet = null, string codigoObjeto = null);
-        [ExcludeFromCodeCoverage]
         ///<summary>
         ///Método para programar una sincronización recurrente
         ///</summary>
@@ -30,7 +30,11 @@ namespace CronConfigure.Models.Services
         ///<param name="cronExpression">expresión de recurrencia</param>
         ///<param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
         ///<param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
-        public static void ProgramRecurringJob(Guid idRepository, string nombreCron, string cronExpression,string set = null, string codigoObjeto = null) { }
+        [ExcludeFromCodeCoverage]
+        public static void ProgramRecurringJob(Guid idRepository, string nombreCron, string cronExpression,string set = null, string codigoObjeto = null) 
+        {
+            // Método sobreescrito.
+        }
         ///<summary>
         ///Método para programar una tarea
         ///</summary>
@@ -50,7 +54,5 @@ namespace CronConfigure.Models.Services
         ///<param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
         ///<param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
         public void ProgramPublishRepositoryRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime fechaInicio, IConfiguration configuration, string set = null, string codigoObjeto = null);
-
-
     }
 }

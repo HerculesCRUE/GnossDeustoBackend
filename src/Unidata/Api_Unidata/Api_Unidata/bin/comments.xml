@@ -4,20 +4,43 @@
         <name>Api_Unidata</name>
     </assembly>
     <members>
+        <member name="T:Api_Unidata.Controllers.UnidataController">
+            <summary>
+            Controlador para cargar triples en el grafo unidata
+            </summary>
+        </member>
         <member name="M:Api_Unidata.Controllers.UnidataController.LoadTriples(System.Collections.Generic.List{System.String})">
             <summary>
             Carga los triples en el grafo unidata
             </summary>
-            <param name="triples">Lista de triples a insertar</param>
+            <param name="triples">Lista de triples a insertar</param> 
         </member>
         <member name="T:Api_Unidata.Middlewares.ErrorHandlingMiddleware">
             <summary>
             Clase que actua de Middleware para la gestión de las excepciones
             </summary>
         </member>
+        <member name="M:Api_Unidata.Middlewares.ErrorHandlingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            ErrorHandlingMiddleware.
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:Api_Unidata.Middlewares.ErrorHandlingMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invoke.
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
         <member name="T:Api_Unidata.Models.Services.ConfigSparql">
             <summary>
             Clase para obtener la configuración necesaria para el uso de Sparql
+            </summary>
+        </member>
+        <member name="P:Api_Unidata.Models.Services.ConfigSparql.Configuration">
+            <summary>
+            Configuración.
             </summary>
         </member>
         <member name="M:Api_Unidata.Models.Services.ConfigSparql.GetGraphUnidata">
@@ -34,6 +57,73 @@
             <summary>
             Obtiene el parametro de query configurado en Sparql:QueryParam del fichero appsettings.json
             </summary>
+        </member>
+        <member name="T:Api_Unidata.Models.Services.SparqlUtility">
+            <summary>
+            SparqlUtility.
+            </summary>
+        </member>
+        <member name="M:Api_Unidata.Models.Services.SparqlUtility.LoadTriples(System.Collections.Generic.List{System.String})">
+            <summary>
+            Carga los triples.
+            </summary>
+            <param name="triplesInsert"></param>
+        </member>
+        <member name="M:Api_Unidata.Models.Services.SparqlUtility.InsertData(System.String,System.String,System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            Inserta los datos.
+            </summary>
+            <param name="pSPARQLEndpoint"></param>
+            <param name="pGraph"></param>
+            <param name="triplesInsert"></param>
+            <param name="pQueryParam"></param>
+        </member>
+        <member name="T:Api_Unidata.Program">
+            <summary>
+            Program.
+            </summary>
+        </member>
+        <member name="M:Api_Unidata.Program.Main(System.String[])">
+            <summary>
+            Main.
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:Api_Unidata.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            CreateHostBuilder.
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Api_Unidata.Startup">
+            <summary>
+            Startup.
+            </summary>
+        </member>
+        <member name="M:Api_Unidata.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Startup.
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:Api_Unidata.Startup.Configuration">
+            <summary>
+            Configuration.
+            </summary>
+        </member>
+        <member name="M:Api_Unidata.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Api_Unidata.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
         </member>
     </members>
 </doc>

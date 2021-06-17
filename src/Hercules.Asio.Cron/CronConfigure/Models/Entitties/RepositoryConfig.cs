@@ -17,9 +17,12 @@ namespace CronConfigure.Models.Entitties
     [ExcludeFromCodeCoverage]
     public class RepositoryConfig
     {
+        /// <summary>
+        /// RepositoryConfig.
+        /// </summary>
         public RepositoryConfig()
         {
-            //ShapeConfig = new HashSet<ShapeConfig>();
+            
         }
 
         /// <summary>
@@ -40,8 +43,14 @@ namespace CronConfigure.Models.Entitties
         /// url del repositorio
         /// </summary>
         public string Url { get; set; }
+        /// <summary>
+        /// ShapeConfig.
+        /// </summary>
         [ForeignKey("RepositoryID")]
         public virtual ICollection<ShapeConfig> ShapeConfig { get; set; }
+        /// <summary>
+        /// RepositoryConfigSet.
+        /// </summary>
         [ForeignKey("RepositoryID")]
         public virtual ICollection<RepositoryConfigSet> RepositoryConfigSet { get; set; }
 

@@ -15,7 +15,6 @@ namespace ApiCargaWebInterface.Controllers
 {
     public class HomeController : Controller
     {
-        readonly ILogger<HomeController> _logger;
         readonly ConfigUrlService _configUrlService;
         [AllowAnonymous]
         [Route("login")]
@@ -26,7 +25,6 @@ namespace ApiCargaWebInterface.Controllers
         }
         public HomeController(ILogger<HomeController> logger, ConfigUrlService configUrlService)
         {
-            _logger = logger;
             _configUrlService = configUrlService;
         }
 

@@ -4,9 +4,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CronConfigure.Migrations
 {
+    /// <summary>
+    /// UpdateProcessDiscoverStateJob.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public partial class UpdateProcessDiscoverStateJob : Migration
     {
+        /// <summary>
+        /// Up.
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
@@ -14,6 +21,10 @@ namespace CronConfigure.Migrations
                 table: "ProcessDiscoverStateJob");
         }
 
+        /// <summary>
+        /// Down.
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<DateTime>(

@@ -295,7 +295,6 @@
             <summary>
             Representa un item de descubrimiento
             </summary>
-            
         </member>
         <member name="T:API_CARGA.Models.Entities.DiscoverItem.DiscoverDissambiguation">
             <summary>
@@ -795,6 +794,7 @@
             Simula realizar una llamada para la obtención de unos datos ficticios que harían esas llamadas
             </summary>
             <param name="urlMethod">método a llamar</param>
+            <param name="token">token</param>
         </member>
         <member name="M:API_CARGA.Models.Services.CallOAIPMH.GetUri(System.String)">
             <summary>
@@ -1013,6 +1013,7 @@
             Realizar una llamda Get a una url que tiene como base la configurada en el appSettings.json en la propiedad ConfigUrl
             </summary>
             <param name="urlMethod">método al que se hace la llamada</param>
+            <param name="token">token</param>
         </member>
         <member name="M:API_CARGA.Models.Services.ICallNeedPublishData.CallPostApiFile(System.String,System.Net.Http.MultipartFormDataContent,API_CARGA.Models.Entities.TokenBearer,System.String)">
             <summary>
@@ -1021,6 +1022,7 @@
             <param name="urlMethod">método a llamar</param>
             <param name="item">Objeto con el fichero</param>
             <param name="parameters">parametros adicionales en formato queryString</param>
+            <param name = "token" >token</param>
         </member>
         <member name="M:API_CARGA.Models.Services.ICallNeedPublishData.CallDataValidate(System.String,System.Guid,API_CARGA.Models.Entities.TokenBearer)">
             <summary>
@@ -1028,6 +1030,7 @@
             </summary>
             <param name="rdf">contenido en rdf a publicar</param>
             <param name="repositoryIdentifier">Identificador del repositorio</param>
+            <param name="token">token</param>
         </member>
         <member name="M:API_CARGA.Models.Services.ICallNeedPublishData.CallDataPublish(System.String,System.String,System.Boolean,API_CARGA.Models.Entities.TokenBearer)">
             <summary>
@@ -1036,6 +1039,7 @@
             <param name="rdf">contenido en rdf a publicar</param>
             <param name="jobId">En el caso de que haya sido una tarea la que ha lanzado la acción representa el identificador de la tarea</param>
             <param name="discoverProcessed">En el caso de que ya se haya procesado el descubrimiento se envía true y se inserta tal cual en BBDD (sin procesar descubrimiento)</param>
+            <param name="token">token</param>
         </member>
         <member name="T:API_CARGA.Models.Services.ICallService">
             <summary>
@@ -1301,13 +1305,15 @@
             Constructor de la clase que configura los datos necesarios para conectarse con rabbit
             </summary>
             <param name="ampOptionsSnapshot">Opciones de configuracion para Rabbit</param>
+            <param name="configuration">Configuración.</param>
         </member>
         <member name="M:API_CARGA.Models.Services.RabbitMQService.PublishMessage(System.Object,System.String,System.Boolean)">
             <summary>
-            Encola un objeto en Rabbbit
+            Encola un objeto en Rabbit
             </summary>
             <param name="message">Objeto a encolar</param>
-            <param name="pQueue">Cola</param>
+            <param name="queue">Cola</param>
+            <param name="pDurable">Sí es durable o no</param>
         </member>
         <member name="T:API_CARGA.Models.Services.RepositoriesConfigBDService">
             <summary>
@@ -1501,7 +1507,7 @@
             <summary>
             Obtiene los triples de un RDF
             </summary>
-            <param name="pXMLRDF">XML RDF</param>
+            <param name="pGraph">Grafo</param>
             <returns>Lista de triples</returns>
         </member>
         <member name="M:API_CARGA.Models.Utility.SparqlUtility.SplitList``1(System.Collections.Generic.List{``0},System.Int32)">
@@ -1519,6 +1525,11 @@
             </summary>
             
         </member>
+        <member name="T:API_CARGA.Extras.Excepciones.ValidationException">
+            <summary>
+            Excepción para indicar que ha fallado la validación de un RDF
+            </summary>
+        </member>
         <member name="M:Hercules.Asio.Api.Carga.Models.Services.CallConversor.GetString(System.String)">
             <summary>
             Obtiene el resultado
@@ -1532,6 +1543,7 @@
             </summary>
             <param name="pRecord">XML con el record</param>
             <param name="pType">Tipo</param>
+            <param name="pUrlConversor">Url del conversor</param>
             <returns></returns>
         </member>
         <member name="M:VDS.RDF.RohGraph.GetNextBlankNodeID">

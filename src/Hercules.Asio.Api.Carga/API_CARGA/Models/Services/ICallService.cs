@@ -11,7 +11,6 @@ namespace API_CARGA.Models.Services
     /// </summary>
     public interface ICallService
     {
-        //public string CallGetApi(string urlBase, string urlMethod, TokenBearer token = null);
         /// <summary>
         /// Hace la llamada post a una url
         /// </summary>
@@ -22,7 +21,5 @@ namespace API_CARGA.Models.Services
         /// <param name="isFile">si el objeto pasado es un fichero</param>
         /// <param name="fileName">nombre del parametro del fichero</param>
         public string CallPostApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false, string fileName = "rdfFile");
-        //public string CallPutApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false, string fileName = "rdfFile");
-        //public string CallDeleteApi(string urlBase, string urlMethod, TokenBearer token = null);
     }
 }

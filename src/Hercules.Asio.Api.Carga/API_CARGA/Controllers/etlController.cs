@@ -46,10 +46,7 @@ namespace API_CARGA.Controllers
             _callOAIPMH = callOAIPMH;
             _amqpService = amqpService;
         }
-
-        [ExcludeFromCodeCoverage]
-        //No se puede ejecuar el test desde gitHub
-
+               
         /// <summary>
         /// Ejecuta el penúltimo paso del proceso de carga, por el que el RDF generado se encola en una cola de Rabbit MQ para que posteriormente el servicio de descubimiento lo procese y lo almacene en el Triple Store. Permite cargar una fuente RDF arbitraria.
         /// Aquí se encuentra un RDF de Ejemplo: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_CARGA/API_CARGA/Samples/rdfSample.xml
@@ -61,6 +58,7 @@ namespace API_CARGA.Controllers
         [HttpPost("data-publish")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ExcludeFromCodeCoverage] // No se puede ejecuar el test desde gitHub
         public IActionResult dataPublish(IFormFile rdfFile, string jobId, bool discoverProcessed)
         {
             try
@@ -176,10 +174,7 @@ namespace API_CARGA.Controllers
                 return Problem(ex.ToString());
             }
 
-        }
-
-        [ExcludeFromCodeCoverage]
-        //No se puede ejecuar el test desde gitHub
+        }   
 
         /// <summary>
         /// Aplica el descubrimiento sobre un RDF
@@ -189,6 +184,7 @@ namespace API_CARGA.Controllers
         [HttpPost("data-discover")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ExcludeFromCodeCoverage] // No se puede ejecuar el test desde gitHub
         public IActionResult dataDiscover(IFormFile rdfFile)
         {
             try
@@ -204,10 +200,7 @@ namespace API_CARGA.Controllers
                 return Problem(ex.ToString());
             }
         }
-
-        [ExcludeFromCodeCoverage]
-        //No se puede ejecuar el test desde gitHub
-
+               
         /// <summary>
         /// Obtiene el estado de una tarea de descubrimiento
         /// </summary>
@@ -217,6 +210,7 @@ namespace API_CARGA.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [SwaggerResponse(StatusCodes.Status200OK, "Example", typeof(DiscoverStateResult))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ExcludeFromCodeCoverage] // No se puede ejecuar el test desde gitHub
         public IActionResult dataDiscoverState(Guid identifier)
         {
             try
@@ -262,10 +256,7 @@ namespace API_CARGA.Controllers
                 return Problem(ex.ToString());
             }
         }
-
-        [ExcludeFromCodeCoverage]
-        //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
-
+        
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recupera un registro de metadatos individual del repositorio en formato XML OAI-PMH.        
@@ -277,6 +268,7 @@ namespace API_CARGA.Controllers
         [HttpGet("GetRecord/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ExcludeFromCodeCoverage] // Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
         public FileResult GetRecord(Guid repositoryIdentifier, string identifier, string metadataPrefix)
         {
             RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
@@ -285,10 +277,7 @@ namespace API_CARGA.Controllers
             byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
-
-        [ExcludeFromCodeCoverage]
-        //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
-
+       
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Obtiene la información del repositorio OAI-PMH configurado en formato XML OAI-PMH.
@@ -298,6 +287,7 @@ namespace API_CARGA.Controllers
         [HttpGet("Identify/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ExcludeFromCodeCoverage] // Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
         public FileResult Identify(Guid repositoryIdentifier)
         {
             RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
@@ -306,10 +296,7 @@ namespace API_CARGA.Controllers
             byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
-
-        [ExcludeFromCodeCoverage]
-        //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
-
+        
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Es una forma abreviada de ListRecords, que recupera solo encabezados en formato XML OAI-PMH en lugar de registros.        
@@ -324,6 +311,7 @@ namespace API_CARGA.Controllers
         [HttpGet("ListIdentifiers/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ExcludeFromCodeCoverage] // Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
         public FileResult ListIdentifiers(Guid repositoryIdentifier, string metadataPrefix = null, string from = null, string until = null, string set = null, string resumptionToken = null)
         {
             RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
@@ -352,10 +340,7 @@ namespace API_CARGA.Controllers
             byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
-
-        [ExcludeFromCodeCoverage]
-        //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
-
+        
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recupera los formatos de metadatos disponibles del repositorio en formato XML OAI-PMH.        
@@ -366,6 +351,7 @@ namespace API_CARGA.Controllers
         [HttpGet("ListMetadataFormats/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ExcludeFromCodeCoverage] // Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
         public FileResult ListMetadataFormats(Guid repositoryIdentifier, string identifier = null)
         {
             RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
@@ -378,10 +364,7 @@ namespace API_CARGA.Controllers
             byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
-
-        [ExcludeFromCodeCoverage]
-        //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
-
+       
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recupera registros del repositorio en formato XML OAI-PMH.        
@@ -396,6 +379,7 @@ namespace API_CARGA.Controllers
         [HttpGet("ListRecords/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ExcludeFromCodeCoverage] // Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
         public FileResult ListRecords(Guid repositoryIdentifier, string metadataPrefix, string from = null, string until = null, string set = null, string resumptionToken = null)
         {
             RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);
@@ -425,10 +409,6 @@ namespace API_CARGA.Controllers
             return File(array, "application/xml");
         }
 
-        [ExcludeFromCodeCoverage]
-        //Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
-
-
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recuperar la estructura establecida de un repositorio en formato XML OAI-PMH, útil para la recolección selectiva.        
@@ -439,6 +419,7 @@ namespace API_CARGA.Controllers
         [HttpGet("ListSets/{repositoryIdentifier}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ExcludeFromCodeCoverage] // Exluido del analis porque se necesita llamar a una url y no se debe llamar a otro servicio en un test unitario
         public FileResult ListSets(Guid repositoryIdentifier, string resumptionToken = null)
         {
             RepositoryConfig repositoryConfig = _repositoriesConfigService.GetRepositoryConfigById(repositoryIdentifier);

@@ -88,7 +88,7 @@ namespace API_CARGA.Models.Services
                     if (!ismetadata)
                     {
                         //Si en el conversor no hay ningún tipo de los que vienen del OAI-PMH lanzamos exception
-                        throw new Exception("Los metadataformat " + string.Join(",", metadataformats) + " no son válidos.");
+                        throw new ArgumentNullException("Los metadataformat " + string.Join(",", metadataformats) + " no son válidos.");
                     }
                 }
                 if (codigoObjeto == null)
@@ -192,19 +192,16 @@ namespace API_CARGA.Models.Services
                 }
                 if (validationException)
                 {
-                    throw new Exception(exception.ToString());
+                    throw new ArgumentNullException(exception.ToString());
                 }
 
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new ArgumentNullException(ex.Message);
             }
 
         }
-
-        [ExcludeFromCodeCoverage]
-        //No se ve a añadir una sincronzacion en base de datos en un test unitario
 
         /// <summary>
         /// Añade un objeto de sincronización en base de datos
@@ -212,6 +209,7 @@ namespace API_CARGA.Models.Services
         /// <param name="lastSyncro">Objeto identificador de OAIPMH que contiene la fecha</param>
         /// <param name="repositoryId">Identificador del repositorio</param>
         /// <param name="set">tipo del objeto, usado para filtrar por agrupaciones</param>
+        [ExcludeFromCodeCoverage]
         private void AddSyncro(IdentifierOAIPMH lastSyncro, string set, Guid repositoryId)
         {
             //Actualizamos la fecha de la última sincronización           

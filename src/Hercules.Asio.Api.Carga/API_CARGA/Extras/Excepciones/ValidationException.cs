@@ -7,12 +7,12 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
-/// <summary>
-/// Excepción para indicar que ha fallado la validación de un RDF
-/// </summary>
+
 namespace API_CARGA.Extras.Excepciones
 {
-
+    /// <summary>
+    /// Excepción para indicar que ha fallado la validación de un RDF
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class ValidationException : Exception
     {

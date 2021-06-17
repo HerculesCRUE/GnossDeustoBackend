@@ -8,13 +8,16 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Models.Hangfire
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase usada por Hangfire para el guardado de las tareas
     ///</summary>
+    [ExcludeFromCodeCoverage]
     [Table("schema", Schema = "hangfire")]
     public partial class Schema
     {
+        /// <summary>
+        /// Version
+        /// </summary>
         [Key]
         public int Version { get; set; }
     }

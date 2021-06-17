@@ -20,17 +20,24 @@ using System.Linq;
 
 namespace CronConfigure.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para la programación de tareas
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class ProgramingMethodsService : IProgramingMethodService
     {
-        private CallApiService _serviceApi;
-        private HangfireEntityContext _context;
+        readonly private CallApiService _serviceApi;
+        readonly private HangfireEntityContext _context;
         readonly TokenBearer _token;
         readonly ConfigUrlService _configUrlService;
 
+        /// <summary>
+        /// ProgramingMethodsService
+        /// </summary>
+        /// <param name="serviceApi"></param>
+        /// <param name="context"></param>
+        /// <param name="tokenService"></param>
+        /// <param name="configUrlService"></param>
         public ProgramingMethodsService(CallApiService serviceApi, HangfireEntityContext context, CallTokenService tokenService, ConfigUrlService configUrlService)
         {
             _serviceApi = serviceApi;
@@ -42,14 +49,14 @@ namespace CronConfigure.Models.Services
             }
         }
 
-        [AutomaticRetry(Attempts = 0, DelaysInSeconds = new int[] { 3600 })]
-        [ProlongExpirationTime]
         ///<summary>
         ///Método para la sincronización de repositorios
         ///</summary>
         ///<param name="idRepositoryGuid">identificador del repositorio a sincronizar</param>
         /// <param name="pSet">tipo del objeto, usado para filtrar por agrupaciones</param>
         /// <param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
+        [AutomaticRetry(Attempts = 0, DelaysInSeconds = new int[] { 3600 })]
+        [ProlongExpirationTime]
         public string PublishRepositories(Guid idRepositoryGuid, PerformContext context,  string pSet = null, string codigoObjeto = null)
         {
             string idRepository = idRepositoryGuid.ToString();
@@ -132,8 +139,7 @@ namespace CronConfigure.Models.Services
                 string timeStamp = CreateTimeStamp();
                 CreateLoggin(timeStamp, idRepository);
                 Log.Error($"{ex.Message}\n{ex.StackTrace}\n");
-                throw new Exception(ex.Message);
-                //return ex.Message;
+                throw new ArgumentNullException(ex.Message);
             }
         }
 
@@ -147,7 +153,6 @@ namespace CronConfigure.Models.Services
         ///<param name="codigoObjeto">codigo del objeto a sincronizar, es necesario pasar el parametro set si se quiere pasar este parámetro</param>
         public void ProgramRecurringJob(Guid idRepository, string nombreCron, string cronExpression, string set = null, string codigoObjeto = null)
         {
-            CallApiService serviceApi = new CallApiService(_configUrlService);
             RecurringJob.AddOrUpdate(nombreCron, () => PublishRepositories(idRepository, null, set, codigoObjeto), cronExpression);
         }
 

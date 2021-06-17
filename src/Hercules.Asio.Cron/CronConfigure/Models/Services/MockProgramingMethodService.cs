@@ -13,16 +13,42 @@ namespace CronConfigure.Models.Services
     ///</summary>
     public class MockProgramingMethodService : IProgramingMethodService
     {
+        /// <summary>
+        /// ProgramPublishRepositoryJob
+        /// </summary>
+        /// <param name="idRepository"></param>
+        /// <param name="fechaInicio"></param>
+        /// <param name="set"></param>
+        /// <param name="codigoObjeto"></param>
+        /// <returns></returns>
         public string ProgramPublishRepositoryJob(Guid idRepository, DateTime fechaInicio, string set = null, string codigoObjeto = null)
         {
             return "";
         }
 
+        /// <summary>
+        /// ProgramPublishRepositoryRecurringJob
+        /// </summary>
+        /// <param name="idRepository"></param>
+        /// <param name="nombreCron"></param>
+        /// <param name="cronExpression"></param>
+        /// <param name="fechaInicio"></param>
+        /// <param name="configuration"></param>
+        /// <param name="set"></param>
+        /// <param name="codigoObjeto"></param>
         public void ProgramPublishRepositoryRecurringJob(Guid idRepository, string nombreCron, string cronExpression, DateTime fechaInicio, IConfiguration configuration, string set = null, string codigoObjeto = null)
         {
-           
+           // Método sobreescrito.
         }
 
+        /// <summary>
+        /// PublishRepositories
+        /// </summary>
+        /// <param name="idRepositoryGuid"></param>
+        /// <param name="context"></param>
+        /// <param name="pSet"></param>
+        /// <param name="codigoObjeto"></param>
+        /// <returns></returns>
         public string PublishRepositories(Guid idRepositoryGuid, PerformContext context, string pSet = null, string codigoObjeto = null)
         {
             return "";

@@ -14,7 +14,8 @@ namespace API_CARGA.Models.Services
     ///</summary>
     public class RepositoriesConfigMockService : IRepositoriesConfigService
     {
-        private List<RepositoryConfig> _configRepositories;
+        readonly private List<RepositoryConfig> _configRepositories;
+
         ///<summary>
         ///Inicializa la lista de repositorios
         ///</summary>
@@ -98,7 +99,7 @@ namespace API_CARGA.Models.Services
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -110,13 +111,9 @@ namespace API_CARGA.Models.Services
         ///<param name="repositoryConfig">Repositorio a añadir</param>
         public Guid AddRepositoryConfig(RepositoryConfig repositoryConfig)
         {
-            Guid repositoryConfigID = Guid.Empty;
-            //if (GetRepositoryConfigByName(repositoryConfig.Name) == null)
-            //{
-            repositoryConfigID = Guid.NewGuid();
+            Guid repositoryConfigID = Guid.NewGuid();
             repositoryConfig.RepositoryConfigID = repositoryConfigID;
             _configRepositories.Add(repositoryConfig);
-            //}
             return repositoryConfigID;
         }
 
@@ -129,13 +126,11 @@ namespace API_CARGA.Models.Services
             bool modified = false;
             RepositoryConfig repositoryConfigOriginal = GetRepositoryConfigById(repositoryConfig.RepositoryConfigID);
             if (repositoryConfigOriginal != null)
-            {
-                //CheckDataExceptions(repositoryConfigOriginal, repositoryConfig);
+            {                
                 repositoryConfigOriginal.Name = repositoryConfig.Name;
                 repositoryConfigOriginal.Url = repositoryConfig.Url;
                 repositoryConfigOriginal.OauthToken = repositoryConfig.OauthToken; 
                 modified = true;
-
             }
             return modified;
         }

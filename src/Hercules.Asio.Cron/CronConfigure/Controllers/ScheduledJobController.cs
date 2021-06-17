@@ -7,7 +7,6 @@ using CronConfigure.Models.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 
 namespace CronConfigure.Controllers
 {
@@ -19,9 +18,16 @@ namespace CronConfigure.Controllers
     [Authorize]
     public class ScheduledJobController : ControllerBase
     {
-        public ICronApiService _cronApiService;
-        private IProgramingMethodService _programingMethodsService;
-        private IRepositoryCronService _repositoryCronService;
+        private ICronApiService _cronApiService;
+        readonly private IProgramingMethodService _programingMethodsService;
+        readonly private IRepositoryCronService _repositoryCronService;
+
+        /// <summary>
+        /// ScheduledJobController.
+        /// </summary>
+        /// <param name="cronApiService"></param>
+        /// <param name="programingMethodsService"></param>
+        /// <param name="repositoryCronService"></param>
         public ScheduledJobController(ICronApiService cronApiService, IProgramingMethodService programingMethodsService, IRepositoryCronService repositoryCronService)
         {
             _cronApiService = cronApiService;
@@ -58,7 +64,6 @@ namespace CronConfigure.Controllers
         public IActionResult AddScheduledJob(string fecha_ejecucion, string id_repository, string set = null, string codigo_objeto = null)
         {
             DateTime fechaInicio = DateTime.Now;
-            DateTime? fechaDateTime = null;
             if (codigo_objeto != null && set == null)
             {
                 return BadRequest("falta el tipo de objeto");

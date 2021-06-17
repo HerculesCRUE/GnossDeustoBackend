@@ -18,7 +18,6 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
     {
         readonly private CallApiVirtualPath _apiVirtualPath;
         readonly private string _viewPath;
-        private static Dictionary<string, DateTime?> _pageLastRequested = new Dictionary<string, DateTime?>();
 
         public ApiChangeToken(CallApiVirtualPath apiVirtualPath, string viewPath)
         {

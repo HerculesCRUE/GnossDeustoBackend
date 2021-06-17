@@ -175,8 +175,6 @@ namespace API_CARGA.Models.Utility
             }
             return response;
         }
-        [ExcludeFromCodeCoverage]
-        //No se puede hacer una llamada Post en un test unitario
 
         /// <summary>
         /// Carga una ontología en un SPARQL endpoint
@@ -188,6 +186,7 @@ namespace API_CARGA.Models.Utility
         /// <param name="pGraph">Grafo</param>
         /// <param name="pUsername">Usuario</param>
         /// <param name="pPassword">Password</param>
+        [ExcludeFromCodeCoverage]
         public static void LoadOntology(RabbitMQService pRabbitMQService, RohGraph pOntology, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
         {
             //Eliminamos los datos anteriores
@@ -211,7 +210,7 @@ namespace API_CARGA.Models.Utility
                 if (ex.Response != null)
                 {
                     string response = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
-                    throw new Exception(response);
+                    throw new ArgumentNullException(response);
                 }
                 throw ex;
             }
@@ -232,8 +231,6 @@ namespace API_CARGA.Models.Utility
             //Cargamos la ontología
             SparqlUtility.LoadTriples(pRabbitMQService, SparqlUtility.GetTriplesFromGraph(pOntology), pSPARQLEndpoint, pQueryParam, pGraph, pUsername, pPassword);
         }
-        [ExcludeFromCodeCoverage]
-        //Se le llama desde LoadOntology 
 
         /// <summary>
         /// Carga los triples en un PARQL endpoint
@@ -245,6 +242,7 @@ namespace API_CARGA.Models.Utility
         /// <param name="pGraph">Grafo</param>
         /// <param name="pUsername">Usuario</param>
         /// <param name="pPassword">Password</param>
+        [ExcludeFromCodeCoverage]
         public static void LoadTriples(RabbitMQService pRabbitMQService, List<string> pTriples, string pSPARQLEndpoint, string pQueryParam, string pGraph, string pUsername, string pPassword)
         {
             int maxTriples = 500;
@@ -325,7 +323,7 @@ namespace API_CARGA.Models.Utility
                     {
                         if (listTriples.Count == 0 && triples.Count > maxTriples)
                         {
-                            throw new Exception("No se puden insertar " + triples.Count + " triples simultáneos con blank nodes");
+                            throw new ArgumentNullException("No se puden insertar " + triples.Count + " triples simultáneos con blank nodes");
                         }
                         else if ((listTriples.Count + triples.Count) < maxTriples)
                         {
@@ -394,7 +392,7 @@ namespace API_CARGA.Models.Utility
                     if (ex.Response != null)
                     {
                         string response = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
-                        throw new Exception(response);
+                        throw new ArgumentNullException(response);
                     }
                     throw ex;
                 }
@@ -417,7 +415,7 @@ namespace API_CARGA.Models.Utility
         /// <summary>
         /// Obtiene los triples de un RDF
         /// </summary>
-        /// <param name="pXMLRDF">XML RDF</param>
+        /// <param name="pGraph">Grafo</param>
         /// <returns>Lista de triples</returns>
         public static List<string> GetTriplesFromGraph(RohGraph pGraph)
         {

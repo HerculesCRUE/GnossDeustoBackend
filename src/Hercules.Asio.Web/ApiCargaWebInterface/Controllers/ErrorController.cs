@@ -25,21 +25,6 @@ namespace ApiCargaWebInterface.Controllers
             if (code == 404)
             {
                 return View("Error404", feature.OriginalPath);
-
-                //if (feature != null)
-                //{
-                //    route = feature.OriginalPath;
-                //}
-                //try
-                //{
-
-                //    return View(route, route);
-                //}
-                //catch (Exception ex)
-                //{
-                //    return View("Error404", route);
-                //}
-
             }
             return View("General", feature.OriginalPath);
         }

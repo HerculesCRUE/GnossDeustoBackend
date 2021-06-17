@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para gestionar los shapes en base de datos 
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class ShapesConfigBDService : IShapesConfigService
     {
         private readonly EntityContext _context;
@@ -30,8 +30,7 @@ namespace API_CARGA.Models.Services
         ///<param name="shapeConfig">Shape a añadir</param>
         public Guid AddShapeConfig(ShapeConfig shapeConfig)
         {
-            Guid addedID = Guid.Empty;
-            addedID = Guid.NewGuid();
+            Guid addedID = Guid.NewGuid();
             shapeConfig.ShapeConfigID = addedID;
             _context.ShapeConfig.Add(shapeConfig);
             _context.SaveChanges();

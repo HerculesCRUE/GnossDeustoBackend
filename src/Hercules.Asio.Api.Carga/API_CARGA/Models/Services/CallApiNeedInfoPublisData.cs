@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 
 namespace API_CARGA.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase que sirve para realizar las llamadas necesarias al controlador etl para poder realizar una sincronización
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class CallApiNeedInfoPublisData: ICallNeedPublishData
     {
 
@@ -121,8 +121,6 @@ namespace API_CARGA.Models.Services
         ///<param name="token">Token de tipo Bearer para la seguridad entre apis</param>
         public string CallPostApiFile(string urlMethod, MultipartFormDataContent item, TokenBearer token = null, string parameters = null)
         {
-            //string stringData = JsonConvert.SerializeObject(item);
-            //var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
             string result = "";
             HttpResponseMessage response = null;
             try

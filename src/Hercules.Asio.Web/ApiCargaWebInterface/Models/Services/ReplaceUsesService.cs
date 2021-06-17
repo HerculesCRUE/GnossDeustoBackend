@@ -17,9 +17,9 @@ namespace ApiCargaWebInterface.Models.Services
     /// </summary>
     public class ReplaceUsesService
     {
-        private ICallService _callService;
-        private ConfigUrlService _configUrlService;
-        private ConfigUrlCronService _configUrlCronService;
+        readonly private ICallService _callService;
+        readonly private ConfigUrlService _configUrlService;
+        readonly private ConfigUrlCronService _configUrlCronService;
         readonly CallTokenService _callTokenService;
         public ReplaceUsesService(ICallService callService, ConfigUrlService configUrlService, ConfigUrlCronService configUrlCronService, CallTokenService callTokenService)
         {

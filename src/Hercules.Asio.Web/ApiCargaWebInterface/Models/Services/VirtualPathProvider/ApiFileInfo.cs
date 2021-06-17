@@ -85,7 +85,6 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
                     _viewContent = Encoding.UTF8.GetBytes(page.Content);
                     _lastModified = page.LastModified;
                 }                
-                //Log.Information($"Api file info: obtener la ruta: {viewPath} : {sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")}\n");
             }
             catch (Exception)
             {

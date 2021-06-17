@@ -12,10 +12,10 @@ using System.Reflection;
 
 namespace API_CARGA.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para gestionar las operaciones de las tareas de descubrimiento
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class DiscoverItemBDService : IDiscoverItemService
     {
         private readonly EntityContext _context;
@@ -75,13 +75,11 @@ namespace API_CARGA.Models.Services
             return _context.DiscoverItem.Any(x => x.JobID == jobId && (x.Status == DiscoverItem.DiscoverItemStatus.Error.ToString() || x.Status == DiscoverItem.DiscoverItemStatus.ProcessedDissambiguationProblem.ToString()));
         }
 
-        [ExcludeFromCodeCoverage]
-        //Se está usando en partes del código que no se pueden analizar porque no se pueden hacer test unitarios de esos métodos
-
         ///<summary>
         ///Añade un item de descubrimiento
         ///</summary>
         ///<param name="discoverItem">Item de descubrimiento</param>
+        [ExcludeFromCodeCoverage] // Se está usando en partes del código que no se pueden analizar porque no se pueden hacer test unitarios de esos métodos
         public Guid AddDiscoverItem(DiscoverItem discoverItem)
         {
             discoverItem.ID = Guid.NewGuid();
@@ -150,7 +148,7 @@ namespace API_CARGA.Models.Services
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

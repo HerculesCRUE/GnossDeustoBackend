@@ -9,22 +9,34 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Models.Hangfire
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase usada por Hangfire para el guardado de las tareas
     ///</summary>
+    [ExcludeFromCodeCoverage]
     [Table("jobqueue", Schema = "hangfire")]
     public partial class JobQueue
     {
+        /// <summary>
+        /// Id
+        /// </summary>
         [Column(Order = 0)]
         public int Id { get; set; }
 
+        /// <summary>
+        /// JobId
+        /// </summary>
         public long JobId { get; set; }
 
+        /// <summary>
+        /// Queue
+        /// </summary>
         [Column(Order = 1)]
         [StringLength(50)]
         public string Queue { get; set; }
 
+        /// <summary>
+        /// FetchedAt
+        /// </summary>
         public DateTime? FetchedAt { get; set; }
     }
 }

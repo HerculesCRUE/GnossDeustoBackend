@@ -18,12 +18,21 @@ namespace Api_Unidata.Middlewares
     {
         private readonly RequestDelegate _next;
         private string _timeStamp;
+
+        /// <summary>
+        /// ErrorHandlingMiddleware.
+        /// </summary>
+        /// <param name="next"></param>
         public ErrorHandlingMiddleware(RequestDelegate next)
         {
             _next = next;
-
         }
 
+        /// <summary>
+        /// Invoke.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task Invoke(HttpContext context /* other dependencies */)
         {
             try
@@ -45,17 +54,6 @@ namespace Api_Unidata.Middlewares
             }
 
             var code = HttpStatusCode.InternalServerError;
-
-            //if (ex is ParametersNotConfiguredException)
-            //{
-            //    code = HttpStatusCode.BadRequest;
-            //    Log.Information($"{ex.Message}\n");
-            //}
-            //else if (ex is FailedLoadConfigJsonException)
-            //{
-            //    code = HttpStatusCode.InternalServerError;
-            //    Log.Information($"{ex.Message}\n");
-            //}
 
             var result = JsonConvert.SerializeObject(new { error = "Internal server error" });
             if (code != HttpStatusCode.InternalServerError)

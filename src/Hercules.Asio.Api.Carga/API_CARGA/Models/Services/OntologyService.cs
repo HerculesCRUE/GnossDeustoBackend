@@ -14,8 +14,8 @@ namespace API_CARGA.Models.Services
     /// </summary>
     public class OntologyService
     {
-        public static string ONTOLOGY_FOLDER = "Config/Ontology/";
-        public static string ONTOLOGY_FILE = "Config/Ontology/roh-v2.owl";
+        readonly private static string ONTOLOGY_FOLDER = "Config/Ontology/";
+        readonly private static string ONTOLOGY_FILE = "Config/Ontology/roh-v2.owl";
 
         /// <summary>
         /// Lee el fichero de la ontologia

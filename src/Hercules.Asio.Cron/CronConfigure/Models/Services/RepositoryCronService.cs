@@ -12,14 +12,23 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.Models.Services
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase para obtener la información de las tareas vinculadas a un repositorio
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class RepositoryCronService: IRepositoryCronService
     {
-        private HangfireEntityContext _context;
+        readonly private HangfireEntityContext _context;
+        /// <summary>
+        /// ICronApiService
+        /// </summary>
         public ICronApiService _cronApiService;
+
+        /// <summary>
+        /// RepositoryCronService
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="cronApiService"></param>
         public RepositoryCronService(HangfireEntityContext context, ICronApiService cronApiService)
         {
             _context = context;
@@ -155,10 +164,9 @@ namespace CronConfigure.Models.Services
         ///<returns>Lista de tareas</returns>
         public List<JobViewModel> GetAllJobs(Guid repositoryID)
         {
-            List<JobViewModel> listAllJobs = new List<JobViewModel>();
             List<JobViewModel> listJobs = GetJobs(repositoryID);
             List<JobViewModel> listJobsOfRecurring = GetJobsOfRecurringJob(repositoryID);
-            listAllJobs = listJobs.Union(listJobsOfRecurring).OrderByDescending(item => item.ExecutedAt).ToList();
+            List<JobViewModel> listAllJobs = listJobs.Union(listJobsOfRecurring).OrderByDescending(item => item.ExecutedAt).ToList();
             return listAllJobs;
         }
     }

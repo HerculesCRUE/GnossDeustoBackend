@@ -4,9 +4,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CronConfigure.Migrations
 {
+    /// <summary>
+    /// AddTableJobRepository.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public partial class AddTableJobRepository : Migration
     {
+        /// <summary>
+        /// Up.
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -23,6 +30,10 @@ namespace CronConfigure.Migrations
                 });
         }
 
+        /// <summary>
+        /// Down.
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
            migrationBuilder.DropTable(

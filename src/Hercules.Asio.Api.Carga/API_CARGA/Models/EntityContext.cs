@@ -14,7 +14,6 @@ namespace API_CARGA.Models
     [ExcludeFromCodeCoverage]
     public class EntityContext : DbContext
     {
-        private string _defaultSchema;
         public DbSet<RepositoryConfig> RepositoryConfig { get; set; }
         public DbSet<RepositoryConfigSet> RepositoryConfigSet { get; set; }
         public DbSet<DiscoverItem> DiscoverItem { get; set; }

@@ -9,17 +9,26 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Models.Entitties
 {
-    [ExcludeFromCodeCoverage]
-    [Table("JobRepository", Schema = "hangfire")]
     ///<summary>
     ///Clase que vincula una sincronización con un repositorio
     ///</summary>
+    [ExcludeFromCodeCoverage]
+    [Table("JobRepository", Schema = "hangfire")]
     public class JobRepository
     {
+        /// <summary>
+        /// IdJob
+        /// </summary>
         [Key]
         public string IdJob { get; set; }
+        /// <summary>
+        /// IdRepository
+        /// </summary>
         [Required]
         public Guid IdRepository { get; set; }
+        /// <summary>
+        /// FechaEjecucion
+        /// </summary>
         public DateTime FechaEjecucion { get; set; }
     }
 }

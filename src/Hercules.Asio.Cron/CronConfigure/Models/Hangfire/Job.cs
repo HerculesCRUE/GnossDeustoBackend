@@ -10,47 +10,77 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Models.Hangfire
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase usada por Hangfire para el guardado de las tareas
     ///</summary>
-
+    [ExcludeFromCodeCoverage]
     [Table("job", Schema = "hangfire")]
     public partial class Job
     {
+        /// <summary>
+        /// Job
+        /// </summary>
         public Job()
         {
             JobParameter = new HashSet<JobParameter>();
             State = new HashSet<State>();
         }
+
+        /// <summary>
+        /// Id
+        /// </summary>
         [Column("id")]
         [Key]
         public long Id { get; set; }
 
+        /// <summary>
+        /// StateId
+        /// </summary>
         [Column("stateid")]
         public long? StateId { get; set; }
 
+        /// <summary>
+        /// StateName
+        /// </summary>
         [Column("statename")]
         [StringLength(20)]
         public string StateName { get; set; }
 
+        /// <summary>
+        /// InvocationData
+        /// </summary>
         [Column("invocationdata")]
         [Required]
         public string InvocationData { get; set; }
 
+        /// <summary>
+        /// Arguments
+        /// </summary>
         [Column("arguments")]
         [Required]
         public string Arguments { get; set; }
 
+        /// <summary>
+        /// CreatedAt
+        /// </summary>
         [Column("createdat")]
         public DateTime CreatedAt { get; set; }
 
+        /// <summary>
+        /// ExpireAt
+        /// </summary>
         [Column("expireat")]
         public DateTime? ExpireAt { get; set; }
 
+        /// <summary>
+        /// JobParameter
+        /// </summary>
         [Column("jobparameter")]
         public virtual ICollection<JobParameter> JobParameter { get; set; }
 
+        /// <summary>
+        /// State
+        /// </summary>
         [Column("state")]
         public virtual ICollection<State> State { get; set; }
     }

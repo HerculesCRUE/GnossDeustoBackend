@@ -10,11 +10,26 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.Models.Enumeracion
 {
+    /// <summary>
+    /// JobType
+    /// </summary>
     public enum JobType
     {
+        /// <summary>
+        /// All
+        /// </summary>
         All = 0,
+        /// <summary>
+        /// Failed
+        /// </summary>
         Failed = 1,
+        /// <summary>
+        /// Succeeded
+        /// </summary>
         Succeeded = 2,
+        /// <summary>
+        /// Processing
+        /// </summary>
         Processing = 3
     }
 }

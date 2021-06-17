@@ -20,16 +20,29 @@ using Swashbuckle.AspNetCore.Filters;
 
 namespace Api_Unidata
 {
+    /// <summary>
+    /// Startup.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Startup.
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Configuration.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             IDictionary environmentVariables = Environment.GetEnvironmentVariables();
@@ -58,8 +71,7 @@ namespace Api_Unidata
             })
                 .AddIdentityServerAuthentication(options =>
                 {
-                    options.Authority = authority;
-                    //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
+                    options.Authority = authority;                    
                     options.RequireHttpsMetadata = false;
                     options.ApiName = scope;
                 });
@@ -68,10 +80,6 @@ namespace Api_Unidata
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API de unidata", Version = "v1", Description = "API de unidata" });
                 c.IncludeXmlComments(string.Format(@"{0}comments.xml", System.AppDomain.CurrentDomain.BaseDirectory));
-                //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                //c.IncludeXmlComments(xmlPath);
-                //c.ExampleFilters();
                 c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
@@ -85,7 +93,11 @@ namespace Api_Unidata
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

@@ -10,14 +10,27 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Filters
 {
+    /// <summary>
+    /// ProlongExpirationTimeAttribute.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class ProlongExpirationTimeAttribute : JobFilterAttribute, IApplyStateFilter
     {
+        /// <summary>
+        /// OnStateUnapplied.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="transaction"></param>
         public void OnStateUnapplied(ApplyStateContext context, IWriteOnlyTransaction transaction)
         {
             context.JobExpirationTimeout = TimeSpan.FromDays(60);
         }
 
+        /// <summary>
+        /// OnStateApplied.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="transaction"></param>
         public void OnStateApplied(ApplyStateContext context, IWriteOnlyTransaction transaction)
         {
             context.JobExpirationTimeout = TimeSpan.FromDays(60);

@@ -93,10 +93,8 @@ namespace ApiCargaWebInterface.Models.Services
             }
             else
             {
-                {
-                    string stringData = $"grant_type=client_credentials&scope=apiGestorDocumentacion&client_id=Web&client_secret=master";
-                    return CallTokenIdentity(stringData);
-                }
+                string stringData = $"grant_type=client_credentials&scope=apiGestorDocumentacion&client_id=Web&client_secret=master";
+                return CallTokenIdentity(stringData);
             }
         }
         /// <summary>
@@ -143,10 +141,9 @@ namespace ApiCargaWebInterface.Models.Services
             HttpResponseMessage response = null;
             try
             {
-                HttpClient client = new HttpClient();
-                //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authString);
+                HttpClient client = new HttpClient();                
                 client.Timeout = TimeSpan.FromDays(1);
-                string authority = _configToken.GetAuthority()+ "/connect/token";
+                string authority = _configToken.GetAuthority() + "/connect/token";
                 response = client.PostAsync($"{authority}", contentData).Result;
                 response.EnsureSuccessStatusCode();
                 string result = response.Content.ReadAsStringAsync().Result;

@@ -15,22 +15,33 @@ using System.Threading.Tasks;
 
 namespace CronConfigure.Middlewares
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase que actua de Middleware para la gestión de las excepciones
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
         private IConfiguration _configuration { get; set; }
         private string _timeStamp;
         private string _LogPath;
+
+        /// <summary>
+        /// ErrorHandlingMiddleware.
+        /// </summary>
+        /// <param name="next"></param>
+        /// <param name="configuration"></param>
         public ErrorHandlingMiddleware(RequestDelegate next, IConfiguration configuration)
         {
             _next = next;
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Invoke.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task Invoke(HttpContext context /* other dependencies */)
         {
             try
@@ -96,6 +107,10 @@ namespace CronConfigure.Middlewares
             return timeStamp;
         }
 
+        /// <summary>
+        /// GetLogPath.
+        /// </summary>
+        /// <returns></returns>
         public string GetLogPath()
         {
             if (string.IsNullOrEmpty(_LogPath))

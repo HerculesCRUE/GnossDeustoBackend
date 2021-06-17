@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApiCargaWebInterface.ViewModels
 {
-    public class UriStructureViewModel
+    public static class UriStructureViewModel
     {
         public static string GetUriStrcuture()
         {

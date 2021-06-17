@@ -4,9 +4,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CronConfigure.Migrations
 {
+    /// <summary>
+    /// DiscoveryState.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public partial class DiscoveryState : Migration
     {
+        /// <summary>
+        /// Up.
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -30,6 +37,10 @@ namespace CronConfigure.Migrations
                 unique: true);
         }
 
+        /// <summary>
+        /// Down.
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

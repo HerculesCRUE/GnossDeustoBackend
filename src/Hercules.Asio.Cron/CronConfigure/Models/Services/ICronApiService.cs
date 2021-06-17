@@ -18,6 +18,11 @@ namespace CronConfigure.Models.Services
         ///</summary>
         public List<RecurringJobViewModel> GetRecurringJobs();
         ///<summary>
+        ///Obtiene una tarea recurrente
+        ///</summary>
+        ///<param name="id">nombre de la tarea recurrente</param>
+        public RecurringJobViewModel GetRecurringJobs(string id);
+        ///<summary>
         ///Comprueba que exista una tarea
         ///</summary>
         ///<param name="id">identificador de la tarea</param>
@@ -37,11 +42,6 @@ namespace CronConfigure.Models.Services
         ///</summary>
         ///<param name="id">identificador de la tarea</param>
         public void EnqueueJob(string id);
-        ///<summary>
-        ///Obtiene una tarea recurrente
-        ///</summary>
-        ///<param name="id">nombre de la tarea recurrente</param>
-        public RecurringJobViewModel GetRecurringJobs(string id);
         ///<summary>
         ///Obtiene una lista de tareas ejecutadas
         ///</summary>

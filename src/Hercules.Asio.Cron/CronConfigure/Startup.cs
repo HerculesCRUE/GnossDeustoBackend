@@ -33,19 +33,32 @@ using Swashbuckle.AspNetCore.Filters;
 
 namespace CronConfigure
 {
+    /// <summary>
+    /// Startup
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class Startup
     {
         private readonly IWebHostEnvironment _env;
+        /// <summary>
+        /// Configuration
+        /// </summary>
         public IConfiguration Configuration { get; }
-
+        /// <summary>
+        /// Startup
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="env"></param>
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
             _env = env;
-        }                
+        }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -92,7 +105,6 @@ namespace CronConfigure
                 .AddIdentityServerAuthentication(options =>
                 {
                     options.Authority = authority;
-                    //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
                     options.RequireHttpsMetadata = false;
                     options.ApiName = "apiCron";
                 });
@@ -104,12 +116,6 @@ namespace CronConfigure
                 logPath = environmentVariables["LogPath"] as string;
             }
 
-           // Log.Logger = new LoggerConfiguration().WriteTo.Logger(x =>
-           // {
-           //     x.WriteTo.File($"{logPath}/log_info.txt");
-           //     x.Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Information);
-           // })
-           //.CreateLogger();
             services.AddHangfireServer();
 
             services.AddSwaggerGen(options =>
@@ -118,7 +124,6 @@ namespace CronConfigure
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
-                //options.SchemaFilter<EnumSchemaFilter>();
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
@@ -153,7 +158,11 @@ namespace CronConfigure
             services.AddScoped(typeof(CallTokenService));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -195,8 +204,6 @@ namespace CronConfigure
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("v1/swagger.json", "Uris factory");
-                //c.OAuthClientId("client");
-                //c.OAuthClientSecret("511536EF-F270-4058-80CA-1C89C192F69A");
             });
             app.UseEndpoints(endpoints =>
             {
@@ -205,6 +212,9 @@ namespace CronConfigure
         }
     }
 
+    /// <summary>
+    /// AllowAnonymous
+    /// </summary>
     public class AllowAnonymous : IAuthorizationHandler
     {
         public Task HandleAsync(AuthorizationHandlerContext context)

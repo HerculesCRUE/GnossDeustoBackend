@@ -17,7 +17,7 @@ namespace API_CARGA.Models.Services
     ///</summary>
     public class DiscoverItemMockService : IDiscoverItemService
     {
-        private List<DiscoverItem> _discoverItems;
+        readonly private List<DiscoverItem> _discoverItems;
 
         public DiscoverItemMockService()
         {
@@ -87,19 +87,17 @@ namespace API_CARGA.Models.Services
         ///<param name="discoverItem">Item de descubrimiento</param>
         public Guid AddDiscoverItem(DiscoverItem discoverItem)
         {
-            Guid discoveritemID = Guid.Empty;
-            discoveritemID = Guid.NewGuid();
+            Guid discoveritemID = Guid.NewGuid();
             discoverItem.ID = discoveritemID;
             _discoverItems.Add(discoverItem);
             return discoveritemID;
         }
-        [ExcludeFromCodeCoverage]
-        //No se usa en el código
 
         ///<summary>
         ///Modifica una item de descubrimiento
         ///</summary>
         ///<param name="discoverItem">tem de descubrimiento a modificar con los datos nuevos</param>
+        [ExcludeFromCodeCoverage]
         public bool ModifyDiscoverItem(DiscoverItem discoverItem)
         {
             bool modified = false;
@@ -123,13 +121,11 @@ namespace API_CARGA.Models.Services
             return modified;
         }
 
-        [ExcludeFromCodeCoverage]
-        //No se usa en el código
-
         ///<summary>
         ///Elimina un discoverItem
         ///</summary>
         ///<param name="identifier">Identificador del item</param>
+        [ExcludeFromCodeCoverage]
         public bool RemoveDiscoverItem(Guid identifier)
         {
             try
@@ -141,7 +137,7 @@ namespace API_CARGA.Models.Services
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

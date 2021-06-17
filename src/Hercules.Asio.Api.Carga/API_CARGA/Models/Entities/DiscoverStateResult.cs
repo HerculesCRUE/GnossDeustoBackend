@@ -10,18 +10,17 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace API_CARGA.Models.Entities
 {
-    [ExcludeFromCodeCoverage]
-
     ///<summary>
     ///Representa el estao de un item de descubrimiento
     ///</summary>
     ///
+    [ExcludeFromCodeCoverage]
     public class DiscoverStateResult
     {
-        [ExcludeFromCodeCoverage]
         ///<summary>
         ///Representa un problema de desambiguación en un DiscoverItem
         ///</summary>
+        [ExcludeFromCodeCoverage]
         public class DiscoverDissambiguation
         {
             ///<summary>

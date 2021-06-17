@@ -9,20 +9,26 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CronConfigure.Models.Hangfire
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase usada por Hangfire para el guardado de las tareas
     ///</summary>
-
+    [ExcludeFromCodeCoverage]
     [Table("aggregatedcounter", Schema="hangfire")]
     public partial class AggregatedCounter
     {
+        /// <summary>
+        /// Key
+        /// </summary>
         [Key]
         [StringLength(100)]
         public string Key { get; set; }
-
+        /// <summary>
+        /// Value
+        /// </summary>
         public long Value { get; set; }
-
+        /// <summary>
+        /// ExpireAt
+        /// </summary>
         public DateTime? ExpireAt { get; set; }
     }
 }
