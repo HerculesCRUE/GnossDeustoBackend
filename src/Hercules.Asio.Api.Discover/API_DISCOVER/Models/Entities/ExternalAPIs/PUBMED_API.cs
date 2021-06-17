@@ -11,12 +11,21 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// </summary>
     public class PUBMED_API : I_ExternalAPI
     {
+        /// <summary>
+        /// Name
+        /// </summary>
         public string Name { get { return "PubMed"; } }
-
+        /// <summary>
+        /// Description
+        /// </summary>
         public string Description { get { return "PubMed® comprises more than 30 million citations for biomedical literature from MEDLINE, life science journals, and online books."; } }
-
+        /// <summary>
+        /// HomePage
+        /// </summary>
         public string HomePage { get { return "https://pubmed.ncbi.nlm.nih.gov/"; } }
-
+        /// <summary>
+        /// Id
+        /// </summary>
         public string Id { get { return "pubmed"; } }
 
         /// <summary>

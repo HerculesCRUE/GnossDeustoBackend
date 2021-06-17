@@ -16,9 +16,21 @@ namespace API_DISCOVER.Models.Entities
     [ExcludeFromCodeCoverage]
     public class TokenBearer
     {
+        /// <summary>
+        /// access_token
+        /// </summary>
         public string access_token { get; set; }
+        /// <summary>
+        /// expires_in
+        /// </summary>
         public int expires_in { get; set; }
+        /// <summary>
+        /// token_type
+        /// </summary>
         public string token_type { get; set; }
+        /// <summary>
+        /// scope
+        /// </summary>
         public string scope { get; set; }
     }
 }

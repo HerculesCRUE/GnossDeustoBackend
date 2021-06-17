@@ -5,17 +5,31 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace API_DISCOVER.Models.Entities
 {
+    /// <summary>
+    /// RabbitMQInfo
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class RabbitMQInfo
     {
+        /// <summary>
+        /// UsernameRabbitMq
+        /// </summary>
         public string UsernameRabbitMq { get; set; }
-
+        /// <summary>
+        /// PasswordRabbitMq
+        /// </summary>
         public string PasswordRabbitMq { get; set; }
-
+        /// <summary>
+        /// VirtualHostRabbitMq
+        /// </summary>
         public string VirtualHostRabbitMq { get; set; }
-
+        /// <summary>
+        /// HostNameRabbitMq
+        /// </summary>
         public string HostNameRabbitMq { get; set; }
-
+        /// <summary>
+        /// UriRabbitMq
+        /// </summary>
         public string UriRabbitMq { get; set; }
     }
 }

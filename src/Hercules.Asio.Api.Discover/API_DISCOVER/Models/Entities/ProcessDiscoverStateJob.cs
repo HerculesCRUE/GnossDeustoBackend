@@ -6,17 +6,26 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-/// <summary>
-/// Clase para asociar una tarea con su estado de descubrimiento
-/// </summary>
 namespace API_DISCOVER.Models.Entities
 {
+    /// <summary>
+    /// Clase para asociar una tarea con su estado de descubrimiento
+    /// </summary>
     [Table("ProcessDiscoverStateJob")]
     public class ProcessDiscoverStateJob
     {
+        /// <summary>
+        /// Id
+        /// </summary>
         [Key]
         public Guid Id { get; set; }
+        /// <summary>
+        /// JobId
+        /// </summary>
         public string JobId { get; set; }
+        /// <summary>
+        /// State
+        /// </summary>
         public string State { get; set; }
     }
 }

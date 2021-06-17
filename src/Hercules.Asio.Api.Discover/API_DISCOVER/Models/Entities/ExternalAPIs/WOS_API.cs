@@ -20,12 +20,21 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
         /// Cookie para las peticiones
         /// </summary>
         private static string _cookie { get; set; }
-       
+        /// <summary>
+        /// Name
+        /// </summary>
         public string Name { get { return "Web of Science"; } }
+        /// <summary>
+        /// Description
+        /// </summary>
         public string Description { get { return "Los datos del Grafo de Conocimiento de la investigación que contiene Hércules ASIO provienen del Sistema de Gestión de la Investigación de la Universidad de Murcia."; } }
-
+        /// <summary>
+        /// HomePage
+        /// </summary>
         public string HomePage { get { return "http://wos.fecyt.es/"; } }
-
+        /// <summary>
+        /// Id
+        /// </summary>
         public string Id { get { return "wos"; } }
         private static DateTime dateActive = DateTime.UtcNow;
 
@@ -78,11 +87,11 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
                     _cookie = doc.InnerText.ToString();
                     break;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     if (i == 1)
                     {
-                        throw ex;
+                        throw;
                     }
                     dateActive= DateTime.UtcNow.AddMinutes(5);
                 }
@@ -136,21 +145,20 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
                             response = sr.ReadToEnd().Trim();
                         }
                     }
-                    response= response.Replace("&lt;", "<").Replace("&gt;", ">");
+                    response = response.Replace("&lt;", "<").Replace("&gt;", ">");
                     XDocument xdoc = XDocument.Parse(response);
                     foreach (var node in xdoc.Descendants().Where(e => e.Attribute("{http://www.w3.org/2001/XMLSchema-instance}type") != null))
                     {
                         node.Attribute("{http://www.w3.org/2001/XMLSchema-instance}type").Remove();
                     }
-                    response = xdoc.ToString();
                     XmlSerializer serializer = new XmlSerializer(typeof(WOSWorks));
                     WOSWorks result = serializer.Deserialize(xdoc.CreateReader()) as WOSWorks;
                     return result;
-                }catch(Exception ex)
+                }catch(Exception)
                 {
                     if (i == 1)
                     {
-                        throw ex;
+                        throw;
                     }
                     Thread.Sleep(1000);
                     ActualizarCookie(authorization);
@@ -161,7 +169,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
                     Thread.Sleep(500);
                 }
             }
-            throw new Exception("Ha fallado la llamada al API 'http://search.webofknowledge.com/esti/wokmws/ws/WokSearch' ");
+            throw new ArgumentNullException("Ha fallado la llamada al API 'http://search.webofknowledge.com/esti/wokmws/ws/WokSearch' ");
         }
     }
 

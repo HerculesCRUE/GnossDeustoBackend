@@ -64,7 +64,7 @@ namespace VDS.RDF.Query.Inference
                 {
                     if (!t.Object.Equals(_rdfsClass) && !t.Object.Equals(_rdfProperty))
                     {
-                        InferClasses(t, input, output, inferences);
+                        InferClasses(t, output, inferences);
                     }
                 }
                 else if (t.Predicate.Equals(_rdfsSubClass))
@@ -95,7 +95,7 @@ namespace VDS.RDF.Query.Inference
                             break;
                         }
                     }
-                }               
+                }
             }
 
             // Assert the inferred information
@@ -127,13 +127,9 @@ namespace VDS.RDF.Query.Inference
                             _classMappings.Add(t.Subject, null);
                         }
                     }
-                    else if (t.Object.Equals(_rdfProperty))
+                    else if (t.Object.Equals(_rdfProperty) && !_propertyMappings.ContainsKey(t.Subject))
                     {
-                        // The Triple defines a Property
-                        if (!_propertyMappings.ContainsKey(t.Subject))
-                        {
-                            _propertyMappings.Add(t.Subject, null);
-                        }
+                        _propertyMappings.Add(t.Subject, null);
                     }
                 }
                 else if (t.Predicate.Equals(_rdfsSubClass))
@@ -175,10 +171,9 @@ namespace VDS.RDF.Query.Inference
         /// Helper method which applies Class hierarchy inferencing.
         /// </summary>
         /// <param name="t">Triple defining the type for something.</param>
-        /// <param name="input">Input Graph.</param>
         /// <param name="output">Output Graph.</param>
         /// <param name="inferences">List of Inferences.</param>
-        private void InferClasses(Triple t, IGraph input, IGraph output, List<Triple> inferences)
+        private void InferClasses(Triple t, IGraph output, List<Triple> inferences)
         {
             INode type = t.Object;
 

@@ -7,6 +7,9 @@ using VDS.RDF.Writing;
 
 namespace VDS.RDF
 {
+    /// <summary>
+    /// RohGraph
+    /// </summary>
     [Serializable]
     public class RohGraph : Graph
     {
@@ -49,7 +52,10 @@ namespace VDS.RDF
             id="N" + id.Replace("-", "");
             return id;
         }
-
+        /// <summary>
+        /// Clone
+        /// </summary>
+        /// <returns></returns>
         public RohGraph Clone()
         {
             RdfXmlWriter rdfxmlwriter = new RdfXmlWriter();
