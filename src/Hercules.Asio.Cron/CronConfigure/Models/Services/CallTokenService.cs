@@ -25,7 +25,7 @@ namespace CronConfigure.Models.Services
     [ExcludeFromCodeCoverage]
     public class CallTokenService
     {
-        readonly private ConfigTokenService _configToken; 
+        readonly private ConfigTokenService _configToken;
         readonly IWebHostEnvironment _env;
         private IConfiguration _configuration { get; set; }
 
@@ -69,7 +69,7 @@ namespace CronConfigure.Models.Services
             {
                 HttpClient client = new HttpClient();
                 client.Timeout = TimeSpan.FromDays(1);
-                string authority = _configToken.GetAuthority()+"/connect/token";
+                string authority = _configToken.GetAuthority() + "/connect/token";
                 response = client.PostAsync($"{authority}", contentData).Result;
                 response.EnsureSuccessStatusCode();
                 string result = response.Content.ReadAsStringAsync().Result;
@@ -78,16 +78,13 @@ namespace CronConfigure.Models.Services
             }
             catch (HttpRequestException)
             {
-                if (response != null)
+                if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
                 {
-                    if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
-                    {
-                        throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
-                    }
-                    else
-                    {
-                        throw new HttpRequestException(response.ReasonPhrase);
-                    }
+                    throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpRequestException(response.ReasonPhrase);
                 }
             }
         }

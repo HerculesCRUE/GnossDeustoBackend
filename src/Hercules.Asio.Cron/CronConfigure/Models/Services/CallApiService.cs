@@ -55,20 +55,17 @@ namespace CronConfigure.Models.Services
             }
             catch (HttpRequestException)
             {
-                if (response != null)
+                if (response.StatusCode.Equals(HttpStatusCode.BadRequest))
                 {
-                    if (response.StatusCode.Equals(HttpStatusCode.BadRequest))
-                    {
-                        throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
-                    }
-                    else if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
-                    {
-                        throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
-                    }
-                    else
-                    {
-                        throw new HttpRequestException(response.ReasonPhrase);
-                    }
+                    throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
+                }
+                else if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                {
+                    throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpRequestException(response.ReasonPhrase);
                 }
             }
         }
