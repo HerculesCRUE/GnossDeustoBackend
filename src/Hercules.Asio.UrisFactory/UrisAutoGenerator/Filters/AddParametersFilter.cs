@@ -10,16 +10,28 @@ using UrisFactory.Models.Services;
 
 namespace UrisFactory.Filters
 {
+    /// <summary>
+    /// AddParametersFilter
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class AddParametersFilter: IOperationFilter
     {
-        private ConfigJsonHandler _configJsonHandler;
+        readonly private ConfigJsonHandler _configJsonHandler;
 
+        /// <summary>
+        /// AddParametersFilter
+        /// </summary>
+        /// <param name="configJsonHandler"></param>
         public AddParametersFilter(ConfigJsonHandler configJsonHandler)
         {
             _configJsonHandler = configJsonHandler;
         }
 
+        /// <summary>
+        /// Apply
+        /// </summary>
+        /// <param name="operation"></param>
+        /// <param name="context"></param>
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             UriStructureGeneral uriStructureGeneral = _configJsonHandler.GetUrisConfig();

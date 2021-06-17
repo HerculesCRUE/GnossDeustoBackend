@@ -7,12 +7,15 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace UrisFactory.ModelExamples
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase de ejemplo para mostrar un error
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class UriErrorExample
     {
+        /// <summary>
+        /// Error
+        /// </summary>
         public string Error { get; set; }
     }
 }

@@ -11,9 +11,21 @@ namespace UrisFactory.Models.ConfigEntities
     ///</summary>
     public class UriStructureGeneral
     {
+        /// <summary>
+        /// Base
+        /// </summary>
         public string Base { get; set; }
+        /// <summary>
+        /// Characters
+        /// </summary>
         public IList<Characters> Characters { get; set; }
+        /// <summary>
+        /// UriStructures
+        /// </summary>
         public IList<UriStructure> UriStructures { get; set; }
+        /// <summary>
+        /// ResourcesClasses
+        /// </summary>
         public IList<ResourcesClass> ResourcesClasses { get; set; }
     }
 }

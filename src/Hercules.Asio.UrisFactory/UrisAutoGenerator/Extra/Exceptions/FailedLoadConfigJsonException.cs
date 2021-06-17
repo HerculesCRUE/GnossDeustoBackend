@@ -11,15 +11,25 @@ namespace UrisFactory.Extra.Exceptions
     ///</summary>
     public class FailedLoadConfigJsonException : Exception
     {
+        /// <summary>
+        /// FailedLoadConfigJsonException
+        /// </summary>
         public FailedLoadConfigJsonException()
         {
         }
-
+        /// <summary>
+        /// FailedLoadConfigJsonException
+        /// </summary>
+        /// <param name="message"></param>
         public FailedLoadConfigJsonException(string message)
             : base(message)
         {
         }
-
+        /// <summary>
+        /// FailedLoadConfigJsonException
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="inner"></param>
         public FailedLoadConfigJsonException(string message, Exception inner)
             : base(message, inner)
         {

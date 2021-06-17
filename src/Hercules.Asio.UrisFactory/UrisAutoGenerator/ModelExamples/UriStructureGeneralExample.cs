@@ -9,12 +9,16 @@ using UrisFactory.Models.ConfigEntities;
 
 namespace UrisFactory.ModelExamples
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase de ejemplo para mostrar un ejemplo del fichero de configuración
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class UriStructureGeneralExample : IExamplesProvider<UriStructureGeneral>
     {
+        /// <summary>
+        /// GetExamples
+        /// </summary>
+        /// <returns></returns>
         public UriStructureGeneral GetExamples()
         {
             return new UriStructureGeneral()

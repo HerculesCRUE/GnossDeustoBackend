@@ -13,13 +13,28 @@ namespace UrisFactory.Models.ConfigEntities
     ///</summary>
     public static class UriComponentsList
     {
+        /// <summary>
+        /// Base
+        /// </summary>
         public const string Base = "base";
+        /// <summary>
+        /// Character
+        /// </summary>
         public const string Character = "character";
+        /// <summary>
+        /// ResourceClass
+        /// </summary>
         public const string ResourceClass = "resourceClass";
+        /// <summary>
+        /// Identifier
+        /// </summary>
         public const string Identifier = "identifier";
 
         private static ImmutableList<String> defaultParameters = new List<string> { Base, Character, ResourceClass, Identifier }.ToImmutableList();
 
+        /// <summary>
+        /// DefaultParameters
+        /// </summary>
         public static ImmutableList<String> DefaultParameters
         {
             get

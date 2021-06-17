@@ -9,10 +9,25 @@ namespace UrisFactory.Models.ConfigEntities
     ///</summary>
     public class Component
     {
+        /// <summary>
+        /// UriComponent
+        /// </summary>
         public string UriComponent { get; set; }
+        /// <summary>
+        /// UriComponentValue
+        /// </summary>
         public string UriComponentValue { get; set; }
+        /// <summary>
+        /// UriComponentOrder
+        /// </summary>
         public int UriComponentOrder { get; set; }
+        /// <summary>
+        /// Mandatory
+        /// </summary>
         public bool Mandatory { get; set; }
+        /// <summary>
+        /// FinalCharacter
+        /// </summary>
         public string FinalCharacter { get; set; }
     }
 }

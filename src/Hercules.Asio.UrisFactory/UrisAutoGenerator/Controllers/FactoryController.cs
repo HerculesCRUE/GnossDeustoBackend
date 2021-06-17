@@ -25,8 +25,12 @@ namespace UrisFactory.Controllers
     //[Authorize]
     public class FactoryController : ControllerBase
     {
-        private ConfigJsonHandler _configJsonHandler;
+        readonly private ConfigJsonHandler _configJsonHandler;
 
+        /// <summary>
+        /// FactoryController
+        /// </summary>
+        /// <param name="configJsonHandler"></param>
         public FactoryController(ConfigJsonHandler configJsonHandler)
         {
             _configJsonHandler = configJsonHandler;

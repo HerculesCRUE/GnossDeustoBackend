@@ -29,19 +29,32 @@ using UrisFactory.Models.Services;
 
 namespace UrisFactory
 {
+    /// <summary>
+    /// Startup
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class Startup
     {
         private readonly IWebHostEnvironment _env;
+        /// <summary>
+        /// Configuration
+        /// </summary>
         public IConfiguration Configuration { get; }
-
+        /// <summary>
+        /// Startup
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="env"></param>
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
             _env = env;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             IdentityModelEventSource.ShowPII = true; //Add this line
@@ -71,7 +84,6 @@ namespace UrisFactory
                 .AddIdentityServerAuthentication(options =>
                 {
                     options.Authority = authority;
-                    //options.Authority = "http://herc-as-front-desa.atica.um.es/identityserver";
                     options.RequireHttpsMetadata = false;
                     options.ApiName = "apiUrisFactory";
                 });
@@ -115,7 +127,11 @@ namespace UrisFactory
             services.AddScoped<ISchemaConfigOperations, SchemaConfigFileOperations>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -155,8 +171,16 @@ namespace UrisFactory
             });
         }
     }
+    /// <summary>
+    /// AllowAnonymous
+    /// </summary>
     public class AllowAnonymous : IAuthorizationHandler
     {
+        /// <summary>
+        /// HandleAsync
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public Task HandleAsync(AuthorizationHandlerContext context)
         {
             foreach (IAuthorizationRequirement requirement in context.PendingRequirements.ToList())

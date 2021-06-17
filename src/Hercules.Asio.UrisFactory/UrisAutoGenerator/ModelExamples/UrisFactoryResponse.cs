@@ -7,12 +7,16 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace UrisFactory.ModelExamples
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase de ejemplo para mostrar una uri
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class UrisFactoryResponse: IExamplesProvider<string>
     {
+        /// <summary>
+        /// GetExamples
+        /// </summary>
+        /// <returns></returns>
         public string GetExamples()
         {
             return "http://data.um.es/res/researcher/121s";

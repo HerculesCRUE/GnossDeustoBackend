@@ -10,12 +10,16 @@ using UrisFactory.ViewModels;
 
 namespace UrisFactory.ModelExamples
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase de ejemplo para mostrar un ejemplo de estructura uri
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class UriStructureInfoRequest: IExamplesProvider<InfoUriStructure>
     {
+        /// <summary>
+        /// GetExamples
+        /// </summary>
+        /// <returns></returns>
         public InfoUriStructure GetExamples()
         {
             ResourcesClass item = new ResourcesClass()

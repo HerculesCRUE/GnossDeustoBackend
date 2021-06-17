@@ -8,16 +8,27 @@ using System.Threading.Tasks;
 
 namespace Hercules.Asio.UrisFactory.Models.Services
 {
+    /// <summary>
+    /// ConfigService
+    /// </summary>
     public class ConfigService
     {
         private IConfiguration _configuration { get; set; }
         private string Base { get; set; }
 
+        /// <summary>
+        /// ConfigService
+        /// </summary>
+        /// <param name="configuration"></param>
         public ConfigService(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// GetBuildConfiguration
+        /// </summary>
+        /// <returns></returns>
         public static IConfiguration GetBuildConfiguration()
         {
             var builder = new ConfigurationBuilder()

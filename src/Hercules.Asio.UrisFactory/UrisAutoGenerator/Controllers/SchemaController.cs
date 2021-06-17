@@ -28,9 +28,14 @@ namespace UrisFactory.Controllers
     //[Authorize]
     public class SchemaController : Controller
     {
-        private ConfigJsonHandler _configJsonHandler;
-        private ISchemaConfigOperations _schemaConfigOperations;
+        readonly private ConfigJsonHandler _configJsonHandler;
+        readonly private ISchemaConfigOperations _schemaConfigOperations;
 
+        /// <summary>
+        /// SchemaController
+        /// </summary>
+        /// <param name="configJsonHandler"></param>
+        /// <param name="schemaConfigOperations"></param>
         public SchemaController(ConfigJsonHandler configJsonHandler, ISchemaConfigOperations schemaConfigOperations)
         {
             _configJsonHandler = configJsonHandler;

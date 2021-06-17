@@ -12,8 +12,13 @@ namespace UrisFactory.ViewModels
     ///</summary>
     public class InfoUriStructure
     {
+        /// <summary>
+        /// UriStructure
+        /// </summary>
         public UriStructure UriStructure{get;set;}
-         
+        /// <summary>
+        /// ResourcesClass
+        /// </summary>
         public List<ResourcesClass> ResourcesClass { get; set; }
     }
 }

@@ -20,7 +20,12 @@ namespace UrisFactory.Models.Services
         private static string configPath = "Config/UrisConfig.json";
         private static string oldConfigPath = "Config/oldUrisConfig.json";
 
-        private ConfigJsonHandler _configJsonHandler;
+        readonly private ConfigJsonHandler _configJsonHandler;
+
+        /// <summary>
+        /// SchemaConfigFileOperations
+        /// </summary>
+        /// <param name="configJsonHandler"></param>
         public SchemaConfigFileOperations(ConfigJsonHandler configJsonHandler)
         {
             _configJsonHandler = configJsonHandler;
@@ -42,11 +47,6 @@ namespace UrisFactory.Models.Services
         public byte[] GetFileSchemaData()
         {
             return File.ReadAllBytes(configPath);
-            //catch (Exception ex)
-            //{
-            //    string message = $"{ex.Message}-----------------------{ex.InnerException}";
-            //    return Encoding.Unicode.GetBytes(message);
-            //}
         }
 
         ///<summary>

@@ -6,10 +6,19 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace UrisFactory.ModelExamples
 {
+    /// <summary>
+    /// Uri
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class Uri
     {
+        /// <summary>
+        /// Parameters
+        /// </summary>
         public string Parameters { get; set; }
+        /// <summary>
+        /// UriResult
+        /// </summary>
         public string UriResult { get; set; }
     }
 }

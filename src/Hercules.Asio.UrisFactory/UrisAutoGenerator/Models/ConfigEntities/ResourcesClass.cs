@@ -9,10 +9,25 @@ namespace UrisFactory.Models.ConfigEntities
     ///</summary>
     public class ResourcesClass
     {
+        /// <summary>
+        /// ResourceClass
+        /// </summary>
         public string ResourceClass { get; set; }
+        /// <summary>
+        /// RdfType
+        /// </summary>
         public string RdfType { get; set; }
+        /// <summary>
+        /// LabelResourceClass
+        /// </summary>
         public string LabelResourceClass { get; set; }
+        /// <summary>
+        /// ResourceURI
+        /// </summary>
         public string ResourceURI { get; set; }
+        /// <summary>
+        /// BlankNode
+        /// </summary>
         public bool BlankNode { get; set; }
     }
 }

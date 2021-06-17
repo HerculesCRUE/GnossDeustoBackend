@@ -13,20 +13,29 @@ using UrisFactory.Extra.Exceptions;
 
 namespace UrisFactory.Middlewares
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase que hace de middleware y gestiona los errores de la aplicación para generar logs
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
         private string _timeStamp;
+
+        /// <summary>
+        /// ErrorHandlingMiddleware
+        /// </summary>
+        /// <param name="next"></param>
         public ErrorHandlingMiddleware(RequestDelegate next)
         {
-            _next = next;
-            
+            _next = next;            
         }
 
+        /// <summary>
+        /// Invoke
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task Invoke(HttpContext context /* other dependencies */)
         {
             try

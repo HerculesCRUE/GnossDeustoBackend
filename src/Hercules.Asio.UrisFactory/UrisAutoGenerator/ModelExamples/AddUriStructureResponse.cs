@@ -7,12 +7,16 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace UrisFactory.ModelExamples
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase de ejemplo para mostrar una insercción correcta de una estructura uri
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class AddUriStructureResponse : IExamplesProvider<string>
     {
+        /// <summary>
+        /// GetExamples
+        /// </summary>
+        /// <returns></returns>
         public string GetExamples()
         {
             return "uriStructure: uriExampleStructure has been added and the new config schema is loaded";

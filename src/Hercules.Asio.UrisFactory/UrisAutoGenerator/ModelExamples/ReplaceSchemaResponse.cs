@@ -7,12 +7,16 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace UrisFactory.ModelExamples
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase de ejemplo para mostrar el correcto reemplazo de un fichero de configuración
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class ReplaceSchemaResponse : IExamplesProvider<string>
     {
+        /// <summary>
+        /// GetExamples
+        /// </summary>
+        /// <returns></returns>
         public string GetExamples()
         {
             return "new config file loaded";

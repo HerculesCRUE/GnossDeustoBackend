@@ -7,12 +7,16 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace UrisFactory.ModelExamples
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase de ejemplo para mostrar correcto reemplazo del fichero de configuración
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class ReplaceShemaErrorResponse : IExamplesProvider<UriErrorExample>
     {
+        /// <summary>
+        /// GetExamples
+        /// </summary>
+        /// <returns></returns>
         public UriErrorExample GetExamples()
         {
             return new UriErrorExample()

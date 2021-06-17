@@ -9,7 +9,13 @@ namespace UrisFactory.Models.ConfigEntities
     ///</summary>
     public class Characters
     {
+        /// <summary>
+        /// Character
+        /// </summary>
         public string Character { get; set; }
+        /// <summary>
+        /// LabelCharacter
+        /// </summary>
         public string LabelCharacter { get; set; }
     }
 }

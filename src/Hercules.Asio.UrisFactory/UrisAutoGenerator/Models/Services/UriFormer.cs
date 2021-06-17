@@ -16,9 +16,12 @@ namespace UrisFactory.Models.Services
     ///</summary>
     public class UriFormer
     {
-        private UriStructureGeneral _uristructure;
+        readonly private UriStructureGeneral _uristructure;
 
-
+        /// <summary>
+        /// UriFormer
+        /// </summary>
+        /// <param name="uristructure"></param>
         public UriFormer(UriStructureGeneral uristructure)
         {
             _uristructure = uristructure;

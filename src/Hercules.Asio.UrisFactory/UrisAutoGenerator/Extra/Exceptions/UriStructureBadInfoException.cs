@@ -11,15 +11,25 @@ namespace UrisFactory.Extra.Exceptions
     ///</summary>
     public class UriStructureBadInfoException : Exception
     {
+        /// <summary>
+        /// UriStructureBadInfoException
+        /// </summary>
         public UriStructureBadInfoException()
         {
         }
-
+        /// <summary>
+        /// UriStructureBadInfoException
+        /// </summary>
+        /// <param name="message"></param>
         public UriStructureBadInfoException(string message)
             : base(message)
         {
         }
-
+        /// <summary>
+        /// UriStructureBadInfoException
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="inner"></param>
         public UriStructureBadInfoException(string message, Exception inner)
             : base(message, inner)
         {

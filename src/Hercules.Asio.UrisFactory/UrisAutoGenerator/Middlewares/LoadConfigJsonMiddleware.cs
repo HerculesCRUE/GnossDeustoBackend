@@ -8,21 +8,29 @@ using System.Threading.Tasks;
 
 namespace UrisFactory.Middlewares
 {
-    [ExcludeFromCodeCoverage]
     ///<summary>
     ///Clase que hace de middleware y carga el fichero de configuración
     ///</summary>
+    [ExcludeFromCodeCoverage]
     public class LoadConfigJsonMiddleware
     {
         private readonly RequestDelegate _next;
+        /// <summary>
+        /// LoadConfigJsonMiddleware
+        /// </summary>
+        /// <param name="next"></param>
         public LoadConfigJsonMiddleware(RequestDelegate next)
         {
             _next = next;
         }
 
+        /// <summary>
+        /// Invoke
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task Invoke(HttpContext context /* other dependencies */)
         {
-            //ConfigJsonHandler.InitializerConfigJson();
             await _next(context);
         }
     }
