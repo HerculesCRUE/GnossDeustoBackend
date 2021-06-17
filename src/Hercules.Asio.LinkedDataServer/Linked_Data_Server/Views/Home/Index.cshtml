@@ -92,11 +92,11 @@
                                 <td class="" title="@title">
                                     @if (!string.IsNullOrEmpty(title))
                                     {
-                                        <b>@title</b>
+                                        <strong>@title</strong>
                                     }
                                     else
                                     {
-                                        <b>@propiedadAbreviada</b>
+                                        <strong>@propiedadAbreviada</strong>
                                     }
                                     <a href="@stringProperty.Key" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
                                 </td>
@@ -159,7 +159,7 @@
                                                 string uri = propTransform.transform.Replace("{value}", valor);
 
                                                 <td>
-                                                    <b><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a></b>
+                                                    <strong><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a></strong>
                                                     @{
                                                         List<Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel.ProvenanceData> provenanceData = pItem.provenanceData.Where(x => x.property == stringProperty.Key && x.value == valor).ToList();
                                                         if (provenanceData.Count() > 0)
@@ -180,9 +180,9 @@
                                                                     {
                                                                         <tr>
                                                                             <td>
-                                                                                <b>@provenanceDataIn.date.ToString("G", System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"))</b>
+                                                                                <strong>@provenanceDataIn.date.ToString("G", System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"))</strong>
                                                                             </td>
-                                                                            <td><b>@provenanceDataIn.organization</b></td>
+                                                                            <td><strong>@provenanceDataIn.organization</strong></td>
                                                                         </tr>
                                                                     }
                                                                 </tbody>
@@ -196,7 +196,7 @@
                                         if (!transform)
                                         {
                                             <td>
-                                                <b>@valor</b>
+                                                <strong>@valor</strong>
                                                 @{
                                                     List<Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel.ProvenanceData> provenanceData = pItem.provenanceData.Where(x => x.property == stringProperty.Key && x.value == valor).ToList();
                                                     if (provenanceData.Count() > 0)
@@ -217,9 +217,9 @@
                                                                 {
                                                                     <tr>
                                                                         <td>
-                                                                            <b>@provenanceDataIn.date.ToString("G", System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"))</b>
+                                                                            <strong>@provenanceDataIn.date.ToString("G", System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"))</strong>
                                                                         </td>
-                                                                        <td><b>@provenanceDataIn.organization</b></td>
+                                                                        <td><strong>@provenanceDataIn.organization</strong></td>
                                                                     </tr>
                                                                 }
                                                             </tbody>
@@ -254,11 +254,11 @@
                                         <td class="" title="@title">
                                             @if (!string.IsNullOrEmpty(title))
                                             {
-                                                <b>@title</b>
+                                                <strong>@title</strong>
                                             }
                                             else
                                             {
-                                                <b>@propiedadAbreviada</b>
+                                                <strong>@propiedadAbreviada</strong>
                                             }
                                             <a href="@entitiesProperty.Key" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
                                         </td>

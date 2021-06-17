@@ -77,6 +77,8 @@ namespace Linked_Data_Server.Utility
             {
                 datosDBpedia = JsonConvert.DeserializeObject<SparqlObject>(jsonRespuesta);
             }
+
+            webClient.Dispose();
             return datosDBpedia;
         }
     }
