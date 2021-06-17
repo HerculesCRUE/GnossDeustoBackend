@@ -23,7 +23,7 @@ namespace UrisFactory.ModelExamples
         {
             return new UriStructureGeneral()
             {
-                Base = "http://data.um.es",
+                Base = "https://data.um.es",
                 Characters = new List<Characters>()
                 {
                     new Characters()

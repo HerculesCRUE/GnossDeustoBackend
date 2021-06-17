@@ -19,7 +19,7 @@ namespace UrisFactory.ModelExamples
         /// <returns></returns>
         public string GetExamples()
         {
-            return "http://data.um.es/res/researcher/121s";
+            return "https://data.um.es/res/researcher/121s";
         }
  
     }
