@@ -33,6 +33,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
                 webClient.Headers.Add(HttpRequestHeader.UserAgent, CrossrefUserAgent);
             }
             string jsonRespuesta = webClient.DownloadString($"https://api.crossref.org/works?query.author={q}&rows=200");
+            webClient.Dispose();
             return JsonConvert.DeserializeObject<CROSSREF_Works>(jsonRespuesta);
         }
     }

@@ -347,6 +347,8 @@ namespace API_DISCOVER.Utility
                 pRabbitMQService.PublishMessage(new RabbitVirtuosoObject(pGraph, pConsulta), pRabbitMQService.queueNameVirtuoso);
             }
 
+            webClient.Dispose();
+
             return datosSPARQL;
         }
 

@@ -30,6 +30,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             WebClient webClient = new WebClient();
             webClient.Headers.Add(HttpRequestHeader.Accept, "application/json");
             string jsonRespuesta = webClient.DownloadString("https://pub.orcid.org/v3.0/expanded-search?q=" + q + "&rows=5");
+            webClient.Dispose();
             return JsonConvert.DeserializeObject<ORCIDExpandedSearch>(jsonRespuesta);
         }
         
@@ -43,6 +44,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             WebClient webClient = new WebClient();
             webClient.Headers.Add(HttpRequestHeader.Accept, "application/json");
             string jsonRespuestaOrcidPerson = webClient.DownloadString("https://pub.orcid.org/v3.0/" + id + "/person");
+            webClient.Dispose();
             return JsonConvert.DeserializeObject<ORCIDPerson>(jsonRespuestaOrcidPerson);
         }
 
@@ -56,6 +58,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             WebClient webClient = new WebClient();
             webClient.Headers.Add(HttpRequestHeader.Accept, "application/json");
             string jsonRespuestaOrcidWorks = webClient.DownloadString("https://pub.orcid.org/v3.0/" +id + "/works");
+            webClient.Dispose();
             return JsonConvert.DeserializeObject<ORCIDWorks>(jsonRespuestaOrcidWorks);
         }
     }

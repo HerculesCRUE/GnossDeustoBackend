@@ -33,7 +33,7 @@ namespace API_DISCOVER.Models.Services
             _configToken = configToken;
             _env = env;
         }
-        
+
         /// <summary>
         /// Obtiene un token de seguridad de acceso para el Api carga
         /// </summary>

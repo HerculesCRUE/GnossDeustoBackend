@@ -77,7 +77,7 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
                         elements = elements.Descendants(propertySplit).ToList();
                     }
                 }
-                if (elements.Count > 0)
+                if (elements != null && elements.Count > 0)
                 {
                     for (int i = 0; i < elements.Count; i++)
                     {
