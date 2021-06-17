@@ -8,7 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace PRH
 {
     [ExcludeFromCodeCoverage]
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {

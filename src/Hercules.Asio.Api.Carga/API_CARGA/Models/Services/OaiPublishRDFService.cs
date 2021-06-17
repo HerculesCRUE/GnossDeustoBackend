@@ -107,7 +107,7 @@ namespace API_CARGA.Models.Services
                     }
 
                     List<IdentifierOAIPMH> listIdentifier = CallListIdentifier(identifier, metadataformat, set, fechaFromString);
-                    int totalCount = listIdentifier.Count();
+                    int totalCount = listIdentifier.Count;
 
                     foreach (IdentifierOAIPMH identifierOAIPMH in listIdentifier)
                     {
@@ -163,13 +163,13 @@ namespace API_CARGA.Models.Services
                                 }
                                 ok = true;
                             }
-                            catch (Exception ex)
+                            catch (Exception)
                             {
                                 ok = false;
                                 numExceptions++;
                                 if (numExceptions >= 10)
                                 {
-                                    throw ex;                              
+                                    throw;                              
                                 }
                             }
                         }

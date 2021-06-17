@@ -84,7 +84,7 @@ namespace API_CARGA.Models.Utility
                 if (!report.Conforms)
                 {
                     response.conforms = false;
-                    response.results.AddRange(report.Results.ToList().Select(x => new ShapeReport.Result()
+                    response.results.AddRange(report.Results.Select(x => new ShapeReport.Result()
                     {
                         severity = (x.Severity != null) ? x.Severity.ToString() : null,
                         focusNode = (x.FocusNode != null) ? x.FocusNode.ToString() : null,
@@ -147,7 +147,7 @@ namespace API_CARGA.Models.Utility
             if (!report.Conforms)
             {
                 response.conforms = false;
-                response.results.AddRange(report.Results.ToList().Select(x => new ShapeReport.Result()
+                response.results.AddRange(report.Results.Select(x => new ShapeReport.Result()
                 {
                     severity = (x.Severity != null) ? x.Severity.ToString() : null,
                     focusNode = (x.FocusNode != null) ? x.FocusNode.ToString() : null,
@@ -212,11 +212,11 @@ namespace API_CARGA.Models.Utility
                     string response = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
                     throw new ArgumentNullException(response);
                 }
-                throw ex;
+                throw;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {
@@ -308,7 +308,7 @@ namespace API_CARGA.Models.Utility
                         added = false;
                         foreach (int triple in triples.ToList())
                         {
-                            foreach (HashSet<int> triplesAux in blankNodeTriples.Where(x => x.Value.Contains(triple)).ToList().Select(x => x.Value).ToList())
+                            foreach (HashSet<int> triplesAux in blankNodeTriples.Where(x => x.Value.Contains(triple)).Select(x => x.Value).ToList())
                             {
                                 int numPrev = triples.Count;
                                 triples.UnionWith(triplesAux);
@@ -394,11 +394,11 @@ namespace API_CARGA.Models.Utility
                         string response = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
                         throw new ArgumentNullException(response);
                     }
-                    throw ex;
+                    throw;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    throw ex;
+                    throw;
                 }
                 finally
                 {

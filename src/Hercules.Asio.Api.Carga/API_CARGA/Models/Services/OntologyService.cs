@@ -12,7 +12,7 @@ namespace API_CARGA.Models.Services
     /// <summary>
     /// Contiene los métodos necesarios para poder cargar una ontologia
     /// </summary>
-    public class OntologyService
+    public static class OntologyService
     {
         readonly private static string ONTOLOGY_FOLDER = "Config/Ontology/";
         readonly private static string ONTOLOGY_FILE = "Config/Ontology/roh-v2.owl";
