@@ -14,11 +14,21 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// </summary>
     public class DBPEDIA_API : I_ExternalAPI
     {
+        /// <summary>
+        /// Name
+        /// </summary>
         public string Name { get { return "DBPEDIA"; } }
+        /// <summary>
+        /// Description
+        /// </summary>
         public string Description { get { return "DBPEDIA es un proyecto para la extracción de datos de Wikipedia para proponer una versión Web semántica."; } }
-
+        /// <summary>
+        /// HomePage
+        /// </summary>
         public string HomePage { get { return "https://dbpedia.org/"; } }
-
+        /// <summary>
+        /// Id
+        /// </summary>
         public string Id { get { return "dbpedia"; } }
 
         /// <summary>
@@ -50,13 +60,25 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             return dBPEDIAData;
         }
     }
+    /// <summary>
+    /// DBPEDIAData
+    /// </summary>
     public class DBPEDIAData
     {
+        /// <summary>
+        /// DBPEDIAData
+        /// </summary>
         public DBPEDIAData()
         {
 
         }
+        /// <summary>
+        /// uri_dbpedia
+        /// </summary>
         public string uri_dbpedia { get; set; }
+        /// <summary>
+        /// uri_geonames
+        /// </summary>
         public string uri_geonames { get; set; }
     }
 }

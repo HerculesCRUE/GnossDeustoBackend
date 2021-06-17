@@ -20,11 +20,21 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             "r|incollection|title",
             "r|collection|title"};
         
+        /// <summary>
+        /// Name
+        /// </summary>
         public string Name { get { return "DBLP Computer Science Bibliography"; } }
+        /// <summary>
+        /// Description
+        /// </summary>
         public string Description { get { return "The dblp computer science bibliography is the on-line reference for bibliographic information on major computer science publications. It has evolved from an early small experimental web server to a popular open-data service for the whole computer science community."; } }
-
+        /// <summary>
+        /// HomePage
+        /// </summary>
         public string HomePage { get { return "https://dblp.org/"; } }
-
+        /// <summary>
+        /// Id
+        /// </summary>
         public string Id { get { return "dblp"; } }
 
         /// <summary>
@@ -288,6 +298,9 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             }
         }
 
+        /// <summary>
+        /// dblppersonRDocument
+        /// </summary>
         public dblppersonRDocument proceedings
         {
             get
@@ -300,6 +313,9 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             }
         }
 
+        /// <summary>
+        /// dblppersonRDocument
+        /// </summary>
         public dblppersonRDocument inproceedings
         {
             get
@@ -312,6 +328,9 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             }
         }
 
+        /// <summary>
+        /// dblppersonRDocument
+        /// </summary>
         public dblppersonRDocument incollection
         {
             get
@@ -324,6 +343,9 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
             }
         }
 
+        /// <summary>
+        /// dblppersonRDocument
+        /// </summary>
         public dblppersonRDocument collection
         {
             get

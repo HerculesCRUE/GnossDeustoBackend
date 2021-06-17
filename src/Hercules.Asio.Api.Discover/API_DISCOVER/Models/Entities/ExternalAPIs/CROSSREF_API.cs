@@ -12,11 +12,21 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
     /// </summary>
     public class CROSSREF_API:I_ExternalAPI
     {
+        /// <summary>
+        /// Name
+        /// </summary>
         public string Name { get { return "Crossref"; } }
+        /// <summary>
+        /// Description
+        /// </summary>
         public string Description { get { return "Crossref makes research outputs easy to find, cite, link, assess, and reuse. A not-for-profit membership organization that exists to make scholarly communications better."; } }
-
+        /// <summary>
+        /// HomePage
+        /// </summary>
         public string HomePage { get { return "https://www.crossref.org/"; } }
-
+        /// <summary>
+        /// Id
+        /// </summary>
         public string Id { get { return "crossref"; } }
 
         /// <summary>
@@ -38,28 +48,63 @@ namespace API_DISCOVER.Models.Entities.ExternalAPIs
         }
     }
 
-
+    /// <summary>
+    /// CROSSREF_Works
+    /// </summary>
     public class CROSSREF_Works
     {
+        /// <summary>
+        /// Message
+        /// </summary>
         public Message message { get; set; }
     }
 
+    /// <summary>
+    /// Message
+    /// </summary>
     public class Message
     {
+        /// <summary>
+        /// Items
+        /// </summary>
         public Item[] items { get; set; }
     }
 
+    /// <summary>
+    /// Item
+    /// </summary>
     public class Item
     {
+        /// <summary>
+        /// DOI
+        /// </summary>
         public string DOI { get; set; }
+        /// <summary>
+        /// Title
+        /// </summary>
         public string[] title { get; set; }
+        /// <summary>
+        /// Author
+        /// </summary>
         public Author[] author { get; set; }
     }
 
+    /// <summary>
+    /// Author
+    /// </summary>
     public class Author
     {
+        /// <summary>
+        /// Given
+        /// </summary>
         public string given { get; set; }
+        /// <summary>
+        /// Family
+        /// </summary>
         public string family { get; set; }
+        /// <summary>
+        /// ORCID
+        /// </summary>
         public string ORCID { get; set; }
     }
 }

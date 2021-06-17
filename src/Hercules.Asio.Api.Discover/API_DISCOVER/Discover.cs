@@ -35,21 +35,21 @@ namespace API_DISCOVER
     [ExcludeFromCodeCoverage]
     public class Discover
     {
-        private readonly ILogger<Worker> _logger;
         private readonly IServiceScopeFactory _serviceScopeFactory;
 
         private readonly static string mPropertySGIRohCrisIdentifier = "http://purl.org/roh#crisIdentifier";
         private RohGraph _ontologyGraph { get; set; }
+        /// <summary>
+        /// DiscoverCacheGlobal
+        /// </summary>
         public static DiscoverCacheGlobal _discoverCacheGlobal { get; set; }
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="logger">Logger</param>
         /// <param name="serviceScopeFactory">Factoría de servicios</param>
-        public Discover(ILogger<Worker> logger, IServiceScopeFactory serviceScopeFactory)
+        public Discover(IServiceScopeFactory serviceScopeFactory)
         {
-            _logger = logger;
             _serviceScopeFactory = serviceScopeFactory;
         }
 
@@ -113,9 +113,6 @@ namespace API_DISCOVER
             return true;
 
         }
-
-        //TODO mover a otro sitio
-
 
         /// <summary>
         /// Realiza el proceso completo de desubrimiento sobre un RDF
@@ -236,7 +233,7 @@ namespace API_DISCOVER
                     discoverUtility.LoadNamesScore(ref namesScore, dataInferenceGraph, discoverCache, _discoverCacheGlobal, MinScore, MaxScore);
 
                     //0.- Macamos como reconciliadas aquellas que ya estén cargadas en la BBDD con los mismos identificadores
-                    List<string> entidadesCargadas = discoverUtility.LoadEntitiesDB(entitiesRdfType.Keys.ToList().Except(reconciliationData.reconciliatedEntityList.Keys.Union(reconciliationData.reconciliatedEntityList.Values)), SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword).Keys.ToList();
+                    List<string> entidadesCargadas = discoverUtility.LoadEntitiesDB(entitiesRdfType.Keys.Except(reconciliationData.reconciliatedEntityList.Keys.Union(reconciliationData.reconciliatedEntityList.Values)), SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword).Keys.ToList();
                     foreach (string entitiID in entidadesCargadas)
                     {
                         reconciliationData.reconciliatedEntityList.Add(entitiID, entitiID);

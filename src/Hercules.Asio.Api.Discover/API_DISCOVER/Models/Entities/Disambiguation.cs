@@ -47,28 +47,40 @@ namespace API_DISCOVER.Models.Entities
                 maxNumWordsTitle = pMaxNumWordsTitle;
                 if (pScorePositive.HasValue && (pScorePositive.Value < 0 || pScorePositive > 1))
                 {
-                    throw new Exception("El valor de pScorePositive debe estar comprendido entre 0 y 1");
+                    throw new ArgumentNullException("El valor de pScorePositive debe estar comprendido entre 0 y 1");
                 }
                 if (pScoreNegative.HasValue && (pScoreNegative.Value < 0 || pScoreNegative > 1))
                 {
-                    throw new Exception("El valor de pScoreNegative debe estar comprendido entre 0 y 1");
+                    throw new ArgumentNullException("El valor de pScoreNegative debe estar comprendido entre 0 y 1");
                 }
                 if (pType == Type.title && !pMaxNumWordsTitle.HasValue)
                 {
-                    throw new Exception("Si la propiedad es del tipo 'Type.title' tiene que tener asignado valor en la propiedad pMaxNumWordsTitle");
+                    throw new ArgumentNullException("Si la propiedad es del tipo 'Type.title' tiene que tener asignado valor en la propiedad pMaxNumWordsTitle");
                 }
                 scorePositive = pScorePositive;
                 scoreNegative = pScoreNegative;
             }
+
+            /// <summary>
+            /// Type
+            /// </summary>
             public enum Type
             {
-                //Misma entidad o mismo valor de la propiedad
+                /// <summary>
+                /// Misma entidad o mismo valor de la propiedad
+                /// </summary>
                 equals,
-                //Mismo valor de la propiedad (ignorando mayúsculas y minúsculas)
+                /// <summary>
+                /// Mismo valor de la propiedad (ignorando mayúsculas y minúsculas)
+                /// </summary>
                 ignoreCaseSensitive,
-                //Mismo nombre (para nombres de personas)
+                /// <summary>
+                /// Mismo nombre (para nombres de personas)
+                /// </summary>
                 name,
-                //Mismo título (para títulos de documentos por ejemplo)
+                /// <summary>
+                /// Mismo título (para títulos de documentos por ejemplo)
+                /// </summary>
                 title
             }
             /// <summary>

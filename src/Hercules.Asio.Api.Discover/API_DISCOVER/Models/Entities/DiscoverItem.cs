@@ -27,6 +27,9 @@ namespace API_DISCOVER.Models.Entities
             ///</summary>
             public class DiscoverDissambiguationCandiate
             {
+                /// <summary>
+                /// DiscoverDissambiguationCandiate
+                /// </summary>
                 public DiscoverDissambiguationCandiate()
                 {
                 }
@@ -56,6 +59,9 @@ namespace API_DISCOVER.Models.Entities
                 public float Score { get; set; }
             }
 
+            /// <summary>
+            /// DiscoverDissambiguation
+            /// </summary>
             public DiscoverDissambiguation()
             {
             }
@@ -90,6 +96,9 @@ namespace API_DISCOVER.Models.Entities
         ///</summary>
         public class DiscardDissambiguation
         {
+            /// <summary>
+            /// DiscardDissambiguation
+            /// </summary>
             public DiscardDissambiguation()
             {
             }
@@ -118,14 +127,32 @@ namespace API_DISCOVER.Models.Entities
             public List<string> DiscardCandidates { get; set; }
         }
 
+        /// <summary>
+        /// DiscoverItemStatus
+        /// </summary>
         public enum DiscoverItemStatus
         {
+            /// <summary>
+            /// Pending
+            /// </summary>
             Pending,
+            /// <summary>
+            /// Processed
+            /// </summary>
             Processed,
+            /// <summary>
+            /// ProcessedDissambiguationProblem
+            /// </summary>
             ProcessedDissambiguationProblem,
+            /// <summary>
+            /// Error
+            /// </summary>
             Error
         }
 
+        /// <summary>
+        /// DiscoverItem
+        /// </summary>
         public DiscoverItem()
         {
         }

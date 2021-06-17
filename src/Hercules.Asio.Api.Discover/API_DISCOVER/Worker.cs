@@ -34,10 +34,10 @@ namespace API_DISCOVER
             _serviceScopeFactory = serviceScopeFactory;
         }
 
-        public Task StartAsync(CancellationToken stoppingToken)
+        public Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Timed Hosted Service running.");
-            while (!stoppingToken.IsCancellationRequested)
+            while (!cancellationToken.IsCancellationRequested)
             {
                 try
                 {
@@ -45,7 +45,7 @@ namespace API_DISCOVER
                     {
                         var scope = _serviceScopeFactory.CreateScope();
                         RabbitMQService rabbitMQService = scope.ServiceProvider.GetRequiredService<RabbitMQService>();
-                        Discover descubrimiento = new Discover(_logger, _serviceScopeFactory);
+                        Discover descubrimiento = new Discover(_serviceScopeFactory);
                         rabbitMQService.ListenToQueue(new RabbitMQService.ReceivedDelegate(descubrimiento.ProcessItem), new RabbitMQService.ShutDownDelegate(OnShutDown));
                         _processRabbitReady = true;
                     }
@@ -63,7 +63,7 @@ namespace API_DISCOVER
                                 if (time.HasValue)
                                 {
                                     Thread.Sleep((time.Value.UtcDateTime - DateTimeOffset.UtcNow));
-                                    Discover descubrimiento = new Discover(_logger, _serviceScopeFactory);
+                                    Discover descubrimiento = new Discover(_serviceScopeFactory);
                                     descubrimiento.ApplyDiscoverLoadedEntities(ConfigService.GetSleepSecondsAfterProcessEntityDiscoverLoadedEntities(), _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallUrisFactoryApiService>());
                                     _processDiscoverLoadedEntities = false;
                                 }
@@ -148,7 +148,7 @@ namespace API_DISCOVER
         }
 
 
-        public Task StopAsync(CancellationToken stoppingToken)
+        public Task StopAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Timed Hosted Service is stopping.");
             _timer?.Change(Timeout.Infinite, 0);
