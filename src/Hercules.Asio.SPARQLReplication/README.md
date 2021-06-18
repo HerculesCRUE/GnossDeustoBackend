@@ -13,6 +13,10 @@
 # Acerca de SparqlReplication
 
 ![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20Hercules.Asio.SPARQLReplication/badge.svg)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=SPARQLReplication&metric=bugs)](https://sonarcloud.io/dashboard?id=SPARQLReplication)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=SPARQLReplication&metric=security_rating)](https://sonarcloud.io/dashboard?id=GestorDocumentacion)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=SPARQLReplication&metric=ncloc)](https://sonarcloud.io/dashboard?id=SPARQLReplication)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=SPARQLReplication&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=SPARQLReplication)
 
 El proyecto SparqlReplication es una aplicación en segundo plano que se encarga de ejecutar instrucciones SPARQL en un SPARQL Endpoint. Su función es servir como sistema de replicación, que repita las instruciones SPARQL de inserción, modificación o eliminación que se han ejecutado previamente sobre una base de datos RDF (maestro), en otra(s) base(s) de datos RDF (réplicas). 
 Cuando arranca la aplicación se queda escuchando los eventos que se envían a una cola de RabbitMQ. Cada evento que llega a esa cola será una instrucción SPARQL que se ejecutará en el o los servidores SPARQL réplica. 

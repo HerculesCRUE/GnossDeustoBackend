@@ -4,9 +4,11 @@
 // Excepción de validación
 using Linked_Data_Server.ViewModels;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Linked_Data_Server.Extra.Exceptions
 {
+    [ExcludeFromCodeCoverage]
     /// <summary>
     /// Excepción de validación
     /// </summary>

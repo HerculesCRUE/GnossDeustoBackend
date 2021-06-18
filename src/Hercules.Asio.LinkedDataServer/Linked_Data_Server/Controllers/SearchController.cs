@@ -1,4 +1,5 @@
-﻿using Linked_Data_Server.Models.Entities;
+﻿using Hercules.Asio.LinkedDataServer.Utility;
+using Linked_Data_Server.Models.Entities;
 using Linked_Data_Server.Models.Services;
 using Linked_Data_Server.Utility;
 using Microsoft.AspNetCore.Mvc;
@@ -14,14 +15,27 @@ namespace Linked_Data_Server.Controllers
     {
         private readonly static ConfigService mConfigService = new ConfigService();
         private readonly static Config_Linked_Data_Server mLinked_Data_Server_Config = LoadLinked_Data_Server_Config();
+        private readonly ISparqlUtility _sparqlUtility;
 
+        public SearchController(ISparqlUtility sparqlUtility)
+        {
+            _sparqlUtility = sparqlUtility;
+        }
         [HttpGet]
         public IActionResult Index(string q, int pagina)
+        {
+            SearchModelTemplate searchModelTemplate = GenerateSearchTemplate(q, pagina);
+
+            ViewData["Title"] = "Resultados para '" + q+"'";
+            return View(searchModelTemplate);
+        }
+        [NonAction]
+        public SearchModelTemplate GenerateSearchTemplate(string q, int pagina)
         {
             SearchModelTemplate searchModelTemplate = new SearchModelTemplate();
             searchModelTemplate.entidades = new Dictionary<string, SearchModelTemplate.Entidad>();
 
-            if(pagina == 0)
+            if (pagina == 0)
             {
                 pagina = 1;
             }
@@ -30,10 +44,11 @@ namespace Linked_Data_Server.Controllers
                                     {{
                                         ?s ?p ?o.
                                         ?s a ?rdfType.
-                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>) AND (lcase(?o) like'{q.ToLower()}*' OR lcase(?o) like'* {q.ToLower()}*'))
-                                    }}OFFSET {(pagina-1)*10} limit 11";
+                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>))
+                                        FILTER(regex(lcase(?o), '^{q.ToLower()}') || regex(lcase(?o), ' {q.ToLower()}'))
+                                    }}OFFSET {(pagina - 1) * 10} limit 11";
             string pXAppServer = "";
-            SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta,ref pXAppServer);
+            SparqlObject sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
             {
                 if (!searchModelTemplate.entidades.ContainsKey(row["s"].value))
@@ -46,14 +61,13 @@ namespace Linked_Data_Server.Controllers
             {
                 searchModelTemplate.paginaAnterior = pagina - 1;
             }
-            if (sparqlObject.results.bindings.Count()==11)
+            if (sparqlObject.results.bindings.Count() == 11)
             {
                 searchModelTemplate.paginaSiguiente = pagina + 1;
                 searchModelTemplate.entidades.Remove(searchModelTemplate.entidades.Last().Key);
             }
-            
-            ViewData["Title"] = "Resultados para '" + q+"'";
-            return View(searchModelTemplate);
+            return searchModelTemplate;
+
         }
 
         /// <summary>

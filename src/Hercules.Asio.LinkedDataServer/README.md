@@ -11,6 +11,8 @@
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=LinkedDataServer)
 
+![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20and%20test%20Hercules.Asio.LinkedDataServer/badge.svg)
+[![codecov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend/branch/master/graph/badge.svg?token=4SONQMD1TI&flag=linkedData)](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=LinkedDataServer&metric=bugs)](https://sonarcloud.io/dashboard?id=LinkedDataServer)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=LinkedDataServer&metric=security_rating)](https://sonarcloud.io/dashboard?id=LinkedDataServer)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=LinkedDataServer&metric=ncloc)](https://sonarcloud.io/dashboard?id=LinkedDataServer)

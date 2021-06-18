@@ -15,12 +15,15 @@ using VDS.RDF;
 using VDS.RDF.Parsing;
 using Linked_Data_Server.Models.Entities;
 using Linked_Data_Server.Models.Services;
+using System.Diagnostics.CodeAnalysis;
+using Hercules.Asio.LinkedDataServer.Utility;
 
 namespace Linked_Data_Server.Utility
 {
-    public static class SparqlUtility
+    [ExcludeFromCodeCoverage]
+    public class SparqlUtility : ISparqlUtility
     {
-        public static SparqlObject SelectData(ConfigService pConfigService, string pGraph, string pConsulta, ref string pXAppServer)
+        public SparqlObject SelectData(ConfigService pConfigService, string pGraph, string pConsulta, ref string pXAppServer)
         {
             SparqlObject datosDBpedia = null;
             string urlConsulta = pConfigService.GetSparqlEndpoint();

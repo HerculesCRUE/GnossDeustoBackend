@@ -12,7 +12,10 @@
 
 # Acerca de SAML
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/workflows/Build%20Hercules.Asio.SPARQLReplication/badge.svg)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=SAML&metric=bugs)](https://sonarcloud.io/dashboard?id=SAML)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=SAML&metric=security_rating)](https://sonarcloud.io/dashboard?id=SAML)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=SAML&metric=ncloc)](https://sonarcloud.io/dashboard?id=SAML)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=SAML&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=SAML)
 
 SAML es un tipo de servicio SSO (Single Sign On) capaz de intercambiar información del usuario mediante un identity provider y un service provider. 
 La función principal es de dar seguridad y permisos a los distintos usuarios que naveguen por la web sin comprometer sus datos.

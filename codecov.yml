@@ -22,6 +22,11 @@ coverage:
         target: auto
         flags:
           - pages
+      linkedData:
+        target: auto
+         flags:
+          - linkedData
+          
 comment:
   layout: "reach, diff, flags, files"
   behavior: default
@@ -48,4 +53,9 @@ flags:
   pages:
     paths:
       -src/Hercules.Asio.DinamicPages
+  linkedData:
+    paths:
+      -src/Hercules.Asio.LinkedDataServer
+    ignore:
+      - Linked_Data_Server/Views
     carryforward: false
