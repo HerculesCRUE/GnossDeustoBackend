@@ -125,6 +125,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return Problem(ex.ToString());
             }
         }
