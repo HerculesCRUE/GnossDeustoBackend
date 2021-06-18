@@ -83,8 +83,10 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
                     client.DefaultRequestHeaders.Add("Authorization",$"{token.token_type} {token.access_token}");
                 }
                 except.AppendLine("Paso el if del token ------------------------");
-                response = client.GetAsync($"{urlBase}{urlMethod}").Result;
-                except.AppendLine("Hago la llamada con cliente y cojo el result-----------------");
+                var javi = client.GetAsync($"{urlBase}{urlMethod}");
+                except.AppendLine("Hago la llamada con el cliente ---------------");
+                response = javi.Result;
+                except.AppendLine("Cojo el result-----------------");
                 response.EnsureSuccessStatusCode();
                 result = response.Content.ReadAsStringAsync().Result;
             }
