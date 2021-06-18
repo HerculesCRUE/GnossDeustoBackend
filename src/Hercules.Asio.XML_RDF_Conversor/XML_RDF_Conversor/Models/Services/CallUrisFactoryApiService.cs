@@ -7,15 +7,17 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
 {
+    [ExcludeFromCodeCoverage]
     /// <summary>
     /// clase para realizar llamadas al api de uris factory
     /// </summary>
-    public class CallUrisFactoryApiService 
+    public class CallUrisFactoryApiService : ICallUrisFactoryApiService
     {
         readonly CallApiService _serviceApi;
         readonly static string _urlFactory = "Factory";

@@ -16,7 +16,7 @@ using System.Text;
 
 namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
 {
-    
+    [ExcludeFromCodeCoverage]
     /// <summary>
     /// Servicio para hacer llamadas a un api
     /// </summary>
@@ -28,7 +28,6 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
         public CallApiService()
         {
         }
-        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Hace una petición delete
         /// </summary>
@@ -74,7 +73,6 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
         {
             string result = "";
             HttpResponseMessage response = null;
-            StringBuilder except = new StringBuilder();
             try
             {
                 HttpClient client = new HttpClient();
@@ -82,17 +80,14 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
                 { 
                     client.DefaultRequestHeaders.Add("Authorization",$"{token.token_type} {token.access_token}");
                 }
-                except.AppendLine("Paso el if del token ------------------------");
                 var javi = client.GetAsync($"{urlBase}{urlMethod}");
-                except.AppendLine("Hago la llamada con el cliente ---------------");
                 response = javi.Result;
-                except.AppendLine("Cojo el result-----------------");
                 response.EnsureSuccessStatusCode();
                 result = response.Content.ReadAsStringAsync().Result;
             }
             catch (HttpRequestException)
             {
-                //StringBuilder except = new StringBuilder();
+                StringBuilder except = new StringBuilder();
                 except.AppendLine($"Url del intento de llamada: {urlBase}{urlMethod} --------- error: ");
                 if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
                 {
@@ -107,14 +102,13 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
             }
             catch(Exception ex)
             {
-                
+                StringBuilder except = new StringBuilder();
                 except.AppendLine($"Url del intento de llamada: {urlBase}{urlMethod} --------- error: ");
                 except.AppendLine(ex.Message);
                 throw new ArgumentNullException(except.ToString());
             }
             return result;
         }
-        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Hace una petición post al api
         /// </summary>
@@ -184,7 +178,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
                 }
             }
         }
-        [ExcludeFromCodeCoverage]
+
         /// <summary>
         /// Hace una petición post
         /// </summary>
@@ -236,7 +230,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
                 }
             }
         }
-        [ExcludeFromCodeCoverage]
+
         /// <summary>
         /// Hace una petición put
         /// </summary>

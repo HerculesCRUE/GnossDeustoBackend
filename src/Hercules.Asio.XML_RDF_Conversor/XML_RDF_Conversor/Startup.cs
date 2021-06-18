@@ -110,7 +110,7 @@ namespace Hercules.Asio.XML_RDF_Conversor
 
             services.AddSingleton(typeof(ConfigUrlService));
             services.AddScoped(typeof(CallApiService));
-            services.AddScoped(typeof(CallUrisFactoryApiService));
+            services.AddScoped<ICallUrisFactoryApiService, CallUrisFactoryApiService>();
             services.AddScoped(typeof(CallTokenService));
 
         }

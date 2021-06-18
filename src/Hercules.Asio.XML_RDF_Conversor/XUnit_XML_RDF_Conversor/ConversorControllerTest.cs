@@ -24,8 +24,12 @@ namespace XUnit_XML_RDF_Conversor
         [Fact]
         public void TestConvert()
         {
+            //ConfigUrlService configUrlService = new ConfigUrlService(ConfigUrlService.GetBuildConfiguration());
+            //CallUrisFactoryApiService callUrisFactoryApiService = new CallUrisFactoryApiService(new CallApiService(), null, configUrlService);
+            //ConversorController conversorController = new ConversorController(null, callUrisFactoryApiService);
             ConfigUrlService configUrlService = new ConfigUrlService(ConfigUrlService.GetBuildConfiguration());
-            CallUrisFactoryApiService callUrisFactoryApiService = new CallUrisFactoryApiService(new CallApiService(), null, configUrlService);
+
+            CallUrisFactoryApiMockService callUrisFactoryApiService = new CallUrisFactoryApiMockService();
             ConversorController conversorController = new ConversorController(null, callUrisFactoryApiService);
             string xml = File.ReadAllText("Documents/xml.txt");
             var stream = new MemoryStream();
