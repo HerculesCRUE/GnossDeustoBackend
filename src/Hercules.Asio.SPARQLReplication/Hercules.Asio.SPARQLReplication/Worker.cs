@@ -160,6 +160,7 @@ namespace Hercules.Asio.SPARQLReplication
                 {
                     throw exception;
                 }
+                webClient.Dispose();
                 return "";
             }
             catch (Exception e)
