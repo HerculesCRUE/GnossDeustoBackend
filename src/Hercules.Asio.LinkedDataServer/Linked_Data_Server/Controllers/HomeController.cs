@@ -67,7 +67,7 @@ namespace Linked_Data_Server.Controllers
             EntityModelTemplate entityModel = new EntityModelTemplate();
 
             //Customizamos Header
-            if (!string.IsNullOrEmpty(mConfigService.GetConstrainedByUrl()))
+            if (!string.IsNullOrEmpty(mConfigService.GetConstrainedByUrl()) && HttpContext != null)
             {
                 HttpContext.Response.Headers.Add("Link", "<http://www.w3.org/ns/ldp#BasicContainer>; rel=\"type\", <http://www.w3.org/ns/ldp#Resource>; rel=\"type\", <" + mConfigService.GetConstrainedByUrl() + ">; rel=\"http://www.w3.org/ns/ldp#constrainedBy\"");
             }
