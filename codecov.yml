@@ -57,5 +57,5 @@ flags:
     paths:
       -src/Hercules.Asio.LinkedDataServer
     ignore:
-      - "Linked_Data_Server/Views"
+      - Linked_Data_Server/Views
     carryforward: false
