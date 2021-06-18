@@ -26,6 +26,10 @@ coverage:
         target: auto
          flags:
           - linkedData
+      xmlToRdf:
+        target: auto
+        flags:
+          - xmlToRdf
           
 comment:
   layout: "reach, diff, flags, files"
@@ -58,4 +62,7 @@ flags:
       -src/Hercules.Asio.LinkedDataServer
     ignore:
       - Linked_Data_Server/Views
+  xmlToRdf:
+    paths:
+      - src/Hercules.Asio.XML_RDF_Conversor
     carryforward: false
