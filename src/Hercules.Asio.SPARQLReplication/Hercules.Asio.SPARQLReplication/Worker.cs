@@ -23,7 +23,6 @@ namespace Hercules.Asio.SPARQLReplication
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private ConnectionFactory _connectionFactory;
         private IConnection _connection;
         private IModel _channel;
         private string QueueName;
@@ -31,7 +30,7 @@ namespace Hercules.Asio.SPARQLReplication
         private string _urlSparqlServer;
         private string _userSparqlServer;
         private string _passwordSparqlServer;
-        IDictionary _environmentVariables;
+        readonly IDictionary _environmentVariables;
         public Worker(IServiceProvider services, ILogger<Worker> logger)
         {
             Services = services;
@@ -44,7 +43,7 @@ namespace Hercules.Asio.SPARQLReplication
         {
             _configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true).Build();
             _urlSparqlServer = GetConfiguration("SparqlServer_Url");
-            _connectionFactory = new ConnectionFactory();
+            ConnectionFactory _connectionFactory = new ConnectionFactory();
 
             _connectionFactory.HostName = GetConfiguration("RabbitMQ_Hostname");
             _connectionFactory.UserName = GetConfiguration("RabbitMQ_User");
@@ -58,8 +57,7 @@ namespace Hercules.Asio.SPARQLReplication
 
             _connection = _connectionFactory.CreateConnection();
             _channel = _connection.CreateModel();
-            _channel.QueueDeclare(QueueName, true, false, false);
-            //_channel.QueueDeclarePassive(QueueName);
+            _channel.QueueDeclare(QueueName, true, false, false);            
             _channel.BasicQos(0, 1, false);
             _logger.LogInformation($"Queue [{QueueName}] is waiting for messages.");
 
@@ -81,9 +79,9 @@ namespace Hercules.Asio.SPARQLReplication
             return value;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {       
-            stoppingToken.ThrowIfCancellationRequested();
+        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
             string resultadoWebRequest = "";
             var consumer = new AsyncEventingBasicConsumer(_channel);
 
