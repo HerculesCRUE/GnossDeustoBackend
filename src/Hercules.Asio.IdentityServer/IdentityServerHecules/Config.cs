@@ -34,8 +34,7 @@ namespace IdentityServerHecules
                     new Secret("secret".Sha256())
                 },
                 AllowedScopes = {"apiCarga","apiConversor","apiOAIPMH"},
-                AccessTokenLifetime = 86400,
-                AccessTokenType = AccessTokenType.Reference
+                AccessTokenLifetime = 86400
             },
             new Client
             {
@@ -46,8 +45,7 @@ namespace IdentityServerHecules
                     new Secret("secretCron".Sha256())
                 },
                 AllowedScopes = {"apiCron","apiCarga"},
-                AccessTokenLifetime = 86400,
-                AccessTokenType = AccessTokenType.Reference
+                AccessTokenLifetime = 86400
             }
             ,
             new Client
@@ -59,8 +57,7 @@ namespace IdentityServerHecules
                     new Secret("master".Sha256())
                 },
                 AllowedScopes = {"apiCron", "apiCarga", "apiUrisFactory", "apiGestorDocumentacion","apiConversor","apiOAIPMH"},
-                AccessTokenLifetime = 86400,
-                AccessTokenType = AccessTokenType.Reference
+                AccessTokenLifetime = 86400
             },
             new Client
             {
@@ -70,8 +67,7 @@ namespace IdentityServerHecules
                 {
                     new Secret("secretUris".Sha256())
                 },
-                AccessTokenLifetime = 86400,
-                AccessTokenType = AccessTokenType.Reference
+                AccessTokenLifetime = 86400
             },
             new Client
             {
@@ -82,8 +78,7 @@ namespace IdentityServerHecules
                     new Secret("secretGestorDocumentacion".Sha256())
                 },
                 AllowedScopes = { "apiGestorDocumentacion"},
-                AccessTokenLifetime = 86400,
-                AccessTokenType = AccessTokenType.Reference
+                AccessTokenLifetime = 86400
             },
             new Client
             {
@@ -94,8 +89,7 @@ namespace IdentityServerHecules
                     new Secret("secretDiscover".Sha256())
                 },
                 AllowedScopes = {"apiCron", "apiCarga","apiUrisFactory"},
-                AccessTokenLifetime = 86400,
-                AccessTokenType = AccessTokenType.Reference
+                AccessTokenLifetime = 86400
             },
             new Client
             {
@@ -107,7 +101,6 @@ namespace IdentityServerHecules
                 },
                 AllowedScopes = { "apiUrisFactory"},
                 AccessTokenLifetime = 86400,
-                AccessTokenType = AccessTokenType.Reference
             }
         };
         }
