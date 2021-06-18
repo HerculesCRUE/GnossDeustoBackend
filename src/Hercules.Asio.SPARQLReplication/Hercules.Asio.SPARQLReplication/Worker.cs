@@ -79,9 +79,9 @@ namespace Hercules.Asio.SPARQLReplication
             return value;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            cancellationToken.ThrowIfCancellationRequested();
+            stoppingToken.ThrowIfCancellationRequested();
             string resultadoWebRequest = "";
             var consumer = new AsyncEventingBasicConsumer(_channel);
 
@@ -109,9 +109,9 @@ namespace Hercules.Asio.SPARQLReplication
 
             await Task.CompletedTask;
         }
-        public override async Task StopAsync(CancellationToken stoppingToken)
+        public override async Task StopAsync(CancellationToken cancellationToken)
         {
-            await base.StopAsync(stoppingToken);
+            await base.StopAsync(cancellationToken);
             _connection.Close();
             _logger.LogInformation("RabbitMQ connection is closed.");
         }
