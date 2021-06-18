@@ -55,14 +55,20 @@ namespace CargaDataSetMurcia.Model
             GenerarActividades(outputFolder + "/Actividades/", pUrlUrisFactory, congresos, exposiciones, autoresCongresos, autoresExposiciones, personas);
         }
 
-        public static void PublicarRDF(string pUriUrisFactory, List<SparqlConfig> pSparqlASIO, string pSparqlASIO_Graph)
+        public static void PublicarRDF(string pUriUrisFactory, List<SparqlConfig> pSparqlASIO, string pSparqlASIO_Graph, string pSparqlASIO_Domain, List<SparqlConfig> pSparqlUnidata, string pSparqlUnidata_Graph, string pSparqlUnidata_Domain)
         {
             string sparqlASIO_Graph_temp = pSparqlASIO_Graph + "_temporal";
+            string sparqlUnidata_Graph_temp = pSparqlUnidata_Graph + "_temporal";
 
             #region Eliminamos los grafos temporales
             foreach (SparqlConfig sparqlConfig in pSparqlASIO)
             {
                 SparqlUtility.SelectData(sparqlConfig.endpoint, sparqlASIO_Graph_temp, $"DROP SILENT GRAPH <{sparqlASIO_Graph_temp }>", sparqlConfig.username, sparqlConfig.pass);
+            }
+            foreach (SparqlConfig sparqlConfig in pSparqlUnidata)
+            {
+
+                SparqlUtility.SelectData(sparqlConfig.endpoint, sparqlUnidata_Graph_temp, $"DROP SILENT GRAPH <{sparqlUnidata_Graph_temp }>", sparqlConfig.username, sparqlConfig.pass);
             }
             #endregion
 
@@ -70,6 +76,10 @@ namespace CargaDataSetMurcia.Model
             foreach (SparqlConfig sparqlConfig in pSparqlASIO)
             {
                 SparqlUtility.SelectData(sparqlConfig.endpoint, sparqlASIO_Graph_temp, $"CREATE GRAPH <{sparqlASIO_Graph_temp }>", sparqlConfig.username, sparqlConfig.pass);
+            }
+            foreach (SparqlConfig sparqlConfig in pSparqlUnidata)
+            {
+                SparqlUtility.SelectData(sparqlConfig.endpoint, sparqlUnidata_Graph_temp, $"CREATE GRAPH <{sparqlUnidata_Graph_temp }>", sparqlConfig.username, sparqlConfig.pass);
             }
             #endregion
 
@@ -107,8 +117,58 @@ namespace CargaDataSetMurcia.Model
                     INode o = asioGeneralGraph.CreateLiteralNode("https://www.um.es/");
                     asioGeneralGraph.Assert(new Triple(s, p, o));
                 }
-                CargarGrafo(asioGeneralGraph, pSparqlASIO, pSparqlASIO_Graph, pUriUrisFactory);
+                CargarGrafo(asioGeneralGraph, pSparqlASIO, pSparqlASIO_Graph, pSparqlASIO_Domain, null, null, null, pUriUrisFactory);
 
+            }
+            //Si existe Unidata creamos los triples generales
+            if (pSparqlUnidata.Count > 0)
+            {
+                //Unidata
+                Graph unidataGeneralGraph = new Graph();
+                {
+                    INode s = unidataGeneralGraph.CreateUriNode(UriFactory.Create(pSparqlUnidata_Graph));
+                    INode p = unidataGeneralGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+                    INode o = unidataGeneralGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#Graph"));
+                    unidataGeneralGraph.Assert(new Triple(s, p, o));
+                }
+                string uriOrgUnidata = GetUri(pUriUrisFactory, unidataGeneralGraph, "http://purl.org/roh/mirror/foaf#Organization", "ASIO Unidata").ToString().Replace(pSparqlASIO_Domain, pSparqlUnidata_Domain);
+                {
+                    INode s = unidataGeneralGraph.CreateUriNode(UriFactory.Create(pSparqlUnidata_Graph));
+                    INode p = unidataGeneralGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/ns/prov#wasAttributedTo"));
+                    INode o = unidataGeneralGraph.CreateUriNode(UriFactory.Create(uriOrgUnidata));
+                    unidataGeneralGraph.Assert(new Triple(s, p, o));
+                }
+                {
+
+                    INode s = unidataGeneralGraph.CreateUriNode(UriFactory.Create(uriOrgUnidata));
+                    INode p = unidataGeneralGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+                    INode o = unidataGeneralGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#Organization"));
+                    unidataGeneralGraph.Assert(new Triple(s, p, o));
+                }
+                {
+                    INode s = unidataGeneralGraph.CreateUriNode(UriFactory.Create(uriOrgUnidata));
+                    INode p = unidataGeneralGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#name"));
+                    INode o = unidataGeneralGraph.CreateLiteralNode("ASIO Unidata");
+                    unidataGeneralGraph.Assert(new Triple(s, p, o));
+                }
+
+                string uriOrgMurcia = GetUri(pUriUrisFactory, unidataGeneralGraph, "http://purl.org/roh/mirror/vivo#University", "um").ToString().Replace(pSparqlASIO_Domain, pSparqlUnidata_Domain);
+                {
+
+                    INode s = unidataGeneralGraph.CreateUriNode(UriFactory.Create(uriOrgMurcia));
+                    INode p = unidataGeneralGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+                    INode o = unidataGeneralGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/vivo#University"));
+                    unidataGeneralGraph.Assert(new Triple(s, p, o));
+                }
+                {
+                    INode s = unidataGeneralGraph.CreateUriNode(UriFactory.Create(uriOrgMurcia));
+                    INode p = unidataGeneralGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#name"));
+                    INode o = unidataGeneralGraph.CreateLiteralNode("Universidad de Murcia");
+                    unidataGeneralGraph.Assert(new Triple(s, p, o));
+                }
+
+
+                CargarGrafo(unidataGeneralGraph, null, null, pSparqlASIO_Domain, pSparqlUnidata, pSparqlUnidata_Graph, pSparqlUnidata_Domain, pUriUrisFactory);
             }
 
             #endregion
@@ -153,7 +213,7 @@ namespace CargaDataSetMurcia.Model
                     grafoCarga.Merge(g);
                     if (numEntities >= 100)
                     {
-                        CargarGrafo(grafoCarga, pSparqlASIO, pSparqlASIO_Graph, pUriUrisFactory);
+                        CargarGrafo(grafoCarga, pSparqlASIO, pSparqlASIO_Graph, pSparqlASIO_Domain, pSparqlUnidata, pSparqlUnidata_Graph, pSparqlUnidata_Domain, pUriUrisFactory);
                         numEntities = 0;
                         grafoCarga = new Graph();
                         Console.Write($"\rPublicandoRDFs {numProcesados}/{numTotal}");
@@ -161,7 +221,7 @@ namespace CargaDataSetMurcia.Model
 
                 }
             }
-            CargarGrafo(grafoCarga, pSparqlASIO, pSparqlASIO_Graph,  pUriUrisFactory);
+            CargarGrafo(grafoCarga, pSparqlASIO, pSparqlASIO_Graph, pSparqlASIO_Domain, pSparqlUnidata, pSparqlUnidata_Graph, pSparqlUnidata_Domain, pUriUrisFactory);
             Console.WriteLine($"\rPublicandoRDFs {numProcesados}/{numTotal}");
             #endregion
 
@@ -170,9 +230,14 @@ namespace CargaDataSetMurcia.Model
             {
                 SparqlUtility.SelectData(sparqlConfig.endpoint, sparqlASIO_Graph_temp, $"MOVE <{sparqlASIO_Graph_temp }> TO <{pSparqlASIO_Graph }>", sparqlConfig.username, sparqlConfig.pass);
             }
+            foreach (SparqlConfig sparqlConfig in pSparqlUnidata)
+            {
+
+                SparqlUtility.SelectData(sparqlConfig.endpoint, sparqlUnidata_Graph_temp, $"MOVE <{sparqlUnidata_Graph_temp }> TO <{pSparqlUnidata_Graph }>", sparqlConfig.username, sparqlConfig.pass);
+            }
         }
 
-        private static void CargarGrafo(Graph pGraph, List<SparqlConfig> pSparqlASIO, string pSparqlASIO_Graph, string pUriUrisFactory)
+        private static void CargarGrafo(Graph pGraph, List<SparqlConfig> pSparqlASIO, string pSparqlASIO_Graph, string pSparqlASIO_Domain, List<SparqlConfig> pSparqlUnidata, string pSparqlUnidata_Graph, string pSparqlUnidata_Domain, string pUriUrisFactory)
         {
             //Obtenemos sujetos del grafo a cargar en ASIO
             HashSet<string> asioSubjects = new HashSet<string>();
@@ -185,22 +250,113 @@ namespace CargaDataSetMurcia.Model
                 }
             }
 
-
-            //Modificamos el grafo para añadir la fecha de actualización
-            foreach (string id in asioSubjects)
+            //Obtenemos objetos del grafo a cargar en ASIO
+            HashSet<string> asioObjects = new HashSet<string>();
             {
-                INode sSameAs = pGraph.CreateUriNode(UriFactory.Create(id));
-                INode pSameAs = pGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/ns/prov#endedAtTime"));
-                INode oSameAs = pGraph.CreateLiteralNode(DateTime.UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss.fffzzzzz"), UriFactory.Create("http://www.w3.org/2001/XMLSchema#datetime"));
-                pGraph.Assert(new Triple(sSameAs, pSameAs, oSameAs));
+                SparqlResultSet sparqlResultSet = (SparqlResultSet)pGraph.ExecuteQuery("select distinct ?o where{?s ?p ?o. FILTER(isURI(?o))}");
+                foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
+                {
+                    string o = sparqlResult["o"].ToString();
+                    if (o.StartsWith(pSparqlASIO_Domain))
+                    {
+                        asioObjects.Add(o);
+                    }
+                }
             }
+
+            //Preparamos el grafo de ASIO
+            Graph asioGRaph = CloneGraph(pGraph);
+
+            //Si existe Unidata y ASIO creamos los sameAs
+            if (pSparqlUnidata != null && pSparqlUnidata.Count > 0 && pSparqlASIO != null && pSparqlASIO.Count > 0)
+            {
+                //Insertamos en todas las entidades cuyo sujeto tenga 'domainASIO' un sameAs hacia la misma URL pero con el dominio 'domainUnidata'
+                foreach (string uri in asioSubjects)
+                {
+                    IUriNode sSameAs = asioGRaph.CreateUriNode(UriFactory.Create(uri));
+                    IUriNode pSameAs = asioGRaph.CreateUriNode(UriFactory.Create("http://www.w3.org/2002/07/owl#sameAs"));
+                    IUriNode oSameAs = asioGRaph.CreateUriNode(UriFactory.Create(pSparqlUnidata_Domain + uri.Substring(pSparqlASIO_Domain.Length)));
+                    asioGRaph.Assert(new Triple(sSameAs, pSameAs, oSameAs));
+                }
+            }
+
 
             //Insertamos en el triplestore de ASIO
             if (pSparqlASIO != null)
             {
                 foreach (SparqlConfig sparqlConfig in pSparqlASIO)
                 {
-                    SparqlUtility.LoadTriples(SparqlUtility.GetTriplesFromGraph(pGraph), sparqlConfig.endpoint, pSparqlASIO_Graph + "_temporal", sparqlConfig.username, sparqlConfig.pass);
+                    SparqlUtility.LoadTriples(SparqlUtility.GetTriplesFromGraph(asioGRaph), sparqlConfig.endpoint, pSparqlASIO_Graph + "_temporal", sparqlConfig.username, sparqlConfig.pass);
+                }
+            }
+
+            //Si existe Unidata hacemos la carga en Unidata
+            if (pSparqlUnidata != null && pSparqlUnidata.Count > 0)
+            {
+                //Creamos el grafo de unidata
+                Graph unidataGraph = CloneGraph(pGraph);
+                //Modificamos todas las uris de sujetos u objetos que contengan 'domainASIO' por la misma url pero cambiando el dominio por 'domainUnidata'
+                TripleStore store = new TripleStore();
+                store.Add(unidataGraph);
+                LeviathanUpdateProcessor processor = new LeviathanUpdateProcessor(store);
+                foreach (string sujeto in asioSubjects)
+                {
+                    if (sujeto.StartsWith(pSparqlASIO_Domain))
+                    {
+                        SparqlUpdateParser parser = new SparqlUpdateParser();
+                        SparqlUpdateCommandSet updateSubjects = parser.ParseFromString(@$"  DELETE {{ ?s ?p ?o. }}
+                                                                                    INSERT {{ ?newS ?p ?o. }}
+                                                                                    WHERE 
+                                                                                    {{
+                                                                                        ?s ?p ?o.   
+                                                                                        FILTER(?s =<{sujeto}>)
+                                                                                        BIND(<{pSparqlUnidata_Domain + sujeto.Substring(pSparqlASIO_Domain.Length)}> as ?newS)
+                                                                                    }}");
+                        processor.ProcessCommandSet(updateSubjects);
+                    }
+                }
+                foreach (string objeto in asioObjects)
+                {
+                    if (objeto.StartsWith(pSparqlASIO_Domain))
+                    {
+                        SparqlUpdateParser parser = new SparqlUpdateParser();
+                        //Creamos SameAs los sujetos
+                        SparqlUpdateCommandSet createSameAs = parser.ParseFromString(@$"    DELETE {{ ?s ?p ?o. }}
+                                                                                    INSERT {{ ?s ?p ?newO. }}
+                                                                                    WHERE 
+                                                                                    {{
+                                                                                        ?s ?p ?o.   
+                                                                                        FILTER(?o =<{objeto}>)
+                                                                                        BIND(<{pSparqlUnidata_Domain + objeto.Substring(pSparqlASIO_Domain.Length)}> as ?newO)
+                                                                                    }}");
+                        processor.ProcessCommandSet(createSameAs);
+                    }
+                }
+                //Insertamos los sameAs
+                if (pSparqlUnidata != null && pSparqlUnidata.Count > 0 && pSparqlASIO != null && pSparqlASIO.Count > 0)
+                {
+                    foreach (string uri in asioSubjects)
+                    {
+                        IUriNode sSameAs = unidataGraph.CreateUriNode(UriFactory.Create(pSparqlUnidata_Domain + uri.Substring(pSparqlASIO_Domain.Length)));
+                        IUriNode pSameAs = unidataGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/2002/07/owl#sameAs"));
+                        IUriNode oSameAs = unidataGraph.CreateUriNode(UriFactory.Create(uri));
+                        unidataGraph.Assert(new Triple(sSameAs, pSameAs, oSameAs));
+                    }
+                }
+
+                foreach (string uri in asioSubjects)
+                {
+                    IUriNode sProv = unidataGraph.CreateUriNode(UriFactory.Create(pSparqlUnidata_Domain + uri.Substring(pSparqlASIO_Domain.Length)));
+                    IUriNode pProv = unidataGraph.CreateUriNode(UriFactory.Create("http://www.w3.org/ns/prov#wasAttributedTo"));
+                    string uriOrgMurcia = GetUri(pUriUrisFactory, unidataGraph, "http://purl.org/roh/mirror/vivo#University", "um").ToString().Replace(pSparqlASIO_Domain, pSparqlUnidata_Domain);
+                    IUriNode oProv = unidataGraph.CreateUriNode(UriFactory.Create(uriOrgMurcia));
+                    unidataGraph.Assert(new Triple(sProv, pProv, oProv));
+                }
+
+                //Insertamos en el triplestore de Unidata
+                foreach (SparqlConfig sparqlConfig in pSparqlUnidata)
+                {
+                    SparqlUtility.LoadTriples(SparqlUtility.GetTriplesFromGraph(unidataGraph), sparqlConfig.endpoint, pSparqlUnidata_Graph + "_temporal", sparqlConfig.username, sparqlConfig.pass);
                 }
             }
         }
@@ -714,7 +870,7 @@ namespace CargaDataSetMurcia.Model
                             elemento.FECHAFINPROYECTO = node.SelectSingleNode("FECHAFINPROYECTO").InnerText;
                             break;
                         case "CODTIPOMOTIVOCAMBIOFECHA":
-                            elemento.CODTIPOMOTIVOCAMBIOFECHA = node.SelectSingleNode("CODTIPOMOTIVOCAMBIOFECHA").InnerText;
+                            //elemento.CODTIPOMOTIVOCAMBIOFECHA = node.SelectSingleNode("CODTIPOMOTIVOCAMBIOFECHA").InnerText;
                             break;
                         case "MOTIVOCAMBIOFECHA":
                             elemento.MOTIVOCAMBIOFECHA = node.SelectSingleNode("MOTIVOCAMBIOFECHA").InnerText;
