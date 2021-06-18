@@ -15,7 +15,7 @@
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=XML_RDF_Conversor&metric=bugs)](https://sonarcloud.io/dashboard?id=XML_RDF_Conversor)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=XML_RDF_Conversor&metric=security_rating)](https://sonarcloud.io/dashboard?id=GestorDocumentacion)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=XML_RDF_Conversor&metric=ncloc)](https://sonarcloud.io/dashboard?id=XML_RDF_Conversor)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=XML_RDF_Conversor&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=GestorDocumentacion)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=XML_RDF_Conversor&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=XML_RDF_Conversor)
 
 Accesible en el entorno de desarrollo en esta dirección a través de swagger: http://herc-as-front-desa.atica.um.es/conversor_xml_rdf/swagger/index.html.
 
