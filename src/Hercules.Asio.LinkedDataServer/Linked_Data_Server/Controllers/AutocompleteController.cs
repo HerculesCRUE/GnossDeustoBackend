@@ -18,6 +18,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using Newtonsoft.Json;
+using Hercules.Asio.LinkedDataServer.Utility;
 
 namespace Linked_Data_Server.Controllers
 {
@@ -27,23 +28,26 @@ namespace Linked_Data_Server.Controllers
         private readonly static ConfigService mConfigService = new ConfigService();
         private readonly static Config_Linked_Data_Server mLinked_Data_Server_Config = LoadLinked_Data_Server_Config();
         private readonly ILogger<HomeController> _logger;
+        private readonly ISparqlUtility _sparqlUtility;
 
-        public AutocompleteController(ILogger<HomeController> logger)
+        public AutocompleteController(ISparqlUtility sparqlUtility, ILogger<HomeController> logger)
         {
             _logger = logger;
+            _sparqlUtility = sparqlUtility;
         }
 
 
         public IActionResult Index(string q)
         {
             List<KeyValuePair<string, string>> response = new List<KeyValuePair<string, string>>();
-            string consulta = @$"   select distinct ?s ?o where 
+            string consulta = @$"     select distinct ?s ?o where 
                                     {{
                                         ?s ?p ?o.
-                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>) AND (lcase(?o) like'{q.ToLower()}*' OR lcase(?o) like'* {q.ToLower()}*'))
-                                    }}limit 10";
+                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>))
+                                        FILTER(regex(lcase(?o), '^{q.ToLower()}') || regex(lcase(?o), ' {q.ToLower()}'))
+                                    }}limit 10 ";
             string pXAppServer = "";
-            SparqlObject sparqlObject = SparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta,ref pXAppServer);
+            SparqlObject sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta,ref pXAppServer);
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
             {
                 response.Add(new KeyValuePair<string, string>(row["o"].value, row["s"].value));
