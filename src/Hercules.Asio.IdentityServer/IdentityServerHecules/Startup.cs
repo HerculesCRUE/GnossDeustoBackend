@@ -97,7 +97,7 @@ namespace IdentityServerHecules
                         );
 
                     // this enables automatic token cleanup. this is optional.
-                    options.EnableTokenCleanup = true;
+                    options.EnableTokenCleanup = false;
                     options.TokenCleanupInterval = 604800;
                 });
 
