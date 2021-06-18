@@ -20,10 +20,13 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
     /// </summary>
     public class CallApiService
     {
-        
+        /// <summary>
+        /// CallApiService
+        /// </summary>
         public CallApiService()
         {
         }
+
         /// <summary>
         /// Hace una petición delete
         /// </summary>
@@ -100,7 +103,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
                 StringBuilder except = new StringBuilder();
                 except.AppendLine($"Url del intento de llamada: {urlBase}{urlMethod} --------- error: ");
                 except.AppendLine(ex.Message);
-                throw new Exception(except.ToString());
+                throw new ArgumentNullException(except.ToString());
             }
             return result;
         }
@@ -114,6 +117,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
         /// <param name="item">objeto a pasar</param>
         /// <param name="isFile">si el objeto pasado es un fichero</param>
         /// <param name="fileName">nombre del parametro del fichero, en el caso de que el objeto pasado sea un fichero</param>
+        /// <param name="sparql">si tiene sparql o no</param>
         public string CallPostApi(string urlBase, string urlMethod, object item, TokenBearer token = null, bool isFile = false, string fileName = "rdfFile", bool sparql = false)
         {
             HttpContent contentData = null;
@@ -157,7 +161,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
                 result = response.Content.ReadAsStringAsync().Result;
                 return result;
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 if (response.StatusCode.Equals(HttpStatusCode.BadRequest))
                 {

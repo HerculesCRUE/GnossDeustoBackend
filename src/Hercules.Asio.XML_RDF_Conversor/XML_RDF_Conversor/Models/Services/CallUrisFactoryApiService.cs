@@ -19,9 +19,15 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
     {
         readonly CallApiService _serviceApi;
         readonly static string _urlFactory = "Factory";
-        readonly static string _urlSchema = "Schema";
         readonly TokenBearer _token;
         readonly ConfigUrlService _serviceUrl;
+
+        /// <summary>
+        /// Servicio.
+        /// </summary>
+        /// <param name="serviceApi"></param>
+        /// <param name="tokenService"></param>
+        /// <param name="serviceUrl"></param>
         public CallUrisFactoryApiService(CallApiService serviceApi, CallTokenService tokenService,ConfigUrlService serviceUrl)
         {
             _serviceUrl = serviceUrl;

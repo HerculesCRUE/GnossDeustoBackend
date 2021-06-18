@@ -11,15 +11,27 @@ namespace Hercules.Asio.XML_RDF_Conversor.Extra.Exceptions
     /// </summary>
     public class BadRequestException : Exception
     {
+        /// <summary>
+        /// BadRequestException
+        /// </summary>
         public BadRequestException()
         {
         }
 
+        /// <summary>
+        /// BadRequestException
+        /// </summary>
+        /// <param name="message"></param>
         public BadRequestException(string message)
             : base(message)
         {
         }
 
+        /// <summary>
+        /// BadRequestException
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="inner"></param>
         public BadRequestException(string message, Exception inner)
             : base(message, inner)
         {

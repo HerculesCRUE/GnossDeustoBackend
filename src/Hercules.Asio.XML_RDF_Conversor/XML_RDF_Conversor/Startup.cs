@@ -159,8 +159,17 @@ namespace Hercules.Asio.XML_RDF_Conversor
             });
         }
     }
+
+    /// <summary>
+    /// AllowAnonymous
+    /// </summary>
     public class AllowAnonymous : IAuthorizationHandler
     {
+        /// <summary>
+        /// HandleAsync
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public Task HandleAsync(AuthorizationHandlerContext context)
         {
             foreach (IAuthorizationRequirement requirement in context.PendingRequirements.ToList())

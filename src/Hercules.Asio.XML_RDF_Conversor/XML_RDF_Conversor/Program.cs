@@ -12,7 +12,7 @@ namespace Hercules.Asio.XML_RDF_Conversor
     /// <summary>
     /// Clase encargada de inicializar el servicio.
     /// </summary>
-    public class Program
+    public static class Program
     {
         /// <summary>
         /// Main.

@@ -25,6 +25,11 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
         readonly IWebHostEnvironment _env;
         private IConfiguration _configuration { get; }
 
+        /// <summary>
+        /// Servicio.
+        /// </summary>
+        /// <param name="env"></param>
+        /// <param name="configuration"></param>
         public CallTokenService(IWebHostEnvironment env,IConfiguration configuration)
         {
             _env = env;

@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace Hercules.Asio.XML_RDF_Conversor.Models.Middlewares
 {
+    /// <summary>
+    /// ErrorHandlingMiddleware
+    /// </summary>
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;        
@@ -20,12 +23,22 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Middlewares
 
         private IConfiguration _configuration { get; set; }
 
+        /// <summary>
+        /// ErrorHandlingMiddleware
+        /// </summary>
+        /// <param name="next"></param>
+        /// <param name="configuration"></param>
         public ErrorHandlingMiddleware(RequestDelegate next, IConfiguration configuration)
         {
             _next = next;
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Invoke
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task Invoke(HttpContext context /* other dependencies */)
         {
             try
@@ -91,6 +104,10 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Middlewares
             return timeStamp;
         }
 
+        /// <summary>
+        /// GetLogPath
+        /// </summary>
+        /// <returns></returns>
         public string GetLogPath()
         {
             if (string.IsNullOrEmpty(_LogPath))

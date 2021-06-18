@@ -14,10 +14,17 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
     /// </summary>
     public class ConfigUrlService
     {
+        /// <summary>
+        /// UrlUrisFactory
+        /// </summary>
         public string UrlUrisFactory { get; set; }
 
         private IConfiguration _configuration { get; set; }
 
+        /// <summary>
+        /// Servicio.
+        /// </summary>
+        /// <param name="configuration"></param>
         public ConfigUrlService(IConfiguration configuration)
         {
             _configuration = configuration;

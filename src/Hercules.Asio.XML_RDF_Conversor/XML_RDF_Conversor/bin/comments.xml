@@ -14,6 +14,13 @@
             Propiedad encargada de almacenar la configuración.
             </summary>
         </member>
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Controllers.ConversorController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Hercules.Asio.XML_RDF_Conversor.Models.Services.CallUrisFactoryApiService)">
+            <summary>
+            Controlador.
+            </summary>
+            <param name="configuration"></param>
+            <param name="callUrisFactoryService"></param>
+        </member>
         <member name="M:Hercules.Asio.XML_RDF_Conversor.Controllers.ConversorController.ConfigurationFilesList">
             <summary>
             Permite visualizar una lista con los archivos de configuración JSON disponibles.
@@ -93,6 +100,24 @@
             <summary>
             Excepción del tipo BadRequest
             </summary>
+        </member>
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Extra.Exceptions.BadRequestException.#ctor">
+            <summary>
+            BadRequestException
+            </summary>
+        </member>
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Extra.Exceptions.BadRequestException.#ctor(System.String)">
+            <summary>
+            BadRequestException
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Extra.Exceptions.BadRequestException.#ctor(System.String,System.Exception)">
+            <summary>
+            BadRequestException
+            </summary>
+            <param name="message"></param>
+            <param name="inner"></param>
         </member>
         <member name="T:Hercules.Asio.XML_RDF_Conversor.Models.ConfigJson.ConversorConfig">
             <summary>
@@ -239,6 +264,31 @@
             IRI del tipo de la entidad a la que apunta.
             </summary>
         </member>
+        <member name="T:Hercules.Asio.XML_RDF_Conversor.Models.Entities.TokenBearer">
+            <summary>
+            Token Bearer de seguridad.
+            </summary>
+        </member>
+        <member name="P:Hercules.Asio.XML_RDF_Conversor.Models.Entities.TokenBearer.access_token">
+            <summary>
+            Token id.
+            </summary>
+        </member>
+        <member name="P:Hercules.Asio.XML_RDF_Conversor.Models.Entities.TokenBearer.expires_in">
+            <summary>
+            Tiempo de expiración.
+            </summary>
+        </member>
+        <member name="P:Hercules.Asio.XML_RDF_Conversor.Models.Entities.TokenBearer.token_type">
+            <summary>
+            Tipo de token.
+            </summary>
+        </member>
+        <member name="P:Hercules.Asio.XML_RDF_Conversor.Models.Entities.TokenBearer.scope">
+            <summary>
+            Scope.
+            </summary>
+        </member>
         <member name="T:Hercules.Asio.XML_RDF_Conversor.Models.ErrorViewModel">
             <summary>
             Error.
@@ -254,9 +304,39 @@
             Permite visualizar el id.
             </summary>
         </member>
+        <member name="T:Hercules.Asio.XML_RDF_Conversor.Models.Middlewares.ErrorHandlingMiddleware">
+            <summary>
+            ErrorHandlingMiddleware
+            </summary>
+        </member>
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Middlewares.ErrorHandlingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            ErrorHandlingMiddleware
+            </summary>
+            <param name="next"></param>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Middlewares.ErrorHandlingMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invoke
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Middlewares.ErrorHandlingMiddleware.GetLogPath">
+            <summary>
+            GetLogPath
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallApiService">
             <summary>
             Servicio para hacer llamadas a un api
+            </summary>
+        </member>
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallApiService.#ctor">
+            <summary>
+            CallApiService
             </summary>
         </member>
         <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallApiService.CallDeleteApi(System.String,System.String,Hercules.Asio.XML_RDF_Conversor.Models.Entities.TokenBearer)">
@@ -285,6 +365,7 @@
             <param name="item">objeto a pasar</param>
             <param name="isFile">si el objeto pasado es un fichero</param>
             <param name="fileName">nombre del parametro del fichero, en el caso de que el objeto pasado sea un fichero</param>
+            <param name="sparql">si tiene sparql o no</param>
         </member>
         <!-- Badly formed XML comment ignored for member "M:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallApiService.CallPostApiFiles(System.String,System.String,System.Collections.Generic.Dictionary{System.String,Microsoft.AspNetCore.Http.IFormFile},Hercules.Asio.XML_RDF_Conversor.Models.Entities.TokenBearer)" -->
         <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallApiService.CallPutApi(System.String,System.String,System.Object,Hercules.Asio.XML_RDF_Conversor.Models.Entities.TokenBearer,System.Boolean,System.String)">
@@ -302,6 +383,13 @@
             <summary>
             clase para la obtención de los tokens de acceso
             </summary>
+        </member>
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallTokenService.#ctor(Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Servicio.
+            </summary>
+            <param name="env"></param>
+            <param name="configuration"></param>
         </member>
         <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallTokenService.CallTokenUrisFactory">
             <summary>
@@ -327,6 +415,14 @@
             clase para realizar llamadas al api de uris factory
             </summary>
         </member>
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallUrisFactoryApiService.#ctor(Hercules.Asio.XML_RDF_Conversor.Models.Services.CallApiService,Hercules.Asio.XML_RDF_Conversor.Models.Services.CallTokenService,Hercules.Asio.XML_RDF_Conversor.Models.Services.ConfigUrlService)">
+            <summary>
+            Servicio.
+            </summary>
+            <param name="serviceApi"></param>
+            <param name="tokenService"></param>
+            <param name="serviceUrl"></param>
+        </member>
         <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallUrisFactoryApiService.GetUri(System.String,System.String)">
             <summary>
             Obtiene una rui
@@ -339,6 +435,17 @@
             <summary>
             Servicio para obtener las variables de configuración de urls
             </summary>
+        </member>
+        <member name="P:Hercules.Asio.XML_RDF_Conversor.Models.Services.ConfigUrlService.UrlUrisFactory">
+            <summary>
+            UrlUrisFactory
+            </summary>
+        </member>
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.ConfigUrlService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Servicio.
+            </summary>
+            <param name="configuration"></param>
         </member>
         <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.ConfigUrlService.GetUrlUrisFactory">
             <summary>
@@ -392,6 +499,18 @@
             </summary>
             <param name="app">ApplicationBuilder.</param>
             <param name="env">Environment.</param>
+        </member>
+        <member name="T:Hercules.Asio.XML_RDF_Conversor.AllowAnonymous">
+            <summary>
+            AllowAnonymous
+            </summary>
+        </member>
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.AllowAnonymous.HandleAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
+            <summary>
+            HandleAsync
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
         </member>
         <member name="T:VDS.RDF.RohGraph">
             <summary>

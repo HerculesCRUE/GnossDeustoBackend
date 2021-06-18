@@ -29,14 +29,19 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
     [Authorize]
     public class ConversorController : Controller
     {
-        //clase para realizar llamadas al api de uris factory
-        CallUrisFactoryApiService _callUrisFactoryService;
+        // Clase para realizar llamadas al API de Uris Factory
+        readonly CallUrisFactoryApiService _callUrisFactoryService;
 
         /// <summary>
         /// Propiedad encargada de almacenar la configuración.
         /// </summary>
         public IConfiguration _configuration { get; set; }
 
+        /// <summary>
+        /// Controlador.
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="callUrisFactoryService"></param>
         public ConversorController(IConfiguration configuration, CallUrisFactoryApiService callUrisFactoryService)
         {
             _configuration = configuration;
@@ -105,10 +110,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
                 // Creación del RDF virtual.                
                 RohGraph dataGraph = new RohGraph();
                 CreateEntities(dataGraph, objJson.entities, documento, nsmgr); // Método Recursivo.
-
-                // Consulta de comprobación.
-                Object consulta = dataGraph.ExecuteQuery("SELECT * WHERE {?s ?p ?o}");
-
+                                
                 // Creación del RDF.
                 System.IO.StringWriter sw = new System.IO.StringWriter();
                 RdfXmlWriter rdfXmlWriter = new RdfXmlWriter();
@@ -174,7 +176,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
                             }
                         }
 
-                        if (nodo.ChildNodes.Count > 0 && tieneHijoComprobado == true)
+                        if (nodo.ChildNodes.Count > 0 && tieneHijoComprobado)
                         {
                             // Entidades.
                             string uriEntity = GetURI(entidad, nodo, pNsmgr); // Obtención del URI.
@@ -196,7 +198,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
                                 }
                                 else
                                 {
-                                    throw new Exception("No se ha podido obtener el rdf:type de la entidad: " + nodo.Name);
+                                    throw new ArgumentNullException("No se ha podido obtener el rdf:type de la entidad: " + nodo.Name);
                                 }
                             }
 
