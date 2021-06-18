@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Linked_Data_Server.ViewModels
 {
+    [ExcludeFromCodeCoverage]
     [Display(Name = "Shape config")]
     public class ShapeConfigViewModel
     {
