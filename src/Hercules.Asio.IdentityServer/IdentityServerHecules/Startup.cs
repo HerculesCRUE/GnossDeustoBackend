@@ -99,7 +99,6 @@ namespace IdentityServerHecules
                     // this enables automatic token cleanup. this is optional.
                     options.EnableTokenCleanup = true;
                     options.TokenCleanupInterval = 604800;
-                    
                 });
 
             services.AddTransient<IPersistedGrantStore, PersistedGrantStore>();
@@ -139,65 +138,23 @@ namespace IdentityServerHecules
         {
 
             context.Database.Migrate();
+            if (context.Clients.Any())
+            {
+                foreach (var client in context.Clients)
+                {
+                    context.Clients.Remove(client);
+                }
+                context.SaveChanges();
+            }
 
-            var x = context.Clients.Count();
-
-            ////Eliminamos
-            //if (context.Clients.Any())
-            //{
-            //    foreach (Client clientDB in context.Clients)
-            //    {
-            //        //Si no existe en la configuración lo eliminamos
-            //        if (Config.GetClients().FirstOrDefault(x => x.ClientId == clientDB.ClientId) == null)
-            //        {
-            //            context.Clients.Remove(clientDB);
-            //        }
-            //    }
-            //    context.SaveChanges();
-            //}
-            ////Creamos o actualizamos
-            //if (context.Clients.Any())
-            //{
-            //    foreach (IdentityServer4.Models.Client clientConfig in Config.GetClients())
-            //    {
-            //        Client clientDB = context.Clients.FirstOrDefault(x => x.ClientId == clientConfig.ClientId);
-            //        if (clientDB == null)
-            //        {
-            //            //Si no existe en la bbdd lo creamos
-            //            context.Clients.Add(clientConfig.ToEntity());
-            //        }
-            //        else if (!clientDB.ClientId.Equals(clientConfig.ClientId) ||
-            //            !clientDB.AllowedGrantTypes.Equals(clientConfig.AllowedGrantTypes) ||
-            //            !clientDB.ClientSecrets.Equals(clientConfig.ClientSecrets) ||
-            //            !clientDB.AllowedScopes.Equals(clientConfig.AllowedScopes) || 
-            //            !clientDB.AccessTokenLifetime.Equals(clientConfig.AccessTokenLifetime))
-            //        {
-            //            //Si existe pero es diferente lo actualizamos
-            //            context.Clients.Remove(clientDB);
-            //            context.Clients.Add(clientConfig.ToEntity());
-            //        }
-            //    }
-            //    context.SaveChanges();
-            //}
-
-
-            //if (context.Clients.Any())
-            //{
-            //    foreach (var client in context.Clients)
-            //    {
-            //        context.Clients.Remove(client);
-            //    }
-            //    context.SaveChanges();
-            //}
-
-            //if (!context.Clients.Any())
-            //{
-            //    foreach (var client in Config.GetClients())
-            //    {
-            //        context.Clients.Add(client.ToEntity());
-            //    }
-            //    context.SaveChanges();
-            //}
+            if (!context.Clients.Any())
+            {
+                foreach (var client in Config.GetClients())
+                {
+                    context.Clients.Add(client.ToEntity());
+                }
+                context.SaveChanges();
+            }
 
             //if (!context.IdentityResources.Any())
             //{
@@ -205,24 +162,24 @@ namespace IdentityServerHecules
             //    {
             //        context.IdentityResources.Add(resource.ToEntity());
             //    }
-            ////    context.SaveChanges();
-            ////}
-            //if (context.ApiResources.Any())
-            //{
-            //    foreach (var resource in context.ApiResources)
-            //    {
-            //        context.ApiResources.Remove(resource);
-            //    }
             //    context.SaveChanges();
             //}
-            //if (!context.ApiResources.Any())
-            //{
-            //    foreach (var resource in Config.GetApiResources())
-            //    {
-            //        context.ApiResources.Add(resource.ToEntity());
-            //    }
-            //    context.SaveChanges();
-            //}
+            if (context.ApiResources.Any())
+            {
+                foreach (var resource in context.ApiResources)
+                {
+                    context.ApiResources.Remove(resource);
+                }
+                context.SaveChanges();
+            }
+            if (!context.ApiResources.Any())
+            {
+                foreach (var resource in Config.GetApiResources())
+                {
+                    context.ApiResources.Add(resource.ToEntity());
+                }
+                context.SaveChanges();
+            }
 
         }
     }
