@@ -29,7 +29,18 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
         {
             _configuration = configuration;
         }
+        /// <summary>
+        /// GetBuildConfiguration
+        /// </summary>
+        /// <returns></returns>
+        public static IConfiguration GetBuildConfiguration()
+        {
+            var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
 
+            return builder.Build();
+        }
         /// <summary>
         /// Obtiene la url del api de uris factory que ha sido configurada
         /// </summary>

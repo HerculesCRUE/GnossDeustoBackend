@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -15,6 +16,7 @@ using System.Text;
 
 namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
 {
+    
     /// <summary>
     /// Servicio para hacer llamadas a un api
     /// </summary>
@@ -26,7 +28,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
         public CallApiService()
         {
         }
-
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Hace una petición delete
         /// </summary>
@@ -107,7 +109,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
             }
             return result;
         }
-
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Hace una petición post al api
         /// </summary>
@@ -177,7 +179,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
                 }
             }
         }
-
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Hace una petición post
         /// </summary>
@@ -229,6 +231,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
                 }
             }
         }
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Hace una petición put
         /// </summary>

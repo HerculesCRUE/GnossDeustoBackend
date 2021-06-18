@@ -5,6 +5,7 @@ using Serilog;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Hercules.Asio.XML_RDF_Conversor.Models.Middlewares
 {
+    [ExcludeFromCodeCoverage]
     /// <summary>
     /// ErrorHandlingMiddleware
     /// </summary>
