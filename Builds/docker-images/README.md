@@ -404,6 +404,15 @@ Ahora, si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz 
 
 ![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/front.png)
 
+## Actualización y reinicio de los servicicios
+
+Si queremos reinicarlos por un mal funcionamiento, o simplemente queremos actualizarlos, debemos ejecutar los script de despleigues que hemos mencionado en apartados anteriores en su correspondiente frontal.
+
+./actualizar-front.sh
+./actualizar-back.sh
+
+Si tenemos los sercicios de fron en alta disponibilidad es recomendable ejecutarlo en los dos aunque solamente tengamos el problema en uno, debido a que este proceso también los actualiza.
+
 ## Ejemplo de configuración de HAProxy
 
 Para implementar la alta disponibilidad tanto de los frontales web, como de Virtuoso podemos colocarlos duplicados detrás de un HAProxy, como se ilustra en la siguiente imagen y se explica en el apartado de [Elementos de alta disponibilidad](../../Docs/Hercules-ASIO-Documento-de-Alojamiento.md#324-elementos-en-alta-disponibilidad) del "Documento de alojamiento".
