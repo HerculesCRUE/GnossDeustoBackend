@@ -97,8 +97,9 @@ namespace IdentityServerHecules
                         );
 
                     // this enables automatic token cleanup. this is optional.
-                    options.EnableTokenCleanup = false;
+                    options.EnableTokenCleanup = true;
                     options.TokenCleanupInterval = 604800;
+                    
                 });
 
             services.AddTransient<IPersistedGrantStore, PersistedGrantStore>();
