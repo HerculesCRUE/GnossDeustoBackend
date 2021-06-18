@@ -74,6 +74,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
         {
             string result = "";
             HttpResponseMessage response = null;
+            StringBuilder except = new StringBuilder();
             try
             {
                 HttpClient client = new HttpClient();
@@ -81,13 +82,15 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
                 { 
                     client.DefaultRequestHeaders.Add("Authorization",$"{token.token_type} {token.access_token}");
                 }
+                except.AppendLine("Paso el if del token ------------------------");
                 response = client.GetAsync($"{urlBase}{urlMethod}").Result;
+                except.AppendLine("Hago la llamada con cliente y cojo el result-----------------");
                 response.EnsureSuccessStatusCode();
                 result = response.Content.ReadAsStringAsync().Result;
             }
             catch (HttpRequestException)
             {
-                StringBuilder except = new StringBuilder();
+                //StringBuilder except = new StringBuilder();
                 except.AppendLine($"Url del intento de llamada: {urlBase}{urlMethod} --------- error: ");
                 if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
                 {
@@ -102,7 +105,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
             }
             catch(Exception ex)
             {
-                StringBuilder except = new StringBuilder();
+                
                 except.AppendLine($"Url del intento de llamada: {urlBase}{urlMethod} --------- error: ");
                 except.AppendLine(ex.Message);
                 throw new ArgumentNullException(except.ToString());
