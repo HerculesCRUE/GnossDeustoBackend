@@ -205,8 +205,8 @@ namespace IdentityServerHecules
             //    {
             //        context.IdentityResources.Add(resource.ToEntity());
             //    }
-            //    context.SaveChanges();
-            //}
+            ////    context.SaveChanges();
+            ////}
             //if (context.ApiResources.Any())
             //{
             //    foreach (var resource in context.ApiResources)
