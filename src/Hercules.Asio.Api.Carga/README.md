@@ -4,7 +4,7 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|API CARGA readme| 
 |Descripción|Manual del servicio API CARGA|
-|Versión|1.1|
+|Versión|1.2|
 |Módulo|API CARGA|
 |Tipo|Manual|
 |Cambios de la Versión|Cambiado el enlace a las pruebas unitarias|
