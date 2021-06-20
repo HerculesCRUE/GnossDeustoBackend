@@ -1,13 +1,13 @@
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 01/10/2020                                                   |
+| Fecha         | 20/06/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Descripción de CRON| 
 |Descripción|configuración de appsettings|
-|Versión|1|
+|Versión|1.1|
 |Módulo|CronConfigure|
 |Tipo|Documentación|
-|Cambios de la Versión|Se han añadido a la documentación los parámetros de configuración nuevos|
+|Cambios de la Versión|Las pruebas unitarias están en CodeCov|
 
 
 # Acerca de CronConfigure
@@ -39,7 +39,7 @@ Mediante estos controladores se pueden crear los siguientes tipos de tareas:
 
 http://herc-as-front-desa.atica.um.es/cronconfigure/api/CronConfigure.Controllers.html
 
-Los resultados de las pruebas unitarias se pueden consultar en [ResultsTest](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/CronConfigure/ResultsTest).
+Los resultados de las pruebas unitarias se pueden consultar en [CodeCov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend).
 
 Las librerías compiladas se encuentran en la carpeta [librerías](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/libraries).
 
