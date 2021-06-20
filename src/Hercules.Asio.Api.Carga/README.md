@@ -37,7 +37,7 @@ Para una especificación más detallada del servicio se puede consultar la sigui
  
 Esta aplicación se encarga de sincronizar los datos de un repositorio OAI-PMH con el RDF Store. Obtiene todas las entidades actualizadas desde la última sincronización, solicita al repositorio OAI-PMH todos sus datos y los inserta en el RDF Store.
 
-Los resultados de las pruebas unitarias se pueden consultar en [ResultsTest](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/API_CARGA/ResultsTest).
+Los resultados de las pruebas unitarias se pueden consultar en [CodeCov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend).
 
 Las librerías compiladas se encuentran en la carpeta [librerías](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/libraries).
 
