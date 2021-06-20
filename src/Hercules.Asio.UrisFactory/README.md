@@ -1,13 +1,13 @@
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 3/5/2021                                                   |
+| Fecha         | 20/6/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Acerca de UrisFactory| 
 |Descripción|Librería UrisFactory|
-|Versión|1.5|
+|Versión|1.6|
 |Módulo|UrisFactory|
 |Tipo|Software|
-|Cambios de la Versión|Revisión de la documentación|
+|Cambios de la Versión|Enlace a pruebas unitarias en CodeCov|
 
 
 # Acerca de UrisFactory
@@ -34,7 +34,7 @@ La documentación de la librería está disponible en:
 
 http://herc-as-front-desa.atica.um.es/uris-factory/library/api/UrisFactory.Controllers.html
 
-Los resultados de las pruebas unitarias se pueden consultar en [ResultsTest](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.UrisFactory/ResultsTest).
+Los resultados de las pruebas unitarias se pueden consultar en [CodeCov](https://codecov.io/gh/HerculesCRUE/GnossDeustoBackend).
 
 La librería compilada se encuentra en la carpeta [librerías](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/libraries).
 
