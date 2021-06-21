@@ -2,6 +2,7 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Controlador OAI-PMH que sirve los datos de los curículums de los investigadores de la Universidad de Murcia en formato RDF.
+using Hercules.Asio.CVN2OAI_PMH.Models.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,14 +30,16 @@ namespace OAI_PMH.Controllers
         private IOaiConfiguration _configOAI;
 
         readonly ConfigOAI_PMH_CVN _configOAI_PMH_CVN;
+        private readonly IUtil _util;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="configOAI_PMH_CVN">Configuración del servicio</param>
-        public OAI_PMHController(ConfigOAI_PMH_CVN configOAI_PMH_CVN)
+        public OAI_PMHController(ConfigOAI_PMH_CVN configOAI_PMH_CVN, IUtil util)
         {
             _configOAI_PMH_CVN = configOAI_PMH_CVN;
+            _util = util;
             _configOAI = OaiConfiguration.Instance;
             _configOAI.SupportSets = true;
             _configOAI.RepositoryName = "OAI_PMH_CVN";
@@ -76,7 +79,7 @@ namespace OAI_PMH.Controllers
             //MetadataFormatRepository
             MetadataFormatRepository metadataFormatRepository = new MetadataFormatRepository();
 
-            RecordRepository recordRepository = new RecordRepository(_configOAI, _configOAI_PMH_CVN);
+            RecordRepository recordRepository = new RecordRepository(_configOAI, _configOAI_PMH_CVN, _util);
 
             //SetRepository
             SetRepository setRepository = new SetRepository(_configOAI);

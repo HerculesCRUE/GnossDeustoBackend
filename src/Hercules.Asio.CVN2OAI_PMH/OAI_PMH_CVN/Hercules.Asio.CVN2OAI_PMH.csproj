@@ -45,6 +45,15 @@
     <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="CVS\1.rdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="CVS\2.rdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

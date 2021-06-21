@@ -56,7 +56,7 @@
                     <table class="rdftable">
                         <thead class="table-subject">
                             <tr>
-                                <th colspan="2">
+                                <th scope="col" colspan="2">
                                     @if (pEntityLink)
                                     {
                                         <span id="@pItem.uriEntity"><a href="@pItem.uriEntity">@pItem.uriEntity</a></span>
@@ -170,7 +170,7 @@
                                                             <table class="provenancetable" style="display:none">
                                                                 <thead class="table-subject">
                                                                     <tr>
-                                                                        <th colspan="2">
+                                                                        <th scope="col" colspan="2">
                                                                             <span>Provenance</span>
                                                                         </th>
                                                                     </tr>
@@ -207,7 +207,7 @@
                                                         <table class="provenancetable" style="display:none">
                                                             <thead class="table-subject">
                                                                 <tr>
-                                                                    <th colspan="2">
+                                                                    <th scope="col" colspan="2">
                                                                         <span>Provenance</span>
                                                                     </th>
                                                                 </tr>
@@ -293,7 +293,7 @@
                     <tr>
                         @foreach (var header in table.Header)
                         {
-                            <th>@header</th>
+                            <th scope="col">@header</th>
                         }
                     </tr>
                 </thead>

@@ -20,12 +20,6 @@ var estructurarContenidoPrincipal = {
         this.crearCabecera();
         this.crearLista();
     },
-    crearCabecera: function() {
-        var h1 = this.contenidoPrincipal.find('h1');
-        var h2 = this.contenidoPrincipal.find('h2');
-        this.contenidoWrapper.append(h1);
-        this.contenidoWrapper.append(h2);
-    },
     crearLista: function() {
         var firstitem = true;
         var that = this;

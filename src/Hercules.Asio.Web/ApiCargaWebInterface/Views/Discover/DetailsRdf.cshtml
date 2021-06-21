@@ -41,11 +41,11 @@
                 <tr>
                     @if (pItem.LoadedEntities.Contains(pItem.uriEntity))
                     {
-                        <th colspan="2"><span class="entityHeader" id="@pItem.uriEntity"></span><span id="@pItem.uriEntity">@pItem.uriEntity</span><a href="@pItem.uriEntity" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a></th>
+                        <th scope="col" colspan="2"><span class="entityHeader" id="@pItem.uriEntity"></span><span id="@pItem.uriEntity">@pItem.uriEntity</span><a href="@pItem.uriEntity" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a></th>
                     }
                     else
                     {
-                        <th colspan="2"><span class="entityHeader" id="@pItem.uriEntity"></span><span id="@pItem.uriEntity">@pItem.uriEntity</span></th>
+                        <th scope="col" colspan="2"><span class="entityHeader" id="@pItem.uriEntity"></span><span id="@pItem.uriEntity">@pItem.uriEntity</span></th>
                     }
                 </tr>
             </thead>

@@ -14,7 +14,7 @@
             Propiedad encargada de almacenar la configuración.
             </summary>
         </member>
-        <member name="M:Hercules.Asio.XML_RDF_Conversor.Controllers.ConversorController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Hercules.Asio.XML_RDF_Conversor.Models.Services.CallUrisFactoryApiService)">
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Controllers.ConversorController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Hercules.Asio.XML_RDF_Conversor.Models.Services.ICallUrisFactoryApiService)">
             <summary>
             Controlador.
             </summary>
@@ -289,11 +289,6 @@
             Scope.
             </summary>
         </member>
-        <member name="T:Hercules.Asio.XML_RDF_Conversor.Models.ErrorViewModel">
-            <summary>
-            Error.
-            </summary>
-        </member>
         <member name="P:Hercules.Asio.XML_RDF_Conversor.Models.ErrorViewModel.RequestId">
             <summary>
             Id.
@@ -302,11 +297,6 @@
         <member name="P:Hercules.Asio.XML_RDF_Conversor.Models.ErrorViewModel.ShowRequestId">
             <summary>
             Permite visualizar el id.
-            </summary>
-        </member>
-        <member name="T:Hercules.Asio.XML_RDF_Conversor.Models.Middlewares.ErrorHandlingMiddleware">
-            <summary>
-            ErrorHandlingMiddleware
             </summary>
         </member>
         <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Middlewares.ErrorHandlingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Configuration.IConfiguration)">
@@ -328,11 +318,6 @@
             GetLogPath
             </summary>
             <returns></returns>
-        </member>
-        <member name="T:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallApiService">
-            <summary>
-            Servicio para hacer llamadas a un api
-            </summary>
         </member>
         <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallApiService.#ctor">
             <summary>
@@ -379,11 +364,6 @@
             <param name="isFile">si el objeto pasado es un fichero</param>
             <param name="fileName">nombre del parametro del fichero, en el caso de que el objeto pasado sea un fichero</param>
         </member>
-        <member name="T:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallTokenService">
-            <summary>
-            clase para la obtención de los tokens de acceso
-            </summary>
-        </member>
         <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallTokenService.#ctor(Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             Servicio.
@@ -409,11 +389,6 @@
             <param name="pTypeToken">Tipo del token.</param>
             <param name="pAccessToken">Token.</param>
             <returns></returns>
-        </member>
-        <member name="T:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallUrisFactoryApiService">
-            <summary>
-            clase para realizar llamadas al api de uris factory
-            </summary>
         </member>
         <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.CallUrisFactoryApiService.#ctor(Hercules.Asio.XML_RDF_Conversor.Models.Services.CallApiService,Hercules.Asio.XML_RDF_Conversor.Models.Services.CallTokenService,Hercules.Asio.XML_RDF_Conversor.Models.Services.ConfigUrlService)">
             <summary>
@@ -447,11 +422,25 @@
             </summary>
             <param name="configuration"></param>
         </member>
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.ConfigUrlService.GetBuildConfiguration">
+            <summary>
+            GetBuildConfiguration
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.ConfigUrlService.GetUrlUrisFactory">
             <summary>
             Obtiene la url del api de uris factory que ha sido configurada
             </summary>
             <returns>uri del api uris factory</returns>
+        </member>
+        <member name="M:Hercules.Asio.XML_RDF_Conversor.Models.Services.ICallUrisFactoryApiService.GetUri(System.String,System.String)">
+            <summary>
+            Obtiene una rui
+            </summary>
+            <param name="resourceClass">Resource class o rdfType</param>
+            <param name="identifier">Identificador</param>
+            <returns>uri</returns>
         </member>
         <member name="T:Hercules.Asio.XML_RDF_Conversor.Program">
             <summary>

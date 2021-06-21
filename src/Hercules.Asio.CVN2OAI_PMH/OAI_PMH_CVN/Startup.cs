@@ -4,10 +4,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Hercules.Asio.CVN2OAI_PMH.Models.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -25,6 +27,7 @@ using Swashbuckle.AspNetCore.Filters;
 
 namespace PRH
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         private readonly IWebHostEnvironment _env;
@@ -95,6 +98,7 @@ namespace PRH
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
 
+            services.AddScoped<IUtil, Util>();
             services.AddSingleton(typeof(ConfigOAI_PMH_CVN));
 
         }
