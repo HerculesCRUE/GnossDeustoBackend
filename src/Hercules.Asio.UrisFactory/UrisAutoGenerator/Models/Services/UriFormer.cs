@@ -106,7 +106,7 @@ namespace UrisFactory.Models.Services
                         {
                             uri = "N";
                         }
-                        else
+                        else if (resourceClassObject != null)
                         {
                             uri = $"{uri}{resourceClassObject.LabelResourceClass}{component.FinalCharacter}";
                         }
