@@ -111,7 +111,7 @@ namespace API_DISCOVER.Models.Services
             }
             catch (HttpRequestException)
             {
-                if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                if (response != null && !string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
                 {
                     throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
                 }
