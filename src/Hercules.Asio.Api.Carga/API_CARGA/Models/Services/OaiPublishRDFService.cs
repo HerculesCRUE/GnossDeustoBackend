@@ -169,7 +169,7 @@ namespace API_CARGA.Models.Services
                                 numExceptions++;
                                 if (numExceptions >= 10)
                                 {
-                                    throw;                              
+                                    throw;
                                 }
                             }
                         }
@@ -267,11 +267,7 @@ namespace API_CARGA.Models.Services
                 else
                 {
                     RepositorySync repoSync = _context.RepositorySync.FirstOrDefault(item => item.RepositoryId.Equals(repositoryId) && item.Set.Equals(set));
-                    if (repoSync == null)
-                    {
-                        repoSync.UltimaFechaDeSincronizacion = lastSyncro.Fecha;
-                    }
-                    else
+                    if (repoSync != null)
                     {
                         RepositorySync repoSyncAdd = new RepositorySync()
                         {
@@ -386,7 +382,7 @@ namespace API_CARGA.Models.Services
                 uri += $"&from={fechaFrom}";
             }
             List<IdentifierOAIPMH> listIdentifier = new List<IdentifierOAIPMH>();
-            
+
             string resumptionToken = "";
             while (resumptionToken != null)
             {
