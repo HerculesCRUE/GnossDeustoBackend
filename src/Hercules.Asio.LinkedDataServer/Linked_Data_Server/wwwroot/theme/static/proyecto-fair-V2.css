@@ -5,7 +5,7 @@
 #contenido-principal .item .cabecera-item h3 { max-width: 80%;font-size: 15px; color: #af1a2e; line-height: 1.27; font-weight: bold; margin: 0; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
 #contenido-principal .item .cabecera-item .estrellas { padding-left: 10px; position: relative; flex-grow: 1; }
 #contenido-principal .item .cabecera-item .estrellas img { position: absolute;  top: -16px; }
-#contenido-principal .item .cabecera-item:after { color: #747474; content: "\e313"; font-family: "Material Icons", "sans-serif"; position: absolute; right: 0px; top: -6px; font-size: 24px; }
+#contenido-principal .item .cabecera-item:after { color: #747474; content: "\e313"; font-family: Material Icons, sans-serif; position: absolute; right: 0px; top: -6px; font-size: 24px; }
 #contenido-principal .item.desplegado .cabecera-itemafter { content: "\e316"; }
 #contenido-principal .item > div:not(.cabecera-item) { font-size: 15px; color: #747474; height: 0; overflow: hidden; }
 #contenido-principal .item.desplegado > div:not(.cabecera-item) { font-size: 15px; color: #747474; height: auto; }

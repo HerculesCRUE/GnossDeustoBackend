@@ -152,13 +152,17 @@ namespace ApiCargaWebInterface.Models.Services
             }
             catch (HttpRequestException)
             {
-                if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                if (response != null && !string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
                 {
                     throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                else
+                else if (response != null)
                 {
                     throw new HttpRequestException(response.ReasonPhrase);
+                }
+                else
+                {
+                    throw new HttpRequestException();
                 }
             }
         }
