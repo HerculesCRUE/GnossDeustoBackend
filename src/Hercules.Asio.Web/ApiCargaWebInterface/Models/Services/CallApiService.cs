@@ -47,13 +47,17 @@ namespace ApiCargaWebInterface.Models.Services
             }
             catch (HttpRequestException)
             {
-                if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                if (response != null && !string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
                 {
                     throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                else
+                else if (response != null)
                 {
                     throw new HttpRequestException(response.ReasonPhrase);
+                }
+                else
+                {
+                    throw new HttpRequestException();
                 }
             }
             return result;
@@ -84,15 +88,19 @@ namespace ApiCargaWebInterface.Models.Services
             {
                 StringBuilder except = new StringBuilder();
                 except.AppendLine($"Url del intento de llamada: {urlBase}{urlMethod} --------- error: ");
-                if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                if (response != null && !string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
                 {
                     except.AppendLine(response.Content.ReadAsStringAsync().Result);
                     throw new HttpRequestException(except.ToString());
                 }
-                else
+                else if (response != null)
                 {
                     except.AppendLine(response.ReasonPhrase);
                     throw new HttpRequestException(except.ToString());
+                }
+                else
+                {
+                    throw new HttpRequestException();
                 }
             }
             catch(Exception ex)
@@ -159,17 +167,21 @@ namespace ApiCargaWebInterface.Models.Services
             }
             catch (HttpRequestException)
             {
-                if (response.StatusCode.Equals(HttpStatusCode.BadRequest))
+                if (response != null && response.StatusCode.Equals(HttpStatusCode.BadRequest))
                 {
                     throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                else if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                else if (response != null && !string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
                 {
                     throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                else
+                else if (response != null)
                 {
                     throw new HttpRequestException(response.ReasonPhrase);
+                }
+                else
+                {
+                    throw new HttpRequestException();
                 }
             }
         }
@@ -211,17 +223,21 @@ namespace ApiCargaWebInterface.Models.Services
             }
             catch (HttpRequestException)
             {
-                if (response.StatusCode.Equals(HttpStatusCode.BadRequest))
+                if (response != null && response.StatusCode.Equals(HttpStatusCode.BadRequest))
                 {
                     throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                else if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                else if (response != null && !string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
                 {
                     throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                else
+                else if (response != null)
                 {
                     throw new HttpRequestException(response.ReasonPhrase);
+                }
+                else
+                {
+                    throw new HttpRequestException();
                 }
             }
         }
@@ -272,17 +288,21 @@ namespace ApiCargaWebInterface.Models.Services
             }
             catch (HttpRequestException)
             {
-                if (response.StatusCode.Equals(HttpStatusCode.BadRequest))
+                if (response != null && response.StatusCode.Equals(HttpStatusCode.BadRequest))
                 {
                     throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                else if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                else if (response != null && !string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
                 {
                     throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                else
+                else if (response != null)
                 {
                     throw new HttpRequestException(response.ReasonPhrase);
+                }
+                else
+                {
+                    throw new HttpRequestException();
                 }
             }
         }
