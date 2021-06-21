@@ -115,9 +115,13 @@ namespace API_DISCOVER.Models.Services
                 {
                     throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                else
+                else if (response != null)
                 {
                     throw new HttpRequestException(response.ReasonPhrase);
+                }
+                else
+                {
+                    throw new HttpRequestException();
                 }
             }
         }
