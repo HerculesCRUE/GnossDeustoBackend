@@ -20,7 +20,18 @@ namespace OAI_PMH_CVN.Models.Services
         {
             _configuration = configuration;
         }
+        /// <summary>
+        /// GetBuildConfiguration
+        /// </summary>
+        /// <returns></returns>
+        public static IConfiguration GetBuildConfiguration()
+        {
+            var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.Development.json");
 
+            return builder.Build();
+        }
         public string GetXML_CVN_Repository()
         {
             if (string.IsNullOrEmpty(XML_CVN_Repository))
