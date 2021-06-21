@@ -80,11 +80,11 @@ namespace ApiCargaWebInterface.Controllers
                 if (exceptionDetails != null && !string.IsNullOrEmpty(exceptionDetails.detail))
                 {
                     job.ExceptionDetails = "Se ha producido un error:<br>";
-                    job.ExceptionDetails = @$"""type"":""{exceptionDetails.type}"",<br>";
-                    job.ExceptionDetails = @$"""title"":""{exceptionDetails.title}"",<br>";
-                    job.ExceptionDetails = @$"""status"":""{exceptionDetails.status}"",<br>";
-                    job.ExceptionDetails = @$"""detail"":""{exceptionDetails.detail}"",<br>";
-                    job.ExceptionDetails = @$"""traceId"":""{exceptionDetails.traceId}"",<br>";
+                    job.ExceptionDetails+= @$"""type"":""{exceptionDetails.type}"",<br>";
+                    job.ExceptionDetails+= @$"""title"":""{exceptionDetails.title}"",<br>";
+                    job.ExceptionDetails+= @$"""status"":""{exceptionDetails.status}"",<br>";
+                    job.ExceptionDetails+= @$"""detail"":""{exceptionDetails.detail}"",<br>";
+                    job.ExceptionDetails+= @$"""traceId"":""{exceptionDetails.traceId}"",<br>";
 
                     ShapeReport shapeReport= JsonConvert.DeserializeObject<ShapeReport>(exceptionDetails.detail);
                     if (shapeReport != null && !shapeReport.conforms && shapeReport.results!=null && shapeReport.results.Count>0)
