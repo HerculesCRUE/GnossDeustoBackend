@@ -172,9 +172,13 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
                 {
                     throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                else
+                else if (response != null)
                 {
                     throw new HttpRequestException(response.ReasonPhrase);
+                }
+                else
+                {
+                    throw new HttpRequestException();
                 }
             }
         }
@@ -224,9 +228,13 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
                 {
                     throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                else
+                else if (response != null)
                 {
                     throw new HttpRequestException(response.ReasonPhrase);
+                }
+                else
+                {
+                    throw new HttpRequestException();
                 }
             }
         }
@@ -286,9 +294,13 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
                 {
                     throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                else
+                else if (response != null)
                 {
                     throw new HttpRequestException(response.ReasonPhrase);
+                }
+                else
+                {
+                    throw new HttpRequestException();
                 }
             }
         }
