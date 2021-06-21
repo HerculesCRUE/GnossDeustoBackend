@@ -26,6 +26,8 @@
 
 [Despliegue de los servicios front](#despliegue-de-los-servicios-front)
 
+[Actualización y reinicio de los servicicios](#actualizacion-y-reinicio-de-los-servicicios)
+
 [Ejemplo de configuración de HAProxy](#ejemplo-de-configuración-de-haproxy)
 
 # Despliegue de ASIO Backend SGI con Docker
