@@ -75,15 +75,9 @@ namespace ApiCargaWebInterface.Controllers
                     }
                     jobVM.IdRepository = id;
                 }
-            }
-            if (result != null)
-            {
-                return View(result);
-            }
-            else
-            {
-                return NotFound();
-            }
+            }            
+            return View(result);
+            
         }
         /// <summary>
         /// Obtiene los los shapes del repositorio
