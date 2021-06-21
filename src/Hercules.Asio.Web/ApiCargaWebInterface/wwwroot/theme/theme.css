@@ -1545,9 +1545,8 @@ img { max-width: 100%; }
 .ficha-documento .info-documento ul li { line-height: 1.4; }
 
 
-p.ayuda-btn-discover
-{
-    max-width:60%;
-    font-weight:400;
-    color:#666;
+p.ayuda-btn-discover {
+    max-width: 60%;
+    font-weight: 400 !important;
+    color: #666 !important;
 }
