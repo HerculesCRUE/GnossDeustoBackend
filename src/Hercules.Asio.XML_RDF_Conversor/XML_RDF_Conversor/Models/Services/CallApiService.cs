@@ -164,11 +164,11 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
             }
             catch (HttpRequestException)
             {
-                if (response.StatusCode.Equals(HttpStatusCode.BadRequest))
+                if (response != null && response.StatusCode.Equals(HttpStatusCode.BadRequest))
                 {
                     throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                else if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                else if (response != null && !string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
                 {
                     throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
                 }
@@ -216,11 +216,11 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
             }
             catch (HttpRequestException)
             {
-                if (response.StatusCode.Equals(HttpStatusCode.BadRequest))
+                if (response != null && response.StatusCode.Equals(HttpStatusCode.BadRequest))
                 {
                     throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                else if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                else if (response != null && !string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
                 {
                     throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
                 }
@@ -278,11 +278,11 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
             }
             catch (HttpRequestException)
             {
-                if (response.StatusCode.Equals(HttpStatusCode.BadRequest))
+                if (response != null && response.StatusCode.Equals(HttpStatusCode.BadRequest))
                 {
                     throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
                 }
-                else if (!string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
+                else if (response != null && !string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
                 {
                     throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
                 }
