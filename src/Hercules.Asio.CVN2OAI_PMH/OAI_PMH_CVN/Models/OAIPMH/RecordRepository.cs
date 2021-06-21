@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Hercules.Asio.CVN2OAI_PMH.Models.Services;
 using Newtonsoft.Json;
 using OAI_PMH_CVN.Models.Services;
 using OaiPmhNet.Converters;
@@ -23,16 +24,18 @@ namespace OaiPmhNet.Models.OAIPMH
         private readonly ConfigOAI_PMH_CVN _configOAI_PMH_CVN;
         private readonly IDateConverter _dateConverter;
         private readonly IDublinCoreMetadataConverter _dublinCoreMetadataConverter;
+        private readonly IUtil _util;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="configurationOAI">Configuración OAI-PMH</param>
         /// <param name="configOAI_PMH_CVN">Configuración del servicio</param>
-        public RecordRepository(IOaiConfiguration configurationOAI, ConfigOAI_PMH_CVN configOAI_PMH_CVN)
+        public RecordRepository(IOaiConfiguration configurationOAI, ConfigOAI_PMH_CVN configOAI_PMH_CVN, IUtil util)
         {
             _configurationOAI = configurationOAI;
             _configOAI_PMH_CVN = configOAI_PMH_CVN;
+            _util = util;
             _dateConverter = new DateConverter();
             _dublinCoreMetadataConverter = new DublinCoreMetadataConverter(configurationOAI, _dateConverter);
         }
@@ -64,7 +67,7 @@ namespace OaiPmhNet.Models.OAIPMH
                 inicio = from;
             }
             
-            HashSet<string> ids = GetCurriculumsIDs(inicio, _configOAI_PMH_CVN.GetXML_CVN_Repository());
+            HashSet<string> ids = _util.GetCurriculumsIDs(inicio, _configOAI_PMH_CVN.GetXML_CVN_Repository());
             List<CVN> listCVN = new List<CVN>();
             foreach (string id in ids)
             {
@@ -153,22 +156,7 @@ namespace OaiPmhNet.Models.OAIPMH
             return record;
         }
 
-        /// <summary>
-        /// Obtiene los IDs de los curriculums desde una fecha de inicio
-        /// </summary>
-        /// <param name="pInicio">Fecha de inicio</param>
-        /// <param name="pXML_CVN_Repository">Ruta del repositorio de CVN</param>
-        /// <returns>Identificadores de os curriculums</returns>
-        private HashSet<string> GetCurriculumsIDs(DateTime pInicio, string pXML_CVN_Repository)
-        {
-            var client = new RestClient($"{pXML_CVN_Repository}changes?date={pInicio.ToString("yyyy")}-{pInicio.ToString("MM")}-{pInicio.ToString("dd")}");
-            client.Timeout = -1;
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("application", "asio");
-            request.AddHeader("key", "asiokey");
-            XML_CVN_Repository_Response respuesta = JsonConvert.DeserializeObject<XML_CVN_Repository_Response>(client.Execute(request).Content);
-            return new HashSet<string>(respuesta.ids.Select(x => x.ToString()));
-        }
+        
 
         /// <summary>
         /// Obtiene un CVN

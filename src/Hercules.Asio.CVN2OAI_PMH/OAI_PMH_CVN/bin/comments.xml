@@ -9,7 +9,7 @@
             Controlador OAI-PMH que sirve los datos de los curículums de los investigadores de la Universidad de Murcia en formato RDF.
             </summary>
         </member>
-        <member name="M:OAI_PMH.Controllers.OAI_PMHController.#ctor(OAI_PMH_CVN.Models.Services.ConfigOAI_PMH_CVN)">
+        <member name="M:OAI_PMH.Controllers.OAI_PMHController.#ctor(OAI_PMH_CVN.Models.Services.ConfigOAI_PMH_CVN,Hercules.Asio.CVN2OAI_PMH.Models.Services.IUtil)">
             <summary>
             Constructor
             </summary>
@@ -79,7 +79,7 @@
             Implementación de IRecordRepository
             </summary>
         </member>
-        <member name="M:OaiPmhNet.Models.OAIPMH.RecordRepository.#ctor(OaiPmhNet.IOaiConfiguration,OAI_PMH_CVN.Models.Services.ConfigOAI_PMH_CVN)">
+        <member name="M:OaiPmhNet.Models.OAIPMH.RecordRepository.#ctor(OaiPmhNet.IOaiConfiguration,OAI_PMH_CVN.Models.Services.ConfigOAI_PMH_CVN,Hercules.Asio.CVN2OAI_PMH.Models.Services.IUtil)">
             <summary>
             Constructor
             </summary>
@@ -125,14 +125,6 @@
             <param name="pMetadataPrefix">Prefijo de metadatos</param>
             <returns>Record OAI-PMH</returns>
         </member>
-        <member name="M:OaiPmhNet.Models.OAIPMH.RecordRepository.GetCurriculumsIDs(System.DateTime,System.String)">
-            <summary>
-            Obtiene los IDs de los curriculums desde una fecha de inicio
-            </summary>
-            <param name="pInicio">Fecha de inicio</param>
-            <param name="pXML_CVN_Repository">Ruta del repositorio de CVN</param>
-            <returns>Identificadores de os curriculums</returns>
-        </member>
         <member name="M:OaiPmhNet.Models.OAIPMH.RecordRepository.GetCurriculum(System.String,System.Boolean,System.String)">
             <summary>
             Obtiene un CVN
@@ -167,6 +159,22 @@
             GetBuildConfiguration
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Hercules.Asio.CVN2OAI_PMH.Models.Services.Util.GetCurriculumsIDs(System.DateTime,System.String)">
+            <summary>
+            Obtiene los IDs de los curriculums desde una fecha de inicio
+            </summary>
+            <param name="pInicio">Fecha de inicio</param>
+            <param name="pXML_CVN_Repository">Ruta del repositorio de CVN</param>
+            <returns>Identificadores de os curriculums</returns>
+        </member>
+        <member name="M:Hercules.Asio.CVN2OAI_PMH.Models.Services.UtilMock.GetCurriculumsIDs(System.DateTime,System.String)">
+            <summary>
+            Obtiene los IDs de los curriculums desde una fecha de inicio
+            </summary>
+            <param name="pInicio">Fecha de inicio</param>
+            <param name="pXML_CVN_Repository">Ruta del repositorio de CVN</param>
+            <returns>Identificadores de os curriculums</returns>
         </member>
     </members>
 </doc>
