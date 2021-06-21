@@ -1543,3 +1543,10 @@ img { max-width: 100%; }
 .ficha-documento .info-documento p { font-size: 100%;}
 .ficha-documento .info-documento ul { padding-left: 20px; }
 .ficha-documento .info-documento ul li { line-height: 1.4; }
+
+
+p.ayuda-btn-discover {
+    max-width: 60%;
+    font-weight: 400 !important;
+    color: #666 !important;
+}

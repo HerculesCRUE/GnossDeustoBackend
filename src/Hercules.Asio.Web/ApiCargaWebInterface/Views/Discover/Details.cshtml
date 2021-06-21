@@ -101,12 +101,15 @@
                                     }
                                 </div>
                                 <input style="margin-top:15px;width:500px;" class="submit principal" type="submit" value="Enriquecer y procesar">
+                                <p class="ayuda-btn-discover">Aplica las desambiguaciones seleccionadas por el usuario y procesa de nuevo el RDF para intentar cargarlo en una nueva iteración</p>
                             </form>
                             <form id="formretry" asp-action="RetryDiscover" asp-controller="Job" asp-all-route-data="diccionarioValues" method="post">
                                 <input style="margin-top:15px;width:500px;" class="submit principal" type="submit" value="Descartar y reintentar">
+                                <p class="ayuda-btn-discover">No aplica ninguna desambiguación y procesa de nuevo el RDF para intentar cargarlo en una nueva iteración</p>
                             </form>
                             <form id="formdiscard" asp-action="DiscardDiscover" asp-controller="Job" asp-all-route-data="diccionarioValues" method="post">
                                 <input style="margin-top:15px;width:500px;" class="submit principal" type="submit" value="Descartar el RDF @Model.IdDiscoverItem">
+                                <p class="ayuda-btn-discover">No aplica ninguna desambiguación y descarta el RDF sin intentar cargarlo de nuevo</p>
                             </form>
                         </div>
                     }
