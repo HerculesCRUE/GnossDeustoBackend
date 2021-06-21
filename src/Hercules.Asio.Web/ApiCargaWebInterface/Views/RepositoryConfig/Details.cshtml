@@ -53,7 +53,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="@Url.Action("Syncro", "Job", new { repositoryId = Model.RepositoryConfigID })" class="btn btn-sincronizar">Sincronizar</a>
+                                <a href="@Url.Action("Syncro", "Job", new { repositoryId = Model.RepositoryConfigID })" class="btn btn-sincronizar" title="Lanza una tarea de sincronización que actualiza los datos modificados en el reposiotrio desde la fecha de la última ejecución">Sincronizar</a>
                             </li>
                             <li>
                                 <a href="@Url.Action("Edit", new {  id=Model.RepositoryConfigID  })" class="btn btn-editar">Editar</a>
@@ -61,6 +61,7 @@
                             <li>
                                 <a href="@Url.Action("Delete", new {  id=Model.RepositoryConfigID  })" class="btn btn-eliminar">Eliminar</a>
                             </li>
+                            <li><a href="https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.Web/Manual-de-usuario.md#p%C3%A1gina-de-un-repositorio" target="_blank">Documentación</a></li>
                         </ul>
 
                     </div>
