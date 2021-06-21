@@ -83,14 +83,14 @@
                         <p>@Model.Url</p>
                     </div>
                     <div class="outh-token">
-                        <p class="titulo">Tareas exitosas</p>
+                        <p class="titulo">Tareas de ejecución de sincronización exitosas</p>
                         @if (Model.ListJobs == null || Model.ListJobs.Count == 0)
                         {
                             <p @clase>Aún no se ha ejecutado ninguna tarea</p>
                         }
                         else
                         {
-                            <p @clase>@Model.PorcentajeTareas %</p>
+                            <p @clase>@Model.PorcentajeTareas % de las tareas ejecutadas con éxito</p>
                         }
                     </div>
                     <hr />
