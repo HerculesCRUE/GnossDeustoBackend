@@ -30,6 +30,10 @@ coverage:
         target: auto
         flags:
           - xmlToRdf
+      oaipmh:
+        target: auto
+        flags:
+          - xmlToRdf
           
 comment:
   layout: "reach, diff, flags, files"
@@ -65,4 +69,7 @@ flags:
   xmlToRdf:
     paths:
       - src/Hercules.Asio.XML_RDF_Conversor
+  oaipmh:
+    paths:
+      - src/Hercules.Asio.CVN2OAI_PMH
     carryforward: false

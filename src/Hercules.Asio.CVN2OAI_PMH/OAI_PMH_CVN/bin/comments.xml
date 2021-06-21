@@ -162,5 +162,11 @@
             <param name="resumptionToken">Token de reanudación</param>
             <returns></returns>
         </member>
+        <member name="M:OAI_PMH_CVN.Models.Services.ConfigOAI_PMH_CVN.GetBuildConfiguration">
+            <summary>
+            GetBuildConfiguration
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>
