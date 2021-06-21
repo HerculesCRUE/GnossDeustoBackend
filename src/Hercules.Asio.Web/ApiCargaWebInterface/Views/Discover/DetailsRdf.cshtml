@@ -69,7 +69,7 @@
                                 title = pItem.communNamePropierties[stringProperty.Key];
                             }
                             <td class="" title="@title">
-                                <b>@propiedadAbreviada</b>
+                                <strong>@propiedadAbreviada</strong>
                                 <a href="@stringProperty.Key" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
                             </td>
 
@@ -110,11 +110,11 @@
                                     {
                                         valorPropiedadAbreviada = valorPropiedadAbreviada.Substring(valorPropiedadAbreviada.LastIndexOf("/") + 1);
                                     }
-                                    <td title="@title"><b>@valorPropiedadAbreviada</b></td>
+                                    <td title="@title"><strong>@valorPropiedadAbreviada</strong></td>
                                 }
                                 else
                                 {
-                                    <td><b>@valor</b></td>
+                                    <td><strong>@valor</strong></td>
                                 }
                             }
 
@@ -139,7 +139,7 @@
                         }
                         <tr>
                             <td class="" title="@title">
-                                <b>@propiedadAbreviada</b>
+                                <strong>@propiedadAbreviada</strong>
                             </td>
                             <td class="">
                                 @{

@@ -16,7 +16,7 @@ using System.Text;
 
 namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
 {
-    
+    [ExcludeFromCodeCoverage]
     /// <summary>
     /// Servicio para hacer llamadas a un api
     /// </summary>
@@ -28,7 +28,6 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
         public CallApiService()
         {
         }
-        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Hace una petición delete
         /// </summary>
@@ -81,7 +80,8 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
                 { 
                     client.DefaultRequestHeaders.Add("Authorization",$"{token.token_type} {token.access_token}");
                 }
-                response = client.GetAsync($"{urlBase}{urlMethod}").Result;
+                var javi = client.GetAsync($"{urlBase}{urlMethod}");
+                response = javi.Result;
                 response.EnsureSuccessStatusCode();
                 result = response.Content.ReadAsStringAsync().Result;
             }
@@ -109,7 +109,6 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
             }
             return result;
         }
-        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Hace una petición post al api
         /// </summary>
@@ -179,7 +178,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
                 }
             }
         }
-        [ExcludeFromCodeCoverage]
+
         /// <summary>
         /// Hace una petición post
         /// </summary>
@@ -231,7 +230,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Models.Services
                 }
             }
         }
-        [ExcludeFromCodeCoverage]
+
         /// <summary>
         /// Hace una petición put
         /// </summary>

@@ -26,6 +26,8 @@
 
 [Despliegue de los servicios front](#despliegue-de-los-servicios-front)
 
+[Actualización y reinicio de los servicicios](#actualización-y-reinicio-de-los-servicicios)
+
 [Ejemplo de configuración de HAProxy](#ejemplo-de-configuración-de-haproxy)
 
 # Despliegue de ASIO Backend SGI con Docker
@@ -408,8 +410,8 @@ Ahora, si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz 
 
 Si queremos reinicarlos por un mal funcionamiento, o simplemente queremos actualizarlos, debemos ejecutar los script de despleigues que hemos mencionado en apartados anteriores en su correspondiente frontal.
 
-./actualizar-front.sh
-./actualizar-back.sh
+	./actualizar-front.sh
+	./actualizar-back.sh
 
 Si tenemos los sercicios de fron en alta disponibilidad es recomendable ejecutarlo en los dos aunque solamente tengamos el problema en uno, debido a que este proceso también los actualiza.
 

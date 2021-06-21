@@ -3,14 +3,17 @@
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Excepción del tipo BadRequest
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hercules.Asio.XML_RDF_Conversor.Extra.Exceptions
 {
     /// <summary>
     /// Excepción del tipo BadRequest
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class BadRequestException : Exception
     {
+
         /// <summary>
         /// BadRequestException
         /// </summary>

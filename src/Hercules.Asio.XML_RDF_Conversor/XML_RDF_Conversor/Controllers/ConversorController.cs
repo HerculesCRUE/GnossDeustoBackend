@@ -30,7 +30,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
     public class ConversorController : Controller
     {
         // Clase para realizar llamadas al API de Uris Factory
-        readonly CallUrisFactoryApiService _callUrisFactoryService;
+        readonly ICallUrisFactoryApiService _callUrisFactoryService;
 
         /// <summary>
         /// Propiedad encargada de almacenar la configuración.
@@ -42,7 +42,7 @@ namespace Hercules.Asio.XML_RDF_Conversor.Controllers
         /// </summary>
         /// <param name="configuration"></param>
         /// <param name="callUrisFactoryService"></param>
-        public ConversorController(IConfiguration configuration, CallUrisFactoryApiService callUrisFactoryService)
+        public ConversorController(IConfiguration configuration, ICallUrisFactoryApiService callUrisFactoryService)
         {
             _configuration = configuration;
             _callUrisFactoryService = callUrisFactoryService;
