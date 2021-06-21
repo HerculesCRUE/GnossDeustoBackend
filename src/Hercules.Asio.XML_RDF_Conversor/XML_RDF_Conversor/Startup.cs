@@ -25,6 +25,7 @@ namespace Hercules.Asio.XML_RDF_Conversor
     /// <summary>
     /// Startup.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         private readonly IWebHostEnvironment _env;
