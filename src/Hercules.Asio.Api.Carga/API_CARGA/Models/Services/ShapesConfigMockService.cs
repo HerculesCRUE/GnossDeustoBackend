@@ -87,8 +87,8 @@ namespace API_CARGA.Models.Services
             personShape.AppendLine("@prefix vcard: <http://purl.org/roh/mirror/vcard#>.");
             personShape.AppendLine("roh:foaf1_PersonShape");
             personShape.AppendLine("\ta sh:NodeShape ;");
-            personShape.AppendLine("\th:targetClass foaf1:Person ;");
-            personShape.AppendLine("\th:property roh:someValuesDataType__foaf1__Person__foaf1__firstName;");
+            personShape.AppendLine("\tsh:targetClass foaf1:Person ;");
+            personShape.AppendLine("\tsh:property roh:someValuesDataType__foaf1__Person__foaf1__firstName;");
             personShape.AppendLine("\tsh:property roh:someValuesDataType__foaf1__Person__vivo__identifier;");
             personShape.AppendLine("\tsh:property roh:someValuesDataType__foaf1__Person__foaf1__surname;");
             personShape.AppendLine("\tsh:property roh:allValuesDataType__foaf1__Person__foaf1__surname;");
