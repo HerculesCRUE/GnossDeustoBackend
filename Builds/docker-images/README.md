@@ -406,6 +406,7 @@ Ahora, si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz 
 
 ![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/front.png)
 
+
 ## Actualización y reinicio de los servicicios
 
 Si queremos reinicarlos por un mal funcionamiento, o simplemente queremos actualizarlos, debemos ejecutar los script de despleigues que hemos mencionado en apartados anteriores en su correspondiente frontal.
