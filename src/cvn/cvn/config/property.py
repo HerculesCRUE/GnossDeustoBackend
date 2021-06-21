@@ -10,12 +10,18 @@ def init_property_from_serialized_toml(config, entity_parent):
     name = "topDataProperty"
     if 'displayname' in config:
         display_name_format = re.compile("^[a-zA-Z]+:\w+$")
+        display_name_format_2 =re.compile("^[a-zA-Z]+:\w+-\w+$")
         if re.match(display_name_format, config['displayname']):
             split = config['displayname'].split(":")
             ontology = split[0]
             name = split[1]
+        elif re.match(display_name_format_2, config['displayname']):
+            split = config['displayname'].split(":")
+            ontology = split[0]
+            name = split[1]
         else:
-            raise ValueError('displayname has invalid format')
+            raise ValueError('displayname property has invalid format')
+    '''
     else:
         if 'ontology' not in config:
             raise KeyError('ontology not specified for Property: ' + str(config))
@@ -25,7 +31,7 @@ def init_property_from_serialized_toml(config, entity_parent):
         if 'name' not in config:
             raise KeyError('name not specified for Property')
         name = config['name']
-
+    '''
     format_string = None
     if 'format' in config:
         format_string = config['format']
@@ -45,7 +51,6 @@ def init_property_from_serialized_toml(config, entity_parent):
     generated_property = Property(ontology=ontology, name=name, format_string=format_string,
                                   hidden=hidden, parent=entity_parent, data_type=data_type,
                                   required=required)
-
     if 'sources' not in config:
         raise KeyError('no sources defined for Property')
     for source in config['sources']:

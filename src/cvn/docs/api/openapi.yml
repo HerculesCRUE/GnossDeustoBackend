@@ -38,4 +38,3 @@ paths:
           description: "Error de conversión (archivo demasiado grande/mal formateado) o del servidor en general."
         "422":
           description: "Error de validación. Algún campo no se está incluyendo o se está incluyendo mal. Ver mensaje de respuesta"
-          

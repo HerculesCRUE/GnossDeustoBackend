@@ -46,9 +46,10 @@ class OntologyConfig:
         return self.ontologies.get(short_name)
 
     def add_ontology(self, ontology):
-        # if self.ontology_exists(ontology.short_name):
-        # TODO error handling verificación de si existe ontología
-        self.ontologies[ontology.short_name] = ontology
+        if self.ontology_exists(ontology.short_name):
+            return self
+        else:
+            self.ontologies[ontology.short_name] = ontology
         return self
 
     def ontology_exists(self, short_name):

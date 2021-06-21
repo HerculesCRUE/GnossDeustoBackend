@@ -56,8 +56,8 @@ Para la transformación de los archivos, se han definido una serie de ficheros d
 
 Todos los archivos de configuración están ubicados en la carpeta `mappings/(versión actual cvn)/cvn-to-roh`. En su interior encontramos los siguientes archivos:
 
-- `1-personal-data.toml` \
-	Sección especial, en la que se definen todos los datos personales que deben extraerse del CVN y enlazarlos a la persona dueña del CVN.
+- `1-data-type.toml` \
+	 Se definen los datatype que se pueden usar. 
 
 - `2-entities.toml`
 	Generación de entidades, subentidades y relaciones a partir de los datos disponibles en el CVN.
@@ -82,7 +82,7 @@ Para definir, por ejemplo, el uso de la ontología `foaf`, se haría añadiendo 
 ```toml
 [[ontologies]]
 shortname = "foaf"
-uri_base = "http://xmlns.com/foaf/0.1/"
+uri_base = "http://w3id.org/roh/mirror/foaf#"
 ```
 
 Parámetros:
@@ -97,20 +97,15 @@ Otro ejemplo de configuración completo:
 ```toml
 [[ontologies]]
 shortname = "roh"
-uri_base = "https://purl.org/roh/"
-primary = true
+uri_base = "http://w3id.org/roh#"
+
+[[ontologies]]
+shortname = "rohes"
+uri_base = "http://w3id.org/rohes#"
 
 [[ontologies]]
 shortname = "bibo"
-uri_base = "http://purl.org/roh/mirror/bibo/"
-
-[[ontologies]]
-shortname = "vivo"
-uri_base = "http://purl.org/roh/mirror/vivo#"
-
-[[ontologies]]
-shortname = "foaf"
-uri_base = "http://xmlns.com/foaf/0.1/"
+uri_base = "http://w3id.org/roh/mirror/bibo#"
 ```
 
 Observa cómo se repite el encabezado `[[ontologies]]` en cada ontología, indicando que se trata de un elemento de un *array*.
@@ -240,10 +235,8 @@ id.resource = "Article"
 id.format = "{vivo:doi}"
 
     [[entities.relationships]]
-    ontology = "roh"
-    name = "correspondingAuthor"
-    inverse_ontology = "roh"
-    inverse_name = "correspondingAuthorOf"
+    direct = "roh:correspondingAuthor"
+    inverse = "roh:correspondingAuthorOf"
     link_to_cvn_person = true
 ```
 Aquí creamos un *AcademicArticle* y lo enlazamos con la entidad primaria (normalmente será la persona del CVN)
@@ -256,16 +249,13 @@ En el siguiente ejemplo hay dos relaciones con las clases padres: un *DateTimeIn
     classname = "DateTimeInterval"
 
         [[entities.subentities.relationships]]
-        inverse_ontology = "vivo"
-        inverse_name = "dateTimeInterval"
+        inverse = "vivo:dateTimeInterval"
 
         [[entities.subentities.subentities]]
-        ontology = "vivo"
-        classname = "DateTimeValue"
+        direct = "vivo:DateTimeValue"
 
             [[entities.subentities.subentities.relationships]]
-            inverse_ontology = "vivo"
-            inverse_name = "start"
+            inverse = "vivo:start"
 ```
 
 
@@ -281,16 +271,16 @@ code = "030.010.000.000"
 displayname = "vivo:TeacherRole"
 
     [[entities.relationships]]
-    direct = "oboro:RO_000052"
-    inverse = "oboro:RO_000053"
+    direct = "ro:RO_000052"
+    inverse = "ro:RO_000053"
     link_to_cvn_person = true
 
     [[entities.subentities]]
     displayname = "vivo:Course"
 
         [[entities.subentities.relationships]]
-        direct = "obobfo:BFO_0000055"
-        inverse = "obobfo:BFO_0000054"
+        direct = "bfo:BFO_0000055"
+        inverse = "bfo:BFO_0000054"
 
         [[entities.subentities.properties]]
         displayname = "roh:title"
