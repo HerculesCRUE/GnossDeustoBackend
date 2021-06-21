@@ -20,5 +20,21 @@ namespace Hercules.Asio.CVN2OAI_PMH.Models.Services
             list.Add("2");
             return list;
         }
+
+        /// <summary>
+        /// Obtiene un CVN
+        /// </summary>
+        /// <param name="pId">Identificador</param>
+        /// <param name="pOnlyIDs">Obtiene solo el CVN con el IDID</param>
+        /// <param name="pXML_CVN_Repository">Ruta del repositorio de CVN</param>
+        /// <returns></returns>
+        public string GetCurriculum(string pId, bool pOnlyIDs, string pXML_CVN_Repository)
+        {
+            if (!pOnlyIDs)
+            {
+                return "";
+            }
+            return null;
+        }
     }
 }

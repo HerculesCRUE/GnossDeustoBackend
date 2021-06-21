@@ -23,4 +23,13 @@
     <ProjectReference Include="..\OAI_PMH_CVN\Hercules.Asio.CVN2OAI_PMH.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="CVS\1.rdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="CVS\2.rdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

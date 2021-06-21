@@ -8,6 +8,7 @@ namespace Hercules.Asio.CVN2OAI_PMH.Models.Services
 {
     public interface IUtil
     {
-        HashSet<string> GetCurriculumsIDs(DateTime pInicio, string pXML_CVN_Repository);
+        public HashSet<string> GetCurriculumsIDs(DateTime pInicio, string pXML_CVN_Repository);
+        public string GetCurriculum(string pId, bool pOnlyIDs, string pXML_CVN_Repository);
     }
 }

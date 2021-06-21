@@ -4,6 +4,7 @@
 // Objeto con la información correspondiente al CVN
 using RestSharp;
 using System;
+using System.IO;
 
 namespace OaiPmhNet.Models.OAIPMH
 {
@@ -38,6 +39,10 @@ namespace OaiPmhNet.Models.OAIPMH
                     throw new Exception("Se ha producido un error al generar el RDF");
                 }
                 rdf = response.Content;
+            }
+            else if(pXML_CVN != null)
+            {
+                rdf = File.ReadAllText($"CVS/{pId}.rdf");
             }
             Id = pId.ToString();           
         }

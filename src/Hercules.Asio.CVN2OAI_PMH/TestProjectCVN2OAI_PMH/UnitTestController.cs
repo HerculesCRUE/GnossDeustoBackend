@@ -66,5 +66,34 @@ namespace TestProjectCVN2OAI_PMH
             var identifyNode = doc.DocumentElement.ChildNodes.Item(2);
             Assert.True(identifyNode.Name.Equals("ListSets"));
         }
+        [Fact]
+        public void TestListRecords()
+        {
+            ConfigOAI_PMH_CVN configOAI_PMH_CVN = new ConfigOAI_PMH_CVN(ConfigOAI_PMH_CVN.GetBuildConfiguration());
+            UtilMock util = new UtilMock();
+            OAI_PMHController oAI_PMHController = new OAI_PMHController(configOAI_PMH_CVN, util);
+            var resultAction = oAI_PMHController.Get(OaiPmhNet.OaiVerb.ListRecords, metadataPrefix: "rdf");
+            var result = (FileContentResult)resultAction;
+            XmlDocument doc = new XmlDocument();
+            MemoryStream ms = new MemoryStream(result.FileContents);
+            doc.Load(ms);
+            var identifyNode = doc.DocumentElement.ChildNodes.Item(2);
+            Assert.True(identifyNode.Name.Equals("ListRecords"));
+        }
+
+        [Fact]
+        public void TestGetRecord()
+        {
+            ConfigOAI_PMH_CVN configOAI_PMH_CVN = new ConfigOAI_PMH_CVN(ConfigOAI_PMH_CVN.GetBuildConfiguration());
+            UtilMock util = new UtilMock();
+            OAI_PMHController oAI_PMHController = new OAI_PMHController(configOAI_PMH_CVN, util);
+            var resultAction = oAI_PMHController.Get(OaiPmhNet.OaiVerb.GetRecord, "1", "rdf");
+            var result = (FileContentResult)resultAction;
+            XmlDocument doc = new XmlDocument();
+            MemoryStream ms = new MemoryStream(result.FileContents);
+            doc.Load(ms);
+            var identifyNode = doc.DocumentElement.ChildNodes.Item(2);
+            Assert.True(identifyNode.Name.Equals("GetRecord"));
+        }
     }
 }

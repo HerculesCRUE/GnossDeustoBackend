@@ -167,16 +167,8 @@ namespace OaiPmhNet.Models.OAIPMH
         /// <returns></returns>
         private CVN GetCurriculum(string pId, bool pOnlyIDs, string pXML_CVN_Repository)
         {
-            string xml = "";
-            if (!pOnlyIDs)
-            {
-                var client = new RestClient($"{pXML_CVN_Repository}cvn?id={pId}");
-                client.Timeout = -1;
-                var request = new RestRequest(Method.GET);
-                request.AddHeader("application", "asio");
-                request.AddHeader("key", "asiokey");
-                xml = client.Execute(request).Content;
-            }
+            string xml = _util.GetCurriculum(pId, pOnlyIDs, pXML_CVN_Repository);
+            
             return new CVN(xml, pId, _configOAI_PMH_CVN.GetCVN_ROH_converter());
         }
 
