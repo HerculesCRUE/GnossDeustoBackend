@@ -1,0 +1,1 @@
+Esta capeta contiene las imágenes explicativas para ejecutar la petición POST desde Postman y que se usan en el [README princiapal](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/cvn/README.md)

@@ -25,6 +25,7 @@ Requisitos:
 Instalamos con Pipenv:
 
 ```bash
+$ pip install pipenv
 $ pipenv install
 ```
 
@@ -37,16 +38,43 @@ $ pipenv run python3 -m cvn.webserver
 ```
 # Realizar el request
 
-Se recomienda usar el programa Postman(https://www.postman.com/).  Para poder utilizar la API de conversión CVN desde esta aplicación, únicamente hay que seleccionar al importar una nueva api y subir la carpeta `docs` y automaticamente encuentra la API necesaria. Se debe ejecutar el servidor como se explicó en la sección superior. Postman te permite darle los datos para la petición POST. 
- 
-Una vez subida la api a Postman, se realiza un request y automáticamente te saldrá la petición POST seguida de una URL similar a la siguiente: 
-```{{baseUrl}}/convert?orcid=ORCID&format=FORMATO```
+Se recomienda usar el programa Postman (https://www.postman.com/). Seguir los siguientes pasos ilustrados con imágenes:
+* Para poder utilizar la API de conversión CVN desde esta aplicación, 
+    * Hay que importar una nueva api (aplicando al botón que se ve en flecha roja de la siguiente imagen). 
+    * Se abre un menú de opciones que son las que se observan en la imagen y se debe seleccionar `Folder` (flecha azul). 
+    * Seleccionar en la opción anterior `Choose folder from your computer`, y se deberá seccionar la carpeta `docs`. Selecionar importar la api que encuentra de manera automática. 
 
-Se debera cambiar en esta línea los parámetros ORCID por el orcid y FORMATO por el formato deseado.  Las opciones de formato se exponen mas abajo. Un ejemplo de cómo debe quedar es el siguiente:
-```{{baseUrl}}/convert?orcid=0000-0001-8055-6823&format=xml```
+![](imagenes/paso_1.png)
+
+* Una vez realizado este paso, Postman te permite darle los datos para la petición POST. En la siguiente imagen se muestra el aspecto de Postman al terminar el paso anterior. La flecha roja muestra nuestra api. Para poder pasarle los datos se deberá clicar al enlace que señala la fecha azul. 
  
-Para pasarle el fichero xml que queremos transformar, en esta petición POST en la opción body en binary hay que subir el fichero .xml que se quiere 
-y cuando pulsemos el boton send obtendremos las tripletas deseadas. 
+![](imagenes/paso_2.png)
+
+* Se debera clicar el enlace de `Open Request` señalado con la fecha azul. 
+
+![](imagenes/paso_3.png)
+
+
+* Una  vez realizado todos los pasos anteriores, de debe ejecutar el servidor (explicado en la sección anterior).
+
+* Volviendo a Postman, hay que realizar la petición POST a la cual hay que pasarle los datos, deseados. Para ello:
+    * En la URL  que aparece en el rectángulo rojo, hay que insertar el ORCID y el formato deseado. Este URL tiene la siguiente forma, donde los parámetros ORCID y FORMATO pueden ser diferentes en cada petición realizada. Se deberá sustituir por los datos deseados. Ejemplificando.  
+    ```{{baseUrl}}/convert?orcid=ORCID&format=FORMATO``` --> ```{{baseUrl}}/convert?orcid=0000-0001-8055-6823&format=xml```
+
+![](imagenes/paso_4.png)
+
+* Una vez cambiado la URL se deberá clicar en el botón `body`, el resultado de esta acción se muestra en la siguiente imagen.
+    * Se debe clicar en la opción `binary` (flecha roja). 
+    * Clicar en `Select File` y seleccionar el archivo xml que contiene el CVN que se desea transformar en tripletas. Es importante tener en cuenta que estas tripletas seran compatibles con la ultima versión de [ROH](https://github.com/HerculesCRUE/ROH/tree/gh-pages).
+    * Llegado a este punto ya se le han pasado todos los datos a la petición POST y se ha activado el servidor por lo que únicamente hace falta realizar la petición clicando el botón `Send` (flecha verde).
+    
+ 
+![](imagenes/paso_5.png)
+
+* Con el fin de ejemplificar el resultado, en la siguiente imagen se muestra como aparece el resultado de la conversión del xml que se encuentra en la carpeta de Ejemplos con nombre  cv1.xml. y como URL se utilizó la anteriormente ejemplificada y que se observa en la imagen anterior. El resultado es el siguiente
+
+![](imagenes/paso_6.png)
+
 
 ## Configuración
 
