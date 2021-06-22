@@ -29,7 +29,7 @@ import cvn.config.entitycache as cvn_entity_cache
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB máx.
 
-debug = True
+debug = False
 
 # Formatos de salida permitidos
 ALLOWED_FORMATS = ["xml", "n3", "turtle", "nt", "pretty-xml", "trix", "trig", "nquads"]
