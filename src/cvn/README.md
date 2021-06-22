@@ -37,16 +37,15 @@ $ pipenv run python3 -m cvn.webserver
 ```
 # Realizar el request
 
-Se recomienda usar el programa Postman.  Para subir la api a esta aplicacion unicamente hay que seleccionar el importar una nueva api y  subir la capeta 
-`docs`  y automaticamente encuentra la api necesaria. Se debe ejecutar el servidor como se explico en la seccion superior. Postman te permite darle los datos para la petición post. 
+Se recomienda usar el programa Postman(https://www.postman.com/).  Para poder utilizar la API de conversión CVN desde esta aplicación, únicamente hay que seleccionar al importar una nueva api y subir la carpeta `docs` y automaticamente encuentra la API necesaria. Se debe ejecutar el servidor como se explicó en la sección superior. Postman te permite darle los datos para la petición POST. 
  
-Una vez subida la api a Postman, se realiza un request y aumentaticamente te saldra la petidion post segudi de un url similar  al siguiente: 
+Una vez subida la api a Postman, se realiza un request y automáticamente te saldrá la petición POST seguida de una URL similar a la siguiente: 
 ```{{baseUrl}}/convert?orcid=ORCID&format=FORMATO```
 
-Se debera cambiar en esta linea los parametros ORCID por el orcid y FORMATO por el formato deseado.  Las opciones de formato se exponen mas abajo. Un ejemplo de como debe quedar esta linea es el siguiente:
+Se debera cambiar en esta línea los parámetros ORCID por el orcid y FORMATO por el formato deseado.  Las opciones de formato se exponen mas abajo. Un ejemplo de cómo debe quedar es el siguiente:
 ```{{baseUrl}}/convert?orcid=0000-0001-8055-6823&format=xml```
  
-Para pasarle el fichero xml que queremos transformar, en esta peticion post en la opción body en binary hay que subir el fichero .xml que se quiere 
+Para pasarle el fichero xml que queremos transformar, en esta petición POST en la opción body en binary hay que subir el fichero .xml que se quiere 
 y cuando pulsemos el boton send obtendremos las tripletas deseadas. 
 
 ## Configuración
