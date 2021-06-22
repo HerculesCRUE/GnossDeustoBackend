@@ -1,4 +1,1 @@
-Documentación de:
-
-- `api`: definición de OpenAPI y servidor-documentación
-- `config`: archivos de configuración para la conversión
+Esta carpeta conteiene el archivo que permite ejecutar el Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH.

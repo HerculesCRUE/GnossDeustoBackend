@@ -22,7 +22,7 @@ Requisitos:
 - Python 3
 - Pipenv
 
-Instalamos con Pipenv:
+Instalamos con Pipenv (son imprescindible las dos ordenes):
 
 ```bash
 $ pip install pipenv
