@@ -2,13 +2,17 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Controlador encargado de gestionar las operaciones de la factoria de uris
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using ApiCargaWebInterface.Extra.Exceptions;
 using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.Models.Services;
+using ApiCargaWebInterface.Models.UrisFactory;
 using ApiCargaWebInterface.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -58,10 +62,10 @@ namespace ApiCargaWebInterface.Controllers
         {
             UrisFactoryResultViewModel urisFactoryModel = new UrisFactoryResultViewModel();
             urisFactoryModel.Identifier = Identifier;
-            urisFactoryModel.Resource_class = Identifier;
+            urisFactoryModel.Resource_class = Resource_class;
             try
             {
-                urisFactoryModel.UriResult = _callUrisFactoryService.GetUri(Resource_class, Identifier, uriGetEnum);
+                urisFactoryModel.UriResult = _callUrisFactoryService.GetUri(HttpUtility.UrlEncode(Resource_class), HttpUtility.UrlEncode(Identifier), uriGetEnum);
             }
             catch(HttpRequestException ex)
             {
@@ -181,6 +185,27 @@ namespace ApiCargaWebInterface.Controllers
                 ModelState.AddModelError("Uri_Structure", badExce.Message);
                 return View("Index", urisFactoryModel);
             }
+        }
+
+        /// <summary>
+        /// Autocompleta
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("[Controller]/autocomplete")]
+        public IActionResult Autocomplete(string q,bool rdfType)
+        {
+            string result = _callUrisFactoryService.GetSchema();
+            UriStructureGeneral uriStructure = JsonConvert.DeserializeObject<UriStructureGeneral>(result);
+            List<string> listClass = new List<string>();
+            if(rdfType)
+            {
+                listClass = uriStructure.ResourcesClasses.Select(x => x.RdfType).Distinct().ToList();
+            }else
+            {
+                listClass = uriStructure.ResourcesClasses.Select(x => x.ResourceClass).Distinct().ToList();
+            }
+            listClass = listClass.Where(x => x.ToLower().Contains(q.ToLower())).ToList();
+            return Json(listClass);
         }
 
     }

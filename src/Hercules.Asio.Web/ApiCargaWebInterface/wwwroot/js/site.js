@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 $(function () {
-
+    //Autocomplete LDS
     $.ajax({
         url: "/carga-web/autocomplete/GetUrlSearch",
         type: "GET",
@@ -35,6 +35,40 @@ $(function () {
         },
         select: function (event, ui) {
             document.location.href = ui.item.url;
+        }
+    })
+
+    //Autocomplete URIS_FACTORY
+    $.ajax({
+        url: "/carga-web/UrisFactory/autocomplete",
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            $('#Resource_class').attr('action', data);
+        }
+    })
+
+    $("#Resource_class").autocomplete({
+        minLength: 3,
+        source: function (request, response) {
+            $.ajax({
+                url: "/carga-web/UrisFactory/autocomplete",
+                type: "GET",
+                dataType: "json",
+                data: {
+                    q: request.term,
+                    rdfType: $('#UriGetEnum').val() =='Rdftype'
+                },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item
+                        }
+                    }))
+                }
+            })
+        },
+        select: function (event, ui) {
         }
     })
 });
