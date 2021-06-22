@@ -71,7 +71,7 @@ Se recomienda usar el programa Postman (https://www.postman.com/). Seguir los si
  
 ![](imagenes/paso_5.png)
 
-* Con el fin de ejemplificar el resultado, en la siguiente imagen se muestra como aparece el resultado de la conversión del xml que se encuentra en la carpeta de Ejemplos con nombre  cv1.xml. y como URL se utilizó la anteriormente ejemplificada y que se observa en la imagen anterior. El resultado es el siguiente
+* Con el fin de ejemplificar el resultado, en la siguiente imagen se muestra como aparece el resultado de la conversión de un xml:
 
 ![](imagenes/paso_6.png)
 
