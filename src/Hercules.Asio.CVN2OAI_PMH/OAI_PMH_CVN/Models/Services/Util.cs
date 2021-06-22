@@ -21,7 +21,10 @@ namespace Hercules.Asio.CVN2OAI_PMH.Models.Services
         /// <returns>Identificadores de os curriculums</returns>
         public HashSet<string> GetCurriculumsIDs(DateTime pInicio, string pXML_CVN_Repository)
         {
-           
+            HashSet<string> x = new HashSet<string>();
+            x.Add("1");
+            x.Add("2");
+            return x;
             var client = new RestClient($"{pXML_CVN_Repository}changes?date={pInicio.ToString("yyyy")}-{pInicio.ToString("MM")}-{pInicio.ToString("dd")}");
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
