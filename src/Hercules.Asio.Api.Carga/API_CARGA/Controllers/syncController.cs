@@ -45,11 +45,13 @@ namespace API_CARGA.Controllers
             }
             catch (TaskCanceledException ex)
             {
-                return Problem(ex.Message);
+                throw ex;
+                //return Problem(ex.Message);
             }
             catch (Exception ex)
             {
-                return Problem(ex.Message);
+                throw ex;
+                //return Problem(ex.Message);
             }
             
         }
