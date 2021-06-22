@@ -135,7 +135,7 @@ A continuación se muestra un error en el que se requiere la intervención del u
 en el caso de que no sea ninguna la opción correcta. En esta pantalla se muestra la confianza de las opciones siendo 1 la más alta, además se puede visualizar los datos de 
 las diferentes opciones desde el enlace que hay en ver opción.
 
-![](img/DiscoverUser.png)
+![](img/DiscoverUser2.png)
 
 Vista de una tarea recurrente
 -----------------------------
