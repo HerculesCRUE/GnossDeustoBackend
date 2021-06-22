@@ -628,7 +628,8 @@ $(function () {
                         $searchButton.click();
                     })
             $('.dataTables_filter').append($searchButton, $clearButton);
-            $('.dataTables_filter').addClass('dataTables_paginate');
+            $('.dataTables_filter').addClass('dataTables_paginate');            
+            $('.dataTables_filter input').attr("placeholder", "Texto a buscar");   
         }   
     });
 
