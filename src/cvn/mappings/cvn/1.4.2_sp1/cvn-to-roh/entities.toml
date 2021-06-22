@@ -19,6 +19,14 @@ cache = "foaf:name"
         value = "true"
 
     [[entities.properties]]
+    displayname = "roh:ORCID"
+    format = "{name}"
+        # Identificador único de CV = ORCID. 
+        [[entities.properties.sources]]
+        code = "000.020.000.010"
+        name = "name"
+
+    [[entities.properties]]
     displayname = "foaf:name"
     format = "{name} {familyName} {secondFamilyName}"
 
