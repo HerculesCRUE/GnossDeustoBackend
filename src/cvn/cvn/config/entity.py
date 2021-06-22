@@ -1,3 +1,5 @@
+import rdflib
+
 from ..utils import code as cvn_code
 import cvn.config.property as cvn_property
 from rdflib.namespace import RDF
@@ -12,8 +14,6 @@ import urllib.parse
 import cvn.utils.xmltree as xmltree
 import cvn.webserver as web_server
 import logging
-import os
-
 
 # Caché de URIs generadas
 # TODO mover a un servicio externo, o hacer algo más elaborado
@@ -38,11 +38,7 @@ def generate_uri(resource_class, identifier):
         return cached_uris[cache_id]
      
     # Quitar verify=False
-    url_uris_factory = os.getenv('ConfigUrlUrisFactory')
-    if url_uris_factory is None:
-        url_uris_factory = "http://herc-as-front-desa.atica.um.es/uris/"
-    url_uris_factory += "Factory"
-    api_response = requests.get(url_uris_factory, params={
+    api_response = requests.get("http://herc-as-front-desa.atica.um.es/uris/Factory", params={
         'resource_class': resource_class,
         'identifier': identifier
     })  # TODO comprobar que lo que devuelve es de hecho una URL bien formateada
@@ -84,6 +80,10 @@ def init_entity_from_serialized_toml(config, parent=None):
             classname = split[1]
         else:
             raise ValueError('displayname has invalid format: ' + config['displayname'])
+    # Actualemente no se va a separar la ontologia y el nombre.
+    # unicamente se pondran displayname en las subentidades y propiedad. Luego se puede añadir los atributos de format
+    # y otros pero par ala descripcion de la propiedad o entidad de realidad con displayname PREFIX:name.
+    '''
     else:
         if 'ontology' not in config:
             raise KeyError('ontology not specified for Entity')
@@ -94,7 +94,7 @@ def init_entity_from_serialized_toml(config, parent=None):
 
         ontology = config['ontology']
         classname = config['classname']
-
+    '''
     # ID
     config_id_format = None
     config_id_resource = None
@@ -128,6 +128,7 @@ def init_entity_from_serialized_toml(config, parent=None):
     if 'properties' in config:
         for property_config in config['properties']:
             property_generated = cvn_property.init_property_from_serialized_toml(property_config, entity)
+
             entity.add_property(property_generated)
             property_generated.parent = entity
 
@@ -142,6 +143,9 @@ def init_entity_from_serialized_toml(config, parent=None):
                 split = relationship['direct'].split(":")
                 ontology = split[0]
                 name = split[1]
+            # Actualemente no se va a separar la ontologia y el nombre.
+            # unicamente se pondran en las relaciones los atributos dicrect y invserse.
+            '''
             else:
                 if 'name' in relationship:
                     if 'ontology' not in relationship:
@@ -149,21 +153,25 @@ def init_entity_from_serialized_toml(config, parent=None):
                         # TODO comprobar que está definida
                     name = relationship['name']
                     ontology = relationship['ontology']
-
+            '''
             inverse_name = None
             inverse_ontology = None
             if 'inverse' in relationship:
                 split = relationship['inverse'].split(":")
                 inverse_ontology = split[0]
                 inverse_name = split[1]
+            # Actualemente no se va a separar la ontologia y el nombre.
+            # unicamente se pondran en las relaciones los atributos dicrect y invserse.
+            '''
             else:
                 if 'inverse_name' in relationship:
                     if 'inverse_ontology' not in relationship:
                         raise KeyError('inverse Relationship name was specified but no ontology for it')
                         # TODO comprobar que está definida
+
                     inverse_name = relationship['inverse_name']
                     inverse_ontology = relationship['inverse_ontology']
-
+            '''
             link_to_cvn_person = False
             if 'link_to_cvn_person' in relationship:
                 link_to_cvn_person = relationship['link_to_cvn_person']
@@ -385,7 +393,8 @@ class Entity:
 
             if relationship.link_to_cvn_person:
                 other = ontology_config.cvn_person
-                # TODO comprobar que person no sea None
+                #if other == None:
+                #    continue # Si  no esta definido la persona del cvn nos la saltamos...
             else:
                 if self.parent is None:
                     continue  # Si es una relación con el padre, pero no tiene... nos la saltamos
@@ -432,8 +441,7 @@ class Entity:
     def add_entity_to_ontology(self, ontology_config, skip_subentities_with_subcode):
         if not self.should_generate():
             return
-
-        if self.uri is None:
+        if self.uri is None or self.uri == "http://sws.geonames.org/2510769/" or self.uri=="http://sws.geonames.org/6695072/":
             # Propiedades
             propiedades = self.generate_property_triples(ontology_config)
 
@@ -455,6 +463,7 @@ class Entity:
                     subentity.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
                 else:
                     subentity.add_entity_to_ontology(ontology_config, skip_subentities_with_subcode)
+
         else:
             print("Uri inválida.")
 

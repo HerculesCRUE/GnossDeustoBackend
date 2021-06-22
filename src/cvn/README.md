@@ -11,9 +11,9 @@
 |Cambios de la Versión|Reordenación de la documentación y cambio de rutas|
 
 
-Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH.
+<!--Servidor HTTP que ofrece una API para convertir XML CVN a tripletas ROH.
 
-http://herc-as-front-desa.atica.um.es:8080/v1/ui/#/default/convert_post
+http://herc-as-front-desa.atica.um.es:8080/v1/ui/#/default/convert_post-->
 
 # Instalación
 
@@ -35,6 +35,18 @@ Ejecutar un servidor en el puerto por defecto (`5000`) y con el modo `debug` des
 ```bash
 $ pipenv run python3 -m cvn.webserver
 ```
+# Realizar el request
+
+Se recomienda usar el programa Postman(https://www.postman.com/).  Para poder utilizar la API de conversión CVN desde esta aplicación, únicamente hay que seleccionar al importar una nueva api y subir la carpeta `docs` y automaticamente encuentra la API necesaria. Se debe ejecutar el servidor como se explicó en la sección superior. Postman te permite darle los datos para la petición POST. 
+ 
+Una vez subida la api a Postman, se realiza un request y automáticamente te saldrá la petición POST seguida de una URL similar a la siguiente: 
+```{{baseUrl}}/convert?orcid=ORCID&format=FORMATO```
+
+Se debera cambiar en esta línea los parámetros ORCID por el orcid y FORMATO por el formato deseado.  Las opciones de formato se exponen mas abajo. Un ejemplo de cómo debe quedar es el siguiente:
+```{{baseUrl}}/convert?orcid=0000-0001-8055-6823&format=xml```
+ 
+Para pasarle el fichero xml que queremos transformar, en esta petición POST en la opción body en binary hay que subir el fichero .xml que se quiere 
+y cuando pulsemos el boton send obtendremos las tripletas deseadas. 
 
 ## Configuración
 
@@ -44,6 +56,7 @@ En el siguiente ejemplo, se ejecutará el servidor en el puerto `80`.
 ```bash
 $ pipenv run python3 -m cvn.webserver -p 80
 ```
+> Recomendable usar en Windows `python` en vez de `python3`. 
 
 Si se incluye el argumento `-h`, se mostrará la ayuda:
 
@@ -73,6 +86,7 @@ Parámetros:
 
 | key | ¿Obligatorio? | descripción |
 |:--|:--|:--|
+| `orcid` | Sí | La ORCID de la persona de la que es el CVN.<br>Ejemplo: `0000-0001-8055-6823`
 | `format` | No | Valor por defecto: `xml`<br>Posibles formatos: <ul><li>`xml`</li><li>`n3`</li><li>`turtle`</li><li>`nt`</li><li>`pretty-xml`</li><li>`trix`</li><li>`trig`</li><li>`nquads`</li></ul>
 
 El contenido del archivo que queremos debe enviarse como el cuerpo, en codificación binaria (ver ejemplos más abajo) y estando en UTF-8.
@@ -81,6 +95,13 @@ El contenido del archivo que queremos debe enviarse como el cuerpo, en codificac
 
 - `An xml file is required as binary body data.` \
     No se está enviando bien el archivo, ver ejemplos más abajo. Debe ser el cuerpo de la solicitud.
+
+- `The orcid parameter is required.` \
+    El parámetro ORCID debe ser indicado como un parámetro HTTP más, y es obligatorio.
+
+- `The orcid field has an invalid format.` \
+    El ORCID indicado no sigue el formato. Ejemplo de ORCID: `0000-0001-8055-6823`. 
+    El RegEx que usa el programa es [`0000-000(1-[5-9]|2-[0-9]|3-[0-4])\d{3}-\d{3}[\dX]`](https://regex101.com/r/w6sa8Q/2)
 
 - `The format field has an unsupported format.` \
 	El parámetro format tiene un valor fuera de los permitidos. Ver tabla más arriba para una lista completa de los formatos soportados.
@@ -96,13 +117,13 @@ Suponiendo que el servidor está en `127.0.0.1:5000`, la siguiente llamada usand
 el archivo en `examples/cvn_202033-Diego.xml`
 
 ```bash
-curl --location --request POST 'http://127.0.0.1:5000/v1/convert' \
+curl --location --request POST 'http://127.0.0.1:5000/v1/convert?orcid=0000-0001-8055-6823' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-binary '@examples/cvn_202033-Diego.xml'
 ```
 
 > Recomendable usar en Windows `"` en vez de `'`, el comando sería:
-> `curl --location --request POST "http://127.0.0.1:5000/v1/convert" --header "Content-Type: application/x-www-form-urlencoded" --data-binary "@examples/cvn_202033-Diego.xml"`
+> `curl --location --request POST "http://127.0.0.1:5000/v1/convert?orcid=0000-0001-8055-6823" --header "Content-Type: application/x-www-form-urlencoded" --data-binary "@examples/cvn_202033-Diego.xml"`
 
 #### C# - RestSharp
 
@@ -110,7 +131,7 @@ Similar a la de `curl`.
 (sustituyendo `<contenido del archivo aquí>` por el contenido del archivo que queremos convertir)
 
 ```cs
-var client = new RestClient("http://127.0.0.1:5000/v1/convert");
+var client = new RestClient("http://127.0.0.1:5000/v1/convert?orcid=0000-0001-8055-6823");
 client.Timeout = -1;
 var request = new RestRequest(Method.POST);
 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -118,8 +139,8 @@ request.AddParameter("application/x-www-form-urlencoded", "<contenido del archiv
 IRestResponse response = client.Execute(request);
 Console.WriteLine(response.Content);
 ```
-
-# Ejecución de la documentación de la API
+<!---
+ # Ejecución de la documentación de la API
 
 Existe un servidor de OpenAPI que va incluido en los archivos. Tiene los mismos requisitos que la API. Podemos ejecutarlo de la siguiente manera:
 
@@ -133,4 +154,4 @@ Se puede acceder desde la siguiente URL:
 
 http://localhost:8080/v1/ui
 
-Se puede ejecutar a la vez que la API abriendo otra terminal nueva (en Windows, una nueva ventana)
+Se puede ejecutar a la vez que la API abriendo otra terminal nueva (en Windows, una nueva ventana)-->

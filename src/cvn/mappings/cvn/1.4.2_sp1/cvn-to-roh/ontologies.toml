@@ -1,30 +1,35 @@
 [[ontologies]]
 shortname = "roh"
-uri_base = "http://purl.org/roh#"
+uri_base = "http://w3id.org/roh#"
 
 [[ontologies]]
 shortname = "rohes"
-uri_base = "http://purl.org/rohes#"
+uri_base = "http://w3id.org/rohes#"
 
 [[ontologies]]
 shortname = "bibo"
-uri_base = "http://purl.org/roh/mirror/bibo#"
+uri_base = "http://w3id.org/roh/mirror/bibo#"
 
 [[ontologies]]
 shortname = "vivo"
-uri_base = "http://purl.org/roh/mirror/vivo#"
+uri_base = "http://w3id.org/roh/mirror/vivo#"
 
 [[ontologies]]
 shortname = "foaf"
-uri_base = "http://purl.org/roh/mirror/foaf#"
+uri_base = "http://w3id.org/roh/mirror/foaf#"
 
 [[ontologies]]
-shortname = "oboro"
-uri_base = "http://purl.org/roh/mirror/obo/ro#"
+shortname = "ro"
+uri_base = "http://w3id.org/roh/mirror/obo/ro#"
 
 [[ontologies]]
-shortname = "obobfo"
-uri_base = "http://purl.org/roh/mirror/obo/bfo#"
+shortname = "bfo"
+uri_base = "http://w3id.org/roh/mirror/obo/bfo#"
+
+[[ontologies]]
+shortname= "iao"
+uri_base= "http://w3id.org/roh/mirror/obo/iao#"
+
 
 [[ontologies]]
 shortname = "owl"
@@ -32,7 +37,7 @@ uri_base = "http://www.w3.org/2002/07/owl#"
 
 [[ontologies]]
 shortname = "vcard"
-uri_base = "http://purl.org/roh/mirror/vcard#"
+uri_base = "http://w3id.org/roh/mirror/vcard#"
 
 [[ontologies]]
 shortname = "xsd"
@@ -43,5 +48,9 @@ shortname = "rdf"
 uri_base = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 
 [[ontologies]]
-shortname = "geonames"
-uri_base = "http://purl.org/roh/mirror/geonames#"
+shortname = "rdfs"
+uri_base = "http://www.w3.org/2000/01/rdf-schema#"
+
+[[ontologies]]
+shortname = "gn"
+uri_base = "http://w3id.org/roh/mirror/geonames#"
