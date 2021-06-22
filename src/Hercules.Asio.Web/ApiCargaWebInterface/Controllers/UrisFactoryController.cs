@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using ApiCargaWebInterface.Extra.Exceptions;
 using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Entities;
@@ -61,10 +62,10 @@ namespace ApiCargaWebInterface.Controllers
         {
             UrisFactoryResultViewModel urisFactoryModel = new UrisFactoryResultViewModel();
             urisFactoryModel.Identifier = Identifier;
-            urisFactoryModel.Resource_class = Identifier;
+            urisFactoryModel.Resource_class = Resource_class;
             try
             {
-                urisFactoryModel.UriResult = _callUrisFactoryService.GetUri(Resource_class, Identifier, uriGetEnum);
+                urisFactoryModel.UriResult = _callUrisFactoryService.GetUri(HttpUtility.UrlEncode(Resource_class), HttpUtility.UrlEncode(Identifier), uriGetEnum);
             }
             catch(HttpRequestException ex)
             {
