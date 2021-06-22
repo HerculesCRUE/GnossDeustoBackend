@@ -14,6 +14,7 @@ import urllib.parse
 import cvn.utils.xmltree as xmltree
 import cvn.webserver as web_server
 import logging
+import os
 
 # Caché de URIs generadas
 # TODO mover a un servicio externo, o hacer algo más elaborado
@@ -38,7 +39,11 @@ def generate_uri(resource_class, identifier):
         return cached_uris[cache_id]
      
     # Quitar verify=False
-    api_response = requests.get("http://herc-as-front-desa.atica.um.es/uris/Factory", params={
+    url_uris_factory = os.getenv('ConfigUrlUrisFactory')
+    if url_uris_factory is None:
+        url_uris_factory = "http://herc-as-front-desa.atica.um.es/uris/"
+    url_uris_factory += "Factory"
+    api_response = requests.get(url_uris_factory, params={
         'resource_class': resource_class,
         'identifier': identifier
     })  # TODO comprobar que lo que devuelve es de hecho una URL bien formateada
