@@ -612,7 +612,24 @@ $(function () {
                 "next": "Siguiente",
                 "previous": "Anterior"
             }
-        }
+        },
+        initComplete: function () {
+            var input = $('.dataTables_filter input').unbind(),
+                self = this.api(),
+                $searchButton = $('<button class="paginate_button current">')
+                    .text('Buscar')
+                    .click(function () {
+                        self.search(input.val()).draw();
+                    }),
+                $clearButton = $('<button class="paginate_button current">')
+                    .text('Limpiar')
+                    .click(function () {
+                        input.val('');
+                        $searchButton.click();
+                    })
+            $('.dataTables_filter').append($searchButton, $clearButton);
+            $('.dataTables_filter').addClass('dataTables_paginate');
+        }   
     });
 
     if (datosGraficas != null) {
