@@ -56,6 +56,7 @@ En el siguiente ejemplo, se ejecutará el servidor en el puerto `80`.
 ```bash
 $ pipenv run python3 -m cvn.webserver -p 80
 ```
+> Recomendable usar en Windows `python` en vez de `python3`. 
 
 Si se incluye el argumento `-h`, se mostrará la ayuda:
 
