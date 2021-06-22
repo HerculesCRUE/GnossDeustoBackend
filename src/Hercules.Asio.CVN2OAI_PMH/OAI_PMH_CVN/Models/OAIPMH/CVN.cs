@@ -39,18 +39,14 @@ namespace OaiPmhNet.Models.OAIPMH
                     throw new Exception("Se ha producido un error al generar el RDF");
                 }
                 rdf = response.Content;
-            }
-            else if(pXML_CVN != null)
-            {
-                rdf = File.ReadAllText($"CVS/{pId}.rdf");
-            }
+            }            
             Id = pId.ToString();           
         }
 
         /// <summary>
         /// RDF del CVN
         /// </summary>
-        public string rdf { get; }
+        public string rdf { get; set; }
 
         /// <summary>
         /// Identificador

@@ -168,8 +168,12 @@ namespace OaiPmhNet.Models.OAIPMH
         private CVN GetCurriculum(string pId, bool pOnlyIDs, string pXML_CVN_Repository)
         {
             string xml = _util.GetCurriculum(pId, pOnlyIDs, pXML_CVN_Repository);
-            
-            return new CVN(xml, pId, _configOAI_PMH_CVN.GetCVN_ROH_converter());
+            CVN cvn = new CVN(xml, pId, _configOAI_PMH_CVN.GetCVN_ROH_converter());
+            if (_util is UtilMock)
+            {
+                cvn.rdf = File.ReadAllText($"CVS/{pId}.rdf");
+            }
+            return cvn;
         }
 
     }
