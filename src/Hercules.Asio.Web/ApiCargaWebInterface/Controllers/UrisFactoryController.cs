@@ -203,6 +203,7 @@ namespace ApiCargaWebInterface.Controllers
             {
                 listClass = uriStructure.ResourcesClasses.Select(x => x.ResourceClass).Distinct().ToList();
             }
+            listClass = listClass.Where(x => x.ToLower().Contains(q.ToLower())).ToList();
             return Json(listClass);
         }
 
