@@ -2,6 +2,8 @@
 // Licenciado bajo la licencia GPL 3. Ver https://www.gnu.org/licenses/gpl-3.0.html
 // Proyecto Hércules ASIO Backend SGI. Ver https://www.um.es/web/hercules/proyectos/asio
 // Controlador encargado de gestionar las operaciones de la factoria de uris
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +11,7 @@ using ApiCargaWebInterface.Extra.Exceptions;
 using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.Models.Services;
+using ApiCargaWebInterface.Models.UrisFactory;
 using ApiCargaWebInterface.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -181,6 +184,26 @@ namespace ApiCargaWebInterface.Controllers
                 ModelState.AddModelError("Uri_Structure", badExce.Message);
                 return View("Index", urisFactoryModel);
             }
+        }
+
+        /// <summary>
+        /// Autocompleta
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("[Controller]/autocomplete")]
+        public IActionResult Autocomplete(string q,bool rdfType)
+        {
+            string result = _callUrisFactoryService.GetSchema();
+            UriStructureGeneral uriStructure = JsonConvert.DeserializeObject<UriStructureGeneral>(result);
+            List<string> listClass = new List<string>();
+            if(rdfType)
+            {
+                listClass = uriStructure.ResourcesClasses.Select(x => x.RdfType).Distinct().ToList();
+            }else
+            {
+                listClass = uriStructure.ResourcesClasses.Select(x => x.ResourceClass).Distinct().ToList();
+            }
+            return Json(listClass);
         }
 
     }
