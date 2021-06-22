@@ -131,9 +131,13 @@ En la siguiente imágen se muestra un error de ejecución que se haya podido dar
 Resolución de problemas de desambiguación
 -----------------------------
 
-A continuación se muestra un error en el que se requiere la intervención del usuario eligiendo la opción que sea correcta enter las opciones disponibles o no elegir ninguna opción
-en el caso de que no sea ninguna la opción correcta. En esta pantalla se muestra la confianza de las opciones siendo 1 la más alta, además se puede visualizar los datos de 
-las diferentes opciones desde el enlace que hay en ver opción.
+A continuación se muestra un error en el que se requiere la intervención del usuario eligiendo la opción que sea correcta enter las opciones disponibles o no elegir ninguna opción en el caso de que no sea ninguna la opción correcta. En esta pantalla se muestra la confianza de las opciones siendo 1 la más alta, además se puede visualizar los datos de las diferentes opciones desde el enlace que hay en ver opción.
+
+Se pueden tomar 3 acciones una vez se hayan revisado los problemas de desambiguación:
+ - Enriquecer y procesar: Aplica las desambiguaciones seleccionadas por el usuario y procesa de nuevo el RDF para intentar cargarlo en una nueva iteración
+ - Descartar y reintentar: No aplica ninguna desambiguación y procesa de nuevo el RDF para intentar cargarlo en una nueva iteración
+ - Descartar el RDF: No aplica ninguna desambiguación y descarta el RDF sin intentar cargarlo de nuevo
+
 
 ![](img/DiscoverUser2.png)
 
