@@ -4,10 +4,10 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Despliegue de ASIO Backend de SGI con Docker| 
 |Descripción|Instrucciones para instalar ASIO mediante el despliegue de instancias docker|
-|Versión|1.4|
+|Versión|1.5|
 |Módulo|Documentación|
 |Tipo|Manual|
-|Cambios de la Versión|Añadidas instrucciones para instalar Apache. Añadir índice.|
+|Cambios de la Versión|Añadidas instrucciones para reiniciar los frontales.|
 
 ## Índice
 [Requisitos previos](#requisitos-previos)
