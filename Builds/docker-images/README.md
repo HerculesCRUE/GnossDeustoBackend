@@ -413,7 +413,7 @@ Si queremos reinicarlos por un mal funcionamiento, o simplemente queremos actual
 	./actualizar-front.sh
 	./actualizar-back.sh
 
-Si tenemos los sercicios de fron en alta disponibilidad es recomendable ejecutarlo en los dos aunque solamente tengamos el problema en uno, debido a que este proceso también los actualiza.
+Si tenemos los servicios de front en alta disponibilidad es recomendable ejecutarlo en los dos aunque solamente tengamos el problema en uno, debido a que este proceso también los actualiza.
 
 ## Ejemplo de configuración de HAProxy
 
