@@ -408,12 +408,12 @@ Ahora, si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz 
 
 ## Actualización y reinicio de los servicicios
 
-Si queremos reinicarlos por un mal funcionamiento, o simplemente queremos actualizarlos, debemos ejecutar los script de despleigues que hemos mencionado en apartados anteriores en su correspondiente frontal.
+Si queremos actualizar los servicios o reiniciarlos por algún mal funcionamiento, debemos ejecutar los script de despliegues que hemos mencionado en apartados anteriores en su correspondiente frontal. Se trata por tanto de ejecutar los siguientes scripts:
 
 	./actualizar-front.sh
 	./actualizar-back.sh
 
-Si tenemos los servicios de front en alta disponibilidad es recomendable ejecutarlo en los dos aunque solamente tengamos el problema en uno, debido a que este proceso también los actualiza.
+Si los servicios de front estuvieran en alta disponibilidad sería recomendable ejecutar el script de front en los dos, aunque solamente tuviéramos el problema en uno, debido a que este proceso actualiza además de reiniciar.
 
 ## Ejemplo de configuración de HAProxy
 
