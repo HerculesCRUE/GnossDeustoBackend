@@ -153,7 +153,6 @@ def v1_convert():
         numdeleted += remove_entities_without_rdftype(g)
         # Query para obtener las entidades que únicamente tengan rdftype.
         numdeleted += remove_empty_entities(g)
-    g=change(g)
     g=eliminar_localizacion(g)
     return make_response(g.serialize(format=params['format']), 200)
 
@@ -211,23 +210,6 @@ def get_sources_from_property(current_property, node):
             else:
                 sources[source['name']] = None
     return sources
-
-# lo unico que hace es cambiar los rdf:member por rdf:_n, ahora como el grafo esta terminado podemos saber le valor de
-# n por lo que es mas facil.
-def change(grafo):
-    for triple in grafo:
-        prificado=str(triple[1])
-        if prificado == "http://www.w3.org/2000/01/rdf-schema#member":
-            sujeto = str(triple[0])
-            string="SELECT DISTINCT ?objeto WHERE { <"+  sujeto +">  <"+ prificado +"> ?objeto }"
-            resultadoQuery = grafo.query(string)
-            i=1
-            for fila in enumerate(resultadoQuery):
-                objecto = fila[1][0]
-                grafo.remove(( rdflib.term.URIRef(sujeto),rdflib.term.URIRef( prificado), rdflib.term.URIRef(objecto)))
-                grafo.add((  rdflib.term.URIRef(sujeto), rdflib.term.URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#_'+str(i)), objecto))
-                i=i+1
-    return grafo
 
 # esta funcion nos permite que un recurso no tenga mas de una localizacion. Por ello se queda con la localizacion mas larga,
 # Lo que ocurria es que un mismo recurso tenia varias localizaciones: JAEN, JAÈN, JAEN ESPAÑA. Por tanto esta funcion se queda con una unicamente.

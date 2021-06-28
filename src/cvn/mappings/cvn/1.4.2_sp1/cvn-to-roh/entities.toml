@@ -1089,15 +1089,17 @@ id.format = "{vivo:doi}"
         id.resource = "Person"
         cache = "foaf:name"
 
+            #[[entities.subentities.subentities.relationships]]
+            #inverse = "rdfs:member"
+
             [[entities.subentities.subentities.relationships]]
-            inverse = "rdfs:member"
+            inverse = "rdf:{roh_dummy}"
 
+            [[entities.subentities.subentities.properties]]
+            displayname = "roh:dummy" # (no existe, pero como esta propiedad no se convierte en tripletas, da igual)
+            hidden = true
 
-#            [[entities.subentities.subentities.properties]]
-#            displayname = "roh:dummy" # (no existe, pero como esta propiedad no se convierte en tripletas, da igual)
-#            hidden = true
-
-                [[entities.subentities.subentities.relationships.sources]]
+                [[entities.subentities.subentities.properties.sources]]
                 name = "order"
                 bean = "SignatureOrder"
                 format = "_{value}"
@@ -1205,8 +1207,11 @@ id.format = "{vivo:doi}"
         id.resource = "Person"
         cache = "foaf:name"
 
+            #[[entities.subentities.subentities.relationships]]
+            #inverse = "rdfs:member"
+
             [[entities.subentities.subentities.relationships]]
-            inverse = "rdfs:member"
+            inverse = "rdf:{roh_dummy}"
 
             [[entities.subentities.subentities.properties]]
             displayname = "roh:dummy" # (no existe, pero como esta propiedad no se convierte en tripletas, da igual)
@@ -1322,8 +1327,11 @@ id.format = "{vivo:doi}"
         id.resource = "Person"
         cache = "foaf:name"
 
+            #[[entities.subentities.subentities.relationships]]
+            #inverse = "rdfs:member"
+
             [[entities.subentities.subentities.relationships]]
-            inverse = "rdfs:member"
+            inverse = "rdf:{roh_dummy}"
 
             [[entities.subentities.subentities.properties]]
             displayname = "roh:dummy" # (no existe, pero como esta propiedad no se convierte en tripletas, da igual)
@@ -1451,17 +1459,20 @@ id.resource = "Conference"
             id.resource = "Person"
             cache = "foaf:name"
 
-                [[entities.subentities.subentities.subentities.relationships]]
-                inverse = "rdfs:member"
+                #[[entities.subentities.subentities.subentities.relationships]]
+                #inverse = "rdfs:member"
 
-#                [[entities.subentities.subentities.subentities.properties]]
-#                displayname = "roh:me" # (no existe, pero como esta propiedad no se convierte en tripletas, da igual)
-#                hidden = true
-#
-#                    [[entities.subentities.subentities.subentities.properties.sources]]
-#                    name = "order"
-#                    bean = "SignatureOrder"
-#                    format = "_{value}"
+                [[entities.subentities.subentities.subentities.relationships]]
+                inverse = "rdf:{roh_dummy}"
+
+                [[entities.subentities.subentities.subentities.properties]]
+                displayname = "roh:dummy" # (no existe, pero como esta propiedad no se convierte en tripletas, da igual)
+                hidden = true
+
+                    [[entities.subentities.subentities.subentities.properties.sources]]
+                    name = "order"
+                    bean = "SignatureOrder"
+                    format = "_{value}"
 
                 [[entities.subentities.subentities.subentities.properties]]
                 displayname = "foaf:name"
