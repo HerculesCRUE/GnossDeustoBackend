@@ -196,11 +196,10 @@ namespace API_CARGA.Models.Services
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
-
         }
 
         /// <summary>
