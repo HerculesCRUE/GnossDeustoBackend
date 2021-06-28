@@ -30,6 +30,7 @@ namespace Linked_Data_Server.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly static Config_Linked_Data_Server mLinked_Data_Server_Config = LoadLinked_Data_Server_Config();
         private readonly ISparqlUtility _sparqlUtility;
+        private static RohGraph ontologyGraph;
 
         public HomeController(ISparqlUtility sparqlUtility, ILogger<HomeController> logger)
         {
@@ -1011,60 +1012,68 @@ namespace Linked_Data_Server.Controllers
             return arborGraphs;
         }
 
+
         private RohGraph LoadGraph(string pGraph, ConfigService pConfigService, ref string pXAppServer)
         {
-            RohGraph dataGraph = new RohGraph();
-            string consulta = "select ?s ?p ?o where { ?s ?p ?o. }";
-            SparqlObject sparqlObject = _sparqlUtility.SelectData(pConfigService, pGraph, consulta, ref pXAppServer);
-
-            foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+            if(ontologyGraph!=null)
             {
-                SparqlObject.Data sDB = row["s"];
-                SparqlObject.Data pDB = row["p"];
-                SparqlObject.Data oDB = row["o"];
-                #region S
-                INode sG = null;
-                if (sDB.type == "bnode")
+                return ontologyGraph;
+            }else
+            { 
+                RohGraph dataGraph = new RohGraph();
+                string consulta = "select ?s ?p ?o where { ?s ?p ?o. }";
+                SparqlObject sparqlObject = _sparqlUtility.SelectData(pConfigService, pGraph, consulta, ref pXAppServer);
+
+                foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
                 {
-                    sG = dataGraph.CreateBlankNode(sDB.value);
-                }
-                else if (sDB.type == "uri")
-                {
-                    sG = dataGraph.CreateUriNode(UriFactory.Create(sDB.value));
-                }
-                #endregion
-                #region P
-                INode pG = dataGraph.CreateUriNode(UriFactory.Create(pDB.value));
-                #endregion
-                #region O
-                INode oG = null;
-                if (oDB.type == "bnode")
-                {
-                    oG = dataGraph.CreateBlankNode(oDB.value);
-                }
-                else if (oDB.type == "uri")
-                {
-                    oG = dataGraph.CreateUriNode(UriFactory.Create(oDB.value));
-                }
-                else if (oDB.type == "typed-literal" || oDB.type == "literal")
-                {
-                    if (!string.IsNullOrEmpty(oDB.lang))
+                    SparqlObject.Data sDB = row["s"];
+                    SparqlObject.Data pDB = row["p"];
+                    SparqlObject.Data oDB = row["o"];
+                    #region S
+                    INode sG = null;
+                    if (sDB.type == "bnode")
                     {
-                        oG = dataGraph.CreateLiteralNode(row["o"].value, oDB.lang);
+                        sG = dataGraph.CreateBlankNode(sDB.value);
                     }
-                    else if (!string.IsNullOrEmpty(oDB.datatype))
+                    else if (sDB.type == "uri")
                     {
-                        oG = dataGraph.CreateLiteralNode(row["o"].value, new Uri(oDB.datatype));
+                        sG = dataGraph.CreateUriNode(UriFactory.Create(sDB.value));
                     }
-                    else
+                    #endregion
+                    #region P
+                    INode pG = dataGraph.CreateUriNode(UriFactory.Create(pDB.value));
+                    #endregion
+                    #region O
+                    INode oG = null;
+                    if (oDB.type == "bnode")
                     {
-                        oG = dataGraph.CreateLiteralNode(row["o"].value);
+                        oG = dataGraph.CreateBlankNode(oDB.value);
                     }
+                    else if (oDB.type == "uri")
+                    {
+                        oG = dataGraph.CreateUriNode(UriFactory.Create(oDB.value));
+                    }
+                    else if (oDB.type == "typed-literal" || oDB.type == "literal")
+                    {
+                        if (!string.IsNullOrEmpty(oDB.lang))
+                        {
+                            oG = dataGraph.CreateLiteralNode(row["o"].value, oDB.lang);
+                        }
+                        else if (!string.IsNullOrEmpty(oDB.datatype))
+                        {
+                            oG = dataGraph.CreateLiteralNode(row["o"].value, new Uri(oDB.datatype));
+                        }
+                        else
+                        {
+                            oG = dataGraph.CreateLiteralNode(row["o"].value);
+                        }
+                    }
+                    #endregion
+                    dataGraph.Assert(sG, pG, oG);
                 }
-                #endregion
-                dataGraph.Assert(sG, pG, oG);
+                ontologyGraph = dataGraph;
+                return ontologyGraph;
             }
-            return dataGraph;
 
         }
     }
