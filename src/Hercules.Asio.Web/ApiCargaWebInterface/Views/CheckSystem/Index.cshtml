@@ -50,10 +50,18 @@
                 <div class="list-group">
                     <a href="@Url.Action("getLogs",new { api = "Carga"})" class="list-group-item @cargaSuccess">
                         <h4 class="list-group-item-heading">Estado de api Carga: </h4>
+                        @if (!string.IsNullOrEmpty(Model.UrlApiCargaSwagger))
+                        {
+                            <p class="list-group-item-text">Url: <a target="_blank" href="@Model.UrlApiCargaSwagger">@Model.UrlApiCargaSwagger</a></p>
+                        }
                         <p class="list-group-item-text">@cargaText</p>
                     </a>
                     <a href="@Url.Action("getLogs",new { api = "Cron"})" class="list-group-item @cronSuccess">
                         <h4 class="list-group-item-heading">Estado del api Cron</h4>
+                        @if (!string.IsNullOrEmpty(Model.UrlApiCronSwagger))
+                        {
+                            <p class="list-group-item-text">Url: <a target="_blank" href="@Model.UrlApiCargaSwagger">@Model.UrlApiCronSwagger</a></p>
+                        }
                         <p class="list-group-item-text">@cronText</p>
                     </a>
                     <a href="@Url.Action("getLogs",new { api = "Identity"})" class="list-group-item @tokensSuccess">

@@ -15,6 +15,7 @@ namespace ApiCargaWebInterface.Models.Services
     public class ConfigUrlService
     {
         public string Url { get; set; }
+        public string UrlSwagger { get; set; }
         public string UrlUris { get; set; }
         public string UrlDocumentacion { get; set; }
         public string UrlSAMLLogin { get; set; }
@@ -53,6 +54,30 @@ namespace ApiCargaWebInterface.Models.Services
                 Url = connectionString;
             }
             return Url;
+        }
+
+        /// <summary>
+        /// Obtiene la url de swagger del api de carga que ha sido configurada
+        /// </summary>
+        /// <returns>uri del api carga</returns>
+        public string GetUrlSwagger()
+        {
+            if (string.IsNullOrEmpty(UrlSwagger))
+            {
+                string connectionString = "";
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                if (environmentVariables.Contains("ConfigUrlSwagger"))
+                {
+                    connectionString = environmentVariables["ConfigUrlSwagger"] as string;
+                }
+                else
+                {
+                    connectionString = _configuration["ConfigUrlSwagger"];
+                }
+
+                UrlSwagger = connectionString;
+            }
+            return UrlSwagger;
         }
         /// <summary>
         /// Obtiene la url del api de uris factory que ha sido configurada

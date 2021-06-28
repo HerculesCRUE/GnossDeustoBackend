@@ -15,6 +15,7 @@ namespace ApiCargaWebInterface.Models.Services
     public class ConfigUrlCronService
     {
         public string Url { get; set; }
+        public string UrlSwagger { get; set; }
 
         private IConfiguration _configuration { get; set; }
 
@@ -44,5 +45,28 @@ namespace ApiCargaWebInterface.Models.Services
             }
             return Url;
         }
+        /// <summary>
+        /// Obtiene la url de swagger del api de cron que ha sido configurada
+        /// </summary>
+        /// <returns>uri del api cron</returns>
+        public string GetUrlSwagger()
+        {
+            if (string.IsNullOrEmpty(UrlSwagger))
+            {
+                IDictionary environmentVariables = Environment.GetEnvironmentVariables();
+                string connectionString = "";
+                if (environmentVariables.Contains("ConfigUrlCronSwagger"))
+                {
+                    connectionString = environmentVariables["ConfigUrlCronSwagger"] as string;
+                }
+                else
+                {
+                    connectionString = _configuration["ConfigUrlCronSwagger"];
+                }
+                UrlSwagger = connectionString;
+            }
+            return UrlSwagger;
+        }
+
     }
 }

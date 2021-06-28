@@ -12,7 +12,9 @@ namespace ApiCargaWebInterface.Models.Entities
     public class CheckSystemReport
     {
         public bool ApiCarga { get; set; }
+        public string UrlApiCargaSwagger { get; set; }
         public bool ApiCron { get; set; }
+        public string UrlApiCronSwagger { get; set; }
         public bool IdentityServer { get; set; }
     }
 }
