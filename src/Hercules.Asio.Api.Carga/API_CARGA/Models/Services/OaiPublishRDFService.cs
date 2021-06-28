@@ -198,7 +198,7 @@ namespace API_CARGA.Models.Services
             }
             catch (Exception ex)
             {
-                throw new ArgumentNullException(ex.Message);
+                throw;
             }
 
         }
