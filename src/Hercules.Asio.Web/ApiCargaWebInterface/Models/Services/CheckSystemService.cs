@@ -21,16 +21,12 @@ namespace ApiCargaWebInterface.Models.Services
         readonly private ICallRepositoryConfigService _callRepositoryConfigService;
         readonly private CallTokenService _callTokenService;
         readonly private ConfigPathLog _configPathLog;
-        readonly private ConfigUrlService _configUrlService;
-        readonly private ConfigUrlCronService _configUrlCronService;
-        public CheckSystemService(CallCronApiService callCronApiService, ICallRepositoryConfigService callRepositoryConfigService, CallTokenService callTokenService, ConfigPathLog configPathLog, ConfigUrlService configUrlService, ConfigUrlCronService configUrlCronService)
+        public CheckSystemService(CallCronApiService callCronApiService, ICallRepositoryConfigService callRepositoryConfigService, CallTokenService callTokenService, ConfigPathLog configPathLog)
         {
             _callCronApiService = callCronApiService;
             _callRepositoryConfigService = callRepositoryConfigService;
             _callTokenService = callTokenService;
             _configPathLog = configPathLog;
-            _configUrlService = configUrlService;
-            _configUrlCronService = configUrlCronService;
         }
         /// <summary>
         /// Obtiene una lista de ficheros de log
@@ -142,8 +138,6 @@ namespace ApiCargaWebInterface.Models.Services
             CheckSystemReport checkSystemReport = new CheckSystemReport();
             checkSystemReport.ApiCarga = CheckApiCarga();
             checkSystemReport.ApiCron = CheckCronApi();
-            checkSystemReport.UrlApiCargaSwagger = _configUrlService.GetUrlSwagger();
-            checkSystemReport.UrlApiCronSwagger = _configUrlCronService.GetUrlSwagger();
             checkSystemReport.IdentityServer = CheckIdentityServer();
             return checkSystemReport;
         }
