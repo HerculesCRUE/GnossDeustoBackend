@@ -59,7 +59,7 @@ namespace API_CARGA.Models.Services
                 {
                     client.DefaultRequestHeaders.Add("Authorization", $"{token.token_type} {token.access_token}");
                 }
-                client.Timeout = TimeSpan.FromMinutes(15);
+                client.Timeout = TimeSpan.FromMinutes(60);
                 response = client.PostAsync($"{urlBase}{urlMethod}", contentData).Result;
                 response.EnsureSuccessStatusCode();
                 result = response.Content.ReadAsStringAsync().Result;

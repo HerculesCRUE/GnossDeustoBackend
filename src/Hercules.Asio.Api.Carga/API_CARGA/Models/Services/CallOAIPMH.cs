@@ -35,6 +35,7 @@ namespace API_CARGA.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
+                client.Timeout = TimeSpan.FromMinutes(60);
                 if (_token != null)
                 {
                     client.DefaultRequestHeaders.Add("Authorization", $"{_token.token_type} {_token.access_token}");

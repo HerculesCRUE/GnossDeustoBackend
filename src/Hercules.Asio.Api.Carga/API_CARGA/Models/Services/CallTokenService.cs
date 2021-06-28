@@ -92,7 +92,7 @@ namespace API_CARGA.Models.Services
             try
             {
                 HttpClient client = new HttpClient();
-                client.Timeout = TimeSpan.FromDays(1);
+                client.Timeout = TimeSpan.FromMinutes(60);
 
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 string authority = "";

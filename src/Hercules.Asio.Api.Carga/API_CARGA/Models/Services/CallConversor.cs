@@ -90,7 +90,7 @@ namespace Hercules.Asio.Api.Carga.Models.Services
                 {
                     client.DefaultRequestHeaders.Add("Authorization", $"{_token.token_type} {_token.access_token}");
                 }
-                client.Timeout = TimeSpan.FromMinutes(15);
+                client.Timeout = TimeSpan.FromMinutes(60);
                 response = client.PostAsync($"{pUrlConversor}Conversor/Convert?pType=" + pType, contentData).Result;
                 response.EnsureSuccessStatusCode();
                 result = response.Content.ReadAsStringAsync().Result;
