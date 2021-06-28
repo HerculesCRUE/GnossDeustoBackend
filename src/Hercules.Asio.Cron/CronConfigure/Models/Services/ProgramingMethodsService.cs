@@ -140,7 +140,7 @@ namespace CronConfigure.Models.Services
                 string timeStamp = CreateTimeStamp();
                 CreateLoggin(timeStamp, idRepository);
                 Log.Error($"{ex.Message}\n{ex.StackTrace}\n");
-                throw new ArgumentNullException(ex.Message);
+                throw;
             }
         }
 
