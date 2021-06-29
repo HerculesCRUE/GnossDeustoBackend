@@ -39,14 +39,6 @@ $(function () {
     })
 
     //Autocomplete URIS_FACTORY
-    $.ajax({
-        url: "/carga-web/UrisFactory/autocomplete",
-        type: "GET",
-        dataType: "json",
-        success: function (data) {
-            $('#Resource_class').attr('action', data);
-        }
-    })
 
     $("#Resource_class").autocomplete({
         minLength: 3,
