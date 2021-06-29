@@ -13,11 +13,8 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
 {
     public class ApiFileProvider : IFileProvider
     {
-        readonly private CallApiVirtualPath _callVirtualPath;
-        public ApiFileProvider(CallApiVirtualPath callVirtualPath)
+        public ApiFileProvider()
         {
-            Log.Error($"ApiFileProvider constructor");
-            _callVirtualPath = callVirtualPath;            
         }
 
         public IDirectoryContents GetDirectoryContents(string subpath)
@@ -27,12 +24,18 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
 
         public IFileInfo GetFileInfo(string subpath)
         {
+            Log.Error($"GetFileInfo PRE");
+            CallApiVirtualPath _callVirtualPath = (CallApiVirtualPath)(new HttpContextAccessor().HttpContext.RequestServices.GetService(typeof(CallApiVirtualPath)));
+            Log.Error($"GetFileInfo POST");
             var result = new ApiFileInfo(_callVirtualPath, subpath);
             return result.Exists ? result as IFileInfo : new NotFoundFileInfo(subpath);
         }
 
         public IChangeToken Watch(string filter)
         {
+            Log.Error($"Watch PRE");
+            CallApiVirtualPath _callVirtualPath = (CallApiVirtualPath)(new HttpContextAccessor().HttpContext.RequestServices.GetService(typeof(CallApiVirtualPath)));
+            Log.Error($"Watch POST");
             var apiChangeToken = new ApiChangeToken(_callVirtualPath, filter);
             return apiChangeToken;
         }
