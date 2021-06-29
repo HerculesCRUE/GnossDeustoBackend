@@ -22,6 +22,7 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
     public class CallApiVirtualPath
     {
         private TokenBearer _token;
+        private DateTime _tokenDateExpire;
         readonly ConfigUrlService _serviceUrl;
         readonly ICallService _serviceApi;
         readonly CallTokenService _tokenService;
@@ -36,7 +37,7 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
         private void LoadToken()
         {
             Log.Error($"loadtoken out");
-            if (_token == null)
+            if (_token == null || _tokenDateExpire<DateTime.UtcNow)
             {
                 Log.Error($"loadtoken in");
                 bool tokenCargado = false;
@@ -46,6 +47,7 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
                     {
                         _token = _tokenService.CallTokenApiDocumentacion();
                         tokenCargado = true;
+                        _tokenDateExpire = DateTime.UtcNow.AddMinutes(1);
                     }
                     catch (Exception)
                     {
