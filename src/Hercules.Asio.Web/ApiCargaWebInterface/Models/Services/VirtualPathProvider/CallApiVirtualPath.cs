@@ -28,18 +28,15 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
         readonly CallTokenService _tokenService;
 
         public CallApiVirtualPath(CallTokenService tokenService, ConfigUrlService serviceUrl, ICallService serviceApi)
-        {
-            Log.Error($"CallApiVirtualPath constructor");
+        {            
             _serviceUrl = serviceUrl;
             _serviceApi = serviceApi;
             _tokenService = tokenService;
         }
         private void LoadToken()
         {
-            Log.Error($"loadtoken out");
             if (_token == null || _tokenDateExpire<DateTime.UtcNow)
             {
-                Log.Error($"loadtoken in");
                 bool tokenCargado = false;
                 while (!tokenCargado)
                 {
