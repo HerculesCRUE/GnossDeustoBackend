@@ -28,6 +28,7 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
 
         public CallApiVirtualPath(CallTokenService tokenService, ConfigUrlService serviceUrl, ICallService serviceApi)
         {
+            Log.Error($"CallApiVirtualPath constructor");
             _serviceUrl = serviceUrl;
             _serviceApi = serviceApi;
             _tokenService = tokenService;
