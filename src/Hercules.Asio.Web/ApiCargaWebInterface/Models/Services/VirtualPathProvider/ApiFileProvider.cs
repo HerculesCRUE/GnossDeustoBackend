@@ -25,14 +25,18 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
         }
 
         public IFileInfo GetFileInfo(string subpath)
-        {            
+        {
+            Log.Error($"GetFileInfo PRE");
             var result = new ApiFileInfo(_callVirtualPath, subpath);
+            Log.Error($"GetFileInfo POST");
             return result.Exists ? result as IFileInfo : new NotFoundFileInfo(subpath);
         }
 
         public IChangeToken Watch(string filter)
         {
+            Log.Error($"Watch PRE");
             var apiChangeToken = new ApiChangeToken(_callVirtualPath, filter);
+            Log.Error($"Watch POST");
             return apiChangeToken;
         }
     }
