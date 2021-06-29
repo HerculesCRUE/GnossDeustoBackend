@@ -34,8 +34,10 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
         }
         private void LoadToken()
         {
+            Log.Error($"loadtoken out");
             if (_token == null)
             {
+                Log.Error($"loadtoken in");
                 bool tokenCargado = false;
                 while (!tokenCargado)
                 {
