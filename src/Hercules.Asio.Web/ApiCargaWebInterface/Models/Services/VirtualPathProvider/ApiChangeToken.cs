@@ -32,9 +32,10 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
             {
                 try
                 {
-
+                    Log.Error($"HasChanged out");
                     if (!_viewPath.EndsWith(".cshtml") || _viewPath.Contains("Views/Shared/_menupersonalizado.cshtml"))
                     {
+                        Log.Error($"HasChanged in");
                         PageInfo page = _apiVirtualPath.GetPage(_viewPath);
                         if (page != null)
                         {
