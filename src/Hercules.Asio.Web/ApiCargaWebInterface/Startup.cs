@@ -133,10 +133,6 @@ namespace ApiCargaWebInterface
             services.AddScoped(typeof(CallApiVirtualPath));
             services.AddScoped(typeof(CallRepositoryJobService));
             services.AddScoped(typeof(ReplaceUsesService));
-            var sp = services.BuildServiceProvider();
-
-            // Resolve the services from the service provider
-            var virtualProvider = sp.GetService<CallApiVirtualPath>();
             while (!cargado)
             {
                 try
@@ -147,7 +143,7 @@ namespace ApiCargaWebInterface
                     {
 
                         opts.FileProviders.Add(
-                            new ApiFileProvider(virtualProvider));
+                            new ApiFileProvider());
                     });
                     cargado = true;
                 }
