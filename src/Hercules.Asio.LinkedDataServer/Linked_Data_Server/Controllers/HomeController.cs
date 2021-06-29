@@ -44,7 +44,6 @@ namespace Linked_Data_Server.Controllers
             string pXAppServer = "";
             //Obtenemos la URL de la entidad
             string url = Request.GetEncodedUrl();
-            //string url = Request.GetDisplayUrl();
             string urlParam = HttpUtility.ParseQueryString(Request.QueryString.Value).Get("url");
             if (!string.IsNullOrEmpty(urlParam))
             {
@@ -60,6 +59,27 @@ namespace Linked_Data_Server.Controllers
                 return File(Encoding.UTF8.GetBytes(model.Rdf), "application/rdf+xml");
             }
             return View(model);
+        }
+
+        public IActionResult Graph(string url)
+        {
+            string pXAppServer = "";
+
+            //Obtenemos el arborGrah
+            RohRdfsReasoner reasoner = new RohRdfsReasoner();
+            reasoner.Initialise(ontologyGraph);
+
+
+            RohGraph dataGraph = new RohGraph();
+            Dictionary<string, string> entitiesNames;
+            Dictionary<string, SparqlObject> sparqlObjectDictionary = GetEntityData(url, out entitiesNames, mConfigService, ref pXAppServer, true);
+            createDataGraph(url, new List<string>(), false, dataGraph, sparqlObjectDictionary);
+
+            RohGraph dataInferenceGraph = dataGraph.Clone();
+            reasoner.Apply(dataInferenceGraph);
+
+            List<ArborGraph> dataArborGrahs = GetDataArborGraphs(dataInferenceGraph, dataGraph, url, mConfigService, ref pXAppServer,false);
+            return Json(dataArborGrahs);
         }
 
         public EntityModelTemplate GenerarModeloDeUrl(string url, ref string pXAppServer)
@@ -175,7 +195,8 @@ namespace Linked_Data_Server.Controllers
                     List<Table> dataTables = GetDataTables(dataInferenceGraph, url, mConfigService, ref pXAppServer);
 
                     //Obtenemos los arborGrah configurados
-                    List<ArborGraph> dataArborGrahs = GetDataArborGraphs(dataInferenceGraph, dataGraph, url, mConfigService, ref pXAppServer);
+                    bool mock = _sparqlUtility is SparqlUtilityMock;
+                    List<ArborGraph> dataArborGrahs = GetDataArborGraphs(dataInferenceGraph, dataGraph, url, mConfigService, ref pXAppServer,mock);
 
                     //Obtenemos las 10 primeras entidades que apuntan a la entidad
                     HashSet<string> inverseEntities = new HashSet<string>();
@@ -258,7 +279,7 @@ namespace Linked_Data_Server.Controllers
         /// <param name="pEntity">URL de la entidad</param>
         /// <param name="pEntitiesNames">Lista con los nombres de las entidades a las que se apunta</param>
         /// <returns>Diccionario con los datos de la entidad</returns>
-        private Dictionary<string, SparqlObject> GetEntityData(string pEntity, out Dictionary<string, string> pEntitiesNames, ConfigService pConfigService, ref string pXAppServer)
+        private Dictionary<string, SparqlObject> GetEntityData(string pEntity, out Dictionary<string, string> pEntitiesNames, ConfigService pConfigService, ref string pXAppServer, bool pOnlyFirstLevel = false)
         {
             pEntitiesNames = new Dictionary<string, string>();
             Dictionary<string, SparqlObject> sparqlObjectDictionary = new Dictionary<string, SparqlObject>();
@@ -286,7 +307,7 @@ namespace Linked_Data_Server.Controllers
                                 {
                                     SparqlObject.Data data = new SparqlObject.Data();
                                     data.type = "bnode";
-                                    data.value = triple.Subject.ToString(); 
+                                    data.value = triple.Subject.ToString();
                                     dict.Add("s", data);
                                 }
                                 {
@@ -359,7 +380,7 @@ namespace Linked_Data_Server.Controllers
                                     }}order by asc(?s) asc(?p) asc(?o)";
                 SparqlObject sparqlObject = _sparqlUtility.SelectData(pConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
                 foreach (string pendiente in entidadesCargar)
-                {                    
+                {
                     sparqlObjectDictionary.Add(pendiente, sparqlObject);
                 }
                 entidadesCargar = new HashSet<string>();
@@ -375,25 +396,29 @@ namespace Linked_Data_Server.Controllers
                         entidadesCargadas.Add(row["o"].value);
                     }
                 }
+                if (pOnlyFirstLevel)
+                {
+                    entidadesCargar = new HashSet<string>();
+                }
             }
             if (mock)
             {
                 foreach (string entityId in pEntitiesNames.Keys.ToList())
                 {
-                    if(entityId.StartsWith("_:"))
+                    if (entityId.StartsWith("_:"))
                     {
                         pEntitiesNames[entityId.Replace("_:", "")] = pEntitiesNames[entityId];
                         pEntitiesNames.Remove(entityId);
                     }
                 }
 
-                foreach(string entityId in sparqlObjectDictionary.Keys.ToList())
+                foreach (string entityId in sparqlObjectDictionary.Keys.ToList())
                 {
-                    foreach(Dictionary<string,SparqlObject.Data> fila in sparqlObjectDictionary[entityId].results.bindings)
+                    foreach (Dictionary<string, SparqlObject.Data> fila in sparqlObjectDictionary[entityId].results.bindings)
                     {
-                        if(fila["s"].type=="bnode")
+                        if (fila["s"].type == "bnode")
                         {
-                            fila["s"].value = fila["s"].value.Replace("_:","");
+                            fila["s"].value = fila["s"].value.Replace("_:", "");
                         }
                         if (fila["o"].type == "bnode")
                         {
@@ -528,67 +553,69 @@ namespace Linked_Data_Server.Controllers
         /// <returns></returns>
         public void createDataGraph(string idEntity, List<string> parents, Boolean isBlank, RohGraph datagraph, Dictionary<string, SparqlObject> sparqlObject)
         {
-            foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject[idEntity].results.bindings)
+            if (sparqlObject.ContainsKey(idEntity))
             {
-                if (row["s"].value == idEntity)
+                foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject[idEntity].results.bindings)
                 {
-                    if (!isBlank)
+                    if (row["s"].value == idEntity)
                     {
-                        IUriNode s = datagraph.CreateUriNode(UriFactory.Create(idEntity));
-                        IUriNode p = datagraph.CreateUriNode(UriFactory.Create(row["p"].value));
+                        if (!isBlank)
+                        {
+                            IUriNode s = datagraph.CreateUriNode(UriFactory.Create(idEntity));
+                            IUriNode p = datagraph.CreateUriNode(UriFactory.Create(row["p"].value));
 
-                        if (row["o"].type == "bnode" && !parents.Contains(row["o"].value))
-                        {
-                            IBlankNode o = datagraph.CreateBlankNode(row["o"].value);
-                            datagraph.Assert(new Triple(s, p, o));
-                            parents.Add(row["o"].value);
-                            createDataGraph(row["o"].value, parents, true, datagraph, sparqlObject);
-                        }
-                        else if (row["o"].type == "typed-literal" || row["o"].type == "literal")
-                        {
-                            ILiteralNode o = datagraph.CreateLiteralNode(row["o"].value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                            datagraph.Assert(new Triple(s, p, o));
-                        }
-                        else
-                        {
-                            IUriNode o = datagraph.CreateUriNode(UriFactory.Create(row["o"].value));
-                            datagraph.Assert(new Triple(s, p, o));
-                        }
-                    }
-                    else
-                    {
-
-                        IBlankNode s = datagraph.CreateBlankNode(idEntity);
-                        IUriNode p = datagraph.CreateUriNode(UriFactory.Create(row["p"].value));
-
-                        if (row["o"].type == "bnode")
-                        {
-                            if (!parents.Contains(row["o"].value))
+                            if (row["o"].type == "bnode" && !parents.Contains(row["o"].value))
                             {
                                 IBlankNode o = datagraph.CreateBlankNode(row["o"].value);
                                 datagraph.Assert(new Triple(s, p, o));
                                 parents.Add(row["o"].value);
                                 createDataGraph(row["o"].value, parents, true, datagraph, sparqlObject);
                             }
+                            else if (row["o"].type == "typed-literal" || row["o"].type == "literal")
+                            {
+                                ILiteralNode o = datagraph.CreateLiteralNode(row["o"].value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                datagraph.Assert(new Triple(s, p, o));
+                            }
                             else
                             {
-                                IBlankNode o = datagraph.CreateBlankNode(row["o"].value);
+                                IUriNode o = datagraph.CreateUriNode(UriFactory.Create(row["o"].value));
                                 datagraph.Assert(new Triple(s, p, o));
                             }
                         }
-                        else if (row["o"].type == "typed-literal" || row["o"].type == "literal")
-                        {
-                            ILiteralNode o = datagraph.CreateLiteralNode(row["o"].value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
-                            datagraph.Assert(new Triple(s, p, o));
-                        }
                         else
                         {
-                            IUriNode o = datagraph.CreateUriNode(UriFactory.Create(row["o"].value));
-                            datagraph.Assert(new Triple(s, p, o));
+
+                            IBlankNode s = datagraph.CreateBlankNode(idEntity);
+                            IUriNode p = datagraph.CreateUriNode(UriFactory.Create(row["p"].value));
+
+                            if (row["o"].type == "bnode")
+                            {
+                                if (!parents.Contains(row["o"].value))
+                                {
+                                    IBlankNode o = datagraph.CreateBlankNode(row["o"].value);
+                                    datagraph.Assert(new Triple(s, p, o));
+                                    parents.Add(row["o"].value);
+                                    createDataGraph(row["o"].value, parents, true, datagraph, sparqlObject);
+                                }
+                                else
+                                {
+                                    IBlankNode o = datagraph.CreateBlankNode(row["o"].value);
+                                    datagraph.Assert(new Triple(s, p, o));
+                                }
+                            }
+                            else if (row["o"].type == "typed-literal" || row["o"].type == "literal")
+                            {
+                                ILiteralNode o = datagraph.CreateLiteralNode(row["o"].value, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+                                datagraph.Assert(new Triple(s, p, o));
+                            }
+                            else
+                            {
+                                IUriNode o = datagraph.CreateUriNode(UriFactory.Create(row["o"].value));
+                                datagraph.Assert(new Triple(s, p, o));
+                            }
                         }
                     }
                 }
-
             }
         }
 
@@ -756,15 +783,17 @@ namespace Linked_Data_Server.Controllers
             return tableList;
         }
 
-
         /// <summary>
-        /// Obtiene de la BBDD los datos configurados para pintar los gráficos
+        /// Obtiene los datos para pintar los gráficos
         /// </summary>
         /// <param name="pDataInferenceGraph">Grafo que contiene los datos (con inferencia)</param>
         /// <param name="pDataGraph">Grafo que contiene los datos</param>
         /// <param name="pEntity">URL de la entidad</param>
+        /// <param name="pConfigService">Configuraciones del servicio</param>
+        /// <param name="pXAppServer">Afinidad virtuoso</param>
+        /// <param name="pOnlyConfig">Carga sólo las configuraciones</param>
         /// <returns>Lista con los datos para pintar los gráficos</returns>
-        private List<ArborGraph> GetDataArborGraphs(RohGraph pDataInferenceGraph, RohGraph pDataGraph, string pEntity, ConfigService pConfigService, ref string pXAppServer)
+        private List<ArborGraph> GetDataArborGraphs(RohGraph pDataInferenceGraph, RohGraph pDataGraph, string pEntity, ConfigService pConfigService, ref string pXAppServer,bool pOnlyConfig)
         {
             List<ArborGraph> arborGraphList = new List<ArborGraph>();
             try
@@ -794,7 +823,7 @@ namespace Linked_Data_Server.Controllers
                             SparqlResultSet resultName = (SparqlResultSet)pDataInferenceGraph.ExecuteQuery("select ?o where {<" + pEntity + "> ?propTitle ?o. FILTER(?propTitle in(<" + string.Join(">,<", propsTitle) + ">)) }");
                             if (resultName.Results.Count > 0)
                             {
-                                arborGraphList.AddRange(LoadGraphs(pEntity, arborGraphRdfType, ((LiteralNode)(resultName.Results[0]["o"])).Value, rdfType, pConfigService, ref pXAppServer));
+                                arborGraphList.AddRange(LoadGraphs(pEntity, arborGraphRdfType, ((LiteralNode)(resultName.Results[0]["o"])).Value, rdfType, pConfigService, ref pXAppServer,pOnlyConfig));
                             }
                         }
 
@@ -855,8 +884,11 @@ namespace Linked_Data_Server.Controllers
         /// <param name="pArborGraphRdfType">COnfiguracion de arborGraph</param>
         /// <param name="pNameEntity">Nombre de la entidad</param>
         /// <param name="pRdfType">RdfTypes de la entidad</param>
+        /// <param name="pConfigService">Configuraciones</param>
+        /// <param name="pXAppServer">Afinidad virtuoso</param>
+        /// <param name="pOnlyConfig">Carga sólo las configuraciones</param>
         /// <returns>Lista de los arborGraphs rellenados</returns>
-        private List<ArborGraph> LoadGraphs(string pEntity, Config_Linked_Data_Server.ConfigArborGraph.ArborGraphRdfType pArborGraphRdfType, string pNameEntity, string pRdfType, ConfigService pConfigService, ref string pXAppServer)
+        private List<ArborGraph> LoadGraphs(string pEntity, Config_Linked_Data_Server.ConfigArborGraph.ArborGraphRdfType pArborGraphRdfType, string pNameEntity, string pRdfType, ConfigService pConfigService, ref string pXAppServer, bool pOnlyConfig)
         {
             List<ArborGraph> arborGraphs = new List<ArborGraph>();
 
@@ -864,6 +896,7 @@ namespace Linked_Data_Server.Controllers
             {
                 ArborGraph arborGraph = new ArborGraph();
                 arborGraph.Name = arborGrahConfig.name;
+                arborGraph.Description = arborGrahConfig.description;
                 arborGraph.nodes = new Dictionary<string, ArborGraph.Node>();
                 arborGraph.edges = new Dictionary<string, Dictionary<string, ArborGraph.Relation>>();
                 Dictionary<string, Dictionary<string, string>> relationNodes = new Dictionary<string, Dictionary<string, string>>();
@@ -887,106 +920,108 @@ namespace Linked_Data_Server.Controllers
                     ArborGraph.Node nodePrincipal = new ArborGraph.Node() { main = true, color = "#af1a2e", label = pNameEntity, link = pEntity };
                     arborGraph.nodes.Add(pEntity, nodePrincipal);
                 }
-
-                //Cargamos los nodos de la consulta, en la consulta ?id ?nombre 
-                foreach (Config_Linked_Data_Server.ConfigArborGraph.ArborGraphRdfType.ArborGraph.Property property in arborGrahConfig.properties)
+                if (!pOnlyConfig)
                 {
-                    string consulta = property.query.Replace("{ENTITY_ID}", pEntity);
-                    SparqlObject sparqlObject = _sparqlUtility.SelectData(pConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
-
-                    Dictionary<string, string> nodesName = new Dictionary<string, string>();
-                    Dictionary<string, string> nodesRdfType = new Dictionary<string, string>();
-                    // Guardamos los nombres y los rdfTypes de cada entidad
-                    foreach (var result in sparqlObject.results.bindings)
+                    //Cargamos los nodos de la consulta, en la consulta ?id ?nombre 
+                    foreach (Config_Linked_Data_Server.ConfigArborGraph.ArborGraphRdfType.ArborGraph.Property property in arborGrahConfig.properties)
                     {
-                        foreach (string key in result.Keys)
+                        string consulta = property.query.Replace("{ENTITY_ID}", pEntity);
+                        SparqlObject sparqlObject = _sparqlUtility.SelectData(pConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
+
+                        Dictionary<string, string> nodesName = new Dictionary<string, string>();
+                        Dictionary<string, string> nodesRdfType = new Dictionary<string, string>();
+                        // Guardamos los nombres y los rdfTypes de cada entidad
+                        foreach (var result in sparqlObject.results.bindings)
                         {
-                            if (key.StartsWith("level"))
+                            foreach (string key in result.Keys)
                             {
-                                nodesName[result[key].value] = null;
-                                nodesRdfType[result[key].value] = null;
+                                if (key.StartsWith("level"))
+                                {
+                                    nodesName[result[key].value] = null;
+                                    nodesRdfType[result[key].value] = null;
+                                }
                             }
                         }
-                    }
 
-                    string consultaNamesRdfType = "select distinct ?s ?name ?rdftype where {?s a ?rdftype.?s ?propTitle ?name. FILTER(?s in (<" + string.Join(">,<", nodesName.Keys) + ">)) Filter(?propTitle in (<" + string.Join(">,<", mLinked_Data_Server_Config.PropsTitle) + ">))}";
-                    SparqlObject sparqlObjecDataNamesRdfType = _sparqlUtility.SelectData(pConfigService, mConfigService.GetSparqlGraph(), consultaNamesRdfType, ref pXAppServer);
-                    foreach (var result in sparqlObjecDataNamesRdfType.results.bindings)
-                    {
-                        nodesName[result["s"].value] = result["name"].value;
-                        nodesRdfType[result["s"].value] = result["rdftype"].value;
-                    }
-
-                    foreach (var result in sparqlObject.results.bindings)
-                    {
-                        foreach (string key in result.Keys)
+                        string consultaNamesRdfType = "select distinct ?s ?name ?rdftype where {?s a ?rdftype.?s ?propTitle ?name. FILTER(?s in (<" + string.Join(">,<", nodesName.Keys) + ">)) Filter(?propTitle in (<" + string.Join(">,<", mLinked_Data_Server_Config.PropsTitle) + ">))}";
+                        SparqlObject sparqlObjecDataNamesRdfType = _sparqlUtility.SelectData(pConfigService, mConfigService.GetSparqlGraph(), consultaNamesRdfType, ref pXAppServer);
+                        foreach (var result in sparqlObjecDataNamesRdfType.results.bindings)
                         {
+                            nodesName[result["s"].value] = result["name"].value;
+                            nodesRdfType[result["s"].value] = result["rdftype"].value;
+                        }
 
-                            if (key.StartsWith("level"))
+                        foreach (var result in sparqlObject.results.bindings)
+                        {
+                            foreach (string key in result.Keys)
                             {
-                                if (!arborGraph.nodes.ContainsKey(result[key].value))
+
+                                if (key.StartsWith("level"))
                                 {
-                                    string icon = "";
-                                    //Pintamos icono segun el rdfType
-                                    foreach (var iconGraph in mLinked_Data_Server_Config.ConfigArborGraphs.icons)
+                                    if (!arborGraph.nodes.ContainsKey(result[key].value))
                                     {
-                                        if (iconGraph.rdfType == nodesRdfType[result[key].value])
+                                        string icon = "";
+                                        //Pintamos icono segun el rdfType
+                                        foreach (var iconGraph in mLinked_Data_Server_Config.ConfigArborGraphs.icons)
                                         {
-                                            icon = iconGraph.icon;
+                                            if (iconGraph.rdfType == nodesRdfType[result[key].value])
+                                            {
+                                                icon = iconGraph.icon;
+                                            }
+                                        }
+                                        // Agregamos los nodos según si tienen icono
+                                        if (icon != "")
+                                        {
+                                            ArborGraph.Node node = new ArborGraph.Node() { label = nodesName[result[key].value], image = icon, link = result[key].value };
+                                            arborGraph.nodes.Add(result[key].value, node);
+                                        }
+                                        else
+                                        {
+                                            ArborGraph.Node node = new ArborGraph.Node() { label = nodesName[result[key].value], link = result[key].value };
+                                            arborGraph.nodes.Add(result[key].value, node);
                                         }
                                     }
-                                    // Agregamos los nodos según si tienen icono
-                                    if (icon != "")
+
+                                    if (key == "level1")
                                     {
-                                        ArborGraph.Node node = new ArborGraph.Node() { label = nodesName[result[key].value], image = icon, link = result[key].value };
-                                        arborGraph.nodes.Add(result[key].value, node);
+                                        // Cargamos la relación principal
+                                        if (!relationNodes.ContainsKey(pEntity))
+                                        {
+                                            relationNodes.Add(pEntity, new Dictionary<string, string>());
+                                        }
+                                        if (!relationNodes[pEntity].ContainsKey(result[key].value))
+                                        {
+                                            relationNodes[pEntity].Add(result[key].value, key);
+                                        }
+
                                     }
                                     else
                                     {
-                                        ArborGraph.Node node = new ArborGraph.Node() { label = nodesName[result[key].value], link = result[key].value };
-                                        arborGraph.nodes.Add(result[key].value, node);
-                                    }
-                                }
+                                        // Cargamos las relaciones según el nivel
+                                        int levelActual = int.Parse(key.Replace("level", ""));
+                                        string levelAnterior = "level" + (levelActual - 1);
+                                        if (!relationNodes.ContainsKey(result[levelAnterior].value))
+                                        {
+                                            relationNodes.Add(result[levelAnterior].value, new Dictionary<string, string>());
+                                        }
+                                        if (!relationNodes[result[levelAnterior].value].ContainsKey(result[key].value))
+                                        {
 
-                                if (key == "level1")
-                                {
-                                    // Cargamos la relación principal
-                                    if (!relationNodes.ContainsKey(pEntity))
-                                    {
-                                        relationNodes.Add(pEntity, new Dictionary<string, string>());
-                                    }
-                                    if (!relationNodes[pEntity].ContainsKey(result[key].value))
-                                    {
-                                        relationNodes[pEntity].Add(result[key].value, key);
+                                            relationNodes[result[levelAnterior].value].Add(result[key].value, key);
+                                        }
                                     }
 
                                 }
-                                else
-                                {
-                                    // Cargamos las relaciones según el nivel
-                                    int levelActual = int.Parse(key.Replace("level", ""));
-                                    string levelAnterior = "level" + (levelActual - 1);
-                                    if (!relationNodes.ContainsKey(result[levelAnterior].value))
-                                    {
-                                        relationNodes.Add(result[levelAnterior].value, new Dictionary<string, string>());
-                                    }
-                                    if (!relationNodes[result[levelAnterior].value].ContainsKey(result[key].value))
-                                    {
-
-                                        relationNodes[result[levelAnterior].value].Add(result[key].value, key);
-                                    }
-                                }
-
                             }
-                        }
 
+                        }
                     }
-                }
-                if (arborGraph.nodes.Count == 1)
-                {
-                    //si no se ha añadido ningún nodo además del principal no lo cargamos
-                    continue;
-                }
+                    if (arborGraph.nodes.Count == 1)
+                    {
+                        //si no se ha añadido ningún nodo además del principal no lo cargamos
+                        continue;
+                    }
+                }                
 
                 // Colores para pintar las relaciones según el nivel
                 List<string> colors = new List<string>();
@@ -1015,11 +1050,12 @@ namespace Linked_Data_Server.Controllers
 
         private RohGraph LoadGraph(string pGraph, ConfigService pConfigService, ref string pXAppServer)
         {
-            if(ontologyGraph!=null)
+            if (ontologyGraph != null)
             {
                 return ontologyGraph;
-            }else
-            { 
+            }
+            else
+            {
                 RohGraph dataGraph = new RohGraph();
                 string consulta = "select ?s ?p ?o where { ?s ?p ?o. }";
                 SparqlObject sparqlObject = _sparqlUtility.SelectData(pConfigService, pGraph, consulta, ref pXAppServer);

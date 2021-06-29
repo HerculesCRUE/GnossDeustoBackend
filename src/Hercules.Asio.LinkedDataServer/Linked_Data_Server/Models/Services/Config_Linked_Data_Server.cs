@@ -87,6 +87,12 @@ namespace Linked_Data_Server.Models.Services
                     public string name { get; set; }
 
                     /// <summary>
+                    /// Descripción del gráfico
+                    /// </summary>
+                    public string description { get; set; }
+
+
+                    /// <summary>
                     /// Propiedades a cargar
                     /// </summary>
                     public List<Property> properties { get; set; }

@@ -63,6 +63,7 @@ namespace Linked_Data_Server.Models.Entities
             public string color { get; set; }
         }
         public string Name { get; set; }
+        public string Description { get; set; }
         public Dictionary<string, Node> nodes { get; set; }
         /// <summary>
         /// Relaciones entre los nodos

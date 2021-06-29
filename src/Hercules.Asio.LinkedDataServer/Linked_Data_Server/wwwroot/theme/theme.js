@@ -633,19 +633,19 @@ $(function () {
         }   
     });
 
-    if (datosGraficas != null) {
-        for (var i = 0;i < datosGraficas.length; i++) {
-            var datosGrafica = datosGraficas[i];
-            var sys = arbor.ParticleSystem(1000, 400, 1);
-            sys.parameters({ gravity: true });
-            sys.renderer = Renderer("#arborgraph_"+i);
-            sys.graft(datosGrafica);
-
-        }
-    }
-
-
-    
+    if ($('#graphs').length) {
+        $.get("home/graph?url=" + encodeURIComponent(document.location.href), function (data) {
+            $('#graphs').show();
+            for (key in data)
+            {
+                var datosGrafico = data[key];
+                var sys = arbor.ParticleSystem(1000, 400, 1);
+                sys.parameters({ gravity: true });
+                sys.renderer = Renderer('#'+$("canvas[name='" + datosGrafico.name + "']").attr('id'));
+                sys.graft(datosGrafico);
+            }            
+        });
+    }    
 });
 
 

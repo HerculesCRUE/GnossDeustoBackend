@@ -4,11 +4,11 @@
     ViewData["BodyClass"] = "fichaRecurso";
 
 }
-<script>
+@*<script>
 
-    var datosGraficas =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.arborGraphs));
+        var datosGraficas =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.arborGraphs));
 
-</script>
+    </script>*@
 
 <div class="row">
     <div class="col col-12 col-lg-12 col-contenido">
@@ -26,7 +26,11 @@
                     if (i == 1)
                     {
                         PintarTablas(Model.tables);
-                        PintarArborGraphs(Model.arborGraphs);
+                        <div id="graphs" style="display:none">
+                            @{
+                                PintarArborGraphs(Model.arborGraphs);
+                            }
+                        </div>
                         <h2>Entidades relacionadas</h2>
                     }
                     PintarItem(entity, i > 0, Model.propsTransform);
@@ -34,8 +38,13 @@
                 }
                 if (i == 1)
                 {
+
                     PintarTablas(Model.tables);
-                    PintarArborGraphs(Model.arborGraphs);
+                    <div id="graphs"  style="display:none">
+                        @{
+                            PintarArborGraphs(Model.arborGraphs);
+                        }
+                    </div>
                 }
             }
 
@@ -79,160 +88,160 @@
                                     {
                                         propiedadAbreviada = propiedadAbreviada.Substring(propiedadAbreviada.LastIndexOf("/") + 1);
                                     }
-                            <tr>
-                                @{
-                                    String title = "";
-                                }
+                                    <tr>
+                                        @{
+                                            String title = "";
+                                        }
 
-                                @if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
-                                {
-                                    title = pItem.communNamePropierties[stringProperty.Key];
-                                }
-
-                                <td class="" title="@title">
-                                    @if (!string.IsNullOrEmpty(title))
-                                    {
-                                        <strong>@title</strong>
-                                    }
-                                    else
-                                    {
-                                        <strong>@propiedadAbreviada</strong>
-                                    }
-                                    <a href="@stringProperty.Key" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-                                </td>
-
-                                @if (pItem.urisRdf.Contains(valor))
-                                {
-                                    string nombre = valor;
-                                    @if (pItem.entitiesNames.ContainsKey(valor))
-                                    {
-                                        nombre = pItem.entitiesNames[valor];
-                                    }
-                                    <td>
-                                        <a href="@valor">
-                                            @nombre
-                                        </a>
-                                    </td>
-                                }
-                                else
-                                {
-                                    if (stringProperty.Key == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
-                                    {
-                                        title = "";
-
-                                        if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
+                                        @if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
                                         {
                                             title = pItem.communNamePropierties[stringProperty.Key];
                                         }
 
-                                        string valorPropiedadAbreviada = valor;
-                                        if (valorPropiedadAbreviada.Contains("/"))
-                                        {
-                                            valorPropiedadAbreviada = valorPropiedadAbreviada.Substring(valorPropiedadAbreviada.LastIndexOf("/") + 1);
-                                        }
-
-
-                                        string rdftypestring = "";
-                                        if (pItem.communNamePropierties.ContainsKey(valor))
-                                        {
-                                            rdftypestring = pItem.communNamePropierties[valor];
-                                        }
-
-                                        <td title="@title">
-                                            @if (!string.IsNullOrEmpty(rdftypestring))
+                                        <td class="" title="@title">
+                                            @if (!string.IsNullOrEmpty(title))
                                             {
-                                                <a href="@valor" target="_blank">@rdftypestring</a>
+                                                <strong>@title</strong>
                                             }
                                             else
                                             {
-                                                <a href="@valor" target="_blank">@valorPropiedadAbreviada</a>
+                                                <strong>@propiedadAbreviada</strong>
                                             }
+                                            <a href="@stringProperty.Key" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
                                         </td>
-                                    }
-                                    else
-                                    {
-                                        bool transform = false;
-                                        foreach (var propTransform in pPropsTransform)
-                                        {
-                                            if (propTransform.property.Contains(stringProperty.Key))
-                                            {
-                                                string uri = propTransform.transform.Replace("{value}", valor);
 
-                                                <td>
-                                                    <strong><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a></strong>
-                                                    @{
-                                                        List<Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel.ProvenanceData> provenanceData = pItem.provenanceData.Where(x => x.property == stringProperty.Key && x.value == valor).ToList();
-                                                        if (provenanceData.Count() > 0)
-                                                        {
-                                                            <a href="#" class="linkprovenancea"><span class="linkprovenance">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-                                                            @*<img src="/theme/resources/provenance.png" class="btProvenance" alt="Provenance" />*@
-                                                            @*<img src="~/theme/resources/provenance.png" alt="Provenance">*@
-                                                            <table class="provenancetable" style="display:none">
-                                                                <thead class="table-subject">
-                                                                    <tr>
-                                                                        <th scope="col" colspan="2">
-                                                                            <span>Provenance</span>
-                                                                        </th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach (Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel.ProvenanceData provenanceDataIn in provenanceData)
-                                                                    {
-                                                                        <tr>
-                                                                            <td>
-                                                                                <strong>@provenanceDataIn.date.ToString("G", System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"))</strong>
-                                                                            </td>
-                                                                            <td><strong>@provenanceDataIn.organization</strong></td>
-                                                                        </tr>
-                                                                    }
-                                                                </tbody>
-                                                            </table>
-                                                        }
-                                                    }
-                                                </td>
-                                                transform = true;
-                                            }
-                                        }
-                                        if (!transform)
+                                        @if (pItem.urisRdf.Contains(valor))
                                         {
+                                            string nombre = valor;
+                                            @if (pItem.entitiesNames.ContainsKey(valor))
+                                            {
+                                                nombre = pItem.entitiesNames[valor];
+                                            }
                                             <td>
-                                                <strong>@valor</strong>
-                                                @{
-                                                    List<Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel.ProvenanceData> provenanceData = pItem.provenanceData.Where(x => x.property == stringProperty.Key && x.value == valor).ToList();
-                                                    if (provenanceData.Count() > 0)
-                                                    {
-                                                        <a href="#" class="linkprovenancea"><span class="linkprovenance">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-                                                        @*<img src="/theme/resources/provenance.png" class="btProvenance" alt="Provenance" />*@
-                                                        @*<img src="~/theme/resources/provenance.png" alt="Provenance">*@
-                                                        <table class="provenancetable" style="display:none">
-                                                            <thead class="table-subject">
-                                                                <tr>
-                                                                    <th scope="col" colspan="2">
-                                                                        <span>Provenance</span>
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @foreach (Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel.ProvenanceData provenanceDataIn in provenanceData)
-                                                                {
-                                                                    <tr>
-                                                                        <td>
-                                                                            <strong>@provenanceDataIn.date.ToString("G", System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"))</strong>
-                                                                        </td>
-                                                                        <td><strong>@provenanceDataIn.organization</strong></td>
-                                                                    </tr>
-                                                                }
-                                                            </tbody>
-                                                        </table>
-                                                    }
-                                                }
+                                                <a href="@valor">
+                                                    @nombre
+                                                </a>
                                             </td>
                                         }
-                                    }
+                                        else
+                                        {
+                                            if (stringProperty.Key == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
+                                            {
+                                                title = "";
+
+                                                if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
+                                                {
+                                                    title = pItem.communNamePropierties[stringProperty.Key];
+                                                }
+
+                                                string valorPropiedadAbreviada = valor;
+                                                if (valorPropiedadAbreviada.Contains("/"))
+                                                {
+                                                    valorPropiedadAbreviada = valorPropiedadAbreviada.Substring(valorPropiedadAbreviada.LastIndexOf("/") + 1);
+                                                }
 
 
-                                }
-                            </tr>
+                                                string rdftypestring = "";
+                                                if (pItem.communNamePropierties.ContainsKey(valor))
+                                                {
+                                                    rdftypestring = pItem.communNamePropierties[valor];
+                                                }
+
+                                                <td title="@title">
+                                                    @if (!string.IsNullOrEmpty(rdftypestring))
+                                                    {
+                                                        <a href="@valor" target="_blank">@rdftypestring</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="@valor" target="_blank">@valorPropiedadAbreviada</a>
+                                                    }
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                bool transform = false;
+                                                foreach (var propTransform in pPropsTransform)
+                                                {
+                                                    if (propTransform.property.Contains(stringProperty.Key))
+                                                    {
+                                                        string uri = propTransform.transform.Replace("{value}", valor);
+
+                                                        <td>
+                                                            <strong><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a></strong>
+                                                            @{
+                                                                List<Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel.ProvenanceData> provenanceData = pItem.provenanceData.Where(x => x.property == stringProperty.Key && x.value == valor).ToList();
+                                                                if (provenanceData.Count() > 0)
+                                                                {
+                                                                    <a href="#" class="linkprovenancea"><span class="linkprovenance">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                                    @*<img src="/theme/resources/provenance.png" class="btProvenance" alt="Provenance" />*@
+                                                                    @*<img src="~/theme/resources/provenance.png" alt="Provenance">*@
+                                                                    <table class="provenancetable" style="display:none">
+                                                                        <thead class="table-subject">
+                                                                            <tr>
+                                                                                <th scope="col" colspan="2">
+                                                                                    <span>Provenance</span>
+                                                                                </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @foreach (Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel.ProvenanceData provenanceDataIn in provenanceData)
+                                                                            {
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <strong>@provenanceDataIn.date.ToString("G", System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"))</strong>
+                                                                                    </td>
+                                                                                    <td><strong>@provenanceDataIn.organization</strong></td>
+                                                                                </tr>
+                                                                            }
+                                                                        </tbody>
+                                                                    </table>
+                                                                }
+                                                            }
+                                                        </td>
+                                                        transform = true;
+                                                    }
+                                                }
+                                                if (!transform)
+                                                {
+                                                    <td>
+                                                        <strong>@valor</strong>
+                                                        @{
+                                                            List<Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel.ProvenanceData> provenanceData = pItem.provenanceData.Where(x => x.property == stringProperty.Key && x.value == valor).ToList();
+                                                            if (provenanceData.Count() > 0)
+                                                            {
+                                                                <a href="#" class="linkprovenancea"><span class="linkprovenance">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                                @*<img src="/theme/resources/provenance.png" class="btProvenance" alt="Provenance" />*@
+                                                                @*<img src="~/theme/resources/provenance.png" alt="Provenance">*@
+                                                                <table class="provenancetable" style="display:none">
+                                                                    <thead class="table-subject">
+                                                                        <tr>
+                                                                            <th scope="col" colspan="2">
+                                                                                <span>Provenance</span>
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach (Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel.ProvenanceData provenanceDataIn in provenanceData)
+                                                                        {
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <strong>@provenanceDataIn.date.ToString("G", System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"))</strong>
+                                                                                </td>
+                                                                                <td><strong>@provenanceDataIn.organization</strong></td>
+                                                                            </tr>
+                                                                        }
+                                                                    </tbody>
+                                                                </table>
+                                                            }
+                                                        }
+                                                    </td>
+                                                }
+                                            }
+
+
+                                        }
+                                    </tr>
                                 }
                             }
                             @foreach (var entitiesProperty in pItem.entitiesPropertiesEntity)
@@ -358,10 +367,9 @@
         foreach (var arborGraph in pArborGraphs)
         {
             <h2>@arborGraph.Name</h2>
-            <canvas id="arborgraph_@i" width="800" height="600">Gráfico de relaciones del autor</canvas>
+            <canvas id="arborgraph_@i" name="@arborGraph.Name" width="800" height="600">@arborGraph.Description</canvas>
             i++;
         }
     }
-
 }
 
