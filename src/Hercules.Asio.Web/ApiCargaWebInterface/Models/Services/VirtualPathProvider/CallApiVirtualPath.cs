@@ -46,8 +46,8 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
                     try
                     {
                         _token = _tokenService.CallTokenApiDocumentacion();
-                        tokenCargado = true;
                         _tokenDateExpire = DateTime.UtcNow.AddMinutes(1);
+                        tokenCargado = true;
                     }
                     catch (Exception)
                     {
