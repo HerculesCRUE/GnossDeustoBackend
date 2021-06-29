@@ -16,6 +16,7 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
         readonly private CallApiVirtualPath _callVirtualPath;
         public ApiFileProvider(CallApiVirtualPath callVirtualPath)
         {
+            Log.Error($"ApiFileProvider constructor");
             _callVirtualPath = callVirtualPath;            
         }
 
