@@ -634,7 +634,7 @@ $(function () {
     });
 
     if ($('#graphs').length) {
-        $.get("home/graph?url=" + encodeURIComponent(document.location.href), function (data) {
+        $.get(document.location.origin+"/home/graph?url=" + encodeURIComponent(document.location.href), function (data) {
             $('#graphs').show();
             for (key in data)
             {
