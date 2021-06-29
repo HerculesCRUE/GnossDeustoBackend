@@ -25,7 +25,7 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
         }
 
         public IFileInfo GetFileInfo(string subpath)
-        {
+        {            
             var result = new ApiFileInfo(_callVirtualPath, subpath);
             return result.Exists ? result as IFileInfo : new NotFoundFileInfo(subpath);
         }
