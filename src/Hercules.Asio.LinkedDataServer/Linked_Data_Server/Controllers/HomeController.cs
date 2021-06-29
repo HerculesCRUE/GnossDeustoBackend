@@ -196,7 +196,7 @@ namespace Linked_Data_Server.Controllers
 
                     //Obtenemos los arborGrah configurados
                     bool mock = _sparqlUtility is SparqlUtilityMock;
-                    List<ArborGraph> dataArborGrahs = GetDataArborGraphs(dataInferenceGraph, dataGraph, url, mConfigService, ref pXAppServer,mock);
+                    List<ArborGraph> dataArborGrahs = GetDataArborGraphs(dataInferenceGraph, dataGraph, url, mConfigService, ref pXAppServer,!mock);
 
                     //Obtenemos las 10 primeras entidades que apuntan a la entidad
                     HashSet<string> inverseEntities = new HashSet<string>();
