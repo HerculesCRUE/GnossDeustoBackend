@@ -614,7 +614,7 @@ $(function () {
             }
         },
         initComplete: function () {
-            var input = $('.dataTables_filter input').unbind(),
+            var input = $('#' + this.attr('id') +'_wrapper .dataTables_filter input').unbind(),
                 self = this.api(),
                 $searchButton = $('<button class="paginate_button current">')
                     .text('Buscar')
@@ -627,9 +627,9 @@ $(function () {
                         input.val('');
                         $searchButton.click();
                     })
-            $('.dataTables_filter').append($searchButton, $clearButton);
-            $('.dataTables_filter').addClass('dataTables_paginate');            
-            $('.dataTables_filter input').attr("placeholder", "Texto a buscar");   
+            $('#' + this.attr('id') +'_wrapper .dataTables_filter').append($searchButton, $clearButton);
+            $('#' + this.attr('id') +'_wrapper .dataTables_filter').addClass('dataTables_paginate');            
+            $('#' + this.attr('id') +'_wrapper .dataTables_filter input').attr("placeholder", "Texto a buscar");   
         }   
     });
 

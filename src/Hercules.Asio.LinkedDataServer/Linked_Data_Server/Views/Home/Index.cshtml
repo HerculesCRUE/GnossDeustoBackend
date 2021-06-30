@@ -20,11 +20,14 @@
                     if (i == 1)
                     {
                         PintarTablas(Model.tables);
-                        <div id="graphs" style="display:none">
-                            @{
-                                PintarArborGraphs(Model.arborGraphs);
-                            }
-                        </div>
+                        @if (Model.arborGraphs != null && Model.arborGraphs.Count > 0)
+                        {
+                            <div id="graphs" style="display:none">
+                                @{
+                                    PintarArborGraphs(Model.arborGraphs);
+                                }
+                            </div>
+                        }
                         <h2>Entidades relacionadas</h2>
                     }
                     PintarItem(entity, i > 0, Model.propsTransform);
@@ -34,11 +37,14 @@
                 {
 
                     PintarTablas(Model.tables);
-                    <div id="graphs"  style="display:none">
-                        @{
-                            PintarArborGraphs(Model.arborGraphs);
-                        }
-                    </div>
+                    @if (Model.arborGraphs != null && Model.arborGraphs.Count > 0)
+                    {
+                        <div id="graphs" style="display:none">
+                            @{
+                                PintarArborGraphs(Model.arborGraphs);
+                            }
+                        </div>
+                    }
                 }
             }
 
