@@ -117,7 +117,7 @@ div:nth-of-type(4n+3) { /*border-bottom: 0 !important; padding-bottom: 0 !import
 
 #contenido-principal.container { padding: 0; margin-bottom: 20px; }
 
-#contenido-principal .row { margin-left: 16px; margin-right: 16px; margin-bottom: 12px; }
+#contenido-principal .row { margin-left: 16px; margin-right: 16px; margin-bottom: 12px; display: flex; flex-wrap: wrap; }
 #contenido-principal .row.full-row { margin-left: 0; margin-right: 0; margin-bottom: 32px; }
 #contenido-principal .row.full-row .col { padding: 0; }
 
@@ -134,19 +134,16 @@ div:nth-of-type(4n+3) { /*border-bottom: 0 !important; padding-bottom: 0 !import
 #contenido-principal .col .imagen { /*height: 150px;*/ background-color: #f5f5f5; background-position: center !important; background-size: cover !important; object-fit: cover; }
 #contenido-principal .col .bloque,
 #contenido-principal .col .banner { background-color: #f5f5f5; /*height: 200px;*/ width: 100%; padding: 0 }
-#contenido-principal .col .banner { /*height: 280px; */}
+#contenido-principal .col .banner { /*height: 280px;*/ }
 #contenido-principal .col .banner p { font-size: 15px; }
 #contenido-principal .col .bloque p { font-size: 13px; }
 
-#contenido-principal .col .bloque-texto { border: 1px solid #d1d1d1; background: #fff; padding: 0; height: 420px; }
+#contenido-principal .col .bloque-texto { border: 1px solid #d1d1d1; height: 100%; }
 #contenido-principal .col .bloque-texto .contenido { padding: 17px 30px; }
-#contenido-principal .col .bloque-texto .contenido h2 { overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
 #contenido-principal .col .bloque-texto .contenido p { font-size: 15px; margin: 0; }
+#contenido-principal .col .bloque-texto .imagen img { width: 100%; object-fit: cover; }
 
-.list-group-item-info {
-    color: #31708f;
-    background-color: transparent;
-}
+#contenido-principal .col.col-md-3 .bloque-texto .contenido { padding: 17px 20px; }
 
 @media (max-width: 1199px){
     #contenido-principal .col { padding-bottom: 20px; }
@@ -156,7 +153,7 @@ div:nth-of-type(4n+3) { /*border-bottom: 0 !important; padding-bottom: 0 !import
 
 /* TIPO HOME */
 
-.tipo-home #contenido-principal h1 { padding: 0 16px; margin-bottom: 12px; }
+.tipo-home #contenido-principal h1 { padding: 0 16px; margin-bottom: 12px; flex: 0 0 100%; max-width: 100%; }
 
 /**/
 
@@ -208,4 +205,5 @@ div:nth-of-type(4n+3) { /*border-bottom: 0 !important; padding-bottom: 0 !import
     .dashboard .graficos > div { flex: 0 0 100%; max-width: 100%; }
 }
 
+/**/
 /**/
