@@ -3,125 +3,131 @@
     ViewData["Title"] = Model.Id + " - Job";
     ViewData["BodyClass"] = "fichaRecurso";
 }
-    <div class="row">
-        <div class="col col-12 col-lg-12 col-contenido">
-            <div class="wrapCol">
-                <div class="header-resource">
-                    <div class="h1-container">
-                        <h1>Detalles de la tarea: @Model.Id</h1>
-                        @*<div class="botones">
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <div class="header-resource">
+                <div class="h1-container">
+                    <h1>Detalles de la tarea: @Model.Id</h1>
+                    @*<div class="botones">
                             <a href="@Url.Action("ReQueue", new { idJob = Model.Id })" class="btn btn-sincronizar">Sincronizar</a>
                         </div>*@
-                    </div>
                 </div>
-                <div class="contenido">
-                    <div class="grupo grupo-descripcion">
-                        <div class="identifier">
-                            <p class="titulo">Identificador</p>
-                            <p>@Model.Id</p>
-                        </div>
-                        <div class="job">
-                            <p class="titulo">Tarea</p>
-                            <p>@Model.Job</p>
-                        </div>
-                        <div class="state">
-                            <p class="titulo">Estado de la tarea</p>
-                            <p>@Model.State</p>
-                        </div>
-                        <div class="state">
-                            <p class="titulo">Estado del descubrimiento</p>
-                            @{
-                                string estadoDescubrimiento = Model.DiscoverState;
-                                if (Model.DiscoverStates != null)
+            </div>
+            <div class="contenido">
+                <div class="grupo grupo-descripcion">
+                    <div class="identifier">
+                        <p class="titulo">Identificador</p>
+                        <p>@Model.Id</p>
+                    </div>
+                    <div class="job">
+                        <p class="titulo">Tarea</p>
+                        <p>@Model.Job</p>
+                    </div>
+                    <div class="state">
+                        <p class="titulo">Estado de la tarea</p>
+                        <p>@Model.State</p>
+                    </div>
+                    <div class="state">
+                        <p class="titulo">Estado del descubrimiento</p>
+                        @{
+                            string estadoDescubrimiento = Model.DiscoverState;
+                            if (Model.DiscoverStates != null)
+                            {
+                                int numTotal = Model.DiscoverStates.Values.Sum();
+                                int numProcess = 0;
+                                if (Model.DiscoverStates.ContainsKey("Processed"))
                                 {
-                                    int numTotal = Model.DiscoverStates.Values.Sum();
-                                    int numProcess = 0;
-                                    if (Model.DiscoverStates.ContainsKey("Processed"))
-                                    {
-                                        numProcess = Model.DiscoverStates["Processed"];
-                                    }
-                                    estadoDescubrimiento += $" ({numProcess}/{numTotal} success)";
+                                    numProcess = Model.DiscoverStates["Processed"];
                                 }
+                                estadoDescubrimiento += $" ({numProcess}/{numTotal} success)";
                             }
-                            <p>@estadoDescubrimiento</p>
-                        </div>
-                        <div class="ExecutedAt">
-                            <p class="titulo">Fecha de la ejecución</p>
-                            <p>@Model.ExecutedAt</p>
-                        </div>
+                        }
+                        <p>@estadoDescubrimiento</p>
+                    </div>
+                    <div class="ExecutedAt">
+                        <p class="titulo">Fecha de la ejecución</p>
+                        <p>@Model.ExecutedAt</p>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.ExceptionDetails))
+                    {
                         <div class="Exception">
                             <p class="titulo">Excepción</p>
                             <p>@Html.Raw(Model.ExceptionDetails)</p>
                         </div>
-                        @if (Model.State.Equals("Processing"))
-                        {
-                            double complete = ((double)Model.ProcessNumIdentifierOAIPMH / Model.TotalNumIdentifierOAIPMH) * 100;
-                            string percentage = $"{complete}%";
-                            string process = $"{percentage} -> {Model.ProcessNumIdentifierOAIPMH} elemetnos procesados de {Model.TotalNumIdentifierOAIPMH}";
-                            <div class="LastIdentifierOAIPMH">
-                                <p class="titulo">Último elemento procesado</p>
-                                <p>@Model.LastIdentifierOAIPMH</p>
-                            </div>
-                            <div class="estado-tarea">
-                                <p class="titulo">Estado última tarea ejecutada</p>
-                                <p>En ejecucion</p>
-                                <div class="barra-progreso">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="@complete" aria-valuemin="0" aria-valuemax="100" style="width:@percentage">
+                    }
+                    @if (Model.State.Equals("Processing"))
+                    {
+                        double complete = ((double)Model.ProcessNumIdentifierOAIPMH / Model.TotalNumIdentifierOAIPMH) * 100;
+                        string percentage = $"{complete}%";
+                        string process = $"{percentage} -> {Model.ProcessNumIdentifierOAIPMH} elemetnos procesados de {Model.TotalNumIdentifierOAIPMH}";
+                        <div class="LastIdentifierOAIPMH">
+                            <p class="titulo">Último elemento procesado</p>
+                            <p>@Model.LastIdentifierOAIPMH</p>
+                        </div>
+                        <div class="estado-tarea">
+                            <p class="titulo">Estado última tarea ejecutada</p>
+                            <p>En ejecucion</p>
+                            <div class="barra-progreso">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="@complete" aria-valuemin="0" aria-valuemax="100" style="width:@percentage">
 
-                                    </div>
                                 </div>
                             </div>
-                        }
-                        else if (Model.State.Equals("Failed") || Model.State.Equals("Succeeded"))
-                        {
-                            <div class="Exception">
-                                <p class="titulo">Errores de descubrimiento</p>
-                            </div>
-                            <div class="grupo grupo-programacion">
-                                <div class="items tabla">
-                                    <div class="cabecera">
-                                        <div class="columna">
-                                            <p>Identificador del item</p>
+                        </div>
+                    }
+
+                    @if (Model.DiscoverItemsMini != null && Model.DiscoverItemsMini.Count > 0)
+                    {
+                        <div class="Exception">
+                            <p class="titulo">Errores de descubrimiento</p>
+                        </div>
+                        <div class="grupo grupo-programacion">
+                            <div class="items tabla">
+                                <div class="cabecera">
+                                    <div class="columna">
+                                        <p>Identificador del item</p>
+                                    </div>
+                                    <div class="columna">
+                                        <p>Estado</p>
+                                    </div>
+                                    <div class="columna acciones">
+                                        <p>Acciones</p>
+                                    </div>
+                                </div>
+
+                                @foreach (var discoverItem in Model.DiscoverItemsMini)
+                                {
+                                    <div class="fila">
+                                        <div class="columna principal">
+                                            <p>@discoverItem.ID</p>
                                         </div>
-                                        <div class="columna">
-                                            <p>Estado</p>
+                                        <div class="columna principal">
+                                            <p>@discoverItem.Status</p>
                                         </div>
                                         <div class="columna acciones">
-                                            <p>Acciones</p>
+                                            <ul>
+                                                <li>
+                                                    <a href="@Url.Action("Details", "Discover", new { itemId = discoverItem.ID })" class="ver">
+                                                        <em class="material-icons">remove_red_eye</em>
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    @foreach (var discoverItem in Model.DiscoverItemsMini)
-                                    {
-                                        <div class="fila">
-                                            <div class="columna principal">
-                                                <p>@discoverItem.ID</p>
-                                            </div>
-                                            <div class="columna principal">
-                                                <p>@discoverItem.Status</p>
-                                            </div>
-                                            <div class="columna acciones">
-                                                <ul>
-                                                    <li>
-                                                        <a href="@Url.Action("Details", "Discover", new {  itemId=discoverItem.ID })" class="ver">
-                                                            <em class="material-icons">remove_red_eye</em>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    }
+                                }
 
-                                </div>
+
                             </div>
-                        }
-                        <div>
-                            <a href="@Url.Action("Details","RepositoryConfig", new {  id=Model.IdRepository  })">Volver al repositorio</a>
                         </div>
+                    }
+                    <div>
+                        <a href="@Url.Action("Details","RepositoryConfig", new {  id=Model.IdRepository  })">Volver al repositorio</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-  
+</div>
+
 
 
