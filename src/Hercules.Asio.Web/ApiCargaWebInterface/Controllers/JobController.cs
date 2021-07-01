@@ -76,47 +76,50 @@ namespace ApiCargaWebInterface.Controllers
 
             try
             {
+                if(job.ExceptionDetails!=null)
+                { 
                 ExceptionDetails exceptionDetails = JsonConvert.DeserializeObject<ExceptionDetails>(job.ExceptionDetails);
-                if (exceptionDetails != null && !string.IsNullOrEmpty(exceptionDetails.detail))
-                {
-                    job.ExceptionDetails = "Se ha producido un error:<br>";
-                    job.ExceptionDetails+= @$"""type"":""{exceptionDetails.type}""<br>";
-                    job.ExceptionDetails+= @$"""title"":""{exceptionDetails.title}""<br>";
-                    job.ExceptionDetails+= @$"""status"":""{exceptionDetails.status}""<br>";
-                    job.ExceptionDetails+= @$"""detail"":""{exceptionDetails.detail}""<br>";
-                    job.ExceptionDetails+= @$"""traceId"":""{exceptionDetails.traceId}""<br>";
-
-                    ShapeReport shapeReport= JsonConvert.DeserializeObject<ShapeReport>(exceptionDetails.detail);
-                    if (shapeReport != null && !shapeReport.conforms && shapeReport.results!=null && shapeReport.results.Count>0)
+                    if (exceptionDetails != null && !string.IsNullOrEmpty(exceptionDetails.detail))
                     {
-                        job.ExceptionDetails = "Se ha producido violaciones de los Shapes:<br>";
-                        HashSet<string> shapes = new HashSet<string>();
-                        foreach (ShapeReport.Result result in shapeReport.results)
+                        job.ExceptionDetails = "Se ha producido un error:<br>";
+                        job.ExceptionDetails += @$"""type"":""{exceptionDetails.type}""<br>";
+                        job.ExceptionDetails += @$"""title"":""{exceptionDetails.title}""<br>";
+                        job.ExceptionDetails += @$"""status"":""{exceptionDetails.status}""<br>";
+                        job.ExceptionDetails += @$"""detail"":""{exceptionDetails.detail}""<br>";
+                        job.ExceptionDetails += @$"""traceId"":""{exceptionDetails.traceId}""<br>";
+
+                        ShapeReport shapeReport = JsonConvert.DeserializeObject<ShapeReport>(exceptionDetails.detail);
+                        if (shapeReport != null && !shapeReport.conforms && shapeReport.results != null && shapeReport.results.Count > 0)
                         {
-                            shapes.Add(result.shapeName);
+                            job.ExceptionDetails = "Se ha producido violaciones de los Shapes:<br>";
+                            HashSet<string> shapes = new HashSet<string>();
+                            foreach (ShapeReport.Result result in shapeReport.results)
+                            {
+                                shapes.Add(result.shapeName);
+                            }
+                            foreach (string result in shapes)
+                            {
+                                job.ExceptionDetails += result + "<br>";
+                            }
+                            job.ExceptionDetails += "Mas detalles a continuación:<br>";
+                            job.ExceptionDetails += @$"""severity"":""{shapeReport.severity}"",<br>";
+                            job.ExceptionDetails += @$"""conforms"":{shapeReport.conforms},<br>";
+                            job.ExceptionDetails += @$"""results"":[<br>";
+                            foreach (ShapeReport.Result result in shapeReport.results)
+                            {
+                                job.ExceptionDetails += @$"{{<br>";
+                                job.ExceptionDetails += @$"&nbsp;&nbsp;""severity"":""{result.severity}"",<br>";
+                                job.ExceptionDetails += @$"&nbsp;&nbsp;""focusNode"":""{result.focusNode}"",<br>";
+                                job.ExceptionDetails += @$"&nbsp;&nbsp;""resultValue"":""{result.resultValue}"",<br>";
+                                job.ExceptionDetails += @$"&nbsp;&nbsp;""message"":""{result.message}"",<br>";
+                                job.ExceptionDetails += @$"&nbsp;&nbsp;""resultPath"":""{result.resultPath}"",<br>";
+                                job.ExceptionDetails += @$"&nbsp;&nbsp;""shapeName"":""{result.shapeName}"",<br>";
+                                job.ExceptionDetails += @$"&nbsp;&nbsp;""sourceShape"":""{result.sourceShape}"",<br>";
+                                job.ExceptionDetails += @$"&nbsp;&nbsp;""shapeID"":""{result.shapeID}"",<br>";
+                                job.ExceptionDetails += @$"""}}<br>";
+                            }
+                            job.ExceptionDetails += @$"""]<br>";
                         }
-                        foreach (string result in shapes)
-                        {
-                            job.ExceptionDetails += result + "<br>";
-                        }
-                        job.ExceptionDetails += "Mas detalles a continuación:<br>";
-                        job.ExceptionDetails += @$"""severity"":""{shapeReport.severity}"",<br>";
-                        job.ExceptionDetails += @$"""conforms"":{shapeReport.conforms},<br>";
-                        job.ExceptionDetails += @$"""results"":[<br>";
-                        foreach (ShapeReport.Result result in shapeReport.results)
-                        {
-                            job.ExceptionDetails += @$"{{<br>";
-                            job.ExceptionDetails += @$"&nbsp;&nbsp;""severity"":""{result.severity}"",<br>";
-                            job.ExceptionDetails += @$"&nbsp;&nbsp;""focusNode"":""{result.focusNode}"",<br>";
-                            job.ExceptionDetails += @$"&nbsp;&nbsp;""resultValue"":""{result.resultValue}"",<br>";
-                            job.ExceptionDetails += @$"&nbsp;&nbsp;""message"":""{result.message}"",<br>";
-                            job.ExceptionDetails += @$"&nbsp;&nbsp;""resultPath"":""{result.resultPath}"",<br>";
-                            job.ExceptionDetails += @$"&nbsp;&nbsp;""shapeName"":""{result.shapeName}"",<br>";
-                            job.ExceptionDetails += @$"&nbsp;&nbsp;""sourceShape"":""{result.sourceShape}"",<br>";
-                            job.ExceptionDetails += @$"&nbsp;&nbsp;""shapeID"":""{result.shapeID}"",<br>";
-                            job.ExceptionDetails += @$"""}}<br>";
-                        }
-                        job.ExceptionDetails += @$"""]<br>";
                     }
                 }
             }
