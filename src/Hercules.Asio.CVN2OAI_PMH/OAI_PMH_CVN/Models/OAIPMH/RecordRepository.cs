@@ -71,7 +71,7 @@ namespace OaiPmhNet.Models.OAIPMH
             List<CVN> listCVN = new List<CVN>();
             foreach (string id in ids)
             {
-                DateTime date = DateTime.UtcNow.AddDays(-100 + int.Parse(id));
+                DateTime date = DateTime.UtcNow;//.AddDays(-100 + int.Parse(id));
                 if(date>inicio)
                 {
                     listCVN.Add(GetCurriculum(id, arguments.Verb == OaiVerb.ListIdentifiers.ToString(), _configOAI_PMH_CVN.GetXML_CVN_Repository()));
