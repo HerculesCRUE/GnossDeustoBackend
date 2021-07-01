@@ -755,8 +755,8 @@ id.source = "Project"
 
 
         [[entities.subentities.relationships]]
-        direct = "vivo:relatedBy"
-        inverse = "vivo:relates"
+        direct = "vivo:relates"
+        inverse = "vivo:relatedBy"
 
 
         [[entities.subentities.subentities]]
@@ -967,8 +967,8 @@ id.resource = "Project"
     displayname = "vivo:PrincipalInvestigatorRole"
 
         [[entities.subentities.relationships]]
-        direct = "vivo:relatedBy"
-        inverse = "vivo:relates"
+        direct = "vivo:relates"
+        inverse = "vivo:relatedBy"
 
         [[entities.subentities.subentities]]
         displayname = "foaf:Person"
