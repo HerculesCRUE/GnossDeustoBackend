@@ -359,7 +359,7 @@ displayname = "roh:PhDSupervisingRelationship"
 
             [[entities.subentities.subentities.relationships]]
             direct = "vivo:relatedBy"
-            inverse = "oboro:RO_0000052"
+            inverse = "ro:RO_0000052"
 
             [[entities.subentities.subentities.properties]]
             displayname = "foaf:name"
@@ -539,7 +539,7 @@ displayname = "roh:BachelorsSupervisingRelationship"
 
             [[entities.subentities.subentities.relationships]]
             direct = "vivo:relatedBy"
-            inverse = "oboro:RO_0000052"
+            inverse = "ro:RO_0000052"
 
             [[entities.subentities.subentities.properties]]
             displayname = "foaf:name"
