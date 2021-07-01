@@ -179,8 +179,8 @@ code = "030.010.000.000"
 displayname = "vivo:TeacherRole"
 
     [[entities.relationships]]
-    inverse = "roh:hasRole"
-    direct = "roh:roleOf"
+    direct = "vivo:relates"
+	inverse = "vivo:relatedBy"
     link_to_cvn_person = true
 
     [[entities.subentities]]
@@ -680,12 +680,12 @@ id.source = "Project"
     displayname = "vivo:MemberRole"
 
         [[entities.subentities.relationships]]
-        direct = "vivo:relatedBy"
-        inverse= "vivo:relates"
+        direct = "vivo:relates"
+        inverse = "vivo:relatedBy"
 
         [[entities.subentities.relationships]]
-        direct = "roh:roleOf"
-        inverse = "roh:hasRole"
+        direct = "vivo:relates"
+        inverse = "vivo:relatedBy"
         link_to_cvn_person = true
 #
 #        [[entities.subentities.subentities]]
@@ -903,12 +903,12 @@ id.resource = "Project"
 
 
         [[entities.subentities.relationships]]
-        direct = "vivo:relatedBy"
-        inverse= "vivo:relates"
+        direct = "vivo:relates"
+        inverse = "vivo:relatedBy"
 
         [[entities.subentities.relationships]]
-        direct = "roh:roleOf"
-        inverse = "roh:hasRole"
+        direct = "vivo:relates"
+        inverse = "vivo:relatedBy"
         link_to_cvn_person = true
 #
 #        [[entities.subentities.subentities]]
@@ -1572,8 +1572,8 @@ id.resource = "Activity"
     displayname = "vivo:AdministrationRole"
 
         [[entities.subentities.relationships]]
-        direct = "roh:roleOf"
-        inverse = "roh:hasRole"
+        direct = "vivo:relates"
+        inverse = "vivo:relatedBy"
         link_to_cvn_person = true
 
         [[entities.subentities.properties]]
