@@ -323,8 +323,8 @@ displayname = "roh:PhDSupervisingRelationship"
         id.resource = "Person"
 
             [[entities.subentities.subentities.relationships]]
-            direct = "roh:hasRole"
-            inverse = "roh:roleOf"
+            direct = "vivo:relatedBy"
+            inverse = "vivo:relates"
 
             [[entities.subentities.subentities.properties]]
             displayname = "foaf:name"
@@ -503,8 +503,8 @@ displayname = "roh:BachelorsSupervisingRelationship"
         cache = "foaf:name"
 
             [[entities.subentities.subentities.relationships]]
-            direct = "roh:hasRole"
-            inverse = "roh:roleOf"
+            direct = "vivo:relatedBy"
+            inverse = "vivo:relates"
 
             [[entities.subentities.subentities.properties]]
             displayname = "foaf:name"
@@ -766,8 +766,8 @@ id.source = "Project"
         cache = "foaf:name"
 
             [[entities.subentities.subentities.relationships]]
-            direct = "roh:hasRole"
-            inverse = "roh:roleOf"
+            direct = "vivo:relatedBy"
+            inverse = "vivo:relates"
 
 
             [[entities.subentities.subentities.properties]]
@@ -976,8 +976,8 @@ id.resource = "Project"
         cache = "foaf:name"
 
             [[entities.subentities.subentities.relationships]]
-            direct = "roh:hasRole"
-            inverse = "roh:roleOf"
+            direct = "vivo:relatedBy"
+            inverse = "vivo:relates"
 
             [[entities.subentities.subentities.properties]]
                 displayname = "foaf:name"
