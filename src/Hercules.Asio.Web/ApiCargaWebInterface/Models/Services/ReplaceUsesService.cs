@@ -6,6 +6,7 @@ using ApiCargaWebInterface.Models.Entities;
 using ApiCargaWebInterface.Utility;
 using ApiCargaWebInterface.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Web;
@@ -34,12 +35,13 @@ namespace ApiCargaWebInterface.Models.Services
         /// <param name="htmlContent">html de la página con las directivas</param>
         /// <param name="dataModel">modelo donde cargar los datos</param>
         /// <param name="request">request</param>
+        /// <param name="cache">meoria cache</param>
         /// <returns>Modelo con los datos cargados</returns>
-        public CmsDataViewModel PageWithDirectives(string htmlContent, CmsDataViewModel dataModel,HttpRequest request)
+        public CmsDataViewModel PageWithDirectives(string htmlContent, CmsDataViewModel dataModel, HttpRequest request, IMemoryCache cache)
         {
             dataModel.Results = new List<string>();
-            Dictionary<int, string>  directiveList = Directives(htmlContent);
-            foreach(var item in directiveList)
+            Dictionary<int, string> directiveList = Directives(htmlContent);
+            foreach (var item in directiveList)
             {
                 if (item.Value.Equals("api"))
                 {
@@ -47,7 +49,7 @@ namespace ApiCargaWebInterface.Models.Services
                 }
                 else if (item.Value.Equals("sparql"))
                 {
-                    dataModel.Results.Add(Sparql(htmlContent, item.Key,request));
+                    dataModel.Results.Add(Sparql(htmlContent, item.Key, request, cache));
                 }
             }
             return dataModel;
@@ -68,7 +70,7 @@ namespace ApiCargaWebInterface.Models.Services
             while (count < countFinal)
             {
                 count = directives.Count;
-                first = htmlContent.IndexOf(DirectivesList.Directive,last);
+                first = htmlContent.IndexOf(DirectivesList.Directive, last);
                 if (first != -1)
                 {
                     last = htmlContent.IndexOf("/%>*@", first);
@@ -83,7 +85,7 @@ namespace ApiCargaWebInterface.Models.Services
                     }
                 }
                 countFinal = directives.Count;
-            }  
+            }
             return directives;
         }
         /// <summary>
@@ -109,7 +111,7 @@ namespace ApiCargaWebInterface.Models.Services
                 url = url.Replace("{URL_DOCUMENTACION}", _configUrlService.GetUrlDocumentacion());
                 token = _callTokenService.CallTokenApiDocumentacion();
             }
-            else if (url.Contains(_configUrlCronService.GetUrl())||url.Contains("{URL_CRON}"))
+            else if (url.Contains(_configUrlCronService.GetUrl()) || url.Contains("{URL_CRON}"))
             {
                 url = url.Replace("{URL_CRON}", _configUrlCronService.GetUrl());
                 token = _callTokenService.CallTokenCron();
@@ -123,29 +125,53 @@ namespace ApiCargaWebInterface.Models.Services
         /// <param name="htmlContent">contenido html</param>
         /// <param name="ocurrence">Posición de la cual hay que mirar</param>
         /// <param name="request">Request</param>
+        /// <param name="cache">Memoria cache</param>
         /// <returns>Resultado de la llamada en formato csv</returns>
-        private string Sparql(string htmlContent, int ocurrence, HttpRequest request)
+        private string Sparql(string htmlContent, int ocurrence, HttpRequest request, IMemoryCache cache)
         {
             int first = htmlContent.IndexOf(DirectivesList.Sparql, ocurrence);
             first = first + DirectivesList.Sparql.Length;
             int last = htmlContent.IndexOf(DirectivesList.EndDirective, first);
-            string queryS = $"{htmlContent.Substring(first, last - first)}";
-            while(queryS.Contains("{GET_PARAM_"))
+            string queryS = $"{htmlContent.Substring(first, last - first)}".Trim();
+            int timeCacheSecondsInt = 0;
+            if (queryS.StartsWith("cache:"))
+            {
+                string timeCacheSeconds = queryS.Substring(6);
+                timeCacheSecondsInt = int.Parse(timeCacheSeconds.Substring(0, timeCacheSeconds.IndexOf(";")));
+                queryS = queryS.Substring(queryS.IndexOf(";") + 1);
+            }
+            while (queryS.Contains("{GET_PARAM_"))
             {
                 string param = queryS.Substring(queryS.IndexOf("{GET_PARAM_"));
-                param = param.Substring(0,param.IndexOf("}")+1);
+                param = param.Substring(0, param.IndexOf("}") + 1);
                 string paramGet = param.Trim('{').Trim('}').Replace("GET_PARAM_", "");
                 string value = "";
-                if(request.Query.ContainsKey(paramGet))
+                if (request.Query.ContainsKey(paramGet))
                 {
                     value = request.Query[paramGet].ToString();
                 }
-                queryS=queryS.Replace(param,value);
+                queryS = queryS.Replace(param, value);
             }
             queryS = queryS.Replace("{URL_GRAPH}", _configUrlService.GetGraph());
             string consulta = HttpUtility.UrlEncode(queryS);
             consulta = $"query={consulta}&format=text/csv";
-            string result = _callService.CallPostApi(_configUrlService.GetSaprqlEndpoint(),"",consulta, sparql : true);
+            string result = null;
+            if (timeCacheSecondsInt > 0)
+            {
+                result = cache.Get<string>(queryS);
+            }
+            if (result == null)
+            {
+                result = _callService.CallPostApi(_configUrlService.GetSaprqlEndpoint(), "", consulta, sparql: true);
+                if (timeCacheSecondsInt > 0)
+                {
+                    cache.Set(queryS, result, new MemoryCacheEntryOptions()
+                    .SetSize(1)
+                    .SetAbsoluteExpiration(TimeSpan.FromSeconds(timeCacheSecondsInt))
+                  );
+                }
+            }
+
             return result;
         }
 

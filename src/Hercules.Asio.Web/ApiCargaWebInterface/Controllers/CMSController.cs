@@ -16,6 +16,7 @@ using ApiCargaWebInterface.ViewModels;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Serilog;
 
 namespace ApiCargaWebInterface.Controllers
@@ -28,11 +29,13 @@ namespace ApiCargaWebInterface.Controllers
         readonly CallApiVirtualPath _documentationApi;
         readonly ReplaceUsesService _replaceUsesService;
         readonly ConfigUrlService _configUrlService;
-        public CMSController(CallApiVirtualPath documentationApi, ReplaceUsesService replaceUsesService,ConfigUrlService configUrlService)
+        readonly IMemoryCache _cache;
+        public CMSController(CallApiVirtualPath documentationApi, ReplaceUsesService replaceUsesService,ConfigUrlService configUrlService, IMemoryCache cache)
         {
             _documentationApi = documentationApi;
             _replaceUsesService = replaceUsesService;
             _configUrlService = configUrlService;
+            _cache = cache;
         }
 
         /// <summary>
@@ -53,7 +56,7 @@ namespace ApiCargaWebInterface.Controllers
             ViewBag.SPARQL_GRAPH = _configUrlService.GetGraph();
             if (page.Content.Contains("@*<%"))
             {
-                dataModel = _replaceUsesService.PageWithDirectives(page.Content, dataModel,Request);
+                dataModel = _replaceUsesService.PageWithDirectives(page.Content, dataModel,Request, _cache);
             }            
 
             return View($"/{url}", dataModel);

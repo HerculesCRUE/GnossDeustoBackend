@@ -18,6 +18,7 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
     {
         readonly private CallApiVirtualPath _apiVirtualPath;
         readonly private string _viewPath;
+        private static Dictionary<string, DateTime?> _pageLastRequested = new Dictionary<string, DateTime?>();
 
         public ApiChangeToken(CallApiVirtualPath apiVirtualPath, string viewPath)
         {
@@ -34,15 +35,35 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
                 {
                     if (!_viewPath.EndsWith(".cshtml") || _viewPath.Contains("Views/Shared/_menupersonalizado.cshtml"))
                     {
-                        PageInfo page = _apiVirtualPath.GetPage(_viewPath);
-                        if (page != null)
-                        {
-                            return true;
-                        }
-                        else
+                        if (!LastRequested(_viewPath).HasValue)
                         {
                             return false;
                         }
+                        else
+                        {
+                            DateTime lastRequested = LastRequested(_viewPath).Value;
+                            DateTime now = DateTime.Now;
+                            var segundos = (now - lastRequested).TotalSeconds;
+                            if (segundos>5)
+                            {
+                                PageInfo page = _apiVirtualPath.GetPage(_viewPath);
+                                if (page != null)
+                                {
+                                    DateTime lastRequest = LastRequested(_viewPath, true).Value;
+                                    bool changed = page.LastModified > lastRequest;
+                                    return changed;
+                                }
+                                else
+                                {
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+
                     }
                     else
                     {
@@ -60,6 +81,24 @@ namespace ApiCargaWebInterface.Models.Services.VirtualPathProvider
         public IDisposable RegisterChangeCallback(Action<object> callback, object state)
         {
             return EmptyDisposable.Instance;
+        }
+
+        private DateTime? LastRequested(string path, bool changeResquested = false)
+        {
+            DateTime? lastRequested = null;
+            if (_pageLastRequested.ContainsKey(path))
+            {
+                lastRequested = _pageLastRequested[path];
+                if (changeResquested)
+                {
+                    _pageLastRequested[path] = DateTime.Now;
+                }
+            }
+            else
+            {
+                _pageLastRequested.Add(path, DateTime.Now);
+            }
+            return lastRequested;
         }
     }
     internal class EmptyDisposable : IDisposable
