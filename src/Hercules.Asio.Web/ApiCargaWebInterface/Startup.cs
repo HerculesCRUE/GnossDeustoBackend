@@ -133,6 +133,7 @@ namespace ApiCargaWebInterface
             services.AddScoped(typeof(CallApiVirtualPath));
             services.AddScoped(typeof(CallRepositoryJobService));
             services.AddScoped(typeof(ReplaceUsesService));
+            services.AddMemoryCache();
             var sp = services.BuildServiceProvider();
 
             // Resolve the services from the service provider
