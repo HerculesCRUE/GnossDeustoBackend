@@ -414,7 +414,7 @@ displayname = "roh:PhDSupervisingRelationship"
         displayname = "roh:ThesisViva"
 
                 [[entities.subentities.subentities.relationships]]
-                #direct = "bibo:presents"
+                direct = "bibo:presents"
                 inverse = "bibo:presentedAt"
 
                 [[entities.subentities.subentities.subentities]]
@@ -1436,7 +1436,7 @@ id.resource = "Conference"
     cache = "roh:title"
 
         [[entities.subentities.relationships]]
-        #inverse = "bibo:presentedAt"
+        inverse = "bibo:presentedAt"
         inverse = "bibo:presents"
 
         [[entities.subentities.properties]]
