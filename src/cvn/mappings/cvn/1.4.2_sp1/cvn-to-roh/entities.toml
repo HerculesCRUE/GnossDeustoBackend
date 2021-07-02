@@ -1436,8 +1436,9 @@ id.resource = "Conference"
     cache = "roh:title"
 
         [[entities.subentities.relationships]]
+		direct = "bibo:presents"
         inverse = "bibo:presentedAt"
-        inverse = "bibo:presents"
+        
 
         [[entities.subentities.properties]]
         displayname = "roh:title"
