@@ -332,13 +332,13 @@ Estos dos módulos son bastante potentes y podemos ver mas configuraciones en lo
 
 Para simplificar el despliegue de los servicios de back, hemos creado un script que debemos descargar en nuestra máquinas para servicios de back. Partiendo desde la home del usurio (ej. /home/usuario/).
 	
-	wget https://raw.githubusercontent.com/HerculesCRUE/GnossDeustoBackend/master/Builds/docker-images/docs/docker-servicios-back/actualizar-back.sh
+	wget https://raw.githubusercontent.com/HerculesCRUE/GnossDeustoBackend/master/Builds/docker-images/docs/docker-servicios-back/actualizar_back.sh
 	
 Este script clonará los repositorios necesarios y luego generará las imágenes docker automáticamente. Le debemos dar permisos de ejecución.
 
-	chmod +x actualizar-back.sh
+	chmod +x actualizar_back.sh
 
-Después creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-back porque en el script actualizar-back.sh así se llama, pero podríamos cambiar estos valores. Después lo descargamos.
+Después creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-back porque en el script actualizar_back.sh así se llama, pero podríamos cambiar estos valores. Después lo descargamos.
 
 	mkdir dock-back
 	cd dock-back
@@ -352,19 +352,19 @@ También debemos indicar las conexiones a PostgreSQL y RabbitMQ que hayamos dete
 
 Con la ip ajustada ya podemos ejecutar el script que nos prepara el entorno.
 
-	./actualizar-back.sh
+	./actualizar_back.sh
 
 ## Despliegue de los servicios front
 
 Para simplificar el despliegue de los servicios de front, hemos creado un script que debemos descargar en la máquina donde queramos alojar los servicios de front. Partiendo desde la home del usurio (ej. /home/usuario/).
 
-	wget https://raw.githubusercontent.com/HerculesCRUE/GnossDeustoBackend/master/Builds/docker-images/docs/docker-servicios-front/actualizar-front.sh
+	wget https://raw.githubusercontent.com/HerculesCRUE/GnossDeustoBackend/master/Builds/docker-images/docs/docker-servicios-front/actualizar_front.sh
 	
 Este script clonará los repositorios necesarios y luego generará las imágenes docker automáticamente. Le debemos dar permisos de ejecución.
 
-	chmod +x actualizar-front.sh
+	chmod +x actualizar_front.sh
 
-Después creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-front porque en el script actualizar.sh se llama así, pero podríamos cambiar con estos valores. Después lo descargamos.
+Después creamos el directorio donde vamos a alojar el docker-compose.yml que va orquestar todos los servicios. Lo hemos llamado dock-front porque en el script actualizar_fron.sh se llama así, pero podríamos cambiar con estos valores. Después lo descargamos.
 
 	mkdir dock-front
 	cd dock-front
@@ -378,7 +378,7 @@ También debemos indicar las conexiones a PostgreSQL y RabbitMQ que hayamos dete
 
 Con las IPs ajustadas ya podemos ejecutar el script que nos prepara el entorno.
 
-	./actualizar-front.sh
+	./actualizar_front.sh
 	
 Cuando accedamos por primera vez el frontal web nos debería fallar porque aún falta la carga en BBDD de las vistas personalizadas. Para conseguir esto tenemos que hacer estos pasos:
 
@@ -410,8 +410,8 @@ Ahora, si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz 
 
 Si queremos actualizar los servicios o reiniciarlos por algún mal funcionamiento, debemos ejecutar los script de despliegues que hemos mencionado en apartados anteriores en su correspondiente frontal. Se trata por tanto de ejecutar los siguientes scripts:
 
-	./actualizar-front.sh
-	./actualizar-back.sh
+	./actualizar_front.sh
+	./actualizar_back.sh
 
 Si los servicios de front estuvieran en alta disponibilidad sería recomendable ejecutar el script de front en los dos, aunque solamente tuviéramos el problema en uno, debido a que este proceso actualiza además de reiniciar.
 
