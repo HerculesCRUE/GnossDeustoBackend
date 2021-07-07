@@ -117,7 +117,18 @@ div:nth-of-type(4n+3) { /*border-bottom: 0 !important; padding-bottom: 0 !import
 
 #contenido-principal.container { padding: 0; margin-bottom: 20px; }
 
-#contenido-principal .row { margin-left: 16px; margin-right: 16px; margin-bottom: 12px; display: flex; flex-wrap: wrap; }
+.tipo-home #contenido-principal .row {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+}
+#contenido-principal .row {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 12px;
+}
 #contenido-principal .row.full-row { margin-left: 0; margin-right: 0; margin-bottom: 32px; }
 #contenido-principal .row.full-row .col { padding: 0; }
 
