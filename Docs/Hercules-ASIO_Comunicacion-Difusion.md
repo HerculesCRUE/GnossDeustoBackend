@@ -122,7 +122,7 @@ su publicación.
 | **Tipo**                                         | **Descripción**                                                                                          | **Fecha**  |
 |--------------------------------------------------|----------------------------------------------------------------------------------------------------------|------------|
 | Artículo divulgativo                             | Sobre Hércules en el Nº 22 de la [Revista Deusto Ingeniería](https://revistaingenieria.deusto.es/)[^9].  | 30/06/2021 |
-| Full research paper / Descriptions of ontologies | Artículo describiendo la ROH en el [Semantic Web](http://www.semantic-web-journal.net/)[^10] journal.    | 12/07/2021 |
+| Full research paper / Descriptions of ontologies | Artículo describiendo la ROH en el [Semantic Web](http://www.semantic-web-journal.net/)[^10] journal.    | 26/07/2021 |
 
 [^9]: <https://revistaingenieria.deusto.es/>
 
@@ -174,12 +174,12 @@ Ontologías de Hércules).
 | **Repositorios de investigación** |                                                                                                        |            |
 |-----------------------------------|--------------------------------------------------------------------------------------------------------|------------|
 | **Tipo**                          | **Descripción**                                                                                        | **Fecha**  |
-| **Repositorio de ontologías**     | ROH en [LOV (Linked Open Vocabularies)](https://lov.linkeddata.es)[^12]                                | 12/07/2021 |
-|                                   | ROH en [Protégé Ontology Library](https://protegewiki.stanford.edu/wiki/Protege_Ontology_Library)[^13] | 12/07/2021 |
-| **Repositorio de ROs**            | ROH y documentación asociada en [Zenodo](https://zenodo.org/)[^14]                                     | 12/07/2021 |
-|                                   | ROH y documentación asociada en [Figshare](https://figshare.com/)[^15]                                 | 12/07/2021 |
-|                                   | ROH y documentación asociada en [Share](https://share.osf.io/)[^16]                                    | 12/07/2021 |
-|                                   | ROH y documentación asociada en [euroCRIS](https://dspacecris.eurocris.org/)[^17]                      | 12/07/2021 |
+| **Repositorio de ontologías**     | ROH en [LOV (Linked Open Vocabularies)](https://lov.linkeddata.es)[^12]                                | 26/07/2021 |
+|                                   | ROH en [Protégé Ontology Library](https://protegewiki.stanford.edu/wiki/Protege_Ontology_Library)[^13] | 26/07/2021 |
+| **Repositorio de ROs**            | ROH y documentación asociada en [Zenodo](https://zenodo.org/)[^14]                                     | 26/07/2021 |
+|                                   | ROH y documentación asociada en [Figshare](https://figshare.com/)[^15]                                 | 26/07/2021 |
+|                                   | ROH y documentación asociada en [Share](https://share.osf.io/)[^16]                                    | 26/07/2021 |
+|                                   | ROH y documentación asociada en [euroCRIS](https://dspacecris.eurocris.org/)[^17]                      | 26/07/2021 |
 
 [^12]: <https://lov.linkeddata.es/>
 
@@ -234,9 +234,9 @@ prevista para la misma.
 |------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
 | **Medio**                                | **Descripción**                                                                                                                                                                                                                                                                                    | **Fecha**  |
 | **Correo electrónico**                   | **[HERCULES] Estado de la ontología ROH** Universidad de Cantabria (Francisco Javier Muñoz, Elisa Gutiérrez, José Victoriano Aja, Carlos Pérez), UPV-EHU (Lorena Fernández, Susana Greno), Universidad de Oviedo (Emilio Rubiera Azcona), Izertis (José Barranquero Tolosa, Lorena Sierra García). | 28/05/2021 |
-| **Sitios web**                           | Entrada en la web de la Universidad de Deusto sobre la finalización del proyecto ASIO-Hércules.                                                                                                                                                                                                    | 12/07/2021 |
-| **Twitter**                              | Tuit referenciando a la entrada anterior desde la cuenta @deustoMORElab                                                                                                                                                                                                                            | 12/07/2021 |
-| **LinkedIn**                             | Post referenciando a la entrada anterior desde la cuenta de la Universidad de Deusto                                                                                                                                                                                                               | 12/07/2021 |
+| **Sitios web**                           | Entrada en la web de la Universidad de Deusto sobre la finalización del proyecto ASIO-Hércules.                                                                                                                                                                                                    | 26/07/2021 |
+| **Twitter**                              | Tuit referenciando a la entrada anterior desde la cuenta @deustoMORElab                                                                                                                                                                                                                            | 26/07/2021 |
+| **LinkedIn**                             | Post referenciando a la entrada anterior desde la cuenta de la Universidad de Deusto                                                                                                                                                                                                               | 26/07/2021 |
 
 *Tabla 7: Otras acciones de difusión previstas.*
 
