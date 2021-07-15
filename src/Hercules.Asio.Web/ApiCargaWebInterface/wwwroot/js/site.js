@@ -48,8 +48,7 @@ $(function () {
                 type: "GET",
                 dataType: "json",
                 data: {
-                    q: request.term,
-                    rdfType: $('#UriGetEnum').val() =='Rdftype'
+                    q: request.term
                 },
                 success: function (data) {
                     response($.map(data, function (item) {

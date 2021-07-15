@@ -18,9 +18,8 @@ namespace ApiCargaWebInterface.Models.Services
         /// </summary>
         /// <param name="resourceClass">Resource class o rdfType</param>
         /// <param name="identifier">Identificador</param>
-        /// <param name="uriGetEnum">Configurador para indicar si el parametro pasado en resourceClass es un resource class o rdf type</param>
         /// <returns>uri</returns>
-        public string GetUri(string resourceClass, string identifier, UriGetEnum uriGetEnum);
+        public string GetUri(string resourceClass, string identifier);
         /// <summary>
         /// Obtiene el esquema de uris configurado
         /// </summary>

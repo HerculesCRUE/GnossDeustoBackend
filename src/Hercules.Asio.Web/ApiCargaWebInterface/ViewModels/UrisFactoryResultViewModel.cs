@@ -16,7 +16,6 @@ namespace ApiCargaWebInterface.ViewModels
         public string Identifier { get; set; }
         public string Uri_Structure { get; set; }
         [Display(Name = "Tipo de dato")]
-        public UriGetEnum UriGetEnum { get; set; }
         public IFormFile New_Schema_File { get; set; }
     }
 }

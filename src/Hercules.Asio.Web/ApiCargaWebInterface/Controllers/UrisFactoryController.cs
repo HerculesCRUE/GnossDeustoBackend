@@ -55,17 +55,16 @@ namespace ApiCargaWebInterface.Controllers
         /// </summary>
         /// <param name="resourceClass">Resource class o rdfType</param>
         /// <param name="identifier">Identificador</param>
-        /// <param name="uriGetEnum">Configurador para indicar si el parametro pasado en resourceClass es un resource class o rdf type</param>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult GetUri(string Resource_class, string Identifier, UriGetEnum uriGetEnum)
+        public IActionResult GetUri(string Resource_class, string Identifier)
         {
             UrisFactoryResultViewModel urisFactoryModel = new UrisFactoryResultViewModel();
             urisFactoryModel.Identifier = Identifier;
             urisFactoryModel.Resource_class = Resource_class;
             try
             {
-                urisFactoryModel.UriResult = _callUrisFactoryService.GetUri(HttpUtility.UrlEncode(Resource_class), HttpUtility.UrlEncode(Identifier), uriGetEnum);
+                urisFactoryModel.UriResult = _callUrisFactoryService.GetUri(HttpUtility.UrlEncode(Resource_class), HttpUtility.UrlEncode(Identifier));
             }
             catch(HttpRequestException ex)
             {
