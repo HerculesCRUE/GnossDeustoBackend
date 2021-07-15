@@ -12,10 +12,11 @@ namespace ApiCargaWebInterface.ViewModels
     {
         public string UriResult { get; set; }
         public string Error { get; set; }
+        [Display(Name = "ResourceClass / RdfType")]
         public string Resource_class { get; set; }
         public string Identifier { get; set; }
         public string Uri_Structure { get; set; }
-        [Display(Name = "Tipo de dato")]
+        
         public IFormFile New_Schema_File { get; set; }
     }
 }

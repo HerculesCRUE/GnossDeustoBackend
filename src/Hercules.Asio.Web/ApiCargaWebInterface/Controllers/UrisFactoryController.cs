@@ -68,7 +68,7 @@ namespace ApiCargaWebInterface.Controllers
             }
             catch(HttpRequestException ex)
             {
-                ModelState.AddModelError("Resource_class", ex.Message);
+                ModelState.AddModelError("Resource_class / RdfType", ex.Message);
             }
             return View("Index", urisFactoryModel);
         }
