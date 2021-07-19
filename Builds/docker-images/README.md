@@ -26,7 +26,7 @@
 
 [Despliegue de los servicios front](#despliegue-de-los-servicios-front)
 
-[Despliegue del interfaz queryservice](#despliegue-de-los-servicios-front)
+[Despliegue del Wikimedia GUI](#despliegue-del-wikimedia-gui)
 
 [Actualización y reinicio de los servicicios](#actualización-y-reinicio-de-los-servicicios)
 
@@ -407,6 +407,8 @@ Si todo ha ido bien veremos el recuento de los inserts con este formato:
 Ahora, si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz web para poder hacer cargas.
 
 ![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/front.png)
+
+## Despliegue del Wikimedia GUI
 
 ## Actualización y reinicio de los servicicios
 

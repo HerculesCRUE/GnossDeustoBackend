@@ -1,0 +1,12 @@
+
+> wikidata-query-gui@0.1.4 start /home/esteban_herculesgnoss/gui
+> http-server -o
+
+[33mStarting up http-server, serving [39m[36m./[39m[33m[39m
+[33mAvailable on:[39m
+  http://127.0.0.1:[32m8080[39m
+  http://155.54.239.201:[32m8080[39m
+  http://192.168.240.1:[32m8080[39m
+Hit CTRL-C to stop the server
+open: http://127.0.0.1:8080
+[31mhttp-server stopped.[39m

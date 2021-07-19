@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+    <!-- build:css css/style.min.css -->
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
+	<link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="node_modules/codemirror/lib/codemirror.css">
+	<link rel="stylesheet" href="node_modules/codemirror/addon/hint/show-hint.css">
+	<link rel="stylesheet" href="node_modules/codemirror/addon/display/fullscreen.css">
+	<link rel="stylesheet" href="node_modules/select2/dist/css/select2.css">
+	<link rel="stylesheet" href="node_modules/vis/dist/vis.css">
+	<link rel="stylesheet" href="node_modules/ekko-lightbox/dist/ekko-lightbox.css">
+	<link rel="stylesheet" href="node_modules/bootstrap-table/dist/bootstrap-table.css">
+	<link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
+	<link rel="stylesheet" href="node_modules/leaflet-fullscreen/dist/leaflet.fullscreen.css">
+	<link rel="stylesheet" href="node_modules/leaflet-zoombox/L.Control.ZoomBox.css">
+	<link rel="stylesheet" href="node_modules/leaflet.markercluster/dist/MarkerCluster.css">
+	<link rel="stylesheet" href="node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css">
+	<link rel="stylesheet" href="node_modules/leaflet.locatecontrol/dist/L.Control.Locate.css">
+	<link rel="stylesheet" href="node_modules/leaflet-minimap/dist/Control.MiniMap.min.css">
+	<link rel="stylesheet" href="node_modules/jqcloud2/dist/jqcloud.css">
+	<link rel="stylesheet" href="node_modules/jquery.uls/css/jquery.uls.css">
+	<link rel="stylesheet" href="node_modules/jquery.uls/css/jquery.uls.grid.css">
+	<link rel="stylesheet" href="node_modules/jquery.uls/css/jquery.uls.lcd.css">
+	<link rel="stylesheet" href="node_modules/jquery.uls/css/jquery.uls.mobile.css">
+	<link rel="stylesheet" href="node_modules/jstree/dist/themes/default/style.css" />
+	<link rel="stylesheet" href="node_modules/jquery-toast-plugin/src/jquery.toast.css" />
+	<link rel="stylesheet" href="node_modules/gijgo/css/gijgo.min.css" />
+	<link rel="stylesheet" href="vendor/bootstrap-tags/css/bootstrap-tags.css">
+	<link rel="stylesheet" href="style.css">
+	<!-- endbuild -->
+
+	<!-- build:none -->
+	<link rel="stylesheet/less" type="text/css" href="style.less">
+	<script src="node_modules/less/dist/less.js" data-env="development"></script>
+	<script>less.watch()</script>
+	<!-- endbuild -->
+
+	<link id="favicon" rel="shortcut icon" >
+	<!-- build:js js/shim.min.js -->
+	<script src="node_modules/es6-shim/es6-shim.js"></script>
+	<!-- endbuild -->
+
+	<style id="MJX-CHTML-styles">/* placeholder for MathJax */</style>
+</head>
+<body>
+	<div class="wikibase-queryservice container-fluid">
+		<div class="row">
+			<!-- Editor Navbar -->
+			<nav class="navbar navbar-default">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar-collapse" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+					</button>
+					<div class="navbar-brand">
+						<a href="./"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA="><span></span></a>
+					</div>
+				</div>
+				<div class="collapse navbar-collapse in" id="header-navbar-collapse">
+					<ul class="nav navbar-nav navbar-left" id="left-navbar">
+						<li>
+							<button type="button" class="btn navbar-btn btn-default" id="open-example" data-toggle="modal" data-target="#QueryExamples">
+							<span class="fa fa-folder-open-o"></span> <span data-i18n="wdqs-app-button-examples" id="examples-label"></span>
+							</button>
+						</li>
+						<li class="dropdown">
+							<div class="btn-group navbar-btn">
+								<a href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/Wikidata_Query_Help" target="_blank" class="btn btn-default">
+									<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> <span data-i18n="wdqs-app-button-help" id="help-label"></span>
+								</a>
+								<button data-toggle="dropdown" class="btn btn-default dropdown-toggle" id="help-toggle">
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li><a target="_blank" rel="noopener" href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/Wikidata_Query_Help" data-i18n="wdqs-app-help-portal"></a></li>
+									<li><a target="_blank" rel="noopener" href="https://www.mediawiki.org/wiki/Special:MyLanguage/Wikidata_Query_Service/User_Manual" data-i18n="wdqs-app-help-manual"></a></li>
+									<li><a target="_blank" rel="noopener" id="examples-link" href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/queries/examples" data-i18n="wdqs-app-help-examples"></a></li>
+									<li role="separator" class="divider"></li>
+									<li><a target="_blank" rel="noopener" href="https://www.w3.org/TR/sparql11-query/">SPARQL</a></li>
+									<li><a target="_blank" rel="noopener" href="https://www.mediawiki.org/wiki/Special:MyLanguage/Wikibase/Indexing/RDF_Dump_Format" data-i18n="wdqs-app-help-datamodel"></a></li>
+									<li><a target="_blank" rel="noopener" href="https://www.mediawiki.org/wiki/Special:MyLanguage/Wikibase/Indexing/RDF_Dump_Format#Full_list_of_prefixes" data-i18n="wdqs-app-help-prefixes"></a></li>
+									<li role="separator" class="divider"></li>
+									<li><a target="_blank" rel="noopener" href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:Request_a_query" data-i18n="wdqs-app-help-request-query"></a></li>
+									<li><a target="_blank" rel="noopener" href="https://www.mediawiki.org/w/index.php?title=Talk:Wikidata_Query_Service&action=edit&section=new" data-i18n="wdqs-app-help-feedback"></a></li>
+									<li><a target="_blank" rel="noopener" id="copyright-link" href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/Copyright" data-i18n="wdqs-app-help-copy"></a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="dropdown">
+							<div class="btn-group navbar-btn">
+								<a href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:Tools" target="_blank" class="btn btn-default">
+									<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> <span data-i18n="wdqs-app-button-more-tools" id="tools-label"></span>
+								</a>
+								<button data-toggle="dropdown" class="btn btn-default dropdown-toggle" id="tools-toggle">
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li><a target="_blank" rel="noopener" href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:Tools/Edit_items" data-i18n="wdqs-app-tools-edit-items"></a></li>
+									<li><a target="_blank" rel="noopener" href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:Tools/Query_data" data-i18n="wdqs-app-tools-query-data"></a></li>
+									<li><a target="_blank" rel="noopener" href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:Tools/Enhance_user_interface" data-i18n="wdqs-app-tools-enhance-ui"></a></li>
+									<li><a target="_blank" rel="noopener" href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:Tools/Visualize_data" data-i18n="wdqs-app-tools-visualize-data"></a></li>
+									<li><a target="_blank" rel="noopener" href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:List_of_properties" data-i18n="wdqs-app-tools-list-properties"></a></li>
+									<li><a target="_blank" rel="noopener" href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:Tools/Lexicographical_data" data-i18n="wdqs-app-tools-lexicographical-data"></a></li>
+									<li><a target="_blank" rel="noopener" href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:Tools/For_programmers" data-i18n="wdqs-app-tools-for-programmers"></a></li>
+									<li role="separator" class="divider"></li>
+									<li><a target="_blank" rel="noopener" href="https://tools.wmflabs.org/hay/directory/#/search/wikidata">Wikimedia Toolforge</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right" id="right-navbar">
+						<li>
+							<a href="#" class="uls-trigger" id="language-toggle" data-toggle="tooltip"></a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<div id="query-box">
+				<!-- The action URL is also set dynamically inside wikibase/init.js -->
+				<form id="query-form" action="https://query.wikidata.org/bigdata/namespace/wdq/sparql">
+					<div class="query-main">
+						<div class="toolbar">
+							<div class="toolbar-top">
+								<div>
+									<a href="#" class="btn query-helper-trigger" data-toggle="tooltip" data-placement="top" data-i18n="[title]wdqs-app-button-query-helper"> <span class="fa fa-info-circle" aria-hidden="true"></span></a>
+								</div>
+								<div>
+									<a href="#" class="btn fullscreen-toggle" data-toggle="tooltip" data-placement="top" data-i18n="[title]wdqs-app-button-fullscreen-title"> <span class="fa fa-arrows-alt" aria-hidden="true"></span>
+									</a>
+								</div>
+								<div class="dropdown">
+									<a href="#" class="btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-i18n="[title]wdqs-app-button-prefixes"> <span class="fa fa-thumb-tack"
+										aria-hidden="true"
+									></span><span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><strong data-i18n="wdqs-app-button-prefixes"></strong></li>
+										<li role="separator" class="divider"></li>
+										<li><div class="namespace-shortcuts"></div></li>
+										<li role="separator" class="divider"></li>
+										<li><a class="addPrefixes" data-i18n="wdqs-app-editor-addprefixes"></a></li>
+									</ul>
+								</div>
+								<div>
+									<a href="#" class="btn" id="format-button" data-toggle="tooltip" data-placement="top" data-i18n="[title]wdqs-app-button-format-title"> <span class="fa fa-diamond" aria-hidden="true"></span>
+									</a>
+								</div>
+								<div>
+									<a href="#" class="btn" data-i18n="[title]wdqs-app-button-examples" data-toggle="modal" data-target="#QueryExamples"> <span class="fa fa-folder-open-o" aria-hidden="true"></span>
+									</a>
+								</div>
+								<div>
+									<a href="#" class="btn restore" id="restore-button" data-toggle="tooltip" data-placement="top" data-i18n="[title]wdqs-app-button-restore-title"> <span class="fa fa-history" aria-hidden="true"></span>
+									</a>
+								</div>
+								<div>
+									<a href="#" class="btn" id="clear-button" data-toggle="tooltip" data-placement="top" data-i18n="[title]wdqs-app-button-clear-title"> <span class="fa fa-trash-o" aria-hidden="true"></span>
+									</a>
+								</div>
+								<div>
+									<a href="#" class="btn shareQuery shortUrlTrigger query" target="_blank" data-i18n="[title]wdqs-app-shorturl-page-title" data-toggle="popover"> <span class="fa fa-link" aria-hidden="true"></span></a>
+								</div>
+							</div>
+							<div class="toolbar-bottom">
+								<button type="submit" class="btn btn-info" id="execute-button" data-toggle="tooltip" data-placement="top" data-i18n="[title]wdqs-app-button-run-title">
+									<span class="fa fa-play" aria-hidden="true"></span>
+								</button>
+							</div>
+						</div>
+						<div class="query-helper-and-editor">
+							<div class="query-helper query-helper-hidden">
+								<div class="panel panel-info">
+									<div class="panel-heading">
+										<strong data-i18n="wdqs-app-help-queryhelper"></strong> <a target="_blank" rel="noopener" id="query-helper-help" href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/Query_Helper"><span
+											class="glyphicon glyphicon-question-sign"
+										></span></a>
+										<button type="button" class="close" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="panel-body"></div>
+								</div>
+							</div>
+							<div class="splitter"></div>
+							<div class="query-editor-container" dir="ltr">
+								<textarea class="queryEditor" name="query" data-i18n="[placeholder]wdqs-app-editor-placeholder" placeholder="(Input a SPARQL query or choose a query example)"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="navbar navbar-default query-helper-tag-cloud query-helper-hidden">
+					</div>
+					<div class="status navbar navbar-default toolbar">
+						<div class="navbar-right">
+							<span class="dataUpdated"> </span>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<noscript>
+			<div class="row action-bar" style="display: block">
+				<div class="message">
+					<div class="label label-warning">
+						For interactive query editing, a localized user interface, and other improvements,
+						please enable JavaScript or use a browser that supports it.
+					</div>
+				</div>
+			</div>
+		</noscript>
+		<div class="row">
+					<nav class="navbar navbar-default result">
+						<ul class="nav navbar-nav navbar-left">
+							<li><a id="display-button" href="#" data-toggle="dropdown" class="dropdown-toggle" data-placement="top" data-i18n="[title]wdqs-app-button-display-title"><span id="display-button-icon" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span id="display-button-label"></span><span class="caret"></span>
+							</a>
+								<ul id="result-browser-menu" class="dropdown-menu" role="menu">
+								</ul></li>
+							<li>
+							<li>
+								<a target="_blank" class="help" rel="noopener" href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/Wikidata_Query_Help/Result_Views"><span class="fa fa-question-circle"></span></a>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="navbar-text">
+								<span class="query-total">
+									<span class="label label-default" id="response-summary"></span>
+								</span> &nbsp;
+							</li>
+							<li>
+								<a class="btn" data-toggle="modal" data-target="#CodeExamples" data-i18n="[title]wdqs-app-button-code-title">
+									<span class="fa fa-code"></span> <span data-i18n="wdqs-app-button-code"></span>
+								</a>
+							</li>
+							<li><a id="download-button" href="#" data-toggle="dropdown" class="dropdown-toggle" data-placement="top" data-i18n="[title]wdqs-app-button-download-title"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span><span data-i18n="wdqs-app-button-download"></span><span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a id="downloadJSON" href="#"><span class="fa fa-file-code-o" aria-hidden="true"></span> <span data-i18n="wdqs-app-result-json"></span></a></li>
+								<li><a id="downloadFull-JSON" href="#"><span class="fa fa-file-code-o" aria-hidden="true"></span> <span data-i18n="wdqs-app-result-json-verbose"></span></a></li>
+								<li role="separator" class="divider"></li>
+								<li><a id="downloadSimple-TSV" href="#"><span class="fa fa-file-excel-o" aria-hidden="true"></span> <span data-i18n="wdqs-app-result-tsv"></span></a></li>
+								<li><a id="downloadTSV" href="#"><span class="fa fa-file-excel-o" aria-hidden="true"></span> <span data-i18n="wdqs-app-result-tsv-verbose"></span></a></li>
+								<li role="separator" class="divider"></li>
+								<li><a id="downloadCSV" href="#"><span class="fa fa-file-excel-o" aria-hidden="true"></span> <span data-i18n="wdqs-app-result-csv"></span></a></li>
+								<li role="separator" class="divider"></li>
+								<li><a id="downloadHTML" href="#"><span class="fa fa-file-code-o" aria-hidden="true"></span> <span data-i18n="wdqs-app-result-html"></span></a></li>
+								<li role="separator" class="divider"></li>
+								<li><a id="downloadSVG" href="#"><span class="fa fa-file-image-o" aria-hidden="true"></span> <span data-i18n="wdqs-app-result-svg"></span></a></li>
+							</ul></li>
+							<li>
+							<a id="link-button" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" data-placement="top" data-i18n="[title]wdqs-app-button-link-title">
+								    <span class="glyphicon glyphicon-link" aria-hidden="true"></span><span data-i18n="wdqs-app-button-link"></span><span class="caret"></span>
+								  </a>
+								  <ul class="dropdown-menu">
+									<li><a href="#" class="shortUrlTrigger result" target="_blank"  data-i18n="[title]wdqs-app-result-shorturl-title" data-toggle="popover"><span data-i18n="wdqs-app-result-shorturl"></span></a></li>
+									<li><a target="_blank" class="queryUri" data-i18n="[title]wdqs-app-result-endpoint-title"><span data-i18n="wdqs-app-result-endpoint"></span></a></li>
+									<li><a href="#" class="embed result" target="_blank" data-toggle="popover" data-i18n="wdqs-app-result-embed"></a></li>
+								  </ul>
+							</li>
+						</ul>
+					</nav>
+		</div>
+		<div class="row action-bar">
+			<div class="message"></div>
+		</div>
+		<div class="row">
+			<div id="query-result">Test result</div>
+		</div>
+		<div class="row">
+			<div id="query-error" class="panel-heading">
+			</div>
+		</div>
+		<div class="row">
+			<div id="empty-query-error" class="text-center">
+				<p data-i18n="wdqs-action-empty-query"></p>
+				<button type="button" class="btn navbar-btn btn-default" id="open-example" data-toggle="modal" data-target="#QueryExamples">
+					<span class="fa fa-folder-open-o"></span> <span data-i18n="wdqs-app-button-examples" id="examples-label"></span>
+				</button>
+			</div>
+		</div>
+		<div class="row">
+			<div id="loading-spinner">
+				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+				<span class="sr-only">Loading...</span>
+			</div>
+		</div>
+
+		<div id="explorer-dialogs">
+			<div class="explorer-dialog">
+				<div data-role="header" class="modal-header clearfix explorer-header">
+					<h3 data-role="title" class="modal-title pull-left explorer-title">Explorer</h3>
+					<button data-role="close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div data-role="body" class="explorer-body">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Query Example Modal -->
+	<div class="modal fade QueryExamples" id="QueryExamples" tabindex="-1" role="dialog" aria-labelledby="QueryExamplesModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<!--
+					<div class="tagCloud"></div>
+					<div class="tagFilter"></div>
+					-->
+					<div class="input-group">
+						<!--
+						<span class="input-group-addon"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span></span>
+						<input type="text" class="tableFilter form-control" placeholder="Type to filter"/>
+						<span class="input-group-addon"><span class="badge count"></span></span>
+						-->
+					</div>
+				</div>
+				<div class="exampleTable">
+					<table class="table">
+					    <tbody>
+							<tr class="active">
+								<td colspan="4">Consultas de validación</td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20uneskos%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Funesco-individuals%23%3E%0A%0ASELECT%20%3Fcentro%20WHERE%20%7B%0A%20%20%20%20%20%20%20%20%3Fcentro%20a%20roh%3AResearchGroup%20%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20roh%3AhasKnowledgeArea%20uneskos%3A120304%20.%0A%7D">Q1 - Centros de investigación que trabajan en un área/disciplina específica</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20unesco%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Funesco-individuals%23%3E%0APREFIX%20ro%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fobo%2Fowl%2Fro%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0A%0ASELECT%20%3Fresearcher%20%3Fcenter%20%3FpositionClass%0AWHERE%20%7B%0A%20%20%3Fresearcher%09roh%3AhasKnowledgeArea%20unesco%3A120304%20%3B%0A%20%20%09%09%09%09roh%3AhasPosition%20%3Fposition%20.%0A%20%20%3Fposition%20vivo%3Arelates%20%3Fcenter%20%3B%0A%20%20%09%09%09a%09%3FpositionClass%20.%0A%20%20%3Fcenter%20a%20roh%3AResearchGroup%20.%0AFILTER%20NOT%20EXISTS%20%7B%0A%3Fposition%20a%20%3FotherClass%20.%0A%3FotherClass%20rdfs%3AsubClassOf%20%3FpositionClass%20.%0AFILTER%20(%3FotherClass%20!%3D%20%3FpositionClass)%0A%7D%0A%7D">Q2 - Listado de los investigadores de un centro/estructura de investigación de un área/disciplina específica y su posición</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0ASELECT%20%3Fcenter%20%3FaccreditationTitle%0AWHERE%20%7B%0A%20%3Fcenter%20a%20roh%3AResearchGroup%20%3B%0A%20%20%20%20%20%20%20%20%20roh%3AhasAccreditation%20%3Faccreditation%20.%0A%20%3Faccreditation%20roh%3Atitle%20%3FaccreditationTitle%0A%7D">Q4 - Centros/estructuras de investigación que posean sellos de calidad asociados</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20ro%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fro%23%3E%0APREFIX%20bibo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fontology%2Fbibo%2F%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0APREFIX%20unesco%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Funesco-individuals%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0A%0ASELECT%20DISTINCT%20%3Fcentro%20%3FfundingProgram%20%3Fproject%0AWHERE%20%7B%0A%20%20%3FfundingAmount%20roh%3Agrants%20%3Fcentro%20.%0A%20%20%3Ffunding%20ro%3AhasPart%20%3FfundingAmount%20%3B%0A%20%20roh%3AfundedBy%20%3FfundingProgram%20%3B%0A%20%20%20roh%3Asupports%20%3Fproject%20.%0AOPTIONAL%20%7B%0A%3Fproject%20roh%3AprojectStatus%20%3FprojectStatus%20.%0A%7D%0AFILTER%20(!BOUND(%3FprojectStatus)%20%7C%7C%20%3FprojectStatus%20!%3D%20%22PROPOSAL_SUBMITTED%22)%0A%7D">Q5 - Listado de los centros/estructuras de investigación que hayan realizado proyectos y su respectiva convocatoria
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20bibo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0ASELECT%20%3Forganization%20%3FresearchObject%20%3FknowledgeArea%20%0AWHERE%20%7B%0A%3FresearchObject%20a%20roh%3AResearchObject%20%3B%0Avivo%3AdateIssued%20%3FdateIssued%20%3B%0Aroh%3AhasKnowledgeArea%20%3FknowledgeArea%20%3B%0Abibo%3AauthorList%20%3FauthorList%20.%0A%3FauthorList%20rdfs%3Amember%20%3Fauthor%20.%0A%3Fauthor%20roh%3AhasPosition%20%3Fposition%20.%0A%3Forganization%20a%20foaf%3AOrganization%20.%0A%3Fposition%20vivo%3Arelates%20%3Forganization%20.%0A%3FdateIssued%20vivo%3AdateTime%20%3FdateTime%20.%0AFILTER%20(YEAR(%3FdateTime)%20%3E%3D%20%222010%22%5E%5Exsd%3Ainteger%20%26%26%20YEAR(%3FdateTime)%20%3C%3D%20%222020%22%5E%5Exsd%3Ainteger)%0A%7D%20GROUP%20BY%20%3Forganization%20%3FresearchObject%20%3FknowledgeArea">Q6 - Listado de la producción científica en un determinado rango de fechas de un centro/estructura de investigación en un área/disciplina
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20obo%3A%20%3Chttp%3A%2F%2Fpurl.obolibrary.org%2Fobo%2F%3E%0APREFIX%20bibo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0APREFIX%20unesco%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Funesco-individuals%23%3E%0APREFIX%20ro%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fobo%2Fowl%2Fro%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20ero%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fero%23%3E%0APREFIX%20gn%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fgeonames%23%3E%0APREFIX%20iao%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fiao%23%3E%0APREFIX%20dc%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%3E%0A%0ASELECT%0A(COUNT(DISTINCT%20%3Fpublication)%20as%20%3FpublicationCount)%20%3FcomunidadAutonoma%20%20%0AWHERE%20%7B%0A%20%20%20%20%20%20%20%20%3Fpublication%20%20%20%20%20%20%20%20%20a%20iao%3AIAO_0000013%20%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20vivo%3AhasPublicationVenue%20%20%20%20%20%20%20%20%3Fjournal%20%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20bibo%3AauthorList%20%20%20%20%20%20%20%20%3FauthorList%20.%0A%20%20%20%20%20%20%20%20%20%20%3Fjournal%20%20%20%20%20%20%20%20a%20bibo%3AJournal%20%20%20%20%20%20%20%20%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20vivo%3AdateIssued%20%20%20%20%20%20%20%20%3FdateTimeValue%20.%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%3FauthorList%20%20%20%20%20%20%20%20rdfs%3Amember%20%20%20%20%20%20%20%20%3Fauthor%20.%0A%20%20%20%20%20%20%20%20%20%20%3FdateTimeValue%20%20%20%20%20%20%20%20vivo%3AdateTime%20%20%20%20%20%20%20%20%3FdateTime%20.%0A%20%20%20%20%20%20%20%20%20%20%3Fauthor%20vivo%3ArelatedBy%20%20%20%20%20%20%20%20%3Fposition%20%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20a%20%20%20%20%20%20%20%20foaf%3APerson%20.%0A%20%20%20%20%20%20%20%20%20%20%3Fposition%20%20%20%20%20%20%20%20%20a%20%20%20%20%20%20%20%20%3FpositionClass%20%20%20%20%20%20%20%20%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20vivo%3Arelates%20%20%20%20%20%20%20%20%3Forganization%20.%0A%20%20%20%20%20%20%20%20%20%20%3Forganization%20%20%20%20%20%20%20%20a%20%3ForganizationClass%20%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20gn%3AlocatedIn%20%20%20%20%20%20%20%20%3Flocation%20.%0A%20%09%20%09%20%20%3Flocation%20%3Chttp%3A%2F%2Fwww.geonames.org%2Fontology%23parentADM1%3E%20%3FcomunidadAutonoma%20.%0A%7D%20%0AGROUP%20BY%20%3FcomunidadAutonoma">Q7 - Artículos publicados en revistas, según las comunidades autónomas
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20bibo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0ASELECT%20DISTINCT%20%3FresearchGroup%20%3FresearchObject%20%3FresearchObjectClass%20%0AWHERE%20%7B%0A%3FresearchObject%20a%20roh%3AResearchObject%20%3B%0Aa%20%3FresearchObjectClass%20%3B%0Abibo%3AauthorList%20%3FauthorList%20.%0A%3FauthorList%20%3Forder%20%3Fauthor%20.%0A%3Fauthor%20roh%3AhasPosition%20%3Fposition%20.%0A%3Fposition%20vivo%3Arelates%20%3FresearchGroup%20.%0A%3FresearchGroup%20a%20roh%3AResearchGroup%20.%0AFILTER%20NOT%20EXISTS%20%7B%0A%3FresearchObject%20a%20%3FotherClass%20.%0A%3FotherClass%20rdfs%3AsubClassOf%20%3FresearchObjectClass%20.%0AFILTER%20(%3FotherClass%20!%3D%20%3FresearchObjectClass)%0A%7D%0AFILTER%20(str(%3FresearchObjectClass)%20!%3D%20%22http%3A%2F%2Fpurl.org%2Froh%23ResearchObject%22)%0A%7D">Q8 - Producción científica (ResearchObjects) de un grupo de investigación agrupados por tipo, es decir, publicaciones, patentes
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20bibo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0ASELECT%20%3Fpatent%20%3Fcentre%20%3FknowledgeArea%20%0AWHERE%20%7B%0A%3Fpatent%20a%20bibo%3APatent%20%3B%0Abibo%3AauthorList%20%3FauthorList%20.%0A%3Fpatent%20roh%3AhasKnowledgeArea%20%3FknowledgeArea%20.%0A%3Fauthorlist%20rdfs%3Amember%20%3Fauthor%20.%0A%3Fauthor%20roh%3AhasPosition%20%3Fposition%20.%0A%3Fposition%20vivo%3Arelates%20%3Fcentre%20.%0A%3Fcentre%20a%20roh%3AResearchGroup%20.%0A%7D%20GROUP%20BY%20%3Fpatent%20%3Fcentre%20%3FknowledgeArea">Q9 - Listado de patentes, diseños industriales, etc. de un centro/estructura de investigación en un área/disciplina
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0APREFIX%20bfo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fbfo%23%3E%0ASELECT%20DISTINCT%20%3Fproject%20%3Fcentre%20%3FknowledgeArea%20%0AWHERE%20%7B%0A%3Fproject%20a%20vivo%3AProject%20%3B%0Aroh%3AhasKnowledgeArea%20%3FknowledgeArea%20%3B%0Avivo%3Arelates%20%3Frole%20%3B%0Avivo%3AdateTimeInterval%20%3FdateTimeInterval%20.%0A%3Frole%20a%20bfo%3ABFO_0000023%20%3B%0Aroh%3AroleOf%20%3Fcentre%20.%0A%3Fcentre%20a%20foaf%3AOrganization%20.%0A%3FdateTimeInterval%20vivo%3Astart%20%3FstartDateTimeValue%20%3B%0Avivo%3Aend%20%3FendDateTimeValue%20.%20%0A%3FstartDateTimeValue%20vivo%3AdateTime%20%3Fstart%20.%20%0A%3FendDateTimeValue%20vivo%3AdateTime%20%3Fend%20.%20%0AFILTER%20(YEAR(%3Fstart)%20%3C%3D%20%222019%22%5E%5Exsd%3Ainteger%20%26%26%20YEAR(%3Fend)%20%3E%3D%20%222019%22%5E%5Exsd%3Ainteger%20)%0A%7D">Q10 - Listado de los proyectos adjudicados/desarrollados, de un centro/estructura de investigación, de un área/disciplina, en un determinado año de búsqueda
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0APREFIX%20bibo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0ASELECT%20DISTINCT%20%3FresearchObject%20%3Fdate%20%0AWHERE%20%7B%0A%3FresearchObject%20a%20roh%3AResearchObject%20%3B%0Avivo%3AdateIssued%20%3FdateIssued%20%3B%0Aroh%3AhasKnowledgeArea%20%3FknowledgeArea%20%3B%0Abibo%3AauthorList%20%3FauthorList%20.%0A%3FdateIssued%20vivo%3AdateTime%20%3Fdate%20.%0A%3FauthorList%20%3Fp%20%3Fauthor%20.%0A%3Fauthor%20a%20foaf%3APerson%20%3B%0Aroh%3AhasPosition%20%3Fposition%20.%0A%3Fposition%20vivo%3Arelates%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fdata%23centro-investigacion-1%3E%20.%0A%7D%20ORDER%20BY%20ASC(%3Fdate)%20LIMIT%201">Q11A - Encontrar el research object más antiguo organización
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0APREFIX%20bibo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0ASELECT%20DISTINCT%20%3FresearchObject%20%3Fdate%20%0AWHERE%20%7B%0A%3FresearchObject%20a%20roh%3AResearchObject%20%3B%0Avivo%3AdateIssued%20%3FdateIssued%20%3B%0Aroh%3AhasKnowledgeArea%20%3FknowledgeArea%20%3B%0Abibo%3AauthorList%20%3FauthorList%20.%0A%3FdateIssued%20vivo%3AdateTime%20%3Fdate%20.%0A%3FauthorList%20%3Fp%20%3Fauthor%20.%0A%3Fauthor%20a%20foaf%3APerson%20%3B%0Aroh%3AhasPosition%20%3Fposition%20.%0A%3Fposition%20vivo%3Arelates%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fdata%23centro-investigacion-1%3E%20.%0A%7D%20ORDER%20BY%20DESC(%3Fdate)%20LIMIT%201">Q11B - Encontrar el research object más reciente de una organización
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20gn%3A%09%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fgeonames%23%3E%0ASELECT%20DISTINCT%20%3Fproject%20%3Fcentre%20%3Flocation%20%0AWHERE%20%7B%0A%3Fproject%20a%20vivo%3AProject%20%3B%20%0Agn%3AlocatedIn%20%3Flocation%20%3B%0Avivo%3Arelates%20%3Frole%20.%0A%3Frole%20a%20vivo%3AMemberRole%20%3B%0Aroh%3AroleOf%20%3Fcentre%20.%0A%3Fcentre%20a%20roh%3AResearchGroup%20.%0AOPTIONAL%20%7B%20%3Fproject%20roh%3AprojectStatus%20%3FprojectStatus%20.%0AFILTER%20(%3FprojectStatus%20!%3D%20%22PROPOSAL_SUBMITTED%22)%7D%0A%7D">Q12 - Listar proyectos agrupados por ámbito geográfico
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20bibo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0ASELECT%20%20%3Fdocument%20%3FdocumentType%0AWHERE%20%7B%0A%3Fdossier%20a%20roh%3ADossier%20.%0A%3Fdossier%20vivo%3Arelates%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fdata%23a-project%3E%2C%20%3Fdocument%20.%0A%3Fdocument%20a%20%3FdocumentType%20.%0A%3FdocumentType%20rdfs%3AsubClassOf%20bibo%3AReport%20.FILTER%20NOT%20EXISTS%20%7B%0A%3Fdocument%20a%20%3FotherClass%20.%0A%3FotherClass%20rdfs%3AsubClassOf%20%3FdocumentType%20.%0AFILTER%20(%3FotherClass%20!%3D%20%3FdocumentType)%0A%7D%0A%7D%20">Q13 - Dado un proyecto listar los documentos de su dossier
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20uneskos%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Funesco-individuals%23%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0ASELECT%20DISTINCT%20%3Fproject%20%0AWHERE%20%7B%0A%7B%0A%3Fproject%20a%20vivo%3AProject%20%3B%0Aroh%3AhasKnowledgeArea%20%3FknowledgeArea%20.%0A%3FknowledgeArea%20skos%3Abroader%2B%7Cskos%3Anarrower%2B%7Cskos%3Arelated%2B%20uneskos%3A1203%20.%0A%7D%20UNION%20%7B%0Auneskos%3A1203%20skos%3Abroader%2B%20%3FtopKnowledgeArea%20.%0A%3FtopKnowledgeArea%20skos%3Anarrower%2B%20%3FotherKnowledgeArea%20.%0A%3Fproject%20roh%3AhasKnowledgeArea%20%3FotherKnowledgeArea%20%3B%0Aa%20vivo%3AProject%20.%0A%7D%0A%7D">Q15 - Listar proyectos con el mismo subject area o con subject areas relacionadas por parentesco, mirando en el árbol UNESKOS
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0ASELECT%20DISTINCT%20%3Fresearcher%20%3Fproject%20%3Forganization%20%0AWHERE%20%7B%0A%3Fproject%20a%20vivo%3AProject%20%3B%0Avivo%3Arelates%20%3Frole%20%3B%0Avivo%3AdateTimeInterval%20%3FdateTimeInterval%20.%0A%3FdateTimeInterval%20vivo%3Aend%20%3FendDateTimeValue%20%3B%0Avivo%3Astart%20%3FstartDateTimeValue%20.%0A%3FendDateTimeValue%20vivo%3AdateTime%20%3Fend%20.%0A%3FstartDateTimeValue%20vivo%3AdateTime%20%3Fstart%20.%0A%3Frole%20roh%3AroleOf%20%3Fresearcher%20.%0A%3Fresearcher%20roh%3AhasPosition%20%3Fposition%20.%0A%3Fposition%20vivo%3Arelates%20%3Forganization%20.%0A%3Forganization%20a%20%3ForganizationClass%20.%0A%3ForganizationClass%20rdfs%3AsubClassOf%20foaf%3AOrganization%20.%0AFILTER%20(YEAR(%3Fstart)%20%3C%3D%20%222019%22%5E%5Exsd%3Ainteger%20%26%26%20YEAR(%3Fend)%20%3E%3D%20%222019%22%5E%5Exsd%3Ainteger%20)%0A%7D">Q16A - Dada una persona listar proyectos en los que ha intervenido filtrados por periodo y/o organización
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0APREFIX%20bibo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0ASELECT%20DISTINCT%20%3Fresearcher%20%3FresearchObject%20%3Forganization%20%0AWHERE%20%7B%0A%3FresearchObject%20a%20roh%3AResearchObject%20%3B%0Abibo%3AauthorList%20%3FauthorList%20%3B%0Avivo%3AdateIssued%20%3FdateTimeValue%20.%0A%3FdateTimeValue%20vivo%3AdateTime%20%3Fdate%20.%0A%3FauthorList%20rdfs%3Amember%20%3Fresearcher%20.%0A%3Fresearcher%20roh%3AhasPosition%20%3Fposition%20.%0A%3Fposition%20vivo%3Arelates%20%3Forganization%20.%0A%3Forganization%20a%20%3ForganizationClass%20.%0A%3ForganizationClass%20rdfs%3AsubClassOf%20foaf%3AOrganization%20.%0AFILTER%20(YEAR(%3Fdate)%20%3E%3D%20%222019%22%5E%5Exsd%3Ainteger%20%26%26%20YEAR(%3Fdate)%20%3C%3D%20%222020%22%5E%5Exsd%3Ainteger%20)%0A%7D%0A%20ORDER%20BY%20%3Fresearcher">Q16B - Dada una persona listar research objects a los que ha contribuido, filtrados por periodo y/o organización
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0ASELECT%20%20DISTINCT%20%3Forganization%20%3Fproject%20%0AWHERE%20%7B%0A%3Forganization%20a%20%3ForganizationClass%20.%0A%3ForganizationClass%20rdfs%3AsubClassOf*%20foaf%3AOrganization%20.%0A%3Frole%20roh%3AroleOf%20%3Forganization%20%3B%0Avivo%3ArelatedBy%20%3Fproject%20.%0A%3Fproject%20a%20vivo%3AProject%20%3B%0Avivo%3AdateTimeInterval%20%3FdateTimeInterval%20.%0A%3FdateTimeInterval%20vivo%3Astart%20%3FstartDateTimeValue%20%3B%0Avivo%3Aend%20%3FendDateTimeValue%20.%20%0A%3FstartDateTimeValue%20vivo%3AdateTime%20%3Fstart%20.%20%0A%3FendDateTimeValue%20vivo%3AdateTime%20%3Fend%20.%20%0AFILTER%20(YEAR(%3Fstart)%20%3C%3D%20%222019%22%5E%5Exsd%3Ainteger%20%26%26%20YEAR(%3Fend)%20%3E%3D%20%222019%22%5E%5Exsd%3Ainteger%20)%0A%7D">Q17 - Dada una organización, en un periodo de tiempo, listar research projects o proyectos
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20bibo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0ASELECT%20%3Fresearcher%20(COUNT(%3Fmetric)%20as%20%3Fcount)%0AWHERE%20%7B%0A%3FresearchObject%20a%20roh%3AResearchObject%20%3B%0Abibo%3AauthorList%20%3FauthorList%20%3B%0Aroh%3AhasMetric%20%3Fmetric%20.%0A%3Fmetric%20roh%3AimpactFactor%20%3FimpactFactor%20.%0A%3FauthorList%20rdfs%3Amember%20%3Fresearcher%20.%0A%7D%20GROUP%20BY%20%3Fresearcher%20">Q18 - Contar las publicaciones con índice de impacto de un usuario en un periodo de tiempo
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20bfo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fbfo%23%3E%0APREFIX%20bibo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0ASELECT%20%3Forganization%20%3FknowledgeArea%20(count(DISTINCT%20%3Fitem)%20as%20%3Fcount)%20%0AWHERE%20%7B%0ASELECT%20%3Fdate%20%3Fitem%20%3Forganization%20%3FknowledgeArea%20%0AWHERE%7B%0A%7B%0A%3Fitem%20a%20vivo%3AProject%20%3B%0Avivo%3AdateTimeInterval%20%3FdateTimeInterval%20%3B%0Aroh%3AhasKnowledgeArea%20%3FknowledgeArea%20%3B%0Avivo%3Arelates%20%3Frole%20.%0A%3FdateTimeInterval%20vivo%3Aend%20%3FendDateTimeValue%20%3B%0Avivo%3Astart%20%3FstartDateTimeValue%20.%0A%3FendDateTimeValue%20vivo%3AdateTime%20%3Fend%20.%0A%3FstartDateTimeValue%20vivo%3AdateTime%20%3Fstart%20.%0A%3Frole%20a%20%3FroleClass%20%3B%0Aroh%3AroleOf%20%3Forganization%20.%0A%3FroleClass%20rdfs%3AsubClassOf*%20bfo%3ABFO_0000023%20.%0A%3Forganization%20a%20%3ForganizationClass%20.%0A%3ForganizationClass%20rdfs%3AsubClassOf*%20foaf%3AOrganization%20.%0AFILTER%20(YEAR(%3Fstart)%20%3C%3D%20%222019%22%5E%5Exsd%3Ainteger%20%26%26%20YEAR(%3Fend)%20%3E%3D%20%222019%22%5E%5Exsd%3Ainteger%20)%0A%7D%0AUNION%20%7B%0A%3Fitem%20a%20%3FpublicationClass%20%3B%0Avivo%3AdateIssued%20%3FdateTimeValue%20%3B%0Aroh%3AhasKnowledgeArea%20%3FknowledgeArea%20%3B%0Abibo%3AauthorList%20%3FauthorList%20.%0A%3FpublicationClass%20rdfs%3AsubClassOf*%20bibo%3ADocument%20.%0A%3FauthorList%20%3Forder%20%3Fauthor%20.%0A%3Fauthor%20roh%3AhasPosition%20%3Fposition%20.%0A%3Fposition%20vivo%3Arelates%20%3Forganization%20.%0A%3Forganization%20a%20%3ForganizationClass%20.%0A%3ForganizationClass%20rdfs%3AsubClassOf*%20foaf%3AOrganization%20.%0A%3FdateTimeValue%20vivo%3AdateTime%20%3Fdate%20.%0AFILTER%20(YEAR(%3Fdate)%20%3C%3D%20%222019%22%5E%5Exsd%3Ainteger%20%7C%7C%20YEAR(%3Fdate)%20%3E%3D%20%222020%22%5E%5Exsd%3Ainteger%20)%0A%7D%0A%7D%0A%7D%20GROUP%20BY%20%3Forganization%20%3FknowledgeArea%20ORDER%20BY%20%3Fcount">Q20 - Listar las áreas de conocimiento más abordadas por una organización en proyectos o publicaciones en un periodo de tiempo
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0ASELECT%20DISTINCT%20%3Fproject%20%3Fcentre%20%0AWHERE%20%7B%0A%3Fproject%20a%20vivo%3AProject%20%3B%0Avivo%3Arelates%20%3Frole%20%3B%0Avivo%3Arelates%20%3FcentreRole%20.%0A%3Frole%20roh%3AroleOf%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fdata%23company-one%3E%20.%0A%3FcentreRole%20roh%3AroleOf%20%3Fcentre%20.%0A%3Fcentre%20a%20roh%3AResearchGroup%20.%0A%7D">Q24 - Dada una empresa encontrar los proyectos en los que ha colaborado con los grupos de una universidad
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20ro%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fro%23%3E%0A%0ASELECT%20%3Fthesis%20%0AWHERE%20%7B%0A%20%20%3FsupervisorRole%20a%20roh%3ASupervisorRole%20%3B%0A%20%20ro%3ARO_0000052%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fdata%23investigador-1%3E%20%3B%0A%20%20%20%20%20%20%20%20vivo%3ArelatedBy%20%3FsupervisingRelationship%20.%0A%20%20%3FsupervisingRelationship%20a%20roh%3APhDSupervisingRelationship%20%3B%0A%20roh%3Aproduces%20%3Fthesis%7D">Q25 - Obtener el listado de las tesis doctorales que he dirigido
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20ro%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fro%23%3E%0APREFIX%20bibo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20bfo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fbfo%23%3E%0ASELECT%20%3Fresearcher%20%3Fconference%20%3FroleClass%20%0AWHERE%20%7B%0A%3Fconference%20a%20bibo%3AConference%20%3B%0Abfo%3ABFO_0000055%20%3Frole%20.%0A%3Frole%20a%20%3FroleClass%20%3B%0Aro%3ARO_0000052%20%3Fresearcher%20.%0AFILTER%20NOT%20EXISTS%20%7B%0A%3Frole%20a%20%3FotherClass%20.%0A%3FotherClass%20rdfs%3AsubClassOf%20%3FroleClass%20.%0AFILTER%20(%3FotherClass%20!%3D%20%3FroleClass)%0A%7D%0A%7D">Q26 - Obtener el listado de congresos/workshops y eventos de divulgación científica en los que haya participado indicando el rol que he tenido: organizador, expositor, etc.
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20bibo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0ASELECT%20%3Fpatent%20%3Fresearcher%20%3Fcenter%20%0AWHERE%20%7B%0A%3Fpatent%20a%20bibo%3APatent%20%3B%0Aroh%3AcorrespondingAuthor%20%3Fresearcher%20.%0A%3Fresearcher%20roh%3AhasPosition%20%3Fposition%20.%0A%3Fposition%20vivo%3Arelates%20%3Fcenter%20.%0A%3Fcenter%20a%20roh%3AResearchGroup%20.%0A%7D">Q27 - Obtener el listado de patentes, diseños industriales, etc. que haya registrado como titular o cotitular X o Y persona, Z o K institución
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0ASELECT%20%3Fresearcher%20%3Fproject%20%3FroleClass%20%0AWHERE%20%7B%0A%3Fproject%20a%20vivo%3AProject%20%3B%0Avivo%3Arelates%20%3Frole%20.%0A%3Frole%20a%20%3FroleClass%20%3B%0Aroh%3AroleOf%20%3Fresearcher%20.%0A%3Fresearcher%20a%20foaf%3APerson%20.%0AFILTER%20NOT%20EXISTS%20%7B%0A%3Frole%20a%20%3FotherClass%20.%0A%3FotherClass%20rdfs%3AsubClassOf%20%3FroleClass%20.%0AFILTER%20(%3FotherClass%20!%3D%20%3FroleClass)%0A%7D%0A%7D">Q28 - Obtener el listado de proyectos en los que he participado incluyendo el rol que he desempeñado, por ejemplo, investigador principal
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20bibo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0ASELECT%20DISTINCT%20%3Fitem%20%0AWHERE%20%7B%0A%3Fitem%20a%20roh%3AResearchObject%20%3B%0Abibo%3AauthorList%20%3FauthorList%20.%0A%3FauthorList%20rdfs%3Amember%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fdata%23investigador-1%3E%20.%20%0A%7D">Q29 - Obtener el listado de mi producción científica
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0ASELECT%20%3Fresearcher%20%3FfactorH%20%3Fcites%20%0AWHERE%20%7B%0A%3Fresearcher%20a%20foaf%3APerson%20%3B%0Aroh%3AhasCV%20%3Fcv%20.%0A%3Fcv%20roh%3Acites%20%3Fcites%20%3B%0Aroh%3AfactorH%20%3FfactorH%20.%0A%7D">Q31 - Obtener los indicadores de mi producción científica como, por ejemplo, total de citas, h-index, etc.
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20iao%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fiao%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20bibo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0ASELECT%20%3Fresearcher%20(COUNT(%3Fjournal)%20as%20%3Fcount)%20%20WHERE%20%7B%0A%3Fjournal%20a%20iao%3AIAO_0000013%20%3B%0Avivo%3AdateIssued%20%3FdateTimeValue%20%3B%0Abibo%3AauthorList%20%3FauthorList%20%3B%0Aroh%3AhasMetric%20%3Fmetric%20.%0A%3FdateTimeValue%20vivo%3AdateTime%20%3Fdate%20.%0A%3FauthorList%20rdfs%3Amember%20%3Fresearcher%20.%20%0A%3Fmetric%20roh%3AimpactFactor%20%3FimpactFactor%20%3B%0Aroh%3Aquartile%20%3Fquartile%20.%0AFILTER%20(str(%3Fquartile)%20%3D%20%22Q1%22%5E%5Exsd%3Astring%20%7C%7C%20str(%3Fquartile)%20%3D%20%22Q2%22%5E%5Exsd%3Astring)%20%0AFILTER%20(YEAR(%3Fdate)%20%3E%3D%20%222015%22%5E%5Exsd%3Ainteger%20%26%26%20YEAR(%3Fdate)%20%3C%3D%20%222020%22%5E%5Exsd%3Ainteger%20)%0A%7D%20GROUP%20BY%20%3Fresearcher%20HAVING%20(%3Fcount%20%3E%205)%20">Q33 - Dado un periodo de 6 años devuelveme el número de academic articles con factor de impacto y determina si es mayor 5, pudiendo filtrar por cuartil, considerando de Q3 para arriba
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20ro%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fro%23%3E%0ASELECT%20%3Fproject%20%3Fcompany%20%3FfundingAmounts%20%0AWHERE%20%7B%0A%3Fproject%20a%20vivo%3AProject%20%3B%0Aroh%3AprojectStatus%20%22PROPOSAL_SUBMITTED%22%20%3B%0Aroh%3AisSupportedBy%20%3Ffunding%20.%0A%3Ffunding%20ro%3AhasPart%20%3FfundingAmount%20%3B%0Aroh%3AfundedBy%20%3FfundingProgram%20.%0A%3FfundingProgram%20roh%3ApromotedBy%20%3Fcompany%20.%0A%3FfundingAmount%20roh%3AmonetaryAmount%20%3FfundingAmounts%20.%0A%3Fcompany%20a%20vivo%3ACompany%20.%0A%7D">Q34 - Proyecto en estado PROPOSAL_SUBMITTED dirigidas a una empresa e incluso detalles económicos de la misma, el Funding propuesto y los Funding Amounts associados
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20bibo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0ASELECT%20DISTINCT%20%3Fproject%20%3Freport%20%0AWHERE%20%7B%0A%3Fproject%20a%20vivo%3AProject%20.%0A%3Fdossier%20vivo%3Arelates%20%3Fproject%20.%0A%7B%0ASELECT%20%3Freport%20%0AWHERE%7B%0A%3Fdossier%20vivo%3Arelates%20%3Freport%20.%0A%3Freport%20a%20%3FreportClass%20.%0A%3FreportClass%20rdfs%3AsubClassOf*%20bibo%3AReport%20.%0A%7D%0A%7D%0A%7D">Q35A - Listar los documentos de justificación asociados a un proyecto
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0ASELECT%20%3FforeseenJustificationDate%20%0AWHERE%20%7B%0A%3Fproject%20a%20vivo%3AProject%20%3B%0Aroh%3AforeseenJustificationDate%20%3FforeseenJustificationDate%20.%0A%7D">Q35B - Listar las fechas de justificación de un proyecto
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0ASELECT%20%3Fexpense%20%3Fdescription%20%0AWHERE%20%7B%0A%3Fproject%20a%20vivo%3AProject%20%3B%0Aroh%3Aspends%20%3Fexpense%20.%0A%3Fexpense%20vivo%3Adescription%20%3Fdescription%20.%0A%7D">Q35C - Listar los gastos de un proyecto
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20ro%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fro%23%3E%0ASELECT%20%3Forganization%20%3FfundingProgram%20(SUM(%3FmonetaryAmount)%20as%20%3FtotalFunding)%20%0AWHERE%20%7B%0A%3FfundingProgram%20a%20roh%3AFundingProgram%20%3B%0Aroh%3Afunds%20%3Ffunding%20.%0A%3Ffunding%20ro%3AhasPart%20%3FfundingAmount%20.%0A%3FfundingAmount%20roh%3Agrants%20%3Forganization%20%3B%0Aroh%3AmonetaryAmount%20%3FmonetaryAmount%20.%0A%7D%20GROUP%20BY%20%3Forganization%20%3FfundingProgram%20">Q36 - Listar los grupos ordenados por financiación recibida
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0ASELECT%20DISTINCT%20%3Fproject%20%3Forganization%20%3FotherOrganization%20%0AWHERE%20%7B%0A%3Fproject%20a%20vivo%3AProject%20%3B%0Avivo%3Arelates%20%3Frole%20%3B%0Avivo%3Arelates%20%3FotherRole%20.%0A%3Frole%20roh%3AroleOf%20%3Forganization%20.%0A%3Forganization%20a%20foaf%3AOrganization%20.%0A%3FotherRole%20roh%3AroleOf%20%3FotherOrganization%20.%0A%3FotherOrganization%20a%20foaf%3AOrganization%20.%0AFILTER%20(%3Forganization%20!%3D%20%3FotherOrganization)%20%0A%7D">Q37 - Listar número de proyectos y/o publicaciones compartidas entre 2 o más organizaciones
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20ro%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fro%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0ASELECT%20%3Forganization%20%3FknowledgeArea%20(SUM(%3FmonetaryAmount)%20as%20%3FtotalFunding)%20%0AWHERE%20%7B%0A%3Fproject%20a%20vivo%3AProject%20%3B%0Aroh%3AhasKnowledgeArea%20%3FknowledgeArea%20%3B%0Aroh%3AisSupportedBy%20%3Ffunding%20.%0A%3Ffunding%20ro%3AhasPart%20%3FfundingAmount%20.%0A%3FfundingAmount%20roh%3AmonetaryAmount%20%3FmonetaryAmount%20%3B%0Aroh%3Agrants%20%3Forganization%20.%0A%3Forganization%20a%20foaf%3AOrganization%20.%0A%7D%20GROUP%20BY%20%3Forganization%20%3FknowledgeArea">Q39 - Financiación atraída en unos años por todos los investigadores del área de conocimiento X
+</a></td>
+							</tr>							
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0ASELECT%20%3Fresearcher%20%3Fgrant%20%0AWHERE%20%7B%0A%3Fcontract%20a%20roh%3APersonContract%20%3B%20%0Avivo%3Arelates%20%3Fresearcher%20.%0A%3Fresearcher%20a%20foaf%3APerson%20.%0A%7B%0ASELECT%20%3Fgrant%20%0AWHERE%20%7B%0A%3Fgrant%20a%20roh%3AGrant%20.%0A%3Fcontract%20vivo%3Arelates%20%3Fgrant%20.%0A%7D%0A%7D%0A%7D">Q42 - Investigadores que tienen ERCs, Marie Curie, etc.
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20ro%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fro%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0ASELECT%20DISTINCT%20%3Fproject%20%3FfundingProgram%20%3FotherOrganization%20%3Funiversity%20%0AWHERE%7B%0A%3Fproject%20a%20vivo%3AProject%20%3B%0Avivo%3AdateTimeInterval%20%3FdateTimeInterval%20%3B%0Avivo%3Arelates%20%3Frole%20%3B%0Avivo%3Arelates%20%3FotherRole%20%3B%0Aroh%3AisSupportedBy%20%3Ffunding%20.%0A%3Ffunding%20roh%3AfundedBy%20%3FfundingProgram%20.%0A%3Frole%20roh%3AroleOf%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fdata%23centro-investigacion-1%3E%20.%0A%3FotherRole%20roh%3AroleOf%20%3FotherOrganization%20.%0A%3Funiversity%20ro%3ABFO_0000051%20%3FotherOrganization%20.%0A%3Funiversity%20a%20vivo%3AUniversity%20.%0A%3FdateTimeInterval%20vivo%3Astart%20%3Fstart%20%3B%0Avivo%3Aend%20%3Fend%20.%0A%3Fstart%20vivo%3AdateTime%20%3FstartTime%20.%0A%3Fend%20vivo%3AdateTime%20%3FendTime%20.%0AFILTER%20(%3FotherOrganization%20!%3D%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fdata%23centro-investigacion-1%3E)FILTER%20(YEAR(%3FstartTime)%20%3C%3D%20%222019%22%5E%5Exsd%3Ainteger%20%26%26%20YEAR(%3FendTime)%20%3E%3D%20%222019%22%5E%5Exsd%3Ainteger)%7D">Q44 - Cuantificar los proyectos en convocatorias competitivas de un grupo de investigación en un rango de años con grupos de investigación de otras Universidades
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20iao%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fiao%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20bibo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0ASELECT%20%3Fgender%20(COUNT(%3Fjournal)%20as%20%3Fcount)%20%20WHERE%20%7B%0A%3Fjournal%20a%20iao%3AIAO_0000013%20%3B%0Avivo%3AdateIssued%20%3FdateTimeValue%20%3B%0Abibo%3AauthorList%20%3FauthorList%20%3B%0Aroh%3AhasMetric%20%3Fmetric%20.%0A%3FdateTimeValue%20vivo%3AdateTime%20%3Fdate%20.%0A%3FauthorList%20rdfs%3Amember%20%3Fresearcher%20.%20%0A%3Fresearcher%20foaf%3Agender%20%3Fgender%20.%0A%3Fmetric%20roh%3AimpactFactor%20%3FimpactFactor%20.%0A%7D%20GROUP%20BY%20%3Fgender%20">Q45 - Obtener el total de publicaciones de impacto por mujeres y hombres
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Ffoaf%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0ASELECT%20%3FresearchGroup%20(SUM(%3Fcites)%20as%20%3FtotalCites)%20%0AWHERE%20%7B%0A%3Fresearcher%20a%20foaf%3APerson%20%3B%0Aroh%3AhasPosition%20%3Fposition%20%3B%0Aroh%3AhasCV%20%3Fcv%20.%0A%3Fcv%20roh%3Acites%20%3Fcites%20%3B%0Aroh%3AfactorH%20%3FfactorH%20.%0A%3Fposition%20vivo%3Arelates%20%3FresearchGroup%20.%0A%3FresearchGroup%20a%20roh%3AResearchGroup%20.%0A%7D%20GROUP%20BY%20%3FresearchGroup">Q48 - Obtener los indicadores de la producción científica como, por ejemplo, total de citas, h-index, JCR, etc de un grupo de investigación o instituto de investigación
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20bibo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0ASELECT%20DISTINCT%20%3FresearchGroup%20%3FjournalArticle%20%0AWHERE%20%7B%0A%3Fresearcher%20roh%3AhasPosition%20%3Fposition%20.%0A%3Fposition%20vivo%3Arelates%20%3FresearchGroup%20.%0A%3FresearchGroup%20a%20roh%3AResearchGroup%20.%0A%3FjournalArticle%20bibo%3AauthorList%20%3FauthorList%20%3B%0Avivo%3AhasPublicationVenue%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fdata%23excelent-journal%3E%20.%0A%3FauthorList%20rdfs%3Amember%20%3Fresearcher%20.%0A%7D">Q49 - Obtener las publicaciones de un investigador o grupo de investigación en una revista científica indicada
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20iao%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fiao%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20bibo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0ASELECT%20%3Fjournal%20%3FimpactFactor%20(YEAR(%3Fdate)%20as%20%3Fyear)%20%20WHERE%20%7B%0A%3Fjournal%20a%20iao%3AIAO_0000013%20%3B%0Avivo%3AdateIssued%20%3FdateTimeValue%20%3B%0Abibo%3AauthorList%20%3FauthorList%20%3B%0Aroh%3AhasMetric%20%3Fmetric%20.%0A%3FdateTimeValue%20vivo%3AdateTime%20%3Fdate%20.%0A%3FauthorList%20rdfs%3Amember%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fdata%23investigador-1%3E%20.%20%0A%3Fmetric%20roh%3AimpactFactor%20%3FimpactFactor%20%3B%0AFILTER%20(YEAR(%3Fdate)%20%3E%3D%20%222020%22%5E%5Exsd%3Ainteger%20%26%26%20YEAR(%3Fdate)%20%3C%3D%20%222020%22%5E%5Exsd%3Ainteger%20)%0A%7D%20">Q50 - Dados unos años listar los JRCs en los mismos para poder visualizar evolución
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20bibo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20dc%3A%20%20%20%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%3E%0ASELECT%20DISTINCT%20%3Fpublication%20%0AWHERE%20%7B%0A%3Fpublication%20bibo%3AauthorList%20%3FauthorList%20%20%3Bdc%3Atitle%20%3Ftitle%20%3Ba%20bibo%3AArticle%20.%3FauthorList%20rdfs%3Amember%20%3Fauthor%20.%0A%3Fauthor%20roh%3AhasPosition%20%3Fposition%20.%0A%3Fposition%20vivo%3Arelates%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fdata%23centro-investigacion-1%3E%20.%0AFILTER%20regex(%3Ftitle%2C%20%22great%22%2C%20%22i%22)%7D">Q52 - Buscar las publicaciones de un grupo o instituto de investigación, o una universidad en las que aparezca en el título de la publicación los tokens que indique como entrada a la consulta
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20bibo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0ASELECT%20DISTINCT%20%3Fjournal%20%3FknowledgeArea%20%0AWHERE%20%7B%0A%3FjournalArticle%20vivo%3AhasPublicationVenue%20%3Fjournal%20%3B%0Abibo%3AauthorList%20%3FauthorList%20%3B%0Aroh%3AhasMetric%20%3Fmetric%20%3B%0Aroh%3AhasKnowledgeArea%20%3FknowledgeArea%20.%0A%3FauthorList%20rdfs%3Amember%20%3Fauthor%20.%0A%3Fauthor%20roh%3AhasPosition%20%3Fposition%20.%0A%3Fposition%20vivo%3Arelates%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fdata%23centro-investigacion-1%3E%20.%0A%3Fmetric%20roh%3Aquartile%20%22Q2%22%7D">Q53 - Listar la revistas científicas con un JCR Q2, en un área determinada, donde ha publicado un grupo o instituto de investigación
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20iao%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fiao%23%3E%0APREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20bibo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0ASELECT%20%3Fresearcher%20%3Fjournal%20%3FimpactFactor%20%20WHERE%20%7B%0A%3Fjournal%20a%20iao%3AIAO_0000013%20%3B%0Avivo%3AdateIssued%20%3FdateTimeValue%20%3B%0Abibo%3AauthorList%20%3FauthorList%20%3B%0Aroh%3AhasMetric%20%3Fmetric%20.%0A%3FdateTimeValue%20vivo%3AdateTime%20%3Fdate%20.%0A%3FauthorList%20rdfs%3Amember%20%3Fresearcher%20.%20%0A%3Fmetric%20roh%3AimpactFactor%20%3FimpactFactor%20%3B%0AFILTER%20(YEAR(%3Fdate)%20%3E%3D%20%222020%22%5E%5Exsd%3Ainteger%20%26%26%20YEAR(%3Fdate)%20%3C%3D%20%222020%22%5E%5Exsd%3Ainteger%20)%0A%7D%20">Q54 - Listar los impactos JCR de los investigadores de un grupo en un año
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20ro%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fro%23%3E%0ASELECT%20%3FresearchGroup%20%3Fproject%20%3Fcompany%20%0AWHERE%20%7B%0A%3Fproject%20a%20vivo%3AProject%20%3B%0Avivo%3Arelates%20%3Frole%20%3B%0Aroh%3AisSupportedBy%20%3Ffunding%20.%0A%3Ffunding%20ro%3AhasPart%20%3FfundingAmount%20%3B%0Aroh%3AfundedBy%20%3FfundingProgram%20.%0A%3FfundingProgram%20roh%3ApromotedBy%20%3Fcompany%20.%0A%3FfundingAmount%20roh%3AmonetaryAmount%20%3FfundingAmounts%20.%0A%3Fcompany%20a%20vivo%3ACompany%20.%0A%3Frole%20roh%3AroleOf%20%3FresearchGroup%20.%0A%3FresearchGroup%20a%20roh%3AResearchGroup%20.%0AOPTIONAL%20%7B%0A%3Fproject%20roh%3AprojectStatus%20%3FprojectStatus%20.%0A%7D%0AFILTER%20(!BOUND(%3FprojectStatus)%20%7C%7C%20%3FprojectStatus%20!%3D%20%22PROPOSAL_SUBMITTED%22)%0A%7D">Q55 - Listar los proyectos privados obtenidos por un grupo de investigación contratados por una organización privada
+</a></td>
+							</tr>
+							<tr>
+								<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20vivo%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fvivo%23%3E%0APREFIX%20bibo%3A%20%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fbibo%23%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20dc%3A%20%20%20%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%3E%0APREFIX%20ro%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Fmirror%2Fobo%2Fro%23%3E%0ASELECT%20DISTINCT%20%3Funiversity%20%3FphdThesis%20%0AWHERE%20%7B%0A%3FphdThesis%20a%20roh%3APhDThesis%20%0A%3Bbibo%3AauthorList%20%3FauthorList%20%3B%0Adc%3Atitle%20%3Ftitle%20.%0A%3FauthorList%20rdfs%3Amember%20%3Fauthor%20.%0A%3Fauthor%20roh%3AhasPosition%20%3Fposition%20.%0A%3Fposition%20vivo%3Arelates%20%3FresearchGroup%20.%0A%3FresearchGroup%20a%20roh%3AResearchGroup%20.%0A%3Funiversity%20ro%3ABFO_0000051%20%3FresearchGroup%20.%0AFILTER%20regex(%3Ftitle%2C%20%22fabulous%22%2C%20%22i%22)%7D">Q56 - Listar las tesis de una universidad en las que aparezca en el título los tokens que indique como entrada a la consulta
+</a></td>
+							</tr>
+					    </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Keyboard Shortcut Help Modal -->
+	<div class="modal" id="keyboardShortcutHelpModal" tabindex="-1" role="dialog" aria-labelledby="keyboardShortcutHelpModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="keyboardShortcutHelpModalLabel" data-i18n="wdqs-dialog-key-shortcut-title"></h5>
+				</div>
+				<div class="modal-body">
+					<table class="keyboard-shortcut-help">
+						<tbody>
+							<tr>
+								<th scope="row">
+									<kbd><kbd>ctrl</kbd>+<kbd>enter</kbd></kbd>
+								</th>
+								<td data-i18n="wdqs-dialog-key-shortcut-run-query"></td>
+							</tr>
+							<tr>
+								<th scope="row">
+									<kbd>esc</kbd>
+								</th>
+								<td data-i18n="wdqs-dialog-key-shortcut-esc"></td>
+							</tr>
+							<tr>
+								<th scope="row">
+									<kbd>?</kbd>
+								</th>
+								<td data-i18n="wdqs-dialog-key-shortcut-show-shortcut-help"></td>
+							</tr>
+							<tr>
+								<th scope="row">
+									<kbd>i</kbd>
+								</th>
+								<td data-i18n="wdqs-dialog-key-shortcut-focus-textarea"></td>
+							</tr>
+							<tr>
+								<th scope="row">
+									<kbd>r</kbd>
+								</th>
+								<td data-i18n="wdqs-dialog-key-shortcut-jump-to-result"></td>
+							</tr>
+							<tr>
+								<th scope="row">
+									<kbd>f</kbd>
+								</th>
+								<td data-i18n="wdqs-dialog-key-shortcut-focus-filter"></td>
+							</tr>
+							<tr>
+								<th scope="row">
+									<kbd>s</kbd>
+								</th>
+								<td data-i18n="wdqs-dialog-key-shortcut-focus-show"></td>
+							</tr>
+							<tr>
+								<th scope="row">
+									<kbd>m</kbd>
+								</th>
+								<td data-i18n="wdqs-dialog-key-shortcut-focus-limit"></td>
+							</tr>
+							<tr>
+								<th scope="row">
+									<kbd>e</kbd>
+								</th>
+								<td data-i18n="wdqs-dialog-key-shortcut-show-example"></td>
+							</tr>
+							<tr>
+								<th scope="row">
+									<kbd>h</kbd>
+								</th>
+								<td data-i18n="wdqs-dialog-key-shortcut-help-menu"></td>
+							</tr>
+							<tr>
+								<th scope="row">
+									<kbd>l</kbd>
+								</th>
+								<td data-i18n="wdqs-dialog-key-shortcut-show-language"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" data-i18n="wdqs-dialog-key-shortcut-close-button"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Code Example Modal -->
+	<div class="modal fade CodeExamples" id="CodeExamples" tabindex="-1" role="dialog" aria-labelledby="CodeExamplesModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div>
+					  <!-- Nav tabs -->
+					  <ul class="nav nav-tabs" role="tablist">
+					  </ul>
+					  <!-- Tab panes -->
+					  <div class="tab-content">
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- JS files -->
+	<!-- build:js js/vendor.min.js -->
+	<script src="node_modules/jquery/dist/jquery.js"></script>
+	<script src="node_modules/jquery-toast-plugin/src/jquery.toast.js"></script>
+	<script src="node_modules/underscore/underscore.js"></script>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="node_modules/codemirror/lib/codemirror.js"></script>
+	<script src="node_modules/codemirror/mode/sparql/sparql.js"></script>
+	<script src="node_modules/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+	<script src="node_modules/codemirror/mode/xml/xml.js"></script>
+	<script src="node_modules/codemirror/mode/clike/clike.js"></script>
+	<script src="node_modules/codemirror/mode/php/php.js"></script>
+	<script src="node_modules/codemirror/mode/javascript/javascript.js"></script>
+	<script src="node_modules/codemirror/mode/octave/octave.js"></script>
+	<script src="node_modules/codemirror/mode/python/python.js"></script>
+	<script src="node_modules/codemirror/mode/ruby/ruby.js"></script>
+	<script src="node_modules/codemirror/mode/r/r.js"></script>
+	<script src="node_modules/codemirror/addon/display/autorefresh.js"></script>
+	<script src="node_modules/codemirror/addon/hint/show-hint.js"></script>
+	<script src="node_modules/codemirror/addon/display/placeholder.js"></script>
+	<script src="node_modules/codemirror/addon/display/fullscreen.js"></script>
+	<script src="node_modules/codemirror/addon/comment/comment.js"></script>
+	<script src="node_modules/bootstrap-table/dist/bootstrap-table.js"></script>
+	<script src="node_modules/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.js"></script>
+	<script src="node_modules/bootstrap-table/dist/extensions/key-events/bootstrap-table-key-events.js"></script>
+	<script src="node_modules/bootstrap-table/dist/extensions/cookie/bootstrap-table-cookie.js"></script>
+	<script src="node_modules/select2/dist/js/select2.js"></script>
+	<script src="node_modules/ekko-lightbox/dist/ekko-lightbox.js"></script>
+	<script src="node_modules/leaflet/dist/leaflet.js"></script>
+	<script src="node_modules/leaflet-fullscreen/dist/Leaflet.fullscreen.js"></script>
+	<script src="node_modules/leaflet-zoombox/L.Control.ZoomBox.js"></script>
+	<script src="node_modules/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+	<script src="node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
+	<script src="node_modules/leaflet-minimap/dist/Control.MiniMap.min.js"></script>
+	<script src="node_modules/d3/d3.js"></script>
+	<script src="node_modules/dimple-js/dist/dimple.latest.js"></script>
+	<script src="node_modules/js-cookie/src/js.cookie.js"></script>
+	<script src="node_modules/vis/dist/vis.js"></script>
+	<script src="node_modules/moment/min/moment-with-locales.js"></script>
+	<script src="node_modules/jqcloud2/dist/jqcloud.js"></script>
+	<script src="node_modules/downloadjs/download.js"></script>
+	<script src="node_modules/jquery.uls/src/jquery.uls.data.js"></script>
+	<script src="node_modules/jquery.uls/src/jquery.uls.data.utils.js"></script>
+	<script src="node_modules/jquery.uls/src/jquery.uls.lcd.js"></script>
+	<script src="node_modules/jquery.uls/src/jquery.uls.languagefilter.js"></script>
+	<script src="node_modules/jquery.uls/src/jquery.uls.core.js"></script>
+	<script src="node_modules/cldrpluralruleparser/src/CLDRPluralRuleParser.js"></script>
+	<script src="node_modules/@wikimedia/jquery.i18n/src/jquery.i18n.js"></script>
+	<script src="node_modules/@wikimedia/jquery.i18n/src/jquery.i18n.messagestore.js"></script>
+	<script src="node_modules/@wikimedia/jquery.i18n/src/jquery.i18n.fallbacks.js"></script>
+	<script src="node_modules/@wikimedia/jquery.i18n/src/jquery.i18n.parser.js"></script>
+	<script src="node_modules/@wikimedia/jquery.i18n/src/jquery.i18n.emitter.js"></script>
+	<script src="node_modules/@wikimedia/jquery.i18n/src/jquery.i18n.language.js"></script>
+	<script src="node_modules/jquery-resizable-dom/dist/jquery-resizable.js"></script>
+	<script src="node_modules/jstree/dist/jstree.js"></script>
+	<script src="node_modules/wellknown/wellknown.js"></script>
+	<script src="node_modules/gijgo/js/gijgo.min.js"></script>
+	<script src="node_modules/mathjax/es5/mml-chtml.js"></script>
+	<script src="vendor/bootstrap-tags/js/bootstrap-tags.min.js"></script>
+	<script src="vendor/sparqljs/dist/sparqljs-browser-min.js"></script>
+	<script src="vendor/bootstrapx-clickover/bootstrapx-clickover.js"></script>
+
+	<!-- endbuild -->
+
+	<!-- build:js js/wdqs.min.js -->
+	<script src="wikibase/config.js"></script>
+	<script src="wikibase/queryService/ui/App.js"></script>
+	<script src="wikibase/queryService/ui/toolbar/ActionBar.js"></script>
+	<script src="wikibase/queryService/ui/i18n/LanguageSelector.js"></script>
+	<script src="wikibase/queryService/ui/i18n/getMessage.js"></script>
+	<script src="wikibase/queryService/ui/editor/hint/Sparql.js"></script>
+	<script src="wikibase/queryService/ui/editor/hint/Rdf.js"></script>
+	<script src="wikibase/queryService/ui/editor/tooltip/Rdf.js"></script>
+	<script src="wikibase/queryService/ui/editor/Editor.js"></script>
+	<script src="wikibase/queryService/ui/queryHelper/QueryHelper.js"></script>
+	<script src="wikibase/queryService/ui/queryHelper/SparqlQuery.js"></script>
+	<script src="wikibase/queryService/ui/queryHelper/SelectorBox.js"></script>
+	<script src="wikibase/queryService/ui/queryHelper/QueryTemplate.js"></script>
+	<script src="wikibase/queryService/ui/dialog/CodeExample.js"></script>
+	<script src="wikibase/queryService/ui/dialog/QueryExampleDialog.js"></script>
+	<script src="wikibase/queryService/ui/ResultView.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/helper/FormatterHelper.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/helper/Options.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/AbstractResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/AbstractChartResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/AbstractDimpleChartResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/ImageResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/TableResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/CoordinateResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/TreeMapResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/TreeResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/BubbleChartResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/LineChartResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/BarChartResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/ScatterChartResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/AreaChartResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/TimelineResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/MultiDimensionResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/GraphResultBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/GraphResultBrowserNodeBrowser.js"></script>
+	<script src="wikibase/queryService/ui/resultBrowser/PolestarResultBrowser.js"></script>
+	<script src="wikibase/queryService/api/Sparql.js"></script>
+	<script src="wikibase/queryService/api/CodeSamples.js"></script>
+	<script src="wikibase/queryService/api/QuerySamples.js"></script>
+	<script src="wikibase/queryService/api/Wikibase.js"></script>
+	<script src="wikibase/queryService/api/Tracking.js"></script>
+	<script src="wikibase/queryService/api/UrlShortener.js"></script>
+	<script src="wikibase/queryService/RdfNamespaces.js"></script>
+	<script src="wikibase/init.js"></script>
+	<!-- endbuild -->
+
+</body>
+</html>

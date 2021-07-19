@@ -1,0 +1,12 @@
+node_modules
+.project
+.tmp
+.settings
+build
+.idea
+*.iml
+npm-debug.log
+style.css
+target
+*.log
+custom-config.json
