@@ -1,7 +1,7 @@
 {
   "api": {
     "sparql": {
-      "uri": "https://linkeddata2test.um.es/sparql"
+      "uri": "https://interfaz_sparq/sparql"
     },
     "wikibase": {
       "uri": "https://www.wikidata.org/w/api.php"
