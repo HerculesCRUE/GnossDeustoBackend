@@ -26,6 +26,8 @@
 
 [Despliegue de los servicios front](#despliegue-de-los-servicios-front)
 
+[Despliegue del interfaz queryservice](#despliegue-de-los-servicios-front)
+
 [Actualización y reinicio de los servicicios](#actualización-y-reinicio-de-los-servicicios)
 
 [Ejemplo de configuración de HAProxy](#ejemplo-de-configuración-de-haproxy)
