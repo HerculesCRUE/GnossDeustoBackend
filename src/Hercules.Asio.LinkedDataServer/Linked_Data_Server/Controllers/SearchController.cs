@@ -32,6 +32,7 @@ namespace Linked_Data_Server.Controllers
         [NonAction]
         public SearchModelTemplate GenerateSearchTemplate(string q, int pagina)
         {
+            ViewBag.UrlHome = mConfigService.GetUrlHome();
             SearchModelTemplate searchModelTemplate = new SearchModelTemplate();
             searchModelTemplate.entidades = new Dictionary<string, SearchModelTemplate.Entidad>();
 
@@ -45,8 +46,8 @@ namespace Linked_Data_Server.Controllers
                                         ?s ?p ?o.
                                         ?s a ?rdfType.
                                         FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>))
-                                        FILTER(regex(lcase(?o), '^{q.ToLower()}') || regex(lcase(?o), ' {q.ToLower()}'))
-                                    }}OFFSET {(pagina - 1) * 10} limit 11";
+                                        FILTER(regex(?o, '^{SparqlUtility.GetRegexSearch(q)}','i') || regex(?o, ' {SparqlUtility.GetRegexSearch(q)}','i'))
+                                    }}order by asc(?o) asc (?s) OFFSET {(pagina - 1) * 10} limit 11";
             string pXAppServer = "";
             SparqlObject sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
@@ -69,6 +70,7 @@ namespace Linked_Data_Server.Controllers
             return searchModelTemplate;
 
         }
+        
 
         /// <summary>
         /// Cargamos las configuraciones 

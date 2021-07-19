@@ -634,10 +634,10 @@ $(function () {
     });
 
     if ($('#graphs').length) {
-        $.get(document.location.origin+"/home/graph?url=" + encodeURIComponent(document.location.href), function (data) {
-            $('#graphs').show();
+        $.get(document.location.origin+"/home/graph?url=" + encodeURIComponent(document.location.href), function (data) {            
             for (key in data)
             {
+                $('#graphs').show();
                 var datosGrafico = data[key];
                 var sys = arbor.ParticleSystem(1000, 400, 1);
                 sys.parameters({ gravity: true });

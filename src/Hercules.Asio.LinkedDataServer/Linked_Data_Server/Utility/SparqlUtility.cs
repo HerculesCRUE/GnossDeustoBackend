@@ -17,6 +17,7 @@ using Linked_Data_Server.Models.Entities;
 using Linked_Data_Server.Models.Services;
 using System.Diagnostics.CodeAnalysis;
 using Hercules.Asio.LinkedDataServer.Utility;
+using System.Globalization;
 
 namespace Linked_Data_Server.Utility
 {
@@ -83,6 +84,26 @@ namespace Linked_Data_Server.Utility
 
             webClient.Dispose();
             return datosDBpedia;
+        }
+
+        public static string GetRegexSearch(string pText)
+        {
+            return RemoveAccentsWithNormalization(pText).ToLower().Replace("a", "[a,á]").Replace("e", "[e,é]").Replace("i", "[i,í]").Replace("o", "[o,ó]").Replace("u", "[u,ú]");
+        }
+
+        public static string RemoveAccentsWithNormalization(string inputString)
+        {
+            string normalizedString = inputString.Normalize(NormalizationForm.FormD);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < normalizedString.Length; i++)
+            {
+                UnicodeCategory uc = CharUnicodeInfo.GetUnicodeCategory(normalizedString[i]);
+                if (uc != UnicodeCategory.NonSpacingMark)
+                {
+                    sb.Append(normalizedString[i]);
+                }
+            }
+            return (sb.ToString().Normalize(NormalizationForm.FormC));
         }
     }
 }

@@ -6,7 +6,7 @@
         {
           "name": "Documentos",
           "fields": [ "ID", "Título", "RdfType" ],
-          "query": "select distinct ?ID ?Nombre ?RdfType where { {?ID <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?lista ?p <{ENTITY_ID}>.}UNION{?ID <http://purl.org/roh#correspondingAuthor> <{ENTITY_ID}>.} ?ID <http://purl.org/roh#title> ?Nombre. ?ID a ?RdfType. } "
+          "query": "select distinct ?ID ?Nombre ?RdfType  where  {    ?ID <http://purl.org/roh/mirror/bibo#authorList> ?lista.   ?lista ?p <{ENTITY_ID}>.   ?ID <http://purl.org/roh#title> ?Nombre.   ?ID a ?RdfType.  } "
         }
       ]
     },
@@ -21,7 +21,17 @@
         {
           "name": "Lista de entidades",
           "fields": [ "RdfType", "Número" ],
-          "query": "select ?o (count(?s) as ?num) from <{ENTITY_ID}> where {?s a ?o}order by desc(?num) "
+          "query": "select ?o (count(?s) as ?num) where {?s a ?o. FILTER (!isBlank(?s))}order by desc(?num) "
+        }
+      ]
+    },
+    {
+      "rdfType": "http://purl.org/roh#ResearchGroup",
+      "tables": [
+        {
+          "name": "Documentos de los miembros del grupo",
+          "fields": [ "ID", "Título", "RdfType" ],
+          "query": "select distinct ?ID ?Nombre ?RdfType  where  {           ?ID <http://purl.org/roh/mirror/bibo#authorList> ?lista.       ?lista ?p ?persona.        ?persona <http://purl.org/roh#hasRole> ?rol.         ?rol <http://purl.org/roh/mirror/vivo#relatedBy> <{ENTITY_ID}>.     OPTIONAL  {        ?rol <http://purl.org/roh/mirror/vivo#dateTimeInterval> ?intervaloGrupo.        OPTIONAL   {    ?intervaloGrupo <http://purl.org/roh/mirror/vivo#start> ?inicioIntervalo.   }        OPTIONAL   {    ?intervaloGrupo <http://purl.org/roh/mirror/vivo#end> ?finIntervalo.   }     }     ?ID <http://purl.org/roh#title> ?Nombre.      ?ID a ?RdfType.       ?ID <http://purl.org/roh/mirror/vivo#dateTime> ?fechaPublicacion.     FILTER((!BOUND(?inicioIntervalo) OR ?fechaPublicacion>=?inicioIntervalo) AND (!BOUND(?finIntervalo) OR ?fechaPublicacion<=?finIntervalo))  }"
         }
       ]
     }
@@ -44,7 +54,23 @@
             "properties": [
               {
                 "name": "Coautor",
-                "query": "select distinct (?coautorID_1 as ?level1) (?coautorID_2 as ?level2)  where  {  ?doc <http://purl.org/roh/mirror/bibo#authorList> ?lista.   ?lista ?autores ?coautorID_1.     FILTER(?coautorID_1 in (?coautorID_A))    {    select ?coautorID_A    where    {     ?doc_A <http://purl.org/roh/mirror/bibo#authorList> ?lista_A.     ?lista_A ?autor_A <{ENTITY_ID}>.     ?lista_A ?autores2_A ?coautorID_A.     ?coautorID_A a ?rdftype_A.     FILTER(?rdftype_A = <http://purl.org/roh/mirror/foaf#Person>).     ?coautorID_A <http://purl.org/roh/mirror/foaf#name> ?name_A.     filter(?coautorID_A !=<{ENTITY_ID}>)    }    order by desc (count(distinct ?doc_A )) asc(?coautorID_A) limit 10   }  OPTIONAL{         FILTER(?coautorID_2 in (?coautorID_B)) FILTER(?coautorID_1 != ?coautorID_2 )          ?lista ?autores2 ?coautorID_2.   {    select ?coautorID_B    where    {     ?doc_B <http://purl.org/roh/mirror/bibo#authorList> ?lista_B.     ?lista_B ?autor_B <{ENTITY_ID}>.     ?lista_B ?autores2_B ?coautorID_B.     ?coautorID_B a ?rdftype_B.     FILTER(?rdftype_B = <http://purl.org/roh/mirror/foaf#Person>).     ?coautorID_B <http://purl.org/roh/mirror/foaf#name> ?name.     filter(?coautorID_B !=<{ENTITY_ID}>)    }    order by desc (count(distinct ?doc_B )) asc(?coautorID_B ) limit 10   }  } }"
+                "query": "select distinct (?coautorID_1 as ?level1) (?coautorID_2 as ?level2)   where   {    ?doc <http://purl.org/roh/mirror/bibo#authorList> ?lista.     ?lista ?autores ?coautorID_1.       FILTER(?coautorID_1 in (?coautorID_A))      {       select ?coautorID_A    where       {         ?doc_A <http://purl.org/roh/mirror/bibo#authorList> ?lista_A.         ?lista_A ?autor_A <{ENTITY_ID}>.         ?lista_A ?autores2_A ?coautorID_A.         ?coautorID_A a ?rdftype_A.         FILTER(?rdftype_A = <http://purl.org/roh/mirror/foaf#Person>).         ?coautorID_A <http://purl.org/roh/mirror/foaf#name> ?name_A.         filter(?coautorID_A !=<{ENTITY_ID}>)       }       order by desc (count(distinct ?doc_A )) asc(?coautorID_A) limit 10     }    OPTIONAL  {            FILTER(?coautorID_2 in (?coautorID_B)) FILTER(?coautorID_1 != ?coautorID_2 )             ?lista ?autores2 ?coautorID_2.      {        select ?coautorID_B    where        {          ?doc_B <http://purl.org/roh/mirror/bibo#authorList> ?lista_B.          ?lista_B ?autor_B <{ENTITY_ID}>.          ?lista_B ?autores2_B ?coautorID_B.          ?coautorID_B a ?rdftype_B.          FILTER(?rdftype_B = <http://purl.org/roh/mirror/foaf#Person>).          ?coautorID_B <http://purl.org/roh/mirror/foaf#name> ?name.          filter(?coautorID_B !=<{ENTITY_ID}>)        }        order by desc (count(distinct ?doc_B )) asc(?coautorID_B ) limit 10      }    }  }"
+              }
+            ]
+          }
+        ]
+      }
+      ,
+      {
+        "rdfType": "http://purl.org/roh#ResearchGroup",
+        "arborGraphs": [
+          {
+            "name": "Miembros del grupo con más publicaciones",
+            "description": "Gráfico de miembros con más publicaciones",
+            "properties": [
+              {
+                "name": "Coautor",
+                "query": "select distinct (?persona as ?level1) where  {           ?ID <http://purl.org/roh/mirror/bibo#authorList> ?lista.       ?lista ?p ?persona.        ?persona <http://purl.org/roh#hasRole> ?rol.         ?rol <http://purl.org/roh/mirror/vivo#relatedBy> <{ENTITY_ID}>.     OPTIONAL  {        ?rol <http://purl.org/roh/mirror/vivo#dateTimeInterval> ?intervaloGrupo.        OPTIONAL   {    ?intervaloGrupo <http://purl.org/roh/mirror/vivo#start> ?inicioIntervalo.   }        OPTIONAL   {    ?intervaloGrupo <http://purl.org/roh/mirror/vivo#end> ?finIntervalo.   }     }     ?ID a ?RdfType.       ?ID <http://purl.org/roh/mirror/vivo#dateTime> ?fechaPublicacion.     FILTER((!BOUND(?inicioIntervalo) OR ?fechaPublicacion>=?inicioIntervalo) AND (!BOUND(?finIntervalo) OR ?fechaPublicacion<=?finIntervalo))  }order by desc(count(distinct ?ID)) limit 10"
               }
             ]
           }

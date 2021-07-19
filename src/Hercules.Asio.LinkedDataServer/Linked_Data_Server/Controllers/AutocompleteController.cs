@@ -44,7 +44,7 @@ namespace Linked_Data_Server.Controllers
                                     {{
                                         ?s ?p ?o.
                                         FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>))
-                                        FILTER(regex(lcase(?o), '^{q.ToLower()}') || regex(lcase(?o), ' {q.ToLower()}'))
+                                        FILTER(regex(lcase(?o), '^{SparqlUtility.GetRegexSearch(q)}') || regex(lcase(?o), ' {SparqlUtility.GetRegexSearch(q)}'))
                                     }}limit 10 ";
             string pXAppServer = "";
             SparqlObject sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta,ref pXAppServer);

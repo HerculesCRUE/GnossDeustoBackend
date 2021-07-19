@@ -191,8 +191,8 @@ namespace Linked_Data_Server.Controllers
                     //Obtenemos datos del resto de grafos (para los provenance)
                     Dictionary<string, List<Dictionary<string, SparqlObject.Data>>> sparqlObjectDictionaryGraphs = GetEntityDataGraphs(url, mConfigService, ref pXAppServer);
 
-                    //Obtenemos las tablas configuradas
-                    List<Table> dataTables = GetDataTables(dataInferenceGraph, url, mConfigService, ref pXAppServer);
+                    //Obtenemos las tablas configuradas 
+                    List<Table> dataTables = GetDataTables(dataInferenceGraph, url, mConfigService,ref pXAppServer);
 
                     //Obtenemos los arborGrah configurados
                     bool mock = _sparqlUtility is SparqlUtilityMock;
@@ -771,8 +771,15 @@ namespace Linked_Data_Server.Controllers
                     SparqlResultSet result = (SparqlResultSet)pDataInferenceGraph.ExecuteQuery("select * where {<" + pEntity + "> ?p <" + configtable.rdfType + "> }");
                     if (result.Count() > 0)
                     {
+                        string sparqlGraph = mConfigService.GetSparqlGraph();
+                        //si es una entidad tipo grafo consultamos sobre la entidad en lugar del grafo genérico
+                        //if(configtable.rdfType== "http://www.w3.org/1999/02/22-rdf-syntax-ns#Graph")
+                        //{
+                        //    sparqlGraph = pEntity;
+                        //}
+
                         //Obtiene los datos para las tablas
-                        tableList.AddRange(LoadTables(pEntity, configtable, pConfigService, ref pXAppServer));
+                        tableList.AddRange(LoadTables(pEntity, configtable, pConfigService, sparqlGraph, ref pXAppServer));
                     }
                 }
             }
@@ -845,7 +852,7 @@ namespace Linked_Data_Server.Controllers
         /// <param name="pEntity">URL de la entidad</param>
         /// <param name="pConfigtables">Tablas de configuración para la entidad</param>
         /// <returns>Lista con las tablas</returns>
-        private List<Table> LoadTables(string pEntity, Config_Linked_Data_Server.ConfigTable pConfigtables, ConfigService pConfigService, ref string pXAppServer)
+        private List<Table> LoadTables(string pEntity, Config_Linked_Data_Server.ConfigTable pConfigtables, ConfigService pConfigService,string pSPARQLGraph, ref string pXAppServer)
         {
             List<Table> tableList = new List<Table>();
 
@@ -860,7 +867,7 @@ namespace Linked_Data_Server.Controllers
                     table.Header.Add(field);
                 }
                 string consulta = tableConfig.query.Replace("{ENTITY_ID}", pEntity);
-                SparqlObject sparqlObject = _sparqlUtility.SelectData(pConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
+                SparqlObject sparqlObject = _sparqlUtility.SelectData(pConfigService, pSPARQLGraph, consulta, ref pXAppServer);
 
                 foreach (var result in sparqlObject.results.bindings)
                 {
