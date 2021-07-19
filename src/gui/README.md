@@ -1,4 +1,4 @@
-# Wikibase Query Service GUI
+# Wikibase Query Service GUII
 
 This repository contains the GUI for the [Wikidata Query Service](https://query.wikidata.org/).
 
