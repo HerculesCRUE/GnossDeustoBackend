@@ -296,44 +296,28 @@
     {
         foreach (var table in pTables)
         {
-            <h2>@table.Name</h2>
-            <table class="display datatable">
-                <thead>
-                    <tr>
-                        @foreach (var header in table.Header)
-                        {
-                            <th scope="col">@header</th>
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var row in table.Rows)
-                    {
+            if (table.Rows.Count > 0)
+            {
+                <h2>@table.Name</h2>
+                <table class="display datatable">
+                    <thead>
                         <tr>
-                            @foreach (var field in row.fields)
+                            @foreach (var header in table.Header)
                             {
-                                @if (Uri.IsWellFormedUriString(field, UriKind.Absolute))
-                                {
-                                    Uri uri = new Uri(field);
-
-                                    if (Context.Request.Host.Value == uri.Host)
-                                    {
-                                        <td>
-                                            <a href="@field">@field</a>
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td>
-                                            <a href="@field" target="_blank">@field</a>
-                                        </td>
-                                    }
-                                }
-                                else
+                                <th scope="col">@header</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var row in table.Rows)
+                        {
+                            <tr>
+                                @foreach (var field in row.fields)
                                 {
                                     @if (Uri.IsWellFormedUriString(field, UriKind.Absolute))
                                     {
                                         Uri uri = new Uri(field);
+
                                         if (Context.Request.Host.Value == uri.Host)
                                         {
                                             <td>
@@ -349,15 +333,34 @@
                                     }
                                     else
                                     {
-                                        <td>@field</td>
+                                        @if (Uri.IsWellFormedUriString(field, UriKind.Absolute))
+                                        {
+                                            Uri uri = new Uri(field);
+                                            if (Context.Request.Host.Value == uri.Host)
+                                            {
+                                                <td>
+                                                    <a href="@field">@field</a>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <a href="@field" target="_blank">@field</a>
+                                                </td>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <td>@field</td>
+                                        }
                                     }
-                                }
 
-                            }
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
         }
     }
 
