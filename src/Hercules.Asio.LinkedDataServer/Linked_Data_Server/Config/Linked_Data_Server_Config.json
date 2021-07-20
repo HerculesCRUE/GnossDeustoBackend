@@ -21,7 +21,7 @@
         {
           "name": "Lista de entidades",
           "fields": [ "RdfType", "Número" ],
-          "query": "select ?o (count(?s) as ?num) where {?s a ?o. FILTER (!isBlank(?s))}order by desc(?num) "
+          "query": "select ?o (count(?s) as ?num) from <{ENTITY_ID}> where {?s a ?o. FILTER (!isBlank(?s))}order by desc(?num) "
         }
       ]
     },
