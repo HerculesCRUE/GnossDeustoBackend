@@ -24,8 +24,8 @@
     "copyrightUrl": "https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/Copyright"
   },
   "location": {
-    "root": "./queryservice",
-    "index": "./queryservice/index.html"
+    "root": "/queryservice",
+    "index": "/queryservice/index.html"
   },
   "prefixes": {}
 }
