@@ -3,6 +3,10 @@
 
 // Write your JavaScript code.
 $(function () {
+    if ($('.autocomplete.ui-widget').length == 2) {
+        $('.autocomplete.ui-widget')[0].remove();
+    }
+
     //Autocomplete LDS
     $.ajax({
         url: "/carga-web/autocomplete/GetUrlSearch",
