@@ -1,13 +1,13 @@
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 14/06/2021                                                   |
+| Fecha         | 21/07/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Despliegue de ASIO Backend de SGI con Docker| 
 |Descripción|Instrucciones para instalar ASIO mediante el despliegue de instancias docker|
-|Versión|1.5|
+|Versión|1.6|
 |Módulo|Documentación|
 |Tipo|Manual|
-|Cambios de la Versión|Añadidas instrucciones para reiniciar los frontales.|
+|Cambios de la Versión|Añadidas instrucciones para configurar el editor SPARQL avanzado de Wikimedia|
 
 ## Índice
 [Requisitos previos](#requisitos-previos)
@@ -414,9 +414,9 @@ Ahora, si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz 
 
 ## Despliegue del Wikimedia GUI
 
-Para desplegar el interfaz personalizable de Wikimedia, debemos construir una imagen Docker aprovechando el código que nos descargamos en el paso anterior (Despliegue de los servicios front). Pero vamos a detallar los posibles cambios que podemos hacer en el:
+Para desplegar el interfaz SPARQL personalizable de Wikimedia, debemos construir una imagen Docker aprovechando el código que nos descargamos en el paso anterior (Despliegue de los servicios front). Vamos a detallar los posibles cambios que podemos o tenemos que hacer:
 
-- Consultas de ejemplo. Para editarlas tenemos que ir al archivo "GnossDeustoBackend/src/gui/index.html" y editar el bloque "div class="exampleTable" como en este ejemplo, debemos añadir un tr por consulta a añadir:
+- Consultas de ejemplo. Para editarlas tenemos que ir al archivo "GnossDeustoBackend/src/gui/index.html" y editar el bloque "div class="exampleTable" como en este ejemplo, añadiendo un elemento tr por cada consulta adicional:
 	<!--Este bloque lo podemos editar para poner las consultas de ejemplo que queramos-->
 		<div class="exampleTable">
 			<table class="table">
@@ -458,7 +458,7 @@ Para desplegar el interfaz personalizable de Wikimedia, debemos construir una im
 - Graph builder. Para que la función Graph builder funcione de manera correcta debemos tener en cuenta tres archivos. Ahora explicaremos los posibles cambios que tendremos que hacer en cada uno:
 
 	- **wikibase/queryService/api/Sparql.js** - En la línea 8 debemos indicar en la variable SPARQL_SERVICE_URI la uri en la que esté nuestro servicio. Ejemplo: var SPARQL_SERVICE_URI = 'https://linkeddata2.um.es/sparql',.
-	- **wikibase/queryService/ui/resultBrowser/PolestarResultBrowser.js** - En la línea 10 debemos ajustar la variable GRAPH_QUERY_PREFIX en funciona de uri en la que esté nuestro servicio. Ejemplo: var GRAPH_QUERY_PREFIX = 'wikidatasparql://linkeddata2.um.es/sparql?query=';.
+	- **wikibase/queryService/ui/resultBrowser/PolestarResultBrowser.js** - En la línea 10 debemos ajustar la variable GRAPH_QUERY_PREFIX en funciona de la URL en la que esté nuestro servicio. Ejemplo: var GRAPH_QUERY_PREFIX = 'wikidatasparql://linkeddata2.um.es/sparql?query=';.
 	- **polestar/scripts/vendor.js** - Este archivo ya esta preparado para funcionar el los entornos actuales de herc-as-front-desa.atica.um.es, linkeddata2test.um.es y linkeddata2.um.es pero tendremos que editarlos si lo ponemos en otros dominios.
 	
 			82804: https: ["mediawiki.org", "wikibooks.org", "wikidata.org", "wikimedia.org", "wikimediafoundation.org", "wikinews.org", "wikipedia.org", "wikiquote.org", "wikisource.org", "wikiversity.org", "wikivoyage.org", "wiktionary.org","linkeddata2.um.es", "linkeddata2c.um.es", "herc-as-front-desa.atica.um.es", "linkeddata2test.um.es"],
@@ -468,17 +468,17 @@ Para desplegar el interfaz personalizable de Wikimedia, debemos construir una im
 
 - default-config.json. En este archivo tenemos que hacer varios cambios:
 
-	- **uri** - Denemos indicar la uri principal en donde va a contestar nuestro interfaz. Ejemplo: "uri": "https://linkeddata2.um.es/sparql"
+	- **uri** - Debemos indicar la URL principal en donde va a contestar nuestro interfaz. Ejemplo: "uri": "https://linkeddata2.um.es/sparql"
 	- **title** - Aquí indicamos el título que queramos que aparezca. Ejemplo: "title": "Hércules"
 	- **logo** - Debemos colocar el fichero de del logo en la raiz del código. Ejemplo: "logo": "hecules.png"
 	- **favicon** - Debemos colocar el fichero del favicon en la raiz del código. Normalmente pondremos un fichero con el nombre por defecto.
-	- **localtion e index** - Aquí debemos indicar el path que hemos usado para el proxy. Ejemplo "root": "/queryservice", "index": "/queryservice/index.html"
+	- **location e index** - Aquí debemos indicar el path que hemos usado para el proxy. Ejemplo "root": "/queryservice", "index": "/queryservice/index.html"
 	
-Una vez tengamos todo preparado, tenemos que crear la imagen docker en el path "GnossDeustoBackend/src/gui" en el que se haya el Dockerfile y ejecutar el siguiente comando:
+Una vez tengamos todo preparado, tenemos que crear la imagen docker en el path "GnossDeustoBackend/src/gui" en el que se encuentra el Dockerfile y ejecutar el siguiente comando:
 
 	docker build -t wikimediagui .
 	
-Hecho esto debemos añadir a los docker-compose de front las siguietes líneas:
+Hecho esto debemos añadir a los docker-compose de front las siguientes líneas:
 
 	wikimediagui:
 	  image: wikimediagui
