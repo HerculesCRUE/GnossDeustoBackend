@@ -416,7 +416,7 @@ Ahora, si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz 
 
 Para desplegar el interfaz personalizable de Wikimedia, debemos construir una imagen Docker aprovechando el código que nos descargamos en el paso anterior (Despliegue de los servicios front). Pero vamos a detallar los posibles cambios que podemos hacer en el:
 
-* Consultas de ejemplo. Para editarlas tenemos que ir al archivo "GnossDeustoBackend/src/gui/index.html" y editar el bloque como en este ejemplo:
+- Consultas de ejemplo. Para editarlas tenemos que ir al archivo "GnossDeustoBackend/src/gui/index.html" y editar el bloque como en este ejemplo:
 <!--Este bloque lo podemos editar para poner las consultas de ejemplo que queramos-->
 	<div class="exampleTable">
 		<table class="table">
@@ -428,7 +428,7 @@ Para desplegar el interfaz personalizable de Wikimedia, debemos construir una im
 					<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20uneskos%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Funesco-individuals%23%3E%0A%0ASELECT%20%3Fcentro%20WHERE%20%7B%0A%20%20%20%20%20%20%20%20%3Fcentro%20a%20roh%3AResearchGroup%20%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20roh%3AhasKnowledgeArea%20uneskos%3A120304%20.%0A%7D">Q1 - Centros de investigación que trabajan en un área/disciplina específica</a></td>
 				</tr>
 						    
-* Prefijos. Podemos gestionar los prefijos RDF modificando el archivo "GnossDeustoBackend/src/gui/wikibase/queryService/RdfNamespaces.js". Para ello tenemos que añadir listados en "RdfNamespaces.NAMESPACE_SHORTCUTS" como podemos ver en este ejemplo:
+- Prefijos. Podemos gestionar los prefijos RDF modificando el archivo "GnossDeustoBackend/src/gui/wikibase/queryService/RdfNamespaces.js". Para ello tenemos que añadir listados en "RdfNamespaces.NAMESPACE_SHORTCUTS" como podemos ver en este ejemplo:
 				
 		RdfNamespaces.NAMESPACE_SHORTCUTS = {
 			Hércules: {
@@ -455,7 +455,41 @@ Para desplegar el interfaz personalizable de Wikimedia, debemos construir una im
 
 * Auto completar. :
 				
-* Logo y título. Podemos editar de manera sencilla el logo y el título que aparecen en el interfaz. Para ello tenemos que editar el archivo "default-config.json" 
+* default-config.json. En este archivo tenemos que hacer varios cambios:
+
+* uri - No
+
+	{
+	"api": {
+		"sparql": {
+		"uri": "https://linkeddata2.um.es/sparql"
+		},
+		"wikibase": {
+		"uri": "https://www.wikidata.org/w/api.php"
+		},
+		"examples": {
+		"server": "https://www.wikidata.org/",
+		"apiPath": "w/api.php",
+		"pageTitle": "Wikidata:SPARQL_query_service/queries/examples",
+		"pagePathElement": "wiki/"
+		},
+		"urlShortener": "tinyurl",
+		"query-builder": {
+		"server": "https://query-builder-test.toolforge.org/"
+		}
+	},
+	"brand": {
+		"title": "Hércules",
+		"logo": "hecules.png",
+		"favicon": "favicon.ico",
+		"copyrightUrl": "https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/Copyright"
+	},
+	"location": {
+		"root": "/queryservice",
+		"index": "/queryservice/index.html"
+	},
+	"prefixes": {}
+	}
 
 ## Actualización y reinicio de los servicicios
 
