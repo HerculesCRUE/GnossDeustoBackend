@@ -417,9 +417,15 @@ Hecho esto tendremos todos los servicios de fron desplegados a excepción del in
 ## Despliegue del Wikimedia GUI
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Para desplegar el interfaz personalizable de Wikimedia, debemos construir una imagen Docker aprovechando el código que nos descargamos en el paso anterior (Despliegue de los servicios front) que debería estar en la /home/usuario/GnossDeustoBackend si seguimos el ejemplo. Vamos a detallar los posibles cambios que podemos hacer en el:
 
 - Consultas de ejemplo. Para editarlas tenemos que ir al archivo "src/gui/index.html" y editar el bloque "div class="exampleTable" como en este ejemplo, debemos añadir un tr por consulta a añadir:
+=======
+Para desplegar el interfaz SPARQL personalizable de Wikimedia, debemos construir una imagen Docker aprovechando el código que nos descargamos en el paso anterior (Despliegue de los servicios front). Vamos a detallar los posibles cambios que podemos o tenemos que hacer:
+
+- Consultas de ejemplo. Para editarlas tenemos que ir al archivo "GnossDeustoBackend/src/gui/index.html" y editar el bloque "div class="exampleTable" como en este ejemplo, añadiendo un elemento tr por cada consulta adicional:
+>>>>>>> a17531bf81ce7ee557a44e6e8ac4f12e26a27775
 =======
 Para desplegar el interfaz SPARQL personalizable de Wikimedia, debemos construir una imagen Docker aprovechando el código que nos descargamos en el paso anterior (Despliegue de los servicios front). Vamos a detallar los posibles cambios que podemos o tenemos que hacer:
 
@@ -489,7 +495,11 @@ Para desplegar el interfaz SPARQL personalizable de Wikimedia, debemos construir
 	- **location e index** - Aquí debemos indicar el path que hemos usado para el proxy. Ejemplo "root": "/queryservice", "index": "/queryservice/index.html"
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 Una vez tengamos todo preparado, tenemos que crear la imagen docker en el path "src/gui" en el que se haya el Dockerfile y ejecutar el siguiente comando:
+=======
+Una vez tengamos todo preparado, tenemos que crear la imagen docker en el path "GnossDeustoBackend/src/gui" en el que se encuentra el Dockerfile y ejecutar el siguiente comando:
+>>>>>>> a17531bf81ce7ee557a44e6e8ac4f12e26a27775
 =======
 Una vez tengamos todo preparado, tenemos que crear la imagen docker en el path "GnossDeustoBackend/src/gui" en el que se encuentra el Dockerfile y ejecutar el siguiente comando:
 >>>>>>> a17531bf81ce7ee557a44e6e8ac4f12e26a27775
