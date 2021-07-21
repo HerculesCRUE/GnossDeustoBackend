@@ -462,7 +462,7 @@ Para desplegar el interfaz personalizable de Wikimedia, debemos construir una im
 	- **logo** - Debemos colocar el fichero de del logo en la raiz del código.
 	- **favicon** - Debemos colocar el fichero del favicon en la raiz del código.
 	- **localtion e index** - Aquí debemos indicar el path que hemos usado para el proxy.
-	{
+{
 	"api": {
 	"sparql": {
 	"uri": "https://linkeddata2.um.es/sparql"
