@@ -454,7 +454,18 @@ Para desplegar el interfaz personalizable de Wikimedia, debemos construir una im
 		},
 
 - Auto completar. :
-				
+
+- Graph builder. Para que la función Graph builder funcione de manera correcta debemos tener en cuenta tres archivos. Ahora explicaremos los posibles cambios que tendremos que hacer en cada uno:
+
+	- **wikibase/queryService/api/Sparql.js** - En la línea 8 debemos indicar en la variable SPARQL_SERVICE_URI la uri en la que esté nuestro servicio. Ejemplo: var SPARQL_SERVICE_URI = 'https://linkeddata2.um.es/sparql',.
+	- **wikibase/queryService/ui/resultBrowser/PolestarResultBrowser.js** - En la línea 10 debemos ajustar la variable GRAPH_QUERY_PREFIX en funciona de uri en la que esté nuestro servicio. Ejemplo: var GRAPH_QUERY_PREFIX = 'wikidatasparql://linkeddata2.um.es/sparql?query=';.
+	- **polestar/scripts/vendor.js** -
+		82565: //i.pathname = "/bigdata/namespace/wdq/sparql",
+		82804: https: ["mediawiki.org", "wikibooks.org", "wikidata.org", "wikimedia.org", "wikimediafoundation.org", "wikinews.org", "wikipedia.org", "wikiquote.org", "wikisource.org", "wikiversity.org", "wikivoyage.org", "wiktionary.org","linkeddata2.um.es", "linkeddata2c.um.es", "herc-as-front-desa.atica.um.es", "linkeddata2test.um.es"],
+		82805: http: ["wmflabs.org","linkeddata2.um.es", "linkeddata2c.um.es", "herc-as-front-desa.atica.um.es", "linkeddata2test.um.es"],
+		82806: wikirawupload: ["upload.wikimedia.org", "upload.beta.wmflabs.org"],
+		82807: wikidatasparql: ["query.wikidata.org", "wdqs-test.wmflabs.org","linkeddata2.um.es", "linkeddata2c.um.es", "herc-as-front-desa.atica.um.es", "linkeddata2test.um.es"],
+
 - default-config.json. En este archivo tenemos que hacer varios cambios:
 
 	- **uri** - Denemos indicar la uri principal en donde va a contestar nuestro interfaz. Ejemplo: "uri": "https://linkeddata2.um.es/sparql"
