@@ -411,7 +411,6 @@ Si todo ha ido bien veremos el recuento de los inserts con este formato:
 Ahora, si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz web para poder hacer cargas.
 
 ![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/front.png)
-
 ## Despliegue del Wikimedia GUI
 
 Para desplegar el interfaz personalizable de Wikimedia, debemos construir una imagen Docker aprovechando el código que nos descargamos en el paso anterior (Despliegue de los servicios front). Pero vamos a detallar los posibles cambios que podemos hacer en el:
