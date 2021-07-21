@@ -474,6 +474,20 @@ Para desplegar el interfaz personalizable de Wikimedia, debemos construir una im
 	- **favicon** - Debemos colocar el fichero del favicon en la raiz del código. Normalmente pondremos un fichero con el nombre por defecto.
 	- **localtion e index** - Aquí debemos indicar el path que hemos usado para el proxy. Ejemplo "root": "/queryservice", "index": "/queryservice/index.html"
 	
+Una vez tengamos todo preparado, tenemos que crear la imagen docker en el path "GnossDeustoBackend/src/gui" en el que se haya el Dockerfile y ejecutar el siguiente comando:
+
+	docker build -t wikimediagui .
+	
+Hecho esto debemos añadir a los docker-compose de front las siguietes líneas:
+
+	wikimediagui:
+	  image: wikimediagui
+      ports:
+        - 8080:8080
+
+Reiniciamos los servicios con:
+
+	./actualizar_front.sh
 
 ## Actualización y reinicio de los servicicios
 
