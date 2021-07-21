@@ -457,43 +457,12 @@ Para desplegar el interfaz personalizable de Wikimedia, debemos construir una im
 				
 - default-config.json. En este archivo tenemos que hacer varios cambios:
 
-	- **uri** - Denemos indicar la uri principal en donde va a contestar nuestro interfaz.
-	- **title** - Aquí indicamos el título que queramos que aparezca.
-	- **logo** - Debemos colocar el fichero de del logo en la raiz del código.
-	- **favicon** - Debemos colocar el fichero del favicon en la raiz del código.
-	- **localtion e index** - Aquí debemos indicar el path que hemos usado para el proxy.
+	- **uri** - Denemos indicar la uri principal en donde va a contestar nuestro interfaz. Ejemplo: "uri": "https://linkeddata2.um.es/sparql"
+	- **title** - Aquí indicamos el título que queramos que aparezca. Ejemplo: "title": "Hércules"
+	- **logo** - Debemos colocar el fichero de del logo en la raiz del código. Ejemplo: "logo": "hecules.png"
+	- **favicon** - Debemos colocar el fichero del favicon en la raiz del código. Normalmente pondremos un fichero con el nombre por defecto.
+	- **localtion e index** - Aquí debemos indicar el path que hemos usado para el proxy. Ejemplo "root": "/queryservice", "index": "/queryservice/index.html"
 	
-{
-	"api": {
-	"sparql": {
-	"uri": "https://linkeddata2.um.es/sparql"
-	},
-	"wikibase": {
-	"uri": "https://www.wikidata.org/w/api.php"
-	},
-	"examples": {
-	"server": "https://www.wikidata.org/",
-	"apiPath": "w/api.php",
-	"pageTitle": "Wikidata:SPARQL_query_service/queries/examples",
-	"pagePathElement": "wiki/"
-	},
-	"urlShortener": "tinyurl",
-	"query-builder": {
-	"server": "https://query-builder-test.toolforge.org/"
-	}
-},
-"brand": {
-	"title": "Hércules",
-	"logo": "hecules.png",
-	"favicon": "favicon.ico",
-	"copyrightUrl": "https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/Copyright"
-},
-"location": {
-	"root": "/queryservice",
-	"index": "/queryservice/index.html"
-},
-"prefixes": {}
-}
 
 ## Actualización y reinicio de los servicicios
 
