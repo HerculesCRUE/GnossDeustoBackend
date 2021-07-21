@@ -1550,3 +1550,11 @@ p.ayuda-btn-discover {
     font-weight: 400 !important;
     color: #666 !important;
 }
+
+.tipo-home .row.center {
+    justify-content: center;
+}
+
+.tipo-home .row.center input {
+    border: 1px solid #af1a2e;
+}
