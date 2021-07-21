@@ -451,6 +451,8 @@ Para desplegar el interfaz personalizable de Wikimedia, debemos construir una im
 	};
 
 * Auto completar. :
+				
+* Logo y título. Para poner un logo y un título 
 
 ## Actualización y reinicio de los servicicios
 
