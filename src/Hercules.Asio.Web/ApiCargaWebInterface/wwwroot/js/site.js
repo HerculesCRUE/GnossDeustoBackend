@@ -9,11 +9,11 @@ $(function () {
         type: "GET",
         dataType: "json",
         success: function (data) {
-            $('#formautocompletelds').attr('action', data);
+            $('.formautocompletelds').attr('action', data);
         }
     })
 
-    $("#autocompletelds").autocomplete({
+    $(".autocompletelds").autocomplete({
         minLength: 3,
         source: function (request, response) {
             $.ajax({
