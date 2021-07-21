@@ -453,11 +453,11 @@ Para desplegar el interfaz personalizable de Wikimedia, debemos construir una im
 				xsd: 'http://www.w3.org/2001/XMLSchema#'
 		},
 
-* Auto completar. :
+- Auto completar. :
 				
-* default-config.json. En este archivo tenemos que hacer varios cambios:
+- default-config.json. En este archivo tenemos que hacer varios cambios:
 
-* uri - No
+	- **uri** - No
 
 	{
 	"api": {
