@@ -7,16 +7,20 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using ApiCargaWebInterface.Extra.Exceptions;
+using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
+using Hercules.Asio.Web.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiCargaWebInterface.Controllers
 {
+
     /// <summary>
     /// Controlador para la publicación manual y la validacion de los rdf
     /// </summary>
+    [ClaimRequirement("Administrator", "true")]
     public class PublishController : Controller
     {
         readonly ICallEtlService _callEtlPublishService;
@@ -39,7 +43,8 @@ namespace ApiCargaWebInterface.Controllers
                 RepositoryId = repository,
                 Id = "",
                 Type = "rdf",
-                RepositoryShapes = _serviceApi.GetRepositoryConfig(repository).ShapeConfig
+                RepositoryShapes = _serviceApi.GetRepositoryConfig(repository).ShapeConfig,
+
             };
             return View("ObtenerRdf",publishRepositoryModel);
         }
@@ -56,6 +61,8 @@ namespace ApiCargaWebInterface.Controllers
                 RepositoryId = repository,
                 Id = "",
                 Type = "rdf",
+                listaMetadataFormats = _callEtlPublishService.CallListMetadataFormats(repository),
+                NameRepository = _serviceApi.GetRepositoryConfig(repository).Name,
             };
             return View(publishRepositoryModel);
         }
@@ -72,7 +79,8 @@ namespace ApiCargaWebInterface.Controllers
                 RepositoryId = repository,
                 Id = "",
                 Type = "rdf",
-                RepositoryShapes = _serviceApi.GetRepositoryConfig(repository).ShapeConfig
+                RepositoryShapes = _serviceApi.GetRepositoryConfig(repository).ShapeConfig,
+                NameRepository = _serviceApi.GetRepositoryConfig(repository).Name,
             };
             return View(publishRepositoryModel);
         }
@@ -90,9 +98,54 @@ namespace ApiCargaWebInterface.Controllers
                 RepositoryId = repository,
                 Id = "",
                 Type = "rdf",
+                NameRepository = _serviceApi.GetRepositoryConfig(repository).Name,
             };
             return View(publishRepositoryModel);
         }
+        /// <summary>
+        /// Obtiene la página para publicar un RDF
+        /// </summary>
+        /// <param name="repository">Identificador del repositorio</param>
+        /// <returns></returns>
+        [Route("[Controller]/identifiers/{repository}")]
+        public IActionResult ListarIdentifiers(Guid repository)
+        {           
+            IdentifiersModel publishRepositoryModel = new IdentifiersModel()
+            {
+                RepositoryId = repository,
+                listaMetadataFormats = _callEtlPublishService.CallListMetadataFormats(repository), 
+                listaSets = _callEtlPublishService.CallListSets(repository),
+                NameRepository = _serviceApi.GetRepositoryConfig(repository).Name,
+        };
+            return View(publishRepositoryModel);
+        }
+        /// <summary>
+        /// Obtiene a lista de identificadores.
+        /// </summary>
+        /// <param name="repository"></param>
+        /// <param name="prefijo"></param>
+        /// <param name="set"></param>
+        /// <param name="from"></param>
+        /// <param name="until"></param>
+        /// <returns></returns>
+        [Route("[Controller]/getidentifiers")]
+        public IActionResult GetListIdentifiers(Guid repositoryId, string metadataPrefix, string set, string from, string until)
+        {
+            string result = _callEtlPublishService.CallGetListIdentifiers(repositoryId, metadataPrefix, set, from, until);
+            if (result != null)
+            {
+                var content = new System.IO.MemoryStream(Encoding.ASCII.GetBytes(result));
+                var contentType = "APPLICATION/octet-stream";
+                var fileName = $"{repositoryId}.xml";
+                return File(content, contentType, fileName);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+
         /// <summary>
         /// Obtiene el rdf de un elemento asociado al repositorio
         /// </summary>
@@ -133,14 +186,15 @@ namespace ApiCargaWebInterface.Controllers
             {
                 RepositoryConfigViewModel result = _serviceApi.GetRepositoryConfig(repositoryId);
                 _callEtlPublishService.ValidateRDFPersonalized(repositoryId, rdfToValidate, validationRDF, shapesList, result.ShapeConfig);
-                
+
                 return View("ValidarRdf", new PublishRepositoryModel
                 {
                     RepositoryId = repositoryId,
                     Id = "",
                     Type = "rdf",
-                    Result = $"RDF válido",
-                    RepositoryShapes = result.ShapeConfig
+                    Result = $"RDF Válido",
+                    RepositoryShapes = result.ShapeConfig,
+                    NameRepository = _serviceApi.GetRepositoryConfig(repositoryId).Name,
                 });
             }
             catch (ValidationException vEx)

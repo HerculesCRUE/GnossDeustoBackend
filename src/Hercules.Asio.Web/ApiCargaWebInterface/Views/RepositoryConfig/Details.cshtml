@@ -42,6 +42,9 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
+                                        <a href="@Url.Action("ListarIdentifiers", "Publish", new {repository = Model.RepositoryConfigID })">Listar Identificadores</a>
+                                    </li>
+                                    <li>
                                         <a href="@Url.Action("Index", "Publish", new {repository = Model.RepositoryConfigID })">Obtención de RDFs</a>
                                     </li>
                                     <li>
@@ -49,7 +52,7 @@
                                     </li>
                                     <li>
                                         <a href="@Url.Action("PublicarRdf", "Publish", new {repository = Model.RepositoryConfigID })">Publicación de RDF</a>
-                                    </li>    
+                                    </li>
                                 </ul>
                             </li>
                             <li>

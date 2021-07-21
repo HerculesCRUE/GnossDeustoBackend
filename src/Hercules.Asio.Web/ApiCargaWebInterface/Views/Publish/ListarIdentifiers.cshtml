@@ -1,0 +1,62 @@
+﻿@model Hercules.Asio.Web.ViewModels.IdentifiersModel
+@{
+    ViewData["Title"] = "Identifiers";
+    ViewData["BodyClass"] = "formulario";
+}
+
+    <div class="row">
+        <div class="col col-12 col-lg-12 col-contenido">
+            <div class="wrapCol">
+                <div class="header-resource">
+                    <div class="h1-container">
+                        <h1>Administración > <a href="@Url.Action("Index","RepositoryConfig")">Repositorios</a> > <a href="@Url.Action("Details","RepositoryConfig",new { id=Model.RepositoryId})">@Model.NameRepository</a> > Listar Identificadores</h1>
+                    </div>
+                </div>
+                <form asp-action="GetListIdentifiers" method="get">
+                    <div class="fieldset fieldset01">
+                        <fieldset class="mediumLabels">
+                            <div class="fieldsetContent">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label for="metadataPrefix" class="control-label">Prefijo del Metadata</label>
+                                    <select id="metadataPrefix" name="metadataPrefix" class="form-control">
+                                        @foreach (string pref in Model.listaMetadataFormats)
+                                        {
+                                            <option value="@pref">@pref</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="set" class="control-label">Set</label>
+                                    <select id="set" name="set" class="form-control">
+                                        @foreach (string set in Model.listaSets)
+                                        {
+                                            <option value="@set">@set</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="from" class="control-label">Desde (Codificado con ISO8601 y expresado en UTC, YYYY-MM-DD o YYYY-MM-DDThh:mm:ssZ)</label>
+                                    <input id="from" name="from" for="from" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="until" class="control-label">Hasta (Codificado con ISO8601 y expresado en UTC, YYYY-MM-DD o YYYY-MM-DDThh:mm:ssZ)</label>
+                                    <input id="until" name="until" for="until" class="form-control" />
+                                </div>
+                                <input hidden id="repositoryId" name="repositoryId" value="@Model.RepositoryId" />
+
+                                <div class="fieldset actionButtons fieldset03">
+                                    <fieldset>
+                                        <p>
+                                            <input class="submit principal" type="submit" value="Obtener Identificadores">
+                                        </p>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </form>
+                <a href="@Url.Action("ObtenerRdf", new {repository = Model.RepositoryId })">Obtener RDF --></a>
+            </div>
+        </div>
+    </div>
