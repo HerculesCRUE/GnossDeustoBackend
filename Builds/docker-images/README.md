@@ -464,35 +464,35 @@ Para desplegar el interfaz personalizable de Wikimedia, debemos construir una im
 	- **localtion e index** - Aquí debemos indicar el path que hemos usado para el proxy.
 	{
 	"api": {
-		"sparql": {
-		"uri": "https://linkeddata2.um.es/sparql"
-		},
-		"wikibase": {
-		"uri": "https://www.wikidata.org/w/api.php"
-		},
-		"examples": {
-		"server": "https://www.wikidata.org/",
-		"apiPath": "w/api.php",
-		"pageTitle": "Wikidata:SPARQL_query_service/queries/examples",
-		"pagePathElement": "wiki/"
-		},
-		"urlShortener": "tinyurl",
-		"query-builder": {
-		"server": "https://query-builder-test.toolforge.org/"
-		}
+	"sparql": {
+	"uri": "https://linkeddata2.um.es/sparql"
 	},
-	"brand": {
-		"title": "Hércules",
-		"logo": "hecules.png",
-		"favicon": "favicon.ico",
-		"copyrightUrl": "https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/Copyright"
+	"wikibase": {
+	"uri": "https://www.wikidata.org/w/api.php"
 	},
-	"location": {
-		"root": "/queryservice",
-		"index": "/queryservice/index.html"
+	"examples": {
+	"server": "https://www.wikidata.org/",
+	"apiPath": "w/api.php",
+	"pageTitle": "Wikidata:SPARQL_query_service/queries/examples",
+	"pagePathElement": "wiki/"
 	},
-	"prefixes": {}
+	"urlShortener": "tinyurl",
+	"query-builder": {
+	"server": "https://query-builder-test.toolforge.org/"
 	}
+},
+"brand": {
+	"title": "Hércules",
+	"logo": "hecules.png",
+	"favicon": "favicon.ico",
+	"copyrightUrl": "https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/Copyright"
+},
+"location": {
+	"root": "/queryservice",
+	"index": "/queryservice/index.html"
+},
+"prefixes": {}
+}
 
 ## Actualización y reinicio de los servicicios
 
