@@ -430,28 +430,28 @@ Para desplegar el interfaz personalizable de Wikimedia, debemos construir una im
 						    
 - Prefijos. Podemos gestionar los prefijos RDF modificando el archivo "GnossDeustoBackend/src/gui/wikibase/queryService/RdfNamespaces.js". Para ello tenemos que añadir listados en "RdfNamespaces.NAMESPACE_SHORTCUTS" como podemos ver en este ejemplo:
 				
-	RdfNamespaces.NAMESPACE_SHORTCUTS = {
-		Hércules: {
-			roh: 'http://purl.org/roh#',
-			bfo: 'http://purl.org/roh/mirror/obo/bfo#',
-			bibo: 'http://purl.org/roh/mirror/bibo#',
-			foaf: 'https://xmlns.com/foaf/0.1/',
-			iao: 'http://purl.org/roh/mirror/obo/iao#',
-			ns: 'http://www.w3.org/2003/06/sw-vocab-status/ns#',
-			obo: 'http://purl.obolibrary.org/obo/',
-			owl: 'http://www.w3.org/2002/07/owl#',
-			rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
-			rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
-			ro: 'http://purl.org/roh/mirror/obo/ro#',
-			schema: 'https://schema.org/',
-			skos: 'http://www.w3.org/2004/02/skos/core#',
-			terms: 'http://purl.org/dc/terms/',
-			uneskos: 'http://purl.org/umu/uneskos#',
-			vitro: 'http://vitro.mannlib.cornell.edu/ns/vitro/0.7#',
-			vivo: 'http://purl.org/roh/mirror/vivo#',
-			xml: 'http://www.w3.org/XML/1998/namespace',
-			xsd: 'http://www.w3.org/2001/XMLSchema#'
-	},
+		RdfNamespaces.NAMESPACE_SHORTCUTS = {
+			Hércules: {
+				roh: 'http://purl.org/roh#',
+				bfo: 'http://purl.org/roh/mirror/obo/bfo#',
+				bibo: 'http://purl.org/roh/mirror/bibo#',
+				foaf: 'https://xmlns.com/foaf/0.1/',
+				iao: 'http://purl.org/roh/mirror/obo/iao#',
+				ns: 'http://www.w3.org/2003/06/sw-vocab-status/ns#',
+				obo: 'http://purl.obolibrary.org/obo/',
+				owl: 'http://www.w3.org/2002/07/owl#',
+				rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+				rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
+				ro: 'http://purl.org/roh/mirror/obo/ro#',
+				schema: 'https://schema.org/',
+				skos: 'http://www.w3.org/2004/02/skos/core#',
+				terms: 'http://purl.org/dc/terms/',
+				uneskos: 'http://purl.org/umu/uneskos#',
+				vitro: 'http://vitro.mannlib.cornell.edu/ns/vitro/0.7#',
+				vivo: 'http://purl.org/roh/mirror/vivo#',
+				xml: 'http://www.w3.org/XML/1998/namespace',
+				xsd: 'http://www.w3.org/2001/XMLSchema#'
+		},
 
 - Auto completar. En el archivo "GnossDeustoBackend/src/gui/wikibase/queryService/ui/editor/hint/Sparql.js" podemos editar las opciones de autocompletado del interfaz.
 
