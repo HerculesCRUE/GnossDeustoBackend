@@ -26,7 +26,7 @@ namespace Linked_Data_Server.Utility
     {
         public SparqlObject SelectData(ConfigService pConfigService, string pGraph, string pConsulta, ref string pXAppServer)
         {
-            SparqlObject datosDBpedia = null;
+            SparqlObject datosSparql = null;
             string urlConsulta = pConfigService.GetSparqlEndpoint();
             if(!string.IsNullOrEmpty(pXAppServer))
             {
@@ -79,11 +79,47 @@ namespace Linked_Data_Server.Utility
 
             if (!string.IsNullOrEmpty(jsonRespuesta))
             {
-                datosDBpedia = JsonConvert.DeserializeObject<SparqlObject>(jsonRespuesta);
+                datosSparql = JsonConvert.DeserializeObject<SparqlObject>(jsonRespuesta);
             }
 
             webClient.Dispose();
-            return datosDBpedia;
+            return datosSparql;
+        }
+
+        public static string GetSearchAutocompletar(string pText)
+        {
+            pText=string.Join("", pText.Where(x=>char.IsLetterOrDigit(x) || char.IsWhiteSpace(x)));            
+            int indiceUltimaPalabra=pText.LastIndexOf(" ");
+            string lastWord = pText.Substring(indiceUltimaPalabra+1);
+            string txt = "?o bif:contains \"'";
+            if (lastWord.Length>3)
+            {
+                txt += pText+"*";
+            }else if(indiceUltimaPalabra>-1)
+            {
+                txt += pText.Substring(0, indiceUltimaPalabra);
+            }else
+            {
+                return "";
+            }
+            txt+= "'\" OPTION(score ?sc).";
+            return txt;
+        }
+
+        public static string GetSearchBuscador(string pText)
+        {
+            pText=pText.Trim();
+            bool busquedaExacta = pText.StartsWith("\"") && pText.EndsWith("\"");
+            string txt = "?o bif:contains '";
+            if (busquedaExacta)
+            {
+                txt += pText.Replace("\"","\\\"").Replace("'","\\'");
+            }else
+            {
+                txt += "\"" + string.Join("\" AND \"",pText.Split(new string[] { " "},StringSplitOptions.RemoveEmptyEntries)) + "\"";
+            }
+            txt += "' OPTION(score ?sc).";
+            return txt;
         }
 
         public static string GetRegexSearch(string pText)

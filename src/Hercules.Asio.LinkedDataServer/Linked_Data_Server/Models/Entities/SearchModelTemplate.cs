@@ -17,7 +17,8 @@ namespace Linked_Data_Server.Models.Entities
         }
 
         public Dictionary<string, Entidad> entidades { get; set; }
-        public int paginaAnterior { get; set; }
-        public int paginaSiguiente { get; set; }
+        public int numResultados { get; set; }
+        public int numResultadosPagina { get; set; }
+        public int paginaActual { get; set; }
     }
 }

@@ -5,28 +5,177 @@
 }
 <div>
     <h1>@ViewData["Title"]</h1>
-    <table>
-        <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">rdfType</th>
-        </tr>
 
-        @foreach (var entity in Model.entidades)
+    @foreach (var entity in Model.entidades)
+    {
+        <p>
+            @entity.Value.rdfType<br>
+            <a href="@entity.Key">@entity.Value.name</a>
+        </p>
+
+    }
+    @{
+        //Paginador
+        int numTotal = Model.numResultados;
+        int numResultadosPagina = Model.numResultadosPagina;
+        int PaginaActual = Model.paginaActual;
+
+
+        int NUM_PAG_INICIO = 3;
+        int NUM_PAG_PROX_CENTRO = 2;
+        int NUM_PAG_FIN = 3;
+
+        int numPaginas = (int)Math.Ceiling((double)numTotal / (double)numResultadosPagina);
+
+
+        if (numPaginas > 1)
         {
-            <tr>
-                <td><a href="@entity.Key" >@entity.Value.name</a></td>
-                <td>@entity.Value.rdfType</td>
-            </tr>
+            <div id="navegadorRemover">
+                <div id="NavegadorPaginasCorreo" class="paginadorResultados">
+                    <div class="pag" id="NavegadorPaginasCorreo_Pag">
+                        @if (PaginaActual != 1)
+                        {
+                            <a class="btn" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@(PaginaActual-1)">Anterior</a>
+                        }
+                        else
+                        {
+                            <a class="btn disabled" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@(PaginaActual-1)">Anterior</a>
+                        }
+
+                        @{
+                            //INICIO
+                            for (int i = 1; i <= NUM_PAG_INICIO; i++)
+                            {
+                                if (i > numPaginas) //Hemos excedio el número máximo de páginas, así que dejamos de pintar.
+                                {
+                                    break;
+                                }
+
+                                if (i == PaginaActual)
+                                {
+                                    <a class="btn disabled" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@i">@i</a>
+                                }
+                                else
+                                {
+                                    <a class="btn" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@i">@i</a>
+                                }
+                            }
+
+                            if (numPaginas > NUM_PAG_INICIO) //Continuamos si ha más páginas que las que ya hemos pintado
+                            {
+                                int inicioRango = PaginaActual - NUM_PAG_PROX_CENTRO;
+                                int finRango = PaginaActual + NUM_PAG_PROX_CENTRO;
+
+                                if (PaginaActual < (NUM_PAG_INICIO + NUM_PAG_PROX_CENTRO + 1))
+                                {
+                                    inicioRango = NUM_PAG_INICIO + 1;
+                                    if (PaginaActual <= NUM_PAG_INICIO) //En el rango de las primeras
+                                    {
+                                        finRango = PaginaActual + NUM_PAG_INICIO + NUM_PAG_PROX_CENTRO - 1;
+                                    }
+                                    else
+                                    {
+                                        finRango = NUM_PAG_INICIO + (2 * NUM_PAG_PROX_CENTRO) + 1; //Ultimo número de la serie.
+                                    }
+                                }
+                                else if (PaginaActual > (numPaginas - NUM_PAG_FIN - NUM_PAG_PROX_CENTRO))
+                                {
+                                    finRango = numPaginas - NUM_PAG_FIN;
+                                    if (PaginaActual > numPaginas - NUM_PAG_FIN) //En el rango de las últimas
+                                    {
+                                        inicioRango = PaginaActual - NUM_PAG_FIN - NUM_PAG_PROX_CENTRO + 1;//finRango - (pNumPaginas - PaginaActual + 1);
+                                    }
+                                    else
+                                    {
+                                        inicioRango = numPaginas - (NUM_PAG_FIN + (2 * NUM_PAG_PROX_CENTRO)); //Ultimo número de la serie empezando atrás.
+                                    }
+
+                                    //Avanzamos el inicio de la zona final para que no agrege páginas ya pintadas
+                                    while (inicioRango <= NUM_PAG_INICIO)
+                                    {
+                                        inicioRango++;
+                                    }
+                                }
+
+                                if (inicioRango > (NUM_PAG_INICIO + 1))
+                                {
+                                    <span class="separador">...</span>
+                                }
+
+
+                                for (int i = inicioRango; i <= finRango; i++)
+                                {
+                                    if (i > numPaginas) //Hemos excedio el número máximo de páginas, así que dejamos de pintar.
+                                    {
+                                        break;
+                                    }
+
+                                    if (i == PaginaActual)
+                                    {
+                                        <a class="btn disabled" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@i">@i</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@i">@i</a>
+                                    }
+                                }
+
+                                if (finRango < numPaginas)
+                                {
+                                    //Continuamos si ha más páginas que las que ya hemos pintado
+                                    inicioRango = numPaginas - NUM_PAG_FIN + 1;
+
+                                    if ((inicioRango - 1) > finRango)
+                                    {
+                                        <span class="separador">...</span>
+                                    }
+
+                                    //Avanzamos el inicio de la zona final para que no agrege páginas ya pintadas
+                                    while (inicioRango <= finRango)
+                                    {
+                                        inicioRango++;
+                                    }
+
+                                    finRango = numPaginas;
+
+                                    for (int i = inicioRango; i <= finRango; i++)
+                                    {
+                                        if (i > numPaginas) //Hemos excedio el número máximo de páginas, así que dejamos de pintar.
+                                        {
+                                            break;
+                                        }
+
+                                        if (i == PaginaActual)
+                                        {
+                                            <a class="btn disabled" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@i">@i</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@i">@i</a>
+                                        }
+                                    }
+                                }
+                            }
+                            if (PaginaActual != numPaginas)
+                            {
+                                <a class="btn" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@(PaginaActual+1)">Siguiente</a>
+                            }
+                            else
+                            {
+                                <a class="btn disabled" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@(PaginaActual+1)">Siguiente</a>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
         }
-
-
-    </table>
-    @if (Model.paginaAnterior != 0)
-    {
-        <a class="btn"href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@Model.paginaAnterior">Anterior</a>
     }
-    @if (Model.paginaSiguiente != 0)
-    {
-        <a class="btn" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@Model.paginaSiguiente">Siguiente</a>
-    }
+    @*@if (Model.paginaAnterior != 0)
+        {
+            <a class="btn"href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@Model.paginaAnterior">Anterior</a>
+        }
+        @if (Model.paginaSiguiente != 0)
+        {
+            <a class="btn" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@Model.paginaSiguiente">Siguiente</a>
+        }*@
 </div>
