@@ -426,7 +426,7 @@ Para desplegar el interfaz personalizable de Wikimedia, debemos construir una im
 						</tr>
 						    
 * Prefijos. Podemos gestionar los prefijos RDF modificando el archivo "GnossDeustoBackend/src/gui/wikibase/queryService/RdfNamespaces.js". Para ello tenemos que añadir listados en "RdfNamespaces.NAMESPACE_SHORTCUTS" como podemos ver en este ejemplo:
-						    
+	
 	RdfNamespaces.NAMESPACE_SHORTCUTS = {
 		Hércules: {
 			roh: 'http://purl.org/roh#',
