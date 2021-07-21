@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
@@ -105,7 +106,7 @@ namespace ApiCargaWebInterface.Models.Services
         /// <summary>
         /// Llama al método del api de carga de getRecord
         /// </summary>
-        /// <param name="repoIdentifier">Identificador del repositorio OAI-PMH </param>
+        /// <param name="repoIdentifier">Identificador del repositorio OAI-PMH</param>
         /// <param name="identifier">Identificador de la entidad a recolectar (Los identificadores se obtienen con el metodo /etl/ListIdentifiers/{repositoryIdentifier}).</param>
         /// <param name="type">metadata que se desea recuperar (rdf). Los formatos de metadatos admitidos por un repositorio y para un elemento en particular se pueden recuperar mediante la solicitud /etl/ListMetadataFormats/{repositoryIdentifier}.</param>
         /// <returns></returns>
@@ -116,6 +117,53 @@ namespace ApiCargaWebInterface.Models.Services
             XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
             string rdf = respuestaXML.Root.Element(nameSpace + "GetRecord").Descendants(nameSpace + "metadata").First().FirstNode.ToString();
             return rdf;
+        }
+        /// <summary>
+        /// Llama al método del API ListMetadataFormats.
+        /// </summary>
+        /// <param name="identifierRepo">Identificador del repositorio OAI-PMH.</param>
+        /// <returns></returns>
+        public List<string> CallListMetadataFormats(Guid identifierRepo)
+        {
+            List<string> listMetadataFormats = new List<string>();
+            string xml = _serviceApi.CallGetApi(_serviceUrl.GetUrl(), $"etl/ListMetadataFormats/{identifierRepo}", _token);
+            XDocument respuestaXML = XDocument.Load(new StringReader(xml));
+            XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
+            XElement listIdentifierElement = respuestaXML.Root.Element(nameSpace + "ListMetadataFormats");
+            IEnumerable<XElement> listMetadataFormat = listIdentifierElement.Descendants(nameSpace + "metadataFormat");
+            foreach (var metadataFormat in listMetadataFormat)
+            {
+                listMetadataFormats.Add(metadataFormat.Element(nameSpace + "metadataPrefix").Value);
+            }
+            return listMetadataFormats;
+        }
+        /// <summary>
+        /// Llama al método del API ListSets.
+        /// </summary>
+        /// <param name="identifierRepo">Identificador del repositorio OAI-PMH.</param>
+        /// <returns></returns>
+        public List<string> CallListSets(Guid identifierRepo)
+        {
+            List<string> listMetadataFormats = new List<string>();
+            string xml = _serviceApi.CallGetApi(_serviceUrl.GetUrl(), $"etl/ListSets/{identifierRepo}", _token);
+            XDocument respuestaXML = XDocument.Load(new StringReader(xml));
+            XNamespace nameSpace = respuestaXML.Root.GetDefaultNamespace();
+            XElement listIdentifierElement = respuestaXML.Root.Element(nameSpace + "ListSets");
+            IEnumerable<XElement> listMetadataFormat = listIdentifierElement.Descendants(nameSpace + "set");
+            foreach (var metadataFormat in listMetadataFormat)
+            {
+                listMetadataFormats.Add(metadataFormat.Element(nameSpace + "setSpec").Value);
+            }
+            return listMetadataFormats;
+        }
+        /// <summary>
+        /// Obtiene la lista de identificadores.
+        /// </summary>
+        /// <returns></returns>
+        public string CallGetListIdentifiers(Guid identifierRepo, string metadataPrefix, string set, string from, string until)
+        {
+            string result = _serviceApi.CallGetApi(_serviceUrl.GetUrl(), $"etl/ListIdentifiers/{identifierRepo}?metadataPrefix={metadataPrefix}&&set={set}&&from={from}&&until={until}", _token);
+            return result;
         }
         /// <summary>
         /// Sube una ontologia
@@ -146,29 +194,19 @@ namespace ApiCargaWebInterface.Models.Services
         /// <param name="repositoryShapes">Lista de shapes configuradas en el repositorio</param>
         public void ValidateRDFPersonalized(Guid repositoryId, IFormFile rdfToValidate, IFormFile validationRdf, List<Guid> validationShapesList, List<ShapeConfigViewModel> repositoryShapes)
         {
-            if (validationRdf == null && (validationShapesList != null && repositoryShapes.Select(item => item.ShapeConfigID).SequenceEqual(validationShapesList)))
-            {
-                CallDataValidate(rdfToValidate, repositoryId);
-            }
-            else if ((validationShapesList == null || validationShapesList.Count == 0) && validationRdf != null)
+            if(validationRdf != null)
             {
                 CallDataValidatePersonalized(rdfToValidate, validationRdf);
             }
-            else if (validationShapesList != null && repositoryShapes.Select(item => item.ShapeConfigID).SequenceEqual(validationShapesList) && validationRdf != null)
+            if(validationShapesList!=null)
             {
-                CallDataValidatePersonalized(rdfToValidate, validationRdf);
-                CallDataValidate(rdfToValidate, repositoryId);
-            }
-            else if (validationRdf != null && validationShapesList != null && validationShapesList.Count > 0)
-            {
-                CallDataValidatePersonalized(rdfToValidate, validationRdf);
                 foreach (Guid idShape in validationShapesList)
                 {
                     string shape = repositoryShapes.Where(item => item.ShapeConfigID.Equals(idShape)).Select(item => item.Shape).FirstOrDefault();
                     if (!string.IsNullOrEmpty(shape))
                     {
                         var content = new System.IO.MemoryStream(Encoding.ASCII.GetBytes(shape));
-                        IFormFile fileValidation = new FormFile(content, 0, content.Length,"validationShape", "validationShape.rdf");
+                        IFormFile fileValidation = new FormFile(content, 0, content.Length, "validationShape", "validationShape.rdf");
                         CallDataValidatePersonalized(rdfToValidate, fileValidation);
                     }
                 }

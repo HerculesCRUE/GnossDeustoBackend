@@ -6,10 +6,14 @@
 <div class="row">
     <div class="col col-12 col-lg-12 col-contenido">
         <div class="wrapCol">
+            <div class="header-resource">
+                <div class="h1-container">
+                    <h1>Administración > <a href="@Url.Action("Index","RepositoryConfig")">Repositorios</a> > <a href="@Url.Action("Details","RepositoryConfig",new { id=Model.RepositoryId})">@Model.NameRepository</a> > Publicar un RDF</h1>
+                </div>
+            </div>
             <form asp-action="PublishRdf" method="post" enctype="multipart/form-data">
                 <div class="fieldset fieldset01">
                     <fieldset class="mediumLabels">
-                        <h1>Publicar un RDF</h1>
                         <div class="fieldsetContent">
                             <div class="form-group">
                                 <div class="form-group" hiddden>

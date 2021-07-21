@@ -9,10 +9,14 @@
     <div class="row">
         <div class="col col-12 col-lg-12 col-contenido">
             <div class="wrapCol">
+                <div class="header-resource">
+                    <div class="h1-container">
+                        <h1>Administración > <a href="@Url.Action("Index", "RepositoryConfig")">Repositorios</a> > <a href="@Url.Action("Details", "RepositoryConfig", new { id = Model.RepositoryId })">@Model.NameRepository</a> > Obtener RDF</h1>
+                    </div>
+                </div>
                 <form asp-action="GetRDF" method="get">
                     <div class="fieldset fieldset01">
                         <fieldset class="mediumLabels">
-                            <h1>Obtener rdf</h1>
                             <div class="fieldsetContent">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="form-group">
@@ -20,11 +24,17 @@
                                     <input asp-for="Id" class="form-control" />
                                     <span asp-validation-for="Id" class="text-danger"></span>
                                 </div>
+
                                 <div class="form-group">
-                                    <label asp-for="Type" class="control-label"></label>
-                                    <input asp-for="Type" class="form-control" />
-                                    <span asp-validation-for="Type" class="text-danger"></span>
+                                    <label for="metadataPrefix" class="control-label">Prefijo del Metadata</label>
+                                    <select id="metadataPrefix" name="metadataPrefix" class="form-control">
+                                        @foreach (string pref in Model.listaMetadataFormats)
+                                        {
+                                            <option value="@pref">@pref</option>
+                                        }
+                                    </select>
                                 </div>
+
                                 <div class="form-group" hidden>
                                     <label asp-for="RepositoryId" class="control-label"></label>
                                     <input asp-for="RepositoryId" class="form-control" readonly />
@@ -33,7 +43,7 @@
                                 <div class="fieldset actionButtons fieldset03">
                                     <fieldset>
                                         <p>
-                                            <input class="submit principal" type="submit" value="Obtener rdf">
+                                            <input class="submit principal" type="submit" value="Obtener RDF">
                                         </p>
                                     </fieldset>
                                 </div>
@@ -41,6 +51,7 @@
                         </fieldset>
                     </div>
                 </form>
+                <a href="@Url.Action("ListarIdentifiers", new {repository = Model.RepositoryId })"> &#60;-- Listar Identificadores</a>
                 <a href="@Url.Action("ValidarRdf", new {repository = Model.RepositoryId })"> Validar RDF --></a>
             </div>
         </div>

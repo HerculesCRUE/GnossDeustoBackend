@@ -16,5 +16,7 @@ namespace ApiCargaWebInterface.ViewModels
         public string Type { get; set; }
         public string Result { get; set; }
         public List<ShapeConfigViewModel> RepositoryShapes { get; set; }
+        public string NameRepository { get; set; }
+        public List<string> listaMetadataFormats { get; set; }
     }
 }

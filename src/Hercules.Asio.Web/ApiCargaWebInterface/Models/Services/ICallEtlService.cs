@@ -63,5 +63,27 @@ namespace ApiCargaWebInterface.Models.Services
         /// </summary>
         /// <returns>La ontología actualizada</returns>
         public RohGraph CallGetOntology();
+        /// <summary>
+        /// Devuelve una lista con los MetadataFormats.
+        /// </summary>
+        /// <param name="identifierRepo"></param>
+        /// <returns></returns>
+        public List<string> CallListMetadataFormats(Guid identifierRepo);
+        /// <summary>
+        /// Devuelve una lista con lo Sets.
+        /// </summary>
+        /// <param name="identifierRepo"></param>
+        /// <returns></returns>
+        public List<string> CallListSets(Guid identifierRepo);
+        /// <summary>
+        /// Obtiene los identificadores.
+        /// </summary>
+        /// <param name="identifierRepo"></param>
+        /// <param name="metadataPrefix"></param>
+        /// <param name="set"></param>
+        /// <param name="from"></param>
+        /// <param name="until"></param>
+        /// <returns></returns>
+        public string CallGetListIdentifiers(Guid identifierRepo, string metadataPrefix, string set, string from, string until);
     }
 }

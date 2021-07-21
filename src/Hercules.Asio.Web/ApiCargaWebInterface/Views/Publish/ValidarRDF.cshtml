@@ -7,12 +7,20 @@
 <div class="row">
     <div class="col col-12 col-lg-12 col-contenido">
         <div class="wrapCol">
+            <div class="header-resource">
+                <div class="h1-container">
+                    <h1>Administración > <a href="@Url.Action("Index","RepositoryConfig")">Repositorios</a> > <a href="@Url.Action("Details","RepositoryConfig",new { id=Model.RepositoryId})">@Model.NameRepository</a> > Validar un RDF</h1>
+                </div>
+            </div>
             <form asp-action="ValidateRdf" method="post" enctype="multipart/form-data">
                 <div class="fieldset fieldset01">
                     <fieldset class="mediumLabels">
-                        <h1>Validar un RDF</h1>
                         <div class="fieldsetContent">
                             <div class="form-group">
+                                @if (!string.IsNullOrEmpty(Model.Result))
+                                {
+                                    <p class="list-group-item-success">@Model.Result</p>
+                                }
                                 <div class="form-group" hidden>
                                     <label asp-for="RepositoryId" class="control-label"></label>
                                     <input asp-for="RepositoryId" class="form-control" readonly />
@@ -39,14 +47,14 @@
                             <div class="fieldset actionButtons fieldset03">
                                 <fieldset>
                                     <p>
-                                        <input class="submit principal" type="submit" value="validar RDF">
+                                        <input class="submit principal" type="submit" value="Validar RDF">
                                     </p>
                                 </fieldset>
-                            </div>
+                            </div>                            
                         </div>
                     </fieldset>
                 </div>
-            </form> 
+            </form>
             <a href="@Url.Action("ObtenerRdf", new { repository = Model.RepositoryId })"> &#60;-- Obtener RDF</a> <a href="@Url.Action("PublicarRdf", new { repository = Model.RepositoryId })"> Publicar RDF --></a>
         </div>
     </div>
