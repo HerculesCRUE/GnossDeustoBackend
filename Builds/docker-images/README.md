@@ -453,7 +453,7 @@ Para desplegar el interfaz personalizable de Wikimedia, debemos construir una im
 				xsd: 'http://www.w3.org/2001/XMLSchema#'
 		},
 
-- Auto completar. :
+- Auto completar. En el archivo "GnossDeustoBackend/src/gui/wikibase/queryService/ui/editor/hint/Sparql.js" podemos editar las opciones de autocompletado del interfaz.
 
 - Graph builder. Para que la función Graph builder funcione de manera correcta debemos tener en cuenta tres archivos. Ahora explicaremos los posibles cambios que tendremos que hacer en cada uno:
 
