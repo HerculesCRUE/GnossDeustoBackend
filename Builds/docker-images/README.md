@@ -278,7 +278,11 @@ Ahora debemos añadir estas líneas a la configuración ssl. En RHEL lo encontra
 	#VIRTUOSO2
 	ProxyPass /sparql2 http://ip_del_servicio:8890/sparql
 	ProxyPassReverse /sparql2 http://ip_del_servicio:8890/sparql
-
+	
+	#QUERYSERVICE
+	ProxyPass /queryservice http://ip_del_servicio:8080/queryservice
+	ProxyPassReverse /queryservice http://ip_del_servicio:8080/queryservice
+	
 Por último, para que la aplicación disponga de los archivos necesarios tenemos que subir estos estilos en la capeta publica de Apache.
 
 	wget https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/contenido.tar.gz
@@ -406,9 +410,84 @@ Si todo ha ido bien veremos el recuento de los inserts con este formato:
 
 Ahora, si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz web para poder hacer cargas.
 
-![](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images/docs/capturas/front.png)
+![](./docs/capturas/front.png)
 
 ## Despliegue del Wikimedia GUI
+
+Para desplegar el interfaz personalizable de Wikimedia, debemos construir una imagen Docker aprovechando el código que nos descargamos en el paso anterior (Despliegue de los servicios front). Pero vamos a detallar los posibles cambios que podemos hacer en el:
+
+- Consultas de ejemplo. Para editarlas tenemos que ir al archivo "GnossDeustoBackend/src/gui/index.html" y editar el bloque "div class="exampleTable" como en este ejemplo, debemos añadir un tr por consulta a añadir:
+	<!--Este bloque lo podemos editar para poner las consultas de ejemplo que queramos-->
+		<div class="exampleTable">
+			<table class="table">
+				<tbody>
+					<tr class="active">
+						<td colspan="4">Consultas de validación</td>
+					</tr>
+					<tr>
+						<td><a title="Select" href="#PREFIX%20roh%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%23%3E%0APREFIX%20uneskos%3A%20%3Chttp%3A%2F%2Fpurl.org%2Froh%2Funesco-individuals%23%3E%0A%0ASELECT%20%3Fcentro%20WHERE%20%7B%0A%20%20%20%20%20%20%20%20%3Fcentro%20a%20roh%3AResearchGroup%20%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20roh%3AhasKnowledgeArea%20uneskos%3A120304%20.%0A%7D">Q1 - Centros de investigación que trabajan en un área/disciplina específica</a></td>
+					</tr>
+						    
+- Prefijos. Podemos gestionar los prefijos RDF modificando el archivo "GnossDeustoBackend/src/gui/wikibase/queryService/RdfNamespaces.js". Para ello tenemos que añadir listados en "RdfNamespaces.NAMESPACE_SHORTCUTS" como podemos ver en este ejemplo:
+				
+		RdfNamespaces.NAMESPACE_SHORTCUTS = {
+			Hércules: {
+				roh: 'http://purl.org/roh#',
+				bfo: 'http://purl.org/roh/mirror/obo/bfo#',
+				bibo: 'http://purl.org/roh/mirror/bibo#',
+				foaf: 'https://xmlns.com/foaf/0.1/',
+				iao: 'http://purl.org/roh/mirror/obo/iao#',
+				ns: 'http://www.w3.org/2003/06/sw-vocab-status/ns#',
+				obo: 'http://purl.obolibrary.org/obo/',
+				owl: 'http://www.w3.org/2002/07/owl#',
+				rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+				rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
+				ro: 'http://purl.org/roh/mirror/obo/ro#',
+				schema: 'https://schema.org/',
+				skos: 'http://www.w3.org/2004/02/skos/core#',
+				terms: 'http://purl.org/dc/terms/',
+				uneskos: 'http://purl.org/umu/uneskos#',
+				vitro: 'http://vitro.mannlib.cornell.edu/ns/vitro/0.7#',
+				vivo: 'http://purl.org/roh/mirror/vivo#',
+				xml: 'http://www.w3.org/XML/1998/namespace',
+				xsd: 'http://www.w3.org/2001/XMLSchema#'
+		},
+
+- Auto completar. En el archivo "GnossDeustoBackend/src/gui/wikibase/queryService/ui/editor/hint/Sparql.js" podemos editar las opciones de autocompletado del interfaz.
+
+- Graph builder. Para que la función Graph builder funcione de manera correcta debemos tener en cuenta tres archivos. Ahora explicaremos los posibles cambios que tendremos que hacer en cada uno:
+
+	- **wikibase/queryService/api/Sparql.js** - En la línea 8 debemos indicar en la variable SPARQL_SERVICE_URI la uri en la que esté nuestro servicio. Ejemplo: var SPARQL_SERVICE_URI = 'https://linkeddata2.um.es/sparql',.
+	- **wikibase/queryService/ui/resultBrowser/PolestarResultBrowser.js** - En la línea 10 debemos ajustar la variable GRAPH_QUERY_PREFIX en funciona de uri en la que esté nuestro servicio. Ejemplo: var GRAPH_QUERY_PREFIX = 'wikidatasparql://linkeddata2.um.es/sparql?query=';.
+	- **polestar/scripts/vendor.js** - Este archivo ya esta preparado para funcionar el los entornos actuales de herc-as-front-desa.atica.um.es, linkeddata2test.um.es y linkeddata2.um.es pero tendremos que editarlos si lo ponemos en otros dominios.
+	
+			82804: https: ["mediawiki.org", "wikibooks.org", "wikidata.org", "wikimedia.org", "wikimediafoundation.org", "wikinews.org", "wikipedia.org", "wikiquote.org", "wikisource.org", "wikiversity.org", "wikivoyage.org", "wiktionary.org","linkeddata2.um.es", "linkeddata2c.um.es", "herc-as-front-desa.atica.um.es", "linkeddata2test.um.es"],
+			82805: http: ["wmflabs.org","linkeddata2.um.es", "linkeddata2c.um.es", "herc-as-front-desa.atica.um.es", "linkeddata2test.um.es"],
+			82806: wikirawupload: ["upload.wikimedia.org", "upload.beta.wmflabs.org"],
+			82807: wikidatasparql: ["query.wikidata.org", "wdqs-test.wmflabs.org","linkeddata2.um.es", "linkeddata2c.um.es", "herc-as-front-desa.atica.um.es", "linkeddata2test.um.es"],
+
+- default-config.json. En este archivo tenemos que hacer varios cambios:
+
+	- **uri** - Denemos indicar la uri principal en donde va a contestar nuestro interfaz. Ejemplo: "uri": "https://linkeddata2.um.es/sparql"
+	- **title** - Aquí indicamos el título que queramos que aparezca. Ejemplo: "title": "Hércules"
+	- **logo** - Debemos colocar el fichero de del logo en la raiz del código. Ejemplo: "logo": "hecules.png"
+	- **favicon** - Debemos colocar el fichero del favicon en la raiz del código. Normalmente pondremos un fichero con el nombre por defecto.
+	- **localtion e index** - Aquí debemos indicar el path que hemos usado para el proxy. Ejemplo "root": "/queryservice", "index": "/queryservice/index.html"
+	
+Una vez tengamos todo preparado, tenemos que crear la imagen docker en el path "GnossDeustoBackend/src/gui" en el que se haya el Dockerfile y ejecutar el siguiente comando:
+
+	docker build -t wikimediagui .
+	
+Hecho esto debemos añadir a los docker-compose de front las siguietes líneas:
+
+	wikimediagui:
+	  image: wikimediagui
+      ports:
+        - 8080:8080
+
+Reiniciamos los servicios con:
+
+	./actualizar_front.sh
 
 ## Actualización y reinicio de los servicicios
 
