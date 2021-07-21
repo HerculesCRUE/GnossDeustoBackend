@@ -57,8 +57,13 @@ namespace ApiCargaWebInterface.Controllers
             if (page.Content.Contains("@*<%"))
             {
                 dataModel = _replaceUsesService.PageWithDirectives(page.Content, dataModel,Request, _cache);
-            }            
-
+            }
+            ViewBag.Lang = "ES";
+            if(url.ToLower().StartsWith("en/"))
+            {
+                ViewBag.Lang = "EN";
+            }
+            ViewBag.Url = url;
             return View($"/{url}", dataModel);
         }
 
