@@ -19,7 +19,7 @@
     <!-- LIGHTGALLERY -->
     <link media="screen" type="text/css" rel="stylesheet" href="~/theme/libraries/lightgallery/css/lightgallery.min.css">
     <!-- PERSONALIZACION TEMA -->
-    <link media="screen" type="text/css" rel="stylesheet" href="~/theme/theme.css">
+    <link media="screen" type="text/css" rel="stylesheet" href="~/theme/theme.css" asp-append-version="true">
     <link media="screen" type="text/css" rel="stylesheet" href="~/theme/theme2.css">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="~/theme/static/style.css">
@@ -76,65 +76,77 @@
         </main>
     </div>
 
-
-    <footer>
-        <div class="container-fluid">
-            <div class="col col-12 col-logo">
-                <img src="~/theme/resources/logo-um-peq.png" alt="Universidad Murcia">
-            </div>
-            <div class="col col-12 col-md-6 col-informacion">
-                <ul>
-                    <li>
-                        <a href="javascript: void(0);">Universidad de Murcia</a>
-                    </li>
-                    <li>
-                        Avda. Teniente Flomesta, 5 · 30003 · Murcia
-                    </li>
-                    <li>
-                        Teléfono: +34 868 88 3000 (Centralita) / +34 868 88 8888 (Información)
-                    </li>
-                </ul>
-            </div>
-            <div class="col col-12 col-md-6 col-enlaces">
-                <ul class="destacado">
-                    <li>
-                        <a href="javascript: void(0);">Departamentos</a>
-                    </li>
-                    <li>
-                        <a href="javascript: void(0);">Servicios</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <a href="javascript: void(0);">Aula Virtual</a>
-                    </li>
-                    <li>
-                        <a href="javascript: void(0);">Buzón Universitario</a>
-                    </li>
-                    <li>
-                        <a href="javascript: void(0);">Lucha contra el fraude</a>
-                    </li>
-                    <li>
-                        <a href="javascript: void(0);">Sistema DUMBO</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <a href="javascript: void(0);">Accesibilidad</a>
-                    </li>
-                    <li>
-                        <a href="javascript: void(0);">Cómo llegar</a>
-                    </li>
-                    <li>
-                        <a href="javascript: void(0);">Emergencias</a>
-                    </li>
-                    <li>
-                        <a href="javascript: void(0);">Ayuda</a>
-                    </li>
-                </ul>
-            </div>
+    <div class="container-fluid franja-pie um">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <div class="caja-pie">
+            <section id="pie">
+                <div class="banda-pie row">
+                    <div class="col-md-7">
+                        <div id="logo-um-pie">
+                            <a href="https://www.um.es/" data-senna-off="true">
+                                <img class="img-responsive" src="https://www.um.es/o/um-lr-genericov2-um-theme/images/logo-umu-pie.png" alt="Logo Universidad de Murcia">
+                            </a>
+                            <a href="https://www.um.es/web/hrs4r">
+                                <img class="logo-hr" src="https://www.um.es/o/um-lr-genericov2-um-theme/images/logo-hr-500.png" alt="Logo Human Resources Strategy for Researchers">
+                            </a>
+                        </div>
+                    </div> <!-- .col-md-6 -->
+                    <div class="col-md-5 redes-pie">
+                        <p>
+                            <a href="https://www.um.es/actualidad/rss/index.php" target="_blank" title="RSS de la Universidad de Murcia">
+                                <span class="fas fa-rss"></span>
+                                <span class="sr-only">Acceder al feed RSS</span>
+                            </a>
+                            <a href="https://www.facebook.com/universidadmurcia" target="_blank" title="Perfil de Facebook de la Universidad de Murcia">
+                                <span class="fab fa-facebook-f"></span>
+                                <span class="sr-only">Acceder al perfil de Facebook</span>
+                            </a>
+                            <a href="https://twitter.com/UMU" target="_blank" title="Perfil de Twitter de la Universidad de Murcia">
+                                <span class="fab fa-twitter"></span>
+                                <span class="sr-only">Acceder al perfil de Twitter</span>
+                            </a>
+                            <a href="https://www.youtube.com/universidaddemurcia" target="_blank" title="Perfil de YouTube de la Universidad de Murcia">
+                                <span class="fab fa-youtube"></span>
+                                <span class="sr-only">Acceder al perfil de YouTube</span>
+                            </a>
+                            <a href="https://www.instagram.com/umu/" target="_blank" title="Perfil de Instagram de la Universidad de Murcia">
+                                <span class="fab fa-instagram"></span>
+                                <span class="sr-only">Acceder al perfil de Instagram</span>
+                            </a>
+                            <a href="https://www.ivoox.com/radio-um.es_sw_1_1.html" target="_blank" title="Podcast de Radio Um.es">
+                                <span class="fas fa-microphone"></span>
+                                <span class="sr-only">Acceder a Podcast de Radio Um.es</span>
+                            </a>
+                            <a href="https://t.me/UMUinforma" target="_blank" title="Telegram de la Universidad de Murcia">
+                                <span class="fab fa-telegram-plane"></span>
+                                <span class="sr-only">Acceder a Telegram de la Universidad de Murcia</span>
+                            </a>
+                            <a href="https://es.linkedin.com/school/universidad-de-murcia/" target="_blank" title="Perfil de Linkedin de la Universidad de Murcia">
+                                <span class="fab fa-linkedin-in"></span>
+                                <span class="sr-only">Acceder al perfil de Linkedin</span>
+                            </a>
+                        </p>
+                    </div> <!-- .col-md-6 -->
+                </div> <!-- #banda-pie -->
+                <div class="row">
+                    <div class="col-md-6 copyright-pie">
+                        <p class="copyright-pie-titulo text-uppercase">Universidad de Murcia</p>
+                        <p>
+                            Avda. Teniente Flomesta, 5 · 30003 · Murcia
+                            <br>Teléfono: +34 868 88 3000 (Centralita) / +34 868 88 8888 (Información)
+                        </p>
+                    </div>
+                    <div class="col-md-6 como-llegar-pie">
+                        <p><a href="https://www.um.es/departamentos">Departamentos</a> - <a href="https://www.um.es/servicios">Servicios</a></p>
+                        <p><a href="https://www.um.es/web/universidad/campus-virtual">Aula Virtual</a> - <a href="https://general.um.es/general/inspeccion.buzon">Buzón Universitario</a> - <a href="https://www.um.es/web/universidad/lucha-contra-el-fraude" class="um-lr-gtm-principal-pie-fraude">Lucha contra el fraude</a> - <a href="http://dumbo.um.es/">Sistema DUMBO</a></p>
+                        <p><a href="https://www.um.es/web/universidad/accesibilidad">Accesibilidad</a> - <a href="https://www.um.es/web/universidad/contenido/como-llegar">Cómo llegar</a> - <a href="https://www.um.es/web/emergencias">Emergencias</a> - <a href="https://www.um.es/web/ayuda/">Ayuda</a></p>
+                    </div>
+                </div>
+            </section> <!-- section pie -->
         </div>
-    </footer>
+    </div>
+
+
     <!--Default-->
     @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@

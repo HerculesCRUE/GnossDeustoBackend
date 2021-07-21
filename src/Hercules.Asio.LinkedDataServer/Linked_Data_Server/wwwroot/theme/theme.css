@@ -1522,3 +1522,171 @@ img { max-width: 100%; }
 .ficha-documento .info-documento p { font-size: 100%;}
 .ficha-documento .info-documento ul { padding-left: 20px; }
 .ficha-documento .info-documento ul li { line-height: 1.4; }
+
+
+.franja-pie {
+    background-color: #494949;
+    padding: 2.5em 2.5em 5em 2.5em;
+    color: #fff;
+}
+
+    .franja-pie p {
+        color: #fff;
+    }
+
+.caja-pie {
+    margin: 0 1%
+}
+
+@media(max-width: 767px) {
+    .caja-pie {
+        margin-bottom: 40px
+    }
+}
+
+@media(min-width: 1200px) {
+    .caja-pie {
+        width: 89em;
+        max-width: 100%;
+        margin: 0 auto
+    }
+}
+
+.caja-pie-sitio {
+    padding-top: 50px;
+    padding-bottom: 40px;
+    text-align: center
+}
+
+@media(min-width: 1200px) {
+    .caja-pie-sitio {
+        width: 89em;
+        max-width: 100%;
+        margin: 0 auto
+    }
+}
+
+.redes-pie {
+    text-align: right;
+    font-size: 1.2em
+}
+
+@media(max-width: 767px) {
+    .redes-pie {
+        text-align: center;
+        padding-right: 0;
+        padding-left: 0;
+        margin-top: 1.5em
+    }
+}
+
+@media(min-width: 768px) {
+    .redes-pie {
+        align-self: center
+    }
+}
+
+.redes-pie a {
+    color: #fff !important;
+    margin-left: .8em
+}
+
+    .redes-pie a:hover, .redes-pie a:focus {
+        text-decoration: none
+    }
+
+.pie-nav-fondo {
+    background-color: #c02f3d;
+    padding: 2.5em;
+    color: #fff
+}
+
+.banda-pie {
+    margin-bottom: .1em
+}
+
+@media(min-width: 768px) {
+    .banda-pie {
+        display: flex
+    }
+}
+
+.como-llegar-pie {
+    text-align: right
+}
+
+@media(max-width: 767px) {
+    .como-llegar-pie {
+        text-align: center
+    }
+}
+
+@media(min-width: 768px) {
+    .como-llegar-pie {
+        position: relative;
+        top: -3px
+    }
+}
+
+.como-llegar-pie a {
+    color: #fff !important;
+    text-decoration: none
+}
+
+.copyright-pie {
+    padding-top: 1em
+}
+
+@media(max-width: 767px) {
+    .copyright-pie {
+        text-align: center
+    }
+}
+
+.copyright-pie a {
+    color: #fff
+}
+
+.copyright-pie-titulo {
+    margin-bottom: 3px
+}
+
+@media(max-width: 767px) {
+    #logo-um-pie {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center
+    }
+}
+
+@media(max-width: 767px) {
+    #logo-um-pie img {
+        margin: 0 20px
+    }
+}
+
+@media(min-width: 768px) {
+    #logo-um-pie img {
+        float: left
+    }
+
+        #logo-um-pie img.logo-hr {
+            margin-left: 30px
+        }
+
+        #logo-um-pie img.cmn-logo {
+            margin-left: 20px
+        }
+}
+
+@media(min-width: 768px) and (max-width:1199px) {
+    #logo-um-pie img {
+        height: 41px
+    }
+}
+
+@media(min-width: 768px) and (max-width:440px) {
+    #logo-um-pie img {
+        height: 26px
+    }
+}
