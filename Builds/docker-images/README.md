@@ -416,7 +416,7 @@ Ahora, si accedemos a http://ip_de_nuestra_maquina:5103 podemos ver el interfaz 
 
 Para desplegar el interfaz personalizable de Wikimedia, debemos construir una imagen Docker aprovechando el código que nos descargamos en el paso anterior (Despliegue de los servicios front). Pero vamos a detallar los posibles cambios que podemos hacer en el:
 
-- Consultas de ejemplo. Para editarlas tenemos que ir al archivo "GnossDeustoBackend/src/gui/index.html" y editar el bloque "div class="exampleTable""como en este ejemplo:
+- Consultas de ejemplo. Para editarlas tenemos que ir al archivo "GnossDeustoBackend/src/gui/index.html" y editar el bloque "div class="exampleTable" como en este ejemplo, debemos añadir un tr por consulta a añadir:
 	<!--Este bloque lo podemos editar para poner las consultas de ejemplo que queramos-->
 		<div class="exampleTable">
 			<table class="table">
