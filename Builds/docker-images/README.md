@@ -1,13 +1,13 @@
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 14/06/2021                                                   |
+| Fecha         | 21/07/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Despliegue de ASIO Backend de SGI con Docker| 
 |Descripción|Instrucciones para instalar ASIO mediante el despliegue de instancias docker|
-|Versión|1.5|
+|Versión|1.6|
 |Módulo|Documentación|
 |Tipo|Manual|
-|Cambios de la Versión|Añadidas instrucciones para reiniciar los frontales.|
+|Cambios de la Versión|Añadidas instrucciones para configurar el editor SPARQL avanzado de Wikimedia|
 
 ## Índice
 [Requisitos previos](#requisitos-previos)
