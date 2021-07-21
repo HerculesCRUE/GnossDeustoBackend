@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VDS.RDF;
+using VDS.RDF.Query;
 
 namespace Linked_Data_Server.Controllers
 {
@@ -16,6 +18,7 @@ namespace Linked_Data_Server.Controllers
         private readonly static ConfigService mConfigService = new ConfigService();
         private readonly static Config_Linked_Data_Server mLinked_Data_Server_Config = LoadLinked_Data_Server_Config();
         private readonly ISparqlUtility _sparqlUtility;
+        private static RohGraph ontologyGraph;
 
         public SearchController(ISparqlUtility sparqlUtility)
         {
@@ -26,51 +29,95 @@ namespace Linked_Data_Server.Controllers
         {
             SearchModelTemplate searchModelTemplate = GenerateSearchTemplate(q, pagina);
 
-            ViewData["Title"] = "Resultados para '" + q+"'";
+            ViewData["Title"] = searchModelTemplate.numResultados + " Resultados para '" + q + "'";
             return View(searchModelTemplate);
         }
         [NonAction]
         public SearchModelTemplate GenerateSearchTemplate(string q, int pagina)
         {
+            string pXAppServer = "";
+            RohGraph ontologyGraph = LoadGraph(mConfigService.GetOntologyGraph(), mConfigService, ref pXAppServer);
+            SparqlResultSet sparqlResultSetNombresPropiedades = (SparqlResultSet)ontologyGraph.ExecuteQuery(
+                @"select distinct ?entidad ?nombre lang(?nombre) as ?lang where 
+                { 
+                    ?entidad <http://www.w3.org/2000/01/rdf-schema#label> ?nombre. 
+                }"
+            );
+
+            //Guardamos todos los nombres de las propiedades en un diccionario
+            Dictionary<string, string> communNamePropierties = new Dictionary<string, string>();
+            foreach (SparqlResult sparqlResult in sparqlResultSetNombresPropiedades.Results)
+            {
+                string entity = sparqlResult["entidad"].ToString();
+                if (!communNamePropierties.ContainsKey(entity))
+                {
+                    List<SparqlResult> filas = sparqlResultSetNombresPropiedades.Results.Where(x => x["entidad"].ToString() == entity).ToList();
+                    if (filas.FirstOrDefault(x => x["lang"].ToString() == "es") != null)
+                    {
+                        communNamePropierties[entity] = ((LiteralNode)filas.FirstOrDefault(x => x["lang"].ToString() == "es")["nombre"]).Value.ToString();
+                    }
+                    else if (filas.FirstOrDefault(x => x["lang"].ToString() == "en") != null)
+                    {
+                        communNamePropierties[entity] = ((LiteralNode)filas.FirstOrDefault(x => x["lang"].ToString() == "en")["nombre"]).Value.ToString();
+                    }
+                    else if (filas.FirstOrDefault(x => string.IsNullOrEmpty(x["lang"].ToString())) != null)
+                    {
+                        communNamePropierties[entity] = ((LiteralNode)filas.FirstOrDefault(x => string.IsNullOrEmpty(x["lang"].ToString()))["nombre"]).Value.ToString();
+                    }
+                }
+            }
+
+
+            int numResultadosPagina = 10;
             ViewBag.UrlHome = mConfigService.GetUrlHome();
             SearchModelTemplate searchModelTemplate = new SearchModelTemplate();
             searchModelTemplate.entidades = new Dictionary<string, SearchModelTemplate.Entidad>();
-
             if (pagina == 0)
             {
                 pagina = 1;
             }
-
-            string consulta = @$"   select distinct ?s ?o ?rdfType where 
-                                    {{
-                                        ?s ?p ?o.
+            string consulta = @$" select * where
+                                {{    
+                                    select distinct ?s ?o ?rdfType where 
+                                    {{      
                                         ?s a ?rdfType.
                                         FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>))
-                                        FILTER(regex(?o, '^{SparqlUtility.GetRegexSearch(q)}','i') || regex(?o, ' {SparqlUtility.GetRegexSearch(q)}','i'))
-                                    }}order by asc(?o) asc (?s) OFFSET {(pagina - 1) * 10} limit 11";
-            string pXAppServer = "";
+                                        ?s ?p ?o.
+                                        {SparqlUtility.GetSearchBuscador(q)}
+                                    }}order by desc(?sc) asc(?o) asc (?s)
+                                }} OFFSET {(pagina - 1) * numResultadosPagina} limit {numResultadosPagina} ";
+
             SparqlObject sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
             foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
             {
                 if (!searchModelTemplate.entidades.ContainsKey(row["s"].value))
                 {
-                    searchModelTemplate.entidades.Add(row["s"].value, new SearchModelTemplate.Entidad(row["o"].value, row["rdfType"].value));
+                    string entityName = row["rdfType"].value;
+                    if(communNamePropierties.ContainsKey(entityName))
+                    {
+                        entityName = communNamePropierties[entityName];
+                    }
+                    searchModelTemplate.entidades.Add(row["s"].value, new SearchModelTemplate.Entidad(row["o"].value, entityName));
                 }
             }
 
-            if (pagina > 1)
-            {
-                searchModelTemplate.paginaAnterior = pagina - 1;
-            }
-            if (sparqlObject.results.bindings.Count() == 11)
-            {
-                searchModelTemplate.paginaSiguiente = pagina + 1;
-                searchModelTemplate.entidades.Remove(searchModelTemplate.entidades.Last().Key);
-            }
-            return searchModelTemplate;
+            string consultaNumero = @$"     select count(distinct ?s) as ?num where 
+                                    {{      
+                                        ?s a ?rdfType.
+                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>))
+                                        ?s ?p ?o.
+                                        {SparqlUtility.GetSearchBuscador(q)}
+                                    }} ";
+            SparqlObject sparqlObjectNumero = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consultaNumero, ref pXAppServer);
+            searchModelTemplate.numResultados = int.Parse(sparqlObjectNumero.results.bindings[0]["num"].value);
+            searchModelTemplate.numResultadosPagina = numResultadosPagina;
+            searchModelTemplate.paginaActual = pagina;
 
+
+
+            return searchModelTemplate;
         }
-        
+
 
         /// <summary>
         /// Cargamos las configuraciones 
@@ -79,6 +126,71 @@ namespace Linked_Data_Server.Controllers
         private static Config_Linked_Data_Server LoadLinked_Data_Server_Config()
         {
             return JsonConvert.DeserializeObject<Config_Linked_Data_Server>(System.IO.File.ReadAllText("Config/Linked_Data_Server_Config.json"));
+        }
+
+        private RohGraph LoadGraph(string pGraph, ConfigService pConfigService, ref string pXAppServer)
+        {
+            if (ontologyGraph != null)
+            {
+                return ontologyGraph;
+            }
+            else
+            {
+                RohGraph dataGraph = new RohGraph();
+                string consulta = "select ?s ?p ?o where { ?s ?p ?o. }";
+                SparqlObject sparqlObject = _sparqlUtility.SelectData(pConfigService, pGraph, consulta, ref pXAppServer);
+
+                foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+                {
+                    SparqlObject.Data sDB = row["s"];
+                    SparqlObject.Data pDB = row["p"];
+                    SparqlObject.Data oDB = row["o"];
+                    #region S
+                    INode sG = null;
+                    if (sDB.type == "bnode")
+                    {
+                        sG = dataGraph.CreateBlankNode(sDB.value);
+                    }
+                    else if (sDB.type == "uri")
+                    {
+                        sG = dataGraph.CreateUriNode(UriFactory.Create(sDB.value));
+                    }
+                    #endregion
+                    #region P
+                    INode pG = dataGraph.CreateUriNode(UriFactory.Create(pDB.value));
+                    #endregion
+                    #region O
+                    INode oG = null;
+                    if (oDB.type == "bnode")
+                    {
+                        oG = dataGraph.CreateBlankNode(oDB.value);
+                    }
+                    else if (oDB.type == "uri")
+                    {
+                        oG = dataGraph.CreateUriNode(UriFactory.Create(oDB.value));
+                    }
+                    else if (oDB.type == "typed-literal" || oDB.type == "literal")
+                    {
+                        if (!string.IsNullOrEmpty(oDB.lang))
+                        {
+                            oG = dataGraph.CreateLiteralNode(row["o"].value, oDB.lang);
+                        }
+                        else if (!string.IsNullOrEmpty(oDB.datatype))
+                        {
+                            oG = dataGraph.CreateLiteralNode(row["o"].value, new Uri(oDB.datatype));
+                        }
+                        else
+                        {
+                            oG = dataGraph.CreateLiteralNode(row["o"].value);
+                        }
+                    }
+                    #endregion
+                    dataGraph.Assert(sG, pG, oG);
+                }
+                ontologyGraph = dataGraph;
+                return ontologyGraph;
+            }
+
         }
     }
 

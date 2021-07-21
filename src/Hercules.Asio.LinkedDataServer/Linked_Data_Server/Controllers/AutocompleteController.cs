@@ -40,17 +40,21 @@ namespace Linked_Data_Server.Controllers
         public IActionResult Index(string q)
         {
             List<KeyValuePair<string, string>> response = new List<KeyValuePair<string, string>>();
-            string consulta = @$"     select distinct ?s ?o where 
-                                    {{
-                                        ?s ?p ?o.
-                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>))
-                                        FILTER(regex(lcase(?o), '^{SparqlUtility.GetRegexSearch(q)}') || regex(lcase(?o), ' {SparqlUtility.GetRegexSearch(q)}'))
-                                    }}limit 10 ";
-            string pXAppServer = "";
-            SparqlObject sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta,ref pXAppServer);
-            foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+            string searchAutocompletar = SparqlUtility.GetSearchAutocompletar(q);
+            if (!string.IsNullOrEmpty(searchAutocompletar))
             {
-                response.Add(new KeyValuePair<string, string>(row["o"].value, row["s"].value));
+                string consulta = @$"     select distinct ?s ?o where 
+                                    {{                                        
+                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>))
+                                        ?s ?p ?o.
+                                        {SparqlUtility.GetSearchAutocompletar(q)}
+                                    }}order by desc(?sc) asc(?o) asc (?s) limit 10 ";
+                string pXAppServer = "";
+                SparqlObject sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
+                foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+                {
+                    response.Add(new KeyValuePair<string, string>(row["o"].value, row["s"].value));
+                }
             }
             return Json(response);
         }
