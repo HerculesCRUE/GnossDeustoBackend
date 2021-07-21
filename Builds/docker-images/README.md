@@ -457,8 +457,11 @@ Para desplegar el interfaz personalizable de Wikimedia, debemos construir una im
 				
 - default-config.json. En este archivo tenemos que hacer varios cambios:
 
-	- **uri** - No
-
+	- **uri** - Denemos indicar la uri principal en donde va a contestar nuestro interfaz.
+	- **title** - Aquí indicamos el título que queramos que aparezca.
+	- **logo** - Debemos colocar el fichero de del logo en la raiz del código.
+	- **favicon** - Debemos colocar el fichero del favicon en la raiz del código.
+	- **localtion e index** - Aquí debemos indicar el path que hemos usado para el proxy.
 	{
 	"api": {
 		"sparql": {
