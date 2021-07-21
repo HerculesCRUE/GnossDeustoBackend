@@ -22,6 +22,10 @@ namespace ApiCargaWebInterface.ViewModels
         /// </summary>
         public Guid IdRepository { get; set; }
         /// <summary>
+        /// Nombre del repositorio
+        /// </summary>
+        public string NameRepository { get; set; }
+        /// <summary>
         /// Estado de la ejecución
         /// </summary>
         public string State { get; set; }

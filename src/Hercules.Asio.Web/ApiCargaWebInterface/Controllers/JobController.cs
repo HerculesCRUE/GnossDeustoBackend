@@ -29,13 +29,15 @@ namespace ApiCargaWebInterface.Controllers
     [ClaimRequirement("Administrator", "true")]
     public class JobController : Controller
     {
-        readonly CallCronApiService _serviceApi;
+        readonly CallCronApiService _serviceApiCron;
+        readonly ICallRepositoryConfigService _serviceApi;
         readonly ConfigUnidataPrefix _unidataPrefix;
         readonly DiscoverItemBDService _discoverItemService;
         readonly ProcessDiscoverStateJobBDService _processDiscoverStateJobBDService;
         readonly ICallEtlService _callEDtlPublishService;
-        public JobController(DiscoverItemBDService iIDiscoverItemService, ProcessDiscoverStateJobBDService iProcessDiscoverStateJobBDService, CallCronApiService serviceApi, ICallEtlService callEDtlPublishService, ConfigUnidataPrefix unidataPrefix)
+        public JobController(DiscoverItemBDService iIDiscoverItemService, ProcessDiscoverStateJobBDService iProcessDiscoverStateJobBDService, CallCronApiService serviceApiCron, ICallRepositoryConfigService serviceApi, ICallEtlService callEDtlPublishService, ConfigUnidataPrefix unidataPrefix)
         {
+            _serviceApiCron = serviceApiCron;
             _serviceApi = serviceApi;
             _discoverItemService = iIDiscoverItemService;
             _processDiscoverStateJobBDService = iProcessDiscoverStateJobBDService;
@@ -60,7 +62,7 @@ namespace ApiCargaWebInterface.Controllers
         [HttpGet("[Controller]/{id}")]
         public IActionResult DetailsJob(string id, Guid repository_id)
         {
-            var job = _serviceApi.GetJob(id);
+            var job = _serviceApiCron.GetJob(id);
             ProcessDiscoverStateJob stateJob = _processDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(job.Id);
             if (stateJob != null)
             {
@@ -69,6 +71,7 @@ namespace ApiCargaWebInterface.Controllers
             if (!Guid.Empty.Equals(repository_id))
             {
                 job.IdRepository = repository_id;
+                job.NameRepository = _serviceApi.GetRepositoryConfig(repository_id).Name;
             }
             job.DiscoverStates = _discoverItemService.GetDiscoverItemsStatesByJob(id);
             var discoverItemsErrorMini = _discoverItemService.GetDiscoverItemsErrorByJobMini(id);
@@ -76,9 +79,9 @@ namespace ApiCargaWebInterface.Controllers
 
             try
             {
-                if(job.ExceptionDetails!=null)
-                { 
-                ExceptionDetails exceptionDetails = JsonConvert.DeserializeObject<ExceptionDetails>(job.ExceptionDetails);
+                if (job.ExceptionDetails != null)
+                {
+                    ExceptionDetails exceptionDetails = JsonConvert.DeserializeObject<ExceptionDetails>(job.ExceptionDetails);
                     if (exceptionDetails != null && !string.IsNullOrEmpty(exceptionDetails.detail))
                     {
                         job.ExceptionDetails = "Se ha producido un error:<br>";
@@ -138,10 +141,10 @@ namespace ApiCargaWebInterface.Controllers
         [HttpGet("[Controller]/recurring/{name}")]
         public IActionResult DetailsRecurringJob(string name)
         {
-            var recurringJob = _serviceApi.GetRecurringJob(name);
+            var recurringJob = _serviceApiCron.GetRecurringJob(name);
             RecurringJobWebViewModel recurringJobViewModel = new RecurringJobWebViewModel();
             recurringJobViewModel.RecurringJobViewModel = recurringJob;
-            recurringJobViewModel.ListJobs = _serviceApi.GetJobsOfRecurringJob(name);
+            recurringJobViewModel.ListJobs = _serviceApiCron.GetJobsOfRecurringJob(name);
             return View(recurringJobViewModel);
         }
 
@@ -199,7 +202,7 @@ namespace ApiCargaWebInterface.Controllers
             {
                 if (jobModel.Nombre_job != null)
                 {
-                    _serviceApi.CreateRecurringJob(jobModel);
+                    _serviceApiCron.CreateRecurringJob(jobModel);
                     return RedirectToAction("Details", "RepositoryConfig", new { id = jobModel.IdRepository });
                 }
                 else
@@ -220,11 +223,11 @@ namespace ApiCargaWebInterface.Controllers
         {
             if (job.Equals("scheduled"))
             {
-                _serviceApi.DeleteScheduledJob(id);
+                _serviceApiCron.DeleteScheduledJob(id);
             }
             else if (job.Equals("recurring"))
             {
-                _serviceApi.DeleteRecurringJob(id);
+                _serviceApiCron.DeleteRecurringJob(id);
             }
             return View("Deleted", id);
         }
@@ -237,7 +240,7 @@ namespace ApiCargaWebInterface.Controllers
         public IActionResult Syncro(Guid repositoryId)
         {
             CreateJobViewModel jobModel = new CreateJobViewModel() { IdRepository = repositoryId };
-            string id = _serviceApi.CreateJob(jobModel);
+            string id = _serviceApiCron.CreateJob(jobModel);
             JobCreated item = new JobCreated()
             {
                 Id = id,
@@ -253,8 +256,8 @@ namespace ApiCargaWebInterface.Controllers
         /// <returns></returns>
         public IActionResult ReQueue(string idJob)
         {
-            _serviceApi.ReQueueJob(idJob);
-            var job = _serviceApi.GetJob(idJob);
+            _serviceApiCron.ReQueueJob(idJob);
+            var job = _serviceApiCron.GetJob(idJob);
             return View("DetailsJob", job);
         }
         /// <summary>

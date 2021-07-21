@@ -10,7 +10,7 @@
         <div class="wrapCol">
             <div class="header-resource">
                 <div class="h1-container">
-                    <h1>@Model.Name</h1>
+                    <h1>Administración > <a href="@Url.Action("Index","ShapeConfig")">Shapes y Validación</a> > @Model.Name</h1>                    
                     <div class="botones">
                         <ul>
                             <li>
@@ -19,7 +19,7 @@
                             <li>
                                 <a href="@Url.Action("Delete", "ShapeConfig", new {  id=Model.ShapeConfigID  })" class="btn btn-eliminar">Eliminar</a>
                             </li>
-                        </ul>   
+                        </ul>
                     </div>
                 </div>
             </div>
