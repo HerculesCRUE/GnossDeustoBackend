@@ -46,7 +46,7 @@ namespace API_CARGA.Controllers
             _callOAIPMH = callOAIPMH;
             _amqpService = amqpService;
         }
-               
+
         /// <summary>
         /// Ejecuta el penúltimo paso del proceso de carga, por el que el RDF generado se encola en una cola de Rabbit MQ para que posteriormente el servicio de descubimiento lo procese y lo almacene en el Triple Store. Permite cargar una fuente RDF arbitraria.
         /// Aquí se encuentra un RDF de Ejemplo: https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/API_CARGA/API_CARGA/Samples/rdfSample.xml
@@ -79,7 +79,7 @@ namespace API_CARGA.Controllers
                     discoverItem.Status = "Pending";
                     discoverItem.DiscoverRdf = rdf.InnerXml;
 
-                    _amqpService.PublishMessage(idDiscoverItem,((RabbitMQService)_amqpService).queueName);
+                    _amqpService.PublishMessage(idDiscoverItem, ((RabbitMQService)_amqpService).queueName);
                     return Ok();
                 }
                 else
@@ -91,6 +91,28 @@ namespace API_CARGA.Controllers
                     return Ok();
                 }
 
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Agrega a la cola de Rabbit MQ la URL de la entidad para que posteriormente el servicio de descubimiento lo procese y lo elimine del Triple Store.
+        /// </summary>
+        /// <param name="pEntityUrl"></param>
+        /// <returns></returns>
+        [HttpPost("data-delete")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ExcludeFromCodeCoverage] // No se puede ejecuar el test desde gitHub
+        public IActionResult dataDelete(string pEntityUrl)
+        {
+            try
+            {
+                _amqpService.PublishMessage(pEntityUrl, ((RabbitMQService)_amqpService).queueNameDelete);
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -166,7 +188,7 @@ namespace API_CARGA.Controllers
                 ontologyGraph = _configSparql.GetGraphRoh();
                 RohGraph graph = new RohGraph();
                 graph.LoadFromString(OntologyService.GetOntology());
-                SparqlUtility.LoadOntology((RabbitMQService)_amqpService,graph, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), ontologyGraph, _configSparql.GetUsername(), _configSparql.GetPassword());
+                SparqlUtility.LoadOntology((RabbitMQService)_amqpService, graph, _configSparql.GetEndpoint(), _configSparql.GetQueryParam(), ontologyGraph, _configSparql.GetUsername(), _configSparql.GetPassword());
                 return Ok();
             }
             catch (Exception ex)
@@ -174,7 +196,7 @@ namespace API_CARGA.Controllers
                 return Problem(ex.ToString());
             }
 
-        }   
+        }
 
         /// <summary>
         /// Aplica el descubrimiento sobre un RDF
@@ -192,7 +214,7 @@ namespace API_CARGA.Controllers
                 XmlDocument rdf = SparqlUtility.GetRDFFromFile(rdfFile);
                 DiscoverItem discoverItem = new DiscoverItem() { Rdf = rdf.InnerXml, Publish = false, DissambiguationProcessed = false, Status = "Pending" };
                 Guid addedID = _discoverItemService.AddDiscoverItem(discoverItem);
-                _amqpService.PublishMessage(addedID,((RabbitMQService)_amqpService).queueName);
+                _amqpService.PublishMessage(addedID, ((RabbitMQService)_amqpService).queueName);
                 return Ok(addedID);
             }
             catch (Exception ex)
@@ -200,7 +222,7 @@ namespace API_CARGA.Controllers
                 return Problem(ex.ToString());
             }
         }
-               
+
         /// <summary>
         /// Obtiene el estado de una tarea de descubrimiento
         /// </summary>
@@ -256,7 +278,7 @@ namespace API_CARGA.Controllers
                 return Problem(ex.ToString());
             }
         }
-        
+
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recupera un registro de metadatos individual del repositorio en formato XML OAI-PMH.        
@@ -277,7 +299,7 @@ namespace API_CARGA.Controllers
             byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
-       
+
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Obtiene la información del repositorio OAI-PMH configurado en formato XML OAI-PMH.
@@ -296,7 +318,7 @@ namespace API_CARGA.Controllers
             byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
-        
+
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Es una forma abreviada de ListRecords, que recupera solo encabezados en formato XML OAI-PMH en lugar de registros.        
@@ -340,7 +362,7 @@ namespace API_CARGA.Controllers
             byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
-        
+
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recupera los formatos de metadatos disponibles del repositorio en formato XML OAI-PMH.        
@@ -364,7 +386,7 @@ namespace API_CARGA.Controllers
             byte[] array = _callOAIPMH.GetUri(uri);
             return File(array, "application/xml");
         }
-       
+
         /// <summary>
         /// Este método hace de PROXY entre el API y el proveedor OAI-PMH.
         /// Recupera registros del repositorio en formato XML OAI-PMH.        
@@ -468,7 +490,7 @@ namespace API_CARGA.Controllers
         /// <param name="hashAlgorithm"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-         [NonAction]
+        [NonAction]
         public string GetHash(HashAlgorithm hashAlgorithm, string input)
         {
 

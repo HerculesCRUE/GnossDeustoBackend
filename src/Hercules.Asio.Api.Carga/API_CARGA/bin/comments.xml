@@ -19,6 +19,13 @@
             <param name="discoverProcessed">Indica si ya está procesado el descubrimiento</param>
             <returns></returns>
         </member>
+        <member name="M:API_CARGA.Controllers.etlController.dataDelete(System.String)">
+            <summary>
+            Agrega a la cola de Rabbit MQ la URL de la entidad para que posteriormente el servicio de descubimiento lo procese y lo elimine del Triple Store.
+            </summary>
+            <param name="pEntityUrl"></param>
+            <returns></returns>
+        </member>
         <member name="M:API_CARGA.Controllers.etlController.dataValidate(Microsoft.AspNetCore.Http.IFormFile,System.Guid)">
             <summary>
             Valida un RDF mediante el shape SHACL configurado

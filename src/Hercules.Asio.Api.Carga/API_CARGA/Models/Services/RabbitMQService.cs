@@ -30,6 +30,7 @@ namespace API_CARGA.Models.Services
         private readonly ConnectionFactory connectionFactory;
         public string queueName { get; set; }
         public string queueNameVirtuoso { get; set; }
+        public string queueNameDelete { get; set; }
 
         private IConfiguration _configuration { get; set; }
 
@@ -59,6 +60,15 @@ namespace API_CARGA.Models.Services
             else
             {
                 queueNameVirtuoso = _configuration["RabbitQueueNameVirtuoso"];
+            }
+
+            if (environmentVariables.Contains("RabbitQueueNameDelete"))
+            {
+                queueNameDelete = environmentVariables["RabbitQueueNameDelete"] as string;
+            }
+            else
+            {
+                queueNameDelete = _configuration["RabbitQueueNameDelete"];
             }
 
             amqpInfo = ampOptionsSnapshot.Value;
