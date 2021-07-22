@@ -85,5 +85,7 @@ namespace ApiCargaWebInterface.Models.Services
         /// <param name="until"></param>
         /// <returns></returns>
         public string CallGetListIdentifiers(Guid identifierRepo, string metadataPrefix, string set, string from, string until);
+
+        public string CallRemover(string pEntity);
     }
 }

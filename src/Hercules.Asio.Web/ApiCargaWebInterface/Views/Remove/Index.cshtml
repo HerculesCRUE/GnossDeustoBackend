@@ -1,0 +1,44 @@
+﻿@model Hercules.Asio.Web.ViewModels.RemoveViewModel;
+
+@{
+    string action = "Remove";
+    
+    ViewData["Title"] = "Borrar Entidad";
+    ViewData["BodyClass"] = "formulario";
+}
+    <div class="row">
+        <div class="col col-12 col-lg-12 col-contenido">
+            <div class="wrapCol">
+                <form asp-action="@action">
+                    <div class="fieldset fieldset01">
+                        <fieldset class="mediumLabels">
+                            <h1>Borrar Entidad</h1>
+                            <div class="fieldsetContent">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>                                
+                                <div class="form-group">
+                                    @if (!string.IsNullOrEmpty(Model.resultado) && Model.resultado.Contains("ERROR"))
+                                    {
+                                        <p class="list-group-item-danger">@Model.resultado</p>
+                                    }
+                                    else if (!string.IsNullOrEmpty(Model.resultado))
+                                    {
+                                        <p class="list-group-item-success">@Model.resultado</p>
+                                    }
+                                    <label for="pEntity" class="control-label">Entidad</label>
+                                    <input id="pEntity" name="pEntity" for="until" class="form-control" />
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="fieldset actionButtons fieldset03">
+                        <fieldset>
+                            <p>
+                                <input class="submit principal" type="submit" value="Borrar">
+                            </p>
+                        </fieldset>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>

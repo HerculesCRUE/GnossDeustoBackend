@@ -212,5 +212,11 @@ namespace ApiCargaWebInterface.Models.Services
                 }
             }
         }
+
+        public string CallRemover(string pEntity)
+        {
+            string result = _serviceApi.CallPostApi(_serviceUrl.GetUrl(), $"etl/data-delete?pEntityUrl={pEntity}", null, _token);
+            return result;
+        }
     }
 }
