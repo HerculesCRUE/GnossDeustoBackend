@@ -41,11 +41,15 @@ namespace API_DISCOVER.Models.Services
 
         private readonly RabbitMQInfo amqpInfo;
         private readonly ConnectionFactory connectionFactory;
-        private string queueName;
+        public string queueName;
         /// <summary>
         /// queueNameVirtuoso
         /// </summary>
         public string queueNameVirtuoso { get; set; }
+        /// <summary>
+        /// queueNameVirtuoso
+        /// </summary>
+        public string queueNameDelete { get; set; }
 
         /// <summary>
         /// Constructor de la clase que configura los datos necesarios para conectarse con rabbit
@@ -77,6 +81,15 @@ namespace API_DISCOVER.Models.Services
                 queueNameVirtuoso = Configuration["RabbitQueueNameVirtuoso"];
             }
 
+            if (environmentVariables.Contains("RabbitQueueNameDelete"))
+            {
+                queueNameDelete = environmentVariables["RabbitQueueNameDelete"] as string;
+            }
+            else
+            {
+                queueNameDelete = Configuration["RabbitQueueNameDelete"];
+            }
+
             amqpInfo = ampOptionsSnapshot.Value;
 
             connectionFactory = new ConnectionFactory
@@ -96,12 +109,12 @@ namespace API_DISCOVER.Models.Services
         /// </summary>
         /// <param name="receivedFunction"></param>
         /// <param name="shutdownFunction"></param>
-        public void ListenToQueue(ReceivedDelegate receivedFunction, ShutDownDelegate shutdownFunction)
+        public void ListenToQueue(ReceivedDelegate receivedFunction, ShutDownDelegate shutdownFunction,string queue)
         {
             IModel channel = connection.CreateModel();
             channel.BasicQos(0, 1, false);
 
-            channel.QueueDeclare(queue: queueName,
+            channel.QueueDeclare(queue: queue,
                                  durable: false,
                                  exclusive: false,
                                  autoDelete: false,
@@ -137,7 +150,7 @@ namespace API_DISCOVER.Models.Services
                 shutdownFunction();
             };
 
-            channel.BasicConsume(queueName, false, eventingBasicConsumer);
+            channel.BasicConsume(queue, false, eventingBasicConsumer);
         }
 
         /// <summary>

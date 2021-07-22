@@ -115,6 +115,44 @@ namespace API_DISCOVER
         }
 
         /// <summary>
+        /// Procesa un item de descubrimiento
+        /// </summary>
+        /// <param name="itemIDstring">Identificador del item</param>
+        /// <returns></returns>
+        public bool ProcessDeletedItem(string UriEntity)
+        {
+            try
+            {
+                UriEntity = JsonConvert.DeserializeObject<string>(UriEntity);
+                #region Cargamos configuraciones
+                ConfigSparql ConfigSparql = new ConfigSparql();
+                string SGI_SPARQLEndpoint = ConfigSparql.GetEndpoint();
+                string SGI_SPARQLGraph = ConfigSparql.GetGraph();
+                string SGI_SPARQLQueryParam = ConfigSparql.GetQueryParam();
+                string SGI_SPARQLUsername = ConfigSparql.GetUsername();
+                string SGI_SPARQLPassword = ConfigSparql.GetPassword();
+                #endregion
+
+                //Publicamos en el SGI
+                AsioPublication asioPublication = new AsioPublication(SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword, _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<RabbitMQService>());
+                
+                //1º Borramos la propia entidad
+                asioPublication.DeleteEntity(UriEntity);
+
+                //2º Borrar los triples que apuntan a la entidad
+                asioPublication.DeleteRelationToEntity(UriEntity);
+
+                //3º TODO Borrar de los datos en memoria los datos relativos a la entidad
+            }
+            catch (Exception ex)
+            {
+                Logging.Error(ex);
+            }
+            return true;
+
+        }
+
+        /// <summary>
         /// Realiza el proceso completo de desubrimiento sobre un RDF
         /// </summary>
         /// <param name="pDiscoverItem">Item de descubrimiento</param>

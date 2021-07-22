@@ -24,6 +24,7 @@ namespace API_DISCOVER
         private readonly IServiceScopeFactory _serviceScopeFactory;
         private Timer _timer;
         private bool _processRabbitReady = false;
+        private bool _processRabbitDeleteReady = false;
         private bool _processDiscoverLoadedEntities = false;
         private bool _processRemoveBlankNodes = false;
 
@@ -46,8 +47,16 @@ namespace API_DISCOVER
                         var scope = _serviceScopeFactory.CreateScope();
                         RabbitMQService rabbitMQService = scope.ServiceProvider.GetRequiredService<RabbitMQService>();
                         Discover descubrimiento = new Discover(_serviceScopeFactory);
-                        rabbitMQService.ListenToQueue(new RabbitMQService.ReceivedDelegate(descubrimiento.ProcessItem), new RabbitMQService.ShutDownDelegate(OnShutDown));
+                        rabbitMQService.ListenToQueue(new RabbitMQService.ReceivedDelegate(descubrimiento.ProcessItem), new RabbitMQService.ShutDownDelegate(OnShutDown), rabbitMQService.queueName);
                         _processRabbitReady = true;
+                    }
+                    if (!_processRabbitDeleteReady)
+                    {
+                        var scope = _serviceScopeFactory.CreateScope();
+                        RabbitMQService rabbitMQService = scope.ServiceProvider.GetRequiredService<RabbitMQService>();
+                        Discover descubrimiento = new Discover(_serviceScopeFactory);
+                        rabbitMQService.ListenToQueue(new RabbitMQService.ReceivedDelegate(descubrimiento.ProcessDeletedItem), new RabbitMQService.ShutDownDelegate(OnShutDownDelete), rabbitMQService.queueNameDelete);
+                        _processRabbitDeleteReady = true;
                     }
                     if (!_processDiscoverLoadedEntities)
                     {
@@ -145,6 +154,11 @@ namespace API_DISCOVER
         private void OnShutDown()
         {
             _processRabbitReady = false;
+        }
+
+        private void OnShutDownDelete()
+        {
+            _processRabbitDeleteReady = false;
         }
 
 

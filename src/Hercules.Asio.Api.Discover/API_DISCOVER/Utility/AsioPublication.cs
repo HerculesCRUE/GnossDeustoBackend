@@ -206,7 +206,7 @@ namespace API_DISCOVER.Utility
             {
                 foreach (string mainEntity in mainEntities)
                 {
-                    graphs.UnionWith(DeleteUpdatedEntity(mainEntity));
+                    graphs.UnionWith(DeleteEntity(mainEntity));
                 }
             }
 
@@ -374,7 +374,7 @@ namespace API_DISCOVER.Utility
         /// </summary>
         /// <param name="pEntity">Entida</param>
         /// <returns>Lista de grafos afectados</returns>
-        private HashSet<string> DeleteUpdatedEntity(string pEntity)
+        public HashSet<string> DeleteEntity(string pEntity)
         {
             //Obtenemos todos los grafos en los que está la entidad como sujeto para eliminar sus triples
             HashSet<string> listGraphs = new HashSet<string>();
@@ -395,6 +395,33 @@ namespace API_DISCOVER.Utility
             }
             return listGraphs;
         }
+        /// <summary>
+        /// Elimina las relaciones que apuntan a una entidad.
+        /// </summary>
+        /// <param name="pEntity">Entida</param>
+        /// <returns>Lista de grafos afectados</returns>
+        public HashSet<string> DeleteRelationToEntity(string pEntity)
+        {
+            //Obtenemos todos los grafos en los que está la entidad como objeto para eliminar sus triples
+            HashSet<string> listGraphs = new HashSet<string>();
+            SparqlObject sparqlObjectGraphs = _SparqlUtility.SelectData(_RabbitMQService, _SPARQLEndpoint, "", $"select distinct ?g where{{graph ?g{{?s ?p ?o. FILTER( ?o in(<>,<{pEntity}>) )}}}}", _QueryParam, _Username, _Password);
+            foreach (Dictionary<string, SparqlObject.Data> row in sparqlObjectGraphs.results.bindings)
+            {
+                listGraphs.Add(row["g"].value);
+            }
+
+            foreach (string graph in listGraphs)
+            {
+                string queryDeleteS = $@"DELETE {{ ?s ?p <{pEntity}>. }}
+                                    WHERE 
+                                    {{
+                                        ?s ?p <{pEntity}>. 
+                                    }}";
+                _SparqlUtility.SelectData(_RabbitMQService, _SPARQLEndpoint, graph, queryDeleteS, _QueryParam, _Username, _Password);
+            }
+            return listGraphs;
+        }
+
 
         /// <summary>
         /// Limpiamos los blanknodes huerfanos, o que no tengan triples (sólo rdftype)
