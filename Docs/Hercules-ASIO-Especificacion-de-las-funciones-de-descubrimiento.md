@@ -1,13 +1,13 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
-| Fecha         | 14/4/2021                                                   |
+| Fecha         | 22/7/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Hércules ASIO. Especificación de las funciones de descubrimiento| 
 |Descripción|Especificación de las funciones de descubrimiento|
-|Versión|1.0|
+|Versión|1.2|
 |Módulo|API DISCOVER|
 |Tipo|Especificación|
-|Cambios de la Versión|Añadida justificación del método elegido|
+|Cambios de la Versión|Añadida información sobre métricas de uso de los sistemas|
 
 # Hércules Backend ASIO. Especificación de las funciones de descubrimiento
 
