@@ -14,6 +14,7 @@ namespace Linked_Data_Server.Models.Entities
         }
         public List<string> urisRdf { get; set; }
         public string uriEntity { get; set; }
+        public bool bnode { get; set; }
 
         public Dictionary<string, List<string>> stringPropertiesEntity { get; set; }
         public List<ProvenanceData> provenanceData { get; set; }

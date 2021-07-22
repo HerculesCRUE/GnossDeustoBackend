@@ -224,7 +224,7 @@ namespace Linked_Data_Server.Controllers
 
                     //Preparamos el modelo de la entidad principal
                     List<LinkedDataRdfViewModel> modelEntities = new List<LinkedDataRdfViewModel>();
-                    LinkedDataRdfViewModel entidad = createLinkedDataRdfViewModel(url, dataGraph, sparqlObjectDictionaryGraphs, new List<string>(), allEntities, communNamePropierties, entitiesNames);
+                    LinkedDataRdfViewModel entidad = createLinkedDataRdfViewModel(url,false, dataGraph, sparqlObjectDictionaryGraphs, new List<string>(), allEntities, communNamePropierties, entitiesNames);
                     modelEntities.Add(entidad);
                     KeyValuePair<string, List<string>> titulo = entidad.stringPropertiesEntity.FirstOrDefault(x => mLinked_Data_Server_Config.PropsTitle.Contains(x.Key));
                     ViewData["Title"] = "About: " + url;
@@ -237,7 +237,7 @@ namespace Linked_Data_Server.Controllers
                     //Preparamos el modelo del resto de entidades
                     foreach (string entity in inverseEntities)
                     {
-                        LinkedDataRdfViewModel entidadInversa = createLinkedDataRdfViewModel(entity, dataGraph, null, new List<string>(), allEntities, communNamePropierties, entitiesNames);
+                        LinkedDataRdfViewModel entidadInversa = createLinkedDataRdfViewModel(entity,false, dataGraph, null, new List<string>(), allEntities, communNamePropierties, entitiesNames);
                         modelEntities.Add(entidadInversa);
                     }
 
@@ -623,6 +623,7 @@ namespace Linked_Data_Server.Controllers
         /// Crea un modelo DiscoverRdfViewModel
         /// </summary>
         /// <param name="idEntity">Identificador de la entidad de la que crear el modelo</param>
+        /// <param name="bnode">Indica si se trata de un banknode</param>
         /// <param name="dataGraph">Grafo que contiene los datos</param>
         /// <param name="pSparqlObjectDictionaryGraphs">Objeto con los datos de otros grafos</param>
         /// <param name="parents">Lista de ancestros de la entidad</param>
@@ -630,12 +631,13 @@ namespace Linked_Data_Server.Controllers
         /// <param name="communNameProperties">Diccionario con los nombres de las propiedades</param>
         /// <param name="entitiesNames">Nombres de las entiadades a las que se apunta</param>
         /// <returns></returns>
-        public LinkedDataRdfViewModel createLinkedDataRdfViewModel(string idEntity, RohGraph dataGraph, Dictionary<string, List<Dictionary<string, SparqlObject.Data>>> pSparqlObjectDictionaryGraphs, List<string> parents, List<string> allEntities, Dictionary<string, string> communNameProperties, Dictionary<string, string> entitiesNames)
+        public LinkedDataRdfViewModel createLinkedDataRdfViewModel(string idEntity,bool bnode, RohGraph dataGraph, Dictionary<string, List<Dictionary<string, SparqlObject.Data>>> pSparqlObjectDictionaryGraphs, List<string> parents, List<string> allEntities, Dictionary<string, string> communNameProperties, Dictionary<string, string> entitiesNames)
         {
             //Obtenemos todos los triples de la entidad
             SparqlResultSet sparqlResultSet = (SparqlResultSet)dataGraph.ExecuteQuery("select ?p ?o where { <" + idEntity + "> ?p ?o }");
             LinkedDataRdfViewModel entidad = new LinkedDataRdfViewModel();
             entidad.uriEntity = idEntity;
+            entidad.bnode = bnode;
             entidad.urisRdf = allEntities;
             entidad.communNamePropierties = communNameProperties;
             entidad.entitiesNames = entitiesNames;
@@ -651,7 +653,7 @@ namespace Linked_Data_Server.Controllers
                         entitiesPropertiesEntityAux.Add(sparqlResult["p"].ToString(), new List<LinkedDataRdfViewModel>());
                     }
                     parents.Add(idEntity);
-                    entitiesPropertiesEntityAux[sparqlResult["p"].ToString()].Add(createLinkedDataRdfViewModel(sparqlResult["o"].ToString(), dataGraph, null, parents, allEntities, communNameProperties, entitiesNames));
+                    entitiesPropertiesEntityAux[sparqlResult["p"].ToString()].Add(createLinkedDataRdfViewModel(sparqlResult["o"].ToString(),true, dataGraph, null, parents, allEntities, communNameProperties, entitiesNames));
                 }
                 else
                 {

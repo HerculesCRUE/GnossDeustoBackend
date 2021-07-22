@@ -63,20 +63,23 @@
                 <div class="estado-tarea">
 
                     <table class="rdftable">
-                        <thead class="table-subject">
-                            <tr>
-                                <th scope="col" colspan="2">
-                                    @if (pEntityLink)
-                                    {
-                                        <span id="@pItem.uriEntity"><a href="@pItem.uriEntity">@pItem.uriEntity</a></span>
-                                    }
-                                    else
-                                    {
-                                        <span id="@pItem.uriEntity">@pItem.uriEntity</span>
-                                    }
-                                </th>
-                            </tr>
-                        </thead>
+                        @if (!pItem.bnode)
+                        {
+                            <thead class="table-subject">
+                                <tr>
+                                    <th scope="col" colspan="2">
+                                        @if (pEntityLink)
+                                        {
+                                            <span id="@pItem.uriEntity"><a href="@pItem.uriEntity">@pItem.uriEntity</a></span>
+                                        }
+                                        else
+                                        {
+                                            <span id="@pItem.uriEntity">@pItem.uriEntity</span>
+                                        }
+                                    </th>
+                                </tr>
+                            </thead>
+                        }
 
                         <tbody>
                             @foreach (var stringProperty in pItem.stringPropertiesEntity)
