@@ -35,7 +35,9 @@
 
 [4.2 Comparación con resultados obtenidos contra benchmarks](#comparación-con-resultados-obtenidos-contra-benchmarks)
 
-[4.3 Conclusiones](#conclusiones)
+[4.3 Escalabilidad del método elegido](#escalabilidad-del-método-elegido)
+
+[4.4 Conclusiones](#conclusiones)
 
 [5 Detalle de los APIs utilizados para el descubrimiento de enlaces](#detalle-de-los-apis-utilizados-para-el-descubrimiento-de-enlaces)
 
@@ -393,6 +395,17 @@ Como se puede ver, los resultados de 2020 son algo mejores, oscilando los result
 
 Como se puede observar, los resultados obtenidos mediante reglas son comparables, en este caso, a los que se obtienen contra el benchmark SPIMBENCH de referencia en OAEI.
 
+Escalabilidad del método elegido
+-----------------------
+
+Durante la ejecución del test se ha monitorizado el servidor de ejecución, con unos datos que se pueden consultar en el fichero [20210722 Hércules ASIO Carga de sistemas con CVN y descubrimiento.xlsx](./media/20210722%20Hércules%20ASIO%20Carga%20de%20sistemas%20con%20CVN%20y%20descubrimiento.xlsx)
+
+La métrica más relevante en el consumo de recursos del sistema durante el proceso de carga es el consumo de CPU. La naturaleza secuencial del proceso de carga ejecutado hace que este consumo sea bastante lineal, lo que lo convierte en un proceso previsible. En la siguiente gráfica se observa que se ha ocupado un núcleo mientras se ejecutaba el descubrimiento:
+
+![](./media/Test%20de%20descubrimiento%20Consumo%20de%20CPU.png)
+
+El proceso esperado de incorporación de datos de Hércules SGI, mediante un interfaz OAI-PMH, será también secuencial. Si bien el proceso podría paralelizarse, consideramos que, en general, no será recomendable, ya que información de valor en el el proceso de descubrimiento podría no estar disponible a tiempo por encontrarse en otro hilo de ejecución.
+
 Conclusiones
 -----------
 
@@ -400,8 +413,9 @@ Los algoritmos y aproximaciones utilizados contra SPIMBENCH, de propósito gener
 
 También cabe citar que los algoritmos utilizados contra SPIMBENCH necesitarían una arquitectura más compleja para obtener un resultado dudosamente mejor que con la solución que proponemos.
 
-La solución propuesta, basada en reglas, sería configurable para resolver otros problemas, pero está especialmente adaptada al caso que nos ocupa, lo que ofrece un resultado muy similar al que ofrecería una revisión humana. Además, los parámetros del sistema son configurables, según lo indicado anteriormente, lo que ofrecería la posibilidad de generar un funcionamiento más o menos desatendido. Por ejemplo, se podría reducir el umbral de decisión para que la reconciliación con los investigadores ya cargados en el grafo fuera más automática.
+La solución propuesta, basada en reglas, sería configurable para resolver otros problemas, pero está especialmente adaptada al caso que nos ocupa, lo que ofrece un resultado muy similar al que resultaría de una revisión humana. Además, los parámetros del sistema son configurables, según lo indicado anteriormente, lo que ofrecería la posibilidad de generar un funcionamiento más o menos desatendido. Por ejemplo, se podría reducir el umbral de decisión para que la reconciliación con los investigadores ya cargados en el grafo fuera más automática.
 
+Por último, indicar que el proceso presenta un comportamiento lineal en el consumo de recursos, lo que permite prever los recursos necesarios para la ejecución del descubrimiento.
 
     
 Detalle de los APIs utilizados para el descubrimiento de enlaces
