@@ -11,7 +11,10 @@ namespace ApiCargaWebInterface.ViewModels
         [Display(Name = "Identifier")]
         public Guid RepositoryConfigID { get; set; }
 
+        [Display(Name = "Nombre")]
         public string Name { get; set; }
+        [Display(Name = "Aplicar descubrimiento")]
+        public bool ApplyDiscover { get; set; }
 
         [Display(Name = "Oauth token")]
         public string OauthToken { get; set; }
