@@ -404,7 +404,7 @@ La métrica más relevante en el consumo de recursos del sistema durante el proc
 
 ![](./media/Test%20de%20descubrimiento%20Consumo%20de%20CPU.png)
 
-El proceso esperado de incorporación de datos de Hércules SGI, mediante un interfaz OAI-PMH, será también secuencial. Si bien el proceso podría paralelizarse, consideramos que, en general, no será recomendable, ya que información de valor en el el proceso de descubrimiento podría no estar disponible a tiempo por encontrarse en otro hilo de ejecución.
+El proceso esperado de incorporación de datos de Hércules SGI, mediante un interfaz OAI-PMH, será también secuencial. Si bien el proceso podría paralelizarse, consideramos que, en general, no será recomendable, ya que información de valor para el descubrimiento podría no estar disponible en el momento adecuado por encontrarse en otro hilo de ejecución.
 
 Conclusiones
 -----------
