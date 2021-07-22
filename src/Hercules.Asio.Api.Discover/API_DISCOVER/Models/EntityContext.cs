@@ -25,6 +25,12 @@ namespace API_DISCOVER.Models
         /// ProcessDiscoverStateJob
         /// </summary>
         public DbSet<ProcessDiscoverStateJob> ProcessDiscoverStateJob { get; set; }
+
+        public DbSet<ProcessingJobState> ProcessingJobState { get; set; }
+
+        public DbSet<RepositoryConfig> RepositoryConfig { get; set; }
+
+
         /// <summary>
         /// EntityContext
         /// </summary>

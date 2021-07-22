@@ -40,8 +40,7 @@ namespace API_DISCOVER
                     services.AddScoped(typeof(ConfigTokenService));
                     services.AddScoped(typeof(CallTokenService));
 
-                    services.AddScoped<DiscoverItemBDService, DiscoverItemBDService>();
-                    services.AddScoped<ProcessDiscoverStateJobBDService, ProcessDiscoverStateJobBDService>();
+                    services.AddScoped<DataBDService, DataBDService>();
 
                     //SQL
                     {

@@ -63,23 +63,21 @@ namespace API_DISCOVER
             Guid itemID = JsonConvert.DeserializeObject<Guid>(itemIDstring);
             try
             {
-                DiscoverItemBDService discoverItemBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>();
-                ProcessDiscoverStateJobBDService processDiscoverStateJobBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<ProcessDiscoverStateJobBDService>();
+                DataBDService dataBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DataBDService>();
                 CallCronApiService callCronApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallCronApiService>();
                 CallEtlApiService callEtlApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallEtlApiService>();
                 CallUrisFactoryApiService callUrisFactoryApiService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallUrisFactoryApiService>();
 
-                DiscoverItem discoverItem = discoverItemBDService.GetDiscoverItemById(itemID);
+                DiscoverItem discoverItem = dataBDService.GetDiscoverItemById(itemID);
 
                 if (discoverItem != null)
                 {
                     //Aplicamos el proceso de descubrimiento
-                    DiscoverResult resultado = Init(discoverItem, callEtlApiService, callUrisFactoryApiService);
+                    DiscoverResult resultado = Init(discoverItem, dataBDService, callEtlApiService, callUrisFactoryApiService);
                     Process(discoverItem, resultado,
-                        discoverItemBDService,
+                        dataBDService,
                         callCronApiService,
-                        callUrisFactoryApiService,
-                        processDiscoverStateJobBDService
+                        callUrisFactoryApiService
                         );
                 }
             }
@@ -88,25 +86,24 @@ namespace API_DISCOVER
                 Logging.Error(ex);
                 //Se ha producido un error al aplicar el descubrimiento
                 //Modificamos los datos del DiscoverItem que ha fallado
-                DiscoverItemBDService discoverItemBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DiscoverItemBDService>();
-                DiscoverItem discoverItemBBDD = discoverItemBDService.GetDiscoverItemById(itemID);
+                DataBDService dataBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<DataBDService>();
+                DiscoverItem discoverItemBBDD = dataBDService.GetDiscoverItemById(itemID);
                 discoverItemBBDD.UpdateError($"{ex.Message}\n{ex.StackTrace}\n");
-                discoverItemBDService.ModifyDiscoverItem(discoverItemBBDD);
+                dataBDService.ModifyDiscoverItem(discoverItemBBDD);
 
                 if (!string.IsNullOrEmpty(discoverItemBBDD.JobID))
                 {
-                    //Si viene de una tarea actualizamos su estado de descubrimiento
-                    ProcessDiscoverStateJobBDService processDiscoverStateJobBDService = _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<ProcessDiscoverStateJobBDService>();
-                    ProcessDiscoverStateJob processDiscoverStateJob = processDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(discoverItemBBDD.JobID);
+                    //Si viene de una tarea actualizamos su estado de descubrimiento                    
+                    ProcessDiscoverStateJob processDiscoverStateJob = dataBDService.GetProcessDiscoverStateJobByIdJob(discoverItemBBDD.JobID);
                     if (processDiscoverStateJob != null)
                     {
                         processDiscoverStateJob.State = "Error";
-                        processDiscoverStateJobBDService.ModifyProcessDiscoverStateJob(processDiscoverStateJob);
+                        dataBDService.ModifyProcessDiscoverStateJob(processDiscoverStateJob);
                     }
                     else
                     {
                         processDiscoverStateJob = new ProcessDiscoverStateJob() { State = "Error", JobId = discoverItemBBDD.JobID };
-                        processDiscoverStateJobBDService.AddProcessDiscoverStateJob(processDiscoverStateJob);
+                        dataBDService.AddProcessDiscoverStateJob(processDiscoverStateJob);
                     }
                 }
             }
@@ -115,9 +112,9 @@ namespace API_DISCOVER
         }
 
         /// <summary>
-        /// Procesa un item de descubrimiento
+        /// Procesa una entidad pendiente de eliminación
         /// </summary>
-        /// <param name="itemIDstring">Identificador del item</param>
+        /// <param name="UriEntity">Url de la entidad</param>
         /// <returns></returns>
         public bool ProcessDeletedItem(string UriEntity)
         {
@@ -156,10 +153,11 @@ namespace API_DISCOVER
         /// Realiza el proceso completo de desubrimiento sobre un RDF
         /// </summary>
         /// <param name="pDiscoverItem">Item de descubrimiento</param>
+        /// <param name="pDataBDService">Clase para gestionar las operaciones de la BBDD</param>
         /// <param name="pCallEtlApiService">Servicio para hacer llamadas a los métodos del controlador etl del API_CARGA </param>
         /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
         /// <returns>DiscoverResult con los datos del descubrimiento</returns>
-        private DiscoverResult Init(DiscoverItem pDiscoverItem, CallEtlApiService pCallEtlApiService, CallUrisFactoryApiService pCallUrisFactoryApiService)
+        private DiscoverResult Init(DiscoverItem pDiscoverItem, DataBDService pDataBDService, CallEtlApiService pCallEtlApiService, CallUrisFactoryApiService pCallUrisFactoryApiService)
         {
             #region Cargamos configuraciones
             ConfigSparql ConfigSparql = new ConfigSparql();
@@ -246,6 +244,17 @@ namespace API_DISCOVER
                 discoverUtility.LoadEntitiesWithTitle(_discoverCacheGlobal, SGI_SPARQLEndpoint, SGI_SPARQLGraph, SGI_SPARQLQueryParam, SGI_SPARQLUsername, SGI_SPARQLPassword);
             }
 
+            //Comprobamos si hay que aplicar el descubrimiento de enlaces
+            bool applyDiscover = false;
+            ProcessingJobState processingJobState = pDataBDService.GetProcessingJobStateByIdJob(pDiscoverItem.JobID);
+            if(processingJobState!=null)
+            {
+                RepositoryConfig repositoryConfig=pDataBDService.GetRepositoryConfigById(processingJobState.RepositoryId);
+                if(repositoryConfig!=null)
+                {
+                    applyDiscover = repositoryConfig.ApplyDiscover;
+                }
+            }
 
             if (!pDiscoverItem.DissambiguationProcessed)
             {
@@ -287,8 +296,11 @@ namespace API_DISCOVER
                     //3.- Realizamos la reconciliación con los datos de la BBDD
                     discoverUtility.ReconciliateBBDD(ref hasChanges, ref reconciliationData, out reconciliationEntitiesProbability, _ontologyGraph, ref dataGraph, reasoner, namesScore, discardDissambiguations, discoverCache, _discoverCacheGlobal, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword);
 
-                    //4.- Realizamos la reconciliación con los datos de las integraciones externas
-                    discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref reconciliationEntitiesProbability, ref dataGraph, reasoner, namesScore,/*entitiesWithTitle,*/ _ontologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache,_discoverCacheGlobal, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword,pCallUrisFactoryApiService);
+                    if (applyDiscover)
+                    {
+                        //4.- Realizamos la reconciliación con los datos de las integraciones externas
+                        discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref reconciliationEntitiesProbability, ref dataGraph, reasoner, namesScore,/*entitiesWithTitle,*/ _ontologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache, _discoverCacheGlobal, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword, pCallUrisFactoryApiService);
+                    }
 
                     //Eliminamos de las probabilidades aquellos que ya estén reconciliados
                     foreach (string key in reconciliationData.reconciliatedEntityList.Keys)
@@ -315,12 +327,11 @@ namespace API_DISCOVER
         /// </summary>
         /// <param name="pDiscoverItem">Objeto con los datos de com procesar el proeso de descubrimiento</param>
         /// <param name="pDiscoverResult">Resultado de la aplicación del descubrimiento</param>
-        /// <param name="pDiscoverItemBDService">Clase para gestionar las operaciones de las tareas de descubrimiento</param>
+        /// <param name="pDataBDService">Clase para gestionar las operaciones de la BBDD</param>
         /// <param name="pCallCronApiService">Servicio para hacer llamadas a los métodos del apiCron</param>
         /// <param name="pCallUrisFactoryApiService">Servicio para hacer llamadas a los métodos del Uris Factory</param>
-        /// <param name="pProcessDiscoverStateJobBDService">Clase para gestionar los estados de descubrimiento de las tareas</param>
         /// <returns></returns>
-        public void Process(DiscoverItem pDiscoverItem, DiscoverResult pDiscoverResult, DiscoverItemBDService pDiscoverItemBDService, CallCronApiService pCallCronApiService, CallUrisFactoryApiService pCallUrisFactoryApiService, ProcessDiscoverStateJobBDService pProcessDiscoverStateJobBDService)
+        public void Process(DiscoverItem pDiscoverItem, DiscoverResult pDiscoverResult, DataBDService pDataBDService, CallCronApiService pCallCronApiService, CallUrisFactoryApiService pCallUrisFactoryApiService)
         {
             #region Cargamos configuraciones
             ConfigSparql ConfigSparql = new ConfigSparql();
@@ -359,7 +370,7 @@ namespace API_DISCOVER
                         pDiscoverResult.discoveredEntitiesProbability,
                         pDiscoverResult.reconciliationData.reconciliatedEntitiesWithBBDD.Values.Select(x => x.uri).Union(pDiscoverResult.reconciliationData.reconciliatedEntitiesWithIds.Values).Union(pDiscoverResult.reconciliationData.reconciliatedEntitiesWithSubject).Union(pDiscoverResult.reconciliationData.reconciliatedEntitiesWithExternalIntegration.Values.Select(x => x.uri)).ToList(),
                         pDiscoverResult.GetDataGraphRDF());
-                    pDiscoverItemBDService.ModifyDiscoverItem(pDiscoverItem);
+                    pDataBDService.ModifyDiscoverItem(pDiscoverItem);
                 }
                 else
                 {
@@ -437,7 +448,7 @@ namespace API_DISCOVER
 
                     //Lo marcamos como procesado en la BBDD y eliminamos sus metadatos
                     pDiscoverItem.UpdateProcessed();
-                    pDiscoverItemBDService.ModifyDiscoverItem(pDiscoverItem);
+                    pDataBDService.ModifyDiscoverItem(pDiscoverItem);
                 }
 
                 //Actualizamos el estado de descubrimiento de la tarea si el estado encolado esta en estado Succeeded o Failed (ha finalizado)
@@ -445,14 +456,14 @@ namespace API_DISCOVER
                 string statusQueueJob = pCallCronApiService.GetJob(pDiscoverItem.JobID).State;
                 if ((statusQueueJob == "Failed" || statusQueueJob == "Succeeded"))
                 {
-                    ProcessDiscoverStateJob processDiscoverStateJob = pProcessDiscoverStateJobBDService.GetProcessDiscoverStateJobByIdJob(pDiscoverItem.JobID);
+                    ProcessDiscoverStateJob processDiscoverStateJob = pDataBDService.GetProcessDiscoverStateJobByIdJob(pDiscoverItem.JobID);
                     string state;
                     //Actualizamos a error si existen items en estado error o con problemas de desambiguación 
-                    if (pDiscoverItemBDService.ExistsDiscoverItemsErrorOrDissambiguatinProblems(pDiscoverItem.JobID))
+                    if (pDataBDService.ExistsDiscoverItemsErrorOrDissambiguatinProblems(pDiscoverItem.JobID))
                     {
                         state = "Error";
                     }
-                    else if (pDiscoverItemBDService.ExistsDiscoverItemsPending(pDiscoverItem.JobID))
+                    else if (pDataBDService.ExistsDiscoverItemsPending(pDiscoverItem.JobID))
                     {
                         //Actualizamos a 'Pending' si aún existen items pendientes
                         state = "Pending";
@@ -465,19 +476,19 @@ namespace API_DISCOVER
                     if (processDiscoverStateJob != null)
                     {
                         processDiscoverStateJob.State = state;
-                        pProcessDiscoverStateJobBDService.ModifyProcessDiscoverStateJob(processDiscoverStateJob);
+                        pDataBDService.ModifyProcessDiscoverStateJob(processDiscoverStateJob);
                     }
                     else
                     {
                         processDiscoverStateJob = new ProcessDiscoverStateJob() { State = state, JobId = pDiscoverItem.JobID };
-                        pProcessDiscoverStateJobBDService.AddProcessDiscoverStateJob(processDiscoverStateJob);
+                        pDataBDService.AddProcessDiscoverStateJob(processDiscoverStateJob);
                     }
                 }
             }
             else
             {
                 //Actualizamos en BBDD
-                DiscoverItem discoverItemBD = pDiscoverItemBDService.GetDiscoverItemById(pDiscoverItem.ID);
+                DiscoverItem discoverItemBD = pDataBDService.GetDiscoverItemById(pDiscoverItem.ID);
 
                 //Reporte de descubrimiento
                 string discoverReport = "Time processed (seconds): " + pDiscoverResult.secondsProcessed + "\n";
@@ -531,7 +542,7 @@ namespace API_DISCOVER
                     }
                 }
                 discoverItemBD.UpdateReport(pDiscoverResult.discoveredEntitiesProbability, pDiscoverResult.GetDataGraphRDF(), discoverReport);
-                pDiscoverItemBDService.ModifyDiscoverItem(discoverItemBD);
+                pDataBDService.ModifyDiscoverItem(discoverItemBD);
             }
         }
 

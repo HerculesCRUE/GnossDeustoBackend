@@ -12,23 +12,20 @@ using System.Reflection;
 
 namespace API_DISCOVER.Models.Services
 {
-    ///<summary>
-    ///Clase para gestionar las operaciones de las tareas de descubrimiento
-    ///</summary>
     [ExcludeFromCodeCoverage]
-    public class DiscoverItemBDService
+    public class DataBDService
     {
         private readonly EntityContext _context;
         /// <summary>
-        /// DiscoverItemBDService
+        /// DataBDService
         /// </summary>
         /// <param name="context"></param>
-        public DiscoverItemBDService(EntityContext context)
+        public DataBDService(EntityContext context)
         {
             _context = context;
         }
 
-
+        #region DiscoverItem
         ///<summary>
         /// Obtiene un item de descubrimiento
         ///</summary>
@@ -119,42 +116,83 @@ namespace API_DISCOVER.Models.Services
             return modified;
         }
 
+        #endregion
+
+        #region ProcessDiscoverStateJob
         ///<summary>
-        ///Elimina un discoverItem
+        ///Obtiene un estado de descubrimiento de una tarea a través de su identificador
         ///</summary>
-        ///<param name="identifier">Identificador del item</param>
-        public bool RemoveDiscoverItem(Guid identifier)
+        ///<param name="id">Identificador del estado de descubrimiento de la tarea</param>
+        public ProcessDiscoverStateJob GetProcessDiscoverStateJobById(Guid id)
         {
-            try
-            {
-                DiscoverItem discoverItem = GetDiscoverItemById(identifier);
-                if (discoverItem != null)
-                {
-                    if (discoverItem.DissambiguationProblems != null)
-                    {
-                        foreach (var dissambiguationProblem in discoverItem.DissambiguationProblems)
-                        {
-                            _context.Entry(dissambiguationProblem).State = EntityState.Deleted;
-
-                            if (dissambiguationProblem.DissambiguationCandiates != null)
-                            {
-                                foreach (var dissambiguationCandidate in dissambiguationProblem.DissambiguationCandiates)
-                                {
-                                    _context.Entry(dissambiguationCandidate).State = EntityState.Deleted;
-                                }
-                            }
-                        }
-                    }
-
-                    _context.Entry(discoverItem).State = EntityState.Deleted;
-                    _context.SaveChanges();
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            return _context.ProcessDiscoverStateJob.FirstOrDefault(item => item.Id.Equals(id));
         }
+
+        ///<summary>
+        ///Obtiene un estado de descubrimiento de una tarea a través de su idJob
+        ///</summary>
+        ///<param name="id">Identificador del Job del estado de descubrimiento de la tarea</param>
+        public ProcessDiscoverStateJob GetProcessDiscoverStateJobByIdJob(string idJob)
+        {
+            return _context.ProcessDiscoverStateJob.FirstOrDefault(item => item.JobId.Equals(idJob));
+        }
+
+        ///<summary>
+        ///Añade un estado de descubrimiento de una tarea
+        ///</summary>
+        ///<param name="processDiscoverStateJob">Estado de descubrimiento de una tarea</param>
+        public Guid AddProcessDiscoverStateJob(ProcessDiscoverStateJob processDiscoverStateJob)
+        {
+            if (processDiscoverStateJob.Id == Guid.Empty)
+            {
+                processDiscoverStateJob.Id = Guid.NewGuid();
+            }
+            _context.ProcessDiscoverStateJob.Add(processDiscoverStateJob);
+            _context.SaveChanges();
+            return processDiscoverStateJob.Id;
+        }
+
+        ///<summary>
+        ///Modifica un estado de descubrimiento de una tarea
+        ///</summary>
+        ///<param name="processDiscoverStateJob">Estado de descubrimiento de una tarea</param>
+        public bool ModifyProcessDiscoverStateJob(ProcessDiscoverStateJob processDiscoverStateJob)
+        {
+            bool modified = false;
+            ProcessDiscoverStateJob processDiscoverStateJobOriginal = GetProcessDiscoverStateJobById(processDiscoverStateJob.Id);
+            if (processDiscoverStateJobOriginal != null)
+            {
+                processDiscoverStateJobOriginal.JobId = processDiscoverStateJob.JobId;
+                processDiscoverStateJobOriginal.State = processDiscoverStateJob.State;
+                _context.SaveChanges();
+                modified = true;
+            }
+            return modified;
+        }
+
+        #endregion
+
+        #region ProcessingJobState
+        ///<summary>
+        ///Obtiene un ProcessDiscoverStateJob a través de su idJob
+        ///</summary>
+        ///<param name="idJob">Identificador del Job del estado de descubrimiento de la tarea</param>
+        public ProcessingJobState GetProcessingJobStateByIdJob(string idJob)
+        {
+            return _context.ProcessingJobState.FirstOrDefault(item => item.JobId.Equals(idJob));
+        }
+        #endregion
+
+        #region RepositoryConfig
+        ///<summary>
+        ///Obtiene un repositorio
+        ///</summary>
+        ///<param name="id">Identificador del repositorio</param>
+        public RepositoryConfig GetRepositoryConfigById(Guid id)
+        {
+            return _context.RepositoryConfig.FirstOrDefault(repository => repository.RepositoryConfigID.Equals(id));
+        }
+        #endregion
+
     }
 }

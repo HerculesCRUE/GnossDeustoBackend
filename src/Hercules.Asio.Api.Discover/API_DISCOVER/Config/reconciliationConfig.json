@@ -58,6 +58,15 @@
         "scoreNegative": null
       },
       {
+        "property": "http://purl.org/roh#correspondingAuthor",
+        "mandatory": false,
+        "inverse": true,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": null
+      },
+      {
         "property": "http://purl.org/roh/mirror/bibo#authorList@@@?",
         "mandatory": false,
         "inverse": true,
@@ -238,6 +247,15 @@
         "scoreNegative": 0.05
       },
       {
+        "property": "http://purl.org/roh#correspondingAuthorOf",
+        "mandatory": false,
+        "inverse": true,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.05
+      },
+      {
         "property": "http://purl.org/roh/mirror/bibo#authorList@@@?",
         "mandatory": false,
         "inverse": false,
@@ -308,6 +326,15 @@
         "maxNumWordsTitle": null,
         "scorePositive": 0.5,
         "scoreNegative": 0.05
+      },
+      {
+        "property": "http://purl.org/roh/mirror/vivo#dateTimeValue@@@http://purl.org/roh/mirror/vivo#dateTime",
+        "mandatory": false,
+        "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.9,
+        "scoreNegative": 0.5
       }
     ]
   },
@@ -355,6 +382,15 @@
         "property": "http://purl.org/roh/mirror/bibo#presents",
         "mandatory": false,
         "inverse": false,
+        "type": 0,
+        "maxNumWordsTitle": null,
+        "scorePositive": 0.5,
+        "scoreNegative": 0.05
+      },
+      {
+        "property": "http://purl.org/roh/mirror/bibo#presentedAt",
+        "mandatory": false,
+        "inverse": true,
         "type": 0,
         "maxNumWordsTitle": null,
         "scorePositive": 0.5,
