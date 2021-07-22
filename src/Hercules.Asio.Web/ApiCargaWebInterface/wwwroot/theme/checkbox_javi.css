@@ -28,11 +28,12 @@ input[type="checkbox"] {
     display: none;
 }
 
-input[type="checkbox"] + label {
-    font-weight: bold;
-    line-height: 3em;
-    color: #ccc;
-}
+    input[type="checkbox"] + label {
+        font-weight: bold;
+        line-height: 3em;
+        color: #ccc;
+        line-height: 40px!important;
+    }
 
 input[type="checkbox"]:checked + label {
     color: #0fbf12;
