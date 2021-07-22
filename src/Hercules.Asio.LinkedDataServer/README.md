@@ -1,13 +1,13 @@
 ![](../../Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 14/04/2021                                                 |
+| Fecha         | 23/07/2021                                                 |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|LINKED DATA SERVER| 
 |Descripción|Manual del servicio LINKED DATA SERVER|
-|Versión|1|
+|Versión|1.1|
 |Módulo|API DISCOVER|
 |Tipo|Manual|
-|Cambios de la Versión|Cambios en la configuración|
+|Cambios de la Versión|Cambios en la explicación de las opciones de configuración del renderizado por tipo de entidad|
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=LinkedDataServer)
 
@@ -30,7 +30,7 @@
 
 [Configuración de appsettings.json](#configuración-de-appsettingsjson)
 
-[Configuración de Linked_Data_Server_Config.json](#configuración-de-linked-data-server-configjson)
+[Configuración de Linked Data Server](#configuración-de-linked-data-server)
 
 [Vista de las fichas](#vista-de-las-fichas)
 
@@ -125,80 +125,9 @@ Las opciones de configuración son:
  - ConstrainedByUrl: Url en la que se encuentran las restricciones ConstrainedBy 
  - UrlHome: Url con la que enlazar el logo de la cabecera 'Hércules'
 
-## Configuración de Linked_Data_Server_Config.json
-En este fichero se pueden configurar las personalizaciones a aplicar en las fichas de las entidades en función de su rdf:type
+## Configuración de Linked Data Server
 
-
-    {
-		"ConfigTables": [
-			{
-			  "rdfType": "http://purl.org/roh/mirror/foaf#Person",
-			  "tables": [
-				{
-				 "name": "Documentos",
-          			 "fields": [ "ID", "Título", "RdfType" ],
-           			 "query": "select distinct ?ID ?Nombre ?RdfType where { {?ID <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?lista ?p <{ENTITY_ID}>.}UNION{?ID <http://purl.org/roh#correspondingAuthor> <{ENTITY_ID}>.} ?ID <http://purl.org/roh#title> ?Nombre. ?ID a ?RdfType. } "
-       				 }
-			   ]
-			}
-		 ],
-		 "ExcludeRelatedEntity": [ "http://purl.org/roh/mirror/foaf#Person" ],
-		 "ConfigArborGraphs": {
-			 "icons": [
-      				{
-					"rdfType": "http://purl.org/roh/mirror/foaf#Person",
-					"icon": "person-grafo-hercules.svg"
-      				 }
-    			   ],
-			  "arborGraphsRdfType": [
-			  	{
-					"rdfType": "http://purl.org/roh/mirror/foaf#Person",
-					"arborGraphs": [
-				  		{
-						    "name": "Coautores",
-						    "properties": [
-				      			{
-								"name": "Coautor",
-								"query": "select distinct ?coautorID_1 as ?level1 ?coautorID_2 as ?level2 where { ?doc <http://purl.org/roh/mirror/bibo#authorList> ?lista. ?lista ?autores ?coautorID_1. ?lista ?autores2 ?coautorID_2. FILTER(?coautorID_1 in (?coautorID_A)) FILTER(?coautorID_2 in (?coautorID_B)) FILTER(?coautorID_1 != ?coautorID_2 ) { select ?coautorID_A where { ?doc_A <http://purl.org/roh/mirror/bibo#authorList> ?lista_A. ?lista_A ?autor_A <{ENTITY_ID}>. ?lista_A ?autores2_A ?coautorID_A. ?coautorID_A a ?rdftype_A. FILTER(?rdftype_A = <http://purl.org/roh/mirror/foaf#Person>). ?coautorID_A <http://purl.org/roh/mirror/foaf#name> ?name_A. filter(?coautorID_A !=<{ENTITY_ID}>) } order by desc (count(distinct ?doc_A )) asc(?coautorID_A) limit 10 } { select ?coautorID_B where { ?doc_B <http://purl.org/roh/mirror/bibo#authorList> ?lista_B. ?lista_B ?autor_B <{ENTITY_ID}>. ?lista_B ?autores2_B ?coautorID_B. ?coautorID_B a ?rdftype_B. FILTER(?rdftype_B = <http://purl.org/roh/mirror/foaf#Person>). ?coautorID_B <http://purl.org/roh/mirror/foaf#name> ?name. filter(?coautorID_B !=<{ENTITY_ID}>) } order by desc (count(distinct ?doc_B )) asc(?coautorID_B ) limit 10 } }"
-				      			  }
-				    		      ]
-				  		 }
-					 ]
-			      	  }
-			     ]
-		 },
-		 "PropsTitle": [ "http://purl.org/roh#title", "http://purl.org/roh/mirror/foaf#name" ],
-		 "PropsTransform": [
-			    {
-				      "property": "http://purl.org/roh/mirror/vivo#researcherId",
-				      "transform": "http://www.researcherid.com/rid/{value}"
-			    },
-			    {
-				      "property": "http://purl.org/roh#ORCID",
-				      "transform": "https://orcid.org/{value}"
-			    },
-			    {
-				      "property": "http://purl.org/roh/mirror/vivo#scopusId",
-				      "transform": "https://www.scopus.com/authid/detail.uri?authorId={value}"
-			    },
-			    {
-				      "property": "http://purl.org/roh#researcherDBLP",
-				      "transform": "https://dblp.org/pid/{value}.html"
-			    },
-			    {
-				      "property": "http://purl.org/roh#roDBLP",
-				      "transform": "https://dblp.org/rec/{value}.html"
-			    },
-			    {
-				      "property": "http://purl.org/roh/mirror/bibo#doi",
-				      "transform": "https://doi.org/{value}"
-			    },
-			    {
-				      "property": "http://purl.org/roh#roPubmed",
-				      "transform": "https://pubmed.ncbi.nlm.nih.gov/{value}/"
-			    }
-		 ]
-	}
+El fichero con las opciones de configuración es [Linked_Data_Server_Config.json](./Linked_Data_Server/Config/Linked_Data_Server_Config.json). En este fichero se definen las las personalizaciones a aplicar en las fichas de las entidades en función de su rdf:type
 
 Las opciones de configuración son: 
  - ConfigTables: En esta sección se definen las tablas que se mostrarán en la fichas de la entidades en función de los siguientes parámetros:
