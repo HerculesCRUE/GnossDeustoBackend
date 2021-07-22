@@ -1553,10 +1553,14 @@ p.ayuda-btn-discover {
 
 .tipo-home .row.center {
     justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .tipo-home .row.center input {
     border: 1px solid #af1a2e;
+    height:60px;
+    font-size:20px;
 }
 
 .franja-pie {
