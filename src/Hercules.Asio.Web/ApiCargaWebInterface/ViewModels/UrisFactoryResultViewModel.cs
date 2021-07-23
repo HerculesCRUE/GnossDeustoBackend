@@ -15,8 +15,8 @@ namespace ApiCargaWebInterface.ViewModels
         [Display(Name = "ResourceClass / RdfType")]
         public string Resource_class { get; set; }
         public string Identifier { get; set; }
-        public string Uri_Structure { get; set; }
-        
+        public string Uri_Structure { get; set; }        
         public IFormFile New_Schema_File { get; set; }
+        public HashSet<string> listaRdfType { get; set; }
     }
 }

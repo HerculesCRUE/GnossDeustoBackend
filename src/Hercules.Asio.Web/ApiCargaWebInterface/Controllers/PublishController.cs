@@ -44,6 +44,8 @@ namespace ApiCargaWebInterface.Controllers
                 Id = "",
                 Type = "rdf",
                 RepositoryShapes = _serviceApi.GetRepositoryConfig(repository).ShapeConfig,
+                listaMetadataFormats = _callEtlPublishService.CallListMetadataFormats(repository),
+                NameRepository = _serviceApi.GetRepositoryConfig(repository).Name,
 
             };
             return View("ObtenerRdf",publishRepositoryModel);
