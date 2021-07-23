@@ -11,6 +11,10 @@
 
 ## DOCUMENTO CON EL INVENTARIO DE ENTREGA DE HÉRCULES ASIO BACKEND SGI
 
+El despliegue de Hércules ASIO en preproducción está en https://linkeddata2.um.es/carga-web/public/home
+
+Para acceder se necesita un usuario de la Universidad de Murcia con permisos de acceso mediante VPN.
+
 Los componentes del proyecto se pueden consultar en:
 
 |Entregable|Tipo de Entregable|Notas|Ubicación|
