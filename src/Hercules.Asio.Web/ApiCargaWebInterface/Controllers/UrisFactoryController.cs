@@ -26,7 +26,7 @@ namespace ApiCargaWebInterface.Controllers
     /// </summary>
     //[Authorize]
     [ClaimRequirement("Administrator", "true")]
-    public class UrisFactoryController:Controller
+    public class UrisFactoryController : Controller
     {
         readonly ICallUrisFactoryApiService _callUrisFactoryService;
         public UrisFactoryController(ICallUrisFactoryApiService callUrisFactoryService)
@@ -66,7 +66,7 @@ namespace ApiCargaWebInterface.Controllers
             {
                 urisFactoryModel.UriResult = _callUrisFactoryService.GetUri(HttpUtility.UrlEncode(Resource_class), HttpUtility.UrlEncode(Identifier));
             }
-            catch(HttpRequestException ex)
+            catch (HttpRequestException ex)
             {
                 ModelState.AddModelError("Resource_class", ex.Message);
             }
@@ -83,7 +83,7 @@ namespace ApiCargaWebInterface.Controllers
             if (result != null)
             {
                 var content = new System.IO.MemoryStream(Encoding.ASCII.GetBytes(result));
-                var contentType = "APPLICATION/octet-stream";   
+                var contentType = "APPLICATION/octet-stream";
                 var fileName = $"UrisFactorySchema.json";
                 return File(content, contentType, fileName);
             }
@@ -108,13 +108,13 @@ namespace ApiCargaWebInterface.Controllers
                 {
                     _callUrisFactoryService.ReplaceSchema(New_Schema_File);
                 }
-                catch(BadRequestException badExce)
+                catch (BadRequestException badExce)
                 {
                     UrisFactoryResultViewModel urisFactoryModel = new UrisFactoryResultViewModel();
                     ModelState.AddModelError("New_Schema_File", badExce.Message);
                     return View("Index", urisFactoryModel);
                 }
-                
+
             }
             return View("Index", null);
         }
@@ -142,7 +142,7 @@ namespace ApiCargaWebInterface.Controllers
                 ModelState.AddModelError("Uri_Structure", badExce.Message);
                 return View("Index", urisFactoryModel);
             }
-           
+
         }
         /// <summary>
         /// Devuelve la página de creación de una estructura
@@ -191,19 +191,14 @@ namespace ApiCargaWebInterface.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("[Controller]/autocomplete")]
-        public IActionResult Autocomplete(string q,bool rdfType)
+        public IActionResult Autocomplete(string q)
         {
             string result = _callUrisFactoryService.GetSchema();
             UriStructureGeneral uriStructure = JsonConvert.DeserializeObject<UriStructureGeneral>(result);
-            List<string> listClass = new List<string>();
-            if(rdfType)
-            {
-                listClass = uriStructure.ResourcesClasses.Select(x => x.RdfType).Distinct().ToList();
-            }else
-            {
-                listClass = uriStructure.ResourcesClasses.Select(x => x.ResourceClass).Distinct().ToList();
-            }
-            listClass = listClass.Where(x => x.ToLower().Contains(q.ToLower())).ToList();
+            HashSet<string> listClass = new HashSet<string>();
+            listClass = new HashSet<string>(uriStructure.ResourcesClasses.Select(x => x.RdfType).Distinct().ToList());
+            listClass.UnionWith(uriStructure.ResourcesClasses.Select(x => x.ResourceClass).Distinct().ToList());
+            listClass = new HashSet<string>( listClass.Where(x => x.ToLower().Contains(q.ToLower())).ToList());
             return Json(listClass);
         }
 
