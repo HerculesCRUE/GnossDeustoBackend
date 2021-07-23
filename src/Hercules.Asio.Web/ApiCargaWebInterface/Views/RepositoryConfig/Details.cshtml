@@ -79,15 +79,22 @@
                         <p class="titulo">Identificador</p>
                         <p>@Model.RepositoryConfigID</p>
                     </div>
-                    @*<div class="outh-token">
-                        <p class="titulo">Oauth token</p>
-                        <p>@Model.OauthToken</p>
-                    </div>*@
-                    <div class="outh-token">
+                    <div>
                         <p class="titulo">Url</p>
                         <p>@Model.Url</p>
                     </div>
-                    <div class="outh-token">
+                    <div>
+                        <p class="titulo">Aplicar descubrimiento de enlaces</p>
+                        @if (Model.ApplyDiscover)
+                        {
+                            <p>Sí</p>
+                        }
+                        else
+                        {
+                            <p>No</p>
+                        }
+                    </div>
+                    <div>
                         <p class="titulo">Tareas de ejecución de sincronización exitosas</p>
                         @if (Model.ListJobs == null || Model.ListJobs.Count == 0)
                         {
