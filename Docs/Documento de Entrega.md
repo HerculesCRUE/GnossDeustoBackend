@@ -15,8 +15,7 @@ Los componentes del proyecto se pueden consultar en:
 
 |Entregable|Tipo de Entregable|Notas|Ubicación|
 |:----|:----|:----|:----|
-|Backend SGI|Software|Plataforma completa, incluyendo módulos de otros entregables|https://github.com/HerculesCRUE/GnossDeustoBackend
-En el repositorio de GitHub están todos los componentes de la Arquitectura Semántica|
+|Backend SGI|Software|Plataforma completa, incluyendo módulos de otros entregables|https://github.com/HerculesCRUE/GnossDeustoBackend. En el repositorio de GitHub están todos los componentes de la Arquitectura Semántica|
 |Manual de uso Backend SGI|Documento| |https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Docs|
 |Imágenes Docker de
 Backend SGI|Software| |https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images|
