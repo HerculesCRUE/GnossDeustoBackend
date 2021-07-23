@@ -37,7 +37,7 @@ Backend SGI|Software| |https://github.com/HerculesCRUE/GnossDeustoBackend/tree/m
 |Manual Test suite para publicación de datos|Documento| |https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/data|
 |Análisis sobre necesidad de cumplimiento LDP|Documento| |https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/Hercules-ASIO-Evaluacion-de-cumplimiento-Linked-Data-Platform.md|
 |Material de formación|Documento| |https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Formacion|
-|Otros resultados o desarrollos a comprobar| | | |
+|**Otros resultados o desarrollos a comprobar**| | | |
 |UX- Accesibilidad de las páginas Web| | |Web de ASIO en PRE: https://linkeddata2.um.es/carga-web/public/home|
 | | | |Linked Data Server en PRE: http://linkeddata2.um.es/res/person/12118|
 |Calidad del software| | |https://github.com/HerculesCRUE/GnossDeustoBackend. Se muestra información de pruebas unitarias y de cobertura de código en cada uno de los componentes del SGI|
