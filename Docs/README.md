@@ -1,13 +1,13 @@
 ![](..//Docs/media/CabeceraDocumentosMD.png)
 
-| Fecha         | 3/5/2021                                                   |
+| Fecha         | 23/7/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Resumen de Documentación de ASIO Backend SGI| 
 |Descripción|Inventario de la documentación|
 |Versión|3.2|
 |Módulo|Documentación|
 |Tipo|Manual|
-|Cambios de la Versión|Agrupación de documentos como partes del entregable Manual de uso del Backend SGI|
+|Cambios de la Versión|Cambio en el contenido del documento de procedencia|
 
 ## DOCUMENTACIÓN DE HÉRCULES ASIO BACKEND SGI
 
@@ -16,7 +16,7 @@ La carpeta Docs contiene los siguientes documentos:
  - [Hercules ASIO Especificación de funciones de Carga](Hercules-ASIO-Especificacion-de-funciones-de-Carga.md)
  - [Hércules ASIO Especificación de las funciones de descubrimiento](Hercules-ASIO-Especificacion-de-las-funciones-de-descubrimiento.md)
  - [Hercules ASIO Fuentes externas de información para las funciones de descubrimiento](Hercules-ASIO-Fuentes-externas-de-informacion-para-las-funciones-de-descubrimiento.md)
- - [Hércules ASIO Procedencia de datos externos - Provenance](Hercules-ASIO-Procedencia-de-datos-externos-Provenance.md)
+ - [Hércules ASIO Procedencia de datos externos - Provenance. Descripción del servicio SPARQL](Hercules-ASIO-Procedencia-de-datos-externos-Provenance.md)
  - [UrisFactory](UrisFactory/)
    - [Buenas prácticas del esquema de URIs](UrisFactory/Buenas-practicas-URIs.md)
    - [Especificación de Esquema de URIs](UrisFactory/Especificacion-Esquema-de-URIs.md)
