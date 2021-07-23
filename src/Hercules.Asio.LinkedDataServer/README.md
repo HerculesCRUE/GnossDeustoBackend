@@ -4,10 +4,10 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|LINKED DATA SERVER| 
 |Descripción|Manual del servicio LINKED DATA SERVER|
-|Versión|1.1|
+|Versión|1.2|
 |Módulo|API DISCOVER|
 |Tipo|Manual|
-|Cambios de la Versión|Cambios en la explicación de las opciones de configuración del renderizado por tipo de entidad|
+|Cambios de la Versión|Añadida la sección 'Búsqueda por texto libre'|
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=LinkedDataServer)
 
@@ -25,6 +25,8 @@
 [Introducción](#introducción)
 
 [Ejemplos de resolución de URIs](#ejemplos-de-resolución-de-uris) 
+
+[Búsqueda por texto libre](#búsqueda-por-texto-libre) 
 
 [Conexión a Triple Store](#conexión-a-triple-store)
 
@@ -64,6 +66,15 @@ Se puede comprobar el funcionamiento del servidor mediante los siguientes ejempl
 - [http://graph.um.es/res/person/26d09e44-68bf-4629-8f4e-8ffdf27ba0b3](http://graph.um.es/res/person/26d09e44-68bf-4629-8f4e-8ffdf27ba0b3) Investigador con publicaciones y código ORCID.
 - [http://graph.um.es/res/academic-article/161158](http://graph.um.es/res/academic-article/161158) Artículo científico.
 - [http://graph.um.es/res/project/RADBOUDUMC](http://graph.um.es/res/project/RADBOUDUMC) Proyecto de investigación.
+
+
+Búsqueda por texto libre
+-----------------------
+
+Para las búsquedas por texto libre se ha utilizado la función bif:contains de Virtuoso. 
+Se pueden realizar búsquedas de dos formas:
+- Sin introducir comillas '"' al inicio y al fin del texto a buscar: Realizará una búsqueda en la que encontrará todas las entidades que contengan todas las palabras introducidas (sin importar el orden). En la práctica se realiza la siguiente instrucción bif:contains '"" AND "" AND ""
+
 
 *Conexión a Triple Store*
 -------------------------
