@@ -46,6 +46,7 @@ namespace XUnitTestAPI_CARGA
             RepositoryConfig repositoryConfigToAdd = new RepositoryConfig
             {
                 Name = "Un repositorio para configurarlos a todos",
+                ApplyDiscover=false,
                 Url = "config\\repository",
                 OauthToken = "12weq1"
             };

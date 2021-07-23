@@ -37,6 +37,10 @@ namespace API_CARGA.Models.Entities
         /// </summary>
         public string OauthToken { get; set; }
         /// <summary>
+        /// Indica si se apica el descubrimiento al repositorio
+        /// </summary>
+        public bool ApplyDiscover { get; set; }
+        /// <summary>
         /// url del repositorio
         /// </summary>
         public string Url { get; set; }

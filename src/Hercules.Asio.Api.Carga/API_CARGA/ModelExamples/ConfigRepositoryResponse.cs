@@ -22,6 +22,7 @@ namespace API_CARGA.ModelExamples
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_1",
+                ApplyDiscover = false,
                 Url = "https://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH",
                 OauthToken = "12weq1"
             };

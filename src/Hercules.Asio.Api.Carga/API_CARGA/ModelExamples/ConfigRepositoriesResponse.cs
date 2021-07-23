@@ -24,6 +24,7 @@ namespace API_CARGA.ModelExamples
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_1",
+                ApplyDiscover = false,
                 Url = "https://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH",
                 OauthToken = "12weq1"
             });
@@ -31,6 +32,7 @@ namespace API_CARGA.ModelExamples
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_2",
+                ApplyDiscover = false,
                 Url = "https://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH",
                 OauthToken = "11389"
             });
@@ -38,6 +40,7 @@ namespace API_CARGA.ModelExamples
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_3",
+                ApplyDiscover = false,
                 Url = "https://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH",
                 OauthToken = "1238912"
             });

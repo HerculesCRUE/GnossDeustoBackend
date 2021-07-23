@@ -26,6 +26,7 @@ namespace API_CARGA.Models.Services
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_1",
+                ApplyDiscover=false,
                 Url = "config\\repository",
                 OauthToken = "12weq1"
             });
@@ -33,6 +34,7 @@ namespace API_CARGA.Models.Services
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_2",
+                ApplyDiscover = false,
                 Url = "config\\repository",
                 OauthToken = "11389"
             });
@@ -40,6 +42,7 @@ namespace API_CARGA.Models.Services
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_3",
+                ApplyDiscover = false,
                 Url = "config\\repository",
                 OauthToken = "1238912"
             });
@@ -47,6 +50,7 @@ namespace API_CARGA.Models.Services
             {
                 RepositoryConfigID = Guid.NewGuid(),
                 Name = "ConfigRepository_4",
+                ApplyDiscover = false,
                 Url = "config\\repository",
                 OauthToken = "asf46s"
             });
@@ -54,6 +58,7 @@ namespace API_CARGA.Models.Services
             {
                 RepositoryConfigID = new Guid("5efac0ad-ec4e-467d-bbf5-ce3f64edb46a"),
                 Name = "ConfigRepository_5",
+                ApplyDiscover = false,
                 //Url = "http://herc-as-front-desa.atica.um.es/oai-pmh-cvn/OAI_PMH",
                 Url = "https://localhost:44308/OAI_PMH",
                 OauthToken = "87f9"
@@ -62,6 +67,7 @@ namespace API_CARGA.Models.Services
             {
                 RepositoryConfigID = new Guid("11111111-1111-1111-1111-111111111111"),
                 Name = "CVN_OAI_PMH",
+                ApplyDiscover = false,
                 Url = "https://localhost:44353/OAI_PMH",
                 OauthToken = "87f9j"
             }); 
@@ -128,6 +134,7 @@ namespace API_CARGA.Models.Services
             if (repositoryConfigOriginal != null)
             {                
                 repositoryConfigOriginal.Name = repositoryConfig.Name;
+                repositoryConfigOriginal.ApplyDiscover = repositoryConfig.ApplyDiscover;
                 repositoryConfigOriginal.Url = repositoryConfig.Url;
                 repositoryConfigOriginal.OauthToken = repositoryConfig.OauthToken; 
                 modified = true;

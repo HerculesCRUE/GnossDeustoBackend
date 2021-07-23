@@ -97,6 +97,7 @@ namespace API_CARGA.Models.Services
             {               
                 repositoryConfigOriginal.Name = repositoryConfig.Name;
                 repositoryConfigOriginal.Url = repositoryConfig.Url;
+                repositoryConfigOriginal.ApplyDiscover = repositoryConfig.ApplyDiscover;
                 repositoryConfigOriginal.OauthToken = repositoryConfig.OauthToken;
                 _context.SaveChanges();
                 modified = true;                
