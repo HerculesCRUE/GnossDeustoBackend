@@ -89,7 +89,7 @@
         "inverse": true,
         "type": 0,
         "maxNumWordsTitle": null,
-        "scorePositive": 0.5,
+        "scorePositive": 0.9,
         "scoreNegative": null
       },
       {
@@ -209,7 +209,7 @@
         "inverse": false,
         "type": 0,
         "maxNumWordsTitle": null,
-        "scorePositive": 0.5,
+        "scorePositive": 0.9,
         "scoreNegative": null
       }
     ]
