@@ -9,7 +9,7 @@
 |Tipo|Especificación|
 |Cambios de la Versión|Añadida información acerca de la descripción del servicio SPARQL|
 
-# Hércules Backend ASIO. Procedencia de datos - Provenance
+# Hércules Backend ASIO. Procedencia de datos - Provenance. Descripción del servicio SPARQL
 
 [Introducción](#introducción)
 
@@ -136,16 +136,16 @@ La descripción del servicio SPARQL se obtiene mediante una petición al SPARQL 
 Para configurar esta información en Virtuoso hay que:
  - Editar el fichero virtuoso.ini y añadir la opción que define el SPARQL por defecto, por ejemplo:
 
-´´´
+```
 [URIQA]
 ...
 ;DefaultHost  = localhost:8890
 DefaultHost  = linkeddata2.um.es
-´´´
+```
 
  - Insertar los triples descriptivos en un grafo sparql, por ejemplo http://linkeddata2.um.es/sparql. Los triples son:
 
-´´´
+```
 insert into <http://linkeddata2.um.es/sparql>
 {
 	<http://linkeddata2.um.es/sparql> <http://purl.org/dc/terms/title> "Hercules ASIO Backend SGI". 
@@ -166,4 +166,4 @@ insert into <http://linkeddata2.um.es/sparql>
 	<http://linkeddata2.um.es/sparql> <http://www.w3.org/ns/sparql-service-description#supportedLanguage> <http://www.w3.org/ns/sparql-service-description#SPARQL10Query> .
 	<http://linkeddata2.um.es/sparql> <http://www.w3.org/ns/sparql-service-description#url> <https://linkeddata2.um.es/sparql> .
 }
-´´´
+```
