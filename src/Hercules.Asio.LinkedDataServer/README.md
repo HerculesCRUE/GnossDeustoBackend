@@ -73,8 +73,16 @@ Búsqueda por texto libre
 
 Para las búsquedas por texto libre se ha utilizado la función bif:contains de Virtuoso. 
 Se pueden realizar búsquedas de dos formas:
-- Sin introducir comillas dobles **"** al inicio y al fin del texto a buscar: Realizará una búsqueda en la que encontrará todas las entidades que contengan todas las palabras introducidas (sin importar el orden). En la práctica se realiza la siguiente instrucción **bif:contains '"palabra1" AND "palabra2" AND .... AND "palabraN"'**.
-- Introduciendo comillas dobles **"** al inicio y al final del texto a buscar: Realizará una búsqueda en la que encontrará todas las entidades que cumplan la expresión introducida. En la práctica se realiza la siguiente instrucción **bif:contains 'texto_introducido'**. Se podría utilizar para realizar una búsqueda de un texto completo concreto si únicamente se introducen las comillas al inicio y al final **"este es el texto introducido"** o se pueden usar expresiones como OR para realizar búsquedas **"proyecto" OR "ciencia""**
+- Sin introducir comillas dobles **"** al inicio y al fin del texto a buscar: Realizará una búsqueda en la que encontrará todas las entidades que contengan todas las palabras introducidas (sin importar el orden). En la práctica al introducir en el buscador el texto **proyecto murcia** se realiza la siguiente instrucción **bif:contains '"proyecto" AND "murcia"'**.
+![](../../Docs/media/texto_libre.png)
+
+
+- Introduciendo comillas dobles **"** al inicio y al final del texto a buscar: Realizará una búsqueda en la que encontrará todas las entidades que cumplan la expresión introducida. En la práctica se realiza la siguiente instrucción **bif:contains 'texto_introducido'**. 
+	Por lo que se podría utilizar para realizar una búsqueda de un texto completo concreto si únicamente se introducen las comillas al inicio y al final **"proyecto murcia"**
+![](../../Docs/media/texto_libre_comillas.png)
+
+	O se pueden usar expresiones como OR para realizar búsquedas **"proyecto" OR "ciencia""**
+![](../../Docs/media/texto_libre_comillas_OR.png)
 
 
 *Conexión a Triple Store*
