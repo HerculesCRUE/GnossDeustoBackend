@@ -103,7 +103,7 @@ Descripción del servicio SPARQL
 
 La descripción del servicio SPARQL se obtiene mediante una petición al SPARQL Endpoint (p.e. https://linkeddata2.um.es/sparql) con la cabecera  con la cabecera “accept: application/rdf+xml”. Los datos son:
 
-´´´
+```
 <?xml version="1.0" encoding="utf-8" ?>
 <rdf:RDF
         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -131,7 +131,7 @@ La descripción del servicio SPARQL se obtiene mediante una petición al SPARQL 
     <ns4:type rdf:resource="http://www.w3.org/ns/sparql-service-description#Service" />
   </rdf:Description>
 </rdf:RDF>
-´´´
+```
 
 Para configurar esta información en Virtuoso hay que:
  - Editar el fichero virtuoso.ini y añadir la opción que define el SPARQL por defecto, por ejemplo:
