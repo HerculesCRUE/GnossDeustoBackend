@@ -130,7 +130,7 @@ Las opciones de configuración son:
 El fichero con las opciones de configuración es [Linked_Data_Server_Config.json](./Linked_Data_Server/Config/Linked_Data_Server_Config.json). En este fichero se definen las las personalizaciones a aplicar en las fichas de las entidades en función de su rdf:type
 
 Si la entidad tiene una personalización en el fichero de configuración, se renderiza del siguiente modo:
-- Atributos directos de la entidad. Por ejemplo, en la ficha del investigador serían:
+- Atributos directos de la entidad, que se renderizan para todos los tipos de entidades. Por ejemplo, en la ficha del investigador serían:
 
 ![](../../Docs/media/linkeddata-datos-investigador.png)
 
