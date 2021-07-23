@@ -63,9 +63,9 @@ Ejemplos de resolución de URIs
 -----------------------
 
 Se puede comprobar el funcionamiento del servidor mediante los siguientes ejemplos:
-- [http://graph.um.es/res/person/26d09e44-68bf-4629-8f4e-8ffdf27ba0b3](http://graph.um.es/res/person/26d09e44-68bf-4629-8f4e-8ffdf27ba0b3) Investigador con publicaciones y código ORCID.
-- [http://graph.um.es/res/academic-article/161158](http://graph.um.es/res/academic-article/161158) Artículo científico.
-- [http://graph.um.es/res/project/RADBOUDUMC](http://graph.um.es/res/project/RADBOUDUMC) Proyecto de investigación.
+- [http://linkeddata2.um.es/res/person/124](http://linkeddata2.um.es/res/person/124) Investigador con publicaciones y código ORCID.
+- [http://linkeddata2.um.es/res/academic-article/77681](http://linkeddata2.um.es/res/academic-article/77681) Artículo científico.
+- [http://linkeddata2.um.es/res/project/15335](http://linkeddata2.um.es/res/project/15335) Proyecto de investigación.
 
 
 Búsqueda por texto libre
