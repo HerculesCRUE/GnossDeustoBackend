@@ -93,6 +93,7 @@ http://graph.um.es/res/project/RADBOUDUMC
 		},
 		"RabbitQueueName": "HerculesDemoQueue",
 		"RabbitQueueNameVirtuoso": "HerculesQueueVirtuoso",
+		"RabbitQueueNameDelete": "HerculesDemoQueueDelete",
 		"Authority": "http://herc-as-front-desa.atica.um.es:5108",
 		"ConfigUrlXmlConverter": "http://herc-as-front-desa.atica.um.es/conversor_xml_rdf/"
     }
@@ -117,6 +118,7 @@ http://graph.um.es/res/project/RADBOUDUMC
  - RabbitMQ.virtualhostRabbitMq: host virtual configurado en Rabbit
  - RabbitQueueName: Nombre de la cola de Rabbit para la carga de RDFs
  - RabbitQueueNameVirtuoso: Nombre de la cola de Rabbit para la replicación de la BBDD RDF
+ - RabbitQueueNameDelete: Nombre de la cola de Rabbit para el borrado de entidades
  - Authority: Url de la servicio de identidades
  - ConfigUrlXmlConverter: URL donse está lanzada la aplicación CONVERSOR_XML_RDF
 
