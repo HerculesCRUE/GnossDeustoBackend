@@ -129,7 +129,22 @@ Las opciones de configuración son:
 
 El fichero con las opciones de configuración es [Linked_Data_Server_Config.json](./Linked_Data_Server/Config/Linked_Data_Server_Config.json). En este fichero se definen las las personalizaciones a aplicar en las fichas de las entidades en función de su rdf:type
 
-Las opciones de configuración son: 
+Si la entidad tiene una personalización en el fichero de configuración, se renderiza del siguiente modo:
+- Atributos directos de la entidad, que se renderizan para todos los tipos de entidades. Por ejemplo, en la ficha del investigador serían:
+
+![](../../Docs/media/linkeddata-datos-investigador.png)
+
+- Tablas configuradas que muestran datos relacionados con la entidad. Por ejemplo, los artículos de un investigador:
+
+![](../../Docs/media/linkeddata-articulos-investigador.png)
+
+- Grafos configurados que muestran relacionados con otras entidades. Por ejemplo, los investigadores con los que un investigador publica:
+
+![](../../Docs/media/linkeddata-grafo-investigador.png)
+
+- Por último, datos de entidades relacionadas, siempre que el tipo de la entidad no esté incluido en la opción "ExcludeRelatedEntity" del fichero Linked_Data_Server_Config.json, como sucede con los investigadores.
+
+En resumen, las opciones de configuración del fichero [Linked_Data_Server_Config.json](./Linked_Data_Server/Config/Linked_Data_Server_Config.json) son: 
  - ConfigTables: En esta sección se definen las tablas que se mostrarán en la fichas de la entidades en función de los siguientes parámetros:
  	- ConfigTables.rdfType: rdf:type de las entidades a las que afectará esta configuración.
  	- ConfigTables.tables: Tablas que se mostrarán en las entidades que tengan el rdf:type especificado en el punto anterior.
@@ -152,9 +167,18 @@ Las opciones de configuración son:
 			- ConfigArborGraphs.arborGraphsRdfType.arborGraps.properties.query: Consulta que obtiene los datos a mostrar en el gráfico
 
  - PropsTitle: Propiedades de la ontología para utilizar como título de las entidades en la presentación de la web. Generalmente http://purl.org/roh/mirror/foaf#name para las personas y http://purl.org/roh#title para el resto de entidades
- - PropsTransform: Propiedades que serán transformadas en la visualizació de las fichas de las entidades.
- 	- PropsTransform.property: Propiedades cuya presentación en la web se transforma. Se visualizarán transformadas como enlaces externos según lo especificado en PropsTransform.transform
+ - PropsTransform: Propiedades que serán transformadas en la visualizació de las fichas de las entidades, como vemos en el ejemplo siguiente para mostrar ORCID como un enlace.
+ 	- PropsTransform.property: Propiedades cuya presentación en la web se transforma. Se visualizarán transformadas como enlaces externos según lo especificado en PropsTransform.transform. Por ejemplo, que un código ORCID se presente como un enlace se declara del siguiente modo:
  	- PropsTransform.transform: Las propiedades especificadas en PropsTransform.property se visualizarán como un hipervínculo en la web según lo especificado en esta configuración
+
+
+```
+    {
+        "property": "http://purl.org/roh#ORCID",
+        "transform": "https://orcid.org/{value}"
+    },
+```
+
 
 ## Vista de las fichas
 
