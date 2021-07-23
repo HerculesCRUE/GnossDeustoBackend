@@ -78,10 +78,13 @@ Se pueden realizar búsquedas de dos formas:
 
 
 - Introduciendo comillas dobles **"** al inicio y al final del texto a buscar: Realizará una búsqueda en la que encontrará todas las entidades que cumplan la expresión introducida. En la práctica se realiza la siguiente instrucción **bif:contains 'texto_introducido'**. 
+	
 	Por lo que se podría utilizar para realizar una búsqueda de un texto completo concreto si únicamente se introducen las comillas al inicio y al final **"proyecto murcia"**
+	
 ![](../../Docs/media/texto_libre_comillas.png)
 
 	O se pueden usar expresiones como OR para realizar búsquedas **"proyecto" OR "ciencia""**
+	
 ![](../../Docs/media/texto_libre_comillas_OR.png)
 
 
