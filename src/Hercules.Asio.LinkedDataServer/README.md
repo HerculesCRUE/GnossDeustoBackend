@@ -138,7 +138,7 @@ Si la entidad tiene una personalización en el fichero de configuración, se ren
 
 ![](../../Docs/media/linkeddata-articulos-investigador.png)
 
-- Grafos configuradas que muestran relacionados con otras entidades. Por ejemplo, los investigadores con los que un investigador publica:
+- Grafos configurados que muestran relacionados con otras entidades. Por ejemplo, los investigadores con los que un investigador publica:
 
 ![](../../Docs/media/linkeddata-grafo-investigador.png)
 
@@ -172,12 +172,12 @@ En resumen, las opciones de configuración del fichero [Linked_Data_Server_Confi
  	- PropsTransform.transform: Las propiedades especificadas en PropsTransform.property se visualizarán como un hipervínculo en la web según lo especificado en esta configuración
 
 
-'''
+```
     {
         "property": "http://purl.org/roh#ORCID",
         "transform": "https://orcid.org/{value}"
     },
-'''
+```
 
 
 ## Vista de las fichas
