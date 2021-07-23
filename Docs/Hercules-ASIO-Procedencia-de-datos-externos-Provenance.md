@@ -1,13 +1,13 @@
 ![](.//media/CabeceraDocumentosMD.png)
 
-| Fecha         | 19/05/2021                                                   |
+| Fecha         | 23/07/2021                                                   |
 | ------------- | ------------------------------------------------------------ |
-|Titulo|Hércules ASIO. Procedencia de datos - Provenance| 
+|Titulo|Hércules ASIO. Procedencia de datos - Provenance. Descripción del servicio SPARQL| 
 |Descripción|Gestión de la procedencia de los datos incorporados a ASIO desde fuentes externas|
-|Versión|1.2|
+|Versión|1.3|
 |Módulo|API DISCOVER|
 |Tipo|Especificación|
-|Cambios de la Versión|Añadida información acerca del tratamiento de los datos provenientes del SGI|
+|Cambios de la Versión|Añadida información acerca de la descripción del servicio SPARQL|
 
 # Hércules Backend ASIO. Procedencia de datos - Provenance
 
@@ -18,6 +18,8 @@
 [Carga de datos y procedencia](#carga-de-datos-y-procedencia)
 
 [Datos de procedencia](#datos-de-procedencia)
+
+[Descripción del servicio SPARQL](#descripción-del-servicio-sparql)
 
 Introducción
 ============
@@ -96,3 +98,72 @@ Grafo de DBLP (roh:graph/dblp):
         prov:wasAssociatedWith roh:res/agent/idAgente1;        
 	    prov:wasAssociatedWith roh:res/organization/dblp;
 
+Descripción del servicio SPARQL
+============
+
+La descripción del servicio SPARQL se obtiene mediante una petición al SPARQL Endpoint (p.e. https://linkeddata2.um.es/sparql) con la cabecera  con la cabecera “accept: application/rdf+xml”. Los datos son:
+
+´´´
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+        xmlns:sd="http://www.w3.org/ns/sparql-service-description#"
+        xmlns:ns3="http://purl.org/dc/terms/"
+        xmlns:ns4="rdf:" >
+  <rdf:Description rdf:about="http://linkeddata2.um.es/sparql">
+    <sd:endpoint rdf:resource="https://linkeddata2.um.es/sparql" />
+    <sd:feature rdf:resource="http://www.w3.org/ns/sparql-service-description#DereferencesURIs" />
+    <sd:feature rdf:resource="http://www.w3.org/ns/sparql-service-description#UnionDefaultGraph" />
+    <sd:resultFormat rdf:resource="http://www.w3.org/ns/formats/Turtle" />
+    <sd:resultFormat rdf:resource="http://www.w3.org/ns/formats/RDF_XML" />
+    <sd:resultFormat rdf:resource="http://www.w3.org/ns/formats/SPARQL_Results_CSV" />
+    <sd:resultFormat rdf:resource="http://www.w3.org/ns/formats/SPARQL_Results_JSON" />
+    <sd:resultFormat rdf:resource="http://www.w3.org/ns/formats/SPARQL_Results_XML" />
+    <sd:resultFormat rdf:resource="http://www.w3.org/ns/formats/RDFa" />
+    <sd:resultFormat rdf:resource="http://www.w3.org/ns/formats/N-Triples" />
+    <sd:resultFormat rdf:resource="http://www.w3.org/ns/formats/N3" />
+    <sd:supportedLanguage rdf:resource="http://www.w3.org/ns/sparql-service-description#SPARQL10Query" />
+    <sd:url rdf:resource="https://linkeddata2.um.es/sparql" />
+    <ns3:description>Datos de investigación de la universidad de Murcia</ns3:description>
+    <ns3:source rdf:resource="https://linkeddata2.um.es/carga-web/public/home" />
+    <ns3:title>Hercules ASIO Backend SGI</ns3:title>
+    <ns4:type rdf:resource="http://www.w3.org/ns/sparql-service-description#Service" />
+  </rdf:Description>
+</rdf:RDF>
+´´´
+
+Para configurar esta información en Virtuoso hay que:
+ - Editar el fichero virtuoso.ini y añadir la opción que define el SPARQL por defecto, por ejemplo:
+
+´´´
+[URIQA]
+...
+;DefaultHost  = localhost:8890
+DefaultHost  = linkeddata2.um.es
+´´´
+
+ - Insertar los triples descriptivos en un grafo sparql, por ejemplo http://linkeddata2.um.es/sparql. Los triples son:
+
+´´´
+insert into <http://linkeddata2.um.es/sparql>
+{
+	<http://linkeddata2.um.es/sparql> <http://purl.org/dc/terms/title> "Hercules ASIO Backend SGI". 
+	<http://linkeddata2.um.es/sparql> <http://purl.org/dc/terms/description> "Datos de investigación de la universidad de Murcia".
+    <http://linkeddata2.um.es/sparql> <http://purl.org/dc/terms/source> <https://linkeddata2.um.es/carga-web/public/home>.
+	<http://linkeddata2.um.es/sparql> <rdf:type> <http://www.w3.org/ns/sparql-service-description#Service> .
+	<http://linkeddata2.um.es/sparql> <http://www.w3.org/ns/sparql-service-description#endpoint> <https://linkeddata2.um.es/sparql> .
+	<http://linkeddata2.um.es/sparql> <http://www.w3.org/ns/sparql-service-description#feature> <http://www.w3.org/ns/sparql-service-description#UnionDefaultGraph> .
+	<http://linkeddata2.um.es/sparql> <http://www.w3.org/ns/sparql-service-description#feature> <http://www.w3.org/ns/sparql-service-description#DereferencesURIs> .
+	<http://linkeddata2.um.es/sparql> <http://www.w3.org/ns/sparql-service-description#resultFormat> <http://www.w3.org/ns/formats/RDF_XML> .
+	<http://linkeddata2.um.es/sparql> <http://www.w3.org/ns/sparql-service-description#resultFormat> <http://www.w3.org/ns/formats/SPARQL_Results_CSV> . 
+	<http://linkeddata2.um.es/sparql> <http://www.w3.org/ns/sparql-service-description#resultFormat> <http://www.w3.org/ns/formats/SPARQL_Results_JSON> .
+	<http://linkeddata2.um.es/sparql> <http://www.w3.org/ns/sparql-service-description#resultFormat> <http://www.w3.org/ns/formats/SPARQL_Results_XML> .
+	<http://linkeddata2.um.es/sparql> <http://www.w3.org/ns/sparql-service-description#resultFormat> <http://www.w3.org/ns/formats/RDFa> .
+	<http://linkeddata2.um.es/sparql> <http://www.w3.org/ns/sparql-service-description#resultFormat> <http://www.w3.org/ns/formats/N-Triples> .
+	<http://linkeddata2.um.es/sparql> <http://www.w3.org/ns/sparql-service-description#resultFormat> <http://www.w3.org/ns/formats/N3> .
+	<http://linkeddata2.um.es/sparql> <http://www.w3.org/ns/sparql-service-description#resultFormat> <http://www.w3.org/ns/formats/Turtle> .
+	<http://linkeddata2.um.es/sparql> <http://www.w3.org/ns/sparql-service-description#supportedLanguage> <http://www.w3.org/ns/sparql-service-description#SPARQL10Query> .
+	<http://linkeddata2.um.es/sparql> <http://www.w3.org/ns/sparql-service-description#url> <https://linkeddata2.um.es/sparql> .
+}
+´´´
