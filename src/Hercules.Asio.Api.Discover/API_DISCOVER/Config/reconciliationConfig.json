@@ -18,7 +18,6 @@
         "type": 2,
         "maxNumWordsTitle": null,
         "scorePositive": 0.89,
-        //"scorePositive": 0.95,
         "scoreNegative": null
       },
       {
@@ -54,7 +53,7 @@
         "inverse": false,
         "type": 0,
         "maxNumWordsTitle": null,
-        "scorePositive": 0.5,
+        "scorePositive": 0.9,
         "scoreNegative": null
       },
       {
@@ -63,7 +62,7 @@
         "inverse": true,
         "type": 0,
         "maxNumWordsTitle": null,
-        "scorePositive": 0.5,
+        "scorePositive": 0.9,
         "scoreNegative": null
       },
       {
@@ -99,7 +98,7 @@
         "inverse": false,
         "type": 0,
         "maxNumWordsTitle": null,
-        "scorePositive": 0.5,
+        "scorePositive": 0.9,
         "scoreNegative": null
       },
       {
@@ -184,7 +183,7 @@
         "type": 0,
         "maxNumWordsTitle": null,
         "scorePositive": 0.9,
-        "scoreNegative": 0.05
+        "scoreNegative": null
       },
       {
         "property": "http://purl.org/roh#isSupportedBy@@@http://purl.org/roh/mirror/vivo#identifier",
@@ -243,8 +242,8 @@
         "inverse": false,
         "type": 0,
         "maxNumWordsTitle": null,
-        "scorePositive": 0.5,
-        "scoreNegative": 0.05
+        "scorePositive": 0.9,
+        "scoreNegative": null
       },
       {
         "property": "http://purl.org/roh#correspondingAuthorOf",
@@ -252,8 +251,8 @@
         "inverse": true,
         "type": 0,
         "maxNumWordsTitle": null,
-        "scorePositive": 0.5,
-        "scoreNegative": 0.05
+        "scorePositive": 0.9,
+        "scoreNegative": null
       },
       {
         "property": "http://purl.org/roh/mirror/bibo#authorList@@@?",
@@ -289,7 +288,7 @@
         "type": 0,
         "maxNumWordsTitle": null,
         "scorePositive": 0.5,
-        "scoreNegative": 0.05
+        "scoreNegative": null
       },
       {
         "property": "http://purl.org/roh/mirror/bibo#presentedAt",
@@ -298,7 +297,7 @@
         "type": 0,
         "maxNumWordsTitle": null,
         "scorePositive": 0.5,
-        "scoreNegative": 0.05
+        "scoreNegative": null
       },
       {
         "property": "http://purl.org/roh/mirror/vivo#dateTime",
@@ -334,7 +333,7 @@
         "type": 0,
         "maxNumWordsTitle": null,
         "scorePositive": 0.5,
-        "scoreNegative": 0.05
+        "scoreNegative": null
       },
       {
         "property": "http://purl.org/roh/mirror/vivo#dateTimeValue@@@http://purl.org/roh/mirror/vivo#dateTime",
