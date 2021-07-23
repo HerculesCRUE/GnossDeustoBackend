@@ -39,7 +39,14 @@ namespace ApiCargaWebInterface.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
-            return View();
+            string result = _callUrisFactoryService.GetSchema();
+            UriStructureGeneral uriStructure = JsonConvert.DeserializeObject<UriStructureGeneral>(result);
+            HashSet<string> listClass = new HashSet<string>();
+            listClass = new HashSet<string>(uriStructure.ResourcesClasses.Select(x => x.RdfType).Distinct().ToList());
+            listClass.UnionWith(uriStructure.ResourcesClasses.Select(x => x.ResourceClass).Distinct().ToList());
+            UrisFactoryResultViewModel urisFactoryModel = new UrisFactoryResultViewModel();
+            urisFactoryModel.listaRdfType = listClass;
+            return View(urisFactoryModel);
         }
         /// <summary>
         /// Devuelve la página de los esquemas
@@ -70,6 +77,12 @@ namespace ApiCargaWebInterface.Controllers
             {
                 ModelState.AddModelError("Resource_class", ex.Message);
             }
+            string result = _callUrisFactoryService.GetSchema();
+            UriStructureGeneral uriStructure = JsonConvert.DeserializeObject<UriStructureGeneral>(result);
+            HashSet<string> listClass = new HashSet<string>();
+            listClass = new HashSet<string>(uriStructure.ResourcesClasses.Select(x => x.RdfType).Distinct().ToList());
+            listClass.UnionWith(uriStructure.ResourcesClasses.Select(x => x.ResourceClass).Distinct().ToList());
+            urisFactoryModel.listaRdfType = listClass;
             return View("Index", urisFactoryModel);
         }
         /// <summary>
@@ -102,6 +115,12 @@ namespace ApiCargaWebInterface.Controllers
         [HttpPost]
         public IActionResult ReplaceSchema(IFormFile New_Schema_File)
         {
+            string result = _callUrisFactoryService.GetSchema();
+            UriStructureGeneral uriStructure = JsonConvert.DeserializeObject<UriStructureGeneral>(result);
+            HashSet<string> listClass = new HashSet<string>();
+            listClass = new HashSet<string>(uriStructure.ResourcesClasses.Select(x => x.RdfType).Distinct().ToList());
+            listClass.UnionWith(uriStructure.ResourcesClasses.Select(x => x.ResourceClass).Distinct().ToList());
+            UrisFactoryResultViewModel urisFactoryModel = new UrisFactoryResultViewModel();
             if (New_Schema_File != null)
             {
                 try
@@ -109,14 +128,15 @@ namespace ApiCargaWebInterface.Controllers
                     _callUrisFactoryService.ReplaceSchema(New_Schema_File);
                 }
                 catch (BadRequestException badExce)
-                {
-                    UrisFactoryResultViewModel urisFactoryModel = new UrisFactoryResultViewModel();
+                {                    
                     ModelState.AddModelError("New_Schema_File", badExce.Message);
+                    urisFactoryModel.listaRdfType = listClass;
                     return View("Index", urisFactoryModel);
                 }
 
             }
-            return View("Index", null);
+            urisFactoryModel.listaRdfType = listClass;
+            return View("Index", urisFactoryModel);
         }
 
         /// <summary>

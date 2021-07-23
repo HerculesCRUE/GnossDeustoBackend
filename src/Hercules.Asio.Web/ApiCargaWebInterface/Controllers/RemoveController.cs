@@ -44,7 +44,7 @@ namespace Hercules.Asio.Web.Controllers
             try
             {
                 _callRemoverService.CallRemover(pEntity);                
-                removerConfigView.resultado = $@"Entidad {pEntity} borrada correctamente.";
+                removerConfigView.resultado = $@"Entidad '{pEntity}' agregada a la cola de borrado.";
                 return View("Index", removerConfigView);
             }
             catch (Exception)

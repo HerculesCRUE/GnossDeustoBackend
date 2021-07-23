@@ -12,9 +12,9 @@
                 <form asp-action="@action">
                     <div class="fieldset fieldset01">
                         <fieldset class="mediumLabels">
-                            <h1>Borrar Entidad</h1>
+                            <h1>Administración > Borrar Entidad</h1>
                             <div class="fieldsetContent">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>                                
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="form-group">
                                     @if (!string.IsNullOrEmpty(Model.resultado) && Model.resultado.Contains("ERROR"))
                                     {
@@ -25,17 +25,55 @@
                                         <p class="list-group-item-success">@Model.resultado</p>
                                     }
                                     <label for="pEntity" class="control-label">Entidad</label>
-                                    <input id="pEntity" name="pEntity" for="until" class="form-control" />
+                                    <input placeholder="Introduzce la URL de la entidad..." id="pEntity" name="pEntity" for="until" class="form-control" />
                                 </div>
                             </div>
                         </fieldset>
                     </div>
-                    <div class="fieldset actionButtons fieldset03">
+                    <div hidden style="display:none" class="fieldset actionButtons fieldset03">
                         <fieldset>
                             <p>
-                                <input class="submit principal" type="submit" value="Borrar">
+                                <input id ="borrarEntidad" class="submit principal" type="submit" value="Borrar">
                             </p>
                         </fieldset>
+                    </div>
+
+                    <input type="button" class="borrar" data-toggle="modal" data-target="#modalEliminar0" value="Borrar">
+
+                    <div class="modal fade top-modal eliminar" id="modalEliminar0" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Eliminar</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="despAccionRec">
+                                        <div class="stateShowForm" id="panels">
+                                            <div id="menssages">
+                                                <div class="ok"></div>
+                                                <div class="ko"></div>
+                                            </div>
+                                            <div class="box form activeForm" id="action">
+                                                <div>
+                                                    <fieldset>
+                                                        <legend>¿Está seguro que quiere eliminar la entidad?</legend>
+                                                        <div id="eliminar">
+                                                            <p>
+                                                                <a onclick="$('#borrarEntidad').click()"><input type="button" class="button btn-principal" value="Eliminar"></a>
+                                                                <input type="button" value="Cancelar" data-dismiss="modal">
+                                                            </p>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
