@@ -19,9 +19,9 @@ Los componentes del proyecto se pueden consultar en:
 |Manual de uso Backend SGI|Documento| |https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Docs#manual-de-uso-del-backend-sgi|
 |Imágenes Docker de
 Backend SGI|Software| |https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Builds/docker-images|
-|Esquema de URIs Hércules|Especificación| |https://herculescrue.github.io/GnossDeustoBackend/Docs/UrisFactory/Especificacion-Esquema-de-URIs.md|
+|Esquema de URIs Hércules|Especificación| |https://herculescrue.github.io/GnossDeustoBackend/Docs/UrisFactory/Especificacion-Esquema-de-URIs|
 |Esquema de URIs Hércules|Software|Esquema de URIs para usar en Factoría de URIs|https://herculescrue.github.io/GnossDeustoBackend/Docs/UrisFactory/|
-|Buenas prácticas para URIs Hércules|Documento| |https://herculescrue.github.io/GnossDeustoBackend/Docs/UrisFactory/Buenas-practicas-URIs.md|
+|Buenas prácticas para URIs Hércules|Documento| |https://herculescrue.github.io/GnossDeustoBackend/Docs/UrisFactory/Buenas-practicas-URIs|
 |Librería Factoría de URIs|Software| |https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.UrisFactory|
 |Benchmark con criterios adicionales y resultados|Software| |https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Benchmark|
 |Resultados Benchmark|Documento| |https://herculescrue.github.io/GnossDeustoBackend/Docs/Hercules-TripleStore-Benchmark-deliverable-report|
@@ -35,7 +35,7 @@ Backend SGI|Software| |https://github.com/HerculesCRUE/GnossDeustoBackend/tree/m
 | | | |https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/src/Hercules.Asio.LinkedDataServer|
 |**Test suite para publicación de datos**|Software|Componente I+D|https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/data|
 |Manual Test suite para publicación de datos|Documento| |https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/data|
-|Análisis sobre necesidad de cumplimiento LDP|Documento| |https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/Hercules-ASIO-Evaluacion-de-cumplimiento-Linked-Data-Platform.md|
+|Análisis sobre necesidad de cumplimiento LDP|Documento| |https://herculescrue.github.io/GnossDeustoBackend/Docs/Hercules-ASIO-Evaluacion-de-cumplimiento-Linked-Data-Platform|
 |Material de formación|Documento| |https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Formacion|
 |**Otros resultados o desarrollos a comprobar**| | | |
 |UX- Accesibilidad de las páginas Web| | |Web de ASIO en PRE: https://linkeddata2.um.es/carga-web/public/home|
