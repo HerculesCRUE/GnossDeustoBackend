@@ -7,7 +7,7 @@
 |Versión|3.2|
 |Módulo|Documentación|
 |Tipo|Manual|
-|Cambios de la Versión|Cambio en el contenido del documento de procedencia|
+|Cambios de la Versión|Cambio en el contenido del documento de procedencia. Añadido SPARQL Replication|
 
 ## DOCUMENTACIÓN DE HÉRCULES ASIO BACKEND SGI
 
@@ -65,6 +65,7 @@ El entregable **Manual de uso del backend SGI** consta del siguiente contenido:
  - CVN
 	 - [Instalación y configuración del servicio](../src/cvn)
 	 - [Configuración del mapeo CVN-ROH](../src/cvn/docs/config)
+ - [SPARQL Replication](../src/Hercules.Asio.SPARQLReplication)
  - SPARQL
 	 [Hércules ASIO Ejemplos de consultas SPARQL](SPARQL/Hercules-ASIO-Ejemplos-de-consultas-SPARQL.md)
 	 
