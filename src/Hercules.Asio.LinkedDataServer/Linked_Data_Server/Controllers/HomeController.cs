@@ -876,9 +876,15 @@ namespace Linked_Data_Server.Controllers
                 {
                     Table.Row rowlist = new Table.Row();
                     rowlist.fields = new List<string>();
-                    foreach (var row in result)
+                    foreach (var head in sparqlObject.head.vars)
                     {
-                        rowlist.fields.Add(row.Value.value);
+                        if (result.ContainsKey(head))
+                        {
+                            rowlist.fields.Add(result[head].value);
+                        }else
+                        {
+                            rowlist.fields.Add("");
+                        }
                     }
                     table.Rows.Add(rowlist);
                 }
