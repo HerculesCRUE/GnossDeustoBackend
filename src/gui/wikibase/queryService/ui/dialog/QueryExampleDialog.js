@@ -249,7 +249,8 @@ wikibase.queryService.ui.dialog.QueryExampleDialog = ( function( $ ) {
 			return tagCloud;
 		} );*/
 	};
-
+	
+	
 	/**
 	 * @private
 	 */
@@ -376,3 +377,7 @@ wikibase.queryService.ui.dialog.QueryExampleDialog = ( function( $ ) {
 
 	return SELF;
 }( jQuery ) );
+
+$('.exampleTable a').on("click", function (){
+	$('div#QueryExamples.modal.fade.QueryExamples').modal('hide');
+});
