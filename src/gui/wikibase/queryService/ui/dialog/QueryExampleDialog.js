@@ -197,7 +197,7 @@ wikibase.queryService.ui.dialog.QueryExampleDialog = ( function( $ ) {
 	 * @private
 	 */
 	SELF.prototype._getCloudTags = function() {
-		var self = this,
+		/*var self = this,
 			filterTags = self._$element.find( '.tagFilter' ).tags().getTags();
 
 		// filter tags that don't effect the filter for examples
@@ -247,7 +247,7 @@ wikibase.queryService.ui.dialog.QueryExampleDialog = ( function( $ ) {
 				tag.label = _.compact( data.entities[tag.id].labels )[0].value;
 			} );
 			return tagCloud;
-		} );
+		} );*/
 	};
 
 	/**
@@ -257,8 +257,7 @@ wikibase.queryService.ui.dialog.QueryExampleDialog = ( function( $ ) {
 		var self = this,
 			queryHref = '#' + encodeURIComponent( query ),
 
-			$link = $( '<a title="Select">' ).text( title ).attr( 'href', queryHref )
-				.click( function ( e ) {
+			$link = $( '<a title="Select">' ).text( title ).attr( 'href', queryHref ).click( function ( e ) {
 					if ( e.ctrlKey || e.metaKey || e.shiftKey ) {
 						// if one of those keys is pressed, the link is opened in a new tab/window
 						// instead of being displayed in the current tab,
@@ -271,10 +270,10 @@ wikibase.queryService.ui.dialog.QueryExampleDialog = ( function( $ ) {
 						e.preventDefault();
 					}
 
-					self._$element.modal( 'hide' );
-					self._callback( query, title );
-					self._track( 'select' );
-					self._track( 'select.category.' + category.replace( /[^a-zA-Z0-9]/g, '_' ) );
+					self._$element.modal('hide');
+					self._callback(query, title);
+					self._track('select');
+					self._track('select.category.' + category.replace( /[^a-zA-Z0-9]/g, '_' ));
 				} ),
 			$edit = $( '<a>' )
 				.attr( { title: 'Edit', href: editHref, target: '_blank' } )
