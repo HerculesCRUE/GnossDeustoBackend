@@ -5,6 +5,7 @@ using Linked_Data_Server.Models.Services;
 using Linked_Data_Server.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -40,10 +41,10 @@ namespace Linked_Data_Server.Controllers
 
         [Produces("application/rdf+xml", "text/html")]
         public IActionResult Index()
-        {
+        {            
             string pXAppServer = "";
             //Obtenemos la URL de la entidad
-            string url = Request.GetEncodedUrl();
+            string url = Request.Scheme+"://"+Request.Host+ Request.HttpContext.Features.Get<IHttpRequestFeature>().RawTarget;
             string urlParam = HttpUtility.ParseQueryString(Request.QueryString.Value).Get("url");
             if (!string.IsNullOrEmpty(urlParam))
             {
