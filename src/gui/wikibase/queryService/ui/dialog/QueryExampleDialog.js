@@ -122,7 +122,7 @@ wikibase.queryService.ui.dialog.QueryExampleDialog = ( function( $ ) {
 
 		this._querySamplesApi.getExamples().then( function( examples ) {
 			self._examples = examples;
-			self._initTagCloud();
+			//self._initTagCloud();
 			self._updateExamplesCount( examples.length );
 
 			$.each( examples, function( key, example ) {
