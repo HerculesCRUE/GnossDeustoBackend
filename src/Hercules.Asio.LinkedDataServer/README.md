@@ -4,10 +4,10 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|LINKED DATA SERVER| 
 |Descripción|Manual del servicio LINKED DATA SERVER|
-|Versión|1.1|
+|Versión|1.2|
 |Módulo|API DISCOVER|
 |Tipo|Manual|
-|Cambios de la Versión|Cambios en la explicación de las opciones de configuración del renderizado por tipo de entidad|
+|Cambios de la Versión|Añadida la sección 'Búsqueda por texto libre'|
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=LinkedDataServer)
 
@@ -25,6 +25,8 @@
 [Introducción](#introducción)
 
 [Ejemplos de resolución de URIs](#ejemplos-de-resolución-de-uris) 
+
+[Búsqueda por texto libre](#búsqueda-por-texto-libre) 
 
 [Conexión a Triple Store](#conexión-a-triple-store)
 
@@ -61,9 +63,31 @@ Ejemplos de resolución de URIs
 -----------------------
 
 Se puede comprobar el funcionamiento del servidor mediante los siguientes ejemplos:
-- [http://graph.um.es/res/person/26d09e44-68bf-4629-8f4e-8ffdf27ba0b3](http://graph.um.es/res/person/26d09e44-68bf-4629-8f4e-8ffdf27ba0b3) Investigador con publicaciones y código ORCID.
-- [http://graph.um.es/res/academic-article/161158](http://graph.um.es/res/academic-article/161158) Artículo científico.
-- [http://graph.um.es/res/project/RADBOUDUMC](http://graph.um.es/res/project/RADBOUDUMC) Proyecto de investigación.
+- [http://linkeddata2.um.es/res/person/124](http://linkeddata2.um.es/res/person/124) Investigador con publicaciones y código ORCID.
+- [http://linkeddata2.um.es/res/academic-article/77681](http://linkeddata2.um.es/res/academic-article/77681) Artículo científico.
+- [http://linkeddata2.um.es/res/project/15335](http://linkeddata2.um.es/res/project/15335) Proyecto de investigación.
+
+
+Búsqueda por texto libre
+-----------------------
+
+Para las búsquedas por texto libre se ha utilizado la función bif:contains de Virtuoso, si se utilizase otro RDF Store habría que modificar la query que se realiza dentro del controlador [SearchController](../Hercules.Asio.LinkedDataServer/Linked_Data_Server/Controllers/SearchController.cs). 
+
+Se pueden realizar búsquedas de dos formas:
+- Sin introducir comillas dobles al inicio y al fin del texto a buscar: Realizará una búsqueda en la que encontrará todas las entidades que contengan todas las palabras introducidas (sin importar el orden). En la práctica al introducir en el buscador el texto **proyecto murcia** se realiza la siguiente instrucción **bif:contains '"proyecto" AND "murcia"'**.
+![](../../Docs/media/texto_libre.png)
+
+
+- Introduciendo comillas dobles al inicio y al final del texto a buscar: Realizará una búsqueda en la que encontrará todas las entidades que cumplan la expresión introducida. En la práctica se realiza la siguiente instrucción **bif:contains 'texto_introducido'**. 
+	
+Por lo que se podría utilizar para realizar una búsqueda de un texto completo concreto si únicamente se introducen las comillas al inicio y al final. Por ejemplo, al introducir el texto **"proyecto murcia"**  se realiza la siguiente instrucción **bif:contains '"proyecto murcia"'**.
+	
+![](../../Docs/media/texto_libre_comillas.png)
+
+O se pueden usar expresiones como OR para realizar búsquedas. Por ejemplo, al introducir el texto **"proyecto" OR "murcia"**  se realiza la siguiente instrucción **bif:contains '"proyecto" OR "murcia"'**.
+	
+![](../../Docs/media/texto_libre_comillas_OR.png)
+
 
 *Conexión a Triple Store*
 -------------------------
