@@ -12,5 +12,7 @@ namespace CargaDataSetMurcia.Model.XML
         public string NOMBRE { get; set; }
         public string PROYECTOFINALISTA { get; set; }
         public string LIMITATIVO { get; set; }
+        public string TIPOFINANCIACION { get; set; }
+        public string AMBITO_GEOGRAFICO { get; set; }
     }
 }

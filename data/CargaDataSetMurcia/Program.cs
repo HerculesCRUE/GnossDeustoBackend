@@ -79,21 +79,7 @@ namespace CargaDataSetMurcia
             {
                 throw new Exception("No está configurada el dominio de ASIO");
             }
-
-            Graph g = new Graph();
-            g.LoadFromFile("C:\\Cargas\\roh-v2.owl");
             
-
-            foreach (SparqlConfig sparqlConfig in sparqlASIO)
-            {
-                SparqlUtility.LoadTriples(SparqlUtility.GetTriplesFromGraph(g), sparqlConfig.endpoint, "http://graph.um.es/graph/research/roh", sparqlConfig.username, sparqlConfig.pass);
-            }
-            foreach (SparqlConfig sparqlConfig in sparqlUnidata)
-            {
-
-                SparqlUtility.LoadTriples(SparqlUtility.GetTriplesFromGraph(g), sparqlConfig.endpoint, "http://graph.um.es/graph/research/roh", sparqlConfig.username, sparqlConfig.pass);
-            }
-
 
             CargaRDF.GenerarRDF(urlUrisFactory);
             CargaRDF.PublicarRDF(urlUrisFactory, sparqlASIO, sparqlASIO_Graph, sparqlASIO_Domain, sparqlUnidata, sparqlUnidata_Graph, sparqlUnidata_Domain);
