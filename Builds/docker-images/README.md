@@ -200,8 +200,9 @@ Para que el Linked Data Server funcione de manera adecuada tenemos que preparar 
     		ServerName linkeddata2test.um.es
 		DocumentRoot "/var/www/html"
     		ProxyPreserveHost On
-    		ProxyPass / http://127.0.0.1:8081/
-    		ProxyPassReverse / http://127.0.0.1:8081/
+			AllowEncodedSlashes NoDecode
+    		ProxyPass / http://127.0.0.1:8081/ nocanon
+    		ProxyPassReverse / http://127.0.0.1:8081/ nocanon
     		Timeout 5400
     		ProxyTimeout 5400
     		<Proxy *>
