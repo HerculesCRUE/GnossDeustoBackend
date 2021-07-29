@@ -4,7 +4,7 @@
 | ------------- | ------------------------------------------------------------ |
 |Titulo|Despliegue de ASIO Backend de SGI con Docker| 
 |Descripción|Instrucciones para instalar ASIO mediante el despliegue de instancias docker|
-|Versión|1.5|
+|Versión|1.6|
 |Módulo|Documentación|
 |Tipo|Manual|
 |Cambios de la Versión|Añadidas instrucciones para reiniciar los frontales.|
@@ -194,7 +194,7 @@ Si lo queremos instalar en Ubuntu o Debian debemos ejecutar los siguientes coman
 	a2enmod proxy_balancer
 	a2enmod lbmethod_byrequests
 
-Para que el Linked Data Server funcione de manera adecuada tenemos que preparar un archivo de configuracion de Apache con estos datos. Esta configuración hace basicamente que lo que se pida por http se re dirija al servidor de Linked Data Server que en este caso estaria en la misma máquina y en su puerto establecido "8081"
+Para que el Linked Data Server funcione de manera adecuada tenemos que preparar un archivo de configuracion de Apache con estos datos. Esta configuración hace basicamente que lo que se pida por http se re dirija al servidor de Linked Data Server que en este caso estaria en la misma máquina y en su puerto establecido "8081".
 
 	<VirtualHost *:80>
     		ServerName linkeddata2test.um.es
