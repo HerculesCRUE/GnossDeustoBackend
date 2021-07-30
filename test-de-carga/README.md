@@ -18,6 +18,15 @@ Disponemos de los siguientes tests:
   - El archivo para repetir las pruebas es [hercules-5-10-hilos.jmx](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-5-10-hilos/hercules-5-10-hilos.jmx)
 - [De 10 a 20 hilos](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/test-de-carga/hercules-10-20-hilos), con peticiones HTML de la web pública y del Linked Data Server.
   - El archivo para repetir las pruebas es [hercules-10-20-hilos.jmx](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/hercules-10-20-hilos.jmx)
+  - Los gráficas de rendimiento de los sistemas se pueden consultar en:
+    - [Frontal 1 10-20 hilos CPU.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/Frontal%201%2010-20%20hilos%20CPU.png)
+    - [Frontal 1 10-20 hilos Mem.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/Frontal%201%2010-20%20hilos%20Mem.png)
+    - [Frontal 2 10-20 hilos CPU.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/Frontal%202%2010-20%20hilos%20CPU.png)
+    - [Frontal 2 10-20 hilos Mem.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/Frontal%202%2010-20%20hilos%20Mem.png)
+    - [RDF Store 1 10-20 hilos CPU.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/RDF%20Store%201%2010-20%20hilos%20CPU.png)
+    - [RDF Store 1 10-20 hilos Mem.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/RDF%20Store%201%2010-20%20hilos%20Mem.png)
+    - [RDF Store 2 10-20 hilos CPU.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/RDF%20Store%202%2010-20%20hilos%20CPU.png)
+    - [RDF Store 2 10-20 hilos Mem.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/RDF%20Store%202%2010-20%20hilos%20Mem.png)
 - [De 10 a 20 hilos](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos-linkeddata), con peticiones de datos RDF del Linked Data Server.
   - El archivo para repetir las pruebas es [hercules-10-20-hilos-linkeddata.jmx](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos-linkeddata/hercules-10-20-hilos-linkeddata.jmx)
 - [De 13 a 25 hilos](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-13-25-hilos-linkeddata), con peticiones de datos RDF del Linked Data Server.
