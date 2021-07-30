@@ -27,23 +27,34 @@ namespace CargaDataSetMurcia.Model
             string inputFolder = "Dataset";
             string outputFolder = "RDF";
 
-            //Leemos los XML            
-            List<Persona> personas = LeerPersonas(inputFolder + "/Personas.xml");
+            //Leemos los XML    
+            List<AreasUnescoProyectos> areasUnescoProyectos = LeerAreasUnescoProyectos(inputFolder + "/Areas UNESCO Proyectos.xml");
             List<Articulo> articulos = LeerArticulos(inputFolder + "/Articulos.xml");
             List<AutorArticulo> autoresArticulos = LeerAutoresArticulos(inputFolder + "/Autores articulos.xml");
             List<AutorCongreso> autoresCongresos = LeerAutoresCongresos(inputFolder + "/Autores congresos.xml");
             List<AutorExposicion> autoresExposiciones = LeerAutoresExposiciones(inputFolder + "/Autores exposiciones.xml");
             List<Centro> centros = LeerCentros(inputFolder + "/Centros.xml");
+            List<CodigosUnesco> codigosUnesco = LeerCodigosUnesco(inputFolder + "/Codigos UNESCO.xml");
             List<Congreso> congresos = LeerCongresos(inputFolder + "/Congresos.xml");
+            List<DatoEquipoInvestigacion> datoEquiposInvestigacion = LeerDatoEquiposInvestigacion(inputFolder + "/Datos equipo investigacion.xml");
             List<Departamento> departamentos = LeerDepartamentos(inputFolder + "/Departamentos.xml");
+            List<DirectoresTesis> directoresTesis = LeerDirectoresTesis(inputFolder + "/Directores tesis.xml");
             List<EquipoProyecto> equiposProyectos = LeerEquiposProyectos(inputFolder + "/Equipos proyectos.xml");
             List<Exposicion> exposiciones = LeerExposiciones(inputFolder + "/Exposiciones.xml");
             List<FechaEquipoProyecto> fechasEquiposProyectos = LeerFechasEquiposProyectos(inputFolder + "/Fechas equipos proyectos.xml");
             List<FechaProyecto> fechasProyectos = LeerFechasProyectos(inputFolder + "/Fechas proyectos.xml");
-            List<Proyecto> proyectos = LeerProyectos(inputFolder + "/Proyectos.xml");
-            List<TipoParticipacionGrupo> tipoParticipacionGrupos = LeerTipoParticipacionGrupos(inputFolder + "/Tipo participacion grupo.xml");
-            List<DatoEquipoInvestigacion> datoEquiposInvestigacion = LeerDatoEquiposInvestigacion(inputFolder + "/Datos equipo investigacion.xml");
             List<GrupoInvestigacion> gruposInvestigacion = LeerGruposInvestigacion(inputFolder + "/Grupos de investigacion.xml");
+            List<InventoresPatentes> inventoresPatentes = LeerInventoresPatentes(inputFolder + "/Inventores patentes.xml");
+            List<LineasDeInvestigacion> lineasDeInvestigacion = LeerLineasDeInvestigacion(inputFolder + "/Lineas de investigacion.xml");
+            List<LineasInvestigador> lineasInvestigador = LeerLineasInvestigador(inputFolder + "/Lineas investigador.xml");
+            List<LineasUnesco> lineasUnesco = LeerLineasUnesco(inputFolder + "/Lineas UNESCO.xml");
+            List<OrganizacionesExternas> organizacionesExternas = LeerOrganizacionesExternas(inputFolder + "/Organizaciones externas.xml");
+            List<Patentes> patentes = LeerPatentes(inputFolder + "/Patentes.xml");
+            List<Persona> personas = LeerPersonas(inputFolder + "/Personas.xml");
+            List<Proyecto> proyectos = LeerProyectos(inputFolder + "/Proyectos.xml");
+            List<Tesis> tesis = LeerTesis(inputFolder + "/Tesis.xml");
+            List<TipoParticipacionGrupo> tipoParticipacionGrupos = LeerTipoParticipacionGrupos(inputFolder + "/Tipo participacion grupo.xml");
+            List<TiposEventos> tiposEventos = LeerTiposEventos(inputFolder + "/Tipos eventos.xml");
 
             List<Feature> features = LeerFeatures();
 
@@ -56,10 +67,12 @@ namespace CargaDataSetMurcia.Model
             GenerarAmbitosProyectos(outputFolder + "/Ambito/", features);
             GenerarPersonas(outputFolder + "/Personas/", pUrlUrisFactory, personas, centros, departamentos, datoEquiposInvestigacion, tipoParticipacionGrupos, gruposInvestigacion);
             GenerarArticulos(outputFolder + "/Articulos/", pUrlUrisFactory, articulos, personas, autoresArticulos);
-            GenerarOrganizaciones(outputFolder + "/Organizaciones/", pUrlUrisFactory, centros, departamentos, gruposInvestigacion);
-            GenerarProyectos(outputFolder + "/Proyectos/", pUrlUrisFactory, proyectos, fechasProyectos, equiposProyectos, fechasEquiposProyectos, personas,features);
+            GenerarOrganizaciones(outputFolder + "/Organizaciones/", pUrlUrisFactory, centros, departamentos, gruposInvestigacion, datoEquiposInvestigacion, proyectos, equiposProyectos, fechasEquiposProyectos, lineasInvestigador, lineasDeInvestigacion, lineasUnesco);
+            GenerarProyectos(outputFolder + "/Proyectos/", pUrlUrisFactory, proyectos, fechasProyectos, equiposProyectos, fechasEquiposProyectos, personas, features, areasUnescoProyectos, organizacionesExternas);
             GenerarActividades(outputFolder + "/Actividades/", pUrlUrisFactory, congresos, exposiciones, autoresCongresos, autoresExposiciones, personas);
-            
+            GenerarPatentes(outputFolder + "/Patente/", pUrlUrisFactory, patentes, inventoresPatentes, personas);
+            GenerarTesis(outputFolder + "/Tesis/", pUrlUrisFactory, tesis, directoresTesis, personas);
+            GenerarTeauroUnesco(outputFolder + "/TesauroUnesco/", pUrlUrisFactory, codigosUnesco);
         }
 
         public static void PublicarRDF(string pUriUrisFactory, List<SparqlConfig> pSparqlASIO, string pSparqlASIO_Graph, string pSparqlASIO_Domain, List<SparqlConfig> pSparqlUnidata, string pSparqlUnidata_Graph, string pSparqlUnidata_Domain)
@@ -410,10 +423,50 @@ namespace CargaDataSetMurcia.Model
                             elemento.PERSONAL_ACTIVO = node.SelectSingleNode("PERSONAL_ACTIVO").InnerText;
                             break;
                         case "PERSONAL_UMU":
-                            elemento.SEXO = node.SelectSingleNode("PERSONAL_UMU").InnerText;
+                            elemento.PERSONAL_UMU = node.SelectSingleNode("PERSONAL_UMU").InnerText;
                             break;
                         case "EMAIL":
-                            elemento.SEXO = node.SelectSingleNode("EMAIL").InnerText;
+                            elemento.EMAIL = node.SelectSingleNode("EMAIL").InnerText;
+                            break;
+                        default:
+                            throw new Exception("Propiedad no controlada");
+                    }
+                }
+                elementos.Add(elemento);
+            }
+            Console.WriteLine($"\rLeídos {elementos.Count} elementos de {pFile}");
+            return elementos;
+        }
+
+        private static List<AreasUnescoProyectos> LeerAreasUnescoProyectos(string pFile)
+        {
+            Console.Write($"Leyendo {pFile}...");
+            List<AreasUnescoProyectos> elementos = new List<AreasUnescoProyectos>();
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(System.IO.File.ReadAllText(pFile));
+
+            foreach (XmlNode node in doc.SelectNodes("main/DATA_RECORD"))
+            {
+                AreasUnescoProyectos elemento = new AreasUnescoProyectos();
+                foreach (string propiedad in Propiedades(elemento))
+                {
+                    switch (propiedad)
+                    {
+                        case "IDPROYECTO":
+                            elemento.IDPROYECTO = node.SelectSingleNode("IDPROYECTO").InnerText;
+                            break;
+                        case "NUMERO":
+                            elemento.NUMERO = node.SelectSingleNode("NUMERO").InnerText;
+                            break;
+                        case "UNAR_CODIGO":
+                            elemento.UNAR_CODIGO = node.SelectSingleNode("UNAR_CODIGO").InnerText;
+                            break;
+                        case "UNCA_CODIGO":
+                            elemento.UNCA_CODIGO = node.SelectSingleNode("UNCA_CODIGO").InnerText;
+                            break;
+                        case "UNES_CODIGO":
+                            elemento.UNES_CODIGO = node.SelectSingleNode("UNES_CODIGO").InnerText;
                             break;
                         default:
                             throw new Exception("Propiedad no controlada");
@@ -458,11 +511,20 @@ namespace CargaDataSetMurcia.Model
                         case "CATALOGO":
                             elemento.CATALOGO = node.SelectSingleNode("CATALOGO").InnerText;
                             break;
+                        case "DESCRI_CATALOGO":
+                            elemento.DESCRI_CATALOGO = node.SelectSingleNode("DESCRI_CATALOGO").InnerText;
+                            break;
                         case "AREA":
                             elemento.AREA = node.SelectSingleNode("AREA").InnerText;
                             break;
+                        case "DESCRI_AREA":
+                            elemento.DESCRI_AREA = node.SelectSingleNode("DESCRI_AREA").InnerText;
+                            break;
                         case "NOMBRE_REVISTA":
                             elemento.NOMBRE_REVISTA = node.SelectSingleNode("NOMBRE_REVISTA").InnerText;
+                            break;
+                        case "IMPACTO_REVISTA":
+                            elemento.IMPACTO_REVISTA = node.SelectSingleNode("IMPACTO_REVISTA").InnerText;
                             break;
                         case "CUARTIL_REVISTA":
                             elemento.CUARTIL_REVISTA = node.SelectSingleNode("CUARTIL_REVISTA").InnerText;
@@ -634,6 +696,43 @@ namespace CargaDataSetMurcia.Model
             return elementos;
         }
 
+        private static List<CodigosUnesco> LeerCodigosUnesco(string pFile)
+        {
+            Console.Write($"Leyendo {pFile}...");
+            List<CodigosUnesco> elementos = new List<CodigosUnesco>();
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(System.IO.File.ReadAllText(pFile));
+
+            foreach (XmlNode node in doc.SelectNodes("main/DATA_RECORD"))
+            {
+                CodigosUnesco elemento = new CodigosUnesco();
+                foreach (string propiedad in Propiedades(elemento))
+                {
+                    switch (propiedad)
+                    {
+                        case "UNES_UNAR_CODIGO":
+                            elemento.UNES_UNAR_CODIGO = node.SelectSingleNode("UNES_UNAR_CODIGO").InnerText;
+                            break;
+                        case "UNES_UNCA_CODIGO":
+                            elemento.UNES_UNCA_CODIGO = node.SelectSingleNode("UNES_UNCA_CODIGO").InnerText;
+                            break;
+                        case "UNES_CODIGO":
+                            elemento.UNES_CODIGO = node.SelectSingleNode("UNES_CODIGO").InnerText;
+                            break;
+                        case "UNES_NOMBRE":
+                            elemento.UNES_NOMBRE = node.SelectSingleNode("UNES_NOMBRE").InnerText;
+                            break;
+                        default:
+                            throw new Exception("Propiedad no controlada");
+                    }
+                }
+                elementos.Add(elemento);
+            }
+            Console.WriteLine($"\rLeídos {elementos.Count} elementos de {pFile}");
+            return elementos;
+        }
+
         private static List<Congreso> LeerCongresos(string pFile)
         {
             Console.Write($"Leyendo {pFile}...");
@@ -703,6 +802,37 @@ namespace CargaDataSetMurcia.Model
                             break;
                         case "DEP_CED_CODIGO":
                             elemento.DEP_CED_CODIGO = node.SelectSingleNode("DEP_CED_CODIGO").InnerText;
+                            break;
+                        default:
+                            throw new Exception("Propiedad no controlada");
+                    }
+                }
+                elementos.Add(elemento);
+            }
+            Console.WriteLine($"\rLeídos {elementos.Count} elementos de {pFile}");
+            return elementos;
+        }
+
+        private static List<DirectoresTesis> LeerDirectoresTesis(string pFile)
+        {
+            Console.Write($"Leyendo {pFile}...");
+            List<DirectoresTesis> elementos = new List<DirectoresTesis>();
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(System.IO.File.ReadAllText(pFile));
+
+            foreach (XmlNode node in doc.SelectNodes("main/DATA_RECORD"))
+            {
+                DirectoresTesis elemento = new DirectoresTesis();
+                foreach (string propiedad in Propiedades(elemento))
+                {
+                    switch (propiedad)
+                    {
+                        case "CODIGO_TESIS":
+                            elemento.CODIGO_TESIS = node.SelectSingleNode("CODIGO_TESIS").InnerText;
+                            break;
+                        case "IDPERSONADIRECTOR":
+                            elemento.IDPERSONADIRECTOR = node.SelectSingleNode("IDPERSONADIRECTOR").InnerText;
                             break;
                         default:
                             throw new Exception("Propiedad no controlada");
@@ -885,8 +1015,11 @@ namespace CargaDataSetMurcia.Model
                         case "FECHAFINPROYECTO":
                             elemento.FECHAFINPROYECTO = node.SelectSingleNode("FECHAFINPROYECTO").InnerText;
                             break;
-                        case "CODTIPOMOTIVOCAMBIOFECHA":
-                            //elemento.CODTIPOMOTIVOCAMBIOFECHA = node.SelectSingleNode("CODTIPOMOTIVOCAMBIOFECHA").InnerText;
+                        case "ESTADO":
+                            elemento.ESTADO = node.SelectSingleNode("ESTADO").InnerText;
+                            break;
+                        case "CODTIPOMOIVOCAMBIOFECHA":
+                            elemento.CODTIPOMOIVOCAMBIOFECHA = node.SelectSingleNode("CODTIPOMOIVOCAMBIOFECHA").InnerText;
                             break;
                         case "MOTIVOCAMBIOFECHA":
                             elemento.MOTIVOCAMBIOFECHA = node.SelectSingleNode("MOTIVOCAMBIOFECHA").InnerText;
@@ -1056,6 +1189,299 @@ namespace CargaDataSetMurcia.Model
                             break;
                         case "FECHADESAPARICION":
                             elemento.FECHADESAPARICION = node.SelectSingleNode("FECHADESAPARICION").InnerText;
+                            break;
+                        default:
+                            throw new Exception("Propiedad no controlada");
+                    }
+                }
+                elementos.Add(elemento);
+            }
+            Console.WriteLine($"\rLeídos {elementos.Count} elementos de {pFile}");
+            return elementos;
+        }
+
+        private static List<InventoresPatentes> LeerInventoresPatentes(string pFile)
+        {
+            Console.Write($"Leyendo {pFile}...");
+            List<InventoresPatentes> elementos = new List<InventoresPatentes>();
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(System.IO.File.ReadAllText(pFile));
+
+            foreach (XmlNode node in doc.SelectNodes("main/DATA_RECORD"))
+            {
+                InventoresPatentes elemento = new InventoresPatentes();
+                foreach (string propiedad in Propiedades(elemento))
+                {
+                    switch (propiedad)
+                    {
+                        case "IDPATENTE":
+                            elemento.IDPATENTE = node.SelectSingleNode("IDPATENTE").InnerText;
+                            break;
+                        case "IDPERSONAINVENTOR":
+                            elemento.IDPERSONAINVENTOR = node.SelectSingleNode("IDPERSONAINVENTOR").InnerText;
+                            break;
+                        case "INVENTORPRINCIPAL":
+                            elemento.INVENTORPRINCIPAL = node.SelectSingleNode("INVENTORPRINCIPAL").InnerText;
+                            break;
+                        case "PERSONALPROPIO":
+                            elemento.PERSONALPROPIO = node.SelectSingleNode("PERSONALPROPIO").InnerText;
+                            break;
+                        case "NUMEROORDEN":
+                            elemento.NUMEROORDEN = node.SelectSingleNode("NUMEROORDEN").InnerText;
+                            break;
+                        case "PARTICIPACION":
+                            elemento.PARTICIPACION = node.SelectSingleNode("PARTICIPACION").InnerText;
+                            break;
+                        default:
+                            throw new Exception("Propiedad no controlada");
+                    }
+                }
+                elementos.Add(elemento);
+            }
+            Console.WriteLine($"\rLeídos {elementos.Count} elementos de {pFile}");
+            return elementos;
+        }
+
+        private static List<LineasDeInvestigacion> LeerLineasDeInvestigacion(string pFile)
+        {
+            Console.Write($"Leyendo {pFile}...");
+            List<LineasDeInvestigacion> elementos = new List<LineasDeInvestigacion>();
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(System.IO.File.ReadAllText(pFile));
+
+            foreach (XmlNode node in doc.SelectNodes("main/DATA_RECORD"))
+            {
+                LineasDeInvestigacion elemento = new LineasDeInvestigacion();
+                foreach (string propiedad in Propiedades(elemento))
+                {
+                    switch (propiedad)
+                    {
+                        case "LINE_CODIGO":
+                            elemento.LINE_CODIGO = node.SelectSingleNode("LINE_CODIGO").InnerText;
+                            break;
+                        case "LINE_DESCRIPCION":
+                            elemento.LINE_DESCRIPCION = node.SelectSingleNode("LINE_DESCRIPCION").InnerText;
+                            break;
+                        case "LINE_INICIO":
+                            elemento.LINE_INICIO = node.SelectSingleNode("LINE_INICIO").InnerText;
+                            break;
+                        default:
+                            throw new Exception("Propiedad no controlada");
+                    }
+                }
+                elementos.Add(elemento);
+            }
+            Console.WriteLine($"\rLeídos {elementos.Count} elementos de {pFile}");
+            return elementos;
+        }
+
+        private static List<LineasInvestigador> LeerLineasInvestigador(string pFile)
+        {
+            Console.Write($"Leyendo {pFile}...");
+            List<LineasInvestigador> elementos = new List<LineasInvestigador>();
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(System.IO.File.ReadAllText(pFile));
+
+            foreach (XmlNode node in doc.SelectNodes("main/DATA_RECORD"))
+            {
+                LineasInvestigador elemento = new LineasInvestigador();
+                foreach (string propiedad in Propiedades(elemento))
+                {
+                    switch (propiedad)
+                    {
+                        case "IDGRUPOINVESTIGACION":
+                            elemento.IDGRUPOINVESTIGACION = node.SelectSingleNode("IDGRUPOINVESTIGACION").InnerText;
+                            break;
+                        case "IDPERSONAINVESTIGADOR":
+                            elemento.IDPERSONAINVESTIGADOR = node.SelectSingleNode("IDPERSONAINVESTIGADOR").InnerText;
+                            break;
+                        case "FECHAINCORPORACIONGRUPO":
+                            elemento.FECHAINCORPORACIONGRUPO = node.SelectSingleNode("FECHAINCORPORACIONGRUPO").InnerText;
+                            break;
+                        case "LINE_CODIGO":
+                            elemento.LINE_CODIGO = node.SelectSingleNode("LINE_CODIGO").InnerText;
+                            break;
+                        case "FECHAINICIOTRABAJOLINEA":
+                            elemento.FECHAINICIOTRABAJOLINEA = node.SelectSingleNode("FECHAINICIOTRABAJOLINEA").InnerText;
+                            break;
+                        case "FECHAFINTRABAJOLINEA":
+                            elemento.FECHAFINTRABAJOLINEA = node.SelectSingleNode("FECHAFINTRABAJOLINEA").InnerText;
+                            break;
+                        default:
+                            throw new Exception("Propiedad no controlada");
+                    }
+                }
+                elementos.Add(elemento);
+            }
+            Console.WriteLine($"\rLeídos {elementos.Count} elementos de {pFile}");
+            return elementos;
+        }
+
+        private static List<LineasUnesco> LeerLineasUnesco(string pFile)
+        {
+            Console.Write($"Leyendo {pFile}...");
+            List<LineasUnesco> elementos = new List<LineasUnesco>();
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(System.IO.File.ReadAllText(pFile));
+
+            foreach (XmlNode node in doc.SelectNodes("main/DATA_RECORD"))
+            {
+                LineasUnesco elemento = new LineasUnesco();
+                foreach (string propiedad in Propiedades(elemento))
+                {
+                    switch (propiedad)
+                    {
+                        case "LIUN_LINE_CODIGO":
+                            elemento.LIUN_LINE_CODIGO = node.SelectSingleNode("LIUN_LINE_CODIGO").InnerText;
+                            break;
+                        case "LIUN_UNAR_CODIGO":
+                            elemento.LIUN_UNAR_CODIGO = node.SelectSingleNode("LIUN_UNAR_CODIGO").InnerText;
+                            break;
+                        case "LIUN_UNCA_CODIGO":
+                            elemento.LIUN_UNCA_CODIGO = node.SelectSingleNode("LIUN_UNCA_CODIGO").InnerText;
+                            break;
+                        case "LIUN_UNES_CODIGO":
+                            elemento.LIUN_UNES_CODIGO = node.SelectSingleNode("LIUN_UNES_CODIGO").InnerText;
+                            break;
+                        default:
+                            throw new Exception("Propiedad no controlada");
+                    }
+                }
+                elementos.Add(elemento);
+            }
+            Console.WriteLine($"\rLeídos {elementos.Count} elementos de {pFile}");
+            return elementos;
+        }
+
+        private static List<OrganizacionesExternas> LeerOrganizacionesExternas(string pFile)
+        {
+            Console.Write($"Leyendo {pFile}...");
+            List<OrganizacionesExternas> elementos = new List<OrganizacionesExternas>();
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(System.IO.File.ReadAllText(pFile));
+
+            foreach (XmlNode node in doc.SelectNodes("main/DATA_RECORD"))
+            {
+                OrganizacionesExternas elemento = new OrganizacionesExternas();
+                foreach (string propiedad in Propiedades(elemento))
+                {
+                    switch (propiedad)
+                    {
+                        case "IDPROYECTO":
+                            elemento.IDPROYECTO = node.SelectSingleNode("IDPROYECTO").InnerText;
+                            break;
+                        case "TIPO_COLABORACION":
+                            elemento.TIPO_COLABORACION = node.SelectSingleNode("TIPO_COLABORACION").InnerText;
+                            break;
+                        case "ENTIDAD":
+                            elemento.ENTIDAD = node.SelectSingleNode("ENTIDAD").InnerText;
+                            break;
+                        default:
+                            throw new Exception("Propiedad no controlada");
+                    }
+                }
+                elementos.Add(elemento);
+            }
+            Console.WriteLine($"\rLeídos {elementos.Count} elementos de {pFile}");
+            return elementos;
+        }
+
+        private static List<Patentes> LeerPatentes(string pFile)
+        {
+            Console.Write($"Leyendo {pFile}...");
+            List<Patentes> elementos = new List<Patentes>();
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(System.IO.File.ReadAllText(pFile));
+
+            foreach (XmlNode node in doc.SelectNodes("main/DATA_RECORD"))
+            {
+                Patentes elemento = new Patentes();
+                foreach (string propiedad in Propiedades(elemento))
+                {
+                    switch (propiedad)
+                    {
+                        case "IDPATENTE":
+                            elemento.IDPATENTE = node.SelectSingleNode("IDPATENTE").InnerText;
+                            break;
+                        case "TIPO":
+                            elemento.TIPO = node.SelectSingleNode("TIPO").InnerText;
+                            break;
+                        case "REFERENCIA":
+                            elemento.REFERENCIA = node.SelectSingleNode("REFERENCIA").InnerText;
+                            break;
+                        case "TITULO":
+                            elemento.TITULO = node.SelectSingleNode("TITULO").InnerText;
+                            break;
+                        default:
+                            throw new Exception("Propiedad no controlada");
+                    }
+                }
+                elementos.Add(elemento);
+            }
+            Console.WriteLine($"\rLeídos {elementos.Count} elementos de {pFile}");
+            return elementos;
+        }
+
+        private static List<Tesis> LeerTesis(string pFile)
+        {
+            Console.Write($"Leyendo {pFile}...");
+            List<Tesis> elementos = new List<Tesis>();
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(System.IO.File.ReadAllText(pFile));
+
+            foreach (XmlNode node in doc.SelectNodes("main/DATA_RECORD"))
+            {
+                Tesis elemento = new Tesis();
+                foreach (string propiedad in Propiedades(elemento))
+                {
+                    switch (propiedad)
+                    {
+                        case "CODIGO_TESIS":
+                            elemento.CODIGO_TESIS = node.SelectSingleNode("CODIGO_TESIS").InnerText;
+                            break;
+                        case "TITULO_TESIS":
+                            elemento.TITULO_TESIS = node.SelectSingleNode("TITULO_TESIS").InnerText;
+                            break;
+                        case "FECHA_LECTURA":
+                            elemento.FECHA_LECTURA = node.SelectSingleNode("FECHA_LECTURA").InnerText;
+                            break;
+                        default:
+                            throw new Exception("Propiedad no controlada");
+                    }
+                }
+                elementos.Add(elemento);
+            }
+            Console.WriteLine($"\rLeídos {elementos.Count} elementos de {pFile}");
+            return elementos;
+        }
+
+        private static List<TiposEventos> LeerTiposEventos(string pFile)
+        {
+            Console.Write($"Leyendo {pFile}...");
+            List<TiposEventos> elementos = new List<TiposEventos>();
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(System.IO.File.ReadAllText(pFile));
+
+            foreach (XmlNode node in doc.SelectNodes("main/DATA_RECORD"))
+            {
+                TiposEventos elemento = new TiposEventos();
+                foreach (string propiedad in Propiedades(elemento))
+                {
+                    switch (propiedad)
+                    {
+                        case "TIEV_CODIGO":
+                            elemento.TIEV_CODIGO = node.SelectSingleNode("TIEV_CODIGO").InnerText;
+                            break;
+                        case "TIEV_NOMBRE":
+                            elemento.TIEV_NOMBRE = node.SelectSingleNode("TIEV_NOMBRE").InnerText;
                             break;
                         default:
                             throw new Exception("Propiedad no controlada");
@@ -1281,7 +1707,7 @@ namespace CargaDataSetMurcia.Model
 
                                 //dedicationPercentage
                                 INode uriDedicationPercentage = graph.CreateUriNode(new Uri("http://purl.org/roh#dedicationPercentage"));
-                                INode objectDedicationPercentage = graph.CreateLiteralNode((float.Parse(datoEquipoInvestigacion.EDP) * 100).ToString(), new Uri("http://www.w3.org/2001/XMLSchema#double"));
+                                INode objectDedicationPercentage = graph.CreateLiteralNode((float.Parse(datoEquipoInvestigacion.EDP) * 100).ToString().Replace(",", "."), new Uri("http://www.w3.org/2001/XMLSchema#double"));
                                 Triple tripleDedicationPercentage = new Triple(uriSubjectRole, uriDedicationPercentage, objectDedicationPercentage);
                                 graph.Assert(tripleDedicationPercentage);
 
@@ -1428,6 +1854,27 @@ namespace CargaDataSetMurcia.Model
                     graph.Assert(triplePageEnd);
                 }
 
+                //Publicaciones Unesco
+                if (!string.IsNullOrEmpty(articulo.AREA) && !string.IsNullOrEmpty(articulo.DESCRI_AREA))
+                {
+                    //RdfType
+                    INode uriSubjectPubliUnesco = GetUri(pUriUrisFactory, graph, "Concept", articulo.AREA);
+                    INode uriObjectPubliUnesco = graph.CreateUriNode(new Uri("http://www.w3.org/2004/02/skos/core#Concept"));
+                    Triple triplePubliUnesco = new Triple(uriSubjectPubliUnesco, uriPredicateRdfType, uriObjectPubliUnesco);
+                    graph.Assert(triplePubliUnesco);
+
+                    //Label
+                    INode uriPredicateLabel = graph.CreateUriNode(new Uri("http://www.w3.org/2004/02/skos/core#prefLabel"));
+                    INode objectLabel = CreateTextNode(graph, articulo.DESCRI_AREA);
+                    Triple tripleLabel = new Triple(uriSubjectPubliUnesco, uriPredicateLabel, objectLabel);
+                    graph.Assert(tripleLabel);
+
+                    //HasKnowledgeArea
+                    INode uriPredicateHasKnowledgeArea = graph.CreateUriNode(new Uri("http://purl.org/roh#hasKnowledgeArea"));
+                    Triple tripleHasKnowledgeArea = new Triple(uriSubject, uriPredicateHasKnowledgeArea, uriSubjectPubliUnesco);
+                    graph.Assert(tripleHasKnowledgeArea);
+                }
+
                 //Revista
                 if (!string.IsNullOrEmpty(articulo.NOMBRE_REVISTA))
                 {
@@ -1457,6 +1904,37 @@ namespace CargaDataSetMurcia.Model
                     graph.Assert(tripleHasPublicationVenue);
                 }
 
+                if ((!string.IsNullOrEmpty(articulo.IMPACTO_REVISTA) && articulo.IMPACTO_REVISTA != "0") || (!string.IsNullOrEmpty(articulo.CUARTIL_REVISTA) && Int32.Parse(articulo.CUARTIL_REVISTA) > 0 && Int32.Parse(articulo.CUARTIL_REVISTA) < 5))
+                {
+                    //Metrica
+                    INode uriSubjectMetric = GetUri(pUriUrisFactory, graph, "http://purl.org/roh#Metric", null);
+                    INode uriObjectRdfTypeMetric = graph.CreateUriNode(new Uri("http://purl.org/roh#Metric"));
+                    Triple tripleRdfTypeMetric = new Triple(uriSubjectMetric, uriPredicateRdfType, uriObjectRdfTypeMetric);
+                    graph.Assert(tripleRdfTypeMetric);
+
+                    //TieneMetrica
+                    INode uriPredicateRohHasMetric = graph.CreateUriNode(new Uri("http://purl.org/roh#hasMetric"));
+                    Triple tripleMetrica = new Triple(uriSubject, uriPredicateRohHasMetric, uriSubjectMetric);
+                    graph.Assert(tripleMetrica);
+
+                    if (!string.IsNullOrEmpty(articulo.CUARTIL_REVISTA) && Int32.Parse(articulo.CUARTIL_REVISTA) > 0 && Int32.Parse(articulo.CUARTIL_REVISTA) < 5)
+                    {
+                        //Cuartil
+                        INode uriPredicateCuartil = graph.CreateUriNode(new Uri("http://purl.org/roh#quartile"));
+                        INode objectCuartil = CreateTextNode(graph, "Q" + articulo.CUARTIL_REVISTA);
+                        Triple tripleCuartil = new Triple(uriSubjectMetric, uriPredicateCuartil, objectCuartil);
+                        graph.Assert(tripleCuartil);
+                    }
+
+                    if (!string.IsNullOrEmpty(articulo.IMPACTO_REVISTA) && articulo.IMPACTO_REVISTA != "0")
+                    {
+                        //Factor de impacto
+                        INode uriPredicateImpacto = graph.CreateUriNode(new Uri("http://purl.org/roh#impactFactor"));
+                        INode objectImpacto = graph.CreateLiteralNode(articulo.IMPACTO_REVISTA.Replace(",", "."), new Uri("http://www.w3.org/2001/XMLSchema#float"));
+                        Triple tripleImpacto = new Triple(uriSubjectMetric, uriPredicateImpacto, objectImpacto);
+                        graph.Assert(tripleImpacto);
+                    }
+                }
 
                 List<AutorArticulo> autores = pAutorArticulo.Where(x => x.ARTI_CODIGO == articulo.CODIGO).ToList();
                 if (autores.Count > 0)
@@ -1506,7 +1984,7 @@ namespace CargaDataSetMurcia.Model
             Console.WriteLine($"\rGenerando RDFs en {pRuta} {i}/{pArticulos.Count}");
         }
 
-        private static void GenerarOrganizaciones(string pRuta, string pUrlUrisFactory, List<Centro> pCentros, List<Departamento> pDepartamentos, List<GrupoInvestigacion> pGruposInvestigacion)
+        private static void GenerarOrganizaciones(string pRuta, string pUrlUrisFactory, List<Centro> pCentros, List<Departamento> pDepartamentos, List<GrupoInvestigacion> pGruposInvestigacion, List<DatoEquipoInvestigacion> pDatoEquipoInvestigacions, List<Proyecto> pProyecto, List<EquipoProyecto> pEquipoProyecto, List<FechaEquipoProyecto> pFechaEquipoProyectos, List<LineasInvestigador> pLineasInvestigador, List<LineasDeInvestigacion> pLineasInvestigacion, List<LineasUnesco> pLineasUnesco)
         {
             System.IO.Directory.CreateDirectory(pRuta);
             int i = 0;
@@ -1609,6 +2087,52 @@ namespace CargaDataSetMurcia.Model
                 INode uriObjectRdfType = graph.CreateUriNode(new Uri("http://purl.org/roh#ResearchGroup"));
                 Triple tripleRdfType = new Triple(uriSubject, uriPredicateRdfType, uriObjectRdfType);
                 graph.Assert(tripleRdfType);
+
+                HashSet<string> listadoProyectos = new HashSet<string>();
+
+                List<DatoEquipoInvestigacion> listaDatosEquipoInvestigacion = pDatoEquipoInvestigacions.Where(x => x.IDGRUPOINVESTIGACION == grupoInvestigacion.IDGRUPOINVESTIGACION).ToList();
+                foreach (DatoEquipoInvestigacion dataEquipoInvestigacion in listaDatosEquipoInvestigacion)
+                {
+                    List<EquipoProyecto> listaEquipoProyecto = pEquipoProyecto.Where(x => x.IDPERSONA == dataEquipoInvestigacion.IDPERSONA &&
+                    (
+                    ObtenerFechaDeTexto(dataEquipoInvestigacion.FECHAINICIOPERIODO, true) >= ObtenerFechaDeTexto(x.FECHAINICIO, true) && ObtenerFechaDeTexto(dataEquipoInvestigacion.FECHAINICIOPERIODO, true) <= ObtenerFechaDeTexto(x.FECHAFIN, false)
+                    ||
+                    ObtenerFechaDeTexto(dataEquipoInvestigacion.FECHAFINPERIODO, false) >= ObtenerFechaDeTexto(x.FECHAINICIO, true) && ObtenerFechaDeTexto(dataEquipoInvestigacion.FECHAFINPERIODO, false) <= ObtenerFechaDeTexto(x.FECHAFIN, false)
+                    ||
+                    ObtenerFechaDeTexto(x.FECHAINICIO, true) >= ObtenerFechaDeTexto(dataEquipoInvestigacion.FECHAINICIOPERIODO, true) && ObtenerFechaDeTexto(x.FECHAINICIO, true) <= ObtenerFechaDeTexto(dataEquipoInvestigacion.FECHAFINPERIODO, false)
+                    ||
+                    ObtenerFechaDeTexto(x.FECHAFIN, false) >= ObtenerFechaDeTexto(dataEquipoInvestigacion.FECHAINICIOPERIODO, true) && ObtenerFechaDeTexto(x.FECHAFIN, false) <= ObtenerFechaDeTexto(dataEquipoInvestigacion.FECHAFINPERIODO, false)
+                    )).ToList();
+
+                    foreach (EquipoProyecto dataProyecto in listaEquipoProyecto)
+                    {
+                        List<FechaEquipoProyecto> fechaEquipoProyecto = pFechaEquipoProyectos.Where(x => x.IDPROYECTO == dataProyecto.IDPROYECTO && x.NUMEROCOLABORADOR == dataProyecto.NUMEROCOLABORADOR && x.CODTIPOPARTICIPACION == "IP" && x.FECHAINICIOPERIODO == dataEquipoInvestigacion.FECHAINICIOPERIODO).ToList();
+                        if (fechaEquipoProyecto.Count() == 1)
+                        {
+                            //Se guarda los IDs de los proyectos.
+                            listadoProyectos.Add(fechaEquipoProyecto[0].IDPROYECTO);
+                        }
+                    }
+                }
+
+                foreach (string idproyecto in listadoProyectos)
+                {
+                    //MemberRole   
+                    INode uriSubjectMemberRole = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/vivo#MemberRole", null);
+                    INode uriObjectMemberRole = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#MemberRole"));
+                    Triple tripleRdfMemberRole = new Triple(uriSubjectMemberRole, uriPredicateRdfType, uriObjectMemberRole);
+                    graph.Assert(tripleRdfMemberRole);
+
+                    //HasRole
+                    INode uriPredicateRohHasRole = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
+                    Triple tripleHasRol = new Triple(uriSubject, uriPredicateRohHasRole, uriSubjectMemberRole);
+                    graph.Assert(tripleHasRol);
+
+                    //RelatedBy
+                    INode uriPredicateRelatedBy = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
+                    Triple tripleRelatedBy = new Triple(uriSubjectMemberRole, uriPredicateRelatedBy, GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/vivo#Project", idproyecto));
+                    graph.Assert(tripleRelatedBy);
+                }
 
                 //Title
                 INode uriPredicateRohTitle = graph.CreateUriNode(new Uri("http://purl.org/roh#title"));
@@ -1718,6 +2242,51 @@ namespace CargaDataSetMurcia.Model
                     }
                 }
 
+                List<LineasInvestigador> lineaInvestigador = pLineasInvestigador.Where(x => x.IDGRUPOINVESTIGACION == grupoInvestigacion.IDGRUPOINVESTIGACION).ToList();
+
+
+                foreach (LineasInvestigador linea in lineaInvestigador)
+                {
+                    //ResearchLine
+                    List<LineasDeInvestigacion> lineaInvestigacion = pLineasInvestigacion.Where(x => x.LINE_CODIGO == linea.LINE_CODIGO).ToList();
+                    if (lineaInvestigacion != null && lineaInvestigacion.Count > 0)
+                    {
+                        foreach (LineasDeInvestigacion lineaInv in lineaInvestigacion)
+                        {
+                            INode uriPredicateResearchLine = graph.CreateUriNode(new Uri("http://purl.org/roh#researchLine"));
+                            INode objectRohResearchLine = CreateTextNode(graph, lineaInv.LINE_DESCRIPCION);
+                            Triple tripleResearchLine = new Triple(uriSubject, uriPredicateResearchLine, objectRohResearchLine);
+                            graph.Assert(tripleResearchLine);
+                        }
+                    }
+
+                    //HasKnowledgeArea
+                    List<LineasUnesco> lineasUnesco = pLineasUnesco.Where(x => x.LIUN_LINE_CODIGO == linea.LINE_CODIGO).ToList();
+                    if (lineasUnesco != null && lineasUnesco.Count > 0)
+                    {
+                        foreach (LineasUnesco lineaUnesco in lineasUnesco)
+                        {
+                            string codigoUNESCO = string.Empty;
+                            if (!string.IsNullOrEmpty(lineaUnesco.LIUN_UNAR_CODIGO) && lineaUnesco.LIUN_UNAR_CODIGO != "00")
+                            {
+                                codigoUNESCO += lineaUnesco.LIUN_UNAR_CODIGO;
+                            }
+                            if (!string.IsNullOrEmpty(lineaUnesco.LIUN_UNCA_CODIGO) && lineaUnesco.LIUN_UNCA_CODIGO != "00")
+                            {
+                                codigoUNESCO += lineaUnesco.LIUN_UNCA_CODIGO;
+                            }
+                            if (!string.IsNullOrEmpty(lineaUnesco.LIUN_UNES_CODIGO) && lineaUnesco.LIUN_UNES_CODIGO != "00")
+                            {
+                                codigoUNESCO += lineaUnesco.LIUN_UNES_CODIGO;
+                            }
+
+                            INode uriPredicateHasKnowledgeArea = graph.CreateUriNode(new Uri("http://purl.org/roh#hasKnowledgeArea"));
+                            Triple tripleHasKnowledgeArea = new Triple(uriSubject, uriPredicateHasKnowledgeArea, graph.CreateUriNode(new Uri($@"http://skos.um.es/unesco6/{codigoUNESCO}")));
+                            graph.Assert(tripleHasKnowledgeArea);
+                        }
+                    }
+                }
+
                 graph.SaveToFile(rutaGrupoInvestigacion);
             }
 
@@ -1725,7 +2294,27 @@ namespace CargaDataSetMurcia.Model
             Console.WriteLine($"\rGenerando RDFs en {pRuta} {i}/{total}");
         }
 
-        private static void GenerarProyectos(string pRuta, string pUrlUrisFactory, List<Proyecto> pProyectos, List<FechaProyecto> pFechaProyecto, List<EquipoProyecto> pEquipoProyecto, List<FechaEquipoProyecto> pFechaEquipoProyecto, List<Persona> pPersonas, List<Feature> pFeatures)
+        private static DateTime ObtenerFechaDeTexto(string pFechaTexto, bool pInicio)
+        {
+            if (string.IsNullOrEmpty(pFechaTexto))
+            {
+                if (pInicio)
+                {
+                    return DateTime.MinValue;
+                }
+                else
+                {
+                    return DateTime.MaxValue;
+                }
+            }
+            else
+            {
+                return new DateTime(int.Parse(pFechaTexto.Substring(0, 4)), int.Parse(pFechaTexto.Substring(5, 2)), int.Parse(pFechaTexto.Substring(8, 2)),
+                    int.Parse(pFechaTexto.Substring(11, 2)), int.Parse(pFechaTexto.Substring(14, 2)), int.Parse(pFechaTexto.Substring(17, 2)));
+            }
+        }
+
+        private static void GenerarProyectos(string pRuta, string pUrlUrisFactory, List<Proyecto> pProyectos, List<FechaProyecto> pFechaProyecto, List<EquipoProyecto> pEquipoProyecto, List<FechaEquipoProyecto> pFechaEquipoProyecto, List<Persona> pPersonas, List<Feature> pFeatures, List<AreasUnescoProyectos> pAreasUnescoProyectos, List<OrganizacionesExternas> pOrganizacionesExternas)
         {
             System.IO.Directory.CreateDirectory(pRuta);
             int i = 0;
@@ -1733,7 +2322,7 @@ namespace CargaDataSetMurcia.Model
             {
                 i++;
                 Console.Write($"\rGenerando RDFs en {pRuta} {i}/{pProyectos.Count}");
-                string rutaProyecto = pRuta + proyecto.IDPROYECTO.Replace("|","---") + ".rdf";
+                string rutaProyecto = pRuta + proyecto.IDPROYECTO.Replace("|", "---") + ".rdf";
                 Graph graph = new Graph();
 
                 //Rdftype
@@ -1749,10 +2338,155 @@ namespace CargaDataSetMurcia.Model
                 Triple tripleTitle = new Triple(uriSubject, uriPredicateRohTitle, objectRohTitle);
                 graph.Assert(tripleTitle);
 
+                //Estado del Proyecto (ProjectStatus)
+                INode uriPredicateProjectStatus = graph.CreateUriNode(new Uri("http://purl.org/roh#projectStatus"));
+                FechaProyecto fechaProyectoEstado = pFechaProyecto.Where(x => x.IDPROYECTO == proyecto.IDPROYECTO).ToList()[0];
+                string estado = string.Empty;
+                switch (fechaProyectoEstado.ESTADO)
+                {
+                    case "CONCEDIDO":
+                        estado = "CLOSED";
+                        break;
+                    case "VIGENTE":
+                        estado = "OPEN";
+                        break;
+                }
+                INode objectProjectStatus = CreateTextNode(graph, estado);
+                Triple tripleProjectStatus = new Triple(uriSubject, uriPredicateProjectStatus, objectProjectStatus);
+                graph.Assert(tripleProjectStatus);
+
                 //Identificador
                 INode uriPredicateCrisIdentifier = graph.CreateUriNode(new Uri("http://purl.org/roh#crisIdentifier"));
                 Triple tripleCrisIdentifier = new Triple(uriSubject, uriPredicateCrisIdentifier, GetIdentifier(graph, "Project", proyecto.IDPROYECTO));
                 graph.Assert(tripleCrisIdentifier);
+
+                //HasKnowledgeArea
+                List<AreasUnescoProyectos> proyectosUnesco = pAreasUnescoProyectos.Where(x => x.IDPROYECTO == proyecto.IDPROYECTO).ToList();
+                foreach (AreasUnescoProyectos proy in proyectosUnesco)
+                {
+                    string codigoUNESCO = string.Empty;
+                    if (!string.IsNullOrEmpty(proy.UNAR_CODIGO) && proy.UNAR_CODIGO != "00")
+                    {
+                        codigoUNESCO += proy.UNAR_CODIGO;
+                    }
+                    if (!string.IsNullOrEmpty(proy.UNCA_CODIGO) && proy.UNCA_CODIGO != "00")
+                    {
+                        codigoUNESCO += proy.UNCA_CODIGO;
+                    }
+                    if (!string.IsNullOrEmpty(proy.UNES_CODIGO) && proy.UNES_CODIGO != "00")
+                    {
+                        codigoUNESCO += proy.UNES_CODIGO;
+                    }
+
+                    INode uriPredicateHasKnowledgeArea = graph.CreateUriNode(new Uri("http://purl.org/roh#hasKnowledgeArea"));
+                    Triple tripleHasKnowledgeArea = new Triple(uriSubject, uriPredicateHasKnowledgeArea, graph.CreateUriNode(new Uri($@"http://skos.um.es/unesco6/{codigoUNESCO}")));
+                    graph.Assert(tripleHasKnowledgeArea);
+                }
+
+                //Organizaciones
+                List<OrganizacionesExternas> organizacionesExternas = pOrganizacionesExternas.Where(x => x.IDPROYECTO == proyecto.IDPROYECTO).ToList();
+                foreach (OrganizacionesExternas organizacion in organizacionesExternas)
+                {
+                    INode uriSubjectOrganizacion = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/foaf#Organization", HttpUtility.UrlEncode(organizacion.ENTIDAD.ToLower()));
+                    INode uriObjectOrganizacion = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/foaf#Organization"));
+                    Triple tripleOrganizacion = new Triple(uriSubjectOrganizacion, uriPredicateRdfType, uriObjectOrganizacion);
+                    graph.Assert(tripleOrganizacion);
+
+                    //Title
+                    INode uriPredicateOrgRohTitle = graph.CreateUriNode(new Uri("http://purl.org/roh#title"));
+                    INode objectOrgRohTitle = CreateTextNode(graph, organizacion.ENTIDAD);
+                    Triple tripleOrgTitle = new Triple(uriSubjectOrganizacion, uriPredicateOrgRohTitle, objectOrgRohTitle);
+                    graph.Assert(tripleOrgTitle);
+
+                    //hasRole                    
+                    switch (organizacion.TIPO_COLABORACION)
+                    {
+                        case "CONTRATADO":
+                            //RdfType
+                            INode uriSubjectHasRoleContratado = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#ThirdPartyContractorRole", null);
+                            INode uriObjectHasRoleContratado = graph.CreateUriNode(new Uri("http://purl.org/roh#ThirdPartyContractorRole"));
+                            Triple tripleRdfTypeHasRoleContratado = new Triple(uriSubjectHasRoleContratado, uriPredicateRdfType, uriObjectHasRoleContratado);
+                            graph.Assert(tripleRdfTypeHasRoleContratado);
+
+                            //HasRole
+                            INode uriPredicateHasRole = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
+                            Triple tripleHasRoleContratado = new Triple(uriSubjectOrganizacion, uriPredicateHasRole, uriSubjectHasRoleContratado);
+                            graph.Assert(tripleHasRoleContratado);
+
+                            //RelatedBy
+                            INode uriPredicateRelatedBy = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
+                            Triple triplerelatedBy = new Triple(uriSubjectHasRoleContratado, uriPredicateRelatedBy, uriSubject);
+                            graph.Assert(triplerelatedBy);
+                            break;
+                        case "LIDER":
+                            //RdfType
+                            INode uriSubjectHasRoleLider = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/vivo#LeaderRole", null);
+                            INode uriObjectHasRoleLider = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#LeaderRole"));
+                            Triple tripleRdfTypeHasRoleLider = new Triple(uriSubjectHasRoleLider, uriPredicateRdfType, uriObjectHasRoleLider);
+                            graph.Assert(tripleRdfTypeHasRoleLider);
+
+                            //HasRole
+                            INode uriPredicateHasLider = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
+                            Triple tripleHasRoleLider = new Triple(uriSubjectOrganizacion, uriPredicateHasLider, uriSubjectHasRoleLider);
+                            graph.Assert(tripleHasRoleLider);
+
+                            //RelatedBy
+                            INode uriPredicateRelatedByLider = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
+                            Triple triplerelatedByLider = new Triple(uriSubjectHasRoleLider, uriPredicateRelatedByLider, uriSubject);
+                            graph.Assert(triplerelatedByLider);
+
+                            //RdfType
+                            INode uriSubjectHasRoleExternal = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#ExternalMemberRole", null);
+                            INode uriObjectHasRoleExternal = graph.CreateUriNode(new Uri("http://purl.org/roh#ExternalMemberRole"));
+                            Triple tripleRdfTypeHasRoleExternal = new Triple(uriSubjectHasRoleExternal, uriPredicateRdfType, uriObjectHasRoleExternal);
+                            graph.Assert(tripleRdfTypeHasRoleExternal);
+
+                            //HasRole
+                            INode uriPredicateHasExternal = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
+                            Triple tripleHasRoleExternal = new Triple(uriSubjectOrganizacion, uriPredicateHasExternal, uriSubjectHasRoleExternal);
+                            graph.Assert(tripleHasRoleExternal);
+
+                            //RelatedBy
+                            INode uriPredicateRelatedByExternal = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
+                            Triple triplerelatedByExternal = new Triple(uriSubjectHasRoleExternal, uriPredicateRelatedByExternal, uriSubject);
+                            graph.Assert(triplerelatedByExternal);
+                            break;
+                        case "OTROS":
+                            //RdfType
+                            INode uriSubjectHasRoleOtros = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#ExternalMemberRole", null);
+                            INode uriObjectHasRoleOtros = graph.CreateUriNode(new Uri("http://purl.org/roh#ExternalMemberRole"));
+                            Triple tripleRdfTypeHasRoleOtros = new Triple(uriSubjectHasRoleOtros, uriPredicateRdfType, uriObjectHasRoleOtros);
+                            graph.Assert(tripleRdfTypeHasRoleOtros);
+
+                            //HasRole
+                            INode uriPredicateHasRoleOtros = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
+                            Triple tripleHasRoleOtros = new Triple(uriSubjectOrganizacion, uriPredicateHasRoleOtros, uriSubjectHasRoleOtros);
+                            graph.Assert(tripleHasRoleOtros);
+
+                            //RelatedBy
+                            INode uriPredicateRelatedByOtros = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
+                            Triple triplerelatedByOtros = new Triple(uriSubjectHasRoleOtros, uriPredicateRelatedByOtros, uriSubject);
+                            graph.Assert(triplerelatedByOtros);
+                            break;
+                        case "SOCIO":
+                            //RdfType
+                            INode uriSubjectHasRoleSocio = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#ExternalMemberRole", null);
+                            INode uriObjectHasRoleSocio = graph.CreateUriNode(new Uri("http://purl.org/roh#ExternalMemberRole"));
+                            Triple tripleRdfTypeHasRoleSocio = new Triple(uriSubjectHasRoleSocio, uriPredicateRdfType, uriObjectHasRoleSocio);
+                            graph.Assert(tripleRdfTypeHasRoleSocio);
+
+                            //HasRole
+                            INode uriPredicateHasRoleSocio = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
+                            Triple tripleHasRoleSocio = new Triple(uriSubjectOrganizacion, uriPredicateHasRoleSocio, uriSubjectHasRoleSocio);
+                            graph.Assert(tripleHasRoleSocio);
+
+                            //RelatedBy
+                            INode uriPredicateRelatedBySocio = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
+                            Triple triplerelatedBySocio = new Triple(uriSubjectHasRoleSocio, uriPredicateRelatedBySocio, uriSubject);
+                            graph.Assert(triplerelatedBySocio);
+                            break;
+                    }
+                }
 
                 //LocatedIn
                 if (!string.IsNullOrEmpty(proyecto.AMBITO_GEOGRAFICO))
@@ -1875,15 +2609,16 @@ namespace CargaDataSetMurcia.Model
                                 Triple tripleCrisIdentifierPerson = new Triple(uriSubjectPersona, uriPredicateCrisIdentifier, GetIdentifier(graph, "Person", persona.IDPERSONA));
                                 graph.Assert(tripleCrisIdentifierPerson);
 
-                                //roleOf
-                                INode uriPredicateRoleOf = graph.CreateUriNode(new Uri("http://purl.org/roh#roleOf"));
-                                Triple tripleRoleOf = new Triple(uriSubjectRole, uriPredicateRoleOf, uriSubjectPersona);
-                                graph.Assert(tripleRoleOf);
+                                //hasRole
+                                INode uriPredicateHasRole = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
+                                Triple tripleHasRole = new Triple(uriSubjectPersona, uriPredicateHasRole, uriSubjectRole);
+                                graph.Assert(tripleHasRole);
 
-                                //relates
-                                INode uriPredicateRelates = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relates"));
-                                Triple triplerelates = new Triple(uriSubject, uriPredicateRelates, uriSubjectRole);
-                                graph.Assert(triplerelates);
+                                //relatedBy
+                                INode uriPredicateRelatedBy = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
+                                Triple triplerelatedBy = new Triple(uriSubjectRole, uriPredicateRelatedBy, uriSubject);
+                                graph.Assert(triplerelatedBy);
+
 
                                 if (!string.IsNullOrEmpty(fechaEquipoProyecto.FECHAINICIOPERIODO) || !string.IsNullOrEmpty(fechaEquipoProyecto.FECHAFINPERIODO))
                                 {
@@ -1943,10 +2678,7 @@ namespace CargaDataSetMurcia.Model
                                         Triple tripleDateTime = new Triple(uriSubjectDateTimeValueFin, uriPredicateDateTime, uriObjectDateTime);
                                         graph.Assert(tripleDateTime);
                                     }
-
                                 }
-
-
                             }
                         }
                     }
@@ -2234,6 +2966,236 @@ namespace CargaDataSetMurcia.Model
             Console.WriteLine($"\rGenerando RDFs en {pRuta} {i}/{total}");
         }
 
+        private static void GenerarPatentes(string pRuta, string pUrlUrisFactory, List<Patentes> pPatentes, List<InventoresPatentes> pInventoresPatentes, List<Persona> pPersonas)
+        {
+            System.IO.Directory.CreateDirectory(pRuta);
+            int i = 0;
+            int total = pPatentes.Count;
+            foreach (Patentes patente in pPatentes)
+            {
+                i++;
+                Console.Write($"\rGenerando RDFs en {pRuta} {i}/{total}");
+                string rutaPatente = pRuta + "Patente_" + patente.IDPATENTE + ".rdf";
+                Graph graph = new Graph();
+
+                //RdfType
+                INode uriSubject = null;
+                INode uriPredicateRdfType = null;
+                INode uriObjectRdfType = null;
+                if (patente.TIPO == "D")
+                {
+                    uriSubject = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#Invention", patente.IDPATENTE);
+                    uriPredicateRdfType = graph.CreateUriNode(new Uri("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+                    uriObjectRdfType = graph.CreateUriNode(new Uri("http://purl.org/roh#Invention"));
+                    Triple tripleRdfType = new Triple(uriSubject, uriPredicateRdfType, uriObjectRdfType);
+                    graph.Assert(tripleRdfType);
+                }
+                else if (patente.TIPO == "M" || patente.TIPO == "P")
+                {
+                    uriSubject = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#PatentApplication", patente.IDPATENTE);
+                    uriPredicateRdfType = graph.CreateUriNode(new Uri("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+                    uriObjectRdfType = graph.CreateUriNode(new Uri("http://purl.org/roh#PatentApplication"));
+                    Triple tripleRdfType = new Triple(uriSubject, uriPredicateRdfType, uriObjectRdfType);
+                    graph.Assert(tripleRdfType);
+                }
+
+                //Titulo
+                INode uriPredicateRohTitle = graph.CreateUriNode(new Uri("http://purl.org/roh#title"));
+                INode objectRohTitle = CreateTextNode(graph, patente.TITULO);
+                Triple tripleTitle = new Triple(uriSubject, uriPredicateRohTitle, objectRohTitle);
+                graph.Assert(tripleTitle);
+
+                List<InventoresPatentes> inventores = pInventoresPatentes.Where(x => x.IDPATENTE == patente.IDPATENTE).ToList();
+                if (inventores.Count > 0)
+                {
+                    foreach (InventoresPatentes inventor in inventores)
+                    {
+                        Persona persona = pPersonas.FirstOrDefault(x => x.IDPERSONA == inventor.IDPERSONAINVENTOR);
+
+                        //Rdftype
+                        INode uriSubjectPersona = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/foaf#Person", persona.IDPERSONA);
+                        INode uriObjectRdfTypePersona = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/foaf#Person"));
+                        Triple tripleRdfTypePersona = new Triple(uriSubjectPersona, uriPredicateRdfType, uriObjectRdfTypePersona);
+                        graph.Assert(tripleRdfTypePersona);
+
+                        //Nombre
+                        INode uriPredicateFoafName = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/foaf#name"));
+                        INode objectFoafName = CreateTextNode(graph, persona.NOMBRE);
+                        Triple tripleNombre = new Triple(uriSubjectPersona, uriPredicateFoafName, objectFoafName);
+                        graph.Assert(tripleNombre);
+
+                        //Identificador
+                        INode uriPredicateCrisIdentifier = graph.CreateUriNode(new Uri("http://purl.org/roh#crisIdentifier"));
+                        Triple tripleCrisIdentifier = new Triple(uriSubjectPersona, uriPredicateCrisIdentifier, GetIdentifier(graph, "Person", persona.IDPERSONA));
+                        graph.Assert(tripleCrisIdentifier);
+
+                        if (inventor.INVENTORPRINCIPAL == "S")
+                        {
+                            if (persona != null)
+                            {
+                                //Principal Investigator Role
+                                INode uriSubjectRole = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/vivo#PrincipalInvestigatorRole", null);
+                                INode uriObjectRdfTypeMemberRole = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#PrincipalInvestigatorRole"));
+                                Triple tripleRdfTypeMemberRole = new Triple(uriSubjectRole, uriPredicateRdfType, uriObjectRdfTypeMemberRole);
+                                graph.Assert(tripleRdfTypeMemberRole);
+
+                                //Rol
+                                INode uriPredicateHasRole = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
+                                INode objectHasRole = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
+                                Triple tripleHasRole = new Triple(uriSubjectPersona, uriPredicateHasRole, uriSubjectRole);
+                                graph.Assert(tripleHasRole);
+
+                                //relatedBy
+                                INode uriPredicateRelatedBy = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
+                                Triple tripleRelatedBy = new Triple(uriSubjectRole, uriPredicateRelatedBy, uriSubject);
+                                graph.Assert(tripleRelatedBy);
+                            }
+                        }
+                        else if (inventor.INVENTORPRINCIPAL == "N")
+                        {
+                            if (persona != null)
+                            {
+                                //Investigator Role
+                                INode uriSubjectRole = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/vivo#InvestigatorRole", null);
+                                INode uriObjectRdfTypeMemberRole = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#InvestigatorRole"));
+                                Triple tripleRdfTypeMemberRole = new Triple(uriSubjectRole, uriPredicateRdfType, uriObjectRdfTypeMemberRole);
+                                graph.Assert(tripleRdfTypeMemberRole);
+
+                                //Rol
+                                INode uriPredicateHasRole = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
+                                INode objectHasRole = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
+                                Triple tripleHasRole = new Triple(uriSubjectPersona, uriPredicateHasRole, uriSubjectRole);
+                                graph.Assert(tripleHasRole);
+
+                                //relatedBy
+                                INode uriPredicateRelatedBy = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
+                                Triple tripleRelatedBy = new Triple(uriSubjectRole, uriPredicateRelatedBy, uriSubject);
+                                graph.Assert(tripleRelatedBy);
+                            }
+                        }
+                    }
+                }
+
+                graph.SaveToFile(rutaPatente);
+            }
+
+            Console.WriteLine($"\rGenerando RDFs en {pRuta} {i}/{total}");
+        }
+
+        private static void GenerarTesis(string pRuta, string pUrlUrisFactory, List<Tesis> pTesis, List<DirectoresTesis> pDirectoresTesis, List<Persona> pPersonas)
+        {
+            System.IO.Directory.CreateDirectory(pRuta);
+            int i = 0;
+            int total = pTesis.Count;
+            foreach (Tesis tesis in pTesis)
+            {
+                i++;
+                Console.Write($"\rGenerando RDFs en {pRuta} {i}/{total}");
+                string rutaTesis = pRuta + "Tesis_" + tesis.CODIGO_TESIS + ".rdf";
+                Graph graph = new Graph();
+
+                //RdfType
+                INode uriSubject = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#PhDThesis", tesis.CODIGO_TESIS);
+                INode uriPredicateRdfType = graph.CreateUriNode(new Uri("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+                INode uriObjectRdfType = graph.CreateUriNode(new Uri("http://purl.org/roh#PhDThesis"));
+                Triple tripleRdfType = new Triple(uriSubject, uriPredicateRdfType, uriObjectRdfType);
+                graph.Assert(tripleRdfType);
+
+                //Title
+                INode uriPredicateRohTitle = graph.CreateUriNode(new Uri("http://purl.org/roh#title"));
+                INode objectRohTitle = CreateTextNode(graph, tesis.TITULO_TESIS);
+                Triple tripleTitle = new Triple(uriSubject, uriPredicateRohTitle, objectRohTitle);
+                graph.Assert(tripleTitle);
+
+                //Fecha Lectura
+                string anio = tesis.FECHA_LECTURA.Substring(0, 4);
+                string mes = tesis.FECHA_LECTURA.Substring(5, 2);
+                string dia = tesis.FECHA_LECTURA.Substring(8, 2);
+                INode uriPredicateFechaLectura = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#dateTime"));
+                INode objectFechaLectura = graph.CreateLiteralNode($"{anio}-{mes}-{dia}T00:00:00.000+00:00", new Uri("http://www.w3.org/2001/XMLSchema#datetime"));
+                Triple tripleFechaLectura = new Triple(uriSubject, uriPredicateFechaLectura, objectFechaLectura);
+                graph.Assert(tripleFechaLectura);
+
+                //Supervisado por
+                List<DirectoresTesis> listaSupervisores = pDirectoresTesis.Where(x => x.CODIGO_TESIS == tesis.CODIGO_TESIS).ToList();
+                foreach (DirectoresTesis director in listaSupervisores)
+                {
+                    List<Persona> persona = pPersonas.Where(x => x.IDPERSONA == director.IDPERSONADIRECTOR).ToList();
+
+                    //Rdftype
+                    INode uriSubjectPersona = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/foaf#Person", persona[0].IDPERSONA);
+                    INode uriObjectRdfTypePersona = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/foaf#Person"));
+                    Triple tripleRdfTypePersona = new Triple(uriSubjectPersona, uriPredicateRdfType, uriObjectRdfTypePersona);
+                    graph.Assert(tripleRdfTypePersona);
+
+                    //Nombre
+                    INode uriPredicateFoafName = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/foaf#name"));
+                    INode objectFoafName = CreateTextNode(graph, persona[0].NOMBRE);
+                    Triple tripleNombre = new Triple(uriSubjectPersona, uriPredicateFoafName, objectFoafName);
+                    graph.Assert(tripleNombre);
+
+                    //Identificador
+                    INode uriPredicateCrisIdentifier = graph.CreateUriNode(new Uri("http://purl.org/roh#crisIdentifier"));
+                    Triple tripleCrisIdentifier = new Triple(uriSubjectPersona, uriPredicateCrisIdentifier, GetIdentifier(graph, "Person", persona[0].IDPERSONA));
+                    graph.Assert(tripleCrisIdentifier);
+
+                    //Title
+                    INode uriPredicateSupervisado = graph.CreateUriNode(new Uri("http://purl.org/roh#supervisedBy"));
+                    Triple tripleSupervisado = new Triple(uriSubject, uriPredicateSupervisado, uriSubjectPersona);
+                    graph.Assert(tripleSupervisado);
+                }
+
+                graph.SaveToFile(rutaTesis);
+            }
+
+            Console.WriteLine($"\rGenerando RDFs en {pRuta} {i}/{total}");
+        }
+
+        private static void GenerarTeauroUnesco(string pRuta, string pUrlUrisFactory, List<CodigosUnesco> pCodigosUnesco)
+        {
+            System.IO.Directory.CreateDirectory(pRuta);
+            int i = 0;
+            int total = pCodigosUnesco.Count;
+            foreach (CodigosUnesco codigos in pCodigosUnesco)
+            {
+                i++;
+                Console.Write($"\rGenerando RDFs en {pRuta} {i}/{total}");
+                string rutaTesis = $@"{pRuta}TesauroUnesco_{codigos.UNES_UNAR_CODIGO}{codigos.UNES_UNCA_CODIGO}{codigos.UNES_CODIGO}.rdf";
+                Graph graph = new Graph();
+
+                string codigoUNESCO = string.Empty;
+                if (!string.IsNullOrEmpty(codigos.UNES_UNAR_CODIGO) && codigos.UNES_UNAR_CODIGO != "00")
+                {
+                    codigoUNESCO += codigos.UNES_UNAR_CODIGO;
+                }
+                if (!string.IsNullOrEmpty(codigos.UNES_UNCA_CODIGO) && codigos.UNES_UNCA_CODIGO != "00")
+                {
+                    codigoUNESCO += codigos.UNES_UNCA_CODIGO;
+                }
+                if (!string.IsNullOrEmpty(codigos.UNES_CODIGO) && codigos.UNES_CODIGO != "00")
+                {
+                    codigoUNESCO += codigos.UNES_CODIGO;
+                }
+
+                //RdfType
+                INode uriSubject = graph.CreateUriNode(new Uri($@"http://skos.um.es/unesco6/{codigoUNESCO}"));
+                INode uriPredicateRdfType = graph.CreateUriNode(new Uri("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+                INode uriObjectRdfType = graph.CreateUriNode(new Uri("http://www.w3.org/2004/02/skos/core#Concept"));
+                Triple tripleRdfType = new Triple(uriSubject, uriPredicateRdfType, uriObjectRdfType);
+                graph.Assert(tripleRdfType);
+
+                //Label
+                INode uriPredicateLabel = graph.CreateUriNode(new Uri("http://www.w3.org/2004/02/skos/core#prefLabel"));
+                INode objectLabel = CreateTextNode(graph, codigos.UNES_NOMBRE);
+                Triple tripleLabel = new Triple(uriSubject, uriPredicateLabel, objectLabel);
+                graph.Assert(tripleLabel);
+
+                graph.SaveToFile(rutaTesis);
+            }
+
+            Console.WriteLine($"\rGenerando RDFs en {pRuta} {i}/{total}");
+        }
+
         private static void GenerarAmbitosProyectos(string pRuta, List<Feature> pFeatures)
         {
             System.IO.Directory.CreateDirectory(pRuta);
@@ -2331,7 +3293,7 @@ namespace CargaDataSetMurcia.Model
 
         #region Carga RDFs
 
-        #endregion 
+        #endregion
 
         #region Auxiliares
         private static Graph CloneGraph(Graph pGraph)

@@ -13,7 +13,8 @@ namespace CargaDataSetMurcia.Model.XML
         public string FECHAINICIOEXPEDIENTE { get; set; }
         public string FECHAINICIOPROYECTO { get; set; }
         public string FECHAFINPROYECTO { get; set; }
-        public string CODTIPOMOTIVOCAMBIOFECHA { get; set; }
+        public string ESTADO { get; set; }
+        public string CODTIPOMOIVOCAMBIOFECHA { get; set; }
         public string MOTIVOCAMBIOFECHA { get; set; }
     }
 }

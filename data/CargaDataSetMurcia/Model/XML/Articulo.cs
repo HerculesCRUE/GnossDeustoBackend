@@ -14,8 +14,11 @@ namespace CargaDataSetMurcia.Model.XML
         public string PAIS_CODIGO { get; set; }
         public string REIS_ISSN { get; set; }
         public string CATALOGO { get; set; }
+        public string DESCRI_CATALOGO { get; set; }    
         public string AREA { get; set; }
+        public string DESCRI_AREA { get; set; }
         public string NOMBRE_REVISTA { get; set; }
+        public string IMPACTO_REVISTA { get; set; }
         public string CUARTIL_REVISTA { get; set; }
         public string URL_REVISTA { get; set; }
         public string VOLUMEN { get; set; }
