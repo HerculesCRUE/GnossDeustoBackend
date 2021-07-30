@@ -32,13 +32,13 @@ Disponemos de los siguientes tests:
 - [De 10 a 20 hilos](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos-linkeddata), con peticiones de datos RDF del Linked Data Server.
   - El archivo para repetir las pruebas es [hercules-10-20-hilos-linkeddata.jmx](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos-linkeddata/hercules-10-20-hilos-linkeddata.jmx)
   - Los gráficas de rendimiento de los sistemas se pueden consultar en:
-    - [Frontal 1 10-20 hilos Linked Data CPU.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/Frontal%201%2010-20%20hilos%20Linked%20Data%20CPU.png)
-    - [Frontal 1 10-20 hilos Linked Data Mem.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/Frontal%201%2010-20%20hilos%20Linked%20Data%20Mem.png)
-    - [Frontal 2 10-20 hilos Linked Data CPU.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/Frontal%202%2010-20%20hilos%20Linked%20Data%20CPU.png)
-    - [Frontal 2 10-20 hilos Linked Data Mem.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/Frontal%202%2010-20%20hilos%20Linked%20Data%20Mem.png)
-    - [RDF Store 1 10-20 hilos Linked Data CPU.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/RDF%20Store%201%2010-20%20hilos%20Linked%20Data%20CPU.png)
-    - [RDF Store 1 10-20 hilos Linked Data Mem.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/RDF%20Store%201%2010-20%20hilos%20Linked%20Data%20Mem.png)
-    - [RDF Store 2 10-20 hilos Linked Data CPU.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/RDF%20Store%202%2010-20%20hilos%20Linked%20Data%20CPU.png)
-    - [RDF Store 2 10-20 hilos Linked Data Mem.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos/RDF%20Store%202%2010-20%20hilos%20Linked%20Data%20Mem.png)
+    - [Frontal 1 10-20 hilos Linked Data CPU.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos-linkeddata/Frontal%201%2010-20%20hilos%20Linked%20Data%20CPU.png)
+    - [Frontal 1 10-20 hilos Linked Data Mem.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos-linkeddata/Frontal%201%2010-20%20hilos%20Linked%20Data%20Mem.png)
+    - [Frontal 2 10-20 hilos Linked Data CPU.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos-linkeddata/Frontal%202%2010-20%20hilos%20Linked%20Data%20CPU.png)
+    - [Frontal 2 10-20 hilos Linked Data Mem.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos-linkeddata/Frontal%202%2010-20%20hilos%20Linked%20Data%20Mem.png)
+    - [RDF Store 1 10-20 hilos Linked Data CPU.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos-linkeddata/RDF%20Store%201%2010-20%20hilos%20Linked%20Data%20CPU.png)
+    - [RDF Store 1 10-20 hilos Linked Data Mem.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos-linkeddata/RDF%20Store%201%2010-20%20hilos%20Linked%20Data%20Mem.png)
+    - [RDF Store 2 10-20 hilos Linked Data CPU.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos-linkeddata/RDF%20Store%202%2010-20%20hilos%20Linked%20Data%20CPU.png)
+    - [RDF Store 2 10-20 hilos Linked Data Mem.png](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-10-20-hilos-linkeddata/RDF%20Store%202%2010-20%20hilos%20Linked%20Data%20Mem.png)
 - [De 13 a 25 hilos](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-13-25-hilos-linkeddata), con peticiones de datos RDF del Linked Data Server.
   - El archivo para repetir las pruebas es [hercules-13-25-hilos-linkeddata.jmx](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/hercules-13-25-hilos-linkeddata/hercules-13-25-hilos-linkeddata.jmx)
