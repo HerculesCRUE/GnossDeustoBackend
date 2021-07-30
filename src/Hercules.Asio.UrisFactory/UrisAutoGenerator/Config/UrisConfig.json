@@ -1060,7 +1060,8 @@
 			"ResourceClass": "Metric",
 			"RdfType": "http://purl.org/roh#Metric",
 			"LabelResourceClass": "metric",
-			"ResourceURI": "uriResourceStructure"
+			"ResourceURI": "uriResourceStructure",
+			"BlankNode": true
 		},
 		{
 			"ResourceClass": "MicroEnterprise",
@@ -1472,6 +1473,18 @@
 			"ResourceClass": "WorkshopPaper",
 			"RdfType": "http://purl.org/roh#WorkshopPaper",
 			"LabelResourceClass": "workshop_paper",
+			"ResourceURI": "uriResourceStructure"
+		},
+		{
+			"ResourceClass": "PatentApplication",
+			"RdfType": "http://purl.org/roh#PatentApplication",
+			"LabelResourceClass": "patent_application",
+			"ResourceURI": "uriResourceStructure"
+		},
+		{
+			"ResourceClass": "Invention",
+			"RdfType": "http://purl.org/roh#Invention",
+			"LabelResourceClass": "invention",
 			"ResourceURI": "uriResourceStructure"
 		},
 		{
