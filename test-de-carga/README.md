@@ -13,7 +13,7 @@
 
 Para ejecutar los tests de carga es necesario descargar [JMeter en su versión 5.4.1](https://jmeter.apache.org/download_jmeter.cgi).
 
-Los datos brutos de rendimiento de los sistemas están disponibles en [20210724 Hércules ASIO Pruebas de rendimiento Uso de servidores.xlsx](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/20210724%20H%C3%A9rcules%20ASIO%20Pruebas%20de%20rendimiento%20Uso%20de%20servidores.xlsx)
+Los datos brutos de rendimiento de los sistemas están disponibles en [20210724 Hércules ASIO Pruebas de rendimiento Uso de servidores.xlsx](https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/test-de-carga/20210724%20H%C3%A9rcules%20ASIO%20Pruebas%20de%20rendimiento%20Uso%20de%20servidores.xlsx). Se han obtenido estos datos para las pruebas que representan una carga alta con un rendimiento adecuado. 
 
 Disponemos de los siguientes tests:
 - [De 5 a 10 hilos](https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/test-de-carga/hercules-5-10-hilos), con peticiones HTML de la web pública y del Linked Data Server.
