@@ -84,7 +84,7 @@
     ]
   },
 
-  "PropsTitle": [ "http://purl.org/roh#title", "http://purl.org/roh/mirror/foaf#name" ],
+  "PropsTitle": [ "http://purl.org/roh#title", "http://purl.org/roh/mirror/foaf#name", "http://www.w3.org/2004/02/skos/core#prefLabel" ],
   "PropsTransform": [
     {
       "property": "http://purl.org/roh/mirror/vivo#researcherId",
