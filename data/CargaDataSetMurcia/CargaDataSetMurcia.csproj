@@ -80,6 +80,9 @@
     <None Update="Dataset\Organizaciones externas.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Dataset\Palabras clave articulos.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Dataset\Patentes.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
