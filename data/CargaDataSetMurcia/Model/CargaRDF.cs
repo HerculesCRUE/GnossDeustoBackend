@@ -2810,122 +2810,255 @@ namespace CargaDataSetMurcia.Model
             foreach (Congreso congreso in pCongresos)
             {
                 i++;
+                //En función del tipo generamos los 'congresos' de forma diferente
                 Console.Write($"\rGenerando RDFs en {pRuta} {i}/{total}");
-                string rutaCongreso = pRuta + "Congreso_" + congreso.CONG_NUMERO + ".rdf";
-                Graph graph = new Graph();
+                string rutaConference = pRuta + "Conference_" + congreso.CONG_NUMERO + ".rdf";
+                Graph graphConference = new Graph();
+                string rutaPresentation = pRuta + "Presentation_" + congreso.TITULO_CONTRIBUCION.ToLower().GetHashCode() + ".rdf";
+                Graph graphPresentation = new Graph();
+
+                //Generamos la conferencia 'Padre'
+
                 //Rdftype
-                INode uriSubject = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/vivo#Presentation", congreso.CONG_NUMERO);
-                INode uriPredicateRdfType = graph.CreateUriNode(new Uri("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
-                INode uriObjectRdfType = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#Presentation"));
-                Triple tripleRdfType = new Triple(uriSubject, uriPredicateRdfType, uriObjectRdfType);
-                graph.Assert(tripleRdfType);
+                INode uriSubjectConference = GetUri(pUrlUrisFactory, graphConference, "http://purl.org/roh/mirror/bibo#Conference", congreso.TITULO_CONGRESO);
+                INode uriPredicateRdfType = graphConference.CreateUriNode(new Uri("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+                INode uriObjectRdfType = graphConference.CreateUriNode(new Uri("http://purl.org/roh/mirror/bibo#Conference"));
+                Triple tripleRdfType = new Triple(uriSubjectConference, uriPredicateRdfType, uriObjectRdfType);
+                graphConference.Assert(tripleRdfType);
 
                 //Title
-                INode uriPredicateRohTitle = graph.CreateUriNode(new Uri("http://purl.org/roh#title"));
-                INode objectRohTitle = CreateTextNode(graph, congreso.TITULO_CONTRIBUCION + " - " + congreso.TITULO_CONGRESO);
-                Triple tripleTitle = new Triple(uriSubject, uriPredicateRohTitle, objectRohTitle);
-                graph.Assert(tripleTitle);
+                INode uriPredicateRohTitle = graphConference.CreateUriNode(new Uri("http://purl.org/roh#title"));
+                INode objectRohTitle = CreateTextNode(graphConference, congreso.TITULO_CONGRESO);
+                Triple tripleTitle = new Triple(uriSubjectConference, uriPredicateRohTitle, objectRohTitle);
+                graphConference.Assert(tripleTitle);
 
                 //Locality
                 if (!string.IsNullOrEmpty(congreso.LUGAR_CELEBRACION))
                 {
-                    INode uriPredicateLocality = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vcard#locality"));
-                    INode objectLocality = CreateTextNode(graph, congreso.LUGAR_CELEBRACION);
-                    Triple tripleLocality = new Triple(uriSubject, uriPredicateLocality, objectLocality);
-                    graph.Assert(tripleLocality);
+                    INode uriPredicateLocality = graphConference.CreateUriNode(new Uri("http://purl.org/roh/mirror/vcard#locality"));
+                    INode objectLocality = CreateTextNode(graphConference, congreso.LUGAR_CELEBRACION);
+                    Triple tripleLocality = new Triple(uriSubjectConference, uriPredicateLocality, objectLocality);
+                    graphConference.Assert(tripleLocality);
                 }
 
-                //Fecha 
-                if (!string.IsNullOrEmpty(congreso.FECHA_CELEBRACION))
+                //Internacional
+                INode uriPredicateRohInternational = graphConference.CreateUriNode(new Uri("http://purl.org/roh#international"));
+                INode objectInternacional = graphConference.CreateLiteralNode("false", new Uri("http://www.w3.org/2001/XMLSchema#boolean"));
+                if (congreso.CONGRESO_INTERNACIONAL == "S")
                 {
-                    //Rdftype DateTimeInterval
-                    INode uriSubjectDateTimeInterval = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/vivo#DateTimeInterval", "");
-                    INode uriObjectRdfTypeDateTimeInterval = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#DateTimeInterval"));
-                    Triple tripleRdfTypeDateTimeInterval = new Triple(uriSubjectDateTimeInterval, uriPredicateRdfType, uriObjectRdfTypeDateTimeInterval);
-                    graph.Assert(tripleRdfTypeDateTimeInterval);
-
-                    //PredicateDateTimeInterval
-                    INode uriPredicateDateTimeInterval = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#dateTimeInterval"));
-                    Triple tripleDateTimeInterval = new Triple(uriSubject, uriPredicateDateTimeInterval, uriSubjectDateTimeInterval);
-                    graph.Assert(tripleDateTimeInterval);
-
-                    {
-                        string anio = congreso.FECHA_CELEBRACION.Substring(0, 4);
-                        string mes = congreso.FECHA_CELEBRACION.Substring(5, 2);
-                        string dia = congreso.FECHA_CELEBRACION.Substring(8, 2);
-                        string h = congreso.FECHA_CELEBRACION.Substring(11, 2);
-                        string m = congreso.FECHA_CELEBRACION.Substring(14, 2);
-                        string s = congreso.FECHA_CELEBRACION.Substring(17, 2);
-                        //Rdftype DateTimeValue inicio
-                        INode uriSubjectDateTimeValueInicio = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/vivo#DateTimeValue", "");
-                        INode uriObjectRdfTypeDateTimeValue = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#DateTimeValue"));
-                        Triple tripleRdfTypeDateTimeValueInicio = new Triple(uriSubjectDateTimeValueInicio, uriPredicateRdfType, uriObjectRdfTypeDateTimeValue);
-                        graph.Assert(tripleRdfTypeDateTimeValueInicio);
-
-                        //PredicateStart
-                        INode uriPredicateStart = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#start"));
-                        Triple tripleStart = new Triple(uriSubjectDateTimeInterval, uriPredicateStart, uriSubjectDateTimeValueInicio);
-                        graph.Assert(tripleStart);
-
-                        //dateTime
-                        INode uriPredicateDateTime = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#dateTime"));
-                        INode uriObjectDateTime = graph.CreateLiteralNode($"{anio}-{mes}-{dia}T{h}:{m}:{s}.000+00:00", new Uri("http://www.w3.org/2001/XMLSchema#datetime"));
-                        Triple tripleDateTime = new Triple(uriSubjectDateTimeValueInicio, uriPredicateDateTime, uriObjectDateTime);
-                        graph.Assert(tripleDateTime);
-                    }
-
-                    {
-                        string anio = congreso.FECHA_CELEBRACION.Substring(0, 4);
-                        string mes = congreso.FECHA_CELEBRACION.Substring(5, 2);
-                        string dia = congreso.FECHA_CELEBRACION.Substring(8, 2);
-                        string h = congreso.FECHA_CELEBRACION.Substring(11, 2);
-                        string m = congreso.FECHA_CELEBRACION.Substring(14, 2);
-                        string s = congreso.FECHA_CELEBRACION.Substring(17, 2);
-                        //Rdftype DateTimeValue fin
-                        INode uriSubjectDateTimeValueFin = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/vivo#DateTimeValue", "");
-                        INode uriObjectRdfTypeDateTimeValue = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#DateTimeValue"));
-                        Triple tripleRdfTypeDateTimeValueInicioFin = new Triple(uriSubjectDateTimeValueFin, uriPredicateRdfType, uriObjectRdfTypeDateTimeValue);
-                        graph.Assert(tripleRdfTypeDateTimeValueInicioFin);
-
-                        //PredicateEnd
-                        INode uriPredicateEnd = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#end"));
-                        Triple tripleEnd = new Triple(uriSubjectDateTimeInterval, uriPredicateEnd, uriSubjectDateTimeValueFin);
-                        graph.Assert(tripleEnd);
-
-                        //dateTime
-                        INode uriPredicateDateTime = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#dateTime"));
-                        INode uriObjectDateTime = graph.CreateLiteralNode($"{anio}-{mes}-{dia}T{h}:{m}:{s}.000+00:00", new Uri("http://www.w3.org/2001/XMLSchema#datetime"));
-                        Triple tripleDateTime = new Triple(uriSubjectDateTimeValueFin, uriPredicateDateTime, uriObjectDateTime);
-                        graph.Assert(tripleDateTime);
-                    }
+                    objectInternacional = graphConference.CreateLiteralNode("true", new Uri("http://www.w3.org/2001/XMLSchema#boolean"));
                 }
+                Triple tripleRohInternational = new Triple(uriSubjectConference, uriPredicateRohInternational, objectInternacional);
+                graphConference.Assert(tripleRohInternational);
 
-                //Identificador
+                if (string.IsNullOrEmpty(congreso.TITULO_CONTRIBUCION))
                 {
-                    INode uriPredicateCrisIdentifier = graph.CreateUriNode(new Uri("http://purl.org/roh#crisIdentifier"));
-                    Triple tripleCrisIdentifier = new Triple(uriSubject, uriPredicateCrisIdentifier, GetIdentifier(graph, "Presentation", congreso.CONG_NUMERO));
-                    graph.Assert(tripleCrisIdentifier);
-                }
-
-                List<AutorCongreso> autores = pAutoresCongreso.Where(x => x.CONG_NUMERO == congreso.CONG_NUMERO).ToList();
-                if (autores.Count > 0)
-                {
-                    foreach (AutorCongreso autorCongreso in autores)
+                    //Si no existe la contribución como tal, metemos la fecha en la conferencia
+                    //Fecha 
+                    if (!string.IsNullOrEmpty(congreso.FECHA_CELEBRACION))
                     {
-                        Persona persona = pPersonas.FirstOrDefault(x => x.IDPERSONA == autorCongreso.IDPERSONA);
-                        if (persona != null)
+                        //Rdftype DateTimeInterval
+                        INode uriSubjectDateTimeInterval = GetUri(pUrlUrisFactory, graphConference, "http://purl.org/roh/mirror/vivo#DateTimeInterval", "");
+                        INode uriObjectRdfTypeDateTimeInterval = graphConference.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#DateTimeInterval"));
+                        Triple tripleRdfTypeDateTimeInterval = new Triple(uriSubjectDateTimeInterval, uriPredicateRdfType, uriObjectRdfTypeDateTimeInterval);
+                        graphConference.Assert(tripleRdfTypeDateTimeInterval);
+
+                        //PredicateDateTimeInterval
+                        INode uriPredicateDateTimeInterval = graphConference.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#dateTimeInterval"));
+                        Triple tripleDateTimeInterval = new Triple(uriSubjectConference, uriPredicateDateTimeInterval, uriSubjectDateTimeInterval);
+                        graphConference.Assert(tripleDateTimeInterval);
+
                         {
-                            //Rdftype
-                            INode uriSubjectPersona = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/foaf#Person", persona.IDPERSONA);
+                            string anio = congreso.FECHA_CELEBRACION.Substring(0, 4);
+                            string mes = congreso.FECHA_CELEBRACION.Substring(5, 2);
+                            string dia = congreso.FECHA_CELEBRACION.Substring(8, 2);
+                            string h = congreso.FECHA_CELEBRACION.Substring(11, 2);
+                            string m = congreso.FECHA_CELEBRACION.Substring(14, 2);
+                            string s = congreso.FECHA_CELEBRACION.Substring(17, 2);
+                            //Rdftype DateTimeValue inicio
+                            INode uriSubjectDateTimeValueInicio = GetUri(pUrlUrisFactory, graphConference, "http://purl.org/roh/mirror/vivo#DateTimeValue", "");
+                            INode uriObjectRdfTypeDateTimeValue = graphConference.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#DateTimeValue"));
+                            Triple tripleRdfTypeDateTimeValueInicio = new Triple(uriSubjectDateTimeValueInicio, uriPredicateRdfType, uriObjectRdfTypeDateTimeValue);
+                            graphConference.Assert(tripleRdfTypeDateTimeValueInicio);
 
-                            //Participated by
-                            INode uriPredicateParticipatedBy = graph.CreateUriNode(new Uri("http://purl.org/roh#participatedBy"));
-                            Triple tripleParticipatedBy = new Triple(uriSubject, uriPredicateParticipatedBy, uriSubjectPersona);
-                            graph.Assert(tripleParticipatedBy);
+                            //PredicateStart
+                            INode uriPredicateStart = graphConference.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#start"));
+                            Triple tripleStart = new Triple(uriSubjectDateTimeInterval, uriPredicateStart, uriSubjectDateTimeValueInicio);
+                            graphConference.Assert(tripleStart);
+
+                            //dateTime
+                            INode uriPredicateDateTime = graphConference.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#dateTime"));
+                            INode uriObjectDateTime = graphConference.CreateLiteralNode($"{anio}-{mes}-{dia}T{h}:{m}:{s}.000+00:00", new Uri("http://www.w3.org/2001/XMLSchema#datetime"));
+                            Triple tripleDateTime = new Triple(uriSubjectDateTimeValueInicio, uriPredicateDateTime, uriObjectDateTime);
+                            graphConference.Assert(tripleDateTime);
                         }
                     }
                 }
-                graph.SaveToFile(rutaCongreso);
+                else
+                {
+                    INode uriPredicateRdfTypePresentation = graphPresentation.CreateUriNode(new Uri("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+
+                    //Rdftype
+                    INode uriSubjectPresentation = GetUri(pUrlUrisFactory, graphPresentation, "http://purl.org/roh/mirror/vivo#Presentation", congreso.CONG_NUMERO);
+                    INode uriObjectRdfTypePresentation = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#Presentation"));
+                    switch (congreso.TIPO_PARTICIPACION)
+                    {
+                        case "":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "11":
+                            break;
+                        case "5":
+                            uriSubjectPresentation = GetUri(pUrlUrisFactory, graphPresentation, "http://purl.org/roh/mirror/vivo#ConferencePoster", congreso.CONG_NUMERO);
+                            uriObjectRdfTypePresentation = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#ConferencePoster"));
+                            break;
+                        case "8":
+                            uriSubjectPresentation = GetUri(pUrlUrisFactory, graphPresentation, "http://purl.org/roh#RoundTable", congreso.CONG_NUMERO);
+                            uriObjectRdfTypePresentation = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh#RoundTable"));
+                            break;
+                        case "10":
+                            uriSubjectPresentation = GetUri(pUrlUrisFactory, graphPresentation, "http://purl.org/roh/mirror/bibo#Workshop", congreso.CONG_NUMERO);
+                            uriObjectRdfTypePresentation = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh/mirror/bibo#Workshop"));
+                            break;
+                        case "12":
+                            uriSubjectPresentation = GetUri(pUrlUrisFactory, graphPresentation, "http://purl.org/roh/mirror/vivo#InvitedTalk", congreso.CONG_NUMERO);
+                            uriObjectRdfTypePresentation = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#InvitedTalk"));
+                            break;
+                        case "99":
+                            uriSubjectPresentation = GetUri(pUrlUrisFactory, graphPresentation, "http://purl.org/roh#Activity", congreso.CONG_NUMERO);
+                            uriObjectRdfTypePresentation = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh#Activity"));
+                            break;
+                        default:
+                            throw new Exception("Tipo no controlado");
+                    }
+                    Triple tripleRdfTypePresentation = new Triple(uriSubjectPresentation, uriPredicateRdfTypePresentation, uriObjectRdfTypePresentation);
+                    graphPresentation.Assert(tripleRdfTypePresentation);
+
+
+                    //Title
+                    INode objectRohTitlePresentation = CreateTextNode(graphPresentation, congreso.TITULO_CONTRIBUCION);
+                    INode uriPredicateRohTitlePresentation = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh#title"));
+                    Triple tripleTitlePresentation = new Triple(uriSubjectPresentation, uriPredicateRohTitlePresentation, objectRohTitlePresentation);
+                    graphPresentation.Assert(tripleTitlePresentation);
+
+                    //Identificador
+                    {
+                        INode uriPredicateCrisIdentifier = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh#crisIdentifier"));
+                        Triple tripleCrisIdentifier = new Triple(uriSubjectPresentation, uriPredicateCrisIdentifier, GetIdentifier(graphPresentation, "", congreso.CONG_NUMERO));
+                        graphPresentation.Assert(tripleCrisIdentifier);
+                    }
+
+                    //Fecha 
+                    if (!string.IsNullOrEmpty(congreso.FECHA_CELEBRACION))
+                    {
+                        string anio = congreso.FECHA_CELEBRACION.Substring(0, 4);
+                        string mes = congreso.FECHA_CELEBRACION.Substring(5, 2);
+                        string dia = congreso.FECHA_CELEBRACION.Substring(8, 2);
+                        string h = congreso.FECHA_CELEBRACION.Substring(11, 2);
+                        string m = congreso.FECHA_CELEBRACION.Substring(14, 2);
+                        string s = congreso.FECHA_CELEBRACION.Substring(17, 2);
+                        if (congreso.TIPO_PARTICIPACION == "5")
+                        {
+                            //Es un documento
+
+                            //DateTime
+                            INode uriPredicateDateTime = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#dateTime"));
+                            INode uriObjectDateTime = graphPresentation.CreateLiteralNode($"{anio}-{mes}-{dia}T{h}:{m}:{s}.000+00:00", new Uri("http://www.w3.org/2001/XMLSchema#datetime"));
+                            Triple tripleDateTime = new Triple(uriSubjectPresentation, uriPredicateDateTime, uriObjectDateTime);
+                            graphPresentation.Assert(tripleDateTime);
+                        }
+                        else
+                        {
+                            //Es una actividad
+
+                            //Rdftype DateTimeInterval
+                            INode uriSubjectDateTimeInterval = GetUri(pUrlUrisFactory, graphPresentation, "http://purl.org/roh/mirror/vivo#DateTimeInterval", "");
+                            INode uriObjectRdfTypeDateTimeInterval = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#DateTimeInterval"));
+                            Triple tripleRdfTypeDateTimeInterval = new Triple(uriSubjectDateTimeInterval, uriPredicateRdfTypePresentation, uriObjectRdfTypeDateTimeInterval);
+                            graphPresentation.Assert(tripleRdfTypeDateTimeInterval);
+
+                            //PredicateDateTimeInterval
+                            INode uriPredicateDateTimeInterval = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#dateTimeInterval"));
+                            Triple tripleDateTimeInterval = new Triple(uriSubjectPresentation, uriPredicateDateTimeInterval, uriSubjectDateTimeInterval);
+                            graphPresentation.Assert(tripleDateTimeInterval);
+
+                            {
+                                //Rdftype DateTimeValue inicio
+                                INode uriSubjectDateTimeValueInicio = GetUri(pUrlUrisFactory, graphPresentation, "http://purl.org/roh/mirror/vivo#DateTimeValue", "");
+                                INode uriObjectRdfTypeDateTimeValue = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#DateTimeValue"));
+                                Triple tripleRdfTypeDateTimeValueInicio = new Triple(uriSubjectDateTimeValueInicio, uriPredicateRdfTypePresentation, uriObjectRdfTypeDateTimeValue);
+                                graphPresentation.Assert(tripleRdfTypeDateTimeValueInicio);
+
+                                //PredicateStart
+                                INode uriPredicateStart = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#start"));
+                                Triple tripleStart = new Triple(uriSubjectDateTimeInterval, uriPredicateStart, uriSubjectDateTimeValueInicio);
+                                graphPresentation.Assert(tripleStart);
+
+                                //dateTime
+                                INode uriPredicateDateTime = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#dateTime"));
+                                INode uriObjectDateTime = graphPresentation.CreateLiteralNode($"{anio}-{mes}-{dia}T{h}:{m}:{s}.000+00:00", new Uri("http://www.w3.org/2001/XMLSchema#datetime"));
+                                Triple tripleDateTime = new Triple(uriSubjectDateTimeValueInicio, uriPredicateDateTime, uriObjectDateTime);
+                                graphPresentation.Assert(tripleDateTime);
+                            }
+                        }
+                    }
+
+                    List<AutorCongreso> autores = pAutoresCongreso.Where(x => x.CONG_NUMERO == congreso.CONG_NUMERO).ToList();
+                    if (autores.Count > 0)
+                    {
+                        if (congreso.TIPO_PARTICIPACION == "5")
+                        {
+                            //Lista de autores
+                            INode uriPredicateBiboAuthorList = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh/mirror/bibo#authorList"));
+                            INode uriAuthorList = GetUri(pUrlUrisFactory, graphPresentation, "http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq", null);
+                            Triple tripleAuthorList = new Triple(uriSubjectPresentation, uriPredicateBiboAuthorList, uriAuthorList);
+                            graphPresentation.Assert(tripleAuthorList);
+
+                            //Rdftype AuthorList                
+                            INode uriObjectRdfTypeSeq = graphPresentation.CreateUriNode(new Uri("http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq"));
+                            Triple tripleRdfTypeSeq = new Triple(uriAuthorList, uriPredicateRdfTypePresentation, uriObjectRdfTypeSeq);
+                            graphPresentation.Assert(tripleRdfTypeSeq);
+
+                            foreach (AutorCongreso autorCongreso in autores)
+                            {
+                                INode uriSubjectPersona = GetUri(pUrlUrisFactory, graphPresentation, "http://purl.org/roh/mirror/foaf#Person", autorCongreso.IDPERSONA);
+
+                                //Seq-persona
+                                INode uriPredicateSeq = graphPresentation.CreateUriNode(new Uri("http://www.w3.org/1999/02/22-rdf-syntax-ns#_" + autorCongreso.ORDEN));
+                                Triple tripleSeqPersona = new Triple(uriAuthorList, uriPredicateSeq, uriSubjectPersona);
+                                graphPresentation.Assert(tripleSeqPersona);
+                            }
+                        }
+                        else
+                        {
+                            foreach (AutorCongreso autorCongreso in autores)
+                            {
+                                INode uriSubjectPersona = GetUri(pUrlUrisFactory, graphPresentation, "http://purl.org/roh/mirror/foaf#Person", autorCongreso.IDPERSONA);
+
+                                //Participated by
+                                INode uriPredicateParticipatedBy = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh#participatedBy"));
+                                Triple tripleParticipatedBy = new Triple(uriSubjectPresentation, uriPredicateParticipatedBy, uriSubjectPersona);
+                                graphPresentation.Assert(tripleParticipatedBy);
+                            }
+                        }
+                    }
+                    //PresentedAt
+                    INode uriPredicatePresentedAt = graphPresentation.CreateUriNode(new Uri("http://purl.org/roh/mirror/bibo#presentedAt"));
+                    INode uriSubjectConferencePresentation = GetUri(pUrlUrisFactory, graphPresentation, "http://purl.org/roh/mirror/bibo#Conference", congreso.TITULO_CONGRESO);
+                    Triple triplePresentedAt = new Triple(uriSubjectPresentation, uriPredicatePresentedAt, uriSubjectConferencePresentation);
+                    graphPresentation.Assert(triplePresentedAt);
+
+
+                }
+                if (graphConference.Triples.Count > 0)
+                {
+                    graphConference.SaveToFile(rutaConference);
+                }
+                if (graphPresentation.Triples.Count > 0)
+                {
+                    graphPresentation.SaveToFile(rutaPresentation);
+                }
             }
 
             foreach (Exposicion exposicion in pExposiciones)
@@ -3282,7 +3415,14 @@ namespace CargaDataSetMurcia.Model
 
         private static INode GetIdentifier(Graph pGraph, string pType, string pIdentifier)
         {
-            return pGraph.CreateLiteralNode(pType + "-" + pIdentifier, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+            if (string.IsNullOrEmpty(pType))
+            {
+                return pGraph.CreateLiteralNode(pIdentifier, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+            }
+            else
+            {
+                return pGraph.CreateLiteralNode(pType + "-" + pIdentifier, new Uri("http://www.w3.org/2001/XMLSchema#string"));
+            }
         }
 
         private static INode CreateTextNode(Graph pGraph, string pText)
