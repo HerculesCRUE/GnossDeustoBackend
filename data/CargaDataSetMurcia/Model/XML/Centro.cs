@@ -10,5 +10,7 @@ namespace CargaDataSetMurcia.Model.XML
     {
         public string CED_CODIGO { get; set; }
         public string CED_NOMBRE { get; set; }
+        public string COD_ORGANIZACION { get; set; }
+        public string DESCRI_ORGANIZACION { get; set; }
     }
 }
