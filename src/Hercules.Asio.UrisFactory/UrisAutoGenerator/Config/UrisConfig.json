@@ -1488,6 +1488,12 @@
 			"ResourceURI": "uriResourceStructure"
 		},
 		{
+			"ResourceClass": "RoundTable",
+			"RdfType": "http://purl.org/roh#RoundTable",
+			"LabelResourceClass": "round_table",
+			"ResourceURI": "uriResourceStructure"
+		},
+		{
 			"ResourceClass": "HRClassification",
 			"RdfType": "",
 			"LabelResourceClass": "hr",
