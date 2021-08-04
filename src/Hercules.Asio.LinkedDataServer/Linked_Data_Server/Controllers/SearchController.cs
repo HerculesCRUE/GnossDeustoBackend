@@ -25,15 +25,15 @@ namespace Linked_Data_Server.Controllers
             _sparqlUtility = sparqlUtility;
         }
         [HttpGet]
-        public IActionResult Index(string q, int pagina)
+        public IActionResult Index(string q,string concept, int pagina)
         {
-            SearchModelTemplate searchModelTemplate = GenerateSearchTemplate(q, pagina);
+            SearchModelTemplate searchModelTemplate = GenerateSearchTemplate(q,concept, pagina);
 
-            ViewData["Title"] = searchModelTemplate.numResultados + " Resultados para '" + q + "'";
+            
             return View(searchModelTemplate);
         }
         [NonAction]
-        public SearchModelTemplate GenerateSearchTemplate(string q, int pagina)
+        public SearchModelTemplate GenerateSearchTemplate(string q, string concept, int pagina)
         {
             string pXAppServer = "";
             RohGraph ontologyGraph = LoadGraph(mConfigService.GetOntologyGraph(), mConfigService, ref pXAppServer);
@@ -76,43 +76,103 @@ namespace Linked_Data_Server.Controllers
             {
                 pagina = 1;
             }
-            string consulta = @$" select * where
+            if (!string.IsNullOrEmpty(q))
+            {
+                //No buscamos en http://www.w3.org/2004/02/skos/core#prefLabel
+                string consulta = @$" select * where
                                 {{    
                                     select distinct ?s ?o ?rdfType where 
                                     {{      
                                         ?s a ?rdfType.
-                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>))
+                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
                                         ?s ?p ?o.
                                         {SparqlUtility.GetSearchBuscador(q)}
                                     }}order by desc(?sc) asc(?o) asc (?s)
                                 }} OFFSET {(pagina - 1) * numResultadosPagina} limit {numResultadosPagina} ";
 
-            SparqlObject sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
-            foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
-            {
-                if (!searchModelTemplate.entidades.ContainsKey(row["s"].value))
+                SparqlObject sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
+                foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
                 {
-                    string entityName = row["rdfType"].value;
-                    if(communNamePropierties.ContainsKey(entityName))
+                    if (!searchModelTemplate.entidades.ContainsKey(row["s"].value))
                     {
-                        entityName = communNamePropierties[entityName];
+                        string entityName = row["rdfType"].value;
+                        if (communNamePropierties.ContainsKey(entityName))
+                        {
+                            entityName = communNamePropierties[entityName];
+                        }
+                        searchModelTemplate.entidades.Add(row["s"].value, new SearchModelTemplate.Entidad(row["o"].value, entityName));
                     }
-                    searchModelTemplate.entidades.Add(row["s"].value, new SearchModelTemplate.Entidad(row["o"].value, entityName));
                 }
-            }
-
-            string consultaNumero = @$"     select count(distinct ?s) as ?num where 
+                //No buscamos en http://www.w3.org/2004/02/skos/core#prefLabel
+                string consultaNumero = @$"     select count(distinct ?s) as ?num where 
                                     {{      
                                         ?s a ?rdfType.
-                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>))
+                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
                                         ?s ?p ?o.
                                         {SparqlUtility.GetSearchBuscador(q)}
                                     }} ";
-            SparqlObject sparqlObjectNumero = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consultaNumero, ref pXAppServer);
-            searchModelTemplate.numResultados = int.Parse(sparqlObjectNumero.results.bindings[0]["num"].value);
-            searchModelTemplate.numResultadosPagina = numResultadosPagina;
-            searchModelTemplate.paginaActual = pagina;
+                SparqlObject sparqlObjectNumero = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consultaNumero, ref pXAppServer);
+                searchModelTemplate.numResultados = int.Parse(sparqlObjectNumero.results.bindings[0]["num"].value);
+                searchModelTemplate.numResultadosPagina = numResultadosPagina;
+                searchModelTemplate.paginaActual = pagina;
+                ViewData["Title"] = searchModelTemplate.numResultados + " Resultados para '" + q + "'";
+            }
+            else if(!string.IsNullOrEmpty(concept))
+            {
+                //Buscamos el nombre del área de conocimiento
+                string nombreArea = concept;
+                string consultaNombre = @$" 
+                                    select distinct ?o where 
+                                    {{      
+                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>))
+                                        <{concept}> ?p ?o.
+                                    }}";
 
+                SparqlObject sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consultaNombre, ref pXAppServer);
+                foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+                {
+                    nombreArea = row["o"].value;
+                }
+
+                //No buscamos en http://www.w3.org/2004/02/skos/core#prefLabel
+                string consulta = @$" select * where
+                                {{    
+                                    select distinct ?s ?o ?rdfType where 
+                                    {{      
+                                        ?s a ?rdfType.
+                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
+                                        ?s ?p ?o.
+                                        ?s <http://purl.org/roh#hasKnowledgeArea> <{concept}>.
+                                    }}order by asc(?o) asc (?s)
+                                }} OFFSET {(pagina - 1) * numResultadosPagina} limit {numResultadosPagina} ";
+
+                sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
+                foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+                {
+                    if (!searchModelTemplate.entidades.ContainsKey(row["s"].value))
+                    {
+                        string entityName = row["rdfType"].value;
+                        if (communNamePropierties.ContainsKey(entityName))
+                        {
+                            entityName = communNamePropierties[entityName];
+                        }
+                        searchModelTemplate.entidades.Add(row["s"].value, new SearchModelTemplate.Entidad(row["o"].value, entityName));
+                    }
+                }
+                //No buscamos en http://www.w3.org/2004/02/skos/core#prefLabel
+                string consultaNumero = @$"     select count(distinct ?s) as ?num where 
+                                    {{      
+                                        ?s a ?rdfType.
+                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
+                                        ?s ?p ?o.
+                                        ?s <http://purl.org/roh#hasKnowledgeArea> <{concept}>.
+                                    }} ";
+                SparqlObject sparqlObjectNumero = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consultaNumero, ref pXAppServer);
+                searchModelTemplate.numResultados = int.Parse(sparqlObjectNumero.results.bindings[0]["num"].value);
+                searchModelTemplate.numResultadosPagina = numResultadosPagina;
+                searchModelTemplate.paginaActual = pagina;
+                ViewData["Title"] = searchModelTemplate.numResultados + " Resultados para el área de conocimiento '" + nombreArea + "'";
+            }
 
 
             return searchModelTemplate;

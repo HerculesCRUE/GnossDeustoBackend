@@ -43,9 +43,10 @@ namespace Linked_Data_Server.Controllers
             string searchAutocompletar = SparqlUtility.GetSearchAutocompletar(q);
             if (!string.IsNullOrEmpty(searchAutocompletar))
             {
-                string consulta = @$"     select distinct ?s ?o where 
+                string consulta = @$"     select distinct ?s ?o ?rdfType where 
                                     {{                                        
                                         FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>))
+                                        ?s a ?rdfType.
                                         ?s ?p ?o.
                                         {SparqlUtility.GetSearchAutocompletar(q)}
                                     }}order by desc(?sc) asc(?o) asc (?s) limit 10 ";
@@ -53,7 +54,16 @@ namespace Linked_Data_Server.Controllers
                 SparqlObject sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
                 foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
                 {
-                    response.Add(new KeyValuePair<string, string>(row["o"].value, row["s"].value));
+                    //Las categorías tienen otro comportamiento (revisar categorías no unesko)
+                    if (row["rdfType"].value == "http://www.w3.org/2004/02/skos/core#Concept")
+                    {
+                        string url = $"{Request.Scheme}://{Request.Host}/Search?concept={row["s"].value}";
+                        response.Add(new KeyValuePair<string, string>(row["o"].value, url));
+                    }
+                    else
+                    {
+                        response.Add(new KeyValuePair<string, string>(row["o"].value, row["s"].value));
+                    }
                 }
             }
             return Json(response);

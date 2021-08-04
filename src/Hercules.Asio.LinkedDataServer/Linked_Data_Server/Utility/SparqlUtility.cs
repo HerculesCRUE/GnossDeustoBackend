@@ -121,6 +121,7 @@ namespace Linked_Data_Server.Utility
             txt += "' OPTION(score ?sc).";
             return txt;
         }
+        
 
         public static string GetRegexSearch(string pText)
         {
