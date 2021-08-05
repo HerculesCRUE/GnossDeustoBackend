@@ -225,7 +225,7 @@ namespace Linked_Data_Server.Controllers
 
                     //Preparamos el modelo de la entidad principal
                     List<LinkedDataRdfViewModel> modelEntities = new List<LinkedDataRdfViewModel>();
-                    LinkedDataRdfViewModel entidad = createLinkedDataRdfViewModel(url,false, dataGraph, sparqlObjectDictionaryGraphs, new List<string>(), allEntities, communNamePropierties, entitiesNames);
+                    LinkedDataRdfViewModel entidad = createLinkedDataRdfViewModel(url,false, dataGraph, sparqlObjectDictionaryGraphs, new List<string>(), allEntities, communNamePropierties, entitiesNames, mLinked_Data_Server_Config.ExcludeProps);
                     modelEntities.Add(entidad);
                     KeyValuePair<string, List<string>> titulo = entidad.stringPropertiesEntity.FirstOrDefault(x => mLinked_Data_Server_Config.PropsTitle.Contains(x.Key));
                     ViewData["Title"] = "About: " + url;
@@ -238,7 +238,7 @@ namespace Linked_Data_Server.Controllers
                     //Preparamos el modelo del resto de entidades
                     foreach (string entity in inverseEntities)
                     {
-                        LinkedDataRdfViewModel entidadInversa = createLinkedDataRdfViewModel(entity,false, dataGraph, null, new List<string>(), allEntities, communNamePropierties, entitiesNames);
+                        LinkedDataRdfViewModel entidadInversa = createLinkedDataRdfViewModel(entity,false, dataGraph, null, new List<string>(), allEntities, communNamePropierties, entitiesNames,mLinked_Data_Server_Config.ExcludeProps);
                         modelEntities.Add(entidadInversa);
                     }
 
@@ -631,8 +631,9 @@ namespace Linked_Data_Server.Controllers
         /// <param name="allEntities">Listado con todos los identificadores del RDF</param>
         /// <param name="communNameProperties">Diccionario con los nombres de las propiedades</param>
         /// <param name="entitiesNames">Nombres de las entiadades a las que se apunta</param>
+        /// <param name="excludeProps">Propiedades excluidas</param>
         /// <returns></returns>
-        public LinkedDataRdfViewModel createLinkedDataRdfViewModel(string idEntity,bool bnode, RohGraph dataGraph, Dictionary<string, List<Dictionary<string, SparqlObject.Data>>> pSparqlObjectDictionaryGraphs, List<string> parents, List<string> allEntities, Dictionary<string, string> communNameProperties, Dictionary<string, string> entitiesNames)
+        public LinkedDataRdfViewModel createLinkedDataRdfViewModel(string idEntity,bool bnode, RohGraph dataGraph, Dictionary<string, List<Dictionary<string, SparqlObject.Data>>> pSparqlObjectDictionaryGraphs, List<string> parents, List<string> allEntities, Dictionary<string, string> communNameProperties, Dictionary<string, string> entitiesNames,List<string> excludeProps)
         {
             //Obtenemos todos los triples de la entidad
             SparqlResultSet sparqlResultSet = (SparqlResultSet)dataGraph.ExecuteQuery("select ?p ?o where { <" + idEntity + "> ?p ?o }");
@@ -646,30 +647,33 @@ namespace Linked_Data_Server.Controllers
             Dictionary<string, List<LinkedDataRdfViewModel>> entitiesPropertiesEntityAux = new Dictionary<string, List<LinkedDataRdfViewModel>>();
             foreach (SparqlResult sparqlResult in sparqlResultSet.Results)
             {
-                if (sparqlResult["o"] is BlankNode && !parents.Contains(sparqlResult["o"].ToString()))
+                if (!excludeProps.Contains(sparqlResult["p"].ToString()))
                 {
-                    if (!entitiesPropertiesEntityAux.ContainsKey(sparqlResult["p"].ToString()))
+                    if (sparqlResult["o"] is BlankNode && !parents.Contains(sparqlResult["o"].ToString()))
                     {
-                        //Añadimos la propiedad a 'entitiesPropertiesEntity'
-                        entitiesPropertiesEntityAux.Add(sparqlResult["p"].ToString(), new List<LinkedDataRdfViewModel>());
-                    }
-                    parents.Add(idEntity);
-                    entitiesPropertiesEntityAux[sparqlResult["p"].ToString()].Add(createLinkedDataRdfViewModel(sparqlResult["o"].ToString(),true, dataGraph, null, parents, allEntities, communNameProperties, entitiesNames));
-                }
-                else
-                {
-                    if (!stringPropertiesEntityAux.ContainsKey(sparqlResult["p"].ToString()))
-                    {
-                        //Añadimos la propiedad a 'stringPropertiesEntity'
-                        stringPropertiesEntityAux.Add(sparqlResult["p"].ToString(), new List<string>());
-                    }
-                    if (sparqlResult["o"] is LiteralNode)
-                    {
-                        stringPropertiesEntityAux[sparqlResult["p"].ToString()].Add(((LiteralNode)(sparqlResult["o"])).Value);
+                        if (!entitiesPropertiesEntityAux.ContainsKey(sparqlResult["p"].ToString()))
+                        {
+                            //Añadimos la propiedad a 'entitiesPropertiesEntity'
+                            entitiesPropertiesEntityAux.Add(sparqlResult["p"].ToString(), new List<LinkedDataRdfViewModel>());
+                        }
+                        parents.Add(idEntity);
+                        entitiesPropertiesEntityAux[sparqlResult["p"].ToString()].Add(createLinkedDataRdfViewModel(sparqlResult["o"].ToString(), true, dataGraph, null, parents, allEntities, communNameProperties, entitiesNames, excludeProps));
                     }
                     else
                     {
-                        stringPropertiesEntityAux[sparqlResult["p"].ToString()].Add(sparqlResult["o"].ToString());
+                        if (!stringPropertiesEntityAux.ContainsKey(sparqlResult["p"].ToString()))
+                        {
+                            //Añadimos la propiedad a 'stringPropertiesEntity'
+                            stringPropertiesEntityAux.Add(sparqlResult["p"].ToString(), new List<string>());
+                        }
+                        if (sparqlResult["o"] is LiteralNode)
+                        {
+                            stringPropertiesEntityAux[sparqlResult["p"].ToString()].Add(((LiteralNode)(sparqlResult["o"])).Value);
+                        }
+                        else
+                        {
+                            stringPropertiesEntityAux[sparqlResult["p"].ToString()].Add(sparqlResult["o"].ToString());
+                        }
                     }
                 }
             }

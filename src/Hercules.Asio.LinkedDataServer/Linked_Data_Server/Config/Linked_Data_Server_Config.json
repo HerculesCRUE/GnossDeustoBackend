@@ -30,7 +30,7 @@
       "tables": [
         {
           "name": "Miembros del grupo",
-          "fields": [ "ID", "Nombre", "Rol","Porcentage de dedicación","Fecha de inicio","Fecha de fin" ],
+          "fields": [ "ID", "Nombre", "Rol", "Porcentage de dedicación", "Fecha de inicio", "Fecha de fin" ],
           "query": "select ?persona ?nombrePersona ?tipoRol  ?porcentage ?fechaInicio ?fechaFin where { ?persona <http://purl.org/roh/mirror/foaf#name> ?nombrePersona. ?persona <http://purl.org/roh#hasRole> ?rol . ?rol <http://purl.org/roh/mirror/vivo#relatedBy> <{ENTITY_ID}>. ?rol a ?tipoRol. OPTIONAL{    ?rol <http://purl.org/roh#dedicationPercentage> ?porcentage } OPTIONAL{    ?rol <http://purl.org/roh/mirror/vivo#dateTimeInterval> ?intervalo.    OPTIONAL{         ?intervalo <http://purl.org/roh/mirror/vivo#start> ?inicio.         ?inicio <http://purl.org/roh/mirror/vivo#dateTime> ?fechaInicio     }     OPTIONAL{         ?intervalo <http://purl.org/roh/mirror/vivo#end> ?fin.         ?fin <http://purl.org/roh/mirror/vivo#dateTime> ?fechaFin     } } }"
         },
         {
@@ -42,6 +42,7 @@
     }
   ],
   "ExcludeRelatedEntity": [ "http://purl.org/roh/mirror/foaf#Person", "http://purl.org/roh#ResearchGroup" ],
+  "ExcludeProps": [ "http://purl.org/roh#freetextSearch" ],
   "ConfigArborGraphs": {
     "icons": [
       {
@@ -64,8 +65,7 @@
             ]
           }
         ]
-      }
-      ,
+      },
       {
         "rdfType": "http://purl.org/roh#ResearchGroup",
         "arborGraphs": [

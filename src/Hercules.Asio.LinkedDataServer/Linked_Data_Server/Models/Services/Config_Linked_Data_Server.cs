@@ -129,6 +129,11 @@ namespace Linked_Data_Server.Models.Services
         /// </summary>
         public List<string> ExcludeRelatedEntity { get; set; }
 
+        /// <summary>
+        /// Lista de propiedades excluidas para pintar
+        /// </summary>
+        public List<string> ExcludeProps { get; set; }
+
         public List<string> PropsTitle { get; set; }
 
         /// <summary>
