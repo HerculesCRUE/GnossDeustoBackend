@@ -2,6 +2,15 @@
 
 @{
     ViewData["BodyClass"] = "Buscador";
+    string urlSearch = $"{Context.Request.Path}?q={Context.Request.Query["q"]}";
+    if(Context.Request.Query["concept"].ToString()!="")
+    {
+        urlSearch = $"{Context.Request.Path}?concept={Context.Request.Query["concept"]}";
+    }
+    else if (Context.Request.Query["etiqueta"].ToString() != "")
+    {
+        urlSearch = $"{Context.Request.Path}?etiqueta={Context.Request.Query["etiqueta"]}";
+    }
 }
 <div>
     <h1>@ViewData["Title"]</h1>
@@ -35,11 +44,11 @@
                     <div class="pag" id="NavegadorPaginasCorreo_Pag">
                         @if (PaginaActual != 1)
                         {
-                            <a class="btn" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@(PaginaActual-1)">Anterior</a>
+                            <a class="btn" href="@urlSearch&pagina=@(PaginaActual-1)">Anterior</a>
                         }
                         else
                         {
-                            <a class="btn disabled" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@(PaginaActual-1)">Anterior</a>
+                            <a class="btn disabled" href="@urlSearch&pagina=@(PaginaActual-1)">Anterior</a>
                         }
 
                         @{
@@ -53,11 +62,11 @@
 
                                 if (i == PaginaActual)
                                 {
-                                    <a class="btn disabled" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@i">@i</a>
+                                    <a class="btn disabled" href="@urlSearch&pagina=@i">@i</a>
                                 }
                                 else
                                 {
-                                    <a class="btn" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@i">@i</a>
+                                    <a class="btn" href="@urlSearch&pagina=@i">@i</a>
                                 }
                             }
 
@@ -112,11 +121,11 @@
 
                                     if (i == PaginaActual)
                                     {
-                                        <a class="btn disabled" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@i">@i</a>
+                                        <a class="btn disabled" href="@urlSearch&pagina=@i">@i</a>
                                     }
                                     else
                                     {
-                                        <a class="btn" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@i">@i</a>
+                                        <a class="btn" href="@urlSearch&pagina=@i">@i</a>
                                     }
                                 }
 
@@ -147,22 +156,22 @@
 
                                         if (i == PaginaActual)
                                         {
-                                            <a class="btn disabled" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@i">@i</a>
+                                            <a class="btn disabled" href="@urlSearch&pagina=@i">@i</a>
                                         }
                                         else
                                         {
-                                            <a class="btn" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@i">@i</a>
+                                            <a class="btn" href="@urlSearch&pagina=@i">@i</a>
                                         }
                                     }
                                 }
                             }
                             if (PaginaActual != numPaginas)
                             {
-                                <a class="btn" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@(PaginaActual+1)">Siguiente</a>
+                                <a class="btn" href="@urlSearch&pagina=@(PaginaActual+1)">Siguiente</a>
                             }
                             else
                             {
-                                <a class="btn disabled" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@(PaginaActual+1)">Siguiente</a>
+                                <a class="btn disabled" href="@urlSearch&pagina=@(PaginaActual+1)">Siguiente</a>
                             }
                         }
                     </div>
@@ -170,12 +179,4 @@
             </div>
         }
     }
-    @*@if (Model.paginaAnterior != 0)
-        {
-            <a class="btn"href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@Model.paginaAnterior">Anterior</a>
-        }
-        @if (Model.paginaSiguiente != 0)
-        {
-            <a class="btn" href="@Context.Request.Path?q=@Context.Request.Query["q"]&pagina=@Model.paginaSiguiente">Siguiente</a>
-        }*@
 </div>
