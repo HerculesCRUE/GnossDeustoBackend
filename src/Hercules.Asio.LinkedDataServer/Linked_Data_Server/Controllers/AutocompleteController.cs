@@ -122,7 +122,7 @@ namespace Linked_Data_Server.Controllers
                             listaAutocompletar.Add(score, new List<KeyValuePair<string, string>>());
                         }
                         string url = $"{Request.Scheme}://{Request.Host}/Search?etiqueta={row["o"].value.ToLower()}";
-                        listaAutocompletar[score].Add(new KeyValuePair<string, string>($"{ row["o"].value.ToLower() } - Etiqueta", url));
+                        listaAutocompletar[score].Add(new KeyValuePair<string, string>($"{ row["o"].value.ToLower() } - Palabra clave", url));
                     }
                 }
                 int num = 0;
