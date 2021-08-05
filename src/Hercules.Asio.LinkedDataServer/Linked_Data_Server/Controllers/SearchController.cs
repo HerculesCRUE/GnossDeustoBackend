@@ -201,7 +201,7 @@ namespace Linked_Data_Server.Controllers
                                         FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
                                         ?s ?p ?o.
                                         ?s <http://purl.org/roh/mirror/vivo#freetextKeyword> ?tag
-                                        FILTER(lcase(str(?tag))='{etiqueta}')
+                                        FILTER(lcase(str(?tag))='{etiqueta.ToLower()}')
                                     }}order by asc(?o) asc (?s)
                                 }} OFFSET {(pagina - 1) * numResultadosPagina} limit {numResultadosPagina} ";
 
@@ -225,7 +225,7 @@ namespace Linked_Data_Server.Controllers
                                         FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
                                         ?s ?p ?o.
                                         ?s <http://purl.org/roh/mirror/vivo#freetextKeyword> ?tag
-                                        FILTER(lcase(str(?tag))='{etiqueta}')
+                                        FILTER(lcase(str(?tag))='{etiqueta.ToLower()}')
                                     }} ";
                 SparqlObject sparqlObjectNumero = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consultaNumero, ref pXAppServer);
                 searchModelTemplate.numResultados = int.Parse(sparqlObjectNumero.results.bindings[0]["num"].value);
