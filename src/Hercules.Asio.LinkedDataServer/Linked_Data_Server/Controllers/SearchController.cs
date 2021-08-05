@@ -231,7 +231,7 @@ namespace Linked_Data_Server.Controllers
                 searchModelTemplate.numResultados = int.Parse(sparqlObjectNumero.results.bindings[0]["num"].value);
                 searchModelTemplate.numResultadosPagina = numResultadosPagina;
                 searchModelTemplate.paginaActual = pagina;
-                ViewData["Title"] = searchModelTemplate.numResultados + " Resultados para la etiqueta '" + etiqueta + "'";
+                ViewData["Title"] = searchModelTemplate.numResultados + " Resultados para la palabra clave '" + etiqueta + "'";
             }
 
 
