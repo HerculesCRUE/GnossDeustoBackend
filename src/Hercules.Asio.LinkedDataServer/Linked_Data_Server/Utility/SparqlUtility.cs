@@ -109,6 +109,7 @@ namespace Linked_Data_Server.Utility
         public static string GetSearchBuscador(string pText,string pVar,string pScoreVar)
         {
             pText=pText.Trim();
+            pText = pText.Replace("\'", "\\\'");
             bool busquedaExacta = pText.StartsWith("\"") && pText.EndsWith("\"");
             string txt = $"?{pVar} bif:contains '";
             if (busquedaExacta)
