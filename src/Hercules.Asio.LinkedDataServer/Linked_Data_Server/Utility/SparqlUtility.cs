@@ -106,11 +106,11 @@ namespace Linked_Data_Server.Utility
             return txt;
         }
 
-        public static string GetSearchBuscador(string pText)
+        public static string GetSearchBuscador(string pText,string pVar,string pScoreVar)
         {
             pText=pText.Trim();
             bool busquedaExacta = pText.StartsWith("\"") && pText.EndsWith("\"");
-            string txt = "?o bif:contains '";
+            string txt = $"?{pVar} bif:contains '";
             if (busquedaExacta)
             {
                 txt += pText.Replace("\"","\\\"").Replace("'","\\'");
@@ -118,7 +118,7 @@ namespace Linked_Data_Server.Utility
             {
                 txt += "\"" + string.Join("\" AND \"",pText.Split(new string[] { " "},StringSplitOptions.RemoveEmptyEntries)) + "\"";
             }
-            txt += "' OPTION(score ?sc).";
+            txt += $"' OPTION(score ?{pScoreVar}).";
             return txt;
         }
         

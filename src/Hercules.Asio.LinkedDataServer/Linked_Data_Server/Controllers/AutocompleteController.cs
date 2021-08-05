@@ -100,12 +100,10 @@ namespace Linked_Data_Server.Controllers
                         {
                             string url = $"{Request.Scheme}://{Request.Host}/Search?concept={row["s"].value}";
                             listaAutocompletar[score].Add(new KeyValuePair<string, string>($"{ row["o"].value } - {rdftypename}", url));
-                            //response.Add(new KeyValuePair<string, string>($"{ row["o"].value } - {rdftypename}", url));
                         }
                         else
                         {
                             listaAutocompletar[score].Add(new KeyValuePair<string, string>($"{row["o"].value} - {rdftypename}", row["s"].value));
-                            //response.Add(new KeyValuePair<string, string>($"{row["o"].value} - {rdftypename}", row["s"].value));
                         }
                     }
                 }
