@@ -113,6 +113,14 @@
     {
       "property": "http://purl.org/roh#roPubmed",
       "transform": "https://pubmed.ncbi.nlm.nih.gov/{value}/"
+    },
+    {
+      "property": "http://purl.org/roh/mirror/vivo#freetextKeyword",
+      "transform": "http://linkeddata2.um.es/Search?etiqueta={value}"
+    },
+    {
+      "property": "http://purl.org/roh#hasKnowledgeArea",
+      "transform": "http://linkeddata2.um.es/Search?concept={value}"
     }
   ]
 }
