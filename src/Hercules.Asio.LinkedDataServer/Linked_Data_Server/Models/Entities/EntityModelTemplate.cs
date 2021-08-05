@@ -13,5 +13,6 @@ namespace Linked_Data_Server.Models.Entities
         public List<ArborGraph> arborGraphs { get; set; }
         public bool Status405 { get; set; }
         public string Rdf { get; set; }
+        public string domain { get; set; }
     }
 }

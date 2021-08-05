@@ -116,15 +116,36 @@
                                         @if (pItem.urisRdf.Contains(valor))
                                         {
                                             string nombre = valor;
-                                            @if (pItem.entitiesNames.ContainsKey(valor))
+                                            string valorAux = valor;
+                                            if (pItem.entitiesNames.ContainsKey(valor))
                                             {
                                                 nombre = pItem.entitiesNames[valor];
                                             }
-                                            <td>
-                                                <a href="@valor">
-                                                    @nombre
-                                                </a>
-                                            </td>
+
+                                            foreach (var propTransform in pPropsTransform)
+                                            {
+                                                if (propTransform.property.Contains(stringProperty.Key))
+                                                {
+                                                    valorAux = propTransform.transform.Replace("{value}", valorAux);
+                                                }
+                                            }
+                                            bool blank = true;
+                                            if (valorAux.StartsWith(Model.domain))
+                                            {
+                                                blank = false;
+                                            }
+                                    <td>
+                                        @if (blank)
+                                        {
+                                            <a href="@valorAux" target="_blank">@nombre</a> <a href="@valorAux" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@valorAux">
+                                                @nombre
+                                            </a>
+                                        }
+                                    </td>
                                         }
                                         else
                                         {
@@ -169,9 +190,21 @@
                                                     if (propTransform.property.Contains(stringProperty.Key))
                                                     {
                                                         string uri = propTransform.transform.Replace("{value}", valor);
+                                                        bool blank = true;
+                                                        if (uri.StartsWith(Model.domain))
+                                                        {
+                                                            blank = false;
+                                                        }
 
                                                         <td>
-                                                            <strong><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a></strong>
+                                                            @if (blank)
+                                                            {
+                                                                <strong><a href="@uri" target="_blank">@valor</a> <a href="@uri" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a></strong>
+                                                            }
+                                                            else
+                                                            {
+                                                                <strong><a href="@uri">@valor</a></strong>
+                                                            }
                                                             @{
                                                                 List<Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel.ProvenanceData> provenanceData = pItem.provenanceData.Where(x => x.property == stringProperty.Key && x.value == valor).ToList();
                                                                 if (provenanceData.Count() > 0)
