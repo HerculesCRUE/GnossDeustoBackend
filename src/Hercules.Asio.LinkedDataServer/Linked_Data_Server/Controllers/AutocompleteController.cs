@@ -73,32 +73,74 @@ namespace Linked_Data_Server.Controllers
             string searchAutocompletar = SparqlUtility.GetSearchAutocompletar(q);
             if (!string.IsNullOrEmpty(searchAutocompletar))
             {
-                string consulta = @$"     select distinct ?s ?o ?rdfType where 
+                Dictionary<int, List<KeyValuePair<string, string>>> listaAutocompletar = new Dictionary<int, List<KeyValuePair<string, string>>>();
+                {
+                    string consulta = @$"     select distinct ?s ?sc ?o ?rdfType where 
                                     {{                                        
                                         FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle)}>))
                                         ?s a ?rdfType.
                                         ?s ?p ?o.
-                                        {SparqlUtility.GetSearchAutocompletar(q)}
+                                        {searchAutocompletar}
                                     }}order by desc(?sc) asc(?o) asc (?s) limit 10 ";
-                SparqlObject sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
-                foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
-                {
-                    string rdftypename = row["rdfType"].value;
-                    if (communNamePropierties.ContainsKey(rdftypename))
+                    SparqlObject sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
+                    foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
                     {
-                        rdftypename = communNamePropierties[rdftypename];
-                    }
-                    //Las categorías tienen otro comportamiento (revisar categorías no unesko)
-                    if (row["rdfType"].value == "http://www.w3.org/2004/02/skos/core#Concept")
-                    {
-                        string url = $"{Request.Scheme}://{Request.Host}/Search?concept={row["s"].value}";
-                        response.Add(new KeyValuePair<string, string>($"{ row["o"].value } - {rdftypename}", url));
-                    }
-                    else
-                    {
-                        response.Add(new KeyValuePair<string, string>($"{row["o"].value} - {rdftypename}", row["s"].value));
+                        string rdftypename = row["rdfType"].value;
+                        int score = int.Parse(row["sc"].value);
+                        if(!listaAutocompletar.ContainsKey(score))
+                        {
+                            listaAutocompletar.Add(score,new List<KeyValuePair<string, string>>());
+                        }
+                        if (communNamePropierties.ContainsKey(rdftypename))
+                        {
+                            rdftypename = communNamePropierties[rdftypename];
+                        }
+                        //Las categorías tienen otro comportamiento (revisar categorías no unesko)
+                        if (row["rdfType"].value == "http://www.w3.org/2004/02/skos/core#Concept")
+                        {
+                            string url = $"{Request.Scheme}://{Request.Host}/Search?concept={row["s"].value}";
+                            listaAutocompletar[score].Add(new KeyValuePair<string, string>($"{ row["o"].value } - {rdftypename}", url));
+                            //response.Add(new KeyValuePair<string, string>($"{ row["o"].value } - {rdftypename}", url));
+                        }
+                        else
+                        {
+                            listaAutocompletar[score].Add(new KeyValuePair<string, string>($"{row["o"].value} - {rdftypename}", row["s"].value));
+                            //response.Add(new KeyValuePair<string, string>($"{row["o"].value} - {rdftypename}", row["s"].value));
+                        }
                     }
                 }
+                {
+                    string consultaTags = @$"     select distinct lcase(?o) as ?o ?sc where 
+                                    {{  
+                                        ?s <http://purl.org/roh/mirror/vivo#freetextKeyword> ?o.
+                                        {searchAutocompletar}
+                                    }}order by desc(?sc) asc(?o) limit 10 ";
+                    SparqlObject sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consultaTags, ref pXAppServer);
+                    foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+                    {
+                        int score = int.Parse(row["sc"].value);
+                        if (!listaAutocompletar.ContainsKey(score))
+                        {
+                            listaAutocompletar.Add(score, new List<KeyValuePair<string, string>>());
+                        }
+                        string url = $"{Request.Scheme}://{Request.Host}/Search?etiqueta={row["o"].value.ToLower()}";
+                        listaAutocompletar[score].Add(new KeyValuePair<string, string>($"{ row["o"].value.ToLower() } - Etiqueta", url));
+                    }
+                }
+                int num = 0;
+                foreach(List<KeyValuePair<string, string>> list in listaAutocompletar.OrderByDescending(x=>x.Key).ToDictionary(x=>x.Key,y=>y.Value).Values)
+                {
+                    foreach(KeyValuePair<string, string> item in list)
+                    {
+                        if(num==10)
+                        {
+                            break;
+                        }
+                        num++;
+                        response.Add(item);
+                    }
+                }
+
             }
             return Json(response);
         }
