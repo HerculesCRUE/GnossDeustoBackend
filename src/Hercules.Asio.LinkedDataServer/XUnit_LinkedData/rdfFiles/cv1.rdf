@@ -429,6 +429,8 @@
     <roh:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HEURISTIC ALGORITHMS FOR MINIMUM BANDWETH CONSUMPTION MULTICAST ROUTING IN WIRELESS MESH NETWORKS</roh:title>
     <bibo:pageStart rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LNCS</bibo:pageStart>
     <vivo:dateTime rdf:datatype="http://www.w3.org/2001/XMLSchema#datetime">2005-01-01T00:00:00.000+01:00</vivo:dateTime>
+    <roh:hasKnowledgeArea rdf:resource="http://graph.um.es/concept/1"></roh:hasKnowledgeArea>
+    <vivo:freetextKeyword rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IA</vivo:freetextKeyword>
   </rdf:Description>
   <rdf:Description rdf:about="http://graph.um.es/res/book-section/872eb583-d027-4f55-b75c-767588cd213b">
     <bibo:authorList rdf:nodeID="Nc940c096-aa17-4426-b3a8-17d78603fd11"/>
