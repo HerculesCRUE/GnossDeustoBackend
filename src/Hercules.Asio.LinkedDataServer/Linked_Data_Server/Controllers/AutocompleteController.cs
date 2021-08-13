@@ -99,7 +99,7 @@ namespace Linked_Data_Server.Controllers
                         if (row["rdfType"].value == "http://www.w3.org/2004/02/skos/core#Concept")
                         {
                             string url = $"{Request.Scheme}://{Request.Host}/Search?concept={row["s"].value}";
-                            listaAutocompletar[score].Add(new KeyValuePair<string, string>($"{ row["o"].value } - {rdftypename}", url));
+                            listaAutocompletar[score].Add(new KeyValuePair<string, string>($"{ row["o"].value } - Área de conocimiento", url));
                         }
                         else
                         {
