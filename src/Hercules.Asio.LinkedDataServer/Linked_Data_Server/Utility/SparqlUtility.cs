@@ -86,7 +86,7 @@ namespace Linked_Data_Server.Utility
             return datosSparql;
         }
 
-        public static string GetSearchAutocompletar(string pText)
+        public string GetSearchAutocompletar(string pText)
         {
             pText=string.Join("", pText.Where(x=>char.IsLetterOrDigit(x) || char.IsWhiteSpace(x)));            
             int indiceUltimaPalabra=pText.LastIndexOf(" ");
@@ -106,7 +106,7 @@ namespace Linked_Data_Server.Utility
             return txt;
         }
 
-        public static string GetSearchBuscador(string pText,string pVar,string pScoreVar)
+        public string GetSearchBuscador(string pText,string pVar,string pScoreVar)
         {
             pText=pText.Trim();
             pText = pText.Replace("\'", "\\\'");

@@ -87,13 +87,13 @@ namespace Linked_Data_Server.Controllers
                                         {{
                                             FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
                                             ?s ?p ?o.
-                                            {SparqlUtility.GetSearchBuscador(q,"o","sc")}
+                                            {_sparqlUtility.GetSearchBuscador(q,"o","sc")}
                                         }}union
                                         {{
                                             FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
                                             ?s ?p ?o.
                                             ?s <http://purl.org/roh#freetextSearch> ?search.
-                                            {SparqlUtility.GetSearchBuscador(q,"search","sc2")}
+                                            {_sparqlUtility.GetSearchBuscador(q,"search","sc2")}
                                         }}
                                     }}order by desc(?sc) desc(?sc2) asc(?o) asc (?s)
                                 }} OFFSET {(pagina - 1) * numResultadosPagina} limit {numResultadosPagina} ";
@@ -118,13 +118,13 @@ namespace Linked_Data_Server.Controllers
                                         {{
                                             FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
                                             ?s ?p ?o.
-                                            {SparqlUtility.GetSearchBuscador(q,"o","sc")}
+                                            {_sparqlUtility.GetSearchBuscador(q,"o","sc")}
                                         }}union
                                         {{
                                             FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
                                             ?s ?p ?o.
                                             ?s <http://purl.org/roh#freetextSearch> ?search.
-                                            {SparqlUtility.GetSearchBuscador(q, "search","sc2")}
+                                            {_sparqlUtility.GetSearchBuscador(q, "search","sc2")}
                                         }}
                                     }} ";
                 SparqlObject sparqlObjectNumero = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consultaNumero, ref pXAppServer);

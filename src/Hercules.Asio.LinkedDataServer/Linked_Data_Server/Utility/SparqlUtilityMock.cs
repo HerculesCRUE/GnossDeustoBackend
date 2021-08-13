@@ -24,11 +24,15 @@ namespace Hercules.Asio.LinkedDataServer.Utility
             SparqlObject sparqlObject = new SparqlObject();
             sparqlObject.results = new SparqlObject.Results();
             sparqlObject.results.bindings = new List<Dictionary<string, SparqlObject.Data>>();
+            sparqlObject.head = new SparqlObject.Head();
+            sparqlObject.head.vars = new HashSet<string>();
+
             foreach (var sparqlResult in sparqlResultSet)
             {
                 Dictionary<string, SparqlObject.Data> dict = new Dictionary<string, SparqlObject.Data>();
                 foreach (var variable in sparqlResult.Variables)
                 {
+                    sparqlObject.head.vars.Add(variable);
                     SparqlObject.Data data = new SparqlObject.Data();
                     if (sparqlResult[variable] != null)
                     {
@@ -57,6 +61,16 @@ namespace Hercules.Asio.LinkedDataServer.Utility
                 sparqlObject.results.bindings.Add(dict);
             }
             return sparqlObject;
+        }
+
+        public string GetSearchAutocompletar(string pText)
+        {
+            return $"FILTER(regex(lcase(?o), '^{pText.ToLower()}') || regex(lcase(?o), ' {pText.ToLower()}')) bind(1 as ?sc)";
+        }
+
+        public string GetSearchBuscador(string pText, string pVar, string pScoreVar)
+        {
+            return $"FILTER(regex(lcase(?o), '^{pText.ToLower()}') || regex(lcase(?o), ' {pText.ToLower()}')) bind(1 as ?sc)";
         }
     }
 }

@@ -72,7 +72,7 @@ namespace XUnit_LinkedData
 
             SparqlUtilityMock sparqlUtilityMock = new SparqlUtilityMock(dataGraphBBDD);
             SearchController x = new SearchController(sparqlUtilityMock);
-            var result = x.GenerateSearchTemplate("ped", 1);
+            var result = x.GenerateSearchTemplate("ped","","", 1);
             Assert.True(result.entidades.Count > 0);
         }
     }

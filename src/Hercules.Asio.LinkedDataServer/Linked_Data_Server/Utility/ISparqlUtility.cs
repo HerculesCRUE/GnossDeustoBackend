@@ -10,5 +10,7 @@ namespace Hercules.Asio.LinkedDataServer.Utility
     public interface ISparqlUtility
     {
         public SparqlObject SelectData(ConfigService pConfigService, string pGraph, string pConsulta, ref string pXAppServer);
+        public string GetSearchAutocompletar(string pText);
+        public string GetSearchBuscador(string pText, string pVar, string pScoreVar);
     }
 }

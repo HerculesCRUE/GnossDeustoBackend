@@ -70,7 +70,7 @@ namespace Linked_Data_Server.Controllers
             }
 
             List<KeyValuePair<string, string>> response = new List<KeyValuePair<string, string>>();
-            string searchAutocompletar = SparqlUtility.GetSearchAutocompletar(q);
+            string searchAutocompletar = _sparqlUtility.GetSearchAutocompletar(q);            
             if (!string.IsNullOrEmpty(searchAutocompletar))
             {
                 Dictionary<int, List<KeyValuePair<string, string>>> listaAutocompletar = new Dictionary<int, List<KeyValuePair<string, string>>>();
@@ -108,7 +108,7 @@ namespace Linked_Data_Server.Controllers
                     }
                 }
                 {
-                    string consultaTags = @$"     select distinct lcase(?o) as ?o ?sc where 
+                    string consultaTags = @$"     select distinct lcase(?o) as ?oTag ?sc where 
                                     {{  
                                         ?s <http://purl.org/roh/mirror/vivo#freetextKeyword> ?o.
                                         {searchAutocompletar}
@@ -121,8 +121,8 @@ namespace Linked_Data_Server.Controllers
                         {
                             listaAutocompletar.Add(score, new List<KeyValuePair<string, string>>());
                         }
-                        string url = $"{Request.Scheme}://{Request.Host}/Search?etiqueta={row["o"].value.ToLower()}";
-                        listaAutocompletar[score].Add(new KeyValuePair<string, string>($"{ row["o"].value.ToLower() } - Palabra clave", url));
+                        string url = $"{Request.Scheme}://{Request.Host}/Search?etiqueta={row["oTag"].value.ToLower()}";
+                        listaAutocompletar[score].Add(new KeyValuePair<string, string>($"{ row["oTag"].value.ToLower() } - Palabra clave", url));
                     }
                 }
                 int num = 0;

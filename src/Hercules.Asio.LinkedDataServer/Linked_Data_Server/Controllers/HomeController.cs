@@ -87,7 +87,10 @@ namespace Linked_Data_Server.Controllers
         {
             ViewBag.UrlHome = mConfigService.GetUrlHome();
             EntityModelTemplate entityModel = new EntityModelTemplate();
-            entityModel.domain = Request.Scheme + "://" + Request.Host;
+            if (Request != null)
+            {
+                entityModel.domain = Request.Scheme + "://" + Request.Host;
+            }
             //Customizamos Header
             if (!string.IsNullOrEmpty(mConfigService.GetConstrainedByUrl()) && HttpContext != null)
             {
