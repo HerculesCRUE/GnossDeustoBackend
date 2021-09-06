@@ -7,6 +7,11 @@
           "name": "Documentos",
           "fields": [ "Título", "Título_href", "RdfType" ],
           "query": "select distinct ?Nombre ?ID ?RdfType  where  {    ?ID <http://purl.org/roh/mirror/bibo#authorList> ?lista.   ?lista ?p <{ENTITY_ID}>.   ?ID <http://purl.org/roh#title> ?Nombre.   ?ID a ?RdfType.  } "
+        },
+        {
+          "name": "Proyectos",
+          "fields": [ "Título", "Título_href", "Rol", "Fecha de inicio", "Fecha de fin" ],
+          "query": "select distinct ?Nombre ?ID ?tipoRol ?fechaInicioIntervalo ?fechaFinIntervalo  where  {<{ENTITY_ID}> <http://purl.org/roh#hasRole> ?rol. ?rol a ?tipoRol. ?rol <http://purl.org/roh/mirror/vivo#relatedBy> ?ID. ?ID a <http://purl.org/roh/mirror/vivo#Project>.   ?ID <http://purl.org/roh#title> ?Nombre.  OPTIONAL  {        ?rol <http://purl.org/roh/mirror/vivo#dateTimeInterval> ?intervaloGrupo.        OPTIONAL   {    ?intervaloGrupo <http://purl.org/roh/mirror/vivo#start> ?inicioIntervalo. ?inicioIntervalo <http://purl.org/roh/mirror/vivo#dateTime> ?fechaInicioIntervalo.   }        OPTIONAL   {    ?intervaloGrupo <http://purl.org/roh/mirror/vivo#end> ?finIntervalo. ?finIntervalo <http://purl.org/roh/mirror/vivo#dateTime> ?fechaFinIntervalo  }     }   } "
         }
       ]
     },
