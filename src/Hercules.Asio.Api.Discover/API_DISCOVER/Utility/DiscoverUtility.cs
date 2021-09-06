@@ -4742,7 +4742,7 @@ namespace API_DISCOVER.Utility
             IUriNode descriptionProperty = rohApi.CreateUriNode(UriFactory.Create("http://www.w3.org/2000/01/rdf-schema#comment"));
             ILiteralNode descriptionValue = rohApi.CreateLiteralNode(pExternalAPI.Description, new Uri("http://www.w3.org/2001/XMLSchema#string"));
             rohApi.Assert(new Triple(subjectOrganization, descriptionProperty, descriptionValue));
-            IUriNode homepageProperty = rohApi.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#homePage"));
+            IUriNode homepageProperty = rohApi.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#homepage"));
             ILiteralNode homepageValue = rohApi.CreateLiteralNode(pExternalAPI.HomePage, new Uri("http://www.w3.org/2001/XMLSchema#string"));
             rohApi.Assert(new Triple(subjectOrganization, homepageProperty, homepageValue));
             IUriNode subjectGraph = rohApi.CreateUriNode(UriFactory.Create(provenanceGraph));
