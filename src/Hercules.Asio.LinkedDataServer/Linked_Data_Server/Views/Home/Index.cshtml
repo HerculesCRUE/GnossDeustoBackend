@@ -98,15 +98,9 @@
                                         @if (pItem.communNameProperties.ContainsKey(stringProperty.Key))
                                         {
                                             title = pItem.communNameProperties[stringProperty.Key];
-                                        }else if(stringProperty.Key== "http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
+                                        }else if(stringProperty.Key.StartsWith("http://www.w3.org/1999/02/22-rdf-syntax-ns#_"))
                                         {
-                                            title = "RdfType";
-                                        }else if(stringProperty.Key== "http://www.w3.org/2002/07/owl#sameAs")
-                                        {
-                                            title = "igual que";
-                                        }else if(stringProperty.Key== "http://www.w3.org/2000/01/rdf-schema#comment")
-                                        {
-                                            title = "comment";
+                                            title = title.Replace("http://www.w3.org/1999/02/22-rdf-syntax-ns#","rdf:");
                                         }
 
                                         <td class="" title="@title">
