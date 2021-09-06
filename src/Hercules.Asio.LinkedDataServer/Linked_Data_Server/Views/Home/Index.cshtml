@@ -100,7 +100,7 @@
                                             title = pItem.communNameProperties[stringProperty.Key];
                                         }else if(stringProperty.Key.StartsWith("http://www.w3.org/1999/02/22-rdf-syntax-ns#_"))
                                         {
-                                            title = title.Replace("http://www.w3.org/1999/02/22-rdf-syntax-ns#","rdf:");
+                                            title = stringProperty.Key.Replace("http://www.w3.org/1999/02/22-rdf-syntax-ns#","rdf:");
                                         }
 
                                         <td class="" title="@title">
