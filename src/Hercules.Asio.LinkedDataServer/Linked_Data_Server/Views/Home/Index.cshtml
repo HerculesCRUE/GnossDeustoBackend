@@ -19,7 +19,7 @@
                 {
                     if (i == 1)
                     {
-                        PintarTablas(Model.tables);
+                        PintarTablas(entity, Model.tables);
                         @if (Model.arborGraphs != null && Model.arborGraphs.Count > 0)
                         {
                             <div id="graphs" style="display:none">
@@ -35,8 +35,7 @@
                 }
                 if (i == 1)
                 {
-
-                    PintarTablas(Model.tables);
+                    PintarTablas(Model.linkedDataRDF.First(), Model.tables);
                     @if (Model.arborGraphs != null && Model.arborGraphs.Count > 0)
                     {
                         <div id="graphs" style="display:none">
@@ -96,9 +95,9 @@
                                             String title = "";
                                         }
 
-                                        @if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
+                                        @if (pItem.communNameProperties.ContainsKey(stringProperty.Key))
                                         {
-                                            title = pItem.communNamePropierties[stringProperty.Key];
+                                            title = pItem.communNameProperties[stringProperty.Key];
                                         }
 
                                         <td class="" title="@title">
@@ -134,18 +133,18 @@
                                             {
                                                 blank = false;
                                             }
-                                    <td>
-                                        @if (blank)
-                                        {
-                                            <a href="@valorAux" target="_blank">@nombre</a> <a href="@valorAux" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-                                        }
-                                        else
-                                        {
-                                            <a href="@valorAux">
-                                                @nombre
-                                            </a>
-                                        }
-                                    </td>
+                                            <td>
+                                                @if (blank)
+                                                {
+                                                    <a href="@valorAux" target="_blank">@nombre</a> <a href="@valorAux" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@valorAux">
+                                                        @nombre
+                                                    </a>
+                                                }
+                                            </td>
                                         }
                                         else
                                         {
@@ -153,9 +152,9 @@
                                             {
                                                 title = "";
 
-                                                if (pItem.communNamePropierties.ContainsKey(stringProperty.Key))
+                                                if (pItem.communNameProperties.ContainsKey(stringProperty.Key))
                                                 {
-                                                    title = pItem.communNamePropierties[stringProperty.Key];
+                                                    title = pItem.communNameProperties[stringProperty.Key];
                                                 }
 
                                                 string valorPropiedadAbreviada = valor;
@@ -166,9 +165,9 @@
 
 
                                                 string rdftypestring = "";
-                                                if (pItem.communNamePropierties.ContainsKey(valor))
+                                                if (pItem.communNameProperties.ContainsKey(valor))
                                                 {
-                                                    rdftypestring = pItem.communNamePropierties[valor];
+                                                    rdftypestring = pItem.communNameProperties[valor];
                                                 }
 
                                                 <td title="@title">
@@ -291,9 +290,9 @@
                                     }
                                     String title = "";
 
-                                    if (pItem.communNamePropierties.ContainsKey(entitiesProperty.Key))
+                                    if (pItem.communNameProperties.ContainsKey(entitiesProperty.Key))
                                     {
-                                        title = pItem.communNamePropierties[entitiesProperty.Key];
+                                        title = pItem.communNameProperties[entitiesProperty.Key];
                                     }
                                     <tr>
                                         <td class="" title="@title">
@@ -328,19 +327,31 @@
         </div>
     }
 
-    void PintarTablas(List<Linked_Data_Server.Models.Entities.Table> pTables)
+    void PintarTablas(Linked_Data_Server.Models.Entities.LinkedDataRdfViewModel pItem, List<Linked_Data_Server.Models.Entities.Table> pTables)
     {
         foreach (var table in pTables)
         {
             if (table.Rows.Count > 0)
             {
+                HashSet<int> enlaces = new HashSet<int>();
                 <h2>@table.Name</h2>
                 <table class="display datatable">
                     <thead>
                         <tr>
-                            @foreach (var header in table.Header)
-                            {
-                                <th scope="col">@header</th>
+                            @{
+                                int iHeader = 0;
+                                foreach (var header in table.Header)
+                                {
+                                    if (header.EndsWith("_href"))
+                                    {
+                                        enlaces.Add(iHeader);
+                                    }
+                                    else
+                                    {
+                                        <th scope="col">@header</th>
+                                    }
+                                    iHeader++;
+                                }
                             }
                         </tr>
                     </thead>
@@ -348,49 +359,47 @@
                         @foreach (var row in table.Rows)
                         {
                             <tr>
-                                @foreach (var field in row.fields)
-                                {
-                                    @if (Uri.IsWellFormedUriString(field, UriKind.Absolute))
+                                @{
+                                    int iField = 0;
+                                    for(int i=0;i<row.fields.Count;i++)
                                     {
-                                        Uri uri = new Uri(field);
-
-                                        if (Context.Request.Host.Value == uri.Host)
+                                        string text = row.fields[i];
+                                        string uri = row.fields[i];
+                                        if(enlaces.Contains(i+1))
                                         {
-                                            <td>
-                                                <a href="@field">@field</a>
-                                            </td>
+                                            uri = row.fields[i+1];
+                                            i++;
                                         }
-                                        else
+                                        @if (Uri.IsWellFormedUriString(uri, UriKind.Absolute))
                                         {
-                                            <td>
-                                                <a href="@field" target="_blank">@field</a>
-                                            </td>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        @if (Uri.IsWellFormedUriString(field, UriKind.Absolute))
-                                        {
-                                            Uri uri = new Uri(field);
-                                            if (Context.Request.Host.Value == uri.Host)
+                                            Uri uriAux = new Uri(uri);
+                                            if (pItem.communNameProperties.ContainsKey(text))
+                                            {
+                                                text = pItem.communNameProperties[text];
+                                            }
+                                            else if (pItem.entitiesNames.ContainsKey(text))
+                                            {
+                                                text = pItem.entitiesNames[text];
+                                            }
+                                            if (Context.Request.Host.Value == uriAux.Host)
                                             {
                                                 <td>
-                                                    <a href="@field">@field</a>
+                                                    <a href="@uri">@text</a>
                                                 </td>
                                             }
                                             else
                                             {
                                                 <td>
-                                                    <a href="@field" target="_blank">@field</a>
+                                                    <a href="@uri" target="_blank">@text</a>
                                                 </td>
                                             }
                                         }
                                         else
-                                        {
-                                            <td>@field</td>
+                                        {                                            
+                                            <td>@text</td>
                                         }
+                                        iField++;
                                     }
-
                                 }
                             </tr>
                         }

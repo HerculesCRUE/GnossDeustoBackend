@@ -644,7 +644,7 @@ namespace Linked_Data_Server.Controllers
             entidad.uriEntity = idEntity;
             entidad.bnode = bnode;
             entidad.urisRdf = allEntities;
-            entidad.communNamePropierties = communNameProperties;
+            entidad.communNameProperties = communNameProperties;
             entidad.entitiesNames = entitiesNames;
             Dictionary<string, List<string>> stringPropertiesEntityAux = new Dictionary<string, List<string>>();
             Dictionary<string, List<LinkedDataRdfViewModel>> entitiesPropertiesEntityAux = new Dictionary<string, List<LinkedDataRdfViewModel>>();
