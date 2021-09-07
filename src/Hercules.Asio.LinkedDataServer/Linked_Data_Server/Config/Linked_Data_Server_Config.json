@@ -44,9 +44,19 @@
           "query": "select distinct ?Nombre  ?ID ?RdfType  where  {           ?ID <http://purl.org/roh/mirror/bibo#authorList> ?lista.       ?lista ?p ?persona.        ?persona <http://purl.org/roh#hasRole> ?rol.         ?rol <http://purl.org/roh/mirror/vivo#relatedBy> <{ENTITY_ID}>.     OPTIONAL  {        ?rol <http://purl.org/roh/mirror/vivo#dateTimeInterval> ?intervaloGrupo.        OPTIONAL   {    ?intervaloGrupo <http://purl.org/roh/mirror/vivo#start> ?inicioIntervalo.   }        OPTIONAL   {    ?intervaloGrupo <http://purl.org/roh/mirror/vivo#end> ?finIntervalo.   }     }     ?ID <http://purl.org/roh#title> ?Nombre.      ?ID a ?RdfType.       ?ID <http://purl.org/roh/mirror/vivo#dateTime> ?fechaPublicacion.     FILTER((!BOUND(?inicioIntervalo) OR ?fechaPublicacion>=?inicioIntervalo) AND (!BOUND(?finIntervalo) OR ?fechaPublicacion<=?finIntervalo))  }"
         }
       ]
+    },
+    {
+      "rdfType": "http://purl.org/roh/mirror/vivo#Project",
+      "tables": [
+        {
+          "name": "Participantes en el proyecto",
+          "fields": [ "Nombre", "Nombre_href", "Rol", "RdfType", "Fecha de inicio", "Fecha de fin" ],
+          "query": "select ?nombre ?ID ?tipoRol  ?tipo ?fechaInicioIntervalo ?fechaFinIntervalo where { ?ID ?propnombre ?nombre. FILTER(?propnombre in (<http://purl.org/roh/mirror/foaf#name> ,<http://purl.org/roh#title>)). ?ID <http://purl.org/roh#hasRole> ?rol . ?rol <http://purl.org/roh/mirror/vivo#relatedBy> <{ENTITY_ID}>. ?rol a ?tipoRol. ?ID a ?tipo. OPTIONAL  {        ?rol <http://purl.org/roh/mirror/vivo#dateTimeInterval> ?intervaloGrupo.        OPTIONAL   {    ?intervaloGrupo <http://purl.org/roh/mirror/vivo#start> ?inicioIntervalo. ?inicioIntervalo <http://purl.org/roh/mirror/vivo#dateTime> ?fechaInicioIntervalo.   }        OPTIONAL   {    ?intervaloGrupo <http://purl.org/roh/mirror/vivo#end> ?finIntervalo. ?finIntervalo <http://purl.org/roh/mirror/vivo#dateTime> ?fechaFinIntervalo  }     }   }"
+        }
+      ]
     }
   ],
-  "ExcludeRelatedEntity": [ "http://purl.org/roh/mirror/foaf#Person", "http://purl.org/roh#ResearchGroup" ],
+  "ExcludeRelatedEntity": [ "http://purl.org/roh/mirror/foaf#Person", "http://purl.org/roh#ResearchGroup", "http://purl.org/roh/mirror/vivo#Project" ],
   "ExcludeProps": [ "http://purl.org/roh#freetextSearch" ],
   "ConfigArborGraphs": {
     "icons": [
