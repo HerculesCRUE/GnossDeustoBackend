@@ -68,9 +68,9 @@ namespace CargaDataSetMurcia.Model
             GenerarAmbitosProyectos(outputFolder + "/Ambito/", features);
             GenerarPersonas(outputFolder + "/Personas/", pUrlUrisFactory, personas, centros, departamentos, datoEquiposInvestigacion, tipoParticipacionGrupos, gruposInvestigacion, patentes, inventoresPatentes, equiposProyectos, fechasEquiposProyectos);
             GenerarArticulos(outputFolder + "/Articulos/", pUrlUrisFactory, articulos, personas, autoresArticulos, palabrasClave);
-            GenerarOrganizaciones(outputFolder + "/Organizaciones/", pUrlUrisFactory, centros, departamentos, gruposInvestigacion, datoEquiposInvestigacion, proyectos, equiposProyectos, fechasEquiposProyectos, lineasInvestigador, lineasDeInvestigacion, lineasUnesco);
+            GenerarOrganizaciones(outputFolder + "/Organizaciones/", pUrlUrisFactory, centros, departamentos, gruposInvestigacion, datoEquiposInvestigacion, proyectos, equiposProyectos, fechasEquiposProyectos, lineasInvestigador, lineasDeInvestigacion, lineasUnesco,codigosUnesco);
             GenerarOrganizacionesExternas(outputFolder + "/OrganizacionesExternas/", pUrlUrisFactory, organizacionesExternas);
-            GenerarProyectos(outputFolder + "/Proyectos/", pUrlUrisFactory, proyectos, fechasProyectos, equiposProyectos, fechasEquiposProyectos, personas, features, areasUnescoProyectos, organizacionesExternas);
+            GenerarProyectos(outputFolder + "/Proyectos/", pUrlUrisFactory, proyectos, fechasProyectos, equiposProyectos, fechasEquiposProyectos, personas, features, areasUnescoProyectos,codigosUnesco, organizacionesExternas);
             GenerarActividades(outputFolder + "/Actividades/", pUrlUrisFactory, congresos, exposiciones, autoresCongresos, autoresExposiciones, personas);
             GenerarPatentes(outputFolder + "/Patente/", pUrlUrisFactory, patentes, inventoresPatentes, personas);
             GenerarTesis(outputFolder + "/Tesis/", pUrlUrisFactory, tesis, directoresTesis, personas);
@@ -135,7 +135,7 @@ namespace CargaDataSetMurcia.Model
                 }
                 {
                     INode s = GetUri(pUriUrisFactory, asioGeneralGraph, "http://purl.org/roh/mirror/vivo#University", "um");
-                    INode p = asioGeneralGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#homePage"));
+                    INode p = asioGeneralGraph.CreateUriNode(UriFactory.Create("http://purl.org/roh/mirror/foaf#homepage"));
                     INode o = asioGeneralGraph.CreateLiteralNode("https://www.um.es/");
                     asioGeneralGraph.Assert(new Triple(s, p, o));
                 }
@@ -1585,6 +1585,23 @@ namespace CargaDataSetMurcia.Model
                 Triple tripleNombre = new Triple(uriSubject, uriPredicateFoafName, objectFoafName);
                 graph.Assert(tripleNombre);
 
+                //Genero
+                if (persona.SEXO == "M")
+                {
+                    INode uriPredicateFoafGender = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/foaf#gender"));
+                    INode objectFoafGender = CreateTextNode(graph, "male");
+                    Triple tripleGender = new Triple(uriSubject, uriPredicateFoafGender, objectFoafGender);
+                    graph.Assert(tripleGender);
+                }else if (persona.SEXO == "F")
+                {
+                    INode uriPredicateFoafGender = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/foaf#gender"));
+                    INode objectFoafGender = CreateTextNode(graph, "female");
+                    Triple tripleGender = new Triple(uriSubject, uriPredicateFoafGender, objectFoafGender);
+                    graph.Assert(tripleGender);
+                }
+
+           
+
                 {
                     //Identificador
                     INode uriPredicateCrisIdentifier = graph.CreateUriNode(new Uri("http://purl.org/roh#crisIdentifier"));
@@ -1993,6 +2010,7 @@ namespace CargaDataSetMurcia.Model
             foreach (Articulo articulo in pArticulos)
             {
                 i++;
+                string freetextsearch = "";
                 Console.Write($"\rGenerando RDFs en {pRuta} {i}/{pArticulos.Count}");
                 string rutaArticulo = pRuta + articulo.CODIGO + ".rdf";
                 Graph graph = new Graph();
@@ -2003,6 +2021,14 @@ namespace CargaDataSetMurcia.Model
                 INode uriObjectRdfType = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/bibo#AcademicArticle"));
                 Triple tripleRdfType = new Triple(uriSubject, uriPredicateRdfType, uriObjectRdfType);
                 graph.Assert(tripleRdfType);
+                
+
+                //Title
+                INode uriPredicateRohTitle = graph.CreateUriNode(new Uri("http://purl.org/roh#title"));
+                INode objectRohTitle = CreateTextNode(graph, articulo.TITULO);
+                Triple tripleTitulo = new Triple(uriSubject, uriPredicateRohTitle, objectRohTitle);
+                graph.Assert(tripleTitulo);
+                freetextsearch += " " + articulo.TITULO.ToLower();
 
                 //Palabras Clave
                 List<PalabrasClaveArticulos> palabrasClave = pPalabrasClave.Where(x => x.PC_ARTI_CODIGO == articulo.CODIGO).ToList();
@@ -2012,13 +2038,9 @@ namespace CargaDataSetMurcia.Model
                     INode objectFreeTextKeyword = CreateTextNode(graph, palabraClave.PC_PALABRA);
                     Triple tripleFreeTextKeyword = new Triple(uriSubject, uriPredicateFreeTextKeyword, objectFreeTextKeyword);
                     graph.Assert(tripleFreeTextKeyword);
+                    freetextsearch += " " + palabraClave.PC_PALABRA.ToLower();
                 }
 
-                //Title
-                INode uriPredicateRohTitle = graph.CreateUriNode(new Uri("http://purl.org/roh#title"));
-                INode objectRohTitle = CreateTextNode(graph, articulo.TITULO);
-                Triple tripleTitulo = new Triple(uriSubject, uriPredicateRohTitle, objectRohTitle);
-                graph.Assert(tripleTitulo);
                 {
                     //Identificador
                     INode uriPredicateCrisIdentifier = graph.CreateUriNode(new Uri("http://purl.org/roh#crisIdentifier"));
@@ -2071,7 +2093,7 @@ namespace CargaDataSetMurcia.Model
                     graph.Assert(triplePageEnd);
                 }
 
-                //Publicaciones Unesco
+                //Publicaciones Tesaruro
                 if (!string.IsNullOrEmpty(articulo.AREA) && !string.IsNullOrEmpty(articulo.DESCRI_AREA))
                 {
                     //RdfType
@@ -2090,6 +2112,8 @@ namespace CargaDataSetMurcia.Model
                     INode uriPredicateHasKnowledgeArea = graph.CreateUriNode(new Uri("http://purl.org/roh#hasKnowledgeArea"));
                     Triple tripleHasKnowledgeArea = new Triple(uriSubject, uriPredicateHasKnowledgeArea, uriSubjectPubliUnesco);
                     graph.Assert(tripleHasKnowledgeArea);
+
+                    freetextsearch += " " + articulo.DESCRI_AREA.ToLower();
                 }
 
                 //Revista
@@ -2168,20 +2192,29 @@ namespace CargaDataSetMurcia.Model
 
                     foreach (AutorArticulo autorArticulo in autorArticuloID[articulo.CODIGO])
                     {
-                        INode uriSubjectPersona = GetUri(pUriUrisFactory, graph, "http://purl.org/roh/mirror/foaf#Person", autorArticulo.IDPERSONA);
+                        if (pPersonas.Exists(x => x.IDPERSONA == autorArticulo.IDPERSONA))
+                        {
+                            INode uriSubjectPersona = GetUri(pUriUrisFactory, graph, "http://purl.org/roh/mirror/foaf#Person", autorArticulo.IDPERSONA);
 
-                        //Seq-persona
-                        INode uriPredicateSeq = graph.CreateUriNode(new Uri("http://www.w3.org/1999/02/22-rdf-syntax-ns#_" + autorArticulo.ORDEN));
-                        Triple tripleSeqPersona = new Triple(uriAuthorList, uriPredicateSeq, uriSubjectPersona);
-                        graph.Assert(tripleSeqPersona);
+                            //Seq-persona
+                            INode uriPredicateSeq = graph.CreateUriNode(new Uri("http://www.w3.org/1999/02/22-rdf-syntax-ns#_" + autorArticulo.ORDEN));
+                            Triple tripleSeqPersona = new Triple(uriAuthorList, uriPredicateSeq, uriSubjectPersona);
+                            graph.Assert(tripleSeqPersona);
+                        }
                     }
                 }
+                //freetextsearch
+                INode uriPredicateFreetextSearch = graph.CreateUriNode(new Uri("http://purl.org/roh#freetextSearch"));
+                INode uriObjectFreetextSearch = CreateTextNode(graph, freetextsearch);
+                Triple tripleFreetextSearch = new Triple(uriSubject, uriPredicateFreetextSearch, uriObjectFreetextSearch);
+                graph.Assert(tripleFreetextSearch);
+
                 graph.SaveToFile(rutaArticulo);
             }
             Console.WriteLine($"\rGenerando RDFs en {pRuta} {i}/{pArticulos.Count}");
         }
 
-        private static void GenerarOrganizaciones(string pRuta, string pUrlUrisFactory, List<Centro> pCentros, List<Departamento> pDepartamentos, List<GrupoInvestigacion> pGruposInvestigacion, List<DatoEquipoInvestigacion> pDatoEquipoInvestigacions, List<Proyecto> pProyecto, List<EquipoProyecto> pEquipoProyecto, List<FechaEquipoProyecto> pFechaEquipoProyectos, List<LineasInvestigador> pLineasInvestigador, List<LineasDeInvestigacion> pLineasInvestigacion, List<LineasUnesco> pLineasUnesco)
+        private static void GenerarOrganizaciones(string pRuta, string pUrlUrisFactory, List<Centro> pCentros, List<Departamento> pDepartamentos, List<GrupoInvestigacion> pGruposInvestigacion, List<DatoEquipoInvestigacion> pDatoEquipoInvestigacions, List<Proyecto> pProyecto, List<EquipoProyecto> pEquipoProyecto, List<FechaEquipoProyecto> pFechaEquipoProyectos, List<LineasInvestigador> pLineasInvestigador, List<LineasDeInvestigacion> pLineasInvestigacion, List<LineasUnesco> pLineasUnesco,List<CodigosUnesco> pCodigosUnesco)
         {
             System.IO.Directory.CreateDirectory(pRuta);
             int i = 0;
@@ -2295,6 +2328,7 @@ namespace CargaDataSetMurcia.Model
             foreach (GrupoInvestigacion grupoInvestigacion in pGruposInvestigacion)
             {
                 i++;
+                string freetextsearch = "";
                 Console.Write($"\rGenerando RDFs en {pRuta} {i}/{total}");
                 string rutaGrupoInvestigacion = pRuta + "GrupoInvestigacion_" + grupoInvestigacion.IDGRUPOINVESTIGACION.Replace("/", "--") + ".rdf";
                 Graph graph = new Graph();
@@ -2356,6 +2390,8 @@ namespace CargaDataSetMurcia.Model
                 INode uriPredicateRohTitle = graph.CreateUriNode(new Uri("http://purl.org/roh#title"));
                 INode objectRohTitle = CreateTextNode(graph, grupoInvestigacion.DESCRIPCION);
                 Triple tripleTitle = new Triple(uriSubject, uriPredicateRohTitle, objectRohTitle);
+                freetextsearch += " " + grupoInvestigacion.DESCRIPCION.ToLower();
+
                 graph.Assert(tripleTitle);
                 {
                     //Identificador
@@ -2462,7 +2498,7 @@ namespace CargaDataSetMurcia.Model
 
                 List<LineasInvestigador> lineaInvestigador = pLineasInvestigador.Where(x => x.IDGRUPOINVESTIGACION == grupoInvestigacion.IDGRUPOINVESTIGACION).ToList();
 
-
+                HashSet<string> aniadido = new HashSet<string>();
                 foreach (LineasInvestigador linea in lineaInvestigador)
                 {
                     //ResearchLine
@@ -2481,29 +2517,44 @@ namespace CargaDataSetMurcia.Model
                     //HasKnowledgeArea
                     List<LineasUnesco> lineasUnesco = pLineasUnesco.Where(x => x.LIUN_LINE_CODIGO == linea.LINE_CODIGO).ToList();
                     if (lineasUnesco != null && lineasUnesco.Count > 0)
-                    {
+                    {                        
                         foreach (LineasUnesco lineaUnesco in lineasUnesco)
                         {
                             string codigoUNESCO = string.Empty;
+                            string nivel1 = "00";
+                            string nivel2 = "00";
+                            string nivel3 = "00";
                             if (!string.IsNullOrEmpty(lineaUnesco.LIUN_UNAR_CODIGO) && lineaUnesco.LIUN_UNAR_CODIGO != "00")
                             {
                                 codigoUNESCO += lineaUnesco.LIUN_UNAR_CODIGO;
+                                nivel1 = lineaUnesco.LIUN_UNAR_CODIGO;
                             }
                             if (!string.IsNullOrEmpty(lineaUnesco.LIUN_UNCA_CODIGO) && lineaUnesco.LIUN_UNCA_CODIGO != "00")
                             {
                                 codigoUNESCO += lineaUnesco.LIUN_UNCA_CODIGO;
+                                nivel2 = lineaUnesco.LIUN_UNCA_CODIGO;
                             }
                             if (!string.IsNullOrEmpty(lineaUnesco.LIUN_UNES_CODIGO) && lineaUnesco.LIUN_UNES_CODIGO != "00")
                             {
                                 codigoUNESCO += lineaUnesco.LIUN_UNES_CODIGO;
+                                nivel3 = lineaUnesco.LIUN_UNES_CODIGO;
                             }
+                            if (aniadido.Add(nivel1 + nivel2 + nivel3))
+                            {
+                                INode uriPredicateHasKnowledgeArea = graph.CreateUriNode(new Uri("http://purl.org/roh#hasKnowledgeArea"));
+                                Triple tripleHasKnowledgeArea = new Triple(uriSubject, uriPredicateHasKnowledgeArea, graph.CreateUriNode(new Uri($@"http://skos.um.es/unesco6/{codigoUNESCO}")));
+                                graph.Assert(tripleHasKnowledgeArea);
 
-                            INode uriPredicateHasKnowledgeArea = graph.CreateUriNode(new Uri("http://purl.org/roh#hasKnowledgeArea"));
-                            Triple tripleHasKnowledgeArea = new Triple(uriSubject, uriPredicateHasKnowledgeArea, graph.CreateUriNode(new Uri($@"http://skos.um.es/unesco6/{codigoUNESCO}")));
-                            graph.Assert(tripleHasKnowledgeArea);
+                                freetextsearch += " " + pCodigosUnesco.First(x => x.UNES_UNAR_CODIGO == nivel1 && x.UNES_UNCA_CODIGO == nivel2 && x.UNES_CODIGO == nivel3).UNES_NOMBRE.ToLower();
+                            }
                         }
                     }
                 }
+                //freetextsearch
+                INode uriPredicateFreetextSearch = graph.CreateUriNode(new Uri("http://purl.org/roh#freetextSearch"));
+                INode uriObjectFreetextSearch = CreateTextNode(graph, freetextsearch);
+                Triple tripleFreetextSearch = new Triple(uriSubject, uriPredicateFreetextSearch, uriObjectFreetextSearch);
+                graph.Assert(tripleFreetextSearch);
 
                 graph.SaveToFile(rutaGrupoInvestigacion);
             }
@@ -2536,100 +2587,86 @@ namespace CargaDataSetMurcia.Model
                 Triple tripleTitleCentro = new Triple(uriSubjectOrganizacion, uriPredicateRohTitle, objectRohTitleOrganizacion);
                 graph.Assert(tripleTitleCentro);
 
-
-                INode uriSubjectProyecto = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/vivo#Project", organizacion.IDPROYECTO);
-
-                switch (organizacion.TIPO_COLABORACION)
+                foreach (OrganizacionesExternas organizacion2 in pOrganizacionesExternas.Where(x => x.ENTIDAD == organizacion.ENTIDAD))
                 {
-                    case "CONTRATADO":
-                        //RdfType
-                        INode uriSubjectHasRoleContratado = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#ThirdPartyContractorRole", null);
-                        INode uriObjectHasRoleContratado = graph.CreateUriNode(new Uri("http://purl.org/roh#ThirdPartyContractorRole"));
-                        Triple tripleRdfTypeHasRoleContratado = new Triple(uriSubjectHasRoleContratado, uriPredicateRdfType, uriObjectHasRoleContratado);
-                        graph.Assert(tripleRdfTypeHasRoleContratado);
+                    INode uriSubjectProyecto = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/vivo#Project", organizacion2.IDPROYECTO);
 
-                        //HasRole
-                        INode uriPredicateHasRole = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
-                        Triple tripleHasRoleContratado = new Triple(uriSubjectOrganizacion, uriPredicateHasRole, uriSubjectHasRoleContratado);
-                        graph.Assert(tripleHasRoleContratado);
+                    switch (organizacion.TIPO_COLABORACION)
+                    {
+                        case "CONTRATADO":
+                            //RdfType
+                            INode uriSubjectHasRoleContratado = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#ThirdPartyContractorRole", null);
+                            INode uriObjectHasRoleContratado = graph.CreateUriNode(new Uri("http://purl.org/roh#ThirdPartyContractorRole"));
+                            Triple tripleRdfTypeHasRoleContratado = new Triple(uriSubjectHasRoleContratado, uriPredicateRdfType, uriObjectHasRoleContratado);
+                            graph.Assert(tripleRdfTypeHasRoleContratado);
 
-                        //RelatedBy
-                        INode uriPredicateRelatedBy = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
-                        Triple triplerelatedBy = new Triple(uriSubjectHasRoleContratado, uriPredicateRelatedBy, uriSubjectProyecto);
-                        graph.Assert(triplerelatedBy);
-                        break;
-                    case "LIDER":
-                        //RdfType
-                        INode uriSubjectHasRoleLider = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/vivo#LeaderRole", null);
-                        INode uriObjectHasRoleLider = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#LeaderRole"));
-                        Triple tripleRdfTypeHasRoleLider = new Triple(uriSubjectHasRoleLider, uriPredicateRdfType, uriObjectHasRoleLider);
-                        graph.Assert(tripleRdfTypeHasRoleLider);
+                            //HasRole
+                            INode uriPredicateHasRole = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
+                            Triple tripleHasRoleContratado = new Triple(uriSubjectOrganizacion, uriPredicateHasRole, uriSubjectHasRoleContratado);
+                            graph.Assert(tripleHasRoleContratado);
 
-                        //HasRole
-                        INode uriPredicateHasLider = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
-                        Triple tripleHasRoleLider = new Triple(uriSubjectOrganizacion, uriPredicateHasLider, uriSubjectHasRoleLider);
-                        graph.Assert(tripleHasRoleLider);
+                            //RelatedBy
+                            INode uriPredicateRelatedBy = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
+                            Triple triplerelatedBy = new Triple(uriSubjectHasRoleContratado, uriPredicateRelatedBy, uriSubjectProyecto);
+                            graph.Assert(triplerelatedBy);
+                            break;
+                        case "LIDER":
+                            //RdfType
+                            INode uriSubjectHasRoleLider = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh/mirror/vivo#LeaderRole", null);
+                            INode uriObjectHasRoleLider = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#LeaderRole"));
+                            Triple tripleRdfTypeHasRoleLider = new Triple(uriSubjectHasRoleLider, uriPredicateRdfType, uriObjectHasRoleLider);
+                            graph.Assert(tripleRdfTypeHasRoleLider);
 
-                        //RelatedBy
-                        INode uriPredicateRelatedByLider = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
-                        Triple triplerelatedByLider = new Triple(uriSubjectHasRoleLider, uriPredicateRelatedByLider, uriSubjectProyecto);
-                        graph.Assert(triplerelatedByLider);
+                            //HasRole
+                            INode uriPredicateHasLider = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
+                            Triple tripleHasRoleLider = new Triple(uriSubjectOrganizacion, uriPredicateHasLider, uriSubjectHasRoleLider);
+                            graph.Assert(tripleHasRoleLider);
 
-                        //RdfType
-                        INode uriSubjectHasRoleExternal = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#ExternalMemberRole", null);
-                        INode uriObjectHasRoleExternal = graph.CreateUriNode(new Uri("http://purl.org/roh#ExternalMemberRole"));
-                        Triple tripleRdfTypeHasRoleExternal = new Triple(uriSubjectHasRoleExternal, uriPredicateRdfType, uriObjectHasRoleExternal);
-                        graph.Assert(tripleRdfTypeHasRoleExternal);
+                            //RelatedBy
+                            INode uriPredicateRelatedByLider = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
+                            Triple triplerelatedByLider = new Triple(uriSubjectHasRoleLider, uriPredicateRelatedByLider, uriSubjectProyecto);
+                            graph.Assert(triplerelatedByLider);
+                            break;
+                        case "OTROS":
+                            //RdfType
+                            INode uriSubjectHasRoleOtros = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#ExternalMemberRole", null);
+                            INode uriObjectHasRoleOtros = graph.CreateUriNode(new Uri("http://purl.org/roh#ExternalMemberRole"));
+                            Triple tripleRdfTypeHasRoleOtros = new Triple(uriSubjectHasRoleOtros, uriPredicateRdfType, uriObjectHasRoleOtros);
+                            graph.Assert(tripleRdfTypeHasRoleOtros);
 
-                        //HasRole
-                        INode uriPredicateHasExternal = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
-                        Triple tripleHasRoleExternal = new Triple(uriSubjectOrganizacion, uriPredicateHasExternal, uriSubjectHasRoleExternal);
-                        graph.Assert(tripleHasRoleExternal);
+                            //HasRole
+                            INode uriPredicateHasRoleOtros = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
+                            Triple tripleHasRoleOtros = new Triple(uriSubjectOrganizacion, uriPredicateHasRoleOtros, uriSubjectHasRoleOtros);
+                            graph.Assert(tripleHasRoleOtros);
 
-                        //RelatedBy
-                        INode uriPredicateRelatedByExternal = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
-                        Triple triplerelatedByExternal = new Triple(uriSubjectHasRoleExternal, uriPredicateRelatedByExternal, uriSubjectProyecto);
-                        graph.Assert(triplerelatedByExternal);
-                        break;
-                    case "OTROS":
-                        //RdfType
-                        INode uriSubjectHasRoleOtros = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#ExternalMemberRole", null);
-                        INode uriObjectHasRoleOtros = graph.CreateUriNode(new Uri("http://purl.org/roh#ExternalMemberRole"));
-                        Triple tripleRdfTypeHasRoleOtros = new Triple(uriSubjectHasRoleOtros, uriPredicateRdfType, uriObjectHasRoleOtros);
-                        graph.Assert(tripleRdfTypeHasRoleOtros);
+                            //RelatedBy
+                            INode uriPredicateRelatedByOtros = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
+                            Triple triplerelatedByOtros = new Triple(uriSubjectHasRoleOtros, uriPredicateRelatedByOtros, uriSubjectProyecto);
+                            graph.Assert(triplerelatedByOtros);
+                            break;
+                        case "SOCIO":
+                            //RdfType
+                            INode uriSubjectHasRoleSocio = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#ExternalMemberRole", null);
+                            INode uriObjectHasRoleSocio = graph.CreateUriNode(new Uri("http://purl.org/roh#ExternalMemberRole"));
+                            Triple tripleRdfTypeHasRoleSocio = new Triple(uriSubjectHasRoleSocio, uriPredicateRdfType, uriObjectHasRoleSocio);
+                            graph.Assert(tripleRdfTypeHasRoleSocio);
 
-                        //HasRole
-                        INode uriPredicateHasRoleOtros = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
-                        Triple tripleHasRoleOtros = new Triple(uriSubjectOrganizacion, uriPredicateHasRoleOtros, uriSubjectHasRoleOtros);
-                        graph.Assert(tripleHasRoleOtros);
+                            //HasRole
+                            INode uriPredicateHasRoleSocio = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
+                            Triple tripleHasRoleSocio = new Triple(uriSubjectOrganizacion, uriPredicateHasRoleSocio, uriSubjectHasRoleSocio);
+                            graph.Assert(tripleHasRoleSocio);
 
-                        //RelatedBy
-                        INode uriPredicateRelatedByOtros = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
-                        Triple triplerelatedByOtros = new Triple(uriSubjectHasRoleOtros, uriPredicateRelatedByOtros, uriSubjectProyecto);
-                        graph.Assert(triplerelatedByOtros);
-                        break;
-                    case "SOCIO":
-                        //RdfType
-                        INode uriSubjectHasRoleSocio = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#ExternalMemberRole", null);
-                        INode uriObjectHasRoleSocio = graph.CreateUriNode(new Uri("http://purl.org/roh#ExternalMemberRole"));
-                        Triple tripleRdfTypeHasRoleSocio = new Triple(uriSubjectHasRoleSocio, uriPredicateRdfType, uriObjectHasRoleSocio);
-                        graph.Assert(tripleRdfTypeHasRoleSocio);
-
-                        //HasRole
-                        INode uriPredicateHasRoleSocio = graph.CreateUriNode(new Uri("http://purl.org/roh#hasRole"));
-                        Triple tripleHasRoleSocio = new Triple(uriSubjectOrganizacion, uriPredicateHasRoleSocio, uriSubjectHasRoleSocio);
-                        graph.Assert(tripleHasRoleSocio);
-
-                        //RelatedBy
-                        INode uriPredicateRelatedBySocio = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
-                        Triple triplerelatedBySocio = new Triple(uriSubjectHasRoleSocio, uriPredicateRelatedBySocio, uriSubjectProyecto);
-                        graph.Assert(triplerelatedBySocio);
-                        break;
+                            //RelatedBy
+                            INode uriPredicateRelatedBySocio = graph.CreateUriNode(new Uri("http://purl.org/roh/mirror/vivo#relatedBy"));
+                            Triple triplerelatedBySocio = new Triple(uriSubjectHasRoleSocio, uriPredicateRelatedBySocio, uriSubjectProyecto);
+                            graph.Assert(triplerelatedBySocio);
+                            break;
+                    }
                 }
 
                 graph.SaveToFile(rutaOrganizacion);
             }
-            Console.Write($"\rGenerando RDFs en {pRuta} {i}/{total}");
+            Console.WriteLine($"\rGenerando RDFs en {pRuta} {i}/{total}");
         }
 
         private static DateTime ObtenerFechaDeTexto(string pFechaTexto, bool pInicio)
@@ -2652,13 +2689,14 @@ namespace CargaDataSetMurcia.Model
             }
         }
 
-        private static void GenerarProyectos(string pRuta, string pUrlUrisFactory, List<Proyecto> pProyectos, List<FechaProyecto> pFechaProyecto, List<EquipoProyecto> pEquipoProyecto, List<FechaEquipoProyecto> pFechaEquipoProyecto, List<Persona> pPersonas, List<Feature> pFeatures, List<AreasUnescoProyectos> pAreasUnescoProyectos, List<OrganizacionesExternas> pOrganizacionesExternas)
+        private static void GenerarProyectos(string pRuta, string pUrlUrisFactory, List<Proyecto> pProyectos, List<FechaProyecto> pFechaProyecto, List<EquipoProyecto> pEquipoProyecto, List<FechaEquipoProyecto> pFechaEquipoProyecto, List<Persona> pPersonas, List<Feature> pFeatures, List<AreasUnescoProyectos> pAreasUnescoProyectos, List<CodigosUnesco> pCodigosUnesco, List<OrganizacionesExternas> pOrganizacionesExternas)
         {
             System.IO.Directory.CreateDirectory(pRuta);
             int i = 0;
             foreach (Proyecto proyecto in pProyectos)
             {
                 i++;
+                string freetextsearch = "";
                 Console.Write($"\rGenerando RDFs en {pRuta} {i}/{pProyectos.Count}");
                 string rutaProyecto = pRuta + proyecto.IDPROYECTO.Replace("|", "---") + ".rdf";
                 Graph graph = new Graph();
@@ -2675,6 +2713,7 @@ namespace CargaDataSetMurcia.Model
                 INode objectRohTitle = CreateTextNode(graph, proyecto.NOMBRE);
                 Triple tripleTitle = new Triple(uriSubject, uriPredicateRohTitle, objectRohTitle);
                 graph.Assert(tripleTitle);
+                freetextsearch += " " + proyecto.NOMBRE.ToLower();
 
                 //Estado del Proyecto (ProjectStatus)
                 INode uriPredicateProjectStatus = graph.CreateUriNode(new Uri("http://purl.org/roh#projectStatus"));
@@ -2703,22 +2742,32 @@ namespace CargaDataSetMurcia.Model
                 foreach (AreasUnescoProyectos proy in proyectosUnesco)
                 {
                     string codigoUNESCO = string.Empty;
+                    string nivel1 = "00";
+                    string nivel2 = "00";
+                    string nivel3 = "00";
                     if (!string.IsNullOrEmpty(proy.UNAR_CODIGO) && proy.UNAR_CODIGO != "00")
                     {
                         codigoUNESCO += proy.UNAR_CODIGO;
+                        nivel1= proy.UNAR_CODIGO;
                     }
                     if (!string.IsNullOrEmpty(proy.UNCA_CODIGO) && proy.UNCA_CODIGO != "00")
                     {
                         codigoUNESCO += proy.UNCA_CODIGO;
+                        nivel2 = proy.UNCA_CODIGO;
                     }
                     if (!string.IsNullOrEmpty(proy.UNES_CODIGO) && proy.UNES_CODIGO != "00")
                     {
                         codigoUNESCO += proy.UNES_CODIGO;
+                        nivel3 = proy.UNES_CODIGO;
                     }
+                    if (!string.IsNullOrEmpty(codigoUNESCO))
+                    {
+                        INode uriPredicateHasKnowledgeArea = graph.CreateUriNode(new Uri("http://purl.org/roh#hasKnowledgeArea"));
+                        Triple tripleHasKnowledgeArea = new Triple(uriSubject, uriPredicateHasKnowledgeArea, graph.CreateUriNode(new Uri($@"http://skos.um.es/unesco6/{codigoUNESCO}")));
+                        graph.Assert(tripleHasKnowledgeArea);
 
-                    INode uriPredicateHasKnowledgeArea = graph.CreateUriNode(new Uri("http://purl.org/roh#hasKnowledgeArea"));
-                    Triple tripleHasKnowledgeArea = new Triple(uriSubject, uriPredicateHasKnowledgeArea, graph.CreateUriNode(new Uri($@"http://skos.um.es/unesco6/{codigoUNESCO}")));
-                    graph.Assert(tripleHasKnowledgeArea);
+                        freetextsearch += " " + pCodigosUnesco.First(x => x.UNES_UNAR_CODIGO == nivel1 && x.UNES_UNCA_CODIGO == nivel2 && x.UNES_CODIGO == nivel3).UNES_NOMBRE.ToLower();
+                    }
                 }
 
                 //LocatedIn
@@ -2792,6 +2841,11 @@ namespace CargaDataSetMurcia.Model
                         graph.Assert(tripleDateTime);
                     }
                 }
+                //freetextsearch
+                INode uriPredicateFreetextSearch = graph.CreateUriNode(new Uri("http://purl.org/roh#freetextSearch"));
+                INode uriObjectFreetextSearch = CreateTextNode(graph, freetextsearch);
+                Triple tripleFreetextSearch = new Triple(uriSubject, uriPredicateFreetextSearch, uriObjectFreetextSearch);
+                graph.Assert(tripleFreetextSearch);
 
                 graph.SaveToFile(rutaProyecto);
             }
@@ -3420,7 +3474,7 @@ namespace CargaDataSetMurcia.Model
             {
                 try
                 {
-                    WebRequest request = WebRequest.Create($"{pUriUrisFactory}?resource_class={HttpUtility.UrlEncode(pClass)}&identifier={pID}");
+                    WebRequest request = WebRequest.Create($"{pUriUrisFactory}?resource_class={HttpUtility.UrlEncode(pClass)}&identifier={HttpUtility.UrlEncode(pID)}");
                     WebResponse response = request.GetResponse();
                     Stream data = response.GetResponseStream();
                     string uri = String.Empty;
