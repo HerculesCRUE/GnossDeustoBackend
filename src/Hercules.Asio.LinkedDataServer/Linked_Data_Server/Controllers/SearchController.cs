@@ -25,15 +25,15 @@ namespace Linked_Data_Server.Controllers
             _sparqlUtility = sparqlUtility;
         }
         [HttpGet]
-        public IActionResult Index(string q,string concept,string etiqueta, int pagina)
+        public IActionResult Index(string q,string concept,string etiqueta, string rdfType, int pagina)
         {
-            SearchModelTemplate searchModelTemplate = GenerateSearchTemplate(q,concept, etiqueta, pagina);
+            SearchModelTemplate searchModelTemplate = GenerateSearchTemplate(q,concept, etiqueta, rdfType, pagina);
 
             
             return View(searchModelTemplate);
         }
         [NonAction]
-        public SearchModelTemplate GenerateSearchTemplate(string q, string concept,string etiqueta, int pagina)
+        public SearchModelTemplate GenerateSearchTemplate(string q, string concept,string etiqueta, string rdfType, int pagina)
         {
             string pXAppServer = "";
             RohGraph ontologyGraph = LoadGraph(mConfigService.GetOntologyGraph(), mConfigService, ref pXAppServer);
@@ -232,6 +232,48 @@ namespace Linked_Data_Server.Controllers
                 searchModelTemplate.numResultadosPagina = numResultadosPagina;
                 searchModelTemplate.paginaActual = pagina;
                 ViewData["Title"] = searchModelTemplate.numResultados + " Resultados para la palabra clave '" + etiqueta + "'";
+            }
+            else if (!string.IsNullOrEmpty(rdfType))
+            {
+                string entityName = string.Empty;
+                //No buscamos en http://www.w3.org/2004/02/skos/core#prefLabel
+                string consulta = @$" select * where
+                                {{    
+                                    select distinct ?s ?o ?rdfType where 
+                                    {{      
+                                        ?s a ?rdfType.
+                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
+                                        ?s ?p ?o.
+                                        FILTER(?rdfType = <{rdfType}>)
+                                    }}order by asc(?o) asc (?s)
+                                }} OFFSET {(pagina - 1) * numResultadosPagina} limit {numResultadosPagina} ";
+
+                SparqlObject sparqlObject = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consulta, ref pXAppServer);
+                foreach (Dictionary<string, SparqlObject.Data> row in sparqlObject.results.bindings)
+                {
+                    if (!searchModelTemplate.entidades.ContainsKey(row["s"].value))
+                    {
+                        entityName = row["rdfType"].value;
+                        if (communNamePropierties.ContainsKey(entityName))
+                        {
+                            entityName = communNamePropierties[entityName];
+                        }
+                        searchModelTemplate.entidades.Add(row["s"].value, new SearchModelTemplate.Entidad(row["o"].value, entityName));
+                    }
+                }
+                //No buscamos en http://www.w3.org/2004/02/skos/core#prefLabel
+                string consultaNumero = @$"     select count(distinct ?s) as ?num where 
+                                    {{      
+                                        ?s a ?rdfType.
+                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
+                                        ?s ?p ?o.
+                                        FILTER(?rdfType = <{rdfType}>)
+                                    }} ";
+                SparqlObject sparqlObjectNumero = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consultaNumero, ref pXAppServer);
+                searchModelTemplate.numResultados = int.Parse(sparqlObjectNumero.results.bindings[0]["num"].value);
+                searchModelTemplate.numResultadosPagina = numResultadosPagina;
+                searchModelTemplate.paginaActual = pagina;
+                ViewData["Title"] = searchModelTemplate.numResultados + " Resultados para el tipo '" + entityName + "'";
             }
 
 

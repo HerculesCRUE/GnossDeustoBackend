@@ -5,11 +5,15 @@
     string urlSearch = $"{Context.Request.Path}?q={Context.Request.Query["q"]}";
     if(Context.Request.Query["concept"].ToString()!="")
     {
-        urlSearch = $"{Context.Request.Path}?concept={Context.Request.Query["concept"]}";
+        urlSearch = $"{Context.Request.Path}?concept={System.Web.HttpUtility.UrlEncode(Context.Request.Query["concept"])}";
     }
     else if (Context.Request.Query["etiqueta"].ToString() != "")
     {
-        urlSearch = $"{Context.Request.Path}?etiqueta={Context.Request.Query["etiqueta"]}";
+        urlSearch = $"{Context.Request.Path}?etiqueta={System.Web.HttpUtility.UrlEncode(Context.Request.Query["etiqueta"])}";
+    }
+    else if (Context.Request.Query["rdftype"].ToString() != "")
+    {
+        urlSearch = $"{Context.Request.Path}?rdftype={System.Web.HttpUtility.UrlEncode(Context.Request.Query["rdftype"])}";
     }
 }
 <div>
