@@ -79,6 +79,16 @@
           "query": "select ?nombre ?ID where { ?ID <http://purl.org/roh#hasRole> ?rol. ?rol <http://purl.org/roh/mirror/vivo#relatedBy> <{ENTITY_ID}>. ?ID <http://purl.org/roh/mirror/foaf#name> ?nombre. }"
         }
       ]
+    },
+    {
+      "rdfType": "http://purl.org/roh/mirror/foaf#Organization",
+      "tables": [
+        {
+          "name": "Roles en proyectos",
+          "fields": [ "Proyecto", "Proyecto_href", "Rol" ],
+          "query": "select distinct ?proyNombre ?proy  ?ID where { <{ENTITY_ID}> <http://purl.org/roh#hasRole> ?rol. ?rol  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?ID. ?rol <http://purl.org/roh/mirror/vivo#relatedBy> ?proy . ?proy <http://purl.org/roh#title> ?proyNombre . ?proy a <http://purl.org/roh/mirror/vivo#Project>}"
+        }
+      ]
     }
   ],
   "ExcludeRelatedEntity": [ "http://purl.org/roh/mirror/foaf#Person", "http://purl.org/roh#ResearchGroup", "http://purl.org/roh/mirror/vivo#Project", "http://purl.org/roh/mirror/vivo#Center", "http://purl.org/roh/mirror/vivo#Department" ],
