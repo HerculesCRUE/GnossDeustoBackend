@@ -3,14 +3,20 @@
 @{
     bool editar = Model != null && !Model.RepositoryConfigID.Equals(Guid.Empty);
     string action = "Create";
+    string titulo = "";
+    string boton = "";
     if (!editar)
     {
         ViewData["Title"] = "Crear repositorio";
+        titulo = "Crear repositorio";
+        boton = "Crear";
     }
     else
     {
         ViewData["Title"] = Model.Name + " - Editar repositorio";
         action = "Edit";
+        titulo = "Editar repositorio";
+        boton = "Modificar";
     }
     ViewData["BodyClass"] = "formulario";
 }
@@ -20,7 +26,7 @@
                 <form asp-action="@action">
                     <div class="fieldset fieldset01">
                         <fieldset class="mediumLabels">
-                            <h1>Crear repositorio</h1>
+                            <h1>@titulo</h1>
                             <div class="fieldsetContent">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <p hidden>
@@ -49,7 +55,7 @@
                     <div class="fieldset actionButtons fieldset03">
                         <fieldset>
                             <p>
-                                <input class="submit principal" type="submit" value="Crear">
+                                <input class="submit principal" type="submit" value="@boton">
                             </p>
                         </fieldset>
                     </div>
