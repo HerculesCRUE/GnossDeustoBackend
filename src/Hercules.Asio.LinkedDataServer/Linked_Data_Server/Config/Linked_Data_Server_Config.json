@@ -25,8 +25,8 @@
         },
         {
           "name": "Lista de entidades",
-          "fields": [ "RdfType", "Número" ],
-          "query": "select ?o (count(?s) as ?num) from <{ENTITY_ID}> where {?s a ?o. FILTER (!isBlank(?s))}order by desc(?num) "
+          "fields": [ "RdfType", "RdfType_href_rdftype", "Número" ],
+          "query": "select ?o ?o as ?url (count(?s) as ?num) from <{ENTITY_ID}> where {?s a ?o. FILTER (!isBlank(?s))}order by desc(?num) "
         }
       ]
     },

@@ -176,11 +176,13 @@
                                                 <td title="@title">
                                                     @if (!string.IsNullOrEmpty(rdftypestring))
                                                     {
-                                                        <a href="@valor" target="_blank">@rdftypestring</a>
+                                                        <strong>@rdftypestring</strong>
+                                                        <a href="@valor" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
                                                     }
                                                     else
                                                     {
-                                                        <a href="@valor" target="_blank">@valorPropiedadAbreviada</a>
+                                                        <strong>@valorPropiedadAbreviada</strong>
+                                                        <a href="@valor" target="_blank"><span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
                                                     }
                                                 </td>
                                             }
@@ -337,6 +339,7 @@
             if (table.Rows.Count > 0)
             {
                 HashSet<int> enlaces = new HashSet<int>();
+                HashSet<int> enlacesRdfType = new HashSet<int>();
                 <h2>@table.Name</h2>
                 <table class="display datatable">
                     <thead>
@@ -348,6 +351,9 @@
                                     if (header.EndsWith("_href"))
                                     {
                                         enlaces.Add(iHeader);
+                                    }else if (header.EndsWith("_href_rdftype"))
+                                    {
+                                        enlacesRdfType.Add(iHeader);
                                     }
                                     else
                                     {
@@ -371,6 +377,11 @@
                                         if(enlaces.Contains(i+1))
                                         {
                                             uri = row.fields[i+1];
+                                            i++;
+                                        }
+                                        if (enlacesRdfType.Contains(i + 1))
+                                        {
+                                            uri = Context.Request.Scheme + "://" + Context.Request.Host + "/search?rdfType="+ System.Web.HttpUtility.UrlEncode(row.fields[i + 1]);
                                             i++;
                                         }
                                         @if (Uri.IsWellFormedUriString(uri, UriKind.Absolute))

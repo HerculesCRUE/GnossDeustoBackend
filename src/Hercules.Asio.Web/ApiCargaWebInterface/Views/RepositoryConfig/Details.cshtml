@@ -62,7 +62,7 @@
                                 <a href="@Url.Action("Edit", new {  id=Model.RepositoryConfigID  })" class="btn btn-editar">Editar</a>
                             </li>
                             <li>
-                                <a href="@Url.Action("Delete", new {  id=Model.RepositoryConfigID  })" class="btn btn-eliminar">Eliminar</a>
+                                <a data-toggle="modal" data-target="#modalEliminar0" class="btn btn-eliminar" id="borrarEntidad">Eliminar</a>                                
                             </li>
                             <li>
                                 <a href="https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/src/Hercules.Asio.Web/Manual-de-usuario.md#p%C3%A1gina-de-un-repositorio" target="_blank" class="btn btn-documentacion">Documentación</a>
@@ -73,6 +73,43 @@
 
                 </div>
             </div>
+
+            <div class="modal fade top-modal eliminar" id="modalEliminar0" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Eliminar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="despAccionRec">
+                                <div class="stateShowForm" id="panels">
+                                    <div id="menssages">
+                                        <div class="ok"></div>
+                                        <div class="ko"></div>
+                                    </div>
+                                    <div class="box form activeForm" id="action">
+                                        <div>
+                                            <fieldset>
+                                                <legend>¿Está seguro que quiere eliminar la entidad?</legend>
+                                                <div id="eliminar">
+                                                    <p>
+                                                        <a href="@Url.Action("Delete", new {  id=Model.RepositoryConfigID  })""><input type="button" class="button btn-principal" value="Eliminar"></a>
+                                                        <input type="button" value="Cancelar" data-dismiss="modal">
+                                                    </p>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="contenido">
                 <div class="grupo grupo-descripcion">
                     <div class="identifier">
@@ -136,27 +173,27 @@
                     </div>
                     <hr />
                 </div>
-            <div class="grupo grupo-programacion">
-                <h2>Tareas de sincronización</h2>
-                <a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea</a>
-                <partial name="_ListRecurringJobs" model="@Model.ListRecurringJobs" />
-            </div>
-            <div class="grupo grupo-programacion">
-                <h2>Tareas programadas</h2>
-                @*<a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>*@
-                <partial name="_ListScheduledJobs" model="@Model.ListScheduledJobs" />
-            </div>
-            @*<div class="grupo grupo-programacion">
+                <div class="grupo grupo-programacion">
+                    <h2>Tareas de sincronización</h2>
+                    <a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea</a>
+                    <partial name="_ListRecurringJobs" model="@Model.ListRecurringJobs" />
+                </div>
+                <div class="grupo grupo-programacion">
+                    <h2>Tareas programadas</h2>
+                    @*<a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>*@
+                    <partial name="_ListScheduledJobs" model="@Model.ListScheduledJobs" />
+                </div>
+                @*<div class="grupo grupo-programacion">
                 <h2>Shapes</h2>
                 <a href="@Url.Action("Create", "ShapeConfig", modeloShape)" class="btn btn-programacion">Crear nuevo Shape</a>
                 <partial name="_ListShapes" model="@Model.ShapeConfig" />
             </div>*@
-            <div class="grupo grupo-programacion">
-                <h2>Ejecuciones completadas</h2>
-                @*<a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>*@
-                <partial name="_ListJobs" model="@Model.ListJobs" />
+                <div class="grupo grupo-programacion">
+                    <h2>Ejecuciones completadas</h2>
+                    @*<a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>*@
+                    <partial name="_ListJobs" model="@Model.ListJobs" />
+                </div>
             </div>
         </div>
-    </div>
 </div>
 </div>
