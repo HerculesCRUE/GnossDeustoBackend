@@ -21,7 +21,7 @@
         {
           "name": "Organizacion de atribución",
           "fields": [ "Nombre", "Página" ],
-          "query": "select distinct ?nameOrg ?homepage where {?s <http://www.w3.org/ns/prov#wasAttributedTo> ?orgAttribution. FILTER(?s=<{ENTITY_ID}>).OPTIONAL{?orgAttribution <http://purl.org/roh/mirror/foaf#name> ?nameOrg.}OPTIONAL{?orgAttribution <http://purl.org/roh/mirror/foaf#homePage> ?homepage.}}"
+          "query": "select distinct ?nameOrg ?homepage where {?s <http://www.w3.org/ns/prov#wasAttributedTo> ?orgAttribution. FILTER(?s=<{ENTITY_ID}>).OPTIONAL{?orgAttribution <http://purl.org/roh/mirror/foaf#name> ?nameOrg.}OPTIONAL{?orgAttribution <http://purl.org/roh/mirror/foaf#homepage> ?homepage.}}"
         },
         {
           "name": "Lista de entidades",
