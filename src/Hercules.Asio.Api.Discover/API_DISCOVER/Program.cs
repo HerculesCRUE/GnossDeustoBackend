@@ -36,7 +36,7 @@ namespace API_DISCOVER
                     services.AddSingleton(typeof(ConfigUrlService));
                     services.AddScoped(typeof(CallCronApiService));                   
                     services.AddScoped(typeof(CallEtlApiService));
-                    services.AddScoped(typeof(CallUrisFactoryApiService));
+                    //services.AddScoped(typeof(CallUrisFactoryApiService));
                     services.AddScoped(typeof(ConfigTokenService));
                     services.AddScoped(typeof(CallTokenService));
 
