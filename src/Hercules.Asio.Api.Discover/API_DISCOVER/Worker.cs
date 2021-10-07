@@ -44,8 +44,8 @@ namespace API_DISCOVER
                 {
                     var scopeX = _serviceScopeFactory.CreateScope();
                     CallTokenService tokenService = scopeX.ServiceProvider.GetRequiredService<CallTokenService>();
-                    var x = tokenService.CallTokenCarga();                    
-                    Logging.Error(new Exception("Carga "+ x.access_token));
+                    //var x = tokenService.CallTokenCarga();                    
+                    //Logging.Error(new Exception("Carga "+ x.access_token));
                     var y = tokenService.CallTokenCron();
                     Logging.Error(new Exception("Cron " + y.access_token));
                     var z = tokenService.CallTokenUrisFactory();
