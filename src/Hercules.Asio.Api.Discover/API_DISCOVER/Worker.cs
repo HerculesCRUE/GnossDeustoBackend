@@ -72,6 +72,7 @@ namespace API_DISCOVER
 
                                 if (time.HasValue)
                                 {
+                                    Logging.Error(new Exception(time.Value.UtcDateTime.ToString() +"|" + DateTimeOffset.UtcNow.ToString()));
                                     Logging.Error(new Exception((time.Value.UtcDateTime - DateTimeOffset.UtcNow).TotalMinutes.ToString()));
                                     Thread.Sleep((time.Value.UtcDateTime - DateTimeOffset.UtcNow));
                                     Logging.Error(new Exception("empieza _processDiscoverLoadedEntities"));
