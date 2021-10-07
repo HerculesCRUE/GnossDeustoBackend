@@ -37,11 +37,13 @@ namespace API_DISCOVER
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
+            Thread.Sleep(20000);
             _logger.LogInformation("Timed Hosted Service running.");
             while (!cancellationToken.IsCancellationRequested)
             {
                 try
                 {
+
                     var scopeX = _serviceScopeFactory.CreateScope();
                     CallTokenService tokenService = scopeX.ServiceProvider.GetRequiredService<CallTokenService>();
                     var x = tokenService.CallTokenCarga();                    
