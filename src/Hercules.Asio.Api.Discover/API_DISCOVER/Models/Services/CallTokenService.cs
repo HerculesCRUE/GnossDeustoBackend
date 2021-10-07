@@ -103,7 +103,6 @@ namespace API_DISCOVER.Models.Services
                 HttpClient client = new HttpClient();
                 client.Timeout = TimeSpan.FromDays(1);
                 string authority = _configToken.GetAuthority();
-                throw new Exception(authority + "|" + stringData);
                 response = client.PostAsync($"{authority}", contentData).Result;
                 response.EnsureSuccessStatusCode();
                 string result = response.Content.ReadAsStringAsync().Result;
