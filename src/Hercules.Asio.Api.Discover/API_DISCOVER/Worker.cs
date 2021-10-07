@@ -73,6 +73,7 @@ namespace API_DISCOVER
                                 if (time.HasValue)
                                 {
                                     Thread.Sleep((time.Value.UtcDateTime - DateTimeOffset.UtcNow));
+                                    Logging.Error(new Exception("empieza _processDiscoverLoadedEntities"));
                                     Discover descubrimiento = new Discover(_serviceScopeFactory);
                                     descubrimiento.ApplyDiscoverLoadedEntities(ConfigService.GetSleepSecondsAfterProcessEntityDiscoverLoadedEntities(), _serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<CallUrisFactoryApiService>());
                                     _processDiscoverLoadedEntities = false;
