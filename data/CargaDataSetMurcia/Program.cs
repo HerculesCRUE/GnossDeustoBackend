@@ -79,11 +79,8 @@ namespace CargaDataSetMurcia
             {
                 throw new Exception("No está configurada el dominio de ASIO");
             }
-            
-
             CargaRDF.GenerarRDF(urlUrisFactory);
             CargaRDF.PublicarRDF(urlUrisFactory, sparqlASIO, sparqlASIO_Graph, sparqlASIO_Domain, sparqlUnidata, sparqlUnidata_Graph, sparqlUnidata_Domain);
-
         }
 
 

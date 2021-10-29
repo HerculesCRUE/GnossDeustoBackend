@@ -56,6 +56,7 @@ namespace CargaDataSetMurcia.Model
             List<Tesis> tesis = LeerTesis(inputFolder + "/Tesis.xml");
             List<TipoParticipacionGrupo> tipoParticipacionGrupos = LeerTipoParticipacionGrupos(inputFolder + "/Tipo participacion grupo.xml");
             List<TiposEventos> tiposEventos = LeerTiposEventos(inputFolder + "/Tipos eventos.xml");
+            List<FuentesFinanciacionProyectos> fuentesFinanciacionProyectos = LeerFuentesFinanciacionProyectos(inputFolder + "/Fuentes financiacion proyectos.xml");
 
             List<Feature> features = LeerFeatures();
 
@@ -70,7 +71,8 @@ namespace CargaDataSetMurcia.Model
             GenerarArticulos(outputFolder + "/Articulos/", pUrlUrisFactory, articulos, personas, autoresArticulos, palabrasClave);
             GenerarOrganizaciones(outputFolder + "/Organizaciones/", pUrlUrisFactory, centros, departamentos, gruposInvestigacion, datoEquiposInvestigacion, proyectos, equiposProyectos, fechasEquiposProyectos, lineasInvestigador, lineasDeInvestigacion, lineasUnesco,codigosUnesco);
             GenerarOrganizacionesExternas(outputFolder + "/OrganizacionesExternas/", pUrlUrisFactory, organizacionesExternas);
-            GenerarProyectos(outputFolder + "/Proyectos/", pUrlUrisFactory, proyectos, fechasProyectos, equiposProyectos, fechasEquiposProyectos, personas, features, areasUnescoProyectos,codigosUnesco, organizacionesExternas);
+            GenerarFuentesFinanciacion(outputFolder + "/FuentesFinanciacion/", pUrlUrisFactory, fuentesFinanciacionProyectos);
+            GenerarProyectos(outputFolder + "/Proyectos/", pUrlUrisFactory, proyectos, fechasProyectos, equiposProyectos, fechasEquiposProyectos, personas, features, areasUnescoProyectos,codigosUnesco, organizacionesExternas, fuentesFinanciacionProyectos);
             GenerarActividades(outputFolder + "/Actividades/", pUrlUrisFactory, congresos, exposiciones, autoresCongresos, autoresExposiciones, personas);
             GenerarPatentes(outputFolder + "/Patente/", pUrlUrisFactory, patentes, inventoresPatentes, personas);
             GenerarTesis(outputFolder + "/Tesis/", pUrlUrisFactory, tesis, directoresTesis, personas);
@@ -1531,6 +1533,41 @@ namespace CargaDataSetMurcia.Model
             return elementos;
         }
 
+        private static List<FuentesFinanciacionProyectos> LeerFuentesFinanciacionProyectos(string pFile)
+        {
+            Console.Write($"Leyendo {pFile}...");
+            List<FuentesFinanciacionProyectos> elementos = new List<FuentesFinanciacionProyectos>();
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(System.IO.File.ReadAllText(pFile));
+
+            foreach (XmlNode node in doc.SelectNodes("main/DATA_RECORD"))
+            {
+                FuentesFinanciacionProyectos elemento = new FuentesFinanciacionProyectos();
+                foreach (string propiedad in Propiedades(elemento))
+                {
+                    switch (propiedad)
+                    {
+                        case "IDPROYECTO":
+                            elemento.IDPROYECTO = node.SelectSingleNode("IDPROYECTO").InnerText;
+                            break;
+                        case "AYFI_FUEN_CODIGO":
+                            elemento.AYFI_FUEN_CODIGO = node.SelectSingleNode("AYFI_FUEN_CODIGO").InnerText;
+                            break;
+                        case "FUEN_NOMBRE":
+                            elemento.FUEN_NOMBRE = node.SelectSingleNode("FUEN_NOMBRE").InnerText;
+                            break;
+                        default:
+                            throw new Exception("Propiedad no controlada");
+                    }
+                }
+                elementos.Add(elemento);
+            }
+            Console.WriteLine($"\rLeídos {elementos.Count} elementos de {pFile}");
+            return elementos;
+        }
+
+
         private static List<Feature> LeerFeatures()
         {
             Console.Write($"Leyendo features...");
@@ -2669,6 +2706,39 @@ namespace CargaDataSetMurcia.Model
             Console.WriteLine($"\rGenerando RDFs en {pRuta} {i}/{total}");
         }
 
+        private static void GenerarFuentesFinanciacion(string pRuta, string pUrlUrisFactory, List<FuentesFinanciacionProyectos> pFuentesFinanciacionProyectos)
+        {
+            System.IO.Directory.CreateDirectory(pRuta);
+            int i = 0;
+            int total = pFuentesFinanciacionProyectos.Select(x => x.AYFI_FUEN_CODIGO).Distinct().Count();
+            HashSet<string> ids = new HashSet<string>();
+            foreach (FuentesFinanciacionProyectos fuentesFinanciacionProyectos in pFuentesFinanciacionProyectos)
+            {
+                Console.Write($"\rGenerando RDFs en {pRuta} {i}/{total}");
+                if (ids.Add(fuentesFinanciacionProyectos.AYFI_FUEN_CODIGO))
+                {
+                    i++;
+                    string rutaFuenteFinanciacion = pRuta + "FuenteFinanciacion_" + fuentesFinanciacionProyectos.AYFI_FUEN_CODIGO + ".rdf";
+                    Graph graph = new Graph();
+
+                    //Fuente de financiación
+                    INode uriSubjectFuenteFinanciacion = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#FundingProgram", fuentesFinanciacionProyectos.AYFI_FUEN_CODIGO);
+                    INode uriPredicateRdfType = graph.CreateUriNode(new Uri("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+                    INode uriObjectRdfTypeFuenteFinanciacion = graph.CreateUriNode(new Uri("http://purl.org/roh#FundingProgram"));
+                    Triple tripleRdfTypeFuenteFinanciacion = new Triple(uriSubjectFuenteFinanciacion, uriPredicateRdfType, uriObjectRdfTypeFuenteFinanciacion);
+                    graph.Assert(tripleRdfTypeFuenteFinanciacion);
+
+                    //Título
+                    INode uriPredicateRohTitle = graph.CreateUriNode(new Uri("http://purl.org/roh#title"));
+                    INode objectRohTitle = CreateTextNode(graph, fuentesFinanciacionProyectos.FUEN_NOMBRE);
+                    Triple tripleTitle = new Triple(uriSubjectFuenteFinanciacion, uriPredicateRohTitle, objectRohTitle);
+                    graph.Assert(tripleTitle);
+
+                    graph.SaveToFile(rutaFuenteFinanciacion);
+                }
+            }
+            Console.WriteLine($"\rGenerando RDFs en {pRuta} {i}/{total}");
+        }
         private static DateTime ObtenerFechaDeTexto(string pFechaTexto, bool pInicio)
         {
             if (string.IsNullOrEmpty(pFechaTexto))
@@ -2689,7 +2759,7 @@ namespace CargaDataSetMurcia.Model
             }
         }
 
-        private static void GenerarProyectos(string pRuta, string pUrlUrisFactory, List<Proyecto> pProyectos, List<FechaProyecto> pFechaProyecto, List<EquipoProyecto> pEquipoProyecto, List<FechaEquipoProyecto> pFechaEquipoProyecto, List<Persona> pPersonas, List<Feature> pFeatures, List<AreasUnescoProyectos> pAreasUnescoProyectos, List<CodigosUnesco> pCodigosUnesco, List<OrganizacionesExternas> pOrganizacionesExternas)
+        private static void GenerarProyectos(string pRuta, string pUrlUrisFactory, List<Proyecto> pProyectos, List<FechaProyecto> pFechaProyecto, List<EquipoProyecto> pEquipoProyecto, List<FechaEquipoProyecto> pFechaEquipoProyecto, List<Persona> pPersonas, List<Feature> pFeatures, List<AreasUnescoProyectos> pAreasUnescoProyectos, List<CodigosUnesco> pCodigosUnesco, List<OrganizacionesExternas> pOrganizacionesExternas,List<FuentesFinanciacionProyectos> pFuentesFinanciacionProyectos)
         {
             System.IO.Directory.CreateDirectory(pRuta);
             int i = 0;
@@ -2717,20 +2787,23 @@ namespace CargaDataSetMurcia.Model
 
                 //Estado del Proyecto (ProjectStatus)
                 INode uriPredicateProjectStatus = graph.CreateUriNode(new Uri("http://purl.org/roh#projectStatus"));
-                FechaProyecto fechaProyectoEstado = pFechaProyecto.Where(x => x.IDPROYECTO == proyecto.IDPROYECTO).ToList()[0];
-                string estado = string.Empty;
-                switch (fechaProyectoEstado.ESTADO)
+                FechaProyecto fechaProyectoEstado = pFechaProyecto.FirstOrDefault(x => x.IDPROYECTO == proyecto.IDPROYECTO);
+                if (fechaProyectoEstado != null)
                 {
-                    case "CONCEDIDO":
-                        estado = "CLOSED";
-                        break;
-                    case "VIGENTE":
-                        estado = "OPEN";
-                        break;
+                    string estado = string.Empty;
+                    switch (fechaProyectoEstado.ESTADO)
+                    {
+                        case "CONCEDIDO":
+                            estado = "CLOSED";
+                            break;
+                        case "VIGENTE":
+                            estado = "OPEN";
+                            break;
+                    }
+                    INode objectProjectStatus = CreateTextNode(graph, estado);
+                    Triple tripleProjectStatus = new Triple(uriSubject, uriPredicateProjectStatus, objectProjectStatus);
+                    graph.Assert(tripleProjectStatus);
                 }
-                INode objectProjectStatus = CreateTextNode(graph, estado);
-                Triple tripleProjectStatus = new Triple(uriSubject, uriPredicateProjectStatus, objectProjectStatus);
-                graph.Assert(tripleProjectStatus);
 
                 //Identificador
                 INode uriPredicateCrisIdentifier = graph.CreateUriNode(new Uri("http://purl.org/roh#crisIdentifier"));
@@ -2748,7 +2821,7 @@ namespace CargaDataSetMurcia.Model
                     if (!string.IsNullOrEmpty(proy.UNAR_CODIGO) && proy.UNAR_CODIGO != "00")
                     {
                         codigoUNESCO += proy.UNAR_CODIGO;
-                        nivel1= proy.UNAR_CODIGO;
+                        nivel1 = proy.UNAR_CODIGO;
                     }
                     if (!string.IsNullOrEmpty(proy.UNCA_CODIGO) && proy.UNCA_CODIGO != "00")
                     {
@@ -2847,6 +2920,14 @@ namespace CargaDataSetMurcia.Model
                 Triple tripleFreetextSearch = new Triple(uriSubject, uriPredicateFreetextSearch, uriObjectFreetextSearch);
                 graph.Assert(tripleFreetextSearch);
 
+                //Fuente de financiación
+                foreach (FuentesFinanciacionProyectos fuentesFinanciacionProyectos in pFuentesFinanciacionProyectos.Where(x => x.IDPROYECTO == proyecto.IDPROYECTO))
+                {                    
+                    INode uriPredicateFinanciadoPor = graph.CreateUriNode(new Uri("http://purl.org/roh#fundedBy"));
+                    INode uriObjectFuenteFinanciacion = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#FundingProgram", fuentesFinanciacionProyectos.AYFI_FUEN_CODIGO);
+                    Triple tripleFinanciadoPor = new Triple(uriSubject, uriPredicateFinanciadoPor, uriObjectFuenteFinanciacion);
+                    graph.Assert(tripleFinanciadoPor);
+                }
                 graph.SaveToFile(rutaProyecto);
             }
             Console.WriteLine($"\rGenerando RDFs en {pRuta} {i}/{pProyectos.Count}");
