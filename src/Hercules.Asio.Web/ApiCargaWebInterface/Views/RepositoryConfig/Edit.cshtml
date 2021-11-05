@@ -42,9 +42,8 @@
             </div>
         </form>
     </div>
-
-    <partial name="_CreateJob" model="@modelo" />
-    <partial name="_CreateShape" model="@modeloShape"/>
+    @await Html.PartialAsync("_CreateJob", @modelo)
+    @await Html.PartialAsync("_CreateShape", @modeloShape)
 </div>
 
 <div>

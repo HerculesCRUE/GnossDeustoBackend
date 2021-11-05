@@ -169,30 +169,25 @@
                     </div>
                     <div>
                         <p class="titulo">Datos de la última sincronización de un set</p>
-                        <partial name="_RepositoryConfigSet" model="@Model.RepositoryConfigSet" />
+                        @await Html.PartialAsync("_RepositoryConfigSet", @Model.RepositoryConfigSet)
                     </div>
                     <hr />
                 </div>
                 <div class="grupo grupo-programacion">
                     <h2>Tareas de sincronización</h2>
                     <a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea</a>
-                    <partial name="_ListRecurringJobs" model="@Model.ListRecurringJobs" />
+                    @await Html.PartialAsync("_ListRecurringJobs", @Model.ListRecurringJobs)
                 </div>
                 <div class="grupo grupo-programacion">
                     <h2>Tareas programadas</h2>
                     @*<a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>*@
-                    <partial name="_ListScheduledJobs" model="@Model.ListScheduledJobs" />
+                    @await Html.PartialAsync("_ListScheduledJobs", @Model.ListScheduledJobs)
                 </div>
-                @*<div class="grupo grupo-programacion">
-                <h2>Shapes</h2>
-                <a href="@Url.Action("Create", "ShapeConfig", modeloShape)" class="btn btn-programacion">Crear nuevo Shape</a>
-                <partial name="_ListShapes" model="@Model.ShapeConfig" />
-            </div>*@
-                <div class="grupo grupo-programacion">
-                    <h2>Ejecuciones completadas</h2>
-                    @*<a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>*@
-                    <partial name="_ListJobs" model="@Model.ListJobs" />
-                </div>
+            <div class="grupo grupo-programacion">
+                <h2>Ejecuciones completadas</h2>
+                @*<a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>*@
+                @await Html.PartialAsync("_ListJobs", @Model.ListJobs)
+            </div>
             </div>
         </div>
 </div>
