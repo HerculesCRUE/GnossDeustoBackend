@@ -37,7 +37,7 @@ namespace Hercules_SAML
         {
             try
             {
-                config.AuthnResponseSignType = Saml2AuthnResponseSignTypes.SignAssertion;
+                config.AuthnResponseSignType = Saml2AuthnResponseSignTypes.SignResponse;
                 //config.SignAuthnRequest = false;
 
                 var binding = new Saml2PostBinding();
