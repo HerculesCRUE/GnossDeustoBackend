@@ -16,7 +16,7 @@ namespace Hercules_SAML
     public class AuthController : Controller
     {
         const string relayStateReturnUrl = "ReturnUrl";
-        private readonly Saml2Configuration config;
+        private Saml2Configuration config;
 
         public AuthController(IOptions<Saml2Configuration> configAccessor)
         {
@@ -37,6 +37,9 @@ namespace Hercules_SAML
         {
             try
             {
+                //config.AuthnResponseSignType=Saml2AuthnResponseSignTypes.
+                config.SignAuthnRequest = false;
+
                 var binding = new Saml2PostBinding();
                 var saml2AuthnResponse = new Saml2AuthnResponse(config);
 
