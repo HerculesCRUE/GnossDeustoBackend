@@ -37,7 +37,7 @@ namespace Hercules_SAML
         {
             try
             {
-                config.AuthnResponseSignType = Saml2AuthnResponseSignTypes.SignAssertionAndResponse;
+                //config.AuthnResponseSignType = Saml2AuthnResponseSignTypes.;
                 //config.SignAuthnRequest = false;
 
                 var binding = new Saml2PostBinding();
@@ -48,6 +48,7 @@ namespace Hercules_SAML
                 {
                     throw new AuthenticationException($"SAML Response status: {saml2AuthnResponse.Status}");
                 }
+                return Ok(binding.PostContent);
                 binding.Unbind(Request.ToGenericHttpRequest(), saml2AuthnResponse);
                 await saml2AuthnResponse.CreateSession(HttpContext, lifetime: new TimeSpan(0, 0, 5), claimsTransform: (claimsPrincipal) => ClaimsTransform.Transform(claimsPrincipal));
 
