@@ -35,31 +35,21 @@ namespace Hercules_SAML
         [Route("AssertionConsumerService")]
         public async Task<IActionResult> AssertionConsumerService()
         {
-            try
+            var binding = new Saml2PostBinding();
+            var saml2AuthnResponse = new Saml2AuthnResponse(config);
+
+            binding.ReadSamlResponse(Request.ToGenericHttpRequest(), saml2AuthnResponse);
+            if (saml2AuthnResponse.Status != Saml2StatusCodes.Success)
             {
-                //config.AuthnResponseSignType = Saml2AuthnResponseSignTypes.;
-                //config.SignAuthnRequest = false;
-
-                var binding = new Saml2PostBinding();
-                var saml2AuthnResponse = new Saml2AuthnResponse(config);
-
-                binding.ReadSamlResponse(Request.ToGenericHttpRequest(), saml2AuthnResponse);
-                if (saml2AuthnResponse.Status != Saml2StatusCodes.Success)
-                {
-                    throw new AuthenticationException($"SAML Response status: {saml2AuthnResponse.Status}");
-                }
+                throw new AuthenticationException($"SAML Response status: {saml2AuthnResponse.Status}");
+            }
                 
-                //binding.Unbind(Request.ToGenericHttpRequest(), saml2AuthnResponse);
-                await saml2AuthnResponse.CreateSession(HttpContext, lifetime: new TimeSpan(0, 0, 5), claimsTransform: (claimsPrincipal) => ClaimsTransform.Transform(claimsPrincipal));
+            //binding.Unbind(Request.ToGenericHttpRequest(), saml2AuthnResponse);
+            await saml2AuthnResponse.CreateSession(HttpContext, lifetime: new TimeSpan(0, 0, 5), claimsTransform: (claimsPrincipal) => ClaimsTransform.Transform(claimsPrincipal));
 
-                var relayStateQuery = binding.GetRelayStateQuery();
-                var returnUrl = relayStateQuery.ContainsKey(relayStateReturnUrl) ? relayStateQuery[relayStateReturnUrl] : Url.Content("~/");
-                return Redirect(returnUrl);
-            }
-            catch (Exception ex) {
-                return Ok(ex.Message+" "+ex.StackTrace);
-            
-            }
+            var relayStateQuery = binding.GetRelayStateQuery();
+            var returnUrl = relayStateQuery.ContainsKey(relayStateReturnUrl) ? relayStateQuery[relayStateReturnUrl] : Url.Content("~/");
+            return Redirect(returnUrl);
         }
 
         [Route("Logout")]
