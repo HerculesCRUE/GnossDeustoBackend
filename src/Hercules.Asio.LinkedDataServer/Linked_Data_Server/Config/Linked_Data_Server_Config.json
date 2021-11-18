@@ -17,6 +17,11 @@
           "name": "Acreditaciones",
           "fields": [ "Título", "Título_href", "Fecha" ],
           "query": "select distinct ?Nombre ?ID ?fecha  where  {<{ENTITY_ID}> <http://purl.org/roh#hasAccreditation> ?ID. ?ID <http://purl.org/roh#title> ?Nombre.  OPTIONAL  {   ?ID <http://purl.org/roh/mirror/vivo#dateTime> ?fecha}   } "
+        },
+        {
+          "name": "Autorías de correspondencia",
+          "fields": [ "Título", "Título_href", "RdfType" ],
+          "query": "select distinct ?Nombre ?ID ?RdfType  where  {  <{ENTITY_ID}>  <http://purl.org/roh#correspondingAuthorOf> ?ID .   ?ID <http://purl.org/roh#title> ?Nombre.   ?ID a ?RdfType.  } "
         }
       ]
     },
