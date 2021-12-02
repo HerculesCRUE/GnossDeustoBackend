@@ -11,6 +11,7 @@ namespace ApiCargaWebInterface.ViewModels
         [Display(Name = "Identifier")]
         public Guid RepositoryConfigID { get; set; }
 
+        [Required(ErrorMessage = "El nombre es obligatorio")]
         [Display(Name = "Nombre")]
         public string Name { get; set; }
         [Display(Name = "Aplicar descubrimiento")]
@@ -19,6 +20,8 @@ namespace ApiCargaWebInterface.ViewModels
         [Display(Name = "Oauth token")]
         public string OauthToken { get; set; }
 
+        [Required(ErrorMessage = "La Url es obligatoria")]
+        [Display(Name = "Url")]
         public string Url { get; set; }
         [Display(Name = "Última tarea ejecutada")]
         public string LastJob { get; set; }
