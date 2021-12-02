@@ -207,6 +207,7 @@ namespace ApiCargaWebInterface.Controllers
                 }
                 else
                 {
+                    _serviceApiCron.CreateJob(jobModel);
                     return RedirectToAction("Details", "RepositoryConfig", new { id = jobModel.IdRepository });
                 }
             }
