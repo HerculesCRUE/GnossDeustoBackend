@@ -29,6 +29,7 @@
                                     <a href="@Url.Action("Details", new {  id=item.ShapeConfigID  })">@Html.DisplayFor(modelItem => item.Name)</a>
                                 </h2>
                                 <div class="desc">
+                                    Repositorio: <a href="@Url.Action("Details","RepositoryConfig", new {  id=item.RepositoryID  })">@item.RepositoryName</a>
                                 </div>
                             </div>
                         </article>

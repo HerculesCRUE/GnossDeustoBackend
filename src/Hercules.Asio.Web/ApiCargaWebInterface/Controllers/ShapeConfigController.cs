@@ -4,13 +4,17 @@
 // Controlador Shapes
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 using System.Text;
 using ApiCargaWebInterface.Extra.Exceptions;
 using ApiCargaWebInterface.Models;
 using ApiCargaWebInterface.Models.Services;
 using ApiCargaWebInterface.ViewModels;
+using Hercules.Asio.Web.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace ApiCargaWebInterface.Controllers
 {
@@ -38,6 +42,14 @@ namespace ApiCargaWebInterface.Controllers
             {
                 result = new List<ShapeConfigViewModel>();
             }
+            else
+            {
+                List<RepositoryConfigViewModel> repositories= _repositoryServiceApi.GetRepositoryConfigs();
+                foreach (ShapeConfigViewModel item in result)
+                {
+                    item.RepositoryName = repositories.FirstOrDefault(x => x.RepositoryConfigID == item.RepositoryID).Name;
+                }
+            }
             return View(result);
         }
 
@@ -52,6 +64,15 @@ namespace ApiCargaWebInterface.Controllers
             ShapeConfigViewModel result = _serviceApi.GetShapeConfig(id);
             if (result != null)
             {
+                if (result.RepositoryID != null)
+                {
+                    RepositoryConfigViewModel repository = _repositoryServiceApi.GetRepositoryConfig(result.RepositoryID);
+                    if(repository!=null)
+                    {
+                        result.RepositoryName = repository.Name;
+                    }
+                }
+
                 return View(result);
             }
             else
@@ -87,7 +108,7 @@ namespace ApiCargaWebInterface.Controllers
         /// </summary>
         /// <param name="id">Identificador de la configuración</param>
         /// <returns></returns>
-        public IActionResult Edit(Guid id)
+        public IActionResult Edit(Guid id,string error)
         {
             ShapeConfigViewModel result = _serviceApi.GetShapeConfig(id);
             
@@ -98,7 +119,8 @@ namespace ApiCargaWebInterface.Controllers
                     Name = result.Name,
                     RepositoryID = result.RepositoryID,
                     Shape = result.Shape,
-                    ShapeConfigID = result.ShapeConfigID
+                    ShapeConfigID = result.ShapeConfigID,
+                    Error = error
                 };
 
                 return View(shapeConfigViewModel);
@@ -126,6 +148,14 @@ namespace ApiCargaWebInterface.Controllers
             catch (BadRequestException)
             {
                 return BadRequest();
+            }catch(HttpRequestException ex)
+            {
+                string error = "";
+                if (!string.IsNullOrEmpty( ex.Message))
+                {
+                    error = JsonConvert.DeserializeObject<ExceptionDetails>(ex.Message).detail;                    
+                }
+                return Edit(shapeConfigViewModel.ShapeConfigID,error);
             }
         }
 

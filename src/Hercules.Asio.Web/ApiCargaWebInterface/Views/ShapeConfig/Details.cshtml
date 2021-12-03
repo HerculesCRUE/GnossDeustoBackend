@@ -5,6 +5,42 @@
     ViewData["BodyClass"] = "fichaRecurso";
 }
 
+<div class="modal fade top-modal eliminar" id="modalEliminarShape" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Eliminar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="despAccionRec">
+                    <div class="stateShowForm" id="panels">
+                        <div id="menssages">
+                            <div class="ok"></div>
+                            <div class="ko"></div>
+                        </div>
+                        <div class="box form activeForm" id="action">
+                            <div>
+                                <fieldset>
+                                    <legend>¿Está seguro que quiere eliminar el shape?</legend>
+                                    <div id="eliminar">
+                                        <p>                                                                                        
+                                            <a href="@Url.Action("Delete", "ShapeConfig", new {  id=Model.ShapeConfigID  })" "><input type="button" class="button btn-principal" value="Eliminar"></a>
+                                            <input type="button" value="Cancelar" data-dismiss="modal">
+                                        </p>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col col-12 col-lg-12 col-contenido">
         <div class="wrapCol">
@@ -17,7 +53,7 @@
                                 <a href="@Url.Action("Edit", "ShapeConfig", new {  id=Model.ShapeConfigID  })" class="btn btn-editar">Editar</a>
                             </li>
                             <li>
-                                <a href="@Url.Action("Delete", "ShapeConfig", new {  id=Model.ShapeConfigID  })" class="btn btn-eliminar">Eliminar</a>
+                                <a data-toggle="modal" data-target="#modalEliminarShape" class="btn btn-eliminar" id="borrarShape">Eliminar</a>
                             </li>
                         </ul>
                     </div>
@@ -26,12 +62,13 @@
             <div class="contenido">
                 <div class="grupo grupo-descripcion">
                     <div class="identifier">
-                        <p class="titulo">Identifier</p>
+                        <p class="titulo">Identificador</p>
                         <p>@Model.ShapeConfigID</p>
                     </div>
                     <div class="outh-token">
                         <p class="titulo">Repositorio</p>
-                        <p>@Model.RepositoryID</p>
+                        <p>
+                        <a href="@Url.Action("Details","RepositoryConfig", new { id = Model.RepositoryID })">@Model.RepositoryName</a></p>
                     </div>
                     <div class="outh-token">
                         <p class="titulo">Shape</p>

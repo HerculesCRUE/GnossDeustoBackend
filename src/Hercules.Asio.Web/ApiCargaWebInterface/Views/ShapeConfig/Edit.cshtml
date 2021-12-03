@@ -38,6 +38,11 @@
                                 <label asp-for="ShapeFile" class="control-label"></label>
                                 <input asp-for="ShapeFile" class="form-control" />
                                 <span asp-validation-for="ShapeFile" class="text-danger"></span>
+                                @if (!string.IsNullOrEmpty(Model.Error))
+                                {
+                                    <span class="text-danger field-validation-error"><span id="shape-error">@Model.Error</span></span>
+                                }
+
                             </p>
                         </div>
                     </fieldset>

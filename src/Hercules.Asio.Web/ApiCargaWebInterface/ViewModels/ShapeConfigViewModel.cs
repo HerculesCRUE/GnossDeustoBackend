@@ -12,6 +12,7 @@ namespace ApiCargaWebInterface.ViewModels
         public string Name { get; set; }
         [Display(Name = "identificador del repositorio")]
         public Guid RepositoryID { get; set; }
+        public string RepositoryName { get; set; }
         public string Shape { get; set; }
     }
 }
