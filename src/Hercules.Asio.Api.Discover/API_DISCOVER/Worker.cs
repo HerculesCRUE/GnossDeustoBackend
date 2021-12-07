@@ -43,7 +43,7 @@ namespace API_DISCOVER
             {
                 try
                 {
-                    if (!_processRabbitReady && !Discover.ProcessingItem)
+                    if (!_processRabbitReady)
                     {
                         var scope = _serviceScopeFactory.CreateScope();
                         RabbitMQService rabbitMQService = scope.ServiceProvider.GetRequiredService<RabbitMQService>();
@@ -59,7 +59,7 @@ namespace API_DISCOVER
                 }
                 try
                 {
-                    if (!_processRabbitDeleteReady && !Discover.ProcessingDeletedItem)
+                    if (!_processRabbitDeleteReady)
                     {
                         var scope = _serviceScopeFactory.CreateScope();
                         RabbitMQService rabbitMQService = scope.ServiceProvider.GetRequiredService<RabbitMQService>();

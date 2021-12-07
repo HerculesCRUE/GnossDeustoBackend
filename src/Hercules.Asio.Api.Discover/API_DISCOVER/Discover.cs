@@ -53,9 +53,6 @@ namespace API_DISCOVER
             _serviceScopeFactory = serviceScopeFactory;
         }
 
-        public static bool ProcessingItem = false;
-        public static bool ProcessingDeletedItem = false;
-
         /// <summary>
         /// Procesa un item de descubrimiento
         /// </summary>
@@ -63,13 +60,6 @@ namespace API_DISCOVER
         /// <returns></returns>
         public bool ProcessItem(string itemIDstring)
         {
-            if (ProcessingItem)
-            {
-                Logging.Error(new Exception($"ProcessItem {itemIDstring} aborted: Se está procesando otro item"));
-                Thread.Sleep(5000);
-                return false;
-            }
-            ProcessingItem = true;
             Guid itemID = JsonConvert.DeserializeObject<Guid>(itemIDstring);
             try
             {
@@ -117,10 +107,6 @@ namespace API_DISCOVER
                     }
                 }
             }
-            finally
-            {
-                ProcessingItem = false;
-            }
             return true;
 
         }
@@ -132,13 +118,6 @@ namespace API_DISCOVER
         /// <returns></returns>
         public bool ProcessDeletedItem(string UriEntity)
         {
-            if (ProcessingDeletedItem)
-            {
-                Logging.Error(new Exception($"ProcessingDeletedItem {UriEntity} aborted: Se está procesando otro item"));
-                Thread.Sleep(5000);
-                return false;
-            }
-            ProcessingDeletedItem = true;
             try
             {
                 UriEntity = JsonConvert.DeserializeObject<string>(UriEntity);
@@ -165,10 +144,6 @@ namespace API_DISCOVER
             catch (Exception ex)
             {
                 Logging.Error(ex);
-            }
-            finally
-            {
-                ProcessingDeletedItem = false;
             }
             return true;
 
@@ -324,7 +299,7 @@ namespace API_DISCOVER
                     if (applyDiscover)
                     {
                         //4.- Realizamos la reconciliación con los datos de las integraciones externas
-                        discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref reconciliationEntitiesProbability, ref dataGraph, reasoner, namesScore,/*entitiesWithTitle,*/ _ontologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache, _discoverCacheGlobal, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword, pCallUrisFactoryApiService);
+                        //discoverUtility.ExternalIntegration(ref hasChanges, ref reconciliationData, ref discoverLinkData, ref reconciliationEntitiesProbability, ref dataGraph, reasoner, namesScore,/*entitiesWithTitle,*/ _ontologyGraph, out Dictionary<string, ReconciliationData.ReconciliationScore> entidadesReconciliadasConIntegracionExternaAux, discardDissambiguations, discoverCache, _discoverCacheGlobal, ScopusApiKey, ScopusUrl, CrossrefUserAgent, WOSAuthorization, MinScore, MaxScore, SGI_SPARQLEndpoint, SGI_SPARQLQueryParam, SGI_SPARQLGraph, SGI_SPARQLUsername, SGI_SPARQLPassword, pCallUrisFactoryApiService);
                     }
 
                     //Eliminamos de las probabilidades aquellos que ya estén reconciliados
