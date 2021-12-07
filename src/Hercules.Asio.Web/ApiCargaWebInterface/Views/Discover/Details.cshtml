@@ -43,6 +43,7 @@
                                 var diccionarioValues = new Dictionary<string, string>();
                                 diccionarioValues.Add("idJob", Model.JobId);
                                 diccionarioValues.Add("IdDiscoverItem", Model.IdDiscoverItem.ToString());
+                                diccionarioValues.Add("repository_id", Model.RepositoryID.ToString());
                             }
                             <form id="formresolve" asp-action="ResolveDiscover" asp-controller="Job" asp-all-route-data="diccionarioValues" method="post">
                                 <div class="tabla error">
