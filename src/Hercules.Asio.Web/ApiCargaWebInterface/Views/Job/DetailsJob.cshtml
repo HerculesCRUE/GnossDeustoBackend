@@ -55,7 +55,7 @@
                     }
                     @if (Model.State.Equals("Processing"))
                     {
-                        double complete = ((double)Model.ProcessNumIdentifierOAIPMH / Model.TotalNumIdentifierOAIPMH) * 100;
+                        int complete = (int)(((double)Model.ProcessNumIdentifierOAIPMH / Model.TotalNumIdentifierOAIPMH) * 100);
                         string percentage = $"{complete}%";
                         string process = $"{percentage} -> {Model.ProcessNumIdentifierOAIPMH} elemetnos procesados de {Model.TotalNumIdentifierOAIPMH}";
                         <div class="LastIdentifierOAIPMH">
