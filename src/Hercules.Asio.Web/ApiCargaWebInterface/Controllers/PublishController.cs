@@ -220,13 +220,14 @@ namespace ApiCargaWebInterface.Controllers
             {
                 _callEtlPublishService.CallDataValidate(rdfPublish, repositoryId);
                 _callEtlPublishService.CallDataPublish(rdfPublish,"",false);
-                
+
                 return View("PublicarRdf", new PublishRepositoryModel
                 {
                     RepositoryId = repositoryId,
                     Id = "",
                     Type = "rdf",
                     Result = $"Publicado con éxito el rdf: {rdfPublish.FileName}",
+                    NameRepository= _serviceApi.GetRepositoryConfig(repositoryId).Name,
                     RepositoryShapes = result.ShapeConfig
                 });
             }
