@@ -104,7 +104,7 @@
                                         <div class="columna acciones">
                                             <ul>
                                                 <li>
-                                                    <a href="@Url.Action("Details", "Discover", new { itemId = discoverItem.ID })" class="ver">
+                                                    <a href="@Url.Action("details", "Discover", new { itemId = discoverItem.ID,repository_id=Model.IdRepository  })" class="ver">
                                                         <em class="material-icons">remove_red_eye</em>
                                                     </a>
                                                 </li>

@@ -31,12 +31,14 @@ namespace ApiCargaWebInterface.Controllers
         /// Obtiene los detalles de un error de descubrimiento
         /// </summary>
         /// <returns></returns>
-        public IActionResult Details(Guid itemId)
+        [HttpGet("[Controller]/details/{repository_id}/{itemId}")]
+        public IActionResult Details(Guid repository_id, Guid itemId)
         {
             var discovery = _discoverItemService.GetDiscoverItemById(itemId);
             DiscoverItemViewModel model = new DiscoverItemViewModel();
             model.DissambiguationProblems = new Dictionary<string, List<string>>();
             model.DissambiguationProblemsTitles = new Dictionary<string, string>();
+            model.RepositoryID = repository_id;
             if (discovery.Status.Equals("Error"))
             {
                 model.Error = discovery.Error;

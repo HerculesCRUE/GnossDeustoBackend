@@ -281,10 +281,11 @@ namespace ApiCargaWebInterface.Controllers
         /// </summary>
         /// <param name="DissambiguationProblemsResolve">Resolución con los problemas de desambiguación</param>
         /// <param name="IdDiscoverItem">Identificador del item de descubrimiento</param>
+        /// <param name="repository_id">Identificador del repositorio</param>
         /// <param name="idJob">Identificador de la tarea a la que eprtenece el item de descubrimiento</param>
         /// <returns></returns>
-        [HttpPost("[Controller]/{idJob}/resolve/{IdDiscoverItem}")]
-        public IActionResult ResolveDiscover(string idJob, string IdDiscoverItem, Dictionary<string, string> DissambiguationProblemsResolve)
+        [HttpPost("[Controller]/{repository_id}/{idJob}/resolve/{IdDiscoverItem}")]
+        public IActionResult ResolveDiscover(Guid repository_id,  string idJob, string IdDiscoverItem, Dictionary<string, string> DissambiguationProblemsResolve)
         {
             DiscoverItem item = _discoverItemService.GetDiscoverItemById(new Guid(IdDiscoverItem));
 
@@ -359,17 +360,18 @@ namespace ApiCargaWebInterface.Controllers
             //Lo reencolamos corregido junto con su identificador
             _callEDtlPublishService.CallDataPublish(file, idJob, false, IdDiscoverItem);
 
-            return RedirectToAction("DetailsJob", "Job", new { id = idJob });
+            return RedirectToAction("DetailsJob", "Job", new { id = idJob, repository_id = repository_id });
         }
 
         /// <summary>
         /// Vuelve a encolar un problema de descubrimiento que haya fallado
         /// </summary>
         /// <param name="IdDiscoverItem">Identificador del item de descubrimiento</param>
+        /// <param name="repository_id">Identificador del repositorio</param>
         /// <param name="idJob">Identificador de la tarea a la que eprtenece el item de descubrimiento</param>
         /// <returns></returns>
-        [HttpPost("[Controller]/{idJob}/retry/{IdDiscoverItem}")]
-        public IActionResult RetryDiscover(string idJob, string IdDiscoverItem)
+        [HttpPost("[Controller]/{repository_id}/{idJob}/retry/{IdDiscoverItem}")]
+        public IActionResult RetryDiscover(Guid repository_id, string idJob, string IdDiscoverItem)
         {
             DiscoverItem item = _discoverItemService.GetDiscoverItemById(new Guid(IdDiscoverItem));
             Stream stream = new MemoryStream(Encoding.UTF8.GetBytes(item.Rdf));
@@ -379,21 +381,22 @@ namespace ApiCargaWebInterface.Controllers
 
             //Eliminamos el item
             _discoverItemService.RemoveDiscoverItem(item.ID);
-            return RedirectToAction("DetailsJob", "Job", new { id = idJob });
+            return RedirectToAction("DetailsJob", "Job", new { id = idJob, repository_id = repository_id });
         }
 
         /// <summary>
         /// Descarta un problema de descubrimiento que haya fallado
         /// </summary>
+        /// <param name="repository_id">Identificador del repositorio</param>
         /// <param name="IdDiscoverItem">Identificador del item de descubrimiento</param>
         /// <param name="idJob">Identificador de la tarea a la que eprtenece el item de descubrimiento</param>
         /// <returns></returns>
-        [HttpPost("[Controller]/{idJob}/discard/{IdDiscoverItem}")]
-        public IActionResult DiscardDiscover(string idJob, string IdDiscoverItem)
+        [HttpPost("[Controller]/{repository_id}/{idJob}/discard/{IdDiscoverItem}")]
+        public IActionResult DiscardDiscover(Guid repository_id, string idJob, string IdDiscoverItem)
         {
             //Eliminamos el item
             _discoverItemService.RemoveDiscoverItem(new Guid(IdDiscoverItem));
-            return RedirectToAction("DetailsJob", "Job", new { id = idJob });
+            return RedirectToAction("DetailsJob", "Job", new { id = idJob, repository_id = repository_id });
 
         }
     }

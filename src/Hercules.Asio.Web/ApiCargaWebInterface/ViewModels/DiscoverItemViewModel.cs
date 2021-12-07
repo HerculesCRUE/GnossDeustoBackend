@@ -18,5 +18,6 @@ namespace ApiCargaWebInterface.ViewModels
         [Display(Name = "Título de las entidades")]
         public Dictionary<string, string> DissambiguationProblemsTitles { get; set; }
         public string JobId { get; set; }
+        public Guid RepositoryID { get; set; }
     }
 }
