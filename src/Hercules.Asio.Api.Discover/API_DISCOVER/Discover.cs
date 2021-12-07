@@ -53,6 +53,9 @@ namespace API_DISCOVER
             _serviceScopeFactory = serviceScopeFactory;
         }
 
+        public static bool ProcessingItem = false;
+        public static bool ProcessingDeletedItem = false;
+
         /// <summary>
         /// Procesa un item de descubrimiento
         /// </summary>
@@ -60,6 +63,13 @@ namespace API_DISCOVER
         /// <returns></returns>
         public bool ProcessItem(string itemIDstring)
         {
+            if (ProcessingItem)
+            {
+                Logging.Error(new Exception($"ProcessItem {itemIDstring} aborted: Se está procesando otro item"));
+                Thread.Sleep(5000);
+                return false;
+            }
+            ProcessingItem = true;
             Guid itemID = JsonConvert.DeserializeObject<Guid>(itemIDstring);
             try
             {
@@ -107,6 +117,10 @@ namespace API_DISCOVER
                     }
                 }
             }
+            finally
+            {
+                ProcessingItem = false;
+            }
             return true;
 
         }
@@ -118,6 +132,13 @@ namespace API_DISCOVER
         /// <returns></returns>
         public bool ProcessDeletedItem(string UriEntity)
         {
+            if (ProcessingDeletedItem)
+            {
+                Logging.Error(new Exception($"ProcessingDeletedItem {UriEntity} aborted: Se está procesando otro item"));
+                Thread.Sleep(5000);
+                return false;
+            }
+            ProcessingDeletedItem = true;
             try
             {
                 UriEntity = JsonConvert.DeserializeObject<string>(UriEntity);
@@ -144,6 +165,10 @@ namespace API_DISCOVER
             catch (Exception ex)
             {
                 Logging.Error(ex);
+            }
+            finally
+            {
+                ProcessingDeletedItem = false;
             }
             return true;
 

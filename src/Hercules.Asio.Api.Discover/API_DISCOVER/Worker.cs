@@ -43,7 +43,7 @@ namespace API_DISCOVER
             {
                 try
                 {
-                    if (!_processRabbitReady)
+                    if (!_processRabbitReady && !Discover.ProcessingItem)
                     {
                         var scope = _serviceScopeFactory.CreateScope();
                         RabbitMQService rabbitMQService = scope.ServiceProvider.GetRequiredService<RabbitMQService>();
@@ -51,7 +51,15 @@ namespace API_DISCOVER
                         rabbitMQService.ListenToQueue(new RabbitMQService.ReceivedDelegate(descubrimiento.ProcessItem), new RabbitMQService.ShutDownDelegate(OnShutDown), rabbitMQService.queueName);
                         _processRabbitReady = true;
                     }
-                    if (!_processRabbitDeleteReady)
+                }
+                catch (Exception ex)
+                {
+                    Logging.Error(ex);
+                    _processRabbitReady = false;
+                }
+                try
+                {
+                    if (!_processRabbitDeleteReady && !Discover.ProcessingDeletedItem)
                     {
                         var scope = _serviceScopeFactory.CreateScope();
                         RabbitMQService rabbitMQService = scope.ServiceProvider.GetRequiredService<RabbitMQService>();
@@ -59,6 +67,14 @@ namespace API_DISCOVER
                         rabbitMQService.ListenToQueue(new RabbitMQService.ReceivedDelegate(descubrimiento.ProcessDeletedItem), new RabbitMQService.ShutDownDelegate(OnShutDownDelete), rabbitMQService.queueNameDelete);
                         _processRabbitDeleteReady = true;
                     }
+                }
+                catch (Exception ex)
+                {
+                    Logging.Error(ex);
+                    _processRabbitDeleteReady = false;
+                }
+                try
+                {
                     if (!_processDiscoverLoadedEntities)
                     {
                         new Thread(() =>
@@ -85,6 +101,14 @@ namespace API_DISCOVER
                         }).Start();
                         _processDiscoverLoadedEntities = true;
                     }
+                }
+                catch (Exception ex)
+                {
+                    Logging.Error(ex);
+                    _processDiscoverLoadedEntities = false;
+                }
+                try
+                {
                     if (!_processRemoveBlankNodes)
                     {
                         new Thread(() =>
@@ -146,9 +170,10 @@ namespace API_DISCOVER
                 catch (Exception ex)
                 {
                     Logging.Error(ex);
+                    _processRemoveBlankNodes = false;
                 }
-                Thread.Sleep(1000);
             }
+            Thread.Sleep(1000);
             return Task.CompletedTask;
         }
 
