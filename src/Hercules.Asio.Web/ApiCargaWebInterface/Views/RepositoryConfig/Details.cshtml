@@ -194,7 +194,7 @@
             <div class="grupo grupo-programacion">
                 <h2>Ejecuciones completadas</h2>
                 @*<a href="@Url.Action("Create", "Job", modeloJob)" class="btn btn-programacion">Crear nueva tarea de sincronización</a>*@
-                @await Html.PartialAsync("_ListJobs", @Model.ListJobs)
+                @await Html.PartialAsync("_ListJobs",new KeyValuePair<bool, IEnumerable<ApiCargaWebInterface.ViewModels.JobViewModel>> ( Model.ApplyDiscover, Model.ListJobs))
             </div>
             </div>
         </div>

@@ -48,7 +48,7 @@
                     </div>
                     <div class="grupo grupo-programacion">
                         <h2>Ejecuciones completadas a partir de esta tarea recurrente</h2>
-                        @await Html.PartialAsync("../RepositoryConfig/_ListJobs", @Model.ListJobs)
+                        @await Html.PartialAsync("../RepositoryConfig/_ListJobs", new KeyValuePair<bool, IEnumerable<ApiCargaWebInterface.ViewModels.JobViewModel>>(false, Model.ListJobs))
                     </div>
                 </div>
             </div>
