@@ -2579,7 +2579,7 @@ namespace API_DISCOVER.Utility
             }
             foreach (Thread thread in hilosIntegracionesExternas)
             {
-                if(thread.IsAlive)
+                while(thread.IsAlive)
                 {
                     Thread.Sleep(1000);
                 }
