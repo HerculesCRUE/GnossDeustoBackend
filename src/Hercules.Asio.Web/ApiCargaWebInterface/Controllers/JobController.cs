@@ -57,9 +57,10 @@ namespace ApiCargaWebInterface.Controllers
         /// <summary>
         /// Obtiene los detalles de una tarea
         /// </summary>
+        /// <param name="repository_id">Identificador del repositorio</param>
         /// <param name="id">Identificador de una tarea</param>
         /// <returns></returns>
-        [HttpGet("[Controller]/{id}")]
+        [HttpGet("[Controller]/{repository_id}/{id}")]
         public IActionResult DetailsJob(string id, Guid repository_id)
         {
             var job = _serviceApiCron.GetJob(id);
@@ -207,7 +208,6 @@ namespace ApiCargaWebInterface.Controllers
                 }
                 else
                 {
-                    _serviceApiCron.CreateJob(jobModel);
                     return RedirectToAction("Details", "RepositoryConfig", new { id = jobModel.IdRepository });
                 }
             }
