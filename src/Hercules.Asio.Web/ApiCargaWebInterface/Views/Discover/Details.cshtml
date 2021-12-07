@@ -51,7 +51,7 @@
                                     {
                                         <div class="fila">
                                             <p class="titulo">
-                                                Elige la opción que más se adecue para <a asp-controller="Discover" asp-action="DetailsRdf" asp-route-itemId="@Context.Request.Query["itemId"]" asp-fragment="@item.Key" target="_blank">@item.Key<span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                Elige la opción que más se adecue para <a asp-controller="Discover" asp-action="DetailsRdf" asp-route-itemId="@Model.IdDiscoverItem" asp-fragment="@item.Key" target="_blank">@item.Key<span class="linkext">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
 
                                             </p>
                                             @if (Model.DissambiguationProblemsTitles.ContainsKey(item.Key))
