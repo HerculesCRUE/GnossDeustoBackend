@@ -45,10 +45,15 @@ namespace API_DISCOVER
                 {
                     if (!_processRabbitReady)
                     {
+                        Logging.Error(new Exception("Rabbit 1"));
                         var scope = _serviceScopeFactory.CreateScope();
+                        Logging.Error(new Exception("Rabbit 2"));
                         RabbitMQService rabbitMQService = scope.ServiceProvider.GetRequiredService<RabbitMQService>();
+                        Logging.Error(new Exception("Rabbit 3"));
                         Discover descubrimiento = new Discover(_serviceScopeFactory);
+                        Logging.Error(new Exception("Rabbit 4"));
                         rabbitMQService.ListenToQueue(new RabbitMQService.ReceivedDelegate(descubrimiento.ProcessItem), new RabbitMQService.ShutDownDelegate(OnShutDown), rabbitMQService.queueName);
+                        Logging.Error(new Exception("Rabbit 5"));
                         _processRabbitReady = true;
                     }
                     if (!_processRabbitDeleteReady)
