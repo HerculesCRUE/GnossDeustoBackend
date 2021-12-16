@@ -2715,7 +2715,7 @@ namespace CargaDataSetMurcia.Model
             foreach (FuentesFinanciacionProyectos fuentesFinanciacionProyectos in pFuentesFinanciacionProyectos)
             {
                 Console.Write($"\rGenerando RDFs en {pRuta} {i}/{total}");
-                if (ids.Add(fuentesFinanciacionProyectos.AYFI_FUEN_CODIGO))
+                if (fuentesFinanciacionProyectos.AYFI_FUEN_CODIGO!="COOR" && ids.Add(fuentesFinanciacionProyectos.AYFI_FUEN_CODIGO))
                 {
                     i++;
                     string rutaFuenteFinanciacion = pRuta + "FuenteFinanciacion_" + fuentesFinanciacionProyectos.AYFI_FUEN_CODIGO + ".rdf";
@@ -2922,11 +2922,14 @@ namespace CargaDataSetMurcia.Model
 
                 //Fuente de financiación
                 foreach (FuentesFinanciacionProyectos fuentesFinanciacionProyectos in pFuentesFinanciacionProyectos.Where(x => x.IDPROYECTO == proyecto.IDPROYECTO))
-                {                    
-                    INode uriPredicateFinanciadoPor = graph.CreateUriNode(new Uri("http://purl.org/roh#fundedBy"));
-                    INode uriObjectFuenteFinanciacion = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#FundingProgram", fuentesFinanciacionProyectos.AYFI_FUEN_CODIGO);
-                    Triple tripleFinanciadoPor = new Triple(uriSubject, uriPredicateFinanciadoPor, uriObjectFuenteFinanciacion);
-                    graph.Assert(tripleFinanciadoPor);
+                {
+                    if (fuentesFinanciacionProyectos.AYFI_FUEN_CODIGO != "COOR")
+                    {
+                        INode uriPredicateFinanciadoPor = graph.CreateUriNode(new Uri("http://purl.org/roh#fundedBy"));
+                        INode uriObjectFuenteFinanciacion = GetUri(pUrlUrisFactory, graph, "http://purl.org/roh#FundingProgram", fuentesFinanciacionProyectos.AYFI_FUEN_CODIGO);
+                        Triple tripleFinanciadoPor = new Triple(uriSubject, uriPredicateFinanciadoPor, uriObjectFuenteFinanciacion);
+                        graph.Assert(tripleFinanciadoPor);
+                    }
                 }
                 graph.SaveToFile(rutaProyecto);
             }
