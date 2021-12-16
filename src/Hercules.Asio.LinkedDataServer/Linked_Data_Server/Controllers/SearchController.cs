@@ -240,11 +240,29 @@ namespace Linked_Data_Server.Controllers
                 string consulta = @$" select * where
                                 {{    
                                     select distinct ?s ?o ?rdfType where 
-                                    {{      
-                                        ?s a ?rdfType.
-                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
-                                        ?s ?p ?o.
-                                        FILTER(?rdfType = <{rdfType}>)
+                                    {{  
+                                        {{
+                                            FILTER(?rdfType != <http://www.w3.org/1999/02/22-rdf-syntax-ns#Graph>)
+                                            FILTER(?rdfType != <http://www.w3.org/2004/02/skos/core#Concept>)
+                                            ?s a ?rdfType.
+                                            FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
+                                            ?s ?p ?o.
+                                            FILTER(?rdfType = <{rdfType}>)
+                                        }}UNION
+                                        {{
+                                            FILTER(?rdfType = <http://www.w3.org/1999/02/22-rdf-syntax-ns#Graph>)
+                                            ?s a ?rdfType.
+                                            ?s <http://www.w3.org/ns/prov#wasAttributedTo> ?org.
+                                            FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
+                                            ?org ?p ?o.
+                                            FILTER(?rdfType = <{rdfType}>)                                            
+                                        }}UNION
+                                        {{
+                                            FILTER(?rdfType = <http://www.w3.org/2004/02/skos/core#Concept>)
+                                            ?s a ?rdfType.
+                                            ?s <http://www.w3.org/2004/02/skos/core#prefLabel> ?o.
+                                            FILTER(?rdfType = <{rdfType}>)                                            
+                                        }}
                                     }}order by asc(?o) asc (?s)
                                 }} OFFSET {(pagina - 1) * numResultadosPagina} limit {numResultadosPagina} ";
 
@@ -264,10 +282,28 @@ namespace Linked_Data_Server.Controllers
                 //No buscamos en http://www.w3.org/2004/02/skos/core#prefLabel
                 string consultaNumero = @$"     select count(distinct ?s) as ?num where 
                                     {{      
-                                        ?s a ?rdfType.
-                                        FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
-                                        ?s ?p ?o.
-                                        FILTER(?rdfType = <{rdfType}>)
+                                        {{
+                                            FILTER(?rdfType != <http://www.w3.org/1999/02/22-rdf-syntax-ns#Graph>)
+                                            FILTER(?rdfType != <http://www.w3.org/2004/02/skos/core#Concept>)
+                                            ?s a ?rdfType.
+                                            FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
+                                            ?s ?p ?o.
+                                            FILTER(?rdfType = <{rdfType}>)
+                                        }}UNION
+                                        {{
+                                            FILTER(?rdfType = <http://www.w3.org/1999/02/22-rdf-syntax-ns#Graph>)
+                                            ?s a ?rdfType.
+                                            ?s <http://www.w3.org/ns/prov#wasAttributedTo> ?org.
+                                            FILTER(?p in (<{string.Join(">,<", mLinked_Data_Server_Config.PropsTitle.Except(new List<string> { "http://www.w3.org/2004/02/skos/core#prefLabel" }))}>))
+                                            ?org ?p ?o.
+                                            FILTER(?rdfType = <{rdfType}>)                                            
+                                        }}UNION
+                                        {{
+                                            FILTER(?rdfType = <http://www.w3.org/2004/02/skos/core#Concept>)
+                                            ?s a ?rdfType.
+                                            ?s <http://www.w3.org/2004/02/skos/core#prefLabel> ?o.
+                                            FILTER(?rdfType = <{rdfType}>)                                            
+                                        }}
                                     }} ";
                 SparqlObject sparqlObjectNumero = _sparqlUtility.SelectData(mConfigService, mConfigService.GetSparqlGraph(), consultaNumero, ref pXAppServer);
                 searchModelTemplate.numResultados = int.Parse(sparqlObjectNumero.results.bindings[0]["num"].value);
