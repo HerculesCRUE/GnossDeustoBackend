@@ -1,10 +1,19 @@
 ﻿@model System.String
-<h1>Eliminado </h1>
+<div class="row">
+    <div class="col col-12 col-lg-12 col-contenido">
+        <div class="wrapCol">
+            <div class="acciones-listado">
+                <div class="wrap">
 
-<div>
-    <h4>Eliminado</h4>
-    <hr />
-    <div class="row">
-        <p> Tarea @Model eliminada</p>
+                </div>
+            </div>
+            <div class="resource-list compacView">
+                <div class="wrap">
+                    <h1>Eliminación</h1>
+                    <p>Tarea '@Model' eliminada.</p>
+                </div>
+            </div>
+            <a href="@Context.Request.Headers["Referer"]">Volver a los repositorios</a>
+        </div>
     </div>
 </div>

@@ -13,9 +13,9 @@
                     <div class="card-body">
                         <div class="fieldset fieldset01">
                             <fieldset class="mediumLabels">
-                                <h1>Descarga el esquema de uris</h1>
-                                <p class="card-text">Obten el esquema de uris usado actualmente</p>
-                                <a href="@Url.Action("DownloadSchema")">Descárguelo aquí</a>
+                                <h1>Descarga el esquema de URIs</h1>
+                                <p class="card-text">Recupera el <a href="@Url.Action("DownloadSchema")">esquema de URIs</a> usado actualmente.</p>
+                                <p class="card-text">Puedes encontrar una explicación del esquema en <a href="https://github.com/HerculesCRUE/GnossDeustoBackend/tree/master/Docs/UrisFactory">GitHub – Documentación de URIs factory</a>.</p>
                             </fieldset>
                         </div>
                     </div>
@@ -27,15 +27,16 @@
                         <form asp-action="ReplaceSchema" method="post" enctype="multipart/form-data">
                             <div class="fieldset fieldset01">
                                 <fieldset class="mediumLabels">
-                                    <h1>Reemplazar el Esquema de uris</h1>
-                                    <p class="card-text">Reemplaza el esquema de uris por otro esquema, puedes encontrar una plantilla en el siguiente enlace:</p>
-                                    <a href="https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/UrisFactory/20191211%20Esquema%20de%20URIs.json" class="card-link">plantilla de esquema</a>
+                                    <h1>Reemplaza el Esquema de URIs</h1>
+                                    <p class="card-text">Reemplaza el esquema de URIs por otro esquema:</p>
+                                    <!--<a href="https://github.com/HerculesCRUE/GnossDeustoBackend/blob/master/Docs/UrisFactory/20191211%20Esquema%20de%20URIs.json" class="card-link">plantilla de esquema</a>-->
                                     <div class="fieldsetContent">
                                         <div class="form-group">
                                             <label asp-for="New_Schema_File" class="control-label"></label>
                                             <input asp-for="New_Schema_File" class="form-control" />
                                             <span asp-validation-for="New_Schema_File" class="text-danger"></span>
                                         </div>
+                                        <p class="card-text">Ten en cuenta que estos cambios pueden afectar a la coherencia de los datos nuevos con los existentes anteriores al cambio y a la estructura de estos nuevos datos respecto al modelo ontológico.</p>
                                         <div class="fieldset actionButtons fieldset03">
                                             <fieldset>
                                                 <p>
@@ -43,7 +44,7 @@
                                                 </p>
                                             </fieldset>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                 </fieldset>
                             </div>
                         </form>
@@ -56,14 +57,15 @@
                         <form asp-action="Details" method="get">
                             <div class="fieldset fieldset01">
                                 <fieldset class="mediumLabels">
-                                    <h1>Obtener una estructura de uris</h1>
-                                    <p class="card-text">Obtener la información de configuración sobre un esquema de uris concreto</p>
+                                    <h1>Recupera una estructura de URIs</h1>
+                                    <p class="card-text">Obtener la información de configuración sobre un esquema de URIs concreto.</p>
                                     <div class="fieldsetContent">
                                         <div class="form-group">
                                             <label asp-for="Uri_Structure" class="control-label"></label>
                                             <input placeholder="Introduce la estructura de la URI..." asp-for="Uri_Structure" class="form-control" />
                                             <span asp-validation-for="Uri_Structure" class="text-danger"></span>
                                         </div>
+                                        <p class="card-text">Se trata de los nombres definidos en el fichero JSON del esquema de URIs, como uriResourceStructure o uriKosStructure, en UriStructure.Name</p>
                                         <div class="fieldset actionButtons fieldset03">
                                             <fieldset>
                                                 <p>
@@ -83,10 +85,12 @@
                     <div class="card-body">
                         <div class="fieldset fieldset01">
                             <fieldset class="mediumLabels">
-                                <h1>Crea una estructura de uris</h1>
-                                <p class="card-text">Crear una estructura de uris nueva</p>
-                                <a href="@Url.Action("CreateStructure")">Agregar</a>
+                                <h1>Crea o modifica una estructura de URIs</h1>
+                                <p class="card-text">A partir de los ejemplos recuperados desde las opciones anteriores, es posible crear o modificar una estructura de URIs. En el caso de modificación, usando uno de los nombres definidos en el JSON del esquema de URIs.</p>
+                                <a href="@Url.Action("CreateStructure")">Agregar</a>                                
                             </fieldset>
+                            <br />
+                            <a href="@Url.Action("","UrisFactory")">Volver atrás</a>
                         </div>
                     </div>
                 </div>

@@ -203,8 +203,15 @@ namespace ApiCargaWebInterface.Controllers
             {
                 if (jobModel.Nombre_job != null)
                 {
-                    _serviceApiCron.CreateRecurringJob(jobModel);
-                    return RedirectToAction("Details", "RepositoryConfig", new { id = jobModel.IdRepository });
+                    try
+                    {
+                        _serviceApiCron.CreateRecurringJob(jobModel);
+                        return RedirectToAction("Details", "RepositoryConfig", new { id = jobModel.IdRepository });
+                    }catch(Exception ex)
+                    {
+                        ModelState.AddModelError("Nombre_job", ex.Message);
+                        return View("Create", jobModel);
+                    }
                 }
                 else
                 {
@@ -286,7 +293,7 @@ namespace ApiCargaWebInterface.Controllers
         /// <param name="idJob">Identificador de la tarea a la que eprtenece el item de descubrimiento</param>
         /// <returns></returns>
         [HttpPost("[Controller]/{repository_id}/{idJob}/resolve/{IdDiscoverItem}")]
-        public IActionResult ResolveDiscover(Guid repository_id,  string idJob, string IdDiscoverItem, Dictionary<string, string> DissambiguationProblemsResolve)
+        public IActionResult ResolveDiscover(Guid repository_id, string idJob, string IdDiscoverItem, Dictionary<string, string> DissambiguationProblemsResolve)
         {
             DiscoverItem item = _discoverItemService.GetDiscoverItemById(new Guid(IdDiscoverItem));
 

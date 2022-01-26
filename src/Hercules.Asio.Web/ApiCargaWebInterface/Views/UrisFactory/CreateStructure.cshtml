@@ -13,7 +13,8 @@
                     <form asp-action="CreateStructure" method="post">
                         <div class="fieldset fieldset01">
                             <fieldset class="mediumLabels">
-                                <h1>Crear estructura</h1>
+                                <h1>Crear o modificar una estructura de URIs</h1>
+                                <p class="card-text">Introduce el fragmento JSON de una estructura de URIs que quieras crear o modificar:</p>
                                 <div class="fieldsetContent">
                                     @*<pre>*@
                                         <textarea cols="75" rows="50" id="structure" name="structure">
@@ -27,6 +28,7 @@
                                             </p>
                                         </fieldset>
                                     </div>
+                                    <a href="@Url.Action("SchemaConfig")">Volver atrás</a>
                                 </div>
                             </fieldset>
                         </div>

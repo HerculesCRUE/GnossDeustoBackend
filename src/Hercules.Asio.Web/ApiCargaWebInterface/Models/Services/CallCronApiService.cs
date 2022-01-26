@@ -105,7 +105,14 @@ namespace ApiCargaWebInterface.Models.Services
                 uriParams += $"&fecha={newJob.FechaFrom.Value.ToString("dd/MM/yyyy HH:mm")}";
             }
             string result = _serviceApi.CallPostApi("", $"{ _urlRecurringJobApi}?{uriParams}", null, _token);
-            guidAdded = JsonConvert.DeserializeObject<string>(result);
+            try
+            {
+                guidAdded = JsonConvert.DeserializeObject<string>(result);
+            }
+            catch
+            {
+                throw new Exception(result);
+            }
             return guidAdded;
         }
 

@@ -138,7 +138,8 @@ namespace ApiCargaWebInterface.Models.Services
             {
                 if (response != null && response.StatusCode.Equals(HttpStatusCode.BadRequest))
                 {
-                    throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
+                    //throw new BadRequestException(response.Content.ReadAsStringAsync().Result);
+                    return response.Content.ReadAsStringAsync().Result;                    
                 }
                 else if (response != null && !string.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
                 {

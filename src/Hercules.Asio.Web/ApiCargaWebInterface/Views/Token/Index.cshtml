@@ -12,6 +12,7 @@
                 <div class="fieldset fieldset01">
                     <fieldset class="mediumLabels">
                         <h1>Administración > Obtener token</h1>
+                        <p class="card-text">Elige el tipo de token que quieres generar, en función del API para la que se solicita acceso:</p>
                         <div class="fieldsetContent">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
@@ -24,12 +25,13 @@
                                 </select>
                             </div>
                             <div class="fieldset actionButtons fieldset03">
-                                <fieldset>
+                                <fieldset>                                    
                                     <p>
                                         <input class="submit principal" type="submit" value="Obtener Token">
                                         @{
                                             if (!string.IsNullOrEmpty(Model.Token))
                                             {
+                                                <p class="card-text">El token tiene una caducidad de 24 horas.</p>
                                                 <button class="copiarToken" onclick="CopiarToken(event)">Copiar Token</button>
                                             }
                                         }
